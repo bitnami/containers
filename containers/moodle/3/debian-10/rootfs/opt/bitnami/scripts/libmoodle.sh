@@ -302,7 +302,14 @@ moodle_install() {
 #########################
 moodle_upgrade() {
     pushd "$MOODLE_BASE_DIR" >/dev/null
-    debug_execute php "admin/cli/upgrade.php" --non-interactive --allow-unstable
+    local -a moodle_upgrade_args=(
+        "${PHP_BIN_DIR}/php"
+        "admin/cli/upgrade.php"
+        "--non-interactive"
+        "--allow-unstable"
+    )
+    am_i_root && moodle_upgrade_args=("gosu" "$WEB_SERVER_DAEMON_USER" "${moodle_upgrade_args[@]}")
+    debug_execute "${moodle_install_args[@]}"
     popd >/dev/null
 }
 
