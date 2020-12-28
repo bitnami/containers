@@ -11,7 +11,7 @@ RUN install_packages ca-certificates curl fontconfig fonts-dejavu-extra gzip lib
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install java-1.8.275-0 --checksum 81e35af4a12129edc3d2fdd6fd7c4fab2dbdd5fba74eab6fe4576381867a55ab
-RUN bitnami-pkg install git-2.29.2-1 --checksum 562c90f50c96c25edcaf718f585290f1a2fd9a45c7aa89ca05d6338583d3465e
+RUN bitnami-pkg install git-2.30.0-0 --checksum da1ad2f9c18b54f8b382df278b29da9b2c870aae3a16783a740b0d9d28c5e0fb
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
 RUN bitnami-pkg unpack jenkins-2.263.1-1 --checksum 681af6ac9176e730430c0069597494f2a57dddd6bde179968d63065de415dcf7
 RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
@@ -22,7 +22,7 @@ RUN mkdir -p /usr/share/jenkins/ref
 COPY rootfs /
 RUN ln -sf /install-plugins.sh /usr/local/bin/install-plugins.sh
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.263.1-debian-10-r22" \
+    BITNAMI_IMAGE_VERSION="2.263.1-debian-10-r23" \
     DISABLE_JENKINS_INITIALIZATION="no" \
     JAVA_OPTS="" \
     JENKINS_HOME="/opt/bitnami/jenkins/jenkins_home" \
