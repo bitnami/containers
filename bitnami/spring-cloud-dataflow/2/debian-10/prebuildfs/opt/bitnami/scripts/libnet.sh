@@ -10,15 +10,17 @@
 # Functions
 
 ########################
-# Resolve dns
+# Resolve IP address for a host/domain (i.e. DNS lookup)
 # Arguments:
 #   $1 - Hostname to resolve
+#   $2 - IP address version (v4, v6), leave empty for resolving to any version
 # Returns:
 #   IP
 #########################
 dns_lookup() {
     local host="${1:?host is missing}"
-    getent ahosts "$host" | awk '/STREAM/ {print $1 }'
+    local ip_version="${2:-}"
+    getent "ahosts${ip_version}" "$host" | awk '/STREAM/ {print $1 }' | head -n 1
 }
 
 #########################
