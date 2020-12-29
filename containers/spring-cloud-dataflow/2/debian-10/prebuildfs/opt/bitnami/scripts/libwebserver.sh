@@ -153,7 +153,6 @@ web_server_restart() {
 #   None
 #########################
 web_server_reload() {
-    info "Reloading $(web_server_type) configuration"
     "${BITNAMI_ROOT_DIR}/scripts/$(web_server_type)/reload.sh"
 }
 
