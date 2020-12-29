@@ -13,17 +13,17 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "97abdc3ab74a94d722e0f968476e41b5f7584af7d2af21f48009b992e1ba9364  /tmp/bitnami/pkg/cache/python-3.7.9-13-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/python-3.7.9-13-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/python-3.7.9-13-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/azure-cli-2.16.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "d16fa61586bfa44d66cc7486d42309619392ad5b24ad234dbf1c773b3526c1dc  /tmp/bitnami/pkg/cache/azure-cli-2.16.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/azure-cli-2.16.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/azure-cli-2.16.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/azure-cli-2.17.0-0-linux-amd64-debian-10.tar.gz && \
+    echo "d041c1c11562c1c3668f76a3b577e46f7a43706aced388c714e5d8a5cd839683  /tmp/bitnami/pkg/cache/azure-cli-2.17.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/azure-cli-2.17.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/azure-cli-2.17.0-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /.azure /.azcopy && chmod g+rwX /.azure /.azcopy /bin
 
 ENV BITNAMI_APP_NAME="azure-cli" \
-    BITNAMI_IMAGE_VERSION="2.16.0-debian-10-r20" \
+    BITNAMI_IMAGE_VERSION="2.17.0-debian-10-r0" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/azure-cli/bin:/opt/bitnami/azure-cli/venv/bin:$PATH"
 
 USER 1001
