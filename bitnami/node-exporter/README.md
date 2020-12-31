@@ -78,16 +78,16 @@ Use the `--network <NETWORK>` argument to the `docker run` command to attach the
 $ docker run --name node-exporter-node1 --network node-exporter-network bitnami/node-exporter:latest
 ```
 
-### Step 3: Run another containers
+### Step 3: Run another container
 
-We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
+We can launch another container using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name for your container, you will be able to use it as a hostname in your network.
 
 
 # Configuration
 
 There is varying support for collectors on each operating system.
 
-Collectors are enabled by providing a --collector.<name> flag. Collectors that are enabled by default can be disabled by providing a --no-collector.<name> flag.
+Collectors are enabled by providing a `--collector.<name>` flag. Collectors that are enabled by default can be disabled by providing a `--no-collector.<name>` flag.
 [Further information](https://prometheus.io/docs/introduction/overview/)
 
 # Logging
