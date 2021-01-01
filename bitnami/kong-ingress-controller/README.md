@@ -28,7 +28,7 @@ $ docker run --name kong-ingress-controller bitnami/kong-ingress-controller:late
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.1.0`, `1.1.0-debian-10-r21` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/blob/1.1.0-debian-10-r21/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.1.0`, `1.1.0-debian-10-r22` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/blob/1.1.0-debian-10-r22/1/debian-10/Dockerfile)
 * [`0`, `0-debian-10`, `0.10.0`, `0.10.0-debian-10-r102`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/blob/0.10.0-debian-10-r102/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kong-ingress-controller GitHub repo](https://github.com/bitnami/bitnami-docker-kong-ingress-controller).
@@ -81,7 +81,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright 2020 Bitnami
+Copyright 2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
