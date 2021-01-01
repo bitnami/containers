@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`9.0`, `9.0-debian-10`, `9.0.41`, `9.0.41-debian-10-r22`, `latest` (9.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.41-debian-10-r22/9.0/debian-10/Dockerfile)
+* [`9.0`, `9.0-debian-10`, `9.0.41`, `9.0.41-debian-10-r23`, `latest` (9.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.41-debian-10-r23/9.0/debian-10/Dockerfile)
 * [`8.5`, `8.5-debian-10`, `8.5.61`, `8.5.61-debian-10-r22` (8.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.61-debian-10-r22/8.5/debian-10/Dockerfile)
 * [`7`, `7-debian-10`, `7.0.107`, `7.0.107-debian-10-r28` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.107-debian-10-r28/7/debian-10/Dockerfile)
 
@@ -318,7 +318,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright (c) 2015-2020 Bitnami
+Copyright (c) 2015-2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
