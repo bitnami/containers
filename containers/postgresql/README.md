@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`12`, `12-debian-10`, `12.5.0`, `12.5.0-debian-10-r46` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.5.0-debian-10-r46/12/debian-10/Dockerfile)
 * [`11`, `11-debian-10`, `11.10.0`, `11.10.0-debian-10-r48`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.10.0-debian-10-r48/11/debian-10/Dockerfile)
 * [`10`, `10-debian-10`, `10.15.0`, `10.15.0-debian-10-r46` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.15.0-debian-10-r46/10/debian-10/Dockerfile)
-* [`9.6`, `9.6-debian-10`, `9.6.20`, `9.6.20-debian-10-r45` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.20-debian-10-r45/9.6/debian-10/Dockerfile)
+* [`9.6`, `9.6-debian-10`, `9.6.20`, `9.6.20-debian-10-r46` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.20-debian-10-r46/9.6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql).
 
@@ -835,7 +835,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright (c) 2015-2020 Bitnami
+Copyright (c) 2015-2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
