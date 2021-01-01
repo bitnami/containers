@@ -35,7 +35,7 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.5.11`, `1.5.11-debian-10-r313`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-debian-10-r313/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.5.11`, `1.5.11-debian-10-r314`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/1.5.11-debian-10-r314/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/symfony GitHub repo](https://github.com/bitnami/bitnami-docker-symfony).
 
@@ -147,7 +147,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright (c) 2015-2020 Bitnami
+Copyright (c) 2015-2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
