@@ -34,7 +34,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5`, `5-debian-10`, `5.0.100`, `5.0.100-debian-10-r29` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet-sdk/blob/5.0.100-debian-10-r29/5/debian-10/Dockerfile)
-* [`3.1`, `3.1-debian-10`, `3.1.404`, `3.1.404-debian-10-r49`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet-sdk/blob/3.1.404-debian-10-r49/3.1/debian-10/Dockerfile)
+* [`3.1`, `3.1-debian-10`, `3.1.404`, `3.1.404-debian-10-r50`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet-sdk/blob/3.1.404-debian-10-r50/3.1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dotnet-sdk GitHub repo](https://github.com/bitnami/bitnami-docker-dotnet-sdk).
 
@@ -166,7 +166,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright (c) 2020 Bitnami
+Copyright (c) 2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
