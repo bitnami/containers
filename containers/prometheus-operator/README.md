@@ -36,7 +36,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.44.1`, `0.44.1-debian-10-r17`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus-operator/blob/0.44.1-debian-10-r17/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.44.1`, `0.44.1-debian-10-r18`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus-operator/blob/0.44.1-debian-10-r18/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prometheus-operator GitHub repo](https://github.com/bitnami/bitnami-docker-prometheus-operator).
 
@@ -79,7 +79,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # License
-Copyright (c) 2020 Bitnami
+Copyright (c) 2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
