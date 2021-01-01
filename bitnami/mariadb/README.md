@@ -46,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`10.5`, `10.5-debian-10`, `10.5.8`, `10.5.8-debian-10-r39`, `latest` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.5.8-debian-10-r39/10.5/debian-10/Dockerfile)
 * [`10.4`, `10.4-debian-10`, `10.4.17`, `10.4.17-debian-10-r47` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.17-debian-10-r47/10.4/debian-10/Dockerfile)
-* [`10.3`, `10.3-debian-10`, `10.3.27`, `10.3.27-debian-10-r46` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.27-debian-10-r46/10.3/debian-10/Dockerfile)
+* [`10.3`, `10.3-debian-10`, `10.3.27`, `10.3.27-debian-10-r47` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.27-debian-10-r47/10.3/debian-10/Dockerfile)
 * [`10.2`, `10.2-debian-10`, `10.2.36`, `10.2.36-debian-10-r46` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.36-debian-10-r46/10.2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb).
@@ -682,7 +682,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright (c) 2015-2020 Bitnami
+Copyright (c) 2015-2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
