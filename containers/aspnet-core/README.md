@@ -34,7 +34,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5`, `5-debian-10`, `5.0.1`, `5.0.1-debian-10-r22` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/5.0.1-debian-10-r22/5/debian-10/Dockerfile)
-* [`3.1`, `3.1-debian-10`, `3.1.9`, `3.1.9-debian-10-r73`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/3.1.9-debian-10-r73/3.1/debian-10/Dockerfile)
+* [`3.1`, `3.1-debian-10`, `3.1.9`, `3.1.9-debian-10-r74`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/3.1.9-debian-10-r74/3.1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/aspnet-core GitHub repo](https://github.com/bitnami/bitnami-docker-aspnet-core).
 
@@ -166,7 +166,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright (c) 2020 Bitnami
+Copyright (c) 2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
