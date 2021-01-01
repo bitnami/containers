@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`14`, `14-debian-10`, `14.0.20201210`, `14.0.20201210-debian-10-r20` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/14.0.20201210-debian-10-r20/14/debian-10/Dockerfile)
+* [`14`, `14-debian-10`, `14.0.20201210`, `14.0.20201210-debian-10-r21` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/14.0.20201210-debian-10-r21/14/debian-10/Dockerfile)
 * [`13`, `13-debian-10`, `13.0.20201210`, `13.0.20201210-debian-10-r20`, `latest` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20201210-debian-10-r20/13/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.0.20201215`, `12.0.20201215-debian-10-r15` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/12.0.20201215-debian-10-r15/12/debian-10/Dockerfile)
 
@@ -271,7 +271,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright 2016-2020 Bitnami
+Copyright 2016-2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
