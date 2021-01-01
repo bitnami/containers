@@ -33,7 +33,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.20200116.0`, `0.20200116.0-debian-10-r214`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ldap-auth-daemon/blob/0.20200116.0-debian-10-r214/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.20200116.0`, `0.20200116.0-debian-10-r215`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ldap-auth-daemon/blob/0.20200116.0-debian-10-r215/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nginx-ldap-auth-daemon GitHub repo](https://github.com/bitnami/bitnami-docker-nginx-ldap-auth-daemon).
 
@@ -265,7 +265,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright (c) 2020 Bitnami
+Copyright (c) 2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
