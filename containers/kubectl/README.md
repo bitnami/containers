@@ -32,7 +32,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`1.19`, `1.19-debian-10`, `1.19.6`, `1.19.6-debian-10-r9` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.19.6-debian-10-r9/1.19/debian-10/Dockerfile)
 * [`1.18`, `1.18-debian-10`, `1.18.14`, `1.18.14-debian-10-r9`, `latest` (1.18/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.18.14-debian-10-r9/1.18/debian-10/Dockerfile)
 * [`1.17`, `1.17-debian-10`, `1.17.16`, `1.17.16-debian-10-r9` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.17.16-debian-10-r9/1.17/debian-10/Dockerfile)
-* [`1.16`, `1.16-debian-10`, `1.16.15`, `1.16.15-debian-10-r116` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.16.15-debian-10-r116/1.16/debian-10/Dockerfile)
+* [`1.16`, `1.16-debian-10`, `1.16.15`, `1.16.15-debian-10-r117` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.16.15-debian-10-r117/1.16/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubectl GitHub repo](https://github.com/bitnami/bitnami-docker-kubectl).
 
@@ -92,7 +92,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright 2020 Bitnami
+Copyright 2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
