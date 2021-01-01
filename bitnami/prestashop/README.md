@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.7`, `1.7-debian-10`, `1.7.7-0`, `1.7.7-0-debian-10-r21`, `latest` (1.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.7-0-debian-10-r21/1.7/debian-10/Dockerfile)
+* [`1.7`, `1.7-debian-10`, `1.7.7-0`, `1.7.7-0-debian-10-r22`, `latest` (1.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.7-0-debian-10-r22/1.7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prestashop GitHub repo](https://github.com/bitnami/bitnami-docker-prestashop).
 
@@ -533,7 +533,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright (c) 2020 Bitnami
+Copyright (c) 2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
