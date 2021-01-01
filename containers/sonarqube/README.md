@@ -34,7 +34,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8`, `8-debian-10`, `8.6.0`, `8.6.0-debian-10-r1` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/8.6.0-debian-10-r1/8/debian-10/Dockerfile)
-* [`7`, `7-debian-10`, `7.9.5`, `7.9.5-debian-10-r46`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.9.5-debian-10-r46/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.9.5`, `7.9.5-debian-10-r47`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.9.5-debian-10-r47/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/sonarqube GitHub repo](https://github.com/bitnami/bitnami-docker-sonarqube).
 
@@ -393,7 +393,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright 2015-2020 Bitnami
+Copyright 2015-2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
