@@ -40,7 +40,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.1.0`, `0.1.0-debian-10-r155`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.1.0-debian-10-r155/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.1.0`, `0.1.0-debian-10-r156`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.1.0-debian-10-r156/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubewatch GitHub repo](https://github.com/bitnami/bitnami-docker-kubewatch).
 
@@ -122,7 +122,7 @@ request](https://github.com/bitnami/bitnami-docker-kubewatch/pulls) with your co
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 # License
-Copyright 2020 Bitnami
+Copyright 2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
