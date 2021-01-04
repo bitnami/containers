@@ -29,10 +29,10 @@
     },
     "orangehrm": {
         "arch": "amd64",
-        "digest": "7e1eaa19aa12a47eff6a663e9a8da958813c0e6ef5e3ca9614b44fb8d5e71442",
+        "digest": "316c8529510d62efac5bda65039b4e2428fbd3831b155198bf7fdd8dcfca0a65",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.6.0-1-0"
+        "version": "4.7.0-0-0"
     },
     "php": {
         "arch": "amd64",
