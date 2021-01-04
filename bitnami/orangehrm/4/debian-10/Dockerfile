@@ -14,7 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.46-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.27-0" --checksum f96905e763a6334b75a7cdb07f8d89658cde02be41cb09d91d0682fc649fdcff
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.25-1" --checksum 830db27d5ba104e6927e9f32626be713d562ffd10ffc4791b54bae36ad6a0947
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "orangehrm" "4.6.0-1-0" --checksum 7e1eaa19aa12a47eff6a663e9a8da958813c0e6ef5e3ca9614b44fb8d5e71442
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "orangehrm" "4.7.0-0-0" --checksum 316c8529510d62efac5bda65039b4e2428fbd3831b155198bf7fdd8dcfca0a65
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -31,7 +31,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="orangehrm" \
-    BITNAMI_IMAGE_VERSION="4.6.0-1-debian-10-r19" \
+    BITNAMI_IMAGE_VERSION="4.7.0-0-debian-10-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
