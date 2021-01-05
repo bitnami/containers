@@ -3,28 +3,28 @@ services:
   mariadb:
     image: 'docker.io/bitnami/mariadb:10.3-debian-10'
     environment:
+      - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=bn_owncloud
       - MARIADB_DATABASE=bitnami_owncloud
-      - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - 'mariadb_data:/bitnami'
+      - 'mariadb_data:/bitnami/mariadb'
   owncloud:
     image: 'docker.io/bitnami/owncloud:10-debian-10'
+    ports:
+      - '80:8080'
+      - '443:8443'
     environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
+      - OWNCLOUD_DATABASE_HOST=mariadb
+      - OWNCLOUD_DATABASE_PORT_NUMBER=3306
       - OWNCLOUD_DATABASE_USER=bn_owncloud
       - OWNCLOUD_DATABASE_NAME=bitnami_owncloud
       - ALLOW_EMPTY_PASSWORD=yes
-      # Host for accessing OwnCloud
+      # Host for accessing ownCloud
       # note: this setting will only be applied on the first run
       # ref: https://github.com/bitnami/bitnami-docker-owncloud#configuration
       - OWNCLOUD_HOST=localhost
-    ports:
-      - '80:80'
-      - '443:443'
     volumes:
-      - 'owncloud_data:/bitnami'
+      - 'owncloud_data:/bitnami/owncloud'
     depends_on:
       - mariadb
 volumes:
