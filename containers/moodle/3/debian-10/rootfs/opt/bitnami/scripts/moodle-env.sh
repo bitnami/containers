@@ -18,6 +18,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 moodle_env_vars=(
+    MOODLE_DATA_DIR
     MOODLE_DATA_TO_PERSIST
     MOODLE_SKIP_BOOTSTRAP
     MOODLE_INSTALL_EXTRA_ARGS
@@ -62,7 +63,7 @@ export MOODLE_CONF_FILE="${MOODLE_BASE_DIR}/config.php"
 
 # Moodle persistence configuration
 export MOODLE_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/moodle"
-export MOODLE_DATA_DIR="${BITNAMI_VOLUME_DIR}/moodledata"
+export MOODLE_DATA_DIR="${MOODLE_DATA_DIR:-${BITNAMI_VOLUME_DIR}/moodledata}"
 export MOODLE_DATA_TO_PERSIST="${MOODLE_DATA_TO_PERSIST:-$MOODLE_BASE_DIR}"
 
 # Moodle configuration

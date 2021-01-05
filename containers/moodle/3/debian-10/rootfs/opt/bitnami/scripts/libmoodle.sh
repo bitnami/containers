@@ -103,7 +103,7 @@ moodle_fix_manageddb_check() {
 #########################
 moodle_initialize() {
     # Check if Moodle has already been initialized and persisted in a previous run
-    local db_host db_port db_name db_user db_pass
+    local db_type db_host db_port db_name db_user db_pass
     local -r app_name="moodle"
     if ! is_app_initialized "$app_name"; then
         # Ensure Moodle persisted directories exist (i.e. when a volume has been mounted to /bitnami)
@@ -121,7 +121,7 @@ moodle_initialize() {
         db_name="$MOODLE_DATABASE_NAME"
         db_user="$MOODLE_DATABASE_USER"
         db_pass="$MOODLE_DATABASE_PASSWORD"
-        [[ "$db_type" = "mariadb" || "$db_type" == "mysqli" ]] && moodle_wait_for_mysql_db_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
+        [[ "$db_type" = "mariadb" || "$db_type" = "mysqli" ]] && moodle_wait_for_mysql_db_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
 
         # Create Moodle install argument list, allowing to pass custom options via 'MOODLE_INSTALL_EXTRA_ARGS'
         local -a moodle_install_args=("--dbtype=${db_type}" "--dbhost=${db_host}" "--dbport=${db_port}" "--dbname=${db_name}" "--dbuser=${db_user}" "--dbpass=${db_pass}")
@@ -175,7 +175,7 @@ EOF
         db_name="$(moodle_conf_get "\$CFG->dbname")"
         db_user="$(moodle_conf_get "\$CFG->dbuser")"
         db_pass="$(moodle_conf_get "\$CFG->dbpass")"
-        [[ "$db_type" = "mariadb" || "$db_type" == "mysqli" ]] && moodle_wait_for_mysql_db_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
+        [[ "$db_type" = "mariadb" || "$db_type" = "mysqli" ]] && moodle_wait_for_mysql_db_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
 
         # Perform Moodle database schema upgrade
         info "Running database upgrade"
