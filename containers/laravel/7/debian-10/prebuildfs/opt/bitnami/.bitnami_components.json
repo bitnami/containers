@@ -15,17 +15,17 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "20a83ca1cb7d6ba658a10251f7740e57a0a60fec97753e9f37aacd78169475b1",
+        "digest": "1c23a75145fc202950f12bd6cb13a9c9b3ac35a3a09d194c105912d2f4d4a8a6",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "14.15.3-1"
+        "version": "14.15.4-0"
     },
     "php": {
         "arch": "amd64",
-        "digest": "afb06e12396c6901d65ab826cafca0ae532b1d8a5e8293071edda395ba409ae6",
+        "digest": "518ddc6c6eafad3125c5342ce2fd7e1a6e5c4a11b04d6f14e2ce9ecff82e6f85",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.13-3"
+        "version": "7.4.13-5"
     },
     "tini": {
         "arch": "amd64",
