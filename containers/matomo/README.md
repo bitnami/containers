@@ -36,7 +36,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.1.0`, `4.1.0-debian-10-r13`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/4.1.0-debian-10-r13/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.1.0`, `4.1.0-debian-10-r14`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/4.1.0-debian-10-r14/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/matomo GitHub repo](https://github.com/bitnami/bitnami-docker-matomo).
 
@@ -357,7 +357,7 @@ This would be an example of SMTP configuration using a Gmail account:
 - `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
 - `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
 - `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
-- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. Default: **yes**
+- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
 
 If you want to add a new environment variable:
 
