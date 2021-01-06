@@ -217,8 +217,15 @@ owncloud_initialize() {
     # Need to set 660 permissions in case of it already being present with 440 permissions (i.e. after a restart)
     configure_permissions_ownership "${OWNCLOUD_BASE_DIR}/.htaccess" -f "660"
     owncloud_execute_occ "maintenance:update:htaccess"
-    # Ensure that the .htaccess files cannot be written to by the web server user
+    # Ensure that the .htaccess and files cannot be written to by the web server user
     configure_permissions_ownership "${OWNCLOUD_BASE_DIR}/.htaccess" -f "440"
+
+    # Configure PHP options provided via envvars in .user.ini (which overrides configuration in php.ini)
+    configure_permissions_ownership "${OWNCLOUD_BASE_DIR}/.user.ini" -f "660"
+    php_set_runtime_config "${OWNCLOUD_BASE_DIR}/.user.ini"
+    # Ensure that the .user.ini files cannot be written to by the web server user
+    # This file allows for PHP-FPM to set application-specific PHP settings, and could be a security risk if left writable
+    configure_permissions_ownership "${OWNCLOUD_BASE_DIR}/.user.ini" -f "440"
 
     # Ensure ownCloud cron jobs are created when running setup with a root user
     # https://doc.owncloud.com/server/admin_manual/configuration/server/background_jobs_configuration.html#cron
