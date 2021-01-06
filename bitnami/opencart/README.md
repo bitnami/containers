@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.0.3-6`, `3.0.3-6-debian-10-r143`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-6-debian-10-r143/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.0.3-6`, `3.0.3-6-debian-10-r144`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-6-debian-10-r144/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/opencart GitHub repo](https://github.com/bitnami/bitnami-docker-opencart).
 
@@ -274,7 +274,7 @@ To configure OpenCart to send email using SMTP you can set the following environ
 - `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
 - `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. Default: **20M**
 - `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. Default: **25M**
-- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. Default: **yes**
+- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
 
 ##### Example
 
