@@ -42,7 +42,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.11.18`, `7.11.18-debian-10-r56`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.11.18-debian-10-r56/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.11.18`, `7.11.18-debian-10-r57`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.11.18-debian-10-r57/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/suitecrm GitHub repo](https://github.com/bitnami/bitnami-docker-suitecrm).
 
@@ -281,6 +281,7 @@ To configure SuiteCRM to send email using SMTP you can set the following environ
 - `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
 - `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. **60M**.
 - `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. **60M**.
+- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
 
 ##### Example
 
@@ -509,14 +510,14 @@ To upgrade a deployment with the previous Bitnami SuiteCRM container image, whic
      volumes:
 ```
 
-## 7.11.4-debian-9-r21 and 7.11.4-ol-7-r32
+### 7.11.4-debian-9-r21 and 7.11.4-ol-7-r32
 
 - This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
 - The Apache configuration volume (`/bitnami/apache`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the Apache configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom Apache configuration files are advised to mount a volume for the configuration at `/opt/bitnami/apache/conf`, or mount specific configuration files individually.
 - The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
 - Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`.
 
-## 7.10.10-debian-9-r18 and 7.10.10-ol-7-r24
+### 7.10.10-debian-9-r18 and 7.10.10-ol-7-r24
 
 - Due to several broken SuiteCRM features and plugins, the entire `htdocs` directory is now being persisted (instead of a select number of files and directories). Because of this, upgrades will not work and a full migration needs to be performed. Upgrade instructions have been updated to reflect these changes.
 
