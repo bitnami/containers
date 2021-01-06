@@ -57,18 +57,35 @@ php_conf_set() {
 php_initialize() {
     # Configure PHP options based on the runtime environment
     info "Configuring PHP options"
-    ! is_empty_value "$PHP_MAX_EXECUTION_TIME" && info "Setting PHP max_execution_time option" && php_conf_set max_execution_time "$PHP_MAX_EXECUTION_TIME"
-    ! is_empty_value "$PHP_MAX_INPUT_TIME" && info "Setting PHP max_input_time option" && php_conf_set max_input_time "$PHP_MAX_INPUT_TIME"
-    ! is_empty_value "$PHP_MAX_INPUT_VARS" && info "Setting PHP max_input_vars option" && php_conf_set max_input_vars "$PHP_MAX_INPUT_VARS"
-    ! is_empty_value "$PHP_MEMORY_LIMIT" && info "Setting PHP memory_limit option" && php_conf_set memory_limit "$PHP_MEMORY_LIMIT"
-    ! is_empty_value "$PHP_POST_MAX_SIZE" && info "Setting PHP post_max_size option" && php_conf_set post_max_size "$PHP_POST_MAX_SIZE"
-    ! is_empty_value "$PHP_UPLOAD_MAX_FILESIZE" && info "Setting PHP upload_max_filesize option" && php_conf_set upload_max_filesize "$PHP_UPLOAD_MAX_FILESIZE"
-    is_yes_no_value "$PHP_EXPOSE_PHP" && info "Setting PHP expose_php option" && php_conf_set expose_php "$(php_convert_to_boolean "$PHP_EXPOSE_PHP")"
+    php_set_runtime_config "$PHP_CONF_FILE"
 
     # PHP-FPM configuration
     ! is_empty_value "$PHP_FPM_LISTEN_ADDRESS" && info "Setting PHP-FPM listen option" && php_conf_set "listen" "$PHP_FPM_LISTEN_ADDRESS" "${PHP_CONF_DIR}/php-fpm.d/www.conf"
 
     # Avoid exit code of previous commands to affect the result of this function
+    true
+}
+
+########################
+# Set PHP runtime options, based on user-provided environment variables
+# Globals:
+#   PHP_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+php_set_runtime_config() {
+    local -r conf_file="${1:?missing conf file}"
+
+    ! is_empty_value "$PHP_MAX_EXECUTION_TIME" && info "Setting PHP max_execution_time option" && php_conf_set max_execution_time "$PHP_MAX_EXECUTION_TIME" "$conf_file"
+    ! is_empty_value "$PHP_MAX_INPUT_TIME" && info "Setting PHP max_input_time option" && php_conf_set max_input_time "$PHP_MAX_INPUT_TIME" "$conf_file"
+    ! is_empty_value "$PHP_MAX_INPUT_VARS" && info "Setting PHP max_input_vars option" && php_conf_set max_input_vars "$PHP_MAX_INPUT_VARS" "$conf_file"
+    ! is_empty_value "$PHP_MEMORY_LIMIT" && info "Setting PHP memory_limit option" && php_conf_set memory_limit "$PHP_MEMORY_LIMIT" "$conf_file"
+    ! is_empty_value "$PHP_POST_MAX_SIZE" && info "Setting PHP post_max_size option" && php_conf_set post_max_size "$PHP_POST_MAX_SIZE" "$conf_file"
+    ! is_empty_value "$PHP_UPLOAD_MAX_FILESIZE" && info "Setting PHP upload_max_filesize option" && php_conf_set upload_max_filesize "$PHP_UPLOAD_MAX_FILESIZE" "$conf_file"
+    ! is_empty_value "$PHP_EXPOSE_PHP" && info "Setting PHP expose_php option" && php_conf_set expose_php "$PHP_EXPOSE_PHP" "$conf_file"
+
     true
 }
 
