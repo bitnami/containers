@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.7`, `1.7-debian-10`, `1.7.7-0`, `1.7.7-0-debian-10-r25`, `latest` (1.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.7-0-debian-10-r25/1.7/debian-10/Dockerfile)
+* [`1.7`, `1.7-debian-10`, `1.7.7-0`, `1.7.7-0-debian-10-r26`, `latest` (1.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.7-0-debian-10-r26/1.7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prestashop GitHub repo](https://github.com/bitnami/bitnami-docker-prestashop).
 
@@ -278,7 +278,7 @@ To configure PrestaShop to send email using SMTP you can set the following envir
 - `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
 - `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. Default: **20M**
 - `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. Default: **25M**
-- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. Default: **yes**
+- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
 
 ##### Example
 
