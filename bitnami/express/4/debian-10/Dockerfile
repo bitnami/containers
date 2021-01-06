@@ -24,7 +24,7 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY rootfs /
 RUN mkdir -p /dist /app /.npm /.config /.cache /.local && chmod g+rwx /dist /app /.npm /.config /.cache /.local
 ENV BITNAMI_APP_NAME="express" \
-    BITNAMI_IMAGE_VERSION="4.17.1-debian-10-r307" \
+    BITNAMI_IMAGE_VERSION="4.17.1-debian-10-r308" \
     NAMI_PREFIX="/.nami" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
