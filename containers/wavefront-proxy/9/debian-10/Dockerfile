@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/wavefront-proxy/postunpack.sh
 ENV BITNAMI_APP_NAME="wavefront-proxy" \
-    BITNAMI_IMAGE_VERSION="9.3.0-debian-10-r120" \
+    BITNAMI_IMAGE_VERSION="9.3.0-debian-10-r121" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 2878
