@@ -34,10 +34,14 @@ for dir in "$OWNCLOUD_BASE_DIR" "$OWNCLOUD_VOLUME_DIR"; do
     configure_permissions_ownership "$dir" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root"
 done
 
+# ownCloud provides a .user.ini file which can be used to set PHP configuration as if we were configuring in 'php.ini'
+# This only applies for PHP-FPM (not mod_php) so we set it in both locations as we don't know beforehand which mode will be enabled
 info "Configuring default PHP options for ownCloud"
-php_conf_set memory_limit "$PHP_DEFAULT_MEMORY_LIMIT"
-php_conf_set upload_max_filesize "$PHP_DEFAULT_UPLOAD_MAX_FILESIZE"
-php_conf_set post_max_size "$PHP_DEFAULT_POST_MAX_SIZE"
+for php_ini_file in "${OWNCLOUD_BASE_DIR}/.user.ini" "$PHP_CONF_FILE"; do
+    php_conf_set memory_limit "$PHP_DEFAULT_MEMORY_LIMIT" "$php_ini_file"
+    php_conf_set upload_max_filesize "$PHP_DEFAULT_UPLOAD_MAX_FILESIZE" "$php_ini_file"
+    php_conf_set post_max_size "$PHP_DEFAULT_POST_MAX_SIZE" "$php_ini_file"
+done
 
 # Enable default web server configuration for ownCloud
 info "Creating default web server configuration for ownCloud"

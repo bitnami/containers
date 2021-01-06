@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10`, `10-debian-10`, `10.6.0`, `10.6.0-debian-10-r18`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.6.0-debian-10-r18/10/debian-10/Dockerfile)
+* [`10`, `10-debian-10`, `10.6.0`, `10.6.0-debian-10-r19`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.6.0-debian-10-r19/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/owncloud GitHub repo](https://github.com/bitnami/bitnami-docker-owncloud).
 
@@ -265,6 +265,7 @@ To configure ownCloud to send email using SMTP you can set the following environ
 - `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **512M**
 - `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. Default: **2G**
 - `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. Default: **2G**
+- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
 
 ##### Example
 
@@ -471,9 +472,7 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 
 ## Notable Changes
 
-## Notable Changes
-
-## 10.6.0-debian-10-r18
+### 10.6.0-debian-10-r18
 
 - The size of the container image has been decreased.
 - The configuration logic is now based on Bash scripts in the *rootfs/* folder.
@@ -494,7 +493,7 @@ To upgrade a deployment with the previous Bitnami SuiteCRM container image, whic
      volumes:
 ```
 
-## 10.2.0-debian-9-r8 and 10.2.0-ol-7-r8
+### 10.2.0-debian-9-r8 and 10.2.0-ol-7-r8
 
 - This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
 - The Apache configuration volume (`/bitnami/apache`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the Apache configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom Apache configuration files are advised to mount a volume for the configuration at `/opt/bitnami/apache/conf`, or mount specific configuration files individually.
