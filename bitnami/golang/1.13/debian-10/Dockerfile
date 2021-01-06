@@ -17,7 +17,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN mkdir -p "/go/src" "/go/bin" && chmod -R 777 "/go"
 
 ENV BITNAMI_APP_NAME="golang" \
-    BITNAMI_IMAGE_VERSION="1.13.15-debian-10-r142" \
+    BITNAMI_IMAGE_VERSION="1.13.15-debian-10-r143" \
     GOPATH="/go" \
     PATH="/go/bin:/opt/bitnami/go/bin:$PATH"
 
