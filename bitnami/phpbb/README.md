@@ -42,7 +42,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.3.2`, `3.3.2-debian-10-r58`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.3.2-debian-10-r58/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.3.2`, `3.3.2-debian-10-r59`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.3.2-debian-10-r59/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpbb GitHub repo](https://github.com/bitnami/bitnami-docker-phpbb).
 
@@ -281,7 +281,7 @@ To configure phpBB to send email using SMTP you can set the following environmen
 - `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
 - `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
 - `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
-- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. Default: **yes**
+- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
 
 ##### Example
 
