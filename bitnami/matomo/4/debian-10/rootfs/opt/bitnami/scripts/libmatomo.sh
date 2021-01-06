@@ -81,7 +81,7 @@ matomo_validate() {
         done
         ! is_empty_value "$MATOMO_SMTP_PORT_NUMBER" && validate_port "$MATOMO_SMTP_PORT_NUMBER"
         ! is_empty_value "$MATOMO_SMTP_PROTOCOL" && check_multi_value "MATOMO_SMTP_PROTOCOL" "ssl tls none"
-        ! is_empty_value "$MATOMO_SMTP_AUTH" && check_multi_value "MATOMO_SMTP_PROTOCOL" "Plain Login Crammd5"
+        ! is_empty_value "$MATOMO_SMTP_AUTH" && check_multi_value "MATOMO_SMTP_AUTH" "Plain Login Crammd5"
     fi
 
     # Check that the web server is properly set up
