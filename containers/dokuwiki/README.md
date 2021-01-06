@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`20200729`, `20200729-debian-10`, `20200729.0.0`, `20200729.0.0-debian-10-r134`, `latest` (20200729/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/20200729.0.0-debian-10-r134/20200729/debian-10/Dockerfile)
+* [`20200729`, `20200729-debian-10`, `20200729.0.0`, `20200729.0.0-debian-10-r135`, `latest` (20200729/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/20200729.0.0-debian-10-r135/20200729/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dokuwiki GitHub repo](https://github.com/bitnami/bitnami-docker-dokuwiki).
 
@@ -151,7 +151,7 @@ Available environment variables:
 - `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
 - `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
 - `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
-- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. Default: **yes**
+- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
 
 ## Logging
 
