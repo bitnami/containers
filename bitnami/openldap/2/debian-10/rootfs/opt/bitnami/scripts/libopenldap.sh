@@ -308,7 +308,7 @@ EOF
 ldap_add_custom_ldifs() {
     info "Loading custom LDIF files..."
     warn "Ignoring LDAP_USERS, LDAP_PASSWORDS, LDAP_USER_DC and LDAP_GROUP environment variables..."
-    debug_execute find "$LDAP_CUSTOM_LDIF_DIR" -maxdepth 1 -type f -iname '*.ldif' -print0 | sort -z | xargs --null -I{} ldapadd -f {} -H 'ldapi:///' -D "$LDAP_ADMIN_DN" -w "$LDAP_ADMIN_PASSWORD"
+    find "$LDAP_CUSTOM_LDIF_DIR" -maxdepth 1 \( -type f -o -type l \) -iname '*.ldif' -print0 | sort -z | xargs --null -I{} bash -c ". /opt/bitnami/scripts/libos.sh && debug_execute ldapadd -f {} -H 'ldapi:///' -D $LDAP_ADMIN_DN -w $LDAP_ADMIN_PASSWORD"
 }
 
 ########################
