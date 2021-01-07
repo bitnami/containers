@@ -39,7 +39,7 @@ fi
 
 debug "RABBITMQ_SYNC_TIMEOUT is $RABBITMQ_SYNC_TIMEOUT"
 
-if debug_execute rabbitmqctl cluster_status && [[ $RABBITMQ_SYNC_TIMEOUT gt 0 ]]; then
+if debug_execute rabbitmqctl cluster_status && [[ $RABBITMQ_SYNC_TIMEOUT -gt 0 ]]; then
     debug "Will wait up to $RABBITMQ_SYNC_TIMEOUT seconds for node to make sure cluster is healthy after node shutdown"
     debug_execute timeout $RABBITMQ_SYNC_TIMEOUT /opt/bitnami/scripts/rabbitmq/waitforsafeshutdown.sh
     if [[ $? -eq 124 ]]; then
