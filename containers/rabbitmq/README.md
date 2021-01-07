@@ -515,10 +515,13 @@ $ docker-compose up rabbitmq
 
 ## Notable changes
 
+* Add script to be used as preStop hook on K8s environments. It waits until queues have synchronised
+  mirror before shutting down.
+
 ### 3.8.9-debian-10-r42
 
 * The environment variable `RABBITMQ_HASHED_PASSWORD` has not been used for some time. It is now
-  removed from documentation anv validation.
+  removed from documentation and validation.
 * New boolean environment variable `RABBITMQ_LOAD_DEFINITIONS` to get behavior compatible with using
   the `load_definitions` configuration. Initially this means that the password of
   `RABBITMQ_USERNAME` is not changed using `rabbitmqctl change_password`.
