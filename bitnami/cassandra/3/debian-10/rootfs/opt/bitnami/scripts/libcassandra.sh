@@ -769,14 +769,14 @@ cassandra_execute_startup_cql() {
 #   None
 #########################
 cassandra_custom_init_scripts() {
-    if [[ -n $(find "$CASSANDRA_INITSCRIPTS_DIR/" -type f -regex ".*\.\(sh\|cql\|cql.gz\)") ]] && [[ ! -f "$CASSANDRA_VOLUME_DIR/.user_scripts_initialized" ]]; then
+    if [[ -n $(find "$CASSANDRA_INITSCRIPTS_DIR/" \( -type f -o -type l \) -regex ".*\.\(sh\|cql\|cql.gz\)") ]] && [[ ! -f "$CASSANDRA_VOLUME_DIR/.user_scripts_initialized" ]]; then
         info "Loading user's custom files from $CASSANDRA_INITSCRIPTS_DIR ..."
         local -r tmp_file="/tmp/filelist"
         if ! is_cassandra_running; then
             cassandra_start_bg "$CASSANDRA_INITSCRIPTS_BOOT_LOG_FILE"
             wait_for_cql_access
         fi
-        find "${CASSANDRA_INITSCRIPTS_DIR}/" -type f -regex ".*\.\(sh\|cql\|cql.gz\)" | sort >"$tmp_file"
+        find "${CASSANDRA_INITSCRIPTS_DIR}/" \( -type f -o -type l \) -regex ".*\.\(sh\|cql\|cql.gz\)" | sort >"$tmp_file"
         while read -r f; do
             case "$f" in
             *.sh)
