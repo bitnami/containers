@@ -94,6 +94,7 @@ kafka_env() {
 export KAFKA_BASE_DIR="${KAFKA_BASE_DIR:-/opt/bitnami/kafka}"
 export KAFKA_VOLUME_DIR="${KAFKA_VOLUME_DIR:-/bitnami/kafka}"
 export KAFKA_HOME="$KAFKA_BASE_DIR"
+export KAFKA_OPTS="${KAFKA_OPTS:-}"
 export KAFKA_LOG_DIR="$KAFKA_BASE_DIR"/logs
 export KAFKA_CONF_DIR="${KAFKA_CONF_DIR:-"$KAFKA_BASE_DIR"/config}"
 export KAFKA_CONF_FILE="$KAFKA_CONF_DIR"/server.properties
