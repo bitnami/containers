@@ -16,10 +16,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "ef5f22567fba8403553735c9fa26825e3aeb913ce7207b44bcbc336d6ada6b67  /tmp/bitnami/pkg/cache/java-11.0.9-1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/java-11.0.9-1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/java-11.0.9-1-0-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jruby-9.2.14-0-1-linux-amd64-debian-10.tar.gz && \
-    echo "d1d3cc149ba39c0220811856c7288fac00885aa63a1edbf1d7b881384e9729b1  /tmp/bitnami/pkg/cache/jruby-9.2.14-0-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/jruby-9.2.14-0-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/jruby-9.2.14-0-1-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jruby-9.2.14-0-2-linux-amd64-debian-10.tar.gz && \
+    echo "11c29aa17368d0291c6fdd0f43850634f02ad9ab13ae62ddb2afb247abec3049  /tmp/bitnami/pkg/cache/jruby-9.2.14-0-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/jruby-9.2.14-0-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/jruby-9.2.14-0-2-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
@@ -27,7 +27,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 ENV BITNAMI_APP_NAME="jruby" \
-    BITNAMI_IMAGE_VERSION="9.2.14-0-debian-10-r32" \
+    BITNAMI_IMAGE_VERSION="9.2.14-0-debian-10-r33" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/jruby/bin:$PATH"
 
 EXPOSE 3000
