@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-resnet" \
-    BITNAMI_IMAGE_VERSION="2.4.0-debian-10-r21" \
+    BITNAMI_IMAGE_VERSION="2.4.0-debian-10-r22" \
     NAMI_PREFIX="/.nami" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
