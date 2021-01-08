@@ -15,10 +15,10 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "830db27d5ba104e6927e9f32626be713d562ffd10ffc4791b54bae36ad6a0947",
+        "digest": "2011a6ddd6853afd60b0399ff5c334f7b6b131f90c0e326115d28a06de6b262b",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.25-1"
+        "version": "7.3.26-0"
     },
     "mediawiki": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "64a395833771f3ca776d455ad9eb0838bf1c9e04ae328ec2dd1ebd85235a4ee7",
+        "digest": "70dd059496d02e7166e32e4f1cfd6645459f7c17de6e92ee1bce393eb04c3e11",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.25-5"
+        "version": "7.3.26-0"
     },
     "render-template": {
         "arch": "amd64",
