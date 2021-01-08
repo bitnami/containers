@@ -300,7 +300,7 @@ suitecrm_pass_smtp_wizard() {
         "--data-urlencode" "mail_smtpauth_req=1"
         "--data-urlencode" "module=EmailMan"
         "--data-urlencode" "mail_smtppass=${SUITECRM_SMTP_PASSWORD}"
-        "--data-urlencode" "mail_smtpport=${SUITECRM_SMTP_PORT}"
+        "--data-urlencode" "mail_smtpport=${SUITECRM_SMTP_PORT_NUMBER}"
         "--data-urlencode" "mail_smtpserver=${SUITECRM_SMTP_HOST}"
         "--data-urlencode" "mail_smtptype=other"
         "--data-urlencode" "mail_smtpuser=${SUITECRM_SMTP_USER}"
