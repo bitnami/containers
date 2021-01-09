@@ -645,27 +645,6 @@ mongodb_configure_primary() {
     fi
 }
 
-
-
-########################
-# Is node confirmed
-# Globals:
-#   None
-# Arguments:
-#   $1 - node
-# Returns:
-#   Boolean
-#########################
-mongodb_is_node_confirmed() {
-    local -r node="${1:?node is required}"
-
-    result=$(mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
-rs.status().members
-EOF
-)
-    grep -q "$node" <<< "$result"
-}
-
 ########################
 # Wait for Confirmation
 # Globals:
@@ -678,12 +657,12 @@ EOF
 mongodb_wait_confirmation() {
     local -r node="${1:?node is required}"
 
-    debug "Waiting until $node is added to the replica set..."
-    if ! retry_while "mongodb_is_node_confirmed $node" "$MONGODB_MAX_TIMEOUT"; then
-        error "Unable to confirm that $node has been added to the replica set!"
+    debug "Waiting until ${node} is added to the replica set..."
+    if ! retry_while "mongodb_node_currently_in_cluster ${node}" "$MONGODB_MAX_TIMEOUT"; then
+        error "Unable to confirm that ${node} has been added to the replica set!"
         exit 1
     else
-        info "Node $node is confirmed!"
+        info "Node ${node} is confirmed!"
     fi
 }
 
@@ -897,10 +876,10 @@ mongodb_node_currently_in_cluster() {
     local result
 
     result=$(mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
-rs.status()
+rs.status().members
 EOF
 )
-    grep -q "name.*$node" <<< "$result"
+    grep -q -E "\"${node}(:[0-9]+)?\"" <<< "$result"
 }
 
 ########################
