@@ -238,14 +238,15 @@ keycloak_configure_tls() {
 embed-server --server-config=${KEYCLOAK_CONF_FILE} --std-out=discard
 batch
 /subsystem=elytron/key-store=kcKeyStore:add(path=${KEYCLOAK_TLS_KEYSTORE_FILE},type=JKS,credential-reference={clear-text=${KEYCLOAK_TLS_KEYSTORE_PASSWORD}})
-/subsystem=elytron/key-manager=kcKeyManager:add(key-store=kcKeyStore,credential-reference={clear-text=${KEYCLOAK_TLS_KEYSTORE_PASSWORD})
+/subsystem=elytron/key-manager=kcKeyManager:add(key-store=kcKeyStore,credential-reference={clear-text=${KEYCLOAK_TLS_KEYSTORE_PASSWORD}})
 /subsystem=elytron/server-ssl-context=kcSSLContext:add(key-manager=kcKeyManager)
 /subsystem=undertow/server=default-server/https-listener=https:undefine-attribute(name=security-realm)
 /subsystem=undertow/server=default-server/https-listener=https:write-attribute(name=ssl-context,value=kcSSLContext)
-/subsystem=elytron/key-store=kcTrustStore:add(path=${KEYCLOAK_TLS_TRUSTSTORE_FILE},type=JKS,credential-reference={clear-text=${KEYCLOAK_TLS_TRUSTSTORE_PASSWORD})
+/subsystem=elytron/key-store=kcTrustStore:add(path=${KEYCLOAK_TLS_TRUSTSTORE_FILE},type=JKS,credential-reference={clear-text=${KEYCLOAK_TLS_TRUSTSTORE_PASSWORD}})
 /subsystem=elytron/trust-manager=kcTrustManager:add(key-store=kcTrustStore)
 /subsystem=elytron/server-ssl-context=kcSSLContext:write-attribute(name=trust-manager, value=kcTrustManager)
 /subsystem=elytron/server-ssl-context=kcSSLContext:write-attribute(name=want-client-auth, value=true)
+/subsystem=keycloak-server/spi=truststore/:add
 /subsystem=keycloak-server/spi=truststore/provider=file/:add(enabled=true,properties={file => ${KEYCLOAK_TLS_TRUSTSTORE_FILE}, password => ${KEYCLOAK_TLS_TRUSTSTORE_PASSWORD}, hostname-verification-policy => "WILDCARD", disabled => "false"})
 run-batch
 stop-embedded-server
