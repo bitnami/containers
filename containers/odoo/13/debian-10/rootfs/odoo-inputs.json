@@ -9,5 +9,6 @@
   "smtpPassword": "{{$global.env.SMTP_PASSWORD}}",
   "smtpPort": "{{$global.env.SMTP_PORT}}",
   "smtpProtocol": "{{$global.env.SMTP_PROTOCOL}}",
-  "smtpUser": "{{$global.env.SMTP_USER}}"
+  "smtpUser": "{{$global.env.SMTP_USER}}",
+  "withoutDemo": "{{$global.env.WITHOUT_DEMO}}"
 }
