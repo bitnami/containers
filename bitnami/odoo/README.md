@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`14`, `14-debian-10`, `14.0.20201210`, `14.0.20201210-debian-10-r25` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/14.0.20201210-debian-10-r25/14/debian-10/Dockerfile)
-* [`13`, `13-debian-10`, `13.0.20201210`, `13.0.20201210-debian-10-r25`, `latest` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20201210-debian-10-r25/13/debian-10/Dockerfile)
+* [`13`, `13-debian-10`, `13.0.20201210`, `13.0.20201210-debian-10-r26`, `latest` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20201210-debian-10-r26/13/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.0.20201215`, `12.0.20201215-debian-10-r20` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/12.0.20201215-debian-10-r20/12/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/odoo GitHub repo](https://github.com/bitnami/bitnami-docker-odoo).
@@ -215,6 +215,7 @@ Available variables:
  - `POSTGRESQL_PASSWORD`: Root password for the PostgreSQL.
  - `POSTGRESQL_HOST`: Hostname for PostgreSQL server. Default: **postgresql**
  - `POSTGRESQL_PORT_NUMBER`: Port used by PostgreSQL server. Default: **5432**
+ - `WITHOUT_DEMO`: Disable loading demo data for modules to be installed (comma-separated or use 'all'). Default: **all**
 
 ### SMTP Configuration
 
