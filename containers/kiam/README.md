@@ -28,7 +28,7 @@ $ docker run --name kiam bitnami/kiam:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.6.0`, `3.6.0-debian-10-r85`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kiam/blob/3.6.0-debian-10-r85/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.6.0`, `3.6.0-debian-10-r86`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kiam/blob/3.6.0-debian-10-r86/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kiam GitHub repo](https://github.com/bitnami/bitnami-docker-kiam).
 
