@@ -20,7 +20,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/tomcat/postunpack.sh
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="9.0.41-debian-10-r31"
+    BITNAMI_IMAGE_VERSION="9.0.41-debian-10-r32"
 
 EXPOSE 8080 8443
 
