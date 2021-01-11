@@ -1,0 +1,4 @@
+version: '2'
+services:
+  kiam:
+    image: docker.io/bitnami/kiam:4-debian-10
