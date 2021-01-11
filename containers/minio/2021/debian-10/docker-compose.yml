@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  minio:
+    image: 'docker.io/bitnami/minio:2021-debian-10'
+    ports:
+      - '9000:9000'
+    volumes:
+      - 'minio_data:/data'
+
+volumes:
+  minio_data:
+    driver: local
