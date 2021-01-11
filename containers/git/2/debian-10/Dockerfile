@@ -15,7 +15,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN /build/bitnami-user.sh
 
 ENV BITNAMI_APP_NAME="git" \
-    BITNAMI_IMAGE_VERSION="2.30.0-debian-10-r12" \
+    BITNAMI_IMAGE_VERSION="2.30.0-debian-10-r13" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/git/bin:$PATH"
 
 ENTRYPOINT [ "git" ]
