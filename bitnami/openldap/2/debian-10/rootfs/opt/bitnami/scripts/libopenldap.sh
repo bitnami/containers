@@ -35,6 +35,9 @@ export LDAP_ONLINE_CONF_DIR="${LDAP_VOLUME_DIR}/slapd.d"
 export LDAP_PID_FILE="${LDAP_BASE_DIR}/var/run/slapd.pid"
 export LDAP_CUSTOM_LDIF_DIR="${LDAP_CUSTOM_LDIF_DIR:-/ldifs}"
 export PATH="${LDAP_BIN_DIR}:${LDAP_SBIN_DIR}:$PATH"
+export LDAP_TLS_CERT_FILE="${LDAP_TLS_CERT_FILE:-}"
+export LDAP_TLS_KEY_FILE="${LDAP_TLS_KEY_FILE:-}"
+export LDAP_TLS_CA_FILE="${LDAP_TLS_CA_FILE:-}"
 # Users
 export LDAP_DAEMON_USER="slapd"
 export LDAP_DAEMON_GROUP="slapd"
@@ -51,6 +54,7 @@ export LDAP_USERS="${LDAP_USERS:-user01,user02}"
 export LDAP_PASSWORDS="${LDAP_PASSWORDS:-bitnami1,bitnami2}"
 export LDAP_USER_DC="${LDAP_USER_DC:-users}"
 export LDAP_GROUP="${LDAP_GROUP:-readers}"
+export LDAP_ENABLE_TLS="${LDAP_ENABLE_TLS:-no}"
 EOF
 }
 
@@ -80,9 +84,28 @@ ldap_validate() {
             print_validation_error "An invalid port was specified in the environment variable ${port_var}: ${err}."
         fi
     }
+    for var in LDAP_SKIP_DEFAULT_TREE LDAP_ENABLE_TLS; do
+        if ! is_yes_no_value "${!var}"; then
+            print_validation_error "The allowed values for $var are: yes or no"
+        fi
+    done
 
-    if ! is_yes_no_value "$LDAP_SKIP_DEFAULT_TREE"; then
-        print_validation_error "The values allowed for LDAP_SKIP_DEFAULT_TREE are: yes or no"
+    if is_boolean_yes "$LDAP_ENABLE_TLS"; then
+        if [[ -z "$LDAP_TLS_CERT_FILE" ]]; then
+            print_validation_error "You must provide a X.509 certificate in order to use TLS"
+        elif [[ ! -f "$LDAP_TLS_CERT_FILE" ]]; then
+            print_validation_error "The X.509 certificate file in the specified path ${LDAP_TLS_CERT_FILE} does not exist"
+        fi
+        if [[ -z "$LDAP_TLS_KEY_FILE" ]]; then
+            print_validation_error "You must provide a private key in order to use TLS"
+        elif [[ ! -f "$LDAP_TLS_KEY_FILE" ]]; then
+            print_validation_error "The private key file in the specified path ${LDAP_TLS_KEY_FILE} does not exist"
+        fi
+        if [[ -z "$LDAP_TLS_CA_FILE" ]]; then
+            print_validation_error "You must provide a CA X.509 certificate in order to use TLS"
+        elif [[ ! -f "$LDAP_TLS_CA_FILE" ]]; then
+            print_validation_error "The CA X.509 certificate file in the specified path ${LDAP_TLS_CA_FILE} does not exist"
+        fi
     fi
 
     read -r -a users <<< "$(tr ',;' ' ' <<< "${LDAP_USERS}")"
@@ -350,6 +373,9 @@ ldap_initialize() {
         ldap_create_online_configuration
         ldap_start_bg
         ldap_admin_credentials
+        if is_boolean_yes "$LDAP_ENABLE_TLS"; then
+            ldap_configure_tls
+        fi
         if is_boolean_yes "$LDAP_SKIP_DEFAULT_TREE"; then
             info "Skipping default schemas/tree structure"
         else
@@ -363,4 +389,31 @@ ldap_initialize() {
         fi
         ldap_stop
     fi
+}
+
+########################
+# OpenLDAP configure TLS
+# Globals:
+#   LDAP_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+ldap_configure_tls() {
+    info "Configuring TLS"
+    cat > "${LDAP_SHARE_DIR}/certs.ldif" << EOF
+dn: cn=config
+changetype: modify
+replace: olcTLSCACertificateFile
+olcTLSCACertificateFile: $LDAP_TLS_CA_FILE
+-
+replace: olcTLSCertificateFile
+olcTLSCertificateFile: $LDAP_TLS_CERT_FILE
+-
+replace: olcTLSCertificateKeyFile
+olcTLSCertificateKeyFile: $LDAP_TLS_KEY_FILE
+
+EOF
+    debug_execute ldapmodify -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/certs.ldif"
 }
