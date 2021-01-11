@@ -9,17 +9,17 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kapacitor-1.5.7-0-linux-amd64-debian-10.tar.gz && \
-    echo "89d8b36ceef871b85e19dad2b656128d6b29832f8470fbc9f2dbc8ca6663eeaf  /tmp/bitnami/pkg/cache/kapacitor-1.5.7-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/kapacitor-1.5.7-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/kapacitor-1.5.7-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kapacitor-1.5.8-0-linux-amd64-debian-10.tar.gz && \
+    echo "297545d7e1feed98a9d3eac084c332e2156086992d64deedd476bcb28f8aebf4  /tmp/bitnami/pkg/cache/kapacitor-1.5.8-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/kapacitor-1.5.8-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/kapacitor-1.5.8-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir -p /bitnami/kapacitor && chmod g+rwX /bitnami/kapacitor
 
 ENV BITNAMI_APP_NAME="kapacitor" \
-    BITNAMI_IMAGE_VERSION="1.5.7-debian-10-r70" \
+    BITNAMI_IMAGE_VERSION="1.5.8-debian-10-r0" \
     KAPACITOR_DATA_DIR="/bitnami/kapacitor" \
     KAPACITOR_LOAD_DIR="/bitnami/kapacitor/load" \
     KAPACITOR_REPLAY_DIR="/bitnami/kapacitor/replay" \
