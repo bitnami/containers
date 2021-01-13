@@ -1,9 +1,12 @@
 
-# What is Redis Sentinel?
+# What is Redis(TM) Sentinel packaged by Bitnami?
 
-> Redis Sentinel provides high availability for Redis. In practical terms this means that using Sentinel you can create a Redis deployment that resists without human intervention to certain kind of failures.
+Disclaimer: REDIS(r) is a registered trademark of Redis Labs Ltd.Any rights therein are reserved to Redis Labs Ltd. Any use by Bitnami is for referential
+purposes only and does not indicate any sponsorship, endorsement, or affiliation between Redis Labs Ltd.
+
+> Redis(TM) Sentinel provides high availability for Redis. In practical terms this means that using Sentinel you can create a Redis deployment that resists without human intervention to certain kind of failures.
 >
-> Redis Sentinel also provides other collateral tasks such as monitoring, notifications and acts as a configuration provider for clients.
+> Redis(TM) Sentinel also provides other collateral tasks such as monitoring, notifications and acts as a configuration provider for clients.
 
 
 [redis.io](http://redis.io/)
@@ -45,13 +48,13 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`6.0`, `6.0-debian-10`, `6.0.9`, `6.0.9-debian-10-r73`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.0.9-debian-10-r73/6.0/debian-10/Dockerfile)
-* [`5.0`, `5.0-debian-10`, `5.0.10`, `5.0.10-debian-10-r73` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.10-debian-10-r73/5.0/debian-10/Dockerfile)
+* [`5.0`, `5.0-debian-10`, `5.0.10`, `5.0.10-debian-10-r74` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.10-debian-10-r74/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-sentinel GitHub repo](https://github.com/bitnami/bitnami-docker-redis-sentinel).
 
 # Get this image
 
-The recommended way to get the Bitnami Redis Sentinel Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/redis-sentinel).
+The recommended way to get the Bitnami Redis(TM) Sentinel Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/redis-sentinel).
 
 ```console
 $ docker pull bitnami/redis-sentinel:latest
@@ -71,13 +74,13 @@ $ docker build -t bitnami/redis-sentinel:latest 'https://github.com/bitnami/bitn
 
 # Connecting to other containers
 
-Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a Redis server running inside a container can easily be accessed by your application containers.
+Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a Redis(TM) server running inside a container can easily be accessed by your application containers.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
 ## Using the Command Line
 
-In this example, we will create a Redis Sentinel instance that will monitor a Redis instance that is running on the same docker network.
+In this example, we will create a Redis(TM) Sentinel instance that will monitor a Redis(TM) instance that is running on the same docker network.
 
 ### Step 1: Create a network
 
@@ -85,9 +88,9 @@ In this example, we will create a Redis Sentinel instance that will monitor a Re
 $ docker network create app-tier --driver bridge
 ```
 
-### Step 2: Launch the Redis instance
+### Step 2: Launch the Redis(TM) instance
 
-Use the `--network app-tier` argument to the `docker run` command to attach the Redis container to the `app-tier` network.
+Use the `--network app-tier` argument to the `docker run` command to attach the Redis(TM) container to the `app-tier` network.
 
 ```console
 $ docker run -d --name redis-server \
@@ -96,9 +99,9 @@ $ docker run -d --name redis-server \
     bitnami/redis:latest
 ```
 
-### Step 3: Launch your Redis Sentinel instance
+### Step 3: Launch your Redis(TM) Sentinel instance
 
-Finally we create a new container instance to launch the Redis client and connect to the server created in the previous step:
+Finally we create a new container instance to launch the Redis(TM) client and connect to the server created in the previous step:
 
 ```console
 $ docker run -it --rm \
@@ -109,7 +112,7 @@ $ docker run -it --rm \
 
 ## Using Docker Compose
 
-When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the Redis server from your own custom application image which is identified in the following snippet by the service name `myapp`.
+When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the Redis(TM) server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
 ```yaml
 version: '2'
@@ -198,14 +201,14 @@ $ docker-compose up --scale redis-sentinel=3 -d
 
 ## Environment variables
 
-The Redis Sentinel instance can be customized by specifying environment variables on the first run. The following environment values are provided to customize Redis Sentinel:
+The Redis(TM) Sentinel instance can be customized by specifying environment variables on the first run. The following environment values are provided to customize Redis(TM) Sentinel:
 
-- `REDIS_MASTER_HOST`: Host of the Redis master to monitor. Default: **redis**.
-- `REDIS_MASTER_PORT_NUMBER`: Port of the Redis master to monitor. Default: **6379**.
-- `REDIS_MASTER_SET`: Name of the set of Redis instances to monitor. Default: **mymaster**.
+- `REDIS_MASTER_HOST`: Host of the Redis(TM) master to monitor. Default: **redis**.
+- `REDIS_MASTER_PORT_NUMBER`: Port of the Redis(TM) master to monitor. Default: **6379**.
+- `REDIS_MASTER_SET`: Name of the set of Redis(TM) instances to monitor. Default: **mymaster**.
 - `REDIS_MASTER_PASSWORD`: Password to authenticate with the master. No defaults. As an alternative, you can mount a file with the password and set the `REDIS_MASTER_PASSWORD_FILE` variable.
-- `REDIS_MASTER_USER`: Username to authenticate with when ACL is enabled for the master. No defaults. This is available only for redis 6 or higher. If not specified, Redis Sentinel will try to authenticate with just the password (using `sentinel auth-pass <master-name> <password>`).
-- `REDIS_SENTINEL_PORT_NUMBER`: Redis Sentinel port. Default: **26379**.
+- `REDIS_MASTER_USER`: Username to authenticate with when ACL is enabled for the master. No defaults. This is available only for redis 6 or higher. If not specified, Redis(TM) Sentinel will try to authenticate with just the password (using `sentinel auth-pass <master-name> <password>`).
+- `REDIS_SENTINEL_PORT_NUMBER`: Redis(TM) Sentinel port. Default: **26379**.
 - `REDIS_SENTINEL_QUORUM`: Number of Sentinels that need to agree about the fact the master is not reachable. Default: **2**.
 - `REDIS_SENTINEL_PASSWORD`: Password to authenticate with this sentinel and to authenticate to other sentinels. No defaults. Needs to be identical on all sentinels. As an alternative, you can mount a file with the password and set the `REDIS_SENTINEL_PASSWORD_FILE` variable.
 - `REDIS_SENTINEL_DOWN_AFTER_MILLISECONDS`: Number of milliseconds before master is declared down. Default: **60000**.
@@ -220,9 +223,9 @@ The Redis Sentinel instance can be customized by specifying environment variable
 - `REDIS_SENTINEL_ANNOUNCE_IP`: Use the specified IP address in the HELLO messages used to gossip its presence. Default: **auto-detected local address**.
 - `REDIS_SENTINEL_ANNOUNCE_PORT`: Use the specified port in the HELLO messages used to gossip its presence. Default: **port specified in `REDIS_SENTINEL_PORT_NUMBER`**.
 
-## Securing Redis Sentinel traffic
+## Securing Redis(TM) Sentinel traffic
 
-Starting with version 6, Redis adds the support for SSL/TLS connections. Should you desire to enable this optional feature, you may use the aforementioned `REDIS_SENTINEL_TLS_*` enviroment variables to configure the application.
+Starting with version 6, Redis(TM) adds the support for SSL/TLS connections. Should you desire to enable this optional feature, you may use the aforementioned `REDIS_SENTINEL_TLS_*` enviroment variables to configure the application.
 
 When enabling TLS, conventional standard traffic is disabled by default. However this new feature is not mutually exclusive, which means it is possible to listen to both TLS and non-TLS connection simultaneously. To enable non-TLS traffic, set `REDIS_SENTINEL_PORT_NUMBER` to another port different than `0`.
 
@@ -264,9 +267,9 @@ Alternatively, you may also provide with this configuration in your [custom](htt
 
 The image looks for configurations in `/bitnami/redis-sentinel/conf/`. You can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/redis-persistence/redis-sentinel/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
-### Step 1: Run the Redis Sentinel image
+### Step 1: Run the Redis(TM) Sentinel image
 
-Run the Redis Sentinel image, mounting a directory from your host.
+Run the Redis(TM) Sentinel image, mounting a directory from your host.
 
 ```console
 $ docker run --name redis-sentinel \
@@ -294,9 +297,9 @@ Edit the configuration on your host using your favorite editor.
 $ vi /path/to/redis-persistence/redis-sentinel/conf/redis.conf
 ```
 
-### Step 3: Restart Redis
+### Step 3: Restart Redis(TM)
 
-After changing the configuration, restart your Redis container for changes to take effect.
+After changing the configuration, restart your Redis(TM) container for changes to take effect.
 
 ```console
 $ docker restart redis
@@ -308,11 +311,11 @@ or using Docker Compose:
 $ docker-compose restart redis
 ```
 
-Refer to the [Redis configuration](http://redis.io/topics/config) manual for the complete list of configuration options.
+Refer to the [Redis(TM) configuration](http://redis.io/topics/config) manual for the complete list of configuration options.
 
 # Logging
 
-The Bitnami Redis Sentinel Docker Image sends the container logs to the `stdout`. To view the logs:
+The Bitnami Redis(TM) Sentinel Docker Image sends the container logs to the `stdout`. To view the logs:
 
 ```console
 $ docker logs redis
@@ -330,7 +333,7 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 
 ## Upgrade this image
 
-Bitnami provides up-to-date versions of Redis Sentinel, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
+Bitnami provides up-to-date versions of Redis(TM) Sentinel, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
 ### Step 1: Get the updated image
 
@@ -395,7 +398,7 @@ $ docker-compose up redis
 
 ## 4.0.10-r25
 
-- The Redis sentinel container has been migrated to a non-root container approach. Previously the container run as `root` user and the redis daemon was started as `redis` user. From now own, both the container and the redis daemon run as user `1001`. As a consequence, the configuration files are writable by the user running the redis process. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
+- The Redis(TM) sentinel container has been migrated to a non-root container approach. Previously the container run as `root` user and the redis daemon was started as `redis` user. From now own, both the container and the redis daemon run as user `1001`. As a consequence, the configuration files are writable by the user running the redis process. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 # Contributing
 
