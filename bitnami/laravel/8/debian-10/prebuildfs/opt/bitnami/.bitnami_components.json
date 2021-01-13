@@ -8,10 +8,10 @@
     },
     "laravel": {
         "arch": "amd64",
-        "digest": "9fe75c995228619c7699b474fdbe204b4e6d27591e13a621e63102645df0eadc",
+        "digest": "d2836fef9de018f20e680067d4211f99c1a3e0b1986fc98935dfc7632fb26efc",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.5.7-0"
+        "version": "8.5.8-0"
     },
     "node": {
         "arch": "amd64",
