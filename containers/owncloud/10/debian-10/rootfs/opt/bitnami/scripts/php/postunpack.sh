@@ -35,4 +35,4 @@ info "Disabling PHP-FPM daemon user/group configuration"
 mv "${PHP_CONF_DIR}/common.conf" "${PHP_CONF_DIR}/common.conf.disabled"
 touch "${PHP_CONF_DIR}/common.conf"
 
-ln -sf "/dev/stdout" "${PHP_FPM_LOG_FILE}"
+ln -sf "/dev/stdout" "$PHP_FPM_LOG_FILE"
