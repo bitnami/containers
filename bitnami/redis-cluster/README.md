@@ -1,6 +1,9 @@
-# What is Redis-Cluster?
+# What is Redis(TM) Cluster packaged by Bitnami?
 
-> Redis is an advanced key-value cache and store. It is often referred to as a data structure server since keys can contain strings, hashes, lists, sets, sorted sets, bitmaps and hyperloglogs.
+Disclaimer: REDIS(r) is a registered trademark of Redis Labs Ltd.Any rights therein are reserved to Redis Labs Ltd. Any use by Bitnami is for referential
+purposes only and does not indicate any sponsorship, endorsement, or affiliation between Redis Labs Ltd.
+
+> Redis(TM) is an advanced key-value cache and store. It is often referred to as a data structure server since keys can contain strings, hashes, lists, sets, sorted sets, bitmaps and hyperloglogs.
 
 [Redis.io](https://redis.io/)
 
@@ -28,9 +31,9 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/redis-cluster?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy Redis-Cluster in Kubernetes?
+# How to deploy Redis(TM) Cluster in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Redis-Cluster Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/redis-cluster).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Redis(TM) Cluster Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/redis-cluster).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
@@ -40,13 +43,13 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`6.0`, `6.0-debian-10`, `6.0.9`, `6.0.9-debian-10-r62`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/6.0.9-debian-10-r62/6.0/debian-10/Dockerfile)
-* [`5.0`, `5.0-debian-10`, `5.0.10`, `5.0.10-debian-10-r66` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/5.0.10-debian-10-r66/5.0/debian-10/Dockerfile)
+* [`5.0`, `5.0-debian-10`, `5.0.10`, `5.0.10-debian-10-r67` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/5.0.10-debian-10-r67/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-cluster GitHub repo](https://github.com/bitnami/bitnami-docker-redis-cluster).
 
 # Get this image
 
-The recommended way to get the Bitnami Redis-Cluster Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/redis-cluster).
+The recommended way to get the Bitnami Redis(TM) Cluster Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/redis-cluster).
 
 ```console
 $ docker pull bitnami/redis-cluster:latest
@@ -101,7 +104,7 @@ Containers attached to the same network can communicate with each other using th
 $ docker network create redis-cluster-network --driver bridge
 ```
 
-### Step 2: Launch the Redis-Cluster container within your network
+### Step 2: Launch the Redis(TM) Cluster container within your network
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `redis-cluster-network` network.
 
@@ -139,14 +142,14 @@ services:
   ...
 ```
 
-Refer to the [Redis configuration](http://redis.io/topics/config) manual for the complete list of configuration options.
+Refer to the [Redis(TM) configuration](http://redis.io/topics/config) manual for the complete list of configuration options.
 
 The following env vars are supported for this container:
 | Name                                    | Description                                                                                                                                                                            |
 |-----------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `REDIS_DISABLE_COMMANDS`                | Disables the specified Redis commands                                                                                                                                                  |
-| `REDIS_PORT`                            | Set the Redis port. Default=: `6379`                                                                                                                                                   |
-| `REDIS_PASSWORD`                        | Set the Redis password. Default: `bitnami`                                                                                                                                             |
+| `REDIS_DISABLE_COMMANDS`                | Disables the specified Redis(TM) commands                                                                                                                                                  |
+| `REDIS_PORT`                            | Set the Redis(TM) port. Default=: `6379`                                                                                                                                                   |
+| `REDIS_PASSWORD`                        | Set the Redis(TM) password. Default: `bitnami`                                                                                                                                             |
 | `ALLOW_EMPTY_PASSWORD`                  | Enables access without password                                                                                                                                                        |
 | `REDIS_DNS_RETRIES`                     | Number of retries to get the IPs of the provided `REDIS_NODES`. It will wait 5 seconds between retries                                                                                 |
 | `REDISCLI_AUTH`                         | Provide the same value as the configured `REDIS_PASSWORD` for the redis-cli tool to authenticate                                                                                       |
@@ -154,7 +157,7 @@ The following env vars are supported for this container:
 | `REDIS_CLUSTER_REPLICAS`                | Number of replicas for every master that the cluster will have.                                                                                                                        |
 | `REDIS_NODES`                           | String delimited by spaces containing the hostnames of all of the nodes that will be part of the cluster                                                                               |
 | `REDIS_CLUSTER_ANNOUNCE_IP`             | IP that the node should announce, used for non dynamic ip environents                                                                                                                  |
-| `REDIS_CLUSTER_DYNAMIC_IPS`             | Set to `no` if your Redis cluster will be created with statical IPs. Default: `yes`                                                                                                    |
+| `REDIS_CLUSTER_DYNAMIC_IPS`             | Set to `no` if your Redis(TM) cluster will be created with statical IPs. Default: `yes`                                                                                                    |
 | `REDIS_TLS_ENABLED`                     | Whether to enable TLS for traffic or not. Defaults to `no`.                                                                                                                            |
 | `REDIS_TLS_PORT`                        | Port used for TLS secure traffic. Defaults to `6379`.                                                                                                                                  |
 | `REDIS_TLS_CERT_FILE`                   | File containing the certificate file for the TSL traffic. No defaults.                                                                                                                 |
@@ -166,7 +169,7 @@ The following env vars are supported for this container:
 | `REDIS_CLUSTER_DNS_LOOKUP_RETRIES`      | Number of retries for the node's DNS lookup during the initial cluster creation. Defaults to `5`.                                                                                      |
 | `REDIS_CLUSTER_DNS_LOOKUP_SLEEP`        | Number of seconds to wait between each node's DNS lookup during the initial cluster creation. Defaults to `1`.                                                                         |
 
-Once all the Redis nodes are running you need to execute command like the following to initiate the cluster:
+Once all the Redis(TM) nodes are running you need to execute command like the following to initiate the cluster:
 
 ```console
 redis-cli --cluster create node1:port node2:port --cluster-replicas 1 --cluster-yes
@@ -184,9 +187,9 @@ performing this DNS lookup in order to prevent getting stale records. To this en
 `REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP` to a value around `30` which has been found to be good in most cases. You can
 check the discussion regarding this [here](https://github.com/bitnami/bitnami-docker-redis-cluster/pull/16#pullrequestreview-540706903).
 
-## Securing Redis Cluster traffic
+## Securing Redis(TM) Cluster traffic
 
-Starting with version 6, Redis adds the support for SSL/TLS connections. Should you desire to enable this optional feature, you may use the aforementioned `REDIS_TLS_*` enviroment variables to configure the application.
+Starting with version 6, Redis(TM) adds the support for SSL/TLS connections. Should you desire to enable this optional feature, you may use the aforementioned `REDIS_TLS_*` enviroment variables to configure the application.
 
 When enabling TLS, conventional standard traffic is disabled by default. However this new feature is not mutually exclusive, which means it is possible to listen to both TLS and non-TLS connection simultaneously. To enable non-TLS traffic, set `REDIS_TLS_PORT` to another port different than `0`.
 
@@ -225,7 +228,7 @@ Alternatively, you may also provide with this configuration in your [custom](htt
 
 # Logging
 
-The Bitnami Redis-Cluster Docker image sends the container logs to `stdout`. To view the logs:
+The Bitnami Redis(TM) Cluster Docker image sends the container logs to `stdout`. To view the logs:
 
 ```console
 $ docker logs redis-cluster
@@ -237,7 +240,7 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 
 ## Upgrade this image
 
-Bitnami provides up-to-date versions of Redis-Cluster, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
+Bitnami provides up-to-date versions of Redis(TM) Cluster, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
 ### Step 1: Get the updated image
 
