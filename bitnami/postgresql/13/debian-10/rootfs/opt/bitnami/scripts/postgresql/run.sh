@@ -19,7 +19,7 @@ cmd=$(command -v postgres)
 
 info "** Starting PostgreSQL **"
 if am_i_root; then
-    exec gosu "$POSTGRESQL_DAEMON_USER" "${cmd}" "${flags[@]}"
+    exec gosu "$POSTGRESQL_DAEMON_USER" "$cmd" "${flags[@]}"
 else
-    exec "${cmd}" "${flags[@]}"
+    exec "$cmd" "${flags[@]}"
 fi
