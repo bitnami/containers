@@ -15,7 +15,7 @@ set -o pipefail
 # Load Spring Cloud Data Flow environment variables
 . /opt/bitnami/scripts/spring-cloud-dataflow-env.sh
 
-for dir in "${SPRING_CLOUD_DATAFLOW_VOLUME_DIR}" "${SPRING_CLOUD_DATAFLOW_CONF_DIR}" "${SPRING_CLOUD_DATAFLOW_M2_DIR}"; do
+for dir in "$SPRING_CLOUD_DATAFLOW_VOLUME_DIR" "$SPRING_CLOUD_DATAFLOW_CONF_DIR" "$SPRING_CLOUD_DATAFLOW_M2_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done
