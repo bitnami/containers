@@ -13,12 +13,12 @@ set -o pipefail
 . /opt/bitnami/scripts/libharbor.sh
 
 read -r -a directories <<<"$(get_system_cert_paths)"
-directories+=("${SCANNER_TRIVY_CACHE_DIR}" "${SCANNER_TRIVY_REPORTS_DIR}")
+directories+=("$SCANNER_TRIVY_CACHE_DIR" "$SCANNER_TRIVY_REPORTS_DIR")
 
 # Create directories
 for dir in "${directories[@]}"; do
-    ensure_dir_exists "${dir}"
-    chmod -R g+rwX "${dir}"
+    ensure_dir_exists "$dir"
+    chmod -R g+rwX "$dir"
 done
 
 # Fix for CentOS Internal TLS
