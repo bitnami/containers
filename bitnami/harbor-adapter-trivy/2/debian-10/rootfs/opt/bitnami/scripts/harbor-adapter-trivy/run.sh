@@ -16,7 +16,7 @@ cmd=$(command -v scanner-trivy)
 
 info "** Starting Harbor Adapter Trivy **"
 if am_i_root; then
-    exec gosu "$SCANNER_TRIVY_DAEMON_USER" "${cmd}" "$@"
+    exec gosu "$SCANNER_TRIVY_DAEMON_USER" "$cmd" "$@"
 else
-    exec "${cmd}" "$@"
+    exec "$cmd" "$@"
 fi
