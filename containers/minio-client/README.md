@@ -38,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2021`, `2021-debian-10`, `2021.1.5`, `2021.1.5-debian-10-r2` (2021/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2021.1.5-debian-10-r2/2021/debian-10/Dockerfile)
-* [`2020`, `2020-debian-10`, `2020.12.18`, `2020.12.18-debian-10-r27`, `latest` (2020/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2020.12.18-debian-10-r27/2020/debian-10/Dockerfile)
+* [`2020`, `2020-debian-10`, `2020.12.18`, `2020.12.18-debian-10-r28`, `latest` (2020/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2020.12.18-debian-10-r28/2020/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/minio-client GitHub repo](https://github.com/bitnami/bitnami-docker-minio-client).
 
