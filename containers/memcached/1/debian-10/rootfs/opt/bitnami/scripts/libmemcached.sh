@@ -54,7 +54,7 @@ memcached_validate() {
         print_validation_error "The variable MEMCACHED_THREADS must be positive integer"
     fi
 
-    [[ "${error_code}" -eq 0 ]] || exit "${error_code}"
+    [[ "${error_code}" -eq 0 ]] || exit "$error_code"
 }
 
 ########################

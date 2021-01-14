@@ -21,7 +21,7 @@ memcached_validate
 # Create Memcached system user and group
 if am_i_root; then
     info "Creating Memcached daemon user"
-    ensure_user_exists "${MEMCACHED_DAEMON_USER}" "${MEMCACHED_DAEMON_GROUP}"
+    ensure_user_exists "$MEMCACHED_DAEMON_USER" "$MEMCACHED_DAEMON_GROUP"
 fi
 
 # Ensure Memcached is initialized
