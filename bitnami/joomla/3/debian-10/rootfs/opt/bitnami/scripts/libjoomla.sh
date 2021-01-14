@@ -61,7 +61,11 @@ joomla_validate() {
 
     # Validate SMTP credentials
     if ! is_empty_value "$JOOMLA_SMTP_HOST"; then
-        for empty_env_var in "JOOMLA_SMTP_USER" "JOOMLA_SMTP_PASSWORD" "JOOMLA_SMTP_PORT_NUMBER" "JOOMLA_SMTP_PROTOCOL"; do
+        for empty_env_var in "JOOMLA_SMTP_USER" "JOOMLA_SMTP_PASSWORD"; do
+            is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
+        done
+
+        for empty_env_var in "JOOMLA_SMTP_PORT_NUMBER" "JOOMLA_SMTP_PROTOCOL"; do
             is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set."
         done
     fi
@@ -130,11 +134,14 @@ joomla_initialize() {
         ## SMTP
         # Use JOOMLA_SMTP_HOST as a flag to know if SMTP should be enabled (the rest of parameters are check in the validation)
         if ! is_empty_value "$JOOMLA_SMTP_HOST"; then
+            local smtp_auth_req=0
+            ! is_empty_value "$JOOMLA_SMTP_USER" && smtp_auth_req=1
+
             info "Enabling SMTP" && joomla_conf_set  "\$mailer" "smtp"
-            debug "Enabling SMTP authorization" && joomla_conf_set  "\$smtpauth" "1"
+            debug "Enabling SMTP authorization" && joomla_conf_set  "\$smtpauth" "$smtp_auth_req"
             debug "Setting SMTP host" && joomla_conf_set  "\$smtphost" "$JOOMLA_SMTP_HOST"
-            debug "Setting SMTP user" && joomla_conf_set  "\$smtpuser" "$JOOMLA_SMTP_USER"
-            debug "Setting SMTP password" && joomla_conf_set  "\$smtppass" "$JOOMLA_SMTP_PASSWORD"
+            ! is_empty_value "$JOOMLA_SMTP_USER" && debug "Setting SMTP user" && joomla_conf_set  "\$smtpuser" "$JOOMLA_SMTP_USER"
+            ! is_empty_value "$JOOMLA_SMTP_PASSWORD" && debug "Setting SMTP password" && joomla_conf_set  "\$smtppass" "$JOOMLA_SMTP_PASSWORD"
             debug "Setting SMTP port" && joomla_conf_set  "\$smtpport" "$JOOMLA_SMTP_PORT"
             debug "Setting SMTP protocol" && joomla_conf_set  "\$smtpsecure" "$JOOMLA_SMTP_PROTOCOL"
         fi
