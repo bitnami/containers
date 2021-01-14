@@ -29,4 +29,4 @@ else
     info "apache is not running"
 fi
 
-exit "${error_code}"
+exit "$error_code"
