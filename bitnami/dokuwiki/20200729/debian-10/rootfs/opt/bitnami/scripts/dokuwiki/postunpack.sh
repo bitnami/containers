@@ -40,6 +40,7 @@ php_conf_set memory_limit "$PHP_DEFAULT_MEMORY_LIMIT"
 # Enable default web server configuration for DokuWiki
 info "Creating default web server configuration for DokuWiki"
 web_server_validate
+# shellcheck disable=SC2016
 ensure_web_server_app_configuration_exists "dokuwiki" --type php --apache-extra-directory-configuration '
 # Enable DokuWiki friendly URLs - Based on https://www.dokuwiki.org/rewrite
 RewriteEngine on
