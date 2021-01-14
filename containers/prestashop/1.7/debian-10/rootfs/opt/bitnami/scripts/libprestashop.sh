@@ -61,9 +61,11 @@ prestashop_validate() {
 
     # Validate SMTP credentials
     if ! is_empty_value "$PRESTASHOP_SMTP_HOST"; then
-        for empty_env_var in "PRESTASHOP_SMTP_USER" "PRESTASHOP_SMTP_PASSWORD" "PRESTASHOP_SMTP_PORT_NUMBER"; do
-            is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set."
+        for empty_env_var in "PRESTASHOP_SMTP_USER" "PRESTASHOP_SMTP_PASSWORD"; do
+            is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
         done
+        is_empty_value "$PRESTASHOP_SMTP_PORT_NUMBER" && print_validation_error "The PRESTASHOP_SMTP_PORT_NUMBER environment variable is empty or not set."
+        
         ! is_empty_value "$PRESTASHOP_SMTP_PROTOCOL" && check_multi_value "PRESTASHOP_SMTP_PROTOCOL" "ssl tls"
     fi
 
