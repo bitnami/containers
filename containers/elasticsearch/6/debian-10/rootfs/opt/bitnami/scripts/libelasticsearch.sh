@@ -146,7 +146,7 @@ elasticsearch_start() {
     local log_counter=30
     while [[ -z "$log_result" ]] && [[ "$log_counter" -ne 0 ]]; do
         log_counter=$(("$log_counter" - 1))
-        log_result="$(tail -7 "${ELASTICSEARCH_LOG_DIR}/elasticsearch.log" | grep -i "Node" | grep -i "started")"
+        log_result="$(tail -7 "$ELASTICSEARCH_LOG_FILE" | grep -i "Node" | grep -i "started")"
         sleep 2
     done
 }
@@ -431,7 +431,7 @@ elasticsearch_initialize() {
     fi
 
     debug "Ensuring expected directories/files exist..."
-    for dir in "$ELASTICSEARCH_TMP_DIR" "$ELASTICSEARCH_DATA_DIR" "$ELASTICSEARCH_LOG_DIR" "$ELASTICSEARCH_BASE_DIR/plugins" "$ELASTICSEARCH_BASE_DIR/modules" "$ELASTICSEARCH_CONF_DIR"; do
+    for dir in "$ELASTICSEARCH_TMP_DIR" "$ELASTICSEARCH_DATA_DIR" "$ELASTICSEARCH_LOGS_DIR" "$ELASTICSEARCH_BASE_DIR/plugins" "$ELASTICSEARCH_BASE_DIR/modules" "$ELASTICSEARCH_CONF_DIR"; do
         ensure_dir_exists "$dir"
         am_i_root && chown -R "$ELASTICSEARCH_DAEMON_USER:$ELASTICSEARCH_DAEMON_GROUP" "$dir"
     done
