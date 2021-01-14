@@ -1,0 +1,37 @@
+{
+    "airflow-worker": {
+        "arch": "amd64",
+        "digest": "f0361b8a5ea042d033711276a45af37859f29594cbcdb3865c448b0cabefe015",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "2.0.0-0"
+    },
+    "gosu": {
+        "arch": "amd64",
+        "digest": "4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.12.0-2"
+    },
+    "postgresql-client": {
+        "arch": "amd64",
+        "digest": "a3b2c9f7bcc58ec78b2bbb4170cd0bb5b71a8fd8d879187aaff4a7f81326dcfc",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "10.15.0-0"
+    },
+    "python": {
+        "arch": "amd64",
+        "digest": "cc3e62e05463929529214f65cb7922794c758a3db5ca29bf5c9a59fe66e95b80",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "3.6.12-10"
+    },
+    "tini": {
+        "arch": "amd64",
+        "digest": "9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "0.19.0-1"
+    }
+}
