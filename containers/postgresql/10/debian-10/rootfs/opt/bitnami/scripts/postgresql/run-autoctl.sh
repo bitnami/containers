@@ -15,16 +15,16 @@ set -o pipefail
 # Load PostgreSQL environment variables
 . /opt/bitnami/scripts/postgresql-env.sh
 
-export HOME="${POSTGRESQL_AUTOCTL_VOLUME_DIR}"
+export HOME="$POSTGRESQL_AUTOCTL_VOLUME_DIR"
 
 autoctl_initialize
 
-flags=("run" "--pgdata" "${POSTGRESQL_DATA_DIR}")
+flags=("run" "--pgdata" "$POSTGRESQL_DATA_DIR")
 cmd=$(command -v pg_autoctl)
 
 info "** Starting PostgreSQL autoctl_node (Mode: $POSTGRESQL_AUTOCTL_MODE) **"
 if am_i_root; then
-    exec gosu "$POSTGRESQL_DAEMON_USER" "${cmd}" "${flags[@]}"
+    exec gosu "$POSTGRESQL_DAEMON_USER" "$cmd" "${flags[@]}"
 else
-    PGPASSWORD=${POSTGRESQL_REPLICATION_PASSWORD} exec "${cmd}" "${flags[@]}"
+    PGPASSWORD=$POSTGRESQL_REPLICATION_PASSWORD exec "$cmd" "${flags[@]}"
 fi
