@@ -127,10 +127,9 @@ redis_cluster_create() {
 
     for node in "${nodes[@]}"; do
         host_and_port=($(to_host_and_port $node))
+        wait_command="redis-cli -h ${host_and_port[0]} -p ${host_and_port[1]} ping"
         if is_boolean_yes "$REDIS_TLS_ENABLED"; then
-            wait_command="redis-cli -h ${host_and_port[0]} -p ${host_and_port[1]} --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE} ping"
-        else
-            wait_command="redis-cli -h ${host_and_port[0]} -p ${host_and_port[1]} ping"
+            wait_command="${wait_command:0:-5} --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE} ping"
         fi
         while [[ $($wait_command) != 'PONG' ]]; do
             echo "Node $node not ready, waiting for all the nodes to be ready..."
@@ -146,11 +145,9 @@ redis_cluster_create() {
         ip_and_ports+=("$(wait_for_dns_lookup "${host_and_port[0]}" "${REDIS_CLUSTER_DNS_LOOKUP_RETRIES}" "${REDIS_CLUSTER_DNS_LOOKUP_SLEEP}"):${host_and_port[1]}")
     done
 
+    create_command="redis-cli --cluster create ${ip_and_ports[*]} --cluster-replicas ${REDIS_CLUSTER_REPLICAS} --cluster-yes"
     if is_boolean_yes "$REDIS_TLS_ENABLED"; then
-        create_command="redis-cli --cluster create ${ip_and_ports[*]} --cluster-replicas ${REDIS_CLUSTER_REPLICAS} --cluster-yes --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE}"
-    else
-        echo "redis-cli --cluster create ${ip_and_ports[*]} --cluster-replicas ${REDIS_CLUSTER_REPLICAS} --cluster-yes"
-        create_command="redis-cli --cluster create ${ip_and_ports[*]} --cluster-replicas ${REDIS_CLUSTER_REPLICAS} --cluster-yes"
+        create_command="${create_command} --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE}"
     fi
     yes yes | $create_command || true
     if redis_cluster_check "${ip_and_ports[0]}"; then
