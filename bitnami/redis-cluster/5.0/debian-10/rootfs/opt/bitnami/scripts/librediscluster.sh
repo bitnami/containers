@@ -228,7 +228,7 @@ redis_cluster_update_ips() {
 #   - 2 element Array of host and port
 #########################
 to_host_and_port() {
-    local host_and_port=($(echo $1 | tr ":" "\n"))
+    host_and_port=($(echo ${1:?At least the host is required} | tr ":" "\n"))
 
     if [ "${#host_and_port[*]}" -eq "1" ]; then
         if is_boolean_yes "$REDIS_TLS_ENABLED"; then
