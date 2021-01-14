@@ -15,7 +15,7 @@ set -o pipefail
 # Load Spring Cloud Skipper environment variables
 . /opt/bitnami/scripts/spring-cloud-skipper-env.sh
 
-for dir in "${SPRING_CLOUD_SKIPPER_VOLUME_DIR}" "${SPRING_CLOUD_SKIPPER_CONF_DIR}" "${SPRING_CLOUD_SKIPPER_M2_DIR}"; do
+for dir in "$SPRING_CLOUD_SKIPPER_VOLUME_DIR" "$SPRING_CLOUD_SKIPPER_CONF_DIR" "$SPRING_CLOUD_SKIPPER_M2_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done
