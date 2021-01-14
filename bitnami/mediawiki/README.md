@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.35.1`, `1.35.1-debian-10-r18`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.35.1-debian-10-r18/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.35.1`, `1.35.1-debian-10-r19`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.35.1-debian-10-r19/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mediawiki GitHub repo](https://github.com/bitnami/bitnami-docker-mediawiki).
 
@@ -286,7 +286,7 @@ This would be an example of SMTP configuration using a GMail account:
       - MEDIAWIKI_DATABASE_USER=bn_mediawiki
       - MEDIAWIKI_DATABASE_NAME=bitnami_mediawiki
       - ALLOW_EMPTY_PASSWORD=yes
-      - MEDIAWIKI_SMTP_HOST=tls://smtp.gmail.com
+      - MEDIAWIKI_SMTP_HOST=smtp.gmail.com
       - MEDIAWIKI_SMTP_HOST_ID=mydomain.com
       - MEDIAWIKI_SMTP_PORT=587
       - MEDIAWIKI_SMTP_USER=your_email@gmail.com
@@ -299,7 +299,7 @@ This would be an example of SMTP configuration using a GMail account:
   $ docker run -d --name mediawiki -p 80:8080 -p 443:8443 \
     --env MEDIAWIKI_DATABASE_USER=bn_mediawiki \
     --env MEDIAWIKI_DATABASE_NAME=bitnami_mediawiki \
-    --env MEDIAWIKI_SMTP_HOST=tls://smtp.gmail.com \
+    --env MEDIAWIKI_SMTP_HOST=smtp.gmail.com \
     --env MEDIAWIKI_SMTP_HOST_ID=mydomain.com \
     --env MEDIAWIKI_SMTP_PORT=587 \
     --env MEDIAWIKI_SMTP_USER=your_email@gmail.com \
