@@ -76,9 +76,11 @@ matomo_validate() {
 
     # Validate SMTP credentials
     if ! is_empty_value "$MATOMO_SMTP_HOST"; then
-        for empty_env_var in "MATOMO_SMTP_USER" "MATOMO_SMTP_PASSWORD" "MATOMO_SMTP_PORT_NUMBER"; do
-            is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set."
+        for empty_env_var in "MATOMO_SMTP_USER" "MATOMO_SMTP_PASSWORD"; do
+            is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
         done
+        is_empty_value "$MATOMO_SMTP_PORT_NUMBER" && print_validation_error "The MATOMO_SMTP_PORT_NUMBER environment variable is empty or not set."
+
         ! is_empty_value "$MATOMO_SMTP_PORT_NUMBER" && validate_port "$MATOMO_SMTP_PORT_NUMBER"
         ! is_empty_value "$MATOMO_SMTP_PROTOCOL" && check_multi_value "MATOMO_SMTP_PROTOCOL" "ssl tls none"
         ! is_empty_value "$MATOMO_SMTP_AUTH" && check_multi_value "MATOMO_SMTP_AUTH" "Plain Login Crammd5"
