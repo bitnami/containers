@@ -9,16 +9,16 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kubectl-1.17.16-0-linux-amd64-debian-10.tar.gz && \
-    echo "e6ac1c7091fc52b5ec644d5f0961efc853c53758ce429d1403216c85882a7301  /tmp/bitnami/pkg/cache/kubectl-1.17.16-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/kubectl-1.17.16-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/kubectl-1.17.16-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kubectl-1.17.17-0-linux-amd64-debian-10.tar.gz && \
+    echo "9a3dd5c463db90754cceedadc4faf40eab9738434dfdeaa837a7dc26b407aaa8  /tmp/bitnami/pkg/cache/kubectl-1.17.17-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/kubectl-1.17.17-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/kubectl-1.17.17-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="kubectl" \
-    BITNAMI_IMAGE_VERSION="1.17.16-debian-10-r21" \
+    BITNAMI_IMAGE_VERSION="1.17.17-debian-10-r0" \
     PATH="/opt/bitnami/kubectl/bin:$PATH"
 
 USER 1001
