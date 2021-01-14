@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="wavefront-kubernetes-collector" \
-    BITNAMI_IMAGE_VERSION="1.2.6-debian-10-r45" \
+    BITNAMI_IMAGE_VERSION="1.2.6-debian-10-r46" \
     PATH="/opt/bitnami/wavefront/bin:$PATH"
 
 USER 1001
