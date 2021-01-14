@@ -29,4 +29,4 @@ else
     info "php-fpm is already running"
 fi
 
-exit "${error_code}"
+exit "$error_code"
