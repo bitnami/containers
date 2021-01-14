@@ -126,7 +126,7 @@ redis_cluster_create() {
     local create_command
 
     for node in "${nodes[@]}"; do
-        to_host_and_port $node
+        host_and_port=($(to_host_and_port $node))
         if is_boolean_yes "$REDIS_TLS_ENABLED"; then
             wait_command="redis-cli -h ${host_and_port[0]} -p ${host_and_port[1]} --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE} ping"
         else
@@ -142,7 +142,7 @@ redis_cluster_create() {
     sleep "${REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP}"
 
     for node in "${nodes[@]}"; do
-        to_host_and_port $node
+        host_and_port=($(to_host_and_port $node))
         ip_and_ports+=("$(wait_for_dns_lookup "${host_and_port[0]}" "${REDIS_CLUSTER_DNS_LOOKUP_RETRIES}" "${REDIS_CLUSTER_DNS_LOOKUP_SLEEP}"):${host_and_port[1]}")
     done
 
@@ -218,8 +218,17 @@ redis_cluster_update_ips() {
     fi
 }
 
+#########################
+## Assigns a port to the host if one is not set using redis defaults
+# Globals:
+#   REDIS_*
+# Arguments:
+#   $1 - redis host or redis host and port
+# Returns:
+#   - 2 element Array of host and port
+#########################
 to_host_and_port() {
-    host_and_port=($(echo $1 | tr ":" "\n"))
+    local host_and_port=($(echo $1 | tr ":" "\n"))
 
     if [ "${#host_and_port[*]}" -eq "1" ]; then
         if is_boolean_yes "$REDIS_TLS_ENABLED"; then
@@ -228,4 +237,6 @@ to_host_and_port() {
             host_and_port=("${host_and_port[0]}" "${REDIS_PORT_NUMBER}")
         fi
     fi
+
+    echo "${host_and_port[*]}"
 }
