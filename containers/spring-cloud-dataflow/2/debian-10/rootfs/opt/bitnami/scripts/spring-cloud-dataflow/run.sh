@@ -22,7 +22,7 @@ __run_cmd="java"
 __run_flags=($JAVA_OPTS "-jar" "-Duser.home=${HOME}" "${SPRING_CLOUD_DATAFLOW_BASE_DIR}/spring-cloud-dataflow.jar" "--spring.config.additional-location=${SPRING_CLOUD_DATAFLOW_CONF_FILE}" "$@")
 
 if am_i_root; then
-    exec gosu "$SPRING_CLOUD_DATAFLOW_DAEMON_USER" "${__run_cmd}" "${__run_flags[@]}"
+    exec gosu "$SPRING_CLOUD_DATAFLOW_DAEMON_USER" "$__run_cmd" "${__run_flags[@]}"
 else
-    exec "${__run_cmd}" "${__run_flags[@]}"
+    exec "$__run_cmd" "${__run_flags[@]}"
 fi
