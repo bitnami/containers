@@ -27,7 +27,7 @@ __run_cmd="java"
 __run_flags=($JAVA_OPTS "-jar" "-Duser.home=${HOME}" "${SCDF_COMPOSED_TASK_RUNNER_BASE_DIR}/scdf-composed-task-runner.jar" "$@")
 
 if am_i_root; then
-    exec gosu "$SCDF_COMPOSED_TASK_RUNNER_DAEMON_USER" "${__run_cmd}" "${__run_flags[@]}"
+    exec gosu "$SCDF_COMPOSED_TASK_RUNNER_DAEMON_USER" "$__run_cmd" "${__run_flags[@]}"
 else
-    exec "${__run_cmd}" "${__run_flags[@]}"
+    exec "$__run_cmd" "${__run_flags[@]}"
 fi
