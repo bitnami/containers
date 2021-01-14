@@ -1,9 +1,9 @@
 {
     "aspnet-core": {
         "arch": "amd64",
-        "digest": "8bd13715e36dc0a75456a7e36ccafff52ed543287442d574afd8df7ab0ef8672",
+        "digest": "22ddf1799c5fea671757afceeb4c1dfcbc05bf33ca190eed800d0394b473d1cf",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "5.0.1-0"
+        "version": "5.0.2-0"
     }
 }
