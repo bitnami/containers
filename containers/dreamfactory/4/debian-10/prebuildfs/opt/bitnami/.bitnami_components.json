@@ -57,10 +57,10 @@
     },
     "redis-client": {
         "arch": "amd64",
-        "digest": "2a506be874ecbc2d4f667e9b714d44441eb476b7b6574b17d220c0421d20b73b",
+        "digest": "6d749a3b00ec99ff3deac5d925dd3c574b314d0f22840c5f44d6bbc6fa6f2edc",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "6.0.9-0"
+        "version": "6.0.10-0"
     },
     "tini": {
         "arch": "amd64",
