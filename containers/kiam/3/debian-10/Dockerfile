@@ -20,7 +20,7 @@ RUN update-alternatives --set iptables /usr/sbin/iptables-legacy && \
     update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
 
 ENV BITNAMI_APP_NAME="kiam" \
-    BITNAMI_IMAGE_VERSION="3.6.0-debian-10-r89" \
+    BITNAMI_IMAGE_VERSION="3.6.0-debian-10-r90" \
     PATH="/opt/bitnami/kiam/bin:$PATH"
 
 USER 1001
