@@ -16,6 +16,6 @@ eval "$(ldap_env)"
 # Ensure Open LDAP environment variables are valid
 ldap_validate
 # Ensure 'daemon' user exists when running as 'root'
-am_i_root && ensure_user_exists "$LDAP_DAEMON_USER" "$LDAP_DAEMON_GROUP"
+am_i_root && ensure_user_exists "$LDAP_DAEMON_USER" --group "$LDAP_DAEMON_GROUP"
 # Ensure Open LDAP server is initialize
 ldap_initialize
