@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN ln -sf /opt/bitnami/nginx-exporter/bin/nginx-prometheus-exporter /usr/bin/exporter
 
 ENV BITNAMI_APP_NAME="nginx-exporter" \
-    BITNAMI_IMAGE_VERSION="0.8.0-debian-10-r197" \
+    BITNAMI_IMAGE_VERSION="0.8.0-debian-10-r198" \
     PATH="/opt/bitnami/nginx-exporter/bin:$PATH"
 
 EXPOSE 9113
