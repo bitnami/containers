@@ -77,11 +77,9 @@ testlink_validate() {
 
     # Validate SMTP credentials
     if ! is_empty_value "$TESTLINK_SMTP_HOST"; then
-        #Warn if not present
         for empty_env_var in "TESTLINK_SMTP_USER" "TESTLINK_SMTP_PASSWORD"; do
             is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
         done
-
         is_empty_value "TESTLINK_SMTP_PORT_NUMBER" && print_validation_error "The TESTLINK_SMTP_PORT_NUMBER environment variable is empty or not set."
         
         ! is_empty_value "$TESTLINK_SMTP_PORT_NUMBER" && validate_port "$TESTLINK_SMTP_PORT_NUMBER"
