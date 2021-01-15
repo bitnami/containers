@@ -24,7 +24,7 @@ mongodb_validate
 trap "mongodb_stop" EXIT
 
 # Ensure 'daemon' user exists when running as 'root'
-am_i_root && ensure_user_exists "$MONGODB_DAEMON_USER" "$MONGODB_DAEMON_GROUP"
+am_i_root && ensure_user_exists "$MONGODB_DAEMON_USER" --group "$MONGODB_DAEMON_GROUP"
 # Fix logging issue when running as root
 am_i_root && chmod o+w "$(readlink /dev/stdout)"
 
