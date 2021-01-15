@@ -102,9 +102,11 @@ phpbb_validate() {
 
     # Validate SMTP credentials
     if ! is_empty_value "$PHPBB_SMTP_HOST"; then
-        for empty_env_var in "PHPBB_SMTP_USER" "PHPBB_SMTP_PASSWORD" "PHPBB_SMTP_PORT_NUMBER"; do
-            is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set."
+        for empty_env_var in "PHPBB_SMTP_USER" "PHPBB_SMTP_PASSWORD"; do
+            is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
         done
+        is_empty_value "$PHPBB_SMTP_PORT_NUMBER" && print_validation_error "The PHPBB_SMTP_PORT_NUMBER environment variable is empty or not set."
+
         ! is_empty_value "$PHPBB_SMTP_PROTOCOL" && check_multi_value "PHPBB_SMTP_PROTOCOL" "plain ssl tls"
     fi
 
