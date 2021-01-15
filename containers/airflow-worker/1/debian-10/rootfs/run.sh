@@ -8,7 +8,10 @@
 USER=airflow
 DAEMON=airflow
 EXEC=$(which $DAEMON)
-START_COMMAND="${EXEC} worker ${AIRFLOW_QUEUE:+-q $AIRFLOW_QUEUE} | tee /opt/bitnami/airflow/logs/airflow-worker.log"
+AIRFLOW_COMMAND="worker"
+# Adapt airflow commant to version 2.X CLI syntax
+[[ $BITNAMI_IMAGE_VERSION =~ ^2.* ]] && AIRFLOW_COMMAND="celery ${AIRFLOW_COMMAND}"
+START_COMMAND="${EXEC} ${AIRFLOW_COMMAND} ${AIRFLOW_QUEUE:+-q $AIRFLOW_QUEUE} | tee /opt/bitnami/airflow/logs/airflow-worker.log"
 
 echo "Waiting for db..."
 counter=0;

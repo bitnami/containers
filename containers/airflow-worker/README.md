@@ -34,7 +34,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2`, `2-debian-10`, `2.0.0`, `2.0.0-debian-10-r0` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker-scheduler/blob/2.0.0-debian-10-r0/2/debian-10/Dockerfile)
-* [`1`, `1-debian-10`, `1.10.14`, `1.10.14-debian-10-r35`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker-scheduler/blob/1.10.14-debian-10-r35/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.10.14`, `1.10.14-debian-10-r36`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker-scheduler/blob/1.10.14-debian-10-r36/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow-worker).
 
