@@ -1,4 +1,4 @@
-# What is MinIO(TM)?
+# What is MinIO(TM) Container packaged by Bitnami?
 
 > MinIO(TM) is an object storage server, compatible with Amazon S3 cloud storage service, mainly used for storing unstructured data (such as photos, videos, log files, etc.).
 
@@ -44,7 +44,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2021`, `2021-debian-10`, `2021.1.8`, `2021.1.8-debian-10-r2` (2021/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2021.1.8-debian-10-r2/2021/debian-10/Dockerfile)
-* [`2020`, `2020-debian-10`, `2020.12.29`, `2020.12.29-debian-10-r15`, `latest` (2020/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2020.12.29-debian-10-r15/2020/debian-10/Dockerfile)
+* [`2020`, `2020-debian-10`, `2020.12.29`, `2020.12.29-debian-10-r16`, `latest` (2020/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2020.12.29-debian-10-r16/2020/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/minio GitHub repo](https://github.com/bitnami/bitnami-docker-minio).
 
