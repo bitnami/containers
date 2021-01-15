@@ -71,7 +71,11 @@ suitecrm_validate() {
 
     # Validate SMTP credentials
     if ! is_empty_value "$SUITECRM_SMTP_HOST"; then
-        for empty_env_var in "SUITECRM_SMTP_USER" "SUITECRM_SMTP_PASSWORD" "SUITECRM_SMTP_PORT_NUMBER" "SUITECRM_SMTP_NOTIFY_NAME" "SUITECRM_SMTP_NOTIFY_ADDRESS"; do
+        for empty_env_var in "SUITECRM_SMTP_USER" "SUITECRM_SMTP_PASSWORD"; do
+            is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
+        done
+
+        for empty_env_var in "SUITECRM_SMTP_PORT_NUMBER" "SUITECRM_SMTP_NOTIFY_NAME" "SUITECRM_SMTP_NOTIFY_ADDRESS"; do
             is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set."
         done
         ! is_empty_value "$SUITECRM_SMTP_PROTOCOL" && check_multi_value "SUITECRM_SMTP_PROTOCOL" "ssl tls"
@@ -294,10 +298,14 @@ suitecrm_pass_smtp_wizard() {
     [[ "$SUITECRM_SMTP_PROTOCOL" = "ssl" ]] && smtp_protocol="1"
     [[ "$SUITECRM_SMTP_PROTOCOL" = "tls" ]] && smtp_protocol="2"
 
+    # Check if SMTP user:pass is configured
+    local smtp_auth_req=0
+    ! is_empty_value "$SUITECRM_SMTP_USER" && smtp_auth_req=1
+
     curl_data_opts=(
         "--data-urlencode" "mail_allowusersend=0"
         "--data-urlencode" "mail_sendtype=SMTP"
-        "--data-urlencode" "mail_smtpauth_req=1"
+        "--data-urlencode" "mail_smtpauth_req=${smtp_auth_req}"
         "--data-urlencode" "module=EmailMan"
         "--data-urlencode" "mail_smtppass=${SUITECRM_SMTP_PASSWORD}"
         "--data-urlencode" "mail_smtpport=${SUITECRM_SMTP_PORT_NUMBER}"
