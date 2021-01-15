@@ -56,9 +56,10 @@ mediawiki_validate() {
 
     # Validate SMTP credentials
     if ! is_empty_value "$MEDIAWIKI_SMTP_HOST"; then
-        for empty_env_var in "MEDIAWIKI_SMTP_USER" "MEDIAWIKI_SMTP_PASSWORD" "MEDIAWIKI_SMTP_PORT_NUMBER"; do
-            is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set."
+        for empty_env_var in "MEDIAWIKI_SMTP_USER" "MEDIAWIKI_SMTP_PASSWORD"; do
+            is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
         done
+        is_empty_value "$MEDIAWIKI_SMTP_PORT_NUMBER" && print_validation_error "The MEDIAWIKI_SMTP_PORT_NUMBER environment variable is empty or not set."
     fi
 
     # Check that the web server is properly set up
