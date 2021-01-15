@@ -27,9 +27,9 @@ mysql_validate
 trap "mysql_stop" EXIT
 if am_i_root; then
     # Ensure 'daemon' user exists when running as 'root'
-    ensure_user_exists "$DB_DAEMON_USER" "$DB_DAEMON_GROUP"
+    ensure_user_exists "$DB_DAEMON_USER" --group "$DB_DAEMON_GROUP"
     # Ensure 'nslcd' user exists when running as 'root'
-    ensure_user_exists "$LDAP_NSLCD_USER" "$LDAP_NSLCD_GROUP"
+    ensure_user_exists "$LDAP_NSLCD_USER" --group "$LDAP_NSLCD_GROUP"
     # Fix logging issue when running as root
     chmod o+w "$(readlink /dev/stdout)"
 fi
