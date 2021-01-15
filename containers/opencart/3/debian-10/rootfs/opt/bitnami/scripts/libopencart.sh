@@ -61,9 +61,11 @@ opencart_validate() {
 
     # Validate SMTP credentials
     if ! is_empty_value "$OPENCART_SMTP_HOST"; then
-        for empty_env_var in "OPENCART_SMTP_USER" "OPENCART_SMTP_PASSWORD" "OPENCART_SMTP_PORT_NUMBER"; do
-            is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set."
+        for empty_env_var in "OPENCART_SMTP_USER" "OPENCART_SMTP_PASSWORD"; do
+            is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
         done
+        is_empty_value "$OPENCART_SMTP_PORT_NUMBER" && print_validation_error "The OPENCART_SMTP_PORT_NUMBER environment variable is empty or not set."
+
         ! is_empty_value "$OPENCART_SMTP_PROTOCOL" && check_multi_value "OPENCART_SMTP_PROTOCOL" "ssl tls"
     fi
 
