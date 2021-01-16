@@ -30,7 +30,7 @@ fi
 kafka_validate
 # Ensure Kafka user and group exist when running as 'root'
 if am_i_root; then
-    ensure_user_exists "$KAFKA_DAEMON_USER" "$KAFKA_DAEMON_GROUP"
+    ensure_user_exists "$KAFKA_DAEMON_USER" --group "$KAFKA_DAEMON_GROUP"
     KAFKA_OWNERSHIP_USER="$KAFKA_DAEMON_USER"
 else
     KAFKA_OWNERSHIP_USER=""
