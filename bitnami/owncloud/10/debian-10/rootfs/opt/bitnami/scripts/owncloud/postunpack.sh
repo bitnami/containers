@@ -26,7 +26,7 @@ set -o pipefail
 
 # Ensure the ownCloud base directory exists and has proper permissions
 info "Configuring file permissions for ownCloud"
-ensure_user_exists "$WEB_SERVER_DAEMON_USER" "$WEB_SERVER_DAEMON_GROUP"
+ensure_user_exists "$WEB_SERVER_DAEMON_USER" --group "$WEB_SERVER_DAEMON_GROUP"
 # The assets dir and tp are needed but not created by ownCloud
 for dir in "$OWNCLOUD_BASE_DIR" "$OWNCLOUD_VOLUME_DIR"; do
     ensure_dir_exists "$dir"
