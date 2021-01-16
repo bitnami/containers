@@ -28,7 +28,7 @@ set -o pipefail
 
 # Ensure the Matomo base directory exists and has proper permissions
 info "Configuring file permissions for Matomo"
-ensure_user_exists "$WEB_SERVER_DAEMON_USER" "$WEB_SERVER_DAEMON_GROUP"
+ensure_user_exists "$WEB_SERVER_DAEMON_USER" --group "$WEB_SERVER_DAEMON_GROUP"
 for dir in "$MATOMO_BASE_DIR" "$MATOMO_VOLUME_DIR" "${MATOMO_BASE_DIR}/tmp" "${MATOMO_BASE_DIR}/misc/" "${MATOMO_BASE_DIR}/misc/user" "${MATOMO_BASE_DIR}/plugins"; do
     ensure_dir_exists "$dir"
     # Use daemon:root ownership for compatibility when running as a non-root user
