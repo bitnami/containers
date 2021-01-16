@@ -26,7 +26,7 @@ set -o pipefail
 
 # Ensure the DokuWiki base directory exists and has proper permissions
 info "Configuring file permissions for DokuWiki"
-ensure_user_exists "$WEB_SERVER_DAEMON_USER" "$WEB_SERVER_DAEMON_GROUP"
+ensure_user_exists "$WEB_SERVER_DAEMON_USER" --group "$WEB_SERVER_DAEMON_GROUP"
 for dir in "$DOKUWIKI_BASE_DIR" "$DOKUWIKI_VOLUME_DIR" "${DOKUWIKI_BASE_DIR}/lib/images/smileys/local" "${DOKUWIKI_BASE_DIR}/uploads"; do
     ensure_dir_exists "$dir"
     # Use daemon:root ownership for compatibility when running as a non-root user
