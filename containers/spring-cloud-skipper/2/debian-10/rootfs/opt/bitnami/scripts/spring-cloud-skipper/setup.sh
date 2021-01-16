@@ -17,7 +17,7 @@ set -o pipefail
 . /opt/bitnami/scripts/spring-cloud-skipper-env.sh
 
 # Ensure 'daemon' user exists when running as 'root'
-am_i_root && ensure_user_exists "$SPRING_CLOUD_DATAFLOW_DAEMON_USER" "$SPRING_CLOUD_DATAFLOW_DAEMON_GROUP"
+am_i_root && ensure_user_exists "$SPRING_CLOUD_DATAFLOW_DAEMON_USER" --group "$SPRING_CLOUD_DATAFLOW_DAEMON_GROUP"
 
 # Validations
 # Ensure Spring Cloud Skipper environment variables settings are valid
