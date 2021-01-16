@@ -60,7 +60,7 @@ kong_configure_non_empty_values() {
 eval "$(kong_env)"
 
 # Ensure users and groups used by Kong exist
-ensure_user_exists "$KONG_DAEMON_USER" "$KONG_DAEMON_GROUP"
+ensure_user_exists "$KONG_DAEMON_USER" --group "$KONG_DAEMON_GROUP"
 # Ensure directories used by Kong exist and have proper permissions
 ensure_dir_exists "$KONG_SERVER_DIR"
 ensure_dir_exists "$KONG_INITSCRIPTS_DIR"
