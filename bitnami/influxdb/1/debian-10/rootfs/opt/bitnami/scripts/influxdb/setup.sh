@@ -19,7 +19,7 @@ eval "$(influxdb_env)"
 influxdb_validate
 # Ensure InfluxDB user and group exist when running as 'root'
 if am_i_root; then
-    ensure_user_exists "$INFLUXDB_DAEMON_USER" "$INFLUXDB_DAEMON_GROUP"
+    ensure_user_exists "$INFLUXDB_DAEMON_USER" --group "$INFLUXDB_DAEMON_GROUP"
     chown -R "$INFLUXDB_DAEMON_USER" "$INFLUXDB_DATA_DIR" "$INFLUXDB_CONF_DIR"
 fi
 # Ensure InfluxDB is stopped when this script ends.
