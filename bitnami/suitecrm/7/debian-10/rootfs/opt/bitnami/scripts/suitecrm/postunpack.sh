@@ -26,7 +26,7 @@ set -o pipefail
 
 # Ensure the SuiteCRM base directory exists and has proper permissions
 info "Configuring file permissions for SuiteCRM"
-ensure_user_exists "$WEB_SERVER_DAEMON_USER" "$WEB_SERVER_DAEMON_GROUP"
+ensure_user_exists "$WEB_SERVER_DAEMON_USER" --group "$WEB_SERVER_DAEMON_GROUP"
 for dir in "$SUITECRM_BASE_DIR" "$SUITECRM_VOLUME_DIR" "${SUITECRM_BASE_DIR}/tmp"; do
     ensure_dir_exists "$dir"
     # Use daemon:root ownership for compatibility when running as a non-root user
