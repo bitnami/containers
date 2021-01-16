@@ -37,14 +37,34 @@ group_exists() {
 # Create a group in the system if it does not exist already
 # Arguments:
 #   $1 - group
+# Flags:
+#   -s|--system - Whether to create new user as system user (uid <= 999)
 # Returns:
 #   None
 #########################
 ensure_group_exists() {
     local group="${1:?group is missing}"
+    local is_system_user=false
+
+    # Validate arguments
+    shift 1
+    while [ "$#" -gt 0 ]; do
+        case "$1" in
+            -s|--system)
+                is_system_user=true
+                ;;
+            *)
+                echo "Invalid command line flag $1" >&2
+                return 1
+                ;;
+        esac
+        shift
+    done
 
     if ! group_exists "$group"; then
-        groupadd "$group" >/dev/null 2>&1
+        local -a args=("$group")
+        $is_system_user && args+=("--system")
+        groupadd "${args[@]}" >/dev/null 2>&1
     fi
 }
 
@@ -52,21 +72,59 @@ ensure_group_exists() {
 # Create an user in the system if it does not exist already
 # Arguments:
 #   $1 - user
-#   $2 - group
+# Flags:
+#   -g|--group - the group the new user should belong to
+#   -h|--home - the home directory for the new user
+#   -s|--system - whether to create new user as system user (uid <= 999)
 # Returns:
 #   None
 #########################
 ensure_user_exists() {
     local user="${1:?user is missing}"
-    local group="${2:-}"
+    local group=""
+    local home=""
+    local is_system_user=false
+
+    # Validate arguments
+    shift 1
+    while [ "$#" -gt 0 ]; do
+        case "$1" in
+            -g|--group)
+                shift
+                group="${1:?missing group}"
+                ;;
+            -h|--home)
+                shift
+                home="${1:?missing home directory}"
+                ;;
+            -s|--system)
+                is_system_user=true
+                ;;
+            *)
+                echo "Invalid command line flag $1" >&2
+                return 1
+                ;;
+        esac
+        shift
+    done
 
     if ! user_exists "$user"; then
-        useradd "$user" >/dev/null 2>&1
+        local -a user_args=("-N" "$user")
+        $is_system_user && user_args+=("--system")
+        useradd "${user_args[@]}" >/dev/null 2>&1
     fi
 
     if [[ -n "$group" ]]; then
-        ensure_group_exists "$group"
+        local -a group_args=("$group")
+        $is_system_user && group_args+=("--system")
+        ensure_group_exists "${group_args[@]}"
         usermod -a -G "$group" "$user" >/dev/null 2>&1
+    fi
+
+    if [[ -n "$home" ]]; then
+        mkdir -p "$home"
+        usermod -d "$home" "$user" >/dev/null 2>&1
+        configure_permissions_ownership "$home" -d "775" -f "664" -u "$user" -g "$group"
     fi
 }
 
