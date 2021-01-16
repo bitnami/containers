@@ -28,7 +28,7 @@ set -o pipefail
 [[ ! -f "$PHPMYADMIN_CONF_FILE" ]] && cp "${PHPMYADMIN_BASE_DIR}/config.sample.inc.php" "$PHPMYADMIN_CONF_FILE"
 
 # Ensure the phpMyAdmin 'tmp' directory exists and has proper permissions
-ensure_user_exists "$WEB_SERVER_DAEMON_USER" "$WEB_SERVER_DAEMON_GROUP"
+ensure_user_exists "$WEB_SERVER_DAEMON_USER" --group "$WEB_SERVER_DAEMON_GROUP"
 for dir in "$PHPMYADMIN_BASE_DIR" "$PHPMYADMIN_TMP_DIR" "$PHPMYADMIN_VOLUME_DIR"; do
     ensure_dir_exists "$dir"
     configure_permissions_ownership "$dir" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root"
