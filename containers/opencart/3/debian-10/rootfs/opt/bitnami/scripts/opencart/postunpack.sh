@@ -26,7 +26,7 @@ set -o pipefail
 
 # Ensure the OpenCart base directory exists and has proper permissions
 info "Configuring file permissions for OpenCart"
-ensure_user_exists "$WEB_SERVER_DAEMON_USER" "$WEB_SERVER_DAEMON_GROUP"
+ensure_user_exists "$WEB_SERVER_DAEMON_USER" --group "$WEB_SERVER_DAEMON_GROUP"
 for dir in "$OPENCART_BASE_DIR" "$OPENCART_VOLUME_DIR" "$OPENCART_STORAGE_DIR"; do
     ensure_dir_exists "$dir"
     # Use daemon:root ownership for compatibility when running as a non-root user
