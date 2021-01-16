@@ -22,7 +22,7 @@ elasticsearch_validate
 # Ensure Elasticsearch is stopped when this script ends
 trap "elasticsearch_stop" EXIT
 # Ensure 'daemon' user exists when running as 'root'
-am_i_root && ensure_user_exists "$ELASTICSEARCH_DAEMON_USER" "$ELASTICSEARCH_DAEMON_GROUP"
+am_i_root && ensure_user_exists "$ELASTICSEARCH_DAEMON_USER" --group "$ELASTICSEARCH_DAEMON_GROUP"
 # Ensure Elasticsearch is initialized
 elasticsearch_initialize
 # Install Elasticsearch plugins
