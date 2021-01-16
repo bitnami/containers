@@ -17,7 +17,7 @@ set -o pipefail
 keycloak_validate
 
 # Ensure 'daemon' user exists when running as 'root'
-am_i_root && ensure_user_exists "$KEYCLOAK_DAEMON_USER" "$KEYCLOAK_DAEMON_GROUP"
+am_i_root && ensure_user_exists "$KEYCLOAK_DAEMON_USER" --group "$KEYCLOAK_DAEMON_GROUP"
 
 # Ensure keycloak is initialized
 keycloak_initialize
