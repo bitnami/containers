@@ -17,7 +17,7 @@ eval "$(logstash_env)"
 logstash_validate
 
 # Ensure 'daemon' user exists when running as 'root'
-am_i_root && ensure_user_exists "$LOGSTASH_DAEMON_USER" "$LOGSTASH_DAEMON_GROUP"
+am_i_root && ensure_user_exists "$LOGSTASH_DAEMON_USER" --group "$LOGSTASH_DAEMON_GROUP"
 
 # Ensure Logstash is initialized
 logstash_initialize
