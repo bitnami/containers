@@ -19,7 +19,7 @@ set -o pipefail
 
 print_welcome_page
 
-am_i_root && ensure_user_exists "$SCDF_COMPOSED_TASK_RUNNER_DAEMON_USER" "$SCDF_COMPOSED_TASK_RUNNER_DAEMON_GROUP"
+am_i_root && ensure_user_exists "$SCDF_COMPOSED_TASK_RUNNER_DAEMON_USER" --group "$SCDF_COMPOSED_TASK_RUNNER_DAEMON_GROUP"
 
 info "** Starting Spring Cloud Dataflow Compose Task Runner **"
 
