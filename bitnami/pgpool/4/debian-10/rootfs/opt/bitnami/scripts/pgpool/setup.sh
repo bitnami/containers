@@ -21,8 +21,8 @@ eval "$(ldap_env)"
 # Ensure Pgpool environment variables are valid
 pgpool_validate
 # Ensure 'daemon' user exists when running as 'root'
-am_i_root && ensure_user_exists "$PGPOOL_DAEMON_USER" "$PGPOOL_DAEMON_GROUP"
-am_i_root && ensure_user_exists "$LDAP_NSLCD_USER" "$LDAP_NSLCD_GROUP"
+am_i_root && ensure_user_exists "$PGPOOL_DAEMON_USER" --group "$PGPOOL_DAEMON_GROUP"
+am_i_root && ensure_user_exists "$LDAP_NSLCD_USER" --group "$LDAP_NSLCD_GROUP"
 # Ensure Pgpool is initialized
 pgpool_initialize
 # Ensure LDAP is initialized
