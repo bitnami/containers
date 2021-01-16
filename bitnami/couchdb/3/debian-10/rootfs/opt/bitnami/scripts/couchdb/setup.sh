@@ -20,7 +20,7 @@ couchdb_validate
 # Ensure CouchDB user and group exist when running as 'root'
 if am_i_root; then
     info "Creating CouchDB daemon user"
-    ensure_user_exists "$COUCHDB_DAEMON_USER" "$COUCHDB_DAEMON_GROUP"
+    ensure_user_exists "$COUCHDB_DAEMON_USER" --group "$COUCHDB_DAEMON_GROUP"
 fi
 # Ensure directories used by CouchDB exist and have proper ownership and permissions
 for dir in "$COUCHDB_DATA_DIR" "$COUCHDB_CONF_DIR"; do
