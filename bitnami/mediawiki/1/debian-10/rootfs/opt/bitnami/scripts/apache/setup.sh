@@ -17,7 +17,7 @@ set -o pipefail
 apache_validate
 
 # Ensure Apache daemon user exists when running as 'root'
-am_i_root && ensure_user_exists "$APACHE_DAEMON_USER" "$APACHE_DAEMON_GROUP"
+am_i_root && ensure_user_exists "$APACHE_DAEMON_USER" --group "$APACHE_DAEMON_GROUP"
 
 # Ensure Apache is initialized
 apache_initialize
