@@ -19,7 +19,7 @@ eval "$(cassandra_env)"
 # Ensure Cassandra environment variables settings are valid
 cassandra_validate
 # Ensure 'daemon' user exists when running as 'root'
-am_i_root && ensure_user_exists "$CASSANDRA_DAEMON_USER" "$CASSANDRA_DAEMON_GROUP"
+am_i_root && ensure_user_exists "$CASSANDRA_DAEMON_USER" --group "$CASSANDRA_DAEMON_GROUP"
 # Ensure Cassandra is initialized
 cassandra_initialize
 
