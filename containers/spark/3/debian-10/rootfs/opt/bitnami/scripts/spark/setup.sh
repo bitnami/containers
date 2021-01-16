@@ -19,7 +19,7 @@ eval "$(spark_env)"
 spark_validate
 
 # Ensure 'spark' user exists when running as 'root'
-am_i_root && ensure_user_exists "$SPARK_DAEMON_USER" "$SPARK_DAEMON_GROUP"
+am_i_root && ensure_user_exists "$SPARK_DAEMON_USER" --group "$SPARK_DAEMON_GROUP"
 
 # Ensure Spark is initialized
 spark_initialize
