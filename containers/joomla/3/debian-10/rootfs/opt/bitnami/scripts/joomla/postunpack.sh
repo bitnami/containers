@@ -29,7 +29,7 @@ set -o pipefail
 
 # Ensure the Joomla! base directory exists and has proper permissions
 info "Configuring file permissions for Joomla!"
-ensure_user_exists "$WEB_SERVER_DAEMON_USER" "$WEB_SERVER_DAEMON_GROUP"
+ensure_user_exists "$WEB_SERVER_DAEMON_USER" --group "$WEB_SERVER_DAEMON_GROUP"
 for dir in "$JOOMLA_BASE_DIR" "$JOOMLA_VOLUME_DIR" "$JOOMLA_TMP_DIR" "$JOOMLA_LOGS_DIR"; do
     ensure_dir_exists "$dir"
     # Use daemon:root ownership for compatibility when running as a non-root user
