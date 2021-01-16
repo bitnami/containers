@@ -17,7 +17,7 @@ set -o pipefail
 
 # Ensure PHP-FPM daemon user exists and required folder belongs to this user when running as 'root'
 if am_i_root; then
-    ensure_user_exists "$PHP_FPM_DAEMON_USER" "$PHP_FPM_DAEMON_GROUP"
+    ensure_user_exists "$PHP_FPM_DAEMON_USER" --group "$PHP_FPM_DAEMON_GROUP"
     ensure_dir_exists "$PHP_TMP_DIR"
     chown -R "${PHP_FPM_DAEMON_USER}:${PHP_FPM_DAEMON_GROUP}" "$PHP_TMP_DIR"
     # Enable daemon configuration
