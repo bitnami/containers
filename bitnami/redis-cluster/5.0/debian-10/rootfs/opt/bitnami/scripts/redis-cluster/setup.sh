@@ -19,7 +19,7 @@ set -o pipefail
 redis_cluster_validate
 # Ensure Redis is stopped when this script ends
 trap "redis_stop" EXIT
-am_i_root && ensure_user_exists "$REDIS_DAEMON_USER" "$REDIS_DAEMON_GROUP"
+am_i_root && ensure_user_exists "$REDIS_DAEMON_USER" --group "$REDIS_DAEMON_GROUP"
 
 # Ensure Redis is initialized
 redis_cluster_initialize
