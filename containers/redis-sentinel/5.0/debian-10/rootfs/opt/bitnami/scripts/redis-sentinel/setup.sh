@@ -15,7 +15,7 @@ set -o pipefail
 . /opt/bitnami/scripts/libos.sh
 
 # Create daemon user if needed
-am_i_root && ensure_user_exists "$REDIS_SENTINEL_DAEMON_USER" "$REDIS_SENTINEL_DAEMON_GROUP"
+am_i_root && ensure_user_exists "$REDIS_SENTINEL_DAEMON_USER" --group "$REDIS_SENTINEL_DAEMON_GROUP"
 
 # Ensure redis environment variables are valid
 redis_validate
