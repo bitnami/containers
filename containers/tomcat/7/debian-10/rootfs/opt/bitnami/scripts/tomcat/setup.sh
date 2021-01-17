@@ -19,7 +19,7 @@ eval "$(tomcat_env)"
 tomcat_validate
 
 # Ensure 'daemon' user exists when running as 'root'
-am_i_root && ensure_user_exists "$TOMCAT_DAEMON_USER" "$TOMCAT_DAEMON_GROUP"
+am_i_root && ensure_user_exists "$TOMCAT_DAEMON_USER" --group "$TOMCAT_DAEMON_GROUP"
 
 # Ensure tomcat is initialized
 tomcat_initialize
