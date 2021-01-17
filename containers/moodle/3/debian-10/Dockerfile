@@ -17,7 +17,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.46-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.27-0" --checksum f96905e763a6334b75a7cdb07f8d89658cde02be41cb09d91d0682fc649fdcff
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.26-0" --checksum 2011a6ddd6853afd60b0399ff5c334f7b6b131f90c0e326115d28a06de6b262b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "moodle" "3.10.0-1" --checksum 71ef46968d001246683f0bc992d2643f26a686276403e6eec58632a1b0b61f8b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "moodle" "3.10.1-0" --checksum 27ac0d2ca20033bda37c21f84c1568cc176621fde444f6f5503d124174dacda8
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -41,7 +41,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="moodle" \
-    BITNAMI_IMAGE_VERSION="3.10.0-debian-10-r61" \
+    BITNAMI_IMAGE_VERSION="3.10.1-debian-10-r0" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     MARIADB_HOST="mariadb" \
