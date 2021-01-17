@@ -18,6 +18,6 @@ set -o pipefail
 # Ensure Redis environment variables settings are valid
 redis_validate
 # Ensure Redis daemon user exists when running as root
-am_i_root && ensure_user_exists "$REDIS_DAEMON_USER" "$REDIS_DAEMON_GROUP"
+am_i_root && ensure_user_exists "$REDIS_DAEMON_USER" --group "$REDIS_DAEMON_GROUP"
 # Ensure Redis is initialized
 redis_initialize
