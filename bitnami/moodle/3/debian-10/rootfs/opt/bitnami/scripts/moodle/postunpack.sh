@@ -27,7 +27,7 @@ set -o pipefail
 
 # Ensure the Moodle base directory exists and has proper permissions
 info "Configuring file permissions for Moodle"
-ensure_user_exists "$WEB_SERVER_DAEMON_USER" "$WEB_SERVER_DAEMON_GROUP"
+ensure_user_exists "$WEB_SERVER_DAEMON_USER" --group "$WEB_SERVER_DAEMON_GROUP"
 for dir in "$MOODLE_BASE_DIR" "$MOODLE_VOLUME_DIR" "$MOODLE_DATA_DIR"; do
     ensure_dir_exists "$dir"
     # Use daemon:root ownership for compatibility when running as a non-root user
