@@ -140,7 +140,7 @@ nginx_initialize() {
     local nginx_user_configuration
     if am_i_root; then
         debug "Ensuring NGINX daemon user/group exists"
-        ensure_user_exists "$NGINX_DAEMON_USER" "$NGINX_DAEMON_GROUP"
+        ensure_user_exists "$NGINX_DAEMON_USER" --group "$NGINX_DAEMON_GROUP"
         if [[ -n "${NGINX_DAEMON_USER:-}" ]]; then
             chown -R "${NGINX_DAEMON_USER:-}" "$NGINX_TMP_DIR"
         fi
