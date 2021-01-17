@@ -22,7 +22,7 @@ nginx_validate
 trap "nginx_stop" EXIT
 
 # Ensure NGINX daemon user exists when running as 'root'
-am_i_root && ensure_user_exists "$NGINX_DAEMON_USER" "$NGINX_DAEMON_GROUP"
+am_i_root && ensure_user_exists "$NGINX_DAEMON_USER" --group "$NGINX_DAEMON_GROUP"
 
 # Fix logging issue when running as root
 ! am_i_root || chmod o+w "$(readlink /dev/stdout)" "$(readlink /dev/stderr)"
