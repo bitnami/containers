@@ -1,10 +1,10 @@
 {
     "ejbca": {
         "arch": "amd64",
-        "digest": "f244d0041df0394e0c4ab186a7d1769e007a90b8d2150f05aadad3f3ea573b80",
+        "digest": "2048d9595e30ee93cd180f9410f3b351419fd5585457b6873ba4c208d22e9092",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "6.15.2-6-3"
+        "version": "6.15.2-6-4"
     },
     "gosu": {
         "arch": "amd64",
