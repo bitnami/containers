@@ -226,8 +226,8 @@ rabbitmq_print_networking_configuration() {
 rabbitmq_print_management_configuration() {
     echo "## Management"
     if rabbitmq_is_ssl_enabled "management_ssl"; then
-        echo "management.ssl.port = ${RABBITMQ_MANAGEMENT_BIND_IP}"
-        echo "management.ssl.ip = ${RABBITMQ_MANAGEMENT_SSL_PORT_NUMBER}"
+        echo "management.ssl.ip = ${RABBITMQ_MANAGEMENT_BIND_IP}"
+        echo "management.ssl.port = ${RABBITMQ_MANAGEMENT_SSL_PORT_NUMBER}"
         rabbitmq_print_ssl_configuration "management_ssl" "management.ssl"
     else
         # Assume SSL is disabled when no environment variables matching 'RABBITMQ_SSL_*' have been specified
