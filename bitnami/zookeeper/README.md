@@ -189,7 +189,7 @@ The configuration can easily be setup with the Bitnami ZooKeeper Docker image us
  - `ZOO_CLIENT_PASSWORD_FILE`: Absolute path to a file that contains the password that will be used by ZooKeeper clients to perform authentication. No defaults.
  - `ZOO_SERVER_USERS`: Comma, semicolon or whitespace separated  list of user to be created.  Example: user1,user2,admin. No defaults
  - `ZOO_SERVER_PASSWORDS`: Comma, semicolon or whitespace separated list of passwords to assign to users when created. Example: pass4user1, pass4user2, pass4admin. No defaults
- - `ZOO_SERVER_PASSWORDS_FILE`: Abslute path to a file that contains a comma, semicolon or whitespace separated list of passwords to assign to users when created. Example: pass4user1, pass4user2, pass4admin. No defaults
+ - `ZOO_SERVER_PASSWORDS_FILE`: Absolute path to a file that contains a comma, semicolon or whitespace separated list of passwords to assign to users when created. Example: pass4user1, pass4user2, pass4admin. No defaults
  - `ZOO_ENABLE_AUTH`: Enable ZooKeeper auth. It uses SASL/Digest-MD5. Default: **no**
  - `ZOO_RECONFIG_ENABLED`: Enable ZooKeeper Dynamic Reconfiguration. Default: **no**
  - `ZOO_LISTEN_ALLIPS_ENABLED`: Listen for connections from its peers on all available IP addresses. Default: **no**
@@ -204,15 +204,15 @@ The configuration can easily be setup with the Bitnami ZooKeeper Docker image us
  - `JVMFLAGS`: Default JVMFLAGS for the ZooKeeper process. No defaults
  - `ZOO_TLS_CLIENT_ENABLE`: Enable tls for client communication. Default: **false**
  - `ZOO_TLS_PORT_NUMBER`: Zookeeper TLS port. Default: 3181
- - `ZOO_TLS_CLIENT_KEYSTORE_FILE`: KeyStore file file: Default: No Defaults
- - `ZOO_TLS_CLIENT_KEYSTORE_PASSWORD`: KeyStore file password. This can be an evironment variable. It will be evaled by bash. No Defaults
- - `ZOO_TLS_CLIENT_TRUSTSTORE_FILE`: TrustStore file file: Default: No Defaults
- - `ZOO_TLS_CLIENT_TRUSTSTORE_PASSWORD`: TrustStore file password. This can be an evironment variable. It will be evaled by bash. No Defaults
+ - `ZOO_TLS_CLIENT_KEYSTORE_FILE`: KeyStore file: Default: No Defaults
+ - `ZOO_TLS_CLIENT_KEYSTORE_PASSWORD`: KeyStore file password. This can be an environment variable. It will be evaluated by bash. No Defaults
+ - `ZOO_TLS_CLIENT_TRUSTSTORE_FILE`: TrustStore file: Default: No Defaults
+ - `ZOO_TLS_CLIENT_TRUSTSTORE_PASSWORD`: TrustStore file password. This can be an environment variable. It will be evaluated by bash. No Defaults
  - `ZOO_TLS_QUORUM_ENABLE`: Enable tls for quorum communication. Default: **false**
- - `ZOO_TLS_QUORUM_KEYSTORE_FILE`: KeyStore file file: Default: No Defaults
- - `ZOO_TLS_QUORUM_KEYSTORE_PASSWORD`: KeyStore file password. This can be an evironment variable. It will be evaled by bash. No Defaults
- - `ZOO_TLS_QUORUM_KEYSTORE_FILE`: TrustStore file file: Default: No Defaults
- - `ZOO_TLS_QUORUM_KEYSTORE_PASSWORD`: TrustStore file password. This can be an evironment variable. It will be evaled by bash. No Defaults
+ - `ZOO_TLS_QUORUM_KEYSTORE_FILE`: KeyStore file: Default: No Defaults
+ - `ZOO_TLS_QUORUM_KEYSTORE_PASSWORD`: KeyStore file password. This can be an environment variable. It will be evaluated by bash. No Defaults
+ - `ZOO_TLS_QUORUM_TRUSTSTORE_FILE`: TrustStore file: Default: No Defaults
+ - `ZOO_TLS_QUORUM_TRUSTSTORE_PASSWORD`: TrustStore file password. This can be an environment variable. It will be evaluated by bash. No Defaults
 
 ```console
 $ docker run --name zookeeper -e ZOO_SERVER_ID=1 bitnami/zookeeper:latest
