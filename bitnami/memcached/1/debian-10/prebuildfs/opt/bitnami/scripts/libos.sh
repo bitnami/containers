@@ -6,6 +6,7 @@
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libfs.sh
 
 # Functions
 
@@ -118,7 +119,7 @@ ensure_user_exists() {
         local -a group_args=("$group")
         $is_system_user && group_args+=("--system")
         ensure_group_exists "${group_args[@]}"
-        usermod -a -G "$group" "$user" >/dev/null 2>&1
+        usermod -g "$group" "$user" >/dev/null 2>&1
     fi
 
     if [[ -n "$home" ]]; then
