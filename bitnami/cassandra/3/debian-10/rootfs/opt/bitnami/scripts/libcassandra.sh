@@ -826,6 +826,7 @@ cassandra_execute() {
     local -r keyspace="${3:-}"
     local -r host="${4:-localhost}"
     local -r extra_args="${5:-}"
+    local -r port="${CASSANDRA_CQL_PORT_NUMBER}"
     local -r cmd=("${CASSANDRA_BIN_DIR}/cqlsh")
     local args=("-u" "$user" "-p" "$pass")
 
@@ -833,6 +834,7 @@ cassandra_execute() {
     [[ -n "$keyspace" ]] && args+=("-k" "$keyspace")
     [[ -n "$extra_args" ]] && args+=($extra_args)
     args+=("$host")
+    args+=("$port")
     if [[ "${BITNAMI_DEBUG}" = true ]]; then
         local -r command="$(cat)"
         debug "Executing CQL \"$command\""
