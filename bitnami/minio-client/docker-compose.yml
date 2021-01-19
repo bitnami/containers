@@ -2,4 +2,4 @@ version: '2'
 
 services:
   minio-client:
-    image: 'docker.io/bitnami/minio-client:2020-debian-10'
+    image: 'docker.io/bitnami/minio-client:2021-debian-10'
