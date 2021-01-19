@@ -42,7 +42,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.11.18`, `7.11.18-debian-10-r67`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.11.18-debian-10-r67/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.11.18`, `7.11.18-debian-10-r68`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.11.18-debian-10-r68/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/suitecrm GitHub repo](https://github.com/bitnami/bitnami-docker-suitecrm).
 
@@ -444,7 +444,9 @@ FROM bitnami/suitecrm
 ## Put your customizations below
 ...
 ```
+
 ## Example 1
+
 Here is an example of extending the image with the following modifications:
 
 - Install the `vim` editor
@@ -485,15 +487,16 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 +      - PHP_MEMORY_LIMIT=512m
      ...
 ```
+
 ## Example 2: Add SuiteCRM API support
+
 ```Dockerfile
 FROM bitnami/suitecrm
 LABEL maintainer "Bitnami <containers@bitnami.com>"
-
 ## Install keys
 RUN openssl genrsa -out /opt/bitnami/suitecrm/Api/V8/OAuth2/private.key 2048 && \
-openssl rsa -in /opt/bitnami/suitecrm/Api/V8/OAuth2/private.key -pubout -out /opt/bitnami/suitecrm/Api/V8/OAuth2/public.key && \
-chmod 600 /opt/bitnami/suitecrm/Api/V8/OAuth2/private.key /opt/bitnami/suitecrm/Api/V8/OAuth2/public.key
+    openssl rsa -in /opt/bitnami/suitecrm/Api/V8/OAuth2/private.key -pubout -out /opt/bitnami/suitecrm/Api/V8/OAuth2/public.key && \
+    chmod 600 /opt/bitnami/suitecrm/Api/V8/OAuth2/private.key /opt/bitnami/suitecrm/Api/V8/OAuth2/public.key
 ```
 
 ## Notable Changes
