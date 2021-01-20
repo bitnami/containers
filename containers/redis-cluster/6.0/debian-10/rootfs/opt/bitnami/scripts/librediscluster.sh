@@ -121,7 +121,7 @@ redis_cluster_initialize() {
 #########################
 redis_cluster_create() {
     local nodes=("$@")
-    local ip_and_ports=()
+    local sockets=()
     local wait_command
     local create_command
 
@@ -143,15 +143,15 @@ redis_cluster_create() {
 
     for node in "${nodes[@]}"; do
         host_and_port=($(to_host_and_port $node))
-        ip_and_ports+=("$(wait_for_dns_lookup "${host_and_port[0]}" "${REDIS_CLUSTER_DNS_LOOKUP_RETRIES}" "${REDIS_CLUSTER_DNS_LOOKUP_SLEEP}"):${host_and_port[1]}")
+        sockets+=("$(wait_for_dns_lookup "${host_and_port[0]}" "${REDIS_CLUSTER_DNS_LOOKUP_RETRIES}" "${REDIS_CLUSTER_DNS_LOOKUP_SLEEP}"):${host_and_port[1]}")
     done
 
-    create_command="redis-cli --cluster create ${ip_and_ports[*]} --cluster-replicas ${REDIS_CLUSTER_REPLICAS} --cluster-yes"
+    create_command="redis-cli --cluster create ${sockets[*]} --cluster-replicas ${REDIS_CLUSTER_REPLICAS} --cluster-yes"
     if is_boolean_yes "$REDIS_TLS_ENABLED"; then
         create_command="${create_command} --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE}"
     fi
     yes yes | $create_command || true
-    if redis_cluster_check "${ip_and_ports[0]}"; then
+    if redis_cluster_check "${sockets[0]}"; then
         echo "Cluster correctly created"
     else
         echo "The cluster was already created, the nodes should have recovered it"
@@ -226,7 +226,8 @@ redis_cluster_update_ips() {
 #   - 2 element Array of host and port
 #########################
 to_host_and_port() {
-    host_and_port=($(echo ${1:?At least the host is required} | tr ":" "\n"))
+    echo ${1:?"At least the host is required"}
+    local host_and_port=($(echo $1 | tr ":" "\n"))
 
     if [ "${#host_and_port[*]}" -eq "1" ]; then
         if is_boolean_yes "$REDIS_TLS_ENABLED"; then
