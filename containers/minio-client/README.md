@@ -37,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2021`, `2021-debian-10`, `2021.1.16`, `2021.1.16-debian-10-r1` (2021/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2021.1.16-debian-10-r1/2021/debian-10/Dockerfile)
+* [`2021`, `2021-debian-10`, `2021.1.16`, `2021.1.16-debian-10-r2`, `latest` (2021/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2021.1.16-debian-10-r2/2021/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/minio-client GitHub repo](https://github.com/bitnami/bitnami-docker-minio-client).
 
@@ -58,7 +58,7 @@ $ docker pull bitnami/minio-client:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-
+$ docker build -t bitnami/minio-client:latest 'https://github.com/bitnami/bitnami-docker-minio-client.git#master:2021/debian-10'
 ```
 
 # Connecting to other containers
