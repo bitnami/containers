@@ -92,7 +92,7 @@ redis_cluster_override_conf() {
     fi
     if is_boolean_yes "$REDIS_CLUSTER_DYNAMIC_IPS"; then
         # Always set the announce-ip to avoid issues when using proxies and traffic restrictions.
-        redis_conf_set cluster-announce-ip "$(hostname -i)"
+        redis_conf_set cluster-announce-ip "$(get_machine_ip)"
     fi
     if is_boolean_yes "$REDIS_TLS_ENABLED"; then
         redis_conf_set tls-cluster yes
