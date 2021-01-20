@@ -45,7 +45,7 @@ mysql_client_validate() {
     }
 
     # Only validate environment variables if any action needs to be performed
-    check_yes_no_value "DB_TLS_ENABLED"
+    check_yes_no_value "DB_ENABLE_SSL_WRAPPER"
 
     if [[ -n "$DB_CREATE_DATABASE_USER" || -n "$DB_CREATE_DATABASE_NAME" ]]; then
         if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
@@ -78,9 +78,9 @@ mysql_client_validate() {
 #   None
 #########################
 mysql_client_initialize() {
-    # Wrap binary to force the usage of TLS
-    if is_boolean_yes "$DB_TLS_ENABLED"; then
-        mysql_client_wrap_binary_for_tls
+    # Wrap binary to force the usage of SSL
+    if is_boolean_yes "$DB_ENABLE_SSL_WRAPPER"; then
+        mysql_client_wrap_binary_for_ssl
     fi
     # Wait for the database to be accessible if any action needs to be performed
     if [[ -n "$DB_CREATE_DATABASE_USER" || -n "$DB_CREATE_DATABASE_NAME" ]]; then
@@ -113,7 +113,7 @@ mysql_client_initialize() {
 }
 
 ########################
-# Wrap binary to force the usage of TLS
+# Wrap binary to force the usage of SSL
 # Globals:
 #   DB_*
 # Arguments:
@@ -121,14 +121,16 @@ mysql_client_initialize() {
 # Returns:
 #   None
 #########################
-mysql_client_wrap_binary_for_tls() {
+mysql_client_wrap_binary_for_ssl() {
     local -r wrapper_file="${DB_BIN_DIR}/mysql"
     local -r wrapped_binary_file="${DB_BASE_DIR}/.bin/mysql"
+    local -a ssl_opts=()
+    read -r -a ssl_opts <<< "$(mysql_client_extra_opts)"
 
     mv "$wrapper_file" "$wrapped_binary_file"
     cat >"$wrapper_file" <<EOF
 #!/bin/sh
-exec "${wrapped_binary_file}" "\$@" --ssl=1
+exec "${wrapped_binary_file}" "\$@" ${ssl_opts[@]:-}
 EOF
     chmod +x "$wrapper_file"
 }
@@ -209,8 +211,9 @@ mysql_execute_print_output() {
     local -r db="${1:-}"
     local -r user="${2:-root}"
     local -r pass="${3:-}"
-    local mysql_cmd opts
-    read -r -a opts <<<"${@:4}"
+    local -a opts extra_opts
+    read -r -a opts <<< "${@:4}"
+    read -r -a extra_opts <<< "$(mysql_client_extra_opts)"
 
     # Process mysql CLI arguments
     local -a args=()
@@ -219,9 +222,11 @@ mysql_execute_print_output() {
     fi
     args+=("-N" "-u" "$user" "$db")
     [[ -n "$pass" ]] && args+=("-p$pass")
-    [[ -n "${opts[*]:-}" ]] && args+=("${opts[@]:-}")
+    [[ "${#opts[@]}" -gt 0 ]] && args+=("${opts[@]}")
+    [[ "${#extra_opts[@]}" -gt 0 ]] && args+=("${extra_opts[@]}")
 
     # Obtain the command specified via stdin
+    local mysql_cmd
     mysql_cmd="$(</dev/stdin)"
     debug "Executing SQL command:\n$mysql_cmd"
     "$DB_BIN_DIR/mysql" "${args[@]}" <<<"$mysql_cmd"
@@ -246,6 +251,30 @@ mysql_execute() {
 }
 
 ########################
+# Execute an arbitrary query/queries against a remote MySQL/MariaDB service and print to stdout
+# Stdin:
+#   Query/queries to execute
+# Globals:
+#   BITNAMI_DEBUG
+#   DB_*
+# Arguments:
+#   $1 - Remote MySQL/MariaDB service hostname
+#   $2 - Remote MySQL/MariaDB service port
+#   $3 - Database where to run the queries
+#   $4 - User to run queries
+#   $5 - Password
+#   $6 - Extra MySQL CLI options
+# Returns:
+#   None
+mysql_remote_execute_print_output() {
+    local -r hostname="${1:?hostname is required}"
+    local -r port="${2:?port is required}"
+    local -a args=("-h" "$hostname" "-P" "$port" "--connect-timeout=5")
+    shift 2
+    "mysql_execute_print_output" "$@" "${args[@]}"
+}
+
+########################
 # Execute an arbitrary query/queries against a remote MySQL/MariaDB service
 # Stdin:
 #   Query/queries to execute
@@ -262,11 +291,7 @@ mysql_execute() {
 # Returns:
 #   None
 mysql_remote_execute() {
-    local -r hostname="${1:?hostname is required}"
-    local -r port="${2:?port is required}"
-    local -a args=("-h" "$hostname" "-P" "$port" "--connect-timeout=5")
-    shift 2
-    debug_execute "mysql_execute_print_output" "$@" "${args[@]}"
+    debug_execute "mysql_remote_execute_print_output" "$@"
 }
 
 ########################
@@ -468,7 +493,7 @@ mysql_upgrade() {
 # Returns:
 #   None
 #########################
-migrate_old_configuration() {
+mysql_migrate_old_configuration() {
     local -r old_custom_conf_file="$DB_VOLUME_DIR/conf/my_custom.cnf"
     local -r custom_conf_file="$DB_CONF_DIR/bitnami/my_custom.cnf"
     debug "Persisted configuration detected. Migrating any existing 'my_custom.cnf' file to new location"
@@ -529,10 +554,6 @@ mysql_ensure_user_exists() {
             --use-ldap)
                 use_ldap="yes"
                 ;;
-            --ssl-ca)
-                shift
-                ssl_ca="${1:?missing path to ssl CA}"
-                ;;
             --host)
                 shift
                 db_host="${1:?missing database host}"
@@ -558,22 +579,26 @@ mysql_ensure_user_exists() {
         fi
     fi
     debug "creating database user \'$user\'"
-    local -a opts=()
-    [[ -n "$db_host" ]] && opts+=("-h" "${db_host}")
-    [[ -n "$db_port" ]] && opts+=("-P" "${db_port}")
-    [[ -n "$ssl_ca" ]] && opts+=("--ssl-ca" "$ssl_ca")
+
+    local -a mysql_execute_cmd=("mysql_execute")
+    local -a mysql_execute_print_output_cmd=("mysql_execute_print_output")
+    if [[ -n "$db_host" && -n "$db_port" ]]; then
+        mysql_execute_cmd=("mysql_remote_execute" "$db_host" "$db_port")
+        mysql_execute_print_output_cmd=("mysql_remote_execute_print_output" "$db_host" "$db_port")
+    fi
+
     local mysql_create_user_cmd
     [[ "$DB_FLAVOR" = "mariadb" ]] && mysql_create_user_cmd="create or replace user" || mysql_create_user_cmd="create user if not exists"
-    mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" "${opts[@]:-}" <<EOF
+    "${mysql_execute_cmd[@]}" "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
 ${mysql_create_user_cmd} '${user}'@'%' ${auth_string};
 EOF
     debug "Removing all other hosts for the user"
-    hosts=$(mysql_execute_print_output "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" "${opts[@]:-}" <<EOF
+    hosts=$("${mysql_execute_print_output_cmd[@]}" "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
 select Host from user where User='${user}' and Host!='%';
 EOF
 )
     for host in $hosts; do
-        mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" "${opts[@]:-}" <<EOF
+        "${mysql_execute_cmd[@]}" "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
 drop user '$user'@'$host';
 EOF
     done
@@ -713,16 +738,16 @@ mysql_ensure_database_exists() {
         shift
     done
 
-    local -a extra_args=()
-    [[ -n "$character_set" ]] && extra_args=("character set = '${character_set}'")
-    [[ -n "$collate" ]] && extra_args=("collate = '${collate}'")
-
     local -a mysql_execute_cmd=("mysql_execute")
     [[ -n "$db_host" && -n "$db_port" ]] && mysql_execute_cmd=("mysql_remote_execute" "$db_host" "$db_port")
 
+    local -a create_database_args=()
+    [[ -n "$character_set" ]] && create_database_args+=("character set = '${character_set}'")
+    [[ -n "$collate" ]] && create_database_args+=("collate = '${collate}'")
+
     debug "Creating database $database"
     "${mysql_execute_cmd[@]}" "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-create database if not exists \`$database\` ${extra_args[@]:-};
+create database if not exists \`$database\` ${create_database_args[@]:-};
 EOF
 }
 
@@ -924,7 +949,7 @@ mysql_conf_set() {
 #########################
 mysql_update_custom_config() {
     # Persisted configuration files from old versions
-    ! is_dir_empty "$DB_VOLUME_DIR" && [[ -d "$DB_VOLUME_DIR/conf" ]] && migrate_old_configuration
+    ! is_dir_empty "$DB_VOLUME_DIR" && [[ -d "$DB_VOLUME_DIR/conf" ]] && mysql_migrate_old_configuration
 
     # User injected custom configuration
     if [[ -f "$DB_CONF_DIR/my_custom.cnf" ]]; then
@@ -985,4 +1010,58 @@ mysql_healthcheck() {
     fi
 
     mysqladmin "${args[@]}" ping && mysqladmin "${args[@]}" status
+}
+
+########################
+# Prints flavor of 'mysql' client (useful to determine proper CLI flags that can be used)
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   mysql client flavor
+#########################
+mysql_client_flavor() {
+    if "${DB_BIN_DIR}/mysql" "--version" 2>&1 | grep -q MariaDB; then
+        echo "mariadb"
+    else
+        echo "mysql"
+    fi
+}
+
+########################
+# Prints extra options for MySQL client calls (i.e. SSL options)
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   List of options to pass to "mysql" CLI
+#########################
+mysql_client_extra_opts() {
+    # Helper to get the proper value for the MySQL client environment variable
+    mysql_client_env_value() {
+        local env_name="MYSQL_CLIENT_${1:?missing name}"
+        if [[ -n "${!env_name:-}" ]]; then
+            echo "${!env_name:-}"
+        else
+            env_name="DB_CLIENT_${1}"
+            echo "${!env_name:-}"
+        fi
+    }
+    local -a opts=()
+    local key value
+    if is_boolean_yes "$DB_ENABLE_SSL"; then
+        if [[ "$(mysql_client_flavor)" = "mysql" ]]; then
+            opts+=("--ssl-mode=REQUIRED")
+        else
+            opts+=("--ssl=TRUE")
+        fi
+        # Add "--ssl-ca", "--ssl-key" and "--ssl-cert" options if the env vars are defined
+        for key in ca key cert; do
+            value="$(mysql_client_env_value "SSL_${key^^}_FILE")"
+            [[ -n "${value}" ]] && opts+=("--ssl-${key}=${value}")
+        done
+    fi
+    echo "${opts[@]:-}"
 }
