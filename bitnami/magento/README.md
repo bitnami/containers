@@ -1,12 +1,12 @@
-# What is Magento?
+# Bitnami Docker Image for Magento
+
+## What is Magento?
 
 > Magento is a feature-rich flexible e-commerce solution. It includes transaction options, multi-store functionality, loyalty programs, product categorization and shopper filtering, promotion rules, and more.
 
 https://magento.com/
 
-# TL;DR
-
-## Docker Compose
+## TL;DR
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-magento/master/docker-compose.yml > docker-compose.yml
@@ -15,7 +15,7 @@ $ docker-compose up -d
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -23,7 +23,6 @@ You can find the default credentials and available configuration options in the 
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
-
 
 > This [CVE scan report](https://quay.io/repository/bitnami/magento?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
@@ -33,24 +32,42 @@ Deploying Bitnami applications as Helm Charts is the easiest way to get started 
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
-# Supported tags and respective `Dockerfile` links
+## Why use a non-root container?
+
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
+
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.4.1`, `2.4.1-debian-10-r79`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.4.1-debian-10-r79/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.4.1`, `2.4.1-debian-10-r80`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.4.1-debian-10-r80/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/magento GitHub repo](https://github.com/bitnami/bitnami-docker-magento).
 
-# Prerequisites
+## Get this image
 
-To run this application you need Docker Engine 1.10.0. Docker Compose is recomended with a version 1.6.0 or later.
+The recommended way to get the Bitnami Magento Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/magento).
 
-# How to use this image
+```console
+$ docker pull bitnami/magento:latest
+```
 
-## Run Magento with a Database Container
+To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/magento/tags/) in the Docker Hub Registry.
 
-Running Magento with a database server is the recommended way. You can either use docker-compose or run the containers manually.
+```console
+$ docker pull bitnami/magento:[TAG]
+```
+
+If you wish, you can also build the image yourself.
+
+```console
+$ docker build -t bitnami/magento:latest 'https://github.com/bitnami/bitnami-docker-magento.git#master:2/debian-10'
+```
+
+## How to use this image
+
+Magento requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://www.github.com/bitnami/bitnami-docker-mariadb) for the database requirements.
 
 ### Run the application using Docker Compose
 
@@ -61,160 +78,127 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-magento/mas
 $ docker-compose up -d
 ```
 
-### Run the application manually
+### Using the Docker Command Line
 
-If you want to run the application manually instead of using docker-compose, these are the basic steps you need to run:
+If you want to run the application manually instead of using `docker-compose`, these are the basic steps you need to run:
 
-1. Create a new network for the application and the database:
+#### Step 1: Create a network
 
-  ```console
-  $ docker network create magento-tier
-  ```
+```console
+$ docker network create magento-network
+```
 
-2. Create a volume for MariaDB persistence and create a MariaDB container
+#### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
 
-  ```console
-  $ docker volume create --name mariadb_data
-  $ docker run -d --name mariadb \
-    -e ALLOW_EMPTY_PASSWORD=yes \
-    -e MARIADB_USER=bn_magento \
-    -e MARIADB_PASSWORD=your_password \
-    -e MARIADB_DATABASE=bitnami_magento \
-    --net magento-tier \
-    --volume mariadb_data:/bitnami \
-    bitnami/mariadb:latest
-  ```
+```console
+$ docker volume create --name mariadb_data
+$ docker run -d --name mariadb \
+  --env ALLOW_EMPTY_PASSWORD=yes \
+  --env MARIADB_USER=bn_magento \
+  --env MARIADB_PASSWORD=bitnami \
+  --env MARIADB_DATABASE=bitnami_magento \
+  --network magento-network \
+  --volume mariadb_data:/bitnami/mariadb \
+  bitnami/mariadb:latest
+```
 
-  *Note:* You need to give the container a name in order for Magento to resolve the host
+#### Step 3: Create volumes for Magento persistence and launch the container
 
-3. Create volumes for Magento persistence and launch the container
+```console
+$ docker volume create --name magento_data
+$ docker run -d --name magento \
+  -p 8080:8080 -p 8443:8443 \
+  --env ALLOW_EMPTY_PASSWORD=yes \
+  --env MAGENTO_DATABASE_USER=bn_magento \
+  --env MAGENTO_DATABASE_PASSWORD=bitnami \
+  --env MAGENTO_DATABASE_NAME=bitnami_magento \
+  --network magento-network \
+  --volume magento_data:/bitnami/magento \
+  bitnami/magento:latest
+```
 
-  ```console
-  $ docker volume create --name magento_data
-  $ docker run -d --name magento -p 80:80 -p 443:443 \
-    -e MAGENTO_DATABASE_USER=bn_magento \
-    -e MAGENTO_DATABASE_PASSWORD=your_password \
-    -e MAGENTO_DATABASE_NAME=bitnami_magento \
-    --net magento-tier \
-    --volume magento_data:/bitnami \
-    bitnami/magento:latest
-  ```
-
-Then you can access your application at http://your-ip/
-
-*Note:* If you want to access your application from a public IP or hostname you need to configure the application domain. You can handle it adjusting the configuration of the instance by setting the environment variable "MAGENTO_HOST" to your public IP or hostname.
+Access your application at *http://your-ip/*
 
 ## Persisting your application
 
-If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
+For persistence you should mount a directory at the `/bitnami/magento` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should mount a volume for persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
 
-The above examples define docker volumes namely `mariadb_data` and `magento_data`. The Magento application state will persist as long as these volumes are not removed.
+The above examples define the Docker volumes named `mariadb_data` and `magento_data`. The Magento application state will persist as long as volumes are not removed.
 
-To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
+To avoid inadvertent removal of volumes, you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
 ### Mount host directories as data volumes with Docker Compose
 
 This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-magento/blob/master/docker-compose.yml) file present in this repository:
 
-```yaml
-services:
-  mariadb:
-  ...
-    volumes:
-      - /path/to/mariadb-persistence:/bitnami
-  ...
-  magento:
-  ...
-    volumes:
-      - '/path/to/magento-persistence:/bitnami'
-  ...
+```diff
+   mariadb:
+     ...
+     volumes:
+-      - 'mariadb_data:/bitnami/mariadb'
++      - /path/to/mariadb-persistence:/bitnami/mariadb
+   ...
+   magento:
+     ...
+     volumes:
+-      - 'magento_data:/bitnami/magento'
++      - /path/to/magento-persistence:/bitnami/magento
+   ...
+-volumes:
+-  mariadb_data:
+-    driver: local
+-  magento_data:
+-    driver: local
 ```
+
+> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 ### Mount host directories as data volumes using the Docker command line
 
-In this case you need to specify the directories to mount on the run command. The process is the same than the one previously shown:
-
-1. Create a network (if it does not exist):
-
-  ```console
-  $ docker network create magento-tier
-  ```
-
-2. Create a MariaDB container with host volume:
-
-  ```console
-  $ docker run -d --name mariadb
-    -e ALLOW_EMPTY_PASSWORD=yes \
-    -e MARIADB_USER=bn_magento \
-    -e MARIADB_PASSWORD=your_password \
-    -e MARIADB_DATABASE=bitnami_magento \
-    --net magento-tier \
-    --volume /path/to/mariadb-persistence:/bitnami \
-    bitnami/mariadb:latest
-  ```
-
-  *Note:* You need to give the container a name in order to Magento to resolve the host
-
-3. Create the Magento container with host volumes:
-
-  ```console
-  $ docker run -d --name magento -p 80:80 -p 443:443 \
-    -e MAGENTO_DATABASE_USER=bn_magento \
-    -e MAGENTO_DATABASE_PASSWORD=your_password \
-    -e MAGENTO_DATABASE_NAME=bitnami_magento \
-    --net magento-tier \
-    --volume /path/to/magento-persistence:/bitnami \
-    bitnami/magento:latest
-  ```
-
-# Upgrade this application
-
-Bitnami provides up-to-date versions of MariaDB and Magento, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Magento container. For the MariaDB upgrade see https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
-
-To upgrade the Magento application, follow the [official update guide](https://devdocs.magento.com/guides/v2.4/install-gde/install/cli/dev_update-magento.html).
-
-To upgrade the components included in the Magento container image (such as Apache or PHP), follow these steps:
-
-1. Get the updated images:
-
-  ```console
-  $ docker pull bitnami/magento:latest
-  ```
-
-2. Stop your container
-
- * For docker-compose: `$ docker-compose stop magento`
- * For manual execution: `$ docker stop magento`
-
-3. Take a snapshot of the application state
+#### Step 1: Create a network (if it does not exist)
 
 ```console
-$ rsync -a /path/to/magento-persistence /path/to/magento-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+$ docker network create magento-network
 ```
 
-Additionally, [snapshot the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container)
+#### Step 2. Create a MariaDB container with host volume
 
-You can use these snapshots to restore the application state should the upgrade fail.
+```console
+$ docker volume create --name mariadb_data
+$ docker run -d --name mariadb \
+  --env ALLOW_EMPTY_PASSWORD=yes \
+  --env MARIADB_USER=bn_magento \
+  --env MARIADB_PASSWORD=bitnami \
+  --env MARIADB_DATABASE=bitnami_magento \
+  --network magento-network \
+  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
+  bitnami/mariadb:latest
+```
 
-4. Remove the currently running container
+#### Step 3. Create the Magento the container with host volumes
 
- * For docker-compose: `$ docker-compose rm -v magento`
- * For manual execution: `$ docker rm -v magento`
+```console
+$ docker volume create --name magento_data
+$ docker run -d --name magento \
+  -p 8080:8080 -p 8443:8443 \
+  --env ALLOW_EMPTY_PASSWORD=yes \
+  --env MAGENTO_DATABASE_USER=bn_magento \
+  --env MAGENTO_DATABASE_PASSWORD=bitnami \
+  --env MAGENTO_DATABASE_NAME=bitnami_magento \
+  --network magento-network \
+  --volume /path/to/magento-persistence:/bitnami/magento \
+  bitnami/magento:latest
+```
 
-5. Run the new image
-
- * For docker-compose: `$ docker-compose up magento`
- * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name magento bitnami/magento:latest`
-
-# Configuration
+## Configuration
 
 ## Environment variables
 
-When you start the magento image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
+When you start the Magento image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
- * For docker-compose, add the variable to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-magento/blob/master/docker-compose.yml) file present in this repository:
+ * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-magento/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
 magento:
@@ -224,74 +208,301 @@ magento:
   ...
 ```
 
- * For manual execution add a `-e` option with each variable and value:
+ * For manual execution add a `--env` option with each variable and value:
 
   ```console
-  $ docker run -d --name magento -p 80:80 -p 443:443 \
-    -e MAGENTO_PASSWORD=my_password1234 \
-    --net magento-tier \
+  $ docker run -d --name magento -p 80:8080 -p 443:8443 \
+    --env MAGENTO_PASSWORD=my_password1234 \
+    --network magento-tier \
     --volume /path/to/magento-persistence:/bitnami \
     bitnami/magento:latest
   ```
 
-Available variables:
+Available environment variables:
 
-#### User and Site configuration
+##### User and Site configuration
 
+- `APACHE_HTTP_PORT_NUMBER`: Port used by Apache for HTTP. Default: **8080**
+- `APACHE_HTTPS_PORT_NUMBER`: Port used by Apache for HTTPS. Default: **8443**
+- `MAGENTO_EXTERNAL_HTTP_PORT_NUMBER`: Port to access Magento from outside of the container using HTTP. Used to configure Magento's internal routes. Default: **80**
+- `MAGENTO_EXTERNAL_HTTPS_PORT_NUMBER`: Port to access Magento from outside of the container using HTTPS. Used to configure Magento's internal routes. Default: **443**
 - `MAGENTO_USERNAME`: Magento application username. Default: **user**
 - `MAGENTO_PASSWORD`: Magento application password. Default: **bitnami1**
 - `MAGENTO_EMAIL`: Magento application email. Default: **user@example.com**
-- `MAGENTO_ADMINURI`: Prefix to access the Magento Admin. Default: **admin**
-- `MAGENTO_FIRSTNAME`: Magento application first name. Default: **FirstName**
-- `MAGENTO_LASTNAME`: Magento application last name. Default: **LastName**
-- `MAGENTO_HOST`: Host domain or IP.
-- `EXTERNAL_HTTP_PORT_NUMBER`: Port to access Magento from outside of the container using HTTP. Used to configure Magento's internal routes. Default: **80**
-- `EXTERNAL_HTTPS_PORT_NUMBER`: Port to access Magento from outside of the container using HTTPS. Used to configure Magento's internal routes. Default: **443**
-- `MAGENTO_MODE`: Magento mode. Valid values: **default**, **production**, **developer**. Default: **default**
-- `MAGENTO_USE_SECURE_ADMIN`: Use SSL to access the Magento Admin. Valid values: **yes**, **no**. Default: **no**
+- `MAGENTO_FIRST_NAME`: Magento application first name. Default: **FirstName**
+- `MAGENTO_LAST_NAME`: Magento application last name. Default: **LastName**
+- `MAGENTO_HOST`: Magento host domain or IP address. Default: **localhost**
+- `MAGENTO_MODE`: Magento mode. Valid values: default, production, developer. Default: **default**
+- `MAGENTO_EXTRA_INSTALL_ARGS`: Extra flags to append to the Magento 'setup:install' command call. No defaults
+- `MAGENTO_ADMIN_URL_PREFIX`: URL prefix to access the Magento Admin. Default: **admin**
+- `MAGENTO_ENABLE_HTTPS`: Whether to use SSL to access the Magento Store. Valid values: yes, no. Default: **no**
+- `MAGENTO_ENABLE_ADMIN_HTTPS`: Whether to use SSL to access the Magento Admin. Valid values: yes, no. Default: **no**
+- `MAGENTO_DEPLOY_STATIC_CONTENT`: Whether to deploy Magento static content during the initialization, to optimize initial page load time. Default: **no**
+- `MAGENTO_SKIP_REINDEX`: Whether to skip Magento re-index during the initialization. Default: **no**
+- `MAGENTO_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. Default: **no**
 
-#### Search configuration
+##### HTTP cache server
 
-Elasticsearch is now the default search engine in Magento 2.3. To configure it, use the following environment variables. If not specified, MySQL search will be used, but please note that it's been deprecated.
+- `MAGENTO_ENABLE_HTTP_CACHE`: Whether to enable a HTTP cache server for Magento (i.e. Varnish). Default: **no**
+- `MAGENTO_HTTP_CACHE_BACKEND_HOST`: HTTP cache backend hostname. No defaults
+- `MAGENTO_HTTP_CACHE_BACKEND_PORT_NUMBER`: HTTP cache backend port. No defaults
+- `MAGENTO_HTTP_CACHE_SERVER_HOST`: HTTP cache server hostname. No defaults
+- `MAGENTO_HTTP_CACHE_SERVER_PORT_NUMBER`: HTTP cache server hostname. No defaults
 
-- `ELASTICSEARCH_HOST`: Hostname for the Elasticsearch server.
-- `ELASTICSEARCH_PORT_NUMBER`: Port used by the Elasticsearch server.
+##### Search engines
 
-#### Database configuration
+- `MAGENTO_SEARCH_ENGINE`: Magento search engine. Default: **elasticsearch7**
+- `MAGENTO_ELASTICSEARCH_HOST`: Elasticsearch server host, if using Elasticsearch as a search engine. Default: **elasticsearch**
+- `MAGENTO_ELASTICSEARCH_PORT_NUMBER`: Elasticsearch server port number, if using Elasticsearch as a search engine. Default: **9200**
+- `MAGENTO_ELASTICSEARCH_ENABLE_AUTH`: Whether to enable authentication for connections to the Elasticsearch server. Default: **no**
+- `MAGENTO_ELASTICSEARCH_USER`: Elasticsearch server user login, if using Elasticsearch as a search engine and authentication is enabled. No defaults
+- `MAGENTO_ELASTICSEARCH_PASSWORD`: Elasticsearch server user password, if using Elasticsearch as a search engine and authentication is enabled. No defaults
 
-There are two options to configure the Magento database. You can either use an existing database or create a new one from the Magento container using the mysql client.
-Below you can see the available environment variables for each option:
+##### Database server connection credentials and configuration
 
-##### Use an existing database
-
-- `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
-- `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
+- `MAGENTO_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
+- `MAGENTO_DATABASE_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
 - `MAGENTO_DATABASE_NAME`: Database name that Magento will use to connect with the database. Default: **bitnami_magento**
 - `MAGENTO_DATABASE_USER`: Database user that Magento will use to connect with the database. Default: **bn_magento**
-- `MAGENTO_DATABASE_PASSWORD`: Database password that Magento will use to connect with the database. No defaults. Required.
+- `MAGENTO_DATABASE_PASSWORD`: Database password that Magento will use to connect with the database. No defaults.
+- `MAGENTO_ENABLE_DATABASE_SSL`: Whether to enable SSL for database connections. Default: **no**
+- `MAGENTO_VERIFY_DATABASE_SSL`: Whether to verify the database SSL certificate when SSL is enabled for database connections. Default: **yes**
+- `MAGENTO_DATABASE_SSL_CERT_FILE`: Path to the database client certificate file. No defaults
+- `MAGENTO_DATABASE_SSL_KEY_FILE`: Path to the database client certificate key file. No defaults
+- `MAGENTO_DATABASE_SSL_CA_FILE`: Path to the database server CA bundle file. No defaults
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
 ##### Create a database for Magento using mysql-client
 
-- `MARIADB_HOST`: Hostname for MariaDB server. Default: **mariadb**
-- `MARIADB_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
-- `MARIADB_ROOT_USER`: Database admin user. Default: **root**
-- `MARIADB_ROOT_PASSWORD`: Database password for the `MARIADB_ROOT_USER` user. No defaults.
+- `MYSQL_CLIENT_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
+- `MYSQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
+- `MYSQL_CLIENT_DATABASE_ROOT_USER`: Database admin user. Default: **root**
+- `MYSQL_CLIENT_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No defaults.
 - `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No defaults.
 - `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
 - `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
-- `MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES`: Comma-separated list of privileges to grant to the database user. Default: **ALL**
+- `MYSQL_CLIENT_CREATE_DATABASE_CHARACTER_SET`: Character set to use for the new database. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_COLLATE`: Database collation to use for the new database. No defaults.
+- `MYSQL_CLIENT_ENABLE_SSL_WRAPPER`: Whether to force SSL connections to the database via the `mysql` CLI tool. Useful for applications that rely on the CLI instead of APIs. Default: **no**
+- `MYSQL_CLIENT_ENABLE_SSL`: Whether to force SSL connections for the database. Default: **no**
+- `MYSQL_CLIENT_SSL_CA_FILE`: Path to the SSL CA file for the new database. No defaults
+- `MYSQL_CLIENT_SSL_CERT_FILE`: Path to the SSL CA file for the new database. No defaults
+- `MYSQL_CLIENT_SSL_KEY_FILE`: Path to the SSL CA file for the new database. No defaults
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
 ##### PHP configuration
 
-- `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **768M**
+- `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. Default: **18000**
+- `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
+- `PHP_MAX_INPUT_VARS`: Maximum amount of input variables for PHP scripts. No default.
+- `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **756M**
+- `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
+- `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
+- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
 
-# Customize this image
+## Logging
+
+The Bitnami Magento Docker image sends the container logs to `stdout`. To view the logs:
+
+```console
+$ docker logs magento
+```
+
+Or using Docker Compose:
+
+```console
+$ docker-compose logs magento
+```
+
+You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+
+## Maintenance
+
+### Backing up your container
+
+To backup your data, configuration and logs, follow these simple steps:
+
+#### Step 1: Stop the currently running container
+
+```console
+$ docker stop magento
+```
+
+Or using Docker Compose:
+
+```console
+$ docker-compose stop magento
+```
+
+#### Step 2: Run the backup command
+
+We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
+
+```console
+$ docker run --rm -v /path/to/magento-backups:/backups --volumes-from magento busybox \
+  cp -a /bitnami/magento /backups/latest
+```
+
+### Restoring a backup
+
+Restoring a backup is as simple as mounting the backup as volumes in the containers.
+
+For the MariaDB database container:
+
+```diff
+ $ docker run -d --name mariadb \
+   ...
+-  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
++  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
+   bitnami/mariadb:latest
+```
+
+For the Magento container:
+
+```diff
+ $ docker run -d --name magento \
+   ...
+-  --volume /path/to/magento-persistence:/bitnami/magento \
++  --volume /path/to/magento-backups/latest:/bitnami/magento \
+   bitnami/magento:latest
+```
+
+### Upgrade this image
+
+Bitnami provides up-to-date versions of MariaDB and Magento, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Magento application and bundled components (Apache, PHP...). For the MariaDB upgrade see: https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
+
+#### Upgrading the Magento application
+
+Follow this guide to update the Magento version used in your running container image. Note that the below steps will not update any bundled image components such as Apache or PHP, to do this check the next section.
+
+##### Step 1: Create a backup
+
+Before following any of the below steps, [create a backup of your container](#backing-up-your-container) to avoid possible data loss, in case something goes wrong.
+
+##### Step 2: Getting Magento authentication keys
+
+In order to properly upgrade Magento, you will need Magento authentication keys that will be used to fetch the Magento updates. To obtain these keys, follow [this guide](https://devdocs.magento.com/guides/v2.4/install-gde/prereq/connect-auth.html).
+
+##### Step 3: Preparing the Docker container for the upgrade
+
+* Enter the container shell (e.g. `docker exec -u root ...`).
+
+* Only if the container is running as `root` user, disable cron jobs and wait for any pending jobs to complete:
+
+        $ sed -i 's/^/#/' /etc/cron.d/magento
+
+* Increase the PHP `memory_limit` to an apropriate value for the upgrade commands to work, such as `2G`:
+
+        $ sed -i 's/memory_limit = .*/memory_limit = 2G/' /opt/bitnami/php/etc/php.ini
+
+* Backup `composer.json`:
+
+        $ cp /opt/bitnami/magento/composer.json /opt/bitnami/magento/composer.json.bak
+
+##### Step 4: Update Magento to the desired version
+
+* Only if the container is running as `root` user, login as the web server user before executing the below command:
+
+        $ su daemon -s /bin/bash
+
+* To avoid user access to your Magento site while you are upgrading, enable maintenance mode:
+
+        $ magento maintenance:enable
+
+* Enter the container shell (e.g. `docker exec -u root ...`).
+
+* Only if the container is running as `root` user, disable cron jobs:
+
+        $ sed -i 's/^/#/' /etc/cron.d/magento
+
+* Update your Magento requirement to the new desired version in `composer.json`. At this point, you will be asked to provide credentials to access `repo.magento.com`. Enter the authentication keys obtained in Step 1.
+
+        $ cd /opt/bitnami/magento
+        $ composer require magento/product-community-edition=VERSION --no-update
+
+    > NOTE: Replace the `VERSION` placeholder with an appropriate value, i.e.: `2.4.1`
+
+* Update your installation. You will also be asked to provide the same credentials provided in the previous step.
+
+        $ composer update
+
+    > NOTE: If you see an error similar to this while executing the above command, you will need to increase the PHP `memory_limit` configuration to an even higher value.
+    >
+    > ```
+    > Fatal error: Allowed memory size of 21610612736 bytes exhausted
+    > ```
+
+* Clear the `var/` and `generated/` directories:
+
+        $ rm -rf /opt/bitnami/magento/var/cache/*
+        $ rm -rf /opt/bitnami/magento/var/page_cache/*
+        $ rm -rf /opt/bitnami/magento/generated/*
+
+* Upgrade the Magento database schema:
+
+        $ magento setup:upgrade
+
+* Finally, disable maintenance mode to complete the upgrade:
+
+        $ magento maintenance:disable
+
+##### Step 5: Restart Docker container
+
+Restart the Docker container to reset any configuration changes:
+
+```console
+$ docker stop magento
+```
+
+Or using Docker Compose:
+
+```console
+$ docker-compose stop magento
+```
+
+#### Upgrading bundled image components
+
+Follow this guide to upgrade any bundled image components, such as Apache or PHP. Note that **Magento will not be updated** if you follow these steps.
+
+##### Step 1: Get the updated image
+
+```console
+$ docker pull bitnami/magento:latest
+```
+
+##### Step 2: Stop the running container
+
+Stop the currently running container using the command
+
+```console
+$ docker-compose stop magento
+```
+
+##### Step 3: Take a snapshot of the application state
+
+Follow the steps in [Backing up your container](#backing-up-your-container) to take a snapshot of the current application state.
+
+##### Step 4: Remove the currently running container
+
+Remove the currently running container by executing the following command:
+
+```console
+docker-compose rm -v magento
+```
+
+##### Step 5: Run the new image
+
+Update the image tag in `docker-compose.yml` and re-create your container with the new image:
+
+```console
+$ docker-compose up -d
+```
+
+## Customize this image
 
 The Bitnami Magento Docker image is designed to be extended so it can be used as the base image for your custom web applications.
 
-## Extend this image
+### Extend this image
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
@@ -318,8 +529,12 @@ Here is an example of extending the image with the following modifications:
 FROM bitnami/magento
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
+## Change user to perform privileged actions
+USER 0
 ## Install 'vim'
 RUN install_packages vim
+## Revert to the original non-root user
+USER 1001
 
 ## Enable mod_ratelimit module
 RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt/bitnami/apache/conf/httpd.conf
@@ -331,52 +546,32 @@ ENV APACHE_HTTPS_PORT_NUMBER=8143
 EXPOSE 8181 8143
 ```
 
-Based on the extended image, you can use a Docker Compose file like the one below to add other features:
+Based on the extended image, you can update the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-magento/blob/master/docker-compose.yml) file present in this repository to add other features:
 
-```yaml
-version: '2'
-services:
-  mariadb:
-    image: 'bitnami/mariadb:10.2'
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_magento
-      - MARIADB_PASSWORD=magento_db_password
-      - MARIADB_DATABASE=bitnami_magento
-    volumes:
-      - 'mariadb_data:/bitnami'
-  magento:
-    build: .
-    environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - MAGENTO_DATABASE_USER=bn_magento
-      - MAGENTO_DATABASE_PASSWORD=magento_db_password
-      - MAGENTO_DATABASE_NAME=bitnami_magento
-      - ELASTICSEARCH_HOST=elasticsearch
-      - ELASTICSEARCH_PORT_NUMBER=9200
-    ports:
-      - '80:8181'
-      - '443:8143'
-    volumes:
-      - 'magento_data:/bitnami'
-    depends_on:
-      - mariadb
-      - elasticsearch
-  elasticsearch:
-    image: 'bitnami/elasticsearch:6'
-    volumes:
-      - 'elasticsearch_data:/bitnami/elasticsearch/data'
-volumes:
-  elasticsearch_data:
-    driver: local
-  mariadb_data:
-    driver: local
-  magento_data:
-    driver: local
+```diff
+   magento:
+-    image: bitnami/magento:latest
++    build: .
+     ports:
+-      - '80:8080'
+-      - '443:8443'
++      - '80:8181'
++      - '443:8143'
+     environment:
++      - PHP_MEMORY_LIMIT=512m
+     ...
 ```
 
 # Notable Changes
+
+## 2.4.1-debian-10-r80
+
+- The size of the container image has been decreased.
+- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+- The Magento container now supports the "non-root" user approach, but it still runs as the `root` user by default. When running as a non-root user, all services will be run under the same user and Cron jobs will be disabled as crond requires to be run as a superuser. To run as a non-root user, change `USER root` to `USER 1001` in the Dockerfile, or specify `user: 1001` in `docker-compose.yml`. Related changes:
+
+  - The HTTP/HTTPS ports exposed by the container are now `8080/8443` instead of `80/443`.
+  - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the Magento site by exporting its content, and importing it on a new Magento container.
 
 ## 2.3.5-debian-10-r57
 
@@ -389,29 +584,29 @@ volumes:
 - The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
 - Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-magento/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-magento/pulls) with your contribution.
 
-# Issues
+## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-magento/issues/new). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-magento/issues). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
-- Docker version (`$ docker version`)
-- Output of `$ docker info`
-- Version of this container (`# echo $BITNAMI_IMAGE_VERSION` inside the container)
+- Docker version (`docker version`)
+- Output of `docker info`
+- Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
-Copyright 2016-2021 Bitnami
+Copyright (c) 2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-  <http://www.apache.org/licenses/LICENSE-2.0>
+    http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
