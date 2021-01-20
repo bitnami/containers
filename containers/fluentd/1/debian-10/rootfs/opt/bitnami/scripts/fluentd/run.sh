@@ -26,7 +26,7 @@ fi
 
 info "** Starting Fluentd **"
 if am_i_root && [[ "$FLUENTD_DAEMON_USER" != "root" ]]; then
-    infod "Switching daemon from root to $FLUENTD_DAEMON_USER..."
+    info "Switching daemon from root to $FLUENTD_DAEMON_USER..."
     exec gosu "$FLUENTD_DAEMON_USER" "$EXEC" "${args[@]}"
 else
     exec "$EXEC" "${args[@]}"
