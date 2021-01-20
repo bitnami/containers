@@ -90,6 +90,10 @@ redis_cluster_override_conf() {
     if ! (is_boolean_yes "$REDIS_CLUSTER_DYNAMIC_IPS" || is_boolean_yes "$REDIS_CLUSTER_CREATOR"); then
         redis_conf_set cluster-announce-ip "$REDIS_CLUSTER_ANNOUNCE_IP"
     fi
+    if is_boolean_yes "$REDIS_CLUSTER_DYNAMIC_IPS"; then
+        # Always set the announce-ip to avoid issues when using proxies and traffic restrictions.
+        redis_conf_set cluster-announce-ip "$(hostname -i)"
+    fi
     if is_boolean_yes "$REDIS_TLS_ENABLED"; then
         redis_conf_set tls-cluster yes
         redis_conf_set tls-replication yes
@@ -207,7 +211,7 @@ redis_cluster_update_ips() {
             if [[ ${host_2_ip_array[$node]+true} ]]; then
                 echo "Changing old IP ${host_2_ip_array[$node]} by the new one ${newIP}"
                 nodesFile=$(sed "s/${host_2_ip_array[$node]}/$newIP/g" "${REDIS_DATA_DIR}/nodes.conf")
-                echo "$nodesFile" >"${REDIS_DATA_DIR}/nodes.conf"
+                echo "$nodesFile" > "${REDIS_DATA_DIR}/nodes.conf"
             fi
             host_2_ip_array["$node"]="$newIP"
         done
