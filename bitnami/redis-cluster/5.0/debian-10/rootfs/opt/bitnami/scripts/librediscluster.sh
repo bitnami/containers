@@ -126,7 +126,7 @@ redis_cluster_create() {
     local create_command
 
     for node in "${nodes[@]}"; do
-        host_and_port=($(to_host_and_port $node))
+        host_and_port=($(to_host_and_port "$node"))
         wait_command="redis-cli -h ${host_and_port[0]} -p ${host_and_port[1]} ping"
         if is_boolean_yes "$REDIS_TLS_ENABLED"; then
             wait_command="${wait_command:0:-5} --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE} ping"
@@ -141,7 +141,7 @@ redis_cluster_create() {
     sleep "${REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP}"
 
     for node in "${nodes[@]}"; do
-        host_and_port=($(to_host_and_port $node))
+        host_and_port=($(to_host_and_port "$node"))
         sockets+=("$(wait_for_dns_lookup "${host_and_port[0]}" "${REDIS_CLUSTER_DNS_LOOKUP_RETRIES}" "${REDIS_CLUSTER_DNS_LOOKUP_SLEEP}"):${host_and_port[1]}")
     done
 
