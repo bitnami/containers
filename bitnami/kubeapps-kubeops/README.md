@@ -33,7 +33,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-scratch`, `2.0.1`, `2.0.1-scratch-r2` (2/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-kubeops/blob/2.0.1-scratch-r2/2/scratch/Dockerfile)
+* [`2`, `2-scratch`, `2.0.1`, `2.0.1-scratch-r3` (2/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-kubeops/blob/2.0.1-scratch-r3/2/scratch/Dockerfile)
 
 # Configuration
 
@@ -55,7 +55,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright (c) 2020 Bitnami
+Copyright (c) 2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
