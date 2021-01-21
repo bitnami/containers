@@ -36,6 +36,7 @@ for dir in "$MATOMO_BASE_DIR" "$MATOMO_VOLUME_DIR" "${MATOMO_BASE_DIR}/tmp" "${M
 done
 
 info "Configuring default PHP options for Matomo"
+php_conf_set memory_limit "$PHP_DEFAULT_MEMORY_LIMIT"
 # Fix the MySQL local infile system check
 # https://matomo.org/faq/troubleshooting/faq_194/
 php_conf_set mysqli.allow_local_infile "1"
