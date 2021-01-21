@@ -42,9 +42,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`22`, `22-debian-10`, `22.0.0`, `22.0.0-debian-10-r1` (22/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/22.0.0-debian-10-r1/22/debian-10/Dockerfile)
-* [`21`, `21-debian-10`, `21.0.2`, `21.0.2-debian-10-r30` (21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/21.0.2-debian-10-r30/21/debian-10/Dockerfile)
-* [`20`, `20-debian-10`, `20.0.1`, `20.0.1-debian-10-r164`, `latest` (20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/20.0.1-debian-10-r164/20/debian-10/Dockerfile)
+* [`22`, `22-debian-10`, `22.0.0`, `22.0.0-debian-10-r2`, `latest` (22/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/22.0.0-debian-10-r2/22/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wildfly GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
 
@@ -65,7 +63,7 @@ $ docker pull bitnami/wildfly:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/wildfly:latest 'https://github.com/bitnami/bitnami-docker-wildfly.git#master:20/debian-10'
+$ docker build -t bitnami/wildfly:latest 'https://github.com/bitnami/bitnami-docker-wildfly.git#master:22/debian-10'
 ```
 
 # Persisting your application
