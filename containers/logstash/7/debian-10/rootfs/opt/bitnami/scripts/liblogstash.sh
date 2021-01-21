@@ -160,9 +160,9 @@ logstash_set_heap_size() {
         if [[ "$machine_mem" -lt 65536 ]]; then
             local max_allowed_memory
             local calculated_heap_size
-            calculated_heap_size="$(("$machine_mem" / 2))"
-            max_allowed_memory="$(("$LOGSTASH_MAX_ALLOWED_MEMORY_PERCENTAGE" * "$machine_mem"))"
-            max_allowed_memory="$(("$max_allowed_memory" / 100))"
+            calculated_heap_size="$((machine_mem / 2))"
+            max_allowed_memory="$((LOGSTASH_MAX_ALLOWED_MEMORY_PERCENTAGE * machine_mem))"
+            max_allowed_memory="$((max_allowed_memory / 100))"
             if [[ "$calculated_heap_size" -gt "$max_allowed_memory" ]]; then
                 info "Calculated Java heap size of ${calculated_heap_size} will be limited to ${max_allowed_memory}"
                 calculated_heap_size="$max_allowed_memory"
