@@ -42,8 +42,8 @@ export DOKUWIKI_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/dokuwiki"
 export DOKUWIKI_DATA_TO_PERSIST="${DOKUWIKI_DATA_TO_PERSIST:-data conf lib/plugins lib/tpl lib/images/smileys/local lib/images/interwiki}"
 
 # DokuWiki configuration
-export DOKUWIKI_USERNAME="${DOKUWIKI_USERNAME:-superuser}"
-export DOKUWIKI_FULL_NAME="${DOKUWIKI_FULL_NAME:-Full Name}"
+export DOKUWIKI_USERNAME="${DOKUWIKI_USERNAME:-user}"
+export DOKUWIKI_FULL_NAME="${DOKUWIKI_FULL_NAME:-FirstName LastName}"
 export DOKUWIKI_EMAIL="${DOKUWIKI_EMAIL:-user@example.com}"
 export DOKUWIKI_PASSWORD="${DOKUWIKI_PASSWORD:-bitnami1}"
 export DOKUWIKI_WIKI_NAME="${DOKUWIKI_WIKI_NAME:-Bitnami DokuWiki}"
