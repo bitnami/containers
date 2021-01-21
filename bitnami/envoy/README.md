@@ -28,7 +28,8 @@ $ docker run --name envoy bitnami/envoy:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.17.0`, `1.17.0-debian-10-r1`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.17.0-debian-10-r1/1/debian-10/Dockerfile)
+* [`1.17`, `1.17-debian-10`, `1.17.0`, `1.17.0-debian-10-r1`, `latest` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.17.0-debian-10-r1/1.17/debian-10/Dockerfile)
+* [`1.16`, `1.16-debian-10`, `1.16.2`, `1.16.2-debian-10-r37` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.16.2-debian-10-r37/1.16/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/envoy GitHub repo](https://github.com/bitnami/bitnami-docker-envoy).
 
@@ -49,7 +50,7 @@ $ docker pull bitnami/envoy:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/envoy:latest 'https://github.com/bitnami/bitnami-docker-envoy.git#master:1/debian-10'
+$ docker build -t bitnami/envoy:latest 'https://github.com/bitnami/bitnami-docker-envoy.git#master:1.17/debian-10'
 ```
 
 # Configuration
