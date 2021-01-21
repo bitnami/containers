@@ -573,7 +573,15 @@ EOF
         warn "Node already initialized."
         return 0
     fi
-    grep -q "\"ok\" : 1" <<< "$result"
+    
+    if ! grep -q "\"ok\" : 1" <<< "$result"; then
+        warn "Problem initating replica set
+            request: rs.initiate({\"_id\":\"$MONGODB_REPLICA_SET_NAME\", \"members\":[{\"_id\":0,\"host\":\"$node:$MONGODB_PORT_NUMBER\",\"priority\":5}]})
+            response: $result"
+        return 1
+    fi
+
+    return 0
 }
 
 
