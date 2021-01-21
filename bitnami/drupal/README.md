@@ -41,8 +41,8 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`9`, `9-debian-10`, `9.1.2`, `9.1.2-debian-10-r8`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/9.1.2-debian-10-r8/9/debian-10/Dockerfile)
-* [`8`, `8-debian-10`, `8.9.12`, `8.9.12-debian-10-r8` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.9.12-debian-10-r8/8/debian-10/Dockerfile)
+* [`9`, `9-debian-10`, `9.1.3`, `9.1.3-debian-10-r-1`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/9.1.3-debian-10-r-1/9/debian-10/Dockerfile)
+* [`8`, `8-debian-10`, `8.9.13`, `8.9.13-debian-10-r0` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.9.13-debian-10-r0/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal GitHub repo](https://github.com/bitnami/bitnami-docker-drupal).
 
@@ -244,12 +244,14 @@ Available environment variables:
 ##### Create a database for Drupal using mysql-client
 
 - `MYSQL_CLIENT_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
-- `MYSQL_CLIENT_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
-- `MYSQL_CLIENT_ROOT_USER`: Database admin user. Default: **root**
-- `MYSQL_CLIENT_ROOT_PASSWORD`: Database password for the `MARIADB_ROOT_USER` user. No defaults.
+- `MYSQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
+- `MYSQL_CLIENT_DATABASE_ROOT_USER`: Database admin user. Default: **root**
+- `MYSQL_CLIENT_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No defaults.
 - `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No defaults.
 - `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
 - `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_CHARACTER_SET`: Character set to use for the new database. No defaults.
+- `MYSQL_CLIENT_CREATE_DATABASE_COLLATE`: Database collation to use for the new database. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
 ##### SMTP Configuration
@@ -264,13 +266,13 @@ To configure Drupal to send email using SMTP you can set the following environme
 
 ##### PHP configuration
 
+- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
 - `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. No default.
 - `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
 - `PHP_MAX_INPUT_VARS`: Maximum amount of input variables for PHP scripts. No default.
 - `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
 - `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
 - `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
-- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
 
 ##### Example
 
