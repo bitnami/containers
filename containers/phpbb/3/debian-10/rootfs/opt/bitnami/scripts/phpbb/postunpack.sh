@@ -36,6 +36,10 @@ for dir in "$PHPBB_BASE_DIR" "$PHPBB_VOLUME_DIR"; do
     configure_permissions_ownership "$dir" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root"
 done
 
+# Configure memory limit for PHP
+info "Configuring default PHP options for DokuWiki"
+php_conf_set memory_limit "$PHP_DEFAULT_MEMORY_LIMIT"
+
 # Enable default web server configuration for phpBB
 info "Creating default web server configuration for phpBB"
 web_server_validate
