@@ -184,7 +184,7 @@ Check the official [OpenLDAP Configuration Reference](https://www.openldap.org/d
 
 OpenLDAP clients and servers are capable of using the Transport Layer Security (TLS) framework to provide integrity and confidentiality protections and to support LDAP authentication using the SASL EXTERNAL mechanism. Should you desire to enable this optional feature, you may use the following enviroment variables to configure the application:
 
- - `LDAP_TLS_ENABLED`: Whether to enable TLS for traffic or not. Defaults to `no`.
+ - `LDAP_ENABLE_TLS`: Whether to enable TLS for traffic or not. Defaults to `no`.
  - `LDAP_LDAPS_PORT_NUMBER`: Port used for TLS secure traffic. Defaults to `1636`.
  - `LDAP_TLS_CERT_FILE`: File containing the certificate file for the TSL traffic. No defaults.
  - `LDAP_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
@@ -199,7 +199,7 @@ This new feature is not mutually exclusive, which means it is possible to listen
         -v /path/to/certs:/opt/bitnami/openldap/certs \
         -v /path/to/openldap-data-persistence:/bitnami/openldap/data \
         -e ALLOW_EMPTY_PASSWORD=yes \
-        -e LDAP_TLS_ENABLED=yes \
+        -e LDAP_ENABLE_TLS=yes \
         -e LDAP_TLS_CERT_FILE=/opt/bitnami/openldap/certs/openldap.crt \
         -e LDAP_TLS_KEY_FILE=/opt/bitnami/openldap/certs/openldap.key \
         -e LDAP_TLS_CA_FILE=/opt/bitnami/openldap/certs/openldapCA.crt \
@@ -214,7 +214,7 @@ This new feature is not mutually exclusive, which means it is possible to listen
       ...
         environment:
           ...
-          - LDAP_TLS_ENABLED=yes
+          - LDAP_ENABLE_TLS=yes
           - LDAP_TLS_CERT_FILE=/opt/bitnami/openldap/certs/openldap.crt
           - LDAP_TLS_KEY_FILE=/opt/bitnami/openldap/certs/openldap.key
           - LDAP_TLS_CA_FILE=/opt/bitnami/openldap/certs/openldapCA.crt
