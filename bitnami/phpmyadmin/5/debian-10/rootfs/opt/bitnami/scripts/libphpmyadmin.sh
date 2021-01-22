@@ -73,8 +73,8 @@ phpmyadmin_initialize() {
     ! is_empty_value "$PHPMYADMIN_ALLOW_ARBITRARY_SERVER" && info "Setting AllowArbitraryServer option" && phpmyadmin_conf_set "\$cfg['AllowArbitraryServer']" "$(php_convert_to_boolean "$PHPMYADMIN_ALLOW_ARBITRARY_SERVER")" yes
 
     # Support reverse proxy
-    ! is_empty_value "$PMA_ABSOLUTE_URI" && info "Setting PmaAbsoluteUri option" && phpmyadmin_conf_set "\$cfg['PmaAbsoluteUri']" "$PMA_ABSOLUTE_URI"
-    
+    ! is_empty_value "$PHPMYADMIN_ABSOLUTE_URI" && info "Setting PmaAbsoluteUri option" && phpmyadmin_conf_set "\$cfg['PmaAbsoluteUri']" "$PHPMYADMIN_ABSOLUTE_URI"
+
     # Configure database settings
     ! is_empty_value "$DATABASE_HOST" && info "Setting database host option" && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['host']" "$DATABASE_HOST"
     ! is_empty_value "$DATABASE_PORT_NUMBER" && info "Setting database port number option" && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['port']" "$DATABASE_PORT_NUMBER"
