@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.10.1`, `3.10.1-debian-10-r1`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.10.1-debian-10-r1/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.10.1`, `3.10.1-debian-10-r2`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.10.1-debian-10-r2/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/moodle GitHub repo](https://github.com/bitnami/bitnami-docker-moodle).
 
@@ -265,13 +265,13 @@ To configure Moodle<sup>TM</sup> to send email using SMTP you can set the follow
 
 ##### PHP configuration
 
+- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
 - `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. No default.
 - `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
 - `PHP_MAX_INPUT_VARS`: Maximum amount of input variables for PHP scripts. No default.
 - `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
 - `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
 - `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
-- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
 
 ##### Example
 
