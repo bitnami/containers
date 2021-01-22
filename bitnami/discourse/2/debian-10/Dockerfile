@@ -15,14 +15,14 @@ RUN bitnami-pkg unpack discourse-sidekiq-2.6.0-0 --checksum 6fcce674bccb7d88e094
 RUN bitnami-pkg install brotli-1.0.9-0 --checksum 710dd6f5c97af313d0e867e793bedc013aebe173f9c28d0fabc09a16d3100ab6
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
 RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
-RUN bitnami-pkg unpack discourse-2.6.0-0 --checksum 7e64c1d9b50e82f5a579388c4e5b6cb9e1223d9363ab1d050ebd160eb411b445
+RUN bitnami-pkg unpack discourse-2.6.1-0 --checksum 07f10b20b9186a80d1679a5b6c038a6db7b65d0d215e2fc24578fad24c192e8c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /opt/bitnami/ruby/bin/gem install --force bundler -v '< 2'
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.6.0-debian-10-r34" \
+    BITNAMI_IMAGE_VERSION="2.6.1-debian-10-r0" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_HOST="discourse" \
     DISCOURSE_HOSTNAME="127.0.0.1" \
