@@ -8,17 +8,17 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "81e35af4a12129edc3d2fdd6fd7c4fab2dbdd5fba74eab6fe4576381867a55ab",
+        "digest": "473d0ab64adfe82d84dd810c28e0f22242eeffbaf74a85febf7586ce013aa7ba",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.8.275-0"
+        "version": "1.8.282-0"
     },
     "spring-cloud-skipper": {
         "arch": "amd64",
-        "digest": "3ef12a4c65a6f5f252ced90215924963868cb9b8eee5a07d718210d366339ecb",
+        "digest": "dc0918f5b86ea9cfe8c0b358dc6c613a4cd69ef3f083573a8cb1ea0b88437037",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.6.0-0"
+        "version": "2.6.1-0"
     },
     "yq": {
         "arch": "amd64",
