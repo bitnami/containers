@@ -8,16 +8,16 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "81e35af4a12129edc3d2fdd6fd7c4fab2dbdd5fba74eab6fe4576381867a55ab",
+        "digest": "473d0ab64adfe82d84dd810c28e0f22242eeffbaf74a85febf7586ce013aa7ba",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.8.275-0"
+        "version": "1.8.282-0"
     },
     "spring-cloud-dataflow-composed-task-runner": {
         "arch": "amd64",
-        "digest": "fc903213713d77be84cb0071b89cd9292ab96d6ad1795981f59064bae67596b3",
+        "digest": "f75eca5e6c8baa921542bfc0b2d1e826bdebb2667d24e794bd18039f6d7e762e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.7.0-0"
+        "version": "2.7.1-0"
     }
 }
