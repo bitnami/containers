@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="kubectl" \
-    BITNAMI_IMAGE_VERSION="1.19.7-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="1.19.7-debian-10-r7" \
     PATH="/opt/bitnami/kubectl/bin:$PATH"
 
 USER 1001
