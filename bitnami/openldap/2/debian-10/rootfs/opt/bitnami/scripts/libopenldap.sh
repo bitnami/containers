@@ -49,6 +49,7 @@ export LDAP_ADMIN_USERNAME="${LDAP_ADMIN_USERNAME:-admin}"
 export LDAP_ADMIN_DN="${LDAP_ADMIN_USERNAME/#/cn=},${LDAP_ROOT}"
 export LDAP_ADMIN_PASSWORD="${LDAP_ADMIN_PASSWORD:-adminpassword}"
 export LDAP_ENCRYPTED_ADMIN_PASSWORD="$(echo -n $LDAP_ADMIN_PASSWORD | slappasswd -n -T /dev/stdin)"
+export LDAP_EXTRA_SCHEMAS="${LDAP_EXTRA_SCHEMAS:-cosine,inetorgperson,nis}"
 export LDAP_SKIP_DEFAULT_TREE="${LDAP_SKIP_DEFAULT_TREE:-no}"
 export LDAP_USERS="${LDAP_USERS:-user01,user02}"
 export LDAP_PASSWORDS="${LDAP_PASSWORDS:-bitnami1,bitnami2}"
@@ -248,9 +249,10 @@ EOF
 #########################
 ldap_add_schemas() {
     info "Adding LDAP extra schemas"
-    debug_execute ldapadd -Y EXTERNAL -H "ldapi:///" -f "${LDAP_CONF_DIR}/schema/cosine.ldif"
-    debug_execute ldapadd -Y EXTERNAL -H "ldapi:///" -f "${LDAP_CONF_DIR}/schema/inetorgperson.ldif"
-    debug_execute ldapadd -Y EXTERNAL -H "ldapi:///" -f "${LDAP_CONF_DIR}/schema/nis.ldif"
+    read -r -a schemas <<< "$(tr ',;' ' ' <<< "${LDAP_EXTRA_SCHEMAS}")"
+    for schema in "${schemas[@]}"; do
+        debug_execute ldapadd -Y EXTERNAL -H "ldapi:///" -f "${LDAP_CONF_DIR}/schema/${schema}.ldif"
+    done
 }
 
 ########################
