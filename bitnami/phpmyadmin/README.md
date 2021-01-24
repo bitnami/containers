@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`5`, `5-debian-10`, `5.0.4`, `5.0.4-debian-10-r93`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/5.0.4-debian-10-r93/5/debian-10/Dockerfile)
+* [`5`, `5-debian-10`, `5.0.4`, `5.0.4-debian-10-r94`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/5.0.4-debian-10-r94/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpmyadmin GitHub repo](https://github.com/bitnami/bitnami-docker-phpmyadmin).
 
@@ -172,6 +172,7 @@ The phpMyAdmin instance can be customized by specifying environment variables on
 
 - `PHPMYADMIN_ALLOW_ARBITRARY_SERVER`: Allows you to enter database server hostname on login form. Default: **false**
 - `PHPMYADMIN_ALLOW_REMOTE_CONNECTIONS`: Whether to allow access from any source. When disabled, only connections from 127.0.0.1 will be allowed. Default: **yes**
+- `PHPMYADMIN_ABSOLUTE_URI`: If specified, absolute URL to phpMyAdmin when generating links. No defaults
 - `DATABASE_ALLOW_NO_PASSWORD`: Whether to allow logins without a password. Default: **yes**
 - `DATABASE_HOST`: Database server host. Default: **mariadb**
 - `DATABASE_PORT_NUMBER`: Database server port. Default: **3306**
