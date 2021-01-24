@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.4.1`, `2.4.1-debian-10-r82`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.4.1-debian-10-r82/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.4.1`, `2.4.1-debian-10-r83`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.4.1-debian-10-r83/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/magento GitHub repo](https://github.com/bitnami/bitnami-docker-magento).
 
@@ -123,7 +123,7 @@ Access your application at *http://your-ip/*
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a directory at the `/bitnami/magento` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should mount a volume for persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
+For persistence you should mount a directory at the `/bitnami/magento` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should mount a volume for persistence of the [MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
 
 The above examples define the Docker volumes named `mariadb_data` and `magento_data`. The Magento application state will persist as long as volumes are not removed.
 
@@ -292,13 +292,13 @@ Available environment variables:
 
 ##### PHP configuration
 
+- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
 - `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. Default: **18000**
 - `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
 - `PHP_MAX_INPUT_VARS`: Maximum amount of input variables for PHP scripts. No default.
 - `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **756M**
 - `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
 - `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
-- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
 
 ## Logging
 
@@ -385,46 +385,54 @@ In order to properly upgrade Magento, you will need Magento authentication keys 
 
 ##### Step 3: Preparing the Docker container for the upgrade
 
-* Enter the container shell (e.g. `docker exec -u root ...`).
+* Enter the container shell as the `root` user (e.g. `docker exec -u root ...`).
 
 * Only if the container is running as `root` user, disable cron jobs and wait for any pending jobs to complete:
 
-        $ sed -i 's/^/#/' /etc/cron.d/magento
+    ```console
+    $ sed -i 's/^/#/' /etc/cron.d/magento
+    ```
 
 * Increase the PHP `memory_limit` to an apropriate value for the upgrade commands to work, such as `2G`:
 
-        $ sed -i 's/memory_limit = .*/memory_limit = 2G/' /opt/bitnami/php/etc/php.ini
+    ```console
+    $ sed -i 's/memory_limit = .*/memory_limit = 2G/' /opt/bitnami/php/etc/php.ini
+    ```
 
 * Backup `composer.json`:
 
-        $ cp /opt/bitnami/magento/composer.json /opt/bitnami/magento/composer.json.bak
+    ```console
+    $ cp /opt/bitnami/magento/composer.json /opt/bitnami/magento/composer.json.bak
+    ```
 
 ##### Step 4: Update Magento to the desired version
 
 * Only if the container is running as `root` user, login as the web server user before executing the below command:
 
-        $ su daemon -s /bin/bash
+    ```console
+    $ su daemon -s /bin/bash
+    ```
 
 * To avoid user access to your Magento site while you are upgrading, enable maintenance mode:
 
-        $ magento maintenance:enable
-
-* Enter the container shell (e.g. `docker exec -u root ...`).
-
-* Only if the container is running as `root` user, disable cron jobs:
-
-        $ sed -i 's/^/#/' /etc/cron.d/magento
+    ```console
+    $ magento maintenance:enable
+    ```
 
 * Update your Magento requirement to the new desired version in `composer.json`. At this point, you will be asked to provide credentials to access `repo.magento.com`. Enter the authentication keys obtained in Step 1.
 
-        $ cd /opt/bitnami/magento
-        $ composer require magento/product-community-edition=VERSION --no-update
+    ```console
+    $ cd /opt/bitnami/magento
+    $ composer require magento/product-community-edition=VERSION --no-update
+    ```
 
     > NOTE: Replace the `VERSION` placeholder with an appropriate value, i.e.: `2.4.1`
 
 * Update your installation. You will also be asked to provide the same credentials provided in the previous step.
 
-        $ composer update
+    ```console
+    $ composer update
+    ```
 
     > NOTE: If you see an error similar to this while executing the above command, you will need to increase the PHP `memory_limit` configuration to an even higher value.
     >
@@ -434,17 +442,23 @@ In order to properly upgrade Magento, you will need Magento authentication keys 
 
 * Clear the `var/` and `generated/` directories:
 
-        $ rm -rf /opt/bitnami/magento/var/cache/*
-        $ rm -rf /opt/bitnami/magento/var/page_cache/*
-        $ rm -rf /opt/bitnami/magento/generated/*
+    ```console
+    $ rm -rf /opt/bitnami/magento/var/cache/*
+    $ rm -rf /opt/bitnami/magento/var/page_cache/*
+    $ rm -rf /opt/bitnami/magento/generated/*
+    ```
 
 * Upgrade the Magento database schema:
 
-        $ magento setup:upgrade
+    ```console
+    $ magento setup:upgrade
+    ```
 
 * Finally, disable maintenance mode to complete the upgrade:
 
-        $ magento maintenance:disable
+    ```console
+    $ magento maintenance:disable
+    ```
 
 ##### Step 5: Restart Docker container
 
