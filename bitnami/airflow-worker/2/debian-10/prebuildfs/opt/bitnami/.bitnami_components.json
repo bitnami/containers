@@ -1,10 +1,10 @@
 {
     "airflow-worker": {
         "arch": "amd64",
-        "digest": "7c68c7e887588743282b3b05afe64569e8846343035321f601a69cba6abf3c85",
+        "digest": "dea1688bec9e2a10162195ca730a85baed705eddde6c5930b7307c6aeb91d62c",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.0.0-1"
+        "version": "2.0.0-2"
     },
     "gosu": {
         "arch": "amd64",
@@ -22,10 +22,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "cc3e62e05463929529214f65cb7922794c758a3db5ca29bf5c9a59fe66e95b80",
+        "digest": "0260b82a35d5c19c653e1e0605690d4e13b6c16d590a60127c7994216a427486",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.6.12-10"
+        "version": "3.8.7-4"
     },
     "tini": {
         "arch": "amd64",
