@@ -15,10 +15,10 @@
     },
     "neo4j": {
         "arch": "amd64",
-        "digest": "3240982926e513bfdc6db3d19a919a07b0c02185dea54e14ac04858c476baa3a",
+        "digest": "e2429026766e1f3134cc9d31e0a6db5fbf77561950b9845f052c3ede5fcf2885",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.1.3-0"
+        "version": "4.1.6-0"
     },
     "tini": {
         "arch": "amd64",
