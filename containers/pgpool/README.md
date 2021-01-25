@@ -260,6 +260,7 @@ Pgpool configuration:
 - `PGPOOL_ADMIN_USERNAME`: Username for the pgpool administrator. No defaults.
 - `PGPOOL_ADMIN_PASSWORD`: Password for the user set in `PGPOOL_ADMIN_USERNAME` environment variable. No defaults.
 - `PGPOOL_HEALTH_CHECK_USER`: Specifies the PostgreSQL user name to perform health check. Defaults to value set in `PGPOOL_SR_CHECK_USER`.
+- `PGPOOL_HEALTH_CHECK_PASSWORD`: Specifies the PostgreSQL user password to perform health check. Defaults to value set in `PGPOOL_SR_CHECK_PASSWORD`.
 - `PGPOOL_HEALTH_CHECK_PERIOD`: Specifies the interval between the health checks in seconds. Defaults to `30`.
 - `PGPOOL_HEALTH_CHECK_TIMEOUT`: Specifies the timeout in seconds to give up connecting to the backend PostgreSQL if the TCP connect does not succeed within this time. Defaults to `10`.
 - `PGPOOL_HEALTH_CHECK_MAX_RETRIES`: Specifies the maximum number of retries to do before giving up and initiating failover when health check fails. Defaults to `5`.
