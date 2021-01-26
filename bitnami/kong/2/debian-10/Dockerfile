@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 libpcre3 libssl1.1 libyaml-0-2 perl procps tar zlib1g zlib1g-dev
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kong" "2.3.0-0" --checksum 386c85f1d28778dc41808d54fbfb5012cfdd8fdd81793be00c62dca4178d9483
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kong" "2.3.1-0" --checksum 36aa5d0e7ac626367a9663cbd321751b9d1706d2c2512c01ff7342943bd47518
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -18,7 +18,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/kong/postunpack.sh
 ENV BITNAMI_APP_NAME="kong" \
-    BITNAMI_IMAGE_VERSION="2.3.0-debian-10-r9" \
+    BITNAMI_IMAGE_VERSION="2.3.1-debian-10-r0" \
     PATH="/opt/bitnami/kong/bin:/opt/bitnami/kong/openresty/bin:/opt/bitnami/kong/openresty/luajit/bin:/opt/bitnami/kong/openresty/nginx/sbin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8000 8001 8443 8444
