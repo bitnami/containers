@@ -37,6 +37,11 @@ rabbitmq_validate() {
             print_validation_error "An invalid value was specified in the environment variable ${1}. Valid values are: yes or no"
         fi
     }
+    check_true_false_value() {
+        if ! is_yes_no_value "${!1}" && ! is_true_false_value "${!1}"; then
+            print_validation_error "An invalid value was specified in the environment variable ${1}. Valid values are: true or false"
+        fi
+    }
     check_multi_value() {
         if [[ " ${2} " != *" ${!1} "* ]]; then
             print_validation_error "The allowed values for ${1} are: ${2}"
@@ -62,6 +67,14 @@ rabbitmq_validate() {
         fi
     }
 
+    check_fqdn() {
+        if [[ "${!1}" == *.* ]]; then
+            if [[ "${RABBITMQ_USE_LONGNAME}" = false ]] ; then
+                print_validation_error "The node name appears to be a fully qualified hostname and RABBITMQ_USE_LONGNAME is not set."
+            fi
+        fi
+    }
+
     check_yes_no_value "RABBITMQ_LOAD_DEFINITIONS"
     check_yes_no_value "RABBITMQ_SECURE_PASSWORD"
     check_yes_no_value "RABBITMQ_ENABLE_LDAP"
@@ -69,6 +82,8 @@ rabbitmq_validate() {
     check_conflicting_ports "RABBITMQ_MANAGEMENT_PORT_NUMBER" "RABBITMQ_NODE_PORT_NUMBER" "RABBITMQ_MANAGEMENT_SSL_PORT_NUMBER" "RABBITMQ_NODE_SSL_PORT_NUMBER"
     check_multi_value "RABBITMQ_SSL_VERIFY" "verify_none verify_peer"
     check_multi_value "RABBITMQ_MANAGEMENT_SSL_VERIFY" "verify_none verify_peer"
+    check_true_false_value "RABBITMQ_USE_LONGNAME"
+    check_fqdn "RABBITMQ_NODE_NAME"
 
     if is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS"; then
         is_boolean_yes "$RABBITMQ_SECURE_PASSWORD" && "The RABBITMQ_LOAD_DEFINITIONS and RABBITMQ_SECURE_PASSWORD environment variables cannot be enabled at once."
