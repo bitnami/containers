@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.4.57`, `2.4.57-debian-10-r5`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.4.57-debian-10-r5/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.4.57`, `2.4.57-debian-10-r6`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.4.57-debian-10-r6/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/openldap GitHub repo](https://github.com/bitnami/bitnami-docker-openldap).
 
@@ -175,6 +175,7 @@ The Bitnami Docker OpenLDAP can be easily setup with the following environment v
 - `LDAP_PASSWORDS`: Comma separated list of passwords to use for LDAP users. Default: **bitnami1,bitnami2**
 - `LDAP_USER_DC`: DC for the users' organizational unit. Default: **users**
 - `LDAP_GROUP`: Group used to group created users. Default: **readers**
+- `LDAP_EXTRA_SCHEMAS`: Extra schemas to add, among OpenLDAP's distributed schemas. Default: **cosine, inetorgperson, nis**
 - `LDAP_SKIP_DEFAULT_TREE`: Whether to skip creating the default LDAP tree based on `LDAP_USERS`, `LDAP_PASSWORDS`, `LDAP_USER_DC` and `LDAP_GROUP`. Default: **no**
 - `LDAP_CUSTOM_LDIF_DIR`: Location of a directory that contains LDIF files that should be used to bootstrap the database. Only files ending in `.ldif` will be used. Default LDAP tree based on the `LDAP_USERS`, `LDAP_PASSWORDS`, `LDAP_USER_DC` and `LDAP_GROUP` will be skipped when `LDAP_CUSTOM_LDIF_DIR` is used. When using this will override the usage of `LDAP_ROOT`,`LDAP_USERS`, `LDAP_PASSWORDS`, `LDAP_USER_DC` and `LDAP_GROUP`. Default: **/ldifs**
 
