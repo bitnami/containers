@@ -166,7 +166,7 @@ suitecrm_initialize() {
     # Ensure SuiteCRM cron jobs are created when running setup with a root user
     cron_cmd=(cd "${SUITECRM_BASE_DIR};" "${PHP_BIN_DIR}/php" "-f" "cron.php")
     if am_i_root; then
-        generate_cron_conf "suitecrm" "${cron_cmd[*]} > /dev/null 2>&1" --schedule "*/1 * * * *"
+        generate_cron_conf "suitecrm" "${cron_cmd[*]} > /dev/null 2>&1" --run-as "$WEB_SERVER_DAEMON_USER" --schedule "*/1 * * * *"
     else
         warn "Skipping cron configuration for SuiteCRM because of running as a non-root user"
     fi
