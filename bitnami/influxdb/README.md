@@ -37,7 +37,8 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.8.4`, `1.8.4-debian-10-r0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/1.8.4-debian-10-r0/1/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.0.2`, `2.0.2-debian-10-r0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/2.0.2-debian-10-r0/2/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.8.4`, `1.8.4-debian-10-r0` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/1.8.4-debian-10-r0/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/influxdb GitHub repo](https://github.com/bitnami/bitnami-docker-influxdb).
 
@@ -58,7 +59,7 @@ $ docker pull bitnami/influxdb:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/influxdb:latest 'https://github.com/bitnami/bitnami-docker-influxdb.git#master:1/debian-10'
+$ docker build -t bitnami/influxdb:latest 'https://github.com/bitnami/bitnami-docker-influxdb.git#master:2/debian-10'
 ```
 
 # Persisting your application
@@ -158,11 +159,12 @@ $ docker-compose up -d
 
 # Configuration
 
-InfluxDB (TM) can be configured via environment variables (prefixed with `INFLUXDB_`) or using a configuration file (`influxdb.conf`). If a configuration option is not specified in either the configuration file or in an environment variable, InfluxDB (TM) uses its internal default configuration.
+InfluxDB (TM) can be configured via environment variables or using a configuration file (`influxdb.conf`). If a configuration option is not specified in either the configuration file or in an environment variable, InfluxDB (TM) uses its internal default configuration.
+
+- If you are using v1, variables must be prefixed by `INFLUXDB_`, find more [here](https://docs.influxdata.com/influxdb/v1.8/administration/config/).
+- If you are using v2, variables must be prefixed by `INFLUXD_`, find more [here](https://docs.influxdata.com/influxdb/v2.0/reference/config-options).
 
 > Note: The settings at the environment variables override the equivalent options in the configuration file."
-
-Find more information about all the available configuration options in the [official documentation](https://docs.influxdata.com/influxdb/v1.7/administration/config/).
 
 ## Configuration file
 
@@ -217,11 +219,11 @@ services:
   ...
 ```
 
-**Warning** In case you want to allow users to access the database without credentials, set the environment variable `INFLUXDB_HTTP_AUTH_ENABLED=false`. **This is recommended only for development**.
+**Warning** In case you want to allow users to access the database without credentials, set the environment variable `INFLUXDB_HTTP_AUTH_ENABLED=false`. **This is recommended only for development**. If you are using InfluxDB (TM) v2 authentication is required and `INFLUXDB_HTTP_AUTH_ENABLED` will be ignored.
 
 ## Allowing empty passwords
 
-By default the InfluxDB (TM) image expects all the available passwords to be set. In order to allow empty passwords, it is necessary to set the `INFLUXDB_HTTP_AUTH_ENABLED=false` env variable. This env variable is only recommended for testing or development purposes. We strongly recommend specifying the `INFLUXDB_ADMIN_USER_PASSWORD` for any other scenario.
+By default the InfluxDB (TM) image expects all the available passwords to be set. In order to allow empty passwords, it is necessary to set the `INFLUXDB_HTTP_AUTH_ENABLED=false` env variable. This env variable is only recommended for testing or development purposes. We strongly recommend specifying the `INFLUXDB_ADMIN_USER_PASSWORD` for any other scenario. If you are using InfluxDB (TM) v2, authentication is required and `INFLUXDB_HTTP_AUTH_ENABLED` will be ignored.
 
 ```console
 $ docker run --name influxdb --env INFLUXDB_HTTP_AUTH_ENABLED=false bitnami/influxdb:latest
@@ -240,13 +242,13 @@ services:
 
 ## Creating a database on first run
 
-By passing the `INFLUXDB_DB` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the InfluxDB (TM) client.
+If you are using InfluxDB (TM) v1 you can pass `INFLUXDB_DB` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the InfluxDB (TM) client.
 
 ```console
 $ docker run --name influxdb \
     -e INFLUXDB_ADMIN_USER_PASSWORD=password123 \
     -e INFLUXDB_DB=my_database \
-    bitnami/influxdb:latest
+    bitnami/influxdb:1-debian-10
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-influxdb/blob/master/docker-compose.yml) file present in this repository:
@@ -259,6 +261,15 @@ services:
       - INFLUXDB_ADMIN_USER_PASSWORD=password123
       - INFLUXDB_DB=my_database
   ...
+```
+
+For If you are using InfluxDB (TM) v2 you can pass `INFLUXDB_USER_BUCKET` environment variable when running the image for the first time, a new bucket will be created. This is useful if your application requires that a bucket already exists, saving you from having to manually create the bucket using the InfluxDB (TM) CLI.
+
+```console
+$ docker run --name influxdb \
+    -e INFLUXDB_ADMIN_USER_PASSWORD=password123 \
+    -e INFLUXDB_USER_BUCKET=my_bucket \
+    bitnami/influxdb:latest
 ```
 
 ## Creating a database user on first run
@@ -325,7 +336,6 @@ services:
 ```
 
 - `INFLUXDB_HTTP_READINESS_TIMEOUT`: Spacify the time to wait until the HTTP endpoint is ready in seconds. Default: 60
-
 
 # Logging
 
