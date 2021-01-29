@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.263.3`, `2.263.3-debian-10-r3`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.263.3-debian-10-r3/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.263.3`, `2.263.3-debian-10-r4`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.263.3-debian-10-r4/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jenkins GitHub repo](https://github.com/bitnami/bitnami-docker-jenkins).
 
@@ -409,6 +409,12 @@ $ docker run -d --name jenkins \
 ```
 
 # Notable Changes
+
+## 2.263.3-debian-10-rXX
+
+- The deprecated plugins below are not included in the image by default anymore:
+  - [GitHub Organization Folder](https://plugins.jenkins.io/github-organization-folder).
+  - [Pipeline: Declarative Agent API](https://plugins.jenkins.io/pipeline-model-declarative-agent).
 
 ## 2.222.1-debian-10-r17
 
