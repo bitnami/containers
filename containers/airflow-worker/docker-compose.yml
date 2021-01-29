@@ -16,7 +16,7 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
   airflow-worker:
-    image: docker.io/bitnami/airflow-worker:1-debian-10
+    image: docker.io/bitnami/airflow-worker:2-debian-10
     environment:
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
