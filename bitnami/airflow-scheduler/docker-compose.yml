@@ -1,7 +1,7 @@
 version: '2'
 services:
   airflow-scheduler:
-    image: docker.io/bitnami/airflow-scheduler:1-debian-10
+    image: docker.io/bitnami/airflow-scheduler:2-debian-10
     environment:
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
