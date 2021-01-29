@@ -457,8 +457,7 @@ kafka_create_sasl_scram_zookeeper_users() {
 ########################
 # Configure Kafka SSL settings
 # Globals:
-#   KAFKA_CERTIFICATE_PASSWORD
-#   KAFKA_CONF_DIR
+#   KAFKA_*
 # Arguments:
 #   None
 # Returns:
