@@ -14,7 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.46-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.27-0" --checksum f96905e763a6334b75a7cdb07f8d89658cde02be41cb09d91d0682fc649fdcff
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.26-0" --checksum 2011a6ddd6853afd60b0399ff5c334f7b6b131f90c0e326115d28a06de6b262b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "phpbb" "3.3.2-0" --checksum fcd90205f54f0be117908812e0db0c50c185859e49da884d9ad9d535a4e9efae
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "phpbb" "3.3.3-0" --checksum 1e3508fbbf0367d8e05520c39f345ac681ee3a0b5376fa9a2392362125412dba
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -31,7 +31,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="phpbb" \
-    BITNAMI_IMAGE_VERSION="3.3.2-debian-10-r76" \
+    BITNAMI_IMAGE_VERSION="3.3.3-debian-10-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
