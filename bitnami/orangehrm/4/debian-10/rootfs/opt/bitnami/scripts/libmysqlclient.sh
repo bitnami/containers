@@ -534,7 +534,6 @@ mysql_ensure_user_exists() {
     local use_ldap="no"
     local hosts
     local auth_string=""
-    local ssl_ca=""
     # For accessing an external database
     local db_host=""
     local db_port=""
