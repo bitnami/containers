@@ -3,6 +3,7 @@
 # Bitnami InfluxDB library
 
 # shellcheck disable=SC1091
+# shellcheck disable=SC1090
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/liblog.sh
@@ -47,10 +48,26 @@ export INFLUXDB_PORT_NUMBER="${INFLUXDB_PORT_NUMBER:-8088}"
 export INFLUXDB_BIND_ADDRESS="${INFLUXDB_BIND_ADDRESS:-0.0.0.0:${INFLUXDB_PORT_NUMBER}}"
 # Authentication
 export INFLUXDB_ADMIN_USER="${INFLUXDB_ADMIN_USER:-admin}"
+export INFLUXDB_ADMIN_CONFIG_NAME="${INFLUXDB_ADMIN_CONFIG_NAME:-default}"
+export INFLUXDB_ADMIN_ORG="${INFLUXDB_ADMIN_ORG:-primary}"
+export INFLUXDB_ADMIN_BUCKET="${INFLUXDB_ADMIN_BUCKET:-primary}"
+export INFLUXDB_ADMIN_RETENTION="${INFLUXDB_ADMIN_RETENTION:-0}"
 export INFLUXDB_USER="${INFLUXDB_USER:-}"
+export INFLUXDB_USER_ORG="${INFLUXDB_USER_ORG:-${INFLUXDB_ADMIN_ORG}}"
+export INFLUXDB_USER_BUCKET="${INFLUXDB_USER_BUCKET:-}"
+export INFLUXDB_CREATE_USER_TOKEN="${INFLUXDB_CREATE_USER_TOKEN:-no}"
 export INFLUXDB_READ_USER="${INFLUXDB_READ_USER:-}"
 export INFLUXDB_WRITE_USER="${INFLUXDB_WRITE_USER:-}"
 export INFLUXDB_DB="${INFLUXDB_DB:-}"
+
+# V2 required env vars aliases
+export INFLUXD_ENGINE_PATH="${INFLUXDB_VOLUME_DIR}"
+export INFLUXD_BOLT_PATH="${INFLUXDB_VOLUME_DIR}/influxd.bolt"
+export INFLUXD_CONFIG_PATH="${INFLUXDB_CONF_DIR}/influxdb.conf"
+export INFLUX_CONFIGS_PATH="${INFLUXDB_VOLUME_DIR}/configs"
+
+export INFLUXD_HTTP_BIND_ADDRESS="${INFLUXDB_HTTP_BIND_ADDRESS}"
+
 EOF
     # The configuration can be provided in a configuration file or environment variables
     # This setting is necessary to determine certain validations/actions during the
@@ -61,7 +78,7 @@ INFLUXDB_HTTP_AUTH_ENABLED="${INFLUXDB_HTTP_AUTH_ENABLED:-$(influxdb_conf_get "a
 export INFLUXDB_HTTP_AUTH_ENABLED="${INFLUXDB_HTTP_AUTH_ENABLED:-true}"
 EOF
     else
-    cat <<"EOF"
+        cat <<"EOF"
 export INFLUXDB_HTTP_AUTH_ENABLED="${INFLUXDB_HTTP_AUTH_ENABLED:-true}"
 EOF
     fi
@@ -74,6 +91,15 @@ EOF
     else
         cat <<"EOF"
 export INFLUXDB_ADMIN_USER_PASSWORD="${INFLUXDB_ADMIN_USER_PASSWORD:-}"
+EOF
+    fi
+    if [[ -f "${INFLUXDB_ADMIN_USER_TOKEN_FILE:-}" ]]; then
+        cat <<"EOF"
+export INFLUXDB_ADMIN_USER_TOKEN="$(< "${INFLUXDB_ADMIN_USER_TOKEN_FILE}")"
+EOF
+    else
+        cat <<"EOF"
+export INFLUXDB_ADMIN_USER_TOKEN="${INFLUXDB_ADMIN_USER_TOKEN:-}"
 EOF
     fi
     if [[ -f "${INFLUXDB_USER_PASSWORD_FILE:-}" ]]; then
@@ -106,6 +132,31 @@ EOF
 }
 
 ########################
+# Get InfluxDB branch (for compatibility purposes)
+# Globals:
+#   INFLUXDB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+influxdb_branch() {
+    local -r version=$(influx version 2>/dev/null || influx -version)
+    debug "Calculate branch with: ${version}"
+
+    local branch
+    if [[ "${version}" =~ 2\.[0-9]+\.[0-9]+ ]]; then
+        branch="2"
+    elif [[ "${version}" =~ 1\.[0-9]+\.[0-9]+ ]]; then
+        branch="1"
+    else
+        error "not supported branch: ${version}"
+    fi
+
+    echo "${branch}"
+}
+
+########################
 # Validate settings in INFLUXDB_* env vars
 # Globals:
 #   INFLUXDB_*
@@ -115,6 +166,7 @@ EOF
 #   None
 #########################
 influxdb_validate() {
+    local -r branch="$(influxdb_branch)"
     local error_code=0
     debug "Validating settings in INFLUXDB_* env vars..."
 
@@ -146,32 +198,50 @@ influxdb_validate() {
 
     # InfluxDB secret files validations
     local -a user_envs=("INFLUXDB_ADMIN_USER" "INFLUXDB_USER" "INFLUXDB_READ_USER" "INFLUXDB_WRITE_USER")
-    local -a pwd_file_envs=( "${user_envs[@]/%/_PASSWORD_FILE}" )
+    local -a pwd_file_envs=("${user_envs[@]/%/_PASSWORD_FILE}")
+    if [[ "${branch}" = "2" ]]; then
+        pwd_file_envs=("INFLUXDB_ADMIN_USER_PASSWORD_FILE" "INFLUXDB_ADMIN_USER_TOKEN_FILE" "INFLUXDB_USER_PASSWORD_FILE")
+    fi
     for pwd_file in "${pwd_file_envs[@]}"; do
         check_password_file "$pwd_file"
     done
 
     # InfluxDB booleans validations
-    read -r -a boolean_envs <<< "$(compgen -A variable | grep -E "INFLUXDB_.*_(ENABLED|DISABLED)" | tr '\r\n' ' ')"
-    for boolean_env in "${boolean_envs[@]}"; do
-        check_true_false_value "$boolean_env"
-    done
+    if [[ "${branch}" = "1" ]]; then
+        read -r -a boolean_envs <<<"$(compgen -A variable | grep -E "INFLUXDB_.*_(ENABLED|DISABLED)" | tr '\r\n' ' ')"
+        for boolean_env in "${boolean_envs[@]}"; do
+            check_true_false_value "$boolean_env"
+        done
+    fi
 
     # InfluxDB authentication validations
-    if ! is_boolean_yes "$INFLUXDB_HTTP_AUTH_ENABLED"; then
-        warn "Authentication is disabled over HTTP and HTTPS. For safety reasons, enable it in a production environment."
-        for user in "${user_envs[@]}"; do
-            if [[ -n "${!user:-}" ]]; then
-                warn "The ${user} environment variable will be ignored since authentication is disabled."
-            fi
-        done
+    if [[ "$branch" = "2" ]]; then
+        if [[ -z "${INFLUXDB_ADMIN_USER_PASSWORD:-}" ]]; then
+            print_validation_error "Primary config authentication is required. Please, specify a password for the ${INFLUXDB_ADMIN_USER} user by setting the 'INFLUXDB_ADMIN_USER_PASSWORD' or 'INFLUXDB_ADMIN_USER_PASSWORD_FILE' environment variables."
+        fi
+        if [[ -z "${INFLUXDB_ADMIN_USER_TOKEN:-}" ]]; then
+            print_validation_error "Primary config authentication is required. Please, specify a token for the ${INFLUXDB_ADMIN_USER} user by setting the 'INFLUXDB_ADMIN_USER_TOKEN' or 'INFLUXDB_ADMIN_USER_TOKEN_FILE' environment variables."
+        fi
+
+        if [[ -n "${INFLUXDB_USER:-}" ]] && [[ -z "${INFLUXDB_USER_PASSWORD:-}" ]]; then
+            print_validation_error "User authentication is required. Please, specify a password for the ${INFLUXDB_USER} user by setting the 'INFLUXDB_USER_PASSWORD' or 'INFLUXDB_USER_PASSWORD_FILE' environment variables."
+        fi
     else
-        for user in "${user_envs[@]}"; do
-            pwd="${user/%/_PASSWORD}"
-            if [[ -n "${!user:-}" ]] && [[ -z "${!pwd:-}" ]]; then
-                print_validation_error "Authentication is enabled over HTTP and HTTPS and you did not provide a password for the ${!user} user. Please, specify a password for the ${!user} user by setting the '${user/%/_PASSWORD}' or '${user/%/_PASSWORD_FILE}' environment variables."
-            fi
-        done
+        if ! is_boolean_yes "$INFLUXDB_HTTP_AUTH_ENABLED"; then
+            warn "Authentication is disabled over HTTP and HTTPS. For safety reasons, enable it in a production environment."
+            for user in "${user_envs[@]}"; do
+                if [[ -n "${!user:-}" ]]; then
+                    warn "The ${user} environment variable will be ignored since authentication is disabled."
+                fi
+            done
+        else
+            for user in "${user_envs[@]}"; do
+                pwd="${user/%/_PASSWORD}"
+                if [[ -n "${!user:-}" ]] && [[ -z "${!pwd:-}" ]]; then
+                    print_validation_error "Authentication is enabled over HTTP and HTTPS and you did not provide a password for the ${!user} user. Please, specify a password for the ${!user} user by setting the '${user/%/_PASSWORD}' or '${user/%/_PASSWORD_FILE}' environment variables."
+                fi
+            done
+        fi
     fi
 
     # InfluxDB port validations
@@ -199,31 +269,11 @@ influxdb_validate() {
 # TODO: use a golan binary (toml-parser)
 influxdb_conf_get() {
     local -r key="${1:?missing key}"
-#     local -r section="${2:?missing section}"
+    #     local -r section="${2:?missing section}"
 
     sed -n -e "s/^ *$key *= *//p" "$INFLUXDB_CONF_FILE"
-#     toml-parser -r "$section" "$key" "$INFLUXDB_CONF_FILE"
+    #     toml-parser -r "$section" "$key" "$INFLUXDB_CONF_FILE"
 }
-
-########################
-# Modify the influxdb.conf file by setting a property
-# Globals:
-#   INFLUXDB_*
-# Arguments:
-#   $1 - section
-#   $2 - key
-#   $3 - value
-# Returns:
-#   None
-#########################
-# TODO: use a golan binary (toml-parser) to perform these substitutions
-# influxdb_conf_set() {
-#     local -r section="${1:?missing section}"
-#     local -r key="${2:?missing key}"
-#     local -r value="${2:-}"
-#
-#     toml-parser -w "$section" "$key" "$value" "$INFLUXDB_CONF_FILE"
-# }
 
 ########################
 # Create basic influxdb.conf file using the example provided in the etc/ folder
@@ -235,22 +285,108 @@ influxdb_conf_get() {
 #   None
 #########################
 influxdb_create_config() {
-    cp "${INFLUXDB_CONF_DIR}/influxdb.conf.default" "$INFLUXDB_CONF_FILE"
+    local -r branch="${1:?branch is missing}"
+    local config_file="${INFLUXDB_CONF_FILE}"
 
-    # TODO: use a golan binary (toml-parser) to perform these substitutions
-    # These settings:
-    # - [meta] dir
-    # - [data] dir
-    # - [data] wal-dir
-    # will be ignored and the values at the environment variables below will be used instead:
-    # - INFLUXDB_META_DIR
-    # - INFLUXDB_DATA_DIR
-    # - INFLUXDB_DATA_WAL_DIR
-    # However, to avoid confussion for users checking the configuration file,
-    # we'll update them to reflec the same values.
-    # influxdb_set_property "meta" "dir" "$INFLUXDB_META_DIR"
-    # influxdb_set_property "data" "dir" "$INFLUXDB_DATA_DIR"
-    # influxdb_set_property "data" "wal-dir" "$INFLUXDB_DATA_WAL_DIR"
+    if [[ "${branch}" = "2" ]]; then
+        config_file="${INFLUXD_CONFIG_PATH}"
+    fi
+
+    if [[ -f "${config_file}" ]]; then
+        info "Custom configuration ${INFLUXDB_CONF_FILE} detected!"
+        warn "The 'INFLUXDB_' environment variables override the equivalent options in the configuration file."
+        warn "If a configuration option is not specified in either the configuration file or in an environment variable, InfluxDB uses its internal default configuration"
+    else
+        info "No injected configuration files found. Creating default config files..."
+        if [[ "${branch}" = "2" ]]; then
+            touch "${config_file}"
+        else
+            cp "${INFLUXDB_CONF_DIR}/influxdb.conf.default" "$INFLUXDB_CONF_FILE"
+        fi
+    fi
+}
+
+########################
+# Create primary setup (only for InfluxDB 2.0)
+# Globals:
+#   INFLUXDB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+influxdb_v2_create_primary_setup() {
+    "${INFLUXDB_BIN_DIR}/influx" setup -f --name "${INFLUXDB_ADMIN_CONFIG_NAME}" \
+        --org "${INFLUXDB_ADMIN_ORG}" \
+        --bucket "${INFLUXDB_ADMIN_BUCKET}" \
+        --username "${INFLUXDB_ADMIN_USER}" \
+        --password "${INFLUXDB_ADMIN_USER_PASSWORD}" \
+        --token "${INFLUXDB_ADMIN_USER_TOKEN}" \
+        --retention "${INFLUXDB_ADMIN_RETENTION}"
+}
+
+########################
+# Create organization (only for InfluxDB 2.0)
+# Globals:
+#   INFLUXDB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+influxdb_v2_create_org() {
+    INFLUX_ACTIVE_CONFIG="${INFLUXDB_ADMIN_CONFIG_NAME}" "${INFLUXDB_BIN_DIR}/influx" org create --name "${INFLUXDB_USER_ORG}"
+}
+
+########################
+# Create bucket (only for InfluxDB 2.0)
+# Globals:
+#   INFLUXDB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+influxdb_v2_create_bucket() {
+    INFLUX_ACTIVE_CONFIG="${INFLUXDB_ADMIN_CONFIG_NAME}" "${INFLUXDB_BIN_DIR}/influx" bucket create \
+        "--org" "${INFLUXDB_USER_ORG:-${INFLUXDB_ADMIN_ORG}}" \
+        "--name" "${INFLUXDB_USER_BUCKET}"
+}
+
+########################
+# Create user (only for InfluxDB 2.0)
+# Globals:
+#   INFLUXDB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+influxdb_v2_create_user() {
+    local username=${1:?missing username}
+    local password=${2:?missing password}
+    local kind=${3:-"admin"}
+
+    local params=("--org" "${INFLUXDB_USER_ORG:-${INFLUXDB_ADMIN_ORG}}" "--name" "${username}" "--password" "${password}")
+    INFLUX_ACTIVE_CONFIG="${INFLUXDB_ADMIN_CONFIG_NAME}" "${INFLUXDB_BIN_DIR}/influx" user create "${params[@]}"
+
+    if is_boolean_yes "${INFLUXDB_CREATE_USER_TOKEN}"; then
+        local read_grants=("--read-buckets" "--read-checks" "--read-dashboards" "--read-dbrps" "--read-notificationEndpoints" "--read-notificationRules" "--read-orgs" "--read-tasks")
+        local write_grants=("--write-buckets" "--write-checks" "--write-dashboards" "--write-dbrps" "--write-notificationEndpoints" "--write-notificationRules" "--write-orgs" "--write-tasks")
+
+        local grants
+        if [[ ${kind} = "admin" ]] || [[ ${kind} = "write" ]]; then
+            grants=(${read_grants[@]} ${write_grants[@]})
+        elif [[ ${kind} = "read" ]]; then
+            grants=(${read_grants[@]})
+        else
+            echo "not supported user kind: ${kind}" && exit 1
+        fi
+
+        INFLUX_ACTIVE_CONFIG="${INFLUXDB_ADMIN_CONFIG_NAME}" "${INFLUXDB_BIN_DIR}/influx" auth create \
+            --user "${username}" \
+            --org "${INFLUXDB_USER_ORG:-${INFLUXDB_ADMIN_ORG}}" "${grants[@]}"
+    fi
 }
 
 ########################
@@ -263,12 +399,20 @@ influxdb_create_config() {
 #   None
 #########################
 influxdb_start_bg_noauth() {
+    local -r branch="${1:?branch is missing}"
+
     info "Starting InfluxDB in background..."
-    local start_command=("${INFLUXDB_BIN_DIR}/influxd" "-config" "$INFLUXDB_CONF_FILE")
+
+    local start_command=("${INFLUXDB_BIN_DIR}/influxd")
+    # if branch 1 then add config file flag that is required
+    [[ "${branch}" = "1" ]] && start_command=("${start_command[@]}" "-config" "$INFLUXDB_CONF_FILE")
+    # if root user then run it with gosu
     am_i_root && start_command=("gosu" "$INFLUXDB_DAEMON_USER" "${start_command[@]}")
+
     INFLUXDB_HTTP_HTTPS_ENABLED=false INFLUXDB_HTTP_BIND_ADDRESS="127.0.0.1:${INFLUXDB_HTTP_PORT_NUMBER}" debug_execute "${start_command[@]}" &
 
-    wait-for-port "$INFLUXDB_PORT_NUMBER"
+    # branch 2 does not lisent on this port
+    [[ "${branch}" = "1" ]] && wait-for-port "$INFLUXDB_PORT_NUMBER"
     wait-for-port "$INFLUXDB_HTTP_PORT_NUMBER"
 
     wait-for-influxdb
@@ -285,7 +429,7 @@ influxdb_start_bg_noauth() {
 #   None
 ########################
 wait-for-influxdb() {
-    curl -sSL -I "127.0.0.1:${INFLUXDB_HTTP_PORT_NUMBER}/ping?wait_for_leader=${INFLUXDB_HTTP_READINESS_TIMEOUT}s" > /dev/null 2>&1
+    curl -sSL -I "127.0.0.1:${INFLUXDB_HTTP_PORT_NUMBER}/ping?wait_for_leader=${INFLUXDB_HTTP_READINESS_TIMEOUT}s" >/dev/null 2>&1
 }
 
 ########################
@@ -416,7 +560,7 @@ influxdb_grant() {
 influxdb_user_role() {
     local role
     local -r user="${1:?user is required}"
-    role="${user//_}"
+    role="${user//_/}"
     role="${role%USER}"
     role="${role#INFLUXDB}"
     echo "${role:-ALL}"
@@ -432,36 +576,64 @@ influxdb_user_role() {
 #   None
 #########################
 influxdb_initialize() {
-    info "Initializing InfluxDB..."
+    local -r branch="$(influxdb_branch)"
+    info "Initializing InfluxDB in branch: ${branch}..."
 
-    # Detect custom configuration files
-    if [[ -f "$INFLUXDB_CONF_FILE" ]]; then
-        info "Custom configuration ${INFLUXDB_CONF_FILE} detected!"
-        warn "The 'INFLUXDB_' environment variables override the equivalent options in the configuration file."
-        warn "If a configuration option is not specified in either the configuration file or in an environment variable, InfluxDB uses its internal default configuration"
-    else
-        info "No injected configuration files found. Creating default config files..."
-        influxdb_create_config
-    fi
+    influxdb_create_config "${branch}"
 
-    if is_dir_empty "$INFLUXDB_DATA_DIR"; then
-        info "Deploying InfluxDB from scratch"
-        if is_boolean_yes "$INFLUXDB_HTTP_AUTH_ENABLED"; then
-            influxdb_start_bg_noauth
-            info "Creating users and databases..."
-            influxdb_create_admin_user
-            [[ -n "$INFLUXDB_DB" ]] && influxdb_create_db "$INFLUXDB_DB"
-            local -a user_envs=("INFLUXDB_USER" "INFLUXDB_READ_USER" "INFLUXDB_WRITE_USER")
-            for user in "${user_envs[@]}"; do
-                pwd="${user/%/_PASSWORD}"
-                if [[ -n "${!user}" ]]; then
-                    influxdb_create_user "${!user}" "${!pwd}"
-                    [[ -n "$INFLUXDB_DB" ]] && influxdb_grant "${!user}" "$INFLUXDB_DB" "$(influxdb_user_role "$user")"
-                fi
-            done
+    if [[ "${branch}" = "2" ]]; then
+        if [[ ! -f "${INFLUX_CONFIGS_PATH}" ]]; then
+            influxdb_start_bg_noauth "${branch}"
+            info "Deploying InfluxDB from scratch"
+            info "Creating primary setup..."
+            influxdb_v2_create_primary_setup
+
+            if [[ -n "${INFLUXDB_USER_ORG}" ]] && [[ "${INFLUXDB_USER_ORG}" != "${INFLUXDB_ADMIN_ORG}" ]]; then
+                info "Creating custom org with id: ${INFLUXDB_USER_ORG}..."
+                influxdb_v2_create_org
+            fi
+
+            if [[ -n "${INFLUXDB_USER_BUCKET}" ]]; then
+                info "Creating custom bucket with id: ${INFLUXDB_USER_BUCKET} in org with id: ${INFLUXDB_USER_ORG:-${INFLUXDB_ADMIN_ORG}}..."
+                influxdb_v2_create_bucket
+            fi
+
+            if [[ -n "${INFLUXDB_USER}" ]]; then
+                info "Creating custom user with username: ${INFLUXDB_USER} in org with id: ${INFLUXDB_USER_ORG:-${INFLUXDB_ADMIN_ORG}}..."
+                influxdb_v2_create_user "${INFLUXDB_USER}" "${INFLUXDB_USER_PASSWORD}"
+            fi
+            if [[ -n "${INFLUXDB_READ_USER}" ]]; then
+                info "Creating custom user with username: ${INFLUXDB_READ_USER} in org with id: ${INFLUXDB_USER_ORG:-${INFLUXDB_ADMIN_ORG}}..."
+                influxdb_v2_create_user "${INFLUXDB_READ_USER}" "${INFLUXDB_READ_USER_PASSWORD}" "read"
+            fi
+            if [[ -n "${INFLUXDB_WRITE_USER}" ]]; then
+                info "Creating custom user with username: ${INFLUXDB_WRITE_USER} in org with id: ${INFLUXDB_USER_ORG:-${INFLUXDB_ADMIN_ORG}}..."
+                influxdb_v2_create_user "${INFLUXDB_WRITE_USER}" "${INFLUXDB_WRITE_USER_PASSWORD}" "write"
+            fi
+        else
+            info "influx CLI configuration ${INFLUXDB_CONF_FILE} detected!"
+            info "Deploying InfluxDB with persisted data"
         fi
     else
-        info "Deploying InfluxDB with persisted data"
+        if is_dir_empty "$INFLUXDB_DATA_DIR"; then
+            info "Deploying InfluxDB from scratch"
+            if is_boolean_yes "$INFLUXDB_HTTP_AUTH_ENABLED"; then
+                influxdb_start_bg_noauth "${branch}"
+                info "Creating users and databases..."
+                influxdb_create_admin_user
+                [[ -n "$INFLUXDB_DB" ]] && influxdb_create_db "$INFLUXDB_DB"
+                local -a user_envs=("INFLUXDB_USER" "INFLUXDB_READ_USER" "INFLUXDB_WRITE_USER")
+                for user in "${user_envs[@]}"; do
+                    pwd="${user/%/_PASSWORD}"
+                    if [[ -n "${!user}" ]]; then
+                        influxdb_create_user "${!user}" "${!pwd}"
+                        [[ -n "$INFLUXDB_DB" ]] && influxdb_grant "${!user}" "$INFLUXDB_DB" "$(influxdb_user_role "$user")"
+                    fi
+                done
+            fi
+        else
+            info "Deploying InfluxDB with persisted data"
+        fi
     fi
 }
 
@@ -475,26 +647,33 @@ influxdb_initialize() {
 #   None
 #########################
 influxdb_custom_init_scripts() {
-    if [[ -n $(find "${INFLUXDB_INITSCRIPTS_DIR}/" -type f -regex ".*\.\(sh\|txt\)") ]] && [[ ! -f "${INFLUXDB_INITSCRIPTS_DIR}/.user_scripts_initialized" ]] ; then
+    local -r branch="$(influxdb_branch)"
+
+    if [[ -n $(find "${INFLUXDB_INITSCRIPTS_DIR}/" -type f -regex ".*\.\(sh\|txt\)") ]] && [[ ! -f "${INFLUXDB_INITSCRIPTS_DIR}/.user_scripts_initialized" ]]; then
         info "Loading user's custom files from ${INFLUXDB_INITSCRIPTS_DIR} ..."
         local -r tmp_file="/tmp/filelist"
         if ! is_influxdb_running; then
-            influxdb_start_bg_noauth
+            influxdb_start_bg_noauth "${branch}"
         fi
-        find "${INFLUXDB_INITSCRIPTS_DIR}/" -type f -regex ".*\.\(sh\|txt\)" | sort > "$tmp_file"
+        find "${INFLUXDB_INITSCRIPTS_DIR}/" -type f -regex ".*\.\(sh\|txt\)" | sort >"$tmp_file"
         while read -r f; do
             case "$f" in
-                *.sh)
-                    if [[ -x "$f" ]]; then
-                        debug "Executing $f"; "$f"
-                    else
-                        debug "Sourcing $f"; . "$f"
-                    fi
-                    ;;
-                *.txt)    debug "Executing $f"; influxdb_execute_query "$(<"$f")";;
-                *)        debug "Ignoring $f" ;;
+            *.sh)
+                if [[ -x "$f" ]]; then
+                    debug "Executing $f"
+                    "$f"
+                else
+                    debug "Sourcing $f"
+                    . "$f"
+                fi
+                ;;
+            *.txt)
+                debug "Executing $f"
+                influxdb_execute_query "$(<"$f")"
+                ;;
+            *) debug "Ignoring $f" ;;
             esac
-        done < $tmp_file
+        done <$tmp_file
         rm -f "$tmp_file"
         touch "$INFLUXDB_VOLUME_DIR"/.user_scripts_initialized
     fi

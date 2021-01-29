@@ -16,7 +16,14 @@ set -o pipefail
 eval "$(influxdb_env)"
 
 info "** Starting InfluxDB **"
-start_command=("${INFLUXDB_BIN_DIR}/influxd" "-config" "$INFLUXDB_CONF_FILE" "$@")
+start_command=("${INFLUXDB_BIN_DIR}/influxd" "$@")
+[[ "$(influxdb_branch)" = "1" ]] && start_command=("${start_command[@]}" "-config" "$INFLUXDB_CONF_FILE")
 am_i_root && start_command=("gosu" "$INFLUXDB_DAEMON_USER" "${start_command[@]}")
+
+if [[ -f "$INFLUXDB_CONF_FILE" ]]; then
+  export INFLUXD_CONFIG_PATH=${INFLUXDB_CONF_FILE:-}
+fi
+
+export HOME=/bitnami/influxdb/
 
 exec "${start_command[@]}"
