@@ -29,9 +29,9 @@
     },
     "wildfly": {
         "arch": "amd64",
-        "digest": "83f467a6986822f61f1e4607677bab19ae2c288565539303bc7fcad92b3f029a",
+        "digest": "d265ebfedbae77f7340a1fac3cd45e26a3ac820afb8db628c5fd069cccb9c56a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "14.0.1-11"
+        "version": "14.0.1-12"
     }
 }
