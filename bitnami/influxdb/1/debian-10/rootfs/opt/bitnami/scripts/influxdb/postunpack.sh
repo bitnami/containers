@@ -10,7 +10,7 @@
 eval "$(influxdb_env)"
 
 # Ensure directories used by InfluxDB exist and have proper ownership and permissions
-for dir in "$INFLUXDB_DATA_DIR" "$INFLUXDB_DATA_WAL_DIR" "$INFLUXDB_META_DIR" "$INFLUXDB_CONF_DIR" "$INFLUXDB_INITSCRIPTS_DIR"; do
+for dir in "$INFLUXDB_VOLUME_DIR" "$INFLUXDB_DATA_DIR" "$INFLUXDB_DATA_WAL_DIR" "$INFLUXDB_META_DIR" "$INFLUXDB_CONF_DIR" "$INFLUXDB_INITSCRIPTS_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done
