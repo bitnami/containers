@@ -17,7 +17,7 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
   airflow-scheduler:
-    image: docker.io/bitnami/airflow-scheduler:1-debian-10
+    image: docker.io/bitnami/airflow-scheduler:2-debian-10
     environment:
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
@@ -26,7 +26,7 @@ services:
     volumes:
       - airflow_scheduler_data:/bitnami
   airflow-worker:
-    image: docker.io/bitnami/airflow-worker:1-debian-10
+    image: docker.io/bitnami/airflow-worker:2-debian-10
     environment:
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
@@ -35,7 +35,7 @@ services:
     volumes:
       - airflow_worker_data:/bitnami
   airflow:
-    image: docker.io/bitnami/airflow:1-debian-10
+    image: docker.io/bitnami/airflow:2-debian-10
     environment:
       - AIRFLOW_LDAP_ENABLE=yes
       - AIRFLOW_LDAP_URI=ldap://openldap:1389
