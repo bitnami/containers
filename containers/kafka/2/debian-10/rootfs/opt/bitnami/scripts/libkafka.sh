@@ -99,6 +99,7 @@ export KAFKA_LOG_DIR="$KAFKA_BASE_DIR"/logs
 export KAFKA_CONF_DIR="${KAFKA_CONF_DIR:-"$KAFKA_BASE_DIR"/config}"
 export KAFKA_CONF_FILE="$KAFKA_CONF_DIR"/server.properties
 export KAFKA_MOUNTED_CONF_DIR="${KAFKA_MOUNTED_CONF_DIR:-${KAFKA_VOLUME_DIR}/config}"
+export KAFKA_CERTS_DIR="$KAFKA_CONF_DIR"/certs
 export KAFKA_DATA_DIR="$KAFKA_VOLUME_DIR"/data
 export KAFKA_INITSCRIPTS_DIR=/docker-entrypoint-initdb.d
 export KAFKA_DAEMON_USER="kafka"
@@ -122,6 +123,7 @@ export KAFKA_CFG_ZOOKEEPER_CONNECT="${KAFKA_CFG_ZOOKEEPER_CONNECT:-"localhost:21
 export KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE="${KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE:-"true"}"
 export KAFKA_CFG_SASL_ENABLED_MECHANISMS="${KAFKA_CFG_SASL_ENABLED_MECHANISMS:-PLAIN,SCRAM-SHA-256,SCRAM-SHA-512}"
 export KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL="${KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL:-}"
+export KAFKA_CFG_TLS_TYPE="${KAFKA_CFG_TLS_TYPE:-JKS}"
 EOF
     # Make compatible KAFKA_CLIENT_USERS/PASSWORDS with the old KAFKA_CLIENT_USER/PASSWORD
     [[ -n "${KAFKA_CLIENT_USER:-}" ]] && KAFKA_CLIENT_USERS="${KAFKA_CLIENT_USER:-},${KAFKA_CLIENT_USERS:-}"
@@ -240,6 +242,11 @@ kafka_validate() {
             print_validation_error "An invalid port was specified in the environment variable KAFKA_CFG_LISTENERS: $err"
         fi
     }
+    check_multi_value() {
+        if [[ " ${2} " != *" ${!1} "* ]]; then
+            print_validation_error "The allowed values for ${1} are: ${2}"
+        fi
+    }
 
     if [[ ${KAFKA_CFG_LISTENERS:-} =~ INTERNAL://:([0-9]*) ]]; then
         internal_port="${BASH_REMATCH[1]}"
@@ -264,9 +271,11 @@ kafka_validate() {
         warn "You set the environment variable ALLOW_PLAINTEXT_LISTENER=$ALLOW_PLAINTEXT_LISTENER. For safety reasons, do not use this flag in a production environment."
     fi
     if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SSL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SSL ]]; then
-        if ([[ ! -f "$KAFKA_CONF_DIR"/certs/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_CONF_DIR"/certs/kafka.truststore.jks ]]) \
-            && ([[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/kafka.truststore.jks ]]); then
-            print_validation_error "In order to configure the TLS encryption for Kafka you must mount your kafka.keystore.jks and kafka.truststore.jks certificates to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
+        if ([[ ! -f "$KAFKA_CERTS_DIR"/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_CERTS_DIR"/kafka.truststore.jks ]]) \
+            && ([[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/kafka.truststore.jks ]]) \
+            && ([[ ! -f "$KAFKA_CERTS_DIR"kafka.keystore.pem ]] || [[ ! -f "$KAFKA_CERTS_DIR"/certs/kafka.truststore.pem ]]) \
+            && ([[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/kafka.keystore.pem ]] || [[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/kafka.truststore.pem ]]); then
+            print_validation_error "In order to configure the TLS encryption for Kafka you must mount your kafka.keystore.jks (or kafka.keystore.pem) and kafka.truststore.jks (or kafka.trustsore.pem) certificates to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
         fi
     elif [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL ]]; then
         if [[ -z "$KAFKA_CLIENT_PASSWORD" && -z "$KAFKA_CLIENT_PASSWORDS" ]] && [[ -z "$KAFKA_INTER_BROKER_PASSWORD" ]]; then
@@ -276,7 +285,7 @@ kafka_validate() {
         print_validation_error "The KAFKA_CFG_LISTENERS environment variable does not configure a secure listener. Set the environment variable ALLOW_PLAINTEXT_LISTENER=yes to allow the container to be started with a plaintext listener. This is only recommended for development."
     fi
     if [[ "${KAFKA_ZOOKEEPER_PROTOCOL}" =~ SSL ]]; then
-        if ([[ ! -f "$KAFKA_CONF_DIR"/certs/zookeeper.keystore.jks ]] || [[ ! -f "$KAFKA_CONF_DIR"/certs/zookeeper.truststore.jks ]]) \
+        if ([[ ! -f "$KAFKA_CERTS_DIR"/zookeeper.keystore.jks ]] || [[ ! -f "$KAFKA_CERTS_DIR"/zookeeper.truststore.jks ]]) \
             && ([[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/zookeeper.keystore.jks ]] || [[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/zookeeper.truststore.jks ]]); then
             print_validation_error "In order to configure the TLS encryption for Zookeeper you must mount your zookeeper.keystore.jks and zookeeper.truststore.jks certificates to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
         fi
@@ -287,6 +296,7 @@ kafka_validate() {
     elif ! is_boolean_yes "$ALLOW_PLAINTEXT_LISTENER"; then
          print_validation_error "The KAFKA_ZOOKEEPER_PROTOCOL environment variable does not configure a secure protocol. Set the environment variable ALLOW_PLAINTEXT_LISTENER=yes to allow the container to be started with a plaintext listener. This is only recommended for development."
     fi
+    check_multi_value "KAFKA_CFG_TLS_TYPE" "JKS PEM"
     [[ "$error_code" -eq 0 ]] || return "$error_code"
 }
 
@@ -455,18 +465,27 @@ kafka_create_sasl_scram_zookeeper_users() {
 #   None
 #########################
 kafka_configure_ssl() {
+    local -r ext="${KAFKA_CFG_TLS_TYPE,,}"
+
     # Set Kafka configuration
-    kafka_server_conf_set ssl.keystore.location "$KAFKA_CONF_DIR"/certs/kafka.keystore.jks
-    kafka_server_conf_set ssl.keystore.password "$KAFKA_CERTIFICATE_PASSWORD"
+    kafka_server_conf_set ssl.keystore.type "$KAFKA_CFG_TLS_TYPE"
+    kafka_server_conf_set ssl.keystore.location "$KAFKA_CERTS_DIR"/kafka.keystore."$ext"
     kafka_server_conf_set ssl.key.password "$KAFKA_CERTIFICATE_PASSWORD"
-    kafka_server_conf_set ssl.truststore.location "$KAFKA_CONF_DIR"/certs/kafka.truststore.jks
-    kafka_server_conf_set ssl.truststore.password "$KAFKA_CERTIFICATE_PASSWORD"
+    kafka_server_conf_set ssl.truststore.type "$KAFKA_CFG_TLS_TYPE"
+    kafka_server_conf_set ssl.truststore.location "$KAFKA_CERTS_DIR"/kafka.truststore."$ext"
     # Set producer/consumer configuration
-    kafka_producer_consumer_conf_set ssl.keystore.location "$KAFKA_CONF_DIR"/certs/kafka.keystore.jks
-    kafka_producer_consumer_conf_set ssl.keystore.password "$KAFKA_CERTIFICATE_PASSWORD"
-    kafka_producer_consumer_conf_set ssl.truststore.location "$KAFKA_CONF_DIR"/certs/kafka.truststore.jks
-    kafka_producer_consumer_conf_set ssl.truststore.password "$KAFKA_CERTIFICATE_PASSWORD"
+    kafka_producer_consumer_conf_set ssl.keystore.type "$KAFKA_CFG_TLS_TYPE"
+    kafka_producer_consumer_conf_set ssl.keystore.location "$KAFKA_CERTS_DIR"/kafka.keystore."$ext"
     kafka_producer_consumer_conf_set ssl.key.password "$KAFKA_CERTIFICATE_PASSWORD"
+    kafka_producer_consumer_conf_set ssl.truststore.type "$KAFKA_CFG_TLS_TYPE"
+    kafka_producer_consumer_conf_set ssl.truststore.location "$KAFKA_CERTS_DIR"/kafka.truststore."$ext"
+    # keystore and truststore passwords are only compatible with JKS files
+    if [[ "$KAFKA_CFG_TLS_TYPE" == "JKS" ]]; then
+        kafka_server_conf_set ssl.keystore.password "$KAFKA_CERTIFICATE_PASSWORD"
+        kafka_server_conf_set ssl.truststore.password "$KAFKA_CERTIFICATE_PASSWORD"
+        kafka_producer_consumer_conf_set ssl.keystore.password "$KAFKA_CERTIFICATE_PASSWORD"
+        kafka_producer_consumer_conf_set ssl.truststore.password "$KAFKA_CERTIFICATE_PASSWORD"
+    fi
 }
 
 ########################
@@ -562,9 +581,9 @@ zookeeper_get_tls_config() {
     # otherwise the connection attempt to Zookeeper will fail.
     echo "-Dzookeeper.clientCnxnSocket=org.apache.zookeeper.ClientCnxnSocketNetty \
           -Dzookeeper.client.secure=true \
-          -Dzookeeper.ssl.keyStore.location=${KAFKA_CONF_DIR}/certs/zookeeper.keystore.jks \
+          -Dzookeeper.ssl.keyStore.location=${KAFKA_CERTS_DIR}/zookeeper.keystore.jks \
           -Dzookeeper.ssl.keyStore.password=$KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD \
-          -Dzookeeper.ssl.trustStore.location=${KAFKA_CONF_DIR}/certs/zookeeper.truststore.jks \
+          -Dzookeeper.ssl.trustStore.location=${KAFKA_CERTS_DIR}/zookeeper.truststore.jks \
           -Dzookeeper.ssl.trustStore.password=$KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD \
           -Dzookeeper.ssl.hostnameVerification=$KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME"
 }

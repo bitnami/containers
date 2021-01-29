@@ -198,6 +198,7 @@ The configuration can easily be setup with the Bitnami Kafka Docker image using 
 * `KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME`: Verify Zookeeper hostname on TLS certificates. Defaults: **true**.
 * `KAFKA_CFG_SASL_ENABLED_MECHANISMS`: Allowed mechanism when using SASL either for clients, inter broker, or zookeeper comunications. Allowed values: `PLAIN`, `SCRAM-SHA-256`, `SCRAM-SHA-512` or a comma separated combination of those values. Default: **PLAIN,SCRAM-SHA-256,SCRAM-SHA-512**
 * `KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL`: SASL mechanism to use for inter broker communications. No defaults.
+* `KAFKA_CFG_TLS_TYPE`: Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`. Defaults: **JKS**
 * `KAFKA_CLIENT_USERS`: Additional users to `KAFKA_CLIENT_USER` that will be created into Zookeeper when using SASL_SCRAM for client communications. Separated by commas. Default: **user**
 * `KAFKA_CLIENT_PASSWORDS`: Passwords for the users specified at`KAFKA_CLIENT_USERS`. Separated by commas. Default: **bitnami**
 
@@ -323,7 +324,7 @@ KAFKA_CLIENT_USER=user
 KAFKA_CLIENT_PASSWORD=password
 ```
 
-You **must** also use your own certificates for SSL. You can drop your Java Key Stores files into `/opt/bitnami/kafka/config/certs`. If the JKS is password protected (recommended), you will need to provide it to get access to the keystores:
+You **must** also use your own certificates for SSL. You can drop your Java Key Stores or PEM files into `/opt/bitnami/kafka/config/certs`. If the JKS or PEM is password protected (recommended), you will need to provide it to get access to the keystores:
 
 `KAFKA_CERTIFICATE_PASSWORD=myCertificatePassword`
 
@@ -366,9 +367,12 @@ services:
       - KAFKA_CLIENT_USER=user
       - KAFKA_CLIENT_PASSWORD=password
       - KAFKA_CERTIFICATE_PASSWORD=certificatePassword123
+      - KAFKA_CFG_TLS_TYPE=JKS # or PEM
     volumes:
+      # Both .jks and .pem files are supported
       - './kafka.keystore.jks:/opt/bitnami/kafka/config/certs/kafka.keystore.jks:ro'
       - './kafka.truststore.jks:/opt/bitnami/kafka/config/certs/kafka.truststore.jks:ro'
+
 ```
 
 In order to get the required credentials to consume and produce messages you need to provide the credentials in the client. If your Kafka client allows it, use the credentials you've provided.
