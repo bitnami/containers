@@ -52,7 +52,7 @@ services:
       - prometheus
   # MinIO
   minio:
-    image: docker.io/bitnami/minio:2020
+    image: docker.io/bitnami/minio:2021
     ports:
       - '9000:9000'
     volumes:
