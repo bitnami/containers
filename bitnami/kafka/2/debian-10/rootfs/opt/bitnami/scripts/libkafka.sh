@@ -124,6 +124,7 @@ export KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE="${KAFKA_CFG_AUTO_CREATE_TOPICS_ENABL
 export KAFKA_CFG_SASL_ENABLED_MECHANISMS="${KAFKA_CFG_SASL_ENABLED_MECHANISMS:-PLAIN,SCRAM-SHA-256,SCRAM-SHA-512}"
 export KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL="${KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL:-}"
 export KAFKA_CFG_TLS_TYPE="${KAFKA_CFG_TLS_TYPE:-JKS}"
+export KAFKA_CFG_TLS_CLIENT_AUTH="${KAFKA_CFG_TLS_CLIENT_AUTH:-required}"
 EOF
     # Make compatible KAFKA_CLIENT_USERS/PASSWORDS with the old KAFKA_CLIENT_USER/PASSWORD
     [[ -n "${KAFKA_CLIENT_USER:-}" ]] && KAFKA_CLIENT_USERS="${KAFKA_CLIENT_USER:-},${KAFKA_CLIENT_USERS:-}"
@@ -296,6 +297,7 @@ kafka_validate() {
     elif ! is_boolean_yes "$ALLOW_PLAINTEXT_LISTENER"; then
          print_validation_error "The KAFKA_ZOOKEEPER_PROTOCOL environment variable does not configure a secure protocol. Set the environment variable ALLOW_PLAINTEXT_LISTENER=yes to allow the container to be started with a plaintext listener. This is only recommended for development."
     fi
+    check_multi_value "KAFKA_CFG_TLS_CLIENT_AUTH" "none requested required"
     check_multi_value "KAFKA_CFG_TLS_TYPE" "JKS PEM"
     [[ "$error_code" -eq 0 ]] || return "$error_code"
 }
@@ -520,7 +522,7 @@ kafka_configure_internal_communications() {
             kafka_configure_ssl
             # We need to enable 2 way authentication on SASL_SSL so brokers authenticate each other.
             # It won't affect client communications unless the SSL protocol is for them.
-            kafka_server_conf_set ssl.client.auth required
+            kafka_server_conf_set ssl.client.auth "$KAFKA_CFG_TLS_CLIENT_AUTH"
         fi
     else
         error "Authentication protocol ${protocol} is not supported!"
@@ -557,7 +559,7 @@ kafka_configure_client_communications() {
             kafka_configure_ssl
         fi
         if [[ "$protocol" = "SSL" ]]; then
-            kafka_server_conf_set ssl.client.auth required
+            kafka_server_conf_set ssl.client.auth "$KAFKA_CFG_TLS_CLIENT_AUTH"
         fi
     else
         error "Authentication protocol ${protocol} is not supported!"
