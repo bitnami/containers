@@ -388,6 +388,24 @@ In the above command the container is configured as a `arbiter` using the `MONGO
 
 You now have a three node MongoDB replication cluster up and running which can be scaled by adding/removing secondaries.
 
+### Optional: Create a replication hidden node
+
+If we want a replication hidden node, we start a MongoDB hidden container.
+
+```console
+$ docker run --name mongodb-hidden \
+  --link mongodb-primary:primary \
+  -e MONGODB_REPLICA_SET_MODE=hidden \
+  -e MONGODB_ADVERTISED_HOSTNAME=mongodb-hidden \
+  -e MONGODB_INITIAL_PRIMARY_HOST=primary \
+  -e MONGODB_INITIAL_PRIMARY_PORT_NUMBER=27017 \
+  -e MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password123 \
+  -e MONGODB_REPLICA_SET_KEY=replicasetkey123 \
+  bitnami/mongodb:latest
+```
+
+In the above command the container is configured as a `hidden` using the `MONGODB_REPLICA_SET_MODE` parameter. The `MONGODB_INITIAL_PRIMARY_HOST` and `MONGODB_INITIAL_PRIMARY_PORT_NUMBER` parameters are used connect and with the MongoDB primary.
+
 With Docker Compose the replicaset can be setup using:
 
 ```yaml
@@ -497,7 +515,7 @@ The above command scales up the number of secondary nodes to `3`. You can scale 
 
 ### How is a replica set configured?
 
-There are three different roles in a replica set configuration (primary, secondary or arbiter). Each one of these roles are configured in a different way:
+There are four different roles in a replica set configuration (primary, secondary, hidden or arbiter). Each one of these roles are configured in a different way:
 
 **Primary node configuration:**
 
@@ -518,7 +536,11 @@ After adding the secondary nodes we verified they have been successfully added b
 
 **Arbiter node configuration:**
 
-Finally, the arbiters follows the same procedure than secondary nodes with the exception that the command to add it to the replica set is `rs.addArb(ARBITER_NODE_HOST)`. An arbiter should be added when the sum of primary nodes plus secondaries nodes is even.
+The arbiters follows the same procedure than secondary nodes with the exception that the command to add it to the replica set is `rs.addArb(ARBITER_NODE_HOST)`. An arbiter should be added when the sum of primary nodes plus secondaries nodes is even.
+
+**Hidden node configuration:**
+
+Finally, the hidden node follows the same procedure than secondary nodes with the exception that the command to add it to the replica set is `rs.add(host: HIDDEN_NODE_HOST, hidden: true, priority: 0})`.
 
 ## Enabling SSL/TLS
 
