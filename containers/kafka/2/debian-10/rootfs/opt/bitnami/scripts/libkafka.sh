@@ -118,6 +118,7 @@ export KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD="${KAFKA_ZOOKEEPER_TLS_KEYSTORE_PAS
 export KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD="${KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD:-}"
 export KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME="${KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME:-"true"}"
 export KAFKA_ZOOKEEPER_TLS_TYPE="${KAFKA_ZOOKEEPER_TLS_TYPE:-JKS}"
+export KAFKA_ZOOKEEPER_TLS_TYPE="${KAFKA_ZOOKEEPER_TLS_TYPE^^}"
 export KAFKA_CFG_ADVERTISED_LISTENERS="${KAFKA_CFG_ADVERTISED_LISTENERS:-"PLAINTEXT://:9092"}"
 export KAFKA_CFG_LISTENERS="${KAFKA_CFG_LISTENERS:-"PLAINTEXT://:9092"}"
 export KAFKA_CFG_ZOOKEEPER_CONNECT="${KAFKA_CFG_ZOOKEEPER_CONNECT:-"localhost:2181"}"
@@ -586,7 +587,6 @@ zookeeper_get_tls_config() {
     # Note that ZooKeeper does not support a key password different from the keystore password,
     # so be sure to set the key password in the keystore to be identical to the keystore password;
     # otherwise the connection attempt to Zookeeper will fail.
-
     local -r ext="${KAFKA_ZOOKEEPER_TLS_TYPE,,}"
     local keystore_location=""
     if [[ -f "$KAFKA_CERTS_DIR"/zookeeper.keystore."$ext" ]]; then
@@ -615,6 +615,10 @@ kafka_configure_from_environment_variables() {
     # Map environment variables to config properties
     for var in "${!KAFKA_CFG_@}"; do
         key="$(echo "$var" | sed -e 's/^KAFKA_CFG_//g' -e 's/_/\./g' | tr '[:upper:]' '[:lower:]')"
+
+        # Exception for the camel case in this environment variable
+        [[ "$var" == "KAFKA_CFG_ZOOKEEPER_CLIENTCNXNSOCKET" ]] && key="zookeeper.clientCnxnSocket"
+
         value="${!var}"
         kafka_server_conf_set "$key" "$value"
     done
