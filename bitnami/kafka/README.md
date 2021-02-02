@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
-* [`2`, `2-debian-10`, `2.7.0`, `2.7.0-debian-10-r41`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.7.0-debian-10-r41/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.7.0`, `2.7.0-debian-10-r42`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.7.0-debian-10-r42/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
@@ -431,7 +431,7 @@ In order to authenticate Kafka against a Zookeeper server with `SSL`, you should
 * `KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD`: Kafka Zookeeper keystore file password and key password. No defaults.
 * `KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD`: Kafka Zookeeper truststore file password. No defaults.
 * `KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME`: Verify Zookeeper hostname on TLS certificates. Defaults: **true**.
-* `KAFKA_ZOOKEEPER_TLS_TYPE`: Choose between JKS and PEM TLS certificate formats. Defaults: **JKS**.
+* `KAFKA_ZOOKEEPER_TLS_TYPE`: Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`. Defaults: **JKS**.
 
 In order to authenticate Kafka against a Zookeeper server with `SASL_SSL`, you should provide the environment variables below:
 
@@ -441,9 +441,9 @@ In order to authenticate Kafka against a Zookeeper server with `SASL_SSL`, you s
 * `KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD`: Kafka Zookeeper keystore file password and key password. No defaults.
 * `KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD`: Kafka Zookeeper truststore file password. No defaults.
 * `KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME`: Verify Zookeeper hostname on TLS certificates. Defaults: **true**.
-* `KAFKA_ZOOKEEPER_TLS_TYPE`: Choose between JKS and PEM TLS certificate formats. Defaults: **JKS**.
+* `KAFKA_ZOOKEEPER_TLS_TYPE`: Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`. Defaults: **JKS**.
 
-Note: You **must** also use your own certificates for SSL. You can mount your Java Key Stores or PEM files (`zookeeper.keystore.jks|.pem` and `zookeeper.truststore.jks|.pem`) into `/opt/bitnami/kafka/conf/certs`.
+> Note: You **must** also use your own certificates for SSL. You can mount your Java Key Stores or PEM files (`zookeeper.keystore.jks|.pem` and `zookeeper.truststore.jks|.pem`) into `/opt/bitnami/kafka/conf/certs`.
 If client authentication is `none` or `want` in Zookeeper, the keystore file is optional.
 
 ### Setting up a Kafka Cluster
