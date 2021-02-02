@@ -9,16 +9,16 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/metallb-0.9.5-1-linux-amd64-debian-10.tar.gz && \
-    echo "5473509e5e1b6c69cb715a745855762fce0f54d20eb833d88021acd4ca59e06c  /tmp/bitnami/pkg/cache/metallb-0.9.5-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/metallb-0.9.5-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/metallb-0.9.5-1-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/metallb-0.9.5-2-linux-amd64-debian-10.tar.gz && \
+    echo "b6f458feb55fbb7b30182cf95b140f99cc7147a5d2a6137f936c8b1a53752915  /tmp/bitnami/pkg/cache/metallb-0.9.5-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/metallb-0.9.5-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/metallb-0.9.5-2-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="metallb-controller" \
-    BITNAMI_IMAGE_VERSION="0.9.5-debian-10-r75" \
+    BITNAMI_IMAGE_VERSION="0.9.5-debian-10-r76" \
     PATH="/opt/bitnami/metallb/bin:$PATH"
 
 USER 1001
