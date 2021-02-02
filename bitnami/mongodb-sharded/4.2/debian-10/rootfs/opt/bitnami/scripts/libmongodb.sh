@@ -44,7 +44,7 @@ in the primary node and MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD in the rest of nod
         if [[ -z "$MONGODB_ADVERTISED_HOSTNAME" ]]; then
             warn "In order to use hostnames instead of IPs your should set MONGODB_ADVERTISED_HOSTNAME"
         fi
-        if [[ "$MONGODB_REPLICA_SET_MODE" =~ ^(secondary|arbiter) ]]; then
+        if [[ "$MONGODB_REPLICA_SET_MODE" =~ ^(secondary|arbiter|hidden) ]]; then
             if [[ -z "$MONGODB_INITIAL_PRIMARY_HOST" ]]; then
                 error_message="In order to configure MongoDB as a secondary or arbiter node \
 you need to provide the MONGODB_INITIAL_PRIMARY_HOST env var"
@@ -75,7 +75,7 @@ This is only recommended for development."
             fi
         else
             error_message="You set the environment variable MONGODB_REPLICA_SET_MODE with an invalid value. \
-Available options are 'primary/secondary/arbiter'"
+Available options are 'primary/secondary/arbiter/hidden'"
             print_validation_error "$error_message"
         fi
     fi
@@ -483,7 +483,7 @@ mongodb_create_users() {
     local result
 
     info "Creating users..."
-    if [[ -n "$MONGODB_ROOT_PASSWORD" ]] && ! [[ "$MONGODB_REPLICA_SET_MODE"  =~ ^(secondary|arbiter) ]]; then
+    if [[ -n "$MONGODB_ROOT_PASSWORD" ]] && ! [[ "$MONGODB_REPLICA_SET_MODE"  =~ ^(secondary|arbiter|hidden) ]]; then
         info "Creating root user..."
         result=$(mongodb_execute "" "" "" "127.0.0.1" <<EOF
 db.getSiblingDB('admin').createUser({ user: 'root', pwd: '$MONGODB_ROOT_PASSWORD', roles: [{role: 'root', db: 'admin'}] })
@@ -605,6 +605,33 @@ EOF
     # which will become resynced when the secondary joins the replicaset.
     if grep -q "\"code\" : 103" <<< "$result"; then
         warn "The ReplicaSet configuration is not aligned with primary node's configuration. Starting secondary node so it syncs with ReplicaSet..."
+        return 0
+    fi
+    grep -q "\"ok\" : 1" <<< "$result"
+}
+
+########################
+# Get if hidden node is pending
+# Globals:
+#   MONGODB_*
+# Arguments:
+#   $1 - node
+# Returns:
+#   Boolean
+#########################
+mongodb_is_hidden_node_pending() {
+    local node="${1:?node is required}"
+    local result
+
+    result=$(mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
+rs.add({host: '$node:$MONGODB_PORT_NUMBER', hidden: true, priority: 0})
+EOF
+)
+    # Error code 103 is considered OK.
+    # It indicates a possiblely desynced configuration,
+    # which will become resynced when the hidden joins the replicaset.
+    if grep -q "\"code\" : 103" <<< "$result"; then
+        warn "The ReplicaSet configuration is not aligned with primary node's configuration. Starting hidden node so it syncs with ReplicaSet..."
         return 0
     fi
     grep -q "\"ok\" : 1" <<< "$result"
@@ -802,6 +829,32 @@ mongodb_configure_secondary() {
     fi
 }
 
+########################
+# Configure hidden node
+# Globals:
+#   None
+# Arguments:
+#   $1 - node
+# Returns:
+#   None
+#########################
+mongodb_configure_hidden() {
+    local -r node="${1:?node is required}"
+
+    mongodb_wait_for_primary_node "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD"
+
+    if mongodb_node_currently_in_cluster "$node"; then
+        info "Node currently in the cluster"
+    else
+        info "Adding hidden node to the cluster"
+        if ! retry_while "mongodb_is_hidden_node_pending $node" "$MONGODB_MAX_TIMEOUT"; then
+            error "Hidden node did not get ready"
+            exit 1
+        fi
+        mongodb_wait_confirmation "$node"
+    fi
+}
+
 
 ########################
 # Configure arbiter node
@@ -914,6 +967,9 @@ mongodb_configure_replica_set() {
             ;;
         "arbiter")
             mongodb_configure_arbiter "$node"
+            ;;
+        "hidden")
+            mongodb_configure_hidden "$node"
             ;;
         "dynamic")
             # Do nothing
