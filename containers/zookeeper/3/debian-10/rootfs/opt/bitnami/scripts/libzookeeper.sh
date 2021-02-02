@@ -69,11 +69,13 @@ export ZOO_TLS_CLIENT_KEYSTORE_FILE="${ZOO_TLS_CLIENT_KEYSTORE_FILE:-}"
 export ZOO_TLS_CLIENT_KEYSTORE_PASSWORD="${ZOO_TLS_CLIENT_KEYSTORE_PASSWORD:-}"
 export ZOO_TLS_CLIENT_TRUSTSTORE_FILE="${ZOO_TLS_CLIENT_TRUSTSTORE_FILE:-}"
 export ZOO_TLS_CLIENT_TRUSTSTORE_PASSWORD="${ZOO_TLS_CLIENT_TRUSTSTORE_PASSWORD:-}"
+export ZOO_TLS_CLIENT_AUTH="${ZOO_TLS_CLIENT_AUTH:-need}"
 export ZOO_TLS_QUORUM_ENABLE="${ZOO_TLS_QUORUM_ENABLE:-false}"
 export ZOO_TLS_QUORUM_KEYSTORE_FILE="${ZOO_TLS_QUORUM_KEYSTORE_FILE:-}"
 export ZOO_TLS_QUORUM_KEYSTORE_PASSWORD="${ZOO_TLS_QUORUM_KEYSTORE_PASSWORD:-}"
 export ZOO_TLS_QUORUM_TRUSTSTORE_FILE="${ZOO_TLS_QUORUM_TRUSTSTORE_FILE:-}"
 export ZOO_TLS_QUORUM_TRUSTSTORE_PASSWORD="${ZOO_TLS_QUORUM_TRUSTSTORE_PASSWORD:-}"
+export ZOO_TLS_QUORUM_CLIENT_AUTH="${ZOO_TLS_QUORUM_CLIENT_AUTH:-need}"
 
 # Java settings
 export JVMFLAGS="${JVMFLAGS:-}"
@@ -152,6 +154,12 @@ zookeeper_validate() {
         fi
     }
 
+    check_multi_value() {
+        if [[ " ${2} " != *" ${!1} "* ]]; then
+            print_validation_error "The allowed values for ${1} are: ${2}"
+        fi
+    }
+
     check_allowed_port ZOO_PORT_NUMBER
     check_allowed_port ZOO_PROMETHEUS_METRICS_PORT_NUMBER
 
@@ -181,6 +189,9 @@ zookeeper_validate() {
             fi
         done
     fi
+
+    check_multi_value "ZOO_TLS_CLIENT_AUTH" "none want need"
+    check_multi_value "ZOO_TLS_QUORUM_CLIENT_AUTH" "none want need"
 
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
@@ -280,6 +291,7 @@ zookeeper_generate_conf() {
     # If TLS in enable
     if is_boolean_yes "$ZOO_TLS_CLIENT_ENABLE"; then
         zookeeper_conf_set "$ZOO_CONF_FILE" client.secure true
+        zookeeper_conf_set "$ZOO_CONF_FILE" ssl.clientAuth "$ZOO_TLS_CLIENT_AUTH"
         zookeeper_conf_set "$ZOO_CONF_FILE" secureClientPort "$ZOO_TLS_PORT_NUMBER"
         zookeeper_conf_set "$ZOO_CONF_FILE" serverCnxnFactory org.apache.zookeeper.server.NettyServerCnxnFactory
         [[ -n "$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD" ]] && zookeeper_conf_set "$ZOO_CONF_FILE" ssl.keyStore.password "$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD"
@@ -289,6 +301,7 @@ zookeeper_generate_conf() {
     fi
     if is_boolean_yes "$ZOO_TLS_QUORUM_ENABLE"; then
         zookeeper_conf_set "$ZOO_CONF_FILE" sslQuorum true
+        zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.clientAuth "$ZOO_TLS_QUORUM_CLIENT_AUTH"
         zookeeper_conf_set "$ZOO_CONF_FILE" serverCnxnFactory org.apache.zookeeper.server.NettyServerCnxnFactory
         zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.keyStore.location "$ZOO_TLS_QUORUM_KEYSTORE_FILE"
         [[ -n "$ZOO_TLS_QUORUM_KEYSTORE_PASSWORD" ]] && zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.keyStore.password "$ZOO_TLS_QUORUM_KEYSTORE_PASSWORD"
