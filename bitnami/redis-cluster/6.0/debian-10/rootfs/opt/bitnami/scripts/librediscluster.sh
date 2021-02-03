@@ -127,7 +127,6 @@ redis_cluster_create() {
 
     for node in "${nodes[@]}"; do
         host_and_port=($(to_host_and_port "$node"))
-
         wait_command="redis-cli -h ${host_and_port[0]} -p ${host_and_port[1]} ping"
         if is_boolean_yes "$REDIS_TLS_ENABLED"; then
             wait_command="${wait_command:0:-5} --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE} ping"
@@ -226,8 +225,8 @@ redis_cluster_update_ips() {
 #   - 2 element Array of host and port
 #########################
 to_host_and_port() {
-    local host="${1:?At least the host is required}"
-    local host_and_port=($(echo $host | tr ":" "\n"))
+    local host="${1:?host is required}"
+    local host_and_port=($(echo "$host" | tr ":" "\n"))
 
     if [ "${#host_and_port[*]}" -eq "1" ]; then
         if is_boolean_yes "$REDIS_TLS_ENABLED"; then
