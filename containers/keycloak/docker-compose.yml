@@ -10,7 +10,7 @@ services:
       - 'postgresql_data:/bitnami/postgresql'
 
   keycloak:
-    image: docker.io/bitnami/keycloak:11-debian-10
+    image: docker.io/bitnami/keycloak:12-debian-10
     depends_on:
       - postgresql
     ports:
