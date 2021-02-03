@@ -21,6 +21,8 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
+# Fix https://github.com/bitnami/bitnami-docker-aws-cli/issues/1
+ENV AWS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 ENV BITNAMI_APP_NAME="aws-cli" \
     BITNAMI_IMAGE_VERSION="1.19.0-debian-10-r0" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/aws-cli/bin:/opt/bitnami/aws-cli/venv/bin:$PATH"
