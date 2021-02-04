@@ -1,10 +1,10 @@
 {
     "airflow-scheduler": {
         "arch": "amd64",
-        "digest": "4cb4926e3b9cc572c9955bd0c65e508231db9fc5e7fc8a26eab00e74bac1a72a",
+        "digest": "43d6417cb0e7a45e027341fb114cb9134c8b8c4a5e52743673ff4344f0542a9e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.0.0-3"
+        "version": "2.0.0-4"
     },
     "gosu": {
         "arch": "amd64",
