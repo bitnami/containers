@@ -709,7 +709,7 @@ cassandra_initialize() {
     is_boolean_yes "$CASSANDRA_CLIENT_ENCRYPTION" && cassandra_setup_client_ssl
 
     debug "Ensuring expected directories/files exist..."
-    for dir in "$CASSANDRA_DATA_DIR" "$CASSANDRA_TMP_DIR" "$CASSANDRA_LOG_DIR" "$CASSANDRA_COMMITLOG_DIR"; do
+    for dir in "$CASSANDRA_DATA_DIR" "$CASSANDRA_TMP_DIR" "$CASSANDRA_LOG_DIR"; do
         ensure_dir_exists "$dir"
         am_i_root && chown -R "$CASSANDRA_DAEMON_USER:$CASSANDRA_DAEMON_GROUP" "$dir"
     done
