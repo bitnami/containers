@@ -243,6 +243,10 @@ redis_configure_replication() {
 
     redis_conf_set replica-announce-ip "${REDIS_REPLICA_IP:-$(get_machine_ip)}"
     redis_conf_set replica-announce-port "${REDIS_REPLICA_PORT:-$REDIS_MASTER_PORT_NUMBER}"
+    # Use TLS in the replication connections
+    if is_boolean_yes "$REDIS_TLS_ENABLED"; then
+        redis_conf_set tls-replication yes
+    fi
     if [[ "$REDIS_REPLICATION_MODE" = "master" ]]; then
         if [[ -n "$REDIS_PASSWORD" ]]; then
             redis_conf_set masterauth "$REDIS_PASSWORD"
@@ -265,10 +269,6 @@ redis_configure_replication() {
         local parameter="replicaof"
         [[ $(redis_major_version) -lt 5 ]] && parameter="slaveof"
         redis_conf_set "$parameter" "$REDIS_MASTER_HOST $REDIS_MASTER_PORT_NUMBER"
-        # Configure replicas to use TLS for outgoing connections to the master
-        if is_boolean_yes "$REDIS_TLS_ENABLED"; then
-            redis_conf_set tls-replication yes
-        fi
     fi
 }
 
