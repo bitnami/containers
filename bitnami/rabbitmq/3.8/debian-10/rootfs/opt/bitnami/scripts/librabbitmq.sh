@@ -623,7 +623,7 @@ rabbitmq_change_password() {
     local password="${2:?password is required}"
     debug "Changing password for user '${user}'..."
 
-    if ! debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" change_password "$user" "$password"; then
+    if ! debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" change_password -- "$user" "$password"; then
         error "Couldn't change password for user '${user}'."
         return 1
     fi
