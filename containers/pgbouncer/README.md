@@ -75,7 +75,7 @@ The Bitnami PgBouncer container requires a running PostgreSQL installation to co
 
 - `POSTGRESQL_USERNAME`: Backend PostgreSQL username. Default: **postgres**.
 - `POSTGRESQL_PASSWORD`: Backend PostgreSQL password. No defaults.
-- `POSTGRESQL_PASSWORD`: Backend PostgreSQL Database name to connect to. Default: **postgres**.
+- `POSTGRESQL_DATABASE`: Backend PostgreSQL Database name to connect to. Default: **postgres**.
 - `POSTGRESQL_HOST`: Backend PostgreSQL hostname. Default: **postgresql**.
 - `POSTGRESQL_PORT`: Backend PostgreSQL port. Default: **5432**.
 
