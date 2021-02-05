@@ -33,7 +33,7 @@ You can find the default credentials and available configuration options in the 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.0.0`, `2.0.0-debian-10-r15`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/2.0.0-debian-10-r15/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.0.0`, `2.0.0-debian-10-r16`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/2.0.0-debian-10-r16/2/debian-10/Dockerfile)
 * [`1`, `1-debian-10`, `1.10.14`, `1.10.14-debian-10-r42` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/1.10.14-debian-10-r42/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow).
@@ -349,8 +349,9 @@ The Airflow instance can be customized by specifying environment variables on th
 - `AIRFLOW_LDAP_BIND_PASSWORD`: LDAP user password. No defaults.
 - `AIRFLOW_LDAP_UID_FIELD`: LDAP field used for uid. Default: **uid**.
 - `AIRFLOW_LDAP_USE_TLS`: Use LDAP SSL. Defaults: **False**.
-- `AIRFLOW_LDAP_ALLOW_SELF_SIGNED`: Allow self signed certicates in LDAP ssl. Default:s **True**.
+- `AIRFLOW_LDAP_ALLOW_SELF_SIGNED`: Allow self signed certicates in LDAP ssl. Default: **True**.
 - `AIRFLOW_LDAP_TLS_CA_CERTIFICATE`: File that store the CA for LDAP ssl. No defaults.
+- `AIRFLOW_USER_REGISTRATION_ROLE`: Role for the created user. Default: **Public**
 
 > In addition to the previous environment variables, all the parameters from the configuration file can be overwritten by using environment variables with this format: `AIRFLOW__{SECTION}__{KEY}`. Note the double underscores.
 
