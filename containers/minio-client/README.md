@@ -1,8 +1,10 @@
-# What is MinIO(TM) Container Client packaged by Bitnami?
+# What is MinIO(R) Container Client packaged by Bitnami?
 
-> MinIO(TM) Client is a Golang CLI tool that offers alternatives for ls, cp, mkdir, diff, and rsync commands for filesystems and object storage systems.
+> This software listing is packaged and published by Bitnami. MinIO(R) Client is a Golang CLI tool that offers alternatives for ls, cp, mkdir, diff, and rsync commands for filesystems and object storage systems.
 
 [min.io](https://min.io/)
+
+Disclaimer: All software products, projects and company names are trademarks(TM) or registered(R) trademarks of their respective holders, and use of them does not imply any affiliation or endorsement. This software is licensed to you subject to one or more open source licenses and VMware provides the software on an AS-IS basis.
 
 # TL;DR
 
@@ -37,13 +39,13 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2021`, `2021-debian-10`, `2021.1.30`, `2021.1.30-debian-10-r6`, `latest` (2021/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2021.1.30-debian-10-r6/2021/debian-10/Dockerfile)
+* [`2021`, `2021-debian-10`, `2021.1.30`, `2021.1.30-debian-10-r7`, `latest` (2021/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2021.1.30-debian-10-r7/2021/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/minio-client GitHub repo](https://github.com/bitnami/bitnami-docker-minio-client).
 
 # Get this image
 
-The recommended way to get the Bitnami MinIO(TM) Client Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/minio-client).
+The recommended way to get the Bitnami MinIO(R) Client Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/minio-client).
 
 ```console
 $ docker pull bitnami/minio-client:latest
@@ -63,13 +65,13 @@ $ docker build -t bitnami/minio-client:latest 'https://github.com/bitnami/bitnam
 
 # Connecting to other containers
 
-Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a MinIO(TM) Client can be used to access other running containers such as [MinIO(TM) server](https://github.com/bitnami/bitnami-docker-minio).
+Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a MinIO(R) Client can be used to access other running containers such as [MinIO(R) server](https://github.com/bitnami/bitnami-docker-minio).
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
 ## Using the Command Line
 
-In this example, we will create a MinIO(TM) Client container that will connect to a MinIO(TM) server container that is running on the same docker network.
+In this example, we will create a MinIO(R) Client container that will connect to a MinIO(R) server container that is running on the same docker network.
 
 ### Step 1: Create a network
 
@@ -77,9 +79,9 @@ In this example, we will create a MinIO(TM) Client container that will connect t
 $ docker network create app-tier --driver bridge
 ```
 
-### Step 2: Launch the MinIO(TM) server container
+### Step 2: Launch the MinIO(R) server container
 
-Use the `--network app-tier` argument to the `docker run` command to attach the MinIO(TM) container to the `app-tier` network.
+Use the `--network app-tier` argument to the `docker run` command to attach the MinIO(R) container to the `app-tier` network.
 
 ```console
 $ docker run -d --name minio-server \
@@ -89,9 +91,9 @@ $ docker run -d --name minio-server \
     bitnami/minio:latest
 ```
 
-### Step 3: Launch your MinIO(TM) Client container
+### Step 3: Launch your MinIO(R) Client container
 
-Finally we create a new container instance to launch the MinIO(TM) client and connect to the server created in the previous step. In this example, we create a new bucket in the MinIO(TM) storage server:
+Finally we create a new container instance to launch the MinIO(R) client and connect to the server created in the previous step. In this example, we create a new bucket in the MinIO(R) storage server:
 
 ```console
 $ docker run --rm --name minio-client \
@@ -105,15 +107,15 @@ $ docker run --rm --name minio-client \
 
 # Configuration
 
-MinIO(TM) Client (`mc`) can be setup so it is already configured to point to a specific MinIO(TM) server by providing the environment variables below:
+MinIO(R) Client (`mc`) can be setup so it is already configured to point to a specific MinIO(R) server by providing the environment variables below:
 
-- `MINIO_SERVER_HOST`: MinIO(TM) server host.
-- `MINIO_SERVER_PORT_NUMBER`: MinIO(TM) server port. Default: `9000`.
-- `MINIO_SERVER_SCHEME`: MinIO(TM) server scheme. Default: `http`.
-- `MINIO_SERVER_ACCESS_KEY`: MinIO(TM) server Access Key. Must be common on every node.
-- `MINIO_SERVER_SECRET_KEY`: MinIO(TM) server Secret Key. Must be common on every node.
+- `MINIO_SERVER_HOST`: MinIO(R) server host.
+- `MINIO_SERVER_PORT_NUMBER`: MinIO(R) server port. Default: `9000`.
+- `MINIO_SERVER_SCHEME`: MinIO(R) server scheme. Default: `http`.
+- `MINIO_SERVER_ACCESS_KEY`: MinIO(R) server Access Key. Must be common on every node.
+- `MINIO_SERVER_SECRET_KEY`: MinIO(R) server Secret Key. Must be common on every node.
 
-For instance, use the command below to create a new bucket in the MinIO(TM) Server `my.minio.domain`:
+For instance, use the command below to create a new bucket in the MinIO(R) Server `my.minio.domain`:
 
 ```console
 $ docker run --rm --name minio-client \
@@ -124,7 +126,7 @@ $ docker run --rm --name minio-client \
     mb minio/my-bucket
 ```
 
-Find more information about the client configuration in the [MinIO(TM) Client documentation](https://docs.min.io/docs/minio-admin-complete-guide.html).
+Find more information about the client configuration in the [MinIO(R) Client documentation](https://docs.min.io/docs/minio-admin-complete-guide.html).
 
 # Contributing
 
@@ -155,5 +157,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
-Disclaimer: The respective trademarks mentioned in the offering are owned by the respective companies. We do not provide a commercial license for any of these products. This listing has an open-source license. MinIO(TM) is run and maintained by MinIO, which is a completely separate project from Bitnami.
