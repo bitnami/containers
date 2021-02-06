@@ -1,7 +1,7 @@
 
 # What is Redis Exporter?
 
-Redis Exporter is a simple server that scrapes Redis metrics endpoint and exports them as Prometheus metrics.
+Redis Exporter is a simple server that scrapes Redis(TM) metrics endpoint and exports them as Prometheus metrics.
 
 [https://github.com/oliver006/redis_exporter](https://github.com/oliver006/redis_exporter)
 
@@ -32,7 +32,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.16.0`, `1.16.0-debian-10-r7`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-exporter/blob/1.16.0-debian-10-r7/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.16.0`, `1.16.0-debian-10-r8`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-exporter/blob/1.16.0-debian-10-r8/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-redis-exporter).
 
