@@ -35,7 +35,7 @@ You can find the default credentials and available configuration options in the 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.6.1`, `2.6.1-debian-10-r13`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.6.1-debian-10-r13/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.6.1`, `2.6.1-debian-10-r14`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.6.1-debian-10-r14/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/discourse GitHub repo](https://github.com/bitnami/bitnami-docker-discourse).
 
@@ -76,7 +76,7 @@ If you want to run the application manually instead of using docker-compose, the
 
   *Note:* You need to give the container a name in order to Discourse to resolve the host
 
-3. Start Redis in the network generated:
+3. Start Redis(TM) in the network generated:
 
   ```console
   $ docker run -d --name redis --net=discourse-tier \
@@ -112,7 +112,7 @@ RAILS_ENV=production bundle exec rake admin:create
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for persistence of the [PostgreSQL](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database), [Redis](https://github.com/bitnami/bitnami-docker-redis#persisting-your-database) data.
+For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for persistence of the [PostgreSQL](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database), [Redis(TM)](https://github.com/bitnami/bitnami-docker-redis#persisting-your-database) data.
 
 The above examples define docker volumes namely `postgresql_data`, `redis_data`, `sidekiq_data` and `discourse_data`. The Discourse application state will persist as long as these volumes are not removed.
 
@@ -165,7 +165,7 @@ In this case you need to specify the directories to mount on the run command. Th
   bitnami/postgresql
   ```
 
-3. Start Redis in the previous network as well:
+3. Start Redis(TM) in the previous network as well:
 
   ```console
   $ docker run -d --name redis \
@@ -217,7 +217,7 @@ $ rsync -a /path/to/discourse-persistence /path/to/discourse-persistence.bkp.$(d
 $ rsync -a /path/to/sidekiq-persistence /path/to/sidekiq-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
-Additionally, [snapshot the PostgreSQL](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container) and [Redis](https://github.com/bitnami/bitnami-docker-redis#step-2-stop-and-backup-the-currently-running-container) data.
+Additionally, [snapshot the PostgreSQL](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container) and [Redis(TM)](https://github.com/bitnami/bitnami-docker-redis#step-2-stop-and-backup-the-currently-running-container) data.
 
 You can use these snapshots to restore the application state should the upgrade fail.
 
@@ -284,9 +284,9 @@ Available variables:
  - `DISCOURSE_POSTGRESQL_USERNAME`: Discourse application database user. Default: **bn_discourse**
  - `DISCOURSE_POSTGRESQL_PASSWORD`: Discourse application database password. Default: **bitnami1**
  - `DISCOURSE_POSTGRESQL_NAME`: Discourse application database name. Default: **bitnami_application**
- - `REDIS_HOST`: Hostname for Redis. Default: **redis**
- - `REDIS_PORT_NUMBER`: Port used by Redis. Default: **6379**
- - `REDIS_PASSWORD`: Password for Redis.
+ - `REDIS_HOST`: Hostname for Redis(TM). Default: **redis**
+ - `REDIS_PORT_NUMBER`: Port used by Redis(TM). Default: **6379**
+ - `REDIS_PASSWORD`: Password for Redis(TM).
 
 ### SMTP Configuration
 
