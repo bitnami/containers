@@ -648,7 +648,7 @@ mysql_get_version() {
     ver_string=$("${DB_BIN_DIR}/mysql" "--version")
     ver_split=(${ver_string// / })
 
-    if [[ "$ver_string" == *" Distrib "* ]]; then
+    if [[ "$ver_string" = *" Distrib "* ]]; then
         echo "${ver_split[4]::-1}"
     else
         echo "${ver_split[2]}"
@@ -666,7 +666,8 @@ mysql_get_version() {
 #########################
 get_env_var() {
     local -r id="${1:?id is required}"
-    echo "${DB_FLAVOR^^}_${id}"
+    local -r prefix="${DB_FLAVOR//-/_}"
+    echo "${prefix^^}_${id}"
 }
 
 ########################
@@ -941,11 +942,11 @@ mysql_install_db() {
     local command="${DB_BIN_DIR}/mysql_install_db"
     local -a args=("--defaults-file=${DB_CONF_FILE}" "--basedir=${DB_BASE_DIR}" "--datadir=${DB_DATA_DIR}")
     am_i_root && args=("${args[@]}" "--user=$DB_DAEMON_USER")
-    if [[ "$DB_FLAVOR" = "mysql" ]]; then
+    if [[ "$DB_FLAVOR" = "mariadb" ]]; then
+        args+=("--auth-root-authentication-method=normal")
+    else
         command="${DB_BIN_DIR}/mysqld"
         args+=("--initialize-insecure")
-    else
-        args+=("--auth-root-authentication-method=normal")
     fi
     debug_execute "$command" "${args[@]}"
 }
@@ -967,7 +968,7 @@ mysql_upgrade() {
     minor_version="$(get_sematic_version "$(mysql_get_version)" 2)"
     patch_version="$(get_sematic_version "$(mysql_get_version)" 3)"
     info "Running mysql_upgrade"
-    if [[ "$DB_FLAVOR" = "mysql" ]] && [[
+    if [[ "$DB_FLAVOR" = *"mysql"* ]] && [[
         "$major_version" -gt "8"
         || ( "$major_version" -eq "8" && "$minor_version" -gt "0" )
         || ( "$major_version" -eq "8" && "$minor_version" -eq "0" && "$patch_version" -ge "16" )
@@ -1152,7 +1153,7 @@ mysql_ensure_root_user_exists() {
     fi
 
     debug "Configuring root user credentials"
-    if [ "$DB_FLAVOR" == "mariadb" ]; then
+    if [[ "$DB_FLAVOR" = "mariadb" ]]; then
         mysql_execute "mysql" "root" <<EOF
 -- create root@localhost user for local admin access
 -- create user 'root'@'localhost' $([ "$password" != "" ] && echo "identified by \"$password\"");
