@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="node-exporter" \
-    BITNAMI_IMAGE_VERSION="1.1.0-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="1.1.0-debian-10-r2" \
     PATH="/opt/bitnami/node-exporter/bin:$PATH"
 
 EXPOSE 9100
