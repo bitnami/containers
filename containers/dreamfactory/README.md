@@ -44,7 +44,7 @@ To run this application you need [Docker Engine](https://www.docker.com/products
 
 # How to use this image
 
-DreamFactory requires access to a MySQL database or MariaDB database to store information. We'll use our very own [MariaDB image](https://www.github.com/bitnami/bitnami-docker-mariadb) for the database requirements. It also uses our [MongoDB image] (https://www.github.com/bitnami/bitnami-docker-mongodb) and [Redis(TM) image] (https://www.github.com/bitnami/bitnami-docker-redis).
+DreamFactory requires access to a MySQL database or MariaDB database to store information. We'll use our very own [MariaDB image](https://www.github.com/bitnami/bitnami-docker-mariadb) for the database requirements. It also uses our [MongoDB image](https://www.github.com/bitnami/bitnami-docker-mongodb) and [Redis(TM) image](https://www.github.com/bitnami/bitnami-docker-redis).
 
 ## Using Docker Compose
 
