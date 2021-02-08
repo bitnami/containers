@@ -12,14 +12,12 @@ RUN install_packages acl ca-certificates curl gzip libaec0 libaom0 libarmadillo9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.6.12-10" --checksum cc3e62e05463929529214f65cb7922794c758a3db5ca29bf5c9a59fe66e95b80
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mxnet" "1.7.0-3" --checksum a7202bb353748ed66b0b9604caf0fd7c1fcbf038264426dc7f087de49c02d5e4
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
-RUN apt-get update && apt-get upgrade -y && \
-    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mxnet/postunpack.sh
 ENV BITNAMI_APP_NAME="mxnet" \
-    BITNAMI_IMAGE_VERSION="1.7.0-debian-10-r136" \
+    BITNAMI_IMAGE_VERSION="1.7.0-debian-10-r137" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:$PATH"
 
