@@ -1,10 +1,12 @@
-# What is MongoDB?
+# What is MongoDB(TM) packaged by Bitnami?
 
-> [MongoDB](https://www.mongodb.org/) is a cross-platform document-oriented database. Classified as a NoSQL database, MongoDB eschews the traditional table-based relational database structure in favor of JSON-like documents with dynamic schemas, making the integration of data in certain types of applications easier and faster.
+> [MongoDB(TM)](https://www.mongodb.org/) is a cross-platform document-oriented database. Classified as a NoSQL database, MongoDB(TM) eschews the traditional table-based relational database structure in favor of JSON-like documents with dynamic schemas, making the integration of data in certain types of applications easier and faster.
 
-This container ships the official MongoDB Community binaries from MongoDB, Inc and the source code is available at the [official MongoDB Community Server downloads page](https://www.mongodb.com/download-center/community).
+This container ships the official MongoDB(TM) Community binaries from MongoDB, Inc and the source code is available at the [official MongoDB(TM) Community Server downloads page](https://www.mongodb.com/download-center/community).
 
-All MongoDB versions released after October 16, 2018 (3.6.9 or later, 4.0.4 or later or 4.1.5 or later) are licensed under the [Server Side Public License](https://www.mongodb.com/licensing/server-side-public-license) that is not currently accepted as a Open Source license by the Open Source Iniciative (OSI).
+All MongoDB(TM) versions released after October 16, 2018 (3.6.9 or later, 4.0.4 or later or 4.1.5 or later) are licensed under the [Server Side Public License](https://www.mongodb.com/licensing/server-side-public-license) that is not currently accepted as a Open Source license by the Open Source Iniciative (OSI).
+
+Disclaimer: The respective trademarks mentioned in the offering are owned by the respective companies. We do not provide a commercial license for any of these products. This listing has an open-source license. MongoDB(TM) is run and maintained by MongoDB, which is a completely separate project from Bitnami.
 
 # TL;DR
 
@@ -31,9 +33,9 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/mongodb?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy MongoDB in Kubernetes?
+# How to deploy MongoDB(TM) in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami MongoDB Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/mongodb).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami MongoDB(TM) Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/mongodb).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
@@ -49,13 +51,13 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`4.4`, `4.4-debian-10`, `4.4.3`, `4.4.3-debian-10-r45`, `latest` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.3-debian-10-r45/4.4/debian-10/Dockerfile)
 * [`4.2`, `4.2-debian-10`, `4.2.12`, `4.2.12-debian-10-r16` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.12-debian-10-r16/4.2/debian-10/Dockerfile)
 * [`4.0`, `4.0-debian-9`, `4.0.22`, `4.0.22-debian-9-r43` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.22-debian-9-r43/4.0/debian-9/Dockerfile)
-* [`3.6`, `3.6-debian-9`, `3.6.22`, `3.6.22-debian-9-r3` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.22-debian-9-r3/3.6/debian-9/Dockerfile)
+* [`3.6`, `3.6-debian-9`, `3.6.22`, `3.6.22-debian-9-r4` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.22-debian-9-r4/3.6/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
 
 # Get this image
 
-The recommended way to get the Bitnami MongoDB Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mongodb).
+The recommended way to get the Bitnami MongoDB(TM) Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mongodb).
 
 ```console
 $ docker pull bitnami/mongodb:latest
@@ -102,13 +104,13 @@ or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-do
 
 # Connecting to other containers
 
-Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a MongoDB server running inside a container can easily be accessed by your application containers.
+Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a MongoDB(TM) server running inside a container can easily be accessed by your application containers.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
 ## Using the Command Line
 
-In this example, we will create a MongoDB client instance that will connect to the server instance that is running on the same docker network as the client.
+In this example, we will create a MongoDB(TM) client instance that will connect to the server instance that is running on the same docker network as the client.
 
 ### Step 1: Create a network
 
@@ -116,9 +118,9 @@ In this example, we will create a MongoDB client instance that will connect to t
 $ docker network create app-tier --driver bridge
 ```
 
-### Step 2: Launch the MongoDB server instance
+### Step 2: Launch the MongoDB(TM) server instance
 
-Use the `--network app-tier` argument to the `docker run` command to attach the MongoDB container to the `app-tier` network.
+Use the `--network app-tier` argument to the `docker run` command to attach the MongoDB(TM) container to the `app-tier` network.
 
 ```console
 $ docker run -d --name mongodb-server \
@@ -126,9 +128,9 @@ $ docker run -d --name mongodb-server \
     bitnami/mongodb:latest
 ```
 
-### Step 3: Launch your MongoDB client instance
+### Step 3: Launch your MongoDB(TM) client instance
 
-Finally we create a new container instance to launch the MongoDB client and connect to the server created in the previous step:
+Finally we create a new container instance to launch the MongoDB(TM) client and connect to the server created in the previous step:
 
 ```console
 $ docker run -it --rm \
@@ -138,7 +140,7 @@ $ docker run -it --rm \
 
 ## Using Docker Compose
 
-When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the MongoDB server from your own custom application image which is identified in the following snippet by the service name `myapp`.
+When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the MongoDB(TM) server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
 ```yaml
 version: '2'
@@ -161,7 +163,7 @@ services:
 > **IMPORTANT**:
 >
 > 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
-> 2. In your application container, use the hostname `mongodb` to connect to the MongoDB server
+> 2. In your application container, use the hostname `mongodb` to connect to the MongoDB(TM) server
 
 Launch the containers using:
 
@@ -204,8 +206,8 @@ services:
 
 Configuring the system log verbosity level is possible through the following env vars:
 
-- `MONGODB_DISABLE_SYSTEM_LOG`: Whether to enable/disable system log on MongoDB. Default: `false`. Possible values: `[true, false]`.
-- `MONGODB_SYSTEM_LOG_VERBOSITY`: MongoDB system log verbosity level. Default: `0`. Possible values: `[0, 1, 2, 3, 4, 5]`. For more information about the verbosity levels please refer to the [MongoDB documentation](https://docs.mongodb.com/manual/reference/configuration-options/#systemLog.verbosity)
+- `MONGODB_DISABLE_SYSTEM_LOG`: Whether to enable/disable system log on MongoDB(TM). Default: `false`. Possible values: `[true, false]`.
+- `MONGODB_SYSTEM_LOG_VERBOSITY`: MongoDB(TM) system log verbosity level. Default: `0`. Possible values: `[0, 1, 2, 3, 4, 5]`. For more information about the verbosity levels please refer to the [MongoDB(TM) documentation](https://docs.mongodb.com/manual/reference/configuration-options/#systemLog.verbosity)
 
 ```console
 $ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_SYSTEM_LOG_VERBOSITY='3' bitnami/mongodb:latest
@@ -227,7 +229,7 @@ services:
 
 Enabling/disabling IPv6 is possible through the following env var:
 
-- `MONGODB_ENABLE_IPV6`: Whether to enable/disable IPv6 on MongoDB. Default: `false`. Possible values: `[true, false]`
+- `MONGODB_ENABLE_IPV6`: Whether to enable/disable IPv6 on MongoDB(TM). Default: `false`. Possible values: `[true, false]`
 
 To enable IPv6 support, you can execute:
 
@@ -251,7 +253,7 @@ services:
 
 Enabling/disabling [directoryPerDB](https://docs.mongodb.com/manual/reference/configuration-options/#storage.directoryPerDB) is possible through the following env var:
 
-- `MONGODB_ENABLE_DIRECTORY_PER_DB`: Whether to enable/disable directoryPerDB on MongoDB. Default: `true`. Possible values: `[true, false]`
+- `MONGODB_ENABLE_DIRECTORY_PER_DB`: Whether to enable/disable directoryPerDB on MongoDB(TM). Default: `true`. Possible values: `[true, false]`
 
 ```console
 $ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_ENABLE_DIRECTORY_PER_DB=yes bitnami/mongodb:latest
@@ -271,7 +273,7 @@ services:
 
 ## Setting the root password on first run
 
-Passing the `MONGODB_ROOT_PASSWORD` environment variable when running the image for the first time will set the password of the `root` user to the value of `MONGODB_ROOT_PASSWORD` and enabled authentication on the MongoDB server.
+Passing the `MONGODB_ROOT_PASSWORD` environment variable when running the image for the first time will set the password of the `root` user to the value of `MONGODB_ROOT_PASSWORD` and enabled authentication on the MongoDB(TM) server.
 
 ```console
 $ docker run --name mongodb \
@@ -289,7 +291,7 @@ services:
   ...
 ```
 
-The `root` user is configured to have full administrative access to the MongoDB server. When `MONGODB_ROOT_PASSWORD` is not specified the server allows unauthenticated and unrestricted access.
+The `root` user is configured to have full administrative access to the MongoDB(TM) server. When `MONGODB_ROOT_PASSWORD` is not specified the server allows unauthenticated and unrestricted access.
 
 ## Creating a user and database on first run
 
@@ -315,21 +317,21 @@ services:
 ```
 
 **Note!**
-Creation of a user enables authentication on the MongoDB server and as a result unauthenticated access by *any* user is not permitted.
+Creation of a user enables authentication on the MongoDB(TM) server and as a result unauthenticated access by *any* user is not permitted.
 
 ## Setting up replication
 
-A [replication](https://docs.mongodb.com/manual/replication/) cluster can easily be setup with the Bitnami MongoDB Docker Image using the following environment variables:
+A [replication](https://docs.mongodb.com/manual/replication/) cluster can easily be setup with the Bitnami MongoDB(TM) Docker Image using the following environment variables:
 
  - `MONGODB_REPLICA_SET_MODE`: The replication mode. Possible values `primary`/`secondary`/`arbiter`. No defaults.
- - `MONGODB_REPLICA_SET_NAME`: MongoDB replica set name. Default: **replicaset**
- - `MONGODB_PORT_NUMBER`: The port each MongoDB will use. Default: **27017**
- - `MONGODB_INITIAL_PRIMARY_HOST`: MongoDB initial primary host, once the replicaset is created any node can be eventually promoted to be the primary. No defaults.
- - `MONGODB_INITIAL_PRIMARY_PORT_NUMBER`: MongoDB initial primary node port, as seen by other nodes. Default: **27017**
- - `MONGODB_ADVERTISED_HOSTNAME`: MongoDB advertised hostname. No defaults. It is recommended to pass this environment variable if you experience issues with ephemeral IPs. Setting this env var makes the nodes of the replica set to be configured with a hostname instead of the machine IP.
- - `MONGODB_REPLICA_SET_KEY`: MongoDB replica set key. Length should be greater than 5 characters and should not contain any special characters. Required for all nodes. No default.
- - `MONGODB_ROOT_PASSWORD`: MongoDB root password. No defaults. Only for primary node.
- - `MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD`: MongoDB initial primary root password. No defaults. Only for secondaries and arbiter nodes.
+ - `MONGODB_REPLICA_SET_NAME`: MongoDB(TM) replica set name. Default: **replicaset**
+ - `MONGODB_PORT_NUMBER`: The port each MongoDB(TM) will use. Default: **27017**
+ - `MONGODB_INITIAL_PRIMARY_HOST`: MongoDB(TM) initial primary host, once the replicaset is created any node can be eventually promoted to be the primary. No defaults.
+ - `MONGODB_INITIAL_PRIMARY_PORT_NUMBER`: MongoDB(TM) initial primary node port, as seen by other nodes. Default: **27017**
+ - `MONGODB_ADVERTISED_HOSTNAME`: MongoDB(TM) advertised hostname. No defaults. It is recommended to pass this environment variable if you experience issues with ephemeral IPs. Setting this env var makes the nodes of the replica set to be configured with a hostname instead of the machine IP.
+ - `MONGODB_REPLICA_SET_KEY`: MongoDB(TM) replica set key. Length should be greater than 5 characters and should not contain any special characters. Required for all nodes. No default.
+ - `MONGODB_ROOT_PASSWORD`: MongoDB(TM) root password. No defaults. Only for primary node.
+ - `MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD`: MongoDB(TM) initial primary root password. No defaults. Only for secondaries and arbiter nodes.
 
 In a replication cluster you can have one primary node, zero or more secondary nodes and zero or one arbiter node.
 
@@ -337,7 +339,7 @@ In a replication cluster you can have one primary node, zero or more secondary n
 
 ### Step 1: Create the replication primary
 
-The first step is to start the MongoDB primary.
+The first step is to start the MongoDB(TM) primary.
 
 ```console
 $ docker run --name mongodb-primary \
@@ -352,7 +354,7 @@ In the above command the container is configured as the `primary` using the `MON
 
 ### Step 2: Create the replication secondary node
 
-Next we start a MongoDB secondary container.
+Next we start a MongoDB(TM) secondary container.
 
 ```console
 $ docker run --name mongodb-secondary \
@@ -366,11 +368,11 @@ $ docker run --name mongodb-secondary \
   bitnami/mongodb:latest
 ```
 
-In the above command the container is configured as a `secondary` using the `MONGODB_REPLICA_SET_MODE` parameter. The `MONGODB_INITIAL_PRIMARY_HOST` and `MONGODB_INITIAL_PRIMARY_PORT_NUMBER` parameters are used connect and with the MongoDB primary.
+In the above command the container is configured as a `secondary` using the `MONGODB_REPLICA_SET_MODE` parameter. The `MONGODB_INITIAL_PRIMARY_HOST` and `MONGODB_INITIAL_PRIMARY_PORT_NUMBER` parameters are used connect and with the MongoDB(TM) primary.
 
 ### Step 3: Create a replication arbiter node
 
-Finally we start a MongoDB arbiter container.
+Finally we start a MongoDB(TM) arbiter container.
 
 ```console
 $ docker run --name mongodb-arbiter \
@@ -384,13 +386,13 @@ $ docker run --name mongodb-arbiter \
   bitnami/mongodb:latest
 ```
 
-In the above command the container is configured as a `arbiter` using the `MONGODB_REPLICA_SET_MODE` parameter. The `MONGODB_INITIAL_PRIMARY_HOST` and `MONGODB_INITIAL_PRIMARY_PORT_NUMBER` parameters are used connect and with the MongoDB primary.
+In the above command the container is configured as a `arbiter` using the `MONGODB_REPLICA_SET_MODE` parameter. The `MONGODB_INITIAL_PRIMARY_HOST` and `MONGODB_INITIAL_PRIMARY_PORT_NUMBER` parameters are used connect and with the MongoDB(TM) primary.
 
-You now have a three node MongoDB replication cluster up and running which can be scaled by adding/removing secondaries.
+You now have a three node MongoDB(TM) replication cluster up and running which can be scaled by adding/removing secondaries.
 
 ### Optional: Create a replication hidden node
 
-If we want a replication hidden node, we start a MongoDB hidden container.
+If we want a replication hidden node, we start a MongoDB(TM) hidden container.
 
 ```console
 $ docker run --name mongodb-hidden \
@@ -404,7 +406,7 @@ $ docker run --name mongodb-hidden \
   bitnami/mongodb:latest
 ```
 
-In the above command the container is configured as a `hidden` using the `MONGODB_REPLICA_SET_MODE` parameter. The `MONGODB_INITIAL_PRIMARY_HOST` and `MONGODB_INITIAL_PRIMARY_PORT_NUMBER` parameters are used connect and with the MongoDB primary.
+In the above command the container is configured as a `hidden` using the `MONGODB_REPLICA_SET_MODE` parameter. The `MONGODB_INITIAL_PRIMARY_HOST` and `MONGODB_INITIAL_PRIMARY_PORT_NUMBER` parameters are used connect and with the MongoDB(TM) primary.
 
 With Docker Compose the replicaset can be setup using:
 
@@ -624,9 +626,9 @@ Especially client authentication and requirements for common name and OU/DN/etc.
 
 The image looks for mounted configurations files in `/bitnami/mongodb/conf/`. You can mount a volume at `/bitnami/mongodb/conf/` and copy/edit the configurations in the `/path/to/mongodb-configuration-persistence/`. The default configurations will be populated to the `/opt/bitnami/mongodb/conf/` directory if it's empty.
 
-### Step 1: Run the MongoDB image
+### Step 1: Run the MongoDB(TM) image
 
-Run the MongoDB image, mounting a directory from your host.
+Run the MongoDB(TM) image, mounting a directory from your host.
 
 ```console
 $ docker run --name mongodb -v /path/to/mongodb-configuration-persistence:/bitnami/mongodb/conf bitnami/mongodb:latest
@@ -653,9 +655,9 @@ Edit the configuration on your host using your favorite editor.
 $ vi /path/to/mongodb-configuration-persistence/mongodb.conf
 ```
 
-### Step 3: Restart MongoDB
+### Step 3: Restart MongoDB(TM)
 
-After changing the configuration, restart your MongoDB container for changes to take effect.
+After changing the configuration, restart your MongoDB(TM) container for changes to take effect.
 
 ```console
 $ docker restart mongodb
@@ -667,11 +669,11 @@ or using Docker Compose:
 $ docker-compose restart mongodb
 ```
 
-Refer to the [configuration file options](http://docs.mongodb.org/v2.4/reference/configuration-options/) manual for the complete list of MongoDB configuration options.
+Refer to the [configuration file options](http://docs.mongodb.org/v2.4/reference/configuration-options/) manual for the complete list of MongoDB(TM) configuration options.
 
 # Logging
 
-The Bitnami MongoDB Docker image sends the container logs to the `stdout`. To view the logs:
+The Bitnami MongoDB(TM) Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```console
 $ docker logs mongodb
@@ -689,7 +691,7 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 
 ## Upgrade this image
 
-Bitnami provides up-to-date versions of MongoDB, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
+Bitnami provides up-to-date versions of MongoDB(TM), including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
 ### Step 1: Get the updated image
 
@@ -759,15 +761,15 @@ $ docker-compose up mongodb
 
 ## 3.6.13-debian-9-r15, 3.6.13-ol-7-r15, 4.0.10-debian-9-r23, 4.0.10-ol-7-r24, 4.1.13-debian-9-r22, 4.1.13-ol-7-r23 or later
 
-- Decrease the size of the container. Node.js is not needed anymore. MongoDB configuration logic has been moved to bash scripts in the rootfs folder.
+- Decrease the size of the container. Node.js is not needed anymore. MongoDB(TM) configuration logic has been moved to bash scripts in the rootfs folder.
 
 ## 3.6.9, 4.0.4 and 4.1.5 or later
 
-- All MongoDB versions released after October 16, 2018 (3.6.9 or later, 4.0.4 or later or 4.1.5 or later) are licensed under the [Server Side Public License](https://www.mongodb.com/licensing/server-side-public-license) that is not currently accepted as a Open Source license by the Open Source Iniciative (OSI).
+- All MongoDB(TM) versions released after October 16, 2018 (3.6.9 or later, 4.0.4 or later or 4.1.5 or later) are licensed under the [Server Side Public License](https://www.mongodb.com/licensing/server-side-public-license) that is not currently accepted as a Open Source license by the Open Source Iniciative (OSI).
 
 ## 3.6.6-r16 and 4.1.1-r9
 
-- The MongoDB container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the MongoDB daemon was started as the `mongo` user. From now on, both the container and the MongoDB daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
+- The MongoDB(TM) container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the MongoDB(TM) daemon was started as the `mongo` user. From now on, both the container and the MongoDB(TM) daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 ## 3.2.7-r5
 
