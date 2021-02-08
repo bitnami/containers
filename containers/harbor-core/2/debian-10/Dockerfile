@@ -13,14 +13,12 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.3.0-2" --checksum d89528e5d733f34ae030984584659ff10a36370d40332bd8d41c047764d39cda
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-core" "2.1.3-2" --checksum 07911c0412497c25bf0455bef50e1f6b6311ca1400cd2f78c4a570f82bdb6320
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
-RUN apt-get update && apt-get upgrade -y && \
-    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-core/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-core" \
-    BITNAMI_IMAGE_VERSION="2.1.3-debian-10-r22" \
+    BITNAMI_IMAGE_VERSION="2.1.3-debian-10-r23" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/harbor-core/bin:$PATH"
 
 VOLUME [ "/data", "/etc/core" ]
