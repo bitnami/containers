@@ -575,7 +575,7 @@ EOF
     fi
 
     if ! grep -q "\"ok\" : 1" <<< "$result"; then
-        warn "Problem initating replica set
+        warn "Problem initiating replica set
             request: rs.initiate({\"_id\":\"$MONGODB_REPLICA_SET_NAME\", \"members\":[{\"_id\":0,\"host\":\"$node:$MONGODB_PORT_NUMBER\",\"priority\":5}]})
             response: $result"
         return 1
