@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`6.0`, `6.0-debian-10`, `6.0.10`, `6.0.10-debian-10-r22`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.0.10-debian-10-r22/6.0/debian-10/Dockerfile)
-* [`5.0`, `5.0-debian-10`, `5.0.10`, `5.0.10-debian-10-r96` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.10-debian-10-r96/5.0/debian-10/Dockerfile)
+* [`5.0`, `5.0-debian-10`, `5.0.10`, `5.0.10-debian-10-r97` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.10-debian-10-r97/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-sentinel GitHub repo](https://github.com/bitnami/bitnami-docker-redis-sentinel).
 
@@ -225,7 +225,7 @@ The Redis(TM) Sentinel instance can be customized by specifying environment vari
 
 ## Securing Redis(TM) Sentinel traffic
 
-Starting with version 6, Redis(TM) adds the support for SSL/TLS connections. Should you desire to enable this optional feature, you may use the aforementioned `REDIS_SENTINEL_TLS_*` enviroment variables to configure the application.
+Starting with version 6, Redis(TM) adds the support for SSL/TLS connections. Should you desire to enable this optional feature, you may use the aforementioned `REDIS_SENTINEL_TLS_*` environment variables to configure the application.
 
 When enabling TLS, conventional standard traffic is disabled by default. However this new feature is not mutually exclusive, which means it is possible to listen to both TLS and non-TLS connection simultaneously. To enable non-TLS traffic, set `REDIS_SENTINEL_PORT_NUMBER` to another port different than `0`.
 
