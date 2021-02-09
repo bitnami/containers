@@ -15,12 +15,10 @@ RUN bitnami-pkg install mongodb-client-4.4.3-0 --checksum 0e76516960a83631bd6a55
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
 RUN bitnami-pkg unpack parse-4.9.3-0 --checksum 06542d1d41c71615eb028ab06b14c9c0b2bb86cf44644960337a82c8c67fd34e
 RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
-RUN apt-get update && apt-get upgrade -y && \
-    rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="4.9.3-debian-10-r47" \
+    BITNAMI_IMAGE_VERSION="4.9.3-debian-10-r48" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
