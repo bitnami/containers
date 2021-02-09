@@ -13,12 +13,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "e8fc27443e7f64a9f2a5d98282f44a8657a69be7f43befd4c834e7269640ca6d  /tmp/bitnami/pkg/cache/envoy-1.17.0-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/envoy-1.17.0-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/envoy-1.17.0-1-linux-amd64-debian-10.tar.gz
-RUN apt-get update && apt-get upgrade -y && \
-    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="envoy" \
-    BITNAMI_IMAGE_VERSION="1.17.0-debian-10-r18" \
+    BITNAMI_IMAGE_VERSION="1.17.0-debian-10-r19" \
     PATH="/opt/bitnami/envoy/bin:$PATH"
 
 USER 1001
