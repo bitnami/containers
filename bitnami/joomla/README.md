@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.9.24`, `3.9.24-debian-10-r20`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.9.24-debian-10-r20/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.9.24`, `3.9.24-debian-10-r21`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.9.24-debian-10-r21/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/joomla GitHub repo](https://github.com/bitnami/bitnami-docker-joomla).
 
@@ -316,7 +316,7 @@ This would be an example of SMTP configuration using a Gmail account:
 
 ### Installing additional language packs
 
-By default, this container packs a generic English version of Joomla!. Nevertheless, more Langage Packs can be added to the default configuration using the in-platform Administration [interface](https://docs.joomla.org/J3.x:Setup_a_Multilingual_Site/Installing_New_Language). In order to fully support a new Language Pack it is also a requirement to update the system's locales files. We highly recommend [extending](https://github.com/bitnami/bitnami-docker-joomla#extend-this-image) the default image and adding as many locales as needed:
+By default, this container packs a generic English version of Joomla!. Nevertheless, more Language Packs can be added to the default configuration using the in-platform Administration [interface](https://docs.joomla.org/J3.x:Setup_a_Multilingual_Site/Installing_New_Language). In order to fully support a new Language Pack it is also a requirement to update the system's locales files. We highly recommend [extending](https://github.com/bitnami/bitnami-docker-joomla#extend-this-image) the default image and adding as many locales as needed:
 +Stop the currently running container using the command
 
 ```Dockerfile
