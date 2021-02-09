@@ -13,13 +13,11 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "7a64d02f081af68f53084d987e297dee5b04a54c02163914d0e955c199fbf54d  /tmp/bitnami/pkg/cache/kapacitor-1.5.8-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/kapacitor-1.5.8-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/kapacitor-1.5.8-1-linux-amd64-debian-10.tar.gz
-RUN apt-get update && apt-get upgrade -y && \
-    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir -p /bitnami/kapacitor && chmod g+rwX /bitnami/kapacitor
 
 ENV BITNAMI_APP_NAME="kapacitor" \
-    BITNAMI_IMAGE_VERSION="1.5.8-debian-10-r23" \
+    BITNAMI_IMAGE_VERSION="1.5.8-debian-10-r24" \
     KAPACITOR_DATA_DIR="/bitnami/kapacitor" \
     KAPACITOR_LOAD_DIR="/bitnami/kapacitor/load" \
     KAPACITOR_REPLAY_DIR="/bitnami/kapacitor/replay" \
