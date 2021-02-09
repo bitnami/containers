@@ -13,15 +13,13 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "e326607351eecff80108df92e20fb15953742456b7e4a0bae47fce9253ea7eca  /tmp/bitnami/pkg/cache/etcd-3.4.14-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/etcd-3.4.14-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/etcd-3.4.14-0-linux-amd64-debian-10.tar.gz
-RUN apt-get update && apt-get upgrade -y && \
-    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN mkdir -p /bitnami/etcd/data/ && chmod g+rwX /bitnami/etcd/data/
 RUN chmod g+rwX /opt/bitnami/etcd
 ENV BITNAMI_APP_NAME="etcd" \
-    BITNAMI_IMAGE_VERSION="3.4.14-debian-10-r67" \
+    BITNAMI_IMAGE_VERSION="3.4.14-debian-10-r68" \
     ETCDCTL_API="3" \
     ETCD_ADVERTISE_CLIENT_URLS="http://127.0.0.1:2379" \
     ETCD_DATA_DIR="/bitnami/etcd/data/" \
