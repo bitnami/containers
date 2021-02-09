@@ -13,14 +13,12 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-clien
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.0-3" --checksum 7521d9a4f9e4e182bf32977e234026caa7b03759799868335bccb1edd8f8fd12
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "pgpool" "4.2.1-0" --checksum b109f37cd5fba65c52f862a7b12e36688089b7aaeb9145932251198c41bb5f15
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
-RUN apt-get update && apt-get upgrade -y && \
-    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/pgpool/postunpack.sh
 ENV BITNAMI_APP_NAME="pgpool" \
-    BITNAMI_IMAGE_VERSION="4.2.1-debian-10-r42" \
+    BITNAMI_IMAGE_VERSION="4.2.1-debian-10-r43" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/common/bin:/opt/bitnami/pgpool/bin:$PATH" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_NAME="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
