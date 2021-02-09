@@ -48,7 +48,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.9.3`, `4.9.3-debian-10-r47`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/4.9.3-debian-10-r47/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.9.3`, `4.9.3-debian-10-r48`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/4.9.3-debian-10-r48/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse GitHub repo](https://github.com/bitnami/bitnami-docker-parse).
 
@@ -81,7 +81,7 @@ If you want to run the application manually instead of using docker-compose, the
   $ docker network create parse_network
   ```
 
-2. Start a MongoDB database in the network generated:
+2. Start a MongoDB&reg; database in the network generated:
 
   ```console
   $ docker run -d --name mongodb --net=parse_network bitnami/mongodb
@@ -101,7 +101,7 @@ Then you can access your application at http://your-ip/parse
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MongoDB data](https://github.com/bitnami/bitnami-docker-mongodb#persisting-your-database).
+For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MongoDB&reg; data](https://github.com/bitnami/bitnami-docker-mongodb#persisting-your-database).
 
 The above examples define docker volumes namely `mongodb_data` and `parse_data`. The Parse application state will persist as long as these volumes are not removed.
 
@@ -136,7 +136,7 @@ In this case you need to specify the directories to mount on the run command. Th
   $ docker network create parse-tier
   ```
 
-2. Create a MongoDB container with host volume:
+2. Create a MongoDB&reg; container with host volume:
 
   ```console
   $ docker run -d --name mongodb \
@@ -177,7 +177,7 @@ Bitnami provides up-to-date versions of Mongodb and Parse, including security pa
 $ rsync -a /path/to/parse-persistence /path/to/parse-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
-Additionally, [snapshot the MongoDB data](https://github.com/bitnami/bitnami-docker-mongodb#step-2-stop-and-backup-the-currently-running-container)
+Additionally, [snapshot the MongoDB&reg; data](https://github.com/bitnami/bitnami-docker-mongodb#step-2-stop-and-backup-the-currently-running-container)
 
 You can use these snapshots to restore the application state should the upgrade fail.
 
