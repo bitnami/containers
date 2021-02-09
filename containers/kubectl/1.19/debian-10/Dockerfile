@@ -13,12 +13,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "2bc188e7897237cb2daecf7f3cd7ede9d3642e13c53a8eecf404f2b51e6f7f36  /tmp/bitnami/pkg/cache/kubectl-1.19.7-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/kubectl-1.19.7-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/kubectl-1.19.7-0-linux-amd64-debian-10.tar.gz
-RUN apt-get update && apt-get upgrade -y && \
-    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="kubectl" \
-    BITNAMI_IMAGE_VERSION="1.19.7-debian-10-r21" \
+    BITNAMI_IMAGE_VERSION="1.19.7-debian-10-r22" \
     PATH="/opt/bitnami/kubectl/bin:$PATH"
 
 USER 1001
