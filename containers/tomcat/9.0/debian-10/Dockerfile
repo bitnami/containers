@@ -13,14 +13,12 @@ RUN install_packages acl ca-certificates curl gzip libc6 libssl1.1 procps tar zl
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.10-0" --checksum 68b909cfb5c98625e7d0db5c6eb82a34eca9b8940ada38b7eaa0c238bb510b57
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "9.0.43-0" --checksum 656fd042fcf3b1a5ab90adcc5a6dfe1bee4975eae827381eb12e9c08c2f354cd
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
-RUN apt-get update && apt-get upgrade -y && \
-    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/tomcat/postunpack.sh
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="9.0.43-debian-10-r4"
+    BITNAMI_IMAGE_VERSION="9.0.43-debian-10-r5"
 
 EXPOSE 8080 8443
 
