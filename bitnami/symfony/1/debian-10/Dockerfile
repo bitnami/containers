@@ -13,12 +13,10 @@ RUN bitnami-pkg install mysql-client-10.3.27-0 --checksum f96905e763a6334b75a7cd
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
 RUN bitnami-pkg install symfony-1.5.11-5 --checksum cf2c0695033c5bb6ed1184af96c95d48d6e2d2ae72384c8a944f7a5c3b350e8d
 RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
-RUN apt-get update && apt-get upgrade -y && \
-    rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="symfony" \
-    BITNAMI_IMAGE_VERSION="1.5.11-debian-10-r347" \
+    BITNAMI_IMAGE_VERSION="1.5.11-debian-10-r348" \
     MARIADB_DATABASE="bitnami_myapp" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
