@@ -13,12 +13,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "9c19c9c17c2f431e28009edd04611d79f8e691e627471be9b6fd625ef60a7c48  /tmp/bitnami/pkg/cache/open-service-broker-azure-1.8.4-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/open-service-broker-azure-1.8.4-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/open-service-broker-azure-1.8.4-2-linux-amd64-debian-10.tar.gz
-RUN apt-get update && apt-get upgrade -y && \
-    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="open-service-broker-azure" \
-    BITNAMI_IMAGE_VERSION="1.8.4-debian-10-r348" \
+    BITNAMI_IMAGE_VERSION="1.8.4-debian-10-r349" \
     PATH="/opt/bitnami/open-service-broker-azure/bin:$PATH"
 
 EXPOSE 8080
