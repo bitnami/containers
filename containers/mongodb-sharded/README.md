@@ -1,12 +1,12 @@
-# What is MongoDB(TM) Sharded packaged by Bitnami?
+# What is MongoDB&reg; Sharded packaged by Bitnami?
 
-> [MongoDB(TM)](https://www.mongodb.org/) is a cross-platform document-oriented database. Classified as a NoSQL database, MongoDB(TM) eschews the traditional table-based relational database structure in favor of JSON-like documents with dynamic schemas, making the integration of data in certain types of applications easier and faster.
+> [MongoDB&reg;](https://www.mongodb.org/) is a cross-platform document-oriented database. Classified as a NoSQL database, MongoDB&reg; eschews the traditional table-based relational database structure in favor of JSON-like documents with dynamic schemas, making the integration of data in certain types of applications easier and faster.
 
 This container flavor uses the [sharding method](https://docs.mongodb.com/manual/sharding/) for distributing data across multiple machines. This is meant for deployments with very large data sets and high throughput operations.
 
-All MongoDB(TM) versions released after October 16, 2018 (3.6.9 or later, 4.0.4 or later or 4.1.5 or later) are licensed under the [Server Side Public License](https://www.mongodb.com/licensing/server-side-public-license) that is not currently accepted as a Open Source license by the Open Source Iniciative (OSI).
+All MongoDB&reg; versions released after October 16, 2018 (3.6.9 or later, 4.0.4 or later or 4.1.5 or later) are licensed under the [Server Side Public License](https://www.mongodb.com/licensing/server-side-public-license) that is not currently accepted as a Open Source license by the Open Source Iniciative (OSI).
 
-Disclaimer: The respective trademarks mentioned in the offering are owned by the respective companies. We do not provide a commercial license for any of these products. This listing has an open-source license. MongoDB(TM) is run and maintained by MongoDB, which is a completely separate project from Bitnami.
+Disclaimer: The respective trademarks mentioned in the offering are owned by the respective companies. We do not provide a commercial license for any of these products. This listing has an open-source license. MongoDB&reg; is run and maintained by MongoDB, which is a completely separate project from Bitnami.
 
 # TL;DR
 
@@ -33,9 +33,9 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/mongodb?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy MongoDB(TM) Sharded in Kubernetes?
+# How to deploy MongoDB&reg; Sharded in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami MongoDB(TM) Sharded Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/mongodb-sharded).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami MongoDB&reg; Sharded Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/mongodb-sharded).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
@@ -51,13 +51,13 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`4.4`, `4.4-debian-10`, `4.4.3`, `4.4.3-debian-10-r43`, `latest` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.3-debian-10-r43/4.4/debian-10/Dockerfile)
 * [`4.2`, `4.2-debian-10`, `4.2.12`, `4.2.12-debian-10-r15` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.12-debian-10-r15/4.2/debian-10/Dockerfile)
 * [`4.0`, `4.0-debian-9`, `4.0.22`, `4.0.22-debian-9-r44` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.22-debian-9-r44/4.0/debian-9/Dockerfile)
-* [`3.6`, `3.6-debian-9`, `3.6.22`, `3.6.22-debian-9-r4` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.22-debian-9-r4/3.6/debian-9/Dockerfile)
+* [`3.6`, `3.6-debian-9`, `3.6.22`, `3.6.22-debian-9-r5` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.22-debian-9-r5/3.6/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
 
 # Get this image
 
-The recommended way to get the Bitnami MongoDB(TM) Sharded Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mongodb-sharded).
+The recommended way to get the Bitnami MongoDB&reg; Sharded Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mongodb-sharded).
 
 ```console
 $ docker pull bitnami/mongodb-sharded:latest
@@ -108,21 +108,21 @@ In a sharded cluster, there are [three components](https://docs.mongodb.com/manu
 - Config Servers: Stores metadata and configuration settings for the sharded database.
 - Shards: Contains a subset of the data.
 
-A [sharded cluster](https://docs.mongodb.com/manual/sharding/#sharded-cluster) can easily be setup with the Bitnami MongoDB(TM) Sharded Docker Image using the following environment variables:
+A [sharded cluster](https://docs.mongodb.com/manual/sharding/#sharded-cluster) can easily be setup with the Bitnami MongoDB&reg; Sharded Docker Image using the following environment variables:
 
  - `MONGODB_SHARDING_MODE`: The sharding mode. Possible values: `mongos`/`configsvr`/`shardsvr`. No defaults.
- - `MONGODB_REPLICA_SET_NAME`: MongoDB(TM) replica set name. In a sharded cluster we will have multiple replica sets. Default: **replicaset**
- - `MONGODB_MONGOS_HOST`: MongoDB(TM) mongos instance host. No defaults.
- - `MONGODB_CFG_REPLICA_SET_NAME`: MongoDB(TM) config server replica set name. In a sharded cluster we will have multiple replica sets. Default: **replicaset**
- - `MONGODB_CFG_PRIMARY_HOST`: MongoDB(TM) config server primary host. No defaults.
- - `MONGODB_ADVERTISED_HOSTNAME`: MongoDB(TM) advertised hostname. No defaults. It is recommended to pass this environment variable if you experience issues with ephemeral IPs. Setting this env var makes the nodes of the replica set to be configured with a hostname instead of the machine IP.
- - `MONGODB_REPLICA_SET_KEY`: MongoDB(TM) replica set key. Length should be greater than 5 characters and should not contain any special characters. Required for all nodes in the sharded cluster. No default.
- - `MONGODB_ROOT_PASSWORD`: MongoDB(TM) root password. No defaults.
+ - `MONGODB_REPLICA_SET_NAME`: MongoDB&reg; replica set name. In a sharded cluster we will have multiple replica sets. Default: **replicaset**
+ - `MONGODB_MONGOS_HOST`: MongoDB&reg; mongos instance host. No defaults.
+ - `MONGODB_CFG_REPLICA_SET_NAME`: MongoDB&reg; config server replica set name. In a sharded cluster we will have multiple replica sets. Default: **replicaset**
+ - `MONGODB_CFG_PRIMARY_HOST`: MongoDB&reg; config server primary host. No defaults.
+ - `MONGODB_ADVERTISED_HOSTNAME`: MongoDB&reg; advertised hostname. No defaults. It is recommended to pass this environment variable if you experience issues with ephemeral IPs. Setting this env var makes the nodes of the replica set to be configured with a hostname instead of the machine IP.
+ - `MONGODB_REPLICA_SET_KEY`: MongoDB&reg; replica set key. Length should be greater than 5 characters and should not contain any special characters. Required for all nodes in the sharded cluster. No default.
+ - `MONGODB_ROOT_PASSWORD`: MongoDB&reg; root password. No defaults.
  - `MONGODB_REPLICA_SET_MODE`: The replication mode. Possible values `primary`/`secondary`/`arbiter`. No defaults.
 
 ### Step 1: Create the config server replica set
 
-The first step is to start the MongoDB(TM) primary config server.
+The first step is to start the MongoDB&reg; primary config server.
 
 ```console
 $ docker run --name mongodb-configsvr-primary \
@@ -134,11 +134,11 @@ $ docker run --name mongodb-configsvr-primary \
    bitnami/mongodb-sharded:latest
 ```
 
-In the above command the container is configured as Config server using the `MONGODB_SHARDING_MODE` parameter and as `primary` using the `MONGODB_REPLICA_SET_MODE` parameter. You can configure secondary nodes by following the [Bitnami MongoDB(TM) container replication guide](https://github.com/bitnami/bitnami-docker-mongodb#setting-up-replication).
+In the above command the container is configured as Config server using the `MONGODB_SHARDING_MODE` parameter and as `primary` using the `MONGODB_REPLICA_SET_MODE` parameter. You can configure secondary nodes by following the [Bitnami MongoDB&reg; container replication guide](https://github.com/bitnami/bitnami-docker-mongodb#setting-up-replication).
 
 ### Step 2: Create the mongos instance
 
-Next we start a MongoDB(TM) mongos server and connect it to the config server replica set.
+Next we start a MongoDB&reg; mongos server and connect it to the config server replica set.
 
 ```console
 $ docker run --name mongos \
@@ -151,11 +151,11 @@ $ docker run --name mongos \
   bitnami/mongodb-sharded:latest
 ```
 
-In the above command the container is configured as a `mongos` using the `MONGODB_SHARDING_MODE` parameter. The `MONGODB_CFG_PRIMARY_HOST`, `MONGODB_REPLICA_SET_KEY`, `MONGODB_CFG_REPLICA_SET_NAME` and `MONGODB_ROOT_PASSWORD` parameters are used connect and with the MongoDB(TM) primary config server.
+In the above command the container is configured as a `mongos` using the `MONGODB_SHARDING_MODE` parameter. The `MONGODB_CFG_PRIMARY_HOST`, `MONGODB_REPLICA_SET_KEY`, `MONGODB_CFG_REPLICA_SET_NAME` and `MONGODB_ROOT_PASSWORD` parameters are used connect and with the MongoDB&reg; primary config server.
 
 ### Step 3: Create a shard
 
-Finally we start a MongoDB(TM) data shard container.
+Finally we start a MongoDB&reg; data shard container.
 
 ```console
 $ docker run --name mongodb-shard0-primary \
@@ -170,9 +170,9 @@ $ docker run --name mongodb-shard0-primary \
   bitnami/mongodb-sharded:latest
 ```
 
-In the above command the container is configured as a data shard using the `MONGODB_SHARDING_MODE` parameter. The `MONGODB_MONGOS_HOST`,  `MONGODB_ROOT_PASSWORD` and `MONGODB_REPLICA_SET_KEY` parameters are used connect and with the Mongos instance. You can configure secondary nodes by following the [Bitnami MongoDB(TM) container replication guide](https://github.com/bitnami/bitnami-docker-mongodb#setting-up-replication).
+In the above command the container is configured as a data shard using the `MONGODB_SHARDING_MODE` parameter. The `MONGODB_MONGOS_HOST`,  `MONGODB_ROOT_PASSWORD` and `MONGODB_REPLICA_SET_KEY` parameters are used connect and with the Mongos instance. You can configure secondary nodes by following the [Bitnami MongoDB&reg; container replication guide](https://github.com/bitnami/bitnami-docker-mongodb#setting-up-replication).
 
-You now have a sharded MongoDB(TM) cluster up and running. You can add more shards by repeating step 3. Make sure you set a different `MONGODB_REPLICA_SET_NAME` value. You can also add more mongos instances by repeating step 2.
+You now have a sharded MongoDB&reg; cluster up and running. You can add more shards by repeating step 3. Make sure you set a different `MONGODB_REPLICA_SET_NAME` value. You can also add more mongos instances by repeating step 2.
 
 With Docker Compose the sharded cluster can be setup using:
 
@@ -221,12 +221,12 @@ volumes:
     driver: local
 ```
 
-## More MongoDB(TM) configuration settings
-The Bitnami MongoDB(TM) Sharded image contains the [same configuration features than the Bitnami MongoDB(TM) image](https://github.com/bitnami/bitnami-docker-mongodb#configuration).
+## More MongoDB&reg; configuration settings
+The Bitnami MongoDB&reg; Sharded image contains the [same configuration features than the Bitnami MongoDB&reg; image](https://github.com/bitnami/bitnami-docker-mongodb#configuration).
 
 # Logging
 
-The Bitnami MongoDB(TM) Sharded Docker image sends the container logs to the `stdout`. To view the logs:
+The Bitnami MongoDB&reg; Sharded Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```console
 $ docker logs mongodb-sharded
@@ -244,7 +244,7 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 
 ## Upgrade this image
 
-Bitnami provides up-to-date versions of MongoDB(TM), including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
+Bitnami provides up-to-date versions of MongoDB&reg;, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
 ### Step 1: Get the updated image
 
