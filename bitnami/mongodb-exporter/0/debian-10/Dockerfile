@@ -13,13 +13,11 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "aa767756a5217171517d22900388548ed107439813be1490d1a273b30b8f98c5  /tmp/bitnami/pkg/cache/mongodb-exporter-0.20.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/mongodb-exporter-0.20.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/mongodb-exporter-0.20.1-0-linux-amd64-debian-10.tar.gz
-RUN apt-get update && apt-get upgrade -y && \
-    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN ln -sf /opt/bitnami/mongodb-exporter/bin/mongodb_exporter /bin/mongodb_exporter
 
 ENV BITNAMI_APP_NAME="mongodb-exporter" \
-    BITNAMI_IMAGE_VERSION="0.20.1-debian-10-r61" \
+    BITNAMI_IMAGE_VERSION="0.20.1-debian-10-r62" \
     PATH="/opt/bitnami/mongodb-exporter/bin:$PATH"
 
 EXPOSE 9216
