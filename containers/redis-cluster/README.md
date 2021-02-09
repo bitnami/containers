@@ -43,7 +43,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`6.0`, `6.0-debian-10`, `6.0.10`, `6.0.10-debian-10-r22`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/6.0.10-debian-10-r22/6.0/debian-10/Dockerfile)
-* [`5.0`, `5.0-debian-10`, `5.0.10`, `5.0.10-debian-10-r88` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/5.0.10-debian-10-r88/5.0/debian-10/Dockerfile)
+* [`5.0`, `5.0-debian-10`, `5.0.10`, `5.0.10-debian-10-r89` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/5.0.10-debian-10-r89/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-cluster GitHub repo](https://github.com/bitnami/bitnami-docker-redis-cluster).
 
@@ -148,7 +148,7 @@ The following env vars are supported for this container:
 | Name                                    | Description                                                                                                                                                                            |
 |-----------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `REDIS_DISABLE_COMMANDS`                | Disables the specified Redis(TM) commands                                                                                                                                                  |
-| `REDIS_PORT`                            | Set the Redis(TM) port. Default=: `6379`                                                                                                                                                   |
+| `REDIS_PORT_NUMBER`                     | Set the Redis(TM) port. Default=: `6379`                                                                                                                                                   |
 | `REDIS_PASSWORD`                        | Set the Redis(TM) password. Default: `bitnami`                                                                                                                                             |
 | `ALLOW_EMPTY_PASSWORD`                  | Enables access without password                                                                                                                                                        |
 | `REDIS_DNS_RETRIES`                     | Number of retries to get the IPs of the provided `REDIS_NODES`. It will wait 5 seconds between retries                                                                                 |
