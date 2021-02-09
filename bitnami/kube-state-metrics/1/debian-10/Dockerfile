@@ -13,12 +13,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "10c2028772eee2620fa422e114845c88c37c65a29646b30f7960107ff73e9475  /tmp/bitnami/pkg/cache/kube-state-metrics-1.9.7-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/kube-state-metrics-1.9.7-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/kube-state-metrics-1.9.7-1-linux-amd64-debian-10.tar.gz
-RUN apt-get update && apt-get upgrade -y && \
-    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="kube-state-metrics" \
-    BITNAMI_IMAGE_VERSION="1.9.7-debian-10-r196" \
+    BITNAMI_IMAGE_VERSION="1.9.7-debian-10-r197" \
     PATH="/opt/bitnami/kube-state-metrics/bin:$PATH"
 
 EXPOSE 8080 8081
