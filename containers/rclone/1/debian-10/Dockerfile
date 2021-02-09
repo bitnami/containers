@@ -13,12 +13,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "d883faf26683061c8175134250a150a1c41a9d571e6ffc99339192d0e5e4e5f9  /tmp/bitnami/pkg/cache/rclone-1.54.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/rclone-1.54.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/rclone-1.54.0-0-linux-amd64-debian-10.tar.gz
-RUN apt-get update && apt-get upgrade -y && \
-    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="rclone" \
-    BITNAMI_IMAGE_VERSION="1.54.0-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="1.54.0-debian-10-r6" \
     PATH="/opt/bitnami/rclone/bin:$PATH"
 
 USER 1001
