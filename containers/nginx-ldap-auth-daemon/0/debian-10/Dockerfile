@@ -12,13 +12,11 @@ RUN install_packages acl ca-certificates curl gzip libbz2-1.0 libc6 libffi6 libg
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.6.12-10" --checksum cc3e62e05463929529214f65cb7922794c758a3db5ca29bf5c9a59fe66e95b80
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx-ldap-auth-daemon" "0.20200116.0-2" --checksum 2b8d45c561b5c23ec090898f1d5de35caa5090a8e7ffe600a72065f802e5ba5e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
-RUN apt-get update && apt-get upgrade -y && \
-    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="nginx-ldap-auth-daemon" \
-    BITNAMI_IMAGE_VERSION="0.20200116.0-debian-10-r248" \
+    BITNAMI_IMAGE_VERSION="0.20200116.0-debian-10-r249" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/nginx-ldap-auth-daemon/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8888
