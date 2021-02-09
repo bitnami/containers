@@ -13,12 +13,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "a3d2820dbd415813c91c91cf3f45d59404a922bdb1b58c46a4466f0f057dd09b  /tmp/bitnami/pkg/cache/service-catalog-0.3.1-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/service-catalog-0.3.1-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/service-catalog-0.3.1-1-linux-amd64-debian-10.tar.gz
-RUN apt-get update && apt-get upgrade -y && \
-    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="service-catalog" \
-    BITNAMI_IMAGE_VERSION="0.3.1-debian-10-r88" \
+    BITNAMI_IMAGE_VERSION="0.3.1-debian-10-r89" \
     PATH="/opt/bitnami/service-catalog/bin:$PATH"
 
 EXPOSE 443 8443
