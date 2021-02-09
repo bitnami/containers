@@ -33,7 +33,7 @@ You can find the default credentials and available configuration options in the 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.4.0`, `4.4.0-debian-10-r11`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.4.0-debian-10-r11/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.4.0`, `4.4.0-debian-10-r12`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.4.0-debian-10-r12/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dreamfactory GitHub repo](https://github.com/bitnami/bitnami-docker-dreamfactory).
 
@@ -44,7 +44,7 @@ To run this application you need [Docker Engine](https://www.docker.com/products
 
 # How to use this image
 
-DreamFactory requires access to a MySQL database or MariaDB database to store information. We'll use our very own [MariaDB image](https://www.github.com/bitnami/bitnami-docker-mariadb) for the database requirements. It also uses our [MongoDB image](https://www.github.com/bitnami/bitnami-docker-mongodb) and [Redis(TM) image](https://www.github.com/bitnami/bitnami-docker-redis).
+DreamFactory requires access to a MySQL database or MariaDB database to store information. We'll use our very own [MariaDB image](https://www.github.com/bitnami/bitnami-docker-mariadb) for the database requirements. It also uses our [MongoDB&reg; image](https://www.github.com/bitnami/bitnami-docker-mongodb) and [Redis(TM) image](https://www.github.com/bitnami/bitnami-docker-redis).
 
 ## Using Docker Compose
 
@@ -75,7 +75,7 @@ $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes\
   bitnami/mariadb:latest
 ```
 
-3. Create a volume for MongoDB persistence and create a MongoDB container
+3. Create a volume for MongoDB&reg; persistence and create a MongoDB&reg; container
 
 ```console
 $ docker volume create --name mongodb_data
@@ -111,7 +111,7 @@ Access your application at http://your-ip/
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for persistence of the [MariaDB](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database), [MongoDB](https://github.com/bitnami/bitnami-docker-mongodb#persisting-your-database) and [Redis(TM)](https://github.com/bitnami/bitnami-docker-redis#persisting-your-database) data.
+For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for persistence of the [MariaDB](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database), [MongoDB&reg;](https://github.com/bitnami/bitnami-docker-mongodb#persisting-your-database) and [Redis(TM)](https://github.com/bitnami/bitnami-docker-redis#persisting-your-database) data.
 
 The above examples define docker volumes namely `mariadb_data`, `mongodb_data`, `redis_data` and `dreamfactory_data`. The DreamFactory application state will persist as long as these volumes are not removed.
 
@@ -162,7 +162,7 @@ $ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
   bitnami/mariadb:latest
 ```
 
-3. Create a MongoDB container with host volume
+3. Create a MongoDB&reg; container with host volume
 
 ```console
 $ docker run -d --name mongodb \
@@ -192,7 +192,7 @@ $ docker run -d --name dreamfactory -p 80:80 -p 443:443 \
 
 # Upgrading DreamFactory
 
-Bitnami provides up-to-date versions of MariaDB, MongoDB, Redis(TM) and DreamFactory, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the DreamFactory container. For the MariaDB upgrade see https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image. For the MongoDB upgrade see https://github.com/bitnami/bitnami-docker-mongodb/blob/master/README.md#upgrade-this-image. For the Redis(TM) upgrade see https://github.com/bitnami/bitnami-docker-redis/blob/master/README.md#upgrade-this-image
+Bitnami provides up-to-date versions of MariaDB, MongoDB&reg;, Redis(TM) and DreamFactory, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the DreamFactory container. For the MariaDB upgrade see https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image. For the MongoDB&reg; upgrade see https://github.com/bitnami/bitnami-docker-mongodb/blob/master/README.md#upgrade-this-image. For the Redis(TM) upgrade see https://github.com/bitnami/bitnami-docker-redis/blob/master/README.md#upgrade-this-image
 
 The `bitnami/dreamfactory:latest` tag always points to the most recent release. To get the most recent release you can simple repull the `latest` tag from the Docker Hub with `docker pull bitnami/dreamfactory:latest`. However it is recommended to use [tagged versions](https://hub.docker.com/r/bitnami/dreamfactory/tags/).
 
@@ -213,7 +213,7 @@ The `bitnami/dreamfactory:latest` tag always points to the most recent release. 
 $ rsync -a /path/to/dreamfactory-persistence /path/to/dreamfactory-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
-Additionally, snapshot the [MariaDB](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container), [MongoDB](https://github.com/bitnami/bitnami-docker-mongodb#step-2-stop-and-backup-the-currently-running-container) and [Redis(TM)](https://github.com/bitnami/bitnami-docker-redis#step-2-stop-and-backup-the-currently-running-container) data.
+Additionally, snapshot the [MariaDB](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container), [MongoDB&reg;](https://github.com/bitnami/bitnami-docker-mongodb#step-2-stop-and-backup-the-currently-running-container) and [Redis(TM)](https://github.com/bitnami/bitnami-docker-redis#step-2-stop-and-backup-the-currently-running-container) data.
 
 You can use these snapshots to restore the application state should the upgrade fail.
 
@@ -244,11 +244,11 @@ The DreamFactory instance can be customized by specifying environment variables 
 - `POSTGRESQL_PASSWORD`: Admin password for the PostgreSQL server.
 - `POSTGRESQL_HOST`: Hostname for the PostgreSQL server. Default: **postgresql**
 - `POSTGRESQL_PORT_NUMBER`: Port used by the PostgreSQL server. Default: **5432**
-- `DREAMFACTORY_ENABLE_MONGODB_DATABASE`: Whether to enable a MongoDB service in DreamFactory. Default: **yes**
-- `MONGODB_HOST`: Hostname for MongoDB server. Default: **mongodb**
-- `MONGODB_PORT_NUMBER`: Port used by MongoDB server. Default: **27017**
-- `MONGODB_USER`: Username for MongoDB server.
-- `MONGODB_PORT_NUMBER`: Password for the MongoDB server user. Default: **27017**
+- `DREAMFACTORY_ENABLE_MONGODB_DATABASE`: Whether to enable a MongoDB&reg; service in DreamFactory. Default: **yes**
+- `MONGODB_HOST`: Hostname for MongoDB&reg; server. Default: **mongodb**
+- `MONGODB_PORT_NUMBER`: Port used by MongoDB&reg; server. Default: **27017**
+- `MONGODB_USER`: Username for MongoDB&reg; server.
+- `MONGODB_PORT_NUMBER`: Password for the MongoDB&reg; server user. Default: **27017**
 - `REDIS_HOST`: Hostname for Redis(TM). Default: **redis**
 - `REDIS_PORT_NUMBER`: Port used by Redis(TM). Default: **6379**
 - `REDIS_PASSWORD`: Password for Redis(TM).
@@ -260,7 +260,7 @@ The DreamFactory instance can be customized by specifying environment variables 
 - `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
 
 - PostgreSQL is now a supported database for storing DreamFactory configuration. Check the environment variable `DREAMFACTORY_DATABASE_TYPE` (default: `mariadb`). When `postgresql` is specified, a PostgreSQL database will be configured with the connection configuration in the environment variables `POSTGRESQL_HOST`, `POSTGRESQL_PORT_NUMBER`, `POSTGRESQL_USER` and `POSTGRESQL_PASSWORD`.
-- It is possible to enable/disable the additional database service that is created by default, by setting the environment variable `DREAMFACTORY_ENABLE_MARIADB_DATABASE` for MariaDB database (default: `no`), `DREAMFACTORY_ENABLE_POSTGRESQL_DATABASE` for PostgreSQL database (default: `no`) and `DREAMFACTORY_ENABLE_MONGODB_DATABASE` for MongoDB database (default: `yes`). A service will be created for the default database type specified in `DREAMFACTORY_DATABASE_TYPE` (default: `mariadb`).
+- It is possible to enable/disable the additional database service that is created by default, by setting the environment variable `DREAMFACTORY_ENABLE_MARIADB_DATABASE` for MariaDB database (default: `no`), `DREAMFACTORY_ENABLE_POSTGRESQL_DATABASE` for PostgreSQL database (default: `no`) and `DREAMFACTORY_ENABLE_MONGODB_DATABASE` for MongoDB&reg; database (default: `yes`). A service will be created for the default database type specified in `DREAMFACTORY_DATABASE_TYPE` (default: `mariadb`).
 
 ### Specifying Environment variables using Docker Compose
 
@@ -382,7 +382,7 @@ volumes:
 ## 4.0.1-debian-10-r19
 
 - PostgreSQL is now a supported database for storing DreamFactory configuration. Check the environment variable `DREAMFACTORY_DATABASE_TYPE` (default: `mariadb`). When `postgresql` is specified, a PostgreSQL database will be configured with the connection configuration in the environment variables `POSTGRESQL_HOST`, `POSTGRESQL_PORT_NUMBER`, `POSTGRESQL_USER` and `POSTGRESQL_PASSWORD`.
-- It is possible to enable/disable the additional database service that is created by default, by setting the environment variable `DREAMFACTORY_ENABLE_MARIADB_DATABASE` for MariaDB database (default: `no`), `DREAMFACTORY_ENABLE_POSTGRESQL_DATABASE` for PostgreSQL database (default: `no`) and `DREAMFACTORY_ENABLE_MONGODB_DATABASE` for MongoDB database (default: `yes`). A service will be created for the default database type specified in `DREAMFACTORY_DATABASE_TYPE` (default: `mariadb`).
+- It is possible to enable/disable the additional database service that is created by default, by setting the environment variable `DREAMFACTORY_ENABLE_MARIADB_DATABASE` for MariaDB database (default: `no`), `DREAMFACTORY_ENABLE_POSTGRESQL_DATABASE` for PostgreSQL database (default: `no`) and `DREAMFACTORY_ENABLE_MONGODB_DATABASE` for MongoDB&reg; database (default: `yes`). A service will be created for the default database type specified in `DREAMFACTORY_DATABASE_TYPE` (default: `mariadb`).
 
 ## 2.14.1-debian-9-r195 and 2.14.1-ol-7-r204
 
