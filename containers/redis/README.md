@@ -46,7 +46,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`6.0`, `6.0-debian-10`, `6.0.10`, `6.0.10-debian-10-r22`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.0.10-debian-10-r22/6.0/debian-10/Dockerfile)
+* [`6.0`, `6.0-debian-10`, `6.0.10`, `6.0.10-debian-10-r23`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.0.10-debian-10-r23/6.0/debian-10/Dockerfile)
 * [`5.0`, `5.0-debian-10`, `5.0.10`, `5.0.10-debian-10-r99` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.10-debian-10-r99/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
@@ -384,7 +384,7 @@ The above command scales up the number of replicas to `3`. You can scale down in
 
 ## Securing Redis(TM) traffic
 
-Starting with version 6, Redis(TM) adds the support for SSL/TLS connections. Should you desire to enable this optional feature, you may use the following enviroment variables to configure the application:
+Starting with version 6, Redis(TM) adds the support for SSL/TLS connections. Should you desire to enable this optional feature, you may use the following environment variables to configure the application:
 
  - `REDIS_TLS_ENABLED`: Whether to enable TLS for traffic or not. Defaults to `no`.
  - `REDIS_TLS_PORT`: Port used for TLS secure traffic. Defaults to `6379`.
