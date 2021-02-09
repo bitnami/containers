@@ -13,12 +13,10 @@ RUN bitnami-pkg install java-11.0.10-0 --checksum 68b909cfb5c98625e7d0db5c6eb82a
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
 RUN bitnami-pkg unpack sonarqube-8.6.1-0 --checksum 37c4e397165b9370cb6695b9d59493f56b6c7662140523dc4f9540f1f7269a2b
 RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
-RUN apt-get update && apt-get upgrade -y && \
-    rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="sonarqube" \
-    BITNAMI_IMAGE_VERSION="8.6.1-debian-10-r10" \
+    BITNAMI_IMAGE_VERSION="8.6.1-debian-10-r11" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux" \
