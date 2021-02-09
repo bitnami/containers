@@ -13,12 +13,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "087a388de591e152205a4de50c3167bfc200de9e2230ed6e927b0a3d00a8cb0b  /tmp/bitnami/pkg/cache/memcached-exporter-0.8.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/memcached-exporter-0.8.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/memcached-exporter-0.8.0-0-linux-amd64-debian-10.tar.gz
-RUN apt-get update && apt-get upgrade -y && \
-    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="memcached-exporter" \
-    BITNAMI_IMAGE_VERSION="0.8.0-debian-10-r60" \
+    BITNAMI_IMAGE_VERSION="0.8.0-debian-10-r61" \
     PATH="/opt/bitnami/memcached-exporter/bin:$PATH"
 
 EXPOSE 9150
