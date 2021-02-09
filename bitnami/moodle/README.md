@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.10.1`, `3.10.1-debian-10-r18`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.10.1-debian-10-r18/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.10.1`, `3.10.1-debian-10-r19`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.10.1-debian-10-r19/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/moodle GitHub repo](https://github.com/bitnami/bitnami-docker-moodle).
 
@@ -316,7 +316,7 @@ This would be an example of SMTP configuration using a Gmail account:
 
 ### Installing additional language packs
 
-By default, this container packs a generic English version of Moodle<sup>TM</sup>. Nevertheless, more Langage Packs can be added to the default configuration using the in-platform Administration [interface](https://docs.moodle.org/38/en/Language_packs#Language_pack_installation_and_uninstallation). In order to fully support a new Language Pack it is also a requirement to update the system's locales files. To do that, you have several options:
+By default, this container packs a generic English version of Moodle<sup>TM</sup>. Nevertheless, more Language Packs can be added to the default configuration using the in-platform Administration [interface](https://docs.moodle.org/38/en/Language_packs#Language_pack_installation_and_uninstallation). In order to fully support a new Language Pack it is also a requirement to update the system's locales files. To do that, you have several options:
 
 
 #### Build the default image with the `EXTRA_LOCALES` build-time variable
