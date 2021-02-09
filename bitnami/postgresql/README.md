@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`12`, `12-debian-10`, `12.5.0`, `12.5.0-debian-10-r84` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.5.0-debian-10-r84/12/debian-10/Dockerfile)
 * [`11`, `11-debian-10`, `11.10.0`, `11.10.0-debian-10-r83`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.10.0-debian-10-r83/11/debian-10/Dockerfile)
 * [`10`, `10-debian-10`, `10.15.0`, `10.15.0-debian-10-r82` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.15.0-debian-10-r82/10/debian-10/Dockerfile)
-* [`9.6`, `9.6-debian-10`, `9.6.20`, `9.6.20-debian-10-r81` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.20-debian-10-r81/9.6/debian-10/Dockerfile)
+* [`9.6`, `9.6-debian-10`, `9.6.20`, `9.6.20-debian-10-r82` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.20-debian-10-r82/9.6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql).
 
@@ -250,7 +250,7 @@ When `POSTGRESQL_USERNAME` is specified, the `postgres` user is not assigned a p
 
 ## Auditing
 
-The Bitnami PostgreSQL Image comes with the pgAudit module enabled by default. Thanks to this, audit information can be enabled in the container with these enviroment variables:
+The Bitnami PostgreSQL Image comes with the pgAudit module enabled by default. Thanks to this, audit information can be enabled in the container with these environment variables:
 
 - `POSTGRESQL_PGAUDIT_LOG`: Comma-separated list with different operations to audit. Find in the [official pgAudit documentation](https://github.com/pgaudit/pgaudit#configuration) the list of possible values. No defaults.
 - `POSTGRESQL_PGAUDIT_LOG_CATALOG`: Session logging enabled in the case where all relations in a statement are in pg_catalog. No defaults.
@@ -485,7 +485,7 @@ For more information refer to [Postgresql LDAP auth configuration documentation]
 
 ## Securing PostgreSQL traffic
 
-PostgreSQL supports the encryption of connections using the SSL/TLS protocol. Should you desire to enable this optional feature, you may use the following enviroment variables to configure the application:
+PostgreSQL supports the encryption of connections using the SSL/TLS protocol. Should you desire to enable this optional feature, you may use the following environment variables to configure the application:
 
  - `POSTGRESQL_ENABLE_TLS`: Whether to enable TLS for traffic or not. Defaults to `no`.
  - `POSTGRESQL_TLS_CERT_FILE`: File containing the certificate file for the TLS traffic. No defaults.
