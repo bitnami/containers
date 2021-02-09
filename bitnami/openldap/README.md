@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.4.57`, `2.4.57-debian-10-r18`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.4.57-debian-10-r18/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.4.57`, `2.4.57-debian-10-r19`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.4.57-debian-10-r19/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/openldap GitHub repo](https://github.com/bitnami/bitnami-docker-openldap).
 
@@ -183,7 +183,7 @@ Check the official [OpenLDAP Configuration Reference](https://www.openldap.org/d
 
 ## Securing OpenLDAP traffic
 
-OpenLDAP clients and servers are capable of using the Transport Layer Security (TLS) framework to provide integrity and confidentiality protections and to support LDAP authentication using the SASL EXTERNAL mechanism. Should you desire to enable this optional feature, you may use the following enviroment variables to configure the application:
+OpenLDAP clients and servers are capable of using the Transport Layer Security (TLS) framework to provide integrity and confidentiality protections and to support LDAP authentication using the SASL EXTERNAL mechanism. Should you desire to enable this optional feature, you may use the following environment variables to configure the application:
 
  - `LDAP_ENABLE_TLS`: Whether to enable TLS for traffic or not. Defaults to `no`.
  - `LDAP_LDAPS_PORT_NUMBER`: Port used for TLS secure traffic. Defaults to `1636`.
