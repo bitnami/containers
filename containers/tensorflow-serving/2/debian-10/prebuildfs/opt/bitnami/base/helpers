@@ -12,7 +12,7 @@
 #   Initialize an unpacked nami module with the `nami initialize` command.
 #   Command arguments can be specified as function argumnts after the module name.
 #   `--log-level trace` flag is added to the command if `NAMI_DEBUG` env variable exists.
-#   The log level can be overriden using the `NAMI_LOG_LEVEL` env variable.
+#   The log level can be overridden using the `NAMI_LOG_LEVEL` env variable.
 #########################
 nami_initialize_one() {
     local module="${1:?module not specified}"
