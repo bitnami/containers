@@ -43,7 +43,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`6.0`, `6.0-debian-10`, `6.0.10`, `6.0.10-debian-10-r23`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/6.0.10-debian-10-r23/6.0/debian-10/Dockerfile)
-* [`5.0`, `5.0-debian-10`, `5.0.10`, `5.0.10-debian-10-r89` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/5.0.10-debian-10-r89/5.0/debian-10/Dockerfile)
+* [`5.0`, `5.0-debian-10`, `5.0.10`, `5.0.10-debian-10-r90` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/5.0.10-debian-10-r90/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-cluster GitHub repo](https://github.com/bitnami/bitnami-docker-redis-cluster).
 
@@ -189,7 +189,7 @@ check the discussion regarding this [here](https://github.com/bitnami/bitnami-do
 
 ## Securing Redis(TM) Cluster traffic
 
-Starting with version 6, Redis(TM) adds the support for SSL/TLS connections. Should you desire to enable this optional feature, you may use the aforementioned `REDIS_TLS_*` enviroment variables to configure the application.
+Starting with version 6, Redis(TM) adds the support for SSL/TLS connections. Should you desire to enable this optional feature, you may use the aforementioned `REDIS_TLS_*` environment variables to configure the application.
 
 When enabling TLS, conventional standard traffic is disabled by default. However this new feature is not mutually exclusive, which means it is possible to listen to both TLS and non-TLS connection simultaneously. To enable non-TLS traffic, set `REDIS_TLS_PORT` to another port different than `0`.
 

@@ -204,7 +204,7 @@ redis_validate() {
     if is_boolean_yes "$REDIS_TLS_ENABLED"; then
         if [[ "$REDIS_PORT_NUMBER" == "$REDIS_TLS_PORT" ]] && [[ "$REDIS_PORT_NUMBER" != "6379" ]]; then
             # If both ports are assigned the same numbers and they are different to the default settings
-            print_validation_error "Enviroment variables REDIS_PORT_NUMBER and REDIS_TLS_PORT point to the same port number (${REDIS_PORT_NUMBER}). Change one of them or disable non-TLS traffic by setting REDIS_PORT_NUMBER=0"
+            print_validation_error "Environment variables REDIS_PORT_NUMBER and REDIS_TLS_PORT point to the same port number (${REDIS_PORT_NUMBER}). Change one of them or disable non-TLS traffic by setting REDIS_PORT_NUMBER=0"
         fi
         if [[ -z "$REDIS_TLS_CERT_FILE" ]]; then
             print_validation_error "You must provide a X.509 certificate in order to use TLS"
