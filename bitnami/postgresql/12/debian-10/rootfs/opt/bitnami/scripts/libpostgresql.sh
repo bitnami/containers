@@ -422,7 +422,7 @@ postgresql_configure_tls() {
     info "Configuring TLS"
     chmod 600 "$POSTGRESQL_TLS_KEY_FILE" || warn "Could not set compulsory permissions (600) on file ${POSTGRESQL_TLS_KEY_FILE}"
     postgresql_set_property "ssl" "on"
-    # Server ciphers are prefered by default
+    # Server ciphers are preferred by default
     ! is_boolean_yes "$POSTGRESQL_TLS_PREFER_SERVER_CIPHERS" && postgresql_set_property "ssl_prefer_server_ciphers" "off"
     [[ -n $POSTGRESQL_TLS_CA_FILE ]] && postgresql_set_property "ssl_ca_file" "$POSTGRESQL_TLS_CA_FILE"
     [[ -n $POSTGRESQL_TLS_CRL_FILE ]] && postgresql_set_property "ssl_crl_file" "$POSTGRESQL_TLS_CRL_FILE"
