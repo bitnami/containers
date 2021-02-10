@@ -358,7 +358,7 @@ elasticsearch_set_heap_size() {
         debug "Using specified values for Xmx and Xms heap options..."
         heap_size="$ELASTICSEARCH_HEAP_SIZE"
     else
-        debug "Calculating appropiate Xmx and Xms values..."
+        debug "Calculating appropriate Xmx and Xms values..."
         local machine_mem=""
         machine_mem="$(get_total_memory)"
         if [[ "$machine_mem" -lt 65536 ]]; then
