@@ -207,6 +207,7 @@ Available variables:
 * `RABBITMQ_SSL_CACERTFILE`: Path to the RabbitMQ server SSL CA certificate file. No defaults.
 * `RABBITMQ_SSL_CERTFILE`: Path to the RabbitMQ server SSL certificate file. No defaults.
 * `RABBITMQ_SSL_KEYFILE`: Path to the RabbitMQ server SSL certificate key file. No defaults.
+* `RABBITMQ_COMBINED_CERT_PATH`: Cert- and keyfile are combined automatically into one combined file at this file path. If you are using a combined certificate anyways, mount it to the container and set this path to the mounted file. Default: **/tmp/rabbitmq_combined_keys.pem** 
 * `RABBITMQ_SSL_DEPTH`: Maximum number of non-self-issued intermediate certificates that may follow the peer certificate in a valid certification path. No defaults.
 * `RABBITMQ_SSL_FAIL_IF_NO_PEER_CERT`: Whether to reject TLS connections if client fails to provide a certificate. Default: **verify_none**
 * `RABBITMQ_SSL_VERIFY`: Whether to enable peer SSL certificate verification. Default: **no**
