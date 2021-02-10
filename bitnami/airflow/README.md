@@ -33,7 +33,7 @@ You can find the default credentials and available configuration options in the 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.0.1`, `2.0.1-debian-10-r0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/2.0.1-debian-10-r0/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.0.1`, `2.0.1-debian-10-r1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/2.0.1-debian-10-r1/2/debian-10/Dockerfile)
 * [`1`, `1-debian-10`, `1.10.14`, `1.10.14-debian-10-r45` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/1.10.14-debian-10-r45/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow).
@@ -44,7 +44,7 @@ To run this application you need [Docker Engine](https://www.docker.com/products
 
 # How to use this image
 
-Airflow requires access to a PostgreSQL database to store information. We will use our very own [PostgreSQL image](https://www.github.com/bitnami/bitnami-docker-postgresql) for the database requirements. Additionaly, if you pretend to use the `CeleryExecutor`, you will also need an [Airflow Scheduler](https://www.github.com/bitnami/bitnami-docker-airflow-scheduler), one or more [Airflow Workers](https://www.github.com/bitnami/bitnami-docker-airflow-worker) and a [Redis(TM) server](https://www.github.com/bitnami/bitnami-docker-redis).
+Airflow requires access to a PostgreSQL database to store information. We will use our very own [PostgreSQL image](https://www.github.com/bitnami/bitnami-docker-postgresql) for the database requirements. Additionally, if you pretend to use the `CeleryExecutor`, you will also need an [Airflow Scheduler](https://www.github.com/bitnami/bitnami-docker-airflow-scheduler), one or more [Airflow Workers](https://www.github.com/bitnami/bitnami-docker-airflow-worker) and a [Redis(TM) server](https://www.github.com/bitnami/bitnami-docker-redis).
 
 ## Using Docker Compose
 
