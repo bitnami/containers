@@ -1,4 +1,3 @@
-
 # What is Apache Solr?
 
 > Solr is the popular, blazing-fast, open source enterprise search platform built on Apache Lucene.
@@ -37,7 +36,7 @@ You can find the available configuration options in the [Environment Variables](
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8`, `8-debian-10`, `8.8.0`, `8.8.0-debian-10-r8`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.8.0-debian-10-r8/8/debian-10/Dockerfile)
+* [`8`, `8-debian-10`, `8.8.0`, `8.8.0-debian-10-r9`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.8.0-debian-10-r9/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/solr GitHub repo](https://github.com/bitnami/bitnami-docker-solr).
 
@@ -154,6 +153,23 @@ When you start the solr image, you can adjust the configuration of the instance 
 - `SOLR_CORE`: Core name to create at first run. By default, it will not create a core. (E.g.: '**my_core**')
 - `SOLR_CORE_CONF_DIR`: Configuration directory to copy when creating a new core. Default: **data_driven_schema_configs**
 
+Cluster related environment variables:
+
+- `SOLR_CLOUD_BOOTSTRAP`: Indicates if this node is going to bootstrap the cluster. Default: **no**
+- `SOLR_ENABLE_CLOUD_MODE`: Enable cloud mode. Default: **no**
+- `SOLR_COLLECTION`: Create collection at the first run. By default, it will not create a core. (E.g.: '**my_collection**')
+- `SOLR_COLLECTION_SHARDS`: Number of shards for the collection created at first run. Default: **1**
+- `SOLR_COLLECTION_REPLICAS`: Number of replicas for the collection create at first run. Default: **1**
+- `SOLR_NUMBER_OF_NODES`: Number of the node of the Solr cloud cluster. Default: **1**
+- `SOLR_HOST`: Name of the node. If not set the node IP will be used. Default: **null**
+- `SORL_ZK_SLEEP_TIME`: Sleep time when waiting for init configuration operations to finish. Default: **5**
+- `SOLR_ZK_MAX_RETRIES`: Maximum retries when waitinf for init configuration operations to finish. Default: **5**
+
+Authentication related environment variables:
+- `SOLR_ENABLE_AUTHENTICATION`: Enable the authentication, you can indicate the administrator credentiales with the following variables. Default: **no**
+- `SOLR_ADMIN_USERNAME`: Username for the administrator user. Default: **admin**
+- `SOLR_ADMIN_PASSWORD`: Password for the administrator user. Default: **Bitnami**
+
 ### Specifying Environment Variables using Docker Compose
 
 This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-solr/blob/master/docker-compose.yml) file present in this repository:
@@ -269,6 +285,14 @@ or using Docker Compose:
 $ docker-compose up solr
 ```
 # Notable Changes
+
+## 8.8.0-debian-10-r9
+
+- The Solr container initialization logic has been moved to Bash scripts.
+- The size of the container image has been decreased.
+- Added the support for cloud mode.
+- Added support for authentication and admin user creation.
+- Data migration for the upgrades. If you are running an older version of this container, run this version as user `root` and it will migrate your current data.
 
 ## 7.4.0-r23
 
