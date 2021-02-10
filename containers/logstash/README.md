@@ -42,7 +42,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.10.2`, `7.10.2-debian-10-r22`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/7.10.2-debian-10-r22/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.10.2`, `7.10.2-debian-10-r23`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/7.10.2-debian-10-r23/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/logstash GitHub repo](https://github.com/bitnami/bitnami-docker-logstash).
 
@@ -134,7 +134,7 @@ $ docker run --env LOGSTASH_CONF_STRING="input {file {path => \"/tmp/logstash_in
 
 ## Using a configuration file
 
-You can override the default configuration for logstash by mounting your own configuration files on directory `/bitnami/logstash/config`. You will need to indicate the file holding the pipeline definition by setting the `LOGSTASH_CONF_FILENAME` enviroment variable.
+You can override the default configuration for logstash by mounting your own configuration files on directory `/bitnami/logstash/config`. You will need to indicate the file holding the pipeline definition by setting the `LOGSTASH_CONF_FILENAME` environment variable.
 
 ```console
 $ docker run -d --env LOGSTASH_CONF_FILENAME=my_config.conf -v /path/to/custom-conf-directory:/bitnami/logstash/config bitnami/logstash:latest
