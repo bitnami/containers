@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.15.0`, `1.15.0-debian-10-r14`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgbouncer/blob/1.15.0-debian-10-r14/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.15.0`, `1.15.0-debian-10-r15`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgbouncer/blob/1.15.0-debian-10-r15/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pgbouncer GitHub repo](https://github.com/bitnami/bitnami-docker-pgbouncer).
 
@@ -119,7 +119,7 @@ pgbouncer:
 
 ## Securing PgBouncer traffic
 
-PgBouncer supports the encryption of connections using the SSL/TLS protocol. Should you desire to enable this optional feature, you may use the following enviroment variables to configure the application:
+PgBouncer supports the encryption of connections using the SSL/TLS protocol. Should you desire to enable this optional feature, you may use the following environment variables to configure the application:
 
  - `PGBOUNCER_CLIENT_TLS_SSLMODE`: TLS traffic settings. Defaults to `disable`. Check the [official PgBouncer documentation](https://www.pgbouncer.org/config.html) for the available values for `client_tls_sslmode`.
  - `PGBOUNCER_CLIENT_TLS_CERT_FILE`: File containing the certificate file for the TLS traffic. No defaults.
