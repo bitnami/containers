@@ -39,7 +39,7 @@ if is_cassandra_running; then
 
     if [[ -f "$CASSANDRA_FIRST_BOOT_LOG_FILE" ]]; then
         running_log_file="$CASSANDRA_FIRST_BOOT_LOG_FILE"
-        info "Cassandra already running with PID $__run_pid because of the intial cluster setup"
+        info "Cassandra already running with PID $__run_pid because of the initial cluster setup"
     elif [[ -f "$CASSANDRA_INITSCRIPTS_BOOT_LOG_FILE" ]]; then
         running_log_file="$CASSANDRA_INITSCRIPTS_BOOT_LOG_FILE"
         info "Cassandra already running PID $__run_pid because of the init scripts execution"
