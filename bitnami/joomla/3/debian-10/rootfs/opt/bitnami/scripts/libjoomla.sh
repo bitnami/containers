@@ -144,6 +144,8 @@ joomla_initialize() {
             ! is_empty_value "$JOOMLA_SMTP_PASSWORD" && debug "Setting SMTP password" && joomla_conf_set  "\$smtppass" "$JOOMLA_SMTP_PASSWORD"
             debug "Setting SMTP port" && joomla_conf_set  "\$smtpport" "$JOOMLA_SMTP_PORT"
             debug "Setting SMTP protocol" && joomla_conf_set  "\$smtpsecure" "$JOOMLA_SMTP_PROTOCOL"
+            ! is_empty_value "$JOOMLA_SMTP_SENDER_EMAIL" && debug "Setting SMTP sender email" && joomla_conf_set  "\$mailfrom" "$JOOMLA_SMTP_SENDER_EMAIL"
+            ! is_empty_value "$JOOMLA_SMTP_SENDER_NAME" && debug "Setting SMTP sender name" && joomla_conf_set  "\$fromname" "$JOOMLA_SMTP_SENDER_NAME"
         fi
 
         info "Setting database host" && joomla_conf_set "\$host" "${JOOMLA_DATABASE_HOST}:${JOOMLA_DATABASE_PORT_NUMBER}"

@@ -31,6 +31,8 @@ joomla_env_vars=(
     JOOMLA_SMTP_USER
     JOOMLA_SMTP_PASSWORD
     JOOMLA_SMTP_PROTOCOL
+    JOOMLA_SMTP_SENDER_EMAIL
+    JOOMLA_SMTP_SENDER_NAME
     JOOMLA_DEFAULT_DATABASE_PORT_NUMBER
     JOOMLA_DATABASE_HOST
     JOOMLA_DATABASE_PORT_NUMBER
@@ -43,6 +45,8 @@ joomla_env_vars=(
     SMTP_USER
     SMTP_PASSWORD
     SMTP_PROTOCOL
+    SMTP_SENDER_EMAIL
+    SMTP_SENDER_NAME
 )
 for env_var in "${joomla_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -87,6 +91,10 @@ JOOMLA_SMTP_PASSWORD="${JOOMLA_SMTP_PASSWORD:-"${SMTP_PASSWORD:-}"}"
 export JOOMLA_SMTP_PASSWORD="${JOOMLA_SMTP_PASSWORD:-}" # only used during the first initialization
 JOOMLA_SMTP_PROTOCOL="${JOOMLA_SMTP_PROTOCOL:-"${SMTP_PROTOCOL:-}"}"
 export JOOMLA_SMTP_PROTOCOL="${JOOMLA_SMTP_PROTOCOL:-}" # only used during the first initialization
+JOOMLA_SMTP_SENDER_EMAIL="${JOOMLA_SMTP_SENDER_EMAIL:-"${SMTP_SENDER_EMAIL:-}"}"
+export JOOMLA_SMTP_SENDER_EMAIL="${JOOMLA_SMTP_SENDER_EMAIL:-}" # only used during the first initialization
+JOOMLA_SMTP_SENDER_NAME="${JOOMLA_SMTP_SENDER_NAME:-"${SMTP_SENDER_NAME:-}"}"
+export JOOMLA_SMTP_SENDER_NAME="${JOOMLA_SMTP_SENDER_NAME:-}" # only used during the first initialization
 
 # Database configuration
 export JOOMLA_DEFAULT_DATABASE_HOST="mariadb" # only used at build time
