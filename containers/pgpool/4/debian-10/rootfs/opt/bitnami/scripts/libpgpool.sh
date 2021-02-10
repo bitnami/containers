@@ -456,7 +456,7 @@ pgpool_create_config() {
     if is_boolean_yes "$PGPOOL_ENABLE_TLS"; then
         chmod 600 "$PGPOOL_TLS_KEY_FILE" || warn "Could not set compulsory permissions (600) on file ${PGPOOL_TLS_KEY_FILE}"
         pgpool_set_property "ssl" "on"
-        # Server ciphers are prefered by default
+        # Server ciphers are preferred by default
         ! is_boolean_yes "$PGPOOL_TLS_PREFER_SERVER_CIPHERS" && pgpool_set_property "ssl_prefer_server_ciphers" "off"
         [[ -n $PGPOOL_TLS_CA_FILE ]] && pgpool_set_property "ssl_ca_cert" "$PGPOOL_TLS_CA_FILE"
         pgpool_set_property "ssl_cert" "$PGPOOL_TLS_CERT_FILE"
