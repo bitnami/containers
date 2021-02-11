@@ -66,26 +66,6 @@ rabbitmq_validate() {
             print_validation_error "An invalid port was specified in the environment variable ${port_var}: ${err}."
         fi
     }
-    check_file_exists_or_path_writable() {
-        local path_to_check="${!1}"
-        local full_path_to_check=$(realpath "${path_to_check}")
-        local path_directory_to_check="${full_path_to_check%/*}"
-        # check if given path is empty
-        if [ -z "${path_to_check}" ]; then
-            # not okay if the given path is empty
-            print_validation_error "The variable ${1} must be set to either an existant file or a non-existant file in a writable directory."
-        fi
-        # check if file at given path exists
-        if [ ! -f "${path_to_check}" ]; then
-            # if the file does not exist, check if the directory is writable
-            if [ ! -w "${path_directory_to_check}" ]; then
-              # not okay if not writable
-              print_validation_error "The variable ${1} must be set to either an existant file or a non-existant file in a writable directory."
-            fi
-            # ok if writable
-        fi
-        # ok if the file exists
-    }
 
     check_fqdn() {
         if [[ "${!1}" == *.* ]]; then
@@ -93,6 +73,29 @@ rabbitmq_validate() {
                 print_validation_error "The node name appears to be a fully qualified hostname and RABBITMQ_USE_LONGNAME is not set."
             fi
         fi
+    }
+
+    check_file_exists_or_path_writable() {
+        local path_to_check="${!1}"
+        local full_path_to_check
+        full_path_to_check=$(realpath "${path_to_check}")
+        local path_directory_to_check="${full_path_to_check%/*}"
+
+        # check if given path is empty
+        if [[ -z "${path_to_check}" ]]; then
+            # not okay if the given path is empty
+            print_validation_error "The variable ${1} must be set to either an existant file or a non-existant file in a writable directory."
+        fi
+        # check if file at given path exists
+        if [[ ! -f "${path_to_check}" ]]; then
+            # if the file does not exist, check if the directory is writable
+            if [[ ! -w "${path_directory_to_check}" ]]; then
+                # not okay if not writable
+                print_validation_error "The variable ${1} must be set to either an existant file or a non-existant file in a writable directory."
+            fi
+            # ok if writable
+        fi
+        # ok if the file exists
     }
 
     check_yes_no_value "RABBITMQ_LOAD_DEFINITIONS"
@@ -445,8 +448,9 @@ rabbitmq_erlang_ssl_dir() {
 #   None
 #########################
 rabbitmq_create_combined_ssl_file() {
+    local -r combined_ssl_file="/etc/rabbitmq_combined_keys.pem"
     if [[ ! -f "$RABBITMQ_COMBINED_CERT_PATH" ]]; then
-      cat "$RABBITMQ_SSL_CERTFILE" "$RABBITMQ_SSL_KEYFILE" > "$RABBITMQ_COMBINED_CERT_PATH"
+        cat "$RABBITMQ_SSL_CERTFILE" "$RABBITMQ_SSL_KEYFILE" > "$RABBITMQ_COMBINED_CERT_PATH"
     fi
 }
 
