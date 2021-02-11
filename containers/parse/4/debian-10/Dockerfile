@@ -10,7 +10,7 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl ghostscript gzip imagemagick libbz2-1.0 libc6 libcom-err2 libcurl4 libffi6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libncursesw6 libnettle6 libnghttp2-14 libp11-kit0 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 procps sudo tar zlib1g
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
-RUN bitnami-pkg install node-12.20.1-0 --checksum a3877a2368de27c799a770b142830754e3d7d6616d6d56ca71be67dea5c9c774
+RUN bitnami-pkg install node-12.20.2-0 --checksum 21d3d65f5f89e25628090d135c097d7ebc9d444b7d4893592f117ce307e436c3
 RUN bitnami-pkg install mongodb-client-4.4.3-0 --checksum 0e76516960a83631bd6a557c9a2c9c8c81e59ba9fbbdf349cabb00c83f7e01a4
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
 RUN bitnami-pkg unpack parse-4.9.3-0 --checksum 06542d1d41c71615eb028ab06b14c9c0b2bb86cf44644960337a82c8c67fd34e
@@ -18,7 +18,7 @@ RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="4.9.3-debian-10-r49" \
+    BITNAMI_IMAGE_VERSION="4.9.3-debian-10-r50" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
