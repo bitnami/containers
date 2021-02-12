@@ -1,10 +1,10 @@
 {
     "airflow": {
         "arch": "amd64",
-        "digest": "c8c1e3a7ed30cf23fa331127a5e0181f1b972801e1c1626c94a738fd6136f0ec",
+        "digest": "6f3f48e9b3717df7140abd7e007323682fd0a9c91c27ace5fbe0f38b6f2d2397",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.0.1-0"
+        "version": "2.0.1-1"
     },
     "gosu": {
         "arch": "amd64",
