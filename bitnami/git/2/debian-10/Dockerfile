@@ -13,7 +13,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.30.1-0" 
 RUN /build/bitnami-user.sh
 
 ENV BITNAMI_APP_NAME="git" \
-    BITNAMI_IMAGE_VERSION="2.30.1-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="2.30.1-debian-10-r4" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/git/bin:$PATH"
 
 ENTRYPOINT [ "git" ]
