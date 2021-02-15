@@ -12,7 +12,7 @@ RUN bitnami-pkg install python-3.6.12-10 --checksum cc3e62e05463929529214f65cb79
 RUN bitnami-pkg install postgresql-client-11.11.0-0 --checksum 648e3913acf696c24143dfca8081d22f655f6a70abc542f5daf3f3cd9aa8e2e9
 RUN bitnami-pkg install node-14.15.5-0 --checksum 64c9e8d920b9d033f728e8365c5df7b63ddd6177f0045fd432993b6dc102fd05
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
-RUN bitnami-pkg unpack odoo-12.0.20210115-1 --checksum 8fcbbb64aa04487acc35615df4c2d9ec7eeb0311cbffb5272185a9e032257152
+RUN bitnami-pkg unpack odoo-12.0.20210215-0 --checksum 682489623b7e5c752fb5ac320c1fedd9f8a7cd4a270cd99725ec8e618e53849e
 RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN curl -sLO https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.buster_amd64.deb && \
     echo "dfab5506104447eef2530d1adb9840ee3a67f30caaad5e9bcb8743ef2f9421bd  wkhtmltox_0.12.5-1.buster_amd64.deb" | sha256sum -c - && \
@@ -21,7 +21,7 @@ RUN curl -sLO https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="odoo" \
-    BITNAMI_IMAGE_VERSION="12.0.20210115-debian-10-r25" \
+    BITNAMI_IMAGE_VERSION="12.0.20210215-debian-10-r0" \
     LD_LIBRARY_PATH="/opt/bitnami/odoo/venv/lib/python3.6/site-packages/reportlab/.libs:$LD_LIBRARY_PATH" \
     ODOO_EMAIL="user@example.com" \
     ODOO_PASSWORD="bitnami" \
