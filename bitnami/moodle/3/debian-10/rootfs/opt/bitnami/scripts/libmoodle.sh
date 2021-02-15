@@ -310,7 +310,7 @@ moodle_upgrade() {
         "--allow-unstable"
     )
     am_i_root && moodle_upgrade_args=("gosu" "$WEB_SERVER_DAEMON_USER" "${moodle_upgrade_args[@]}")
-    debug_execute "${moodle_install_args[@]}"
+    debug_execute "${moodle_upgrade_args[@]}"
     popd >/dev/null
 }
 
