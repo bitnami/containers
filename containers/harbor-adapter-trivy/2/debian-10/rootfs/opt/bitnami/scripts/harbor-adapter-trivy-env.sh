@@ -8,6 +8,9 @@
 # 3. Environment variables overridden via external files using *_FILE variables (see below)
 # 4. Environment variables set externally (i.e. current Bash context/Dockerfile/userdata)
 
+# Load logging library
+. /opt/bitnami/scripts/liblog.sh
+
 export BITNAMI_ROOT_DIR="/opt/bitnami"
 export BITNAMI_VOLUME_DIR="/bitnami"
 
@@ -25,8 +28,12 @@ harbor_adapter_trivy_env_vars=(
 for env_var in "${harbor_adapter_trivy_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
     if [[ -n "${!file_env_var:-}" ]]; then
-        export "${env_var}=$(< "${!file_env_var}")"
-        unset "${file_env_var}"
+        if [[ -r "${!file_env_var:-}" ]]; then
+            export "${env_var}=$(< "${!file_env_var}")"
+            unset "${file_env_var}"
+        else
+            warn "Skipping export of '${env_var}'. '${!file_env_var:-}' is not readable."
+        fi
     fi
 done
 unset harbor_adapter_trivy_env_vars
