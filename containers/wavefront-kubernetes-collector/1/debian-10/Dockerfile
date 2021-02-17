@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="wavefront-kubernetes-collector" \
-    BITNAMI_IMAGE_VERSION="1.2.6-debian-10-r75" \
+    BITNAMI_IMAGE_VERSION="1.2.6-debian-10-r76" \
     PATH="/opt/bitnami/wavefront/bin:$PATH"
 
 USER 1001
