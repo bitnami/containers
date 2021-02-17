@@ -327,6 +327,8 @@ LDAP configuration parameters must be specified if you wish to enable LDAP suppo
 - `LDAP_BASE_LOOKUP`: LDAP base lookup (Optional). No defaults.
 - `LDAP_NSS_INITGROUPS_IGNOREUSERS`: LDAP ignored users. Defaults to `root,nslcd`.
 - `LDAP_SCOPE`: LDAP search scope (Optional). No defaults.
+- `LDAP_SEARCH_FILTER`: LDAP search filter on posix users (Optional). No defaults.
+- `LDAP_SEARCH_MAP`: LDAP custom search attribute to be looked up on posix users (Optional). No defaults.
 - `LDAP_TLS_REQCERT`: LDAP TLS check on server certificates (Optional). No defaults.
 
 ### Step 1: Start MariaDB Galera with LDAP support
