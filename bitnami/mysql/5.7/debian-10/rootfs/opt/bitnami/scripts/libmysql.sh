@@ -155,13 +155,13 @@ bind_address=${DB_DEFAULT_BIND_ADDRESS}
 log_error=${DB_LOGS_DIR}/mysqld.log
 character_set_server=${DB_DEFAULT_CHARACTER_SET}
 collation_server=${DB_DEFAULT_COLLATE}
-plugin_dir=${DB_BASE_DIR}/plugin
+plugin_dir=${DB_BASE_DIR}/lib/plugin
 
 [client]
 port=${DB_DEFAULT_PORT_NUMBER}
 socket=${DB_SOCKET_FILE}
 default_character_set=UTF8
-plugin_dir=${DB_BASE_DIR}/plugin
+plugin_dir=${DB_BASE_DIR}/lib/plugin
 
 [manager]
 port=${DB_DEFAULT_PORT_NUMBER}
