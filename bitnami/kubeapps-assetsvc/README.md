@@ -2,7 +2,7 @@
 
 > Kubeapps AssetSvc is one of the main components of Kubeapps, a Web-based application deployment and management tool for Kubernetes clusters.
 >
-> This micro-service reads metadata about the repositories available and its charts in a MongoDB database and create an API endpoint to present it.
+> This micro-service reads metadata about the repositories available and its charts in a MongoDB&reg; database and create an API endpoint to present it.
 
 
 [https://kubeapps.com/](https://kubeapps.com/)
@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-scratch`, `2.1.0`, `2.1.0-scratch-r0` (2/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-assetsvc/blob/2.1.0-scratch-r0/2/scratch/Dockerfile)
+* [`2`, `2-scratch`, `2.2.0`, `2.2.0-scratch-r0` (2/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-assetsvc/blob/2.2.0-scratch-r0/2/scratch/Dockerfile)
 
 # Configuration
 
