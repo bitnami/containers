@@ -9,14 +9,14 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/telegraf-1.17.2-0-linux-amd64-debian-10.tar.gz && \
-    echo "e02ef9f0c3ae197910a4c1ca1fcf5e5c86fcf8174dd25520f8db60735828a371  /tmp/bitnami/pkg/cache/telegraf-1.17.2-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/telegraf-1.17.2-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/telegraf-1.17.2-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/telegraf-1.17.3-0-linux-amd64-debian-10.tar.gz && \
+    echo "0ff09d2f19cdd7a8bd30dbacf590954b30bb0078f341ece70746a99d50a5e503  /tmp/bitnami/pkg/cache/telegraf-1.17.3-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/telegraf-1.17.3-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/telegraf-1.17.3-0-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="telegraf" \
-    BITNAMI_IMAGE_VERSION="1.17.2-debian-10-r19" \
+    BITNAMI_IMAGE_VERSION="1.17.3-debian-10-r0" \
     PATH="/opt/bitnami/telegraf/bin:$PATH"
 
 USER 1001
