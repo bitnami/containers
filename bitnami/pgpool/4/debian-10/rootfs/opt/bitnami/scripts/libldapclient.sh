@@ -30,6 +30,9 @@ export LDAP_BASE_LOOKUP="${LDAP_BASE_LOOKUP:-}"
 export LDAP_NSS_INITGROUPS_IGNOREUSERS="${LDAP_NSS_INITGROUPS_IGNOREUSERS:-root,nslcd}"
 export LDAP_SCOPE="${LDAP_SCOPE:-}"
 export LDAP_TLS_REQCERT="${LDAP_TLS_REQCERT:-}"
+export LDAP_SEARCH_FILTER="${LDAP_SEARCH_FILTER:-}"
+export LDAP_SEARCH_MAP="${LDAP_SEARCH_MAP:-}"
+
 EOF
     if [[ "$OS_FLAVOUR" =~ ^debian-.*$ ]]; then
         cat <<"EOF"
@@ -121,6 +124,18 @@ EOF
         cat >>"/etc/nslcd.conf"<<EOF
 # The search scope
 scope $LDAP_SCOPE
+EOF
+    fi
+    if [[ -n "${LDAP_SEARCH_FILTER}" ]]; then
+        cat >>"/etc/nslcd.conf"<<EOF
+# LDAP search filter to use for posix users
+filter passwd (objectClass=$LDAP_SEARCH_FILTER)
+EOF
+    fi
+    if [[ -n "${LDAP_SEARCH_MAP}" ]]; then
+        cat >>"/etc/nslcd.conf"<<EOF
+# Used for lookup of custom attributes
+map passwd uid $LDAP_SEARCH_MAP
 EOF
     fi
     if [[ -n "${LDAP_TLS_REQCERT}" ]]; then
