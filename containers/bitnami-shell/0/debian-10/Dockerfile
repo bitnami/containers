@@ -6,7 +6,7 @@ COPY prebuildfs /
 RUN install_packages curl procps
 
 ENV BITNAMI_APP_NAME="bitnami-shell" \
-    BITNAMI_IMAGE_VERSION="0-debian-10-r2" \
+    BITNAMI_IMAGE_VERSION="0-debian-10-r3" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux"
