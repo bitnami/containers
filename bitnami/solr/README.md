@@ -36,7 +36,7 @@ You can find the available configuration options in the [Environment Variables](
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8`, `8-debian-10`, `8.8.0`, `8.8.0-debian-10-r10`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.8.0-debian-10-r10/8/debian-10/Dockerfile)
+* [`8`, `8-debian-10`, `8.8.0`, `8.8.0-debian-10-r11`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.8.0-debian-10-r11/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/solr GitHub repo](https://github.com/bitnami/bitnami-docker-solr).
 
@@ -170,6 +170,14 @@ Authentication related environment variables:
 - `SOLR_ADMIN_USERNAME`: Username for the administrator user. Default: **admin**
 - `SOLR_ADMIN_PASSWORD`: Password for the administrator user. Default: **Bitnami**
 
+SSL related environment variables:
+- `SOLR_SSL_ENABLED`: Indicates if solr is going to enable SSL. Default: **no**
+- `SOLR_SSL_KEY_STORE`: Key store file. Default: **null**
+- `SOLR_SSL_KEY_STORE_PASSWORD`: Password for the key store file. Default: **null**
+- `SOLR_SSL_TRUST_STORE`: Trust store file. Default: **null**
+- `SOLR_SSL_TRUST_STORE_PASSWORD`: Password for the trust store file. Default: **null**
+- `SOLR_SSL_CHECK_PEER_NAME`: Indicates if the peer name should be checked. Default: **false**
+
 ### Specifying Environment Variables using Docker Compose
 
 This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-solr/blob/master/docker-compose.yml) file present in this repository:
@@ -285,6 +293,10 @@ or using Docker Compose:
 $ docker-compose up solr
 ```
 # Notable Changes
+
+## 8.8.0-debian-10-r11
+
+- Adds SSL support.
 
 ## 8.8.0-debian-10-r9
 

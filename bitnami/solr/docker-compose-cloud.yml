@@ -14,7 +14,7 @@ services:
     volumes:
       - 'solr_data:/bitnami/solr'
   zk1:
-    image: 'docker.io/bitnami/zookeeper:latest'
+    image: 'docker.io/bitnami/zookeeper:3-debian-10'
     ports:
       - '2181'
     volumes:
@@ -23,6 +23,7 @@ services:
       - ZOO_SERVER_ID=1
       - ALLOW_ANONYMOUS_LOGIN=yes
       - ZOO_SERVERS=zk1:2888:3888
+      - ZOO_4LW_COMMANDS_WHITELIST=srvr,mntr,conf,ruok
 volumes:
   solr_data:
     driver: local
