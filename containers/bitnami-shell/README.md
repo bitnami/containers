@@ -26,7 +26,7 @@ $ docker run --name bitnami-shell bitnami/bitnami-shell:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0-debian-10-r3`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-bitnami-shell/blob/0-debian-10-r3/0/debian-10/Dockerfile)
+* [`10`, `10-debian-10`, `10-debian-10-r0`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-bitnami-shell/blob/10-debian-10-r0/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/bitnami-shell GitHub repo](https://github.com/bitnami/bitnami-docker-bitnami-shell).
 
@@ -47,7 +47,7 @@ $ docker pull bitnami/bitnami-shell:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/bitnami-shell:latest 'https://github.com/bitnami/bitnami-docker-bitnami-shell.git#master:0/debian-10'
+$ docker build -t bitnami/bitnami-shell:latest 'https://github.com/bitnami/bitnami-docker-bitnami-shell.git#master:10/debian-10'
 ```
 
 # Configuration
