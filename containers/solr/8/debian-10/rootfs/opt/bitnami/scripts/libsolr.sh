@@ -61,20 +61,48 @@ solr_validate() {
         error_code=1
     }
 
-    ! is_yes_no_value "$SOLR_ENABLE_AUTHENTICATION" && print_validation_error "SOLR_ENABLE_AUTHENTICATION posible values are yes or no"
-
+    ! is_yes_no_value "$SOLR_ENABLE_AUTHENTICATION" && print_validation_error "SOLR_ENABLE_AUTHENTICATION possible values are yes or no"
     if is_boolean_yes "$SOLR_ENABLE_AUTHENTICATION"; then
        [[ -z "$SOLR_ADMIN_USERNAME" ]] && print_validation_error "You need to provide an username in SOLR_USERNAME"
        [[ -z "$SOLR_ADMIN_PASSWORD" ]] && print_validation_error "You need to provide a password for the user: ${SOLR_ADMIN_USERNAME}"
     fi
 
+    ! is_yes_no_value "$SOLR_SSL_ENABLED" && print_validation_error "SOLR_SSL_ENABLED possible values are yes or no"
+    if is_boolean_yes "$SOLR_SSL_ENABLED"; then
+        [[ -z "$SOLR_SSL_KEY_STORE" ]] && print_validation_error "You need to provide a key store file in SOLR_SSL_KEY_STORE"
+        [[ -z "$SOLR_SSL_TRUST_STORE" ]] && print_validation_error "You need to provide a trust store file in SOLR_SSL_TRUST_STORE"
+        [[ -z "$SOLR_SSL_KEY_STORE_PASSWORD" ]] && print_validation_error "You need to provide a password in SOLR_SSL_KEY_STORE_PASSWORD"
+        [[ -z "$SOLR_SSL_TRUST_STORE_PASSWORD" ]] && print_validation_error "You need to provide a password file in SOLR_SSL_TRUST_STORE_PASSWORD"
+    fi
+
     ! is_yes_no_value "$SOLR_ENABLE_CLOUD_MODE" && print_validation_error "SOLR_ENABLE_CLOUD_MODE posible values are yes or no"
     is_boolean_yes "$SOLR_ENABLE_CLOUD_MODE" && [[ -z "$SOLR_ZK_HOSTS" ]] && print_validation_error "You need to provide the Zookeper node list in SOLR_ZK_HOSTS"
+
     ! is_boolean_yes "$SOLR_CLOUD_BOOTSTRAP" && is_boolean_yes "$SOLR_ENABLE_CLOUD_MODE" && [[ -n "$SOLR_CORE" ]] && info "This node is not a boostrap node and will not create the collection"
+
+    ! is_true_false_value "$SOLR_SSL_CHECK_PEER_NAME" && print_validation_error "SOLR_SSL_CHECK_PEER_NAME possible values are true or false"
 
     [[ "$SOLR_NUMBER_OF_NODES" -lt $(( "$SOLR_COLLECTION_REPLICAS" * "$SOLR_COLLECTION_SHARDS" )) ]] && print_validation_error "Not enough nodes for the replicas and shards indicated"
 
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
+}
+
+
+########################
+# Wait for solr root to exists in zookeeper
+# Globals:
+#   SOLR_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+solr_wait_for_zk_root() {
+    info "Waiting for solr root in zookeeper"
+    if ! retry_while solr_zk_root_exists; then
+        error "Failed to connect to the zookeeper"
+        exit 1
+    fi
 }
 
 ########################
@@ -118,13 +146,16 @@ solr_create_core() {
     local -r core="${1:?Missing core}"
     local -r exec="curl"
     local command_args=("--silent")
+    local protocol="http"
+
+    is_boolean_yes "$SOLR_SSL_ENABLED" && protocol="https" && command_args+=("-k")
 
     is_boolean_yes "$SOLR_ENABLE_AUTHENTICATION" && command_args+=("--user" "${SOLR_ADMIN_USERNAME}:${SOLR_ADMIN_PASSWORD}")
 
     mkdir -p "${SOLR_SERVER_DIR}/solr/${core}/data"
     cp -r "${SOLR_SERVER_DIR}"/solr/configsets/_default/* "${SOLR_SERVER_DIR}/solr/${core}/"
 
-    command_args+=( "http://localhost:${SOLR_PORT_NUMBER}/solr/admin/cores?action=CREATE&name=${SOLR_CORE}&instanceDir=${SOLR_CORE}&config=solrconfig.xml&schema=schema.xml&dataDir=data" )
+    command_args+=( "${protocol}://localhost:${SOLR_PORT_NUMBER}/solr/admin/cores?action=CREATE&name=${SOLR_CORE}&instanceDir=${SOLR_CORE}&config=solrconfig.xml&schema=schema.xml&dataDir=data" )
 
     info "Creating solr core: ${SOLR_CORE}"
 
@@ -151,7 +182,12 @@ solr_update_password() {
     local -r default_password="SolrRocks"
     local -r username="${1:?user is required}"
     local -r password="${2:?password is required}"
-    local command_args=("--silent" "--user" "${username}:${default_password}" "http://localhost:${SOLR_PORT_NUMBER}/api/cluster/security/authentication" "-H" "'Content-type:application/json'" "-d" "{\"set-user\":{\"${username}\":\"${password}\"}}" )
+    local protocol="http"
+    local command_args=( )
+
+    is_boolean_yes "$SOLR_SSL_ENABLED" && protocol="https" && command_args+=("-k")
+
+    command_args+=("--silent" "--user" "${username}:${default_password}" "${protocol}://localhost:${SOLR_PORT_NUMBER}/api/cluster/security/authentication" "-H" "'Content-type:application/json'" "-d" "{\"set-user\":{\"${username}\":\"${password}\"}}" )
 
     info "Updating user password"
 
@@ -199,12 +235,16 @@ solr_create_cloud_user() {
 #   None
 #########################
 solr_create_collection() {
-    local -r exec="${SOLR_BIN_DIR}/solr"
-    local command_args=("create_collection" "-c" "$SOLR_COLLECTION" "-replicationFactor" "$SOLR_COLLECTION_REPLICAS" "-shards" "$SOLR_COLLECTION_SHARDS")
+    local -r exec="curl"
+    local command_args=("--silent")
+    local protocol="http"
 
     info "Creating collection:${SOLR_COLLECTION} with ${SOLR_COLLECTION_REPLICAS} replicas and ${SOLR_COLLECTION_SHARDS} shards"
 
-    [[ -n "$SOLR_PORT_NUMBER" ]] && command_args+=("-p" "$SOLR_PORT_NUMBER")
+    is_boolean_yes "$SOLR_ENABLE_AUTHENTICATION" && command_args+=("--user" "${SOLR_ADMIN_USERNAME}:${SOLR_ADMIN_PASSWORD}")
+    is_boolean_yes "$SOLR_SSL_ENABLED" && protocol="https" && command_args+=("-k")
+
+    command_args+=( "${protocol}://localhost:${SOLR_PORT_NUMBER}/solr/admin/collections?action=CREATE&name=${SOLR_COLLECTION}&numShards=${SOLR_COLLECTION_SHARDS}&replicationFactor=${SOLR_COLLECTION_REPLICAS}" )
 
     #Check if the collection exists before creating it
     if ! solr_collection_exists "$SOLR_COLLECTION"; then
@@ -216,7 +256,7 @@ solr_create_collection() {
             fi
         fi
 
-        if ! debug_execute "$exec" "${command_args[@]}"; then
+        if ! debug_execute "$exec" "${command_args[@]}" > /dev/null; then
             error "There was an error when creating the collection"
             exit 1
         else
@@ -225,6 +265,24 @@ solr_create_collection() {
     else
         info "Skipping. Collection already exists."
     fi
+}
+
+#########################
+# Check if the root of solr exists in zookeeper
+# Globals:
+#   SOLR_*
+# Arguments:
+#   $1 - Collection name
+# Returns:
+#   None
+#########################
+solr_zk_root_exists() {
+    local -r exec="${SOLR_BIN_DIR}/solr"
+    local command_args=("zk" "ls" "/" "-z" "$SOLR_ZK_HOSTS")
+
+    debug "Checking if root of solr exists in zookeeper"
+
+    "$exec" "${command_args[@]}" 2> /dev/null | grep -q "solr"
 }
 
 #########################
@@ -334,9 +392,26 @@ solr_zk_initialize() {
         info "Zookeeper is already initialized"
     else
         info "Creating root in zookeeper"
-        debug_execute "$exec" "${command_args[@]}" || true
+        debug_execute "$exec" "${command_args[@]}"
     fi
 }
+
+
+#########################
+# Set cluster properties in zookeeper
+# Globals:
+#   SOLR_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+solr_set_ssl_url_scheme() {
+    info "Initializing configuring Solr HTTPS in Zookeeper"
+
+    solr_wait_for_zk_root && "${SOLR_SERVER_DIR}/scripts/cloud-scripts/zkcli.sh" -zkhost "${SOLR_ZK_HOSTS}/solr" -cmd clusterprop -name urlScheme -val https
+}
+
 
 #########################
 # Create root in zookeeper
@@ -379,6 +454,8 @@ solr_initialize() {
     # Check if there is persisted data from old version and migrate it
     ! is_dir_empty "${SOLR_VOLUME_DIR}/data" && [[ -f "$SOLR_VOLUME_DIR/.initialized" ]] && solr_migrate_old_data
 
+    is_boolean_yes "$SOLR_SSL_ENABLED" && export SOLR_SSL_ENABLED=true
+
     # Check if Solr has already been initialized and persisted in a previous run
     local -r app_name="solr"
     if ! is_app_initialized "$app_name"; then
@@ -401,10 +478,18 @@ solr_initialize() {
 
                 solr_start_bg "cloud"
 
+                is_boolean_yes "$SOLR_SSL_ENABLED" && solr_set_ssl_url_scheme
+
                 [[ -n "$SOLR_COLLECTION" ]] && solr_create_collection
                 is_boolean_yes "$SOLR_ENABLE_AUTHENTICATION" && solr_create_cloud_user "$SOLR_ADMIN_USERNAME" "$SOLR_ADMIN_PASSWORD"
 
                 solr_stop
+            else
+                if is_boolean_yes "$SOLR_SSL_ENABLED"; then
+                    solr_set_ssl_url_scheme
+                else
+                    solr_wait_for_zk_root
+                fi
             fi
         else
             info "Deploying Solr from scratch"
