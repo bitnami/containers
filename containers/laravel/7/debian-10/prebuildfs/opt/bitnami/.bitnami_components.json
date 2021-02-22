@@ -22,10 +22,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "3db7c9e23347bf422e60afe0b150d960e6f670d3ec29971ae3fd0c35edda3b4e",
+        "digest": "bf2fec1f87edc4cd0e420db94ac97f9a630c23950362e8539e061af8615675d4",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.15-1"
+        "version": "7.4.15-2"
     },
     "tini": {
         "arch": "amd64",
