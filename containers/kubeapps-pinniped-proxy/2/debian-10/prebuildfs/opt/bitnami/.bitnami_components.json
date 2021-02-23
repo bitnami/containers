@@ -1,9 +1,9 @@
 {
     "kubeapps-pinniped-proxy": {
         "arch": "amd64",
-        "digest": "f3b6cf3d7b0df38781050ca6049fcb75874de439a7e9559684f5b598deb80729",
+        "digest": "e75211f01f87f795956ecbec5cf0e0ea2699d4cbf2e14132535663a08ff3d959",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.2.0-0"
+        "version": "2.2.1-0"
     }
 }
