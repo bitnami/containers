@@ -1094,10 +1094,9 @@ is_cassandra_running() {
 #   None
 #########################
 cassandra_common_conf_set() {
-    local file="${1:?missing file}"
-    local key="${2:?missing key}"
-    shift
-    shift
+    local -r file="${1:?missing file}"
+    local -r key="${2:?missing key}"
+    shift 2
     local values=("$@")
 
     if [[ "${#values[@]}" -eq 0 ]]; then
