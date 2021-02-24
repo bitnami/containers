@@ -706,6 +706,8 @@ cassandra_initialize() {
     cassandra_setup_rack_dc
     cassandra_setup_data_dirs
     cassandra_setup_cluster
+    cassandra_setup_from_environment_variables # Give priority to users configuration
+
     is_boolean_yes "$CASSANDRA_CLIENT_ENCRYPTION" && cassandra_setup_client_ssl
 
     debug "Ensuring expected directories/files exist..."
@@ -1078,4 +1080,115 @@ is_cassandra_running() {
     else
         is_service_running "$pid"
     fi
+}
+
+########################
+# Set a configuration setting value to a file
+# Globals:
+#   None
+# Arguments:
+#   $1 - file
+#   $2 - key
+#   $3 - values (array)
+# Returns:
+#   None
+#########################
+cassandra_common_conf_set() {
+    local file="${1:?missing file}"
+    local key="${2:?missing key}"
+    shift
+    shift
+    local values=("$@")
+
+    if [[ "${#values[@]}" -eq 0 ]]; then
+        stderr_print "missing value"
+        return 1
+    elif [[ "${#values[@]}" -ne 1 ]]; then
+        for i in "${!values[@]}"; do
+            cassandra_common_conf_set "$file" "${key[$i]}" "${values[$i]}"
+        done
+    else
+        value="${values[0]}"
+        # Check if the value was set before
+        if grep -q "^[#\\s]*$key\s*=.*" "$file"; then
+            # Update the existing key
+            replace_in_file "$file" "^[#\\s]*${key}\s*=.*" "${key}=${value}" false
+        else
+            # Add a new key
+            printf '\n%s=%s' "$key" "$value" >>"$file"
+        fi
+    fi
+}
+
+########################
+# Set a configuration setting value to cassandra-env.sh
+# Globals:
+#   CASSANDRA_CONF_DIR
+# Arguments:
+#   $1 - key
+#   $2 - values (array)
+# Returns:
+#   None
+#########################
+cassandra_env_conf_set() {
+    cassandra_common_conf_set "${CASSANDRA_CONF_DIR}/cassandra-env.sh" "$@"
+}
+
+########################
+# Set a configuration setting value to cassandra-rackdc.properties
+# Globals:
+#   CASSANDRA_CONF_DIR
+# Arguments:
+#   $1 - key
+#   $2 - values (array)
+# Returns:
+#   None
+#########################
+cassandra_rackdc_conf_set() {
+    cassandra_common_conf_set "${CASSANDRA_CONF_DIR}/cassandra-rackdc.properties" "$@"
+}
+
+########################
+# Set a configuration setting value to commitlog_archiving.properties
+# Globals:
+#   CASSANDRA_CONF_DIR
+# Arguments:
+#   $1 - key
+#   $2 - values (array)
+# Returns:
+#   None
+#########################
+cassandra_commitlog_conf_set() {
+    cassandra_common_conf_set "${CASSANDRA_CONF_DIR}/commitlog_archiving.properties" "$@"
+}
+
+########################
+# Configure Cassandra configuration files from environment variables
+# Globals:
+#   CASSANDRA_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+cassandra_setup_from_environment_variables() {
+    # Map environment variables to config properties for cassandra-env.sh
+    for var in "${!CASSANDRA_CFG_ENV_@}"; do
+        # shellcheck disable=SC2001
+        key="$(echo "$var" | sed -e 's/^CASSANDRA_CFG_ENV_//g')"
+        value="${!var}"
+        cassandra_env_conf_set "$key" "$value"
+    done
+    # Map environment variables to config properties for cassandra-rackdc.properties
+    for var in "${!CASSANDRA_CFG_RACKDC_@}"; do
+        key="$(echo "$var" | sed -e 's/^CASSANDRA_CFG_RACKDC_//g' | tr '[:upper:]' '[:lower:]')"
+        value="${!var}"
+        cassandra_rackdc_conf_set "$key" "$value"
+    done
+    # Map environment variables to config properties for commitlog_archiving.properties
+    for var in "${!CASSANDRA_CFG_COMMITLOG_@}"; do
+        key="$(echo "$var" | sed -e 's/^CASSANDRA_CFG_COMMITLOG_//g' | tr '[:upper:]' '[:lower:]')"
+        value="${!var}"
+        cassandra_commitlog_conf_set "$key" "$value"
+    done
 }
