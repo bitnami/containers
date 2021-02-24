@@ -46,7 +46,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`6.0`, `6.0-debian-10`, `6.0.11`, `6.0.11-debian-10-r0`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.0.11-debian-10-r0/6.0/debian-10/Dockerfile)
+* [`6.2`, `6.2-debian-10`, `6.2.0`, `6.2.0-debian-10-r0`, `latest` (6.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.2.0-debian-10-r0/6.2/debian-10/Dockerfile)
+* [`6.0`, `6.0-debian-10`, `6.0.11`, `6.0.11-debian-10-r0` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.0.11-debian-10-r0/6.0/debian-10/Dockerfile)
 * [`5.0`, `5.0-debian-10`, `5.0.11`, `5.0.11-debian-10-r1` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.11-debian-10-r1/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
@@ -68,7 +69,7 @@ $ docker pull bitnami/redis:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/redis:latest 'https://github.com/bitnami/bitnami-docker-redis.git#master:6.0/debian-10'
+$ docker build -t bitnami/redis:latest 'https://github.com/bitnami/bitnami-docker-redis.git#master:6.2/debian-10'
 ```
 
 # Persisting your database
