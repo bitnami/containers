@@ -1051,7 +1051,7 @@ mysql_client_extra_opts() {
     }
     local -a opts=()
     local key value
-    if is_boolean_yes "$DB_ENABLE_SSL"; then
+    if is_boolean_yes "${DB_ENABLE_SSL:-no}"; then
         if [[ "$(mysql_client_flavor)" = "mysql" ]]; then
             opts+=("--ssl-mode=REQUIRED")
         else
