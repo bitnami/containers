@@ -33,7 +33,7 @@ replace_in_file() {
     # 1) They are not compatible with files mounted from ConfigMap(s)
     # 2) We found incompatibility issues with Debian10 and "in-place" substitutions
     result="$(sed "${regex_modifier}s@${match_regex}@${substitute_regex}@g" "$filename")"
-    echo "$result" > "$filename"
+    echo "$result" >"$filename"
 }
 
 ########################
@@ -45,20 +45,21 @@ replace_in_file() {
 # Returns: none
 #########################
 wait_for_db() {
-  local db_host="${DB_HOST:-mariadb}"
-  local db_port="${DB_PORT:-3306}"
-  local db_address=$(getent hosts "$db_host" | awk '{ print $1 }')
-  counter=0
-  log "Connecting to mariadb at $db_address"
-  while ! nc -z "$db_address" "$db_port" >/dev/null; do
-    counter=$((counter+1))
-    if [ $counter == 30 ]; then
-      log "Error: Couldn't connect to mariadb."
-      exit 1
-    fi
-    log "Trying to connect to mariadb at $db_address. Attempt $counter."
-    sleep 5
-  done
+    local -r db_host="${DB_HOST:-mariadb}"
+    local -r db_port="${DB_PORT:-3306}"
+    local db_address
+    db_address=$(getent hosts "$db_host" | awk '{ print $1 }')
+    local counter=0
+    log "Connecting to mariadb at $db_address"
+    while ! nc -z "$db_address" "$db_port" >/dev/null; do
+        counter=$((counter + 1))
+        if [ $counter == 30 ]; then
+            log "Error: Couldn't connect to mariadb."
+            exit 1
+        fi
+        log "Trying to connect to mariadb at $db_address. Attempt $counter."
+        sleep 5
+    done
 }
 
 ########################
@@ -67,43 +68,45 @@ wait_for_db() {
 # Returns: none
 #########################
 setup_db() {
-  log "Configuring the database"
-  php artisan migrate --force
+    log "Configuring the database"
+    php artisan migrate --force
 }
 
 print_welcome_page
 
 if [ "${1}" == "php" -a "$2" == "artisan" -a "$3" == "serve" ]; then
-  if [[ ! -f /app/config/database.php ]]; then
-    log "Creating laravel application"
-    cp -a /tmp/app/. /app/
-  fi
+    if [[ ! -d /app/app ]]; then
+        log "Creating laravel application"
+        cp -a /tmp/app/. /app/
+        log "Regenerating APP_KEY"
+        php artisan key:generate --ansi
+    fi
 
-  log "Installing/Updating Laravel dependencies (composer)"
-  if [[ ! -f /app/vendor ]]; then
-    composer install
-    log "Dependencies installed"
-  else
-    composer update
-    log "Dependencies updated"
-  fi
+    log "Installing/Updating Laravel dependencies (composer)"
+    if [[ ! -d /app/vendor ]]; then
+        composer install
+        log "Dependencies installed"
+    else
+        composer update
+        log "Dependencies updated"
+    fi
 
-  wait_for_db
+    wait_for_db
 
-  if [[ -f $INIT_SEM ]]; then
-    echo "#########################################################################"
-    echo "                                                                         "
-    echo " App initialization skipped:                                             "
-    echo " Delete the file $INIT_SEM and restart the container to reinitialize     "
-    echo " You can alternatively run specific commands using docker-compose exec   "
-    echo " e.g docker-compose exec myapp php artisan make:console FooCommand       "
-    echo "                                                                         "
-    echo "#########################################################################"
-  else
-    setup_db
-    log "Initialization finished"
-    touch $INIT_SEM
-  fi
+    if [[ -f $INIT_SEM ]]; then
+        echo "#########################################################################"
+        echo "                                                                         "
+        echo " App initialization skipped:                                             "
+        echo " Delete the file $INIT_SEM and restart the container to reinitialize     "
+        echo " You can alternatively run specific commands using docker-compose exec   "
+        echo " e.g docker-compose exec myapp php artisan make:console FooCommand       "
+        echo "                                                                         "
+        echo "#########################################################################"
+    else
+        setup_db
+        log "Initialization finished"
+        touch $INIT_SEM
+    fi
 fi
 
 exec tini -- "$@"
