@@ -9,7 +9,7 @@ RUN install_packages ca-certificates curl gzip libargon2-1 libaudit1 libbsd0 lib
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg unpack php-7.3.27-4 --checksum ddf457d94e488cf2009c9b85d8fe9b7f471947eb95230561dbddfb1789327e71
-RUN bitnami-pkg unpack apache-2.4.46-4 --checksum 35f10bccc2a1e55c050c9c483e28ee729e11f873acadd327d7361b53938a0101
+RUN bitnami-pkg unpack apache-2.4.46-5 --checksum f6663ef2cd47d80d63af1da7ff319ed94afe8a825115b2f52894d799013b551c
 RUN bitnami-pkg unpack mysql-client-10.3.28-0 --checksum 9398376ca9e2033d5bc193232e8aa9b57d91d4ccf06fa67bfa0d30ef36e44c25
 RUN bitnami-pkg install libphp-7.3.27-1 --checksum 92d2a0e197d171c0661a66f9e25ae6ca2f91dd6edf1c319b8e152929299c837d
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
@@ -24,7 +24,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="osclass" \
-    BITNAMI_IMAGE_VERSION="3.9.0-debian-10-r219" \
+    BITNAMI_IMAGE_VERSION="3.9.0-debian-10-r220" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
