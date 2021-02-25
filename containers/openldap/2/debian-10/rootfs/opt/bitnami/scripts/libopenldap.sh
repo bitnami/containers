@@ -401,11 +401,9 @@ ldap_initialize() {
         else
             # Initialize OpenLDAP with schemas/tree structure
             ldap_add_schemas
-
             if [ -f "$LDAP_CUSTOM_SCHEMA_FILE" ]; then
                 ldap_add_custom_schema
             fi
-
             if ! is_dir_empty "$LDAP_CUSTOM_LDIF_DIR"; then
                 ldap_add_custom_ldifs
             else
