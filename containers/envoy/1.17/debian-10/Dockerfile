@@ -9,14 +9,14 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/envoy-1.17.0-1-linux-amd64-debian-10.tar.gz && \
-    echo "e8fc27443e7f64a9f2a5d98282f44a8657a69be7f43befd4c834e7269640ca6d  /tmp/bitnami/pkg/cache/envoy-1.17.0-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/envoy-1.17.0-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/envoy-1.17.0-1-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/envoy-1.17.1-0-linux-amd64-debian-10.tar.gz && \
+    echo "aa73ff350d0e4b4f58abef1549ac354a46fe3a6a8e74f68c0287af4f821d9d4e  /tmp/bitnami/pkg/cache/envoy-1.17.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/envoy-1.17.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/envoy-1.17.1-0-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="envoy" \
-    BITNAMI_IMAGE_VERSION="1.17.0-debian-10-r36" \
+    BITNAMI_IMAGE_VERSION="1.17.1-debian-10-r0" \
     PATH="/opt/bitnami/envoy/bin:$PATH"
 
 USER 1001
