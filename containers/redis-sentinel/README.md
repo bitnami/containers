@@ -47,7 +47,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`6.0`, `6.0-debian-10`, `6.0.12`, `6.0.12-debian-10-r0`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.0.12-debian-10-r0/6.0/debian-10/Dockerfile)
+* [`6.2`, `6.2-debian-10`, `6.2.1`, `6.2.1-debian-10-r0`, `latest` (6.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.2.1-debian-10-r0/6.2/debian-10/Dockerfile)
+* [`6.0`, `6.0-debian-10`, `6.0.12`, `6.0.12-debian-10-r0` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.0.12-debian-10-r0/6.0/debian-10/Dockerfile)
 * [`5.0`, `5.0-debian-10`, `5.0.12`, `5.0.12-debian-10-r0` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.12-debian-10-r0/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-sentinel GitHub repo](https://github.com/bitnami/bitnami-docker-redis-sentinel).
@@ -69,7 +70,7 @@ $ docker pull bitnami/redis-sentinel:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/redis-sentinel:latest 'https://github.com/bitnami/bitnami-docker-redis-sentinel.git#master:6.0/debian-10'
+$ docker build -t bitnami/redis-sentinel:latest 'https://github.com/bitnami/bitnami-docker-redis-sentinel.git#master:6.2/debian-10'
 ```
 
 # Connecting to other containers
@@ -213,6 +214,7 @@ The Redis(TM) Sentinel instance can be customized by specifying environment vari
 - `REDIS_SENTINEL_PASSWORD`: Password to authenticate with this sentinel and to authenticate to other sentinels. No defaults. Needs to be identical on all sentinels. As an alternative, you can mount a file with the password and set the `REDIS_SENTINEL_PASSWORD_FILE` variable.
 - `REDIS_SENTINEL_DOWN_AFTER_MILLISECONDS`: Number of milliseconds before master is declared down. Default: **60000**.
 - `REDIS_SENTINEL_FAILOVER_TIMEOUT`: Specifies the failover timeout in milliseconds. Default: **180000**.
+- `REDIS_SENTINEL_RESOLVE_HOSTNAMES`: Enables sentinel hostnames support. Default: **yes**.
 - `REDIS_SENTINEL_TLS_ENABLED`: Whether to enable TLS for traffic or not. Default: **no**.
 - `REDIS_SENTINEL_TLS_PORT_NUMBER`: Port used for TLS secure traffic. Default: **26379**.
 - `REDIS_SENTINEL_TLS_CERT_FILE`: File containing the certificate file for the TSL traffic. No defaults.
