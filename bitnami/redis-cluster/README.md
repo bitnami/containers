@@ -42,6 +42,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
+* [`6.2`, `6.2-debian-10`, `6.2.1`, `6.2.1-debian-10-r0`, `latest` (6.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/6.2.1-debian-10-r0/6.2/debian-10/Dockerfile)
 * [`6.0`, `6.0-debian-10`, `6.0.12`, `6.0.12-debian-10-r0` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/6.0.12-debian-10-r0/6.0/debian-10/Dockerfile)
 * [`5.0`, `5.0-debian-10`, `5.0.12`, `5.0.12-debian-10-r0` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/5.0.12-debian-10-r0/5.0/debian-10/Dockerfile)
 
@@ -64,7 +65,7 @@ $ docker pull bitnami/redis-cluster:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-
+$ docker build -t bitnami/redis-cluster:latest 'https://github.com/bitnami/bitnami-docker-redis-cluster.git#master:6.2/debian-10'
 ```
 
 # Persisting your application
