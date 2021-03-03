@@ -29,7 +29,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8`, `8-debian-10`, `8.5.12`, `8.5.12-debian-10-r-1` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/8.5.12-debian-10-r-1/8/debian-10/Dockerfile)
-* [`7`, `7-debian-10`, `7.30.1`, `7.30.1-debian-10-r113`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/7.30.1-debian-10-r113/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.30.1`, `7.30.1-debian-10-r114`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/7.30.1-debian-10-r114/7/debian-10/Dockerfile)
 * [`6`, `6-debian-10`, `6.20.0`, `6.20.0-debian-10-r114` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/6.20.0-debian-10-r114/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/laravel GitHub repo](https://github.com/bitnami/bitnami-docker-laravel).
@@ -124,6 +124,12 @@ Following are a few examples of launching some commonly used Laravel development
 # Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-laravel/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-laravel/pulls) with your contribution.
+
+## Special Thanks
+
+We want to thank the following individuals for reporting vulnerabilities responsibly and helping improve the security of this container.
+
+- [LEI WANG](`https://github.com/ssst0n3): [APP_KEY fixed into the docker image](https://github.com/bitnami/bitnami-docker-laravel/issues/139)
 
 ## Issues
 
