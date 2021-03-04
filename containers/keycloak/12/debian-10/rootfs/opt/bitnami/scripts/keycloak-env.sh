@@ -146,8 +146,6 @@ export KEYCLOAK_DATABASE_NAME="${KEYCLOAK_DATABASE_NAME:-bitnami_keycloak}"
 KEYCLOAK_DATABASE_PASSWORD="${KEYCLOAK_DATABASE_PASSWORD:-"${DB_PASSWORD:-}"}"
 export KEYCLOAK_DATABASE_PASSWORD="${KEYCLOAK_DATABASE_PASSWORD:-}"
 KEYCLOAK_DATABASE_SCHEMA="${KEYCLOAK_DATABASE_SCHEMA:-"${DB_SCHEMA:-}"}"
-# if this image is ever designed to support mariadb/mysql in addition to postgres, the default
-# schema name should be dbo for those databases
 export KEYCLOAK_DATABASE_SCHEMA="${KEYCLOAK_DATABASE_SCHEMA:-public}"
 
 # System users (when running with a privileged user)
