@@ -8,6 +8,7 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purpose
 
 # Load libraries
+. /opt/bitnami/scripts/libversion.sh
 . /opt/bitnami/scripts/libapache.sh
 
 # Load Apache environment
@@ -16,7 +17,13 @@ set -o pipefail
 
 # Enable required Apache modules
 apache_enable_module "mpm_prefork_module"
-apache_enable_module "php7_module" "modules/libphp7.so"
+php_version="$("${PHP_BIN_DIR}/php" -v | grep ^PHP | cut -d' ' -f2))"
+php_major_version="$(get_sematic_version "$php_version" 1)"
+if [[ "$php_major_version" -eq "8" ]]; then
+    apache_enable_module "php_module" "modules/libphp.so"
+else
+    apache_enable_module "php${php_major_version}_module" "modules/libphp${php_major_version}.so"
+fi
 
 # Disable incompatible Apache modules
 apache_disable_module "mpm_event_module"
