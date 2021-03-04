@@ -218,7 +218,6 @@ moodle_conf_get() {
     # Sanitize key (sed does not support fixed string substitutions)
     local sanitized_pattern
     sanitized_pattern="^\s*(//\s*)?$(sed 's/[]\[^$.*/]/\\&/g' <<<"$key")\s*=>?([^;,]+)[;,]"
-    debug "$sanitized_pattern"
     grep -E "$sanitized_pattern" "$MOODLE_CONF_FILE" | sed -E "s|${sanitized_pattern}|\2|" | tr -d "\"' "
 }
 
