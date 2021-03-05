@@ -15,10 +15,10 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "67857f144ebafa0e9f0f3f6ebf645620c2279508183a9a3a15fdbf4cb7c263c0",
+        "digest": "fb54edcd26a5a199901f4c1d0012a2a367901d67b424be4163ad38eea875cf3d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.0.2-2"
+        "version": "8.0.3-0"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -29,10 +29,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "46a474412b505882733f37553298480aa58825e33074637665123625c98457a4",
+        "digest": "fdbc02e221910eeab1a7c14d022a6585f19e7337fc429b65e452e3e3bf085876",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.0.2-5"
+        "version": "8.0.3-0"
     },
     "phpmyadmin": {
         "arch": "amd64",
