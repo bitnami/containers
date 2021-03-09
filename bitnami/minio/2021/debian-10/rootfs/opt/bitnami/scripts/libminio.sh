@@ -29,6 +29,7 @@ export MINIO_LOGDIR="${MINIO_BASEDIR}/log"
 export MINIO_SECRETSDIR="${MINIO_BASEDIR}/secrets"
 export MINIO_DATADIR="/data"
 export MINIO_CERTSDIR="/certs"
+export MINIO_SCHEME="${MINIO_SCHEME:-http}"
 export MINIO_SKIP_CLIENT="${MINIO_SKIP_CLIENT:-no}"
 export MINIO_DISTRIBUTED_MODE_ENABLED="${MINIO_DISTRIBUTED_MODE_ENABLED:-no}"
 export MINIO_DEFAULT_BUCKETS="${MINIO_DEFAULT_BUCKETS:-}"
@@ -56,6 +57,42 @@ EOF
 export MINIO_SECRET_KEY="${MINIO_SECRET_KEY:-miniosecret}"
 EOF
     fi
+}
+
+########################
+# Checks if MINIO_DISTRIBUTED_NODES uses the ellipses syntax {1...n}
+# Globals:
+#   MINIO_DISTRIBUTED_NODES
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_distributed_ellipses_syntax() {
+    ! is_empty_value "$MINIO_DISTRIBUTED_NODES" && [[ $MINIO_DISTRIBUTED_NODES == *"..."* ]]
+}
+
+########################
+# Obtain the list of drives used by the MinIO node
+# Globals:
+#   MINIO_DISTRIBUTED_NODES
+# Arguments:
+#   None
+# Returns:
+#   Array with MinIO node drives
+#########################
+minio_distributed_drives() {
+    local -a drives=()
+    local -a nodes
+
+    if ! is_empty_value "$MINIO_DISTRIBUTED_NODES"; then
+        read -r -a nodes <<< "$(tr ',;' ' ' <<< "${MINIO_DISTRIBUTED_NODES}")"
+        for node in "${nodes[@]}"; do
+            drive="$(parse_uri "${MINIO_SCHEME}://${node}" "path")"
+            drives+=("$drive")
+        done
+    fi
+    echo "${drives[@]}"
 }
 
 ########################
@@ -96,12 +133,17 @@ is_minio_running() {
 #########################
 minio_start_bg() {
     local -r exec=$(command -v minio)
-    local args=("server" "--certs-dir" "${MINIO_CERTSDIR}")
+    local -a args=("server" "--certs-dir" "${MINIO_CERTSDIR}")
+    local -a nodes
 
     if is_boolean_yes "$MINIO_DISTRIBUTED_MODE_ENABLED"; then
         read -r -a nodes <<< "$(tr ',;' ' ' <<< "${MINIO_DISTRIBUTED_NODES}")"
         for node in "${nodes[@]}"; do
-            args+=("http://${node}:${MINIO_PORT_NUMBER}/${MINIO_DATADIR}")
+            if is_distributed_ellipses_syntax; then
+                args+=("${MINIO_SCHEME}://${node}")
+            else
+                args+=("${MINIO_SCHEME}://${node}:${MINIO_PORT_NUMBER}/${MINIO_DATADIR}")
+            fi
         done
     else
         args+=("--address" ":${MINIO_PORT_NUMBER}" "${MINIO_DATADIR}")
@@ -182,7 +224,7 @@ minio_validate() {
             print_validation_error "Distributed mode is enabled. Nodes must be indicated setting the environment variable MINIO_DISTRIBUTED_NODES"
         else
             read -r -a nodes <<< "$(tr ',;' ' ' <<< "${MINIO_DISTRIBUTED_NODES}")"
-            if [[ "${#nodes[@]}" -lt 4 ]] || (( "${#nodes[@]}" % 2 )); then
+            if ! is_distributed_ellipses_syntax && ([[ "${#nodes[@]}" -lt 4 ]] || (( "${#nodes[@]}" % 2 ))); then
                 print_validation_error "Number of nodes must even and greater than 4."
             fi
         fi
