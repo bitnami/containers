@@ -30,11 +30,17 @@ else
     minio_start_bg
     # Ensure MinIO Client is stopped when this script ends.
     trap "minio_stop" EXIT
-    # Configure MinIO Client to use local MinIO server
-    minio_client_configure_local "${MINIO_DATADIR}/.minio.sys/config/config.json"
     if is_boolean_yes "$MINIO_DISTRIBUTED_MODE_ENABLED"; then
+        if is_distributed_ellipses_syntax; then
+            read -r -a drives <<< "$(minio_distributed_drives)"
+            minio_client_configure_local "/${drives[0]}/.minio.sys/config/config.json"
+        else
+            minio_client_configure_local "${MINIO_DATADIR}/.minio.sys/config/config.json"
+        fi
         # Wait for other clients (distribute mode)
         sleep 5
+    else
+        minio_client_configure_local "${MINIO_DATADIR}/.minio.sys/config/config.json"
     fi
     # Create default buckets
     minio_create_default_buckets

@@ -21,7 +21,11 @@ ARGS=("server" "--certs-dir" "${MINIO_CERTSDIR}")
 if is_boolean_yes "$MINIO_DISTRIBUTED_MODE_ENABLED"; then
     read -r -a nodes <<< "$(tr ',;' ' ' <<< "${MINIO_DISTRIBUTED_NODES}")"
     for node in "${nodes[@]}"; do
-        ARGS+=("http://${node}:${MINIO_PORT_NUMBER}${MINIO_DATADIR}")
+        if is_distributed_ellipses_syntax; then
+            ARGS+=("${MINIO_SCHEME}://${node}")
+        else
+            ARGS+=("${MINIO_SCHEME}://${node}:${MINIO_PORT_NUMBER}/${MINIO_DATADIR}")
+        fi
     done
 else
     ARGS+=("--address" ":${MINIO_PORT_NUMBER}" "${MINIO_DATADIR}")
