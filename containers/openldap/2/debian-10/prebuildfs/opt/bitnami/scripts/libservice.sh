@@ -103,6 +103,8 @@ generate_cron_conf() {
     local run_as="root"
     local schedule="* * * * *"
 
+    local clean="true"
+
     # Parse optional CLI flags
     shift 2
     while [[ "$#" -gt 0 ]]; do
@@ -115,6 +117,9 @@ generate_cron_conf() {
                 shift
                 schedule="$1"
                 ;;
+            --no-clean)
+                clean="false"
+                ;;
             *)
                 echo "Invalid command line flag ${1}" >&2
                 return 1
@@ -124,7 +129,11 @@ generate_cron_conf() {
     done
 
     mkdir -p /etc/cron.d
-    echo "${schedule} ${run_as} ${cmd}" > /etc/cron.d/"$service_name"
+    if "$clean"; then
+        echo "${schedule} ${run_as} ${cmd}" > /etc/cron.d/"$service_name"
+    else
+        echo "${schedule} ${run_as} ${cmd}" >> /etc/cron.d/"$service_name"
+    fi
 }
 
 ########################
