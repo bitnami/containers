@@ -49,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`6.2`, `6.2-debian-10`, `6.2.1`, `6.2.1-debian-10-r7`, `latest` (6.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.2.1-debian-10-r7/6.2/debian-10/Dockerfile)
 * [`6.0`, `6.0-debian-10`, `6.0.12`, `6.0.12-debian-10-r0` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.0.12-debian-10-r0/6.0/debian-10/Dockerfile)
-* [`5.0`, `5.0-debian-10`, `5.0.12`, `5.0.12-debian-10-r0` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.12-debian-10-r0/5.0/debian-10/Dockerfile)
+* [`5.0`, `5.0-debian-10`, `5.0.12`, `5.0.12-debian-10-r1` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.12-debian-10-r1/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-sentinel GitHub repo](https://github.com/bitnami/bitnami-docker-redis-sentinel).
 
@@ -106,7 +106,7 @@ Finally we create a new container instance to launch the Redis(TM) client and co
 
 ```console
 $ docker run -it --rm \
-    -e REDIS_MASTER_HOST=redis \
+    -e REDIS_MASTER_HOST=redis-server \
     --network app-tier \
     bitnami/redis-sentinel:latest
 ```
@@ -208,13 +208,13 @@ The Redis(TM) Sentinel instance can be customized by specifying environment vari
 - `REDIS_MASTER_PORT_NUMBER`: Port of the Redis(TM) master to monitor. Default: **6379**.
 - `REDIS_MASTER_SET`: Name of the set of Redis(TM) instances to monitor. Default: **mymaster**.
 - `REDIS_MASTER_PASSWORD`: Password to authenticate with the master. No defaults. As an alternative, you can mount a file with the password and set the `REDIS_MASTER_PASSWORD_FILE` variable.
-- `REDIS_MASTER_USER`: Username to authenticate with when ACL is enabled for the master. No defaults. This is available only for redis 6 or higher. If not specified, Redis(TM) Sentinel will try to authenticate with just the password (using `sentinel auth-pass <master-name> <password>`).
+- `REDIS_MASTER_USER`: Username to authenticate with when ACL is enabled for the master. No defaults. This is available only for Redis(TM) 6 or higher. If not specified, Redis(TM) Sentinel will try to authenticate with just the password (using `sentinel auth-pass <master-name> <password>`).
 - `REDIS_SENTINEL_PORT_NUMBER`: Redis(TM) Sentinel port. Default: **26379**.
 - `REDIS_SENTINEL_QUORUM`: Number of Sentinels that need to agree about the fact the master is not reachable. Default: **2**.
 - `REDIS_SENTINEL_PASSWORD`: Password to authenticate with this sentinel and to authenticate to other sentinels. No defaults. Needs to be identical on all sentinels. As an alternative, you can mount a file with the password and set the `REDIS_SENTINEL_PASSWORD_FILE` variable.
 - `REDIS_SENTINEL_DOWN_AFTER_MILLISECONDS`: Number of milliseconds before master is declared down. Default: **60000**.
 - `REDIS_SENTINEL_FAILOVER_TIMEOUT`: Specifies the failover timeout in milliseconds. Default: **180000**.
-- `REDIS_SENTINEL_RESOLVE_HOSTNAMES`: Enables sentinel hostnames support. Default: **yes**.
+- `REDIS_SENTINEL_RESOLVE_HOSTNAMES`: Enables sentinel hostnames support. This is available only for Redis(TM) 6.2 or higher.  Default: **yes**.
 - `REDIS_SENTINEL_TLS_ENABLED`: Whether to enable TLS for traffic or not. Default: **no**.
 - `REDIS_SENTINEL_TLS_PORT_NUMBER`: Port used for TLS secure traffic. Default: **26379**.
 - `REDIS_SENTINEL_TLS_CERT_FILE`: File containing the certificate file for the TSL traffic. No defaults.
