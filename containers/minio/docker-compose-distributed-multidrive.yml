@@ -2,7 +2,7 @@ version: '2'
 
 services:
   prepare-data:
-    image: 'docker.io/bitnami/bitnami-shell:10'
+    image: 'docker.io/bitnami/bitnami-shell:latest'
     command:
       - /bin/bash
       - -ec

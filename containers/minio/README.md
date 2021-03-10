@@ -45,7 +45,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2021`, `2021-debian-10`, `2021.3.4`, `2021.3.4-debian-10-r5`, `latest` (2021/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2021.3.4-debian-10-r5/2021/debian-10/Dockerfile)
+* [`2021`, `2021-debian-10`, `2021.3.4`, `2021.3.4-debian-10-r6`, `latest` (2021/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2021.3.4-debian-10-r6/2021/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/minio GitHub repo](https://github.com/bitnami/bitnami-docker-minio).
 
@@ -265,6 +265,7 @@ services:
       - MINIO_SECRET_KEY=minio-secret-key
       - MINIO_DISTRIBUTED_MODE_ENABLED=yes
       - MINIO_DISTRIBUTED_NODES=minio1,minio2,minio3,minio4
+      - MINIO_SKIP_CLIENT=yes
   minio2:
     image: 'bitnami/minio:latest'
     environment:
@@ -272,6 +273,7 @@ services:
       - MINIO_SECRET_KEY=minio-secret-key
       - MINIO_DISTRIBUTED_MODE_ENABLED=yes
       - MINIO_DISTRIBUTED_NODES=minio1,minio2,minio3,minio4
+      - MINIO_SKIP_CLIENT=yes
   minio3:
     image: 'bitnami/minio:latest'
     environment:
@@ -279,6 +281,7 @@ services:
       - MINIO_SECRET_KEY=minio-secret-key
       - MINIO_DISTRIBUTED_MODE_ENABLED=yes
       - MINIO_DISTRIBUTED_NODES=minio1,minio2,minio3,minio4
+      - MINIO_SKIP_CLIENT=yes
   minio4:
     image: 'bitnami/minio:latest'
     environment:
@@ -286,13 +289,13 @@ services:
       - MINIO_SECRET_KEY=minio-secret-key
       - MINIO_DISTRIBUTED_MODE_ENABLED=yes
       - MINIO_DISTRIBUTED_NODES=minio1,minio2,minio3,minio4
+      - MINIO_SKIP_CLIENT=yes
 ```
 
 MinIO(R) also supports ellipsis syntax (`{1..n}`) to list the MinIO(R) node hosts, where `n` is the number of nodes. This syntax is also valid to use multiple drives (`{1..m}`) on each MinIO(R) node, where `n` is the number of drives per node. You can use the Docker Compose below to create an 2-node distributed MinIO(R) setup with 2 drives per node:
 
 ```yaml
 version: '2'
-
 services:
   minio-0:
     image: 'bitnami/minio:latest'
@@ -314,7 +317,6 @@ services:
       - MINIO_SECRET_KEY=miniosecret
       - MINIO_DISTRIBUTED_MODE_ENABLED=yes
       - MINIO_DISTRIBUTED_NODES=minio-{0...1}/data-{0...1}
-
 volumes:
   minio_0_data_0:
     driver: local
