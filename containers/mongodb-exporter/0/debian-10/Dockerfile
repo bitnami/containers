@@ -9,15 +9,15 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/mongodb-exporter-0.20.1-0-linux-amd64-debian-10.tar.gz && \
-    echo "aa767756a5217171517d22900388548ed107439813be1490d1a273b30b8f98c5  /tmp/bitnami/pkg/cache/mongodb-exporter-0.20.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/mongodb-exporter-0.20.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/mongodb-exporter-0.20.1-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/mongodb-exporter-0.20.3-0-linux-amd64-debian-10.tar.gz && \
+    echo "c32baf57461ea3123f5f0172d3b1a9f93cfaf9e9d2eb5f0e974dfbda6f94e7b1  /tmp/bitnami/pkg/cache/mongodb-exporter-0.20.3-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/mongodb-exporter-0.20.3-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/mongodb-exporter-0.20.3-0-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
 RUN ln -sf /opt/bitnami/mongodb-exporter/bin/mongodb_exporter /bin/mongodb_exporter
 
 ENV BITNAMI_APP_NAME="mongodb-exporter" \
-    BITNAMI_IMAGE_VERSION="0.20.1-debian-10-r92" \
+    BITNAMI_IMAGE_VERSION="0.20.3-debian-10-r0" \
     PATH="/opt/bitnami/mongodb-exporter/bin:$PATH"
 
 EXPOSE 9216
