@@ -112,6 +112,47 @@ redis_validate() {
 }
 
 ########################
+# Get Redis version
+# Arguments:
+#   None
+# Flags:
+#   --major - Whether to return only the major version (optional)
+#   --minor - Whether to return only the minor version (optional)
+#   --patch - Whether to return only the patch version (optional)
+# Returns:
+#   Redis version
+#########################
+redis_version() {
+    local complete_version="true"
+    local version
+
+    # Parse optional CLI flags
+    if [[ "$#" -gt 0 ]]; then
+        case "$1" in
+            --major)
+                version="1"
+                ;;
+            --minor)
+                version="2"
+                ;;
+            --patch)
+                version="3"
+                ;;
+            *)
+                echo "Invalid command line flag ${1}" >&2
+                return 1
+                ;;
+        esac
+        complete_version="false"
+    fi
+    if "$complete_version"; then
+        "${REDIS_SENTINEL_BIN_DIR}/redis-cli" --version | grep -E -o "[0-9]+.[0-9]+.[0-9]+"
+    else
+        "${REDIS_SENTINEL_BIN_DIR}/redis-cli" --version | grep -E -o "[0-9]+.[0-9]+.[0-9]+" | grep -E -o "[0-9]" | awk "NR==${version}"
+    fi
+}
+
+########################
 # Check if redis is running
 # Globals:
 #   REDIS_BASE_DIR
@@ -173,11 +214,12 @@ redis_initialize() {
         redis_conf_set "sentinel down-after-milliseconds" "${REDIS_MASTER_SET} ${REDIS_SENTINEL_DOWN_AFTER_MILLISECONDS}"
         redis_conf_set "sentinel failover-timeout" "${REDIS_MASTER_SET} ${REDIS_SENTINEL_FAILOVER_TIMEOUT}"
         redis_conf_set "sentinel parallel-syncs" "${REDIS_MASTER_SET} 1"
-        redis_conf_set "sentinel resolve-hostnames" "${REDIS_SENTINEL_RESOLVE_HOSTNAMES}"
         [[ -z "$REDIS_MASTER_PASSWORD" ]] || redis_conf_set "sentinel auth-pass" "${REDIS_MASTER_SET} ${REDIS_MASTER_PASSWORD}"
         [[ -z "$REDIS_MASTER_USER" ]] || redis_conf_set "sentinel auth-user" "${REDIS_MASTER_SET} ${REDIS_MASTER_USER}"
         [[ -z "$REDIS_SENTINEL_ANNOUNCE_IP" ]] || redis_conf_set "sentinel announce-ip" "${REDIS_SENTINEL_ANNOUNCE_IP}"
         [[ -z "$REDIS_SENTINEL_ANNOUNCE_PORT" ]] || redis_conf_set "sentinel announce-port" "${REDIS_SENTINEL_ANNOUNCE_PORT}"
+        # Sentinel's configuration was refactored for Redis 6.2 and hostname's support now has to be enabled using a configuration parameter. 
+        [[ $(redis_version --major) -ge 6 ]] && [[ $(redis_version --minor) -ge 2 ]] && redis_conf_set "sentinel resolve-hostnames" "${REDIS_SENTINEL_RESOLVE_HOSTNAMES}"
 
         # Sentinel Configuration (maybe overwritten by more specific init blocks like TLS configuration)
         redis_conf_set port "$REDIS_SENTINEL_PORT_NUMBER"
