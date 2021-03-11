@@ -1,22 +1,20 @@
-version: '2'
+version: "2"
 services:
   tensorflow-serving:
-    image: 'docker.io/bitnami/tensorflow-serving:2-debian-10'
-    environment:
-      - TENSORFLOW_SERVING_MODEL_NAME=resnet
+    image: "docker.io/bitnami/tensorflow-serving:2"
     ports:
       - 8500:8500
       - 8501:8501
     volumes:
-      - 'tensorflow_serving_data:/bitnami'
-      - '/tmp/model-data:/bitnami/model-data'
+      - "tensorflow_serving_data:/bitnami"
+      - "/tmp/model-data:/bitnami/model-data"
   tensorflow-resnet:
-    image: 'docker.io/bitnami/tensorflow-resnet:2-debian-10'
+    image: "docker.io/bitnami/tensorflow-resnet:2-debian-10"
     depends_on:
       - tensorflow-serving
     volumes:
-      - 'tensorflow_resnet_data:/bitnami'
-      - '/tmp/model-data:/bitnami/model-data'
+      - "tensorflow_resnet_data:/bitnami"
+      - "/tmp/model-data:/bitnami/model-data"
 volumes:
   tensorflow_serving_data:
     driver: local
