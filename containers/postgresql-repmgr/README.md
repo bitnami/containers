@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`13`, `13-debian-10`, `13.2.0`, `13.2.0-debian-10-r23` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/13.2.0-debian-10-r23/13/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.6.0`, `12.6.0-debian-10-r24` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.6.0-debian-10-r24/12/debian-10/Dockerfile)
-* [`11`, `11-debian-10`, `11.11.0`, `11.11.0-debian-10-r23`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.11.0-debian-10-r23/11/debian-10/Dockerfile)
+* [`11`, `11-debian-10`, `11.11.0`, `11.11.0-debian-10-r24`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.11.0-debian-10-r24/11/debian-10/Dockerfile)
 * [`10`, `10-debian-10`, `10.16.0`, `10.16.0-debian-10-r24` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.16.0-debian-10-r24/10/debian-10/Dockerfile)
 * [`9.6`, `9.6-debian-10`, `9.6.21`, `9.6.21-debian-10-r23` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.21-debian-10-r23/9.6/debian-10/Dockerfile)
 
@@ -244,6 +244,8 @@ A HA PostgreSQL cluster with [Streaming replication](https://www.postgresql.org/
 - `REPMGR_USERNAME`: Username for `repmgr` user. Defaults to `repmgr`.
 - `REPMGR_PASSWORD_FILE`: Path to a file that contains the `repmgr` user password. This will override the value specified in `REPMGR_PASSWORD`. No defaults.
 - `REPMGR_PASSWORD`: Password for `repmgr` user. No defaults.
+- `REPMGR_USE_PASSFILE`: Configure repmgr to use `passfile` and `PGPASSFILE` instead of plain-text password in its configuration.
+- `REPMGR_PASSFILE_PATH`: Location of the passfile, if it doesn't exist it will be created using REPMGR credentials.
 - `REPMGR_PRIMARY_HOST`: Hostname of the initial primary node. No defaults.
 - `REPMGR_PARTNER_NODES`: Comma separated list of partner nodes in the cluster.  No defaults.
 - `REPMGR_NODE_NAME`: Node name. No defaults.
@@ -251,6 +253,10 @@ A HA PostgreSQL cluster with [Streaming replication](https://www.postgresql.org/
 - `REPMGR_PGHBA_TRUST_ALL`: This will set the auth-method in the generated pg_hba.conf. Set it to `yes` only if you are using pgpool with LDAP authentication. Default to `no`.
 
 In a HA PostgreSQL cluster you can have one primary and zero or more standby nodes. The primary node is in read-write mode, while the standby nodes are in read-only mode. For best performance its advisable to limit the reads to the standby nodes.
+
+> NOTE: REPMGR_USE_PASSFILE and REPMGR_PASSFILE_PATH will be ignored for Postgresql prior to version 9.6.
+>
+> When mounting an external passfile using REPMGR_PASSFILE_PATH, it is necessary to also configure REPMGR_PASSWORD and REPMGR_USERNAME accordingly.
 
 ### Step 1: Create a network
 
@@ -535,6 +541,7 @@ Please see the list of environment variables available in the Bitnami PostgreSQL
 | REPMGR_DATABASE                      | `repmgr`      |
 | REPMGR_PASSWORD                      | `nil`         |
 | REPMGR_PASSWORD_FILE                 | `nil`         |
+| REPMGR_USE_PASSFILE                  | `nil`         |
 | POSTGRESQL_USERNAME                  | `postgres`    |
 | POSTGRESQL_DATABASE                  | `nil`         |
 | POSTGRESQL_PASSWORD                  | `nil`         |

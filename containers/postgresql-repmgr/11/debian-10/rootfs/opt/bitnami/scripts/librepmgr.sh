@@ -35,6 +35,40 @@ repmgr_get_node_id() {
 }
 
 ########################
+# Get repmgr password method
+# Globals:
+#   REPMGR_*
+# Arguments:
+#   None
+# Returns:
+#   String
+#########################
+repmgr_get_env_password() {
+    if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
+        echo "PGPASSFILE=${REPMGR_PASSFILE_PATH}"
+    else
+        echo "PGPASSWORD=${REPMGR_PASSWORD}"
+    fi
+}
+
+########################
+# Get repmgr conninfo password method
+# Globals:
+#   REPMGR_*
+# Arguments:
+#   None
+# Returns:
+#   String
+#########################
+repmgr_get_conninfo_password() {
+    if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
+        echo "passfile=${REPMGR_PASSFILE_PATH}"
+    else
+        echo "password=${REPMGR_PASSWORD}"
+    fi
+}
+
+########################
 # Validate settings in REPMGR_* env. variables
 # Globals:
 #   REPMGR_*
@@ -73,6 +107,14 @@ repmgr_validate() {
     # Credentials validations
     if [[ -z "$REPMGR_USERNAME" ]] || [[ -z "$REPMGR_PASSWORD" ]]; then
         print_validation_error "The repmgr credentials are mandatory. Set the environment variables REPMGR_USERNAME and REPMGR_PASSWORD with the repmgr credentials."
+    fi
+
+    if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
+        local -r psql_major_version="$(postgresql_get_major_version)"
+        if [[ "$psql_major_version" -le "9" ]]; then
+            warn "Variable REPMGR_USE_PASSFILE is not compatible with PostgreSQL ${psql_major_version}. It will be disabled."
+            export REPMGR_USE_PASSFILE="false"
+        fi
     fi
 
     if ! is_yes_no_value "$REPMGR_PGHBA_TRUST_ALL"; then
@@ -361,6 +403,7 @@ EOF
 # Globals:
 #   POSTGRESQL_MOUNTED_CONF_DIR
 #   REPMGR_MOUNTED_CONF_DIR
+#   REPMGR_PASSFILE_PATH
 # Arguments:
 #   None
 # Returns:
@@ -382,6 +425,10 @@ repmgr_postgresql_configuration() {
         cp "${REPMGR_MOUNTED_CONF_DIR}/pg_hba.conf" "${POSTGRESQL_MOUNTED_CONF_DIR}/pg_hba.conf"
     else
         repmgr_inject_pghba_configuration
+    fi
+    if [[ "$REPMGR_USE_PASSFILE" = "true" ]] && [[ ! -f "${REPMGR_PASSFILE_PATH}" ]]; then
+        echo "*:*:*:${REPMGR_USERNAME}:${REPMGR_PASSWORD}" > "${REPMGR_PASSFILE_PATH}"
+        chmod 600 "${REPMGR_PASSFILE_PATH}"
     fi
 }
 
@@ -411,10 +458,10 @@ pg_bindir='${POSTGRESQL_BIN_DIR}'
 # FIXME: these 2 parameter should work
 node_id=$(repmgr_get_node_id)
 node_name='${REPMGR_NODE_NAME}'
-conninfo='user=${REPMGR_USERNAME} password=${REPMGR_PASSWORD} host=${REPMGR_NODE_NETWORK_NAME} dbname=${REPMGR_DATABASE} port=${REPMGR_PORT_NUMBER} connect_timeout=${REPMGR_CONNECT_TIMEOUT}'
+conninfo='user=${REPMGR_USERNAME} $(repmgr_get_conninfo_password) host=${REPMGR_NODE_NETWORK_NAME} dbname=${REPMGR_DATABASE} port=${REPMGR_PORT_NUMBER} connect_timeout=${REPMGR_CONNECT_TIMEOUT}'
 failover='automatic'
-promote_command='PGPASSWORD=${REPMGR_PASSWORD} repmgr standby promote -f "${REPMGR_CONF_FILE}" --log-level DEBUG --verbose'
-follow_command='PGPASSWORD=${REPMGR_PASSWORD} repmgr standby follow -f "${REPMGR_CONF_FILE}" -W --log-level DEBUG --verbose'
+promote_command='$(repmgr_get_env_password) repmgr standby promote -f "${REPMGR_CONF_FILE}" --log-level DEBUG --verbose'
+follow_command='$(repmgr_get_env_password) repmgr standby follow -f "${REPMGR_CONF_FILE}" -W --log-level DEBUG --verbose'
 reconnect_attempts='${REPMGR_RECONNECT_ATTEMPTS}'
 reconnect_interval='${REPMGR_RECONNECT_INTERVAL}'
 log_level='${REPMGR_LOG_LEVEL}'
@@ -424,6 +471,9 @@ data_directory='${POSTGRESQL_DATA_DIR}'
 async_query_timeout='${REPMGR_MASTER_RESPONSE_TIMEOUT}'
 pg_ctl_options='-o "--config-file=\"${POSTGRESQL_CONF_FILE}\" --external_pid_file=\"${POSTGRESQL_PID_FILE}\" --hba_file=\"${POSTGRESQL_PGHBA_FILE}\""'
 EOF
+        if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
+            echo "passfile='${REPMGR_PASSFILE_PATH}'" >> "$REPMGR_CONF_FILE"
+        fi
     fi
 }
 
@@ -475,7 +525,12 @@ repmgr_clone_primary() {
     info "Cloning data from primary node..."
     local -r flags=("-f" "$REPMGR_CONF_FILE" "-h" "$REPMGR_CURRENT_PRIMARY_HOST" "-p" "$REPMGR_CURRENT_PRIMARY_PORT" "-U" "$REPMGR_USERNAME" "-d" "$REPMGR_DATABASE" "-D" "$POSTGRESQL_DATA_DIR" "standby" "clone" "--fast-checkpoint" "--force")
 
-    PGPASSWORD="$REPMGR_PASSWORD" debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}"
+    if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
+        PGPASSFILE="$REPMGR_PASSFILE_PATH" debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}"
+    else
+        PGPASSWORD="$REPMGR_PASSWORD" debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}"
+    fi
+
 }
 
 ########################
@@ -544,7 +599,12 @@ repmgr_standby_follow() {
     info "Running standby follow..."
     local -r flags=("standby" "follow" "-f" "$REPMGR_CONF_FILE" "-W" "--log-level" "DEBUG" "--verbose")
 
-    PGPASSWORD="$REPMGR_PASSWORD" debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}"
+    if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
+        PGPASSFILE="$REPMGR_PASSFILE_PATH" debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}"
+    else
+        PGPASSWORD="$REPMGR_PASSWORD" debug_execute "${REPMGR_BIN_DIR}/repmgr" "${flags[@]}"
+    fi
+
 }
 
 ########################
