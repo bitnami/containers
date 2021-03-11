@@ -30,6 +30,8 @@ if is_boolean_yes "$MINIO_DISTRIBUTED_MODE_ENABLED"; then
 else
     ARGS+=("--address" ":${MINIO_PORT_NUMBER}" "${MINIO_DATADIR}")
 fi
+# Add any extra flags passed to this script
+ARGS+=("$@")
 
 info "** Starting MinIO **"
 if am_i_root; then
