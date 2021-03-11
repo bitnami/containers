@@ -56,7 +56,6 @@ services:
       - JOBSERVICE_SECRET=CHANGEME
       - ADMIRAL_URL=
       - WITH_NOTARY=False
-      - WITH_CLAIR=False
       - WITH_CHARTMUSEUM=True
       - CHART_REPOSITORY_URL=http://chartmuseum:8080
       - CORE_URL=http://core:8080
