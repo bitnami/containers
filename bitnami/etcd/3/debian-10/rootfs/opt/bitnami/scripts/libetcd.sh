@@ -110,27 +110,29 @@ etcdctl_get_endpoints() {
     local -a endpoints=()
     local host domain port
 
-    # This piece of code assumes this container is used on a K8s environment
-    # where etcd members are part of a statefulset that uses a headless service
-    # to create a unique FQDN per member. Under this circustamences, the
-    # ETCD_ADVERTISE_CLIENT_URLS are created as follows:
-    #   SCHEME://POD_NAME.HEADLESS_SVC_DOMAIN:CLIENT_PORT
-    #
-    # Assuming this, we can extract the HEADLESS_SVC_DOMAIN and obtain
-    # every available endpoint
-    host="$(parse_uri "$ETCD_ADVERTISE_CLIENT_URLS" "host")"
-    port="$(parse_uri "$ETCD_ADVERTISE_CLIENT_URLS" "port")"
-    domain="${host#"${ETCD_NAME}."}"
-    # When ETCD_CLUSTER_DOMAIN is set, we use that value instead of extracting
-    # it from ETCD_ADVERTISE_CLIENT_URLS
-    ! is_empty_value "$ETCD_CLUSTER_DOMAIN" && domain="$ETCD_CLUSTER_DOMAIN"
-    wait_for_dns_lookup "domain"
-    for h in $(getent ahosts "$domain" | awk '{print $1}' | uniq); do
-        endpoint="$(getent hosts "$h" | awk '{print $2}')"
-        if ! { [[ $only_others = true ]] && [[ "$endpoint" = "$host" ]]; }; then
-            endpoints+=("${endpoint}:${port}")
-        fi
-    done
+    if is_boolean_yes "$ETCD_ON_K8S"; then
+        # This piece of code assumes this container is used on a K8s environment
+        # where etcd members are part of a statefulset that uses a headless service
+        # to create a unique FQDN per member. Under this circustamences, the
+        # ETCD_ADVERTISE_CLIENT_URLS are created as follows:
+        #   SCHEME://POD_NAME.HEADLESS_SVC_DOMAIN:CLIENT_PORT
+        #
+        # Assuming this, we can extract the HEADLESS_SVC_DOMAIN and obtain
+        # every available endpoint
+        host="$(parse_uri "$ETCD_ADVERTISE_CLIENT_URLS" "host")"
+        port="$(parse_uri "$ETCD_ADVERTISE_CLIENT_URLS" "port")"
+        domain="${host#"${ETCD_NAME}."}"
+        # When ETCD_CLUSTER_DOMAIN is set, we use that value instead of extracting
+        # it from ETCD_ADVERTISE_CLIENT_URLS
+        ! is_empty_value "$ETCD_CLUSTER_DOMAIN" && domain="$ETCD_CLUSTER_DOMAIN"
+        wait_for_dns_lookup "domain"
+        for h in $(getent ahosts "$domain" | awk '{print $1}' | uniq); do
+            endpoint="$(getent hosts "$h" | awk '{print $2}')"
+            if ! { [[ $only_others = true ]] && [[ "$endpoint" = "$host" ]]; }; then
+                endpoints+=("${endpoint}:${port}")
+            fi
+        done
+    fi
     echo "${endpoints[*]}" | tr ' ' ','
 }
 
@@ -288,28 +290,33 @@ recalculate_initial_cluster() {
     local -a endpoints_array initial_members
     local domain host member_host member_port member_id port scheme
 
-    read -r -a endpoints_array <<< "$(tr ',;' ' ' <<< "$(etcdctl_get_endpoints)")"
-    # This piece of code assumes this container is used on a K8s environment
-    # where etcd members are part of a statefulset that uses a headless service
-    # to create a unique FQDN per member. Under this circustamences, the
-    # ETCD_INITIAL_ADVERTISE_PEER_URLS are created as follows:
-    #   SCHEME://POD_NAME.HEADLESS_SVC_DOMAIN:PEER_PORT
-    #
-    # Assuming this, we can extract the HEADLESS_SVC_DOMAIN
-    host="$(parse_uri "$ETCD_INITIAL_ADVERTISE_PEER_URLS" "host")"
-    scheme="$(parse_uri "$ETCD_INITIAL_ADVERTISE_PEER_URLS" "scheme")"
-    port="$(parse_uri "$ETCD_INITIAL_ADVERTISE_PEER_URLS" "port")"
-    domain="${host#"${ETCD_NAME}."}"
-    # When ETCD_CLUSTER_DOMAIN is set, we use that value instead of extracting
-    # it from ETCD_INITIAL_ADVERTISE_PEER_URLS
-    ! is_empty_value "$ETCD_CLUSTER_DOMAIN" && domain="$ETCD_CLUSTER_DOMAIN"
-    for e in "${endpoints_array[@]}"; do
-         member_host="$(parse_uri "$scheme://$e" "host")"
-         member_port="$(parse_uri "$scheme://$e" "port")"
-         member_id=${e%".$domain:$member_port"}
-         initial_members+=("${member_id}=${scheme}://${member_host}:$port")
-    done
-    echo "${initial_members[*]}" | tr ' ' ','
+    if is_boolean_yes "$ETCD_ON_K8S"; then
+        read -r -a endpoints_array <<< "$(tr ',;' ' ' <<< "$(etcdctl_get_endpoints)")"
+        # This piece of code assumes this container is used on a K8s environment
+        # where etcd members are part of a statefulset that uses a headless service
+        # to create a unique FQDN per member. Under this circustamences, the
+        # ETCD_INITIAL_ADVERTISE_PEER_URLS are created as follows:
+        #   SCHEME://POD_NAME.HEADLESS_SVC_DOMAIN:PEER_PORT
+        #
+        # Assuming this, we can extract the HEADLESS_SVC_DOMAIN
+        host="$(parse_uri "$ETCD_INITIAL_ADVERTISE_PEER_URLS" "host")"
+        scheme="$(parse_uri "$ETCD_INITIAL_ADVERTISE_PEER_URLS" "scheme")"
+        port="$(parse_uri "$ETCD_INITIAL_ADVERTISE_PEER_URLS" "port")"
+        domain="${host#"${ETCD_NAME}."}"
+        # When ETCD_CLUSTER_DOMAIN is set, we use that value instead of extracting
+        # it from ETCD_INITIAL_ADVERTISE_PEER_URLS
+        ! is_empty_value "$ETCD_CLUSTER_DOMAIN" && domain="$ETCD_CLUSTER_DOMAIN"
+        for e in "${endpoints_array[@]}"; do
+             member_host="$(parse_uri "$scheme://$e" "host")"
+             member_port="$(parse_uri "$scheme://$e" "port")"
+             member_id=${e%".$domain:$member_port"}
+             initial_members+=("${member_id}=${scheme}://${member_host}:$port")
+        done
+        echo "${initial_members[*]}" | tr ' ' ','
+    else
+        # Nothing to do
+        echo "$ETCD_INITIAL_CLUSTER"
+    fi
 }
 
 ########################
@@ -377,7 +384,7 @@ etcd_initialize() {
         info "Detected data from previous deployments"
         if [[ $(stat -c "%a" "$ETCD_DATA_DIR") != *700 ]]; then
             debug "Setting data directory permissions to 700 in a recursive way (required in etcd >=3.4.10)"
-            chmod -R 700 "$ETCD_DATA_DIR"
+            debug_execute chmod -R 700 "$ETCD_DATA_DIR" || true
         fi
         if [[ ${#initial_members[@]} -gt 1 ]]; then
             if ! is_healthy_cluster; then
@@ -410,12 +417,15 @@ etcd_initialize() {
                 etcdctl member add "$ETCD_NAME" "${extra_flags[@]}" | grep "^ETCD_" > "$ETCD_NEW_MEMBERS_ENV_FILE"
                 replace_in_file "$ETCD_NEW_MEMBERS_ENV_FILE" "^" "export "
                 debug_execute etcd_store_member_id &
-            else
+            elif [[ -f "${ETCD_DATA_DIR}/member_id" ]]; then
                 info "Updating member in existing cluster"
                 export ETCD_INITIAL_CLUSTER_STATE=existing
                 read -r -a extra_flags <<< "$(etcdctl_auth_flags)"
                 extra_flags+=("--endpoints=$(etcdctl_get_endpoints true)" "--peer-urls=$ETCD_INITIAL_ADVERTISE_PEER_URLS")
                 etcdctl member update "$(cat "${ETCD_DATA_DIR}/member_id")" "${extra_flags[@]}"
+            else
+                info "Member ID wasn't properly stored, the member will try to join the cluster by it's own"
+                export ETCD_INITIAL_CLUSTER_STATE=existing
             fi
         fi
     fi

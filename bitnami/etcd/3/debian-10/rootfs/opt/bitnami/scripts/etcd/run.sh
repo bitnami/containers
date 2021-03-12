@@ -19,12 +19,12 @@ set -o pipefail
 
 # Constants
 EXEC="$(command -v etcd)"
-declare -a args=("$@")
 
 ! is_empty_value "$ETCD_ROOT_PASSWORD" && unset ETCD_ROOT_PASSWORD
-
-ETCD_INITIAL_CLUSTER="$(recalculate_initial_cluster)"
-export ETCD_INITIAL_CLUSTER
+if ! is_empty_value "$ETCD_INITIAL_CLUSTER"; then
+    ETCD_INITIAL_CLUSTER="$(recalculate_initial_cluster)"
+    export ETCD_INITIAL_CLUSTER
+fi
 if [[ -f "$ETCD_NEW_MEMBERS_ENV_FILE" ]]; then
     debug "Loading env vars of existing cluster"
     . "$ETCD_NEW_MEMBERS_ENV_FILE"
@@ -32,7 +32,7 @@ fi
 
 info "** Starting etcd **"
 if am_i_root; then
-    exec gosu "$ETCD_DAEMON_USER" "${EXEC}" "${args[@]}"
+    exec gosu "$ETCD_DAEMON_USER" "${EXEC}" "$@"
 else
-    exec "${EXEC}" "${args[@]}"
+    exec "${EXEC}" "$@"
 fi

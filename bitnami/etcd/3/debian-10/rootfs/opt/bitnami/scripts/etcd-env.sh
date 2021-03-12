@@ -23,8 +23,10 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 etcd_env_vars=(
     ALLOW_NONE_AUTHENTICATION
     ETCD_ROOT_PASSWORD
+    ETCD_CLUSTER_DOMAIN
     ETCD_START_FROM_SNAPSHOT
     ETCD_DISASTER_RECOVERY
+    ETCD_ON_K8S
     ETCDCTL_API
     ETCD_NAME
     ETCD_LOG_LEVEL
@@ -59,9 +61,9 @@ export ETCD_BASE_DIR="/opt/bitnami/etcd"
 export ETCD_VOLUME_DIR="/bitnami/etcd"
 export ETCD_BIN_DIR="${ETCD_BASE_DIR}/sbin"
 export ETCD_DATA_DIR="${ETCD_VOLUME_DIR}/data"
-export ETCD_NEW_MEMBERS_ENV_FILE="${ETCD_DATA_DIR}/new_member_envs"
 export ETCD_SNAPSHOTS_DIR="/snapshots"
 export ETCD_INIT_SNAPSHOTS_DIR="/init-snapshot"
+export ETCD_NEW_MEMBERS_ENV_FILE="${ETCD_DATA_DIR}/new_member_envs"
 export PATH="${ETCD_BIN_DIR}:${PATH}"
 
 # System users (when running with a privileged user)
@@ -71,8 +73,10 @@ export ETCD_DAEMON_GROUP="etcd"
 # etcd settings
 export ALLOW_NONE_AUTHENTICATION="${ALLOW_NONE_AUTHENTICATION:-no}"
 export ETCD_ROOT_PASSWORD="${ETCD_ROOT_PASSWORD:-}"
+export ETCD_CLUSTER_DOMAIN="${ETCD_CLUSTER_DOMAIN:-}"
 export ETCD_START_FROM_SNAPSHOT="${ETCD_START_FROM_SNAPSHOT:-no}"
 export ETCD_DISASTER_RECOVERY="${ETCD_DISASTER_RECOVERY:-no}"
+export ETCD_ON_K8S="${ETCD_ON_K8S:-no}"
 
 # etcd native environment variables (see https://etcd.io/docs/current/op-guide/configuration)
 export ETCDCTL_API="${ETCDCTL_API:-3}"
