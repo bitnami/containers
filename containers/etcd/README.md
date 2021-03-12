@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.4.15`, `3.4.15-debian-10-r7`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.4.15-debian-10-r7/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.4.15`, `3.4.15-debian-10-r8`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.4.15-debian-10-r8/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/etcd GitHub repo](https://github.com/bitnami/bitnami-docker-etcd).
 
@@ -185,6 +185,10 @@ The previous rule applies to all [etcd flags](https://coreos.com/etcd/docs/lates
 > Note: by default the environment variable `ETCDCTL_API` is set to `3`. Modify this environment variable to use a different API version.
 
 # Notable Changes
+
+## 3.4.15-debian-10-r7
+
+* The container now contains the needed logic to deploy the etcd container on Kubernetes using the [Bitnami etcd Chart](https://github.com/bitnami/charts/tree/master/bitnami/etcd).
 
 ## 3.4.13-debian-10-r7
 
