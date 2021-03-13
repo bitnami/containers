@@ -56,12 +56,12 @@ mysql_extra_flags() {
     # This is especially important for the MariaDB Galera chart, in which the 'my.cnf' configuration file is mounted by default
     if ! is_file_writable "$DB_CONF_FILE"; then
         dbExtraFlags+=(
-            "--wsrep-node-name=$(get_node_name)"
-            "--wsrep-node-address=$(get_node_address)"
-            "--wsrep-cluster-name=${DB_GALERA_CLUSTER_NAME}"
-            "--wsrep-cluster-address=$(get_galera_cluster_address_value)"
-            "--wsrep-sst-method=${DB_GALERA_SST_METHOD}"
-            "--wsrep-sst-auth=${DB_GALERA_MARIABACKUP_USER}:${DB_GALERA_MARIABACKUP_PASSWORD}"
+            "--wsrep_node_name=$(get_node_name)"
+            "--wsrep_node_address=$(get_node_address)"
+            "--wsrep_cluster_name=${DB_GALERA_CLUSTER_NAME}"
+            "--wsrep_cluster_address=$(get_galera_cluster_address_value)"
+            "--wsrep_sst_method=${DB_GALERA_SST_METHOD}"
+            "--wsrep_sst_auth=${DB_GALERA_MARIABACKUP_USER}:${DB_GALERA_MARIABACKUP_PASSWORD}"
         )
     fi
 
