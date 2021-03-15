@@ -102,6 +102,7 @@ generate_cron_conf() {
     local cmd="${2:?command is missing}"
     local run_as="root"
     local schedule="* * * * *"
+    local clean="true"
 
     local clean="true"
 
