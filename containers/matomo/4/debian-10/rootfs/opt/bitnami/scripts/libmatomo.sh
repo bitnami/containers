@@ -218,7 +218,7 @@ EOF
     if am_i_root; then
         local -r port="${WEB_SERVER_HTTP_PORT_NUMBER:-"$WEB_SERVER_DEFAULT_HTTP_PORT_NUMBER"}"
         info "Configuring cron jobs"
-        cron_cmd=("${PHP_BIN_DIR}/php" "${MATOMO_BASE_DIR}/console" "core:archive" "--url=http://127.0.0.1:${port}")
+        local -a cron_cmd=("${PHP_BIN_DIR}/php" "${MATOMO_BASE_DIR}/console" "core:archive" "--url=http://127.0.0.1:${port}")
         generate_cron_conf "matomo" "${cron_cmd[*]} > /dev/null 2>> ${MATOMO_BASE_DIR}/tmp/logs/matomo-cron.log" --run-as "$WEB_SERVER_DAEMON_USER" --schedule "*/1 * * * *"
     else
         warn "Skipping cron configuration for Matomo because of running as a non-root user"
