@@ -279,7 +279,7 @@ kafka_validate() {
             && ([[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/kafka.truststore.jks ]]) \
             && ([[ ! -f "$KAFKA_CERTS_DIR"kafka.keystore.pem ]] || [[ ! -f "$KAFKA_CERTS_DIR"/certs/kafka.truststore.pem ]]) \
             && ([[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/kafka.keystore.pem ]] || [[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/kafka.truststore.pem ]]); then
-            print_validation_error "In order to configure the TLS encryption for Kafka you must mount your kafka.keystore.jks (or kafka.keystore.pem) and kafka.truststore.jks (or kafka.trustsore.pem) certificates to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
+            print_validation_error "In order to configure the TLS encryption for Kafka you must mount your kafka.keystore.jks (or kafka.keystore.pem) and kafka.truststore.jks (or kafka.truststore.pem) certificates to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
         fi
     elif [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL ]]; then
         if [[ -z "$KAFKA_CLIENT_PASSWORD" && -z "$KAFKA_CLIENT_PASSWORDS" ]] && [[ -z "$KAFKA_INTER_BROKER_PASSWORD" ]]; then
