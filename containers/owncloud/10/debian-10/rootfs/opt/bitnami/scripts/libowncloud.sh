@@ -229,7 +229,7 @@ owncloud_initialize() {
 
     # Ensure ownCloud cron jobs are created when running setup with a root user
     # https://doc.owncloud.com/server/admin_manual/configuration/server/background_jobs_configuration.html#cron
-    local cron_cmd=("${PHP_BIN_DIR}/php" "${OWNCLOUD_BASE_DIR}/occ" "system:cron")
+    local -a cron_cmd=("${PHP_BIN_DIR}/php" "${OWNCLOUD_BASE_DIR}/occ" "system:cron")
     if am_i_root; then
         generate_cron_conf "owncloud" "${cron_cmd[*]}" --run-as "$WEB_SERVER_DAEMON_USER" --schedule "*/1 * * * *"
     else
