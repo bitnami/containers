@@ -43,8 +43,6 @@ EOF
 #   None
 #########################
 mongodb_sharded_mongod_initialize() {
-    local persisted=false
-
     info "Initializing MongoDB Sharded..."
     rm -f "$MONGODB_PID_FILE"
 
@@ -72,7 +70,6 @@ mongodb_sharded_mongod_initialize() {
         mongodb_sharded_configure_replica_set
         mongodb_stop
     else
-        persisted=true
         mongodb_create_keyfile "$MONGODB_REPLICA_SET_KEY"
         mongodb_set_keyfile_conf
         mongodb_set_auth_conf
