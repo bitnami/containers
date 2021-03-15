@@ -1025,8 +1025,6 @@ configure_permissions() {
 #   None
 #########################
 mongodb_initialize() {
-    local persisted=false
-
     info "Initializing MongoDB..."
 
     rm -f "$MONGODB_PID_FILE"
@@ -1054,7 +1052,6 @@ mongodb_initialize() {
 
         mongodb_stop
     else
-        persisted=true
         mongodb_set_auth_conf
         info "Deploying MongoDB with persisted data..."
         if [[ -n "$MONGODB_REPLICA_SET_MODE" ]]; then
