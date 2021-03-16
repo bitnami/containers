@@ -1,7 +1,7 @@
 {
     "oras": {
-        "digest": "46d1f23bd41c85b947b75ad49dcee7baed1c41867821f46b2576c46908d40bfb",
+        "digest": "80b8453d90bf166920520d3bfbd474356a8d3d54d54073ca1a5122ee24760dfb",
         "type": "BLACKSMITH",
-        "version": "0.10.0"
+        "version": "0.11.0"
     }
 }
