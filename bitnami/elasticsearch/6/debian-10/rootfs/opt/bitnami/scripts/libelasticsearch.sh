@@ -6,6 +6,7 @@
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
+. /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libnet.sh
@@ -444,6 +445,20 @@ elasticsearch_initialize() {
         am_i_root && chown -R "$ELASTICSEARCH_DAEMON_USER:$ELASTICSEARCH_DAEMON_GROUP" "$dir"
     done
 
+    if is_file_writable "${ELASTICSEARCH_CONF_DIR}/jvm.options"; then
+        if is_boolean_yes "$ELASTICSEARCH_DISABLE_JVM_HEAP_DUMP"; then
+            info "Disabling JVM heap dumps..."
+            replace_in_file "${ELASTICSEARCH_CONF_DIR}/jvm.options" "-XX:[+]HeapDumpOnOutOfMemoryError" "# -XX:+HeapDumpOnOutOfMemoryError"
+        fi
+        if is_boolean_yes "$ELASTICSEARCH_DISABLE_GC_LOGS"; then
+            info "Disabling JVM GC logs..."
+            replace_in_file "${ELASTICSEARCH_CONF_DIR}/jvm.options" "8:-Xloggc:logs[/]gc.log" "# 8:-Xloggc:logs/gc.log"
+        fi
+        elasticsearch_set_heap_size
+    else
+        warn "The '${ELASTICSEARCH_CONF_DIR}/jvm.options' file is not writable. Configurations based on environment variables will not be applied for this file"
+    fi
+
     if [[ -f "$ELASTICSEARCH_CONF_FILE" ]]; then
         info "Custom configuration file detected, using it..."
     else
@@ -454,19 +469,10 @@ elasticsearch_initialize() {
         elasticsearch_conf_set transport.tcp.port "$ELASTICSEARCH_NODE_PORT_NUMBER"
         is_boolean_yes "$ELASTICSEARCH_ACTION_DESTRUCTIVE_REQUIRES_NAME" && elasticsearch_conf_set action.destructive_requires_name "true"
         is_boolean_yes "$ELASTICSEARCH_LOCK_ALL_MEMORY" && elasticsearch_conf_set bootstrap.memory_lock "true"
-        if is_boolean_yes "$ELASTICSEARCH_DISABLE_JVM_HEAP_DUMP"; then
-            info "Disabling JVM heap dumps..."
-            replace_in_file "${ELASTICSEARCH_CONF_DIR}"/jvm.options "-XX:[+]HeapDumpOnOutOfMemoryError" "# -XX:+HeapDumpOnOutOfMemoryError"
-        fi
-        if is_boolean_yes "$ELASTICSEARCH_DISABLE_GC_LOGS"; then
-            info "Disabling JVM GC logs..."
-            replace_in_file "${ELASTICSEARCH_CONF_DIR}"/jvm.options "8:-Xloggc:logs[/]gc.log" "# 8:-Xloggc:logs/gc.log"
-        fi
         elasticsearch_cluster_configuration
         elasticsearch_configure_node_type
         elasticsearch_custom_configuration
     fi
-    elasticsearch_set_heap_size
 }
 
 ########################
