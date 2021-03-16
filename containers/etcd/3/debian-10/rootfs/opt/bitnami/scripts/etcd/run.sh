@@ -21,7 +21,7 @@ set -o pipefail
 EXEC="$(command -v etcd)"
 
 ! is_empty_value "$ETCD_ROOT_PASSWORD" && unset ETCD_ROOT_PASSWORD
-if ! is_empty_value "$ETCD_INITIAL_CLUSTER"; then
+if ! is_empty_value "$ETCD_INITIAL_CLUSTER" && ! is_new_etcd_cluster; then
     ETCD_INITIAL_CLUSTER="$(recalculate_initial_cluster)"
     export ETCD_INITIAL_CLUSTER
 fi
