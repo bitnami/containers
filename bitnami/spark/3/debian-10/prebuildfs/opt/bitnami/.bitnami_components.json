@@ -15,10 +15,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "72cfce0cd7aa1512e17a0091c2e7c878c11bdee1d0575e7f2287017714216b51",
+        "digest": "b4a195d69e9adbed71cbacb1f43013cf49fb0e1000fa08a575969704995c561b",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.6.13-0"
+        "version": "3.6.13-1"
     },
     "spark": {
         "arch": "amd64",
