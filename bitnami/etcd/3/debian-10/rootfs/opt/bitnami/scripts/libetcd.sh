@@ -229,15 +229,28 @@ was_etcd_member_removed() {
 }
 
 ########################
+# Checks if etcd needs to bootstrap a new cluster
+# Globals:
+#   ETCD_*
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+########################
+is_new_etcd_cluster() {
+    [[ "$ETCD_INITIAL_CLUSTER_STATE" = "new" ]] && [[ "$ETCD_INITIAL_CLUSTER" = *"$ETCD_INITIAL_ADVERTISE_PEER_URLS"* ]]
+}
+
+########################
 # Checks if there are enough active members
 # Globals:
 #   ETCD_*
 # Arguments:
 #   None
 # Returns:
-#   None
+#   Boolean
 ########################
-is_healthy_cluster() {
+is_healthy_etcd_cluster() {
     local return_value=0
     local active_endpoints=0
     local -a extra_flags
@@ -336,7 +349,7 @@ etcd_initialize() {
     if is_mounted_dir_empty "$ETCD_DATA_DIR"; then
         info "There is no data from previous deployments"
         if [[ ${#initial_members[@]} -gt 1 ]]; then
-            if [[ "$ETCD_INITIAL_CLUSTER_STATE" = "new" ]] && [[ $ETCD_INITIAL_CLUSTER = *"$ETCD_INITIAL_ADVERTISE_PEER_URLS"* ]]; then
+            if is_new_etcd_cluster; then
                 info "Bootstrapping a new cluster"
             else
                 info "Adding new member to existing cluster"
@@ -387,7 +400,7 @@ etcd_initialize() {
             debug_execute chmod -R 700 "$ETCD_DATA_DIR" || true
         fi
         if [[ ${#initial_members[@]} -gt 1 ]]; then
-            if ! is_healthy_cluster; then
+            if ! is_healthy_etcd_cluster; then
                 warn "Cluster not responding!"
                 if is_boolean_yes "$ETCD_DISASTER_RECOVERY"; then
                     latest_snapshot_file="$(find /snapshots/ -maxdepth 1 -type f -name 'db-*' | sort | tail -n 1)"
