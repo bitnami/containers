@@ -8,7 +8,7 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl fontconfig ghostscript gzip imagemagick libbsd0 libbz2-1.0 libc6 libcap2-bin libedit2 libffi6 libfreetype6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libhogweed4 libicu63 libidn2-0 libjpeg62-turbo libldap-2.4-2 liblzma5 libncursesw6 libnettle6 libp11-kit0 libpng16-16 libpq5 libreadline7 libsasl2-2 libsqlite3-0 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libx11-6 libxcb1 libxext6 libxml2 libxrender1 libxslt1.1 procps sudo tar xfonts-75dpi xfonts-base zlib1g
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
-RUN bitnami-pkg install python-3.6.13-0 --checksum 72cfce0cd7aa1512e17a0091c2e7c878c11bdee1d0575e7f2287017714216b51
+RUN bitnami-pkg install python-3.6.13-1 --checksum b4a195d69e9adbed71cbacb1f43013cf49fb0e1000fa08a575969704995c561b
 RUN bitnami-pkg install postgresql-client-11.11.0-0 --checksum 648e3913acf696c24143dfca8081d22f655f6a70abc542f5daf3f3cd9aa8e2e9
 RUN bitnami-pkg install node-14.16.0-0 --checksum 969129b158e7c651dad4afe5eb8a549cd05d8ec0bbd77cf362f0f183d1d33910
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
@@ -21,7 +21,7 @@ RUN curl -sLO https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="odoo" \
-    BITNAMI_IMAGE_VERSION="14.0.20210310-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="14.0.20210310-debian-10-r6" \
     LD_LIBRARY_PATH="/opt/bitnami/odoo/venv/lib/python3.6/site-packages/reportlab/.libs:$LD_LIBRARY_PATH" \
     ODOO_EMAIL="user@example.com" \
     ODOO_PASSWORD="bitnami" \
