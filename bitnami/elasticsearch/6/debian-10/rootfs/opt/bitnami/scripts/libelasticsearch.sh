@@ -172,8 +172,16 @@ elasticsearch_validate_kernel() {
     }
 
     debug "Validating Kernel settings..."
-    validate_sysctl_key "vm.max_map_count" 262144
-    validate_sysctl_key "fs.file-max" 65536
+    if [[ $(yq r "$ELASTICSEARCH_CONF_FILE" index.store.type) || $(yq r "$ELASTICSEARCH_CONF_FILE" '[index.store.type]') ]]; then
+        debug "Custom index.store.type found in the config file. Skipping kernel validation..."
+    else
+        validate_sysctl_key "fs.file-max" 65536
+    fi
+    if [[ $(yq r "$ELASTICSEARCH_CONF_FILE" node.store.allow_mmap) || $(yq r "$ELASTICSEARCH_CONF_FILE" '[node.store.allow_mmap]') ]]; then
+        debug "Custom node.store.allow_mmap found in the config file. Skipping kernel validation..."
+    else
+        validate_sysctl_key "vm.max_map_count" 262144
+    fi
 }
 
 ########################
