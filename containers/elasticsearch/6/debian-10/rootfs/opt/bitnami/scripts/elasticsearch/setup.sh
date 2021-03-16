@@ -15,8 +15,6 @@ set -o pipefail
 # Load environment
 . /opt/bitnami/scripts/elasticsearch-env.sh
 
-# Ensure kernel settings are valid
-elasticsearch_validate_kernel
 # Ensure Elasticsearch environment variables settings are valid
 elasticsearch_validate
 # Ensure Elasticsearch is stopped when this script ends
@@ -25,6 +23,8 @@ trap "elasticsearch_stop" EXIT
 am_i_root && ensure_user_exists "$ELASTICSEARCH_DAEMON_USER" --group "$ELASTICSEARCH_DAEMON_GROUP"
 # Ensure Elasticsearch is initialized
 elasticsearch_initialize
+# Ensure kernel settings are valid
+elasticsearch_validate_kernel
 # Install Elasticsearch plugins
 elasticsearch_install_plugins
 # Ensure custom initialization scripts are executed
