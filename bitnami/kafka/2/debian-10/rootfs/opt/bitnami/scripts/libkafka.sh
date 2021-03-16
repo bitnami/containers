@@ -275,10 +275,10 @@ kafka_validate() {
         warn "You set the environment variable ALLOW_PLAINTEXT_LISTENER=$ALLOW_PLAINTEXT_LISTENER. For safety reasons, do not use this flag in a production environment."
     fi
     if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SSL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SSL ]]; then
-        if ([[ ! -f "$KAFKA_CERTS_DIR"/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_CERTS_DIR"/kafka.truststore.jks ]]) \
-            && ([[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/kafka.keystore.jks ]] || [[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/kafka.truststore.jks ]]) \
-            && ([[ ! -f "$KAFKA_CERTS_DIR"kafka.keystore.pem ]] || [[ ! -f "$KAFKA_CERTS_DIR"/certs/kafka.truststore.pem ]]) \
-            && ([[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/kafka.keystore.pem ]] || [[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/kafka.truststore.pem ]]); then
+        if ([[ ! -f "${KAFKA_CERTS_DIR}/kafka.keystore.jks" ]] || [[ ! -f "${KAFKA_CERTS_DIR}/kafka.truststore.jks" ]]) \
+            && ([[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/kafka.keystore.jks" ]] || [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/kafka.truststore.jks" ]]) \
+            && ([[ ! -f "${KAFKA_CERTS_DIR}/kafka.keystore.pem" ]] || [[ ! -f "${KAFKA_CERTS_DIR}/kafka.truststore.pem" ]]) \
+            && ([[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/kafka.keystore.pem" ]] || [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/kafka.truststore.pem" ]]); then
             print_validation_error "In order to configure the TLS encryption for Kafka you must mount your kafka.keystore.jks (or kafka.keystore.pem) and kafka.truststore.jks (or kafka.truststore.pem) certificates to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
         fi
     elif [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL ]]; then
@@ -289,12 +289,12 @@ kafka_validate() {
         print_validation_error "The KAFKA_CFG_LISTENERS environment variable does not configure a secure listener. Set the environment variable ALLOW_PLAINTEXT_LISTENER=yes to allow the container to be started with a plaintext listener. This is only recommended for development."
     fi
     if [[ "${KAFKA_ZOOKEEPER_PROTOCOL}" =~ SSL ]]; then
-        if [[ ! -f "$KAFKA_CERTS_DIR"/zookeeper.truststore.jks ]] && [[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/zookeeper.truststore.jks ]] \
-            && [[ ! -f "$KAFKA_CERTS_DIR"/zookeeper.truststore.pem ]] && [[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/zookeeper.truststore.pem ]]; then
+        if [[ ! -f "${KAFKA_CERTS_DIR}/zookeeper.truststore.jks" ]] && [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/zookeeper.truststore.jks" ]] \
+            && [[ ! -f "${KAFKA_CERTS_DIR}/zookeeper.truststore.pem" ]] && [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/zookeeper.truststore.pem" ]]; then
             print_validation_error "In order to configure the TLS encryption for Zookeeper you must mount your zookeeper.truststore.jks (or zookeeper.truststore.pem) certificates to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
         fi
-        if [[ ! -f "$KAFKA_CERTS_DIR"/zookeeper.keystore.jks ]] && [[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/zookeeper.keystore.jks ]] \
-            && [[ ! -f "$KAFKA_CERTS_DIR"/zookeeper.keystore.pem ]] && [[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/certs/zookeeper.keystore.pem ]]; then
+        if [[ ! -f "${KAFKA_CERTS_DIR}/zookeeper.keystore.jks" ]] && [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/zookeeper.keystore.jks" ]] \
+            && [[ ! -f "${KAFKA_CERTS_DIR}/zookeeper.keystore.pem" ]] && [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/zookeeper.keystore.pem" ]]; then
             warn "In order to configure the mTLS for Zookeeper you must mount your zookeeper.keystore.jks (or zookeeper.keystore.pem) certificates to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
         fi
     elif [[ "${KAFKA_ZOOKEEPER_PROTOCOL}" =~ SASL ]]; then
