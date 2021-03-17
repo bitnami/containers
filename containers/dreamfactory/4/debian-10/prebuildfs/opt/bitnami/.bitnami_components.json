@@ -29,10 +29,10 @@
     },
     "mongodb-client": {
         "arch": "amd64",
-        "digest": "f839db79af81f0e53978d2213ca7b4b565a1c43c7f425c99d8dadcab2ddbe7c6",
+        "digest": "d937810c41b56edf50fb553c7d2e0a8bc096c11898e2d669937136e61263f3a3",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.4.4-0"
+        "version": "4.4.4-1"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -57,10 +57,10 @@
     },
     "redis-client": {
         "arch": "amd64",
-        "digest": "e3cb2dbe6567da23053db6f6224cc0dd54d4a305a09f97fdebfc8f5b5e5d546a",
+        "digest": "f5935c786e305fc61ad48140c831526b78733d1fab61cc7e7ff4d8f389f4ef12",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "6.0.12-0"
+        "version": "6.0.12-1"
     },
     "tini": {
         "arch": "amd64",
