@@ -459,7 +459,6 @@ elasticsearch_initialize() {
         warn "The '${ELASTICSEARCH_CONF_DIR}/jvm.options' file is not writable. Configurations based on environment variables will not be applied for this file"
     fi
 
-
     if [[ -f "$ELASTICSEARCH_CONF_FILE" ]]; then
         info "Custom configuration file detected, using it..."
     else
