@@ -1,7 +1,7 @@
 {
     "kubeapps-assetsvc": {
-        "digest": "858cbb72bbec189435a8eb0f9b87f029d804caf914354469e168f02e6a3791fe",
+        "digest": "98cfdf66638c0573e182b5c058a07bcc12aa375eb41d6eb16af325b03d43c042",
         "type": "BLACKSMITH",
-        "version": "2.2.1"
+        "version": "2.3.0"
     }
 }
