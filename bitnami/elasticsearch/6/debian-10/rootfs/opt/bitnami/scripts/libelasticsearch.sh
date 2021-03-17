@@ -445,7 +445,6 @@ elasticsearch_initialize() {
         am_i_root && chown -R "$ELASTICSEARCH_DAEMON_USER:$ELASTICSEARCH_DAEMON_GROUP" "$dir"
     done
 
-
     if is_file_writable "${ELASTICSEARCH_CONF_DIR}/jvm.options"; then
         if is_boolean_yes "$ELASTICSEARCH_DISABLE_JVM_HEAP_DUMP"; then
             info "Disabling JVM heap dumps..."
@@ -459,7 +458,6 @@ elasticsearch_initialize() {
     else
         warn "The '${ELASTICSEARCH_CONF_DIR}/jvm.options' file is not writable. Configurations based on environment variables will not be applied for this file"
     fi
-
 
     if [[ -f "$ELASTICSEARCH_CONF_FILE" ]]; then
         info "Custom configuration file detected, using it..."
