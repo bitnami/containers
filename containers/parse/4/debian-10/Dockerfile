@@ -11,14 +11,14 @@ RUN install_packages ca-certificates curl ghostscript gzip imagemagick libbz2-1.
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install node-12.21.0-0 --checksum 04dd55d91642d37fc68335a267fe00ebf9fca8b90b9cae254c82423ed1d0d619
-RUN bitnami-pkg install mongodb-client-4.4.4-0 --checksum f839db79af81f0e53978d2213ca7b4b565a1c43c7f425c99d8dadcab2ddbe7c6
+RUN bitnami-pkg install mongodb-client-4.4.4-1 --checksum d937810c41b56edf50fb553c7d2e0a8bc096c11898e2d669937136e61263f3a3
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
 RUN bitnami-pkg unpack parse-4.9.3-0 --checksum 06542d1d41c71615eb028ab06b14c9c0b2bb86cf44644960337a82c8c67fd34e
 RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="4.9.3-debian-10-r83" \
+    BITNAMI_IMAGE_VERSION="4.9.3-debian-10-r84" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
