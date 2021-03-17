@@ -8,16 +8,16 @@
     },
     "mxnet": {
         "arch": "amd64",
-        "digest": "a7202bb353748ed66b0b9604caf0fd7c1fcbf038264426dc7f087de49c02d5e4",
+        "digest": "ebae46e99921c709521b42e01079b44cfae08f6eadbf920aee1759d4abc9c54f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.7.0-3"
+        "version": "1.8.0-0"
     },
     "python": {
         "arch": "amd64",
-        "digest": "72cfce0cd7aa1512e17a0091c2e7c878c11bdee1d0575e7f2287017714216b51",
+        "digest": "2a6fa2764026a933a1e9517adbc372a37862ba74fda5f4a6c3d32122928c216e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.6.13-0"
+        "version": "3.7.10-1"
     }
 }
