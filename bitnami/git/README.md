@@ -28,7 +28,7 @@ $ docker run --name git bitnami/git:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.31.0`, `2.31.0-debian-10-r1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/2.31.0-debian-10-r1/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.31.0`, `2.31.0-debian-10-r2`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/2.31.0-debian-10-r2/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/git GitHub repo](https://github.com/bitnami/bitnami-docker-git).
 
@@ -59,7 +59,21 @@ $ docker build -t bitnami/git:latest 'https://github.com/bitnami/bitnami-docker-
 To run commands inside this container you can use `docker run`, for example to execute `git version` you can follow below example
 
 ```console
-$ docker run --name bitnami/git:latest --version
+$ docker run --name git bitnami/git:latest git --version
+```
+
+# Notable Changes
+
+## 2.31.0-debian-10-r2
+
+- The `ENTRYPOINT` of the container has been modified to load a proper NSS environment that enables git ssh connections when running the container as non-root.
+- The `CMD` is also changed to enter the Bash shell.
+
+If you were using the container without replacing the entrypoint [`ENTRYPOINT [ "git" ]`](https://github.com/bitnami/bitnami-docker-git/blob/af46ea91cebed3de1a863cb9969210688131b4e9/2/debian-10/Dockerfile#L19), make sure you specify the `git` command now:
+
+```diff
+-docker run bitnami/git:latest --version
++docker run bitnami/git:latest git --version
 ```
 
 # Contributing
