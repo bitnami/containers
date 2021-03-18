@@ -70,7 +70,7 @@ is_etcd_running() {
 etcd_stop() {
     local pid
     ! is_etcd_running && return
-    
+
     info "Stopping etcd"
     pid="$(pgrep -f "^etcd")"
     local counter=10
@@ -90,7 +90,7 @@ etcd_stop() {
 #########################
 etcd_start_bg() {
     is_etcd_running && return
-    
+
     info "Starting etcd in background"
     debug_execute "etcd" &
     sleep 3
