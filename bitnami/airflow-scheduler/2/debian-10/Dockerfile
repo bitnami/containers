@@ -15,7 +15,7 @@ RUN bitnami-pkg install python-3.8.8-1 --checksum 2bf3628359e03d5fd729ef956dab6e
 RUN bitnami-pkg install postgresql-client-10.16.0-0 --checksum 6ae2df74c4cc145690104c9bfbd4f9977cc00d26b3a010bb1eba74d92048485d
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
 RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
-RUN bitnami-pkg unpack airflow-scheduler-2.0.1-1 --checksum 480e6521bcecc49fa13654efb9218a7a82b9030a2e6400393ea364759b986aa2
+RUN bitnami-pkg unpack airflow-scheduler-2.0.1-2 --checksum e57c52862222ad40af27ab4f7b29728a158810a587f351d447b0e3b0c7cb61fd
 
 COPY rootfs /
 ENV AIRFLOW_DATABASE_HOST="postgresql" \
@@ -33,7 +33,7 @@ ENV AIRFLOW_DATABASE_HOST="postgresql" \
     AIRFLOW_WEBSERVER_HOST="airflow" \
     AIRFLOW_WEBSERVER_PORT_NUMBER="8080" \
     BITNAMI_APP_NAME="airflow-scheduler" \
-    BITNAMI_IMAGE_VERSION="2.0.1-debian-10-r34" \
+    BITNAMI_IMAGE_VERSION="2.0.1-debian-10-r35" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/airflow/venv/lib/python3.8/site-packages/numpy.libs/:$LD_LIBRARY_PATH" \
     LIBNSS_WRAPPER_PATH="/opt/bitnami/common/lib/libnss_wrapper.so" \
     LNAME="airflow" \
