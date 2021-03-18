@@ -153,7 +153,7 @@ solr_create_core() {
     is_boolean_yes "$SOLR_ENABLE_AUTHENTICATION" && command_args+=("--user" "${SOLR_ADMIN_USERNAME}:${SOLR_ADMIN_PASSWORD}")
 
     mkdir -p "${SOLR_SERVER_DIR}/solr/${core}/data"
-    cp -r "${SOLR_SERVER_DIR}"/solr/configsets/_default/* "${SOLR_SERVER_DIR}/solr/${core}/"
+    cp -r "${SOLR_CORE_CONF_DIR}"/* "${SOLR_SERVER_DIR}/solr/${core}/"
 
     command_args+=( "${protocol}://localhost:${SOLR_PORT_NUMBER}/solr/admin/cores?action=CREATE&name=${SOLR_CORE}&instanceDir=${SOLR_CORE}&config=solrconfig.xml&schema=schema.xml&dataDir=data" )
 

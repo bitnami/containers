@@ -20,7 +20,6 @@ ENV BITNAMI_APP_NAME="solr" \
     BITNAMI_IMAGE_VERSION="8.8.1-debian-10-r21" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/solr/bin:/opt/bitnami/common/bin:$PATH" \
     SOLR_CORE="" \
-    SOLR_CORE_CONF_DIR="_default" \
     SOLR_HEAP="512m" \
     SOLR_PORT_NUMBER="8983" \
     SOLR_SERVER_DIRECTORY="server"
