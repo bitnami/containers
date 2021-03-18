@@ -1,43 +1,43 @@
-version: '2'
+version: "2"
 
 services:
   zookeeper:
-    image: 'docker.io/bitnami/zookeeper:3-debian-10'
+    image: "docker.io/bitnami/zookeeper:3"
     ports:
-     - '2181:2181'
+      - "2181:2181"
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
   kafka:
-    image: 'docker.io/bitnami/kafka:2-debian-10'
+    image: "docker.io/bitnami/kafka:2-debian-10"
     ports:
-      - '9092'
+      - "9092"
     environment:
       - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
     volumes:
-      - 'kafka2_data:/bitnami'
+      - "kafka2_data:/bitnami"
     depends_on:
       - zookeeper
   kafka2:
-    image: 'docker.io/bitnami/kafka:2-debian-10'
+    image: "docker.io/bitnami/kafka:2-debian-10"
     ports:
-      - '9092'
+      - "9092"
     environment:
       - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
     volumes:
-      - 'kafka_data:/bitnami'
+      - "kafka_data:/bitnami"
     depends_on:
       - zookeeper
   kafka3:
-    image: 'docker.io/bitnami/kafka:2-debian-10'
+    image: "docker.io/bitnami/kafka:2-debian-10"
     ports:
-      - '9092'
+      - "9092"
     environment:
       - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
     volumes:
-      - 'kafka3_data:/bitnami'
+      - "kafka3_data:/bitnami"
     depends_on:
       - zookeeper
 
