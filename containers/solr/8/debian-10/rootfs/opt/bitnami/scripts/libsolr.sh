@@ -12,8 +12,6 @@
 . /opt/bitnami/scripts/libservice.sh
 . /opt/bitnami/scripts/libvalidations.sh
 
-
-
 ########################
 # Create initial security.json
 # Globals:
@@ -25,7 +23,7 @@
 #########################
 solr_generate_initial_security() {
     info "Generating initial security file"
-    cat > "${SOLR_BASE_DIR}/server/solr/security.json" << EOF
+    cat >"${SOLR_BASE_DIR}/server/solr/security.json" <<EOF
 {
 "authentication":{
    "blockUnknown": true,
@@ -63,8 +61,8 @@ solr_validate() {
 
     ! is_yes_no_value "$SOLR_ENABLE_AUTHENTICATION" && print_validation_error "SOLR_ENABLE_AUTHENTICATION possible values are yes or no"
     if is_boolean_yes "$SOLR_ENABLE_AUTHENTICATION"; then
-       [[ -z "$SOLR_ADMIN_USERNAME" ]] && print_validation_error "You need to provide an username in SOLR_USERNAME"
-       [[ -z "$SOLR_ADMIN_PASSWORD" ]] && print_validation_error "You need to provide a password for the user: ${SOLR_ADMIN_USERNAME}"
+        [[ -z "$SOLR_ADMIN_USERNAME" ]] && print_validation_error "You need to provide an username in SOLR_USERNAME"
+        [[ -z "$SOLR_ADMIN_PASSWORD" ]] && print_validation_error "You need to provide a password for the user: ${SOLR_ADMIN_USERNAME}"
     fi
 
     ! is_yes_no_value "$SOLR_SSL_ENABLED" && print_validation_error "SOLR_SSL_ENABLED possible values are yes or no"
@@ -82,11 +80,10 @@ solr_validate() {
 
     ! is_true_false_value "$SOLR_SSL_CHECK_PEER_NAME" && print_validation_error "SOLR_SSL_CHECK_PEER_NAME possible values are true or false"
 
-    [[ "$SOLR_NUMBER_OF_NODES" -lt $(( "$SOLR_COLLECTION_REPLICAS" * "$SOLR_COLLECTION_SHARDS" )) ]] && print_validation_error "Not enough nodes for the replicas and shards indicated"
+    [[ "$SOLR_NUMBER_OF_NODES" -lt $(("$SOLR_COLLECTION_REPLICAS" * "$SOLR_COLLECTION_SHARDS")) ]] && print_validation_error "Not enough nodes for the replicas and shards indicated"
 
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
-
 
 ########################
 # Wait for solr root to exists in zookeeper
@@ -119,7 +116,7 @@ solr_wait_for_zookeeper() {
     local port
 
     info "Waiting for Zookeeper to be up"
-    read -r -a zoo_nodes <<< "$(tr ',' ' ' <<< "${SOLR_ZK_HOSTS}")"
+    read -r -a zoo_nodes <<<"$(tr ',' ' ' <<<"${SOLR_ZK_HOSTS}")"
     for zoo_node in "${zoo_nodes[@]}"; do
         if [[ "$zoo_node" =~ (.*):([0-9]*) ]]; then
             host="${BASH_REMATCH[1]}"
@@ -155,11 +152,11 @@ solr_create_core() {
     mkdir -p "${SOLR_SERVER_DIR}/solr/${core}/data"
     cp -r "${SOLR_CORE_CONF_DIR}"/* "${SOLR_SERVER_DIR}/solr/${core}/"
 
-    command_args+=( "${protocol}://localhost:${SOLR_PORT_NUMBER}/solr/admin/cores?action=CREATE&name=${SOLR_CORE}&instanceDir=${SOLR_CORE}&config=solrconfig.xml&schema=schema.xml&dataDir=data" )
+    command_args+=("${protocol}://localhost:${SOLR_PORT_NUMBER}/solr/admin/cores?action=CREATE&name=${SOLR_CORE}&instanceDir=${SOLR_CORE}&config=solrconfig.xml&schema=schema.xml&dataDir=data")
 
     info "Creating solr core: ${SOLR_CORE}"
 
-    if ! debug_execute "$exec" "${command_args[@]}" > /dev/null; then
+    if ! debug_execute "$exec" "${command_args[@]}" >/dev/null; then
         error "There was an error when creating the core"
         exit 1
     else
@@ -183,15 +180,15 @@ solr_update_password() {
     local -r username="${1:?user is required}"
     local -r password="${2:?password is required}"
     local protocol="http"
-    local command_args=( )
+    local command_args=()
 
     is_boolean_yes "$SOLR_SSL_ENABLED" && protocol="https" && command_args+=("-k")
 
-    command_args+=("--silent" "--user" "${username}:${default_password}" "${protocol}://localhost:${SOLR_PORT_NUMBER}/api/cluster/security/authentication" "-H" "'Content-type:application/json'" "-d" "{\"set-user\":{\"${username}\":\"${password}\"}}" )
+    command_args+=("--silent" "--user" "${username}:${default_password}" "${protocol}://localhost:${SOLR_PORT_NUMBER}/api/cluster/security/authentication" "-H" "'Content-type:application/json'" "-d" "{\"set-user\":{\"${username}\":\"${password}\"}}")
 
     info "Updating user password"
 
-    if ! debug_execute "$exec" "${command_args[@]}" > /dev/null; then
+    if ! debug_execute "$exec" "${command_args[@]}" >/dev/null; then
         error "There was an error when updating the user password"
         exit 1
     else
@@ -217,7 +214,7 @@ solr_create_cloud_user() {
 
     info "Creating user: ${username}"
 
-    if ! debug_execute "$exec" "${command_args[@]}" > /dev/null; then
+    if ! debug_execute "$exec" "${command_args[@]}" >/dev/null; then
         error "There was an error when creating the user"
         exit 1
     else
@@ -244,7 +241,7 @@ solr_create_collection() {
     is_boolean_yes "$SOLR_ENABLE_AUTHENTICATION" && command_args+=("--user" "${SOLR_ADMIN_USERNAME}:${SOLR_ADMIN_PASSWORD}")
     is_boolean_yes "$SOLR_SSL_ENABLED" && protocol="https" && command_args+=("-k")
 
-    command_args+=( "${protocol}://localhost:${SOLR_PORT_NUMBER}/solr/admin/collections?action=CREATE&name=${SOLR_COLLECTION}&numShards=${SOLR_COLLECTION_SHARDS}&replicationFactor=${SOLR_COLLECTION_REPLICAS}" )
+    command_args+=("${protocol}://localhost:${SOLR_PORT_NUMBER}/solr/admin/collections?action=CREATE&name=${SOLR_COLLECTION}&numShards=${SOLR_COLLECTION_SHARDS}&replicationFactor=${SOLR_COLLECTION_REPLICAS}")
 
     #Check if the collection exists before creating it
     if ! solr_collection_exists "$SOLR_COLLECTION"; then
@@ -256,7 +253,7 @@ solr_create_collection() {
             fi
         fi
 
-        if ! debug_execute "$exec" "${command_args[@]}" > /dev/null; then
+        if ! debug_execute "$exec" "${command_args[@]}" >/dev/null; then
             error "There was an error when creating the collection"
             exit 1
         else
@@ -282,7 +279,7 @@ solr_zk_root_exists() {
 
     debug "Checking if root of solr exists in zookeeper"
 
-    "$exec" "${command_args[@]}" 2> /dev/null | grep -q "solr"
+    "$exec" "${command_args[@]}" 2>/dev/null | grep -q "solr"
 }
 
 #########################
@@ -331,7 +328,7 @@ solr_is_zk_initialized() {
 
     info "Checking if solr has been initialized in zookeeper"
 
-    if ! debug_execute "$exec" "${command_args[@]}" 2> /dev/null; then
+    if ! debug_execute "$exec" "${command_args[@]}" 2>/dev/null; then
         info "Zookeeper was not initialized."
         return 1
     else
@@ -372,7 +369,7 @@ solr_start_bg() {
 #########################
 solr_stop() {
     info "Stopping solr"
-    stop_service_using_pid  "$SOLR_PID_FILE"
+    stop_service_using_pid "$SOLR_PID_FILE"
 }
 
 #########################
@@ -396,7 +393,6 @@ solr_zk_initialize() {
     fi
 }
 
-
 #########################
 # Set cluster properties in zookeeper
 # Globals:
@@ -411,7 +407,6 @@ solr_set_ssl_url_scheme() {
 
     solr_wait_for_zk_root && "${SOLR_SERVER_DIR}/scripts/cloud-scripts/zkcli.sh" -zkhost "${SOLR_ZK_HOSTS}/solr" -cmd clusterprop -name urlScheme -val https
 }
-
 
 #########################
 # Create root in zookeeper
@@ -437,7 +432,6 @@ solr_migrate_old_data() {
         exit 1
     fi
 }
-
 
 #########################
 # Initialize SOLR
