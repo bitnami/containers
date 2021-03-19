@@ -412,6 +412,27 @@ mongodb_set_listen_all_conf() {
 }
 
 ########################
+# Disable javascript
+# Globals:
+#   MONGODB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+mongodb_disable_javascript_conf() {
+    local -r conf_file_path="${1:-$MONGODB_CONF_FILE}"
+    local -r conf_file_name="${conf_file_path#"$MONGODB_CONF_DIR"}"
+
+    if ! mongodb_is_file_external "$conf_file_name"; then
+        mongodb_config_apply_regex "#?security:" "security:\n  javascriptEnabled: false" "$conf_file_path"
+    else
+        debug "$conf_file_name mounted. Skipping disabling javascript"
+    fi
+}
+
+
+########################
 # Enable Auth
 # Globals:
 #   MONGODB_*
@@ -1032,6 +1053,7 @@ mongodb_initialize() {
     mongodb_set_net_conf
     mongodb_set_log_conf
     mongodb_set_storage_conf
+    is_boolean_yes "$MONGODB_DISABLE_JAVASCRIPT" && mongodb_disable_javascript_conf
 
     if is_dir_empty "$MONGODB_DATA_DIR/db"; then
         info "Deploying MongoDB from scratch..."
