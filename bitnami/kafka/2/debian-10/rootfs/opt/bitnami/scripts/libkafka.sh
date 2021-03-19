@@ -128,6 +128,7 @@ export KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL="${KAFKA_CFG_SASL_MECHANIS
 export KAFKA_CFG_TLS_TYPE="${KAFKA_CFG_TLS_TYPE:-JKS}"
 export KAFKA_CFG_TLS_TYPE="${KAFKA_CFG_TLS_TYPE^^}"
 export KAFKA_CFG_TLS_CLIENT_AUTH="${KAFKA_CFG_TLS_CLIENT_AUTH:-required}"
+export KAFKA_CERTIFICATE_PASSWORD="${KAFKA_CERTIFICATE_PASSWORD:-}"
 EOF
     # Make compatible KAFKA_CLIENT_USERS/PASSWORDS with the old KAFKA_CLIENT_USER/PASSWORD
     [[ -n "${KAFKA_CLIENT_USER:-}" ]] && KAFKA_CLIENT_USERS="${KAFKA_CLIENT_USER:-},${KAFKA_CLIENT_USERS:-}"
@@ -275,11 +276,14 @@ kafka_validate() {
         warn "You set the environment variable ALLOW_PLAINTEXT_LISTENER=$ALLOW_PLAINTEXT_LISTENER. For safety reasons, do not use this flag in a production environment."
     fi
     if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SSL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SSL ]]; then
-        if ([[ ! -f "${KAFKA_CERTS_DIR}/kafka.keystore.jks" ]] || [[ ! -f "${KAFKA_CERTS_DIR}/kafka.truststore.jks" ]]) \
-            && ([[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/kafka.keystore.jks" ]] || [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/kafka.truststore.jks" ]]) \
-            && ([[ ! -f "${KAFKA_CERTS_DIR}/kafka.keystore.pem" ]] || [[ ! -f "${KAFKA_CERTS_DIR}/kafka.truststore.pem" ]]) \
-            && ([[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/kafka.keystore.pem" ]] || [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/kafka.truststore.pem" ]]); then
-            print_validation_error "In order to configure the TLS encryption for Kafka you must mount your kafka.keystore.jks (or kafka.keystore.pem) and kafka.truststore.jks (or kafka.truststore.pem) certificates to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
+        if [[ "$KAFKA_CFG_TLS_TYPE" = "JKS" ]] \
+            && ([[ ! -f "${KAFKA_CERTS_DIR}/kafka.keystore.jks" ]] || [[ ! -f "${KAFKA_CERTS_DIR}/kafka.truststore.jks" ]]) \
+            && ([[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/kafka.keystore.jks" ]] || [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/kafka.truststore.jks" ]]); then
+            print_validation_error "In order to configure the TLS encryption for Kafka with JKS certs you must mount your kafka.keystore.jks and kafka.truststore.jks certs to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
+        elif [[ "$KAFKA_CFG_TLS_TYPE" = "PEM" ]] \
+            && ([[ ! -f "${KAFKA_CERTS_DIR}/kafka.keystore.pem" ]] || [[ ! -f "${KAFKA_CERTS_DIR}/kafka.keystore.key" ]] || [[ ! -f "${KAFKA_CERTS_DIR}/kafka.truststore.pem" ]]) \
+            && ([[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/kafka.keystore.pem" ]] || [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/kafka.keystore.key" ]] || [[ ! -f "${KAFKA_CERTS_DIR}/kafka.truststore.pem" ]]); then
+            print_validation_error "In order to configure the TLS encryption for Kafka with PEM certs you must mount your kafka.keystore.pem, kafka.keystore.key and kafka.truststore.jks certs to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
         fi
     elif [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL ]]; then
         if [[ -z "$KAFKA_CLIENT_PASSWORD" && -z "$KAFKA_CLIENT_PASSWORDS" ]] && [[ -z "$KAFKA_INTER_BROKER_PASSWORD" ]]; then
@@ -289,13 +293,20 @@ kafka_validate() {
         print_validation_error "The KAFKA_CFG_LISTENERS environment variable does not configure a secure listener. Set the environment variable ALLOW_PLAINTEXT_LISTENER=yes to allow the container to be started with a plaintext listener. This is only recommended for development."
     fi
     if [[ "${KAFKA_ZOOKEEPER_PROTOCOL}" =~ SSL ]]; then
-        if [[ ! -f "${KAFKA_CERTS_DIR}/zookeeper.truststore.jks" ]] && [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/zookeeper.truststore.jks" ]] \
+        if [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "JKS" ]] \
+            && [[ ! -f "${KAFKA_CERTS_DIR}/zookeeper.truststore.jks" ]] && [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/zookeeper.truststore.jks" ]]; then
+            print_validation_error "In order to configure the TLS encryption for Zookeeper with JKS certs you must mount your zookeeper.truststore.jks cert to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
+        elif [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "PEM" ]] \
             && [[ ! -f "${KAFKA_CERTS_DIR}/zookeeper.truststore.pem" ]] && [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/zookeeper.truststore.pem" ]]; then
-            print_validation_error "In order to configure the TLS encryption for Zookeeper you must mount your zookeeper.truststore.jks (or zookeeper.truststore.pem) certificates to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
+            print_validation_error "In order to configure the TLS encryption for Zookeeper with PEM certs you must mount your zookeeper.truststore.pem cert to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
         fi
-        if [[ ! -f "${KAFKA_CERTS_DIR}/zookeeper.keystore.jks" ]] && [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/zookeeper.keystore.jks" ]] \
-            && [[ ! -f "${KAFKA_CERTS_DIR}/zookeeper.keystore.pem" ]] && [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/zookeeper.keystore.pem" ]]; then
-            warn "In order to configure the mTLS for Zookeeper you must mount your zookeeper.keystore.jks (or zookeeper.keystore.pem) certificates to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
+        if [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "JKS" ]] \
+            && [[ ! -f "${KAFKA_CERTS_DIR}/zookeeper.keystore.jks" ]] && [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/zookeeper.keystore.jks" ]]; then
+            warn "In order to configure the mTLS for Zookeeper with JKS certs you must mount your zookeeper.keystore.jks cert to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
+        elif [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "PEM" ]] \
+            && ([[ ! -f "${KAFKA_CERTS_DIR}/zookeeper.keystore.pem" ]] || [[ ! -f "${KAFKA_CERTS_DIR}/zookeeper.keystore.key" ]]) \
+            && ([[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/zookeeper.keystore.pem" ]] || [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/zookeeper.keystore.key" ]]); then
+            warn "In order to configure the mTLS for Zookeeper with PEM certs you must mount your zookeeper.keystore.pem cert and zookeeper.keystore.key key to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
         fi
     elif [[ "${KAFKA_ZOOKEEPER_PROTOCOL}" =~ SASL ]]; then
         if [[ -z "$KAFKA_ZOOKEEPER_USER" ]] || [[ -z "$KAFKA_ZOOKEEPER_PASSWORD" ]]; then
@@ -305,6 +316,7 @@ kafka_validate() {
          print_validation_error "The KAFKA_ZOOKEEPER_PROTOCOL environment variable does not configure a secure protocol. Set the environment variable ALLOW_PLAINTEXT_LISTENER=yes to allow the container to be started with a plaintext listener. This is only recommended for development."
     fi
     check_multi_value "KAFKA_CFG_TLS_TYPE" "JKS PEM"
+    check_multi_value "KAFKA_ZOOKEEPER_TLS_TYPE" "JKS PEM"
     check_multi_value "KAFKA_CFG_TLS_CLIENT_AUTH" "none requested required"
     [[ "$error_code" -eq 0 ]] || return "$error_code"
 }
@@ -472,28 +484,31 @@ kafka_create_sasl_scram_zookeeper_users() {
 # Returns:
 #   None
 #########################
+SSL_CONFIGURED=false
 kafka_configure_ssl() {
-    local -r ext="${KAFKA_CFG_TLS_TYPE,,}"
-
-    # Set Kafka configuration
-    kafka_server_conf_set ssl.keystore.type "$KAFKA_CFG_TLS_TYPE"
-    kafka_server_conf_set ssl.keystore.location "$KAFKA_CERTS_DIR"/kafka.keystore."$ext"
-    kafka_server_conf_set ssl.key.password "$KAFKA_CERTIFICATE_PASSWORD"
-    kafka_server_conf_set ssl.truststore.type "$KAFKA_CFG_TLS_TYPE"
-    kafka_server_conf_set ssl.truststore.location "$KAFKA_CERTS_DIR"/kafka.truststore."$ext"
-    # Set producer/consumer configuration
-    kafka_producer_consumer_conf_set ssl.keystore.type "$KAFKA_CFG_TLS_TYPE"
-    kafka_producer_consumer_conf_set ssl.keystore.location "$KAFKA_CERTS_DIR"/kafka.keystore."$ext"
-    kafka_producer_consumer_conf_set ssl.key.password "$KAFKA_CERTIFICATE_PASSWORD"
-    kafka_producer_consumer_conf_set ssl.truststore.type "$KAFKA_CFG_TLS_TYPE"
-    kafka_producer_consumer_conf_set ssl.truststore.location "$KAFKA_CERTS_DIR"/kafka.truststore."$ext"
-    # keystore and truststore passwords are only compatible with JKS files
-    if [[ "$KAFKA_CFG_TLS_TYPE" == "JKS" ]]; then
-        kafka_server_conf_set ssl.keystore.password "$KAFKA_CERTIFICATE_PASSWORD"
-        kafka_server_conf_set ssl.truststore.password "$KAFKA_CERTIFICATE_PASSWORD"
-        kafka_producer_consumer_conf_set ssl.keystore.password "$KAFKA_CERTIFICATE_PASSWORD"
-        kafka_producer_consumer_conf_set ssl.truststore.password "$KAFKA_CERTIFICATE_PASSWORD"
+    [[ "$SSL_CONFIGURED" = true ]] && return 0
+    # Configures both Kafka server and producers/consumers
+    configure_both() {
+        kafka_server_conf_set "${1:?missing key}" "${2:?missing value}"
+        kafka_producer_consumer_conf_set "${1:?missing key}" "${2:?missing value}"
+    }
+    configure_both ssl.keystore.type "${KAFKA_CFG_TLS_TYPE}"
+    configure_both ssl.truststore.type "${KAFKA_CFG_TLS_TYPE}"
+    ! is_empty_value "$KAFKA_CERTIFICATE_PASSWORD" && configure_both ssl.key.password "$KAFKA_CERTIFICATE_PASSWORD"
+    if [[ "$KAFKA_CFG_TLS_TYPE" = "PEM" ]]; then
+        file_to_multiline_property() {
+            awk 'NR > 1{print line" \\"}{line=$0;}END{print $0" "}' < "${1:?missing file}"
+        }
+        configure_both ssl.keystore.key "$(file_to_multiline_property "${KAFKA_CERTS_DIR}/kafka.keystore.key")"
+        configure_both ssl.keystore.certificate.chain "$(file_to_multiline_property "${KAFKA_CERTS_DIR}/kafka.keystore.pem")"
+        configure_both ssl.truststore.certificates "$(file_to_multiline_property "${KAFKA_CERTS_DIR}/kafka.truststore.pem")"
+    elif [[ "$KAFKA_CFG_TLS_TYPE" = "JKS" ]]; then
+        configure_both ssl.keystore.location "$KAFKA_CERTS_DIR"/kafka.keystore.jks
+        configure_both ssl.truststore.location "$KAFKA_CERTS_DIR"/kafka.truststore.jks
+        ! is_empty_value "$KAFKA_CERTIFICATE_PASSWORD" && configure_both ssl.keystore.password "$KAFKA_CERTIFICATE_PASSWORD"
+        ! is_empty_value "$KAFKA_CERTIFICATE_PASSWORD" && configure_both ssl.truststore.password "$KAFKA_CERTIFICATE_PASSWORD"
     fi
+    SSL_CONFIGURED=true # prevents configuring SSL more than once
 }
 
 ########################
@@ -589,17 +604,22 @@ zookeeper_get_tls_config() {
     # otherwise the connection attempt to Zookeeper will fail.
     local -r ext="${KAFKA_ZOOKEEPER_TLS_TYPE,,}"
     local keystore_location=""
-    if [[ -f "$KAFKA_CERTS_DIR"/zookeeper.keystore."$ext" ]]; then
-        keystore_location="${KAFKA_CERTS_DIR}/zookeeper.keystore.${ext}"
-    fi
 
+    if [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "JKS" ]] && [[ -f "$KAFKA_CERTS_DIR"/zookeeper.keystore.jks ]]; then
+        keystore_location="${KAFKA_CERTS_DIR}/zookeeper.keystore.jks"
+    elif [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "PEM" ]] && [[ -f "$KAFKA_CERTS_DIR"/zookeeper.keystore.pem ]] && [[ -f "$KAFKA_CERTS_DIR"/zookeeper.keystore.key ]]; then
+        # Concatenating private key into public certificate file
+        # This is needed to load keystore from location using PEM
+        cat "$KAFKA_CERTS_DIR"/zookeeper.keystore.key >> "$KAFKA_CERTS_DIR"/zookeeper.keystore.pem
+        keystore_location="${KAFKA_CERTS_DIR}/zookeeper.keystore.pem"
+    fi
     echo "-Dzookeeper.clientCnxnSocket=org.apache.zookeeper.ClientCnxnSocketNetty \
           -Dzookeeper.client.secure=true \
           -Dzookeeper.ssl.keyStore.location=${keystore_location} \
-          -Dzookeeper.ssl.keyStore.password=$KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD \
+          -Dzookeeper.ssl.keyStore.password=${KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD} \
           -Dzookeeper.ssl.trustStore.location=${KAFKA_CERTS_DIR}/zookeeper.truststore.${ext} \
-          -Dzookeeper.ssl.trustStore.password=$KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD \
-          -Dzookeeper.ssl.hostnameVerification=$KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME"
+          -Dzookeeper.ssl.trustStore.password=${KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD} \
+          -Dzookeeper.ssl.hostnameVerification=${KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME}"
 }
 
 ########################
