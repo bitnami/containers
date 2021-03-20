@@ -14,7 +14,7 @@ set -o pipefail
 eval "$(consul_env)"
 
 EXEC="${CONSUL_BASE_DIR}/bin/consul"
-flags=("agent" "-config-dir" "${CONSUL_CONF_DIR}" "-log-file" "${CONSUL_LOG_FILE}" "-disable-host-node-id=true")
+flags=("agent" "-config-dir" "${CONSUL_CONF_DIR}" "-log-file" "${CONSUL_LOG_FILE}" "-disable-host-node-id=${CONSUL_DISABLE_HOST_NODE_ID}")
 
 if [[ "${CONSUL_AGENT_MODE}" = "server" ]]; then
     flags+=("-server")
