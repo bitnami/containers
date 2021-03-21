@@ -1,15 +1,15 @@
-version: '2'
+version: "2"
 services:
   elasticsearch:
-    image: 'docker.io/bitnami/elasticsearch:7-debian-10'
+    image: "docker.io/bitnami/elasticsearch:7"
     volumes:
-      - 'elasticsearch_data:/bitnami'
+      - "elasticsearch_data:/bitnami"
   kibana:
-    image: 'docker.io/bitnami/kibana:7-debian-10'
+    image: "docker.io/bitnami/kibana:7-debian-10"
     ports:
-      - '5601:5601'
+      - "5601:5601"
     volumes:
-      - 'kibana_data:/bitnami'
+      - "kibana_data:/bitnami"
     depends_on:
       - elasticsearch
 volumes:
