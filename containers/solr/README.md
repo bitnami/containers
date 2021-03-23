@@ -208,7 +208,7 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 solr:
   ...
   environment:
-    - SOLR_CORE_CONF_DIR=/path/to/your/confDir
+    - SOLR_CORE_CONF_DIR=/container/path/to/your/confDir
   volumes:
     - '/local/path/to/your/confDir:/container/path/to/your/confDir'
   ...
