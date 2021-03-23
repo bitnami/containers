@@ -1,9 +1,9 @@
 {
     "nginx-exporter": {
         "arch": "amd64",
-        "digest": "619a32dbaaaf0b3f16158cd0a811d84c0c50e0fff5e9c0e9863d82624b3c3720",
+        "digest": "6026b1cae7f9e22dc9257410389894e021e5e4b19567c9e662e64ecff6820bf4",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.8.0-2"
+        "version": "0.9.0-0"
     }
 }
