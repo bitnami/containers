@@ -42,6 +42,8 @@ for php_ini_file in "${OWNCLOUD_BASE_DIR}/.user.ini" "$PHP_CONF_FILE"; do
     php_conf_set upload_max_filesize "$PHP_DEFAULT_UPLOAD_MAX_FILESIZE" "$php_ini_file"
     php_conf_set post_max_size "$PHP_DEFAULT_POST_MAX_SIZE" "$php_ini_file"
 done
+# Enable imagick extension by default
+php_conf_set extension "imagick"
 
 # Enable default web server configuration for ownCloud
 info "Creating default web server configuration for ownCloud"
