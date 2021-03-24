@@ -1,0 +1,6 @@
+version: '2'
+services:
+  wavefront-adapter-for-istio:
+    image: docker.io/bitnami/wavefront-adapter-for-istio:0-debian-10
+    ports:
+      - '37671:37671'
