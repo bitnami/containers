@@ -28,7 +28,7 @@ $ docker run --name wavefront-kubernetes-collector bitnami/wavefront-kubernetes-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.3.0`, `1.3.0-debian-10-r32`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector/blob/1.3.0-debian-10-r32/1/debian-10/Dockerfile)
+* [`1`, `1-scratch`, `1.3.0`, `1.3.0-scratch-r0`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector/blob/1.3.0-scratch-r0/1/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wavefront-kubernetes-collector GitHub repo](https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector).
 
@@ -49,7 +49,7 @@ $ docker pull bitnami/wavefront-kubernetes-collector:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/wavefront-kubernetes-collector:latest 'https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector.git#master:1/debian-10'
+$ docker build -t bitnami/wavefront-kubernetes-collector:latest 'https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector.git#master:1/scratch'
 ```
 
 # Configuration
