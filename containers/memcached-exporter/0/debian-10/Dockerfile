@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="memcached-exporter" \
-    BITNAMI_IMAGE_VERSION="0.8.0-debian-10-r104" \
+    BITNAMI_IMAGE_VERSION="0.8.0-debian-10-r105" \
     PATH="/opt/bitnami/memcached-exporter/bin:$PATH"
 
 EXPOSE 9150
