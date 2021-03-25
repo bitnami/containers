@@ -37,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7.3`, `7.3-debian-10`, `7.3.0`, `7.3.0-debian-10-r138`, `latest` (7.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash-exporter/blob/7.3.0-debian-10-r138/7.3/debian-10/Dockerfile)
+* [`7.3`, `7.3-debian-10`, `7.3.0`, `7.3.0-debian-10-r139`, `latest` (7.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash-exporter/blob/7.3.0-debian-10-r139/7.3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/logstash-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-logstash-exporter).
 
