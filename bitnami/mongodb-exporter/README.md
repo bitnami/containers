@@ -31,7 +31,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`0`, `0-debian-10`, `0.20.3`, `0.20.3-debian-10-r12`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb-exporter/blob/0.20.3-debian-10-r12/0/debian-10/Dockerfile)
-* [`0.11`, `0.11-debian-10`, `0.11.2`, `0.11.2-debian-10-r119` (0.11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb-exporter/blob/0.11.2-debian-10-r119/0.11/debian-10/Dockerfile)
+* [`0.11`, `0.11-debian-10`, `0.11.2`, `0.11.2-debian-10-r120` (0.11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb-exporter/blob/0.11.2-debian-10-r120/0.11/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb-exporter).
 
