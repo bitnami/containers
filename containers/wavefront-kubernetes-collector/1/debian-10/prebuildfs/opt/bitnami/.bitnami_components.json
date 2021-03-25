@@ -1,9 +1,0 @@
-{
-    "wavefront": {
-        "arch": "amd64",
-        "digest": "98e2c65761d01cdeb420c2c606c65f58258c314ff360c996bc13a46143961ef1",
-        "distro": "debian-10",
-        "type": "NAMI",
-        "version": "1.3.0-0"
-    }
-}
