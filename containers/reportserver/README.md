@@ -32,7 +32,7 @@ You can find the default credentials and available configuration options in the 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.4.0-6035`, `3.4.0-6035-debian-10-r1`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserver-community/blob/3.4.0-6035-debian-10-r1/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.4.0-6035`, `3.4.0-6035-debian-10-r2`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserver-community/blob/3.4.0-6035-debian-10-r2/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/reportserver-community GitHub repo](https://github.com/bitnami/bitnami-docker-reportserver-community).
 
