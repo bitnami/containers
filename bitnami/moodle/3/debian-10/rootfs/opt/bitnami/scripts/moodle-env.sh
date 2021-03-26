@@ -26,6 +26,7 @@ moodle_env_vars=(
     MOODLE_SKIP_BOOTSTRAP
     MOODLE_INSTALL_EXTRA_ARGS
     MOODLE_SITE_NAME
+    MOODLE_CRON_MINUTES
     MOODLE_USERNAME
     MOODLE_PASSWORD
     MOODLE_DATABASE_MIN_VERSION
@@ -78,6 +79,7 @@ MOODLE_SKIP_BOOTSTRAP="${MOODLE_SKIP_BOOTSTRAP:-"${MOODLE_SKIP_INSTALL:-}"}"
 export MOODLE_SKIP_BOOTSTRAP="${MOODLE_SKIP_BOOTSTRAP:-}" # only used during the first initialization
 export MOODLE_INSTALL_EXTRA_ARGS="${MOODLE_INSTALL_EXTRA_ARGS:-}" # only used during the first initialization
 export MOODLE_SITE_NAME="${MOODLE_SITE_NAME:-New Site}" # only used during the first initialization
+export MOODLE_CRON_MINUTES="${MOODLE_CRON_MINUTES:-1}"
 
 # Moodle credentials
 export MOODLE_USERNAME="${MOODLE_USERNAME:-user}" # only used during the first initialization
@@ -112,4 +114,3 @@ export MOODLE_DATABASE_PASSWORD="${MOODLE_DATABASE_PASSWORD:-}" # only used duri
 export PHP_DEFAULT_MEMORY_LIMIT="256M" # only used at build time
 
 # Custom environment variables may be defined below
-export MOODLE_CRON_MINUTES="${MOODLE_CRON_MINUTES:-1}" # How frequently to run the moodle cron job.  Default to 1 minutes
