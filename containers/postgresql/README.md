@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`13`, `13-debian-10`, `13.2.0`, `13.2.0-debian-10-r43` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/13.2.0-debian-10-r43/13/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.6.0`, `12.6.0-debian-10-r43` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.6.0-debian-10-r43/12/debian-10/Dockerfile)
 * [`11`, `11-debian-10`, `11.11.0`, `11.11.0-debian-10-r45`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.11.0-debian-10-r45/11/debian-10/Dockerfile)
-* [`10`, `10-debian-10`, `10.16.0`, `10.16.0-debian-10-r43` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.16.0-debian-10-r43/10/debian-10/Dockerfile)
+* [`10`, `10-debian-10`, `10.16.0`, `10.16.0-debian-10-r44` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.16.0-debian-10-r44/10/debian-10/Dockerfile)
 * [`9.6`, `9.6-debian-10`, `9.6.21`, `9.6.21-debian-10-r45` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.21-debian-10-r45/9.6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql).
