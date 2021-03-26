@@ -16,16 +16,16 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "68b909cfb5c98625e7d0db5c6eb82a34eca9b8940ada38b7eaa0c238bb510b57  /tmp/bitnami/pkg/cache/java-11.0.10-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/java-11.0.10-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/java-11.0.10-0-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jruby-9.2.16-0-0-linux-amd64-debian-10.tar.gz && \
-    echo "42abf522cb0eb010e3bf32890016cb5d2411e7f921e9652618cfd0cbc5647ebb  /tmp/bitnami/pkg/cache/jruby-9.2.16-0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/jruby-9.2.16-0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/jruby-9.2.16-0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jruby-9.2.16-0-1-linux-amd64-debian-10.tar.gz && \
+    echo "04b965ce50fb988a0e74d1651c6ca17162db035f4f6508cfbb49965df30bd198  /tmp/bitnami/pkg/cache/jruby-9.2.16-0-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/jruby-9.2.16-0-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/jruby-9.2.16-0-1-linux-amd64-debian-10.tar.gz
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS    0/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 ENV BITNAMI_APP_NAME="jruby" \
-    BITNAMI_IMAGE_VERSION="9.2.16-0-debian-10-r22" \
+    BITNAMI_IMAGE_VERSION="9.2.16-0-debian-10-r23" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/jruby/bin:$PATH"
 
 EXPOSE 3000
