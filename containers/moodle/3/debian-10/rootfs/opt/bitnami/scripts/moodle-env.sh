@@ -112,3 +112,4 @@ export MOODLE_DATABASE_PASSWORD="${MOODLE_DATABASE_PASSWORD:-}" # only used duri
 export PHP_DEFAULT_MEMORY_LIMIT="256M" # only used at build time
 
 # Custom environment variables may be defined below
+export MOODLE_CRON_MINUTES="${MOODLE_CRON_MINUTES:-1}" # How frequently to run the moodle cron job.  Default to 1 minutes
