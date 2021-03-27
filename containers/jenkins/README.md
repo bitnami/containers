@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.277.1`, `2.277.1-debian-10-r3`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.277.1-debian-10-r3/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.277.1`, `2.277.1-debian-10-r4`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.277.1-debian-10-r4/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jenkins GitHub repo](https://github.com/bitnami/bitnami-docker-jenkins).
 
@@ -129,6 +129,32 @@ $ docker run -d --name jenkins \
 # Customizations
 
 For customizations, please note that this image is, by default, a non-root container using the user `jenkins` with `uid=1001`.
+
+## Extend this image
+
+To extend the bitnami original image, you can create your own image using a Dockerfile with the format below:
+
+```Dockerfile
+FROM bitnami/jenkins
+## Put your customizations below
+...
+```
+
+Here is an example of extending the image with the following modifications:
+
+- Install the `vim` editor
+
+```Dockerfile
+FROM bitnami/jenkins
+LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+## Change user to perform privileged actions
+USER 0
+## Install 'vim'
+RUN install_packages vim
+## Revert to the original non-root user
+USER 1001
+```
 
 ## Preinstalling plugins
 

@@ -27,9 +27,13 @@ user_exists() {
     getent passwd "$uid" >/dev/null 2>&1
 }
 
-if ! am_i_root && ! user_exists "$(id -u)" && [[ -e "/opt/bitnami/common/lib/libnss_wrapper.so" ]]; then
+if ! am_i_root && ! user_exists "$(id -u)" && [[ -f "$LD_PRELOAD" ]]; then
+    echo "INFO  ==> Configuring libnss_wrapper..."
+    NSS_WRAPPER_PASSWD="$(mktemp)"
+    export NSS_WRAPPER_PASSWD
+    NSS_WRAPPER_GROUP="$(mktemp)"
+    export NSS_WRAPPER_GROUP
     echo "jenkins:x:$(id -u):$(id -g):Jenkins:$JENKINS_HOME:/bin/false" > "$NSS_WRAPPER_PASSWD"
     echo "jenkins:x:$(id -g):" > "$NSS_WRAPPER_GROUP"
-else
-    unset LD_PRELOAD
+    chmod 400 "$NSS_WRAPPER_PASSWD" "$NSS_WRAPPER_GROUP"
 fi
