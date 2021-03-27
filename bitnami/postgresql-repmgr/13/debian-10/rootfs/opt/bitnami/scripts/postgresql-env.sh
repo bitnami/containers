@@ -190,7 +190,6 @@ done
 unset postgresql_env_vars
 
 # Paths
-export PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/common/bin:$PATH"
 export POSTGRESQL_VOLUME_DIR="/bitnami/postgresql"
 export POSTGRESQL_BASE_DIR="/opt/bitnami/postgresql"
 POSTGRESQL_DATA_DIR="${POSTGRESQL_DATA_DIR:-"${POSTGRES_DATA_DIR:-}"}"
