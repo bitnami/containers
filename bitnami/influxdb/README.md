@@ -38,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2`, `2-debian-10`, `2.0.4`, `2.0.4-debian-10-r41`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/2.0.4-debian-10-r41/2/debian-10/Dockerfile)
-* [`1`, `1-debian-10`, `1.8.4`, `1.8.4-debian-10-r55` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/1.8.4-debian-10-r55/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.8.4`, `1.8.4-debian-10-r56` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/1.8.4-debian-10-r56/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/influxdb GitHub repo](https://github.com/bitnami/bitnami-docker-influxdb).
 
