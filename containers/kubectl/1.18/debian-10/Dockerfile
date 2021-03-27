@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="kubectl" \
-    BITNAMI_IMAGE_VERSION="1.18.17-debian-10-r7" \
+    BITNAMI_IMAGE_VERSION="1.18.17-debian-10-r8" \
     PATH="/opt/bitnami/kubectl/bin:$PATH"
 
 USER 1001
