@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="external-dns" \
-    BITNAMI_IMAGE_VERSION="0.7.6-debian-10-r66" \
+    BITNAMI_IMAGE_VERSION="0.7.6-debian-10-r67" \
     PATH="/opt/bitnami/external-dns/bin:$PATH"
 
 EXPOSE 7979
