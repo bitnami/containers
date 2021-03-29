@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.10.3`, `3.10.3-debian-10-r2`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.10.3-debian-10-r2/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.10.3`, `3.10.3-debian-10-r3`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.10.3-debian-10-r3/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/moodle GitHub repo](https://github.com/bitnami/bitnami-docker-moodle).
 
@@ -168,7 +168,6 @@ $ docker network create moodle-network
 #### Step 2. Create a MariaDB container with host volume
 
 ```console
-$ docker volume create --name mariadb_data
 $ docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_moodle \
@@ -182,7 +181,6 @@ $ docker run -d --name mariadb \
 #### Step 3. Create the Moodle<sup>TM</sup> container with host volumes
 
 ```console
-$ docker volume create --name moodle_data
 $ docker run -d --name moodle \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
