@@ -110,7 +110,7 @@ rabbitmq_validate() {
     check_fqdn "RABBITMQ_NODE_NAME"
 
     if is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS"; then
-        is_boolean_yes "$RABBITMQ_SECURE_PASSWORD" && "The RABBITMQ_LOAD_DEFINITIONS and RABBITMQ_SECURE_PASSWORD environment variables cannot be enabled at once."
+        is_boolean_yes "$RABBITMQ_SECURE_PASSWORD" && print_validation_error "The RABBITMQ_LOAD_DEFINITIONS and RABBITMQ_SECURE_PASSWORD environment variables cannot be enabled at once."
     elif [[ -z "$RABBITMQ_PASSWORD" ]]; then
         print_validation_error "You must indicate a password"
     fi
@@ -360,13 +360,18 @@ cluster_partition_handling = ${RABBITMQ_CLUSTER_PARTITION_HANDLING}
 default_permissions.configure = .*
 default_permissions.read = .*
 default_permissions.write = .*
+EOF
+
+        # When loading definitions, default vhost and user/pass won't be created: https://www.rabbitmq.com/definitions.html#import-on-boot
+        if ! is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS"; then
+            cat <<EOF
 default_vhost = ${RABBITMQ_VHOST}
 default_user = ${RABBITMQ_USERNAME}
 EOF
-        # In most cases (i.e. container images), it is not a concern to specify the default password this way
-        # In fact, changing it via 'rabbitmqctl' can be incompatible with some use cases like loading external definitions
-        ! is_boolean_yes "$RABBITMQ_SECURE_PASSWORD" && cat <<< "default_pass = ${RABBITMQ_PASSWORD}"
-        echo
+            # In most cases (i.e. container images), it is not a concern to specify the default password this way
+            ! is_boolean_yes "$RABBITMQ_SECURE_PASSWORD" && cat <<< "default_pass = ${RABBITMQ_PASSWORD}"
+            echo
+        fi
 
         rabbitmq_print_networking_configuration
         rabbitmq_print_management_configuration
@@ -745,7 +750,7 @@ rabbitmq_initialize() {
     else
         ! is_rabbitmq_running && rabbitmq_start_bg
 
-        if is_boolean_yes "$RABBITMQ_SECURE_PASSWORD" && ! is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS"; then
+        if is_boolean_yes "$RABBITMQ_SECURE_PASSWORD"; then
             rabbitmq_change_password "$RABBITMQ_USERNAME" "$RABBITMQ_PASSWORD"
         fi
 
