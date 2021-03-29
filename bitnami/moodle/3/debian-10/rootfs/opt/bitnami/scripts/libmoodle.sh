@@ -279,7 +279,7 @@ moodle_install() {
     )
     # HACK: Change database version check for Azure Database for MariaDB
     ! is_empty_value "$MOODLE_DATABASE_MIN_VERSION" && moodle_fix_manageddb_check
-    pushd "$MOODLE_BASE_DIR" >/dev/null
+    pushd "$MOODLE_BASE_DIR" >/dev/null || exit
     # Run as web server user to avoid having to change permissions/ownership afterwards
     if am_i_root; then
         debug_execute gosu "$WEB_SERVER_DAEMON_USER" "${moodle_install_args[@]}"
@@ -288,7 +288,7 @@ moodle_install() {
     else
         debug_execute "${moodle_install_args[@]}"
     fi
-    popd >/dev/null
+    popd >/dev/null || exit
 }
 
 ########################
@@ -301,7 +301,7 @@ moodle_install() {
 #   true if the script succeeded, false otherwise
 #########################
 moodle_upgrade() {
-    pushd "$MOODLE_BASE_DIR" >/dev/null
+    pushd "$MOODLE_BASE_DIR" >/dev/null || exit
     local -a moodle_upgrade_args=(
         "${PHP_BIN_DIR}/php"
         "admin/cli/upgrade.php"
@@ -310,7 +310,7 @@ moodle_upgrade() {
     )
     am_i_root && moodle_upgrade_args=("gosu" "$WEB_SERVER_DAEMON_USER" "${moodle_upgrade_args[@]}")
     debug_execute "${moodle_upgrade_args[@]}"
-    popd >/dev/null
+    popd >/dev/null || exit
 }
 
 ########################
