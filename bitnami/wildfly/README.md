@@ -42,7 +42,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`23`, `23-debian-10`, `23.0.0`, `23.0.0-debian-10-r8` (23/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/23.0.0-debian-10-r8/23/debian-10/Dockerfile)
+* [`23`, `23-debian-10`, `23.0.0`, `23.0.0-debian-10-r9` (23/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/23.0.0-debian-10-r9/23/debian-10/Dockerfile)
 * [`22`, `22-debian-10`, `22.0.1`, `22.0.1-debian-10-r45`, `latest` (22/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/22.0.1-debian-10-r45/22/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wildfly GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
@@ -339,6 +339,10 @@ $ docker-compose up wildfly
 
 - All volumes have been merged at `/bitnami/wildfly`. Now you only need to mount a single volume at `/bitnami/wildfly` for persistence.
 - The logs are always sent to the `stdout` and are no longer collected in the volume.
+
+# Branch Deprecation Notice
+
+Wildfly's branch 22 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 04-29-2021
 
 # Contributing
 
