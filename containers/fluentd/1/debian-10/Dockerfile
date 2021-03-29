@@ -11,13 +11,13 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl ghostscript gzip imagemagick libc6 libgcc1 libgmp-dev libjemalloc-dev libncurses5-dev libncurses6 libreadline-dev libreadline7 libssl-dev libssl1.1 libstdc++6 libtinfo6 libxml2-dev libxslt1-dev procps sqlite3 tar wget zlib1g zlib1g-dev
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "2.6.6-2" --checksum 4a1c68af2b652fd873124ebb00ec79574007105730059539b1d3223bbea2af34
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "fluentd" "1.12.1-0" --checksum 997425abb71592b28e3dc182b9e51d97c264464a3b2f6d8a3db14071dbcd1ec1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "fluentd" "1.12.2-0" --checksum 93aa3c0d107458095a5d274c5469da6ffd34be734e2ea84157f760fb5e605249
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/fluentd/postunpack.sh
 ENV BITNAMI_APP_NAME="fluentd" \
-    BITNAMI_IMAGE_VERSION="1.12.1-debian-10-r35" \
+    BITNAMI_IMAGE_VERSION="1.12.2-debian-10-r0" \
     GEM_HOME="/opt/bitnami/fluentd" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/common/bin:/opt/bitnami/fluentd/bin:$PATH"
 
