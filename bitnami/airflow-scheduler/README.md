@@ -34,7 +34,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2`, `2-debian-10`, `2.0.1`, `2.0.1-debian-10-r45`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-scheduler/blob/2.0.1-debian-10-r45/2/debian-10/Dockerfile)
-* [`1`, `1-debian-10`, `1.10.15`, `1.10.15-debian-10-r10` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-scheduler/blob/1.10.15-debian-10-r10/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.10.15`, `1.10.15-debian-10-r11` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-scheduler/blob/1.10.15-debian-10-r11/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow-scheduler).
 
@@ -220,10 +220,9 @@ services:
   $ docker network create airflow-tier
   ```
 
-2. Create a volume for PostgreSQL persistence and create a PostgreSQL container
+2. Create the PostgreSQL container with host volumes
 
   ```console
-  $ docker volume create --name postgresql_data
   $ docker run -d --name postgresql \
     -e POSTGRESQL_USERNAME=bn_airflow \
     -e POSTGRESQL_PASSWORD=bitnami1 \
@@ -233,10 +232,9 @@ services:
     bitnami/postgresql:latest
   ```
 
-3. Create a volume for Redis(TM) persistence and create a Redis(TM) container
+3. Create the Redis(TM) container with host volumes
 
   ```console
-  $ docker volume create --name redis_data
   $ docker run -d --name redis \
     -e ALLOW_EMPTY_PASSWORD=yes \
     --net airflow-tier \
@@ -244,10 +242,9 @@ services:
     bitnami/redis:latest
   ```
 
-4. Create volumes for Airflow persistence and launch the container
+4. Create the Airflow container with host volumes
 
   ```console
-  $ docker volume create --name airflow_data
   $ docker run -d --name airflow -p 8080:8080 \
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
     -e AIRFLOW_EXECUTOR=CeleryExecutor \
@@ -263,10 +260,9 @@ services:
     bitnami/airflow:latest
   ```
 
-5. Create volumes for Airflow Scheduler persistence and launch the container
+5. Create the Airflow Scheduler container with host volumes
 
   ```console
-  $ docker volume create --name airflow_scheduler_data
   $ docker run -d --name airflow-scheduler \
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
     -e AIRFLOW_EXECUTOR=CeleryExecutor \
@@ -279,10 +275,9 @@ services:
     bitnami/airflow-scheduler:latest
   ```
 
-6. Create volumes for Airflow Worker persistence and launch the container
+6. Create the Airflow Worker container with host volumes
 
   ```console
-  $ docker volume create --name airflow_worker_data
   $ docker run -d --name airflow-worker \
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
     -e AIRFLOW_EXECUTOR=CeleryExecutor \
