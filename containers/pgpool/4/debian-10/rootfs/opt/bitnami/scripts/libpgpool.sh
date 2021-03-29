@@ -261,8 +261,8 @@ pgpool_healthcheck() {
         # look up backiends that are marked offline
         for node in $(PGPASSWORD="${PGPOOL_POSTGRES_PASSWORD}" psql -U "${PGPOOL_POSTGRES_USERNAME}" -d postgres \
             -h "${PGPOOL_TMP_DIR}" -p "${PGPOOL_PORT_NUMBER}" -tA -c "SHOW pool_nodes;" | grep "down"); do
-            node_id=$(echo ${node} | cut -d'|' -f1)
-            node_host=$(echo ${node} | cut -d'|' -f2)
+            node_id=$(echo "${node}" | cut -d'|' -f1)
+            node_host=$(echo "${node}" | cut -d'|' -f2)
             if PGPASSWORD="${PGPOOL_POSTGRES_PASSWORD}" psql -U "${PGPOOL_POSTGRES_USERNAME}" -d postgres \
                 -h "${node_host}" -p "${PGPOOL_PORT_NUMBER}" -tA -c "SELECT 1" >/dev/null; then
                 # attach backend if it has come back online
