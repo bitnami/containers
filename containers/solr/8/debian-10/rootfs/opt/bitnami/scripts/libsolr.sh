@@ -73,7 +73,7 @@ solr_validate() {
         [[ -z "$SOLR_SSL_TRUST_STORE_PASSWORD" ]] && print_validation_error "You need to provide a password file in SOLR_SSL_TRUST_STORE_PASSWORD"
     fi
 
-    ! is_yes_no_value "$SOLR_ENABLE_CLOUD_MODE" && print_validation_error "SOLR_ENABLE_CLOUD_MODE posible values are yes or no"
+    ! is_yes_no_value "$SOLR_ENABLE_CLOUD_MODE" && print_validation_error "SOLR_ENABLE_CLOUD_MODE possible values are yes or no"
     is_boolean_yes "$SOLR_ENABLE_CLOUD_MODE" && [[ -z "$SOLR_ZK_HOSTS" ]] && print_validation_error "You need to provide the Zookeper node list in SOLR_ZK_HOSTS"
 
     ! is_boolean_yes "$SOLR_CLOUD_BOOTSTRAP" && is_boolean_yes "$SOLR_ENABLE_CLOUD_MODE" && [[ -n "$SOLR_CORE" ]] && info "This node is not a boostrap node and will not create the collection"
