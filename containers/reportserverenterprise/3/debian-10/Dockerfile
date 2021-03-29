@@ -18,7 +18,7 @@ RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="reportserverenterprise" \
-    BITNAMI_IMAGE_VERSION="3.4.0-6035-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="3.4.0-6035-debian-10-r6" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
