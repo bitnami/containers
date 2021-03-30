@@ -396,13 +396,13 @@ cassandra_copy_default_config() {
     find "$CASSANDRA_DEFAULT_CONF_DIR" -type f >$tmp_file_list
     while read -r f; do
         filename="${f#${CASSANDRA_DEFAULT_CONF_DIR}/}" # Get path with subfolder
-        dest="$(echo $f | sed "s?$CASSANDRA_DEFAULT_CONF_DIR?$CASSANDRA_CONF_DIR?g")"
+        dest="$(echo "$f" | sed "s?$CASSANDRA_DEFAULT_CONF_DIR?$CASSANDRA_CONF_DIR?g")"
         if [[ -f "$dest" ]]; then
             debug "Found ${filename}. Skipping default"
         else
             debug "No injected ${filename} file found. Creating default ${filename} file"
             # There are conf files in subfolders. We may need to create them
-            mkdir -p "$(dirname $dest)"
+            mkdir -p "$(dirname "$dest")"
             cp "$f" "$dest"
         fi
     done <$tmp_file_list
@@ -420,7 +420,7 @@ cassandra_copy_default_config() {
 #########################
 cassandra_setup_data_dirs() {
     if ! cassandra_is_file_external "cassandra.yaml"; then
-        cassandra_yaml_set_as_array data_file_directories "${CASSANDRA_DATA_DIR}/data" $CASSANDRA_CONF_FILE
+        cassandra_yaml_set_as_array data_file_directories "${CASSANDRA_DATA_DIR}/data" "$CASSANDRA_CONF_FILE"
 
         cassandra_yaml_set commitlog_directory "$CASSANDRA_COMMITLOG_DIR"
         cassandra_yaml_set hints_directory "${CASSANDRA_DATA_DIR}/hints"
@@ -879,7 +879,7 @@ cassandra_execute_with_retries() {
     # Get command from stdin as we will retry it several times
     local -r command="$(cat)"
 
-    for i in $(seq 1 $retries); do
+    for i in $(seq 1 "$retries"); do
         if (echo "$command" | cassandra_execute "$user" "$pass" "$keyspace" "$host" "$extra_args"); then
             success=yes
             break
