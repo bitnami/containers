@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.19`, `1.19-debian-10`, `1.19.8`, `1.19.8-debian-10-r19`, `latest` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.19.8-debian-10-r19/1.19/debian-10/Dockerfile)
+* [`1.19`, `1.19-debian-10`, `1.19.9`, `1.19.9-debian-10-r0`, `latest` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.19.9-debian-10-r0/1.19/debian-10/Dockerfile)
 * [`1.18`, `1.18-debian-10`, `1.18.0`, `1.18.0-debian-10-r305` (1.18/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.18.0-debian-10-r305/1.18/debian-10/Dockerfile)
 
 # Get this image
@@ -280,7 +280,7 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 The Bitnami NGINX Open Source Docker image is built using a Dockerfile with the structure below:
 
 ```Dockerfile
-FROM bitnami/minideb-extras-base
+FROM bitnami/minideb
 ...
 # Install required system packages and dependencies
 RUN install_packages xxx yyy zzz
