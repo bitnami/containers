@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.277.1`, `2.277.1-debian-10-r6`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.277.1-debian-10-r6/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.277.1`, `2.277.1-debian-10-r7`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.277.1-debian-10-r7/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jenkins GitHub repo](https://github.com/bitnami/bitnami-docker-jenkins).
 
@@ -116,7 +116,7 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 $ docker network create jenkins-network
 ```
 
-#### Step 2. Create the Jenkins the container with host volumes
+#### Step 2. Create the Jenkins container with host volumes
 
 ```console
 $ docker run -d --name jenkins \
