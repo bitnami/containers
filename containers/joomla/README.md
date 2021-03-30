@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.9.25`, `3.9.25-debian-10-r25`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.9.25-debian-10-r25/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.9.25`, `3.9.25-debian-10-r26`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.9.25-debian-10-r26/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/joomla GitHub repo](https://github.com/bitnami/bitnami-docker-joomla).
 
@@ -166,7 +166,6 @@ $ docker network create joomla-network
 #### Step 2. Create a MariaDB container with host volume
 
 ```console
-$ docker volume create --name mariadb_data
 $ docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_joomla \
@@ -177,10 +176,9 @@ $ docker run -d --name mariadb \
   bitnami/mariadb:latest
 ```
 
-#### Step 3. Create the Joomla! the container with host volumes
+#### Step 3. Create the Joomla! container with host volumes
 
 ```console
-$ docker volume create --name joomla_data
 $ docker run -d --name joomla \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
