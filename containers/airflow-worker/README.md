@@ -33,7 +33,7 @@ You can find the default credentials and available configuration options in the 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.0.1`, `2.0.1-debian-10-r45`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker-scheduler/blob/2.0.1-debian-10-r45/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.0.1`, `2.0.1-debian-10-r46`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker-scheduler/blob/2.0.1-debian-10-r46/2/debian-10/Dockerfile)
 * [`1`, `1-debian-10`, `1.10.15`, `1.10.15-debian-10-r12` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker-scheduler/blob/1.10.15-debian-10-r12/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow-worker).
