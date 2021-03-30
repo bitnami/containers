@@ -18,7 +18,7 @@ RUN ln -sf /opt/bitnami/prometheus-operator/bin/prometheus-config-reloader /bin/
 RUN ln -sf /opt/bitnami/prometheus-operator/bin/operator /bin/operator
 
 ENV BITNAMI_APP_NAME="prometheus-operator" \
-    BITNAMI_IMAGE_VERSION="0.46.0-debian-10-r25" \
+    BITNAMI_IMAGE_VERSION="0.46.0-debian-10-r26" \
     PATH="/opt/bitnami/prometheus-operator/bin:$PATH"
 
 EXPOSE 8080
