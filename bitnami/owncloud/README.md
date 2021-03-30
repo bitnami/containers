@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10`, `10-debian-10`, `10.6.0`, `10.6.0-debian-10-r92`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.6.0-debian-10-r92/10/debian-10/Dockerfile)
+* [`10`, `10-debian-10`, `10.6.0`, `10.6.0-debian-10-r93`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.6.0-debian-10-r93/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/owncloud GitHub repo](https://github.com/bitnami/bitnami-docker-owncloud).
 
@@ -160,7 +160,6 @@ $ docker network create owncloud-network
 #### Step 2. Create a MariaDB container with host volume
 
 ```console
-$ docker volume create --name mariadb_data
 $ docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_owncloud \
@@ -171,10 +170,9 @@ $ docker run -d --name mariadb \
   bitnami/mariadb:latest
 ```
 
-#### Step 3. Create the ownCloud the container with host volumes
+#### Step 3. Create the ownCloud container with host volumes
 
 ```console
-$ docker volume create --name owncloud_data
 $ docker run -d --name owncloud \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
