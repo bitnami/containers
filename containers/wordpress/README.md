@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`5`, `5-debian-10`, `5.7.0`, `5.7.0-debian-10-r14`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.7.0-debian-10-r14/5/debian-10/Dockerfile)
+* [`5`, `5-debian-10`, `5.7.0`, `5.7.0-debian-10-r15`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.7.0-debian-10-r15/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress).
 
@@ -161,7 +161,7 @@ $ docker run -d --name mariadb \
 
 > NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-#### Step 3. Create the WordPress the container with host volumes
+#### Step 3. Create the WordPress container with host volumes
 
 ```console
 $ docker run -d --name wordpress \
