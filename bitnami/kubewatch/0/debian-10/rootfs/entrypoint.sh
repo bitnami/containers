@@ -2,9 +2,9 @@
 
 CONF_FILE="${KW_CONFIG:-${HOME}}/.kubewatch.yaml";
 
-if [ ! -e ${CONF_FILE} ]; then
+if [ ! -e "${CONF_FILE}" ]; then
     echo "==> Writing config file..."
-    cat > ${CONF_FILE} << EOF
+    cat > "${CONF_FILE}" << EOF
 handler:
   slack:
     token: "${KW_SLACK_TOKEN}"
