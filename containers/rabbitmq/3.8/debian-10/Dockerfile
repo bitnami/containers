@@ -10,7 +10,7 @@ ENV HOME="/opt/bitnami/rabbitmq/.rabbitmq" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libssl1.1 libtinfo6 locales procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "erlang" "22.3.0-1" --checksum a53fc3e5da7d8b315a33c3f809ad6687e35a4e307ce7038dd9edb47d91733f6a
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "erlang" "23.3.1-0" --checksum defd24cdd278ead12e6ddde6edd0d1b578398abb7325d00a20579daed5977c38
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rabbitmq" "3.8.14-0" --checksum 0919e3c94d5f1ac169b2647f6118f094b72c1dafb80d618c52087e23d94be107
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN chmod g+rwX /opt/bitnami
@@ -24,7 +24,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/rabbitmq/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.8.14-debian-10-r24" \
+    BITNAMI_IMAGE_VERSION="3.8.14-debian-10-r25" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en"
 
