@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.0.3-6`, `3.0.3-6-debian-10-r218`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-6-debian-10-r218/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.0.3-6`, `3.0.3-6-debian-10-r219`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-6-debian-10-r219/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/opencart GitHub repo](https://github.com/bitnami/bitnami-docker-opencart).
 
@@ -168,7 +168,6 @@ $ docker network create opencart-network
 #### Step 2. Create a MariaDB container with host volume
 
 ```console
-$ docker volume create --name mariadb_data
 $ docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_opencart \
@@ -179,10 +178,9 @@ $ docker run -d --name mariadb \
   bitnami/mariadb:latest
 ```
 
-#### Step 3. Create the OpenCart the container with host volumes
+#### Step 3. Create the OpenCart container with host volumes
 
 ```console
-$ docker volume create --name opencart_data
 $ docker run -d --name opencart \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
