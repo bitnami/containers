@@ -30,7 +30,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`16-prod`, `16.0.0-prod-debian-10-r0` (16-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/16.0.0-prod-debian-10-r0/16-prod/debian-10/Dockerfile), [`16-prod-prod`, `16.0.0-prod-debian-10-r0-prod` (16-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/16.0.0-prod-debian-10-r0/16-prod/debian-10/prod/Dockerfile)
+- [`16-prod`, `16.0.0-prod-debian-10-r1` (16-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/16.0.0-prod-debian-10-r1/16-prod/debian-10/Dockerfile), [`16-prod-prod`, `16.0.0-prod-debian-10-r1-prod` (16-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/16.0.0-prod-debian-10-r1/16-prod/debian-10/prod/Dockerfile)
 - [`16`, `16.0.0-debian-10-r0` (16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/16.0.0-debian-10-r0/16/debian-10/Dockerfile), [`16-prod`, `16.0.0-debian-10-r0-prod` (16/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/16.0.0-debian-10-r0/16/debian-10/prod/Dockerfile)
 - [`15-prod`, `15.0.2-prod-debian-10-r64` (15-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/15.0.2-prod-debian-10-r64/15-prod/debian-10/Dockerfile), [`15-prod-prod`, `15.0.2-prod-debian-10-r64-prod` (15-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/15.0.2-prod-debian-10-r64/15-prod/debian-10/prod/Dockerfile)
 - [`15`, `15.0.2-debian-10-r64` (15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/15.0.2-debian-10-r64/15/debian-10/Dockerfile), [`15-prod`, `15.0.2-debian-10-r64-prod` (15/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/15.0.2-debian-10-r64/15/debian-10/prod/Dockerfile)
@@ -146,9 +146,13 @@ $ docker-compose up java
 
 # Notable Changes
 
-## 1.8.252-debian-10-r0, 11.0.7-debian-10-r7, and 15.0.1-debian-10-r20 
+## 1.8.252-debian-10-r0, 11.0.7-debian-10-r7, and 15.0.1-debian-10-r20
 
 - Java distribution has been migrated from AdoptOpenJDK to OpenJDK Liberica. As part of VMware, we have an agreement with Bell Software to distribute the Liberica distribution of OpenJDK. That way, we can provide support & the latest versions and security releases for Java.
+
+# Branch Deprecation Notice
+
+Java's branch 15 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 04-30-2021
 
 # Contributing
 
