@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.8.0`, `7.8.0-debian-10-r176`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.8.0-debian-10-r176/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.8.0`, `7.8.0-debian-10-r177`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.8.0-debian-10-r177/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jasperreports GitHub repo](https://github.com/bitnami/bitnami-docker-jasperreports).
 
@@ -158,7 +158,7 @@ In this case you need to specify the directories to mount on the run command. Th
 3. Create the JasperReports Server container with host volume:
 
   ```console
-  $  $ docker run -d --name jasperreports -p 80:8080 \
+  $ docker run -d --name jasperreports -p 80:8080 \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e JASPERREPORTS_DATABASE_USER=bn_jasperreports \
     -e JASPERREPORTS_DATABASE_NAME=bitnami_jasperreports \
