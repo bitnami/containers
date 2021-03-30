@@ -10,14 +10,14 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl ghostscript gzip imagemagick libbz2-1.0 libc6 libffi6 libgcc1 liblzma5 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 procps sudo tar zlib1g
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
-RUN bitnami-pkg install node-12.21.0-0 --checksum 04dd55d91642d37fc68335a267fe00ebf9fca8b90b9cae254c82423ed1d0d619
+RUN bitnami-pkg install node-12.22.0-0 --checksum bac1ce830d537dfcef8c4fcc66558852c81805ba6465673dc84da9ce12bfdb77
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
 RUN bitnami-pkg unpack parse-dashboard-2.1.0-1 --checksum 2bd96d3dd57b1f48ab4a8fea2d9ff24070427863375de1259270d48f12ed3bcb
 RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="2.1.0-debian-10-r319" \
+    BITNAMI_IMAGE_VERSION="2.1.0-debian-10-r320" \
     NAMI_PREFIX="/.nami" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
