@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`20200729`, `20200729-debian-10`, `20200729.0.0`, `20200729.0.0-debian-10-r209`, `latest` (20200729/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/20200729.0.0-debian-10-r209/20200729/debian-10/Dockerfile)
+* [`20200729`, `20200729-debian-10`, `20200729.0.0`, `20200729.0.0-debian-10-r210`, `latest` (20200729/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/20200729.0.0-debian-10-r210/20200729/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dokuwiki GitHub repo](https://github.com/bitnami/bitnami-docker-dokuwiki).
 
@@ -95,10 +95,9 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 $ docker network create dokuwiki-network
 ```
 
-#### Step 2. Create the DokuWiki the container with host volumes
+#### Step 2. Create the DokuWiki container with host volumes
 
 ```console
-$ docker volume create --name dokuwiki_data
 $ docker run -d --name dokuwiki \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
