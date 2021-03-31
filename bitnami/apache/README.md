@@ -45,7 +45,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2.4`, `2.4-debian-10`, `2.4.46`, `2.4.46-debian-10-r212`, `latest` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.46-debian-10-r212/2.4/debian-10/Dockerfile)
+* [`2.4`, `2.4-debian-10`, `2.4.46`, `2.4.46-debian-10-r213`, `latest` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.46-debian-10-r213/2.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/apache GitHub repo](https://github.com/bitnami/bitnami-docker-apache).
 
@@ -291,7 +291,7 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 The Bitnami Apache Docker image is built using a Dockerfile with the structure below:
 
 ```Dockerfile
-FROM bitnami/minideb-extras-base
+FROM bitnami/minideb
 ...
 # Install required system packages and dependencies
 RUN install_packages xxx yyy zzz
