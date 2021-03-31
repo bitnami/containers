@@ -11,12 +11,12 @@ RUN /build/install-nami.sh
 RUN bitnami-pkg unpack postgresql-client-10.16.0-0 --checksum 6ae2df74c4cc145690104c9bfbd4f9977cc00d26b3a010bb1eba74d92048485d
 RUN bitnami-pkg install java-11.0.10-0 --checksum 68b909cfb5c98625e7d0db5c6eb82a34eca9b8940ada38b7eaa0c238bb510b57
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
-RUN bitnami-pkg unpack sonarqube-8.7.1-0 --checksum d4fc163d2f7a167bfa30995019495ef1abffbcbf6e5ad6b5b1c09b001d6fb56d
+RUN bitnami-pkg unpack sonarqube-8.8.0-0 --checksum 0685dd05fc96a66c3a663f9eaff8e5c13ce8131056cf7f286df803c0201d230d
 RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="sonarqube" \
-    BITNAMI_IMAGE_VERSION="8.7.1-debian-10-r13" \
+    BITNAMI_IMAGE_VERSION="8.8.0-debian-10-r0" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux" \
