@@ -214,7 +214,7 @@ The Redis(TM) Sentinel instance can be customized by specifying environment vari
 - `REDIS_SENTINEL_PASSWORD`: Password to authenticate with this sentinel and to authenticate to other sentinels. No defaults. Needs to be identical on all sentinels. As an alternative, you can mount a file with the password and set the `REDIS_SENTINEL_PASSWORD_FILE` variable.
 - `REDIS_SENTINEL_DOWN_AFTER_MILLISECONDS`: Number of milliseconds before master is declared down. Default: **60000**.
 - `REDIS_SENTINEL_FAILOVER_TIMEOUT`: Specifies the failover timeout in milliseconds. Default: **180000**.
-- `REDIS_SENTINEL_RESOLVE_HOSTNAMES`: Enables sentinel hostnames support. This is available only for Redis(TM) 6.2 or higher.  Default: **yes**.
+- `REDIS_SENTINEL_RESOLVE_HOSTNAMES`: Enables sentinel hostnames support. This is available only for Redis(TM) 6.2 or higher.  Default: **no**.
 - `REDIS_SENTINEL_TLS_ENABLED`: Whether to enable TLS for traffic or not. Default: **no**.
 - `REDIS_SENTINEL_TLS_PORT_NUMBER`: Port used for TLS secure traffic. Default: **26379**.
 - `REDIS_SENTINEL_TLS_CERT_FILE`: File containing the certificate file for the TSL traffic. No defaults.
