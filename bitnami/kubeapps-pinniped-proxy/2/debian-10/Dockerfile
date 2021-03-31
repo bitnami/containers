@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="kubeapps-pinniped-proxy" \
-    BITNAMI_IMAGE_VERSION="2.3.1-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="2.3.1-debian-10-r2" \
     PATH="/opt/bitnami/kubeapps-pinniped-proxy/bin:$PATH"
 
 USER 1001
