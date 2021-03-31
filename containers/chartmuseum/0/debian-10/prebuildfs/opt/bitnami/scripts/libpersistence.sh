@@ -35,7 +35,7 @@ persist_app() {
         warn "No files are configured to be persisted"
         return
     fi
-    pushd "$install_dir" >/dev/null
+    pushd "$install_dir" >/dev/null || exit
     local file_to_persist_relative file_to_persist_destination file_to_persist_destination_folder
     local -r tmp_file="/tmp/perms.acl"
     for file_to_persist in "${files_to_persist[@]}"; do
@@ -53,16 +53,16 @@ persist_app() {
         ensure_dir_exists "$file_to_persist_destination_folder"
         cp -Lr --preserve=links "$file_to_persist_relative" "$file_to_persist_destination_folder"
         # Restore permissions
-        pushd "$persist_dir" >/dev/null
+        pushd "$persist_dir" >/dev/null || exit
         if am_i_root; then
             setfacl --restore="$tmp_file"
         else
             # When running as non-root, don't change ownership
             setfacl --restore=<(grep -E -v '^# (owner|group):' "$tmp_file")
         fi
-        popd >/dev/null
+        popd >/dev/null || exit
     done
-    popd >/dev/null
+    popd >/dev/null || exit
     rm -f "$tmp_file"
     # Install the persisted files into the installation directory, via symlinks
     restore_persisted_app "$@"
