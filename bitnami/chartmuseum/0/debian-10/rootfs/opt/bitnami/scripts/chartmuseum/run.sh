@@ -2,7 +2,7 @@
 #
 # Bitnami Chartmuseum run
 
-# shellcheck disable=SC1091
+# shellcheck disable=SC1091,SC2086
 
 set -o errexit
 set -o nounset
