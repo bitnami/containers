@@ -35,7 +35,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`7`, `7-debian-10`, `7.1.1`, `7.1.1-debian-10-r1`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/7.1.1-debian-10-r1/7/debian-10/Dockerfile)
-* [`6`, `6-debian-10`, `6.1.1`, `6.1.1-debian-10-r194` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/6.1.1-debian-10-r194/6/debian-10/Dockerfile)
+* [`6`, `6-debian-10`, `6.1.1`, `6.1.1-debian-10-r195` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/6.1.1-debian-10-r195/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/oauth2-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-oauth2-proxy).
 
