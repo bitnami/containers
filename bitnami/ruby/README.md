@@ -41,7 +41,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`2.6-prod`, `2.6-prod-debian-10`, `2.6.6-prod`, `2.6.6-prod-debian-10-r337` (2.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.6-prod-debian-10-r337/2.6-prod/debian-10/Dockerfile)
 * [`2.6`, `2.6-debian-10`, `2.6.6`, `2.6.6-debian-10-r336`, `latest` (2.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.6-debian-10-r336/2.6/debian-10/Dockerfile)
 * [`2.5-prod`, `2.5-prod-debian-10`, `2.5.8-prod`, `2.5.8-prod-debian-10-r350` (2.5-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.8-prod-debian-10-r350/2.5-prod/debian-10/Dockerfile)
-* [`2.5`, `2.5-debian-10`, `2.5.8`, `2.5.8-debian-10-r335` (2.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.8-debian-10-r335/2.5/debian-10/Dockerfile)
+* [`2.5`, `2.5-debian-10`, `2.5.8`, `2.5.8-debian-10-r336` (2.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.8-debian-10-r336/2.5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ruby GitHub repo](https://github.com/bitnami/bitnami-docker-ruby).
 
@@ -314,6 +314,10 @@ $ docker-compose up ruby
 ## 2.2.3-0-r01 (2015-08-26)
 
 - Permissions fixed so `bitnami` user can install gems without needing `sudo`.
+
+# Branch Deprecation Notice
+
+Ruby's branch 25 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 05-01-2021
 
 # Contributing
 
