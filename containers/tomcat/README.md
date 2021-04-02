@@ -46,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`9.0`, `9.0-debian-10`, `9.0.44`, `9.0.44-debian-10-r21`, `latest` (9.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.44-debian-10-r21/9.0/debian-10/Dockerfile)
 * [`8.5`, `8.5-debian-10`, `8.5.64`, `8.5.64-debian-10-r21` (8.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.64-debian-10-r21/8.5/debian-10/Dockerfile)
-* [`7`, `7-debian-10`, `7.0.108`, `7.0.108-debian-10-r50` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.108-debian-10-r50/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.0.108`, `7.0.108-debian-10-r51` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/7.0.108-debian-10-r51/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tomcat GitHub repo](https://github.com/bitnami/bitnami-docker-tomcat).
 
@@ -301,6 +301,10 @@ $ docker-compose up tomcat
 
 - All volumes have been merged at `/bitnami/tomcat`. Now you only need to mount a single volume at `/bitnami/tomcat` for persistence.
 - The logs are always sent to the `stdout` and are no longer collected in the volume.
+
+# Branch Deprecation Notice
+
+Tomcat's branch 7 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 05-01-2021
 
 # Contributing
 
