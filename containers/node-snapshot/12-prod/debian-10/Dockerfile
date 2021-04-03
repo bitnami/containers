@@ -1,4 +1,4 @@
-FROM docker.io/bitnami/minideb:buster-snapshot-20210401T204253Z-amd64
+FROM docker.io/bitnami/minideb:buster-snapshot-20210402T203729Z-amd64
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV OS_ARCH="amd64" \
@@ -8,10 +8,10 @@ ENV OS_ARCH="amd64" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl ghostscript gzip imagemagick libbz2-1.0 libc6 libffi6 libgcc1 liblzma5 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 procps tar wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-12.22.0-1-linux-amd64-debian-10.tar.gz && \
-    echo "b72e0a41151eb6c3229d5a626941c095a500b7b35b01feea3e0f3050daa7079b  /tmp/bitnami/pkg/cache/node-12.22.0-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/node-12.22.0-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/node-12.22.0-1-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-12.22.0-2-linux-amd64-debian-10.tar.gz && \
+    echo "2049844e01142c1c8266eadf7626fa21f87ee9708c3974828dd4d97e4d5a728d  /tmp/bitnami/pkg/cache/node-12.22.0-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/node-12.22.0-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/node-12.22.0-2-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
@@ -19,7 +19,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 ENV BITNAMI_APP_NAME="node-snapshot" \
-    BITNAMI_IMAGE_VERSION="12.22.0-prod-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="12.22.0-prod-debian-10-r5" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 3000
