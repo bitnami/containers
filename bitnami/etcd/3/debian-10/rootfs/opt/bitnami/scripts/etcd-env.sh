@@ -27,6 +27,7 @@ etcd_env_vars=(
     ETCD_START_FROM_SNAPSHOT
     ETCD_DISASTER_RECOVERY
     ETCD_ON_K8S
+    ETCD_INIT_SNAPSHOT_FILENAME
     ETCDCTL_API
     ETCD_NAME
     ETCD_LOG_LEVEL
@@ -78,6 +79,7 @@ export ETCD_CLUSTER_DOMAIN="${ETCD_CLUSTER_DOMAIN:-}"
 export ETCD_START_FROM_SNAPSHOT="${ETCD_START_FROM_SNAPSHOT:-no}"
 export ETCD_DISASTER_RECOVERY="${ETCD_DISASTER_RECOVERY:-no}"
 export ETCD_ON_K8S="${ETCD_ON_K8S:-no}"
+export ETCD_INIT_SNAPSHOT_FILENAME="${ETCD_INIT_SNAPSHOT_FILENAME:-}"
 
 # etcd native environment variables (see https://etcd.io/docs/current/op-guide/configuration)
 export ETCDCTL_API="${ETCDCTL_API:-3}"
