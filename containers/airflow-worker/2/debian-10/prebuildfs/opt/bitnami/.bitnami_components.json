@@ -1,10 +1,10 @@
 {
     "airflow-worker": {
         "arch": "amd64",
-        "digest": "dfc165ae7921141a07a0db6af6b87b836159b13def56c13f5f94921c5ea63d23",
+        "digest": "cf754bdc8e231d408275c1971d9a732576e346e0cd4af1ea426739bf3e62538d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.0.1-1"
+        "version": "2.0.1-2"
     },
     "gosu": {
         "arch": "amd64",
@@ -12,6 +12,13 @@
         "distro": "debian-10",
         "type": "NAMI",
         "version": "1.12.0-2"
+    },
+    "ini-file": {
+        "arch": "amd64",
+        "digest": "d89528e5d733f34ae030984584659ff10a36370d40332bd8d41c047764d39cda",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.3.0-2"
     },
     "postgresql-client": {
         "arch": "amd64",
@@ -27,11 +34,11 @@
         "type": "NAMI",
         "version": "3.8.9-0"
     },
-    "tini": {
+    "wait-for-port": {
         "arch": "amd64",
-        "digest": "9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d",
+        "digest": "7521d9a4f9e4e182bf32977e234026caa7b03759799868335bccb1edd8f8fd12",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.19.0-1"
+        "version": "1.0.0-3"
     }
 }
