@@ -13,6 +13,10 @@ eval "$(ldap_env)"
 
 readonly command="$(command -v slapd)"
 
+# Reduce maximum number of open file descriptors to 1024
+# https://github.com/docker/docker/issues/8231
+ulimit -n 1024
+
 flags=("-h" "ldap://:${LDAP_PORT_NUMBER}/ ldapi:///")
 
 # Add LDAPS URI when TLS is enabled
