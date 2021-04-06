@@ -13,9 +13,9 @@ eval "$(ldap_env)"
 
 readonly command="$(command -v slapd)"
 
-# Reduce maximum number of open file descriptors to 1024
+# Reduce maximum number of open file descriptors
 # https://github.com/docker/docker/issues/8231
-ulimit -n 1024
+ulimit -n "$LDAP_ULIMIT_NOFILES"
 
 flags=("-h" "ldap://:${LDAP_PORT_NUMBER}/ ldapi:///")
 
