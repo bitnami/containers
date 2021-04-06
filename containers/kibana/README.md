@@ -35,7 +35,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.10.2`, `7.10.2-debian-10-r61`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/7.10.2-debian-10-r61/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.12.0`, `7.12.0-debian-10-r0`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/7.12.0-debian-10-r0/7/debian-10/Dockerfile)
+* [`7.10.2`, `7.10.2-debian-10`, `7.10.2-debian-10-r0` (7.10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/7.10.2-debian-10-r0/7.10.2/debian-10/Dockerfile)
 * [`6`, `6-debian-10`, `6.8.15`, `6.8.15-debian-10-r11` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.8.15-debian-10-r11/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kibana GitHub repo](https://github.com/bitnami/bitnami-docker-kibana).
@@ -108,7 +109,7 @@ The above examples define docker volumes namely `elasticsearch_data` and `kibana
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
 ```console
-$ docker run -v /path/to/kibana-persistence:/bitnami bitnami/kibana:latest
+$ docker run -v /path/to/kibana-persistence:/bitnami/kibana bitnami/kibana:latest
 ```
 
 or modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-kibana/blob/master/docker-compose.yml) file present in this repository:
@@ -117,7 +118,7 @@ or modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docke
 kibana:
   ...
   volumes:
-    - /path/to/kibana-persistence:/bitnami
+    - /path/to/kibana-persistence:/bitnami/kibana
   ...
 ```
 
@@ -195,6 +196,36 @@ $ docker-compose up -d
 
 # Configuration
 
+## Environment variables
+
+When you start the kibana image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. The following environment values are provided to custom Kibana:
+
+- `KIBANA_ELASTICSEARCH_URL`: Elasticsearch URL. Provide Client node url in the case of a cluster. Default: **elasticsearch**
+- `KIBANA_ELASTICSEARCH_PORT_NUMBER`: Elasticsearch port. Default: **9200**
+- `KIBANA_HOST`: Kibana host. Default: **0.0.0.0**
+- `KIBANA_PORT_NUMBER`: Kibana port. Default: **5601**
+- `KIBANA_WAIT_READY_MAX_RETRIES`: Max retries to wait for Kibana to be ready. Default: **30**
+- `KIBANA_INITSCRIPTS_START_SERVER`: Whether to start the Kibana server before executing the init scripts. Default: **yes**
+- `KIBANA_FORCE_INITSCRIPTS`: Whether to force the execution of the init scripts. Default: **no**
+
+### Specifying Environment Variables using Docker Compose
+
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-kibana/blob/master/docker-compose.yml) file present in this repository:
+
+```yaml
+kibana:
+  ...
+  environment:
+    - KIBANA_ELASTICSEARCH_URL=elasticsearch
+  ...
+```
+
+### Specifying Environment Variables on the Docker command line
+
+```console
+$ docker run -d -e KIBANA_ELASTICSEARCH_URL=elasticsearch --name kibana bitnami/kibana:latest
+```
+
 ## Initializing a new instance
 
 When the container is executed for the first time, it will execute the files with extension `.sh`, located at `/docker-entrypoint-initdb.d`.
@@ -219,7 +250,7 @@ or modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docke
 kibana:
   ...
   volumes:
-    - /path/to/kibana-persistence:/bitnami
+    - /path/to/kibana-persistence:/bitnami/kibana
   ...
 ```
 
@@ -329,6 +360,13 @@ $ docker-compose up kibana
 ```
 
 # Notable Changes
+
+## 6.8.15-debian-10-r12 & 7.10.2-debian-10-r62 & 7.12.0-debian-10-r0
+
+- The size of the container image has been decreased.
+- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+- Kibana 7.12.0 version or later are licensed under the Elastic License that is not currently accepted as an Open Source license by the Open Source Initiative (OSI).
+- Kibana 7.12.0 version or later are including x-pack plugin installed by default. Follow official documentation to use it.
 
 ## 6.5.1-r3 & 5.6.13-r20
 
