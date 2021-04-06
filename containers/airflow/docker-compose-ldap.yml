@@ -17,7 +17,9 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
   airflow-scheduler:
-    image: docker.io/bitnami/airflow-scheduler:2-debian-10
+    # TODO: to be reverted to use proper registry/distro on T39132
+    # image: docker.io/bitnami/airflow-scheduler:2-debian-10
+    image: bitnami/airflow-scheduler:2
     environment:
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
@@ -26,7 +28,9 @@ services:
     volumes:
       - airflow_scheduler_data:/bitnami
   airflow-worker:
-    image: docker.io/bitnami/airflow-worker:2-debian-10
+    # TODO: to be reverted to use proper registry/distro on T39132
+    # image: docker.io/bitnami/airflow-worker:2-debian-10
+    image: bitnami/airflow-worker:2
     environment:
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
