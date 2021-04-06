@@ -57,6 +57,7 @@ export LDAP_PASSWORDS="${LDAP_PASSWORDS:-bitnami1,bitnami2}"
 export LDAP_USER_DC="${LDAP_USER_DC:-users}"
 export LDAP_GROUP="${LDAP_GROUP:-readers}"
 export LDAP_ENABLE_TLS="${LDAP_ENABLE_TLS:-no}"
+export LDAP_ULIMIT_NOFILES="${LDAP_ULIMIT_NOFILES:-1024}"
 EOF
 }
 
@@ -168,6 +169,7 @@ ldap_start_bg() {
     local -a flags=("-h" "ldap://:${LDAP_PORT_NUMBER}/ ldapi:/// " "-F" "${LDAP_CONF_DIR}/slapd.d")
     if is_ldap_not_running; then
         info "Starting OpenLDAP server in background"
+        ulimit -n "$LDAP_ULIMIT_NOFILES"
         am_i_root && flags=("-u" "$LDAP_DAEMON_USER" "${flags[@]}")
         debug_execute slapd "${flags[@]}"
     fi
