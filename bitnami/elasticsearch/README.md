@@ -46,6 +46,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
+* [`7.10.2`, `7.10.2-debian-10`, `7.10.2-debian-10-r75` (7.10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.10.2-debian-10-r75/7.10.2/debian-10/Dockerfile)
 * [`7`, `7-debian-10`, `7.10.2`, `7.10.2-debian-10-r74`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.10.2-debian-10-r74/7/debian-10/Dockerfile)
 * [`6`, `6-debian-10`, `6.8.15`, `6.8.15-debian-10-r13` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.15-debian-10-r13/6/debian-10/Dockerfile)
 
@@ -422,6 +423,11 @@ $ docker-compose up elasticsearch
 ```
 
 ## Notable Changes
+
+### 7.12.0-debian-10-r0
+
+* Elasticsearch 7.12.0 version or later are licensed under the Elastic License that is not currently accepted as an Open Source license by the Open Source Initiative (OSI).
+* Elasticsearch 7.12.0 version or later are including x-pack plugin installed by default. Follow official documentation to use it.
 
 ### 6.8.5-debian-9-r0, 6.8.5-ol-7-r1, 7.4.2-debian-9-r10, 7.4.2-ol-7-r27
 
