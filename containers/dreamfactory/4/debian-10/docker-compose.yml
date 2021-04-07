@@ -2,23 +2,23 @@ version: '2'
 
 services:
   mariadb:
-    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
+    image: docker.io/bitnami/mariadb:10.3
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'mariadb_data:/bitnami'
   redis:
-    image: 'docker.io/bitnami/redis:6.0-debian-10'
+    image: docker.io/bitnami/redis:6.0
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'redis_data:/bitnami'
   mongodb:
-    image: 'docker.io/bitnami/mongodb:4.2-debian-10'
+    image: docker.io/bitnami/mongodb:4.2
     volumes:
       - 'mongodb_data:/bitnami'
   dreamfactory:
-    image: 'docker.io/bitnami/dreamfactory:4-debian-10'
+    image: docker.io/bitnami/dreamfactory:4
     ports:
       - '80:80'
       - '443:443'
