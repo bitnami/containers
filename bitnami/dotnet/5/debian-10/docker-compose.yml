@@ -1,7 +1,7 @@
 version: '2'
 services:
   dotnet:
-    image: docker.io/bitnami/dotnet:5-debian-10
+    image: docker.io/bitnami/dotnet:5
     command: ["tail", "-f", "/dev/null"] # To keep the container running
     volumes:
       - dotnet_data:/app
