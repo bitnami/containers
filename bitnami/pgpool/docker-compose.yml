@@ -35,7 +35,7 @@ services:
       - REPMGR_NODE_NAME=pg-1
       - REPMGR_NODE_NETWORK_NAME=pg-1
   pgpool:
-    image: docker.io/bitnami/pgpool:4-debian-10
+    image: docker.io/bitnami/pgpool:4
     ports:
       - 5432:5432
     environment:
