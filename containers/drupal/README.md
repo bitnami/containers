@@ -228,6 +228,8 @@ Available environment variables:
  - `DRUPAL_USERNAME`: Drupal application username. Default: **user**
  - `DRUPAL_PASSWORD`: Drupal application password. Default: **bitnami**
  - `DRUPAL_EMAIL`: Drupal application email. Default: **user@example.com**
+ - `DRUPAL_CONFIG_SYNC_DIR`: Drupal configuration file directory. Default: **sites/default/files/config_${RANDOM_STRING}**
+ - `DRUPAL_HASH_SALT`: Salt used for hardening against SQL injection. Default: **A random string**
 
 ##### Use an existing database
 

@@ -143,12 +143,25 @@ drupal_initialize() {
                 info "Configuring SMTP"
                 drupal_configure_smtp
             fi
-            info "Flushing Drupal cache"
-            drupal_flush_cache
         else
             info "An already initialized Drupal database was provided, configuration will be skipped"
+            if is_empty_value "$DRUPAL_DATABASE_TLS_CA_FILE"; then
+                drupal_set_database_settings
+            else
+                drupal_set_database_ssl_settings
+            fi
+
+            # Drupal expects a directory for storing site configuration
+            # For more info see https://www.drupal.org/docs/configuration-management
+            drupal_create_config_directory
+
+            # Drupal needs a hash value to build one-time login links, cancel links, form tokens, etc.
+            drupal_set_hash_salt
             drupal_update_database
         fi
+
+        info "Flushing Drupal cache"
+        drupal_flush_cache
 
         info "Persisting Drupal installation"
         persist_app "$app_name" "$DRUPAL_DATA_TO_PERSIST"
@@ -278,6 +291,41 @@ drupal_site_install() {
     if am_i_root; then
         configure_permissions_ownership "$DRUPAL_CONF_FILE" -u "root" -g "$WEB_SERVER_DAEMON_USER" -f "644"
     fi
+}
+
+########################
+# Drupal Create Config Directory
+# Globals:
+#   *
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+drupal_create_config_directory() {
+    local config_sync_dir="${DRUPAL_CONFIG_SYNC_DIR:-}"
+    if is_empty_value "$config_sync_dir"; then
+        config_sync_dir="${DRUPAL_BASE_DIR}/sites/default/files/config_$(generate_random_string -t alphanumeric -c 16)"
+    fi
+    ensure_dir_exists "$config_sync_dir"
+    drupal_conf_set "\$settings['config_sync_directory']" "$config_sync_dir"
+}
+
+########################
+# Drupal Create Hash Salt
+# Globals:
+#   *
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+drupal_set_hash_salt() {
+    local hash_salt="${DRUPAL_HASH_SALT:-}"
+    if is_empty_value "$hash_salt"; then
+        hash_salt="$(generate_random_string -t alphanumeric -c 32)"
+    fi
+    drupal_conf_set "\$settings['hash_salt']" "$hash_salt"
 }
 
 ########################
@@ -441,6 +489,22 @@ drupal_set_database_ssl_settings() {
 );
 EOF
 }
+
+drupal_set_database_settings() {
+    cat >>"$DRUPAL_CONF_FILE" <<EOF
+\$databases['default']['default'] = array ( // Database block with SSL support
+  'database' => '${DRUPAL_DATABASE_NAME}',
+  'username' => '${DRUPAL_DATABASE_USER}',
+  'password' => '${DRUPAL_DATABASE_PASSWORD}',
+  'prefix' => '',
+  'host' => '${DRUPAL_DATABASE_HOST}',
+  'port' => '${DRUPAL_DATABASE_PORT_NUMBER}',
+  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+  'driver' => 'mysql',
+);
+EOF
+}
+
 
 ########################
 # Drupal remove duplicated database block from settings file
