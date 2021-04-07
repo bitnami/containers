@@ -2,7 +2,7 @@ version: '2'
 
 services:
   redis-sentinel:
-    image: docker.io/bitnami/redis-sentinel:6.0-debian-10
+    image: docker.io/bitnami/redis-sentinel:6.0
     volumes:
       - redis-sentinel_data:/bitnami
   redis:
