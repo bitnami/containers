@@ -18,7 +18,7 @@ RUN ln -s /opt/bitnami/scripts/memcached/run.sh /run.sh
 COPY rootfs /
 RUN /opt/bitnami/scripts/memcached/postunpack.sh
 ENV BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.6.9-debian-10-r124" \
+    BITNAMI_IMAGE_VERSION="1.6.9-debian-10-r125" \
     PATH="/opt/bitnami/memcached/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 11211
