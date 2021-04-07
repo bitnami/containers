@@ -2,7 +2,7 @@
 #
 # Bitnami Pgpool library
 
-# shellcheck disable=SC1091
+# shellcheck disable=SC1090,SC1091
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/libfile.sh
@@ -145,13 +145,13 @@ pgpool_validate() {
     if [[ -z "$PGPOOL_ADMIN_USERNAME" ]] || [[ -z "$PGPOOL_ADMIN_PASSWORD" ]]; then
         print_validation_error "The Pgpool administrator user's credentials are mandatory. Set the environment variables PGPOOL_ADMIN_USERNAME and PGPOOL_ADMIN_PASSWORD with the Pgpool administrator user's credentials."
     fi
-    if [[ "$PGPOOL_SR_CHECK_PERIOD" -gt 0 ]] && ([[ -z "$PGPOOL_SR_CHECK_USER" ]] || [[ -z "$PGPOOL_SR_CHECK_PASSWORD" ]]); then
+    if [[ "$PGPOOL_SR_CHECK_PERIOD" -gt 0 ]] && { [[ -z "$PGPOOL_SR_CHECK_USER" ]] || [[ -z "$PGPOOL_SR_CHECK_PASSWORD" ]]; }; then
         print_validation_error "The PostrgreSQL replication credentials are mandatory. Set the environment variables PGPOOL_SR_CHECK_USER and PGPOOL_SR_CHECK_PASSWORD with the PostrgreSQL replication credentials."
     fi
     if [[ -z "$PGPOOL_HEALTH_CHECK_USER" ]] || [[ -z "$PGPOOL_HEALTH_CHECK_PASSWORD" ]]; then
         print_validation_error "The PostrgreSQL health check credentials are mandatory. Set the environment variables PGPOOL_HEALTH_CHECK_USER and PGPOOL_HEALTH_CHECK_PASSWORD with the PostrgreSQL health check credentials."
     fi
-    if is_boolean_yes "$PGPOOL_ENABLE_LDAP" && ([[ -z "${LDAP_URI}" ]] || [[ -z "${LDAP_BASE}" ]] || [[ -z "${LDAP_BIND_DN}" ]] || [[ -z "${LDAP_BIND_PASSWORD}" ]]); then
+    if is_boolean_yes "$PGPOOL_ENABLE_LDAP" && { [[ -z "${LDAP_URI}" ]] || [[ -z "${LDAP_BASE}" ]] || [[ -z "${LDAP_BIND_DN}" ]] || [[ -z "${LDAP_BIND_PASSWORD}" ]]; }; then
         print_validation_error "The LDAP configuration is required when LDAP authentication is enabled. Set the environment variables LDAP_URI, LDAP_BASE, LDAP_BIND_DN and LDAP_BIND_PASSWORD with the LDAP configuration."
     fi
 
@@ -238,7 +238,8 @@ pgpool_attach_node() {
     local -r node_id=${1:?node id is missing}
 
     info "Attaching backend node..."
-    export PCPPASSFILE=$(mktemp /tmp/pcppass-XXXXX)
+    PCPPASSFILE=$(mktemp /tmp/pcppass-XXXXX)
+    export PCPPASSFILE
     echo "localhost:9898:${PGPOOL_ADMIN_USERNAME}:${PGPOOL_ADMIN_PASSWORD}" >"${PCPPASSFILE}"
     pcp_attach_node -h localhost -U "${PGPOOL_ADMIN_USERNAME}" -p 9898 -n "${node_id}" -w
     rm -rf "${PCPPASSFILE}"
@@ -293,7 +294,7 @@ pgpool_create_pghba() {
     if is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"; then
         postgres_auth_line="host     all             ${PGPOOL_POSTGRES_USERNAME}       all         md5"
     fi
-    if [[ ! -z "$PGPOOL_SR_CHECK_USER" ]]; then
+    if [[ -n "$PGPOOL_SR_CHECK_USER" ]]; then
         sr_check_auth_line="host     all             ${PGPOOL_SR_CHECK_USER}       all         trust"
     fi
 
@@ -346,8 +347,6 @@ pgpool_set_property() {
 #########################
 pgpool_create_backend_config() {
     local -r node=${1:?node is missing}
-    local -r retries=5
-    local -r sleep_time=3
 
     # default values
     read -r -a fields <<<"$(tr ':' ' ' <<<"${node}")"
@@ -378,7 +377,6 @@ EOF
 #   None
 #########################
 pgpool_create_config() {
-    local -i node_counter=0
     local pool_passwd=""
 
     if is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"; then
