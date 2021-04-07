@@ -26,6 +26,8 @@ drupal_env_vars=(
     DRUPAL_SITE_NAME
     DRUPAL_SKIP_BOOTSTRAP
     DRUPAL_ENABLE_MODULES
+    DRUPAL_CONFIG_SYNC_DIR
+    DRUPAL_HASH_SALT
     DRUPAL_USERNAME
     DRUPAL_PASSWORD
     DRUPAL_EMAIL
@@ -77,8 +79,8 @@ export DRUPAL_PROFILE="${DRUPAL_PROFILE:-standard}" # only used during the first
 export DRUPAL_SITE_NAME="${DRUPAL_SITE_NAME:-My blog}" # only used during the first initialization
 export DRUPAL_SKIP_BOOTSTRAP="${DRUPAL_SKIP_BOOTSTRAP:-}" # only used during the first initialization
 export DRUPAL_ENABLE_MODULES="${DRUPAL_ENABLE_MODULES:-}" # only used during the first initialization
-export DRUPAL_CONFIG_SYNC_DIR="${DRUPAL_CONFIG_SYNC_DIR:-}"
-export DRUPAL_HASH_SALT="${DRUPAL_HASH_SALT:-}"
+export DRUPAL_CONFIG_SYNC_DIR="${DRUPAL_CONFIG_SYNC_DIR:-}" # only used during the first initialization
+export DRUPAL_HASH_SALT="${DRUPAL_HASH_SALT:-}" # only used during the first initialization
 
 # Drupal credentials
 export DRUPAL_USERNAME="${DRUPAL_USERNAME:-user}" # only used during the first initialization

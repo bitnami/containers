@@ -143,6 +143,8 @@ drupal_initialize() {
                 info "Configuring SMTP"
                 drupal_configure_smtp
             fi
+            info "Flushing Drupal cache"
+            drupal_flush_cache
         else
             info "An already initialized Drupal database was provided, configuration will be skipped"
             if is_empty_value "$DRUPAL_DATABASE_TLS_CA_FILE"; then
@@ -159,9 +161,6 @@ drupal_initialize() {
             drupal_set_hash_salt
             drupal_update_database
         fi
-
-        info "Flushing Drupal cache"
-        drupal_flush_cache
 
         info "Persisting Drupal installation"
         persist_app "$app_name" "$DRUPAL_DATA_TO_PERSIST"
@@ -294,9 +293,9 @@ drupal_site_install() {
 }
 
 ########################
-# Drupal Create Config Directory
+# Create Drupal sync configuration directory (DRUPAL_SKIP_BOOTSTRAP only)
 # Globals:
-#   *
+#   DRUPAL_BASE_DIR
 # Arguments:
 #   None
 # Returns:
@@ -312,9 +311,9 @@ drupal_create_config_directory() {
 }
 
 ########################
-# Drupal Create Hash Salt
+# Create Drupal hash salt value (DRUPAL_SKIP_BOOTSTRAP only)
 # Globals:
-#   *
+#   DRUPAL_HASH_SALT
 # Arguments:
 #   None
 # Returns:
@@ -490,6 +489,15 @@ drupal_set_database_ssl_settings() {
 EOF
 }
 
+########################
+# Drupal set database non-SSL settings (DRUPAL_SKIP_BOOTSTRAP only)
+# Globals:
+#   *
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
 drupal_set_database_settings() {
     cat >>"$DRUPAL_CONF_FILE" <<EOF
 \$databases['default']['default'] = array ( // Database block with SSL support
