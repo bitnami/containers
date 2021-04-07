@@ -1,9 +1,9 @@
 {
     "node": {
         "arch": "amd64",
-        "digest": "159f4fc53f9ce61f42eb844f12cf70521f1681be360b432c2f5ab71c35ea9d9d",
+        "digest": "74931871fc227e62c71d63a4e478b19673632174bde599e97f4624783b3d2474",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.24.0-2"
+        "version": "10.24.1-0"
     }
 }
