@@ -2,6 +2,6 @@ version: '2'
 
 services:
   external-dns:
-    image: docker.io/bitnami/external-dns:0-debian-10
+    image: docker.io/bitnami/external-dns:0
     ports:
       - '7979:7979'
