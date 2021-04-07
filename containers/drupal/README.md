@@ -42,7 +42,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`9`, `9-debian-10`, `9.1.5`, `9.1.5-debian-10-r30`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/9.1.5-debian-10-r30/9/debian-10/Dockerfile)
-* [`8`, `8-debian-10`, `8.9.13`, `8.9.13-debian-10-r70` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.9.13-debian-10-r70/8/debian-10/Dockerfile)
+* [`8`, `8-debian-10`, `8.9.13`, `8.9.13-debian-10-r71` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.9.13-debian-10-r71/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal GitHub repo](https://github.com/bitnami/bitnami-docker-drupal).
 
@@ -221,15 +221,15 @@ Available environment variables:
 
 ##### User and Site configuration
 
- - `DRUPAL_PROFILE`: Drupal installation profile. Default: **standard**
- - `DRUPAL_SITE_NAME`: Drupal blog name. Default: **My blog**
- - `DRUPAL_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. Default: **no**
- - `DRUPAL_ENABLE_MODULES`: Comma or space separated list of installed modules to enable during the first initialization.. Default: No defaults.
- - `DRUPAL_USERNAME`: Drupal application username. Default: **user**
- - `DRUPAL_PASSWORD`: Drupal application password. Default: **bitnami**
- - `DRUPAL_EMAIL`: Drupal application email. Default: **user@example.com**
- - `DRUPAL_CONFIG_SYNC_DIR`: Drupal configuration file directory. Default: **sites/default/files/config_${RANDOM_STRING}**
- - `DRUPAL_HASH_SALT`: Salt used for hardening against SQL injection. Default: **A random string**
+- `DRUPAL_PROFILE`: Drupal installation profile. Default: **standard**
+- `DRUPAL_SITE_NAME`: Drupal blog name. Default: **My blog**
+- `DRUPAL_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. Default: **no**
+- `DRUPAL_ENABLE_MODULES`: Comma or space separated list of installed modules to enable during the first initialization. No defaults.
+- `DRUPAL_USERNAME`: Drupal application username. Default: **user**
+- `DRUPAL_PASSWORD`: Drupal application password. Default: **bitnami**
+- `DRUPAL_EMAIL`: Drupal application email. Default: **user@example.com**
+- `DRUPAL_CONFIG_SYNC_DIR`: Drupal sync configuration directory location. Only used when `DRUPAL_SKIP_BOOTSTRAP` is enabled. No defaults.
+- `DRUPAL_HASH_SALT`: Drupal string used to generate random values. Only used when `DRUPAL_SKIP_BOOTSTRAP` is enabled. No defaults.
 
 ##### Use an existing database
 
