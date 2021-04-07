@@ -1,6 +1,6 @@
 version: '2'
 services:
   logstash-exporter:
-    image: docker.io/bitnami/logstash-exporter:7.3-debian-10
+    image: docker.io/bitnami/logstash-exporter:7.3
     ports:
       - 9198:9198
