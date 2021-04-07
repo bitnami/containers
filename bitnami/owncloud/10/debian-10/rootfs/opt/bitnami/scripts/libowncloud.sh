@@ -251,7 +251,7 @@ owncloud_initialize() {
 #########################
 owncloud_execute_occ_print_stdout() {
     local args=("${@:?missing args}")
-    local -r cmd=("php" "${OWNCLOUD_BASE_DIR}/occ" "${args[@]}")
+    local -r -a cmd=("php" "${OWNCLOUD_BASE_DIR}/occ" "${args[@]}")
     if am_i_root; then
         gosu "$WEB_SERVER_DAEMON_USER" "${cmd[@]}"
     else
@@ -323,24 +323,29 @@ owncloud_conf_get() {
 #   None
 #########################
 owncloud_upgrade_database_schema() {
-    local -r next_migration="$(owncloud_execute_occ_print_stdout migrations:status core | grep "Next Version")"
+    local next_migration current_version installed_version
+    next_migration="$(owncloud_execute_occ_print_stdout migrations:status core | grep "Next Version")"
+    # Based on the logic that ownCloud uses to decide whether to print upgrade page in 'printUpgradePage' (lib/base.php)
+    current_version="$(php_execute_print_output <<< "require('${OWNCLOUD_BASE_DIR}/config/config.php'); echo \$CONFIG['version'];")"
+    installed_version="$(php_execute_print_output <<< "require('${OWNCLOUD_BASE_DIR}/version.php'); echo implode(\$OC_Version, '.');")"
 
     debug "Checking if database schema needs to be upgraded"
 
-    # Upgrade database schema if we are not using at the latest migration.
-    if [[ ! "$next_migration" =~ "Already at latest migration step" ]]; then
+    # Upgrade database schema if we are not using the latest app version, or if migrations are pending
+    if [[ "$current_version" != "$installed_version" || ! "$next_migration" =~ "Already at latest migration step" ]]; then
         info "Upgrading database schema"
         # Enable maintenance mode
         debug "Enabling maintenance mode"
         owncloud_execute_occ maintenance:mode --on
 
         # Disable apps before schema upgrade
-        local -r app_list_file="${OWNCLOUD_BASE_DIR}/tmp/app_list"
-        local -r database_app_list_file="${OWNCLOUD_BASE_DIR}/tmp/database_app_list"
+        local app_list_file database_app_list_file
+        app_list_file="$(mktemp)"
+        database_app_list_file="$(mktemp)"
         # Get all enabled apps
-        jq '.enabled | keys[]' <<< "$(owncloud_execute_occ_print_stdout app:list --no-warnings --output json)" >> "$app_list_file"
+        jq -r '.enabled | keys[]' <<< "$(owncloud_execute_occ_print_stdout app:list --no-warnings --output json)" >> "$app_list_file"
         # Get database enabled apps
-        jq '.apps | to_entries[] | select(.value.enabled=="yes") | .key' <<< "$(owncloud_execute_occ_print_stdout config:list --no-warnings --output json)" >> "$database_app_list_file"
+        jq -r '.apps | to_entries[] | select(.value.enabled=="yes") | .key' <<< "$(owncloud_execute_occ_print_stdout config:list --no-warnings --output json)" >> "$database_app_list_file"
         # Disable apps that do not exist on the new version
         comm -13 "$app_list_file" "$database_app_list_file" | while read -r app; do
             owncloud_execute_occ app:disable "$app" --no-warnings
@@ -348,7 +353,8 @@ owncloud_upgrade_database_schema() {
         rm -f "$app_list_file" "$database_app_list_file"
 
         # Get all enabled non-shipped apps
-        local -r non_shipped_app_list=($(jq '.enabled | keys[]' <<< "$(owncloud_execute_occ_print_stdout app:list --no-warnings --shipped=false --output json)"))
+        local -a non_shipped_app_list
+        read -r -a non_shipped_app_list <<< "$(jq -r -j '.enabled | keys[] + " "' <<< "$(owncloud_execute_occ_print_stdout app:list --no-warnings --shipped=false --output json)")"
         # Disable non-shipped apps before the upgrade
         for app in "${non_shipped_app_list[@]}"; do
             # Disable all the apps except market since we use it to update the rest
