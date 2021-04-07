@@ -106,5 +106,5 @@ indent() {
     for ((i = 0; i < num; i++)); do
         indent_unit="${indent_unit}${char}"
     done
-    echo "$string" | sed "s/^/${indent_unit}/"
+    echo "${string//^/${indent_unit}}"
 }
