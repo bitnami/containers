@@ -253,6 +253,8 @@ zookeeper_generate_conf() {
     zookeeper_conf_set "$ZOO_CONF_FILE" tickTime "$ZOO_TICK_TIME"
     zookeeper_conf_set "$ZOO_CONF_FILE" initLimit "$ZOO_INIT_LIMIT"
     zookeeper_conf_set "$ZOO_CONF_FILE" syncLimit "$ZOO_SYNC_LIMIT"
+    zookeeper_conf_set "$ZOO_CONF_FILE" preAllocSize "$ZOO_PRE_ALLOC_SIZE"
+    zookeeper_conf_set "$ZOO_CONF_FILE" snapCount "$ZOO_SNAPCOUNT"
     zookeeper_conf_set "$ZOO_CONF_FILE" dataDir "$ZOO_DATA_DIR"
     [[ -n "$ZOO_DATA_LOG_DIR" ]] && zookeeper_conf_set "$ZOO_CONF_FILE" dataLogDir "$ZOO_DATA_LOG_DIR"
     zookeeper_conf_set "$ZOO_CONF_FILE" clientPort "$ZOO_PORT_NUMBER"
@@ -264,8 +266,6 @@ zookeeper_generate_conf() {
     zookeeper_conf_set "$ZOO_CONF_FILE" autopurge.snapRetainCount "$ZOO_AUTOPURGE_RETAIN_COUNT"
     zookeeper_conf_set "$ZOO_CONF_FILE" 4lw.commands.whitelist "$ZOO_4LW_COMMANDS_WHITELIST"
     zookeeper_conf_set "$ZOO_CONF_FILE" maxSessionTimeout "$ZOO_MAX_SESSION_TIMEOUT"
-    zookeeper_conf_set "$ZOO_CONF_FILE" preAllocSize "$ZOO_PRE_ALLOC_SIZE"
-    zookeeper_conf_set "$ZOO_CONF_FILE" snapCount "$ZOO_SNAPCOUNT"
     # Set log level
     zookeeper_conf_set "${ZOO_CONF_DIR}/log4j.properties" zookeeper.console.threshold "$ZOO_LOG_LEVEL"
 
