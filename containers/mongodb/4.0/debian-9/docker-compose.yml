@@ -2,7 +2,7 @@ version: '2'
 
 services:
   mongodb:
-    image: 'docker.io/bitnami/mongodb:4.0-debian-9'
+    image: docker.io/bitnami/mongodb:4.0
     ports:
       - "27017:27017"
     volumes:
