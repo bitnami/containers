@@ -25,7 +25,7 @@ You can find the default credentials and available configuration options in the 
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-> This [CVE scan report](https://quay.io/repository/bitnami/drupal?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
+> This [CVE scan report](https://quay.io/repository/bitnami/drupal-nginx?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 ## Why use a non-root container?
 
@@ -33,7 +33,7 @@ Non-root container images add an extra layer of security and are generally recom
 
 ## How to deploy Drupal in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Drupal Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/drupal).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Drupal Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/drupal-nginx).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
@@ -42,7 +42,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`9`, `9-debian-10`, `9.1.5`, `9.1.5-debian-10-r32`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal-nginx/blob/9.1.5-debian-10-r32/9/debian-10/Dockerfile)
+* [`9`, `9-debian-10`, `9.1.5`, `9.1.5-debian-10-r33`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal-nginx/blob/9.1.5-debian-10-r33/9/debian-10/Dockerfile)
 * [`8`, `8-debian-10`, `8.9.13`, `8.9.13-debian-10-r71` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal-nginx/blob/8.9.13-debian-10-r71/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-drupal-nginx).
@@ -221,13 +221,15 @@ Available environment variables:
 
 ##### User and Site configuration
 
- - `DRUPAL_PROFILE`: Drupal installation profile. Default: **standard**
- - `DRUPAL_SITE_NAME`: Drupal blog name. Default: **My blog**
- - `DRUPAL_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. Default: **no**
- - `DRUPAL_ENABLE_MODULES`: Comma or space separated list of installed modules to enable during the first initialization.. Default: No defaults.
- - `DRUPAL_USERNAME`: Drupal application username. Default: **user**
- - `DRUPAL_PASSWORD`: Drupal application password. Default: **bitnami**
- - `DRUPAL_EMAIL`: Drupal application email. Default: **user@example.com**
+- `DRUPAL_PROFILE`: Drupal installation profile. Default: **standard**
+- `DRUPAL_SITE_NAME`: Drupal blog name. Default: **My blog**
+- `DRUPAL_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. Default: **no**
+- `DRUPAL_ENABLE_MODULES`: Comma or space separated list of installed modules to enable during the first initialization. No defaults.
+- `DRUPAL_USERNAME`: Drupal application username. Default: **user**
+- `DRUPAL_PASSWORD`: Drupal application password. Default: **bitnami**
+- `DRUPAL_EMAIL`: Drupal application email. Default: **user@example.com**
+- `DRUPAL_CONFIG_SYNC_DIR`: Drupal sync configuration directory location. Only used when `DRUPAL_SKIP_BOOTSTRAP` is enabled. No defaults.
+- `DRUPAL_HASH_SALT`: Drupal string used to generate random values. Only used when `DRUPAL_SKIP_BOOTSTRAP` is enabled. No defaults.
 
 ##### Use an existing database
 
@@ -310,7 +312,7 @@ This would be an example of SMTP configuration using a Gmail account:
     --env DRUPAL_SMTP_PROTOCOL=tls \
     --network drupal-tier \
     --volume /path/to/drupal-persistence:/bitnami \
-    bitnami/drupal:latest
+    bitnami/drupal-nginx:latest
   ```
 
 ## Logging
@@ -377,7 +379,7 @@ For the Drupal container:
    ...
 -  --volume /path/to/drupal-persistence:/bitnami/drupal \
 +  --volume /path/to/drupal-backups/latest:/bitnami/drupal \
-   bitnami/drupal:latest
+   bitnami/drupal-nginx:latest
 ```
 
 ### Upgrade this image
@@ -466,7 +468,7 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 
 ```diff
    drupal:
--    image: bitnami/drupal:latest
+-    image: bitnami/drupal-nginx:latest
 +    build: .
      ports:
 -      - '80:8080'
