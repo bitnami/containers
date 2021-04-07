@@ -1,4 +1,4 @@
 version: '2'
 services:
   envoy:
-    image: docker.io/bitnami/envoy:1.17-debian-10
+    image: docker.io/bitnami/envoy:1.17
