@@ -2,7 +2,7 @@ version: '2'
 
 services:
   postgresql:
-    image: 'docker.io/bitnami/postgresql:10'
+    image: docker.io/bitnami/postgresql:10
     volumes:
       - 'postgresql_data:/bitnami/postgresql'
     environment:
@@ -19,7 +19,7 @@ services:
   airflow-scheduler:
     # TODO: to be reverted to use proper registry/distro on T39132
     # image: docker.io/bitnami/airflow-scheduler:1
-    image: bitnami/airflow-scheduler:1
+    image: docker.io/bitnami/airflow-scheduler:1
     environment:
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
@@ -30,7 +30,7 @@ services:
   airflow-worker:
     # TODO: to be reverted to use proper registry/distro on T39132
     # image: docker.io/bitnami/airflow-worker:1
-    image: bitnami/airflow-worker:1
+    image: docker.io/bitnami/airflow-worker:1
     environment:
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
@@ -39,7 +39,7 @@ services:
     volumes:
       - airflow_worker_data:/bitnami
   airflow:
-    image: docker.io/bitnami/airflow:1-debian-10
+    image: docker.io/bitnami/airflow:1
     environment:
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
