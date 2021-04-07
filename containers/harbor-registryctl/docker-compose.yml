@@ -2,7 +2,7 @@ version: '2'
 
 services:
   harbor-registryctl:
-    image: docker.io/bitnami/harbor-registryctl:2-debian-10
+    image: docker.io/bitnami/harbor-registryctl:2
     ports:
       - 80:8080
     environment:
