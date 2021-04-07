@@ -61,6 +61,8 @@ export ZOO_LISTEN_ALLIPS_ENABLED="${ZOO_LISTEN_ALLIPS_ENABLED:-no}"
 export ZOO_ENABLE_PROMETHEUS_METRICS="${ZOO_ENABLE_PROMETHEUS_METRICS:-no}"
 export ZOO_PROMETHEUS_METRICS_PORT_NUMBER="${ZOO_PROMETHEUS_METRICS_PORT_NUMBER:-7000}"
 export ZOO_MAX_SESSION_TIMEOUT="${ZOO_MAX_SESSION_TIMEOUT:-40000}"
+export ZOO_PRE_ALLOC_SIZE="${ZOO_PRE_ALLOC_SIZE:-65536}"
+export ZOO_SNAPCOUNT="${ZOO_SNAPCOUNT:-100000}"
 
 # Zookeeper TLS Settings
 export ZOO_TLS_CLIENT_ENABLE="${ZOO_TLS_CLIENT_ENABLE:-false}"
@@ -262,6 +264,8 @@ zookeeper_generate_conf() {
     zookeeper_conf_set "$ZOO_CONF_FILE" autopurge.snapRetainCount "$ZOO_AUTOPURGE_RETAIN_COUNT"
     zookeeper_conf_set "$ZOO_CONF_FILE" 4lw.commands.whitelist "$ZOO_4LW_COMMANDS_WHITELIST"
     zookeeper_conf_set "$ZOO_CONF_FILE" maxSessionTimeout "$ZOO_MAX_SESSION_TIMEOUT"
+    zookeeper_conf_set "$ZOO_CONF_FILE" preAllocSize "$ZOO_PRE_ALLOC_SIZE"
+    zookeeper_conf_set "$ZOO_CONF_FILE" snapCount "$ZOO_SNAPCOUNT"
     # Set log level
     zookeeper_conf_set "${ZOO_CONF_DIR}/log4j.properties" zookeeper.console.threshold "$ZOO_LOG_LEVEL"
 

@@ -178,6 +178,8 @@ The configuration can easily be setup with the Bitnami ZooKeeper Docker image us
  - `ZOO_PORT_NUMBER`: ZooKeeper client port. Default: **2181**
  - `ZOO_SERVER_ID`: ID of the server in the ensemble. Default: **1**
  - `ZOO_TICK_TIME`: Basic time unit in milliseconds used by ZooKeeper for heartbeats. Default: **2000**
+ - `ZOO_PRE_ALLOC_SIZE`': Block size for transaction log file. Default **65536**
+ - `ZOO_SNAPCOUNT`: The number of transactions recorded in the transaction log before a snapshot can be taken (and the transaction log rolled). Default **100000**
  - `ZOO_INIT_LIMIT`: ZooKeeper uses to limit the length of time the ZooKeeper servers in quorum have to connect to a leader. Default: **10**
  - `ZOO_SYNC_LIMIT`: How far out of date a server can be from a leader. Default: **5**
  - `ZOO_MAX_CNXNS`: Limits the total number of concurrent connections that can be made to a ZooKeeper server. Setting it to 0 entirely removes the limit. Default: **0**
