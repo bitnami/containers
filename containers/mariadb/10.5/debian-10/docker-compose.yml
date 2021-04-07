@@ -2,7 +2,7 @@ version: '2.1'
 
 services:
   mariadb:
-    image: 'docker.io/bitnami/mariadb:10.5-debian-10'
+    image: docker.io/bitnami/mariadb:10.5
     ports:
       - '3306:3306'
     volumes:
