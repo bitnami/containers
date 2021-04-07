@@ -2,8 +2,7 @@
 #
 # Bitnami InfluxDB library
 
-# shellcheck disable=SC1091
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/liblog.sh
@@ -376,9 +375,9 @@ influxdb_v2_create_user() {
 
         local grants
         if [[ ${kind} = "admin" ]] || [[ ${kind} = "write" ]]; then
-            grants=(${read_grants[@]} ${write_grants[@]})
+            grants=("${read_grants[@]}" "${write_grants[@]}")
         elif [[ ${kind} = "read" ]]; then
-            grants=(${read_grants[@]})
+            grants=("${read_grants[@]}")
         else
             echo "not supported user kind: ${kind}" && exit 1
         fi
