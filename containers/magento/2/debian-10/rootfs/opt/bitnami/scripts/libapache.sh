@@ -685,3 +685,23 @@ apache_update_app_configuration() {
         fi
     fi
 }
+
+########################
+# Create a password file for basic authentication and restrict its permissions
+# Globals:
+#   *
+# Arguments:
+#   $1 - file
+#   $2 - username
+#   $3 - password
+# Returns:
+#   true if the configuration was updated, false otherwise
+########################
+apache_create_password_file() {
+    local -r file="${1:?missing file}"
+    local -r username="${2:?missing username}"
+    local -r password="${3:?missing password}"
+
+    "${APACHE_BIN_DIR}/htpasswd" -bc "$file" "$username" "$password"
+    am_i_root && configure_permissions_ownership "$file" --file-mode "600" --user "$APACHE_DAEMON_USER" --group "$APACHE_DAEMON_GROUP"
+}
