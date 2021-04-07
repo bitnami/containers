@@ -1,12 +1,14 @@
 #!/bin/bash -e
 
+# shellcheck disable=SC1091
+
 . /opt/bitnami/base/functions
 . /opt/bitnami/base/helpers
 . /opt/bitnami/express/functions
 
 print_welcome_page
 
-if [ "$1" = npm ] && [ "$2" = "start" -o "$2" = "run" ]; then
+if [ "$1" = npm ] && { [ "$2" = "start" ] || [ "$2" = "run" ]; }; then
   bootstrap_express_app
 
   add_dockerfile
