@@ -1,4 +1,4 @@
 version: '2'
 services:
   trivy:
-    image: docker.io/bitnami/trivy:0-debian-10
+    image: docker.io/bitnami/trivy:0
