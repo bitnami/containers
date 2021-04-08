@@ -1,13 +1,13 @@
 version: '2'
 services:
   mariadb:
-    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
+    image: docker.io/bitnami/mariadb:10.3
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
 
   myapp:
     tty: true # Enables debugging capabilities when attached to this container.
-    image: docker.io/bitnami/rails:6-debian-10
+    image: docker.io/bitnami/rails:6
     environment:
       - DATABASE_HOST=mariadb
       - DATABASE_NAME=my_app_development
