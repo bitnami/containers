@@ -1,7 +1,7 @@
 version: '2'
 services:
   airflow-worker:
-    image: docker.io/bitnami/airflow-worker:1-debian-10
+    image: docker.io/bitnami/airflow-worker:1
     environment:
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
