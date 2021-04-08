@@ -1,7 +1,7 @@
 version: '2'
 services:
   kapacitor:
-    image: docker.io/bitnami/kapacitor:1-debian-10
+    image: docker.io/bitnami/kapacitor:1
     volumes:
       - 'kapacitor_data:/bitnami/kapacitor'
 
