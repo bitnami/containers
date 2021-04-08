@@ -1,7 +1,7 @@
 version: '2'
 services:
   solrnode1:
-    image: 'docker.io/bitnami/solr:8-debian-10'
+    image: docker.io/bitnami/solr:8
     environment:
       - SOLR_ENABLE_CLOUD_MODE=yes
       - SOLR_CLOUD_BOOTSTRAP=yes
@@ -14,7 +14,7 @@ services:
     volumes:
       - 'solr_data:/bitnami/solr'
   zk1:
-    image: 'docker.io/bitnami/zookeeper:3-debian-10'
+    image: docker.io/bitnami/zookeeper:3
     ports:
       - '2181'
     volumes:
