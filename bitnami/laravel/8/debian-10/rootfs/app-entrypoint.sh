@@ -74,7 +74,7 @@ setup_db() {
 
 print_welcome_page
 
-if [ "${1}" == "php" -a "$2" == "artisan" -a "$3" == "serve" ]; then
+if [ "${1}" == "php" ] && [ "$2" == "artisan" ] && [ "$3" == "serve" ]; then
     if [[ ! -d /app/app ]]; then
         log "Creating laravel application"
         cp -a /tmp/app/. /app/
