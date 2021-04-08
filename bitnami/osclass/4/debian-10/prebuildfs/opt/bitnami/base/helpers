@@ -1,0 +1,40 @@
+#!/bin/bash
+
+. /opt/bitnami/base/functions
+
+########################
+# Helper function to initialize a single nami module
+# Arguments:
+#   Module to initialize
+# Returns:
+#   None
+# Description:
+#   Initialize an unpacked nami module with the `nami initialize` command.
+#   Command arguments can be specified as function argumnts after the module name.
+#   `--log-level trace` flag is added to the command if `NAMI_DEBUG` env variable exists.
+#   The log level can be overridden using the `NAMI_LOG_LEVEL` env variable.
+#########################
+nami_initialize_one() {
+    local module="${1:?module not specified}"
+    if nami inspect $module | grep -q '"lifecycle": "unpacked"'; then
+        local inputs=
+        if [[ -f "/${module}-inputs.json" ]]; then
+            inputs="--inputs-file=/${module}-inputs.json"
+        fi
+        nami ${NAMI_DEBUG:+--log-level ${NAMI_LOG_LEVEL:-trace}} initialize $module $inputs "${@:2}"
+    fi
+}
+
+########################
+# Helper function to initialize one or more nami modules
+# Arguments:
+#   Module to initialize
+# Returns:
+#   None
+#########################
+nami_initialize() {
+    local module="${1:?module not specified}"
+    for module in "${@}"; do
+        nami_initialize_one $module
+    done
+}
