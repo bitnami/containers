@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# shellcheck disable=SC1091
+# shellcheck disable=SC1090,SC1091
 
 set -o errexit
 set -o nounset
@@ -23,6 +23,5 @@ flags=("--host" "${NGINXLDAP_HOSTNAME}" "-p" "${NGINXLDAP_PORT_NUMBER}" "--url" 
 [[ -n "${NGINXLDAP_HTTP_COOKIE_NAME}" ]] && flags=("${flags[@]}" "-c" "${NGINXLDAP_HTTP_COOKIE_NAME}")
 
 info "** Starting NGINX LDAP Auth daemong **"
-# shellcheck source=/dev/null
 VIRTUAL_ENV_DISABLE_PROMPT=true . "${NGINXLDAP_PYTHON_BIN_DIR}"/activate
 exec python "${NGINXLDAP_SCRIPT_FILE}" "${flags[@]}"
