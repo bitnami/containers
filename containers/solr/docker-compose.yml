@@ -1,7 +1,7 @@
 version: '2'
 services:
   solr:
-    image: 'docker.io/bitnami/solr:8-debian-10'
+    image: docker.io/bitnami/solr:8
     environment:
       - SOLR_ENABLE_AUTHENTICATION=yes
     ports:
