@@ -2,7 +2,7 @@
 #
 # Bitnami MySQL Galera library
 
-# shellcheck disable=SC1091
+# shellcheck disable=SC1090,SC1091
 
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libfs.sh
@@ -109,7 +109,7 @@ get_galera_cluster_bootstrap_value() {
             read -r -a hosts <<< "$(tr ',' ' ' <<< "${clusterAddress#*://}")"
             if [[ "${#hosts[@]}" -eq "1" ]]; then
                 read -r -a cluster_ips <<< "$(getent hosts "${hosts[0]}" | awk '{print $1}' | tr '\n' ' ')"
-                if [[ "${#cluster_ips[@]}" -gt "1" ]] || ( [[ "${#cluster_ips[@]}" -eq "1" ]] && [[ "${cluster_ips[0]}" != "$local_ip" ]] ) ; then
+                if [[ "${#cluster_ips[@]}" -gt "1" ]] || { [[ "${#cluster_ips[@]}" -eq "1" ]] && [[ "${cluster_ips[0]}" != "$local_ip" ]]; }; then
                     clusterBootstrap="no"
                 else
                     clusterBootstrap="yes"
@@ -220,21 +220,21 @@ mysql_validate() {
         backslash_password_error "$(get_env_var PASSWORD)"
     fi
 
-    if is_boolean_yes "$DB_ENABLE_LDAP" && ( [[ -z "${LDAP_URI}" ]] || [[ -z "${LDAP_BASE}" ]] || [[ -z "${LDAP_BIND_DN}" ]] || [[ -z "${LDAP_BIND_PASSWORD}" ]] ); then
+    if is_boolean_yes "$DB_ENABLE_LDAP" && { [[ -z "${LDAP_URI}" ]] || [[ -z "${LDAP_BASE}" ]] || [[ -z "${LDAP_BIND_DN}" ]] || [[ -z "${LDAP_BIND_PASSWORD}" ]]; }; then
         print_validation_error "The LDAP configuration is required when LDAP authentication is enabled. Set the environment variables LDAP_URI, LDAP_BASE, LDAP_BIND_DN and LDAP_BIND_PASSWORD with the LDAP configuration."
     fi
 
     if is_boolean_yes "$DB_ENABLE_TLS"; then
-        if ( [[ -z "${DB_TLS_CERT_FILE}" ]] || [[ -z "${DB_TLS_KEY_FILE}" ]] || [[ -z "${DB_TLS_CA_FILE}" ]]); then
+        if [[ -z "${DB_TLS_CERT_FILE}" ]] || [[ -z "${DB_TLS_KEY_FILE}" ]] || [[ -z "${DB_TLS_CA_FILE}" ]]; then
             print_validation_error "The TLS cert file, key and CA are required when TLS is enabled. Set the environment variables TLS_CERT_FILE, TLS_KEY_FILE and TLS_CA_FILE with the path to each file."
         fi
-        if ( [[ ! -f "${DB_TLS_CERT_FILE}" ]] ); then
+        if [[ ! -f "${DB_TLS_CERT_FILE}" ]]; then
             print_validation_error "The TLS_CERT file ${DB_TLS_CERT_FILE} must exist."
         fi
-        if ( [[ ! -f "${DB_TLS_KEY_FILE}" ]] ); then
+        if [[ ! -f "${DB_TLS_KEY_FILE}" ]]; then
             print_validation_error "The TLS_KEY file ${DB_TLS_KEY_FILE} must exist."
         fi
-        if ( [[ ! -f "${DB_TLS_CA_FILE}" ]] ); then
+        if [[ ! -f "${DB_TLS_CA_FILE}" ]]; then
             print_validation_error "The TLS_CA file ${DB_TLS_CA_FILE} must exist."
         fi
     fi
@@ -632,6 +632,10 @@ get_node_address() {
     fi
 }
 
+#!/bin/bash
+#
+# Library for mysql common
+
 ########################
 # Extract mysql version from version string
 # Globals:
@@ -646,7 +650,7 @@ mysql_get_version() {
     local -a ver_split
 
     ver_string=$("${DB_BIN_DIR}/mysql" "--version")
-    ver_split=(${ver_string// / })
+    ver_split=("${ver_string// / }")
 
     if [[ "$ver_string" = *" Distrib "* ]]; then
         echo "${ver_split[4]::-1}"
