@@ -2,7 +2,7 @@
 #
 # Bitnami Cassandra library
 
-# shellcheck disable=SC1091
+# shellcheck disable=SC1090,SC1091
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/libfile.sh
@@ -396,7 +396,7 @@ cassandra_copy_default_config() {
     find "$CASSANDRA_DEFAULT_CONF_DIR" -type f >$tmp_file_list
     while read -r f; do
         filename="${f#${CASSANDRA_DEFAULT_CONF_DIR}/}" # Get path with subfolder
-        dest="$(echo "$f" | sed "s?$CASSANDRA_DEFAULT_CONF_DIR?$CASSANDRA_CONF_DIR?g")"
+        dest="${f//$CASSANDRA_DEFAULT_CONF_DIR/$CASSANDRA_CONF_DIR}"
         if [[ -f "$dest" ]]; then
             debug "Found ${filename}. Skipping default"
         else
@@ -564,8 +564,6 @@ cassandra_change_cassandra_password() {
     local -r user="cassandra"
     local -r escaped_password="${new_password//\'/\'\'}"
 
-    local passwordChanged=no
-
     if (echo "ALTER USER cassandra WITH PASSWORD \$\$${escaped_password}\$\$;" | cassandra_execute_with_retries "$retries" "$sleep_time" "$user" "$old_password"); then
         debug "ALTER USER command executed. Trying to log in"
         wait_for_cql_access "$user" "$new_password" "" "$retries" "$sleep_time"
@@ -656,7 +654,7 @@ cassandra_clean_from_restart() {
     rm -f "$CASSANDRA_PID_FILE"
     rm -f "$CASSANDRA_FIRST_BOOT_LOG_FILE" "$CASSANDRA_INITSCRIPTS_BOOT_LOG_FILE"
     if ! is_dir_empty "$CASSANDRA_CONF_DIR"; then
-        rm -rf "$CASSANDRA_CONF_DIR"/*
+        rm -rf "${CASSANDRA_CONF_DIR:?}"/*
     fi
 }
 
@@ -729,9 +727,9 @@ cassandra_initialize() {
             done
             # Setup user
             if [[ "$CASSANDRA_USER" = "cassandra" ]]; then
-                cassandra_change_cassandra_password
+                cassandra_change_cassandra_password "cassandra" "$CASSANDRA_PASSWORD" "$CASSANDRA_CQL_MAX_RETRIES" "$CASSANDRA_CQL_SLEEP_TIME"
             else
-                cassandra_create_admin_user
+                cassandra_create_admin_user "$CASSANDRA_USER" "$CASSANDRA_PASSWORD" "cassandra" "cassandra" "$CASSANDRA_CQL_MAX_RETRIES" "$CASSANDRA_CQL_SLEEP_TIME"
             fi
 
             cassandra_execute_startup_cql
@@ -835,7 +833,7 @@ cassandra_execute() {
 
     is_boolean_yes "$CASSANDRA_CLIENT_ENCRYPTION" && args+=("--ssl")
     [[ -n "$keyspace" ]] && args+=("-k" "$keyspace")
-    [[ -n "$extra_args" ]] && args+=($extra_args)
+    [[ -n "$extra_args" ]] && args+=("$extra_args")
     args+=("$host")
     args+=("$port")
     if [[ "${BITNAMI_DEBUG}" = true ]]; then
