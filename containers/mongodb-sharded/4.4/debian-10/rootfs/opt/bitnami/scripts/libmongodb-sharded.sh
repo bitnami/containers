@@ -4,8 +4,6 @@
 # Bitnami MongoDB library
 
 # shellcheck disable=SC1091
-# shellcheck disable=SC2120
-# shellcheck disable=SC2119
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/liblog.sh
@@ -50,7 +48,7 @@ mongodb_sharded_mongod_initialize() {
     mongodb_set_net_conf
     mongodb_set_log_conf
     mongodb_set_storage_conf
-    mongodb_sharded_set_sharding_conf
+    mongodb_sharded_set_sharding_conf "$MONGODB_CONF_FILE"
 
     if is_dir_empty "$MONGODB_DATA_DIR/db"; then
         info "Deploying MongoDB Sharded from scratch..."
