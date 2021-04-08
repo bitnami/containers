@@ -1,6 +1,6 @@
 version: '2'
 services:
   nginx-exporter:
-    image: docker.io/bitnami/nginx-exporter:0-debian-10
+    image: docker.io/bitnami/nginx-exporter:0
     ports:
       - 9113:9113
