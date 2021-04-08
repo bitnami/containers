@@ -1,7 +1,7 @@
 version: '2'
 services:
   couchdb:
-    image: docker.io/bitnami/couchdb:3-debian-10
+    image: docker.io/bitnami/couchdb:3
     environment:
       - COUCHDB_PASSWORD=couchdb
     ports:
