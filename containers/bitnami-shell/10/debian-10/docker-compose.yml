@@ -1,4 +1,4 @@
 version: '2'
 services:
   bitnami-shell:
-    image: docker.io/bitnami/bitnami-shell:10-debian-10
+    image: docker.io/bitnami/bitnami-shell:10
