@@ -29,7 +29,7 @@ chart_museum_validate() {
         warn "No storage type provided, a local storage will be used"
     fi
 
-    if [[ ! -z "${TLS_CERT:-}" ]] && [[ ! -z "${TLS_KEY:-}" ]]; then
+    if [[ -n "${TLS_CERT:-}" ]] && [[ -n "${TLS_KEY:-}" ]]; then
         if [[ ! -f "$TLS_CERT" ]]; then
             print_validation_error "The TLS certificate file in the specified path ${TLS_CERT} does not exist" || exit 1
         fi
@@ -37,7 +37,7 @@ chart_museum_validate() {
         if [[ ! -f "$TLS_KEY" ]]; then
             print_validation_error "The TLS private key file in the specified path ${TLS_KEY} does not exist" || exit 1
         fi
-    elif [[ ! -z "${TLS_CERT:-}" ]] || [[ ! -z "${TLS_KEY:-}" ]]; then
+    elif [[ -n "${TLS_CERT:-}" ]] || [[ -n "${TLS_KEY:-}" ]]; then
         print_validation_error "Both TLS_CERT and TLS_KEY env variables must be set to enable TLS" || exit 1
     else
         warn "No certificates provided, an insecure connection will be used"
