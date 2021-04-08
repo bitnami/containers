@@ -12,7 +12,7 @@
 ########################
 # Validate settings in MYSQL_CLIENT_* environment variables
 # Globals:
-#   DB_*
+#   MYSQL_CLIENT_*
 # Arguments:
 #   None
 # Returns:
@@ -45,24 +45,24 @@ mysql_client_validate() {
     }
 
     # Only validate environment variables if any action needs to be performed
-    check_yes_no_value "DB_ENABLE_SSL_WRAPPER"
+    check_yes_no_value "MYSQL_CLIENT_ENABLE_SSL_WRAPPER"
 
-    if [[ -n "$DB_CREATE_DATABASE_USER" || -n "$DB_CREATE_DATABASE_NAME" ]]; then
+    if [[ -n "$MYSQL_CLIENT_CREATE_DATABASE_USER" || -n "$MYSQL_CLIENT_CREATE_DATABASE_NAME" ]]; then
         if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
             empty_password_enabled_warn
         else
-            if [[ -z "$DB_ROOT_PASSWORD" ]]; then
-                empty_password_error "$(get_env_var ROOT_PASSWORD)"
+            if [[ -z "$MYSQL_CLIENT_DATABASE_ROOT_PASSWORD" ]]; then
+                empty_password_error "MYSQL_CLIENT_DATABASE_ROOT_PASSWORD"
             fi
-            if [[ -n "$DB_CREATE_DATABASE_USER" ]] && [[ -z "$DB_CREATE_DATABASE_PASSWORD" ]]; then
-                empty_password_error "$(get_env_var CREATE_DATABASE_PASSWORD)"
+            if [[ -n "$MYSQL_CLIENT_CREATE_DATABASE_USER" ]] && [[ -z "$MYSQL_CLIENT_CREATE_DATABASE_PASSWORD" ]]; then
+                empty_password_error "MYSQL_CLIENT_CREATE_DATABASE_PASSWORD"
             fi
         fi
-        if [[ "${DB_ROOT_PASSWORD:-}" = *\\* ]]; then
-            backslash_password_error "$(get_env_var ROOT_PASSWORD)"
+        if [[ "${MYSQL_CLIENT_DATABASE_ROOT_PASSWORD:-}" = *\\* ]]; then
+            backslash_password_error "MYSQL_CLIENT_DATABASE_ROOT_PASSWORD"
         fi
-        if [[ "${DB_CREATE_DATABASE_PASSWORD:-}" = *\\* ]]; then
-            backslash_password_error "$(get_env_var CREATE_DATABASE_PASSWORD)"
+        if [[ "${MYSQL_CLIENT_CREATE_DATABASE_PASSWORD:-}" = *\\* ]]; then
+            backslash_password_error "MYSQL_CLIENT_CREATE_DATABASE_PASSWORD"
         fi
     fi
     return "$error_code"
@@ -71,7 +71,7 @@ mysql_client_validate() {
 ########################
 # Perform actions to a database
 # Globals:
-#   DB_*
+#   MYSQL_CLIENT_*
 # Arguments:
 #   None
 # Returns:
@@ -79,14 +79,14 @@ mysql_client_validate() {
 #########################
 mysql_client_initialize() {
     # Wrap binary to force the usage of SSL
-    if is_boolean_yes "$DB_ENABLE_SSL_WRAPPER"; then
+    if is_boolean_yes "$MYSQL_CLIENT_ENABLE_SSL_WRAPPER"; then
         mysql_client_wrap_binary_for_ssl
     fi
     # Wait for the database to be accessible if any action needs to be performed
-    if [[ -n "$DB_CREATE_DATABASE_USER" || -n "$DB_CREATE_DATABASE_NAME" ]]; then
+    if [[ -n "$MYSQL_CLIENT_CREATE_DATABASE_USER" || -n "$MYSQL_CLIENT_CREATE_DATABASE_NAME" ]]; then
         info "Trying to connect to the database server"
         check_mysql_connection() {
-            echo "SELECT 1" | mysql_execute "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" "-h" "$DB_DATABASE_HOST" "-P" "$DB_DATABASE_PORT_NUMBER"
+            echo "SELECT 1" | mysql_execute "mysql" "$MYSQL_CLIENT_DATABASE_ROOT_USER" "$MYSQL_CLIENT_DATABASE_ROOT_PASSWORD" "-h" "$MYSQL_CLIENT_DATABASE_HOST" "-P" "$MYSQL_CLIENT_DATABASE_PORT_NUMBER"
         }
         if ! retry_while "check_mysql_connection"; then
             error "Could not connect to the database server"
@@ -94,20 +94,20 @@ mysql_client_initialize() {
         fi
     fi
     # Ensure a database user exists in the server
-    if [[ -n "$DB_CREATE_DATABASE_USER" ]]; then
-        info "Creating database user ${DB_CREATE_DATABASE_USER}"
-        local -a args=("$DB_CREATE_DATABASE_USER" "--host" "$DB_DATABASE_HOST" "--port" "$DB_DATABASE_PORT_NUMBER")
-        [[ -n "$DB_CREATE_DATABASE_PASSWORD" ]] && args+=("-p" "$DB_CREATE_DATABASE_PASSWORD")
-        [[ -n "$DB_DATABASE_AUTHENTICATION_PLUGIN" ]] && args+=("--auth-plugin" "$DB_DATABASE_AUTHENTICATION_PLUGIN")
+    if [[ -n "$MYSQL_CLIENT_CREATE_DATABASE_USER" ]]; then
+        info "Creating database user ${MYSQL_CLIENT_CREATE_DATABASE_USER}"
+        local -a args=("$MYSQL_CLIENT_CREATE_DATABASE_USER" "--host" "$MYSQL_CLIENT_DATABASE_HOST" "--port" "$MYSQL_CLIENT_DATABASE_PORT_NUMBER")
+        [[ -n "$MYSQL_CLIENT_CREATE_DATABASE_PASSWORD" ]] && args+=("-p" "$MYSQL_CLIENT_CREATE_DATABASE_PASSWORD")
+        [[ -n "$MYSQL_CLIENT_DATABASE_AUTHENTICATION_PLUGIN" ]] && args+=("--auth-plugin" "$MYSQL_CLIENT_DATABASE_AUTHENTICATION_PLUGIN")
         mysql_ensure_optional_user_exists "${args[@]}"
     fi
     # Ensure a database exists in the server (and that the user has write privileges, if specified)
-    if [[ -n "$DB_CREATE_DATABASE_NAME" ]]; then
-        info "Creating database ${DB_CREATE_DATABASE_NAME}"
-        local -a createdb_args=("$DB_CREATE_DATABASE_NAME" "--host" "$DB_DATABASE_HOST" "--port" "$DB_DATABASE_PORT_NUMBER")
-        [[ -n "$DB_CREATE_DATABASE_USER" ]] && createdb_args+=("-u" "$DB_CREATE_DATABASE_USER")
-        [[ -n "$DB_CREATE_DATABASE_CHARACTER_SET" ]] && createdb_args+=("--character-set" "$DB_CREATE_DATABASE_CHARACTER_SET")
-        [[ -n "$DB_CREATE_DATABASE_COLLATE" ]] && createdb_args+=("--collate" "$DB_CREATE_DATABASE_COLLATE")
+    if [[ -n "$MYSQL_CLIENT_CREATE_DATABASE_NAME" ]]; then
+        info "Creating database ${MYSQL_CLIENT_CREATE_DATABASE_NAME}"
+        local -a createdb_args=("$MYSQL_CLIENT_CREATE_DATABASE_NAME" "--host" "$MYSQL_CLIENT_DATABASE_HOST" "--port" "$MYSQL_CLIENT_DATABASE_PORT_NUMBER")
+        [[ -n "$MYSQL_CLIENT_CREATE_DATABASE_USER" ]] && createdb_args+=("-u" "$MYSQL_CLIENT_CREATE_DATABASE_USER")
+        [[ -n "$MYSQL_CLIENT_CREATE_DATABASE_CHARACTER_SET" ]] && createdb_args+=("--character-set" "$MYSQL_CLIENT_CREATE_DATABASE_CHARACTER_SET")
+        [[ -n "$MYSQL_CLIENT_CREATE_DATABASE_COLLATE" ]] && createdb_args+=("--collate" "$MYSQL_CLIENT_CREATE_DATABASE_COLLATE")
         mysql_ensure_optional_database_exists "${createdb_args[@]}"
     fi
 }
@@ -115,15 +115,15 @@ mysql_client_initialize() {
 ########################
 # Wrap binary to force the usage of SSL
 # Globals:
-#   DB_*
+#   MYSQL_CLIENT_*
 # Arguments:
 #   None
 # Returns:
 #   None
 #########################
 mysql_client_wrap_binary_for_ssl() {
-    local -r wrapper_file="${DB_BIN_DIR}/mysql"
-    local -r wrapped_binary_file="${DB_BASE_DIR}/.bin/mysql"
+    local -r wrapper_file="${MYSQL_CLIENT_BIN_DIR}/mysql"
+    local -r wrapped_binary_file="${MYSQL_CLIENT_BASE_DIR}/.bin/mysql"
     local -a ssl_opts=()
     read -r -a ssl_opts <<< "$(mysql_client_extra_opts)"
 
@@ -134,6 +134,10 @@ exec "${wrapped_binary_file}" "\$@" ${ssl_opts[@]:-}
 EOF
     chmod +x "$wrapper_file"
 }
+
+#!/bin/bash
+#
+# Library for mysql common
 
 ########################
 # Extract mysql version from version string
@@ -149,7 +153,7 @@ mysql_get_version() {
     local -a ver_split
 
     ver_string=$("${DB_BIN_DIR}/mysql" "--version")
-    ver_split=(${ver_string// / })
+    read -r -a ver_split <<< "$ver_string"
 
     if [[ "$ver_string" = *" Distrib "* ]]; then
         echo "${ver_split[4]::-1}"
