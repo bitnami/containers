@@ -106,5 +106,7 @@ indent() {
     for ((i = 0; i < num; i++)); do
         indent_unit="${indent_unit}${char}"
     done
-    echo "${string//^/${indent_unit}}"
+    # shellcheck disable=SC2001
+    # Complex regex, see https://github.com/koalaman/shellcheck/wiki/SC2001#exceptions
+    echo "$string" | sed "s/^/${indent_unit}/"
 }
