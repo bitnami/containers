@@ -3,7 +3,6 @@
 # Bitnami ownCloud library
 
 # shellcheck disable=SC1091
-# shellcheck disable=SC2012
 
 # Load generic libraries
 . /opt/bitnami/scripts/libphp.sh
