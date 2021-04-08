@@ -2,7 +2,7 @@
 #
 # Bitnami MySQL library
 
-# shellcheck disable=SC1091
+# shellcheck disable=SC1090,SC1091
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/libfile.sh
@@ -372,6 +372,10 @@ mysql_custom_init_scripts() {
     fi
 }
 
+#!/bin/bash
+#
+# Library for mysql common
+
 ########################
 # Extract mysql version from version string
 # Globals:
@@ -386,7 +390,7 @@ mysql_get_version() {
     local -a ver_split
 
     ver_string=$("${DB_BIN_DIR}/mysql" "--version")
-    ver_split=(${ver_string// / })
+    read -r -a ver_split <<< "$ver_string"
 
     if [[ "$ver_string" = *" Distrib "* ]]; then
         echo "${ver_split[4]::-1}"
