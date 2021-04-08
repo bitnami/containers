@@ -1,6 +1,6 @@
 version: '2'
 services:
   prometheus-operator:
-    image: docker.io/bitnami/prometheus-operator:0-debian-10
+    image: docker.io/bitnami/prometheus-operator:0
     ports:
       - 8080:8080
