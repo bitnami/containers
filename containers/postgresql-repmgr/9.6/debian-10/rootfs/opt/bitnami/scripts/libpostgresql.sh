@@ -2,8 +2,7 @@
 #
 # Bitnami PostgreSQL library
 
-# shellcheck disable=SC1091
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/libfile.sh
@@ -294,7 +293,6 @@ EOF
 #########################
 postgresql_restrict_pghba() {
     if [[ -n "$POSTGRESQL_PASSWORD" ]]; then
-        local pghba_file
         replace_in_file "$POSTGRESQL_PGHBA_FILE" "trust" "md5" false
     fi
 }
@@ -595,7 +593,7 @@ postgresql_initialize() {
     else
         if [[ "$POSTGRESQL_REPLICATION_MODE" = "master" ]]; then
             postgresql_master_init_db
-            postgresql_start_bg
+            postgresql_start_bg "false"
             [[ -n "${POSTGRESQL_DATABASE}" ]] && [[ "$POSTGRESQL_DATABASE" != "postgres" ]] && postgresql_create_custom_database
             if [[ "$POSTGRESQL_USERNAME" = "postgres" ]]; then
                 postgresql_alter_postgres_user "$POSTGRESQL_PASSWORD"
@@ -671,7 +669,7 @@ postgresql_custom_init_scripts() {
     info "Loading custom scripts..."
     if [[ -d "$POSTGRESQL_INITSCRIPTS_DIR" ]] && [[ -n $(find "$POSTGRESQL_INITSCRIPTS_DIR/" -type f -regex ".*\.\(sh\|sql\|sql.gz\)") ]] && [[ ! -f "$POSTGRESQL_VOLUME_DIR/.user_scripts_initialized" ]]; then
         info "Loading user's custom files from $POSTGRESQL_INITSCRIPTS_DIR ..."
-        postgresql_start_bg
+        postgresql_start_bg "false"
         find "$POSTGRESQL_INITSCRIPTS_DIR/" -type f -regex ".*\.\(sh\|sql\|sql.gz\)" | sort | while read -r f; do
             case "$f" in
             *.sh)
