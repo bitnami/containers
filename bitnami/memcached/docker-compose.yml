@@ -2,6 +2,6 @@ version: '2'
 
 services:
   memcached:
-    image: 'docker.io/bitnami/memcached:1-debian-10'
+    image: docker.io/bitnami/memcached:1
     ports:
       - '11211:11211'
