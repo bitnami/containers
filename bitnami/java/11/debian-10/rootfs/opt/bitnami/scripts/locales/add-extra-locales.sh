@@ -33,6 +33,7 @@ if [[ "$WITH_ALL_LOCALES" =~ ^(yes|true|1)$ ]]; then
     echo "Enabling all locales"
     cp "$SUPPORTED_LOCALES_FILE" "$LOCALES_FILE"
 else
+    # shellcheck disable=SC2001
     LOCALES_TO_ADD="$(sed 's/[,;]\s*/\n/g' <<< "$EXTRA_LOCALES")"
     while [[ -n "$LOCALES_TO_ADD" ]] && read -r locale; do
         echo "Enabling locale ${locale}"
