@@ -259,7 +259,7 @@ redis_configure_replication() {
             else
                 sentinel_info_command="redis-cli -h ${REDIS_SENTINEL_HOST} -p ${REDIS_SENTINEL_PORT_NUMBER} sentinel get-master-addr-by-name ${REDIS_SENTINEL_MASTER_NAME}"
             fi
-            REDIS_SENTINEL_INFO=($($sentinel_info_command))
+            REDIS_SENTINEL_INFO=("$($sentinel_info_command)")
             REDIS_MASTER_HOST=${REDIS_SENTINEL_INFO[0]}
             REDIS_MASTER_PORT_NUMBER=${REDIS_SENTINEL_INFO[1]}
         fi
