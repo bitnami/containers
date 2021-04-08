@@ -2,7 +2,7 @@ version: '2'
 
 services:
   elasticsearch:
-    image: 'docker.io/bitnami/elasticsearch:6-debian-10'
+    image: docker.io/bitnami/elasticsearch:6
     ports:
       - '9200:9200'
       - '9300:9300'
