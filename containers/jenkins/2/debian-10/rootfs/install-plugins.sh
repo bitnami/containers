@@ -2,6 +2,8 @@
 
 ## Based on https://github.com/jenkinsci/docker/blob/610f266227fcda2aa2c409998690607da1dc6c4a/install-plugins.sh
 
+# shellcheck disable=SC1091
+
 set -o pipefail
 
 REF_DIR="/usr/share/jenkins/ref/plugins/"
