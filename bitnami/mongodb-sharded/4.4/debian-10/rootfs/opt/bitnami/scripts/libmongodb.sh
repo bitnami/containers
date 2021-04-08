@@ -1,11 +1,8 @@
 #!/bin/bash
-
 #
 # Bitnami MongoDB library
 
-# shellcheck disable=SC1091
-# shellcheck disable=SC2120
-# shellcheck disable=SC2119
+# shellcheck disable=SC1090,SC1091
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/libfile.sh
@@ -142,7 +139,7 @@ mongodb_execute() {
     local -a args=("--host" "$host" "--port" "$port")
     [[ -n "$final_user" ]] && args+=("-u" "$final_user")
     [[ -n "$password" ]] && args+=("-p" "$password")
-    [[ -n "$extra_args" ]] && args+=($extra_args)
+    [[ -n "$extra_args" ]] && args+=("$extra_args")
     [[ -n "$database" ]] && args+=("$database")
 
     "$MONGODB_BIN_DIR/mongo" "${args[@]}"
@@ -225,7 +222,7 @@ is_mongodb_not_running() {
 #########################
 mongodb_restart() {
     mongodb_stop
-    mongodb_start_bg
+    mongodb_start_bg "$MONGODB_CONF_FILE"
 }
 
 ########################
@@ -242,7 +239,7 @@ mongodb_start_bg() {
     # ref: https://docs.mongodb.com/manual/reference/program/mongod/#cmdoption-mongod-fork
     local -r conf_file="${1:-$MONGODB_CONF_FILE}"
     local flags=("--fork" "--config=$conf_file")
-    [[ -z "${MONGODB_EXTRA_FLAGS:-}" ]] || flags+=(${MONGODB_EXTRA_FLAGS})
+    [[ -z "${MONGODB_EXTRA_FLAGS:-}" ]] || flags+=("${MONGODB_EXTRA_FLAGS}")
 
     debug "Starting MongoDB in background..."
 
@@ -1050,45 +1047,45 @@ mongodb_initialize() {
 
     rm -f "$MONGODB_PID_FILE"
     mongodb_copy_mounted_config
-    mongodb_set_net_conf
-    mongodb_set_log_conf
-    mongodb_set_storage_conf
-    is_boolean_yes "$MONGODB_DISABLE_JAVASCRIPT" && mongodb_disable_javascript_conf
+    mongodb_set_net_conf "$MONGODB_CONF_FILE"
+    mongodb_set_log_conf "$MONGODB_CONF_FILE"
+    mongodb_set_storage_conf "$MONGODB_CONF_FILE"
+    is_boolean_yes "$MONGODB_DISABLE_JAVASCRIPT" && mongodb_disable_javascript_conf "$MONGODB_CONF_FILE"
 
     if is_dir_empty "$MONGODB_DATA_DIR/db"; then
         info "Deploying MongoDB from scratch..."
         ensure_dir_exists "$MONGODB_DATA_DIR/db"
         am_i_root && chown -R "$MONGODB_DAEMON_USER" "$MONGODB_DATA_DIR/db"
 
-        mongodb_start_bg
+        mongodb_start_bg "$MONGODB_CONF_FILE"
         mongodb_create_users
         if [[ -n "$MONGODB_REPLICA_SET_MODE" ]]; then
             if [[ -n "$MONGODB_REPLICA_SET_KEY" ]]; then
                 mongodb_create_keyfile "$MONGODB_REPLICA_SET_KEY"
-                mongodb_set_keyfile_conf
+                mongodb_set_keyfile_conf "$MONGODB_CONF_FILE"
             fi
-            mongodb_set_replicasetmode_conf
-            mongodb_set_listen_all_conf
+            mongodb_set_replicasetmode_conf "$MONGODB_CONF_FILE"
+            mongodb_set_listen_all_conf "$MONGODB_CONF_FILE"
             mongodb_configure_replica_set
         fi
 
         mongodb_stop
     else
-        mongodb_set_auth_conf
+        mongodb_set_auth_conf "$MONGODB_CONF_FILE"
         info "Deploying MongoDB with persisted data..."
         if [[ -n "$MONGODB_REPLICA_SET_MODE" ]]; then
             if [[ -n "$MONGODB_REPLICA_SET_KEY" ]]; then
                 mongodb_create_keyfile "$MONGODB_REPLICA_SET_KEY"
-                mongodb_set_keyfile_conf
+                mongodb_set_keyfile_conf "$MONGODB_CONF_FILE"
             fi
             if [[ "$MONGODB_REPLICA_SET_MODE" = "dynamic" ]]; then
                 mongodb_ensure_dynamic_mode_consistency
             fi
-            mongodb_set_replicasetmode_conf
+            mongodb_set_replicasetmode_conf "$MONGODB_CONF_FILE"
         fi
     fi
 
-    mongodb_set_auth_conf
+    mongodb_set_auth_conf "$MONGODB_CONF_FILE"
 }
 
 ########################
@@ -1104,7 +1101,7 @@ mongodb_ensure_dynamic_mode_consistency() {
     if grep -q -E "^[[:space:]]*replSetName: $MONGODB_REPLICA_SET_NAME" "$MONGODB_CONF_FILE"; then
             info "ReplicaSetMode set to \"dynamic\" and replSetName different from config file."
             info "Dropping local database ..."
-            mongodb_start_bg
+            mongodb_start_bg "$MONGODB_CONF_FILE"
             mongodb_drop_local_database
             mongodb_stop
     fi
@@ -1158,7 +1155,7 @@ mongodb_custom_init_scripts() {
     fi
     if is_boolean_yes "$run_custom_init_scripts"; then
         info "Loading user's custom files from $MONGODB_INITSCRIPTS_DIR ...";
-        mongodb_start_bg
+        mongodb_start_bg "$MONGODB_CONF_FILE"
         local -r tmp_file=/tmp/filelist
         local mongo_user
         local mongo_pass
