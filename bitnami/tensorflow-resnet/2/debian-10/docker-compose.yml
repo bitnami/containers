@@ -1,7 +1,7 @@
 version: "2"
 services:
   tensorflow-serving:
-    image: "docker.io/bitnami/tensorflow-serving:2"
+    image: docker.io/bitnami/tensorflow-serving:2
     ports:
       - 8500:8500
       - 8501:8501
@@ -9,7 +9,7 @@ services:
       - "tensorflow_serving_data:/bitnami"
       - "/tmp/model-data:/bitnami/model-data"
   tensorflow-resnet:
-    image: "docker.io/bitnami/tensorflow-resnet:2-debian-10"
+    image: docker.io/bitnami/tensorflow-resnet:2
     depends_on:
       - tensorflow-serving
     volumes:
