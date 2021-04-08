@@ -1,7 +1,7 @@
 version: '2'
 services:
   mariadb:
-    image: 'docker.io/bitnami/mariadb:10.5-debian-10'
+    image: docker.io/bitnami/mariadb:10.5
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=bn_drupal
@@ -9,7 +9,7 @@ services:
     volumes:
       - 'mariadb_data:/bitnami/mariadb'
   drupal:
-    image: 'docker.io/bitnami/drupal:8-debian-10'
+    image: docker.io/bitnami/drupal:8
     ports:
       - '80:8080'
       - '443:8443'
