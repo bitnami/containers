@@ -3,7 +3,7 @@ version: '2'
 services:
   java:
     tty: true # Enables debugging capabilities when attached to this container.
-    image: 'docker.io/bitnami/java:15-prod-debian-10'
+    image: docker.io/bitnami/java:15-prod
     command: ["tail", "-f", "/dev/null"] # To keep the container running
     ports:
       - 8080:8080
