@@ -18,8 +18,8 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
   airflow-scheduler:
     # TODO: to be reverted to use proper registry/distro on T39132
-    # image: docker.io/bitnami/airflow-scheduler:2-debian-10
-    image: bitnami/airflow-scheduler:2
+    # image: docker.io/bitnami/airflow-scheduler:2
+    image: docker.io/bitnami/airflow-scheduler:2
     environment:
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
@@ -29,8 +29,8 @@ services:
       - airflow_scheduler_data:/bitnami
   airflow-worker:
     # TODO: to be reverted to use proper registry/distro on T39132
-    # image: docker.io/bitnami/airflow-worker:2-debian-10
-    image: bitnami/airflow-worker:2
+    # image: docker.io/bitnami/airflow-worker:2
+    image: docker.io/bitnami/airflow-worker:2
     environment:
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
@@ -39,7 +39,7 @@ services:
     volumes:
       - airflow_worker_data:/bitnami
   airflow:
-    image: docker.io/bitnami/airflow:2-debian-10
+    image: docker.io/bitnami/airflow:2
     environment:
       - AIRFLOW_LDAP_ENABLE=yes
       - AIRFLOW_LDAP_URI=ldap://openldap:1389
