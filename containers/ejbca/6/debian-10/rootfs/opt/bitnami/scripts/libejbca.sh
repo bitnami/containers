@@ -442,7 +442,7 @@ ejbca_create_truststore() {
     info "Load the CAs in the trustkeystore"
     ejbca_ca="$(ejbca_command ca listcas 2>&1)"
     if grep -q 'CA Name: ' <<<"$ejbca_ca"; then
-        ca_list=($(grep 'CA Name: ' <<<"$ejbca_ca" | sed 's/.*CA Name: //g'))
+        ca_list=("$(grep 'CA Name: ' <<<"$ejbca_ca" | sed 's/.*CA Name: //g')")
         for line in "${ca_list[@]}"; do
             ejbca_command ca getcacert \
                 --caname "$line" \
