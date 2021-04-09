@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.4.2`, `2.4.2-debian-10-r40`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.4.2-debian-10-r40/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.4.2`, `2.4.2-debian-10-r41`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.4.2-debian-10-r41/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/magento GitHub repo](https://github.com/bitnami/bitnami-docker-magento).
 
@@ -290,6 +290,7 @@ Available environment variables:
 
 ##### PHP configuration
 
+- `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
 - `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
 - `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. Default: **18000**
 - `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
