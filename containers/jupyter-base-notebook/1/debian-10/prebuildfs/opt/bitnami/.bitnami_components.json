@@ -1,0 +1,16 @@
+{
+    "jupyter-base-notebook": {
+        "arch": "amd64",
+        "digest": "6c48982835cea0dd885f6e909ee4ff4627b64cf001b2d433f17026af7c7b1119",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.3.0-0"
+    },
+    "miniconda": {
+        "arch": "amd64",
+        "digest": "35d4fd9e2c401689d9880a5cd2fb8e099202320a70f025d5f93ca5b800e45d26",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "4.9.2-0"
+    }
+}
