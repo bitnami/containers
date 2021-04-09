@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.7`, `1.7-debian-10`, `1.7.7-3`, `1.7.7-3-debian-10-r7`, `latest` (1.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.7-3-debian-10-r7/1.7/debian-10/Dockerfile)
+* [`1.7`, `1.7-debian-10`, `1.7.7-3`, `1.7.7-3-debian-10-r8`, `latest` (1.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.7-3-debian-10-r8/1.7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prestashop GitHub repo](https://github.com/bitnami/bitnami-docker-prestashop).
 
@@ -248,6 +248,7 @@ Available environment variables:
 
 ##### Create a database for PrestaShop using mysql-client
 
+- `MYSQL_CLIENT_FLAVOR`: SQL database flavor. Valid values: `mariadb` or `mysql`. Default: **mariadb**.
 - `MYSQL_CLIENT_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
 - `MYSQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
 - `MYSQL_CLIENT_DATABASE_ROOT_USER`: Database admin user. Default: **root**
@@ -275,6 +276,7 @@ To configure PrestaShop to send email using SMTP you can set the following envir
 
 ##### PHP configuration
 
+- `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
 - `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
 - `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. Default: **300**
 - `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. Default: **-1**
