@@ -31,7 +31,7 @@ You can find the default credentials and available configuration options in the 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.13.0`, `7.13.0-debian-10-r142`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phppgadmin/blob/7.13.0-debian-10-r142/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.13.0`, `7.13.0-debian-10-r143`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phppgadmin/blob/7.13.0-debian-10-r143/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phppgadmin GitHub repo](https://github.com/bitnami/bitnami-docker-phppgadmin).
 
@@ -170,6 +170,7 @@ The phpPgAdmin instance can be customized by specifying environment variables on
 
 ### PHP configuration
 
+- `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
 - `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
 - `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. No default.
 - `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
