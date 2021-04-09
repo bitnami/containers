@@ -43,7 +43,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`9`, `9-debian-10`, `9.1.6`, `9.1.6-debian-10-r1`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal-nginx/blob/9.1.6-debian-10-r1/9/debian-10/Dockerfile)
-* [`8`, `8-debian-10`, `8.9.13`, `8.9.13-debian-10-r73` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal-nginx/blob/8.9.13-debian-10-r73/8/debian-10/Dockerfile)
+* [`8`, `8-debian-10`, `8.9.13`, `8.9.13-debian-10-r74` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal-nginx/blob/8.9.13-debian-10-r74/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-drupal-nginx).
 
@@ -243,6 +243,7 @@ Available environment variables:
 
 ##### Create a database for Drupal using mysql-client
 
+- `MYSQL_CLIENT_FLAVOR`: SQL database flavor. Valid values: `mariadb` or `mysql`. Default: **mariadb**.
 - `MYSQL_CLIENT_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
 - `MYSQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
 - `MYSQL_CLIENT_DATABASE_ROOT_USER`: Database admin user. Default: **root**
@@ -271,6 +272,7 @@ To configure Drupal to send email using SMTP you can set the following environme
 
 ##### PHP configuration
 
+- `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
 - `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
 - `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. No default.
 - `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
