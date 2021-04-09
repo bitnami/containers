@@ -2,7 +2,7 @@
 #
 # Bitnami Spring Cloud Dataflow Compose Task Runner entrypoint
 
-# shellcheck disable=SC1091
+# shellcheck disable=SC1091,SC2153
 
 set -o errexit
 set -o nounset
@@ -24,7 +24,9 @@ am_i_root && ensure_user_exists "$SCDF_COMPOSED_TASK_RUNNER_DAEMON_USER" --group
 info "** Starting Spring Cloud Dataflow Compose Task Runner **"
 
 __run_cmd="java"
-__run_flags=("$JAVA_OPTS" "-jar" "-Duser.home=${HOME}" "${SCDF_COMPOSED_TASK_RUNNER_BASE_DIR}/scdf-composed-task-runner.jar" "$@")
+read -r -a java_opts <<< "$JAVA_OPTS"
+__run_flags=("-jar" "-Duser.home=${HOME}" "${SCDF_COMPOSED_TASK_RUNNER_BASE_DIR}/scdf-composed-task-runner.jar" "$@")
+[[ "${#java_opts[@]}" -gt 0 ]] && __run_flags=("${java_opts[@]}" "${__run_flags[@]}")
 
 if am_i_root; then
     exec gosu "$SCDF_COMPOSED_TASK_RUNNER_DAEMON_USER" "$__run_cmd" "${__run_flags[@]}"
