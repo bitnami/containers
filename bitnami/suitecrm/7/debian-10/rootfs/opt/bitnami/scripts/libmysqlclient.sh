@@ -153,7 +153,7 @@ mysql_get_version() {
     local -a ver_split
 
     ver_string=$("${DB_BIN_DIR}/mysql" "--version")
-    ver_split=("${ver_string// / }")
+    read -r -a ver_split <<< "$ver_string"
 
     if [[ "$ver_string" = *" Distrib "* ]]; then
         echo "${ver_split[4]::-1}"
