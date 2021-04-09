@@ -2,7 +2,7 @@ version: '2'
 
 services:
   grafana-image-renderer:
-    image: docker.io/bitnami/grafana-image-renderer:2-debian-10
+    image: docker.io/bitnami/grafana-image-renderer:2
     ports:
       - '8080:8080'
     environment:
