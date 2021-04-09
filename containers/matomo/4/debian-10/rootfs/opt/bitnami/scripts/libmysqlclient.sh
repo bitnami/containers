@@ -44,8 +44,15 @@ mysql_client_validate() {
         fi
     }
 
+    check_multi_value() {
+        if [[ " ${2} " != *" ${!1} "* ]]; then
+            print_validation_error "The allowed values for ${1} are: ${2}"
+        fi
+    }
+
     # Only validate environment variables if any action needs to be performed
     check_yes_no_value "MYSQL_CLIENT_ENABLE_SSL_WRAPPER"
+    check_multi_value "MYSQL_CLIENT_FLAVOR" "mariadb mysql"
 
     if [[ -n "$MYSQL_CLIENT_CREATE_DATABASE_USER" || -n "$MYSQL_CLIENT_CREATE_DATABASE_NAME" ]]; then
         if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
