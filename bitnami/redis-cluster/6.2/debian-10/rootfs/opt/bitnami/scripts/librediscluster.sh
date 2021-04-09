@@ -2,10 +2,7 @@
 #
 # Bitnami Redis Cluster library
 
-# shellcheck disable=SC1091
-# shellcheck disable=SC2178
-# shellcheck disable=SC2128
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/libfile.sh
@@ -130,7 +127,7 @@ redis_cluster_create() {
     local create_command
 
     for node in "${nodes[@]}"; do
-        host_and_port=($(to_host_and_port "$node"))
+        read -r -a host_and_port <<< "$(to_host_and_port "$node")"
         wait_command="redis-cli -h ${host_and_port[0]} -p ${host_and_port[1]} ping"
         if is_boolean_yes "$REDIS_TLS_ENABLED"; then
             wait_command="${wait_command:0:-5} --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE} ping"
@@ -145,7 +142,7 @@ redis_cluster_create() {
     sleep "${REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP}"
 
     for node in "${nodes[@]}"; do
-        host_and_port=($(to_host_and_port "$node"))
+        read -r -a host_and_port <<< "$(to_host_and_port "$node")"
         sockets+=("$(wait_for_dns_lookup "${host_and_port[0]}" "${REDIS_CLUSTER_DNS_LOOKUP_RETRIES}" "${REDIS_CLUSTER_DNS_LOOKUP_SLEEP}"):${host_and_port[1]}")
     done
 
@@ -230,7 +227,7 @@ redis_cluster_update_ips() {
 #########################
 to_host_and_port() {
     local host="${1:?host is required}"
-    local host_and_port=($(echo "$host" | tr ":" "\n"))
+    read -r -a host_and_port <<< "$(echo "$host" | tr ":" " ")"
 
     if [ "${#host_and_port[*]}" -eq "1" ]; then
         if is_boolean_yes "$REDIS_TLS_ENABLED"; then
@@ -239,6 +236,6 @@ to_host_and_port() {
             host_and_port=("${host_and_port[0]}" "${REDIS_PORT_NUMBER}")
         fi
     fi
-    
+
     echo "${host_and_port[*]}"
 }
