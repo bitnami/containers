@@ -8,17 +8,17 @@
     },
     "discourse": {
         "arch": "amd64",
-        "digest": "e6ff476a14b1d75ffaa325bfd5e8b23ae863697bc66304cb4e42833e92aff9d0",
+        "digest": "f544fe43c370355724579b8eeda1c4df1eb824e44609c79c3b6b53c87dbe703f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.6.3-0"
+        "version": "2.6.4-0"
     },
     "discourse-sidekiq": {
         "arch": "amd64",
-        "digest": "570d9f57d3e3ba1e86cfdd709e60881d5aa38a693c6410ef0262bd8c1d49a7cd",
+        "digest": "e5638f85d703791962621dcc6d7d4b1b8b608ae97c8b81f710f2961fe4531945",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.6.3-0"
+        "version": "2.6.4-1"
     },
     "git": {
         "arch": "amd64",
@@ -43,10 +43,10 @@
     },
     "ruby": {
         "arch": "amd64",
-        "digest": "4a1c68af2b652fd873124ebb00ec79574007105730059539b1d3223bbea2af34",
+        "digest": "3d605c181d6ae44f6a6debb7c89a4dc64081b5ee28ca41354946f1fa5cd1276a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.6.6-2"
+        "version": "2.6.7-0"
     },
     "tini": {
         "arch": "amd64",
