@@ -22,13 +22,15 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # variable will be overridden with the value specified in that file
 php_env_vars=(
     PHP_FPM_LISTEN_ADDRESS
+    PHP_ENABLE_OPCACHE
+    PHP_EXPOSE_PHP
     PHP_MAX_EXECUTION_TIME
     PHP_MAX_INPUT_TIME
     PHP_MAX_INPUT_VARS
     PHP_MEMORY_LIMIT
     PHP_POST_MAX_SIZE
     PHP_UPLOAD_MAX_FILESIZE
-    PHP_EXPOSE_PHP
+    PHP_OPCACHE_ENABLED
 )
 for env_var in "${php_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -70,12 +72,14 @@ export PHP_FPM_DAEMON_USER="daemon"
 export PHP_FPM_DAEMON_GROUP="daemon"
 
 # PHP configuration
+PHP_ENABLE_OPCACHE="${PHP_ENABLE_OPCACHE:-"${PHP_OPCACHE_ENABLED:-}"}"
+export PHP_ENABLE_OPCACHE="${PHP_ENABLE_OPCACHE:-}"
+export PHP_EXPOSE_PHP="${PHP_EXPOSE_PHP:-}"
 export PHP_MAX_EXECUTION_TIME="${PHP_MAX_EXECUTION_TIME:-}"
 export PHP_MAX_INPUT_TIME="${PHP_MAX_INPUT_TIME:-}"
 export PHP_MAX_INPUT_VARS="${PHP_MAX_INPUT_VARS:-}"
 export PHP_MEMORY_LIMIT="${PHP_MEMORY_LIMIT:-}"
 export PHP_POST_MAX_SIZE="${PHP_POST_MAX_SIZE:-}"
 export PHP_UPLOAD_MAX_FILESIZE="${PHP_UPLOAD_MAX_FILESIZE:-}"
-export PHP_EXPOSE_PHP="${PHP_EXPOSE_PHP:-}"
 
 # Custom environment variables may be defined below
