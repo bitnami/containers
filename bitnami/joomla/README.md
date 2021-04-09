@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.9.25`, `3.9.25-debian-10-r34`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.9.25-debian-10-r34/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.9.25`, `3.9.25-debian-10-r35`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.9.25-debian-10-r35/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/joomla GitHub repo](https://github.com/bitnami/bitnami-docker-joomla).
 
@@ -270,6 +270,7 @@ To configure Joomla! to send email using SMTP you can set the following environm
 
 ##### PHP configuration
 
+- `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
 - `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
 - `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. No default.
 - `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
