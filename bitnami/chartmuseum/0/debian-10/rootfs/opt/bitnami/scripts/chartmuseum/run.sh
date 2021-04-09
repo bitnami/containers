@@ -2,7 +2,7 @@
 #
 # Bitnami Chartmuseum run
 
-# shellcheck disable=SC1091,SC2086
+# shellcheck disable=SC1091
 
 set -o errexit
 set -o nounset
@@ -13,14 +13,19 @@ set -o pipefail
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/liblog.sh
 
-FLAGS=''
+FLAGS=()
 STORAGE="${STORAGE:-local}"
 
 if [[ "$STORAGE" = "local" ]]; then
     info "Using local storage into /bitnami/data directory"
     STORAGE_LOCAL_ROOTDIR='/bitnami/data'
-    FLAGS="$FLAGS --storage $STORAGE --storage-local-rootdir $STORAGE_LOCAL_ROOTDIR"
+    FLAGS+=("--storage" "$STORAGE" "--storage-local-rootdir" "$STORAGE_LOCAL_ROOTDIR")
 fi
 
 info "** Starting chartmuseum **"
-exec /opt/bitnami/chartmuseum/bin/chartmuseum $FLAGS
+EXEC=/opt/bitnami/chartmuseum/bin/chartmuseum
+if [[ "${#FLAGS[@]}" -gt 0 ]]; then
+    exec "$EXEC" "${FLAGS[@]}"
+else
+    exec "$EXEC"
+fi
