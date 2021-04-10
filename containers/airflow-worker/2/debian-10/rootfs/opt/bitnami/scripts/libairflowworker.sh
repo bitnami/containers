@@ -3,7 +3,6 @@
 # Bitnami Airflow library
 
 # shellcheck disable=SC1091
-# shellcheck disable=SC2153
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/libfile.sh
