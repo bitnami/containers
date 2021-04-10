@@ -253,13 +253,10 @@ redis_configure_replication() {
         fi
     elif [[ "$REDIS_REPLICATION_MODE" =~ ^(slave|replica)$ ]]; then
         if [[ -n "$REDIS_SENTINEL_HOST" ]]; then
-            local sentinel_info_command
-            if is_boolean_yes "$REDIS_TLS_ENABLED"; then
-                sentinel_info_command="redis-cli -h ${REDIS_SENTINEL_HOST} -p ${REDIS_SENTINEL_PORT_NUMBER} --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE} sentinel get-master-addr-by-name ${REDIS_SENTINEL_MASTER_NAME}"
-            else
-                sentinel_info_command="redis-cli -h ${REDIS_SENTINEL_HOST} -p ${REDIS_SENTINEL_PORT_NUMBER} sentinel get-master-addr-by-name ${REDIS_SENTINEL_MASTER_NAME}"
-            fi
-            REDIS_SENTINEL_INFO=("$($sentinel_info_command)")
+            local -a sentinel_info_command=("redis-cli" "-h" "${REDIS_SENTINEL_HOST}" "-p" "${REDIS_SENTINEL_PORT_NUMBER}")
+            is_boolean_yes "$REDIS_TLS_ENABLED" && sentinel_info_command+=("--tls" "--cert" "${REDIS_TLS_CERT_FILE}" "--key" "${REDIS_TLS_KEY_FILE}" "--cacert" "${REDIS_TLS_CA_FILE}")
+            sentinel_info_command+=("sentinel" "get-master-addr-by-name" "${REDIS_SENTINEL_MASTER_NAME}")
+            read -r -a REDIS_SENTINEL_INFO <<< "$("${sentinel_info_command[@]}")"
             REDIS_MASTER_HOST=${REDIS_SENTINEL_INFO[0]}
             REDIS_MASTER_PORT_NUMBER=${REDIS_SENTINEL_INFO[1]}
         fi
