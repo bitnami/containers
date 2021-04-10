@@ -21,6 +21,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 mysql_env_vars=(
+    MYSQL_CLIENT_FLAVOR
     ALLOW_EMPTY_PASSWORD
     MYSQL_CLIENT_DATABASE_AUTHENTICATION_PLUGIN
     MYSQL_CLIENT_DATABASE_HOST
@@ -56,7 +57,8 @@ for env_var in "${mysql_env_vars[@]}"; do
     fi
 done
 unset mysql_env_vars
-export DB_FLAVOR="mariadb"
+export MYSQL_CLIENT_FLAVOR="${MYSQL_CLIENT_FLAVOR:-mariadb}"
+export DB_FLAVOR="$MYSQL_CLIENT_FLAVOR"
 
 # Paths
 export DB_BASE_DIR="${BITNAMI_ROOT_DIR}/mysql"
