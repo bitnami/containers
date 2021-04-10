@@ -833,7 +833,11 @@ cassandra_execute() {
 
     is_boolean_yes "$CASSANDRA_CLIENT_ENCRYPTION" && args+=("--ssl")
     [[ -n "$keyspace" ]] && args+=("-k" "$keyspace")
-    [[ -n "$extra_args" ]] && args+=("$extra_args")
+    if [[ -n "$extra_args" ]]; then
+        local extra_args_array=()
+        read -r -a extra_args_array <<< "$extra_args"
+        [[ "${#extra_args[@]}" -gt 0 ]] && args+=("${extra_args_array[@]}")
+    fi
     args+=("$host")
     args+=("$port")
     if [[ "${BITNAMI_DEBUG}" = true ]]; then
