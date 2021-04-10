@@ -373,11 +373,11 @@ influxdb_v2_create_user() {
         local read_grants=("--read-buckets" "--read-checks" "--read-dashboards" "--read-dbrps" "--read-notificationEndpoints" "--read-notificationRules" "--read-orgs" "--read-tasks")
         local write_grants=("--write-buckets" "--write-checks" "--write-dashboards" "--write-dbrps" "--write-notificationEndpoints" "--write-notificationRules" "--write-orgs" "--write-tasks")
 
-        local grants
+        local -a grants
         if [[ ${kind} = "admin" ]] || [[ ${kind} = "write" ]]; then
-            grants=("${read_grants[@]}" "${write_grants[@]}")
+            grants+=("${read_grants[@]}" "${write_grants[@]}")
         elif [[ ${kind} = "read" ]]; then
-            grants=("${read_grants[@]}")
+            grants+=("${read_grants[@]}")
         else
             echo "not supported user kind: ${kind}" && exit 1
         fi
