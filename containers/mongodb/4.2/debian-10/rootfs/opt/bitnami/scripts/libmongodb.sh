@@ -139,7 +139,11 @@ mongodb_execute() {
     local -a args=("--host" "$host" "--port" "$port")
     [[ -n "$final_user" ]] && args+=("-u" "$final_user")
     [[ -n "$password" ]] && args+=("-p" "$password")
-    [[ -n "$extra_args" ]] && args+=("$extra_args")
+    if [[ -n "$extra_args" ]]; then
+        local extra_args_array=()
+        read -r -a extra_args_array <<< "$extra_args"
+        [[ "${#extra_args[@]}" -gt 0 ]] && args+=("${extra_args_array[@]}")
+    fi
     [[ -n "$database" ]] && args+=("$database")
 
     "$MONGODB_BIN_DIR/mongo" "${args[@]}"
@@ -239,7 +243,7 @@ mongodb_start_bg() {
     # ref: https://docs.mongodb.com/manual/reference/program/mongod/#cmdoption-mongod-fork
     local -r conf_file="${1:-$MONGODB_CONF_FILE}"
     local flags=("--fork" "--config=$conf_file")
-    [[ -z "${MONGODB_EXTRA_FLAGS:-}" ]] || flags+=("${MONGODB_EXTRA_FLAGS}")
+    [[ -z "${MONGODB_EXTRA_FLAGS:-}"  ]] || flags+=(${MONGODB_EXTRA_FLAGS})
 
     debug "Starting MongoDB in background..."
 
