@@ -115,7 +115,7 @@ rabbitmq_validate() {
         print_validation_error "You must indicate a password"
     fi
 
-    if is_boolean_yes "$RABBITMQ_ENABLE_LDAP" && ( [[ -z "${RABBITMQ_LDAP_SERVERS}" ]] || [[ -z "${RABBITMQ_LDAP_USER_DN_PATTERN}" ]] ); then
+    if is_boolean_yes "$RABBITMQ_ENABLE_LDAP" && { [[ -z "${RABBITMQ_LDAP_SERVERS}" ]] || [[ -z "${RABBITMQ_LDAP_USER_DN_PATTERN}" ]]; }; then
         print_validation_error "The LDAP configuration is required when LDAP authentication is enabled. Set the environment variables RABBITMQ_LDAP_SERVERS and RABBITMQ_LDAP_USER_DN_PATTERN."
     fi
 
@@ -453,7 +453,6 @@ rabbitmq_erlang_ssl_dir() {
 #   None
 #########################
 rabbitmq_create_combined_ssl_file() {
-    local -r combined_ssl_file="/etc/rabbitmq_combined_keys.pem"
     if [[ ! -f "$RABBITMQ_COMBINED_CERT_PATH" ]]; then
         cat "$RABBITMQ_SSL_CERTFILE" "$RABBITMQ_SSL_KEYFILE" > "$RABBITMQ_COMBINED_CERT_PATH"
     fi
@@ -679,7 +678,6 @@ rabbitmq_join_cluster() {
 
     debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" stop_app
 
-    local counter=0
     if ! retry_while "debug_execute ${RABBITMQ_BIN_DIR}/rabbitmq-plugins --node $clusternode is_enabled rabbitmq_management" 120 1; then
         error "Node ${clusternode} is not running."
         return 1
