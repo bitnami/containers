@@ -9,7 +9,7 @@
 
 # Functions
 ########################
-# Gets semantic version 
+# Gets semantic version
 # Arguments:
 #   $1 - version: string to extract major.minor.patch
 #   $2 - section: 1 to extract major, 2 to extract minor, 3 to extract patch
@@ -38,7 +38,7 @@ get_sematic_version () {
         done
 
         local number_regex='^[0-9]+$'
-        if [[ "$section" =~ $number_regex ]] && (( $section > 0 )) && (( $section <= 3 )); then
+        if [[ "$section" =~ $number_regex ]] && (( section > 0 )) && (( section <= 3 )); then
              echo "${version_sections[$section]}"
              return
         else
