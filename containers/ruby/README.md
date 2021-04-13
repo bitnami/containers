@@ -38,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`3.0`, `3.0-debian-10`, `3.0.1`, `3.0.1-debian-10-r7` (3.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/3.0.1-debian-10-r7/3.0/debian-10/Dockerfile)
 * [`2.7-prod`, `2.7-prod-debian-10`, `2.7.3-prod`, `2.7.3-prod-debian-10-r6` (2.7-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.7.3-prod-debian-10-r6/2.7-prod/debian-10/Dockerfile)
 * [`2.7`, `2.7-debian-10`, `2.7.3`, `2.7.3-debian-10-r6` (2.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.7.3-debian-10-r6/2.7/debian-10/Dockerfile)
-* [`2.6-prod`, `2.6-prod-debian-10`, `2.6.7-prod`, `2.6.7-prod-debian-10-r6` (2.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.7-prod-debian-10-r6/2.6-prod/debian-10/Dockerfile)
+* [`2.6-prod`, `2.6-prod-debian-10`, `2.6.7-prod`, `2.6.7-prod-debian-10-r7` (2.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.7-prod-debian-10-r7/2.6-prod/debian-10/Dockerfile)
 * [`2.6`, `2.6-debian-10`, `2.6.7`, `2.6.7-debian-10-r6`, `latest` (2.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.7-debian-10-r6/2.6/debian-10/Dockerfile)
 * [`2.5-prod`, `2.5-prod-debian-10`, `2.5.9-prod`, `2.5.9-prod-debian-10-r6` (2.5-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.9-prod-debian-10-r6/2.5-prod/debian-10/Dockerfile)
 * [`2.5`, `2.5-debian-10`, `2.5.9`, `2.5.9-debian-10-r6` (2.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.5.9-debian-10-r6/2.5/debian-10/Dockerfile)
