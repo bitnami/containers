@@ -78,6 +78,7 @@ mysql_client_validate() {
 ########################
 # Perform actions to a database
 # Globals:
+#   DB_*
 #   MYSQL_CLIENT_*
 # Arguments:
 #   None
@@ -122,6 +123,7 @@ mysql_client_initialize() {
 ########################
 # Wrap binary to force the usage of SSL
 # Globals:
+#   DB_*
 #   MYSQL_CLIENT_*
 # Arguments:
 #   None
@@ -129,8 +131,8 @@ mysql_client_initialize() {
 #   None
 #########################
 mysql_client_wrap_binary_for_ssl() {
-    local -r wrapper_file="${MYSQL_CLIENT_BIN_DIR}/mysql"
-    local -r wrapped_binary_file="${MYSQL_CLIENT_BASE_DIR}/.bin/mysql"
+    local -r wrapper_file="${DB_BIN_DIR}/mysql"
+    local -r wrapped_binary_file="${DB_BASE_DIR}/.bin/mysql"
     local -a ssl_opts=()
     read -r -a ssl_opts <<< "$(mysql_client_extra_opts)"
 
