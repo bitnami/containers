@@ -471,6 +471,7 @@ elasticsearch_initialize() {
         elasticsearch_cluster_configuration
         elasticsearch_configure_node_type
         elasticsearch_custom_configuration
+        [[ -d "${ELASTICSEARCH_BASE_DIR}/modules/x-pack-ml/platform/linux-x86_64/lib" ]] || elasticsearch_conf_set xpack.ml.enabled "false"
     fi
 }
 
