@@ -1,9 +1,9 @@
 {
     "cert-manager": {
         "arch": "amd64",
-        "digest": "bac88fbea9cc5589ecb13a578c04ee39ea898183f8e5d10884ea3cb2b1b5b9ea",
+        "digest": "3d7870f2c7f07f3b2e9a3d60392c94edbc35cfc8637180ba0df0af38aa23b613",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.2.0-0"
+        "version": "1.3.0-0"
     }
 }
