@@ -22,9 +22,17 @@
 # Arguments:
 #   None
 # Returns:
-#   None
+#   0 if the validation succeeded, 1 otherwise
 #########################
 airflow_validate() {
+    local error_code=0
+
+    # Auxiliary functions
+    print_validation_error() {
+        error "$1"
+        error_code=1
+    }
+
     # Check postgresql host
     [[ -z "$AIRFLOW_DATABASE_HOST" ]] && print_validation_error "Missing AIRFLOW_DATABASE_HOST"
 
@@ -45,6 +53,8 @@ airflow_validate() {
         [[ -z "$AIRFLOW_POOL_DESC" ]] && print_validation_error "Provided AIRFLOW_POOL_NAME but missing AIRFLOW_POOL_DESC"
         [[ -z "$AIRFLOW_POOL_SIZE" ]] && print_validation_error "Provided AIRFLOW_POOL_NAME but missing AIRFLOW_POOL_SIZE"
     fi
+
+    return "$error_code"
 }
 
 ########################
