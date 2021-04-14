@@ -703,8 +703,11 @@ repmgr_initialize() {
         postgresql_start_bg
         repmgr_unregister_standby
         repmgr_register_standby
-        if [[ "$psql_major_version" -lt "12" ]]; then
-           repmgr_standby_follow
+        
+        if [[ "$psql_major_version" -lt "12" ]]; then 
+            info "Check if primary running..."
+            repmgr_wait_primary_node
+            repmgr_standby_follow
         fi
     fi
 }
