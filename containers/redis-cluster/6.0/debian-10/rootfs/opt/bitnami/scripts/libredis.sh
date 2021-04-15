@@ -49,6 +49,7 @@ redis_conf_set() {
     value="${value//\\/\\\\}"
     value="${value//&/\\&}"
     value="${value//\?/\\?}"
+    value="${value//[$'\t\n\r']}"
     [[ "$value" = "" ]] && value="\"$value\""
 
     replace_in_file "${REDIS_BASE_DIR}/etc/redis.conf" "^#*\s*${key} .*" "${key} ${value}" false
