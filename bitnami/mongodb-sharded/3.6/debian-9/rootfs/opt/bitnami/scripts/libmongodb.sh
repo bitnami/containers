@@ -243,7 +243,11 @@ mongodb_start_bg() {
     # ref: https://docs.mongodb.com/manual/reference/program/mongod/#cmdoption-mongod-fork
     local -r conf_file="${1:-$MONGODB_CONF_FILE}"
     local flags=("--fork" "--config=$conf_file")
-    [[ -z "${MONGODB_EXTRA_FLAGS:-}"  ]] || flags+=(${MONGODB_EXTRA_FLAGS})
+    if [[ -n "${MONGODB_EXTRA_FLAGS:-}" ]]; then
+        local extra_flags_array=()
+        read -r -a extra_flags_array <<< "$MONGODB_EXTRA_FLAGS"
+        [[ "${#extra_flags_array[@]}" -gt 0 ]] && flags+=("${extra_flags_array[@]}")
+    fi
 
     debug "Starting MongoDB in background..."
 
