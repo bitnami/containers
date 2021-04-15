@@ -519,18 +519,19 @@ rabbitmq_download_community_plugins() {
 #########################
 rabbitmq_create_enabled_plugins_file() {
     debug "Creating enabled_plugins file..."
-    local plugins="rabbitmq_management_agent"
+    local -a plugins=("rabbitmq_management_agent")
 
     if [[ -n "${RABBITMQ_PLUGINS:-}" ]]; then
-        plugins="$RABBITMQ_PLUGINS"
+        read -r -a extra_plugins_array <<< "$(tr ',;' ' ' <<< "$RABBITMQ_PLUGINS")"
+        [[ "${#extra_plugins_array[@]}" -gt 0 ]] && plugins+=("${extra_plugins_array[@]}")
     else
         if [[ "$RABBITMQ_NODE_TYPE" = "stats" ]]; then
-            plugins="rabbitmq_management"
+            plugins=("rabbitmq_management")
         fi
-        is_boolean_yes "$RABBITMQ_ENABLE_LDAP" && plugins="${plugins}, rabbitmq_auth_backend_ldap"
+        is_boolean_yes "$RABBITMQ_ENABLE_LDAP" && plugins+=("rabbitmq_auth_backend_ldap")
     fi
     cat > "${RABBITMQ_CONF_DIR}/enabled_plugins" <<EOF
-[${plugins}].
+[$(echo "${plugins[@]}" | sed -E 's/\s+/,/g')].
 EOF
 }
 
