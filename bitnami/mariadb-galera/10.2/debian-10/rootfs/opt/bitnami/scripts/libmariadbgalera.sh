@@ -81,6 +81,8 @@ mysql_extra_flags() {
 #########################
 get_galera_cluster_bootstrap_value() {
     local clusterBootstrap
+    local local_ip
+    local host_ip
 
     # This block evaluate if the cluster needs to be boostraped or not.
     # When the node is marked to bootstrap:
