@@ -215,7 +215,7 @@ parse:
 
 Available variables:
  - `PARSE_HOST`: Parse server host. Default: **127.0.0.1**
- - `PARSE_PORT_NUMBER_NUMBER`: Parse server port. Default: **1337**
+ - `PARSE_PORT_NUMBER`: Parse server port. Default: **1337**
  - `PARSE_MOUNT_PATH`: Parse server mount path. Default: **/parse**
  - `PARSE_APP_ID`: Parse server App ID. Default: **myappID**
  - `PARSE_MASTER_KEY`: Parse server Master Key: **mymasterKey**
