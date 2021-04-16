@@ -43,10 +43,10 @@
     },
     "wordpress": {
         "arch": "amd64",
-        "digest": "3ffd475c0ee3a6e4b705dba59f31a0f96d0e44169e9eabd5c55c7dd653b154f0",
+        "digest": "60cef2bcfae9064930310d3114bf7900f9396c5ca747e0186febf347ba508a0e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "5.7.1-0"
+        "version": "5.7.1-1"
     },
     "wp-cli": {
         "arch": "amd64",
