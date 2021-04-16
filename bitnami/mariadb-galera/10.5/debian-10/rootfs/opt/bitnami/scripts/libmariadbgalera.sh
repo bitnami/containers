@@ -887,6 +887,10 @@ mysql_start_bg() {
     # users are not configured on slave nodes during initialization due to --skip-slave-start
     wait_for_mysql
 
+    # Wait for WSREP to be ready. If WSREP is not ready, we cannot do any transactions, thus cannot
+    # create any users, and WSREP instantly kills MariaDB if doing so
+    wait_for_wsrep
+
     # Special configuration flag for system with slow disks that could take more time
     # in initializing
     if [[ -n "${DB_INIT_SLEEP_TIME}" ]]; then
@@ -911,6 +915,44 @@ wait_for_mysql() {
     if ! retry_while is_mysql_running "$retries" "$sleep_time"; then
         error "MySQL failed to start"
         return 1
+    fi
+}
+
+########################
+# Wait for WSREP to be ready to do transactions
+# Arguments:
+#   None
+# Returns:
+#   None
+########################
+wait_for_wsrep() {
+    local -r retries=300
+    local -r sleep_time=2
+    if ! retry_while is_wsrep_ready "$retries" "$sleep_time"; then
+        error "WSREP did not become ready"
+        return 1
+    fi
+}
+
+########################
+# Checks for WSREP to be ready to do transactions
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+########################
+is_wsrep_ready() {
+    debug "Checking if WSREP is ready"
+    is_ready="$(mysql_execute_print_output "mysql" "root" "" "-ss" "${opts[@]:-}" <<EOF
+select VARIABLE_VALUE from information_schema.GLOBAL_STATUS where VARIABLE_NAME = 'wsrep_ready';
+EOF
+)"
+    if [[ $is_ready == 'ON' ]]; then
+        debug "WSREP status $is_ready"
+        true
+    else
+        debug "WSREP status $is_ready"
+        false
     fi
 }
 
