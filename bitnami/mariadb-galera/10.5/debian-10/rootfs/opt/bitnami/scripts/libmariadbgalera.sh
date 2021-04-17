@@ -655,6 +655,89 @@ get_node_address() {
     fi
 }
 
+########################
+# Starts MySQL/MariaDB in the background and waits until it's ready
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+mysql_start_bg() {
+    local -a flags=("--defaults-file=${DB_CONF_FILE}" "--basedir=${DB_BASE_DIR}" "--datadir=${DB_DATA_DIR}" "--socket=${DB_SOCKET_FILE}")
+
+    # Only allow local connections until MySQL is fully initialized, to avoid apps trying to connect to MySQL before it is fully initialized
+    flags+=("--bind-address=127.0.0.1")
+
+    # Add flags specified via the 'DB_EXTRA_FLAGS' environment variable
+    read -r -a db_extra_flags <<< "$(mysql_extra_flags)"
+    [[ "${#db_extra_flags[@]}" -gt 0 ]] && flags+=("${db_extra_flags[@]}")
+
+    # Do not start as root, to avoid permission issues
+    am_i_root && flags+=("--user=${DB_DAEMON_USER}")
+
+    # The slave should only start in 'run.sh', elseways user credentials would be needed for any connection
+    flags+=("--skip-slave-start")
+    flags+=("$@")
+
+    is_mysql_running && return
+
+    info "Starting $DB_FLAVOR in background"
+    debug_execute "${DB_SBIN_DIR}/mysqld" "${flags[@]}" &
+
+    # we cannot use wait_for_mysql_access here as mysql_upgrade for MySQL >=8 depends on this command
+    # users are not configured on slave nodes during initialization due to --skip-slave-start
+    wait_for_mysql
+
+    # Wait for WSREP to be ready. If WSREP is not ready, we cannot do any transactions, thus cannot
+    # create any users, and WSREP instantly kills MariaDB if doing so
+    wait_for_wsrep
+
+    # Special configuration flag for system with slow disks that could take more time
+    # in initializing
+    if [[ -n "${DB_INIT_SLEEP_TIME}" ]]; then
+        debug "Sleeping ${DB_INIT_SLEEP_TIME} seconds before continuing with initialization"
+        sleep "${DB_INIT_SLEEP_TIME}"
+    fi
+}
+
+########################
+# Wait for WSREP to be ready to do transactions
+# Arguments:
+#   None
+# Returns:
+#   None
+########################
+wait_for_wsrep() {
+    local -r retries=300
+    local -r sleep_time=2
+    if ! retry_while is_wsrep_ready "$retries" "$sleep_time"; then
+        error "WSREP did not become ready"
+        return 1
+    fi
+}
+
+########################
+# Checks for WSREP to be ready to do transactions
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+########################
+is_wsrep_ready() {
+    debug "Checking if WSREP is ready"
+    is_ready="$(mysql_execute_print_output "mysql" "root" <<EOF
+select VARIABLE_VALUE from information_schema.GLOBAL_STATUS where VARIABLE_NAME = 'wsrep_ready';
+EOF
+)"
+    debug "WSREP status $is_ready"
+    if [[ $is_ready == 'ON' ]]; then
+        true
+    else
+        false
+    fi
+}
 #!/bin/bash
 #
 # Library for mysql common
@@ -853,53 +936,6 @@ is_mysql_not_running() {
 }
 
 ########################
-# Starts MySQL/MariaDB in the background and waits until it's ready
-# Globals:
-#   DB_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-mysql_start_bg() {
-    local -a flags=("--defaults-file=${DB_CONF_FILE}" "--basedir=${DB_BASE_DIR}" "--datadir=${DB_DATA_DIR}" "--socket=${DB_SOCKET_FILE}")
-
-    # Only allow local connections until MySQL is fully initialized, to avoid apps trying to connect to MySQL before it is fully initialized
-    flags+=("--bind-address=127.0.0.1")
-
-    # Add flags specified via the 'DB_EXTRA_FLAGS' environment variable
-    read -r -a db_extra_flags <<< "$(mysql_extra_flags)"
-    [[ "${#db_extra_flags[@]}" -gt 0 ]] && flags+=("${db_extra_flags[@]}")
-
-    # Do not start as root, to avoid permission issues
-    am_i_root && flags+=("--user=${DB_DAEMON_USER}")
-
-    # The slave should only start in 'run.sh', elseways user credentials would be needed for any connection
-    flags+=("--skip-slave-start")
-    flags+=("$@")
-
-    is_mysql_running && return
-
-    info "Starting $DB_FLAVOR in background"
-    debug_execute "${DB_SBIN_DIR}/mysqld" "${flags[@]}" &
-
-    # we cannot use wait_for_mysql_access here as mysql_upgrade for MySQL >=8 depends on this command
-    # users are not configured on slave nodes during initialization due to --skip-slave-start
-    wait_for_mysql
-
-    # Wait for WSREP to be ready. If WSREP is not ready, we cannot do any transactions, thus cannot
-    # create any users, and WSREP instantly kills MariaDB if doing so
-    wait_for_wsrep
-
-    # Special configuration flag for system with slow disks that could take more time
-    # in initializing
-    if [[ -n "${DB_INIT_SLEEP_TIME}" ]]; then
-        debug "Sleeping ${DB_INIT_SLEEP_TIME} seconds before continuing with initialization"
-        sleep "${DB_INIT_SLEEP_TIME}"
-    fi
-}
-
-########################
 # Wait for MySQL/MariaDB to be running
 # Globals:
 #   DB_TMP_DIR
@@ -915,44 +951,6 @@ wait_for_mysql() {
     if ! retry_while is_mysql_running "$retries" "$sleep_time"; then
         error "MySQL failed to start"
         return 1
-    fi
-}
-
-########################
-# Wait for WSREP to be ready to do transactions
-# Arguments:
-#   None
-# Returns:
-#   None
-########################
-wait_for_wsrep() {
-    local -r retries=300
-    local -r sleep_time=2
-    if ! retry_while is_wsrep_ready "$retries" "$sleep_time"; then
-        error "WSREP did not become ready"
-        return 1
-    fi
-}
-
-########################
-# Checks for WSREP to be ready to do transactions
-# Arguments:
-#   None
-# Returns:
-#   Boolean
-########################
-is_wsrep_ready() {
-    debug "Checking if WSREP is ready"
-    is_ready="$(mysql_execute_print_output "mysql" "root" "" "-ss" "${opts[@]:-}" <<EOF
-select VARIABLE_VALUE from information_schema.GLOBAL_STATUS where VARIABLE_NAME = 'wsrep_ready';
-EOF
-)"
-    if [[ $is_ready == 'ON' ]]; then
-        debug "WSREP status $is_ready"
-        true
-    else
-        debug "WSREP status $is_ready"
-        false
     fi
 }
 
