@@ -342,49 +342,6 @@ is_mysql_not_running() {
 }
 
 ########################
-# Starts MySQL/MariaDB in the background and waits until it's ready
-# Globals:
-#   DB_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-mysql_start_bg() {
-    local -a flags=("--defaults-file=${DB_CONF_FILE}" "--basedir=${DB_BASE_DIR}" "--datadir=${DB_DATA_DIR}" "--socket=${DB_SOCKET_FILE}")
-
-    # Only allow local connections until MySQL is fully initialized, to avoid apps trying to connect to MySQL before it is fully initialized
-    flags+=("--bind-address=127.0.0.1")
-
-    # Add flags specified via the 'DB_EXTRA_FLAGS' environment variable
-    read -r -a db_extra_flags <<< "$(mysql_extra_flags)"
-    [[ "${#db_extra_flags[@]}" -gt 0 ]] && flags+=("${db_extra_flags[@]}")
-
-    # Do not start as root, to avoid permission issues
-    am_i_root && flags+=("--user=${DB_DAEMON_USER}")
-
-    # The slave should only start in 'run.sh', elseways user credentials would be needed for any connection
-    flags+=("--skip-slave-start")
-    flags+=("$@")
-
-    is_mysql_running && return
-
-    info "Starting $DB_FLAVOR in background"
-    debug_execute "${DB_SBIN_DIR}/mysqld" "${flags[@]}" &
-
-    # we cannot use wait_for_mysql_access here as mysql_upgrade for MySQL >=8 depends on this command
-    # users are not configured on slave nodes during initialization due to --skip-slave-start
-    wait_for_mysql
-
-    # Special configuration flag for system with slow disks that could take more time
-    # in initializing
-    if [[ -n "${DB_INIT_SLEEP_TIME}" ]]; then
-        debug "Sleeping ${DB_INIT_SLEEP_TIME} seconds before continuing with initialization"
-        sleep "${DB_INIT_SLEEP_TIME}"
-    fi
-}
-
-########################
 # Wait for MySQL/MariaDB to be running
 # Globals:
 #   DB_TMP_DIR
