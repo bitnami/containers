@@ -16,7 +16,7 @@ set -o pipefail
 
 # Constants
 EXEC=$(command -v elasticsearch)
-ARGS=("-p" "$ELASTICSEARCH_TMP_DIR/elasticsearch.pid" "-Epath.data=$ELASTICSEARCH_DATA_DIR")
+ARGS=("-p" "$ELASTICSEARCH_TMP_DIR/elasticsearch.pid")
 [[ -z "${ELASTICSEARCH_EXTRA_FLAGS:-}" ]] || ARGS=("${ARGS[@]}" "${ELASTICSEARCH_EXTRA_FLAGS[@]}")
 export JAVA_HOME=/opt/bitnami/java
 

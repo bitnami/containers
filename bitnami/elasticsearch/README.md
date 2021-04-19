@@ -86,7 +86,7 @@ $ docker run \
 or by making a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-mariadb:
+elasticsearch:
   ...
   volumes:
     - /path/to/elasticsearch-data-persistence:/bitnami/elasticsearch/data
@@ -94,6 +94,19 @@ mariadb:
 ```
 
 > NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
+
+It is also possible to use multiple volumes for data persistence by using the `ELASTICSEARCH_DATA_DIR_LIST`environment variable:
+
+```yaml
+elasticsearch:
+  ...
+  volumes:
+    - /path/to/elasticsearch-data-persistence-1:/elasticsearch/data-1
+    - /path/to/elasticsearch-data-persistence-2:/elasticsearch/data-2
+  environment:
+    - ELASTICSEARCH_DATA_DIR_LIST=/elasticsearch/data-1,/elasticsearch/data-2
+  ...
+```
 
 ## Connecting to other containers
 
@@ -208,6 +221,7 @@ Available variables:
 * `ELASTICSEARCH_KEYS`: Comma, semi-colon or space separated list of key-value pairs (key=value) to store. No defaults.
 * `ELASTICSEARCH_HEAP_SIZE`: Memory used for the Xmx and Xms java heap values. Default: **1024m**
 * `ELASTICSEARCH_FS_SNAPSHOT_REPO_PATH`: Elasticsearch file system snapshot repository path. No defaults.
+* `ELASTICSEARCH_DATA_DIR_LIST`: Comma, semi-colon or space separated list of directories to use for data storage. No defaults.
 
 ### Setting up a cluster
 

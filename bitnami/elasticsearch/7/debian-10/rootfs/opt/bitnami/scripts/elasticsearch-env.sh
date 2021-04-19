@@ -42,6 +42,7 @@ elasticsearch_env_vars=(
     ELASTICSEARCH_PLUGINS
     ELASTICSEARCH_KEYS
     ELASTICSEARCH_PORT_NUMBER
+    ELASTICSEARCH_DATA_DIR_LIST
 )
 for env_var in "${elasticsearch_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -97,5 +98,6 @@ export ELASTICSEARCH_NODE_TYPE="${ELASTICSEARCH_NODE_TYPE:-master}"
 export ELASTICSEARCH_PLUGINS="${ELASTICSEARCH_PLUGINS:-}"
 export ELASTICSEARCH_KEYS="${ELASTICSEARCH_KEYS:-}"
 export ELASTICSEARCH_PORT_NUMBER="${ELASTICSEARCH_PORT_NUMBER:-9200}"
+export ELASTICSEARCH_DATA_DIR_LIST="${ELASTICSEARCH_DATA_DIR_LIST:-}"
 
 # Custom environment variables may be defined below
