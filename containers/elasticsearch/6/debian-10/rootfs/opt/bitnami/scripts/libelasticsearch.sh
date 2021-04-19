@@ -126,7 +126,7 @@ elasticsearch_start() {
     is_elasticsearch_running && return
 
     debug "Starting Elasticsearch..."
-    local command=("${ELASTICSEARCH_BASE_DIR}/bin/elasticsearch" "-d" "-p" "${ELASTICSEARCH_TMP_DIR}/elasticsearch.pid" "-Epath.data=$ELASTICSEARCH_DATA_DIR")
+    local command=("${ELASTICSEARCH_BASE_DIR}/bin/elasticsearch" "-d" "-p" "${ELASTICSEARCH_TMP_DIR}/elasticsearch.pid")
     am_i_root && command=("gosu" "$ELASTICSEARCH_DAEMON_USER" "${command[@]}")
     if [[ "$BITNAMI_DEBUG" = true ]]; then
         "${command[@]}" &
@@ -432,14 +432,21 @@ elasticsearch_initialize() {
     # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
     rm -f "$ELASTICSEARCH_TMP_DIR/elasticsearch.pid"
 
-    # Persisted data from old versions
-    if ! is_dir_empty "$ELASTICSEARCH_DATA_DIR"; then
-        debug "Detected persisted data from previous deployments"
-        [[ -d "$ELASTICSEARCH_DATA_DIR/elasticsearch" ]] && [[ -f "$ELASTICSEARCH_DATA_DIR/elasticsearch/.initialized" ]] && migrate_old_data
+    read -r -a data_dirs_list <<<"$(tr ',;' ' ' <<<"$ELASTICSEARCH_DATA_DIR_LIST")"
+    if [[ "${#data_dirs_list[@]}" -gt 0 ]]; then
+        info "Multiple data directories specified, ignoring ELASTICSEARCH_DATA_DIR option"
+    else
+        data_dirs_list+=("$ELASTICSEARCH_DATA_DIR")
+
+        # Persisted data from old versions
+        if ! is_dir_empty "$ELASTICSEARCH_DATA_DIR"; then
+            debug "Detected persisted data from previous deployments"
+            [[ -d "$ELASTICSEARCH_DATA_DIR/elasticsearch" ]] && [[ -f "$ELASTICSEARCH_DATA_DIR/elasticsearch/.initialized" ]] && migrate_old_data
+        fi
     fi
 
     debug "Ensuring expected directories/files exist..."
-    for dir in "$ELASTICSEARCH_TMP_DIR" "$ELASTICSEARCH_DATA_DIR" "$ELASTICSEARCH_LOGS_DIR" "$ELASTICSEARCH_BASE_DIR/plugins" "$ELASTICSEARCH_BASE_DIR/modules" "$ELASTICSEARCH_CONF_DIR"; do
+    for dir in "$ELASTICSEARCH_TMP_DIR" "${data_dirs_list[@]}" "$ELASTICSEARCH_LOGS_DIR" "$ELASTICSEARCH_BASE_DIR/plugins" "$ELASTICSEARCH_BASE_DIR/modules" "$ELASTICSEARCH_CONF_DIR"; do
         ensure_dir_exists "$dir"
         am_i_root && chown -R "$ELASTICSEARCH_DAEMON_USER:$ELASTICSEARCH_DAEMON_GROUP" "$dir"
     done
@@ -464,7 +471,7 @@ elasticsearch_initialize() {
         info "Setting default configuration"
         touch "$ELASTICSEARCH_CONF_FILE"
         elasticsearch_conf_set http.port "$ELASTICSEARCH_PORT_NUMBER"
-        elasticsearch_conf_set path.data "$ELASTICSEARCH_DATA_DIR"
+        elasticsearch_conf_set path.data "${data_dirs_list[@]}"
         elasticsearch_conf_set transport.tcp.port "$ELASTICSEARCH_NODE_PORT_NUMBER"
         is_boolean_yes "$ELASTICSEARCH_ACTION_DESTRUCTIVE_REQUIRES_NAME" && elasticsearch_conf_set action.destructive_requires_name "true"
         is_boolean_yes "$ELASTICSEARCH_LOCK_ALL_MEMORY" && elasticsearch_conf_set bootstrap.memory_lock "true"
