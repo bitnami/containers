@@ -15,10 +15,10 @@
     },
     "pgbouncer": {
         "arch": "amd64",
-        "digest": "6e3cbcdfcde40c2189c361876710919f9075a0743be4930a4a2f9233ab2eaacd",
+        "digest": "da9f06f3340fa2a9483ee59fc045c34acc8411f1bdf2a9e71254cd3f3346c777",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.15.0-1"
+        "version": "1.15.0-2"
     },
     "postgresql-client": {
         "arch": "amd64",
