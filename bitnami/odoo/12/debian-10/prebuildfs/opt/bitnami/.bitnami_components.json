@@ -15,10 +15,10 @@
     },
     "odoo": {
         "arch": "amd64",
-        "digest": "3b9406a029094ab6d495f9fbcddd4c822eab3e1539ccc7051827183465f2c86c",
+        "digest": "3f5dc30af5ef895cabf09e152a060d67a75e34eb22947295b1d38333b4cfcb40",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "12.0.20210415-0"
+        "version": "12.0.20210415-1"
     },
     "postgresql-client": {
         "arch": "amd64",
@@ -29,10 +29,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "b4a195d69e9adbed71cbacb1f43013cf49fb0e1000fa08a575969704995c561b",
+        "digest": "17767ca76f5bd434f629b66edc4a6f3d5cd504a0ad5894811ea25d3614242f24",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.6.13-1"
+        "version": "3.6.13-2"
     },
     "tini": {
         "arch": "amd64",
