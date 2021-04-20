@@ -1,10 +1,10 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "fb5216cb32c47100d039af1b738b2e9d48f48aac194ca9b47ffb9ea42517a9ea",
+        "digest": "cfb1835e471967ec5a6df8c622bdd907be03fb5b57b4f86f68eb7b73fe0f6be3",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.46-6"
+        "version": "2.4.46-7"
     },
     "gosu": {
         "arch": "amd64",
@@ -15,10 +15,10 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "c421ba5d9e4ad24e94662a3fa4fa73b172e5245a7a5bc866ce20d705d68d0882",
+        "digest": "70248d4fc19d31ff422044ba05e3f50712881be444bb1ac22bf2080782877431",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.16-0"
+        "version": "7.4.16-1"
     },
     "magento": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "f92750a3b9b5e00a1e1b4ab0025be54f6abf1f8c6803f9b15b791c4e82b1a7e8",
+        "digest": "c5a8cab6bbdfc925cb108ad65489218b8060c035fbd28c5e2a8bc63162a03048",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.16-6"
+        "version": "7.4.16-7"
     },
     "render-template": {
         "arch": "amd64",
