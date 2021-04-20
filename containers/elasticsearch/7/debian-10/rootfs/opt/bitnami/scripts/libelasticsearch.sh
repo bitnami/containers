@@ -432,9 +432,9 @@ elasticsearch_initialize() {
     # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
     rm -f "$ELASTICSEARCH_TMP_DIR/elasticsearch.pid"
 
-    read -r -a data_dirs_list <<<"$(tr ',;' ' ' <<<"$ELASTICSEARCH_DATA_DIR_LIST")"
+    read -r -a data_dirs_list <<< "$(tr ',;' ' ' <<< "$ELASTICSEARCH_DATA_DIR_LIST")"
     if [[ "${#data_dirs_list[@]}" -gt 0 ]]; then
-        info "Multiple data directories specified, ignoring ELASTICSEARCH_DATA_DIR option"
+        info "Multiple data directories specified, ignoring ELASTICSEARCH_DATA_DIR environment variable."
     else
         data_dirs_list+=("$ELASTICSEARCH_DATA_DIR")
 
@@ -446,9 +446,13 @@ elasticsearch_initialize() {
     fi
 
     debug "Ensuring expected directories/files exist..."
-    for dir in "$ELASTICSEARCH_TMP_DIR" "${data_dirs_list[@]}" "$ELASTICSEARCH_LOGS_DIR" "$ELASTICSEARCH_BASE_DIR/plugins" "$ELASTICSEARCH_BASE_DIR/modules" "$ELASTICSEARCH_CONF_DIR"; do
+    for dir in "$ELASTICSEARCH_TMP_DIR" "$ELASTICSEARCH_LOGS_DIR" "$ELASTICSEARCH_BASE_DIR/plugins" "$ELASTICSEARCH_BASE_DIR/modules" "$ELASTICSEARCH_CONF_DIR"; do
         ensure_dir_exists "$dir"
         am_i_root && chown -R "$ELASTICSEARCH_DAEMON_USER:$ELASTICSEARCH_DAEMON_GROUP" "$dir"
+    done
+    for dir in "${data_dirs_list[@]}"; do
+        ensure_dir_exists "$dir"
+        am_i_root && is_mounted_dir_empty "$dir" && chown -R "$ELASTICSEARCH_DAEMON_USER:$ELASTICSEARCH_DAEMON_GROUP" "$dir"
     done
 
     if is_file_writable "${ELASTICSEARCH_CONF_DIR}/jvm.options"; then
