@@ -22,10 +22,10 @@
     },
     "jenkins": {
         "arch": "amd64",
-        "digest": "91c3776e38a943e582892ef53f1cc04d81568ea8d0a5de7f26682bb108bc1fdd",
+        "digest": "7295f88d60ec3dd1e0baba5b90d8c1aa714381b2648934443e33231ad94969e5",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.277.2-1"
+        "version": "2.277.3-0"
     },
     "tini": {
         "arch": "amd64",
