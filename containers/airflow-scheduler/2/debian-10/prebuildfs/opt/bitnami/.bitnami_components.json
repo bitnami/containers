@@ -1,10 +1,10 @@
 {
     "airflow-scheduler": {
         "arch": "amd64",
-        "digest": "6f4388df02d2115b0981c067c284532ec1adf038e7b4dd65126b43c9b9ce815b",
+        "digest": "015a4eeda9274c21df7348f8048c3e5d57434fbb9bc21c91123c9734c55aee22",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.0.1-3"
+        "version": "2.0.1-4"
     },
     "gosu": {
         "arch": "amd64",
@@ -29,10 +29,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "4f1f6b81a3617dfaaa2c579510118ef6df07119977a5d6ca7df3cf485fca709a",
+        "digest": "26c5c2e08436f3f4ca504bba3bcd0b643dedce622c88382e2b58fa93dd27a987",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.8.9-0"
+        "version": "3.8.9-1"
     },
     "wait-for-port": {
         "arch": "amd64",
