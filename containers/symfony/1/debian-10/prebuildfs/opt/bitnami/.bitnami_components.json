@@ -15,17 +15,17 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "87f9a8240a159879343ebed39110d322569f0d7cc7cb9e6a14823d7884de4e0a",
+        "digest": "2e75ea136568340c45dad61f773844e4062da83f7b537cd5cb2241a3811b4bb6",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.27-11"
+        "version": "7.3.27-12"
     },
     "symfony": {
         "arch": "amd64",
-        "digest": "cf2c0695033c5bb6ed1184af96c95d48d6e2d2ae72384c8a944f7a5c3b350e8d",
+        "digest": "11f60bb26ed13a4ba639320ecec3d9e4eaac74ebcd61c01a1cfd296049a5f349",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.5.11-5"
+        "version": "1.5.11-6"
     },
     "tini": {
         "arch": "amd64",
