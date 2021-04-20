@@ -8,24 +8,24 @@
     },
     "express": {
         "arch": "amd64",
-        "digest": "e90ac676893a1c1edaf31f5bac8b9f951ea00405a6c54613b8e3882ccbad6c3c",
+        "digest": "4f04ea4b7c6cf8f63de7df2a1a0861a09ad6d9dc4b998e37b6a0090be2b9d5df",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.17.1-0"
+        "version": "4.17.1-1"
     },
     "express-generator": {
         "arch": "amd64",
-        "digest": "09dc5947a709a9bbeb257b17cd13bdb2ca87b08fa17baab4583bdc026badef35",
+        "digest": "f305084e4b45ac55c2662eef90ff420ea321157c26b6fee3eb1dda51fb56faa0",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.16.1-0"
+        "version": "4.16.1-1"
     },
     "git": {
         "arch": "amd64",
-        "digest": "08cc25cd961bf4ea1695b9d11cd4dc0ebb2f4a00afd6cacbc18c81d6cd104aa2",
+        "digest": "81233bbb8e724b9fcc0f451a61d5120fdc101a26b40bb82307eaa2b694cdd789",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.31.1-0"
+        "version": "2.31.1-1"
     },
     "gosu": {
         "arch": "amd64",
@@ -43,10 +43,10 @@
     },
     "sequelize-cli": {
         "arch": "amd64",
-        "digest": "7e572fea880336f69bf7b0b34cd718ee81e7114fe61313acaba12b7a5564cddc",
+        "digest": "7555275076a12faf13e23da63b3b7b307a883d13faa8c6c36386592a76690c28",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "5.5.1-0"
+        "version": "5.5.1-1"
     },
     "tini": {
         "arch": "amd64",
