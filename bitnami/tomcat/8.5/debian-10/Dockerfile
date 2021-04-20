@@ -11,14 +11,14 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libssl1.1 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.10-0" --checksum 68b909cfb5c98625e7d0db5c6eb82a34eca9b8940ada38b7eaa0c238bb510b57
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "8.5.65-0" --checksum e92c7ec7b705053b100858ad31edac2766aa411da2da179b243f781b410b74d8
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "8.5.65-1" --checksum 821b8580c0c3100c4ad4bc20798c4de268bcec97ec9ae2bbdcee9a809b7e53be
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/tomcat/postunpack.sh
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="8.5.65-debian-10-r11"
+    BITNAMI_IMAGE_VERSION="8.5.65-debian-10-r12"
 
 EXPOSE 8080 8443
 
