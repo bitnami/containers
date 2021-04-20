@@ -1,10 +1,10 @@
 {
     "codeigniter": {
         "arch": "amd64",
-        "digest": "9323269981af3805e5f6b465c42f74f3cf20e53fb678f389eb6a5a988dd6fabd",
+        "digest": "f76285166592aaad19d67d41fa623206fb64a92d7182ba7f0b63d215c0dfd757",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.1.11-2"
+        "version": "3.1.11-3"
     },
     "gosu": {
         "arch": "amd64",
@@ -22,10 +22,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "87f9a8240a159879343ebed39110d322569f0d7cc7cb9e6a14823d7884de4e0a",
+        "digest": "2e75ea136568340c45dad61f773844e4062da83f7b537cd5cb2241a3811b4bb6",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.27-11"
+        "version": "7.3.27-12"
     },
     "tini": {
         "arch": "amd64",
