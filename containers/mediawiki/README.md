@@ -212,7 +212,7 @@ mediawiki:
   $ docker run -d --name mediawiki -p 80:8080 -p 443:8443 \
     --env MEDIAWIKI_PASSWORD=my_password \
     --network mediawiki-tier \
-    --volume /path/to/mediawiki-persistence:/bitnami \
+    --volume /path/to/mediawiki-persistence:/bitnami/mediawiki \
     bitnami/mediawiki:latest
   ```
 
@@ -311,7 +311,7 @@ This would be an example of SMTP configuration using a GMail account:
     --env MEDIAWIKI_SMTP_USER=your_email@gmail.com \
     --env MEDIAWIKI_SMTP_PASSWORD=your_password \
     --network mediawiki-tier \
-    --volume /path/to/mediawiki-persistence:/bitnami \
+    --volume /path/to/mediawiki-persistence:/bitnami/mediawiki \
     bitnami/mediawiki:latest
   ```
 
