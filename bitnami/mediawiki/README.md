@@ -221,7 +221,7 @@ Available variables:
 ##### User and Site configuration
 
 - `MEDIAWIKI_USERNAME`: Mediawiki application username. Default: **user**
-- `MEDIAWIKI_PASSWORD`: Mediawiki application password. Default: **bitnami123**
+- `MEDIAWIKI_PASSWORD`: Mediawiki application password. Default: **bitnami123** (min 10 characters, alphanumeric, no special characters)
 - `MEDIAWIKI_EMAIL`: Mediawiki application email. Default: **user@example.com**
 - `MEDIAWIKI_WIKI_NAME`: Mediawiki wiki name. Default: **Bitnami MediaWiki**
 - `MEDIAWIKI_HOST`: Mediawiki application host. No defaults.
