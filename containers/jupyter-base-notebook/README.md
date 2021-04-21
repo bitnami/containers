@@ -27,7 +27,7 @@ $ docker run --name jupyter-base-notebook bitnami/jupyter-base-notebook:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.3.0`, `1.3.0-debian-10-r11`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook/blob/1.3.0-debian-10-r11/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.3.0`, `1.3.0-debian-10-r12`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook/blob/1.3.0-debian-10-r12/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jupyter-base-notebook GitHub repo](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook).
 
@@ -66,6 +66,20 @@ $ docker run --rm --name jupyter-base-notebook bitnami/jupyter-base-notebook:lat
 ```
 
 Check the [official Jupyter Notebook documentation](https://jupyter.readthedocs.io/en/latest/running.html) for a list of the available parameters.
+
+## Adding more python packages
+
+To add more python packages, you need to create a Dockerfile extending the current image, and the commands to install the desired packages.
+In the following example, the base notebook image is used to add `scipy` and `matplotlib`.
+
+```
+FROM bitnami/jupyter-base-notebook:latest
+
+RUN conda install --quiet --yes \
+    'matplotlib-base' \
+    'scipy' && \
+    conda clean --all -f -y 
+```
 
 # Contributing
 
