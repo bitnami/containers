@@ -116,6 +116,7 @@ mysql_client_initialize() {
         [[ -n "$MYSQL_CLIENT_CREATE_DATABASE_USER" ]] && createdb_args+=("-u" "$MYSQL_CLIENT_CREATE_DATABASE_USER")
         [[ -n "$MYSQL_CLIENT_CREATE_DATABASE_CHARACTER_SET" ]] && createdb_args+=("--character-set" "$MYSQL_CLIENT_CREATE_DATABASE_CHARACTER_SET")
         [[ -n "$MYSQL_CLIENT_CREATE_DATABASE_COLLATE" ]] && createdb_args+=("--collate" "$MYSQL_CLIENT_CREATE_DATABASE_COLLATE")
+        [[ -n "$MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES" ]] && createdb_args+=("--privileges" "$MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES")
         mysql_ensure_optional_database_exists "${createdb_args[@]}"
     fi
 }
@@ -736,15 +737,16 @@ EOF
 mysql_ensure_user_has_database_privileges() {
     local -r user="${1:?user is required}"
     local -r database="${2:?db is required}"
-    local -r db_host="${3:-}"
-    local -r db_port="${4:-}"
+    local -r privileges="${3:-all}"
+    local -r db_host="${4:-}"
+    local -r db_port="${5:-}"
 
     local -a mysql_execute_cmd=("mysql_execute")
     [[ -n "$db_host" && -n "$db_port" ]] && mysql_execute_cmd=("mysql_remote_execute" "$db_host" "$db_port")
 
     debug "Providing privileges to username $user on database $database"
     "${mysql_execute_cmd[@]}" "mysql" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
-grant all on \`$database\`.* to '$user'@'%';
+grant ${privileges} on \`${database}\`.* to '${user}'@'%';
 EOF
 }
 
@@ -832,6 +834,7 @@ mysql_ensure_optional_database_exists() {
     local character_set=""
     local collate=""
     local user=""
+    local privileges=""
     # For accessing an external database
     local db_host=""
     local db_port=""
@@ -860,6 +863,10 @@ mysql_ensure_optional_database_exists() {
                 shift
                 db_port="${1:?missing database port}"
                 ;;
+            --privileges)
+                shift
+                privileges="${1:?missing privileges}"
+                ;;
             *)
                 echo "Invalid command line flag $1" >&2
                 return 1
@@ -876,10 +883,7 @@ mysql_ensure_optional_database_exists() {
     mysql_ensure_database_exists "${flags[@]}"
 
     if [[ -n "$user" ]]; then
-        local -a grant_flags=("$user" "$database")
-        [[ -n "$db_host" ]] && grant_flags+=("$db_host")
-        [[ -n "$db_port" ]] && grant_flags+=("$db_port")
-        mysql_ensure_user_has_database_privileges "${grant_flags[@]}"
+        mysql_ensure_user_has_database_privileges "$user" "$database" "$privileges" "$db_host" "$db_port"
     fi
 }
 
