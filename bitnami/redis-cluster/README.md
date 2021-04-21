@@ -42,7 +42,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`6.2`, `6.2-debian-10`, `6.2.2`, `6.2.2-debian-10-r0`, `latest` (6.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/6.2.2-debian-10-r0/6.2/debian-10/Dockerfile)
+* [`6.2`, `6.2-debian-10`, `6.2.2`, `6.2.2-debian-10-r1`, `latest` (6.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/6.2.2-debian-10-r1/6.2/debian-10/Dockerfile)
 * [`6.0`, `6.0-debian-10`, `6.0.12`, `6.0.12-debian-10-r46` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/6.0.12-debian-10-r46/6.0/debian-10/Dockerfile)
 * [`5.0`, `5.0-debian-10`, `5.0.12`, `5.0.12-debian-10-r46` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/5.0.12-debian-10-r46/5.0/debian-10/Dockerfile)
 
@@ -146,11 +146,12 @@ services:
 Refer to the [Redis(TM) configuration](http://redis.io/topics/config) manual for the complete list of configuration options.
 
 The following env vars are supported for this container:
+
 | Name                                    | Description                                                                                                                                                                            |
 |-----------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `REDIS_DISABLE_COMMANDS`                | Disables the specified Redis(TM) commands                                                                                                                                                  |
-| `REDIS_PORT_NUMBER`                     | Set the Redis(TM) port. Default=: `6379`                                                                                                                                                   |
-| `REDIS_PASSWORD`                        | Set the Redis(TM) password. Default: `bitnami`                                                                                                                                             |
+| `REDIS_DISABLE_COMMANDS`                | Disables the specified Redis(TM) commands                                                                                                                                              |
+| `REDIS_PORT_NUMBER`                     | Set the Redis(TM) port. Default=: `6379`                                                                                                                                               |
+| `REDIS_PASSWORD`                        | Set the Redis(TM) password. Default: `bitnami`                                                                                                                                         |
 | `ALLOW_EMPTY_PASSWORD`                  | Enables access without password                                                                                                                                                        |
 | `REDIS_DNS_RETRIES`                     | Number of retries to get the IPs of the provided `REDIS_NODES`. It will wait 5 seconds between retries                                                                                 |
 | `REDISCLI_AUTH`                         | Provide the same value as the configured `REDIS_PASSWORD` for the redis-cli tool to authenticate                                                                                       |
@@ -158,7 +159,7 @@ The following env vars are supported for this container:
 | `REDIS_CLUSTER_REPLICAS`                | Number of replicas for every master that the cluster will have.                                                                                                                        |
 | `REDIS_NODES`                           | String delimited by spaces containing the hostnames of all of the nodes that will be part of the cluster                                                                               |
 | `REDIS_CLUSTER_ANNOUNCE_IP`             | IP that the node should announce, used for non dynamic ip environents                                                                                                                  |
-| `REDIS_CLUSTER_DYNAMIC_IPS`             | Set to `no` if your Redis(TM) cluster will be created with statical IPs. Default: `yes`                                                                                                    |
+| `REDIS_CLUSTER_DYNAMIC_IPS`             | Set to `no` if your Redis(TM) cluster will be created with statical IPs. Default: `yes`                                                                                                |
 | `REDIS_TLS_ENABLED`                     | Whether to enable TLS for traffic or not. Defaults to `no`.                                                                                                                            |
 | `REDIS_TLS_PORT`                        | Port used for TLS secure traffic. Defaults to `6379`.                                                                                                                                  |
 | `REDIS_TLS_CERT_FILE`                   | File containing the certificate file for the TSL traffic. No defaults.                                                                                                                 |
