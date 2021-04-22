@@ -182,7 +182,7 @@ redis_cluster_check() {
 #   None
 #########################
 redis_cluster_update_ips() {
-    IFS=' ' read -ra nodes <<<"$REDIS_NODES"
+    read -ra nodes <<< "$(tr ',;' ' ' <<< "${REDIS_NODES}")"
 
     declare -A host_2_ip_array # Array to map hosts and IPs
     # Update the IPs when a number of nodes > quorum change their IPs
