@@ -32,7 +32,7 @@ You can find the default credentials and available configuration options in the 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.5.0-6037`, `3.5.0-6037-debian-10-r0`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/3.5.0-6037-debian-10-r0/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.5.0-6037`, `3.5.0-6037-debian-10-r1`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/3.5.0-6037-debian-10-r1/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/reportserverenterprise GitHub repo](https://github.com/bitnami/bitnami-docker-reportserverenterprise).
 
@@ -282,6 +282,10 @@ reportserverenterprise:
     -e SMTP_PASSWORD=your_password \
     bitnami/reportserverenterprise
 ```
+
+## Use sample data
+
+Sample data for ReportServer Enterprise is available at [https://github.com/infofabrik/reportserver-samples/](https://github.com/infofabrik/reportserver-samples/).
 
 # Notable Changes
 
