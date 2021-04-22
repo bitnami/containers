@@ -3,6 +3,7 @@
 > ReportServer is an open source business intelligence (OSBI) platform with powerful reporting and analysis tools. It provides a unified interface to reporting engines from different providers, making it easy for managers to collate, analyze and take action on data from multiple business touchpoints. With support for Jasper, Birt, Mondrian and Excel as well as a powerful ad-hoc reporting component ReportServer is the ideal tool for business decision makers, analysts and consultants.
 
 https://reportserver.net/en/#secondsection
+https://github.com/infofabrik/reportserver
 
 # TL;DR
 
@@ -32,7 +33,7 @@ You can find the default credentials and available configuration options in the 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.5.0-6037`, `3.5.0-6037-debian-10-r0`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserver-community/blob/3.5.0-6037-debian-10-r0/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.5.0-6037`, `3.5.0-6037-debian-10-r1`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserver-community/blob/3.5.0-6037-debian-10-r1/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/reportserver-community GitHub repo](https://github.com/bitnami/bitnami-docker-reportserver-community).
 
@@ -282,6 +283,10 @@ reportserver-community:
     -e SMTP_PASSWORD=your_password \
     bitnami/reportserver-community
 ```
+
+## Use sample data
+
+Sample data for ReportServer Community is available at [https://github.com/infofabrik/reportserver-samples/](https://github.com/infofabrik/reportserver-samples/).
 
 # Notable Changes
 
