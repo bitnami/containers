@@ -10,6 +10,7 @@
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libnet.sh
 . /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libversion.sh
 . /opt/bitnami/scripts/libservice.sh
 . /opt/bitnami/scripts/libvalidations.sh
 
@@ -262,7 +263,8 @@ elasticsearch_cluster_configuration() {
         if [[ -n "$ELASTICSEARCH_TOTAL_NODES" ]]; then
             total_nodes=$ELASTICSEARCH_TOTAL_NODES
         fi
-        ELASTICSEARCH_MAJOR_VERSION=$(elasticsearch --version | grep Version: | awk -F "," '{print $1}' | awk -F ":" '{print $2}' | awk -F "." '{print $1}')
+        ELASTICSEARCH_VERSION="$(elasticsearch_get_version)"
+        ELASTICSEARCH_MAJOR_VERSION="$(get_sematic_version "$ELASTICSEARCH_VERSION" 1)"
         if [[ "$ELASTICSEARCH_MAJOR_VERSION" -le 6 ]]; then
             elasticsearch_conf_set discovery.zen.ping.unicast.hosts "${host_list[@]}"
         else
@@ -482,7 +484,15 @@ elasticsearch_initialize() {
         elasticsearch_cluster_configuration
         elasticsearch_configure_node_type
         elasticsearch_custom_configuration
-        [[ -d "${ELASTICSEARCH_BASE_DIR}/modules/x-pack-ml/platform/linux-x86_64/lib" ]] || elasticsearch_conf_set xpack.ml.enabled "false"
+        ELASTICSEARCH_VERSION="$(elasticsearch_get_version)"
+        ELASTICSEARCH_MAJOR_VERSION="$(get_sematic_version "$ELASTICSEARCH_VERSION" 1)"
+        ELASTICSEARCH_MINOR_VERSION="$(get_sematic_version "$ELASTICSEARCH_VERSION" 2)"
+        # Elasticsearch <= 7.10.2 is packaged without x-pack so adding this line "xpack.ml.enabled:false" will cause a failure
+        # Latest Elasticseach releases install x-pack-ml  by default. Since we have faced some issues with this library on certain platforms, 
+        # currently we are disabling this machine learning module whatsoever by defining "xpack.ml.enabled=false" in the "elasicsearch.yml" file
+        if [[ "$ELASTICSEARCH_MAJOR_VERSION" -ge 7 && "$ELASTICSEARCH_MINOR_VERSION" -gt 10 && ! -d "${ELASTICSEARCH_BASE_DIR}/modules/x-pack-ml/platform/linux-x86_64/lib" ]]; then
+            elasticsearch_conf_set xpack.ml.enabled "false"
+        fi
     fi
 }
 
@@ -602,4 +612,17 @@ elasticsearch_custom_init_scripts() {
         done
         touch "$ELASTICSEARCH_VOLUME_DIR"/.user_scripts_initialized
     fi
+}
+
+########################
+# Get elasticsearch version
+# Globals:
+#   ELASTICSEARCH_*
+# Arguments:
+#   None
+# Returns:
+#   version
+#########################
+elasticsearch_get_version(){
+    elasticsearch --version | grep Version: | awk -F "," '{print $1}' | awk -F ":" '{print $2}'
 }
