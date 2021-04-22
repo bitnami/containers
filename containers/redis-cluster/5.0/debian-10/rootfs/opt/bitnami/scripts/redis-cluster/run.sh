@@ -7,7 +7,8 @@ set -o nounset
 set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purpose
 
-# We need  to enable job control
+# Enable job control
+# ref https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin
 set -m
 
 # Load Redis environment variables
@@ -17,7 +18,7 @@ set -m
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/librediscluster.sh
 
-IFS=' ' read -ra nodes <<< "$REDIS_NODES"
+read -ra nodes <<< "$(tr ',;' ' ' <<< "${REDIS_NODES}")"
 
 ARGS=("--port" "$REDIS_PORT_NUMBER")
 ARGS+=("--include" "${REDIS_BASE_DIR}/etc/redis.conf")
