@@ -31,13 +31,7 @@ fi
 
 ARGS+=("$@")
 
-if ! is_boolean_yes "$REDIS_CLUSTER_CREATOR"; then
-    if am_i_root; then
-        exec gosu "$REDIS_DAEMON_USER" redis-server "${ARGS[@]}"
-    else
-        exec redis-server "${ARGS[@]}"
-    fi
-else
+if is_boolean_yes "$REDIS_CLUSTER_CREATOR"; then
     # Start Redis in background
     if am_i_root; then
         gosu "$REDIS_DAEMON_USER" redis-server "${ARGS[@]}" &
@@ -48,4 +42,10 @@ else
     redis_cluster_create "${nodes[@]}"
     # Bring redis process to foreground
     fg
+else
+    if am_i_root; then
+        exec gosu "$REDIS_DAEMON_USER" redis-server "${ARGS[@]}"
+    else
+        exec redis-server "${ARGS[@]}"
+    fi
 fi
