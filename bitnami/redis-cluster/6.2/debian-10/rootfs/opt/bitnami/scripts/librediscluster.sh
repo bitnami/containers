@@ -45,15 +45,11 @@ redis_cluster_validate() {
     if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
         empty_password_enabled_warn
     else
-        if ! is_boolean_yes "$REDIS_CLUSTER_CREATOR"; then
-            [[ -z "$REDIS_PASSWORD" ]] && empty_password_error REDIS_PASSWORD
-        fi
+        [[ -z "$REDIS_PASSWORD" ]] && empty_password_error REDIS_PASSWORD
     fi
 
     if ! is_boolean_yes "$REDIS_CLUSTER_DYNAMIC_IPS"; then
-        if ! is_boolean_yes "$REDIS_CLUSTER_CREATOR"; then
-            [[ -z "$REDIS_CLUSTER_ANNOUNCE_IP" ]] && print_validation_error "To provide external access you need to provide the REDIS_CLUSTER_ANNOUNCE_IP env var"
-        fi
+        [[ -z "$REDIS_CLUSTER_ANNOUNCE_IP" ]] && print_validation_error "To provide external access you need to provide the REDIS_CLUSTER_ANNOUNCE_IP env var"
     fi
 
     [[ -z "$REDIS_NODES" ]] && print_validation_error "REDIS_NODES is required"
@@ -63,7 +59,7 @@ redis_cluster_validate() {
     fi
 
     if is_boolean_yes "$REDIS_CLUSTER_CREATOR"; then
-        [[ -z "$REDIS_CLUSTER_REPLICAS" ]] && print_validation_error "To create the cluster you need to provide the number of replicas"
+        [[ -z "$REDIS_CLUSTER_REPLICAS" ]] && print_validation_error "To create the cluster you need to provide the number of replicas to the cluster creator"
     fi
 
     if ((REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP < 0)); then
@@ -84,7 +80,7 @@ redis_cluster_validate() {
 #########################
 redis_cluster_override_conf() {
     # Redis configuration to override
-    if ! (is_boolean_yes "$REDIS_CLUSTER_DYNAMIC_IPS" || is_boolean_yes "$REDIS_CLUSTER_CREATOR"); then
+    if ! is_boolean_yes "$REDIS_CLUSTER_DYNAMIC_IPS"; then
         redis_conf_set cluster-announce-ip "$REDIS_CLUSTER_ANNOUNCE_IP"
     fi
     if is_boolean_yes "$REDIS_CLUSTER_DYNAMIC_IPS"; then
@@ -186,7 +182,7 @@ redis_cluster_check() {
 #   None
 #########################
 redis_cluster_update_ips() {
-    IFS=' ' read -ra nodes <<<"$REDIS_NODES"
+    read -ra nodes <<< "$(tr ',;' ' ' <<< "${REDIS_NODES}")"
 
     declare -A host_2_ip_array # Array to map hosts and IPs
     # Update the IPs when a number of nodes > quorum change their IPs

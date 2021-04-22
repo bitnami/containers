@@ -24,6 +24,6 @@ am_i_root && ensure_user_exists "$REDIS_DAEMON_USER" --group "$REDIS_DAEMON_GROU
 # Ensure Redis is initialized
 redis_cluster_initialize
 
-if ! is_boolean_yes "$REDIS_CLUSTER_CREATOR" && is_boolean_yes "$REDIS_CLUSTER_DYNAMIC_IPS"; then
+if is_boolean_yes "$REDIS_CLUSTER_DYNAMIC_IPS"; then
     redis_cluster_update_ips
 fi
