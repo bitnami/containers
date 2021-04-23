@@ -121,7 +121,7 @@ mediawiki_initialize() {
         mediawiki_configure_short_urls
         mediawiki_conf_set "\$wgEnableUploads" "true" yes
         which convert >/dev/null && mediawiki_conf_set "\$wgUseImageMagick" "true" yes
-        mediawiki_conf_set "\$wgServer" "//${MEDIAWIKI_HOST}"
+        mediawiki_configure_host "$MEDIAWIKI_HOST"
         mediawiki_conf_set "\$wgEmergencyContact" "$MEDIAWIKI_EMAIL"
         mediawiki_conf_set "\$wgPasswordSender" "$MEDIAWIKI_EMAIL"
         mediawiki_configure_smtp
@@ -286,4 +286,33 @@ mediawiki_configure_short_urls() {
 \$wgArticlePath = "$MEDIAWIKI_WIKI_PREFIX/\$1";
 \$wgUsePathInfo = true;
 EOF
+}
+
+#########################
+# Configure Mediawiki host
+# Globals:
+#   MEDIAWIKI_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+mediawiki_configure_host() {
+    local host="${1:?missing host}"
+    local url
+
+    if is_boolean_yes "$MEDIAWIKI_ENABLE_HTTPS"; then
+        url="https://${host}"
+        [[ "$MEDIAWIKI_EXTERNAL_HTTPS_PORT_NUMBER" != "443" ]] && url+=":${MEDIAWIKI_EXTERNAL_HTTPS_PORT_NUMBER}"
+    else
+        if [[ "$MEDIAWIKI_EXTERNAL_HTTP_PORT_NUMBER" != "80" || "$MEDIAWIKI_EXTERNAL_HTTPS_PORT_NUMBER" != "443" ]]; then
+            url="http://${host}"
+            [[ "$MEDIAWIKI_EXTERNAL_HTTP_PORT_NUMBER" != "80" ]] && url+=":${MEDIAWIKI_EXTERNAL_HTTP_PORT_NUMBER}"
+        else
+            # If using default values, support both HTTP and HTTPS at the same time
+            url="//${host}"
+        fi
+    fi
+    mediawiki_conf_set "\$wgServer" "$url"
+
 }
