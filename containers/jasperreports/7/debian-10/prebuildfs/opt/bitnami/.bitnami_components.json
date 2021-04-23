@@ -22,10 +22,10 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "473d0ab64adfe82d84dd810c28e0f22242eeffbaf74a85febf7586ce013aa7ba",
+        "digest": "700e2d8391934048faefb45b4c3a2af74bc7b85d4c4e0e9a24164d7256456ca2",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.8.282-0"
+        "version": "1.8.292-0"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -43,9 +43,9 @@
     },
     "tomcat": {
         "arch": "amd64",
-        "digest": "a1dff9b60f874648ff23f6257d6c06f2cf8e607c80fe49918e97e52db43caa2d",
+        "digest": "93d357fc47209e4e1cb5dbc11eb1039f202c873ff48f63e8221aea8f64281b73",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "9.0.45-1"
+        "version": "9.0.45-2"
     }
 }
