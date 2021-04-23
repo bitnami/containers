@@ -389,6 +389,7 @@ ensure_apache_app_configuration_exists() {
     export allow_override="All"
     export document_root="${BITNAMI_ROOT_DIR}/${app}"
     export extra_directory_configuration=""
+    export proxy_address=""
     # Validate arguments
     shift
     while [[ "$#" -gt 0 ]]; do
@@ -409,6 +410,7 @@ ensure_apache_app_configuration_exists() {
             | --allow-override \
             | --document-root \
             | --extra-directory-configuration \
+            | --proxy-address \
             )
                 var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
                 shift
