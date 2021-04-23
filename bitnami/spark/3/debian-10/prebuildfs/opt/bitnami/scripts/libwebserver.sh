@@ -212,6 +212,7 @@ ensure_web_server_app_configuration_exists() {
             | --apache-before-vhost-configuration \
             | --apache-allow-override \
             | --apache-extra-directory-configuration \
+            | --apache-proxy-address \
             | --apache-move-htaccess \
             )
                 apache_args+=("${1//apache-/}" "${2:?missing value}")
