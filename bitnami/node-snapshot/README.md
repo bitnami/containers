@@ -52,7 +52,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`12-prod`, `12-prod-debian-10`, `12.22.1-prod`, `12.22.1-prod-debian-10-r19` (12-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/12.22.1-prod-debian-10-r19/12-prod/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.22.1`, `12.22.1-debian-10-r19`, `latest` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/12.22.1-debian-10-r19/12/debian-10/Dockerfile)
 * [`10-prod`, `10-prod-debian-10`, `10.24.1-prod`, `10.24.1-prod-debian-10-r19` (10-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/10.24.1-prod-debian-10-r19/10-prod/debian-10/Dockerfile)
-* [`10`, `10-debian-10`, `10.24.1`, `10.24.1-debian-10-r19` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/10.24.1-debian-10-r19/10/debian-10/Dockerfile)
+* [`10`, `10-debian-10`, `10.24.1`, `10.24.1-debian-10-r20` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/10.24.1-debian-10-r20/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node-snapshot GitHub repo](https://github.com/bitnami/bitnami-docker-node-snapshot).
 
@@ -353,6 +353,10 @@ or using Docker Compose:
 ```console
 $ docker-compose up node
 ```
+
+# Branch Deprecation Notice
+
+Node.js's 10 upstream branch will go End-of-Life at the end of April 2021 and has now been internally tagged as to be deprecated. The branch node-snapshot 10 will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 05-27-2021
 
 # Contributing
 
