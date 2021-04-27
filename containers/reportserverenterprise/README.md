@@ -32,7 +32,7 @@ You can find the default credentials and available configuration options in the 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.5.0-6037`, `3.5.0-6037-debian-10-r5`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/3.5.0-6037-debian-10-r5/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.5.0-6037`, `3.5.0-6037-debian-10-r6`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/3.5.0-6037-debian-10-r6/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/reportserverenterprise GitHub repo](https://github.com/bitnami/bitnami-docker-reportserverenterprise).
 
@@ -285,7 +285,15 @@ reportserverenterprise:
 
 ## Use sample data
 
-Sample data for ReportServer Enterprise is available at [https://github.com/infofabrik/reportserver-samples/](https://github.com/infofabrik/reportserver-samples/).
+Sample scripts for ReportServer Enterprise is available at [https://github.com/infofabrik/reportserver-samples/](https://github.com/infofabrik/reportserver-samples/).
+
+# Learn more about ReportServer Enteprise
+
+Developers can obtain the source code for ReportServer Community from [https://github.com/infofabrik/reportserver](https://github.com/infofabrik/reportserver).
+
+Developers can also access the [API documentation](https://reportserver.net/api/current/javadoc/index.html), including information on available [entities](https://reportserver.net/api/current/entities.html), [hooks](https://reportserver.net/api/current/hooks.html) and [services](https://reportserver.net/api/current/services.html).
+
+More information is available from the [ReportServer website](https://reportserver.net/en/).
 
 # Notable Changes
 
