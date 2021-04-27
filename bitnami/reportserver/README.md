@@ -3,7 +3,6 @@
 > ReportServer is an open source business intelligence (OSBI) platform with powerful reporting and analysis tools. It provides a unified interface to reporting engines from different providers, making it easy for managers to collate, analyze and take action on data from multiple business touchpoints. With support for Jasper, Birt, Mondrian and Excel as well as a powerful ad-hoc reporting component ReportServer is the ideal tool for business decision makers, analysts and consultants.
 
 https://reportserver.net/en/#secondsection
-https://github.com/infofabrik/reportserver
 
 # TL;DR
 
@@ -33,7 +32,7 @@ You can find the default credentials and available configuration options in the 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.5.0-6037`, `3.5.0-6037-debian-10-r5`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserver-community/blob/3.5.0-6037-debian-10-r5/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.5.0-6037`, `3.5.0-6037-debian-10-r6`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserver-community/blob/3.5.0-6037-debian-10-r6/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/reportserver-community GitHub repo](https://github.com/bitnami/bitnami-docker-reportserver-community).
 
@@ -284,9 +283,11 @@ reportserver-community:
     bitnami/reportserver-community
 ```
 
-## Use sample data
+# Learn more about ReportServer Community
 
-Sample data for ReportServer Community is available at [https://github.com/infofabrik/reportserver-samples/](https://github.com/infofabrik/reportserver-samples/).
+Developers can obtain the source code for ReportServer Community from [https://github.com/infofabrik/reportserver](https://github.com/infofabrik/reportserver).
+
+More information is available from the [ReportServer website](https://reportserver.net/en/).
 
 # Notable Changes
 
