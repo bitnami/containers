@@ -15,10 +15,10 @@
     },
     "nginx": {
         "arch": "amd64",
-        "digest": "10012fafd14a4c1e1546125ca02117871a580fe025a312291a95b1f32ac42136",
+        "digest": "d5f1f9cd897c15e1e2d940831f90f566ea8d5d9c5a74e0de2cfce9b71e655564",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.19.10-0"
+        "version": "1.19.10-1"
     },
     "render-template": {
         "arch": "amd64",
