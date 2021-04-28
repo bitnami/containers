@@ -359,7 +359,7 @@ volumes:
 
 ### Configuration file
 
-A custom `rabbitmq.conf` configuration file can be mounted to the `/bitnami/rabbitmq/conf` directory. If no file is mounted, the container will generate a default one based on the environment variables. You can also moun on this directory your own `advanced.config` (using classic Erlang terms) and `rabbitmq-env.conf` configuration files.
+A custom `rabbitmq.conf` configuration file can be mounted to the `/bitnami/rabbitmq/conf` directory. If no file is mounted, the container will generate a default one based on the environment variables. You can also mount on this directory your own `advanced.config` (using classic Erlang terms) and `rabbitmq-env.conf` configuration files.
 
 As an alternative, you can also mount a `custom.conf` configuration file and mount it to the `/bitnami/rabbitmq/conf` directory. In this case, the default configuation file will be generated and, later on, the settings available in the `custom.conf` configuration file will be merged with the default ones. For example, in order to override the `listeners.tcp.default` directive:
 
