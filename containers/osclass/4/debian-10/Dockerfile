@@ -13,7 +13,7 @@ RUN bitnami-pkg unpack apache-2.4.46-7 --checksum cfb1835e471967ec5a6df8c622bdd9
 RUN bitnami-pkg unpack mysql-client-10.3.28-0 --checksum 9398376ca9e2033d5bc193232e8aa9b57d91d4ccf06fa67bfa0d30ef36e44c25
 RUN bitnami-pkg install libphp-7.3.27-3 --checksum 584ad378b927b6746ba20085247fd98c7788ed3658638b1c75ce7aa34f6d307f
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
-RUN bitnami-pkg unpack osclass-4.3.2-0 --checksum be7a46eeaabebed3202a240d4dc0c7ea6fa924e3abf916850d4d147bfe70702e
+RUN bitnami-pkg unpack osclass-4.4.0-0 --checksum ef7ad7da4f3b18f34e8bb427518c209bb88c481ca2fb6ca68c1e6324b8a9a44e
 RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log && \
     ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
@@ -24,7 +24,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="443" \
     APACHE_HTTP_PORT_NUMBER="80" \
     BITNAMI_APP_NAME="osclass" \
-    BITNAMI_IMAGE_VERSION="4.3.2-debian-10-r7" \
+    BITNAMI_IMAGE_VERSION="4.4.0-debian-10-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
