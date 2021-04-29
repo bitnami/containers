@@ -26,6 +26,11 @@ else
     args=( "-f" "$LOGSTASH_CONF_FILE" )
 fi
 
+if [[ -n "$LOGSTASH_EXTRA_ARGS" ]]; then
+    read -r -a extra_args <<<"$LOGSTASH_EXTRA_ARGS"
+    args+=("${extra_args[@]}")
+fi
+
 is_boolean_yes "$LOGSTASH_EXPOSE_API" && args+=( "--http.host" "0.0.0.0" "--http.port" "$LOGSTASH_API_PORT_NUMBER" )
 
 if am_i_root; then
