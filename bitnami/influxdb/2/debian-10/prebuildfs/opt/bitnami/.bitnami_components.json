@@ -8,10 +8,10 @@
     },
     "influxdb": {
         "arch": "amd64",
-        "digest": "2b292db366d602f8fcaed20e1df647ef4ba2450592606d078f6fef54e7cd44a8",
+        "digest": "03377bc21f3b546f2760fad8c4c277a5a4330daf4de57675a7e14993de0f279a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.0.4-0"
+        "version": "2.0.5-0"
     },
     "wait-for-port": {
         "arch": "amd64",
