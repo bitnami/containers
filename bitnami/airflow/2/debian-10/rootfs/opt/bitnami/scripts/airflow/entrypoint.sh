@@ -16,6 +16,21 @@ set -o pipefail
 
 print_welcome_page
 
+if ! am_i_root && [[ -e "$LIBNSS_WRAPPER_PATH" ]]; then
+    info "Enabling non-root system user with nss_wrapper"
+    echo "airflow:x:$(id -u):$(id -g):Airflow:$AIRFLOW_HOME:/bin/false" > "$NSS_WRAPPER_PASSWD"
+    echo "airflow:x:$(id -g):" > "$NSS_WRAPPER_GROUP"
+
+    export LD_PRELOAD="$LIBNSS_WRAPPER_PATH"
+fi
+
+# Install custom python package if requirements.txt is present
+if [[ -f "/bitnami/python/requirements.txt" ]]; then
+    . /opt/bitnami/airflow/venv/bin/activate
+    pip install -r /bitnami/python/requirements.txt
+    deactivate
+fi
+
 if [[ "$*" = *"/opt/bitnami/scripts/airflow/run.sh"* || "$*" = *"/run.sh"* ]]; then
     info "** Starting Airflow setup **"
     /opt/bitnami/scripts/airflow/setup.sh
