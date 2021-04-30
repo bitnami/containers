@@ -293,7 +293,7 @@ More information is available from the [ReportServer website](https://reportserv
 
 ## Use sample scripts and templates
 
-Sample scripts and templates for ReportServer Enterprise is available at [https://github.com/infofabrik/reportserver-samples/](https://github.com/infofabrik/reportserver-samples/).
+Sample scripts and templates for ReportServer Enterprise are available at [https://github.com/infofabrik/reportserver-samples/](https://github.com/infofabrik/reportserver-samples/).
 
 # Notable Changes
 
