@@ -37,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.14.1`, `1.14.1-debian-10-r11`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-contour/blob/1.14.1-debian-10-r11/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.15.0`, `1.15.0-debian-10-r0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-contour/blob/1.15.0-debian-10-r0/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/contour GitHub repo](https://github.com/bitnami/bitnami-docker-contour).
 
@@ -111,7 +111,7 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 # Configuration
 
-CHANGEME: Add configuration section
+Find how to configure Contour in its [official documentation](https://projectcontour.io/docs/main/).
 
 # Logging
 
