@@ -22,17 +22,17 @@
     },
     "nginx": {
         "arch": "amd64",
-        "digest": "d5f1f9cd897c15e1e2d940831f90f566ea8d5d9c5a74e0de2cfce9b71e655564",
+        "digest": "a3b7f2f5a8ec3c8c7643c2b93979d2b109573b64d7e0eec9df1f19768bcb0bba",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.19.10-1"
+        "version": "1.19.10-2"
     },
     "php": {
         "arch": "amd64",
-        "digest": "2e75ea136568340c45dad61f773844e4062da83f7b537cd5cb2241a3811b4bb6",
+        "digest": "3237333ec3bd0e5fa9bcb720b63e89eb04ba338122ec4f7f636e6b88a0df2f76",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.27-12"
+        "version": "7.3.27-13"
     },
     "render-template": {
         "arch": "amd64",
