@@ -51,7 +51,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`4.4`, `4.4-debian-10`, `4.4.5`, `4.4.5-debian-10-r20`, `latest` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.5-debian-10-r20/4.4/debian-10/Dockerfile)
 * [`4.2`, `4.2-debian-10`, `4.2.13`, `4.2.13-debian-10-r39` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.13-debian-10-r39/4.2/debian-10/Dockerfile)
 * [`4.0`, `4.0-debian-9`, `4.0.24`, `4.0.24-debian-9-r12` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.24-debian-9-r12/4.0/debian-9/Dockerfile)
-* [`3.6`, `3.6-debian-9`, `3.6.23`, `3.6.23-debian-9-r39` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.23-debian-9-r39/3.6/debian-9/Dockerfile)
+* [`3.6`, `3.6-debian-9`, `3.6.23`, `3.6.23-debian-9-r40` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.23-debian-9-r40/3.6/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
 
@@ -268,6 +268,28 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MONGODB_ENABLE_DIRECTORY_PER_DB=yes
+  ...
+```
+
+## Enabling/disabling journaling
+
+Enabling/disabling [journal](https://docs.mongodb.com/manual/reference/configuration-options/#mongodb-setting-storage.journal.enabled) is possible through the following env var:
+
+- `MONGODB_ENABLE_JOURNAL`: Whether to enable/disable journaling on MongoDB&reg;. Default: `true`. Possible values: `[true, false]`
+
+```console
+$ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_ENABLE_JOURNAL=true bitnami/mongodb:latest
+```
+
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  mongodb:
+  ...
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MONGODB_ENABLE_JOURNAL=true
   ...
 ```
 

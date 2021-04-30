@@ -349,6 +349,31 @@ mongodb_set_log_conf() {
     fi
 }
 
+
+########################
+# Change journaling setting
+# Globals:
+#   MONGODB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+mongodb_set_journal_conf() {
+    local -r conf_file_path="${1:-$MONGODB_CONF_FILE}"
+    local -r conf_file_name="${conf_file_path#"$MONGODB_CONF_DIR"}"
+    local mongodb_conf
+
+    if ! mongodb_is_file_external "$conf_file_name"; then
+        if [[ -n "$MONGODB_ENABLE_JOURNAL" ]]; then
+            mongodb_conf="$(sed -E "/^ *journal:/,/^ *[^:]*:/s/enabled:.*/enabled: $({ is_boolean_yes "$MONGODB_ENABLE_JOURNAL" && echo 'true';} || echo 'false')/" "$conf_file_path")"
+            echo "$mongodb_conf" > "$conf_file_path"
+        fi
+    else
+        debug "$conf_file_name mounted. Skipping setting log settings"
+    fi
+}
+
 ########################
 # Change common storage settings
 # Globals:
@@ -1057,6 +1082,7 @@ mongodb_initialize() {
     mongodb_copy_mounted_config
     mongodb_set_net_conf "$MONGODB_CONF_FILE"
     mongodb_set_log_conf "$MONGODB_CONF_FILE"
+    mongodb_set_journal_conf "$MONGODB_CONF_FILE"
     mongodb_set_storage_conf "$MONGODB_CONF_FILE"
     is_boolean_yes "$MONGODB_DISABLE_JAVASCRIPT" && mongodb_disable_javascript_conf "$MONGODB_CONF_FILE"
 
