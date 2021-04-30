@@ -287,6 +287,8 @@ reportserver-community:
 
 Developers can obtain the source code for ReportServer Community from [https://github.com/infofabrik/reportserver](https://github.com/infofabrik/reportserver).
 
+Developers can also access the [API documentation](https://reportserver.net/api/current/javadoc/index.html), including information on available [entities](https://reportserver.net/api/current/entities.html), [hooks](https://reportserver.net/api/current/hooks.html) and [services](https://reportserver.net/api/current/services.html).
+
 More information is available from the [ReportServer website](https://reportserver.net/en/).
 
 # Notable Changes
