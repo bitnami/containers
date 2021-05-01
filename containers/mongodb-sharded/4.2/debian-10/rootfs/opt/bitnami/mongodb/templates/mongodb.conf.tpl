@@ -6,7 +6,7 @@
 storage:
   dbPath: {{MONGODB_DATA_DIR}}/db
   journal:
-    enabled: true
+    enabled: {{MONGODB_DEFAULT_ENABLE_JOURNAL}}
   directoryPerDB: {{MONGODB_DEFAULT_ENABLE_DIRECTORY_PER_DB}}
 
 # where to write logging data.
