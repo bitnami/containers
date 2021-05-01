@@ -33,7 +33,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.16`, `1.16-debian-10`, `1.16.3`, `1.16.3-debian-10-r25`, `latest` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.16.3-debian-10-r25/1.16/debian-10/Dockerfile)
+* [`1.16`, `1.16-debian-10`, `1.16.3`, `1.16.3-debian-10-r26`, `latest` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.16.3-debian-10-r26/1.16/debian-10/Dockerfile)
 * [`1.15`, `1.15-debian-10`, `1.15.11`, `1.15.11-debian-10-r27` (1.15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.15.11-debian-10-r27/1.15/debian-10/Dockerfile)
 * [`1.14`, `1.14-debian-10`, `1.14.15`, `1.14.15-debian-10-r80` (1.14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.14.15-debian-10-r80/1.14/debian-10/Dockerfile)
 
@@ -107,7 +107,16 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 # Configuration
 
-CHANGEME: Add configuration section
+## Running your Golang project
+
+The default workspace for the Bitnami Golang image is `/go` (GOPATH, consult [Golang documentation](https://golang.org/doc/gopath_code#Workspaces) for more info about workspaces). You can mount your custom Golang project from your host, and run it normally using the `go` command.
+
+```console
+$ docker -it --name golang run \
+  -v /path/to/your/project:/go/src/project \
+  bitnami/golang \
+  bash -ec 'cd src/project && go run .'
+```
 
 # Logging
 
