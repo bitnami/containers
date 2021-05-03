@@ -58,7 +58,7 @@ items:
            image: bitnami/kafka:latest
            imagePullPolicy: IfNotPresent
            env:
-           - name: KAFKA_ZOOKEEPER_CONNECT
+           - name: KAFKA_CFG_ZOOKEEPER_CONNECT
              value: zookeeper:2181
            - name: ALLOW_PLAINTEXT_LISTENER
              value: "yes"
