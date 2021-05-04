@@ -8,9 +8,9 @@
     },
     "redis-sentinel": {
         "arch": "amd64",
-        "digest": "940999737d5a150ded614ffb5318419cc8b062af0a385fdc9db621c25b917d86",
+        "digest": "c616f0f422bb62545b389a224f1ac16f9a1a9147fca526bb0b67409840be6c40",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "6.2.2-0"
+        "version": "6.2.3-0"
     }
 }
