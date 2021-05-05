@@ -15,10 +15,10 @@
     },
     "spring-cloud-dataflow": {
         "arch": "amd64",
-        "digest": "3f437b9721233824bb5581b6e0ed37e6ff253f16aa8d3251a3446b1d828a8c30",
+        "digest": "2d843b7cb9680b97839bf1ff81746c62a20982dec9391229de76d111af31386d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.7.1-0"
+        "version": "2.7.2-0"
     },
     "yq": {
         "arch": "amd64",
