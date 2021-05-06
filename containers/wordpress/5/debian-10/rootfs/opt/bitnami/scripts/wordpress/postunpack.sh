@@ -52,6 +52,8 @@ info "Configuring default PHP options for WordPress"
 php_conf_set memory_limit "$PHP_DEFAULT_MEMORY_LIMIT"
 php_conf_set upload_max_filesize "$PHP_DEFAULT_UPLOAD_MAX_FILESIZE"
 php_conf_set post_max_size "$PHP_DEFAULT_POST_MAX_SIZE"
+# https://make.wordpress.org/hosting/handbook/handbook/server-environment/#php-extensions
+php_conf_set extension "imagick"
 # Memcached extension is required for W3 Total Cache plugin
 php_conf_set extension "memcached"
 
