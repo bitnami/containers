@@ -41,8 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`23`, `23-debian-10`, `23.0.2`, `23.0.2-debian-10-r5` (23/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/23.0.2-debian-10-r5/23/debian-10/Dockerfile)
-* [`22`, `22-debian-10`, `22.0.1`, `22.0.1-debian-10-r78`, `latest` (22/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/22.0.1-debian-10-r78/22/debian-10/Dockerfile)
+* [`23`, `23-debian-10`, `23.0.2`, `23.0.2-debian-10-r6`, `latest` (23/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/23.0.2-debian-10-r6/23/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wildfly GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
 
@@ -63,7 +62,7 @@ $ docker pull bitnami/wildfly:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/wildfly:latest 'https://github.com/bitnami/bitnami-docker-wildfly.git#master:22/debian-10'
+$ docker build -t bitnami/wildfly:latest 'https://github.com/bitnami/bitnami-docker-wildfly.git#master:23/debian-10'
 ```
 
 ## Persisting your application
@@ -321,10 +320,6 @@ Consequences:
 
 - All volumes have been merged at `/bitnami/wildfly`. Now you only need to mount a single volume at `/bitnami/wildfly` for persistence.
 - The logs are always sent to the `stdout` and are no longer collected in the volume.
-
-### Branch Deprecation Notice
-
-WildFly's branch 22 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 04-29-2021
 
 ## Contributing
 
