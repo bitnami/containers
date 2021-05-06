@@ -5,9 +5,9 @@ services:
     volumes:
       - 'mysql_data:/bitnami/mysql'
     environment:
+      - ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_USER=bn_wordpress
       - MYSQL_DATABASE=bitnami_wordpress
-      - ALLOW_EMPTY_PASSWORD=yes
   wordpress:
     image: docker.io/bitnami/wordpress:5
     ports:
@@ -18,11 +18,11 @@ services:
     depends_on:
       - mysql
     environment:
-      - MARIADB_HOST=mysql
-      - MARIADB_PORT_NUMBER=3306
+      - ALLOW_EMPTY_PASSWORD=yes
+      - WORDPRESS_DATABASE_HOST=mysql
+      - WORDPRESS_DATABASE_PORT_NUMBER=3306
       - WORDPRESS_DATABASE_USER=bn_wordpress
       - WORDPRESS_DATABASE_NAME=bitnami_wordpress
-      - ALLOW_EMPTY_PASSWORD=yes
 volumes:
   mysql_data:
     driver: local
