@@ -34,8 +34,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.1.3`, `7.1.3-debian-10-r6`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/7.1.3-debian-10-r6/7/debian-10/Dockerfile)
-* [`6`, `6-debian-10`, `6.1.1`, `6.1.1-debian-10-r227` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/6.1.1-debian-10-r227/6/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.1.3`, `7.1.3-debian-10-r7`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/7.1.3-debian-10-r7/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/oauth2-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-oauth2-proxy).
 
@@ -142,10 +141,6 @@ Re-create your container from the new image, [restoring your backup](#restoring-
 ```console
 $ docker run --name oauth2-proxy bitnami/oauth2-proxy:latest
 ```
-
-# Branch Deprecation Notice
-
-OAuth2-Proxy's branch 6 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 05-05-2021
 
 # Contributing
 
