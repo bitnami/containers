@@ -172,6 +172,7 @@ nginx_initialize() {
 #   --http-port - HTTP port number
 #   --https-port - HTTPS port number
 #   --additional-configuration - Additional server block configuration (no default)
+#   --external-configuration - Configuration external to server block (no default)
 #   --document-root - Path to document root directory
 # Returns:
 #   true if the configuration was enabled, false otherwise
@@ -189,6 +190,7 @@ ensure_nginx_app_configuration_exists() {
     local var_name
     # Template variables defaults
     export additional_configuration=""
+    export external_configuration=""
     export document_root="${BITNAMI_ROOT_DIR}/${app}"
     # Validate arguments
     shift
@@ -205,6 +207,7 @@ ensure_nginx_app_configuration_exists() {
             | --http-port \
             | --https-port \
             | --additional-configuration \
+            | --external-configuration \
             | --document-root \
             | --extra-directory-configuration \
             )
@@ -247,6 +250,7 @@ absolute_redirect off;"
     # Indent configurations
     acl_configuration="$(indent "$acl_configuration" 4)"
     additional_configuration=$'\n'"$(indent "$additional_configuration" 4)"
+    external_configuration=$'\n'"$external_configuration"
     http_listen_configuration="$(indent "$http_listen_configuration" 4)"
     https_listen_configuration="$(indent "$https_listen_configuration" 4)"
     # Render templates
