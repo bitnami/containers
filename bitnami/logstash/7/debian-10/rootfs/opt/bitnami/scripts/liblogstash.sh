@@ -28,7 +28,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 ## Paths
 export LOGSTASH_BASE_DIR="/opt/bitnami/logstash"
 export LOGSTASH_VOLUME_DIR="${LOGSTASH_VOLUME_DIR:-/bitnami/logstash}"
-export LOGSTASH_DATA_DIR="${LOGSTASH_BASE_DIR}/data"
+export LOGSTASH_DATA_DIR="${LOGSTASH_DATA_DIR:-${LOGSTASH_VOLUME_DIR}/data}"
 export LOGSTASH_CONF_DIR="${LOGSTASH_BASE_DIR}/config"
 export LOGSTASH_BIN_DIR="${LOGSTASH_BASE_DIR}/bin"
 export LOGSTASH_LOG_DIR="${LOGSTASH_BASE_DIR}/logs"
