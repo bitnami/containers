@@ -113,54 +113,6 @@ apache_configure_https_port() {
 }
 
 ########################
-# Ensure Apache is initialized
-# Globals:
-#   APACHE_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-apache_initialize() {
-    # Copy vhosts files
-    if ! is_dir_empty "/vhosts"; then
-        info "Found mounted virtual hosts in '/vhosts'. Copying them to '${APACHE_BASE_DIR}/conf/vhosts'"
-        cp -Lr "/vhosts/." "${APACHE_VHOSTS_DIR}"
-    fi
-
-    # Mount certificate files
-    if ! is_dir_empty "${APACHE_BASE_DIR}/certs"; then
-        warn "The directory '${APACHE_BASE_DIR}/certs' was externally mounted. This is a legacy configuration and will be deprecated soon. Please mount certificate files at '/certs' instead. Find an example at: https://github.com/bitnami/bitnami-docker-apache#using-custom-ssl-certificates"
-        warn "Restoring certificates at '${APACHE_BASE_DIR}/certs' to '${APACHE_CONF_DIR}/bitnami/certs'"
-        rm -rf "${APACHE_CONF_DIR}/bitnami/certs"
-        ln -sf "${APACHE_BASE_DIR}/certs" "${APACHE_CONF_DIR}/bitnami/certs"
-    elif ! is_dir_empty "/certs"; then
-        info "Mounting certificates files from '/certs'"
-        rm -rf "${APACHE_CONF_DIR}/bitnami/certs"
-        ln -sf "/certs" "${APACHE_CONF_DIR}/bitnami/certs"
-    fi
-
-    # Mount application files
-    if ! is_dir_empty "/app"; then
-        info "Mounting application files from '/app'"
-        rm -rf "$APACHE_HTDOCS_DIR"
-        ln -sf "/app" "$APACHE_HTDOCS_DIR"
-    fi
-
-    # Port configuration
-    [[ -n "$APACHE_HTTP_PORT_NUMBER" ]] && info "Configuring the HTTP port" && apache_configure_http_port "$APACHE_HTTP_PORT_NUMBER"
-    [[ -n "$APACHE_HTTPS_PORT_NUMBER" ]] && info "Configuring the HTTPS port" && apache_configure_https_port "$APACHE_HTTPS_PORT_NUMBER"
-
-    # Restore persisted configuration files (deprecated)
-    if ! is_dir_empty "/bitnami/apache/conf"; then
-        warn "The directory '/bitnami/apache/conf' was externally mounted. This is a legacy configuration and will be deprecated soon. Please mount certificate files at '${APACHE_CONF_DIR}' instead. Find an example at: https://github.com/bitnami/bitnami-docker-apache#full-configuration"
-        warn "Restoring configuration at '/bitnami/apache/conf' to '${APACHE_CONF_DIR}'"
-        rm -rf "$APACHE_CONF_DIR"
-        ln -sf "/bitnami/apache/conf" "$APACHE_CONF_DIR"
-    fi
-}
-
-########################
 # Enable a module in the Apache configuration file
 # Globals:
 #   APACHE_CONF_FILE
@@ -325,27 +277,37 @@ apache_replace_htaccess_files() {
         esac
         shift
     done
-    # Locate all .htaccess files inside the document root
-    read -r -a htaccess_files <<< "$(find "$document_root" -name .htaccess -print0 | xargs -0)"
-    [[ "${#htaccess_files[@]}" = 0 ]] && return
-    for htaccess_file in "${htaccess_files[@]}"; do
-        htaccess_dir="$(dirname "$htaccess_file")"
-        htaccess_contents="$(indent "$(< "$htaccess_file")" 2)"
-        # Skip if it was already included to the resulting htaccess file
-        if grep -q "^<Directory \"$htaccess_dir\">" <<< "$htaccess_contents"; then
-            continue
-        fi
-        # Add to the htaccess file
-        cat >> "$result_file" <<EOF
+    if is_file_writable "$result_file"; then
+        # Locate all .htaccess files inside the document root
+        read -r -a htaccess_files <<< "$(find "$document_root" -name .htaccess -print0 | xargs -0)"
+        [[ "${#htaccess_files[@]}" = 0 ]] && return
+        # Create file with root group write privileges, so it can be modified in non-root containers
+        [[ ! -f "$result_file" ]] && touch "$result_file" && chmod g+rw "$result_file"
+        for htaccess_file in "${htaccess_files[@]}"; do
+            htaccess_dir="$(dirname "$htaccess_file")"
+            htaccess_contents="$(indent "$(< "$htaccess_file")" 2)"
+            # Skip if it was already included to the resulting htaccess file
+            if grep -q "^<Directory \"$htaccess_dir\">" <<< "$htaccess_contents"; then
+                continue
+            fi
+            # Add to the htaccess file
+            cat >> "$result_file" <<EOF
 <Directory "${htaccess_dir}">
 ${htaccess_contents}
 </Directory>
 EOF
-        # Overwrite the original .htaccess with the explanation text
-        if is_boolean_yes "$overwrite"; then
-            echo "# This configuration has been moved to the ${result_file} config file for performance and security reasons" > "$htaccess_file"
-        fi
-    done
+            # Overwrite the original .htaccess with the explanation text
+            if is_boolean_yes "$overwrite"; then
+                echo "# This configuration has been moved to the ${result_file} config file for performance and security reasons" > "$htaccess_file"
+            fi
+        done
+    elif [[ ! -f "$result_file" ]]; then
+        error "Could not create htaccess for ${app} at '${result_file}'. Check permissions and ownership for parent directories."
+        return 1
+    else
+        warn "The ${app} htaccess file '${result_file}' is not writable. Configurations based on environment variables will not be applied for this file."
+        return
+    fi
 }
 
 ########################
@@ -587,7 +549,7 @@ Require local
 ErrorDocument 403 "For security reasons, this URL is only accessible using localhost (127.0.0.1) as the hostname."
 # AuthType Basic
 # AuthName ${app}
-# AuthUserFile "${APACHE_CONF_DIR}/users"
+# AuthUserFile "${APACHE_BASE_DIR}/users"
 # Require valid-user
 EOF
 )"
