@@ -409,6 +409,10 @@ wp_execute_print_output() {
     # Avoid creating unnecessary cache files at initialization time
     local -a env=("env" "WP_CLI_CONFIG_PATH=${WORDPRESS_CLI_CONF_FILE}" "WP_CLI_CACHE_DIR=/dev/null")
     local -a cmd=("${PHP_BIN_DIR}/php" "${WORDPRESS_CLI_BIN_DIR}/wp-cli.phar" "$@")
+    # Allow to specify extra CLI flags, but ensure they are added last
+    local -a wp_extra_cli_flags
+    read -r -a wp_extra_cli_flags <<< "$WORDPRESS_EXTRA_CLI_ARGS"
+    [[ "${#wp_extra_cli_flags[@]}" -gt 0 ]] && cmd+=("${wp_extra_cli_flags[@]}")
     # Run as web server user to avoid having to change permissions/ownership afterwards
     if am_i_root; then
         gosu "$WEB_SERVER_DAEMON_USER" "${env[@]}" "${cmd[@]}"

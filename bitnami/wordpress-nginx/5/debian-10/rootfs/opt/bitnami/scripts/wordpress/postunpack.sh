@@ -30,10 +30,15 @@ set -o pipefail
 # Ensure the WordPress base directory exists and has proper permissions
 info "Configuring file permissions for WordPress"
 ensure_user_exists "$WEB_SERVER_DAEMON_USER" --group "$WEB_SERVER_DAEMON_GROUP"
-# Some directories are needed for wp-cli to be able to install languages/plugins/etc as a non-root user
-# However they are not included in the WordPress source tarball, so we create them at this point with proper ownership
-# All of them are used by different wp-cli commands, such as 'wp language', 'wp plugin', or 'wp media', amongst others
-for dir in "$WORDPRESS_BASE_DIR" "$WORDPRESS_VOLUME_DIR" "${WORDPRESS_BASE_DIR}/wp-content/languages" "${WORDPRESS_BASE_DIR}/wp-content/upgrade" "${WORDPRESS_BASE_DIR}/wp-content/uploads"; do
+declare -a writable_dirs=(
+    "$WORDPRESS_BASE_DIR" "$WORDPRESS_VOLUME_DIR"
+    # These directories are needed for wp-cli to be able to install languages/plugins/packages/etc as a non-root user
+    # However they are not included in the WordPress source tarball, so we create them at this point with proper ownership
+    # All of them are used by different wp-cli commands, such as 'wp language', 'wp plugin', or 'wp media', amongst others
+    "${WORDPRESS_BASE_DIR}/wp-content/languages" "${WORDPRESS_BASE_DIR}/wp-content/upgrade" "${WORDPRESS_BASE_DIR}/wp-content/uploads"
+    "${WORDPRESS_CLI_BASE_DIR}/.cache" "${WORDPRESS_CLI_BASE_DIR}/.packages"
+)
+for dir in "${writable_dirs[@]}"; do
     ensure_dir_exists "$dir"
     # Use daemon:root ownership for compatibility when running as a non-root user
     configure_permissions_ownership "$dir" -d "g+rwx" -f "g+rw" -u "$WEB_SERVER_DAEMON_USER" -g "root"
