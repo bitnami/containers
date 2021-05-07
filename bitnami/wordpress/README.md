@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`5`, `5-debian-10`, `5.7.1`, `5.7.1-debian-10-r22`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.7.1-debian-10-r22/5/debian-10/Dockerfile)
+- [`5`, `5-debian-10`, `5.7.1`, `5.7.1-debian-10-r23`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.7.1-debian-10-r23/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress).
 
@@ -238,6 +238,7 @@ Available environment variables:
 - `WORDPRESS_TABLE_PREFIX`: Table prefix to use in WordPress. Default: **wp_**
 - `WORDPRESS_PLUGINS`: List of WordPress plugins to install and activate, separated via commas. Can also be set to `all` to activate all currently installed plugins, or `none` to skip. Default: **none**
 - `WORDPRESS_EXTRA_INSTALL_ARGS`: Extra flags to append to the WordPress 'wp core install' command call. No defaults.
+- `WORDPRESS_EXTRA_CLI_ARGS`: Extra flags to append to all WP-CLI command calls. No defaults.
 - `WORDPRESS_EXTRA_WP_CONFIG_CONTENT`: Extra configuration to append to wp-config.php during install. No defaults.
 - `WORDPRESS_ENABLE_HTTPS`: Whether to use HTTPS by default. Default: **no**
 - `WORDPRESS_SKIP_BOOTSTRAP`: Skip the WordPress installation wizard. This is necessary when providing a database with existing WordPress data. Default: **no**
