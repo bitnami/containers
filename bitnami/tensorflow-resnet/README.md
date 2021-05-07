@@ -42,7 +42,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.4.1`, `2.4.1-debian-10-r91`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/2.4.1-debian-10-r91/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.4.1`, `2.4.1-debian-10-r92`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/2.4.1-debian-10-r92/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tensorflow-resnet GitHub repo](https://github.com/bitnami/bitnami-docker-tensorflow-resnet).
 
@@ -134,13 +134,13 @@ Once you have deployed both the TensorFlow Serving and TensorFlow ResNet contain
 2. Download an image:
 
 ```console
-wget https://tensorflow.org/images/blogs/serving/cat.jpg
+curl -L --output cat.jpeg https://tensorflow.org/images/blogs/serving/cat.jpg
 ```
 
 3. Send the image to the TensorFlow Serving server.
 
 ```console
-resnet_client_cc --server_port=tensorflow-serving:8500 --image_file=8500
+resnet_client_cc --server_port=tensorflow-serving:8500 --image_file=./cat.jpg
 ```
 
 4. The model says the image belongs to the category 286. You can check the [imagenet classes index](https://s3.amazonaws.com/deep-learning-models/image-models/imagenet_class_index.json) to see how the category 286 correspond to a cougar.
@@ -155,6 +155,19 @@ the result tensor[1] is:
 286
 Done.
 ```
+
+## Environment variables
+
+Tensorflow Resnet can be customized by specifying environment variables on the first run. The following environment values are provided to custom Tensorflow:
+
+- `TF_RESNET_SERVING_PORT_NUMBER`: TensorFlow Serving Port. Default: **8500**
+- `TF_RESNET_SERVING_HOST`: TensorFlow Serving server name. Default: **tensorflow-serving**
+
+# Notable Changes
+
+## 2.4.1-debian-10-r87
+
+- The container initialization logic is now using bash.
 
 # Contributing
 
