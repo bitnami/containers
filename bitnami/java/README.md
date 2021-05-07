@@ -32,10 +32,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 - [`16-prod`, `16.0.1-prod-debian-10-r12` (16-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/16.0.1-prod-debian-10-r12/16-prod/debian-10/Dockerfile), [`16-prod-prod`, `16.0.1-prod-debian-10-r12-prod` (16-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/16.0.1-prod-debian-10-r12/16-prod/debian-10/prod/Dockerfile)
 - [`16`, `16.0.1-debian-10-r13` (16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/16.0.1-debian-10-r13/16/debian-10/Dockerfile), [`16-prod`, `16.0.1-debian-10-r13-prod` (16/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/16.0.1-debian-10-r13/16/debian-10/prod/Dockerfile)
-- [`15-prod`, `15.0.2-prod-debian-10-r98` (15-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/15.0.2-prod-debian-10-r98/15-prod/debian-10/Dockerfile), [`15-prod-prod`, `15.0.2-prod-debian-10-r98-prod` (15-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/15.0.2-prod-debian-10-r98/15-prod/debian-10/prod/Dockerfile)
-- [`15`, `15.0.2-debian-10-r97` (15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/15.0.2-debian-10-r97/15/debian-10/Dockerfile), [`15-prod`, `15.0.2-debian-10-r97-prod` (15/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/15.0.2-debian-10-r97/15/debian-10/prod/Dockerfile)
 - [`11-prod`, `11.0.11-prod-debian-10-r11` (11-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.11-prod-debian-10-r11/11-prod/debian-10/Dockerfile), [`11-prod-prod`, `11.0.11-prod-debian-10-r11-prod` (11-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.11-prod-debian-10-r11/11-prod/debian-10/prod/Dockerfile)
-- [`11`, `11.0.11-debian-10-r12` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.11-debian-10-r12/11/debian-10/Dockerfile), [`11-prod`, `11.0.11-debian-10-r12-prod` (11/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.11-debian-10-r12/11/debian-10/prod/Dockerfile)
+- [`11`, `11.0.11-debian-10-r13` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.11-debian-10-r13/11/debian-10/Dockerfile), [`11-prod`, `11.0.11-debian-10-r13-prod` (11/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.11-debian-10-r13/11/debian-10/prod/Dockerfile)
 - [`1.8-prod`, `1.8.292-prod-debian-10-r12` (1.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.292-prod-debian-10-r12/1.8-prod/debian-10/Dockerfile), [`1.8-prod-prod`, `1.8.292-prod-debian-10-r12-prod` (1.8-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.292-prod-debian-10-r12/1.8-prod/debian-10/prod/Dockerfile)
 - [`1.8`, `1.8.292-debian-10-r12` (1.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.292-debian-10-r12/1.8/debian-10/Dockerfile), [`1.8-prod`, `1.8.292-debian-10-r12-prod` (1.8/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.292-debian-10-r12/1.8/debian-10/prod/Dockerfile)
 
@@ -149,10 +147,6 @@ $ docker-compose up java
 ## 1.8.252-debian-10-r0, 11.0.7-debian-10-r7, and 15.0.1-debian-10-r20
 
 - Java distribution has been migrated from AdoptOpenJDK to OpenJDK Liberica. As part of VMware, we have an agreement with Bell Software to distribute the Liberica distribution of OpenJDK. That way, we can provide support & the latest versions and security releases for Java.
-
-# Branch Deprecation Notice
-
-Java's branch 15 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 04-30-2021
 
 # Contributing
 
