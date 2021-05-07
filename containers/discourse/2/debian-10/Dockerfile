@@ -11,7 +11,7 @@ RUN /build/install-nami.sh
 RUN bitnami-pkg install ruby-2.6.7-0 --checksum 3d605c181d6ae44f6a6debb7c89a4dc64081b5ee28ca41354946f1fa5cd1276a
 RUN bitnami-pkg unpack postgresql-client-11.11.0-0 --checksum 648e3913acf696c24143dfca8081d22f655f6a70abc542f5daf3f3cd9aa8e2e9
 RUN bitnami-pkg install git-2.31.1-1 --checksum 81233bbb8e724b9fcc0f451a61d5120fdc101a26b40bb82307eaa2b694cdd789
-RUN bitnami-pkg unpack discourse-sidekiq-2.6.6-0 --checksum 48c3b81d8965c79496033170541fc899389df81b9768a9a3d572f9e789587596
+RUN bitnami-pkg unpack discourse-sidekiq-2.6.6-1 --checksum 7784c1da5e5b7a9e0e7f0b58bbcc9a7becd59b98b618f21bada210f4abd99f83
 RUN bitnami-pkg install brotli-1.0.9-0 --checksum 710dd6f5c97af313d0e867e793bedc013aebe173f9c28d0fabc09a16d3100ab6
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
 RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
@@ -20,7 +20,7 @@ RUN /opt/bitnami/ruby/bin/gem install --force bundler -v '< 2'
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.6.6-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="2.6.6-debian-10-r6" \
     DISCOURSE_EMAIL="user@example.com" \
     DISCOURSE_HOST="discourse" \
     DISCOURSE_HOSTNAME="127.0.0.1" \
