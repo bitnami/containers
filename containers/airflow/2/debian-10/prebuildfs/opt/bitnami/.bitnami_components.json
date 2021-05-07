@@ -29,10 +29,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "55ae480809401e9bea797a1cd31c6d7e0089d4d4449136ac6bb172da3564d929",
+        "digest": "b7a37a0590eff13717c191c90dc277f26706196c5fbf2a6b79019bd9f1032f68",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.8.10-0"
+        "version": "3.8.10-2"
     },
     "wait-for-port": {
         "arch": "amd64",
