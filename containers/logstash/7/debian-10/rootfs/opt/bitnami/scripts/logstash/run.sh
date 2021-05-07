@@ -16,14 +16,16 @@ eval "$(logstash_env)"
 
 info "** Starting Logstash **"
 
+args=("--path.data" "$LOGSTASH_DATA_DIR")
+
 if [[ -n "$LOGSTASH_CONF_STRING" ]]; then
     info "Starting logstash using config string"
-    args=( "-e"  "$LOGSTASH_CONF_STRING" )
+    args+=( "-e"  "$LOGSTASH_CONF_STRING" )
 elif is_boolean_yes "$LOGSTASH_ENABLE_MULTIPLE_PIPELINES"; then
     info "Starting logstash using pipelines file (pipelines.yml)"
 else
     info "Starting logstash using config file ($LOGSTASH_CONF_FILENAME)"
-    args=( "-f" "$LOGSTASH_CONF_FILE" )
+    args+=( "-f" "$LOGSTASH_CONF_FILE" )
 fi
 
 if [[ -n "$LOGSTASH_EXTRA_ARGS" ]]; then
