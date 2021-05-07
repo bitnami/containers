@@ -180,6 +180,7 @@ web_server_reload() {
 #   --apache-move-htaccess - Move .htaccess files to a common place so they can be loaded during Apache startup
 # NGINX-specific flags:
 #   --nginx-additional-configuration - Additional server block configuration (no default)
+#   --nginx-external-configuration - Configuration external to server block (no default)
 # Returns:
 #   true if the configuration was enabled, false otherwise
 ########################
@@ -212,6 +213,7 @@ ensure_web_server_app_configuration_exists() {
             | --apache-before-vhost-configuration \
             | --apache-allow-override \
             | --apache-extra-directory-configuration \
+            | --apache-proxy-address \
             | --apache-move-htaccess \
             )
                 apache_args+=("${1//apache-/}" "${2:?missing value}")
@@ -219,7 +221,8 @@ ensure_web_server_app_configuration_exists() {
                 ;;
 
             # Specific NGINX flags
-            --nginx-additional-configuration)
+            --nginx-additional-configuration \
+            | --nginx-external-configuration)
                 nginx_args+=("${1//nginx-/}" "${2:?missing value}")
                 shift
                 ;;
