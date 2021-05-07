@@ -1,3 +1,5 @@
+{{external_configuration}}
+
 server {
     # Port to listen on, can also be set in IP:PORT format
     {{https_listen_configuration}}
