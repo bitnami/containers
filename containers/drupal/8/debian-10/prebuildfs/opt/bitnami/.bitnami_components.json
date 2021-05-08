@@ -8,10 +8,10 @@
     },
     "drupal": {
         "arch": "amd64",
-        "digest": "1e4d17a98198e6664b4f089b1a76c3fa32285e6c6df1a66f27f5ef40c136ed0a",
+        "digest": "0359720dd7e7df160a8b501992e194f8716cfa43a55a07a3a58c9104bc33b5a1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.9.15-0"
+        "version": "8.9.15-1"
     },
     "gosu": {
         "arch": "amd64",
@@ -29,10 +29,10 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "9398376ca9e2033d5bc193232e8aa9b57d91d4ccf06fa67bfa0d30ef36e44c25",
+        "digest": "5bf8f1ed022c8ad75a4db5b8b72ae54ce427bff628d7e4025c5b5e67b876708d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.3.28-0"
+        "version": "10.3.29-0"
     },
     "php": {
         "arch": "amd64",
