@@ -181,7 +181,7 @@ validate_ipv4() {
     local stat=1
 
     if [[ $ip =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
-	read -r -a ip_array <<< "$(tr '.' ' ' <<< "$ip")"
+        read -r -a ip_array <<< "$(tr '.' ' ' <<< "$ip")"
         [[ ${ip_array[0]} -le 255 && ${ip_array[1]} -le 255 \
             && ${ip_array[2]} -le 255 && ${ip_array[3]} -le 255 ]]
         stat=$?
