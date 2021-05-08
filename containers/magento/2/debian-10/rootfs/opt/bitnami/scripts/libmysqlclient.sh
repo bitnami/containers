@@ -285,6 +285,8 @@ mysql_remote_execute_print_output() {
     local -r hostname="${1:?hostname is required}"
     local -r port="${2:?port is required}"
     local -a args=("-h" "$hostname" "-P" "$port" "--connect-timeout=5")
+    # When using "localhost" it would try to connect to the socket, which will not exist for mysql-client
+    [[ -n "${MYSQL_CLIENT_FLAVOR:-}" && "$hostname" = "localhost" ]] && args+=("--protocol=tcp")
     shift 2
     "mysql_execute_print_output" "$@" "${args[@]}"
 }
