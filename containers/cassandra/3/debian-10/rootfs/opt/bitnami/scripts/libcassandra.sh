@@ -543,6 +543,27 @@ cassandra_setup_java() {
 }
 
 ########################
+# Configure jemalloc path (ignored if cassandra-env.sh is mounted)
+# Globals:
+#   CASSANDRA_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+cassandra_setup_jemalloc() {
+    if ! cassandra_is_file_external "cassandra-env.sh"; then
+        if [[ -n "$(find_jemalloc_lib)" ]]; then
+            echo "JVM_OPTS=\"\$JVM_OPTS -Dcassandra.libjemalloc=$(find_jemalloc_lib)\"" >> "${CASSANDRA_CONF_DIR}/cassandra-env.sh"
+        else
+            warn "Couldn't find jemalloc installed. Skipping jemalloc configuration."
+        fi
+    else
+        debug "cassandra-env.sh mounted. Skipping jemalloc configuration."
+    fi
+}
+
+########################
 # Change the password for the cassandra user
 # Globals:
 #   CASSANDRA_*
@@ -699,6 +720,7 @@ cassandra_initialize() {
     cassandra_copy_default_config
     cassandra_enable_auth
     cassandra_setup_java
+    cassandra_setup_jemalloc
     cassandra_setup_logging
     cassandra_setup_ports
     cassandra_setup_rack_dc
@@ -1192,4 +1214,26 @@ cassandra_setup_from_environment_variables() {
         value="${!var}"
         cassandra_commitlog_conf_set "$key" "$value"
     done
+}
+
+########################
+# Find the path to the libjemalloc library file
+# Globals:
+#   None
+# Arguments:
+#   None
+# Returns:
+#   Path to a libjemalloc shared object file
+#########################
+find_jemalloc_lib() {
+    local -a locations=( "/usr/lib" "/usr/lib64" )
+    local -r pattern='libjemalloc.so.[0-9]'
+    local path
+    for dir in "${locations[@]}"; do
+        # Find the first element matching the pattern and quit
+        [[ ! -d "$dir" ]] && continue
+        path="$(find "$dir" -name "$pattern" -print -quit)"
+        [[ -n "$path" ]] && break
+    done
+    echo "${path:-}"
 }
