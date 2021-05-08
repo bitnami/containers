@@ -12,9 +12,9 @@ RUN install_packages acl ca-certificates curl gzip less libaudit1 libbsd0 libbz2
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.4.19-0" --checksum a06427120c60a05308a7f06af69397a5f2bd940dc71ad30e2a92550f7f68a6ae
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.46-7" --checksum cfb1835e471967ec5a6df8c622bdd907be03fb5b57b4f86f68eb7b73fe0f6be3
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wp-cli" "2.4.0-2" --checksum 33c3b53e87e9e433291ac3511e68263c80b43aa4de3dead9502934f506b7f2e6
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.28-0" --checksum 9398376ca9e2033d5bc193232e8aa9b57d91d4ccf06fa67bfa0d30ef36e44c25
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.29-0" --checksum 5bf8f1ed022c8ad75a4db5b8b72ae54ce427bff628d7e4025c5b5e67b876708d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.19-0" --checksum 285daf7986284f628aa0278ebdff8d9bb8d5c97527a8582f254aaf300d4215ca
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wordpress" "5.7.1-7" --checksum a4e965a807152ed6c578fbbe9beff6820c637afc5346805a729cef03158e1d31
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wordpress" "5.7.1-9" --checksum fa8c25c33cc81cd4286f616e65c1a8399a73cf5360c2dbcbc233cce54edae3e3
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN chmod g+rwX /opt/bitnami
@@ -30,7 +30,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="5.7.1-debian-10-r23" \
+    BITNAMI_IMAGE_VERSION="5.7.1-debian-10-r24" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
