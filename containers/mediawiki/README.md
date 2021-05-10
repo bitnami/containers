@@ -317,13 +317,15 @@ This would be an example of SMTP configuration using a GMail account:
 
 # How to install imagemagick in the Bitnami MediaWiki Docker image
 
-If you require better quality thumbnails for your uploaded images, you may want to install imagemagick instead of using GD. To do so you can build your own docker image adding the `imagemagick` system package.
+If you require better quality thumbnails for your uploaded images, you may want to install imagemagick instead of using GD. To do so you can build your own docker image adding the `imagemagick` system package. Since we are using a non-root container, we have to swap the user to root to install imagemagick and it's requirements. 
 
 1. Create the following Dockerfile
 
 ```Dockerfile
 FROM bitnami/mediawiki:latest
+USER root
 RUN install_packages imagemagick
+USER 1001
 ```
 
 2. Build the docker image
