@@ -39,6 +39,7 @@ export PATH="${LDAP_BIN_DIR}:${LDAP_SBIN_DIR}:$PATH"
 export LDAP_TLS_CERT_FILE="${LDAP_TLS_CERT_FILE:-}"
 export LDAP_TLS_KEY_FILE="${LDAP_TLS_KEY_FILE:-}"
 export LDAP_TLS_CA_FILE="${LDAP_TLS_CA_FILE:-}"
+export LDAP_TLS_DH_PARAMS_FILE="${LDAP_TLS_DH_PARAMS_FILE:-}"
 # Users
 export LDAP_DAEMON_USER="slapd"
 export LDAP_DAEMON_GROUP="slapd"
@@ -444,6 +445,9 @@ olcTLSCertificateFile: $LDAP_TLS_CERT_FILE
 -
 replace: olcTLSCertificateKeyFile
 olcTLSCertificateKeyFile: $LDAP_TLS_KEY_FILE
+-
+replace: olcTLSDHParamFile
+olcTLSDHParamFile: $LDAP_TLS_DH_PARAMS_FILE
 
 EOF
     debug_execute ldapmodify -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/certs.ldif"

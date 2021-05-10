@@ -192,6 +192,7 @@ OpenLDAP clients and servers are capable of using the Transport Layer Security (
  - `LDAP_TLS_CERT_FILE`: File containing the certificate file for the TSL traffic. No defaults.
  - `LDAP_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
  - `LDAP_TLS_CA_FILE`: File containing the CA of the certificate. No defaults.
+ - `LDAP_TLS_DH_PARAMS_FILE`: File containing the DH paramters. No defaults.
 
 This new feature is not mutually exclusive, which means it is possible to listen to both TLS and non-TLS connection simultaneously. To use TLS you can use the URI `ldaps://openldap:1636` or use the non-TLS URI forcing ldap to use TLS `ldap://openldap:1389 -ZZ`.
 
