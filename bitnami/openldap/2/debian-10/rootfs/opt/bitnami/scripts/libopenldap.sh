@@ -445,10 +445,16 @@ olcTLSCertificateFile: $LDAP_TLS_CERT_FILE
 -
 replace: olcTLSCertificateKeyFile
 olcTLSCertificateKeyFile: $LDAP_TLS_KEY_FILE
+EOF
+
+    if [[ ! -z "$LDAP_TLS_DH_PARAMS_FILE" ]] ; then
+      cat >> "${LDAP_SHARE_DIR}/certs.ldif" << EOF
 -
 replace: olcTLSDHParamFile
 olcTLSDHParamFile: $LDAP_TLS_DH_PARAMS_FILE
-
 EOF
+
+    fi
+
     debug_execute ldapmodify -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/certs.ldif"
 }
