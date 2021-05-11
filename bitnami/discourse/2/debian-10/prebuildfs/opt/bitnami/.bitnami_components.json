@@ -8,17 +8,17 @@
     },
     "discourse": {
         "arch": "amd64",
-        "digest": "acc38517859e08555131a4350d13ca8b512b4c5ccada579c1bedca2c2bdb39dc",
+        "digest": "ad67d62385a9f3ef337ad1b5f40e44989a0f580339917c0ba4fdb4ae82a1a63b",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.6.6-0"
+        "version": "2.6.7-0"
     },
     "discourse-sidekiq": {
         "arch": "amd64",
-        "digest": "7784c1da5e5b7a9e0e7f0b58bbcc9a7becd59b98b618f21bada210f4abd99f83",
+        "digest": "c23504e69388a28b2294bc634d79b40d00404f6e10f2a4ec47967d6e304036be",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.6.6-1"
+        "version": "2.6.7-0"
     },
     "git": {
         "arch": "amd64",
