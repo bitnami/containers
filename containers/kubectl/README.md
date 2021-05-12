@@ -28,12 +28,12 @@ $ docker run --name kubectl bitnami/kubectl:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.21`, `1.21-debian-10`, `1.21.0`, `1.21.0-debian-10-r23`, `latest` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.21.0-debian-10-r23/1.21/debian-10/Dockerfile)
+* [`1.21`, `1.21-debian-10`, `1.21.0`, `1.21.0-debian-10-r24`, `latest` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.21.0-debian-10-r24/1.21/debian-10/Dockerfile)
 * [`1.20`, `1.20-debian-10`, `1.20.6`, `1.20.6-debian-10-r23` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.20.6-debian-10-r23/1.20/debian-10/Dockerfile)
 * [`1.19`, `1.19-debian-10`, `1.19.10`, `1.19.10-debian-10-r22` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.19.10-debian-10-r22/1.19/debian-10/Dockerfile)
 * [`1.18`, `1.18-debian-10`, `1.18.18`, `1.18.18-debian-10-r23` (1.18/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.18.18-debian-10-r23/1.18/debian-10/Dockerfile)
 * [`1.17`, `1.17-debian-10`, `1.17.17`, `1.17.17-debian-10-r109` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.17.17-debian-10-r109/1.17/debian-10/Dockerfile)
-* [`1.16`, `1.16-debian-10`, `1.16.15`, `1.16.15-debian-10-r237` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.16.15-debian-10-r237/1.16/debian-10/Dockerfile)
+* [`1.16`, `1.16-debian-10`, `1.16.15`, `1.16.15-debian-10-r238` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.16.15-debian-10-r238/1.16/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubectl GitHub repo](https://github.com/bitnami/bitnami-docker-kubectl).
 
