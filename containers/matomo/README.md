@@ -36,7 +36,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.2.1`, `4.2.1-debian-10-r64`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/4.2.1-debian-10-r64/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.2.1`, `4.2.1-debian-10-r65`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/4.2.1-debian-10-r65/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/matomo GitHub repo](https://github.com/bitnami/bitnami-docker-matomo).
 
@@ -283,6 +283,7 @@ When you start the Matomo image, you can adjust the configuration of the instanc
  - `MATOMO_DATABASE_SSL_CERT_FILE`: Path to the database client certificate file. No defaults.
  - `MATOMO_DATABASE_SSL_KEY_FILE`: Path to the database client certificate key. No defaults.
  - `MATOMO_VERIFY_DATABASE_SSL`: Whether to verify the database SSL certificate when SSL is enabled. Default: **yes**
+ - `BITNAMI_DEBUG`: Increase verbosity on initialization logs. Default **false**
 
 ### Use an existing database
 
