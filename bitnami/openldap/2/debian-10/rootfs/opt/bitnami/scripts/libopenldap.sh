@@ -291,9 +291,9 @@ ldap_create_tree() {
     local o="example"
     read -r -a root <<< "$(tr ',;' ' ' <<< "${LDAP_ROOT}")"
     for attr in "${root[@]}"; do
-        if [[ $attr == dc=* ]] && [[ -z "$dc" ]]; then
+        if [[ $attr = dc=* ]] && [[ -z "$dc" ]]; then
             dc="${attr:3}"
-        elif [[ $attr == o=* ]] && [[ $o == "example" ]]; then
+        elif [[ $attr = o=* ]] && [[ $o = "example" ]]; then
             o="${attr:2}"
         fi
     done
@@ -410,7 +410,7 @@ ldap_initialize() {
         else
             # Initialize OpenLDAP with schemas/tree structure
             ldap_add_schemas
-            if [ -f "$LDAP_CUSTOM_SCHEMA_FILE" ]; then
+            if [[ -f "$LDAP_CUSTOM_SCHEMA_FILE" ]]; then
                 ldap_add_custom_schema
             fi
             if ! is_dir_empty "$LDAP_CUSTOM_LDIF_DIR"; then
@@ -446,15 +446,12 @@ olcTLSCertificateFile: $LDAP_TLS_CERT_FILE
 replace: olcTLSCertificateKeyFile
 olcTLSCertificateKeyFile: $LDAP_TLS_KEY_FILE
 EOF
-
-    if [[ ! -z "$LDAP_TLS_DH_PARAMS_FILE" ]] ; then
-      cat >> "${LDAP_SHARE_DIR}/certs.ldif" << EOF
+    if [[ -f "$LDAP_TLS_DH_PARAMS_FILE" ]]; then
+        cat >> "${LDAP_SHARE_DIR}/certs.ldif" << EOF
 -
 replace: olcTLSDHParamFile
 olcTLSDHParamFile: $LDAP_TLS_DH_PARAMS_FILE
 EOF
-
     fi
-
     debug_execute ldapmodify -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/certs.ldif"
 }
