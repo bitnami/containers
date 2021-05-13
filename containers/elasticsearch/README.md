@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`7`, `7-debian-10`, `7.12.1`, `7.12.1-debian-10-r12`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.12.1-debian-10-r12/7/debian-10/Dockerfile)
-* [`7.10.2`, `7.10.2-debian-10`, `7.10.2-debian-10-r101` (7.10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.10.2-debian-10-r101/7.10.2/debian-10/Dockerfile)
+* [`7.10.2`, `7.10.2-debian-10`, `7.10.2-debian-10-r102` (7.10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.10.2-debian-10-r102/7.10.2/debian-10/Dockerfile)
 * [`6`, `6-debian-10`, `6.8.15`, `6.8.15-debian-10-r38` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.15-debian-10-r38/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch).
@@ -372,6 +372,9 @@ $ docker-compose logs elasticsearch
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+
+Additionally, in case you'd like to modify Elasticsearch logging configuration, it can be done by overwriting the file `/opt/bitnami/elasticsearch/config/log4j2.properties`.
+The syntax of this file can be found in Elasticsearch [logging documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/logging.html).
 
 ## Maintenance
 
