@@ -19,3 +19,4 @@ for dir in "$LOGSTASH_CONF_DIR" "$LOGSTASH_LOG_DIR" "$LOGSTASH_MOUNTED_CONF_DIR"
     chmod -R g+rwX "$dir"
 done
 
+logstash_configure_logging

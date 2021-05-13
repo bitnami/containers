@@ -212,3 +212,37 @@ logstash_initialize() {
     fi
     logstash_set_heap_size
 }
+
+
+########################
+# Modify log4j2.properties to send events to stdout instead of a logfile
+# Globals:
+#   ELASTICSEARCH_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+logstash_configure_logging(){
+    # Back up the original file for users who'd like to use logfile logging
+    cp -L "${LOGSTASH_CONF_DIR}/log4j2.properties" "${LOGSTASH_CONF_DIR}/log4j2.file.properties"
+
+    cat > "${LOGSTASH_CONF_DIR}/log4j2.properties" << EOF
+status = error
+name = LogstashPropertiesConfig
+
+appender.console.type = Console
+appender.console.name = plain_console
+appender.console.layout.type = PatternLayout
+appender.console.layout.pattern = [%d{ISO8601}][%-5p][%-25c]%notEmpty{[%X{pipeline.id}]}%notEmpty{[%X{plugin.id}]} %m%n
+
+appender.json_console.type = Console
+appender.json_console.name = json_console
+appender.json_console.layout.type = JSONLayout
+appender.json_console.layout.compact = true
+appender.json_console.layout.eventEol = true
+
+rootLogger.level = \${sys:ls.log.level}
+rootLogger.appenderRef.console.ref = \${sys:ls.log.format}_console
+EOF
+}
