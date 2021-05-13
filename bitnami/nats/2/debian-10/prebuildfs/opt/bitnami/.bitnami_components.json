@@ -1,9 +1,9 @@
 {
     "nats": {
         "arch": "amd64",
-        "digest": "af1e4d759df64130663a033931268f862791546ae6abdb6923820634e2dc0fa1",
+        "digest": "592541849403957b9f65f174e1e42447dd4c28dd1b799b158d2d92bb37379144",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.2.3-0"
+        "version": "2.2.4-0"
     }
 }
