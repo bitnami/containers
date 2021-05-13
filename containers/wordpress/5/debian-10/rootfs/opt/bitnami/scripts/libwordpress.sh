@@ -90,7 +90,7 @@ wordpress_validate() {
         check_multi_value "WORDPRESS_MULTISITE_NETWORK_TYPE" "subfolder subdirectory subdomain"
         check_yes_no_value "WORDPRESS_MULTISITE_ENABLE_NIP_IO_REDIRECTION"
         check_int_value "WORDPRESS_MULTISITE_FILEUPLOAD_MAXK"
-        if ! is_empty_value "WORDPRESS_MULTISITE_HOST"; then
+        if ! is_empty_value "$WORDPRESS_MULTISITE_HOST"; then
             check_resolved_hostname "$WORDPRESS_MULTISITE_HOST"
             [[ "$WORDPRESS_MULTISITE_HOST" =~ localhost ]] && print_validation_error "WORDPRESS_MULTISITE_HOST must be set to an actual hostname, localhost values are not allowed."
             validate_ipv4 "$WORDPRESS_MULTISITE_HOST" && print_validation_error "WORDPRESS_MULTISITE_HOST must be set to an actual hostname, IP addresses are not allowed."
@@ -99,7 +99,7 @@ wordpress_validate() {
         else
             print_validation_error "WORDPRESS_MULTISITE_HOST must be set when enabling WordPress Multisite mode."
         fi
-    elif ! is_empty_value "WORDPRESS_MULTISITE_HOST"; then
+    elif ! is_empty_value "$WORDPRESS_MULTISITE_HOST"; then
         warn "Multisite mode is not enabled, and WORDPRESS_MULTISITE_HOST is only used for Multisite installations. Its value will be ignored."
     fi
 
