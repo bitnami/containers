@@ -15,9 +15,9 @@
     },
     "tomcat": {
         "arch": "amd64",
-        "digest": "2fe38cb39a6ea13f56f3857fe5049f8290859b5fd7ee00f3ed0d9cb092a28582",
+        "digest": "063b3ac81198a95c0d4b6e0d74c07dd3046e956120decc4d358858cbf978bde2",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.0.5-3"
+        "version": "10.0.5-4"
     }
 }
