@@ -488,7 +488,7 @@ elasticsearch_initialize() {
         ELASTICSEARCH_MAJOR_VERSION="$(get_sematic_version "$ELASTICSEARCH_VERSION" 1)"
         ELASTICSEARCH_MINOR_VERSION="$(get_sematic_version "$ELASTICSEARCH_VERSION" 2)"
         # Elasticsearch <= 7.10.2 is packaged without x-pack so adding this line "xpack.ml.enabled:false" will cause a failure
-        # Latest Elasticseach releases install x-pack-ml  by default. Since we have faced some issues with this library on certain platforms, 
+        # Latest Elasticseach releases install x-pack-ml  by default. Since we have faced some issues with this library on certain platforms,
         # currently we are disabling this machine learning module whatsoever by defining "xpack.ml.enabled=false" in the "elasicsearch.yml" file
         if [[ "$ELASTICSEARCH_MAJOR_VERSION" -ge 7 && "$ELASTICSEARCH_MINOR_VERSION" -gt 10 && ! -d "${ELASTICSEARCH_BASE_DIR}/modules/x-pack-ml/platform/linux-x86_64/lib" ]]; then
             elasticsearch_conf_set xpack.ml.enabled "false"
@@ -625,4 +625,37 @@ elasticsearch_custom_init_scripts() {
 #########################
 elasticsearch_get_version(){
     elasticsearch --version | grep Version: | awk -F "," '{print $1}' | awk -F ":" '{print $2}'
+}
+
+########################
+# Modify log4j2.properties to send events to stdout instead of a logfile
+# Globals:
+#   ELASTICSEARCH_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_configure_logging(){
+    # Back up the original file for users who'd like to use logfile logging
+    cp "${ELASTICSEARCH_CONF_DIR}/log4j2.properties" "${ELASTICSEARCH_CONF_DIR}/log4j2.file.properties"
+
+    # Replace RollingFile with Console
+    replace_in_file "${ELASTICSEARCH_CONF_DIR}/log4j2.properties" "RollingFile" "Console"
+
+    local -a delete_patterns=(
+        # Remove RollingFile specific settings
+        "^.*\.policies\..*$" "^.*\.filePattern.*$" "^.*\.fileName.*$" "^.*\.strategy\..*$"
+        # Remove headers
+        "^###.*$"
+        # Remove .log and .json because of multiline configurations (filename)
+        "^\s\s.*\.log" "^\s\s.*\.json"
+        # Remove default rolling logger and references
+        "^appender\.rolling" "appenderRef\.rolling"
+        # Remove _old loggers
+        "_old\."
+    )
+    for pattern in "${delete_patterns[@]}"; do
+        remove_in_file "${ELASTICSEARCH_CONF_DIR}/log4j2.properties" "$pattern"
+    done
 }
