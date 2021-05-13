@@ -458,6 +458,7 @@ pg_bindir='${POSTGRESQL_BIN_DIR}'
 # FIXME: these 2 parameter should work
 node_id=$(repmgr_get_node_id)
 node_name='${REPMGR_NODE_NAME}'
+location='${REPMGR_NODE_LOCATION}'
 conninfo='user=${REPMGR_USERNAME} $(repmgr_get_conninfo_password) host=${REPMGR_NODE_NETWORK_NAME} dbname=${REPMGR_DATABASE} port=${REPMGR_PORT_NUMBER} connect_timeout=${REPMGR_CONNECT_TIMEOUT}'
 failover='automatic'
 promote_command='$(repmgr_get_env_password) repmgr standby promote -f "${REPMGR_CONF_FILE}" --log-level DEBUG --verbose'

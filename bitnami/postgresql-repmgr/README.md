@@ -523,6 +523,7 @@ Please see the list of environment variables available in the Bitnami PostgreSQL
 | REPMGR_NODE_ID                       | `nil`         |
 | REPMGR_NODE_NAME                     | `nil`         |
 | REPMGR_NODE_NETWORK_NAME             | `nil`         |
+| REPMGR_NODE_LOCATION                 | `default`     |
 | REPMGR_NODE_PRIORITY                 | `100`         |
 | REPMGR_PARTNER_NODES                 | `nil`         |
 | REPMGR_PRIMARY_HOST                  | `nil`         |
