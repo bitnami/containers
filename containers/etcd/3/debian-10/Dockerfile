@@ -11,13 +11,13 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "etcd" "3.4.15-0" --checksum da3698c9467c728b56082a0d1fcd7d72e859e8e41b3143ccf6eda868b538ab80
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "etcd" "3.4.16-0" --checksum 87ffa91cbaf5ad953cae045b8dfb4cb4f12c66da499bd332d2b4acf2f01941f0
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/etcd/postunpack.sh
 ENV BITNAMI_APP_NAME="etcd" \
-    BITNAMI_IMAGE_VERSION="3.4.15-debian-10-r69" \
+    BITNAMI_IMAGE_VERSION="3.4.16-debian-10-r0" \
     ETCDCTL_API="3"
 
 EXPOSE 2379 2380
