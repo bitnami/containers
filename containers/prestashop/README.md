@@ -244,6 +244,7 @@ Available environment variables:
 - `PRESTASHOP_DATABASE_NAME`: Database name that PrestaShop will use to connect with the database. Default: **bitnami_prestashop**
 - `PRESTASHOP_DATABASE_USER`: Database user that PrestaShop will use to connect with the database. Default: **bn_prestashop**
 - `PRESTASHOP_DATABASE_PASSWORD`: Database password that PrestaShop will use to connect with the database. No defaults.
+- `PRESTASHOP_DATABASE_PREFIX`: Database table prefix that prestashop will use in the database. Default: **ps_**
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
 ##### Create a database for PrestaShop using mysql-client

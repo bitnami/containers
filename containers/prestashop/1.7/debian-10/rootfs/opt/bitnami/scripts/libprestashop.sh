@@ -115,6 +115,7 @@ prestashop_initialize() {
             "--db_password=${db_pass}"
             "--db_server=${db_host}:${db_port}"
             "--db_name=${db_name}"
+            "--prefix=${PRESTASHOP_DATABASE_PREFIX}"
             "--domain=${PRESTASHOP_HOST}"
             "--firstname=${PRESTASHOP_FIRST_NAME}"
             "--lastname=${PRESTASHOP_LAST_NAME}"
@@ -160,7 +161,7 @@ prestashop_initialize() {
             fi
             for setting in "${settings_to_update[@]}"; do
                 # We split the key and value with the '=' delimiter via native Bash functionality to simplify the logic
-                mysql_remote_execute "${mysql_execute_args[@]}" <<< "UPDATE ps_configuration SET value='${setting#*=}' WHERE name='${setting%=*}';"
+                mysql_remote_execute "${mysql_execute_args[@]}" <<< "UPDATE ${PRESTASHOP_DATABASE_PREFIX}configuration SET value='${setting#*=}' WHERE name='${setting%=*}';"
             done
         else
             info "An already initialized PrestaShop database was provided, configuration will be skipped"
