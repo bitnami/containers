@@ -17,7 +17,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.46-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.29-0" --checksum 5bf8f1ed022c8ad75a4db5b8b72ae54ce427bff628d7e4025c5b5e67b876708d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.28-0" --checksum 70777f4c71ed24d033410bb3eaf4475d12aec111b971d7a3ed3f6935db72ed51
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "moodle" "3.10.4-0" --checksum 186ebba3a7737a964e2ef383acb50609436c6cec379c7a1d7337aa75bed402be
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "moodle" "3.11.0-0" --checksum 5cdb9ca9ed58b9ba84e918d7f3a7ec4b98fe87ba6a3f6210c95482f975434690
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN chmod g+rwX /opt/bitnami
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
@@ -29,8 +29,8 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
-RUN /opt/bitnami/scripts/apache/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
+RUN /opt/bitnami/scripts/apache/postunpack.sh
 RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/moodle/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
@@ -39,7 +39,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="moodle" \
-    BITNAMI_IMAGE_VERSION="3.10.4-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="3.11.0-debian-10-r0" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     MARIADB_HOST="mariadb" \
