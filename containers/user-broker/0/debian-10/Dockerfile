@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="user-broker" \
-    BITNAMI_IMAGE_VERSION="0.3.1-debian-10-r179" \
+    BITNAMI_IMAGE_VERSION="0.3.1-debian-10-r180" \
     PATH="/opt/bitnami/user-broker/bin:$PATH"
 
 EXPOSE 8005 8080
