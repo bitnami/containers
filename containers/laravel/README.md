@@ -28,7 +28,7 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8`, `8-debian-10`, `8.5.17`, `8.5.17-debian-10-r3`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/8.5.17-debian-10-r3/8/debian-10/Dockerfile)
+* [`8`, `8-debian-10`, `8.5.17`, `8.5.17-debian-10-r4`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/8.5.17-debian-10-r4/8/debian-10/Dockerfile)
 * [`6`, `6-debian-10`, `6.20.1`, `6.20.1-debian-10-r4` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/6.20.1-debian-10-r4/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/laravel GitHub repo](https://github.com/bitnami/bitnami-docker-laravel).
