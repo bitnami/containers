@@ -33,7 +33,7 @@ You can find the default credentials and available configuration options in the 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8`, `8-debian-10`, `8.9.0`, `8.9.0-debian-10-r2` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/8.9.0-debian-10-r2/8/debian-10/Dockerfile)
+* [`8`, `8-debian-10`, `8.9.0`, `8.9.0-debian-10-r3` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/8.9.0-debian-10-r3/8/debian-10/Dockerfile)
 * [`7`, `7-debian-10`, `7.9.6`, `7.9.6-debian-10-r61`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/7.9.6-debian-10-r61/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/sonarqube GitHub repo](https://github.com/bitnami/bitnami-docker-sonarqube).
