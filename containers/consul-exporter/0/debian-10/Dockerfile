@@ -17,7 +17,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN ln -sf /opt/bitnami/consul-exporter/bin/consul_exporter /bin/consul_exporter
 
 ENV BITNAMI_APP_NAME="consul-exporter" \
-    BITNAMI_IMAGE_VERSION="0.7.1-debian-10-r279" \
+    BITNAMI_IMAGE_VERSION="0.7.1-debian-10-r280" \
     PATH="/opt/bitnami/consul-exporter/bin:$PATH"
 
 EXPOSE 9107
