@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="cainjector" \
-    BITNAMI_IMAGE_VERSION="1.3.1-debian-10-r22" \
+    BITNAMI_IMAGE_VERSION="1.3.1-debian-10-r23" \
     PATH="/opt/bitnami/cainjector/bin:$PATH"
 
 WORKDIR /opt/bitnami/cainjector
