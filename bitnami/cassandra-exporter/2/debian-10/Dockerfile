@@ -20,7 +20,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="cassandra-exporter" \
-    BITNAMI_IMAGE_VERSION="2.3.4-debian-10-r406" \
+    BITNAMI_IMAGE_VERSION="2.3.4-debian-10-r407" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 8080
