@@ -2,28 +2,27 @@ version: '2'
 services:
   mariadb:
     image: docker.io/bitnami/mariadb:10.3
+    volumes:
+      - 'mariadb_data:/bitnami/mariadb'
     environment:
+      - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=bn_osclass
       - MARIADB_DATABASE=bitnami_osclass
-      - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - 'mariadb_data:/bitnami'
   osclass:
     image: docker.io/bitnami/osclass:4
-    environment:
-      - MARIADB_HOST=mariadb
-      - MARIADB_PORT_NUMBER=3306
-      - OSCLASS_HOST=localhost
-      - OSCLASS_DATABASE_USER=bn_osclass
-      - OSCLASS_DATABASE_NAME=bitnami_osclass
-      - ALLOW_EMPTY_PASSWORD=yes
     ports:
-      - '80:80'
-      - '443:443'
+      - '80:8080'
+      - '443:8443'
+    volumes:
+      - 'osclass_data:/bitnami/osclass'
     depends_on:
       - mariadb
-    volumes:
-      - 'osclass_data:/bitnami'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - OSCLASS_DATABASE_HOST=mariadb
+      - OSCLASS_DATABASE_PORT_NUMBER=3306
+      - OSCLASS_DATABASE_USER=bn_osclass
+      - OSCLASS_DATABASE_NAME=bitnami_osclass
 volumes:
   mariadb_data:
     driver: local
