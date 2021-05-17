@@ -20,7 +20,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/aspnet-core/postunpack.sh
 ENV BITNAMI_APP_NAME="aspnet-core" \
-    BITNAMI_IMAGE_VERSION="3.1.9-debian-10-r191" \
+    BITNAMI_IMAGE_VERSION="3.1.9-debian-10-r192" \
     DOTNET_CLI_HOME="/app" \
     DOTNET_ROOT="/opt/bitnami/aspnet-core/bin" \
     PATH="/opt/bitnami/aspnet-core/bin:$PATH"
