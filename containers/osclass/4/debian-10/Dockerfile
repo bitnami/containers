@@ -1,30 +1,35 @@
 FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ENV PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/nami/bin:$PATH"
+ENV HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-10" \
+    OS_NAME="linux"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip libargon2-1 libaudit1 libbsd0 libbz2-1.0 libc6 libcap-ng0 libcom-err2 libcurl4 libexpat1 libffi6 libfftw3-double3 libfontconfig1 libfreetype6 libgcc1 libgcrypt20 libglib2.0-0 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjemalloc2 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblcms2-2 libldap-2.4-2 liblqr-1-0 libltdl7 liblzma5 libmagickcore-6.q16-6 libmagickwand-6.q16-6 libmcrypt4 libmemcached11 libmemcachedutil2 libncurses6 libnettle6 libnghttp2-14 libp11-kit0 libpam0g libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsodium23 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5deb1 libtinfo6 libunistring2 libuuid1 libwebp6 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxslt1.1 libzip4 procps sudo tar zlib1g
-RUN /build/bitnami-user.sh
-RUN /build/install-nami.sh
-RUN bitnami-pkg unpack php-7.3.28-0 --checksum 029ca7c2678b4ccfb07db3b4ad18724070e0f49528ad17b42bbcf6b20620e574
-RUN bitnami-pkg unpack apache-2.4.46-7 --checksum cfb1835e471967ec5a6df8c622bdd907be03fb5b57b4f86f68eb7b73fe0f6be3
-RUN bitnami-pkg unpack mysql-client-10.3.29-0 --checksum 5bf8f1ed022c8ad75a4db5b8b72ae54ce427bff628d7e4025c5b5e67b876708d
-RUN bitnami-pkg install libphp-7.3.28-0 --checksum 70777f4c71ed24d033410bb3eaf4475d12aec111b971d7a3ed3f6935db72ed51
-RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
-RUN bitnami-pkg unpack osclass-4.4.0-0 --checksum ef7ad7da4f3b18f34e8bb427518c209bb88c481ca2fb6ca68c1e6324b8a9a44e
-RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
-RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log && \
-    ln -sf /dev/stderr /opt/bitnami/apache/logs/error_log
+RUN install_packages acl ca-certificates curl gzip libaudit1 libbsd0 libbz2-1.0 libc6 libcap-ng0 libcom-err2 libcurl4 libexpat1 libffi6 libfftw3-double3 libfontconfig1 libfreetype6 libgcc1 libgcrypt20 libglib2.0-0 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjemalloc2 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblcms2-2 libldap-2.4-2 liblqr-1-0 libltdl7 liblzma5 libmagickcore-6.q16-6 libmagickwand-6.q16-6 libmcrypt4 libmemcached11 libmemcachedutil2 libncurses6 libnettle6 libnghttp2-14 libonig5 libp11-kit0 libpam0g libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsodium23 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5deb1 libtinfo6 libunistring2 libuuid1 libwebp6 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxslt1.1 libzip4 procps tar zlib1g
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.4.19-1" --checksum bbd1264e15d8eb1f3418ce0da010afff4fe3e3c539419d4c2acf00bc56655616
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.46-7" --checksum cfb1835e471967ec5a6df8c622bdd907be03fb5b57b4f86f68eb7b73fe0f6be3
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.29-0" --checksum 5bf8f1ed022c8ad75a4db5b8b72ae54ce427bff628d7e4025c5b5e67b876708d
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.19-0" --checksum 285daf7986284f628aa0278ebdff8d9bb8d5c97527a8582f254aaf300d4215ca
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "osclass" "4.4.0-0" --checksum ef7ad7da4f3b18f34e8bb427518c209bb88c481ca2fb6ca68c1e6324b8a9a44e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
+RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
+RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
+RUN /opt/bitnami/scripts/apache/postunpack.sh
+RUN /opt/bitnami/scripts/php/postunpack.sh
+RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
+RUN /opt/bitnami/scripts/osclass/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_ENABLE_CUSTOM_PORTS="no" \
-    APACHE_HTTPS_PORT_NUMBER="443" \
-    APACHE_HTTP_PORT_NUMBER="80" \
+    APACHE_HTTPS_PORT_NUMBER="" \
+    APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="osclass" \
-    BITNAMI_IMAGE_VERSION="4.4.0-debian-10-r15" \
+    BITNAMI_IMAGE_VERSION="4.4.0-debian-10-r16" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -35,25 +40,10 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MYSQL_CLIENT_CREATE_DATABASE_USER="" \
     MYSQL_CLIENT_ENABLE_SSL="no" \
     MYSQL_CLIENT_SSL_CA_FILE="" \
-    OSCLASS_DATABASE_NAME="bitnami_osclass" \
-    OSCLASS_DATABASE_PASSWORD="" \
-    OSCLASS_DATABASE_USER="bn_osclass" \
-    OSCLASS_EMAIL="user@example.com" \
-    OSCLASS_HOST="127.0.0.1" \
-    OSCLASS_PASSWORD="bitnami1" \
-    OSCLASS_USERNAME="user" \
-    OSCLASS_WEB_TITLE="Sample Web Page" \
-    OS_ARCH="amd64" \
-    OS_FLAVOUR="debian-10" \
-    OS_NAME="linux" \
-    PHP_MEMORY_LIMIT="256M" \
-    SMTP_HOST="" \
-    SMTP_PASSWORD="" \
-    SMTP_PORT="" \
-    SMTP_PROTOCOL="" \
-    SMTP_USER=""
+    PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
-EXPOSE 80 443
+EXPOSE 8080 8443
 
-ENTRYPOINT [ "/app-entrypoint.sh" ]
-CMD [ "httpd", "-f", "/opt/bitnami/apache/conf/httpd.conf", "-DFOREGROUND" ]
+USER 1001
+ENTRYPOINT [ "/opt/bitnami/scripts/osclass/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/apache/run.sh" ]
