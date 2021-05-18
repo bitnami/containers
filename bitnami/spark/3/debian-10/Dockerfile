@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/spark/postunpack.sh
 ENV BITNAMI_APP_NAME="spark" \
-    BITNAMI_IMAGE_VERSION="3.1.1-debian-10-r66" \
+    BITNAMI_IMAGE_VERSION="3.1.1-debian-10-r67" \
     JAVA_HOME="/opt/bitnami/java" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/spark/venv/lib/python3.6/site-packages/numpy.libs/:$LD_LIBRARY_PATH" \
     LIBNSS_WRAPPER_PATH="/opt/bitnami/common/lib/libnss_wrapper.so" \
