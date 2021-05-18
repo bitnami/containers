@@ -28,7 +28,7 @@ $ docker run --name wavefront-kubernetes-collector bitnami/wavefront-kubernetes-
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-scratch`, `1.3.5`, `1.3.5-scratch-r1`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector/blob/1.3.5-scratch-r1/1/scratch/Dockerfile)
+* [`1`, `1-scratch`, `1.3.6`, `1.3.6-scratch-r0`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector/blob/1.3.6-scratch-r0/1/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wavefront-kubernetes-collector GitHub repo](https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector).
 
