@@ -18,7 +18,7 @@ RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="4.9.3-debian-10-r134" \
+    BITNAMI_IMAGE_VERSION="4.9.3-debian-10-r135" \
     MONGODB_HOST="mongodb" \
     MONGODB_PASSWORD="" \
     MONGODB_PORT_NUMBER="27017" \
