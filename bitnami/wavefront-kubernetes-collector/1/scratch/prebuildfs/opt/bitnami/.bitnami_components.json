@@ -1,7 +1,7 @@
 {
     "wavefront": {
-        "digest": "89a75281eb54eb88414e40dd56f7f54a80b7ee8ade8f1e30b78496cd5cfd37ce",
+        "digest": "53ae8c5d67cf3fdb3b416f666999f9acbd3637ad60cbfbced22090e5135b639c",
         "type": "BLACKSMITH",
-        "version": "1.3.5"
+        "version": "1.3.6"
     }
 }
