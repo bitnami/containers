@@ -1,10 +1,10 @@
 {
     "grafana-image-renderer": {
         "arch": "amd64",
-        "digest": "bfd64342b22a888f1171ff8bda6843c05d9661643f2bcff61e4dd5c0672dcb3e",
+        "digest": "b4449cfb287affcb8e16c68f5cba53ad0e46d5835bb9dbe679a747e554bed4b7",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.1.0-0"
+        "version": "2.1.1-0"
     },
     "node": {
         "arch": "amd64",
