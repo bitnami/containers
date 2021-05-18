@@ -17,7 +17,7 @@ RUN mkdir /.m2 && chmod -R g+rwX /.m2
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="spring-cloud-dataflow-composed-task-runner" \
-    BITNAMI_IMAGE_VERSION="2.7.2-debian-10-r10" \
+    BITNAMI_IMAGE_VERSION="2.7.2-debian-10-r11" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"
 
 USER 1001
