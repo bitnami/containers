@@ -14,7 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.46-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wp-cli" "2.4.0-2" --checksum 33c3b53e87e9e433291ac3511e68263c80b43aa4de3dead9502934f506b7f2e6
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.29-0" --checksum 5bf8f1ed022c8ad75a4db5b8b72ae54ce427bff628d7e4025c5b5e67b876708d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.19-0" --checksum 285daf7986284f628aa0278ebdff8d9bb8d5c97527a8582f254aaf300d4215ca
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wordpress" "5.7.2-1" --checksum 7ff610bc75f2f7573cbe66a8a221438d3bdc04fbcff67be06354a1e2d1681a10
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wordpress" "5.7.2-2" --checksum 121f44e71a2b03ed34aee2ee0ee6362bf315f83bea22003d5c70f7dda9bc5b8e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN chmod g+rwX /opt/bitnami
@@ -30,7 +30,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="5.7.2-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="5.7.2-debian-10-r5" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
