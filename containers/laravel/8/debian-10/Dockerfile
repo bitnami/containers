@@ -11,13 +11,13 @@ RUN /build/install-nami.sh
 RUN bitnami-pkg unpack php-7.4.19-1 --checksum bbd1264e15d8eb1f3418ce0da010afff4fe3e3c539419d4c2acf00bc56655616
 RUN bitnami-pkg install node-14.17.0-0 --checksum 445d6ffbde4c69c382f1d1614f014fb29c716756e6e91e9d5792bfb5268ea4d1
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
-RUN bitnami-pkg install laravel-8.5.17-0 --checksum 96097e186428feb0d00c6319f31bb09dbcde1e30e5b939bdc0e77887868f0ce5
+RUN bitnami-pkg install laravel-8.5.18-0 --checksum e1ea50e2fd9fed506ca27721d806434fb26761c29c8fd3fcc958617d8f48b8c8
 RUN bitnami-pkg install gosu-1.12.0-2 --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN mkdir /app && chown bitnami:bitnami /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="laravel" \
-    BITNAMI_IMAGE_VERSION="8.5.17-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="8.5.18-debian-10-r0" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
