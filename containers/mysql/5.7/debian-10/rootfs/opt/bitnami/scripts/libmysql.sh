@@ -673,20 +673,20 @@ mysql_stop() {
 
     are_db_files_locked() {
         local return_value=0
-        read -r -a db_files <<< "$(find "$DB_DATA_DIR" -regex "^.*ibdata[0-9]+" -o -regex "^.*ib_logfile[0-9]+" | xargs)"
+        read -r -a db_files <<< "$(find "$DB_DATA_DIR" -regex "^.*ibdata[0-9]+" -print0 -o -regex "^.*ib_logfile[0-9]+" -print0 | xargs -0)"
         for f in "${db_files[@]}"; do
             debug_execute lsof -w "$f" && return_value=1
         done
         return $return_value
     }
 
-    is_mysql_not_running && return
+    ! is_mysql_running && return
 
     info "Stopping $DB_FLAVOR"
     stop_service_using_pid "$DB_PID_FILE"
     debug "Waiting for $DB_FLAVOR to unlock db files"
     if ! retry_while are_db_files_locked "$retries" "$sleep_time"; then
-        error "MySQL failed to stop"
+        error "$DB_FLAVOR failed to stop"
         return 1
     fi
 }
