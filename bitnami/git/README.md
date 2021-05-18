@@ -28,7 +28,7 @@ $ docker run --name git bitnami/git:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.31.1`, `2.31.1-debian-10-r47`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/2.31.1-debian-10-r47/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.31.1`, `2.31.1-debian-10-r48`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/2.31.1-debian-10-r48/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/git GitHub repo](https://github.com/bitnami/bitnami-docker-git).
 
