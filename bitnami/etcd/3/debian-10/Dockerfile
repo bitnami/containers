@@ -17,7 +17,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/etcd/postunpack.sh
 ENV BITNAMI_APP_NAME="etcd" \
-    BITNAMI_IMAGE_VERSION="3.4.16-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="3.4.16-debian-10-r4" \
     ETCDCTL_API="3"
 
 EXPOSE 2379 2380
