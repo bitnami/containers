@@ -17,7 +17,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/redis-sentinel/postunpack.sh
 ENV BITNAMI_APP_NAME="redis-sentinel" \
-    BITNAMI_IMAGE_VERSION="5.0.12-debian-10-r63"
+    BITNAMI_IMAGE_VERSION="5.0.12-debian-10-r64"
 
 EXPOSE 26379
 
