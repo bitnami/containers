@@ -17,7 +17,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN mkdir -p /bitnami/kapacitor && chmod g+rwX /bitnami/kapacitor
 
 ENV BITNAMI_APP_NAME="kapacitor" \
-    BITNAMI_IMAGE_VERSION="1.5.9-debian-10-r42" \
+    BITNAMI_IMAGE_VERSION="1.5.9-debian-10-r43" \
     KAPACITOR_DATA_DIR="/bitnami/kapacitor" \
     KAPACITOR_LOAD_DIR="/bitnami/kapacitor/load" \
     KAPACITOR_REPLAY_DIR="/bitnami/kapacitor/replay" \
