@@ -20,7 +20,7 @@ ENV APACHE_ENABLE_CUSTOM_PORTS="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="apache" \
-    BITNAMI_IMAGE_VERSION="2.4.46-debian-10-r256" \
+    BITNAMI_IMAGE_VERSION="2.4.46-debian-10-r257" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/apache/bin:$PATH"
 
 EXPOSE 8080 8443
