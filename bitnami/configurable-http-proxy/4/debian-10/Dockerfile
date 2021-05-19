@@ -20,7 +20,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="configurable-http-proxy" \
-    BITNAMI_IMAGE_VERSION="4.3.2-debian-10-r32" \
+    BITNAMI_IMAGE_VERSION="4.3.2-debian-10-r33" \
     PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:/opt/bitnami/configurable-http-proxy/bin:$PATH"
 
 EXPOSE 3000
