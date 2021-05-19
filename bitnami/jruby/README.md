@@ -33,7 +33,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`9.2`, `9.2-debian-10`, `9.2.17-0`, `9.2.17-0-debian-10-r45`, `latest` (9.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jruby/blob/9.2.17-0-debian-10-r45/9.2/debian-10/Dockerfile)
+* [`9.2`, `9.2-debian-10`, `9.2.17-0`, `9.2.17-0-debian-10-r46`, `latest` (9.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jruby/blob/9.2.17-0-debian-10-r46/9.2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jruby GitHub repo](https://github.com/bitnami/bitnami-docker-jruby).
 
