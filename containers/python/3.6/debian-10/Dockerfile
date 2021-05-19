@@ -17,7 +17,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="3.6.13-debian-10-r87" \
+    BITNAMI_IMAGE_VERSION="3.6.13-debian-10-r88" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 8000
