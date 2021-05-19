@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="wavefront-prometheus-storage-adapter" \
-    BITNAMI_IMAGE_VERSION="1.0.3-debian-10-r60" \
+    BITNAMI_IMAGE_VERSION="1.0.3-debian-10-r61" \
     PATH="/opt/bitnami/wavefront-prometheus-storage-adapter/bin:$PATH"
 
 USER 1001
