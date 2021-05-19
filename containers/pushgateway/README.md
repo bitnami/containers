@@ -32,7 +32,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.4.0`, `1.4.0-debian-10-r112`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/1.4.0-debian-10-r112/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.4.0`, `1.4.0-debian-10-r113`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/1.4.0-debian-10-r113/1/debian-10/Dockerfile)
 * [`0`, `0-debian-10`, `0.10.0`, `0.10.0-debian-10-r443` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/0.10.0-debian-10-r443/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pushgateway GitHub repo](https://github.com/bitnami/bitnami-docker-pushgateway).
@@ -141,6 +141,10 @@ Re-create your container from the new image, [restoring your backup](#restoring-
 ```console
 $ docker run --name pushgateway bitnami/pushgateway:latest
 ```
+
+# Branch Deprecation Notice
+
+Prometheus Pushgateway's branch 0 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 06-19-2021
 
 # Contributing
 
