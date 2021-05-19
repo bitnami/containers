@@ -39,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.2.2`, `4.2.2-debian-10-r84`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.2.2-debian-10-r84/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.2.2`, `4.2.2-debian-10-r85`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.2.2-debian-10-r85/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pgpool GitHub repo](https://github.com/bitnami/bitnami-docker-pgpool).
 
@@ -268,6 +268,8 @@ Pgpool configuration:
 - `PGPOOL_USER_CONF_FILE`: Configuration file to be added to the generated config file. This allow to override configuration set by the initializacion process. No defaults.
 - `PGPOOL_POSTGRES_CUSTOM_USERS`: List of comma or semicolon separeted list of postgres usernames. This will create entries in `pgpool_passwd`. No defaults.
 - `PGPOOL_POSTGRES_CUSTOM_PASSWORDS`: List of comma or semicolon separated list for postgresql user passwords. These are the corresponding passwords for the users in `PGPOOL_POSTGRES_CUSTOM_USERS`. No defaults.
+- `PGPOOL_AUTO_FAILBACK`: Enables pgpool `[auto_failback](https://www.pgpool.net/docs/latest/en/html/runtime-config-failover.html)`. Default to `no`.
+- `PGPOOL_BACKEND_APPLICATION_NAMES`: Comma separated list of backend nodes `application_name`. No defaults.
 
 PostgreSQL with Replication Manager:
 
@@ -284,6 +286,7 @@ PostgreSQL with Replication Manager:
 - `REPMGR_PARTNER_NODES`: Comma separated list of partner nodes in the cluster.  No defaults.
 - `REPMGR_NODE_NAME`: Node name. No defaults.
 - `REPMGR_NODE_NETWORK_NAME`: Node hostname. No defaults.
+- `POSTGRESQL_CLUSTER_APP_NAME`: Node `application_name`. In the case you are enabling auto_failback, each node needs a different name. Defaults to `walreceiver`.
 
 In a HA PostgreSQL cluster you can have one primary and zero or more standby nodes. The primary node is in read-write mode, while the standby nodes are in read-only mode. For best performance its advisable to limit the reads to the standby nodes.
 
