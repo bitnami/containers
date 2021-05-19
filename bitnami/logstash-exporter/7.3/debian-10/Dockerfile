@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="logstash-exporter" \
-    BITNAMI_IMAGE_VERSION="7.3.0-debian-10-r188" \
+    BITNAMI_IMAGE_VERSION="7.3.0-debian-10-r189" \
     PATH="/opt/bitnami/logstash-exporter/bin:$PATH"
 
 EXPOSE 9198
