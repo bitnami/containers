@@ -32,7 +32,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.0.0`, `2.0.0-debian-10-r19`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/2.0.0-debian-10-r19/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.0.0`, `2.0.0-debian-10-r20`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/2.0.0-debian-10-r20/2/debian-10/Dockerfile)
 * [`1`, `1-debian-10`, `1.9.8`, `1.9.8-debian-10-r79` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/1.9.8-debian-10-r79/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kube-state-metrics GitHub repo](https://github.com/bitnami/bitnami-docker-kube-state-metrics).
@@ -70,6 +70,10 @@ For clusters of more than 100 nodes, allocate at least
 
 * 2MiB memory per node
 * 0.001 cores per node
+
+# Branch Deprecation Notice
+
+kube-state-metrics' branch 1 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 06-19-2021
 
 # Contributing
 
