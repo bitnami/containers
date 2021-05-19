@@ -128,7 +128,7 @@ The Bitnami Keycloak Docker image allows configuring TLS encryption between node
  - `keystore`: File with the server keystore
  - `truststore`: File with the server truststore
 
-> Note: find more information about how to create these files at the [Keycloak documentation](https://github.com/keycloak/keycloak-documentation/blob/master/openshift/topics/advanced_concepts.adoc#creating-https-and-jgroups-keystores-and-truststore-for-the-project_name-server).
+> Note: find more information about how to create these files at the [Keycloak documentation](https://www.keycloak.org/docs/latest/server_installation/#_truststore).
 
 Apart from that, the following environment variables must be set:
 
