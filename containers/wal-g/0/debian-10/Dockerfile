@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="wal-g" \
-    BITNAMI_IMAGE_VERSION="0.2.19-debian-10-r155" \
+    BITNAMI_IMAGE_VERSION="0.2.19-debian-10-r156" \
     PATH="/opt/bitnami/wal-g/bin:$PATH"
 
 USER 1001
