@@ -75,9 +75,10 @@ export PGPOOL_HEALTH_CHECK_MAX_RETRIES="${PGPOOL_HEALTH_CHECK_MAX_RETRIES:-5}"
 export PGPOOL_HEALTH_CHECK_RETRY_DELAY="${PGPOOL_HEALTH_CHECK_RETRY_DELAY:-5}"
 export PGPOOL_POSTGRES_CUSTOM_USERS="${PGPOOL_POSTGRES_CUSTOM_USERS:-}"
 export PGPOOL_POSTGRES_CUSTOM_PASSWORDS="${PGPOOL_POSTGRES_CUSTOM_PASSWORDS:-}"
+export PGPOOL_AUTO_FAILBACK="${PGPOOL_AUTO_FAILBACK:-no}"
+export PGPOOL_BACKEND_APPLICATION_NAMES="${PGPOOL_BACKEND_APPLICATION_NAMES:-}"
 
 # SSL
-
 export PGPOOL_ENABLE_TLS="${PGPOOL_ENABLE_TLS:-no}"
 export PGPOOL_TLS_CERT_FILE="${PGPOOL_TLS_CERT_FILE:-}"
 export PGPOOL_TLS_KEY_FILE="${PGPOOL_TLS_KEY_FILE:-}"
@@ -178,11 +179,23 @@ pgpool_validate() {
         done
     fi
 
+    if is_boolean_yes "$PGPOOL_AUTO_FAILBACK"; then
+        if  [[ -z "$PGPOOL_BACKEND_APPLICATION_NAMES" ]]; then
+            print_validation_error "The list of backend application names cannot be empty. Set the environment variable PGPOOL_BACKEND_APPLICATION_NAMES with a comma separated list of backend nodes."
+        fi
+
+        read -r -a app_name_list <<<"$(tr ',;' ' ' <<<"${PGPOOL_BACKEND_APPLICATION_NAMES}")"
+        read -r -a nodes_list <<<"$(tr ',;' ' ' <<<"${PGPOOL_BACKEND_NODES}")"
+        if [[ ${#app_name_list[@]} -ne ${#nodes_list[@]} ]]; then
+            print_validation_error "PGPOOL_BACKEND_APPLICATION_NAMES and PGPOOL_BACKEND_NODES lists should have the same length"
+        fi
+    fi
+
     if [[ -n "$PGPOOL_USER_CONF_FILE" && ! -e "$PGPOOL_USER_CONF_FILE" ]]; then
         print_validation_error "The provided PGPOOL_USER_CONF_FILE: ${PGPOOL_USER_CONF_FILE} must exist."
     fi
 
-    local yes_no_values=("PGPOOL_ENABLE_POOL_HBA" "PGPOOL_ENABLE_POOL_PASSWD" "PGPOOL_ENABLE_LOAD_BALANCING" "PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING" "PGPOOL_ENABLE_LOG_CONNECTIONS" "PGPOOL_ENABLE_LOG_HOSTNAME" "PGPOOL_ENABLE_LOG_PER_NODE_STATEMENT")
+    local yes_no_values=("PGPOOL_ENABLE_POOL_HBA" "PGPOOL_ENABLE_POOL_PASSWD" "PGPOOL_ENABLE_LOAD_BALANCING" "PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING" "PGPOOL_ENABLE_LOG_CONNECTIONS" "PGPOOL_ENABLE_LOG_HOSTNAME" "PGPOOL_ENABLE_LOG_PER_NODE_STATEMENT" "PGPOOL_AUTO_FAILBACK")
     for yn in "${yes_no_values[@]}"; do
         if ! is_yes_no_value "${!yn}"; then
             print_validation_error "The values allowed for $yn are: yes or no"
@@ -347,6 +360,7 @@ pgpool_set_property() {
 #########################
 pgpool_create_backend_config() {
     local -r node=${1:?node is missing}
+    local -r application="${2:-}"
 
     # default values
     read -r -a fields <<<"$(tr ':' ' ' <<<"${node}")"
@@ -365,6 +379,11 @@ backend_weight$num = $weight
 backend_data_directory$num = '$dir'
 backend_flag$num = '$flag'
 EOF
+    if [[ -n "$application" ]]; then
+        cat >>"$PGPOOL_CONF_FILE" <<EOF
+backend_application_name$num = '$application'
+EOF
+    fi
 }
 
 ########################
@@ -378,6 +397,7 @@ EOF
 #########################
 pgpool_create_config() {
     local pool_passwd=""
+    local i=0
 
     if is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"; then
         pool_passwd="$PGPOOL_PASSWD_FILE"
@@ -463,8 +483,15 @@ pgpool_create_config() {
 
     # Backend settings
     read -r -a nodes <<<"$(tr ',;' ' ' <<<"${PGPOOL_BACKEND_NODES}")"
+    if is_boolean_yes "$PGPOOL_AUTO_FAILBACK"; then
+        pgpool_set_property "auto_failback" "on"
+
+        read -r -a app_name <<<"$(tr ',;' ' ' <<<"${PGPOOL_BACKEND_APPLICATION_NAMES}")"
+    fi
+
     for node in "${nodes[@]}"; do
-        pgpool_create_backend_config "$node"
+        pgpool_create_backend_config "$node" "$(is_boolean_yes "$PGPOOL_AUTO_FAILBACK" && echo "${app_name[i]}")"
+        ((i += 1))
     done
 
     if [[ -f "$PGPOOL_USER_CONF_FILE" ]]; then
