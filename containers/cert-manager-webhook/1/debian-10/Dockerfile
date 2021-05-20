@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="cert-manager-webhook" \
-    BITNAMI_IMAGE_VERSION="1.3.1-debian-10-r25" \
+    BITNAMI_IMAGE_VERSION="1.3.1-debian-10-r26" \
     PATH="/opt/bitnami/cert-manager-webhook/bin:$PATH"
 
 WORKDIR /opt/bitnami/cert-manager-webhook
