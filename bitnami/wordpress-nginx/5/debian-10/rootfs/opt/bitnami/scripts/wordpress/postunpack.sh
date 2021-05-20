@@ -31,7 +31,7 @@ set -o pipefail
 info "Configuring file permissions for WordPress"
 ensure_user_exists "$WEB_SERVER_DAEMON_USER" --group "$WEB_SERVER_DAEMON_GROUP"
 declare -a writable_dirs=(
-    "$WORDPRESS_BASE_DIR" "$WORDPRESS_VOLUME_DIR"
+    "$WORDPRESS_BASE_DIR" "$WORDPRESS_VOLUME_DIR" "${WORDPRESS_BASE_DIR}/tmp"
     # These directories are needed for wp-cli to be able to install languages/plugins/packages/etc as a non-root user
     # However they are not included in the WordPress source tarball, so we create them at this point with proper ownership
     # All of them are used by different wp-cli commands, such as 'wp language', 'wp plugin', or 'wp media', amongst others
@@ -50,7 +50,7 @@ cat >"$WORDPRESS_CLI_CONF_FILE" <<EOF
 # Global parameter defaults
 path: "${WORDPRESS_BASE_DIR}"
 EOF
-render-template "${BITNAMI_ROOT_DIR}/scripts/wordpress/bitnami-templates/wp.tpl" > "${WORDPRESS_CLI_BIN_DIR}/wp"
+render-template "${BITNAMI_ROOT_DIR}/scripts/wordpress/bitnami-templates/wp.tpl" >"${WORDPRESS_CLI_BIN_DIR}/wp"
 configure_permissions_ownership "${WORDPRESS_CLI_BIN_DIR}/wp" -f "755"
 
 info "Configuring default PHP options for WordPress"
