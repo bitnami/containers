@@ -15,7 +15,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN mkdir -p "/go/src" "/go/bin" && chmod -R 777 "/go"
 
 ENV BITNAMI_APP_NAME="golang" \
-    BITNAMI_IMAGE_VERSION="1.16.4-debian-10-r12" \
+    BITNAMI_IMAGE_VERSION="1.16.4-debian-10-r13" \
     GOPATH="/go" \
     PATH="/go/bin:/opt/bitnami/go/bin:$PATH"
 
