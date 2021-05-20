@@ -35,7 +35,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`13`, `13-debian-10`, `13.0.0`, `13.0.0-debian-10-r3` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/13.0.0-debian-10-r3/13/debian-10/Dockerfile)
-* [`12`, `12-debian-10`, `12.0.4`, `12.0.4-debian-10-r78`, `latest` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/12.0.4-debian-10-r78/12/debian-10/Dockerfile)
+* [`12`, `12-debian-10`, `12.0.4`, `12.0.4-debian-10-r79`, `latest` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/12.0.4-debian-10-r79/12/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak).
 
@@ -128,7 +128,7 @@ The Bitnami Keycloak Docker image allows configuring TLS encryption between node
  - `keystore`: File with the server keystore
  - `truststore`: File with the server truststore
 
-> Note: find more information about how to create these files at the [Keycloak documentation](https://www.keycloak.org/docs/latest/server_installation/#_setting_up_ssl).
+> Note: find more information about how to create these files at the [Keycloak documentation](https://www.keycloak.org/docs/latest/server_installation/#_truststore).
 
 Apart from that, the following environment variables must be set:
 
