@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="telegraf" \
-    BITNAMI_IMAGE_VERSION="1.18.2-debian-10-r19" \
+    BITNAMI_IMAGE_VERSION="1.18.2-debian-10-r20" \
     PATH="/opt/bitnami/telegraf/bin:$PATH"
 
 USER 1001
