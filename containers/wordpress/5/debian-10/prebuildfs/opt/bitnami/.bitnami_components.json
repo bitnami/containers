@@ -43,16 +43,16 @@
     },
     "wordpress": {
         "arch": "amd64",
-        "digest": "121f44e71a2b03ed34aee2ee0ee6362bf315f83bea22003d5c70f7dda9bc5b8e",
+        "digest": "1b8c1a52fe5bbcfa1e66b0654ee8ead86b184ca5cea3db17cd5281e552943de3",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "5.7.2-2"
+        "version": "5.7.2-3"
     },
     "wp-cli": {
         "arch": "amd64",
-        "digest": "33c3b53e87e9e433291ac3511e68263c80b43aa4de3dead9502934f506b7f2e6",
+        "digest": "b2be17e2065fc8d9d1a175e1dbc689e8f6a5543bb3b6a6f5470bc987b7c396ce",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.0-2"
+        "version": "2.5.0-0"
     }
 }
