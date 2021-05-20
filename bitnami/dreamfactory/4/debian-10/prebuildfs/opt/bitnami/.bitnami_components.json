@@ -8,10 +8,10 @@
     },
     "dreamfactory": {
         "arch": "amd64",
-        "digest": "76e37947aee5bd14add450d5b55412c8f5304914a927dfcfd559de4245f4c3bf",
+        "digest": "0c26c7c4d4b071adcf19daca9385f5d0f793006cf112855c421cbe545956e6c5",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.6.1-0"
+        "version": "4.7.0-0"
     },
     "gosu": {
         "arch": "amd64",
