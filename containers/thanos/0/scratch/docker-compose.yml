@@ -1,7 +1,7 @@
 version: '2'
 services:
   thanos:
-    image: docker.io/bitnami/thanos:0-scratch
+    image: docker.io/bitnami/thanos:0
     command:
       - query
       - --grpc-address=0.0.0.0:10901

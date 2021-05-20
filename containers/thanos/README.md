@@ -38,7 +38,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-scratch`, `0.19.0`, `0.19.0-scratch-r0`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-thanos/blob/0.19.0-scratch-r0/0/scratch/Dockerfile)
+* [`0`, `0-scratch`, `0.20.1`, `0.20.1-scratch-r0`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-thanos/blob/0.20.1-scratch-r0/0/scratch/Dockerfile)
 
 # Connecting to other containers
 
