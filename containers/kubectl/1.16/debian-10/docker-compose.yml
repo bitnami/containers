@@ -1,4 +1,0 @@
-version: '2'
-services:
-  kubectl:
-    image: docker.io/bitnami/kubectl:1.16
