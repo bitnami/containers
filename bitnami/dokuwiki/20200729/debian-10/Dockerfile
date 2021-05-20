@@ -14,7 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.46-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.28-0" --checksum 70777f4c71ed24d033410bb3eaf4475d12aec111b971d7a3ed3f6935db72ed51
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dokuwiki" "20200729.0.0-1" --checksum d2f0229f0f6c663aeae3f77b297f8c415aae81543a2206686387a0b622411086
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dokuwiki" "20200729.0.0-2" --checksum ef85bcac977f92a43b14dfa89011f240216a3f27936b9e982e0925c42d2c352c
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
@@ -26,7 +26,7 @@ ENV APACHE_ENABLE_CUSTOM_PORTS="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="dokuwiki" \
-    BITNAMI_IMAGE_VERSION="20200729.0.0-debian-10-r254" \
+    BITNAMI_IMAGE_VERSION="20200729.0.0-debian-10-r255" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080 8443
