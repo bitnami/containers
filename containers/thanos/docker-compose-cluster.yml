@@ -1,4 +1,4 @@
-version: '2'
+version: '2.1'
 services:
   # Node Exporter
   node-exporter:
@@ -39,8 +39,8 @@ services:
       - node-exporter
       - prepare-prometheus
   # Thanos Sidecar
-  thanos-sidecar:
-    image: docker.io/bitnami/thanos:0-scratch
+  sidecar:
+    image: docker.io/bitnami/thanos:0
     command:
       - sidecar
       - --tsdb.path=/data
@@ -49,12 +49,17 @@ services:
     volumes:
       - 'tsdb_data:/data'
     depends_on:
-      - prometheus
+      - query
   # MinIO
   minio:
     image: docker.io/bitnami/minio:2021
     ports:
       - '9000:9000'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
     volumes:
       - 'minio_data:/data'
     environment:
@@ -80,8 +85,8 @@ services:
     volumes:
       - 'ojb_store_conf:/conf'
   # Thanos Store Gateway
-  thanos-store-gateway:
-    image: docker.io/bitnami/thanos:0-scratch
+  store-gateway:
+    image: docker.io/bitnami/thanos:0
     command:
       - store
       - --objstore.config-file=/conf/bucket.yml
@@ -92,11 +97,10 @@ services:
       - 'ojb_store_conf:/conf'
       - 'store_data:/data'
     depends_on:
-      - minio
-      - prepare-object-store-conf
+      - query
   # Thanos Compactor
-  thanos-compactor:
-    image: docker.io/bitnami/thanos:0-scratch
+  compactor:
+    image: docker.io/bitnami/thanos:0
     command:
       - compact
       - --objstore.config-file=/conf/bucket.yml
@@ -105,22 +109,25 @@ services:
     volumes:
       - 'ojb_store_conf:/conf'
     depends_on:
-      - minio
-      - prepare-object-store-conf
+      - query
   # Thanos Query
-  thanos-query:
-    image: docker.io/bitnami/thanos:0-scratch
+  query:
+    image: docker.io/bitnami/thanos:0
     command:
       - query
       - --grpc-address=0.0.0.0:10901
       - --http-address=0.0.0.0:9090
-      - --store=thanos-sidecar:10901
-      - --store=thanos-store-gateway:10901
+      - --store=sidecar:10901
+      - --store=store-gateway:10901
     ports:
       - '9090:9090'
     depends_on:
-      - thanos-sidecar
-      - thanos-store-gateway
+      prepare-object-store-conf:
+        condition: service_started
+      prometheus:
+        condition: service_started
+      minio:
+        condition: service_healthy
 volumes:
   prom_conf:
     driver: local
