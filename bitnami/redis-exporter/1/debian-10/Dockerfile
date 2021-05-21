@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="redis-exporter" \
-    BITNAMI_IMAGE_VERSION="1.23.1-debian-10-r13" \
+    BITNAMI_IMAGE_VERSION="1.23.1-debian-10-r14" \
     PATH="/opt/bitnami/redis-exporter/bin:$PATH"
 
 EXPOSE 9121
