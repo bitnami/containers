@@ -10,14 +10,14 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio-client" "2021.5.18-1" --checksum edf5b2d10ca794d239e632d7b00d18ef580407ca834d4fd3d9293b3d94c6e49c
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio" "2021.5.18-1" --checksum ca67f4a6691e619de581d017072ce474c6d2e8a6a544b0bcf0fdd35fa0559d0e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio" "2021.5.20-0" --checksum 7e28c72b5a5dafa73a6b4c2330c5f2a9287382ec07ffce44c8413f3869811f99
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/minio/postunpack.sh
 ENV BITNAMI_APP_NAME="minio" \
-    BITNAMI_IMAGE_VERSION="2021.5.18-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="2021.5.20-debian-10-r0" \
     PATH="/opt/bitnami/minio-client/bin:/opt/bitnami/minio/bin:/opt/bitnami/common/bin:$PATH"
 
 VOLUME [ "/certs", "/data" ]
