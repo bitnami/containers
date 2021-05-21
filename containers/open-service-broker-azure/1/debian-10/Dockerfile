@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="open-service-broker-azure" \
-    BITNAMI_IMAGE_VERSION="1.8.4-debian-10-r440" \
+    BITNAMI_IMAGE_VERSION="1.8.4-debian-10-r441" \
     PATH="/opt/bitnami/open-service-broker-azure/bin:$PATH"
 
 EXPOSE 8080
