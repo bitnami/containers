@@ -32,7 +32,7 @@ fi
 
 ARGS+=("$@")
 
-if is_boolean_yes "$REDIS_CLUSTER_CREATOR"; then
+if is_boolean_yes "$REDIS_CLUSTER_CREATOR" && [[ ! -f "${REDIS_DATA_DIR}/nodes.sh" ]]; then
     # Start Redis in background
     if am_i_root; then
         gosu "$REDIS_DAEMON_USER" redis-server "${ARGS[@]}" &
