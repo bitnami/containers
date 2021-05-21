@@ -16,7 +16,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-notary-signer/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-notary-signer" \
-    BITNAMI_IMAGE_VERSION="2.2.2-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="2.2.2-debian-10-r1" \
     PATH="/opt/bitnami/harbor-notary-signer/bin:/opt/bitnami/common/bin:$PATH" \
     SERVICE_NAME="notary_signer"
 
