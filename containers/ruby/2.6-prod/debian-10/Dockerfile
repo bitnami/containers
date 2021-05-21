@@ -17,7 +17,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="2.6.7-prod-debian-10-r40" \
+    BITNAMI_IMAGE_VERSION="2.6.7-prod-debian-10-r41" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 EXPOSE 3000
