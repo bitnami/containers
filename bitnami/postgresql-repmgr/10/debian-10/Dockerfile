@@ -22,7 +22,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/postgresql-repmgr/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV BITNAMI_APP_NAME="postgresql-repmgr" \
-    BITNAMI_IMAGE_VERSION="10.17.0-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="10.17.0-debian-10-r7" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
