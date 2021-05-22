@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="acmesolver" \
-    BITNAMI_IMAGE_VERSION="1.3.1-debian-10-r33" \
+    BITNAMI_IMAGE_VERSION="1.3.1-debian-10-r34" \
     PATH="/opt/bitnami/acmesolver/bin:$PATH"
 
 WORKDIR /opt/bitnami/acmesolver
