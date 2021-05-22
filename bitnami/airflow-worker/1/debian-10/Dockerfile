@@ -27,7 +27,7 @@ RUN /opt/bitnami/scripts/airflow-worker/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
     BITNAMI_APP_NAME="airflow-worker" \
-    BITNAMI_IMAGE_VERSION="1.10.15-debian-10-r58" \
+    BITNAMI_IMAGE_VERSION="1.10.15-debian-10-r59" \
     C_FORCE_ROOT="True" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
