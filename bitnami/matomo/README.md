@@ -36,7 +36,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.3.0`, `4.3.0-debian-10-r3`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/4.3.0-debian-10-r3/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.3.0`, `4.3.0-debian-10-r4`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/4.3.0-debian-10-r4/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/matomo GitHub repo](https://github.com/bitnami/bitnami-docker-matomo).
 
