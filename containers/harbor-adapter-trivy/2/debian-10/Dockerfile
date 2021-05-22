@@ -16,7 +16,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-adapter-trivy/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-adapter-trivy" \
-    BITNAMI_IMAGE_VERSION="2.2.2-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="2.2.2-debian-10-r2" \
     PATH="/opt/bitnami/harbor-adapter-trivy/bin:/opt/bitnami/common/bin:$PATH"
 
 WORKDIR /opt/bitnami/harbor-adapter-trivy
