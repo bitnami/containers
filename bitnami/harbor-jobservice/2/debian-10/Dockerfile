@@ -17,7 +17,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-jobservice/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-jobservice" \
-    BITNAMI_IMAGE_VERSION="2.2.2-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="2.2.2-debian-10-r2" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/harbor-jobservice/bin:$PATH"
 
 VOLUME [ "/etc/jobservice", "/var/log/jobs" ]
