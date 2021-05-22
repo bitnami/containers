@@ -27,7 +27,7 @@ $ docker run --name configurable-http-proxy bitnami/configurable-http-proxy:late
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.3.2`, `4.3.2-debian-10-r35`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-configurable-http-proxy/blob/4.3.2-debian-10-r35/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.3.2`, `4.3.2-debian-10-r36`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-configurable-http-proxy/blob/4.3.2-debian-10-r36/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/configurable-http-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-configurable-http-proxy).
 
