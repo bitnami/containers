@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="kafka-exporter" \
-    BITNAMI_IMAGE_VERSION="1.3.1-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="1.3.1-debian-10-r4" \
     PATH="/opt/bitnami/kafka-exporter/bin:$PATH"
 
 EXPOSE 9308
