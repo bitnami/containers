@@ -28,7 +28,7 @@ $ docker run --name wal-g bitnami/wal-g:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.2.19`, `0.2.19-debian-10-r157`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wal-g/blob/0.2.19-debian-10-r157/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.2.19`, `0.2.19-debian-10-r158`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wal-g/blob/0.2.19-debian-10-r158/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wal-g GitHub repo](https://github.com/bitnami/bitnami-docker-wal-g).
 
