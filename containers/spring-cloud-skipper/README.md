@@ -39,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.6.2`, `2.6.2-debian-10-r12`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper/blob/2.6.2-debian-10-r12/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.6.2`, `2.6.2-debian-10-r13`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper/blob/2.6.2-debian-10-r13/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/spring-cloud-skipper GitHub repo](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper).
 
