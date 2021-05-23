@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="service-catalog" \
-    BITNAMI_IMAGE_VERSION="0.3.1-debian-10-r184" \
+    BITNAMI_IMAGE_VERSION="0.3.1-debian-10-r185" \
     PATH="/opt/bitnami/service-catalog/bin:$PATH"
 
 EXPOSE 443 8443
