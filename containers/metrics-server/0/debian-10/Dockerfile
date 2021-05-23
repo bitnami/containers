@@ -17,7 +17,7 @@ RUN chmod g+rwX /opt/bitnami
 
 RUN chown -R 1001:root /opt/bitnami/metrics-server && chmod -R g+rwX /opt/bitnami/metrics-server
 ENV BITNAMI_APP_NAME="metrics-server" \
-    BITNAMI_IMAGE_VERSION="0.5.0-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="0.5.0-debian-10-r1" \
     PATH="/opt/bitnami/metrics-server/bin:$PATH"
 
 EXPOSE 8443
