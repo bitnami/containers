@@ -28,7 +28,7 @@ $ docker run --name metallb-speaker bitnami/metallb-speaker:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.9.6`, `0.9.6-debian-10-r55`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-metallb-speaker/blob/0.9.6-debian-10-r55/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.9.6`, `0.9.6-debian-10-r56`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-metallb-speaker/blob/0.9.6-debian-10-r56/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/metallb-speaker GitHub repo](https://github.com/bitnami/bitnami-docker-metallb-speaker).
 
