@@ -28,7 +28,7 @@ $ docker run --name wavefront-adapter-for-istio bitnami/wavefront-adapter-for-is
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.1.5`, `0.1.5-debian-10-r51`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-adapter-for-istio/blob/0.1.5-debian-10-r51/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.1.5`, `0.1.5-debian-10-r52`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-adapter-for-istio/blob/0.1.5-debian-10-r52/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wavefront-adapter-for-istio GitHub repo](https://github.com/bitnami/bitnami-docker-wavefront-adapter-for-istio).
 
