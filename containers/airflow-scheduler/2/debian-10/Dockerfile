@@ -15,14 +15,14 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.10-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "10.17.0-0" --checksum b1c2a23c7d904b8968f8264dbbe0816cb1d6f5475cce3da620f823752c129266
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.3.0-2" --checksum d89528e5d733f34ae030984584659ff10a36370d40332bd8d41c047764d39cda
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "airflow-scheduler" "2.0.2-1" --checksum 02fddc23d0f87f075cb9070a219329c6fe95b1c25e71dd0dd7f73d77e5e284ea
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "airflow-scheduler" "2.1.0-0" --checksum 33abdf6b9f395ae6849e823af6ca2e994504d7afba0c543e4c739163b142a8ed
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/airflow-scheduler/postunpack.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
     BITNAMI_APP_NAME="airflow-scheduler" \
-    BITNAMI_IMAGE_VERSION="2.0.2-debian-10-r30" \
+    BITNAMI_IMAGE_VERSION="2.1.0-debian-10-r0" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/airflow/venv/lib/python3.8/site-packages/numpy.libs/:$LD_LIBRARY_PATH" \
     LIBNSS_WRAPPER_PATH="/opt/bitnami/common/lib/libnss_wrapper.so" \
     LNAME="airflow" \
