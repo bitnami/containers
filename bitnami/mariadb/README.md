@@ -259,6 +259,21 @@ services:
   ...
 ```
 
+## Disable creation of test database
+
+By default the MariaDB process create test database, in order to disable creation of test database "--skip-test-db" could be added on mysql_install_db process.
+This function is available on version equal or higher than 10.5 of mariadb.
+
+by passing the `SKIP_TEST_DB` environment variable when running the image for the first time, the test database won't be create
+
+```console
+$ docker run --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e SKIP_TEST_DB=true \
+    bitnami/mariadb:latest
+```
+
+
 ## Creating a database on first run
 
 By passing the `MARIADB_DATABASE` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the MySQL client.

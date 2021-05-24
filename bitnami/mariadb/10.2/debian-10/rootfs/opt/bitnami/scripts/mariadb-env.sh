@@ -47,6 +47,7 @@ mariadb_env_vars=(
     MARIADB_CLIENT_SSL_CERT_FILE
     MARIADB_CLIENT_SSL_KEY_FILE
     MARIADB_CLIENT_EXTRA_FLAGS
+    MARIADB_SKIP_TEST_DB
 )
 for env_var in "${mariadb_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -148,3 +149,4 @@ export MARIADB_CLIENT_EXTRA_FLAGS="${MARIADB_CLIENT_EXTRA_FLAGS:-no}"
 export DB_CLIENT_EXTRA_FLAGS="$MARIADB_CLIENT_EXTRA_FLAGS"
 
 # Custom environment variables may be defined below
+export MARIADB_SKIP_TEST_DB="${MARIADB_SKIP_TEST_DB:-no}"
