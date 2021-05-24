@@ -184,10 +184,26 @@ ldap_start_bg() {
 #   None
 #########################
 ldap_stop() {
-    local pid
-    pid="$(get_pid_from_file "${LDAP_PID_FILE}")"
-    if is_ldap_running; then
-        kill "${pid}" 2>/dev/null
+    local -r retries=25
+    local -r sleep_time=1
+
+    are_db_files_locked() {
+        local return_value=0
+        read -r -a db_files <<< "$(find "$LDAP_DATA_DIR" -type f | xargs)"
+        for f in "${db_files[@]}"; do
+            debug_execute lsof -w "$f" && return_value=1
+        done
+        return $return_value
+    }
+
+    if ! is_ldap_running ; then 
+        return
+    fi
+
+    stop_service_using_pid "$LDAP_PID_FILE"
+    if ! retry_while are_db_files_locked "$retries" "$sleep_time"; then
+        error "OpenLDAP failed to stop"
+        return 1
     fi
 }
 
