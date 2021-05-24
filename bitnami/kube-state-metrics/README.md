@@ -33,7 +33,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2`, `2-debian-10`, `2.0.0`, `2.0.0-debian-10-r23`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/2.0.0-debian-10-r23/2/debian-10/Dockerfile)
-* [`1`, `1-debian-10`, `1.9.8`, `1.9.8-debian-10-r82` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/1.9.8-debian-10-r82/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.9.8`, `1.9.8-debian-10-r83` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/1.9.8-debian-10-r83/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kube-state-metrics GitHub repo](https://github.com/bitnami/bitnami-docker-kube-state-metrics).
 
