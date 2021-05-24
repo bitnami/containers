@@ -47,6 +47,7 @@ mariadb_env_vars=(
     MARIADB_CLIENT_SSL_CERT_FILE
     MARIADB_CLIENT_SSL_KEY_FILE
     MARIADB_CLIENT_EXTRA_FLAGS
+    MARIADB_SKIP_TEST_DB
 )
 for env_var in "${mariadb_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -75,7 +76,6 @@ export DB_CONF_FILE="${DB_CONF_DIR}/my.cnf"
 export DB_PID_FILE="${DB_TMP_DIR}/mysqld.pid"
 export DB_SOCKET_FILE="${DB_TMP_DIR}/mysql.sock"
 export PATH="${DB_SBIN_DIR}:${DB_BIN_DIR}:/opt/bitnami/common/bin:${PATH}"
-
 # System users (when running with a privileged user)
 export DB_DAEMON_USER="mysql"
 export DB_DAEMON_GROUP="mysql"
@@ -148,3 +148,4 @@ export MARIADB_CLIENT_EXTRA_FLAGS="${MARIADB_CLIENT_EXTRA_FLAGS:-no}"
 export DB_CLIENT_EXTRA_FLAGS="$MARIADB_CLIENT_EXTRA_FLAGS"
 
 # Custom environment variables may be defined below
+export MARIADB_SKIP_TEST_DB="${MARIADB_SKIP_TEST_DB:-no}"

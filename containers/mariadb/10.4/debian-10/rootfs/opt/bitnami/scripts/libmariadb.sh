@@ -707,6 +707,9 @@ mysql_install_db() {
     am_i_root && args=("${args[@]}" "--user=$DB_DAEMON_USER")
     if [[ "$DB_FLAVOR" = "mariadb" ]]; then
         args+=("--auth-root-authentication-method=normal")
+        if [[ ! "$(mysql_get_version)" =~ ^10.[01234]. ]]; then
+            is_boolean_yes "$MARIADB_SKIP_TEST_DB" && args+=("--skip-test-db")
+        fi
     else
         command="${DB_BIN_DIR}/mysqld"
         args+=("--initialize-insecure")
