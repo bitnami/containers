@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10.5`, `10.5-debian-10`, `10.5.10`, `10.5.10-debian-10-r14`, `latest` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.5.10-debian-10-r14/10.5/debian-10/Dockerfile)
+* [`10.5`, `10.5-debian-10`, `10.5.10`, `10.5.10-debian-10-r15`, `latest` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.5.10-debian-10-r15/10.5/debian-10/Dockerfile)
 * [`10.4`, `10.4-debian-10`, `10.4.19`, `10.4.19-debian-10-r15` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.19-debian-10-r15/10.4/debian-10/Dockerfile)
 * [`10.3`, `10.3-debian-10`, `10.3.29`, `10.3.29-debian-10-r14` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.29-debian-10-r14/10.3/debian-10/Dockerfile)
 * [`10.2`, `10.2-debian-10`, `10.2.38`, `10.2.38-debian-10-r15` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.38-debian-10-r15/10.2/debian-10/Dockerfile)
@@ -259,21 +259,6 @@ services:
   ...
 ```
 
-## Disable creation of test database
-
-By default the MariaDB process create test database, in order to disable creation of test database "--skip-test-db" could be added on mysql_install_db process.
-This function is available on version equal or higher than 10.5 of mariadb.
-
-by passing the `SKIP_TEST_DB` environment variable when running the image for the first time, the test database won't be create
-
-```console
-$ docker run --name mariadb \
-    -e ALLOW_EMPTY_PASSWORD=yes \
-    -e SKIP_TEST_DB=true \
-    bitnami/mariadb:latest
-```
-
-
 ## Creating a database on first run
 
 By passing the `MARIADB_DATABASE` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the MySQL client.
@@ -325,6 +310,31 @@ services:
 ```
 
 **Note!** The `root` user will be created with remote access and without a password if `ALLOW_EMPTY_PASSWORD` is enabled. Please provide the `MARIADB_ROOT_PASSWORD` env variable instead if you want to set a password for the `root` user.
+
+## Disable creation of test database
+
+By default MariaDB creates a test database. In order to disable the creation of this test database, the flag `--skip-test-db` can be passed to `mysql_install_db`. This function is only on MariaDB >= `10.5`.
+
+To disable the test database in the Bitnami MariaDB container, set the `MARIADB_SKIP_TEST_DB` environment variable to `yes` during the first boot of the container.
+
+```console
+$ docker run --name mariadb \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -e MARIADB_SKIP_TEST_DB=yes \
+    bitnami/mariadb:latest
+```
+
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  mariadb:
+  ...
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_SKIP_TEST_DB=yes
+  ...
+```
 
 ## Slow filesystems
 
