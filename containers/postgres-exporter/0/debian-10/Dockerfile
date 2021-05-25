@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="postgres-exporter" \
-    BITNAMI_IMAGE_VERSION="0.9.0-debian-10-r74" \
+    BITNAMI_IMAGE_VERSION="0.9.0-debian-10-r75" \
     PATH="/opt/bitnami/postgres-exporter/bin:$PATH"
 
 EXPOSE 9187
