@@ -389,7 +389,9 @@ repmgr_inject_pghba_configuration() {
     cat > "${POSTGRESQL_MOUNTED_CONF_DIR}/pg_hba.conf" << EOF
 host     all            $REPMGR_USERNAME    0.0.0.0/0    trust
 host     $REPMGR_DATABASE         $REPMGR_USERNAME    0.0.0.0/0    trust
+host     $REPMGR_DATABASE         $REPMGR_USERNAME    ::/0    trust
 host     replication      $REPMGR_USERNAME    0.0.0.0/0    trust
+host     replication      $REPMGR_USERNAME    ::/0    trust
 ${tls_auth}hostssl     all             all             0.0.0.0/0               cert
 ${tls_auth}hostssl     all             all             ::/0                    cert
 host     all              all       0.0.0.0/0    trust
