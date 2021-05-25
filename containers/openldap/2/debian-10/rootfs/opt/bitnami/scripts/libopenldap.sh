@@ -179,26 +179,25 @@ ldap_start_bg() {
 ########################
 # Stop OpenLDAP server
 # Arguments:
-#   None
+#   $1 - max retries. Default: 12
+#   $2 - sleep between retries (in seconds). Default: 1
 # Returns:
 #   None
 #########################
 ldap_stop() {
-    local -r retries=25
-    local -r sleep_time=1
+    local -r retries="${1:-12}"
+    local -r sleep_time="${2:-1}"
 
     are_db_files_locked() {
         local return_value=0
-        read -r -a db_files <<< "$(find "$LDAP_DATA_DIR" -type f | xargs)"
+        read -r -a db_files <<< "$(find "$LDAP_DATA_DIR" -type f -print0 | xargs -0)"
         for f in "${db_files[@]}"; do
             debug_execute lsof -w "$f" && return_value=1
         done
         return $return_value
     }
 
-    if ! is_ldap_running ; then 
-        return
-    fi
+    is_ldap_not_running && return
 
     stop_service_using_pid "$LDAP_PID_FILE"
     if ! retry_while are_db_files_locked "$retries" "$sleep_time"; then
