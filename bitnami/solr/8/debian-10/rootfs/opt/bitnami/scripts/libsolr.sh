@@ -38,6 +38,42 @@ solr_generate_initial_security() {
    "user-role":{"${SOLR_ADMIN_USERNAME}":"admin"}
 }}
 EOF
+
+    if am_i_root; then
+        configure_permissions_ownership "${SOLR_BASE_DIR}/server/solr/security.json" -u "$SOLR_DAEMON_USER" -g "$SOLR_DAEMON_GROUP"
+    fi
+}
+
+########################
+# Configure Solr Heap Size
+# Globals:
+#  SOLR_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+solr_set_heap_size() {
+    local heap_ms_size
+    local heap_mx_size
+    local machine_mem=""
+
+    debug "Calculating appropriate Xmx and Xms values..."
+    machine_mem="$(get_total_memory)"
+
+    if [[ "$machine_mem" -lt 512 ]]; then
+        heap_ms_size=256
+        heap_mx_size=256
+    elif [[ "$machine_mem" -lt 4096 ]]; then
+        heap_ms_size=256
+        heap_mx_size=$((machine_mem - 512))
+    else
+        heap_ms_size=512
+        heap_mx_size="$((machine_mem - 1024))"
+    fi
+
+    info "Setting '-Xms${heap_ms_size}m -Xmx${heap_mx_size}m' heap options..."
+    replace_in_file "$SOLR_BIN_DIR"/solr.in.sh ".*SOLR_JAVA_MEM=.*" "SOLR_JAVA_MEM=\"-Xms${heap_ms_size}m -Xmx${heap_mx_size}m\""
 }
 
 ########################
@@ -152,7 +188,7 @@ solr_create_core() {
     mkdir -p "${SOLR_SERVER_DIR}/solr/${core}/data"
     cp -r "${SOLR_CORE_CONF_DIR}"/* "${SOLR_SERVER_DIR}/solr/${core}/"
 
-    command_args+=("${protocol}://localhost:${SOLR_PORT_NUMBER}/solr/admin/cores?action=CREATE&name=${SOLR_CORE}&instanceDir=${SOLR_CORE}&config=solrconfig.xml&schema=schema.xml&dataDir=data")
+    command_args+=("${protocol}://localhost:${SOLR_PORT_NUMBER}/solr/admin/cores?action=CREATE&name=${core}&instanceDir=${core}&config=solrconfig.xml&schema=schema.xml&dataDir=data")
 
     info "Creating solr core: ${SOLR_CORE}"
 
@@ -193,6 +229,56 @@ solr_update_password() {
         exit 1
     else
         info "Password updated"
+    fi
+}
+
+
+#########################
+# Check if the API is ready
+# Globals:
+#   SOLR_*
+# Arguments:
+#   $1 - username
+#   $2 - password
+# Returns:
+#   Boolean
+#########################
+solr_check_api() {
+    local -r exec="curl"
+    local -r username="${1:?user is required}"
+    local -r password="${2:?password is required}"
+    local protocol="http"
+    local command_args=()
+
+    debug "Checking if the API is ready"
+
+    is_boolean_yes "$SOLR_SSL_ENABLED" && protocol="https" && command_args+=("-k")
+
+    command_args+=("--silent" "--user" "${username}:${password}" "${protocol}://localhost:${SOLR_PORT_NUMBER}/api/" "-H" "'Content-type:application/json'")
+
+    if ! debug_execute "$exec" "${command_args[@]}" >/dev/null; then
+        return 1
+    fi
+}
+
+#########################
+# Wait for api
+# Globals:
+#   SOLR_*
+# Arguments:
+#   $1 - username
+#   $2 - password
+# Returns:
+#   None
+#########################
+solr_wait_for_api() {
+    local -r username="${1:?user is required}"
+    local -r password="${2:?password is required}"
+    info "Wait for Solr API"
+
+    if ! retry_while "solr_check_api ${username} ${password}"; then
+        error "Solr API not available"
+        exit 1
     fi
 }
 
@@ -355,7 +441,13 @@ solr_start_bg() {
     if [[ "$mode" == "cloud" ]]; then
         start_args+=("-cloud" "-z" "$SOLR_ZK_HOSTS/solr")
     fi
-    debug_execute "$exec" "${start_args[@]}"
+
+    # Do not start as root, to avoid solr error message
+    if am_i_root; then
+        debug_execute "gosu" "$SOLR_DAEMON_USER" "$exec" "${start_args[@]}"
+    else
+        debug_execute "$exec" "${start_args[@]}"
+    fi
 }
 
 #########################
@@ -370,6 +462,38 @@ solr_start_bg() {
 solr_stop() {
     info "Stopping solr"
     stop_service_using_pid "$SOLR_PID_FILE"
+}
+
+########################
+# Check if Solr is running
+# Globals:
+#   SOLR_PID_FILE
+# Arguments:
+#   None
+# Returns:
+#   Whether Solr is running
+########################
+is_solr_running() {
+    local pid
+    pid="$(get_pid_from_file "$SOLR_PID_FILE")"
+    if [[ -n "$pid" ]]; then
+        is_service_running "$pid"
+    else
+        false
+    fi
+}
+
+########################
+# Check if Solr is running
+# Globals:
+#   SOLR_PID_FILE
+# Arguments:
+#   None
+# Returns:
+#   Whether Solr is not running
+########################
+is_solr_not_running() {
+    ! is_solr_running
 }
 
 #########################
@@ -472,6 +596,8 @@ solr_initialize() {
 
                 solr_start_bg "cloud"
 
+                solr_wait_for_api "admin" "SolrRocks"
+
                 is_boolean_yes "$SOLR_SSL_ENABLED" && solr_set_ssl_url_scheme
 
                 [[ -n "$SOLR_COLLECTION" ]] && solr_create_collection
@@ -491,6 +617,8 @@ solr_initialize() {
             is_boolean_yes "$SOLR_ENABLE_AUTHENTICATION" && solr_generate_initial_security
 
             solr_start_bg
+
+            solr_wait_for_api "admin" "SolrRocks"
 
             is_boolean_yes "$SOLR_ENABLE_AUTHENTICATION" && solr_update_password "$SOLR_ADMIN_USERNAME" "$SOLR_ADMIN_PASSWORD"
 
