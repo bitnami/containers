@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="nats-exporter" \
-    BITNAMI_IMAGE_VERSION="0.7.0-debian-10-r80" \
+    BITNAMI_IMAGE_VERSION="0.7.0-debian-10-r81" \
     PATH="/opt/bitnami/nats-exporter/bin:$PATH"
 
 EXPOSE 7777
