@@ -15,17 +15,17 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "9398376ca9e2033d5bc193232e8aa9b57d91d4ccf06fa67bfa0d30ef36e44c25",
+        "digest": "5bf8f1ed022c8ad75a4db5b8b72ae54ce427bff628d7e4025c5b5e67b876708d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.3.28-0"
+        "version": "10.3.29-0"
     },
     "node": {
         "arch": "amd64",
-        "digest": "b4b83736d1c19d11dee3043820d3679f1c786bdab64329e474ca430c58efbedf",
+        "digest": "445d6ffbde4c69c382f1d1614f014fb29c716756e6e91e9d5792bfb5268ea4d1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "14.16.1-1"
+        "version": "14.17.0-0"
     },
     "rails": {
         "arch": "amd64",
