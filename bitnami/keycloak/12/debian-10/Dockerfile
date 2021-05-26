@@ -18,7 +18,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/keycloak/postunpack.sh
 ENV BITNAMI_APP_NAME="keycloak" \
-    BITNAMI_IMAGE_VERSION="12.0.4-debian-10-r83" \
+    BITNAMI_IMAGE_VERSION="12.0.4-debian-10-r84" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/keycloak/bin:$PATH"
 
 USER 1001
