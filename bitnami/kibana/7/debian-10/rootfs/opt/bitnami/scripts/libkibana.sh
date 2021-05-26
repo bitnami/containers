@@ -93,7 +93,7 @@ kibana_initialize() {
 ########################
 # Write a configuration setting value
 # Globals:
-#   KIBANA_*
+#   KIBANA_CONF_FILE
 # Arguments:
 #   $1 - key
 #   $2 - value
@@ -114,7 +114,7 @@ kibana_conf_set() {
 ########################
 # Read a configuration setting value
 # Globals:
-#   KIBANA_*
+#   KIBANA_CONF_FILE
 # Arguments:
 #   $1 - key
 # Returns:
@@ -127,7 +127,6 @@ kibana_conf_get() {
         yq r "$KIBANA_CONF_FILE" "$key"
     fi
 }
-
 
 ########################
 # Configure/initialize Kibana
@@ -199,14 +198,15 @@ is_kibana_not_running() {
 #   Boolean
 #########################
 is_kibana_ready() {
-    local basePath=
-	local rewriteBasePath=$(kibana_conf_get "[server.rewriteBasePath]")
-	if [[ "$rewriteBasePath" == "true" ]]; then
-		basePath=$(kibana_conf_get "[server.basePath]")
-	fi
+    local basePath
+    local rewriteBasePath
+    rewriteBasePath=$(kibana_conf_get "[server.rewriteBasePath]")
+    # The default value for is 'server.rewriteBasePath' is 'true' when ommited.'
+    # Therefore, we must check the value is not 'true'
+    [[ ! "$rewriteBasePath" = "false" ]] && basePath=$(kibana_conf_get "[server.basePath]")
     if is_kibana_running; then
-        local -r state="$(yq r - "status.overall.state" <<<"$(curl -s "127.0.0.1:${KIBANA_PORT_NUMBER}${basePath}/api/status")")"
-        [[ "$state" == "green" ]]
+        local -r state="$(yq r - "status.overall.state" <<< "$(curl -s "127.0.0.1:${KIBANA_PORT_NUMBER}${basePath:-}/api/status")")"
+        [[ "$state" = "green" ]]
     else
         false
     fi
