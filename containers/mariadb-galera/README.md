@@ -432,6 +432,7 @@ $ docker run -d --name mariadb-galera-0 \
   -e MARIADB_GALERA_CLUSTER_NAME=my_galera \
   -e MARIADB_GALERA_MARIABACKUP_USER=my_mariabackup_user \
   -e MARIADB_GALERA_MARIABACKUP_PASSWORD=my_mariabackup_password \
+  -e MARIADB_GALERA_CLUSTER_BOOTSTRAP=yes \
   -e MARIADB_ROOT_PASSWORD=my_root_password \
   -e MARIADB_USER=my_user \
   -e MARIADB_PASSWORD=my_password \
