@@ -142,7 +142,7 @@ mongodb_execute() {
     if [[ -n "$extra_args" ]]; then
         local extra_args_array=()
         read -r -a extra_args_array <<< "$extra_args"
-        [[ "${#extra_args[@]}" -gt 0 ]] && args+=("${extra_args_array[@]}")
+        [[ "${#extra_args_array[@]}" -gt 0 ]] && args+=("${extra_args_array[@]}")
     fi
     [[ -n "$database" ]] && args+=("$database")
 
