@@ -49,7 +49,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.7.0`, `3.7.0-debian-10-r53`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.7.0-debian-10-r53/3/debian-10/Dockerfile)
+* [`3.7`, `3.7-debian-10`, `3.7.0`, `3.7.0-debian-10-r55`, `latest` (3.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.7.0-debian-10-r55/3.7/debian-10/Dockerfile)
+* [`3.6`, `3.6-debian-10`, `3.6.3`, `3.6.3-debian-10-r0` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.6.3-debian-10-r0/3.6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
 
@@ -72,7 +73,7 @@ $ docker pull bitnami/zookeeper:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-docker build -t bitnami/zookeeper:latest 'https://github.com/bitnami/bitnami-docker-zookeeper.git#master:3/debian-10'
+docker build -t bitnami/zookeeper:latest 'https://github.com/bitnami/bitnami-docker-zookeeper.git#master:3.7/debian-10'
 ```
 
 # Persisting your data
