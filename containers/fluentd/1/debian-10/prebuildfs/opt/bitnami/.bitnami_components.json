@@ -1,10 +1,10 @@
 {
     "fluentd": {
         "arch": "amd64",
-        "digest": "3451364ea339ff71169ae0298e05dc0dd973b8cad55b36b013d3749e5c4ec9db",
+        "digest": "216e7a4ad01267d474b2a5ab3fbe9a1dabe8cb0e08740313a2ad4aa1f79ef143",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.12.4-0"
+        "version": "1.13.0-0"
     },
     "gosu": {
         "arch": "amd64",
