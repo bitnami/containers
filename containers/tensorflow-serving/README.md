@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.5.1`, `2.5.1-debian-10-r11`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/2.5.1-debian-10-r11/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.5.1`, `2.5.1-debian-10-r12`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/2.5.1-debian-10-r12/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tensorflow-serving GitHub repo](https://github.com/bitnami/bitnami-docker-tensorflow-serving).
 
@@ -326,6 +326,11 @@ $ docker-compose start tensorflow-serving
 ```
 
 # Notable Changes
+
+## 2.5.1-debian-10-r12
+
+- The size of the container image has been decreased.
+- The configuration logic is now based on Bash scripts in the rootfs/ folder.
 
 ## 1.12.0-r34
 
