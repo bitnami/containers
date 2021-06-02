@@ -2,4 +2,4 @@ version: '2'
 
 services:
   oras:
-    image: docker.io/bitnami/oras:0-scratch
+    image: docker.io/bitnami/oras:0
