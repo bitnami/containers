@@ -1,10 +1,10 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "cfb1835e471967ec5a6df8c622bdd907be03fb5b57b4f86f68eb7b73fe0f6be3",
+        "digest": "85aa9ec2b419b3e53b5aa8f8e52bb35cddba3a646f204dfaec029e292d250017",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.46-7"
+        "version": "2.4.48-0"
     },
     "gosu": {
         "arch": "amd64",
@@ -15,10 +15,10 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "285daf7986284f628aa0278ebdff8d9bb8d5c97527a8582f254aaf300d4215ca",
+        "digest": "396966c426a65f3556c94323b6c4bbc194469c00739bab71773c2b7252289097",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.19-0"
+        "version": "7.4.19-1"
     },
     "magento": {
         "arch": "amd64",
