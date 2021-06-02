@@ -1,10 +1,10 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "cfb1835e471967ec5a6df8c622bdd907be03fb5b57b4f86f68eb7b73fe0f6be3",
+        "digest": "85aa9ec2b419b3e53b5aa8f8e52bb35cddba3a646f204dfaec029e292d250017",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.46-7"
+        "version": "2.4.48-0"
     },
     "drupal": {
         "arch": "amd64",
@@ -22,10 +22,10 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "70777f4c71ed24d033410bb3eaf4475d12aec111b971d7a3ed3f6935db72ed51",
+        "digest": "a2eb2d88d68d878f264bb33a0264f9b7bb95994e4caf17635dc5053568edc7ca",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.28-0"
+        "version": "7.3.28-1"
     },
     "mysql-client": {
         "arch": "amd64",
