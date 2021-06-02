@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`16`, `16-debian-10`, `16.2.0`, `16.2.0-debian-10-r13` (16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/16.2.0-debian-10-r13/16/debian-10/Dockerfile)
 * [`15-prod`, `15-prod-debian-10`, `15.14.0-prod`, `15.14.0-prod-debian-10-r57` (15-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/15.14.0-prod-debian-10-r57/15-prod/debian-10/Dockerfile)
 * [`15`, `15-debian-10`, `15.14.0`, `15.14.0-debian-10-r56` (15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/15.14.0-debian-10-r56/15/debian-10/Dockerfile)
-* [`14-prod`, `14-prod-debian-10`, `14.17.0-prod`, `14.17.0-prod-debian-10-r20` (14-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/14.17.0-prod-debian-10-r20/14-prod/debian-10/Dockerfile)
+* [`14-prod`, `14-prod-debian-10`, `14.17.0-prod`, `14.17.0-prod-debian-10-r21` (14-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/14.17.0-prod-debian-10-r21/14-prod/debian-10/Dockerfile)
 * [`14`, `14-debian-10`, `14.17.0`, `14.17.0-debian-10-r21` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/14.17.0-debian-10-r21/14/debian-10/Dockerfile)
 * [`12-prod`, `12-prod-debian-10`, `12.22.1-prod`, `12.22.1-prod-debian-10-r55` (12-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/12.22.1-prod-debian-10-r55/12-prod/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.22.1`, `12.22.1-debian-10-r55`, `latest` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/12.22.1-debian-10-r55/12/debian-10/Dockerfile)
@@ -357,6 +357,8 @@ $ docker-compose up node
 # Branch Deprecation Notice
 
 Node.js's 10 upstream branch will go End-of-Life at the end of April 2021 and has now been internally tagged as to be deprecated. The branch node-snapshot 10 will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 05-27-2021
+
+Node.js's 15 upstream branch will go End-of-Life at the end of May 2021 and has now been internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 07-01-2021
 
 # Contributing
 
