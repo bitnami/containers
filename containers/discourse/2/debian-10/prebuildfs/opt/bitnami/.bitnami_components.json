@@ -8,17 +8,10 @@
     },
     "discourse": {
         "arch": "amd64",
-        "digest": "0e5440460712c7fc9204fef415bc4a1bad70e517e2e3136dd1b2d429dab8001b",
+        "digest": "46b20e6c7e787282160d61553ebeb6501296f1fb1b469adf70ae8df3c9e76ae4",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.7.0-1"
-    },
-    "discourse-sidekiq": {
-        "arch": "amd64",
-        "digest": "1358b5480b0f3310f6bcd96a7fd1ea097f79f02badfde07efad2072614aa763e",
-        "distro": "debian-10",
-        "type": "NAMI",
-        "version": "2.7.0-0"
+        "version": "2.7.0-2"
     },
     "git": {
         "arch": "amd64",
@@ -34,25 +27,39 @@
         "type": "NAMI",
         "version": "1.12.0-2"
     },
-    "postgresql-client": {
+    "node": {
         "arch": "amd64",
-        "digest": "94395af20a0ee9e12aaab0d1a58bb42290145af8ab7f736c4bb7cc3f51bbf2b6",
+        "digest": "445d6ffbde4c69c382f1d1614f014fb29c716756e6e91e9d5792bfb5268ea4d1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "11.12.0-0"
+        "version": "14.17.0-0"
+    },
+    "postgresql-client": {
+        "arch": "amd64",
+        "digest": "1202c736e3c5b28de1dd1deb05eb2d68bd7ebccc54c9ed1eab05220f346456c3",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "13.3.0-0"
     },
     "ruby": {
         "arch": "amd64",
-        "digest": "3d605c181d6ae44f6a6debb7c89a4dc64081b5ee28ca41354946f1fa5cd1276a",
+        "digest": "2d90de24a8b55a41379330d94c075beefed4f657de5edbb6d89c350b7e1b69aa",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.6.7-0"
+        "version": "2.7.3-0"
     },
-    "tini": {
+    "uglify-js": {
         "arch": "amd64",
-        "digest": "9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d",
+        "digest": "0e8396efc4c2b545d48d25da5ecb42150d7035fb4fa4bc514249214c0b47048d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.19.0-1"
+        "version": "3.13.1-0"
+    },
+    "wait-for-port": {
+        "arch": "amd64",
+        "digest": "7521d9a4f9e4e182bf32977e234026caa7b03759799868335bccb1edd8f8fd12",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.0.0-3"
     }
 }
