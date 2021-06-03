@@ -360,7 +360,7 @@ $ docker run -d -p 80:8080 --name jenkins \
 
 ## Notable Changes
 
-### 2.777.4-debian-10-rXX
+### 2.277.4-debian-10-r19
 
 - The size of the container image has been decreased.
 - The configuration logic is now based on Bash scripts in the *rootfs/* folder.
