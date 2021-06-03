@@ -13,7 +13,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.3.28-0" 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.48-0" --checksum 85aa9ec2b419b3e53b5aa8f8e52bb35cddba3a646f204dfaec029e292d250017
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.29-0" --checksum 5bf8f1ed022c8ad75a4db5b8b72ae54ce427bff628d7e4025c5b5e67b876708d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.28-1" --checksum a2eb2d88d68d878f264bb33a0264f9b7bb95994e4caf17635dc5053568edc7ca
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "suitecrm" "7.11.19-0" --checksum e1bdbde51f5460fbb4c71fcdf5df5a06c507351a69a6f892e257d08561a2e00c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "suitecrm" "7.11.20-1" --checksum 7a206333272507ba59c537de2e86084e41cfc390e5e03e76751d0c98446c6296
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN chmod g+rwX /opt/bitnami
@@ -21,8 +21,8 @@ RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/cron
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
-RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/apache/postunpack.sh
+RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/suitecrm/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
@@ -30,7 +30,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="suitecrm" \
-    BITNAMI_IMAGE_VERSION="7.11.19-debian-10-r32" \
+    BITNAMI_IMAGE_VERSION="7.11.20-debian-10-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
