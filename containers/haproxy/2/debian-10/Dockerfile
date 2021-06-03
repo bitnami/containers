@@ -20,7 +20,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="haproxy" \
-    BITNAMI_IMAGE_VERSION="2.4.0-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="2.4.0-debian-10-r7" \
     PATH="/opt/bitnami/haproxy-dataplaneapi/bin:/opt/bitnami/haproxy/sbin:$PATH"
 
 USER 1001
