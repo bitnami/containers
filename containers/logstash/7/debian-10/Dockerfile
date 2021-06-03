@@ -10,14 +10,14 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.11-0" --checksum 8cf28afc1090b0fec1ad841012ead25b59d2d5f4212742c3d62e6007ef57850b
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "logstash" "7.13.0-0" --checksum 074da7e4040f452c1c4e4eb578879f76ac47263833bc5286decffb6992867b8d
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "logstash" "7.13.1-0" --checksum 7ef110703058b01ed54dcd95fda4e2ce6954e01a4153560fe050b0726f01d41b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.12.0-2" --checksum 4d858ac600c38af8de454c27b7f65c0074ec3069880cb16d259a6e40a46bbc50
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/logstash/postunpack.sh
 ENV BITNAMI_APP_NAME="logstash" \
-    BITNAMI_IMAGE_VERSION="7.13.0-debian-10-r8" \
+    BITNAMI_IMAGE_VERSION="7.13.1-debian-10-r0" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/logstash/bin:/opt/bitnami/common/bin:$PATH"
 
