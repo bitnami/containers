@@ -177,6 +177,10 @@ web_server_reload() {
 #   --apache-before-vhost-configuration - Configuration to add before the <VirtualHost> directive (no default)
 #   --apache-allow-override - Whether to allow .htaccess files (only allowed when --move-htaccess is set to 'no')
 #   --apache-extra-directory-configuration - Extra configuration for the document root directory
+#   --apache-proxy-address - Address where to proxy requests
+#   --apache-proxy-configuration - Extra configuration for the proxy
+#   --apache-proxy-http-configuration - Extra configuration for the proxy HTTP vhost
+#   --apache-proxy-https-configuration - Extra configuration for the proxy HTTPS vhost
 #   --apache-move-htaccess - Move .htaccess files to a common place so they can be loaded during Apache startup
 # NGINX-specific flags:
 #   --nginx-additional-configuration - Additional server block configuration (no default)
@@ -214,6 +218,9 @@ ensure_web_server_app_configuration_exists() {
             | --apache-allow-override \
             | --apache-extra-directory-configuration \
             | --apache-proxy-address \
+            | --apache-proxy-configuration \
+            | --apache-proxy-http-configuration \
+            | --apache-proxy-https-configuration \
             | --apache-move-htaccess \
             )
                 apache_args+=("${1//apache-/}" "${2:?missing value}")
