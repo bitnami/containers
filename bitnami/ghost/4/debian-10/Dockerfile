@@ -20,7 +20,7 @@ RUN bitnami-pkg unpack ghost-4.6.4-0 --checksum 6442f976b5258d8fa4fd0310b10df86a
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="4.6.4-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="4.6.4-debian-10-r7" \
     BLOG_TITLE="User's Blog" \
     GHOST_DATABASE_NAME="bitnami_ghost" \
     GHOST_DATABASE_PASSWORD="" \
