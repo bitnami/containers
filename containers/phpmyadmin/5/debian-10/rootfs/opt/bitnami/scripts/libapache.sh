@@ -330,6 +330,10 @@ EOF
 #   --allow-override - Whether to allow .htaccess files (only allowed when --move-htaccess is set to 'no')
 #   --document-root - Path to document root directory
 #   --extra-directory-configuration - Extra configuration for the document root directory
+#   --proxy-address - Address where to proxy requests
+#   --proxy-configuration - Extra configuration for the proxy
+#   --proxy-http-configuration - Extra configuration for the proxy HTTP vhost
+#   --proxy-https-configuration - Extra configuration for the proxy HTTPS vhost
 # Returns:
 #   true if the configuration was enabled, false otherwise
 ########################
@@ -352,6 +356,9 @@ ensure_apache_app_configuration_exists() {
     export document_root="${BITNAMI_ROOT_DIR}/${app}"
     export extra_directory_configuration=""
     export proxy_address=""
+    export proxy_configuration=""
+    export proxy_http_configuration=""
+    export proxy_https_configuration=""
     # Validate arguments
     shift
     while [[ "$#" -gt 0 ]]; do
@@ -373,6 +380,9 @@ ensure_apache_app_configuration_exists() {
             | --document-root \
             | --extra-directory-configuration \
             | --proxy-address \
+            | --proxy-configuration \
+            | --proxy-http-configuration \
+            | --proxy-https-configuration \
             )
                 var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
                 shift
