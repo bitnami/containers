@@ -18,7 +18,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/tensorflow-serving/postunpack.sh
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="2.5.1-debian-10-r13" \
+    BITNAMI_IMAGE_VERSION="2.5.1-debian-10-r14" \
     TENSORFLOW_SERVING_ENABLE_MONITORING="no" \
     TENSORFLOW_SERVING_MODEL_NAME="resnet" \
     TENSORFLOW_SERVING_MONITORING_PATH="/monitoring/prometheus/metrics" \
