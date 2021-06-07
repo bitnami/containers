@@ -47,9 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`14-prod`, `14-prod-debian-10`, `14.17.0-prod`, `14.17.0-prod-debian-10-r21` (14-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/14.17.0-prod-debian-10-r21/14-prod/debian-10/Dockerfile)
 * [`14`, `14-debian-10`, `14.17.0`, `14.17.0-debian-10-r22`, `latest` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/14.17.0-debian-10-r22/14/debian-10/Dockerfile)
 * [`12-prod`, `12-prod-debian-10`, `12.22.1-prod`, `12.22.1-prod-debian-10-r55` (12-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.22.1-prod-debian-10-r55/12-prod/debian-10/Dockerfile)
-* [`12`, `12-debian-10`, `12.22.1`, `12.22.1-debian-10-r53` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.22.1-debian-10-r53/12/debian-10/Dockerfile)
-* [`10-prod`, `10-prod-debian-10`, `10.24.1-prod`, `10.24.1-prod-debian-10-r55` (10-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.24.1-prod-debian-10-r55/10-prod/debian-10/Dockerfile)
-* [`10`, `10-debian-10`, `10.24.1`, `10.24.1-debian-10-r54` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/10.24.1-debian-10-r54/10/debian-10/Dockerfile)
+* [`12`, `12-debian-10`, `12.22.1`, `12.22.1-debian-10-r54` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.22.1-debian-10-r54/12/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
 
@@ -366,8 +364,6 @@ $ docker-compose up node
 - `/app` directory is no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume are not persisted between Dockerfile `RUN` instructions. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
 
 # Branch Deprecation Notice
-
-Node.js's 10 upstream branch will go End-of-Life at the end of April 2021 and has now been internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 05-27-2021
 
 Node.js's 15 upstream branch will go End-of-Life at the end of May 2021 and has now been internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 07-01-2021
 
