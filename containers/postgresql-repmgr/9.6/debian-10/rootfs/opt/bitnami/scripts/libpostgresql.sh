@@ -466,6 +466,8 @@ postgresql_create_admin_user() {
     echo "CREATE ROLE \"${POSTGRESQL_USERNAME}\" WITH LOGIN ${connlimit_string} CREATEDB PASSWORD '${escaped_password}';" | postgresql_execute
     info "Granting access to \"${POSTGRESQL_USERNAME}\" to the database \"${POSTGRESQL_DATABASE}\""
     echo "GRANT ALL PRIVILEGES ON DATABASE \"${POSTGRESQL_DATABASE}\" TO \"${POSTGRESQL_USERNAME}\"\;" | postgresql_execute "" "postgres" "$POSTGRESQL_PASSWORD"
+    info "Setting ownership for the 'public' schema database \"${POSTGRESQL_DATABASE}\" to \"${POSTGRESQL_USERNAME}\""
+    echo "ALTER SCHEMA public OWNER TO \"${POSTGRESQL_USERNAME}\"\;" | postgresql_execute "$POSTGRESQL_DATABASE" "postgres" "$POSTGRESQL_PASSWORD"
 }
 
 ########################
