@@ -36,7 +36,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.5.7`, `7.5.7-debian-10-r15`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/7.5.7-debian-10-r15/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.5.7`, `7.5.7-debian-10-r16`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/7.5.7-debian-10-r16/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
 
@@ -119,7 +119,20 @@ grafana:
   ...
 ```
 
-### Install plugins at initialization
+### Grafana plugins
+
+The Bitnami Grafana image includes, by default, a series of popular/useful plugins. This is done by executing the script below during the image building process:
+
+- [grafana-plugins.sh](debian-10/rootfs/grafana-plugins.sh)
+
+You can customize this image and include the plugins you desire editing the list of plugins avilable in the script (see the variable "grafana_plugin_list") and build your own image as shown below:
+
+```console
+$ cd 7/debian-10
+$ docker build -t your-custom-grafana .
+```
+
+#### Install plugins at initialization
 
 When you start the Grafana image, you can specify a comma, semi-colon or space separated list of plugins to install by setting the env. variable `GF_INSTALL_PLUGINS`. The entries in `GF_INSTALL_PLUGINS` have three different formats:
 
@@ -145,7 +158,7 @@ $ docker run -d --name grafana -p 3000:3000 \
     bitnami/grafana:latest
 ```
 
-### Grafana Image Renderer plugin
+#### Grafana Image Renderer plugin
 
 You can install the [Grafana Image Renderer plugin](https://github.com/grafana/grafana-image-renderer) to handle rendering panels and dashboards as PNG images. To install the plugin, follow the instructions described in the [previous section](#install-plugins-at-initialization).
 
@@ -226,6 +239,16 @@ $ docker run --name grafana bitnami/grafana:latest
 ```
 
 ## Notable Changes
+
+### 7.5.7-debian-10-r16
+
+The number of plugins included in the image by default has been decreased. This decision is supported by the following reasons:
+
+- Bitnami commitment to offer images as less opinionated as possible: only very popular and well-maintained plugins should be included.
+- Reducing the image size.
+- Security concerns: by reducing the number of plugins, we also reduce the chances to include libraries affected by known vulnerabilities.
+
+You can still build your custom image adding your custom plugins or install them during the installization as explained in the [Grafana Plugins section](#grafana-plugins).
 
 ### 6.7.3-debian-10-r28
 
