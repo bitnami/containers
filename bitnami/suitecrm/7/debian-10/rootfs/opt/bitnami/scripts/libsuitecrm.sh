@@ -54,6 +54,13 @@ suitecrm_validate() {
             print_validation_error "The allowed values for $1 are [true, false]"
         fi
     }
+    check_valid_port() {
+        local port_var="${1:?missing port variable}"
+        local err
+        if ! err="$(validate_port "${!port_var}")"; then
+            print_validation_error "An invalid port was specified in the environment variable ${port_var}: ${err}."
+        fi
+    }
 
     # Validate user inputs
     ! is_empty_value "$SUITECRM_VALIDATE_USER_IP" && check_true_false_value "SUITECRM_VALIDATE_USER_IP"
@@ -74,10 +81,8 @@ suitecrm_validate() {
         for empty_env_var in "SUITECRM_SMTP_USER" "SUITECRM_SMTP_PASSWORD"; do
             is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
         done
-
-        for empty_env_var in "SUITECRM_SMTP_PORT_NUMBER" "SUITECRM_SMTP_NOTIFY_NAME" "SUITECRM_SMTP_NOTIFY_ADDRESS"; do
-            is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set."
-        done
+        is_empty_value "$SUITECRM_SMTP_PORT_NUMBER" && print_validation_error "The SUITECRM_SMTP_PORT_NUMBER environment variable is empty or not set."
+        ! is_empty_value "$SUITECRM_SMTP_PORT_NUMBER" && check_valid_port "SUITECRM_SMTP_PORT_NUMBER"
         ! is_empty_value "$SUITECRM_SMTP_PROTOCOL" && check_multi_value "SUITECRM_SMTP_PROTOCOL" "ssl tls"
     fi
 
