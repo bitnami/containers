@@ -86,7 +86,7 @@ airflow_worker_initialize() {
     # Wait for airflow webserver to be available
     info "Waiting for Airflow Webserser to be up"
     airflow_worker_wait_for_webserver "$AIRFLOW_WEBSERVER_HOST" "$AIRFLOW_WEBSERVER_PORT_NUMBER"
-    [[ "$AIRFLOW_EXECUTOR" == "CeleryExecutor" ]] && wait-for-port --host "$REDIS_HOST" "$REDIS_PORT_NUMBER"
+    [[ "$AIRFLOW_EXECUTOR" == "CeleryExecutor" || "$AIRFLOW_EXECUTOR" == "CeleryKubernetesExecutor"  ]] && wait-for-port --host "$REDIS_HOST" "$REDIS_PORT_NUMBER"
 
     # Avoid to fail when the executor is not celery
     true
@@ -119,7 +119,7 @@ airflow_worker_generate_config() {
 
     # Configure Airflow executor
     airflow_conf_set "core" "executor" "$AIRFLOW_EXECUTOR"
-    [[ "$AIRFLOW_EXECUTOR" == "CeleryExecutor" ]] && airflow_configure_celery_executor
+    [[ "$AIRFLOW_EXECUTOR" == "CeleryExecutor" || "$AIRFLOW_EXECUTOR" == "CeleryKubernetesExecutor"  ]] && airflow_configure_celery_executor
     true # Avoid the function to fail due to the check above
 }
 
