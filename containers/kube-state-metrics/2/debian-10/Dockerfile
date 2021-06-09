@@ -9,14 +9,14 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kube-state-metrics-2.0.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "8c6e2d61f64cafe57d9180d4b47d1157b7dc87b88bc5bbed2358ede5d35a388d  /tmp/bitnami/pkg/cache/kube-state-metrics-2.0.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/kube-state-metrics-2.0.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/kube-state-metrics-2.0.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kube-state-metrics-2.1.0-0-linux-amd64-debian-10.tar.gz && \
+    echo "2d9fed62ac797aed86eaf4ab9f9e46b615f2f6a6fed38ebf5aeb54d9435e0bc0  /tmp/bitnami/pkg/cache/kube-state-metrics-2.1.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/kube-state-metrics-2.1.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/kube-state-metrics-2.1.0-0-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="kube-state-metrics" \
-    BITNAMI_IMAGE_VERSION="2.0.0-debian-10-r36" \
+    BITNAMI_IMAGE_VERSION="2.1.0-debian-10-r0" \
     PATH="/opt/bitnami/kube-state-metrics/bin:$PATH"
 
 EXPOSE 8080 8081
