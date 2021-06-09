@@ -71,6 +71,13 @@ wordpress_validate() {
             print_validation_error "The variable ${1} is defined but the file ${!1} is not accessible or does not exist"
         fi
     }
+    check_valid_port() {
+        local port_var="${1:?missing port variable}"
+        local err
+        if ! err="$(validate_port "${!port_var}")"; then
+            print_validation_error "An invalid port was specified in the environment variable ${port_var}: ${err}."
+        fi
+    }
 
     # Warn users in case the configuration file is not writable
     is_file_writable "$WORDPRESS_CONF_FILE" || warn "The WordPress configuration file '${WORDPRESS_CONF_FILE}' is not writable. Configurations based on environment variables will not be applied for this file."
@@ -94,8 +101,8 @@ wordpress_validate() {
             check_resolved_hostname "$WORDPRESS_MULTISITE_HOST"
             [[ "$WORDPRESS_MULTISITE_HOST" =~ localhost ]] && print_validation_error "WORDPRESS_MULTISITE_HOST must be set to an actual hostname, localhost values are not allowed."
             validate_ipv4 "$WORDPRESS_MULTISITE_HOST" && print_validation_error "WORDPRESS_MULTISITE_HOST must be set to an actual hostname, IP addresses are not allowed."
-            validate_port "$WORDPRESS_MULTISITE_EXTERNAL_HTTP_PORT_NUMBER"
-            validate_port "$WORDPRESS_MULTISITE_EXTERNAL_HTTPS_PORT_NUMBER"
+            check_valid_port "WORDPRESS_MULTISITE_EXTERNAL_HTTP_PORT_NUMBER"
+            check_valid_port "WORDPRESS_MULTISITE_EXTERNAL_HTTPS_PORT_NUMBER"
         else
             print_validation_error "WORDPRESS_MULTISITE_HOST must be set when enabling WordPress Multisite mode."
         fi
@@ -105,7 +112,7 @@ wordpress_validate() {
 
     # Database configuration validations
     check_resolved_hostname "$WORDPRESS_DATABASE_HOST"
-    validate_port "$WORDPRESS_DATABASE_PORT_NUMBER"
+    check_valid_port "WORDPRESS_DATABASE_PORT_NUMBER"
     check_yes_no_value "WORDPRESS_ENABLE_DATABASE_SSL"
     if is_boolean_yes "$WORDPRESS_ENABLE_DATABASE_SSL"; then
         check_yes_no_value "WORDPRESS_VERIFY_DATABASE_SSL"
@@ -126,10 +133,11 @@ wordpress_validate() {
     # Validate SMTP credentials
     if ! is_empty_value "$WORDPRESS_SMTP_HOST"; then
         check_resolved_hostname "$WORDPRESS_SMTP_HOST"
-        for empty_env_var in "WORDPRESS_SMTP_USER" "WORDPRESS_SMTP_PASSWORD" "WORDPRESS_SMTP_PORT_NUMBER"; do
-            is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set."
+        for empty_env_var in "WORDPRESS_SMTP_USER" "WORDPRESS_SMTP_PASSWORD"; do
+            is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
         done
-        ! is_empty_value "$WORDPRESS_SMTP_PORT_NUMBER" && validate_port "$WORDPRESS_DATABASE_PORT_NUMBER"
+        is_empty_value "$WORDPRESS_SMTP_PORT_NUMBER" && print_validation_error "The WORDPRESS_SMTP_PORT_NUMBER environment variable is empty or not set."
+        ! is_empty_value "$WORDPRESS_SMTP_PORT_NUMBER" && check_valid_port "WORDPRESS_SMTP_PORT_NUMBER"
         ! is_empty_value "$WORDPRESS_SMTP_PROTOCOL" && check_multi_value "WORDPRESS_SMTP_PROTOCOL" "ssl tls"
     fi
 
