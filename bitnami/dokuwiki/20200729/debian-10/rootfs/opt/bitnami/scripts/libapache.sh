@@ -433,6 +433,9 @@ EOF
     additional_configuration="$(indent $'\n'"$additional_configuration" 2)"
     htaccess_include="$(indent $'\n'"$htaccess_include" 2)"
     extra_directory_configuration="$(indent $'\n'"$extra_directory_configuration" 4)"
+    proxy_configuration="$(indent $'\n'"$proxy_configuration" 2)"
+    proxy_http_configuration="$(indent $'\n'"$proxy_http_configuration" 2)"
+    proxy_https_configuration="$(indent $'\n'"$proxy_https_configuration" 2)"
     # Render templates
     # We remove lines that are empty or contain only newspaces with 'sed', so the resulting file looks better
     local template_name="app"
