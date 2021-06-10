@@ -230,6 +230,10 @@ wait_for_kibana_ready() {
     done
     if [[ "$retries" -eq 0 ]]; then
         error "Kibana is not available after ${KIBANA_WAIT_READY_MAX_RETRIES} retries"
+        if [[ -r "${KIBANA_LOGS_DIR}/init_scripts_start.log" ]]; then
+            info "Dumping ${KIBANA_LOGS_DIR}/init_scripts_start.log for additional diagnostics..."
+            cat "${KIBANA_LOGS_DIR}/init_scripts_start.log"
+        fi
         exit 1
     fi
 }
