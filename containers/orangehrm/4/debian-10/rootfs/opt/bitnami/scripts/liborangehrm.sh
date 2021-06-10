@@ -55,6 +55,13 @@ orangehrm_validate() {
             warn "Hostname $1 could not be resolved. This could lead to connection issues"
         fi
     }
+    check_valid_port() {
+        local port_var="${1:?missing port variable}"
+        local err
+        if ! err="$(validate_port "${!port_var}")"; then
+            print_validation_error "An invalid port was specified in the environment variable ${port_var}: ${err}."
+        fi
+    }
 
     # Warn users in case the configuration file is not writable
     is_file_writable "$ORANGEHRM_CONF_FILE" || warn "The OrangeHRM configuration file '${ORANGEHRM_CONF_FILE}' is not writable. Some configurations might fail."
@@ -63,7 +70,7 @@ orangehrm_validate() {
     # Validate user inputs
     ! is_empty_value "$ORANGEHRM_SKIP_BOOTSTRAP" && check_yes_no_value "ORANGEHRM_SKIP_BOOTSTRAP"
     ! is_empty_value "$ORANGEHRM_ENFORCE_PASSWORD_STRENGTH" && check_yes_no_value "ORANGEHRM_ENFORCE_PASSWORD_STRENGTH"
-    ! is_empty_value "$ORANGEHRM_DATABASE_PORT_NUMBER" && validate_port "$ORANGEHRM_DATABASE_PORT_NUMBER"
+    ! is_empty_value "$ORANGEHRM_DATABASE_PORT_NUMBER" && check_valid_port "ORANGEHRM_DATABASE_PORT_NUMBER"
     ! is_empty_value "$ORANGEHRM_DATABASE_HOST" && check_resolved_hostname "$ORANGEHRM_DATABASE_HOST"
 
     # Validate credentials
@@ -81,8 +88,7 @@ orangehrm_validate() {
             is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
         done
         is_empty_value "$ORANGEHRM_SMTP_PORT_NUMBER" && print_validation_error "The ORANGEHRM_SMTP_PORT_NUMBER environment variable is empty or not set."
-
-        ! is_empty_value "$ORANGEHRM_SMTP_PORT_NUMBER" && validate_port "$ORANGEHRM_SMTP_PORT_NUMBER"
+        ! is_empty_value "$ORANGEHRM_SMTP_PORT_NUMBER" && check_valid_port "ORANGEHRM_SMTP_PORT_NUMBER"
         ! is_empty_value "$ORANGEHRM_SMTP_PROTOCOL" && check_multi_value "ORANGEHRM_SMTP_PROTOCOL" "ssl none"
     fi
 
