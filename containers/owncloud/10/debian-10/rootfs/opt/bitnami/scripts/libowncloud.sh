@@ -66,6 +66,13 @@ owncloud_validate() {
             print_validation_error "${1} is defined but the file ${!1} is not accessible or does not exist"
         fi
     }
+    check_valid_port() {
+        local port_var="${1:?missing port variable}"
+        local err
+        if ! err="$(validate_port "${!port_var}")"; then
+            print_validation_error "An invalid port was specified in the environment variable ${port_var}: ${err}."
+        fi
+    }
 
     # Warn users in case the configuration file is not writable
     is_file_writable "$OWNCLOUD_CONF_FILE" || warn "The ownCloud configuration file '${OWNCLOUD_CONF_FILE}' is not writable. Configurations based on environment variables will not be applied for this file."
@@ -91,8 +98,11 @@ owncloud_validate() {
 
     # Validate SMTP credentials
     if ! is_empty_value "$OWNCLOUD_SMTP_HOST"; then
-        # Not checking for empty OWNCLOUD_SMTP_USERNAME/PASSWORD because it's a supported scenario
-        is_empty_value "OWNCLOUD_SMTP_PORT_NUMBER" && print_validation_error "The ${empty_env_var} environment variable is empty or not set."
+        for empty_env_var in "OWNCLOUD_SMTP_USER" "OWNCLOUD_SMTP_PASSWORD"; do
+            is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
+        done
+        is_empty_value "OWNCLOUD_SMTP_PORT_NUMBER" && print_validation_error "The OWNCLOUD_SMTP_PORT_NUMBER environment variable is empty or not set."
+        ! is_empty_value "OWNCLOUD_SMTP_PORT_NUMBER" && check_valid_port "OWNCLOUD_SMTP_PORT_NUMBER"
         ! is_empty_value "$OWNCLOUD_SMTP_PROTOCOL" && check_multi_value "OWNCLOUD_SMTP_PROTOCOL" "ssl tls"
     fi
 
