@@ -69,7 +69,7 @@ rabbitmq_validate() {
 
     check_fqdn() {
         if [[ "${!1}" == *.* ]]; then
-            if [[ "${RABBITMQ_USE_LONGNAME}" = false ]] ; then
+            if [[ "${RABBITMQ_USE_LONGNAME}" = false ]]; then
                 print_validation_error "The node name appears to be a fully qualified hostname and RABBITMQ_USE_LONGNAME is not set."
             fi
         fi
@@ -252,7 +252,6 @@ rabbitmq_print_networking_configuration() {
     fi
 }
 
-
 ########################
 # Prints RabbitMQ management configuration entries
 # Globals:
@@ -296,11 +295,11 @@ auth_backends.2 = internal
 auth_ldap.port = $RABBITMQ_LDAP_SERVERS_PORT
 auth_ldap.user_dn_pattern = $RABBITMQ_LDAP_USER_DN_PATTERN
 EOF
-        read -r -a ldap_servers <<< "$(tr ',;' ' ' <<< "$RABBITMQ_LDAP_SERVERS")"
+        read -r -a ldap_servers <<<"$(tr ',;' ' ' <<<"$RABBITMQ_LDAP_SERVERS")"
         local index=1
         for server in "${ldap_servers[@]}"; do
             echo "auth_ldap.servers.${index} = ${server}"
-            (( index++ ))
+            ((index++))
         done
         if is_boolean_yes "$RABBITMQ_LDAP_TLS"; then
             echo "auth_ldap.use_ssl = true"
@@ -322,7 +321,7 @@ rabbitmq_print_resource_limits_configuration() {
             echo "# Set a relative memory threshold"
             if [[ "$memory_size" =~ %$ ]]; then
                 # Convert percentage to a relative value (< 1)
-                memory_size="$(awk '{ print $1 / 100 }' <<< "${memory_size//%/}")"
+                memory_size="$(awk '{ print $1 / 100 }' <<<"${memory_size//%/}")"
             fi
             # Only keep first three decimals
             printf "vm_memory_high_watermark.relative = %.03f\n" "$memory_size"
@@ -369,7 +368,7 @@ default_vhost = ${RABBITMQ_VHOST}
 default_user = ${RABBITMQ_USERNAME}
 EOF
             # In most cases (i.e. container images), it is not a concern to specify the default password this way
-            ! is_boolean_yes "$RABBITMQ_SECURE_PASSWORD" && cat <<< "default_pass = ${RABBITMQ_PASSWORD}"
+            ! is_boolean_yes "$RABBITMQ_SECURE_PASSWORD" && cat <<<"default_pass = ${RABBITMQ_PASSWORD}"
             echo
         fi
 
@@ -377,7 +376,7 @@ EOF
         rabbitmq_print_management_configuration
         rabbitmq_print_ldap_configuration
         rabbitmq_print_resource_limits_configuration
-    ) >> "$RABBITMQ_CONF_FILE"
+    ) >>"$RABBITMQ_CONF_FILE"
 }
 
 ########################
@@ -411,7 +410,7 @@ rabbitmq_conf_set() {
             replace_in_file "$RABBITMQ_CONF_FILE" "^[# ]*${key}\s*=.*" "${key} = ${value}" false
         else
             # Add a new key
-            printf '\n%s = %s' "$key" "$value" >> "$RABBITMQ_CONF_FILE"
+            printf '\n%s = %s' "$key" "$value" >>"$RABBITMQ_CONF_FILE"
         fi
     fi
 }
@@ -454,7 +453,7 @@ rabbitmq_erlang_ssl_dir() {
 #########################
 rabbitmq_create_combined_ssl_file() {
     if [[ ! -f "$RABBITMQ_COMBINED_CERT_PATH" ]]; then
-        cat "$RABBITMQ_SSL_CERTFILE" "$RABBITMQ_SSL_KEYFILE" > "$RABBITMQ_COMBINED_CERT_PATH"
+        cat "$RABBITMQ_SSL_CERTFILE" "$RABBITMQ_SSL_KEYFILE" >"$RABBITMQ_COMBINED_CERT_PATH"
     fi
 }
 
@@ -486,7 +485,7 @@ SERVER_ADDITIONAL_ERL_ARGS="-pa \$ERL_SSL_PATH
 RABBITMQ_CTL_ERL_ARGS="\$SERVER_ADDITIONAL_ERL_ARGS"
 EOF
         fi
-    } > "$RABBITMQ_CONF_ENV_FILE"
+    } >"$RABBITMQ_CONF_ENV_FILE"
 }
 
 ########################
@@ -500,7 +499,7 @@ EOF
 #########################
 rabbitmq_download_community_plugins() {
     debug "Downloading custom plugins..."
-    read -r -a plugins <<< "$(tr ',;' ' ' <<< "$RABBITMQ_COMMUNITY_PLUGINS")"
+    read -r -a plugins <<<"$(tr ',;' ' ' <<<"$RABBITMQ_COMMUNITY_PLUGINS")"
     cd "$RABBITMQ_PLUGINS_DIR" || return
     for plugin in "${plugins[@]}"; do
         curl --remote-name --location --silent "$plugin"
@@ -519,10 +518,10 @@ rabbitmq_download_community_plugins() {
 #########################
 rabbitmq_create_enabled_plugins_file() {
     debug "Creating enabled_plugins file..."
-    local -a plugins=("rabbitmq_management_agent")
+    local -a plugins=("rabbitmq_management_agent" "rabbitmq_prometheus")
 
     if [[ -n "${RABBITMQ_PLUGINS:-}" ]]; then
-        read -r -a extra_plugins_array <<< "$(tr ',;' ' ' <<< "$RABBITMQ_PLUGINS")"
+        read -r -a extra_plugins_array <<<"$(tr ',;' ' ' <<<"$RABBITMQ_PLUGINS")"
         [[ "${#extra_plugins_array[@]}" -gt 0 ]] && plugins+=("${extra_plugins_array[@]}")
     else
         if [[ "$RABBITMQ_NODE_TYPE" = "stats" ]]; then
@@ -530,7 +529,7 @@ rabbitmq_create_enabled_plugins_file() {
         fi
         is_boolean_yes "$RABBITMQ_ENABLE_LDAP" && plugins+=("rabbitmq_auth_backend_ldap")
     fi
-    cat > "${RABBITMQ_CONF_DIR}/enabled_plugins" <<EOF
+    cat >"${RABBITMQ_CONF_DIR}/enabled_plugins" <<EOF
 [$(echo "${plugins[@]}" | sed -E 's/\s+/,/g')].
 EOF
 }
@@ -553,7 +552,7 @@ rabbitmq_create_erlang_cookie() {
         RABBITMQ_ERL_COOKIE=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c32)
     fi
 
-    echo "$RABBITMQ_ERL_COOKIE" > "${RABBITMQ_HOME_DIR}/.erlang.cookie"
+    echo "$RABBITMQ_ERL_COOKIE" >"${RABBITMQ_HOME_DIR}/.erlang.cookie"
 }
 
 ########################
