@@ -87,6 +87,13 @@ phpbb_validate() {
             print_validation_error "The allowed values for ${1} are: ${2}"
         fi
     }
+    check_valid_port() {
+        local port_var="${1:?missing port variable}"
+        local err
+        if ! err="$(validate_port "${!port_var}")"; then
+            print_validation_error "An invalid port was specified in the environment variable ${port_var}: ${err}."
+        fi
+    }
 
     # Warn users in case the configuration file is not writable
     is_file_writable "$PHPBB_CONF_FILE" || warn "The phpBB configuration file '${PHPBB_CONF_FILE}' is not writable. Configurations based on environment variables will not be applied for this file."
@@ -106,7 +113,7 @@ phpbb_validate() {
             is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
         done
         is_empty_value "$PHPBB_SMTP_PORT_NUMBER" && print_validation_error "The PHPBB_SMTP_PORT_NUMBER environment variable is empty or not set."
-
+        ! is_empty_value "$PHPBB_SMTP_PORT_NUMBER" && check_valid_port "PHPBB_SMTP_PORT_NUMBER"
         ! is_empty_value "$PHPBB_SMTP_PROTOCOL" && check_multi_value "PHPBB_SMTP_PROTOCOL" "plain ssl tls"
     fi
 
@@ -220,38 +227,6 @@ EOF
 
     # Avoid exit code of previous commands to affect the result of this function
     true
-}
-
-########################
-# Add or modify an entry in the phpBB configuration file (config.inc.php)
-# Globals:
-#   PHPBB_*
-# Arguments:
-#   $1 - PHP variable name
-#   $2 - Value to assign to the PHP variable
-#   $3 - Whether the value is a literal, or if instead it should be quoted (default: no)
-# Returns:
-#   None
-#########################
-phpbb_conf_set() {
-    local -r key="${1:?key missing}"
-    local -r value="${2:?value missing}"
-    local -r is_literal="${3:-no}"
-    debug "Setting ${key} to '${value}' in phpBB configuration (literal: ${is_literal})"
-    # Sanitize key (sed does not support fixed string substitutions)
-    local sanitized_pattern
-    sanitized_pattern="^\s*(//\s*)?$(sed 's/[]\[^$.*/]/\\&/g' <<<"$key")\s*=.*"
-    local entry
-    is_boolean_yes "$is_literal" && entry="${key} = $value;" || entry="${key} = '$value';"
-    # Check if the configuration exists in the file
-    if grep -q -E "$sanitized_pattern" "$PHPBB_CONF_FILE"; then
-        # It exists, so replace the line
-        replace_in_file "$PHPBB_CONF_FILE" "$sanitized_pattern" "$entry"
-    else
-        # The phpBB configuration file includes all supported keys, but because of its format,
-        # we cannot append contents to the end.
-        warn "Could not set the phpBB '${key}' configuration. Check that the file has not been modified externally."
-    fi
 }
 
 ########################
