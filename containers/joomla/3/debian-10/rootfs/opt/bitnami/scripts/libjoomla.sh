@@ -49,6 +49,13 @@ joomla_validate() {
             print_validation_error "The allowed values for ${1} are: ${2}"
         fi
     }
+    check_valid_port() {
+        local port_var="${1:?missing port variable}"
+        local err
+        if ! err="$(validate_port "${!port_var}")"; then
+            print_validation_error "An invalid port was specified in the environment variable ${port_var}: ${err}."
+        fi
+    }
 
     # Validate credentials
     if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
@@ -64,10 +71,9 @@ joomla_validate() {
         for empty_env_var in "JOOMLA_SMTP_USER" "JOOMLA_SMTP_PASSWORD"; do
             is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
         done
-
-        for empty_env_var in "JOOMLA_SMTP_PORT_NUMBER" "JOOMLA_SMTP_PROTOCOL"; do
-            is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set."
-        done
+        is_empty_value "$JOOMLA_SMTP_PORT_NUMBER" && print_validation_error "The JOOMLA_SMTP_PORT_NUMBER environment variable is empty or not set."
+        ! is_empty_value "$JOOMLA_SMTP_PORT_NUMBER" && check_valid_port "JOOMLA_SMTP_PORT_NUMBER"
+        ! is_empty_value "$JOOMLA_SMTP_PROTOCOL" && check_multi_value "JOOMLA_SMTP_PROTOCOL" "ssl tls"
     fi
 
     # Check that the web server is properly set up
@@ -220,7 +226,7 @@ joomla_initialize() {
 #########################
 joomla_conf_set() {
     local -r key="${1:?key missing}"
-    local -r value="${2:?value missing}"
+    local -r value="${2:-}"
     local -r is_literal="${3:-no}"
     debug "Setting ${key} to '${value}' in Joomla! configuration (literal: ${is_literal})"
     # Sanitize key (sed does not support fixed string substitutions)
