@@ -50,7 +50,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3.7`, `3.7-debian-10`, `3.7.0`, `3.7.0-debian-10-r60`, `latest` (3.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.7.0-debian-10-r60/3.7/debian-10/Dockerfile)
-* [`3.6`, `3.6-debian-10`, `3.6.3`, `3.6.3-debian-10-r11` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.6.3-debian-10-r11/3.6/debian-10/Dockerfile)
+* [`3.6`, `3.6-debian-10`, `3.6.3`, `3.6.3-debian-10-r12` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.6.3-debian-10-r12/3.6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
 
