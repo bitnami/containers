@@ -51,7 +51,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.8`, `3.8-debian-10`, `3.8.16`, `3.8.16-debian-10-r27`, `latest` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.16-debian-10-r27/3.8/debian-10/Dockerfile)
+* [`3.8`, `3.8-debian-10`, `3.8.17`, `3.8.17-debian-10-r1`, `latest` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.17-debian-10-r1/3.8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rabbitmq GitHub repo](https://github.com/bitnami/bitnami-docker-rabbitmq).
 
@@ -193,7 +193,7 @@ Available variables:
 * `RABBITMQ_VHOST`: RabbitMQ application vhost. Default: **/**
 * `RABBITMQ_USERNAME`: RabbitMQ application username. Default: **user**
 * `RABBITMQ_PASSWORD`: RabbitMQ application password. Default: **bitnami**
-* `RABBITMQ_SECURE_PASSWORD`: Whether to set the RabbitMQ password securely. This is incompatible with loading external RabbitMQ definitions. Default: **yes**
+* `RABBITMQ_SECURE_PASSWORD`: Whether to set the RabbitMQ password securely. This is incompatible with loading external RabbitMQ definitions. Default: **no**
 * `RABBITMQ_LOAD_DEFINITIONS`: Whether to load external RabbitMQ definitions. This is incompatible with setting the RabbitMQ password securely. Default: **no**.
 * `RABBITMQ_ERL_COOKIE`: Erlang cookie to determine whether different nodes are allowed to communicate with each other.
 * `RABBITMQ_NODE_TYPE`: Node Type. Valid values: *stats*, *queue-ram* or *queue-disc*. Default: **stats**
@@ -517,6 +517,13 @@ $ docker-compose up rabbitmq
 
 ## Notable changes
 
+### 3.8.16-debian-10-r28
+
+* Added several minor changes to make the container compatible with the [RabbitMQ Cluster Operator](https://github.com/rabbitmq/cluster-operator/):
+  * Add `/etc/rabbitmq`, `/var/log/rabbitmq` and `/var/lib/rabbitmq` as symlinks to the corresponding folders in `/opt/bitnami/rabbitmq`.
+  * Set the `RABBITMQ_SECURE_PASSWORD` password to `no` by default. This does not affect the Bitnami RabbitMQ helm as it sets that variable to `yes` by default.
+  * Enable the `rabbitmq-prometheus` plugin by default.
+
 ### 3.8.9-debian-10-r82
 
 * Add script to be used as preStop hook on K8s environments. It waits until queues have synchronised
@@ -560,7 +567,7 @@ $ docker-compose up rabbitmq
 
 The following parameters have been renamed:
 
-|            From            |              To              |
+| From                       | To                           |
 |----------------------------|------------------------------|
 | `RABBITMQ_ERLANG_COOKIE`   | `RABBITMQ_ERL_COOKIE`        |
 | `RABBITMQ_NODETYPE`        | `RABBITMQ_NODE_TYPE`         |

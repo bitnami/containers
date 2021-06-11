@@ -13,6 +13,7 @@ services:
       - ./config/advanced.config:/bitnami/rabbitmq/conf/advanced.config:ro
     environment:
       - BITNAMI_DEBUG=true
+      - RABBITMQ_SECURE_PASSWORD=yes
       - RABBITMQ_ENABLE_LDAP=yes
       - RABBITMQ_LDAP_TLS=no
       - RABBITMQ_LDAP_SERVERS=openldap

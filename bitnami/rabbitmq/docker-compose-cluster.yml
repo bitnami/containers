@@ -6,6 +6,7 @@ services:
       - RABBITMQ_NODE_TYPE=stats
       - RABBITMQ_NODE_NAME=rabbit@stats
       - RABBITMQ_ERL_COOKIE=s3cr3tc00ki3
+      - RABBITMQ_SECURE_PASSWORD=yes
     ports:
       - '15672:15672'
     volumes:
@@ -17,6 +18,7 @@ services:
       - RABBITMQ_NODE_NAME=rabbit@queue-disc1
       - RABBITMQ_CLUSTER_NODE_NAME=rabbit@stats
       - RABBITMQ_ERL_COOKIE=s3cr3tc00ki3
+      - RABBITMQ_SECURE_PASSWORD=yes
     volumes:
       - 'rabbitmqdisc1_data:/bitnami'
   queue-ram1:
@@ -26,6 +28,7 @@ services:
       - RABBITMQ_NODE_NAME=rabbit@queue-ram1
       - RABBITMQ_CLUSTER_NODE_NAME=rabbit@stats
       - RABBITMQ_ERL_COOKIE=s3cr3tc00ki3
+      - RABBITMQ_SECURE_PASSWORD=yes
     volumes:
       - 'rabbitmqram1_data:/bitnami'
 
