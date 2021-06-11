@@ -65,13 +65,20 @@ drupal_validate() {
             print_validation_error "The variable ${1} is defined but the file ${!1} is not accessible or does not exist"
         fi
     }
+    check_valid_port() {
+        local port_var="${1:?missing port variable}"
+        local err
+        if ! err="$(validate_port "${!port_var}")"; then
+            print_validation_error "An invalid port was specified in the environment variable ${port_var}: ${err}."
+        fi
+    }
 
     # Warn users in case the configuration file is not writable
     is_file_writable "$DRUPAL_CONF_FILE" || warn "The Drupal configuration file '${DRUPAL_CONF_FILE}' is not writable. Configurations based on environment variables will not be applied for this file."
 
     # Validate user inputs
     ! is_empty_value "$DRUPAL_SKIP_BOOTSTRAP" && check_yes_no_value "DRUPAL_SKIP_BOOTSTRAP"
-    ! is_empty_value "$DRUPAL_DATABASE_PORT_NUMBER" && validate_port "$DRUPAL_DATABASE_PORT_NUMBER"
+    ! is_empty_value "$DRUPAL_DATABASE_PORT_NUMBER" && check_valid_port "DRUPAL_DATABASE_PORT_NUMBER"
     ! is_empty_value "$DRUPAL_DATABASE_HOST" && check_resolved_hostname "$DRUPAL_DATABASE_HOST"
     check_mounted_file "DRUPAL_DATABASE_TLS_CA_FILE"
 
@@ -86,10 +93,11 @@ drupal_validate() {
 
     # Validate SMTP credentials
     if ! is_empty_value "$DRUPAL_SMTP_HOST"; then
-        for empty_env_var in "DRUPAL_SMTP_USER" "DRUPAL_SMTP_PASSWORD" "DRUPAL_SMTP_PORT_NUMBER" "DRUPAL_SMTP_PROTOCOL"; do
+        for empty_env_var in "DRUPAL_SMTP_USER" "DRUPAL_SMTP_PASSWORD"; do
             is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
         done
-        ! is_empty_value "$DRUPAL_SMTP_PORT_NUMBER" && validate_port "$DRUPAL_SMTP_PORT_NUMBER"
+        is_empty_value "$DRUPAL_SMTP_PORT_NUMBER" && print_validation_error "The DRUPAL_SMTP_PORT_NUMBER environment variable is empty or not set."
+        ! is_empty_value "$DRUPAL_SMTP_PORT_NUMBER" && check_valid_port "DRUPAL_SMTP_PORT_NUMBER"
         ! is_empty_value "$DRUPAL_SMTP_PROTOCOL" && check_multi_value "DRUPAL_SMTP_PROTOCOL" "standard tls ssl"
     fi
 
@@ -358,7 +366,7 @@ drush_execute() {
 drush_config_set() {
     local -r group="${1:?missing config group}"
     local -r key="${2:?missing config key}"
-    local -r value="${3:?missing config value}"
+    local -r value="${3:-}"
 
     local -r major_version="$(get_sematic_version "$(drupal_get_version)" 1)"
     if [[ "$major_version" -gt 7 ]]; then
