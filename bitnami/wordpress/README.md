@@ -234,6 +234,7 @@ Available environment variables:
 - `WORDPRESS_BLOG_NAME`: WordPress blog name. Default: **User's blog**
 - `WORDPRESS_HTACCESS_OVERRIDE_NONE`: Set the Apache `AllowOverride` variable to `None`. All the default directives will be loaded from `/opt/bitnami/wordpress/wordpress-htaccess.conf`. Default: **yes**
 - `WORDPRESS_ENABLE_HTACCESS_PERSISTENCE`: Persist the custom changes of the htaccess. It depends on the value of `WORDPRESS_HTACCESS_OVERRIDE_NONE`, when `yes` it will persist `/opt/bitnami/wordpress/wordpress-htaccess.conf` if `no` it will persist `/opt/bitnami/wordpress/.htaccess`. Default: **no**
+- `WORDPRESS_DATA_TO_PERSIST`: Space separated list of files and directories to persist.  Default: **"wp-config.php wp-content"**
 - `WORDPRESS_RESET_DATA_PERMISSIONS`: Force resetting ownership/permissions on persisted data when restarting WordPress, otherwise it assumes the ownership/permissions are correct. Ignored when running as non-root. Default: **no**
 - `WORDPRESS_TABLE_PREFIX`: Table prefix to use in WordPress. Default: **wp_**
 - `WORDPRESS_PLUGINS`: List of WordPress plugins to install and activate, separated via commas. Can also be set to `all` to activate all currently installed plugins, or `none` to skip. Default: **none**
