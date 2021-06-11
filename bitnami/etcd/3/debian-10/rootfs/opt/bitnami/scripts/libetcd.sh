@@ -112,6 +112,13 @@ etcdctl_get_endpoints() {
     local -a endpoints=()
     local host domain port
 
+    ip_has_hostname() {
+       local ip="${1:?ip is required}"
+
+       [[ "$(getent hosts "$ip")" != "" ]] && return 0
+       return 1
+    }
+
     if is_boolean_yes "$ETCD_ON_K8S"; then
         # This piece of code assumes this container is used on a K8s environment
         # where etcd members are part of a statefulset that uses a headless service
@@ -127,11 +134,13 @@ etcdctl_get_endpoints() {
         # When ETCD_CLUSTER_DOMAIN is set, we use that value instead of extracting
         # it from ETCD_ADVERTISE_CLIENT_URLS
         ! is_empty_value "$ETCD_CLUSTER_DOMAIN" && domain="$ETCD_CLUSTER_DOMAIN"
-        wait_for_dns_lookup "domain"
-        for h in $(getent ahosts "$domain" | awk '{print $1}' | uniq); do
-            endpoint="$(getent hosts "$h" | awk '{print $2}')"
-            if ! { [[ $only_others = true ]] && [[ "$endpoint" = "$host" ]]; }; then
-                endpoints+=("${endpoint}:${port}")
+        wait_for_dns_lookup "$domain" >/dev/null 2>&1
+        for ip in $(getent ahosts "$domain" | awk '{print $1}' | uniq); do
+            if retry_while "ip_has_hostname $ip"; then
+                h="$(getent hosts "$ip" | awk '{print $2}')"
+                if ! { [[ $only_others = true ]] && [[ "$h" = "$host" ]]; }; then
+                    endpoints+=("${h}:${port}")
+                fi
             fi
         done
     fi
@@ -256,21 +265,25 @@ is_healthy_etcd_cluster() {
     local return_value=0
     local active_endpoints=0
     local -a extra_flags
+    local host port
 
     read -r -a endpoints_array <<< "$(tr ',;' ' ' <<< "$(etcdctl_get_endpoints)")"
     local -r cluster_size=${#endpoints_array[@]}
+    host="$(parse_uri "$ETCD_ADVERTISE_CLIENT_URLS" "host")"
+    port="$(parse_uri "$ETCD_ADVERTISE_CLIENT_URLS" "port")"
     for e in "${endpoints_array[@]}"; do
         read -r -a extra_flags <<< "$(etcdctl_auth_flags)"
         extra_flags+=("--endpoints=$e")
-        if [[ "$e" != "$ETCD_ADVERTISE_CLIENT_URLS" ]] && etcdctl endpoint health "${extra_flags[@]}" >/dev/null 2>&1; then
+        if [[ "$e" != "$host:$port" ]] && etcdctl endpoint health "${extra_flags[@]}" >/dev/null 2>&1; then
             debug "$e endpoint is active"
-            active_endpoints+=1
+            ((active_endpoints++))
         fi
     done
 
     if is_boolean_yes "$ETCD_DISASTER_RECOVERY"; then
         if [[ -f "/snapshots/.disaster_recovery" ]]; then
-            if [[ $active_endpoints -eq $((cluster_size - 1)) ]]; then
+            remove_in_file "/snapshots/.disaster_recovery" "$host:$port"
+            if [[ $(wc -w < "/snapshots/.disaster_recovery") -eq 0 ]]; then
                 debug "Last member to recover from the disaster!"
                 rm "/snapshots/.disaster_recovery"
             fi
@@ -278,7 +291,9 @@ is_healthy_etcd_cluster() {
         else
             if [[ $active_endpoints -lt $(((cluster_size + 1)/2)) ]]; then
                 debug "There are no enough active endpoints!"
-                touch "/snapshots/.disaster_recovery"
+                for e in "${endpoints_array[@]}"; do
+                    [[ "$e" != "$host:$port" ]] && [[ "$e" != ":$port" ]] && echo "$e" >> "/snapshots/.disaster_recovery"
+                done
                 return_value=1
             fi
         fi
