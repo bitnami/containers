@@ -89,14 +89,21 @@ wildfly_validate() {
             print_validation_error "${1} must be set"
         fi
     }
+    check_valid_port() {
+        local port_var="${1:?missing port variable}"
+        local err
+        if ! err="$(validate_port "${!port_var}")"; then
+            print_validation_error "An invalid port was specified in the environment variable ${port_var}: ${err}."
+        fi
+    }
 
     # Warn users in case the configuration file is not writable
     is_file_writable "$WILDFLY_CONF_FILE" || warn "The WildFly configuration file '${WILDFLY_CONF_FILE}' is not writable. Configurations based on environment variables will not be applied for this file."
 
     # Validate user inputs
-    ! is_empty_value "$WILDFLY_HTTP_PORT_NUMBER" && validate_port "$WILDFLY_HTTP_PORT_NUMBER"
-    ! is_empty_value "$WILDFLY_AJP_PORT_NUMBER" && validate_port "$WILDFLY_AJP_PORT_NUMBER"
-    ! is_empty_value "$WILDFLY_MANAGEMENT_PORT_NUMBER" && validate_port "$WILDFLY_MANAGEMENT_PORT_NUMBER"
+    ! is_empty_value "$WILDFLY_HTTP_PORT_NUMBER" && check_valid_port "WILDFLY_HTTP_PORT_NUMBER"
+    ! is_empty_value "$WILDFLY_AJP_PORT_NUMBER" && check_valid_port "WILDFLY_AJP_PORT_NUMBER"
+    ! is_empty_value "$WILDFLY_MANAGEMENT_PORT_NUMBER" && check_valid_port "WILDFLY_MANAGEMENT_PORT_NUMBER"
     check_conflicting_ports "WILDFLY_HTTP_PORT_NUMBER" "WILDFLY_AJP_PORT_NUMBER" "WILDFLY_MANAGEMENT_PORT_NUMBER"
 
     # Validate credentials
