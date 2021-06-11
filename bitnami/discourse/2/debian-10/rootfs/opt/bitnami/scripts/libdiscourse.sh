@@ -66,6 +66,13 @@ discourse_validate() {
             print_validation_error "${password_var} must be at least ${length} characters"
         fi
     }
+    check_valid_port() {
+        local port_var="${1:?missing port variable}"
+        local err
+        if ! err="$(validate_port "${!port_var}")"; then
+            print_validation_error "An invalid port was specified in the environment variable ${port_var}: ${err}."
+        fi
+    }
 
     # Warn users in case the configuration file is not writable
     is_file_writable "$DISCOURSE_CONF_FILE" || warn "The Discourse configuration file '${DISCOURSE_CONF_FILE}' is not writable. Configurations based on environment variables will not be applied for this file."
@@ -78,9 +85,9 @@ discourse_validate() {
     ! is_empty_value "$DISCOURSE_ENABLE_HTTPS" && check_yes_no_value "DISCOURSE_ENABLE_HTTPS"
     ! is_empty_value "$DISCOURSE_SKIP_BOOTSTRAP" && check_yes_no_value "DISCOURSE_SKIP_BOOTSTRAP"
     ! is_empty_value "$DISCOURSE_DATABASE_HOST" && check_resolved_hostname "$DISCOURSE_DATABASE_HOST"
-    ! is_empty_value "$DISCOURSE_DATABASE_PORT_NUMBER" && validate_port "$DISCOURSE_DATABASE_PORT_NUMBER"
+    ! is_empty_value "$DISCOURSE_DATABASE_PORT_NUMBER" && check_valid_port "DISCOURSE_DATABASE_PORT_NUMBER"
     ! is_empty_value "$DISCOURSE_REDIS_HOST" && check_resolved_hostname "$DISCOURSE_REDIS_HOST"
-    ! is_empty_value "$DISCOURSE_REDIS_PORT_NUMBER" && validate_port "$DISCOURSE_REDIS_PORT_NUMBER"
+    ! is_empty_value "$DISCOURSE_REDIS_PORT_NUMBER" && check_valid_port "DISCOURSE_REDIS_PORT_NUMBER"
     if ! is_file_writable "$DISCOURSE_CONF_FILE"; then
         warn "The Discourse configuration file ${DISCOURSE_CONF_FILE} is not writable. Configurations specified via environment variables will not be applied to this file."
         is_boolean_yes "$DISCOURSE_ENABLE_CONF_PERSISTENCE" && warn "The DISCOURSE_ENABLE_CONF_PERSISTENCE configuration is enabled but the ${DISCOURSE_CONF_FILE} file is not writable. The file will not be persisted."
@@ -98,9 +105,11 @@ discourse_validate() {
 
     # Validate SMTP credentials
     if ! is_empty_value "$DISCOURSE_SMTP_HOST"; then
-        for empty_env_var in "DISCOURSE_SMTP_USER" "DISCOURSE_SMTP_PASSWORD" "DISCOURSE_SMTP_PORT_NUMBER"; do
-            is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set."
+        for empty_env_var in "DISCOURSE_SMTP_USER" "DISCOURSE_SMTP_PASSWORD"; do
+            is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
         done
+        is_empty_value "$DISCOURSE_SMTP_PORT_NUMBER" && print_validation_error "The DISCOURSE_SMTP_PORT_NUMBER environment variable is empty or not set."
+        ! is_empty_value "$DISCOURSE_SMTP_PORT_NUMBER" && check_valid_port "DISCOURSE_SMTP_PORT_NUMBER"
         ! is_empty_value "$DISCOURSE_SMTP_PROTOCOL" && check_multi_value "DISCOURSE_SMTP_PROTOCOL" "ssl tls"
     fi
 
