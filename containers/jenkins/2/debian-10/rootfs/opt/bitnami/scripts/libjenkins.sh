@@ -177,13 +177,20 @@ jenkins_validate() {
             print_validation_error "The allowed values for ${1} are: yes no"
         fi
     }
+    check_valid_port() {
+        local port_var="${1:?missing port variable}"
+        local err
+        if ! err="$(validate_port "${!port_var}")"; then
+            print_validation_error "An invalid port was specified in the environment variable ${port_var}: ${err}."
+        fi
+    }
 
     check_yes_no_value "JENKINS_SKIP_BOOTSTRAP"
 
     # Validate ports
-    ! is_empty_value "$JENKINS_HTTP_PORT_NUMBER" && validate_port "$JENKINS_HTTP_PORT_NUMBER"
-    ! is_empty_value "$JENKINS_HTTPS_PORT_NUMBER" && validate_port "$JENKINS_HTTPS_PORT_NUMBER"
-    ! is_empty_value "$JENKINS_JNLP_PORT_NUMBER" && validate_port "$JENKINS_JNLP_PORT_NUMBER"
+    ! is_empty_value "$JENKINS_HTTP_PORT_NUMBER" && check_valid_port "JENKINS_HTTP_PORT_NUMBER"
+    ! is_empty_value "$JENKINS_HTTPS_PORT_NUMBER" && check_valid_port "JENKINS_HTTPS_PORT_NUMBER"
+    ! is_empty_value "$JENKINS_JNLP_PORT_NUMBER" && check_valid_port "JENKINS_JNLP_PORT_NUMBER"
     check_conflicting_ports "JENKINS_HTTP_PORT_NUMBER" "JENKINS_HTTPS_PORT_NUMBER" "JENKINS_JNLP_PORT_NUMBER"
 
     # Validate host
