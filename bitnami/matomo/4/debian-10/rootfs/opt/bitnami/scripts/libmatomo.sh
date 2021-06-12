@@ -50,12 +50,10 @@ matomo_validate() {
         fi
     }
 
-    check_allowed_port() {
+    check_valid_port() {
         local port_var="${1:?missing port variable}"
-        local -a validate_port_args=()
-        ! am_i_root && validate_port_args+=("-unprivileged")
-        validate_port_args+=("${!port_var}")
-        if ! err=$(validate_port "${validate_port_args[@]}"); then
+        local err
+        if ! err="$(validate_port "${!port_var}")"; then
             print_validation_error "An invalid port was specified in the environment variable ${port_var}: ${err}."
         fi
     }
@@ -80,8 +78,7 @@ matomo_validate() {
             is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
         done
         is_empty_value "$MATOMO_SMTP_PORT_NUMBER" && print_validation_error "The MATOMO_SMTP_PORT_NUMBER environment variable is empty or not set."
-
-        ! is_empty_value "$MATOMO_SMTP_PORT_NUMBER" && validate_port "$MATOMO_SMTP_PORT_NUMBER"
+        ! is_empty_value "$MATOMO_SMTP_PORT_NUMBER" && check_valid_port "MATOMO_SMTP_PORT_NUMBER"
         ! is_empty_value "$MATOMO_SMTP_PROTOCOL" && check_multi_value "MATOMO_SMTP_PROTOCOL" "ssl tls none"
         ! is_empty_value "$MATOMO_SMTP_AUTH" && check_multi_value "MATOMO_SMTP_AUTH" "Plain Login Crammd5"
     fi
