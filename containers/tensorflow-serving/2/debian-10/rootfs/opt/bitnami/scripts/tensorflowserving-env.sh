@@ -55,7 +55,7 @@ export PATH="${TENSORFLOW_SERVING_BASE_DIR}/serving/bazel-bin/tensorflow_serving
 
 # Persitence
 export TENSORFLOW_SERVING_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/tensorflow-serving"
-export TENSORFLOW_SERVING_MODEL_DATA="${BITNAMI_ROOT_DIR}/model-data"
+export TENSORFLOW_SERVING_MODEL_DATA="${BITNAMI_VOLUME_DIR}/model-data"
 
 # Tensorflow parameters
 export TENSORFLOW_SERVING_ENABLE_MONITORING="${TENSORFLOW_SERVING_ENABLE_MONITORING:-no}"
