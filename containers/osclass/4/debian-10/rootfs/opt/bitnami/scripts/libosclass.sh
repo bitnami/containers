@@ -61,11 +61,18 @@ osclass_validate() {
             warn "Hostname ${1} could not be resolved, this could lead to connection issues"
         fi
     }
+    check_valid_port() {
+        local port_var="${1:?missing port variable}"
+        local err
+        if ! err="$(validate_port "${!port_var}")"; then
+            print_validation_error "An invalid port was specified in the environment variable ${port_var}: ${err}."
+        fi
+    }
 
     check_empty_value "OSCLASS_WEB_TITLE"
     ! is_empty_value "$OSCLASS_SKIP_BOOTSTRAP" && check_yes_no_value "OSCLASS_SKIP_BOOTSTRAP"
     ! is_empty_value "$OSCLASS_DATABASE_HOST" && check_resolved_hostname "$OSCLASS_DATABASE_HOST"
-    ! is_empty_value "$OSCLASS_DATABASE_PORT_NUMBER" && validate_port "$OSCLASS_DATABASE_PORT_NUMBER"
+    ! is_empty_value "$OSCLASS_DATABASE_PORT_NUMBER" && check_valid_port "OSCLASS_DATABASE_PORT_NUMBER"
 
     # Validate credentials
     if is_boolean_yes "${ALLOW_EMPTY_PASSWORD:-}"; then
@@ -78,9 +85,11 @@ osclass_validate() {
 
     # Validate SMTP credentials
     if ! is_empty_value "$OSCLASS_SMTP_HOST"; then
-        for empty_env_var in "OSCLASS_SMTP_USER" "OSCLASS_SMTP_PASSWORD" "OSCLASS_SMTP_PORT_NUMBER"; do
-            is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set."
+        for empty_env_var in "OSCLASS_SMTP_USER" "OSCLASS_SMTP_PASSWORD"; do
+            is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
         done
+        is_empty_value "$OSCLASS_SMTP_PORT_NUMBER" && warn "The OSCLASS_SMTP_PORT_NUMBER environment variable is empty or not set."
+        ! is_empty_value "$OSCLASS_SMTP_PORT_NUMBER" && check_valid_port "OSCLASS_SMTP_PORT_NUMBER"
         ! is_empty_value "$OSCLASS_SMTP_PROTOCOL" && check_multi_value "OSCLASS_SMTP_PROTOCOL" "ssl tls"
     fi
 
