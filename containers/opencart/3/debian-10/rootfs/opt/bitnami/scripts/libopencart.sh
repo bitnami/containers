@@ -49,6 +49,13 @@ opencart_validate() {
             print_validation_error "The allowed values for ${1} are: ${2}"
         fi
     }
+    check_valid_port() {
+        local port_var="${1:?missing port variable}"
+        local err
+        if ! err="$(validate_port "${!port_var}")"; then
+            print_validation_error "An invalid port was specified in the environment variable ${port_var}: ${err}."
+        fi
+    }
 
     # Validate credentials
     if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
@@ -65,7 +72,7 @@ opencart_validate() {
             is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
         done
         is_empty_value "$OPENCART_SMTP_PORT_NUMBER" && print_validation_error "The OPENCART_SMTP_PORT_NUMBER environment variable is empty or not set."
-
+        ! is_empty_value "$OPENCART_SMTP_PORT_NUMBER" && check_valid_port "OPENCART_SMTP_PORT_NUMBER"
         ! is_empty_value "$OPENCART_SMTP_PROTOCOL" && check_multi_value "OPENCART_SMTP_PROTOCOL" "ssl tls"
     fi
 
