@@ -19,10 +19,5 @@ print_welcome_page
 
 info "** Starting tensorflow resnet **"
 
-if ! retry_while "wait-for-port --host $TF_RESNET_SERVING_HOST --timeout 10 $TF_RESNET_SERVING_PORT_NUMBER" ; then
-    error "Unable to connect to host $TF_RESNET_SERVING_HOST"
-    exit 1
-fi
-
 echo ""
 exec "$@"
