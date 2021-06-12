@@ -36,7 +36,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`5`, `5-debian-10`, `5.7.2`, `5.7.2-debian-10-r24`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.7.2-debian-10-r24/5/debian-10/Dockerfile)
+- [`5`, `5-debian-10`, `5.7.2`, `5.7.2-debian-10-r25`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.7.2-debian-10-r25/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress-nginx).
 
@@ -227,6 +227,7 @@ Available environment variables:
 - `WORDPRESS_FIRST_NAME`: WordPress user first name. Default: **FirstName**
 - `WORDPRESS_LAST_NAME`: WordPress user last name. Default: **LastName**
 - `WORDPRESS_BLOG_NAME`: WordPress blog name. Default: **User's blog**
+- `WORDPRESS_DATA_TO_PERSIST`: Space separated list of files and directories to persist.  Default: **"wp-config.php wp-content"**
 - `WORDPRESS_RESET_DATA_PERMISSIONS`: Force resetting ownership/permissions on persisted data when restarting WordPress, otherwise it assumes the ownership/permissions are correct. Ignored when running WP as non-root. Default: **no**
 - `WORDPRESS_TABLE_PREFIX`: Table prefix to use in WordPress. Default: **wp_**
 - `WORDPRESS_PLUGINS`: List of WordPress plugins to install and activate, separated via commas. Can also be set to `all` to activate all currently installed plugins, or `none` to skip. Default: **none**
