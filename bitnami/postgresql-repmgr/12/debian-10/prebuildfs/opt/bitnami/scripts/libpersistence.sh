@@ -31,7 +31,7 @@ persist_app() {
     local -r install_dir="${BITNAMI_ROOT_DIR}/${app}"
     local -r persist_dir="${BITNAMI_VOLUME_DIR}/${app}"
     # Persist the individual files
-    if [[ "${#files_to_persist[@]}" -lt 0 ]]; then
+    if [[ "${#files_to_persist[@]}" -le 0 ]]; then
         warn "No files are configured to be persisted"
         return
     fi
@@ -87,7 +87,7 @@ restore_persisted_app() {
     local -r install_dir="${BITNAMI_ROOT_DIR}/${app}"
     local -r persist_dir="${BITNAMI_VOLUME_DIR}/${app}"
     # Restore the individual persisted files
-    if [[ "${#files_to_restore[@]}" -lt 0 ]]; then
+    if [[ "${#files_to_restore[@]}" -le 0 ]]; then
         warn "No persisted files are configured to be restored"
         return
     fi
