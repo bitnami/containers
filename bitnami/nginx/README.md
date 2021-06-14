@@ -407,7 +407,7 @@ Below is an example Dockerfile to build and install the NGINX Perl module (`ngx_
 
 ```Dockerfile
 ARG NGINX_VERSION=1.19.6
-ARG BITNAMI_NGINX_REVISION=r0
+ARG BITNAMI_NGINX_REVISION=r1
 ARG BITNAMI_NGINX_TAG=${NGINX_VERSION}-debian-10-${BITNAMI_NGINX_REVISION}
 
 FROM bitnami/nginx:${BITNAMI_NGINX_TAG} AS builder
