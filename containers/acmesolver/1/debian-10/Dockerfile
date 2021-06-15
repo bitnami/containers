@@ -9,14 +9,14 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/acmesolver-1.3.1-0-linux-amd64-debian-10.tar.gz && \
-    echo "9cb08834af70c4ff99c4c66124122614a0d22d05b35064c1b142c544febbadbf  /tmp/bitnami/pkg/cache/acmesolver-1.3.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/acmesolver-1.3.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/acmesolver-1.3.1-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/acmesolver-1.4.0-0-linux-amd64-debian-10.tar.gz && \
+    echo "cfe5778a4c486307b53c750f69523e95fcc357d201feba91fa44f1192509d4c1  /tmp/bitnami/pkg/cache/acmesolver-1.4.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/acmesolver-1.4.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/acmesolver-1.4.0-0-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="acmesolver" \
-    BITNAMI_IMAGE_VERSION="1.3.1-debian-10-r52" \
+    BITNAMI_IMAGE_VERSION="1.4.0-debian-10-r0" \
     PATH="/opt/bitnami/acmesolver/bin:$PATH"
 
 WORKDIR /opt/bitnami/acmesolver
