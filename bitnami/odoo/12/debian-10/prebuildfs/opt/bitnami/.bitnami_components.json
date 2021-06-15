@@ -15,10 +15,10 @@
     },
     "odoo": {
         "arch": "amd64",
-        "digest": "a2f097dee1cabc74b2adcbbde20550da3a59b191c589f094bc715ff1bca01b3c",
+        "digest": "5373cef5b277a71f1a9bcb98be71340c56b8575868d376a0c1a46ad122297ac8",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "12.0.20210515-0"
+        "version": "12.0.20210615-0"
     },
     "postgresql-client": {
         "arch": "amd64",
