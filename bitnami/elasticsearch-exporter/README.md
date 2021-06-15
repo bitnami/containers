@@ -3,7 +3,7 @@
 
 Prometheus exporter for various metrics about ElasticSearch.
 
-[https://github.com/justwatchcom/elasticsearch_exporter](https://github.com/justwatchcom/elasticsearch_exporter)
+[https://github.com/prometheus-community/elasticsearch_exporter](https://github.com/prometheus-community/elasticsearch_exporter)
 
 # TL;DR
 
