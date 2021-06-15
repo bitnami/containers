@@ -49,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4.4`, `4.4-debian-10`, `4.4.6`, `4.4.6-debian-10-r31`, `latest` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.6-debian-10-r31/4.4/debian-10/Dockerfile)
-* [`4.2`, `4.2-debian-10`, `4.2.14`, `4.2.14-debian-10-r34` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.14-debian-10-r34/4.2/debian-10/Dockerfile)
+* [`4.2`, `4.2-debian-10`, `4.2.14`, `4.2.14-debian-10-r35` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.14-debian-10-r35/4.2/debian-10/Dockerfile)
 * [`4.0`, `4.0-debian-9`, `4.0.25`, `4.0.25-debian-9-r5` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.25-debian-9-r5/4.0/debian-9/Dockerfile)
 * [`3.6`, `3.6-debian-9`, `3.6.23`, `3.6.23-debian-9-r81` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.23-debian-9-r81/3.6/debian-9/Dockerfile)
 
