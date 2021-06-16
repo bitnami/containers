@@ -447,11 +447,7 @@ repmgr_postgresql_configuration() {
 repmgr_generate_repmgr_config() {
     info "Preparing repmgr configuration..."
 
-    if [[ -f "${REPMGR_MOUNTED_CONF_DIR}/repmgr.conf" ]]; then
-        info "Custom repmgr.conf file detected"
-        cp "${REPMGR_MOUNTED_CONF_DIR}/repmgr.conf" "$REPMGR_CONF_FILE"
-    else
-        cat << EOF >> "$REPMGR_CONF_FILE"
+    cat << EOF >> "${REPMGR_CONF_FILE}.tmp"
 event_notification_command='${REPMGR_EVENTS_DIR}/router.sh %n %e %s "%t" "%d"'
 ssh_options='-o "StrictHostKeyChecking no" -v'
 use_replication_slots='${REPMGR_USE_REPLICATION_SLOTS}'
@@ -474,10 +470,18 @@ data_directory='${POSTGRESQL_DATA_DIR}'
 async_query_timeout='${REPMGR_MASTER_RESPONSE_TIMEOUT}'
 pg_ctl_options='-o "--config-file=\"${POSTGRESQL_CONF_FILE}\" --external_pid_file=\"${POSTGRESQL_PID_FILE}\" --hba_file=\"${POSTGRESQL_PGHBA_FILE}\""'
 EOF
-        if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
-            echo "passfile='${REPMGR_PASSFILE_PATH}'" >> "$REPMGR_CONF_FILE"
-        fi
+
+    if [[ -f "${REPMGR_MOUNTED_CONF_DIR}/repmgr.conf" ]]; then
+        # remove from default the overrided keys, and append the desired conf
+        grep -v -f "${REPMGR_CONF_FILE}.tmp" "${REPMGR_MOUNTED_CONF_DIR}/repmgr.conf" | awk -F"=" '{print $1;}' > "${REPMGR_CONF_FILE}.keys" && grep -v -f "${REPMGR_CONF_FILE}.keys" "${REPMGR_CONF_FILE}.tmp" > "$REPMGR_CONF_FILE" && cat "${REPMGR_MOUNTED_CONF_DIR}/repmgr.conf" >> "$REPMGR_CONF_FILE"
+    else
+        cp "${REPMGR_CONF_FILE}.tmp" "${REPMGR_CONF_FILE}"
     fi
+
+    if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
+        echo "passfile='${REPMGR_PASSFILE_PATH}'" >> "$REPMGR_CONF_FILE"
+    fi
+
 }
 
 ########################
