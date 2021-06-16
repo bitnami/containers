@@ -492,8 +492,6 @@ mysql_initialize() {
     # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
     rm -f "$DB_PID_FILE"
 
-    mysql_copy_mounted_config
-
     debug "Ensuring expected directories/files exist"
     for dir in "$DB_DATA_DIR" "$DB_TMP_DIR" "$DB_LOGS_DIR" "$DB_GALERA_BOOTSTRAP_DIR"; do
         ensure_dir_exists "$dir"
@@ -501,14 +499,13 @@ mysql_initialize() {
     done
 
     if is_file_writable "$DB_CONF_FILE"; then
-        if is_mounted_dir_empty "$DB_GALERA_MOUNTED_CONF_DIR"; then
-            info "Updating 'my.cnf' with custom configuration"
-            mysql_update_custom_config
-            mysql_galera_update_custom_config
-        else
+        if ! is_mounted_dir_empty "$DB_GALERA_MOUNTED_CONF_DIR"; then
             info "Found mounted configuration directory"
             mysql_copy_mounted_config
         fi
+        info "Updating 'my.cnf' with custom configuration"
+        mysql_update_custom_config
+        mysql_galera_update_custom_config
         mysql_galera_configure_ssl
     else
         warn "The ${DB_FLAVOR} configuration file '${DB_CONF_FILE}' is not writable or does not exist. Configurations based on environment variables will not be applied for this file."
