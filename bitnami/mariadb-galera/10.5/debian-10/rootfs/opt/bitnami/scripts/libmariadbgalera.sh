@@ -332,6 +332,30 @@ EOF
 }
 
 ########################
+# Update MySQL/MariaDB Galera-specific ssl configuration with user custom inputs
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+mysql_galera_configure_ssl() {
+    if is_boolean_yes "$DB_ENABLE_TLS" && ! grep -q "socket.ssl_cert=" "$DB_TLS_CERT_FILE"; then
+        info "Setting ENABLE_TLS"
+        cat >> "$DB_CONF_FILE" <<EOF
+ssl_cert=${DB_TLS_CERT_FILE}
+ssl_key=${DB_TLS_KEY_FILE}
+ssl_ca=${DB_TLS_CA_FILE}
+wsrep_provider_options="socket.ssl_cert=${DB_TLS_CERT_FILE};socket.ssl_key=${DB_TLS_KEY_FILE};socket.ssl_ca=${DB_TLS_CA_FILE}"
+EOF
+    fi
+
+    # Avoid exit code of previous commands to affect the result of this function
+    true
+}
+
+########################
 # Update MySQL/MariaDB Galera-specific configuration file with user custom inputs
 # Globals:
 #   DB_*
@@ -360,16 +384,6 @@ mysql_galera_update_custom_config() {
     local galera_auth_string="${DB_GALERA_MARIABACKUP_USER}:${DB_GALERA_MARIABACKUP_PASSWORD}"
     local default_auth_string="${DB_GALERA_DEFAULT_MARIABACKUP_USER}:${DB_GALERA_DEFAULT_MARIABACKUP_PASSWORD}"
     [[ "$galera_auth_string" != "$default_auth_string" ]] && mysql_conf_set "wsrep_sst_auth" "$galera_auth_string" "galera"
-
-    if is_boolean_yes "$DB_ENABLE_TLS" && ! grep -q "socket.ssl_cert=" "$DB_TLS_CERT_FILE"; then
-        info "Setting ENABLE_TLS"
-        cat >> "$DB_CONF_FILE" <<EOF
-ssl_cert=${DB_TLS_CERT_FILE}
-ssl_key=${DB_TLS_KEY_FILE}
-ssl_ca=${DB_TLS_CA_FILE}
-wsrep_provider_options="socket.ssl_cert=${DB_TLS_CERT_FILE};socket.ssl_key=${DB_TLS_KEY_FILE};socket.ssl_ca=${DB_TLS_CA_FILE}"
-EOF
-    fi
 
     # Avoid exit code of previous commands to affect the result of this function
     true
@@ -485,9 +499,14 @@ mysql_initialize() {
     done
 
     if is_file_writable "$DB_CONF_FILE"; then
+        if ! is_mounted_dir_empty "$DB_GALERA_MOUNTED_CONF_DIR"; then
+            info "Found mounted configuration directory"
+            mysql_copy_mounted_config
+        fi
         info "Updating 'my.cnf' with custom configuration"
         mysql_update_custom_config
         mysql_galera_update_custom_config
+        mysql_galera_configure_ssl
     else
         warn "The ${DB_FLAVOR} configuration file '${DB_CONF_FILE}' is not writable or does not exist. Configurations based on environment variables will not be applied for this file."
     fi
@@ -559,6 +578,24 @@ EOF
 flush privileges;
 EOF
             fi
+        fi
+    fi
+}
+
+########################
+# Copy mounted configuration files
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+mysql_copy_mounted_config() {
+    if ! is_dir_empty "$DB_GALERA_MOUNTED_CONF_DIR"; then
+        if ! cp -Lr "$DB_GALERA_MOUNTED_CONF_DIR"/* "$DB_GALERA_CONF_DIR"; then
+            error "Issue copying mounted configuration files from $DB_GALERA_MOUNTED_CONF_DIR to $DB_GALERA_CONF_DIR. Make sure you are not mounting configuration files in $DB_GALERA_CONF_DIR and $DB_GALERA_MOUNTED_CONF_DIR at the same time"
+            exit 1
         fi
     fi
 }
@@ -738,6 +775,7 @@ EOF
         false
     fi
 }
+
 #!/bin/bash
 #
 # Library for mysql common
