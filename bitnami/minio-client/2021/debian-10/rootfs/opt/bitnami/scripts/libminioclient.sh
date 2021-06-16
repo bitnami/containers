@@ -100,5 +100,5 @@ minio_client_configure_server() {
 #########################
 minio_client_configure_local() {
     info "Adding local Minio host to 'mc' configuration..."
-    minio_client_execute config host add local "http://localhost:${MINIO_SERVER_PORT_NUMBER}" "${MINIO_SERVER_ACCESS_KEY}" "${MINIO_SERVER_SECRET_KEY}" >/dev/null 2>&1
+    minio_client_execute config host add local "${MINIO_SERVER_SCHEME}://localhost:${MINIO_SERVER_PORT_NUMBER}" "${MINIO_SERVER_ACCESS_KEY}" "${MINIO_SERVER_SECRET_KEY}" >/dev/null 2>&1
 }
