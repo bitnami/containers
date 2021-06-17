@@ -481,7 +481,6 @@ EOF
     if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
         echo "passfile='${REPMGR_PASSFILE_PATH}'" >> "$REPMGR_CONF_FILE"
     fi
-    
 }
 
 ########################
