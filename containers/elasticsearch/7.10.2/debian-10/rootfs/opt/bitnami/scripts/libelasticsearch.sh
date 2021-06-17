@@ -363,7 +363,11 @@ elasticsearch_configure_node_type() {
 #   None
 #########################
 elasticsearch_set_heap_size() {
-    local heap_size
+    local heap_size es_version es_major_version es_minor_version
+    es_version="$(elasticsearch_get_version)"
+    es_major_version="$(get_sematic_version "$es_version" 1)"
+    es_minor_version="$(get_sematic_version "$es_version" 2)"
+
     if [[ -n "$ELASTICSEARCH_HEAP_SIZE" ]]; then
         debug "Using specified values for Xmx and Xms heap options..."
         heap_size="$ELASTICSEARCH_HEAP_SIZE"
@@ -388,8 +392,17 @@ elasticsearch_set_heap_size() {
         fi
     fi
     debug "Setting '-Xmx${heap_size} -Xms${heap_size}' heap options..."
-    replace_in_file "${ELASTICSEARCH_CONF_DIR}/jvm.options" "-Xmx[0-9]+[mg]+" "-Xmx${heap_size}"
-    replace_in_file "${ELASTICSEARCH_CONF_DIR}/jvm.options" "-Xms[0-9]+[mg]+" "-Xms${heap_size}"
+    # Elasticsearch > 7.10 encourages to customize the heap settings through a file in 'jvm.options.d'
+    # Previous versions need to update the 'jvm.options' file
+    if [[ "$es_major_version" -ge 7 && "$es_minor_version" -gt 10 ]]; then
+        cat > "${ELASTICSEARCH_CONF_DIR}/jvm.options.d/heap.options" << EOF
+-Xms${heap_size}
+-Xmx${heap_size}
+EOF
+    else
+        replace_in_file "${ELASTICSEARCH_CONF_DIR}/jvm.options" "-Xmx[0-9]+[mg]+" "-Xmx${heap_size}"
+        replace_in_file "${ELASTICSEARCH_CONF_DIR}/jvm.options" "-Xms[0-9]+[mg]+" "-Xms${heap_size}"
+    fi
 }
 
 ########################
@@ -428,6 +441,7 @@ migrate_old_data() {
 #   None
 #########################
 elasticsearch_initialize() {
+    local es_version es_major_version es_minor_version
     info "Configuring/Initializing Elasticsearch..."
 
     # This fixes an issue where the trap would kill the entrypoint.sh, if a PID was left over from a previous run
@@ -457,20 +471,6 @@ elasticsearch_initialize() {
         am_i_root && is_mounted_dir_empty "$dir" && chown -R "$ELASTICSEARCH_DAEMON_USER:$ELASTICSEARCH_DAEMON_GROUP" "$dir"
     done
 
-    if is_file_writable "${ELASTICSEARCH_CONF_DIR}/jvm.options"; then
-        if is_boolean_yes "$ELASTICSEARCH_DISABLE_JVM_HEAP_DUMP"; then
-            info "Disabling JVM heap dumps..."
-            replace_in_file "${ELASTICSEARCH_CONF_DIR}/jvm.options" "-XX:[+]HeapDumpOnOutOfMemoryError" "# -XX:+HeapDumpOnOutOfMemoryError"
-        fi
-        if is_boolean_yes "$ELASTICSEARCH_DISABLE_GC_LOGS"; then
-            info "Disabling JVM GC logs..."
-            replace_in_file "${ELASTICSEARCH_CONF_DIR}/jvm.options" "8:-Xloggc:logs[/]gc.log" "# 8:-Xloggc:logs/gc.log"
-        fi
-        elasticsearch_set_heap_size
-    else
-        warn "The '${ELASTICSEARCH_CONF_DIR}/jvm.options' file is not writable. Configurations based on environment variables will not be applied for this file"
-    fi
-
     if [[ -f "$ELASTICSEARCH_CONF_FILE" ]]; then
         info "Custom configuration file detected, using it..."
     else
@@ -484,15 +484,31 @@ elasticsearch_initialize() {
         elasticsearch_cluster_configuration
         elasticsearch_configure_node_type
         elasticsearch_custom_configuration
-        ELASTICSEARCH_VERSION="$(elasticsearch_get_version)"
-        ELASTICSEARCH_MAJOR_VERSION="$(get_sematic_version "$ELASTICSEARCH_VERSION" 1)"
-        ELASTICSEARCH_MINOR_VERSION="$(get_sematic_version "$ELASTICSEARCH_VERSION" 2)"
+        es_version="$(elasticsearch_get_version)"
+        es_major_version="$(get_sematic_version "$es_version" 1)"
+        es_minor_version="$(get_sematic_version "$es_version" 2)"
         # Elasticsearch <= 7.10.2 is packaged without x-pack so adding this line "xpack.ml.enabled:false" will cause a failure
         # Latest Elasticseach releases install x-pack-ml  by default. Since we have faced some issues with this library on certain platforms,
         # currently we are disabling this machine learning module whatsoever by defining "xpack.ml.enabled=false" in the "elasicsearch.yml" file
-        if [[ "$ELASTICSEARCH_MAJOR_VERSION" -ge 7 && "$ELASTICSEARCH_MINOR_VERSION" -gt 10 && ! -d "${ELASTICSEARCH_BASE_DIR}/modules/x-pack-ml/platform/linux-x86_64/lib" ]]; then
+        if [[ "$es_major_version" -ge 7 && "$es_minor_version" -gt 10 && ! -d "${ELASTICSEARCH_BASE_DIR}/modules/x-pack-ml/platform/linux-x86_64/lib" ]]; then
             elasticsearch_conf_set xpack.ml.enabled "false"
         fi
+    fi
+
+    es_version="$(elasticsearch_get_version)"
+    es_major_version="$(get_sematic_version "$es_version" 1)"
+    if is_file_writable "${ELASTICSEARCH_CONF_DIR}/jvm.options" && ([[ "$es_major_version" -le 6 ]] || is_file_writable "${ELASTICSEARCH_CONF_DIR}/jvm.options.d"); then
+        if is_boolean_yes "$ELASTICSEARCH_DISABLE_JVM_HEAP_DUMP"; then
+            info "Disabling JVM heap dumps..."
+            replace_in_file "${ELASTICSEARCH_CONF_DIR}/jvm.options" "-XX:[+]HeapDumpOnOutOfMemoryError" "# -XX:+HeapDumpOnOutOfMemoryError"
+        fi
+        if is_boolean_yes "$ELASTICSEARCH_DISABLE_GC_LOGS"; then
+            info "Disabling JVM GC logs..."
+            replace_in_file "${ELASTICSEARCH_CONF_DIR}/jvm.options" "8:-Xloggc:logs[/]gc.log" "# 8:-Xloggc:logs/gc.log"
+        fi
+        elasticsearch_set_heap_size
+    else
+        warn "The JVM options configuration files are not writable. Configurations based on environment variables will not be applied"
     fi
 }
 
