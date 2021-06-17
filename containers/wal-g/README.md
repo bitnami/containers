@@ -28,7 +28,7 @@ $ docker run --name wal-g bitnami/wal-g:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.0.0`, `1.0.0-debian-10-r1` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wal-g/blob/1.0.0-debian-10-r1/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.0.0`, `1.0.0-debian-10-r2` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wal-g/blob/1.0.0-debian-10-r2/1/debian-10/Dockerfile)
 * [`0`, `0-debian-10`, `0.2.19`, `0.2.19-debian-10-r181`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wal-g/blob/0.2.19-debian-10-r181/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wal-g GitHub repo](https://github.com/bitnami/bitnami-docker-wal-g).
@@ -64,6 +64,10 @@ $ docker run --rm --name wal-g bitnami/wal-g:latest -- wal-g --version
 ```
 
 Check the [official WAL-G documentation](https://github.com/wal-g/wal-g#configuration) for a list of the available parameters.
+
+# Branch Deprecation Notice
+
+WAL-G's branch 0 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 07-17-2021
 
 # Contributing
 
