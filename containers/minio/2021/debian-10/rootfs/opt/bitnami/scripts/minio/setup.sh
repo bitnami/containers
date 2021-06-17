@@ -14,6 +14,7 @@ set -o pipefail
 # Load MinIO environment variables
 eval "$(minio_env)"
 export MINIO_SERVER_PORT_NUMBER="$MINIO_PORT_NUMBER"
+export MINIO_SERVER_SCHEME="$MINIO_SCHEME"
 export MINIO_SERVER_ACCESS_KEY="${MINIO_ACCESS_KEY:-}"
 export MINIO_SERVER_SECRET_KEY="${MINIO_SECRET_KEY:-}"
 # Load MinIO Client environment variables
