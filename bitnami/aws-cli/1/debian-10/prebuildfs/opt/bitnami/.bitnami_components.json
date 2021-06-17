@@ -1,10 +1,10 @@
 {
     "aws-cli": {
         "arch": "amd64",
-        "digest": "699a27a139317e13b66bf6a1300c8cd1831094261077a69358c4b1fa7c82a02b",
+        "digest": "b6c17c75bd8a76023c0fe95fcbc9019b97614751530ad6d1a5cb3fd49c3f3e3f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.19.95-0"
+        "version": "1.19.96-0"
     },
     "python": {
         "arch": "amd64",
