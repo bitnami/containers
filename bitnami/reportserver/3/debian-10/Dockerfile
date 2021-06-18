@@ -9,16 +9,16 @@ RUN install_packages ca-certificates curl fontconfig fonts-dejavu-extra gzip lib
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install java-11.0.11-0 --checksum 8cf28afc1090b0fec1ad841012ead25b59d2d5f4212742c3d62e6007ef57850b
-RUN bitnami-pkg unpack tomcat-9.0.46-3 --checksum 5e266d8dbbc5788ab85fae6e08299664411bbb50e35603b5679da9f5a006f5b8
+RUN bitnami-pkg unpack tomcat-9.0.48-0 --checksum 3797aa92f0ca44e34faca2799bf5f1604f5c65b08c347e7ebd99c9cbad7cc1c4
 RUN bitnami-pkg unpack mysql-client-10.3.29-0 --checksum 5bf8f1ed022c8ad75a4db5b8b72ae54ce427bff628d7e4025c5b5e67b876708d
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
-RUN bitnami-pkg unpack reportserver-3.7.0-6044-0 --checksum 301bbc005ca36a8e843399f0e28f328f207a78cabf6e3b0a46f3ee0f8673f9fc
+RUN bitnami-pkg unpack reportserver-3.7.0-6044-1 --checksum 2fee0935348a9a26425cc666ead61b7cae8ac7f1e68944a3c355a1ad5f8251ba
 RUN bitnami-pkg install gosu-1.13.0-0 --checksum fd7257c2736164d02832dbf72e2c1ed9d875bf3e32f0988520796bc503330129
 
 COPY rootfs /
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="reportserver" \
-    BITNAMI_IMAGE_VERSION="3.7.0-6044-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="3.7.0-6044-debian-10-r1" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
