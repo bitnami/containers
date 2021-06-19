@@ -8,10 +8,10 @@
     },
     "drupal": {
         "arch": "amd64",
-        "digest": "6a6e03bfbe76a8de2f64e4d64148ec2699af8ae384b32245fa031b7deea44b6d",
+        "digest": "8e82bc8430b5cbf02ffc0ce3fb86be9d344d6046de13e046ce624f7eda5d777e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "9.1.10-0"
+        "version": "9.2.0-0"
     },
     "gosu": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "f322ae11b499cba2f9a5af3e4d3143b9041362a5e0a9cd23e037049ba68275fc",
+        "digest": "6ffc1ee70ea2e3db51e3a5d21414467eb8c15fc7c4728583f11b99851c391d12",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.28-1"
+        "version": "7.3.28-2"
     },
     "render-template": {
         "arch": "amd64",
