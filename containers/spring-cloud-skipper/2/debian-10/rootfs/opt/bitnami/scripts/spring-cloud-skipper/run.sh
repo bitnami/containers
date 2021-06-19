@@ -20,7 +20,7 @@ info "** Starting Spring Cloud Skipper **"
 
 __run_cmd="java"
 read -r -a java_opts <<< "$JAVA_OPTS"
-__run_flags=("-jar" "-Duser.home=${HOME}" "${SPRING_CLOUD_SKIPPER_BASE_DIR}/spring-cloud-skipper.jar" "--spring.config.additional-location=${SPRING_CLOUD_SKIPPER_CONF_FILE}" "$@")
+__run_flags=("-jar" "-Duser.home=${HOME}" "${SPRING_CLOUD_SKIPPER_BASE_DIR}/spring-cloud-skipper.jar" "--spring.config.additional-location=optional:${SPRING_CLOUD_SKIPPER_CONF_FILE}" "$@")
 [[ "${#java_opts[@]}" -gt 0 ]] && __run_flags=("${java_opts[@]}" "${__run_flags[@]}")
 
 if am_i_root; then
