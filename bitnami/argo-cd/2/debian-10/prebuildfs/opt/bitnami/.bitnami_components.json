@@ -1,9 +1,9 @@
 {
     "argo-cd": {
         "arch": "amd64",
-        "digest": "7aabfc4eec886ef6c57535f2b284246dad795d2b45d35304b8260bf10a2eb0d4",
+        "digest": "ea186d8daa83074faca3653c3f65d75f3ea847743cbc2904e7a333e92a00883e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.0.3-0"
+        "version": "2.0.3-1"
     }
 }
