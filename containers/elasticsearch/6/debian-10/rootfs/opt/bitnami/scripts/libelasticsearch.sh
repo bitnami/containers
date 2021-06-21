@@ -364,6 +364,9 @@ elasticsearch_configure_node_type() {
 #########################
 elasticsearch_set_heap_size() {
     local heap_size es_version es_major_version es_minor_version
+
+    # Remove heap.options if it already exists
+    rm -f "${ELASTICSEARCH_CONF_DIR}/jvm.options.d/heap.options"
     es_version="$(elasticsearch_get_version)"
     es_major_version="$(get_sematic_version "$es_version" 1)"
     es_minor_version="$(get_sematic_version "$es_version" 2)"
