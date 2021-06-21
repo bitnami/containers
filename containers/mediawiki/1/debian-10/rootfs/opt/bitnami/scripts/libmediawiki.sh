@@ -66,6 +66,7 @@ mediawiki_validate() {
         for empty_env_var in "MEDIAWIKI_SMTP_USER" "MEDIAWIKI_SMTP_PASSWORD"; do
             is_empty_value "${!empty_env_var}" && warn "The ${empty_env_var} environment variable is empty or not set."
         done
+        check_yes_no_value "MEDIAWIKI_ENABLE_SMTP_AUTH"
         is_empty_value "$MEDIAWIKI_SMTP_PORT_NUMBER" && print_validation_error "The MEDIAWIKI_SMTP_PORT_NUMBER environment variable is empty or not set."
         ! is_empty_value "$MEDIAWIKI_SMTP_PORT_NUMBER" && check_valid_port "MEDIAWIKI_SMTP_PORT_NUMBER"
     fi
@@ -267,13 +268,15 @@ mediawiki_configure_smtp() {
     is_empty_value "$MEDIAWIKI_SMTP_HOST" && return
     info "Setting SMTP credentials"
     cat >>"$MEDIAWIKI_CONF_FILE" <<EOF
+
+# Configure SMTP server
 \$wgSMTP = array(
 'host' => '${MEDIAWIKI_SMTP_HOST}',
 'IDHost' => '${MEDIAWIKI_SMTP_HOST_ID}',
 'port' => ${MEDIAWIKI_SMTP_PORT_NUMBER},
 'username' => '${MEDIAWIKI_SMTP_USER}',
 'password' => '${MEDIAWIKI_SMTP_PASSWORD}',
-'auth' => true
+'auth' => $(php_convert_to_boolean "$MEDIAWIKI_ENABLE_SMTP_AUTH")
 );
 EOF
 }
