@@ -96,7 +96,7 @@ embed-server --server-config=${KEYCLOAK_CONF_FILE} --std-out=echo
 batch
 /subsystem=datasources/data-source=KeycloakDS: remove()
 /subsystem=datasources/data-source=KeycloakDS: add(jndi-name=java:jboss/datasources/KeycloakDS,enabled=true,use-java-context=true,use-ccm=true, connection-url=jdbc:postgresql://${KEYCLOAK_DATABASE_HOST}:${KEYCLOAK_DATABASE_PORT}/${KEYCLOAK_DATABASE_NAME}, driver-name=postgresql)
-/subsystem=datasources/data-source=KeycloakDS: write-attribute(name=user-name, value=${KEYCLOAK_DATABASE_USER})
+/subsystem=datasources/data-source=KeycloakDS: write-attribute(name=user-name, value=\${env.KEYCLOAK_DATABASE_USER})
 /subsystem=datasources/data-source=KeycloakDS: write-attribute(name=check-valid-connection-sql, value="SELECT 1")
 /subsystem=datasources/data-source=KeycloakDS: write-attribute(name=background-validation, value=true)
 /subsystem=datasources/data-source=KeycloakDS: write-attribute(name=background-validation-millis, value=60000)
@@ -111,7 +111,7 @@ EOF
         debug_execute jboss-cli.sh <<EOF
 embed-server --server-config=${KEYCLOAK_CONF_FILE} --std-out=echo
 batch
-/subsystem=datasources/data-source=KeycloakDS: write-attribute(name=password, value=${KEYCLOAK_DATABASE_PASSWORD})
+/subsystem=datasources/data-source=KeycloakDS: write-attribute(name=password, value=\${env.KEYCLOAK_DATABASE_PASSWORD})
 run-batch
 stop-embedded-server
 EOF
