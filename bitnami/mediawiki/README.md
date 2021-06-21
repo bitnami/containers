@@ -265,8 +265,9 @@ To configure Mediawiki to send email using SMTP you can set the following enviro
 - `MEDIAWIKI_SMTP_HOST`: SMTP host.
 - `MEDIAWIKI_SMTP_HOST_ID`: SMTP host ID. It is a MediaWiki-specific setting used to build the Message-ID email header. If not provided, it will default to the value of `MEDIAWIKI_SMTP_HOST`.
 - `MEDIAWIKI_SMTP_PORT`: SMTP port.
-- `MEDIAWIKI_SMTP_USER`: SMTP account user.
-- `MEDIAWIKI_SMTP_PASSWORD`: SMTP account password.
+- `MEDIAWIKI_SMTP_USER`: SMTP account user (if being used).
+- `MEDIAWIKI_SMTP_PASSWORD`: SMTP account password (if being used).
+- `MEDIAWIKI_ENABLE_SMTP_AUTH`: Whether to use authentication for SMTP server (yes or no).
 
 ##### PHP configuration
 
