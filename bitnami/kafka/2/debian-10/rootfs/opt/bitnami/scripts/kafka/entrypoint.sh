@@ -17,7 +17,7 @@ eval "$(kafka_env)"
 
 print_welcome_page
 
-if [[ "$*" = "/opt/bitnami/scripts/kafka/run.sh" || "$*" = "/run.sh" ]]; then
+if [[ "$*" = *"/opt/bitnami/scripts/kafka/run.sh"* || "$*" = *"/run.sh"* ]]; then
     info "** Starting Kafka setup **"
     /opt/bitnami/scripts/kafka/setup.sh
     info "** Kafka setup finished! **"

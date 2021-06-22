@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
-* [`2`, `2-debian-10`, `2.8.0`, `2.8.0-debian-10-r40`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.0-debian-10-r40/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.8.0`, `2.8.0-debian-10-r42`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.0-debian-10-r42/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
@@ -203,6 +203,8 @@ The configuration can easily be setup with the Bitnami Kafka Docker image using 
 * `KAFKA_CFG_TLS_TYPE`: Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`. Defaults: **JKS**.
 * `KAFKA_CLIENT_USERS`: Additional users to `KAFKA_CLIENT_USER` that will be created into Zookeeper when using SASL_SCRAM for client communications. Separated by commas. Default: **user**
 * `KAFKA_CLIENT_PASSWORDS`: Passwords for the users specified at`KAFKA_CLIENT_USERS`. Separated by commas. Default: **bitnami**
+* `KAFKA_CFG_MAX_PARTITION_FETCH_BYTES`:  The maximum amount of data per-partition the server will return. Default: 1048576
+* `KAFKA_CFG_MAX_REQUEST_SIZE`: The maximum size of a request in bytes. Default: 1048576
 
 Additionally, any environment variable beginning with `KAFKA_CFG_` will be mapped to its corresponding Kafka key. For example, use `KAFKA_CFG_BACKGROUND_THREADS` in order to set `background.threads` or `KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE` in order to configure `auto.create.topics.enable`.
 
