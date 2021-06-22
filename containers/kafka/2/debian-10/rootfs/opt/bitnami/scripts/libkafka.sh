@@ -129,6 +129,8 @@ export KAFKA_CFG_TLS_TYPE="${KAFKA_CFG_TLS_TYPE:-JKS}"
 export KAFKA_CFG_TLS_TYPE="${KAFKA_CFG_TLS_TYPE^^}"
 export KAFKA_CFG_TLS_CLIENT_AUTH="${KAFKA_CFG_TLS_CLIENT_AUTH:-required}"
 export KAFKA_CERTIFICATE_PASSWORD="${KAFKA_CERTIFICATE_PASSWORD:-}"
+export KAFKA_CFG_MAX_REQUEST_SIZE="${KAFKA_CFG_MAX_REQUEST_SIZE:-"1048576"}"
+export KAFKA_CFG_MAX_PARTITION_FETCH_BYTES="${KAFKA_CFG_MAX_PARTITION_FETCH_BYTES:-"1048576"}"
 EOF
     # Make compatible KAFKA_CLIENT_USERS/PASSWORDS with the old KAFKA_CLIENT_USER/PASSWORD
     [[ -n "${KAFKA_CLIENT_USER:-}" ]] && KAFKA_CLIENT_USERS="${KAFKA_CLIENT_USER:-},${KAFKA_CLIENT_USERS:-}"
@@ -645,6 +647,24 @@ kafka_configure_from_environment_variables() {
 }
 
 ########################
+# Configure Kafka configuration files to set up message sizes
+# Globals:
+#   KAFKA_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+kafka_configure_producer_consumer_message_sizes() {
+        if [[ -n "$KAFKA_CFG_MAX_REQUEST_SIZE" ]]; then
+            kafka_common_conf_set "$KAFKA_CONF_DIR/producer.properties" max.request.size "$KAFKA_CFG_MAX_REQUEST_SIZE"
+        fi
+        if [[ -n "$KAFKA_CFG_MAX_PARTITION_FETCH_BYTES" ]]; then
+            kafka_common_conf_set "$KAFKA_CONF_DIR/consumer.properties" max.partition.fetch.bytes "$KAFKA_CFG_MAX_PARTITION_FETCH_BYTES"
+        fi
+}
+
+########################
 # Initialize Kafka
 # Globals:
 #   KAFKA_*
@@ -699,6 +719,7 @@ kafka_initialize() {
         if [[ -n "${KAFKA_CFG_INTER_BROKER_LISTENER_NAME:-}" ]]; then
             remove_in_file "$KAFKA_CONF_FILE" "security.inter.broker.protocol" false
         fi
+        kafka_configure_producer_consumer_message_sizes
     fi
 }
 
