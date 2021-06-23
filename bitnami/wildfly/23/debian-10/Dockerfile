@@ -17,7 +17,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/wildfly/postunpack.sh
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="23.0.2-debian-10-r45" \
+    BITNAMI_IMAGE_VERSION="23.0.2-debian-10-r46" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:/opt/bitnami/common/bin:$PATH" \
     WILDFLY_HOME="/home/wildfly"
 
