@@ -8,9 +8,9 @@
     },
     "memcached": {
         "arch": "amd64",
-        "digest": "ba34c1a7f77068678199d5975d45132fab0e6f2fec923150ff94d145340c37af",
+        "digest": "6a25bd53f52c6e806c9b76e00465f87e7f4ac8d8898afaab2382131f3cd6c8ed",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.6.9-0"
+        "version": "1.6.9-1"
     }
 }

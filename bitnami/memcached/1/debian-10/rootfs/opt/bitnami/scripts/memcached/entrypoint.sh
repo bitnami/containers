@@ -17,7 +17,7 @@ set -o pipefail
 
 print_welcome_page
 
-if [[ "$*" = "/opt/bitnami/scripts/memcached/run.sh" || "$*" = "/run.sh" ]]; then
+if [[ "$*" = *"/opt/bitnami/scripts/memcached/run.sh"* || "$*" = *"/run.sh"* ]]; then
     info "** Starting Memcached setup **"
     /opt/bitnami/scripts/memcached/setup.sh
     info "** Memcached setup finished! **"
