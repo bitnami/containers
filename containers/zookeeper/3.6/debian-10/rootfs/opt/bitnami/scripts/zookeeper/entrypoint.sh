@@ -17,7 +17,7 @@ eval "$(zookeeper_env)"
 
 print_welcome_page
 
-if [[ "$*" = "/opt/bitnami/scripts/zookeeper/run.sh" || "$*" = "/run.sh" ]]; then
+if [[ "$*" = *"/opt/bitnami/scripts/zookeeper/run.sh"* || "$*" = *"/run.sh"* ]]; then
     info "** Starting ZooKeeper setup **"
     /opt/bitnami/scripts/zookeeper/setup.sh
     info "** ZooKeeper setup finished! **"
