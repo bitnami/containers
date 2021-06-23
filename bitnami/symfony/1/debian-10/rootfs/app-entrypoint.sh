@@ -12,7 +12,7 @@ export PROJECT_DIRECTORY="/app/$SYMFONY_PROJECT_NAME"
 
 echo "Starting application ..."
 
-if [ "$1" = "/run.sh" ]; then
+if [[ "$1" = *"/run.sh"* ]]; then
   # Create a Symfony app if not found
   if [ ! -d "$PROJECT_DIRECTORY" ] ; then
     log "Creating a project with symfony/skeleton"
