@@ -17,7 +17,7 @@ set -o pipefail
 
 print_welcome_page
 
-if [[ "$*" = *"/opt/bitnami/scripts/spring-cloud-dataflow/run.sh"* || "$*" = "/run.sh" ]]; then
+if [[ "$*" = *"/opt/bitnami/scripts/spring-cloud-dataflow/run.sh"* || "$*" = *"/run.sh"* ]]; then
     info "** Starting Spring Cloud Data Flow setup **"
     /opt/bitnami/scripts/spring-cloud-dataflow/setup.sh
     info "** Spring Cloud Data Flow setup finished! **"
