@@ -10,104 +10,9 @@
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/libservice.sh
 
 # Functions
-
-########################
-# Load global variables used on ZooKeeper configuration
-# Globals:
-#   ZOO_*
-# Arguments:
-#   None
-# Returns:
-#   Series of exports to be used as 'eval' arguments
-#########################
-zookeeper_env() {
-    cat <<"EOF"
-# Format log messages
-export MODULE=zookeeper
-export BITNAMI_DEBUG=${BITNAMI_DEBUG:-false}
-
-# Paths
-export ZOO_BASE_DIR="/opt/bitnami/zookeeper"
-export ZOO_DATA_DIR="/bitnami/zookeeper/data"
-export ZOO_DATA_LOG_DIR="${ZOO_DATA_LOG_DIR:-}"
-export ZOO_CONF_DIR="${ZOO_BASE_DIR}/conf"
-export ZOO_CONF_FILE="${ZOO_CONF_DIR}/zoo.cfg"
-export ZOO_LOG_DIR="${ZOO_BASE_DIR}/logs"
-export ZOO_BIN_DIR="${ZOO_BASE_DIR}/bin"
-
-# Users
-export ZOO_DAEMON_USER="zookeeper"
-export ZOO_DAEMON_GROUP="zookeeper"
-
-# Cluster configuration
-export ZOO_PORT_NUMBER="${ZOO_PORT_NUMBER:-2181}"
-export ZOO_SERVER_ID="${ZOO_SERVER_ID:-1}"
-export ZOO_SERVERS="${ZOO_SERVERS:-}"
-
-# Zookeeper settings
-export ZOO_TICK_TIME="${ZOO_TICK_TIME:-2000}"
-export ZOO_INIT_LIMIT="${ZOO_INIT_LIMIT:-10}"
-export ZOO_SYNC_LIMIT="${ZOO_SYNC_LIMIT:-5}"
-export ZOO_MAX_CNXNS="${ZOO_MAX_CNXNS:-0}"
-export ZOO_MAX_CLIENT_CNXNS="${ZOO_MAX_CLIENT_CNXNS:-60}"
-export ZOO_AUTOPURGE_INTERVAL="${ZOO_AUTOPURGE_INTERVAL:-0}"
-export ZOO_AUTOPURGE_RETAIN_COUNT="${ZOO_AUTOPURGE_RETAIN_COUNT:-3}"
-export ZOO_LOG_LEVEL="${ZOO_LOG_LEVEL:-INFO}"
-export ZOO_4LW_COMMANDS_WHITELIST="${ZOO_4LW_COMMANDS_WHITELIST:-srvr, mntr}"
-export ZOO_RECONFIG_ENABLED="${ZOO_RECONFIG_ENABLED:-no}"
-export ZOO_LISTEN_ALLIPS_ENABLED="${ZOO_LISTEN_ALLIPS_ENABLED:-no}"
-export ZOO_ENABLE_PROMETHEUS_METRICS="${ZOO_ENABLE_PROMETHEUS_METRICS:-no}"
-export ZOO_PROMETHEUS_METRICS_PORT_NUMBER="${ZOO_PROMETHEUS_METRICS_PORT_NUMBER:-7000}"
-export ZOO_MAX_SESSION_TIMEOUT="${ZOO_MAX_SESSION_TIMEOUT:-40000}"
-export ZOO_PRE_ALLOC_SIZE="${ZOO_PRE_ALLOC_SIZE:-65536}"
-export ZOO_SNAPCOUNT="${ZOO_SNAPCOUNT:-100000}"
-
-# Zookeeper TLS Settings
-export ZOO_TLS_CLIENT_ENABLE="${ZOO_TLS_CLIENT_ENABLE:-false}"
-export ZOO_TLS_PORT_NUMBER="${ZOO_TLS_PORT_NUMBER:-3181}"
-export ZOO_TLS_CLIENT_KEYSTORE_FILE="${ZOO_TLS_CLIENT_KEYSTORE_FILE:-}"
-export ZOO_TLS_CLIENT_KEYSTORE_PASSWORD="${ZOO_TLS_CLIENT_KEYSTORE_PASSWORD:-}"
-export ZOO_TLS_CLIENT_TRUSTSTORE_FILE="${ZOO_TLS_CLIENT_TRUSTSTORE_FILE:-}"
-export ZOO_TLS_CLIENT_TRUSTSTORE_PASSWORD="${ZOO_TLS_CLIENT_TRUSTSTORE_PASSWORD:-}"
-export ZOO_TLS_CLIENT_AUTH="${ZOO_TLS_CLIENT_AUTH:-need}"
-export ZOO_TLS_QUORUM_ENABLE="${ZOO_TLS_QUORUM_ENABLE:-false}"
-export ZOO_TLS_QUORUM_KEYSTORE_FILE="${ZOO_TLS_QUORUM_KEYSTORE_FILE:-}"
-export ZOO_TLS_QUORUM_KEYSTORE_PASSWORD="${ZOO_TLS_QUORUM_KEYSTORE_PASSWORD:-}"
-export ZOO_TLS_QUORUM_TRUSTSTORE_FILE="${ZOO_TLS_QUORUM_TRUSTSTORE_FILE:-}"
-export ZOO_TLS_QUORUM_TRUSTSTORE_PASSWORD="${ZOO_TLS_QUORUM_TRUSTSTORE_PASSWORD:-}"
-export ZOO_TLS_QUORUM_CLIENT_AUTH="${ZOO_TLS_QUORUM_CLIENT_AUTH:-need}"
-
-# Java settings
-export JVMFLAGS="${JVMFLAGS:-}"
-export ZOO_HEAP_SIZE="${ZOO_HEAP_SIZE:-1024}"
-
-# Authentication
-export ALLOW_ANONYMOUS_LOGIN="${ALLOW_ANONYMOUS_LOGIN:-no}"
-export ZOO_ENABLE_AUTH="${ZOO_ENABLE_AUTH:-no}"
-export ZOO_CLIENT_USER="${ZOO_CLIENT_USER:-}"
-export ZOO_SERVER_USERS="${ZOO_SERVER_USERS:-}"
-EOF
-    if [[ -f "${ZOO_CLIENT_PASSWORD_FILE:-}" ]]; then
-        cat <<"EOF"
-export ZOO_CLIENT_PASSWORD="$(< "${ZOO_CLIENT_PASSWORD_FILE}")"
-EOF
-    else
-        cat <<"EOF"
-export ZOO_CLIENT_PASSWORD="${ZOO_CLIENT_PASSWORD:-}"
-EOF
-    fi
-    if [[ -f "${ZOO_SERVER_PASSWORDS_FILE:-}" ]]; then
-        cat <<"EOF"
-export ZOO_SERVER_PASSWORDS="$(< "${ZOO_SERVER_PASSWORDS_FILE}")"
-EOF
-    else
-        cat <<"EOF"
-export ZOO_SERVER_PASSWORDS="${ZOO_SERVER_PASSWORDS:-}"
-EOF
-    fi
-}
 
 ########################
 # Validate settings in ZOO_* env vars
@@ -412,6 +317,7 @@ zookeeper_create_jaas_file() {
     done
     zookeeper_server_user_passwords="${zookeeper_server_user_passwords#\\n   };"
 
+    # TODO: Indent properly
     cat >"${ZOO_CONF_DIR}/zoo_jaas.conf" <<EOF
 Client {
     org.apache.zookeeper.server.auth.DigestLoginModule required
@@ -530,4 +436,36 @@ warn "You are probably using an old version of the bitnami/zookeeper Helm Chart.
 
 exec /opt/bitnami/scripts/entrypoint.sh /opt/bitnami/scripts/run.sh
 EOF
+}
+
+########################
+# Check if ZooKeeper is running
+# Globals:
+#   ZOO_PID_FILE
+# Arguments:
+#   None
+# Returns:
+#   Whether ZooKeeper is running
+########################
+is_zookeeper_running() {
+    local pid
+    pid="$(get_pid_from_file "$ZOO_PID_FILE")"
+    if [[ -n "$pid" ]]; then
+        is_service_running "$pid"
+    else
+        false
+    fi
+}
+
+########################
+# Check if ZooKeeper is running
+# Globals:
+#   ZOO_PID_FILE
+# Arguments:
+#   None
+# Returns:
+#   Whether ZooKeeper is not running
+########################
+is_zookeeper_not_running() {
+    ! is_zookeeper_running
 }
