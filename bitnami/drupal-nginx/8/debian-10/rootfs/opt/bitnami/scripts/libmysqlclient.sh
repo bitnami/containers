@@ -348,6 +348,8 @@ is_mysql_not_running() {
 # Wait for MySQL/MariaDB to be running
 # Globals:
 #   DB_TMP_DIR
+#   DB_STARTUP_WAIT_RETRIES
+#   DB_STARTUP_WAIT_SLEEP_TIME
 # Arguments:
 #   None
 # Returns:
@@ -355,8 +357,8 @@ is_mysql_not_running() {
 #########################
 wait_for_mysql() {
     local pid
-    local -r retries=300
-    local -r sleep_time=2
+    local -r retries="${DB_STARTUP_WAIT_RETRIES:-300}"
+    local -r sleep_time="${DB_STARTUP_WAIT_SLEEP_TIME:-2}"
     if ! retry_while is_mysql_running "$retries" "$sleep_time"; then
         error "MySQL failed to start"
         return 1
