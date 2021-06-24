@@ -13,7 +13,7 @@ set -o pipefail
 . /opt/bitnami/scripts/libkafka.sh
 
 # Load Kafka environment variables
-eval "$(kafka_env)"
+. /opt/bitnami/scripts/kafka-env.sh
 
 print_welcome_page
 

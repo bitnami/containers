@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
-* [`2`, `2-debian-10`, `2.8.0`, `2.8.0-debian-10-r42`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.0-debian-10-r42/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.8.0`, `2.8.0-debian-10-r43`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.0-debian-10-r43/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
@@ -186,8 +186,6 @@ The configuration can easily be setup with the Bitnami Kafka Docker image using 
 * `ALLOW_PLAINTEXT_LISTENER`: Allow to use the PLAINTEXT listener. Default: **no**.
 * `KAFKA_INTER_BROKER_USER`: Kafka inter broker communication user. Default: admin. Default: **user**.
 * `KAFKA_INTER_BROKER_PASSWORD`: Kafka inter broker communication password. Default: **bitnami**.
-* `KAFKA_CLIENT_USER`: Kafka client user. Deprecated in favor of `KAFKA_CLIENT_USERS`.
-* `KAFKA_CLIENT_PASSWORD`: Kafka client user password. Deprecated in favor of `KAFKA_CLIENT_PASSWORDS`.
 * `KAFKA_CERTIFICATE_PASSWORD`: Password for certificates. No defaults.
 * `KAFKA_HEAP_OPTS`: Kafka's Java Heap size. Default: **-Xmx1024m -Xms1024m**.
 * `KAFKA_ZOOKEEPER_PROTOCOL`: Authentication protocol for Zookeeper connections. Allowed protocols: **PLAINTEXT**, **SASL**, **SSL**, and **SASL_SSL**. Defaults: **PLAINTEXT**.
@@ -726,7 +724,7 @@ $ docker-compose up kafka
 
 ### 2.5.0-debian-10-r111
 
-* The `KAFKA_CLIENT_USER` AND `KAFKA-CLIENT-PASSWORD` have been deprecated in favor of `KAFKA_CLIENT_USERS` and `KAFKA_CLIENT_PASSWORDS`.
+* The `KAFKA_CLIENT_USER` AND `KAFKA_CLIENT_PASSWORD` have been deprecated in favor of `KAFKA_CLIENT_USERS` and `KAFKA_CLIENT_PASSWORDS`.
 
 ### 2.5.0-debian-10-r51
 
