@@ -13,9 +13,9 @@ set -o pipefail
 . /opt/bitnami/scripts/liblog.sh
 
 # Load ZooKeeper environment variables
-eval "$(zookeeper_env)"
+. /opt/bitnami/scripts/zookeeper-env.sh
 
-START_COMMAND=("${ZOO_BASE_DIR}/bin/zkServer.sh" "start-foreground")
+START_COMMAND=("${ZOO_BASE_DIR}/bin/zkServer.sh" "start-foreground" "$@")
 
 info "** Starting ZooKeeper **"
 if am_i_root; then
