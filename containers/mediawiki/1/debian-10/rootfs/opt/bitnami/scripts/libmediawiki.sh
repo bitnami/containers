@@ -268,8 +268,7 @@ mediawiki_configure_smtp() {
     is_empty_value "$MEDIAWIKI_SMTP_HOST" && return
     info "Setting SMTP credentials"
     cat >>"$MEDIAWIKI_CONF_FILE" <<EOF
-
-# Configure SMTP server
+// Configure SMTP server
 \$wgSMTP = array(
 'host' => '${MEDIAWIKI_SMTP_HOST}',
 'IDHost' => '${MEDIAWIKI_SMTP_HOST_ID}',

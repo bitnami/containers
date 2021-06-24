@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.36.0`, `1.36.0-debian-10-r19`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.36.0-debian-10-r19/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.36.0`, `1.36.0-debian-10-r20`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.36.0-debian-10-r20/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mediawiki GitHub repo](https://github.com/bitnami/bitnami-docker-mediawiki).
 
@@ -267,7 +267,7 @@ To configure Mediawiki to send email using SMTP you can set the following enviro
 - `MEDIAWIKI_SMTP_PORT`: SMTP port.
 - `MEDIAWIKI_SMTP_USER`: SMTP account user (if being used).
 - `MEDIAWIKI_SMTP_PASSWORD`: SMTP account password (if being used).
-- `MEDIAWIKI_ENABLE_SMTP_AUTH`: Whether to use authentication for SMTP server (yes or no).
+- `MEDIAWIKI_ENABLE_SMTP_AUTH`: Whether to use authentication for SMTP server. Valid values: `yes`, `no`. Default: **yes**
 
 ##### PHP configuration
 
