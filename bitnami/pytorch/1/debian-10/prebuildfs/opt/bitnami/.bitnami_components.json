@@ -6,18 +6,18 @@
         "type": "NAMI",
         "version": "1.13.0-0"
     },
-    "miniconda": {
+    "python": {
         "arch": "amd64",
-        "digest": "35d4fd9e2c401689d9880a5cd2fb8e099202320a70f025d5f93ca5b800e45d26",
+        "digest": "fa9904bbde303b906c4fd8d9c6d43e5d611994597951719eb04a93a7b4f8ff80",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.9.2-0"
+        "version": "3.7.10-6"
     },
     "pytorch": {
         "arch": "amd64",
-        "digest": "c75ac9b6db08ddb6c21b604ff9a5354bb3ad1652d9810a32bbddc868d3d9d38b",
+        "digest": "8d6b40252cefdeb3d92cc895965e19362892cbbb43e91c73542f829c084f8642",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.9.0-0"
+        "version": "1.9.0-1"
     }
 }

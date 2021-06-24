@@ -8,18 +8,18 @@ ENV HOME="/" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages acl ca-certificates curl gzip libc6 libffi6 libgcc1 libstdc++6 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "miniconda" "4.9.2-0" --checksum 35d4fd9e2c401689d9880a5cd2fb8e099202320a70f025d5f93ca5b800e45d26
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "pytorch" "1.9.0-0" --checksum c75ac9b6db08ddb6c21b604ff9a5354bb3ad1652d9810a32bbddc868d3d9d38b
+RUN install_packages acl ca-certificates curl gzip libbz2-1.0 libc6 libffi6 libgcc1 liblzma5 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 procps tar zlib1g
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.7.10-6" --checksum fa9904bbde303b906c4fd8d9c6d43e5d611994597951719eb04a93a7b4f8ff80
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "pytorch" "1.9.0-1" --checksum 8d6b40252cefdeb3d92cc895965e19362892cbbb43e91c73542f829c084f8642
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.13.0-0" --checksum fd7257c2736164d02832dbf72e2c1ed9d875bf3e32f0988520796bc503330129
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/pytorch/postunpack.sh
 ENV BITNAMI_APP_NAME="pytorch" \
-    BITNAMI_IMAGE_VERSION="1.9.0-debian-10-r2" \
-    LD_LIBRARY_PATH="/opt/bitnami/miniconda/lib/python3.7/site-packages/torch/lib/:/opt/bitnami/miniconda/lib/python3.7/site-packages/PIL/.libs/:$LD_LIBRARY_PATH" \
-    PATH="/opt/bitnami/miniconda/bin:/opt/bitnami/common/bin:$PATH"
+    BITNAMI_IMAGE_VERSION="1.9.0-debian-10-r3" \
+    LD_LIBRARY_PATH="/opt/bitnami/python/lib/python3.7/site-packages/torch/lib/:/opt/bitnami/python/lib/python3.7/site-packages/PIL/.libs/:$LD_LIBRARY_PATH" \
+    PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:$PATH"
 
 WORKDIR /app
 USER 1001
