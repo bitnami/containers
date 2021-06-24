@@ -17,7 +17,7 @@ set -o pipefail
 
 print_welcome_page
 
-if [[ "$*" = *"/opt/bitnami/scripts/spring-cloud-skipper/run.sh"* || "$*" = "/run.sh" ]]; then
+if [[ "$*" = *"/opt/bitnami/scripts/spring-cloud-skipper/run.sh"* || "$*" = *"/run.sh"* ]]; then
     info "** Starting Spring Cloud Skipper setup **"
     /opt/bitnami/scripts/spring-cloud-skipper/setup.sh
     info "** Spring Cloud Skipper setup finished! **"
