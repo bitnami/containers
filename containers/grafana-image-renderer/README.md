@@ -38,7 +38,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.0.1`, `3.0.1-debian-10-r0` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-image-renderer/blob/3.0.1-debian-10-r0/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.0.1`, `3.0.1-debian-10-r1` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-image-renderer/blob/3.0.1-debian-10-r1/3/debian-10/Dockerfile)
 * [`2`, `2-debian-10`, `2.1.1`, `2.1.1-debian-10-r32`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-image-renderer/blob/2.1.1-debian-10-r32/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana-image-renderer GitHub repo](https://github.com/bitnami/bitnami-docker-grafana-image-renderer).
@@ -200,6 +200,10 @@ Re-create your container from the new image:
 ```console
 $ docker run --name grafana-image-renderer bitnami/grafana-image-renderer:latest
 ```
+
+# Branch Deprecation Notice
+
+Grafana Image Renderer's branch 2 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 07-24-2021
 
 ## Contributing
 
