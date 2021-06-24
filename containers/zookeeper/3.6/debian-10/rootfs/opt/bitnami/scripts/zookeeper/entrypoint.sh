@@ -13,7 +13,7 @@ set -o pipefail
 . /opt/bitnami/scripts/libzookeeper.sh
 
 # Load ZooKeeper environment variables
-eval "$(zookeeper_env)"
+. /opt/bitnami/scripts/zookeeper-env.sh
 
 print_welcome_page
 
