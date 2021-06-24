@@ -10,6 +10,7 @@
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/libservice.sh
 
 # Functions
 
@@ -81,67 +82,6 @@ kafka_producer_consumer_conf_set() {
 }
 
 ########################
-# Load global variables used on Kafka configuration
-# Globals:
-#   KAFKA_*
-# Arguments:
-#   None
-# Returns:
-#   Series of exports to be used as 'eval' arguments
-#########################
-kafka_env() {
-    cat <<"EOF"
-export KAFKA_BASE_DIR="${KAFKA_BASE_DIR:-/opt/bitnami/kafka}"
-export KAFKA_VOLUME_DIR="${KAFKA_VOLUME_DIR:-/bitnami/kafka}"
-export KAFKA_HOME="$KAFKA_BASE_DIR"
-export KAFKA_OPTS="${KAFKA_OPTS:-}"
-export KAFKA_LOG_DIR="$KAFKA_BASE_DIR"/logs
-export KAFKA_CONF_DIR="${KAFKA_CONF_DIR:-"$KAFKA_BASE_DIR"/config}"
-export KAFKA_CONF_FILE="$KAFKA_CONF_DIR"/server.properties
-export KAFKA_MOUNTED_CONF_DIR="${KAFKA_MOUNTED_CONF_DIR:-${KAFKA_VOLUME_DIR}/config}"
-export KAFKA_CERTS_DIR="$KAFKA_CONF_DIR"/certs
-export KAFKA_DATA_DIR="$KAFKA_VOLUME_DIR"/data
-export KAFKA_INITSCRIPTS_DIR=/docker-entrypoint-initdb.d
-export KAFKA_DAEMON_USER="kafka"
-export KAFKA_DAEMON_GROUP="kafka"
-export PATH="${KAFKA_BASE_DIR}/bin:$PATH"
-export ALLOW_PLAINTEXT_LISTENER="${ALLOW_PLAINTEXT_LISTENER:-no}"
-export KAFKA_INTER_BROKER_USER="${KAFKA_INTER_BROKER_USER:-user}"
-export KAFKA_INTER_BROKER_PASSWORD="${KAFKA_INTER_BROKER_PASSWORD:-bitnami}"
-export KAFKA_CLIENT_USER="${KAFKA_CLIENT_USER:-}"
-export KAFKA_CLIENT_PASSWORD="${KAFKA_CLIENT_PASSWORD:-}"
-export KAFKA_HEAP_OPTS="${KAFKA_HEAP_OPTS:-"-Xmx1024m -Xms1024m"}"
-export KAFKA_ZOOKEEPER_PROTOCOL="${KAFKA_ZOOKEEPER_PROTOCOL:-"PLAINTEXT"}"
-export KAFKA_ZOOKEEPER_PASSWORD="${KAFKA_ZOOKEEPER_PASSWORD:-}"
-export KAFKA_ZOOKEEPER_USER="${KAFKA_ZOOKEEPER_USER:-}"
-export KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD="${KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD:-}"
-export KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD="${KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD:-}"
-export KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME="${KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME:-"true"}"
-export KAFKA_ZOOKEEPER_TLS_TYPE="${KAFKA_ZOOKEEPER_TLS_TYPE:-JKS}"
-export KAFKA_ZOOKEEPER_TLS_TYPE="${KAFKA_ZOOKEEPER_TLS_TYPE^^}"
-export KAFKA_CFG_ADVERTISED_LISTENERS="${KAFKA_CFG_ADVERTISED_LISTENERS:-"PLAINTEXT://:9092"}"
-export KAFKA_CFG_LISTENERS="${KAFKA_CFG_LISTENERS:-"PLAINTEXT://:9092"}"
-export KAFKA_CFG_ZOOKEEPER_CONNECT="${KAFKA_CFG_ZOOKEEPER_CONNECT:-"localhost:2181"}"
-export KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE="${KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE:-"true"}"
-export KAFKA_CFG_SASL_ENABLED_MECHANISMS="${KAFKA_CFG_SASL_ENABLED_MECHANISMS:-PLAIN,SCRAM-SHA-256,SCRAM-SHA-512}"
-export KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL="${KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL:-}"
-export KAFKA_CFG_TLS_TYPE="${KAFKA_CFG_TLS_TYPE:-JKS}"
-export KAFKA_CFG_TLS_TYPE="${KAFKA_CFG_TLS_TYPE^^}"
-export KAFKA_CFG_TLS_CLIENT_AUTH="${KAFKA_CFG_TLS_CLIENT_AUTH:-required}"
-export KAFKA_CERTIFICATE_PASSWORD="${KAFKA_CERTIFICATE_PASSWORD:-}"
-export KAFKA_CFG_MAX_REQUEST_SIZE="${KAFKA_CFG_MAX_REQUEST_SIZE:-"1048576"}"
-export KAFKA_CFG_MAX_PARTITION_FETCH_BYTES="${KAFKA_CFG_MAX_PARTITION_FETCH_BYTES:-"1048576"}"
-EOF
-    # Make compatible KAFKA_CLIENT_USERS/PASSWORDS with the old KAFKA_CLIENT_USER/PASSWORD
-    [[ -n "${KAFKA_CLIENT_USER:-}" ]] && KAFKA_CLIENT_USERS="${KAFKA_CLIENT_USER:-},${KAFKA_CLIENT_USERS:-}"
-    [[ -n "${KAFKA_CLIENT_PASSWORD:-}" ]] && KAFKA_CLIENT_PASSWORDS="${KAFKA_CLIENT_PASSWORD:-},${KAFKA_CLIENT_PASSWORDS:-}"
-    cat <<"EOF"
-export KAFKA_CLIENT_USERS="${KAFKA_CLIENT_USERS:-user}"
-export KAFKA_CLIENT_PASSWORDS="${KAFKA_CLIENT_PASSWORDS:-bitnami}"
-EOF
-}
-
-########################
 # Create alias for environment variable, so both can be used
 # Globals:
 #   None
@@ -205,8 +145,8 @@ kafka_create_alias_environment_variables() {
     kafka_declare_alias_env "KAFKA_CFG_MESSAGE_MAX_BYTES" "KAFKA_MAX_MESSAGE_BYTES"
     kafka_declare_alias_env "KAFKA_CFG_ZOOKEEPER_CONNECTION_TIMEOUT_MS" "KAFKA_ZOOKEEPER_CONNECT_TIMEOUT_MS"
     kafka_declare_alias_env "KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE" "KAFKA_AUTO_CREATE_TOPICS_ENABLE"
-    kafka_declare_alias_env "KAFKA_CLIENT_USER" "KAFKA_BROKER_USER"
-    kafka_declare_alias_env "KAFKA_CLIENT_PASSWORD" "KAFKA_BROKER_PASSWORD"
+    kafka_declare_alias_env "KAFKA_CLIENT_USERS" "KAFKA_BROKER_USER"
+    kafka_declare_alias_env "KAFKA_CLIENT_PASSWORDS" "KAFKA_BROKER_PASSWORD"
     for s in "${suffixes[@]}"; do
         kafka_declare_alias_env "KAFKA_CFG_${s}" "KAFKA_${s}"
     done
@@ -288,7 +228,7 @@ kafka_validate() {
             print_validation_error "In order to configure the TLS encryption for Kafka with PEM certs you must mount your kafka.keystore.pem, kafka.keystore.key and kafka.truststore.pem certs to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
         fi
     elif [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL ]]; then
-        if [[ -z "$KAFKA_CLIENT_PASSWORD" && -z "$KAFKA_CLIENT_PASSWORDS" ]] && [[ -z "$KAFKA_INTER_BROKER_PASSWORD" ]]; then
+        if [[ -z "$KAFKA_CLIENT_PASSWORDS" && -z "$KAFKA_INTER_BROKER_PASSWORD" ]]; then
             print_validation_error "In order to configure SASL authentication for Kafka, you must provide the SASL credentials. Set the environment variables KAFKA_CLIENT_USERS and KAFKA_CLIENT_PASSWORDS, to configure the credentials for SASL authentication with clients, or set the environment variables KAFKA_INTER_BROKER_USER and KAFKA_INTER_BROKER_PASSWORD, to configure the credentials for SASL authentication between brokers."
         fi
     elif ! is_boolean_yes "$ALLOW_PLAINTEXT_LISTENER"; then
@@ -656,12 +596,12 @@ kafka_configure_from_environment_variables() {
 #   None
 #########################
 kafka_configure_producer_consumer_message_sizes() {
-        if [[ -n "$KAFKA_CFG_MAX_REQUEST_SIZE" ]]; then
-            kafka_common_conf_set "$KAFKA_CONF_DIR/producer.properties" max.request.size "$KAFKA_CFG_MAX_REQUEST_SIZE"
-        fi
-        if [[ -n "$KAFKA_CFG_MAX_PARTITION_FETCH_BYTES" ]]; then
-            kafka_common_conf_set "$KAFKA_CONF_DIR/consumer.properties" max.partition.fetch.bytes "$KAFKA_CFG_MAX_PARTITION_FETCH_BYTES"
-        fi
+    if [[ -n "$KAFKA_CFG_MAX_REQUEST_SIZE" ]]; then
+        kafka_common_conf_set "$KAFKA_CONF_DIR/producer.properties" max.request.size "$KAFKA_CFG_MAX_REQUEST_SIZE"
+    fi
+    if [[ -n "$KAFKA_CFG_MAX_PARTITION_FETCH_BYTES" ]]; then
+        kafka_common_conf_set "$KAFKA_CONF_DIR/consumer.properties" max.partition.fetch.bytes "$KAFKA_CFG_MAX_PARTITION_FETCH_BYTES"
+    fi
 }
 
 ########################
@@ -721,6 +661,7 @@ kafka_initialize() {
         fi
         kafka_configure_producer_consumer_message_sizes
     fi
+    true
 }
 
 ########################
@@ -756,4 +697,50 @@ kafka_custom_init_scripts() {
         done
         touch "$KAFKA_VOLUME_DIR"/.user_scripts_initialized
     fi
+}
+
+########################
+# Check if Kafka is running
+# Globals:
+#   KAFKA_PID_FILE
+# Arguments:
+#   None
+# Returns:
+#   Whether Kafka is running
+########################
+is_kafka_running() {
+    local pid
+    pid="$(get_pid_from_file "$KAFKA_PID_FILE")"
+    if [[ -n "$pid" ]]; then
+        is_service_running "$pid"
+    else
+        false
+    fi
+}
+
+########################
+# Check if Kafka is running
+# Globals:
+#   KAFKA_PID_FILE
+# Arguments:
+#   None
+# Returns:
+#   Whether Kafka is not running
+########################
+is_kafka_not_running() {
+    ! is_kafka_running
+}
+
+########################
+# Stop Kafka
+# Globals:
+#   KAFKA_PID_FILE
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+kafka_stop() {
+    ! is_kafka_running && return
+    stop_service_using_pid "$KAFKA_PID_FILE" TERM
 }
