@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.9.0`, `1.9.0-debian-10-r2`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pytorch/blob/1.9.0-debian-10-r2/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.9.0`, `1.9.0-debian-10-r3`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pytorch/blob/1.9.0-debian-10-r3/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pytorch GitHub repo](https://github.com/bitnami/bitnami-docker-pytorch).
 
@@ -137,6 +137,12 @@ or using Docker Compose:
 ```console
 $ docker-compose up pytorch
 ```
+
+# Notable changes
+
+## 1.9.0-debian-10-r3
+
+This version removes miniconda in favour of pip. This creates a smaller container and least prone to security issues. Users extending this container with other packages will need to switch from conda to pip commands.
 
 # Contributing
 
