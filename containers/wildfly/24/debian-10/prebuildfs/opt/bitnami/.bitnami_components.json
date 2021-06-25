@@ -1,0 +1,23 @@
+{
+    "gosu": {
+        "arch": "amd64",
+        "digest": "fd7257c2736164d02832dbf72e2c1ed9d875bf3e32f0988520796bc503330129",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.13.0-0"
+    },
+    "java": {
+        "arch": "amd64",
+        "digest": "8cf28afc1090b0fec1ad841012ead25b59d2d5f4212742c3d62e6007ef57850b",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "11.0.11-0"
+    },
+    "wildfly": {
+        "arch": "amd64",
+        "digest": "02266aac77079f50fb0521b8322d79a73d3dbfb2910a2688b3e60384d2a26bd3",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "24.0.0-0"
+    }
+}
