@@ -8,10 +8,10 @@
     },
     "discourse": {
         "arch": "amd64",
-        "digest": "5e2ed95b410b123aad34a37ab999b863bd302fa8ed3e482e14ba9e4cbbf4c70e",
+        "digest": "84b81def8f1d7d23bda9be218e4cf32d506d6079decc80c3ff700c43206b5990",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.7.1-0"
+        "version": "2.7.4-0"
     },
     "git": {
         "arch": "amd64",
@@ -29,10 +29,10 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "445d6ffbde4c69c382f1d1614f014fb29c716756e6e91e9d5792bfb5268ea4d1",
+        "digest": "989d82a6cd0065bafccd59a681dac9417a3b0844dcaecc88ebeb8a2f69528589",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "14.17.0-0"
+        "version": "14.17.1-0"
     },
     "postgresql-client": {
         "arch": "amd64",

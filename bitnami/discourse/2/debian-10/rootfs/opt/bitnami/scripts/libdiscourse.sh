@@ -111,6 +111,7 @@ discourse_validate() {
         is_empty_value "$DISCOURSE_SMTP_PORT_NUMBER" && print_validation_error "The DISCOURSE_SMTP_PORT_NUMBER environment variable is empty or not set."
         ! is_empty_value "$DISCOURSE_SMTP_PORT_NUMBER" && check_valid_port "DISCOURSE_SMTP_PORT_NUMBER"
         ! is_empty_value "$DISCOURSE_SMTP_PROTOCOL" && check_multi_value "DISCOURSE_SMTP_PROTOCOL" "ssl tls"
+        check_multi_value "DISCOURSE_SMTP_AUTH" "plain login cram_md5"
     fi
 
     return "$error_code"
