@@ -8,7 +8,7 @@ services:
     volumes:
       - 'postgresql_data:/bitnami/postgresql'
   sonarqube:
-    image: docker.io/bitnami/sonarqube:7
+    image: docker.io/bitnami/sonarqube:8
     ports:
       - '80:9000'
     environment:
