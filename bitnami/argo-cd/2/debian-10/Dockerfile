@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN useradd -r -u 1001 -g root argo-cd
 
 ENV BITNAMI_APP_NAME="argo-cd" \
-    BITNAMI_IMAGE_VERSION="2.0.4-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="2.0.4-debian-10-r1" \
     PATH="/opt/bitnami/argo-cd/bin:$PATH"
 
 USER 1001
