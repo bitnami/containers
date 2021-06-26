@@ -17,7 +17,7 @@ set -o pipefail
 
 print_welcome_page
 
-if [[ "$*" = "/opt/bitnami/scripts/mongodb-sharded/run.sh" || "$*" = "/run.sh" ]]; then
+if [[ "$*" = *"/opt/bitnami/scripts/mongodb-sharded/run.sh"* || "$*" = *"/run.sh"* ]]; then
     info "** Starting MongoDB Sharded setup **"
     /opt/bitnami/scripts/mongodb-sharded/setup.sh
     info "** MongoDB Sharded setup finished! **"
