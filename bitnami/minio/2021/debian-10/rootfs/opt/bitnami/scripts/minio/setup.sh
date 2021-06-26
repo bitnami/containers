@@ -27,6 +27,10 @@ minio_regenerate_keys
 if is_boolean_yes "$MINIO_SKIP_CLIENT"; then
     debug "Skipping MinIO client configuration..."
 else
+    if [ "$MINIO_SERVER_SCHEME" == "https" ]; then
+        [ ! -d "${MINIO_CLIENT_CONFIGDIR}/certs/CAs" ] && mkdir -p "${MINIO_CLIENT_CONFIGDIR}/certs/CAs"
+        cp "${MINIO_CERTSDIR}/CAs/public.crt" "${MINIO_CLIENT_CONFIGDIR}/certs/CAs/"
+    fi
     # Start MinIO server in background
     minio_start_bg
     # Ensure MinIO Client is stopped when this script ends.
