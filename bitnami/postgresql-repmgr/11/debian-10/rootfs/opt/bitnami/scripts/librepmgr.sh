@@ -473,7 +473,7 @@ EOF
 
     if [[ -f "${REPMGR_MOUNTED_CONF_DIR}/repmgr.conf" ]]; then
         # remove from default the overrided keys, and append the desired conf
-        grep -v -f "${REPMGR_CONF_FILE}.tmp" "${REPMGR_MOUNTED_CONF_DIR}/repmgr.conf" | awk -F"=" '{print $1;}' > "${REPMGR_CONF_FILE}.keys" && grep -v -f "${REPMGR_CONF_FILE}.keys" "${REPMGR_CONF_FILE}.tmp" > "$REPMGR_CONF_FILE" && cat "${REPMGR_MOUNTED_CONF_DIR}/repmgr.conf" >> "$REPMGR_CONF_FILE"
+        grep -Fxvf "${REPMGR_CONF_FILE}.tmp" "${REPMGR_MOUNTED_CONF_DIR}/repmgr.conf" | awk -F"=" '{print $1;}' > "${REPMGR_CONF_FILE}.keys" && grep -v -f "${REPMGR_CONF_FILE}.keys" "${REPMGR_CONF_FILE}.tmp" > "$REPMGR_CONF_FILE" && cat "${REPMGR_MOUNTED_CONF_DIR}/repmgr.conf" >> "$REPMGR_CONF_FILE"
     else
         cp "${REPMGR_CONF_FILE}.tmp" "${REPMGR_CONF_FILE}"
     fi
