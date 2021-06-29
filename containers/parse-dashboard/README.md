@@ -37,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.1.0`, `2.1.0-debian-10-r396`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/2.1.0-debian-10-r396/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.1.0`, `2.1.0-debian-10-r397`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/2.1.0-debian-10-r397/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse-dashboard GitHub repo](https://github.com/bitnami/bitnami-docker-parse-dashboard).
 
@@ -231,6 +231,11 @@ Available variables:
  - `PARSE_DASHBOARD_APP_NAME`: Parse Dashboard application name. Default: **MyDashboard**
 
 # Notable Changes
+
+## 2.1.0-debian-10-r328
+
+- The size of the container image has been decreased.
+- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
 
 ## 1.2.0-r69
 

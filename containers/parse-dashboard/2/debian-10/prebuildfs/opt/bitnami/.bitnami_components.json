@@ -8,23 +8,16 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "cd53d80389db5c1675d60e1525f07b4c8a3968a41db245e7c10ec8f868e750f6",
+        "digest": "4a53cadf5b93354879f534b1a75eedeb89e89d179aeb41c7393d3e846f8a9219",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "12.22.1-1"
+        "version": "12.22.1-2"
     },
     "parse-dashboard": {
         "arch": "amd64",
-        "digest": "5cd86480d6808be8625d76a22c0862b2a451e6c54b04003dfaca4a1f03eb1978",
+        "digest": "0f61900845142579626ae74babbe11b70449c5801eb099a7c32e6765c67d7d8f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.1.0-2"
-    },
-    "tini": {
-        "arch": "amd64",
-        "digest": "9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d",
-        "distro": "debian-10",
-        "type": "NAMI",
-        "version": "0.19.0-1"
+        "version": "2.1.0-3"
     }
 }
