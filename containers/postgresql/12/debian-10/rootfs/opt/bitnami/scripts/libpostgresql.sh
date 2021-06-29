@@ -1018,17 +1018,17 @@ postgresql_execute_print_output() {
     local -r user="${2:-postgres}"
     local -r pass="${3:-}"
     local opts
-    read -r -a opts <<< "${@:4}"
+    read -r -a opts <<<"${@:4}"
 
     local args=("-U" "$user")
     [[ -n "$db" ]] && args+=("-d" "$db")
-    [[ "${#opts[@]}" -gt 0 ]] && args+=( "${opts[@]}" )
+    [[ "${#opts[@]}" -gt 0 ]] && args+=("${opts[@]}")
 
     # Obtain the command specified via stdin
     local sql_cmd
-    sql_cmd="$(< /dev/stdin)"
+    sql_cmd="$(</dev/stdin)"
     debug "Executing SQL command:\n$sql_cmd"
-    PGPASSWORD=$pass psql "${args[@]}" <<< "$sql_cmd"
+    PGPASSWORD=$pass psql "${args[@]}" <<<"$sql_cmd"
 }
 
 ########################
@@ -1128,22 +1128,22 @@ postgresql_ensure_user_exists() {
     shift 1
     while [ "$#" -gt 0 ]; do
         case "$1" in
-            -p|--password)
-                shift
-                password="${1:?missing password}"
-                ;;
-            --host)
-                shift
-                db_host="${1:?missing database host}"
-                ;;
-            --port)
-                shift
-                db_port="${1:?missing database port}"
-                ;;
-            *)
-                echo "Invalid command line flag $1" >&2
-                return 1
-                ;;
+        -p | --password)
+            shift
+            password="${1:?missing password}"
+            ;;
+        --host)
+            shift
+            db_host="${1:?missing database host}"
+            ;;
+        --port)
+            shift
+            db_port="${1:?missing database port}"
+            ;;
+        *)
+            echo "Invalid command line flag $1" >&2
+            return 1
+            ;;
         esac
         shift
     done
@@ -1215,22 +1215,22 @@ postgresql_ensure_database_exists() {
     shift 1
     while [ "$#" -gt 0 ]; do
         case "$1" in
-            -u|--user)
-                shift
-                user="${1:?missing database user}"
-                ;;
-            --host)
-                shift
-                db_host="${1:?missing database host}"
-                ;;
-            --port)
-                shift
-                db_port="${1:?missing database port}"
-                ;;
-            *)
-                echo "Invalid command line flag $1" >&2
-                return 1
-                ;;
+        -u | --user)
+            shift
+            user="${1:?missing database user}"
+            ;;
+        --host)
+            shift
+            db_host="${1:?missing database host}"
+            ;;
+        --port)
+            shift
+            db_port="${1:?missing database port}"
+            ;;
+        *)
+            echo "Invalid command line flag $1" >&2
+            return 1
+            ;;
         esac
         shift
     done
