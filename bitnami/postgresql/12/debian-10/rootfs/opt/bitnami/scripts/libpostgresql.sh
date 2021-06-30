@@ -237,7 +237,7 @@ EOF
 postgresql_tls_auth_configuration() {
     info "Enabling TLS Client authentication"
     local previous_content
-    previous_content=$(cat "$POSTGRESQL_PGHBA_FILE")
+    [[ -f "$POSTGRESQL_PGHBA_FILE" ]] && previous_content=$(cat "$POSTGRESQL_PGHBA_FILE")
 
     cat <<EOF >"$POSTGRESQL_PGHBA_FILE"
 hostssl     all             all             0.0.0.0/0               cert
