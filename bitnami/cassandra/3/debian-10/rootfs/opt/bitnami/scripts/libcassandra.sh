@@ -110,6 +110,8 @@ export CASSANDRA_SSL_VALIDATE="${CASSANDRA_SSL_VALIDATE:-false}"
 export SSL_CERTFILE="${CASSANDRA_SSL_CERT_FILE}"
 # SSL_VALIDATE is used to indicate if the client should check the hostname in the certificate
 export SSL_VALIDATE="${CASSANDRA_SSL_VALIDATE}"
+# SSL_VERSION determines the protocol used by cqlsh when connecting with cassandra, currently TLSv1.2 is the latest available.
+export SSL_VERSION="${SSL_VERSION:-TLSv1_2}"
 EOF
     if [[ -n "${CASSANDRA_PASSWORD_FILE:-}" ]] && [[ -f "$CASSANDRA_PASSWORD_FILE" ]]; then
         cat <<"EOF"
