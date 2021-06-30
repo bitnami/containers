@@ -48,7 +48,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.9.3`, `4.9.3-debian-10-r169`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/4.9.3-debian-10-r169/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.9.3`, `4.9.3-debian-10-r170`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/4.9.3-debian-10-r170/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse GitHub repo](https://github.com/bitnami/bitnami-docker-parse).
 
@@ -290,6 +290,11 @@ $ docker-compose up -d
 Find more information about Cloud Code and Cloud functions in the [official documentation](https://docs.parseplatform.org/cloudcode/guide/).
 
 # Notable Changes
+
+## 4.9.3-debian-10-r161
+
+- The size of the container image has been decreased.
+- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
 
 ## 3.1.2-r14
 

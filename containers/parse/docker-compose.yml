@@ -3,15 +3,25 @@ services:
   mongodb:
     image: docker.io/bitnami/mongodb:4.2
     volumes:
-      - 'mongodb_data:/bitnami'
+      - 'mongodb_data:/bitnami/mongodb'
+    environment:
+      - MONGODB_USERNAME=bn_parse
+      - MONGODB_DATABASE=bitnami_parse
+      - MONGODB_PASSWORD=bitnami123
   parse:
     image: docker.io/bitnami/parse:4
     ports:
       - '1337:1337'
     volumes:
-      - 'parse_data:/bitnami'
+      - 'parse_data:/bitnami/parse'
     depends_on:
       - mongodb
+    environment:
+      - PARSE_DATABASE_HOST=mongodb
+      - PARSE_DATABASE_PORT_NUMBER=27017
+      - PARSE_DATABASE_USER=bn_parse
+      - PARSE_DATABASE_NAME=bitnami_parse
+      - PARSE_DATABASE_PASSWORD=bitnami123
 volumes:
   mongodb_data:
     driver: local
