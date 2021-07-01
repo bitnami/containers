@@ -153,9 +153,9 @@ couchdb_vm_args_set() {
     if ! is_empty_value "$value"; then
         if grep -q -E "^\s*${key}\s+.*$" "${COUCHDB_CONF_DIR}/vm.args"; then
             vm_args_content="$(sed -E "s/^\s*${key}\s+.*$/${key} ${value}/" "${COUCHDB_CONF_DIR}/vm.args")"
-            echo "$vm_args_content" > "${COUCHDB_CONF_DIR}/vm.args"
+            echo "$vm_args_content" >"${COUCHDB_CONF_DIR}/vm.args"
         else
-            echo "${key} ${value}" >> "${COUCHDB_CONF_DIR}/vm.args"
+            echo "${key} ${value}" >>"${COUCHDB_CONF_DIR}/vm.args"
         fi
     fi
 }
@@ -212,7 +212,7 @@ couchdb_stop() {
     info "Stopping CouchDB..."
     pkill --full --signal TERM "$COUCHDB_BASE_DIR"
     wait-for-port --state free "${COUCHDB_PORT_NUMBER:-5984}"
-    wait-for-port --state free  "${COUCHDB_CLUSTER_PORT_NUMBER:-9100}"
+    wait-for-port --state free "${COUCHDB_CLUSTER_PORT_NUMBER:-9100}"
 }
 
 ########################
@@ -253,7 +253,7 @@ is_couchdb_running() {
 }
 
 ########################
-# Check if CouchDB is running
+# Check if CouchDB is not running
 # Globals:
 #   COUCHDB_PID_FILE
 # Arguments:
