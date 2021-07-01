@@ -61,7 +61,7 @@ unset parse_env_vars
 export PARSE_BASE_DIR="${BITNAMI_ROOT_DIR}/parse"
 export PARSE_TMP_DIR="${PARSE_BASE_DIR}/tmp"
 export PARSE_LOGS_DIR="${PARSE_BASE_DIR}/logs"
-export PARSE_PID_FILE="${PARSE_TMP_DIR}/parse-dashboard.pid"
+export PARSE_PID_FILE="${PARSE_TMP_DIR}/parse.pid"
 export PARSE_LOG_FILE="${PARSE_LOGS_DIR}/parse.log"
 export PARSE_CONF_FILE="${PARSE_BASE_DIR}/config.json"
 
