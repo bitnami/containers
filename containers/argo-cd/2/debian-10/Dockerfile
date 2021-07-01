@@ -8,16 +8,24 @@ ENV HOME="/" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/argo-cd-2.0.4-0-linux-amd64-debian-10.tar.gz && \
-    echo "df45b3e85eae0926c8ad8f917428c715d8ff86feb5107a356c535bece92e0f9d  /tmp/bitnami/pkg/cache/argo-cd-2.0.4-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/argo-cd-2.0.4-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/argo-cd-2.0.4-0-linux-amd64-debian-10.tar.gz
-RUN useradd -r -u 1001 -g root argo-cd
+RUN install_packages acl ca-certificates curl git git-lfs gnupg gzip libc6 openssh-server procps tar
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kustomize" "4.1.3-0" --checksum 7dc309c3dbad65ce453407dd08f2ea18c426a0fdea77755b2931d1ffd60734cc
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ksonnet" "0.13.1-0" --checksum d789f0ddb6cf2351ba09ca3e907ea2e41605067f398aa8fa069bdcfe59a25cd6
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "helm" "3.6.2-0" --checksum 252298c7656b925c859f339eaf91094475cd2bebf195aca708b5dc188d5603f6
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.13.0-0" --checksum fd7257c2736164d02832dbf72e2c1ed9d875bf3e32f0988520796bc503330129
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "argo-cd" "2.0.4-0" --checksum df45b3e85eae0926c8ad8f917428c715d8ff86feb5107a356c535bece92e0f9d
+RUN chmod g+rwX /opt/bitnami
 
+COPY rootfs /
+RUN /opt/bitnami/scripts/argo-cd/postunpack.sh
 ENV BITNAMI_APP_NAME="argo-cd" \
-    BITNAMI_IMAGE_VERSION="2.0.4-debian-10-r5" \
-    PATH="/opt/bitnami/argo-cd/bin:$PATH"
+    BITNAMI_IMAGE_VERSION="2.0.4-debian-10-r6" \
+    LIBNSS_WRAPPER_PATH="/opt/bitnami/common/lib/libnss_wrapper.so" \
+    LNAME="argocd" \
+    NSS_WRAPPER_GROUP="/opt/bitnami/argo-cd/nss_group" \
+    NSS_WRAPPER_PASSWD="/opt/bitnami/argo-cd/nss_passwd" \
+    PATH="/opt/bitnami/kustomize/bin:/opt/bitnami/ksonnet/bin:/opt/bitnami/helm/bin:/opt/bitnami/common/bin:/opt/bitnami/argo-cd/bin:/opt/bitnami/argo-cd/hack:$PATH"
 
 USER 1001
-ENTRYPOINT [ "/opt/bitnami/argo-cd/bin/argocd" ]
+ENTRYPOINT [ "/opt/bitnami/scripts/argo-cd/entrypoint.sh" ]
+CMD [ "nami", "start", "--foreground", "argo-cd" ]
