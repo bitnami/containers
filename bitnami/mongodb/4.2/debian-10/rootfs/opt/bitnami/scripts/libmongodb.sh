@@ -47,8 +47,8 @@ in the primary node and MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD in the rest of nod
 you need to provide the MONGODB_INITIAL_PRIMARY_HOST env var"
                 print_validation_error "$error_message"
             fi
-            if { [[ -n "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" ]] && [[ -z "$MONGODB_REPLICA_SET_KEY" ]]; } || \
-               { [[ -z "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" ]] && [[ -n "$MONGODB_REPLICA_SET_KEY" ]]; }; then
+            if { [[ -n "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" ]] && [[ -z "$MONGODB_REPLICA_SET_KEY" ]]; } ||
+                { [[ -z "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" ]] && [[ -n "$MONGODB_REPLICA_SET_KEY" ]]; }; then
                 print_validation_error "$replicaset_error_message"
             fi
             if [[ -n "$MONGODB_ROOT_PASSWORD" ]]; then
@@ -56,8 +56,8 @@ you need to provide the MONGODB_INITIAL_PRIMARY_HOST env var"
                 print_validation_error "$error_message"
             fi
         elif [[ "$MONGODB_REPLICA_SET_MODE" = "primary" ]]; then
-            if { [[ -n "$MONGODB_ROOT_PASSWORD" ]] && [[ -z "$MONGODB_REPLICA_SET_KEY" ]] ;} || \
-               { [[ -z "$MONGODB_ROOT_PASSWORD" ]] && [[ -n "$MONGODB_REPLICA_SET_KEY" ]] ;}; then
+            if { [[ -n "$MONGODB_ROOT_PASSWORD" ]] && [[ -z "$MONGODB_REPLICA_SET_KEY" ]]; } ||
+                { [[ -z "$MONGODB_ROOT_PASSWORD" ]] && [[ -n "$MONGODB_REPLICA_SET_KEY" ]]; }; then
                 print_validation_error "$replicaset_error_message"
             fi
             if [[ -n "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" ]]; then
@@ -77,7 +77,7 @@ Available options are 'primary/secondary/arbiter/hidden'"
         fi
     fi
 
-    if [[ -n "$MONGODB_REPLICA_SET_KEY" ]] && (( ${#MONGODB_REPLICA_SET_KEY} < 5 )); then
+    if [[ -n "$MONGODB_REPLICA_SET_KEY" ]] && ((${#MONGODB_REPLICA_SET_KEY} < 5)); then
         error_message="MONGODB_REPLICA_SET_KEY must be, at least, 5 characters long!"
         print_validation_error "$error_message"
     fi
@@ -108,45 +108,6 @@ mongodb_copy_mounted_config() {
             exit 1
         fi
     fi
-}
-
-########################
-# Execute an arbitrary query/queries against the running MongoDB service
-# Stdin:
-#   Query/queries to execute
-# Arguments:
-#   $1 - User to run queries
-#   $2 - Password
-#   $3 - Database where to run the queries
-#   $4 - Host (default to result of get_mongo_hostname function)
-#   $5 - Port (default $MONGODB_PORT_NUMBER)
-#   $6 - Extra arguments (default $MONGODB_CLIENT_EXTRA_FLAGS)
-# Returns:
-#   None
-########################
-mongodb_execute() {
-    local -r user="${1:-}"
-    local -r password="${2:-}"
-    local -r database="${3:-}"
-    local -r host="${4:-$(get_mongo_hostname)}"
-    local -r port="${5:-$MONGODB_PORT_NUMBER}"
-    local -r extra_args="${6:-$MONGODB_CLIENT_EXTRA_FLAGS}"
-    local result
-    local final_user="$user"
-    # If password is empty it means no auth, do not specify user
-    [[ -z "$password" ]] && final_user=""
-
-    local -a args=("--host" "$host" "--port" "$port")
-    [[ -n "$final_user" ]] && args+=("-u" "$final_user")
-    [[ -n "$password" ]] && args+=("-p" "$password")
-    if [[ -n "$extra_args" ]]; then
-        local extra_args_array=()
-        read -r -a extra_args_array <<< "$extra_args"
-        [[ "${#extra_args_array[@]}" -gt 0 ]] && args+=("${extra_args_array[@]}")
-    fi
-    [[ -n "$database" ]] && args+=("$database")
-
-    "$MONGODB_BIN_DIR/mongo" "${args[@]}"
 }
 
 ########################
@@ -245,7 +206,7 @@ mongodb_start_bg() {
     local flags=("--fork" "--config=$conf_file")
     if [[ -n "${MONGODB_EXTRA_FLAGS:-}" ]]; then
         local extra_flags_array=()
-        read -r -a extra_flags_array <<< "$MONGODB_EXTRA_FLAGS"
+        read -r -a extra_flags_array <<<"$MONGODB_EXTRA_FLAGS"
         [[ "${#extra_flags_array[@]}" -gt 0 ]] && flags+=("${extra_flags_array[@]}")
     fi
 
@@ -256,7 +217,7 @@ mongodb_start_bg() {
     if am_i_root; then
         debug_execute gosu "$MONGODB_DAEMON_USER" "$MONGODB_BIN_DIR/mongod" "${flags[@]}"
     else
-       debug_execute "$MONGODB_BIN_DIR/mongod" "${flags[@]}"
+        debug_execute "$MONGODB_BIN_DIR/mongod" "${flags[@]}"
     fi
 
     # wait until the server is up and answering queries
@@ -278,11 +239,12 @@ mongodb_start_bg() {
 mongodb_is_mongodb_started() {
     local result
 
-    result=$(mongodb_execute 2>/dev/null <<EOF
+    result=$(
+        mongodb_execute 2>/dev/null <<EOF
 db
 EOF
-)
-   [[ -n "$result" ]]
+    )
+    [[ -n "$result" ]]
 }
 
 ########################
@@ -322,7 +284,7 @@ mongodb_config_apply_regex() {
     local mongodb_conf
 
     mongodb_conf="$(sed -E "s@$match_regex@$substitute_regex@" "$conf_file_path")"
-    echo "$mongodb_conf" > "$conf_file_path"
+    echo "$mongodb_conf" >"$conf_file_path"
 }
 
 ########################
@@ -339,7 +301,7 @@ mongodb_set_log_conf() {
     local -r conf_file_name="${conf_file_path#"$MONGODB_CONF_DIR"}"
     if ! mongodb_is_file_external "$conf_file_name"; then
         if [[ -n "$MONGODB_DISABLE_SYSTEM_LOG" ]]; then
-            mongodb_config_apply_regex "quiet:.*" "quiet: $({ is_boolean_yes "$MONGODB_DISABLE_SYSTEM_LOG" && echo 'true';} || echo 'false')" "$conf_file_path"
+            mongodb_config_apply_regex "quiet:.*" "quiet: $({ is_boolean_yes "$MONGODB_DISABLE_SYSTEM_LOG" && echo 'true'; } || echo 'false')" "$conf_file_path"
         fi
         if [[ -n "$MONGODB_SYSTEM_LOG_VERBOSITY" ]]; then
             mongodb_config_apply_regex "verbosity:.*" "verbosity: $MONGODB_SYSTEM_LOG_VERBOSITY" "$conf_file_path"
@@ -348,7 +310,6 @@ mongodb_set_log_conf() {
         debug "$conf_file_name mounted. Skipping setting log settings"
     fi
 }
-
 
 ########################
 # Change journaling setting
@@ -366,8 +327,8 @@ mongodb_set_journal_conf() {
 
     if ! mongodb_is_file_external "$conf_file_name"; then
         if [[ -n "$MONGODB_ENABLE_JOURNAL" ]]; then
-            mongodb_conf="$(sed -E "/^ *journal:/,/^ *[^:]*:/s/enabled:.*/enabled: $({ is_boolean_yes "$MONGODB_ENABLE_JOURNAL" && echo 'true';} || echo 'false')/" "$conf_file_path")"
-            echo "$mongodb_conf" > "$conf_file_path"
+            mongodb_conf="$(sed -E "/^ *journal:/,/^ *[^:]*:/s/enabled:.*/enabled: $({ is_boolean_yes "$MONGODB_ENABLE_JOURNAL" && echo 'true'; } || echo 'false')/" "$conf_file_path")"
+            echo "$mongodb_conf" >"$conf_file_path"
         fi
     else
         debug "$conf_file_name mounted. Skipping setting log settings"
@@ -389,7 +350,7 @@ mongodb_set_storage_conf() {
 
     if ! mongodb_is_file_external "$conf_file_name"; then
         if [[ -n "$MONGODB_ENABLE_DIRECTORY_PER_DB" ]]; then
-            mongodb_config_apply_regex "directoryPerDB:.*" "directoryPerDB: $({ is_boolean_yes "$MONGODB_ENABLE_DIRECTORY_PER_DB" && echo 'true';} || echo 'false')" "$conf_file_path"
+            mongodb_config_apply_regex "directoryPerDB:.*" "directoryPerDB: $({ is_boolean_yes "$MONGODB_ENABLE_DIRECTORY_PER_DB" && echo 'true'; } || echo 'false')" "$conf_file_path"
         fi
     else
         debug "$conf_file_name mounted. Skipping setting storage settings"
@@ -414,7 +375,7 @@ mongodb_set_net_conf() {
             mongodb_config_apply_regex "port:.*" "port: $MONGODB_PORT_NUMBER" "$conf_file_path"
         fi
         if [[ -n "$MONGODB_ENABLE_IPV6" ]]; then
-            mongodb_config_apply_regex "directoryPerDB:.*" "directoryPerDB: $({ is_boolean_yes "$MONGODB_ENABLE_IPV6" && echo 'true';} || echo 'false')" "$conf_file_path"
+            mongodb_config_apply_regex "directoryPerDB:.*" "directoryPerDB: $({ is_boolean_yes "$MONGODB_ENABLE_IPV6" && echo 'true'; } || echo 'false')" "$conf_file_path"
         fi
     else
         debug "$conf_file_name mounted. Skipping setting port and IPv6 settings"
@@ -460,7 +421,6 @@ mongodb_disable_javascript_conf() {
         debug "$conf_file_name mounted. Skipping disabling javascript"
     fi
 }
-
 
 ########################
 # Enable Auth
@@ -514,7 +474,7 @@ mongodb_set_replicasetmode_conf() {
             mongodb_config_apply_regex "replSetName:.*" "replSetName: $MONGODB_REPLICA_SET_NAME" "$conf_file_path"
         fi
         if [[ -n "$MONGODB_ENABLE_MAJORITY_READ" ]]; then
-            mongodb_config_apply_regex "enableMajorityReadConcern:.*" "enableMajorityReadConcern: $({ is_boolean_yes "$MONGODB_ENABLE_MAJORITY_READ" && echo 'true';} || echo 'false')" "$conf_file_path"
+            mongodb_config_apply_regex "enableMajorityReadConcern:.*" "enableMajorityReadConcern: $({ is_boolean_yes "$MONGODB_ENABLE_MAJORITY_READ" && echo 'true'; } || echo 'false')" "$conf_file_path"
         fi
     else
         debug "$conf_file_name mounted. Skipping replicaset mode enabling"
@@ -534,21 +494,23 @@ mongodb_create_users() {
     local result
 
     info "Creating users..."
-    if [[ -n "$MONGODB_ROOT_PASSWORD" ]] && ! [[ "$MONGODB_REPLICA_SET_MODE"  =~ ^(secondary|arbiter|hidden) ]]; then
+    if [[ -n "$MONGODB_ROOT_PASSWORD" ]] && ! [[ "$MONGODB_REPLICA_SET_MODE" =~ ^(secondary|arbiter|hidden) ]]; then
         info "Creating root user..."
-        result=$(mongodb_execute "" "" "" "127.0.0.1" <<EOF
+        result=$(
+            mongodb_execute "" "" "" "127.0.0.1" <<EOF
 db.getSiblingDB('admin').createUser({ user: 'root', pwd: '$MONGODB_ROOT_PASSWORD', roles: [{role: 'root', db: 'admin'}] })
 EOF
-)
+        )
     fi
 
     if [[ -n "$MONGODB_USERNAME" ]] && [[ -n "$MONGODB_PASSWORD" ]] && [[ -n "$MONGODB_DATABASE" ]]; then
         info "Creating '$MONGODB_USERNAME' user..."
 
-        result=$(mongodb_execute 'root' "$MONGODB_ROOT_PASSWORD" "" "127.0.0.1" <<EOF
+        result=$(
+            mongodb_execute 'root' "$MONGODB_ROOT_PASSWORD" "" "127.0.0.1" <<EOF
 db.getSiblingDB('$MONGODB_DATABASE').createUser({ user: '$MONGODB_USERNAME', pwd: '$MONGODB_PASSWORD', roles: [{role: 'readWrite', db: '$MONGODB_DATABASE'}] })
 EOF
-)
+        )
     fi
     info "Users created"
 }
@@ -587,7 +549,7 @@ mongodb_create_keyfile() {
 
     if ! mongodb_is_file_external "keyfile"; then
         info "Writing keyfile for replica set authentication..."
-        echo "$key" > "$MONGODB_KEY_FILE"
+        echo "$key" >"$MONGODB_KEY_FILE"
 
         chmod 600 "$MONGODB_KEY_FILE"
 
@@ -613,26 +575,26 @@ mongodb_create_keyfile() {
 mongodb_is_primary_node_initiated() {
     local node="${1:?node is required}"
     local result
-    result=$(mongodb_execute "root" "$MONGODB_ROOT_PASSWORD" "admin" "127.0.0.1" "$MONGODB_PORT_NUMBER" <<EOF
+    result=$(
+        mongodb_execute "root" "$MONGODB_ROOT_PASSWORD" "admin" "127.0.0.1" "$MONGODB_PORT_NUMBER" <<EOF
 rs.initiate({"_id":"$MONGODB_REPLICA_SET_NAME", "members":[{"_id":0,"host":"$node:$MONGODB_PORT_NUMBER","priority":5}]})
 EOF
-)
+    )
 
     # Code 23 is considered OK
     # It indicates that the node is already initialized
-    if grep -q "\"code\" : 23" <<< "$result"; then
+    if grep -q "\"code\" : 23" <<<"$result"; then
         warn "Node already initialized."
         return 0
     fi
 
-    if ! grep -q "\"ok\" : 1" <<< "$result"; then
+    if ! grep -q "\"ok\" : 1" <<<"$result"; then
         warn "Problem initiating replica set
             request: rs.initiate({\"_id\":\"$MONGODB_REPLICA_SET_NAME\", \"members\":[{\"_id\":0,\"host\":\"$node:$MONGODB_PORT_NUMBER\",\"priority\":5}]})
             response: $result"
         return 1
     fi
 }
-
 
 ########################
 # Get if secondary node is pending
@@ -647,18 +609,19 @@ mongodb_is_secondary_node_pending() {
     local node="${1:?node is required}"
     local result
 
-    result=$(mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
+    result=$(
+        mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
 rs.add('$node:$MONGODB_PORT_NUMBER')
 EOF
-)
+    )
     # Error code 103 is considered OK.
     # It indicates a possiblely desynced configuration,
     # which will become resynced when the secondary joins the replicaset.
-    if grep -q "\"code\" : 103" <<< "$result"; then
+    if grep -q "\"code\" : 103" <<<"$result"; then
         warn "The ReplicaSet configuration is not aligned with primary node's configuration. Starting secondary node so it syncs with ReplicaSet..."
         return 0
     fi
-    grep -q "\"ok\" : 1" <<< "$result"
+    grep -q "\"ok\" : 1" <<<"$result"
 }
 
 ########################
@@ -674,18 +637,19 @@ mongodb_is_hidden_node_pending() {
     local node="${1:?node is required}"
     local result
 
-    result=$(mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
+    result=$(
+        mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
 rs.add({host: '$node:$MONGODB_PORT_NUMBER', hidden: true, priority: 0})
 EOF
-)
+    )
     # Error code 103 is considered OK.
     # It indicates a possiblely desynced configuration,
     # which will become resynced when the hidden joins the replicaset.
-    if grep -q "\"code\" : 103" <<< "$result"; then
+    if grep -q "\"code\" : 103" <<<"$result"; then
         warn "The ReplicaSet configuration is not aligned with primary node's configuration. Starting hidden node so it syncs with ReplicaSet..."
         return 0
     fi
-    grep -q "\"ok\" : 1" <<< "$result"
+    grep -q "\"ok\" : 1" <<<"$result"
 }
 
 ########################
@@ -701,11 +665,12 @@ mongodb_is_arbiter_node_pending() {
     local node="${1:?node is required}"
     local result
 
-    result=$(mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
+    result=$(
+        mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
 rs.addArb('$node:$MONGODB_PORT_NUMBER')
 EOF
-)
-    grep -q "\"ok\" : 1" <<< "$result"
+    )
+    grep -q "\"ok\" : 1" <<<"$result"
 }
 
 ########################
@@ -765,11 +730,12 @@ mongodb_is_primary_node_up() {
 
     debug "Validating $host as primary node..."
 
-    result=$(mongodb_execute "$user" "$password" "admin" "$host" "$port" <<EOF
+    result=$(
+        mongodb_execute "$user" "$password" "admin" "$host" "$port" <<EOF
 db.isMaster().ismaster
 EOF
-)
-    grep -q "true" <<< "$result"
+    )
+    grep -q "true" <<<"$result"
 }
 
 ########################
@@ -788,14 +754,15 @@ mongodb_is_node_available() {
     local -r password="${4:-}"
 
     local result
-    result=$(mongodb_execute "$user" "$password" "admin" "$host" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
+    result=$(
+        mongodb_execute "$user" "$password" "admin" "$host" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
 db.getUsers()
 EOF
-)
-    if ! grep -q "\"user\" :" <<< "$result"; then
+    )
+    if ! grep -q "\"user\" :" <<<"$result"; then
         # If no password was provided on first run
         # it may be the case that DB is up but has no users
-        [[ -z $password ]] && grep -q "\[\ \]" <<< "$result"
+        [[ -z $password ]] && grep -q "\[\ \]" <<<"$result"
     fi
 }
 
@@ -906,7 +873,6 @@ mongodb_configure_hidden() {
     fi
 }
 
-
 ########################
 # Configure arbiter node
 # Globals:
@@ -941,15 +907,16 @@ mongodb_configure_arbiter() {
 # Returns:
 #   None
 #########################
-mongodb_is_not_in_sync(){
+mongodb_is_not_in_sync() {
     local result
 
-    result=$(mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
+    result=$(
+        mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
 db.printSlaveReplicationInfo()
 EOF
-)
+    )
 
-    grep -q -E "^[[:space:]]*0 secs" <<< "$result"
+    grep -q -E "^[[:space:]]*0 secs" <<<"$result"
 }
 
 ########################
@@ -985,11 +952,12 @@ mongodb_node_currently_in_cluster() {
     local -r node="${1:?node is required}"
     local result
 
-    result=$(mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
+    result=$(
+        mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
 rs.status().members
 EOF
-)
-    grep -q -E "\"${node}(:[0-9]+)?\"" <<< "$result"
+    )
+    grep -q -E "\"${node}(:[0-9]+)?\"" <<<"$result"
 }
 
 ########################
@@ -1010,28 +978,27 @@ mongodb_configure_replica_set() {
     mongodb_restart
 
     case "$MONGODB_REPLICA_SET_MODE" in
-        "primary" )
-            mongodb_configure_primary "$node"
-            ;;
-        "secondary")
-            mongodb_configure_secondary "$node"
-            ;;
-        "arbiter")
-            mongodb_configure_arbiter "$node"
-            ;;
-        "hidden")
-            mongodb_configure_hidden "$node"
-            ;;
-        "dynamic")
-            # Do nothing
-            ;;
+    "primary")
+        mongodb_configure_primary "$node"
+        ;;
+    "secondary")
+        mongodb_configure_secondary "$node"
+        ;;
+    "arbiter")
+        mongodb_configure_arbiter "$node"
+        ;;
+    "hidden")
+        mongodb_configure_hidden "$node"
+        ;;
+    "dynamic")
+        # Do nothing
+        ;;
     esac
 
     if [[ "$MONGODB_REPLICA_SET_MODE" = "secondary" ]]; then
         mongodb_wait_until_sync_complete
     fi
 }
-
 
 ########################
 # Configure permisions
@@ -1133,11 +1100,11 @@ mongodb_initialize() {
 #########################
 mongodb_ensure_dynamic_mode_consistency() {
     if grep -q -E "^[[:space:]]*replSetName: $MONGODB_REPLICA_SET_NAME" "$MONGODB_CONF_FILE"; then
-            info "ReplicaSetMode set to \"dynamic\" and replSetName different from config file."
-            info "Dropping local database ..."
-            mongodb_start_bg "$MONGODB_CONF_FILE"
-            mongodb_drop_local_database
-            mongodb_stop
+        info "ReplicaSetMode set to \"dynamic\" and replSetName different from config file."
+        info "Dropping local database ..."
+        mongodb_start_bg "$MONGODB_CONF_FILE"
+        mongodb_drop_local_database
+        mongodb_stop
     fi
 }
 
@@ -1152,7 +1119,7 @@ mongodb_ensure_dynamic_mode_consistency() {
 #########################
 mongodb_is_file_external() {
     local -r filename="${1:?file_is_missing}"
-    if [[ -f "${MONGODB_MOUNTED_CONF_DIR}/${filename}" ]] || { [[ -f "${MONGODB_CONF_DIR}/${filename}" ]] && ! test -w "${MONGODB_CONF_DIR}/${filename}" ;}; then
+    if [[ -f "${MONGODB_MOUNTED_CONF_DIR}/${filename}" ]] || { [[ -f "${MONGODB_CONF_DIR}/${filename}" ]] && ! test -w "${MONGODB_CONF_DIR}/${filename}"; }; then
         true
     else
         false
@@ -1188,36 +1155,82 @@ mongodb_custom_init_scripts() {
         fi
     fi
     if is_boolean_yes "$run_custom_init_scripts"; then
-        info "Loading user's custom files from $MONGODB_INITSCRIPTS_DIR ...";
+        info "Loading user's custom files from $MONGODB_INITSCRIPTS_DIR ..."
         mongodb_start_bg "$MONGODB_CONF_FILE"
         local -r tmp_file=/tmp/filelist
         local mongo_user
         local mongo_pass
-        if [[ -n "$MONGODB_ROOT_PASSWORD" ]];then
+        if [[ -n "$MONGODB_ROOT_PASSWORD" ]]; then
             mongo_user=root
             mongo_pass="$MONGODB_ROOT_PASSWORD"
-        elif [[ -n "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" ]];then
+        elif [[ -n "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" ]]; then
             mongo_user=root
             mongo_pass="$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD"
         else
             mongo_user="$MONGODB_USERNAME"
             mongo_pass="$MONGODB_PASSWORD"
         fi
-        find "$MONGODB_INITSCRIPTS_DIR" -type f -regex ".*\.\(sh\|js\|js.gz\)" | sort > $tmp_file
+        find "$MONGODB_INITSCRIPTS_DIR" -type f -regex ".*\.\(sh\|js\|js.gz\)" | sort >$tmp_file
         while read -r f; do
             case "$f" in
-                *.sh)
-                    if [[ -x "$f" ]]; then
-                        debug "Executing $f"; "$f"
-                    else
-                        debug "Sourcing $f"; . "$f"
-                    fi
-                    ;;
-                *.js)    debug "Executing $f"; mongodb_execute "$mongo_user" "$mongo_pass" < "$f";;
-                *.js.gz) debug "Executing $f"; gunzip -c "$f" | mongodb_execute "$mongo_user" "$mongo_pass";;
-                *)        debug "Ignoring $f" ;;
+            *.sh)
+                if [[ -x "$f" ]]; then
+                    debug "Executing $f"
+                    "$f"
+                else
+                    debug "Sourcing $f"
+                    . "$f"
+                fi
+                ;;
+            *.js)
+                debug "Executing $f"
+                mongodb_execute "$mongo_user" "$mongo_pass" <"$f"
+                ;;
+            *.js.gz)
+                debug "Executing $f"
+                gunzip -c "$f" | mongodb_execute "$mongo_user" "$mongo_pass"
+                ;;
+            *) debug "Ignoring $f" ;;
             esac
-        done < $tmp_file
+        done <$tmp_file
         touch "$MONGODB_VOLUME_DIR"/mongodb/.user_scripts_initialized
     fi
+}
+
+########################
+# Execute an arbitrary query/queries against the running MongoDB service
+# Stdin:
+#   Query/queries to execute
+# Arguments:
+#   $1 - User to run queries
+#   $2 - Password
+#   $3 - Database where to run the queries
+#   $4 - Host (default to result of get_mongo_hostname function)
+#   $5 - Port (default $MONGODB_PORT_NUMBER)
+#   $6 - Extra arguments (default $MONGODB_CLIENT_EXTRA_FLAGS)
+# Returns:
+#   None
+########################
+mongodb_execute() {
+    local -r user="${1:-}"
+    local -r password="${2:-}"
+    local -r database="${3:-}"
+    local -r host="${4:-$(get_mongo_hostname)}"
+    local -r port="${5:-$MONGODB_PORT_NUMBER}"
+    local -r extra_args="${6:-$MONGODB_CLIENT_EXTRA_FLAGS}"
+    local final_user="$user"
+    # If password is empty it means no auth, do not specify user
+    [[ -z "$password" ]] && final_user=""
+
+    local -a args=("--host" "$host" "--port" "$port")
+    [[ -n "$final_user" ]] && args+=("-u" "$final_user")
+    [[ -n "$password" ]] && args+=("-p" "$password")
+    if [[ -n "$extra_args" ]]; then
+        local extra_args_array=()
+        read -r -a extra_args_array <<<"$extra_args"
+        [[ "${#extra_args_array[@]}" -gt 0 ]] && args+=("${extra_args_array[@]}")
+    fi
+    [[ -n "$database" ]] && args+=("$database")
+
+    "$MONGODB_BIN_DIR/mongo" "${args[@]}"
 }
