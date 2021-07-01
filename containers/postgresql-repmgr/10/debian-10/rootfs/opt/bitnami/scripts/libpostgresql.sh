@@ -237,7 +237,7 @@ EOF
 postgresql_tls_auth_configuration() {
     info "Enabling TLS Client authentication"
     local previous_content
-    previous_content=$(cat "$POSTGRESQL_PGHBA_FILE")
+    [[ -f "$POSTGRESQL_PGHBA_FILE" ]] && previous_content=$(cat "$POSTGRESQL_PGHBA_FILE")
 
     cat <<EOF >"$POSTGRESQL_PGHBA_FILE"
 hostssl     all             all             0.0.0.0/0               cert
@@ -466,6 +466,7 @@ postgresql_create_admin_user() {
     echo "CREATE ROLE \"${POSTGRESQL_USERNAME}\" WITH LOGIN ${connlimit_string} CREATEDB PASSWORD '${escaped_password}';" | postgresql_execute
     info "Granting access to \"${POSTGRESQL_USERNAME}\" to the database \"${POSTGRESQL_DATABASE}\""
     echo "GRANT ALL PRIVILEGES ON DATABASE \"${POSTGRESQL_DATABASE}\" TO \"${POSTGRESQL_USERNAME}\"\;" | postgresql_execute "" "postgres" "$POSTGRESQL_PASSWORD"
+    echo "ALTER DATABASE \"${POSTGRESQL_DATABASE}\" OWNER TO \"${POSTGRESQL_USERNAME}\"\;" | postgresql_execute "" "postgres" "$POSTGRESQL_PASSWORD"
     info "Setting ownership for the 'public' schema database \"${POSTGRESQL_DATABASE}\" to \"${POSTGRESQL_USERNAME}\""
     echo "ALTER SCHEMA public OWNER TO \"${POSTGRESQL_USERNAME}\"\;" | postgresql_execute "$POSTGRESQL_DATABASE" "postgres" "$POSTGRESQL_PASSWORD"
 }
@@ -1018,17 +1019,17 @@ postgresql_execute_print_output() {
     local -r user="${2:-postgres}"
     local -r pass="${3:-}"
     local opts
-    read -r -a opts <<< "${@:4}"
+    read -r -a opts <<<"${@:4}"
 
     local args=("-U" "$user")
     [[ -n "$db" ]] && args+=("-d" "$db")
-    [[ "${#opts[@]}" -gt 0 ]] && args+=( "${opts[@]}" )
+    [[ "${#opts[@]}" -gt 0 ]] && args+=("${opts[@]}")
 
     # Obtain the command specified via stdin
     local sql_cmd
-    sql_cmd="$(< /dev/stdin)"
+    sql_cmd="$(</dev/stdin)"
     debug "Executing SQL command:\n$sql_cmd"
-    PGPASSWORD=$pass psql "${args[@]}" <<< "$sql_cmd"
+    PGPASSWORD=$pass psql "${args[@]}" <<<"$sql_cmd"
 }
 
 ########################
@@ -1128,22 +1129,22 @@ postgresql_ensure_user_exists() {
     shift 1
     while [ "$#" -gt 0 ]; do
         case "$1" in
-            -p|--password)
-                shift
-                password="${1:?missing password}"
-                ;;
-            --host)
-                shift
-                db_host="${1:?missing database host}"
-                ;;
-            --port)
-                shift
-                db_port="${1:?missing database port}"
-                ;;
-            *)
-                echo "Invalid command line flag $1" >&2
-                return 1
-                ;;
+        -p | --password)
+            shift
+            password="${1:?missing password}"
+            ;;
+        --host)
+            shift
+            db_host="${1:?missing database host}"
+            ;;
+        --port)
+            shift
+            db_port="${1:?missing database port}"
+            ;;
+        *)
+            echo "Invalid command line flag $1" >&2
+            return 1
+            ;;
         esac
         shift
     done
@@ -1189,6 +1190,7 @@ postgresql_ensure_user_has_database_privileges() {
     debug "Providing privileges to username ${user} on database ${database}"
     "${postgresql_execute_cmd[@]}" "${postgresql_execute_flags[@]}" <<EOF
 GRANT ALL PRIVILEGES ON DATABASE "${database}" TO "${user}";
+ALTER DATABASE "${database}" OWNER TO "${user}";
 EOF
 }
 
@@ -1215,22 +1217,22 @@ postgresql_ensure_database_exists() {
     shift 1
     while [ "$#" -gt 0 ]; do
         case "$1" in
-            -u|--user)
-                shift
-                user="${1:?missing database user}"
-                ;;
-            --host)
-                shift
-                db_host="${1:?missing database host}"
-                ;;
-            --port)
-                shift
-                db_port="${1:?missing database port}"
-                ;;
-            *)
-                echo "Invalid command line flag $1" >&2
-                return 1
-                ;;
+        -u | --user)
+            shift
+            user="${1:?missing database user}"
+            ;;
+        --host)
+            shift
+            db_host="${1:?missing database host}"
+            ;;
+        --port)
+            shift
+            db_port="${1:?missing database port}"
+            ;;
+        *)
+            echo "Invalid command line flag $1" >&2
+            return 1
+            ;;
         esac
         shift
     done
