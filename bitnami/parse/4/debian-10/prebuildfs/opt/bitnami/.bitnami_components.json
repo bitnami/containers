@@ -26,12 +26,5 @@
         "distro": "debian-10",
         "type": "NAMI",
         "version": "4.9.3-1"
-    },
-    "python": {
-        "arch": "amd64",
-        "digest": "28b91ef5db9ad93e704881400703e4085bd82f016be15e3cf8760df044da9490",
-        "distro": "debian-10",
-        "type": "NAMI",
-        "version": "3.8.11-0"
     }
 }
