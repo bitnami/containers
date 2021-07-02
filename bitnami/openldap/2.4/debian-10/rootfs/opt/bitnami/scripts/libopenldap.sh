@@ -51,6 +51,7 @@ export LDAP_ADMIN_USERNAME="${LDAP_ADMIN_USERNAME:-admin}"
 export LDAP_ADMIN_DN="${LDAP_ADMIN_USERNAME/#/cn=},${LDAP_ROOT}"
 export LDAP_ADMIN_PASSWORD="${LDAP_ADMIN_PASSWORD:-adminpassword}"
 export LDAP_ENCRYPTED_ADMIN_PASSWORD="$(echo -n $LDAP_ADMIN_PASSWORD | slappasswd -n -T /dev/stdin)"
+export LDAP_CONFIG_ADMIN_ENABLED="${LDAP_CONFIG_ADMIN_ENABLED:-no}"
 export LDAP_CONFIG_ADMIN_USERNAME="${LDAP_CONFIG_ADMIN_USERNAME:-admin}"
 export LDAP_CONFIG_ADMIN_DN="${LDAP_CONFIG_ADMIN_USERNAME/#/cn=},cn=config"
 export LDAP_CONFIG_ADMIN_PASSWORD="${LDAP_CONFIG_ADMIN_PASSWORD:-configpassword}"
@@ -259,6 +260,10 @@ changetype: modify
 replace: olcAccess
 olcAccess: {0}to * by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external, cn=auth" read by dn.base="${LDAP_ADMIN_DN}" read by * none
 
+EOF
+
+    if is_boolean_yes "$LDAP_CONFIG_ADMIN_ENABLED"; then
+        cat >> "${LDAP_SHARE_DIR}/admin.ldif" << EOF
 dn: olcDatabase={0}config,cn=config
 changetype: modify
 add: olcRootDN
@@ -269,6 +274,7 @@ changetype: modify
 add: olcRootPW
 olcRootPW: $LDAP_ENCRYPTED_CONFIG_ADMIN_PASSWORD
 EOF
+    fi
     debug_execute ldapmodify -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/admin.ldif"
 }
 
