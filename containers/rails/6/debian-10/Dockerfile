@@ -9,7 +9,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl build-essential ca-certificates curl default-libmysqlclient-dev ghostscript git gzip imagemagick libaudit1 libbz2-1.0 libc6 libcap-ng0 libcom-err2 libcurl4 libffi6 libgcc1 libgcrypt20 libgmp-dev libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjemalloc2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmariadb3 libncurses6 libncursesw6 libnettle6 libnghttp2-14 libp11-kit0 libpam0g libpq5 libpsl5 libreadline-dev libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libsqlite3-dev libssh2-1 libssl-dev libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libxml2 libxml2-dev libxslt1-dev netcat netcat-traditional pkg-config procps sqlite3 sudo tar unzip wget zlib1g zlib1g-dev
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "2.6.7-0" --checksum 3d605c181d6ae44f6a6debb7c89a4dc64081b5ee28ca41354946f1fa5cd1276a
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.17.1-1" --checksum c60526f1fa17e1ee0a5a3d8fd51c28c1ad57ae1800a3fa77e107fab9f4d9eeec
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.17.2-0" --checksum 101c00a56ab33ae192e9ac5a1780effa97885104679393a55aa5a941f9ece7f8
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.30-0" --checksum 47107f86621bb184307e47bbb15244d076575f0e0f7d339f198ef312b6f3f285
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.32.0-0" --checksum 3094f50c904e966bd6c6a2d6152cf41fd3a816d32395622a785ccbcda62b7c5f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rails" "6.1.4-0-0" --checksum bc2ad12da3b255f65c70fed6e1e7db6259acb2b4f1e69fc304702ba46d1637c2
@@ -20,7 +20,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/rails/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="rails" \
-    BITNAMI_IMAGE_VERSION="6.1.4-0-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="6.1.4-0-debian-10-r6" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
