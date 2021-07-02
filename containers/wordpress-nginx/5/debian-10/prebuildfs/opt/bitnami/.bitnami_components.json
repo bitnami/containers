@@ -15,17 +15,17 @@
     },
     "nginx": {
         "arch": "amd64",
-        "digest": "a3b7f2f5a8ec3c8c7643c2b93979d2b109573b64d7e0eec9df1f19768bcb0bba",
+        "digest": "1adb8b0952f468544b71a6d0b6e42066be5c80b99fc1f87b1187d67fa95b0481",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.19.10-2"
+        "version": "1.21.0-0"
     },
     "php": {
         "arch": "amd64",
-        "digest": "330a25fc9d868fc0937ed67d172ae7de223b29f4b7cb936a0f325394f9ea93b5",
+        "digest": "cd407e914d11706babacc6a95070cbe96f41f0cef11e879e0d14b666d8be5e64",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.20-2"
+        "version": "7.4.21-0"
     },
     "render-template": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "wordpress": {
         "arch": "amd64",
-        "digest": "59e3a5f6e9caf60b7ab1dd898f3d0339be1828a3099340d511e9e40b285616dd",
+        "digest": "3786cf63e8efed884e705031edf24979784054cc71076fed73eb05b17105ccf2",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "5.7.2-13"
+        "version": "5.7.2-14"
     },
     "wp-cli": {
         "arch": "amd64",
