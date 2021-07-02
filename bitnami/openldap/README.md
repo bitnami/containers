@@ -182,6 +182,9 @@ The Bitnami Docker OpenLDAP can be easily setup with the following environment v
 - `LDAP_CUSTOM_SCHEMA_FILE`: Location of a custom internal schema file that could not be added as custom ldif file (i.e. containing some `structuralObjectClass`). Default is **/schema/custom.ldif**"
 - `LDAP_ULIMIT_NOFILES`: Maximum number of open file descriptors. Default: **1024**.
 - `LDAP_ALLOW_ANON_BINDING`: Allow anonymous bindings to the LDAP server. Default: **yes**.
+- `LDAP_CONFIG_ADMIN_ENABLED`: Whether to create a configuration admin user. Default: **no**.
+- `LDAP_CONFIG_ADMIN_USERNAME`: LDAP configuration admin user. This is separate from `LDAP_ADMIN_USERNAME`. Default: **admin**.
+- `LDAP_CONFIG_ADMIN_PASSWORD`: LDAP configuration admin password. Default: **configpassword**.
 
 Check the official [OpenLDAP Configuration Reference](https://www.openldap.org/doc/admin24/guide.html) for more information about how to configure OpenLDAP.
 
