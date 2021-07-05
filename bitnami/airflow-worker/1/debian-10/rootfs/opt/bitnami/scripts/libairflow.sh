@@ -236,17 +236,20 @@ airflow_configure_webserver_authentication() {
 
     if is_boolean_yes "$AIRFLOW_LDAP_ENABLE"; then
         info "Enabling LDAP authentication"
-        airflow_webserver_conf_set "AUTH_USER_REGISTRATION" "True",
-        airflow_webserver_conf_set "AUTH_TYPE" "AUTH_LDAP",
-        airflow_webserver_conf_set "AUTH_LDAP_SERVER" "$AIRFLOW_LDAP_URI",
-        airflow_webserver_conf_set "AUTH_LDAP_SEARCH" "$AIRFLOW_LDAP_SEARCH",
-        airflow_webserver_conf_set "AUTH_LDAP_BIND_USER" "$AIRFLOW_LDAP_BIND_USER",
-        airflow_webserver_conf_set "AUTH_LDAP_BIND_PASSWORD" "$AIRFLOW_LDAP_BIND_PASSWORD",
-        airflow_webserver_conf_set "AUTH_LDAP_UID_FIELD" "$AIRFLOW_LDAP_UID_FIELD",
-        airflow_webserver_conf_set "AUTH_LDAP_USE_TLS" "$AIRFLOW_LDAP_USE_TLS",
-        airflow_webserver_conf_set "AUTH_LDAP_ALLOW_SELF_SIGNED" "$AIRFLOW_LDAP_ALLOW_SELF_SIGNED",
-        airflow_webserver_conf_set "AUTH_LDAP_TLS_CACERTFILE" "$AIRFLOW_LDAP_TLS_CA_CERTIFICATE",
-        airflow_webserver_conf_set "AUTH_USER_REGISTRATION_ROLE" "$AIRFLOW_USER_REGISTRATION_ROLE",
+        replace_in_file "$AIRFLOW_WEBSERVER_CONF_FILE" "# AUTH_USER_REGISTRATION = True" "AUTH_USER_REGISTRATION = True"
+        airflow_webserver_conf_set "AUTH_TYPE" "AUTH_LDAP"
+        replace_in_file "$AIRFLOW_WEBSERVER_CONF_FILE" "# from flask_appbuilder.security.manager import AUTH_LDAP" "from flask_appbuilder.security.manager import AUTH_LDAP"
+        airflow_webserver_conf_set "AUTH_LDAP_SERVER" "$AIRFLOW_LDAP_URI"
+        airflow_webserver_conf_set "AUTH_LDAP_SEARCH" "$AIRFLOW_LDAP_SEARCH"
+        airflow_webserver_conf_set "AUTH_LDAP_BIND_USER" "$AIRFLOW_LDAP_BIND_USER"
+        airflow_webserver_conf_set "AUTH_LDAP_BIND_PASSWORD" "$AIRFLOW_LDAP_BIND_PASSWORD"
+        airflow_webserver_conf_set "AUTH_LDAP_UID_FIELD" "$AIRFLOW_LDAP_UID_FIELD"
+        airflow_webserver_conf_set "AUTH_LDAP_USE_TLS" "$AIRFLOW_LDAP_USE_TLS"
+        airflow_webserver_conf_set "AUTH_LDAP_ALLOW_SELF_SIGNED" "$AIRFLOW_LDAP_ALLOW_SELF_SIGNED"
+         if [[ "$AIRFLOW_LDAP_USE_TLS" == "True" ]]; then
+            airflow_webserver_conf_set "AUTH_LDAP_TLS_CACERTFILE" "$AIRFLOW_LDAP_TLS_CA_CERTIFICATE"
+        fi
+        airflow_webserver_conf_set "AUTH_USER_REGISTRATION_ROLE" "$AIRFLOW_USER_REGISTRATION_ROLE"
     fi
 }
 
@@ -266,9 +269,9 @@ airflow_webserver_conf_set() {
 
     local -r file="$AIRFLOW_WEBSERVER_CONF_FILE"
     # Check if the value was set before
-    if grep -q "^#*\\s*${key}=.*$" "$file"; then
+    if grep -q "^#*\\s*${key} =.*$" "$file"; then
         # Update the existing key
-        replace_in_file "$file" "^#*\\s*${key}=.*$" "${key} = \"${value}\"" false
+        replace_in_file "$file" "^#*\\s*${key} =.*$" "${key} = \"${value}\"" false
     else
         # Add a new key
         printf '\n%s="%s"' "$key" "$value" >>"$file"
