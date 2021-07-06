@@ -14,13 +14,13 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.48-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.30-0" --checksum 47107f86621bb184307e47bbb15244d076575f0e0f7d339f198ef312b6f3f285
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.21-0" --checksum 292d68cbb7fdb64f5a99d9f8221f4c584083f972f6ab986ed0dc6dced6b43a65
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "joomla" "3.9.27-0" --checksum 0796e4509f58e55809c320f6f1acc56b62a0786804f0ff3ec7ab08616cf65cba
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "joomla" "3.9.28-0" --checksum 155265d942f2fdc07161e782ae04a7b30df9c95e727f9968ba9aedeafaffa742
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.13.0-0" --checksum fd7257c2736164d02832dbf72e2c1ed9d875bf3e32f0988520796bc503330129
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/apache/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
+RUN /opt/bitnami/scripts/apache/postunpack.sh
 RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/joomla/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
@@ -29,7 +29,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="joomla" \
-    BITNAMI_IMAGE_VERSION="3.9.27-debian-10-r32" \
+    BITNAMI_IMAGE_VERSION="3.9.28-debian-10-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
