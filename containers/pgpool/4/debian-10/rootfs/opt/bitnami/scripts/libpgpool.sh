@@ -44,6 +44,7 @@ export PGPOOL_LOG_FILE="${PGPOOL_LOG_DIR}/pgpool.log"
 export PGPOOL_ENABLE_POOL_HBA="${PGPOOL_ENABLE_POOL_HBA:-yes}"
 export PGPOOL_ENABLE_POOL_PASSWD="${PGPOOL_ENABLE_POOL_PASSWD:-yes}"
 export PGPOOL_USER_CONF_FILE="${PGPOOL_USER_CONF_FILE:-}"
+export PGPOOL_USER_HBA_FILE="${PGPOOL_USER_HBA_FILE:-}"
 export PGPOOL_PASSWD_FILE="${PGPOOL_PASSWD_FILE:-pool_passwd}"
 export PATH="${PGPOOL_BIN_DIR}:$PATH"
 
@@ -193,6 +194,10 @@ pgpool_validate() {
 
     if [[ -n "$PGPOOL_USER_CONF_FILE" && ! -e "$PGPOOL_USER_CONF_FILE" ]]; then
         print_validation_error "The provided PGPOOL_USER_CONF_FILE: ${PGPOOL_USER_CONF_FILE} must exist."
+    fi
+
+    if [[ -n "$PGPOOL_USER_HBA_FILE" && ! -e "$PGPOOL_USER_HBA_FILE" ]]; then
+        print_validation_error "The provided PGPOOL_USER_HBA_FILE: ${PGPOOL_USER_HBA_FILE} must exist."
     fi
 
     local yes_no_values=("PGPOOL_ENABLE_POOL_HBA" "PGPOOL_ENABLE_POOL_PASSWD" "PGPOOL_ENABLE_LOAD_BALANCING" "PGPOOL_ENABLE_STATEMENT_LOAD_BALANCING" "PGPOOL_ENABLE_LOG_CONNECTIONS" "PGPOOL_ENABLE_LOG_HOSTNAME" "PGPOOL_ENABLE_LOG_PER_NODE_STATEMENT" "PGPOOL_AUTO_FAILBACK")
@@ -497,6 +502,11 @@ pgpool_create_config() {
     if [[ -f "$PGPOOL_USER_CONF_FILE" ]]; then
         info "Custom configuration '$PGPOOL_USER_CONF_FILE' detected!. Adding it to the configuration file."
         cat "$PGPOOL_USER_CONF_FILE" >>"$PGPOOL_CONF_FILE"
+    fi
+
+    if [[ -f "$PGPOOL_USER_HBA_FILE" ]]; then
+        info "Custom configuration '$PGPOOL_USER_HBA_FILE' detected!. Overwriting the generated hba file."
+        cat "$PGPOOL_USER_HBA_FILE" >"$PGPOOL_PGHBA_FILE"
     fi
 }
 

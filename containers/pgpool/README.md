@@ -265,7 +265,8 @@ Pgpool configuration:
 - `PGPOOL_HEALTH_CHECK_TIMEOUT`: Specifies the timeout in seconds to give up connecting to the backend PostgreSQL if the TCP connect does not succeed within this time. Defaults to `10`.
 - `PGPOOL_HEALTH_CHECK_MAX_RETRIES`: Specifies the maximum number of retries to do before giving up and initiating failover when health check fails. Defaults to `5`.
 - `PGPOOL_HEALTH_CHECK_RETRY_DELAY`: Specifies the amount of time in seconds to sleep between failed health check retries. Defaults to `5`.
-- `PGPOOL_USER_CONF_FILE`: Configuration file to be added to the generated config file. This allow to override configuration set by the initializacion process. No defaults.
+- `PGPOOL_USER_CONF_FILE`: Configuration file to be added to the generated config file. This allow to override configuration set by the initialization process. No defaults.
+- `PGPOOL_USER_HBA_FILE`: Configuration file to be added to the generated hba file. This allow to override configuration set by the initialization process. No defaults.
 - `PGPOOL_POSTGRES_CUSTOM_USERS`: List of comma or semicolon separeted list of postgres usernames. This will create entries in `pgpool_passwd`. No defaults.
 - `PGPOOL_POSTGRES_CUSTOM_PASSWORDS`: List of comma or semicolon separated list for postgresql user passwords. These are the corresponding passwords for the users in `PGPOOL_POSTGRES_CUSTOM_USERS`. No defaults.
 - `PGPOOL_AUTO_FAILBACK`: Enables pgpool `[auto_failback](https://www.pgpool.net/docs/latest/en/html/runtime-config-failover.html)`. Default to `no`.
@@ -428,6 +429,7 @@ Alternatively, you may also provide this configuration in your [custom](https://
 ## Configuration file
 
 You can override the default configuration by providing a configuration file. Set `PGPOOL_USER_CONF_FILE` with the path of the file, and this will be added to the default configuration.
+You can override the default hba configuration by providing a hba configuration file. Set `PGPOOL_USER_HBA_FILE` with the path of the file, and this will overwrite the default hba configuration.
 
 ## Step 1: Generate the configuration file.
 
@@ -438,7 +440,7 @@ max_pool='300'
 
 ### Step 2: Run the Pgpool image
 
-Run the Pgpool image, mounting a directory from your host and setting `PGPOOL_USER_CONF_FILE`. Using Docker Compose:
+Run the Pgpool image, mounting a directory from your host and setting `PGPOOL_USER_CONF_FILE` and `PGPOOL_USER_HBA_FILE`. Using Docker Compose:
 
 ```diff
      image: bitnami/pgpool:4
@@ -446,8 +448,10 @@ Run the Pgpool image, mounting a directory from your host and setting `PGPOOL_US
        - 5432:5432
 +    volumes:
 +      - /path/to/myconf.conf:/config/myconf.conf
++      - /path/to/myhbaconf.conf:/config/myhbaconf.conf
      environment:
 +      - PGPOOL_USER_CONF_FILE=/config/myconf.conf
++      - PGPOOL_USER_HBA_FILE=/config/myhbaconf.conf
        - PGPOOL_BACKEND_NODES=0:pg-0:5432,1:pg-1:5432
        - PGPOOL_SR_CHECK_USER=customuser
 ```
