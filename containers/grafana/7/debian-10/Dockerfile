@@ -20,7 +20,7 @@ RUN mv /opt/bitnami/grafana/conf/sample.ini /opt/bitnami/grafana/conf/grafana.in
 COPY rootfs /
 RUN /grafana-plugins.sh
 ENV BITNAMI_APP_NAME="grafana" \
-    BITNAMI_IMAGE_VERSION="7.5.9-debian-10-r10" \
+    BITNAMI_IMAGE_VERSION="7.5.9-debian-10-r11" \
     PATH="/opt/bitnami/grafana/bin:$PATH"
 
 EXPOSE 3000
