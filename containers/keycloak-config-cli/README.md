@@ -35,7 +35,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4`, `4-debian-10`, `4.0.1`, `4.0.1-debian-10-r0` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak-config-cli/blob/4.0.1-debian-10-r0/4/debian-10/Dockerfile)
-* [`3`, `3-debian-10`, `3.4.0`, `3.4.0-debian-10-r42`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak-config-cli/blob/3.4.0-debian-10-r42/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.4.0`, `3.4.0-debian-10-r43`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak-config-cli/blob/3.4.0-debian-10-r43/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak-config-cli GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak-config-cli).
 
@@ -62,6 +62,10 @@ $ docker build -t bitnami/keycloak-config-cli:latest 'https://github.com/bitnami
 # Configuration
 
 Find how to configure keycloak-config-cli in its [official documentation](https://github.com/adorsys/keycloak-config-cli#cli-option--environment-variables).
+
+# Branch Deprecation Notice
+
+keycloak-config-cli's branch 3 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 08-07-2021.
 
 # Contributing
 
