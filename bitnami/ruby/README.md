@@ -34,12 +34,12 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.0-prod`, `3.0-prod-debian-10`, `3.0.1-prod`, `3.0.1-prod-debian-10-r79` (3.0-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/3.0.1-prod-debian-10-r79/3.0-prod/debian-10/Dockerfile)
-* [`3.0`, `3.0-debian-10`, `3.0.1`, `3.0.1-debian-10-r80` (3.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/3.0.1-debian-10-r80/3.0/debian-10/Dockerfile)
+* [`3.0-prod`, `3.0-prod-debian-10`, `3.0.2-prod`, `3.0.2-prod-debian-10-r0` (3.0-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/3.0.2-prod-debian-10-r0/3.0-prod/debian-10/Dockerfile)
+* [`3.0`, `3.0-debian-10`, `3.0.2`, `3.0.2-debian-10-r-1` (3.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/3.0.2-debian-10-r-1/3.0/debian-10/Dockerfile)
 * [`2.7-prod`, `2.7-prod-debian-10`, `2.7.3-prod`, `2.7.3-prod-debian-10-r82` (2.7-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.7.3-prod-debian-10-r82/2.7-prod/debian-10/Dockerfile)
 * [`2.7`, `2.7-debian-10`, `2.7.3`, `2.7.3-debian-10-r80` (2.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.7.3-debian-10-r80/2.7/debian-10/Dockerfile)
-* [`2.6-prod`, `2.6-prod-debian-10`, `2.6.7-prod`, `2.6.7-prod-debian-10-r79` (2.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.7-prod-debian-10-r79/2.6-prod/debian-10/Dockerfile)
-* [`2.6`, `2.6-debian-10`, `2.6.7`, `2.6.7-debian-10-r82`, `latest` (2.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.7-debian-10-r82/2.6/debian-10/Dockerfile)
+* [`2.6-prod`, `2.6-prod-debian-10`, `2.6.8-prod`, `2.6.8-prod-debian-10-r-1` (2.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.8-prod-debian-10-r-1/2.6-prod/debian-10/Dockerfile)
+* [`2.6`, `2.6-debian-10`, `2.6.8`, `2.6.8-debian-10-r-1`, `latest` (2.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.8-debian-10-r-1/2.6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ruby GitHub repo](https://github.com/bitnami/bitnami-docker-ruby).
 
