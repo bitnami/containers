@@ -35,7 +35,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`14`, `14-debian-10`, `14.0.0`, `14.0.0-debian-10-r0` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/14.0.0-debian-10-r0/14/debian-10/Dockerfile)
-* [`13`, `13-debian-10`, `13.0.1`, `13.0.1-debian-10-r33`, `latest` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/13.0.1-debian-10-r33/13/debian-10/Dockerfile)
+* [`13`, `13-debian-10`, `13.0.1`, `13.0.1-debian-10-r34`, `latest` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/13.0.1-debian-10-r34/13/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak).
 
@@ -261,6 +261,10 @@ keycloak:
 ```
 
 After that, your changes will be taken into account in the server's behaviour.
+
+# Branch Deprecation Notice
+
+Keycloak's branch 13 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 08-07-2021.
 
 # Contributing
 
