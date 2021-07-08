@@ -2,6 +2,11 @@
 #
 # Library for managing files
 
+# shellcheck disable=SC1091
+
+# Load Generic Libraries
+. /opt/bitnami/scripts/libos.sh
+
 # Functions
 
 ########################
@@ -77,4 +82,38 @@ append_file_after_last_match() {
     # We read the file in reverse, replace the first match (0,/pattern/s) and then reverse the results again
     result="$(tac "$file" | sed -E "0,/($match_regex)/s||${value}\n\1|" | tac)"
     echo "$result" > "$file"
+}
+
+########################
+# Wait until certain entry is present in a log file
+# Arguments:
+#   $1 - entry to look for
+#   $2 - log file
+#   $3 - max retries. Default: 12
+#   $4 - sleep between retries (in seconds). Default: 5
+# Returns:
+#   Boolean
+#########################
+wait_for_log_entry() {
+    local -r entry="${1:-missing entry}"
+    local -r log_file="${2:-missing log file}"
+    local -r retries="${3:-12}"
+    local -r interval_time="${4:-5}"
+    local attempt=0
+
+    check_log_file_for_entry() {
+        if ! grep -qE "$entry" "$log_file"; then
+            debug "Entry \"${entry}\" still not present in ${log_file} (attempt $((++attempt))/${retries})"
+            return 1
+        fi
+    }
+    debug "Checking that ${log_file} log file contains entry \"${entry}\""
+    if retry_while check_log_file_for_entry "$retries" "$interval_time"; then
+        debug "Found entry \"${entry}\" in ${log_file}"
+        true
+    else
+        error "Could not find entry \"${entry}\" in ${log_file} after ${retries} retries"
+        debug_execute cat "$log_file"
+        return 1
+    fi
 }
