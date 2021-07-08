@@ -37,7 +37,7 @@ You can find the default credentials and available configuration options in the 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.3.0`, `4.3.0-debian-10-r17`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/4.3.0-debian-10-r17/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.3.0`, `4.3.0-debian-10-r18`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/4.3.0-debian-10-r18/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/neo4j GitHub repo](https://github.com/bitnami/bitnami-docker-neo4j).
 
@@ -150,6 +150,10 @@ When you start the neo4j image, you can adjust the configuration of the instance
 - `NEO4J_BOLT_PORT_NUMBER`: Port used by Neo4j https. Default: **7687**
 - `NEO4J_HTTP_PORT_NUMBER`: Port used by Neo4j http. Default: **7474**
 - `NEO4J_HTTPS_PORT_NUMBER`: Port used by Neo4j https. Default: **7473**
+- `NEO4J_BIND_ADDRESS`: Bind address. Default: **0.0.0.0**
+- `NEO4J_ALLOW_UPGRADE`: Allow automatic schema upgrades. Default: **true**
+- `NEO4J_APOC_IMPORT_FILE_ENABLED`: Allow importing files using the apoc library. Default: **true**
+- `NEO4J_APOC_IMPORT_FILE_USE_NEO4J_CONFIG`: Port used by Neo4j https. Default: **false**
 
 ### Specifying Environment Variables using Docker Compose
 
@@ -171,7 +175,7 @@ $ docker run -d -e NEO4J_BOLT_PORT_NUMBER=7777 --name neo4j bitnami/n3o4j:latest
 
 ## Using your Neo4j configuration files
 
-In order to load your own configuration files, you will have to make them available to the container. You can do it mounting a [volume](https://docs.docker.com/engine/tutorials/dockervolumes/) in the desired location.
+In order to load your own configuration files, you will have to make them available to the container. You can do it mounting a [volume](https://docs.docker.com/engine/tutorials/dockervolumes/) in `/bitnami/neo4j/conf`.
 
 ### Using Docker Compose
 
@@ -181,7 +185,23 @@ Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-neo4
 neo4j:
   ...
   volumes:
-    - '/local/path/to/your/confDir:/container/path/to/your/confDir'
+    - '/local/path/to/your/confDir:/bitnami/neo4j/conf'
+  ...
+```
+
+## Adding extra Neo4j plugins
+
+In order to add extra plugins, you will have to make them available to the container. You can do it mounting a [volume](https://docs.docker.com/engine/tutorials/dockervolumes/) in `/bitnami/neo4j/plugins`.
+
+### Using Docker Compose
+
+Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-neo4j/blob/master/docker-compose.yml) file present in this repository:
+
+```yaml
+neo4j:
+  ...
+  volumes:
+    - '/local/path/to/your/plugins:/bitnami/neo4j/plugins'
   ...
 ```
 
@@ -265,6 +285,10 @@ $ docker-compose up neo4j
 ```
 
 # Notable Changes
+
+## 4.3.0-debian-10-r17
+
+  - Decrease the size of the container. The configuration logic is now based on Bash scripts in the `rootfs/` folder. In addition to this, the container now has the latest stable version of the [apoc library](https://github.com/neo4j-contrib/neo4j-apoc-procedures) enabled by default.
 
 ## 3.4.3-r13
 
