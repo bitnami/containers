@@ -1,37 +1,28 @@
 FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ENV BITNAMI_PKG_CHMOD="-R g+rwX,o+rw" \
-    BITNAMI_PKG_EXTRA_DIRS="/.ghost /opt/bitnami/content" \
-    HOME="/" \
-    PATH="/opt/bitnami/node/bin:/opt/bitnami/python/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/ghost/bin:/opt/bitnami/nami/bin:$PATH"
+ENV HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-10" \
+    OS_NAME="linux"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl ghostscript gzip imagemagick libaudit1 libbsd0 libbz2-1.0 libc6 libcap-ng0 libffi6 libgcc1 libicu63 libjemalloc2 liblzma5 libncurses6 libncursesw6 libpam0g libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 libx11-6 libxau6 libxcb1 libxdmcp6 libxml2 procps sudo tar zlib1g
-RUN /build/bitnami-user.sh
-RUN /build/install-nami.sh
-RUN bitnami-pkg install node-14.17.3-0 --checksum 2ca18a139322e5284f945eee6730c38bfdb238bdf4e5fa15f34ab6a4f1a3b69a
-RUN bitnami-pkg unpack mysql-client-10.3.30-0 --checksum 47107f86621bb184307e47bbb15244d076575f0e0f7d339f198ef312b6f3f285
-RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
-RUN bitnami-pkg install gosu-1.13.0-0 --checksum fd7257c2736164d02832dbf72e2c1ed9d875bf3e32f0988520796bc503330129
-RUN bitnami-pkg unpack ghost-3.42.5-1 --checksum 5e0f1d5860690c9ce195f2602c2d98ad43f381fba7bb3205fa8f80c05212a189
+RUN install_packages acl ca-certificates curl ghostscript gzip imagemagick jq libaudit1 libbsd0 libbz2-1.0 libc6 libcap-ng0 libffi6 libgcc1 libicu63 libjemalloc2 liblzma5 libncurses6 libncursesw6 libpam0g libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 libx11-6 libxau6 libxcb1 libxdmcp6 libxml2 procps tar zlib1g
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.11-0" --checksum 28b91ef5db9ad93e704881400703e4085bd82f016be15e3cf8760df044da9490
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.17.3-0" --checksum 2ca18a139322e5284f945eee6730c38bfdb238bdf4e5fa15f34ab6a4f1a3b69a
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.30-0" --checksum 47107f86621bb184307e47bbb15244d076575f0e0f7d339f198ef312b6f3f285
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.13.0-0" --checksum fd7257c2736164d02832dbf72e2c1ed9d875bf3e32f0988520796bc503330129
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ghost" "3.42.5-2" --checksum b88f9592e3caf0ce8aa7fe3b32a47a1bbb06be6066ab5763c6d9871774e7a151
+RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
+RUN /opt/bitnami/scripts/ghost/postunpack.sh
+RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="3.42.5-debian-10-r66" \
-    BLOG_TITLE="User's Blog" \
-    GHOST_DATABASE_NAME="bitnami_ghost" \
-    GHOST_DATABASE_PASSWORD="" \
-    GHOST_DATABASE_USER="bn_ghost" \
-    GHOST_EMAIL="user@example.com" \
-    GHOST_HOST="" \
-    GHOST_PASSWORD="bitnami123" \
-    GHOST_PORT_NUMBER="80" \
-    GHOST_PROTOCOL="http" \
-    GHOST_USERNAME="user" \
-    LIBNSS_WRAPPER_PATH="/opt/bitnami/common/lib/libnss_wrapper.so" \
+    BITNAMI_IMAGE_VERSION="3.42.5-debian-10-r67" \
+    LD_PRELOAD="/opt/bitnami/common/lib/libnss_wrapper.so" \
     LNAME="ghost" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
@@ -43,24 +34,13 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MYSQL_CLIENT_CREATE_DATABASE_USER="" \
     MYSQL_CLIENT_ENABLE_SSL="no" \
     MYSQL_CLIENT_SSL_CA_FILE="" \
-    NAMI_PREFIX="/.nami" \
-    NSS_WRAPPER_GROUP="/opt/bitnami/ghost/nss_group" \
-    NSS_WRAPPER_PASSWD="/opt/bitnami/ghost/nss_passwd" \
-    OS_ARCH="amd64" \
-    OS_FLAVOUR="debian-10" \
-    OS_NAME="linux" \
-    SMTP_FROM_ADDRESS="" \
-    SMTP_HOST="" \
-    SMTP_PASSWORD="" \
-    SMTP_PORT="" \
-    SMTP_SECURE_CONNECTION="false" \
-    SMTP_SERVICE="" \
-    SMTP_USER="" \
-    USER="ghost"
+    NSS_WRAPPER_GROUP="/opt/bitnami/ghost/nss-wrapper/nss_group" \
+    NSS_WRAPPER_PASSWD="/opt/bitnami/ghost/nss-wrapper/nss_passwd" \
+    PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/ghost/bin:$PATH"
 
 EXPOSE 2368 3000
 
 WORKDIR /opt/bitnami/ghost
 USER 1001
-ENTRYPOINT [ "/app-entrypoint.sh" ]
-CMD [ "/run.sh" ]
+ENTRYPOINT [ "/opt/bitnami/scripts/ghost/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/ghost/run.sh" ]
