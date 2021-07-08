@@ -15,16 +15,9 @@
     },
     "neo4j": {
         "arch": "amd64",
-        "digest": "a34325d9c91f99916718b0db471363a6cab4a2a815a92deedca5a25b9506d07d",
+        "digest": "f42a4456a1b35bc61850c0da36a2968f52806876530aab6a107cbe82e8b7cdbf",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.3.0-1"
-    },
-    "tini": {
-        "arch": "amd64",
-        "digest": "9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d",
-        "distro": "debian-10",
-        "type": "NAMI",
-        "version": "0.19.0-1"
+        "version": "4.3.0-2"
     }
 }

@@ -1,7 +1,0 @@
-{
-  "boltPort": "{{$global.env.NEO4J_BOLT_PORT_NUMBER}}",
-  "host": "{{$global.env.NEO4J_HOST}}",
-  "httpPort": "{{$global.env.NEO4J_HTTP_PORT_NUMBER}}",
-  "httpsPort": "{{$global.env.NEO4J_HTTPS_PORT_NUMBER}}",
-  "password": "{{$global.env.NEO4J_PASSWORD}}"
-}
