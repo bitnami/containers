@@ -290,6 +290,28 @@ services:
   ...
 ```
 
+## Setting up a standalone instance
+
+By default, this image is set up to launch Redis(TM) in standalone mode on port 6379. Should you need to change this behavior, setting the `REDIS_PORT_NUMBER` environment variable will modify the port number. This is not to be confused with `REDIS_MASTER_PORT_NUMBER` or `REDIS_REPLICA_PORT` environment variables that are applicable in replication mode.
+
+```console
+$ docker run --name redis -e REDIS_PORT_NUMBER=7000 -p 7000:7000 bitnami/redis:latest
+```
+
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  redis:
+  ...
+    environment:
+      - REDIS_PORT_NUMBER=7000
+    ...
+    ports:
+      - '7000:7000'
+  ....
+```
+
 ## Setting up replication
 
 A [replication](http://redis.io/topics/replication) cluster can easily be setup with the Bitnami Redis(TM) Docker Image using the following environment variables:
