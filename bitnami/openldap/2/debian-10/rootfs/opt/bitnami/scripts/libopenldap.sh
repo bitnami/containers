@@ -34,7 +34,7 @@ export LDAP_DATA_DIR="${LDAP_VOLUME_DIR}/data"
 export LDAP_ONLINE_CONF_DIR="${LDAP_VOLUME_DIR}/slapd.d"
 export LDAP_PID_FILE="${LDAP_BASE_DIR}/var/run/slapd.pid"
 export LDAP_CUSTOM_LDIF_DIR="${LDAP_CUSTOM_LDIF_DIR:-/ldifs}"
-export LDAP_ALLOW_ANON_BINDINGS="${LDAP_ALLOW_ANON_BINDINGS:-no}"
+export LDAP_ALLOW_ANON_BINDING="${LDAP_ALLOW_ANON_BINDING:-no}"
 export LDAP_CUSTOM_SCHEMA_FILE="${LDAP_CUSTOM_SCHEMA_FILE:-/schema/custom.ldif}"
 export PATH="${LDAP_BIN_DIR}:${LDAP_SBIN_DIR}:$PATH"
 export LDAP_TLS_CERT_FILE="${LDAP_TLS_CERT_FILE:-}"
@@ -438,7 +438,7 @@ ldap_initialize() {
         ldap_create_online_configuration
         ldap_start_bg
         ldap_admin_credentials
-        if [ "$LDAP_ALLOW_ANON_BINDINGS" != 'yes' ]; then
+        if [ "$LDAP_ALLOW_ANON_BINDING" != 'yes' ]; then
             ldap_disable_anon_bindings
         fi
         if is_boolean_yes "$LDAP_ENABLE_TLS"; then
