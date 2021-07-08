@@ -267,15 +267,15 @@ EOF
 # Returns:
 #   None
 #########################
-ldap_disable_anon_bindings() {
-    info "Disable LDAP anonymous bindings"
-    cat > "${LDAP_SHARE_DIR}/ldap_disable_anon_bind.ldif" << EOF
+ldap_disable_anon_binding() {
+    info "Disable LDAP anonymous binding"
+    cat > "${LDAP_SHARE_DIR}/disable_anon_bind.ldif" << EOF
 dn: cn=config
 changetype: modify
 add: olcDisallows
 olcDisallows: bind_anon
 EOF
-    debug_execute ldapmodify -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/ldap_disable_anon_bind.ldif"
+    debug_execute ldapmodify -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/disable_anon_bind.ldif"
 }
 
 ########################
@@ -439,7 +439,7 @@ ldap_initialize() {
         ldap_start_bg
         ldap_admin_credentials
         if [ "$LDAP_ALLOW_ANON_BINDING" != 'yes' ]; then
-            ldap_disable_anon_bindings
+            ldap_disable_anon_binding
         fi
         if is_boolean_yes "$LDAP_ENABLE_TLS"; then
             ldap_configure_tls
