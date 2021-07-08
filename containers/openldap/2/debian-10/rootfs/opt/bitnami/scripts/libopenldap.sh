@@ -438,7 +438,7 @@ ldap_initialize() {
         ldap_create_online_configuration
         ldap_start_bg
         ldap_admin_credentials
-        if [ "$LDAP_ALLOW_ANON_BINDING" != 'yes' ]; then
+        if [ "$LDAP_ALLOW_ANON_BINDING" == 'no' ]; then
             ldap_disable_anon_binding
         fi
         if is_boolean_yes "$LDAP_ENABLE_TLS"; then
