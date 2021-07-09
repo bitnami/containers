@@ -37,7 +37,7 @@ You can find the default credentials and available configuration options in the 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.3.0`, `4.3.0-debian-10-r18`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/4.3.0-debian-10-r18/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.3.0`, `4.3.0-debian-10-r19`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/4.3.0-debian-10-r19/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/neo4j GitHub repo](https://github.com/bitnami/bitnami-docker-neo4j).
 
@@ -289,6 +289,8 @@ $ docker-compose up neo4j
 ## 4.3.0-debian-10-r17
 
   - Decrease the size of the container. The configuration logic is now based on Bash scripts in the `rootfs/` folder. In addition to this, the container now has the latest stable version of the [apoc library](https://github.com/neo4j-contrib/neo4j-apoc-procedures) enabled by default.
+
+  - Now the configuration file is not persisted, so it is recommended to remove the persisted file in `/bitnami/neo4j/conf/` to avoid potential upgrade issues.
 
 ## 3.4.3-r13
 

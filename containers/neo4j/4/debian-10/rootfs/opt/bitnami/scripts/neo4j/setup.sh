@@ -23,6 +23,9 @@ fi
 # Ensure Neo4j environment variables are valid
 neo4j_validate
 
+# Ensure Neo4j daemon user exists when running as 'root'
+am_i_root && ensure_user_exists "$NEO4J_DAEMON_USER" --group "$NEO4J_DAEMON_GROUP"
+
 # Initialize Neo4j
 neo4j_initialize
 
