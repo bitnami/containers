@@ -56,33 +56,6 @@ jenkins_stop() {
 }
 
 ########################
-# Wait until the log file shows that Jenkins is ready
-# Globals:
-#   JENKINS_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-jenkins_wait_for_startup_log_entry() {
-    local -r retries="36"
-    local -r interval_time="10"
-    debug "Checking that jenkins.log file contains entry \"Jenkins is fully up and running\""
-
-    check_function_log_entry() {
-        grep -E "Jenkins is fully up and running" "$JENKINS_LOG_FILE" > /dev/null
-    }
-    if retry_while check_function_log_entry "$retries" "$interval_time"; then
-        debug "Found startup log line"
-        true
-    else
-        error "Jenkins failed to start up"
-        debug_execute cat "$JENKINS_LOG_FILE"
-        exit 1
-    fi
-}
-
-########################
 # Start Jenkins in background
 # Arguments:
 #   None
@@ -106,7 +79,7 @@ jenkins_start_bg() {
     else
         java "${args[@]}" >> "$JENKINS_LOG_FILE" 2>&1 &
     fi
-    jenkins_wait_for_startup_log_entry
+    wait_for_log_entry "Jenkins is fully up and running" "$JENKINS_LOG_FILE" 36 10
 }
 
 ########################
