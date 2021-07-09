@@ -1,0 +1,27 @@
+FROM docker.io/bitnami/minideb:buster
+LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+ENV HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-10" \
+    OS_NAME="linux"
+
+COPY prebuildfs /
+# Install required system packages and dependencies
+RUN install_packages acl ca-certificates curl gzip libc6 procps tar zlib1g
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.11-0" --checksum 8cf28afc1090b0fec1ad841012ead25b59d2d5f4212742c3d62e6007ef57850b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wavefront-proxy" "10.7.0-1" --checksum 8a2965bbdb11786eb133884b67546828a87c7794c6c0c5d86522c783814e0ca5
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.13.0-0" --checksum fd7257c2736164d02832dbf72e2c1ed9d875bf3e32f0988520796bc503330129
+RUN chmod g+rwX /opt/bitnami
+
+COPY rootfs /
+RUN /opt/bitnami/scripts/wavefront-proxy/postunpack.sh
+ENV BITNAMI_APP_NAME="wavefront-proxy" \
+    BITNAMI_IMAGE_VERSION="10.7.0-debian-10-r0" \
+    PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"
+
+EXPOSE 2878
+
+USER 1001
+ENTRYPOINT [ "/opt/bitnami/scripts/wavefront-proxy/entrypoint.sh" ]
+CMD [ "/opt/bitnami/wavefront-proxy/scripts/run.sh" ]
