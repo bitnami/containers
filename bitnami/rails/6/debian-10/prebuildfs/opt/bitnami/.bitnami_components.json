@@ -36,9 +36,9 @@
     },
     "ruby": {
         "arch": "amd64",
-        "digest": "5624996a06ed81e41cbd35305906255dd79c00930e7f069dbc52011edcabdc45",
+        "digest": "aa85db57a30d79ac61743dffac4b1cbdc58b7736ffbffd873ed32248b07f9e51",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.6.8-0"
+        "version": "2.6.8-1"
     }
 }
