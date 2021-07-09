@@ -85,7 +85,7 @@ neo4j_validate() {
 #########################
 neo4j_stop() {
     info "Stopping neo4j"
-    stop_service_using_pid "$NEO4J_PID_FILE"
+    neo4j stop
 }
 
 ########################
@@ -98,13 +98,7 @@ neo4j_stop() {
 #   Whether Neo4j is running
 ########################
 is_neo4j_running() {
-    local pid
-    pid="$(get_pid_from_file "$NEO4J_PID_FILE")"
-    if [[ -n "$pid" ]]; then
-        is_service_running "$pid"
-    else
-        false
-    fi
+    neo4j status | grep -q "Neo4j is running at pid"
 }
 
 ########################
@@ -118,6 +112,24 @@ is_neo4j_running() {
 ########################
 is_neo4j_not_running() {
     ! is_neo4j_running
+}
+
+########################
+# Update the memory settings based on the neo4j-admin memrec command
+# Globals:
+#   NEO4J_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+neo4j_configure_memory_settings() {
+    ## neo4j-admin memrec returns the settings to be added in neo4j.conf
+    ## Source: https://neo4j.com/docs/operations-manual/current/tools/neo4j-admin-memrec/#neo4j-admin-memrec
+    info "Adjusting memory settings"
+    while IFS= read -r setting; do
+        neo4j_conf_set "${setting%=*}" "${setting#*=}"
+    done < <(neo4j-admin memrec | grep -E "^[^#].*=")
 }
 
 ########################
@@ -168,7 +180,7 @@ neo4j_initialize() {
     ## Source: https://neo4j.com/docs/operations-manual/current/configuration/file-locations/#file-locations-permissions
     info "Configuring file permissions for Neo4j"
     if am_i_root; then
-        for dir in "$NEO4J_CONF_DIR" "$NEO4J_PLUGINS_DIR" "$NEO4J_LOGS_DIR" "$NEO4J_DATA_DIR" "$NEO4J_TMP_DIR" "$NEO4J_METRICS_DIR"; do
+        for dir in "$NEO4J_LOGS_DIR" "$NEO4J_DATA_DIR" "$NEO4J_TMP_DIR" "$NEO4J_METRICS_DIR"; do
             configure_permissions_ownership "$dir" -u "$NEO4J_DAEMON_USER" -g "$NEO4J_DAEMON_GROUP" -d 755 -f 644
         done
     fi
@@ -214,7 +226,11 @@ neo4j_initialize() {
         ## Set initial password
         ## Source: https://neo4j.com/docs/operations-manual/current/configuration/set-initial-password/
         info "Configuring initial password"
-        debug_execute neo4j-admin set-initial-password "$NEO4J_PASSWORD"
+        if am_i_root; then
+            debug_execute gosu "$NEO4J_DAEMON_USER" neo4j-admin set-initial-password "$NEO4J_PASSWORD"
+        else
+            debug_execute neo4j-admin set-initial-password "$NEO4J_PASSWORD"
+        fi
     else
         info "Deploying Neo4j with persisted data"
     fi
