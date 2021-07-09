@@ -13,7 +13,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.11-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.17.3-0" --checksum 2ca18a139322e5284f945eee6730c38bfdb238bdf4e5fa15f34ab6a4f1a3b69a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.30-0" --checksum 47107f86621bb184307e47bbb15244d076575f0e0f7d339f198ef312b6f3f285
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.13.0-0" --checksum fd7257c2736164d02832dbf72e2c1ed9d875bf3e32f0988520796bc503330129
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ghost" "4.9.2-0" --checksum 034a8c6a1635b26750337650f36983ba5c74b73256efa5d532aeb5de8b998c6f
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ghost" "4.9.3-0" --checksum b9eaa9b7723a94613834e52faa6a54394b173f20378491de0b037a9a237d5807
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
@@ -21,7 +21,7 @@ RUN /opt/bitnami/scripts/ghost/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="4.9.2-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="4.9.3-debian-10-r0" \
     LD_PRELOAD="/opt/bitnami/common/lib/libnss_wrapper.so" \
     LNAME="ghost" \
     MARIADB_HOST="mariadb" \
