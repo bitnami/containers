@@ -15,30 +15,30 @@
     },
     "odoo": {
         "arch": "amd64",
-        "digest": "29e04dbbdad41d1eb67e7d933135aa012fd3d9077eb7c140c4e2072fe175a8d2",
+        "digest": "02b76f705b08beb5a63a983c631e60bf456f1d648bb6e466592fb34bb9fa8266",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "14.0.20210610-0"
+        "version": "14.0.20210610-1"
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "94395af20a0ee9e12aaab0d1a58bb42290145af8ab7f736c4bb7cc3f51bbf2b6",
+        "digest": "1202c736e3c5b28de1dd1deb05eb2d68bd7ebccc54c9ed1eab05220f346456c3",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "11.12.0-0"
+        "version": "13.3.0-0"
     },
     "python": {
         "arch": "amd64",
-        "digest": "aeca5e596db2cfaa0e14e77c6e32a188cb20ced675a5307be957303e856acf13",
+        "digest": "332cd96e2483f4f6570c2fcb9213e0718215eec983f85eafc8931e2d30f58e49",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.6.14-0"
+        "version": "3.7.11-0"
     },
-    "tini": {
+    "render-template": {
         "arch": "amd64",
-        "digest": "9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d",
+        "digest": "8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.19.0-1"
+        "version": "1.0.0-3"
     }
 }
