@@ -14,7 +14,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     rm -rf /tmp/bitnami/pkg/cache/concourse-7.3.2-0-linux-amd64-debian-10.tar.gz
 
 ENV BITNAMI_APP_NAME="concourse" \
-    BITNAMI_IMAGE_VERSION="7.3.2-debian-10-r17"
+    BITNAMI_IMAGE_VERSION="7.3.2-debian-10-r19"
 
 ENTRYPOINT [ "/opt/bitnami/concourse/bin/concourse" ]
 CMD [ "--help" ]
