@@ -37,6 +37,3 @@ web_server_update_app_configuration "magento"
 
 # Ensure Magento is initialized
 magento_initialize
-
-# Grant execution permissions for the Magento CLI
-chmod 775 "${MAGENTO_BIN_DIR}/magento"
