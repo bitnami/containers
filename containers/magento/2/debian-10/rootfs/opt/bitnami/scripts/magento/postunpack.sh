@@ -52,3 +52,6 @@ info "Creating default web server configuration for Magento"
 web_server_validate
 ensure_web_server_app_configuration_exists "magento" --type php \
     --apache-move-htaccess no # Magento generates .htaccess dynamically during setup
+
+# Grant execution permissions for the Magento CLI
+chmod 775 "${MAGENTO_BIN_DIR}/magento"
