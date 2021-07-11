@@ -43,10 +43,10 @@
     },
     "ruby": {
         "arch": "amd64",
-        "digest": "d8aa0e05776c60697434ae890b52d01f12e6c49b84a3c9bba20eb093ab3a8fc5",
+        "digest": "c0f9bcb452ea0833b81159c1e1656ab0174131930157659875309be2fed2d57c",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.7.4-0"
+        "version": "2.7.4-1"
     },
     "uglify-js": {
         "arch": "amd64",
