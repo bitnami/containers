@@ -13,13 +13,13 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kustomize" "4.2.
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ksonnet" "0.13.1-0" --checksum d789f0ddb6cf2351ba09ca3e907ea2e41605067f398aa8fa069bdcfe59a25cd6
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "helm" "3.6.2-0" --checksum 252298c7656b925c859f339eaf91094475cd2bebf195aca708b5dc188d5603f6
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.13.0-0" --checksum fd7257c2736164d02832dbf72e2c1ed9d875bf3e32f0988520796bc503330129
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "argo-cd" "2.0.4-0" --checksum df45b3e85eae0926c8ad8f917428c715d8ff86feb5107a356c535bece92e0f9d
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "argo-cd" "2.0.4-1" --checksum d62d9d462798cccec49e4de5689d7e3a738b64aabb718924c3b420ddec5410b5
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/argo-cd/postunpack.sh
 ENV BITNAMI_APP_NAME="argo-cd" \
-    BITNAMI_IMAGE_VERSION="2.0.4-debian-10-r15" \
+    BITNAMI_IMAGE_VERSION="2.0.4-debian-10-r16" \
     LIBNSS_WRAPPER_PATH="/opt/bitnami/common/lib/libnss_wrapper.so" \
     LNAME="argocd" \
     NSS_WRAPPER_GROUP="/opt/bitnami/argo-cd/nss_group" \
@@ -28,4 +28,4 @@ ENV BITNAMI_APP_NAME="argo-cd" \
 
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/argo-cd/entrypoint.sh" ]
-CMD [ "nami", "start", "--foreground", "argo-cd" ]
+CMD [ "--help" ]
