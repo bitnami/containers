@@ -42,12 +42,10 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`16-prod`, `16-prod-debian-10`, `16.4.2-prod`, `16.4.2-prod-debian-10-r5` (16-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/16.4.2-prod-debian-10-r5/16-prod/debian-10/Dockerfile)
 * [`16`, `16-debian-10`, `16.4.2`, `16.4.2-debian-10-r5` (16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/16.4.2-debian-10-r5/16/debian-10/Dockerfile)
-* [`15-prod`, `15-prod-debian-10`, `15.14.0-prod`, `15.14.0-prod-debian-10-r85` (15-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/15.14.0-prod-debian-10-r85/15-prod/debian-10/Dockerfile)
-* [`15`, `15-debian-10`, `15.14.0`, `15.14.0-debian-10-r85` (15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/15.14.0-debian-10-r85/15/debian-10/Dockerfile)
 * [`14-prod`, `14-prod-debian-10`, `14.17.3-prod`, `14.17.3-prod-debian-10-r5` (14-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/14.17.3-prod-debian-10-r5/14-prod/debian-10/Dockerfile)
 * [`14`, `14-debian-10`, `14.17.3`, `14.17.3-debian-10-r5`, `latest` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/14.17.3-debian-10-r5/14/debian-10/Dockerfile)
 * [`12-prod`, `12-prod-debian-10`, `12.22.3-prod`, `12.22.3-prod-debian-10-r5` (12-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.22.3-prod-debian-10-r5/12-prod/debian-10/Dockerfile)
-* [`12`, `12-debian-10`, `12.22.3`, `12.22.3-debian-10-r5` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.22.3-debian-10-r5/12/debian-10/Dockerfile)
+* [`12`, `12-debian-10`, `12.22.3`, `12.22.3-debian-10-r6` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.22.3-debian-10-r6/12/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
 
@@ -362,10 +360,6 @@ $ docker-compose up node
 ## 4.1.1-0-r01 (2015-10-07)
 
 - `/app` directory is no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume are not persisted between Dockerfile `RUN` instructions. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
-
-# Branch Deprecation Notice
-
-Node.js's 15 upstream branch will go End-of-Life at the end of May 2021 and has now been internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 07-01-2021
 
 # Contributing
 
