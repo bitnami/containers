@@ -222,7 +222,7 @@ airflow_configure_base_url() {
 }
 
 ########################
-# Configure Airflow webserver authentication
+# Configure Airflow webserver authentication 
 # Globals:
 #   AIRFLOW_*
 # Arguments:
@@ -240,10 +240,10 @@ airflow_configure_webserver_authentication() {
         airflow_webserver_conf_set "AUTH_TYPE" "AUTH_LDAP"
         replace_in_file "$AIRFLOW_WEBSERVER_CONF_FILE" "# from flask_appbuilder.security.manager import AUTH_LDAP" "from flask_appbuilder.security.manager import AUTH_LDAP"
         airflow_webserver_conf_set "AUTH_LDAP_SERVER" "'$AIRFLOW_LDAP_URI'"
-        airflow_webserver_conf_set "AUTH_LDAP_SEARCH" "$AIRFLOW_LDAP_SEARCH"
-        airflow_webserver_conf_set "AUTH_LDAP_BIND_USER" "$AIRFLOW_LDAP_BIND_USER"
-        airflow_webserver_conf_set "AUTH_LDAP_BIND_PASSWORD" "$AIRFLOW_LDAP_BIND_PASSWORD"
-        airflow_webserver_conf_set "AUTH_LDAP_UID_FIELD" "$AIRFLOW_LDAP_UID_FIELD"
+        airflow_webserver_conf_set "AUTH_LDAP_SEARCH" "'$AIRFLOW_LDAP_SEARCH'"
+        airflow_webserver_conf_set "AUTH_LDAP_BIND_USER" "'$AIRFLOW_LDAP_BIND_USER'"
+        airflow_webserver_conf_set "AUTH_LDAP_BIND_PASSWORD" "'$AIRFLOW_LDAP_BIND_PASSWORD'"
+        airflow_webserver_conf_set "AUTH_LDAP_UID_FIELD" "'$AIRFLOW_LDAP_UID_FIELD'"
         airflow_webserver_conf_set "AUTH_LDAP_USE_TLS" "$AIRFLOW_LDAP_USE_TLS"
         airflow_webserver_conf_set "AUTH_LDAP_ALLOW_SELF_SIGNED" "$AIRFLOW_LDAP_ALLOW_SELF_SIGNED"
         if [[ "$AIRFLOW_LDAP_USE_TLS" == "True" ]]; then
@@ -274,7 +274,7 @@ airflow_webserver_conf_set() {
         replace_in_file "$file" "^#*\\s*${key} =.*$" "${key} = ${value}" false
     else
         # Add a new key
-        printf '\n%s="%s"' "$key" "$value" >>"$file"
+        printf '\n%s = %s' "$key" "$value" >>"$file"
     fi
 }
 
