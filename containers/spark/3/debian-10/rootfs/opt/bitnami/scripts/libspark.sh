@@ -49,7 +49,9 @@ export SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED="${SPARK_LOCAL_STORAGE_ENCRYPTION_
 export SPARK_SSL_ENABLED="${SPARK_SSL_ENABLED:-no}"
 export SPARK_SSL_KEY_PASSWORD="${SPARK_SSL_KEY_PASSWORD:-}"
 export SPARK_SSL_KEYSTORE_PASSWORD="${SPARK_SSL_KEYSTORE_PASSWORD:-}"
+export SPARK_SSL_KEYSTORE_FILE="${SPARK_SSL_KEYSTORE_FILE:-${SPARK_CONFDIR}/certs/spark-keystore.jks}"
 export SPARK_SSL_TRUSTSTORE_PASSWORD="${SPARK_SSL_TRUSTSTORE_PASSWORD:-}"
+export SPARK_SSL_TRUSTSTORE_FILE="${SPARK_SSL_TRUSTSTORE_FILE:-${SPARK_CONFDIR}/certs/spark-truststore.jks}"
 export SPARK_SSL_NEED_CLIENT_AUTH="${SPARK_SSL_NEED_CLIENT_AUTH:-yes}"
 export SPARK_SSL_PROTOCOL="${SPARK_SSL_PROTOCOL:-TLSv1.2}"
 
@@ -82,10 +84,11 @@ spark_validate() {
 
     # Validate spark mode
     case "$SPARK_MODE" in
-        master|worker)
+    master | worker) ;;
+
+    *)
+        print_validation_error "Invalid mode $SPARK_MODE. Supported types are 'master/worker'"
         ;;
-        *)
-            print_validation_error "Invalid mode $SPARK_MODE. Supported types are 'master/worker'"
     esac
 
     # Validate metrics enabled
@@ -111,11 +114,11 @@ spark_validate() {
         if [[ -z "$SPARK_SSL_TRUSTSTORE_PASSWORD" ]]; then
             print_validation_error "If you enable SSL configuration, you must provide the password to the trust store."
         fi
-        if [[ ! -f "${SPARK_CONFDIR}/certs/spark-keystore.jks" ]]; then
-            print_validation_error "If you enable SSL configuration, you must mount your keystore file to \"${SPARK_CONFDIR}/certs/spark-keystore.jks\""
+        if [[ ! -f "${SPARK_SSL_KEYSTORE_FILE}" ]]; then
+            print_validation_error "If you enable SSL configuration, you must mount your keystore file and specify the location in SPARK_SSL_KEYSTORE_FILE. Default value: ${SPARK_SSL_KEYSTORE_FILE}"
         fi
-        if [[ ! -f "${SPARK_CONFDIR}/certs/spark-truststore.jks" ]]; then
-            print_validation_error "If you enable SSL configuration, you must mount your trutstore file to \"${SPARK_CONFDIR}/certs/spark-truststore.jks\""
+        if [[ ! -f "${SPARK_SSL_TRUSTSTORE_FILE}" ]]; then
+            print_validation_error "If you enable SSL configuration, you must mount your trutstore file and specify the location in SPARK_SSL_TRUSTSTORE_FILE. Default value: ${SPARK_SSL_TRUSTSTORE_FILE}\""
         fi
     fi
 
@@ -155,7 +158,7 @@ spark_generate_conf_file() {
 spark_enable_rpc_authentication() {
     info "Configuring Spark RPC authentication..."
 
-    echo "# Spark RPC Authentication settings" >> "${SPARK_CONFDIR}/spark-defaults.conf"
+    echo "# Spark RPC Authentication settings" >>"${SPARK_CONFDIR}/spark-defaults.conf"
     spark_conf_set spark.authenticate "true"
     spark_conf_set spark.authenticate.secret "$SPARK_RPC_AUTHENTICATION_SECRET"
 }
@@ -172,7 +175,7 @@ spark_enable_rpc_authentication() {
 spark_enable_rpc_encryption() {
     info "Configuring Spark RPC encryption..."
 
-    echo "# Spark RPC Encryption settings" >> "${SPARK_CONFDIR}/spark-defaults.conf"
+    echo "# Spark RPC Encryption settings" >>"${SPARK_CONFDIR}/spark-defaults.conf"
     spark_conf_set spark.network.crypto.enabled "true"
     spark_conf_set spark.network.crypto.keyLength "128"
 }
@@ -189,14 +192,13 @@ spark_enable_rpc_encryption() {
 spark_enable_local_storage_encryption() {
     info "Configuring Spark local storage encryption..."
 
-    echo "# Spark Local Storate Encryption settings" >> "${SPARK_CONFDIR}/spark-defaults.conf"
+    echo "# Spark Local Storate Encryption settings" >>"${SPARK_CONFDIR}/spark-defaults.conf"
     spark_conf_set spark.io.encryption.enabled "true"
     spark_conf_set spark.io.encryption.keySizeBits "128"
 }
 
-
 ########################
-# Enable metrics 
+# Enable metrics
 # Globals:
 #   SPARK_*
 # Arguments:
@@ -227,17 +229,17 @@ spark_enable_metrics() {
 spark_enable_ssl() {
     info "Configuring Spark SSL..."
 
-    echo "# Spark SSL settings" >> "${SPARK_CONFDIR}/spark-defaults.conf"
+    echo "# Spark SSL settings" >>"${SPARK_CONFDIR}/spark-defaults.conf"
     spark_conf_set spark.ssl.enabled "true"
     spark_conf_set spark.ssl.keyPassword "${SPARK_SSL_KEY_PASSWORD}"
-    spark_conf_set spark.ssl.keyStore "${SPARK_CONFDIR}/certs/spark-keystore.jks"
+    spark_conf_set spark.ssl.keyStore "${SPARK_SSL_KEYSTORE_FILE}"
     spark_conf_set spark.ssl.keyStorePassword "${SPARK_SSL_KEYSTORE_PASSWORD}"
     spark_conf_set spark.ssl.keyStoreType "JKS"
     spark_conf_set spark.ssl.protocol "${SPARK_SSL_PROTOCOL}"
     if is_boolean_yes "$SPARK_SSL_NEED_CLIENT_AUTH"; then
         spark_conf_set spark.ssl.needClientAuth "true"
     fi
-    spark_conf_set spark.ssl.trustStore "${SPARK_CONFDIR}/certs/spark-truststore.jks"
+    spark_conf_set spark.ssl.trustStore "${SPARK_SSL_TRUSTSTORE_FILE}"
     spark_conf_set spark.ssl.trustStorePassword "${SPARK_SSL_TRUSTSTORE_PASSWORD}"
     spark_conf_set spark.ssl.trustStoreType "JKS"
 }
@@ -286,7 +288,7 @@ spark_conf_set() {
 
     [[ "$value" = "" ]] && value="\"$value\""
 
-    echo "$key $value" >> "${SPARK_BASEDIR}/conf/spark-defaults.conf"
+    echo "$key $value" >>"${SPARK_BASEDIR}/conf/spark-defaults.conf"
 }
 
 ########################
@@ -326,7 +328,7 @@ spark_initialize() {
 
         # Enable metrics
         if is_boolean_yes "$SPARK_METRICS_ENABLED"; then
-           spark_enable_metrics
+            spark_enable_metrics
         fi
     else
         info "Detected mounted configuration file..."

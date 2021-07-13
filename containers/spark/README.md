@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.1.2`, `3.1.2-debian-10-r30`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spark/blob/3.1.2-debian-10-r30/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.1.2`, `3.1.2-debian-10-r31`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spark/blob/3.1.2-debian-10-r31/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/spark GitHub repo](https://github.com/bitnami/bitnami-docker-spark).
 
@@ -104,8 +104,10 @@ Available variables:
 * SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED: Enable local storage encryption: Default **no**
 * SPARK_SSL_ENABLED: Enable SSL configuration. Default: **no**
 * SPARK_SSL_KEY_PASSWORD: The password to the private key in the key store. No defaults.
+* SPARK_SSL_KEYSTORE_FILE: Location of the key store. Default: **/opt/bitnami/spark/conf/certs/spark-keystore.jks**.
 * SPARK_SSL_KEYSTORE_PASSWORD: The password for the key store. No defaults.
 * SPARK_SSL_TRUSTSTORE_PASSWORD: The password for the trust store. No defaults.
+* SPARK_SSL_TRUSTSTORE_FILE: Location of the key store. Default: **/opt/bitnami/spark/conf/certs/spark-truststore.jks**.
 * SPARK_SSL_NEED_CLIENT_AUTH: Whether to require client authentication. Default: **yes**
 * SPARK_SSL_PROTOCOL: TLS protocol to use. Default: **TLSv1.2**
 * SPARK_DAEMON_USER: Spark system user when the container is started as root. Default: **spark**
