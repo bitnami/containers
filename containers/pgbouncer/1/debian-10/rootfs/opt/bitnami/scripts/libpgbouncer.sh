@@ -198,7 +198,7 @@ pgbouncer_initialize() {
         ini-file set --section "pgbouncer" --key "logfile" --value "$PGBOUNCER_LOG_FILE" "$PGBOUNCER_CONF_FILE"
         ini-file set --section "pgbouncer" --key "admin_users" --value "$POSTGRESQL_USERNAME" "$PGBOUNCER_CONF_FILE"
         ini-file set --section "pgbouncer" --key "client_tls_sslmode" --value "$PGBOUNCER_CLIENT_TLS_SSLMODE" "$PGBOUNCER_CONF_FILE"
-        if [[ -n "$PGBOUNCER_IGNORE_STARTUP_PARAMETERS" ]]; then
+        if ! is_empty_value "$PGBOUNCER_IGNORE_STARTUP_PARAMETERS"; then
             ini-file set --section "pgbouncer" --key "ignore_startup_parameters" --value "$PGBOUNCER_IGNORE_STARTUP_PARAMETERS" "$PGBOUNCER_CONF_FILE"
         fi
         if [[ "$PGBOUNCER_CLIENT_TLS_SSLMODE" != "disable" ]]; then
