@@ -15,10 +15,10 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "47107f86621bb184307e47bbb15244d076575f0e0f7d339f198ef312b6f3f285",
+        "digest": "85d9e5d8f92e8aac0cdc8a17d09e1887fa1b11d5e5319a66093a4e933b73ac8c",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.3.30-0"
+        "version": "10.4.20-0"
     },
     "postgresql-client": {
         "arch": "amd64",
@@ -41,11 +41,11 @@
         "type": "NAMI",
         "version": "2.6.8-1"
     },
-    "tini": {
+    "yq": {
         "arch": "amd64",
-        "digest": "9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d",
+        "digest": "c88c76a7b5214407821771e5fc340f0320d5ded19eada938629603a982b8b640",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.19.0-1"
+        "version": "3.4.1-0"
     }
 }
