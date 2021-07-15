@@ -345,8 +345,8 @@ generate_random_string() {
 #   md5 hash - string
 #########################
 generate_md5_hash() {
-  local -r str="${1:?missing input string}"
-  echo -n "$str" | md5sum | awk '{print $1}'
+    local -r str="${1:?missing input string}"
+    echo -n "$str" | md5sum | awk '{print $1}'
 }
 
 ########################
