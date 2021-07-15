@@ -1,10 +1,10 @@
 {
     "chartmuseum": {
         "arch": "amd64",
-        "digest": "ed1fc41089fef5de1112e728bc965a3fc994c47b6da9c65d83038d8e94033579",
+        "digest": "de10f2d7e5c4832c487630f55d1dd1bde770586c31392d4c664eb434a001badf",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.13.1-0"
+        "version": "0.13.1-2"
     },
     "gosu": {
         "arch": "amd64",
