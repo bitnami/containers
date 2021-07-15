@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.4.58`, `2.4.58-debian-10-r92`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.4.58-debian-10-r92/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.4.58`, `2.4.58-debian-10-r93`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.4.58-debian-10-r93/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/openldap GitHub repo](https://github.com/bitnami/bitnami-docker-openldap).
 
@@ -180,7 +180,6 @@ The Bitnami Docker OpenLDAP can be easily setup with the following environment v
 - `LDAP_CUSTOM_LDIF_DIR`: Location of a directory that contains LDIF files that should be used to bootstrap the database. Only files ending in `.ldif` will be used. Default LDAP tree based on the `LDAP_USERS`, `LDAP_PASSWORDS`, `LDAP_USER_DC` and `LDAP_GROUP` will be skipped when `LDAP_CUSTOM_LDIF_DIR` is used. When using this will override the usage of `LDAP_ROOT`,`LDAP_USERS`, `LDAP_PASSWORDS`, `LDAP_USER_DC` and `LDAP_GROUP`. Default: **/ldifs**
 - `LDAP_CUSTOM_SCHEMA_FILE`: Location of a custom internal schema file that could not be added as custom ldif file (i.e. containing some `structuralObjectClass`). Default is **/schema/custom.ldif**"
 - `LDAP_ULIMIT_NOFILES`: Maximum number of open file descriptors. Default: **1024**.
-- `LDAP_ALLOW_ANON_BINDING`: Allow anonymous bindings to the LDAP server. Default: **yes**.
 
 Check the official [OpenLDAP Configuration Reference](https://www.openldap.org/doc/admin24/guide.html) for more information about how to configure OpenLDAP.
 
