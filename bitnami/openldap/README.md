@@ -35,7 +35,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.4.58`, `2.4.58-debian-10-r93`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.4.58-debian-10-r93/2/debian-10/Dockerfile)
+* [`2.5`, `2.5-debian-10`, `2.5.5`, `2.5.5-debian-10-r0`, `latest` (2.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.5.5-debian-10-r0/2.5/debian-10/Dockerfile)
+* [`2.4`, `2.4-debian-10`, `2.4.59`, `2.4.59-debian-10-r-1` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.4.59-debian-10-r-1/2.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/openldap GitHub repo](https://github.com/bitnami/bitnami-docker-openldap).
 
@@ -56,7 +57,7 @@ $ docker pull bitnami/openldap:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/openldap:latest 'https://github.com/bitnami/bitnami-docker-openldap.git#master:2/debian-10'
+$ docker build -t bitnami/openldap:latest 'https://github.com/bitnami/bitnami-docker-openldap.git#master:2.5/debian-10'
 ```
 
 # Connecting to other containers
@@ -275,6 +276,11 @@ Re-create your container from the new image.
 $ docker run --name openldap bitnami/openldap:latest
 ```
 
+# Notable Changes
+
+## 2.4.58-debian-10-r93
+
+- The default database backend has been changed from `hdb` to `mdb` as recommended. No additional steps should be necessary at upgrade time; the new container version `2.4.59` will initialize using the persisted data.
 
 # Contributing
 
