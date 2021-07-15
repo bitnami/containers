@@ -63,7 +63,7 @@ To run commands inside this container you can use `docker run`, for example to e
 $ docker run --rm --name aws-cli bitnami/aws-cli:latest -- --version
 ```
 
-Consult the [aws-cli Reference Documentation](https://docs.microsoft.com/en-us/cli/azure/reference-index?view=aws-cli-latest) to find the completed list of commands available.
+Consult the [aws-cli Reference Documentation](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/index.html) to find the completed list of commands available.
 
 ## Loading your own configuration
 
