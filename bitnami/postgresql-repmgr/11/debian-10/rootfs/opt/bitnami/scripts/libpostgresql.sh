@@ -367,7 +367,7 @@ postgresql_create_replication_user() {
 postgresql_configure_replication_parameters() {
     local -r psql_major_version="$(postgresql_get_major_version)"
     info "Configuring replication parameters"
-    postgresql_set_property "wal_level" "hot_standby"
+    postgresql_set_property "wal_level" "$POSTGRESQL_WAL_LEVEL"
     postgresql_set_property "max_wal_size" "400MB"
     postgresql_set_property "max_wal_senders" "16"
     if ((psql_major_version >= 13)); then

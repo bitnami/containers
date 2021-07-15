@@ -353,7 +353,7 @@ repmgr_inject_postgresql_configuration() {
     fi
     postgresql_set_property "max_wal_senders" "16"
     postgresql_set_property "max_replication_slots" "10"
-    postgresql_set_property "wal_level" "hot_standby"
+    postgresql_set_property "wal_level" "$POSTGRESQL_WAL_LEVEL"
     postgresql_set_property "archive_mode" "on"
     postgresql_set_property "hot_standby" "on"
     postgresql_set_property "archive_command" "/bin/true"
@@ -709,8 +709,8 @@ repmgr_initialize() {
         postgresql_start_bg
         repmgr_unregister_standby
         repmgr_register_standby
-        
-        if [[ "$psql_major_version" -lt "12" ]]; then 
+
+        if [[ "$psql_major_version" -lt "12" ]]; then
             info "Check if primary running..."
             repmgr_wait_primary_node
             repmgr_standby_follow
