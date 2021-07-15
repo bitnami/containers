@@ -34,7 +34,6 @@ export LDAP_DATA_DIR="${LDAP_VOLUME_DIR}/data"
 export LDAP_ONLINE_CONF_DIR="${LDAP_VOLUME_DIR}/slapd.d"
 export LDAP_PID_FILE="${LDAP_BASE_DIR}/var/run/slapd.pid"
 export LDAP_CUSTOM_LDIF_DIR="${LDAP_CUSTOM_LDIF_DIR:-/ldifs}"
-export LDAP_ALLOW_ANON_BINDING="${LDAP_ALLOW_ANON_BINDING:-yes}"
 export LDAP_CUSTOM_SCHEMA_FILE="${LDAP_CUSTOM_SCHEMA_FILE:-/schema/custom.ldif}"
 export PATH="${LDAP_BIN_DIR}:${LDAP_SBIN_DIR}:$PATH"
 export LDAP_TLS_CERT_FILE="${LDAP_TLS_CERT_FILE:-}"
@@ -259,26 +258,6 @@ EOF
 }
 
 ########################
-# Disable LDAP anonymous bindings
-# Globals:
-#   LDAP_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-ldap_disable_anon_binding() {
-    info "Disable LDAP anonymous binding"
-    cat > "${LDAP_SHARE_DIR}/disable_anon_bind.ldif" << EOF
-dn: cn=config
-changetype: modify
-add: olcDisallows
-olcDisallows: bind_anon
-EOF
-    debug_execute ldapmodify -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/disable_anon_bind.ldif"
-}
-
-########################
 # Add LDAP schemas
 # Globals:
 #   LDAP_*
@@ -438,9 +417,6 @@ ldap_initialize() {
         ldap_create_online_configuration
         ldap_start_bg
         ldap_admin_credentials
-        if [ "$LDAP_ALLOW_ANON_BINDING" == 'no' ]; then
-            ldap_disable_anon_binding
-        fi
         if is_boolean_yes "$LDAP_ENABLE_TLS"; then
             ldap_configure_tls
         fi
