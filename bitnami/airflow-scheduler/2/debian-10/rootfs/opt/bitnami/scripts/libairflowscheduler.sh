@@ -47,7 +47,7 @@ airflow_scheduler_validate() {
 #########################
 airflow_scheduler_initialize() {
     # Change permissions if running as root
-    for dir in "$AIRFLOW_TMP_DIR" "$AIRFLOW_LOGS_DIR" "$AIRFLOW_DATA_DIR"; do
+    for dir in "$AIRFLOW_TMP_DIR" "$AIRFLOW_LOGS_DIR" "$AIRFLOW_SCHEDULER_LOGS_DIR" "$AIRFLOW_DATA_DIR"; do
         ensure_dir_exists "$dir"
         am_i_root && chown "$AIRFLOW_DAEMON_USER:$AIRFLOW_DAEMON_GROUP" "$dir"
     done
