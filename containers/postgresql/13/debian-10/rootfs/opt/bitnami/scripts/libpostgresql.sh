@@ -733,7 +733,9 @@ postgresql_start_bg() {
     local -r pg_logs=${1:-false}
     local -r pg_ctl_flags=("-w" "-D" "$POSTGRESQL_DATA_DIR" "-l" "$POSTGRESQL_LOG_FILE" "-o" "--config-file=$POSTGRESQL_CONF_FILE --external_pid_file=$POSTGRESQL_PID_FILE --hba_file=$POSTGRESQL_PGHBA_FILE")
     info "Starting PostgreSQL in background..."
-    is_postgresql_running && return
+    if is_postgresql_running; then
+        return 0
+    fi
     local pg_ctl_cmd=()
     if am_i_root; then
         pg_ctl_cmd+=("gosu" "$POSTGRESQL_DAEMON_USER")
