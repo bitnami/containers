@@ -287,15 +287,16 @@ EOF
             # Configure Host
             ghost_configure_host "$GHOST_HOST"
             # Configure smtp
+            # https://ghost.org/docs/config/#mail
             if ! is_empty_value "$GHOST_SMTP_HOST"; then
                 info "Configuring SMTP settings"
-                ghost_conf_set "smtpConfig.from" "$GHOST_EMAIL"
-                ghost_conf_set "smtpConfig.transport" "SMTP"
-                ghost_conf_set "smtpConfig.options.host" "$GHOST_SMTP_HOST"
-                ghost_conf_set "smtpConfig.options.port" "$GHOST_SMTP_PORT_NUMBER" "int"
-                ghost_conf_set "smtpConfig.options.secureConnection" "$([[ "$GHOST_SMTP_PROTOCOL" = "ssl" || "$GHOST_SMTP_PROTOCOL" = "tls" ]] && echo "true" || echo "false")"
-                ghost_conf_set "smtpConfig.options.auth.user" "$GHOST_SMTP_USER"
-                ghost_conf_set "smtpConfig.options.auth.pass" "$GHOST_SMTP_PASSWORD"
+                ghost_conf_set "mail.from" "$GHOST_EMAIL"
+                ghost_conf_set "mail.transport" "SMTP"
+                ghost_conf_set "mail.options.host" "$GHOST_SMTP_HOST"
+                ghost_conf_set "mail.options.port" "$GHOST_SMTP_PORT_NUMBER" "int"
+                ghost_conf_set "mail.options.secureConnection" "$([[ "$GHOST_SMTP_PROTOCOL" = "ssl" || "$GHOST_SMTP_PROTOCOL" = "tls" ]] && echo "true" || echo "false")"
+                ghost_conf_set "mail.options.auth.user" "$GHOST_SMTP_USER"
+                ghost_conf_set "mail.options.auth.pass" "$GHOST_SMTP_PASSWORD"
             fi
             # Configure Admin account
             ghost_pass_wizard
