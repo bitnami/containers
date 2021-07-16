@@ -28,7 +28,7 @@ services:
       - mariadb
       - elasticsearch
   elasticsearch:
-    image: docker.io/bitnami/elasticsearch:6
+    image: docker.io/bitnami/elasticsearch:7.13.3-debian-10-r0
     volumes:
       - 'elasticsearch_data:/bitnami/elasticsearch/data'
 volumes:
