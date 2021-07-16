@@ -34,7 +34,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.1.1`, `7.1.1-debian-10-r11`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-gradle/blob/7.1.1-debian-10-r11/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.1.1`, `7.1.1-debian-10-r12`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-gradle/blob/7.1.1-debian-10-r12/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/gradle GitHub repo](https://github.com/bitnami/bitnami-docker-gradle).
 
