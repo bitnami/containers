@@ -32,7 +32,7 @@ fi
 is_ghost_running() {
     local pid
 
-    pgrep -f "^ghost" > "$GHOST_PID_FILE"
+    pgrep -f "^ghost" >"$GHOST_PID_FILE"
     pid="$(get_pid_from_file "$GHOST_PID_FILE")"
     if [[ -n "$pid" ]]; then
         is_service_running "$pid"
@@ -86,9 +86,9 @@ ghost_start_bg() {
     if am_i_root; then
         touch "$GHOST_LOG_FILE"
         configure_permissions_ownership "$GHOST_LOG_FILE" -u "$GHOST_DAEMON_USER" -g "$GHOST_DAEMON_GROUP"
-        gosu "$GHOST_DAEMON_USER" ghost start --no-enable >> "$GHOST_LOG_FILE" 2>&1
+        gosu "$GHOST_DAEMON_USER" ghost start --no-enable >>"$GHOST_LOG_FILE" 2>&1
     else
-        ghost start --no-enable >> "$GHOST_LOG_FILE" 2>&1
+        ghost start --no-enable >>"$GHOST_LOG_FILE" 2>&1
     fi
     wait_for_log_entry "Your admin interface is located at" "$GHOST_LOG_FILE"
     sleep 5
@@ -248,7 +248,7 @@ ghost_initialize() {
         ghost_wait_for_mysql_connection "$GHOST_DATABASE_HOST" "$GHOST_DATABASE_PORT_NUMBER" "$GHOST_DATABASE_NAME" "$GHOST_DATABASE_USER" "$GHOST_DATABASE_PASSWORD"
         # Configure database
         info "Configuring database"
-        jq '.' > "$GHOST_CONF_FILE" << EOF
+        jq '.' >"$GHOST_CONF_FILE" <<EOF
 {
   "database": {
     "client": "mysql",
@@ -377,7 +377,8 @@ ghost_pass_wizard() {
     # Ensure Ghost is started
     ghost_start_bg
     # User creation & Blog Title configuration
-    data="$(jq '.' << EOF
+    data="$(
+        jq '.' <<EOF
 {
   "setup": [{
     "name": "${GHOST_USERNAME}",
@@ -387,7 +388,7 @@ ghost_pass_wizard() {
   }]
 }
 EOF
-)"
+    )"
     curl_data_opts=(
         "--data" "$data"
     )
