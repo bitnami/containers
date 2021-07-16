@@ -31,7 +31,7 @@ You can find the default credentials and available configuration options in the 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`2`, `2-debian-10`, `2.7.5`, `2.7.5-debian-10-r3`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.7.5-debian-10-r3/2/debian-10/Dockerfile)
+- [`2`, `2-debian-10`, `2.7.5`, `2.7.5-debian-10-r4`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.7.5-debian-10-r4/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/discourse GitHub repo](https://github.com/bitnami/bitnami-docker-discourse).
 
@@ -339,7 +339,7 @@ To configure Discourse to send email using SMTP you can set the following enviro
 - `DISCOURSE_SMTP_USER`: SMTP account user.
 - `DISCOURSE_SMTP_PASSWORD`: SMTP account password.
 - `DISCOURSE_SMTP_PROTOCOL`: If specified, SMTP protocol to use. Allowed values: tls, ssl. No default.
-- `DISCOURSE_SMTP_AUTH`: SMTP authentication method. Default: **login**.
+- `DISCOURSE_SMTP_AUTH`: SMTP authentication method. Allowed values: *login*, *plain*, *cram_md5*. Default: **login**.
 
 #### Examples
 
