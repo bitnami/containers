@@ -23,7 +23,7 @@ RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/redmine/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redmine" \
-    BITNAMI_IMAGE_VERSION="4.2.1-debian-10-r71" \
+    BITNAMI_IMAGE_VERSION="4.2.1-debian-10-r72" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
