@@ -20,7 +20,7 @@ for dir in "$AIRFLOW_VOLUME_DIR" "$AIRFLOW_BASE_DIR" "$AIRFLOW_DATA_DIR"; do
 done
 
 # Ensure the needed directories exist with write permissions
-for dir in "$AIRFLOW_TMP_DIR" "$AIRFLOW_LOGS_DIR" "$AIRFLOW_DAGS_DIR"; do
+for dir in "$AIRFLOW_TMP_DIR" "$AIRFLOW_LOGS_DIR" "$AIRFLOW_SCHEDULER_LOGS_DIR" "$AIRFLOW_DAGS_DIR"; do
     ensure_dir_exists "$dir"
     configure_permissions_ownership "$dir" -d "775" -f "664" -g "root"
 done
