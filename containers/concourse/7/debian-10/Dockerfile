@@ -12,9 +12,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "1677702817f133bdb3067ff361cf395ce90fc4eb10f89b43606714247dd8b837  /tmp/bitnami/pkg/cache/concourse-7.3.2-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/concourse-7.3.2-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/concourse-7.3.2-0-linux-amd64-debian-10.tar.gz
+RUN touch /.flyrc && chmod g+rwX /.flyrc
 
 ENV BITNAMI_APP_NAME="concourse" \
-    BITNAMI_IMAGE_VERSION="7.3.2-debian-10-r22"
+    BITNAMI_IMAGE_VERSION="7.3.2-debian-10-r23" \
+    PATH="/opt/bitnami/concourse/bin:$PATH"
 
-ENTRYPOINT [ "/opt/bitnami/concourse/bin/concourse" ]
-CMD [ "--help" ]
+CMD [ "/opt/bitnami/concourse/bin/concourse", "--help" ]
