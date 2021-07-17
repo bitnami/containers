@@ -49,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`10.5`, `10.5-debian-10`, `10.5.11`, `10.5.11-debian-10-r18`, `latest` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.5.11-debian-10-r18/10.5/debian-10/Dockerfile)
 * [`10.4`, `10.4-debian-10`, `10.4.20`, `10.4.20-debian-10-r19` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.20-debian-10-r19/10.4/debian-10/Dockerfile)
-* [`10.3`, `10.3-debian-10`, `10.3.30`, `10.3.30-debian-10-r18` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.30-debian-10-r18/10.3/debian-10/Dockerfile)
+* [`10.3`, `10.3-debian-10`, `10.3.30`, `10.3.30-debian-10-r19` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.30-debian-10-r19/10.3/debian-10/Dockerfile)
 * [`10.2`, `10.2-debian-10`, `10.2.39`, `10.2.39-debian-10-r18` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.39-debian-10-r18/10.2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb-galera GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb-galera).
