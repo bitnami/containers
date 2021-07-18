@@ -44,7 +44,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`6.2`, `6.2-debian-10`, `6.2.4`, `6.2.4-debian-10-r36`, `latest` (6.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/6.2.4-debian-10-r36/6.2/debian-10/Dockerfile)
 * [`6.0`, `6.0-debian-10`, `6.0.14`, `6.0.14-debian-10-r37` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/6.0.14-debian-10-r37/6.0/debian-10/Dockerfile)
-* [`5.0`, `5.0-debian-10`, `5.0.12`, `5.0.12-debian-10-r117` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/5.0.12-debian-10-r117/5.0/debian-10/Dockerfile)
+* [`5.0`, `5.0-debian-10`, `5.0.12`, `5.0.12-debian-10-r118` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/5.0.12-debian-10-r118/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-cluster GitHub repo](https://github.com/bitnami/bitnami-docker-redis-cluster).
 
