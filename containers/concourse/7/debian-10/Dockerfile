@@ -15,7 +15,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN touch /.flyrc && chmod g+rwX /.flyrc
 
 ENV BITNAMI_APP_NAME="concourse" \
-    BITNAMI_IMAGE_VERSION="7.3.2-debian-10-r24" \
+    BITNAMI_IMAGE_VERSION="7.3.2-debian-10-r25" \
     PATH="/opt/bitnami/concourse/bin:$PATH"
 
 CMD [ "/opt/bitnami/concourse/bin/concourse", "--help" ]
