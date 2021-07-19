@@ -92,6 +92,11 @@ $ docker run --name pgbouncer \
   bitnami/pgbouncer:latest
 ```
 
+## Other options
+
+- `PGBOUNCER_IGNORE_STARTUP_PARAMETERS`: you can use this to set `ignore_startup_parameters` in the auto-generated `pgbouncer.ini`. This can be useful for solving certain connection issues. See https://www.pgbouncer.org/config.html for more details.
+
+
 ## Initializing a new instance
 
 When the container is launched, it will execute the files with extension `.sh` located at `/docker-entrypoint-initdb.d`.
