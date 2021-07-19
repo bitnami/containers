@@ -21,6 +21,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 pgbouncer_env_vars=(
+    PGBOUNCER_IGNORE_STARTUP_PARAMETERS
     PGBOUNCER_DATABASE
     PGBOUNCER_PORT
     PGBOUNCER_LISTEN_ADDRESS
@@ -75,6 +76,7 @@ export PGBOUNCER_AUTH_TYPE="${PGBOUNCER_AUTH_TYPE:-md5}"
 export PGBOUNCER_INIT_SLEEP_TIME="${PGBOUNCER_INIT_SLEEP_TIME:-10}"
 export PGBOUNCER_INIT_MAX_RETRIES="${PGBOUNCER_INIT_MAX_RETRIES:-10}"
 export PGBOUNCER_EXTRA_FLAGS="${PGBOUNCER_EXTRA_FLAGS:-}"
+export PGBOUNCER_IGNORE_STARTUP_PARAMETERS="${PGBOUNCER_IGNORE_STARTUP_PARAMETERS:-}"
 
 # TLS settings
 export PGBOUNCER_CLIENT_TLS_SSLMODE="${PGBOUNCER_CLIENT_TLS_SSLMODE:-disable}"
