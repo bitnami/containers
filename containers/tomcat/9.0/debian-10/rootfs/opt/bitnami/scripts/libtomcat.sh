@@ -38,6 +38,7 @@ export TOMCAT_JAVA_ROOT_DIR="/opt/bitnami/java"
 export TOMCAT_CONF_FILE="${TOMCAT_CONF_DIR}/server.xml"
 export TOMCAT_USERS_CONF_FILE="${TOMCAT_CONF_DIR}/tomcat-users.xml"
 export TOMCAT_LOG_FILE="${TOMCAT_LOG_DIR}/catalina.out"
+export CATALINA_PID="${TOMCAT_TMP_DIR}/catalina.pid"
 
 ## Users
 export TOMCAT_DAEMON_USER="tomcat"
@@ -82,7 +83,7 @@ tomcat_validate() {
 
         for i in $(seq 1 "$((total - 1))"); do
             for j in $(seq "$((i + 1))" "$total"); do
-                if (( "${!i}" == "${!j}" )); then
+                if (("${!i}" == "${!j}")); then
                     print_validation_error "${!i} and ${!j} are bound to the same port"
                 fi
             done
@@ -131,7 +132,7 @@ tomcat_configure_ports() {
 #   None
 #########################
 tomcat_setup_environment() {
-    cat > "${TOMCAT_BIN_DIR}/setenv.sh" <<EOF
+    cat >"${TOMCAT_BIN_DIR}/setenv.sh" <<EOF
 #!/bin/bash
 JAVA_HOME="$JAVA_HOME"
 export JAVA_HOME
@@ -162,7 +163,7 @@ tomcat_overwrite_context() {
     local file_content
 
     file_content="$(sed '/<Context/,/<\/Context>/c'"$context" "$file")"
-    echo "$file_content" > "$file"
+    echo "$file_content" >"$file"
 }
 
 ########################
@@ -182,7 +183,7 @@ tomcat_fix_example_filter_registering() {
 
     file_content="$(sed '/<filter-class>org.apache.catalina.filters.HttpHeaderSecurityFilter<\/filter-class>/a'"<async-supported>true</async-supported>" "$file")"
 
-    echo "$file_content" > "$file"
+    echo "$file_content" >"$file"
 }
 
 ########################
@@ -285,4 +286,72 @@ tomcat_initialize() {
     if is_boolean_yes "$TOMCAT_ALLOW_REMOTE_MANAGEMENT"; then
         tomcat_enable_remote_management
     fi
+}
+
+########################
+# Start Tomcat in background
+# Globals:
+#   TOMCAT_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+tomcat_start_bg() {
+    local -r start_command=("${TOMCAT_BIN_DIR}/catalina.sh" "run")
+    info "Starting Tomcat in background"
+    if am_i_root; then
+        debug_execute gosu "$TOMCAT_DAEMON_USER" "${start_command[@]}" &
+    else
+        debug_execute "${start_command[@]}" &
+    fi
+
+    retry_while "is_tomcat_running"
+}
+
+########################
+# Check if Tomcat is running
+# Globals:
+#   TOMCAT_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+is_tomcat_running() {
+    local pid
+    pid="$(get_pid_from_file "${CATALINA_PID}")"
+    if [[ -n "${pid}" ]]; then
+        is_service_running "${pid}"
+    else
+        false
+    fi
+}
+
+########################
+# Check if Tomcat is not running
+# Globals:
+#   TOMCAT_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+is_tomcat_not_running() {
+    ! is_tomcat_running
+}
+
+########################
+# Stop Tomcat daemon
+# Globals:
+#   TOMCAT_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+tomcat_stop() {
+    is_tomcat_not_running && return
+    info "Stopping Tomcat"
+    stop_service_using_pid "$CATALINA_PID"
 }
