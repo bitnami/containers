@@ -15,7 +15,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.29-0" --checksum 4d12ca46685c94e8502990d417a466a919d1aa5d9528b29a45df3284686bbbf9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.13.0-0" --checksum fd7257c2736164d02832dbf72e2c1ed9d875bf3e32f0988520796bc503330129
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "drupal" "8.9.16-2" --checksum 276b11d7918f93ef1a1d812ca678bcc510752b50a1581895755f06a27c1ddbde
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "drupal" "8.9.17-0" --checksum c73aa55e6e40bee98ce3e93c60f1a9df5c828de1667c430a5455bf54fece905d
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
@@ -29,7 +29,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="8.9.16-debian-10-r41" \
+    BITNAMI_IMAGE_VERSION="8.9.17-debian-10-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
