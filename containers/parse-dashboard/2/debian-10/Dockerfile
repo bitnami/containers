@@ -18,7 +18,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/parse-dashboard/postunpack.sh
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="2.1.0-debian-10-r416" \
+    BITNAMI_IMAGE_VERSION="2.1.0-debian-10-r417" \
     PARSE_APP_ID="myappID" \
     PARSE_DASHBOARD_APP_NAME="" \
     PARSE_DASHBOARD_PASSWORD="bitnami" \
