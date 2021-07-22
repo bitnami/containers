@@ -9,14 +9,14 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/cainjector-1.4.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "528c536714c3b22e1483c1683c87b833fd9f633833f6fe2b1c3fa37614c43896  /tmp/bitnami/pkg/cache/cainjector-1.4.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/cainjector-1.4.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/cainjector-1.4.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/cainjector-1.4.1-0-linux-amd64-debian-10.tar.gz && \
+    echo "cad20f95481b0a4a96268fe44206a40ecaba5af961f914b2420e789d9d961650  /tmp/bitnami/pkg/cache/cainjector-1.4.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/cainjector-1.4.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/cainjector-1.4.1-0-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="cainjector" \
-    BITNAMI_IMAGE_VERSION="1.4.0-debian-10-r32" \
+    BITNAMI_IMAGE_VERSION="1.4.1-debian-10-r0" \
     PATH="/opt/bitnami/cainjector/bin:$PATH"
 
 WORKDIR /opt/bitnami/cainjector
