@@ -1,9 +1,9 @@
 {
     "cert-manager-webhook": {
         "arch": "amd64",
-        "digest": "5a58fa8f4a5fca5530fdc9fd7c965145633fb90470eb719f819b5d2fb9c3769a",
+        "digest": "66a173cac4ada2dd4a0b9273f62999f03dc4f61b45befc4e5fe8c31dc47569e3",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.4.0-0"
+        "version": "1.4.1-0"
     }
 }
