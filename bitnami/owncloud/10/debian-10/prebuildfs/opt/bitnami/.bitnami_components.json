@@ -29,17 +29,17 @@
     },
     "owncloud": {
         "arch": "amd64",
-        "digest": "94719afb3691243549cd749848a92df7b6d4c1b7850f0a9be21abe8cc0610868",
+        "digest": "ace2cb12127f623362e8de16ef2484f7a4ef94c23336291cbf13853ed9ee3d12",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.7.0-0"
+        "version": "10.8.0-0"
     },
     "php": {
         "arch": "amd64",
-        "digest": "184e8d3073eb88e84fa787ee71c482fe7267aac2e9e66bfaae04717c318e9b99",
+        "digest": "0217731acbf278185c66bca0223af9a1d6cd9716ade3734e7ee58574369b7dbb",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.29-2"
+        "version": "7.3.29-3"
     },
     "render-template": {
         "arch": "amd64",
