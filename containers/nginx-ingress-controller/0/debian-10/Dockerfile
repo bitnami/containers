@@ -8,7 +8,7 @@ ENV HOME="/" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip libc6 libcap2-bin libcom-err2 libcurl4 libcurl4-openssl-dev libffi6 libgcc1 libgcrypt20 libgeoip-dev libgeoip1 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblua5.1-0 liblua5.1-dev liblzma5 libnettle6 libnghttp2-14 libp11-kit0 libpcre3 libpcre3-dev libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl-dev libssl1.1 libstdc++6 libtasn1-6 libunistring2 libxml2 procps python3 tar wget zlib1g zlib1g-dev
+RUN install_packages ca-certificates curl gzip libc6 libcap2-bin libcom-err2 libcurl4 libcurl4-openssl-dev libffi6 libgcc1 libgcrypt20 libgeoip-dev libgeoip1 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblua5.1-0 liblua5.1-dev liblzma5 libnettle6 libnghttp2-14 libp11-kit0 libpcre3 libpcre3-dev libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl-dev libssl1.1 libstdc++6 libtasn1-6 libunistring2 libxml2 procps tar wget zlib1g zlib1g-dev
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nginx-ingress-controller-0.48.1-0-linux-amd64-debian-10.tar.gz && \
     echo "33b0704af1a85c3caab17a4916ce84ccab3e1bf09a7774d78f804ba324febf9c  /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.48.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/nginx-ingress-controller-0.48.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
@@ -43,7 +43,7 @@ RUN chgrp -R root /var/log && \
     chmod g+rwX -R /opt/bitnami/nginx/conf && \
     chmod -R g+rwX /opt/bitnami/nginx-ingress-controller /etc/nginx /etc/ingress-controller
 ENV BITNAMI_APP_NAME="nginx-ingress-controller" \
-    BITNAMI_IMAGE_VERSION="0.48.1-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="0.48.1-debian-10-r7" \
     LUA_CPATH="/opt/bitnami/nginx/conf/lua/?.so;/opt/bitnami/lua/lib/lua/5.1/?.so;./?.so;/opt/bitnami/lua/lib/lua/?.so;;" \
     LUA_PATH="/opt/bitnami/lua/share/lua/5.1/?/init.lua;/opt/bitnami/lua/lib/lua/?.lua;/opt/bitnami/lua/lib/lua/5.1/?.lua;/opt/bitnami/nginx/conf/lua/?.lua;;" \
     PATH="/opt/bitnami/nginx-ingress-controller/bin:/opt/bitnami/nginx/sbin:$PATH"
