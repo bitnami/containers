@@ -1,10 +1,10 @@
 {
     "argo-cd": {
         "arch": "amd64",
-        "digest": "4b9a9bcab22a0e26d775592f1bc168f8f142b40f207e7e7ffe7e27df3e13cd2f",
+        "digest": "a35067e663d7a01193cd504879f05a0112c0ee831b3d2a6ca72e8b237a173737",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.0.4-4"
+        "version": "2.0.5-0"
     },
     "gosu": {
         "arch": "amd64",
