@@ -9,15 +9,15 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kapacitor-1.6.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "34962427d2d1dce789f2484742ca9f9547daad0fb0731533b0d57cdaa1cd1ec3  /tmp/bitnami/pkg/cache/kapacitor-1.6.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/kapacitor-1.6.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/kapacitor-1.6.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kapacitor-1.6.1-0-linux-amd64-debian-10.tar.gz && \
+    echo "ea5319874e46db81c25f158d05b6f97359216d99a0418e8b79a2a29e407dae37  /tmp/bitnami/pkg/cache/kapacitor-1.6.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/kapacitor-1.6.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/kapacitor-1.6.1-0-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir -p /bitnami/kapacitor && chmod g+rwX /bitnami/kapacitor
 
 ENV BITNAMI_APP_NAME="kapacitor" \
-    BITNAMI_IMAGE_VERSION="1.6.0-debian-10-r14" \
+    BITNAMI_IMAGE_VERSION="1.6.1-debian-10-r0" \
     KAPACITOR_DATA_DIR="/bitnami/kapacitor" \
     KAPACITOR_LOAD_DIR="/bitnami/kapacitor/load" \
     KAPACITOR_REPLAY_DIR="/bitnami/kapacitor/replay" \
