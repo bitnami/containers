@@ -29,7 +29,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1`, `1-debian-10`, `1.0.0`, `1.0.0-debian-10-r33` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wal-g/blob/1.0.0-debian-10-r33/1/debian-10/Dockerfile)
-* [`0`, `0-debian-10`, `0.2.19`, `0.2.19-debian-10-r212`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wal-g/blob/0.2.19-debian-10-r212/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.2.19`, `0.2.19-debian-10-r213`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wal-g/blob/0.2.19-debian-10-r213/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wal-g GitHub repo](https://github.com/bitnami/bitnami-docker-wal-g).
 
