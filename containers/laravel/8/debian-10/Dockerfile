@@ -9,7 +9,7 @@ RUN install_packages ca-certificates curl gzip libbsd0 libbz2-1.0 libc6 libcom-e
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install python-3.8.11-0 --checksum 28b91ef5db9ad93e704881400703e4085bd82f016be15e3cf8760df044da9490
-RUN bitnami-pkg unpack php-7.4.21-3 --checksum 87265c54baee7ba60c8d788ce41787d0f32a39f62e2ac9c6011d86709c50107b
+RUN bitnami-pkg unpack php-7.4.21-4 --checksum 7fedfcb46edb3c73df96eaf02842e4b2f4f86b7d871c4cd97dba8d96b3eff0fa
 RUN bitnami-pkg install node-14.17.3-2 --checksum c47c559cc4696938d59b58806bcd2c41a665646d89b7fe3c16a7674badc2cacd
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
 RUN bitnami-pkg install laravel-8.5.22-5 --checksum 7ff3055653348f2f077f6319da63d5497e4cf7645b6e12e708ea20a2d22349f9
@@ -18,7 +18,7 @@ RUN mkdir /app && chown bitnami:bitnami /app
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="laravel" \
-    BITNAMI_IMAGE_VERSION="8.5.22-debian-10-r7" \
+    BITNAMI_IMAGE_VERSION="8.5.22-debian-10-r8" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
