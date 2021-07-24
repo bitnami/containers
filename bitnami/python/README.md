@@ -42,7 +42,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`3.7`, `3.7-debian-10`, `3.7.11`, `3.7.11-debian-10-r20`, `latest` (3.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.11-debian-10-r20/3.7/debian-10/Dockerfile)
 * [`3.6-prod`, `3.6-prod-debian-10`, `3.6.14-prod`, `3.6.14-prod-debian-10-r20` (3.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.14-prod-debian-10-r20/3.6-prod/debian-10/Dockerfile)
 * [`3.6`, `3.6-debian-10`, `3.6.14`, `3.6.14-debian-10-r20` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.14-debian-10-r20/3.6/debian-10/Dockerfile)
-* [`2-prod`, `2-prod-debian-10`, `2.7.18-prod`, `2.7.18-prod-debian-10-r416` (2-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.18-prod-debian-10-r416/2-prod/debian-10/Dockerfile)
+* [`2-prod`, `2-prod-debian-10`, `2.7.18-prod`, `2.7.18-prod-debian-10-r417` (2-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.18-prod-debian-10-r417/2-prod/debian-10/Dockerfile)
 * [`2`, `2-debian-10`, `2.7.18`, `2.7.18-debian-10-r422` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.18-debian-10-r422/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/python GitHub repo](https://github.com/bitnami/bitnami-docker-python).
