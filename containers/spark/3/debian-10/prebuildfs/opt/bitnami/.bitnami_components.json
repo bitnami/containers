@@ -8,10 +8,10 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "700e2d8391934048faefb45b4c3a2af74bc7b85d4c4e0e9a24164d7256456ca2",
+        "digest": "59c0b7440797c7110c76959dbbce5235359b52adf62f99218b2718c04f2d67b6",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.8.292-0"
+        "version": "1.8.302-0"
     },
     "python": {
         "arch": "amd64",
