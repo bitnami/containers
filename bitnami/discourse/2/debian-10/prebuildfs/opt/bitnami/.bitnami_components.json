@@ -8,10 +8,10 @@
     },
     "discourse": {
         "arch": "amd64",
-        "digest": "a0734037b2eaadbeff7605cde7d211777678a371e8746215a5a692da265c26a6",
+        "digest": "5b5ed87af0107194ae26d0b78e7234113e725c5cd72c901305d3cae58bd69267",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.7.6-1"
+        "version": "2.7.7-0"
     },
     "git": {
         "arch": "amd64",
@@ -57,10 +57,10 @@
     },
     "uglify-js": {
         "arch": "amd64",
-        "digest": "b73b49cc7c76f27d01ac8a6de08aa0969f15cbc9af70a36a7a15bf13105e594e",
+        "digest": "77434c89e3c0e62b03618b492965a5d605dec6574733084f0ec397dda6f3ba20",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.13.10-0"
+        "version": "3.14.0-0"
     },
     "wait-for-port": {
         "arch": "amd64",
