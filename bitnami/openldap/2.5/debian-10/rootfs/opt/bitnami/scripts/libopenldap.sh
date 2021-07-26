@@ -59,6 +59,7 @@ export LDAP_USER_DC="${LDAP_USER_DC:-users}"
 export LDAP_GROUP="${LDAP_GROUP:-readers}"
 export LDAP_ENABLE_TLS="${LDAP_ENABLE_TLS:-no}"
 export LDAP_ULIMIT_NOFILES="${LDAP_ULIMIT_NOFILES:-1024}"
+export LDAP_ALLOW_ANON_BINDING="${LDAP_ALLOW_ANON_BINDING:-yes}"
 EOF
 }
 
@@ -258,6 +259,26 @@ EOF
 }
 
 ########################
+# Disable LDAP anonymous bindings
+# Globals:
+#   LDAP_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+ldap_disable_anon_binding() {
+    info "Disable LDAP anonymous binding"
+    cat > "${LDAP_SHARE_DIR}/disable_anon_bind.ldif" << EOF
+dn: cn=config
+changetype: modify
+add: olcDisallows
+olcDisallows: bind_anon
+EOF
+    debug_execute ldapmodify -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/disable_anon_bind.ldif"
+}
+
+########################
 # Add LDAP schemas
 # Globals:
 #   LDAP_*
@@ -417,6 +438,9 @@ ldap_initialize() {
         ldap_create_online_configuration
         ldap_start_bg
         ldap_admin_credentials
+        if [ "$LDAP_ALLOW_ANON_BINDING" == 'no' ]; then
+            ldap_disable_anon_binding
+        fi
         if is_boolean_yes "$LDAP_ENABLE_TLS"; then
             ldap_configure_tls
         fi
