@@ -339,6 +339,13 @@ magento_initialize() {
         fi
         magento_wait_for_db_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
 
+        if [[ "$MAGENTO_SEARCH_ENGINE" =~ ^elasticsearch ]]; then
+            es_host="$MAGENTO_ELASTICSEARCH_HOST"
+            es_port="$MAGENTO_ELASTICSEARCH_PORT_NUMBER"
+            info "Trying to connect to Elasticsearch"
+            magento_wait_for_es_connection "$es_host" "$es_port"
+        fi
+
         # Perform database schema upgrade
         info "Upgrading database schema"
         magento_execute setup:upgrade
