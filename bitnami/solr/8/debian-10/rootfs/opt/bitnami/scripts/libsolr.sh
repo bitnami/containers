@@ -178,7 +178,7 @@ solr_wait_for_zookeeper() {
 solr_create_core() {
     local -r core="${1:?Missing core}"
     local -r exec="curl"
-    local command_args=("--silent")
+    local command_args=("--silent" "--fail")
     local protocol="http"
 
     is_boolean_yes "$SOLR_SSL_ENABLED" && protocol="https" && command_args+=("-k")
@@ -186,9 +186,10 @@ solr_create_core() {
     is_boolean_yes "$SOLR_ENABLE_AUTHENTICATION" && command_args+=("--user" "${SOLR_ADMIN_USERNAME}:${SOLR_ADMIN_PASSWORD}")
 
     mkdir -p "${SOLR_SERVER_DIR}/solr/${core}/data"
-    cp -r "${SOLR_CORE_CONF_DIR}"/* "${SOLR_SERVER_DIR}/solr/${core}/"
+    mkdir -p "${SOLR_SERVER_DIR}/solr/${core}/conf"
+    cp -r "${SOLR_CORE_CONF_DIR}"/* "${SOLR_SERVER_DIR}/solr/${core}/conf/"
 
-    command_args+=("${protocol}://localhost:${SOLR_PORT_NUMBER}/solr/admin/cores?action=CREATE&name=${core}&instanceDir=${core}&config=solrconfig.xml&schema=schema.xml&dataDir=data")
+    command_args+=("${protocol}://localhost:${SOLR_PORT_NUMBER}/solr/admin/cores?action=CREATE&name=${core}&instanceDir=${core}&dataDir=data")
 
     info "Creating solr core: ${SOLR_CORE}"
 
