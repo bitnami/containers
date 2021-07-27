@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Executes custom Ruby init scripts
+# Executes custom MySQL (.sql or .sql.gz) init scripts
 
 # shellcheck disable=SC1091
 
