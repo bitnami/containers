@@ -16,7 +16,10 @@ export BITNAMI_VOLUME_DIR="/bitnami"
 
 # Logging configuration
 export MODULE="${MODULE:-mongodb}"
-export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
+export BITNAMI_DEBUG="${BITNAMI_DEBUG:-true}"
+
+#numactl configuration
+export MONGODB_ENABLE_NUMACTL="${MONGODB_ENABLE_NUMACTL:-false}"
 
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
