@@ -481,7 +481,7 @@ $ docker run --name kafka1 \
   --network app-tier \
   -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
   -e ALLOW_PLAINTEXT_LISTENER=yes \
-  -p 9092:9092 \
+  -p :9092 \
   bitnami/kafka:latest
 ```
 
@@ -494,7 +494,7 @@ $ docker run --name kafka2 \
   --network app-tier \
   -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
   -e ALLOW_PLAINTEXT_LISTENER=yes \
-  -p 9092:9092 \
+  -p :9092 \
   bitnami/kafka:latest
 ```
 
@@ -507,7 +507,7 @@ $ docker run --name kafka3 \
   --network app-tier \
   -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
   -e ALLOW_PLAINTEXT_LISTENER=yes \
-  -p 9092:9092 \
+  -p :9092 \
   bitnami/kafka:latest
 ```
 
