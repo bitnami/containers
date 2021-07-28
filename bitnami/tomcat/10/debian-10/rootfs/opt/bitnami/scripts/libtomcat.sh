@@ -29,7 +29,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 export TOMCAT_BASE_DIR="/opt/bitnami/tomcat"
 export TOMCAT_CONF_DIR="${TOMCAT_BASE_DIR}/conf"
 export TOMCAT_BIN_DIR="${TOMCAT_BASE_DIR}/bin"
-export TOMCAT_TMP_DIR="${TOMCAT_BASE_DIR}/tmp"
+export TOMCAT_TMP_DIR="${TOMCAT_BASE_DIR}/temp"
 export TOMCAT_LOG_DIR="${TOMCAT_BASE_DIR}/logs"
 export TOMCAT_LIB_DIR="${TOMCAT_BASE_DIR}/lib"
 export TOMCAT_WORK_DIR="${TOMCAT_BASE_DIR}/work"
@@ -139,6 +139,8 @@ export JAVA_HOME
 
 JAVA_OPTS="$JAVA_OPTS"
 export JAVA_OPTS
+
+export CATALINA_PID="$CATALINA_PID"
 
 # Load Tomcat Native library
 LD_LIBRARY_PATH="${TOMCAT_LIB_DIR}:\${LD_LIBRARY_PATH:+:\$LD_LIBRARY_PATH}"
