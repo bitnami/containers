@@ -57,10 +57,10 @@
     },
     "uglify-js": {
         "arch": "amd64",
-        "digest": "77434c89e3c0e62b03618b492965a5d605dec6574733084f0ec397dda6f3ba20",
+        "digest": "c25568c6c80300e7c44c8d08872dae4857bbc96d54e9adbbf224208b502a35a4",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.14.0-0"
+        "version": "3.14.1-0"
     },
     "wait-for-port": {
         "arch": "amd64",
