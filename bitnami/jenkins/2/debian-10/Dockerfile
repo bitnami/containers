@@ -13,13 +13,13 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template"
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.302-0" --checksum 59c0b7440797c7110c76959dbbce5235359b52adf62f99218b2718c04f2d67b6
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.13.0-0" --checksum fd7257c2736164d02832dbf72e2c1ed9d875bf3e32f0988520796bc503330129
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.32.0-0" --checksum 3094f50c904e966bd6c6a2d6152cf41fd3a816d32395622a785ccbcda62b7c5f
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "jenkins" "2.289.2-0" --checksum fba5e8790bddcf246a0a5b636165e98d533934c7b1c4067968f25593b067edf0
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "jenkins" "2.289.3-0" --checksum 948b7c6a8a2e2366f41952cbff421374ff7821bba6a6c9d1e01a510dde3613f1
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/jenkins/postunpack.sh
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.289.2-debian-10-r17" \
+    BITNAMI_IMAGE_VERSION="2.289.3-debian-10-r0" \
     LD_PRELOAD="/opt/bitnami/common/lib/libnss_wrapper.so" \
     LNAME="jenkins" \
     NSS_WRAPPER_GROUP="/opt/bitnami/jenkins/nss-wrapper/nss_group" \
