@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
-* [`2`, `2-debian-10`, `2.8.0`, `2.8.0-debian-10-r55`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.0-debian-10-r55/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.8.0`, `2.8.0-debian-10-r56`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.0-debian-10-r56/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
@@ -330,6 +330,8 @@ You **must** also use your own certificates for SSL. You can drop your Java Key 
 
 `KAFKA_CERTIFICATE_PASSWORD=myCertificatePassword`
 
+If the truststore is mounted in a different location than `/opt/bitnami/kafka/config/certs/kafka.truststore.jks`, `/opt/bitnami/kafka/conf/certs/kafka.truststore.pem`, `/bitnami/kafka/conf/certs/kafka.truststore.jks` or `/bitnami/kafka/conf/certs/kafka.truststore.pem`, set the `KAFKA_TLS_TRUSTSTORE_FILE` variable.
+
 The following script can help you with the creation of the JKS and certificates:
 
 * [kafka-generate-ssl.sh](https://raw.githubusercontent.com/confluentinc/confluent-platform-security-tools/master/kafka-generate-ssl.sh)
@@ -441,6 +443,7 @@ In order to authenticate Kafka against a Zookeeper server with `SASL_SSL`, you s
 * `KAFKA_ZOOKEEPER_PROTOCOL`: **SASL_SSL**.
 * `KAFKA_ZOOKEEPER_USER`: Kafka Zookeeper user for SASL authentication. No defaults.
 * `KAFKA_ZOOKEEPER_PASSWORD`: Kafka Zookeeper user password for SASL authentication. No defaults.
+* `KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_FILE`: Kafka Zookeeper truststore file location. Set it if the mount location is different from `/bitnami/kafka/conf/certs/zookeeper.truststore.pem`, `/bitnami/kafka/conf/certs/zookeeper.truststore.jks`, `/opt/bitnami/kafka/confif/certs/zookeeper.truststore.jks` or `/opt/bitnami/kafka/conf/certs/zookeeper.truststore.pem` No defaults.
 * `KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD`: Kafka Zookeeper keystore file password and key password. No defaults.
 * `KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD`: Kafka Zookeeper truststore file password. No defaults.
 * `KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME`: Verify Zookeeper hostname on TLS certificates. Defaults: **true**.

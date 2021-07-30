@@ -345,6 +345,20 @@ generate_random_string() {
 #   md5 hash - string
 #########################
 generate_md5_hash() {
-  local -r str="${1:?missing input string}"
-  echo -n "$str" | md5sum | awk '{print $1}'
+    local -r str="${1:?missing input string}"
+    echo -n "$str" | md5sum | awk '{print $1}'
+}
+
+########################
+# Create sha1 hash from a string
+# Arguments:
+#   $1 - string
+#   $2 - algorithm - 1 (default), 224, 256, 384, 512
+# Returns:
+#   sha1 hash - string
+#########################
+generate_sha_hash() {
+    local -r str="${1:?missing input string}"
+    local -r algorithm="${2:-1}"
+    echo -n "$str" | "sha${algorithm}sum" | awk '{print $1}'
 }
