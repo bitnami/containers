@@ -1,4 +1,4 @@
-FROM docker.io/bitnami/minideb:buster-snapshot-20210728T203306Z-amd64
+FROM docker.io/bitnami/minideb:buster-snapshot-20210729T212617Z-amd64
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV OS_ARCH="amd64" \
@@ -12,10 +12,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "28b91ef5db9ad93e704881400703e4085bd82f016be15e3cf8760df044da9490  /tmp/bitnami/pkg/cache/python-3.8.11-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/python-3.8.11-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/python-3.8.11-0-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-16.5.0-3-linux-amd64-debian-10.tar.gz && \
-    echo "65571803c80d90b52a08a2d2db404a7226cf69034be5b5d62f8290fe5f32489a  /tmp/bitnami/pkg/cache/node-16.5.0-3-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/node-16.5.0-3-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/node-16.5.0-3-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-16.6.0-0-linux-amd64-debian-10.tar.gz && \
+    echo "36250584a158e73a14ddd58c40c693f4e7fe7f38f0cc90cc324228b532369b2f  /tmp/bitnami/pkg/cache/node-16.6.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/node-16.6.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/node-16.6.0-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
@@ -23,7 +23,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 ENV BITNAMI_APP_NAME="node-snapshot" \
-    BITNAMI_IMAGE_VERSION="16.5.0-prod-debian-10-r14" \
+    BITNAMI_IMAGE_VERSION="16.6.0-prod-debian-10-r0" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:$PATH"
 
 EXPOSE 3000
