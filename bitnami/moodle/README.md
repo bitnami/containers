@@ -1,8 +1,8 @@
-# Bitnami Docker Image for Moodle<sup>TM</sup> LMS
+# Bitnami Docker Image for Moodle&trade; LMS
 
-## What is Moodle<sup>TM</sup>?
+## What is Moodle&trade;?
 
-Disclaimer: The respective trademarks mentioned in the offering are owned by the respective companies. We do not provide commercial license of any of these products. This listing has an open source license. Moodle<sup>TM</sup> LMS is run and maintained by Moodle HQ, that is a completely and separate project from Bitnami.
+Disclaimer: The respective trademarks mentioned in the offering are owned by the respective companies. We do not provide commercial license of any of these products. This listing has an open source license. Moodle&trade; LMS is run and maintained by Moodle HQ, that is a completely and separate project from Bitnami.
 
 >Moodle(TM) is a very popular open source learning management solution (LMS) for the delivery of elearning courses and programs. It’s used not only by universities, but also by hundreds of corporations around the world who provide eLearning education for their employees. Moodle(TM) features a simple interface, drag-and-drop features, role-based permissions, deep reporting, many language translations, a well-documented API and more. With some of the biggest universities and organizations already using it, Moodle(TM) is ready to meet the needs of just about any size organization.
 
@@ -28,9 +28,9 @@ You can find the default credentials and available configuration options in the 
 
 > This [CVE scan report](https://quay.io/repository/bitnami/moodle?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy Moodle<sup>TM</sup> in Kubernetes?
+# How to deploy Moodle&trade; in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Chart for Moodle<sup>TM</sup> GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/moodle).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Chart for Moodle&trade; GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/moodle).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
@@ -43,13 +43,13 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.11.2`, `3.11.2-debian-10-r1`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.11.2-debian-10-r1/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.11.2`, `3.11.2-debian-10-r2`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.11.2-debian-10-r2/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/moodle GitHub repo](https://github.com/bitnami/bitnami-docker-moodle).
 
 ## Get this image
 
-The recommended way to get the Bitnami Docker Image for Moodle<sup>TM</sup> is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/moodle).
+The recommended way to get the Bitnami Docker Image for Moodle&trade; is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/moodle).
 
 ```console
 $ docker pull bitnami/moodle:latest
@@ -69,7 +69,7 @@ $ docker build -t bitnami/moodle:latest 'https://github.com/bitnami/bitnami-dock
 
 ## How to use this image
 
-Moodle<sup>TM</sup> requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://www.github.com/bitnami/bitnami-docker-mariadb) for the database requirements.
+Moodle&trade; requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://www.github.com/bitnami/bitnami-docker-mariadb) for the database requirements.
 
 ### Run the application using Docker Compose
 
@@ -104,7 +104,7 @@ $ docker run -d --name mariadb \
   bitnami/mariadb:latest
 ```
 
-#### Step 3: Create volumes for Moodle<sup>TM</sup> persistence and launch the container
+#### Step 3: Create volumes for Moodle&trade; persistence and launch the container
 
 ```console
 $ docker volume create --name moodle_data
@@ -127,7 +127,7 @@ If you remove the container all your data will be lost, and the next time you ru
 
 For persistence you should mount a directory at the `/bitnami/moodle` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should mount a volume for persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
 
-The above examples define the Docker volumes named mariadb_data and moodle_data. The Moodle<sup>TM</sup> application state will persist as long as volumes are not removed.
+The above examples define the Docker volumes named mariadb_data and moodle_data. The Moodle&trade; application state will persist as long as volumes are not removed.
 
 To avoid inadvertent removal of volumes, you can mount host directories as data volumes. Alternatively you can make use of volume plugins to host the volume data.
 
@@ -178,7 +178,7 @@ $ docker run -d --name mariadb \
   bitnami/mariadb:latest
 ```
 
-#### Step 3. Create the Moodle<sup>TM</sup> container with host volumes
+#### Step 3. Create the Moodle&trade; container with host volumes
 
 ```console
 $ docker run -d --name moodle \
@@ -196,7 +196,7 @@ $ docker run -d --name moodle \
 
 ## Environment variables
 
-When you start the Moodle<sup>TM</sup> image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
+When you start the Moodle&trade; image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
  * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-moodle/blob/master/docker-compose.yml) file present in this repository:
 
@@ -260,7 +260,7 @@ Available environment variables:
 
 ##### SMTP Configuration
 
-To configure Moodle<sup>TM</sup> to send email using SMTP you can set the following environment variables:
+To configure Moodle&trade; to send email using SMTP you can set the following environment variables:
 
 - `MOODLE_SMTP_HOST`: SMTP host.
 - `MOODLE_SMTP_PORT`: SMTP port.
@@ -317,7 +317,7 @@ This would be an example of SMTP configuration using a Gmail account:
 
 ### Installing additional language packs
 
-By default, this container packs a generic English version of Moodle<sup>TM</sup>. Nevertheless, more Language Packs can be added to the default configuration using the in-platform Administration [interface](https://docs.moodle.org/38/en/Language_packs#Language_pack_installation_and_uninstallation). In order to fully support a new Language Pack it is also a requirement to update the system's locales files. To do that, you have several options:
+By default, this container packs a generic English version of Moodle&trade;. Nevertheless, more Language Packs can be added to the default configuration using the in-platform Administration [interface](https://docs.moodle.org/38/en/Language_packs#Language_pack_installation_and_uninstallation). In order to fully support a new Language Pack it is also a requirement to update the system's locales files. To do that, you have several options:
 
 
 #### Build the default image with the `EXTRA_LOCALES` build-time variable
@@ -391,7 +391,7 @@ Bear in mind that in the example above `es_ES.UTF-8 UTF-8` is the locale needed 
 
 ## Logging
 
-The Bitnami Docker image for Moodle<sup>TM</sup> sends the container logs to `stdout`. To view the logs:
+The Bitnami Docker image for Moodle&trade; sends the container logs to `stdout`. To view the logs:
 
 ```console
 $ docker logs moodle
@@ -446,7 +446,7 @@ For the MariaDB database container:
    bitnami/mariadb:latest
 ```
 
-For the Moodle<sup>TM</sup> container:
+For the Moodle&trade; container:
 
 ```diff
  $ docker run -d --name moodle \
@@ -461,7 +461,7 @@ For the Moodle<sup>TM</sup> container:
 > **NOTE:** Since Moodle(TM) 3.4.0-r1, the application upgrades should be done manually inside the docker container following the [official documentation](https://docs.moodle.org/37/en/Upgrading).
 > As an alternative, you can try upgrading using an updated Docker image. However, any data from the Moodle(TM) container will be lost and you will have to reinstall all the plugins and themes you manually added.
 
-Bitnami provides up-to-date versions of MariaDB and Moodle<sup>TM</sup>, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Moodle<sup>TM</sup> container. For the MariaDB upgrade see: https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
+Bitnami provides up-to-date versions of MariaDB and Moodle&trade;, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Moodle&trade; container. For the MariaDB upgrade see: https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
 
 #### Step 1: Get the updated image
 
@@ -499,7 +499,7 @@ $ docker-compose up -d
 
 ## Customize this image
 
-The Bitnami Docker image for Moodle<sup>TM</sup> is designed to be extended so it can be used as the base image for your custom web applications.
+The Bitnami Docker image for Moodle&trade; is designed to be extended so it can be used as the base image for your custom web applications.
 
 ### Extend this image
 
@@ -568,13 +568,13 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 
 - The size of the container image has been decreased.
 - The configuration logic is now based on Bash scripts in the *rootfs/* folder.
-- The Moodle<sup>TM</sup> container image has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the Apache daemon was started as the `daemon` user. From now on, both the container and the Apache daemon run as user `1001`. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile, or `user: root` in `docker-compose.yml`. Consequences:
+- The Moodle&trade; container image has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the Apache daemon was started as the `daemon` user. From now on, both the container and the Apache daemon run as user `1001`. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile, or `user: root` in `docker-compose.yml`. Consequences:
   - The HTTP/HTTPS ports exposed by the container are now `8080/8443` instead of `80/443`.
-  - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the Moodle<sup>TM</sup> site by exporting its content, and importing it on a new Moodle<sup>TM</sup> container. Follow the steps in [Backing up your container](#backing-up-your-container) and [Restoring a backup](#restoring-a-backup) to migrate the data between the old and new container.
+  - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the Moodle&trade; site by exporting its content, and importing it on a new Moodle&trade; container. Follow the steps in [Backing up your container](#backing-up-your-container) and [Restoring a backup](#restoring-a-backup) to migrate the data between the old and new container.
 
 ## 3.7.1-debian-9-r38 and 3.7.1-ol-7-r40
 
-- It is now possible to use existing Moodle<sup>TM</sup> databases from other installations, as requested in [#95](https://github.com/bitnami/bitnami-docker-moodle/issues/95). In order to do this, use the environment variable `MOODLE_SKIP_INSTALL`, which forces the container not to run the initial Moodle<sup>TM</sup> setup wizard.
+- It is now possible to use existing Moodle&trade; databases from other installations, as requested in [#95](https://github.com/bitnami/bitnami-docker-moodle/issues/95). In order to do this, use the environment variable `MOODLE_SKIP_INSTALL`, which forces the container not to run the initial Moodle&trade; setup wizard.
 
 ## 3.7.0-debian-9-r12 and 3.7.0-ol-7-r13
 
