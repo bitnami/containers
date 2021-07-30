@@ -53,6 +53,49 @@ kafka_common_conf_set() {
 }
 
 ########################
+# Backwards compatibility measure to configure the TLS truststore locations
+# Globals:
+#   KAFKA_CONF_FILE
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+kafka_configure_default_truststore_locations() {
+    # Backwards compatibility measure to allow custom truststore locations but at the same time not disrupt
+    # the UX that the previous version of the containers and the helm chart have.
+    # Context: The chart and containers by default assumed that the truststore location was KAFKA_CERTS_DIR/kafka.truststore.jks or KAFKA_MOUNTED_CONF_DIR/certs/kafka.truststore.jks.
+    # Because of this, we could not use custom certificates in different locations (use case: A custom base image that already has a truststore). Changing the logic to allow custom
+    # locations implied major changes in the current user experience (which only required to mount certificates at the assumed location). In order to maintain this compatibility we need
+    # use this logic that sets the KAFKA_TLS_*_FILE variables to the previously assumed locations in case it is not set
+
+    # Kafka truststore
+    if { [[ "${KAFKA_CFG_LISTENERS:-}" =~ SSL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SSL ]]; } && is_empty_value "$KAFKA_TLS_TRUSTSTORE_FILE"; then
+        local -r kafka_truststore_filename="kafka.truststore.jks"
+        [[ "$KAFKA_CFG_TLS_TYPE" = "PEM" ]] && kafka_truststore_filename="kafka.truststore.pem"
+        if [[ -f "${KAFKA_CERTS_DIR}/${kafka_truststore_filename}" ]]; then
+            # Mounted in /opt/bitnami/kafka/conf/certs
+            export KAFKA_TLS_TRUSTSTORE_FILE="${KAFKA_CERTS_DIR}/${kafka_truststore_filename}"
+        else
+            # Mounted in /bitnami/kafka/conf/certs
+            export KAFKA_TLS_TRUSTSTORE_FILE="${KAFKA_MOUNTED_CONF_DIR}/certs/${kafka_truststore_filename}"
+        fi
+    fi
+    # Zookeeper truststore
+    if [[ "${KAFKA_ZOOKEEPER_PROTOCOL:-}" =~ SSL ]] && is_empty_value "$KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_FILE"; then
+        local -r zk_truststore_filename="zookeeper.truststore.jks"
+        [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "PEM" ]] && zk_truststore_filename="zookeeper.truststore.pem"
+        if [[ -f "${KAFKA_CERTS_DIR}/${zk_truststore_filename}" ]]; then
+            # Mounted in /opt/bitnami/kafka/conf/certs
+            export KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_FILE="${KAFKA_CERTS_DIR}/${zk_truststore_filename}"
+        else
+            # Mounted in /bitnami/kafka/conf/certs
+            export KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_FILE="${KAFKA_MOUNTED_CONF_DIR}/certs/${zk_truststore_filename}"
+        fi
+    fi
+}
+
+########################
 # Set a configuration setting value to server.properties
 # Globals:
 #   KAFKA_CONF_FILE
@@ -94,7 +137,7 @@ kafka_producer_consumer_conf_set() {
 kafka_declare_alias_env() {
     local -r alias="${1:?missing environment variable alias}"
     local -r original="${2:?missing original environment variable}"
-    if printenv "${original}" > /dev/null; then
+    if printenv "${original}" >/dev/null; then
         export "$alias"="${!original:-}"
     fi
 }
@@ -176,7 +219,7 @@ kafka_validate() {
         local -r total="$#"
         for i in $(seq 1 "$((total - 1))"); do
             for j in $(seq "$((i + 1))" "$total"); do
-                if (( "${!i}" == "${!j}" )); then
+                if (("${!i}" == "${!j}")); then
                     print_validation_error "There are listeners bound to the same port"
                 fi
             done
@@ -208,8 +251,8 @@ kafka_validate() {
         warn "The environment variables KAFKA_PORT_NUMBER and KAFKA_CFG_PORT are deprecated, you can specify the port number to use for each listener using the KAFKA_CFG_LISTENERS environment variable instead."
     fi
 
-    read -r -a users <<< "$(tr ',;' ' ' <<< "${KAFKA_CLIENT_USERS}")"
-    read -r -a passwords <<< "$(tr ',;' ' ' <<< "${KAFKA_CLIENT_PASSWORDS}")"
+    read -r -a users <<<"$(tr ',;' ' ' <<<"${KAFKA_CLIENT_USERS}")"
+    read -r -a passwords <<<"$(tr ',;' ' ' <<<"${KAFKA_CLIENT_PASSWORDS}")"
     if [[ "${#users[@]}" -ne "${#passwords[@]}" ]]; then
         print_validation_error "Specify the same number of passwords on KAFKA_CLIENT_PASSWORDS as the number of users on KAFKA_CLIENT_USERS!"
     fi
@@ -218,13 +261,13 @@ kafka_validate() {
         warn "You set the environment variable ALLOW_PLAINTEXT_LISTENER=$ALLOW_PLAINTEXT_LISTENER. For safety reasons, do not use this flag in a production environment."
     fi
     if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SSL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SSL ]]; then
-        if [[ "$KAFKA_CFG_TLS_TYPE" = "JKS" ]] \
-            && { [[ ! -f "${KAFKA_CERTS_DIR}/kafka.keystore.jks" ]] || [[ ! -f "${KAFKA_CERTS_DIR}/kafka.truststore.jks" ]]; } \
-            && { [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/kafka.keystore.jks" ]] || [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/kafka.truststore.jks" ]]; }; then
+        if [[ "$KAFKA_CFG_TLS_TYPE" = "JKS" ]] &&
+            { [[ ! -f "${KAFKA_CERTS_DIR}/kafka.keystore.jks" ]] || [[ ! -f "$KAFKA_TLS_TRUSTSTORE_FILE" ]]; } &&
+            { [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/kafka.keystore.jks" ]] || [[ ! -f "$KAFKA_TLS_TRUSTSTORE_FILE" ]]; }; then
             print_validation_error "In order to configure the TLS encryption for Kafka with JKS certs you must mount your kafka.keystore.jks and kafka.truststore.jks certs to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
-        elif [[ "$KAFKA_CFG_TLS_TYPE" = "PEM" ]] \
-            && { [[ ! -f "${KAFKA_CERTS_DIR}/kafka.keystore.pem" ]] || [[ ! -f "${KAFKA_CERTS_DIR}/kafka.keystore.key" ]] || [[ ! -f "${KAFKA_CERTS_DIR}/kafka.truststore.pem" ]]; } \
-            && { [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/kafka.keystore.pem" ]] || [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/kafka.keystore.key" ]] || [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/kafka.truststore.pem" ]]; }; then
+        elif [[ "$KAFKA_CFG_TLS_TYPE" = "PEM" ]] &&
+            { [[ ! -f "${KAFKA_CERTS_DIR}/kafka.keystore.pem" ]] || [[ ! -f "${KAFKA_CERTS_DIR}/kafka.keystore.key" ]] || [[ ! -f "$KAFKA_TLS_TRUSTSTORE_FILE" ]]; } &&
+            { [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/kafka.keystore.pem" ]] || [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/kafka.keystore.key" ]] || [[ ! -f "$KAFKA_TLS_TRUSTSTORE_FILE" ]]; }; then
             print_validation_error "In order to configure the TLS encryption for Kafka with PEM certs you must mount your kafka.keystore.pem, kafka.keystore.key and kafka.truststore.pem certs to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
         fi
     elif [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL ]]; then
@@ -235,19 +278,19 @@ kafka_validate() {
         print_validation_error "The KAFKA_CFG_LISTENERS environment variable does not configure a secure listener. Set the environment variable ALLOW_PLAINTEXT_LISTENER=yes to allow the container to be started with a plaintext listener. This is only recommended for development."
     fi
     if [[ "${KAFKA_ZOOKEEPER_PROTOCOL}" =~ SSL ]]; then
-        if [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "JKS" ]] \
-            && [[ ! -f "${KAFKA_CERTS_DIR}/zookeeper.truststore.jks" ]] && [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/zookeeper.truststore.jks" ]]; then
+        if [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "JKS" ]] &&
+            [[ ! -f "$KAFKA_ZOOKEEPER_TRUSTSTORE_FILE" ]]; then
             print_validation_error "In order to configure the TLS encryption for Zookeeper with JKS certs you must mount your zookeeper.truststore.jks cert to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
-        elif [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "PEM" ]] \
-            && [[ ! -f "${KAFKA_CERTS_DIR}/zookeeper.truststore.pem" ]] && [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/zookeeper.truststore.pem" ]]; then
+        elif [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "PEM" ]] &&
+            [[ ! -f "$KAFKA_ZOOKEEPER_TRUSTSTORE_FILE" ]]; then
             print_validation_error "In order to configure the TLS encryption for Zookeeper with PEM certs you must mount your zookeeper.truststore.pem cert to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
         fi
-        if [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "JKS" ]] \
-            && [[ ! -f "${KAFKA_CERTS_DIR}/zookeeper.keystore.jks" ]] && [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/zookeeper.keystore.jks" ]]; then
+        if [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "JKS" ]] &&
+            [[ ! -f "${KAFKA_CERTS_DIR}/zookeeper.keystore.jks" ]] && [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/zookeeper.keystore.jks" ]]; then
             warn "In order to configure the mTLS for Zookeeper with JKS certs you must mount your zookeeper.keystore.jks cert to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
-        elif [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "PEM" ]] \
-            && { [[ ! -f "${KAFKA_CERTS_DIR}/zookeeper.keystore.pem" ]] || [[ ! -f "${KAFKA_CERTS_DIR}/zookeeper.keystore.key" ]]; } \
-            && { [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/zookeeper.keystore.pem" ]] || [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/zookeeper.keystore.key" ]]; }; then
+        elif [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "PEM" ]] &&
+            { [[ ! -f "${KAFKA_CERTS_DIR}/zookeeper.keystore.pem" ]] || [[ ! -f "${KAFKA_CERTS_DIR}/zookeeper.keystore.key" ]]; } &&
+            { [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/zookeeper.keystore.pem" ]] || [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/zookeeper.keystore.key" ]]; }; then
             warn "In order to configure the mTLS for Zookeeper with PEM certs you must mount your zookeeper.keystore.pem cert and zookeeper.keystore.key key to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
         fi
     elif [[ "${KAFKA_ZOOKEEPER_PROTOCOL}" =~ SASL ]]; then
@@ -255,7 +298,7 @@ kafka_validate() {
             print_validation_error "In order to configure SASL authentication for Kafka, you must provide the SASL credentials. Set the environment variables KAFKA_ZOOKEEPER_USER and KAFKA_ZOOKEEPER_PASSWORD, to configure the credentials for SASL authentication with Zookeeper."
         fi
     elif ! is_boolean_yes "$ALLOW_PLAINTEXT_LISTENER"; then
-         print_validation_error "The KAFKA_ZOOKEEPER_PROTOCOL environment variable does not configure a secure protocol. Set the environment variable ALLOW_PLAINTEXT_LISTENER=yes to allow the container to be started with a plaintext listener. This is only recommended for development."
+        print_validation_error "The KAFKA_ZOOKEEPER_PROTOCOL environment variable does not configure a secure protocol. Set the environment variable ALLOW_PLAINTEXT_LISTENER=yes to allow the container to be started with a plaintext listener. This is only recommended for development."
     fi
     check_multi_value "KAFKA_CFG_TLS_TYPE" "JKS PEM"
     check_multi_value "KAFKA_ZOOKEEPER_TLS_TYPE" "JKS PEM"
@@ -280,22 +323,22 @@ kafka_generate_jaas_authentication_file() {
     if [[ ! -f "${KAFKA_CONF_DIR}/kafka_jaas.conf" ]]; then
         info "Generating JAAS authentication file"
 
-        read -r -a users <<< "$(tr ',;' ' ' <<< "${KAFKA_CLIENT_USERS:-}")"
-        read -r -a passwords <<< "$(tr ',;' ' ' <<< "${KAFKA_CLIENT_PASSWORDS:-}")"
+        read -r -a users <<<"$(tr ',;' ' ' <<<"${KAFKA_CLIENT_USERS:-}")"
+        read -r -a passwords <<<"$(tr ',;' ' ' <<<"${KAFKA_CLIENT_PASSWORDS:-}")"
 
         if [[ "${client_protocol:-}" =~ SASL ]]; then
             if [[ "${KAFKA_CFG_SASL_ENABLED_MECHANISMS:-}" =~ PLAIN ]]; then
-                cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+                cat >>"${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 KafkaClient {
    org.apache.kafka.common.security.plain.PlainLoginModule required
 EOF
             else
-                cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+                cat >>"${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 KafkaClient {
    org.apache.kafka.common.security.plain.ScramLoginModule required
 EOF
             fi
-            cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+            cat >>"${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
    username="${users[0]:-}"
    password="${passwords[0]:-}";
    };
@@ -303,30 +346,30 @@ EOF
         fi
         if [[ "${client_protocol:-}" =~ SASL ]] && [[ "${internal_protocol:-}" =~ SASL ]]; then
             if [[ "${KAFKA_CFG_SASL_ENABLED_MECHANISMS:-}" =~ PLAIN ]] && [[ "${KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL:-}" =~ PLAIN ]]; then
-                cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+                cat >>"${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 KafkaServer {
    org.apache.kafka.common.security.plain.PlainLoginModule required
    username="${KAFKA_INTER_BROKER_USER:-}"
    password="${KAFKA_INTER_BROKER_PASSWORD:-}"
    user_${KAFKA_INTER_BROKER_USER:-}="${KAFKA_INTER_BROKER_PASSWORD:-}"
 EOF
-                for (( i=0; i<${#users[@]}; i++ )); do
+                for ((i = 0; i < ${#users[@]}; i++)); do
                     if [[ "$i" -eq "(( ${#users[@]} - 1 ))" ]]; then
-                        cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+                        cat >>"${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
    user_${users[i]:-}="${passwords[i]:-}";
 EOF
                     else
-                        cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+                        cat >>"${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
    user_${users[i]:-}="${passwords[i]:-}"
 EOF
                     fi
                 done
-                cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+                cat >>"${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
    org.apache.kafka.common.security.scram.ScramLoginModule required;
    };
 EOF
             else
-                cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+                cat >>"${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 KafkaServer {
    org.apache.kafka.common.security.scram.ScramLoginModule required
    username="${KAFKA_INTER_BROKER_USER:-}"
@@ -335,30 +378,30 @@ KafkaServer {
 EOF
             fi
         elif [[ "${client_protocol:-}" =~ SASL ]]; then
-            cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+            cat >>"${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 KafkaServer {
    org.apache.kafka.common.security.plain.PlainLoginModule required
 EOF
             if [[ "${KAFKA_CFG_SASL_ENABLED_MECHANISMS:-}" =~ PLAIN ]]; then
-                for (( i=0; i<${#users[@]}; i++ )); do
+                for ((i = 0; i < ${#users[@]}; i++)); do
                     if [[ "$i" -eq "(( ${#users[@]} - 1 ))" ]]; then
-                        cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+                        cat >>"${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
    user_${users[i]:-}="${passwords[i]:-}";
 EOF
-                else
-                    cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+                    else
+                        cat >>"${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
    user_${users[i]:-}="${passwords[i]:-}"
 EOF
                     fi
                 done
             fi
-            cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+            cat >>"${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
    org.apache.kafka.common.security.scram.ScramLoginModule required;
    };
 EOF
         elif [[ "${internal_protocol:-}" =~ SASL ]]; then
             if [[ "${KAFKA_CFG_SASL_ENABLED_MECHANISMS:-}" =~ PLAIN ]] && [[ "${KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL:-}" =~ PLAIN ]]; then
-                cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+                cat >>"${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 KafkaServer {
    org.apache.kafka.common.security.plain.PlainLoginModule required
    username="${KAFKA_INTER_BROKER_USER:-}"
@@ -368,7 +411,7 @@ KafkaServer {
    };
 EOF
             else
-                cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+                cat >>"${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 KafkaServer {
    org.apache.kafka.common.security.scram.ScramLoginModule required
    username="${KAFKA_INTER_BROKER_USER:-}"
@@ -378,7 +421,7 @@ EOF
             fi
         fi
         if [[ "${KAFKA_ZOOKEEPER_PROTOCOL}" =~ SASL ]] && [[ -n "$KAFKA_ZOOKEEPER_USER" ]] && [[ -n "$KAFKA_ZOOKEEPER_PASSWORD" ]]; then
-            cat >> "${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
+            cat >>"${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 Client {
    org.apache.kafka.common.security.plain.PlainLoginModule required
    username="${KAFKA_ZOOKEEPER_USER:-}"
@@ -404,13 +447,13 @@ EOF
 kafka_create_sasl_scram_zookeeper_users() {
     export KAFKA_OPTS="-Djava.security.auth.login.config=${KAFKA_CONF_DIR}/kafka_jaas.conf"
     info "Creating users in Zookeeper"
-    read -r -a users <<< "$(tr ',;' ' ' <<< "${KAFKA_CLIENT_USERS}")"
-    read -r -a passwords <<< "$(tr ',;' ' ' <<< "${KAFKA_CLIENT_PASSWORDS}")"
+    read -r -a users <<<"$(tr ',;' ' ' <<<"${KAFKA_CLIENT_USERS}")"
+    read -r -a passwords <<<"$(tr ',;' ' ' <<<"${KAFKA_CLIENT_PASSWORDS}")"
     if [[ "${KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL:-}" =~ SCRAM-SHA ]]; then
         users+=("${KAFKA_INTER_BROKER_USER}")
         passwords+=("${KAFKA_INTER_BROKER_PASSWORD}")
     fi
-    for (( i=0; i<${#users[@]}; i++ )); do
+    for ((i = 0; i < ${#users[@]}; i++)); do
         debug "Creating user ${users[i]} in zookeeper"
         # Ref: https://docs.confluent.io/current/kafka/authentication_sasl/authentication_sasl_scram.html#sasl-scram-overview
         debug_execute kafka-configs.sh --zookeeper "$KAFKA_CFG_ZOOKEEPER_CONNECT" --alter --add-config "SCRAM-SHA-256=[iterations=8192,password=${passwords[i]}],SCRAM-SHA-512=[password=${passwords[i]}]" --entity-type users --entity-name "${users[i]}"
@@ -436,17 +479,18 @@ kafka_configure_ssl() {
     }
     configure_both ssl.keystore.type "${KAFKA_CFG_TLS_TYPE}"
     configure_both ssl.truststore.type "${KAFKA_CFG_TLS_TYPE}"
+    local -r kafka_truststore_location="${KAFKA_CERTS_DIR}/$(basename "${KAFKA_TLS_TRUSTSTORE_FILE}")"
     ! is_empty_value "$KAFKA_CERTIFICATE_PASSWORD" && configure_both ssl.key.password "$KAFKA_CERTIFICATE_PASSWORD"
     if [[ "$KAFKA_CFG_TLS_TYPE" = "PEM" ]]; then
         file_to_multiline_property() {
-            awk 'NR > 1{print line" \\"}{line=$0;}END{print $0" "}' < "${1:?missing file}"
+            awk 'NR > 1{print line" \\"}{line=$0;}END{print $0" "}' <"${1:?missing file}"
         }
         configure_both ssl.keystore.key "$(file_to_multiline_property "${KAFKA_CERTS_DIR}/kafka.keystore.key")"
         configure_both ssl.keystore.certificate.chain "$(file_to_multiline_property "${KAFKA_CERTS_DIR}/kafka.keystore.pem")"
-        configure_both ssl.truststore.certificates "$(file_to_multiline_property "${KAFKA_CERTS_DIR}/kafka.truststore.pem")"
+        configure_both ssl.truststore.certificates "$(file_to_multiline_property "${kafka_truststore_location}")"
     elif [[ "$KAFKA_CFG_TLS_TYPE" = "JKS" ]]; then
         configure_both ssl.keystore.location "$KAFKA_CERTS_DIR"/kafka.keystore.jks
-        configure_both ssl.truststore.location "$KAFKA_CERTS_DIR"/kafka.truststore.jks
+        configure_both ssl.truststore.location "$kafka_truststore_location"
         ! is_empty_value "$KAFKA_CERTIFICATE_PASSWORD" && configure_both ssl.keystore.password "$KAFKA_CERTIFICATE_PASSWORD"
         ! is_empty_value "$KAFKA_CERTIFICATE_PASSWORD" && configure_both ssl.truststore.password "$KAFKA_CERTIFICATE_PASSWORD"
     fi
@@ -480,7 +524,7 @@ kafka_configure_internal_communications() {
             else
                 error "When using SASL for inter broker comunication the mechanism should be provided at KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL"
                 exit 1
-              fi
+            fi
         fi
         if [[ "$protocol" = "SASL_SSL" ]] || [[ "$protocol" = "SSL" ]]; then
             kafka_configure_ssl
@@ -544,22 +588,22 @@ zookeeper_get_tls_config() {
     # Note that ZooKeeper does not support a key password different from the keystore password,
     # so be sure to set the key password in the keystore to be identical to the keystore password;
     # otherwise the connection attempt to Zookeeper will fail.
-    local -r ext="${KAFKA_ZOOKEEPER_TLS_TYPE,,}"
     local keystore_location=""
+    local -r kafka_zk_truststore_location="${KAFKA_CERTS_DIR}/$(basename "${KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_FILE}")"
 
     if [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "JKS" ]] && [[ -f "$KAFKA_CERTS_DIR"/zookeeper.keystore.jks ]]; then
         keystore_location="${KAFKA_CERTS_DIR}/zookeeper.keystore.jks"
     elif [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "PEM" ]] && [[ -f "$KAFKA_CERTS_DIR"/zookeeper.keystore.pem ]] && [[ -f "$KAFKA_CERTS_DIR"/zookeeper.keystore.key ]]; then
         # Concatenating private key into public certificate file
         # This is needed to load keystore from location using PEM
-        cat "$KAFKA_CERTS_DIR"/zookeeper.keystore.key >> "$KAFKA_CERTS_DIR"/zookeeper.keystore.pem
+        cat "$KAFKA_CERTS_DIR"/zookeeper.keystore.key >>"$KAFKA_CERTS_DIR"/zookeeper.keystore.pem
         keystore_location="${KAFKA_CERTS_DIR}/zookeeper.keystore.pem"
     fi
     echo "-Dzookeeper.clientCnxnSocket=org.apache.zookeeper.ClientCnxnSocketNetty \
           -Dzookeeper.client.secure=true \
           -Dzookeeper.ssl.keyStore.location=${keystore_location} \
           -Dzookeeper.ssl.keyStore.password=${KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD} \
-          -Dzookeeper.ssl.trustStore.location=${KAFKA_CERTS_DIR}/zookeeper.truststore.${ext} \
+          -Dzookeeper.ssl.trustStore.location=${kafka_zk_truststore_location} \
           -Dzookeeper.ssl.trustStore.password=${KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD} \
           -Dzookeeper.ssl.hostnameVerification=${KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME}"
 }
@@ -624,6 +668,15 @@ kafka_initialize() {
     if ! is_dir_empty "$KAFKA_MOUNTED_CONF_DIR"; then
         cp -Lr "$KAFKA_MOUNTED_CONF_DIR"/* "$KAFKA_CONF_DIR"
     fi
+    # Copy truststore to cert directory
+    for cert_var in KAFKA_TLS_TRUSTSTORE_FILE KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_FILE; do
+        # Only copy if the file exists and it is in a different location than KAFKA_CERTS_DIR (to avoid copying to the same location)
+        if [[ -f "${!cert_var}" ]] && ! [[ "${!cert_var}" =~ $KAFKA_CERTS_DIR ]]; then
+            info "Copying truststore ${!cert_var} to ${KAFKA_CERTS_DIR}"
+            cp -L "${!cert_var}" "$KAFKA_CERTS_DIR"
+        fi
+    done
+
     # DEPRECATED. Check for server.properties file in old conf directory to maintain compatibility with Helm chart.
     if [[ ! -f "$KAFKA_BASE_DIR"/conf/server.properties ]] && [[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/server.properties ]]; then
         info "No injected configuration files found, creating default config files"
@@ -646,7 +699,7 @@ kafka_initialize() {
             fi
         fi
 
-        if [[ "${internal_protocol:-}" =~ "SASL" || "${client_protocol:-}" =~ "SASL" ]]  || [[ "${KAFKA_ZOOKEEPER_PROTOCOL}" =~ SASL ]]; then
+        if [[ "${internal_protocol:-}" =~ "SASL" || "${client_protocol:-}" =~ "SASL" ]] || [[ "${KAFKA_ZOOKEEPER_PROTOCOL}" =~ SASL ]]; then
             if [[ -n "$KAFKA_CFG_SASL_ENABLED_MECHANISMS" ]]; then
                 kafka_server_conf_set sasl.enabled.mechanisms "$KAFKA_CFG_SASL_ENABLED_MECHANISMS"
                 kafka_generate_jaas_authentication_file "${internal_protocol:-}" "${client_protocol:-}"
@@ -674,25 +727,25 @@ kafka_initialize() {
 #   None
 #########################
 kafka_custom_init_scripts() {
-    if [[ -n $(find "${KAFKA_INITSCRIPTS_DIR}/" -type f -regex ".*\.\(sh\)") ]] && [[ ! -f "${KAFKA_VOLUME_DIR}/.user_scripts_initialized" ]] ; then
-        info "Loading user's custom files from $KAFKA_INITSCRIPTS_DIR";
+    if [[ -n $(find "${KAFKA_INITSCRIPTS_DIR}/" -type f -regex ".*\.\(sh\)") ]] && [[ ! -f "${KAFKA_VOLUME_DIR}/.user_scripts_initialized" ]]; then
+        info "Loading user's custom files from $KAFKA_INITSCRIPTS_DIR"
         for f in /docker-entrypoint-initdb.d/*; do
             debug "Executing $f"
             case "$f" in
-                *.sh)
-                    if [[ -x "$f" ]]; then
-                        if ! "$f"; then
-                            error "Failed executing $f"
-                            return 1
-                        fi
-                    else
-                        warn "Sourcing $f as it is not executable by the current user, any error may cause initialization to fail"
-                        . "$f"
+            *.sh)
+                if [[ -x "$f" ]]; then
+                    if ! "$f"; then
+                        error "Failed executing $f"
+                        return 1
                     fi
-                    ;;
-                *)
-                    warn "Skipping $f, supported formats are: .sh"
-                    ;;
+                else
+                    warn "Sourcing $f as it is not executable by the current user, any error may cause initialization to fail"
+                    . "$f"
+                fi
+                ;;
+            *)
+                warn "Skipping $f, supported formats are: .sh"
+                ;;
             esac
         done
         touch "$KAFKA_VOLUME_DIR"/.user_scripts_initialized
