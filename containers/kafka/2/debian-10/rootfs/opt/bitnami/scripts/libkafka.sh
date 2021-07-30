@@ -72,7 +72,7 @@ kafka_configure_default_truststore_locations() {
     # Kafka truststore
     if { [[ "${KAFKA_CFG_LISTENERS:-}" =~ SSL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SSL ]]; } && is_empty_value "$KAFKA_TLS_TRUSTSTORE_FILE"; then
         local -r kafka_truststore_filename="kafka.truststore.jks"
-        [[ "$KAFKA_CFG_TLS_TYPE" = "PEM" ]] && kafka_truststore_filename="kafka.truststore.pem"
+        [[ "$KAFKA_TLS_TYPE" = "PEM" ]] && kafka_truststore_filename="kafka.truststore.pem"
         if [[ -f "${KAFKA_CERTS_DIR}/${kafka_truststore_filename}" ]]; then
             # Mounted in /opt/bitnami/kafka/conf/certs
             export KAFKA_TLS_TRUSTSTORE_FILE="${KAFKA_CERTS_DIR}/${kafka_truststore_filename}"
@@ -261,11 +261,11 @@ kafka_validate() {
         warn "You set the environment variable ALLOW_PLAINTEXT_LISTENER=$ALLOW_PLAINTEXT_LISTENER. For safety reasons, do not use this flag in a production environment."
     fi
     if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SSL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SSL ]]; then
-        if [[ "$KAFKA_CFG_TLS_TYPE" = "JKS" ]] &&
+        if [[ "$KAFKA_TLS_TYPE" = "JKS" ]] &&
             { [[ ! -f "${KAFKA_CERTS_DIR}/kafka.keystore.jks" ]] || [[ ! -f "$KAFKA_TLS_TRUSTSTORE_FILE" ]]; } &&
             { [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/kafka.keystore.jks" ]] || [[ ! -f "$KAFKA_TLS_TRUSTSTORE_FILE" ]]; }; then
             print_validation_error "In order to configure the TLS encryption for Kafka with JKS certs you must mount your kafka.keystore.jks and kafka.truststore.jks certs to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
-        elif [[ "$KAFKA_CFG_TLS_TYPE" = "PEM" ]] &&
+        elif [[ "$KAFKA_TLS_TYPE" = "PEM" ]] &&
             { [[ ! -f "${KAFKA_CERTS_DIR}/kafka.keystore.pem" ]] || [[ ! -f "${KAFKA_CERTS_DIR}/kafka.keystore.key" ]] || [[ ! -f "$KAFKA_TLS_TRUSTSTORE_FILE" ]]; } &&
             { [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/kafka.keystore.pem" ]] || [[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/certs/kafka.keystore.key" ]] || [[ ! -f "$KAFKA_TLS_TRUSTSTORE_FILE" ]]; }; then
             print_validation_error "In order to configure the TLS encryption for Kafka with PEM certs you must mount your kafka.keystore.pem, kafka.keystore.key and kafka.truststore.pem certs to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
@@ -300,9 +300,9 @@ kafka_validate() {
     elif ! is_boolean_yes "$ALLOW_PLAINTEXT_LISTENER"; then
         print_validation_error "The KAFKA_ZOOKEEPER_PROTOCOL environment variable does not configure a secure protocol. Set the environment variable ALLOW_PLAINTEXT_LISTENER=yes to allow the container to be started with a plaintext listener. This is only recommended for development."
     fi
-    check_multi_value "KAFKA_CFG_TLS_TYPE" "JKS PEM"
+    check_multi_value "KAFKA_TLS_TYPE" "JKS PEM"
     check_multi_value "KAFKA_ZOOKEEPER_TLS_TYPE" "JKS PEM"
-    check_multi_value "KAFKA_CFG_TLS_CLIENT_AUTH" "none requested required"
+    check_multi_value "KAFKA_TLS_CLIENT_AUTH" "none requested required"
     [[ "$error_code" -eq 0 ]] || return "$error_code"
 }
 
@@ -477,18 +477,18 @@ kafka_configure_ssl() {
         kafka_server_conf_set "${1:?missing key}" "${2:?missing value}"
         kafka_producer_consumer_conf_set "${1:?missing key}" "${2:?missing value}"
     }
-    configure_both ssl.keystore.type "${KAFKA_CFG_TLS_TYPE}"
-    configure_both ssl.truststore.type "${KAFKA_CFG_TLS_TYPE}"
+    configure_both ssl.keystore.type "${KAFKA_TLS_TYPE}"
+    configure_both ssl.truststore.type "${KAFKA_TLS_TYPE}"
     local -r kafka_truststore_location="${KAFKA_CERTS_DIR}/$(basename "${KAFKA_TLS_TRUSTSTORE_FILE}")"
     ! is_empty_value "$KAFKA_CERTIFICATE_PASSWORD" && configure_both ssl.key.password "$KAFKA_CERTIFICATE_PASSWORD"
-    if [[ "$KAFKA_CFG_TLS_TYPE" = "PEM" ]]; then
+    if [[ "$KAFKA_TLS_TYPE" = "PEM" ]]; then
         file_to_multiline_property() {
             awk 'NR > 1{print line" \\"}{line=$0;}END{print $0" "}' <"${1:?missing file}"
         }
         configure_both ssl.keystore.key "$(file_to_multiline_property "${KAFKA_CERTS_DIR}/kafka.keystore.key")"
         configure_both ssl.keystore.certificate.chain "$(file_to_multiline_property "${KAFKA_CERTS_DIR}/kafka.keystore.pem")"
         configure_both ssl.truststore.certificates "$(file_to_multiline_property "${kafka_truststore_location}")"
-    elif [[ "$KAFKA_CFG_TLS_TYPE" = "JKS" ]]; then
+    elif [[ "$KAFKA_TLS_TYPE" = "JKS" ]]; then
         configure_both ssl.keystore.location "$KAFKA_CERTS_DIR"/kafka.keystore.jks
         configure_both ssl.truststore.location "$kafka_truststore_location"
         ! is_empty_value "$KAFKA_CERTIFICATE_PASSWORD" && configure_both ssl.keystore.password "$KAFKA_CERTIFICATE_PASSWORD"
@@ -530,7 +530,7 @@ kafka_configure_internal_communications() {
             kafka_configure_ssl
             # We need to enable 2 way authentication on SASL_SSL so brokers authenticate each other.
             # It won't affect client communications unless the SSL protocol is for them.
-            kafka_server_conf_set ssl.client.auth "$KAFKA_CFG_TLS_CLIENT_AUTH"
+            kafka_server_conf_set ssl.client.auth "$KAFKA_TLS_CLIENT_AUTH"
         fi
     else
         error "Authentication protocol ${protocol} is not supported!"
@@ -567,7 +567,7 @@ kafka_configure_client_communications() {
             kafka_configure_ssl
         fi
         if [[ "$protocol" = "SSL" ]]; then
-            kafka_server_conf_set ssl.client.auth "$KAFKA_CFG_TLS_CLIENT_AUTH"
+            kafka_server_conf_set ssl.client.auth "$KAFKA_TLS_CLIENT_AUTH"
         fi
     else
         error "Authentication protocol ${protocol} is not supported!"
