@@ -215,9 +215,17 @@ mongodb_start_bg() {
     is_mongodb_running && return
 
     if am_i_root; then
-        debug_execute gosu "$MONGODB_DAEMON_USER" "$MONGODB_BIN_DIR/mongod" "${flags[@]}"
+        if [ "${MONGODB_ENABLE_NUMACTL}" = true ]; then
+            debug_execute gosu "$MONGODB_DAEMON_USER" numactl --interleave=all "$MONGODB_BIN_DIR/mongod" "${flags[@]}"
+        else
+            debug_execute gosu "$MONGODB_DAEMON_USER" "$MONGODB_BIN_DIR/mongod" "${flags[@]}"
+        fi
     else
-        debug_execute "$MONGODB_BIN_DIR/mongod" "${flags[@]}"
+        if [ "${MONGODB_ENABLE_NUMACTL}" = true ]; then
+            debug_execute numactl --interleave=all "$MONGODB_BIN_DIR/mongod" "${flags[@]}"
+        else
+            debug_execute "$MONGODB_BIN_DIR/mongod" "${flags[@]}"
+        fi
     fi
 
     # wait until the server is up and answering queries
@@ -1195,6 +1203,44 @@ mongodb_custom_init_scripts() {
         done <$tmp_file
         touch "$MONGODB_VOLUME_DIR"/mongodb/.user_scripts_initialized
     fi
+}
+
+########################
+# Execute an arbitrary query/queries against the running MongoDB service
+# Stdin:
+#   Query/queries to execute
+# Arguments:
+#   $1 - User to run queries
+#   $2 - Password
+#   $3 - Database where to run the queries
+#   $4 - Host (default to result of get_mongo_hostname function)
+#   $5 - Port (default $MONGODB_PORT_NUMBER)
+#   $6 - Extra arguments (default $MONGODB_CLIENT_EXTRA_FLAGS)
+# Returns:
+#   None
+########################
+mongodb_execute() {
+    local -r user="${1:-}"
+    local -r password="${2:-}"
+    local -r database="${3:-}"
+    local -r host="${4:-$(get_mongo_hostname)}"
+    local -r port="${5:-$MONGODB_PORT_NUMBER}"
+    local -r extra_args="${6:-$MONGODB_CLIENT_EXTRA_FLAGS}"
+    local final_user="$user"
+    # If password is empty it means no auth, do not specify user
+    [[ -z "$password" ]] && final_user=""
+
+    local -a args=("--host" "$host" "--port" "$port")
+    [[ -n "$final_user" ]] && args+=("-u" "$final_user")
+    [[ -n "$password" ]] && args+=("-p" "$password")
+    if [[ -n "$extra_args" ]]; then
+        local extra_args_array=()
+        read -r -a extra_args_array <<<"$extra_args"
+        [[ "${#extra_args_array[@]}" -gt 0 ]] && args+=("${extra_args_array[@]}")
+    fi
+    [[ -n "$database" ]] && args+=("$database")
+
+    "$MONGODB_BIN_DIR/mongo" "${args[@]}"
 }
 
 ########################
