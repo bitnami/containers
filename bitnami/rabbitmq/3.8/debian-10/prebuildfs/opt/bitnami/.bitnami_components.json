@@ -1,10 +1,10 @@
 {
     "erlang": {
         "arch": "amd64",
-        "digest": "de21490a60b7973a57b6c679a357a6ffce79579bcb7a8121e2e0f77cf927a365",
+        "digest": "b613ec3326628661ad06653c3e2bce8f8facc4d4944d7bdebd120d02873e9131",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "24.0.4-0"
+        "version": "24.0.5-0"
     },
     "gosu": {
         "arch": "amd64",
