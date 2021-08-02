@@ -36,8 +36,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8`, `8-debian-10`, `8.0.6`, `8.0.6-debian-10-r16`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/8.0.6-debian-10-r16/8/debian-10/Dockerfile)
-* [`7`, `7-debian-10`, `7.5.10`, `7.5.10-debian-10-r16` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/7.5.10-debian-10-r16/7/debian-10/Dockerfile)
+* [`8`, `8-debian-10`, `8.0.6`, `8.0.6-debian-10-r17`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/8.0.6-debian-10-r17/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
 
@@ -258,10 +257,6 @@ You can still build your custom image adding your custom plugins or install them
 ### 6.7.2-debian-10-r18
 
 - Grafana doesn't ship the [`grafana-image-renderer` plugin](https://github.com/grafana/grafana-image-renderer/) by default anymore since it's not compatible with K8s distros with IPv6 disable. Instead, the `GF_INSTALL_PLUGINS` environment variable is set by default including this plugin so it's installed during the container's initialization, users can easily avoid it by overwriting the environment variable.
-
-## Branch Deprecation Notice
-
-Grafana's branch 7 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 08-02-2021
 
 ## Contributing
 
