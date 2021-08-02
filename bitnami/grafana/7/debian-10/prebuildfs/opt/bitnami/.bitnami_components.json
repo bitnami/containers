@@ -1,9 +1,0 @@
-{
-    "grafana": {
-        "arch": "amd64",
-        "digest": "7718b3e22f788621bed15907550e58a26ac0477196e5409728b55cfc21bf54f7",
-        "distro": "debian-10",
-        "type": "NAMI",
-        "version": "7.5.10-0"
-    }
-}
