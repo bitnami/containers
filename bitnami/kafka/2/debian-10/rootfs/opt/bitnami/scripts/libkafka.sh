@@ -279,10 +279,10 @@ kafka_validate() {
     fi
     if [[ "${KAFKA_ZOOKEEPER_PROTOCOL}" =~ SSL ]]; then
         if [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "JKS" ]] &&
-            [[ ! -f "$KAFKA_ZOOKEEPER_TRUSTSTORE_FILE" ]]; then
+            [[ ! -f "$KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_FILE" ]]; then
             print_validation_error "In order to configure the TLS encryption for Zookeeper with JKS certs you must mount your zookeeper.truststore.jks cert to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
         elif [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "PEM" ]] &&
-            [[ ! -f "$KAFKA_ZOOKEEPER_TRUSTSTORE_FILE" ]]; then
+            [[ ! -f "$KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_FILE" ]]; then
             print_validation_error "In order to configure the TLS encryption for Zookeeper with PEM certs you must mount your zookeeper.truststore.pem cert to the ${KAFKA_MOUNTED_CONF_DIR}/certs directory."
         fi
         if [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "JKS" ]] &&
