@@ -443,7 +443,7 @@ In order to authenticate Kafka against a Zookeeper server with `SASL_SSL`, you s
 * `KAFKA_ZOOKEEPER_PROTOCOL`: **SASL_SSL**.
 * `KAFKA_ZOOKEEPER_USER`: Kafka Zookeeper user for SASL authentication. No defaults.
 * `KAFKA_ZOOKEEPER_PASSWORD`: Kafka Zookeeper user password for SASL authentication. No defaults.
-* `KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_FILE`: Kafka Zookeeper truststore file location. Set it if the mount location is different from `/bitnami/kafka/conf/certs/zookeeper.truststore.pem`, `/bitnami/kafka/conf/certs/zookeeper.truststore.jks`, `/opt/bitnami/kafka/confif/certs/zookeeper.truststore.jks` or `/opt/bitnami/kafka/conf/certs/zookeeper.truststore.pem` No defaults.
+* `KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_FILE`: Kafka Zookeeper truststore file location. Set it if the mount location is different from `/bitnami/kafka/conf/certs/zookeeper.truststore.pem`, `/bitnami/kafka/conf/certs/zookeeper.truststore.jks`, `/opt/bitnami/kafka/config/certs/zookeeper.truststore.jks` or `/opt/bitnami/kafka/conf/certs/zookeeper.truststore.pem` No defaults.
 * `KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD`: Kafka Zookeeper keystore file password and key password. No defaults.
 * `KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD`: Kafka Zookeeper truststore file password. No defaults.
 * `KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME`: Verify Zookeeper hostname on TLS certificates. Defaults: **true**.
