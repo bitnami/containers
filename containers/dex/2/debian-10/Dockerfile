@@ -9,14 +9,14 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/dex-2.29.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "b2c79acaf165bb1761dec0f433dedff4a972c44f8cd25439194992c2ef219374  /tmp/bitnami/pkg/cache/dex-2.29.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/dex-2.29.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/dex-2.29.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/dex-2.30.0-0-linux-amd64-debian-10.tar.gz && \
+    echo "cfde965db62c343297086ad790d00b7dcabe5da59bd33983680eb5ff43221e45  /tmp/bitnami/pkg/cache/dex-2.30.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/dex-2.30.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/dex-2.30.0-0-linux-amd64-debian-10.tar.gz
 RUN useradd -r -u 1001 -g root dex
 
 ENV BITNAMI_APP_NAME="dex" \
-    BITNAMI_IMAGE_VERSION="2.29.0-debian-10-r32" \
+    BITNAMI_IMAGE_VERSION="2.30.0-debian-10-r0" \
     DEX_FRONTEND_DIR="/opt/bitnami/dex/web" \
     PATH="/opt/bitnami/dex/bin:$PATH"
 
