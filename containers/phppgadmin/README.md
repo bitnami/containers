@@ -31,7 +31,7 @@ You can find the default credentials and available configuration options in the 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.13.0`, `7.13.0-debian-10-r247`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phppgadmin/blob/7.13.0-debian-10-r247/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.13.0`, `7.13.0-debian-10-r248`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phppgadmin/blob/7.13.0-debian-10-r248/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phppgadmin GitHub repo](https://github.com/bitnami/bitnami-docker-phppgadmin).
 
