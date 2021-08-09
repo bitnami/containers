@@ -26,6 +26,8 @@ if [[ -z "${KAFKA_CFG_BROKER_ID:-}" ]]; then
         export KAFKA_CFG_BROKER_ID=-1
     fi
 fi
+# Set the default tuststore locations
+kafka_configure_default_truststore_locations
 # Ensure Kafka environment variables are valid
 kafka_validate
 # Ensure Kafka user and group exist when running as 'root'
