@@ -14,9 +14,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     tar -zxf /tmp/bitnami/pkg/cache/contour-1.18.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/contour-1.18.0-0-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
+RUN ln -s /opt/bitnami/contour/bin/contour /bin/contour
 
 ENV BITNAMI_APP_NAME="contour" \
-    BITNAMI_IMAGE_VERSION="1.18.0-debian-10-r11" \
+    BITNAMI_IMAGE_VERSION="1.18.0-debian-10-r12" \
     PATH="/opt/bitnami/contour/bin:$PATH"
 
 USER 1001
