@@ -32,16 +32,12 @@ Deploying Bitnami applications as Helm Charts is the easiest way to get started 
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
-## Why use a non-root container?
-
-Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
-
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.4.2`, `2.4.2-debian-10-r134`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.4.2-debian-10-r134/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.4.2`, `2.4.2-debian-10-r135`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.4.2-debian-10-r135/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/magento GitHub repo](https://github.com/bitnami/bitnami-docker-magento).
 
@@ -152,8 +148,6 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 -  magento_data:
 -    driver: local
 ```
-
-> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 ### Mount host directories as data volumes using the Docker command line
 
@@ -544,12 +538,8 @@ Here is an example of extending the image with the following modifications:
 FROM bitnami/magento
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-## Change user to perform privileged actions
-USER 0
 ## Install 'vim'
 RUN install_packages vim
-## Revert to the original non-root user
-USER 1001
 
 ## Enable mod_ratelimit module
 RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt/bitnami/apache/conf/httpd.conf
@@ -584,7 +574,6 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 - The size of the container image has been decreased.
 - The configuration logic is now based on Bash scripts in the *rootfs/* folder.
 - The Magento container now supports the "non-root" user approach, but it still runs as the `root` user by default. When running as a non-root user, all services will be run under the same user and Cron jobs will be disabled as crond requires to be run as a superuser. To run as a non-root user, change `USER root` to `USER 1001` in the Dockerfile, or specify `user: 1001` in `docker-compose.yml`. Related changes:
-
   - The HTTP/HTTPS ports exposed by the container are now `8080/8443` instead of `80/443`.
   - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the Magento site by exporting its content, and importing it on a new Magento container.
 
