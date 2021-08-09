@@ -13,7 +13,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "10.17.0-0" --checksum b1c2a23c7d904b8968f8264dbbe0816cb1d6f5475cce3da620f823752c129266
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.0-0" --checksum 88093e848950fd09e80eb26cac55caa11e77aa78f118b5dc67faa38a3836381d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.13.0-0" --checksum fd7257c2736164d02832dbf72e2c1ed9d875bf3e32f0988520796bc503330129
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "pgbouncer" "1.15.0-2" --checksum da9f06f3340fa2a9483ee59fc045c34acc8411f1bdf2a9e71254cd3f3346c777
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "pgbouncer" "1.16.0-0" --checksum 42afabf8f13a9be2642a8720f167c72b0c10cd113cf7c119a6436b551622cdda
 RUN chmod g+rwX /opt/bitnami
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
@@ -25,7 +25,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 RUN /opt/bitnami/scripts/pgbouncer/postunpack.sh
 ENV BITNAMI_APP_NAME="pgbouncer" \
-    BITNAMI_IMAGE_VERSION="1.15.0-debian-10-r181" \
+    BITNAMI_IMAGE_VERSION="1.16.0-debian-10-r0" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
