@@ -30,7 +30,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`1.19`, `1.19-debian-10`, `1.19.0`, `1.19.0-debian-10-r0` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.19.0-debian-10-r0/1.19/debian-10/Dockerfile)
 * [`1.18`, `1.18-debian-10`, `1.18.3`, `1.18.3-debian-10-r37` (1.18/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.18.3-debian-10-r37/1.18/debian-10/Dockerfile)
-* [`1.17`, `1.17-debian-10`, `1.17.3`, `1.17.3-debian-10-r78`, `latest` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.17.3-debian-10-r78/1.17/debian-10/Dockerfile)
+* [`1.17`, `1.17-debian-10`, `1.17.3`, `1.17.3-debian-10-r79`, `latest` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.17.3-debian-10-r79/1.17/debian-10/Dockerfile)
 * [`1.16`, `1.16-debian-10`, `1.16.4`, `1.16.4-debian-10-r79` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.16.4-debian-10-r79/1.16/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/envoy GitHub repo](https://github.com/bitnami/bitnami-docker-envoy).
