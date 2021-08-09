@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`10.5`, `10.5-debian-10`, `10.5.12`, `10.5.12-debian-10-r2`, `latest` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.5.12-debian-10-r2/10.5/debian-10/Dockerfile)
-* [`10.4`, `10.4-debian-10`, `10.4.21`, `10.4.21-debian-10-r2` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.21-debian-10-r2/10.4/debian-10/Dockerfile)
+* [`10.4`, `10.4-debian-10`, `10.4.21`, `10.4.21-debian-10-r3` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.21-debian-10-r3/10.4/debian-10/Dockerfile)
 * [`10.3`, `10.3-debian-10`, `10.3.31`, `10.3.31-debian-10-r2` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.31-debian-10-r2/10.3/debian-10/Dockerfile)
 * [`10.2`, `10.2-debian-10`, `10.2.40`, `10.2.40-debian-10-r2` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.40-debian-10-r2/10.2/debian-10/Dockerfile)
 
@@ -358,7 +358,6 @@ A **zero downtime** MariaDB master-slave [replication](https://dev.mysql.com/doc
 In a replication cluster you can have one master and zero or more slaves. When replication is enabled the master node is in read-write mode, while the slaves are in read-only mode. For best performance its advisable to limit the reads to the slaves.
 
 > **Note**: you can use the [mariadb-galera image](https://github.com/bitnami/bitnami-docker-mariadb-galera) to set up a master-master replication cluster
-
 ### Step 1: Create the replication master
 
 The first step is to start the MariaDB master.
