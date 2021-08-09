@@ -357,6 +357,8 @@ A **zero downtime** MariaDB master-slave [replication](https://dev.mysql.com/doc
 
 In a replication cluster you can have one master and zero or more slaves. When replication is enabled the master node is in read-write mode, while the slaves are in read-only mode. For best performance its advisable to limit the reads to the slaves.
 
+> **Note**: you can use the [mariadb-galera image](https://github.com/bitnami/bitnami-docker-mariadb-galera) to set up a master-master replication cluster
+
 ### Step 1: Create the replication master
 
 The first step is to start the MariaDB master.
