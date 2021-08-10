@@ -295,21 +295,23 @@ wordpress_initialize() {
             if [[ "$WORDPRESS_PLUGINS" = "all" ]]; then
                 info "Activating all installed plugins"
                 install_plugins_args+=("--all")
+                if is_boolean_yes "$WORDPRESS_ENABLE_MULTISITE"; then
+                    install_plugins_args+=("--network")
+                fi
+                wp_execute plugin activate "${install_plugins_args[@]}"
             elif [[ "$WORDPRESS_PLUGINS" != "none" ]]; then
                 local -a plugins_to_install
                 read -r -a plugins_to_install <<< "$(echo "$WORDPRESS_PLUGINS" | tr ',;' ' ')"
                 if [[ "${#plugins_to_install[@]}" -gt 0 ]]; then
                     info "Installing and activating plugins: ${plugins_to_install[*]}"
                     install_plugins_args+=("${plugins_to_install[@]}")
+                    if is_boolean_yes "$WORDPRESS_ENABLE_MULTISITE"; then
+                        install_plugins_args+=("--activate-network")
+                    else
+                        install_plugins_args+=("--activate")
+                    fi
+                    wp_execute plugin install "${install_plugins_args[@]}"
                 fi
-            fi
-            if [[ "${#install_plugins_args[@]}" -gt 0 ]]; then
-                if is_boolean_yes "$WORDPRESS_ENABLE_MULTISITE"; then
-                    install_plugins_args+=("--activate-network")
-                else
-                    install_plugins_args+=("--activate")
-                fi
-                wp_execute plugin install "${install_plugins_args[@]}"
             fi
             # Post installation steps
             local -r default_user_id="1"
