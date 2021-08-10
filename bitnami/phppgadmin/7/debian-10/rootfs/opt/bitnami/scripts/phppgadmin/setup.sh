@@ -25,5 +25,11 @@ phppgadmin_validate
 phppgadmin_initialize
 
 # Configure web server for phpPgAdmin based on the runtime environment
-info "Enabling web server application configuration for phpPgAdmin"
-phppgadmin_ensure_web_server_app_configuration_exists
+if [ -z "${PHPPGADMIN_URL_PREFIX:-}" ]
+then
+    info "Enabling web server application configuration for phpPgAdmin"
+    phppgadmin_ensure_web_server_app_configuration_exists
+else
+    info "Enabling web server application prefix configuration for phpPgAdmin"
+    phppgadmin_ensure_web_server_prefix_configuration_exists
+fi

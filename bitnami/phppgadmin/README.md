@@ -179,6 +179,10 @@ The phpPgAdmin instance can be customized by specifying environment variables on
 - `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. Default: **80M**
 - `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP upload. Default: **80M**
 
+### Apache configuration
+
+- `PHPPGADMIN_URL_PREFIX`: URL prefix from where it will be accessible (i.e. /phppgadmin)
+
 ### Specifying Environment variables using Docker Compose
 
 This requires a change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-phppgadmin/blob/master/docker-compose.yml) file present in this repository:
