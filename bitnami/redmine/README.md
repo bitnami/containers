@@ -37,7 +37,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`4`, `4-debian-10`, `4.2.2`, `4.2.2-debian-10-r4`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.2.2-debian-10-r4/4/debian-10/Dockerfile)
+- [`4`, `4-debian-10`, `4.2.2`, `4.2.2-debian-10-r5`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.2.2-debian-10-r5/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redmine GitHub repo](https://github.com/bitnami/bitnami-docker-redmine).
 
@@ -466,9 +466,8 @@ $ docker-compose up -d
 - It is now possible to use an already populated Redmine database from another installation. In order to do this, use the environment variable `REDMINE_SKIP_BOOTSTRAP`, which forces the container not to run the initial Redmine setup wizard.
 - The following environment variables have been deprecated. They will continue to work as before, but support for these may be removed in a future update:
 
-  - `REDMINE_DB_POSTGRES`, in favor of `REDMINE_DB_TYPE=postgresql`.
-  - `REDMINE_DB_MYSQL`, in favor of `REDMINE_DB_TYPE=mariadb`.
-  - `SMTP_AUTH`, in favor of `REDMINE_PROTOCOL=tls`.
+  - `REDMINE_DB_POSTGRES` in favor of `REDMINE_DATABASE_HOST`. When used, `REDMINE_DATABASE_TYPE=postgresql` will also be set.
+  - `REDMINE_DB_MYSQL`, in favor of `REDMINE_DATABASE_HOST`. Whenused, `REDMINE_DATABASE_TYPE=mariadb` will also be set.
 
 ## Contributing
 

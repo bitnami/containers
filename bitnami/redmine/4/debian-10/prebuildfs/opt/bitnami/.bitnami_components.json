@@ -15,10 +15,10 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "85d9e5d8f92e8aac0cdc8a17d09e1887fa1b11d5e5319a66093a4e933b73ac8c",
+        "digest": "61a35eecbd21dc92344368ad949d2c7923430ffb2dd6622506177e7f2a3314ff",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.4.20-0"
+        "version": "10.4.21-0"
     },
     "postgresql-client": {
         "arch": "amd64",
