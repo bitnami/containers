@@ -18,12 +18,12 @@ RUN bitnami-pkg install express-generator-4.16.1-1 --checksum f305084e4b45ac55c2
 RUN bitnami-pkg install bower-1.8.12-0 --checksum a277b2d091258925c65b62ec562ab4dc0846260161b0da8e64d6531840b093db
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
 RUN bitnami-pkg install gosu-1.13.0-0 --checksum fd7257c2736164d02832dbf72e2c1ed9d875bf3e32f0988520796bc503330129
-RUN bitnami-pkg install express-4.17.1-2 --checksum c37ea45436aa5a1beb67f44d3923d88eea0a53a4bb05f667a0936fcc058f910a
+RUN bitnami-pkg install express-4.17.1-3 --checksum ad196d1e8fe95e92fc388b117e1b5b7596074c9238257296411c9086c0f5b249
 
 COPY rootfs /
 RUN mkdir -p /dist /app /.npm /.config /.cache /.local && chmod g+rwx /dist /app /.npm /.config /.cache /.local
 ENV BITNAMI_APP_NAME="express" \
-    BITNAMI_IMAGE_VERSION="4.17.1-debian-10-r476" \
+    BITNAMI_IMAGE_VERSION="4.17.1-debian-10-r478" \
     NAMI_PREFIX="/.nami" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
