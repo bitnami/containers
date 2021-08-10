@@ -26,11 +26,6 @@ You can find the default credentials and available configuration options in the 
 
 > This [CVE scan report](https://quay.io/repository/bitnami/suitecrm?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-## Why use a non-root container?
-
-Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
-
-
 ## How to deploy SuiteCRM in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami SuiteCRM Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/suitecrm).
@@ -42,7 +37,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.11.20`, `7.11.20-debian-10-r55`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.11.20-debian-10-r55/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.11.20`, `7.11.20-debian-10-r56`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.11.20-debian-10-r56/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/suitecrm GitHub repo](https://github.com/bitnami/bitnami-docker-suitecrm).
 
@@ -153,8 +148,6 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 -  suitecrm_data:
 -    driver: local
 ```
-
-> NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
 ### Restoring persisted SuiteCRM installation
 
@@ -464,9 +457,7 @@ FROM bitnami/suitecrm
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ## Install 'vim'
-USER 0 # Required to perform privileged actions
 RUN install_packages vim
-USER 1001 # Revert to the original non-root user
 
 ## Enable mod_ratelimit module
 RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt/bitnami/apache/conf/httpd.conf
