@@ -44,7 +44,8 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.11.11`, `3.11.11-debian-10-r7`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.11-debian-10-r7/3/debian-10/Dockerfile)
+* [`4.0`, `4.0-debian-10`, `4.0.0`, `4.0.0-debian-10-r0`, `latest` (4.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/4.0.0-debian-10-r0/4.0/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.11.11`, `3.11.11-debian-10-r7` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.11-debian-10-r7/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cassandra GitHub repo](https://github.com/bitnami/bitnami-docker-cassandra).
 
@@ -65,7 +66,7 @@ $ docker pull bitnami/cassandra:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/cassandra:latest 'https://github.com/bitnami/bitnami-docker-cassandra.git#master:3/debian-10'
+$ docker build -t bitnami/cassandra:latest 'https://github.com/bitnami/bitnami-docker-cassandra.git#master:4.0/debian-10'
 ```
 
 # Persisting your application
@@ -196,7 +197,7 @@ cassandra:
  - `CASSANDRA_CLUSTER_NAME`: Cluster name to configure Cassandra.. Defaults: **My Cluster**
  - `CASSANDRA_SEEDS`: Hosts that will act as Cassandra seeds. No defaults.
  - `CASSANDRA_ENDPOINT_SNITCH`: Snitch name (which determines which data centers and racks nodes belong to). Default **SimpleSnitch**
- - `CASSANDRA_ENABLE_RPC`: Enable the thrift RPC endpoint. Default :**true**
+ - `CASSANDRA_ENABLE_RPC`: Enable the thrift RPC endpoint (ignored for Cassandra 4.X and newer). Default :**true**
  - `CASSANDRA_DATACENTER`: Datacenter name for the cluster. Ignored in **SimpleSnitch** endpoint snitch. Default: **dc1**.
  - `CASSANDRA_RACK`: Rack name for the cluster. Ignored in **SimpleSnitch** endpoint snitch. Default: **rack1**.
  - `CASSANDRA_ENABLE_USER_DEFINED_FUNCTIONS`: User defined functions. Default: **false**.
