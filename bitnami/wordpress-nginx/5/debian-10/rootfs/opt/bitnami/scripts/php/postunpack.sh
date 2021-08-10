@@ -27,7 +27,7 @@ php_conf_set "upload_tmp_dir" "${PHP_BASE_DIR}/tmp"
 php_conf_set "session.save_path" "${PHP_TMP_DIR}/session"
 
 # Ensure directories used by PHP-FPM exist and have proper ownership and permissions
-for dir in "$PHP_CONF_DIR" "$PHP_TMP_DIR" "$PHP_FPM_LOGS_DIR" "${PHP_TMP_DIR}/session"; do
+for dir in "$PHP_CONF_DIR" "${PHP_BASE_DIR}/tmp" "$PHP_TMP_DIR" "$PHP_FPM_LOGS_DIR" "${PHP_TMP_DIR}/session"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done
