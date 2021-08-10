@@ -513,7 +513,7 @@ cassandra_setup_cluster() {
             cassandra_yaml_set "broadcast_address" "$CASSANDRA_BROADCAST_ADDRESS"
         fi
 
-        cassandra_config="$(sed -E "/client_encryption_options:.*/ {N; s/client_encryption_options:[^\n]*\n\s{4}enabled:.*/client_encryption_options:\n    enabled: $CASSANDRA_CLIENT_ENCRYPTION/g}" "$CASSANDRA_CONF_FILE")"
+        cassandra_config="$(sed -E "/client_encryption_options:.*/ {N;N; s/client_encryption_options:[^\n]*(\n\s{4}#.*)?\n\s{4}enabled:.*/client_encryption_options:\1\n    enabled: $CASSANDRA_CLIENT_ENCRYPTION/g}" "$CASSANDRA_CONF_FILE")"
         echo "$cassandra_config" >"$CASSANDRA_CONF_FILE"
     else
         debug "cassandra.yaml mounted. Skipping cluster configuration"
