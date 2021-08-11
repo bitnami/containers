@@ -181,7 +181,7 @@ The phpPgAdmin instance can be customized by specifying environment variables on
 
 ### Apache configuration
 
-- `PHPPGADMIN_URL_PREFIX`: URL prefix from where it will be accessible (i.e. /phppgadmin)
+- `PHPPGADMIN_URL_PREFIX`: URL prefix from where it will be accessible (e.g. /phppgadmin). No default.
 
 ### Specifying Environment variables using Docker Compose
 
