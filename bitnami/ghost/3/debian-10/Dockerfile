@@ -10,7 +10,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq libaudit1 libbsd0 libbz2-1.0 libc6 libcap-ng0 libffi6 libgcc1 libicu63 libjemalloc2 liblzma5 libncurses6 libncursesw6 libpam0g libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 libx11-6 libxau6 libxcb1 libxdmcp6 libxml2 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.11-0" --checksum 28b91ef5db9ad93e704881400703e4085bd82f016be15e3cf8760df044da9490
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.17.4-0" --checksum b8d99ebde08907038f649460bf89253fe88c34aa1ca934f8598a8ebdb6a87e1c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.17.4-1" --checksum e2a253c4fef3310e4eb08dcfb41ba2fa3dee0c5e4298059b3527e3a281bdb2fd
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.31-0" --checksum 92b99c64a3ffe10fd94ef9ecd94d2dd65a172404c726093eb50b3b293523559d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.13.0-0" --checksum fd7257c2736164d02832dbf72e2c1ed9d875bf3e32f0988520796bc503330129
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ghost" "3.42.5-3" --checksum f6e914c37242f5593cf596e3f8eba6e5e64b58d16d537a963fe60457111b81ea
@@ -21,7 +21,7 @@ RUN /opt/bitnami/scripts/ghost/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="3.42.5-debian-10-r95" \
+    BITNAMI_IMAGE_VERSION="3.42.5-debian-10-r96" \
     LD_PRELOAD="/opt/bitnami/common/lib/libnss_wrapper.so" \
     LNAME="ghost" \
     MARIADB_HOST="mariadb" \
