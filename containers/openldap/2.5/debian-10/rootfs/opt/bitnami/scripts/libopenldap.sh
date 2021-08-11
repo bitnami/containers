@@ -259,16 +259,13 @@ dn: olcDatabase={1}monitor,cn=config
 changetype: modify
 replace: olcAccess
 olcAccess: {0}to * by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external, cn=auth" read by dn.base="${LDAP_ADMIN_DN}" read by * none
-
 EOF
-
     if is_boolean_yes "$LDAP_CONFIG_ADMIN_ENABLED"; then
         cat >> "${LDAP_SHARE_DIR}/admin.ldif" << EOF
 dn: olcDatabase={0}config,cn=config
 changetype: modify
 add: olcRootDN
 olcRootDN: $LDAP_CONFIG_ADMIN_DN
-
 dn: olcDatabase={0}config,cn=config
 changetype: modify
 add: olcRootPW
