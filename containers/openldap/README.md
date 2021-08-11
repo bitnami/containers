@@ -36,7 +36,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2.5`, `2.5-debian-10`, `2.5.6`, `2.5.6-debian-10-r14`, `latest` (2.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.5.6-debian-10-r14/2.5/debian-10/Dockerfile)
-* [`2.4`, `2.4-debian-10`, `2.4.59`, `2.4.59-debian-10-r25` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.4.59-debian-10-r25/2.4/debian-10/Dockerfile)
+* [`2.4`, `2.4-debian-10`, `2.4.59`, `2.4.59-debian-10-r26` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.4.59-debian-10-r26/2.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/openldap GitHub repo](https://github.com/bitnami/bitnami-docker-openldap).
 
@@ -172,6 +172,9 @@ The Bitnami Docker OpenLDAP can be easily setup with the following environment v
 - `LDAP_ROOT`: LDAP database root node of the LDAP tree. Default: **dc=example,dc=org**
 - `LDAP_ADMIN_USERNAME`: LDAP database admin user. Default: **admin**
 - `LDAP_ADMIN_PASSWORD`: LDAP database admin password. Default: **adminpassword**
+- `LDAP_CONFIG_ADMIN_ENABLED`: Whether to create a configuration admin user. Default: **no**.
+- `LDAP_CONFIG_ADMIN_USERNAME`: LDAP configuration admin user. This is separate from `LDAP_ADMIN_USERNAME`. Default: **admin**.
+- `LDAP_CONFIG_ADMIN_PASSWORD`: LDAP configuration admin password. Default: **configpassword**.
 - `LDAP_USERS`: Comma separated list of LDAP users to create in the default LDAP tree. Default: **user01,user02**
 - `LDAP_PASSWORDS`: Comma separated list of passwords to use for LDAP users. Default: **bitnami1,bitnami2**
 - `LDAP_USER_DC`: DC for the users' organizational unit. Default: **users**
@@ -182,9 +185,6 @@ The Bitnami Docker OpenLDAP can be easily setup with the following environment v
 - `LDAP_CUSTOM_SCHEMA_FILE`: Location of a custom internal schema file that could not be added as custom ldif file (i.e. containing some `structuralObjectClass`). Default is **/schema/custom.ldif**"
 - `LDAP_ULIMIT_NOFILES`: Maximum number of open file descriptors. Default: **1024**.
 - `LDAP_ALLOW_ANON_BINDING`: Allow anonymous bindings to the LDAP server. Default: **yes**.
-- `LDAP_CONFIG_ADMIN_ENABLED`: Whether to create a configuration admin user. Default: **no**.
-- `LDAP_CONFIG_ADMIN_USERNAME`: LDAP configuration admin user. This is separate from `LDAP_ADMIN_USERNAME`. Default: **admin**.
-- `LDAP_CONFIG_ADMIN_PASSWORD`: LDAP configuration admin password. Default: **configpassword**.
 
 Check the official [OpenLDAP Configuration Reference](https://www.openldap.org/doc/admin24/guide.html) for more information about how to configure OpenLDAP.
 
