@@ -2,22 +2,45 @@
 
 # shellcheck disable=SC1091
 
+set -o errexit
+set -o nounset
+set -o pipefail
+# set -o xtrace # Uncomment this line for debugging purpose
+
 # Load libraries
-. /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libtomcat.sh
+. /opt/bitnami/scripts/libfs.sh
 
 # Load Tomcat environment variables
-eval "$(tomcat_env)"
+. /opt/bitnami/scripts/tomcat-env.sh
 
-for dir in "$TOMCAT_TMP_DIR" "$TOMCAT_LOG_DIR" "$TOMCAT_CONF_DIR" "$TOMCAT_WORK_DIR" "$TOMCAT_WEBAPPS_DIR"; do
+# Ensure 'tomcat' user exists when running as 'root'
+ensure_user_exists "$TOMCAT_DAEMON_USER" --group "$TOMCAT_DAEMON_GROUP" --system
+# By default, the upstream Tomcat tarball includes very specific permissions on its files
+# For simplicity purposes, since Bitnami Tomcat is considered a development environment, we reset to OS defaults
+configure_permissions_ownership "$TOMCAT_BASE_DIR" -d "755" -f "644"
+chmod a+x "$TOMCAT_BIN_DIR"/*.sh
+# Make TOMCAT_HOME writable (non-recursively, for security reasons) both for root and non-root approaches
+chown "$TOMCAT_DAEMON_USER" "$TOMCAT_HOME"
+chmod g+rwX "$TOMCAT_HOME"
+# Make TOMCAT_LIB_DIR writable (non-recursively, for security reasons) for non-root approach, some apps may copy files there
+chmod g+rwX "$TOMCAT_LIB_DIR"
+# Make required folders writable by the Tomcat web server user
+for dir in "$TOMCAT_TMP_DIR" "$TOMCAT_LOGS_DIR" "$TOMCAT_CONF_DIR" "$TOMCAT_WORK_DIR" "$TOMCAT_WEBAPPS_DIR" "${TOMCAT_BASE_DIR}/webapps"; do
     ensure_dir_exists "$dir"
+    # Use tomcat:root ownership for compatibility when running as a non-root user
+    configure_permissions_ownership "$dir" -d "775" -f "664" -u "$TOMCAT_DAEMON_USER" -g "root"
 done
 
-mv "$TOMCAT_BASE_DIR/webapps" "$TOMCAT_BASE_DIR/webapps_default"
-ln -s "$TOMCAT_WEBAPPS_DIR" "$TOMCAT_BASE_DIR/webapps"
-ln -s "${TOMCAT_WEBAPPS_DIR}"  "/app"
+# Allow enabling custom Tomcat webapps
+mv "${TOMCAT_BASE_DIR}/webapps" "${TOMCAT_BASE_DIR}/webapps_default"
+ln -sf "$TOMCAT_WEBAPPS_DIR" "${TOMCAT_BASE_DIR}/webapps"
 
-chmod -R g+rwX "$TOMCAT_HOME" "$TOMCAT_TMP_DIR" "$TOMCAT_LOG_DIR" "$TOMCAT_CONF_DIR" "$TOMCAT_WORK_DIR" "$TOMCAT_WEBAPPS_DIR"
+# Create a setenv.sh script
+# For more info, refer to section '(3.4) Using the "setenv" script' from https://tomcat.apache.org/tomcat-9.0-doc/RUNNING.txt
+declare template_dir="${BITNAMI_ROOT_DIR}/scripts/tomcat/bitnami-templates"
+render-template "${template_dir}/setenv.sh.tpl" > "${TOMCAT_BIN_DIR}/setenv.sh"
+chmod g+rwX "${TOMCAT_BIN_DIR}/setenv.sh"
 
-touch "$TOMCAT_BIN_DIR/setenv.sh"
-chmod g+rwX "$TOMCAT_BIN_DIR/setenv.sh"
+# Users can mount their webapps at /app
+ln -sf "$TOMCAT_WEBAPPS_DIR" /app
