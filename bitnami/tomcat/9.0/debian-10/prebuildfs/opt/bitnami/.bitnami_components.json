@@ -13,11 +13,18 @@
         "type": "NAMI",
         "version": "11.0.12-0"
     },
-    "tomcat": {
+    "render-template": {
         "arch": "amd64",
-        "digest": "3f07c11421321e7801af26b2e8977133317af2c885566e1ea94288bba2425477",
+        "digest": "8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "9.0.52-0"
+        "version": "1.0.0-3"
+    },
+    "tomcat": {
+        "arch": "amd64",
+        "digest": "68712f08805abefe3067cd796a2992156ba07313b3fcefe580eb45d1aa808260",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "9.0.52-1"
     }
 }
