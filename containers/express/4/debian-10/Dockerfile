@@ -11,7 +11,7 @@ RUN install_packages ca-certificates curl gzip libbz2-1.0 libc6 libcom-err2 libc
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
 RUN bitnami-pkg install python-3.8.11-0 --checksum 28b91ef5db9ad93e704881400703e4085bd82f016be15e3cf8760df044da9490
-RUN bitnami-pkg install node-14.17.4-1 --checksum e2a253c4fef3310e4eb08dcfb41ba2fa3dee0c5e4298059b3527e3a281bdb2fd
+RUN bitnami-pkg install node-14.17.5-0 --checksum 8afec4a09258ec4ef5f8ea6469038fa79f1d5385e055f86551d90ab4cd540a8a
 RUN bitnami-pkg install sequelize-cli-5.5.1-1 --checksum 7555275076a12faf13e23da63b3b7b307a883d13faa8c6c36386592a76690c28
 RUN bitnami-pkg install git-2.32.0-0 --checksum 3094f50c904e966bd6c6a2d6152cf41fd3a816d32395622a785ccbcda62b7c5f
 RUN bitnami-pkg install express-generator-4.16.1-1 --checksum f305084e4b45ac55c2662eef90ff420ea321157c26b6fee3eb1dda51fb56faa0
@@ -23,7 +23,7 @@ RUN bitnami-pkg install express-4.17.1-3 --checksum ad196d1e8fe95e92fc388b117e1b
 COPY rootfs /
 RUN mkdir -p /dist /app /.npm /.config /.cache /.local && chmod g+rwx /dist /app /.npm /.config /.cache /.local
 ENV BITNAMI_APP_NAME="express" \
-    BITNAMI_IMAGE_VERSION="4.17.1-debian-10-r479" \
+    BITNAMI_IMAGE_VERSION="4.17.1-debian-10-r480" \
     NAMI_PREFIX="/.nami" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
