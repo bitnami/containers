@@ -7,6 +7,8 @@ services:
       - '8080:8080'
     volumes:
       - 'tomcat_data:/bitnami'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
 
 volumes:
   tomcat_data:
