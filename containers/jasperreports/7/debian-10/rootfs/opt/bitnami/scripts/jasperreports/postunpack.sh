@@ -35,7 +35,7 @@ jasperreports_conf_set "maven.jdbc.artifactId" "mariadb-java-client"
 jasperreports_conf_set "dbPassword" ""
 
 # Configure Tomcat path
-jasperreports_conf_set "appServerDir" "$BITNAMI_ROOT_DIR/tomcat"
+jasperreports_conf_set "appServerDir" "${BITNAMI_ROOT_DIR}/tomcat"
 
 # Set keystore location (based on https://community.jaspersoft.com/wiki/encryption-jasperreports-server-75)
 cat <<EOF >"${JASPERREPORTS_CONF_DIR}/keystore.init.properties"
@@ -54,5 +54,6 @@ done
 
 # Disable variable that deletes the JASPERREPORTS_BASE_DIR folder when deploying the war file
 xmlstarlet ed -L -d '//var[@name="warTargetDirDel"]' "${JASPERREPORTS_CONF_DIR}/bin/app-server.xml"
+
 # Grant execution permissions to the buildomatic and ant scripts
 chmod +x "$JASPERREPORTS_CONF_DIR"/*.sh "$JASPERREPORTS_CONF_DIR"/bin/*.sh "$JASPERREPORTS_CONF_DIR"/js-ant "$JASPERREPORTS_CONF_DIR"/js-mvn "${JASPERREPORTS_BASE_DIR}/apache-ant/bin/ant" "${JASPERREPORTS_BASE_DIR}/apache-ant/bin/antRun"

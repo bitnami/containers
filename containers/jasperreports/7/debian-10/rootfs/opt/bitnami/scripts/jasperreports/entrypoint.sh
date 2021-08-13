@@ -18,7 +18,8 @@ print_welcome_page
 
 if [[ "$1" = "/opt/bitnami/scripts/tomcat/run.sh" ]]; then
     /opt/bitnami/scripts/mysql-client/setup.sh
-    /opt/bitnami/scripts/tomcat/setup.sh
+    # For compatibility with previous Helm charts, disable Tomcat auth by default
+    TOMCAT_ENABLE_AUTH="${TOMCAT_ENABLE_AUTH:-no}" /opt/bitnami/scripts/tomcat/setup.sh
     /opt/bitnami/scripts/jasperreports/setup.sh
     /post-init.sh
     info "** JasperReports setup finished! **"
