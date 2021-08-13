@@ -12,54 +12,6 @@
 . /opt/bitnami/scripts/libvalidations.sh
 
 ########################
-# Loads global variables used on Tomcat configuration.
-# Globals:
-# Arguments:
-#   None
-# Returns:
-#   Series of exports to be used as 'eval' arguments
-#########################
-tomcat_env() {
-    cat <<"EOF"
-# Bitnami debug
-export MODULE=tomcat
-export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
-
-## Paths
-export TOMCAT_BASE_DIR="/opt/bitnami/tomcat"
-export TOMCAT_CONF_DIR="${TOMCAT_BASE_DIR}/conf"
-export TOMCAT_BIN_DIR="${TOMCAT_BASE_DIR}/bin"
-export TOMCAT_TMP_DIR="${TOMCAT_BASE_DIR}/temp"
-export TOMCAT_LOG_DIR="${TOMCAT_BASE_DIR}/logs"
-export TOMCAT_LIB_DIR="${TOMCAT_BASE_DIR}/lib"
-export TOMCAT_WORK_DIR="${TOMCAT_BASE_DIR}/work"
-export TOMCAT_WEBAPPS_DIR="/bitnami/tomcat/data"
-export TOMCAT_JAVA_ROOT_DIR="/opt/bitnami/java"
-export TOMCAT_CONF_FILE="${TOMCAT_CONF_DIR}/server.xml"
-export TOMCAT_USERS_CONF_FILE="${TOMCAT_CONF_DIR}/tomcat-users.xml"
-export TOMCAT_LOG_FILE="${TOMCAT_LOG_DIR}/catalina.out"
-export CATALINA_PID="${TOMCAT_TMP_DIR}/catalina.pid"
-
-## Users
-export TOMCAT_DAEMON_USER="tomcat"
-export TOMCAT_DAEMON_GROUP="tomcat"
-
-## Exposed
-export TOMCAT_SHUTDOWN_PORT_NUMBER="${TOMCAT_SHUTDOWN_PORT_NUMBER:-8005}"
-export TOMCAT_HTTP_PORT_NUMBER="${TOMCAT_HTTP_PORT_NUMBER:-8080}"
-export TOMCAT_AJP_PORT_NUMBER="${TOMCAT_AJP_PORT_NUMBER:-8009}"
-export TOMCAT_HOME="${TOMCAT_HOME:-$TOMCAT_BASE_DIR}"
-export TOMCAT_USERNAME="${TOMCAT_USERNAME:-user}"
-export TOMCAT_PASSWORD="${TOMCAT_PASSWORD:-}"
-export TOMCAT_ALLOW_REMOTE_MANAGEMENT="${TOMCAT_ALLOW_REMOTE_MANAGEMENT:-0}"
-
-## JVM
-export JAVA_HOME="${JAVA_HOME:-$TOMCAT_JAVA_ROOT_DIR}"
-export JAVA_OPTS="${JAVA_OPTS:--Djava.awt.headless=true -XX:+UseG1GC -Dfile.encoding=UTF-8 -Duser.home=$TOMCAT_HOME}"
-EOF
-}
-
-########################
 # Validate settings in MYSQL_*/MARIADB_* environment variables
 # Globals:
 #   DB_*
@@ -77,7 +29,11 @@ tomcat_validate() {
         error "$1"
         error_code=1
     }
-
+    check_yes_no_value() {
+        if ! is_yes_no_value "${!1}" && ! is_true_false_value "${!1}" && ! is_1_0_value "${!1}"; then
+            print_validation_error "The allowed values for ${1} are: yes no"
+        fi
+    }
     check_conflicting_ports() {
         local -r total="$#"
 
@@ -89,7 +45,6 @@ tomcat_validate() {
             done
         done
     }
-
     check_allowed_port() {
         local validate_port_args="-unprivileged"
 
@@ -98,159 +53,82 @@ tomcat_validate() {
         fi
     }
 
+    check_yes_no_value TOMCAT_ALLOW_REMOTE_MANAGEMENT
+    check_yes_no_value TOMCAT_ENABLE_AUTH
+    check_yes_no_value TOMCAT_ENABLE_AJP
+
     check_allowed_port TOMCAT_HTTP_PORT_NUMBER
     check_allowed_port TOMCAT_AJP_PORT_NUMBER
     check_allowed_port TOMCAT_SHUTDOWN_PORT_NUMBER
 
     check_conflicting_ports TOMCAT_HTTP_PORT_NUMBER TOMCAT_AJP_PORT_NUMBER TOMCAT_SHUTDOWN_PORT_NUMBER
 
-    [[ "$error_code" -eq 0 ]] || exit "$error_code"
-}
-
-########################
-# Configure ports
-# Globals:
-#   TOMCAT_
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-tomcat_configure_ports() {
-    replace_in_file "$TOMCAT_CONF_FILE" "port=\"8080\"" "port=\"$TOMCAT_HTTP_PORT_NUMBER\""
-    replace_in_file "$TOMCAT_CONF_FILE" "port=\"8005\"" "port=\"$TOMCAT_SHUTDOWN_PORT_NUMBER\""
-    replace_in_file "$TOMCAT_CONF_FILE" "port=\"8009\"" "port=\"$TOMCAT_AJP_PORT_NUMBER\""
-}
-
-########################
-# Apply regex in configuration file
-# Globals:
-#   JAVA_HOME, TOMCAT_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-tomcat_setup_environment() {
-    cat >"${TOMCAT_BIN_DIR}/setenv.sh" <<EOF
-#!/bin/bash
-JAVA_HOME="$JAVA_HOME"
-export JAVA_HOME
-
-JAVA_OPTS="$JAVA_OPTS"
-export JAVA_OPTS
-
-export CATALINA_PID="$CATALINA_PID"
-
-# Load Tomcat Native library
-LD_LIBRARY_PATH="${TOMCAT_LIB_DIR}:\${LD_LIBRARY_PATH:+:\$LD_LIBRARY_PATH}"
-export LD_LIBRARY_PATH
-EOF
-}
-
-########################
-# Overwrite context of a Tomcat application
-# Globals:
-#   TOMCAT_*
-# Arguments:
-#   $1 - application
-#   $2 - context
-# Returns:
-#   None
-#########################
-tomcat_overwrite_context() {
-    local -r application=${1:?application is missing}
-    local -r context=${2:?context is missing}
-    local -r file="${TOMCAT_WEBAPPS_DIR}/${application}/META-INF/context.xml"
-    local file_content
-
-    file_content="$(sed '/<Context/,/<\/Context>/c'"$context" "$file")"
-    echo "$file_content" >"$file"
-}
-
-########################
-# In version 7.0.107, 8.0.60, 9.0.40 Tomcat added to its examples application a new <filter-name>HTTP header security filter</filter-name>
-# but it is missed to add support for async dispatchers, as we are testing this async examples we needed to fix.
-#
-# Globals:
-#   TOMCAT_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-tomcat_fix_example_filter_registering() {
-    local file_content
-    local -r file="${TOMCAT_WEBAPPS_DIR}/examples/WEB-INF/web.xml"
-
-    file_content="$(sed '/<filter-class>org.apache.catalina.filters.HttpHeaderSecurityFilter<\/filter-class>/a'"<async-supported>true</async-supported>" "$file")"
-
-    echo "$file_content" >"$file"
-}
-
-########################
-# Render tag from a value and attributes
-# Globals:
-#   None
-# Arguments:
-#   $1 - name
-#   $2 - attribute
-#   $3 - child
-# Returns:
-#   Rendered tag string
-########################
-tomcat_render_tag() {
-    local -r name=${1:?name is missing}
-    local -r attributes=${2:?attributes is missing}
-    local -r child=${3:-}
-
-    local rendered
-
-    if [[ -z "$child" ]]; then
-        rendered="<$name $attributes/>"
-    else
-        rendered="<$name $attributes>\n $child\n</$name>"
+    # Validate credentials
+    if is_boolean_yes "$TOMCAT_ENABLE_AUTH"; then
+        if is_boolean_yes "${ALLOW_EMPTY_PASSWORD:-no}"; then
+            warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}. For safety reasons, do not use this flag in a production environment."
+        else
+            is_empty_value "$TOMCAT_PASSWORD" && print_validation_error "The TOMCAT_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
+        fi
     fi
 
-    echo "$rendered"
+    return "$error_code"
 }
 
 ########################
-# Enable manager and host-manager to accept remote connections
+# Ensure that a Tomcat user exists
 # Globals:
 #   TOMCAT_*
 # Arguments:
-#   None
+#   $1 - Username
+#   $2 - Password
 # Returns:
 #   None
 #########################
-tomcat_enable_remote_management() {
-    local inner_tag
-    info "Enabling remote connections for manager and host-manager applications..."
+tomcat_ensure_user_exists() {
+    local username="${1:?username is missing}"
+    local password="${2:-}"
 
-    inner_tag=$(tomcat_render_tag Valve "className=\"org.apache.catalina.valves.RemoteAddrValve\" allow=\"\\\d+\\\.\\\d+\\\.\\\d+\\\.\\\d+\"")
-
-    tomcat_overwrite_context manager "$(tomcat_render_tag Context "antiResourceLocking=\"false\" privileged=\"true\"" "$inner_tag")"
-    tomcat_overwrite_context host-manager "$(tomcat_render_tag Context "antiResourceLocking=\"false\" privileged=\"true\"" "$inner_tag")"
+    # This command will create a new user in tomcat-users.xml (inside <tomcat-users>) - How it works:
+    # 0. Assign the XML namespace 'x' (required because it uses a non-standard namespace)
+    # 1. Remove any existing <user> entry for $USERNAME
+    # 2. Create a new subnode in <tomcat-users>
+    # 3. Store that element in a variable so it can be accessed later
+    # 4. Set the "username", "password" and "roles" attributes with their values
+    # shellcheck disable=SC2016
+    xmlstarlet ed -S --inplace -N x="http://tomcat.apache.org/xml" \
+        -d '//x:user[@username="manager"]' \
+        --subnode '//x:tomcat-users' --type elem --name 'user' \
+        --var new_node '$prev' \
+        --insert '$new_node' --type attr --name 'username' --value "$username" \
+        --insert '$new_node' --type attr --name 'password' --value "$password" \
+        --insert '$new_node' --type attr --name 'roles' --value "manager-gui,admin-gui" \
+        "$TOMCAT_USERS_CONF_FILE"
 }
 
 ########################
-# Create tomcat user
+# Ensure that the Tomcat AJP connector is enabled
 # Globals:
 #   TOMCAT_*
 # Arguments:
-#   $1 - name
-#   $2 - password
+#   $1 - Tomcat AJP connector port number
 # Returns:
 #   None
 #########################
-tomcat_create_tomcat_user() {
-    local username=${1:?username is missing}
-    local password=${2:-}
-
-    local user_definition="<user username=\"${username}\" password=\"${password}\" roles=\"manager-gui,admin-gui\"/></tomcat-users>"
-
-    replace_in_file "$TOMCAT_USERS_CONF_FILE" "</tomcat-users>" "$user_definition"
+tomcat_enable_ajp() {
+    local ajp_port="${1:?missing ajp port}"
+    # We want to locate the AJP connector right after the related comment, hence the substitution and not using xmlstarlet
+    # Unfortunately the AJP connector is inside a multi-line comment, so the simplest approach is to add a new line in the proper location
+    local ajp_protocol="AJP/1.3"
+    local ajp_selector="//Connector[@protocol=\"${ajp_protocol}\"]"
+    if is_empty_value "$(xmlstarlet sel --template --value-of "${ajp_selector}/@port" "$TOMCAT_CONF_FILE")"; then
+        # Ensure that it is only added once
+        local ajp_connector="<Connector protocol=\"${ajp_protocol}\" address=\"localhost\" secretRequired=\"false\" port=\"${ajp_port}\" redirectPort=\"8443\"/>"
+        replace_in_file "$TOMCAT_CONF_FILE" "^(\s*)(<!-- Define an AJP .* -->)$" "\1\2\n\1${ajp_connector}"
+    else
+        # If it was already added, update the port number
+        xmlstarlet ed -S --inplace --update "${ajp_selector}/@port" --value "$ajp_port" "$TOMCAT_CONF_FILE"
+    fi
 }
 
 ########################
@@ -263,30 +141,50 @@ tomcat_create_tomcat_user() {
 #   None
 #########################
 tomcat_initialize() {
-    info "Initializing Tomcat server..."
-
-    am_i_root && chown -LR "$TOMCAT_DAEMON_USER":"$TOMCAT_DAEMON_GROUP" "$TOMCAT_TMP_DIR" "$TOMCAT_LOG_DIR" "$TOMCAT_WORK_DIR" "$TOMCAT_CONF_DIR" "$TOMCAT_BIN_DIR" "$TOMCAT_LIB_DIR"
+    info "Ensuring Tomcat directories exist"
     ensure_dir_exists "$TOMCAT_WEBAPPS_DIR"
-    am_i_root && configure_permissions_ownership "$TOMCAT_WEBAPPS_DIR" -u "$TOMCAT_DAEMON_USER" -g "$TOMCAT_DAEMON_GROUP" -d "755" -f "644"
-    am_i_root && configure_permissions_ownership "${TOMCAT_BASE_DIR}/webapps_default" -u "$TOMCAT_DAEMON_USER" -g "$TOMCAT_DAEMON_GROUP" -d "755" -f "644"
+    # Use tomcat:root ownership for compatibility when running as a non-root user
+    am_i_root && configure_permissions_ownership "$TOMCAT_WEBAPPS_DIR" -d "775" -f "664" -u "$TOMCAT_DAEMON_USER" -g "root"
 
-    if is_dir_empty "$TOMCAT_WEBAPPS_DIR"; then
-        info "Deploying Tomcat from scratch..."
+    if ! is_empty_value "$TOMCAT_EXTRA_JAVA_OPTS"; then
+        cat >>"${TOMCAT_BIN_DIR}/setenv.sh" <<EOF
 
-        cp -r "$TOMCAT_BASE_DIR"/webapps_default/* "$TOMCAT_WEBAPPS_DIR"
-    else
-        info "Persisted webapps detected."
+# Additional configuration
+export JAVA_OPTS="\${JAVA_OPTS} ${TOMCAT_EXTRA_JAVA_OPTS}"
+EOF
     fi
 
-    # TODO(T38395): remove this line and the function once Tomcat fixed the issue.
-    tomcat_fix_example_filter_registering
+    # server.xml docs: https://tomcat.apache.org/tomcat-9.0-doc/config/server.html
+    info "Configuring port numbers"
+    xmlstarlet ed -S --inplace --update '//Server/@port' --value "$TOMCAT_SHUTDOWN_PORT_NUMBER" "$TOMCAT_CONF_FILE"
+    xmlstarlet ed -S --inplace --update '//Connector[@protocol="HTTP/1.1"]/@port' --value "$TOMCAT_HTTP_PORT_NUMBER" "$TOMCAT_CONF_FILE"
 
-    tomcat_configure_ports
-    tomcat_setup_environment
-    tomcat_create_tomcat_user "$TOMCAT_USERNAME" "$TOMCAT_PASSWORD"
+    if is_boolean_yes "$TOMCAT_ENABLE_AJP"; then
+        info "Enabling AJP"
+        tomcat_enable_ajp "$TOMCAT_AJP_PORT_NUMBER"
+    fi
 
-    if is_boolean_yes "$TOMCAT_ALLOW_REMOTE_MANAGEMENT"; then
-        tomcat_enable_remote_management
+    if is_boolean_yes "$TOMCAT_ENABLE_AUTH"; then
+        info "Creating Tomcat user"
+        tomcat_ensure_user_exists "$TOMCAT_USERNAME" "$TOMCAT_PASSWORD"
+    fi
+
+    if is_dir_empty "$TOMCAT_WEBAPPS_DIR"; then
+        info "Deploying Tomcat from scratch"
+        cp -rp "$TOMCAT_BASE_DIR"/webapps_default/* "$TOMCAT_WEBAPPS_DIR"
+
+        # Access control is configured in the application's context.xml with a Valve element
+        # context.xml docs: https://tomcat.apache.org/tomcat-9.0-doc/config/context.html
+        # Valve docs for Access Control: https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Access_Control
+        if is_boolean_yes "$TOMCAT_ALLOW_REMOTE_MANAGEMENT"; then
+            info "Enabling remote connections for manager and host-manager applications"
+            for application in manager host-manager; do
+                [[ -f "${TOMCAT_WEBAPPS_DIR}/${application}/META-INF/context.xml" ]] || continue
+                xmlstarlet ed -S --inplace --update '//Valve/@allow' --value '\d+\.\d+\.\d+\.\d+' "${TOMCAT_WEBAPPS_DIR}/${application}/META-INF/context.xml"
+            done
+        fi
+    else
+        info "Persisted webapps detected"
     fi
 }
 
@@ -300,15 +198,54 @@ tomcat_initialize() {
 #   None
 #########################
 tomcat_start_bg() {
-    local -r start_command=("${TOMCAT_BIN_DIR}/catalina.sh" "run")
+    is_tomcat_running && return
+
     info "Starting Tomcat in background"
+    local start_error=0
     if am_i_root; then
-        debug_execute gosu "$TOMCAT_DAEMON_USER" "${start_command[@]}" &
+        debug_execute gosu "$TOMCAT_DAEMON_USER" "${TOMCAT_BIN_DIR}/startup.sh" || start_error="$?"
     else
-        debug_execute "${start_command[@]}" &
+        debug_execute "${TOMCAT_BIN_DIR}/startup.sh" || start_error="$?"
     fi
 
-    retry_while "is_tomcat_running"
+    if [[ "$start_error" -ne 0 ]]; then
+        error "Tomcat failed to start with exit code ${start_error}"
+        return "$start_error"
+    fi
+
+    wait_for_log_entry "Catalina.start Server startup" "$TOMCAT_LOG_FILE"
+}
+
+########################
+# Stop Tomcat daemon
+# Globals:
+#   TOMCAT_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+tomcat_stop() {
+    is_tomcat_not_running && return
+
+    info "Stopping Tomcat"
+    local stop_error=0
+    # 'shutdown.sh stop n -force' - Stop Catalina, wait up to n seconds and then use kill -KILL if still running
+    # The default timeout is 5 seconds, and some apps require even more, so give double the amount of time
+    # In addition, force the shutdown if it did not stop in time to ensure that the shutdown (almost) never fails
+    local tomcat_shutdown_timeout=10
+    if am_i_root; then
+        debug_execute gosu "$TOMCAT_DAEMON_USER" "${TOMCAT_BIN_DIR}/shutdown.sh" "$tomcat_shutdown_timeout" -force || stop_error="$?"
+    else
+        debug_execute "${TOMCAT_BIN_DIR}/shutdown.sh" "$tomcat_shutdown_timeout" -force || stop_error="$?"
+    fi
+
+    if [[ "$stop_error" -ne 0 ]]; then
+        error "Tomcat failed to stop with exit code ${stop_error}"
+        return "$stop_error"
+    fi
+
+    retry_while "is_tomcat_not_running"
 }
 
 ########################
@@ -322,7 +259,7 @@ tomcat_start_bg() {
 #########################
 is_tomcat_running() {
     local pid
-    pid="$(get_pid_from_file "${CATALINA_PID}")"
+    pid="$(get_pid_from_file "${TOMCAT_PID_FILE}")"
     if [[ -n "${pid}" ]]; then
         is_service_running "${pid}"
     else
@@ -341,19 +278,4 @@ is_tomcat_running() {
 #########################
 is_tomcat_not_running() {
     ! is_tomcat_running
-}
-
-########################
-# Stop Tomcat daemon
-# Globals:
-#   TOMCAT_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-tomcat_stop() {
-    is_tomcat_not_running && return
-    info "Stopping Tomcat"
-    stop_service_using_pid "$CATALINA_PID"
 }
