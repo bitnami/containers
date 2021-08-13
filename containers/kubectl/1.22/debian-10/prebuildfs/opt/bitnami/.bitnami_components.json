@@ -1,0 +1,9 @@
+{
+    "kubectl": {
+        "arch": "amd64",
+        "digest": "a33c9c9a8ff38d189d46a4781e3d2ff61520a45465f53ef93d6d62bb7d4b9432",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.22.0-0"
+    }
+}
