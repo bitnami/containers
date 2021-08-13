@@ -92,6 +92,22 @@ is_true_false_value() {
 }
 
 ########################
+# Check if the provided argument is a boolean 1/0 value
+# Arguments:
+#   $1 - Value to check
+# Returns:
+#   Boolean
+#########################
+is_1_0_value() {
+    local -r bool="${1:-}"
+    if [[ "$bool" =~ ^[10]$ ]]; then
+        true
+    else
+        false
+    fi
+}
+
+########################
 # Check if the provided argument is an empty string or not defined
 # Arguments:
 #   $1 - Value to check
