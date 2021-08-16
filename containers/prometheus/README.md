@@ -95,7 +95,7 @@ Containers attached to the same network can communicate with each other using th
 $ docker network create prometheus-network --driver bridge
 ```
 
-### Step 2: Launch the Blacbox_exporter container within your network
+### Step 2: Launch the Prometheus container within your network
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `prometheus-network` network.
 
