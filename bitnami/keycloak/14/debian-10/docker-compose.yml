@@ -6,12 +6,11 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
       - POSTGRESQL_USERNAME=bn_keycloak
       - POSTGRESQL_DATABASE=bitnami_keycloak
-      - KEYCLOAK_DATABASE_SSL=true
     volumes:
       - 'postgresql_data:/bitnami/postgresql'
 
   keycloak:
-    image: bitnami-keycloak:1.0
+    image: docker.io/bitnami/keycloak:14
     depends_on:
       - postgresql
     ports:
