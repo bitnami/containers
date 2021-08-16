@@ -123,12 +123,12 @@ grafana:
 
 The Bitnami Grafana image includes, by default, a series of popular/useful plugins. This is done by executing the script below during the image building process:
 
-- [grafana-plugins.sh](debian-10/rootfs/grafana-plugins.sh)
+- [grafana-plugins.sh](8/debian-10/rootfs/grafana-plugins.sh)
 
 You can customize this image and include the plugins you desire editing the list of plugins avilable in the script (see the variable "grafana_plugin_list") and build your own image as shown below:
 
 ```console
-$ cd 7/debian-10
+$ cd 8/debian-10
 $ docker build -t your-custom-grafana .
 ```
 
