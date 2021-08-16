@@ -11,8 +11,6 @@ services:
 
   keycloak:
     image: docker.io/bitnami/keycloak:13
-    environment:
-      - KEYCLOAK_DATABASE_SSL=true
     depends_on:
       - postgresql
     ports:
