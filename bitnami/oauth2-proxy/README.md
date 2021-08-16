@@ -5,7 +5,7 @@ A reverse proxy and static file server that provides authentication
 using Providers (Google, GitHub, and others) to validate accounts by
 email, domain or group.
 
-[https://github.com/pusher/oauth2_proxy](https://github.com/pusher/oauth2_proxy)
+[https://github.com/oauth2-proxy/oauth2-proxy](https://github.com/oauth2-proxy/oauth2-proxy)
 
 # TL;DR
 
