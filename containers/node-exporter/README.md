@@ -32,7 +32,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.2.2`, `1.2.2-debian-10-r9`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-exporter/blob/1.2.2-debian-10-r9/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.2.2`, `1.2.2-debian-10-r10`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-exporter/blob/1.2.2-debian-10-r10/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-node-exporter).
 
@@ -70,7 +70,7 @@ Containers attached to the same network can communicate with each other using th
 $ docker network create node-exporter-network --driver bridge
 ```
 
-### Step 2: Launch the Blacbox_exporter container within your network
+### Step 2: Launch the Node Exporter container within your network
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `node-exporter-network` network.
 
