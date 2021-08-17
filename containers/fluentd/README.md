@@ -32,7 +32,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.13.3`, `1.13.3-debian-10-r17`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.13.3-debian-10-r17/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.13.3`, `1.13.3-debian-10-r18`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.13.3-debian-10-r18/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd).
 
@@ -70,7 +70,7 @@ Containers attached to the same network can communicate with each other using th
 $ docker network create fluentd-network --driver bridge
 ```
 
-### Step 2: Launch the Blacbox_exporter container within your network
+### Step 2: Launch the Fluentd container within your network
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `fluentd-network` network.
 
