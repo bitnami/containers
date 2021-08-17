@@ -71,7 +71,7 @@ kafka_configure_default_truststore_locations() {
 
     # Kafka truststore
     if { [[ "${KAFKA_CFG_LISTENERS:-}" =~ SSL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SSL ]]; } && is_empty_value "$KAFKA_TLS_TRUSTSTORE_FILE"; then
-        local -r kafka_truststore_filename="kafka.truststore.jks"
+        local kafka_truststore_filename="kafka.truststore.jks"
         [[ "$KAFKA_TLS_TYPE" = "PEM" ]] && kafka_truststore_filename="kafka.truststore.pem"
         if [[ -f "${KAFKA_CERTS_DIR}/${kafka_truststore_filename}" ]]; then
             # Mounted in /opt/bitnami/kafka/conf/certs
@@ -83,7 +83,7 @@ kafka_configure_default_truststore_locations() {
     fi
     # Zookeeper truststore
     if [[ "${KAFKA_ZOOKEEPER_PROTOCOL:-}" =~ SSL ]] && is_empty_value "$KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_FILE"; then
-        local -r zk_truststore_filename="zookeeper.truststore.jks"
+        local zk_truststore_filename="zookeeper.truststore.jks"
         [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "PEM" ]] && zk_truststore_filename="zookeeper.truststore.pem"
         if [[ -f "${KAFKA_CERTS_DIR}/${zk_truststore_filename}" ]]; then
             # Mounted in /opt/bitnami/kafka/conf/certs
