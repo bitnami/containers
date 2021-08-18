@@ -12,11 +12,11 @@ RUN bitnami-pkg unpack php-7.3.29-6 --checksum 7daac9464051ab7ae075ec20e0d24ee99
 RUN bitnami-pkg install mysql-client-10.3.31-0 --checksum 92b99c64a3ffe10fd94ef9ecd94d2dd65a172404c726093eb50b3b293523559d
 RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
 RUN bitnami-pkg install symfony-1.5.11-6 --checksum 11f60bb26ed13a4ba639320ecec3d9e4eaac74ebcd61c01a1cfd296049a5f349
-RUN bitnami-pkg install gosu-1.13.0-0 --checksum fd7257c2736164d02832dbf72e2c1ed9d875bf3e32f0988520796bc503330129
+RUN bitnami-pkg install gosu-1.14.0-0 --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="symfony" \
-    BITNAMI_IMAGE_VERSION="1.5.11-debian-10-r522" \
+    BITNAMI_IMAGE_VERSION="1.5.11-debian-10-r523" \
     MARIADB_DATABASE="bitnami_myapp" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
