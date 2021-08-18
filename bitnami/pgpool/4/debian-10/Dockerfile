@@ -12,13 +12,13 @@ RUN install_packages acl ca-certificates curl gzip ldap-utils libaudit1 libbsd0 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "10.18.0-0" --checksum bc507be929b72ee456f46c031a5c2ab4b6433175d2bbb6fc6a74da565ab3cb08
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.0-3" --checksum 7521d9a4f9e4e182bf32977e234026caa7b03759799868335bccb1edd8f8fd12
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "pgpool" "4.2.4-1" --checksum 7e74b2e1bcc38f5f3154f460ea27b7ebb42ec2049533111842a6238dc01224a8
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.13.0-0" --checksum fd7257c2736164d02832dbf72e2c1ed9d875bf3e32f0988520796bc503330129
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/pgpool/postunpack.sh
 ENV BITNAMI_APP_NAME="pgpool" \
-    BITNAMI_IMAGE_VERSION="4.2.4-debian-10-r14" \
+    BITNAMI_IMAGE_VERSION="4.2.4-debian-10-r15" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/common/bin:/opt/bitnami/pgpool/bin:$PATH" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_NAME="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
