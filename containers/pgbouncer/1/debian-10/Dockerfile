@@ -12,7 +12,7 @@ RUN install_packages acl ca-certificates curl gzip libaudit1 libbsd0 libc-ares2 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.0-3" --checksum 7521d9a4f9e4e182bf32977e234026caa7b03759799868335bccb1edd8f8fd12
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "10.18.0-0" --checksum bc507be929b72ee456f46c031a5c2ab4b6433175d2bbb6fc6a74da565ab3cb08
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.0-0" --checksum 88093e848950fd09e80eb26cac55caa11e77aa78f118b5dc67faa38a3836381d
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.13.0-0" --checksum fd7257c2736164d02832dbf72e2c1ed9d875bf3e32f0988520796bc503330129
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "pgbouncer" "1.16.0-0" --checksum 42afabf8f13a9be2642a8720f167c72b0c10cd113cf7c119a6436b551622cdda
 RUN chmod g+rwX /opt/bitnami
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
@@ -25,7 +25,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 RUN /opt/bitnami/scripts/pgbouncer/postunpack.sh
 ENV BITNAMI_APP_NAME="pgbouncer" \
-    BITNAMI_IMAGE_VERSION="1.16.0-debian-10-r8" \
+    BITNAMI_IMAGE_VERSION="1.16.0-debian-10-r9" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
