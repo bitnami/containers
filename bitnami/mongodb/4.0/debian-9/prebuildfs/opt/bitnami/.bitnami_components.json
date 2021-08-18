@@ -1,10 +1,10 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "d3a2cda4e198dee853a294b71d1c8adac78c0c476cb0e0e712c754a7bef45e25",
+        "digest": "d177bc3da307f83d83ac8284be8062fc8b428e8f38a3b697876b5efc73ebf74f",
         "distro": "debian-9",
         "type": "NAMI",
-        "version": "1.13.0-0"
+        "version": "1.14.0-0"
     },
     "mongodb": {
         "arch": "amd64",
