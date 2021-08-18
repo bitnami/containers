@@ -8,17 +8,17 @@
     },
     "drupal": {
         "arch": "amd64",
-        "digest": "99540071708d88a34455bfe4f2a130635183819f894ce1922eebfa923ee0c349",
+        "digest": "f55e3b803d4945f47ce59c21a9b6063c30c0476ff909a9bcdd933486d670832d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "9.2.3-0"
+        "version": "9.2.4-0"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "fd7257c2736164d02832dbf72e2c1ed9d875bf3e32f0988520796bc503330129",
+        "digest": "3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.13.0-0"
+        "version": "1.14.0-0"
     },
     "libphp": {
         "arch": "amd64",
