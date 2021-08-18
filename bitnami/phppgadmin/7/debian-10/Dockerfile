@@ -15,7 +15,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-clien
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.29-1" --checksum bb5e5663ed26e35eac840f2f98d5beb0a458bad653dceb6efba0d8fd4918d673
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "phppgadmin" "7.13.0-0" --checksum f5ee43a60de97d9841a9b1cc425a7c4071c4c275e57c4523334320c11ec04b75
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.13.0-0" --checksum fd7257c2736164d02832dbf72e2c1ed9d875bf3e32f0988520796bc503330129
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
@@ -28,7 +28,7 @@ ENV APACHE_ENABLE_CUSTOM_PORTS="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="phppgadmin" \
-    BITNAMI_IMAGE_VERSION="7.13.0-debian-10-r259" \
+    BITNAMI_IMAGE_VERSION="7.13.0-debian-10-r260" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/common/bin:$PATH" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_NAME="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
