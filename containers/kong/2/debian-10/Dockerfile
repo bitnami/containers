@@ -9,14 +9,14 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 libpcre3 libssl1.1 libyaml-0-2 perl procps tar zlib1g zlib1g-dev
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kong" "2.5.0-5" --checksum 84eff47f402030b0179c2ac8b98073e572d3f2360cd08be4268ab8c5b76fe120
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kong" "2.5.0-6" --checksum 71d1685c8b0fc998e9213915cb3c0b0dbcb8a5132495b3d6deda199fcf5d3480
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/kong/postunpack.sh
 ENV BITNAMI_APP_NAME="kong" \
-    BITNAMI_IMAGE_VERSION="2.5.0-debian-10-r34" \
+    BITNAMI_IMAGE_VERSION="2.5.0-debian-10-r35" \
     PATH="/opt/bitnami/kong/bin:/opt/bitnami/kong/openresty/bin:/opt/bitnami/kong/openresty/luajit/bin:/opt/bitnami/kong/openresty/nginx/sbin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8000 8001 8443 8444
