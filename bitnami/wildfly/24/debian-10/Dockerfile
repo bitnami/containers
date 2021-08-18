@@ -11,13 +11,13 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl gzip libaio1 libc6 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.12-0" --checksum 14c1274e93b1135d4d1b82ad7985fc2fa7f5d0689b6da18e0c94da37407cd4ea
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wildfly" "24.0.1-1" --checksum 2612ae5967aeff6e413d6cd74e02965b978711e8443ffa4add3eb6ae99a45357
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.13.0-0" --checksum fd7257c2736164d02832dbf72e2c1ed9d875bf3e32f0988520796bc503330129
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/wildfly/postunpack.sh
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="24.0.1-debian-10-r20" \
+    BITNAMI_IMAGE_VERSION="24.0.1-debian-10-r21" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:/opt/bitnami/common/bin:$PATH" \
     WILDFLY_HOME="/home/wildfly"
 
