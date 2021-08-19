@@ -3,6 +3,7 @@ services:
   mariadb:
     image: docker.io/bitnami/mariadb:10.5
     environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=bn_drupal
       - MARIADB_DATABASE=bitnami_drupal
@@ -18,6 +19,7 @@ services:
       - DRUPAL_DATABASE_PORT_NUMBER=3306
       - DRUPAL_DATABASE_USER=bn_drupal
       - DRUPAL_DATABASE_NAME=bitnami_drupal
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'drupal_data:/bitnami/drupal'
