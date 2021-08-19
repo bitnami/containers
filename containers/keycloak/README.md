@@ -10,6 +10,16 @@
 $ docker run --name keycloak bitnami/keycloak:latest
 ```
 
+## Docker Compose
+
+```console
+$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-keycloak/master/docker-compose.yml
+$ docker-compose up
+```
+
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
+
+
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -34,8 +44,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
+* [`15`, `15-debian-10`, `15.0.1`, `15.0.1-debian-10-r0`, `latest` (15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/15.0.1-debian-10-r0/15/debian-10/Dockerfile)
 * [`14`, `14-debian-10`, `14.0.0`, `14.0.0-debian-10-r38` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/14.0.0-debian-10-r38/14/debian-10/Dockerfile)
-* [`13`, `13-debian-10`, `13.0.1`, `13.0.1-debian-10-r73`, `latest` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/13.0.1-debian-10-r73/13/debian-10/Dockerfile)
+* [`13`, `13-debian-10`, `13.0.1`, `13.0.1-debian-10-r73` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/13.0.1-debian-10-r73/13/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak).
 
@@ -56,7 +67,7 @@ $ docker pull bitnami/keycloak:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/keycloak:latest 'https://github.com/bitnami/bitnami-docker-keycloak.git#master:13/debian-10'
+$ docker build -t bitnami/keycloak:latest 'https://github.com/bitnami/bitnami-docker-keycloak.git#master:15/debian-10'
 ```
 
 # Configuration
@@ -81,7 +92,7 @@ The Bitnami Keycloak container requires a PostgreSQL database to work. This is c
 - `KEYCLOAK_DATABASE_USER`: PostgreSQL database user. Default: **bn_keycloak**.
 - `KEYCLOAK_DATABASE_PASSWORD`: PostgreSQL database password. No defaults.
 - `KEYCLOAK_DATABASE_SCHEMA`: PostgreSQL database schema. Default: **public**.
-- `KEYCLOAK_DATABASE_TLS`: PostgreSQL database TLS flag. Default: **false**
+- `KEYCLOAK_DATABASE_TLS`: PostgreSQL database TLS flag. Default: **false**.
 
 ## Port and address binding
 
