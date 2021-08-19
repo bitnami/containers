@@ -11,6 +11,15 @@
 $ docker run --name pgbouncer bitnami/pgbouncer:latest
 ```
 
+## Docker Compose
+
+```console
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-pgbouncer/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
+```
+
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
+
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -31,7 +40,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.16.0`, `1.16.0-debian-10-r9`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgbouncer/blob/1.16.0-debian-10-r9/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.16.0`, `1.16.0-debian-10-r10`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgbouncer/blob/1.16.0-debian-10-r10/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pgbouncer GitHub repo](https://github.com/bitnami/bitnami-docker-pgbouncer).
 
