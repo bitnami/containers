@@ -5,12 +5,14 @@ services:
     volumes:
       - 'postgresql_data:/bitnami/postgresql'
     environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
       - POSTGRESQL_USERNAME=bn_discourse
       - POSTGRESQL_DATABASE=bitnami_discourse
   redis:
     image: docker.io/bitnami/redis:6.0
     environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'redis_data:/bitnami/discourse'
@@ -24,6 +26,7 @@ services:
       - postgresql
       - redis
     environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
       - DISCOURSE_HOST=www.example.com
       - DISCOURSE_DATABASE_HOST=postgresql
@@ -43,6 +46,7 @@ services:
       - 'sidekiq_data:/bitnami/discourse'
     command: /opt/bitnami/scripts/discourse-sidekiq/run.sh
     environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
       - DISCOURSE_HOST=www.example.com
       - DISCOURSE_DATABASE_HOST=postgresql
