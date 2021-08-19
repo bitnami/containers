@@ -3,6 +3,7 @@ services:
   mariadb:
     image: docker.io/bitnami/mariadb:10.3
     environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=bn_suitecrm
       - MARIADB_DATABASE=bitnami_suitecrm
@@ -18,6 +19,7 @@ services:
       - SUITECRM_DATABASE_PORT_NUMBER=3306
       - SUITECRM_DATABASE_USER=bn_suitecrm
       - SUITECRM_DATABASE_NAME=bitnami_suitecrm
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'suitecrm_data:/bitnami/suitecrm'

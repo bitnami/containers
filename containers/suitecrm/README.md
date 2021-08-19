@@ -13,7 +13,7 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-suitecrm/ma
 $ docker-compose up -d
 ```
 
-You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
 
 ## Why use Bitnami Images?
 
@@ -37,7 +37,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.11.20`, `7.11.20-debian-10-r64`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.11.20-debian-10-r64/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.11.20`, `7.11.20-debian-10-r65`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.11.20-debian-10-r65/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/suitecrm GitHub repo](https://github.com/bitnami/bitnami-docker-suitecrm).
 
