@@ -17,6 +17,8 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-concourse/m
 $ docker-compose up -d
 ```
 
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [PostgreSQL container](https://github.com/bitnami/bitnami-docker-postgresql#readme) for a more secure deployment.
+
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -37,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.4.0`, `7.4.0-debian-10-r19`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-concourse/blob/7.4.0-debian-10-r19/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.4.0`, `7.4.0-debian-10-r20`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-concourse/blob/7.4.0-debian-10-r20/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/concourse GitHub repo](https://github.com/bitnami/bitnami-docker-concourse).
 
