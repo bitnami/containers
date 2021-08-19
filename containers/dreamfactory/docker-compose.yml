@@ -4,12 +4,14 @@ services:
   mariadb:
     image: docker.io/bitnami/mariadb:10.3
     environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'mariadb_data:/bitnami'
   redis:
     image: docker.io/bitnami/redis:6.0
     environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'redis_data:/bitnami'
