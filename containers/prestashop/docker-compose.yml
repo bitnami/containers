@@ -3,6 +3,7 @@ services:
   mariadb:
     image: docker.io/bitnami/mariadb:10.3
     environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=bn_prestashop
       - MARIADB_DATABASE=bitnami_prestashop
@@ -19,6 +20,7 @@ services:
       - PRESTASHOP_DATABASE_PORT_NUMBER=3306
       - PRESTASHOP_DATABASE_USER=bn_prestashop
       - PRESTASHOP_DATABASE_NAME=bitnami_prestashop
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'prestashop_data:/bitnami/prestashop'

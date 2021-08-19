@@ -13,7 +13,7 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-prestashop/
 $ docker-compose up -d
 ```
 
-You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
 
 ## Why use Bitnami Images?
 
@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.7`, `1.7-debian-10`, `1.7.7-6`, `1.7.7-6-debian-10-r9`, `latest` (1.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.7-6-debian-10-r9/1.7/debian-10/Dockerfile)
+* [`1.7`, `1.7-debian-10`, `1.7.7-7`, `1.7.7-7-debian-10-r0`, `latest` (1.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.7-7-debian-10-r0/1.7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prestashop GitHub repo](https://github.com/bitnami/bitnami-docker-prestashop).
 
