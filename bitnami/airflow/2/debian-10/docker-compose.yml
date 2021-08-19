@@ -9,12 +9,14 @@ services:
       - POSTGRESQL_DATABASE=bitnami_airflow
       - POSTGRESQL_USERNAME=bn_airflow
       - POSTGRESQL_PASSWORD=bitnami1
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
   redis:
     image: docker.io/bitnami/redis:6.0
     volumes:
       - 'redis_data:/bitnami'
     environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
   airflow-scheduler:
     # TODO: to be reverted to use proper registry/distro on T39132
