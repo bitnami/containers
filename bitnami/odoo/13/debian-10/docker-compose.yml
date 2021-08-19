@@ -5,6 +5,7 @@ services:
     volumes:
       - 'postgresql_data:/bitnami/postgresql'
     environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
       - POSTGRESQL_USERNAME=bn_odoo
       - POSTGRESQL_DATABASE=bitnami_odoo
@@ -17,6 +18,7 @@ services:
     depends_on:
       - postgresql
     environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
       - ODOO_DATABASE_HOST=postgresql
       - ODOO_DATABASE_PORT_NUMBER=5432
