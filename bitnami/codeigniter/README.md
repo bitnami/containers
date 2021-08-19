@@ -11,6 +11,8 @@ $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-codeigniter/
 $ docker-compose up
 ```
 
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [MariaDB container](https://github.com/bitnami/bitnami-docker-mariadb#readme) for a more secure deployment.
+
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -36,7 +38,7 @@ The Bitnami CodeIgniter Development Container has been carefully engineered to p
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.1.11`, `3.1.11-debian-10-r529`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/3.1.11-debian-10-r529/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.1.11`, `3.1.11-debian-10-r530`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/3.1.11-debian-10-r530/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codeigniter GitHub repo](https://github.com/bitnami/bitnami-docker-codeigniter).
 
