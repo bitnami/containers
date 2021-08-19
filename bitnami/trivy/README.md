@@ -27,7 +27,7 @@ $ docker run --name trivy bitnami/trivy:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.19.2`, `0.19.2-debian-10-r27`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-trivy/blob/0.19.2-debian-10-r27/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.19.2`, `0.19.2-debian-10-r28`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-trivy/blob/0.19.2-debian-10-r28/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/trivy GitHub repo](https://github.com/bitnami/bitnami-docker-trivy).
 
@@ -59,10 +59,10 @@ Non-root container images add an extra layer of security and are generally recom
 
 ## Running commands
 
-To run commands inside this container you can use `docker run`, for example to execute `trivy --version` you can follow the example below:
+To run Trivy commands inside this container you can use `docker run` since this container uses the `trivy` binary as entrypoint. For example to execute `trivy --version` you can follow the example below:
 
 ```console
-$ docker run --rm --name trivy bitnami/trivy:latest -- trivy --version
+$ docker run --rm --name trivy bitnami/trivy:latest --version
 ```
 
 Check the [official Trivy documentation](https://github.com/aquasecurity/trivy#usage) for a list of the available parameters.
