@@ -13,7 +13,7 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-ghost/maste
 $ docker-compose up -d
 ```
 
-You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
 
 ## Why use Bitnami Images?
 
@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`4`, `4-debian-10`, `4.12.1`, `4.12.1-debian-10-r1`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/4.12.1-debian-10-r1/4/debian-10/Dockerfile)
+- [`4`, `4-debian-10`, `4.12.1`, `4.12.1-debian-10-r2`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/4.12.1-debian-10-r2/4/debian-10/Dockerfile)
 - [`3`, `3-debian-10`, `3.42.5`, `3.42.5-debian-10-r104` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/3.42.5-debian-10-r104/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ghost GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
