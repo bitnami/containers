@@ -3,6 +3,7 @@ services:
   mariadb:
     image: docker.io/bitnami/mariadb:10.3
     environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=bn_joomla
       - MARIADB_DATABASE=bitnami_joomla
@@ -18,6 +19,7 @@ services:
       - JOOMLA_DATABASE_PORT_NUMBER=3306
       - JOOMLA_DATABASE_USER=bn_joomla
       - JOOMLA_DATABASE_NAME=bitnami_joomla
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'joomla_data:/bitnami/joomla'
