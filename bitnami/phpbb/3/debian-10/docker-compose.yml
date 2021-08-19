@@ -3,6 +3,7 @@ services:
   mariadb:
     image: docker.io/bitnami/mariadb:10.3
     environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=bn_phpbb
       - MARIADB_DATABASE=bitnami_phpbb
@@ -18,6 +19,7 @@ services:
       - PHPBB_DATABASE_PORT_NUMBER=3306
       - PHPBB_DATABASE_USER=bn_phpbb
       - PHPBB_DATABASE_NAME=bitnami_phpbb
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'phpbb_data:/bitnami/phpbb'
