@@ -20,6 +20,8 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-redis/maste
 $ docker-compose up -d
 ```
 
+**Warning**: These quick setups are only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
+
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -48,7 +50,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`6.2`, `6.2-debian-10`, `6.2.5`, `6.2.5-debian-10-r26`, `latest` (6.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.2.5-debian-10-r26/6.2/debian-10/Dockerfile)
 * [`6.0`, `6.0-debian-10`, `6.0.15`, `6.0.15-debian-10-r27` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.0.15-debian-10-r27/6.0/debian-10/Dockerfile)
-* [`5.0`, `5.0-debian-10`, `5.0.13`, `5.0.13-debian-10-r26` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.13-debian-10-r26/5.0/debian-10/Dockerfile)
+* [`5.0`, `5.0-debian-10`, `5.0.13`, `5.0.13-debian-10-r27` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.13-debian-10-r27/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
 
