@@ -11,6 +11,8 @@ $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-express/mast
 $ docker-compose up
 ```
 
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [MongoDB&reg; container](https://github.com/bitnami/bitnami-docker-mongodb#readme) for a more secure deployment.
+
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -28,7 +30,7 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.17.1`, `4.17.1-debian-10-r486`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-express/blob/4.17.1-debian-10-r486/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.17.1`, `4.17.1-debian-10-r487`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-express/blob/4.17.1-debian-10-r487/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codiad GitHub repo](https://github.com/bitnami/bitnami-docker-codiad).
 
