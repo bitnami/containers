@@ -3,6 +3,7 @@ services:
   mariadb:
     image: docker.io/bitnami/mariadb:10.3
     environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=bn_orangehrm
       - MARIADB_DATABASE=bitnami_orangehrm
@@ -18,6 +19,7 @@ services:
       - ORANGEHRM_DATABASE_PORT_NUMBER=3306
       - ORANGEHRM_DATABASE_USER=bn_orangehrm
       - ORANGEHRM_DATABASE_NAME=bitnami_orangehrm
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'orangehrm_data:/bitnami/orangehrm'
