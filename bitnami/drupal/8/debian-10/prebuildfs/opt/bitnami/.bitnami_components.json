@@ -1,10 +1,10 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "0296bc7dd5f621eba6f948433a6c7fc04a45876f42f6395cea5888b707f1ad11",
+        "digest": "ce45103c76533b1fc3b07466dfb0c00aa9fa54b736dbd5e22160ef775233c880",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.48-1"
+        "version": "2.4.48-2"
     },
     "drupal": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "3ef2eb24c358a84f03bf1eee1747a1379bac7ab2c54601abae4423a72ed6f843",
+        "digest": "0e54327672e6a12d6b5af92fcefaeacc7ec149d9a9433d6ab08796ffdcf32a43",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.22-1"
+        "version": "7.4.22-2"
     },
     "render-template": {
         "arch": "amd64",
