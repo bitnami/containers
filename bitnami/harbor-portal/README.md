@@ -14,6 +14,8 @@ $ curl -L https://github.com/bitnami/bitnami-docker-harbor-portal/archive/master
 $ docker-compose up
 ```
 
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [PostgreSQL](https://github.com/bitnami/bitnami-docker-postgresql#readme) and [Redis(TM)](https://github.com/bitnami/bitnami-docker-redis#readme) containers for a more secure deployment.
+
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -40,7 +42,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.3.1`, `2.3.1-debian-10-r23`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-portal/blob/2.3.1-debian-10-r23/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.3.1`, `2.3.1-debian-10-r24`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-portal/blob/2.3.1-debian-10-r24/2/debian-10/Dockerfile)
 
 # Configuration
 
