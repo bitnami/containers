@@ -15,6 +15,8 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-ejbca/maste
 $ docker-compose up -d
 ```
 
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
+
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -35,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`6`, `6-debian-10`, `6.15.2-6`, `6.15.2-6-debian-10-r329`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ejbca/blob/6.15.2-6-debian-10-r329/6/debian-10/Dockerfile)
+* [`6`, `6-debian-10`, `6.15.2-6`, `6.15.2-6-debian-10-r330`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ejbca/blob/6.15.2-6-debian-10-r330/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ejbca GitHub repo](https://github.com/bitnami/bitnami-docker-ejbca).
 
