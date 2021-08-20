@@ -15,7 +15,7 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-postgresql/
 $ docker-compose up -d
 ```
 
-You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
 
 # Why use Bitnami Images?
 
@@ -46,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`13`, `13-debian-10`, `13.4.0`, `13.4.0-debian-10-r6` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/13.4.0-debian-10-r6/13/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.8.0`, `12.8.0-debian-10-r6` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.8.0-debian-10-r6/12/debian-10/Dockerfile)
-* [`11`, `11-debian-10`, `11.13.0`, `11.13.0-debian-10-r6`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.13.0-debian-10-r6/11/debian-10/Dockerfile)
+* [`11`, `11-debian-10`, `11.13.0`, `11.13.0-debian-10-r7`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.13.0-debian-10-r7/11/debian-10/Dockerfile)
 * [`10`, `10-debian-10`, `10.18.0`, `10.18.0-debian-10-r6` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.18.0-debian-10-r6/10/debian-10/Dockerfile)
 * [`9.6`, `9.6-debian-10`, `9.6.23`, `9.6.23-debian-10-r6` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.23-debian-10-r6/9.6/debian-10/Dockerfile)
 
