@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-scratch`, `0.20200717.0`, `0.20200717.0-scratch-r7`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb-relay/blob/0.20200717.0-scratch-r7/0/scratch/Dockerfile)
+* [`0`, `0-scratch`, `0.20200717.0`, `0.20200717.0-scratch-r12`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb-relay/blob/0.20200717.0-scratch-r12/0/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/influxdb-relay GitHub repo](https://github.com/bitnami/bitnami-docker-influxdb-relay).
 
@@ -119,7 +119,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 # License
 
-Copyright (c) 2020 Bitnami
+Copyright (c) 2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
