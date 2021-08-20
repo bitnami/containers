@@ -5,6 +5,7 @@ services:
     volumes:
       - 'mariadb_data:/bitnami/mariadb'
     environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=bn_osclass
       - MARIADB_DATABASE=bitnami_osclass
@@ -18,6 +19,7 @@ services:
     depends_on:
       - mariadb
     environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
       - OSCLASS_DATABASE_HOST=mariadb
       - OSCLASS_DATABASE_PORT_NUMBER=3306
