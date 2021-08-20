@@ -19,6 +19,8 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-mariadb-gal
 $ docker-compose up -d
 ```
 
+**Warning**: These quick setups are only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
+
 # Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -48,7 +50,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`10.5`, `10.5-debian-10`, `10.5.12`, `10.5.12-debian-10-r-1`, `latest` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.5.12-debian-10-r-1/10.5/debian-10/Dockerfile)
-* [`10.4`, `10.4-debian-10`, `10.4.21`, `10.4.21-debian-10-r12` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.21-debian-10-r12/10.4/debian-10/Dockerfile)
+* [`10.4`, `10.4-debian-10`, `10.4.21`, `10.4.21-debian-10-r13` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.21-debian-10-r13/10.4/debian-10/Dockerfile)
 * [`10.3`, `10.3-debian-10`, `10.3.31`, `10.3.31-debian-10-r13` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.31-debian-10-r13/10.3/debian-10/Dockerfile)
 * [`10.2`, `10.2-debian-10`, `10.2.40`, `10.2.40-debian-10-r12` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.40-debian-10-r12/10.2/debian-10/Dockerfile)
 
