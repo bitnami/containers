@@ -79,7 +79,7 @@ $ docker build -t bitnami/mongodb-sharded:latest 'https://github.com/bitnami/bit
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a directory at the `/bitnami/mongodb` path. If the mounted directory is empty, it will be initialized on the first run.
+For persistence you should create a directory and mount it at the /bitnami/mongodb path. If the mounted directory is empty, it will be initialized on the first run. As this is a non-root container, directory must have read/write permissions for the UID 1001.
 
 ```console
 $ docker run \
@@ -89,12 +89,24 @@ $ docker run \
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb-sharded/blob/master/docker-compose.yml) file present in this repository:
 
+- Create directories to hold the persistence data. At minimum you will need one directory for each mongo instance running in the sharded cluster. For example, that means one directory for mongos, mongocfg and mongoshard. You need to assign read write permission to UID 1001 (ie. mkdir [directory] && chown 1001:1001 [directory] && chmod 777 [directory]) to all directories.
+
 ```yaml
 services:
   mongodb-sharded:
   ...
     volumes:
-      - /path/to/mongodb-persistence:/bitnami
+      - /path/to/mongos-persistence:/bitnami
+  ...
+  mongodb-shard0:
+  ...
+    volumes:
+      - /path/to/mongoshard-persistence:/bitnami
+  ...
+  mongodb-cfg:
+  ...
+    volumes:
+      - /path/to/mongocfg-persistence:/bitnami
   ...
 ```
 
