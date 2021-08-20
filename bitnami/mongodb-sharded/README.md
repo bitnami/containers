@@ -51,7 +51,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`4.4`, `4.4-debian-10`, `4.4.8`, `4.4.8-debian-10-r19`, `latest` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.8-debian-10-r19/4.4/debian-10/Dockerfile)
 * [`4.2`, `4.2-debian-10`, `4.2.15`, `4.2.15-debian-10-r40` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.15-debian-10-r40/4.2/debian-10/Dockerfile)
 * [`4.0`, `4.0-debian-9`, `4.0.26`, `4.0.26-debian-9-r26` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.26-debian-9-r26/4.0/debian-9/Dockerfile)
-* [`3.6`, `3.6-debian-9`, `3.6.23`, `3.6.23-debian-9-r135` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.23-debian-9-r135/3.6/debian-9/Dockerfile)
+* [`3.6`, `3.6-debian-9`, `3.6.23`, `3.6.23-debian-9-r136` (3.6/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/3.6.23-debian-9-r136/3.6/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
 
@@ -79,7 +79,7 @@ $ docker build -t bitnami/mongodb-sharded:latest 'https://github.com/bitnami/bit
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should create a directory and mount it at the /bitnami/mongodb path. If the mounted directory is empty, it will be initialized on the first run. As this is a non-root container, directory must have read/write permissions for the UID 1001.
+For persistence you should create a directory and mount it at the `/bitnami/mongodb` path. If the mounted directory is empty, it will be initialized on the first run. As this is a non-root container, directory must have read/write permissions for the UID 1001.
 
 ```console
 $ docker run \
