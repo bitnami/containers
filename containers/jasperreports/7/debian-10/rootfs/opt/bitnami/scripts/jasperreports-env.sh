@@ -68,6 +68,7 @@ export JASPERREPORTS_CONF_DIR="${JASPERREPORTS_BASE_DIR}/buildomatic"
 export JASPERREPORTS_LOGS_DIR="${JASPERREPORTS_BASE_DIR}/WEB-INF/logs"
 export JASPERREPORTS_LOG_FILE="${JASPERREPORTS_LOGS_DIR}/jasperserver.log"
 export JASPERREPORTS_CONF_FILE="${JASPERREPORTS_CONF_DIR}/default_master.properties"
+export PATH="${BITNAMI_ROOT_DIR}/common/bin:${PATH}"
 
 # JasperReports persistence configuration
 export JASPERREPORTS_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/jasperreports"
