@@ -9,14 +9,14 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-notary-server" "2.3.1-0" --checksum c43477924c8de6d450bec34a1778f25716a66804289c820a883817db625cb140
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-notary-server" "2.3.2-0" --checksum f64fc9f66db91fa23d5ddde144df3270c2997cda1dd60cf28a4e6a909ae240d6
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-notary-server/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-notary-server" \
-    BITNAMI_IMAGE_VERSION="2.3.1-debian-10-r29" \
+    BITNAMI_IMAGE_VERSION="2.3.2-debian-10-r0" \
     PATH="/opt/bitnami/harbor-notary-server/bin:/opt/bitnami/common/bin:$PATH" \
     SERVICE_NAME="notary_server"
 
