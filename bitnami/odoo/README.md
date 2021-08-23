@@ -40,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 - [`14`, `14-debian-10`, `14.0.20210810`, `14.0.20210810-debian-10-r12`, `latest` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/14.0.20210810-debian-10-r12/14/debian-10/Dockerfile)
 - [`13`, `13-debian-10`, `13.0.20210810`, `13.0.20210810-debian-10-r12` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20210810-debian-10-r12/13/debian-10/Dockerfile)
-- [`12`, `12-debian-10`, `12.0.20210815`, `12.0.20210815-debian-10-r7` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/12.0.20210815-debian-10-r7/12/debian-10/Dockerfile)
+- [`12`, `12-debian-10`, `12.0.20210815`, `12.0.20210815-debian-10-r8` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/12.0.20210815-debian-10-r8/12/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/odoo GitHub repo](https://github.com/bitnami/bitnami-docker-odoo).
 
@@ -214,6 +214,7 @@ Available environment variables:
 - `ODOO_EMAIL`: Odoo application email. Default: **user@example.com**
 - `ODOO_PASSWORD`: Odoo application password. Default: **bitnami**
 - `ODOO_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. This is necessary in case you use a database that already has Odoo data. Default: **no**
+- `ODOO_SKIP_MODULES_UPDATE`: Whether to perform initial update of the plugins installed. Default: **no**
 - `ODOO_LOAD_DEMO_DATA`: Whether to load demo data. Default: **yes**
 
 ##### Database connection configuration
