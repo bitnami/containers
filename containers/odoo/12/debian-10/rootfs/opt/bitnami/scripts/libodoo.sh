@@ -68,6 +68,7 @@ odoo_validate() {
 
     # Validate user inputs
     check_yes_no_value "ODOO_SKIP_BOOTSTRAP"
+    check_yes_no_value "ODOO_SKIP_MODULES_UPDATE"
     check_yes_no_value "ODOO_LOAD_DEMO_DATA"
     check_valid_port "ODOO_PORT_NUMBER"
     check_valid_port "ODOO_LONGPOLLING_PORT_NUMBER"
@@ -165,8 +166,10 @@ odoo_initialize() {
             # So we need to clear the assets or if none of the .css/.js will load properly
             info "Clearing assets cache from the database"
             postgresql_remote_execute "${db_execute_args[@]}" <<< "DELETE FROM ir_attachment WHERE url LIKE '/web/content/%';"
-            info "Updating modules"
-            odoo_execute --update=all
+            if ! is_boolean_yes "$ODOO_SKIP_MODULES_UPDATE"; then
+                info "Updating modules"
+                odoo_execute --update=all
+            fi
         fi
 
         info "Persisting Odoo installation"
@@ -192,8 +195,10 @@ odoo_initialize() {
         db_user="$(odoo_conf_get "db_user")"
         db_pass="$(odoo_conf_get "db_password")"
         odoo_wait_for_postgresql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
-        info "Updating modules"
-        odoo_execute --update=all
+        if ! is_boolean_yes "$ODOO_SKIP_MODULES_UPDATE"; then
+            info "Updating modules"
+            odoo_execute --update=all
+        fi
     fi
 
     # Avoid exit code of previous commands to affect the result of this function
