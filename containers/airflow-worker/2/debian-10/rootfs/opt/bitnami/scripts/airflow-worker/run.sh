@@ -14,7 +14,7 @@ set -o pipefail
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libairflowworker.sh
 
-args=("--pid" "$AIRFLOW_PID_FILE" "$@")
+args=("${AIRFLOW_QUEUE:+-q $AIRFLOW_QUEUE}" "--pid" "$AIRFLOW_PID_FILE" "$@")
 
 info "** Starting Airflow **"
 if am_i_root; then
