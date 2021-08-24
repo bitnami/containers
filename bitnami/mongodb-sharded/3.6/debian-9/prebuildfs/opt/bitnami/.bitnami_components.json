@@ -8,10 +8,10 @@
     },
     "mongodb": {
         "arch": "amd64",
-        "digest": "140bba29b985d7a55eccd0e54187aa7f2414f93ecb0cfc094054b618b6ce7df7",
+        "digest": "ac34df2bde72f2e2663e5153268a93dde0a167ca3385815988cb41da1d9b2a6b",
         "distro": "debian-9",
         "type": "NAMI",
-        "version": "3.6.23-1"
+        "version": "3.6.23-2"
     },
     "render-template": {
         "arch": "amd64",
@@ -29,9 +29,9 @@
     },
     "yq": {
         "arch": "amd64",
-        "digest": "72c0026ba4c4825e61c4d67fb291c522514600048347df8b16c0d4690f59bd7c",
+        "digest": "3d8172fed8adfa301845de2282d36cad16459345be4e9a3d1752d1b69c540ec4",
         "distro": "debian-9",
         "type": "NAMI",
-        "version": "3.4.1-0"
+        "version": "4.12.0-0"
     }
 }
