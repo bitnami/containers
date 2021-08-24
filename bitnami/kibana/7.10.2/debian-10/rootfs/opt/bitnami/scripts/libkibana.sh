@@ -97,18 +97,32 @@ kibana_initialize() {
 # Arguments:
 #   $1 - key
 #   $2 - value
+#   $3 - YAML type (string, int or bool)
 # Returns:
 #   None
 #########################
 kibana_conf_set() {
-    local key="${1:?missing key}"
-    local value="${2:?missing value}"
+    local -r key="${1:?Missing key}"
+    local -r value="${2:-}"
+    local -r type="${3:-string}"
+    local -r tempfile=$(mktemp)
 
-    if [[ -s "$KIBANA_CONF_FILE" ]]; then
-        yq w -i "$KIBANA_CONF_FILE" "$key" "$value"
-    else
-        yq n "$key" "$value" >"$KIBANA_CONF_FILE"
-    fi
+    case "$type" in
+    string)
+        yq eval "(.${key}) |= \"${value}\"" "$KIBANA_CONF_FILE" >"$tempfile"
+        ;;
+    int)
+        yq eval "(.${key}) |= (\"${value}\" | tonumber)" "$KIBANA_CONF_FILE" >"$tempfile"
+        ;;
+    bool)
+        yq eval "(.${key}) |= (\"${value}\" | test(\"true\"))" "$KIBANA_CONF_FILE" >"$tempfile"
+        ;;
+    *)
+        error "Type unknown: ${type}"
+        return 1
+        ;;
+    esac
+    cp "$tempfile" "$KIBANA_CONF_FILE"
 }
 
 ########################
@@ -124,7 +138,7 @@ kibana_conf_get() {
     local key="${1:?missing key}"
 
     if [[ -r "$KIBANA_CONF_FILE" ]]; then
-        yq r "$KIBANA_CONF_FILE" "$key"
+        yq eval ".${key}" "$KIBANA_CONF_FILE"
     fi
 }
 
@@ -205,7 +219,7 @@ is_kibana_ready() {
     # Therefore, we must check the value is not 'true'
     [[ ! "$rewriteBasePath" = "false" ]] && basePath=$(kibana_conf_get "[server.basePath]")
     if is_kibana_running; then
-        local -r state="$(yq r - "status.overall.state" <<< "$(curl -s "127.0.0.1:${KIBANA_PORT_NUMBER}${basePath:-}/api/status")")"
+        local -r state="$(yq eval ".status.overall.state" <<<"$(curl -s "127.0.0.1:${KIBANA_PORT_NUMBER}${basePath:-}/api/status")")"
         [[ "$state" = "green" ]]
     else
         false
