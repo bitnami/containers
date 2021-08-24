@@ -383,7 +383,7 @@ mongodb_set_net_conf() {
             mongodb_config_apply_regex "port:.*" "port: $MONGODB_PORT_NUMBER" "$conf_file_path"
         fi
         if [[ -n "$MONGODB_ENABLE_IPV6" ]]; then
-            mongodb_config_apply_regex "directoryPerDB:.*" "directoryPerDB: $({ is_boolean_yes "$MONGODB_ENABLE_IPV6" && echo 'true'; } || echo 'false')" "$conf_file_path"
+            mongodb_config_apply_regex "ipv6:.*" "ipv6: $({ is_boolean_yes "$MONGODB_ENABLE_IPV6" && echo 'true'; } || echo 'false')" "$conf_file_path"
         fi
     else
         debug "$conf_file_name mounted. Skipping setting port and IPv6 settings"
