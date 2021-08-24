@@ -23,18 +23,32 @@
 # Arguments:
 #   $1 - key
 #   $2 - value
+#   $3 - YAML type (string, int or bool)
 # Returns:
 #   None
 #########################
 elasticsearch_conf_write() {
-    local key="${1:?missing key}"
-    local value="${2:?missing value}"
+    local -r key="${1:?Missing key}"
+    local -r value="${2:-}"
+    local -r type="${3:-string}"
+    local -r tempfile=$(mktemp)
 
-    if [[ -s "$ELASTICSEARCH_CONF_FILE" ]]; then
-        yq w -i "$ELASTICSEARCH_CONF_FILE" "$key" "$value"
-    else
-        yq n "$key" "$value" >"$ELASTICSEARCH_CONF_FILE"
-    fi
+    case "$type" in
+    string)
+        yq eval "(.${key}) |= \"${value}\"" "$ELASTICSEARCH_CONF_FILE" >"$tempfile"
+        ;;
+    int)
+        yq eval "(.${key}) |= (\"${value}\" | tonumber)" "$ELASTICSEARCH_CONF_FILE" >"$tempfile"
+        ;;
+    bool)
+        yq eval "(.${key}) |= (\"${value}\" | test(\"true\"))" "$ELASTICSEARCH_CONF_FILE" >"$tempfile"
+        ;;
+    *)
+        error "Type unknown: ${type}"
+        return 1
+        ;;
+    esac
+    cp "$tempfile" "$ELASTICSEARCH_CONF_FILE"
 }
 
 ########################
@@ -60,7 +74,7 @@ elasticsearch_conf_set() {
     else
         for i in "${!values[@]}"; do
             if [[ -n "${values[$i]}" ]]; then
-                elasticsearch_conf_write "${key}[+]" "${values[$i]}"
+                elasticsearch_conf_write "${key}[$i]" "${values[$i]}"
             fi
         done
     fi
@@ -173,12 +187,12 @@ elasticsearch_validate_kernel() {
     }
 
     debug "Validating Kernel settings..."
-    if [[ $(yq r "$ELASTICSEARCH_CONF_FILE" index.store.type) || $(yq r "$ELASTICSEARCH_CONF_FILE" '[index.store.type]') ]]; then
+    if [[ $(yq eval .index.store.type "$ELASTICSEARCH_CONF_FILE") ]]; then
         debug "Custom index.store.type found in the config file. Skipping kernel validation..."
     else
         validate_sysctl_key "fs.file-max" 65536
     fi
-    if [[ $(yq r "$ELASTICSEARCH_CONF_FILE" node.store.allow_mmap) || $(yq r "$ELASTICSEARCH_CONF_FILE" '[node.store.allow_mmap]') ]]; then
+    if [[ $(yq eval .node.store.allow_mmap "$ELASTICSEARCH_CONF_FILE") ]]; then
         debug "Custom node.store.allow_mmap found in the config file. Skipping kernel validation..."
     else
         validate_sysctl_key "vm.max_map_count" 262144
@@ -301,9 +315,11 @@ elasticsearch_cluster_configuration() {
 #########################
 elasticsearch_custom_configuration() {
     local custom_conf_file="${ELASTICSEARCH_CONF_DIR}/my_elasticsearch.yml"
+    local -r tempfile=$(mktemp)
     [[ ! -f "$custom_conf_file" ]] && return
     info "Adding custom configuration"
-    yq m -ix "$ELASTICSEARCH_CONF_FILE" "$custom_conf_file"
+    yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' "$ELASTICSEARCH_CONF_FILE" "$custom_conf_file" >"$tempfile"
+    cp "$tempfile" "$ELASTICSEARCH_CONF_FILE"
 }
 
 ########################
@@ -398,7 +414,7 @@ elasticsearch_set_heap_size() {
     # Elasticsearch > 7.10 encourages to customize the heap settings through a file in 'jvm.options.d'
     # Previous versions need to update the 'jvm.options' file
     if [[ "$es_major_version" -ge 7 && "$es_minor_version" -gt 10 ]]; then
-        cat > "${ELASTICSEARCH_CONF_DIR}/jvm.options.d/heap.options" << EOF
+        cat >"${ELASTICSEARCH_CONF_DIR}/jvm.options.d/heap.options" <<EOF
 -Xms${heap_size}
 -Xmx${heap_size}
 EOF
@@ -451,7 +467,7 @@ elasticsearch_initialize() {
     # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
     rm -f "$ELASTICSEARCH_TMP_DIR/elasticsearch.pid"
 
-    read -r -a data_dirs_list <<< "$(tr ',;' ' ' <<< "$ELASTICSEARCH_DATA_DIR_LIST")"
+    read -r -a data_dirs_list <<<"$(tr ',;' ' ' <<<"$ELASTICSEARCH_DATA_DIR_LIST")"
     if [[ "${#data_dirs_list[@]}" -gt 0 ]]; then
         info "Multiple data directories specified, ignoring ELASTICSEARCH_DATA_DIR environment variable."
     else
@@ -642,7 +658,7 @@ elasticsearch_custom_init_scripts() {
 # Returns:
 #   version
 #########################
-elasticsearch_get_version(){
+elasticsearch_get_version() {
     elasticsearch --version | grep Version: | awk -F "," '{print $1}' | awk -F ":" '{print $2}'
 }
 
@@ -655,7 +671,7 @@ elasticsearch_get_version(){
 # Returns:
 #   None
 #########################
-elasticsearch_configure_logging(){
+elasticsearch_configure_logging() {
     # Back up the original file for users who'd like to use logfile logging
     cp "${ELASTICSEARCH_CONF_DIR}/log4j2.properties" "${ELASTICSEARCH_CONF_DIR}/log4j2.file.properties"
 
