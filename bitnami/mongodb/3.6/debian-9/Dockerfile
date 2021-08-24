@@ -9,17 +9,17 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 libpcap0.8 libssl1.1 numactl procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "3.4.1-0" --checksum 72c0026ba4c4825e61c4d67fb291c522514600048347df8b16c0d4690f59bd7c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.12.0-0" --checksum 3d8172fed8adfa301845de2282d36cad16459345be4e9a3d1752d1b69c540ec4
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.0-1" --checksum 04cca3ba5204635108908eb8032b7b2f1882aba2f1636cc45fe3c70dfa0b498a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-1" --checksum 5ab8cb7ec2412c49d506087b360876bae0be39a357427fae8816536b0fd6241d
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb" "3.6.23-1" --checksum 140bba29b985d7a55eccd0e54187aa7f2414f93ecb0cfc094054b618b6ce7df7
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb" "3.6.23-2" --checksum ac34df2bde72f2e2663e5153268a93dde0a167ca3385815988cb41da1d9b2a6b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum d177bc3da307f83d83ac8284be8062fc8b428e8f38a3b697876b5efc73ebf74f
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb/postunpack.sh
 ENV BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="3.6.23-debian-9-r141" \
+    BITNAMI_IMAGE_VERSION="3.6.23-debian-9-r142" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:$PATH"
 
 EXPOSE 27017

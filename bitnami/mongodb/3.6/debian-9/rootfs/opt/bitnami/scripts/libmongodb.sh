@@ -447,7 +447,7 @@ mongodb_set_auth_conf() {
 
     if ! mongodb_is_file_external "$conf_file_name"; then
         if [[ -n "$MONGODB_ROOT_PASSWORD" ]] || [[ -n "$MONGODB_PASSWORD" ]]; then
-            authorization="$(yq read "$MONGODB_CONF_FILE" security.authorization)"
+            authorization="$(yq eval .security.authorization "$MONGODB_CONF_FILE")"
             if [[ "$authorization" = "disabled" ]]; then
 
                 info "Enabling authentication..."
