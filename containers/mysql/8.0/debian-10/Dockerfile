@@ -8,7 +8,7 @@ ENV HOME="/" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages acl ca-certificates curl gzip libaio1 libc6 libcom-err2 libgcc1 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libncurses6 libsasl2-2 libssl1.1 libstdc++6 libtinfo6 lsof procps tar
+RUN install_packages acl ca-certificates curl gzip libaio1 libc6 libcom-err2 libgcc1 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libncurses6 libsasl2-2 libssl1.1 libstdc++6 libtinfo6 procps tar psmisc
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.0-0" --checksum 88093e848950fd09e80eb26cac55caa11e77aa78f118b5dc67faa38a3836381d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql" "8.0.26-0" --checksum dd9e73e1461bb237d99e3d798060124d2565b11ea9a2548af4689240d5e2a4f8
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
