@@ -123,7 +123,7 @@ parse_dashboard_initialize() {
 # Arguments:
 #   $1 - Variable name
 #   $2 - Value to assign to the variable
-#   $3 - Whether the value is a literal, or if instead it should be quoted (default: no)
+#   $3 - YAML type (string, int or bool)
 # Returns:
 #   None
 #########################
@@ -138,10 +138,10 @@ parse_dashboard_conf_set() {
         jq "(.${key}) |= \"${value}\"" "$PARSE_DASHBOARD_CONF_FILE" >"$tempfile"
         ;;
     int)
-        jq "(.${key}) |= (\"${value}\" | tonumber) }" "$PARSE_DASHBOARD_CONF_FILE" >"$tempfile"
+        jq "(.${key}) |= (\"${value}\" | tonumber)" "$PARSE_DASHBOARD_CONF_FILE" >"$tempfile"
         ;;
     bool)
-        jq "(.${key}) |= (\"${value}\" | test(\"true\")) }" "$PARSE_DASHBOARD_CONF_FILE" >"$tempfile"
+        jq "(.${key}) |= (\"${value}\" | test(\"true\"))" "$PARSE_DASHBOARD_CONF_FILE" >"$tempfile"
         ;;
     *)
         error "Type unknown: ${type}"
