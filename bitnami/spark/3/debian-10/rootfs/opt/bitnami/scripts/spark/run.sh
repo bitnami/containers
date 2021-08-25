@@ -21,7 +21,7 @@ if [ "$SPARK_MODE" == "master" ]; then
     info "** Starting Spark in master mode **"
 else
     # Worker constants
-    EXEC=$(command -v start-slave.sh)
+    EXEC=$(command -v start-worker.sh)
     ARGS=("$SPARK_MASTER_URL")
     info "** Starting Spark in worker mode **"
 fi
