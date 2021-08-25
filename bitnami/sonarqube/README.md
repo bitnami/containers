@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`9`, `9-debian-10`, `9.0.1`, `9.0.1-debian-10-r26`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/9.0.1-debian-10-r26/9/debian-10/Dockerfile)
+- [`9`, `9-debian-10`, `9.0.1`, `9.0.1-debian-10-r27`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/9.0.1-debian-10-r27/9/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/sonarqube GitHub repo](https://github.com/bitnami/bitnami-docker-sonarqube).
 
@@ -217,7 +217,7 @@ Available environment variables:
 - `SONARQUBE_USERNAME`: SonarQube application username. Default: **admin**
 - `SONARQUBE_PASSWORD`: SonarQube application password. Default: **bitnami**
 - `SONARQUBE_EMAIL`: SonarQube application email. Default: **user@example.com**
-- `SONARQUBE_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. This is necessary in case you use a database that already has SonarQube data. Default: **no**
+- `SONARQUBE_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. This is necessary in case you use a database that already has SonarQube data. Default: **no**
 - `SONARQUBE_PORT_NUMBER`: SonarQube Web application port number. Default: **9000**
 - `SONARQUBE_ELASTICSEARCH_PORT_NUMBER`: SonarQube Elasticsearch application port number. Default: **9001**
 - `SONARQUBE_WEB_CONTEXT`: SonarQube prefix used to access to the application. Default: **/**
