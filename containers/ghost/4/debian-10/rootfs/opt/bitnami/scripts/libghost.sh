@@ -181,7 +181,7 @@ ghost_validate() {
 # Arguments:
 #   $1 - Variable name
 #   $2 - Value to assign to the variable
-#   $3 - Whether the value is a literal, or if instead it should be quoted (default: no)
+#   $3 - YAML type (string, int or bool)
 # Returns:
 #   None
 #########################
