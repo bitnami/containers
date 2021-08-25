@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.9.20`, `1.9.20-debian-10-r477`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.20-debian-10-r477/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.9.20`, `1.9.20-debian-10-r478`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-testlink/blob/1.9.20-debian-10-r478/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/testlink GitHub repo](https://github.com/bitnami/bitnami-docker-testlink).
 
@@ -220,7 +220,7 @@ Available environment variables:
 - `TESTLINK_PASSWORD`: TestLink application password. Default: **bitnami**
 - `TESTLINK_EMAIL`: TestLink application email. Default: **user@example.com**
 - `TESTLINK_LANGUAGE`: TestLink default language. Default: **en_US**
-- `TESTLINK_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. Default: **no**
+- `TESTLINK_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. Default: **no**
 
 ##### Use an existing database
 
