@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.3.4`, `3.3.4-debian-10-r99`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.3.4-debian-10-r99/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.3.4`, `3.3.4-debian-10-r100`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.3.4-debian-10-r100/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpbb GitHub repo](https://github.com/bitnami/bitnami-docker-phpbb).
 
@@ -232,7 +232,7 @@ Available environment variables:
 - `PHPBB_FORUM_NAME`: Forum Name. Default: **My forum**
 - `PHPBB_FORUM_DESCRIPTION`: Forum Description. Default: **A little text to describe your forum**
 - `PHPBB_HOST`: phpBB application host. No defaults.
-- `PHPBB_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. Default: **no**
+- `PHPBB_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. Default: **no**
 - `PHPBB_COOKIE_SECURE`: Have secure cookies enabled. Default: **no**
 - `PHPBB_FORUM_SERVER_PROTOCOL`: Forum server protocol for the URL generation. Default: **http://**
 - `PHPBB_DISABLE_SESSION_VALIDATION`: Disable session validation. This is for phpBB to work in Kubernetes installations. Default: **false**
