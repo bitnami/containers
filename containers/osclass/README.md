@@ -41,7 +41,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`4`, `4-debian-10`, `4.4.0`, `4.4.0-debian-10-r93`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-osclass/blob/4.4.0-debian-10-r93/4/debian-10/Dockerfile)
+- [`4`, `4-debian-10`, `4.4.0`, `4.4.0-debian-10-r94`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-osclass/blob/4.4.0-debian-10-r94/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/osclass GitHub repo](https://github.com/bitnami/bitnami-docker-osclass).
 
@@ -226,7 +226,7 @@ Available environment variables:
 - `OSCLASS_PASSWORD`: Osclass application password. Default: **bitnami**
 - `OSCLASS_EMAIL`: Osclass application email. Default: **user@example.com**
 - `OSCLASS_WEB_TITLE`: Osclass application title. Default: **Sample Web Page**
-- `OSCLASS_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. This is necessary in case you use a database that already has Osclass data. Default: **no**
+- `OSCLASS_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. This is necessary in case you use a database that already has Osclass data. Default: **no**
 
 ##### Database connection configuration
 - `OSCLASS_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
