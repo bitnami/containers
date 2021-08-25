@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`7`, `7-debian-10`, `7.8.0`, `7.8.0-debian-10-r308`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.8.0-debian-10-r308/7/debian-10/Dockerfile)
+- [`7`, `7-debian-10`, `7.8.0`, `7.8.0-debian-10-r309`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.8.0-debian-10-r309/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jasperreports GitHub repo](https://github.com/bitnami/bitnami-docker-jasperreports).
 
@@ -223,7 +223,7 @@ Available environment variables:
 - `JASPERREPORTS_USERNAME`: JasperReports application username. Default: **jasperadmin**
 - `JASPERREPORTS_PASSWORD`: JasperReports application password. Default: **bitnami**
 - `JASPERREPORTS_EMAIL`: JasperReports application email. Default: **user@example.com**
-- `JASPERREPORTS_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. This is necessary in case you use a database that already has JasperReports data. Default: **no**
+- `JASPERREPORTS_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. This is necessary in case you use a database that already has JasperReports data. Default: **no**
 
 ##### Database connection configuration
 
