@@ -198,7 +198,7 @@ ldap_stop() {
         local return_value=0
         read -r -a db_files <<< "$(find "$LDAP_DATA_DIR" -type f -print0 | xargs -0)"
         for f in "${db_files[@]}"; do
-            debug_execute lsof -w "$f" && return_value=1
+            debug_execute fuser "$f" && return_value=1
         done
         return $return_value
     }
