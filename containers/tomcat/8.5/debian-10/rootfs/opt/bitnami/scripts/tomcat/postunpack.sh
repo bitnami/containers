@@ -42,5 +42,8 @@ declare template_dir="${BITNAMI_ROOT_DIR}/scripts/tomcat/bitnami-templates"
 render-template "${template_dir}/setenv.sh.tpl" > "${TOMCAT_BIN_DIR}/setenv.sh"
 chmod g+rwX "${TOMCAT_BIN_DIR}/setenv.sh"
 
+# Create 'apache-tomcat' symlink pointing to the 'tomcat' directory, for compatibility with Bitnami Docs guides
+ln -sf tomcat "${BITNAMI_ROOT_DIR}/apache-tomcat"
+
 # Users can mount their webapps at /app
 ln -sf "$TOMCAT_WEBAPPS_DIR" /app
