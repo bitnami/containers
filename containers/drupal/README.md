@@ -41,7 +41,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`9`, `9-debian-10`, `9.2.4`, `9.2.4-debian-10-r7`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/9.2.4-debian-10-r7/9/debian-10/Dockerfile)
+* [`9`, `9-debian-10`, `9.2.4`, `9.2.4-debian-10-r8`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/9.2.4-debian-10-r8/9/debian-10/Dockerfile)
 * [`8`, `8-debian-10`, `8.9.18`, `8.9.18-debian-10-r6` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.9.18-debian-10-r6/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal GitHub repo](https://github.com/bitnami/bitnami-docker-drupal).
@@ -223,7 +223,7 @@ Available environment variables:
 
 - `DRUPAL_PROFILE`: Drupal installation profile. Default: **standard**
 - `DRUPAL_SITE_NAME`: Drupal blog name. Default: **My blog**
-- `DRUPAL_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. Default: **no**
+- `DRUPAL_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. Default: **no**
 - `DRUPAL_ENABLE_MODULES`: Comma or space separated list of installed modules to enable during the first initialization. No defaults.
 - `DRUPAL_USERNAME`: Drupal application username. Default: **user**
 - `DRUPAL_PASSWORD`: Drupal application password. Default: **bitnami**
