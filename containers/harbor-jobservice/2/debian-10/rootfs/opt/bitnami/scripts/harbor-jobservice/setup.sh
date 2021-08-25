@@ -26,7 +26,7 @@ harbor_jobservice_conf_get() {
     local key="${1:?missing key}"
     local value
     if [[ -f "/etc/jobservice/config.yml" ]]; then
-        value="$(yq read "/etc/jobservice/config.yml" "$key")"
+        value="$(yq eval ".${key}" "/etc/jobservice/config.yml")"
         if [[ "$value" != "null" ]]; then
             echo "$value"
         fi
@@ -86,8 +86,8 @@ harbor_jobservice_validate() {
     not_empty_setting "JOB_SERVICE_POOL_BACKEND" "worker_pool.backend"
     not_empty_env_var "JOBSERVICE_SECRET"
 
-    if [[ "${JOB_SERVICE_PROTOCOL:-$(harbor_jobservice_conf_get "protocol")}" != "http" ]] && \
-       [[ "${JOB_SERVICE_PROTOCOL:-$(harbor_jobservice_conf_get "protocol")}" != "https" ]]; then
+    if [[ "${JOB_SERVICE_PROTOCOL:-$(harbor_jobservice_conf_get "protocol")}" != "http" ]] &&
+        [[ "${JOB_SERVICE_PROTOCOL:-$(harbor_jobservice_conf_get "protocol")}" != "https" ]]; then
         error "Protocol must be \"http\" or \"https\"!"
         exit 1
     fi
