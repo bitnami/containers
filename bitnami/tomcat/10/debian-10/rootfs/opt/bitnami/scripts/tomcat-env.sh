@@ -56,6 +56,7 @@ export TOMCAT_CONF_FILE="${TOMCAT_CONF_DIR}/server.xml"
 export TOMCAT_USERS_CONF_FILE="${TOMCAT_CONF_DIR}/tomcat-users.xml"
 export TOMCAT_LOGS_DIR="${TOMCAT_BASE_DIR}/logs"
 export TOMCAT_TMP_DIR="${TOMCAT_BASE_DIR}/temp"
+export TOMCAT_LOG_FILE="${TOMCAT_LOGS_DIR}/catalina.out"
 export TOMCAT_PID_FILE="${TOMCAT_TMP_DIR}/catalina.pid"
 export TOMCAT_HOME="$TOMCAT_BASE_DIR"
 
