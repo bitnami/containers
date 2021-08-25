@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.8.0-0`, `4.8.0-0-debian-10-r137`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.8.0-0-debian-10-r137/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.8.0-0`, `4.8.0-0-debian-10-r138`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.8.0-0-debian-10-r138/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/orangehrm GitHub repo](https://github.com/bitnami/bitnami-docker-orangehrm).
 
@@ -219,7 +219,7 @@ Available environment variables:
 - `ORANGEHRM_USERNAME`: OrangeHRM application username. Default: **admin**
 - `ORANGEHRM_PASSWORD`: OrangeHRM application password. Default: **Bitnami.12345**
 - `ORANGEHRM_ENFORCE_PASSWORD_STRENGTH`: Whether the OrangeHRM password validation should use strong or medium level. Default: **yes**
-- `ORANGEHRM_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. Default: **no**
+- `ORANGEHRM_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. Default: **no**
 
 ##### Use an existing database
 
