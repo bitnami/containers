@@ -8,9 +8,9 @@
     },
     "tensorflow-resnet": {
         "arch": "amd64",
-        "digest": "dc7bbffc085f3ecb5ccd0ed0628e7dd3c2067bf6e444c28cb0b53c7da03ec4de",
+        "digest": "d9e160c1109df0e4c563e4e4d3017852301ca84a8b348850b765f0771db76b6c",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.5.1-0"
+        "version": "2.6.0-0"
     }
 }
