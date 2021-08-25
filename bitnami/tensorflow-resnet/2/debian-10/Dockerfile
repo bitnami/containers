@@ -9,13 +9,13 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gcc-7 gzip libc6 libgcc1 libstdc++6 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tensorflow-resnet" "2.5.1-0" --checksum dc7bbffc085f3ecb5ccd0ed0628e7dd3c2067bf6e444c28cb0b53c7da03ec4de
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tensorflow-resnet" "2.6.0-0" --checksum d9e160c1109df0e4c563e4e4d3017852301ca84a8b348850b765f0771db76b6c
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-resnet" \
-    BITNAMI_IMAGE_VERSION="2.5.1-debian-10-r64" \
+    BITNAMI_IMAGE_VERSION="2.6.0-debian-10-r0" \
     PATH="/opt/bitnami/tensorflow-resnet/bin:/opt/bitnami/common/bin:$PATH"
 
 USER 1001
