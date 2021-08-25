@@ -407,7 +407,7 @@ mysql_stop() {
         local return_value=0
         read -r -a db_files <<< "$(find "$DB_DATA_DIR" -regex "^.*ibdata[0-9]+" -print0 -o -regex "^.*ib_logfile[0-9]+" -print0 | xargs -0)"
         for f in "${db_files[@]}"; do
-            debug_execute lsof -w "$f" && return_value=1
+            debug_execute fuser "$f" && return_value=1
         done
         return $return_value
     }
