@@ -37,7 +37,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.4.2`, `2.4.2-debian-10-r148`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.4.2-debian-10-r148/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.4.2`, `2.4.2-debian-10-r149`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.4.2-debian-10-r149/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/magento GitHub repo](https://github.com/bitnami/bitnami-docker-magento).
 
@@ -231,7 +231,7 @@ Available environment variables:
 - `MAGENTO_ENABLE_ADMIN_HTTPS`: Whether to use SSL to access the Magento Admin. Valid values: yes, no. Default: **no**
 - `MAGENTO_DEPLOY_STATIC_CONTENT`: Whether to deploy Magento static content during the initialization, to optimize initial page load time. Default: **no**
 - `MAGENTO_SKIP_REINDEX`: Whether to skip Magento re-index during the initialization. Default: **no**
-- `MAGENTO_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. Default: **no**
+- `MAGENTO_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. Default: **no**
 
 ##### HTTP cache server
 
