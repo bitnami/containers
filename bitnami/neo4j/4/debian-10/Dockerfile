@@ -10,19 +10,19 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq libc6 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.12-0" --checksum 14c1274e93b1135d4d1b82ad7985fc2fa7f5d0689b6da18e0c94da37407cd4ea
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "neo4j" "4.3.0-2" --checksum f42a4456a1b35bc61850c0da36a2968f52806876530aab6a107cbe82e8b7cdbf
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "neo4j" "4.3.3-0" --checksum 6367e80da1d67981553af498e9d5a134e914f3d91ae85540c504ebeef97e10e7
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/neo4j/postunpack.sh
 ENV BITNAMI_APP_NAME="neo4j" \
-    BITNAMI_IMAGE_VERSION="4.3.0-debian-10-r63" \
-    NEO4J_BOLT_PORT_NUMBER="7687" \
+    BITNAMI_IMAGE_VERSION="4.3.3-debian-10-r0" \
+    NEO4J_BOLT_PORT_NUMBER="" \
     NEO4J_HOST="" \
-    NEO4J_HTTPS_PORT_NUMBER="7473" \
-    NEO4J_HTTP_PORT_NUMBER="7474" \
-    NEO4J_PASSWORD="bitnami" \
+    NEO4J_HTTPS_PORT_NUMBER="" \
+    NEO4J_HTTP_PORT_NUMBER="" \
+    NEO4J_PASSWORD="" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/neo4j/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 7473 7474 8756
