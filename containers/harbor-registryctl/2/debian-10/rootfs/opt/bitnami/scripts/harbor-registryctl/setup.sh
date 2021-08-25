@@ -26,7 +26,7 @@ harbor_registryctl_conf_get() {
     local key="${1:?missing key}"
     local value
     if [[ -f "/etc/registryctl/config.yml" ]]; then
-        value="$(yq read "/etc/registryctl/config.yml" "$key")"
+        value="$(yq eval ".${key}" "/etc/registryctl/config.yml")"
         if [[ "$value" != "null" ]]; then
             echo "$value"
         fi
@@ -82,9 +82,8 @@ harbor_registryctl_validate() {
     not_empty_config_option "port"
     not_empty_env_var "JOBSERVICE_SECRET"
 
-
-    if [[ "$(harbor_registryctl_conf_get "protocol")" != "http" ]] && \
-       [[ "$(harbor_registryctl_conf_get "protocol")" != "https" ]]; then
+    if [[ "$(harbor_registryctl_conf_get "protocol")" != "http" ]] &&
+        [[ "$(harbor_registryctl_conf_get "protocol")" != "https" ]]; then
         error "Protocol must be \"http\" or \"https\"!"
         exit 1
     fi
