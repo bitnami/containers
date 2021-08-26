@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`4`, `4-debian-10`, `4.12.1`, `4.12.1-debian-10-r7`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/4.12.1-debian-10-r7/4/debian-10/Dockerfile)
+- [`4`, `4-debian-10`, `4.12.1`, `4.12.1-debian-10-r8`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/4.12.1-debian-10-r8/4/debian-10/Dockerfile)
 - [`3`, `3-debian-10`, `3.42.5`, `3.42.5-debian-10-r109` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/3.42.5-debian-10-r109/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ghost GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
@@ -230,7 +230,7 @@ Available environment variables:
 - `GHOST_ENABLE_HTTPS`: Enable serving Ghost through HTTPS instead of HTTP. Default: **no**
 - `GHOST_EXTERNAL_HTTP_PORT_NUMBER`: Port to used by Ghost to generate URLs and links when accessing using HTTP. Default: **80**
 - `GHOST_EXTERNAL_HTTPS_PORT_NUMBER`: Port to used by Ghost to generate URLs and links when accessing using HTTPS. Default: **443**
-- `GHOST_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. This is necessary in case you use a database that already has Ghost data. Default: **no**
+- `GHOST_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. This is necessary in case you use a database that already has Ghost data. Default: **no**
 
 ##### Database connection configuration
 
