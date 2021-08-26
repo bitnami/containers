@@ -169,7 +169,7 @@ redmine_initialize() {
             redmine_conf_set "default.email_delivery.smtp_settings.user_name" "$REDMINE_SMTP_USER"
             redmine_conf_set "default.email_delivery.smtp_settings.password" "$REDMINE_SMTP_PASSWORD"
             # Remove 'USER@' part from e-mail address and use as domain
-            redmine_conf_set "default.email_delivery.smtp_settings.domain" "${REDMINE_SMTP_USER//*@}"
+            redmine_conf_set "default.email_delivery.smtp_settings.domain" "${REDMINE_SMTP_USER//*@/}"
             if [[ "$REDMINE_SMTP_PROTOCOL" = "tls" ]]; then
                 redmine_conf_set "default.email_delivery.smtp_settings.enable_starttls_auto" "true"
             else
@@ -247,18 +247,34 @@ EOF
 # Arguments:
 #   $1 - YAML key to set
 #   $2 - Value to assign to the YAML key
-#   $3 - YAML tag (e.g. !!int)
+#   $3 - YAML type (string, int or bool)
 #   $4 - File to overwrite
 # Returns:
 #   None
 #########################
 redmine_conf_set() {
-    local -r key="${1:?key missing}"
+    local -r key="${1:?Missing key}"
     local -r value="${2:-}"
-    local -r tag="${3:-!!str}"
+    local -r type="${3:-string}"
     local -r file="${4:-"${REDMINE_CONF_DIR}/configuration.yml"}"
-    debug "Setting Redmine configuration value '${key}' to '${value}'"
-    yq w --inplace "$file" "$key" --tag "$tag" "$value"
+    local -r tempfile=$(mktemp)
+
+    case "$type" in
+    string)
+        yq eval "(.${key}) |= \"${value}\"" "$file" >"$tempfile"
+        ;;
+    int)
+        yq eval "(.${key}) |= (\"${value}\" | tonumber)" "$file" >"$tempfile"
+        ;;
+    bool)
+        yq eval "(.${key}) |= (\"${value}\" | test(\"true\"))" "$file" >"$tempfile"
+        ;;
+    *)
+        error "Type unknown: ${type}"
+        return 1
+        ;;
+    esac
+    cp "$tempfile" "$file"
 }
 
 ########################
@@ -290,7 +306,7 @@ redmine_conf_get() {
     local -r key="${1:?key missing}"
     local -r file="${2:-"${REDMINE_CONF_DIR}/configuration.yml"}"
     debug "Getting ${key} from Redmine configuration"
-    yq r "$file" "$key"
+    yq eval ".${key}" "$file"
 }
 
 ########################
