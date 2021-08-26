@@ -36,11 +36,12 @@ tomcat_validate() {
     }
     check_conflicting_ports() {
         local -r total="$#"
-
         for i in $(seq 1 "$((total - 1))"); do
             for j in $(seq "$((i + 1))" "$total"); do
-                if (("${!i}" == "${!j}")); then
-                    print_validation_error "${!i} and ${!j} are bound to the same port"
+                var_i="${!i}"
+                var_j="${!j}"
+                if [[ -n "${!var_i:-}" ]] && [[ -n "${!var_j:-}" ]] && [[ "${!var_i:-}" = "${!var_j:-}" ]]; then
+                    print_validation_error "${var_i} and ${var_j} are bound to the same port"
                 fi
             done
         done
@@ -219,8 +220,7 @@ tomcat_start_bg() {
         error "Tomcat failed to start with exit code ${start_error}"
         return "$start_error"
     fi
-
-    wait_for_log_entry "Catalina.start Server startup" "$TOMCAT_LOG_FILE"
+    wait_for_log_entry "Catalina.start Server startup" "$TOMCAT_LOG_FILE" "$TOMCAT_START_RETRIES" 10
 }
 
 ########################
