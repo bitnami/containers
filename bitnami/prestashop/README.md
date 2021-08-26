@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.7`, `1.7-debian-10`, `1.7.7-7`, `1.7.7-7-debian-10-r5`, `latest` (1.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.7-7-debian-10-r5/1.7/debian-10/Dockerfile)
+* [`1.7`, `1.7-debian-10`, `1.7.7-7`, `1.7.7-7-debian-10-r6`, `latest` (1.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.7-7-debian-10-r6/1.7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prestashop GitHub repo](https://github.com/bitnami/bitnami-docker-prestashop).
 
@@ -235,7 +235,7 @@ Available environment variables:
 - `PRESTASHOP_COOKIE_CHECK_IP`: Whether to check the cookie's IP address or not. Default: **yes**. See the [Troubleshooting](#troubleshooting) section for more information.
 - `PRESTASHOP_COUNTRY`: Default country of the store. Default: **us**.
 - `PRESTASHOP_LANGUAGE`: Default language of the store (iso code). Default: **en**.
-- `PRESTASHOP_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. Default: **no**
+- `PRESTASHOP_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. Default: **no**
 
 ##### Use an existing database
 
