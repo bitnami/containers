@@ -48,7 +48,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.10.2`, `4.10.2-debian-10-r2`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/4.10.2-debian-10-r2/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.10.2`, `4.10.2-debian-10-r3`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/4.10.2-debian-10-r3/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse GitHub repo](https://github.com/bitnami/bitnami-docker-parse).
 
@@ -290,6 +290,10 @@ $ docker-compose up -d
 Find more information about Cloud Code and Cloud functions in the [official documentation](https://docs.parseplatform.org/cloudcode/guide/).
 
 # Notable Changes
+
+## 4.9.3
+
+- This version was released from an incorrect version tag from the upstream Parse repositories. Parse developers have reported issues in some functionalities, though no concerns in regards to privacy, security, or legality were found. As such, we strongly recommend updating this version as soon as possible. You can find more information in [Parse 4.10.0 Release Notes](https://github.com/parse-community/parse-server/releases/tag/4.10.0)
 
 ## 4.9.3-debian-10-r161
 
