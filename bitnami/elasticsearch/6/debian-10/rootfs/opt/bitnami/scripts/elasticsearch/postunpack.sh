@@ -14,8 +14,6 @@ for dir in "$ELASTICSEARCH_TMP_DIR" "$ELASTICSEARCH_DATA_DIR" "$ELASTICSEARCH_LO
     chmod -R ug+rwX "$dir"
 done
 
-elasticsearch_install_plugins
-
 elasticsearch_configure_logging
 
 for dir in "$ELASTICSEARCH_TMP_DIR" "$ELASTICSEARCH_DATA_DIR" "$ELASTICSEARCH_LOGS_DIR" "${ELASTICSEARCH_BASE_DIR}/plugins" "${ELASTICSEARCH_BASE_DIR}/modules" "$ELASTICSEARCH_CONF_DIR" "$ELASTICSEARCH_VOLUME_DIR" "$ELASTICSEARCH_INITSCRIPTS_DIR" "$ELASTICSEARCH_MOUNTED_PLUGINS_DIR"; do
@@ -31,3 +29,5 @@ for dir in "$ELASTICSEARCH_TMP_DIR" "$ELASTICSEARCH_DATA_DIR" "$ELASTICSEARCH_LO
     # Issue reported at: https://github.com/bitnami/bitnami-docker-elasticsearch/issues/50
     chown -R 1001:0 "$dir"
 done
+
+elasticsearch_install_plugins
