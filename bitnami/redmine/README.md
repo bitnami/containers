@@ -37,7 +37,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`4`, `4-debian-10`, `4.2.2`, `4.2.2-debian-10-r12`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.2.2-debian-10-r12/4/debian-10/Dockerfile)
+- [`4`, `4-debian-10`, `4.2.2`, `4.2.2-debian-10-r13`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.2.2-debian-10-r13/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redmine GitHub repo](https://github.com/bitnami/bitnami-docker-redmine).
 
@@ -224,7 +224,7 @@ Available environment variables:
 - `REDMINE_LAST_NAME`: Redmine user last name. Default: **LastName**
 - `REDMINE_LANGUAGE`: Redmine site default language. Default: **en**
 - `REDMINE_LOAD_DEFAULT_DATA`: Whether to load default configuration data for Redmine. Default: **yes**
-- `REDMINE_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. This is necessary in case you use a database that already has Redmine data. Default: **no**
+- `REDMINE_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. This is necessary in case you use a database that already has Redmine data. Default: **no**
 
 ##### Database connection configuration
 
