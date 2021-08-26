@@ -31,7 +31,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`2`, `2-debian-10`, `2.7.7`, `2.7.7-debian-10-r26`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.7.7-debian-10-r26/2/debian-10/Dockerfile)
+- [`2`, `2-debian-10`, `2.7.7`, `2.7.7-debian-10-r27`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.7.7-debian-10-r27/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/discourse GitHub repo](https://github.com/bitnami/bitnami-docker-discourse).
 
@@ -299,7 +299,7 @@ Available environment variables:
 - `DISCOURSE_PORT_NUMBER`: Port number in which Discourse will run. Default: **3000**
 - `DISCOURSE_ENV`: Discourse environment mode. Allowed values: *development*, *production*, *test*. Default: **production**
 - `DISCOURSE_ENABLE_CONF_PERSISTENCE`: Whether to enable persistence of the Discourse `discourse.conf` configuration file. Default: **no**
-- `DISCOURSE_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. This is necessary in case you use a database that already has Discourse data. Default: **no**
+- `DISCOURSE_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. This is necessary in case you use a database that already has Discourse data. Default: **no**
 
 ##### Database connection configuration
 
