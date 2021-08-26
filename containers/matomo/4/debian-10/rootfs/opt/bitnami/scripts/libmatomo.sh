@@ -207,6 +207,8 @@ EOF
         info "Launching schema update"
         php "$MATOMO_BASE_DIR"/console "core:update" "--yes"
         am_i_root && configure_permissions_ownership "$MATOMO_BASE_DIR"/tmp -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root"
+        debug "Re-creating .htaccess files"
+        php "$MATOMO_BASE_DIR"/console "core:create-security-files"
     fi
 
     ## Ensure Matomo cron jobs are created when running setup with a root user

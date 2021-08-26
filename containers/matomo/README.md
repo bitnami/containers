@@ -36,7 +36,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.4.1`, `4.4.1-debian-10-r22`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/4.4.1-debian-10-r22/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.4.1`, `4.4.1-debian-10-r23`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/4.4.1-debian-10-r23/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/matomo GitHub repo](https://github.com/bitnami/bitnami-docker-matomo).
 
@@ -277,7 +277,7 @@ When you start the Matomo image, you can adjust the configuration of the instanc
  - `MATOMO_WEBSITE_NAME`: Name of a website to track in Matomo. Default: **example**
  - `MATOMO_WEBSITE_HOST`: Website's host or domain to track in Matomo. Default: **https://example.org**
  - `MATOMO_ENABLE_PROXY_URI_HEADER`: Enable 'proxy_uri_header' in Matomo configuration file. Default: **no**
- - `MATOMO_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. Default: **no**
+ - `MATOMO_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. Default: **no**
  - `MATOMO_ENABLE_DATABASE_SSL`: Whether to enable SSL for database connections in the Matomo configuration file. Default: **no**
  - `MATOMO_DATABASE_SSL_CA_FILE`: Path to the database server CA bundle file. No defaults.
  - `MATOMO_DATABASE_SSL_CERT_FILE`: Path to the database client certificate file. No defaults.
