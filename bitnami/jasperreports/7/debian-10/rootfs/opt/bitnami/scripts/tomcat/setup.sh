@@ -15,7 +15,7 @@ set -o pipefail
 # Load Tomcat environment variables
 . /opt/bitnami/scripts/tomcat-env.sh
 
-# Ensure tomcat environment variables are valid
+# Ensure Tomcat environment variables are valid
 tomcat_validate
 
 # Ensure tomcat is initialized

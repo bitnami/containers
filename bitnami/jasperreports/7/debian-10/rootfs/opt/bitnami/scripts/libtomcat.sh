@@ -36,11 +36,12 @@ tomcat_validate() {
     }
     check_conflicting_ports() {
         local -r total="$#"
-
         for i in $(seq 1 "$((total - 1))"); do
             for j in $(seq "$((i + 1))" "$total"); do
-                if (("${!i}" == "${!j}")); then
-                    print_validation_error "${!i} and ${!j} are bound to the same port"
+                var_i="${!i}"
+                var_j="${!j}"
+                if [[ -n "${!var_i:-}" ]] && [[ -n "${!var_j:-}" ]] && [[ "${!var_i:-}" = "${!var_j:-}" ]]; then
+                    print_validation_error "${var_i} and ${var_j} are bound to the same port"
                 fi
             done
         done
@@ -141,11 +142,6 @@ tomcat_enable_ajp() {
 #   None
 #########################
 tomcat_initialize() {
-    info "Ensuring Tomcat directories exist"
-    ensure_dir_exists "$TOMCAT_WEBAPPS_DIR"
-    # Use tomcat:root ownership for compatibility when running as a non-root user
-    am_i_root && configure_permissions_ownership "$TOMCAT_WEBAPPS_DIR" -d "775" -f "664" -u "$TOMCAT_DAEMON_USER" -g "root"
-
     if ! is_empty_value "$TOMCAT_EXTRA_JAVA_OPTS"; then
         cat >>"${TOMCAT_BIN_DIR}/setenv.sh" <<EOF
 
@@ -169,7 +165,21 @@ EOF
         tomcat_ensure_user_exists "$TOMCAT_USERNAME" "$TOMCAT_PASSWORD"
     fi
 
-    if is_dir_empty "$TOMCAT_WEBAPPS_DIR"; then
+    # Fix to make upgrades from old images work
+    # Before, we were persisting 'data' dir instead of 'webapps', causing errors when restoring persisted data
+    if ! is_dir_empty "$TOMCAT_WEBAPPS_DIR" || ! is_dir_empty "${TOMCAT_VOLUME_DIR}/data"; then
+        info "Persisted webapps detected"
+        if [[ ! -e "$TOMCAT_WEBAPPS_DIR" && -e "${TOMCAT_VOLUME_DIR}/data" ]]; then
+            warn "Detected legacy configuration directory path ${TOMCAT_VOLUME_DIR}/conf in volume"
+            warn "Creating ${TOMCAT_BASE_DIR}/webapps symlink pointing to ${TOMCAT_VOLUME_DIR}/data"
+            ln -sf "${TOMCAT_VOLUME_DIR}/data" "${TOMCAT_BASE_DIR}/webapps"
+        fi
+    else
+        info "Ensuring Tomcat directories exist"
+        ensure_dir_exists "$TOMCAT_WEBAPPS_DIR"
+        # Use tomcat:root ownership for compatibility when running as a non-root user
+        am_i_root && configure_permissions_ownership "$TOMCAT_WEBAPPS_DIR" -d "775" -f "664" -u "$TOMCAT_DAEMON_USER" -g "root"
+
         info "Deploying Tomcat from scratch"
         cp -rp "$TOMCAT_BASE_DIR"/webapps_default/* "$TOMCAT_WEBAPPS_DIR"
 
@@ -183,8 +193,6 @@ EOF
                 xmlstarlet ed -S --inplace --update '//Valve/@allow' --value '\d+\.\d+\.\d+\.\d+' "${TOMCAT_WEBAPPS_DIR}/${application}/META-INF/context.xml"
             done
         fi
-    else
-        info "Persisted webapps detected"
     fi
 }
 
@@ -212,8 +220,7 @@ tomcat_start_bg() {
         error "Tomcat failed to start with exit code ${start_error}"
         return "$start_error"
     fi
-
-    wait_for_log_entry "Catalina.start Server startup" "$TOMCAT_LOG_FILE"
+    wait_for_log_entry "Catalina.start Server startup" "$TOMCAT_LOG_FILE" "$TOMCAT_START_RETRIES" 10
 }
 
 ########################
