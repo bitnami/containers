@@ -31,7 +31,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10`, `10-debian-10`, `10.8.0`, `10.8.0-debian-10-r20`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.8.0-debian-10-r20/10/debian-10/Dockerfile)
+* [`10`, `10-debian-10`, `10.8.0`, `10.8.0-debian-10-r21`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.8.0-debian-10-r21/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/owncloud GitHub repo](https://github.com/bitnami/bitnami-docker-owncloud).
 
@@ -213,7 +213,7 @@ Available environment variables:
 - `OWNCLOUD_USERNAME`: ownCloud application username. Default: **user**
 - `OWNCLOUD_PASSWORD`: ownCloud application password. Default: **bitnami**
 - `OWNCLOUD_EMAIL`: ownCloud application email. Default: **user@example.com**
-- `OWNCLOUD_SKIP_BOOTSTRAP`: Whether to perform initial bootstrapping for the application. Default: **no**
+- `OWNCLOUD_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. Default: **no**
 - `OWNCLOUD_HOST`: ownCloud host to configure internal paths. Default: **set to the machine ip**
 
 ##### Use an existing database
