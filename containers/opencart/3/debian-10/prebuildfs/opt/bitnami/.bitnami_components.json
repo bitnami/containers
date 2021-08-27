@@ -29,10 +29,10 @@
     },
     "opencart": {
         "arch": "amd64",
-        "digest": "cdc70c90e1f4951e5068e9c9164cc847db69c8ea1855da672908e09996720650",
+        "digest": "5f44f5480a4c9229a2cb92ee9135850d0ff9a218b56d26a46888f4519ba1652f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.0.3-6-1"
+        "version": "3.0.3-8-0"
     },
     "php": {
         "arch": "amd64",
