@@ -29,9 +29,9 @@
     },
     "yq": {
         "arch": "amd64",
-        "digest": "431d61b51a6451b6896af533581d40e0f4d28732d9eca6145ec109b178c7049c",
+        "digest": "462d59e9908cddf4fb044b499d4352202e3354121e0d3c63e047fee0885f43df",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.12.0-0"
+        "version": "4.12.1-0"
     }
 }
