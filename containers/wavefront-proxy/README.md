@@ -28,8 +28,7 @@ $ docker run --name wavefront-proxy bitnami/wavefront-proxy:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10`, `10-debian-10`, `10.7.0`, `10.7.0-debian-10-r45` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-proxy/blob/10.7.0-debian-10-r45/10/debian-10/Dockerfile)
-* [`9`, `9-debian-10`, `9.7.0`, `9.7.0-debian-10-r130`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-proxy/blob/9.7.0-debian-10-r130/9/debian-10/Dockerfile)
+* [`10`, `10-debian-10`, `10.7.0`, `10.7.0-debian-10-r46`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-proxy/blob/10.7.0-debian-10-r46/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wavefront-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-wavefront-proxy).
 
@@ -50,7 +49,7 @@ $ docker pull bitnami/wavefront-proxy:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/wavefront-proxy:latest 'https://github.com/bitnami/bitnami-docker-wavefront-proxy.git#master:9/debian-10'
+$ docker build -t bitnami/wavefront-proxy:latest 'https://github.com/bitnami/bitnami-docker-wavefront-proxy.git#master:10/debian-10'
 ```
 
 # Configuration
@@ -62,10 +61,6 @@ To run commands inside this container you can use `docker run`, for example to e
 ```console
 $ docker run --rm --name wavefront-proxy bitnami/wavefront-proxy:latest -- java -jar /opt/bitnami/wavefront-proxy/bin/wavefront-proxy.jar --version
 ```
-
-# Branch Deprecation Notice
-
-Wavefront Proxy's branch 9 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 08-12-2021
 
 # Contributing
 
