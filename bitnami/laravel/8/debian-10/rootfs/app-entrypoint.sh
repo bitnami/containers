@@ -45,6 +45,18 @@ replace_in_file() {
 # Returns: none
 #########################
 wait_for_db() {
+    local -r db_connection="${DB_CONNECTION:-mysql}"
+    if [[ "$db_connection" == "sqlite" ]]; then
+        local -r db_database="${DB_DATABASE:-/app/database.sqlite}"
+
+        if [[ ! -f "$db_database" ]]; then
+            log "Creating sqlite database at $db_database"
+            sqlite3 "$db_database" ""
+        fi
+
+        return
+    fi
+
     local -r db_host="${DB_HOST:-mariadb}"
     local -r db_port="${DB_PORT:-3306}"
     local db_address
