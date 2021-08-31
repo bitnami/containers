@@ -9,8 +9,8 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq libbz2-1.0 libc6 libffi6 libgcc1 liblzma5 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.11-0" --checksum 28b91ef5db9ad93e704881400703e4085bd82f016be15e3cf8760df044da9490
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "12.22.5-0" --checksum 2f033fd610aed57672c5039a80f85fd911470e96ab6ee9aec77122955e514cb3
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-0" --checksum e47266d45f14748295297325b9fc6861633e615f7bbf08747604baa908fc4125
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "12.22.6-0" --checksum 9cdaa4d224db9b040a718e445335687b57933ece70c56b3c9fc012e4998723c7
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "parse-dashboard" "2.2.0-0" --checksum 157879a2a8123d5d794907cca7cb34caf8f3dca69c3aeed2dfb53f5d8a3293a5
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
@@ -18,7 +18,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/parse-dashboard/postunpack.sh
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="2.2.0-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="2.2.0-debian-10-r5" \
     PARSE_APP_ID="myappID" \
     PARSE_DASHBOARD_APP_NAME="" \
     PARSE_DASHBOARD_PASSWORD="bitnami" \
