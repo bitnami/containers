@@ -10,7 +10,7 @@ COPY prebuildfs /
 RUN install_packages ca-certificates curl gzip libbz2-1.0 libc6 libcom-err2 libcurl4 libffi6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libncursesw6 libnettle6 libnghttp2-14 libp11-kit0 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 netcat procps sudo tar zlib1g
 RUN /build/bitnami-user.sh
 RUN /build/install-nami.sh
-RUN bitnami-pkg install python-3.8.11-0 --checksum 28b91ef5db9ad93e704881400703e4085bd82f016be15e3cf8760df044da9490
+RUN bitnami-pkg install python-3.8.12-0 --checksum e47266d45f14748295297325b9fc6861633e615f7bbf08747604baa908fc4125
 RUN bitnami-pkg install node-14.17.5-0 --checksum 8afec4a09258ec4ef5f8ea6469038fa79f1d5385e055f86551d90ab4cd540a8a
 RUN bitnami-pkg install sequelize-cli-5.5.1-1 --checksum 7555275076a12faf13e23da63b3b7b307a883d13faa8c6c36386592a76690c28
 RUN bitnami-pkg install git-2.33.0-0 --checksum fd9a3245580fef6248f778efeba0a017675424f15ff16ace42c095496e4f02f3
@@ -23,7 +23,7 @@ RUN bitnami-pkg install express-4.17.1-3 --checksum ad196d1e8fe95e92fc388b117e1b
 COPY rootfs /
 RUN mkdir -p /dist /app /.npm /.config /.cache /.local && chmod g+rwx /dist /app /.npm /.config /.cache /.local
 ENV BITNAMI_APP_NAME="express" \
-    BITNAMI_IMAGE_VERSION="4.17.1-debian-10-r497" \
+    BITNAMI_IMAGE_VERSION="4.17.1-debian-10-r498" \
     NAMI_PREFIX="/.nami" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
