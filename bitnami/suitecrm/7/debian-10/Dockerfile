@@ -12,8 +12,8 @@ RUN install_packages acl ca-certificates cron curl gzip libargon2-1 libaudit1 li
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.3.29-7" --checksum 1cfce7ca7b3afaf0e55736dedc0bb9cba8d2de16f760b26a2a7c3bce571ef81a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.48-2" --checksum ce45103c76533b1fc3b07466dfb0c00aa9fa54b736dbd5e22160ef775233c880
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.31-0" --checksum 92b99c64a3ffe10fd94ef9ecd94d2dd65a172404c726093eb50b3b293523559d
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.29-1" --checksum bb5e5663ed26e35eac840f2f98d5beb0a458bad653dceb6efba0d8fd4918d673
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "suitecrm" "7.11.20-1" --checksum 7a206333272507ba59c537de2e86084e41cfc390e5e03e76751d0c98446c6296
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.30-0" --checksum c264d9d3db96aa91ec2d2de2d4ab862fd059f1fe61271dbed4536c245beb0206
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "suitecrm" "7.11.21-0" --checksum 3a8829380fcbae1fa64d12f67235497c4a307ecfa3924f43e5d46f4759f537e0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
@@ -21,8 +21,8 @@ RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/cron
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
-RUN /opt/bitnami/scripts/apache/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
+RUN /opt/bitnami/scripts/apache/postunpack.sh
 RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/suitecrm/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
@@ -30,7 +30,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="suitecrm" \
-    BITNAMI_IMAGE_VERSION="7.11.20-debian-10-r75" \
+    BITNAMI_IMAGE_VERSION="7.11.21-debian-10-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
