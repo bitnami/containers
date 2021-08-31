@@ -98,7 +98,7 @@ if [ "${1}" == "php" ] && [ "$2" == "artisan" ] && [ "$3" == "serve" ]; then
     if [[ ! -d /app/vendor ]]; then
         composer install
         log "Dependencies installed"
-    else
+    elif [[ "${SKIP_COMPOSER_UPDATE:-false}" != "true" ]]; then
         composer update
         log "Dependencies updated"
     fi
