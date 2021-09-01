@@ -605,6 +605,30 @@ EOF
 }
 
 ########################
+# Set "Default Write Concern"
+# https://docs.mongodb.com/manual/reference/command/setDefaultRWConcern/
+# Globals:
+#   MONGODB_*
+# Returns:
+#   Boolean
+#########################
+mongodb_set_dwc() {
+    local result
+
+    result=$(
+        mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
+db.adminCommand({"setDefaultRWConcern" : 1, "defaultWriteConcern" : {"w" : "majority"}})
+EOF
+    )
+    if grep -q "\"ok\" : 1" <<<"$result"; then
+        debug 'Setting Default Write Concern to {"setDefaultRWConcern" : 1, "defaultWriteConcern" : {"w" : "majority"}}'
+        return 0
+    else
+        return 1
+    fi
+}
+
+########################
 # Get if secondary node is pending
 # Globals:
 #   MONGODB_*
@@ -616,6 +640,8 @@ EOF
 mongodb_is_secondary_node_pending() {
     local node="${1:?node is required}"
     local result
+
+    mongodb_set_dwc
 
     result=$(
         mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
@@ -645,6 +671,8 @@ mongodb_is_hidden_node_pending() {
     local node="${1:?node is required}"
     local result
 
+    mongodb_set_dwc
+
     result=$(
         mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
 rs.add({host: '$node:$MONGODB_PORT_NUMBER', hidden: true, priority: 0})
@@ -672,6 +700,8 @@ EOF
 mongodb_is_arbiter_node_pending() {
     local node="${1:?node is required}"
     local result
+
+    mongodb_set_dwc
 
     result=$(
         mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
