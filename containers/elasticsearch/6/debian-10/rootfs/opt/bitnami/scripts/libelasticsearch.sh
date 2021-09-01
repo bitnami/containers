@@ -217,6 +217,12 @@ elasticsearch_validate() {
         error_code=1
     }
 
+    check_multi_value() {
+        if [[ " ${2} " != *" ${!1} "* ]]; then
+            print_validation_error "The allowed values for ${1} are: ${2}"
+        fi
+    }
+
     validate_node_type() {
         case "$ELASTICSEARCH_NODE_TYPE" in
         coordinating | data | ingest | master) ;;
@@ -238,7 +244,31 @@ elasticsearch_validate() {
         print_validation_error "The Bind Address specified in the environment variable ELASTICSEARCH_BIND_ADDRESS is not a valid IPv4"
     fi
 
+    if is_boolean_yes "$ELASTICSEARCH_ENABLE_SECURITY"; then
+        check_multi_value "ELASTICSEARCH_TLS_VERIFICATION_MODE" "full certificate none"
+        if is_boolean_yes "$ELASTICSEARCH_TLS_USE_PEM"; then
+            if [[ ! -f "$ELASTICSEARCH_NODE_CERT_LOCATION" ]] || [[ ! -f "$ELASTICSEARCH_NODE_KEY_LOCATION" ]] || [[ ! -f "$ELASTICSEARCH_CA_CERT_LOCATION" ]]; then
+                print_validation_error "In order to configure the TLS encryption for Elasticsearch you must provide your node key, certificate and a valid certification_authority certificate."
+            fi
+        elif [[ ! -f "$ELASTICSEARCH_KEYSTORE_LOCATION" ]] || [[ ! -f "$ELASTICSEARCH_TRUSTSTORE_LOCATION" ]]; then
+            print_validation_error "In order to configure the TLS encryption for Elasticsearch with JKS/PKCS12 certs you must mount a valid keystore and truststore."
+        fi
+    fi
+
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
+}
+
+########################
+# Determine the hostname by which to contact the locally running mongo daemon
+# Returns:
+#   The value of $ELASTICSEARCH_ADVERTISED_HOSTNAME or the current host address
+########################
+get_elasticsearch_hostname() {
+    if [[ -n "$ELASTICSEARCH_ADVERTISED_HOSTNAME" ]]; then
+        echo "$ELASTICSEARCH_ADVERTISED_HOSTNAME"
+    else
+        get_machine_ip
+    fi
 }
 
 ########################
@@ -261,8 +291,8 @@ elasticsearch_cluster_configuration() {
     }
 
     info "Configuring Elasticsearch cluster settings..."
-    elasticsearch_conf_set network.host "$(get_machine_ip)"
-    elasticsearch_conf_set network.publish_host "$(get_machine_ip)"
+    elasticsearch_conf_set network.host "$(get_elasticsearch_hostname)"
+    elasticsearch_conf_set network.publish_host "$(get_elasticsearch_hostname)"
     elasticsearch_conf_set network.bind_host "$(bind_address)"
     elasticsearch_conf_set cluster.name "$ELASTICSEARCH_CLUSTER_NAME"
     elasticsearch_conf_set node.name "${ELASTICSEARCH_NODE_NAME:-$(hostname)}"
@@ -301,6 +331,51 @@ elasticsearch_cluster_configuration() {
         fi
     else
         elasticsearch_conf_set "discovery.type" "single-node"
+    fi
+}
+
+########################
+# Configure Elasticsearch TLS settings
+# Globals:
+#   ELASTICSEARCH_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_tls_configuration(){
+    info "Configuring Elasticsearch TLS settings..."
+    elasticsearch_conf_set xpack.security.enabled "true"
+    elasticsearch_conf_set xpack.security.http.ssl.enabled "$ELASTICSEARCH_ENABLE_REST_TLS"
+    elasticsearch_conf_set xpack.security.transport.ssl.enabled "true"
+    elasticsearch_conf_set xpack.security.transport.ssl.verification_mode "$ELASTICSEARCH_TLS_VERIFICATION_MODE"
+
+    if is_boolean_yes "$ELASTICSEARCH_TLS_USE_PEM"; then
+        debug "Configuring Transport Layer TLS settings using PEM certificates..."
+        ! is_empty_value "$ELASTICSEARCH_KEY_PASSWORD" && elasticsearch_set_key_value "xpack.security.transport.ssl.secure_key_passphrase" "$ELASTICSEARCH_KEY_PASSWORD"
+        elasticsearch_conf_set xpack.security.transport.ssl.key "$ELASTICSEARCH_NODE_KEY_LOCATION"
+        elasticsearch_conf_set xpack.security.transport.ssl.certificate "$ELASTICSEARCH_NODE_CERT_LOCATION"
+        elasticsearch_conf_set xpack.security.transport.ssl.certificate_authorities "$ELASTICSEARCH_CA_CERT_LOCATION"
+        if is_boolean_yes "$ELASTICSEARCH_ENABLE_REST_TLS"; then
+            debug "Configuring REST API TLS settings using PEM certificates..."
+            ! is_empty_value "$ELASTICSEARCH_KEY_PASSWORD" && elasticsearch_set_key_value "xpack.security.http.ssl.secure_key_passphrase" "$ELASTICSEARCH_KEY_PASSWORD"
+            elasticsearch_conf_set xpack.security.http.ssl.key "$ELASTICSEARCH_NODE_KEY_LOCATION"
+            elasticsearch_conf_set xpack.security.http.ssl.certificate "$ELASTICSEARCH_NODE_CERT_LOCATION"
+            elasticsearch_conf_set xpack.security.http.ssl.certificate_authorities "$ELASTICSEARCH_CA_CERT_LOCATION"
+        fi
+    else
+        debug "Configuring Transport Layer TLS settings using JKS/PKCS certificates..."
+        ! is_empty_value "$ELASTICSEARCH_KEYSTORE_PASSWORD" && elasticsearch_set_key_value "xpack.security.transport.ssl.keystore.secure_password" "$ELASTICSEARCH_KEYSTORE_PASSWORD"
+        ! is_empty_value "$ELASTICSEARCH_TRUSTSTORE_PASSWORD" && elasticsearch_set_key_value "xpack.security.transport.ssl.truststore.secure_password" "$ELASTICSEARCH_TRUSTSTORE_PASSWORD"
+        elasticsearch_conf_set xpack.security.transport.ssl.keystore.path "$ELASTICSEARCH_KEYSTORE_LOCATION"
+        elasticsearch_conf_set xpack.security.transport.ssl.truststore.path "$ELASTICSEARCH_TRUSTSTORE_LOCATION"
+        if is_boolean_yes "$ELASTICSEARCH_ENABLE_REST_TLS"; then
+            debug "Configuring REST API TLS settings using JKS/PKCS certificates..."
+            ! is_empty_value "$ELASTICSEARCH_KEYSTORE_PASSWORD" && elasticsearch_set_key_value "xpack.security.http.ssl.keystore.secure_password" "$ELASTICSEARCH_KEYSTORE_PASSWORD"
+            ! is_empty_value "$ELASTICSEARCH_TRUSTSTORE_PASSWORD" && elasticsearch_set_key_value "xpack.security.http.ssl.truststore.secure_password" "$ELASTICSEARCH_TRUSTSTORE_PASSWORD"
+            elasticsearch_conf_set xpack.security.http.ssl.keystore.path "$ELASTICSEARCH_KEYSTORE_LOCATION"
+            elasticsearch_conf_set xpack.security.http.ssl.truststore.path "$ELASTICSEARCH_TRUSTSTORE_LOCATION"
+        fi
     fi
 }
 
@@ -503,14 +578,29 @@ elasticsearch_initialize() {
         elasticsearch_cluster_configuration
         elasticsearch_configure_node_type
         elasticsearch_custom_configuration
-        es_version="$(elasticsearch_get_version)"
-        es_major_version="$(get_sematic_version "$es_version" 1)"
-        es_minor_version="$(get_sematic_version "$es_version" 2)"
-        # Elasticsearch <= 7.10.2 is packaged without x-pack so adding this line "xpack.ml.enabled:false" will cause a failure
-        # Latest Elasticseach releases install x-pack-ml  by default. Since we have faced some issues with this library on certain platforms,
-        # currently we are disabling this machine learning module whatsoever by defining "xpack.ml.enabled=false" in the "elasicsearch.yml" file
-        if [[ "$es_major_version" -ge 7 && "$es_minor_version" -gt 10 && ! -d "${ELASTICSEARCH_BASE_DIR}/modules/x-pack-ml/platform/linux-x86_64/lib" ]]; then
-            elasticsearch_conf_set xpack.ml.enabled "false"
+        ELASTICSEARCH_VERSION="$(elasticsearch_get_version)"
+        ELASTICSEARCH_MAJOR_VERSION="$(get_sematic_version "$ELASTICSEARCH_VERSION" 1)"
+        ELASTICSEARCH_MINOR_VERSION="$(get_sematic_version "$ELASTICSEARCH_VERSION" 2)"
+        # X-Pack settings.
+        # Elasticsearch <= 7.10.2 is packaged without x-pack.
+        if [[ "$ELASTICSEARCH_MAJOR_VERSION" -ge 7 && "$ELASTICSEARCH_MINOR_VERSION" -gt 10 ]]; then
+            if is_boolean_yes "$ELASTICSEARCH_ENABLE_SECURITY"; then
+                elasticsearch_set_key_value "bootstrap.password" "$ELASTICSEARCH_PASSWORD"
+                elasticsearch_tls_configuration
+                if is_boolean_yes "$ELASTICSEARCH_ENABLE_FIPS_MODE"; then
+                    elasticsearch_conf_set xpack.security.fips_mode.enabled "true"
+                    elasticsearch_conf_set xpack.security.authc.password_hashing.algorithm "pbkdf2"
+                fi
+            fi
+            # Latest Elasticseach releases install x-pack-ml  by default. Since we have faced some issues with this library on certain platforms,
+            # currently we are disabling this machine learning module whatsoever by defining "xpack.ml.enabled=false" in the "elasicsearch.yml" file
+            if [[ ! -d "${ELASTICSEARCH_BASE_DIR}/modules/x-pack-ml/platform/linux-x86_64/lib" ]]; then
+                elasticsearch_conf_set xpack.ml.enabled "false"
+            fi
+        else
+            if is_boolean_yes "$ELASTICSEARCH_ENABLE_SECURITY"; then
+                warn "Elasticsearch Security (X-Pack) is only available in version 7.11 or higher."
+            fi
         fi
     fi
 
@@ -552,7 +642,7 @@ elasticsearch_install_plugins() {
     get_plugin_name() {
         local plugin="${1:?missing plugin}"
         # Remove any paths, and strip both the .zip extension and the version
-        basename "$plugin" | sed -E -e 's/.zip$//' -e 's/-[0-9]+\.[0-9]+\.[0-9]$//'
+        basename "$plugin" | sed -E -e 's/.zip$//' -e 's/-[0-9]+\.[0-9]+(\.[0-9]+){0,}$//'
     }
 
     # Collect plugins that should be installed offline
@@ -607,10 +697,26 @@ elasticsearch_set_keys() {
             local key="${key_value[0]}"
             local value="${key_value[1]}"
 
-            debug "Storing key: ${key}"
-            elasticsearch-keystore add --stdin --force "$key" <<<"$value"
+            elasticsearch_set_key_value "$key" "$value"
         done
     fi
+}
+
+########################
+# Set Elasticsearch keystore values
+# Globals:
+#   ELASTICSEARCH_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_set_key_value() {
+    local key="${1:?missing key}"
+    local value="${2:?missing value}"
+
+    debug "Storing key: ${key}"
+    elasticsearch-keystore add --stdin --force "$key" <<<"$value"
 }
 
 ########################
@@ -693,4 +799,35 @@ elasticsearch_configure_logging() {
     for pattern in "${delete_patterns[@]}"; do
         remove_in_file "${ELASTICSEARCH_CONF_DIR}/log4j2.properties" "$pattern"
     done
+}
+
+########################
+# Check Elasticsearch health
+# Globals:
+#   ELASTICSEARCH_*
+# Arguments:
+#   None
+# Returns:
+#   0 when healthy
+#   1 when unhealthy
+#########################
+elasticsearch_healthcheck() {
+    info "Checking Elasticsearch health..."
+    local -r exec="curl"
+    local command_args=("--silent" "--show-error" "--fail")
+    local protocol="http"
+    local host
+
+    host=$(get_elasticsearch_hostname)
+
+    is_boolean_yes "$ELASTICSEARCH_ENABLE_REST_TLS" && protocol="https" && command_args+=("-k")
+    is_boolean_yes "$ELASTICSEARCH_ENABLE_SECURITY" && command_args+=("--user" "elastic:${ELASTICSEARCH_PASSWORD}")
+
+    command_args+=("${protocol}://${host}:${ELASTICSEARCH_PORT_NUMBER}/_cluster/health?local=true")
+
+    if ! "$exec" "${command_args[@]}" >/dev/null; then
+        return 1
+    else
+        return 0
+    fi
 }
