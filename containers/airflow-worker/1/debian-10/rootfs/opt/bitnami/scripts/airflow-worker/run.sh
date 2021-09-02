@@ -14,11 +14,11 @@ set -o pipefail
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libairflowworker.sh
 
-args=("${AIRFLOW_QUEUE:+-q $AIRFLOW_QUEUE}" "--pid" "$AIRFLOW_PID_FILE" "$@")
+args=("--pid" "$AIRFLOW_PID_FILE" "$@")
 
 info "** Starting Airflow **"
 if am_i_root; then
-    exec gosu "$AIRFLOW_DAEMON_USER" "${AIRFLOW_BIN_DIR}/airflow" "celery" "worker" "${args[@]}"
+    exec gosu "$AIRFLOW_DAEMON_USER" "${AIRFLOW_BIN_DIR}/airflow" "celery" "worker ${AIRFLOW_QUEUE:+-q $AIRFLOW_QUEUE}" "${args[@]}"
 else
     exec "${AIRFLOW_BIN_DIR}/airflow" "celery" "worker" "${args[@]}"
 fi
