@@ -48,7 +48,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`5.0`, `5.0-debian-10`, `5.0.2`, `5.0.2-debian-10-r0` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/5.0.2-debian-10-r0/5.0/debian-10/Dockerfile)
+* [`5.0`, `5.0-debian-10`, `5.0.2`, `5.0.2-debian-10-r1` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/5.0.2-debian-10-r1/5.0/debian-10/Dockerfile)
 * [`4.4`, `4.4-debian-10`, `4.4.8`, `4.4.8-debian-10-r32`, `latest` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.8-debian-10-r32/4.4/debian-10/Dockerfile)
 * [`4.2`, `4.2-debian-10`, `4.2.15`, `4.2.15-debian-10-r53` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.15-debian-10-r53/4.2/debian-10/Dockerfile)
 * [`4.0`, `4.0-debian-9`, `4.0.26`, `4.0.26-debian-9-r39` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.26-debian-9-r39/4.0/debian-9/Dockerfile)
@@ -317,10 +317,18 @@ $ docker-compose up mongodb-sharded
 
 # Notable Changes
 
+## 4.4.8-debian-10-r32, and 5.0.2-debian-10-r0
+
+- From now on, "Default Write Concern" need to be set before adding new members (secondary, arbiter or hidden) to the cluster. In order to maintain the safest default configuration, `{"setDefaultRWConcern" : 1, "defaultWriteConcern" : {"w" : "majority"}}` is configured before adding new members. See https://docs.mongodb.com/manual/reference/command/setDefaultRWConcern/ and https://docs.mongodb.com/v5.0/reference/mongodb-defaults/#default-write-concern
+
 ## 3.6.16-centos-7-r49, 4.0.14-centos-7-r29, and 4.2.2-centos-7-r41
 
 - `3.6.16-centos-7-r49`, `4.0.14-centos-7-r29`, and `4.2.2-centos-7-r41` are considered the latest images based on CentOS.
 - Standard supported distros: Debian & OEL.
+
+# Branch Deprecation Notice
+
+MongoDB&reg;'s branch 3.6 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 10-02-2021.
 
 # Contributing
 
