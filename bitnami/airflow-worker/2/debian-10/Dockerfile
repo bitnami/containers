@@ -15,7 +15,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "10.18.0-0" --checksum bc507be929b72ee456f46c031a5c2ab4b6433175d2bbb6fc6a74da565ab3cb08
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.0-0" --checksum 88093e848950fd09e80eb26cac55caa11e77aa78f118b5dc67faa38a3836381d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "airflow-worker" "2.1.3-0" --checksum 8a4b949e66e8c273f72b1790419843d1793b38e0760f196876098fd276d6ff72
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "airflow-worker" "2.1.3-1" --checksum 0f4606ee17042b0d02bc4fe3f4bb1b714f5da792c8a59e0a716fab4b906153ee
 RUN chmod g+rwX /opt/bitnami
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
@@ -27,7 +27,7 @@ RUN /opt/bitnami/scripts/airflow-worker/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
     BITNAMI_APP_NAME="airflow-worker" \
-    BITNAMI_IMAGE_VERSION="2.1.3-debian-10-r7" \
+    BITNAMI_IMAGE_VERSION="2.1.3-debian-10-r8" \
     C_FORCE_ROOT="True" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \

@@ -33,7 +33,7 @@ You can find the default credentials and available configuration options in the 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.1.3`, `2.1.3-debian-10-r7`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker/blob/2.1.3-debian-10-r7/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.1.3`, `2.1.3-debian-10-r8`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker/blob/2.1.3-debian-10-r8/2/debian-10/Dockerfile)
 * [`1`, `1-debian-10`, `1.10.15`, `1.10.15-debian-10-r148` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker/blob/1.10.15-debian-10-r148/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow-worker).
@@ -307,7 +307,7 @@ The Airflow Worker instance can be customized by specifying environment variable
 - `AIRFLOW_WEBSERVER_HOST`: Airflow Worker webserver host. Default: **airflow**
 - `AIRFLOW_WEBSERVER_PORT_NUMBER`: Airflow Worker webserver port. Default: **8080**
 - `AIRFLOW_HOSTNAME_CALLABLE`: Method to obtain the hostname. No defaults.
-- `AIRFLOW_QUEUE`: A queue for the worker to pull tasks from.
+- `AIRFLOW_QUEUE`: A queue for the worker to pull tasks from. No defaults.
 
 ##### Use an existing database
 
