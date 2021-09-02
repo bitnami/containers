@@ -1,7 +1,7 @@
 version: '2'
 services:
   stats:
-    image: docker.io/bitnami/rabbitmq:3.8
+    image: docker.io/bitnami/rabbitmq:3.9
     environment:
       - RABBITMQ_NODE_TYPE=stats
       - RABBITMQ_NODE_NAME=rabbit@stats
@@ -12,7 +12,7 @@ services:
     volumes:
       - 'rabbitmqstats_data:/bitnami'
   queue-disc1:
-    image: docker.io/bitnami/rabbitmq:3.8
+    image: docker.io/bitnami/rabbitmq:3.9
     environment:
       - RABBITMQ_NODE_TYPE=queue-disc
       - RABBITMQ_NODE_NAME=rabbit@queue-disc1
@@ -22,7 +22,7 @@ services:
     volumes:
       - 'rabbitmqdisc1_data:/bitnami'
   queue-ram1:
-    image: docker.io/bitnami/rabbitmq:3.8
+    image: docker.io/bitnami/rabbitmq:3.9
     environment:
       - RABBITMQ_NODE_TYPE=queue-ram
       - RABBITMQ_NODE_NAME=rabbit@queue-ram1
