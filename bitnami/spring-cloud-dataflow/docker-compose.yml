@@ -75,7 +75,7 @@ services:
       - MARIADB_DATABASE=test
 
   rabbitmq:
-    image: docker.io/bitnami/rabbitmq:3.8
+    image: docker.io/bitnami/rabbitmq:3.9
     volumes:
       - 'rabbitmq_data:/bitnami'
 
