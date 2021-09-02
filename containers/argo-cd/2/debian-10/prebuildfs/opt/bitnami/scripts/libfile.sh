@@ -10,7 +10,7 @@
 # Functions
 
 ########################
-# Replace a regex in a file
+# Replace a regex-matching string in a file
 # Arguments:
 #   $1 - filename
 #   $2 - match regex
@@ -30,12 +30,32 @@ replace_in_file() {
     # We should avoid using 'sed in-place' substitutions
     # 1) They are not compatible with files mounted from ConfigMap(s)
     # 2) We found incompatibility issues with Debian10 and "in-place" substitutions
-    del=$'\001' # Use a non-printable character as a 'sed' delimiter to avoid issues
+    local -r del=$'\001' # Use a non-printable character as a 'sed' delimiter to avoid issues
     if [[ $posix_regex = true ]]; then
         result="$(sed -E "s${del}${match_regex}${del}${substitute_regex}${del}g" "$filename")"
     else
         result="$(sed "s${del}${match_regex}${del}${substitute_regex}${del}g" "$filename")"
     fi
+    echo "$result" > "$filename"
+}
+
+########################
+# Replace a regex-matching multiline string in a file
+# Arguments:
+#   $1 - filename
+#   $2 - match regex
+#   $3 - substitute regex
+# Returns:
+#   None
+#########################
+replace_in_file_multiline() {
+    local filename="${1:?filename is required}"
+    local match_regex="${2:?match regex is required}"
+    local substitute_regex="${3:?substitute regex is required}"
+
+    local result
+    local -r del=$'\001' # Use a non-printable character as a 'sed' delimiter to avoid issues
+    result="$(perl -pe "BEGIN{undef $/;} s${del}${match_regex}${del}${substitute_regex}${del}sg" "$filename")"
     echo "$result" > "$filename"
 }
 
