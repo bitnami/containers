@@ -31,6 +31,7 @@ tomcat_env_vars=(
     TOMCAT_ENABLE_AJP
     TOMCAT_START_RETRIES
     TOMCAT_EXTRA_JAVA_OPTS
+    JAVA_OPTS
 )
 for env_var in "${tomcat_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -79,7 +80,7 @@ export TOMCAT_EXTRA_JAVA_OPTS="${TOMCAT_EXTRA_JAVA_OPTS:-}"
 
 # Default JVM configuration
 export JAVA_HOME="${BITNAMI_ROOT_DIR}/java"
-export JAVA_OPTS="-Djava.awt.headless=true -XX:+UseG1GC -Dfile.encoding=UTF-8 -Duser.home=${TOMCAT_HOME}"
+export JAVA_OPTS="${JAVA_OPTS:--Djava.awt.headless=true -XX:+UseG1GC -Dfile.encoding=UTF-8 -Duser.home=${TOMCAT_HOME}}"
 
 # Other parameters
 export PATH="${TOMCAT_BASE_DIR}/bin:${JAVA_HOME}/bin:${BITNAMI_ROOT_DIR}/common/bin:${PATH}"
