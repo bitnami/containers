@@ -1,24 +1,29 @@
 FROM docker.io/bitnami/minideb:buster
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-ENV PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/nami/bin:$PATH"
+ENV HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-10" \
+    OS_NAME="linux"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl fontconfig fonts-dejavu-extra gzip libaudit1 libc6 libcap-ng0 libgcc1 libicu63 libjemalloc2 liblzma5 libncurses6 libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 procps sudo tar zlib1g
-RUN /build/bitnami-user.sh
-RUN /build/install-nami.sh
-RUN bitnami-pkg install java-11.0.12-0 --checksum 14c1274e93b1135d4d1b82ad7985fc2fa7f5d0689b6da18e0c94da37407cd4ea
-RUN bitnami-pkg unpack tomcat-9.0.52-0 --checksum 3f07c11421321e7801af26b2e8977133317af2c885566e1ea94288bba2425477
-RUN bitnami-pkg unpack mysql-client-10.3.31-0 --checksum 92b99c64a3ffe10fd94ef9ecd94d2dd65a172404c726093eb50b3b293523559d
-RUN bitnami-pkg install tini-0.19.0-1 --checksum 9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d
-RUN bitnami-pkg unpack reportserverenterprise-3.7.0-6044-0 --checksum 96b132e271addd54af2b7ead00a192c8e2daa149c0f260a0ef3aff27b108c0f8
-RUN bitnami-pkg install gosu-1.13.0-0 --checksum fd7257c2736164d02832dbf72e2c1ed9d875bf3e32f0988520796bc503330129
+RUN install_packages acl ca-certificates curl fontconfig fonts-dejavu-extra gzip libaudit1 libc6 libcap-ng0 libgcc1 libicu63 libjemalloc2 liblzma5 libncurses6 libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 procps tar xmlstarlet zlib1g
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.12-0" --checksum 14c1274e93b1135d4d1b82ad7985fc2fa7f5d0689b6da18e0c94da37407cd4ea
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "9.0.52-2" --checksum 89f028e7b66885241843b1cc677ca3045d1455b7b379d107a6f9454143ba5d75
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.31-0" --checksum 92b99c64a3ffe10fd94ef9ecd94d2dd65a172404c726093eb50b3b293523559d
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "reportserverenterprise" "3.7.1-6046-0" --checksum 5c4a94e760a6cb2173814a33259d0cd6eb045dfac94a1b940c6709793158194c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
+RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
+RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
+RUN /opt/bitnami/scripts/reportserver/postunpack.sh
+RUN /opt/bitnami/scripts/tomcat/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="reportserverenterprise" \
-    BITNAMI_IMAGE_VERSION="3.7.0-6044-debian-10-r49" \
+    BITNAMI_IMAGE_VERSION="3.7.1-6046-debian-10-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -29,28 +34,28 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MYSQL_CLIENT_CREATE_DATABASE_USER="" \
     MYSQL_CLIENT_ENABLE_SSL="no" \
     MYSQL_CLIENT_SSL_CA_FILE="" \
-    OS_ARCH="amd64" \
-    OS_FLAVOUR="debian-10" \
-    OS_NAME="linux" \
+    PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH" \
     REPORTSERVER_CRYPTPASSPHRASE="" \
     REPORTSERVER_CRYPTSALT="" \
-    REPORTSERVER_DATABASE_NAME="bitnami_reportserver" \
+    REPORTSERVER_DATABASE_NAME="" \
     REPORTSERVER_DATABASE_PASSWORD="" \
-    REPORTSERVER_DATABASE_USER="bn_reportserver" \
-    REPORTSERVER_EMAIL="user@example.com" \
+    REPORTSERVER_DATABASE_USER="" \
+    REPORTSERVER_EMAIL="" \
     REPORTSERVER_INSTALLDEMODATA="" \
-    REPORTSERVER_JAVA_OPTS="-Djava.awt.headless=true -Xmx4g -XX:+UseConcMarkSweepGC -XX:MaxPermSize=512M -Dfile.encoding=UTF8" \
-    REPORTSERVER_PASSWORD="bitnami" \
-    REPORTSERVER_USERNAME="user" \
+    REPORTSERVER_JAVA_OPTS="" \
+    REPORTSERVER_PASSWORD="" \
+    REPORTSERVER_USERNAME="" \
     SMTP_HOST="" \
     SMTP_PASSWORD="" \
     SMTP_PORT="" \
-    SMTP_SSL_ENABLE="false" \
-    SMTP_TLS_ENABLE="false" \
-    SMTP_TLS_REQUIRED="false" \
-    SMTP_USER=""
+    SMTP_SSL_ENABLE="" \
+    SMTP_TLS_ENABLE="" \
+    SMTP_TLS_REQUIRED="" \
+    SMTP_USER="" \
+    TOMCAT_START_RETRIES="60"
 
-EXPOSE 8080 8443
+EXPOSE 8009 8080
 
-ENTRYPOINT [ "/app-entrypoint.sh" ]
-CMD [ "nami", "start", "--foreground", "tomcat" ]
+USER 1001
+ENTRYPOINT [ "/opt/bitnami/scripts/reportserver/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/tomcat/run.sh" ]
