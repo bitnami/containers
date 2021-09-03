@@ -6,6 +6,7 @@ services:
     environment:
       - MARIADB_USER=bn_reportserver
       - MARIADB_DATABASE=bitnami_reportserver
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - 'mariadb_data:/bitnami'
@@ -16,6 +17,7 @@ services:
       - MARIADB_PORT_NUMBER=3306
       - REPORTSERVER_DATABASE_USER=bn_reportserver
       - REPORTSERVER_DATABASE_NAME=bitnami_reportserver
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - '80:8080'
