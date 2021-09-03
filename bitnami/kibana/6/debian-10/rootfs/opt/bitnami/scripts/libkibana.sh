@@ -32,6 +32,11 @@ kibana_validate() {
         error "$1"
         error_code=1
     }
+    check_multi_value() {
+        if [[ " ${2} " != *" ${!1} "* ]]; then
+            print_validation_error "The allowed values for ${1} are: ${2}"
+        fi
+    }
     check_empty_value() {
         if is_empty_value "${!1}"; then
             print_validation_error "${1} must be set"
@@ -48,6 +53,29 @@ kibana_validate() {
             print_validation_error "An invalid port was specified in the environment variable $var: $err"
         fi
     done
+
+    if is_boolean_yes "$KIBANA_SERVER_ENABLE_TLS"; then
+        if is_boolean_yes "$KIBANA_SERVER_TLS_USE_PEM"; then
+            if [[ ! -f "$KIBANA_SERVER_CERT_LOCATION" ]] || [[ ! -f "$KIBANA_SERVER_KEY_LOCATION" ]]; then
+                print_validation_error "In order to configure the TLS encryption for Kibana server using PEM certs you must provide your a valid key and certificate."
+            fi
+        elif [[ ! -f "$KIBANA_SERVER_KEYSTORE_LOCATION" ]]; then
+            print_validation_error "In order to configure the TLS encryption for Kibana server using PKCS12 certs you must mount a valid keystore."
+        fi
+    fi
+
+    if is_boolean_yes "$KIBANA_ELASTICSEARCH_ENABLE_TLS"; then
+        check_multi_value "KIBANA_ELASTICSEARCH_TLS_VERIFICATION_MODE" "full certificate none"
+        if [[ "$KIBANA_ELASTICSEARCH_TLS_VERIFICATION_MODE" != "none" ]];then
+            if is_boolean_yes "$KIBANA_ELASTICSEARCH_TLS_USE_PEM"; then
+                if [[ ! -f "$KIBANA_ELASTICSEARCH_CA_CERT_LOCATION" ]]; then
+                    print_validation_error "In order to connect to Elasticsearch via HTTPS, a valid CA certificate is required."
+                fi
+            elif [[ ! -f "$KIBANA_ELASTICSEARCH_TRUSTSTORE_LOCATION" ]]; then
+                print_validation_error "In order to connect to Elasticsearch via HTTPS, a valid PKCS12 truststore is required."
+            fi
+        fi
+    fi
 
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
@@ -85,6 +113,31 @@ kibana_initialize() {
             if ! cp -Lr "$KIBANA_MOUNTED_CONF_DIR"/* "$KIBANA_CONF_DIR"; then
                 error "Issue copying mounted configuration files from $KIBANA_MOUNTED_CONF_DIR to $KIBANA_CONF_DIR. Make sure you are not mounting configuration files in $KIBANA_CONF_DIR and $KIBANA_MOUNTED_CONF_DIR at the same time"
                 exit 1
+            fi
+        fi
+        # Override configuration
+        ! is_empty_value "$KIBANA_PASSWORD" && kibana_conf_set "elasticsearch.password" "$KIBANA_PASSWORD"
+        ! is_empty_value "$KIBANA_USERNAME" && kibana_conf_set "elasticsearch.username" "$KIBANA_USERNAME"
+        if is_boolean_yes "$KIBANA_SERVER_ENABLE_TLS"; then
+            kibana_conf_set "server.ssl.enabled" "true"
+            if "$KIBANA_SERVER_TLS_USE_PEM"; then
+                kibana_conf_set "server.ssl.certificate" "$KIBANA_SERVER_CERT_LOCATION"
+                kibana_conf_set "server.ssl.key" "$KIBANA_SERVER_KEY_LOCATION"
+                ! is_empty_value "$KIBANA_SERVER_KEY_PASSWORD" && kibana_set_key_value "server.ssl.keyPassphrase" "$KIBANA_SERVER_KEY_PASSWORD"
+            else
+                kibana_conf_set "server.ssl.keystore.path" "$KIBANA_SERVER_KEYSTORE_LOCATION"
+                ! is_empty_value "$KIBANA_SERVER_KEYSTORE_PASSWORD" && kibana_set_key_value "server.ssl.keystore.password" "$KIBANA_SERVER_KEYSTORE_PASSWORD"
+            fi
+        fi
+        if is_boolean_yes "$KIBANA_ELASTICSEARCH_ENABLE_TLS"; then
+            kibana_conf_set "elasticsearch.ssl.verificationMode" "$KIBANA_ELASTICSEARCH_TLS_VERIFICATION_MODE"
+            if [[ "$KIBANA_ELASTICSEARCH_TLS_VERIFICATION_MODE" != "none" ]];then
+                if "$KIBANA_ELASTICSEARCH_TLS_USE_PEM"; then
+                    kibana_conf_set "elasticsearch.ssl.certificateAuthorities" "$KIBANA_ELASTICSEARCH_CA_CERT_LOCATION"
+                else
+                    ! is_empty_value "$KIBANA_ELASTICSEARCH_TRUSTSTORE_PASSWORD" && kibana_set_key_value "elasticsearch.ssl.truststore.password" "$KIBANA_ELASTICSEARCH_TRUSTSTORE_PASSWORD"
+                    kibana_conf_set"elasticsearch.ssl.truststore.path" "$KIBANA_ELASTICSEARCH_TRUSTSTORE_LOCATION"
+                fi
             fi
         fi
     fi
@@ -143,6 +196,23 @@ kibana_conf_get() {
 }
 
 ########################
+# Set Elasticsearch keystore values
+# Globals:
+#   ELASTICSEARCH_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+kibana_set_key_value() {
+    local key="${1:?missing key}"
+    local value="${2:?missing value}"
+
+    debug "Storing key: ${key}"
+    kibana-keystore add --stdin --force "$key" <<<"$value"
+}
+
+########################
 # Configure/initialize Kibana
 # For backwards compatibility, it is allowed to specify the host and port in
 # different env-vars and this function will build the correct url.
@@ -157,15 +227,22 @@ kibana_conf_get() {
 kibana_sanitize_elasticsearch_hosts() {
     local -r hostUrl="${1:?missing hostUrl}"
     local -r port="${2:?missing port}"
+    local scheme
+
+    if is_boolean_yes "$KIBANA_ELASTICSEARCH_ENABLE_TLS"; then
+        scheme="https"
+    else
+        scheme="http"
+    fi
 
     if grep -q -E "^https?://[^:]+:[0-9]+$" <<<"$hostUrl"; then # i.e. http://localhost:9200
         echo "${hostUrl}"
     elif grep -q -E "^https?://[^:]+$" <<<"$hostUrl"; then # i.e. http://localhost
         echo "${hostUrl}:${port}"
     elif grep -q -E "^[^:]+:[0-9]+$" <<<"$hostUrl"; then # i.e. localhost:9200
-        echo "http://${hostUrl}"
+        echo "${scheme}://${hostUrl}"
     else # i.e. localhost
-        echo "http://${hostUrl}:${port}"
+        echo "${scheme}://${hostUrl}:${port}"
     fi
 }
 
