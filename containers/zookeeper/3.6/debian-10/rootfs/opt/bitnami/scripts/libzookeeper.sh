@@ -356,7 +356,7 @@ zookeeper_configure_acl() {
 
     for path in / /zookeeper /zookeeper/quota; do
         info "Setting the ACL rule '${acl_string}' in ${path}"
-        retry_while "${ZOO_BIN_DIR}/zkCli.sh setAcl ${path} ${acl_string}" 80
+        retry_while "${ZOO_BIN_DIR}/zkCli.sh -server localhost:${ZOO_PORT_NUMBER} setAcl ${path} ${acl_string}" 80
     done
 
     zookeeper_stop
