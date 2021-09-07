@@ -14,11 +14,8 @@ set -o pipefail
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libredis.sh
 
-# Constants
-REDIS_EXTRA_FLAGS=${REDIS_EXTRA_FLAGS:-}
-
 # Parse CLI flags to pass to the 'redis-server' call
-args=("$REDIS_BASE_DIR/etc/redis.conf" "--daemonize" "no")
+args=("${REDIS_BASE_DIR}/etc/redis.conf" "--daemonize" "no")
 # Add flags specified via the 'REDIS_EXTRA_FLAGS' environment variable
 read -r -a extra_flags <<< "$REDIS_EXTRA_FLAGS"
 [[ "${#extra_flags[@]}" -gt 0 ]] && args+=("${extra_flags[@]}")
