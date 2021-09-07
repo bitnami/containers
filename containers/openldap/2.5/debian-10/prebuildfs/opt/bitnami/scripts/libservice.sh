@@ -138,6 +138,19 @@ generate_cron_conf() {
 }
 
 ########################
+# Remove a cron configuration file for a given service
+# Arguments:
+#   $1 - Service name
+# Returns:
+#   None
+#########################
+remove_cron_conf() {
+    local service_name="${1:?service name is missing}"
+    local cron_conf_dir="/etc/monit/conf.d"
+    rm -f "${cron_conf_dir}/${service_name}"
+}
+
+########################
 # Generate a monit configuration file for a given service
 # Arguments:
 #   $1 - Service name
@@ -181,6 +194,19 @@ check process ${service_name}
   start program = "${start_command}" with timeout 90 seconds
   stop program = "${stop_command}" with timeout 90 seconds
 EOF
+}
+
+########################
+# Remove a monit configuration file for a given service
+# Arguments:
+#   $1 - Service name
+# Returns:
+#   None
+#########################
+remove_monit_conf() {
+    local service_name="${1:?service name is missing}"
+    local monit_conf_dir="/etc/monit/conf.d"
+    rm -f "${monit_conf_dir}/${service_name}.conf"
 }
 
 ########################
@@ -232,4 +258,17 @@ ${log_path} {
 $(indent "$extra" 2)
 }
 EOF
+}
+
+########################
+# Remove a logrotate configuration file
+# Arguments:
+#   $1 - Service name
+# Returns:
+#   None
+#########################
+remove_logrotate_conf() {
+    local service_name="${1:?service name is missing}"
+    local logrotate_conf_dir="/etc/logrotate.d"
+    rm -f "${logrotate_conf_dir}/${service_name}"
 }
