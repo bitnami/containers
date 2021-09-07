@@ -11,6 +11,7 @@ set -o pipefail
 . /opt/bitnami/scripts/phppgadmin-env.sh
 
 # Load libraries
+. /opt/bitnami/scripts/libvalidations.sh
 . /opt/bitnami/scripts/libphppgadmin.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libwebserver.sh
@@ -25,5 +26,10 @@ phppgadmin_validate
 phppgadmin_initialize
 
 # Configure web server for phpPgAdmin based on the runtime environment
-info "Enabling web server application configuration for phpPgAdmin"
-phppgadmin_ensure_web_server_app_configuration_exists
+if is_empty_value "$PHPPGADMIN_URL_PREFIX"; then
+    info "Enabling web server application configuration for phpPgAdmin"
+    phppgadmin_ensure_web_server_app_configuration_exists
+else
+    info "Enabling web server application prefix configuration for phpPgAdmin"
+    phppgadmin_ensure_web_server_prefix_configuration_exists
+fi
