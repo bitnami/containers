@@ -25,6 +25,7 @@ redmine_env_vars=(
     REDMINE_PORT_NUMBER
     REDMINE_ENV
     REDMINE_LANGUAGE
+    REDMINE_REST_API_ENABLED
     REDMINE_LOAD_DEFAULT_DATA
     REDMINE_SKIP_BOOTSTRAP
     REDMINE_USERNAME
@@ -92,6 +93,7 @@ export REDMINE_DAEMON_GROUP="redmine"
 export REDMINE_PORT_NUMBER="${REDMINE_PORT_NUMBER:-3000}" # only used during the first initialization
 export REDMINE_ENV="${REDMINE_ENV:-production}"
 export REDMINE_LANGUAGE="${REDMINE_LANGUAGE:-en}" # only used during the first initialization
+export REDMINE_REST_API_ENABLED="${REDMINE_REST_API_ENABLED:-0}" # only used during the first initialization
 export REDMINE_LOAD_DEFAULT_DATA="${REDMINE_LOAD_DEFAULT_DATA:-yes}" # only used during the first initialization
 export REDMINE_SKIP_BOOTSTRAP="${REDMINE_SKIP_BOOTSTRAP:-}" # only used during the first initialization
 

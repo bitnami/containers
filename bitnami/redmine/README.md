@@ -223,6 +223,7 @@ Available environment variables:
 - `REDMINE_FIRST_NAME`: Redmine user first name. Default: **UserName**
 - `REDMINE_LAST_NAME`: Redmine user last name. Default: **LastName**
 - `REDMINE_LANGUAGE`: Redmine site default language. Default: **en**
+- `REDMINE_REST_API_ENABLED`: Whether to allow REST API calls to Redmine. Default: **0**
 - `REDMINE_LOAD_DEFAULT_DATA`: Whether to load default configuration data for Redmine. Default: **yes**
 - `REDMINE_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. This is necessary in case you use a database that already has Redmine data. Default: **no**
 

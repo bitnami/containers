@@ -158,6 +158,7 @@ redmine_initialize() {
 
         info "Configuring Redmine application with settings provided via environment variables"
         redmine_conf_set "default_language.default" "$REDMINE_LANGUAGE" "" "${REDMINE_CONF_DIR}/settings.yml"
+        redmine_conf_set "rest_api_enabled.default" "$REDMINE_REST_API_ENABLED" "int" "${REDMINE_CONF_DIR}/settings.yml"
 
         # SMTP configuration
         if ! is_empty_value "$REDMINE_SMTP_HOST"; then
