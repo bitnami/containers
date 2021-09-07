@@ -13,7 +13,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "2.7.18-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.302-0" --checksum 59c0b7440797c7110c76959dbbce5235359b52adf62f99218b2718c04f2d67b6
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.12.2-0" --checksum 37fde3fa2288bf1aeaeac74a7666256ef9a1142ea2a526ec8d1a23a90414ec50
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "cassandra" "4.0.0-1" --checksum 78df9b6ca26f1031ae92bf219b702eefeb82b1215564b64b4216fad7bf3b08d2
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "cassandra" "4.0.1-0" --checksum fc4629567dda237bc4e11d5945d109b9ec3c036032d98d7f793a642ba9c32821
 RUN chmod g+rwX /opt/bitnami
 RUN ln -s /opt/bitnami/scripts/cassandra/entrypoint.sh /entrypoint.sh
 RUN ln -s /opt/bitnami/scripts/cassandra/run.sh /run.sh
@@ -21,7 +21,7 @@ RUN ln -s /opt/bitnami/scripts/cassandra/run.sh /run.sh
 COPY rootfs /
 RUN /opt/bitnami/scripts/cassandra/postunpack.sh
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="4.0.0-debian-10-r29" \
+    BITNAMI_IMAGE_VERSION="4.0.1-debian-10-r0" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/cassandra/bin:$PATH"
 
 EXPOSE 7000 9042
