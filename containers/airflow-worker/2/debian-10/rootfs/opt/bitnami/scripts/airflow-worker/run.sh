@@ -20,5 +20,5 @@ info "** Starting Airflow **"
 if am_i_root; then
     exec gosu "$AIRFLOW_DAEMON_USER" "${AIRFLOW_BIN_DIR}/airflow" "celery" "worker ${AIRFLOW_QUEUE:+-q $AIRFLOW_QUEUE}" "${args[@]}"
 else
-    exec "${AIRFLOW_BIN_DIR}/airflow" "celery" "worker" "${args[@]}"
+    exec "${AIRFLOW_BIN_DIR}/airflow" "celery" "worker ${AIRFLOW_QUEUE:+-q $AIRFLOW_QUEUE}" "${args[@]}"
 fi
