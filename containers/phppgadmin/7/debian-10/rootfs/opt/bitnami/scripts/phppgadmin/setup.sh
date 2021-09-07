@@ -11,9 +11,9 @@ set -o pipefail
 . /opt/bitnami/scripts/phppgadmin-env.sh
 
 # Load libraries
-. /opt/bitnami/scripts/libvalidations.sh
 . /opt/bitnami/scripts/libphppgadmin.sh
 . /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libvalidations.sh
 . /opt/bitnami/scripts/libwebserver.sh
 
 # Load web server environment and functions (after phpPgAdmin environment file so MODULE is not set to a wrong value)
