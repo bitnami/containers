@@ -265,7 +265,7 @@ redmine_conf_set() {
         yq eval "(.${key}) |= \"${value}\"" "$file" >"$tempfile"
         ;;
     int)
-        yq eval "(.${key}) |= (\"${value}\" | tonumber)" "$file" >"$tempfile"
+        yq eval "(.${key}) |= ${value}" "$file" >"$tempfile"
         ;;
     bool)
         yq eval "(.${key}) |= (\"${value}\" | test(\"true\"))" "$file" >"$tempfile"
