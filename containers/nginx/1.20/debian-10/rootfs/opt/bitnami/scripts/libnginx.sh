@@ -144,7 +144,7 @@ nginx_initialize() {
         if [[ -n "${NGINX_DAEMON_USER:-}" ]]; then
             chown -R "${NGINX_DAEMON_USER:-}" "$NGINX_TMP_DIR"
         fi
-        nginx_user_configuration="$(sed -E "s/^(user\s+).*/\1 ${NGINX_DAEMON_USER:-} ${NGINX_DAEMON_GROUP:-};/g" "$NGINX_CONF_FILE")"
+        nginx_user_configuration="$(sed -E "s/^(user\s+).*/\1${NGINX_DAEMON_USER:-} ${NGINX_DAEMON_GROUP:-};/g" "$NGINX_CONF_FILE")"
         is_file_writable "$NGINX_CONF_FILE" && echo "$nginx_user_configuration" > "$NGINX_CONF_FILE"
     else
         # The "user" directive makes sense only if the master process runs with super-user privileges
