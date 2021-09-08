@@ -15,7 +15,11 @@ eval "$(ldap_env)"
 
 # Ensure Open LDAP environment variables are valid
 ldap_validate
+# Ensure OpenLDAP is stopped when this script ends
+trap "ldap_stop" EXIT
 # Ensure 'daemon' user exists when running as 'root'
 am_i_root && ensure_user_exists "$LDAP_DAEMON_USER" --group "$LDAP_DAEMON_GROUP"
 # Ensure Open LDAP server is initialize
 ldap_initialize
+# Allow running custom initialization scripts
+ldap_custom_init_scripts

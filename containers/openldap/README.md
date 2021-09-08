@@ -36,7 +36,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2.5`, `2.5-debian-10`, `2.5.7`, `2.5.7-debian-10-r20`, `latest` (2.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.5.7-debian-10-r20/2.5/debian-10/Dockerfile)
-* [`2.4`, `2.4-debian-10`, `2.4.59`, `2.4.59-debian-10-r53` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.4.59-debian-10-r53/2.4/debian-10/Dockerfile)
+* [`2.4`, `2.4-debian-10`, `2.4.59`, `2.4.59-debian-10-r54` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.4.59-debian-10-r54/2.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/openldap GitHub repo](https://github.com/bitnami/bitnami-docker-openldap).
 
@@ -233,6 +233,14 @@ This new feature is not mutually exclusive, which means it is possible to listen
           - /path/to/openldap-data-persistence:/bitnami/openldap/data
       ...
     ```
+
+## Initializing a new instance
+
+The [Bitnami OpenLDAP](https://github.com/bitnami/bitnami-docker-openldap) image allows you to use your custom scripts to initialize a fresh instance.
+
+The allowed script extension is `.sh`, all scripts are executed in alphabetical order and need to reside in `/docker-entrypoint-initdb.d/`.
+
+Scripts are executed are after the initilization and before the startup of the OpenLDAP service.
 
 # Logging
 
