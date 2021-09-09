@@ -5,6 +5,7 @@ services:
     image: docker.io/bitnami/minio:2021
     ports:
       - '9000:9000'
+      - '9001:9001'
     volumes:
       - 'minio_data:/data'
 
