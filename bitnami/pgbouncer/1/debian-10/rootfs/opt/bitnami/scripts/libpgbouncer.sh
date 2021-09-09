@@ -189,7 +189,16 @@ pgbouncer_initialize() {
     info "Creating configuration file"
     # Create configuration
     if ! pgbouncer_is_file_external "pgbouncer.ini"; then
-        ini-file set --section "databases" --key "$PGBOUNCER_DATABASE" --value "host=$POSTGRESQL_HOST port=$POSTGRESQL_PORT dbname=$POSTGRESQL_DATABASE" "$PGBOUNCER_CONF_FILE"
+        # Build DB string based on what the user has configured
+        # Allow for wildcard db config
+        DATABASE_VALUE="host=$POSTGRESQL_HOST port=$POSTGRESQL_PORT"
+        if [[ "$PGBOUNCER_SET_USER" ]]; then
+            DATABASE_VALUE+=" user=$POSTGRESQL_USERNAME"
+        fi
+        if [[ "$PGBOUNCER_DATABASE" != "*" ]]; then
+            DATABASE_VALUE+=" dbname=$POSTGRESQL_DATABASE"
+        fi
+        ini-file set --section "databases" --key "$PGBOUNCER_DATABASE" --value "$DATABASE_VALUE" "$PGBOUNCER_CONF_FILE"
         ini-file set --section "pgbouncer" --key "listen_port" --value "$PGBOUNCER_PORT" "$PGBOUNCER_CONF_FILE"
         ini-file set --section "pgbouncer" --key "listen_addr" --value "$PGBOUNCER_LISTEN_ADDRESS" "$PGBOUNCER_CONF_FILE"
         ini-file set --section "pgbouncer" --key "auth_file" --value "$PGBOUNCER_AUTH_FILE" "$PGBOUNCER_CONF_FILE"
