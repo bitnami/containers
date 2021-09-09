@@ -165,7 +165,7 @@ kibana_conf_set() {
         yq eval "(.${key}) |= \"${value}\"" "$KIBANA_CONF_FILE" >"$tempfile"
         ;;
     int)
-        yq eval "(.${key}) |= (\"${value}\" | tonumber)" "$KIBANA_CONF_FILE" >"$tempfile"
+        yq eval "(.${key}) |= ${value}" "$KIBANA_CONF_FILE" >"$tempfile"
         ;;
     bool)
         yq eval "(.${key}) |= (\"${value}\" | test(\"true\"))" "$KIBANA_CONF_FILE" >"$tempfile"
