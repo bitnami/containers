@@ -45,7 +45,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2021`, `2021-debian-10`, `2021.6.17`, `2021.6.17-debian-10-r71`, `latest` (2021/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2021.6.17-debian-10-r71/2021/debian-10/Dockerfile)
+* [`2021`, `2021-debian-10`, `2021.9.3`, `2021.9.3-debian-10-r0`, `latest` (2021/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2021.9.3-debian-10-r0/2021/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/minio GitHub repo](https://github.com/bitnami/bitnami-docker-minio).
 
@@ -78,6 +78,7 @@ For persistence you should mount a directory at the `/data` path.
 ```console
 $ docker run --name minio \
     --publish 9000:9000 \
+    --publish 9001:9001 \
     --volume /path/to/minio-persistence:/data \
     bitnami/minio:latest
 ```
@@ -153,6 +154,7 @@ services:
     image: 'bitnami/minio:latest'
     ports:
       - '9000:9000'
+      - '9001:9001'
     environment:
       - MINIO_ACCESS_KEY=minio-access-key
       - MINIO_SECRET_KEY=minio-secret-key
@@ -204,6 +206,7 @@ You can create a series of buckets in the MinIO(R) server during the initializat
 ```console
 $ docker run --name minio \
     --publish 9000:9000 \
+    --publish 9001:9001 \
     --env MINIO_DEFAULT_BUCKETS='my-first-bucket:policy,my-second-bucket' \
     bitnami/minio:latest
 ```
@@ -228,6 +231,7 @@ This image expects the certificates to be mounted at the `/certs` directory. You
 ```console
 $ docker run --name minio \
     --publish 9000:9000 \
+    --publish 9001:9001 \
     --volume /path/to/certs:/certs \
     bitnami/minio:latest
 ```
@@ -339,6 +343,7 @@ When using persistence, MinIO(R) will reuse the data configured during the 1st i
 ```console
 $ docker run --name minio \
     --publish 9000:9000 \
+    --publish 9001:9001 \
     --env MINIO_FORCE_NEW_KEYS="yes" \
     --env MINIO_ACCESS_KEY="new-minio-access-key" \
     --env MINIO_SECRET_KEY="new-minio-secret-key" \
@@ -371,6 +376,7 @@ When setting this environment variable to `/opt/bitnami/minio/log/minio.log`, th
 ```console
 $ docker run --name minio \
     --publish 9000:9000 \
+    --publish 9001:9001 \
     --env MINIO_HTTP_TRACE=/opt/bitnami/minio/log/minio.log \
     bitnami/minio:latest
 ```

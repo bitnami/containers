@@ -26,11 +26,11 @@ if is_boolean_yes "$MINIO_DISTRIBUTED_MODE_ENABLED"; then
         if is_distributed_ellipses_syntax; then
             ARGS+=("${MINIO_SCHEME}://${node}")
         else
-            ARGS+=("${MINIO_SCHEME}://${node}:${MINIO_PORT_NUMBER}/${MINIO_DATADIR}")
+            ARGS+=("${MINIO_SCHEME}://${node}:${MINIO_API_PORT_NUMBER}/${MINIO_DATADIR}")
         fi
     done
 else
-    ARGS+=("--address" ":${MINIO_PORT_NUMBER}" "${MINIO_DATADIR}")
+    ARGS+=("--console-address" ":${MINIO_CONSOLE_PORT_NUMBER}" "${MINIO_DATADIR}")
 fi
 
 info "** Starting MinIO **"

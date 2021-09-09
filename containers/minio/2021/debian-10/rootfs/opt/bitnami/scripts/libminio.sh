@@ -33,7 +33,8 @@ export MINIO_SCHEME="${MINIO_SCHEME:-http}"
 export MINIO_SKIP_CLIENT="${MINIO_SKIP_CLIENT:-no}"
 export MINIO_DISTRIBUTED_MODE_ENABLED="${MINIO_DISTRIBUTED_MODE_ENABLED:-no}"
 export MINIO_DEFAULT_BUCKETS="${MINIO_DEFAULT_BUCKETS:-}"
-export MINIO_PORT_NUMBER="${MINIO_PORT_NUMBER:-9000}"
+export MINIO_API_PORT_NUMBER="${MINIO_API_PORT_NUMBER:-9000}"
+export MINIO_CONSOLE_PORT_NUMBER="${MINIO_CONSOLE_PORT_NUMBER:-9001}"
 export MINIO_DAEMON_USER="minio"
 export MINIO_DAEMON_GROUP="minio"
 export PATH="${MINIO_BASEDIR}/bin:$PATH"
@@ -142,11 +143,11 @@ minio_start_bg() {
             if is_distributed_ellipses_syntax; then
                 args+=("${MINIO_SCHEME}://${node}")
             else
-                args+=("${MINIO_SCHEME}://${node}:${MINIO_PORT_NUMBER}/${MINIO_DATADIR}")
+                args+=("${MINIO_SCHEME}://${node}:${MINIO_API_PORT_NUMBER}/${MINIO_DATADIR}")
             fi
         done
     else
-        args+=("--address" ":${MINIO_PORT_NUMBER}" "${MINIO_DATADIR}")
+        args+=("--console-address" ":${MINIO_CONSOLE_PORT_NUMBER}" "${MINIO_DATADIR}")
     fi
 
     is_minio_running && return
@@ -251,7 +252,8 @@ minio_validate() {
     check_yes_no_value MINIO_SKIP_CLIENT
     check_yes_no_value MINIO_DISTRIBUTED_MODE_ENABLED
     check_yes_no_value MINIO_FORCE_NEW_KEYS
-    check_allowed_port MINIO_PORT_NUMBER
+    check_allowed_port MINIO_CONSOLE_PORT_NUMBER
+    check_allowed_port MINIO_API_PORT_NUMBER
 
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
