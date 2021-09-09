@@ -201,6 +201,15 @@ pgbouncer_initialize() {
         if ! is_empty_value "$PGBOUNCER_QUERY_WAIT_TIMEOUT"; then
             ini-file set --section "pgbouncer" --key "query_wait_timeout" --value "$PGBOUNCER_QUERY_WAIT_TIMEOUT" "$PGBOUNCER_CONF_FILE"
         fi
+        if ! is_empty_value "$PGBOUNCER_POOL_MODE"; then
+            ini-file set --section "pgbouncer" --key "pool_mode" --value "$PGBOUNCER_POOL_MODE" "$PGBOUNCER_CONF_FILE"
+        fi
+        if ! is_empty_value "$PGBOUNCER_MAX_CLIENT_CONN"; then
+            ini-file set --section "pgbouncer" --key "max_client_conn" --value "$PGBOUNCER_MAX_CLIENT_CONN" "$PGBOUNCER_CONF_FILE"
+        fi
+        if ! is_empty_value "$PGBOUNCER_IDLE_TRANSACTION_TIMEOUT"; then
+            ini-file set --section "pgbouncer" --key "idle_transaction_timeout" --value "$PGBOUNCER_IDLE_TRANSACTION_TIMEOUT" "$PGBOUNCER_CONF_FILE"
+        fi
         if ! is_empty_value "$PGBOUNCER_IGNORE_STARTUP_PARAMETERS"; then
             ini-file set --section "pgbouncer" --key "ignore_startup_parameters" --value "$PGBOUNCER_IGNORE_STARTUP_PARAMETERS" "$PGBOUNCER_CONF_FILE"
         fi
