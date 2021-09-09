@@ -210,6 +210,9 @@ pgbouncer_initialize() {
         if ! is_empty_value "$PGBOUNCER_IDLE_TRANSACTION_TIMEOUT"; then
             ini-file set --section "pgbouncer" --key "idle_transaction_timeout" --value "$PGBOUNCER_IDLE_TRANSACTION_TIMEOUT" "$PGBOUNCER_CONF_FILE"
         fi
+        if ! is_empty_value "$PGBOUNCER_DEFAULT_POOL_SIZE"; then
+            ini-file set --section "pgbouncer" --key "default_pool_size" --value "$PGBOUNCER_DEFAULT_POOL_SIZE" "$PGBOUNCER_CONF_FILE"
+        fi
         if ! is_empty_value "$PGBOUNCER_IGNORE_STARTUP_PARAMETERS"; then
             ini-file set --section "pgbouncer" --key "ignore_startup_parameters" --value "$PGBOUNCER_IGNORE_STARTUP_PARAMETERS" "$PGBOUNCER_CONF_FILE"
         fi
