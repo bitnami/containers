@@ -112,10 +112,11 @@ To expose the same database name as the backend, set `PGBOUNCER_DATABASE="$POSTG
 ## Other options
 
 - `PGBOUNCER_IGNORE_STARTUP_PARAMETERS`: you can use this to set `ignore_startup_parameters` in the auto-generated `pgbouncer.ini`. This can be useful for solving certain connection issues. See https://www.pgbouncer.org/config.html for more details.
-- `PGBOUNCER_POOL_MODE` : you can use this to set `pool_mode` in the auto-generated `pgbouncer.ini`. This can be useful for solving certain connection issues. See https://www.pgbouncer.org/config.html for more details.
-- `PGBOUNCER_MAX_CLIENT_CONN` : you can use this to set `max_client_conn` in the auto-generated `pgbouncer.ini`. This can be useful for solving certain connection issues. See https://www.pgbouncer.org/config.html for more details.
-- `PGBOUNCER_IDLE_TRANSACTION_TIMEOUT` : you can use this to set `idle_transaction_timeout` in the auto-generated `pgbouncer.ini`. This can be useful for solving certain connection issues. See https://www.pgbouncer.org/config.html for more details.
-- `PGBOUNCER_DEFAULT_POOL_SIZE` : you can use this to set `default_pool_size` in the auto-generated `pgbouncer.ini`. This can be useful for solving certain connection issues. See https://www.pgbouncer.org/config.html for more details.
+- `PGBOUNCER_POOL_MODE` : you can use this to set `pool_mode` in the auto-generated `pgbouncer.ini`.
+- `PGBOUNCER_MAX_CLIENT_CONN` : you can use this to set `max_client_conn` in the auto-generated `pgbouncer.ini`.
+- `PGBOUNCER_IDLE_TRANSACTION_TIMEOUT` : you can use this to set `idle_transaction_timeout` in the auto-generated `pgbouncer.ini`.
+- `PGBOUNCER_DEFAULT_POOL_SIZE` : you can use this to set `default_pool_size` in the auto-generated `pgbouncer.ini`.
+- `PGBOUNCER_UNIX_SOCKET_DIR` : you can use this to set `unix_socket_dir` in the auto-generated `pgbouncer.ini`.
 
 ## Initializing a new instance
 

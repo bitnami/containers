@@ -210,6 +210,9 @@ pgbouncer_initialize() {
         if ! is_empty_value "$PGBOUNCER_QUERY_WAIT_TIMEOUT"; then
             ini-file set --section "pgbouncer" --key "query_wait_timeout" --value "$PGBOUNCER_QUERY_WAIT_TIMEOUT" "$PGBOUNCER_CONF_FILE"
         fi
+        if ! is_empty_value "$PGBOUNCER_UNIX_SOCKET_DIR"; then
+            ini-file set --section "pgbouncer" --key "idle_transaction_timeout" --value "$PGBOUNCER_IDLE_TRANSACTION_TIMEOUT" "$PGBOUNCER_CONF_FILE"
+        fi
         if ! is_empty_value "$PGBOUNCER_POOL_MODE"; then
             ini-file set --section "pgbouncer" --key "pool_mode" --value "$PGBOUNCER_POOL_MODE" "$PGBOUNCER_CONF_FILE"
         fi
