@@ -1,41 +1,66 @@
 version: '2'
-
 services:
   mariadb:
-    image: docker.io/bitnami/mariadb:10.3
-    environment:
-      # ALLOW_EMPTY_PASSWORD is recommended only for development.
-      - ALLOW_EMPTY_PASSWORD=yes
+    image: docker.io/bitnami/mariadb:10.4
     volumes:
-      - 'mariadb_data:/bitnami'
+      - 'mariadb_data:/bitnami/mariadb'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_dreamfactory
+      - MARIADB_DATABASE=bitnami_dreamfactory
+  mongodb:
+    image: docker.io/bitnami/mongodb:5.0
+    volumes:
+      - 'mongodb_data:/bitnami/mongodb'
   redis:
     image: docker.io/bitnami/redis:6.0
+    volumes:
+      - 'redis_data:/bitnami/redis'
     environment:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - 'redis_data:/bitnami'
-  mongodb:
-    image: docker.io/bitnami/mongodb:4.2
-    volumes:
-      - 'mongodb_data:/bitnami'
   dreamfactory:
     image: docker.io/bitnami/dreamfactory:4
     ports:
-      - '80:80'
-      - '443:443'
+      - '80:8080'
+      - '443:8443'
+    volumes:
+      - 'dreamfactory_data:/bitnami/dreamfactory'
     depends_on:
       - mariadb
-      - redis
       - mongodb
-    volumes:
-      - 'dreamfactory_data:/bitnami'
+      - redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - DREAMFACTORY_DATABASE_TYPE=mariadb
+      - DREAMFACTORY_DATABASE_HOST=mariadb
+      - DREAMFACTORY_DATABASE_PORT_NUMBER=3306
+      - DREAMFACTORY_REDIS_HOST=redis
+      - DREAMFACTORY_REDIS_PORT_NUMBER=6379
+      # Enable MariaDB service for DreamFactory
+      - DREAMFACTORY_ENABLE_MARIADB_SERVICE=yes
+      - DREAMFACTORY_MARIADB_SERVICE_DATABASE_NAME=df
+      - DREAMFACTORY_MARIADB_SERVICE_DATABASE_USER=df
+      # Create MariaDB database for extra service
+      - MYSQL_CLIENT_DATABASE_HOST=mariadb
+      - MYSQL_CLIENT_DATABASE_PORT_NUMBER=3306
+      - MYSQL_CLIENT_CREATE_DATABASE_NAME=df
+      - MYSQL_CLIENT_CREATE_DATABASE_USER=df
+      # Enable MongoDB service for DreamFactory
+      - DREAMFACTORY_ENABLE_MONGODB_SERVICE=yes
+      - DREAMFACTORY_MONGODB_SERVICE_DATABASE_NAME=df
+      - DREAMFACTORY_MONGODB_SERVICE_DATABASE_USER=df
+      # Create MongoDB database for extra service
+      - MONGODB_CLIENT_DATABASE_HOST=mongodb
+      - MONGODB_CLIENT_DATABASE_PORT_NUMBER=27017
+      - MONGODB_CLIENT_CREATE_DATABASE_NAME=df
+      - MONGODB_CLIENT_CREATE_DATABASE_USERNAME=df
 volumes:
   mariadb_data:
     driver: local
-  redis_data:
-    driver: local
   mongodb_data:
+    driver: local
+  redis_data:
     driver: local
   dreamfactory_data:
     driver: local
