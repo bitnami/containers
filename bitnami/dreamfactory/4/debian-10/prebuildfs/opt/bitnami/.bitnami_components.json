@@ -8,10 +8,17 @@
     },
     "dreamfactory": {
         "arch": "amd64",
-        "digest": "6fdbd574f16c852a70099de8544228601c1d7fc33643d9ef1fbf261ddc102320",
+        "digest": "40478ecd4e4fd47be0bc7c37208a3fc842e17512b8642a682c04d815dd282423",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.8.0-0"
+        "version": "4.8.0-1"
+    },
+    "git": {
+        "arch": "amd64",
+        "digest": "fd9a3245580fef6248f778efeba0a017675424f15ff16ace42c095496e4f02f3",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "2.33.0-0"
     },
     "gosu": {
         "arch": "amd64",
@@ -29,17 +36,17 @@
     },
     "mongodb-client": {
         "arch": "amd64",
-        "digest": "14c1a841d82eed4d53b778f7ffdf25810fdd628b295171ab781b7dc3f4ebb326",
+        "digest": "cd6b8ba5464fece881416e17943a4f64eba768608e353dafbb726affbf101e7b",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.4.8-1"
+        "version": "5.0.2-1"
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "92b99c64a3ffe10fd94ef9ecd94d2dd65a172404c726093eb50b3b293523559d",
+        "digest": "0ad1e1862ae23bd9aa0513d4cbe37ef6533f4a25ed140a6ae402f3e38bc6fef7",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.3.31-0"
+        "version": "10.4.21-2"
     },
     "php": {
         "arch": "amd64",
@@ -62,11 +69,11 @@
         "type": "NAMI",
         "version": "6.0.15-0"
     },
-    "tini": {
+    "render-template": {
         "arch": "amd64",
-        "digest": "9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d",
+        "digest": "8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.19.0-1"
+        "version": "1.0.0-3"
     }
 }
