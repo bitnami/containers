@@ -44,6 +44,9 @@ mongodb_client_validate() {
             if [[ -z "$MONGODB_CLIENT_CREATE_DATABASE_NAME" ]]; then
                 print_validation_error "Database name not configured. Set the MONGODB_CLIENT_CREATE_DATABASE_PASSWORD variable"
             fi
+            if [[ -z "$MONGODB_CLIENT_DATABASE_ROOT_PASSWORD" ]]; then
+                empty_password_error "MYSQL_CLIENT_DATABASE_ROOT_PASSWORD"
+            fi
             if [[ -z "$MONGODB_CLIENT_CREATE_DATABASE_PASSWORD" ]]; then
                 empty_password_error "MONGODB_CLIENT_CREATE_DATABASE_PASSWORD"
             fi
@@ -64,13 +67,11 @@ mongodb_client_validate() {
 mongodb_client_initialize() {
     # Wait for the database to be accessible if any action needs to be performed
     if [[ -n "$MONGODB_CLIENT_CREATE_DATABASE_USERNAME" && -n "$MONGODB_CLIENT_CREATE_DATABASE_NAME" ]]; then
+        local -a mongodb_execute_args=("$MONGODB_CLIENT_DATABASE_ROOT_USER" "$MONGODB_CLIENT_DATABASE_ROOT_PASSWORD" "admin" "$MONGODB_CLIENT_DATABASE_HOST" "$MONGODB_CLIENT_DATABASE_PORT_NUMBER")
         info "Trying to connect to the database server"
         check_mongodb_connection() {
-            local -r res=$(
-                mongodb_execute "$MONGODB_CLIENT_ROOT_USER" "$MONGODB_CLIENT_CREATE_ROOT_PASSWORD" "admin" "$MONGODB_CLIENT_DATABASE_HOST" "$MONGODB_CLIENT_DATABASE_PORT_NUMBER" <<EOF
-            db.stats();
-EOF
-            )
+            local res
+            res="$(mongodb_execute "${mongodb_execute_args[@]}" <<< "db.stats();")"
             debug_execute echo "$res"
             echo "$res" | grep -q '"ok" : 1'
         }
@@ -78,9 +79,16 @@ EOF
             error "Could not connect to the database server"
             return 1
         fi
-        info "Creating database ${MONGODB_CLIENT_CREATE_DATABASE_NAME} and user ${MONGODB_CLIENT_CREATE_DATABASE_USERNAME}"
-        debug_execute mongodb_execute "$MONGODB_CLIENT_ROOT_USER" "$MONGODB_CLIENT_CREATE_ROOT_PASSWORD" "admin" "$MONGODB_CLIENT_DATABASE_HOST" "$MONGODB_CLIENT_DATABASE_PORT_NUMBER" <<EOF
-            db.getSiblingDB('$MONGODB_CLIENT_CREATE_DATABASE_NAME').createUser({ user: '$MONGODB_CLIENT_CREATE_DATABASE_USERNAME', pwd: '$MONGODB_CLIENT_CREATE_DATABASE_PASSWORD', roles: [{role: 'readWrite', db: '$MONGODB_CLIENT_CREATE_DATABASE_NAME'}] })
+        # Note: MongoDB only creates the database when you first store data in that database (i.e. creating a user)
+        # https://www.mongodb.com/basics/create-database
+        info "Creating database ${MONGODB_CLIENT_CREATE_DATABASE_NAME} and user ${MONGODB_CLIENT_CREATE_DATABASE_NAME}"
+        debug_execute mongodb_execute "${mongodb_execute_args[@]}" <<EOF
+if (!db.system.users.findOne({_id: '${MONGODB_CLIENT_CREATE_DATABASE_NAME}.${MONGODB_CLIENT_CREATE_DATABASE_USERNAME}'}))
+  db.getSiblingDB('${MONGODB_CLIENT_CREATE_DATABASE_NAME}').createUser({
+    user: '${MONGODB_CLIENT_CREATE_DATABASE_USERNAME}',
+    pwd: '${MONGODB_CLIENT_CREATE_DATABASE_PASSWORD}',
+    roles: [{role: 'readWrite', db: '${MONGODB_CLIENT_CREATE_DATABASE_NAME}'}],
+  });
 EOF
     fi
 }
