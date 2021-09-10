@@ -210,21 +210,30 @@ pgbouncer_initialize() {
         if ! is_empty_value "$PGBOUNCER_QUERY_WAIT_TIMEOUT"; then
             ini-file set --section "pgbouncer" --key "query_wait_timeout" --value "$PGBOUNCER_QUERY_WAIT_TIMEOUT" "$PGBOUNCER_CONF_FILE"
         fi
-        if ! is_empty_value "$PGBOUNCER_UNIX_SOCKET_DIR"; then
-            ini-file set --section "pgbouncer" --key "idle_transaction_timeout" --value "$PGBOUNCER_IDLE_TRANSACTION_TIMEOUT" "$PGBOUNCER_CONF_FILE"
-        fi
-        if ! is_empty_value "$PGBOUNCER_POOL_MODE"; then
-            ini-file set --section "pgbouncer" --key "pool_mode" --value "$PGBOUNCER_POOL_MODE" "$PGBOUNCER_CONF_FILE"
-        fi
-        if ! is_empty_value "$PGBOUNCER_MAX_CLIENT_CONN"; then
-            ini-file set --section "pgbouncer" --key "max_client_conn" --value "$PGBOUNCER_MAX_CLIENT_CONN" "$PGBOUNCER_CONF_FILE"
-        fi
-        if ! is_empty_value "$PGBOUNCER_IDLE_TRANSACTION_TIMEOUT"; then
-            ini-file set --section "pgbouncer" --key "idle_transaction_timeout" --value "$PGBOUNCER_IDLE_TRANSACTION_TIMEOUT" "$PGBOUNCER_CONF_FILE"
-        fi
-        if ! is_empty_value "$PGBOUNCER_DEFAULT_POOL_SIZE"; then
-            ini-file set --section "pgbouncer" --key "default_pool_size" --value "$PGBOUNCER_DEFAULT_POOL_SIZE" "$PGBOUNCER_CONF_FILE"
-        fi
+        local -r -a key_value_pairs=(
+            "listen_port:${PGBOUNCER_PORT}"
+            "listen_addr:${PGBOUNCER_LISTEN_ADDRESS}"
+            "auth_file:${PGBOUNCER_AUTH_FILE}"
+            "auth_type:${PGBOUNCER_AUTH_TYPE}"
+            "pidfile:${PGBOUNCER_PID_FILE}"
+            "logfile:${PGBOUNCER_LOG_FILE}"
+            "admin_users:${POSTGRESQL_USERNAME}"
+            "client_tls_sslmode:${PGBOUNCER_CLIENT_TLS_SSLMODE}"
+            "query_wait_timeout:${PGBOUNCER_QUERY_WAIT_TIMEOUT}"
+            "unit_socket_dir:${PGBOUNCER_UNIX_SOCKET_DIR}"
+            "pool_mode:${PGBOUNCER_POOL_MODE}"
+            "max_client_conn:${PGBOUNCER_MAX_CLIENT_CONN}"
+            "idle_transaction_timeout:${PGBOUNCER_IDLE_TRANSACTION_TIMEOUT}"
+            "default_pool_size:${PGBOUNCER_DEFAULT_POOL_SIZE}"
+            "ignore_startup_parameters:${PGBOUNCER_IGNORE_STARTUP_PARAMETERS}"
+        )
+        for pair in "${key_value_pairs[@]}"; do
+            local key="$(awk -F: '{print $1}' <<< "$pair")"
+            local value="$(awk -F: '{print $2}' <<< "$pair")"
+            if ! is_empty_value "${value}"); then
+                ini-file set --section "pgbouncer" --key "${key}" --value "${value}" "$PGBOUNCER_CONF_FILE"
+            fi
+        done
         if ! is_empty_value "$PGBOUNCER_IGNORE_STARTUP_PARAMETERS"; then
             ini-file set --section "pgbouncer" --key "ignore_startup_parameters" --value "$PGBOUNCER_IGNORE_STARTUP_PARAMETERS" "$PGBOUNCER_CONF_FILE"
         fi
