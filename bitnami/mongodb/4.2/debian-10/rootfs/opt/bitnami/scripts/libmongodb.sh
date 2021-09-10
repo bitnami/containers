@@ -503,10 +503,10 @@ mongodb_create_users() {
 
     info "Creating users..."
     if [[ -n "$MONGODB_ROOT_PASSWORD" ]] && ! [[ "$MONGODB_REPLICA_SET_MODE" =~ ^(secondary|arbiter|hidden) ]]; then
-        info "Creating root user..."
+        info "Creating $MONGODB_ROOT_USER user..."
         result=$(
             mongodb_execute "" "" "" "127.0.0.1" <<EOF
-db.getSiblingDB('admin').createUser({ user: 'root', pwd: '$MONGODB_ROOT_PASSWORD', roles: [{role: 'root', db: 'admin'}] })
+db.getSiblingDB('admin').createUser({ user: '$MONGODB_ROOT_USER', pwd: '$MONGODB_ROOT_PASSWORD', roles: [{role: 'root', db: 'admin'}] })
 EOF
         )
     fi
@@ -515,7 +515,7 @@ EOF
         info "Creating '$MONGODB_USERNAME' user..."
 
         result=$(
-            mongodb_execute 'root' "$MONGODB_ROOT_PASSWORD" "" "127.0.0.1" <<EOF
+            mongodb_execute '$MONGODB_ROOT_USER' "$MONGODB_ROOT_PASSWORD" "" "127.0.0.1" <<EOF
 db.getSiblingDB('$MONGODB_DATABASE').createUser({ user: '$MONGODB_USERNAME', pwd: '$MONGODB_PASSWORD', roles: [{role: 'readWrite', db: '$MONGODB_DATABASE'}] })
 EOF
         )
@@ -584,7 +584,7 @@ mongodb_is_primary_node_initiated() {
     local node="${1:?node is required}"
     local result
     result=$(
-        mongodb_execute "root" "$MONGODB_ROOT_PASSWORD" "admin" "127.0.0.1" "$MONGODB_PORT_NUMBER" <<EOF
+        mongodb_execute "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD" "admin" "127.0.0.1" "$MONGODB_PORT_NUMBER" <<EOF
 rs.initiate({"_id":"$MONGODB_REPLICA_SET_NAME", "members":[{"_id":0,"host":"$node:$MONGODB_PORT_NUMBER","priority":5}]})
 EOF
     )
@@ -1199,10 +1199,10 @@ mongodb_custom_init_scripts() {
         local mongo_user
         local mongo_pass
         if [[ -n "$MONGODB_ROOT_PASSWORD" ]]; then
-            mongo_user=root
+            mongo_user="$MONGODB_ROOT_USER"
             mongo_pass="$MONGODB_ROOT_PASSWORD"
         elif [[ -n "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" ]]; then
-            mongo_user=root
+            mongo_user="$MONGODB_ROOT_USER"
             mongo_pass="$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD"
         else
             mongo_user="$MONGODB_USERNAME"
