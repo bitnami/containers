@@ -15,10 +15,10 @@
     },
     "keycloak": {
         "arch": "amd64",
-        "digest": "a0eb252a9a1a44cc7f56614e11ab2e4142d760d635957795b46aacd5b828a900",
+        "digest": "a9c60374e6f34130f8621fe871bba7eb163583538ece932652d03450d6426d55",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "15.0.2-1"
+        "version": "15.0.2-2"
     },
     "wait-for-port": {
         "arch": "amd64",
