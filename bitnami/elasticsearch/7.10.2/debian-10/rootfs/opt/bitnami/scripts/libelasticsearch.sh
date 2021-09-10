@@ -38,7 +38,7 @@ elasticsearch_conf_write() {
         yq eval "(.${key}) |= \"${value}\"" "$ELASTICSEARCH_CONF_FILE" >"$tempfile"
         ;;
     int)
-        yq eval "(.${key}) |= (\"${value}\" | tonumber)" "$ELASTICSEARCH_CONF_FILE" >"$tempfile"
+        yq eval "(.${key}) |= ${value}" "$ELASTICSEARCH_CONF_FILE" >"$tempfile"
         ;;
     bool)
         yq eval "(.${key}) |= (\"${value}\" | test(\"true\"))" "$ELASTICSEARCH_CONF_FILE" >"$tempfile"
