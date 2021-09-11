@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`9`, `9-debian-10`, `9.0.1`, `9.0.1-debian-10-r42`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/9.0.1-debian-10-r42/9/debian-10/Dockerfile)
+- [`9`, `9-debian-10`, `9.0.1`, `9.0.1-debian-10-r43`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/9.0.1-debian-10-r43/9/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/sonarqube GitHub repo](https://github.com/bitnami/bitnami-docker-sonarqube).
 
@@ -242,14 +242,12 @@ Available environment variables:
 
 - `POSTGRESQL_CLIENT_DATABASE_HOST`: Hostname for the PostgreSQL server. Default: **postgresql**
 - `POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the PostgreSQL server. Default: **5432**
-- `POSTGRESQL_CLIENT_DATABASE_ROOT_USER`: Database admin user. Default: **root**
-- `POSTGRESQL_CLIENT_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No default.
+- `POSTGRESQL_CLIENT_DATABASE_POSTGRES_USER`: Database admin user. Default: **root**
+- `POSTGRESQL_CLIENT_DATABASE_POSTGRES_PASSWORD`: Database password for the database admin user. No default.
 - `POSTGRESQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No default.
 - `POSTGRESQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No default.
 - `POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `POSTGRESQL_CLIENT_CREATE_DATABASE_USER` user. No default.
 - `POSTGRESQL_CLIENT_CREATE_DATABASE_EXTENSIONS`: PostgreSQL extensions to enable in the specified database during the first initialization. No default.
-- `POSTGRESQL_CLIENT_ENABLE_SSL`: Whether to enable SSL connections for the new database. Default: **no**
-- `POSTGRESQL_CLIENT_SSL_CA_FILE`: Path to the SSL CA file for the new database. No default.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
 ##### SMTP Configuration
