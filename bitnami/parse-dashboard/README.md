@@ -37,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.2.0`, `2.2.0-debian-10-r14`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/2.2.0-debian-10-r14/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.2.0`, `2.2.0-debian-10-r15`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/2.2.0-debian-10-r15/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse-dashboard GitHub repo](https://github.com/bitnami/bitnami-docker-parse-dashboard).
 
@@ -219,16 +219,23 @@ parse-dashboard:
  $ docker run -d -e PARSE_DASHBOARD_PASSWORD=my_password -p 80:4040 --name parse-dashboard -v /your/local/path/bitnami/parse_dashboard:/bitnami --network=parse_dashboard-tier bitnami/parse-dashboard
 ```
 
-Available variables:
- - `PARSE_DASHBOARD_USER`: Parse Dashboard application username. Default: **user**
- - `PARSE_DASHBOARD_PASSWORD`: Parse Dashboard application password. Default: **bitnami**
- - `PARSE_HOST`: Host used by Parse Dashboard to form the URLs to Parse Server.
- - `PARSE_PROTOCOL`: Protocol used by Parse Dashboard to form the URLs to Parse Server. Default: **http**
- - `PARSE_USE_HOSTNAME`: Whether to use a hostname or an IP to configure the "serverURL" setting. Default: **no**
- - `PARSE_PORT_NUMBER`: Parse Server Port. Default: **1337**
- - `PARSE_APP_ID`: Parse Server App Id. Default: **myappID**
- - `PARSE_MASTER_KEY`: Parse Server Master Key. Default: **mymasterKey**
- - `PARSE_DASHBOARD_APP_NAME`: Parse Dashboard application name. Default: **MyDashboard**
+Available environment variables:
+
+##### User and Site configuration
+
+- `PARSE_DASHBOARD_ENABLE_HTTPS`: Whether to enable HTTPS for Parse Dashboard by default. Default: **no**
+- `PARSE_DASHBOARD_EXTERNAL_HTTP_PORT_NUMBER`: External HTTP port for Parse Dashboard. Default: **80**
+- `PARSE_DASHBOARD_EXTERNAL_HTTPS_PORT_NUMBER`: External HTTPS port for Parse Dashboard. Default: **80**
+- `PARSE_DASHBOARD_PARSE_HOST`: Parse server host. Default: **parse**
+- `PARSE_DASHBOARD_PORT_NUMBER`: Port number in which Parse Dashboard will run. Default: **4040**
+- `PARSE_DASHBOARD_PARSE_PORT_NUMBER`: Parse server port number. Default: **1337**
+- `PARSE_DASHBOARD_PARSE_APP_ID`: Parse app ID. Default: **myappID**
+- `PARSE_DASHBOARD_PARSE_APP_NAME`: Parse app name. Default: **myappID**
+- `PARSE_DASHBOARD_PARSE_MASTER_KEY`: Parse master key: **mymasterKey**
+- `PARSE_DASHBOARD_PARSE_MOUNT_PATH`: Parse server mount path. Default: **/parse**
+- `PARSE_DASHBOARD_PARSE_PROTOCOL`: Parse server protocol. Default: **https**
+- `PARSE_DASHBOARD_USERNAME`: Parse Dashboard user name. Default: **user**
+- `PARSE_DASHBOARD_PASSWORD`: Parse Dashboard password. Default: **bitnami**
 
 # Notable Changes
 
