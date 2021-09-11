@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`4`, `4-debian-10`, `4.8.0`, `4.8.0-debian-10-r69`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.8.0-debian-10-r69/4/debian-10/Dockerfile)
+- [`4`, `4-debian-10`, `4.8.0`, `4.8.0-debian-10-r70`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.8.0-debian-10-r70/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dreamfactory GitHub repo](https://github.com/bitnami/bitnami-docker-dreamfactory).
 
@@ -330,19 +330,43 @@ Available environment variables:
 - `DREAMFACTORY_POSTGRESQL_SERVICE_DATABASE_USER`: Username for the extra MongoDB&reg; server. No default.
 - `DREAMFACTORY_POSTGRESQL_SERVICE_DATABASE_PASSWORD`: Password for the extra MongoDB&reg; server. No default.
 
-##### Create a database for DreamFactory using mysql-client
+##### Create a MariaDB or MySQL database for DreamFactory using mysql-client
 
 - `MYSQL_CLIENT_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
 - `MYSQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the MariaDB or MySQL server. Default: **3306**
 - `MYSQL_CLIENT_DATABASE_ROOT_USER`: Database admin user. Default: **root**
 - `MYSQL_CLIENT_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No default.
-- `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No default.
-- `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No default.
+- `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql-client module. No default.
+- `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql-client module. No default.
 - `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No default.
 - `MYSQL_CLIENT_CREATE_DATABASE_CHARACTER_SET`: Character set to use for the new database. No default.
 - `MYSQL_CLIENT_CREATE_DATABASE_COLLATE`: Database collation to use for the new database. No default.
 - `MYSQL_CLIENT_ENABLE_SSL`: Whether to enable SSL connections for the new database. Default: **no**
 - `MYSQL_CLIENT_SSL_CA_FILE`: Path to the SSL CA file for the new database. No default.
+- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+
+##### Create a PostgreSQL database for DreamFactory using postgresql-client
+
+- `POSTGRESQL_CLIENT_DATABASE_HOST`: Hostname for the PostgreSQL server. Default: **postgresql**
+- `POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the PostgreSQL server. Default: **5432**
+- `POSTGRESQL_CLIENT_DATABASE_POSTGRES_USER`: Database admin user. Default: **root**
+- `POSTGRESQL_CLIENT_DATABASE_POSTGRES_PASSWORD`: Database password for the database admin user. No defaults.
+- `POSTGRESQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the postgresql-client module. No defaults.
+- `POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME`: New database user to be created by the postgresql-client module. No defaults.
+- `POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME` user. No defaults.
+- `POSTGRESQL_CLIENT_CREATE_DATABASE_EXTENSIONS`: PostgreSQL extensions to enable in the specified database during the first initialization. No defaults.
+- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+
+##### Create a MongoDB database for DreamFactory using mongodb-client
+
+- `MONGODB_CLIENT_DATABASE_HOST`: Hostname for the MongoDB server. Default: **mongodb**
+- `MONGODB_CLIENT_DATABASE_PORT_NUMBER`: Port used by the MongoDB server. Default: **27017**
+- `MONGODB_CLIENT_DATABASE_ROOT_USER`: Database admin user. Default: **root**
+- `MONGODB_CLIENT_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No defaults.
+- `MONGODB_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mongodb-client module. No defaults.
+- `MONGODB_CLIENT_CREATE_DATABASE_USERNAME`: New database user to be created by the mongodb-client module. No defaults.
+- `MONGODB_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MONGODB_CLIENT_CREATE_DATABASE_USERNAME` user. No defaults.
+- `MONGODB_CLIENT_EXTRA_FLAGS`: Extra flags when using the mongodb-client during initialization. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
 ##### SMTP Configuration
