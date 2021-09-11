@@ -515,7 +515,7 @@ EOF
         info "Creating '$MONGODB_USERNAME' user..."
 
         result=$(
-            mongodb_execute '$MONGODB_ROOT_USER' "$MONGODB_ROOT_PASSWORD" "" "127.0.0.1" <<EOF
+            mongodb_execute "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD" "" "127.0.0.1" <<EOF
 db.getSiblingDB('$MONGODB_DATABASE').createUser({ user: '$MONGODB_USERNAME', pwd: '$MONGODB_PASSWORD', roles: [{role: 'readWrite', db: '$MONGODB_DATABASE'}] })
 EOF
         )
