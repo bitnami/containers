@@ -48,7 +48,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.10.3`, `4.10.3-debian-10-r7`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/4.10.3-debian-10-r7/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.10.3`, `4.10.3-debian-10-r8`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/4.10.3-debian-10-r8/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse GitHub repo](https://github.com/bitnami/bitnami-docker-parse).
 
@@ -213,15 +213,40 @@ parse:
  $ docker run -d -e PARSE_HOST=my_host -p 1337:1337 --name parse -v /your/local/path/bitnami/parse:/bitnami --network=parse_network bitnami/parse
 ```
 
-Available variables:
- - `PARSE_HOST`: Parse server host. Default: **127.0.0.1**
- - `PARSE_PORT_NUMBER_NUMBER`: Parse server port. Default: **1337**
- - `PARSE_MOUNT_PATH`: Parse server mount path. Default: **/parse**
- - `PARSE_APP_ID`: Parse server App ID. Default: **myappID**
- - `PARSE_MASTER_KEY`: Parse server Master Key: **mymasterKey**
- - `PARSE_ENABLE_CLOUD_CODE`: Enable Parse Cloud Code support. Default **no**
- - `MONGODB_HOST`: Hostname for Mongodb server. Default: **mongodb**
- - `MONGODB_PORT_NUMBER`: Port used by Mongodb server. Default: **27017**
+Available environment variables:
+
+##### User and Site configuration
+
+- `PARSE_ENABLE_HTTPS`: Whether to enable HTTPS for Parse by default. Default: **no**
+- `PARSE_BIND_HOST`: Parse bind host. Default: **127.0.0.1**
+- `PARSE_HOST`: Parse server host. Default: **127.0.0.1**
+- `PARSE_PORT_NUMBER_NUMBER`: Parse server port. Default: **1337**
+- `PARSE_APP_ID`: Parse app ID. Default: **myappID**
+- `PARSE_MASTER_KEY`: Parse master key: **mymasterKey**
+- `PARSE_APP_NAME`: Parse app name. Default: **myappID**
+- `PARSE_MOUNT_PATH`: Parse server mount path. Default: **/parse**
+- `PARSE_ENABLE_CLOUD_CODE`: Enable Parse cloud code support. Default **no**
+
+##### Database connection configuration
+
+- `PARSE_DATABASE_HOST`: Hostname for the MongoDB server. Default: **mongodb**
+- `PARSE_DATABASE_PORT_NUMBER`: Port used by the MongoDB server. Default: **27017**
+- `PARSE_DATABASE_NAME`: Database name that Parse will use to connect with the database. Default: **bitnami_parse**
+- `PARSE_DATABASE_USER`: Database user that Parse will use to connect with the database. Default: **bn_parse**
+- `PARSE_DATABASE_PASSWORD`: Database password that Parse will use to connect with the database. No default.
+- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+
+##### Create a MongoDB database for DreamFactory using mongodb-client
+
+- `MONGODB_CLIENT_DATABASE_HOST`: Hostname for the MongoDB server. Default: **mongodb**
+- `MONGODB_CLIENT_DATABASE_PORT_NUMBER`: Port used by the MongoDB server. Default: **27017**
+- `MONGODB_CLIENT_DATABASE_ROOT_USER`: Database admin user. Default: **root**
+- `MONGODB_CLIENT_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No defaults.
+- `MONGODB_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mongodb-client module. No defaults.
+- `MONGODB_CLIENT_CREATE_DATABASE_USERNAME`: New database user to be created by the mongodb-client module. No defaults.
+- `MONGODB_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MONGODB_CLIENT_CREATE_DATABASE_USERNAME` user. No defaults.
+- `MONGODB_CLIENT_EXTRA_FLAGS`: Extra flags when using the mongodb-client during initialization. No defaults.
+- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
 ## How to deploy your Cloud functions with Parse Cloud Code?
 
