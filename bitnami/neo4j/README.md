@@ -170,7 +170,7 @@ neo4j:
 ### Specifying Environment Variables on the Docker command line
 
 ```console
-$ docker run -d -e NEO4J_BOLT_PORT_NUMBER=7777 --name neo4j bitnami/n3o4j:latest
+$ docker run -d -e NEO4J_BOLT_PORT_NUMBER=7777 --name neo4j bitnami/neo4j:latest
 ```
 
 ## Using your Neo4j configuration files
