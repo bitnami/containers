@@ -33,19 +33,37 @@ airflow_validate() {
         error_code=1
     }
 
+    check_multi_value() {
+        if [[ " ${2} " != *" ${!1} "* ]]; then
+            print_validation_error "The allowed values for ${1} are: ${2}"
+        fi
+    }
+
     # Check postgresql host
     [[ -z "$AIRFLOW_DATABASE_HOST" ]] && print_validation_error "Missing AIRFLOW_DATABASE_HOST"
 
     # Check LDAP parameters
-    if is_boolean_yes "$AIRFLOW_LDAP_ENABLE"; then
+    if is_boolean_yes "$AIRFLOW_LDAP_ENABLE"; then        
         [[ -z "$AIRFLOW_LDAP_URI" ]] && print_validation_error "Missing AIRFLOW_LDAP_URI"
         [[ -z "$AIRFLOW_LDAP_SEARCH" ]] && print_validation_error "Missing AIRFLOW_LDAP_SEARCH"
-        [[ -z "$AIRFLOW_LDAP_BIND_USER" ]] && print_validation_error "Missing AIRFLOW_LDAP_BIND_USER"
         [[ -z "$AIRFLOW_LDAP_UID_FIELD" ]] && print_validation_error "Missing AIRFLOW_LDAP_UID_FIELD"
-        [[ -z "$AIRFLOW_LDAP_BIND_PASSWORD" ]] && print_validation_error "Missing AIRFLOW_LDAP_BIND_PASSWORD"
+        [[ -z "$AIRFLOW_LDAP_BIND_USER" ]] && print_validation_error "Missing AIRFLOW_LDAP_BIND_USER"
+        [[ -z "$AIRFLOW_LDAP_BIND_PASSWORD" ]] && print_validation_error "Missing AIRFLOW_LDAP_BIND_PASSWORD"  
+        [[ -z "$AIRFLOW_LDAP_ROLES_MAPPING" ]] && print_validation_error "Missing AIRFLOW_LDAP_ROLES_MAPPING"
+        [[ -z "$AIRFLOW_LDAP_ROLES_SYNC_AT_LOGIN" ]] && print_validation_error "Missing AIRFLOW_LDAP_ROLES_SYNC_AT_LOGIN"
+        [[ -z "$AIRFLOW_LDAP_USER_REGISTRATION" ]] && print_validation_error "Missing AIRFLOW_LDAP_USER_REGISTRATION"
+        [[ -z "$AIRFLOW_LDAP_USER_REGISTRATION_ROLE" ]] && print_validation_error "Missing AIRFLOW_LDAP_USER_REGISTRATION_ROLE"
+
+        # Chack boolean env vars contain valid values
+        for var in "AIRFLOW_LDAP_USER_REGISTRATION" "AIRFLOW_LDAP_ROLES_SYNC_AT_LOGIN" "AIRFLOW_LDAP_USE_TLS"; do
+            check_multi_value "$var" "True False"
+        done
+
         if [[ "$AIRFLOW_LDAP_USE_TLS" == "True" ]]; then
+            [[ -z "$AIRFLOW_LDAP_ALLOW_SELF_SIGNED" ]] && print_validation_error "Missing AIRFLOW_LDAP_ALLOW_SELF_SIGNED"
             [[ -z "$AIRFLOW_LDAP_TLS_CA_CERTIFICATE" ]] && print_validation_error "Missing AIRFLOW_LDAP_TLS_CA_CERTIFICATE"
         fi
+
     fi
 
     # Check pool parameters
@@ -83,6 +101,7 @@ airflow_initialize() {
         info "Configuration file found, loading configuration"
     fi
 
+
     # Check if Airflow has already been initialized and persisted in a previous run
     local -r app_name="airflow"
     if ! is_app_initialized "$app_name"; then
@@ -90,7 +109,7 @@ airflow_initialize() {
         rm -f "$AIRFLOW_PID_FILE"
 
         airflow_wait_for_postgresql "$AIRFLOW_DATABASE_HOST" "$AIRFLOW_DATABASE_PORT_NUMBER"
-
+        
         # Initialize database
         airflow_execute_command "initdb" "db init"
 
@@ -236,20 +255,35 @@ airflow_configure_webserver_authentication() {
 
     if is_boolean_yes "$AIRFLOW_LDAP_ENABLE"; then
         info "Enabling LDAP authentication"
-        replace_in_file "$AIRFLOW_WEBSERVER_CONF_FILE" "# AUTH_USER_REGISTRATION = True" "AUTH_USER_REGISTRATION = True"
-        airflow_webserver_conf_set "AUTH_TYPE" "AUTH_LDAP"
         replace_in_file "$AIRFLOW_WEBSERVER_CONF_FILE" "# from flask_appbuilder.security.manager import AUTH_LDAP" "from flask_appbuilder.security.manager import AUTH_LDAP"
+        replace_in_file "$AIRFLOW_WEBSERVER_CONF_FILE" "from flask_appbuilder.security.manager import AUTH_DB" "# from flask_appbuilder.security.manager import AUTH_DB"
+
+        # webserver config
+        airflow_webserver_conf_set "AUTH_TYPE" "AUTH_LDAP"        
         airflow_webserver_conf_set "AUTH_LDAP_SERVER" "'$AIRFLOW_LDAP_URI'"
+
+        # searches
         airflow_webserver_conf_set "AUTH_LDAP_SEARCH" "'$AIRFLOW_LDAP_SEARCH'"
+        airflow_webserver_conf_set "AUTH_LDAP_UID_FIELD" "'$AIRFLOW_LDAP_UID_FIELD'"
+
+        # Special account for searches
         airflow_webserver_conf_set "AUTH_LDAP_BIND_USER" "'$AIRFLOW_LDAP_BIND_USER'"
         airflow_webserver_conf_set "AUTH_LDAP_BIND_PASSWORD" "'$AIRFLOW_LDAP_BIND_PASSWORD'"
-        airflow_webserver_conf_set "AUTH_LDAP_UID_FIELD" "'$AIRFLOW_LDAP_UID_FIELD'"
-        airflow_webserver_conf_set "AUTH_LDAP_USE_TLS" "$AIRFLOW_LDAP_USE_TLS"
-        airflow_webserver_conf_set "AUTH_LDAP_ALLOW_SELF_SIGNED" "$AIRFLOW_LDAP_ALLOW_SELF_SIGNED"
+
+        # User self registration
+        airflow_webserver_conf_set "AUTH_USER_REGISTRATION" "$AIRFLOW_LDAP_USER_REGISTRATION"
+        airflow_webserver_conf_set "AUTH_USER_REGISTRATION_ROLE" "'$AIRFLOW_LDAP_USER_REGISTRATION_ROLE'"
+
+        # Mapping from LDAP DN to list of FAB roles
+        airflow_webserver_conf_set "AUTH_ROLES_MAPPING" "$AIRFLOW_LDAP_ROLES_MAPPING"
+
+        # Replace user's roles at login
+        airflow_webserver_conf_set "AUTH_ROLES_SYNC_AT_LOGIN" "$AIRFLOW_LDAP_ROLES_SYNC_AT_LOGIN"
+
         if [[ "$AIRFLOW_LDAP_USE_TLS" == "True" ]]; then
+            airflow_webserver_conf_set "AUTH_LDAP_ALLOW_SELF_SIGNED" "$AIRFLOW_LDAP_ALLOW_SELF_SIGNED"
             airflow_webserver_conf_set "AUTH_LDAP_TLS_CACERTFILE" "$AIRFLOW_LDAP_TLS_CA_CERTIFICATE"
         fi
-        airflow_webserver_conf_set "AUTH_USER_REGISTRATION_ROLE" "'$AIRFLOW_USER_REGISTRATION_ROLE'"
     fi
 }
 
