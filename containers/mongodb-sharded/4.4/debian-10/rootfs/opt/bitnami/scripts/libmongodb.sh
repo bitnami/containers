@@ -215,13 +215,13 @@ mongodb_start_bg() {
     is_mongodb_running && return
 
     if am_i_root; then
-        if [ "${MONGODB_ENABLE_NUMACTL}" = true ]; then
+        if is_boolean_yes "$MONGODB_ENABLE_NUMACTL"; then
             debug_execute gosu "$MONGODB_DAEMON_USER" numactl --interleave=all "$MONGODB_BIN_DIR/mongod" "${flags[@]}"
         else
             debug_execute gosu "$MONGODB_DAEMON_USER" "$MONGODB_BIN_DIR/mongod" "${flags[@]}"
         fi
     else
-        if [ "${MONGODB_ENABLE_NUMACTL}" = true ]; then
+        if is_boolean_yes "$MONGODB_ENABLE_NUMACTL"; then
             debug_execute numactl --interleave=all "$MONGODB_BIN_DIR/mongod" "${flags[@]}"
         else
             debug_execute "$MONGODB_BIN_DIR/mongod" "${flags[@]}"
