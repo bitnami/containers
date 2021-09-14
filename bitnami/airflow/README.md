@@ -33,7 +33,7 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.1.3`, `2.1.3-debian-10-r9`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/2.1.3-debian-10-r9/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.1.3`, `2.1.3-debian-10-r10`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/2.1.3-debian-10-r10/2/debian-10/Dockerfile)
 * [`1`, `1-debian-10`, `1.10.15`, `1.10.15-debian-10-r148` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/1.10.15-debian-10-r148/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow).
@@ -119,6 +119,7 @@ If you want to run the application manually instead of using `docker-compose`, t
     -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
     -e AIRFLOW_LOAD_EXAMPLES=yes \
+    -e AIRFLOW_WEBSERVER_HOST=127.0.0.1 \
     --net airflow-tier \
     --volume airflow_scheduler_data:/bitnami \
     bitnami/airflow-scheduler:latest
@@ -134,6 +135,7 @@ If you want to run the application manually instead of using `docker-compose`, t
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
     -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
+    -e AIRFLOW_WEBSERVER_HOST=127.0.0.1 \
     --net airflow-tier \
     --volume airflow_worker_data:/bitnami \
     bitnami/airflow-worker:latest
@@ -340,13 +342,16 @@ The Airflow instance can be customized by specifying environment variables on th
 - `AIRFLOW_LDAP_ENABLE`: Enable LDAP authentication. Default: **no**
 - `AIRFLOW_LDAP_URI`: LDAP server URI. No defaults.
 - `AIRFLOW_LDAP_SEARCH`: LDAP search base. No defaults.
+- `AIRFLOW_LDAP_UID_FIELD`: LDAP field used for uid. No defaults.
 - `AIRFLOW_LDAP_BIND_USER`: LDAP user name. No defaults.
 - `AIRFLOW_LDAP_BIND_PASSWORD`: LDAP user password. No defaults.
-- `AIRFLOW_LDAP_UID_FIELD`: LDAP field used for uid. Default: **uid**.
+- `AIRFLOW_USER_REGISTRATION`: User self registration. Default: **True**
+- `AIRFLOW_USER_REGISTRATION_ROLE`: Role for the created user. No defaults.
+- `AIRFLOW_LDAP_ROLES_MAPPING`: Mapping from LDAP DN to a list of Airflow roles. No defaults.
+- `AIRFLOW_LDAP_ROLES_SYNC_AT_LOGIN`: Replace ALL the user's roles each login, or only on registration. Default: **True**
 - `AIRFLOW_LDAP_USE_TLS`: Use LDAP SSL. Defaults: **False**.
-- `AIRFLOW_LDAP_ALLOW_SELF_SIGNED`: Allow self signed certicates in LDAP ssl. Default: **True**.
+- `AIRFLOW_LDAP_ALLOW_SELF_SIGNED`: Allow self signed certicates in LDAP ssl. Default: **True**
 - `AIRFLOW_LDAP_TLS_CA_CERTIFICATE`: File that store the CA for LDAP ssl. No defaults.
-- `AIRFLOW_USER_REGISTRATION_ROLE`: Role for the created user. Default: **Public**
 
 > In addition to the previous environment variables, all the parameters from the configuration file can be overwritten by using environment variables with this format: `AIRFLOW__{SECTION}__{KEY}`. Note the double underscores.
 
