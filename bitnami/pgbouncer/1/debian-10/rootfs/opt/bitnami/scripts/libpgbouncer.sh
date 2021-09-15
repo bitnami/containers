@@ -91,6 +91,19 @@ pgbouncer_validate() {
         fi
     fi
 
+    if [[ "$PGBOUNCER_SERVER_TLS_SSLMODE" != "disable" ]]; then
+        # TLS Checks
+        if [[ "$PGBOUNCER_SERVER_TLS_CERT_FILE" != "" ] && [ ! -f "$PGBOUNCER_SERVER_TLS_CERT_FILE" ]]; then
+            print_validation_error "The X.509 server certificate file in the specified path ${PGBOUNCER_SERVER_TLS_CERT_FILE} does not exist"
+        fi
+        if [[ "$PGBOUNCER_SERVER_TLS_KEY_FILE" != "" ] && [ ! -f "$PGBOUNCER_SERVER_TLS_KEY_FILE" ]]; then
+            print_validation_error "The server private key file in the specified path ${PGBOUNCER_SERVER_TLS_KEY_FILE} does not exist"
+        fi
+        elif [[ "$PGBOUNCER_SERVER_TLS_CA_FILE" != "" ] && [ ! -f "$PGBOUNCER_SERVER_TLS_CA_FILE" ]]; then
+            print_validation_error "The server CA X.509 certificate file in the specified path ${PGBOUNCER_SERVER_TLS_CA_FILE} does not exist"
+        fi
+    fi
+
     check_allowed_port PGBOUNCER_PORT
     check_ip_value PGBOUNCER_LISTEN_ADDRESS
 
@@ -197,19 +210,32 @@ pgbouncer_initialize() {
         ini-file set --section "pgbouncer" --key "pidfile" --value "$PGBOUNCER_PID_FILE" "$PGBOUNCER_CONF_FILE"
         ini-file set --section "pgbouncer" --key "logfile" --value "$PGBOUNCER_LOG_FILE" "$PGBOUNCER_CONF_FILE"
         ini-file set --section "pgbouncer" --key "admin_users" --value "$POSTGRESQL_USERNAME" "$PGBOUNCER_CONF_FILE"
-        ini-file set --section "pgbouncer" --key "client_tls_sslmode" --value "$PGBOUNCER_CLIENT_TLS_SSLMODE" "$PGBOUNCER_CONF_FILE"
         if ! is_empty_value "$PGBOUNCER_QUERY_WAIT_TIMEOUT"; then
             ini-file set --section "pgbouncer" --key "query_wait_timeout" --value "$PGBOUNCER_QUERY_WAIT_TIMEOUT" "$PGBOUNCER_CONF_FILE"
         fi
         if ! is_empty_value "$PGBOUNCER_IGNORE_STARTUP_PARAMETERS"; then
             ini-file set --section "pgbouncer" --key "ignore_startup_parameters" --value "$PGBOUNCER_IGNORE_STARTUP_PARAMETERS" "$PGBOUNCER_CONF_FILE"
         fi
+        ini-file set --section "pgbouncer" --key "client_tls_sslmode" --value "$PGBOUNCER_CLIENT_TLS_SSLMODE" "$PGBOUNCER_CONF_FILE"
         if [[ "$PGBOUNCER_CLIENT_TLS_SSLMODE" != "disable" ]]; then
             ini-file set --section "pgbouncer" --key "client_tls_cert_file" --value "$PGBOUNCER_CLIENT_TLS_CERT_FILE" "$PGBOUNCER_CONF_FILE"
             ini-file set --section "pgbouncer" --key "client_tls_key_file" --value "$PGBOUNCER_CLIENT_TLS_KEY_FILE" "$PGBOUNCER_CONF_FILE"
             ! is_empty_value "$PGBOUNCER_CLIENT_TLS_CA_FILE" && ini-file set --section "pgbouncer" --key "client_tls_ca_file" --value "$PGBOUNCER_CLIENT_TLS_CA_FILE" "$PGBOUNCER_CONF_FILE"
             ini-file set --section "pgbouncer" --key "client_tls_ciphers" --value "$PGBOUNCER_CLIENT_TLS_CIPHERS" "$PGBOUNCER_CONF_FILE"
         fi
+        ! is_empty_value "$PGBOUNCER_SERVER_TLS_SSLMODE" && ini-file set --section "pgbouncer" --key "server_tls_sslmode" --value "$PGBOUNCER_SERVER_TLS_SSLMODE" "$PGBOUNCER_CONF_FILE"
+        if [[ "$PGBOUNCER_SERVER_TLS_SSLMODE" != "disable" ]]; then
+            ! is_empty_value "$PGBOUNCER_SERVER_TLS_CERT_FILE" && ini-file set --section "pgbouncer" --key "server_tls_cert_file" --value "$PGBOUNCER_SERVER_TLS_CERT_FILE" "$PGBOUNCER_CONF_FILE"
+            ! is_empty_value "$PGBOUNCER_SERVER_TLS_KEY_FILE" && ini-file set --section "pgbouncer" --key "server_tls_key_file" --value "$PGBOUNCER_SERVER_TLS_KEY_FILE" "$PGBOUNCER_CONF_FILE"
+            ! is_empty_value "$PGBOUNCER_SERVER_TLS_CA_FILE" && ini-file set --section "pgbouncer" --key "server_tls_ca_file" --value "$PGBOUNCER_SERVER_TLS_CA_FILE" "$PGBOUNCER_CONF_FILE"
+            ! is_empty_value "$PGBOUNCER_SERVER_TLS_CIPHERS" && ini-file set --section "pgbouncer" --key "server_tls_ciphers" --value "$PGBOUNCER_SERVER_TLS_CIPHERS" "$PGBOUNCER_CONF_FILE"
+        fi
+        PGBOUNCER_SERVER_TLS_SSLMODE
+    PGBOUNCER_SERVER_TLS_CA_FILE
+    PGBOUNCER_SERVER_TLS_CERT_FILE
+    PGBOUNCER_SERVER_TLS_KEY_FILE
+    PGBOUNCER_SERVER_TLS_PROTOCOLS
+    PGBOUNCER_SERVER_TLS_CIPHERS
     else
         debug "Configuration file is mounted externally, skipping configuration"
     fi
