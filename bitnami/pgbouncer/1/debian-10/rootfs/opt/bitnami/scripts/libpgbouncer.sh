@@ -93,13 +93,13 @@ pgbouncer_validate() {
 
     if [[ "$PGBOUNCER_SERVER_TLS_SSLMODE" != "disable" ]]; then
         # TLS Checks
-        if [[ "$PGBOUNCER_SERVER_TLS_CERT_FILE" != "" ] && [ ! -f "$PGBOUNCER_SERVER_TLS_CERT_FILE" ]]; then
+        if [[ "$PGBOUNCER_SERVER_TLS_CERT_FILE" != "" ]] && [[ ! -f "$PGBOUNCER_SERVER_TLS_CERT_FILE" ]]; then
             print_validation_error "The X.509 server certificate file in the specified path ${PGBOUNCER_SERVER_TLS_CERT_FILE} does not exist"
         fi
-        if [[ "$PGBOUNCER_SERVER_TLS_KEY_FILE" != "" ] && [ ! -f "$PGBOUNCER_SERVER_TLS_KEY_FILE" ]]; then
+        if [[ "$PGBOUNCER_SERVER_TLS_KEY_FILE" != "" ]] && [[ ! -f "$PGBOUNCER_SERVER_TLS_KEY_FILE" ]]; then
             print_validation_error "The server private key file in the specified path ${PGBOUNCER_SERVER_TLS_KEY_FILE} does not exist"
         fi
-        elif [[ "$PGBOUNCER_SERVER_TLS_CA_FILE" != "" ] && [ ! -f "$PGBOUNCER_SERVER_TLS_CA_FILE" ]]; then
+        if [[ "$PGBOUNCER_SERVER_TLS_CA_FILE" != "" ]] && [[ ! -f "$PGBOUNCER_SERVER_TLS_CA_FILE" ]]; then
             print_validation_error "The server CA X.509 certificate file in the specified path ${PGBOUNCER_SERVER_TLS_CA_FILE} does not exist"
         fi
     fi
@@ -228,14 +228,9 @@ pgbouncer_initialize() {
             ! is_empty_value "$PGBOUNCER_SERVER_TLS_CERT_FILE" && ini-file set --section "pgbouncer" --key "server_tls_cert_file" --value "$PGBOUNCER_SERVER_TLS_CERT_FILE" "$PGBOUNCER_CONF_FILE"
             ! is_empty_value "$PGBOUNCER_SERVER_TLS_KEY_FILE" && ini-file set --section "pgbouncer" --key "server_tls_key_file" --value "$PGBOUNCER_SERVER_TLS_KEY_FILE" "$PGBOUNCER_CONF_FILE"
             ! is_empty_value "$PGBOUNCER_SERVER_TLS_CA_FILE" && ini-file set --section "pgbouncer" --key "server_tls_ca_file" --value "$PGBOUNCER_SERVER_TLS_CA_FILE" "$PGBOUNCER_CONF_FILE"
+            ! is_empty_value "$PGBOUNCER_SERVER_TLS_PROTOCOLS" && ini-file set --section "pgbouncer" --key "server_tls_ca_file" --value "$PGBOUNCER_SERVER_TLS_PROTOCOLS" "$PGBOUNCER_CONF_FILE"
             ! is_empty_value "$PGBOUNCER_SERVER_TLS_CIPHERS" && ini-file set --section "pgbouncer" --key "server_tls_ciphers" --value "$PGBOUNCER_SERVER_TLS_CIPHERS" "$PGBOUNCER_CONF_FILE"
         fi
-        PGBOUNCER_SERVER_TLS_SSLMODE
-    PGBOUNCER_SERVER_TLS_CA_FILE
-    PGBOUNCER_SERVER_TLS_CERT_FILE
-    PGBOUNCER_SERVER_TLS_KEY_FILE
-    PGBOUNCER_SERVER_TLS_PROTOCOLS
-    PGBOUNCER_SERVER_TLS_CIPHERS
     else
         debug "Configuration file is mounted externally, skipping configuration"
     fi
