@@ -134,7 +134,7 @@ is_minio_running() {
 #########################
 minio_start_bg() {
     local -r exec=$(command -v minio)
-    local -a args=("server" "--certs-dir" "${MINIO_CERTSDIR}")
+    local -a args=("server" "--certs-dir" "${MINIO_CERTSDIR}" "--console-address" ":${MINIO_CONSOLE_PORT_NUMBER}")
     local -a nodes
 
     if is_boolean_yes "$MINIO_DISTRIBUTED_MODE_ENABLED"; then
@@ -147,7 +147,7 @@ minio_start_bg() {
             fi
         done
     else
-        args+=("--console-address" ":${MINIO_CONSOLE_PORT_NUMBER}" "${MINIO_DATADIR}")
+        args+=("${MINIO_DATADIR}")
     fi
 
     is_minio_running && return
