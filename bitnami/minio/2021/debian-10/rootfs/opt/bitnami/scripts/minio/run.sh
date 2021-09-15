@@ -17,7 +17,7 @@ eval "$(minio_env)"
 
 # Constants
 EXEC=$(command -v minio)
-ARGS=("server" "--certs-dir" "${MINIO_CERTSDIR}")
+ARGS=("server" "--certs-dir" "${MINIO_CERTSDIR}" "--console-address" ":${MINIO_CONSOLE_PORT_NUMBER}")
 # Add any extra flags passed to this script
 ARGS+=("$@")
 if is_boolean_yes "$MINIO_DISTRIBUTED_MODE_ENABLED"; then
@@ -30,7 +30,7 @@ if is_boolean_yes "$MINIO_DISTRIBUTED_MODE_ENABLED"; then
         fi
     done
 else
-    ARGS+=("--console-address" ":${MINIO_CONSOLE_PORT_NUMBER}" "${MINIO_DATADIR}")
+    ARGS+=("${MINIO_DATADIR}")
 fi
 
 info "** Starting MinIO **"
