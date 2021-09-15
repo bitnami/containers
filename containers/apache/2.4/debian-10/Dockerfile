@@ -11,7 +11,7 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl gzip libc6 libexpat1 libffi6 libgcc1 libgmp10 libgnutls30 libhogweed4 libicu63 libidn2-0 libldap-2.4-2 liblzma5 libnettle6 libnghttp2-14 libp11-kit0 libpcre3 libsasl2-2 libssl1.1 libstdc++6 libtasn1-6 libunistring2 libxml2 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.48-2" --checksum ce45103c76533b1fc3b07466dfb0c00aa9fa54b736dbd5e22160ef775233c880
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.48-3" --checksum c54bb354c5818d1170479f69c022b3b5a068a9f4267686d1f94597bc85ba16ab
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
@@ -20,7 +20,7 @@ ENV APACHE_ENABLE_CUSTOM_PORTS="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="apache" \
-    BITNAMI_IMAGE_VERSION="2.4.48-debian-10-r94" \
+    BITNAMI_IMAGE_VERSION="2.4.48-debian-10-r95" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/apache/bin:$PATH"
 
 EXPOSE 8080 8443
