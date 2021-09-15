@@ -9,8 +9,8 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libargon2-1 libaudit1 libbsd0 libbz2-1.0 libc6 libcap-ng0 libcom-err2 libcurl4 libexpat1 libffi6 libfftw3-double3 libfontconfig1 libfreetype6 libgcc1 libgcrypt20 libglib2.0-0 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjemalloc2 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblcms2-2 libldap-2.4-2 liblqr-1-0 libltdl7 liblzma5 libmagickcore-6.q16-6 libmagickwand-6.q16-6 libmcrypt4 libmemcached11 libmemcachedutil2 libncurses6 libnettle6 libnghttp2-14 libp11-kit0 libpam0g libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsodium23 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5deb1 libtinfo6 libunistring2 libuuid1 libwebp6 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxslt1.1 libzip4 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.3.30-1" --checksum f1e89020be3a45b97c7c9a5584acef9059ff28d9f320e8d9d3612a21472e8be3
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.48-2" --checksum ce45103c76533b1fc3b07466dfb0c00aa9fa54b736dbd5e22160ef775233c880
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.3.30-2" --checksum 551e55f86c217d8e28c86657e8a89833cf5ac263aa23ae6a0c70147fdf66ba26
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.48-3" --checksum c54bb354c5818d1170479f69c022b3b5a068a9f4267686d1f94597bc85ba16ab
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.2.40-2" --checksum bd83f77e6784df6d20daaf87c0399bb8cd0eab8ada12c2753ff827ecdaebfd13
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.30-0" --checksum c264d9d3db96aa91ec2d2de2d4ab862fd059f1fe61271dbed4536c245beb0206
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
@@ -29,7 +29,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="prestashop" \
-    BITNAMI_IMAGE_VERSION="1.7.7-8-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="1.7.7-8-debian-10-r1" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
