@@ -27,7 +27,15 @@ flags+=("$@")
 
 info "** Starting MongoDB **"
 if am_i_root; then
-    exec gosu "$MONGODB_DAEMON_USER" "$cmd" "${flags[@]}"
+    if is_boolean_yes "$MONGODB_ENABLE_NUMACTL"; then
+        exec gosu "$MONGODB_DAEMON_USER" numactl --interleave=all "$cmd" "${flags[@]}"
+    else
+        exec gosu "$MONGODB_DAEMON_USER" "$cmd" "${flags[@]}"
+    fi
 else
-    exec "$cmd" "${flags[@]}"
+    if is_boolean_yes "$MONGODB_ENABLE_NUMACTL"; then
+        exec numactl --interleave=all "$cmd" "${flags[@]}"
+    else
+        exec "$cmd" "${flags[@]}"
+    fi
 fi
