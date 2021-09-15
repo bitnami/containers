@@ -1,0 +1,4 @@
+version: '2'
+services:
+  dataplatform-exporter:
+    image: docker.io/bitnami/dataplatform-exporter:0
