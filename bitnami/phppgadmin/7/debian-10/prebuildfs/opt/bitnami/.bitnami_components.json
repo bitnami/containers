@@ -1,10 +1,10 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "ce45103c76533b1fc3b07466dfb0c00aa9fa54b736dbd5e22160ef775233c880",
+        "digest": "c54bb354c5818d1170479f69c022b3b5a068a9f4267686d1f94597bc85ba16ab",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.48-2"
+        "version": "2.4.48-3"
     },
     "gosu": {
         "arch": "amd64",
@@ -15,17 +15,17 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "c264d9d3db96aa91ec2d2de2d4ab862fd059f1fe61271dbed4536c245beb0206",
+        "digest": "b94aeadeeef94f7a3ca45f1a2e6c2afe33e24789e9f9c26c803ba307744ac5a0",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.30-0"
+        "version": "7.4.23-0"
     },
     "php": {
         "arch": "amd64",
-        "digest": "2f9661e347520a9499345e241ed219410cbb857b907cd1c5a15bf2db33d6f1e2",
+        "digest": "4b2e1684ad7400c10e3f54b77c3edd8bf6a36126ad48483e41e9c71967dc5027",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.30-0"
+        "version": "7.4.23-1"
     },
     "phppgadmin": {
         "arch": "amd64",
