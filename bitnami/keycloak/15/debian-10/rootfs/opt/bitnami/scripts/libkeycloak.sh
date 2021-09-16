@@ -65,7 +65,7 @@ keycloak_validate() {
     check_allowed_port KEYCLOAK_HTTP_PORT
     check_allowed_port KEYCLOAK_HTTPS_PORT
 
-    for var in KEYCLOAK_CREATE_ADMIN_USER KEYCLOAK_ENABLE_TLS KEYCLOAK_ENABLE_STATISTICS KEYCLOAK_DATABASE_TLS; do
+    for var in KEYCLOAK_CREATE_ADMIN_USER KEYCLOAK_ENABLE_TLS KEYCLOAK_ENABLE_STATISTICS; do
         if ! is_true_false_value "${!var}"; then
             print_validation_error "The allowed values for $var are [true, false]"
         fi
@@ -95,7 +95,7 @@ keycloak_configure_database() {
 embed-server --server-config=${KEYCLOAK_CONF_FILE} --std-out=echo
 batch
 /subsystem=datasources/data-source=KeycloakDS: remove()
-/subsystem=datasources/data-source=KeycloakDS: add(jndi-name=java:jboss/datasources/KeycloakDS,enabled=true,use-java-context=true,use-ccm=true, connection-url=jdbc:postgresql://${KEYCLOAK_DATABASE_HOST}:${KEYCLOAK_DATABASE_PORT}/${KEYCLOAK_DATABASE_NAME}?useSSL\=${KEYCLOAK_DATABASE_TLS}, driver-name=postgresql)
+/subsystem=datasources/data-source=KeycloakDS: add(jndi-name=java:jboss/datasources/KeycloakDS,enabled=true,use-java-context=true,use-ccm=true, connection-url=jdbc:postgresql://${KEYCLOAK_DATABASE_HOST}:${KEYCLOAK_DATABASE_PORT}/${KEYCLOAK_DATABASE_NAME}${KEYCLOAK_JDBC_PARAMS} driver-name=postgresql)
 /subsystem=datasources/data-source=KeycloakDS: write-attribute(name=user-name, value=\${env.KEYCLOAK_DATABASE_USER})
 /subsystem=datasources/data-source=KeycloakDS: write-attribute(name=check-valid-connection-sql, value="SELECT 1")
 /subsystem=datasources/data-source=KeycloakDS: write-attribute(name=background-validation, value=true)
