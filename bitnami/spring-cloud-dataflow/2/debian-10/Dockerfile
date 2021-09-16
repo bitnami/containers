@@ -10,7 +10,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.302-0" --checksum 59c0b7440797c7110c76959dbbce5235359b52adf62f99218b2718c04f2d67b6
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.12.2-0" --checksum 37fde3fa2288bf1aeaeac74a7666256ef9a1142ea2a526ec8d1a23a90414ec50
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.13.0-0" --checksum b5a6446130d4b7b7592fbc0273e8186a40cf8d14d62d23b140c7fc84fae70180
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "spring-cloud-dataflow" "2.8.2-0" --checksum ea9e15f98d8d4a43513addd01bc505c15254ba73de8fde0be00cec12101eb3d1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
@@ -18,7 +18,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/spring-cloud-dataflow/postunpack.sh
 ENV BITNAMI_APP_NAME="spring-cloud-dataflow" \
-    BITNAMI_IMAGE_VERSION="2.8.2-debian-10-r15" \
+    BITNAMI_IMAGE_VERSION="2.8.2-debian-10-r16" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"
 
 USER 1001
