@@ -33,7 +33,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.17`, `1.17-debian-10`, `1.17.1`, `1.17.1-debian-10-r1` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.17.1-debian-10-r1/1.17/debian-10/Dockerfile)
+* [`1.17`, `1.17-debian-10`, `1.17.1`, `1.17.1-debian-10-r2` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.17.1-debian-10-r2/1.17/debian-10/Dockerfile)
 * [`1.16`, `1.16-debian-10`, `1.16.8`, `1.16.8-debian-10-r1`, `latest` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.16.8-debian-10-r1/1.16/debian-10/Dockerfile)
 * [`1.15`, `1.15-debian-10`, `1.15.15`, `1.15.15-debian-10-r41` (1.15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.15.15-debian-10-r41/1.15/debian-10/Dockerfile)
 
