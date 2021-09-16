@@ -141,8 +141,49 @@ am_i_root() {
     if [[ "$(id -u)" = "0" ]]; then
         true
     else
-	false
+        false
     fi
+}
+
+########################
+# Print OS metadata
+# Arguments:
+#   $1 - Flag name
+# Flags:
+#   --id - Distro ID
+#   --version - Distro version
+#   --branch - Distro branch
+#   --codename - Distro codename
+# Returns:
+#   String
+#########################
+get_os_metadata() {
+    local -r flag_name="${1:?missing flag}"
+    # Helper function
+    get_os_release_metadata() {
+        local -r env_name="${1:?missing environment variable name}"
+        (
+            . /etc/os-release
+            echo "${!env_name}"
+        )
+    }
+    case "$flag_name" in
+        --id)
+            get_os_release_metadata ID
+            ;;
+        --version)
+            get_os_release_metadata VERSION_ID
+            ;;
+        --branch)
+            get_os_release_metadata VERSION_ID | sed 's/\..*//'
+            ;;
+        --codename)
+            get_os_release_metadata VERSION_CODENAME
+            ;;
+        *)
+            error "Unknown flag ${flag_name}"
+            return 1
+    esac
 }
 
 ########################
