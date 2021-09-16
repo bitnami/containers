@@ -83,6 +83,7 @@ The Bitnami PgBouncer container requires a running PostgreSQL installation to co
 - `POSTGRESQL_DATABASE`: Backend PostgreSQL Database name to connect to. Default: **postgres**.
 - `POSTGRESQL_HOST`: Backend PostgreSQL hostname. Default: **postgresql**.
 - `POSTGRESQL_PORT`: Backend PostgreSQL port. Default: **5432**.
+- `PGBOUNCER_SET_USER`: If you want the above backend PostgreSQL username to be included in the database string, set this to `yes`. Default **No**.
 
 ## Port and address binding
 
@@ -111,6 +112,11 @@ To expose the same database name as the backend, set `PGBOUNCER_DATABASE="$POSTG
 ## Other options
 
 - `PGBOUNCER_IGNORE_STARTUP_PARAMETERS`: you can use this to set `ignore_startup_parameters` in the auto-generated `pgbouncer.ini`. This can be useful for solving certain connection issues. See https://www.pgbouncer.org/config.html for more details.
+- `PGBOUNCER_POOL_MODE` : you can use this to set `pool_mode` in the auto-generated `pgbouncer.ini`.
+- `PGBOUNCER_MAX_CLIENT_CONN` : you can use this to set `max_client_conn` in the auto-generated `pgbouncer.ini`.
+- `PGBOUNCER_IDLE_TRANSACTION_TIMEOUT` : you can use this to set `idle_transaction_timeout` in the auto-generated `pgbouncer.ini`.
+- `PGBOUNCER_DEFAULT_POOL_SIZE` : you can use this to set `default_pool_size` in the auto-generated `pgbouncer.ini`.
+- `PGBOUNCER_UNIX_SOCKET_DIR` : you can use this to set `unix_socket_dir` in the auto-generated `pgbouncer.ini`.
 
 ## Initializing a new instance
 
