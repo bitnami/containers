@@ -89,6 +89,11 @@ Available options are 'primary/secondary/arbiter/hidden'"
         print_validation_error "$error_message"
     fi
 
+    if ! is_boolean_yes "$ALLOW_EMPTY_PASSWORD" && [[ -n "$MONGODB_METRICS_USERNAME" ]] && [[ -z "$MONGODB_METRICS_PASSWORD" ]]; then
+        error_message="The MONGODB_METRICS_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is only recommended for development."
+        print_validation_error "$error_message"
+    fi
+
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
@@ -517,6 +522,16 @@ EOF
         result=$(
             mongodb_execute "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD" "" "127.0.0.1" <<EOF
 db.getSiblingDB('$MONGODB_DATABASE').createUser({ user: '$MONGODB_USERNAME', pwd: '$MONGODB_PASSWORD', roles: [{role: 'readWrite', db: '$MONGODB_DATABASE'}] })
+EOF
+        )
+    fi
+
+    if [[ -n "$MONGODB_METRICS_USERNAME" ]] && [[ -n "$MONGODB_METRICS_PASSWORD" ]]; then
+        info "Creating '$MONGODB_METRICS_USERNAME' user..."
+
+        result=$(
+            mongodb_execute 'root' "$MONGODB_ROOT_PASSWORD" "" "127.0.0.1" <<EOF
+db.getSiblingDB('admin').createUser({ user: '$MONGODB_METRICS_USERNAME', pwd: '$MONGODB_METRICS_PASSWORD', roles: [{role: 'clusterMonitor', db: 'admin'},{ role: 'read', db: 'local' }] })
 EOF
         )
     fi
