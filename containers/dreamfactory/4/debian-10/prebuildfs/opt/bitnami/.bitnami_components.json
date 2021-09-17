@@ -1,10 +1,10 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "c54bb354c5818d1170479f69c022b3b5a068a9f4267686d1f94597bc85ba16ab",
+        "digest": "29ebcdb7c2573eb352415a810cc509d9838a64f160b0188fa4b0250067da14d2",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.48-3"
+        "version": "2.4.49-0"
     },
     "dreamfactory": {
         "arch": "amd64",
@@ -29,10 +29,10 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "c264d9d3db96aa91ec2d2de2d4ab862fd059f1fe61271dbed4536c245beb0206",
+        "digest": "616c43aba3c294a1cd4fb45aa3d618b2ee2761fe7c2e9061ae429965abba7927",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.30-0"
+        "version": "7.3.30-1"
     },
     "mongodb-client": {
         "arch": "amd64",
