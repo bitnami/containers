@@ -34,16 +34,20 @@ pgbouncer_validate() {
     trust_enabled_warn() {
         warn "You set the environment variable PGBOUNCER_AUTH_TYPE=${PGBOUNCER_AUTH_TYPE}. For safety reasons, do not use this flag in a production environment."
     }
-    empty_password_error() {
-        print_validation_error "The $1 environment variable is empty or not set. Set the environment variable PGBOUNCER_AUTH_TYPE=trust to allow the container to be started with blank passwords. This is recommended only for development."
+    check_empty_value() {
+        if is_empty_value "${!1}"; then
+            print_validation_error "${1} must be set"
+        fi
     }
-
-    check_allowed_port() {
+    check_multi_value() {
+        if [[ " ${2} " != *" ${!1} "* ]]; then
+            print_validation_error "The allowed values for ${1} are: ${2}"
+        fi
+    }
+    check_valid_port() {
         local port_var="${1:?missing port variable}"
-        local -a validate_port_args=()
-        ! am_i_root && validate_port_args+=("-unprivileged")
-        validate_port_args+=("${!port_var}")
-        if ! err=$(validate_port "${validate_port_args[@]}"); then
+        local err
+        if ! err="$(validate_port "${!port_var}")"; then
             print_validation_error "An invalid port was specified in the environment variable ${port_var}: ${err}."
         fi
     }
@@ -58,22 +62,21 @@ pgbouncer_validate() {
         fi
     }
 
-    if [[ "$PGBOUNCER_AUTH_TYPE" == "trust" ]]; then
+    check_valid_port "PGBOUNCER_PORT"
+    check_ip_value "PGBOUNCER_LISTEN_ADDRESS"
+    check_multi_value "PGBOUNCER_AUTH_TYPE" "any cert md5 hba pam plain scram-sha-256 trust"
+    ! is_empty_value "$PGBOUNCER_POOL_MODE" && check_multi_value "PGBOUNCER_POOL_MODE" "session statement transaction"
+    if [[ "$PGBOUNCER_AUTH_TYPE" = "trust" ]]; then
         trust_enabled_warn
     else
-        if [[ -z "$POSTGRESQL_PASSWORD" ]]; then
-            empty_password_error "POSTGRESQL_PASSWORD"
-        fi
+        check_empty_value "POSTGRESQL_PASSWORD"
         if ((${#POSTGRESQL_PASSWORD} > 100)); then
             print_validation_error "The password cannot be longer than 100 characters. Set the environment variable POSTGRESQL_PASSWORD with a shorter value"
         fi
-        if [[ -n "$POSTGRESQL_USERNAME" ]] && [[ -z "$POSTGRESQL_PASSWORD" ]]; then
-            empty_password_error "POSTGRESQL_PASSWORD"
-        fi
     fi
 
+    # TLS Checks
     if [[ "$PGBOUNCER_CLIENT_TLS_SSLMODE" != "disable" ]]; then
-        # TLS Checks
         if [[ -z "$PGBOUNCER_CLIENT_TLS_CERT_FILE" ]]; then
             print_validation_error "You must provide a X.509 certificate in order to use TLS"
         elif [[ ! -f "$PGBOUNCER_CLIENT_TLS_CERT_FILE" ]]; then
@@ -90,9 +93,6 @@ pgbouncer_validate() {
             print_validation_error "The CA X.509 certificate file in the specified path ${PGBOUNCER_CLIENT_TLS_CA_FILE} does not exist"
         fi
     fi
-
-    check_allowed_port PGBOUNCER_PORT
-    check_ip_value PGBOUNCER_LISTEN_ADDRESS
 
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
@@ -189,27 +189,16 @@ pgbouncer_initialize() {
     info "Creating configuration file"
     # Create configuration
     if ! pgbouncer_is_file_external "pgbouncer.ini"; then
-        # Build DB string based on what the user has configured
+        # Build DB string based on user preferences
         # Allow for wildcard db config
         local database_value="host=$POSTGRESQL_HOST port=$POSTGRESQL_PORT"
-        if is_boolean_yes "$PGBOUNCER_SET_USER"; then
+        if is_boolean_yes "$PGBOUNCER_SET_DATABASE_USER"; then
             database_value+=" user=$POSTGRESQL_USERNAME"
         fi
         if [[ "$PGBOUNCER_DATABASE" != "*" ]]; then
             database_value+=" dbname=$POSTGRESQL_DATABASE"
         fi
         ini-file set --section "databases" --key "$PGBOUNCER_DATABASE" --value "$database_value" "$PGBOUNCER_CONF_FILE"
-        ini-file set --section "pgbouncer" --key "listen_port" --value "$PGBOUNCER_PORT" "$PGBOUNCER_CONF_FILE"
-        ini-file set --section "pgbouncer" --key "listen_addr" --value "$PGBOUNCER_LISTEN_ADDRESS" "$PGBOUNCER_CONF_FILE"
-        ini-file set --section "pgbouncer" --key "auth_file" --value "$PGBOUNCER_AUTH_FILE" "$PGBOUNCER_CONF_FILE"
-        ini-file set --section "pgbouncer" --key "auth_type" --value "$PGBOUNCER_AUTH_TYPE" "$PGBOUNCER_CONF_FILE"
-        ini-file set --section "pgbouncer" --key "pidfile" --value "$PGBOUNCER_PID_FILE" "$PGBOUNCER_CONF_FILE"
-        ini-file set --section "pgbouncer" --key "logfile" --value "$PGBOUNCER_LOG_FILE" "$PGBOUNCER_CONF_FILE"
-        ini-file set --section "pgbouncer" --key "admin_users" --value "$POSTGRESQL_USERNAME" "$PGBOUNCER_CONF_FILE"
-        ini-file set --section "pgbouncer" --key "client_tls_sslmode" --value "$PGBOUNCER_CLIENT_TLS_SSLMODE" "$PGBOUNCER_CONF_FILE"
-        if ! is_empty_value "$PGBOUNCER_QUERY_WAIT_TIMEOUT"; then
-            ini-file set --section "pgbouncer" --key "query_wait_timeout" --value "$PGBOUNCER_QUERY_WAIT_TIMEOUT" "$PGBOUNCER_CONF_FILE"
-        fi
         local -r -a key_value_pairs=(
             "listen_port:${PGBOUNCER_PORT}"
             "listen_addr:${PGBOUNCER_LISTEN_ADDRESS}"
@@ -220,7 +209,6 @@ pgbouncer_initialize() {
             "admin_users:${POSTGRESQL_USERNAME}"
             "client_tls_sslmode:${PGBOUNCER_CLIENT_TLS_SSLMODE}"
             "query_wait_timeout:${PGBOUNCER_QUERY_WAIT_TIMEOUT}"
-            "unit_socket_dir:${PGBOUNCER_UNIX_SOCKET_DIR}"
             "pool_mode:${PGBOUNCER_POOL_MODE}"
             "max_client_conn:${PGBOUNCER_MAX_CLIENT_CONN}"
             "idle_transaction_timeout:${PGBOUNCER_IDLE_TRANSACTION_TIMEOUT}"
@@ -228,15 +216,11 @@ pgbouncer_initialize() {
             "ignore_startup_parameters:${PGBOUNCER_IGNORE_STARTUP_PARAMETERS}"
         )
         for pair in "${key_value_pairs[@]}"; do
-            local key="$(awk -F: '{print $1}' <<< "$pair")"
-            local value="$(awk -F: '{print $2}' <<< "$pair")"
-            if ! is_empty_value "${value}"); then
-                ini-file set --section "pgbouncer" --key "${key}" --value "${value}" "$PGBOUNCER_CONF_FILE"
-            fi
+            local key value
+            key="$(awk -F: '{print $1}' <<< "$pair")"
+            value="$(awk -F: '{print $2}' <<< "$pair")"
+            ! is_empty_value "${value}" && ini-file set --section "pgbouncer" --key "${key}" --value "${value}" "$PGBOUNCER_CONF_FILE"
         done
-        if ! is_empty_value "$PGBOUNCER_IGNORE_STARTUP_PARAMETERS"; then
-            ini-file set --section "pgbouncer" --key "ignore_startup_parameters" --value "$PGBOUNCER_IGNORE_STARTUP_PARAMETERS" "$PGBOUNCER_CONF_FILE"
-        fi
         if [[ "$PGBOUNCER_CLIENT_TLS_SSLMODE" != "disable" ]]; then
             ini-file set --section "pgbouncer" --key "client_tls_cert_file" --value "$PGBOUNCER_CLIENT_TLS_CERT_FILE" "$PGBOUNCER_CONF_FILE"
             ini-file set --section "pgbouncer" --key "client_tls_key_file" --value "$PGBOUNCER_CLIENT_TLS_KEY_FILE" "$PGBOUNCER_CONF_FILE"
