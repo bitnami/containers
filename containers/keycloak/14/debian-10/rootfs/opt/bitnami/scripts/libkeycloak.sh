@@ -358,6 +358,10 @@ EOF
 keycloak_initialize() {
     # Clean to avoid issues when running docker restart
     keycloak_clean_from_restart
+
+    # Prepare JDBC Params if set - add '?' at the beginning if the value is not empty and doesn't start with '?'
+    export KEYCLOAK_JDBC_PARAMS=$(echo "${KEYCLOAK_JDBC_PARAMS}" | sed -E '/^$|^\?+.*$/!s/^/?/')
+
     # Wait for database
     info "Trying to connect to PostgreSQL server $KEYCLOAK_DATABASE_HOST..."
     if ! retry_while "wait-for-port --host $KEYCLOAK_DATABASE_HOST --timeout 10 $KEYCLOAK_DATABASE_PORT" "$KEYCLOAK_INIT_MAX_RETRIES"; then
