@@ -11,7 +11,7 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl gzip libbz2-1.0 libc6 libgcc1 libjemalloc2 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libtinfo6 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "2.7.18-14" --checksum 41346bafdfca45e37e412c4c4c5df351de0119b430243575e78ef63e7c838c7d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.302-0" --checksum 59c0b7440797c7110c76959dbbce5235359b52adf62f99218b2718c04f2d67b6
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.13.0-0" --checksum b5a6446130d4b7b7592fbc0273e8186a40cf8d14d62d23b140c7fc84fae70180
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.13.2-0" --checksum 92356ab39f3233604478ffaf639429461d00a66d63ad42ec0a8d29f2bea43193
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "cassandra" "3.11.11-1" --checksum 7a6d921854f2dc935e74cc31bf51787f0526078d607cd2cb253bc6a30c430d81
 RUN chmod g+rwX /opt/bitnami
@@ -21,7 +21,7 @@ RUN ln -s /opt/bitnami/scripts/cassandra/run.sh /run.sh
 COPY rootfs /
 RUN /opt/bitnami/scripts/cassandra/postunpack.sh
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.11-debian-10-r47" \
+    BITNAMI_IMAGE_VERSION="3.11.11-debian-10-r48" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/cassandra/bin:$PATH"
 
 EXPOSE 7000 9042
