@@ -1,9 +1,9 @@
 {
     "apache-exporter": {
         "arch": "amd64",
-        "digest": "b39f892fd9a8c721fd7fceaba9fc82e6f1a992b799c6aed5a5c5523716d5e439",
+        "digest": "3a0999d13a321efca715a8c51ab37741f619370be41789d40f5438f5c116c791",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.10.0-0"
+        "version": "0.10.1-0"
     }
 }
