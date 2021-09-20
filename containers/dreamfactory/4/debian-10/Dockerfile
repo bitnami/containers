@@ -14,7 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.49-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis-client" "6.0.15-0" --checksum 0d61e4dcceba6a5d0c8f2d340337fa832b5ecaff714ebeb96fe8c595622bfe26
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "11.13.0-0" --checksum 1fc5072414ecbbd142a817ea8b0252904cbe17d34bd1c608a0b4865859458b0b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.4.21-2" --checksum 0ad1e1862ae23bd9aa0513d4cbe37ef6533f4a25ed140a6ae402f3e38bc6fef7
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb-client" "5.0.2-1" --checksum cd6b8ba5464fece881416e17943a4f64eba768608e353dafbb726affbf101e7b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb-client" "5.0.3-0" --checksum dc01abffb8ee5f9a4f420987f8e278028d3f6a261e78c8afa2ed430fdaab71d0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.3.30-1" --checksum 616c43aba3c294a1cd4fb45aa3d618b2ee2761fe7c2e9061ae429965abba7927
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.33.0-0" --checksum fd9a3245580fef6248f778efeba0a017675424f15ff16ace42c095496e4f02f3
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
@@ -34,7 +34,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="dreamfactory" \
-    BITNAMI_IMAGE_VERSION="4.8.0-debian-10-r78" \
+    BITNAMI_IMAGE_VERSION="4.8.0-debian-10-r79" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \

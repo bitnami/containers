@@ -36,10 +36,10 @@
     },
     "mongodb-client": {
         "arch": "amd64",
-        "digest": "cd6b8ba5464fece881416e17943a4f64eba768608e353dafbb726affbf101e7b",
+        "digest": "dc01abffb8ee5f9a4f420987f8e278028d3f6a261e78c8afa2ed430fdaab71d0",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "5.0.2-1"
+        "version": "5.0.3-0"
     },
     "mysql-client": {
         "arch": "amd64",
