@@ -199,6 +199,8 @@ airflow_generate_config() {
     airflow_conf_set "webserver" "web_server_port" "$AIRFLOW_WEBSERVER_PORT_NUMBER"
     # Setup fernet key
     [[ -n "$AIRFLOW_FERNET_KEY" ]] && airflow_conf_set "core" "fernet_key" "$AIRFLOW_FERNET_KEY"
+    # Setup webserver key
+    [[ -n "$AIRFLOW_WEBSERVER_KEY" ]] && airflow_conf_set "webserver" "secret_key" "$AIRFLOW_WEBSERVER_KEY"
     # Configure Airflow executor
     airflow_conf_set "core" "executor" "$AIRFLOW_EXECUTOR"
     [[ "$AIRFLOW_EXECUTOR" == "CeleryExecutor" || "$AIRFLOW_EXECUTOR" == "CeleryKubernetesExecutor"  ]] && airflow_configure_celery_executor
