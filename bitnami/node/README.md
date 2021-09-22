@@ -40,8 +40,8 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`16-prod`, `16-prod-debian-10`, `16.9.1-prod`, `16.9.1-prod-debian-10-r11` (16-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/16.9.1-prod-debian-10-r11/16-prod/debian-10/Dockerfile)
-* [`16`, `16-debian-10`, `16.9.1`, `16.9.1-debian-10-r11` (16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/16.9.1-debian-10-r11/16/debian-10/Dockerfile)
+* [`16-prod`, `16-prod-debian-10`, `16.10.0-prod`, `16.10.0-prod-debian-10-r-1` (16-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/16.10.0-prod-debian-10-r-1/16-prod/debian-10/Dockerfile)
+* [`16`, `16-debian-10`, `16.10.0`, `16.10.0-debian-10-r0` (16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/16.10.0-debian-10-r0/16/debian-10/Dockerfile)
 * [`14-prod`, `14-prod-debian-10`, `14.17.6-prod`, `14.17.6-prod-debian-10-r21` (14-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/14.17.6-prod-debian-10-r21/14-prod/debian-10/Dockerfile)
 * [`14`, `14-debian-10`, `14.17.6`, `14.17.6-debian-10-r21`, `latest` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/14.17.6-debian-10-r21/14/debian-10/Dockerfile)
 * [`12-prod`, `12-prod-debian-10`, `12.22.6-prod`, `12.22.6-prod-debian-10-r21` (12-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.22.6-prod-debian-10-r21/12-prod/debian-10/Dockerfile)
