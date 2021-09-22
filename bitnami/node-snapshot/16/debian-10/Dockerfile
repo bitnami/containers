@@ -12,10 +12,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "db3c9f6e2c8be68a22d4fb3b6eadeea842790bb77bb9ff481456bb309e9dc941  /tmp/bitnami/pkg/cache/python-3.8.12-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/python-3.8.12-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/python-3.8.12-1-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-16.9.1-0-linux-amd64-debian-10.tar.gz && \
-    echo "41a7e29225def6bff669b4897cc1d20018e4c3dd0c19102e7afa9d364ad3a9a9  /tmp/bitnami/pkg/cache/node-16.9.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/node-16.9.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/node-16.9.1-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-16.10.0-0-linux-amd64-debian-10.tar.gz && \
+    echo "c7757938fe3a1efc5ca3ace17bb6fa9617977c87bf1dc7c05665da76ccc2ffb1  /tmp/bitnami/pkg/cache/node-16.10.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/node-16.10.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/node-16.10.0-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
@@ -23,7 +23,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 ENV BITNAMI_APP_NAME="node-snapshot" \
-    BITNAMI_IMAGE_VERSION="16.9.1-debian-10-r12" \
+    BITNAMI_IMAGE_VERSION="16.10.0-debian-10-r0" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:$PATH"
 
 EXPOSE 3000
