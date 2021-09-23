@@ -114,8 +114,11 @@ airflow_worker_generate_config() {
     # Configure the Webserver port
     airflow_conf_set "webserver" "web_server_port" "$AIRFLOW_WEBSERVER_PORT_NUMBER"
 
-    # Setup fernet key
+    # Setup the secret keys for database connection and flask application (fernet key and secret key)
+    # ref: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#fernet-key
+    # ref: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#secret-key
     [[ -n "$AIRFLOW_FERNET_KEY" ]] && airflow_conf_set "core" "fernet_key" "$AIRFLOW_FERNET_KEY"
+    [[ -n "$AIRFLOW_SECRET_KEY" ]] && airflow_conf_set "webserver" "secret_key" "$AIRFLOW_SECRET_KEY"
 
     # Configure Airflow executor
     airflow_conf_set "core" "executor" "$AIRFLOW_EXECUTOR"
