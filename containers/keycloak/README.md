@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`15`, `15-debian-10`, `15.0.2`, `15.0.2-debian-10-r31`, `latest` (15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/15.0.2-debian-10-r31/15/debian-10/Dockerfile)
-* [`14`, `14-debian-10`, `14.0.0`, `14.0.0-debian-10-r74` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/14.0.0-debian-10-r74/14/debian-10/Dockerfile)
+* [`14`, `14-debian-10`, `14.0.0`, `14.0.0-debian-10-r75` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/14.0.0-debian-10-r75/14/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak).
 
@@ -91,7 +91,7 @@ The Bitnami Keycloak container requires a PostgreSQL database to work. This is c
 - `KEYCLOAK_DATABASE_USER`: PostgreSQL database user. Default: **bn_keycloak**.
 - `KEYCLOAK_DATABASE_PASSWORD`: PostgreSQL database password. No defaults.
 - `KEYCLOAK_DATABASE_SCHEMA`: PostgreSQL database schema. Default: **public**.
-- `KEYCLOAK_JDBC_PARAMS`: PostgreSQL database JDBC parameters. No defaults. (example value `sslmode=verify-full&connectTimeout=30000`)
+- `KEYCLOAK_JDBC_PARAMS`: PostgreSQL database JDBC parameters (example: `sslmode=verify-full&connectTimeout=30000`). No defaults.
 
 ## Port and address binding
 
