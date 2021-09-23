@@ -29,7 +29,7 @@ $ docker run --name dataplatform-emitter bitnami/dataplatform-emitter:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`0`, `0-scratch`, `0.0.10`, `0.0.10-scratch-r1`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-dataplatform-emitter/blob/0.0.10-scratch-r1/0/scratch/Dockerfile)
+- [`0`, `0-scratch`, `0.0.10`, `0.0.10-scratch-r2`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-dataplatform-emitter/blob/0.0.10-scratch-r2/0/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dataplatform-emitter GitHub repo](https://github.com/bitnami/bitnami-docker-dataplatform-emitter).
 
