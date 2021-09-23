@@ -43,12 +43,12 @@ airflow_validate() {
     [[ -z "$AIRFLOW_DATABASE_HOST" ]] && print_validation_error "Missing AIRFLOW_DATABASE_HOST"
 
     # Check LDAP parameters
-    if is_boolean_yes "$AIRFLOW_LDAP_ENABLE"; then        
+    if is_boolean_yes "$AIRFLOW_LDAP_ENABLE"; then
         [[ -z "$AIRFLOW_LDAP_URI" ]] && print_validation_error "Missing AIRFLOW_LDAP_URI"
         [[ -z "$AIRFLOW_LDAP_SEARCH" ]] && print_validation_error "Missing AIRFLOW_LDAP_SEARCH"
         [[ -z "$AIRFLOW_LDAP_UID_FIELD" ]] && print_validation_error "Missing AIRFLOW_LDAP_UID_FIELD"
         [[ -z "$AIRFLOW_LDAP_BIND_USER" ]] && print_validation_error "Missing AIRFLOW_LDAP_BIND_USER"
-        [[ -z "$AIRFLOW_LDAP_BIND_PASSWORD" ]] && print_validation_error "Missing AIRFLOW_LDAP_BIND_PASSWORD"  
+        [[ -z "$AIRFLOW_LDAP_BIND_PASSWORD" ]] && print_validation_error "Missing AIRFLOW_LDAP_BIND_PASSWORD"
         [[ -z "$AIRFLOW_LDAP_ROLES_MAPPING" ]] && print_validation_error "Missing AIRFLOW_LDAP_ROLES_MAPPING"
         [[ -z "$AIRFLOW_LDAP_ROLES_SYNC_AT_LOGIN" ]] && print_validation_error "Missing AIRFLOW_LDAP_ROLES_SYNC_AT_LOGIN"
         [[ -z "$AIRFLOW_LDAP_USER_REGISTRATION" ]] && print_validation_error "Missing AIRFLOW_LDAP_USER_REGISTRATION"
@@ -109,7 +109,7 @@ airflow_initialize() {
         rm -f "$AIRFLOW_PID_FILE"
 
         airflow_wait_for_postgresql "$AIRFLOW_DATABASE_HOST" "$AIRFLOW_DATABASE_PORT_NUMBER"
-        
+
         # Initialize database
         airflow_execute_command "initdb" "db init"
 
@@ -195,14 +195,16 @@ airflow_generate_config() {
     fi
     # Configure Airflow database
     airflow_configure_database
+
     # Configure the Webserver port
     airflow_conf_set "webserver" "web_server_port" "$AIRFLOW_WEBSERVER_PORT_NUMBER"
-    # Setup the secret keys for database connection and flask application
+
+    # Setup the secret keys for database connection and flask application (fernet key and secret key)
     # ref: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#fernet-key
     # ref: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#secret-key
     [[ -n "$AIRFLOW_FERNET_KEY" ]] && airflow_conf_set "core" "fernet_key" "$AIRFLOW_FERNET_KEY"
-    # Setup webserver key
-    [[ -n "$AIRFLOW_WEBSERVER_KEY" ]] && airflow_conf_set "webserver" "secret_key" "$AIRFLOW_WEBSERVER_KEY"
+    [[ -n "$AIRFLOW_SECRET_KEY" ]] && airflow_conf_set "webserver" "secret_key" "$AIRFLOW_SECRET_KEY"
+
     # Configure Airflow executor
     airflow_conf_set "core" "executor" "$AIRFLOW_EXECUTOR"
     [[ "$AIRFLOW_EXECUTOR" == "CeleryExecutor" || "$AIRFLOW_EXECUTOR" == "CeleryKubernetesExecutor"  ]] && airflow_configure_celery_executor
@@ -245,7 +247,7 @@ airflow_configure_base_url() {
 }
 
 ########################
-# Configure Airflow webserver authentication 
+# Configure Airflow webserver authentication
 # Globals:
 #   AIRFLOW_*
 # Arguments:
@@ -263,7 +265,7 @@ airflow_configure_webserver_authentication() {
         replace_in_file "$AIRFLOW_WEBSERVER_CONF_FILE" "from flask_appbuilder.security.manager import AUTH_DB" "# from flask_appbuilder.security.manager import AUTH_DB"
 
         # webserver config
-        airflow_webserver_conf_set "AUTH_TYPE" "AUTH_LDAP"        
+        airflow_webserver_conf_set "AUTH_TYPE" "AUTH_LDAP"
         airflow_webserver_conf_set "AUTH_LDAP_SERVER" "'$AIRFLOW_LDAP_URI'"
 
         # searches
