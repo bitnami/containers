@@ -13,14 +13,14 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "41346bafdfca45e37e412c4c4c5df351de0119b430243575e78ef63e7c838c7d  /tmp/bitnami/pkg/cache/python-2.7.18-14-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/python-2.7.18-14-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/python-2.7.18-14-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jenkins-exporter-0.20171225.0-3-linux-amd64-debian-10.tar.gz && \
-    echo "cab2c830b83b9cb0f7a4dbf7c02f0fa584fa772034da39cb11f16aaff38fedbd  /tmp/bitnami/pkg/cache/jenkins-exporter-0.20171225.0-3-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/jenkins-exporter-0.20171225.0-3-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/jenkins-exporter-0.20171225.0-3-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jenkins-exporter-0.20171225.0-4-linux-amd64-debian-10.tar.gz && \
+    echo "e855d46e7b5b38d4dd97297e2ff295531eed8f752115bf34cafda0d4befbd5b7  /tmp/bitnami/pkg/cache/jenkins-exporter-0.20171225.0-4-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/jenkins-exporter-0.20171225.0-4-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/jenkins-exporter-0.20171225.0-4-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="jenkins-exporter" \
-    BITNAMI_IMAGE_VERSION="0.20171225.0-debian-10-r567" \
+    BITNAMI_IMAGE_VERSION="0.20171225.0-debian-10-r568" \
     PATH="/opt/bitnami/jenkins-exporter/venv/bin:$PATH"
 
 EXPOSE 9118
