@@ -33,7 +33,7 @@ You can find the default credentials and available configuration options in the 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.1.4`, `2.1.4-debian-10-r3`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker/blob/2.1.4-debian-10-r3/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.1.4`, `2.1.4-debian-10-r4`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker/blob/2.1.4-debian-10-r4/2/debian-10/Dockerfile)
 * [`1`, `1-debian-10`, `1.10.15`, `1.10.15-debian-10-r168` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker/blob/1.10.15-debian-10-r168/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow-worker).
@@ -96,6 +96,7 @@ If you want to run the application manually instead of using `docker-compose`, t
   $ docker volume create --name airflow_data
   $ docker run -d --name airflow -p 8080:8080 \
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
+    -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
     -e AIRFLOW_EXECUTOR=CeleryExecutor \
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
     -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
@@ -115,6 +116,7 @@ If you want to run the application manually instead of using `docker-compose`, t
   $ docker volume create --name airflow_scheduler_data
   $ docker run -d --name airflow-scheduler \
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
+    -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
     -e AIRFLOW_EXECUTOR=CeleryExecutor \
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
     -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
@@ -131,6 +133,7 @@ If you want to run the application manually instead of using `docker-compose`, t
   $ docker volume create --name airflow_worker_data
   $ docker run -d --name airflow-worker \
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
+    -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
     -e AIRFLOW_EXECUTOR=CeleryExecutor \
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
     -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
@@ -178,6 +181,7 @@ services:
     image: bitnami/airflow-worker:latest
     environment:
       - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+      - AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08=
       - AIRFLOW_EXECUTOR=CeleryExecutor
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
@@ -189,6 +193,7 @@ services:
     image: bitnami/airflow-scheduler:latest
     environment:
       - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+      - AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08=
       - AIRFLOW_EXECUTOR=CeleryExecutor
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
@@ -200,6 +205,7 @@ services:
     image: bitnami/airflow:latest
     environment:
       - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+      - AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08=
       - AIRFLOW_EXECUTOR=CeleryExecutor
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
@@ -248,6 +254,7 @@ services:
   ```console
   $ docker run -d --name airflow -p 8080:8080 \
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
+    -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
     -e AIRFLOW_EXECUTOR=CeleryExecutor \
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
     -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
@@ -266,6 +273,7 @@ services:
   ```console
   $ docker run -d --name airflow-scheduler \
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
+    -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
     -e AIRFLOW_EXECUTOR=CeleryExecutor \
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
     -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
@@ -281,6 +289,7 @@ services:
   ```console
   $ docker run -d --name airflow-worker \
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
+    -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
     -e AIRFLOW_EXECUTOR=CeleryExecutor \
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
     -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
@@ -304,6 +313,7 @@ The Airflow Worker instance can be customized by specifying environment variable
 
 - `AIRFLOW_EXECUTOR`: Airflow Worker executor. Default: **SequentialExecutor**
 - `AIRFLOW_FERNET_KEY`: Airflow Worker Fernet key. No defaults.
+- `AIRFLOW_SECRET_KEY`: Airflow Worker Secret key. No defaults.
 - `AIRFLOW_WEBSERVER_HOST`: Airflow Worker webserver host. Default: **airflow**
 - `AIRFLOW_WEBSERVER_PORT_NUMBER`: Airflow Worker webserver port. Default: **8080**
 - `AIRFLOW_HOSTNAME_CALLABLE`: Method to obtain the hostname. No defaults.
@@ -335,6 +345,7 @@ services:
     image: bitnami/airflow:latest
     environment:
       - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+      - AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08=
       - AIRFLOW_EXECUTOR=CeleryExecutor
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
@@ -349,6 +360,7 @@ services:
 ```console
 $ docker run -d --name airflow -p 8080:8080 \
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
+    -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
     -e AIRFLOW_EXECUTOR=CeleryExecutor \
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
     -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
