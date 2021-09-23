@@ -1,10 +1,10 @@
 {
     "jenkins-exporter": {
         "arch": "amd64",
-        "digest": "cab2c830b83b9cb0f7a4dbf7c02f0fa584fa772034da39cb11f16aaff38fedbd",
+        "digest": "e855d46e7b5b38d4dd97297e2ff295531eed8f752115bf34cafda0d4befbd5b7",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.20171225.0-3"
+        "version": "0.20171225.0-4"
     },
     "python": {
         "arch": "amd64",
