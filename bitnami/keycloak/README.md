@@ -91,7 +91,7 @@ The Bitnami Keycloak container requires a PostgreSQL database to work. This is c
 - `KEYCLOAK_DATABASE_USER`: PostgreSQL database user. Default: **bn_keycloak**.
 - `KEYCLOAK_DATABASE_PASSWORD`: PostgreSQL database password. No defaults.
 - `KEYCLOAK_DATABASE_SCHEMA`: PostgreSQL database schema. Default: **public**.
-- `KEYCLOAK_DATABASE_TLS`: PostgreSQL database TLS flag. Default: **false**.
+- `KEYCLOAK_JDBC_PARAMS`: PostgreSQL database JDBC parameters. No defaults. (example value `sslmode=verify-full&connectTimeout=30000`)
 
 ## Port and address binding
 
