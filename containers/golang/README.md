@@ -33,7 +33,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.17`, `1.17-debian-10`, `1.17.1`, `1.17.1-debian-10-r8` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.17.1-debian-10-r8/1.17/debian-10/Dockerfile)
+* [`1.17`, `1.17-debian-10`, `1.17.1`, `1.17.1-debian-10-r9` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.17.1-debian-10-r9/1.17/debian-10/Dockerfile)
 * [`1.16`, `1.16-debian-10`, `1.16.8`, `1.16.8-debian-10-r8`, `latest` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.16.8-debian-10-r8/1.16/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/golang GitHub repo](https://github.com/bitnami/bitnami-docker-golang).
@@ -160,10 +160,6 @@ Re-create your container from the new image.
 ```console
 $ docker run --name golang bitnami/golang:latest
 ```
-
-# Branch Deprecation Notice
-
-Golang's branch 1.15 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 09-23-2021.
 
 # Contributing
 
