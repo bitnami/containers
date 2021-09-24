@@ -9,16 +9,16 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kubewatch-0.1.0-2-linux-amd64-debian-10.tar.gz && \
-    echo "76f84004f3d0cbf375527bedf3098cfaebc90aceaec8d97f4b180ba1e25915e7  /tmp/bitnami/pkg/cache/kubewatch-0.1.0-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/kubewatch-0.1.0-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/kubewatch-0.1.0-2-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kubewatch-0.1.0-3-linux-amd64-debian-10.tar.gz && \
+    echo "bf975d9c11c030df4b20735ecb0486dcd4013173ff2425edcde34e5542971e72  /tmp/bitnami/pkg/cache/kubewatch-0.1.0-3-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/kubewatch-0.1.0-3-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/kubewatch-0.1.0-3-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN chown -R 1001:root /opt/bitnami/kubewatch/ && chmod g+rwX /opt/bitnami/kubewatch/
 ENV BITNAMI_APP_NAME="kubewatch" \
-    BITNAMI_IMAGE_VERSION="0.1.0-debian-10-r396" \
+    BITNAMI_IMAGE_VERSION="0.1.0-debian-10-r397" \
     KW_CONFIG="/opt/bitnami/kubewatch" \
     KW_FLOCK_URL="" \
     KW_HIPCHAT_ROOM="" \
