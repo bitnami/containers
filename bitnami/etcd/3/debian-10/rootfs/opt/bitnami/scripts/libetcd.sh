@@ -39,7 +39,7 @@ etcd_validate() {
         is_empty_value "$ETCD_ROOT_PASSWORD" && print_validation_error "The ETCD_ROOT_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_NONE_AUTHENTICATION=yes to allow a blank password. This is only recommended for development environments."
     fi
     if is_boolean_yes "$ETCD_START_FROM_SNAPSHOT" && [[ ! -f "${ETCD_INIT_SNAPSHOTS_DIR}/${ETCD_INIT_SNAPSHOT_FILENAME}" ]]; then
-        print_validation_error "You are trying to initialize etcd from a snapshot, but no snapshot was found. Set the environment variable ETCD_INIT_SNAPSHOT_FILENAME with the snapshot filename and mount it at '/init-snapshot' directory."
+        print_validation_error "You are trying to initialize etcd from a snapshot, but no snapshot was found. Set the environment variable ETCD_INIT_SNAPSHOT_FILENAME with the snapshot filename and mount it at '${ETCD_INIT_SNAPSHOTS_DIR}' directory."
     fi
 
     [[ "$error_code" -eq 0 ]] || return "$error_code"
