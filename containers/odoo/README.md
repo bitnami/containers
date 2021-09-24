@@ -40,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 - [`14`, `14-debian-10`, `14.0.20210910`, `14.0.20210910-debian-10-r13`, `latest` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/14.0.20210910-debian-10-r13/14/debian-10/Dockerfile)
 - [`13`, `13-debian-10`, `13.0.20210910`, `13.0.20210910-debian-10-r13` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20210910-debian-10-r13/13/debian-10/Dockerfile)
-- [`12`, `12-debian-10`, `12.0.20210915`, `12.0.20210915-debian-10-r8` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/12.0.20210915-debian-10-r8/12/debian-10/Dockerfile)
+- [`12`, `12-debian-10`, `12.0.20210915`, `12.0.20210915-debian-10-r9` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/12.0.20210915-debian-10-r9/12/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/odoo GitHub repo](https://github.com/bitnami/bitnami-docker-odoo).
 
@@ -229,8 +229,8 @@ Available environment variables:
 
 - `POSTGRESQL_CLIENT_DATABASE_HOST`: Hostname for the PostgreSQL server. Default: **postgresql**
 - `POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the PostgreSQL server. Default: **5432**
-- `POSTGRESQL_CLIENT_DATABASE_POSTGRES_USER`: Database admin user. Default: **root**
-- `POSTGRESQL_CLIENT_DATABASE_POSTGRES_PASSWORD`: Database password for the database admin user. No default.
+- `POSTGRESQL_CLIENT_POSTGRES_USER`: Database admin user. Default: **root**
+- `POSTGRESQL_CLIENT_POSTGRES_PASSWORD`: Database password for the database admin user. No default.
 - `POSTGRESQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No default.
 - `POSTGRESQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No default.
 - `POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `POSTGRESQL_CLIENT_CREATE_DATABASE_USER` user. No default.
