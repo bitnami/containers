@@ -28,6 +28,7 @@ etcd_env_vars=(
     ETCD_DISASTER_RECOVERY
     ETCD_ON_K8S
     ETCD_INIT_SNAPSHOT_FILENAME
+    ETCD_INIT_SNAPSHOTS_DIR
     ETCDCTL_API
     ETCD_NAME
     ETCD_LOG_LEVEL
@@ -64,7 +65,7 @@ export ETCD_VOLUME_DIR="/bitnami/etcd"
 export ETCD_BIN_DIR="${ETCD_BASE_DIR}/sbin"
 export ETCD_DATA_DIR="${ETCD_VOLUME_DIR}/data"
 export ETCD_SNAPSHOTS_DIR="/snapshots"
-export ETCD_INIT_SNAPSHOTS_DIR="/init-snapshot"
+export ETCD_INIT_SNAPSHOTS_DIR="${ETCD_INIT_SNAPSHOTS_DIR:-/init-snapshot}"
 export ETCD_NEW_MEMBERS_ENV_FILE="${ETCD_DATA_DIR}/new_member_envs"
 export PATH="${ETCD_BIN_DIR}:${PATH}"
 
