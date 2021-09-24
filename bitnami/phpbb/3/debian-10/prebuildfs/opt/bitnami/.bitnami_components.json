@@ -15,10 +15,10 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "81a047c3f89fb76bfd0fa4514d14d7885b38f0aea9ce8b1279935da3688710bd",
+        "digest": "918193450a025252992e041b8cf995b6ba3b2ddac65e2333796b921ea8d74e0e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.23-1"
+        "version": "7.4.24-0"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -29,10 +29,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "821704fc85d765c55c5ed89127aa3be4593bd9e8119bf82af52f42ef90312910",
+        "digest": "3950e26b7ecc7766268fe007e2fb3220e9a019da5296a0812014edc899870e3c",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.23-2"
+        "version": "7.4.24-0"
     },
     "phpbb": {
         "arch": "amd64",
