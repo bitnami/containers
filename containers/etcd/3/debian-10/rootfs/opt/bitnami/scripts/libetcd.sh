@@ -38,7 +38,7 @@ etcd_validate() {
     else
         is_empty_value "$ETCD_ROOT_PASSWORD" && print_validation_error "The ETCD_ROOT_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_NONE_AUTHENTICATION=yes to allow a blank password. This is only recommended for development environments."
     fi
-    if is_boolean_yes "$ETCD_START_FROM_SNAPSHOT" && [[ ! -f "/init-snapshot/${ETCD_INIT_SNAPSHOT_FILENAME}" ]]; then
+    if is_boolean_yes "$ETCD_START_FROM_SNAPSHOT" && [[ ! -f "${ETCD_INIT_SNAPSHOTS_DIR}/${ETCD_INIT_SNAPSHOT_FILENAME}" ]]; then
         print_validation_error "You are trying to initialize etcd from a snapshot, but no snapshot was found. Set the environment variable ETCD_INIT_SNAPSHOT_FILENAME with the snapshot filename and mount it at '/init-snapshot' directory."
     fi
 
@@ -378,7 +378,7 @@ etcd_initialize() {
             fi
         fi
         if is_boolean_yes "$ETCD_START_FROM_SNAPSHOT"; then
-            if [[ -f "/init-snapshot/${ETCD_INIT_SNAPSHOT_FILENAME}" ]]; then
+            if [[ -f "${ETCD_INIT_SNAPSHOTS_DIR}/${ETCD_INIT_SNAPSHOT_FILENAME}" ]]; then
                 info "Restoring snapshot before initializing etcd cluster"
                 local -a restore_args=("--data-dir" "$ETCD_DATA_DIR")
                 if [[ ${#initial_members[@]} -gt 1 ]]; then
@@ -391,7 +391,7 @@ etcd_initialize() {
                         "--initial-advertise-peer-urls" "$ETCD_INITIAL_ADVERTISE_PEER_URLS"
                     )
                 fi
-                debug_execute etcdctl snapshot restore "/init-snapshot/${ETCD_INIT_SNAPSHOT_FILENAME}" "${restore_args[@]}"
+                debug_execute etcdctl snapshot restore "${ETCD_INIT_SNAPSHOTS_DIR}/${ETCD_INIT_SNAPSHOT_FILENAME}" "${restore_args[@]}"
                 debug_execute etcd_store_member_id &
             else
                 error "There was no snapshot to restore!"
