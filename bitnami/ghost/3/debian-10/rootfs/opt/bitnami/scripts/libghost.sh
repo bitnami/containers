@@ -156,9 +156,7 @@ ghost_validate() {
     if is_boolean_yes "${ALLOW_EMPTY_PASSWORD:-}"; then
         warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD:-}. For safety reasons, do not use this flag in a production environment."
     else
-        for empty_env_var in "GHOST_DATABASE_PASSWORD"; do
-            is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
-        done
+        is_empty_value "$GHOST_DATABASE_PASSWORD" && print_validation_error "The GHOST_DATABASE_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
     fi
 
     # Validate SMTP credentials
