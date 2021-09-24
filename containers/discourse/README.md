@@ -31,7 +31,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`2`, `2-debian-10`, `2.7.8`, `2.7.8-debian-10-r17`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.7.8-debian-10-r17/2/debian-10/Dockerfile)
+- [`2`, `2-debian-10`, `2.7.8`, `2.7.8-debian-10-r18`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.7.8-debian-10-r18/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/discourse GitHub repo](https://github.com/bitnami/bitnami-docker-discourse).
 
@@ -320,8 +320,8 @@ Available environment variables:
 
 - `POSTGRESQL_CLIENT_DATABASE_HOST`: Hostname for the PostgreSQL server. Default: **postgresql**
 - `POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the PostgreSQL server. Default: **5432**
-- `POSTGRESQL_CLIENT_DATABASE_POSTGRES_USER`: Database admin user. Default: **root**
-- `POSTGRESQL_CLIENT_DATABASE_POSTGRES_PASSWORD`: Database password for the database admin user. No defaults.
+- `POSTGRESQL_CLIENT_POSTGRES_USER`: Database admin user. Default: **root**
+- `POSTGRESQL_CLIENT_POSTGRES_PASSWORD`: Database password for the database admin user. No defaults.
 - `POSTGRESQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No defaults.
 - `POSTGRESQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
 - `POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `POSTGRESQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
@@ -345,15 +345,23 @@ To configure Discourse to send email using SMTP you can set the following enviro
 
 This would be an example of SMTP configuration using a Gmail account:
 
-- Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-discourse/blob/master/docker-compose.yml) file present in this repository:
+- Modify the environment variables used for the `discourse` and `sidekiq` containers in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-discourse/blob/master/docker-compose.yml) file present in this repository:
 
     ```yaml
       discourse:
         ...
         environment:
-          - DISCOURSE_DATABASE_USER=bn_discourse
-          - DISCOURSE_DATABASE_NAME=bitnami_discourse
-          - ALLOW_EMPTY_PASSWORD=yes
+          ...
+          - DISCOURSE_SMTP_HOST=smtp.gmail.com
+          - DISCOURSE_SMTP_PORT=587
+          - DISCOURSE_SMTP_USER=your_email@gmail.com
+          - DISCOURSE_SMTP_PASSWORD=your_password
+          - DISCOURSE_SMTP_PROTOCOL=tls
+      ...
+      sidekiq:
+        ...
+        environment:
+          ...
           - DISCOURSE_SMTP_HOST=smtp.gmail.com
           - DISCOURSE_SMTP_PORT=587
           - DISCOURSE_SMTP_USER=your_email@gmail.com
@@ -364,19 +372,37 @@ This would be an example of SMTP configuration using a Gmail account:
 
 - For manual execution:
 
-    ```console
-    $ docker run -d --name discourse -p 80:8080 -p 443:8443 \
-      --env DISCOURSE_DATABASE_USER=bn_discourse \
-      --env DISCOURSE_DATABASE_NAME=bitnami_discourse \
-      --env DISCOURSE_SMTP_HOST=smtp.gmail.com \
-      --env DISCOURSE_SMTP_PORT=587 \
-      --env DISCOURSE_SMTP_USER=your_email@gmail.com \
-      --env DISCOURSE_SMTP_PASSWORD=your_password \
-      --env DISCOURSE_SMTP_PROTOCOL=tls \
-      --network discourse-tier \
-      --volume /path/to/discourse-persistence:/bitnami \
-      bitnami/discourse:latest
-    ```
+    - First, create the Discourse container:
+
+        ```console
+        $ docker run -d --name discourse -p 80:8080 -p 443:8443 \
+          --env DISCOURSE_DATABASE_USER=bn_discourse \
+          --env DISCOURSE_DATABASE_NAME=bitnami_discourse \
+          --env DISCOURSE_SMTP_HOST=smtp.gmail.com \
+          --env DISCOURSE_SMTP_PORT=587 \
+          --env DISCOURSE_SMTP_USER=your_email@gmail.com \
+          --env DISCOURSE_SMTP_PASSWORD=your_password \
+          --env DISCOURSE_SMTP_PROTOCOL=tls \
+          --network discourse-tier \
+          --volume /path/to/discourse-persistence:/bitnami \
+          bitnami/discourse:latest
+        ```
+
+    - Then, create the Sidekiq container:
+
+        ```console
+        $ docker run -d --name sidekiq \
+          --env DISCOURSE_DATABASE_USER=bn_discourse \
+          --env DISCOURSE_DATABASE_NAME=bitnami_discourse \
+          --env DISCOURSE_SMTP_HOST=smtp.gmail.com \
+          --env DISCOURSE_SMTP_PORT=587 \
+          --env DISCOURSE_SMTP_USER=your_email@gmail.com \
+          --env DISCOURSE_SMTP_PASSWORD=your_password \
+          --env DISCOURSE_SMTP_PROTOCOL=tls \
+          --network discourse-tier \
+          --volume /path/to/discourse-persistence:/bitnami \
+          bitnami/discourse:latest
+        ```
 
 In order to verify your configuration works properly, you can test your configuration parameters from the container itself.
 
