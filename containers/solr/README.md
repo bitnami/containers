@@ -149,7 +149,7 @@ $ docker-compose up -d
 When you start the solr image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. The following environment values are provided to custom Solr:
 
 - `SOLR_PORT_NUMBER`: Port used by Solr server. Default: **8983**
-- `SOLR_SERVER_DIRECTORY`: Specify the Solr server directory. Default: **server**
+- `SOLR_SERVER_DIR`: Specify the Solr server directory. Default: **/opt/bitnami/solr/server**
 - `SOLR_CORE`: Core name to create at first run. By default, it will not create a core. (E.g.: '**my_core**')
 - `SOLR_CORE_CONF_DIR`: Configuration directory to copy when creating a new core. Default: **data_driven_schema_configs**
 
