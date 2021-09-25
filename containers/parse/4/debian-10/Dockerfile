@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq libbz2-1.0 libc6 libcom-err2 libcurl4 libffi6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libncursesw6 libnettle6 libnghttp2-14 libp11-kit0 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-1" --checksum db3c9f6e2c8be68a22d4fb3b6eadeea842790bb77bb9ff481456bb309e9dc941
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-2" --checksum e00677f5209d9426daff2db54cf00e04c46718bbdbc0717aee07e6a727ef05ad
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "12.22.6-0" --checksum 9cdaa4d224db9b040a718e445335687b57933ece70c56b3c9fc012e4998723c7
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb-client" "4.4.9-0" --checksum 93f7e5b0787baaefb05b936a8a25c4e39d093bf04c27fe7ef01c1c9f4d4aabdf
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "parse" "4.10.3-0" --checksum b751f8c3a1f422a99db556f002bf1bfc6aa6f5a1b66e2499f66748d12cb0cf5d
@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/parse/postunpack.sh
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="4.10.3-debian-10-r21" \
+    BITNAMI_IMAGE_VERSION="4.10.3-debian-10-r22" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/mongodb-client/bin:/opt/bitnami/parse/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 1337 3000
