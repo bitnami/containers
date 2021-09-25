@@ -37,7 +37,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`4`, `4-debian-10`, `4.2.2`, `4.2.2-debian-10-r41`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.2.2-debian-10-r41/4/debian-10/Dockerfile)
+- [`4`, `4-debian-10`, `4.2.2`, `4.2.2-debian-10-r42`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/4.2.2-debian-10-r42/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redmine GitHub repo](https://github.com/bitnami/bitnami-docker-redmine).
 
@@ -256,8 +256,8 @@ Available environment variables:
 
 - `POSTGRESQL_CLIENT_DATABASE_HOST`: Hostname for the PostgreSQL server. Default: **postgresql**
 - `POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the PostgreSQL server. Default: **5432**
-- `POSTGRESQL_CLIENT_DATABASE_POSTGRES_USER`: Database admin user. Default: **root**
-- `POSTGRESQL_CLIENT_DATABASE_POSTGRES_PASSWORD`: Database password for the database admin user. No defaults.
+- `POSTGRESQL_CLIENT_POSTGRES_USER`: Database admin user. Default: **root**
+- `POSTGRESQL_CLIENT_POSTGRES_PASSWORD`: Database password for the database admin user. No defaults.
 - `POSTGRESQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No defaults.
 - `POSTGRESQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No defaults.
 - `POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `POSTGRESQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
