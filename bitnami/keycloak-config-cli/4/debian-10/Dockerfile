@@ -21,7 +21,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN ln -sf /opt/bitnami/keycloak-config-cli/keycloak-config-cli.jar /opt/keycloak-config-cli.jar
 
 ENV BITNAMI_APP_NAME="keycloak-config-cli" \
-    BITNAMI_IMAGE_VERSION="4.2.0-debian-10-r44" \
+    BITNAMI_IMAGE_VERSION="4.2.0-debian-10-r45" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 WORKDIR /opt/bitnami/keycloak-config-cli
