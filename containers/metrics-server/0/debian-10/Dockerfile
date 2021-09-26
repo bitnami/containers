@@ -9,15 +9,15 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/metrics-server-0.5.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "6185c8b0dbe0be9fdab1b9c42786d65b25e9c8775953c8cf060464c2dd0dc41d  /tmp/bitnami/pkg/cache/metrics-server-0.5.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/metrics-server-0.5.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/metrics-server-0.5.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/metrics-server-0.5.1-0-linux-amd64-debian-10.tar.gz && \
+    echo "eb899c3ad6c4a427ba4ab86866f755fdbf33a605dfab784cb73a867c25362d81  /tmp/bitnami/pkg/cache/metrics-server-0.5.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/metrics-server-0.5.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/metrics-server-0.5.1-0-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
 
 RUN chown -R 1001:root /opt/bitnami/metrics-server && chmod -R g+rwX /opt/bitnami/metrics-server
 ENV BITNAMI_APP_NAME="metrics-server" \
-    BITNAMI_IMAGE_VERSION="0.5.0-debian-10-r114" \
+    BITNAMI_IMAGE_VERSION="0.5.1-debian-10-r0" \
     PATH="/opt/bitnami/metrics-server/bin:$PATH"
 
 EXPOSE 8443
