@@ -1162,7 +1162,7 @@ mongodb_ensure_dynamic_mode_consistency() {
 }
 
 ########################
-# Check if a givemongodb_sharded_is_join_shard_pendingted externally
+# Check if a given file was mounted externally
 # Globals:
 #   MONGODB_*
 # Arguments:
