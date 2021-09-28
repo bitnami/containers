@@ -13,15 +13,15 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "673e6616d3eef2ecb7d5faced97ca22e8d40b0ddf8a19f05228d7f5962570e09  /tmp/bitnami/pkg/cache/python-3.7.12-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/python-3.7.12-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/python-3.7.12-2-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/google-cloud-sdk-0.358.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "f2296b4e16849e84ebe45be996e2be581ab81f2b5dec0c73401535da499321ba  /tmp/bitnami/pkg/cache/google-cloud-sdk-0.358.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/google-cloud-sdk-0.358.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/google-cloud-sdk-0.358.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/google-cloud-sdk-0.359.0-0-linux-amd64-debian-10.tar.gz && \
+    echo "a421998f0b3aba64ca649666b6a946c11f2a988b81ab46ba2b2104b1ea77c304  /tmp/bitnami/pkg/cache/google-cloud-sdk-0.359.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/google-cloud-sdk-0.359.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/google-cloud-sdk-0.359.0-0-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /.config /.gsutil && chmod g+rwX /.config /.gsutil
 
 ENV BITNAMI_APP_NAME="google-cloud-sdk" \
-    BITNAMI_IMAGE_VERSION="0.358.0-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="0.359.0-debian-10-r0" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/google-cloud-sdk/bin:$PATH"
 
 USER 1001
