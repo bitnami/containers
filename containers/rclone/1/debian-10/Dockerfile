@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="rclone" \
-    BITNAMI_IMAGE_VERSION="1.56.1-debian-10-r8" \
+    BITNAMI_IMAGE_VERSION="1.56.1-debian-10-r9" \
     PATH="/opt/bitnami/rclone/bin:$PATH"
 
 USER 1001
