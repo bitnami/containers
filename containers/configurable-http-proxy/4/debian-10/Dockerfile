@@ -13,10 +13,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "e00677f5209d9426daff2db54cf00e04c46718bbdbc0717aee07e6a727ef05ad  /tmp/bitnami/pkg/cache/python-3.8.12-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/python-3.8.12-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/python-3.8.12-2-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-14.17.6-0-linux-amd64-debian-10.tar.gz && \
-    echo "2c35e2baaa990e10d6cd5083530dbfa1f16075788eacbe4382d8b08abdbc8460  /tmp/bitnami/pkg/cache/node-14.17.6-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/node-14.17.6-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/node-14.17.6-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-14.18.0-0-linux-amd64-debian-10.tar.gz && \
+    echo "58c750af2e2a9b3c137d51f72b9512f9e313f772d28ec884798997519d2705b9  /tmp/bitnami/pkg/cache/node-14.18.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/node-14.18.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/node-14.18.0-0-linux-amd64-debian-10.tar.gz
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/configurable-http-proxy-4.5.0-0-linux-amd64-debian-10.tar.gz && \
     echo "b84a97b61f29f918affd172ecf424bd8326e39509f9549e7ab211d7e88a7544c  /tmp/bitnami/pkg/cache/configurable-http-proxy-4.5.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/configurable-http-proxy-4.5.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
@@ -24,7 +24,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="configurable-http-proxy" \
-    BITNAMI_IMAGE_VERSION="4.5.0-debian-10-r69" \
+    BITNAMI_IMAGE_VERSION="4.5.0-debian-10-r70" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/configurable-http-proxy/bin:$PATH"
 
 EXPOSE 3000
