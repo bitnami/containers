@@ -290,7 +290,7 @@ airflow_configure_webserver_authentication() {
         airflow_webserver_conf_set "AUTH_LDAP_ALLOW_SELF_SIGNED" "$AIRFLOW_LDAP_ALLOW_SELF_SIGNED"
 
         # If StartTLS supply cert
-        if [[ "$AIRFLOW_LDAP_USE_TLS" == "True" ]]; then    
+        if [[ "$AIRFLOW_LDAP_USE_TLS" == "True" ]]; then
             airflow_webserver_conf_set "AUTH_LDAP_TLS_CACERTFILE" "$AIRFLOW_LDAP_TLS_CA_CERTIFICATE"
         fi
     fi
