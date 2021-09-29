@@ -17,7 +17,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/geode/postunpack.sh
 ENV BITNAMI_APP_NAME="geode" \
-    BITNAMI_IMAGE_VERSION="1.14.0-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="1.14.0-debian-10-r2" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/geode/bin:$PATH"
 
 EXPOSE 1099 7070 10334 40404
