@@ -39,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.14.0`, `1.14.0-debian-10-r2`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-geode/blob/1.14.0-debian-10-r2/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.14.0`, `1.14.0-debian-10-r3`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-geode/blob/1.14.0-debian-10-r3/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/geode GitHub repo](https://github.com/bitnami/bitnami-docker-geode).
 
@@ -181,6 +181,8 @@ Available environment variables:
 * `GEODE_LOG_LEVEL`: Apache Geode loge level. Allowed values: *severe*, *error*, *warning*, *info*, *config* and *fine*. Default: **info**
 * `GEODE_INITIAL_HEAP_SIZE`: Initial size of the heap in the same format as the JVM -Xmx parameter. No defaults.
 * `GEODE_MAX_HEAP_SIZE`: Maximum size of the heap in the same format as the JVM -Xmx parameter. No defaults.
+* `GEODE_ENABLE_METRICS`: Enable exposing Apache Geode metrics for Prometheus. Default: **no**
+* `GEODE_METRICS_PORT_NUMBER`: Apache Geode metrics port number. Default: **9914**
 
 #### Apache Geode security configuration
 
