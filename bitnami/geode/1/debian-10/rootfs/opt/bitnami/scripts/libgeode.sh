@@ -80,10 +80,11 @@ geode_validate() {
     for address in "$GEODE_ADVERTISED_HOSTNAME" "$GEODE_SERVER_BIND_ADDRESS" "$GEODE_HTTP_BIND_ADDRESS" "$GEODE_LOCATOR_BIND_ADDRESS"; do
         ! is_empty_value "$address" && ! validate_ipv4 "$address" && check_resolved_hostname "$address"
     done
-    for port in "GEODE_SERVER_PORT_NUMBER" "GEODE_LOCATOR_PORT_NUMBER" "GEODE_HTTP_PORT_NUMBER" "GEODE_RMI_PORT_NUMBER"; do
+    for port in "GEODE_SERVER_PORT_NUMBER" "GEODE_LOCATOR_PORT_NUMBER" "GEODE_HTTP_PORT_NUMBER" "GEODE_RMI_PORT_NUMBER" "GEODE_METRICS_PORT_NUMBER"; do
         ! is_empty_value "${!port}" && check_valid_port "$port"
     done
-    check_conflicting_ports "GEODE_SERVER_PORT_NUMBER" "GEODE_LOCATOR_PORT_NUMBER" "GEODE_HTTP_PORT_NUMBER" "GEODE_RMI_PORT_NUMBER"
+    check_conflicting_ports "GEODE_SERVER_PORT_NUMBER" "GEODE_LOCATOR_PORT_NUMBER" "GEODE_HTTP_PORT_NUMBER" "GEODE_RMI_PORT_NUMBER" "GEODE_METRICS_PORT_NUMBER"
+    check_yes_no_value "GEODE_ENABLE_METRICS"
 
     # Validate Apache Geode locators
     if ! is_empty_value "$GEODE_LOCATORS"; then
@@ -439,6 +440,9 @@ geode_initialize() {
         ;;
     esac
 
+    # Enable metrics
+    ! is_boolean_yes "$GEODE_ENABLE_METRICS" && rm "${GEODE_EXTENSIONS_DIR}/micrometerMetrics.jar" || true
+
     true
 }
 
@@ -469,6 +473,8 @@ geode_start_flags() {
     # Memory flags
     [[ -n "$GEODE_INITIAL_HEAP_SIZE" ]] && start_flags+=("--initial-heap=${GEODE_INITIAL_HEAP_SIZE}")
     [[ -n "$GEODE_MAX_HEAP_SIZE" ]] && start_flags+=("--max-heap=${GEODE_MAX_HEAP_SIZE}")
+    # Metrics flags
+    is_boolean_yes "$GEODE_ENABLE_METRICS" && start_flags+=("--J=-Dprometheus.metrics.port=${GEODE_METRICS_PORT_NUMBER}")
     # Specific flags per node type
     case "$GEODE_NODE_TYPE" in
     server)
