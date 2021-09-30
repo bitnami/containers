@@ -118,6 +118,7 @@ To expose the same database name as the backend, set `PGBOUNCER_DATABASE="$POSTG
 - `PGBOUNCER_MAX_CLIENT_CONN` : PgBouncer maximum number of client connections allowed. Default: **120**.
 - `PGBOUNCER_IDLE_TRANSACTION_TIMEOUT` : PgBouncer maximum time for a client to be in "idle in transaction" state. Default: **0.0**.
 - `PGBOUNCER_DEFAULT_POOL_SIZE` : PgBouncer maximum server connections to allow per user/database pair. Default: **20**.
+- `PGBOUNCER_MIN_POOL_SIZE` : PgBouncer has at least this amount of open connections. Default: **0 (disabled)**.
 - `PGBOUNCER_IGNORE_STARTUP_PARAMETERS`: you can use this to set `ignore_startup_parameters` in the auto-generated `pgbouncer.ini`. This can be useful for solving certain connection issues. See https://www.pgbouncer.org/config.html for more details.
 
 ## Initializing a new instance

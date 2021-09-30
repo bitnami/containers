@@ -213,6 +213,7 @@ pgbouncer_initialize() {
             "max_client_conn:${PGBOUNCER_MAX_CLIENT_CONN}"
             "idle_transaction_timeout:${PGBOUNCER_IDLE_TRANSACTION_TIMEOUT}"
             "default_pool_size:${PGBOUNCER_DEFAULT_POOL_SIZE}"
+            "min_pool_size:${PGBOUNCER_MIN_POOL_SIZE}"
             "ignore_startup_parameters:${PGBOUNCER_IGNORE_STARTUP_PARAMETERS}"
         )
         for pair in "${key_value_pairs[@]}"; do
