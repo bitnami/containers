@@ -214,6 +214,7 @@ pgbouncer_initialize() {
             "idle_transaction_timeout:${PGBOUNCER_IDLE_TRANSACTION_TIMEOUT}"
             "default_pool_size:${PGBOUNCER_DEFAULT_POOL_SIZE}"
             "min_pool_size:${PGBOUNCER_MIN_POOL_SIZE}"
+            "reserve_pool_size:${PGBOUNCER_RESERVE_POOL_SIZE}"
             "ignore_startup_parameters:${PGBOUNCER_IGNORE_STARTUP_PARAMETERS}"
         )
         for pair in "${key_value_pairs[@]}"; do
