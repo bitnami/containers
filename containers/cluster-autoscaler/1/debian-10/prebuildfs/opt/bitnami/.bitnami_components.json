@@ -1,9 +1,9 @@
 {
     "cluster-autoscaler": {
         "arch": "amd64",
-        "digest": "f0962cea542690c68d75bf5ac7f202970b9a70e8b44628b779c8cce7cfe0c662",
+        "digest": "1eaf38636e72a3d3fb082f82bd2754187a231ad4df15c3012af950afd3115fbe",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.22.0-0"
+        "version": "1.22.1-0"
     }
 }
