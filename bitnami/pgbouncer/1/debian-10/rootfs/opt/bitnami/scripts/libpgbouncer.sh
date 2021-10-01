@@ -211,8 +211,11 @@ pgbouncer_initialize() {
             "query_wait_timeout:${PGBOUNCER_QUERY_WAIT_TIMEOUT}"
             "pool_mode:${PGBOUNCER_POOL_MODE}"
             "max_client_conn:${PGBOUNCER_MAX_CLIENT_CONN}"
+            "max_db_connections:${PGBOUNCER_MAX_DB_CONNECTIONS}"
             "idle_transaction_timeout:${PGBOUNCER_IDLE_TRANSACTION_TIMEOUT}"
             "default_pool_size:${PGBOUNCER_DEFAULT_POOL_SIZE}"
+            "min_pool_size:${PGBOUNCER_MIN_POOL_SIZE}"
+            "reserve_pool_size:${PGBOUNCER_RESERVE_POOL_SIZE}"
             "ignore_startup_parameters:${PGBOUNCER_IGNORE_STARTUP_PARAMETERS}"
         )
         for pair in "${key_value_pairs[@]}"; do
