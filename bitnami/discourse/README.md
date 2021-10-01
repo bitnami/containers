@@ -1,6 +1,8 @@
-# Bitnami Docker Image for Discourse
+# Bitnami Docker Image for Discourse&reg;
 
 ## What is Discourse?
+
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 > Discourse is the next-generation community forum platform. Discourse has a thoroughly modern design and is written in JavaScript. Page loads are very fast and new content is loaded as the user scrolls down the page. Discourse allows you to create categories, tag posts, manage notifications, create user profiles, and includes features to let communities govern themselves by voting out trolls and spammers. Discourse is built for mobile from the ground up and support high-res devices.
 
@@ -31,7 +33,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`2`, `2-debian-10`, `2.7.8`, `2.7.8-debian-10-r24`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.7.8-debian-10-r24/2/debian-10/Dockerfile)
+- [`2`, `2-debian-10`, `2.7.8`, `2.7.8-debian-10-r25`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.7.8-debian-10-r25/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/discourse GitHub repo](https://github.com/bitnami/bitnami-docker-discourse).
 
