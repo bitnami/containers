@@ -660,7 +660,7 @@ mongodb_is_secondary_node_pending() {
 
     result=$(
         mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
-rs.add('$node:$MONGODB_PORT_NUMBER')
+rs.add({host: '$node:$MONGODB_PORT_NUMBER'})
 EOF
     )
     debug "$result"
