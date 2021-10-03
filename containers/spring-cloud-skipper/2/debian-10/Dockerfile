@@ -10,7 +10,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.302-0" --checksum 59c0b7440797c7110c76959dbbce5235359b52adf62f99218b2718c04f2d67b6
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.13.2-0" --checksum 92356ab39f3233604478ffaf639429461d00a66d63ad42ec0a8d29f2bea43193
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.13.3-0" --checksum 83a1fc829033b78da3d99335556ecd7cda5f6265ded711d09d23966f72facd10
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "spring-cloud-skipper" "2.7.2-0" --checksum 50dfe55fc7c69fc8e2cd9272526d4d5f5af1aa2e0e3f78d6bc1d24598dc114b9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
@@ -18,7 +18,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/spring-cloud-skipper/postunpack.sh
 ENV BITNAMI_APP_NAME="spring-cloud-skipper" \
-    BITNAMI_IMAGE_VERSION="2.7.2-debian-10-r32" \
+    BITNAMI_IMAGE_VERSION="2.7.2-debian-10-r33" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"
 
 USER 1001
