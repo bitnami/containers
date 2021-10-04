@@ -441,7 +441,7 @@ geode_initialize() {
     esac
 
     # Enable metrics
-    ! is_boolean_yes "$GEODE_ENABLE_METRICS" && rm "${GEODE_EXTENSIONS_DIR}/micrometerMetrics.jar" || true
+    ! is_boolean_yes "$GEODE_ENABLE_METRICS" && rm -f "${GEODE_EXTENSIONS_DIR}/micrometerMetrics.jar"
 
     true
 }
