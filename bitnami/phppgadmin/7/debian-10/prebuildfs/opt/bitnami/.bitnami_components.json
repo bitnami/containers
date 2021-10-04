@@ -15,17 +15,17 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "918193450a025252992e041b8cf995b6ba3b2ddac65e2333796b921ea8d74e0e",
+        "digest": "4c5cb5fc477ce3f4256a76b4952c0a44fe92d46ad56e90a9363c8c9fccd6b036",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.24-0"
+        "version": "7.4.24-1"
     },
     "php": {
         "arch": "amd64",
-        "digest": "3950e26b7ecc7766268fe007e2fb3220e9a019da5296a0812014edc899870e3c",
+        "digest": "38ce5e5860e6eb5d179be3a8e74da07c8ec76e0670078bf47197ef43226f0eac",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.24-0"
+        "version": "7.4.24-1"
     },
     "phppgadmin": {
         "arch": "amd64",
