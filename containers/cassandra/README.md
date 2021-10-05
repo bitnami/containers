@@ -45,7 +45,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4.0`, `4.0-debian-10`, `4.0.1`, `4.0.1-debian-10-r26`, `latest` (4.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/4.0.1-debian-10-r26/4.0/debian-10/Dockerfile)
-* [`3`, `3-debian-10`, `3.11.11`, `3.11.11-debian-10-r62` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.11-debian-10-r62/3/debian-10/Dockerfile)
+* [`3.11`, `3.11-debian-10`, `3.11.11`, `3.11.11-debian-10-r57` (3.11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.11-debian-10-r57/3.11/debian-10/Dockerfile)
+* [`3.0`, `3.0-debian-10`, `3.0.25`, `3.0.25-debian-10-r0` (3.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.0.25-debian-10-r0/3.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cassandra GitHub repo](https://github.com/bitnami/bitnami-docker-cassandra).
 
@@ -528,6 +529,10 @@ $ docker-compose up cassandra
 ```
 
 # Notable Changes
+
+# 3.11.10-debian-10-r81 Split branch 3
+
+- Branch 3 has been split into branch 3.0 and 3.11 mirroring the upstream Cassandra repo.
 
 ## 3.11.4-debian-9-r188 and 3.11.4-ol-7-r201
 
