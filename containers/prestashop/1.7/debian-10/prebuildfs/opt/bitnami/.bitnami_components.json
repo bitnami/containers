@@ -29,17 +29,17 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "341fd99c1bb220199ff0909a85e121c9a4c8408b3312fe130f37a1b026f6aefb",
+        "digest": "55528f22669be09bab84511a8e161c635c1ac05a282b1bb350000e80b126c7cd",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.31-1"
+        "version": "7.3.31-2"
     },
     "prestashop": {
         "arch": "amd64",
-        "digest": "c3de7a192b52bff9e24553ea4808aeb93ec72f68b9904023faaaea191703e25d",
+        "digest": "aafda8c3385072f1235ed26630228977814a3a8cb6502a1a0001d9fa234fdcb9",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.7.7-8-0"
+        "version": "1.7.8-0-0"
     },
     "render-template": {
         "arch": "amd64",
