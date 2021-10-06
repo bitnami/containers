@@ -9,10 +9,10 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaudit1 libbsd0 libbz2-1.0 libc6 libcap-ng0 libcom-err2 libcurl4 libexpat1 libffi6 libfftw3-double3 libfontconfig1 libfreetype6 libgcc1 libgcrypt20 libglib2.0-0 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjemalloc2 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblcms2-2 libldap-2.4-2 liblqr-1-0 libltdl7 liblzma5 libmagickcore-6.q16-6 libmagickwand-6.q16-6 libmemcached11 libmemcachedutil2 libncurses6 libnettle6 libnghttp2-14 libonig5 libp11-kit0 libpam0g libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsodium23 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5deb1 libtinfo6 libunistring2 libuuid1 libwebp6 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxslt1.1 libzip4 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "8.0.11-1" --checksum 364ad737d8a4c78a2975b81532a2594d3ad8ff1d76d5cc84b2291d6d8df87cdd
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.49-0" --checksum 29ebcdb7c2573eb352415a810cc509d9838a64f160b0188fa4b0250067da14d2
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "8.0.11-2" --checksum c2e4e98729d7df8415e1b62f86d0eb07310230dfca96494deb9fafc411c66255
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.50-0" --checksum a59f5a16128bddb988e617e0c40b33e45a75bd656aa624d992009ed11a95ccae
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.31-2" --checksum 15b394a022ca1d0b4b89bfee0487ee13f9e8cc697d0ca09ce62a0a3732536236
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "8.0.11-0" --checksum 23beab7cd6cbda3e0e53e6794394eb8ec6f6bd2201bedc1e9f8c4fd0e9c07cc5
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "8.0.11-1" --checksum f44955c39da034b6ff7f8e312e91ee2c3605c32fa9734aa20abb7d39c8c05f31
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "phpmyadmin" "5.1.1-0" --checksum b2dbf36aeb64d28e1ae862d63185419c92ec957d8534cdbc5bb2076a78858856
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
@@ -28,7 +28,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="phpmyadmin" \
-    BITNAMI_IMAGE_VERSION="5.1.1-debian-10-r108" \
+    BITNAMI_IMAGE_VERSION="5.1.1-debian-10-r109" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
