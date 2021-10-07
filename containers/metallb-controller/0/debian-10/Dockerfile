@@ -9,14 +9,14 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/metallb-0.10.2-0-linux-amd64-debian-10.tar.gz && \
-    echo "7668817b7736be37c65e3b44401ca323b7024159609cdfd67e8a6b0907844111  /tmp/bitnami/pkg/cache/metallb-0.10.2-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/metallb-0.10.2-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/metallb-0.10.2-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/metallb-0.10.3-0-linux-amd64-debian-10.tar.gz && \
+    echo "a2a17087dcb043eaca22b2f4b6983f396db0ee1429be7b58c3ab23d6602d0db5  /tmp/bitnami/pkg/cache/metallb-0.10.3-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/metallb-0.10.3-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/metallb-0.10.3-0-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="metallb-controller" \
-    BITNAMI_IMAGE_VERSION="0.10.2-debian-10-r105" \
+    BITNAMI_IMAGE_VERSION="0.10.3-debian-10-r0" \
     PATH="/opt/bitnami/metallb/bin:$PATH"
 
 USER 1001
