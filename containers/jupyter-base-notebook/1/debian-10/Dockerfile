@@ -21,9 +21,9 @@ RUN chmod g+rwX /opt/bitnami
 RUN mkdir /opt/bitnami/jupyterhub-singleuser/ && chmod g+rwX /opt/bitnami/jupyterhub-singleuser/
 
 ENV BITNAMI_APP_NAME="jupyter-base-notebook" \
-    BITNAMI_IMAGE_VERSION="1.4.2-debian-10-r45" \
+    BITNAMI_IMAGE_VERSION="1.4.2-debian-10-r46" \
     PATH="/opt/bitnami/miniconda/bin:$PATH"
 
 USER 1001
 ENTRYPOINT [ "tini", "-g", "--" ]
-CMD [ "jupyterhub-singlesuser" ]
+CMD [ "jupyterhub-singleuser" ]
