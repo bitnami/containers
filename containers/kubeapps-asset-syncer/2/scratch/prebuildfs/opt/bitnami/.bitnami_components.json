@@ -1,7 +1,7 @@
 {
     "kubeapps-asset-syncer": {
-        "digest": "ab7c8cf300e9fcab730592d16090884d1c0234e959de885a7081437bd66061bf",
+        "digest": "71d00d51dccdb318d86ea0970fc2123a525ac1b6f25a5b67fcadcc87913e6884",
         "type": "BLACKSMITH",
-        "version": "2.4.0"
+        "version": "2.4.1"
     }
 }
