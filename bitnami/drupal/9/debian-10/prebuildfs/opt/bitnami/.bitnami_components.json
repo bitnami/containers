@@ -1,10 +1,10 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "a59f5a16128bddb988e617e0c40b33e45a75bd656aa624d992009ed11a95ccae",
+        "digest": "71010c86332e4ad0993bc875d103bb916184f1f42884a9098db65c969553c34a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.50-0"
+        "version": "2.4.51-0"
     },
     "drupal": {
         "arch": "amd64",
@@ -22,10 +22,10 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "4c5cb5fc477ce3f4256a76b4952c0a44fe92d46ad56e90a9363c8c9fccd6b036",
+        "digest": "534aa93850b658381e8ef85dd9cdb64c097eb7938d733640ac92f65263cb5dec",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.24-1"
+        "version": "7.4.24-3"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "14e6beb844563a6c12c6c3e9d51142fee454ac3d19214bfc583a8888c3620cd8",
+        "digest": "858b9a169923774e26117ef8a04c2aa0974365884847428beb2135ed466a5a30",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.24-2"
+        "version": "7.4.24-3"
     },
     "render-template": {
         "arch": "amd64",
