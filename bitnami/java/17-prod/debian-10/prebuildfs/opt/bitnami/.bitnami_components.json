@@ -1,0 +1,9 @@
+{
+    "java": {
+        "arch": "amd64",
+        "digest": "f5eba40e70c6bc02d12cbaf8114f838079c3594f0e4e4e1836f4a3b3fbb02ee6",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "17.0.0-0"
+    }
+}
