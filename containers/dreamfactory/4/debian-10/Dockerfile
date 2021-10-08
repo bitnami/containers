@@ -11,7 +11,7 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl gzip jq libargon2-1 libaudit1 libbsd0 libbz2-1.0 libc6 libcap-ng0 libcom-err2 libcurl4 libedit2 libexpat1 libffi6 libfftw3-double3 libfontconfig1 libfreetype6 libgcc1 libgcrypt20 libglib2.0-0 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjemalloc2 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblcms2-2 libldap-2.4-2 liblqr-1-0 libltdl7 liblzma5 libmagickcore-6.q16-6 libmagickwand-6.q16-6 libmcrypt4 libmemcached11 libmemcachedutil2 libncurses6 libnettle6 libnghttp2-14 libp11-kit0 libpam0g libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsodium23 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5deb1 libtinfo6 libunistring2 libuuid1 libuv1 libwebp6 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxslt1.1 libzip4 procps sqlite3 tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.3.31-3" --checksum a7111c44636878de8a5db7148fcf982cbe8c4fdd31a919d89c3beaa48149a2ea
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.51-0" --checksum 71010c86332e4ad0993bc875d103bb916184f1f42884a9098db65c969553c34a
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis-client" "6.0.16-0" --checksum 4bb083496dc9a6c6cdb5e6371de53918bd4128506e384bd3856603b122e7efc2
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis-client" "6.0.16-1" --checksum 4098185d902ee5e264bf9ec86e27e51c59c966004750ad7bde30e16a0a5f9f3f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "11.13.0-0" --checksum 1fc5072414ecbbd142a817ea8b0252904cbe17d34bd1c608a0b4865859458b0b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.4.21-2" --checksum 0ad1e1862ae23bd9aa0513d4cbe37ef6533f4a25ed140a6ae402f3e38bc6fef7
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb-client" "5.0.3-0" --checksum dc01abffb8ee5f9a4f420987f8e278028d3f6a261e78c8afa2ed430fdaab71d0
@@ -23,8 +23,8 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dreamfactory" "4
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/apache/postunpack.sh
+RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/dreamfactory/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
@@ -34,7 +34,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="dreamfactory" \
-    BITNAMI_IMAGE_VERSION="4.8.0-debian-10-r95" \
+    BITNAMI_IMAGE_VERSION="4.8.0-debian-10-r96" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
