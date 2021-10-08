@@ -30,6 +30,8 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
+- [`17-prod`, `17.0.0-prod-debian-10-r-1` (17-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/17.0.0-prod-debian-10-r-1/17-prod/debian-10/Dockerfile), [`17-prod-prod`, `17.0.0-prod-debian-10-r-1-prod` (17-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/17.0.0-prod-debian-10-r-1/17-prod/debian-10/prod/Dockerfile)
+- [`17`, `17.0.0-debian-10-r0` (17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/17.0.0-debian-10-r0/17/debian-10/Dockerfile), [`17-prod`, `17.0.0-debian-10-r0-prod` (17/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/17.0.0-debian-10-r0/17/debian-10/prod/Dockerfile)
 - [`16-prod`, `16.0.2-prod-debian-10-r72` (16-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/16.0.2-prod-debian-10-r72/16-prod/debian-10/Dockerfile), [`16-prod-prod`, `16.0.2-prod-debian-10-r72-prod` (16-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/16.0.2-prod-debian-10-r72/16-prod/debian-10/prod/Dockerfile)
 - [`16`, `16.0.2-debian-10-r72` (16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/16.0.2-debian-10-r72/16/debian-10/Dockerfile), [`16-prod`, `16.0.2-debian-10-r72-prod` (16/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/16.0.2-debian-10-r72/16/debian-10/prod/Dockerfile)
 - [`11-prod`, `11.0.12-prod-debian-10-r76` (11-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.12-prod-debian-10-r76/11-prod/debian-10/Dockerfile), [`11-prod-prod`, `11.0.12-prod-debian-10-r76-prod` (11-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.12-prod-debian-10-r76/11-prod/debian-10/prod/Dockerfile)
@@ -74,7 +76,7 @@ $ docker pull bitnami/java:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/java 'https://github.com/bitnami/bitnami-docker-java.git#master:11/debian-10'
+$ docker build -t bitnami/java 'https://github.com/bitnami/bitnami-docker-java.git#master:17/debian-10'
 ```
 
 # Configuration
