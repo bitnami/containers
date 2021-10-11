@@ -40,7 +40,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.16.0`, `1.16.0-debian-10-r36`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgbouncer/blob/1.16.0-debian-10-r36/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.16.0`, `1.16.0-debian-10-r61`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgbouncer/blob/1.16.0-debian-10-r61/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pgbouncer GitHub repo](https://github.com/bitnami/bitnami-docker-pgbouncer).
 
@@ -83,6 +83,7 @@ The Bitnami PgBouncer container requires a running PostgreSQL installation to co
 - `POSTGRESQL_DATABASE`: Backend PostgreSQL Database name to connect to. Default: **postgres**.
 - `POSTGRESQL_HOST`: Backend PostgreSQL hostname. Default: **postgresql**.
 - `POSTGRESQL_PORT`: Backend PostgreSQL port. Default: **5432**.
+- `PGBOUNCER_SET_DATABASE_USER`: Whether to include the backend PostgreSQL username in the database string. Default **no**.
 
 ## Port and address binding
 
@@ -110,6 +111,16 @@ To expose the same database name as the backend, set `PGBOUNCER_DATABASE="$POSTG
 
 ## Other options
 
+- `PGBOUNCER_POOL_MODE` : PgBouncer pool mode. Allowed values: session, transaction and statement. Default: **session**.
+- `PGBOUNCER_INIT_SLEEP_TIME` : PgBouncer initialization sleep time. Default: **10**.
+- `PGBOUNCER_INIT_MAX_RETRIES` : PgBouncer initialization maximum retries. Default: **10**.
+- `PGBOUNCER_QUERY_WAIT_TIMEOUT` : PgBouncer maximum time queries are allowed to spend waiting for execution. Default: **120**.
+- `PGBOUNCER_MAX_CLIENT_CONN` : PgBouncer maximum number of client connections allowed. Default: **120**.
+- `PGBOUNCER_MAX_DB_CONNECTIONS` : PgBouncer maximum number of database connections allowed. Default: **0 (unlimited)**.
+- `PGBOUNCER_IDLE_TRANSACTION_TIMEOUT` : PgBouncer maximum time for a client to be in "idle in transaction" state. Default: **0.0**.
+- `PGBOUNCER_DEFAULT_POOL_SIZE` : PgBouncer maximum server connections to allow per user/database pair. Default: **20**.
+- `PGBOUNCER_MIN_POOL_SIZE` : PgBouncer has at least this amount of open connections. Default: **0 (disabled)**.
+- `PGBOUNCER_RESERVE_POOL_SIZE` : PgBouncer allows this amount of additional connections. Default: **0 (disabled)**.
 - `PGBOUNCER_IGNORE_STARTUP_PARAMETERS`: you can use this to set `ignore_startup_parameters` in the auto-generated `pgbouncer.ini`. This can be useful for solving certain connection issues. See https://www.pgbouncer.org/config.html for more details.
 
 ## Initializing a new instance
@@ -185,7 +196,7 @@ Alternatively, you may also provide this configuration in your [custom](https://
 
 ## Configuration file
 
-The image looks for `pgbouncer.conf` file in `/opt/bitnami/pgbouncer/conf/`. You can mount a volume at `/bitnami/pgbouncer/conf/` and copy/edit the `pgbouncer.conf` file in the `/path/to/pgbouncer-persistence/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
+The image looks for `pgbouncer.ini` file in `/opt/bitnami/pgbouncer/conf/`. You can mount a volume at `/bitnami/pgbouncer/conf/` and copy/edit the `pgbouncer.ini` file in the `/path/to/pgbouncer-persistence/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
 ```console
 /path/to/pgbouncer-persistence/conf/
