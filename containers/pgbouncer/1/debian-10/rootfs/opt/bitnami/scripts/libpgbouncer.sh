@@ -96,13 +96,13 @@ pgbouncer_validate() {
 
     if [[ "$PGBOUNCER_SERVER_TLS_SSLMODE" != "disable" ]]; then
         # TLS Checks
-        if [[ "$PGBOUNCER_SERVER_TLS_CERT_FILE" != "" ]] && [[ ! -f "$PGBOUNCER_SERVER_TLS_CERT_FILE" ]]; then
+        if [[ -n "$PGBOUNCER_SERVER_TLS_CERT_FILE" ]] && [[ ! -f "$PGBOUNCER_SERVER_TLS_CERT_FILE" ]]; then
             print_validation_error "The X.509 server certificate file in the specified path ${PGBOUNCER_SERVER_TLS_CERT_FILE} does not exist"
         fi
-        if [[ "$PGBOUNCER_SERVER_TLS_KEY_FILE" != "" ]] && [[ ! -f "$PGBOUNCER_SERVER_TLS_KEY_FILE" ]]; then
+        if [[ -n "$PGBOUNCER_SERVER_TLS_KEY_FILE" ]] && [[ ! -f "$PGBOUNCER_SERVER_TLS_KEY_FILE" ]]; then
             print_validation_error "The server private key file in the specified path ${PGBOUNCER_SERVER_TLS_KEY_FILE} does not exist"
         fi
-        if [[ "$PGBOUNCER_SERVER_TLS_CA_FILE" != "" ]] && [[ ! -f "$PGBOUNCER_SERVER_TLS_CA_FILE" ]]; then
+        if [[ -n "$PGBOUNCER_SERVER_TLS_CA_FILE" ]] && [[ ! -f "$PGBOUNCER_SERVER_TLS_CA_FILE" ]]; then
             print_validation_error "The server CA X.509 certificate file in the specified path ${PGBOUNCER_SERVER_TLS_CA_FILE} does not exist"
         fi
     fi
