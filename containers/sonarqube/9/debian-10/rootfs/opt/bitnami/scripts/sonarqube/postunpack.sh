@@ -30,7 +30,8 @@ replace_in_file "${SONARQUBE_CONF_DIR}/wrapper.conf" "^[#\s]*wrapper.logfile.rol
 # Ensure the SonarQube base directory exists and has proper permissions
 # Based on https://github.com/SonarSource/docker-sonarqube/blob/master/9/community/Dockerfile#L129
 info "Configuring file permissions for SonarQube"
-ensure_user_exists "$SONARQUBE_DAEMON_USER" --group "$SONARQUBE_DAEMON_GROUP" --system
+ensure_group_exists "$SONARQUBE_DAEMON_GROUP" --gid "$SONARQUBE_DAEMON_GROUP_ID"
+ensure_user_exists "$SONARQUBE_DAEMON_USER" --system --uid "$SONARQUBE_DAEMON_USER_ID" --group "$SONARQUBE_DAEMON_GROUP" --append-groups "root"
 for dir in "$SONARQUBE_DATA_DIR" "$SONARQUBE_EXTENSIONS_DIR" "$SONARQUBE_LOGS_DIR" "$SONARQUBE_TMP_DIR" "${SONARQUBE_BASE_DIR}/pids" "$SONARQUBE_VOLUME_DIR"; do
     ensure_dir_exists "$dir"
     # Use daemon:root ownership for compatibility when running as a non-root user

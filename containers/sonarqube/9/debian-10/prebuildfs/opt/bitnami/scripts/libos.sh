@@ -39,18 +39,24 @@ group_exists() {
 # Arguments:
 #   $1 - group
 # Flags:
+#   --gid - When the group doesn't exist forces an ID for creation
 #   -s|--system - Whether to create new user as system user (uid <= 999)
 # Returns:
 #   None
 #########################
 ensure_group_exists() {
     local group="${1:?group is missing}"
+    local gid=""
     local is_system_user=false
 
     # Validate arguments
     shift 1
     while [ "$#" -gt 0 ]; do
         case "$1" in
+            --gid)
+                shift
+                gid="${1:?missing gid}"
+                ;;
             -s|--system)
                 is_system_user=true
                 ;;
@@ -64,6 +70,13 @@ ensure_group_exists() {
 
     if ! group_exists "$group"; then
         local -a args=("$group")
+        if [[ -n "$gid" ]]; then
+            if group_exists "$gid" ; then
+                error "The GID $gid is already in use." >&2
+                return 1
+            fi
+            args+=("--gid" "$gid")
+        fi
         $is_system_user && args+=("--system")
         groupadd "${args[@]}" >/dev/null 2>&1
     fi
@@ -74,7 +87,9 @@ ensure_group_exists() {
 # Arguments:
 #   $1 - user
 # Flags:
+#   --uid - when the user doesn't exist forces an ID for creation
 #   -g|--group - the group the new user should belong to
+#   --append-groups - append the user to the supplemental GROUPS
 #   -h|--home - the home directory for the new user
 #   -s|--system - whether to create new user as system user (uid <= 999)
 # Returns:
@@ -82,7 +97,9 @@ ensure_group_exists() {
 #########################
 ensure_user_exists() {
     local user="${1:?user is missing}"
+    local uid=""
     local group=""
+    local append_groups=""
     local home=""
     local is_system_user=false
 
@@ -90,9 +107,17 @@ ensure_user_exists() {
     shift 1
     while [ "$#" -gt 0 ]; do
         case "$1" in
+            --uid)
+                shift
+                uid="${1:?missing uid}"
+                ;;
             -g|--group)
                 shift
                 group="${1:?missing group}"
+                ;;
+            --append-groups)
+                shift
+                append_groups="${1:?missing append_groups}"
                 ;;
             -h|--home)
                 shift
@@ -111,6 +136,13 @@ ensure_user_exists() {
 
     if ! user_exists "$user"; then
         local -a user_args=("-N" "$user")
+        if [[ -n "$uid" ]]; then
+            if user_exists "$uid" ; then
+                error "The UID $uid is already in use." >&2
+                return 1
+            fi
+            user_args+=("--uid" "$uid")
+        fi
         $is_system_user && user_args+=("--system")
         useradd "${user_args[@]}" >/dev/null 2>&1
     fi
@@ -120,6 +152,14 @@ ensure_user_exists() {
         $is_system_user && group_args+=("--system")
         ensure_group_exists "${group_args[@]}"
         usermod -g "$group" "$user" >/dev/null 2>&1
+    fi
+
+    if [[ -n "$append_groups" ]]; then
+        read -ra groups <<< "$(tr ',;' ' ' <<< "$append_groups")"
+        for group in "${groups[@]}"; do
+            ensure_group_exists "$group"
+            usermod -aG "$group" "$user" >/dev/null 2>&1
+        done
     fi
 
     if [[ -n "$home" ]]; then
