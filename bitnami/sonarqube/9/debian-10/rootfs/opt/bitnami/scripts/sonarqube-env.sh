@@ -91,7 +91,9 @@ export SONARQUBE_DATA_TO_PERSIST="${SONARQUBE_DATA_TO_PERSIST:-${SONARQUBE_DATA_
 
 # System users (when running with a privileged user)
 export SONARQUBE_DAEMON_USER="sonarqube"
+export SONARQUBE_DAEMON_USER_ID="1001"
 export SONARQUBE_DAEMON_GROUP="sonarqube"
+export SONARQUBE_DAEMON_GROUP_ID="1001"
 
 # SonarQube configuration
 export SONARQUBE_PORT_NUMBER="${SONARQUBE_PORT_NUMBER:-9000}"
