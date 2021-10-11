@@ -39,7 +39,7 @@ group_exists() {
 # Arguments:
 #   $1 - group
 # Flags:
-#   --gid - When the group doesn't exist forces an ID for creation
+#   -i|--gid - the ID for the new group
 #   -s|--system - Whether to create new user as system user (uid <= 999)
 # Returns:
 #   None
@@ -53,7 +53,7 @@ ensure_group_exists() {
     shift 1
     while [ "$#" -gt 0 ]; do
         case "$1" in
-            --gid)
+            -i|--gid)
                 shift
                 gid="${1:?missing gid}"
                 ;;
@@ -87,9 +87,9 @@ ensure_group_exists() {
 # Arguments:
 #   $1 - user
 # Flags:
-#   --uid - when the user doesn't exist forces an ID for creation
+#   -i|--uid - the ID for the new user
 #   -g|--group - the group the new user should belong to
-#   --append-groups - append the user to the supplemental GROUPS
+#   -a|--append-groups - comma-separated list of supplemental groups to append to the new user
 #   -h|--home - the home directory for the new user
 #   -s|--system - whether to create new user as system user (uid <= 999)
 # Returns:
@@ -107,7 +107,7 @@ ensure_user_exists() {
     shift 1
     while [ "$#" -gt 0 ]; do
         case "$1" in
-            --uid)
+            -i|--uid)
                 shift
                 uid="${1:?missing uid}"
                 ;;
@@ -115,7 +115,7 @@ ensure_user_exists() {
                 shift
                 group="${1:?missing group}"
                 ;;
-            --append-groups)
+            -a|--append-groups)
                 shift
                 append_groups="${1:?missing append_groups}"
                 ;;
@@ -138,12 +138,13 @@ ensure_user_exists() {
         local -a user_args=("-N" "$user")
         if [[ -n "$uid" ]]; then
             if user_exists "$uid" ; then
-                error "The UID $uid is already in use." >&2
+                error "The UID $uid is already in use."
                 return 1
             fi
             user_args+=("--uid" "$uid")
+        else
+            $is_system_user && user_args+=("--system")
         fi
-        $is_system_user && user_args+=("--system")
         useradd "${user_args[@]}" >/dev/null 2>&1
     fi
 
@@ -155,6 +156,7 @@ ensure_user_exists() {
     fi
 
     if [[ -n "$append_groups" ]]; then
+        local -a groups
         read -ra groups <<< "$(tr ',;' ' ' <<< "$append_groups")"
         for group in "${groups[@]}"; do
             ensure_group_exists "$group"
@@ -443,3 +445,4 @@ generate_sha_hash() {
     local -r algorithm="${2:-1}"
     echo -n "$str" | "sha${algorithm}sum" | awk '{print $1}'
 }
+
