@@ -8,9 +8,9 @@
     },
     "spring-cloud-skipper-shell": {
         "arch": "amd64",
-        "digest": "db96a616186a7ddf90b228f7fff8ba15a68b0bdc6b8244377b784d44d042f637",
+        "digest": "f54cfd9acd0a11a6025ff5605edb03c74a0b7c66daac7855ccf6197c53df0df8",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.7.2-0"
+        "version": "2.8.0-0"
     }
 }
