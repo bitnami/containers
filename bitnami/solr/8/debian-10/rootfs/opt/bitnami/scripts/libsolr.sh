@@ -297,7 +297,7 @@ solr_create_cloud_user() {
     local -r exec="${SOLR_BIN_DIR}/solr"
     local -r username="${1:?user is required}"
     local -r password="${2:?password is required}"
-    local command_args=("auth" "enable" "-type" "basicAuth" "-credentials" "${username}:${password}" "-blockUnknown" "true" "-z" "$SOLR_ZK_HOSTS")
+    local command_args=("auth" "enable" "-type" "basicAuth" "-credentials" "${username}:${password}" "-blockUnknown" "true" "-z" "$SOLR_ZK_HOSTS/solr")
 
     info "Creating user: ${username}"
 
