@@ -75,7 +75,7 @@ pgbouncer_validate() {
         fi
     fi
 
-    # TLS Checks
+    # TLS Checks (client)
     if [[ "$PGBOUNCER_CLIENT_TLS_SSLMODE" != "disable" ]]; then
         if [[ -z "$PGBOUNCER_CLIENT_TLS_CERT_FILE" ]]; then
             print_validation_error "You must provide a X.509 certificate in order to use TLS"
@@ -227,6 +227,7 @@ pgbouncer_initialize() {
             "logfile:${PGBOUNCER_LOG_FILE}"
             "admin_users:${POSTGRESQL_USERNAME}"
             "client_tls_sslmode:${PGBOUNCER_CLIENT_TLS_SSLMODE}"
+            "server_tls_sslmode:${PGBOUNCER_SERVER_TLS_SSLMODE}"
             "query_wait_timeout:${PGBOUNCER_QUERY_WAIT_TIMEOUT}"
             "pool_mode:${PGBOUNCER_POOL_MODE}"
             "max_client_conn:${PGBOUNCER_MAX_CLIENT_CONN}"
@@ -249,13 +250,13 @@ pgbouncer_initialize() {
             ! is_empty_value "$PGBOUNCER_CLIENT_TLS_CA_FILE" && ini-file set --section "pgbouncer" --key "client_tls_ca_file" --value "$PGBOUNCER_CLIENT_TLS_CA_FILE" "$PGBOUNCER_CONF_FILE"
             ini-file set --section "pgbouncer" --key "client_tls_ciphers" --value "$PGBOUNCER_CLIENT_TLS_CIPHERS" "$PGBOUNCER_CONF_FILE"
         fi
-        ! is_empty_value "$PGBOUNCER_SERVER_TLS_SSLMODE" && ini-file set --section "pgbouncer" --key "server_tls_sslmode" --value "$PGBOUNCER_SERVER_TLS_SSLMODE" "$PGBOUNCER_CONF_FILE"
+
         if [[ "$PGBOUNCER_SERVER_TLS_SSLMODE" != "disable" ]]; then
-            ! is_empty_value "$PGBOUNCER_SERVER_TLS_CERT_FILE" && ini-file set --section "pgbouncer" --key "server_tls_cert_file" --value "$PGBOUNCER_SERVER_TLS_CERT_FILE" "$PGBOUNCER_CONF_FILE"
-            ! is_empty_value "$PGBOUNCER_SERVER_TLS_KEY_FILE" && ini-file set --section "pgbouncer" --key "server_tls_key_file" --value "$PGBOUNCER_SERVER_TLS_KEY_FILE" "$PGBOUNCER_CONF_FILE"
+            ini-file set --section "pgbouncer" --key "server_tls_cert_file" --value "$PGBOUNCER_SERVER_TLS_CERT_FILE" "$PGBOUNCER_CONF_FILE"
+            ini-file set --section "pgbouncer" --key "server_tls_key_file" --value "$PGBOUNCER_SERVER_TLS_KEY_FILE" "$PGBOUNCER_CONF_FILE"
             ! is_empty_value "$PGBOUNCER_SERVER_TLS_CA_FILE" && ini-file set --section "pgbouncer" --key "server_tls_ca_file" --value "$PGBOUNCER_SERVER_TLS_CA_FILE" "$PGBOUNCER_CONF_FILE"
             ! is_empty_value "$PGBOUNCER_SERVER_TLS_PROTOCOLS" && ini-file set --section "pgbouncer" --key "server_tls_ca_file" --value "$PGBOUNCER_SERVER_TLS_PROTOCOLS" "$PGBOUNCER_CONF_FILE"
-            ! is_empty_value "$PGBOUNCER_SERVER_TLS_CIPHERS" && ini-file set --section "pgbouncer" --key "server_tls_ciphers" --value "$PGBOUNCER_SERVER_TLS_CIPHERS" "$PGBOUNCER_CONF_FILE"
+            ini-file set --section "pgbouncer" --key "server_tls_ciphers" --value "$PGBOUNCER_SERVER_TLS_CIPHERS" "$PGBOUNCER_CONF_FILE"
         fi
     else
         debug "Configuration file is mounted externally, skipping configuration"
