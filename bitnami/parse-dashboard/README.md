@@ -37,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.2.1`, `3.2.1-debian-10-r4`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/3.2.1-debian-10-r4/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.2.1`, `3.2.1-debian-10-r5`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/3.2.1-debian-10-r5/3/debian-10/Dockerfile)
 * [`2`, `2-debian-10`, `2.2.0`, `2.2.0-debian-10-r47` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/2.2.0-debian-10-r47/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse-dashboard GitHub repo](https://github.com/bitnami/bitnami-docker-parse-dashboard).
@@ -248,6 +248,10 @@ Available environment variables:
 ## 1.2.0-r69
 
 - The Parse Dashboard container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Parse Dashboard daemon was started as the `parsedashboard` user. From now on, both the container and the Parse Dashboard daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
+
+# Branch Deprecation Notice
+
+Parse Dashboard's branch 2 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 11-08-2021
 
 # Contributing
 
