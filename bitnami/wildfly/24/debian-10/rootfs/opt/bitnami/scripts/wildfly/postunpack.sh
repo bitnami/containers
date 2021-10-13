@@ -24,5 +24,5 @@ for dir in "$WILDFLY_HOME_DIR" "${WILDFLY_BASE_DIR}/domain" "${WILDFLY_BASE_DIR}
     configure_permissions_ownership "$dir" -d "775" -f "664"
 done
 
-# Create a symlink to standalone deployment directory so users can mount their custom webapps at /app
-ln -sf "${WILDFLY_BASE_DIR}/standalone/deployment" /app
+# Create a symlink to standalone deployments directory so users can mount their custom webapps at /app
+ln -sf "${WILDFLY_BASE_DIR}/standalone/deployments" /app
