@@ -161,7 +161,7 @@ PgBouncer supports the encryption of connections using the SSL/TLS protocol. Sho
  - `PGBOUNCER_SERVER_TLS_PROTOCOLS`: TLS protocols to be used in server connection. Defaults to `secure`. Check the [official PgBouncer documentation](https://www.pgbouncer.org/config.html) for the available values for `server_tls_protocols`.
  - `PGBOUNCER_SERVER_TLS_CIPHERS`: TLS ciphers to be used in server connection. Defaults to `fast`. Check the [official PgBouncer documentation](https://www.pgbouncer.org/config.html) for the available values for `server_tls_ciphers`.
 
-When enabling client TLS, PgBouncer will support both standard and encrypted traffic by default, but prefer the latter. Below there are some examples on how to quickly set up TLS traffic:
+When enabling TLS, PgBouncer will support both standard and encrypted traffic by default but prefer the latter. Below there are some examples of how to quickly set up client TLS traffic:
 
 1. Using `docker run`
 
