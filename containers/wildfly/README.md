@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`24`, `24-debian-10`, `24.0.1`, `24.0.1-debian-10-r76`, `latest` (24/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/24.0.1-debian-10-r76/24/debian-10/Dockerfile)
+* [`24`, `24-debian-10`, `24.0.1`, `24.0.1-debian-10-r77`, `latest` (24/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/24.0.1-debian-10-r77/24/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wildfly GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
 
@@ -94,7 +94,7 @@ services:
 
 The Bitnami WildFly image launches WildFLy in standalone mode. Therefore, you can deploy your web applications by placing your compressed web application resource (`.WAR`) files there at `/opt/bitnami/wildfly/standalone/` directory.
 
-Additionally a helper symlink `/app` is present that points to the deployment directory which enables us to deploy applications on a running WildFly instance by simply doing:
+Additionally a helper symlink `/app` is present that points to the deployments directory which enables us to deploy applications on a running WildFly instance by simply doing:
 
 ```console
 $ docker cp /path/to/app.war wildfly:/app
