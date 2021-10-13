@@ -15,10 +15,10 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "58c750af2e2a9b3c137d51f72b9512f9e313f772d28ec884798997519d2705b9",
+        "digest": "53575c1af09f423b9a2553b8b9880462f192961f4ada8fafa70a0238b106f26a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "14.18.0-0"
+        "version": "14.18.1-0"
     },
     "python": {
         "arch": "amd64",
