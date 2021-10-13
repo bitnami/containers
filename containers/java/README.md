@@ -34,7 +34,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 - [`17`, `17.0.0-debian-10-r3` (17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/17.0.0-debian-10-r3/17/debian-10/Dockerfile), [`17-prod`, `17.0.0-debian-10-r3-prod` (17/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/17.0.0-debian-10-r3/17/debian-10/prod/Dockerfile)
 - [`16-prod`, `16.0.2-prod-debian-10-r76` (16-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/16.0.2-prod-debian-10-r76/16-prod/debian-10/Dockerfile), [`16-prod-prod`, `16.0.2-prod-debian-10-r76-prod` (16-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/16.0.2-prod-debian-10-r76/16-prod/debian-10/prod/Dockerfile)
 - [`16`, `16.0.2-debian-10-r76` (16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/16.0.2-debian-10-r76/16/debian-10/Dockerfile), [`16-prod`, `16.0.2-debian-10-r76-prod` (16/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/16.0.2-debian-10-r76/16/debian-10/prod/Dockerfile)
-- [`11-prod`, `11.0.12-prod-debian-10-r80` (11-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.12-prod-debian-10-r80/11-prod/debian-10/Dockerfile), [`11-prod-prod`, `11.0.12-prod-debian-10-r80-prod` (11-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.12-prod-debian-10-r80/11-prod/debian-10/prod/Dockerfile)
+- [`11-prod`, `11.0.12-prod-debian-10-r81` (11-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.12-prod-debian-10-r81/11-prod/debian-10/Dockerfile), [`11-prod-prod`, `11.0.12-prod-debian-10-r81-prod` (11-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.12-prod-debian-10-r81/11-prod/debian-10/prod/Dockerfile)
 - [`11`, `11.0.12-debian-10-r78` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.12-debian-10-r78/11/debian-10/Dockerfile), [`11-prod`, `11.0.12-debian-10-r78-prod` (11/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.12-debian-10-r78/11/debian-10/prod/Dockerfile)
 - [`1.8-prod`, `1.8.302-prod-debian-10-r78` (1.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.302-prod-debian-10-r78/1.8-prod/debian-10/Dockerfile), [`1.8-prod-prod`, `1.8.302-prod-debian-10-r78-prod` (1.8-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.302-prod-debian-10-r78/1.8-prod/debian-10/prod/Dockerfile)
 - [`1.8`, `1.8.302-debian-10-r81` (1.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.302-debian-10-r81/1.8/debian-10/Dockerfile), [`1.8-prod`, `1.8.302-debian-10-r81-prod` (1.8/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.302-debian-10-r81/1.8/debian-10/prod/Dockerfile)
@@ -149,6 +149,10 @@ $ docker-compose up java
 ## 1.8.252-debian-10-r0, 11.0.7-debian-10-r7, and 15.0.1-debian-10-r20
 
 - Java distribution has been migrated from AdoptOpenJDK to OpenJDK Liberica. As part of VMware, we have an agreement with Bell Software to distribute the Liberica distribution of OpenJDK. That way, we can provide support & the latest versions and security releases for Java.
+
+# Branch Deprecation Notice
+
+Java's branch 16 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 11-08-2021
 
 # Contributing
 
