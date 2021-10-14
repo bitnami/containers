@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
-* [`2`, `2-debian-10`, `2.8.1`, `2.8.1-debian-10-r18`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.1-debian-10-r18/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.8.1`, `2.8.1-debian-10-r19` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.1-debian-10-r19/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
@@ -66,7 +66,7 @@ $ docker pull bitnami/kafka:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-docker build -t bitnami/kafka:latest 'https://github.com/bitnami/bitnami-docker-kafka.git#master:2/debian-10'
+
 ```
 
 ## Persisting your data
@@ -138,7 +138,7 @@ Finally we create a new container instance to launch the Kafka client and connec
 $ docker run -it --rm \
     --network app-tier \
     -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper-server:2181 \
-    bitnami/kafka:latest kafka-topics.sh --list  --zookeeper zookeeper-server:2181
+    bitnami/kafka:latest kafka-topics.sh --list  --bootstrap-server kafka-server:9092
 ```
 
 ### Using Docker Compose
@@ -554,10 +554,10 @@ services:
 Then, you can create a replicated topic with:
 
 ```console
-root@kafka1:/# /opt/bitnami/kafka/bin/kafka-topics.sh --create --zookeeper zookeeper:2181 --topic mytopic --partitions 3 --replication-factor 3
+root@kafka1:/# /opt/bitnami/kafka/bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --topic mytopic --partitions 3 --replication-factor 3
 Created topic "mytopic".
 
-root@kafka1:/# /opt/bitnami/kafka/bin/kafka-topics.sh --describe --zookeeper zookeeper:2181 --topic mytopic
+root@kafka1:/# /opt/bitnami/kafka/bin/kafka-topics.sh --describe --bootstrap-server localhost:9092 --topic mytopic
 Topic:mytopic   PartitionCount:3        ReplicationFactor:3     Configs:
         Topic: mytopic  Partition: 0    Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
         Topic: mytopic  Partition: 1    Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
@@ -724,6 +724,10 @@ $ docker-compose up kafka
 ```
 
 ## Notable Changes
+
+### 3.0.0-debian-10-r0
+
+* Apache Kafka 3.0 deprecates the `--zookeper` flag in shell commands. Related operations such as topic creation require the use of updated flags. Please, refer to [Kafka's official release notes](https://downloads.apache.org/kafka/3.0.0/RELEASE_NOTES.html) for further information on the changes introduced by this version.
 
 ### 2.5.0-debian-10-r111
 
