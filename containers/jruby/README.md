@@ -34,7 +34,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`9.3`, `9.3-debian-10`, `9.3.1-0`, `9.3.1-0-debian-10-r0` (9.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jruby/blob/9.3.1-0-debian-10-r0/9.3/debian-10/Dockerfile)
-* [`9.2`, `9.2-debian-10`, `9.2.19-0`, `9.2.19-0-debian-10-r114`, `latest` (9.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jruby/blob/9.2.19-0-debian-10-r114/9.2/debian-10/Dockerfile)
+* [`9.2`, `9.2-debian-10`, `9.2.19-0`, `9.2.19-0-debian-10-r115`, `latest` (9.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jruby/blob/9.2.19-0-debian-10-r115/9.2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jruby GitHub repo](https://github.com/bitnami/bitnami-docker-jruby).
 
@@ -275,6 +275,10 @@ or using Docker Compose:
 ```console
 $ docker-compose up ruby
 ```
+
+# Branch Deprecation Notice
+
+JRuby's branch 9.2 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 11-14-2021
 
 # Contributing
 
