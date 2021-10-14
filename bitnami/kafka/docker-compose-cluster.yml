@@ -10,7 +10,7 @@ services:
     volumes:
       - zookeeper_data:/bitnami/zookeeper
   kafka-0:
-    image: docker.io/bitnami/kafka:2
+    image: docker.io/bitnami/kafka:3
     ports:
       - "9092"
     environment:
@@ -22,7 +22,7 @@ services:
     depends_on:
       - zookeeper
   kafka-1:
-    image: docker.io/bitnami/kafka:2
+    image: docker.io/bitnami/kafka:3
     ports:
       - "9092"
     environment:
@@ -34,7 +34,7 @@ services:
     depends_on:
       - zookeeper
   kafka-2:
-    image: docker.io/bitnami/kafka:2
+    image: docker.io/bitnami/kafka:3
     ports:
       - "9092"
     environment:
