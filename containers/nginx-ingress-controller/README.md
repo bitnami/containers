@@ -35,7 +35,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 # Supported tags and respective `Dockerfile` links
 
 
-* [`1`, `1-debian-10`, `1.0.4`, `1.0.4-debian-10-r1`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/blob/1.0.4-debian-10-r1/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.0.4`, `1.0.4-debian-10-r2`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/blob/1.0.4-debian-10-r2/1/debian-10/Dockerfile)
 * [`0`, `0-debian-10`, `0.49.3`, `0.49.3-debian-10-r8` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/blob/0.49.3-debian-10-r8/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nginx-ingress-controller GitHub repo](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller).
@@ -45,6 +45,9 @@ Subscribe to project updates by watching the [bitnami/nginx-ingress-controller G
 
 For further documentation, please check [here](https://github.com/kubernetes/ingress-nginx).
 
+# Branch Deprecation Notice
+
+NGINX Ingress Controller's branch 0 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 11-15-2021
 
 # Contributing
 
