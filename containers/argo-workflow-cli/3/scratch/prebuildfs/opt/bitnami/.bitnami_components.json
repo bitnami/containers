@@ -1,7 +1,7 @@
 {
-    "argo-workflow-cli": {
-        "digest": "7c78e7202a436940e07a9c1ff2a637ff802dad207199545e497fb7c72cb6c03b",
+    "argo-workflows": {
+        "digest": "2e051f6042789526c64d8334941bcb96fa00a3274a67da87db51a912032a347b",
         "type": "BLACKSMITH",
-        "version": "3.1.13"
+        "version": "3.2.0"
     }
 }
