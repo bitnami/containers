@@ -174,8 +174,8 @@ minio_stop() {
         minio_client_execute_timeout admin service stop local >/dev/null 2>&1 || true
 
         local counter=5
-        while is_minio_running; do
-            if [[ "$counter" -ne 0 ]]; then
+        while is_minio_running || is_service_running "$MINIO_PID"; do
+            if [[ "$counter" -le 0 ]]; then
                 break
             fi
             sleep 1;
