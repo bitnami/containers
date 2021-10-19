@@ -5,31 +5,9 @@
 # Functions
 
 ########################
-# Load global variables used on MinIO Client configuration
-# Globals:
-#   MINIO_CLIENT_*
-# Arguments:
-#   None
-# Returns:
-#   Series of exports to be used as 'eval' arguments
-#########################
-minio_client_env() {
-    cat <<"EOF"
-export MINIO_CLIENT_BASEDIR="/opt/bitnami/minio-client"
-export MINIO_CLIENT_CONFIGDIR="/.mc"
-export MINIO_SERVER_HOST="${MINIO_SERVER_HOST:-}"
-export MINIO_SERVER_PORT_NUMBER="${MINIO_SERVER_PORT_NUMBER:-9000}"
-export MINIO_SERVER_SCHEME="${MINIO_SERVER_SCHEME:-http}"
-export MINIO_SERVER_ACCESS_KEY="${MINIO_SERVER_ACCESS_KEY:-}"
-export MINIO_SERVER_SECRET_KEY="${MINIO_SERVER_SECRET_KEY:-}"
-export PATH="${MINIO_CLIENT_BASEDIR}/bin:$PATH"
-EOF
-}
-
-########################
 # Check if a bucket already exists
 # Globals:
-#   MINIO_CLIENT_CONFIGDIR
+#   MINIO_CLIENT_CONF_DIR
 # Arguments:
 #   $1 - Bucket name
 # Returns:
@@ -46,13 +24,13 @@ minio_client_bucket_exists() {
 ########################
 # Execute an arbitrary MinIO client command
 # Globals:
-#   MINIO_CLIENT_CONFIGDIR
+#   MINIO_CLIENT_CONF_DIR
 # Arguments:
 #   $@ - Command to execute
 # Returns:
 #   None
 minio_client_execute() {
-    local -r args=("--config-dir" "${MINIO_CLIENT_CONFIGDIR}" "--quiet" "$@")
+    local -r args=("--config-dir" "${MINIO_CLIENT_CONF_DIR}" "--quiet" "$@")
     local exec
     exec=$(command -v mc)
 
@@ -62,13 +40,13 @@ minio_client_execute() {
 ########################
 # Execute an arbitrary MinIO client command with a 2s timeout
 # Globals:
-#   MINIO_CLIENT_CONFIGDIR
+#   MINIO_CLIENT_CONF_DIR
 # Arguments:
 #   $@ - Command to execute
 # Returns:
 #   None
 minio_client_execute_timeout() {
-    local -r args=("--config-dir" "${MINIO_CLIENT_CONFIGDIR}" "--quiet" "$@")
+    local -r args=("--config-dir" "${MINIO_CLIENT_CONF_DIR}" "--quiet" "$@")
     local exec
     exec=$(command -v mc)
 
@@ -85,9 +63,9 @@ minio_client_execute_timeout() {
 #   Series of exports to be used as 'eval' arguments
 #########################
 minio_client_configure_server() {
-    if [[ -n "$MINIO_SERVER_HOST" ]] && [[ -n "$MINIO_SERVER_ACCESS_KEY" ]] && [[ -n "$MINIO_SERVER_SECRET_KEY" ]]; then
+    if [[ -n "$MINIO_SERVER_HOST" ]] && [[ -n "$MINIO_SERVER_ROOT_USER" ]] && [[ -n "$MINIO_SERVER_ROOT_PASSWORD" ]]; then
         info "Adding Minio host to 'mc' configuration..."
-        minio_client_execute config host add minio "${MINIO_SERVER_SCHEME}://${MINIO_SERVER_HOST}:${MINIO_SERVER_PORT_NUMBER}" "${MINIO_SERVER_ACCESS_KEY}" "${MINIO_SERVER_SECRET_KEY}"
+        minio_client_execute config host add minio "${MINIO_SERVER_SCHEME}://${MINIO_SERVER_HOST}:${MINIO_SERVER_PORT_NUMBER}" "${MINIO_SERVER_ROOT_USER}" "${MINIO_SERVER_ROOT_PASSWORD}"
     fi
 }
 
@@ -100,5 +78,5 @@ minio_client_configure_server() {
 #########################
 minio_client_configure_local() {
     info "Adding local Minio host to 'mc' configuration..."
-    minio_client_execute config host add local "${MINIO_SERVER_SCHEME}://localhost:${MINIO_SERVER_PORT_NUMBER}" "${MINIO_SERVER_ACCESS_KEY}" "${MINIO_SERVER_SECRET_KEY}" >/dev/null 2>&1
+    minio_client_execute config host add local "${MINIO_SERVER_SCHEME}://localhost:${MINIO_SERVER_PORT_NUMBER}" "${MINIO_SERVER_ROOT_USER}" "${MINIO_SERVER_ROOT_PASSWORD}" >/dev/null 2>&1
 }

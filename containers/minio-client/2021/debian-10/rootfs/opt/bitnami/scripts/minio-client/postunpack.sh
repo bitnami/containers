@@ -6,10 +6,10 @@
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libminioclient.sh
 
-# Load MinIO Client environment variables
-eval "$(minio_client_env)"
+# Load MinIO Client environment
+. /opt/bitnami/scripts/minio-client-env.sh
 
-for dir in "$MINIO_CLIENT_BASEDIR" "$MINIO_CLIENT_CONFIGDIR"; do
+for dir in "$MINIO_CLIENT_BASE_DIR" "$MINIO_CLIENT_CONF_DIR"; do
     ensure_dir_exists "$dir"
 done
-chmod -R g+rwX "$MINIO_CLIENT_BASEDIR" "$MINIO_CLIENT_CONFIGDIR"
+chmod -R g+rwX "$MINIO_CLIENT_BASE_DIR" "$MINIO_CLIENT_CONF_DIR"
