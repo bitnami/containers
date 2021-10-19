@@ -9,6 +9,7 @@ set -o pipefail
 
 # Load libraries
 . /opt/bitnami/scripts/libbitnami.sh
+. /opt/bitnami/scripts/liblog.sh
 
 print_welcome_page
 

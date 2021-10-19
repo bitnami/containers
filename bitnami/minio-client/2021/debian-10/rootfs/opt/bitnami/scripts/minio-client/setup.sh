@@ -12,8 +12,8 @@ set -o pipefail
 . /opt/bitnami/scripts/libnet.sh
 . /opt/bitnami/scripts/libminioclient.sh
 
-# Load MinIO Client environment variables
-eval "$(minio_client_env)"
+# Load MinIO Client environment
+. /opt/bitnami/scripts/minio-client-env.sh
 
 # Configure MinIO Client to use a MinIO server
 minio_client_configure_server

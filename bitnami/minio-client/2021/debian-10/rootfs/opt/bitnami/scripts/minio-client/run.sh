@@ -12,12 +12,12 @@ set -o pipefail
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libminioclient.sh
 
-# Load MinIO Client environment variables
-eval "$(minio_client_env)"
+# Load MinIO Client environment
+. /opt/bitnami/scripts/minio-client-env.sh
 
 # Constants
 EXEC=$(command -v mc)
-ARGS=("--config-dir" "${MINIO_CLIENT_CONFIGDIR}" "$@")
+ARGS=("--config-dir" "${MINIO_CLIENT_CONF_DIR}" "$@")
 
 if am_i_root; then
     exec gosu "${MINIO_CLIENT_DAEMON_USER}" "${EXEC}"  "${ARGS[@]}"
