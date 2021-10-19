@@ -317,11 +317,14 @@ EOF
 # Arguments:
 #   $1 - App name
 # Flags:
-#   --hosts - Hosts to enable
 #   --type - Application type, which has an effect on what configuration template will be used, allowed values: php, (empty)
+#   --hosts - Host listen addresses
+#   --server-name - Server name
+#   --server-aliases - Server aliases (defaults to '*')
 #   --allow-remote-connections - Whether to allow remote connections or to require local connections
-#   --disabled - Whether to render the file with a .disabled prefix
-#   --enable-https - Enable app configuration on HTTPS port
+#   --disable - Whether to render the app's virtual hosts with a .disabled prefix
+#   --disable-http - Whether to render the app's HTTP virtual host with a .disabled prefix
+#   --disable-https - Whether to render the app's HTTPS virtual host with a .disabled prefix
 #   --http-port - HTTP port number
 #   --https-port - HTTPS port number
 #   --move-htaccess - Move .htaccess files to a common place so they can be loaded during Apache startup
@@ -340,37 +343,48 @@ EOF
 ensure_apache_app_configuration_exists() {
     local -r app="${1:?missing app}"
     # Default options
-    local -a hosts=("127.0.0.1" "_default_")
     local type=""
+    local -a hosts=("127.0.0.1" "_default_")
+    local server_name
+    local -a server_aliases=("*")
     local allow_remote_connections="yes"
-    local disabled="no"
-    local enable_https="yes"
-    local http_port="${APACHE_HTTP_PORT_NUMBER:-"$APACHE_DEFAULT_HTTP_PORT_NUMBER"}"
-    local https_port="${APACHE_HTTPS_PORT_NUMBER:-"$APACHE_DEFAULT_HTTPS_PORT_NUMBER"}"
+    local disable="no"
+    local disable_http="no"
+    local disable_https="no"
     local move_htaccess="yes"
-    local var_name
     # Template variables defaults
     export additional_configuration=""
     export before_vhost_configuration=""
     export allow_override="All"
     export document_root="${BITNAMI_ROOT_DIR}/${app}"
     export extra_directory_configuration=""
+    export http_port="${APACHE_HTTP_PORT_NUMBER:-"$APACHE_DEFAULT_HTTP_PORT_NUMBER"}"
+    export https_port="${APACHE_HTTPS_PORT_NUMBER:-"$APACHE_DEFAULT_HTTPS_PORT_NUMBER"}"
     export proxy_address=""
     export proxy_configuration=""
     export proxy_http_configuration=""
     export proxy_https_configuration=""
     # Validate arguments
+    local var_name
     shift
     while [[ "$#" -gt 0 ]]; do
         case "$1" in
-            --hosts)
+            --hosts \
+            | --server-aliases)
+                var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
                 shift
-                read -r -a hosts <<< "$1"
+                read -r -a "$var_name" <<< "$1"
+                ;;
+            --disable \
+            | --disable-http \
+            | --disable-https \
+            )
+                var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
+                export "${var_name}=yes"
                 ;;
             --type \
+            | --server-name \
             | --allow-remote-connections \
-            | --disabled \
-            | --enable-https \
             | --http-port \
             | --https-port \
             | --move-htaccess \
@@ -386,7 +400,7 @@ ensure_apache_app_configuration_exists() {
             )
                 var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
                 shift
-                export "${var_name}"="$1"
+                export "${var_name}=${1}"
                 ;;
             *)
                 echo "Invalid command line flag $1" >&2
@@ -404,6 +418,14 @@ ensure_apache_app_configuration_exists() {
         [[ -z "${http_listen_addresses:-}" ]] && http_listen_addresses="$http_listen" || http_listen_addresses="${http_listen_addresses} ${http_listen}"
         [[ -z "${https_listen_addresses:-}" ]] && https_listen_addresses="$https_listen" || https_listen_addresses="${https_listen_addresses} ${https_listen}"
     done
+    # Construct ServerName/ServerAlias block
+    export server_name_configuration=""
+    if ! is_empty_value "${server_name:-}"; then
+        server_name_configuration="ServerName ${server_name}"
+    fi
+    if [[ "${#server_aliases[@]}" -gt 0 ]]; then
+        server_name_configuration+=$'\n'"ServerAlias ${server_aliases[*]}"
+    fi
     # App .htaccess support
     export htaccess_include
     is_boolean_yes "$move_htaccess" && apache_replace_htaccess_files "$app" --document-root "$document_root"
@@ -430,6 +452,7 @@ EOF
 )"
     fi
     # Indent configurations
+    server_name_configuration="$(indent $'\n'"$server_name_configuration" 2)"
     additional_configuration="$(indent $'\n'"$additional_configuration" 2)"
     htaccess_include="$(indent $'\n'"$htaccess_include" 2)"
     extra_directory_configuration="$(indent $'\n'"$extra_directory_configuration" 4)"
@@ -441,10 +464,11 @@ EOF
     local template_name="app"
     [[ -n "$type" && "$type" != "php" ]] && template_name="app-${type}"
     local -r template_dir="${BITNAMI_ROOT_DIR}/scripts/apache/bitnami-templates"
-    local vhost_suffix=""
-    is_boolean_yes "$disabled" && vhost_suffix=".disabled"
-    local -r http_vhost="${APACHE_VHOSTS_DIR}/${app}-vhost.conf${vhost_suffix}"
-    local -r https_vhost="${APACHE_VHOSTS_DIR}/${app}-https-vhost.conf${vhost_suffix}"
+    local http_vhost="${APACHE_VHOSTS_DIR}/${app}-vhost.conf"
+    local https_vhost="${APACHE_VHOSTS_DIR}/${app}-https-vhost.conf"
+    local -r disable_suffix=".disabled"
+    ( is_boolean_yes "$disable" || is_boolean_yes "$disable_http" ) && http_vhost+="$disable_suffix"
+    ( is_boolean_yes "$disable" || is_boolean_yes "$disable_https" ) && https_vhost+="$disable_suffix"
     if is_file_writable "$http_vhost"; then
         # Create file with root group write privileges, so it can be modified in non-root containers
         [[ ! -f "$http_vhost" ]] && touch "$http_vhost" && chmod g+rw "$http_vhost"
@@ -455,17 +479,15 @@ EOF
     else
         warn "The ${app} virtual host file '${http_vhost}' is not writable. Configurations based on environment variables will not be applied for this file."
     fi
-    if is_boolean_yes "$enable_https"; then
-        if is_file_writable "$https_vhost"; then
-            # Create file with root group write privileges, so it can be modified in non-root containers
-            [[ ! -f "$https_vhost" ]] && touch "$https_vhost" && chmod g+rw "$https_vhost"
-            render-template "${template_dir}/${template_name}-https-vhost.conf.tpl" | sed '/^\s*$/d' > "$https_vhost"
-        elif [[ ! -f "$https_vhost" ]]; then
-            error "Could not create virtual host for ${app} at '${https_vhost}'. Check permissions and ownership for parent directories."
-            return 1
-        else
-            warn "The ${app} virtual host file '${https_vhost}' is not writable. Configurations based on environment variables will not be applied for this file."
-        fi
+    if is_file_writable "$https_vhost"; then
+        # Create file with root group write privileges, so it can be modified in non-root containers
+        [[ ! -f "$https_vhost" ]] && touch "$https_vhost" && chmod g+rw "$https_vhost"
+        render-template "${template_dir}/${template_name}-https-vhost.conf.tpl" | sed '/^\s*$/d' > "$https_vhost"
+    elif [[ ! -f "$https_vhost" ]]; then
+        error "Could not create virtual host for ${app} at '${https_vhost}'. Check permissions and ownership for parent directories."
+        return 1
+    else
+        warn "The ${app} virtual host file '${https_vhost}' is not writable. Configurations based on environment variables will not be applied for this file."
     fi
 }
 
@@ -482,9 +504,10 @@ ensure_apache_app_configuration_not_exists() {
     local -r app="${1:?missing app}"
     local -r http_vhost="${APACHE_VHOSTS_DIR}/${app}-vhost.conf"
     local -r https_vhost="${APACHE_VHOSTS_DIR}/${app}-https-vhost.conf"
+    local -r disable_suffix=".disabled"
     # Note that 'rm -f' will not fail if the files don't exist
     # However if we lack permissions to remove the file, it will result in a non-zero exit code, as expected by this function
-    rm -f "$http_vhost" "$https_vhost"
+    rm -f "$http_vhost" "$https_vhost" "${http_vhost}${disable_suffix}" "${https_vhost}${disable_suffix}"
 }
 
 ########################
@@ -512,13 +535,13 @@ ensure_apache_prefix_configuration_exists() {
     local allow_remote_connections="yes"
     local move_htaccess="yes"
     local prefix="/${app}"
-    local var_name
     # Template variables defaults
     export additional_configuration=""
     export allow_override="All"
     export document_root="${BITNAMI_ROOT_DIR}/${app}"
     export extra_directory_configuration=""
     # Validate arguments
+    local var_name
     shift
     while [[ "$#" -gt 0 ]]; do
         case "$1" in
@@ -533,7 +556,7 @@ ensure_apache_prefix_configuration_exists() {
             )
                 var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
                 shift
-                declare "${var_name}"="$1"
+                declare "${var_name}=${1}"
                 ;;
             *)
                 echo "Invalid command line flag $1" >&2
@@ -598,8 +621,13 @@ EOF
 # Arguments:
 #   $1 - App name
 # Flags:
-#   --hosts - Hosts to enable
-#   --enable-https - Update HTTPS app configuration
+#   --hosts - Host listen addresses
+#   --server-name - Server name
+#   --server-aliases - Server aliases
+#   --enable-http - Enable HTTP app configuration (if not enabled already)
+#   --enable-https - Enable HTTPS app configuration (if not enabled already)
+#   --disable-http - Disable HTTP app configuration (if not disabled already)
+#   --disable-https - Disable HTTPS app configuration (if not disabled already)
 #   --http-port - HTTP port number
 #   --https-port - HTTPS port number
 # Returns:
@@ -609,25 +637,38 @@ apache_update_app_configuration() {
     local -r app="${1:?missing app}"
     # Default options
     local -a hosts=("127.0.0.1" "_default_")
-    local enable_https="yes"
+    local server_name
+    local -a server_aliases=()
+    local enable_http="no"
+    local enable_https="no"
+    local disable_http="no"
+    local disable_https="no"
     local http_port="${APACHE_HTTP_PORT_NUMBER:-"$APACHE_DEFAULT_HTTP_PORT_NUMBER"}"
     local https_port="${APACHE_HTTPS_PORT_NUMBER:-"$APACHE_DEFAULT_HTTPS_PORT_NUMBER"}"
+    local var_name
     # Validate arguments
+    local var_name
     shift
     while [[ "$#" -gt 0 ]]; do
         case "$1" in
-            --hosts)
+            --hosts \
+            | --server-aliases)
+                var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
                 shift
-                read -r -a hosts <<< "$1"
+                read -r -a "$var_name" <<< "$1"
                 ;;
-
             # Common flags
-            --enable-https \
+            --server-name \
+            | --enable-http \
+            | --enable-https \
+            | --disable-http \
+            | --disable-https \
             | --http-port \
             | --https-port \
             )
-                args+=("$1" "$2")
+                var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
                 shift
+                declare "${var_name}=${1}"
                 ;;
 
             *)
@@ -649,13 +690,47 @@ apache_update_app_configuration() {
     # Update configuration
     local -r http_vhost="${APACHE_VHOSTS_DIR}/${app}-vhost.conf"
     local -r https_vhost="${APACHE_VHOSTS_DIR}/${app}-https-vhost.conf"
-    if is_file_writable "$http_vhost"; then
-        replace_in_file "$http_vhost" "^<VirtualHost\s.*>$" "<VirtualHost ${http_listen_addresses}>"
-    else
-        warn "The ${app} virtual host file '${http_vhost}' is not writable. Configurations based on environment variables will not be applied for this file."
+    local -r disable_suffix=".disabled"
+    # Helper function to avoid duplicating code
+    update_common_vhost_config() {
+        local -r vhost_file="${1:?missing virtual host}"
+        # Update ServerName
+        if ! is_empty_value "${server_name:-}"; then
+            replace_in_file "$vhost_file" "^(\s*ServerName\s+).*" "\1${server_name}"
+        fi
+        # Update ServerAlias
+        if [[ "${#server_aliases[@]}" -gt 0 ]]; then
+            replace_in_file "$vhost_file" "^(\s*ServerAlias\s+).*" "\1${server_aliases[*]}"
+        fi
+    }
+    # Disable and enable configuration files
+    rename_conf_file() {
+        local -r origin="$1"
+        local -r destination="$2"
+        if is_file_writable "$origin" && is_file_writable "$destination"; then
+            warn "Could not rename virtual host file '${origin}' to '${destination}' due to lack of permissions."
+        else
+            mv "$origin" "$destination"
+        fi
+    }
+    is_boolean_yes "$disable_http" && [[ -e "$http_vhost" ]] && rename_conf_file "${http_vhost}${disable_suffix}" "$http_vhost"
+    is_boolean_yes "$disable_https" && [[ -e "$https_vhost" ]] && rename_conf_file "${https_vhost}${disable_suffix}" "$https_vhost"
+    is_boolean_yes "$enable_http" && [[ -e "${http_vhost}${disable_suffix}" ]] && rename_conf_file "${http_vhost}${disable_suffix}" "$http_vhost"
+    is_boolean_yes "$enable_https" && [[ -e "${https_vhost}${disable_suffix}" ]] && rename_conf_file "${https_vhost}${disable_suffix}" "$https_vhost"
+    # Update only configuration files without the '.disabled' suffix
+    if [[ -e "$http_vhost" ]]; then
+        if is_file_writable "$http_vhost"; then
+            update_common_vhost_config "$http_vhost"
+            # Update vhost-specific config (listen addresses)
+            replace_in_file "$http_vhost" "^<VirtualHost\s.*>$" "<VirtualHost ${http_listen_addresses}>"
+        else
+            warn "The ${app} virtual host file '${http_vhost}' is not writable. Configurations based on environment variables will not be applied for this file."
+        fi
     fi
-    if is_boolean_yes "$enable_https"; then
+    if [[ -e "$https_vhost" ]]; then
         if is_file_writable "$https_vhost"; then
+            update_common_vhost_config "$https_vhost"
+            # Update vhost-specific config (listen addresses)
             replace_in_file "$https_vhost" "^<VirtualHost\s.*>$" "<VirtualHost ${https_listen_addresses}>"
         else
             warn "The ${app} virtual host file '${https_vhost}' is not writable. Configurations based on environment variables will not be applied for this file."
