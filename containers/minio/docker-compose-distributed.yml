@@ -9,8 +9,8 @@ services:
     volumes:
       - 'minio_data:/data'
     environment:
-      - MINIO_ACCESS_KEY=minio
-      - MINIO_SECRET_KEY=miniosecret
+      - MINIO_ROOT_USER=minio
+      - MINIO_ROOT_PASSWORD=miniosecret
       - MINIO_DISTRIBUTED_MODE_ENABLED=yes
       - MINIO_DISTRIBUTED_NODES=minio,minio2,minio3,minio4
   minio2:
@@ -18,8 +18,8 @@ services:
     volumes:
       - 'minio_2_data:/data'
     environment:
-      - MINIO_ACCESS_KEY=minio
-      - MINIO_SECRET_KEY=miniosecret
+      - MINIO_ROOT_USER=minio
+      - MINIO_ROOT_PASSWORD=miniosecret
       - MINIO_DISTRIBUTED_MODE_ENABLED=yes
       - MINIO_DISTRIBUTED_NODES=minio,minio2,minio3,minio4
   minio3:
@@ -27,8 +27,8 @@ services:
     volumes:
       - 'minio_3_data:/data'
     environment:
-      - MINIO_ACCESS_KEY=minio
-      - MINIO_SECRET_KEY=miniosecret
+      - MINIO_ROOT_USER=minio
+      - MINIO_ROOT_PASSWORD=miniosecret
       - MINIO_DISTRIBUTED_MODE_ENABLED=yes
       - MINIO_DISTRIBUTED_NODES=minio,minio2,minio3,minio4
   minio4:
@@ -36,8 +36,8 @@ services:
     volumes:
       - 'minio_4_data:/data'
     environment:
-      - MINIO_ACCESS_KEY=minio
-      - MINIO_SECRET_KEY=miniosecret
+      - MINIO_ROOT_USER=minio
+      - MINIO_ROOT_PASSWORD=miniosecret
       - MINIO_DISTRIBUTED_MODE_ENABLED=yes
       - MINIO_DISTRIBUTED_NODES=minio,minio2,minio3,minio4
 
