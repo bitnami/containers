@@ -15,9 +15,10 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0"
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
+RUN /opt/bitnami/scripts/minio-client/postunpack.sh
 RUN /opt/bitnami/scripts/minio/postunpack.sh
 ENV BITNAMI_APP_NAME="minio" \
-    BITNAMI_IMAGE_VERSION="2021.10.13-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="2021.10.13-debian-10-r1" \
     PATH="/opt/bitnami/minio-client/bin:/opt/bitnami/minio/bin:/opt/bitnami/common/bin:$PATH"
 
 VOLUME [ "/certs", "/data" ]

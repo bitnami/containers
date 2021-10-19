@@ -12,12 +12,12 @@ set -o pipefail
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libminio.sh
 
-# Load MinIO environment variables
-eval "$(minio_env)"
+# Load MinIO environment
+. /opt/bitnami/scripts/minio-env.sh
 
 # Constants
 EXEC=$(command -v minio)
-ARGS=("server" "--certs-dir" "${MINIO_CERTSDIR}" "--console-address" ":${MINIO_CONSOLE_PORT_NUMBER}")
+ARGS=("server" "--certs-dir" "${MINIO_CERTS_DIR}" "--console-address" ":${MINIO_CONSOLE_PORT_NUMBER}")
 # Add any extra flags passed to this script
 ARGS+=("$@")
 if is_boolean_yes "$MINIO_DISTRIBUTED_MODE_ENABLED"; then
@@ -26,11 +26,11 @@ if is_boolean_yes "$MINIO_DISTRIBUTED_MODE_ENABLED"; then
         if is_distributed_ellipses_syntax; then
             ARGS+=("${MINIO_SCHEME}://${node}")
         else
-            ARGS+=("${MINIO_SCHEME}://${node}:${MINIO_API_PORT_NUMBER}/${MINIO_DATADIR}")
+            ARGS+=("${MINIO_SCHEME}://${node}:${MINIO_API_PORT_NUMBER}/${MINIO_DATA_DIR}")
         fi
     done
 else
-    ARGS+=("${MINIO_DATADIR}")
+    ARGS+=("${MINIO_DATA_DIR}")
 fi
 
 info "** Starting MinIO **"
