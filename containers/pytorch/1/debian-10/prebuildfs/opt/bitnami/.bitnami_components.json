@@ -15,9 +15,9 @@
     },
     "pytorch": {
         "arch": "amd64",
-        "digest": "e2490f2f7380f77da284855637a0080b6278c16b9e270edc1f08fc29ae3c0697",
+        "digest": "5dc54b09bf8d47547c169a62df68bcfcdd0d6248b5e5d2d2fd1f1e6c3dff32af",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.9.0-2"
+        "version": "1.9.1-0"
     }
 }
