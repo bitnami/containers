@@ -164,11 +164,14 @@ nginx_initialize() {
 # Arguments:
 #   $1 - App name
 # Flags:
-#   --hosts - Hosts to enable
 #   --type - Application type, which has an effect on what configuration template will be used, allowed values: php, (empty)
+#   --hosts - Host listen addresses
+#   --server-name - Server name (if not specified, a catch-all server block will be created)
+#   --server-aliases - Server aliases
 #   --allow-remote-connections - Whether to allow remote connections or to require local connections
-#   --disabled - Whether to render the file with a .disabled prefix
-#   --enable-https - Enable app configuration on HTTPS port
+#   --disable - Whether to render the app's server blocks with a .disabled prefix
+#   --disable-http - Whether to render the app's HTTP server block with a .disabled prefix
+#   --disable-https - Whether to render the app's HTTPS server block with a .disabled prefix
 #   --http-port - HTTP port number
 #   --https-port - HTTPS port number
 #   --additional-configuration - Additional server block configuration (no default)
@@ -182,28 +185,39 @@ ensure_nginx_app_configuration_exists() {
     # Default options
     local type=""
     local -a hosts=()
+    local server_name
+    local -a server_aliases=()
     local allow_remote_connections="yes"
-    local disabled="no"
-    local enable_https="yes"
-    local http_port="${NGINX_HTTP_PORT_NUMBER:-"$NGINX_DEFAULT_HTTP_PORT_NUMBER"}"
-    local https_port="${NGINX_HTTPS_PORT_NUMBER:-"$NGINX_DEFAULT_HTTPS_PORT_NUMBER"}"
-    local var_name
+    local disable="no"
+    local disable_http="no"
+    local disable_https="no"
     # Template variables defaults
     export additional_configuration=""
     export external_configuration=""
     export document_root="${BITNAMI_ROOT_DIR}/${app}"
+    export http_port="${NGINX_HTTP_PORT_NUMBER:-"$NGINX_DEFAULT_HTTP_PORT_NUMBER"}"
+    export https_port="${NGINX_HTTPS_PORT_NUMBER:-"$NGINX_DEFAULT_HTTPS_PORT_NUMBER"}"
     # Validate arguments
+    local var_name
     shift
     while [[ "$#" -gt 0 ]]; do
         case "$1" in
-            --hosts)
+            --hosts \
+            | --server-aliases)
+                var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
                 shift
-                read -r -a hosts <<< "$1"
+                read -r -a "$var_name" <<< "$1"
+                ;;
+            --disable \
+            | --disable-http \
+            | --disable-https \
+            )
+                var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
+                export "${var_name}=yes"
                 ;;
             --type \
+            | --server-name \
             | --allow-remote-connections \
-            | --disabled \
-            | --enable-https \
             | --http-port \
             | --https-port \
             | --additional-configuration \
@@ -236,6 +250,20 @@ ensure_nginx_app_configuration_exists() {
         http_listen_configuration=$'\n'"listen ${http_port} default_server;"
         https_listen_configuration=$'\n'"listen ${https_port} ssl default_server;"
     fi
+    # Construct server_name block
+    export server_name_configuration=""
+    if ! is_empty_value "${server_name:-}"; then
+        server_name_configuration="server_name ${server_name}"
+        if [[ "${#server_aliases[@]}" -gt 0 ]]; then
+            server_name_configuration+=" ${server_aliases[*]}"
+        fi
+        server_name_configuration+=";"
+    else
+        server_name_configuration="
+# Catch-all server block
+# See: https://nginx.org/en/docs/http/server_names.html#miscellaneous_names
+server_name _;"
+    fi
     # ACL configuration
     export acl_configuration=""
     if ! is_boolean_yes "$allow_remote_connections"; then
@@ -248,6 +276,7 @@ if (\$remote_addr != 127.0.0.1) {
 absolute_redirect off;"
     fi
     # Indent configurations
+    server_name_configuration="$(indent $'\n'"$server_name_configuration" 4)"
     acl_configuration="$(indent "$acl_configuration" 4)"
     additional_configuration=$'\n'"$(indent "$additional_configuration" 4)"
     external_configuration=$'\n'"$external_configuration"
@@ -258,10 +287,11 @@ absolute_redirect off;"
     local template_name="app"
     [[ -n "$type" && "$type" != "php" ]] && template_name="app-${type}"
     local template_dir="${BITNAMI_ROOT_DIR}/scripts/nginx/bitnami-templates"
-    local server_block_suffix=""
-    is_boolean_yes "$disabled" && server_block_suffix=".disabled"
-    local http_server_block="${NGINX_SERVER_BLOCKS_DIR}/${app}-server-block.conf${server_block_suffix}"
-    local https_server_block="${NGINX_SERVER_BLOCKS_DIR}/${app}-https-server-block.conf${server_block_suffix}"
+    local http_server_block="${NGINX_SERVER_BLOCKS_DIR}/${app}-server-block.conf"
+    local https_server_block="${NGINX_SERVER_BLOCKS_DIR}/${app}-https-server-block.conf"
+    local -r disable_suffix=".disabled"
+    ( is_boolean_yes "$disable" || is_boolean_yes "$disable_http" ) && http_server_block+="$disable_suffix"
+    ( is_boolean_yes "$disable" || is_boolean_yes "$disable_https" ) && https_server_block+="$disable_suffix"
     if is_file_writable "$http_server_block"; then
         # Create file with root group write privileges, so it can be modified in non-root containers
         [[ ! -f "$http_server_block" ]] && touch "$http_server_block" && chmod g+rw "$http_server_block"
@@ -272,17 +302,15 @@ absolute_redirect off;"
     else
         warn "The ${app} server block file '${http_server_block}' is not writable. Configurations based on environment variables will not be applied for this file."
     fi
-    if is_boolean_yes "$enable_https"; then
-        if is_file_writable "$https_server_block"; then
-            # Create file with root group write privileges, so it can be modified in non-root containers
-            [[ ! -f "$https_server_block" ]] && touch "$https_server_block" && chmod g+rw "$https_server_block"
-            render-template "${template_dir}/${template_name}-https-server-block.conf.tpl" | sed '/^\s*$/d' > "$https_server_block"
-        elif [[ ! -f "$https_server_block" ]]; then
-            error "Could not create server block for ${app} at '${https_server_block}'. Check permissions and ownership for parent directories."
-            return 1
-        else
-            warn "The ${app} server block file '${https_server_block}' is not writable. Configurations based on environment variables will not be applied for this file."
-        fi
+    if is_file_writable "$https_server_block"; then
+        # Create file with root group write privileges, so it can be modified in non-root containers
+        [[ ! -f "$https_server_block" ]] && touch "$https_server_block" && chmod g+rw "$https_server_block"
+        render-template "${template_dir}/${template_name}-https-server-block.conf.tpl" | sed '/^\s*$/d' > "$https_server_block"
+    elif [[ ! -f "$https_server_block" ]]; then
+        error "Could not create server block for ${app} at '${https_server_block}'. Check permissions and ownership for parent directories."
+        return 1
+    else
+        warn "The ${app} server block file '${https_server_block}' is not writable. Configurations based on environment variables will not be applied for this file."
     fi
 }
 
@@ -299,9 +327,10 @@ ensure_nginx_app_configuration_not_exists() {
     local app="${1:?missing app}"
     local http_server_block="${NGINX_SERVER_BLOCKS_DIR}/${app}-server-block.conf"
     local https_server_block="${NGINX_SERVER_BLOCKS_DIR}/${app}-https-server-block.conf"
+    local -r disable_suffix=".disabled"
     # Note that 'rm -f' will not fail if the files don't exist
     # However if we lack permissions to remove the file, it will result in a non-zero exit code, as expected by this function
-    rm -f "$http_server_block" "$https_server_block"
+    rm -f "$http_server_block" "$https_server_block" "${http_server_block}${disable_suffix}" "${https_server_block}${disable_suffix}"
 }
 
 ########################
@@ -325,13 +354,13 @@ ensure_nginx_prefix_configuration_exists() {
     # Default options
     local type=""
     local allow_remote_connections="yes"
-    local var_name
     local prefix="/${app}"
     # Template variables defaults
     export additional_configuration=""
     export document_root="${BITNAMI_ROOT_DIR}/${app}"
     export extra_directory_configuration=""
     # Validate arguments
+    local var_name
     shift
     while [[ "$#" -gt 0 ]]; do
         case "$1" in
@@ -395,7 +424,10 @@ absolute_redirect off;"
 #   $1 - App name
 # Flags:
 #   --hosts - Hosts to enable
-#   --enable-https - Update HTTPS app configuration
+#   --enable-http - Enable HTTP app configuration (if not enabled already)
+#   --enable-https - Enable HTTPS app configuration (if not enabled already)
+#   --disable-http - Disable HTTP app configuration (if not disabled already)
+#   --disable-https - Disable HTTPS app configuration (if not disabled already)
 #   --http-port - HTTP port number
 #   --https-port - HTTPS port number
 # Returns:
@@ -405,25 +437,36 @@ nginx_update_app_configuration() {
     local -r app="${1:?missing app}"
     # Default options
     local -a hosts=()
-    local enable_https="yes"
+    local enable_http="no"
+    local enable_https="no"
+    local disable_http="no"
+    local disable_https="no"
     local http_port="${NGINX_HTTP_PORT_NUMBER:-"$NGINX_DEFAULT_HTTP_PORT_NUMBER"}"
     local https_port="${NGINX_HTTPS_PORT_NUMBER:-"$NGINX_DEFAULT_HTTPS_PORT_NUMBER"}"
     # Validate arguments
+    local var_name
     shift
     while [[ "$#" -gt 0 ]]; do
         case "$1" in
-            --hosts)
+            --hosts \
+            | --server-aliases)
+                var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
                 shift
-                read -r -a hosts <<< "$1"
+                read -r -a "$var_name" <<< "$1"
                 ;;
 
             # Common flags
-            --enable-https \
+            --server-name \
+            | --enable-http \
+            | --enable-https \
+            | --disable-http \
+            | --disable-https \
             | --http-port \
             | --https-port \
             )
-                args+=("$1" "$2")
+                var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
                 shift
+                declare "${var_name}=${1}"
                 ;;
 
             *)
@@ -453,13 +496,46 @@ nginx_update_app_configuration() {
     # Update configuration
     local -r http_server_block="${NGINX_SERVER_BLOCKS_DIR}/${app}-server-block.conf"
     local -r https_server_block="${NGINX_SERVER_BLOCKS_DIR}/${app}-https-server-block.conf"
-    if is_file_writable "$http_server_block"; then
-        replace_in_file "$http_server_block" "^\s*listen\s.*;" "$http_listen_configuration"
-    else
-        warn "The ${app} server block file '${http_server_block}' is not writable. Configurations based on environment variables will not be applied for this file."
+    # Helper function to avoid duplicating code
+    update_common_server_block_config() {
+        local -r server_block_file="${1:?missing server block}"
+        # Update server_name
+        if ! is_empty_value "${server_name:-}"; then
+            local server_name_list="$server_name"
+            if [[ "${#server_aliases[@]}" -gt 0 ]]; then
+                server_name_list+=" ${server_aliases[*]}"
+            fi
+            replace_in_file "$server_block_file" "^(\s*server_name\s+)[^;]*" "\1${server_name_list}"
+        fi
+    }
+    # Disable and enable configuration files
+    rename_conf_file() {
+        local -r origin="$1"
+        local -r destination="$2"
+        if is_file_writable "$origin" && is_file_writable "$destination"; then
+            warn "Could not rename server block file '${origin}' to '${destination}' due to lack of permissions."
+        else
+            mv "$origin" "$destination"
+        fi
+    }
+    is_boolean_yes "$disable_http" && [[ -e "$http_server_block" ]] && rename_conf_file "${http_server_block}${disable_suffix}" "$http_server_block"
+    is_boolean_yes "$disable_https" && [[ -e "$https_server_block" ]] && rename_conf_file "${https_server_block}${disable_suffix}" "$https_server_block"
+    is_boolean_yes "$enable_http" && [[ -e "${http_server_block}${disable_suffix}" ]] && rename_conf_file "${http_server_block}${disable_suffix}" "$http_server_block"
+    is_boolean_yes "$enable_https" && [[ -e "${https_server_block}${disable_suffix}" ]] && rename_conf_file "${https_server_block}${disable_suffix}" "$https_server_block"
+    # Update only configuration files without the '.disabled' suffix
+    if [[ -e "$http_server_block" ]]; then
+        if is_file_writable "$http_server_block"; then
+            update_common_server_block_config "$http_server_block"
+            # Update specific server block config (listen addresses)
+            replace_in_file "$http_server_block" "^\s*listen\s.*;" "$http_listen_configuration"
+        else
+            warn "The ${app} server block file '${http_server_block}' is not writable. Configurations based on environment variables will not be applied for this file."
+        fi
     fi
-    if is_boolean_yes "$enable_https"; then
+    if [[ -e "$https_server_block" ]]; then
         if is_file_writable "$https_server_block"; then
+            update_common_server_block_config "$https_server_block"
+            # Update specific server block config (listen addresses)
             replace_in_file "$https_server_block" "^\s*listen\s.*\sssl;" "$https_listen_configuration"
         else
             warn "The ${app} server block file '${https_server_block}' is not writable. Configurations based on environment variables will not be applied for this file."
