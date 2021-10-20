@@ -1,7 +1,7 @@
 {{before_vhost_configuration}}
-PassengerPreStart http://localhost:{{APACHE_DEFAULT_HTTP_PORT_NUMBER}}/
+PassengerPreStart http://localhost:{{http_port}}/
 <VirtualHost {{http_listen_addresses}}>
-  ServerAlias *
+  {{server_name_configuration}}
   DocumentRoot {{document_root}}
   <Directory "{{document_root}}">
     Options -Indexes +FollowSymLinks -MultiViews

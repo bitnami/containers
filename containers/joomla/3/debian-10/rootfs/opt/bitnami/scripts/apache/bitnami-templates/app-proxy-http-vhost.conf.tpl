@@ -1,6 +1,6 @@
 {{before_vhost_configuration}}
 <VirtualHost {{http_listen_addresses}}>
-  ServerAlias *
+  {{server_name_configuration}}
   {{proxy_configuration}}
   {{proxy_http_configuration}}
   ProxyPass / {{proxy_address}}
