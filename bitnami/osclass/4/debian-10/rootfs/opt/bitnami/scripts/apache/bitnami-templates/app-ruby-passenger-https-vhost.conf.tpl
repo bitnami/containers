@@ -1,7 +1,7 @@
 {{before_vhost_configuration}}
-PassengerPreStart https://localhost:{{APACHE_DEFAULT_HTTPS_PORT_NUMBER}}/
+PassengerPreStart https://localhost:{{https_port}}/
 <VirtualHost {{https_listen_addresses}}>
-  ServerAlias *
+  {{server_name_configuration}}
   SSLEngine on
   SSLCertificateFile "{{APACHE_CONF_DIR}}/bitnami/certs/server.crt"
   SSLCertificateKeyFile "{{APACHE_CONF_DIR}}/bitnami/certs/server.key"
