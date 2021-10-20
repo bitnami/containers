@@ -150,7 +150,7 @@ When you start the solr image, you can adjust the configuration of the instance 
 
 - `SOLR_PORT_NUMBER`: Port used by Solr server. Default: **8983**
 - `SOLR_SERVER_DIR`: Specify the Solr server directory. Default: **/opt/bitnami/solr/server**
-- `SOLR_CORE`: Core name to create at first run. By default, it will not create a core. (E.g.: '**my_core**')
+- `SOLR_CORES`: Comma, semi-colon or space separated list of cores to create at first run. By default, it will not create a core. (E.g.: '**my_dev_core,my_test_core**')
 - `SOLR_CORE_CONF_DIR`: Configuration directory to copy when creating a new core. Default: **data_driven_schema_configs**
 
 Cluster related environment variables:
@@ -186,14 +186,14 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 solr:
   ...
   environment:
-    - SOLR_CORE=my_core
+    - SOLR_CORES=my_core
   ...
 ```
 
 ### Specifying Environment Variables on the Docker command line
 
 ```console
-$ docker run -d -e SOLR_CORE=my_core --name solr bitnami/solr:latest
+$ docker run -d -e SOLR_CORES=my_core --name solr bitnami/solr:latest
 ```
 
 ## Using your Apache Solr Cores configuration files

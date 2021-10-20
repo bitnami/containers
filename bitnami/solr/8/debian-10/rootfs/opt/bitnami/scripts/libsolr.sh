@@ -112,7 +112,7 @@ solr_validate() {
     ! is_yes_no_value "$SOLR_ENABLE_CLOUD_MODE" && print_validation_error "SOLR_ENABLE_CLOUD_MODE possible values are yes or no"
     is_boolean_yes "$SOLR_ENABLE_CLOUD_MODE" && [[ -z "$SOLR_ZK_HOSTS" ]] && print_validation_error "You need to provide the Zookeper node list in SOLR_ZK_HOSTS"
 
-    ! is_boolean_yes "$SOLR_CLOUD_BOOTSTRAP" && is_boolean_yes "$SOLR_ENABLE_CLOUD_MODE" && [[ -n "$SOLR_CORE" ]] && info "This node is not a boostrap node and will not create the collection"
+    ! is_boolean_yes "$SOLR_CLOUD_BOOTSTRAP" && is_boolean_yes "$SOLR_ENABLE_CLOUD_MODE" && [[ -n "$SOLR_CORES" ]] && info "This node is not a boostrap node and will not create the collection"
 
     ! is_true_false_value "$SOLR_SSL_CHECK_PEER_NAME" && print_validation_error "SOLR_SSL_CHECK_PEER_NAME possible values are true or false"
 
@@ -171,12 +171,11 @@ solr_wait_for_zookeeper() {
 # Globals:
 #   SOLR_*
 # Arguments:
-#   $1 - Core name
+#   None
 # Returns:
 #   None
 #########################
-solr_create_core() {
-    local -r core="${1:?Missing core}"
+solr_create_cores() {
     local -r exec="curl"
     local command_args=("--silent" "--fail")
     local protocol="http"
@@ -185,20 +184,24 @@ solr_create_core() {
 
     is_boolean_yes "$SOLR_ENABLE_AUTHENTICATION" && command_args+=("--user" "${SOLR_ADMIN_USERNAME}:${SOLR_ADMIN_PASSWORD}")
 
-    mkdir -p "${SOLR_SERVER_DIR}/solr/${core}/data"
-    mkdir -p "${SOLR_SERVER_DIR}/solr/${core}/conf"
-    cp -r "${SOLR_CORE_CONF_DIR}"/* "${SOLR_SERVER_DIR}/solr/${core}/conf/"
+    read -r -a cores <<< "$(tr ',;' ' ' <<< "${SOLR_CORES}")"
+    info "Creating cores..."
+    for core in "${cores[@]}"; do
+        mkdir -p "${SOLR_SERVER_DIR}/solr/${core}/data"
+        mkdir -p "${SOLR_SERVER_DIR}/solr/${core}/conf"
+        cp -r "${SOLR_CORE_CONF_DIR}"/* "${SOLR_SERVER_DIR}/solr/${core}/conf/"
 
-    command_args+=("${protocol}://localhost:${SOLR_PORT_NUMBER}/solr/admin/cores?action=CREATE&name=${core}&instanceDir=${core}&dataDir=data")
+        command_args+=("${protocol}://localhost:${SOLR_PORT_NUMBER}/solr/admin/cores?action=CREATE&name=${core}&instanceDir=${core}&dataDir=data")
 
-    info "Creating solr core: ${SOLR_CORE}"
+        info "Creating solr core: ${core}"
 
-    if ! debug_execute "$exec" "${command_args[@]}" >/dev/null; then
-        error "There was an error when creating the core"
-        exit 1
-    else
-        info "Core created"
-    fi
+        if ! debug_execute "$exec" "${command_args[@]}" >/dev/null; then
+            error "There was an error when creating the core"
+            exit 1
+        else
+            info "Core created"
+        fi
+    done
 }
 
 #########################
@@ -623,7 +626,7 @@ solr_initialize() {
 
             is_boolean_yes "$SOLR_ENABLE_AUTHENTICATION" && solr_update_password "$SOLR_ADMIN_USERNAME" "$SOLR_ADMIN_PASSWORD"
 
-            [[ -n "$SOLR_CORE" ]] && solr_create_core "$SOLR_CORE"
+            [[ -n "$SOLR_CORES" ]] && solr_create_cores
 
             solr_stop
         fi
