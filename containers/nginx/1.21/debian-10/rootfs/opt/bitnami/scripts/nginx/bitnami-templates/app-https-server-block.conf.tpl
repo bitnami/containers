@@ -6,9 +6,7 @@ server {
 
     root {{document_root}};
 
-    # Catch-all server block
-    # See: https://nginx.org/en/docs/http/server_names.html#miscellaneous_names
-    server_name _;
+    {{server_name_configuration}}
 
     ssl_certificate      bitnami/certs/server.crt;
     ssl_certificate_key  bitnami/certs/server.key;
