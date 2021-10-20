@@ -15,7 +15,7 @@ services:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - 'redis_data:/bitnami/discourse'
+      - 'redis_data:/bitnami/redis'
   discourse:
     image: docker.io/bitnami/discourse:2
     ports:
