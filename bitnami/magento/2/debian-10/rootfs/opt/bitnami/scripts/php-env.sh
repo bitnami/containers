@@ -22,6 +22,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # variable will be overridden with the value specified in that file
 php_env_vars=(
     PHP_FPM_LISTEN_ADDRESS
+    PHP_DATE_TIMEZONE
     PHP_ENABLE_OPCACHE
     PHP_EXPOSE_PHP
     PHP_MAX_EXECUTION_TIME
@@ -72,6 +73,7 @@ export PHP_FPM_DAEMON_USER="daemon"
 export PHP_FPM_DAEMON_GROUP="daemon"
 
 # PHP configuration
+export PHP_DATE_TIMEZONE="${PHP_DATE_TIMEZONE:-}"
 PHP_ENABLE_OPCACHE="${PHP_ENABLE_OPCACHE:-"${PHP_OPCACHE_ENABLED:-}"}"
 export PHP_ENABLE_OPCACHE="${PHP_ENABLE_OPCACHE:-}"
 export PHP_EXPOSE_PHP="${PHP_EXPOSE_PHP:-}"
