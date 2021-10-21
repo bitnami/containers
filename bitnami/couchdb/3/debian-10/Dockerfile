@@ -12,13 +12,13 @@ RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 libicu63 libssl
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.0-3" --checksum 7521d9a4f9e4e182bf32977e234026caa7b03759799868335bccb1edd8f8fd12
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.0-0" --checksum 88093e848950fd09e80eb26cac55caa11e77aa78f118b5dc67faa38a3836381d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "couchdb" "3.1.2-0" --checksum 37601e6c90b289843bd064dd72af1ab776002f0e2878d91b9be5968ffc92e815
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "couchdb" "3.2.0-0" --checksum fd13f9726cf3933a7dc9b2d87d9c118c31848e55e16d4ef51b6e6600416fa240
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/couchdb/postunpack.sh
 ENV BITNAMI_APP_NAME="couchdb" \
-    BITNAMI_IMAGE_VERSION="3.1.2-debian-10-r10" \
+    BITNAMI_IMAGE_VERSION="3.2.0-debian-10-r0" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/couchdb/bin:$PATH"
 
