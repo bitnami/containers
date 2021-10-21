@@ -94,6 +94,19 @@ pgbouncer_validate() {
         fi
     fi
 
+    # TLS Checks (server)
+    if [[ -n "$PGBOUNCER_SERVER_TLS_CERT_FILE" ]] && [[ ! -f "$PGBOUNCER_SERVER_TLS_CERT_FILE" ]]; then
+        print_validation_error "The X.509 server certificate file in the specified path ${PGBOUNCER_SERVER_TLS_CERT_FILE} does not exist"
+    fi
+    if [[ -n "$PGBOUNCER_SERVER_TLS_KEY_FILE" ]] && [[ ! -f "$PGBOUNCER_SERVER_TLS_KEY_FILE" ]]; then
+        print_validation_error "The server private key file in the specified path ${PGBOUNCER_SERVER_TLS_KEY_FILE} does not exist"
+    fi
+    if [[ -n "$PGBOUNCER_SERVER_TLS_CA_FILE" ]]; then
+        warn "A CA X.509 certificate was not provided. Server verification will not be performed in TLS connections"
+    elif [[ ! -f "$PGBOUNCER_SERVER_TLS_CA_FILE" ]]; then
+        print_validation_error "The server CA X.509 certificate file in the specified path ${PGBOUNCER_SERVER_TLS_CA_FILE} does not exist"
+    fi
+
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
