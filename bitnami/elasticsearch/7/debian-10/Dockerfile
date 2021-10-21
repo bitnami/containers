@@ -12,16 +12,16 @@ ARG ELASTICSEARCH_PLUGINS=""
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip hostname libasound2-dev libc6 libfreetype6 libfreetype6-dev libgcc1 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.13.2-0" --checksum 92356ab39f3233604478ffaf639429461d00a66d63ad42ec0a8d29f2bea43193
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.13.5-0" --checksum 3b1ddec77c3ead170719fd8a69411be57e181fc58315da214cb6b562803f470f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.12-0" --checksum 14c1274e93b1135d4d1b82ad7985fc2fa7f5d0689b6da18e0c94da37407cd4ea
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "elasticsearch" "7.14.2-0" --checksum 9e9bc8244fd4eae6e475c90b73086bfd047391fb456e062ded7e5eed192c918d
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "elasticsearch" "7.15.1-0" --checksum bc59c11dce4545a941d5b6aa672b19c21380ef1d01c1118ac9cfdee6db55e470
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/elasticsearch/postunpack.sh
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="7.14.2-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="7.15.1-debian-10-r0" \
     JAVA_HOME="/opt/bitnami/java" \
     LD_LIBRARY_PATH="/opt/bitnami/elasticsearch/jdk/lib:/opt/bitnami/elasticsearch/jdk/lib/server:$LD_LIBRARY_PATH"
 
