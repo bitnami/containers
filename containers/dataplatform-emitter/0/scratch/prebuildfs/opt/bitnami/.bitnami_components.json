@@ -1,7 +1,7 @@
 {
     "dataplatform-emitter": {
-        "digest": "654f5a8659bd3e2f031aed993a87f2572f450c6e27d9985ae2bd9ef26168b5b9",
+        "digest": "9d423517c7353bf5c1cbfb2ec54f700a2410a089aa5339c9d2f58e9b98240ad6",
         "type": "BLACKSMITH",
-        "version": "0.0.10"
+        "version": "0.0.11"
     }
 }
