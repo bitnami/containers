@@ -169,7 +169,7 @@ EOF
             # Based on https://github.com/SonarSource/sonarqube/blob/master/sonar-plugin-api/src/main/java/org/sonar/api/config/EmailSettings.java#L39
             if ! is_empty_value "$SONARQUBE_SMTP_HOST"; then
                 info "Configuring SMTP"
-                local -a settings_to_update+=("email.smtp_host.secured=${SONARQUBE_SMTP_HOST}")
+                local -a settings_to_update=("email.smtp_host.secured=${SONARQUBE_SMTP_HOST}")
                 ! is_empty_value "$SONARQUBE_SMTP_PORT_NUMBER" && settings_to_update+=("email.smtp_port.secured=${SONARQUBE_SMTP_PORT_NUMBER}")
                 ! is_empty_value "$SONARQUBE_SMTP_USER" && settings_to_update+=("email.smtp_username.secured=${SONARQUBE_SMTP_USER}")
                 ! is_empty_value "$SONARQUBE_SMTP_PASSWORD" && settings_to_update+=("email.smtp_password.secured=${SONARQUBE_SMTP_PASSWORD}")
