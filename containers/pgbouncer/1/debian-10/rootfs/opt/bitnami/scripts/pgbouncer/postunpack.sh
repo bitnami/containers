@@ -16,7 +16,7 @@ set -o pipefail
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/liblog.sh
 
-for dir in "$PGBOUNCER_CONF_DIR" "$PGBOUNCER_LOG_DIR" "$PGBOUNCER_TMP_DIR" "$PGBOUNCER_MOUNTED_CONF_DIR" "$PGBOUNCER_INITSCRIPTS_DIR"; do
+for dir in "$PGBOUNCER_CONF_DIR" "$PGBOUNCER_LOG_DIR" "$PGBOUNCER_TMP_DIR" "$PGBOUNCER_MOUNTED_CONF_DIR" "$PGBOUNCER_INITSCRIPTS_DIR" "$PGBOUNCER_VOLUME_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done
