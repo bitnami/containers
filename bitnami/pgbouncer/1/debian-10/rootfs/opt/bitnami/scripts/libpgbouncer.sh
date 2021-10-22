@@ -280,9 +280,8 @@ pgbouncer_initialize() {
 #########################
 pgbouncer_custom_init_scripts() {
     info "Loading custom scripts..."
-    if [[ -d "$PGBOUNCER_INITSCRIPTS_DIR" ]] && [[ -n $(find "$PGBOUNCER_INITSCRIPTS_DIR/" -type f -regex ".*\.sh") ]] && [[ ! -f "$PGBOUNCER_VOLUME_DIR/.user_scripts_initialized" ]]; then
+    if [[ -d "$PGBOUNCER_INITSCRIPTS_DIR" ]] && [[ -n $(find "$PGBOUNCER_INITSCRIPTS_DIR/" -type f -regex ".*\.sh") ]] && [[ ! -f "$PGBOUNCER_VOLUME_DIR/.user_scripts_initialized"  || "$PGBOUNCER_FORCE_INITSCRIPTS" == "true" ]]; then
         info "Loading user's custom files from $PGBOUNCER_INITSCRIPTS_DIR ..."
-        postgresql_start_bg
         find "$PGBOUNCER_INITSCRIPTS_DIR/" -type f -regex ".*\.sh" | sort | while read -r f; do
             case "$f" in
             *.sh)
