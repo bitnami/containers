@@ -8,10 +8,10 @@
     },
     "minio": {
         "arch": "amd64",
-        "digest": "35e54f7a9cb445c7eb6c8e6ba9f1fb5a790ebaf2379db6f77c9bd2e5a6f282fa",
+        "digest": "cac409bf4caad8c4924386422c52b6175c194211994b5e14f687988f5e8f6813",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2021.10.13-0"
+        "version": "2021.10.23-0"
     },
     "minio-client": {
         "arch": "amd64",
