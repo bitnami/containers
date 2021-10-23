@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="metallb-speaker" \
-    BITNAMI_IMAGE_VERSION="0.10.3-debian-10-r13" \
+    BITNAMI_IMAGE_VERSION="0.10.3-debian-10-r14" \
     PATH="/opt/bitnami/metallb-speaker/bin:$PATH"
 
 USER 1001
