@@ -27,7 +27,7 @@ $ docker run --name haproxy bitnami/haproxy:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.4.7`, `2.4.7-debian-10-r17`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-haproxy/blob/2.4.7-debian-10-r17/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.4.7`, `2.4.7-debian-10-r18`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-haproxy/blob/2.4.7-debian-10-r18/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/haproxy GitHub repo](https://github.com/bitnami/bitnami-docker-haproxy).
 
