@@ -8,10 +8,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "673e6616d3eef2ecb7d5faced97ca22e8d40b0ddf8a19f05228d7f5962570e09",
+        "digest": "39fae7b68a26d1acb951e02a294c89e1d6e3769898975e99d1aefa8ed48fec52",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.7.12-2"
+        "version": "3.7.12-3"
     },
     "pytorch": {
         "arch": "amd64",
