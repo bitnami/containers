@@ -49,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5.0`, `5.0-debian-10`, `5.0.3`, `5.0.3-debian-10-r29` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/5.0.3-debian-10-r29/5.0/debian-10/Dockerfile)
-* [`4.4`, `4.4-debian-10`, `4.4.10`, `4.4.10-debian-10-r10`, `latest` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.10-debian-10-r10/4.4/debian-10/Dockerfile)
+* [`4.4`, `4.4-debian-10`, `4.4.10`, `4.4.10-debian-10-r11`, `latest` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.10-debian-10-r11/4.4/debian-10/Dockerfile)
 * [`4.2`, `4.2-debian-10`, `4.2.17`, `4.2.17-debian-10-r30` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.17-debian-10-r30/4.2/debian-10/Dockerfile)
 * [`4.0`, `4.0-debian-9`, `4.0.27`, `4.0.27-debian-9-r43` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.27-debian-9-r43/4.0/debian-9/Dockerfile)
 
@@ -334,13 +334,12 @@ $ docker run --name mongodb \
   -e MONGODB_DATABASE=my_database bitnami/mongodb:latest
 ```
 
-You can also modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository as in the example below. This would create a user `my_user1` with access to the database `my_database1` and a user `my_user2` with access to the database `my_database2`. Note the use of two different field delimiters.
+you can also modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository as in the example below. This would create a user `my_user1` with access to the database `my_database1` and a user `my_user2` with access to the database `my_database2`. Note the use of two different field delimiters.
 
 ```yaml
 services:
   mongodb:
   ...
-    environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MONGODB_EXTRA_USERNAMES=my_user1,my_user2
       - MONGODB_EXTRA_PASSWORDS=password123,password321
@@ -798,7 +797,7 @@ $ docker-compose up mongodb
 
 # Notable Changes
 
-## 3.6.23-debian-9-r155, 4.0.26-debian-9-r44, 4.2.15-debian-10-r60, 4.4.8-debian-10-r36, 5.0.2-debian-10-r5
+## 4.0.27-debian-9-r44, 4.2.17-debian-10-r31, 4.4.10-debian-10-r11, and 5.0.3-debian-10-r30
 
 - The variables `MONGODB_EXTRA_USERNAMES`, `MONGODB_EXTRA_PASSWORDS` and `MONGODB_EXTRA_DATABASES` were added to permit initialization of more than one database the first time that a container is run. `MONGODB_EXTRA_USERNAMES`, `MONGODB_EXTRA_PASSWORDS`, `MONGODB_EXTRA_DATABASES` use the characters `,` and/or `;` as field delimiters. It is still possible to use the variables from prior versions if necessary: `MONGODB_USERNAME`, `MONGODB_PASSWORD` and `MONGODB_DATABASE`.
 - When specifying extra users, an empty database name will be understood as the Mongo default database called `test`.
@@ -866,4 +865,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-,
