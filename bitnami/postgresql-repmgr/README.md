@@ -552,6 +552,7 @@ Please see the list of environment variables available in the Bitnami PostgreSQL
 | POSTGRESQL_POSTGRES_PASSWORD_FILE    | `nil`         |
 | POSTGRESQL_PORT_NUMBER               | `5432`        |
 | POSTGRESQL_INITDB_ARGS               | `nil`         |
+| POSTGRESQL_INITDB_WAL_DIR            | `nil`         |
 | POSTGRESQL_PGCTLTIMEOUT              | `60`          |
 | POSTGRESQL_SHUTDOWN_MODE             | `fast`        |
 | POSTGRESQL_ENABLE_TLS                | `no`          |
