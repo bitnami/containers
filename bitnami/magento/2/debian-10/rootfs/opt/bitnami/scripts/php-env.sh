@@ -21,7 +21,6 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 php_env_vars=(
-    PHP_DATE_TIMEZONE
     PHP_FPM_LISTEN_ADDRESS
     PHP_DATE_TIMEZONE
     PHP_ENABLE_OPCACHE
@@ -76,7 +75,6 @@ export PHP_FPM_DAEMON_GROUP="daemon"
 # PHP configuration
 export PHP_DATE_TIMEZONE="${PHP_DATE_TIMEZONE:-}"
 PHP_ENABLE_OPCACHE="${PHP_ENABLE_OPCACHE:-"${PHP_OPCACHE_ENABLED:-}"}"
-export PHP_DATE_TIMEZONE="${PHP_DATE_TIMEZONE:-}"
 export PHP_ENABLE_OPCACHE="${PHP_ENABLE_OPCACHE:-}"
 export PHP_EXPOSE_PHP="${PHP_EXPOSE_PHP:-}"
 export PHP_MAX_EXECUTION_TIME="${PHP_MAX_EXECUTION_TIME:-}"
