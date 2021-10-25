@@ -8,10 +8,10 @@
     },
     "dreamfactory": {
         "arch": "amd64",
-        "digest": "40478ecd4e4fd47be0bc7c37208a3fc842e17512b8642a682c04d815dd282423",
+        "digest": "2e1c1d058590d3af22d0bb75900a719ad5370b618779d119ebf43424d4415610",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.8.0-1"
+        "version": "4.9.0-0"
     },
     "git": {
         "arch": "amd64",
@@ -29,10 +29,10 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "51b987c1dee66e7200218e82bf3ae1cbc3a9d1b985056e057944e9471a6653fa",
+        "digest": "94230b4abfeff6424103c40676c7162330c338b03b4f1a77f07eba709e650e35",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.31-3"
+        "version": "7.4.25-0"
     },
     "mongodb-client": {
         "arch": "amd64",
@@ -50,10 +50,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "319d43094daab21750d6dd8a6d003e367e221bcd97fcbf19e41331fde57e4369",
+        "digest": "a1e8ddaa11e536455db0af843ed8153ba2959c165e662ff4d489537e9b0fa82b",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.31-5"
+        "version": "7.4.25-0"
     },
     "postgresql-client": {
         "arch": "amd64",
