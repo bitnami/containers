@@ -1254,3 +1254,22 @@ EOF
         postgresql_ensure_user_has_database_privileges "${grant_flags[@]}"
     fi
 }
+
+
+########################
+# Retrieves the WAL directory in use by PostgreSQL / to use if not initialized yet
+# Globals:
+#   REPMGR_*
+# Arguments:
+#   None
+# Returns:
+#   the path to the WAL directory, or empty if not set
+#########################
+postgresql_get_waldir() {
+    if [[ -L "${POSTGRESQL_DATA_DIR}/pg_wal" && -d "${POSTGRESQL_DATA_DIR}/pg_wal" ]]; then
+        readlink -f "${POSTGRESQL_DATA_DIR}/pg_wal"
+    else
+        # Uninitialized - using value from $POSTGRESQL_INITDB_WAL_DIR if set
+        echo "$POSTGRESQL_INITDB_WAL_DIR"
+    fi
+}
