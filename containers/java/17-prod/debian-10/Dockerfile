@@ -8,10 +8,10 @@ ENV OS_ARCH="amd64" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 locales procps tar wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/java-17.0.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "f5eba40e70c6bc02d12cbaf8114f838079c3594f0e4e4e1836f4a3b3fbb02ee6  /tmp/bitnami/pkg/cache/java-17.0.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/java-17.0.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/java-17.0.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/java-17.0.1-0-linux-amd64-debian-10.tar.gz && \
+    echo "f41bbe05147002c16011221d6e4ba3b3d6c29d83ed1a683f57591bb3dd528a33  /tmp/bitnami/pkg/cache/java-17.0.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/java-17.0.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/java-17.0.1-0-linux-amd64-debian-10.tar.gz
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
     DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
@@ -24,7 +24,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="17.0.0-prod-debian-10-r16" \
+    BITNAMI_IMAGE_VERSION="17.0.1-prod-debian-10-r0" \
     JAVA_HOME="/opt/bitnami/java" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
