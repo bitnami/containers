@@ -447,6 +447,11 @@ repmgr_postgresql_configuration() {
 repmgr_generate_repmgr_config() {
     info "Preparing repmgr configuration..."
 
+    # If using a distinct WAL directory (${POSTGRESQL_DATA_DIR}/pg_wal is a symlink to an existing dir or $POSTGRESQL_INITDB_WAL_DIR is set a custom value during 1st boot),
+    # set the "--waldir" option accordingly
+    local -r waldir=$(postgresql_get_waldir)
+    local -r waldir_option=$([[ -n "$waldir" ]] && echo "--waldir=$waldir")
+
     cat << EOF >> "${REPMGR_CONF_FILE}.tmp"
 event_notification_command='${REPMGR_EVENTS_DIR}/router.sh %n %e %s "%t" "%d"'
 ssh_options='-o "StrictHostKeyChecking no" -v'
@@ -469,6 +474,7 @@ degraded_monitoring_timeout='${REPMGR_DEGRADED_MONITORING_TIMEOUT}'
 data_directory='${POSTGRESQL_DATA_DIR}'
 async_query_timeout='${REPMGR_MASTER_RESPONSE_TIMEOUT}'
 pg_ctl_options='-o "--config-file=\"${POSTGRESQL_CONF_FILE}\" --external_pid_file=\"${POSTGRESQL_PID_FILE}\" --hba_file=\"${POSTGRESQL_PGHBA_FILE}\""'
+pg_basebackup_options='$waldir_option'
 EOF
 
     if [[ -f "${REPMGR_MOUNTED_CONF_DIR}/repmgr.conf" ]]; then
@@ -528,6 +534,13 @@ repmgr_wait_primary_node() {
 #   None
 #########################
 repmgr_clone_primary() {
+    # Clears WAL directory if existing (pg_basebackup requires the WAL dir to be empty)
+    local -r waldir=$(postgresql_get_waldir)
+    if [[ -d "$waldir" ]]; then
+        info "Deleting existing WAL directory $waldir..."
+        rm -rf "$waldir" && ensure_dir_exists "$waldir"
+    fi
+
     info "Cloning data from primary node..."
     local -r flags=("-f" "$REPMGR_CONF_FILE" "-h" "$REPMGR_CURRENT_PRIMARY_HOST" "-p" "$REPMGR_CURRENT_PRIMARY_PORT" "-U" "$REPMGR_USERNAME" "-d" "$REPMGR_DATABASE" "-D" "$POSTGRESQL_DATA_DIR" "standby" "clone" "--fast-checkpoint" "--force")
 
