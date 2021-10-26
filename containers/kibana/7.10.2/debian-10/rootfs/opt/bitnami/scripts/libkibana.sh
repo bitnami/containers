@@ -136,7 +136,7 @@ kibana_initialize() {
                     kibana_conf_set "elasticsearch.ssl.certificateAuthorities" "$KIBANA_ELASTICSEARCH_CA_CERT_LOCATION"
                 else
                     ! is_empty_value "$KIBANA_ELASTICSEARCH_TRUSTSTORE_PASSWORD" && kibana_set_key_value "elasticsearch.ssl.truststore.password" "$KIBANA_ELASTICSEARCH_TRUSTSTORE_PASSWORD"
-                    kibana_conf_set"elasticsearch.ssl.truststore.path" "$KIBANA_ELASTICSEARCH_TRUSTSTORE_LOCATION"
+                    kibana_conf_set "elasticsearch.ssl.truststore.path" "$KIBANA_ELASTICSEARCH_TRUSTSTORE_LOCATION"
                 fi
             fi
         fi
