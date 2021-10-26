@@ -18,7 +18,7 @@ services:
     depends_on:
       - mariadb
   mariadb:
-    image: docker.io/bitnami/mariadb:10.3
+    image: docker.io/bitnami/mariadb:10.6
     environment:
       - MARIADB_ROOT_PASSWORD=root_password
       - MARIADB_USER=bn_skipper
