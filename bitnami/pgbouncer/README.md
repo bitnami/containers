@@ -40,7 +40,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.16.0`, `1.16.0-debian-10-r71`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgbouncer/blob/1.16.0-debian-10-r71/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.16.0`, `1.16.0-debian-10-r75`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgbouncer/blob/1.16.0-debian-10-r75/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pgbouncer GitHub repo](https://github.com/bitnami/bitnami-docker-pgbouncer).
 
@@ -143,6 +143,8 @@ pgbouncer:
   volumes:
     - /path/to/init-scripts:/docker-entrypoint-initdb.d
 ```
+
+The init scripts will be executed on first boot. If you want to force the re-execution on restarts, set `PGBOUNCER_FORCE_INITSCRIPTS` to `true`.
 
 ## Securing PgBouncer traffic
 
