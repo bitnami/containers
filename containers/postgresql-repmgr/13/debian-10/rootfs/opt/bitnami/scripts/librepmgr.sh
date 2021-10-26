@@ -447,7 +447,7 @@ repmgr_postgresql_configuration() {
 repmgr_generate_repmgr_config() {
     info "Preparing repmgr configuration..."
 
-    # If using a distinct WAL directory ($POSTGRESQL_DATA_DIR/pg_wal is a symlink to an existing dir or $POSTGRESQL_INITDB_WAL_DIR when not initialized),
+    # If using a distinct WAL directory (${POSTGRESQL_DATA_DIR}/pg_wal is a symlink to an existing dir or $POSTGRESQL_INITDB_WAL_DIR is set a custom value during 1st boot),
     # set the "--waldir" option accordingly
     local -r waldir=$(postgresql_get_waldir)
     local -r waldir_option=$([[ -n "$waldir" ]] && echo "--waldir=$waldir")
