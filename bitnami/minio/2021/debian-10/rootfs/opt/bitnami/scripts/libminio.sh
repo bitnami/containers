@@ -254,7 +254,7 @@ minio_create_default_buckets() {
 #########################
 minio_regenerate_keys() {
     local error_code=0
-    if is_boolean_yes "$MINIO_FORCE_NEW_KEYS" && [[ -f "${MINIO_DATA_DIR}/.root_user" ]] && [[ -f "${MINIO_DATADIR}/.root_password" ]]; then
+    if is_boolean_yes "$MINIO_FORCE_NEW_KEYS" && [[ -f "${MINIO_DATA_DIR}/.root_user" ]] && [[ -f "${MINIO_DATA_DIR}/.root_password" ]]; then
         MINIO_ROOT_USER_OLD="$(cat "${MINIO_DATA_DIR}/.root_user")"
         MINIO_ROOT_PASSWORD_OLD="$(cat "${MINIO_DATA_DIR}/.root_password")"
         if [[ "$MINIO_ROOT_USER_OLD" != "$MINIO_ROOT_USER" ]] || [[ "$MINIO_ROOT_PASSWORD_OLD" != "$MINIO_ROOT_PASSWORD" ]]; then
