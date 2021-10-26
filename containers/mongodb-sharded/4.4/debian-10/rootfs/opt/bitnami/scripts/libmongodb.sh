@@ -14,6 +14,80 @@
 . /opt/bitnami/scripts/libnet.sh
 
 ########################
+# Return field separator to use in lists. One of comma or semi-colon, comma
+# being preferred.
+# Globals:
+#   None
+# Arguments:
+#   A (list) of fields
+# Returns:
+#   The separator used within that list
+#########################
+mongodb_field_separator() {
+    if printf %s\\n "$1" | grep -q ','; then
+        echo ','
+    elif printf %s\\n "$1" | grep -q ';'; then
+        echo ';'
+    fi
+}
+
+########################
+# Initialise the arrays databases, usernames and passwords to contain the
+# fields from their respective environment variables.
+# Globals:
+#   MONGODB_EXTRA_DATABASES, MONGODB_EXTRA_USERNAMES, MONGODB_EXTRA_PASSWORDS
+#   MONGODB_DATABASE, MONGODB_USERNAME, MONGODB_PASSWORD
+# Arguments:
+#   $1 - single: initialise based on MONGODB_DATABASE, MONGODB_USERNAME, MONGODB_PASSWORD
+#   $1 - extra: initialise based on MONGODB_EXTRA_DATABASES, MONGODB_EXTRA_USERNAMES, MONGODB_EXTRA_PASSWORDS
+#   $1 - all (or empty): initalise as both of the above
+# Returns:
+#   None
+#########################
+mongodb_auth() {
+    case "${1:-all}" in
+        extra)
+            local -a databases_extra
+            local -a usernames_extra
+            local -a passwords_extra
+            # Start by filling in locally scoped databases, usernames and
+            # passwords arrays with the content of the _EXTRA_ environment
+            # variables.
+            IFS="$(mongodb_field_separator "$MONGODB_EXTRA_DATABASES")" read -r -a databases_extra <<< "$MONGODB_EXTRA_DATABASES"
+            IFS="$(mongodb_field_separator "$MONGODB_EXTRA_USERNAMES")" read -r -a usernames_extra <<< "$MONGODB_EXTRA_USERNAMES"
+            IFS="$(mongodb_field_separator "$MONGODB_EXTRA_PASSWORDS")" read -r -a passwords_extra <<< "$MONGODB_EXTRA_PASSWORDS"
+            # Force missing empty passwords/database names (occurs when
+            # MONGODB_EXTRA_PASSWORDS/DATABASES ends with a separator, e.g. a
+            # comma or semi-colon), then copy into the databases, usernames and
+            # passwords arrays (global).
+            for (( i=0; i<${#usernames_extra[@]}; i++ )); do
+                if [[ -z "${passwords_extra[i]:-}" ]]; then
+                    passwords_extra[i]=""
+                fi
+                if [[ -z "${databases_extra[i]:-}" ]]; then
+                    databases_extra[i]=""
+                fi
+                databases+=("${databases_extra[i]}")
+                usernames+=("${usernames_extra[i]}")
+                passwords+=("${passwords_extra[i]}")
+            done
+            ;;
+        single)
+            # Add the content of the "regular" environment variables to the arrays
+            databases+=("$MONGODB_DATABASE")
+            usernames+=("$MONGODB_USERNAME")
+            passwords+=("$MONGODB_PASSWORD")
+            ;;
+        all)
+            # Perform the following in this order to respect the priority of the
+            # environment variables.
+            mongodb_auth single
+            mongodb_auth extra
+            ;;
+    esac
+}
+
+########################
 # Validate settings in MONGODB_* env. variables
 # Globals:
 #   MONGODB_*
@@ -30,6 +104,7 @@ mongodb_validate() {
 need to provide the MONGODB_REPLICA_SET_KEY on every node, specify MONGODB_ROOT_PASSWORD \
 in the primary node and MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD in the rest of nodes"
     local error_code=0
+    local usernames databases passwords
 
     # Auxiliary functions
     print_validation_error() {
@@ -82,13 +157,52 @@ Available options are 'primary/secondary/arbiter/hidden'"
         print_validation_error "$error_message"
     fi
 
+    if [[ -n "$MONGODB_EXTRA_USERNAMES" ]]; then
+        # Capture list of extra (only!) users, passwords and databases in the
+        # usernames, passwords and databases arrays.
+        mongodb_auth extra
+
+        # Verify there as many usernames as passwords
+        if [[ "${#usernames[@]}" -ne "${#passwords[@]}" ]]; then
+            print_validation_error "Specify the same number of passwords on MONGODB_EXTRA_PASSWORDS as the number of users in MONGODB_EXTRA_USERNAMES"
+        fi
+        # When we have a list of databases, there should be as many databases as
+        # users (thus as passwords).
+        if [[ -n "$MONGODB_EXTRA_DATABASES" ]] && [[ "${#usernames[@]}" -ne "${#databases[@]}" ]]; then
+            print_validation_error "Specify the same number of users on MONGODB_EXTRA_USERNAMES as the number of databases in MONGODB_EXTRA_DATABASES"
+        fi
+        # When the list of database is empty, then all users will be added to
+        # default database.
+        if [[ -z "$MONGODB_EXTRA_DATABASES" ]]; then
+            warn "All users specified in MONGODB_EXTRA_USERNAMES will be added to the default database called 'test'"
+        fi
+    fi
+
     if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
         warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}. For safety reasons, do not use this flag in a production environment."
-    elif [[ -n "$MONGODB_USERNAME" ]] && [[ -z "$MONGODB_PASSWORD" ]]; then
-        error_message="The MONGODB_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is only recommended for development."
+    elif { [[ -n "$MONGODB_EXTRA_USERNAMES" ]] || [[ -n "$MONGODB_USERNAME" ]]; } && [[ -z "$MONGODB_ROOT_PASSWORD" ]]; then
+        # Authorization is turned on as soon as a set of users or a root
+        # password are given. If we have a set of users, but an empty root
+        # password, validation should fail unless ALLOW_EMPTY_PASSWORD is turned
+        # on.
+        error_message="The MONGODB_ROOT_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with a blank root password. This is only recommended for development."
         print_validation_error "$error_message"
     fi
 
+    # Warn for users with empty passwords, as these won't be created. Maybe
+    # should we just end with an error here instead?
+    if [[ -n "$MONGODB_EXTRA_USERNAMES" ]]; then
+        # Here we can access the arrays usernames and passwordsa, as these have
+        # been initialised earlier on.
+        for (( i=0; i<${#passwords[@]}; i++ )); do
+            if [[ -z "${passwords[i]}" ]]; then
+                warn "User ${usernames[i]} will not be created as its password is empty or not set. MongoDB cannot create users with blank passwords."
+            fi
+        done
+    fi
+    if [[ -n "$MONGODB_USERNAME" ]] && [[ -z "$MONGODB_PASSWORD" ]]; then
+        warn "User $MONGODB_USERNAME will not be created as its password is empty or not set. MongoDB cannot create users with blank passwords."
+    fi
     if ! is_boolean_yes "$ALLOW_EMPTY_PASSWORD" && [[ -n "$MONGODB_METRICS_USERNAME" ]] && [[ -z "$MONGODB_METRICS_PASSWORD" ]]; then
         error_message="The MONGODB_METRICS_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow the container to be started with blank passwords. This is only recommended for development."
         print_validation_error "$error_message"
@@ -139,9 +253,13 @@ get_mongo_hostname() {
 #########################
 mongodb_drop_local_database() {
     info "Dropping local database to reset replica set setup..."
-
     local command=("mongodb_execute")
-    [[ -n "$MONGODB_PASSWORD" ]] && command=("${command[@]}" "$MONGODB_USERNAME" "$MONGODB_PASSWORD")
+
+    if [[ -n "$MONGODB_USERNAME" ]] || [[ -n "$MONGODB_EXTRA_USERNAMES" ]]; then
+        local usernames passwords databases
+        mongodb_auth
+        command=("${command[@]}" "${usernames[0]}" "${passwords[0]}")
+    fi
     "${command[@]}" <<EOF
 db.getSiblingDB('local').dropDatabase()
 EOF
@@ -243,7 +361,7 @@ mongodb_start_bg() {
 ########################
 # Check if mongo is accepting requests
 # Globals:
-#   MONGODB_DATABASE
+#   MONGODB_DATABASE and MONGODB_EXTRA_DATABASES
 # Arguments:
 #   None
 # Returns:
@@ -253,7 +371,7 @@ mongodb_is_mongodb_started() {
     local result
 
     result=$(
-        mongodb_execute 2>/dev/null <<EOF
+        mongodb_execute_print_output 2>/dev/null <<EOF
 db
 EOF
     )
@@ -495,6 +613,35 @@ mongodb_set_replicasetmode_conf() {
 }
 
 ########################
+# Create a MongoDB user and provide read/write permissions on a database
+# Globals:
+#   MONGODB_ROOT_PASSWORD
+# Arguments:
+#   $1 - Name of user
+#   $2 - Password for user
+#   $3 - Name of database (empty for default database)
+# Returns:
+#   None
+#########################
+mongodb_create_user() {
+    local -r user="${1:?user is required}"
+    local -r password="${2:-}"
+    local -r database="${3:-}"
+    local query
+
+    if [[ -z "$password" ]]; then
+        warn "Cannot create user '$user', no password provided"
+        return 0
+    fi
+    # Build proper query (default database or specific one)
+    query="db.getSiblingDB('$database').createUser({ user: '$user', pwd: '$password', roles: [{role: 'readWrite', db: '$database'}] })"
+    [[ -z "$database" ]] && query="db.getSiblingDB(db.stats().db).createUser({ user: '$user', pwd: '$password', roles: [{role: 'readWrite', db: db.getSiblingDB(db.stats().db).stats().db }] })"
+    # Create user, discarding mongo CLI output for clean logs
+    info "Creating user '$user'..."
+    mongodb_execute "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD" "" "127.0.0.1" <<< "$query"
+}
+
+########################
 # Create the appropriate users
 # Globals:
 #   MONGODB_*
@@ -504,36 +651,43 @@ mongodb_set_replicasetmode_conf() {
 #   None
 #########################
 mongodb_create_users() {
-    local result
-
     info "Creating users..."
+
     if [[ -n "$MONGODB_ROOT_PASSWORD" ]] && ! [[ "$MONGODB_REPLICA_SET_MODE" =~ ^(secondary|arbiter|hidden) ]]; then
         info "Creating $MONGODB_ROOT_USER user..."
-        result=$(
-            mongodb_execute "" "" "" "127.0.0.1" <<EOF
+        mongodb_execute "" "" "" "127.0.0.1" <<EOF
 db.getSiblingDB('admin').createUser({ user: '$MONGODB_ROOT_USER', pwd: '$MONGODB_ROOT_PASSWORD', roles: [{role: 'root', db: 'admin'}] })
 EOF
-        )
     fi
 
-    if [[ -n "$MONGODB_USERNAME" ]] && [[ -n "$MONGODB_PASSWORD" ]] && [[ -n "$MONGODB_DATABASE" ]]; then
-        info "Creating '$MONGODB_USERNAME' user..."
+    if [[ -n "$MONGODB_USERNAME" ]]; then
+        mongodb_create_user "$MONGODB_USERNAME" "$MONGODB_PASSWORD" "$MONGODB_DATABASE"
+    fi
+    if [[ -n "$MONGODB_EXTRA_USERNAMES" ]]; then
+        local databases usernames passwords
 
-        result=$(
-            mongodb_execute "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD" "" "127.0.0.1" <<EOF
-db.getSiblingDB('$MONGODB_DATABASE').createUser({ user: '$MONGODB_USERNAME', pwd: '$MONGODB_PASSWORD', roles: [{role: 'readWrite', db: '$MONGODB_DATABASE'}] })
-EOF
-        )
+        # Fill in arrays called databases, usernames and passwords with
+        # information from matching environment variables.
+        mongodb_auth extra
+        if [[ -n "$MONGODB_EXTRA_DATABASES" ]]; then
+            # Loop over the databases, usernames and passwords arrays, creating
+            # each user in the database at the same index.
+            for (( i=0; i<${#databases[@]}; i++ )); do
+                mongodb_create_user "${usernames[i]}" "${passwords[i]}" "${databases[i]}"
+            done
+        else
+            # Loop over all users and create them within the default database.
+            for (( i=0; i<${#usernames[@]}; i++ )); do
+                mongodb_create_user "${usernames[i]}" "${passwords[i]}"
+            done
+        fi
     fi
 
     if [[ -n "$MONGODB_METRICS_USERNAME" ]] && [[ -n "$MONGODB_METRICS_PASSWORD" ]]; then
         info "Creating '$MONGODB_METRICS_USERNAME' user..."
-
-        result=$(
-            mongodb_execute 'root' "$MONGODB_ROOT_PASSWORD" "" "127.0.0.1" <<EOF
+        mongodb_execute 'root' "$MONGODB_ROOT_PASSWORD" "" "127.0.0.1" <<EOF
 db.getSiblingDB('admin').createUser({ user: '$MONGODB_METRICS_USERNAME', pwd: '$MONGODB_METRICS_PASSWORD', roles: [{role: 'clusterMonitor', db: 'admin'},{ role: 'read', db: 'local' }] })
 EOF
-        )
     fi
     info "Users created"
 }
@@ -599,7 +753,7 @@ mongodb_is_primary_node_initiated() {
     local node="${1:?node is required}"
     local result
     result=$(
-        mongodb_execute "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD" "admin" "127.0.0.1" "$MONGODB_PORT_NUMBER" <<EOF
+        mongodb_execute_print_output "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD" "admin" "127.0.0.1" "$MONGODB_PORT_NUMBER" <<EOF
 rs.initiate({"_id":"$MONGODB_REPLICA_SET_NAME", "members":[{"_id":0,"host":"$node:$MONGODB_PORT_NUMBER","priority":5}]})
 EOF
     )
@@ -631,7 +785,7 @@ mongodb_set_dwc() {
     local result
 
     result=$(
-        mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
+        mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
 db.adminCommand({"setDefaultRWConcern" : 1, "defaultWriteConcern" : {"w" : "majority"}})
 EOF
     )
@@ -659,7 +813,7 @@ mongodb_is_secondary_node_pending() {
     mongodb_set_dwc
 
     result=$(
-        mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
+        mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
 rs.add({host: '$node:$MONGODB_PORT_NUMBER'})
 EOF
     )
@@ -691,7 +845,7 @@ mongodb_is_hidden_node_pending() {
     mongodb_set_dwc
 
     result=$(
-        mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
+        mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
 rs.add({host: '$node:$MONGODB_PORT_NUMBER', hidden: true, priority: 0})
 EOF
     )
@@ -721,7 +875,7 @@ mongodb_is_arbiter_node_pending() {
     mongodb_set_dwc
 
     result=$(
-        mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
+        mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
 rs.addArb('$node:$MONGODB_PORT_NUMBER')
 EOF
     )
@@ -786,7 +940,7 @@ mongodb_is_primary_node_up() {
     debug "Validating $host as primary node..."
 
     result=$(
-        mongodb_execute "$user" "$password" "admin" "$host" "$port" <<EOF
+        mongodb_execute_print_output "$user" "$password" "admin" "$host" "$port" <<EOF
 db.isMaster().ismaster
 EOF
     )
@@ -810,7 +964,7 @@ mongodb_is_node_available() {
 
     local result
     result=$(
-        mongodb_execute "$user" "$password" "admin" "$host" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
+        mongodb_execute_print_output "$user" "$password" "admin" "$host" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
 db.getUsers()
 EOF
     )
@@ -966,7 +1120,7 @@ mongodb_is_not_in_sync() {
     local result
 
     result=$(
-        mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
+        mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
 db.printSlaveReplicationInfo()
 EOF
     )
@@ -1222,8 +1376,11 @@ mongodb_custom_init_scripts() {
             mongo_user="$MONGODB_ROOT_USER"
             mongo_pass="$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD"
         else
-            mongo_user="$MONGODB_USERNAME"
-            mongo_pass="$MONGODB_PASSWORD"
+            local databases usernames passwords
+
+            mongodb_auth
+            mongo_user="${usernames[0]}"
+            mongo_pass="${passwords[0]}"
         fi
         find "$MONGODB_INITSCRIPTS_DIR" -type f -regex ".*\.\(sh\|js\|js.gz\)" | sort >$tmp_file
         while read -r f; do
@@ -1239,11 +1396,11 @@ mongodb_custom_init_scripts() {
                 ;;
             *.js)
                 debug "Executing $f"
-                mongodb_execute "$mongo_user" "$mongo_pass" <"$f"
+                mongodb_execute_print_output "$mongo_user" "$mongo_pass" <"$f"
                 ;;
             *.js.gz)
                 debug "Executing $f"
-                gunzip -c "$f" | mongodb_execute "$mongo_user" "$mongo_pass"
+                gunzip -c "$f" | mongodb_execute_print_output "$mongo_user" "$mongo_pass"
                 ;;
             *) debug "Ignoring $f" ;;
             esac
@@ -1264,9 +1421,9 @@ mongodb_custom_init_scripts() {
 #   $5 - Port (default $MONGODB_PORT_NUMBER)
 #   $6 - Extra arguments (default $MONGODB_CLIENT_EXTRA_FLAGS)
 # Returns:
-#   None
+#   output of mongo query
 ########################
-mongodb_execute() {
+mongodb_execute_print_output() {
     local -r user="${1:-}"
     local -r password="${2:-}"
     local -r database="${3:-}"
@@ -1288,6 +1445,27 @@ mongodb_execute() {
     [[ -n "$database" ]] && args+=("$database")
 
     "$MONGODB_BIN_DIR/mongo" "${args[@]}"
+}
+
+########################
+# Execute an arbitrary query/queries against the running MongoDB service,
+# discard its output unless BITNAMI_DEBUG is true
+# Stdin:
+#   Query/queries to execute
+# Globals:
+#   BITNAMI_DEBUG
+# Arguments:
+#   $1 - User to run queries
+#   $2 - Password
+#   $3 - Database where to run the queries
+#   $4 - Host (default to result of get_mongo_hostname function)
+#   $5 - Port (default $MONGODB_PORT_NUMBER)
+#   $6 - Extra arguments (default $MONGODB_CLIENT_EXTRA_FLAGS)
+# Returns:
+#   None
+########################
+mongodb_execute() {
+    debug_execute mongodb_execute_print_output "$@"
 }
 
 ########################
