@@ -95,16 +95,22 @@ pgbouncer_validate() {
     fi
 
     # TLS Checks (server)
-    if [[ -n "$PGBOUNCER_SERVER_TLS_CERT_FILE" ]] && [[ ! -f "$PGBOUNCER_SERVER_TLS_CERT_FILE" ]]; then
-        print_validation_error "The X.509 server certificate file in the specified path ${PGBOUNCER_SERVER_TLS_CERT_FILE} does not exist"
-    fi
-    if [[ -n "$PGBOUNCER_SERVER_TLS_KEY_FILE" ]] && [[ ! -f "$PGBOUNCER_SERVER_TLS_KEY_FILE" ]]; then
-        print_validation_error "The server private key file in the specified path ${PGBOUNCER_SERVER_TLS_KEY_FILE} does not exist"
-    fi
-    if [[ -n "$PGBOUNCER_SERVER_TLS_CA_FILE" ]]; then
-        warn "A CA X.509 certificate was not provided. Server verification will not be performed in TLS connections"
-    elif [[ ! -f "$PGBOUNCER_SERVER_TLS_CA_FILE" ]]; then
-        print_validation_error "The server CA X.509 certificate file in the specified path ${PGBOUNCER_SERVER_TLS_CA_FILE} does not exist"
+    if [[ "$PGBOUNCER_SERVER_TLS_SSLMODE" != "disable" ]]; then
+        if [[ -z "$PGBOUNCER_SERVER_TLS_CERT_FILE" ]]; then
+            print_validation_error "You must provide a X.509 certificate in order to use server TLS"
+        elif [[ ! -f "$PGBOUNCER_SERVER_TLS_CERT_FILE" ]]; then
+            print_validation_error "The X.509 server certificate file in the specified path ${PGBOUNCER_SERVER_TLS_CERT_FILE} does not exist"
+        fi
+        if [[ -z "$PGBOUNCER_SERVER_TLS_KEY_FILE" ]]; then
+            print_validation_error "You must provide a private key in order to use server TLS"
+        elif [[ ! -f "$PGBOUNCER_SERVER_TLS_KEY_FILE" ]]; then
+            print_validation_error "The server private key file in the specified path ${PGBOUNCER_SERVER_TLS_KEY_FILE} does not exist"
+        fi
+        if [[ -z "$PGBOUNCER_SERVER_TLS_CA_FILE" ]]; then
+            warn "A CA X.509 certificate was not provided. Server verification will not be performed in TLS connections"
+        elif [[ ! -f "$PGBOUNCER_SERVER_TLS_CA_FILE" ]]; then
+            print_validation_error "The server CA X.509 certificate file in the specified path ${PGBOUNCER_SERVER_TLS_CA_FILE} does not exist"
+        fi
     fi
 
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
@@ -234,8 +240,8 @@ pgbouncer_initialize() {
         )
         for pair in "${key_value_pairs[@]}"; do
             local key value
-            key="$(awk -F: '{print $1}' <<< "$pair")"
-            value="$(awk -F: '{print $2}' <<< "$pair")"
+            key="$(awk -F: '{print $1}' <<<"$pair")"
+            value="$(awk -F: '{print $2}' <<<"$pair")"
             ! is_empty_value "${value}" && ini-file set --section "pgbouncer" --key "${key}" --value "${value}" "$PGBOUNCER_CONF_FILE"
         done
         if [[ "$PGBOUNCER_CLIENT_TLS_SSLMODE" != "disable" ]]; then
@@ -249,7 +255,7 @@ pgbouncer_initialize() {
             ini-file set --section "pgbouncer" --key "server_tls_cert_file" --value "$PGBOUNCER_SERVER_TLS_CERT_FILE" "$PGBOUNCER_CONF_FILE"
             ini-file set --section "pgbouncer" --key "server_tls_key_file" --value "$PGBOUNCER_SERVER_TLS_KEY_FILE" "$PGBOUNCER_CONF_FILE"
             ! is_empty_value "$PGBOUNCER_SERVER_TLS_CA_FILE" && ini-file set --section "pgbouncer" --key "server_tls_ca_file" --value "$PGBOUNCER_SERVER_TLS_CA_FILE" "$PGBOUNCER_CONF_FILE"
-            ! is_empty_value "$PGBOUNCER_SERVER_TLS_PROTOCOLS" && ini-file set --section "pgbouncer" --key "server_tls_protocols" --value "$PGBOUNCER_SERVER_TLS_PROTOCOLS" "$PGBOUNCER_CONF_FILE"
+            ! is_empty_value "$PGBOUNCER_SERVER_TLS_PROTOCOLS" && ini-file set --section "pgbouncer" --key "server_tls_ca_file" --value "$PGBOUNCER_SERVER_TLS_PROTOCOLS" "$PGBOUNCER_CONF_FILE"
             ini-file set --section "pgbouncer" --key "server_tls_ciphers" --value "$PGBOUNCER_SERVER_TLS_CIPHERS" "$PGBOUNCER_CONF_FILE"
         fi
     else
@@ -274,9 +280,8 @@ pgbouncer_initialize() {
 #########################
 pgbouncer_custom_init_scripts() {
     info "Loading custom scripts..."
-    if [[ -d "$PGBOUNCER_INITSCRIPTS_DIR" ]] && [[ -n $(find "$PGBOUNCER_INITSCRIPTS_DIR/" -type f -regex ".*\.sh") ]] && [[ ! -f "$PGBOUNCER_VOLUME_DIR/.user_scripts_initialized" ]]; then
+    if [[ -d "$PGBOUNCER_INITSCRIPTS_DIR" ]] && [[ -n $(find "$PGBOUNCER_INITSCRIPTS_DIR/" -type f -regex ".*\.sh") ]] && [[ ! -f "$PGBOUNCER_VOLUME_DIR/.user_scripts_initialized" || "$PGBOUNCER_FORCE_INITSCRIPTS" == "true" ]]; then
         info "Loading user's custom files from $PGBOUNCER_INITSCRIPTS_DIR ..."
-        postgresql_start_bg
         find "$PGBOUNCER_INITSCRIPTS_DIR/" -type f -regex ".*\.sh" | sort | while read -r f; do
             case "$f" in
             *.sh)
