@@ -8,10 +8,10 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "15b394a022ca1d0b4b89bfee0487ee13f9e8cc697d0ca09ce62a0a3732536236",
+        "digest": "dbeed36d852417dd148bb071980c14fca7631ee9c38ea72ad2fb27de1feef027",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.3.31-2"
+        "version": "10.6.4-0"
     },
     "php": {
         "arch": "amd64",
