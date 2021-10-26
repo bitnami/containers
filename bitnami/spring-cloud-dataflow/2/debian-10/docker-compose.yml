@@ -47,7 +47,7 @@ services:
       - rabbitmq
 
   mariadb-dataflow:
-    image: docker.io/bitnami/mariadb:10.5
+    image: docker.io/bitnami/mariadb:10.6
     environment:
       - MARIADB_ROOT_PASSWORD=root_password
       - MARIADB_USER=bn_dataflow
@@ -57,7 +57,7 @@ services:
       - 'mariadb_dataflow_data:/bitnami'
 
   mariadb-skipper:
-    image: docker.io/bitnami/mariadb:10.5
+    image: docker.io/bitnami/mariadb:10.6
     environment:
       - MARIADB_ROOT_PASSWORD=root_password
       - MARIADB_USER=bn_skipper
@@ -67,7 +67,7 @@ services:
       - 'mariadb_skipper_data:/bitnami'
 
   mariadb-test:
-    image: docker.io/bitnami/mariadb:10.5
+    image: docker.io/bitnami/mariadb:10.6
     environment:
       - MARIADB_ROOT_PASSWORD=root_password
       - MARIADB_USER=bn_test
