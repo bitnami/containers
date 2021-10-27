@@ -461,13 +461,13 @@ In order to properly upgrade Magento, you will need Magento authentication keys 
 Restart the Docker container to reset any configuration changes:
 
 ```console
-$ docker stop magento
+$ docker restart magento
 ```
 
 Or using Docker Compose:
 
 ```console
-$ docker-compose stop magento
+$ docker-compose restart magento
 ```
 
 #### Upgrading bundled image components
