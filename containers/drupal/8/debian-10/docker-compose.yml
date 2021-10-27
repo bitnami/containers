@@ -1,7 +1,7 @@
 version: '2'
 services:
   mariadb:
-    image: docker.io/bitnami/mariadb:10.5
+    image: docker.io/bitnami/mariadb:10.3
     environment:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
