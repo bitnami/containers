@@ -143,8 +143,10 @@ etcdctl_get_endpoints() {
                 fi
             fi
         done
+        echo "${endpoints[*]}" | tr ' ' ','
+    else
+        echo ""
     fi
-    echo "${endpoints[*]}" | tr ' ' ','
 }
 
 ########################
@@ -271,14 +273,16 @@ is_healthy_etcd_cluster() {
     local -r cluster_size=${#endpoints_array[@]}
     host="$(parse_uri "$ETCD_ADVERTISE_CLIENT_URLS" "host")"
     port="$(parse_uri "$ETCD_ADVERTISE_CLIENT_URLS" "port")"
-    for e in "${endpoints_array[@]}"; do
-        read -r -a extra_flags <<< "$(etcdctl_auth_flags)"
-        extra_flags+=("--endpoints=$e")
-        if [[ "$e" != "$host:$port" ]] && etcdctl endpoint health "${extra_flags[@]}" >/dev/null 2>&1; then
-            debug "$e endpoint is active"
-            ((active_endpoints++))
-        fi
-    done
+    if [[ $cluster_size -gt 0 ]]; then
+        for e in "${endpoints_array[@]}"; do
+            read -r -a extra_flags <<< "$(etcdctl_auth_flags)"
+            extra_flags+=("--endpoints=$e")
+            if [[ "$e" != "$host:$port" ]] && etcdctl endpoint health "${extra_flags[@]}" >/dev/null 2>&1; then
+                debug "$e endpoint is active"
+                ((active_endpoints++))
+            fi
+        done
+    fi
 
     if is_boolean_yes "$ETCD_DISASTER_RECOVERY"; then
         if [[ -f "/snapshots/.disaster_recovery" ]]; then
