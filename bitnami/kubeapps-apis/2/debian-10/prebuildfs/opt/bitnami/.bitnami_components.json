@@ -1,9 +1,9 @@
 {
     "kubeapps-apis": {
         "arch": "amd64",
-        "digest": "849a47d16026ca2d72448830c5e05761012338202d5b904bc1073a4877754b43",
+        "digest": "8b7fc7992d61c545e61d993ca01cb262d77b9743b3b4228696ddde1ead704ebf",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.1-0"
+        "version": "2.4.1-1"
     }
 }
