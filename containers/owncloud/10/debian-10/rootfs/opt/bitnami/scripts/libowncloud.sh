@@ -224,10 +224,10 @@ owncloud_initialize() {
 
     # Regenerate .htaccess file(s) to include 'ErrorDocument 403/404' lines, not present by default
     # Need to set 660 permissions in case of it already being present with 440 permissions (i.e. after a restart)
-    configure_permissions_ownership "${OWNCLOUD_BASE_DIR}/.htaccess" -f "660"
+    am_i_root && configure_permissions_ownership "${OWNCLOUD_BASE_DIR}/.htaccess" -f "660"
     owncloud_execute_occ "maintenance:update:htaccess"
     # Ensure that the .htaccess and files cannot be written to by the web server user
-    configure_permissions_ownership "${OWNCLOUD_BASE_DIR}/.htaccess" -f "440"
+    am_i_root && configure_permissions_ownership "${OWNCLOUD_BASE_DIR}/.htaccess" -f "440"
 
     # Configure PHP options provided via envvars in .user.ini (which overrides configuration in php.ini)
     configure_permissions_ownership "${OWNCLOUD_BASE_DIR}/.user.ini" -f "660"
