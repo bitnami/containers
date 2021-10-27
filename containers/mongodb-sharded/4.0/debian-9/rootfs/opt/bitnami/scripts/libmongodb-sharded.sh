@@ -78,6 +78,7 @@ mongodb_sharded_mongod_initialize() {
         mongodb_set_replicasetmode_conf
     fi
 
+    mongodb_set_listen_all_conf
     if [[ "$MONGODB_SHARDING_MODE" = "shardsvr" ]] && [[ "$MONGODB_REPLICA_SET_MODE" = "primary" ]]; then
         mongodb_wait_for_node "$MONGODB_MONGOS_HOST" "$MONGODB_MONGOS_PORT_NUMBER" "root" "$MONGODB_ROOT_PASSWORD"
         if ! mongodb_sharded_shard_currently_in_cluster "$MONGODB_REPLICA_SET_NAME"; then
@@ -86,7 +87,6 @@ mongodb_sharded_mongod_initialize() {
           info "Shard already in cluster"
         fi
     fi
-    mongodb_set_listen_all_conf
 }
 
 ########################
