@@ -334,7 +334,7 @@ airflow_configure_database() {
     local -r user=$(airflow_encode_url "$AIRFLOW_DATABASE_USERNAME")
     local -r password=$(airflow_encode_url "$AIRFLOW_DATABASE_PASSWORD")
     local extra_options
-    is_boolean_yes "$AIRFLOW_REDIS_USE_SSL" && extra_options="?sslmode=require"
+    is_boolean_yes "$AIRFLOW_DATABASE_USE_SSL" && extra_options="?sslmode=require"
 
     info "Configuring Airflow database"
     airflow_conf_set "core" "sql_alchemy_conn" "postgresql+psycopg2://${user}:${password}@${AIRFLOW_DATABASE_HOST}:${AIRFLOW_DATABASE_PORT_NUMBER}/${AIRFLOW_DATABASE_NAME}${extra_options:-}"
@@ -395,7 +395,7 @@ airflow_configure_celery_executor() {
     local -r database_user=$(airflow_encode_url "$AIRFLOW_DATABASE_USERNAME")
     local -r database_password=$(airflow_encode_url "$AIRFLOW_DATABASE_PASSWORD")
     local database_extra_options
-    is_boolean_yes "$AIRFLOW_REDIS_USE_SSL" && database_extra_options="?sslmode=require"
+    is_boolean_yes "$AIRFLOW_DATABASE_USE_SSL" && database_extra_options="?sslmode=require"
     airflow_conf_set "celery" "result_backend" "db+postgresql://${database_user}:${database_password}@${AIRFLOW_DATABASE_HOST}:${AIRFLOW_DATABASE_PORT_NUMBER}/${AIRFLOW_DATABASE_NAME}${database_extra_options:-}"
 }
 
