@@ -6,6 +6,7 @@
 
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libnet.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libservice.sh
 . /opt/bitnami/scripts/libvalidations.sh
@@ -80,9 +81,7 @@ mysql_extra_flags() {
 #   None
 #########################
 get_galera_cluster_bootstrap_value() {
-    local clusterBootstrap
-    local local_ip
-    local host_ip
+    local cluster_bootstrap
 
     # This block evaluate if the cluster needs to be boostraped or not.
     # When the node is marked to bootstrap:
@@ -94,17 +93,17 @@ get_galera_cluster_bootstrap_value() {
     # - Users can force a bootstrap to happen again on a node, by setting the environment variable "MARIADB_GALERA_FORCE_SAFETOBOOTSTRAP".
     # When the node is not marked to bootstrap, the node will join an existing cluster.
     if is_boolean_yes "$DB_GALERA_FORCE_SAFETOBOOTSTRAP"; then
-        clusterBootstrap="yes"
+        cluster_bootstrap="yes"
     elif is_boolean_yes "$DB_GALERA_CLUSTER_BOOTSTRAP"; then
-        clusterBootstrap="yes"
+        cluster_bootstrap="yes"
     elif is_boolean_yes "$(get_previous_boot)"; then
-        clusterBootstrap="no"
+        cluster_bootstrap="yes"
     elif ! is_boolean_yes "$(has_galera_cluster_other_nodes)"; then
-        clusterBootstrap="yes"
+        cluster_bootstrap="yes"
     else
-        clusterBootstrap="no"
+        cluster_bootstrap="yes"
     fi
-    echo "$clusterBootstrap"
+    echo "$cluster_bootstrap"
 }
 
 ########################
@@ -117,38 +116,46 @@ get_galera_cluster_bootstrap_value() {
 #   None
 #########################
 has_galera_cluster_other_nodes() {
-    local local_ip
-    local host_ip
-    local clusterAddress
-    local hasNodes
+    local node_ip
+    local cluster_address
+    local has_nodes
 
-    hasNodes="yes"
-    clusterAddress="$DB_GALERA_CLUSTER_ADDRESS"
-    if [[ -z "$clusterAddress" ]]; then
-        hasNodes="no"
-    elif [[ -n "$clusterAddress" ]]; then
-        hasNodes="no"
+    has_nodes="yes"
+    cluster_address="$DB_GALERA_CLUSTER_ADDRESS"
+    if [[ -z "$cluster_address" ]]; then
+        has_nodes="no"
+    elif [[ -n "$cluster_address" ]]; then
+        has_nodes="no"
         local_ip=$(hostname -i)
-        read -r -a hosts <<< "$(tr ',' ' ' <<< "${clusterAddress#*://}")"
-        if [[ "${#hosts[@]}" -eq "1" ]]; then
-            read -r -a cluster_ips <<< "$(getent hosts "${hosts[0]}" | awk '{print $1}' | tr '\n' ' ')"
-            if [[ "${#cluster_ips[@]}" -gt "1" ]] || ( [[ "${#cluster_ips[@]}" -eq "1" ]] && [[ "${cluster_ips[0]}" != "$local_ip" ]] ) ; then
-                hasNodes="yes"
+        read -r -a addresses <<< "$(tr ',' ' ' <<< "${cluster_address#*://}")"
+        if [[ "${#addresses[@]}" -eq "1" ]]; then
+            if validate_ipv4 "$(echo "${addresses[0]}" | cut -d':' -f1)"; then
+                has_nodes="yes"
             else
-                hasNodes="no"
+                if is_hostname_resolved "$(echo "${addresses[0]}" | cut -d':' -f1)"; then
+                    has_nodes="yes"
+                else
+                    has_nodes="no"
+                fi
             fi
         else
-            hasNodes="no"
-            for host in "${hosts[@]}"; do
-                host_ip=$(getent hosts "${host%:*}" | awk '{print $1}')
-                if [[ -n "$host_ip" ]] && [[ "$host_ip" != "$local_ip" ]]; then
-                    hasNodes="yes"
+            has_nodes="no"
+            for a in "${addresses[@]}"; do
+                address="$(echo "$a" | cut -d':' -f1)"
+                node_ip=""
+                if validate_ipv4 "$address"; then
+                    node_ip="$address"
+                else
+                    is_hostname_resolved "$address" && node_ip="$(dns_lookup "$address")"
+                fi
+                if [[ -n "$node_ip" ]] && [[ "$node_ip" != "$local_ip" ]]; then
+                    has_nodes="yes"
                     break
                 fi
             done
         fi
     fi
-    echo "$hasNodes"
+    echo "$has_nodes"
 }
 
 ########################
@@ -161,14 +168,14 @@ has_galera_cluster_other_nodes() {
 #   None
 #########################
 get_galera_cluster_address_value() {
-    local clusterAddress
+    local cluster_address
     if ! is_boolean_yes "$(get_galera_cluster_bootstrap_value)" && is_boolean_yes "$(has_galera_cluster_other_nodes)"; then
-        clusterAddress="$DB_GALERA_CLUSTER_ADDRESS"
+        cluster_address="$DB_GALERA_CLUSTER_ADDRESS"
     else
-        clusterAddress="gcomm://"
+        cluster_address="gcomm://"
     fi
-    debug "Set Galera cluster address to ${clusterAddress}"
-    echo "$clusterAddress"
+    debug "Set Galera cluster address to ${cluster_address}"
+    echo "$cluster_address"
 }
 
 ########################
