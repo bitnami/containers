@@ -15,10 +15,10 @@
     },
     "harbor-registryctl": {
         "arch": "amd64",
-        "digest": "024b0a5a3a35bd356bc40ca900b78c1d806077868e27883c3d8848c81f4b5c77",
+        "digest": "a1ea3c8359e51e81abf1b3e9a245e38db6d735ad03565da4e2102f20af0fcf23",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.3.3-0"
+        "version": "2.4.0-0"
     },
     "yq": {
         "arch": "amd64",
