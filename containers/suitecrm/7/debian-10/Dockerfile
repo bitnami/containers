@@ -13,7 +13,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.4.25-0" 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.51-0" --checksum 71010c86332e4ad0993bc875d103bb916184f1f42884a9098db65c969553c34a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.31-2" --checksum 15b394a022ca1d0b4b89bfee0487ee13f9e8cc697d0ca09ce62a0a3732536236
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.25-0" --checksum 94230b4abfeff6424103c40676c7162330c338b03b4f1a77f07eba709e650e35
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "suitecrm" "7.11.22-0" --checksum 4401a1a83aa93d1c1639ac41e97f6068c1570cf24264925baf0e3339561e1e02
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "suitecrm" "7.12.0-0" --checksum 1ac05769731386b772364a1684a7ac1947f38e425f9e3dd72ac10124040d6107
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
@@ -30,7 +30,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="suitecrm" \
-    BITNAMI_IMAGE_VERSION="7.11.22-debian-10-r33" \
+    BITNAMI_IMAGE_VERSION="7.12.0-debian-10-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
