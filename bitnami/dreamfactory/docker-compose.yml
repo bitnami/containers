@@ -8,10 +8,6 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=bn_dreamfactory
       - MARIADB_DATABASE=bitnami_dreamfactory
-  mongodb:
-    image: docker.io/bitnami/mongodb:5.0
-    volumes:
-      - 'mongodb_data:/bitnami/mongodb'
   redis:
     image: docker.io/bitnami/redis:6.0
     volumes:
@@ -28,7 +24,6 @@ services:
       - 'dreamfactory_data:/bitnami/dreamfactory'
     depends_on:
       - mariadb
-      - mongodb
       - redis
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
@@ -46,19 +41,8 @@ services:
       - MYSQL_CLIENT_DATABASE_PORT_NUMBER=3306
       - MYSQL_CLIENT_CREATE_DATABASE_NAME=df
       - MYSQL_CLIENT_CREATE_DATABASE_USER=df
-      # Enable MongoDB service for DreamFactory
-      - DREAMFACTORY_ENABLE_MONGODB_SERVICE=yes
-      - DREAMFACTORY_MONGODB_SERVICE_DATABASE_NAME=df
-      - DREAMFACTORY_MONGODB_SERVICE_DATABASE_USER=df
-      # Create MongoDB database for extra service
-      - MONGODB_CLIENT_DATABASE_HOST=mongodb
-      - MONGODB_CLIENT_DATABASE_PORT_NUMBER=27017
-      - MONGODB_CLIENT_CREATE_DATABASE_NAME=df
-      - MONGODB_CLIENT_CREATE_DATABASE_USERNAME=df
 volumes:
   mariadb_data:
-    driver: local
-  mongodb_data:
     driver: local
   redis_data:
     driver: local

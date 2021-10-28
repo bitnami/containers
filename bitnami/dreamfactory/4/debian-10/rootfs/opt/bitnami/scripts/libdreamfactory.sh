@@ -31,13 +31,6 @@ elif [[ -f /opt/bitnami/scripts/libpostgresql.sh ]]; then
     . /opt/bitnami/scripts/libpostgresql.sh
 fi
 
-# Load MongoDB database library
-if [[ -f /opt/bitnami/scripts/libmongodbclient.sh ]]; then
-    . /opt/bitnami/scripts/libmongodbclient.sh
-elif [[ -f /opt/bitnami/scripts/libmongodb.sh ]]; then
-    . /opt/bitnami/scripts/libmongodb.sh
-fi
-
 ########################
 # Validate settings in DREAMFACTORY_* env vars
 # Globals:
@@ -106,10 +99,6 @@ dreamfactory_validate() {
         check_resolved_hostname "$DREAMFACTORY_POSTGRESQL_SERVICE_HOST"
         check_valid_port "DREAMFACTORY_POSTGRESQL_SERVICE_PORT_NUMBER"
     fi
-    if is_boolean_yes "$DREAMFACTORY_ENABLE_MONGODB_SERVICE"; then
-        check_resolved_hostname "$DREAMFACTORY_MONGODB_SERVICE_HOST"
-        check_valid_port "DREAMFACTORY_MONGODB_SERVICE_PORT_NUMBER"
-    fi
     if is_boolean_yes "$DREAMFACTORY_ENABLE_REDIS"; then
         check_resolved_hostname "$DREAMFACTORY_REDIS_HOST"
         check_valid_port "DREAMFACTORY_REDIS_PORT_NUMBER"
@@ -125,7 +114,6 @@ dreamfactory_validate() {
         check_empty_password "DREAMFACTORY_DATABASE_PASSWORD"
         is_boolean_yes "$DREAMFACTORY_ENABLE_MARIADB_SERVICE" && check_empty_password "DREAMFACTORY_MARIADB_SERVICE_DATABASE_PASSWORD"
         is_boolean_yes "$DREAMFACTORY_ENABLE_POSTGRESQL_SERVICE" && check_empty_password "DREAMFACTORY_POSTGRESQL_SERVICE_DATABASE_PASSWORD"
-        is_boolean_yes "$DREAMFACTORY_ENABLE_MONGODB_SERVICE" && check_empty_password "DREAMFACTORY_MONGODB_SERVICE_DATABASE_PASSWORD"
         is_boolean_yes "$DREAMFACTORY_ENABLE_REDIS" && check_empty_password "DREAMFACTORY_REDIS_PASSWORD"
     fi
 
@@ -182,11 +170,6 @@ dreamfactory_initialize() {
         if is_boolean_yes "$DREAMFACTORY_ENABLE_POSTGRESQL_SERVICE"; then
             info "Trying to connect to the PostgreSQL database service"
             dreamfactory_wait_for_postgresql_connection "$DREAMFACTORY_POSTGRESQL_SERVICE_HOST" "$DREAMFACTORY_POSTGRESQL_SERVICE_PORT_NUMBER" "$DREAMFACTORY_POSTGRESQL_SERVICE_DATABASE_USER" "$DREAMFACTORY_POSTGRESQL_SERVICE_DATABASE_PASSWORD" "$DREAMFACTORY_POSTGRESQL_SERVICE_DATABASE_NAME"
-        fi
-        if is_boolean_yes "$DREAMFACTORY_ENABLE_MONGODB_SERVICE"; then
-            # Note: MongoDB is not supported as a configuration database for DreamFactory
-            info "Trying to connect to the extra MongoDB database service"
-            dreamfactory_wait_for_mongodb_connection "$DREAMFACTORY_MONGODB_SERVICE_HOST" "$DREAMFACTORY_MONGODB_SERVICE_PORT_NUMBER" "$DREAMFACTORY_MONGODB_SERVICE_DATABASE_USER" "$DREAMFACTORY_MONGODB_SERVICE_DATABASE_PASSWORD" "$DREAMFACTORY_MONGODB_SERVICE_DATABASE_NAME"
         fi
 
         # Connect to the optional cache services
@@ -299,10 +282,6 @@ EOF
                 dreamfactory_add_service --name "postgresql" --type "pgsql" --label "PostgreSQL Database" --description "A PostgreSQL database service."
             fi
 
-            if is_boolean_yes "$DREAMFACTORY_ENABLE_MONGODB_SERVICE"; then
-                info "Adding MongoDB service"
-                dreamfactory_add_service --name "mongodb" --type "mongodb" --label "MongoDB Database" --description "A MongoDB database service."
-            fi
         else
             info "An already initialized DreamFactory database was provided, configuration will be skipped"
             info "Running database migrations"
@@ -482,13 +461,6 @@ dreamfactory_add_service() {
                 "${config_prefix}.password=\"${DREAMFACTORY_POSTGRESQL_SERVICE_DATABASE_PASSWORD}\""
             )
             ;;
-        mongodb)
-            service_config+=(
-                "${config_prefix}.dsn=\"mongodb://${DREAMFACTORY_MONGODB_SERVICE_HOST}:${DREAMFACTORY_MONGODB_SERVICE_PORT_NUMBER}/${DREAMFACTORY_MONGODB_SERVICE_DATABASE_NAME}\""
-                "${config_prefix}.options.username=\"${DREAMFACTORY_MONGODB_SERVICE_DATABASE_USER}\""
-                "${config_prefix}.options.password=\"${DREAMFACTORY_MONGODB_SERVICE_DATABASE_PASSWORD}\""
-            )
-            ;;
         *)
             error "Unsupported service type '${type}'"
             return 1
@@ -556,37 +528,6 @@ discourse_wait_for_postgresql_connection() {
         echo "SELECT 1" | postgresql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
     }
     if ! retry_while "check_postgresql_connection"; then
-        error "Could not connect to the database"
-        return 1
-    fi
-}
-
-########################
-# Wait until the database is accessible with the currently-known credentials
-# Globals:
-#   *
-# Arguments:
-#   $1 - database host
-#   $2 - database port
-#   $3 - database username
-#   $4 - database user password (optional)
-#   $5 - database name (optional)
-# Returns:
-#   true if the database connection succeeded, false otherwise
-#########################
-dreamfactory_wait_for_mongodb_connection() {
-    local -r db_host="${1:?missing database host}"
-    local -r db_port="${2:?missing database port}"
-    local -r db_user="${3:?missing database user}"
-    local -r db_pass="${4:-}"
-    local -r db_name="${5:-}"
-    check_mongodb_connection() {
-        local res
-        res="$(mongodb_execute "$db_user" "$db_pass" "$db_name" "$db_host" "$db_port" <<< "db.stats();")"
-        debug "$res"
-        echo "$res" | grep -q '"ok" : 1'
-    }
-    if ! retry_while "check_mongodb_connection"; then
         error "Could not connect to the database"
         return 1
     fi
