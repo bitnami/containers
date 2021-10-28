@@ -97,11 +97,11 @@ get_galera_cluster_bootstrap_value() {
     elif is_boolean_yes "$DB_GALERA_CLUSTER_BOOTSTRAP"; then
         cluster_bootstrap="yes"
     elif is_boolean_yes "$(get_previous_boot)"; then
-        cluster_bootstrap="yes"
+        cluster_bootstrap="no"
     elif ! is_boolean_yes "$(has_galera_cluster_other_nodes)"; then
         cluster_bootstrap="yes"
     else
-        cluster_bootstrap="yes"
+        cluster_bootstrap="no"
     fi
     echo "$cluster_bootstrap"
 }
@@ -116,6 +116,7 @@ get_galera_cluster_bootstrap_value() {
 #   None
 #########################
 has_galera_cluster_other_nodes() {
+    local local_ip
     local node_ip
     local cluster_address
     local has_nodes
