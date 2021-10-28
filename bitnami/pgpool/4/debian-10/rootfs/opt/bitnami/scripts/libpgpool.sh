@@ -275,7 +275,8 @@ pgpool_attach_node() {
 #########################
 pgpool_healthcheck() {
     info "Checking pgpool health..."
-    local backends=$(PGCONNECT_TIMEOUT=15 PGPASSWORD="${PGPOOL_POSTGRES_PASSWORD}" psql -U "${PGPOOL_POSTGRES_USERNAME}" \
+    local backends
+    backends=$(PGCONNECT_TIMEOUT=15 PGPASSWORD="${PGPOOL_POSTGRES_PASSWORD}" psql -U "${PGPOOL_POSTGRES_USERNAME}" \
         -d postgres -h "${PGPOOL_TMP_DIR}" -p "${PGPOOL_PORT_NUMBER}" -tA -c "SHOW pool_nodes;" | tr -d ' ')
     if [[ "$backends" ]]; then
         # look up backends that are marked offline
