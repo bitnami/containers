@@ -5,6 +5,7 @@ services:
     volumes:
       - 'mongodb_data:/bitnami/mongodb'
     environment:
+      - ALLOW_EMPTY_PASSWORD=yes
       - MONGODB_USERNAME=bn_parse
       - MONGODB_DATABASE=bitnami_parse
       - MONGODB_PASSWORD=bitnami123
