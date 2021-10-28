@@ -8,10 +8,10 @@
     },
     "dreamfactory": {
         "arch": "amd64",
-        "digest": "2e1c1d058590d3af22d0bb75900a719ad5370b618779d119ebf43424d4415610",
+        "digest": "69b9ae1f34406179d2eaaccefa14c19069db4309c3de2e52894eb0e111a08990",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.9.0-0"
+        "version": "4.9.0-1"
     },
     "git": {
         "arch": "amd64",
@@ -33,13 +33,6 @@
         "distro": "debian-10",
         "type": "NAMI",
         "version": "7.4.25-0"
-    },
-    "mongodb-client": {
-        "arch": "amd64",
-        "digest": "dc01abffb8ee5f9a4f420987f8e278028d3f6a261e78c8afa2ed430fdaab71d0",
-        "distro": "debian-10",
-        "type": "NAMI",
-        "version": "5.0.3-0"
     },
     "mysql-client": {
         "arch": "amd64",

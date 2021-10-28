@@ -14,12 +14,11 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.51-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis-client" "6.0.16-1" --checksum 4098185d902ee5e264bf9ec86e27e51c59c966004750ad7bde30e16a0a5f9f3f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "11.13.0-0" --checksum 1fc5072414ecbbd142a817ea8b0252904cbe17d34bd1c608a0b4865859458b0b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.4.21-2" --checksum 0ad1e1862ae23bd9aa0513d4cbe37ef6533f4a25ed140a6ae402f3e38bc6fef7
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb-client" "5.0.3-0" --checksum dc01abffb8ee5f9a4f420987f8e278028d3f6a261e78c8afa2ed430fdaab71d0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.25-0" --checksum 94230b4abfeff6424103c40676c7162330c338b03b4f1a77f07eba709e650e35
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.33.0-0" --checksum fd9a3245580fef6248f778efeba0a017675424f15ff16ace42c095496e4f02f3
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.0-3" --checksum 8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dreamfactory" "4.9.0-0" --checksum 2e1c1d058590d3af22d0bb75900a719ad5370b618779d119ebf43424d4415610
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dreamfactory" "4.9.0-1" --checksum 69b9ae1f34406179d2eaaccefa14c19069db4309c3de2e52894eb0e111a08990
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
@@ -34,7 +33,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="dreamfactory" \
-    BITNAMI_IMAGE_VERSION="4.9.0-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="4.9.0-debian-10-r2" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -45,7 +44,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MYSQL_CLIENT_CREATE_DATABASE_USER="" \
     MYSQL_CLIENT_ENABLE_SSL="no" \
     MYSQL_CLIENT_SSL_CA_FILE="" \
-    PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/redis/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/git/bin:/opt/bitnami/common/bin:/opt/bitnami/dreamfactory/bin:$PATH" \
+    PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/redis/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:/opt/bitnami/common/bin:/opt/bitnami/dreamfactory/bin:$PATH" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_NAME="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME="" \

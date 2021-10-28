@@ -29,13 +29,6 @@ elif [[ -f /opt/bitnami/scripts/libpostgresql.sh ]]; then
     . /opt/bitnami/scripts/postgresql-env.sh
 fi
 
-# Load MongoDB Client environment for 'mongodb_execute' (after 'dreamfactory-env.sh' so that MODULE is not set to a wrong value)
-if [[ -f /opt/bitnami/scripts/libmongodbclient.sh ]]; then
-    . /opt/bitnami/scripts/mongodb-client-env.sh
-elif [[ -f /opt/bitnami/scripts/libmongodb.sh ]]; then
-    . /opt/bitnami/scripts/mongodb-env.sh
-fi
-
 # Load libraries
 . /opt/bitnami/scripts/libdreamfactory.sh
 . /opt/bitnami/scripts/libwebserver.sh
