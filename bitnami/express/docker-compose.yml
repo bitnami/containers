@@ -3,6 +3,8 @@ version: '2'
 services:
   mongodb:
     image: docker.io/bitnami/mongodb:4.2
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
 
   express:
     tty: true # Enables debugging capabilities when attached to this container.
