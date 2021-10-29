@@ -17,7 +17,7 @@ set -o pipefail
 
 # Constants
 EXEC=$(command -v minio)
-ARGS=("server" "--certs-dir" "${MINIO_CERTS_DIR}" "--console-address" ":${MINIO_CONSOLE_PORT_NUMBER}")
+ARGS=("server" "--certs-dir" "${MINIO_CERTS_DIR}" "--console-address" ":${MINIO_CONSOLE_PORT_NUMBER}" "--address" ":${MINIO_API_PORT_NUMBER}")
 # Add any extra flags passed to this script
 ARGS+=("$@")
 if is_boolean_yes "$MINIO_DISTRIBUTED_MODE_ENABLED"; then
