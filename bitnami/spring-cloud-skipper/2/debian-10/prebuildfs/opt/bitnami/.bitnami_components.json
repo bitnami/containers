@@ -15,10 +15,10 @@
     },
     "spring-cloud-skipper": {
         "arch": "amd64",
-        "digest": "6e4e324bd6fae3eefe84f6b966be6c4af708ce3709493773fcc5ea19959e3871",
+        "digest": "e8d9be48bdd5b8c549b482d731dcb80cfe27550824535a6230ba718e9400a06d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.8.0-0"
+        "version": "2.8.1-0"
     },
     "yq": {
         "arch": "amd64",
