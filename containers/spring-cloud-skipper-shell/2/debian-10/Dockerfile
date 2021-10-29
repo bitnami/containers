@@ -13,10 +13,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "a7e034898281dff05591e74de285ecd69899ddaaff4ce1ea9c09556ac89c9c72  /tmp/bitnami/pkg/cache/java-1.8.312-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/java-1.8.312-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/java-1.8.312-0-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/spring-cloud-skipper-shell-2.8.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "f54cfd9acd0a11a6025ff5605edb03c74a0b7c66daac7855ccf6197c53df0df8  /tmp/bitnami/pkg/cache/spring-cloud-skipper-shell-2.8.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/spring-cloud-skipper-shell-2.8.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/spring-cloud-skipper-shell-2.8.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/spring-cloud-skipper-shell-2.8.1-0-linux-amd64-debian-10.tar.gz && \
+    echo "89be7385c3984e09e051bee28943c98699aa9dab666652cf594903d1eb75e145  /tmp/bitnami/pkg/cache/spring-cloud-skipper-shell-2.8.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/spring-cloud-skipper-shell-2.8.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/spring-cloud-skipper-shell-2.8.1-0-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
@@ -27,7 +27,7 @@ RUN touch /opt/bitnami/spring-cloud-skipper-shell/spring-cloud-skipper-shell.log
 COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV BITNAMI_APP_NAME="spring-cloud-skipper-shell" \
-    BITNAMI_IMAGE_VERSION="2.8.0-debian-10-r16" \
+    BITNAMI_IMAGE_VERSION="2.8.1-debian-10-r0" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     PATH="/opt/bitnami/java/bin:$PATH"
