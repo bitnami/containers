@@ -1,10 +1,10 @@
 {
     "airflow-worker": {
         "arch": "amd64",
-        "digest": "81dd0638aee0e256adaeee8f11bcfc4e8d1904fea333b096507e934b7eb52999",
+        "digest": "4576c3c33206e57176a337d9cc582b8a63d4673adcdba51ff0527959656a4c8a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.2.0-1"
+        "version": "2.2.1-0"
     },
     "git": {
         "arch": "amd64",
