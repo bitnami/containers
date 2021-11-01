@@ -276,6 +276,8 @@ services:
       - 'postgresql_data:/bitnami'
   phppgadmin:
     build: .
+    environment:
+      - DATABASE_HOST=postgresql
     ports:
       - '80:8181'
       - '443:8143'
