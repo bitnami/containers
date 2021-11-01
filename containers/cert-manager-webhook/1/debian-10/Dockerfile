@@ -9,14 +9,14 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/cert-manager-webhook-1.6.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "6b82d67a3318c83e17b583051dbcd38161b370e4d784c2e45eec6dbe8efab467  /tmp/bitnami/pkg/cache/cert-manager-webhook-1.6.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/cert-manager-webhook-1.6.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/cert-manager-webhook-1.6.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/cert-manager-webhook-1.6.1-0-linux-amd64-debian-10.tar.gz && \
+    echo "c84d6b7c0861c3b56896cb81c5cb976a900759483f28be73b2549c3517f180e5  /tmp/bitnami/pkg/cache/cert-manager-webhook-1.6.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/cert-manager-webhook-1.6.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/cert-manager-webhook-1.6.1-0-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="cert-manager-webhook" \
-    BITNAMI_IMAGE_VERSION="1.6.0-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="1.6.1-debian-10-r0" \
     PATH="/opt/bitnami/cert-manager-webhook/bin:$PATH"
 
 WORKDIR /opt/bitnami/cert-manager-webhook
