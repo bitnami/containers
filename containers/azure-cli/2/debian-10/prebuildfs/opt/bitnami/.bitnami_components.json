@@ -1,10 +1,10 @@
 {
     "azure-cli": {
         "arch": "amd64",
-        "digest": "9a86a90416bfaf3af2c25e1bdf00da79d8643e0195a4fd43c355b577d9411b73",
+        "digest": "7bdc0d7ee0d67e2e1d33b2c3101205fd5316c01c84b63a8a4326a2174d2f7035",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.29.2-0"
+        "version": "2.30.0-0"
     },
     "python": {
         "arch": "amd64",
