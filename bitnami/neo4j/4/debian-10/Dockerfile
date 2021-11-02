@@ -6,6 +6,8 @@ ENV HOME="/" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux"
 
+ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
+
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq libc6 procps tar zlib1g
@@ -15,9 +17,11 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0"
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
+RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/neo4j/postunpack.sh
 ENV BITNAMI_APP_NAME="neo4j" \
-    BITNAMI_IMAGE_VERSION="4.3.6-debian-10-r14" \
+    BITNAMI_IMAGE_VERSION="4.3.6-debian-10-r15" \
+    JAVA_HOME="/opt/bitnami/java" \
     NEO4J_BOLT_PORT_NUMBER="" \
     NEO4J_HOST="" \
     NEO4J_HTTPS_PORT_NUMBER="" \
