@@ -10,7 +10,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 netcat procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.0-3" --checksum 7521d9a4f9e4e182bf32977e234026caa7b03759799868335bccb1edd8f8fd12
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-1" --checksum 28dc75dff64df07e67b711d20859c24ebc996db0eaac06138553341d0f769299
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.13-0" --checksum 9552e53ccd3b0ec85a82c31c26a1462260e28b7c58770a5c53560afb02ec66d9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "zookeeper" "3.5.9-0" --checksum 72119e53300c2d088f47920dc5f26261f265cd5e1bfac9d432bcb1ed3ea54efa
@@ -21,7 +21,7 @@ RUN ln -s /opt/bitnami/scripts/zookeeper/run.sh /run.sh
 COPY rootfs /
 RUN /opt/bitnami/scripts/zookeeper/postunpack.sh
 ENV BITNAMI_APP_NAME="zookeeper" \
-    BITNAMI_IMAGE_VERSION="3.5.9-debian-10-r31"
+    BITNAMI_IMAGE_VERSION="3.5.9-debian-10-r32"
 
 EXPOSE 2181 2888 3888 8080
 
