@@ -8,10 +8,10 @@
     },
     "ini-file": {
         "arch": "amd64",
-        "digest": "88093e848950fd09e80eb26cac55caa11e77aa78f118b5dc67faa38a3836381d",
+        "digest": "3d189e4b1fcdc330fb84c14a7c6fb296deff37d3142d9a17fe0c9a5dba51ef6d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.4.0-0"
+        "version": "1.4.1-0"
     },
     "pgbouncer": {
         "arch": "amd64",
@@ -29,9 +29,9 @@
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "7521d9a4f9e4e182bf32977e234026caa7b03759799868335bccb1edd8f8fd12",
+        "digest": "28dc75dff64df07e67b711d20859c24ebc996db0eaac06138553341d0f769299",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.0-3"
+        "version": "1.0.1-1"
     }
 }
