@@ -6,6 +6,8 @@ ENV HOME="/" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux"
 
+ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
+
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 procps tar
@@ -17,8 +19,10 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/spring-cloud-skipper/postunpack.sh
+RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV BITNAMI_APP_NAME="spring-cloud-skipper" \
-    BITNAMI_IMAGE_VERSION="2.8.1-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="2.8.1-debian-10-r5" \
+    JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"
 
 USER 1001
