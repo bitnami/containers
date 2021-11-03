@@ -5,13 +5,13 @@ ENV OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux"
 
+ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
+
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip libc6 locales procps tar wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/java-17.0.1-0-linux-amd64-debian-10.tar.gz && \
-    echo "f41bbe05147002c16011221d6e4ba3b3d6c29d83ed1a683f57591bb3dd528a33  /tmp/bitnami/pkg/cache/java-17.0.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/java-17.0.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/java-17.0.1-0-linux-amd64-debian-10.tar.gz
+RUN install_packages acl ca-certificates curl gzip libc6 locales procps tar zlib1g
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "17.0.1-0" --checksum f41bbe05147002c16011221d6e4ba3b3d6c29d83ed1a683f57591bb3dd528a33
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
     DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
@@ -23,11 +23,13 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
+RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="17.0.1-debian-10-r8" \
+    BITNAMI_IMAGE_VERSION="17.0.1-debian-10-r9" \
     JAVA_HOME="/opt/bitnami/java" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
-    PATH="/opt/bitnami/java/bin:$PATH"
+    PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"
 
+ENTRYPOINT [ "/opt/bitnami/scripts/java/entrypoint.sh" ]
 CMD [ "bash" ]
