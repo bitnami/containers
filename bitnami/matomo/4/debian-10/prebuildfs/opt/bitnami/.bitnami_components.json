@@ -15,10 +15,10 @@
     },
     "ini-file": {
         "arch": "amd64",
-        "digest": "88093e848950fd09e80eb26cac55caa11e77aa78f118b5dc67faa38a3836381d",
+        "digest": "3d189e4b1fcdc330fb84c14a7c6fb296deff37d3142d9a17fe0c9a5dba51ef6d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.4.0-0"
+        "version": "1.4.1-0"
     },
     "libphp": {
         "arch": "amd64",
@@ -43,16 +43,16 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "fb835d2deaeaf6c583ec498ff4b9f985aa022367704c9e4cbdb6dd2e0d154ec0",
+        "digest": "9d07784a96b6cf6a61b9d4f9b642e583fea2f94f92df6c16f332ce54bf9f897d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.25-1"
+        "version": "7.4.25-3"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe",
+        "digest": "00722b62c7561929e039877a6e445a4bb782c340890c0a090fdae3c9e1960161",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.0-3"
+        "version": "1.0.1-1"
     }
 }
