@@ -37,7 +37,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 - [`11-prod`, `11.0.13-prod-debian-10-r8` (11-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.13-prod-debian-10-r8/11-prod/debian-10/Dockerfile), [`11-prod-prod`, `11.0.13-prod-debian-10-r8-prod` (11-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.13-prod-debian-10-r8/11-prod/debian-10/prod/Dockerfile)
 - [`11`, `11.0.13-debian-10-r8` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.13-debian-10-r8/11/debian-10/Dockerfile), [`11-prod`, `11.0.13-debian-10-r8-prod` (11/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.13-debian-10-r8/11/debian-10/prod/Dockerfile)
 - [`1.8-prod`, `1.8.312-prod-debian-10-r12` (1.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.312-prod-debian-10-r12/1.8-prod/debian-10/Dockerfile), [`1.8-prod-prod`, `1.8.312-prod-debian-10-r12-prod` (1.8-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.312-prod-debian-10-r12/1.8-prod/debian-10/prod/Dockerfile)
-- [`1.8`, `1.8.312-debian-10-r12` (1.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.312-debian-10-r12/1.8/debian-10/Dockerfile), [`1.8-prod`, `1.8.312-debian-10-r12-prod` (1.8/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.312-debian-10-r12/1.8/debian-10/prod/Dockerfile)
+- [`1.8`, `1.8.312-debian-10-r13` (1.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.312-debian-10-r13/1.8/debian-10/Dockerfile), [`1.8-prod`, `1.8.312-debian-10-r13-prod` (1.8/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.312-debian-10-r13/1.8/debian-10/prod/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/java GitHub repo](https://github.com/bitnami/bitnami-docker-java).
 
@@ -142,6 +142,23 @@ or using Docker Compose:
 
 ```console
 $ docker-compose up java
+```
+
+## Replace the default truststore using a custom base image
+
+In case you are replacing the default [minideb](https://github.com/bitnami/minideb) base image with a custom base image (based on Debian), it is possible to replace the default truststore located in the `/opt/bitnami/java/lib/security` folder. This is done by setting the `JAVA_EXTRA_SECURITY_DIR` docker build ARG variable, which needs to point to a location that contains a *cacerts* file that would substitute the originally bundled truststore. In the following example we will use a minideb fork that contains a custom *cacerts* file in the */bitnami/java/extra-security* folder:
+
+- In the Dockerfile, replace `FROM docker.io/bitnami/minideb:buster` to use a custom image, defined with the `MYJAVAFORK:TAG` placeholder:
+
+```diff
+- FROM bitnami/minideb:latest
++ FROM MYFORK:TAG
+```
+
+- Run `docker build` setting the value of `JAVA_EXTRA_SECURITY_DIR`. Remember to replace the `MYJAVAFORK:TAG` placeholder.
+
+```
+docker build --build-arg JAVA_EXTRA_SECURITY_DIR=/bitnami/java/extra-security -t MYJAVAFORK:TAG .
 ```
 
 # Notable Changes
