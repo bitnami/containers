@@ -6,6 +6,8 @@ ENV HOME="/" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux"
 
+ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
+
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 lsof netcat-traditional procps tar
@@ -15,9 +17,11 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0"
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
+RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/solr/postunpack.sh
 ENV BITNAMI_APP_NAME="solr" \
-    BITNAMI_IMAGE_VERSION="8.10.1-debian-10-r14" \
+    BITNAMI_IMAGE_VERSION="8.10.1-debian-10-r15" \
+    JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/solr/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8983
