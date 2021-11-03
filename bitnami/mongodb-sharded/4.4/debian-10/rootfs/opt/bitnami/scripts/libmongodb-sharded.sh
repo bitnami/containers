@@ -23,7 +23,7 @@ mongodb_sharded_shard_currently_in_cluster() {
     local -r replicaset="${1:?node is required}"
     local result
 
-    result=$(mongodb_execute "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_MONGOS_HOST" "$MONGODB_MONGOS_PORT_NUMBER" <<EOF
+    result=$(mongodb_execute_print_output "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD" "admin" "$MONGODB_MONGOS_HOST" "$MONGODB_MONGOS_PORT_NUMBER" <<EOF
 db.adminCommand({ listShards: 1 })
 EOF
 )
@@ -56,9 +56,12 @@ mongodb_sharded_mongod_initialize() {
         ensure_dir_exists "$MONGODB_DATA_DIR/db"
         am_i_root && chown -R "$MONGODB_DAEMON_USER" "$MONGODB_DATA_DIR/db"
 
-        if [[ "$MONGODB_SHARDING_MODE" = "configsvr" ]] && [[ "$MONGODB_REPLICA_SET_MODE" = "primary" ]]; then
-            mongodb_sharded_initiate_configsvr_primary
+        mongodb_set_replicasetmode_conf
+
+        if [[ "$MONGODB_SHARDING_MODE" =~ ^(configsvr|shardsvr)$ ]] && [[ "$MONGODB_REPLICA_SET_MODE" = "primary" ]]; then
+            mongodb_sharded_initiate_svr_primary
         fi
+
         mongodb_start_bg
         mongodb_create_users
         mongodb_create_keyfile "$MONGODB_REPLICA_SET_KEY"
@@ -82,9 +85,9 @@ mongodb_sharded_mongod_initialize() {
     if [[ "$MONGODB_SHARDING_MODE" = "shardsvr" ]] && [[ "$MONGODB_REPLICA_SET_MODE" = "primary" ]]; then
         mongodb_wait_for_node "$MONGODB_MONGOS_HOST" "$MONGODB_MONGOS_PORT_NUMBER" "root" "$MONGODB_ROOT_PASSWORD"
         if ! mongodb_sharded_shard_currently_in_cluster "$MONGODB_REPLICA_SET_NAME"; then
-          mongodb_sharded_join_shard_cluster
+            mongodb_sharded_join_shard_cluster
         else
-          info "Shard already in cluster"
+            info "Shard already in cluster"
         fi
     fi
 }
@@ -209,7 +212,7 @@ mongodb_sharded_is_join_shard_pending() {
     local -r password="${5:?password is required}"
     local result
 
-    result=$(mongodb_execute "$user" "$password" "admin" "$mongos_host" "$mongos_port" <<EOF
+    result=$(mongodb_execute_print_output "$user" "$password" "admin" "$mongos_host" "$mongos_port" <<EOF
 sh.addShard("$shard_connection_string")
 EOF
 )
@@ -231,15 +234,12 @@ mongodb_sharded_configure_replica_set() {
     info "Configuring MongoDB Sharded replica set..."
 
     node=$(get_mongo_hostname)
-    mongodb_set_replicasetmode_conf
     mongodb_restart
 
     case "$MONGODB_REPLICA_SET_MODE" in
         "primary" )
-            if [[ "$MONGODB_SHARDING_MODE" = "configsvr" ]]; then
-                mongodb_sharded_configure_configsvr_primary "$node"
-            else
-                mongodb_configure_primary "$node"
+            if [[ "$MONGODB_SHARDING_MODE" =~ ^(configsvr|shardsvr)$ ]]; then
+                mongodb_sharded_reconfigure_svr_primary "$node"
             fi
             ;;
         "secondary")
@@ -259,7 +259,7 @@ mongodb_sharded_configure_replica_set() {
 }
 
 ########################
-# First initialization for the configsvr node
+# First initialization for the configsvr or shardsvr node
 # Globals:
 #   MONGODB_*
 # Arguments:
@@ -267,19 +267,18 @@ mongodb_sharded_configure_replica_set() {
 # Returns:
 #   None
 #########################
-mongodb_sharded_initiate_configsvr_primary() {
-    mongodb_sharded_is_configsvr_initiated() {
+mongodb_sharded_initiate_svr_primary() {
+    mongodb_sharded_is_svr_initiated() {
         local result
-        result=$(mongodb_execute "" "" "" "127.0.0.1" <<EOF
-rs.initiate({"_id":"$MONGODB_REPLICA_SET_NAME", "protocolVersion":1, "members":[{"_id":0,"host":"127.0.0.1:$MONGODB_PORT_NUMBER","priority":5}]})
+        result=$(mongodb_execute_print_output "" "" "" "127.0.0.1" <<EOF
+rs.initiate({"_id":"$MONGODB_REPLICA_SET_NAME", "protocolVersion":1, "members":[{"_id":0,"host":"127.0.0.1:$MONGODB_PORT_NUMBER"}]})
 EOF
         )
         grep -q "\"ok\" : 1" <<< "$result"
     }
 
-    mongodb_set_replicasetmode_conf
     mongodb_start_bg
-    if ! retry_while "mongodb_sharded_is_configsvr_initiated" "$MONGODB_MAX_TIMEOUT"; then
+    if ! retry_while "mongodb_sharded_is_svr_initiated" "$MONGODB_MAX_TIMEOUT"; then
         error "Unable to initialize primary config server: cannot initiate"
         exit 1
     fi
@@ -290,7 +289,7 @@ EOF
 }
 
 ########################
-# Get if primary node is reconfigured
+# Get if the configsvr or shardsvr primary node is reconfigured
 # Globals:
 #   MONGODB_*
 # Arguments:
@@ -298,18 +297,19 @@ EOF
 # Returns:
 #   None
 #########################
-mongodb_sharded_is_configsvr_reconfigured() {
+mongodb_sharded_is_svr_primary_reconfigured() {
     local -r node="${1:?node is required}"
     local result
-    result=$(mongodb_execute "root" "$MONGODB_ROOT_PASSWORD" "admin" "$node" "$MONGODB_PORT_NUMBER" <<EOF
-rs.reconfig({"_id":"$MONGODB_REPLICA_SET_NAME", "protocolVersion":1, "configsvr": true, "members":[{"_id":0,"host":"$node:$MONGODB_PORT_NUMBER","priority":5}]})
+
+    result=$(mongodb_execute_print_output "root" "$MONGODB_ROOT_PASSWORD" "admin" "$node" "$MONGODB_PORT_NUMBER" <<EOF
+rs.reconfig({"_id":"$MONGODB_REPLICA_SET_NAME","configsvr": $([[ "$MONGODB_SHARDING_MODE" = "configsvr" ]] && echo "true" || echo "false"),"protocolVersion":1,"members":[{"_id":0,"host":"$node:$MONGODB_PORT_NUMBER","priority":5}]})
 EOF
 )
     grep -q "\"ok\" : 1" <<< "$result"
 }
 
 ########################
-# Configure primary node
+# Reconfigure configsvr or shardsvr primary node
 # Globals:
 #   MONGODB_*
 # Arguments:
@@ -317,13 +317,13 @@ EOF
 # Returns:
 #   None
 #########################
-mongodb_sharded_configure_configsvr_primary() {
+mongodb_sharded_reconfigure_svr_primary() {
     local -r node="${1:?node is required}"
 
     info "Configuring MongoDB primary node...: $node"
     wait-for-port --timeout 360 "$MONGODB_PORT_NUMBER"
 
-    if ! retry_while "mongodb_sharded_is_configsvr_reconfigured $node" "$MONGODB_MAX_TIMEOUT"; then
+    if ! retry_while "mongodb_sharded_is_svr_primary_reconfigured $node" "$MONGODB_MAX_TIMEOUT"; then
         error "Unable to initialize primary config server"
         exit 1
     fi
