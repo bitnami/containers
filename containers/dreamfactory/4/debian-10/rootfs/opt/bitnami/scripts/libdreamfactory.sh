@@ -312,7 +312,7 @@ EOF
     fi
 
     info "Clearing cache"
-    dreamfactory_execute "config:cache"
+    dreamfactory_execute "config:clear"
     dreamfactory_execute "cache:clear"
 
     # Avoid exit code of previous commands to affect the result of this function
