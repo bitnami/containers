@@ -158,7 +158,7 @@ remove_cron_conf() {
 #   $3 - Start command
 #   $4 - Stop command
 # Flags:
-#   --disabled - Whether to disable the monit configuration
+#   --disable - Whether to disable the monit configuration
 # Returns:
 #   None
 #########################
@@ -174,9 +174,8 @@ generate_monit_conf() {
     shift 4
     while [[ "$#" -gt 0 ]]; do
         case "$1" in
-            --disabled)
-                shift
-                disabled="$1"
+            --disable)
+                disabled="yes"
                 ;;
             *)
                 echo "Invalid command line flag ${1}" >&2

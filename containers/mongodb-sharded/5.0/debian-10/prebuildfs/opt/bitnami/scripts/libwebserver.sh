@@ -164,11 +164,14 @@ web_server_reload() {
 # Arguments:
 #   $1 - App name
 # Flags:
-#   --hosts - Hosts to enable
 #   --type - Application type, which has an effect on which configuration template to use
+#   --hosts - Host listen addresses
+#   --server-name - Server name
+#   --server-aliases - Server aliases
 #   --allow-remote-connections - Whether to allow remote connections or to require local connections
-#   --disabled - Whether to render the file with a .disabled prefix
-#   --enable-https - Enable app configuration on HTTPS port
+#   --disable - Whether to render server configurations with a .disabled prefix
+#   --disable-http - Whether to render the app's HTTP server configuration with a .disabled prefix
+#   --disable-https - Whether to render the app's HTTPS server configuration with a .disabled prefix
 #   --http-port - HTTP port number
 #   --https-port - HTTPS port number
 #   --document-root - Path to document root directory
@@ -198,11 +201,18 @@ ensure_web_server_app_configuration_exists() {
     while [[ "$#" -gt 0 ]]; do
         case "$1" in
             # Common flags
+            --disable \
+            | --disable-http \
+            | --disable-https \
+            )
+                apache_args+=("$1")
+                nginx_args+=("$1")
+                ;;
             --hosts \
+            | --server-name \
+            | --server-aliases \
             | --type \
             | --allow-remote-connections \
-            | --disabled \
-            | --enable-https \
             | --http-port \
             | --https-port \
             | --document-root \
@@ -347,8 +357,13 @@ ensure_web_server_prefix_configuration_exists() {
 # Arguments:
 #   $1 - App name
 # Flags:
-#   --hosts - Hosts to enable
-#   --enable-https - Update HTTPS app configuration
+#   --hosts - Host listen addresses
+#   --server-name - Server name
+#   --server-aliases - Server aliases
+#   --enable-http - Enable HTTP app configuration (if not enabled already)
+#   --enable-https - Enable HTTPS app configuration (if not enabled already)
+#   --disable-http - Disable HTTP app configuration (if not disabled already)
+#   --disable-https - Disable HTTPS app configuration (if not disabled already)
 #   --http-port - HTTP port number
 #   --https-port - HTTPS port number
 # Returns:
@@ -363,8 +378,20 @@ web_server_update_app_configuration() {
     while [[ "$#" -gt 0 ]]; do
         case "$1" in
             # Common flags
-            --hosts \
+            --enable-http \
             | --enable-https \
+            | --disable-http \
+            | --disable-https \
+            )
+                args+=("$1")
+                ;;
+            --hosts \
+            | --server-name \
+            | --server-aliases \
+            | --enable-http \
+            | --enable-https \
+            | --disable-http \
+            | --disable-https \
             | --http-port \
             | --https-port \
             )
