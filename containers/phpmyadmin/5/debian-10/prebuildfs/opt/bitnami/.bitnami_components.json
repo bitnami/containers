@@ -29,10 +29,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "1249b8a23286f5795b332afdb871249dfb33d60a916b001c7cbcfe9791c84e65",
+        "digest": "3465af927ef705d89d7a10156ed8bbfa659def7ca3270a3c3dff284762af9af5",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.0.12-1"
+        "version": "8.0.12-3"
     },
     "phpmyadmin": {
         "arch": "amd64",
@@ -43,9 +43,9 @@
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe",
+        "digest": "00722b62c7561929e039877a6e445a4bb782c340890c0a090fdae3c9e1960161",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.0-3"
+        "version": "1.0.1-1"
     }
 }
