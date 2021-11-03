@@ -34,7 +34,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`9.3`, `9.3-debian-10`, `9.3.1-0`, `9.3.1-0-debian-10-r19` (9.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jruby/blob/9.3.1-0-debian-10-r19/9.3/debian-10/Dockerfile)
-* [`9.2`, `9.2-debian-10`, `9.2.19-0`, `9.2.19-0-debian-10-r134`, `latest` (9.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jruby/blob/9.2.19-0-debian-10-r134/9.2/debian-10/Dockerfile)
+* [`9.2`, `9.2-debian-10`, `9.2.20-0`, `9.2.20-0-debian-10-r0`, `latest` (9.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jruby/blob/9.2.20-0-debian-10-r0/9.2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jruby GitHub repo](https://github.com/bitnami/bitnami-docker-jruby).
 
