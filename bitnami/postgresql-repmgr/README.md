@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`12`, `12-debian-10`, `12.8.0`, `12.8.0-debian-10-r84` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.8.0-debian-10-r84/12/debian-10/Dockerfile)
 * [`11`, `11-debian-10`, `11.13.0`, `11.13.0-debian-10-r58`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.13.0-debian-10-r58/11/debian-10/Dockerfile)
 * [`10`, `10-debian-10`, `10.18.0`, `10.18.0-debian-10-r81` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.18.0-debian-10-r81/10/debian-10/Dockerfile)
-* [`9.6`, `9.6-debian-10`, `9.6.23`, `9.6.23-debian-10-r82` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.23-debian-10-r82/9.6/debian-10/Dockerfile)
+* [`9.6`, `9.6-debian-10`, `9.6.23`, `9.6.23-debian-10-r83` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.23-debian-10-r83/9.6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql-repmgr GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql-repmgr).
 
