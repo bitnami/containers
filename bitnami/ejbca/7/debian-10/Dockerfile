@@ -6,6 +6,8 @@ ENV HOME="/" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux"
 
+ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
+
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaio1 libaudit1 libc6 libcap-ng0 libgcc1 libicu63 libjemalloc2 liblzma5 libncurses6 libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 procps tar zlib1g
@@ -18,9 +20,11 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/ejbca/postunpack.sh
+RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ejbca" \
-    BITNAMI_IMAGE_VERSION="7.4.3-2-debian-10-r32" \
+    BITNAMI_IMAGE_VERSION="7.4.3-2-debian-10-r33" \
+    JAVA_HOME="/opt/bitnami/java" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
