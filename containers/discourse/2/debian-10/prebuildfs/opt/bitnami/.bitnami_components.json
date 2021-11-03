@@ -43,10 +43,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "8f7859ab9651065b2fcf37dfa4edcf5af0cd70614bb06b4ca782295a0a4435d2",
+        "digest": "9316a897742995d2df2d9e05cbb6247791f53f792e0681f22c26adb703844ac2",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.8.12-3"
+        "version": "3.8.12-4"
     },
     "ruby": {
         "arch": "amd64",
@@ -57,16 +57,16 @@
     },
     "uglify-js": {
         "arch": "amd64",
-        "digest": "9a13413877669f8aed9936297a2240da5ff422085bba5b78cf28ff95cd78bde8",
+        "digest": "cd5e910b87179ec076615a0beee361ebe436ba497b739a345c018af39df63e40",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.14.2-0"
+        "version": "3.14.3-0"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "7521d9a4f9e4e182bf32977e234026caa7b03759799868335bccb1edd8f8fd12",
+        "digest": "28dc75dff64df07e67b711d20859c24ebc996db0eaac06138553341d0f769299",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.0-3"
+        "version": "1.0.1-1"
     }
 }
