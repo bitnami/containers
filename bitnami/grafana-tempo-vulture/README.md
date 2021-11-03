@@ -27,7 +27,7 @@ $ docker run --name grafana-tempo-vulture bitnami/grafana-tempo-vulture:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.1.0`, `1.1.0-debian-10-r66`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-tempo-vulture/blob/1.1.0-debian-10-r66/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.1.0`, `1.1.0-debian-10-r67`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-tempo-vulture/blob/1.1.0-debian-10-r67/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana-tempo-vulture GitHub repo](https://github.com/bitnami/bitnami-docker-grafana-tempo-vulture).
 
