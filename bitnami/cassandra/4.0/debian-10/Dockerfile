@@ -6,6 +6,8 @@ ENV HOME="/" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux"
 
+ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
+
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libbz2-1.0 libc6 libgcc1 libjemalloc2 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libtinfo6 procps tar zlib1g
@@ -20,8 +22,10 @@ RUN ln -s /opt/bitnami/scripts/cassandra/run.sh /run.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/cassandra/postunpack.sh
+RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="4.0.1-debian-10-r54" \
+    BITNAMI_IMAGE_VERSION="4.0.1-debian-10-r55" \
+    JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/cassandra/bin:$PATH"
 
 EXPOSE 7000 9042
