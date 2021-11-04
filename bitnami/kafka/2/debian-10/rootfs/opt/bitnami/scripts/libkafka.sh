@@ -456,6 +456,10 @@ kafka_create_sasl_scram_zookeeper_users() {
     for ((i = 0; i < ${#users[@]}; i++)); do
         debug "Creating user ${users[i]} in zookeeper"
         # Ref: https://docs.confluent.io/current/kafka/authentication_sasl/authentication_sasl_scram.html#sasl-scram-overview
+        if [[ "${KAFKA_ZOOKEEPER_PROTOCOL:-}" =~ SSL ]]; then
+            ZOOKEEPER_SSL_CONFIG=$(zookeeper_get_tls_config)
+            export KAFKA_OPTS="$KAFKA_OPTS $ZOOKEEPER_SSL_CONFIG"            
+        fi
         debug_execute kafka-configs.sh --zookeeper "$KAFKA_CFG_ZOOKEEPER_CONNECT" --alter --add-config "SCRAM-SHA-256=[iterations=8192,password=${passwords[i]}],SCRAM-SHA-512=[password=${passwords[i]}]" --entity-type users --entity-name "${users[i]}"
     done
 }
@@ -599,6 +603,7 @@ zookeeper_get_tls_config() {
         cat "$KAFKA_CERTS_DIR"/zookeeper.keystore.key >>"$KAFKA_CERTS_DIR"/zookeeper.keystore.pem
         keystore_location="${KAFKA_CERTS_DIR}/zookeeper.keystore.pem"
     fi
+    
     echo "-Dzookeeper.clientCnxnSocket=org.apache.zookeeper.ClientCnxnSocketNetty \
           -Dzookeeper.client.secure=true \
           -Dzookeeper.ssl.keyStore.location=${keystore_location} \
