@@ -26,7 +26,7 @@ RUN /opt/bitnami/scripts/reportserver/postunpack.sh
 RUN /opt/bitnami/scripts/tomcat/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="reportserverenterprise" \
-    BITNAMI_IMAGE_VERSION="3.7.1-6046-debian-10-r55" \
+    BITNAMI_IMAGE_VERSION="3.7.1-6046-debian-10-r56" \
     JAVA_HOME="/opt/bitnami/java" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
