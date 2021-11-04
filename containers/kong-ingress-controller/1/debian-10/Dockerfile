@@ -9,10 +9,10 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/wait-for-port-1.0.1-0-linux-amd64-debian-10.tar.gz && \
-    echo "7c993f301a9183a82ab68f9aed26c97c0e17ea3e1f85202de600c08cbd1bf877  /tmp/bitnami/pkg/cache/wait-for-port-1.0.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/wait-for-port-1.0.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/wait-for-port-1.0.1-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/wait-for-port-1.0.1-1-linux-amd64-debian-10.tar.gz && \
+    echo "28dc75dff64df07e67b711d20859c24ebc996db0eaac06138553341d0f769299  /tmp/bitnami/pkg/cache/wait-for-port-1.0.1-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/wait-for-port-1.0.1-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/wait-for-port-1.0.1-1-linux-amd64-debian-10.tar.gz
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kong-ingress-controller-1.3.1-1-linux-amd64-debian-10.tar.gz && \
     echo "e0d86a6e6198d64edb03b54c407037f04387b78a4a18ee56f2cbff4d220237e5  /tmp/bitnami/pkg/cache/kong-ingress-controller-1.3.1-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/kong-ingress-controller-1.3.1-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
@@ -20,7 +20,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="kong-ingress-controller" \
-    BITNAMI_IMAGE_VERSION="1.3.1-debian-10-r139" \
+    BITNAMI_IMAGE_VERSION="1.3.1-debian-10-r140" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/kong-ingress-controller/bin:$PATH"
 
 USER 1001
