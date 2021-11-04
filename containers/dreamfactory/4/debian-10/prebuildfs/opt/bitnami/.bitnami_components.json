@@ -8,10 +8,10 @@
     },
     "dreamfactory": {
         "arch": "amd64",
-        "digest": "69b9ae1f34406179d2eaaccefa14c19069db4309c3de2e52894eb0e111a08990",
+        "digest": "969d7feed0886cd23796e2eb806ac5d2bd38d93536ffa571d2e1d5a433987dd1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.9.0-1"
+        "version": "4.9.0-2"
     },
     "git": {
         "arch": "amd64",

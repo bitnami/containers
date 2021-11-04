@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`4`, `4-debian-10`, `4.9.0`, `4.9.0-debian-10-r7`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.9.0-debian-10-r7/4/debian-10/Dockerfile)
+- [`4`, `4-debian-10`, `4.9.0`, `4.9.0-debian-10-r8`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.9.0-debian-10-r8/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dreamfactory GitHub repo](https://github.com/bitnami/bitnami-docker-dreamfactory).
 
@@ -590,6 +590,10 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 ```
 
 # Notable Changes
+
+## 4.9.0-debian-10-r0
+
+The 4.9.0 release required a PHP update from 7.3 to 7.4, which isn't supported by the PECL Cassandra package which has therefore been removed from this image. The repository for the cassandra PECL package is currently in maintenance mode.
 
 ## 4.8.0-debian-10-r69
 

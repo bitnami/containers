@@ -39,7 +39,6 @@ info "Configuring default PHP options for DreamFactory"
 php_conf_set memory_limit "$PHP_DEFAULT_MEMORY_LIMIT"
 # Enable additional PHP modules for additional DB support
 # See https://wiki.dreamfactory.com/DreamFactory/Features/Database
-php_conf_set extension "cassandra"
 php_conf_set extension "mongodb"
 php_conf_set extension "pdo_dblib"
 
