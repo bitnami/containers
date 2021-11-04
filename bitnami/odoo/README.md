@@ -38,7 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`15`, `15-debian-10`, `15.0.20211010`, `15.0.20211010-debian-10-r3`, `latest` (15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/15.0.20211010-debian-10-r3/15/debian-10/Dockerfile)
+- [`15`, `15-debian-10`, `15.0.20211010`, `15.0.20211010-debian-10-r4`, `latest` (15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/15.0.20211010-debian-10-r4/15/debian-10/Dockerfile)
 - [`14`, `14-debian-10`, `14.0.20211010`, `14.0.20211010-debian-10-r23` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/14.0.20211010-debian-10-r23/14/debian-10/Dockerfile)
 - [`13`, `13-debian-10`, `13.0.20211010`, `13.0.20211010-debian-10-r24` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20211010-debian-10-r24/13/debian-10/Dockerfile)
 
