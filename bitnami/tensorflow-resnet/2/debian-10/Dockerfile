@@ -15,7 +15,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="tensorflow-resnet" \
-    BITNAMI_IMAGE_VERSION="2.6.0-debian-10-r66" \
+    BITNAMI_IMAGE_VERSION="2.6.0-debian-10-r67" \
     PATH="/opt/bitnami/tensorflow-resnet/bin:/opt/bitnami/common/bin:$PATH"
 
 USER 1001
