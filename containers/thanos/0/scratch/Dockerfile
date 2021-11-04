@@ -6,4 +6,4 @@ COPY prebuildfs /
 COPY rootfs /
 
 USER 1001
-ENTRYPOINT [ "/thanos" ]
+ENTRYPOINT [ "/bin/thanos" ]
