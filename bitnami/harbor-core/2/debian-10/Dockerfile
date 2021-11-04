@@ -18,7 +18,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-core/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-core" \
-    BITNAMI_IMAGE_VERSION="2.4.0-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="2.4.0-debian-10-r7" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/harbor-core/bin:$PATH"
 
 VOLUME [ "/data", "/etc/core" ]
