@@ -43,9 +43,9 @@
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "7c993f301a9183a82ab68f9aed26c97c0e17ea3e1f85202de600c08cbd1bf877",
+        "digest": "28dc75dff64df07e67b711d20859c24ebc996db0eaac06138553341d0f769299",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-0"
+        "version": "1.0.1-1"
     }
 }
