@@ -18,7 +18,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.25-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.33.0-0" --checksum fd9a3245580fef6248f778efeba0a017675424f15ff16ace42c095496e4f02f3
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-1" --checksum 00722b62c7561929e039877a6e445a4bb782c340890c0a090fdae3c9e1960161
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dreamfactory" "4.9.0-1" --checksum 69b9ae1f34406179d2eaaccefa14c19069db4309c3de2e52894eb0e111a08990
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dreamfactory" "4.9.0-2" --checksum 969d7feed0886cd23796e2eb806ac5d2bd38d93536ffa571d2e1d5a433987dd1
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
@@ -33,7 +33,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="dreamfactory" \
-    BITNAMI_IMAGE_VERSION="4.9.0-debian-10-r7" \
+    BITNAMI_IMAGE_VERSION="4.9.0-debian-10-r8" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
