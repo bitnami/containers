@@ -1,15 +1,16 @@
+# User Broker packaged by Bitnami
 
-# What is User-broker?
+## What is User Broker?
 
-The [Service Catalog project](https://github.com/kubernetes-incubator/service-catalog/) is in incubation to bring integration with service brokers to the Kubernetes ecosystem via the [Open Service Broker API](https://github.com/openservicebrokerapi/servicebroker). User Broker is a part of the Service Catalog project.
+> User Broker is a part of the Service Catalog project which is in incubation to bring integration with service brokers to the Kubernetes ecosystem via the Open Service Broker API.
 
-There are two different images: [`service-catalog`](https://github.com/bitnami/bitnami-docker-service-catalog) and [`user-broker`](https://github.com/bitnami/bitnami-docker-user-broker)
+[Overview of User Broker](https://github.com/openservicebrokerapi/servicebroker)
 
-# TL;DR
+## TL;DR
 
 User Broker is part of the Service Catalog that installs into a Kubernetes cluster and runs behind the [Kubernetes API Aggregator](https://kubernetes.io/docs/concepts/api-extension/apiserver-aggregation/).
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -21,20 +22,20 @@ User Broker is part of the Service Catalog that installs into a Kubernetes clust
 
 > This [CVE scan report](https://quay.io/repository/bitnami/user-broker?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.3.1`, `0.3.1-debian-10-r341`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-user-broker/blob/0.3.1-debian-10-r341/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.3.1`, `0.3.1-debian-10-r342`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-user-broker/blob/0.3.1-debian-10-r342/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/user-broker GitHub repo](https://github.com/bitnami/bitnami-docker-user-broker).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami Service-catalog Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/user-broker).
 
@@ -54,17 +55,17 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/user-broker:latest 'https://github.com/bitnami/bitnami-docker-user-broker.git#master:0/debian-10'
 ```
 
-# Configuration
+## Configuration
 
-## Further documentation
+### Further documentation
 
 For further documentation, please check [Service Catalog documentation](https://kubernetes.io/docs/concepts/extend-kubernetes/service-catalog/)
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-user-broker/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-user-broker/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-user-broker/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -74,7 +75,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2021 Bitnami
 
