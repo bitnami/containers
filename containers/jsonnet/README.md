@@ -1,16 +1,18 @@
-# What is jsonnet?
+# Jsonnet packaged by Bitnami
+
+## What is Jsonnet?
 
 > Jsonnet is a data templating language for application and tool developers, based on JSON.
 
-[https://jsonnet.org](https://jsonnet.org)
+[Overview of Jsonnet](https://jsonnet.org)
 
-# TL;DR
+## TL;DR
 
 ```console
 $ docker run --name jsonnet bitnami/jsonnet:latest
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -19,16 +21,16 @@ $ docker run --name jsonnet bitnami/jsonnet:latest
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.17.0`, `0.17.0-debian-10-r325`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jsonnet/blob/0.17.0-debian-10-r325/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.17.0`, `0.17.0-debian-10-r326`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jsonnet/blob/0.17.0-debian-10-r326/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jsonnet GitHub repo](https://github.com/bitnami/bitnami-docker-jsonnet).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami Git Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/jsonnet).
 
@@ -48,9 +50,9 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/jsonnet:latest 'https://github.com/bitnami/bitnami-docker-jsonnet.git#master:0/debian-10'
 ```
 
-# Configuration
+## Configuration
 
-## Running commands
+### Running commands
 
 To run commands inside this container you can use `docker run`, for example to evaluate jsonnet code:
 
@@ -58,11 +60,11 @@ To run commands inside this container you can use `docker run`, for example to e
 $ docker run --name jsonnet bitnami/jsonnet:latest -e "{hello: 'world'}"
 ```
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-jsonnet/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-jsonnet/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-jsonnet/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -72,7 +74,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2021 Bitnami
 
