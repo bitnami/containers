@@ -1,12 +1,12 @@
-# What is Harbor Core?
+# Harbor Core packaged by Bitnami
 
-> Harbor Core is one of the main components of Harbor, a cloud native registry that stores, signs, and scans content.
->
-> It includes core functionality like token and webhook management.
+## What is Harbor Core?
 
-[https://github.com/goharbor/harbor](https://github.com/goharbor/harbor)
+> Harbor Core is one of the main components of Harbor: a cloud native registry that stores, signs, and scans content. Harbor Core includes core functionalities such as token and webhook management.
 
-# TL;DR
+[Overview of Harbor Core](https://goharbor.io/)
+
+## TL;DR
 
 ```console
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-harbor-portal/master/docker-compose.yml
@@ -16,7 +16,7 @@ $ docker-compose up
 
 > Please note we are downloading the docker-compose.yml file from the Harbor Portal component repository.
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -27,34 +27,34 @@ $ docker-compose up
 
 > This [CVE scan report](https://quay.io/repository/bitnami/harbor-core?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy Harbor in Kubernetes?
+## How to deploy Harbor in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Harbor Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/harbor).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.4.0`, `2.4.0-debian-10-r7`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-core/blob/2.4.0-debian-10-r7/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.4.0`, `2.4.0-debian-10-r8`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-core/blob/2.4.0-debian-10-r8/2/debian-10/Dockerfile)
 
-# Configuration
+## Configuration
 
 Harbor Core is a component of the Harbor application. In order to get the Harbor application running on Kubernetes we encourage you to check the [bitnami/harbor Helm chart](https://github.com/bitnami/charts/tree/master/bitnami/harbor) and configure it using the options exposed in the values.yaml file.
 
 For further information about the specific component itself, please refer to the [source repository documentation](https://github.com/goharbor/harbor/tree/master/docs).
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-harbor-core/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-harbor-core/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-harbor-core/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -64,7 +64,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright (c) 2021 Bitnami
 
