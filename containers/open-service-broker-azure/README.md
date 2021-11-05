@@ -1,9 +1,27 @@
+# Open Service Broker for Azure packaged by Bitnami
 
-# What is Open Service Broker for Azure?
+## What is Open Service Broker for Azure?
 
-Open Service Broker for Azure is the open source, [Open Service Broker](https://www.openservicebrokerapi.org/)-compatible API server that provisions managed services in the Microsoft Azure public cloud.
+> Open Service Broker for Azure is the open source, Open Service Broker-compatible API server that provisions managed services in the Microsoft Azure public cloud.
 
-# Prerequisites
+[Overview of Open Service Broker for Azure](https://www.openservicebrokerapi.org/)
+
+## TL;DR
+
+```console
+$ docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/open-service-broker-azure:latest
+```
+
+#### Docker Compose
+
+```console
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-open-service-broker-azure/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
+```
+
+**Warning**: These quick setups are only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
+
+## Prerequisites
 
 In order to use the charts in this repository, you must have the following components installed:
 
@@ -12,7 +30,7 @@ In order to use the charts in this repository, you must have the following compo
 1. [Kubernetes Service Catalog](https://github.com/kubernetes-incubator/service-catalog)
 1. [Open Service Broker for Azure](https://github.com/azure/open-service-broker-azure)
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -24,20 +42,20 @@ In order to use the charts in this repository, you must have the following compo
 
 > This [CVE scan report](https://quay.io/repository/bitnami/open-service-broker-azure?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.8.4`, `1.8.4-debian-10-r579`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/1.8.4-debian-10-r579/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.8.4`, `1.8.4-debian-10-r580`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/1.8.4-debian-10-r580/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/open-service-broker-azure GitHub repo](https://github.com/bitnami/bitnami-docker-open-service-broker-azure).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami Open Service Broker Azure Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/open-service-broker-azure).
 
@@ -57,17 +75,17 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/open-service-broker-azure:latest 'https://github.com/bitnami/bitnami-docker-open-service-broker-azure.git#master:1/debian-10'
 ```
 
-# Configuration
+## Configuration
 
-# Further documentation
+## Further documentation
 
 For further documentation, please check [here](https://github.com/Azure/open-service-broker-azure/tree/master/docs)
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -77,7 +95,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright (c) 2021 Bitnami
 
