@@ -1,23 +1,25 @@
-# What is Kong?
+# Kong packaged by Bitnami
 
-> Kong is a scalable, open source API layer (aka API gateway or API middleware) that runs in front of any RESTful API. Extra functionalities beyond the core platform are extended through plugins. Kong is built on top of reliable technologies like NGINX and provides an easy-to-use RESTful API to operate and configure the system.
+## What is Kong?
 
-[https://github.com/kong/kong](https://github.com/kong/kong)
+> Kong is an open source Microservice API gateway and platform designed for managing microservices requests of high-availability, fault-tolerance, and distributed systems.
 
-# TL;DR
+[Overview of Kong](https://konghq.com/kong-community-edition/)
+
+## TL;DR
 
 ```
 $ docker run --name kong bitnami/kong:latest
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-kong/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -28,20 +30,20 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/kong?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.6.0`, `2.6.0-debian-10-r34`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong/blob/2.6.0-debian-10-r34/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.6.0`, `2.6.0-debian-10-r35`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong/blob/2.6.0-debian-10-r35/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kong GitHub repo](https://github.com/bitnami/bitnami-docker-kong).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami Kong Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kong).
 
@@ -61,21 +63,21 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/kong:latest 'https://github.com/bitnami/bitnami-docker-kong.git#master:2/debian-10'
 ```
 
-# Connecting to other containers
+## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a different server running inside a container can easily be accessed by your application containers and vice-versa.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-## Using the Command Line
+### Using the Command Line
 
-### Step 1: Create a network
+#### Step 1: Create a network
 
 ```console
 $ docker network create kong-network --driver bridge
 ```
 
-### Step 2: Launch the Kong container within your network
+#### Step 2: Launch the Kong container within your network
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `kong-network` network.
 
@@ -83,11 +85,11 @@ Use the `--network <NETWORK>` argument to the `docker run` command to attach the
 $ docker run --name kong-node1 --network kong-network bitnami/kong:latest
 ```
 
-### Step 3: Run another containers
+#### Step 3: Run another containers
 
 We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
 
-# Configuration
+## Configuration
 
 The Bitnami Docker Kong can be easily setup with the following environment variables:
 
@@ -108,7 +110,7 @@ This container also supports configuring Kong via environment values starting wi
 
 Check the official [Kong Configuration Reference](https://docs.konghq.com/latest/configuration/#environment-variables) for the full list of configurable properties.
 
-## Full configuration
+### Full configuration
 
 The image looks for Kong the configuration file in `/opt/bitnami/kong/conf/kong.conf`, which you can overwrite using your own custom configuration file.
 
@@ -137,7 +139,7 @@ services:
       - /path/to/kong.conf:/opt/bitnami/kong/conf/kong.conf
 ```
 
-# Logging
+## Logging
 
 The Bitnami Kong Docker image sends the container logs to `stdout`. To view the logs:
 
@@ -147,7 +149,7 @@ $ docker logs kong
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-# Understand the structure of this image
+## Understand the structure of this image
 
 The Bitnami Kong Docker image is built using a Dockerfile with the structure below:
 
@@ -156,7 +158,7 @@ FROM bitnami/minideb
 
 ENV ...
 
-# Install required system packages and dependencies
+## Install required system packages and dependencies
 RUN install_packages xxx yyy zzz
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack && component_unpack "kong" "aa.bb.cc-dd"
 
@@ -180,13 +182,13 @@ The Dockerfile has several sections related to:
 - Entrypoint and command
   - Take into account that these actions are not executed until the container is started.
 
-# Customize this image
+## Customize this image
 
 The Bitnami Kong Docker image is designed to be extended so it can be used as the base image for your custom API service.
 
 > Note: Read the [previous section](#understand-the-structure-of-this-image) to understand the Dockerfile structure before extending this image.
 
-## Extend this image
+### Extend this image
 
 Before extending this image, please note it is possible there are certain ways you can configure Kong using the original:
 
@@ -197,7 +199,7 @@ If your desired customizations cannot be covered using the methods mentioned abo
 
 ```Dockerfile
 FROM bitnami/kong
-## Put your customizations below
+### Put your customizations below
 ...
 ```
 
@@ -212,24 +214,24 @@ Here is an example of extending the image with the following modifications:
 FROM bitnami/kong
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-## Change user to perform privileged actions
+### Change user to perform privileged actions
 USER 0
-## Install 'vim'
+### Install 'vim'
 RUN install_packages vim
-## Revert to the original non-root user
+### Revert to the original non-root user
 USER 1001
 
-## Disable anonymous reports
-# Keep in mind it is possible to do this by setting the KONG_ANONYMOUS_REPORTS=off environment variable
+### Disable anonymous reports
+## Keep in mind it is possible to do this by setting the KONG_ANONYMOUS_REPORTS=off environment variable
 RUN sed -i -r 's/#anonymous_reports = on/anonymous_reports = off/' /opt/bitnami/kong/conf/kong.conf
 
-## Modify the ports used by Kong by default
-# It is also possible to change these environment variables at runtime
+### Modify the ports used by Kong by default
+## It is also possible to change these environment variables at runtime
 ENV KONG_PROXY_HTTP_PORT_NUMBER=8080
 ENV KONG_ADMIN_HTTP_PORT_NUMBER=8081
 EXPOSE 8080 8081 8443 8444
 
-## Modify the default container user
+### Modify the default container user
 USER 1002
 ```
 
@@ -256,19 +258,19 @@ volumes:
     driver: local
 ```
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of Kong, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/kong:latest
 ```
 
-### Step 2: Stop the running container
+#### Step 2: Stop the running container
 
 Stop the currently running container using the command
 
@@ -276,13 +278,13 @@ Stop the currently running container using the command
 $ docker stop kong
 ```
 
-### Step 3: Remove the currently running container
+#### Step 3: Remove the currently running container
 
 ```console
 $ docker rm -v kong
 ```
 
-### Step 4: Run the new image
+#### Step 4: Run the new image
 
 Re-create your container from the new image.
 
@@ -290,11 +292,11 @@ Re-create your container from the new image.
 $ docker run --name kong bitnami/kong:latest
 ```
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-kong/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-kong/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-kong/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -304,7 +306,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright (c) 2021 Bitnami
 
