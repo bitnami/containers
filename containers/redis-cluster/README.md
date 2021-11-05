@@ -1,26 +1,25 @@
-# What is Redis(TM) Cluster packaged by Bitnami?
+# Redis(TM) Cluster packaged by Bitnami
 
-Disclaimer: REDIS(r) is a registered trademark of Redis Labs Ltd.Any rights therein are reserved to Redis Labs Ltd. Any use by Bitnami is for referential
-purposes only and does not indicate any sponsorship, endorsement, or affiliation between Redis Labs Ltd.
+## What is Redis(TM) Cluster?
 
-> Redis(TM) is an advanced key-value cache and store. It is often referred to as a data structure server since keys can contain strings, hashes, lists, sets, sorted sets, bitmaps and hyperloglogs.
+> Redis(TM) is an open source, scalable, distributed in-memory cache for applications. It can be used to store and serve data in the form of strings, hashes, lists, sets and sorted sets.	
 
-[Redis.io](https://redis.io/)
+[Overview of Redis(TM) Cluster](http://redis.io)
 
-# TL;DR
+## TL;DR
 
 ```console
 $ docker run --name redis-cluster -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis-cluster:latest
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-redis-cluster/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -31,24 +30,24 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/redis-cluster?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy Redis(TM) Cluster in Kubernetes?
+## How to deploy Redis(TM) Cluster in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Redis(TM) Cluster Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/redis-cluster).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
 * [`6.2`, `6.2-debian-10`, `6.2.6`, `6.2.6-debian-10-r30`, `latest` (6.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/6.2.6-debian-10-r30/6.2/debian-10/Dockerfile)
-* [`6.0`, `6.0-debian-10`, `6.0.16`, `6.0.16-debian-10-r30` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/6.0.16-debian-10-r30/6.0/debian-10/Dockerfile)
+* [`6.0`, `6.0-debian-10`, `6.0.16`, `6.0.16-debian-10-r31` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/6.0.16-debian-10-r31/6.0/debian-10/Dockerfile)
 * [`5.0`, `5.0-debian-10`, `5.0.14`, `5.0.14-debian-10-r32` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/5.0.14-debian-10-r32/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-cluster GitHub repo](https://github.com/bitnami/bitnami-docker-redis-cluster).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami Redis(TM) Cluster Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/redis-cluster).
 
@@ -68,7 +67,7 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/redis-cluster:latest 'https://github.com/bitnami/bitnami-docker-redis-cluster.git#master:6.2/debian-10'
 ```
 
-# Persisting your application
+## Persisting your application
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -91,21 +90,21 @@ redis-cluster:
   ...
 ```
 
-# Connecting to other containers
+## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a different server running inside a container can easily be accessed by your application containers and vice-versa.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-## Using the Command Line
+### Using the Command Line
 
-### Step 1: Create a network
+#### Step 1: Create a network
 
 ```console
 $ docker network create redis-cluster-network --driver bridge
 ```
 
-### Step 2: Launch the Redis(TM) Cluster container within your network
+#### Step 2: Launch the Redis(TM) Cluster container within your network
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `redis-cluster-network` network.
 
@@ -113,13 +112,13 @@ Use the `--network <NETWORK>` argument to the `docker run` command to attach the
 $ docker run -e ALLOW_EMPTY_PASSWORD=yes --name redis-cluster-node1 --network redis-cluster-network bitnami/redis-cluster:latest
 ```
 
-### Step 3: Run another containers
+#### Step 3: Run another containers
 
 We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
 
-# Configuration
+## Configuration
 
-## Configuration file
+### Configuration file
 
 The image looks for configurations in `/opt/bitnami/redis/mounted-etc/redis.conf`. You can overwrite the `redis.conf` file using your own custom configuration file.
 
@@ -179,7 +178,7 @@ redis-cli --cluster create node1:port node2:port --cluster-replicas 1 --cluster-
 
 Where you can add all the `node:port` that you want. The `--cluster-replicas` parameters indicates how many replicas you want to have for every master.
 
-## Cluster Initialization Troubleshooting
+### Cluster Initialization Troubleshooting
 
 Depending on the environment you're deploying into, you might run into issues where the cluster initialization
 is not completing successfully. One of the issue is related to the DNS lookup of the redis nodes performed during
@@ -189,7 +188,7 @@ performing this DNS lookup in order to prevent getting stale records. To this en
 `REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP` to a value around `30` which has been found to be good in most cases. You can
 check the discussion regarding this [here](https://github.com/bitnami/bitnami-docker-redis-cluster/pull/16#pullrequestreview-540706903).
 
-## Securing Redis(TM) Cluster traffic
+### Securing Redis(TM) Cluster traffic
 
 Starting with version 6, Redis(TM) adds the support for SSL/TLS connections. Should you desire to enable this optional feature, you may use the aforementioned `REDIS_TLS_*` environment variables to configure the application.
 
@@ -228,7 +227,7 @@ When enabling TLS, conventional standard traffic is disabled by default. However
     ```
 Alternatively, you may also provide with this configuration in your [custom](https://github.com/bitnami/bitnami-docker-redis-cluster#configuration-file) configuration file.
 
-# Logging
+## Logging
 
 The Bitnami Redis(TM) Cluster Docker image sends the container logs to `stdout`. To view the logs:
 
@@ -238,19 +237,19 @@ $ docker logs redis-cluster
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of Redis(TM) Cluster, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/redis-cluster:latest
 ```
 
-### Step 2: Stop the running container
+#### Step 2: Stop the running container
 
 Stop the currently running container using the command
 
@@ -258,13 +257,13 @@ Stop the currently running container using the command
 $ docker stop redis-cluster
 ```
 
-### Step 3: Remove the currently running container
+#### Step 3: Remove the currently running container
 
 ```console
 $ docker rm -v redis-cluster
 ```
 
-### Step 4: Run the new image
+#### Step 4: Run the new image
 
 Re-create your container from the new image.
 
@@ -272,17 +271,17 @@ Re-create your container from the new image.
 $ docker run --name redis-cluster bitnami/redis-cluster:latest
 ```
 
-# Upgrading
+## Upgrading
 
-## To 5.0.12-debian-10-r48 release, 6.2.1-debian-10-r48 release , 6.0.12-debian-10-r48
+### To 5.0.12-debian-10-r48 release, 6.2.1-debian-10-r48 release , 6.0.12-debian-10-r48
 
 The cluster initialization logic has changed. Now the container in charge of initialize the cluster will also be part of the cluster. It will initialize Redis in background, create the cluster and then bring back to foreground the Redis process.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-redis-cluster/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-redis-cluster/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-redis-cluster/issues). For us to provide better support, be sure to include the following information in your issue:
 
@@ -292,7 +291,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright (c) 2021 Bitnami
 
