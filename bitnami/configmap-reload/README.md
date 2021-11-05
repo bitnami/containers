@@ -1,15 +1,16 @@
+# ConfigMap Reload packaged by Bitnami
 
-# What is ConfigMap Reload?
+## What is ConfigMap Reload?
 
-configmap-reload is a cloud-native tool that watches Kubernetes ConfigMaps and triggers a reload when ConfigMaps are updated.
+> ConfigMap Reload is a cloud-native tool that watches Kubernetes ConfigMaps and triggers a reload when ConfigMaps are updated
 
-[https://github.com/jimmidyson/configmap-reload](https://github.com/jimmidyson/configmap-reload)
+[Overview of ConfigMap Reload](https://github.com/jimmidyson/configmap-reload)
 
-# TL;DR
+## TL;DR
 
 Deploy [ConfigMap Reload](https://github.com/jimmidyson/configmap-reload/blob/master/README.md) on your Kubernetes cluster.
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -21,20 +22,20 @@ Deploy [ConfigMap Reload](https://github.com/jimmidyson/configmap-reload/blob/ma
 
 > This [CVE scan report](https://quay.io/repository/bitnami/configmap-reload?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.5.0`, `0.5.0-debian-10-r266`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-configmap-reload/blob/0.5.0-debian-10-r266/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.5.0`, `0.5.0-debian-10-r267`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-configmap-reload/blob/0.5.0-debian-10-r267/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/configmap-reload GitHub repo](https://github.com/bitnami/bitnami-docker-configmap-reload).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami ConfigMap Reload Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/configmap-reload).
 
@@ -54,15 +55,15 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/configmap-reload:latest 'https://github.com/bitnami/bitnami-docker-configmap-reload.git#master:0/debian-10'
 ```
 
-# Configuration
+## Configuration
 
 Find how to configure ConfigMap Reload in its [official documentation](https://github.com/jimmidyson/configmap-reload/blob/master/README.md).
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-configmap-reload/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-configmap-reload/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-configmap-reload/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -72,7 +73,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 Copyright (c) 2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
