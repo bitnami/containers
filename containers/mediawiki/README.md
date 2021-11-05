@@ -1,10 +1,10 @@
-# Bitnami Docker Image for MediaWiki
+# MediaWiki packaged by Bitnami
 
 ## What is MediaWiki?
 
-> MediaWiki is an extremely powerful, scalable software and a feature-rich wiki implementation that uses PHP to process and display data stored in a database, such as MySQL.
+> MediaWiki is the free and open source wiki software that powers Wikipedia. Used by thousands of organizations, it is extremely powerful, scalable software and a feature-rich wiki implementation.
 
-[https://www.mediawiki.org/wiki/MediaWiki](https://www.mediawiki.org/wiki/MediaWiki)
+[Overview of MediaWiki](http://www.mediawiki.org/wiki/MediaWiki)
 
 ## TL;DR
 
@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.36.2`, `1.36.2-debian-10-r32`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.36.2-debian-10-r32/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.36.2`, `1.36.2-debian-10-r33`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mediawiki/blob/1.36.2-debian-10-r33/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mediawiki GitHub repo](https://github.com/bitnami/bitnami-docker-mediawiki).
 
@@ -220,11 +220,11 @@ Available variables:
 
 ##### User and Site configuration
 
-- `MEDIAWIKI_USERNAME`: Mediawiki application username. Default: **user**
-- `MEDIAWIKI_PASSWORD`: Mediawiki application password. Default: **bitnami123** (min 10 characters, alphanumeric, no special characters)
-- `MEDIAWIKI_EMAIL`: Mediawiki application email. Default: **user@example.com**
-- `MEDIAWIKI_WIKI_NAME`: Mediawiki wiki name. Default: **Bitnami MediaWiki**
-- `MEDIAWIKI_HOST`: Mediawiki application host. No defaults.
+- `MEDIAWIKI_USERNAME`: MediaWiki application username. Default: **user**
+- `MEDIAWIKI_PASSWORD`: MediaWiki application password. Default: **bitnami123** (min 10 characters, alphanumeric, no special characters)
+- `MEDIAWIKI_EMAIL`: MediaWiki application email. Default: **user@example.com**
+- `MEDIAWIKI_WIKI_NAME`: MediaWiki wiki name. Default: **Bitnami MediaWiki**
+- `MEDIAWIKI_HOST`: MediaWiki application host. No defaults.
 - `MEDIAWIKI_EXTERNAL_HTTP_PORT_NUMBER`: Port to used by MediaWiki to generate URLs and links when accessing using HTTP. Default **80**.
 - `MEDIAWIKI_EXTERNAL_HTTPS_PORT_NUMBER`: Port to used by MediaWiki to generate URLs and links when accessing using HTTPS. Default **443**.
 - `MEDIAWIKI_ENABLE_HTTPS`: Whether to use HTTPS by default. Default: **no**.
@@ -260,7 +260,7 @@ Available variables:
 
 ##### SMTP Configuration
 
-To configure Mediawiki to send email using SMTP you can set the following environment variables:
+To configure MediaWiki to send email using SMTP you can set the following environment variables:
 
 - `MEDIAWIKI_SMTP_HOST`: SMTP host.
 - `MEDIAWIKI_SMTP_HOST_ID`: SMTP host ID. It is a MediaWiki-specific setting used to build the Message-ID email header. If not provided, it will default to the value of `MEDIAWIKI_SMTP_HOST`.
@@ -318,7 +318,7 @@ This would be an example of SMTP configuration using a GMail account:
 
 # How to install imagemagick in the Bitnami MediaWiki Docker image
 
-If you require better quality thumbnails for your uploaded images, you may want to install imagemagick instead of using GD. To do so you can build your own docker image adding the `imagemagick` system package. Since we are using a non-root container, we have to swap the user to root to install imagemagick and it's requirements. 
+If you require better quality thumbnails for your uploaded images, you may want to install imagemagick instead of using GD. To do so you can build your own docker image adding the `imagemagick` system package. Since we are using a non-root container, we have to swap the user to root to install imagemagick and it's requirements.
 
 1. Create the following Dockerfile
 
@@ -339,7 +339,7 @@ $ docker build -t bitnami/mediawiki:imagemagick .
 
 4. Finally exec into your MediaWiki container and edit the file */opt/bitnami/mediawiki/LocalSettings.php* as described [here](https://www.mediawiki.org/wiki/Manual:Installing_third-party_tools#Image_thumbnailing) in order to start using imagemagick.
 
-# How to migrate from a Bitnami Mediawiki Stack
+# How to migrate from a Bitnami MediaWiki Stack
 
 You can follow these steps in order to migrate it to this container:
 
@@ -360,7 +360,7 @@ You can follow these steps in order to migrate it to this container:
   $ scp ~/backup-mediawiki-* YOUR_USERNAME@TARGET_HOST:~
   ```
 
-3. Create the Mediawiki Container as described in the section [How to use this Image (Using Docker Compose)](https://github.com/bitnami/bitnami-docker-mediawiki#using-docker-compose)
+3. Create the MediaWiki Container as described in the section [How to use this Image (Using Docker Compose)](https://github.com/bitnami/bitnami-docker-mediawiki#using-docker-compose)
 
 4. Wait for the initial setup to finish. You can follow it with
 
@@ -381,7 +381,7 @@ You can follow these steps in order to migrate it to this container:
   $ docker-compose exec mediawiki nami stop apache
   ```
 
-6. Obtain the password used by Mediawiki to access the database in order avoid reconfiguring it:
+6. Obtain the password used by MediaWiki to access the database in order avoid reconfiguring it:
 
   ```console
   $ docker-compose exec mediawiki bash -c 'cat /opt/bitnami/mediawiki/LocalSettings.php | grep wgDBpassword'
@@ -407,7 +407,7 @@ You can follow these steps in order to migrate it to this container:
   $ cat ./backup-mediawiki-skins.tar.gz | docker exec -i $(docker-compose ps -q mediawiki) bash -c 'cd /bitnami/mediawiki/ ; tar -xzvf -'
   ```
 
-9. Fix Mediawiki directory permissions:
+9. Fix MediaWiki directory permissions:
 
   ```console
   $ docker-compose exec mediawiki chown -R daemon:daemon /bitnami/mediawiki
@@ -488,7 +488,7 @@ For the MediaWiki container:
 
 ### Upgrade this image
 
-Bitnami provides up-to-date versions of MariaDB and MediaWiki, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Mediawiki container. For the MariaDB upgrade see: https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
+Bitnami provides up-to-date versions of MariaDB and MediaWiki, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the MediaWiki container. For the MariaDB upgrade see: https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
 
 #### Step 1: Get the updated image
 
