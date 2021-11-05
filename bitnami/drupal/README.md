@@ -1,10 +1,10 @@
-# Bitnami Docker Image for Drupal
+# Drupal packaged by Bitnami
 
 ## What is Drupal?
 
-> Drupal is one of the most versatile open source content management systems on the market. Drupal is built for high performance and is scalable to many servers, has easy integration via REST, JSON, SOAP and other formats, and features a whopping 15,000 plugins to extend and customize the application for just about any type of website.
+> Drupal is one of the most versatile open source content management systems in the world. It is pre-configured with the Ctools and Views modules, Drush and Let's Encrypt auto-configuration support.
 
-[https://www.drupal.org/](https://www.drupal.org/)
+[Overview of Drupal](http://drupal.org)
 
 ## TL;DR
 
@@ -41,7 +41,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`9`, `9-debian-10`, `9.2.8`, `9.2.8-debian-10-r1`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/9.2.8-debian-10-r1/9/debian-10/Dockerfile)
+* [`9`, `9-debian-10`, `9.2.8`, `9.2.8-debian-10-r2`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/9.2.8-debian-10-r2/9/debian-10/Dockerfile)
 * [`8`, `8-debian-10`, `8.9.19`, `8.9.19-debian-10-r42` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/8.9.19-debian-10-r42/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal GitHub repo](https://github.com/bitnami/bitnami-docker-drupal).
