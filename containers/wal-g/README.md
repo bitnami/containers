@@ -1,17 +1,18 @@
+# WAL-G packaged by Bitnami
 
-# What is WAL-G?
+## What is WAL-G?
 
-> WAL-G is an archival restoration tool for PostgreSQL. WAL-G uses LZ4, LZMA, or Brotli compression, multiple processors, and non-exclusive base backups for Postgres.
+> WAL-G is an archival and restoration tool for PostgreSQL databases. It allows parallel backup and restore operations using different compression formats. It supports AWS and GCE storage backends. 
 
 [Overview of WAL-G](https://wal-g.org/)
 
-# TL;DR
+## TL;DR
 
 ```console
 $ docker run --name wal-g bitnami/wal-g:latest
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -23,16 +24,16 @@ $ docker run --name wal-g bitnami/wal-g:latest
 
 > This [CVE scan report](https://quay.io/repository/bitnami/wal-g?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.1.0`, `1.1.0-debian-10-r82` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wal-g/blob/1.1.0-debian-10-r82/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.1.0`, `1.1.0-debian-10-r83` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wal-g/blob/1.1.0-debian-10-r83/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wal-g GitHub repo](https://github.com/bitnami/bitnami-docker-wal-g).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami wal-g Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/wal-g).
 
@@ -52,9 +53,9 @@ If you wish, you can also build the image yourself.
 
 ```
 
-# Configuration
+## Configuration
 
-## Running commands
+### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `wal-g --version` you can follow the example below:
 
@@ -64,11 +65,11 @@ $ docker run --rm --name wal-g bitnami/wal-g:latest -- wal-g --version
 
 Check the [official WAL-G documentation](https://github.com/wal-g/wal-g#configuration) for a list of the available parameters.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-wal-g/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-wal-g/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-wal-g/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -78,7 +79,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2021 Bitnami
 
