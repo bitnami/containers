@@ -1,19 +1,25 @@
-# What is Java?
+# Java packaged by Bitnami
+
+## What is Java?
 
 > Java is a general-purpose computer programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible.
+
+[Overview of Java](https://openjdk.java.net/)
+
+## TL;DR
 
 ```console
 $ docker run -it --name java bitnami/java
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-java/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -25,7 +31,7 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/java?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
@@ -37,11 +43,11 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 - [`11-prod`, `11.0.13-prod-debian-10-r10` (11-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.13-prod-debian-10-r10/11-prod/debian-10/Dockerfile), [`11-prod-prod`, `11.0.13-prod-debian-10-r10-prod` (11-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.13-prod-debian-10-r10/11-prod/debian-10/prod/Dockerfile)
 - [`11`, `11.0.13-debian-10-r10` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.13-debian-10-r10/11/debian-10/Dockerfile), [`11-prod`, `11.0.13-debian-10-r10-prod` (11/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.13-debian-10-r10/11/debian-10/prod/Dockerfile)
 - [`1.8-prod`, `1.8.312-prod-debian-10-r14` (1.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.312-prod-debian-10-r14/1.8-prod/debian-10/Dockerfile), [`1.8-prod-prod`, `1.8.312-prod-debian-10-r14-prod` (1.8-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.312-prod-debian-10-r14/1.8-prod/debian-10/prod/Dockerfile)
-- [`1.8`, `1.8.312-debian-10-r14` (1.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.312-debian-10-r14/1.8/debian-10/Dockerfile), [`1.8-prod`, `1.8.312-debian-10-r14-prod` (1.8/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.312-debian-10-r14/1.8/debian-10/prod/Dockerfile)
+- [`1.8`, `1.8.312-debian-10-r15` (1.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.312-debian-10-r15/1.8/debian-10/Dockerfile), [`1.8-prod`, `1.8.312-debian-10-r15-prod` (1.8/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.312-debian-10-r15/1.8/debian-10/prod/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/java GitHub repo](https://github.com/bitnami/bitnami-docker-java).
 
-## Deprecation Note (2020-08-18)
+### Deprecation Note (2020-08-18)
 
 The formatting convention for `prod` tags has been changed:
 
@@ -49,7 +55,7 @@ The formatting convention for `prod` tags has been changed:
 * `VERSION-debian-10-rX-prod` is now tagged as `VERSION-prod-debian-10-rX`
 * `latest-prod` is now deprecated
 
-# What are `prod` tagged containers for?
+## What are `prod` tagged containers for?
 
 Containers tagged `prod` are production containers based on [minideb](https://github.com/bitnami/minideb). They contain the minimal dependencies required by an application to work.
 
@@ -59,7 +65,7 @@ The resultant containers only contain the necessary pieces of software to run th
 
 Learn how to use multi-stage builds to build your production application container in the [example](/example) directory
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami Java Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/java).
 
@@ -79,9 +85,9 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/java 'https://github.com/bitnami/bitnami-docker-java.git#master:17/debian-10'
 ```
 
-# Configuration
+## Configuration
 
-## Running your Java jar or war
+### Running your Java jar or war
 
 The default work directory for the Java image is `/app`. You can mount a folder from your host here that includes your Java jar or war, and run it normally using the `java` command.
 
@@ -104,13 +110,13 @@ java:
 
   - [Java SE Documentation](https://docs.oracle.com/javase/8/docs/api/)
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of Java, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/java:latest
@@ -118,7 +124,7 @@ $ docker pull bitnami/java:latest
 
 or if you're using Docker Compose, update the value of the image property to `bitnami/java:latest`.
 
-### Step 2: Remove the currently running container
+#### Step 2: Remove the currently running container
 
 ```console
 $ docker rm -v java
@@ -130,7 +136,7 @@ or using Docker Compose:
 $ docker-compose rm -v java
 ```
 
-### Step 3: Run the new image
+#### Step 3: Run the new image
 
 Re-create your container from the new image.
 
@@ -144,38 +150,21 @@ or using Docker Compose:
 $ docker-compose up java
 ```
 
-## Replace the default truststore using a custom base image
+## Notable Changes
 
-In case you are replacing the default [minideb](https://github.com/bitnami/minideb) base image with a custom base image (based on Debian), it is possible to replace the default truststore located in the `/opt/bitnami/java/lib/security` folder. This is done by setting the `JAVA_EXTRA_SECURITY_DIR` docker build ARG variable, which needs to point to a location that contains a *cacerts* file that would substitute the originally bundled truststore. In the following example we will use a minideb fork that contains a custom *cacerts* file in the */bitnami/java/extra-security* folder:
-
-- In the Dockerfile, replace `FROM docker.io/bitnami/minideb:buster` to use a custom image, defined with the `MYJAVAFORK:TAG` placeholder:
-
-```diff
-- FROM bitnami/minideb:latest
-+ FROM MYFORK:TAG
-```
-
-- Run `docker build` setting the value of `JAVA_EXTRA_SECURITY_DIR`. Remember to replace the `MYJAVAFORK:TAG` placeholder.
-
-```
-docker build --build-arg JAVA_EXTRA_SECURITY_DIR=/bitnami/java/extra-security -t MYJAVAFORK:TAG .
-```
-
-# Notable Changes
-
-## 1.8.252-debian-10-r0, 11.0.7-debian-10-r7, and 15.0.1-debian-10-r20
+### 1.8.252-debian-10-r0, 11.0.7-debian-10-r7, and 15.0.1-debian-10-r20
 
 - Java distribution has been migrated from AdoptOpenJDK to OpenJDK Liberica. As part of VMware, we have an agreement with Bell Software to distribute the Liberica distribution of OpenJDK. That way, we can provide support & the latest versions and security releases for Java.
 
-# Branch Deprecation Notice
+## Branch Deprecation Notice
 
 Java's branch 16 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 11-08-2021
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-java/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-java/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-java/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -186,7 +175,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - The command you used to run the container, and any relevant output you saw (masking any sensitive
 information)
 
-# License
+## License
 
 Copyright (c) 2021 Bitnami
 
