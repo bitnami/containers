@@ -1,21 +1,25 @@
-# What is OpenLDAP?
+# OpenLDAP packaged by Bitnami
 
-> [OpenLDAP](https://openldap.org/) is the open-source solution for LDAP (Lightweight Directory Access Protocol). It is a protocol used to store and retrieve data from a hierarchical directory structure such as in databases.
+## What is OpenLDAP?
 
-# TL;DR
+> OpenLDAP is the open-source solution for LDAP (Lightweight Directory Access Protocol). It is a protocol used to  store and retrieve data from a hierarchical directory structure such as in databases.
+
+[Overview of OpenLDAP](https://openldap.org/)
+
+## TL;DR
 
 ```console
 $ docker run --name openldap bitnami/openldap:latest
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-openldap/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -26,21 +30,21 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/openldap?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2.5`, `2.5-debian-10`, `2.5.9`, `2.5.9-debian-10-r10`, `latest` (2.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.5.9-debian-10-r10/2.5/debian-10/Dockerfile)
+* [`2.5`, `2.5-debian-10`, `2.5.9`, `2.5.9-debian-10-r11`, `latest` (2.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.5.9-debian-10-r11/2.5/debian-10/Dockerfile)
 * [`2.4`, `2.4-debian-10`, `2.4.59`, `2.4.59-debian-10-r111` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.4.59-debian-10-r111/2.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/openldap GitHub repo](https://github.com/bitnami/bitnami-docker-openldap).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami OpenLDAP Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/openldap).
 
@@ -60,23 +64,23 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/openldap:latest 'https://github.com/bitnami/bitnami-docker-openldap.git#master:2.5/debian-10'
 ```
 
-# Connecting to other containers
+## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a different server running inside a container can easily be accessed by your application containers and vice-versa.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-## Using the Command Line
+### Using the Command Line
 
 In this example, we will use a MariaDB Galera instance that will use a OpenLDAP instance that is running on the same docker network to manage authentication.
 
-### Step 1: Create a network
+#### Step 1: Create a network
 
 ```console
 $ docker network create my-network --driver bridge
 ```
 
-### Step 2: Launch the OpenLDAP server instance
+#### Step 2: Launch the OpenLDAP server instance
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `my-network` network.
 
@@ -90,7 +94,7 @@ $ docker run --detach --rm --name openldap \
   bitnami/openldap:latest
 ```
 
-### Step 3: Launch the MariaDB Galera server instance
+#### Step 3: Launch the MariaDB Galera server instance
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `my-network` network.
 
@@ -109,7 +113,7 @@ $ docker run --detach --rm --name mariadb-galera \
     bitnami/mariadb-galera:latest
 ```
 
-### Step 4: Launch the MariaDB client and test you can authenticate using LDAP credentials
+#### Step 4: Launch the MariaDB client and test you can authenticate using LDAP credentials
 
 Finally we create a new container instance to launch the MariaDB client and connect to the server created in the previous step:
 
@@ -119,7 +123,7 @@ $ docker run -it --rm --name mariadb-client \
     bitnami/mariadb-galera:latest mysql -h mariadb-galera -u customuser -D customdatabase -pcustompassword
 ```
 
-## Using Docker Compose
+### Using Docker Compose
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `my-network`. In this example we assume that you want to connect to the OpenLDAP server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
@@ -164,7 +168,7 @@ Launch the containers using:
 $ docker-compose up -d
 ```
 
-# Configuration
+## Configuration
 
 The Bitnami Docker OpenLDAP can be easily setup with the following environment variables:
 
@@ -188,7 +192,7 @@ The Bitnami Docker OpenLDAP can be easily setup with the following environment v
 
 Check the official [OpenLDAP Configuration Reference](https://www.openldap.org/doc/admin24/guide.html) for more information about how to configure OpenLDAP.
 
-## Securing OpenLDAP traffic
+### Securing OpenLDAP traffic
 
 OpenLDAP clients and servers are capable of using the Transport Layer Security (TLS) framework to provide integrity and confidentiality protections and to support LDAP authentication using the SASL EXTERNAL mechanism. Should you desire to enable this optional feature, you may use the following environment variables to configure the application:
 
@@ -234,7 +238,7 @@ This new feature is not mutually exclusive, which means it is possible to listen
       ...
     ```
 
-## Initializing a new instance
+### Initializing a new instance
 
 The [Bitnami OpenLDAP](https://github.com/bitnami/bitnami-docker-openldap) image allows you to use your custom scripts to initialize a fresh instance.
 
@@ -242,7 +246,7 @@ The allowed script extension is `.sh`, all scripts are executed in alphabetical 
 
 Scripts are executed are after the initilization and before the startup of the OpenLDAP service.
 
-# Logging
+## Logging
 
 The Bitnami OpenLDAP Docker image sends the container logs to `stdout`. To view the logs:
 
@@ -254,19 +258,19 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 
 To see the actual output of slapd in the container's logs, set the environment variable `BITNAMI_DEBUG=true`. Useful especially to find/debug problems in your configuration that lead to errors so OpenLDAP won't start.
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of OpenLDAP, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/openldap:latest
 ```
 
-### Step 2: Stop the running container
+#### Step 2: Stop the running container
 
 Stop the currently running container using the command
 
@@ -274,13 +278,13 @@ Stop the currently running container using the command
 $ docker stop openldap
 ```
 
-### Step 3: Remove the currently running container
+#### Step 3: Remove the currently running container
 
 ```console
 $ docker rm -v openldap
 ```
 
-### Step 4: Run the new image
+#### Step 4: Run the new image
 
 Re-create your container from the new image.
 
@@ -288,17 +292,17 @@ Re-create your container from the new image.
 $ docker run --name openldap bitnami/openldap:latest
 ```
 
-# Notable Changes
+## Notable Changes
 
-## 2.4.58-debian-10-r93
+### 2.4.58-debian-10-r93
 
 - The default database backend has been changed from `hdb` to `mdb` as recommended. No additional steps should be necessary at upgrade time; the new container version `2.4.59` will initialize using the persisted data.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-openldap/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-openldap/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-openldap/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -308,7 +312,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2021 Bitnami
 
