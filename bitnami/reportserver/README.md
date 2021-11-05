@@ -1,10 +1,10 @@
-# Bitnami Docker Image for ReportServer Community
+# ReportServer Community packaged by Bitnami
 
 ## What is ReportServer Community?
 
-> ReportServer is an open source business intelligence (OSBI) platform with powerful reporting and analysis tools. It provides a unified interface to reporting engines from different providers, making it easy for managers to collate, analyze and take action on data from multiple business touchpoints. With support for Jasper, Birt, Mondrian and Excel as well as a powerful ad-hoc reporting component ReportServer is the ideal tool for business decision makers, analysts and consultants.
+> ReportServer is the open source business intelligence tool for fast information access and analysis. It integrates multiple reporting engines and features an intuitive dashboard component.
 
-https://reportserver.net/en/#secondsection
+[Overview of ReportServer Community](https://reportserver.net/en/)
 
 ## TL;DR
 
@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`3`, `3-debian-10`, `3.7.1-6046`, `3.7.1-6046-debian-10-r54`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserver/blob/3.7.1-6046-debian-10-r54/3/debian-10/Dockerfile)
+- [`3`, `3-debian-10`, `3.7.1-6046`, `3.7.1-6046-debian-10-r55`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserver/blob/3.7.1-6046-debian-10-r55/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/reportserver GitHub repo](https://github.com/bitnami/bitnami-docker-reportserver).
 
