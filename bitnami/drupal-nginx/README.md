@@ -1,13 +1,12 @@
-# Bitnami Docker Image for Drupal with NGINX
+# Drupal with NGINX packaged by Bitnami
 
 ## What is Drupal with NGINX?
 
-> Drupal with NGINX combines one of the most versatile open source content management systems on the market with the power of the NGINX web server. Drupal is built for high performance and is scalable to many servers, has easy integration via REST, JSON, SOAP and other formats, and features a whopping 15,000 plugins to extend and customize the application for just about any type of website.
+> Drupal with NGINX enhances the popular open source CMS with the performance and security of NGINX. Drupal's modular architecture lets you create many different types of websites and applications.
 
-https://www.drupal.org/
-https://nginx.org/
+[Overview of Drupal with NGINX](http://drupal.org)
 
-# TL;DR
+## TL;DR
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-drupal-nginx/master/docker-compose.yml > docker-compose.yml
@@ -16,7 +15,7 @@ $ docker-compose up -d
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
 
-## Why use Bitnami Images?
+### Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -27,27 +26,27 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/drupal-nginx?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-## Why use a non-root container?
+### Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-## How to deploy Drupal in Kubernetes?
+### How to deploy Drupal in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Drupal Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/drupal-nginx).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
-## Supported tags and respective `Dockerfile` links
+### Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`9`, `9-debian-10`, `9.2.8`, `9.2.8-debian-10-r1`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal-nginx/blob/9.2.8-debian-10-r1/9/debian-10/Dockerfile)
+* [`9`, `9-debian-10`, `9.2.8`, `9.2.8-debian-10-r2`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal-nginx/blob/9.2.8-debian-10-r2/9/debian-10/Dockerfile)
 * [`8`, `8-debian-10`, `8.9.19`, `8.9.19-debian-10-r43` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal-nginx/blob/8.9.19-debian-10-r43/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-drupal-nginx).
 
-## Get this image
+### Get this image
 
 The recommended way to get the Bitnami Drupal Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/drupal-nginx).
 
@@ -67,13 +66,13 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/drupal-nginx:latest 'https://github.com/bitnami/bitnami-docker-drupal-nginx.git#master:9/debian-10'
 ```
 
-# How to use this image
+## How to use this image
 
-## Run Drupal with a Database Container
+### Run Drupal with a Database Container
 
 Running Drupal with a database server is the recommended way. You can either use docker-compose or run the containers manually.
 
-### Run the application using Docker Compose
+#### Run the application using Docker Compose
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-drupal-nginx/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
@@ -82,17 +81,17 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-drupal-ngin
 $ docker-compose up -d
 ```
 
-### Run the application manually
+#### Run the application manually
 
 If you want to run the application manually instead of using docker-compose, these are the basic steps you need to run:
 
-#### 1. Create a new network for the application and the database:
+##### 1. Create a new network for the application and the database:
 
   ```console
   $ docker network create drupal-network
   ```
 
-#### 2. Create a volume for MariaDB persistence and create a MariaDB container
+##### 2. Create a volume for MariaDB persistence and create a MariaDB container
 
   ```console
   $ docker volume create --name mariadb_data
@@ -105,7 +104,7 @@ If you want to run the application manually instead of using docker-compose, the
     bitnami/mariadb:latest
   ```
 
-#### 3. Create volumes for Drupal persistence and launch the container
+##### 3. Create volumes for Drupal persistence and launch the container
 
   ```console
   $ docker volume create --name drupal_data
@@ -120,7 +119,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 Access your application at *http://your-ip:8080/*
 
-## Persisting your application
+### Persisting your application
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -130,7 +129,7 @@ The above examples define the Docker volumes named mariadb_data and drupal_data.
 
 To avoid inadvertent removal of volumes, you can mount host directories as data volumes. Alternatively you can make use of volume plugins to host the volume data.
 
-### Mount host directories as data volumes with Docker Compose
+#### Mount host directories as data volumes with Docker Compose
 
 This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-drupal-nginx/blob/master/docker-compose.yml) file present in this repository:
 
@@ -156,15 +155,15 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 
 > NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-### Mount host directories as data volumes using the Docker command line
+#### Mount host directories as data volumes using the Docker command line
 
-#### Step 1: Create a network (if it does not exist)
+##### Step 1: Create a network (if it does not exist)
 
 ```console
 $ docker network create drupal-network
 ```
 
-#### 2. Create a MariaDB container with host volume:
+##### 2. Create a MariaDB container with host volume:
 
 ```console
 $ docker run -d --name mariadb \
@@ -177,7 +176,7 @@ $ docker run -d --name mariadb \
   bitnami/mariadb:latest
 ```
 
-#### Step 3. Create the Drupal container with host volumes
+##### Step 3. Create the Drupal container with host volumes
 
 ```console
 $ docker run -d --name drupal \
@@ -191,9 +190,9 @@ $ docker run -d --name drupal \
   bitnami/drupal-nginx:latest
 ```
 
-## Configuration
+### Configuration
 
-### Environment variables
+#### Environment variables
 
 When you start the Drupal image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
@@ -219,7 +218,7 @@ drupal:
 
 Available environment variables:
 
-##### User and Site configuration
+###### User and Site configuration
 
 - `DRUPAL_PROFILE`: Drupal installation profile. Default: **standard**
 - `DRUPAL_SITE_NAME`: Drupal blog name. Default: **My blog**
@@ -231,7 +230,7 @@ Available environment variables:
 - `DRUPAL_CONFIG_SYNC_DIR`: Drupal sync configuration directory location. Only used when `DRUPAL_SKIP_BOOTSTRAP` is enabled. No defaults.
 - `DRUPAL_HASH_SALT`: Drupal string used to generate random values. Only used when `DRUPAL_SKIP_BOOTSTRAP` is enabled. No defaults.
 
-##### Use an existing database
+###### Use an existing database
 
 - `DRUPAL_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
 - `DRUPAL_DATABASE_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
@@ -241,7 +240,7 @@ Available environment variables:
 - `DRUPAL_DATABASE_TLS_CA_FILE`: TLS CA certificate for connections. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-##### Create a database for Drupal using mysql-client
+###### Create a database for Drupal using mysql-client
 
 - `MYSQL_CLIENT_FLAVOR`: SQL database flavor. Valid values: `mariadb` or `mysql`. Default: **mariadb**.
 - `MYSQL_CLIENT_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
@@ -261,7 +260,7 @@ Available environment variables:
 - `MYSQL_CLIENT_SSL_KEY_FILE`: Path to the SSL CA file for the new database. No defaults
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-##### SMTP Configuration
+###### SMTP Configuration
 
 To configure Drupal to send email using SMTP you can set the following environment variables:
 
@@ -271,7 +270,7 @@ To configure Drupal to send email using SMTP you can set the following environme
 - `DRUPAL_SMTP_PASSWORD`: SMTP account password.
 - `DRUPAL_SMTP_PROTOCOL`: SMTP protocol. (standard, tls, ssl).
 
-##### PHP configuration
+###### PHP configuration
 
 - `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
 - `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
@@ -282,7 +281,7 @@ To configure Drupal to send email using SMTP you can set the following environme
 - `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
 - `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
 
-##### Example
+###### Example
 
 This would be an example of SMTP configuration using a Gmail account:
 
@@ -318,7 +317,7 @@ This would be an example of SMTP configuration using a Gmail account:
     bitnami/drupal-nginx:latest
   ```
 
-## Logging
+### Logging
 
 The Bitnami Drupal Docker image sends the container logs to `stdout`. To view the logs:
 
@@ -334,13 +333,13 @@ $ docker-compose logs drupal
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-## Maintenance
+### Maintenance
 
-### Backing up your container
+#### Backing up your container
 
 To backup your data, configuration and logs, follow these simple steps:
 
-#### Step 1: Stop the currently running container
+##### Step 1: Stop the currently running container
 
 ```console
 $ docker stop drupal
@@ -352,7 +351,7 @@ Or using Docker Compose:
 $ docker-compose stop drupal
 ```
 
-#### Step 2: Run the backup command
+##### Step 2: Run the backup command
 
 We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
 
@@ -361,7 +360,7 @@ $ docker run --rm -v /path/to/drupal-backups:/backups --volumes-from drupal busy
   cp -a /bitnami/drupal /backups/latest
 ```
 
-### Restoring a backup
+#### Restoring a backup
 
 Restoring a backup is as simple as mounting the backup as volumes in the containers.
 
@@ -385,17 +384,17 @@ For the Drupal container:
    bitnami/drupal-nginx:latest
 ```
 
-### Upgrade this image
+#### Upgrade this image
 
 Bitnami provides up-to-date versions of MariaDB and Drupal, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Drupal container. For the MariaDB upgrade see: https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
 
-#### Step 1: Get the updated image
+##### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/drupal-nginx:latest
 ```
 
-#### Step 2: Stop the running container
+##### Step 2: Stop the running container
 
 Stop the currently running container using the command
 
@@ -403,11 +402,11 @@ Stop the currently running container using the command
 $ docker-compose stop drupal
 ```
 
-#### Step 3: Take a snapshot of the application state
+##### Step 3: Take a snapshot of the application state
 
 Follow the steps in [Backing up your container](#backing-up-your-container) to take a snapshot of the current application state.
 
-#### Step 4: Remove the currently running container
+##### Step 4: Remove the currently running container
 
 Remove the currently running container by executing the following command:
 
@@ -415,7 +414,7 @@ Remove the currently running container by executing the following command:
 docker-compose rm -v drupal
 ```
 
-#### Step 5: Run the new image
+##### Step 5: Run the new image
 
 Update the image tag in `docker-compose.yml` and re-create your container with the new image:
 
@@ -423,11 +422,11 @@ Update the image tag in `docker-compose.yml` and re-create your container with t
 $ docker-compose up -d
 ```
 
-# Customize this image
+## Customize this image
 
 The Bitnami Drupal with NGINX Docker image is designed to be extended so it can be used as the base image for your custom web applications.
 
-## Extend this image
+### Extend this image
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
@@ -440,7 +439,7 @@ If your desired customizations cannot be covered using the methods mentioned abo
 
 ```Dockerfile
 FROM bitnami/drupal-nginx
-## Put your customizations below
+### Put your customizations below
 ...
 ```
 
@@ -454,14 +453,14 @@ Here is an example of extending the image with the following modifications:
 FROM bitnami/drupal-nginx
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-## Install 'vim'
+### Install 'vim'
 RUN install_packages vim
 
-## Update ssl_session_timeout
+### Update ssl_session_timeout
 RUN sed -i -r -E 's/ssl_session_timeout\s+5m;/ssl_session_timeout  5m;/' /opt/bitnami/nginx/conf/nginx.conf
 
-## Modify the ports used by NGINX by default
-# It is also possible to change these environment variables at runtime
+### Modify the ports used by NGINX by default
+## It is also possible to change these environment variables at runtime
 ENV NGINX_HTTP_PORT_NUMBER=8181
 ENV NGINX_HTTPS_PORT_NUMBER=8143
 EXPOSE 8181 8143
@@ -483,9 +482,9 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
      ...
 ```
 
-# Notable Changes
+## Notable Changes
 
-## 8.9.2-debian-10-r3 and 9.0.2-debian-10-r3
+### 8.9.2-debian-10-r3 and 9.0.2-debian-10-r3
 
 - The size of the container image has been decreased.
 - The configuration logic is now based on Bash scripts in the *rootfs/* folder.
@@ -493,17 +492,17 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
   - The HTTP/HTTPS ports exposed by the container are now `8080/8443` instead of `80/443`.
   - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the Drupal site by exporting its content, and importing it on a new Drupal container. Follow the steps in [Backing up your container](#backing-up-your-container) and [Restoring a backup](#restoring-a-backup) to migrate the data between the old and new container.
 
-## 8.7.2-debian-9-r9 and 8.7.2-ol-7-r8
+### 8.7.2-debian-9-r9 and 8.7.2-ol-7-r8
 
 - This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
 - The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
 - Enabling custom NGINX certificates by placing them at `/opt/bitnami/nginx/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-drupal-nginx/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-drupal-nginx/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-drupal-nginx/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -514,7 +513,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - The command you used to run the container, and any relevant output you saw (masking any sensitive
 information)
 
-# License
+## License
 
 Copyright (c) 2021 Bitnami
 
