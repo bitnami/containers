@@ -1,8 +1,10 @@
-# What is Grafana?
+# Grafana packaged by Bitnami
 
-Grafana is an open source, feature rich metrics dashboard and graph editor for Graphite, Elasticsearch, OpenTSDB, Prometheus and InfluxDB.
+## What is Grafana?
 
-[https://grafana.com](https://grafana.com)
+> Grafana is an open source metric analytics and visualization suite for visualizing time series data that supports various types of data sources.
+
+[Overview of Grafana](https://grafana.com/)
 
 ## TL;DR
 
@@ -36,7 +38,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8`, `8-debian-10`, `8.2.3`, `8.2.3-debian-10-r1`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/8.2.3-debian-10-r1/8/debian-10/Dockerfile)
+* [`8`, `8-debian-10`, `8.2.3`, `8.2.3-debian-10-r2`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/8.2.3-debian-10-r2/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
 
