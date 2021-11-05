@@ -1,10 +1,12 @@
-# What is NGINX Ingress Controller?
+# NGINX Ingress Controller packaged by Bitnami
 
-NGINX Ingress Controller is an Ingress controller that uses NGINX to manage external access to HTTP services in a Kubernetes cluster.
+## What is NGINX Ingress Controller?
 
-https://github.com/kubernetes/ingress-nginx
+> NGINX Ingress Controller is an Ingress controller that manages external access to HTTP services in a Kubernetes cluster using NGINX.
 
-# TL;DR
+[Overview of NGINX Ingress Controller](https://kubernetes.github.io/ingress-nginx/)
+
+## TL;DR
 
 Deploy NGINX Ingress Controller for Kubernetes on your [Kubernetes cluster](https://kubernetes.io/docs/concepts/services-networking/ingress/).
 
@@ -13,7 +15,7 @@ Deploy NGINX Ingress Controller for Kubernetes on your [Kubernetes cluster](http
 $ docker run --name nginx-ingress-controller bitnami/nginx-ingress-controller:latest
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -25,36 +27,33 @@ $ docker run --name nginx-ingress-controller bitnami/nginx-ingress-controller:la
 
 > This [CVE scan report](https://quay.io/repository/bitnami/nginx-ingress-controller?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy NGINX Ingress Controller in Kubernetes?
+## How to deploy NGINX Ingress Controller in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami NGINX Ingress Controller Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/nginx-ingress-controller).
 
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 
 * [`1`, `1-debian-10`, `1.0.4`, `1.0.4-debian-10-r22`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/blob/1.0.4-debian-10-r22/1/debian-10/Dockerfile)
-* [`0`, `0-debian-10`, `0.49.3`, `0.49.3-debian-10-r29` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/blob/0.49.3-debian-10-r29/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.49.3`, `0.49.3-debian-10-r30` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/blob/0.49.3-debian-10-r30/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nginx-ingress-controller GitHub repo](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller).
 
 
-# Configuration
+## Configuration
 
 For further documentation, please check [here](https://github.com/kubernetes/ingress-nginx).
 
-# Branch Deprecation Notice
 
-NGINX Ingress Controller's branch 0 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 11-15-2021
-
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/issues), or submit a [pull
 request](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -64,7 +63,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 Copyright 2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
