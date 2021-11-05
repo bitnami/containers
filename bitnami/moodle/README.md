@@ -1,12 +1,10 @@
-# Bitnami Docker Image for Moodle&trade; LMS
+# Bitnami LMS powered by Moodle(TM) LMS
 
-## What is Moodle&trade;?
+## What is Bitnami LMS powered by Moodle(TM) LMS?
 
-Disclaimer: The respective trademarks mentioned in the offering are owned by the respective companies. We do not provide commercial license of any of these products. This listing has an open source license. Moodle&trade; LMS is run and maintained by Moodle HQ, that is a completely and separate project from Bitnami.
+> Moodle(TM) LMS is an open source online Learning Management System widely used at universities, schools, and corporations. It is modular and highly adaptable to any type of online learning.
 
->Moodle(TM) is a very popular open source learning management solution (LMS) for the delivery of elearning courses and programs. It’s used not only by universities, but also by hundreds of corporations around the world who provide eLearning education for their employees. Moodle(TM) features a simple interface, drag-and-drop features, role-based permissions, deep reporting, many language translations, a well-documented API and more. With some of the biggest universities and organizations already using it, Moodle(TM) is ready to meet the needs of just about any size organization.
-
-https://moodle.org/
+[Overview of Bitnami LMS powered by Moodle(TM) LMS](http://moodle.org/)
 
 ## TL;DR
 
@@ -39,7 +37,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.11.3`, `3.11.3-debian-10-r51`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.11.3-debian-10-r51/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.11.3`, `3.11.3-debian-10-r52`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.11.3-debian-10-r52/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/moodle GitHub repo](https://github.com/bitnami/bitnami-docker-moodle).
 
