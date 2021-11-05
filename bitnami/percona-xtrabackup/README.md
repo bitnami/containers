@@ -1,17 +1,18 @@
+# Percona XtraBackup packaged by Bitnami
 
-# What is Percona XtraBackup?
+## What is Percona XtraBackup?
 
-> Percona XtraBackup is a free, online, open source, complete database backups solution for all versions of Percona Server for MySQL and MySQL®. Percona XtraBackup performs online non-blocking, tightly compressed, highly secure full backups on transactional systems so that applications remain fully available during planned maintenance windows.
+> Percona XtraBackup is a set of tools for performing backups of MySQL databases. It executes online non-blocking, tightly compressed, and highly secure full backups on transactional systems.
 
-[Overview of Percona Xtrabackup](https://www.percona.com/software/mysql-database/percona-xtrabackup/)
+[Overview of Percona XtraBackup](https://www.percona.com/software/mysql-database/percona-xtrabackup/)
 
-# TL;DR
+## TL;DR
 
 ```console
 $ docker run --name percona-xtrabackup bitnami/percona-xtrabackup:latest
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -23,17 +24,17 @@ $ docker run --name percona-xtrabackup bitnami/percona-xtrabackup:latest
 
 > This [CVE scan report](https://quay.io/repository/bitnami/percona-xtrabackup?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
 * [`8`, `8-debian-10`, `8.0.26-18`, `8.0.26-18-debian-10-r60`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-percona-xtrabackup/blob/8.0.26-18-debian-10-r60/8/debian-10/Dockerfile)
-* [`2.4`, `2.4-debian-10`, `2.4.24`, `2.4.24-debian-10-r50` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-percona-xtrabackup/blob/2.4.24-debian-10-r50/2.4/debian-10/Dockerfile)
+* [`2.4`, `2.4-debian-10`, `2.4.24`, `2.4.24-debian-10-r51` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-percona-xtrabackup/blob/2.4.24-debian-10-r51/2.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/percona-xtrabackup GitHub repo](https://github.com/bitnami/bitnami-docker-percona-xtrabackup).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami percona-xtrabackup Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/percona-xtrabackup).
 
@@ -53,9 +54,9 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/percona-xtrabackup:latest 'https://github.com/bitnami/bitnami-docker-percona-xtrabackup.git#master:8/debian-10'
 ```
 
-# Configuration
+## Configuration
 
-## Running commands
+### Running commands
 
 To run commands inside this container you can use `docker run`. The container has the Percona XtraBackup tools `xtrabackup`, `xbstream`, `xbcrypt` and `xbcloud`. For example, to run `xtrabackup --version` you can follow the example below:
 
@@ -65,11 +66,11 @@ $ docker run --rm --name percona-xtrabackup bitnami/percona-xtrabackup:latest --
 
 Check the [official percona-xtrabackup documentation](https://www.percona.com/doc/percona-xtrabackup/LATEST/manual.html) for a list of the available parameters.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-percona-xtrabackup/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-percona-xtrabackup/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-percona-xtrabackup/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -79,7 +80,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2021 Bitnami
 
