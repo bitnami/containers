@@ -1,17 +1,18 @@
+# MetalLB Speaker packaged by Bitnami
 
-# What is MetalLB Speaker?
+## What is MetalLB Speaker?
 
-> MetalLB is a load-balancer that allows enabling "LoadBalancer" service addresses in any bare-metal Kubernetes installation. MetalLB speaker is the per-node daemon that advertises services with assigned IPs.
+> MetalLB is a load-balancer that allows enabling "LoadBalancer" service addresses in any bare-metal Kubernetes installation. MetalLB speaker is in charge of IP advertisement.
 
-[Overview of metallb](https://metallb.universe.tf/)
+[Overview of MetalLB Speaker](https://metallb.universe.tf/)
 
-# TL;DR
+## TL;DR
 
 ```console
 $ docker run --name metallb-speaker bitnami/metallb-speaker:latest
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -23,16 +24,16 @@ $ docker run --name metallb-speaker bitnami/metallb-speaker:latest
 
 > This [CVE scan report](https://quay.io/repository/bitnami/metallb-speaker?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.11.0`, `0.11.0-debian-10-r6`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-metallb-speaker/blob/0.11.0-debian-10-r6/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.11.0`, `0.11.0-debian-10-r7`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-metallb-speaker/blob/0.11.0-debian-10-r7/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/metallb-speaker GitHub repo](https://github.com/bitnami/bitnami-docker-metallb-speaker).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami metallb-speaker Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/metallb-speaker).
 
@@ -52,9 +53,9 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/metallb-speaker:latest 'https://github.com/bitnami/bitnami-docker-metallb-speaker.git#master:0/debian-10'
 ```
 
-# Configuration
+## Configuration
 
-## Running commands
+### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `metallb-speaker --version` you can follow the example below:
 
@@ -64,11 +65,11 @@ $ docker run --rm --name metallb-speaker bitnami/metallb-speaker:latest -- --ver
 
 Consult the [metallb Reference Documentation](https://metallb.universe.tf/configuration/) to find the available configuration parameters. Note that this container is expected to be used in a Kubernetes cluster.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-metallb-speaker/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-metallb-speaker/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-metallb-speaker/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -78,7 +79,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2021 Bitnami
 
