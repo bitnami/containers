@@ -1,8 +1,12 @@
-# What is Tomcat?
+# Tomcat packaged by Bitnami
 
-> [Apache Tomcat](http://tomcat.apache.org), often referred to as Tomcat, is an open-source web server and servlet container developed by the [Apache Software Foundation (ASF)](https://www.apache.org). Tomcat implements several Java EE specifications including Java Servlet, JavaServer Pages (JSP), Java EL, and WebSocket, and provides a "pure Java" HTTP web server environment for Java code to run in.
+## What is Tomcat?
 
-# TL;DR
+> Tomcat is an open source web server designed to host and run Java-based web applications. It is a lightweight server that provides good performance for applications running in production environments.
+
+[Overview of Tomcat](http://tomcat.apache.org/)
+
+## TL;DR
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-tomcat/master/docker-compose.yml > docker-compose.yml
@@ -11,7 +15,7 @@ $ docker-compose up -d
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -23,28 +27,28 @@ You can find the default credentials and available configuration options in the 
 
 > This [CVE scan report](https://quay.io/repository/bitnami/tomcat?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy Apache Tomcat in Kubernetes?
+## How to deploy Apache Tomcat in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Apache Tomcat Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/tomcat).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10`, `10-debian-10`, `10.0.12`, `10.0.12-debian-10-r30` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/10.0.12-debian-10-r30/10/debian-10/Dockerfile)
+* [`10`, `10-debian-10`, `10.0.12`, `10.0.12-debian-10-r31` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/10.0.12-debian-10-r31/10/debian-10/Dockerfile)
 * [`9.0`, `9.0-debian-10`, `9.0.54`, `9.0.54-debian-10-r33`, `latest` (9.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.54-debian-10-r33/9.0/debian-10/Dockerfile)
 * [`8.5`, `8.5-debian-10`, `8.5.72`, `8.5.72-debian-10-r30` (8.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.72-debian-10-r30/8.5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tomcat GitHub repo](https://github.com/bitnami/bitnami-docker-tomcat).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami Tomcat Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/tomcat).
 
@@ -64,7 +68,7 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/tomcat:latest 'https://github.com/bitnami/bitnami-docker-tomcat.git#master:9.0/debian-10'
 ```
 
-# Persisting your application
+## Persisting your application
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -87,7 +91,7 @@ services:
 
 > NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-# Deploying web applications on Tomcat
+## Deploying web applications on Tomcat
 
 The `/bitnami/tomcat/data` directory is configured as the Tomcat webapps deployment directory. At this location, you either copy a so-called *exploded web application*, i.e. non-compressed, or a compressed web application resource (`.WAR`) file and it will automatically be deployed by Tomcat.
 
@@ -111,7 +115,7 @@ You can also deploy web applications on a running Tomcat instance using the Tomc
 
   - [Tomcat Web Application Deployment](https://tomcat.apache.org/tomcat-7.0-doc/deployer-howto.html)
 
-# Accessing your Tomcat server from the host
+## Accessing your Tomcat server from the host
 
 To access your web server from your host machine you can ask Docker to map a random port on your host to port `8080` exposed in the container.
 
@@ -134,9 +138,9 @@ $ docker run -p 8080:8080 bitnami/tomcat:latest
 
 Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/).
 
-# Configuration
+## Configuration
 
-## Environment variables
+### Environment variables
 
 The Tomcat instance can be customized by specifying environment variables on the first run. The following environment values are provided to custom Tomcat:
 
@@ -150,13 +154,13 @@ The Tomcat instance can be customized by specifying environment variables on the
 - `TOMCAT_ENABLE_AJP`: Whether to enable the Tomcat AJP connector. Default: **no**
 - `TOMCAT_EXTRA_JAVA_OPTS`: Additional Java settings for Tomcat. No defaults.
 
-### Creating a custom user
+#### Creating a custom user
 
 By default, a management user named `user` is created and is not assigned a password. Passing the `TOMCAT_PASSWORD` environment variable when running the image for the first time will set the password of this user to the value of `TOMCAT_PASSWORD`.
 
 Additionally you can specify a user name for the management user using the `TOMCAT_USERNAME` environment variable. When not specified, the `TOMCAT_PASSWORD` configuration is applied on the default user (`user`).
 
-### Specifying Environment variables using Docker Compose
+#### Specifying Environment variables using Docker Compose
 
 This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-tomcat/blob/master/docker-compose.yml) file present in this repository:
 
@@ -170,7 +174,7 @@ services:
   ...
 ```
 
-### Specifying Environment variables on the Docker command line
+#### Specifying Environment variables on the Docker command line
 
 ```console
 $ docker run --name tomcat \
@@ -179,7 +183,7 @@ $ docker run --name tomcat \
   bitnami/tomcat:latest
 ```
 
-## Configuration files
+### Configuration files
 
 During the initialization of the container, the default Tomcat configuration files are modified with the basic options defined through [environment variables](#environment-variables). If you want to add more specific configuration options, you can always mount your own configuration files under `/opt/bitnami/tomcat/conf/` to override the existing ones. Please note that those files should be writable by the system user of the container.
 
@@ -200,7 +204,7 @@ services:
 
 Refer to the [Tomcat configuration](https://tomcat.apache.org/tomcat-7.0-doc/config/index.html) manual for the complete list of configuration options.
 
-# Logging
+## Logging
 
 The Bitnami Tomcat Docker image sends the container logs to the `stdout`. To view the logs:
 
@@ -216,13 +220,13 @@ $ docker-compose logs tomcat
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of Tomcat, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/tomcat:latest
@@ -231,7 +235,7 @@ $ docker pull bitnami/tomcat:latest
 or if you're using Docker Compose, update the value of the image property to
 `bitnami/tomcat:latest`.
 
-### Step 2: Stop and backup the currently running container
+#### Step 2: Stop and backup the currently running container
 
 Stop the currently running container using the command
 
@@ -251,7 +255,7 @@ Next, take a snapshot of the persistent volume `/path/to/tomcat-persistence` usi
 $ rsync -a /path/to/tomcat-persistence /path/to/tomcat-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
-### Step 3: Remove the currently running container
+#### Step 3: Remove the currently running container
 
 ```console
 $ docker rm -v tomcat
@@ -263,7 +267,7 @@ or using Docker Compose:
 $ docker-compose rm -v tomcat
 ```
 
-### Step 4: Run the new image
+#### Step 4: Run the new image
 
 Re-create your container from the new image.
 
@@ -277,30 +281,30 @@ or using Docker Compose:
 $ docker-compose up tomcat
 ```
 
-# Notable Changes
+## Notable Changes
 
-## Debian: 9.0.26-r0, 8.5.46-r0, 8.0.53-r382, 7.0.96-r50. Oracle: 9.0.24-ol-7-r35, 8.5.45-ol-7-r34, 8.0.53-ol-7-r426, 7.0.96-ol-7-r61
+### Debian: 9.0.26-r0, 8.5.46-r0, 8.0.53-r382, 7.0.96-r50. Oracle: 9.0.24-ol-7-r35, 8.5.45-ol-7-r34, 8.0.53-ol-7-r426, 7.0.96-ol-7-r61
 
 - Decrease the size of the container. The configuration logic is now based on Bash scripts in the `rootfs/` folder.
 
-## 9.0.13-r27 , 8.5.35-r26, 8.0.53-r131 & 7.0.92-r20
+### 9.0.13-r27 , 8.5.35-r26, 8.0.53-r131 & 7.0.92-r20
 
 - The Tomcat container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Tomcat daemon was started as the `tomcat` user. From now on, both the container and the Tomcat daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
-## 8.0.35-r3
+### 8.0.35-r3
 
 - `TOMCAT_USER` parameter has been renamed to `TOMCAT_USERNAME`.
 
-## 8.0.35-r0
+### 8.0.35-r0
 
 - All volumes have been merged at `/bitnami/tomcat`. Now you only need to mount a single volume at `/bitnami/tomcat` for persistence.
 - The logs are always sent to the `stdout` and are no longer collected in the volume.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-tomcat/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-tomcat/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-tomcat/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -310,7 +314,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright (c) 2015-2021 Bitnami
 
