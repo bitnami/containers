@@ -1,12 +1,10 @@
-# Bitnami Docker Image for MinIO(R) Client
+# Bitnami Object Storage Client based on MinIO(R)
 
 ## What is Bitnami Object Storage Client based on MinIO(R)?
 
-> This software listing is packaged and published by Bitnami. MinIO(R) Client is a Golang CLI tool that offers alternatives for ls, cp, mkdir, diff, and rsync commands for filesystems and object storage systems.
+> MinIO(R) Client is a Golang CLI tool that offers alternatives for ls, cp, mkdir, diff, and rsync commands for filesystems and object storage systems.
 
-[min.io](https://min.io/)
-
-Disclaimer: All software products, projects and company names are trademark(TM) or registered(R) trademarks of their respective holders, and use of them does not imply any affiliation or endorsement. This software is licensed to you subject to one or more open source licenses and VMware provides the software on an AS-IS basis. MinIO(R) is a registered trademark of the MinIO, Inc. in the US and other countries. Bitnami is not affiliated, associated, authorized, endorsed by, or in any way officially connected with MinIO, Inc. MinIO(R) is licensed under GNU AGPL v3.0.
+[Overview of Bitnami Object Storage Client based on MinIO(R)](https://min.io/)
 
 ## TL;DR
 
@@ -41,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2021`, `2021-debian-10`, `2021.10.7`, `2021.10.7-debian-10-r28`, `latest` (2021/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2021.10.7-debian-10-r28/2021/debian-10/Dockerfile)
+* [`2021`, `2021-debian-10`, `2021.11.5`, `2021.11.5-debian-10-r0`, `latest` (2021/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2021.11.5-debian-10-r0/2021/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/minio-client GitHub repo](https://github.com/bitnami/bitnami-docker-minio-client).
 
@@ -87,8 +85,8 @@ Use the `--network app-tier` argument to the `docker run` command to attach the 
 
 ```console
 $ docker run -d --name minio-server \
-    --env MINIO_ROOT_USER="minio-root-user" \
-    --env MINIO_ROOT_PASSWORD="minio-root-pass" \
+    --env MINIO_ACCESS_KEY="minio-access-key" \
+    --env MINIO_SECRET_KEY="minio-secret-key" \
     --network app-tier \
     bitnami/minio:latest
 ```
@@ -100,8 +98,8 @@ Finally we create a new container instance to launch the MinIO(R) client and con
 ```console
 $ docker run --rm --name minio-client \
     --env MINIO_SERVER_HOST="minio" \
-    --env MINIO_SERVER_ROOT_USER="minio-root-user" \
-    --env MINIO_SERVER_ROOT_PASSWORD="minio-root-pass" \
+    --env MINIO_SERVER_ACCESS_KEY="minio-access-key" \
+    --env MINIO_SERVER_SECRET_KEY="minio-secret-key" \
     --network app-tier \
     bitnami/minio-client \
     mb minio/my-bucket
@@ -114,27 +112,21 @@ MinIO(R) Client (`mc`) can be setup so it is already configured to point to a sp
 - `MINIO_SERVER_HOST`: MinIO(R) server host.
 - `MINIO_SERVER_PORT_NUMBER`: MinIO(R) server port. Default: `9000`.
 - `MINIO_SERVER_SCHEME`: MinIO(R) server scheme. Default: `http`.
-- `MINIO_SERVER_ROOT_USER`: MinIO(R) server root user name. Must be common on every node.
-- `MINIO_SERVER_ROOT_PASSWORD`: Password for MinIO(R) server root user. Must be common on every node.
+- `MINIO_SERVER_ACCESS_KEY`: MinIO(R) server Access Key. Must be common on every node.
+- `MINIO_SERVER_SECRET_KEY`: MinIO(R) server Secret Key. Must be common on every node.
 
 For instance, use the command below to create a new bucket in the MinIO(R) Server `my.minio.domain`:
 
 ```console
 $ docker run --rm --name minio-client \
     --env MINIO_SERVER_HOST="my.minio.domain" \
-    --env MINIO_SERVER_ROOT_USER="minio-root-user" \
-    --env MINIO_SERVER_ROOT_PASSWORD="minio-root-pass" \
+    --env MINIO_SERVER_ACCESS_KEY="minio-access-key" \
+    --env MINIO_SERVER_SECRET_KEY="minio-secret-key" \
     bitnami/minio-client \
     mb minio/my-bucket
 ```
 
 Find more information about the client configuration in the [MinIO(R) Client documentation](https://docs.min.io/docs/minio-admin-complete-guide.html).
-
-## Notable Changes
-
-### 2021.10.7-debian-10-r11
-
-- The `MINIO_SERVER_ACCESS_KEY` and `MINIO_SERVER_SECRET_KEY`, environment variables were deprecated in favor of `MINIO_SERVER_ROOT_USER` and `MINIO_SERVER_ROOT_PASSWORD`, respectively, so it's aligned with the [current terminology](https://docs.min.io/minio/baremetal/security/minio-identity-management/user-management.html#minio-users-root).
 
 ## Contributing
 
