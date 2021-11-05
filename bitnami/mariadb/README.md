@@ -1,16 +1,18 @@
-# What is MariaDB?
+# MariaDB packaged by Bitnami
 
-> MariaDB is a fast, reliable, scalable, and easy to use open-source relational database system. MariaDB Server is intended for mission-critical, heavy-load production systems as well as for embedding into mass-deployed software.
+## What is MariaDB?
 
-[https://mariadb.com/](https://mariadb.com/)
+> MariaDB is an open source, community-developed SQL database server that is widely in use around the world due to its enterprise features, flexibility, and collaboration with leading tech firms.
 
-# TL;DR
+[Overview of MariaDB](https://mariadb.org/)
+
+## TL;DR
 
 ```console
 $ docker run --name mariadb -e ALLOW_EMPTY_PASSWORD=yes bitnami/mariadb:latest
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-mariadb/master/docker-compose.yml > docker-compose.yml
@@ -19,7 +21,7 @@ $ docker-compose up -d
 
 **Warning**: These quick setups are only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -31,17 +33,17 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/mariadb?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy MariaDB in Kubernetes?
+## How to deploy MariaDB in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami MariaDB Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/mariadb).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
@@ -50,11 +52,11 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`10.5`, `10.5-debian-10`, `10.5.12`, `10.5.12-debian-10-r78` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.5.12-debian-10-r78/10.5/debian-10/Dockerfile)
 * [`10.4`, `10.4-debian-10`, `10.4.21`, `10.4.21-debian-10-r88` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.21-debian-10-r88/10.4/debian-10/Dockerfile)
 * [`10.3`, `10.3-debian-10`, `10.3.31`, `10.3.31-debian-10-r88` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.31-debian-10-r88/10.3/debian-10/Dockerfile)
-* [`10.2`, `10.2-debian-10`, `10.2.40`, `10.2.40-debian-10-r88` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.40-debian-10-r88/10.2/debian-10/Dockerfile)
+* [`10.2`, `10.2-debian-10`, `10.2.40`, `10.2.40-debian-10-r89` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.40-debian-10-r89/10.2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami MariaDB Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mariadb).
 
@@ -78,7 +80,7 @@ $ cd bitnami-docker-mariadb/VERSION/OPERATING-SYSTEM
 $ docker build -t bitnami/mariadb:latest .
 ```
 
-# Persisting your database
+## Persisting your database
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -104,23 +106,23 @@ services:
 
 > NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-# Connecting to other containers
+## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a MariaDB server running inside a container can easily be accessed by your application containers.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-## Using the Command Line
+### Using the Command Line
 
 In this example, we will create a MariaDB client instance that will connect to the server instance that is running on the same docker network as the client.
 
-### Step 1: Create a network
+#### Step 1: Create a network
 
 ```console
 $ docker network create app-tier --driver bridge
 ```
 
-### Step 2: Launch the MariaDB server instance
+#### Step 2: Launch the MariaDB server instance
 
 Use the `--network app-tier` argument to the `docker run` command to attach the MariaDB container to the `app-tier` network.
 
@@ -131,7 +133,7 @@ $ docker run -d --name mariadb-server \
     bitnami/mariadb:latest
 ```
 
-### Step 3: Launch your MariaDB client instance
+#### Step 3: Launch your MariaDB client instance
 
 Finally we create a new container instance to launch the MariaDB client and connect to the server created in the previous step:
 
@@ -141,7 +143,7 @@ $ docker run -it --rm \
     bitnami/mariadb:latest mysql -h mariadb-server -u root
 ```
 
-## Using Docker Compose
+### Using Docker Compose
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the MariaDB server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
@@ -176,9 +178,9 @@ Launch the containers using:
 $ docker-compose up -d
 ```
 
-# Configuration
+## Configuration
 
-## Initializing a new instance
+### Initializing a new instance
 
 When the container is executed for the first time, it will execute the files with extensions `.sh`, `.sql` and `.sql.gz` located at `/docker-entrypoint-initdb.d`.
 
@@ -186,7 +188,7 @@ In order to have your custom files inside the docker image you can mount them as
 
 Take into account those scripts are treated differently depending on the extension. While the `.sh` scripts are executed in all the nodes; the `.sql` and `.sql.gz` scripts are only executed in the master nodes. The reason behind this differentiation is that the `.sh` scripts allow adding conditions to determine what is the node running the script, while these conditions can't be set using `.sql` nor `sql.gz` files. This way it is possible to cover different use cases depending on their needs.
 
-## Passing extra command-line flags to mysqld startup
+### Passing extra command-line flags to mysqld startup
 
 Passing extra command-line flags to the mysqld service command is possible through the following env var:
 
@@ -208,14 +210,14 @@ services:
   ...
 ```
 
-## Setting character set and collation
+### Setting character set and collation
 
 It is possible to configure the character set and collation used by default by the database with the following environment variables:
 
 - `MARIADB_CHARACTER_SET`: The default character set to use. Default: `utf8`
 - `MARIADB_COLLATE`: The default collation to use. Default: `utf8_general_ci`
 
-## Setting the root password on first run
+### Setting the root password on first run
 
 The root user and password can easily be setup with the Bitnami MariaDB Docker image using the following environment variables:
 
@@ -242,7 +244,7 @@ services:
 
 **Warning** The `MARIADB_ROOT_USER` user is always created with remote access. It's suggested that the `MARIADB_ROOT_PASSWORD` env variable is always specified to set a password for the `MARIADB_ROOT_USER` user. In case you want to allow the `MARIADB_ROOT_USER` user to access the database without a password set the environment variable `ALLOW_EMPTY_PASSWORD=yes`. **This is recommended only for development**.
 
-## Allowing empty passwords
+### Allowing empty passwords
 
 By default the MariaDB image expects all the available passwords to be set. In order to allow empty passwords, it is necessary to set the `ALLOW_EMPTY_PASSWORD=yes` env variable. This env variable is only recommended for testing or development purposes. We strongly recommend specifying the `MARIADB_ROOT_PASSWORD` for any other scenario.
 
@@ -262,7 +264,7 @@ services:
   ...
 ```
 
-## Creating a database on first run
+### Creating a database on first run
 
 By passing the `MARIADB_DATABASE` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the MySQL client.
 
@@ -285,7 +287,7 @@ services:
   ...
 ```
 
-## Creating a database user on first run
+### Creating a database user on first run
 
 You can create a restricted database user that only has permissions for the database created with the [`MARIADB_DATABASE`](#creating-a-database-on-first-run) environment variable. To do this, provide the `MARIADB_USER` environment variable and to set a password for the database user provide the `MARIADB_PASSWORD` variable (alternatively, you can set the `MARIADB_PASSWORD_FILE` with the path to a file that contains the user password). MariaDB supports different authentication mechanisms, such as `pam` or `mysql_native_password`. To set it, use the `MARIADB_AUTHENTICATION_PLUGIN` variable.
 
@@ -314,7 +316,7 @@ services:
 
 **Note!** The `root` user will be created with remote access and without a password if `ALLOW_EMPTY_PASSWORD` is enabled. Please provide the `MARIADB_ROOT_PASSWORD` env variable instead if you want to set a password for the `root` user.
 
-## Disable creation of test database
+### Disable creation of test database
 
 By default MariaDB creates a test database. In order to disable the creation of this test database, the flag `--skip-test-db` can be passed to `mysql_install_db`. This function is only on MariaDB >= `10.5`.
 
@@ -339,12 +341,12 @@ services:
   ...
 ```
 
-## Slow filesystems
+### Slow filesystems
 
 In some platforms, the filesystem used for persistence could be slow. That could cause the database to take extra time to be ready. If that's the case, you can configure the `MARIADB_INIT_SLEEP_TIME` environment variable to make the initialization script to wait extra time (in seconds) before proceeding with the configuration operations.
 
 
-## Setting up a replication cluster
+### Setting up a replication cluster
 
 A **zero downtime** MariaDB master-slave [replication](https://dev.mysql.com/doc/refman/5.7/en/server-option-variable-reference.html) cluster can easily be setup with the Bitnami MariaDB Docker image using the following environment variables:
 
@@ -361,7 +363,7 @@ A **zero downtime** MariaDB master-slave [replication](https://dev.mysql.com/doc
 In a replication cluster you can have one master and zero or more slaves. When replication is enabled the master node is in read-write mode, while the slaves are in read-only mode. For best performance its advisable to limit the reads to the slaves.
 
 > **Note**: you can use the [mariadb-galera image](https://github.com/bitnami/bitnami-docker-mariadb-galera) to set up a master-master replication cluster
-### Step 1: Create the replication master
+#### Step 1: Create the replication master
 
 The first step is to start the MariaDB master.
 
@@ -379,7 +381,7 @@ $ docker run --name mariadb-master \
 
 In the above command the container is configured as the `master` using the `MARIADB_REPLICATION_MODE` parameter. A replication user is specified using the `MARIADB_REPLICATION_USER` and `MARIADB_REPLICATION_PASSWORD` parameters.
 
-### Step 2: Create the replication slave
+#### Step 2: Create the replication slave
 
 Next we start a MariaDB slave container.
 
@@ -442,20 +444,20 @@ The above command scales up the number of slaves to `3`. You can scale down in t
 
 > **Note**: You should not scale up/down the number of master nodes. Always have only one master node running.
 
-## Configuration file
+### Configuration file
 
 The image looks for user-defined configurations in `/opt/bitnami/mariadb/conf/my_custom.cnf`. Create a file named `my_custom.cnf` and mount it at `/opt/bitnami/mariadb/conf/my_custom.cnf`.
 
 For example, in order to override the `max_allowed_packet` directive:
 
-### Step 1: Write your `my_custom.cnf` file with the following content.
+#### Step 1: Write your `my_custom.cnf` file with the following content.
 
 ```config
 [mysqld]
 max_allowed_packet=32M
 ```
 
-### Step 2: Run the mariaDB image with the designed volume attached.
+#### Step 2: Run the mariaDB image with the designed volume attached.
 
 ```console
 $ docker run --name mariadb \
@@ -482,7 +484,7 @@ After that, your changes will be taken into account in the server's behaviour.
 
 Refer to the [MariaDB server option and variable reference guide](https://dev.mysql.com/doc/refman/5.7/en/server-option-variable-reference.html) for the complete list of configuration options.
 
-### Overwrite the main Configuration file
+#### Overwrite the main Configuration file
 
 It is also possible to use your custom `my.cnf` and overwrite the main configuration file.
 
@@ -490,11 +492,11 @@ It is also possible to use your custom `my.cnf` and overwrite the main configura
 $ docker run --name mariadb  -e ALLOW_EMPTY_PASSWORD=yes -v /path/to/my.cnf:/opt/bitnami/mariadb/conf/my.cnf:ro bitnami/mariadb:latest
 ```
 
-# Customize this image
+## Customize this image
 
 The Bitnami MariaDB Docker image is designed to be extended so it can be used as the base image for your custom configuration.
 
-## Extend this image
+### Extend this image
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
@@ -504,7 +506,7 @@ If your desired customizations cannot be covered using the methods mentioned abo
 
 ```Dockerfile
 FROM bitnami/mariadb
-## Put your customizations below
+### Put your customizations below
 ...
 ```
 
@@ -519,22 +521,22 @@ Here is an example of extending the image with the following modifications:
 FROM bitnami/mariadb
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-## Change user to perform privileged actions
+### Change user to perform privileged actions
 USER 0
-## Install 'vim'
+### Install 'vim'
 RUN install_packages vim
-## Revert to the original non-root user
+### Revert to the original non-root user
 USER 1001
 
-## modify configuration file.
+### modify configuration file.
 RUN ini-file set --section "mysqld" --key "collation-server" --value "utf8_general_ci" "/opt/bitnami/mariadb/conf/my.cnf"
 
-## Modify the ports used by MariaDB by default
-# It is also possible to change these environment variables at runtime
+### Modify the ports used by MariaDB by default
+## It is also possible to change these environment variables at runtime
 ENV MARIADB_PORT_NUMBER=3307
 EXPOSE 3307
 
-## Modify the default container user
+### Modify the default container user
 USER 1002
 ```
 
@@ -558,7 +560,7 @@ volumes:
     driver: local
 ```
 
-# Logging
+## Logging
 
 The Bitnami MariaDB Docker image sends the container logs to the `stdout`. To view the logs:
 
@@ -574,13 +576,13 @@ $ docker-compose logs mariadb
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of MariaDB, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/mariadb:latest
@@ -589,7 +591,7 @@ $ docker pull bitnami/mariadb:latest
 or if you're using Docker Compose, update the value of the image property to
 `bitnami/mariadb:latest`.
 
-### Step 2: Stop and backup the currently running container
+#### Step 2: Stop and backup the currently running container
 
 Stop the currently running container using the command
 
@@ -611,7 +613,7 @@ $ rsync -a /path/to/mariadb-persistence /path/to/mariadb-persistence.bkp.$(date 
 
 You can use this snapshot to restore the database state should the upgrade fail.
 
-### Step 3: Remove the currently running container
+#### Step 3: Remove the currently running container
 
 ```console
 $ docker rm -v mariadb
@@ -623,7 +625,7 @@ or using Docker Compose:
 $ docker-compose rm -v mariadb
 ```
 
-### Step 4: Run the new image
+#### Step 4: Run the new image
 
 Re-create your container from the new image.
 
@@ -637,20 +639,20 @@ or using Docker Compose:
 $ docker-compose up mariadb
 ```
 
-# Useful Links
+## Useful Links
 
 - [Create An AMP Development Environment With Bitnami Containers
 ](https://docs.bitnami.com/containers/how-to/create-amp-environment-containers/)
 - [Create An EMP Development Environment With Bitnami Containers
 ](https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/)
 
-# Notable Changes
+## Notable Changes
 
-## 10.4.13-debian-10-r12, 10.3.23-debian-10-r14, 10.2.32-debian-10-r14 and 10.1.45-debian-10-r15
+### 10.4.13-debian-10-r12, 10.3.23-debian-10-r14, 10.2.32-debian-10-r14 and 10.1.45-debian-10-r15
 
 - This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
 
-## 10.1.36-r14 and 10.2.27-r36
+### 10.1.36-r14 and 10.2.27-r36
 
 - Decrease the size of the container. It is not necessary Node.js anymore. MariaDB configuration moved to bash scripts in the `rootfs/` folder.
 - The recommended mount point to persist data changes to `/bitnami/mariadb`.
@@ -659,30 +661,30 @@ $ docker-compose up mariadb
 
 ```console
 $ docker-compose down
-# Change the mount point
+## Change the mount point
 sed -i -e 's#mariadb_data:/bitnami#mariadb_data:/bitnami/mariadb#g' docker-compose.yml
-# Pull the latest bitnami/mariadb image
+## Pull the latest bitnami/mariadb image
 $ docker pull bitnami/mariadb:latest
 $ docker-compose up -d
 ```
 
-## 10.1.28-r2 and 10.2.16-r2
+### 10.1.28-r2 and 10.2.16-r2
 
 - The MariaDB container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the MariaDB daemon was started as the `mysql` user. From now on, both the container and the MariaDB daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
-## 10.2.14-r2 and 10.1.32-r1
+### 10.2.14-r2 and 10.1.32-r1
 - The mariadb conf file is not in a persistent volume by default.
 - The user is able to specify a custom file in the default location '/opt/bitnami/mariadb/conf/my.cnf'.
 
-## 10.1.28-r2
+### 10.1.28-r2
 
 - The mariadb container has been migrated to a non-root container approach. Previously the container run as root user and the mariadb daemon was started as mysql user. From now own, both the container and the mariadb daemon run as user 1001. As a consequence, the configuration files are writable by the user running the mariadb process.
 
-## 10.1.24-r2
+### 10.1.24-r2
 
 - `VOLUME` instruction has been removed from the `Dockerfile`.
 
-## 10.1.21-r2
+### 10.1.21-r2
 
 - `MARIADB_MASTER_USER` has been renamed to `MARIADB_MASTER_ROOT_USER`
 - `MARIADB_MASTER_PASSWORD` has been renamed to `MARIADB_MASTER_ROOT_PASSWORD`
@@ -690,16 +692,16 @@ $ docker-compose up -d
 - `ALLOW_EMPTY_PASSWORD` has been added to the available env variables. It can be used to allow blank passwords for MariaDB.
 - By default the MariaDB image requires a root password to start. You can specify it using the `MARIADB_ROOT_PASSWORD` env variable or disable this requirement by setting the `ALLOW_EMPTY_PASSWORD`  env variable to `yes` (testing or development scenarios).
 
-## 10.1.13-r0
+### 10.1.13-r0
 
 - All volumes have been merged at `/bitnami/mariadb`. Now you only need to mount a single volume at `/bitnami/mariadb` for persistence.
 - The logs are always sent to the `stdout` and are no longer collected in the volume.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-mariadb/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-mariadb/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-mariadb/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -709,7 +711,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright (c) 2015-2021 Bitnami
 
