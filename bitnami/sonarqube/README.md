@@ -1,10 +1,10 @@
-# Bitnami Docker Image for SonarQube
+# SonarQube packaged by Bitnami
 
 ## What is SonarQube?
 
-> SonarQube is an open source quality management platform, dedicated to continuously analyze and measure technical quality, from project portfolio to method.
+> SonarQube is an open source quality management platform that analyzes and measures code's technical quality. It enables developers to detect code issues, vulnerabilities, and bugs in early stages.
 
-https://www.sonarqube.org/
+[Overview of SonarQube](http://www.sonarqube.org)
 
 ## TL;DR
 
@@ -36,7 +36,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 - [`9`, `9-debian-10`, `9.1.0`, `9.1.0-debian-10-r41`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/9.1.0-debian-10-r41/9/debian-10/Dockerfile)
-- [`8`, `8-debian-10`, `8.9.3`, `8.9.3-debian-10-r10` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/8.9.3-debian-10-r10/8/debian-10/Dockerfile)
+- [`8`, `8-debian-10`, `8.9.3`, `8.9.3-debian-10-r11` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/8.9.3-debian-10-r11/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/sonarqube GitHub repo](https://github.com/bitnami/bitnami-docker-sonarqube).
 
