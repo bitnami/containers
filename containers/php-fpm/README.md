@@ -1,23 +1,25 @@
-# What is PHP-FPM?
+# PHP-FPM packaged by Bitnami
+
+## What is PHP-FPM?
 
 > PHP-FPM (FastCGI Process Manager) is an alternative PHP FastCGI implementation with some additional features useful for sites of any size, especially busier sites.
 
-[php-fpm.org](http://php-fpm.org/)
+[Overview of PHP-FPM](http://php-fpm.org/)
 
-# TL;DR
+## TL;DR
 
 ```console
 $ docker run -it --name phpfpm -v /path/to/app:/app bitnami/php-fpm
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-php-fpm/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -29,12 +31,12 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/php-fpm?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8.0-prod`, `8.0-prod-debian-10`, `8.0.12-prod`, `8.0.12-prod-debian-10-r16` (8.0-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.0.12-prod-debian-10-r16/8.0-prod/debian-10/Dockerfile)
+* [`8.0-prod`, `8.0-prod-debian-10`, `8.0.12-prod`, `8.0.12-prod-debian-10-r17` (8.0-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.0.12-prod-debian-10-r17/8.0-prod/debian-10/Dockerfile)
 * [`8.0`, `8.0-debian-10`, `8.0.12`, `8.0.12-debian-10-r16` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.0.12-debian-10-r16/8.0/debian-10/Dockerfile)
 * [`7.4-prod`, `7.4-prod-debian-10`, `7.4.25-prod`, `7.4.25-prod-debian-10-r16` (7.4-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.25-prod-debian-10-r16/7.4-prod/debian-10/Dockerfile)
 * [`7.4`, `7.4-debian-10`, `7.4.25`, `7.4.25-debian-10-r16`, `latest` (7.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.25-debian-10-r16/7.4/debian-10/Dockerfile)
@@ -43,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-php-fpm).
 
-## Deprecation Note (2020-08-18)
+### Deprecation Note (2020-08-18)
 
 The formatting convention for `prod` tags has been changed:
 
@@ -51,7 +53,7 @@ The formatting convention for `prod` tags has been changed:
 * `VERSION-debian-10-rX-prod` is now tagged as `VERSION-prod-debian-10-rX`
 * `latest-prod` is now deprecated
 
-# What are `prod` tagged containers for?
+## What are `prod` tagged containers for?
 
 Containers tagged `prod` are production containers based on [minideb](https://github.com/bitnami/minideb). They contain the minimal dependencies required by an application to work.
 
@@ -61,7 +63,7 @@ The resultant containers only contain the necessary pieces of software to run th
 
 Learn how to use multi-stage builds to build your production application container in the [example](/example) directory
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami PHP-FPM Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/php-fpm).
 
@@ -81,15 +83,15 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/php-fpm 'https://github.com/bitnami/bitnami-docker-php-fpm.git#master:7.4/debian-10'
 ```
 
-# Connecting to other containers
+## Connecting to other containers
 
 This image is designed to be used with a web server to serve your PHP app, you can use docker networking to create a network and attach all the containers to that network.
 
-## Serving your PHP app through an nginx frontend
+### Serving your PHP app through an nginx frontend
 
 We will use PHP-FPM with nginx to serve our PHP app. Doing so will allow us to setup more complex configuration, serve static assets using nginx, load balance to different PHP-FPM instances, etc.
 
-### Step 1: Create a network
+#### Step 1: Create a network
 
 ```console
 $ docker network create app-tier --driver bridge
@@ -105,7 +107,7 @@ networks:
     driver: bridge
 ```
 
-### Step 2: Create a server block
+#### Step 2: Create a server block
 
 Let's create an nginx server block to reverse proxy to our PHP-FPM container.
 
@@ -133,7 +135,7 @@ Notice we've substituted the link alias name `myapp`, we will use the same name 
 
 Copy the server block above, saving the file somewhere on your host. We will mount it as a volume in our nginx container.
 
-### Step 3: Run the PHP-FPM image with a specific name
+#### Step 3: Run the PHP-FPM image with a specific name
 
 Docker's linking system uses container ids or names to reference containers. We can explicitly specify a name for our PHP-FPM server to make it easier to connect to other containers.
 
@@ -156,7 +158,7 @@ services:
       - /path/to/app:/app
 ```
 
-### Step 4: Run the nginx image
+#### Step 4: Run the nginx image
 
 ```console
 $ docker run -it \
@@ -182,11 +184,11 @@ services:
       - /path/to/server_block.conf:/opt/bitnami/nginx/conf/server_blocks/yourapp.conf
 ```
 
-# PHP runtime
+## PHP runtime
 
 Since this image bundles a PHP runtime, you may want to make use of PHP outside of PHP-FPM. By default, running this image will start a server. To use the PHP runtime instead, we can override the the default command Docker runs by stating a different command to run after the image name.
 
-## Entering the REPL
+### Entering the REPL
 
 PHP provides a REPL where you can interactively test and try things out in PHP.
 
@@ -198,7 +200,7 @@ $ docker run -it --name phpfpm bitnami/php-fpm php -a
 
 - [PHP Interactive Shell Documentation](http://php.net/manual/en/features.commandline.interactive.php)
 
-# Running your PHP script
+## Running your PHP script
 
 The default work directory for the PHP-FPM image is `/app`. You can mount a folder from your host here that includes your PHP script, and run it normally using the `php` command.
 
@@ -207,13 +209,13 @@ $ docker run -it --name php-fpm -v /path/to/app:/app bitnami/php-fpm \
   php script.php
 ```
 
-# Configuration
+## Configuration
 
-## Mount a custom config file
+### Mount a custom config file
 
 You can mount a custom config file from your host to edit the default configuration for the php-fpm docker image. The following is an example to alter the configuration of the _php-fpm.conf_ configuration file:
 
-### Step 1: Run the PHP-FPM image
+#### Step 1: Run the PHP-FPM image
 
 Run the PHP-FPM image, mounting a file from your host.
 
@@ -232,7 +234,7 @@ services:
   ...
 ```
 
-### Step 2: Edit the configuration
+#### Step 2: Edit the configuration
 
 Edit the configuration on your host using your favorite editor.
 
@@ -240,7 +242,7 @@ Edit the configuration on your host using your favorite editor.
 $ vi /path/to/php-fpm.conf
 ```
 
-### Step 3: Restart PHP-FPM
+#### Step 3: Restart PHP-FPM
 
 After changing the configuration, restart your PHP-FPM container for the changes to take effect.
 
@@ -254,7 +256,7 @@ or using Docker Compose:
 $ docker-compose restart phpfpm
 ```
 
-## Add additional .ini files
+### Add additional .ini files
 
 PHP has been configured at compile time to scan the `/opt/bitnami/php/etc/conf.d/` folder for extra .ini configuration files so it is also possible to mount your customizations there.
 
@@ -279,7 +281,7 @@ $ docker run -it -v /path/to/custom.ini:/opt/bitnami/php/etc/conf.d/custom.ini b
 
 You should see that PHP is using the new specified value for the `max_file_uploads` setting.
 
-# Logging
+## Logging
 
 The Bitnami PHP-FPM Docker Image sends the container logs to the `stdout`. You can configure the containers [logging driver](https://docs.docker.com/engine/reference/run/#logging-drivers-log-driver) using the `--log-driver` option. By defauly the `json-file` driver is used.
 
@@ -297,13 +299,13 @@ $ docker-compose logs phpfpm
 
 *The `docker logs` command is only available when the `json-file` or `journald` logging driver is in use.*
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of PHP-FPM, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/php-fpm:latest
@@ -312,7 +314,7 @@ $ docker pull bitnami/php-fpm:latest
 or if you're using Docker Compose, update the value of the image property to
 `bitnami/php-fpm:latest`.
 
-### Step 2: Stop and backup the currently running container
+#### Step 2: Stop and backup the currently running container
 
 Stop the currently running container using the command
 
@@ -334,7 +336,7 @@ $ rsync -a /path/to/php-fpm-persistence /path/to/php-fpm-persistence.bkp.$(date 
 
 You can use this snapshot to restore the database state should the upgrade fail.
 
-### Step 3: Remove the currently running container
+#### Step 3: Remove the currently running container
 
 ```console
 $ docker rm -v phpfpm
@@ -346,7 +348,7 @@ or using Docker Compose:
 $ docker-compose rm -v phpfpm
 ```
 
-### Step 4: Run the new image
+#### Step 4: Run the new image
 
 Re-create your container from the new image.
 
@@ -360,41 +362,41 @@ or using Docker Compose:
 $ docker-compose up phpfpm
 ```
 
-# Useful Links
+## Useful Links
 
 - [Create An AMP Development Environment With Bitnami Containers
 ](https://docs.bitnami.com/containers/how-to/create-amp-environment-containers/)
 - [Create An EMP Development Environment With Bitnami Containers
 ](https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/)
 
-# Notable Changes
+## Notable Changes
 
-## 7.2.3-r2, 7.1.15-r2, 7.0.28-r2 and 5.6.34-r2 (2018-03-13)
+### 7.2.3-r2, 7.1.15-r2, 7.0.28-r2 and 5.6.34-r2 (2018-03-13)
 
 - PHP has been configured at compile time to scan the `/opt/bitnami/php/etc/conf.d/` folder for extra .ini configuration files.
 
-## 7.0.6-r0 (2016-05-17)
+### 7.0.6-r0 (2016-05-17)
 
 - All volumes have been merged at `/bitnami/php-fpm`. Now you only need to mount a single volume at `/bitnami/php-fpm` for persistence.
 - The logs are always sent to the `stdout` and are no longer collected in the volume.
 
-## 5.5.30-2 (2015-12-07)
+### 5.5.30-2 (2015-12-07)
 
 - Enables support for imagick extension
 
-## 5.5.30-0-r01 (2015-11-10)
+### 5.5.30-0-r01 (2015-11-10)
 
 - `php.ini` is now exposed in the volume mounted at `/bitnami/php-fpm/conf/` allowing users to change the defaults as per their requirements.
 
-## 5.5.30-0 (2015-10-06)
+### 5.5.30-0 (2015-10-06)
 
 - `/app` directory is no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume are not persisted between Dockerfile `RUN` instructions. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-php-fpm/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-php-fpm/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-php-fpm/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -404,7 +406,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright (c) 2015-2021 Bitnami
 
