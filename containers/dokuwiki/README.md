@@ -1,10 +1,10 @@
-# Bitnami Docker Image for DokuWiki
+# DokuWiki packaged by Bitnami
 
 ## What is DokuWiki?
 
-> DokuWiki is a simple to use and highly versatile Open Source wiki software that doesn't require a database. It is loved by users for its clean and readable syntax. The ease of maintenance, backup and integration makes it an administrator's favorite
+> DokuWiki is a standards-compliant wiki optimized for creating documentation. Designed to be simple to use for small organizations, it stores all data in plain text files so no database is required.
 
-[https://www.dokuwiki.org/](https://www.dokuwiki.org/)
+[Overview of DokuWiki](https://www.splitbrain.org/projects/dokuwiki)
 
 ## TL;DR
 
@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`20200729`, `20200729-debian-10`, `20200729.0.0`, `20200729.0.0-debian-10-r409`, `latest` (20200729/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/20200729.0.0-debian-10-r409/20200729/debian-10/Dockerfile)
+* [`20200729`, `20200729-debian-10`, `20200729.0.0`, `20200729.0.0-debian-10-r410`, `latest` (20200729/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/20200729.0.0-debian-10-r410/20200729/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dokuwiki GitHub repo](https://github.com/bitnami/bitnami-docker-dokuwiki).
 
