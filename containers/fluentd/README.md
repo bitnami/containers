@@ -1,9 +1,12 @@
-# What is Fluentd?
+# Fluentd packaged by Bitnami
 
-Fluentd is an open source data collector, which lets you unify the data collection and consumption for a better use and understanding of data.
-[https://www.fluentd.org](https://www.fluentd.org/)
+## What is Fluentd?
 
-# TL;DR
+> Fluentd collects events from various data sources and writes them to files, RDBMS, NoSQL, IaaS, SaaS, Hadoop and so on. 
+
+[Overview of Fluentd](https://www.fluentd.org)
+
+## TL;DR
 
 ```console
 $ docker run --name fluentd bitnami/fluentd:latest
@@ -11,7 +14,7 @@ $ docker run --name fluentd bitnami/fluentd:latest
 
 You can find the available configuration options in the [Environment Variables](#environment-variables) section.
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -23,20 +26,20 @@ You can find the available configuration options in the [Environment Variables](
 
 > This [CVE scan report](https://quay.io/repository/bitnami/fluentd?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.14.2`, `1.14.2-debian-10-r6`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.14.2-debian-10-r6/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.14.2`, `1.14.2-debian-10-r7`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.14.2-debian-10-r7/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami Fluentd Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/fluentd).
 
@@ -56,21 +59,21 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/fluentd:latest 'https://github.com/bitnami/bitnami-docker-fluentd.git#master:1/debian-10'
 ```
 
-# Connecting to other containers
+## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a different server running inside a container can easily be accessed by your application containers and vice-versa.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-## Using the Command Line
+### Using the Command Line
 
-### Step 1: Create a network
+#### Step 1: Create a network
 
 ```console
 $ docker network create fluentd-network --driver bridge
 ```
 
-### Step 2: Launch the Fluentd container within your network
+#### Step 2: Launch the Fluentd container within your network
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `fluentd-network` network.
 
@@ -78,12 +81,12 @@ Use the `--network <NETWORK>` argument to the `docker run` command to attach the
 $ docker run --name fluentd-node1 --network fluentd-network bitnami/fluentd:latest
 ```
 
-### Step 3: Run another containers
+#### Step 3: Run another containers
 
 We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
 
 
-# Configuration
+## Configuration
 
 To create an endpoint that collects logs on your host just run:
 
@@ -132,7 +135,7 @@ fluentd:
 
 Find more information about this feature, consult [official documentation](https://docs.fluentd.org/v0.12/articles/config-file)
 
-# Environment Variables
+## Environment Variables
 
 Environment variable below are configurable to control how to execute fluentd process:
 
@@ -141,7 +144,7 @@ Environment variable below are configurable to control how to execute fluentd pr
   - `FLUENTD_DAEMON_USER`: The user that will run the `fluentd` process when the container is run as root.
   - `FLUENTD_DAEMON_GROUP`: The group of the user that will run the `fluentd` process when the container is run as root.
 
-# Logging
+## Logging
 
 The Bitnami fluentd Docker image sends the container logs to the `stdout`. To view the logs:
 
@@ -151,7 +154,7 @@ $ docker logs fluentd
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-# Understand the structure of this image
+## Understand the structure of this image
 
 The Bitnami Fluentd Open Source Docker image is built using a Dockerfile with the structure below:
 
@@ -159,7 +162,7 @@ The Bitnami Fluentd Open Source Docker image is built using a Dockerfile with th
 FROM bitnami/minideb:buster
 ...
 COPY prebuildfs /
-# Install required system packages and dependencies
+## Install required system packages and dependencies
 RUN install_packages xxx yyy zzz
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "a.b.c-0"
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "fluentd" "d.e.f-0"
@@ -187,13 +190,13 @@ The Dockerfile has several sections related to:
 - Entrypoint and command
   - Take into account that these actions are not executed until the container is started.
 
-# Customize this image
+## Customize this image
 
 The Bitnami Fluentd Open Source Docker image is designed to be extended so it can be used as the base image for your custom Fluentd containers.
 
 > Note: Read the [previous section](#understand-the-structure-of-this-image) to understand the Dockerfile structure before extending this image.
 
-## Extend this image
+### Extend this image
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
@@ -204,7 +207,7 @@ If your desired customizations cannot be covered using the methods mentioned abo
 
 ```Dockerfile
 FROM bitnami/fluentd
-## Put your customizations below
+### Put your customizations below
 ...
 ```
 
@@ -214,23 +217,23 @@ Here is an example of extending the image installing custom Fluentd plugins:
 FROM bitnami/fluentd
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-## Install custom Fluentd plugins
+### Install custom Fluentd plugins
 RUN fluent-gem install 'fluent-plugin-docker_metadata_filter'
 ```
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of fluentd, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/fluentd:latest
 ```
 
-### Step 2: Stop and backup the currently running container
+#### Step 2: Stop and backup the currently running container
 
 Stop the currently running container using the command
 
@@ -246,13 +249,13 @@ $ rsync -a /path/to/fluentd-persistence /path/to/fluentd-persistence.bkp.$(date 
 
 You can use this snapshot to restore the database state should the upgrade fail.
 
-### Step 3: Remove the currently running container
+#### Step 3: Remove the currently running container
 
 ```console
 $ docker rm -v fluentd
 ```
 
-### Step 4: Run the new image
+#### Step 4: Run the new image
 
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
@@ -260,11 +263,11 @@ Re-create your container from the new image, [restoring your backup](#restoring-
 $ docker run --name fluentd bitnami/fluentd:latest
 ```
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-fluentd/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-fluentd/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-fluentd/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -274,7 +277,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 Copyright (c) 2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
