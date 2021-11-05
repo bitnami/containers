@@ -1,10 +1,10 @@
-# Bitnami Docker Image for OpenResty
+# OpenResty packaged by Bitnami
 
 ## What is OpenResty?
 
 > OpenResty is a platform for scalable Web applications and services. It is based on enhanced versions of NGINX and LuaJIT.
 
-[https://openresty.org/](https://openresty.org/)
+[Overview of OpenResty](https://openresty.org/)
 
 ## TL;DR
 
@@ -38,7 +38,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.19`, `1.19-debian-10`, `1.19.9-1`, `1.19.9-1-debian-10-r88`, `latest` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openresty/blob/1.19.9-1-debian-10-r88/1.19/debian-10/Dockerfile)
+* [`1.19`, `1.19-debian-10`, `1.19.9-1`, `1.19.9-1-debian-10-r89`, `latest` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openresty/blob/1.19.9-1-debian-10-r89/1.19/debian-10/Dockerfile)
 
 ## Get this image
 
