@@ -1,18 +1,32 @@
+# ACME Solver packaged by Bitnami
 
-# What is Acmesolver?
+## What is ACME Solver?
 
-Acmesolver is a part of the cert-manager project.
-Cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources.
+> ACME Solver is a part of the Cert Manager project. It will ensure certificates are valid and up to date periodically, and attempt to renew certificates at an appropriate time before expiry.
+> Cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources.
 
-It will ensure certificates are valid and up to date periodically, and attempt to renew certificates at an appropriate time before expiry.
+[Overview of ACME Solver](https://github.com/jetstack/cert-manager)
 
-[https://github.com/jetstack/cert-manager](https://github.com/jetstack/cert-manager)
+## TL;DR
 
-# Pre-requisites
+```console
+$ docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/acmesolver:latest
+```
+
+### Docker Compose
+
+```console
+$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-acmesolver/master/docker-compose.yml > docker-compose.yml
+$ docker-compose up -d
+```
+
+**Warning**: These quick setups are only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
+
+## Pre-requisites
 
 Kubernetes cluster with `CustomResourceDefinition` or `ThirdPartyResource support`
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -23,30 +37,30 @@ Kubernetes cluster with `CustomResourceDefinition` or `ThirdPartyResource suppor
 
 > This [CVE scan report](https://quay.io/repository/bitnami/acmesolver?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.6.1`, `1.6.1-debian-10-r3`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/1.6.1-debian-10-r3/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.6.1`, `1.6.1-debian-10-r4`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/1.6.1-debian-10-r4/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/acmesolver GitHub repo](https://github.com/bitnami/bitnami-docker-acmesolver).
 
-# Configuration
+## Configuration
 
-## Further documentation
+### Further documentation
 
 For further documentation, please check [here](https://github.com/jetstack/cert-manager/blob/master/docs)
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-acmesolver/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-acmesolver/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-acmesolver/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -56,7 +70,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright (c) 2021 Bitnami
 
