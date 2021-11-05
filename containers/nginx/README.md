@@ -1,23 +1,25 @@
-# What is NGINX Open Source?
+# NGINX Open Source packaged by Bitnami
 
-> NGINX (pronounced "engine-x") is an open source reverse proxy server for HTTP, HTTPS, SMTP, POP3 and IMAP protocols, as well as a load balancer, HTTP cache, and a web server (origin server).
+## What is NGINX Open Source?
 
-[http://nginx.org/](http://nginx.org/)
+> NGINX Open Source is a web server that can be also used as a reverse proxy, load balancer, and HTTP cache. Recommended for high-demanding sites due to its ability to provide faster content. 
 
-# TL;DR
+[Overview of NGINX Open Source](http://nginx.org)
+
+## TL;DR
 
 ```console
 $ docker run --name nginx bitnami/nginx:latest
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-nginx/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -29,25 +31,25 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/nginx?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy NGINX Open Source in Kubernetes?
+## How to deploy NGINX Open Source in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami NGINX Open Source Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/nginx).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.21`, `1.21-debian-10`, `1.21.4`, `1.21.4-debian-10-r2`, `latest` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.21.4-debian-10-r2/1.21/debian-10/Dockerfile)
+* [`1.21`, `1.21-debian-10`, `1.21.4`, `1.21.4-debian-10-r3`, `latest` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.21.4-debian-10-r3/1.21/debian-10/Dockerfile)
 * [`1.20`, `1.20-debian-10`, `1.20.1`, `1.20.1-debian-10-r151` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.20.1-debian-10-r151/1.20/debian-10/Dockerfile)
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami NGINX Open Source Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/nginx).
 
@@ -69,7 +71,7 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/nginx:latest 'https://github.com/bitnami/bitnami-docker-nginx.git#master:1.21/debian-10'
 ```
 
-# Hosting a static website
+## Hosting a static website
 
 This NGINX Open Source image exposes a volume at `/app`. Content mounted here is served by the default catch-all server block.
 
@@ -89,7 +91,7 @@ services:
   ...
 ```
 
-# Accessing your server from the host
+## Accessing your server from the host
 
 To access your web server from your host machine you can ask Docker to map a random port on your host to ports `8080` and `8443` exposed in the container.
 
@@ -112,15 +114,15 @@ $ docker run -p 9000:8080 bitnami/nginx:latest
 
 Access your web server in the browser by navigating to [http://localhost:9000](http://localhost:9000/).
 
-# Configuration
+## Configuration
 
-## Adding custom server blocks
+### Adding custom server blocks
 
 The default `nginx.conf` includes server blocks placed in `/opt/bitnami/nginx/conf/server_blocks/`. You can mount a `my_server_block.conf` file containing your custom server block at this location.
 
 For example, in order add a server block for `www.example.com`:
 
-# Step 1: Write your `my_server_block.conf` file with the following content.
+## Step 1: Write your `my_server_block.conf` file with the following content.
 
 ```nginx
 server {
@@ -131,7 +133,7 @@ server {
 }
 ```
 
-# Step 2: Mount the configuration as a volume.
+## Step 2: Mount the configuration as a volume.
 
 ```console
 $ docker run --name nginx \
@@ -150,11 +152,11 @@ services:
   ...
 ```
 
-## Using custom SSL certificates
+### Using custom SSL certificates
 
 *NOTE:* The steps below assume that you are using a custom domain name and that you have already configured the custom domain name to point to your server.
 
-### Step 1: Prepare your certificate files
+#### Step 1: Prepare your certificate files
 
 In your local computer, create a folder called `certs` and put your certificates files. Make sure you rename both files to `server.crt` and `server.key` respectively:
 
@@ -164,7 +166,7 @@ $ cp /path/to/certfile.crt /path/to/nginx-persistence/certs/server.crt
 $ cp /path/to/keyfile.key  /path/to/nginx-persistence/certs/server.key
 ```
 
-### Step 2: Provide a custom Server Block for SSL connections
+#### Step 2: Provide a custom Server Block for SSL connections
 
 Write your `my_server_block.conf` file with the SSL configuration and the relative path to the certificates:
 
@@ -188,7 +190,7 @@ Write your `my_server_block.conf` file with the SSL configuration and the relati
   }
 ```
 
-### Step 3: Run the NGINX Open Source image and open the SSL port
+#### Step 3: Run the NGINX Open Source image and open the SSL port
 
 Run the NGINX Open Source image, mounting the certificates directory from your host.
 
@@ -211,7 +213,7 @@ services:
   ...
 ```
 
-## Full configuration
+### Full configuration
 
 The image looks for configurations in `/opt/bitnami/nginx/conf/nginx.conf`. You can overwrite the `nginx.conf` file using your own custom configuration file.
 
@@ -233,7 +235,7 @@ services:
   ...
 ```
 
-# Reverse proxy to other containers
+## Reverse proxy to other containers
 
 NGINX can be used to reverse proxy to other containers using Docker's linking system. This is particularly useful if you want to serve dynamic content through an NGINX frontend. To do so, [add a server block](#adding-custom-server-blocks) like the following in the `/opt/bitnami/nginx/conf/server_blocks/` folder:
 
@@ -259,7 +261,7 @@ server {
 
   - [NGINX reverse proxy](http://nginx.com/resources/admin-guide/reverse-proxy/)
 
-# Logging
+## Logging
 
 The Bitnami NGINX Open Source Docker image sends the container logs to the `stdout`. To view the logs:
 
@@ -275,14 +277,14 @@ $ docker-compose logs nginx
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-# Understand the structure of this image
+## Understand the structure of this image
 
 The Bitnami NGINX Open Source Docker image is built using a Dockerfile with the structure below:
 
 ```Dockerfile
 FROM bitnami/minideb
 ...
-# Install required system packages and dependencies
+## Install required system packages and dependencies
 RUN install_packages xxx yyy zzz
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "a.b.c-0"
 ...
@@ -310,13 +312,13 @@ The Dockerfile has several sections related to:
 - Entrypoint and command
   - Take into account that these actions are not executed until the container is started.
 
-# Customize this image
+## Customize this image
 
 The Bitnami NGINX Open Source Docker image is designed to be extended so it can be used as the base image for your custom web applications.
 
 > Note: Read the [previous section](#understand-the-structure-of-this-image) to understand the Dockerfile structure before extending this image.
 
-## Extend this image
+### Extend this image
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
@@ -329,7 +331,7 @@ If your desired customizations cannot be covered using the methods mentioned abo
 
 ```Dockerfile
 FROM bitnami/nginx
-## Put your customizations below
+### Put your customizations below
 ...
 ```
 
@@ -344,21 +346,21 @@ Here is an example of extending the image with the following modifications:
 FROM bitnami/nginx
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-## Change user to perform privileged actions
+### Change user to perform privileged actions
 USER 0
-## Install 'vim'
+### Install 'vim'
 RUN install_packages vim
-## Revert to the original non-root user
+### Revert to the original non-root user
 USER 1001
 
-## Modify 'worker_connections' on NGINX config file to '512'
+### Modify 'worker_connections' on NGINX config file to '512'
 RUN sed -i -r "s#(\s+worker_connections\s+)[0-9]+;#\1512;#" /opt/bitnami/nginx/conf/nginx.conf
 
-## Modify the ports used by NGINX by default
+### Modify the ports used by NGINX by default
 ENV NGINX_HTTP_PORT_NUMBER=8181 # It is also possible to change this environment variable at runtime
 EXPOSE 8181 8143
 
-## Modify the default container user
+### Modify the default container user
 USER 1002
 ```
 
@@ -396,11 +398,11 @@ volumes:
     driver: local
 ```
 
-### Adding custom NGINX modules
+#### Adding custom NGINX modules
 
 To add a custom NGINX module, it is necessary to compile NGINX with that module and copy over the appropriate files to the Bitnami image.
 
-#### Example
+##### Example
 
 Below is an example Dockerfile to build and install the NGINX Perl module (`ngx_http_perl_module`) over to the Bitnami image:
 
@@ -411,19 +413,19 @@ ARG BITNAMI_NGINX_TAG=${NGINX_VERSION}-debian-10-${BITNAMI_NGINX_REVISION}
 
 FROM bitnami/nginx:${BITNAMI_NGINX_TAG} AS builder
 USER root
-# Redeclare NGINX_VERSION so it can be used as a parameter inside this build stage
+## Redeclare NGINX_VERSION so it can be used as a parameter inside this build stage
 ARG NGINX_VERSION
-# Install required packages and build dependencies
+## Install required packages and build dependencies
 RUN install_packages dirmngr gpg gpg-agent curl build-essential libpcre3-dev zlib1g-dev libperl-dev
-# Add trusted NGINX PGP key for tarball integrity verification
+## Add trusted NGINX PGP key for tarball integrity verification
 RUN gpg --keyserver pgp.mit.edu --recv-key 520A9993A1C052F8
-# Download NGINX, verify integrity and extract
+## Download NGINX, verify integrity and extract
 RUN cd /tmp && \
     curl -O http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz && \
     curl -O http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz.asc && \
     gpg --verify nginx-${NGINX_VERSION}.tar.gz.asc nginx-${NGINX_VERSION}.tar.gz && \
     tar xzf nginx-${NGINX_VERSION}.tar.gz
-# Compile NGINX with desired module
+## Compile NGINX with desired module
 RUN cd /tmp/nginx-${NGINX_VERSION} && \
     rm -rf /opt/bitnami/nginx && \
     ./configure --prefix=/opt/bitnami/nginx --with-compat --with-http_perl_module=dynamic && \
@@ -432,25 +434,25 @@ RUN cd /tmp/nginx-${NGINX_VERSION} && \
 
 FROM bitnami/nginx:${BITNAMI_NGINX_TAG}
 USER root
-# Install ngx_http_perl_module system package dependencies
+## Install ngx_http_perl_module system package dependencies
 RUN install_packages libperl-dev
-# Install ngx_http_perl_module files
+## Install ngx_http_perl_module files
 COPY --from=builder /usr/local/lib/x86_64-linux-gnu/perl /usr/local/lib/x86_64-linux-gnu/perl
 COPY --from=builder /opt/bitnami/nginx/modules/ngx_http_perl_module.so /opt/bitnami/nginx/modules/ngx_http_perl_module.so
-# Enable module
+## Enable module
 RUN echo "load_module modules/ngx_http_perl_module.so;" | cat - /opt/bitnami/nginx/conf/nginx.conf > /tmp/nginx.conf && \
     cp /tmp/nginx.conf /opt/bitnami/nginx/conf/nginx.conf
-# Set the container to be run as a non-root user by default
+## Set the container to be run as a non-root user by default
 USER 1001
 ```
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of NGINX Open Source, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/nginx:latest
@@ -459,7 +461,7 @@ $ docker pull bitnami/nginx:latest
 or if you're using Docker Compose, update the value of the image property to
 `bitnami/nginx:latest`.
 
-### Step 2: Stop and backup the currently running container
+#### Step 2: Stop and backup the currently running container
 
 Stop the currently running container using the command
 
@@ -473,7 +475,7 @@ or using Docker Compose:
 $ docker-compose stop nginx
 ```
 
-### Step 3: Remove the currently running container
+#### Step 3: Remove the currently running container
 
 ```console
 $ docker rm -v nginx
@@ -485,7 +487,7 @@ or using Docker Compose:
 $ docker-compose rm -v nginx
 ```
 
-### Step 4: Run the new image
+#### Step 4: Run the new image
 
 Re-create your container from the new image.
 
@@ -499,31 +501,31 @@ or using Docker Compose:
 $ docker-compose up nginx
 ```
 
-# Useful Links
+## Useful Links
 
 - [Create An EMP Development Environment With Bitnami Containers](https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/)
 
-# Notable Changes
+## Notable Changes
 
-## 1.18.0-debian-10-r210 and 1.19.6-debian-10-r1
+### 1.18.0-debian-10-r210 and 1.19.6-debian-10-r1
 
 - Added support for enabling dynamic modules.
 
-## 1.16.1-centos-7-r173
+### 1.16.1-centos-7-r173
 
 - `1.16.1-centos-7-r173` is considered the latest image based on CentOS.
 - Standard supported distros: Debian & OEL.
 
-## 1.16.0-r3
+### 1.16.0-r3
 
 - This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
 - The recommended mount point for adding custom server blocks changes from `/opt/bitnami/nginx/conf/vhosts` to `/opt/bitnami/nginx/conf/server_blocks`. Remember to update your Docker Compose files to user the new mount point.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-nginx/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-nginx/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-nginx/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -533,7 +535,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright (c) 2015-2021 Bitnami
 
