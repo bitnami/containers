@@ -1,10 +1,10 @@
-# Bitnami Docker Image for Ghost
+# Ghost packaged by Bitnami
 
 ## What is Ghost?
 
 > Ghost is an open source publishing platform designed to create blogs, magazines, and news sites. It includes a simple markdown editor with preview, theming, and SEO built-in to simplify editing.
 
-[https://ghost.org/](https://ghost.org/)
+[Overview of Ghost](https://ghost.org/)
 
 ## TL;DR
 
@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`4`, `4-debian-10`, `4.21.0`, `4.21.0-debian-10-r1`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/4.21.0-debian-10-r1/4/debian-10/Dockerfile)
+- [`4`, `4-debian-10`, `4.21.0`, `4.21.0-debian-10-r2`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/4.21.0-debian-10-r2/4/debian-10/Dockerfile)
 - [`3`, `3-debian-10`, `3.42.6`, `3.42.6-debian-10-r35` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/3.42.6-debian-10-r35/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ghost GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
