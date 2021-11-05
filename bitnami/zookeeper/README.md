@@ -1,16 +1,18 @@
-# What is ZooKeeper?
+# ZooKeeper packaged by Bitnami
 
->ZooKeeper is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services. All of these kinds of services are used in some form or other by distributed applications.
+## What is ZooKeeper?
 
-[https://zookeeper.apache.org/](https://zookeeper.apache.org/)
+> ZooKeeper provides a reliable, centralized register of configuration data and services for distributed applications.
 
-# TL;DR
+[Overview of ZooKeeper](https://zookeeper.apache.org)
+
+## TL;DR
 
 ```console
 $ docker run --name zookeeper bitnami/zookeeper:latest
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```yaml
 version: '2'
@@ -22,7 +24,7 @@ services:
       - '2181:2181'
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -34,28 +36,28 @@ services:
 
 > This [CVE scan report](https://quay.io/repository/bitnami/zookeeper?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy ZooKeeper in Kubernetes?
+## How to deploy ZooKeeper in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami ZooKeeper Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/zookeeper).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.7`, `3.7-debian-10`, `3.7.0`, `3.7.0-debian-10-r196`, `latest` (3.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.7.0-debian-10-r196/3.7/debian-10/Dockerfile)
+* [`3.7`, `3.7-debian-10`, `3.7.0`, `3.7.0-debian-10-r197`, `latest` (3.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.7.0-debian-10-r197/3.7/debian-10/Dockerfile)
 * [`3.6`, `3.6-debian-10`, `3.6.3`, `3.6.3-debian-10-r151` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.6.3-debian-10-r151/3.6/debian-10/Dockerfile)
 * [`3.5`, `3.5-debian-10`, `3.5.9`, `3.5.9-debian-10-r34` (3.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.5.9-debian-10-r34/3.5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami ZooKeeper Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/zookeeper).
 
@@ -77,7 +79,7 @@ If you wish, you can also build the image yourself.
 docker build -t bitnami/zookeeper:latest 'https://github.com/bitnami/bitnami-docker-zookeeper.git#master:3.7/debian-10'
 ```
 
-# Persisting your data
+## Persisting your data
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -104,23 +106,23 @@ services:
 
 > NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-# Connecting to other containers
+## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a ZooKeeper server running inside a container can easily be accessed by your application containers.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-## Using the Command Line
+### Using the Command Line
 
 In this example, we will create a ZooKeeper client instance that will connect to the server instance that is running on the same docker network as the client.
 
-### Step 1: Create a network
+#### Step 1: Create a network
 
 ```console
 $ docker network create app-tier --driver bridge
 ```
 
-### Step 2: Launch the ZooKeeper server instance
+#### Step 2: Launch the ZooKeeper server instance
 
 Use the `--network app-tier` argument to the `docker run` command to attach the ZooKeeper container to the `app-tier` network.
 
@@ -130,7 +132,7 @@ $ docker run -d --name zookeeper-server \
     bitnami/zookeeper:latest
 ```
 
-### Step 3: Launch your ZooKeeper client instance
+#### Step 3: Launch your ZooKeeper client instance
 
 Finally we create a new container instance to launch the ZooKeeper client and connect to the server created in the previous step:
 
@@ -140,7 +142,7 @@ $ docker run -it --rm \
     bitnami/zookeeper:latest zkCli.sh -server zookeeper-server:2181  get /
 ```
 
-## Using Docker Compose
+### Using Docker Compose
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the ZooKeeper server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
@@ -173,7 +175,7 @@ Launch the containers using:
 $ docker-compose up -d
 ```
 
-# Configuration
+## Configuration
 
 The configuration can easily be setup with the Bitnami ZooKeeper Docker image using the following environment variables:
 
@@ -236,7 +238,7 @@ services:
 ```
 
 
-## Configuration
+### Configuration
 The image looks for configuration in the `conf/` directory of `/opt/bitnami/zookeeper`.
 
 ```console
@@ -245,7 +247,7 @@ $ docker run --name zookeeper -v /path/to/zoo.cfg:/opt/bitnami/zookeeper/conf/zo
 
 After that, your changes will be taken into account in the server's behaviour.
 
-### Step 1: Run the ZooKeeper image
+#### Step 1: Run the ZooKeeper image
 
 Run the ZooKeeper image, mounting a directory from your host.
 
@@ -267,7 +269,7 @@ services:
       - /path/to/zoo.cfg:/opt/bitnami/zookeeper/conf/zoo.cfg
 ```
 
-### Step 2: Edit the configuration
+#### Step 2: Edit the configuration
 
 Edit the configuration on your host using your favorite editor.
 
@@ -275,7 +277,7 @@ Edit the configuration on your host using your favorite editor.
 vi /path/to/zoo.cfg
 ```
 
-### Step 3: Restart ZooKeeper
+#### Step 3: Restart ZooKeeper
 
 After changing the configuration, restart your ZooKeeper container for changes to take effect.
 
@@ -289,7 +291,7 @@ or using Docker Compose:
 $ docker-compose restart zookeeper
 ```
 
-## Security
+### Security
 
 Authentication based on SASL/Digest-MD5 can be easily enabled by passing the `ZOO_ENABLE_AUTH` env var.
 When enabling the ZooKeeper authentication, it is also required to pass the list of users and passwords that will
@@ -322,7 +324,7 @@ services:
   ...
 ```
 
-## Setting up a ZooKeeper ensemble
+### Setting up a ZooKeeper ensemble
 
 A ZooKeeper (https://zookeeper.apache.org/doc/r3.1.2/zookeeperAdmin.html) cluster can easily be setup with the Bitnami ZooKeeper Docker image using the following environment variables:
 
@@ -342,7 +344,7 @@ Create a Docker network to enable visibility to each other via the docker contai
 $ docker network create app-tier --driver bridge
 ```
 
-### Step 1: Create the first node
+#### Step 1: Create the first node
 
 The first step is to create one  ZooKeeper instance.
 
@@ -357,7 +359,7 @@ $ docker run --name zookeeper1 \
   bitnami/zookeeper:latest
 ```
 
-### Step 2: Create the second node
+#### Step 2: Create the second node
 
 Next we start a new ZooKeeper container.
 
@@ -372,7 +374,7 @@ $ docker run --name zookeeper2 \
   bitnami/zookeeper:latest
 ```
 
-### Step 3: Create the third node
+#### Step 3: Create the third node
 
 Next we start another new ZooKeeper container.
 
@@ -429,7 +431,7 @@ services:
       - ZOO_SERVERS=zookeeper1:2888:3888,zookeeper2:2888:3888,0.0.0.0:2888:3888
 ```
 
-## Start Zookeeper with TLS
+### Start Zookeeper with TLS
 
 ```
 docker run --name zookeeper \
@@ -442,7 +444,7 @@ docker run --name zookeeper \
   bitnami/zookeeper:latest
 ```
 
-# Logging
+## Logging
 
 The Bitnami ZooKeeper Docker image sends the container logs to the `stdout`. To view the logs:
 
@@ -458,13 +460,13 @@ $ docker-compose logs zookeeper
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-# Maintenance
+## Maintenance
 
-## Backing up your container
+### Backing up your container
 
 To backup your data, follow these simple steps:
 
-### Step 1: Stop the currently running container
+#### Step 1: Stop the currently running container
 
 ```console
 $ docker stop zookeeper
@@ -476,7 +478,7 @@ or using Docker Compose:
 $ docker-compose stop zookeeper
 ```
 
-### Step 2: Run the backup command
+#### Step 2: Run the backup command
 
 We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
 
@@ -492,7 +494,7 @@ $ docker run --rm -v /path/to/zookeeper-backups:/backups --volumes-from `docker-
   cp -a /bitnami/zookeeper:latest /backups/latest
 ```
 
-## Restoring a backup
+### Restoring a backup
 
 Restoring a backup is as simple as mounting the backup as volumes in the container.
 
@@ -514,11 +516,11 @@ services:
       - /path/to/zookeeper-backups/latest:/bitnami/zookeeper
 ```
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of ZooKeeper, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/zookeeper:latest
@@ -527,13 +529,13 @@ $ docker pull bitnami/zookeeper:latest
 or if you're using Docker Compose, update the value of the image property to
 `bitnami/zookeeper:latest`.
 
-### Step 2: Stop and backup the currently running container
+#### Step 2: Stop and backup the currently running container
 
 Before continuing, you should backup your container's data, configuration and logs.
 
 Follow the steps on [creating a backup](#backing-up-your-container).
 
-### Step 3: Remove the currently running container
+#### Step 3: Remove the currently running container
 
 ```console
 $ docker rm -v zookeeper
@@ -546,7 +548,7 @@ or using Docker Compose:
 $ docker-compose rm -v zookeeper
 ```
 
-### Step 4: Run the new image
+#### Step 4: Run the new image
 
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
@@ -560,30 +562,30 @@ or using Docker Compose:
 $ docker-compose up zookeeper
 ```
 
-# Notable Changes
+## Notable Changes
 
-## 3.5.5-r95
+### 3.5.5-r95
 
 - ZooKeeper configuration moved to bash scripts in the rootfs/ folder.
 
-## 3.4.12-r25
+### 3.4.12-r25
 
 - Configuration is not persisted, it is regenerated each time the container is created or it is used as volume.
 
-## 3.4.10-r4
+### 3.4.10-r4
 
 - The zookeeper container has been migrated to a non-root container approach. Previously the container run as `root` user and the zookeeper daemon was started as `zookeeper` user. From now own, both the container and the zookeeper daemon run as user `1001`.
   As a consequence, the configuration files are writable by the user running the zookeeper process.
 
-## 3.4.10-r0
+### 3.4.10-r0
 
 - New release
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-zookeeper/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-zookeeper/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-zookeeper/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -593,7 +595,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright (c) 2015-2021 Bitnami
 
