@@ -1,10 +1,10 @@
-# Bitnami Docker Image for JasperReports
+# JasperReports packaged by Bitnami
 
 ## What is JasperReports?
 
-> The JasperReports Server can be used as a stand-alone or embedded reporting and BI server that offers web-based reporting, analytic tools and visualization, and a dashboard feature for compiling multiple custom views. JasperReports Server supports multiple data sources including Hadoop Hive, JSON data sources, Excel, XML/A, Hibernate and more. You can create reports with their WYSIWYG tool and build beautiful visualizations, charts and graphs.
+> JasperReports Server is a stand-alone and embeddable reporting server. It is a central information hub, with reporting and analytics that can be embedded into web and mobile applications.
 
-http://community.jaspersoft.com/project/jasperreports-server
+[Overview of JasperReports](http://community.jaspersoft.com/project/jasperreports-server)
 
 ## TL;DR
 
@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`7`, `7-debian-10`, `7.8.0`, `7.8.0-debian-10-r375`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.8.0-debian-10-r375/7/debian-10/Dockerfile)
+- [`7`, `7-debian-10`, `7.8.0`, `7.8.0-debian-10-r376`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/7.8.0-debian-10-r376/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jasperreports GitHub repo](https://github.com/bitnami/bitnami-docker-jasperreports).
 
