@@ -1,10 +1,10 @@
-# Bitnami Docker Image for Odoo
+# Odoo packaged by Bitnami
 
 ## What is Odoo?
 
-> Odoo is a suite of web based open source business apps. Odoo Apps can be used as stand-alone applications, but they also integrate seamlessly so you get a full-featured Open Source ERP when you install several Apps.
+> Odoo is an open source ERP and CRM platform, formerly known as OpenERP, that can connect a wide variety of business operations such as sales, supply chain, finance, and project management.
 
-https://odoo.com/
+[Overview of Odoo](https://www.odoo.com/)
 
 ## TL;DR
 
@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 - [`15`, `15-debian-10`, `15.0.20211010`, `15.0.20211010-debian-10-r5`, `latest` (15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/15.0.20211010-debian-10-r5/15/debian-10/Dockerfile)
-- [`14`, `14-debian-10`, `14.0.20211010`, `14.0.20211010-debian-10-r24` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/14.0.20211010-debian-10-r24/14/debian-10/Dockerfile)
+- [`14`, `14-debian-10`, `14.0.20211010`, `14.0.20211010-debian-10-r25` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/14.0.20211010-debian-10-r25/14/debian-10/Dockerfile)
 - [`13`, `13-debian-10`, `13.0.20211010`, `13.0.20211010-debian-10-r25` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20211010-debian-10-r25/13/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/odoo GitHub repo](https://github.com/bitnami/bitnami-docker-odoo).
