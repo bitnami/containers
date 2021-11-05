@@ -1,11 +1,10 @@
-# Bitnami Docker Image for WordPress with NGINX
+# WordPress with NGINX packaged by Bitnami
 
 ## What is WordPress with NGINX?
 
 > WordPress with NGINX combines the most popular blogging application with the power of the NGINX web server.
 
-[https://www.wordpress.org/](https://www.wordpress.org/)
-[https://nginx.org/](https://nginx.org/)
+[Overview of WordPress with NGINX](http://www.wordpress.org)
 
 ## TL;DR
 
@@ -36,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`5`, `5-debian-10`, `5.8.1`, `5.8.1-debian-10-r54`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.8.1-debian-10-r54/5/debian-10/Dockerfile)
+- [`5`, `5-debian-10`, `5.8.1`, `5.8.1-debian-10-r55`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.8.1-debian-10-r55/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress-nginx).
 
