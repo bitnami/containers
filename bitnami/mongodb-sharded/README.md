@@ -1,27 +1,25 @@
-# What is MongoDB&reg; Sharded packaged by Bitnami?
+# MongoDB(TM) Sharded packaged by Bitnami
 
-> [MongoDB&reg;](https://www.mongodb.org/) is a cross-platform document-oriented database. Classified as a NoSQL database, MongoDB&reg; eschews the traditional table-based relational database structure in favor of JSON-like documents with dynamic schemas, making the integration of data in certain types of applications easier and faster.
+## What is MongoDB(TM) Sharded?
 
-This container flavor uses the [sharding method](https://docs.mongodb.com/manual/sharding/) for distributing data across multiple machines. This is meant for deployments with very large data sets and high throughput operations.
+> MongoDB(TM) is an open source NoSQL database that uses JSON for data storage. MongoDB(TM) Sharded improves scalability and reliability for large datasets by distributing data across multiple machines.
 
-All MongoDB&reg; versions released after October 16, 2018 (3.6.9 or later, 4.0.4 or later or 4.1.5 or later) are licensed under the [Server Side Public License](https://www.mongodb.com/licensing/server-side-public-license) that is not currently accepted as a Open Source license by the Open Source Iniciative (OSI).
+[Overview of MongoDB(TM) Sharded](http://www.mongodb.org)
 
-Disclaimer: The respective trademarks mentioned in the offering are owned by the respective companies. We do not provide a commercial license for any of these products. This listing has an open-source license. MongoDB&reg; is run and maintained by MongoDB, which is a completely separate project from Bitnami.
-
-# TL;DR
+## TL;DR
 
 ```console
 $ docker run --name mongodb bitnami/mongodb-sharded:latest
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-mongodb-sharded/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -33,29 +31,29 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/mongodb?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy MongoDB&reg; Sharded in Kubernetes?
+## How to deploy MongoDB&reg; Sharded in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami MongoDB&reg; Sharded Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/mongodb-sharded).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
 * [`5.0`, `5.0-debian-10`, `5.0.3`, `5.0.3-debian-10-r2` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/5.0.3-debian-10-r2/5.0/debian-10/Dockerfile)
-* [`4.4`, `4.4-debian-10`, `4.4.10`, `4.4.10-debian-10-r21`, `latest` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.10-debian-10-r21/4.4/debian-10/Dockerfile)
+* [`4.4`, `4.4-debian-10`, `4.4.10`, `4.4.10-debian-10-r22`, `latest` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.10-debian-10-r22/4.4/debian-10/Dockerfile)
 * [`4.2`, `4.2-debian-10`, `4.2.17`, `4.2.17-debian-10-r41` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.17-debian-10-r41/4.2/debian-10/Dockerfile)
 * [`4.0`, `4.0-debian-9`, `4.0.27`, `4.0.27-debian-9-r56` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.27-debian-9-r56/4.0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami MongoDB&reg; Sharded Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mongodb-sharded).
 
@@ -75,7 +73,7 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/mongodb-sharded:latest 'https://github.com/bitnami/bitnami-docker-mongodb-sharded.git#master:4.4/debian-10'
 ```
 
-# Persisting your database
+## Persisting your database
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -110,9 +108,9 @@ services:
   ...
 ```
 
-# Configuration
+## Configuration
 
-## Setting up a sharded cluster
+### Setting up a sharded cluster
 
 In a sharded cluster, there are [three components](https://docs.mongodb.com/manual/sharding/#sharded-cluster):
 
@@ -132,7 +130,7 @@ A [sharded cluster](https://docs.mongodb.com/manual/sharding/#sharded-cluster) c
  - `MONGODB_ROOT_PASSWORD`: MongoDB&reg; root password. No defaults.
  - `MONGODB_REPLICA_SET_MODE`: The replication mode. Possible values `primary`/`secondary`/`arbiter`. No defaults.
 
-### Step 1: Create the config server replica set
+#### Step 1: Create the config server replica set
 
 The first step is to start the MongoDB&reg; primary config server.
 
@@ -148,7 +146,7 @@ $ docker run --name mongodb-configsvr-primary \
 
 In the above command the container is configured as Config server using the `MONGODB_SHARDING_MODE` parameter and as `primary` using the `MONGODB_REPLICA_SET_MODE` parameter. You can configure secondary nodes by following the [Bitnami MongoDB&reg; container replication guide](https://github.com/bitnami/bitnami-docker-mongodb#setting-up-replication).
 
-### Step 2: Create the mongos instance
+#### Step 2: Create the mongos instance
 
 Next we start a MongoDB&reg; mongos server and connect it to the config server replica set.
 
@@ -165,7 +163,7 @@ $ docker run --name mongos \
 
 In the above command the container is configured as a `mongos` using the `MONGODB_SHARDING_MODE` parameter. The `MONGODB_CFG_PRIMARY_HOST`, `MONGODB_REPLICA_SET_KEY`, `MONGODB_CFG_REPLICA_SET_NAME` and `MONGODB_ROOT_PASSWORD` parameters are used connect and with the MongoDB&reg; primary config server.
 
-### Step 3: Create a shard
+#### Step 3: Create a shard
 
 Finally we start a MongoDB&reg; data shard container.
 
@@ -233,10 +231,10 @@ volumes:
     driver: local
 ```
 
-## More MongoDB&reg; configuration settings
+### More MongoDB&reg; configuration settings
 The Bitnami MongoDB&reg; Sharded image contains the [same configuration features than the Bitnami MongoDB&reg; image](https://github.com/bitnami/bitnami-docker-mongodb#configuration).
 
-# Logging
+## Logging
 
 The Bitnami MongoDB&reg; Sharded Docker image sends the container logs to the `stdout`. To view the logs:
 
@@ -252,13 +250,13 @@ $ docker-compose logs mongodb-sharded
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of MongoDB&reg;, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/mongodb-sharded:latest
@@ -266,7 +264,7 @@ $ docker pull bitnami/mongodb-sharded:latest
 
 or if you're using Docker Compose, update the value of the image property to `bitnami/mongodb-sharded:latest`.
 
-### Step 2: Stop and backup the currently running container
+#### Step 2: Stop and backup the currently running container
 
 Stop the currently running container using the command
 
@@ -288,7 +286,7 @@ $ rsync -a /path/to/mongodb-persistence /path/to/mongodb-persistence.bkp.$(date 
 
 You can use this snapshot to restore the database state should the upgrade fail.
 
-### Step 3: Remove the currently running container
+#### Step 3: Remove the currently running container
 
 ```console
 $ docker rm -v mongodb-sharded
@@ -300,7 +298,7 @@ or using Docker Compose:
 $ docker-compose rm -v mongodb-sharded
 ```
 
-### Step 4: Run the new image
+#### Step 4: Run the new image
 
 Re-create your container from the new image.
 
@@ -314,22 +312,22 @@ or using Docker Compose:
 $ docker-compose up mongodb-sharded
 ```
 
-# Notable Changes
+## Notable Changes
 
-## 4.4.8-debian-10-r32, and 5.0.2-debian-10-r0
+### 4.4.8-debian-10-r32, and 5.0.2-debian-10-r0
 
 - From now on, "Default Write Concern" need to be set before adding new members (secondary, arbiter or hidden) to the cluster. In order to maintain the safest default configuration, `{"setDefaultRWConcern" : 1, "defaultWriteConcern" : {"w" : "majority"}}` is configured before adding new members. See https://docs.mongodb.com/manual/reference/command/setDefaultRWConcern/ and https://docs.mongodb.com/v5.0/reference/mongodb-defaults/#default-write-concern
 
-## 3.6.16-centos-7-r49, 4.0.14-centos-7-r29, and 4.2.2-centos-7-r41
+### 3.6.16-centos-7-r49, 4.0.14-centos-7-r29, and 4.2.2-centos-7-r41
 
 - `3.6.16-centos-7-r49`, `4.0.14-centos-7-r29`, and `4.2.2-centos-7-r41` are considered the latest images based on CentOS.
 - Standard supported distros: Debian & OEL.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-mongodb-sharded/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-mongodb-sharded/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-mongodb-sharded/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -339,7 +337,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright (c) 2015-2021 Bitnami
 
