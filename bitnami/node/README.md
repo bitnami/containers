@@ -1,23 +1,25 @@
-# What is Node.js?
+# Node.js packaged by Bitnami
 
-> Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
+## What is Node.js?
 
-[nodejs.org](https://nodejs.org/)
+> Node.js is a runtime environment built on V8 JavaScript engine. Its event-driven, non-blocking I/O model enables the development of fast, scalable, and data-intensive server applications.
 
-# TL;DR
+[Overview of Node.js](http://nodejs.org/)
+
+## TL;DR
 
 ```console
 $ docker run -it --name node bitnami/node
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-node/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -29,13 +31,13 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/node?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy Node.js in Kubernetes?
+## How to deploy Node.js in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Node.js Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/node).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
@@ -45,13 +47,13 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`16-prod`, `16-prod-debian-10`, `16.13.0-prod`, `16.13.0-prod-debian-10-r9` (16-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/16.13.0-prod-debian-10-r9/16-prod/debian-10/Dockerfile)
 * [`16`, `16-debian-10`, `16.13.0`, `16.13.0-debian-10-r6` (16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/16.13.0-debian-10-r6/16/debian-10/Dockerfile)
 * [`14-prod`, `14-prod-debian-10`, `14.18.1-prod`, `14.18.1-prod-debian-10-r23` (14-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/14.18.1-prod-debian-10-r23/14-prod/debian-10/Dockerfile)
-* [`14`, `14-debian-10`, `14.18.1`, `14.18.1-debian-10-r21` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/14.18.1-debian-10-r21/14/debian-10/Dockerfile)
+* [`14`, `14-debian-10`, `14.18.1`, `14.18.1-debian-10-r22` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/14.18.1-debian-10-r22/14/debian-10/Dockerfile)
 * [`12-prod`, `12-prod-debian-10`, `12.22.7-prod`, `12.22.7-prod-debian-10-r23` (12-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.22.7-prod-debian-10-r23/12-prod/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.22.7`, `12.22.7-debian-10-r23` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.22.7-debian-10-r23/12/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
 
-# What are `prod` tagged containers for?
+## What are `prod` tagged containers for?
 
 Containers tagged `prod` are production containers based on [minideb](https://github.com/bitnami/minideb). They contain the minimal dependencies required by an application to work.
 
@@ -61,7 +63,7 @@ The resultant containers only contain the necessary pieces of software to run th
 
 Learn how to use multi-stage builds to build your production application container in the [example](/example) directory
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami Node.js Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/node).
 
@@ -81,7 +83,7 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/node 'https://github.com/bitnami/bitnami-docker-node.git#master:17/debian-10'
 ```
 
-# Entering the REPL
+## Entering the REPL
 
 By default, running this image will drop you into the Node.js REPL, where you can interactively test and try things out in Node.js.
 
@@ -93,9 +95,9 @@ $ docker run -it --name node bitnami/node
 
   - [nodejs.org/api/repl.html](https://nodejs.org/api/repl.html)
 
-# Configuration
+## Configuration
 
-## Running your Node.js script
+### Running your Node.js script
 
 The default work directory for the Node.js image is `/app`. You can mount a folder from your host here that includes your Node.js script, and run it normally using the `node` command.
 
@@ -104,7 +106,7 @@ $ docker run -it --name node -v /path/to/app:/app bitnami/node \
   node script.js
 ```
 
-## Running a Node.js app with npm dependencies
+### Running a Node.js app with npm dependencies
 
 If your Node.js app has a `package.json` defining your app's dependencies and start script, you can install the dependencies before running your app.
 
@@ -130,7 +132,7 @@ node:
 - [package.json documentation](https://docs.npmjs.com/files/package.json)
 - [npm start script](https://docs.npmjs.com/misc/scripts#default-values)
 
-# Working with private npm modules
+## Working with private npm modules
 
 To work with npm private modules, it is necessary to be logged into npm. npm CLI uses *auth tokens* for authentication. Check the official [npm documentation](https://www.npmjs.com/package/get-npm-token) for further information about how to obtain the token.
 
@@ -174,7 +176,7 @@ Congratulations! You are now logged into the npm repo.
 
 - [npm official documentation](https://docs.npmjs.com/private-modules/docker-and-private-modules).
 
-# Accessing a Node.js app running a web server
+## Accessing a Node.js app running a web server
 
 By default the image exposes the port `3000` of the container. You can use this port for your Node.js application server.
 
@@ -218,15 +220,15 @@ $ docker run -it --name node -p 8080:3000 -v /path/to/app:/app bitnami/node node
 
 Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/).
 
-# Connecting to other containers
+## Connecting to other containers
 
 If you want to connect to your Node.js web server inside another container, you can use docker networking to create a network and attach all the containers to that network.
 
-## Serving your Node.js app through an nginx frontend
+### Serving your Node.js app through an nginx frontend
 
 We may want to make our Node.js web server only accessible via an nginx web server. Doing so will allow us to setup more complex configuration, serve static assets using nginx, load balance to different Node.js instances, etc.
 
-### Step 1: Create a network
+#### Step 1: Create a network
 
 ```console
 $ docker network create app-tier --driver bridge
@@ -242,7 +244,7 @@ networks:
     driver: bridge
 ```
 
-### Step 2: Create a virtual host
+#### Step 2: Create a virtual host
 
 Let's create an nginx virtual host to reverse proxy to our Node.js container.
 
@@ -267,7 +269,7 @@ Notice we've substituted the link alias name `myapp`, we will use the same name 
 
 Copy the virtual host above, saving the file somewhere on your host. We will mount it as a volume in our nginx container.
 
-### Step 3: Run the Node.js image with a specific name
+#### Step 3: Run the Node.js image with a specific name
 
 ```console
 $ docker run -it --name myapp --network app-tier \
@@ -288,7 +290,7 @@ myapp:
     - .:/app
 ```
 
-### Step 4: Run the nginx image
+#### Step 4: Run the nginx image
 
 ```console
 $ docker run -it \
@@ -309,13 +311,13 @@ nginx:
     - /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf:ro
 ```
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of Node.js, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/node:latest
@@ -323,7 +325,7 @@ $ docker pull bitnami/node:latest
 
 or if you're using Docker Compose, update the value of the image property to `bitnami/node:latest`.
 
-### Step 2: Remove the currently running container
+#### Step 2: Remove the currently running container
 
 ```console
 $ docker rm -v node
@@ -335,7 +337,7 @@ or using Docker Compose:
 $ docker-compose rm -v node
 ```
 
-### Step 3: Run the new image
+#### Step 3: Run the new image
 
 Re-create your container from the new image.
 
@@ -349,25 +351,25 @@ or using Docker Compose:
 $ docker-compose up node
 ```
 
-# Notable Changes
+## Notable Changes
 
-## 6.2.0-r0 (2016-05-11)
+### 6.2.0-r0 (2016-05-11)
 
 - Commands are now executed as the `root` user. Use the `--user` argument to switch to another user or change to the required user using `sudo` to launch applications. Alternatively, as of Docker 1.10 User Namespaces are supported by the docker daemon. Refer to the [daemon user namespace options](https://docs.docker.com/engine/security/userns-remap/) for more details.
 
-## 4.1.2-0 (2015-10-12)
+### 4.1.2-0 (2015-10-12)
 
 - Permissions fixed so `bitnami` user can install global npm modules without needing `sudo`.
 
-## 4.1.1-0-r01 (2015-10-07)
+### 4.1.1-0-r01 (2015-10-07)
 
 - `/app` directory is no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume are not persisted between Dockerfile `RUN` instructions. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-node/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-node/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-node/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -378,7 +380,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - The command you used to run the container, and any relevant output you saw (masking any sensitive
 information)
 
-# License
+## License
 
 Copyright (c) 2021 Bitnami
 
