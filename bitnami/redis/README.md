@@ -1,19 +1,18 @@
-# What is Redis(TM) packaged by Bitnami?
+# Redis(TM) packaged by Bitnami
 
-Disclaimer: REDIS(r) is a registered trademark of Redis Labs Ltd.Any rights therein are reserved to Redis Labs Ltd. Any use by Bitnami is for referential
-purposes only and does not indicate any sponsorship, endorsement, or affiliation between Redis Labs Ltd.
+## What is Redis(TM)?
 
-> Redis(TM) is an advanced key-value cache and store. It is often referred to as a data structure server since keys can contain strings, hashes, lists, sets, sorted sets, bitmaps and hyperloglogs.
+> Redis(TM) is an open source, advanced key-value store. It is often referred to as a data structure server since keys can contain strings, hashes, lists, sets and sorted sets.
 
-[redis.io](http://redis.io/)
+[Overview of Redis(TM)](http://redis.io)
 
-# TL;DR
+## TL;DR
 
 ```console
 $ docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-redis/master/docker-compose.yml > docker-compose.yml
@@ -22,7 +21,7 @@ $ docker-compose up -d
 
 **Warning**: These quick setups are only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -33,28 +32,28 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/redis?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy Redis(TM) in Kubernetes?
+## How to deploy Redis(TM) in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Redis(TM) Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/redis).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
 * [`6.2`, `6.2-debian-10`, `6.2.6`, `6.2.6-debian-10-r30`, `latest` (6.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.2.6-debian-10-r30/6.2/debian-10/Dockerfile)
 * [`6.0`, `6.0-debian-10`, `6.0.16`, `6.0.16-debian-10-r30` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.0.16-debian-10-r30/6.0/debian-10/Dockerfile)
-* [`5.0`, `5.0-debian-10`, `5.0.14`, `5.0.14-debian-10-r31` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.14-debian-10-r31/5.0/debian-10/Dockerfile)
+* [`5.0`, `5.0-debian-10`, `5.0.14`, `5.0.14-debian-10-r32` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.14-debian-10-r32/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami Redis(TM) Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/redis).
 
@@ -74,7 +73,7 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/redis:latest 'https://github.com/bitnami/bitnami-docker-redis.git#master:6.2/debian-10'
 ```
 
-# Persisting your database
+## Persisting your database
 
 Redis(TM) provides a different range of [persistence options](https://redis.io/topics/persistence). This contanier uses *AOF persistence by default* but it is easy to overwrite that configuration in a `docker-compose.yaml` file with this entry `command: /opt/bitnami/scripts/redis/run.sh --appendonly no`. Alternatively, you may use the `REDIS_AOF_ENABLED` env variable as explained in [Disabling AOF persistence](https://github.com/bitnami/bitnami-docker-redis#disabling-aof-persistence).
 
@@ -102,23 +101,23 @@ services:
 
 > NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-# Connecting to other containers
+## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a Redis(TM) server running inside a container can easily be accessed by your application containers.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-## Using the Command Line
+### Using the Command Line
 
 In this example, we will create a Redis(TM) client instance that will connect to the server instance that is running on the same docker network as the client.
 
-### Step 1: Create a network
+#### Step 1: Create a network
 
 ```console
 $ docker network create app-tier --driver bridge
 ```
 
-### Step 2: Launch the Redis(TM) server instance
+#### Step 2: Launch the Redis(TM) server instance
 
 Use the `--network app-tier` argument to the `docker run` command to attach the Redis(TM) container to the `app-tier` network.
 
@@ -129,7 +128,7 @@ $ docker run -d --name redis-server \
     bitnami/redis:latest
 ```
 
-### Step 3: Launch your Redis(TM) client instance
+#### Step 3: Launch your Redis(TM) client instance
 
 Finally we create a new container instance to launch the Redis(TM) client and connect to the server created in the previous step:
 
@@ -139,7 +138,7 @@ $ docker run -it --rm \
     bitnami/redis:latest redis-cli -h redis-server
 ```
 
-## Using Docker Compose
+### Using Docker Compose
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the Redis(TM) server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
@@ -174,9 +173,9 @@ Launch the containers using:
 $ docker-compose up -d
 ```
 
-# Configuration
+## Configuration
 
-## Disabling Redis(TM) commands
+### Disabling Redis(TM) commands
 
 For security reasons, you may want to disable some commands. You can specify them by using the following environment variable on the first run:
 
@@ -209,7 +208,7 @@ services:
   ...
 ```
 
-## Passing extra command-line flags to redis-server startup
+### Passing extra command-line flags to redis-server startup
 
 Passing extra command-line flags to the redis service command is possible by adding them as arguments to *run.sh* script:
 
@@ -231,7 +230,7 @@ services:
 
 Refer to the [Redis(TM) documentation](https://redis.io/topics/config#passing-arguments-via-the-command-line) for the complete list of arguments.
 
-## Setting the server password on first run
+### Setting the server password on first run
 
 Passing the `REDIS_PASSWORD` environment variable when running the image for the first time will set the Redis(TM) server password to the value of `REDIS_PASSWORD` (or the content of the file specified in `REDIS_PASSWORD_FILE`).
 
@@ -254,7 +253,7 @@ services:
 
 **Warning** The Redis(TM) database is always configured with remote access enabled. It's suggested that the `REDIS_PASSWORD` env variable is always specified to set a password. In case you want to access the database without a password set the environment variable `ALLOW_EMPTY_PASSWORD=yes`. **This is recommended only for development**.
 
-## Allowing empty passwords
+### Allowing empty passwords
 
 By default the Redis(TM) image expects all the available passwords to be set. In order to allow empty passwords, it is necessary to set the `ALLOW_EMPTY_PASSWORD=yes` env variable. This env variable is only recommended for testing or development purposes. We strongly recommend specifying the `REDIS_PASSWORD` for any other scenario.
 
@@ -273,7 +272,7 @@ services:
   ...
 ```
 
-## Disabling AOF persistence
+### Disabling AOF persistence
 
 Redis(TM) offers different [options](https://redis.io/topics/persistence) when it comes to persistence. By default, this image is set up to use the AOF (Append Only File) approach. Should you need to change this behaviour, setting the `REDIS_AOF_ENABLED=no` env variable will disable this feature.
 
@@ -292,7 +291,7 @@ services:
   ...
 ```
 
-## Setting up a standalone instance
+### Setting up a standalone instance
 
 By default, this image is set up to launch Redis(TM) in standalone mode on port 6379. Should you need to change this behavior, setting the `REDIS_PORT_NUMBER` environment variable will modify the port number. This is not to be confused with `REDIS_MASTER_PORT_NUMBER` or `REDIS_REPLICA_PORT` environment variables that are applicable in replication mode.
 
@@ -314,7 +313,7 @@ services:
   ....
 ```
 
-## Setting up replication
+### Setting up replication
 
 A [replication](http://redis.io/topics/replication) cluster can easily be setup with the Bitnami Redis(TM) Docker Image using the following environment variables:
 
@@ -327,7 +326,7 @@ A [replication](http://redis.io/topics/replication) cluster can easily be setup 
 
 In a replication cluster you can have one master and zero or more replicas. When replication is enabled the master node is in read-write mode, while the replicas are in read-only mode. For best performance its advisable to limit the reads to the replicas.
 
-### Step 1: Create the replication master
+#### Step 1: Create the replication master
 
 The first step is to start the Redis(TM) master.
 
@@ -340,7 +339,7 @@ $ docker run --name redis-master \
 
 In the above command the container is configured as the `master` using the `REDIS_REPLICATION_MODE` parameter. The `REDIS_PASSWORD` parameter enables authentication on the Redis(TM) master.
 
-### Step 2: Create the replica node
+#### Step 2: Create the replica node
 
 Next we start a Redis(TM) replica container.
 
@@ -407,7 +406,7 @@ The above command scales up the number of replicas to `3`. You can scale down in
 
 > **Note**: You should not scale up/down the number of master nodes. Always have only one master node running.
 
-## Securing Redis(TM) traffic
+### Securing Redis(TM) traffic
 
 Starting with version 6, Redis(TM) adds the support for SSL/TLS connections. Should you desire to enable this optional feature, you may use the following environment variables to configure the application:
 
@@ -456,7 +455,7 @@ When enabling TLS, conventional standard traffic is disabled by default. However
 
 Alternatively, you may also provide with this configuration in your [custom](https://github.com/bitnami/bitnami-docker-redis#configuration-file) configuration file.
 
-## Configuration file
+### Configuration file
 
 The image looks for configurations in `/opt/bitnami/redis/mounted-etc/redis.conf`. You can overwrite the `redis.conf` file using your own custom configuration file.
 
@@ -482,7 +481,7 @@ services:
 
 Refer to the [Redis(TM) configuration](http://redis.io/topics/config) manual for the complete list of configuration options.
 
-# Logging
+## Logging
 
 The Bitnami Redis(TM) Docker image sends the container logs to the `stdout`. To view the logs:
 
@@ -498,13 +497,13 @@ $ docker-compose logs redis
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of Redis(TM), including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/redis:latest
@@ -513,7 +512,7 @@ $ docker pull bitnami/redis:latest
 or if you're using Docker Compose, update the value of the image property to
 `bitnami/redis:latest`.
 
-### Step 2: Stop and backup the currently running container
+#### Step 2: Stop and backup the currently running container
 
 Stop the currently running container using the command
 
@@ -533,7 +532,7 @@ Next, take a snapshot of the persistent volume `/path/to/redis-persistence` usin
 $ rsync -a /path/to/redis-persistence /path/to/redis-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
-### Step 3: Remove the currently running container
+#### Step 3: Remove the currently running container
 
 ```console
 $ docker rm -v redis
@@ -545,7 +544,7 @@ or using Docker Compose:
 $ docker-compose rm -v redis
 ```
 
-### Step 4: Run the new image
+#### Step 4: Run the new image
 
 Re-create your container from the new image.
 
@@ -559,17 +558,17 @@ or using Docker Compose:
 $ docker-compose up redis
 ```
 
-# Notable Changes
+## Notable Changes
 
-## 5.0.8-debian-10-r24
+### 5.0.8-debian-10-r24
 
 - The recommended mount point to use a custom `redis.conf` changes from `/opt/bitnami/redis/etc/ ` to `/opt/bitnami/redis/mounted-etc/`.
 
-## 5.0.0-r0
+### 5.0.0-r0
 
 - Starting with Redis(TM) 5.0 the command [REPLICAOF](https://redis.io/commands/replicaof) is available in favor of `SLAVEOF`. For backward compatibility with previous versions, `slave` replication mode is still supported. We encourage the use of the `REPLICAOF` command if you are using Redis(TM) 5.0.
 
-## 4.0.1-r24
+### 4.0.1-r24
 
 - Decrease the size of the container. It is not necessary Node.js anymore. Redis(TM) configuration moved to bash scripts in the `rootfs/` folder.
 - The recommended mount point to persist data changes to `/bitnami/redis/data`.
@@ -578,32 +577,32 @@ $ docker-compose up redis
 
 ```bash
 docker-compose down
-# Locate your volume and modify the file tree
+## Locate your volume and modify the file tree
 VOLUME=$(docker volume ls | grep "redis_data" | awk '{print $2}')
 docker run --rm -i -v=${VOLUME}:/tmp/redis busybox find /tmp/redis/data -maxdepth 1 -exec mv {} /tmp/redis \;
 docker run --rm -i -v=${VOLUME}:/tmp/redis busybox rm -rf /tmp/redis/{data,conf,.initialized}
-# Change the mount point
+## Change the mount point
 sed -i -e 's#redis_data:/bitnami/redis#redis_data:/bitnami/redis/data#g' docker-compose.yml
-# Pull the latest bitnami/redis image
+## Pull the latest bitnami/redis image
 docker pull bitnami/redis:latest
 docker-compose up -d
 ```
 
-## 4.0.1-r1
+### 4.0.1-r1
 
 - The redis container has been migrated to a non-root container approach. Previously the container run as `root` user and the redis daemon was started as `redis` user. From now own, both the container and the redis daemon run as user `1001`.
   As a consequence, the configuration files are writable by the user running the redis process.
 
-## 3.2.0-r0
+### 3.2.0-r0
 
 - All volumes have been merged at `/bitnami/redis`. Now you only need to mount a single volume at `/bitnami/redis` for persistence.
 - The logs are always sent to the `stdout` and are no longer collected in the volume.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-redis/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-redis/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-redis/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -613,7 +612,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 Copyright (c) 2015-2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
