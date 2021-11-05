@@ -1,17 +1,18 @@
+# SCDF Composed Task Runner packaged by Bitnami
 
-# What is Spring Cloud Data Flow Composed Task Runner?
+## What is SCDF Composed Task Runner?
 
-> The Composed Task Runner is used by the Data Flow server to parse a directed graph DSL, execute a REST-ful call against a specified instance, launch the associated task definition, and check the status of the task. Following this, the Composed Task Runner will either proceed to the next task in the graph or fail based on the DSL configuration.
+> The Spring Cloud Composed Task Runner is a helper used by the Data Flow server to parse a directed graph DSL, launch the task definition specified in an instance, and check task completion status.
 
-[See how to deploy Spring Cloud Data Flow Server](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow)
+[Overview of SCDF Composed Task Runner](https://github.com/spring-cloud/spring-cloud-dataflow)
 
-# TL;DR
+## TL;DR
 
 ```console
 $ docker run --name spring-cloud-dataflow-composed-task-runner bitnami/spring-cloud-dataflow-composed-task-runner:latest
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -23,16 +24,16 @@ $ docker run --name spring-cloud-dataflow-composed-task-runner bitnami/spring-cl
 
 > This [CVE scan report](https://quay.io/repository/bitnami/spring-cloud-dataflow-composed-task-runner?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.9.1`, `2.9.1-debian-10-r7`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow-composed-task-runner/blob/2.9.1-debian-10-r7/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.9.1`, `2.9.1-debian-10-r8`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow-composed-task-runner/blob/2.9.1-debian-10-r8/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/spring-cloud-dataflow-composed-task-runner GitHub repo](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow-composed-task-runner).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami spring-cloud-dataflow-composed-task-runner Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/spring-cloud-dataflow-composed-task-runner).
 
@@ -52,9 +53,9 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/spring-cloud-dataflow-composed-task-runner:latest 'https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow-composed-task-runner.git#master:2/debian-10'
 ```
 
-# Configuration
+## Configuration
 
-## Running commands
+### Running commands
 
 To run tasks inside this container you can use `docker run`:
 
@@ -62,11 +63,11 @@ To run tasks inside this container you can use `docker run`:
 $ docker run --rm --name spring-cloud-dataflow-composed-task-runner bitnami/spring-cloud-dataflow-composed-task-runner:latest <runner_args>
 ```
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow-composed-task-runner/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow-composed-task-runner/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow-composed-task-runner/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -76,7 +77,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2021 Bitnami
 
