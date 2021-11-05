@@ -1,23 +1,25 @@
-# What is JRuby?
+# JRuby packaged by Bitnami
 
-> JRuby is an implementation of the Ruby language using the JVM.
+## What is JRuby?
 
-[https://www.jruby.org/](https://www.jruby.org/)
+> JRuby is a 100% Java implementation of the Ruby programming language. It is Ruby for the JVM. JRuby provides a complete set of core built-in classes and syntax for the Ruby language.
 
-# TL;DR
+[Overview of JRuby](http://jruby.org/)
+
+## TL;DR
 
 ```console
 $ docker run -it --name jruby bitnami/jruby:latest
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-jruby/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -28,17 +30,17 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/jruby?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
 * [`9.3`, `9.3-debian-10`, `9.3.1-0`, `9.3.1-0-debian-10-r22` (9.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jruby/blob/9.3.1-0-debian-10-r22/9.3/debian-10/Dockerfile)
-* [`9.2`, `9.2-debian-10`, `9.2.20-0`, `9.2.20-0-debian-10-r2`, `latest` (9.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jruby/blob/9.2.20-0-debian-10-r2/9.2/debian-10/Dockerfile)
+* [`9.2`, `9.2-debian-10`, `9.2.20-0`, `9.2.20-0-debian-10-r3`, `latest` (9.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jruby/blob/9.2.20-0-debian-10-r3/9.2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jruby GitHub repo](https://github.com/bitnami/bitnami-docker-jruby).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami JRuby Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/jruby).
 
@@ -58,7 +60,7 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/jruby:latest 'https://github.com/bitnami/bitnami-docker-jruby.git#master:9.2/debian-10'
 ```
 
-# Entering the JRuby Interactive Console
+## Entering the JRuby Interactive Console
 
 By default, running this image will drop you into the JRuby Interactive Console (`jirb`), where you can interactively test and try things out in JRuby.
 
@@ -70,9 +72,9 @@ $ docker run -it --name jruby bitnami/jruby:latest
 
   - [JRuby Interactive Console Documentation](https://github.com/jruby/jruby/wiki/GettingStarted#jirb-ruby-interactive-console)
 
-# Configuration
+## Configuration
 
-## Running your Ruby script
+### Running your Ruby script
 
 The default work directory for the JRuby image is `/app`. You can mount a folder from your host here that includes your Ruby script, and run it normally using the `ruby` command.
 
@@ -81,7 +83,7 @@ $ docker run -it --name jruby -v /path/to/app:/app bitnami/jruby:latest \
   ruby script.rb
 ```
 
-## Running a Ruby app with gems
+### Running a Ruby app with gems
 
 If your Ruby app has a `Gemfile` defining your app's dependencies and start script, you can install the dependencies before running your app.
 
@@ -106,7 +108,7 @@ jruby:
   - [rubygems.org](https://rubygems.org/)
   - [bundler.io](http://bundler.io/)
 
-## Accessing a Ruby app running a web server
+### Accessing a Ruby app running a web server
 
 This image exposes port `3000` in the container, so you should ensure that your web server is binding to port `3000`, as well as listening on `0.0.0.0` to accept remote connections from your host.
 
@@ -144,15 +146,15 @@ $ docker run -it --name jruby -p 8080:3000 bitnami/jruby:latest
 
 Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/).
 
-# Connecting to other containers
+## Connecting to other containers
 
 If you want to connect to your Ruby web server inside another container, you can use Docker networking to create a network and attach all the containers to that network.
 
-## Serving your Ruby app through an nginx frontend
+### Serving your Ruby app through an nginx frontend
 
 We may want to make our Ruby web server only accessible via an nginx web server. Doing so will allow us to setup more complex configuration, serve static assets using nginx, load balance to different Ruby instances, etc.
 
-### Step 1: Create a network
+#### Step 1: Create a network
 
 ```console
 $ docker network create app-tier --driver bridge
@@ -168,7 +170,7 @@ networks:
     driver: bridge
 ```
 
-### Step 2: Create a virtual host
+#### Step 2: Create a virtual host
 
 Let's create an nginx virtual host to reverse proxy to our JRuby container.
 
@@ -193,7 +195,7 @@ Notice we've substituted the link alias name `myapp`, we will use the same name 
 
 Copy the virtual host above, saving the file somewhere on your host. We will mount it as a volume in our nginx container.
 
-### Step 3: Run the JRuby image with a specific name
+#### Step 3: Run the JRuby image with a specific name
 
 ```console
 $ docker run -it --name myapp \
@@ -215,7 +217,7 @@ myapp:
     - .:/app
 ```
 
-### Step 4: Run the nginx image
+#### Step 4: Run the nginx image
 
 ```console
 $ docker run -it \
@@ -236,19 +238,19 @@ nginx:
     - /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf
 ```
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of JRuby, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/jruby:latest
 ```
 
-### Step 2: Stop the running container
+#### Step 2: Stop the running container
 
 Stop the currently running container using the command
 
@@ -256,13 +258,13 @@ Stop the currently running container using the command
 $ docker stop jruby
 ```
 
-### Step 3: Remove the currently running container
+#### Step 3: Remove the currently running container
 
 ```console
 $ docker-compose rm -v jruby
 ```
 
-### Step 4: Run the new image
+#### Step 4: Run the new image
 
 Re-create your container from the new image.
 
@@ -276,15 +278,15 @@ or using Docker Compose:
 $ docker-compose up ruby
 ```
 
-# Branch Deprecation Notice
+## Branch Deprecation Notice
 
 JRuby's branch 9.2 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 11-14-2021
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-jruby/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-jruby/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-jruby/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -294,7 +296,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright (c) 2021 Bitnami
 
