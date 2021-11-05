@@ -1,23 +1,18 @@
+# Redis(TM) Sentinel packaged by Bitnami
 
-# What is Redis(TM) Sentinel packaged by Bitnami?
+## What is Redis(TM) Sentinel?
 
-Disclaimer: REDIS(r) is a registered trademark of Redis Labs Ltd.Any rights therein are reserved to Redis Labs Ltd. Any use by Bitnami is for referential
-purposes only and does not indicate any sponsorship, endorsement, or affiliation between Redis Labs Ltd.
+> Redis(TM) Sentinel provides high availability for Redis. Redis Sentinel also provides other collateral tasks such as monitoring, notifications and acts as a configuration provider for clients.
 
-> Redis(TM) Sentinel provides high availability for Redis. In practical terms this means that using Sentinel you can create a Redis deployment that resists without human intervention to certain kind of failures.
->
-> Redis(TM) Sentinel also provides other collateral tasks such as monitoring, notifications and acts as a configuration provider for clients.
+[Overview of Redis(TM) Sentinel](http://redis.io/)
 
-
-[redis.io](http://redis.io/)
-
-# TL;DR
+## TL;DR
 
 ```console
 $ docker run --name redis-sentinel -e REDIS_MASTER_HOST=redis bitnami/redis-sentinel:latest
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-redis-sentinel/master/docker-compose.yml > docker-compose.yml
@@ -26,7 +21,7 @@ $ docker-compose up -d
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -38,22 +33,22 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/redis-sentinel?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
 * [`6.2`, `6.2-debian-10`, `6.2.6`, `6.2.6-debian-10-r30`, `latest` (6.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.2.6-debian-10-r30/6.2/debian-10/Dockerfile)
 * [`6.0`, `6.0-debian-10`, `6.0.16`, `6.0.16-debian-10-r30` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.0.16-debian-10-r30/6.0/debian-10/Dockerfile)
-* [`5.0`, `5.0-debian-10`, `5.0.14`, `5.0.14-debian-10-r30` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.14-debian-10-r30/5.0/debian-10/Dockerfile)
+* [`5.0`, `5.0-debian-10`, `5.0.14`, `5.0.14-debian-10-r31` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.14-debian-10-r31/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-sentinel GitHub repo](https://github.com/bitnami/bitnami-docker-redis-sentinel).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami Redis(TM) Sentinel Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/redis-sentinel).
 
@@ -73,23 +68,23 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/redis-sentinel:latest 'https://github.com/bitnami/bitnami-docker-redis-sentinel.git#master:6.2/debian-10'
 ```
 
-# Connecting to other containers
+## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a Redis(TM) server running inside a container can easily be accessed by your application containers.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-## Using the Command Line
+### Using the Command Line
 
 In this example, we will create a Redis(TM) Sentinel instance that will monitor a Redis(TM) instance that is running on the same docker network.
 
-### Step 1: Create a network
+#### Step 1: Create a network
 
 ```console
 $ docker network create app-tier --driver bridge
 ```
 
-### Step 2: Launch the Redis(TM) instance
+#### Step 2: Launch the Redis(TM) instance
 
 Use the `--network app-tier` argument to the `docker run` command to attach the Redis(TM) container to the `app-tier` network.
 
@@ -100,7 +95,7 @@ $ docker run -d --name redis-server \
     bitnami/redis:latest
 ```
 
-### Step 3: Launch your Redis(TM) Sentinel instance
+#### Step 3: Launch your Redis(TM) Sentinel instance
 
 Finally we create a new container instance to launch the Redis(TM) client and connect to the server created in the previous step:
 
@@ -111,7 +106,7 @@ $ docker run -it --rm \
     bitnami/redis-sentinel:latest
 ```
 
-## Using Docker Compose
+### Using Docker Compose
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the Redis(TM) server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
@@ -145,7 +140,7 @@ Launch the containers using:
 $ docker-compose up -d
 ```
 
-### Using Master-Slave setups
+#### Using Master-Slave setups
 
 When using Sentinel in Master-Slave setup, if you want to set the passwords for Master and Slave nodes, consider having the **same** `REDIS_PASSWORD` and `REDIS_MASTER_PASSWORD` for them ([#23](https://github.com/bitnami/bitnami-docker-redis-sentinel/issues/23)).
 
@@ -198,9 +193,9 @@ Launch the containers using:
 $ docker-compose up --scale redis-sentinel=3 -d
 ```
 
-# Configuration
+## Configuration
 
-## Environment variables
+### Environment variables
 
 The Redis(TM) Sentinel instance can be customized by specifying environment variables on the first run. The following environment values are provided to customize Redis(TM) Sentinel:
 
@@ -225,7 +220,7 @@ The Redis(TM) Sentinel instance can be customized by specifying environment vari
 - `REDIS_SENTINEL_ANNOUNCE_IP`: Use the specified IP address in the HELLO messages used to gossip its presence. Default: **auto-detected local address**.
 - `REDIS_SENTINEL_ANNOUNCE_PORT`: Use the specified port in the HELLO messages used to gossip its presence. Default: **port specified in `REDIS_SENTINEL_PORT_NUMBER`**.
 
-## Securing Redis(TM) Sentinel traffic
+### Securing Redis(TM) Sentinel traffic
 
 Starting with version 6, Redis(TM) adds the support for SSL/TLS connections. Should you desire to enable this optional feature, you may use the aforementioned `REDIS_SENTINEL_TLS_*` environment variables to configure the application.
 
@@ -265,11 +260,11 @@ When enabling TLS, conventional standard traffic is disabled by default. However
     ```
 Alternatively, you may also provide with this configuration in your [custom](https://github.com/bitnami/bitnami-docker-redis-sentinel#configuration-file) configuration file.
 
-## Configuration file
+### Configuration file
 
 The image looks for configurations in `/bitnami/redis-sentinel/conf/`. You can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/redis-persistence/redis-sentinel/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
-### Step 1: Run the Redis(TM) Sentinel image
+#### Step 1: Run the Redis(TM) Sentinel image
 
 Run the Redis(TM) Sentinel image, mounting a directory from your host.
 
@@ -291,7 +286,7 @@ services:
   ...
 ```
 
-### Step 2: Edit the configuration
+#### Step 2: Edit the configuration
 
 Edit the configuration on your host using your favorite editor.
 
@@ -299,7 +294,7 @@ Edit the configuration on your host using your favorite editor.
 $ vi /path/to/redis-persistence/redis-sentinel/conf/redis.conf
 ```
 
-### Step 3: Restart Redis(TM)
+#### Step 3: Restart Redis(TM)
 
 After changing the configuration, restart your Redis(TM) container for changes to take effect.
 
@@ -315,7 +310,7 @@ $ docker-compose restart redis
 
 Refer to the [Redis(TM) configuration](http://redis.io/topics/config) manual for the complete list of configuration options.
 
-# Logging
+## Logging
 
 The Bitnami Redis(TM) Sentinel Docker Image sends the container logs to the `stdout`. To view the logs:
 
@@ -331,13 +326,13 @@ $ docker-compose logs redis
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of Redis(TM) Sentinel, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/redis-sentinel:latest
@@ -346,7 +341,7 @@ $ docker pull bitnami/redis-sentinel:latest
 or if you're using Docker Compose, update the value of the image property to
 `bitnami/redis-sentinel:latest`.
 
-### Step 2: Stop and backup the currently running container
+#### Step 2: Stop and backup the currently running container
 
 Stop the currently running container using the command
 
@@ -366,7 +361,7 @@ Next, take a snapshot of the persistent volume `/path/to/redis-persistence` usin
 $ rsync -a /path/to/redis-persistence /path/to/redis-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
-### Step 3: Remove the currently running container
+#### Step 3: Remove the currently running container
 
 ```console
 $ docker rm -v redis
@@ -378,7 +373,7 @@ or using Docker Compose:
 $ docker-compose rm -v redis
 ```
 
-### Step 4: Run the new image
+#### Step 4: Run the new image
 
 Re-create your container from the new image.
 
@@ -392,21 +387,21 @@ or using Docker Compose:
 $ docker-compose up redis
 ```
 
-# Notable Changes
+## Notable Changes
 
-## 4.0.14-debian-9-r201, 4.0.14-ol-7-r222, 5.0.5-debian-9-r169, 5.0.5-ol-7-r175
+### 4.0.14-debian-9-r201, 4.0.14-ol-7-r222, 5.0.5-debian-9-r169, 5.0.5-ol-7-r175
 
 - Decrease the size of the container. The configuration logic is now based on Bash scripts in the `rootfs/` folder.
 
-## 4.0.10-r25
+### 4.0.10-r25
 
 - The Redis(TM) sentinel container has been migrated to a non-root container approach. Previously the container run as `root` user and the redis daemon was started as `redis` user. From now own, both the container and the redis daemon run as user `1001`. As a consequence, the configuration files are writable by the user running the redis process. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-redis-sentinel/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-redis-sentinel/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-redis-sentinel/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -416,7 +411,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 Copyright (c) 2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
