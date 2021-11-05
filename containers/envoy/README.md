@@ -1,17 +1,18 @@
+# Envoy packaged by Bitnami
 
-# What is Envoy?
+## What is Envoy?
 
-> Envoy is a distributed, high-performance proxy for cloud-native applications. Built on C++, it features a small memory footprint, universal application language compatibility, and supports http/2 and gRPC protocols. It is configurable through APIs. Envoy is the third CNCF graduated project, after Kubernetes and Prometheus.
+> Envoy is a distributed, high-performance proxy for cloud-native applications. It features a small memory footprint, universal application language compatibility, and supports http/2 and gRPC.
 
-[Overview of envoy](https://www.envoyproxy.io/)
+[Overview of Envoy](https://www.envoyproxy.io/)
 
-# TL;DR
+## TL;DR
 
 ```console
 $ docker run --name envoy bitnami/envoy:latest
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -23,7 +24,7 @@ $ docker run --name envoy bitnami/envoy:latest
 
 > This [CVE scan report](https://quay.io/repository/bitnami/envoy?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
@@ -31,12 +32,12 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`1.20`, `1.20-debian-10`, `1.20.0`, `1.20.0-debian-10-r11`, `latest` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.20.0-debian-10-r11/1.20/debian-10/Dockerfile)
 * [`1.19`, `1.19-debian-10`, `1.19.1`, `1.19.1-debian-10-r70` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.19.1-debian-10-r70/1.19/debian-10/Dockerfile)
 * [`1.18`, `1.18-debian-10`, `1.18.4`, `1.18.4-debian-10-r70` (1.18/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.18.4-debian-10-r70/1.18/debian-10/Dockerfile)
-* [`1.17`, `1.17-debian-10`, `1.17.4`, `1.17.4-debian-10-r70` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.17.4-debian-10-r70/1.17/debian-10/Dockerfile)
+* [`1.17`, `1.17-debian-10`, `1.17.4`, `1.17.4-debian-10-r71` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.17.4-debian-10-r71/1.17/debian-10/Dockerfile)
 * [`1.16`, `1.16-debian-10`, `1.16.5`, `1.16.5-debian-10-r70` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.16.5-debian-10-r70/1.16/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/envoy GitHub repo](https://github.com/bitnami/bitnami-docker-envoy).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami envoy Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/envoy).
 
@@ -56,9 +57,9 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/envoy:latest 'https://github.com/bitnami/bitnami-docker-envoy.git#master:1.20/debian-10'
 ```
 
-# Configuration
+## Configuration
 
-## Running commands
+### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `envoy --version` you can follow the example below:
 
@@ -68,7 +69,7 @@ $ docker run --rm --name envoy bitnami/envoy:latest -- --version
 
 Check the [official envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/operations/cli) for a list of the available parameters.
 
-## Adding your custom configuration
+### Adding your custom configuration
 
 By default, envoy will look for a configuration file in `/opt/bitnami/envoy/conf/envoy.yaml`. You can launch the envoy container with your custom configuration with the command below:
 
@@ -78,15 +79,11 @@ $ docker run --rm -v /path/to/your/envoy.yaml:/opt/bitnami/envoy/conf/envoy.yaml
 
 Visit the [official envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/configuration) for all the available configurations.
 
-# Branch Deprecation Notice
-
-Envoy's branch 1.16 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 11-21-2021
-
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-envoy/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-envoy/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-envoy/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -96,7 +93,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2021 Bitnami
 
