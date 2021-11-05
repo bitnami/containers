@@ -1,16 +1,18 @@
-# What is Grafana Tempo?
+# Grafana Tempo packaged by Bitnami
+
+## What is Grafana Tempo?
 
 > Grafana Tempo is a distributed tracing system that has out-of-the-box integration with Grafana. It is highly scalable and works with many popular tracing protocols.
 
 [Overview of Grafana Tempo](https://github.com/grafana/tempo)
 
-# TL;DR
+## TL;DR
 
 ```console
 $ docker run --name grafana-tempo bitnami/grafana-tempo:latest
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -22,16 +24,16 @@ $ docker run --name grafana-tempo bitnami/grafana-tempo:latest
 
 > This [CVE scan report](https://quay.io/repository/bitnami/grafana-tempo?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.1.0`, `1.1.0-debian-10-r62`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-tempo/blob/1.1.0-debian-10-r62/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.1.0`, `1.1.0-debian-10-r63`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-tempo/blob/1.1.0-debian-10-r63/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana-tempo GitHub repo](https://github.com/bitnami/bitnami-docker-grafana-tempo).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami grafana-tempo Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/grafana-tempo).
 
@@ -51,13 +53,13 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/grafana-tempo:latest 'https://github.com/bitnami/bitnami-docker-grafana-tempo.git#master:1/debian-10'
 ```
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Configuration
+## Configuration
 
-## Running commands
+### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `grafana-tempo --version` you can follow the example below:
 
@@ -85,11 +87,11 @@ services:
 
 Check the [official Grafana Tempo documentation](https://grafana.com/docs/tempo/latest/configuration/) to understand the possible configurations.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-grafana-tempo/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-grafana-tempo/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-grafana-tempo/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -99,7 +101,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2021 Bitnami
 
