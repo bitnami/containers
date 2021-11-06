@@ -1,12 +1,14 @@
-# What is Apache Airflow Scheduler?
+# Apache Airflow Scheduler packaged by Bitnami
 
-> Airflow is a platform to programmatically author, schedule and monitor workflows. Airflow Scheduler is one of the required components when the CeleryExecutor is configured.
+## What is Apache Airflow Scheduler?
 
-https://airflow.apache.org/
+> Apache Airflow is a tool to express and execute workflows as directed acyclic graphs (DAGs). The Airflow scheduler triggers tasks and provides tools to monitor task progress.
 
-# TL;DR
+[Overview of Apache Airflow Scheduler](https://airflow.apache.org/)
 
-## Docker Compose
+## TL;DR
+
+### Docker Compose
 
 ```console
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-airflow-scheduler/master/docker-compose.yml
@@ -15,7 +17,7 @@ $ docker-compose up
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -28,26 +30,26 @@ You can find the default credentials and available configuration options in the 
 > This [CVE scan report](https://quay.io/repository/bitnami/airflow-scheduler?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
 * [`2`, `2-debian-10`, `2.2.1`, `2.2.1-debian-10-r6`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-scheduler/blob/2.2.1-debian-10-r6/2/debian-10/Dockerfile)
-* [`1`, `1-debian-10`, `1.10.15`, `1.10.15-debian-10-r210` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-scheduler/blob/1.10.15-debian-10-r210/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.10.15`, `1.10.15-debian-10-r211` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-scheduler/blob/1.10.15-debian-10-r211/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow-scheduler).
 
-# Prerequisites
+## Prerequisites
 
 To run this application you need [Docker Engine](https://www.docker.com/products/docker-engine) >= `1.10.0`. [Docker Compose](https://www.docker.com/products/docker-compose) is recommended with a version `1.6.0` or later.
 
-# How to use this image
+## How to use this image
 
-Airflow Scheduler is a component of an Airflow solution configuring with the `CeleryExecutor`. Hence, you will need to rest of Airflow components for this image to work.
+Apache Airflow Scheduler is a component of an Airflow solution configuring with the `CeleryExecutor`. Hence, you will need to rest of Airflow components for this image to work.
 You will need an [Airflow Webserver](https://www.github.com/bitnami/bitnami-docker-airflow), one or more [Airflow Workers](https://www.github.com/bitnami/bitnami-docker-airflow-worker), a [PostgreSQL database](https://www.github.com/bitnami/bitnami-docker-postgresql) and a [Redis(TM) server](https://www.github.com/bitnami/bitnami-docker-redis).
 
-## Using Docker Compose
+### Using Docker Compose
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-airflow-scheduler/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
@@ -56,7 +58,7 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-airflow-sch
 $ docker-compose up -d
 ```
 
-## Using the Docker Command Line
+### Using the Docker Command Line
 
 If you want to run the application manually instead of using `docker-compose`, these are the basic steps you need to run:
 
@@ -110,7 +112,7 @@ If you want to run the application manually instead of using `docker-compose`, t
     bitnami/airflow:latest
   ```
 
-5. Create volumes for Airflow Scheduler persistence and launch the container
+5. Create volumes for Apache Airflow Scheduler persistence and launch the container
 
   ```console
   $ docker volume create --name airflow_scheduler_data
@@ -145,17 +147,17 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 Access your application at http://your-ip:8080
 
-## Persisting your application
+### Persisting your application
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
 For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount volumes for persistence of [PostgreSQL data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database) and [Redis(TM) data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database)
 
-The above examples define docker volumes namely `postgresql_data`, `redis_data`, `airflow_data`, `airflow_scheduler_data` and `airflow_worker_data`. The Airflow Scheduler application state will persist as long as these volumes are not removed.
+The above examples define docker volumes namely `postgresql_data`, `redis_data`, `airflow_data`, `airflow_scheduler_data` and `airflow_worker_data`. The Apache Airflow Scheduler application state will persist as long as these volumes are not removed.
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
-### Mount host directories as data volumes with Docker Compose
+#### Mount host directories as data volumes with Docker Compose
 
 The following `docker-compose.yml` template demonstrates the use of host directories as data volumes.
 
@@ -218,7 +220,7 @@ services:
       - /path/to/airflow-persistence:/bitnami
 ```
 
-### Mount host directories as data volumes using the Docker command line
+#### Mount host directories as data volumes using the Docker command line
 
 1. Create a network (if it does not exist)
 
@@ -267,7 +269,7 @@ services:
     bitnami/airflow:latest
   ```
 
-5. Create the Airflow Scheduler container with host volumes
+5. Create the Apache Airflow Scheduler container with host volumes
 
   ```console
   $ docker run -d --name airflow-scheduler \
@@ -298,43 +300,43 @@ services:
     bitnami/airflow-worker:latest
   ```
 
-# Configuration
+## Configuration
 
-## Installing additional python modules
+### Installing additional python modules
 
 This container supports the installation of additional python modules at start-up time. In order to do that, you can mount a `requirements.txt` file with your specific needs under the path `/bitnami/python/requirements.txt`.
 
-## Environment variables
+### Environment variables
 
-The Airflow Scheduler instance can be customized by specifying environment variables on the first run. The following environment values are provided to customize Airflow Scheduler:
+The Apache Airflow Scheduler instance can be customized by specifying environment variables on the first run. The following environment values are provided to customize Apache Airflow Scheduler:
 
-##### Airflow Scheduler configuration
+###### Apache Airflow Scheduler configuration
 
-- `AIRFLOW_EXECUTOR`: Airflow Scheduler executor. Default: **SequentialExecutor**
-- `AIRFLOW_FERNET_KEY`: Airflow Scheduler Fernet key. No defaults.
-- `AIRFLOW_SECRET_KEY`: Airflow Scheduler Secret key. No defaults.
-- `AIRFLOW_WEBSERVER_HOST`: Airflow Scheduler webserver host. Default: **airflow**
-- `AIRFLOW_WEBSERVER_PORT_NUMBER`: Airflow Scheduler webserver port. Default: **8080**
+- `AIRFLOW_EXECUTOR`: Apache Airflow Scheduler executor. Default: **SequentialExecutor**
+- `AIRFLOW_FERNET_KEY`: Apache Airflow Scheduler Fernet key. No defaults.
+- `AIRFLOW_SECRET_KEY`: Apache Airflow Scheduler Secret key. No defaults.
+- `AIRFLOW_WEBSERVER_HOST`: Apache Airflow Scheduler webserver host. Default: **airflow**
+- `AIRFLOW_WEBSERVER_PORT_NUMBER`: Apache Airflow Scheduler webserver port. Default: **8080**
 - `AIRFLOW_LOAD_EXAMPLES`: To load example tasks into the application. Default: **yes**
 - `AIRFLOW_HOSTNAME_CALLABLE`: Method to obtain the hostname. No defaults.
 
-##### Use an existing database
+###### Use an existing database
 
 - `AIRFLOW_DATABASE_HOST`: Hostname for PostgreSQL server. Default: **postgresql**
 - `AIRFLOW_DATABASE_PORT_NUMBER`: Port used by PostgreSQL server. Default: **5432**
-- `AIRFLOW_DATABASE_NAME`: Database name that Airflow Scheduler will use to connect with the database. Default: **bitnami_airflow**
-- `AIRFLOW_DATABASE_USERNAME`: Database user that Airflow Scheduler will use to connect with the database. Default: **bn_airflow**
-- `AIRFLOW_DATABASE_PASSWORD`: Database password that Airflow Scheduler will use to connect with the database. No defaults.
+- `AIRFLOW_DATABASE_NAME`: Database name that Apache Airflow Scheduler will use to connect with the database. Default: **bitnami_airflow**
+- `AIRFLOW_DATABASE_USERNAME`: Database user that Apache Airflow Scheduler will use to connect with the database. Default: **bn_airflow**
+- `AIRFLOW_DATABASE_PASSWORD`: Database password that Apache Airflow Scheduler will use to connect with the database. No defaults.
 - `AIRFLOW_DATABASE_USE_SSL`: Set to yes if the database uses SSL. Default: **no**
 - `AIRFLOW_REDIS_USE_SSL`: Set to yes if Redis(TM) uses SSL. Default: **no**
 - `REDIS_HOST`: Hostname for Redis(TM) server. Default: **redis**
 - `REDIS_PORT_NUMBER`: Port used by Redis(TM) server. Default: **6379**
-- `REDIS_USER`: USER that Airflow Scheduler will use to connect with Redis(TM). No defaults.
-- `REDIS_PASSWORD`: Password that Airflow Scheduler will use to connect with Redis(TM). No defaults.
+- `REDIS_USER`: USER that Apache Airflow Scheduler will use to connect with Redis(TM). No defaults.
+- `REDIS_PASSWORD`: Password that Apache Airflow Scheduler will use to connect with Redis(TM). No defaults.
 
 > In addition to the previous environment variables, all the parameters from the configuration file can be overwritten by using environment variables with this format: `AIRFLOW__{SECTION}__{KEY}`. Note the double underscores.
 
-### Specifying Environment variables using Docker Compose
+#### Specifying Environment variables using Docker Compose
 
 ```yaml
 version: '2'
@@ -354,7 +356,7 @@ services:
       - AIRFLOW_EMAIL=user@example.com
 ```
 
-### Specifying Environment variables on the Docker command line
+#### Specifying Environment variables on the Docker command line
 
 ```console
 $ docker run -d --name airflow -p 8080:8080 \
@@ -371,22 +373,22 @@ $ docker run -d --name airflow -p 8080:8080 \
     bitnami/airflow:latest
 ```
 
-# Notable Changes
+## Notable Changes
 
-## 1.10.15-debian-10-r18 and 2.0.1-debian-10-r52
+### 1.10.15-debian-10-r18 and 2.0.1-debian-10-r52
 
 - The size of the container image has been decreased.
 - The configuration logic is now based on Bash scripts in the *rootfs/* folder.
 
-# Branch Deprecation Notice
+## Branch Deprecation Notice
 
-Airflow Scheduler's branch 1 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 11-13-2021
+Apache Airflow Scheduler's branch 1 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 11-13-2021
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-airflow-scheduler/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-airflow-scheduler/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-airflow-scheduler/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -396,7 +398,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2015-2021 Bitnami
 
