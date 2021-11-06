@@ -1,17 +1,18 @@
+# Spring Cloud Data Flow Shell packaged by Bitnami
 
-# What is Spring Cloud Data Flow Shell?
+## What is Spring Cloud Data Flow Shell?
 
-> Spring Cloud Data Flow is a microservices-based toolkit for building streaming and batch data processing pipelines in Cloud Foundry and Kubernetes. This docker image ships the official shell to interact with the data flow server.
+> Spring Cloud Data Flow Shell is a tool for interacting with the Spring Cloud Data Flow server.
 
-[Overview of spring cloud data flow shell](https://docs.spring.io/spring-cloud-dataflow/docs/current/reference/htmlsingle/#shell)
+[Overview of Spring Cloud Data Flow Shell](https://github.com/spring-cloud/spring-cloud-dataflow)
 
-# TL;DR
+## TL;DR
 
 ```console
 $ docker run --name spring-cloud-dataflow-shell bitnami/spring-cloud-dataflow-shell:latest
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -23,16 +24,16 @@ $ docker run --name spring-cloud-dataflow-shell bitnami/spring-cloud-dataflow-sh
 
 > This [CVE scan report](https://quay.io/repository/bitnami/spring-cloud-dataflow-shell?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.9.1`, `2.9.1-debian-10-r7`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow-shell/blob/2.9.1-debian-10-r7/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.9.1`, `2.9.1-debian-10-r8`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow-shell/blob/2.9.1-debian-10-r8/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/spring-cloud-dataflow-shell GitHub repo](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow-shell).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami spring-cloud-dataflow-shell Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/spring-cloud-dataflow-shell).
 
@@ -52,9 +53,9 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/spring-cloud-dataflow-shell:latest 'https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow-shell.git#master:2/debian-10'
 ```
 
-# Configuration
+## Configuration
 
-## Running commands
+### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `spring-cloud-dataflow-shell --help` you can follow the example below:
 
@@ -64,11 +65,11 @@ $ docker run --rm --name spring-cloud-dataflow-shell bitnami/spring-cloud-datafl
 
 Consult the [spring-cloud-dataflow-shell Reference Documentation](https://docs.spring.io/spring-cloud-dataflow/docs/current/reference/htmlsingle/#shell) to find the completed list of commands available.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow-shell/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow-shell/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow-shell/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -78,7 +79,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2021 Bitnami
 
