@@ -1,20 +1,18 @@
-# What is Tensorflow Serving?
+# TensorFlow Serving packaged by Bitnami
 
-> TensorFlow Serving is a flexible, high-performance serving system for machine learning models, designed for production environments. TensorFlow Serving makes it easy to deploy new algorithms and experiments, while keeping the same server architecture and APIs. TensorFlow Serving provides out-of-the-box integration with TensorFlow models, but can be easily extended to serve other types of models and data.
+## What is TensorFlow Serving?
 
-> With the Bitnami Docker TensorFlow Serving image it is easy to server models like ResNet or MNIST. For a functional example you can check the [TensorFlow ResNet repository.](https://github.com/bitnami/bitnami-docker-tensorflow-resnet)
+> Tensorflow Serving is an open source high-performance system for serving machine learning models. It allows programmers to easily deploy algorithms and experiments without changing the architecture. 
 
-[tensorflow.github.io/serving/](https://tensorflow.github.io/serving/)
+[Overview of TensorFlow Serving](https://www.tensorflow.org/serving/)
 
-> NOTE: This image needs access to trained data to actually works. Please check [bitnami-docker-tensorflow-resnet](https://github.com/bitnami/bitnami-docker-tensorflow-resnet) repository or follow the steps provided [here](#using-the-command-line)
-
-# TL;DR
+## TL;DR
 
 ```console
 $ docker run --name tensorflow-serving bitnami/tensorflow-serving:latest
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-tensorflow-serving/master/docker-compose.yml > docker-compose.yml
@@ -23,7 +21,7 @@ $ docker-compose up -d
 
 You can find the available configuration options in the [Environment Variables](#environment-variables) section.
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -34,20 +32,20 @@ You can find the available configuration options in the [Environment Variables](
 
 > This [CVE scan report](https://quay.io/repository/bitnami/tensorflow-serving?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.6.1`, `2.6.1-debian-10-r0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/2.6.1-debian-10-r0/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.7.0`, `2.7.0-debian-10-r0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/2.7.0-debian-10-r0/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tensorflow-serving GitHub repo](https://github.com/bitnami/bitnami-docker-tensorflow-serving).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami TensorFlow Serving Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/tensorflow-serving).
 
@@ -67,7 +65,7 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/tensorflow-serving:latest 'https://github.com/bitnami/bitnami-docker-tensorflow-serving.git#master:2/debian-10'
 ```
 
-# Persisting your configuration
+## Persisting your configuration
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the data and configurations will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -90,17 +88,17 @@ services:
 
 > NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-# Connecting to other containers
+## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a TensorFlow Serving server running inside a container can easily be accessed by your application containers.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-## Using the Command Line
+### Using the Command Line
 
 In this example, we will create a TensorFlow ResNet client instance that will connect to the server instance that is running on the same docker network as the client. The ResNet client will export an already trained data so the server can read it and you will be able to query the server with an image to get it categorized.
 
-### Step 1: Download the ResNet trained data
+#### Step 1: Download the ResNet trained data
 
 ```console
 $ mkdir /tmp/model-data
@@ -109,13 +107,13 @@ $ cd /tmp/model-data
 $ tar xzf resnet_v2_fp32_savedmodel_NHWC_jpg.tar.gz --strip-components=2
 ```
 
-### Step 2: Create a network
+#### Step 2: Create a network
 
 ```console
 $ docker network create app-tier --driver bridge
 ```
 
-### Step 3: Launch the TensorFlow Serving server instance
+#### Step 3: Launch the TensorFlow Serving server instance
 
 Use the `--network app-tier` argument to the `docker run` command to attach the TensorFlow Serving container to the `app-tier` network.
 
@@ -126,7 +124,7 @@ $ docker run -d --name tensorflow-serving \
     bitnami/tensorflow-serving:latest
 ```
 
-### Step 4: Export the data model
+#### Step 4: Export the data model
 
 Run the `tensorflow-resnet` container in background mode to export the data model that you have already downloaded.
 
@@ -143,7 +141,7 @@ Monitor the logs of tensorflow-serving until it shows the message `Successfully 
 $ docker logs tensorflow-serving -f
 ```
 
-### Step 5: Launch your TensorFlow ResNet client instance
+#### Step 5: Launch your TensorFlow ResNet client instance
 
 Finally we create a new container instance to launch the TensorFlow Serving client and connect to the server created in the previous step:
 
@@ -154,7 +152,7 @@ $ docker run -it --rm \
     bitnami/tensorflow-resnet:latest resnet_client_cc --server_port=tensorflow-serving:8500 --image_file=path/to/image.jpg
 ```
 
-## Using Docker Compose
+### Using Docker Compose
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the TensorFlow Serving server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
@@ -187,9 +185,9 @@ Launch the containers using:
 $ docker-compose up -d
 ```
 
-# Configuration
+## Configuration
 
-## Environment variables
+### Environment variables
 
 Tensorflow Serving can be customized by specifying environment variables on the first run. The following environment values are provided to custom Tensorflow:
 
@@ -199,11 +197,11 @@ Tensorflow Serving can be customized by specifying environment variables on the 
 - `TENSORFLOW_SERVING_ENABLE_MONITORING`: Expose Prometheus metrics. Default: **no**
 - `TENSORFLOW_SERVING_MONITORING_PATH`: The API path where the metrics can be scraped. Default: **/monitoring/prometheus/metrics**
 
-## Configuration file
+### Configuration file
 
 The image looks for configurations in `/bitnami/tensorflow-serving/conf/`. As mentioned in [Persisting your configuation](#persisting-your-configuation) you can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/tensorflow-serving-persistence/tensorflow-serving/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
-### Step 1: Run the TensorFlow Serving image
+#### Step 1: Run the TensorFlow Serving image
 
 Run the TensorFlow Serving image, mounting a directory from your host.
 
@@ -222,7 +220,7 @@ services:
   ...
 ```
 
-### Step 2: Edit the configuration
+#### Step 2: Edit the configuration
 
 Edit the configuration on your host using your favorite editor.
 
@@ -230,7 +228,7 @@ Edit the configuration on your host using your favorite editor.
 $ vi /path/to/tensorflow-serving-persistence/conf/tensorflow-serving.conf
 ```
 
-### Step 3: Restart TensorFlow Serving
+#### Step 3: Restart TensorFlow Serving
 
 After changing the configuration, restart your TensorFlow Serving container for changes to take effect.
 
@@ -244,7 +242,7 @@ or using Docker Compose:
 $ docker-compose restart tensorflow-serving
 ```
 
-# Logging
+## Logging
 
 The Bitnami TensorFlow Serving Docker image sends the container logs to the `stdout`. To view the logs:
 
@@ -262,13 +260,13 @@ The logs are also stored inside the container in the /opt/bitnami/tensorflow-ser
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of TensorFlow Serving, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/tensorflow-serving:latest
@@ -277,7 +275,7 @@ $ docker pull bitnami/tensorflow-serving:latest
 or if you're using Docker Compose, update the value of the image property to
 `bitnami/tensorflow-serving:latest`.
 
-### Step 2: Stop and backup the currently running container
+#### Step 2: Stop and backup the currently running container
 
 Stop the currently running container using the command
 
@@ -299,7 +297,7 @@ $ rsync -a /path/to/tensorflow-serving-persistence /path/to/tensorflow-serving-p
 
 You can use this snapshot to restore the database state should the upgrade fail.
 
-### Step 3: Remove the currently running container
+#### Step 3: Remove the currently running container
 
 ```console
 $ docker rm -v tensorflow-serving
@@ -311,7 +309,7 @@ or using Docker Compose:
 $ docker-compose rm -v tensorflow-serving
 ```
 
-### Step 4: Run the new image
+#### Step 4: Run the new image
 
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
@@ -325,26 +323,26 @@ or using Docker Compose:
 $ docker-compose start tensorflow-serving
 ```
 
-# Notable Changes
+## Notable Changes
 
-## 2.5.1-debian-10-r12
+### 2.5.1-debian-10-r12
 
 - The size of the container image has been decreased.
 - The configuration logic is now based on Bash scripts in the rootfs/ folder.
 
-## 1.12.0-r34
+### 1.12.0-r34
 
 - The TensorFlow Serving container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the TensorFlow Serving daemon was started as the `tensorflow` user. From now on, both the container and the TensorFlow Serving daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
-## 1.8.0-r12, 1.8.0-debian-9-r1, 1.8.0-ol-7-r11
+### 1.8.0-r12, 1.8.0-debian-9-r1, 1.8.0-ol-7-r11
 
 - The default serving port has changed from 9000 to 8500.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-tensorflow-serving/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-tensorflow-serving/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-tensorflow-serving/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -354,7 +352,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2021 Bitnami
 
