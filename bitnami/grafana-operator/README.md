@@ -1,14 +1,16 @@
-# What is Grafana Operator?
+# Grafana Operator packaged by Bitnami
 
-A Kubernetes Operator based on the Operator SDK for creating and managing Grafana instances.
+## What is Grafana Operator?
 
-[https://github.com/integr8ly/grafana-operator](https://github.com/integr8ly/grafana-operator)
+> Grafana Operator is a Kubernetes operator that enables the installation and management of Grafana instances, dashboards and plugins.
 
-# TL;DR
+[Overview of Grafana Operator](https://github.com/integr8ly/grafana-operator)
+
+## TL;DR
 
 Deploy [Grafana Operator](https://github.com/integr8ly/grafana-operator/tree/master/documentation) on your Kubernetes cluster.
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -19,26 +21,26 @@ Deploy [Grafana Operator](https://github.com/integr8ly/grafana-operator/tree/mas
 
 > This [CVE scan report](https://quay.io/repository/bitnami/grafana-operator?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# How to deploy Grafana Operator in Kubernetes?
+## How to deploy Grafana Operator in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Grafana Operator Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/grafana-operator).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.10.4`, `3.10.4-debian-10-r15`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-operator/blob/3.10.4-debian-10-r15/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.10.4`, `3.10.4-debian-10-r16`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-operator/blob/3.10.4-debian-10-r16/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana-operator GitHub repo](https://github.com/bitnami/bitnami-docker-grafana-operator).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami Grafana Operator Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/grafana-operator).
 
@@ -58,15 +60,15 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/grafana-operator:latest 'https://github.com/bitnami/bitnami-docker-grafana-operator.git#master:3/debian-10'
 ```
 
-# Configuration
+## Configuration
 
 Find how to configure Grafana Operator in its [official documentation](https://github.com/integr8ly/grafana-operator/tree/master/documentation).
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-grafana-operator/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-grafana-operator/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-grafana-operator/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -76,7 +78,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 Copyright (c) 2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
