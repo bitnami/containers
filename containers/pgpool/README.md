@@ -1,10 +1,14 @@
-# What is Pgpool-II?
+# Pgpool-II packaged by Bitnami
 
-> [Pgpool-II](http://pgpool.net) is a PostgreSQL proxy. It stands between PostgreSQL servers and their clients providing connection pooling, load balancing, automated failover, and replication.
+## What is Pgpool-II?
 
-# TL;DR
+> Pgpool-II is the PostgreSQL proxy. It stands between PostgreSQL servers and their clients providing connection pooling, load balancing, automated failover, and replication.
 
-## Docker Compose
+[Overview of Pgpool-II](http://pgpool.net/)
+
+## TL;DR
+
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-pgpool/master/docker-compose.yml > docker-compose.yml
@@ -13,7 +17,7 @@ $ docker-compose up -d
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -24,26 +28,26 @@ You can find the default credentials and available configuration options in the 
 
 > This [CVE scan report](https://quay.io/repository/bitnami/pgpool?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy Pgpool-II in Kubernetes?
+## How to deploy Pgpool-II in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami PostgreSQL HA Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/postgresql-ha).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.2.5`, `4.2.5-debian-10-r51`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.2.5-debian-10-r51/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.2.5`, `4.2.5-debian-10-r52`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.2.5-debian-10-r52/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pgpool GitHub repo](https://github.com/bitnami/bitnami-docker-pgpool).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami Pgpool-II Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/pgpool).
 
@@ -63,23 +67,23 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/pgpool:latest 'https://github.com/bitnami/bitnami-docker-pgpool.git#master:4/debian-10'
 ```
 
-# Connecting to other containers
+## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a different server running inside a container can easily be accessed by your application containers and vice-versa.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-## Using the Command Line
+### Using the Command Line
 
 In this example, we will create a PostgreSQL client instance that will connect to the pgpool instance that is running on the same docker network as the client.
 
-### Step 1: Create a network
+#### Step 1: Create a network
 
 ```console
 $ docker network create my-network --driver bridge
 ```
 
-### Step 2: Launch 2 postgresql-repmgr containers to be used as backend within your network
+#### Step 2: Launch 2 postgresql-repmgr containers to be used as backend within your network
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `my-network` network.
 
@@ -110,7 +114,7 @@ $ docker run --detach --rm --name pg-1 \
   bitnami/postgresql-repmgr:latest
 ```
 
-### Step 3: Launch the pgpool container within your network
+#### Step 3: Launch the pgpool container within your network
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `my-network` network.
 
@@ -128,7 +132,7 @@ $ docker run --detach --rm --name pgpool \
   bitnami/pgpool:latest
 ```
 
-### Step 4: Launch your PostgreSQL client instance
+#### Step 4: Launch your PostgreSQL client instance
 
 Finally we create a new container instance to launch the PostgreSQL client and connect to the server created in the previous step:
 
@@ -139,7 +143,7 @@ $ docker run -it --rm \
   psql -h pgpool -U customuser -d customdatabase
 ```
 
-## Using Docker Compose
+### Using Docker Compose
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `my-network`. In this example we assume that you want to connect to the Pgpool server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
@@ -222,9 +226,9 @@ Launch the containers using:
 $ docker-compose up -d
 ```
 
-# Configuration
+## Configuration
 
-## Setting up a HA PostgreSQL cluster with pgpool, streaming replication and repmgr
+### Setting up a HA PostgreSQL cluster with pgpool, streaming replication and repmgr
 
 A HA PostgreSQL cluster with Pgpool, [Streaming replication](https://www.postgresql.org/docs/10/warm-standby.html#STREAMING-REPLICATION) and [repmgr](https://repmgr.org) can easily be setup with the Bitnami PostgreSQL with Replication Manager and Pgpool Docker Images using the following environment variables:
 
@@ -291,13 +295,13 @@ PostgreSQL with Replication Manager:
 
 In a HA PostgreSQL cluster you can have one primary and zero or more standby nodes. The primary node is in read-write mode, while the standby nodes are in read-only mode. For best performance its advisable to limit the reads to the standby nodes.
 
-### Step 1: Create a network
+#### Step 1: Create a network
 
 ```console
 $ docker network create my-network --driver bridge
 ```
 
-### Step 2: Create the initial primary node
+#### Step 2: Create the initial primary node
 
 The first step is to start the initial primary node:
 
@@ -316,7 +320,7 @@ $ docker run --detach --name pg-0 \
   bitnami/postgresql-repmgr:latest
 ```
 
-### Step 3: Create a standby node
+#### Step 3: Create a standby node
 
 Next we start a standby node:
 
@@ -336,7 +340,7 @@ $ docker run --detach --name pg-1 \
   bitnami/postgresql-repmgr:latest
 ```
 
-### Step 4: Create the pgpool instance
+#### Step 4: Create the pgpool instance
 
 ```console
 $ docker run --detach --rm --name pgpool \
@@ -365,7 +369,7 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-pgpool/mast
 $ docker-compose up -d
 ```
 
-## Initializing with custom scripts
+### Initializing with custom scripts
 
 **Everytime the container is started**, it will execute the files with extension `.sh` located at `/docker-entrypoint-initdb.d` after initializing Pgpool.
 
@@ -382,7 +386,7 @@ In order to have your custom files inside the docker image you can mount them as
        - PGPOOL_SR_CHECK_USER=customuser
 ```
 
-## Securing Pgpool traffic
+### Securing Pgpool traffic
 
 Pgpool supports the encryption of connections using the SSL/TLS protocol. Should you desire to enable this optional feature, you may use the following environment variables to configure the application:
 
@@ -426,19 +430,19 @@ When enabling TLS, Pgpool will support both standard and encrypted traffic by de
 
 Alternatively, you may also provide this configuration in your [custom](https://github.com/bitnami/bitnami-docker-pgpool#configuration-file) configuration file.
 
-## Configuration file
+### Configuration file
 
 You can override the default configuration by providing a configuration file. Set `PGPOOL_USER_CONF_FILE` with the path of the file, and this will be added to the default configuration.
 You can override the default hba configuration by providing a hba configuration file. Set `PGPOOL_USER_HBA_FILE` with the path of the file, and this will overwrite the default hba configuration.
 
-## Step 1: Generate the configuration file.
+### Step 1: Generate the configuration file.
 
 ```console
 $ cat myconf.conf
 max_pool='300'
 ```
 
-### Step 2: Run the Pgpool image
+#### Step 2: Run the Pgpool image
 
 Run the Pgpool image, mounting a directory from your host and setting `PGPOOL_USER_CONF_FILE` and `PGPOOL_USER_HBA_FILE`. Using Docker Compose:
 
@@ -456,7 +460,7 @@ Run the Pgpool image, mounting a directory from your host and setting `PGPOOL_US
        - PGPOOL_SR_CHECK_USER=customuser
 ```
 
-### Step 3: Start Pgpool
+#### Step 3: Start Pgpool
 
 Start your Pgpool container for changes to take effect.
 
@@ -472,11 +476,11 @@ $ docker-compose restart pgpool
 
 Refer to the [server configuration](http://www.pgpool.net/docs/latest/en/html/runtime-config.html) manual for the complete list of configuration options.
 
-## Re-attaching nodes
+### Re-attaching nodes
 
 Pgpool does not reattach nodes automatically, to reattach a node you have to get the `id` of the node and then run the attach command manually.
 
-### Step 1: Get the node id
+#### Step 1: Get the node id
 
 To get the node `id` first connect to the pgpool container and open a psql session:
 
@@ -499,7 +503,7 @@ postgres=# show pool_nodes;
 
 In this example pg-0 is the node we want to reattach, we will use node `0`.
 
-### Step 2: reattach the node.
+#### Step 2: reattach the node.
 
 Now exit psql console and run the following command, `0` is the node id we got in the previous step.
 
@@ -509,7 +513,7 @@ $ pcp_attach_node -h localhost -U $PGPOOL_ADMIN_USERNAME 0
 
 This command will prompt for a password, this password is the one set in the environment variable: `PGPOOL_ADMIN_PASSWORD`
 
-## Environment variables
+### Environment variables
 
 Please see the list of environment variables available in the Bitnami Pgpool container in the next table:
 
@@ -536,7 +540,7 @@ Please see the list of environment variables available in the Bitnami Pgpool con
 | PGPOOL_POSTGRES_CUSTOM_USERS        | nil           |
 | PGPOOL_POSTGRES_CUSTOM_PASSWORDS    | nil           |
 
-# Logging
+## Logging
 
 The Bitnami Pgpool-II Docker image sends the container logs to `stdout`. To view the logs:
 
@@ -546,19 +550,19 @@ $ docker logs pgpool
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of Pgpool-II, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/pgpool:latest
 ```
 
-### Step 2: Stop the running container
+#### Step 2: Stop the running container
 
 Stop the currently running container using the command
 
@@ -566,13 +570,13 @@ Stop the currently running container using the command
 $ docker-compose stop pgpool
 ```
 
-### Step 3: Remove the currently running container
+#### Step 3: Remove the currently running container
 
 ```console
 $ docker-compose rm -v pgpool
 ```
 
-### Step 4: Run the new image
+#### Step 4: Run the new image
 
 Re-create your container from the new image.
 
@@ -580,24 +584,24 @@ Re-create your container from the new image.
 $ docker-compose up pgpool
 ```
 
-# Notable Changes
+## Notable Changes
 
-## 4.1.1-debian-10-r35
+### 4.1.1-debian-10-r35
 
 - The Pgpool container has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the Pgpool daemon was started as the `pgpool` user. From now on, both the container and the Pgpool daemon run as user `1001`. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 - No backwards compatibility issues are expected.
 - Environment variables related to LDAP configuration were renamed removing the `PGPOOL_` prefix. For instance, to indicate the LDAP URI to use, you must set `LDAP_URI` instead of `PGPOOL_LDAP_URI`.
 
-## 4.1.0-centos-7-r8
+### 4.1.0-centos-7-r8
 
 - `4.1.0-centos-7-r8` is considered the latest image based on CentOS.
 - Standard supported distros: Debian & OEL.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-pgpool/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-pgpool/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-pgpool/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -607,7 +611,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2021 Bitnami
 
