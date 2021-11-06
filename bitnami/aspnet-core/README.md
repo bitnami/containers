@@ -1,23 +1,25 @@
-# What is ASP.NET?
+# ASP.NET packaged by Bitnami
 
-> ASP.NET is an open-source framework for web application development created by Microsoft.
+## What is ASP.NET?
 
-[https://dotnet.microsoft.com/apps/aspnet](https://dotnet.microsoft.com/apps/aspnet)
+> ASP.NET Core is an open-source framework for web application development created by Microsoft. It runs on both the full .NET Framework, on Windows, and the cross-platform .NET Core.	
 
-# TL;DR
+[Overview of ASP.NET](https://github.com/dotnet/aspnetcore)
+
+## TL;DR
 
 ```console
 $ docker run --name aspnet-core bitnami/aspnet-core:latest
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-aspnet-core/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -28,17 +30,17 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/aspnet-core?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`5`, `5-debian-10`, `5.0.11`, `5.0.11-debian-10-r23` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/5.0.11-debian-10-r23/5/debian-10/Dockerfile)
+* [`5`, `5-debian-10`, `5.0.11`, `5.0.11-debian-10-r24` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/5.0.11-debian-10-r24/5/debian-10/Dockerfile)
 * [`3.1`, `3.1-debian-10`, `3.1.20`, `3.1.20-debian-10-r23`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/3.1.20-debian-10-r23/3.1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/aspnet-core GitHub repo](https://github.com/bitnami/bitnami-docker-aspnet-core).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami aspnet-core Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/aspnet-core).
 
@@ -58,7 +60,7 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/aspnet-core:latest 'https://github.com/bitnami/bitnami-docker-aspnet-core.git#master:3.1/debian-10'
 ```
 
-# Persisting your application
+## Persisting your application
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -80,21 +82,21 @@ aspnet-core:
   ...
 ```
 
-# Connecting to other containers
+## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a different server running inside a container can easily be accessed by your application containers and vice-versa.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-## Using the Command Line
+### Using the Command Line
 
-### Step 1: Create a network
+#### Step 1: Create a network
 
 ```console
 $ docker network create aspnet-core-network --driver bridge
 ```
 
-### Step 2: Launch the aspnet-core container within your network
+#### Step 2: Launch the aspnet-core container within your network
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `aspnet-core-network` network.
 
@@ -102,11 +104,11 @@ Use the `--network <NETWORK>` argument to the `docker run` command to attach the
 $ docker run --name aspnet-core-node1 --network aspnet-core-network bitnami/aspnet-core:latest
 ```
 
-### Step 3: Run another containers
+#### Step 3: Run another containers
 
 We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
 
-# Logging
+## Logging
 
 The Bitnami aspnet-core Docker image sends the container logs to `stdout`. To view the logs:
 
@@ -116,19 +118,19 @@ $ docker logs aspnet-core
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of aspnet-core, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/aspnet-core:latest
 ```
 
-### Step 2: Stop the running container
+#### Step 2: Stop the running container
 
 Stop the currently running container using the command
 
@@ -136,13 +138,13 @@ Stop the currently running container using the command
 $ docker stop aspnet-core
 ```
 
-### Step 3: Remove the currently running container
+#### Step 3: Remove the currently running container
 
 ```console
 $ docker rm -v aspnet-core
 ```
 
-### Step 4: Run the new image
+#### Step 4: Run the new image
 
 Re-create your container from the new image.
 
@@ -150,11 +152,11 @@ Re-create your container from the new image.
 $ docker run --name aspnet-core bitnami/aspnet-core:latest
 ```
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-aspnet-core/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-aspnet-core/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-aspnet-core/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -164,7 +166,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright (c) 2021 Bitnami
 
