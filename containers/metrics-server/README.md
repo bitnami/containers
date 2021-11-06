@@ -1,10 +1,12 @@
-# What is Metrics Server?
+# Metrics Server packaged by Bitnami
 
-Metrics Server is a cluster-wide aggregator of resource usage data. Metrics Server collects metrics from the Summary API, exposed by Kubelet on each node.
+## What is Metrics Server?
 
-[https://github.com/kubernetes-incubator/metrics-server](https://github.com/kubernetes-incubator/metrics-server)
+> Metrics Server aggregates resource usage data, such as container CPU and memory usage, in a Kubernetes cluster and makes it available via the Metrics API.
 
-# TL;DR
+[Overview of Metrics Server](https://github.com/kubernetes-incubator/metrics-server)
+
+## TL;DR
 
 Deploy Metrics Server on your [Kubernetes cluster](https://github.com/kubernetes/heapster/tree/master/docs).
 
@@ -12,7 +14,7 @@ Deploy Metrics Server on your [Kubernetes cluster](https://github.com/kubernetes
 $ docker run --name metrics-server bitnami/metrics-server:latest
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -24,37 +26,37 @@ $ docker run --name metrics-server bitnami/metrics-server:latest
 
 > This [CVE scan report](https://quay.io/repository/bitnami/metrics-server?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy Metrics Server in Kubernetes?
+## How to deploy Metrics Server in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Metrics Server Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/metrics-server).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.5.1`, `0.5.1-debian-10-r39`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.5.1-debian-10-r39/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.5.1`, `0.5.1-debian-10-r40`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.5.1-debian-10-r40/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/metrics-server GitHub repo](https://github.com/bitnami/bitnami-docker-metrics-server).
 
-# Configuration
+## Configuration
 
 The directory where the TLS certs are located by default is `/opt/bitnami/metrics-server/certificates`, in the case that `--tls-cert-file` and `--tls-private-key-file` are provided, this directory will be ignored.
 
 For further documentation, please check [here](https://github.com/kubernetes-incubator/metrics-server).
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-metrics-server/issues), or submit a [pull
 request](https://github.com/bitnami/bitnami-docker-metrics-server/pulls) with your contribution.
 
-# Issues
+## Issues
 
 <!-- If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-metrics-server/issues/new). For us to provide better support, be sure to include the following information in your issue: -->
 
@@ -64,7 +66,7 @@ request](https://github.com/bitnami/bitnami-docker-metrics-server/pulls) with yo
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 Copyright 2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
