@@ -1,10 +1,10 @@
-# Bitnami Docker Image for PrestaShop
+# PrestaShop packaged by Bitnami
 
 ## What is PrestaShop?
 
-> PrestaShop is a popular open source e-commerce solution. Professional tools are easily accessible to increase online sales including instant guest checkout, abandoned cart reminders and automated Email marketing.
+> PrestaShop is a powerful open source eCommerce platform used by over 250,000 online storefronts worldwide. It is easily customizable, responsive, and includes powerful tools to drive online sales.
 
-https://www.prestashop.com
+[Overview of PrestaShop](http://www.prestashop.com)
 
 ## TL;DR
 
@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.7`, `1.7-debian-10`, `1.7.8-0`, `1.7.8-0-debian-10-r27`, `latest` (1.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.8-0-debian-10-r27/1.7/debian-10/Dockerfile)
+* [`1.7`, `1.7-debian-10`, `1.7.8-0`, `1.7.8-0-debian-10-r28`, `latest` (1.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.8-0-debian-10-r28/1.7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prestashop GitHub repo](https://github.com/bitnami/bitnami-docker-prestashop).
 
