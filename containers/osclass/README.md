@@ -1,10 +1,10 @@
-# Bitnami Docker Image for Osclass
+# Osclass packaged by Bitnami
 
 ## What is Osclass?
 
-> Osclass is a php script that allows you to quickly create and manage your own free classifieds site. Using this script, you can provide free advertising for items for sale, real estate, jobs, cars... Hundreds of free classified advertising sites are using Osclass. Visit our demo and post a free ad to see Osclass in action.
+> Osclass allows you to easily create a classifieds site without any technical knowledge. It provides support for presenting general ads or specialized ads, is customizable, extensible and multilingual.
 
-https://osclass.org/
+[Overview of Osclass](https://osclass-classifieds.com)
 
 ## TL;DR
 
@@ -41,7 +41,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`4`, `4-debian-10`, `4.4.0`, `4.4.0-debian-10-r164`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-osclass/blob/4.4.0-debian-10-r164/4/debian-10/Dockerfile)
+- [`4`, `4-debian-10`, `4.4.0`, `4.4.0-debian-10-r165`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-osclass/blob/4.4.0-debian-10-r165/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/osclass GitHub repo](https://github.com/bitnami/bitnami-docker-osclass).
 
