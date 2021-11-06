@@ -1,9 +1,12 @@
+# TensorFlow ResNet packaged by Bitnami
 
-# What is TensorFlow ResNet?
+## What is TensorFlow ResNet?
 
-> The TensorFlow ResNet docker image allows querying a TensorFlow server serving the ResNet model. For example, it is very easy to start using the already trained data from the ImageNet image database. For more information check [this link](https://github.com/tensorflow/models/tree/master/official/resnet).
+> TensorFlow ResNet is a client utility for use with TensorFlow Serving and ResNet models.
 
-# TL;DR
+[Overview of TensorFlow ResNet](https://github.com/tensorflow/models/tree/master/official/resnet)
+
+## TL;DR
 
 Before running the docker image you first need to download the ResNet model training checkpoint so it will be available for the TensorFlow Serving server.
 
@@ -14,14 +17,14 @@ $ wget 'http://download.tensorflow.org/models/official/20181001_resnet/savedmode
 $ tar xzf resnet_v2_fp32_savedmodel_NHWC_jpg.tar.gz --strip-components=2
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-tensorflow-resnet/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -33,30 +36,30 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/tensorflow-resnet?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.6.1`, `2.6.1-debian-10-r0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/2.6.1-debian-10-r0/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.6.1`, `2.6.1-debian-10-r1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/2.6.1-debian-10-r1/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tensorflow-resnet GitHub repo](https://github.com/bitnami/bitnami-docker-tensorflow-resnet).
 
-# Prerequisites
+## Prerequisites
 
 To run this application you need Docker Engine 1.10.0. Docker Compose is recommended with a version 1.6.0 or later.
 
-# How to use this image
+## How to use this image
 
-## Run TensorFlow ResNet client with TensorFlow Serving
+### Run TensorFlow ResNet client with TensorFlow Serving
 
 Running TensorFlow ResNet client with the TensorFlow Serving server is the recommended way. You can either use docker-compose or run the containers manually.
 
-### Run the application using Docker Compose
+#### Run the application using Docker Compose
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
@@ -65,7 +68,7 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-tensorflow-
 $ docker-compose up -d
 ```
 
-### Run the application manually
+#### Run the application manually
 
 If you want to run the application manually instead of using docker-compose, these are the basic steps you need to run:
 
@@ -89,7 +92,7 @@ If you want to run the application manually instead of using docker-compose, the
   $ docker run -d -v /tmp/model-data:/bitnami/model-data --name tensorflow-resnet --net tensorflow-tier bitnami/tensorflow-resnet:latest
   ```
 
-# Upgrade this application
+## Upgrade this application
 
 Bitnami provides up-to-date versions of Tensorflow-Serving and TensorFlow ResNet client, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the TensorFlow ResNet client container. For the Tensorflow-Serving upgrade see https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/master/README.md#upgrade-this-image
 
@@ -124,9 +127,9 @@ You can use these snapshots to restore the application state should the upgrade 
  * For docker-compose: `$ docker-compose up tensorflow-resnet`
  * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name tensorflow-resnet bitnami/tensorflow-resnet:latest`
 
-# Configuration
+## Configuration
 
-## Predict an image
+### Predict an image
 
 Once you have deployed both the TensorFlow Serving and TensorFlow ResNet containers you can use the `resnet_client_cc` utility to predict images. To do that follow the next steps:
 
@@ -156,24 +159,24 @@ the result tensor[1] is:
 Done.
 ```
 
-## Environment variables
+### Environment variables
 
 Tensorflow Resnet can be customized by specifying environment variables on the first run. The following environment values are provided to custom Tensorflow:
 
 - `TF_RESNET_SERVING_PORT_NUMBER`: TensorFlow Serving Port. Default: **8500**
 - `TF_RESNET_SERVING_HOST`: TensorFlow Serving server name. Default: **tensorflow-serving**
 
-# Notable Changes
+## Notable Changes
 
-## 2.4.1-debian-10-r87
+### 2.4.1-debian-10-r87
 
 - The container initialization logic is now using bash.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -183,7 +186,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright (c) 2021 Bitnami
 
