@@ -1,17 +1,18 @@
+# Azure CLI packaged by Bitnami
 
-# What is Azure CLI?
+## What is Azure CLI?
 
-> The Azure command-line interface (CLI) is Microsoft's cross-platform command-line experience for managing Azure resources
+> The Azure command-line interface (Azure CLI) allows you to create and manage Azure resources. It is available across all Azure services for use with any Azure solution. 
 
-[Overview of az](https://docs.microsoft.com/en-us/cli/azure/)
+[Overview of Azure CLI](https://docs.microsoft.com/en-us/cli/azure/)
 
-# TL;DR
+## TL;DR
 
 ```console
 $ docker run --name azure-cli bitnami/azure-cli:latest
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -23,16 +24,16 @@ $ docker run --name azure-cli bitnami/azure-cli:latest
 
 > This [CVE scan report](https://quay.io/repository/bitnami/azure-cli?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.30.0`, `2.30.0-debian-10-r3`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-azure-cli/blob/2.30.0-debian-10-r3/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.30.0`, `2.30.0-debian-10-r4`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-azure-cli/blob/2.30.0-debian-10-r4/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/azure-cli GitHub repo](https://github.com/bitnami/bitnami-docker-azure-cli).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami azure-cli Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/azure-cli).
 
@@ -52,9 +53,9 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/azure-cli:latest 'https://github.com/bitnami/bitnami-docker-azure-cli.git#master:2/debian-10'
 ```
 
-# Configuration
+## Configuration
 
-## Running commands
+### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `azure-cli --version` you can follow the example below:
 
@@ -64,7 +65,7 @@ $ docker run --rm --name azure-cli bitnami/azure-cli:latest -- --version
 
 Consult the [azure-cli Reference Documentation](https://docs.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest) to find the completed list of commands available.
 
-## Loading your own configuration
+### Loading your own configuration
 
 It's possible to load your own configuration, which is useful if you want to connect to a remote cluster:
 
@@ -72,11 +73,11 @@ It's possible to load your own configuration, which is useful if you want to con
 $ docker run --rm --name azure-cli -v /path/to/your/az/config:/.azure/config bitnami/azure-cli:latest
 ```
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-azure-cli/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-azure-cli/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-azure-cli/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -86,7 +87,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2021 Bitnami
 
