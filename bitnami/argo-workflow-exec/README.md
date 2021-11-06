@@ -1,23 +1,25 @@
-# What is Argo Workflows Executor?
+# Argo Workflow Executor packaged by Bitnami
+
+## What is Argo Workflow Executor?
 
 > Argo Workflow Executor is the executor component for the Argo Workflows engine, which is meant to orchestrate Kubernetes jobs in parallel.
 
-[argoproj.github.io](https://argoproj.github.io)
+[Overview of Argo Workflow Executor](https://argoproj.github.io/workflows)
 
-# TL;DR
+## TL;DR
 
 ```console
 $ docker run -it --name argo-workflow-exec bitnami/argo-workflow-exec
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-argo-workflow-exec/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -29,20 +31,20 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/argo-workflow-exec?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy Argo Workflows Executor in Kubernetes?
+## How to deploy Argo Workflows Executor in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Argo Workflows Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/argo-workflows).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.2.3`, `3.2.3-debian-10-r9` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/3.2.3-debian-10-r9/3/debian-10/      Dockerfile)
+* [`3`, `3-debian-10`, `3.2.3`, `3.2.3-debian-10-r10` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/3.2.3-debian-10-r10/3/debian-10/      Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/argo-workflow-exec GitHub repo](https://github.com/bitnami/bitnami-docker-argo-workflow-exec).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami Argo Workflows Executor Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/argo-workflow-exec).
 
@@ -62,13 +64,13 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/argo-workflow-exec 'https://github.com/bitnami/bitnami-docker-argo-workflow-exec.git#master:7/debian-10'
 ```
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of Argo Workflows Executor, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/argo-workflow-exec:latest
@@ -76,7 +78,7 @@ $ docker pull bitnami/argo-workflow-exec:latest
 
 or if you're using Docker Compose, update the value of the image property to `bitnami/argo-workflow-exec:latest`.
 
-### Step 2: Remove the currently running container
+#### Step 2: Remove the currently running container
 
 ```console
 $ docker rm -v argo-workflow-exec
@@ -88,7 +90,7 @@ or using Docker Compose:
 $ docker-compose rm -v argo-workflow-exec
 ```
 
-### Step 3: Run the new image
+#### Step 3: Run the new image
 
 Re-create your container from the new image.
 
@@ -102,9 +104,9 @@ or using Docker Compose:
 $ docker-compose up argo-workflow-exec
 ```
 
-# Configuration
+## Configuration
 
-## Running commands
+### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `argocd --help` you can follow the example below:
 
@@ -114,11 +116,11 @@ $ docker run --rm --name argo-workflow-exec bitnami/argo-workflow-exec:latest --
 
 Check the [official Argo Workflows Executor documentation](https://argoproj.github.io/argo-workflows/workflow-executors/) for the list of the available parameters.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-argo-workflow-exec/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-argo-workflow-exec/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-argo-workflow-exec/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -129,7 +131,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - The command you used to run the container, and any relevant output you saw (masking any sensitive
 information)
 
-# License
+## License
 
 Copyright (c) 2021 Bitnami
 
