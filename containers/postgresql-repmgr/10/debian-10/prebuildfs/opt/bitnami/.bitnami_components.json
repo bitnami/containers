@@ -8,9 +8,9 @@
     },
     "postgresql-repmgr": {
         "arch": "amd64",
-        "digest": "cd2b618c35824e6c44583d9a1929cfb57b51d2ea735119122d6f21f83d0c0eb3",
+        "digest": "52bc1193d76f6f40a12844ea20eb5a764cc47a9db7ce1ff4f3cd923dd5adf17e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.18.0-11"
+        "version": "10.18.0-12"
     }
 }
