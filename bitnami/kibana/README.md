@@ -1,20 +1,21 @@
+# Kibana packaged by Bitnami
 
-# What is Kibana?
+## What is Kibana?
 
-> Kibana is an open source, browser based analytics and search dashboard for Elasticsearch. Kibana is a snap to setup and start using. Kibana strives to be easy to get started with, while also being flexible and powerful, just like Elasticsearch
+> Kibana is an open source, browser based analytics and search dashboard for Elasticsearch. Kibana strives to be easy to get started with, while also being flexible and powerful.
 
-[elastic.co/products/kibana](https://www.elastic.co/products/kibana)
+[Overview of Kibana](https://www.elastic.co/products/kibana)
 
-# TL;DR
+## TL;DR
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-kibana/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -26,22 +27,22 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/kibana?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
 * [`7`, `7-debian-10`, `7.15.1`, `7.15.1-debian-10-r13`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/7.15.1-debian-10-r13/7/debian-10/Dockerfile)
-* [`7.10.2`, `7.10.2-debian-10`, `7.10.2-debian-10-r257` (7.10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/7.10.2-debian-10-r257/7.10.2/debian-10/Dockerfile)
+* [`7.10.2`, `7.10.2-debian-10`, `7.10.2-debian-10-r258` (7.10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/7.10.2-debian-10-r258/7.10.2/debian-10/Dockerfile)
 * [`6`, `6-debian-10`, `6.8.20`, `6.8.20-debian-10-r21` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.8.20-debian-10-r21/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kibana GitHub repo](https://github.com/bitnami/bitnami-docker-kibana).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami Kibana Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kibana).
 
@@ -61,9 +62,9 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/kibana:latest 'https://github.com/bitnami/bitnami-docker-kibana.git#master:7/debian-10'
 ```
 
-# How to use this image
+## How to use this image
 
-## Run the application using Docker Compose
+### Run the application using Docker Compose
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-kibana/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
@@ -72,7 +73,7 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-kibana/mast
 $ docker-compose up -d
 ```
 
-## Run the application manually
+### Run the application manually
 
 If you want to run the application manually instead of using docker-compose, these are the basic steps you need to run:
 
@@ -98,7 +99,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 Then you can access your application at http://your-ip:5601/
 
-# Persisting your application
+## Persisting your application
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -124,21 +125,21 @@ kibana:
 
 > NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-# Connecting to other containers
+## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a Kibana server running inside a container can easily be accessed by your application containers.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-## Using the Command Line
+### Using the Command Line
 
-### Step 1: Create a network
+#### Step 1: Create a network
 
 ```console
 $ docker network create app-tier --driver bridge
 ```
 
-### Step 2: Launch the Kibana server instance
+#### Step 2: Launch the Kibana server instance
 
 Use the `--network app-tier` argument to the `docker run` command to attach the Kibana container to the `app-tier` network.
 
@@ -148,7 +149,7 @@ $ docker run -d --name kibana-server \
     bitnami/kibana:latest
 ```
 
-### Step 3: Launch your application container
+#### Step 3: Launch your application container
 
 ```console
 $ docker run -d --name myapp \
@@ -161,7 +162,7 @@ $ docker run -d --name myapp \
 > 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
 > 2. In your application container, use the hostname `kibana-server` to connect to the Kibana server
 
-## Using Docker Compose
+### Using Docker Compose
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the Kibana server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
@@ -194,9 +195,9 @@ Launch the containers using:
 $ docker-compose up -d
 ```
 
-# Configuration
+## Configuration
 
-## Environment variables
+### Environment variables
 
 When you start the kibana image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. The following environment values are provided to custom Kibana:
 
@@ -208,7 +209,7 @@ When you start the kibana image, you can adjust the configuration of the instanc
 - `KIBANA_INITSCRIPTS_START_SERVER`: Whether to start the Kibana server before executing the init scripts. Default: **yes**
 - `KIBANA_FORCE_INITSCRIPTS`: Whether to force the execution of the init scripts. Default: **no**
 
-### Specifying Environment Variables using Docker Compose
+#### Specifying Environment Variables using Docker Compose
 
 This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-kibana/blob/master/docker-compose.yml) file present in this repository:
 
@@ -220,23 +221,23 @@ kibana:
   ...
 ```
 
-### Specifying Environment Variables on the Docker command line
+#### Specifying Environment Variables on the Docker command line
 
 ```console
 $ docker run -d -e KIBANA_ELASTICSEARCH_URL=elasticsearch --name kibana bitnami/kibana:latest
 ```
 
-## Initializing a new instance
+### Initializing a new instance
 
 When the container is executed for the first time, it will execute the files with extension `.sh`, located at `/docker-entrypoint-initdb.d`.
 
 In order to have your custom files inside the docker image you can mount them as a volume.
 
-## Configuration file
+### Configuration file
 
 The image looks for configurations in `/bitnami/kibana/conf/`. As mentioned in [Persisting your application](#persisting-your-application) you can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/kibana-persistence/kibana/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
-### Step 1: Run the Kibana image
+#### Step 1: Run the Kibana image
 
 Run the Kibana image, mounting a directory from your host.
 
@@ -254,7 +255,7 @@ kibana:
   ...
 ```
 
-### Step 2: Edit the configuration
+#### Step 2: Edit the configuration
 
 Edit the configuration on your host using your favorite editor.
 
@@ -262,7 +263,7 @@ Edit the configuration on your host using your favorite editor.
 $ vi /path/to/kibana-persistence/kibana/conf/kibana.conf
 ```
 
-### Step 3: Restart Kibana
+#### Step 3: Restart Kibana
 
 After changing the configuration, restart your Kibana container for changes to take effect.
 
@@ -278,7 +279,7 @@ $ docker-compose restart kibana
 
 Refer to the [configuration](https://www.elastic.co/guide/en/kibana/current/settings.html) manual for the complete list of configuration options.
 
-# Logging
+## Logging
 
 The Bitnami Kibana Docker image sends the container logs to the `stdout`. To view the logs:
 
@@ -294,13 +295,13 @@ $ docker-compose logs kibana
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of Kibana, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/kibana:latest
@@ -309,7 +310,7 @@ $ docker pull bitnami/kibana:latest
 or if you're using Docker Compose, update the value of the image property to
 `bitnami/kibana:latest`.
 
-### Step 2: Stop and backup the currently running container
+#### Step 2: Stop and backup the currently running container
 
 Stop the currently running container using the command
 
@@ -333,7 +334,7 @@ Additionally, [snapshot the Elasticsearch data](https://github.com/bitnami/bitna
 
 You can use these snapshots to restore the application state should the upgrade fail.
 
-### Step 3: Remove the currently running container
+#### Step 3: Remove the currently running container
 
 ```console
 $ docker rm -v kibana
@@ -345,7 +346,7 @@ or using Docker Compose:
 $ docker-compose rm -v kibana
 ```
 
-### Step 4: Run the new image
+#### Step 4: Run the new image
 
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
@@ -359,29 +360,29 @@ or using Docker Compose:
 $ docker-compose up kibana
 ```
 
-# Notable Changes
+## Notable Changes
 
-## 6.8.15-debian-10-r12 & 7.10.2-debian-10-r62 & 7.12.0-debian-10-r0
+### 6.8.15-debian-10-r12 & 7.10.2-debian-10-r62 & 7.12.0-debian-10-r0
 
 - The size of the container image has been decreased.
 - The configuration logic is now based on Bash scripts in the *rootfs/* folder.
 - Kibana 7.12.0 version or later are licensed under the Elastic License that is not currently accepted as an Open Source license by the Open Source Initiative (OSI).
 - Kibana 7.12.0 version or later are including x-pack plugin installed by default. Follow official documentation to use it.
 
-## 6.5.1-r3 & 5.6.13-r20
+### 6.5.1-r3 & 5.6.13-r20
 
 - The Kibana container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Kibana daemon was started as the `kibana` user. From now on, both the container and the Kibana daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
-## 4.5.4-r1
+### 4.5.4-r1
 
 - `ELASTICSEARCH_URL` parameter has been renamed to `KIBANA_ELASTICSEARCH_URL`.
 - `ELASTICSEARCH_PORT` parameter has been renamed to `KIBANA_ELASTICSEARCH_PORT`.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-kibana/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-kibana/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-kibana/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -391,7 +392,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2016-2021 Bitnami
 
