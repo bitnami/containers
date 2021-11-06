@@ -1,12 +1,14 @@
-# What is phpPgAdmin?
+# phpPgAdmin packaged by Bitnami
 
-> phpPgAdmin is a web-based administration tool for PostgreSQL. It is perfect for PostgreSQL DBAs, newbies, and hosting services.
+## What is phpPgAdmin?
 
-https://github.com/phppgadmin/phppgadmin
+> phpPgAdmin is a free software tool written in PHP, intended to handle the administration of PostgreSQL databases over the Web. phpPgAdmin supports a wide range of operations on PostgreSQL.
 
-# TL;DR
+[Overview of phpPgAdmin](https://github.com/phppgadmin/phppgadmin)
 
-## Docker Compose
+## TL;DR
+
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-phppgadmin/master/docker-compose.yml > docker-compose.yml
@@ -15,7 +17,7 @@ $ docker-compose up -d
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -26,24 +28,24 @@ You can find the default credentials and available configuration options in the 
 
 > This [CVE scan report](https://quay.io/repository/bitnami/phppgadmin?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.13.0`, `7.13.0-debian-10-r337`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phppgadmin/blob/7.13.0-debian-10-r337/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.13.0`, `7.13.0-debian-10-r338`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phppgadmin/blob/7.13.0-debian-10-r338/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phppgadmin GitHub repo](https://github.com/bitnami/bitnami-docker-phppgadmin).
 
-# Prerequisites
+## Prerequisites
 
 To run this application you need [Docker Engine](https://www.docker.com/products/docker-engine) >= `1.10.0`. [Docker Compose](https://www.docker.com/products/docker-compose) is recommended with a version `1.6.0` or later.
 
-# How to use this image
+## How to use this image
 
 phpPgAdmin requires access to a PostgreSQL database to work. We'll use our very own [PostgreSQL image](https://www.github.com/bitnami/bitnami-docker-postgresql).
 
-## Using Docker Compose
+### Using Docker Compose
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-phppgadmin/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
@@ -52,7 +54,7 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-phppgadmin/
 $ docker-compose up -d
 ```
 
-## Using the Docker Command Line
+### Using the Docker Command Line
 
 If you want to run the application manually instead of using `docker-compose`, these are the basic steps you need to run:
 
@@ -82,7 +84,7 @@ $ docker run -d --name phppgadmin -p 80:8080 -p 443:8443 \
 
 Access your application at http://your-ip/
 
-## Persisting your application
+### Persisting your application
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -92,7 +94,7 @@ The above examples define a Docker volumes named `postgresql_data`. The applicat
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
-### Mount host directories as data volumes with Docker Compose
+#### Mount host directories as data volumes with Docker Compose
 
 This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-phppgadmin/blob/master/docker-compose.yml) file present in this repository:
 
@@ -105,7 +107,7 @@ services:
   ...
 ```
 
-### Mount host directories as data volumes using the Docker command line
+#### Mount host directories as data volumes using the Docker command line
 
 1. Create a network (if it does not exist)
 
@@ -130,7 +132,7 @@ $ docker run -d --name phppgadmin -p 80:8080 -p 443:8443 \
   bitnami/phppgadmin:latest
 ```
 
-# Upgrading phpPgAdmin
+## Upgrading phpPgAdmin
 
 Bitnami provides up-to-date versions of PostgreSQL and phpPgAdmin, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the phpPgAdmin container. For the PostgreSQL upgrade see https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#upgrade-this-image
 
@@ -157,9 +159,9 @@ The `bitnami/phppgadmin:latest` tag always points to the most recent release. To
  * For docker-compose: `$ docker-compose up phppgadmin`
  * For manual execution: `docker run --name phppgadmin bitnami/phppgadmin:latest`
 
-# Configuration
+## Configuration
 
-## Environment variables
+### Environment variables
 
 The phpPgAdmin instance can be customized by specifying environment variables on the first run. The following environment values are provided to custom phpPgAdmin:
 
@@ -168,7 +170,7 @@ The phpPgAdmin instance can be customized by specifying environment variables on
 - `DATABASE_PORT_NUMBER`: Database server port. Default: **5432**
 - `DATABASE_SSL_MODE`: Database SSL mode. Supported options are: disable, allow, prefer, require. No default.
 
-### PHP configuration
+#### PHP configuration
 
 - `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
 - `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
@@ -179,11 +181,11 @@ The phpPgAdmin instance can be customized by specifying environment variables on
 - `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. Default: **80M**
 - `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP upload. Default: **80M**
 
-### Apache configuration
+#### Apache configuration
 
 - `PHPPGADMIN_URL_PREFIX`: URL prefix from where it will be accessible (e.g. /phppgadmin). No default.
 
-### Specifying Environment variables using Docker Compose
+#### Specifying Environment variables using Docker Compose
 
 This requires a change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-phppgadmin/blob/master/docker-compose.yml) file present in this repository:
 
@@ -201,7 +203,7 @@ services:
   ...
 ```
 
-### Specifying Environment variables on the Docker command line
+#### Specifying Environment variables on the Docker command line
 
 ```console
 $ docker run -d --name phppgadmin -p 80:8080 -p 443:8443 \
@@ -211,11 +213,11 @@ $ docker run -d --name phppgadmin -p 80:8080 -p 443:8443 \
   bitnami/phppgadmin:latest
 ```
 
-# Customize this image
+## Customize this image
 
 The Bitnami phpPgAdmin Docker image is designed to be extended so it can be used as the base image for your custom web applications.
 
-## Extend this image
+### Extend this image
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
@@ -228,7 +230,7 @@ If your desired customizations cannot be covered using the methods mentioned abo
 
 ```Dockerfile
 FROM bitnami/phppgadmin
-## Put your customizations below
+### Put your customizations below
 ...
 ```
 
@@ -243,23 +245,23 @@ Here is an example of extending the image with the following modifications:
 FROM bitnami/phppgadmin
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-## Change user to perform privileged actions
+### Change user to perform privileged actions
 USER 0
-## Install 'vim'
+### Install 'vim'
 RUN install_packages vim
-## Revert to the original non-root user
+### Revert to the original non-root user
 USER 1001
 
-## Enable mod_ratelimit module
+### Enable mod_ratelimit module
 RUN sed -i -r 's/#LoadModule ratelimit_module/LoadModule ratelimit_module/' /opt/bitnami/apache/conf/httpd.conf
 
-## Modify the ports used by Apache by default
-# It is also possible to change these environment variables at runtime
+### Modify the ports used by Apache by default
+## It is also possible to change these environment variables at runtime
 ENV APACHE_HTTP_PORT_NUMBER=8181
 ENV APACHE_HTTPS_PORT_NUMBER=8143
 EXPOSE 8181 8143
 
-## Modify the default container user
+### Modify the default container user
 USER 1002
 ```
 
@@ -276,8 +278,6 @@ services:
       - 'postgresql_data:/bitnami'
   phppgadmin:
     build: .
-    environment:
-      - DATABASE_HOST=postgresql
     ports:
       - '80:8181'
       - '443:8143'
@@ -288,11 +288,11 @@ volumes:
     driver: local
 ```
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-phppgadmin/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-phppgadmin/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/phppgadmin/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -302,7 +302,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2016-2021 Bitnami
 
