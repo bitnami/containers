@@ -1,10 +1,10 @@
-# Bitnami Docker Image for Jenkins
+# Jenkins packaged by Bitnami
 
 ## What is Jenkins?
 
-> Jenkins is widely recognized as the most feature-rich CI available with easy configuration, continuous delivery and continuous integration support, easily test, build and stage your app, and more. It supports multiple SCM tools including CVS, Subversion and Git. It can execute Apache Ant and Apache Maven-based projects as well as arbitrary scripts.
+> Jenkins is an open source Continuous Integration and Continuous Delivery (CI/CD) server designed to automate the building, testing, and deploying of any software project. 
 
-[https://jenkins.io](https://jenkins.io)
+[Overview of Jenkins](http://jenkins-ci.org/)
 
 ## TL;DR
 
@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.303.3`, `2.303.3-debian-10-r0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.303.3-debian-10-r0/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.303.3`, `2.303.3-debian-10-r1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.303.3-debian-10-r1/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jenkins GitHub repo](https://github.com/bitnami/bitnami-docker-jenkins).
 
