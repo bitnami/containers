@@ -1,8 +1,10 @@
-# Bitnami Docker Image for Apache Geode
+# Apache Geode packaged by Bitnami
 
 ## What is Apache Geode?
 
-> [Apache Geode](https://geode.apache.org/) is a data management platform that provides advanced capabilities for data-intensive applications.
+> Apache Geode is a data management platform that provides advanced capabilities for data-intensive applications.
+
+[Overview of Apache Geode](https://geode.apache.org/)
 
 ## TL;DR
 
@@ -39,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.14.0`, `1.14.0-debian-10-r33`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-geode/blob/1.14.0-debian-10-r33/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.14.0`, `1.14.0-debian-10-r34`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-geode/blob/1.14.0-debian-10-r34/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/geode GitHub repo](https://github.com/bitnami/bitnami-docker-geode).
 
