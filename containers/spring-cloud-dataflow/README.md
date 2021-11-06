@@ -1,20 +1,21 @@
+# Spring Cloud Data Flow packaged by Bitnami
 
-# What is Spring Cloud Data Flow?
+## What is Spring Cloud Data Flow?
 
 > Spring Cloud Data Flow is a microservices-based toolkit for building streaming and batch data processing pipelines in Cloud Foundry and Kubernetes.
 
-[Overview of spring cloud data flow](https://docs.spring.io/spring-cloud-dataflow/docs/current/reference/htmlsingle/#getting-started)
+[Overview of Spring Cloud Data Flow](https://github.com/spring-cloud/spring-cloud-dataflow)
 
-# TL;DR
+## TL;DR
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-spring-cloud-dataflow/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -26,24 +27,24 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/spring-cloud-dataflow?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy Data Flow in Kubernetes?
+## How to deploy Data Flow in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Spring Cloud Data Flow Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/spring-cloud-dataflow).
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.9.1`, `2.9.1-debian-10-r7`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow/blob/2.9.1-debian-10-r7/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.9.1`, `2.9.1-debian-10-r8`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow/blob/2.9.1-debian-10-r8/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/spring-cloud-dataflow GitHub repo](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami spring-cloud-dataflow Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/spring-cloud-dataflow).
 
@@ -63,11 +64,11 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/spring-cloud-dataflow:latest 'https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow.git#master:2/debian-10'
 ```
 
-# Configuration
+## Configuration
 
 You can use some environment variable in order to configure the deployment of spring cloud data flow.
 
-## Configuring database
+### Configuring database
 
 A relational database is used to store stream and task definitions as well as the state of executed tasks. Spring Cloud Data Flow provides schemas for H2, MySQL, Oracle, PostgreSQL, Db2, and SQL Server. Use the following environment to configure the connection.
 
@@ -80,7 +81,7 @@ If you are using MariaDB 10.2 or greater, you must also set the following enviro
 
 - spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MariaDB102Dialect
 
-## Configuring additional features
+### Configuring additional features
 
 Spring Cloud Data Flow Server offers specific set of features that can be enabled/disabled when launching.
 
@@ -89,20 +90,20 @@ Spring Cloud Data Flow Server offers specific set of features that can be enable
 
 In the same way, you might need to customize the JVM. Use the `JAVA_OPTS` environment variable for this purpose.
 
-## Configuring stream platform
+### Configuring stream platform
 
 In order to deploy streams using data flow you will require [Spring Cloud Skipper](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper) and one of the following messaging platforms. Please add the following environment variable to point to a different skipper endpoint.
 
 - SPRING_CLOUD_SKIPPER_CLIENT_SERVER_URI=http://spring-cloud-skipper:7577/api
 
-### Using RabbitMQ
+#### Using RabbitMQ
 
 - spring.cloud.dataflow.applicationProperties.stream.spring.rabbitmq.host=rabbitmq
 - spring.cloud.dataflow.applicationProperties.stream.spring.rabbitmq.port=5672
 - spring.cloud.dataflow.applicationProperties.stream.spring.rabbitmq.username=user
 - spring.cloud.dataflow.applicationProperties.stream.spring.rabbitmq.password=bitnami
 
-### Using Kafka
+#### Using Kafka
 
 - spring.cloud.dataflow.applicationProperties.stream.spring.cloud.stream.kafka.binder.brokers=PLAINTEXT://kafka-broker:9092
 - spring.cloud.dataflow.applicationProperties.stream.spring.cloud.stream.kafka.streams.binder.brokers=PLAINTEXT://kafka-broker:9092
@@ -111,11 +112,11 @@ In order to deploy streams using data flow you will require [Spring Cloud Skippe
 
 Consult the [spring-cloud-dataflow Reference Documentation](https://docs.spring.io/spring-cloud-dataflow/docs/current/reference/htmlsingle/#configuration-local) to find the completed list of documentation.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -125,7 +126,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2021 Bitnami
 
