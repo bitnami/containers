@@ -1,8 +1,12 @@
-# What is WildFly?
+# WildFly packaged by Bitnami
 
-> [WildFly](http://wildfly.org), formerly known as JBoss AS, or simply JBoss, is an application server authored by JBoss, now developed by Red Hat. WildFly is written in Java, and implements the Java Platform, Enterprise Edition (Java EE) specification.
+## What is WildFly?
 
-## TLDR
+> Wildfly is a lightweight, open source application server, formerly known as JBoss, that implements the latest enterprise Java standards.
+
+[Overview of WildFly](http://www.wildfly.org/)
+
+## TL;DR
 
 ```console
 $ docker run --name wildfly bitnami/wildfly:latest
@@ -42,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`25`, `25-debian-10`, `25.0.1`, `25.0.1-debian-10-r0`, `latest` (25/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/25.0.1-debian-10-r0/25/debian-10/Dockerfile)
-* [`24`, `24-debian-10`, `24.0.1`, `24.0.1-debian-10-r99` (24/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/24.0.1-debian-10-r99/24/debian-10/Dockerfile)
+* [`24`, `24-debian-10`, `24.0.1`, `24.0.1-debian-10-r100` (24/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/24.0.1-debian-10-r100/24/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wildfly GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
 
