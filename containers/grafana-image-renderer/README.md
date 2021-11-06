@@ -1,8 +1,10 @@
-# What is Grafana Image Renderer?
+# Grafana Image Renderer packaged by Bitnami
+
+## What is Grafana Image Renderer?
 
 > The Grafana Image Renderer is a plugin for Grafana that uses headless Chrome to render panels and dashboards as PNG images.
 
-[https://github.com/grafana/grafana-image-renderer](https://github.com/grafana/grafana-image-renderer)
+[Overview of Grafana Image Renderer](https://github.com/grafana/grafana-image-renderer)
 
 ## TL;DR
 
@@ -38,7 +40,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.2.1`, `3.2.1-debian-10-r23`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-image-renderer/blob/3.2.1-debian-10-r23/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.2.1`, `3.2.1-debian-10-r24`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-image-renderer/blob/3.2.1-debian-10-r24/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana-image-renderer GitHub repo](https://github.com/bitnami/bitnami-docker-grafana-image-renderer).
 
