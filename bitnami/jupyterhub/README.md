@@ -1,16 +1,18 @@
-# What is Jupyter Hub?
+# JupyterHub packaged by Bitnami
 
-> A multi-user version of the notebook designed for companies, classrooms and research labs.
+## What is JupyterHub?
 
-[Overview of Jupyter Hub](https://github.com/jupyterhub/jupyterhub/)
+> JupyterHub brings the power of notebooks to groups of users. It gives users access to computational environments and resources without burdening the users with installation and maintenance tasks.
 
-# TL;DR
+[Overview of JupyterHub](https://jupyter.org/hub)
+
+## TL;DR
 
 ```console
 $ docker run --name jupyterhub bitnami/jupyterhub:latest
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -22,16 +24,16 @@ $ docker run --name jupyterhub bitnami/jupyterhub:latest
 
 > This [CVE scan report](https://quay.io/repository/bitnami/jupyterhub?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.4.2`, `1.4.2-debian-10-r88`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyterhub/blob/1.4.2-debian-10-r88/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.4.2`, `1.4.2-debian-10-r89`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyterhub/blob/1.4.2-debian-10-r89/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jupyterhub GitHub repo](https://github.com/bitnami/bitnami-docker-jupyterhub).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami jupyterhub Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/jupyterhub).
 
@@ -51,13 +53,13 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/jupyterhub:latest 'https://github.com/bitnami/bitnami-docker-jupyterhub.git#master:1/debian-10'
 ```
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Configuration
+## Configuration
 
-## Running commands
+### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `jupyterhub --version` you can follow the example below:
 
@@ -74,11 +76,11 @@ $ docker run --rm --name jupyterhub bitnami/jupyterhub:latest --help-all
 
 
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-jupyterhub/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-jupyterhub/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-jupyterhub/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -88,7 +90,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2021 Bitnami
 
