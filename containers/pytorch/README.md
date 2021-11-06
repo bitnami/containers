@@ -1,27 +1,25 @@
-# What is PyTorch?
+# PyTorch packaged by Bitnami
 
-> PyTorch is a deep learning platform that accelerates the transition from research prototyping to production deployment. It is built for full integration into Python that enables you to use it with its libraries and main packages.
->
-> PyTorch enables tensor computation with strong GPU acceleration and provides deep neural networks built on a tape-based autograd system for faster and more flexible experimentation and efficient production deployment.
->
-> The docker image includes Torchvision for specific computer vision support. The Torchvision package includes common datasets, model architectures and image transformations for computer vision.
+## What is PyTorch?
 
-[pytorch.org](https://pytorch.org/)
+> PyTorch is a deep learning platform that accelerates the transition from research prototyping to production deployment. Bitnami image includes Torchvision for specific computer vision support.
 
-# TL;DR
+[Overview of PyTorch](https://pytorch.org/)
+
+## TL;DR
 
 ```console
 $ docker run -it --name pytorch bitnami/pytorch
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-pytorch/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -32,20 +30,20 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/pytorch?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.9.1`, `1.9.1-debian-10-r14`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pytorch/blob/1.9.1-debian-10-r14/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.9.1`, `1.9.1-debian-10-r15`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pytorch/blob/1.9.1-debian-10-r15/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pytorch GitHub repo](https://github.com/bitnami/bitnami-docker-pytorch).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami Pytorch Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/pytorch).
 
@@ -65,7 +63,7 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/pytorch 'https://github.com/bitnami/bitnami-docker-pytorch.git#master:1/debian-10'
 ```
 
-# Entering the REPL
+## Entering the REPL
 
 By default, running this image will drop you into the Python REPL, where you can interactively test and try things out with PyTorch in Python.
 
@@ -73,9 +71,9 @@ By default, running this image will drop you into the Python REPL, where you can
 $ docker run -it --name pytorch bitnami/pytorch
 ```
 
-# Configuration
+## Configuration
 
-## Running your PyTorch app
+### Running your PyTorch app
 
 The default work directory for the PyTorch image is `/app`. You can mount a folder from your host here that includes your PyTorch script, and run it normally using the `python` command.
 
@@ -84,7 +82,7 @@ $ docker run -it --name pytorch -v /path/to/app:/app bitnami/pytorch \
   python script.py
 ```
 
-## Running a PyTorch app with package dependencies
+### Running a PyTorch app with package dependencies
 
 If your PyTorch app has a `requirements.txt` defining your app's dependencies, you can install the dependencies before running your app.
 
@@ -98,13 +96,13 @@ $ docker run -it --name pytorch -v /path/to/app:/app bitnami/pytorch \
   - [pytorch documentation](https://pytorch.org/docs/stable/index.html)
   - [conda documentation](https://docs.conda.io/en/latest/)
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of PyTorch, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/pytorch:latest
@@ -112,7 +110,7 @@ $ docker pull bitnami/pytorch:latest
 
 or if you're using Docker Compose, update the value of the image property to `bitnami/pytorch:latest`.
 
-### Step 2: Remove the currently running container
+#### Step 2: Remove the currently running container
 
 ```console
 $ docker rm -v pytorch
@@ -124,7 +122,7 @@ or using Docker Compose:
 $ docker-compose rm -v pytorch
 ```
 
-### Step 3: Run the new image
+#### Step 3: Run the new image
 
 Re-create your container from the new image.
 
@@ -138,17 +136,17 @@ or using Docker Compose:
 $ docker-compose up pytorch
 ```
 
-# Notable changes
+## Notable changes
 
-## 1.9.0-debian-10-r3
+### 1.9.0-debian-10-r3
 
 This version removes miniconda in favour of pip. This creates a smaller container and least prone to security issues. Users extending this container with other packages will need to switch from conda to pip commands.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-pytorch/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-pytorch/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-pytorch/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -158,7 +156,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright (c) 2021 Bitnami
 
