@@ -1,8 +1,10 @@
-# What is Elasticsearch?
+# Bitnami Elasticsearch Stack
 
-> Elasticsearch is a highly scalable open-source full-text search and analytics engine. It allows you to store, search, and analyze big volumes of data quickly and in near real time
+## What is Elasticsearch?
 
-[elastic.co/products/elasticsearch](https://www.elastic.co/products/elasticsearch)
+> Elasticsearch is a distributed search and analytics engine. It is used for web search, log monitoring, and real-time analytics. Ideal for Big Data applications.
+
+[Overview of Elasticsearch](https://www.elastic.co/products/elasticsearch)
 
 ## TL;DR
 
@@ -48,7 +50,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`7`, `7-debian-10`, `7.15.1`, `7.15.1-debian-10-r13`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.15.1-debian-10-r13/7/debian-10/Dockerfile)
 * [`7.10.2`, `7.10.2-debian-10`, `7.10.2-debian-10-r267` (7.10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.10.2-debian-10-r267/7.10.2/debian-10/Dockerfile)
-* [`6`, `6-debian-10`, `6.8.20`, `6.8.20-debian-10-r20` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.20-debian-10-r20/6/debian-10/Dockerfile)
+* [`6`, `6-debian-10`, `6.8.20`, `6.8.20-debian-10-r21` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.20-debian-10-r21/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch).
 ## Get this image
