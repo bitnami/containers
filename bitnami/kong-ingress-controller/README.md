@@ -1,17 +1,18 @@
+# Kong Ingress Controller packaged by Bitnami
 
-# What is Kong Ingress Controller?
+## What is Kong Ingress Controller?
 
 > Kong Ingress Controller is an Ingress controller that manages external access to HTTP services in a Kubernetes cluster using the Kong API Gateway.
 
-[Overview of kong-ingress-controller](https://github.com/Kong/kubernetes-ingress-controller)
+[Overview of Kong Ingress Controller](https://github.com/Kong/kubernetes-ingress-controller)
 
-# TL;DR
+## TL;DR
 
 ```console
 $ docker run --name kong-ingress-controller bitnami/kong-ingress-controller:latest
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -23,16 +24,16 @@ $ docker run --name kong-ingress-controller bitnami/kong-ingress-controller:late
 
 > This [CVE scan report](https://quay.io/repository/bitnami/kong-ingress-controller?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.3.1`, `1.3.1-debian-10-r141`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/blob/1.3.1-debian-10-r141/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.3.1`, `1.3.1-debian-10-r142`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/blob/1.3.1-debian-10-r142/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kong-ingress-controller GitHub repo](https://github.com/bitnami/bitnami-docker-kong-ingress-controller).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami kong-ingress-controller Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kong-ingress-controller).
 
@@ -52,9 +53,9 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/kong-ingress-controller:latest 'https://github.com/bitnami/bitnami-docker-kong-ingress-controller.git#master:1/debian-10'
 ```
 
-# Configuration
+## Configuration
 
-## Running commands
+### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `kong-ingress-controller --version` you can follow the example below:
 
@@ -64,11 +65,11 @@ $ docker run --rm --name kong-ingress-controller bitnami/kong-ingress-controller
 
 Consult the [kong-ingress-controller Reference Documentation](https://github.com/Kong/kubernetes-ingress-controller/blob/master/docs/references/cli-arguments.md) to find the completed list of flags. Note that these can also be set by using the `CONTROLLER_` environment variables as stated in the [official documentation](https://github.com/Kong/kubernetes-ingress-controller/blob/master/docs/references/cli-arguments.md#cli-arguments).
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -78,7 +79,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2021 Bitnami
 
