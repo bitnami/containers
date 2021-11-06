@@ -1,16 +1,18 @@
-# What is JupyterHub Single User Base?
+# Jupyter Base Notebook packaged by Bitnami
 
-> JupyterHub Single User is an instance of Jupyter Notebook. The Base flavor is based on the `base-notebook` version of Jupyter Notebook.
+## What is Jupyter Base Notebook?
 
-[Overview of JupyterHub Single User Base](https://github.com/jupyter/docker-stacks)
+> Jupyter Base Notebook is an instance of Jupyter Notebook for your JupyterHub installation. The Base flavor contains the essential Python 3 packages and the JupyterLab user interface. 
 
-# TL;DR
+[Overview of Jupyter Base Notebook](https://github.com/jupyter/docker-stacks)
+
+## TL;DR
 
 ```console
 $ docker run --name jupyter-base-notebook bitnami/jupyter-base-notebook:latest
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -22,16 +24,16 @@ $ docker run --name jupyter-base-notebook bitnami/jupyter-base-notebook:latest
 
 > This [CVE scan report](https://quay.io/repository/bitnami/jupyter-base-notebook?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.4.2`, `1.4.2-debian-10-r73`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook/blob/1.4.2-debian-10-r73/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.4.2`, `1.4.2-debian-10-r74`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook/blob/1.4.2-debian-10-r74/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jupyter-base-notebook GitHub repo](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami jupyter-base-notebook Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/jupyter-base-notebook).
 
@@ -51,13 +53,13 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/jupyter-base-notebook:latest 'https://github.com/bitnami/bitnami-docker-jupyter-base-notebook.git#master:1/debian-10'
 ```
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Configuration
+## Configuration
 
-## Running commands
+### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `jupyterhub-singleuser --version` you can follow the example below:
 
@@ -67,7 +69,7 @@ $ docker run --rm --name jupyter-base-notebook bitnami/jupyter-base-notebook:lat
 
 Check the [official Jupyter Notebook documentation](https://jupyter.readthedocs.io/en/latest/running.html) for a list of the available parameters.
 
-## Adding more python packages
+### Adding more python packages
 
 To add more python packages, you need to create a Dockerfile extending the current image, and the commands to install the desired packages.
 In the following example, the base notebook image is used to add `scipy` and `matplotlib`.
@@ -81,11 +83,11 @@ RUN conda install --quiet --yes \
     conda clean --all -f -y 
 ```
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -95,7 +97,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2021 Bitnami
 
