@@ -1,16 +1,18 @@
-# What is Apache Solr?
+# Apache Solr packaged by Bitnami
 
-> Solr is the popular, blazing-fast, open source enterprise search platform built on Apache Lucene.
+## What is Apache Solr?
 
-[http://lucene.apache.org/solr/](http://lucene.apache.org/solr/)
+> Apache Solr is an extremely powerful, open source enterprise search platform built on Apache Lucene. It is highly reliable and flexible, scalable, and designed to add value very quickly after launch.
 
-# TL;DR
+[Overview of Apache Solr](http://lucene.apache.org/solr/)
+
+## TL;DR
 
 ```console
 $ docker run --name solr bitnami/solr:latest
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-solr/master/docker-compose.yml > docker-compose.yml
@@ -19,7 +21,7 @@ $ docker-compose up -d
 
 You can find the available configuration options in the [Environment Variables](#environment-variables) section.
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -31,16 +33,16 @@ You can find the available configuration options in the [Environment Variables](
 
 > This [CVE scan report](https://quay.io/repository/bitnami/solr?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8`, `8-debian-10`, `8.10.1`, `8.10.1-debian-10-r17`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.10.1-debian-10-r17/8/debian-10/Dockerfile)
+* [`8`, `8-debian-10`, `8.10.1`, `8.10.1-debian-10-r18`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.10.1-debian-10-r18/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/solr GitHub repo](https://github.com/bitnami/bitnami-docker-solr).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami solr Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/solr).
 
@@ -60,7 +62,7 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/solr:latest 'https://github.com/bitnami/bitnami-docker-solr.git#master:8/debian-10'
 ```
 
-# Persisting your application
+## Persisting your application
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -84,21 +86,21 @@ solr:
 
 > NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-# Connecting to other containers
+## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a Solr server running inside a container can easily be accessed by your application containers.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-## Using the Command Line
+### Using the Command Line
 
-### Step 1: Create a network
+#### Step 1: Create a network
 
 ```console
 $ docker network create solr-network --driver bridge
 ```
 
-### Step 2: Launch the solr container within your network
+#### Step 2: Launch the solr container within your network
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `solr-network` network.
 
@@ -106,11 +108,11 @@ Use the `--network <NETWORK>` argument to the `docker run` command to attach the
 $ docker run --name solr-node1 --network solr-network bitnami/solr:latest
 ```
 
-### Step 3: Run another containers
+#### Step 3: Run another containers
 
 We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
 
-## Using Docker Compose
+### Using Docker Compose
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new bridge network named solr-network.
 
@@ -142,15 +144,15 @@ Then, launch the containers using:
 $ docker-compose up -d
 ```
 
-# Configuration
+## Configuration
 
-## Environment variables
+### Environment variables
 
 When you start the solr image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. The following environment values are provided to custom Solr:
 
 - `SOLR_PORT_NUMBER`: Port used by Solr server. Default: **8983**
 - `SOLR_SERVER_DIR`: Specify the Solr server directory. Default: **/opt/bitnami/solr/server**
-- `SOLR_CORES`: Comma, semi-colon or space separated list of cores to create at first run. By default, it will not create a core. (E.g.: '**my_dev_core,my_test_core**')
+- `SOLR_CORE`: Core name to create at first run. By default, it will not create a core. (E.g.: '**my_core**')
 - `SOLR_CORE_CONF_DIR`: Configuration directory to copy when creating a new core. Default: **data_driven_schema_configs**
 
 Cluster related environment variables:
@@ -178,7 +180,7 @@ SSL related environment variables:
 - `SOLR_SSL_TRUST_STORE_PASSWORD`: Password for the trust store file. Default: **null**
 - `SOLR_SSL_CHECK_PEER_NAME`: Indicates if the peer name should be checked. Default: **false**
 
-### Specifying Environment Variables using Docker Compose
+#### Specifying Environment Variables using Docker Compose
 
 This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-solr/blob/master/docker-compose.yml) file present in this repository:
 
@@ -186,21 +188,21 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 solr:
   ...
   environment:
-    - SOLR_CORES=my_core
+    - SOLR_CORE=my_core
   ...
 ```
 
-### Specifying Environment Variables on the Docker command line
+#### Specifying Environment Variables on the Docker command line
 
 ```console
-$ docker run -d -e SOLR_CORES=my_core --name solr bitnami/solr:latest
+$ docker run -d -e SOLR_CORE=my_core --name solr bitnami/solr:latest
 ```
 
-## Using your Apache Solr Cores configuration files
+### Using your Apache Solr Cores configuration files
 
 In order to load your own configuration files, you will have to make them available to the container. You can do it mounting a [volume](https://docs.docker.com/engine/tutorials/dockervolumes/) in the desired location and setting the environment variable with the customized value (as it is pointed above, the default value is **data_driven_schema_configs**).
 
-### Using Docker Compose
+#### Using Docker Compose
 
 This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-solr/blob/master/docker-compose.yml) file present in this repository:
 
@@ -214,7 +216,7 @@ solr:
   ...
 ```
 
-# Logging
+## Logging
 
 The Bitnami solr Docker image sends the container logs to the `stdout`. To view the logs:
 
@@ -230,13 +232,13 @@ $ docker-compose logs solr
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of solr, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/solr:latest
@@ -245,7 +247,7 @@ $ docker pull bitnami/solr:latest
 or if you're using Docker Compose, update the value of the image property to
 `bitnami/solr:latest`.
 
-### Step 2: Stop and backup the currently running container
+#### Step 2: Stop and backup the currently running container
 
 Stop the currently running container using the command
 
@@ -267,7 +269,7 @@ $ rsync -a /path/to/solr-persistence /path/to/solr-persistence.bkp.$(date +%Y%m%
 
 You can use this snapshot to restore the database state should the upgrade fail.
 
-### Step 3: Remove the currently running container
+#### Step 3: Remove the currently running container
 
 ```console
 $ docker rm -v solr
@@ -279,7 +281,7 @@ or using Docker Compose:
 $ docker-compose rm -v solr
 ```
 
-### Step 4: Run the new image
+#### Step 4: Run the new image
 
 Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
 
@@ -292,17 +294,13 @@ or using Docker Compose:
 ```console
 $ docker-compose up solr
 ```
-# Notable Changes
+## Notable Changes
 
-## 8.10.1-debian-10-r2
-
-- variable SOLR_CORE renamed to SOLR_CORES to include core list support.
-
-## 8.8.0-debian-10-r11
+### 8.8.0-debian-10-r11
 
 - Adds SSL support.
 
-## 8.8.0-debian-10-r9
+### 8.8.0-debian-10-r9
 
 - The Solr container initialization logic has been moved to Bash scripts.
 - The size of the container image has been decreased.
@@ -310,15 +308,15 @@ $ docker-compose up solr
 - Added support for authentication and admin user creation.
 - Data migration for the upgrades. If you are running an older version of this container, run this version as user `root` and it will migrate your current data.
 
-## 7.4.0-r23
+### 7.4.0-r23
 
 - The Solr container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Solr daemon was started as the `solr` user. From now on, both the container and the Solr daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-solr/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-solr/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-solr/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -328,7 +326,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 Copyright 2016-2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
