@@ -1,5 +1,10 @@
+# Rails packaged by Bitnami
 
-# Bitnami Rails Development Container
+## What is Rails?
+
+> Rails is a web application framework running on the Ruby programming language.
+
+[Overview of Rails](http://rubyonrails.org/)
 
 ## TL;DR
 
@@ -30,7 +35,7 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`6`, `6-debian-10`, `6.1.4-1`, `6.1.4-1-debian-10-r75`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rails/blob/6.1.4-1-debian-10-r75/6/debian-10/Dockerfile)
+* [`6`, `6-debian-10`, `6.1.4-1`, `6.1.4-1-debian-10-r76`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rails/blob/6.1.4-1-debian-10-r76/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rails GitHub repo](https://github.com/bitnami/bitnami-docker-rails).
 
