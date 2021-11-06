@@ -1,21 +1,25 @@
-# What is InfluxDB (TM)?
+# Bitnami Stack for InfluxDB(TM)
 
-> [InfluxDB (TM)](https://github.com/influxdata/influxdb) is an open source time-series database. It is designed to handle large write and read loads in real-time. It is a core component of the TICK (Telegraf, InfluxDB (TM), Chronograf, Kapacitor) stack.
+## What is InfluxDB(TM)?
 
-# TL;DR
+> InfluxDB(TM) is an open source time-series database. It is a core component of the TICK (Telegraf, InfluxDB(TM), Chronograf, Kapacitor) stack.
+
+[Overview of InfluxDB(TM)](https://www.influxdata.com/products/influxdb-overview)
+
+## TL;DR
 
 ```console
 $ docker run --name influxdb bitnami/influxdb:latest
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-influxdb/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -26,23 +30,23 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/influxdb?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy InfluxDB (TM) in Kubernetes?
+## How to deploy InfluxDB (TM) in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami InfluxDB (TM) Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/influxdb).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.0.9`, `2.0.9-debian-10-r33`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/2.0.9-debian-10-r33/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.0.9`, `2.0.9-debian-10-r34`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/2.0.9-debian-10-r34/2/debian-10/Dockerfile)
 * [`1`, `1-debian-10`, `1.8.5`, `1.8.5-debian-10-r164` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/1.8.5-debian-10-r164/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/influxdb GitHub repo](https://github.com/bitnami/bitnami-docker-influxdb).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami InfluxDB (TM) Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/influxdb).
 
@@ -62,7 +66,7 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/influxdb:latest 'https://github.com/bitnami/bitnami-docker-influxdb.git#master:2/debian-10'
 ```
 
-# Persisting your application
+## Persisting your application
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -85,23 +89,23 @@ InfluxDB:
   ...
 ```
 
-# Connecting to other containers
+## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a different server running inside a container can easily be accessed by your application containers and vice-versa.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-## Using the Command Line
+### Using the Command Line
 
 In this example, we will create a InfluxDB (TM) client instance that will connect to the server instance that is running on the same docker network as the client.
 
-### Step 1: Create a network
+#### Step 1: Create a network
 
 ```console
 $ docker network create my-network --driver bridge
 ```
 
-### Step 2: Launch the InfluxDB (TM) container within your network
+#### Step 2: Launch the InfluxDB (TM) container within your network
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `my-network` network.
 
@@ -112,7 +116,7 @@ $ docker run -d --name influxdb-server \
   bitnami/influxdb:latest
 ```
 
-### Step 3: Launch your InfluxDB (TM) client instance
+#### Step 3: Launch your InfluxDB (TM) client instance
 
 Finally we create a new container instance to launch the InfluxDB (TM) client and connect to the server created in the previous step:
 
@@ -122,7 +126,7 @@ $ docker run -it --rm \
     bitnami/influxdb:latest influx -host influxdb-server
 ```
 
-## Using Docker Compose
+### Using Docker Compose
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `my-network`. In this example we assume that you want to connect to the InfluxDB (TM) server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
@@ -157,7 +161,7 @@ Launch the containers using:
 $ docker-compose up -d
 ```
 
-# Configuration
+## Configuration
 
 InfluxDB (TM) can be configured via environment variables or using a configuration file (`influxdb.conf`). If a configuration option is not specified in either the configuration file or in an environment variable, InfluxDB (TM) uses its internal default configuration.
 
@@ -166,7 +170,7 @@ InfluxDB (TM) can be configured via environment variables or using a configurati
 
 > Note: The settings at the environment variables override the equivalent options in the configuration file."
 
-## Configuration file
+### Configuration file
 
 The configuration can easily be setup by mounting your own configuration file (`influxdb.conf`) on the directory `/opt/bitnami/influxdb/etc/`:
 
@@ -189,13 +193,13 @@ services:
 ```
 
 
-## Initializing a new instance
+### Initializing a new instance
 
 When the container is executed for the first time, it will execute the files with extensions `.sh`, and `.txt` located at `/docker-entrypoint-initdb.d`.
 
 In order to have your custom files inside the docker image you can mount them as a volume.
 
-## Setting the admin password on first run
+### Setting the admin password on first run
 
 The admin user and password can easily be setup with the Bitnami InfluxDB (TM) Docker image using the following environment variables:
 
@@ -221,7 +225,7 @@ services:
 
 **Warning** In case you want to allow users to access the database without credentials, set the environment variable `INFLUXDB_HTTP_AUTH_ENABLED=false`. **This is recommended only for development**. If you are using InfluxDB (TM) v2 authentication is required and `INFLUXDB_HTTP_AUTH_ENABLED` will be ignored.
 
-## Allowing empty passwords
+### Allowing empty passwords
 
 By default the InfluxDB (TM) image expects all the available passwords to be set. In order to allow empty passwords, it is necessary to set the `INFLUXDB_HTTP_AUTH_ENABLED=false` env variable. This env variable is only recommended for testing or development purposes. We strongly recommend specifying the `INFLUXDB_ADMIN_USER_PASSWORD` for any other scenario. If you are using InfluxDB (TM) v2, authentication is required and `INFLUXDB_HTTP_AUTH_ENABLED` will be ignored.
 
@@ -240,7 +244,7 @@ services:
   ...
 ```
 
-## Creating a database on first run
+### Creating a database on first run
 
 If you are using InfluxDB (TM) v1 you can pass `INFLUXDB_DB` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the InfluxDB (TM) client.
 
@@ -272,7 +276,7 @@ $ docker run --name influxdb \
     bitnami/influxdb:latest
 ```
 
-## Creating a database user on first run
+### Creating a database user on first run
 
 You can create a restricted database user that only has permissions for the database created with the [`INFLUXDB_DB`](#creating-a-database-on-first-run) environment variable. To do this, provide the `INFLUXDB_USER` environment variable and to set a password for the database user provide the `INFLUXDB_USER_PASSWORD` variable.
 
@@ -306,7 +310,7 @@ You can also create users with restricted privileges in the database in a very s
 - `INFLUXDB_WRITE_USER`: Specify the user with "write" privileges in the database.
 - `INFLUXDB_WRITE_USER_PASSWORD`: Specify the password of the `INFLUXDB_WRITE_USER` user.
 
-## Customize the HTTP port readiness
+### Customize the HTTP port readiness
 
 You can modify the timeout for the HTTP port readiness probe where the container waits until the HTTP port is actually ready to receive queries before finish the setup. Use `INFLUXDB_HTTP_READINESS_TIMEOUT` to do this.
 
@@ -337,7 +341,7 @@ services:
 
 - `INFLUXDB_HTTP_READINESS_TIMEOUT`: Spacify the time to wait until the HTTP endpoint is ready in seconds. Default: 60
 
-# Logging
+## Logging
 
 The Bitnami InfluxDB (TM) Docker image sends the container logs to `stdout`. To view the logs:
 
@@ -347,13 +351,13 @@ $ docker logs influxdb
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of InfluxDB (TM), including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/influxdb:latest
@@ -361,7 +365,7 @@ $ docker pull bitnami/influxdb:latest
 
 or if you're using Docker Compose, update the value of the image property to `bitnami/influxdb:latest`.
 
-### Step 2: Stop and backup the currently running container
+#### Step 2: Stop and backup the currently running container
 
 Stop the currently running container using the command
 
@@ -381,7 +385,7 @@ Next, take a snapshot of the persistent volume `/path/to/influxdb-persistence` u
 $ rsync -a /path/to/influxdb-persistence /path/to/influxdb-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
-### Step 3: Remove the currently running container
+#### Step 3: Remove the currently running container
 
 ```console
 $ docker rm -v influxdb
@@ -393,7 +397,7 @@ or using Docker Compose:
 $ docker-compose rm -v influxdb
 ```
 
-### Step 4: Run the new image
+#### Step 4: Run the new image
 
 Re-create your container from the new image.
 
@@ -407,11 +411,11 @@ or using Docker Compose:
 $ docker-compose up influxdb
 ```
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-influxdb/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-influxdb/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-influxdb/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -421,7 +425,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright (c) 2021 Bitnami
 
