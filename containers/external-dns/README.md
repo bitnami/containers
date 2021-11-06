@@ -1,10 +1,12 @@
-# What is ExternalDNS?
+# ExternalDNS packaged by Bitnami
 
-ExternalDNS is a Kubernetes addon that configures public DNS servers with information about exposed Kubernetes services to make them discoverable.
+## What is ExternalDNS?
 
-[https://github.com/kubernetes-incubator/external-dns](https://github.com/kubernetes-incubator/external-dns)
+> ExternalDNS is a Kubernetes addon that configures public DNS servers with information about  exposed Kubernetes services to make them discoverable.
 
-# TL;DR
+[Overview of ExternalDNS](https://github.com/kubernetes-incubator/external-dns)
+
+## TL;DR
 
 Deploy ExternalDNS on your [GKE cluster](https://github.com/kubernetes-incubator/external-dns/blob/master/docs/tutorials/nginx-ingress.md).
 
@@ -12,7 +14,7 @@ Deploy ExternalDNS on your [GKE cluster](https://github.com/kubernetes-incubator
 $ docker run --name external-dns bitnami/external-dns:latest
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -24,34 +26,34 @@ $ docker run --name external-dns bitnami/external-dns:latest
 
 > This [CVE scan report](https://quay.io/repository/bitnami/external-dns?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy ExternalDNS in Kubernetes?
+## How to deploy ExternalDNS in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami ExternalDNS Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/external-dns).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.10.1`, `0.10.1-debian-10-r14`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-external-dns/blob/0.10.1-debian-10-r14/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.10.1`, `0.10.1-debian-10-r15`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-external-dns/blob/0.10.1-debian-10-r15/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/external-dns GitHub repo](https://github.com/bitnami/bitnami-docker-external-dns).
 
-# Configuration
+## Configuration
 
 For further documentation, please check [here](https://github.com/kubernetes-incubator/external-dns).
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-external-dns/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-external-dns/pulls) with your contribution.
 
-# Issues
+## Issues
 
 <!-- If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-external-dns/issues/new). For us to provide better support, be sure to include the following information in your issue: -->
 
@@ -61,7 +63,7 @@ We'd love for you to contribute to this container. You can request new features 
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 Copyright 2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
