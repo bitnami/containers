@@ -1,10 +1,10 @@
-# Bitnami Docker Image for OrangeHRM
+# OrangeHRM packaged by Bitnami
 
 ## What is OrangeHRM?
 
-> OrangeHRM Open Source is a free HR management system that offers a wealth of modules to suit the needs of your business. This widely-used system is feature-rich, intuitive and provides an essential HR management platform along with free documentation and access to a broad community of users.
+> OrangeHRM is a feature-rich, intuitive HR management system that offers a wealth of modules to suit the needs of any business. This widely-used system provides an essential HR management platform.
 
-<https://www.orangehrm.com/>
+[Overview of OrangeHRM](http://www.orangehrm.com)
 
 ## TL;DR
 
@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.8.0-0`, `4.8.0-0-debian-10-r207`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.8.0-0-debian-10-r207/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.8.0-0`, `4.8.0-0-debian-10-r208`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-orangehrm/blob/4.8.0-0-debian-10-r208/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/orangehrm GitHub repo](https://github.com/bitnami/bitnami-docker-orangehrm).
 
