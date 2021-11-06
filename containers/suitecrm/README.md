@@ -1,10 +1,10 @@
-# Bitnami Docker Image for SuiteCRM
+# SuiteCRM packaged by Bitnami
 
 ## What is SuiteCRM?
 
-> SuiteCRM is a completely open source enterprise-grade Customer Relationship Management (CRM) application. SuiteCRM is a software fork of the popular customer relationship management (CRM) system SugarCRM.
+> SuiteCRM is a completely open source, enterprise-grade Customer Relationship Management (CRM) application. SuiteCRM is a fork of the popular SugarCRM application.
 
-[https://www.suitecrm.com/](https://www.suitecrm.com/)
+[Overview of SuiteCRM](http://www.suitecrm.com/)
 
 ## TL;DR
 
@@ -37,7 +37,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.12.0`, `7.12.0-debian-10-r7`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.12.0-debian-10-r7/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.12.0`, `7.12.0-debian-10-r8`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.12.0-debian-10-r8/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/suitecrm GitHub repo](https://github.com/bitnami/bitnami-docker-suitecrm).
 
