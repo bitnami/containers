@@ -1,12 +1,14 @@
-# What is Apache Airflow?
+# Apache Airflow packaged by Bitnami
 
-> Airflow is a platform to programmatically author, schedule and monitor workflows.
+## What is Apache Airflow?
 
-https://airflow.apache.org/
+> Apache Airflow is a tool to express and execute workflows as directed acyclic graphs (DAGs). It includes utilities to schedule tasks, monitor task progress and handle task dependencies.
 
-# TL;DR
+[Overview of Apache Airflow](https://airflow.apache.org/)
 
-## Docker Compose
+## TL;DR
+
+### Docker Compose
 
 ```console
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-airflow/master/docker-compose.yml
@@ -15,7 +17,7 @@ $ docker-compose up
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -28,25 +30,25 @@ $ docker-compose up
 > This [CVE scan report](https://quay.io/repository/bitnami/airflow?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
 * [`2`, `2-debian-10`, `2.2.1`, `2.2.1-debian-10-r5`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/2.2.1-debian-10-r5/2/debian-10/Dockerfile)
-* [`1`, `1-debian-10`, `1.10.15`, `1.10.15-debian-10-r198` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/1.10.15-debian-10-r198/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.10.15`, `1.10.15-debian-10-r199` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/1.10.15-debian-10-r199/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow).
 
-# Prerequisites
+## Prerequisites
 
 To run this application you need [Docker Engine](https://www.docker.com/products/docker-engine) >= `1.10.0`. [Docker Compose](https://www.docker.com/products/docker-compose) is recommended with a version `1.6.0` or later.
 
-# How to use this image
+## How to use this image
 
 Airflow requires access to a PostgreSQL database to store information. We will use our very own [PostgreSQL image](https://www.github.com/bitnami/bitnami-docker-postgresql) for the database requirements. Additionally, if you pretend to use the `CeleryExecutor`, you will also need an [Airflow Scheduler](https://www.github.com/bitnami/bitnami-docker-airflow-scheduler), one or more [Airflow Workers](https://www.github.com/bitnami/bitnami-docker-airflow-worker) and a [Redis(TM) server](https://www.github.com/bitnami/bitnami-docker-redis).
 
-## Using Docker Compose
+### Using Docker Compose
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-airflow/blob/master/docker-compose.yml) file. Run the application using it as shown below:
 
@@ -55,7 +57,7 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-airflow/mas
 $ docker-compose up -d
 ```
 
-## Using the Docker Command Line
+### Using the Docker Command Line
 
 If you want to run the application manually instead of using `docker-compose`, these are the basic steps you need to run:
 
@@ -146,7 +148,7 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 Access your application at http://your-ip:8080
 
-## Persisting your application
+### Persisting your application
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -156,7 +158,7 @@ The above examples define docker volumes namely `postgresql_data`, `redis_data`,
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
-### Mount host directories as data volumes with Docker Compose
+#### Mount host directories as data volumes with Docker Compose
 
 The following `docker-compose.yml` template demonstrates the use of host directories as data volumes.
 
@@ -219,7 +221,7 @@ services:
       - /path/to/airflow-persistence:/bitnami
 ```
 
-### Mount host directories as data volumes using the Docker command line
+#### Mount host directories as data volumes using the Docker command line
 
 1. Create a network (if it does not exist)
 
@@ -299,27 +301,27 @@ services:
     bitnami/airflow-worker:latest
   ```
 
-# Configuration
+## Configuration
 
-## Load DAG files
+### Load DAG files
 
 Custom DAG files can be mounted to `/opt/bitnami/airflow/dags`.
 
-## Installing additional python modules
+### Installing additional python modules
 
 This container supports the installation of additional python modules at start-up time. In order to do that, you can mount a `requirements.txt` file with your specific needs under the path `/bitnami/python/requirements.txt`.
 
-## Environment variables
+### Environment variables
 
 The Airflow instance can be customized by specifying environment variables on the first run. The following environment values are provided to customize Airflow:
 
-##### User configuration
+###### User configuration
 
 - `AIRFLOW_USERNAME`: Airflow application username. Default: **user**
 - `AIRFLOW_PASSWORD`: Airflow application password. Default: **bitnami**
 - `AIRFLOW_EMAIL`: Airflow application email. Default: **user@example.com**
 
-##### Airflow configuration
+###### Airflow configuration
 
 - `AIRFLOW_EXECUTOR`: Airflow executor. Default: **SequentialExecutor**
 - `AIRFLOW_FERNET_KEY`: Airflow Fernet key. No defaults.
@@ -333,7 +335,7 @@ The Airflow instance can be customized by specifying environment variables on th
 - `AIRFLOW_POOL_SIZE`: Pool size, required with `AIRFLOW_POOL_NAME`. No defaults.
 - `AIRFLOW_POOL_DESC`: Pool description, required with `AIRFLOW_POOL_NAME`. No defaults.
 
-##### Use an existing database
+###### Use an existing database
 
 - `AIRFLOW_DATABASE_HOST`: Hostname for PostgreSQL server. Default: **postgresql**
 - `AIRFLOW_DATABASE_PORT_NUMBER`: Port used by PostgreSQL server. Default: **5432**
@@ -347,7 +349,7 @@ The Airflow instance can be customized by specifying environment variables on th
 - `REDIS_USER`: User that Airflow will use to connect with Redis(TM). No defaults.
 - `REDIS_PASSWORD`: Password that Airflow will use to connect with Redis(TM). No defaults.
 
-##### Airflow LDAP authentication
+###### Airflow LDAP authentication
 
 - `AIRFLOW_LDAP_ENABLE`: Enable LDAP authentication. Default: **no**
 - `AIRFLOW_LDAP_URI`: LDAP server URI. No defaults.
@@ -365,7 +367,7 @@ The Airflow instance can be customized by specifying environment variables on th
 
 > In addition to the previous environment variables, all the parameters from the configuration file can be overwritten by using environment variables with this format: `AIRFLOW__{SECTION}__{KEY}`. Note the double underscores.
 
-### Specifying Environment variables using Docker Compose
+#### Specifying Environment variables using Docker Compose
 
 ```yaml
 version: '2'
@@ -385,7 +387,7 @@ services:
       - AIRFLOW_EMAIL=user@example.com
 ```
 
-### Specifying Environment variables on the Docker command line
+#### Specifying Environment variables on the Docker command line
 
 ```console
 $ docker run -d --name airflow -p 8080:8080 \
@@ -402,7 +404,7 @@ $ docker run -d --name airflow -p 8080:8080 \
     bitnami/airflow:latest
 ```
 
-### SMTP Configuration
+#### SMTP Configuration
 
 To configure Airflow to send email using SMTP you can set the following environment variables:
 
@@ -462,22 +464,22 @@ $ docker run -d --name airflow -p 8080:8080 \
     bitnami/airflow:latest
 ```
 
-# Notable Changes
+## Notable Changes
 
-## 1.10.15-debian-10-r17 and 2.0.1-debian-10-r50
+### 1.10.15-debian-10-r17 and 2.0.1-debian-10-r50
 
 - The size of the container image has been decreased.
 - The configuration logic is now based on Bash scripts in the *rootfs/* folder.
 
-# Branch Deprecation Notice
+## Branch Deprecation Notice
 
 Airflow's branch 1 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 11-13-2021
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-airflow/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-airflow/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-airflow/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -487,7 +489,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container (`$ echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2015-2021 Bitnami
 
