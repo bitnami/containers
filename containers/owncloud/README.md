@@ -1,10 +1,10 @@
-# Bitnami Docker Image for ownCloud
+# ownCloud packaged by Bitnami
 
 ## What is ownCloud?
 
-ownCloud is a file sharing server that puts the control and security of your own data back into your hands.
+> ownCloud is an open source content collaboration platform used to store and share files from any device. It grants data privacy, synchronization between devices, and file access control. 
 
-https://owncloud.org/
+[Overview of ownCloud](http://owncloud.org)
 
 ## TL;DR
 
@@ -31,7 +31,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10`, `10-debian-10`, `10.8.0`, `10.8.0-debian-10-r87`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.8.0-debian-10-r87/10/debian-10/Dockerfile)
+* [`10`, `10-debian-10`, `10.8.0`, `10.8.0-debian-10-r88`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.8.0-debian-10-r88/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/owncloud GitHub repo](https://github.com/bitnami/bitnami-docker-owncloud).
 
