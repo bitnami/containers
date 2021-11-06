@@ -1,23 +1,25 @@
-# What is Dex?
+# Dex packaged by Bitnami
 
->  Dex is an identity service that uses OpenID Connect to drive authentication for other apps.
+## What is Dex?
 
-[dexidp.io](https://dexidp.io)
+> Dex is an identity provider for applications. It is based on the OpenID Connect standard.
 
-# TL;DR
+[Overview of Dex](https://dexidp.io/)
+
+## TL;DR
 
 ```console
 $ docker run -it --name dex bitnami/dex
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-dex/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -29,16 +31,16 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/dex?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.30.0`, `2.30.0-debian-10-r92`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/2.30.0-debian-10-r92/2/debian-10/      Dockerfile)
+* [`2`, `2-debian-10`, `2.30.0`, `2.30.0-debian-10-r93`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/2.30.0-debian-10-r93/2/debian-10/      Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dex GitHub repo](https://github.com/bitnami/bitnami-docker-dex).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami Dex Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/dex).
 
@@ -58,13 +60,13 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/dex 'https://github.com/bitnami/bitnami-docker-dex.git#master:7/debian-10'
 ```
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of Dex, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/dex:latest
@@ -72,7 +74,7 @@ $ docker pull bitnami/dex:latest
 
 or if you're using Docker Compose, update the value of the image property to `bitnami/dex:latest`.
 
-### Step 2: Remove the currently running container
+#### Step 2: Remove the currently running container
 
 ```console
 $ docker rm -v dex
@@ -84,7 +86,7 @@ or using Docker Compose:
 $ docker-compose rm -v dex
 ```
 
-### Step 3: Run the new image
+#### Step 3: Run the new image
 
 Re-create your container from the new image.
 
@@ -98,9 +100,9 @@ or using Docker Compose:
 $ docker-compose up dex
 ```
 
-# Configuration
+## Configuration
 
-## Running commands
+### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `dex --help` you can follow the example below:
 
@@ -110,11 +112,11 @@ $ docker run --rm --name dex bitnami/dex:latest --help
 
 Check the [official Dex documentation](https://dexidp.io/docs/) for more information about how to use Dex.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-dex/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-dex/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-dex/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -125,7 +127,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - The command you used to run the container, and any relevant output you saw (masking any sensitive
 information)
 
-# License
+## License
 
 Copyright (c) 2021 Bitnami
 
