@@ -1,14 +1,18 @@
-# What is Cassandra?
+# Cassandra packaged by Bitnami
 
-> [Apache Cassandra](http://cassandra.apache.org) is a free and open-source distributed database management system designed to handle large amounts of data across many commodity servers, providing high availability with no single point of failure. Cassandra offers robust support for clusters spanning multiple datacenters, with asynchronous masterless replication allowing low latency operations for all clients.
+## What is Cassandra?
 
-# TL;DR
+> Apache Cassandra is an open source distributed database management system designed to handle large amounts of data across many servers, providing high availability with no single point of failure.
+
+[Overview of Cassandra](http://cassandra.apache.org/)
+
+## TL;DR
 
 ```console
 $ docker run --name cassandra bitnami/cassandra:latest
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-cassandra/master/docker-compose.yml > docker-compose.yml
@@ -17,7 +21,7 @@ $ docker-compose up -d
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -29,28 +33,28 @@ You can find the default credentials and available configuration options in the 
 
 > This [CVE scan report](https://quay.io/repository/bitnami/cassandra?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# How to deploy Cassandra in Kubernetes?
+## How to deploy Cassandra in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Cassandra Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/cassandra).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
 * [`4.0`, `4.0-debian-10`, `4.0.1`, `4.0.1-debian-10-r57`, `latest` (4.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/4.0.1-debian-10-r57/4.0/debian-10/Dockerfile)
 * [`3.11`, `3.11-debian-10`, `3.11.11`, `3.11.11-debian-10-r90` (3.11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.11-debian-10-r90/3.11/debian-10/Dockerfile)
-* [`3.0`, `3.0-debian-10`, `3.0.25`, `3.0.25-debian-10-r29` (3.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.0.25-debian-10-r29/3.0/debian-10/Dockerfile)
+* [`3.0`, `3.0-debian-10`, `3.0.25`, `3.0.25-debian-10-r30` (3.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.0.25-debian-10-r30/3.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cassandra GitHub repo](https://github.com/bitnami/bitnami-docker-cassandra).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami Cassandra Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/cassandra).
 
@@ -70,7 +74,7 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/cassandra:latest 'https://github.com/bitnami/bitnami-docker-cassandra.git#master:4.0/debian-10'
 ```
 
-# Persisting your application
+## Persisting your application
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -93,23 +97,23 @@ cassandra:
 
 > NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-# Connecting to other containers
+## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a Cassandra server running inside a container can easily be accessed by your application containers.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-## Using the Command Line
+### Using the Command Line
 
 In this example, we will create a Cassandra client instance that will connect to the server instance that is running on the same docker network as the client.
 
-### Step 1: Create a network
+#### Step 1: Create a network
 
 ```console
 $ docker network create app-tier --driver bridge
 ```
 
-### Step 2: Launch the Cassandra server instance
+#### Step 2: Launch the Cassandra server instance
 
 Use the `--network app-tier` argument to the `docker run` command to attach the Cassandra container to the `app-tier` network.
 
@@ -119,7 +123,7 @@ $ docker run -d --name cassandra-server \
     bitnami/cassandra:latest
 ```
 
-### Step 3: Launch your Cassandra client instance
+#### Step 3: Launch your Cassandra client instance
 
 Finally we create a new container instance to launch the Cassandra client and connect to the server created in the previous step:
 
@@ -129,7 +133,7 @@ $ docker run -it --rm \
     bitnami/cassandra:latest cqlsh --username cassandra --password cassandra cassandra-server
 ```
 
-## Using Docker Compose
+### Using Docker Compose
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the Cassandra server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
@@ -162,9 +166,9 @@ Launch the containers using:
 $ docker-compose up -d
 ```
 
-# Configuration
+## Configuration
 
-## Environment variables
+### Environment variables
 
  When you start the cassandra image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
@@ -227,13 +231,13 @@ cassandra:
   ...
 ```
 
-## Configuration file
+### Configuration file
 
 The image looks for configurations in `/opt/bitnami/cassandra/conf/`. You can mount a volume at `/bitnami/cassandra/conf/` and copy/edit the configurations in the `/path/to/cassandra-persistence/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
 For example, in order to override the `cassandra.yaml` configuration file:
 
-### Step 1: Write your custom `cassandra.yaml` file
+#### Step 1: Write your custom `cassandra.yaml` file
 You can download the basic cassandra.yaml file like follows
 
 ```console
@@ -242,7 +246,7 @@ wget https://raw.githubusercontent.com/apache/cassandra/trunk/conf/cassandra.yam
 
 Perform any desired modifications in that file
 
-### Step 2: Run the Cassandra image with the designed volume attached.
+#### Step 2: Run the Cassandra image with the designed volume attached.
 
 ```console
 $ docker run --name cassandra \
@@ -273,7 +277,7 @@ After that, your changes will be taken into account in the server's behaviour. N
 Refer to the [Cassandra configuration reference](https://docs.datastax.com/en/cassandra/3.0/cassandra/configuration/configCassandra_yaml.html) for the complete list of configuration options.
 
 
-## Setting the server password on first run
+### Setting the server password on first run
 
 Passing the `CASSANDRA_PASSWORD` environment variable along with `CASSANDRA_PASSWORD_SEEDER=yes` when running the image for the first time will set the Cassandra server password to the value of `CASSANDRA_PASSWORD`.
 
@@ -294,7 +298,7 @@ cassandra:
     - CASSANDRA_PASSWORD=password123
 ```
 
-## Setting up a cluster
+### Setting up a cluster
 
 A cluster can easily be setup with the Bitnami Cassandra Docker Image. **In case you do not mount custom configuration files**, you can use the following environment variables:
 
@@ -314,13 +318,13 @@ Cassandra is a resource-intensive application. Depending on the target system, t
 - `CASSANDRA_PEER_CQL_MAX_RETRIES`: Maximum retries for checking that the Cassandra client can access the database located in a peer host. This is used for ensuring that all of the peers are initialized before changing the database credentials. Default: **100**.
 - `CASSANDRA_PEER_CQL_SLEEP_TIME`: Sleep time (in seconds) between retries for checking that the Cassandra client can access the database in a peer host. Default: **5**.
 
-### Step 1: Create a new network.
+#### Step 1: Create a new network.
 
 ```console
 $ docker network create cassandra_network
 ```
 
-### Step 2: Create a first node.
+#### Step 2: Create a first node.
 
 ```console
 $ docker run --name cassandra-node1 \
@@ -334,7 +338,7 @@ $ docker run --name cassandra-node1 \
 ```
 In the above command the container is added to a cluster named `cassandra-cluster` using the `CASSANDRA_CLUSTER_NAME`. The `CASSANDRA_CLUSTER_HOSTS` parameter set the name of the nodes that set the cluster so we will need to launch other container for the second node. Finally the `CASSANDRA_NODE_NAME` parameter allows to indicate a known name for the node, otherwise cassandra will generate a randon one.
 
-### Step 3: Create a second node
+#### Step 3: Create a second node
 
 ```console
 $ docker run --name cassandra-node2 \
@@ -369,7 +373,7 @@ services:
       - CASSANDRA_SEEDS=cassandra-node1,cassandra-node2
       - CASSANDRA_PASSWORD=password123
 ```
-## Initializing with custom scripts
+### Initializing with custom scripts
 
 When the container is executed for the first time, it will execute the files with extensions `.sh`, `.cql` or `.cql.gz` located at `/docker-entrypoint-initdb.d` in sort'ed order by filename. This behavior can be skipped by setting the environment variable `CASSANDRA_IGNORE_INITDB_SCRIPTS` to a value other than `yes` or `true`.
 
@@ -391,11 +395,11 @@ cassandra:
     - /path/to/cassandra-persistence:/bitnami
 ```
 
-## Configuration file
+### Configuration file
 
 The image looks for configurations in `/bitnami/cassandra/conf/`. As mentioned in [Persisting your application](#persisting-your-application) you can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/cassandra-persistence/cassandra/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
-### Step 1: Run the Cassandra image
+#### Step 1: Run the Cassandra image
 
 Run the Cassandra image, mounting a directory from your host.
 
@@ -414,7 +418,7 @@ cassandra:
     - /path/to/cassandra-persistence:/bitnami
 ```
 
-### Step 2: Edit the configuration
+#### Step 2: Edit the configuration
 
 Edit the configuration on your host using your favorite editor.
 
@@ -422,7 +426,7 @@ Edit the configuration on your host using your favorite editor.
 vi /path/to/cassandra-persistence/cassandra/conf/cassandra.yaml
 ```
 
-### Step 3: Restart Cassandra
+#### Step 3: Restart Cassandra
 
 After changing the configuration, restart your Cassandra container for changes to take effect.
 
@@ -438,7 +442,7 @@ $ docker-compose restart cassandra
 
 Refer to the [configuration](http://docs.datastax.com/en/cassandra/3.x/cassandra/configuration/configTOC.html) manual for the complete list of configuration options.
 
-# TLS Encryption
+## TLS Encryption
 The Bitnami Cassandra Docker image allows configuring TLS encryption between nodes and between server-client. This is done by mounting in `/bitnami/cassandra/secrets` two files:
 
  - `keystore`: File with the server keystore
@@ -451,7 +455,7 @@ Apart from that, the following environment variables must be set:
  - `CASSANDRA_INTERNODE_ENCRYPTION`: Sets the type of encryption between nodes. The default value is `none`. Can be set to `all`, `none`, `dc` or `rack`.
  - `CASSANDRA_CLIENT_ENCRYPTION`: Enables client-server encryption. The default value is `false`.
 
-# Logging
+## Logging
 
 The Bitnami Cassandra Docker image sends the container logs to the `stdout`. To view the logs:
 
@@ -467,13 +471,13 @@ $ docker-compose logs cassandra
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of Cassandra, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/cassandra:latest
@@ -482,7 +486,7 @@ $ docker pull bitnami/cassandra:latest
 or if you're using Docker Compose, update the value of the image property to
 `bitnami/cassandra:latest`.
 
-### Step 2: Stop and backup the currently running container
+#### Step 2: Stop and backup the currently running container
 
 Stop the currently running container using the command
 
@@ -502,7 +506,7 @@ Next, take a snapshot of the persistent volume `/path/to/cassandra-persistence` 
 $ rsync -a /path/to/cassandra-persistence /path/to/cassandra-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
-### Step 3: Remove the currently running container
+#### Step 3: Remove the currently running container
 
 ```console
 $ docker rm -v cassandra
@@ -514,7 +518,7 @@ or using Docker Compose:
 $ docker-compose rm -v cassandra
 ```
 
-### Step 4: Run the new image
+#### Step 4: Run the new image
 
 Re-create your container from the new image.
 
@@ -528,29 +532,29 @@ or using Docker Compose:
 $ docker-compose up cassandra
 ```
 
-# Notable Changes
+## Notable Changes
 
-# 3.11.10-debian-10-r81 Split branch 3
+## 3.11.10-debian-10-r81 Split branch 3
 
 - Branch 3 has been split into branch 3.0 and 3.11 mirroring the upstream Cassandra repo.
 
-## 3.11.4-debian-9-r188 and 3.11.4-ol-7-r201
+### 3.11.4-debian-9-r188 and 3.11.4-ol-7-r201
 
 - Decrease the size of the container. The configuration logic is now based on Bash scripts in the `rootfs/` folder.
 
-## 3.11.3-r129
+### 3.11.3-r129
 
 -The Cassandra container now adds the possibility to inject custom initialization scripts by mounting cql and sh files in `/docker-entrypoint-initdb.d`. See [this section](#initializing-with-custom-scripts) for more information.
 
-## 3.11.2-r22
+### 3.11.2-r22
 
 - The Cassandra container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Cassandra daemon was started as the `cassandra` user. From now on, both the container and the Cassandra daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-cassandra/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-cassandra/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-cassandra/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -560,7 +564,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 Copyright (c) 2016-2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
