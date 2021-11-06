@@ -1,20 +1,21 @@
+# Spring Cloud Skipper packaged by Bitnami
 
-# What is Spring Cloud Skipper?
+## What is Spring Cloud Skipper?
 
 > A package manager that installs, upgrades, and rolls back Spring Boot applications on multiple Cloud Platforms. Skipper can be used as part of implementing the practice of Continuous Deployment.
 
-[Overview of spring cloud skipper](https://docs.spring.io/spring-cloud-skipper/docs/current/reference/htmlsingle)
+[Overview of Spring Cloud Skipper](https://github.com/spring-cloud/spring-cloud-skipper)
 
-# TL;DR
+## TL;DR
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-spring-cloud-skipper/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -26,24 +27,24 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/spring-cloud-skipper?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy Skipper in Kubernetes?
+## How to deploy Skipper in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Spring Cloud Data Flow Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/spring-cloud-dataflow).
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.8.1`, `2.8.1-debian-10-r7`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper/blob/2.8.1-debian-10-r7/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.8.1`, `2.8.1-debian-10-r8`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper/blob/2.8.1-debian-10-r8/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/spring-cloud-skipper GitHub repo](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami spring-cloud-skipper Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/spring-cloud-skipper).
 
@@ -63,11 +64,11 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/spring-cloud-skipper:latest 'https://github.com/bitnami/bitnami-docker-spring-cloud-skipper.git#master:2/debian-10'
 ```
 
-# Configuration
+## Configuration
 
 You can use some environment variable in order to configure the deployment of spring cloud skipper.
 
-## Configuring database
+### Configuring database
 
 A relational database is used to store stream and task definitions as well as the state of executed tasks. Spring Cloud Skipper provides schemas for H2, MySQL, Oracle, PostgreSQL, Db2, and SQL Server. Use the following environment to configure the connection.
 
@@ -84,11 +85,11 @@ Consult the [spring-cloud-skipper Reference Documentation](https://docs.spring.i
 
 In the same way, you might need to customize the JVM. Use the `JAVA_OPTS` environment variable for this purpose.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -98,7 +99,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2021 Bitnami
 
