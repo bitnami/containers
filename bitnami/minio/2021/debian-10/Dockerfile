@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio-client" "2021.10.7-0" --checksum f39c590e6fb454619af7658d755354276b0276a2f772e08bd4928abdf2f863c8
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio-client" "2021.11.5-0" --checksum a617717991dfbe1364a86bba6004b102d70290a41c9d2a0009d93d3a79f46ba5
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio" "2021.10.27-0" --checksum dc4051c7024721166f2d89b15a3b9df43ecd36f05de34e030f581615570e5a26
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
@@ -18,7 +18,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/minio-client/postunpack.sh
 RUN /opt/bitnami/scripts/minio/postunpack.sh
 ENV BITNAMI_APP_NAME="minio" \
-    BITNAMI_IMAGE_VERSION="2021.10.27-debian-10-r7" \
+    BITNAMI_IMAGE_VERSION="2021.10.27-debian-10-r8" \
     PATH="/opt/bitnami/minio-client/bin:/opt/bitnami/minio/bin:/opt/bitnami/common/bin:$PATH"
 
 VOLUME [ "/certs", "/data" ]
