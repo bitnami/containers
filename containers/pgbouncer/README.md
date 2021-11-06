@@ -1,17 +1,18 @@
+# PgBouncer packaged by Bitnami
 
-# What is pgbouncer?
+## What is PgBouncer?
 
-> Lightweight connection pooler for PostgreSQL.
+> PgBouncer is a connection pooler for PostgreSQL. It reduces performance overhead by rotating client connections to PostgreSQL databases. It supports PostgreSQL databases located on different hosts.
 
-[Overview of pgbouncer](https://www.pgbouncer.org)
+[Overview of PgBouncer](https://www.pgbouncer.org/)
 
-# TL;DR
+## TL;DR
 
 ```console
 $ docker run --name pgbouncer bitnami/pgbouncer:latest
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-pgbouncer/master/docker-compose.yml > docker-compose.yml
@@ -20,7 +21,7 @@ $ docker-compose up -d
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -31,20 +32,20 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/pgbouncer?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.16.0`, `1.16.0-debian-10-r86`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgbouncer/blob/1.16.0-debian-10-r86/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.16.0`, `1.16.0-debian-10-r87`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgbouncer/blob/1.16.0-debian-10-r87/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pgbouncer GitHub repo](https://github.com/bitnami/bitnami-docker-pgbouncer).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami pgbouncer Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/pgbouncer).
 
@@ -64,17 +65,17 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/pgbouncer:latest 'https://github.com/bitnami/bitnami-docker-pgbouncer.git#master:1/debian-10'
 ```
 
-# Configuration
+## Configuration
 
-## Daemon settings
+### Daemon settings
 
 The following parameters can be set for the PgBouncer daemon:
 
-## Authentication
+### Authentication
 
 The authentication mode can be set using the `PGBOUNCER_AUTH_TYPE` variable, which can be set to any of the values available [in the official PgBouncer documentation](https://www.pgbouncer.org/config.html). In the case of the `md5` authentication type (default value), set the backend PostgreSQL credentials as explained in the [Backend PostgreSQL connection section](#backend-postgresql-connection).
 
-## Backend PostgreSQL connection
+### Backend PostgreSQL connection
 
 The Bitnami PgBouncer container requires a running PostgreSQL installation to connect to. This is configured with the following environment variables.
 
@@ -85,14 +86,14 @@ The Bitnami PgBouncer container requires a running PostgreSQL installation to co
 - `POSTGRESQL_PORT`: Backend PostgreSQL port. Default: **5432**.
 - `PGBOUNCER_SET_DATABASE_USER`: Whether to include the backend PostgreSQL username in the database string. Default **no**.
 
-## Port and address binding
+### Port and address binding
 
 The listening port and listening address can be configured with the following environment variables:
 
 - `PGBOUNCER_PORT`: PgBouncer port. Default: **6432**.
 - `PGBOUNCER_BIND_ADDRESS`: PgBouncer bind address. Default: **0.0.0.0**.
 
-## Extra arguments to PgBouncer startup
+### Extra arguments to PgBouncer startup
 
 In case you want to add extra flags to the PgBouncer command, use the `PGBOUNCER_EXTRA_ARGS` variable. Example:
 
@@ -102,14 +103,14 @@ $ docker run --name pgbouncer \
   bitnami/pgbouncer:latest
 ```
 
-## Exposed database
+### Exposed database
 
 - `PGBOUNCER_DATABASE`: PgBouncer exposed database. Default: **postgres**.
 
 In case you'd like pgbouncer to expose your database with a different name, you can use the `PGBOUNCER_DATABASE` variable.
 To expose the same database name as the backend, set `PGBOUNCER_DATABASE="$POSTGRESQL_DATABASE"`.
 
-## Other options
+### Other options
 
 - `PGBOUNCER_POOL_MODE` : PgBouncer pool mode. Allowed values: session, transaction and statement. Default: **session**.
 - `PGBOUNCER_INIT_SLEEP_TIME` : PgBouncer initialization sleep time. Default: **10**.
@@ -123,7 +124,7 @@ To expose the same database name as the backend, set `PGBOUNCER_DATABASE="$POSTG
 - `PGBOUNCER_RESERVE_POOL_SIZE` : PgBouncer allows this amount of additional connections. Default: **0 (disabled)**.
 - `PGBOUNCER_IGNORE_STARTUP_PARAMETERS`: you can use this to set `ignore_startup_parameters` in the auto-generated `pgbouncer.ini`. This can be useful for solving certain connection issues. See https://www.pgbouncer.org/config.html for more details.
 
-## Initializing a new instance
+### Initializing a new instance
 
 When the container is launched, it will execute the files with extension `.sh` located at `/docker-entrypoint-initdb.d`.
 
@@ -144,9 +145,7 @@ pgbouncer:
     - /path/to/init-scripts:/docker-entrypoint-initdb.d
 ```
 
-The init scripts will be executed on first boot. If you want to force the re-execution on restarts, set `PGBOUNCER_FORCE_INITSCRIPTS` to `true`.
-
-## Securing PgBouncer traffic
+### Securing PgBouncer traffic
 
 PgBouncer supports the encryption of connections using the SSL/TLS protocol. Should you desire to enable this optional feature, you may use the following environment variables to configure the application:
 
@@ -196,7 +195,7 @@ When enabling TLS, PgBouncer will support both standard and encrypted traffic by
 
 Alternatively, you may also provide this configuration in your [custom](https://github.com/bitnami/bitnami-docker-pgbouncer#configuration-file) configuration file.
 
-## Configuration file
+### Configuration file
 
 The image looks for `pgbouncer.ini` file in `/opt/bitnami/pgbouncer/conf/`. You can mount a volume at `/bitnami/pgbouncer/conf/` and copy/edit the `pgbouncer.ini` file in the `/path/to/pgbouncer-persistence/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
@@ -212,7 +211,7 @@ As PgBouncer image is non-root, you need to set the proper permissions to the mo
 sudo chown 1001:1001 /path/to/pgbouncer-persistence/conf/
 ```
 
-### Step 1: Run the PgBouncer image
+#### Step 1: Run the PgBouncer image
 
 Run the PgBouncer image, mounting a directory from your host.
 
@@ -238,7 +237,7 @@ services:
       - /path/to/pgbouncer-persistence/conf/:/bitnami/pgbouncer/conf/
 ```
 
-### Step 2: Edit the configuration
+#### Step 2: Edit the configuration
 
 Edit the configuration on your host using your favorite editor.
 
@@ -246,7 +245,7 @@ Edit the configuration on your host using your favorite editor.
 vi /path/to/pgbouncer-persistence/conf/pgbouncer.ini
 ```
 
-### Step 3: Restart PgBouncer
+#### Step 3: Restart PgBouncer
 
 After changing the configuration, restart your PgBouncer container for changes to take effect.
 
@@ -262,11 +261,11 @@ $ docker-compose restart pgbouncer
 
 Refer to the [server configuration](https://www.pgbouncer.org/usage.html) manual for the complete list of configuration options.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-pgbouncer/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-pgbouncer/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-pgbouncer/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -276,7 +275,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2021 Bitnami
 
