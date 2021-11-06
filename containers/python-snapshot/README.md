@@ -1,10 +1,12 @@
-# What is Python?
+# Python Snapshot packaged by Bitnami
 
-> Python is a programming language that lets you work quickly and integrate systems more effectively
+## What is Python Snapshot?
 
-[python.org](https://www.python.org/)
+> Python is a programming language that lets you work quickly and integrate systems more effectively. The snapshot container images are based on Debian snapshot repositories.
 
-# TL;DR
+[Overview of Python Snapshot](https://www.python.org/)
+
+## TL;DR
 
 ```console
 $ docker run -it --name python bitnami/python-snapshot
@@ -13,14 +15,14 @@ $ docker run -it --name python bitnami/python-snapshot
 > **_NOTE:_**  This Python "snapshot" container is based on [Debian Snapshot archive](https://snapshot.debian.org/). This archive provides a valuable resource for tracking down when regressions were introduced, or for providing a specific environment that a particular application may require to run. Using a specific snapshot repository allows you to build the container from source at any time and continue using the same system package versions.
 > Bitnami also provides containers based on the upstream Debian repository that allows you to rebuild the container and get the latests packages available, see "bitnami-docker-python" repository.
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-python-snapshot/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -32,13 +34,13 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/python-snapshot?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.9-prod`, `3.9-prod-debian-10`, `3.9.7-prod`, `3.9.7-prod-debian-10-r72` (3.9-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python-snapshot/blob/3.9.7-prod-debian-10-r72/3.9-prod/debian-10/Dockerfile)
-* [`3.9`, `3.9-debian-10`, `3.9.7`, `3.9.7-debian-10-r71` (3.9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python-snapshot/blob/3.9.7-debian-10-r71/3.9/debian-10/Dockerfile)
+* [`3.9-prod`, `3.9-prod-debian-10`, `3.9.8-prod`, `3.9.8-prod-debian-10-r-1` (3.9-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python-snapshot/blob/3.9.8-prod-debian-10-r-1/3.9-prod/debian-10/Dockerfile)
+* [`3.9`, `3.9-debian-10`, `3.9.8`, `3.9.8-debian-10-r-1` (3.9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python-snapshot/blob/3.9.8-debian-10-r-1/3.9/debian-10/Dockerfile)
 * [`3.8-prod`, `3.8-prod-debian-10`, `3.8.12-prod`, `3.8.12-prod-debian-10-r73` (3.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python-snapshot/blob/3.8.12-prod-debian-10-r73/3.8-prod/debian-10/Dockerfile)
 * [`3.8`, `3.8-debian-10`, `3.8.12`, `3.8.12-debian-10-r74` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python-snapshot/blob/3.8.12-debian-10-r74/3.8/debian-10/Dockerfile)
 * [`3.7-prod`, `3.7-prod-debian-10`, `3.7.12-prod`, `3.7.12-prod-debian-10-r66` (3.7-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python-snapshot/blob/3.7.12-prod-debian-10-r66/3.7-prod/debian-10/Dockerfile)
@@ -46,11 +48,11 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`3.6-prod`, `3.6-prod-debian-10`, `3.6.15-prod`, `3.6.15-prod-debian-10-r65` (3.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python-snapshot/blob/3.6.15-prod-debian-10-r65/3.6-prod/debian-10/Dockerfile)
 * [`3.6`, `3.6-debian-10`, `3.6.15`, `3.6.15-debian-10-r66` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python-snapshot/blob/3.6.15-debian-10-r66/3.6/debian-10/Dockerfile)
 * [`2-prod`, `2-prod-debian-10`, `2.7.18-prod`, `2.7.18-prod-debian-10-r457` (2-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python-snapshot/blob/2.7.18-prod-debian-10-r457/2-prod/debian-10/Dockerfile)
-* [`2`, `2-debian-10`, `2.7.18`, `2.7.18-debian-10-r458` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python-snapshot/blob/2.7.18-debian-10-r458/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.7.18`, `2.7.18-debian-10-r459` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python-snapshot/blob/2.7.18-debian-10-r459/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/python-snapshot GitHub repo](https://github.com/bitnami/bitnami-docker-python-snapshot).
 
-# What are `prod` tagged containers for?
+## What are `prod` tagged containers for?
 
 Containers tagged `prod` are production containers based on [minideb](https://github.com/bitnami/minideb). They contain the minimal dependencies required by an application to work.
 
@@ -60,7 +62,7 @@ The resultant containers only contain the necessary pieces of software to run th
 
 Learn how to use multi-stage builds to build your production application container in the [example](/example) directory
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami Python Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/python-snapshot).
 
@@ -80,7 +82,7 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/python-snapshot 'https://github.com/bitnami/bitnami-docker-python-snapshot.git#master:3.7/debian-10'
 ```
 
-# Entering the REPL
+## Entering the REPL
 
 By default, running this image will drop you into the Python REPL, where you can interactively test and try things out in Python.
 
@@ -88,9 +90,9 @@ By default, running this image will drop you into the Python REPL, where you can
 $ docker run -it --name python bitnami/python-snapshot
 ```
 
-# Configuration
+## Configuration
 
-## Running your Python script
+### Running your Python script
 
 The default work directory for the Python image is `/app`. You can mount a folder from your host here that includes your Python script, and run it normally using the `python` command.
 
@@ -99,7 +101,7 @@ $ docker run -it --name python -v /path/to/app:/app bitnami/python-snapshot \
   python script.py
 ```
 
-## Running a Python app with package dependencies
+### Running a Python app with package dependencies
 
 If your Python app has a `requirements.txt` defining your app's dependencies, you can install the dependencies before running your app.
 
@@ -123,13 +125,13 @@ python:
   - [python documentation](https://www.python.org/doc/)
   - [pip documentation](https://pip.pypa.io/en/stable/)
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of Python, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/python-snapshot:latest
@@ -137,7 +139,7 @@ $ docker pull bitnami/python-snapshot:latest
 
 or if you're using Docker Compose, update the value of the image property to `bitnami/python-snapshot:latest`.
 
-### Step 2: Remove the currently running container
+#### Step 2: Remove the currently running container
 
 ```console
 $ docker rm -v python
@@ -149,7 +151,7 @@ or using Docker Compose:
 $ docker-compose rm -v python
 ```
 
-### Step 3: Run the new image
+#### Step 3: Run the new image
 
 Re-create your container from the new image.
 
@@ -163,11 +165,11 @@ or using Docker Compose:
 $ docker-compose up python
 ```
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-python-snapshot/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-python-snapshot/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-python-snapshot/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -178,7 +180,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - The command you used to run the container, and any relevant output you saw (masking any sensitive
 information)
 
-# License
+## License
 
 Copyright (c) 2021 Bitnami
 
