@@ -1,3 +1,10 @@
+# Kapacitor (TM) packaged by Bitnami
+
+## What is Kapacitor (TM)?
+
+> Kapacitor is a native data processing engine for InfluxDB designed to process data streams in real-time. Its plugin architecture enables easy integration with anomaly detection engines.
+
+[Overview of Kapacitor (TM)](https://github.com/influxdata/kapacitor)
 
 # What is Kapacitor?
 
@@ -28,7 +35,7 @@ $ docker run --name kapacitor bitnami/kapacitor:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.6.2`, `1.6.2-debian-10-r30`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kapacitor/blob/1.6.2-debian-10-r30/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.6.2`, `1.6.2-debian-10-r31`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kapacitor/blob/1.6.2-debian-10-r31/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kapacitor GitHub repo](https://github.com/bitnami/bitnami-docker-kapacitor).
 
