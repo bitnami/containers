@@ -1,10 +1,10 @@
-# Bitnami Docker Image for WordPress
+# WordPress packaged by Bitnami
 
 ## What is WordPress?
 
-> WordPress is one of the most versatile open source content management systems on the market. WordPress is built for high performance and is scalable to many servers, has easy integration via REST, JSON, SOAP and other formats, and features a whopping 15,000 plugins to extend and customize the application for just about any type of website.
+> WordPress is the world's most popular blogging and content management platform. Powerful yet simple, everyone from students to global corporations use it to build beautiful, functional websites.
 
-[https://www.wordpress.org/](https://www.wordpress.org/)
+[Overview of WordPress](http://www.wordpress.org)
 
 ## TL;DR
 
@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`5`, `5-debian-10`, `5.8.1`, `5.8.1-debian-10-r55`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.8.1-debian-10-r55/5/debian-10/Dockerfile)
+- [`5`, `5-debian-10`, `5.8.1`, `5.8.1-debian-10-r56`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.8.1-debian-10-r56/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress).
 
