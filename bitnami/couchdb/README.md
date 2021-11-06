@@ -1,23 +1,25 @@
-# What is CouchDB?
+# CouchDB packaged by Bitnami
+
+## What is CouchDB?
 
 > CouchDB is an open source NoSQL database that stores your data with JSON documents, which you can access via HTTP. It allows you to index, combine, and transform your documents with JavaScript.
 
-[https://couchdb.apache.org](https://couchdb.apache.org)
+[Overview of CouchDB](http://couchdb.apache.org)
 
-# TL;DR
+## TL;DR
 
 ```console
 $ docker run --name couchdb bitnami/couchdb:latest
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-couchdb/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -28,20 +30,20 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/couchdb?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.2.0`, `3.2.0-debian-10-r15`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-couchdb/blob/3.2.0-debian-10-r15/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.2.0`, `3.2.0-debian-10-r16`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-couchdb/blob/3.2.0-debian-10-r16/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/couchdb GitHub repo](https://github.com/bitnami/bitnami-docker-couchdb).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami CouchDB Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/couchdb).
 
@@ -61,7 +63,7 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/couchdb:latest 'https://github.com/bitnami/bitnami-docker-couchdb.git#master:3/debian-10'
 ```
 
-# Persisting your application
+## Persisting your application
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -85,21 +87,21 @@ couchdb:
 
 > NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-# Connecting to other containers
+## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a different server running inside a container can easily be accessed by your application containers and vice-versa.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-## Using the Command Line
+### Using the Command Line
 
-### Step 1: Create a network
+#### Step 1: Create a network
 
 ```console
 $ docker network create couchdb-network --driver bridge
 ```
 
-### Step 2: Launch the CouchDB container within your network
+#### Step 2: Launch the CouchDB container within your network
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `couchdb-network` network.
 
@@ -107,11 +109,11 @@ Use the `--network <NETWORK>` argument to the `docker run` command to attach the
 $ docker run --name couchdb-node1 --network couchdb-network bitnami/couchdb:latest
 ```
 
-### Step 3: Run another containers
+#### Step 3: Run another containers
 
 We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
 
-# Configuration
+## Configuration
 
 The configuration can easily be setup in the Bitnami CouchDB Docker image by using the following environment variables:
 
@@ -143,13 +145,13 @@ services:
   ...
 ```
 
-## Mounting your own configuration files
+### Mounting your own configuration files
 
 If you want to provide more specific configuration options to CouchDB, you can always mount your own configuration files under `/opt/bitnami/couchdb/etc/`. You can either add new ones under `./local.d` or override the existing ones.
 
 To understand the precedence of the different configuration files, please check [how CouchDB reads them](https://docs.couchdb.org/en/stable/config/intro.html#configuration-files).
 
-### Step 1: Run the CouchDB image
+#### Step 1: Run the CouchDB image
 
 Run the CouchDB image, mounting a directory from your host.
 
@@ -168,7 +170,7 @@ services:
   ...
 ```
 
-### Step 2: Edit the configuration
+#### Step 2: Edit the configuration
 
 Edit the configuration on your host using your favorite editor.
 
@@ -176,7 +178,7 @@ Edit the configuration on your host using your favorite editor.
 vi /path/to/config/file/10-custom.ini
 ```
 
-### Step 3: Restart CouchDB
+#### Step 3: Restart CouchDB
 
 After changing the configuration, restart your CouchDB container for changes to take effect.
 
@@ -190,7 +192,7 @@ or using Docker Compose:
 $ docker-compose restart couchdb
 ```
 
-## Clustering configuration
+### Clustering configuration
 
 In order to configure CouchDB as a cluster of nodes, please make sure you set proper values for the following environment variables:
 
@@ -198,7 +200,7 @@ In order to configure CouchDB as a cluster of nodes, please make sure you set pr
 - `COUCHDB_CLUSTER_PORT_NUMBER`: Port for cluster communication. Default: **9100**
 - `COUCHDB_CREATE_DATABASES`: Whether to create the system databases or not. You should only set it to yes in one of the nodes. Default: **yes**
 
-# Logging
+## Logging
 
 The Bitnami CouchDB Docker image sends the container logs to `stdout`. To view the logs:
 
@@ -208,14 +210,14 @@ $ docker logs couchdb
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-# Understand the structure of this image
+## Understand the structure of this image
 
 The Bitnami CouchDB Docker image is built using a Dockerfile with the structure below:
 
 ```Dockerfile
 FROM bitnami/minideb
 ...
-# Install required system packages and dependencies
+## Install required system packages and dependencies
 RUN install_packages xxx yyy zzz
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "couchdb" "a.b.c-0"
 ...
@@ -242,13 +244,13 @@ The Dockerfile has several sections related to:
 - Entrypoint and command
   - Take into account that these actions are not executed until the container is started.
 
-# Customize this image
+## Customize this image
 
 The Bitnami CouchDB Docker image is designed to be extended so it can be used as the base image where you can add custom configuration files or other packages.
 
 > Note: Read the [previous section](#understand-the-structure-of-this-image) to understand the Dockerfile structure before extending this image.
 
-## Extend this image
+### Extend this image
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
@@ -259,7 +261,7 @@ If your desired customizations cannot be covered using the methods mentioned abo
 
 ```Dockerfile
 FROM bitnami/couchdb
-## Put your customizations below
+### Put your customizations below
 ...
 ```
 
@@ -273,18 +275,18 @@ Here is an example of extending the image with the following modifications:
 FROM bitnami/couchdb
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
-## Change user to perform privileged actions
+### Change user to perform privileged actions
 USER 0
-## Install 'vim'
+### Install 'vim'
 RUN install_packages vim
-## Revert to the original non-root user
+### Revert to the original non-root user
 USER 1001
 
-## Modify the ports used by NGINX by default
+### Modify the ports used by NGINX by default
 ENV COUCHDB_PORT_NUMBER=1234 # It is also possible to change this environment variable at runtime
 EXPOSE 1234 4369
 
-## Modify the default container user
+### Modify the default container user
 USER 1002
 ```
 
@@ -310,19 +312,19 @@ volumes:
     driver: local
 ```
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of CouchDB, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/couchdb:latest
 ```
 
-### Step 2: Stop the running container
+#### Step 2: Stop the running container
 
 Stop the currently running container using the command
 
@@ -330,13 +332,13 @@ Stop the currently running container using the command
 $ docker stop couchdb
 ```
 
-### Step 3: Remove the currently running container
+#### Step 3: Remove the currently running container
 
 ```console
 $ docker rm -v couchdb
 ```
 
-### Step 4: Run the new image
+#### Step 4: Run the new image
 
 Re-create your container from the new image.
 
@@ -344,17 +346,17 @@ Re-create your container from the new image.
 $ docker run --name couchdb bitnami/couchdb:latest
 ```
 
-# Notable Changes
+## Notable Changes
 
-## 3.0.0-0-debian-10-r0
+### 3.0.0-0-debian-10-r0
 
 - The usage of 'ALLOW_ANONYMOUS_LOGIN' is now deprecated. Please, specify a password for the admin user (defaults to "admin") by setting the 'COUCHDB_PASSWORD' environment variable.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-couchdb/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-couchdb/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-couchdb/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -364,7 +366,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2021 Bitnami
 
