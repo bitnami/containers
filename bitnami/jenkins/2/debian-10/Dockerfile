@@ -22,7 +22,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/jenkins/postunpack.sh
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.303.3-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="2.303.3-debian-10-r2" \
     JAVA_HOME="/opt/bitnami/java" \
     LD_PRELOAD="/opt/bitnami/common/lib/libnss_wrapper.so" \
     LNAME="jenkins" \
