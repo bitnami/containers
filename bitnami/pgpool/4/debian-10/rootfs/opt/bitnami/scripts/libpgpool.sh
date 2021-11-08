@@ -41,6 +41,7 @@ export PGPOOL_PCP_CONF_FILE="${PGPOOL_ETC_DIR}/pcp.conf"
 export PGPOOL_PGHBA_FILE="${PGPOOL_CONF_DIR}/pool_hba.conf"
 export PGPOOL_PID_FILE="${PGPOOL_TMP_DIR}/pgpool.pid"
 export PGPOOL_LOG_FILE="${PGPOOL_LOG_DIR}/pgpool.log"
+export PGPOOLKEYFILE="${PGPOOL_CONF_DIR}/.pgpoolkey"
 export PGPOOL_ENABLE_POOL_HBA="${PGPOOL_ENABLE_POOL_HBA:-yes}"
 export PGPOOL_ENABLE_POOL_PASSWD="${PGPOOL_ENABLE_POOL_PASSWD:-yes}"
 export PGPOOL_USER_CONF_FILE="${PGPOOL_USER_CONF_FILE:-}"
@@ -78,6 +79,8 @@ export PGPOOL_POSTGRES_CUSTOM_USERS="${PGPOOL_POSTGRES_CUSTOM_USERS:-}"
 export PGPOOL_POSTGRES_CUSTOM_PASSWORDS="${PGPOOL_POSTGRES_CUSTOM_PASSWORDS:-}"
 export PGPOOL_AUTO_FAILBACK="${PGPOOL_AUTO_FAILBACK:-no}"
 export PGPOOL_BACKEND_APPLICATION_NAMES="${PGPOOL_BACKEND_APPLICATION_NAMES:-}"
+export PGPOOL_AUTHENTICATION_METHOD="${PGPOOL_AUTHENTICATION_METHOD:-md5}"
+export PGPOOL_AES_KEY="${PGPOOL_AES_KEY:-$(head -c 20 /dev/random | base64)}"
 
 # SSL
 export PGPOOL_ENABLE_TLS="${PGPOOL_ENABLE_TLS:-no}"
@@ -242,6 +245,19 @@ pgpool_validate() {
         fi
     fi
 
+    # Check for Authentication method
+    if ! [[ "$PGPOOL_AUTHENTICATION_METHOD" =~ ^(md5|scram-sha-256)$ ]]; then
+        print_validation_error "The values allowed for PGPOOL_AUTHENTICATION_METHOD: md5,scram-sha-256"
+    fi
+
+    # check for required environment variables for scram-sha-256 based authentication 
+    if [[ "$PGPOOL_AUTHENTICATION_METHOD" = "scram-sha-256" ]]; then
+        # If scram-sha-256 is enabled, pg_pool_password cannot be disabled
+        if ! is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"; then
+            print_validation_error "PGPOOL_ENABLE_POOL_PASSWD cannot be disabled when PGPOOL_AUTHENTICATION_METHOD=scram-sha-256"
+        fi
+    fi
+
     # Custom users validations
     read -r -a custom_users_list <<<"$(tr ',;' ' ' <<<"${PGPOOL_POSTGRES_CUSTOM_USERS}")"
     read -r -a custom_passwords_list <<<"$(tr ',;' ' ' <<<"${PGPOOL_POSTGRES_CUSTOM_PASSWORDS}")"
@@ -304,14 +320,14 @@ pgpool_healthcheck() {
 #   None
 #########################
 pgpool_create_pghba() {
-    local authentication="md5"
+    local authentication="$PGPOOL_AUTHENTICATION_METHOD"
     local postgres_auth_line=""
     local sr_check_auth_line=""
     info "Generating pg_hba.conf file..."
 
     is_boolean_yes "$PGPOOL_ENABLE_LDAP" && authentication="pam pamservice=pgpool"
     if is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"; then
-        postgres_auth_line="host     all             ${PGPOOL_POSTGRES_USERNAME}       all         md5"
+        postgres_auth_line="host     all             ${PGPOOL_POSTGRES_USERNAME}       all         ${authentication}"
     fi
     if [[ -n "$PGPOOL_SR_CHECK_USER" ]]; then
         sr_check_auth_line="host     all             ${PGPOOL_SR_CHECK_USER}       all         trust"
@@ -524,15 +540,28 @@ pgpool_generate_password_file() {
     if is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"; then
         info "Generating password file for local authentication..."
 
-        pg_md5 -m --config-file="$PGPOOL_CONF_FILE" -u "$PGPOOL_POSTGRES_USERNAME" "$PGPOOL_POSTGRES_PASSWORD"
+        local -a password_encryption_cmd=("pg_md5")
+
+        if [[ "$PGPOOL_AUTHENTICATION_METHOD" = "scram-sha-256" ]]; then
+
+            if is_file_writable "$PGPOOLKEYFILE"; then 
+                # Creating a PGPOOLKEYFILE as it is writeable
+                echo "$PGPOOL_AES_KEY" > "$PGPOOLKEYFILE"
+                # Fix permissions for PGPOOLKEYFILE
+                chmod 0600 "$PGPOOLKEYFILE"
+            fi
+            password_encryption_cmd=("pg_enc" "--key-file=${PGPOOLKEYFILE}")
+        fi
+
+        debug_execute "${password_encryption_cmd[@]}" -m --config-file="$PGPOOL_CONF_FILE" -u "$PGPOOL_POSTGRES_USERNAME" "$PGPOOL_POSTGRES_PASSWORD"
 
         if [[ -n "${PGPOOL_POSTGRES_CUSTOM_USERS}" ]]; then
             read -r -a custom_users_list <<<"$(tr ',;' ' ' <<<"${PGPOOL_POSTGRES_CUSTOM_USERS}")"
             read -r -a custom_passwords_list <<<"$(tr ',;' ' ' <<<"${PGPOOL_POSTGRES_CUSTOM_PASSWORDS}")"
 
-            index=0
+            local index=0
             for user in "${custom_users_list[@]}"; do
-                pg_md5 -m --config-file="$PGPOOL_CONF_FILE" -u "$user" "${custom_passwords_list[$index]}"
+                debug_execute "${password_encryption_cmd[@]}" -m --config-file="$PGPOOL_CONF_FILE" -u "$user" "${custom_passwords_list[$index]}"
                 ((index += 1))
             done
         fi

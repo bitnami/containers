@@ -275,6 +275,8 @@ Pgpool configuration:
 - `PGPOOL_POSTGRES_CUSTOM_PASSWORDS`: List of comma or semicolon separated list for postgresql user passwords. These are the corresponding passwords for the users in `PGPOOL_POSTGRES_CUSTOM_USERS`. No defaults.
 - `PGPOOL_AUTO_FAILBACK`: Enables pgpool `[auto_failback](https://www.pgpool.net/docs/latest/en/html/runtime-config-failover.html)`. Default to `no`.
 - `PGPOOL_BACKEND_APPLICATION_NAMES`: Comma separated list of backend nodes `application_name`. No defaults.
+- `PGPOOL_AUTHENTICATION_METHOD`: Specifies the authentication method('md5', 'scram-sha-256'). Defaults to `md5`
+- `PGPOOL_AES_KEY`: Specifies the AES encryption key used for 'scram-sha-256' passwords. Defaults to `random string`.
 
 PostgreSQL with Replication Manager:
 
