@@ -13,14 +13,14 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "54517d6ea3a8f4d8f619db061b0c056aaafb6cf308ad0fe2c4357f41c007ec61  /tmp/bitnami/pkg/cache/miniconda-4.10.3-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/miniconda-4.10.3-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/miniconda-4.10.3-0-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jupyterhub-1.4.2-0-linux-amd64-debian-10.tar.gz && \
-    echo "f84d0e1bf42e37fee90bdad72142bae2cfa660ff6f89f4ea149727615cc248ec  /tmp/bitnami/pkg/cache/jupyterhub-1.4.2-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/jupyterhub-1.4.2-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/jupyterhub-1.4.2-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jupyterhub-1.4.2-1-linux-amd64-debian-10.tar.gz && \
+    echo "48a743c7804452dd0f9397446bf463e853d4afc7acea0e775669e54068085ee3  /tmp/bitnami/pkg/cache/jupyterhub-1.4.2-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/jupyterhub-1.4.2-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/jupyterhub-1.4.2-1-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="jupyterhub" \
-    BITNAMI_IMAGE_VERSION="1.4.2-debian-10-r91" \
+    BITNAMI_IMAGE_VERSION="1.4.2-debian-10-r92" \
     PATH="/opt/bitnami/miniconda/bin:/opt/bitnami/miniconda/bin/:$PATH"
 
 USER 1001
