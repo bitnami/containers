@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="envoy" \
-    BITNAMI_IMAGE_VERSION="1.16.5-debian-10-r73" \
+    BITNAMI_IMAGE_VERSION="1.16.5-debian-10-r74" \
     PATH="/opt/bitnami/envoy/bin:$PATH"
 
 USER 1001
