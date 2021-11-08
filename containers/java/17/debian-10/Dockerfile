@@ -9,7 +9,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages acl ca-certificates curl gzip libc6 locales procps tar zlib1g
+RUN install_packages acl ca-certificates curl gzip libc6 libsqlite3-dev libssl-dev locales procps tar wget zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "17.0.1-0" --checksum f41bbe05147002c16011221d6e4ba3b3d6c29d83ed1a683f57591bb3dd528a33
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
@@ -25,7 +25,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="17.0.1-debian-10-r13" \
+    BITNAMI_IMAGE_VERSION="17.0.1-debian-10-r14" \
     JAVA_HOME="/opt/bitnami/java" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
