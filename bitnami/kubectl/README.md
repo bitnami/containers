@@ -30,7 +30,7 @@ $ docker run --name kubectl bitnami/kubectl:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.22`, `1.22-debian-10`, `1.22.3`, `1.22.3-debian-10-r10`, `latest` (1.22/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.22.3-debian-10-r10/1.22/debian-10/Dockerfile)
+* [`1.22`, `1.22-debian-10`, `1.22.3`, `1.22.3-debian-10-r11`, `latest` (1.22/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.22.3-debian-10-r11/1.22/debian-10/Dockerfile)
 * [`1.21`, `1.21-debian-10`, `1.21.6`, `1.21.6-debian-10-r11` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.21.6-debian-10-r11/1.21/debian-10/Dockerfile)
 * [`1.20`, `1.20-debian-10`, `1.20.12`, `1.20.12-debian-10-r10` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.20.12-debian-10-r10/1.20/debian-10/Dockerfile)
 * [`1.19`, `1.19-debian-10`, `1.19.16`, `1.19.16-debian-10-r11` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.19.16-debian-10-r11/1.19/debian-10/Dockerfile)
