@@ -115,6 +115,39 @@ $ docker run -d --name magento \
 
 Access your application at *http://your-ip/*
 
+## Installing Magento extensions
+
+There are a large number of Magento extensions used to add features to your Magento Stores. If you want to install an extension to your Magento container, these are the basic steps you need to take:
+
+#### Step 1: Log into the container shell as root
+
+```console
+$ docker exec -it magento /bin/bash
+```
+
+#### Step 2: Login as the web server user
+
+```console
+$ su daemon -s /bin/bash
+```
+
+#### Step 3: Change directory to the Magento root
+
+```console
+$ cd /bitnami/magento
+```
+
+#### Step 4: Follow the installation instructions for the extension. The Magento standard is to use composer.
+
+```console
+$ composer require <extension name>
+$ php bin/magento module:enable <extension name>
+$ php bin/magento setup:upgrade
+$ php bin/magento setup:di:compile
+$ php bin/magento setup:static-content:deploy -f
+$ php bin/magento cache:flush
+```
+
 ## Persisting your application
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
