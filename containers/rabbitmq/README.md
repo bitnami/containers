@@ -1,13 +1,10 @@
-# Bitnami Docker Image for RabbitMQ
+# RabbitMQ packaged by Bitnami
 
 ## What is RabbitMQ?
 
-> RabbitMQ is an open source message broker software that implements the Advanced Message Queuing Protocol (AMQP).
-> The RabbitMQ server is written in the Erlang programming language and is built on the Open Telecom Platform
-> framework for clustering and failover. Client libraries to interface with the broker are available for all major
-> programming languages.
+> RabbitMQ is an open source general-purpose message broker that is designed for consistent, highly-available messaging scenarios (both synchronous and asynchronous).
 
-[https://www.rabbitmq.com/](https://www.rabbitmq.com/)
+[Overview of RabbitMQ](https://www.rabbitmq.com)
 
 ## TL;DR
 
@@ -52,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3.9`, `3.9-debian-10`, `3.9.8`, `3.9.8-debian-10-r11`, `latest` (3.9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.9.8-debian-10-r11/3.9/debian-10/Dockerfile)
-* [`3.8`, `3.8-debian-10`, `3.8.23`, `3.8.23-debian-10-r35` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.23-debian-10-r35/3.8/debian-10/Dockerfile)
+* [`3.8`, `3.8-debian-10`, `3.8.23`, `3.8.23-debian-10-r36` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.23-debian-10-r36/3.8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rabbitmq GitHub repo](https://github.com/bitnami/bitnami-docker-rabbitmq).
 

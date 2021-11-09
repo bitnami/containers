@@ -13,7 +13,7 @@ services:
     environment:
       - RABBITMQ_SECURE_PASSWORD=yes
     volumes:
-      - 'rabbitmq_data:/bitnami'
+      - 'rabbitmq_data:/bitnami/rabbitmq/mnesia'
 volumes:
   rabbitmq_data:
     driver: local
