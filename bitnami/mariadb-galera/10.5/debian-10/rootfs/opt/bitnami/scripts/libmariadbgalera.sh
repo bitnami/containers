@@ -78,7 +78,7 @@ mysql_extra_flags() {
 # Arguments:
 #   None
 # Returns:
-#   None
+#   Yes or no
 #########################
 get_galera_cluster_bootstrap_value() {
     local cluster_bootstrap
@@ -91,29 +91,51 @@ get_galera_cluster_bootstrap_value() {
     #   That way, the node will join the existing Galera cluster instead of bootstrapping a new one.
     #   We disable the bootstrap right after processing environment variables in "run.sh" with "set_previous_boot".
     # - Users can force a bootstrap to happen again on a node, by setting the environment variable "MARIADB_GALERA_FORCE_SAFETOBOOTSTRAP".
+    # - Bootstrapping may happen implicitly when "MARIADB_GALERA_CLUSTER_BOOTSTRAP" is undefined.
+    #   This is mostly expected to happen when running in Kubernetes and the Helm Chart value "galera.bootstrap.bootstrapFromNode" is not set.
     # When the node is not marked to bootstrap, the node will join an existing cluster.
+    cluster_bootstrap="no"  # initial value
     if is_boolean_yes "$DB_GALERA_FORCE_SAFETOBOOTSTRAP"; then
         cluster_bootstrap="yes"
-    elif is_boolean_yes "$DB_GALERA_CLUSTER_BOOTSTRAP"; then
-        cluster_bootstrap="yes"
-    elif is_boolean_yes "$(get_previous_boot)"; then
-        cluster_bootstrap="no"
-    elif ! is_boolean_yes "$(has_galera_cluster_other_nodes)"; then
-        cluster_bootstrap="yes"
-    else
-        cluster_bootstrap="no"
+    elif ! is_boolean_yes "$(get_previous_boot)"; then
+        if is_boolean_yes "$DB_GALERA_CLUSTER_BOOTSTRAP"; then
+            cluster_bootstrap="yes"
+        elif is_boolean_yes "$(should_bootstrap_implicitly)"; then
+            cluster_bootstrap="yes"
+        fi
     fi
     echo "$cluster_bootstrap"
 }
 
 ########################
-# Whether the Galera cluster has other running nodes
+# Whether this node should bootstrap if not explicitly stated. 
 # Globals:
 #   DB_*
 # Arguments:
 #   None
 # Returns:
+#   Yes or no
+#########################
+should_bootstrap_implicitly() {
+    bootstrap_implicitly="no"
+    # If bootstrap value is explicitly defined, never bootstrap implicitly.
+    if is_empty_value "$DB_GALERA_CLUSTER_BOOTSTRAP"; then
+        # TODO: Maybe we should only do this if we're sure that this container runs in Kubernetes?
+        if ! is_boolean_yes "$(has_galera_cluster_other_nodes)"; then
+            bootstrap_implicitly="yes"
+        fi
+    fi
+    echo "$bootstrap_implicitly" 
+}
+
+########################
+# Whether the Galera cluster has other running nodes. 
+# Globals:
+#   DB_*
+# Arguments:
 #   None
+# Returns:
+#   Yes or no
 #########################
 has_galera_cluster_other_nodes() {
     local local_ip
@@ -170,10 +192,10 @@ has_galera_cluster_other_nodes() {
 #########################
 get_galera_cluster_address_value() {
     local cluster_address
-    if ! is_boolean_yes "$(get_galera_cluster_bootstrap_value)" && is_boolean_yes "$(has_galera_cluster_other_nodes)"; then
-        cluster_address="$DB_GALERA_CLUSTER_ADDRESS"
-    else
+    if is_boolean_yes "$(get_galera_cluster_bootstrap_value)"; then
         cluster_address="gcomm://"
+    else
+        cluster_address="$DB_GALERA_CLUSTER_ADDRESS"
     fi
     debug "Set Galera cluster address to ${cluster_address}"
     echo "$cluster_address"
@@ -233,7 +255,7 @@ mysql_validate() {
     fi
 
     if [[ -n "$DB_GALERA_FORCE_SAFETOBOOTSTRAP" ]] && ! is_yes_no_value "$DB_GALERA_FORCE_SAFETOBOOTSTRAP"; then
-        print_validation_error "The allowed values for MARDIA_GALERA_FORCE_SAFETOBOOTSTRAP are yes or no."
+        print_validation_error "The allowed values for MARIA_GALERA_FORCE_SAFETOBOOTSTRAP are yes or no."
     fi
 
     if [[ -z "$DB_GALERA_CLUSTER_NAME" ]]; then
