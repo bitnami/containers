@@ -1,10 +1,10 @@
-# Bitnami Docker Image for Magento
+# Magento packaged by Bitnami
 
 ## What is Magento?
 
-> Magento is a feature-rich flexible e-commerce solution. It includes transaction options, multi-store functionality, loyalty programs, product categorization and shopper filtering, promotion rules, and more.
+> Magento is a powerful open source e-commerce platform. With easy customizations and rich features, it allows retailers to grow their online businesses in a cost-effective way.
 
-https://magento.com/
+[Overview of Magento](http://www.magento.com)
 
 ## TL;DR
 
@@ -37,7 +37,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.4.3`, `2.4.3-debian-10-r60`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.4.3-debian-10-r60/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.4.3`, `2.4.3-debian-10-r61`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.4.3-debian-10-r61/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/magento GitHub repo](https://github.com/bitnami/bitnami-docker-magento).
 
@@ -319,7 +319,6 @@ Available environment variables:
 
 ##### PHP configuration
 
-- `PHP_DATE_TIMEZONE`: PHP timezone. No default.
 - `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
 - `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
 - `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. Default: **18000**
@@ -494,13 +493,13 @@ In order to properly upgrade Magento, you will need Magento authentication keys 
 Restart the Docker container to reset any configuration changes:
 
 ```console
-$ docker restart magento
+$ docker stop magento
 ```
 
 Or using Docker Compose:
 
 ```console
-$ docker-compose restart magento
+$ docker-compose stop magento
 ```
 
 #### Upgrading bundled image components
