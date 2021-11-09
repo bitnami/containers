@@ -16,7 +16,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "9.0.54-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.31-2" --checksum 15b394a022ca1d0b4b89bfee0487ee13f9e8cc697d0ca09ce62a0a3732536236
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.33.0-0" --checksum fd9a3245580fef6248f778efeba0a017675424f15ff16ace42c095496e4f02f3
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-1" --checksum 00722b62c7561929e039877a6e445a4bb782c340890c0a090fdae3c9e1960161
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "jasperreports" "7.8.0-10" --checksum 4b1cff8135bf0521e16de93ac65a8fe78541d54ae2efd9cc17aee186a1e4c8ee
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "jasperreports" "7.8.1-0" --checksum 3c2df18851583680f0cad574d392021c56ec691d2e7df180d0073cffeece9e5b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
 
@@ -27,7 +27,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="jasperreports" \
-    BITNAMI_IMAGE_VERSION="7.8.0-debian-10-r379" \
+    BITNAMI_IMAGE_VERSION="7.8.1-debian-10-r0" \
     JAVA_HOME="/opt/bitnami/java" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
