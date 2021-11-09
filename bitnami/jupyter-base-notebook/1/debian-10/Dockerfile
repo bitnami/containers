@@ -13,15 +13,15 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "54517d6ea3a8f4d8f619db061b0c056aaafb6cf308ad0fe2c4357f41c007ec61  /tmp/bitnami/pkg/cache/miniconda-4.10.3-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/miniconda-4.10.3-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/miniconda-4.10.3-0-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jupyter-base-notebook-1.4.2-0-linux-amd64-debian-10.tar.gz && \
-    echo "916b2018eedfc53b6c8d2ea5406530163856afc9b33138fb6f596948b1f439e5  /tmp/bitnami/pkg/cache/jupyter-base-notebook-1.4.2-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/jupyter-base-notebook-1.4.2-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/jupyter-base-notebook-1.4.2-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jupyter-base-notebook-1.4.2-1-linux-amd64-debian-10.tar.gz && \
+    echo "8f60e0bd80c871c863b4713aadc9d43d35f8e093543ef149f8471829d1c08736  /tmp/bitnami/pkg/cache/jupyter-base-notebook-1.4.2-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/jupyter-base-notebook-1.4.2-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/jupyter-base-notebook-1.4.2-1-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /opt/bitnami/jupyterhub-singleuser/ && chmod g+rwX /opt/bitnami/jupyterhub-singleuser/
 
 ENV BITNAMI_APP_NAME="jupyter-base-notebook" \
-    BITNAMI_IMAGE_VERSION="1.4.2-debian-10-r77" \
+    BITNAMI_IMAGE_VERSION="1.4.2-debian-10-r78" \
     PATH="/opt/bitnami/miniconda/bin:$PATH"
 
 USER 1001
