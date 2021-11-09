@@ -320,14 +320,15 @@ pgpool_healthcheck() {
 #   None
 #########################
 pgpool_create_pghba() {
-    local authentication="$PGPOOL_AUTHENTICATION_METHOD"
+    local all_authentication="$PGPOOL_AUTHENTICATION_METHOD"
+    local postgres_authentication="$all_authentication"
+    is_boolean_yes "$PGPOOL_ENABLE_LDAP" && all_authentication="pam pamservice=pgpool"
     local postgres_auth_line=""
     local sr_check_auth_line=""
     info "Generating pg_hba.conf file..."
 
-    is_boolean_yes "$PGPOOL_ENABLE_LDAP" && authentication="pam pamservice=pgpool"
     if is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"; then
-        postgres_auth_line="host     all             ${PGPOOL_POSTGRES_USERNAME}       all         ${authentication}"
+        postgres_auth_line="host     all             ${PGPOOL_POSTGRES_USERNAME}       all         ${postgres_authentication}"
     fi
     if [[ -n "$PGPOOL_SR_CHECK_USER" ]]; then
         sr_check_auth_line="host     all             ${PGPOOL_SR_CHECK_USER}       all         trust"
@@ -345,11 +346,11 @@ EOF
     fi
 
     cat >>"$PGPOOL_PGHBA_FILE" <<EOF
-$sr_check_auth_line
-$postgres_auth_line
+${sr_check_auth_line}
+${postgres_auth_line}
 host     all             wide               all         trust
 host     all             pop_user           all         trust
-host     all             all                all         $authentication
+host     all             all                all         ${all_authentication}
 EOF
 }
 
