@@ -1,22 +1,25 @@
-# What is Logstash?
+# logstash packaged by Bitnami
 
-Logstash is an open source, server-side data processing pipeline that ingests data from a multitude of sources simultaneously, transforms it, and then sends it to your favorite "stash."
-[https://www.elastic.co/products/logstash](https://www.elastic.co/products/logstash)
+## What is logstash?
 
-# TL;DR
+> Logstash is an open source data processing engine. It ingests data from multiple sources, processes it, and sends the output to final destination in real-time. It is a core component of the ELK stack.
+
+[Overview of logstash](http://logstash.net)
+
+## TL;DR
 
 ```console
 $ docker run --name logstash bitnami/logstash:latest
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-logstash/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -27,26 +30,26 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/logstash?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy Logstash in Kubernetes?
+## How to deploy Logstash in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Logstash Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/logstash).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.15.1`, `7.15.1-debian-10-r21`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/7.15.1-debian-10-r21/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.15.1`, `7.15.1-debian-10-r22`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/7.15.1-debian-10-r22/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/logstash GitHub repo](https://github.com/bitnami/bitnami-docker-logstash).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami Logstash Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/logstash).
 
@@ -66,7 +69,7 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/logstash:latest 'https://github.com/bitnami/bitnami-docker-logstash.git#master:7/debian-10'
 ```
 
-# Persisting your application
+## Persisting your application
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -90,21 +93,21 @@ logstash:
 
 > NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-# Connecting to other containers
+## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a different server running inside a container can easily be accessed by your application containers and vice-versa.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-## Using the Command Line
+### Using the Command Line
 
-### Step 1: Create a network
+#### Step 1: Create a network
 
 ```console
 $ docker network create logstash-network --driver bridge
 ```
 
-### Step 2: Launch the Logstash container within your network
+#### Step 2: Launch the Logstash container within your network
 
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `logstash-network` network.
 
@@ -112,11 +115,11 @@ Use the `--network <NETWORK>` argument to the `docker run` command to attach the
 $ docker run --name logstash-node1 --network logstash-network bitnami/logstash:latest
 ```
 
-### Step 3: Run another containers
+#### Step 3: Run another containers
 
 We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
 
-# Configuration
+## Configuration
 
 This container, by default, provides a very basic configuration for logstash, that listen http on port 8080 and writes to stdout.
 
@@ -124,7 +127,7 @@ This container, by default, provides a very basic configuration for logstash, th
 $ docker run -d -p 8080:8080 bitnami/logstash:latest
 ```
 
-## Using a configuration string
+### Using a configuration string
 
 For simple configurations, you specify it using the `LOGSTASH_CONF_STRING` environment variable:
 
@@ -132,7 +135,7 @@ For simple configurations, you specify it using the `LOGSTASH_CONF_STRING` envir
 $ docker run --env LOGSTASH_CONF_STRING="input {file {path => \"/tmp/logstash_input\"}} output {file {path => \"/tmp/logstash_output\"}}" bitnami/logstash:latest
 ```
 
-## Using a configuration file
+### Using a configuration file
 
 You can override the default configuration for logstash by mounting your own configuration files on directory `/bitnami/logstash/config`. You will need to indicate the file holding the pipeline definition by setting the `LOGSTASH_CONF_FILENAME` environment variable.
 
@@ -140,7 +143,7 @@ You can override the default configuration for logstash by mounting your own con
 $ docker run -d --env LOGSTASH_CONF_FILENAME=my_config.conf -v /path/to/custom-conf-directory:/bitnami/logstash/config bitnami/logstash:latest
 ```
 
-## Additional command line options
+### Additional command line options
 
 In case you want to add extra flags to the Logstash command, use the `LOGSTASH_EXTRA_ARGS` variable. Example:
 
@@ -148,7 +151,7 @@ In case you want to add extra flags to the Logstash command, use the `LOGSTASH_E
 $ docker run -d --env LOGSTASH_EXTRA_ARGS="-w 4 -b 4096" bitnami/logstash:latest
 ```
 
-## Using multiple pipelines
+### Using multiple pipelines
 
 You can use [multiple pipelines](https://www.elastic.co/guide/en/logstash/master/multiple-pipelines.html) by setting the `LOGSTASH_ENABLE_MULTIPLE_PIPELINES` environment variable to `true`.
 
@@ -158,7 +161,7 @@ In that case, you should place your `pipelines.yml` file in the mounted volume (
 $ docker run -d --env LOGSTASH_ENABLE_MULTIPLE_PIPELINES=true -v /path/to/custom-conf-directory:/bitnami/logstash/config bitnami/logstash:latest
 ```
 
-## Exposing logstash API
+### Exposing logstash API
 
 You can expose the logstash API by setting the environment variable `LOGSTASH_EXPOSE_API`, you can also change the default port by using `LOGSTASH_API_PORT_NUMBER`.
 
@@ -166,7 +169,7 @@ You can expose the logstash API by setting the environment variable `LOGSTASH_EX
 $ docker run -d --env LOGSTASH_EXPOSE_API=yes --env LOGSTASH_API_PORT_NUMBER=9090 -p 9090:9090 bitnami/logstash:latest
 ```
 
-# Logging
+## Logging
 
 The Bitnami Logstash Docker image sends the container logs to `stdout`. To view the logs:
 
@@ -179,19 +182,19 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 Additionally, in case you'd like to modify Logstash logging configuration, it can be done by overwriting the file `/opt/bitnami/logstash/config/log4j2.properties`.
 The syntax of this file can be found in Logstash [logging documentation](https://www.elastic.co/guide/en/logstash/current/logging.html).
 
-# Maintenance
+## Maintenance
 
-## Upgrade this image
+### Upgrade this image
 
 Bitnami provides up-to-date versions of Logstash, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
-### Step 1: Get the updated image
+#### Step 1: Get the updated image
 
 ```console
 $ docker pull bitnami/logstash:latest
 ```
 
-### Step 2: Stop the running container
+#### Step 2: Stop the running container
 
 Stop the currently running container using the command
 
@@ -199,13 +202,13 @@ Stop the currently running container using the command
 $ docker stop logstash
 ```
 
-### Step 3: Remove the currently running container
+#### Step 3: Remove the currently running container
 
 ```console
 $ docker rm -v logstash
 ```
 
-### Step 4: Run the new image
+#### Step 4: Run the new image
 
 Re-create your container from the new image.
 
@@ -213,11 +216,11 @@ Re-create your container from the new image.
 $ docker run --name logstash bitnami/logstash:latest
 ```
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-logstash/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-logstash/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-logstash/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -227,7 +230,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright (c) 2021 Bitnami
 
