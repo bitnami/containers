@@ -36,23 +36,23 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "fb835d2deaeaf6c583ec498ff4b9f985aa022367704c9e4cbdb6dd2e0d154ec0",
+        "digest": "9d07784a96b6cf6a61b9d4f9b642e583fea2f94f92df6c16f332ce54bf9f897d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.25-1"
+        "version": "7.4.25-3"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "8179ad1371c9a7d897fe3b1bf53bbe763f94edafef19acad2498dd48b3674efe",
+        "digest": "00722b62c7561929e039877a6e445a4bb782c340890c0a090fdae3c9e1960161",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.0-3"
+        "version": "1.0.1-1"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "7521d9a4f9e4e182bf32977e234026caa7b03759799868335bccb1edd8f8fd12",
+        "digest": "28dc75dff64df07e67b711d20859c24ebc996db0eaac06138553341d0f769299",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.0-3"
+        "version": "1.0.1-1"
     }
 }
