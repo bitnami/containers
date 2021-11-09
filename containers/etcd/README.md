@@ -1,23 +1,25 @@
-# What is etcd?
+# etcd packaged by Bitnami
+
+## What is etcd?
 
 > etcd is a distributed key-value store designed to securely store data across a cluster. etcd is widely used in production on account of its reliability, fault-tolerance and ease of use.
 
-[https://coreos.com/etcd/](https://coreos.com/etcd/)
+[Overview of etcd](https://coreos.com/etcd)
 
-# TL;DR
+## TL;DR
 
 ```console
 $ docker run -it --name etcd bitnami/etcd
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-etcd/master/docker-compose.yml
 $ docker-compose up
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -29,30 +31,30 @@ $ docker-compose up
 
 > This [CVE scan report](https://quay.io/repository/bitnami/etcd?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy etcd in Kubernetes?
+## How to deploy etcd in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami etcd Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/etcd).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.5.1`, `3.5.1-debian-10-r19`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.5.1-debian-10-r19/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.5.1`, `3.5.1-debian-10-r20`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.5.1-debian-10-r20/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/etcd GitHub repo](https://github.com/bitnami/bitnami-docker-etcd).
 
-# Prerequisites
+## Prerequisites
 
 To run this application you need [Docker Engine](https://www.docker.com/products/docker-engine) >= `1.10.0`. [Docker Compose](https://www.docker.com/products/docker-compose) is recommended with a version `1.6.0` or later.
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami etcd Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/etcd).
 
@@ -74,23 +76,23 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/etcd:latest 'https://github.com/bitnami/bitnami-docker-etcd.git#master:3/debian-10'
 ```
 
-# Connecting to other containers
+## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a etcd server running inside a container can easily be accessed by your application containers using a etcd client.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-## Using the Command Line
+### Using the Command Line
 
 In this example, we will create a etcd client instance that will connect to the server instance that is running on the same docker network as the client.
 
-### Step 1: Create a network
+#### Step 1: Create a network
 
 ```console
 $ docker network create app-tier --driver bridge
 ```
 
-### Step 2: Launch the etcd server instance
+#### Step 2: Launch the etcd server instance
 
 Use the `--network app-tier` argument to the `docker run` command to attach the etcd container to the `app-tier` network.
 
@@ -104,7 +106,7 @@ $ docker run -d --name etcd-server \
     bitnami/etcd:latest
 ```
 
-### Step 3: Launch your etcd client instance
+#### Step 3: Launch your etcd client instance
 
 Finally we create a new container instance to launch the etcd client and connect to the server created in the previous step:
 
@@ -115,7 +117,7 @@ $ docker run -it --rm \
     bitnami/etcd:latest etcdctl --endpoints http://etcd-server:2379 put /message Hello
 ```
 
-## Using Docker Compose
+### Using Docker Compose
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the etcd server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
@@ -154,7 +156,7 @@ Launch the containers using:
 $ docker-compose up -d
 ```
 
-# Configuration
+## Configuration
 
 The configuration can easily be setup by mounting your own configuration file on the directory `/opt/bitnami/etcd/conf`:
 
@@ -184,29 +186,29 @@ The previous rule applies to all [etcd flags](https://coreos.com/etcd/docs/lates
 
 > Note: by default the environment variable `ETCDCTL_API` is set to `3`. Modify this environment variable to use a different API version.
 
-# Notable Changes
+## Notable Changes
 
-## 3.4.15-debian-10-r7
+### 3.4.15-debian-10-r7
 
 * The container now contains the needed logic to deploy the etcd container on Kubernetes using the [Bitnami etcd Chart](https://github.com/bitnami/charts/tree/master/bitnami/etcd).
 
-## 3.4.13-debian-10-r7
+### 3.4.13-debian-10-r7
 
 * Arbitrary user ID(s) are supported again, see https://github.com/etcd-io/etcd/issues/12158 for more information abut the changes in the upstream source code
 
-## 3.4.10-debian-10-r0
+### 3.4.10-debian-10-r0
 
 * Arbitrary user ID(s) when running the container with a non-privileged user are not supported (only `1001` UID is allowed).
 
-# Further documentation
+## Further documentation
 
 For further documentation, please check [etcd documentation](https://coreos.com/etcd/docs/latest/) or its [GitHub repository](https://github.com/coreos/etcd)
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-etcd/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-etcd/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-etcd/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -216,7 +218,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2021 Bitnami
 
