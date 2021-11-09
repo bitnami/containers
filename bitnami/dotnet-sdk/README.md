@@ -35,8 +35,9 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
+* [`6`, `6-debian-10`, `6.0.100`, `6.0.100-debian-10-r0`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet-sdk/blob/6.0.100-debian-10-r0/6/debian-10/Dockerfile)
 * [`5`, `5-debian-10`, `5.0.403`, `5.0.403-debian-10-r1` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet-sdk/blob/5.0.403-debian-10-r1/5/debian-10/Dockerfile)
-* [`3.1`, `3.1-debian-10`, `3.1.415`, `3.1.415-debian-10-r0`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet-sdk/blob/3.1.415-debian-10-r0/3.1/debian-10/Dockerfile)
+* [`3.1`, `3.1-debian-10`, `3.1.415`, `3.1.415-debian-10-r0` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet-sdk/blob/3.1.415-debian-10-r0/3.1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dotnet-sdk GitHub repo](https://github.com/bitnami/bitnami-docker-dotnet-sdk).
 
@@ -57,7 +58,7 @@ $ docker pull bitnami/dotnet-sdk:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/dotnet-sdk:latest 'https://github.com/bitnami/bitnami-docker-dotnet-sdk.git#master:3.1/debian-10'
+$ docker build -t bitnami/dotnet-sdk:latest 'https://github.com/bitnami/bitnami-docker-dotnet-sdk.git#master:6/debian-10'
 ```
 
 ## Persisting your application
