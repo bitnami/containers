@@ -1,17 +1,16 @@
+# kube-state-metrics packaged by Bitnami
 
-# What is Kube-state-metrics?
+## What is kube-state-metrics?
 
-kube-state-metrics is a simple service that listens to the Kubernetes API server and generates metrics about the state of the objects. (See examples in the Metrics section below.) It is not focused on the health of the individual Kubernetes components, but rather on the health of the various objects inside, such as deployments, nodes and pods.
+> kube-state-metrics is a simple service that listens to the Kubernetes API server and generates metrics about the state of the objects.
 
-The metrics are exported through the Prometheus golang client on the HTTP endpoint /metrics on the listening port (default 80). They are served either as plaintext or protobuf depending on the Accept header. They are designed to be consumed either by Prometheus itself or by a scraper that is compatible with scraping a Prometheus client endpoint. You can also open /metrics in a browser to see the raw metrics.
+[Overview of kube-state-metrics](https://github.com/kubernetes/kube-state-metrics)
 
-[https://github.com/kubernetes/kube-state-metrics](https://github.com/kubernetes/kube-state-metrics)
-
-# TL;DR
+## TL;DR
 
 Deploy Kube-state-metrics on your [Kubernetes cluster](https://github.com/kubernetes/kube-state-metrics/tree/master/Documentation).
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -23,20 +22,20 @@ Deploy Kube-state-metrics on your [Kubernetes cluster](https://github.com/kubern
 
 > This [CVE scan report](https://quay.io/repository/bitnami/kube-state-metrics?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.2.3`, `2.2.3-debian-10-r23`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/2.2.3-debian-10-r23/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.2.3`, `2.2.3-debian-10-r24`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/2.2.3-debian-10-r24/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kube-state-metrics GitHub repo](https://github.com/bitnami/bitnami-docker-kube-state-metrics).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami Kube-state-metrics Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kube-state-metrics).
 
@@ -56,9 +55,9 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/kube-state-metrics:latest 'https://github.com/bitnami/bitnami-docker-kube-state-metrics.git#master:2/debian-10'
 ```
 
-# Configuration
+## Configuration
 
-## Resource recommendation
+### Resource recommendation
 
 Resource usage changes with the size of the cluster. As a general rule, you should allocate
 
@@ -70,11 +69,11 @@ For clusters of more than 100 nodes, allocate at least
 * 2MiB memory per node
 * 0.001 cores per node
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-kube-state-metrics/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-kube-state-metrics/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-kube-state-metrics/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -84,7 +83,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 Copyright (c) 2021 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
