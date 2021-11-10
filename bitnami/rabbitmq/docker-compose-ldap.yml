@@ -11,7 +11,7 @@ services:
       - '25672:25672'
       - '15672:15672'
     volumes:
-      - 'rabbitmq_data:/bitnami/rabbitmq'
+      - 'rabbitmq_data:/bitnami/rabbitmq/mnesia'
       - ./config/advanced.config:/bitnami/rabbitmq/conf/advanced.config:ro
     environment:
       - BITNAMI_DEBUG=true

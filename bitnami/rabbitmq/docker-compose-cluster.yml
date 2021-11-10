@@ -10,7 +10,7 @@ services:
     ports:
       - '15672:15672'
     volumes:
-      - 'rabbitmqstats_data:/bitnami'
+      - 'rabbitmqstats_data:/bitnami/rabbitmq/mnesia'
   queue-disc1:
     image: docker.io/bitnami/rabbitmq:3.9
     environment:
@@ -20,7 +20,7 @@ services:
       - RABBITMQ_ERL_COOKIE=s3cr3tc00ki3
       - RABBITMQ_SECURE_PASSWORD=yes
     volumes:
-      - 'rabbitmqdisc1_data:/bitnami'
+      - 'rabbitmqdisc1_data:/bitnami/rabbitmq/mnesia'
   queue-ram1:
     image: docker.io/bitnami/rabbitmq:3.9
     environment:
@@ -30,7 +30,7 @@ services:
       - RABBITMQ_ERL_COOKIE=s3cr3tc00ki3
       - RABBITMQ_SECURE_PASSWORD=yes
     volumes:
-      - 'rabbitmqram1_data:/bitnami'
+      - 'rabbitmqram1_data:/bitnami/rabbitmq/mnesia'
 
 volumes:
   rabbitmqstats_data:
