@@ -327,10 +327,10 @@ EOF
 #   --disable-https - Whether to render the app's HTTPS virtual host with a .disabled prefix
 #   --http-port - HTTP port number
 #   --https-port - HTTPS port number
-#   --move-htaccess - Move .htaccess files to a common place so they can be loaded during Apache startup
+#   --move-htaccess - Move .htaccess files to a common place so they can be loaded during Apache startup (only allowed when type is not defined)
 #   --additional-configuration - Additional vhost configuration (no default)
 #   --before-vhost-configuration - Configuration to add before the <VirtualHost> directive (no default)
-#   --allow-override - Whether to allow .htaccess files (only allowed when --move-htaccess is set to 'no')
+#   --allow-override - Whether to allow .htaccess files (only allowed when --move-htaccess is set to 'no' and type is not defined)
 #   --document-root - Path to document root directory
 #   --extra-directory-configuration - Extra configuration for the document root directory
 #   --proxy-address - Address where to proxy requests
@@ -358,8 +358,10 @@ ensure_apache_app_configuration_exists() {
     export allow_override="All"
     export document_root="${BITNAMI_ROOT_DIR}/${app}"
     export extra_directory_configuration=""
-    export http_port="${APACHE_HTTP_PORT_NUMBER:-"$APACHE_DEFAULT_HTTP_PORT_NUMBER"}"
-    export https_port="${APACHE_HTTPS_PORT_NUMBER:-"$APACHE_DEFAULT_HTTPS_PORT_NUMBER"}"
+    export default_http_port="${APACHE_HTTP_PORT_NUMBER:-"$APACHE_DEFAULT_HTTP_PORT_NUMBER"}"
+    export default_https_port="${APACHE_HTTPS_PORT_NUMBER:-"$APACHE_DEFAULT_HTTPS_PORT_NUMBER"}"
+    export http_port="$default_http_port"
+    export https_port="$default_https_port"
     export proxy_address=""
     export proxy_configuration=""
     export proxy_http_configuration=""
@@ -409,6 +411,11 @@ ensure_apache_app_configuration_exists() {
         esac
         shift
     done
+    # Construct listen ports configuration (only to add when using non-standard ports)
+    export http_listen_configuration=""
+    export https_listen_configuration=""
+    [[ "$http_port" != "$default_http_port" ]] && http_listen_configuration="Listen ${http_port}"
+    [[ "$https_port" != "$default_https_port" ]] && https_listen_configuration="Listen ${https_port}"
     # Construct host string in the format of "host1:port1[ host2:port2[ ...]]"
     export http_listen_addresses=""
     export https_listen_addresses=""
@@ -426,10 +433,10 @@ ensure_apache_app_configuration_exists() {
     if [[ "${#server_aliases[@]}" -gt 0 ]]; then
         server_name_configuration+=$'\n'"ServerAlias ${server_aliases[*]}"
     fi
-    # App .htaccess support
+    # App .htaccess support (only when type is not defined)
     export htaccess_include
-    is_boolean_yes "$move_htaccess" && apache_replace_htaccess_files "$app" --document-root "$document_root"
-    if [[ -f "${APACHE_HTACCESS_DIR}/${app}-htaccess.conf" ]]; then
+    [[ -z "$type" ]] && is_boolean_yes "$move_htaccess" && apache_replace_htaccess_files "$app" --document-root "$document_root"
+    if [[ -z "$type" && -f "${APACHE_HTACCESS_DIR}/${app}-htaccess.conf" ]]; then
         allow_override="None"
         htaccess_include="Include \"${APACHE_HTACCESS_DIR}/${app}-htaccess.conf\""
     else
@@ -455,6 +462,7 @@ EOF
     server_name_configuration="$(indent $'\n'"$server_name_configuration" 2)"
     additional_configuration="$(indent $'\n'"$additional_configuration" 2)"
     htaccess_include="$(indent $'\n'"$htaccess_include" 2)"
+    acl_configuration=""$(indent $'\n'"$acl_configuration" 4)
     extra_directory_configuration="$(indent $'\n'"$extra_directory_configuration" 4)"
     proxy_configuration="$(indent $'\n'"$proxy_configuration" 2)"
     proxy_http_configuration="$(indent $'\n'"$proxy_http_configuration" 2)"
@@ -519,10 +527,10 @@ ensure_apache_app_configuration_not_exists() {
 # Flags:
 #   --type - Application type, which has an effect on what configuration template will be used, allowed values: php, (empty)
 #   --allow-remote-connections - Whether to allow remote connections or to require local connections
-#   --move-htaccess - Move .htaccess files to a common place so they can be loaded during Apache startup
+#   --move-htaccess - Move .htaccess files to a common place so they can be loaded during Apache startup (only allowed when type is not defined)
 #   --prefix - URL prefix from where it will be accessible (i.e. /myapp)
 #   --additional-configuration - Additional vhost configuration (no default)
-#   --allow-override - Whether to allow .htaccess files (only allowed when --move-htaccess is set to 'no')
+#   --allow-override - Whether to allow .htaccess files (only allowed when --move-htaccess is set to 'no' and type is not defined)
 #   --document-root - Path to document root directory
 #   --extra-directory-configuration - Extra configuration for the document root directory
 # Returns:
@@ -565,10 +573,10 @@ ensure_apache_prefix_configuration_exists() {
         esac
         shift
     done
-    # App .htaccess support
+    # App .htaccess support (only when type is not defined)
     export htaccess_include
-    is_boolean_yes "$move_htaccess" && apache_replace_htaccess_files "$app" --document-root "$document_root"
-    if [[ -f "${APACHE_HTACCESS_DIR}/${app}-htaccess.conf" ]]; then
+    [[ -z "$type" ]] && is_boolean_yes "$move_htaccess" && apache_replace_htaccess_files "$app" --document-root "$document_root"
+    if [[ -z "$type" && -f "${APACHE_HTACCESS_DIR}/${app}-htaccess.conf" ]]; then
         allow_override="None"
         htaccess_include="Include \"${APACHE_HTACCESS_DIR}/${app}-htaccess.conf\""
     else
@@ -643,8 +651,10 @@ apache_update_app_configuration() {
     local enable_https="no"
     local disable_http="no"
     local disable_https="no"
-    local http_port="${APACHE_HTTP_PORT_NUMBER:-"$APACHE_DEFAULT_HTTP_PORT_NUMBER"}"
-    local https_port="${APACHE_HTTPS_PORT_NUMBER:-"$APACHE_DEFAULT_HTTPS_PORT_NUMBER"}"
+    export default_http_port="${APACHE_HTTP_PORT_NUMBER:-"$APACHE_DEFAULT_HTTP_PORT_NUMBER"}"
+    export default_https_port="${APACHE_HTTPS_PORT_NUMBER:-"$APACHE_DEFAULT_HTTPS_PORT_NUMBER"}"
+    export http_port="$default_http_port"
+    export https_port="$default_https_port"
     local var_name
     # Validate arguments
     local var_name
@@ -721,7 +731,8 @@ apache_update_app_configuration() {
     if [[ -e "$http_vhost" ]]; then
         if is_file_writable "$http_vhost"; then
             update_common_vhost_config "$http_vhost"
-            # Update vhost-specific config (listen addresses)
+            # Update vhost-specific config (listen port and addresses)
+            replace_in_file "$http_vhost" "^Listen .*" "Listen ${http_port}"
             replace_in_file "$http_vhost" "^<VirtualHost\s.*>$" "<VirtualHost ${http_listen_addresses}>"
         else
             warn "The ${app} virtual host file '${http_vhost}' is not writable. Configurations based on environment variables will not be applied for this file."
@@ -730,7 +741,8 @@ apache_update_app_configuration() {
     if [[ -e "$https_vhost" ]]; then
         if is_file_writable "$https_vhost"; then
             update_common_vhost_config "$https_vhost"
-            # Update vhost-specific config (listen addresses)
+            # Update vhost-specific config (listen port and addresses)
+            replace_in_file "$https_vhost" "^Listen .*" "Listen ${https_port}"
             replace_in_file "$https_vhost" "^<VirtualHost\s.*>$" "<VirtualHost ${https_listen_addresses}>"
         else
             warn "The ${app} virtual host file '${https_vhost}' is not writable. Configurations based on environment variables will not be applied for this file."
