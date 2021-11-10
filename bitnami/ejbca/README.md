@@ -42,7 +42,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`7`, `7-debian-10`, `7.4.3-2`, `7.4.3-2-debian-10-r39`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ejbca/blob/7.4.3-2-debian-10-r39/7/debian-10/Dockerfile)
-* [`6`, `6-debian-10`, `6.15.2-6`, `6.15.2-6-debian-10-r408` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ejbca/blob/6.15.2-6-debian-10-r408/6/debian-10/Dockerfile)
+* [`6`, `6-debian-10`, `6.15.2-6`, `6.15.2-6-debian-10-r409` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ejbca/blob/6.15.2-6-debian-10-r409/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ejbca GitHub repo](https://github.com/bitnami/bitnami-docker-ejbca).
 
