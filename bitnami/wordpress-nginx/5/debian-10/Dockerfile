@@ -12,21 +12,21 @@ RUN install_packages acl ca-certificates curl gzip less libaudit1 libbsd0 libbz2
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.4.25-4" --checksum ad0e16b36d93d6410f1266bf45f1f853038c9c8bb04523dd3e408b426ceb6a18
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wp-cli" "2.5.0-0" --checksum b2be17e2065fc8d9d1a175e1dbc689e8f6a5543bb3b6a6f5470bc987b7c396ce
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.21.4-0" --checksum 9aaf0999079e60bfe7aa79f35499e340140d1ac1c68e164f009226913dae4604
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.31-2" --checksum 15b394a022ca1d0b4b89bfee0487ee13f9e8cc697d0ca09ce62a0a3732536236
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wordpress" "5.8.1-8" --checksum b4853a30a977f115f63bb7853eaa7dc05bc54031903208aa9257618e92934a3e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.32-0" --checksum 4a211faa9436c9747dfc4374cb9e8a7f9b0065dfc58dd4784cef0f5029c2e65e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wordpress" "5.8.2-0" --checksum 15c50e1055d684dffe90654c7ddf15390c6c310ee844815e7d3b34c37c6baf5b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-1" --checksum 00722b62c7561929e039877a6e445a4bb782c340890c0a090fdae3c9e1960161
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
-RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
+RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN /opt/bitnami/scripts/nginx-php-fpm/postunpack.sh
 RUN /opt/bitnami/scripts/wordpress/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="wordpress-nginx" \
-    BITNAMI_IMAGE_VERSION="5.8.1-debian-10-r59" \
+    BITNAMI_IMAGE_VERSION="5.8.2-debian-10-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
