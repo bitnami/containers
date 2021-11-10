@@ -83,12 +83,13 @@ mongodb_client_initialize() {
         # https://www.mongodb.com/basics/create-database
         info "Creating database ${MONGODB_CLIENT_CREATE_DATABASE_NAME} and user ${MONGODB_CLIENT_CREATE_DATABASE_NAME}"
         debug_execute mongodb_execute "${mongodb_execute_args[@]}" <<EOF
-if (!db.system.users.findOne({_id: '${MONGODB_CLIENT_CREATE_DATABASE_NAME}.${MONGODB_CLIENT_CREATE_DATABASE_USERNAME}'}))
+if (!db.getSiblingDB('${MONGODB_CLIENT_CREATE_DATABASE_NAME}').getUser('${MONGODB_CLIENT_CREATE_DATABASE_USERNAME}')) {
   db.getSiblingDB('${MONGODB_CLIENT_CREATE_DATABASE_NAME}').createUser({
     user: '${MONGODB_CLIENT_CREATE_DATABASE_USERNAME}',
     pwd: '${MONGODB_CLIENT_CREATE_DATABASE_PASSWORD}',
     roles: [{role: 'readWrite', db: '${MONGODB_CLIENT_CREATE_DATABASE_NAME}'}],
   });
+}
 EOF
     fi
 }
