@@ -36,17 +36,17 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "0ad1e1862ae23bd9aa0513d4cbe37ef6533f4a25ed140a6ae402f3e38bc6fef7",
+        "digest": "0f28660749aa65bc54937c37602dc9464064510ebd0a068b2a3e3be17ffab6e5",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.4.21-2"
+        "version": "10.4.22-0"
     },
     "php": {
         "arch": "amd64",
-        "digest": "9d07784a96b6cf6a61b9d4f9b642e583fea2f94f92df6c16f332ce54bf9f897d",
+        "digest": "ad0e16b36d93d6410f1266bf45f1f853038c9c8bb04523dd3e408b426ceb6a18",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.25-3"
+        "version": "7.4.25-4"
     },
     "postgresql-client": {
         "arch": "amd64",
