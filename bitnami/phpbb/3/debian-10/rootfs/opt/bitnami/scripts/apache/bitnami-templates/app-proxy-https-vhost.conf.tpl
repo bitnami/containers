@@ -1,3 +1,4 @@
+{{https_listen_configuration}}
 {{before_vhost_configuration}}
 <VirtualHost {{https_listen_addresses}}>
   {{server_name_configuration}}
