@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="grafana-tempo" \
-    BITNAMI_IMAGE_VERSION="1.1.0-debian-10-r66" \
+    BITNAMI_IMAGE_VERSION="1.1.0-debian-10-r67" \
     PATH="/opt/bitnami/grafana-tempo/bin:$PATH"
 
 USER 1001
