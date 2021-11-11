@@ -683,15 +683,18 @@ repmgr_initialize() {
       fi
     fi
     postgresql_initialize
-    # Allow remote connections, required to register primary and standby nodes
-    postgresql_enable_remote_connections
-    # Configure port and restrict access to PostgreSQL (MD5)
-    postgresql_set_property "port" "$POSTGRESQL_PORT_NUMBER"
+    if ! postgresql_is_file_external "postgresql.conf"; then
+        # Allow remote connections, required to register primary and standby nodes
+        postgresql_enable_remote_connections
+        # Configure port and restrict access to PostgreSQL (MD5)
+        postgresql_set_property "port" "$POSTGRESQL_PORT_NUMBER"
 
-    postgresql_configure_replication_parameters
-    postgresql_configure_fsync
-
-    is_boolean_yes "$REPMGR_PGHBA_TRUST_ALL" || postgresql_restrict_pghba
+        postgresql_configure_replication_parameters
+        postgresql_configure_fsync
+    fi
+    if ! postgresql_is_file_external "pg_hba.conf"; then
+        is_boolean_yes "$REPMGR_PGHBA_TRUST_ALL" ||  postgresql_restrict_pghba
+    fi
     if [[ "$REPMGR_ROLE" = "primary" ]]; then
         if is_boolean_yes "$POSTGRESQL_FIRST_BOOT"; then
             postgresql_start_bg
