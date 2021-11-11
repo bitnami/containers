@@ -31,7 +31,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.22`, `1.22-debian-10`, `1.22.3`, `1.22.3-debian-10-r13`, `latest` (1.22/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.22.3-debian-10-r13/1.22/debian-10/Dockerfile)
-* [`1.21`, `1.21-debian-10`, `1.21.6`, `1.21.6-debian-10-r13` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.21.6-debian-10-r13/1.21/debian-10/Dockerfile)
+* [`1.21`, `1.21-debian-10`, `1.21.6`, `1.21.6-debian-10-r14` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.21.6-debian-10-r14/1.21/debian-10/Dockerfile)
 * [`1.20`, `1.20-debian-10`, `1.20.12`, `1.20.12-debian-10-r13` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.20.12-debian-10-r13/1.20/debian-10/Dockerfile)
 * [`1.19`, `1.19-debian-10`, `1.19.16`, `1.19.16-debian-10-r13` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.19.16-debian-10-r13/1.19/debian-10/Dockerfile)
 
@@ -76,6 +76,10 @@ It's possible to load your own configuration, which is useful if you want to con
 ```console
 $ docker run --rm --name kubectl -v /path/to/your/kube/config:/.kube/config bitnami/kubectl:latest
 ```
+
+## Branch Deprecation Notice
+
+Kubectl's branch 1.19 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 12-10-2021
 
 ## Contributing
 
