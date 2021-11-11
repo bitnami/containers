@@ -22,10 +22,10 @@
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "6c426cd27401d66914b19e8d647a5d1bda1f8cd632836aa2b8ce705c2d643e99",
+        "digest": "eb9051af5a9077ff41349b271ffd1029af7088bcf3d1f5ac81c2c6707801fbec",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "13.4.0-0"
+        "version": "13.5.0-0"
     },
     "python": {
         "arch": "amd64",
