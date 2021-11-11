@@ -1,3 +1,4 @@
+{{https_listen_configuration}}
 {{before_vhost_configuration}}
 PassengerPreStart https://localhost:{{https_port}}/
 <VirtualHost {{https_listen_addresses}}>
