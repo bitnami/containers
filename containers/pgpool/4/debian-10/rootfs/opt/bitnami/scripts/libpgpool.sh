@@ -292,13 +292,14 @@ pgpool_attach_node() {
 pgpool_healthcheck() {
     info "Checking pgpool health..."
     local backends
-    backends=$(PGCONNECT_TIMEOUT=15 PGPASSWORD="${PGPOOL_POSTGRES_PASSWORD}" psql -U "${PGPOOL_POSTGRES_USERNAME}" \
-        -d postgres -h "${PGPOOL_TMP_DIR}" -p "${PGPOOL_PORT_NUMBER}" -tA -c "SHOW pool_nodes;" | tr -d ' ')
+    backends="$(PGCONNECT_TIMEOUT=15 PGPASSWORD="$PGPOOL_POSTGRES_PASSWORD" psql -U "$PGPOOL_POSTGRES_USERNAME" \
+        -d postgres -h "$PGPOOL_TMP_DIR" -p "$PGPOOL_PORT_NUMBER" -tA -c "SHOW pool_nodes;")"
     if [[ "$backends" ]]; then
         # look up backends that are marked offline
-        for node in $(echo "${backends}" | grep "down"); do
-            node_id=$(echo "${node}" | cut -d'|' -f1)
-            node_host=$(echo "${node}" | cut -d'|' -f2)
+        for node in $(echo "${backends}" | grep "down" | tr -d ' '); do
+            IFS="|" read -ra node_info <<< "$node"
+            local -r node_id="${node_info[0]}"
+            local -r node_host="${node_info[1]}"
             if [[ $(PGCONNECT_TIMEOUT=3 PGPASSWORD="${PGPOOL_POSTGRES_PASSWORD}" psql -U "${PGPOOL_POSTGRES_USERNAME}" \
                 -d postgres -h "${node_host}" -p "${PGPOOL_PORT_NUMBER}" -tA -c "SELECT 1" || true) == 1 ]]; then
                 # attach backend if it has come back online
@@ -633,6 +634,18 @@ pgpool_initialize() {
     # Configuring permissions for tmp, logs and data folders
     am_i_root && configure_permissions_ownership "$PGPOOL_TMP_DIR $PGPOOL_LOG_DIR" -u "$PGPOOL_DAEMON_USER" -g "$PGPOOL_DAEMON_GROUP"
     am_i_root && configure_permissions_ownership "$PGPOOL_DATA_DIR" -u "$PGPOOL_DAEMON_USER" -g "$PGPOOL_DAEMON_GROUP" -d "755" -f "644"
+
+    # Wait for postgresql to be running
+    read -r -a nodes <<<"$(tr ',;' ' ' <<<"${PGPOOL_BACKEND_NODES}")"
+    for node in "${nodes[@]}"; do
+        read -r -a fields <<<"$(tr ':' ' ' <<<"${node}")"
+        local -r host="${fields[1]}"
+        local -r port="${fields[2]}"
+        if ! retry_while "debug_execute wait-for-port --timeout 5 --host ${host} ${port}"; then
+            error "Could not connect to PostgreSQL at ${host}:${port}"
+            return 1
+        fi
+    done
 
     pgpool_create_pghba
     pgpool_create_config
