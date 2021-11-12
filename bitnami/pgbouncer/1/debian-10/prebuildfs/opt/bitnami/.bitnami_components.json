@@ -15,17 +15,17 @@
     },
     "pgbouncer": {
         "arch": "amd64",
-        "digest": "472ce1c8e3a16f611ce35409b56b4dff7677d0451a5047911d26156dec022273",
+        "digest": "36a981577d7f7030ada2c318fb362ad006f1fb392d0a8c91bfe11f42adcf4f72",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.16.0-1"
+        "version": "1.16.1-0"
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "bc507be929b72ee456f46c031a5c2ab4b6433175d2bbb6fc6a74da565ab3cb08",
+        "digest": "f32958c288efd50fb29133d614ce19dc46ff40add10fc82254b29c8a46df324c",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.18.0-0"
+        "version": "10.19.0-0"
     },
     "wait-for-port": {
         "arch": "amd64",

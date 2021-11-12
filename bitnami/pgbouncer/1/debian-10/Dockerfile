@@ -10,10 +10,10 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaudit1 libbsd0 libc-ares2 libc6 libcap-ng0 libedit2 libevent-2.1-6 libffi6 libgcc1 libgmp10 libgnutls30 libhogweed4 libicu63 libidn2-0 libldap-2.4-2 liblzma5 libnettle6 libp11-kit0 libpam0g libsasl2-2 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 locales procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-1" --checksum 28dc75dff64df07e67b711d20859c24ebc996db0eaac06138553341d0f769299
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "10.18.0-0" --checksum bc507be929b72ee456f46c031a5c2ab4b6433175d2bbb6fc6a74da565ab3cb08
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "10.19.0-0" --checksum f32958c288efd50fb29133d614ce19dc46ff40add10fc82254b29c8a46df324c
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.1-0" --checksum 3d189e4b1fcdc330fb84c14a7c6fb296deff37d3142d9a17fe0c9a5dba51ef6d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "pgbouncer" "1.16.0-1" --checksum 472ce1c8e3a16f611ce35409b56b4dff7677d0451a5047911d26156dec022273
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "pgbouncer" "1.16.1-0" --checksum 36a981577d7f7030ada2c318fb362ad006f1fb392d0a8c91bfe11f42adcf4f72
 RUN chmod g+rwX /opt/bitnami
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
@@ -25,7 +25,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 RUN /opt/bitnami/scripts/pgbouncer/postunpack.sh
 ENV BITNAMI_APP_NAME="pgbouncer" \
-    BITNAMI_IMAGE_VERSION="1.16.0-debian-10-r92" \
+    BITNAMI_IMAGE_VERSION="1.16.1-debian-10-r0" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
