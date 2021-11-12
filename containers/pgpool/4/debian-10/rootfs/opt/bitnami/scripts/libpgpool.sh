@@ -639,8 +639,8 @@ pgpool_initialize() {
     read -r -a nodes <<<"$(tr ',;' ' ' <<<"${PGPOOL_BACKEND_NODES}")"
     for node in "${nodes[@]}"; do
         read -r -a fields <<<"$(tr ':' ' ' <<<"${node}")"
-        local -r host="${fields[1]}"
-        local -r port="${fields[2]}"
+        local host="${fields[1]}"
+        local port="${fields[2]}"
         if ! retry_while "debug_execute wait-for-port --timeout 5 --host ${host} ${port}"; then
             error "Could not connect to PostgreSQL at ${host}:${port}"
             return 1
