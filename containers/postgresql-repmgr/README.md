@@ -50,9 +50,9 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`14`, `14-debian-10`, `14.0.0`, `14.0.0-debian-10-r21` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/14.0.0-debian-10-r21/14/debian-10/Dockerfile)
 * [`13`, `13-debian-10`, `13.4.0`, `13.4.0-debian-10-r89` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/13.4.0-debian-10-r89/13/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.9.0`, `12.9.0-debian-10-r0` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.9.0-debian-10-r0/12/debian-10/Dockerfile)
-* [`11`, `11-debian-10`, `11.13.0`, `11.13.0-debian-10-r58`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.13.0-debian-10-r58/11/debian-10/Dockerfile)
-* [`10`, `10-debian-10`, `10.19.0`, `10.19.0-debian-10-r-1` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.19.0-debian-10-r-1/10/debian-10/Dockerfile)
-* [`9.6`, `9.6-debian-10`, `9.6.23`, `9.6.23-debian-10-r92` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.23-debian-10-r92/9.6/debian-10/Dockerfile)
+* [`11`, `11-debian-10`, `11.14.0`, `11.14.0-debian-10-r-1`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.14.0-debian-10-r-1/11/debian-10/Dockerfile)
+* [`10`, `10-debian-10`, `10.19.0`, `10.19.0-debian-10-r0` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.19.0-debian-10-r0/10/debian-10/Dockerfile)
+* [`9.6`, `9.6-debian-10`, `9.6.24`, `9.6.24-debian-10-r-1` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.24-debian-10-r-1/9.6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql-repmgr GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql-repmgr).
 
