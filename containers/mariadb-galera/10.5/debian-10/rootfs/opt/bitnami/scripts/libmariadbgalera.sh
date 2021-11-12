@@ -94,7 +94,7 @@ get_galera_cluster_bootstrap_value() {
     # - Bootstrapping may happen implicitly when "MARIADB_GALERA_CLUSTER_BOOTSTRAP" is undefined.
     #   This is mostly expected to happen when running in Kubernetes and the Helm Chart value "galera.bootstrap.bootstrapFromNode" is not set.
     # When the node is not marked to bootstrap, the node will join an existing cluster.
-    cluster_bootstrap="no"  # initial value
+    cluster_bootstrap="no" # initial value
     if is_boolean_yes "$DB_GALERA_FORCE_SAFETOBOOTSTRAP"; then
         cluster_bootstrap="yes"
     elif ! is_boolean_yes "$(get_previous_boot)"; then
@@ -129,15 +129,20 @@ should_bootstrap_implicitly() {
 }
 
 ########################
-# Whether the Galera cluster has other running nodes. 
+# Whether the Galera cluster has other running nodes
 # Globals:
 #   DB_*
 # Arguments:
 #   None
 # Returns:
-#   Yes or no
+#   None
 #########################
 has_galera_cluster_other_nodes() {
+    # - This function works on a best-effort basis and only works reliably with Kubernetes pods.
+    # - We are using `getent hosts` to check for the availability of other hosts, but this may not work when the hosts are defined as IP addresses.
+    #   In some environments, there may be no reverse DNS lookup for IPs, so this function may wrongly return "no".
+    #   It should work fine if the hosts are defined as hostnames of Services (usually of a StatefulSet) inside a Kubernetes environment.
+
     local local_ip
     local node_ip
     local cluster_address
@@ -255,7 +260,7 @@ mysql_validate() {
     fi
 
     if [[ -n "$DB_GALERA_FORCE_SAFETOBOOTSTRAP" ]] && ! is_yes_no_value "$DB_GALERA_FORCE_SAFETOBOOTSTRAP"; then
-        print_validation_error "The allowed values for MARIA_GALERA_FORCE_SAFETOBOOTSTRAP are yes or no."
+        print_validation_error "The allowed values for $(get_env_var GALERA_FORCE_SAFETOBOOTSTRAP) are yes or no."
     fi
 
     if [[ -z "$DB_GALERA_CLUSTER_NAME" ]]; then
