@@ -1,10 +1,10 @@
 {
     "erlang": {
         "arch": "amd64",
-        "digest": "6e5a3f91f75a8a9346d6850ec4d9cdd4811d57e6816048767040671df7709b1c",
+        "digest": "85b41664f26a75a4fbd59afc91273b93936bb1311e1a950a293ffb9777c1e3f0",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "24.1.4-0"
+        "version": "24.1.5-0"
     },
     "gosu": {
         "arch": "amd64",
@@ -15,9 +15,9 @@
     },
     "rabbitmq": {
         "arch": "amd64",
-        "digest": "0e85e814910c01468b6058c701c3a685996405d19ac77c5c941cb77f7082be7d",
+        "digest": "35dce58851c85dca38176dcc35013be7e15e3e85b6b94157e2e8fa66fb8079d5",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.8.23-0"
+        "version": "3.8.24-0"
     }
 }
