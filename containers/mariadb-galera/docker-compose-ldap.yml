@@ -15,6 +15,7 @@ services:
       - MARIADB_GALERA_MARIABACKUP_PASSWORD=backup-password
       - MARIADB_USER=user01
       - MARIADB_DATABASE=my_database
+      - MARIADB_GALERA_CLUSTER_ADDRESS=gcomm://
       - MARIADB_ENABLE_LDAP=yes
       - LDAP_URI=ldap://openldap:1389
       - LDAP_BASE=dc=example,dc=org
