@@ -10,8 +10,8 @@ ENV HOME="/opt/bitnami/rabbitmq/.rabbitmq" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 libssl1.1 libstdc++6 libtinfo6 locales procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "erlang" "24.1.4-0" --checksum 6e5a3f91f75a8a9346d6850ec4d9cdd4811d57e6816048767040671df7709b1c
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rabbitmq" "3.9.8-0" --checksum 56d53e9c00321d310f992d5c93f705e31523a9eb12ee2bd20db40d924f9e3898
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "erlang" "24.1.5-0" --checksum 85b41664f26a75a4fbd59afc91273b93936bb1311e1a950a293ffb9777c1e3f0
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rabbitmq" "3.9.9-0" --checksum 8efd4ec7490a06944b88625de19256135df9020f4249bf563812b3ab27f81d26
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
@@ -24,7 +24,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/rabbitmq/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.9.8-debian-10-r13" \
+    BITNAMI_IMAGE_VERSION="3.9.9-debian-10-r0" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en"
 
