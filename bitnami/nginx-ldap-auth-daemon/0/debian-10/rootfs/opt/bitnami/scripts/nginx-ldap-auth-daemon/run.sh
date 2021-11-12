@@ -22,6 +22,6 @@ flags=("--host" "${NGINXLDAP_HOSTNAME}" "-p" "${NGINXLDAP_PORT_NUMBER}" "--url" 
 [[ -n "${NGINXLDAP_HTTP_REALM}" ]] && flags=("${flags[@]}" "-R" "${NGINXLDAP_HTTP_REALM}")
 [[ -n "${NGINXLDAP_HTTP_COOKIE_NAME}" ]] && flags=("${flags[@]}" "-c" "${NGINXLDAP_HTTP_COOKIE_NAME}")
 
-info "** Starting NGINX LDAP Auth daemong **"
+info "** Starting NGINX LDAP Auth Daemon **"
 VIRTUAL_ENV_DISABLE_PROMPT=true . "${NGINXLDAP_PYTHON_BIN_DIR}"/activate
 exec python "${NGINXLDAP_SCRIPT_FILE}" "${flags[@]}"
