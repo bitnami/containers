@@ -49,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`14`, `14-debian-10`, `14.0.0`, `14.0.0-debian-10-r20` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/14.0.0-debian-10-r20/14/debian-10/Dockerfile)
 * [`13`, `13-debian-10`, `13.4.0`, `13.4.0-debian-10-r88` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/13.4.0-debian-10-r88/13/debian-10/Dockerfile)
-* [`12`, `12-debian-10`, `12.8.0`, `12.8.0-debian-10-r92` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.8.0-debian-10-r92/12/debian-10/Dockerfile)
+* [`12`, `12-debian-10`, `12.8.0`, `12.8.0-debian-10-r93` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.8.0-debian-10-r93/12/debian-10/Dockerfile)
 * [`11`, `11-debian-10`, `11.13.0`, `11.13.0-debian-10-r58`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.13.0-debian-10-r58/11/debian-10/Dockerfile)
 * [`10`, `10-debian-10`, `10.18.0`, `10.18.0-debian-10-r89` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.18.0-debian-10-r89/10/debian-10/Dockerfile)
 * [`9.6`, `9.6-debian-10`, `9.6.23`, `9.6.23-debian-10-r91` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.23-debian-10-r91/9.6/debian-10/Dockerfile)
@@ -648,6 +648,10 @@ $ docker-compose up pg-1
 ### 9.6.15-r18, 9.6.15-ol-7-r23, 9.6.15-centos-7-r23, 10.10.0-r18, 10.10.0-ol-7-r23, 10.10.0-centos-7-r23, 11.5.0-r19, 11.5.0-centos-7-r23, 11.5.0-ol-7-r23
 
 - Adds Postgis extension to postgresql, version 2.3.x to Postgresiql 9.6 and version 2.5 to 10, 11 and 12.
+
+# Branch Deprecation Notice
+
+PostgreSQL's branch 9.6 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 12-11-2021
 
 ## Contributing
 
