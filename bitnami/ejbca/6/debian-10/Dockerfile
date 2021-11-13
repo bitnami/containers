@@ -23,7 +23,7 @@ RUN /opt/bitnami/scripts/ejbca/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ejbca" \
-    BITNAMI_IMAGE_VERSION="6.15.2-6-debian-10-r411" \
+    BITNAMI_IMAGE_VERSION="6.15.2-6-debian-10-r412" \
     JAVA_HOME="/opt/bitnami/java" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
