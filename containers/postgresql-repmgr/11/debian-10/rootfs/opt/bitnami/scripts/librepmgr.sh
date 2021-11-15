@@ -401,6 +401,24 @@ EOF
 }
 
 ########################
+# Check if a given configuration file was mounted externally
+# Globals:
+#   REPMGR_MOUNTED_CONF_DIR
+# Arguments:
+#   $1 - Filename
+# Returns:
+#   1 if the file was mounted externally, 0 otherwise
+#########################
+repmgr_is_file_external() {
+    local -r filename=$1
+    if [[ -d "$REPMGR_MOUNTED_CONF_DIR" ]] && [[ -f "$REPMGR_MOUNTED_CONF_DIR"/"$filename" ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+########################
 # Prepare PostgreSQL default configuration
 # Globals:
 #   POSTGRESQL_MOUNTED_CONF_DIR
@@ -418,12 +436,12 @@ repmgr_postgresql_configuration() {
         debug "User injected custom configuration detected!"
     fi
     ensure_dir_exists "$POSTGRESQL_MOUNTED_CONF_DIR"
-    if [[ -f "${REPMGR_MOUNTED_CONF_DIR}/postgresql.conf" ]]; then
+    if repmgr_is_file_external "postgresql.conf"; then
         cp "${REPMGR_MOUNTED_CONF_DIR}/postgresql.conf" "${POSTGRESQL_MOUNTED_CONF_DIR}/postgresql.conf"
     else
         repmgr_inject_postgresql_configuration
     fi
-    if [[ -f "${REPMGR_MOUNTED_CONF_DIR}/pg_hba.conf" ]]; then
+    if repmgr_is_file_external "pg_hba.conf"; then
         cp "${REPMGR_MOUNTED_CONF_DIR}/pg_hba.conf" "${POSTGRESQL_MOUNTED_CONF_DIR}/pg_hba.conf"
     else
         repmgr_inject_pghba_configuration
@@ -447,7 +465,7 @@ repmgr_postgresql_configuration() {
 repmgr_generate_repmgr_config() {
     info "Preparing repmgr configuration..."
 
-    # If using a distinct WAL directory ($POSTGRESQL_DATA_DIR/pg_wal is a symlink to an existing dir or $POSTGRESQL_INITDB_WAL_DIR when not initialized),
+    # If using a distinct WAL directory (${POSTGRESQL_DATA_DIR}/pg_wal is a symlink to an existing dir or $POSTGRESQL_INITDB_WAL_DIR is set a custom value during 1st boot),
     # set the "--waldir" option accordingly
     local -r waldir=$(postgresql_get_waldir)
     local -r waldir_option=$([[ -n "$waldir" ]] && echo "--waldir=$waldir")
@@ -683,7 +701,7 @@ repmgr_initialize() {
       fi
     fi
     postgresql_initialize
-    if ! postgresql_is_file_external "postgresql.conf"; then
+    if ! repmgr_is_file_external "postgresql.conf"; then
         # Allow remote connections, required to register primary and standby nodes
         postgresql_enable_remote_connections
         # Configure port and restrict access to PostgreSQL (MD5)
@@ -692,7 +710,7 @@ repmgr_initialize() {
         postgresql_configure_replication_parameters
         postgresql_configure_fsync
     fi
-    if ! postgresql_is_file_external "pg_hba.conf"; then
+    if ! repmgr_is_file_external "pg_hba.conf"; then
         is_boolean_yes "$REPMGR_PGHBA_TRUST_ALL" ||  postgresql_restrict_pghba
     fi
     if [[ "$REPMGR_ROLE" = "primary" ]]; then
