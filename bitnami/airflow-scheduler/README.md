@@ -380,10 +380,6 @@ $ docker run -d --name airflow -p 8080:8080 \
 - The size of the container image has been decreased.
 - The configuration logic is now based on Bash scripts in the *rootfs/* folder.
 
-## Branch Deprecation Notice
-
-Apache Airflow Scheduler's branch 1 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 11-13-2021
-
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-airflow-scheduler/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-airflow-scheduler/pulls) with your contribution.
