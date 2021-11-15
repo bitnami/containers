@@ -7,6 +7,8 @@ It allows to manage Kubernetes cluster by providing a wide set of commands that 
 
 [Overview of Kubectl](https://github.com/kubernetes/kubectl)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -31,7 +33,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.22`, `1.22-debian-10`, `1.22.3`, `1.22.3-debian-10-r17`, `latest` (1.22/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.22.3-debian-10-r17/1.22/debian-10/Dockerfile)
-* [`1.21`, `1.21-debian-10`, `1.21.6`, `1.21.6-debian-10-r17` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.21.6-debian-10-r17/1.21/debian-10/Dockerfile)
+* [`1.21`, `1.21-debian-10`, `1.21.6`, `1.21.6-debian-10-r18` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.21.6-debian-10-r18/1.21/debian-10/Dockerfile)
 * [`1.20`, `1.20-debian-10`, `1.20.12`, `1.20.12-debian-10-r17` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.20.12-debian-10-r17/1.20/debian-10/Dockerfile)
 * [`1.19`, `1.19-debian-10`, `1.19.16`, `1.19.16-debian-10-r17` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.19.16-debian-10-r17/1.19/debian-10/Dockerfile)
 
