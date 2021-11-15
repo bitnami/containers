@@ -6,6 +6,8 @@
 
 [Overview of Harbor Adapter Clair](https://github.com/goharbor/harbor-scanner-clair/releases)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 This container is part of the [Harbor solution](https://github.com/bitnami/charts/tree/master/bitnami/harbor) that is primarily intended to be deployed in Kubernetes. You can deploy Harbor solution and then enable this specific container with the command below:
@@ -42,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.4.0`, `2.4.0-debian-10-r17`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-adapter-clair/blob/2.4.0-debian-10-r17/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.4.0`, `2.4.0-debian-10-r18`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-adapter-clair/blob/2.4.0-debian-10-r18/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/harbor-adapter-clair GitHub repo](https://github.com/bitnami/bitnami-docker-harbor-adapter-clair).
 
