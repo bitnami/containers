@@ -897,6 +897,7 @@ postgresql_configure_recovery() {
     else
         cp -f "$POSTGRESQL_BASE_DIR/share/recovery.conf.sample" "$POSTGRESQL_RECOVERY_FILE"
         chmod 600 "$POSTGRESQL_RECOVERY_FILE"
+        am_i_root && chown "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" "$POSTGRESQL_RECOVERY_FILE"
         postgresql_set_property "standby_mode" "on" "$POSTGRESQL_RECOVERY_FILE"
         postgresql_set_property "primary_conninfo" "host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT_NUMBER} user=${POSTGRESQL_REPLICATION_USER} password=${POSTGRESQL_REPLICATION_PASSWORD} application_name=${POSTGRESQL_CLUSTER_APP_NAME}" "$POSTGRESQL_RECOVERY_FILE"
         postgresql_set_property "trigger_file" "/tmp/postgresql.trigger.${POSTGRESQL_MASTER_PORT_NUMBER}" "$POSTGRESQL_RECOVERY_FILE"
@@ -1255,6 +1256,7 @@ EOF
     fi
 }
 
+
 ########################
 # Retrieves the WAL directory in use by PostgreSQL / to use if not initialized yet
 # Globals:
@@ -1265,8 +1267,8 @@ EOF
 #   the path to the WAL directory, or empty if not set
 #########################
 postgresql_get_waldir() {
-    if [[ -L "$POSTGRESQL_DATA_DIR/pg_wal" && -d "$POSTGRESQL_DATA_DIR/pg_wal" ]]; then
-        readlink -f "$POSTGRESQL_DATA_DIR/pg_wal"
+    if [[ -L "${POSTGRESQL_DATA_DIR}/pg_wal" && -d "${POSTGRESQL_DATA_DIR}/pg_wal" ]]; then
+        readlink -f "${POSTGRESQL_DATA_DIR}/pg_wal"
     else
         # Uninitialized - using value from $POSTGRESQL_INITDB_WAL_DIR if set
         echo "$POSTGRESQL_INITDB_WAL_DIR"
