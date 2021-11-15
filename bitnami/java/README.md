@@ -6,6 +6,8 @@
 
 [Overview of Java](https://openjdk.java.net/)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -41,7 +43,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 - [`11-prod`, `11.0.13-prod-debian-10-r20` (11-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.13-prod-debian-10-r20/11-prod/debian-10/Dockerfile), [`11-prod-prod`, `11.0.13-prod-debian-10-r20-prod` (11-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.13-prod-debian-10-r20/11-prod/debian-10/prod/Dockerfile)
 - [`11`, `11.0.13-debian-10-r20` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.13-debian-10-r20/11/debian-10/Dockerfile), [`11-prod`, `11.0.13-debian-10-r20-prod` (11/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.13-debian-10-r20/11/debian-10/prod/Dockerfile)
 - [`1.8-prod`, `1.8.312-prod-debian-10-r24` (1.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.312-prod-debian-10-r24/1.8-prod/debian-10/Dockerfile), [`1.8-prod-prod`, `1.8.312-prod-debian-10-r24-prod` (1.8-prod/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.312-prod-debian-10-r24/1.8-prod/debian-10/prod/Dockerfile)
-- [`1.8`, `1.8.312-debian-10-r24` (1.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.312-debian-10-r24/1.8/debian-10/Dockerfile), [`1.8-prod`, `1.8.312-debian-10-r24-prod` (1.8/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.312-debian-10-r24/1.8/debian-10/prod/Dockerfile)
+- [`1.8`, `1.8.312-debian-10-r25` (1.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.312-debian-10-r25/1.8/debian-10/Dockerfile), [`1.8-prod`, `1.8.312-debian-10-r25-prod` (1.8/debian-10/prod/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.312-debian-10-r25/1.8/debian-10/prod/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/java GitHub repo](https://github.com/bitnami/bitnami-docker-java).
 
