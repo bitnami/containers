@@ -6,6 +6,8 @@
 
 [Overview of PHP-FPM](http://php-fpm.org/)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -39,7 +41,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`8.0-prod`, `8.0-prod-debian-10`, `8.0.12-prod`, `8.0.12-prod-debian-10-r26` (8.0-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.0.12-prod-debian-10-r26/8.0-prod/debian-10/Dockerfile)
 * [`8.0`, `8.0-debian-10`, `8.0.12`, `8.0.12-debian-10-r26` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.0.12-debian-10-r26/8.0/debian-10/Dockerfile)
 * [`7.4-prod`, `7.4-prod-debian-10`, `7.4.25-prod`, `7.4.25-prod-debian-10-r26` (7.4-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.25-prod-debian-10-r26/7.4-prod/debian-10/Dockerfile)
-* [`7.4`, `7.4-debian-10`, `7.4.25`, `7.4.25-debian-10-r26`, `latest` (7.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.25-debian-10-r26/7.4/debian-10/Dockerfile)
+* [`7.4`, `7.4-debian-10`, `7.4.25`, `7.4.25-debian-10-r27`, `latest` (7.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.25-debian-10-r27/7.4/debian-10/Dockerfile)
 * [`7.3-prod`, `7.3-prod-debian-10`, `7.3.32-prod`, `7.3.32-prod-debian-10-r19` (7.3-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.32-prod-debian-10-r19/7.3-prod/debian-10/Dockerfile)
 * [`7.3`, `7.3-debian-10`, `7.3.32`, `7.3.32-debian-10-r19` (7.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.32-debian-10-r19/7.3/debian-10/Dockerfile)
 
