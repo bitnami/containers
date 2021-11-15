@@ -6,6 +6,8 @@
 
 [Overview of WildFly](http://www.wildfly.org/)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -45,7 +47,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`25`, `25-debian-10`, `25.0.1`, `25.0.1-debian-10-r10`, `latest` (25/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/25.0.1-debian-10-r10/25/debian-10/Dockerfile)
+* [`25`, `25-debian-10`, `25.0.1`, `25.0.1-debian-10-r11`, `latest` (25/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/25.0.1-debian-10-r11/25/debian-10/Dockerfile)
 * [`24`, `24-debian-10`, `24.0.1`, `24.0.1-debian-10-r109` (24/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/24.0.1-debian-10-r109/24/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wildfly GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
