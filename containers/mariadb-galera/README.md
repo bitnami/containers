@@ -6,6 +6,8 @@
 
 [Overview of MariaDB Galera](https://mariadb.com/kb/en/library/galera-cluster/)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -54,7 +56,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`10.6`, `10.6-debian-10`, `10.6.5`, `10.6.5-debian-10-r2`, `latest` (10.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.6.5-debian-10-r2/10.6/debian-10/Dockerfile)
 * [`10.5`, `10.5-debian-10`, `10.5.13`, `10.5.13-debian-10-r2` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.5.13-debian-10-r2/10.5/debian-10/Dockerfile)
 * [`10.4`, `10.4-debian-10`, `10.4.22`, `10.4.22-debian-10-r2` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.22-debian-10-r2/10.4/debian-10/Dockerfile)
-* [`10.3`, `10.3-debian-10`, `10.3.32`, `10.3.32-debian-10-r2` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.32-debian-10-r2/10.3/debian-10/Dockerfile)
+* [`10.3`, `10.3-debian-10`, `10.3.32`, `10.3.32-debian-10-r3` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.32-debian-10-r3/10.3/debian-10/Dockerfile)
 * [`10.2`, `10.2-debian-10`, `10.2.41`, `10.2.41-debian-10-r2` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.41-debian-10-r2/10.2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb-galera GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb-galera).
