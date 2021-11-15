@@ -14,7 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.51-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.32-0" --checksum 4a211faa9436c9747dfc4374cb9e8a7f9b0065dfc58dd4784cef0f5029c2e65e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.25-0" --checksum 94230b4abfeff6424103c40676c7162330c338b03b4f1a77f07eba709e650e35
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-1" --checksum 00722b62c7561929e039877a6e445a4bb782c340890c0a090fdae3c9e1960161
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "orangehrm" "4.8.0-0-0" --checksum 96b5f9e825ab5ad880cfc98e022fe0847c209d5343704ec00a790e789631a0cc
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "orangehrm" "4.9.0-0-0" --checksum 7a0a4a678fd20414d574c2d58a7aa0fd893f89e452197e558316796c6291037f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
 
@@ -29,7 +29,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="orangehrm" \
-    BITNAMI_IMAGE_VERSION="4.8.0-0-debian-10-r216" \
+    BITNAMI_IMAGE_VERSION="4.9.0-0-debian-10-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
