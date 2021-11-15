@@ -6,6 +6,8 @@
 
 [Overview of EJBCA](http://www.ejbca.org)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -42,7 +44,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`7`, `7-debian-10`, `7.4.3-2`, `7.4.3-2-debian-10-r44`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ejbca/blob/7.4.3-2-debian-10-r44/7/debian-10/Dockerfile)
-* [`6`, `6-debian-10`, `6.15.2-6`, `6.15.2-6-debian-10-r413` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ejbca/blob/6.15.2-6-debian-10-r413/6/debian-10/Dockerfile)
+* [`6`, `6-debian-10`, `6.15.2-6`, `6.15.2-6-debian-10-r414` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ejbca/blob/6.15.2-6-debian-10-r414/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ejbca GitHub repo](https://github.com/bitnami/bitnami-docker-ejbca).
 
@@ -210,6 +212,10 @@ Re-create your container from the new image.
 ```console
 $ docker run --name ejbca bitnami/ejbca:latest
 ```
+
+## Branch Deprecation Notice
+
+EJBCA's branch 6 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 11-19-2021
 
 ## Contributing
 
