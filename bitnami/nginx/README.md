@@ -6,6 +6,8 @@
 
 [Overview of NGINX Open Source](http://nginx.org)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -47,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.21`, `1.21-debian-10`, `1.21.4`, `1.21.4-debian-10-r12`, `latest` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.21.4-debian-10-r12/1.21/debian-10/Dockerfile)
-* [`1.20`, `1.20-debian-10`, `1.20.1`, `1.20.1-debian-10-r160` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.20.1-debian-10-r160/1.20/debian-10/Dockerfile)
+* [`1.20`, `1.20-debian-10`, `1.20.1`, `1.20.1-debian-10-r161` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.20.1-debian-10-r161/1.20/debian-10/Dockerfile)
 
 ## Get this image
 
