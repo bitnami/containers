@@ -6,6 +6,8 @@
 
 [Overview of CodeIgniter](https://codeigniter.com/)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ### Local workspace
@@ -43,7 +45,7 @@ The Bitnami CodeIgniter Development Container has been carefully engineered to p
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.1.11`, `3.1.11-debian-10-r614`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/3.1.11-debian-10-r614/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.1.11`, `3.1.11-debian-10-r615`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/3.1.11-debian-10-r615/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codeigniter GitHub repo](https://github.com/bitnami/bitnami-docker-codeigniter).
 
