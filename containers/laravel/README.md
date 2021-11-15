@@ -6,6 +6,8 @@
 
 [Overview of Laravel](https://laravel.com/)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ### Local workspace
@@ -35,7 +37,7 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8`, `8-debian-10`, `8.6.6`, `8.6.6-debian-10-r5`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/8.6.6-debian-10-r5/8/debian-10/Dockerfile)
+* [`8`, `8-debian-10`, `8.6.6`, `8.6.6-debian-10-r6`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/8.6.6-debian-10-r6/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/laravel GitHub repo](https://github.com/bitnami/bitnami-docker-laravel).
 
