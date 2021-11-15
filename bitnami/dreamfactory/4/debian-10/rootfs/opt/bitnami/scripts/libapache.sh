@@ -435,8 +435,8 @@ ensure_apache_app_configuration_exists() {
     fi
     # App .htaccess support (only when type is not defined)
     export htaccess_include
-    [[ -z "$type" ]] && is_boolean_yes "$move_htaccess" && apache_replace_htaccess_files "$app" --document-root "$document_root"
-    if [[ -z "$type" && -f "${APACHE_HTACCESS_DIR}/${app}-htaccess.conf" ]]; then
+    [[ -z "$type" || "$type" = "php" ]] && is_boolean_yes "$move_htaccess" && apache_replace_htaccess_files "$app" --document-root "$document_root"
+    if [[ -z "$type" || "$type" = "php" ]] && [[ -f "${APACHE_HTACCESS_DIR}/${app}-htaccess.conf" ]]; then
         allow_override="None"
         htaccess_include="Include \"${APACHE_HTACCESS_DIR}/${app}-htaccess.conf\""
     else
@@ -575,8 +575,8 @@ ensure_apache_prefix_configuration_exists() {
     done
     # App .htaccess support (only when type is not defined)
     export htaccess_include
-    [[ -z "$type" ]] && is_boolean_yes "$move_htaccess" && apache_replace_htaccess_files "$app" --document-root "$document_root"
-    if [[ -z "$type" && -f "${APACHE_HTACCESS_DIR}/${app}-htaccess.conf" ]]; then
+    [[ -z "$type" || "$type" = "php" ]] && is_boolean_yes "$move_htaccess" && apache_replace_htaccess_files "$app" --document-root "$document_root"
+    if [[ -z "$type" || "$type" = "php" ]] && [[ -f "${APACHE_HTACCESS_DIR}/${app}-htaccess.conf" ]]; then
         allow_override="None"
         htaccess_include="Include \"${APACHE_HTACCESS_DIR}/${app}-htaccess.conf\""
     else
