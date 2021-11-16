@@ -6,6 +6,8 @@
 
 [Overview of Redis(TM) Sentinel](http://redis.io/)
 
+Disclaimer: Redis is a registered trademark of Redis Labs Ltd. Any rights therein are reserved to Redis Labs Ltd. Any use by Bitnami is for referential purposes only and does not indicate any sponsorship, endorsement, or affiliation between Redis Labs Ltd.
+
 ## TL;DR
 
 ```console
@@ -44,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`6.2`, `6.2-debian-10`, `6.2.6`, `6.2.6-debian-10-r40`, `latest` (6.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.2.6-debian-10-r40/6.2/debian-10/Dockerfile)
 * [`6.0`, `6.0-debian-10`, `6.0.16`, `6.0.16-debian-10-r40` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.0.16-debian-10-r40/6.0/debian-10/Dockerfile)
-* [`5.0`, `5.0-debian-10`, `5.0.14`, `5.0.14-debian-10-r40` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.14-debian-10-r40/5.0/debian-10/Dockerfile)
+* [`5.0`, `5.0-debian-10`, `5.0.14`, `5.0.14-debian-10-r41` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.14-debian-10-r41/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-sentinel GitHub repo](https://github.com/bitnami/bitnami-docker-redis-sentinel).
 
