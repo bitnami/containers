@@ -6,6 +6,8 @@
 
 [Overview of Cassandra](http://cassandra.apache.org/)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -50,7 +52,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`4.0`, `4.0-debian-10`, `4.0.1`, `4.0.1-debian-10-r68`, `latest` (4.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/4.0.1-debian-10-r68/4.0/debian-10/Dockerfile)
 * [`3.11`, `3.11-debian-10`, `3.11.11`, `3.11.11-debian-10-r100` (3.11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.11-debian-10-r100/3.11/debian-10/Dockerfile)
-* [`3.0`, `3.0-debian-10`, `3.0.25`, `3.0.25-debian-10-r39` (3.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.0.25-debian-10-r39/3.0/debian-10/Dockerfile)
+* [`3.0`, `3.0-debian-10`, `3.0.25`, `3.0.25-debian-10-r40` (3.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.0.25-debian-10-r40/3.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cassandra GitHub repo](https://github.com/bitnami/bitnami-docker-cassandra).
 
