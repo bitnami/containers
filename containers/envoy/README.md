@@ -6,6 +6,8 @@
 
 [Overview of Envoy](https://www.envoyproxy.io/)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -32,7 +34,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`1.20`, `1.20-debian-10`, `1.20.0`, `1.20.0-debian-10-r21`, `latest` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.20.0-debian-10-r21/1.20/debian-10/Dockerfile)
 * [`1.19`, `1.19-debian-10`, `1.19.1`, `1.19.1-debian-10-r80` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.19.1-debian-10-r80/1.19/debian-10/Dockerfile)
 * [`1.18`, `1.18-debian-10`, `1.18.4`, `1.18.4-debian-10-r80` (1.18/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.18.4-debian-10-r80/1.18/debian-10/Dockerfile)
-* [`1.17`, `1.17-debian-10`, `1.17.4`, `1.17.4-debian-10-r80` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.17.4-debian-10-r80/1.17/debian-10/Dockerfile)
+* [`1.17`, `1.17-debian-10`, `1.17.4`, `1.17.4-debian-10-r81` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.17.4-debian-10-r81/1.17/debian-10/Dockerfile)
 * [`1.16`, `1.16-debian-10`, `1.16.5`, `1.16.5-debian-10-r80` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.16.5-debian-10-r80/1.16/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/envoy GitHub repo](https://github.com/bitnami/bitnami-docker-envoy).
@@ -78,6 +80,10 @@ $ docker run --rm -v /path/to/your/envoy.yaml:/opt/bitnami/envoy/conf/envoy.yaml
 ```
 
 Visit the [official envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/configuration) for all the available configurations.
+
+## Branch Deprecation Notice
+
+Envoy's branch 1.16 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 11-21-2021
 
 ## Contributing
 
