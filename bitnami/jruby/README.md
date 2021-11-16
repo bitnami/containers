@@ -6,6 +6,8 @@
 
 [Overview of JRuby](http://jruby.org/)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -35,7 +37,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`9.3`, `9.3-debian-10`, `9.3.1-0`, `9.3.1-0-debian-10-r32` (9.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jruby/blob/9.3.1-0-debian-10-r32/9.3/debian-10/Dockerfile)
+* [`9.3`, `9.3-debian-10`, `9.3.1-0`, `9.3.1-0-debian-10-r33` (9.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jruby/blob/9.3.1-0-debian-10-r33/9.3/debian-10/Dockerfile)
 * [`9.2`, `9.2-debian-10`, `9.2.20-0`, `9.2.20-0-debian-10-r12`, `latest` (9.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jruby/blob/9.2.20-0-debian-10-r12/9.2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jruby GitHub repo](https://github.com/bitnami/bitnami-docker-jruby).
