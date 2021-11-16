@@ -38,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`6`, `6-debian-10`, `6.0.100`, `6.0.100-debian-10-r6`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet-sdk/blob/6.0.100-debian-10-r6/6/debian-10/Dockerfile)
-* [`5`, `5-debian-10`, `5.0.403`, `5.0.403-debian-10-r7` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet-sdk/blob/5.0.403-debian-10-r7/5/debian-10/Dockerfile)
+* [`5`, `5-debian-10`, `5.0.403`, `5.0.403-debian-10-r8` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet-sdk/blob/5.0.403-debian-10-r8/5/debian-10/Dockerfile)
 * [`3.1`, `3.1-debian-10`, `3.1.415`, `3.1.415-debian-10-r7` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet-sdk/blob/3.1.415-debian-10-r7/3.1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dotnet-sdk GitHub repo](https://github.com/bitnami/bitnami-docker-dotnet-sdk).
