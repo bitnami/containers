@@ -1,10 +1,12 @@
-# MongoDB(TM) packaged by Bitnami
+# MongoDB(R) packaged by Bitnami
 
-## What is MongoDB(TM)?
+## What is MongoDB(R)?
 
-> MongoDB(TM) is a relational open source NoSQL database. Easy to use, it stores data in JSON-like documents. Automated scalability and high-performance. Ideal for developing cloud native applications.
+> MongoDB(R) is a relational open source NoSQL database. Easy to use, it stores data in JSON-like documents. Automated scalability and high-performance. Ideal for developing cloud native applications.
 
-[Overview of MongoDB(TM)](http://www.mongodb.org)
+[Overview of MongoDB(R)](http://www.mongodb.org)
+
+Disclaimer: The respective trademarks mentioned in the offering are owned by the respective companies. We do not provide a commercial license for any of these products. This listing has an open-source license. MongoDB(R) is run and maintained by MongoDB, which is a completely separate project from Bitnami.
 
 ## TL;DR
 
@@ -47,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5.0`, `5.0-debian-10`, `5.0.4`, `5.0.4-debian-10-r3` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/5.0.4-debian-10-r3/5.0/debian-10/Dockerfile)
-* [`4.4`, `4.4-debian-10`, `4.4.10`, `4.4.10-debian-10-r32`, `latest` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.10-debian-10-r32/4.4/debian-10/Dockerfile)
+* [`4.4`, `4.4-debian-10`, `4.4.10`, `4.4.10-debian-10-r33`, `latest` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.10-debian-10-r33/4.4/debian-10/Dockerfile)
 * [`4.2`, `4.2-debian-10`, `4.2.17`, `4.2.17-debian-10-r51` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.17-debian-10-r51/4.2/debian-10/Dockerfile)
 * [`4.0`, `4.0-debian-9`, `4.0.27`, `4.0.27-debian-9-r61` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.27-debian-9-r61/4.0/debian-9/Dockerfile)
 
