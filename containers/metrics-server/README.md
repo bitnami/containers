@@ -6,6 +6,8 @@
 
 [Overview of Metrics Server](https://github.com/kubernetes-incubator/metrics-server)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 Deploy Metrics Server on your [Kubernetes cluster](https://github.com/kubernetes/heapster/tree/master/docs).
@@ -41,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.5.1`, `0.5.1-debian-10-r49`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.5.1-debian-10-r49/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.5.1`, `0.5.1-debian-10-r50`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.5.1-debian-10-r50/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/metrics-server GitHub repo](https://github.com/bitnami/bitnami-docker-metrics-server).
 
