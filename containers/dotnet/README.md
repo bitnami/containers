@@ -6,6 +6,8 @@
 
 [Overview of .NET](https://dotnet.microsoft.com/)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -36,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5`, `5-debian-10`, `5.0.12`, `5.0.12-debian-10-r6` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet/blob/5.0.12-debian-10-r6/5/debian-10/Dockerfile)
-* [`3.1`, `3.1-debian-10`, `3.1.21`, `3.1.21-debian-10-r6`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet/blob/3.1.21-debian-10-r6/3.1/debian-10/Dockerfile)
+* [`3.1`, `3.1-debian-10`, `3.1.21`, `3.1.21-debian-10-r7`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet/blob/3.1.21-debian-10-r7/3.1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dotnet GitHub repo](https://github.com/bitnami/bitnami-docker-dotnet).
 
