@@ -6,6 +6,8 @@
 
 [Overview of RabbitMQ](https://www.rabbitmq.com)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -49,7 +51,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3.9`, `3.9-debian-10`, `3.9.9`, `3.9.9-debian-10-r3`, `latest` (3.9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.9.9-debian-10-r3/3.9/debian-10/Dockerfile)
-* [`3.8`, `3.8-debian-10`, `3.8.25`, `3.8.25-debian-10-r2` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.25-debian-10-r2/3.8/debian-10/Dockerfile)
+* [`3.8`, `3.8-debian-10`, `3.8.25`, `3.8.25-debian-10-r3` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq/blob/3.8.25-debian-10-r3/3.8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rabbitmq GitHub repo](https://github.com/bitnami/bitnami-docker-rabbitmq).
 
