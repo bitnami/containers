@@ -6,6 +6,8 @@
 
 [Overview of Node.js](http://nodejs.org/)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -43,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`17-prod`, `17-prod-debian-10`, `17.1.0-prod`, `17.1.0-prod-debian-10-r5` (17-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/17.1.0-prod-debian-10-r5/17-prod/debian-10/Dockerfile)
-* [`17`, `17-debian-10`, `17.1.0`, `17.1.0-debian-10-r5`, `latest` (17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/17.1.0-debian-10-r5/17/debian-10/Dockerfile)
+* [`17`, `17-debian-10`, `17.1.0`, `17.1.0-debian-10-r6`, `latest` (17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/17.1.0-debian-10-r6/17/debian-10/Dockerfile)
 * [`16-prod`, `16-prod-debian-10`, `16.13.0-prod`, `16.13.0-prod-debian-10-r19` (16-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/16.13.0-prod-debian-10-r19/16-prod/debian-10/Dockerfile)
 * [`16`, `16-debian-10`, `16.13.0`, `16.13.0-debian-10-r12` (16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/16.13.0-debian-10-r12/16/debian-10/Dockerfile)
 * [`14-prod`, `14-prod-debian-10`, `14.18.1-prod`, `14.18.1-prod-debian-10-r33` (14-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/14.18.1-prod-debian-10-r33/14-prod/debian-10/Dockerfile)
