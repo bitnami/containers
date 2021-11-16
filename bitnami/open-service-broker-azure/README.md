@@ -6,6 +6,8 @@
 
 [Overview of Open Service Broker for Azure](https://www.openservicebrokerapi.org/)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -51,7 +53,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.8.4`, `1.8.4-debian-10-r589`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/1.8.4-debian-10-r589/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.8.4`, `1.8.4-debian-10-r590`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-open-service-broker-azure/blob/1.8.4-debian-10-r590/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/open-service-broker-azure GitHub repo](https://github.com/bitnami/bitnami-docker-open-service-broker-azure).
 
