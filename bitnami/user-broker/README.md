@@ -6,6 +6,8 @@
 
 [Overview of User Broker](https://github.com/openservicebrokerapi/servicebroker)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 User Broker is part of the Service Catalog that installs into a Kubernetes cluster and runs behind the [Kubernetes API Aggregator](https://kubernetes.io/docs/concepts/api-extension/apiserver-aggregation/).
@@ -31,7 +33,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.3.1`, `0.3.1-debian-10-r351`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-user-broker/blob/0.3.1-debian-10-r351/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.3.1`, `0.3.1-debian-10-r352`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-user-broker/blob/0.3.1-debian-10-r352/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/user-broker GitHub repo](https://github.com/bitnami/bitnami-docker-user-broker).
 
