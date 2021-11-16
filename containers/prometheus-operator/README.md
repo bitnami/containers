@@ -6,6 +6,8 @@
 
 [Overview of Prometheus Operator](https://github.com/coreos/prometheus-operator)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 Deploy [Prometheus Operator](https://github.com/coreos/prometheus-operator/tree/master/Documentation) on your Kubernetes cluster.
@@ -37,7 +39,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.52.0`, `0.52.0-debian-10-r10`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus-operator/blob/0.52.0-debian-10-r10/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.52.0`, `0.52.0-debian-10-r11`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus-operator/blob/0.52.0-debian-10-r11/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prometheus-operator GitHub repo](https://github.com/bitnami/bitnami-docker-prometheus-operator).
 
