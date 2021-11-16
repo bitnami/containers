@@ -76,7 +76,7 @@ harbor_core_validate() {
     if [[ ! -f "/etc/core/key" ]]; then
         info "The key was not mounted at \"/etc/core/key\". Will use environment variable \"CORE_KEY\" instead."
         not_empty_env_var "CORE_KEY"
-        echo "$CORE_KEY" >/etc/core/key
+        echo -n "$CORE_KEY" >/etc/core/key
     fi
 
     if [[ ! -f "/etc/core/app.conf" ]]; then
