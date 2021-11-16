@@ -6,6 +6,8 @@
 
 [Overview of Dex](https://dexidp.io/)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -36,7 +38,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.30.1`, `2.30.1-debian-10-r0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/2.30.1-debian-10-r0/2/debian-10/      Dockerfile)
+* [`2`, `2-debian-10`, `2.30.2`, `2.30.2-debian-10-r0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/2.30.2-debian-10-r0/2/debian-10/      Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dex GitHub repo](https://github.com/bitnami/bitnami-docker-dex).
 
