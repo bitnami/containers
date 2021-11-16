@@ -1,9 +1,9 @@
 {
     "dex": {
         "arch": "amd64",
-        "digest": "e85a6873e37908d9fcf5ff0467b9fa2a9b3667b1a4cae89d3cac95627cfdc201",
+        "digest": "d40ee6b786d4fc2ee16d6ff5178ca6a77cda281a1406face71c7b1fe7ba74c46",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.30.1-0"
+        "version": "2.30.2-0"
     }
 }
