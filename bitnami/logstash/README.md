@@ -1,10 +1,12 @@
-# logstash packaged by Bitnami
+# Logstash packaged by Bitnami
 
-## What is logstash?
+## What is Logstash?
 
 > Logstash is an open source data processing engine. It ingests data from multiple sources, processes it, and sends the output to final destination in real-time. It is a core component of the ELK stack.
 
-[Overview of logstash](http://logstash.net)
+[Overview of Logstash](http://logstash.net)
+
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
@@ -45,7 +47,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.15.2`, `7.15.2-debian-10-r4`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/7.15.2-debian-10-r4/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.15.2`, `7.15.2-debian-10-r5`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/7.15.2-debian-10-r5/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/logstash GitHub repo](https://github.com/bitnami/bitnami-docker-logstash).
 
@@ -121,7 +123,7 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 ## Configuration
 
-This container, by default, provides a very basic configuration for logstash, that listen http on port 8080 and writes to stdout.
+This container, by default, provides a very basic configuration for Logstash, that listen http on port 8080 and writes to stdout.
 
 ```console
 $ docker run -d -p 8080:8080 bitnami/logstash:latest
@@ -137,7 +139,7 @@ $ docker run --env LOGSTASH_CONF_STRING="input {file {path => \"/tmp/logstash_in
 
 ### Using a configuration file
 
-You can override the default configuration for logstash by mounting your own configuration files on directory `/bitnami/logstash/config`. You will need to indicate the file holding the pipeline definition by setting the `LOGSTASH_CONF_FILENAME` environment variable.
+You can override the default configuration for Logstash by mounting your own configuration files on directory `/bitnami/logstash/config`. You will need to indicate the file holding the pipeline definition by setting the `LOGSTASH_CONF_FILENAME` environment variable.
 
 ```console
 $ docker run -d --env LOGSTASH_CONF_FILENAME=my_config.conf -v /path/to/custom-conf-directory:/bitnami/logstash/config bitnami/logstash:latest
@@ -161,9 +163,9 @@ In that case, you should place your `pipelines.yml` file in the mounted volume (
 $ docker run -d --env LOGSTASH_ENABLE_MULTIPLE_PIPELINES=true -v /path/to/custom-conf-directory:/bitnami/logstash/config bitnami/logstash:latest
 ```
 
-### Exposing logstash API
+### Exposing Logstash API
 
-You can expose the logstash API by setting the environment variable `LOGSTASH_EXPOSE_API`, you can also change the default port by using `LOGSTASH_API_PORT_NUMBER`.
+You can expose the Logstash API by setting the environment variable `LOGSTASH_EXPOSE_API`, you can also change the default port by using `LOGSTASH_API_PORT_NUMBER`.
 
 ```console
 $ docker run -d --env LOGSTASH_EXPOSE_API=yes --env LOGSTASH_API_PORT_NUMBER=9090 -p 9090:9090 bitnami/logstash:latest
