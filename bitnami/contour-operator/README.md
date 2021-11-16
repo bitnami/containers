@@ -1,10 +1,12 @@
-# Bitnami Docker Image for Contour Operator
+# Contour Operator packaged by Bitnami
 
 ## What is Contour Operator?
 
-> The Contour Operator extends the Kubernetes API to create, configure and manage instances of Contour.
+> The Contour Operator extends the Kubernetes API to create, configure and manage instances of Contour on behalf of users.
 
 [Overview of Contour Operator](https://github.com/projectcontour/contour-operator)
+
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
@@ -29,7 +31,7 @@ $ docker run --name contour-operator bitnami/contour-operator:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`1`, `1-scratch`, `1.18.2`, `1.18.2-scratch-r2`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-contour-operator/blob/1.18.2-scratch-r2/1/scratch/Dockerfile)
+- [`1`, `1-scratch`, `1.19.1`, `1.19.1-scratch-r0`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-contour-operator/blob/1.19.1-scratch-r0/1/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/contour-operator GitHub repo](https://github.com/bitnami/bitnami-docker-contour-operator).
 
