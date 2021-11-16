@@ -6,6 +6,8 @@
 
 [Overview of Elasticsearch Curator](https://github.com/elastic/curator)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -39,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`5`, `5-debian-10`, `5.8.4`, `5.8.4-debian-10-r183`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-curator/blob/5.8.4-debian-10-r183/5/debian-10/Dockerfile)
+* [`5`, `5-debian-10`, `5.8.4`, `5.8.4-debian-10-r184`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-curator/blob/5.8.4-debian-10-r184/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch-curator GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch-curator).
 
