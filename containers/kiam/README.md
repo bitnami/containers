@@ -1,15 +1,17 @@
-# kiam packaged by Bitnami
+# Kiam packaged by Bitnami
 
-## What is kiam?
+## What is Kiam?
 
 > kiam is a proxy that captures AWS Metadata API requests. It allows AWS IAM roles to be set for Kubernetes workloads.
 
-[Overview of kiam](https://github.com/uswitch/kiam)
+[Overview of Kiam](https://github.com/uswitch/kiam)
+
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
 ```console
-$ docker run --name kiam bitnami/kiam:latest
+$ docker run --name Kiam bitnami/kiam:latest
 ```
 
 ## Why use Bitnami Images?
@@ -30,13 +32,13 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4`, `4-debian-10`, `4.2.0`, `4.2.0-debian-10-r6` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kiam/blob/4.2.0-debian-10-r6/4/debian-10/Dockerfile)
-* [`3`, `3-debian-10`, `3.6.0`, `3.6.0-debian-10-r363`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kiam/blob/3.6.0-debian-10-r363/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.6.0`, `3.6.0-debian-10-r364`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kiam/blob/3.6.0-debian-10-r364/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kiam GitHub repo](https://github.com/bitnami/bitnami-docker-kiam).
 
 ## Get this image
 
-The recommended way to get the Bitnami kiam Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kiam).
+The recommended way to get the Bitnami Kiam Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kiam).
 
 ```console
 $ docker pull bitnami/kiam:latest
@@ -61,10 +63,10 @@ $ docker build -t bitnami/kiam:latest 'https://github.com/bitnami/bitnami-docker
 To run commands inside this container you can use `docker run`, for example to execute `kiam --version` you can follow the example below:
 
 ```console
-$ docker run --rm --name kiam bitnami/kiam:latest -- --version
+$ docker run --rm --name Kiam bitnami/kiam:latest -- --version
 ```
 
-Check the [official kiam documentation](https://github.com/uswitch/kiam/tree/master/docs) for a list of the available parameters.
+Check the [official Kiam documentation](https://github.com/uswitch/kiam/tree/master/docs) for a list of the available parameters.
 
 ## Contributing
 
