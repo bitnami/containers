@@ -6,6 +6,8 @@
 
 [Overview of Configurable HTTP Proxy](https://github.com/jupyterhub/configurable-http-proxy)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -29,7 +31,7 @@ $ docker run --name configurable-http-proxy bitnami/configurable-http-proxy:late
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.5.0`, `4.5.0-debian-10-r116`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-configurable-http-proxy/blob/4.5.0-debian-10-r116/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.5.0`, `4.5.0-debian-10-r117`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-configurable-http-proxy/blob/4.5.0-debian-10-r117/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/configurable-http-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-configurable-http-proxy).
 
