@@ -18,14 +18,14 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.18.1-0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.33.0-0" --checksum fd9a3245580fef6248f778efeba0a017675424f15ff16ace42c095496e4f02f3
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "brotli" "1.0.9-0" --checksum 710dd6f5c97af313d0e867e793bedc013aebe173f9c28d0fabc09a16d3100ab6
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "discourse" "2.7.9-0" --checksum c0a551ee15bb93442af0bdbbf9a766c44f7c96457dc60adf429c3292c207a764
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "discourse" "2.7.10-0" --checksum 8b57d03d2dca63b8ff8efe46d7a844daed098fc0b53ce7c4dbba6cd211bccb1a
 RUN chmod g+rwX /opt/bitnami
 RUN /opt/bitnami/ruby/bin/gem install --force bundler -v '< 2'
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/discourse/postunpack.sh
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.7.9-debian-10-r22" \
+    BITNAMI_IMAGE_VERSION="2.7.10-debian-10-r0" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/git/bin:/opt/bitnami/brotli/bin:$PATH" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_NAME="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
