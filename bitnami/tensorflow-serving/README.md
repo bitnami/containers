@@ -2,9 +2,11 @@
 
 ## What is TensorFlow Serving?
 
-> Tensorflow Serving is an open source high-performance system for serving machine learning models. It allows programmers to easily deploy algorithms and experiments without changing the architecture. 
+> TensorFlow Serving is an open source high-performance system for serving machine learning models. It allows programmers to easily deploy algorithms and experiments without changing the architecture. 
 
 [Overview of TensorFlow Serving](https://www.tensorflow.org/serving/)
+
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
@@ -41,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.7.0`, `2.7.0-debian-10-r9`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/2.7.0-debian-10-r9/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.7.0`, `2.7.0-debian-10-r10`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/2.7.0-debian-10-r10/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tensorflow-serving GitHub repo](https://github.com/bitnami/bitnami-docker-tensorflow-serving).
 
