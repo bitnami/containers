@@ -1,15 +1,17 @@
-# keycloak-config-cli packaged by Bitnami
+# Keycloak Config CLI packaged by Bitnami
 
-## What is keycloak-config-cli?
+## What is Keycloak Config CLI?
 
 > keycloak-config-cli is a Keycloak extension to import JSON or YAML configuration into the Keycloak server without restarting it.
 
-[Overview of keycloak-config-cli](https://github.com/adorsys/keycloak-config-cli)
+[Overview of Keycloak Config CLI](https://github.com/adorsys/keycloak-config-cli)
+
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
 ```console
-$ docker run --rm --name keycloak-config-cli bitnami/keycloak-config-cli:latest
+$ docker run --rm --name Keycloak Config CLI bitnami/keycloak-config-cli:latest
 ```
 
 ## Why use Bitnami Images?
@@ -23,7 +25,7 @@ $ docker run --rm --name keycloak-config-cli bitnami/keycloak-config-cli:latest
 
 > This [CVE scan report](https://quay.io/repository/bitnami/keycloak-config-cli?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-## How to deploy keycloak-config-cli in Kubernetes?
+## How to deploy Keycloak Config CLI in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Keycloak Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/keycloak).
 
@@ -36,13 +38,13 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.3.0`, `4.3.0-debian-10-r45`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak-config-cli/blob/4.3.0-debian-10-r45/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.3.0`, `4.3.0-debian-10-r46`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak-config-cli/blob/4.3.0-debian-10-r46/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak-config-cli GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak-config-cli).
 
 ## Get this image
 
-The recommended way to get the Bitnami keycloak-config-cli Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/keycloak-config-cli).
+The recommended way to get the Bitnami Keycloak Config CLI Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/keycloak-config-cli).
 
 ```console
 $ docker pull bitnami/keycloak-config-cli:latest
@@ -62,7 +64,7 @@ $ docker build -t bitnami/keycloak-config-cli:latest 'https://github.com/bitnami
 
 ## Configuration
 
-Find how to configure keycloak-config-cli in its [official documentation](https://github.com/adorsys/keycloak-config-cli#cli-option--environment-variables).
+Find how to configure Keycloak Config CLI in its [official documentation](https://github.com/adorsys/keycloak-config-cli#cli-option--environment-variables).
 
 ## Contributing
 
