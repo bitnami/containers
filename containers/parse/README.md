@@ -6,6 +6,8 @@
 
 [Overview of Parse Server](http://parseplatform.org/)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ### Docker Compose
@@ -44,7 +46,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.10.4`, `4.10.4-debian-10-r35`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/4.10.4-debian-10-r35/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.10.4`, `4.10.4-debian-10-r36`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/4.10.4-debian-10-r36/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse GitHub repo](https://github.com/bitnami/bitnami-docker-parse).
 
