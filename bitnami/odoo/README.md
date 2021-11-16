@@ -6,6 +6,8 @@
 
 [Overview of Odoo](https://www.odoo.com/)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -39,7 +41,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 - [`15`, `15-debian-10`, `15.0.20211010`, `15.0.20211010-debian-10-r13`, `latest` (15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/15.0.20211010-debian-10-r13/15/debian-10/Dockerfile)
-- [`14`, `14-debian-10`, `14.0.20211110`, `14.0.20211110-debian-10-r4` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/14.0.20211110-debian-10-r4/14/debian-10/Dockerfile)
+- [`14`, `14-debian-10`, `14.0.20211110`, `14.0.20211110-debian-10-r5` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/14.0.20211110-debian-10-r5/14/debian-10/Dockerfile)
 - [`13`, `13-debian-10`, `13.0.20211110`, `13.0.20211110-debian-10-r5` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20211110-debian-10-r5/13/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/odoo GitHub repo](https://github.com/bitnami/bitnami-docker-odoo).
