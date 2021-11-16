@@ -6,6 +6,8 @@
 
 [Overview of OpenResty](https://openresty.org/)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -38,7 +40,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.19`, `1.19-debian-10`, `1.19.9-1`, `1.19.9-1-debian-10-r98`, `latest` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openresty/blob/1.19.9-1-debian-10-r98/1.19/debian-10/Dockerfile)
+* [`1.19`, `1.19-debian-10`, `1.19.9-1`, `1.19.9-1-debian-10-r99`, `latest` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openresty/blob/1.19.9-1-debian-10-r99/1.19/debian-10/Dockerfile)
 
 ## Get this image
 
