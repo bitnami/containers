@@ -6,6 +6,8 @@
 
 [Overview of Golang](https://golang.org/)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -35,7 +37,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.17`, `1.17-debian-10`, `1.17.3`, `1.17.3-debian-10-r10` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.17.3-debian-10-r10/1.17/debian-10/Dockerfile)
+* [`1.17`, `1.17-debian-10`, `1.17.3`, `1.17.3-debian-10-r11` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.17.3-debian-10-r11/1.17/debian-10/Dockerfile)
 * [`1.16`, `1.16-debian-10`, `1.16.10`, `1.16.10-debian-10-r10`, `latest` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.16.10-debian-10-r10/1.16/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/golang GitHub repo](https://github.com/bitnami/bitnami-docker-golang).
