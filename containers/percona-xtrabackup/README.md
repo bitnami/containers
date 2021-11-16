@@ -6,6 +6,8 @@
 
 [Overview of Percona XtraBackup](https://www.percona.com/software/mysql-database/percona-xtrabackup/)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -30,7 +32,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8`, `8-debian-10`, `8.0.26-18`, `8.0.26-18-debian-10-r70`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-percona-xtrabackup/blob/8.0.26-18-debian-10-r70/8/debian-10/Dockerfile)
-* [`2.4`, `2.4-debian-10`, `2.4.24`, `2.4.24-debian-10-r60` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-percona-xtrabackup/blob/2.4.24-debian-10-r60/2.4/debian-10/Dockerfile)
+* [`2.4`, `2.4-debian-10`, `2.4.24`, `2.4.24-debian-10-r61` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-percona-xtrabackup/blob/2.4.24-debian-10-r61/2.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/percona-xtrabackup GitHub repo](https://github.com/bitnami/bitnami-docker-percona-xtrabackup).
 
