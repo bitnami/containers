@@ -6,6 +6,8 @@
 
 [Overview of PostgreSQL](http://www.postgresql.org)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -51,7 +53,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`14`, `14-debian-10`, `14.1.0`, `14.1.0-debian-10-r3` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/14.1.0-debian-10-r3/14/debian-10/Dockerfile)
 * [`13`, `13-debian-10`, `13.5.0`, `13.5.0-debian-10-r3` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/13.5.0-debian-10-r3/13/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.9.0`, `12.9.0-debian-10-r3` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.9.0-debian-10-r3/12/debian-10/Dockerfile)
-* [`11`, `11-debian-10`, `11.14.0`, `11.14.0-debian-10-r3`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.14.0-debian-10-r3/11/debian-10/Dockerfile)
+* [`11`, `11-debian-10`, `11.14.0`, `11.14.0-debian-10-r4`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.14.0-debian-10-r4/11/debian-10/Dockerfile)
 * [`10`, `10-debian-10`, `10.19.0`, `10.19.0-debian-10-r3` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.19.0-debian-10-r3/10/debian-10/Dockerfile)
 * [`9.6`, `9.6-debian-10`, `9.6.24`, `9.6.24-debian-10-r3` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.24-debian-10-r3/9.6/debian-10/Dockerfile)
 
