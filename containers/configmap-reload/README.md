@@ -6,6 +6,8 @@
 
 [Overview of ConfigMap Reload](https://github.com/jimmidyson/configmap-reload)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 Deploy [ConfigMap Reload](https://github.com/jimmidyson/configmap-reload/blob/master/README.md) on your Kubernetes cluster.
@@ -31,7 +33,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.5.0`, `0.5.0-debian-10-r276`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-configmap-reload/blob/0.5.0-debian-10-r276/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.5.0`, `0.5.0-debian-10-r277`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-configmap-reload/blob/0.5.0-debian-10-r277/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/configmap-reload GitHub repo](https://github.com/bitnami/bitnami-docker-configmap-reload).
 
