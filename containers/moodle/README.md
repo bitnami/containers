@@ -6,6 +6,8 @@
 
 [Overview of Bitnami LMS powered by Moodle(TM) LMS](http://moodle.org/)
 
+Disclaimer: The respective trademarks mentioned in the offering are owned by the respective companies. We do not provide commercial license of any of these products. This listing has an open source license. Moodle(TM) LMS is run and maintained by Moodle HQ, that is a completely and separate project from Bitnami.
+
 ## TL;DR
 
 ```console
@@ -37,7 +39,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.11.4`, `3.11.4-debian-10-r6`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.11.4-debian-10-r6/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.11.4`, `3.11.4-debian-10-r7`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.11.4-debian-10-r7/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/moodle GitHub repo](https://github.com/bitnami/bitnami-docker-moodle).
 
