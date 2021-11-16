@@ -6,6 +6,8 @@
 
 [Overview of rClone](https://rclone.org/)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -29,7 +31,7 @@ $ docker run --name rclone bitnami/rclone:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.57.0`, `1.57.0-debian-10-r13`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rclone/blob/1.57.0-debian-10-r13/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.57.0`, `1.57.0-debian-10-r14`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rclone/blob/1.57.0-debian-10-r14/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rclone GitHub repo](https://github.com/bitnami/bitnami-docker-rclone).
 
