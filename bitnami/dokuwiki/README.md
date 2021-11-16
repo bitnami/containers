@@ -6,6 +6,8 @@
 
 [Overview of DokuWiki](https://www.splitbrain.org/projects/dokuwiki)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -35,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`20200729`, `20200729-debian-10`, `20200729.0.0`, `20200729.0.0-debian-10-r419`, `latest` (20200729/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/20200729.0.0-debian-10-r419/20200729/debian-10/Dockerfile)
+* [`20200729`, `20200729-debian-10`, `20200729.0.0`, `20200729.0.0-debian-10-r420`, `latest` (20200729/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dokuwiki/blob/20200729.0.0-debian-10-r420/20200729/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dokuwiki GitHub repo](https://github.com/bitnami/bitnami-docker-dokuwiki).
 
