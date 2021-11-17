@@ -1,17 +1,20 @@
+# Wavefront packaged by Bitnami
 
-# What is Wavefront Kubernetes Collector?
+## What is Wavefront?
 
-> The Wavefront Kubernetes Collector for Kubernetes is an agent that runs as a DaemonSet on each node within a Kubernetes cluster. It collects metrics and events about the cluster and sends them to the Wavefront SaaS service.
+> Wavefront is a high-performance streaming analytics platform for monitoring and optimizing your environment and applications.
 
-[Overview of Wavefront Kubernetes Collector](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes)
+[Overview of Wavefront](https://github.com/wavefrontHQ/wavefront-collector-for-kubernetes)
 
-# TL;DR
+
+
+## TL;DR
 
 ```console
 $ docker run --name wavefront-kubernetes-collector bitnami/wavefront-kubernetes-collector:latest
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -23,16 +26,16 @@ $ docker run --name wavefront-kubernetes-collector bitnami/wavefront-kubernetes-
 
 > This [CVE scan report](https://quay.io/repository/bitnami/wavefront-kubernetes-collector?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-scratch`, `1.7.3`, `1.7.3-scratch-r0`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector/blob/1.7.3-scratch-r0/1/scratch/Dockerfile)
+* [`1`, `1-scratch`, `1.7.4`, `1.7.4-scratch-r0`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector/blob/1.7.4-scratch-r0/1/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wavefront-kubernetes-collector GitHub repo](https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami wavefront-kubernetes-collector Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/wavefront-kubernetes-collector).
 
@@ -52,9 +55,9 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/wavefront-kubernetes-collector:latest 'https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector.git#master:1/scratch'
 ```
 
-# Configuration
+## Configuration
 
-## Running commands
+### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `wavefront-collector --version` you can follow the example below:
 
@@ -63,11 +66,11 @@ $ docker run --rm --name wavefront-kubernetes-collector bitnami/wavefront-kubern
 ```
 
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-wavefront-kubernetes-collector/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -77,7 +80,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2021 Bitnami
 
