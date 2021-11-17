@@ -20,7 +20,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/neo4j/postunpack.sh
 ENV BITNAMI_APP_NAME="neo4j" \
-    BITNAMI_IMAGE_VERSION="4.3.7-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="4.3.7-debian-10-r2" \
     JAVA_HOME="/opt/bitnami/java" \
     NEO4J_BOLT_PORT_NUMBER="" \
     NEO4J_HOST="" \
