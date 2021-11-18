@@ -1,10 +1,10 @@
-# Bitnami Stack for InfluxDB(TM)
+# Bitnami Stack for InfluxDB&trade;
 
-## What is InfluxDB(TM)?
+## What is InfluxDB&trade;?
 
-> InfluxDB(TM) is an open source time-series database. It is a core component of the TICK (Telegraf, InfluxDB(TM), Chronograf, Kapacitor) stack.
+> InfluxDB&trade; is an open source time-series database. It is a core component of the TICK (Telegraf, InfluxDB&trade;, Chronograf, Kapacitor) stack.
 
-[Overview of InfluxDB(TM)](https://www.influxdata.com/products/influxdb-overview)
+[Overview of InfluxDB&trade;](https://www.influxdata.com/products/influxdb-overview)
 
 InfluxDB(TM) is a trademark owned by InfluxData, which is not affiliated with, and does not endorse, this site.
 
@@ -43,7 +43,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.0.9`, `2.0.9-debian-10-r45`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/2.0.9-debian-10-r45/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.0.9`, `2.0.9-debian-10-r46`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/2.0.9-debian-10-r46/2/debian-10/Dockerfile)
 * [`1`, `1-debian-10`, `1.8.5`, `1.8.5-debian-10-r176` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/1.8.5-debian-10-r176/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/influxdb GitHub repo](https://github.com/bitnami/bitnami-docker-influxdb).
