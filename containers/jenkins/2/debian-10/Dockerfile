@@ -14,7 +14,7 @@ RUN install_packages acl ca-certificates curl fontconfig gzip libc6 libcom-err2 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-1" --checksum 00722b62c7561929e039877a6e445a4bb782c340890c0a090fdae3c9e1960161
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.312-0" --checksum a7e034898281dff05591e74de285ecd69899ddaaff4ce1ea9c09556ac89c9c72
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.33.0-0" --checksum fd9a3245580fef6248f778efeba0a017675424f15ff16ace42c095496e4f02f3
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.34.0-0" --checksum 468c6894fa5729edbb20c9055ee16f59fdaeee2d9350cb8e02094b07c7521129
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "jenkins" "2.303.3-0" --checksum a8aa6fa77c220321e91cb0d07a162e148093ead584cc3f9d5cf8fe13db49fa38
 RUN chmod g+rwX /opt/bitnami
 
@@ -22,7 +22,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/jenkins/postunpack.sh
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.303.3-debian-10-r11" \
+    BITNAMI_IMAGE_VERSION="2.303.3-debian-10-r12" \
     JAVA_HOME="/opt/bitnami/java" \
     LD_PRELOAD="/opt/bitnami/common/lib/libnss_wrapper.so" \
     LNAME="jenkins" \
