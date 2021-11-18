@@ -1,7 +1,7 @@
 {
     "argo-workflow-controller": {
-        "digest": "4cc45286aa3dff4c4d8b876203a2a6436b0fef895fa8f05faf554676a63db60f",
+        "digest": "2763f2831235e2d0cc937e74792ae3a179bbea9edb272862be63b2af5333a13b",
         "type": "BLACKSMITH",
-        "version": "3.2.3"
+        "version": "3.2.4"
     }
 }
