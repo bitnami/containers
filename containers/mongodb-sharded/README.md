@@ -1,10 +1,10 @@
-# MongoDB(R) Sharded packaged by Bitnami
+# MongoDB&reg; Sharded packaged by Bitnami
 
-## What is MongoDB(R) Sharded?
+## What is MongoDB&reg; Sharded?
 
-> MongoDB(R) is an open source NoSQL database that uses JSON for data storage. MongoDB(TM) Sharded improves scalability and reliability for large datasets by distributing data across multiple machines.
+> MongoDB&reg; is an open source NoSQL database that uses JSON for data storage. MongoDB&trade; Sharded improves scalability and reliability for large datasets by distributing data across multiple machines.
 
-[Overview of MongoDB(R) Sharded](http://www.mongodb.org)
+[Overview of MongoDB&reg; Sharded](http://www.mongodb.org)
 
 Disclaimer: The respective trademarks mentioned in the offering are owned by the respective companies. We do not provide a commercial license for any of these products. This listing has an open-source license. MongoDB(R) is run and maintained by MongoDB, which is a completely separate project from Bitnami.
 
@@ -50,7 +50,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`5.0`, `5.0-debian-10`, `5.0.4`, `5.0.4-debian-10-r6` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/5.0.4-debian-10-r6/5.0/debian-10/Dockerfile)
 * [`4.4`, `4.4-debian-10`, `4.4.10`, `4.4.10-debian-10-r34`, `latest` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.10-debian-10-r34/4.4/debian-10/Dockerfile)
-* [`4.2`, `4.2-debian-10`, `4.2.17`, `4.2.17-debian-10-r53` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.17-debian-10-r53/4.2/debian-10/Dockerfile)
+* [`4.2`, `4.2-debian-10`, `4.2.17`, `4.2.17-debian-10-r54` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.17-debian-10-r54/4.2/debian-10/Dockerfile)
 * [`4.0`, `4.0-debian-9`, `4.0.27`, `4.0.27-debian-9-r68` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.27-debian-9-r68/4.0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
