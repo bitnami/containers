@@ -281,6 +281,7 @@ Available environment variables:
 - `MAGENTO_SEARCH_ENGINE`: Magento search engine. Default: **elasticsearch7**
 - `MAGENTO_ELASTICSEARCH_HOST`: Elasticsearch server host, if using Elasticsearch as a search engine. Default: **elasticsearch**
 - `MAGENTO_ELASTICSEARCH_PORT_NUMBER`: Elasticsearch server port number, if using Elasticsearch as a search engine. Default: **9200**
+- `MAGENTO_ELASTICSEARCH_USE_HTTPS`: Whether to request Elasticsearch server with 'https://' prefix. Default: **no**
 - `MAGENTO_ELASTICSEARCH_ENABLE_AUTH`: Whether to enable authentication for connections to the Elasticsearch server. Default: **no**
 - `MAGENTO_ELASTICSEARCH_USER`: Elasticsearch server user login, if using Elasticsearch as a search engine and authentication is enabled. No defaults
 - `MAGENTO_ELASTICSEARCH_PASSWORD`: Elasticsearch server user password, if using Elasticsearch as a search engine and authentication is enabled. No defaults
