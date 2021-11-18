@@ -13,7 +13,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.14.2-0" -
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "2.6.8-1" --checksum aa85db57a30d79ac61743dffac4b1cbdc58b7736ffbffd873ed32248b07f9e51
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "11.14.0-0" --checksum caeddf6f0a758c6575d381061fe1c14fa4a2fbe8eb2ca5d53c54a9f95690c2fe
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.4.22-0" --checksum 0f28660749aa65bc54937c37602dc9464064510ebd0a068b2a3e3be17ffab6e5
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.33.0-0" --checksum fd9a3245580fef6248f778efeba0a017675424f15ff16ace42c095496e4f02f3
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.34.0-0" --checksum 468c6894fa5729edbb20c9055ee16f59fdaeee2d9350cb8e02094b07c7521129
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redmine" "4.2.3-0" --checksum 4d15d836b42e544f66e7dbb920010effd903f3d0e2d5f15e5f7b68244add3b47
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
@@ -23,7 +23,7 @@ RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/redmine/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="redmine" \
-    BITNAMI_IMAGE_VERSION="4.2.3-debian-10-r36" \
+    BITNAMI_IMAGE_VERSION="4.2.3-debian-10-r37" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
