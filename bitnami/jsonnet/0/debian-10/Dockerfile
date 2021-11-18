@@ -17,7 +17,7 @@ RUN chmod g+rwX /opt/bitnami
 
 RUN chmod +x /opt/bitnami/jsonnet/bin/jsonnet
 ENV BITNAMI_APP_NAME="jsonnet" \
-    BITNAMI_IMAGE_VERSION="0.17.0-debian-10-r337" \
+    BITNAMI_IMAGE_VERSION="0.17.0-debian-10-r338" \
     PATH="/opt/bitnami/jsonnet/bin:$PATH"
 
 USER 1001
