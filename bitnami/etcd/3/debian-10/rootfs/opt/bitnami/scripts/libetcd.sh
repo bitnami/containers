@@ -120,7 +120,7 @@ etcdctl_get_endpoints() {
        #     POD_NAME.HEADLESS_SVC_DOMAIN.NAMESPACE.svc.cluster.local (using headless service domain)
        #     10-237-136-79.SVC_DOMAIN.NAMESPACE.svc.cluster.local (using POD's IP and service domain)
        # We need to discad the latter to avoid issues when TLS verification is enabled.
-       [[ "$(getent hosts $ip)" = *"$parent_domain"* ]] && return 0
+       [[ "$(getent hosts "$ip")" = *"$parent_domain"* ]] && return 0
        return 1
     }
 
@@ -304,12 +304,12 @@ is_healthy_etcd_cluster() {
     if is_boolean_yes "$ETCD_DISASTER_RECOVERY"; then
         if [[ -f "/snapshots/.disaster_recovery" ]]; then
             # Remove current node from the ones that need to recover
-            remove_in_file "/snapshots/.disaster_recovery" "$host:$port" || true
+            remove_in_file "/snapshots/.disaster_recovery" "$host:$port"
             # Remove nodes that do not exist anymore from the ones that need to recover
-            read -r -a recovery_array <<< $(tr '\n' ' ' < "/snapshots/.disaster_recovery")
+            read -r -a recovery_array <<< "$(tr '\n' ' ' < "/snapshots/.disaster_recovery")"
             for r in "${recovery_array[@]}"; do
-                if [[ ! " ${endpoints_array[*]} " =~ " $r " ]]; then
-                    remove_in_file "/snapshots/.disaster_recovery" "$r" || true
+                if [[ ! "${endpoints_array[*]}" =~ $r ]]; then
+                    remove_in_file "/snapshots/.disaster_recovery" "$r"
                 fi
             done
             if [[ $(wc -w < "/snapshots/.disaster_recovery") -eq 0 ]]; then
