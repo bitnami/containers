@@ -1,16 +1,20 @@
-# What is Wavefront HPA Adapter for Kubernetes?
+# Wavefront HPA Adapter for Kubernetes
 
-> The Wavefront HPA (Horizontal Pod Autoscaler) adapter for Kubernetes implements the Kubernetes custom.metrics.k8s.io/v1beta1 and external.metrics.k8s.io/v1beta1 APIs allowing you to autoscale pods based on metrics available within Wavefront.
+## What is Wavefront HPA Adapter for Kubernetes?
+
+> Wavefront HPA Adapter for Kubernetes is a Kubernetes Horizontal Pod Autoscaler adapter. It allows to scale your Kubernetes workloads based on Wavefront metrics.
 
 [Overview of Wavefront HPA Adapter for Kubernetes](https://github.com/wavefrontHQ/wavefront-hpa-adapter)
 
-# TL;DR
+
+
+## TL;DR
 
 ```console
 $ docker run --name wavefront-hpa-adapter bitnami/wavefront-hpa-adapter:latest
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -22,16 +26,16 @@ $ docker run --name wavefront-hpa-adapter bitnami/wavefront-hpa-adapter:latest
 
 > This [CVE scan report](https://quay.io/repository/bitnami/wavefront-hpa-adapter?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-scratch`, `0.9.8`, `0.9.8-scratch-r5`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-hpa-adapter/blob/0.9.8-scratch-r5/0/scratch/Dockerfile)
+* [`0`, `0-scratch`, `0.9.8`, `0.9.8-scratch-r6`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-hpa-adapter/blob/0.9.8-scratch-r6/0/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wavefront-hpa-adapter GitHub repo](https://github.com/bitnami/bitnami-docker-wavefront-hpa-adapter).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami wavefront-hpa-adapter Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/wavefront-hpa-adapter).
 
@@ -51,13 +55,13 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/wavefront-hpa-adapter:latest 'https://github.com/bitnami/bitnami-docker-wavefront-hpa-adapter.git#master:0/scratch'
 ```
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Configuration
+## Configuration
 
-## Running commands
+### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `wavefront-adapter --wavefront-url example.wavefront.com` you can follow the example below:
 
@@ -67,11 +71,11 @@ $ docker run --rm --name wavefront-hpa-adapter bitnami/wavefront-hpa-adapter:lat
 
 Check the [official Wavefront HPA Adapter for Kubernetes documentation](https://github.com/wavefrontHQ/wavefront-hpa-adapter/blob/master/docs/configuration.md) for a list of the available parameters.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-wavefront-hpa-adapter/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-wavefront-hpa-adapter/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-wavefront-hpa-adapter/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -81,7 +85,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright 2021 Bitnami
 
