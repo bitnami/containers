@@ -13,7 +13,7 @@ set -o pipefail
 # Load etcd environment variables
 . /opt/bitnami/scripts/etcd-env.sh
 
-for dir in "$ETCD_BIN_DIR" "$ETCD_DATA_DIR"; do
+for dir in "$ETCD_BIN_DIR" "$ETCD_DATA_DIR" "${ETCD_BASE_DIR}/certs"; do
     ensure_dir_exists "$dir"
 done
-chmod -R g+rwX "$ETCD_DATA_DIR"
+chmod -R g+rwX "$ETCD_DATA_DIR" "${ETCD_BASE_DIR}/certs"
