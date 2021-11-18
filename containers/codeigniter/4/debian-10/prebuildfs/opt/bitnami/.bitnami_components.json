@@ -1,0 +1,37 @@
+{
+    "codeigniter": {
+        "arch": "amd64",
+        "digest": "4dc5111ee8cb415930c4f969f3bba19c6029ef88f1069792dc48634c17ffd753",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "4.1.5-1"
+    },
+    "gosu": {
+        "arch": "amd64",
+        "digest": "3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.14.0-0"
+    },
+    "mysql-client": {
+        "arch": "amd64",
+        "digest": "0f28660749aa65bc54937c37602dc9464064510ebd0a068b2a3e3be17ffab6e5",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "10.4.22-0"
+    },
+    "php": {
+        "arch": "amd64",
+        "digest": "6eb19b355700feff6930dbc9925f3083be864a81e48590035229dc3c34402211",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "7.4.26-1"
+    },
+    "tini": {
+        "arch": "amd64",
+        "digest": "9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "0.19.0-1"
+    }
+}
