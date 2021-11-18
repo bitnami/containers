@@ -14,7 +14,7 @@ RUN install_packages acl ca-certificates curl fontconfig gzip libaudit1 libc6 li
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.312-0" --checksum a7e034898281dff05591e74de285ecd69899ddaaff4ce1ea9c09556ac89c9c72
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "9.0.55-0" --checksum a4f34f53b92e8317c1648042f740beadb45eb950f88a0a9c0b9d75912dc975c1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.32-0" --checksum 4a211faa9436c9747dfc4374cb9e8a7f9b0065dfc58dd4784cef0f5029c2e65e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.33.0-0" --checksum fd9a3245580fef6248f778efeba0a017675424f15ff16ace42c095496e4f02f3
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.34.0-0" --checksum 468c6894fa5729edbb20c9055ee16f59fdaeee2d9350cb8e02094b07c7521129
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-1" --checksum 00722b62c7561929e039877a6e445a4bb782c340890c0a090fdae3c9e1960161
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "jasperreports" "7.8.1-0" --checksum 3c2df18851583680f0cad574d392021c56ec691d2e7df180d0073cffeece9e5b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
@@ -27,7 +27,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="jasperreports" \
-    BITNAMI_IMAGE_VERSION="7.8.1-debian-10-r7" \
+    BITNAMI_IMAGE_VERSION="7.8.1-debian-10-r8" \
     JAVA_HOME="/opt/bitnami/java" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
