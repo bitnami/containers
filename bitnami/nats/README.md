@@ -48,7 +48,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.6.4`, `2.6.4-debian-10-r13`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/2.6.4-debian-10-r13/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.6.4`, `2.6.4-debian-10-r14`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/2.6.4-debian-10-r14/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nats GitHub repo](https://github.com/bitnami/bitnami-docker-nats).
 
@@ -169,30 +169,96 @@ $ docker-compose up -d
 
 ## Configuration
 
-The configuration can easily be setup by mounting your own configuration file on the directory `/opt/bitnami/nats`:
+### Environment variables
 
-```console
-$ docker run --name nats -v /path/to/nats-server.conf:/opt/bitnami/nats/nats-server.conf bitnami/nats:latest
-```
+When you start the NATS image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
-After that, your configuration will be taken into account in the server's behaviour.
-
-You can also do this by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-nats/blob/master/docker-compose.yml) file present in this repository:
+* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-nats/blob/master/docker-compose.yml) file present in this repository:
 
 ```yaml
-services:
-  nats:
+nats:
   ...
-    volumes:
-      - /path/to/nats-server.conf:/opt/bitnami/nats/nats-server.conf
+  environment:
+    - NATS_ENABLE_AUTH=yes
+    - NATS_PASSWORD=my_password
   ...
 ```
 
-Find more information about how to create your own configuration file on this [link](https://nats-io.github.io/docs/nats_server/configuration.html)
+* For manual execution add a `--env` option with each variable and value:
+
+  ```console
+  $ docker run -d --name nats -p 4222:4222 -p 6222:6222 -p 8222:8222 \
+    --env NATS_ENABLE_AUTH=yes \
+    --env NATS_PASSWORD=my_password \
+    bitnami/nats:latest
+  ```
+
+Available environment variables:
+
+#### NATS configuration
+
+* `NATS_BIND_ADDRESS`: NATS bind address. Default: **0.0.0.0**
+* `NATS_CLIENT_PORT_NUMBER`: NATS Client port number. Default: **4222**
+* `NATS_CLUSTER_PORT_NUMBER`: NATS Cluster port number. Default: **6222**
+* `NATS_HTTP_PORT_NUMBER`: NATS HTTP port number. Default: **8222**
+* `NATS_HTTPS_PORT_NUMBER`: NATS HTTPS port number. Default: **8443**
+* `NATS_FILENAME`: Pefix to use for NATS files (e.g. the PID file would be formed using `${NATS_FILENAME}.pid`). Default: **nats-server**
+
+#### NATS security configuration
+
+* `NATS_ENABLE_AUTH`: Enable NATS authentication. Default: **no**
+* `NATS_USERNAME`: Username credential for client connections. Default: **nats**
+* `NATS_PASSWORD`: Password credential for client connections. No defaults.
+* `NATS_TOKEN`: Auth token for client connections. No defaults.
+* `NATS_ENABLE_TLS`: Enable TLS. Default: **no**
+* `NATS_TLS_CRT_FILE`: TLS certificate filename. Default: **nats-server.crt**
+* `NATS_TLS_KEY_FILE`: TLS key filename. Default: **nats-server.key**
+
+#### NATS cluster configuration
+
+* `NATS_ENABLE_CLUSTER`: Enable NATS Cluster configuration. Default: **no**
+* `NATS_CLUSTER_USERNAME`: Username credential for route connections. Default: **nats**
+* `NATS_CLUSTER_PASSWORD`: Password credential for route connections. No defaults.
+* `NATS_CLUSTER_TOKEN`: Auth token for route connections. No defaults.
+* `NATS_CLUSTER_ROUTES`: Comma-separated list of NATS routes to solicit and connect. No defaults.
+* `NATS_CLUSTER_SEED_NODE`: NATS node to use as seed server for routes announcement. No defaults.
+
+### Full configuration
+
+The image looks for custom configuration files in the `/bitnami/nats/conf/` directory. Find very simple examples below.
+
+#### Using the Docker Command Line
+
+```console
+$ docker run -d --name nats -p 4222:4222 -p 6222:6222 -p 8222:8222 \
+  --volume /path/to/nats-server.conf:/bitnami/nats/conf/nats-server.conf:ro \
+  bitnami/nats:latest
+```
+
+#### Using Docker Compose
+
+Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-nats/blob/master/docker-compose.yml) file present in this repository as follows:
+
+```diff
+...
+services:
+  nats:
+    ...
++   volumes:
++     - /path/to/nats-server.conf:/bitnami/nats/conf/nats-server.conf:ro
+```
+
+After that, your custom configuration will be taken into account to start the NATS node. Find more information about how to create your own configuration file on this [link](https://nats-io.github.io/docs/nats_server/configuration.html)
 
 ### Further documentation
 
 For further documentation, please check [NATS documentation](https://nats.io/documentation/)
+
+# Notable Changes
+
+### 2.6.4-debian-10-r14
+
+- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
 
 ## Contributing
 
