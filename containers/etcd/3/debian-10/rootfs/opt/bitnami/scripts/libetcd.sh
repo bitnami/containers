@@ -112,18 +112,29 @@ etcdctl_get_endpoints() {
     local -a endpoints=()
     local host domain port
 
-    ip_has_hostname() {
+    ip_has_valid_hostname() {
        local ip="${1:?ip is required}"
+       local parent_domain="${1:?parent_domain is required}"
 
-       [[ "$(getent hosts "$ip")" != "" ]] && return 0
+       # 'getent hosts $ip' can return hostnames in 2 different formats:
+       #     POD_NAME.HEADLESS_SVC_DOMAIN.NAMESPACE.svc.cluster.local (using headless service domain)
+       #     10-237-136-79.SVC_DOMAIN.NAMESPACE.svc.cluster.local (using POD's IP and service domain)
+       # We need to discad the latter to avoid issues when TLS verification is enabled.
+       [[ "$(getent hosts $ip)" = *"$parent_domain"* ]] && return 0
+       return 1
+    }
+
+    hostname_has_ips() {
+       local hostname="${1:?hostname is required}"
+       [[ "$(getent ahosts "$hostname")" != "" ]] && return 0
        return 1
     }
 
     if is_boolean_yes "$ETCD_ON_K8S"; then
         # This piece of code assumes this container is used on a K8s environment
         # where etcd members are part of a statefulset that uses a headless service
-        # to create a unique FQDN per member. Under this circustamences, the
-        # ETCD_ADVERTISE_CLIENT_URLS are created as follows:
+        # to create a unique FQDN per member. Under these circumstances, the
+        # ETCD_ADVERTISE_CLIENT_URLS env. variable is created as follows:
         #   SCHEME://POD_NAME.HEADLESS_SVC_DOMAIN:CLIENT_PORT
         #
         # Assuming this, we can extract the HEADLESS_SVC_DOMAIN and obtain
@@ -134,15 +145,18 @@ etcdctl_get_endpoints() {
         # When ETCD_CLUSTER_DOMAIN is set, we use that value instead of extracting
         # it from ETCD_ADVERTISE_CLIENT_URLS
         ! is_empty_value "$ETCD_CLUSTER_DOMAIN" && domain="$ETCD_CLUSTER_DOMAIN"
-        wait_for_dns_lookup "$domain" >/dev/null 2>&1
-        for ip in $(getent ahosts "$domain" | awk '{print $1}' | uniq); do
-            if retry_while "ip_has_hostname $ip"; then
-                h="$(getent hosts "$ip" | awk '{print $2}')"
-                if ! { [[ $only_others = true ]] && [[ "$h" = "$host" ]]; }; then
-                    endpoints+=("${h}:${port}")
+        # Depending on the K8s distro & the DNS plugin, it might need
+        # a few seconds to associate the POD(s) IP(s) to the headless svc domain
+        if retry_while "hostname_has_ips $domain"; then
+            for ip in $(getent ahosts "$domain" | awk '{print $1}' | uniq); do
+                if retry_while "ip_has_valid_hostname $ip $domain"; then
+                    h="$(getent hosts "$ip" | awk '{print $2}')"
+                    if ! { [[ $only_others = true ]] && [[ "$h" = "$host" ]]; }; then
+                        endpoints+=("${h}:${port}")
+                    fi
                 fi
-            fi
-        done
+            done
+        fi
         echo "${endpoints[*]}" | tr ' ' ','
     else
         echo ""
@@ -186,8 +200,11 @@ etcd_store_member_id() {
     read -r -a extra_flags <<< "$(etcdctl_auth_flags)"
     extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
     if retry_while "etcdctl ${extra_flags[*]} member list" >/dev/null 2>&1; then
-        while [[ ! -f "${ETCD_DATA_DIR}/member_id" ]]; do
-            etcdctl "${extra_flags[@]}" member list | grep -w "$ETCD_ADVERTISE_CLIENT_URLS" | awk -F "," '{ print $1}' > "${ETCD_DATA_DIR}/member_id"
+        while [[ ! -s "${ETCD_DATA_DIR}/member_id" ]]; do
+            # We use 'stdbuf' to ensure memory buffers are flushed to disk
+            # so we reduce the chances that the "member_id" file is not created.
+            # ref: https://www.gnu.org/software/coreutils/manual/html_node/stdbuf-invocation.html#stdbuf-invocation
+            stdbuf -oL etcdctl "${extra_flags[@]}" member list | grep -w "$ETCD_ADVERTISE_CLIENT_URLS" | awk -F "," '{ print $1}' > "${ETCD_DATA_DIR}/member_id" || true
         done
         debug "Stored member ID: $(cat "${ETCD_DATA_DIR}/member_id")"
     fi
@@ -286,7 +303,15 @@ is_healthy_etcd_cluster() {
 
     if is_boolean_yes "$ETCD_DISASTER_RECOVERY"; then
         if [[ -f "/snapshots/.disaster_recovery" ]]; then
-            remove_in_file "/snapshots/.disaster_recovery" "$host:$port"
+            # Remove current node from the ones that need to recover
+            remove_in_file "/snapshots/.disaster_recovery" "$host:$port" || true
+            # Remove nodes that do not exist anymore from the ones that need to recover
+            read -r -a recovery_array <<< $(tr '\n' ' ' < "/snapshots/.disaster_recovery")
+            for r in "${recovery_array[@]}"; do
+                if [[ ! " ${endpoints_array[*]} " =~ " $r " ]]; then
+                    remove_in_file "/snapshots/.disaster_recovery" "$r" || true
+                fi
+            done
             if [[ $(wc -w < "/snapshots/.disaster_recovery") -eq 0 ]]; then
                 debug "Last member to recover from the disaster!"
                 rm "/snapshots/.disaster_recovery"
@@ -312,7 +337,7 @@ is_healthy_etcd_cluster() {
 }
 
 ########################
-# Recalculate initial cluster for disaster recovery
+# Recalculate initial cluster
 # Globals:
 #   ETCD_*
 # Arguments:
@@ -328,7 +353,7 @@ recalculate_initial_cluster() {
         read -r -a endpoints_array <<< "$(tr ',;' ' ' <<< "$(etcdctl_get_endpoints)")"
         # This piece of code assumes this container is used on a K8s environment
         # where etcd members are part of a statefulset that uses a headless service
-        # to create a unique FQDN per member. Under this circustamences, the
+        # to create a unique FQDN per member. Under these circumstances, the
         # ETCD_INITIAL_ADVERTISE_PEER_URLS are created as follows:
         #   SCHEME://POD_NAME.HEADLESS_SVC_DOMAIN:PEER_PORT
         #
@@ -364,6 +389,7 @@ recalculate_initial_cluster() {
 #########################
 etcd_initialize() {
     local -a extra_flags initial_members
+    local domain
 
     info "Initializing etcd"
     read -r -a initial_members <<< "$(tr ',;' ' ' <<< "$ETCD_INITIAL_CLUSTER")"
@@ -372,6 +398,34 @@ etcd_initialize() {
         if [[ ${#initial_members[@]} -gt 1 ]]; then
             if is_new_etcd_cluster; then
                 info "Bootstrapping a new cluster"
+                if is_boolean_yes "$ETCD_ON_K8S"; then
+                    debug "Waiting for the headless svc domain to have an IP per initial member in the cluster"
+                    if is_empty_value "$ETCD_CLUSTER_DOMAIN"; then
+                        # This piece of code assumes this container is used on a K8s environment
+                        # where etcd members are part of a statefulset that uses a headless service
+                        # to create a unique FQDN per member. Under these circumstances, the
+                        # ETCD_INITIAL_ADVERTISE_PEER_URLS are created as follows:
+                        #   SCHEME://POD_NAME.HEADLESS_SVC_DOMAIN:PEER_PORT
+                        #
+                        # Assuming this, we can extract the HEADLESS_SVC_DOMAIN
+                        host="$(parse_uri "$ETCD_INITIAL_ADVERTISE_PEER_URLS" "host")"
+                        domain="${host#"${ETCD_NAME}."}"
+                    else
+                        # When ETCD_CLUSTER_DOMAIN is set, we use that value instead of extracting
+                        # it from ETCD_INITIAL_ADVERTISE_PEER_URLS
+                        domain="$ETCD_CLUSTER_DOMAIN"
+                    fi
+                    hostname_has_N_ips() {
+                       local -r hostname="${1:?hostname is required}"
+                       local -r n=${2:?number of ips is required}
+                       [[ $(getent ahosts "$hostname" | awk '{print $1}' | uniq | wc -l) -eq $n ]] && return 0
+                       return 1
+                    }
+                    if ! retry_while "hostname_has_N_ips $domain ${#initial_members[@]}"; then
+                        error "Headless service domain does not have an IP per initial member in the cluster"
+                        exit 1
+                    fi
+                fi
             else
                 info "Adding new member to existing cluster"
                 ensure_dir_exists "$ETCD_DATA_DIR"

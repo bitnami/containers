@@ -20,13 +20,15 @@ set -o pipefail
 EXEC="$(command -v etcd)"
 
 ! is_empty_value "$ETCD_ROOT_PASSWORD" && unset ETCD_ROOT_PASSWORD
-if ! is_empty_value "$ETCD_INITIAL_CLUSTER" && ! is_new_etcd_cluster; then
-    ETCD_INITIAL_CLUSTER="$(recalculate_initial_cluster)"
-    export ETCD_INITIAL_CLUSTER
-fi
 if [[ -f "$ETCD_NEW_MEMBERS_ENV_FILE" ]]; then
     debug "Loading env vars of existing cluster"
     . "$ETCD_NEW_MEMBERS_ENV_FILE"
+else
+    # We do not rely on the original value of ETCD_INITIAL_CLUSTER even
+    # when bootstrapping a new cluster since we cannot assume
+    # that all nodes will come-up healthy
+    ETCD_INITIAL_CLUSTER="$(recalculate_initial_cluster)"
+    export ETCD_INITIAL_CLUSTER
 fi
 
 info "** Starting etcd **"
