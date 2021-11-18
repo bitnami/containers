@@ -1,10 +1,10 @@
-# Redis(TM) Cluster packaged by Bitnami
+# Redis&trade; Cluster packaged by Bitnami
 
-## What is Redis(TM) Cluster?
+## What is Redis&trade; Cluster?
 
-> Redis(TM) is an open source, scalable, distributed in-memory cache for applications. It can be used to store and serve data in the form of strings, hashes, lists, sets and sorted sets.	
+> Redis&trade; is an open source, scalable, distributed in-memory cache for applications. It can be used to store and serve data in the form of strings, hashes, lists, sets and sorted sets.	
 
-[Overview of Redis(TM) Cluster](http://redis.io)
+[Overview of Redis&trade; Cluster](http://redis.io)
 
 Disclaimer: Redis is a registered trademark of Redis Labs Ltd. Any rights therein are reserved to Redis Labs Ltd. Any use by Bitnami is for referential purposes only and does not indicate any sponsorship, endorsement, or affiliation between Redis Labs Ltd.
 
@@ -43,7 +43,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`6.2`, `6.2-debian-10`, `6.2.6`, `6.2.6-debian-10-r42`, `latest` (6.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/6.2.6-debian-10-r42/6.2/debian-10/Dockerfile)
+* [`6.2`, `6.2-debian-10`, `6.2.6`, `6.2.6-debian-10-r43`, `latest` (6.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/6.2.6-debian-10-r43/6.2/debian-10/Dockerfile)
 * [`6.0`, `6.0-debian-10`, `6.0.16`, `6.0.16-debian-10-r43` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/6.0.16-debian-10-r43/6.0/debian-10/Dockerfile)
 * [`5.0`, `5.0-debian-10`, `5.0.14`, `5.0.14-debian-10-r45` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/5.0.14-debian-10-r45/5.0/debian-10/Dockerfile)
 
