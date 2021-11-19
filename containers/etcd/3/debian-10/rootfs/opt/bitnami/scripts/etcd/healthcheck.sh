@@ -14,8 +14,9 @@ set -o nounset
 # Load etcd environment settings
 . /opt/bitnami/scripts/etcd-env.sh
 
-host="$(parse_uri "$ETCD_ADVERTISE_CLIENT_URLS" "host")"
-port="$(parse_uri "$ETCD_ADVERTISE_CLIENT_URLS" "port")"
+read -r -a advertised_array <<< "$(tr ',;' ' ' <<< "$ETCD_ADVERTISE_CLIENT_URLS")"
+host="$(parse_uri "${advertised_array[0]}" "host")"
+port="$(parse_uri "${advertised_array[0]}" "port")"
 read -r -a extra_flags <<< "$(etcdctl_auth_flags)"
 extra_flags+=("--endpoints=${host}:${port}")
 if [[ $ETCD_AUTO_TLS = true ]]; then

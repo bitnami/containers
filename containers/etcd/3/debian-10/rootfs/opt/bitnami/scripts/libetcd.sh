@@ -135,12 +135,13 @@ etcdctl_get_endpoints() {
         # where etcd members are part of a statefulset that uses a headless service
         # to create a unique FQDN per member. Under these circumstances, the
         # ETCD_ADVERTISE_CLIENT_URLS env. variable is created as follows:
-        #   SCHEME://POD_NAME.HEADLESS_SVC_DOMAIN:CLIENT_PORT
+        #   SCHEME://POD_NAME.HEADLESS_SVC_DOMAIN:CLIENT_PORT,SCHEME://SVC_DOMAIN:SVC_CLIENT_PORT
         #
         # Assuming this, we can extract the HEADLESS_SVC_DOMAIN and obtain
         # every available endpoint
-        host="$(parse_uri "$ETCD_ADVERTISE_CLIENT_URLS" "host")"
-        port="$(parse_uri "$ETCD_ADVERTISE_CLIENT_URLS" "port")"
+        read -r -a advertised_array <<< "$(tr ',;' ' ' <<< "$ETCD_ADVERTISE_CLIENT_URLS")"
+        host="$(parse_uri "${advertised_array[0]}" "host")"
+        port="$(parse_uri "${advertised_array[0]}" "port")"
         domain="${host#"${ETCD_NAME}."}"
         # When ETCD_CLUSTER_DOMAIN is set, we use that value instead of extracting
         # it from ETCD_ADVERTISE_CLIENT_URLS
@@ -204,7 +205,8 @@ etcd_store_member_id() {
             # We use 'stdbuf' to ensure memory buffers are flushed to disk
             # so we reduce the chances that the "member_id" file is not created.
             # ref: https://www.gnu.org/software/coreutils/manual/html_node/stdbuf-invocation.html#stdbuf-invocation
-            stdbuf -oL etcdctl "${extra_flags[@]}" member list | grep -w "$ETCD_ADVERTISE_CLIENT_URLS" | awk -F "," '{ print $1}' > "${ETCD_DATA_DIR}/member_id" || true
+            read -r -a advertised_array <<< "$(tr ',;' ' ' <<< "$ETCD_ADVERTISE_CLIENT_URLS")"
+            stdbuf -oL etcdctl "${extra_flags[@]}" member list | grep -w "${advertised_array[0]}" | awk -F "," '{ print $1}' > "${ETCD_DATA_DIR}/member_id" || true
         done
         debug "Stored member ID: $(cat "${ETCD_DATA_DIR}/member_id")"
     fi
@@ -288,8 +290,9 @@ is_healthy_etcd_cluster() {
 
     read -r -a endpoints_array <<< "$(tr ',;' ' ' <<< "$(etcdctl_get_endpoints)")"
     local -r cluster_size=${#endpoints_array[@]}
-    host="$(parse_uri "$ETCD_ADVERTISE_CLIENT_URLS" "host")"
-    port="$(parse_uri "$ETCD_ADVERTISE_CLIENT_URLS" "port")"
+    read -r -a advertised_array <<< "$(tr ',;' ' ' <<< "$ETCD_ADVERTISE_CLIENT_URLS")"
+    host="$(parse_uri "${advertised_array[0]}" "host")"
+    port="$(parse_uri "${advertised_array[0]}" "port")"
     if [[ $cluster_size -gt 0 ]]; then
         for e in "${endpoints_array[@]}"; do
             read -r -a extra_flags <<< "$(etcdctl_auth_flags)"
