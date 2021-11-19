@@ -53,7 +53,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`16`, `16-debian-10`, `16.13.0`, `16.13.0-debian-10-r23` (16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/16.13.0-debian-10-r23/16/debian-10/Dockerfile)
 * [`14-prod`, `14-prod-debian-10`, `14.18.1-prod`, `14.18.1-prod-debian-10-r36` (14-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/14.18.1-prod-debian-10-r36/14-prod/debian-10/Dockerfile)
 * [`14`, `14-debian-10`, `14.18.1`, `14.18.1-debian-10-r36` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/14.18.1-debian-10-r36/14/debian-10/Dockerfile)
-* [`12-prod`, `12-prod-debian-10`, `12.22.7-prod`, `12.22.7-prod-debian-10-r36` (12-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/12.22.7-prod-debian-10-r36/12-prod/debian-10/Dockerfile)
+* [`12-prod`, `12-prod-debian-10`, `12.22.7-prod`, `12.22.7-prod-debian-10-r37` (12-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/12.22.7-prod-debian-10-r37/12-prod/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.22.7`, `12.22.7-debian-10-r36` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/12.22.7-debian-10-r36/12/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node-snapshot GitHub repo](https://github.com/bitnami/bitnami-docker-node-snapshot).
@@ -362,14 +362,21 @@ We'd love for you to contribute to this Docker image. You can request new featur
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-node-snapshot/issues/new). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-node-snapshot/issues/new). Be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
 - Output of `docker info`
-- Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
-- The command you used to run the container, and any relevant output you saw (masking any sensitive
-information)
+- Version of this container
+- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+
+### Community supported solution
+
+Please, note this asset is a community-supported solution. This means that the Bitnami team is not actively working on new features/improvements nor providing support through GitHub Issues. Any new issue will stay open for 20 days to allow the community to contribute, after 15 days without activity the issue will be marked as stale being closed after 5 days.
+
+The Bitnami team will review any PR that is created, feel free to create a PR if you find any issue or want to implement a new feature.
+
+New versions and releases cadence are not going to be affected. Once a new version is released in the upstream project, the Bitnami container image will be updated to use the latest version, supporting the different branches supported by the upstream project as usual.
 
 ## License
 
