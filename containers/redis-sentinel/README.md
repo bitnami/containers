@@ -1,10 +1,10 @@
-# Redis(TM) Sentinel packaged by Bitnami
+# Redis&trade; Sentinel packaged by Bitnami
 
-## What is Redis(TM) Sentinel?
+## What is Redis&trade; Sentinel?
 
-> Redis(TM) Sentinel provides high availability for Redis. Redis Sentinel also provides other collateral tasks such as monitoring, notifications and acts as a configuration provider for clients.
+> Redis&trade; Sentinel provides high availability for Redis. Redis Sentinel also provides other collateral tasks such as monitoring, notifications and acts as a configuration provider for clients.
 
-[Overview of Redis(TM) Sentinel](http://redis.io/)
+[Overview of Redis&trade; Sentinel](http://redis.io/)
 
 Disclaimer: Redis is a registered trademark of Redis Labs Ltd. Any rights therein are reserved to Redis Labs Ltd. Any use by Bitnami is for referential purposes only and does not indicate any sponsorship, endorsement, or affiliation between Redis Labs Ltd.
 
@@ -46,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`6.2`, `6.2-debian-10`, `6.2.6`, `6.2.6-debian-10-r43`, `latest` (6.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.2.6-debian-10-r43/6.2/debian-10/Dockerfile)
 * [`6.0`, `6.0-debian-10`, `6.0.16`, `6.0.16-debian-10-r43` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.0.16-debian-10-r43/6.0/debian-10/Dockerfile)
-* [`5.0`, `5.0-debian-10`, `5.0.14`, `5.0.14-debian-10-r43` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.14-debian-10-r43/5.0/debian-10/Dockerfile)
+* [`5.0`, `5.0-debian-10`, `5.0.14`, `5.0.14-debian-10-r44` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.14-debian-10-r44/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-sentinel GitHub repo](https://github.com/bitnami/bitnami-docker-redis-sentinel).
 
