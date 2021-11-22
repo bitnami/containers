@@ -38,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5.3`, `5.3-debian-10`, `5.3.11`, `5.3.11-debian-10-r0` (5.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/5.3.11-debian-10-r0/5.3/debian-10/Dockerfile)
-* [`4.4`, `4.4-debian-10`, `4.4.33`, `4.4.33-debian-10-r18` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/4.4.33-debian-10-r18/4.4/debian-10/Dockerfile)
+* [`4.4`, `4.4-debian-10`, `4.4.34`, `4.4.34-debian-10-r0` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/4.4.34-debian-10-r0/4.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/symfony GitHub repo](https://github.com/bitnami/bitnami-docker-symfony).
 
