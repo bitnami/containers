@@ -213,10 +213,6 @@ Re-create your container from the new image.
 $ docker run --name ejbca bitnami/ejbca:latest
 ```
 
-## Branch Deprecation Notice
-
-EJBCA's branch 6 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 11-19-2021
-
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-ejbca/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-ejbca/pulls) with your contribution.
