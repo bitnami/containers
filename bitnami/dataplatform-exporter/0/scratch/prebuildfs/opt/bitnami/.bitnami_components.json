@@ -1,7 +1,7 @@
 {
     "dataplatform-exporter": {
-        "digest": "2335dc0f8624c59f274862728b03c0ba08dd162fcb6baa984081430b88ec0edf",
+        "digest": "100a64a5006bce3d2b25e7863ff8a0dea60bf169a5646f4279f249c21328d013",
         "type": "BLACKSMITH",
-        "version": "0.0.11"
+        "version": "0.0.12"
     }
 }
