@@ -20,7 +20,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/logstash/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV BITNAMI_APP_NAME="logstash" \
-    BITNAMI_IMAGE_VERSION="7.15.2-debian-10-r9" \
+    BITNAMI_IMAGE_VERSION="7.15.2-debian-10-r10" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/logstash/bin:/opt/bitnami/common/bin:$PATH"
 
