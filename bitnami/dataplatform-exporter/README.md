@@ -1,10 +1,12 @@
-# Bitnami Docker Image for Data Platform Metrics Exporter
+# Data Platform Metrics Exporter packaged by Bitnami
 
 ## What is Data Platform Metrics Exporter?
 
 > The Prometheus exporter for various metrics of OCTO Data Platform Blueprints includes the most critical metrics to determine the health of the data platform.
 
 [Overview of Data Platform Metrics Exporter](https://github.com/bitnami/dataplatform-exporter)
+
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
@@ -29,7 +31,8 @@ $ docker run --name dataplatform-exporter bitnami/dataplatform-exporter:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`0`, `0-scratch`, `0.0.11`, `0.0.11-scratch-r4`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-dataplatform-exporter/blob/0.0.11-scratch-r4/0/scratch/Dockerfile)
+- [`1`, `1-scratch`, `1.0.1`, `1.0.1-scratch-r0` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-dataplatform-exporter/blob/1.0.1-scratch-r0/1/scratch/Dockerfile)
+- [`0`, `0-scratch`, `0.0.12`, `0.0.12-scratch-r-1`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-dataplatform-exporter/blob/0.0.12-scratch-r-1/0/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dataplatform-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-dataplatform-exporter).
 
