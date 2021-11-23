@@ -37,7 +37,7 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.2.2`, `2.2.2-debian-10-r5`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/2.2.2-debian-10-r5/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.2.2`, `2.2.2-debian-10-r6`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/2.2.2-debian-10-r6/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow).
 
@@ -124,7 +124,7 @@ If you want to run the application manually instead of using `docker-compose`, t
     -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
     -e AIRFLOW_LOAD_EXAMPLES=yes \
-    -e AIRFLOW_WEBSERVER_HOST=airflow \
+    -e AIRFLOW_WEBSERVER_HOST=127.0.0.1 \
     --net airflow-tier \
     --volume airflow_scheduler_data:/bitnami \
     bitnami/airflow-scheduler:latest
@@ -141,7 +141,7 @@ If you want to run the application manually instead of using `docker-compose`, t
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
     -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
-    -e AIRFLOW_WEBSERVER_HOST=airflow \
+    -e AIRFLOW_WEBSERVER_HOST=127.0.0.1 \
     --net airflow-tier \
     --volume airflow_worker_data:/bitnami \
     bitnami/airflow-worker:latest
@@ -282,7 +282,6 @@ services:
     -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
     -e AIRFLOW_LOAD_EXAMPLES=yes \
-    -e AIRFLOW_WEBSERVER_HOST=airflow \
     --net airflow-tier \
     --volume /path/to/airflow-scheduler-persistence:/bitnami \
     bitnami/airflow-scheduler:latest
@@ -298,7 +297,6 @@ services:
     -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
     -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
-    -e AIRFLOW_WEBSERVER_HOST=airflow \
     --net airflow-tier \
     --volume /path/to/airflow-worker-persistence:/bitnami \
     bitnami/airflow-worker:latest
