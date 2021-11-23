@@ -15,9 +15,16 @@
     },
     "logstash": {
         "arch": "amd64",
-        "digest": "22d4404d0079f5a4f7355b8b457e2d9c9b878f72640189a0ae9a085154d9e78c",
+        "digest": "6e0441c439e12e3f54f07fae3ad7cdcab5e47ec2495098b387945659e49c0ebc",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.15.2-0"
+        "version": "7.15.2-1"
+    },
+    "yq": {
+        "arch": "amd64",
+        "digest": "603824903f6b3aa44fed08caeabf517f26e036319e6686c38effb2d61ec63505",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "4.14.2-0"
     }
 }
