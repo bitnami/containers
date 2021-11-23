@@ -16,14 +16,14 @@ RUN install_packages acl ca-certificates curl gzip hostname libasound2-dev libc6
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.14.2-0" --checksum 603824903f6b3aa44fed08caeabf517f26e036319e6686c38effb2d61ec63505
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.13-0" --checksum 9552e53ccd3b0ec85a82c31c26a1462260e28b7c58770a5c53560afb02ec66d9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "elasticsearch" "7.15.2-0" --checksum c085b9bd3fa67636ec8c9e953a8673c7b931383847a5c1b1c322a9f39d9f0616
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "elasticsearch" "7.15.2-1" --checksum abee6caa22db1a953af292bd53860701b465cf8a75510d9be54cc40593f72389
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/elasticsearch/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="7.15.2-debian-10-r9" \
+    BITNAMI_IMAGE_VERSION="7.15.2-debian-10-r10" \
     JAVA_HOME="/opt/bitnami/java" \
     LD_LIBRARY_PATH="/opt/bitnami/elasticsearch/jdk/lib:/opt/bitnami/elasticsearch/jdk/lib/server:$LD_LIBRARY_PATH"
 
