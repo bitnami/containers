@@ -62,11 +62,11 @@ wait_for_db() {
     local db_address
     db_address=$(getent hosts "$db_host" | awk '{ print $1 }')
     local counter=0
-    log "Connecting to mariadb at $db_address"
+    log "Connecting to database at ${db_address}:${db_port}"
     while ! nc -z "$db_address" "$db_port" >/dev/null; do
         counter=$((counter + 1))
         if [ $counter == 30 ]; then
-            log "Error: Couldn't connect to mariadb."
+            log "Error: Couldn't connect to the database"
             exit 1
         fi
         log "Trying to connect to mariadb at $db_address. Attempt $counter."
