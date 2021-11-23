@@ -75,7 +75,6 @@ done
 unset elasticsearch_env_vars
 
 # Paths
-export PATH="/opt/bitnami/elasticsearch/bin:/opt/bitnami/common/bin:$PATH"
 export ELASTICSEARCH_VOLUME_DIR="/bitnami/elasticsearch"
 export ELASTICSEARCH_BASE_DIR="/opt/bitnami/elasticsearch"
 export ELASTICSEARCH_CONF_DIR="${ELASTICSEARCH_BASE_DIR}/config"
@@ -95,6 +94,7 @@ export ELASTICSEARCH_TRUSTSTORE_LOCATION="${ELASTICSEARCH_TRUSTSTORE_LOCATION:-$
 export ELASTICSEARCH_NODE_CERT_LOCATION="${ELASTICSEARCH_NODE_CERT_LOCATION:-${ELASTICSEARCH_CERTS_DIR}/tls.crt}"
 export ELASTICSEARCH_NODE_KEY_LOCATION="${ELASTICSEARCH_NODE_KEY_LOCATION:-${ELASTICSEARCH_CERTS_DIR}/tls.key}"
 export ELASTICSEARCH_CA_CERT_LOCATION="${ELASTICSEARCH_CA_CERT_LOCATION:-${ELASTICSEARCH_CERTS_DIR}/ca.crt}"
+export PATH="${ELASTICSEARCH_BIN_DIR}:${BITNAMI_ROOT_DIR}/common/bin:$PATH"
 
 # System users (when running with a privileged user)
 export ELASTICSEARCH_DAEMON_USER="elasticsearch"
