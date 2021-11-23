@@ -493,13 +493,20 @@ elasticsearch_set_heap_size() {
     # Elasticsearch > 7.10 encourages to customize the heap settings through a file in 'jvm.options.d'
     # Previous versions need to update the 'jvm.options' file
     if [[ "$es_major_version" -ge 7 && "$es_minor_version" -gt 10 ]]; then
+        debug "Setting Xmx and Xms options in heap.options file"
         cat >"${ELASTICSEARCH_CONF_DIR}/jvm.options.d/heap.options" <<EOF
 -Xms${heap_size}
 -Xmx${heap_size}
 EOF
-    else
+    elif [[ -n "$es_major_version" ]]; then
+        # If the version is less than 7.10, set using the legacy approach by updating the 'jvm.options' file
+        debug "Updating Xmx and Xms values in jvm.options file"
         replace_in_file "${ELASTICSEARCH_CONF_DIR}/jvm.options" "-Xmx[0-9]+[mg]+" "-Xmx${heap_size}"
         replace_in_file "${ELASTICSEARCH_CONF_DIR}/jvm.options" "-Xms[0-9]+[mg]+" "-Xms${heap_size}"
+    else
+        # This condition should never happen, as it would only trigger when '--version' fails or prints unknown output
+        error "Could not detect Elasticsearch version"
+        return 1
     fi
 }
 
@@ -769,7 +776,7 @@ elasticsearch_custom_init_scripts() {
 #   version
 #########################
 elasticsearch_get_version() {
-    elasticsearch --version | grep Version: | awk -F "," '{print $1}' | awk -F ":" '{print $2}'
+    ES_JAVA_OPTS="-Xms1m -Xmx10m" elasticsearch --version | grep Version: | awk -F "," '{print $1}' | awk -F ":" '{print $2}'
 }
 
 ########################
