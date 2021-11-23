@@ -11,7 +11,7 @@ set -o pipefail
 . /opt/bitnami/scripts/liblogstash.sh
 
 # Load Logstash environment variables
-eval "$(logstash_env)"
+. /opt/bitnami/scripts/logstash-env.sh
 
 # Ensure Logstash environment variables are valid
 logstash_validate

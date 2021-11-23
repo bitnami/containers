@@ -12,31 +12,27 @@ set -o pipefail
 . /opt/bitnami/scripts/liblogstash.sh
 
 # Load Logstash environment variables
-eval "$(logstash_env)"
+. /opt/bitnami/scripts/logstash-env.sh
+
+declare -a cmd=("logstash")
+
+if is_boolean_yes "$LOGSTASH_EXPOSE_API"; then
+    cmd+=("--http.host" "$LOGSTASH_BIND_ADDRESS" "--http.port" "$LOGSTASH_API_PORT_NUMBER")
+fi
+
+if [[ -n "$LOGSTASH_PIPELINE_CONF_STRING" ]]; then
+    cmd+=("-e" "$LOGSTASH_PIPELINE_CONF_STRING")
+elif ! is_boolean_yes "$LOGSTASH_ENABLE_MULTIPLE_PIPELINES"; then
+    cmd+=("-f" "$LOGSTASH_PIPELINE_CONF_DIR")
+fi
+
+declare -a extra_args=()
+read -r -a extra_args <<< "$LOGSTASH_EXTRA_FLAGS"
+[[ "${#extra_args[@]}" -gt 0 ]] && cmd+=("${extra_args[@]}")
 
 info "** Starting Logstash **"
-
-args=("--path.data" "$LOGSTASH_DATA_DIR")
-
-if [[ -n "$LOGSTASH_CONF_STRING" ]]; then
-    info "Starting logstash using config string"
-    args+=( "-e"  "$LOGSTASH_CONF_STRING" )
-elif is_boolean_yes "$LOGSTASH_ENABLE_MULTIPLE_PIPELINES"; then
-    info "Starting logstash using pipelines file (pipelines.yml)"
-else
-    info "Starting logstash using config file ($LOGSTASH_CONF_FILENAME)"
-    args+=( "-f" "$LOGSTASH_CONF_FILE" )
-fi
-
-if [[ -n "$LOGSTASH_EXTRA_ARGS" ]]; then
-    read -r -a extra_args <<<"$LOGSTASH_EXTRA_ARGS"
-    args+=("${extra_args[@]}")
-fi
-
-is_boolean_yes "$LOGSTASH_EXPOSE_API" && args+=( "--http.host" "0.0.0.0" "--http.port" "$LOGSTASH_API_PORT_NUMBER" )
-
 if am_i_root; then
-    exec gosu "$LOGSTASH_DAEMON_USER" "${LOGSTASH_BIN_DIR}/logstash" "${args[@]}"
+    exec gosu "$LOGSTASH_DAEMON_USER" "${cmd[@]}"
 else
-    exec "${LOGSTASH_BIN_DIR}/logstash" "${args[@]}"
+    exec "${cmd[@]}"
 fi
