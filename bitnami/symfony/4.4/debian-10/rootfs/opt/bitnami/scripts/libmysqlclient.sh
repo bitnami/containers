@@ -462,7 +462,7 @@ mysql_install_db() {
 #   None
 #########################
 mysql_upgrade() {
-    local -a args=("--defaults-file=${DB_CONF_FILE}" "-u" "$DB_ROOT_USER" "--force")
+    local -a args=("--defaults-file=${DB_CONF_FILE}" "-u" "$DB_ROOT_USER")
     local major_version minor_version patch_version
     major_version="$(get_sematic_version "$(mysql_get_version)" 1)"
     minor_version="$(get_sematic_version "$(mysql_get_version)" 2)"
