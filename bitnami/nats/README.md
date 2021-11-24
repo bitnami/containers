@@ -48,13 +48,13 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.6.5`, `2.6.5-debian-10-r1`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/2.6.5-debian-10-r1/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.6.5`, `2.6.5-debian-10-r2`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats/blob/2.6.5-debian-10-r2/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nats GitHub repo](https://github.com/bitnami/bitnami-docker-nats).
 
 ## Prerequisites
 
-To run this application you need [Docker Engine](https://www.docker.com/products/docker-engine) >= `1.10.0`. [Docker Compose](https://www.docker.com/products/docker-compose) is recommended with a version `1.6.0` or later.
+To run this application you need [Docker Engine](https://www.docker.com/products/docker-engine) >= `1.10.0`. [Docker Compose](https://docs.docker.com/compose/) is recommended with a version `1.6.0` or later.
 
 ## Get this image
 
@@ -252,7 +252,7 @@ After that, your custom configuration will be taken into account to start the NA
 
 ### Further documentation
 
-For further documentation, please check [NATS documentation](https://nats.io/documentation/)
+For further documentation, please check [NATS documentation](https://docs.nats.io/)
 
 # Notable Changes
 
