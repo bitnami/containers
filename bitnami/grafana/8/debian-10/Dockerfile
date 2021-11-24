@@ -8,23 +8,20 @@ ENV HOME="/" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip libc6 libfontconfig procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/grafana-8.2.5-0-linux-amd64-debian-10.tar.gz && \
-    echo "01a7e8fae6e943d86a1871049a71c33809150089bd98b75c063173f7fb3b728d  /tmp/bitnami/pkg/cache/grafana-8.2.5-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/grafana-8.2.5-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/grafana-8.2.5-0-linux-amd64-debian-10.tar.gz
+RUN install_packages acl ca-certificates curl gzip libc6 libfontconfig procps tar
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "grafana" "8.2.5-1" --checksum d136943d38c9bcf4ceebb444071609566943d239d0740c4b07e137107d62d76c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
-RUN mkdir -p /opt/bitnami/grafana/data/ /opt/bitnami/grafana/logs/ && chown -R 1001:root /opt/bitnami/grafana/data/ /opt/bitnami/grafana/logs/ && chmod g+rwX /opt/bitnami/grafana/data/ /opt/bitnami/grafana/logs/
-RUN mv /opt/bitnami/grafana/conf/sample.ini /opt/bitnami/grafana/conf/grafana.ini
 
 COPY rootfs /
-RUN /grafana-plugins.sh
+RUN /opt/bitnami/scripts/grafana/postunpack.sh
 ENV BITNAMI_APP_NAME="grafana" \
-    BITNAMI_IMAGE_VERSION="8.2.5-debian-10-r5" \
-    PATH="/opt/bitnami/grafana/bin:$PATH"
+    BITNAMI_IMAGE_VERSION="8.2.5-debian-10-r6" \
+    PATH="/opt/bitnami/grafana/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 3000
 
 WORKDIR /opt/bitnami/grafana
 USER 1001
-ENTRYPOINT [ "/run.sh" ]
+ENTRYPOINT [ "/opt/bitnami/scripts/grafana/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/grafana/run.sh" ]
