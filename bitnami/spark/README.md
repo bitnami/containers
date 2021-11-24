@@ -1,10 +1,10 @@
-# Spark packaged by Bitnami
+# Apache Spark packaged by Bitnami
 
-## What is Spark?
+## What is Apache Spark?
 
 > Apache Spark is a high-performance engine for large-scale computing tasks, such as data processing, machine learning and real-time data streaming. It includes APIs for Java, Python, Scala and R.
 
-[Overview of Spark](https://spark.apache.org/)
+[Overview of Apache Spark](https://spark.apache.org/)
 
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
@@ -30,9 +30,9 @@ You can find the available configuration options in the [Environment Variables](
 
 > This [CVE scan report](https://quay.io/repository/bitnami/spark?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-## How to deploy Spark in Kubernetes?
+## How to deploy Apache Spark in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Spark Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/spark).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Apache Spark Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/spark).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
@@ -45,13 +45,13 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.2.0`, `3.2.0-debian-10-r27`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spark/blob/3.2.0-debian-10-r27/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.2.0`, `3.2.0-debian-10-r28`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spark/blob/3.2.0-debian-10-r28/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/spark GitHub repo](https://github.com/bitnami/bitnami-docker-spark).
 
 ## Get this image
 
-The recommended way to get the Bitnami Spark Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/spark).
+The recommended way to get the Bitnami Apache Spark Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/spark).
 
 ```console
 $ docker pull bitnami/spark:latest
@@ -98,7 +98,7 @@ $ docker run -d --name spark \
 
 Available variables:
 
-* SPARK_MODE: Cluster mode starting Spark. Valid values: *master*, *worker*. Default: **master**
+* SPARK_MODE: Cluster mode starting Apache Spark. Valid values: *master*, *worker*. Default: **master**
 * SPARK_MASTER_URL: Url where the worker can find the master. Only needed when spark mode is *worker*. Default: **spark://spark-master:7077**
 * SPARK_RPC_AUTHENTICATION_ENABLED: Enable RPC authentication. Default: **no**
 * SPARK_RPC_AUTHENTICATION_SECRET: The secret key used for RPC authentication. No defaults.
@@ -112,15 +112,15 @@ Available variables:
 * SPARK_SSL_TRUSTSTORE_FILE: Location of the key store. Default: **/opt/bitnami/spark/conf/certs/spark-truststore.jks**.
 * SPARK_SSL_NEED_CLIENT_AUTH: Whether to require client authentication. Default: **yes**
 * SPARK_SSL_PROTOCOL: TLS protocol to use. Default: **TLSv1.2**
-* SPARK_DAEMON_USER: Spark system user when the container is started as root. Default: **spark**
-* SPARK_DAEMON_GROUP: Spark system group when the container is started as root. Default: **spark**
+* SPARK_DAEMON_USER: Apache Spark system user when the container is started as root. Default: **spark**
+* SPARK_DAEMON_GROUP: Apache Spark system group when the container is started as root. Default: **spark**
 
-More environment variables natively supported by Spark can be found [at the official documentation](https://spark.apache.org/docs/latest/spark-standalone.html#cluster-launch-scripts).
+More environment variables natively supported by Apache Spark can be found [at the official documentation](https://spark.apache.org/docs/latest/spark-standalone.html#cluster-launch-scripts).
 For example, you could still use `SPARK_WORKER_CORES` or `SPARK_WORKER_MEMORY` to configure the number of cores and the amount of memory to be used by a worker machine.
 
 ### Security
 
-The Bitnani Spark docker image supports enabling RPC authentication, RPC encryption and local storage encryption easily using the following env vars in all the nodes of the cluster.
+The Bitnani Apache Spark docker image supports enabling RPC authentication, RPC encryption and local storage encryption easily using the following env vars in all the nodes of the cluster.
 
 ```diff
 + SPARK_RPC_AUTHENTICATION_ENABLED=yes
@@ -150,11 +150,11 @@ Additionally, SSL configuration can be easily activated following the next steps
 
 2. You need to mount your spark keystore and truststore files to `/opt/bitnami/spark/conf/certs`. Please note they should be called `spark-keystore.jks` and `spark-truststore.jks` and they should be in JKS format.
 
-### Setting up a Spark Cluster
+### Setting up a Apache Spark Cluster
 
-A Spark cluster can easily be setup with the default docker-compose.yml file from the root of this repo. The docker-compose includes two different services, `spark-master` and `spark-worker.`
+A Apache Spark cluster can easily be setup with the default docker-compose.yml file from the root of this repo. The docker-compose includes two different services, `spark-master` and `spark-worker.`
 
-By default, when you deploy the docker-compose file you will get a Spark cluster with 1 master and 1 worker.
+By default, when you deploy the docker-compose file you will get a Apache Spark cluster with 1 master and 1 worker.
 
 If you want N workers, all you need to do is start the docker-compose deployment with the following command:
 
@@ -196,7 +196,7 @@ RUN curl https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.11.7
 
 In a similar way that in the previous section, you may want to use a different version of Hadoop jars.
 
-Go to https://spark.apache.org/downloads.html and copy the download url bundling the Hadoop version you want and matching the Spark version of the container. Extend the Bitnami container image as below:
+Go to https://spark.apache.org/downloads.html and copy the download url bundling the Hadoop version you want and matching the Apache Spark version of the container. Extend the Bitnami container image as below:
 
 ```Dockerfile
 FROM bitnami/spark:3.0.0
@@ -218,7 +218,7 @@ $ pyspark
 
 ## Logging
 
-The Bitnami Spark Docker image sends the container logs to the `stdout`. To view the logs:
+The Bitnami Apache Spark Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```console
 $ docker logs spark
