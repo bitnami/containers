@@ -49,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.21`, `1.21-debian-10`, `1.21.4`, `1.21.4-debian-10-r20`, `latest` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.21.4-debian-10-r20/1.21/debian-10/Dockerfile)
-* [`1.20`, `1.20-debian-10`, `1.20.2`, `1.20.2-debian-10-r6` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.20.2-debian-10-r6/1.20/debian-10/Dockerfile)
+* [`1.20`, `1.20-debian-10`, `1.20.2`, `1.20.2-debian-10-r7` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.20.2-debian-10-r7/1.20/debian-10/Dockerfile)
 
 ## Get this image
 
@@ -114,7 +114,7 @@ You can also manually specify the ports you want forwarded from your host to the
 $ docker run -p 9000:8080 bitnami/nginx:latest
 ```
 
-Access your web server in the browser by navigating to [http://localhost:9000](http://localhost:9000/).
+Access your web server in the browser by navigating to `http://localhost:9000`.
 
 ## Configuration
 
