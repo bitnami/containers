@@ -37,7 +37,7 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8`, `8-debian-10`, `8.6.8`, `8.6.8-debian-10-r0`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/8.6.8-debian-10-r0/8/debian-10/Dockerfile)
+* [`8`, `8-debian-10`, `8.6.8`, `8.6.8-debian-10-r1`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/8.6.8-debian-10-r1/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/laravel GitHub repo](https://github.com/bitnami/bitnami-docker-laravel).
 
@@ -78,11 +78,11 @@ Among other things, the above command creates a container service, named `myapp`
 >
 > If the application directory contained the source code of an existing Laravel application, the Bitnami Laravel Development Container would load the existing application instead of bootstrapping a new one.
 
-After the artisan application server has been launched in the `myapp` service, visit http://localhost:3000 in your favorite web browser and you'll be greeted by the default Laravel welcome page.
+After the artisan application server has been launched in the `myapp` service, visit `http://localhost:3000` in your favorite web browser and you'll be greeted by the default Laravel welcome page.
 
 > **Note**
 >
-> If no application available at http://localhost:3000 and you're running Docker on Windows, you might need to uncomment `privileged` setting for `myapp` container. Later, re-launch the Laravel application development environment as stated before.
+> If no application available at `http://localhost:3000` and you're running Docker on Windows, you might need to uncomment `privileged` setting for `myapp` container. Later, re-launch the Laravel application development environment as stated before.
 
 In addition to the Laravel Development Container, the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/bitnami-docker-laravel/master/docker-compose.yml) file also configures a MariaDB service to serve as the database backend of your Laravel application.
 
@@ -136,7 +136,7 @@ We'd love for you to contribute to this container. You can request new features 
 
 We want to thank the following individuals for reporting vulnerabilities responsibly and helping improve the security of this container.
 
-- [LEI WANG](`https://github.com/ssst0n3): [APP_KEY fixed into the docker image](https://github.com/bitnami/bitnami-docker-laravel/issues/139)
+- [LEI WANG](https://github.com/ssst0n3): [APP_KEY fixed into the docker image](https://github.com/bitnami/bitnami-docker-laravel/issues/139)
 
 ## Issues
 
