@@ -47,7 +47,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.15.2`, `7.15.2-debian-10-r12`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/7.15.2-debian-10-r12/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.15.2`, `7.15.2-debian-10-r13`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/7.15.2-debian-10-r13/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/logstash GitHub repo](https://github.com/bitnami/bitnami-docker-logstash).
 
@@ -220,7 +220,7 @@ $ docker run --name logstash bitnami/logstash:latest
 
 ## Notable Changes
 
-### 7.15.2-debian-10-r8
+### 7.15.2-debian-10-r12
 
 - Pipeline configuration files (i.e. `default_config.conf`) are being added into the `/opt/bitnami/logstash/pipeline` directory, instead of `/opt/bitnami/logstash/config`. Subsequently, `LOGSTASH_CONF_FILENAME` was renamed to `LOGSTASH_PIPELINE_CONF_FILENAME`, and `LOGSTASH_CONF_STRING` was renamed to `LOGSTASH_PIPELINE_CONF_STRING`.
 
