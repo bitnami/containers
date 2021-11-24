@@ -35,13 +35,13 @@ You can find the default credentials and available configuration options in the 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.13.0`, `7.13.0-debian-10-r354`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phppgadmin/blob/7.13.0-debian-10-r354/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.13.0`, `7.13.0-debian-10-r355`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phppgadmin/blob/7.13.0-debian-10-r355/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phppgadmin GitHub repo](https://github.com/bitnami/bitnami-docker-phppgadmin).
 
 ## Prerequisites
 
-To run this application you need [Docker Engine](https://www.docker.com/products/docker-engine) >= `1.10.0`. [Docker Compose](https://www.docker.com/products/docker-compose) is recommended with a version `1.6.0` or later.
+To run this application you need [Docker Engine](https://www.docker.com/products/docker-engine) >= `1.10.0`. [Docker Compose](https://docs.docker.com/compose/) is recommended with a version `1.6.0` or later.
 
 ## How to use this image
 
@@ -84,7 +84,7 @@ $ docker run -d --name phppgadmin -p 80:8080 -p 443:8443 \
   bitnami/phppgadmin:latest
 ```
 
-Access your application at http://your-ip/
+Access your application at `http://your-ip/`
 
 ### Persisting your application
 
