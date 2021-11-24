@@ -53,7 +53,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10.6`, `10.6-debian-10`, `10.6.5`, `10.6.5-debian-10-r9`, `latest` (10.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.6.5-debian-10-r9/10.6/debian-10/Dockerfile)
+* [`10.6`, `10.6-debian-10`, `10.6.5`, `10.6.5-debian-10-r10`, `latest` (10.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.6.5-debian-10-r10/10.6/debian-10/Dockerfile)
 * [`10.5`, `10.5-debian-10`, `10.5.13`, `10.5.13-debian-10-r10` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.5.13-debian-10-r10/10.5/debian-10/Dockerfile)
 * [`10.4`, `10.4-debian-10`, `10.4.22`, `10.4.22-debian-10-r10` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.22-debian-10-r10/10.4/debian-10/Dockerfile)
 * [`10.3`, `10.3-debian-10`, `10.3.32`, `10.3.32-debian-10-r10` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.32-debian-10-r10/10.3/debian-10/Dockerfile)
@@ -681,6 +681,10 @@ $ docker-compose up mariadb
 - [Create An EMP Development Environment With Bitnami Containers](https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/)
 
 ## Notable Changes
+
+### 10.2.41-debian-10-r11, 10.3.32-debian-10-r11, 10.4.22-debian-10-r11, 10.5.13-debian-10-r10 and 10.6.5-debian-10-r10
+
+- The command `mysql_upgrade` no longer includes the flag `--force`. Nonetheless, it can be enabled by using the [mysql_upgrade] option group in the MariaDB configuration.
 
 ### 10.4.13-debian-10-r12, 10.3.23-debian-10-r14, 10.2.32-debian-10-r14 and 10.1.45-debian-10-r15
 
