@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`17-prod`, `17-prod-debian-10`, `17.1.0-prod`, `17.1.0-prod-debian-10-r13` (17-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/17.1.0-prod-debian-10-r13/17-prod/debian-10/Dockerfile)
-* [`17`, `17-debian-10`, `17.1.0`, `17.1.0-debian-10-r13`, `latest` (17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/17.1.0-debian-10-r13/17/debian-10/Dockerfile)
+* [`17`, `17-debian-10`, `17.1.0`, `17.1.0-debian-10-r14`, `latest` (17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/17.1.0-debian-10-r14/17/debian-10/Dockerfile)
 * [`16-prod`, `16-prod-debian-10`, `16.13.0-prod`, `16.13.0-prod-debian-10-r27` (16-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/16.13.0-prod-debian-10-r27/16-prod/debian-10/Dockerfile)
 * [`16`, `16-debian-10`, `16.13.0`, `16.13.0-debian-10-r20` (16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/16.13.0-debian-10-r20/16/debian-10/Dockerfile)
 * [`14-prod`, `14-prod-debian-10`, `14.18.1-prod`, `14.18.1-prod-debian-10-r41` (14-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/14.18.1-prod-debian-10-r41/14-prod/debian-10/Dockerfile)
@@ -63,7 +63,7 @@ They don't include development dependencies, so they are commonly used in multi-
 
 The resultant containers only contain the necessary pieces of software to run the application. Therefore, they are smaller and safer.
 
-Learn how to use multi-stage builds to build your production application container in the [example](/example) directory
+Learn how to use multi-stage builds to build your production application container in the [example](https://github.com/bitnami/bitnami-docker-node/tree/master/example) directory
 
 ## Get this image
 
@@ -220,7 +220,7 @@ You can also specify the port you want forwarded from your host to the container
 $ docker run -it --name node -p 8080:3000 -v /path/to/app:/app bitnami/node node index.js
 ```
 
-Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/).
+Access your web server in the browser by navigating to `http://localhost:8080`.
 
 ## Connecting to other containers
 
