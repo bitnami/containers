@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.0.3-8`, `3.0.3-8-debian-10-r84`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-8-debian-10-r84/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.0.3-8`, `3.0.3-8-debian-10-r85`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-8-debian-10-r85/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/opencart GitHub repo](https://github.com/bitnami/bitnami-docker-opencart).
 
@@ -119,7 +119,7 @@ $ docker run -d --name opencart \
   bitnami/opencart:latest
 ```
 
-Then you can access the OpenCart storefront at *http://your-ip/*. To access the administration area, login to *http://your-ip/admin*.
+Then you can access the OpenCart storefront at `http://your-ip/`. To access the administration area, login to `http://your-ip/admin`.
 
 *Note:* If you want to access your application from a public IP or hostname you need to configure OpenCart for it. You can handle it adjusting the configuration of the instance by setting the environment variable `OPENCART_HOST` to your public IP or hostname.
 
