@@ -14,8 +14,6 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 $ docker run --name grafana-image-renderer bitnami/grafana-image-renderer:latest
 ```
 
-You can find the available configuration options in the [Environment Variables](#environment-variables) section.
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -42,7 +40,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.3.0`, `3.3.0-debian-10-r5`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-image-renderer/blob/3.3.0-debian-10-r5/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.3.0`, `3.3.0-debian-10-r6`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-image-renderer/blob/3.3.0-debian-10-r6/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana-image-renderer GitHub repo](https://github.com/bitnami/bitnami-docker-grafana-image-renderer).
 
@@ -153,12 +151,6 @@ $ docker-compose restart grafana-image-renderer
 ```
 
 After that, your configuration will be taken into account in the server's behaviour.
-
-### Environment variables
-
-Certain settings can be override by using environment variables as it's detailed [plugin documentation site](https://github.com/grafana/grafana-image-renderer/blob/master/docs/remote_rendering_using_docker.md#environment-variables).
-
-These environment variables take precedence over the configuration file.
 
 ## Logging
 
