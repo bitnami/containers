@@ -40,7 +40,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.2.1`, `3.2.1-debian-10-r42`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/3.2.1-debian-10-r42/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.2.1`, `3.2.1-debian-10-r43`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/3.2.1-debian-10-r43/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse-dashboard GitHub repo](https://github.com/bitnami/bitnami-docker-parse-dashboard).
 
@@ -89,7 +89,7 @@ If you want to run the application manually instead of using docker-compose, the
   $ docker run -d -p 80:4040 --name parse-dashboard --net=parse_dashboard-tier bitnami/parse-dashboard
   ```
 
-Then you can access your application at http://your-ip/
+Then you can access your application at `http://your-ip/`
 
 ### Persisting your application
 
