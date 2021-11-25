@@ -101,7 +101,6 @@ airflow_initialize() {
         info "Configuration file found, loading configuration"
     fi
 
-
     # Check if Airflow has already been initialized and persisted in a previous run
     local -r app_name="airflow"
     if ! is_app_initialized "$app_name"; then
@@ -154,15 +153,15 @@ airflow_execute_command() {
     local flags="${3:-}"
 
     # The commands can contain more than one argument. Convert them to an array
-    IFS=' ' read -ra oldCommand <<< "$oldCommand"
-    IFS=' ' read -ra newCommand <<< "$newCommand"
+    IFS=' ' read -ra oldCommand <<<"$oldCommand"
+    IFS=' ' read -ra newCommand <<<"$newCommand"
 
     # Execute commands depending on the version
     command=("${oldCommand[@]}")
     [[ "${BITNAMI_IMAGE_VERSION:0:1}" == "2" ]] && command=("${newCommand[@]}")
 
     # Add flags if provided
-    [[ -n "$flags" ]] && IFS=' ' read -ra flags <<< "$flags" && command+=("${flags[@]}")
+    [[ -n "$flags" ]] && IFS=' ' read -ra flags <<<"$flags" && command+=("${flags[@]}")
 
     debug "Executing ${AIRFLOW_BIN_DIR}/airflow ${command[*]}"
     debug_execute "${AIRFLOW_BIN_DIR}/airflow" "${command[@]}"
@@ -207,7 +206,7 @@ airflow_generate_config() {
 
     # Configure Airflow executor
     airflow_conf_set "core" "executor" "$AIRFLOW_EXECUTOR"
-    [[ "$AIRFLOW_EXECUTOR" == "CeleryExecutor" || "$AIRFLOW_EXECUTOR" == "CeleryKubernetesExecutor"  ]] && airflow_configure_celery_executor
+    [[ "$AIRFLOW_EXECUTOR" == "CeleryExecutor" || "$AIRFLOW_EXECUTOR" == "CeleryKubernetesExecutor" ]] && airflow_configure_celery_executor
     true # Avoid the function to fail due to the check above
 }
 
@@ -261,8 +260,9 @@ airflow_configure_webserver_authentication() {
 
     if is_boolean_yes "$AIRFLOW_LDAP_ENABLE"; then
         info "Enabling LDAP authentication"
-        replace_in_file "$AIRFLOW_WEBSERVER_CONF_FILE" "# from flask_appbuilder.security.manager import AUTH_LDAP" "from flask_appbuilder.security.manager import AUTH_LDAP"
-        replace_in_file "$AIRFLOW_WEBSERVER_CONF_FILE" "from flask_appbuilder.security.manager import AUTH_DB" "# from flask_appbuilder.security.manager import AUTH_DB"
+        # Based on PR https://github.com/apache/airflow/pull/16647
+        replace_in_file "$AIRFLOW_WEBSERVER_CONF_FILE" "# from airflow.www.fab_security.manager import AUTH_LDAP" "from airflow.www.fab_security.manager import AUTH_LDAP"
+        replace_in_file "$AIRFLOW_WEBSERVER_CONF_FILE" "from airflow.www.fab_security.manager import AUTH_DB" "# from airflow.www.fab_security.manager import AUTH_DB"
 
         # webserver config
         airflow_webserver_conf_set "AUTH_TYPE" "AUTH_LDAP"
@@ -357,11 +357,11 @@ airflow_encode_url() {
         LC_COLLATE=C
 
         local length="${#1}"
-        for (( i = 0; i < length; i++ )); do
+        for ((i = 0; i < length; i++)); do
             local c="${1:$i:1}"
             case $c in
-                [a-zA-Z0-9.~_-]) printf '%s' "$c" ;;
-                *) printf '%%%02X' "'$c" ;;
+            [a-zA-Z0-9.~_-]) printf '%s' "$c" ;;
+            *) printf '%%%02X' "'$c" ;;
             esac
         done
 
