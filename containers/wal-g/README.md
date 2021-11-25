@@ -4,7 +4,7 @@
 
 > WAL-G is an archival and restoration tool for PostgreSQL databases. It allows parallel backup and restore operations using different compression formats. It supports AWS and GCE storage backends. 
 
-[Overview of WAL-G](https://wal-g.org/)
+[Overview of WAL-G](https://github.com/wal-g/wal-g)
 
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
@@ -31,7 +31,7 @@ $ docker run --name wal-g bitnami/wal-g:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.1.0`, `1.1.0-debian-10-r100` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wal-g/blob/1.1.0-debian-10-r100/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.1.0`, `1.1.0-debian-10-r101` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wal-g/blob/1.1.0-debian-10-r101/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wal-g GitHub repo](https://github.com/bitnami/bitnami-docker-wal-g).
 
