@@ -566,11 +566,28 @@ rabbitmq_create_erlang_cookie() {
 #   Boolean
 #########################
 is_rabbitmq_running() {
+    if [[ -z "${RABBITMQ_PID:-}" && -n "${RABBITMQ_PID_FILE:-}" ]]; then
+        RABBITMQ_PID="$(get_pid_from_file "$RABBITMQ_PID_FILE")"
+    fi
     if [[ -z "${RABBITMQ_PID:-}" ]]; then
         false
     else
         is_service_running "$RABBITMQ_PID"
     fi
+}
+
+########################
+# Checks if RabbitMQ is not running
+# Globals:
+#   RABBITMQ_PID
+#   RABBITMQ_BIN_DIR
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_rabbitmq_not_running() {
+    ! is_rabbitmq_running
 }
 
 ########################

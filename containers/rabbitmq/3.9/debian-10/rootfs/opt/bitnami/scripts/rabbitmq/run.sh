@@ -16,6 +16,7 @@ set -o pipefail
 . /opt/bitnami/scripts/rabbitmq-env.sh
 
 info "** Starting RabbitMQ **"
+cd "$RABBITMQ_BASE_DIR"
 if am_i_root; then
     exec gosu "$RABBITMQ_DAEMON_USER" "${RABBITMQ_BIN_DIR}/rabbitmq-server"
 else
