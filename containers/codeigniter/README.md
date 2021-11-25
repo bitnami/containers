@@ -45,7 +45,7 @@ The Bitnami CodeIgniter Development Container has been carefully engineered to p
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.1.5`, `4.1.5-debian-10-r5`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/4.1.5-debian-10-r5/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.1.5`, `4.1.5-debian-10-r6`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/4.1.5-debian-10-r6/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codeigniter GitHub repo](https://github.com/bitnami/bitnami-docker-codeigniter).
 
@@ -75,7 +75,7 @@ $ docker-compose up
 
 The above command creates a container service for CodeIgniter development and bootstraps a new CodeIgniter application, named `myapp` in working directory. You can use your favorite IDE for developing the application.
 
-After the builtin PHP application server has been launched, visit http://localhost:8000 in your favorite web browser and you'll be greeted the CodeIgniter welcome page.
+After the builtin PHP application server has been launched, visit `http://localhost:8000` in your favorite web browser and you'll be greeted the CodeIgniter welcome page.
 
 ## Executing commands
 
