@@ -40,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`7`, `7-debian-10`, `7.15.2`, `7.15.2-debian-10-r7`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/7.15.2-debian-10-r7/7/debian-10/Dockerfile)
 * [`7.10.2`, `7.10.2-debian-10`, `7.10.2-debian-10-r275` (7.10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/7.10.2-debian-10-r275/7.10.2/debian-10/Dockerfile)
-* [`6`, `6-debian-10`, `6.8.20`, `6.8.20-debian-10-r38` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.8.20-debian-10-r38/6/debian-10/Dockerfile)
+* [`6`, `6-debian-10`, `6.8.20`, `6.8.20-debian-10-r39` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.8.20-debian-10-r39/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kibana GitHub repo](https://github.com/bitnami/bitnami-docker-kibana).
 
@@ -99,7 +99,7 @@ If you want to run the application manually instead of using docker-compose, the
     bitnami/kibana
   ```
 
-Then you can access your application at http://your-ip:5601/
+Then you can access your application at `http://your-ip:5601/`
 
 ## Persisting your application
 
