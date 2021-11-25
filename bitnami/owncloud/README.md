@@ -33,7 +33,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10`, `10-debian-10`, `10.8.0`, `10.8.0-debian-10-r104`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.8.0-debian-10-r104/10/debian-10/Dockerfile)
+* [`10`, `10-debian-10`, `10.8.0`, `10.8.0-debian-10-r106`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.8.0-debian-10-r106/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/owncloud GitHub repo](https://github.com/bitnami/bitnami-docker-owncloud).
 
@@ -109,7 +109,7 @@ $ docker run -d --name owncloud \
   bitnami/owncloud:latest
 ```
 
-Access your application at *http://your-ip/*
+Access your application at `http://your-ip/`
 
 ## Persisting your application
 
