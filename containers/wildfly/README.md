@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`25`, `25-debian-10`, `25.0.1`, `25.0.1-debian-10-r18`, `latest` (25/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/25.0.1-debian-10-r18/25/debian-10/Dockerfile)
-* [`24`, `24-debian-10`, `24.0.1`, `24.0.1-debian-10-r117` (24/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/24.0.1-debian-10-r117/24/debian-10/Dockerfile)
+* [`24`, `24-debian-10`, `24.0.1`, `24.0.1-debian-10-r118` (24/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/24.0.1-debian-10-r118/24/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wildfly GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
 
@@ -133,7 +133,7 @@ You can also manually specify the ports you want forwarded from your host to the
 $ docker run -p 8080:8080 -p 9990:9990 bitnami/wildfly:latest
 ```
 
-Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/) to access the application server and [http://localhost:9990/console](http://localhost:9990/console/) to access the management console.
+Access your web server in the browser by navigating to `http://localhost:8080` to access the application server and `http://localhost:9990/console` to access the management console.
 
 > NOTE: the management console is configured by default to listen exclusively in the localhost interface for security reasons. To allow access from different hosts, you can use the `WILDFLY_MANAGEMENT_LISTEN_ADDRESS` environment variable to set a different listen address (this is not recommended for production environments).
 
