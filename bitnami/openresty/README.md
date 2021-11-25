@@ -40,7 +40,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.19`, `1.19-debian-10`, `1.19.9-1`, `1.19.9-1-debian-10-r106`, `latest` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openresty/blob/1.19.9-1-debian-10-r106/1.19/debian-10/Dockerfile)
+* [`1.19`, `1.19-debian-10`, `1.19.9-1`, `1.19.9-1-debian-10-r107`, `latest` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openresty/blob/1.19.9-1-debian-10-r107/1.19/debian-10/Dockerfile)
 
 ## Get this image
 
@@ -104,7 +104,7 @@ You can also manually specify the ports you want forwarded from your host to the
 $ docker run -p 9000:8080 bitnami/openresty:latest
 ```
 
-Access your web server in the browser by navigating to [http://localhost:9000](http://localhost:9000/).
+Access your web server in the browser by navigating to `http://localhost:9000`.
 
 ## Configuration
 
