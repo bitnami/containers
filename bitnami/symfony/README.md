@@ -37,7 +37,7 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`5.3`, `5.3-debian-10`, `5.3.12`, `5.3.12-debian-10-r0` (5.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/5.3.12-debian-10-r0/5.3/debian-10/Dockerfile)
+* [`5.3`, `5.3-debian-10`, `5.3.12`, `5.3.12-debian-10-r1` (5.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/5.3.12-debian-10-r1/5.3/debian-10/Dockerfile)
 * [`4.4`, `4.4-debian-10`, `4.4.35`, `4.4.35-debian-10-r0` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/4.4.35-debian-10-r0/4.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/symfony GitHub repo](https://github.com/bitnami/bitnami-docker-symfony).
@@ -105,7 +105,7 @@ $ docker-compose up
 
 The above command creates a container service for Symfony development and bootstraps a new Symfony application, named `myapp` in working directory. You can use your favorite IDE for developing the application.
 
-After the built-in PHP application server has been started, visit http://localhost:8000 in your favorite web browser and you'll be greeted by the Symfony welcome page.
+After the built-in PHP application server has been started, visit `http://localhost:8000` in your favorite web browser and you'll be greeted by the Symfony welcome page.
 
 ## Executing commands
 
