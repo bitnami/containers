@@ -38,12 +38,12 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.0-prod`, `3.0-prod-debian-10`, `3.0.3-prod`, `3.0.3-prod-debian-10-r0` (3.0-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/3.0.3-prod-debian-10-r0/3.0-prod/debian-10/Dockerfile)
-* [`3.0`, `3.0-debian-10`, `3.0.3`, `3.0.3-debian-10-r0` (3.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/3.0.3-debian-10-r0/3.0/debian-10/Dockerfile)
-* [`2.7-prod`, `2.7-prod-debian-10`, `2.7.5-prod`, `2.7.5-prod-debian-10-r0` (2.7-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.7.5-prod-debian-10-r0/2.7-prod/debian-10/Dockerfile)
-* [`2.7`, `2.7-debian-10`, `2.7.5`, `2.7.5-debian-10-r0` (2.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.7.5-debian-10-r0/2.7/debian-10/Dockerfile)
-* [`2.6-prod`, `2.6-prod-debian-10`, `2.6.9-prod`, `2.6.9-prod-debian-10-r0` (2.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.9-prod-debian-10-r0/2.6-prod/debian-10/Dockerfile)
-* [`2.6`, `2.6-debian-10`, `2.6.9`, `2.6.9-debian-10-r0`, `latest` (2.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.9-debian-10-r0/2.6/debian-10/Dockerfile)
+* [`3.0-prod`, `3.0-prod-debian-10`, `3.0.3-prod`, `3.0.3-prod-debian-10-r3` (3.0-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/3.0.3-prod-debian-10-r3/3.0-prod/debian-10/Dockerfile)
+* [`3.0`, `3.0-debian-10`, `3.0.3`, `3.0.3-debian-10-r3` (3.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/3.0.3-debian-10-r3/3.0/debian-10/Dockerfile)
+* [`2.7-prod`, `2.7-prod-debian-10`, `2.7.5-prod`, `2.7.5-prod-debian-10-r2` (2.7-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.7.5-prod-debian-10-r2/2.7-prod/debian-10/Dockerfile)
+* [`2.7`, `2.7-debian-10`, `2.7.5`, `2.7.5-debian-10-r2` (2.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.7.5-debian-10-r2/2.7/debian-10/Dockerfile)
+* [`2.6-prod`, `2.6-prod-debian-10`, `2.6.9-prod`, `2.6.9-prod-debian-10-r3` (2.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.9-prod-debian-10-r3/2.6-prod/debian-10/Dockerfile)
+* [`2.6`, `2.6-debian-10`, `2.6.9`, `2.6.9-debian-10-r2`, `latest` (2.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.9-debian-10-r2/2.6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ruby GitHub repo](https://github.com/bitnami/bitnami-docker-ruby).
 
@@ -63,7 +63,7 @@ They don't include development dependencies, so they are commonly used in multi-
 
 The resultant containers only contain the necessary pieces of software to run the application. Therefore, they are smaller and safer.
 
-Learn how to use multi-stage builds to build your production application container in the [example](/example) directory
+Learn how to use multi-stage builds to build your production application container in the [example](https://github.com/bitnami/bitnami-docker-ruby/tree/master/example) directory
 
 ## Get this image
 
@@ -169,7 +169,7 @@ You can also manually specify the port you want forwarded from your host to the 
 $ docker run -it --name ruby -p 8080:3000 bitnami/ruby:latest
 ```
 
-Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/).
+Access your web server in the browser by navigating to `http://localhost:8080`.
 
 
 ## Connecting to other containers
