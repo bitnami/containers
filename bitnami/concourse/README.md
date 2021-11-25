@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.6.0`, `7.6.0-debian-10-r23`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-concourse/blob/7.6.0-debian-10-r23/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.6.0`, `7.6.0-debian-10-r24`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-concourse/blob/7.6.0-debian-10-r24/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/concourse GitHub repo](https://github.com/bitnami/bitnami-docker-concourse).
 
@@ -117,7 +117,7 @@ We can launch another container using the same flag (`--network NETWORK`) in the
 
 ## Configuration
 
-Find how to configure Contour in its [official documentation](https://projectconcourse.io/docs/main/).
+Find how to configure Concourse in its [official documentation](https://concourse-ci.org//docs.html).
 
 ## Logging
 
