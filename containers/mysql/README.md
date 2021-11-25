@@ -50,7 +50,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8.0`, `8.0-debian-10`, `8.0.27`, `8.0.27-debian-10-r34`, `latest` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.27-debian-10-r34/8.0/debian-10/Dockerfile)
+* [`8.0`, `8.0-debian-10`, `8.0.27`, `8.0.27-debian-10-r35`, `latest` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.27-debian-10-r35/8.0/debian-10/Dockerfile)
 * [`5.7`, `5.7-debian-10`, `5.7.36`, `5.7.36-debian-10-r35` (5.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.36-debian-10-r35/5.7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mysql GitHub repo](https://github.com/bitnami/bitnami-docker-mysql).
@@ -294,7 +294,7 @@ services:
 
 ### Setting up a replication cluster
 
-A **zero downtime** MySQL master-slave [replication](https://dev.mysql.com/doc/refman/5.7/en/server-option-variable-reference.html) cluster can easily be setup with the Bitnami MySQL Docker image using the following environment variables:
+A **zero downtime** MySQL master-slave [replication](https://dev.mysql.com/doc/refman/8.0/en/server-options.html) cluster can easily be setup with the Bitnami MySQL Docker image using the following environment variables:
 
  - `MYSQL_REPLICATION_MODE`: The replication mode. Possible values `master`/`slave`. No defaults.
  - `MYSQL_REPLICATION_USER`: The replication user created on the master on first run. No defaults.
@@ -425,7 +425,7 @@ services:
 
 After that, your changes will be taken into account in the server's behaviour.
 
-Refer to the [MySQL server option and variable reference guide](https://dev.mysql.com/doc/refman/5.7/en/mysqld-option-tables.html) for the complete list of configuration options.
+Refer to the [MySQL server option and variable reference guide](https://dev.mysql.com/doc/refman/8.0/en/server-options.html) for the complete list of configuration options.
 
 #### Overwrite the main Configuration file
 
@@ -585,6 +585,10 @@ $ docker-compose up mysql
 ```
 
 ## Notable Changes
+
+### 5.7.36-debian-10-r36  and 8.0.27-debian-10-r35
+
+- The command `mysql_upgrade` no longer includes the flag `--force`. Nonetheless, it can be enabled by using the [mysql_upgrade] option group in the MariaDB configuration.
 
 ### 5.7.30-debian-10-r32 and 8.0.20-debian-10-r29
 
