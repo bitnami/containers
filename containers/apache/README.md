@@ -49,7 +49,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2.4`, `2.4-debian-10`, `2.4.51`, `2.4.51-debian-10-r47`, `latest` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.51-debian-10-r47/2.4/debian-10/Dockerfile)
+* [`2.4`, `2.4-debian-10`, `2.4.51`, `2.4.51-debian-10-r48`, `latest` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-apache/blob/2.4.51-debian-10-r48/2.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/apache GitHub repo](https://github.com/bitnami/bitnami-docker-apache).
 
@@ -120,7 +120,7 @@ You can also manually specify the ports you want forwarded from your host to the
 $ docker run -p 8080:8080 -p 8443:8443 bitnami/apache:latest
 ```
 
-Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/).
+Access your web server in the browser by navigating to `http://localhost:8080/`.
 
 ## Configuration
 
