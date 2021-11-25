@@ -37,7 +37,7 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.17.1`, `4.17.1-debian-10-r579`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-express/blob/4.17.1-debian-10-r579/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.17.1`, `4.17.1-debian-10-r580`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-express/blob/4.17.1-debian-10-r580/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codiad GitHub repo](https://github.com/bitnami/bitnami-docker-codiad).
 
@@ -78,7 +78,7 @@ Among other things, the above command creates a container service, named `myapp`
 >
 > If the application directory contained the source code of an existing Express application, the Bitnami Express Development Container would load the existing application instead of bootstrapping a new one.
 
-After the Node application server has been launched in the `myapp` service, visit http://localhost:3000 in your favorite web browser and you'll be greeted by the default Express welcome page.
+After the Node application server has been launched in the `myapp` service, visit `http://localhost:3000` in your favorite web browser and you'll be greeted by the default Express welcome page.
 
 In addition to the Express Development Container, the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/bitnami-docker-express/master/docker-compose.yml) file also configures a MongoDB&reg; service to serve as the NoSQL database backend of your Express application.
 
