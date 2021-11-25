@@ -41,7 +41,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`3.10-prod`, `3.10-prod-debian-10`, `3.10.0-prod`, `3.10.0-prod-debian-10-r19` (3.10-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.10.0-prod-debian-10-r19/3.10-prod/debian-10/Dockerfile)
 * [`3.10`, `3.10-debian-10`, `3.10.0`, `3.10.0-debian-10-r19` (3.10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.10.0-debian-10-r19/3.10/debian-10/Dockerfile)
 * [`3.9-prod`, `3.9-prod-debian-10`, `3.9.9-prod`, `3.9.9-prod-debian-10-r7` (3.9-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.9.9-prod-debian-10-r7/3.9-prod/debian-10/Dockerfile)
-* [`3.9`, `3.9-debian-10`, `3.9.9`, `3.9.9-debian-10-r7` (3.9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.9.9-debian-10-r7/3.9/debian-10/Dockerfile)
+* [`3.9`, `3.9-debian-10`, `3.9.9`, `3.9.9-debian-10-r8` (3.9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.9.9-debian-10-r8/3.9/debian-10/Dockerfile)
 * [`3.8-prod`, `3.8-prod-debian-10`, `3.8.12-prod`, `3.8.12-prod-debian-10-r86` (3.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.12-prod-debian-10-r86/3.8-prod/debian-10/Dockerfile)
 * [`3.8`, `3.8-debian-10`, `3.8.12`, `3.8.12-debian-10-r86` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.12-debian-10-r86/3.8/debian-10/Dockerfile)
 * [`3.7-prod`, `3.7-prod-debian-10`, `3.7.12-prod`, `3.7.12-prod-debian-10-r80` (3.7-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.12-prod-debian-10-r80/3.7-prod/debian-10/Dockerfile)
@@ -69,7 +69,7 @@ They don't include development dependencies, so they are commonly used in multi-
 
 The resultant containers only contain the necessary pieces of software to run the application. Therefore, they are smaller and safer.
 
-Learn how to use multi-stage builds to build your production application container in the [example](/example) directory
+Learn how to use multi-stage builds to build your production application container in the [example](https://github.com/bitnami/bitnami-docker-python/tree/master/example) directory
 
 ## Get this image
 
