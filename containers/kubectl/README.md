@@ -35,7 +35,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`1.22`, `1.22-debian-10`, `1.22.4`, `1.22.4-debian-10-r6`, `latest` (1.22/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.22.4-debian-10-r6/1.22/debian-10/Dockerfile)
 * [`1.21`, `1.21-debian-10`, `1.21.7`, `1.21.7-debian-10-r6` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.21.7-debian-10-r6/1.21/debian-10/Dockerfile)
 * [`1.20`, `1.20-debian-10`, `1.20.13`, `1.20.13-debian-10-r6` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.20.13-debian-10-r6/1.20/debian-10/Dockerfile)
-* [`1.19`, `1.19-debian-10`, `1.19.16`, `1.19.16-debian-10-r26` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.19.16-debian-10-r26/1.19/debian-10/Dockerfile)
+* [`1.19`, `1.19-debian-10`, `1.19.16`, `1.19.16-debian-10-r27` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.19.16-debian-10-r27/1.19/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubectl GitHub repo](https://github.com/bitnami/bitnami-docker-kubectl).
 
