@@ -1,10 +1,10 @@
-# Tomcat packaged by Bitnami
+# Apache Tomcat packaged by Bitnami
 
-## What is Tomcat?
+## What is Apache Tomcat?
 
-> Tomcat is an open source web server designed to host and run Java-based web applications. It is a lightweight server that provides good performance for applications running in production environments.
+> Apache Tomcat is an open-source web server designed to host and run Java-based web applications. It is a lightweight server with a good performance for applications running in production environments.
 
-[Overview of Tomcat](http://tomcat.apache.org/)
+[Overview of Apache Tomcat](http://tomcat.apache.org/)
 
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
@@ -29,9 +29,9 @@ You can find the default credentials and available configuration options in the 
 
 > This [CVE scan report](https://quay.io/repository/bitnami/tomcat?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-## How to deploy Apache Tomcat in Kubernetes?
+## How to deploy Apache Apache Tomcat in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Apache Tomcat Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/tomcat).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Apache Apache Tomcat Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/tomcat).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
@@ -46,13 +46,13 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`10`, `10-debian-10`, `10.0.13`, `10.0.13-debian-10-r7` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/10.0.13-debian-10-r7/10/debian-10/Dockerfile)
 * [`9.0`, `9.0-debian-10`, `9.0.55`, `9.0.55-debian-10-r7`, `latest` (9.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.55-debian-10-r7/9.0/debian-10/Dockerfile)
-* [`8.5`, `8.5-debian-10`, `8.5.73`, `8.5.73-debian-10-r5` (8.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.73-debian-10-r5/8.5/debian-10/Dockerfile)
+* [`8.5`, `8.5-debian-10`, `8.5.73`, `8.5.73-debian-10-r6` (8.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.73-debian-10-r6/8.5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tomcat GitHub repo](https://github.com/bitnami/bitnami-docker-tomcat).
 
 ## Get this image
 
-The recommended way to get the Bitnami Tomcat Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/tomcat).
+The recommended way to get the Bitnami Apache Tomcat Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/tomcat).
 
 ```console
 $ docker pull bitnami/tomcat:latest
@@ -93,11 +93,11 @@ services:
 
 > NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-## Deploying web applications on Tomcat
+## Deploying web applications on Apache Tomcat
 
-The `/bitnami/tomcat/data` directory is configured as the Tomcat webapps deployment directory. At this location, you either copy a so-called *exploded web application*, i.e. non-compressed, or a compressed web application resource (`.WAR`) file and it will automatically be deployed by Tomcat.
+The `/bitnami/tomcat/data` directory is configured as the Apache Tomcat webapps deployment directory. At this location, you either copy a so-called *exploded web application*, i.e. non-compressed, or a compressed web application resource (`.WAR`) file and it will automatically be deployed by Apache Tomcat.
 
-Additionally a helper symlink `/app` is present that points to the webapps deployment directory which enables us to deploy applications on a running Tomcat instance by simply doing:
+Additionally a helper symlink `/app` is present that points to the webapps deployment directory which enables us to deploy applications on a running Apache Tomcat instance by simply doing:
 
 ```console
 $ docker cp /path/to/app.war tomcat:/app
@@ -111,13 +111,13 @@ COPY sample.war /opt/bitnami/tomcat/webapps_default
 ```
 
 **Note!**
-You can also deploy web applications on a running Tomcat instance using the Tomcat management interface.
+You can also deploy web applications on a running Apache Tomcat instance using the Apache Tomcat management interface.
 
 **Further Reading:**
 
-  - [Tomcat Web Application Deployment](https://tomcat.apache.org/tomcat-7.0-doc/deployer-howto.html)
+  - [Apache Tomcat Web Application Deployment](https://tomcat.apache.org/tomcat-7.0-doc/deployer-howto.html)
 
-## Accessing your Tomcat server from the host
+## Accessing your Apache Tomcat server from the host
 
 To access your web server from your host machine you can ask Docker to map a random port on your host to port `8080` exposed in the container.
 
@@ -138,23 +138,23 @@ You can also manually specify the ports you want forwarded from your host to the
 $ docker run -p 8080:8080 bitnami/tomcat:latest
 ```
 
-Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/).
+Access your web server in the browser by navigating to `http://localhost:8080`.
 
 ## Configuration
 
 ### Environment variables
 
-The Tomcat instance can be customized by specifying environment variables on the first run. The following environment values are provided to custom Tomcat:
+The Apache Tomcat instance can be customized by specifying environment variables on the first run. The following environment values are provided to custom Apache Tomcat:
 
-- `TOMCAT_SHUTDOWN_PORT_NUMBER`: Tomcat shutdown port. Default: **8005**
-- `TOMCAT_HTTP_PORT_NUMBER`: Tomcat HTTP port. Default: **8080**
-- `TOMCAT_AJP_PORT_NUMBER`: Tomcat AJP port. Default: **8009**
-- `TOMCAT_USERNAME`: Tomcat user. Default: **manager**
-- `TOMCAT_PASSWORD`: Tomcat password. No defaults.
-- `TOMCAT_ALLOW_REMOTE_MANAGEMENT`: Whether to allow connections from remote addresses to the Tomcat manager application. Default: **no**
-- `TOMCAT_ENABLE_AUTH`: Whether to enable authentication for Tomcat manager application. Default: **yes**
-- `TOMCAT_ENABLE_AJP`: Whether to enable the Tomcat AJP connector. Default: **no**
-- `TOMCAT_EXTRA_JAVA_OPTS`: Additional Java settings for Tomcat. No defaults.
+- `TOMCAT_SHUTDOWN_PORT_NUMBER`: Apache Tomcat shutdown port. Default: **8005**
+- `TOMCAT_HTTP_PORT_NUMBER`: Apache Tomcat HTTP port. Default: **8080**
+- `TOMCAT_AJP_PORT_NUMBER`: Apache Tomcat AJP port. Default: **8009**
+- `TOMCAT_USERNAME`: Apache Tomcat user. Default: **manager**
+- `TOMCAT_PASSWORD`: Apache Tomcat password. No defaults.
+- `TOMCAT_ALLOW_REMOTE_MANAGEMENT`: Whether to allow connections from remote addresses to the Apache Tomcat manager application. Default: **no**
+- `TOMCAT_ENABLE_AUTH`: Whether to enable authentication for Apache Tomcat manager application. Default: **yes**
+- `TOMCAT_ENABLE_AJP`: Whether to enable the Apache Tomcat AJP connector. Default: **no**
+- `TOMCAT_EXTRA_JAVA_OPTS`: Additional Java settings for Apache Tomcat. No defaults.
 
 #### Creating a custom user
 
@@ -187,7 +187,7 @@ $ docker run --name tomcat \
 
 ### Configuration files
 
-During the initialization of the container, the default Tomcat configuration files are modified with the basic options defined through [environment variables](#environment-variables). If you want to add more specific configuration options, you can always mount your own configuration files under `/opt/bitnami/tomcat/conf/` to override the existing ones. Please note that those files should be writable by the system user of the container.
+During the initialization of the container, the default Apache Tomcat configuration files are modified with the basic options defined through [environment variables](#environment-variables). If you want to add more specific configuration options, you can always mount your own configuration files under `/opt/bitnami/tomcat/conf/` to override the existing ones. Please note that those files should be writable by the system user of the container.
 
 ```console
 $ docker run --name tomcat -v /path/to/config/server.xml:/opt/bitnami/tomcat/conf/server.xml bitnami/tomcat:latest
@@ -204,11 +204,11 @@ services:
   ...
 ```
 
-Refer to the [Tomcat configuration](https://tomcat.apache.org/tomcat-7.0-doc/config/index.html) manual for the complete list of configuration options.
+Refer to the [Apache Tomcat configuration](https://tomcat.apache.org/tomcat-7.0-doc/config/index.html) manual for the complete list of configuration options.
 
 ## Logging
 
-The Bitnami Tomcat Docker image sends the container logs to the `stdout`. To view the logs:
+The Bitnami Apache Tomcat Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```console
 $ docker logs tomcat
@@ -226,7 +226,7 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 
 ### Upgrade this image
 
-Bitnami provides up-to-date versions of Tomcat, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
+Bitnami provides up-to-date versions of Apache Tomcat, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
 #### Step 1: Get the updated image
 
@@ -291,7 +291,7 @@ $ docker-compose up tomcat
 
 ### 9.0.13-r27 , 8.5.35-r26, 8.0.53-r131 & 7.0.92-r20
 
-- The Tomcat container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Tomcat daemon was started as the `tomcat` user. From now on, both the container and the Tomcat daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
+- The Apache Tomcat container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Apache Tomcat daemon was started as the `tomcat` user. From now on, both the container and the Apache Tomcat daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 ### 8.0.35-r3
 
