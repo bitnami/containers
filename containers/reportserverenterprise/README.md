@@ -37,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`3`, `3-debian-10`, `3.7.1-6048`, `3.7.1-6048-debian-10-r11`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/3.7.1-6048-debian-10-r11/3/debian-10/Dockerfile)
+- [`3`, `3-debian-10`, `3.7.1-6048`, `3.7.1-6048-debian-10-r12`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/3.7.1-6048-debian-10-r12/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/reportserverenterprise GitHub repo](https://github.com/bitnami/bitnami-docker-reportserverenterprise).
 
@@ -113,7 +113,7 @@ $ docker run -d --name reportserver \
   bitnami/reportserverenterprise:latest
 ```
 
-Access your application at *http://your-ip/*
+Access your application at `http://your-ip/`
 
 ## Persisting your application
 
