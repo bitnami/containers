@@ -32,7 +32,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2`, `2-debian-10`, `2.0.5`, `2.0.5-debian-10-r7`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/blob/2.0.5-debian-10-r7/2/debian-10/Dockerfile)
-* [`1`, `1-debian-10`, `1.3.1`, `1.3.1-debian-10-r158` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/blob/1.3.1-debian-10-r158/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.3.1`, `1.3.1-debian-10-r159` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/blob/1.3.1-debian-10-r159/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kong-ingress-controller GitHub repo](https://github.com/bitnami/bitnami-docker-kong-ingress-controller).
 
@@ -66,7 +66,7 @@ To run commands inside this container you can use `docker run`, for example to e
 $ docker run --rm --name kong-ingress-controller bitnami/kong-ingress-controller:latest -- --version
 ```
 
-Consult the [kong-ingress-controller Reference Documentation](https://github.com/Kong/kubernetes-ingress-controller/blob/master/docs/references/cli-arguments.md) to find the completed list of flags. Note that these can also be set by using the `CONTROLLER_` environment variables as stated in the [official documentation](https://github.com/Kong/kubernetes-ingress-controller/blob/master/docs/references/cli-arguments.md#cli-arguments).
+Consult the [kong-ingress-controller Reference Documentation](https://docs.konghq.com/kubernetes-ingress-controller/)
 
 ## Branch Deprecation Notice
 
