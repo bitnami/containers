@@ -6,12 +6,6 @@
 
 [Overview of Kapacitor &trade;](https://github.com/influxdata/kapacitor)
 
-# What is Kapacitor?
-
-> Kapacitor is a native data processing engine for InfluxDB. Kapacitor can process both stream and batch data from InfluxDB, acting on this data in real-time via its programming language TICKscript.
-
-[Overview of Kapacitor](https://github.com/influxdata/kapacitor)
-
 # TL;DR;
 
 ```console
@@ -35,7 +29,7 @@ $ docker run --name kapacitor bitnami/kapacitor:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.6.2`, `1.6.2-debian-10-r47`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kapacitor/blob/1.6.2-debian-10-r47/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.6.2`, `1.6.2-debian-10-r48`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kapacitor/blob/1.6.2-debian-10-r48/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kapacitor GitHub repo](https://github.com/bitnami/bitnami-docker-kapacitor).
 
