@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.7`, `1.7-debian-10`, `1.7.8-1`, `1.7.8-1-debian-10-r7`, `latest` (1.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.8-1-debian-10-r7/1.7/debian-10/Dockerfile)
+* [`1.7`, `1.7-debian-10`, `1.7.8-1`, `1.7.8-1-debian-10-r8`, `latest` (1.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.8-1-debian-10-r8/1.7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prestashop GitHub repo](https://github.com/bitnami/bitnami-docker-prestashop).
 
@@ -119,7 +119,7 @@ $ docker run -d --name prestashop \
   bitnami/prestashop:latest
 ```
 
-Access your application at *http://your-ip/*
+Access your application at `http://your-ip/`
 
 > **Note:** If you want to access your application from a public IP or hostname you need to configure PrestaShop for it. You can handle it adjusting the configuration of the instance by setting the environment variable *PRESTASHOP_HOST* to your public IP or hostname.
 
