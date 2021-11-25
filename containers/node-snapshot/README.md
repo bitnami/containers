@@ -54,7 +54,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`14-prod`, `14-prod-debian-10`, `14.18.1-prod`, `14.18.1-prod-debian-10-r42` (14-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/14.18.1-prod-debian-10-r42/14-prod/debian-10/Dockerfile)
 * [`14`, `14-debian-10`, `14.18.1`, `14.18.1-debian-10-r42` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/14.18.1-debian-10-r42/14/debian-10/Dockerfile)
 * [`12-prod`, `12-prod-debian-10`, `12.22.7-prod`, `12.22.7-prod-debian-10-r42` (12-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/12.22.7-prod-debian-10-r42/12-prod/debian-10/Dockerfile)
-* [`12`, `12-debian-10`, `12.22.7`, `12.22.7-debian-10-r42` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/12.22.7-debian-10-r42/12/debian-10/Dockerfile)
+* [`12`, `12-debian-10`, `12.22.7`, `12.22.7-debian-10-r43` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node-snapshot/blob/12.22.7-debian-10-r43/12/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node-snapshot GitHub repo](https://github.com/bitnami/bitnami-docker-node-snapshot).
 
@@ -65,8 +65,6 @@ Containers tagged `prod` are production containers based on [minideb](https://gi
 They don't include development dependencies, so they are commonly used in multi-stage builds as the target image. Application code and dependencies should be copied from a different container.
 
 The resultant containers only contain the necessary pieces of software to run the application. Therefore, they are smaller and safer.
-
-Learn how to use multi-stage builds to build your production application container in the [example](/example) directory
 
 ## Get this image
 
@@ -223,7 +221,7 @@ You can also specify the port you want forwarded from your host to the container
 $ docker run -it --name node -p 8080:3000 -v /path/to/app:/app bitnami/node-snapshot node index.js
 ```
 
-Access your web server in the browser by navigating to [http://localhost:8080](http://localhost:8080/).
+Access your web server in the browser by navigating to `http://localhost:8080`.
 
 ## Connecting to other containers
 
