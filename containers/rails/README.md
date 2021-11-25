@@ -37,7 +37,7 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`6`, `6-debian-10`, `6.1.4-1`, `6.1.4-1-debian-10-r93`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rails/blob/6.1.4-1-debian-10-r93/6/debian-10/Dockerfile)
+* [`6`, `6-debian-10`, `6.1.4-1`, `6.1.4-1-debian-10-r94`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rails/blob/6.1.4-1-debian-10-r94/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rails GitHub repo](https://github.com/bitnami/bitnami-docker-rails).
 
@@ -78,7 +78,7 @@ Among other things, the above command creates a container service, named `myapp`
 >
 > If the application directory contained the source code of an existing Rails application, the Bitnami Rails Development Container would load the existing application instead of bootstrapping a new one.
 
-After the WEBrick application server has been launched in the `myapp` service, visit http://localhost:3000 in your favourite web browser and you'll be greeted by the default Rails welcome page.
+After the WEBrick application server has been launched in the `myapp` service, visit `http://localhost:3000` in your favourite web browser and you'll be greeted by the default Rails welcome page.
 
 In addition to the Rails Development Container, the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/bitnami-docker-rails/master/docker-compose.yml) file also configures a MariaDB service to serve as the database backend of your Rails application.
 
