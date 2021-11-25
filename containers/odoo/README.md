@@ -42,7 +42,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 - [`15`, `15-debian-10`, `15.0.20211110`, `15.0.20211110-debian-10-r0`, `latest` (15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/15.0.20211110-debian-10-r0/15/debian-10/Dockerfile)
 - [`14`, `14-debian-10`, `14.0.20211110`, `14.0.20211110-debian-10-r12` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/14.0.20211110-debian-10-r12/14/debian-10/Dockerfile)
-- [`13`, `13-debian-10`, `13.0.20211110`, `13.0.20211110-debian-10-r12` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20211110-debian-10-r12/13/debian-10/Dockerfile)
+- [`13`, `13-debian-10`, `13.0.20211110`, `13.0.20211110-debian-10-r13` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20211110-debian-10-r13/13/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/odoo GitHub repo](https://github.com/bitnami/bitnami-docker-odoo).
 
@@ -114,7 +114,7 @@ $ docker run -d --name odoo \
   bitnami/odoo:latest
 ```
 
-Access your application at *http://your-ip/*
+Access your application at `http://your-ip/`
 
 ## Persisting your application
 
