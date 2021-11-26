@@ -54,7 +54,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`13`, `13-debian-10`, `13.5.0`, `13.5.0-debian-10-r13` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/13.5.0-debian-10-r13/13/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.9.0`, `12.9.0-debian-10-r13` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.9.0-debian-10-r13/12/debian-10/Dockerfile)
 * [`11`, `11-debian-10`, `11.14.0`, `11.14.0-debian-10-r13`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.14.0-debian-10-r13/11/debian-10/Dockerfile)
-* [`10`, `10-debian-10`, `10.19.0`, `10.19.0-debian-10-r13` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.19.0-debian-10-r13/10/debian-10/Dockerfile)
+* [`10`, `10-debian-10`, `10.19.0`, `10.19.0-debian-10-r14` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.19.0-debian-10-r14/10/debian-10/Dockerfile)
 * [`9.6`, `9.6-debian-10`, `9.6.24`, `9.6.24-debian-10-r13` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.24-debian-10-r13/9.6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql).
@@ -277,6 +277,13 @@ The Bitnami PostgreSQL Image allows configuring several parameters for the conne
 - `POSTGRESQL_TCP_KEEPALIVES_INTERVAL`: TCP keepalive interval. No defaults.
 - `POSTGRESQL_TCP_KEEPALIVES_IDLE`: TCP keepalive idle time. No defaults.
 - `POSTGRESQL_TCP_KEEPALIVES_COUNT`: TCP keepalive count. No defaults.
+
+### Configuring time zone
+
+The Bitnami PostgreSQL Image allows configuring the time zone for PostgreSQL with the following environment variables:
+
+- `POSTGRESQL_TIMEZONE`: Sets the time zone for displaying and interpreting time stamps.
+- `POSTGRESQL_LOG_TIMEZONE`: Sets the time zone used for timestamps written in the server log.
 
 ### Modify pg_hba.conf
 
