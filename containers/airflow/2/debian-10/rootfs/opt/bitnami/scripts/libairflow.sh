@@ -266,19 +266,19 @@ airflow_configure_webserver_authentication() {
 
         # webserver config
         airflow_webserver_conf_set "AUTH_TYPE" "AUTH_LDAP"
-        airflow_webserver_conf_set "AUTH_LDAP_SERVER" "'$AIRFLOW_LDAP_URI'"
+        airflow_webserver_conf_set "AUTH_LDAP_SERVER" "$AIRFLOW_LDAP_URI" "yes"
 
         # searches
-        airflow_webserver_conf_set "AUTH_LDAP_SEARCH" "'$AIRFLOW_LDAP_SEARCH'"
-        airflow_webserver_conf_set "AUTH_LDAP_UID_FIELD" "'$AIRFLOW_LDAP_UID_FIELD'"
+        airflow_webserver_conf_set "AUTH_LDAP_SEARCH" "$AIRFLOW_LDAP_SEARCH" "yes"
+        airflow_webserver_conf_set "AUTH_LDAP_UID_FIELD" "$AIRFLOW_LDAP_UID_FIELD" "yes"
 
         # Special account for searches
-        airflow_webserver_conf_set "AUTH_LDAP_BIND_USER" "'$AIRFLOW_LDAP_BIND_USER'"
-        airflow_webserver_conf_set "AUTH_LDAP_BIND_PASSWORD" "'$AIRFLOW_LDAP_BIND_PASSWORD'"
+        airflow_webserver_conf_set "AUTH_LDAP_BIND_USER" "$AIRFLOW_LDAP_BIND_USER" "yes"
+        airflow_webserver_conf_set "AUTH_LDAP_BIND_PASSWORD" "$AIRFLOW_LDAP_BIND_PASSWORD" "yes"
 
         # User self registration
         airflow_webserver_conf_set "AUTH_USER_REGISTRATION" "$AIRFLOW_LDAP_USER_REGISTRATION"
-        airflow_webserver_conf_set "AUTH_USER_REGISTRATION_ROLE" "'$AIRFLOW_LDAP_USER_REGISTRATION_ROLE'"
+        airflow_webserver_conf_set "AUTH_USER_REGISTRATION_ROLE" "$AIRFLOW_LDAP_USER_REGISTRATION_ROLE" "yes"
 
         # Mapping from LDAP DN to list of FAB roles
         airflow_webserver_conf_set "AUTH_ROLES_MAPPING" "$AIRFLOW_LDAP_ROLES_MAPPING"
@@ -291,7 +291,7 @@ airflow_configure_webserver_authentication() {
 
         # If StartTLS supply cert
         if [[ "$AIRFLOW_LDAP_USE_TLS" == "True" ]]; then
-            airflow_webserver_conf_set "AUTH_LDAP_TLS_CACERTFILE" "$AIRFLOW_LDAP_TLS_CA_CERTIFICATE"
+            airflow_webserver_conf_set "AUTH_LDAP_TLS_CACERTFILE" "$AIRFLOW_LDAP_TLS_CA_CERTIFICATE" "yes"
         fi
     fi
 }
@@ -308,13 +308,16 @@ airflow_configure_webserver_authentication() {
 airflow_webserver_conf_set() {
     local -r key="${1:?missing key}"
     local -r value="${2:?missing key}"
+    local -r is_literal="${3:-no}"
     shift 2
 
     local -r file="$AIRFLOW_WEBSERVER_CONF_FILE"
+    local entry
+    is_boolean_yes "$is_literal" && entry="${key} = ${value}" || entry="${key} = '${value}'"
     # Check if the value was set before
     if grep -q "^#*\\s*${key} =.*$" "$file"; then
         # Update the existing key
-        replace_in_file "$file" "^#*\\s*${key} =.*$" "${key} = ${value}" false
+        replace_in_file "$file" "^#*\\s*${key} =.*$" "$entry" false
     else
         # Add a new key
         printf '\n%s = %s' "$key" "$value" >>"$file"
