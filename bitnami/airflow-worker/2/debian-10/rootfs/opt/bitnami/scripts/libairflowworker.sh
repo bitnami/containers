@@ -62,14 +62,15 @@ airflow_worker_initialize() {
 
     # Check if Airflow has already been initialized and persisted in a previous run
     local -r app_name="airflow"
+    local -a postgresql_remote_execute_args=("$AIRFLOW_DATABASE_HOST" "$AIRFLOW_DATABASE_PORT_NUMBER" "$AIRFLOW_DATABASE_NAME" "$AIRFLOW_DATABASE_USERNAME" "$AIRFLOW_DATABASE_PASSWORD")
     if ! is_app_initialized "$app_name"; then
-        airflow_wait_for_postgresql "$AIRFLOW_DATABASE_HOST" "$AIRFLOW_DATABASE_PORT_NUMBER"
+        airflow_wait_for_postgresql_connection "${postgresql_remote_execute_args[@]}"
 
         info "Persisting Airflow installation"
         persist_app "$app_name" "$AIRFLOW_DATA_TO_PERSIST"
     else
         # Check database connection
-        airflow_wait_for_postgresql "$AIRFLOW_DATABASE_HOST" "$AIRFLOW_DATABASE_PORT_NUMBER"
+        airflow_wait_for_postgresql_connection "${postgresql_remote_execute_args[@]}"
 
         # Restore persisted data
         info "Restoring persisted Airflow installation"
