@@ -1154,7 +1154,7 @@ postgresql_ensure_user_exists() {
 
     local -a postgresql_execute_cmd=("postgresql_execute")
     [[ -n "$db_host" && -n "$db_port" ]] && postgresql_execute_cmd=("postgresql_remote_execute" "$db_host" "$db_port")
-    local -a postgresql_execute_flags=("" "$(get_env_var_value POSTGRES_USER)" "$(get_env_var_value POSTGRES_PASSWORD)")
+    local -a postgresql_execute_flags=("postgres" "$(get_env_var_value POSTGRES_USER)" "$(get_env_var_value POSTGRES_PASSWORD)")
 
     "${postgresql_execute_cmd[@]}" "${postgresql_execute_flags[@]}" <<EOF
 DO
@@ -1188,7 +1188,7 @@ postgresql_ensure_user_has_database_privileges() {
 
     local -a postgresql_execute_cmd=("postgresql_execute")
     [[ -n "$db_host" && -n "$db_port" ]] && postgresql_execute_cmd=("postgresql_remote_execute" "$db_host" "$db_port")
-    local -a postgresql_execute_flags=("" "$(get_env_var_value POSTGRES_USER)" "$(get_env_var_value POSTGRES_PASSWORD)")
+    local -a postgresql_execute_flags=("postgres" "$(get_env_var_value POSTGRES_USER)" "$(get_env_var_value POSTGRES_PASSWORD)")
 
     debug "Providing privileges to username ${user} on database ${database}"
     "${postgresql_execute_cmd[@]}" "${postgresql_execute_flags[@]}" <<EOF
@@ -1242,7 +1242,7 @@ postgresql_ensure_database_exists() {
 
     local -a postgresql_execute_cmd=("postgresql_execute")
     [[ -n "$db_host" && -n "$db_port" ]] && postgresql_execute_cmd=("postgresql_remote_execute" "$db_host" "$db_port")
-    local -a postgresql_execute_flags=("" "$(get_env_var_value POSTGRES_USER)" "$(get_env_var_value POSTGRES_PASSWORD)")
+    local -a postgresql_execute_flags=("postgres" "$(get_env_var_value POSTGRES_USER)" "$(get_env_var_value POSTGRES_PASSWORD)")
 
     "${postgresql_execute_cmd[@]}" "${postgresql_execute_flags[@]}" <<EOF
 SELECT 'CREATE DATABASE "${database}"'
