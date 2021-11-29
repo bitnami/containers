@@ -12,14 +12,15 @@ set -o pipefail
 . /opt/bitnami/scripts/libconsul.sh
 
 # Load Consul env. variables
-eval "$(consul_env)"
+. /opt/bitnami/scripts/consul-env.sh
 
 if am_i_root; then
-    ensure_user_exists "${CONSUL_SYSTEM_USER}" --group "${CONSUL_SYSTEM_GROUP}"
-    chown -R "$CONSUL_SYSTEM_USER":"$CONSUL_SYSTEM_GROUP" \
+    ensure_user_exists "${CONSUL_DAEMON_USER}" --group "${CONSUL_DAEMON_GROUP}"
+    chown -R "$CONSUL_DAEMON_USER":"$CONSUL_DAEMON_GROUP" \
         "${CONSUL_CONF_DIR}" "${CONSUL_DATA_DIR}" "${CONSUL_LOG_DIR}" \
-        "${CONSUL_TMP_DIR}" "${CONSUL_SSL_DIR}" "${CONSUL_EXTRA_DIR}"
+        "${CONSUL_TMP_DIR}" "${CONSUL_SSL_DIR}"
 fi
 
 consul_validate
 consul_initialize
+consul_custom_init_scripts

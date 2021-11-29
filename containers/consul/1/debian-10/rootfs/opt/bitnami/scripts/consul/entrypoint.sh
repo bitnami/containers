@@ -12,7 +12,7 @@ set -o pipefail
 . /opt/bitnami/scripts/liblog.sh
 
 # Load Consul env. variables
-eval "$(consul_env)"
+. /opt/bitnami/scripts/consul-env.sh
 
 print_welcome_page
 

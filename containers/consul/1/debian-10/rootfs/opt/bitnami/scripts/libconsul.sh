@@ -1,106 +1,15 @@
 #!/bin/bash
 
-# shellcheck disable=SC1091
+# shellcheck disable=SC1091,SC1090
 
 # Load libraries
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libnet.sh
 . /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libservice.sh
 . /opt/bitnami/scripts/libvalidations.sh
 
 # Bitnami Consul library
-
-########################
-# Create alias for environment variable, so both can be used
-# Globals:
-#   None
-# Arguments:
-#   $1 - Alias environment variable name
-#   $2 - Original environment variable name
-# Returns:
-#   None
-#########################
-consul_declare_alias_env() {
-    local -r alias="${1:?missing environment variable alias}"
-    local -r original="${2:?missing original environment variable}"
-    if printenv "${original}" > /dev/null; then
-        cat <<EOF
-export "${alias}"="\${${original}:-}"
-EOF
-    fi
-}
-
-########################
-# Loads global variables used on Consul configuration.
-# Globals:
-#   CONSUL_*
-# Arguments:
-#   None
-# Returns:
-#   Series of exports to be used as 'eval' arguments
-#########################
-consul_env() {
-    [[ -n "${CONSUL_SERVER_MODE:-}" ]] && consul_declare_alias_env "CONSUL_AGENT_MODE" "CONSUL_SERVER_MODE"
-    [[ -n "${CONSUL_RETRY_JOIN:-}" ]] && consul_declare_alias_env "CONSUL_RETRY_JOIN_ADDRESS" "CONSUL_RETRY_JOIN"
-    [[ -n "${CONSUL_UI:-}" ]] && consul_declare_alias_env "CONSUL_ENABLE_UI" "CONSUL_UI"
-
-    cat <<"EOF"
-# Paths
-export CONSUL_BASE_DIR="/opt/bitnami/consul"
-export CONSUL_CONF_DIR="${CONSUL_BASE_DIR}/conf"
-export CONSUL_CONF_FILE="${CONSUL_CONF_DIR}/consul.json"
-export CONSUL_ENCRYPT_FILE="${CONSUL_CONF_DIR}/encrypt.json"
-export CONSUL_LOCAL_CONF_FILE="${CONSUL_CONF_DIR}/local.json"
-export CONSUL_LOG_DIR="${CONSUL_BASE_DIR}/logs"
-export CONSUL_LOG_FILE="${CONSUL_LOG_DIR}/consul.log"
-export CONSUL_DATA_DIR="/bitnami/consul"
-export CONSUL_EXTRA_DIR="${CONSUL_BASE_DIR}/extra"
-export CONSUL_MONIT_FILE="${CONSUL_EXTRA_DIR}/monit.conf"
-export CONSUL_LOGROTATE_FILE="${CONSUL_EXTRA_DIR}/logrotate.conf"
-export CONSUL_SSL_DIR="${CONSUL_BASE_DIR}/certificates"
-export CONSUL_TMP_DIR="${CONSUL_BASE_DIR}/tmp"
-export CONSUL_PID_FILE="${CONSUL_TMP_DIR}/consul.pid"
-export CONSUL_TEMPLATES_DIR="${CONSUL_BASE_DIR}/templates"
-export CONSUL_CONFIG_TEMPLATE_FILE="${CONSUL_TEMPLATES_DIR}/consul.json.tpl"
-export CONSUL_ENCRYPT_TEMPLATE_FILE="${CONSUL_TEMPLATES_DIR}/encrypt.json.tpl"
-export CONSUL_LOCAL_TEMPLATE_FILE="${CONSUL_TEMPLATES_DIR}/local.json.tpl"
-
-# Users
-export CONSUL_SYSTEM_USER="consul"
-export CONSUL_SYSTEM_GROUP="consul"
-
-# Settings
-export CONSUL_RPC_PORT_NUMBER="${CONSUL_RPC_PORT_NUMBER:-8300}"
-export CONSUL_HTTP_PORT_NUMBER="${CONSUL_HTTP_PORT_NUMBER:-8500}"
-export CONSUL_DNS_PORT_NUMBER="${CONSUL_DNS_PORT_NUMBER:-8600}"
-export CONSUL_AGENT_MODE="${CONSUL_AGENT_MODE:-server}"
-export CONSUL_DISABLE_KEYRING_FILE="${CONSUL_DISABLE_KEYRING_FILE:-false}"
-export CONSUL_SERF_LAN_ADDRESS="${CONSUL_SERF_LAN_ADDRESS:-0.0.0.0}"
-export CONSUL_SERF_LAN_PORT_NUMBER="${CONSUL_SERF_LAN_PORT_NUMBER:-8301}"
-export CONSUL_CLIENT_LAN_ADDRESS="${CONSUL_CLIENT_LAN_ADDRESS:-0.0.0.0}"
-export CONSUL_RETRY_JOIN_ADDRESS="${CONSUL_RETRY_JOIN_ADDRESS:-127.0.0.1}"
-export CONSUL_RETRY_JOIN_WAN_ADDRESS="${CONSUL_RETRY_JOIN_WAN_ADDRESS:-127.0.0.1}"
-export CONSUL_BIND_INTERFACE="${CONSUL_BIND_INTERFACE:-}"
-export CONSUL_BIND_ADDR="$(get_bind_addr)"
-export CONSUL_ENABLE_UI="${CONSUL_ENABLE_UI:-true}"
-export CONSUL_BOOTSTRAP_EXPECT="${CONSUL_BOOTSTRAP_EXPECT:-1}"
-export CONSUL_RAFT_MULTIPLIER="${CONSUL_RAFT_MULTIPLIER:-1}"
-export CONSUL_LOCAL_CONFIG="${CONSUL_LOCAL_CONFIG:-}"
-export CONSUL_GOSSIP_ENCRYPTION="${CONSUL_GOSSIP_ENCRYPTION:-no}"
-export CONSUL_GOSSIP_ENCRYPTION_KEY="${CONSUL_GOSSIP_ENCRYPTION_KEY:-}"
-export CONSUL_GOSSIP_ENCRYPTION_KEY_FILE="${CONSUL_GOSSIP_ENCRYPTION_KEY_FILE:-}"
-export CONSUL_DATACENTER="${CONSUL_DATACENTER:-dc1}"
-export CONSUL_DOMAIN="${CONSUL_DOMAIN:-consul}"
-export CONSUL_NODE_NAME="$(get_consul_hostname)"
-export CONSUL_DISABLE_HOST_NODE_ID="${CONSUL_DISABLE_HOST_NODE_ID:-true}"
-EOF
-
-    if [[ -n "${CONSUL_GOSSIP_ENCRYPTION_KEY_FILE:-}" ]]; then
-            cat <<"EOF"
-export CONSUL_GOSSIP_ENCRYPTION_KEY="$(< "${CONSUL_GOSSIP_ENCRYPTION_KEY_FILE}")"
-EOF
-    fi
-}
 
 ########################
 # Validate settings in CONSUL_* env. variables
@@ -196,12 +105,13 @@ consul_configure_encryption() {
         info "Configuring encryption key..."
 
         if [[ -z ${CONSUL_GOSSIP_ENCRYPTION_KEY} ]]; then
-            CONSUL_GOSSIP_ENCRYPTION_KEY=$("${CONSUL_BASE_DIR}/bin/consul" "keygen" )
+            CONSUL_GOSSIP_ENCRYPTION_KEY=$("${CONSUL_BASE_DIR}/bin/consul" "keygen")
         else
-            CONSUL_GOSSIP_ENCRYPTION_KEY=$(base64 <<< "${CONSUL_GOSSIP_ENCRYPTION_KEY}")
+            CONSUL_GOSSIP_ENCRYPTION_KEY=$(base64 <<<"${CONSUL_GOSSIP_ENCRYPTION_KEY}")
         fi
 
-        render-template "${CONSUL_ENCRYPT_TEMPLATE_FILE}" > "${CONSUL_ENCRYPT_FILE}"
+        # In case the node name was not set, we automatically set
+        render-template "${CONSUL_ENCRYPT_TEMPLATE_FILE}" >"${CONSUL_ENCRYPT_FILE}"
     fi
 }
 
@@ -218,6 +128,18 @@ consul_initialize() {
 
     info "Initializing Consul..."
 
+    if [[ -z "${CONSUL_NODE_NAME:-}" ]]; then
+        warn "The variable CONSUL_NODE_NAME was not set, defaulting it to the machine ip"
+        local -r machine_ip="$(get_machine_ip)"
+        export CONSUL_NODE_NAME="$machine_ip"
+    fi
+
+    if [[ -n "$CONSUL_BIND_INTERFACE" ]] && [[ -z "${CONSUL_BIND_ADDRESS:-}" ]]; then
+        info "CONSUL_BIND_INTERFACE was set to $CONSUL_BIND_INTERFACE and CONSUL_BIND_ADDRESS was not set, obtaining bind address"
+        local -r bind_address=$(ip -o -4 addr list "$CONSUL_BIND_INTERFACE" | head -n1 | awk '{print $4}' | cut -d/ -f1)
+        export CONSUL_BIND_ADDRESS="$bind_address"
+    fi
+
     if is_dir_empty "${CONSUL_DATA_DIR}"; then
         info "Deploying consul from scratch..."
     else
@@ -229,7 +151,7 @@ consul_initialize() {
     else
         info "No injected configuration files found. Creating default config files..."
         debug "Creating main configuration file..."
-        render-template "${CONSUL_CONFIG_TEMPLATE_FILE}" > "${CONSUL_CONF_FILE}"
+        render-template "${CONSUL_CONFIG_TEMPLATE_FILE}" >"${CONSUL_CONF_FILE}"
     fi
 
     # Create an extra config file with the contents of the CONSUL_LOCAL_CONFIG env var
@@ -242,18 +164,87 @@ consul_initialize() {
 }
 
 ########################
-# Determine the hostname by with contact the consul instance
+# Stop Consul
 # Globals:
-#   CONSUL_NODE_NAME
+#   CONSUL_PID_FILE
 # Arguments:
 #   None
 # Returns:
-#   The value of $CONSUL_NODE_NAME or the current host address
+#   None
+#########################
+consul_stop() {
+    ! is_consul_running && return
+    debug "Stopping Consul..."
+    stop_service_using_pid "$CONSUL_PID_FILE"
+}
+
 ########################
-get_consul_hostname() {
-    if [[ -n "${CONSUL_NODE_NAME:-}" ]]; then
-        echo "$CONSUL_NODE_NAME"
+# Check if Consul is running
+# Globals:
+#   CONSUL_PID_FILE
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_consul_running() {
+    local pid
+    pid="$(get_pid_from_file "$CONSUL_PID_FILE")"
+
+    if [[ -z "$pid" ]]; then
+        false
     else
-        get_machine_ip
+        is_service_running "$pid"
+    fi
+}
+
+########################
+# Check if Consul is not running
+# Globals:
+#   CONSUL_PID_FILE
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_consul_not_running() {
+    ! is_consul_running
+    return "$?"
+}
+
+########################
+# Run custom initialization scripts
+# Globals:
+#   CONSUL_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+consul_custom_init_scripts() {
+    if [[ -n $(find "${CONSUL_INITSCRIPTS_DIR}/" -type f -regex ".*\.sh") ]]; then
+        info "Loading user's custom files from $CONSUL_INITSCRIPTS_DIR ..."
+        local -r tmp_file="/tmp/filelist"
+        find "${CONSUL_INITSCRIPTS_DIR}/" -type f -regex ".*\.sh" | sort >"$tmp_file"
+        while read -r f; do
+            case "$f" in
+            *.sh)
+                if [[ -x "$f" ]]; then
+                    debug "Executing $f"
+                    "$f"
+                else
+                    debug "Sourcing $f"
+                    . "$f"
+                fi
+                ;;
+            *)
+                debug "Ignoring $f"
+                ;;
+            esac
+        done <$tmp_file
+        consul_stop
+        rm -f "$tmp_file"
+    else
+        info "No custom scripts in $CONSUL_INITSCRIPTS_DIR"
     fi
 }

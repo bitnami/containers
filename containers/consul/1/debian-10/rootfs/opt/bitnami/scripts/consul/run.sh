@@ -11,7 +11,7 @@ set -o pipefail
 . /opt/bitnami/scripts/liblog.sh
 
 # Load Consul env. variables
-eval "$(consul_env)"
+. /opt/bitnami/scripts/consul-env.sh
 
 EXEC="${CONSUL_BASE_DIR}/bin/consul"
 flags=("agent" "-config-dir" "${CONSUL_CONF_DIR}" "-log-file" "${CONSUL_LOG_FILE}" "-disable-host-node-id=${CONSUL_DISABLE_HOST_NODE_ID}")
@@ -26,7 +26,7 @@ fi
 
 info "** Starting Consul **"
 if am_i_root; then
-    exec gosu "${CONSUL_SYSTEM_USER}" "${EXEC}" "${flags[@]}"
+    exec gosu "${CONSUL_DAEMON_USER}" "${EXEC}" "${flags[@]}"
 else
     exec "${EXEC}" "${flags[@]}"
 fi
