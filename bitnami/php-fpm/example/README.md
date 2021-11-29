@@ -86,7 +86,7 @@ You can start the deployment with this command:
 $ docker-compose up
 ```
 
-Finally you can access your application at http://your-ip:8080
+Finally you can access your application at `http://your-ip:8080`
 
 ## Deployment
 
