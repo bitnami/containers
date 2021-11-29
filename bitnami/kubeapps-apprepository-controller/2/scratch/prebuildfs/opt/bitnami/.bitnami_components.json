@@ -1,7 +1,7 @@
 {
     "kubeapps-apprepository-controller": {
-        "digest": "8dad8eb5e0f3088ca27ecd01a4f16398f6d4b709782edbd56775feff6c73ffe7",
+        "digest": "2f574c25226481f7cd35d6789ec65564b071d2c6af247823649c69be14c58260",
         "type": "BLACKSMITH",
-        "version": "2.4.1"
+        "version": "2.4.2"
     }
 }
