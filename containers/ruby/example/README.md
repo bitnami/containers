@@ -64,7 +64,7 @@ REPOSITORY               TAG                 IMAGE ID            CREATED        
 bitnami/ruby-example     0.0.1               847d58b5bc8a        4 minutes ago       203MB
 ```
 
-You can now launch and test the image locally. You will need to access to http://YOUR_IP:3000/welcome/index
+You can now launch and test the image locally. You will need to access to `http://YOUR_IP:3000/welcome/index`
 
 ```console
 $ docker run -it --rm -p 3000:3000 bitnami/ruby-example:0.0.1
@@ -130,7 +130,7 @@ Since the service `example-svc` is defined to be of type `NodePort`, we can set 
 $ kubectl port-forward $(kubectl get pods -l app=example -o jsonpath="{ .items[0].metadata.name }") 3000:3000
 ```
 
-The command forwards the local port `3000` to port `3000` of the Pod container. You can access the application by visiting the http://localhost:3000/welcome/index.
+The command forwards the local port `3000` to port `3000` of the Pod container. You can access the application by visiting the `http://localhost:3000/welcome/index`.
 
 > **Note:**
 >
