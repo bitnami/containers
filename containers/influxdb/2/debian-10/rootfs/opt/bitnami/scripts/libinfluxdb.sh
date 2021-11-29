@@ -140,7 +140,7 @@ EOF
 #   None
 #########################
 influxdb_branch() {
-    local -r version=$(influx version 2>/dev/null || influx -version)
+    local -r version=$(influxd version 2>/dev/null || influxd -version)
     debug "Calculate branch with: ${version}"
 
     local branch
@@ -370,8 +370,8 @@ influxdb_v2_create_user() {
     INFLUX_ACTIVE_CONFIG="${INFLUXDB_ADMIN_CONFIG_NAME}" "${INFLUXDB_BIN_DIR}/influx" user create "${params[@]}"
 
     if is_boolean_yes "${INFLUXDB_CREATE_USER_TOKEN}"; then
-        local read_grants=("--read-buckets" "--read-checks" "--read-dashboards" "--read-dbrps" "--read-notificationEndpoints" "--read-notificationRules" "--read-orgs" "--read-tasks")
-        local write_grants=("--write-buckets" "--write-checks" "--write-dashboards" "--write-dbrps" "--write-notificationEndpoints" "--write-notificationRules" "--write-orgs" "--write-tasks")
+        local read_grants=("--read-buckets" "--read-checks" "--read-dashboards" "--read-dbrp" "--read-notificationEndpoints" "--read-notificationRules" "--read-orgs" "--read-tasks")
+        local write_grants=("--write-buckets" "--write-checks" "--write-dashboards" "--write-dbrp" "--write-notificationEndpoints" "--write-notificationRules" "--write-orgs" "--write-tasks")
 
         local -a grants
         if [[ ${kind} = "admin" ]] || [[ ${kind} = "write" ]]; then
