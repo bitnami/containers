@@ -22,12 +22,8 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/jenkins/postunpack.sh
 ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.303.3-debian-10-r19" \
+    BITNAMI_IMAGE_VERSION="2.303.3-debian-10-r20" \
     JAVA_HOME="/opt/bitnami/java" \
-    LD_PRELOAD="/opt/bitnami/common/lib/libnss_wrapper.so" \
-    LNAME="jenkins" \
-    NSS_WRAPPER_GROUP="/opt/bitnami/jenkins/nss-wrapper/nss_group" \
-    NSS_WRAPPER_PASSWD="/opt/bitnami/jenkins/nss-wrapper/nss_passwd" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/git/bin:$PATH"
 
 EXPOSE 8080 8443 50000
