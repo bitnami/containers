@@ -116,7 +116,7 @@ Since the service `example-svc` is defined to be of type `NodePort`, we can set 
 $ kubectl port-forward $(kubectl get pods -l app=example -o jsonpath="{ .items[0].metadata.name }") 3000:3000
 ```
 
-The command forwards the local port `3000` to port `3000` of the Pod container. You can access the application by visiting the http://localhost:3000.
+The command forwards the local port `3000` to port `3000` of the Pod container. You can access the application by visiting the `http://localhost:3000`.
 
 > **Note:**
 >
