@@ -1,18 +1,20 @@
-# What is Kubeapps Asset Syncer?
+# Kubeapps Asset Syncer packaged by Bitnami
 
-> Kubeapps Asset Syncer is one of the main components of Kubeapps, a Web-based application deployment and management tool for Kubernetes clusters.
->
-> This component scans a Helm Chart Repository and populates its metadata in a MongoDB&reg; database.
+## What is Kubeapps Asset Syncer?
 
-[https://kubeapps.com/](https://kubeapps.com/)
+> Kubeapps Asset Syncer is one of the main components of Kubeapps, a Web-based application deployment and management tool for Kubernetes clusters. It scans a chart repository and populates its metadata.
 
-# TL;DR
+[Overview of Kubeapps Asset Syncer](https://github.com/kubeapps/kubeapps)
+
+
+
+## TL;DR
 
 ```console
 $ docker run --name kubeapps-asset-syncer bitnami/kubeapps-asset-syncer:latest
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -21,30 +23,30 @@ $ docker run --name kubeapps-asset-syncer bitnami/kubeapps-asset-syncer:latest
 
 > This [CVE scan report](https://quay.io/repository/bitnami/kubeapps-asset-syncer?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy Kubeapps Asset Syncer in Kubernetes?
+## How to deploy Kubeapps Asset Syncer in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Kubeapps Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/kubeapps).
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-scratch`, `2.4.1`, `2.4.1-scratch-r1`, `latest` (2/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-asset-syncer/blob/2.4.1-scratch-r1/2/scratch/Dockerfile)
+* [`2`, `2-scratch`, `2.4.2`, `2.4.2-scratch-r0`, `latest` (2/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-asset-syncer/blob/2.4.2-scratch-r0/2/scratch/Dockerfile)
 
-# Configuration
+## Configuration
 
 For further documentation, please check [here](https://github.com/kubeapps/kubeapps/tree/master/cmd/asset-syncer).
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-kubeapps-asset-syncer/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-kubeapps-asset-syncer/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-kubeapps-asset-syncer/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -54,7 +56,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright (c) 2021 Bitnami
 
