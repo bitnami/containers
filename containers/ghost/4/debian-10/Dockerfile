@@ -21,9 +21,7 @@ RUN /opt/bitnami/scripts/ghost/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="4.24.0-debian-10-r0" \
-    LD_PRELOAD="/opt/bitnami/common/lib/libnss_wrapper.so" \
-    LNAME="ghost" \
+    BITNAMI_IMAGE_VERSION="4.24.0-debian-10-r1" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
@@ -34,8 +32,6 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     MYSQL_CLIENT_CREATE_DATABASE_USER="" \
     MYSQL_CLIENT_ENABLE_SSL="no" \
     MYSQL_CLIENT_SSL_CA_FILE="" \
-    NSS_WRAPPER_GROUP="/opt/bitnami/ghost/nss-wrapper/nss_group" \
-    NSS_WRAPPER_PASSWD="/opt/bitnami/ghost/nss-wrapper/nss_passwd" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/ghost/bin:$PATH"
 
 EXPOSE 2368 3000
