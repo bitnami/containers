@@ -28,7 +28,7 @@ repmgr_get_node_id() {
     else
         num="${REPMGR_NODE_NAME##*-}"
         if [[ "$num" != "" ]]; then
-            num=$((num+1000))
+            num=$((num + 1000))
             echo "$num"
         fi
     fi
@@ -147,7 +147,7 @@ repmgr_get_upstream_node() {
 
     if [[ -n "$REPMGR_PARTNER_NODES" ]]; then
         info "Querying all partner nodes for common upstream node..."
-        read -r -a nodes <<< "$(tr ',;' ' ' <<< "${REPMGR_PARTNER_NODES}")"
+        read -r -a nodes <<<"$(tr ',;' ' ' <<<"${REPMGR_PARTNER_NODES}")"
         for node in "${nodes[@]}"; do
             # intentionally accept inncorect address (without [schema:]// )
             [[ "$node" =~ ^(([^:/?#]+):)?// ]] || node="tcp://${node}"
@@ -223,8 +223,8 @@ repmgr_get_primary_node() {
     else
         if [[ -z "$upstream_host" ]]; then
             if [[ "${REPMGR_PRIMARY_HOST}:${REPMGR_PRIMARY_PORT}" != "${REPMGR_NODE_NETWORK_NAME}:${REPMGR_PORT_NUMBER}" ]]; then
-              primary_host="$REPMGR_PRIMARY_HOST"
-              primary_port="$REPMGR_PRIMARY_PORT"
+                primary_host="$REPMGR_PRIMARY_HOST"
+                primary_port="$REPMGR_PRIMARY_PORT"
             fi
         else
             primary_host="$upstream_host"
@@ -286,7 +286,6 @@ repmgr_set_property() {
 
     replace_in_file "$conf_file" "^#*\s*${property}\s*=.*" "${property} = '${value}'" false
 }
-
 
 ########################
 # Create the repmgr user (with )
@@ -359,6 +358,7 @@ repmgr_inject_postgresql_configuration() {
     postgresql_set_property "archive_command" "/bin/true"
     postgresql_configure_connections
     postgresql_configure_timezone
+    postgresql_configure_synchronous_replication
     # Redirect logs to POSTGRESQL_LOG_FILE
     postgresql_configure_logging
     postgresql_set_property "logging_collector" "on"
@@ -386,7 +386,7 @@ repmgr_inject_pghba_configuration() {
         tls_auth=""
     fi
 
-    cat > "${POSTGRESQL_MOUNTED_CONF_DIR}/pg_hba.conf" << EOF
+    cat >"${POSTGRESQL_MOUNTED_CONF_DIR}/pg_hba.conf" <<EOF
 host     all            $REPMGR_USERNAME    0.0.0.0/0    trust
 host     $REPMGR_DATABASE         $REPMGR_USERNAME    0.0.0.0/0    trust
 host     $REPMGR_DATABASE         $REPMGR_USERNAME    ::/0    trust
@@ -432,7 +432,7 @@ repmgr_is_file_external() {
 repmgr_postgresql_configuration() {
     info "Preparing PostgreSQL configuration..."
     # User injected custom configuration
-    if [[ -d "$REPMGR_MOUNTED_CONF_DIR" ]] && compgen -G "$REPMGR_MOUNTED_CONF_DIR"/* > /dev/null; then
+    if [[ -d "$REPMGR_MOUNTED_CONF_DIR" ]] && compgen -G "$REPMGR_MOUNTED_CONF_DIR"/* >/dev/null; then
         debug "User injected custom configuration detected!"
     fi
     ensure_dir_exists "$POSTGRESQL_MOUNTED_CONF_DIR"
@@ -447,7 +447,7 @@ repmgr_postgresql_configuration() {
         repmgr_inject_pghba_configuration
     fi
     if [[ "$REPMGR_USE_PASSFILE" = "true" ]] && [[ ! -f "${REPMGR_PASSFILE_PATH}" ]]; then
-        echo "*:*:*:${REPMGR_USERNAME}:${REPMGR_PASSWORD}" > "${REPMGR_PASSFILE_PATH}"
+        echo "*:*:*:${REPMGR_USERNAME}:${REPMGR_PASSWORD}" >"${REPMGR_PASSFILE_PATH}"
         chmod 600 "${REPMGR_PASSFILE_PATH}"
     fi
 }
@@ -470,7 +470,7 @@ repmgr_generate_repmgr_config() {
     local -r waldir=$(postgresql_get_waldir)
     local -r waldir_option=$([[ -n "$waldir" ]] && echo "--waldir=$waldir")
 
-    cat << EOF >> "${REPMGR_CONF_FILE}.tmp"
+    cat <<EOF >>"${REPMGR_CONF_FILE}.tmp"
 event_notification_command='${REPMGR_EVENTS_DIR}/router.sh %n %e %s "%t" "%d"'
 ssh_options='-o "StrictHostKeyChecking no" -v'
 use_replication_slots='${REPMGR_USE_REPLICATION_SLOTS}'
@@ -497,13 +497,13 @@ EOF
 
     if [[ -f "${REPMGR_MOUNTED_CONF_DIR}/repmgr.conf" ]]; then
         # remove from default the overrided keys, and append the desired conf
-        grep -xvFf "${REPMGR_CONF_FILE}.tmp" "${REPMGR_MOUNTED_CONF_DIR}/repmgr.conf" | awk -F"=" '{print $1;}' > "${REPMGR_CONF_FILE}.keys" && grep -v -f "${REPMGR_CONF_FILE}.keys" "${REPMGR_CONF_FILE}.tmp" > "$REPMGR_CONF_FILE" && cat "${REPMGR_MOUNTED_CONF_DIR}/repmgr.conf" >> "$REPMGR_CONF_FILE"
+        grep -xvFf "${REPMGR_CONF_FILE}.tmp" "${REPMGR_MOUNTED_CONF_DIR}/repmgr.conf" | awk -F"=" '{print $1;}' >"${REPMGR_CONF_FILE}.keys" && grep -v -f "${REPMGR_CONF_FILE}.keys" "${REPMGR_CONF_FILE}.tmp" >"$REPMGR_CONF_FILE" && cat "${REPMGR_MOUNTED_CONF_DIR}/repmgr.conf" >>"$REPMGR_CONF_FILE"
     else
         cp "${REPMGR_CONF_FILE}.tmp" "${REPMGR_CONF_FILE}"
     fi
 
     if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
-        echo "passfile='${REPMGR_PASSFILE_PATH}'" >> "$REPMGR_CONF_FILE"
+        echo "passfile='${REPMGR_PASSFILE_PATH}'" >>"$REPMGR_CONF_FILE"
     fi
 }
 
@@ -520,11 +520,11 @@ repmgr_wait_primary_node() {
     local return_value=1
     local -i timeout=60
     local -i step=10
-    local -i max_tries=$(( timeout / step ))
+    local -i max_tries=$((timeout / step))
     local schemata
     info "Waiting for primary node..."
     debug "Wait for schema $REPMGR_DATABASE.repmgr on '${REPMGR_CURRENT_PRIMARY_HOST}:${REPMGR_CURRENT_PRIMARY_PORT}', will try $max_tries times with $step delay seconds (TIMEOUT=$timeout)"
-    for ((i = 0 ; i <= timeout ; i+=step )); do
+    for ((i = 0; i <= timeout; i += step)); do
         local query="SELECT 1 FROM information_schema.schemata WHERE catalog_name='$REPMGR_DATABASE' AND schema_name='repmgr'"
         if ! schemata="$(echo "$query" | NO_ERRORS=true postgresql_remote_execute "$REPMGR_CURRENT_PRIMARY_HOST" "$REPMGR_CURRENT_PRIMARY_PORT" "$REPMGR_DATABASE" "$REPMGR_USERNAME" "$REPMGR_PASSWORD" "-tA")"; then
             debug "Host '${REPMGR_CURRENT_PRIMARY_HOST}:${REPMGR_CURRENT_PRIMARY_PORT}' is not accessible"
@@ -698,7 +698,7 @@ repmgr_initialize() {
             repmgr_clone_primary
         else
             repmgr_rewind
-      fi
+        fi
     fi
     postgresql_initialize
     if ! repmgr_is_file_external "postgresql.conf"; then
@@ -711,7 +711,7 @@ repmgr_initialize() {
         postgresql_configure_fsync
     fi
     if ! repmgr_is_file_external "pg_hba.conf"; then
-        is_boolean_yes "$REPMGR_PGHBA_TRUST_ALL" ||  postgresql_restrict_pghba
+        is_boolean_yes "$REPMGR_PGHBA_TRUST_ALL" || postgresql_restrict_pghba
     fi
     if [[ "$REPMGR_ROLE" = "primary" ]]; then
         if is_boolean_yes "$POSTGRESQL_FIRST_BOOT"; then
