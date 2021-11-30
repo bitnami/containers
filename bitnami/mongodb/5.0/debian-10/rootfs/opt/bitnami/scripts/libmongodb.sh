@@ -46,44 +46,44 @@ mongodb_field_separator() {
 #########################
 mongodb_auth() {
     case "${1:-all}" in
-        extra)
-            local -a databases_extra
-            local -a usernames_extra
-            local -a passwords_extra
-            # Start by filling in locally scoped databases, usernames and
-            # passwords arrays with the content of the _EXTRA_ environment
-            # variables.
-            IFS="$(mongodb_field_separator "$MONGODB_EXTRA_DATABASES")" read -r -a databases_extra <<< "$MONGODB_EXTRA_DATABASES"
-            IFS="$(mongodb_field_separator "$MONGODB_EXTRA_USERNAMES")" read -r -a usernames_extra <<< "$MONGODB_EXTRA_USERNAMES"
-            IFS="$(mongodb_field_separator "$MONGODB_EXTRA_PASSWORDS")" read -r -a passwords_extra <<< "$MONGODB_EXTRA_PASSWORDS"
-            # Force missing empty passwords/database names (occurs when
-            # MONGODB_EXTRA_PASSWORDS/DATABASES ends with a separator, e.g. a
-            # comma or semi-colon), then copy into the databases, usernames and
-            # passwords arrays (global).
-            for (( i=0; i<${#usernames_extra[@]}; i++ )); do
-                if [[ -z "${passwords_extra[i]:-}" ]]; then
-                    passwords_extra[i]=""
-                fi
-                if [[ -z "${databases_extra[i]:-}" ]]; then
-                    databases_extra[i]=""
-                fi
-                databases+=("${databases_extra[i]}")
-                usernames+=("${usernames_extra[i]}")
-                passwords+=("${passwords_extra[i]}")
-            done
-            ;;
-        single)
-            # Add the content of the "regular" environment variables to the arrays
-            databases+=("$MONGODB_DATABASE")
-            usernames+=("$MONGODB_USERNAME")
-            passwords+=("$MONGODB_PASSWORD")
-            ;;
-        all)
-            # Perform the following in this order to respect the priority of the
-            # environment variables.
-            mongodb_auth single
-            mongodb_auth extra
-            ;;
+    extra)
+        local -a databases_extra
+        local -a usernames_extra
+        local -a passwords_extra
+        # Start by filling in locally scoped databases, usernames and
+        # passwords arrays with the content of the _EXTRA_ environment
+        # variables.
+        IFS="$(mongodb_field_separator "$MONGODB_EXTRA_DATABASES")" read -r -a databases_extra <<<"$MONGODB_EXTRA_DATABASES"
+        IFS="$(mongodb_field_separator "$MONGODB_EXTRA_USERNAMES")" read -r -a usernames_extra <<<"$MONGODB_EXTRA_USERNAMES"
+        IFS="$(mongodb_field_separator "$MONGODB_EXTRA_PASSWORDS")" read -r -a passwords_extra <<<"$MONGODB_EXTRA_PASSWORDS"
+        # Force missing empty passwords/database names (occurs when
+        # MONGODB_EXTRA_PASSWORDS/DATABASES ends with a separator, e.g. a
+        # comma or semi-colon), then copy into the databases, usernames and
+        # passwords arrays (global).
+        for ((i = 0; i < ${#usernames_extra[@]}; i++)); do
+            if [[ -z "${passwords_extra[i]:-}" ]]; then
+                passwords_extra[i]=""
+            fi
+            if [[ -z "${databases_extra[i]:-}" ]]; then
+                databases_extra[i]=""
+            fi
+            databases+=("${databases_extra[i]}")
+            usernames+=("${usernames_extra[i]}")
+            passwords+=("${passwords_extra[i]}")
+        done
+        ;;
+    single)
+        # Add the content of the "regular" environment variables to the arrays
+        databases+=("$MONGODB_DATABASE")
+        usernames+=("$MONGODB_USERNAME")
+        passwords+=("$MONGODB_PASSWORD")
+        ;;
+    all)
+        # Perform the following in this order to respect the priority of the
+        # environment variables.
+        mongodb_auth single
+        mongodb_auth extra
+        ;;
     esac
 }
 
@@ -194,7 +194,7 @@ Available options are 'primary/secondary/arbiter/hidden'"
     if [[ -n "$MONGODB_EXTRA_USERNAMES" ]]; then
         # Here we can access the arrays usernames and passwordsa, as these have
         # been initialised earlier on.
-        for (( i=0; i<${#passwords[@]}; i++ )); do
+        for ((i = 0; i < ${#passwords[@]}; i++)); do
             if [[ -z "${passwords[i]}" ]]; then
                 warn "User ${usernames[i]} will not be created as its password is empty or not set. MongoDB cannot create users with blank passwords."
             fi
@@ -638,7 +638,7 @@ mongodb_create_user() {
     [[ -z "$database" ]] && query="db.getSiblingDB(db.stats().db).createUser({ user: '$user', pwd: '$password', roles: [{role: 'readWrite', db: db.getSiblingDB(db.stats().db).stats().db }] })"
     # Create user, discarding mongo CLI output for clean logs
     info "Creating user '$user'..."
-    mongodb_execute "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD" "" "127.0.0.1" <<< "$query"
+    mongodb_execute "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD" "" "127.0.0.1" <<<"$query"
 }
 
 ########################
@@ -672,12 +672,12 @@ EOF
         if [[ -n "$MONGODB_EXTRA_DATABASES" ]]; then
             # Loop over the databases, usernames and passwords arrays, creating
             # each user in the database at the same index.
-            for (( i=0; i<${#databases[@]}; i++ )); do
+            for ((i = 0; i < ${#databases[@]}; i++)); do
                 mongodb_create_user "${usernames[i]}" "${passwords[i]}" "${databases[i]}"
             done
         else
             # Loop over all users and create them within the default database.
-            for (( i=0; i<${#usernames[@]}; i++ )); do
+            for ((i = 0; i < ${#usernames[@]}; i++)); do
                 mongodb_create_user "${usernames[i]}" "${passwords[i]}"
             done
         fi
@@ -964,7 +964,7 @@ mongodb_is_node_available() {
 
     local result
     result=$(
-        mongodb_execute_print_output "$user" "$password" "admin" "$host" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
+        mongodb_execute_print_output "$user" "$password" "admin" "$host" "$port" <<EOF
 db.getUsers()
 EOF
     )
