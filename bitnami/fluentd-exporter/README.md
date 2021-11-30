@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.2.0`, `0.2.0-debian-10-r625`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-debian-10-r625/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.2.0`, `0.2.0-debian-10-r626`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-debian-10-r626/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd-exporter).
 
@@ -96,7 +96,7 @@ Fluentd exporter uses the fluentd monitoring agent api. [Fluentd official docume
     port 24220
   </source>
 ```
-The metrics can then be accessed at: curl http://host:24220/api/plugins.json
+The metrics can then be accessed at: `curl http://host:24220/api/plugins.json`
 
 ### Flags/Arguments
 ```console
