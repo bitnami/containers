@@ -160,7 +160,7 @@ plugin_dir=${DB_BASE_DIR}/lib/plugin
 [client]
 port=${DB_DEFAULT_PORT_NUMBER}
 socket=${DB_SOCKET_FILE}
-default_character_set=UTF8
+default_character_set=${DB_DEFAULT_CHARACTER_SET}
 plugin_dir=${DB_BASE_DIR}/lib/plugin
 
 [manager]
