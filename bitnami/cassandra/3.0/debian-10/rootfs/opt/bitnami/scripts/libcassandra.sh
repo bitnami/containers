@@ -13,136 +13,6 @@
 . /opt/bitnami/scripts/libvalidations.sh
 
 ########################
-# Load global variables used on Cassandra configuration.
-# Globals:
-#   CASSANDRA_*
-# Arguments:
-#   None
-# Returns:
-#   Series of exports to be used as 'eval' arguments
-#########################
-cassandra_env() {
-    cat <<"EOF"
-# Bitnami debug
-export MODULE=cassandra
-export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
-
-# Paths
-export CASSANDRA_BASE_DIR="/opt/bitnami/cassandra"
-export CASSANDRA_BIN_DIR="${CASSANDRA_BASE_DIR}/bin"
-export CASSANDRA_CONF_DIR="${CASSANDRA_BASE_DIR}/conf"
-export CASSANDRA_VOLUME_DIR="${CASSANDRA_VOLUME_DIR:-/bitnami/cassandra}"
-export CASSANDRA_DATA_DIR="${CASSANDRA_DATA_DIR:-${CASSANDRA_VOLUME_DIR}/data}"
-export CASSANDRA_COMMITLOG_DIR="${CASSANDRA_COMMITLOG_DIR:-${CASSANDRA_DATA_DIR}/commitlog}"
-export CASSANDRA_DEFAULT_CONF_DIR="${CASSANDRA_BASE_DIR}/conf.default"
-export CASSANDRA_HISTORY_DIR="/.cassandra"
-export CASSANDRA_INITSCRIPTS_DIR=/docker-entrypoint-initdb.d
-export CASSANDRA_LOG_DIR="${CASSANDRA_BASE_DIR}/logs"
-export CASSANDRA_MOUNTED_CONF_DIR="${CASSANDRA_MOUNTED_CONF_DIR:-${CASSANDRA_VOLUME_DIR}/conf}"
-export CASSANDRA_TMP_DIR="${CASSANDRA_BASE_DIR}/tmp"
-export JAVA_BASE_DIR="/opt/bitnami/java"
-export JAVA_BIN_DIR="${JAVA_BASE_DIR}/bin"
-export PYTHON_BASE_DIR="/opt/bitnami/python"
-export PYTHON_BIN_DIR="${PYTHON_BASE_DIR}/bin"
-
-export CASSANDRA_CONF_FILE="${CASSANDRA_CONF_DIR}/cassandra.yaml"
-export CASSANDRA_LOG_FILE="${CASSANDRA_LOG_DIR}/cassandra.log"
-export CASSANDRA_FIRST_BOOT_LOG_FILE="${CASSANDRA_LOG_DIR}/cassandra_first_boot.log"
-export CASSANDRA_INITSCRIPTS_BOOT_LOG_FILE="${CASSANDRA_LOG_DIR}/cassandra_init_scripts_boot.log"
-export CASSANDRA_PID_FILE="${CASSANDRA_TMP_DIR}/cassandra.pid"
-
-export PATH="$CASSANDRA_BIN_DIR:$JAVA_BIN_DIR:$PYTHON_BIN_DIR:$PATH"
-
-# Users
-export CASSANDRA_DAEMON_USER="cassandra"
-export CASSANDRA_DAEMON_GROUP="cassandra"
-
-# Cluster Settings
-export CASSANDRA_CLIENT_ENCRYPTION="${CASSANDRA_CLIENT_ENCRYPTION:-false}"
-export CASSANDRA_CLUSTER_NAME="${CASSANDRA_CLUSTER_NAME:-My Cluster}"
-export CASSANDRA_DATACENTER="${CASSANDRA_DATACENTER:-dc1}"
-export CASSANDRA_ENABLE_REMOTE_CONNECTIONS="${CASSANDRA_ENABLE_REMOTE_CONNECTIONS:-true}"
-export CASSANDRA_ENABLE_RPC="${CASSANDRA_ENABLE_RPC:-true}"
-export CASSANDRA_ENABLE_USER_DEFINED_FUNCTIONS="${CASSANDRA_ENABLE_USER_DEFINED_FUNCTIONS:-false}"
-export CASSANDRA_ENDPOINT_SNITCH="${CASSANDRA_ENDPOINT_SNITCH:-SimpleSnitch}"
-export CASSANDRA_HOST="${CASSANDRA_HOST:-$(hostname)}"
-export CASSANDRA_INTERNODE_ENCRYPTION="${CASSANDRA_INTERNODE_ENCRYPTION:-none}"
-export CASSANDRA_NUM_TOKENS="${CASSANDRA_NUM_TOKENS:-256}"
-export CASSANDRA_PASSWORD_SEEDER="${CASSANDRA_PASSWORD_SEEDER:-no}"
-export CASSANDRA_SEEDS="${CASSANDRA_SEEDS:-$CASSANDRA_HOST}"
-export CASSANDRA_PEERS="${CASSANDRA_PEERS:-$CASSANDRA_SEEDS}"
-export CASSANDRA_RACK="${CASSANDRA_RACK:-rack1}"
-export CASSANDRA_BROADCAST_ADDRESS="${CASSANDRA_BROADCAST_ADDRESS:-}"
-
-# Startup CQL and init-db settings
-export CASSANDRA_STARTUP_CQL="${CASSANDRA_STARTUP_CQL:-}"
-export CASSANDRA_IGNORE_INITDB_SCRIPTS="${CASSANDRA_IGNORE_INITDB_SCRIPTS:-no}"
-
-# Ports
-export CASSANDRA_CQL_PORT_NUMBER="${CASSANDRA_CQL_PORT_NUMBER:-9042}"
-export CASSANDRA_JMX_PORT_NUMBER="${CASSANDRA_JMX_PORT_NUMBER:-7199}"
-export CASSANDRA_TRANSPORT_PORT_NUMBER="${CASSANDRA_TRANSPORT_PORT_NUMBER:-7000}"
-
-# Retries and sleep times
-export CASSANDRA_CQL_MAX_RETRIES="${CASSANDRA_CQL_MAX_RETRIES:-20}"
-export CASSANDRA_CQL_SLEEP_TIME="${CASSANDRA_CQL_SLEEP_TIME:-5}"
-export CASSANDRA_INIT_MAX_RETRIES="${CASSANDRA_INIT_MAX_RETRIES:-100}"
-export CASSANDRA_INIT_SLEEP_TIME="${CASSANDRA_INIT_SLEEP_TIME:-5}"
-export CASSANDRA_PEER_CQL_MAX_RETRIES="${CASSANDRA_PEER_CQL_MAX_RETRIES:-100}"
-export CASSANDRA_PEER_CQL_SLEEP_TIME="${CASSANDRA_PEER_CQL_SLEEP_TIME:-10}"
-
-# Authentication & Authorization
-export ALLOW_EMPTY_PASSWORD="${ALLOW_EMPTY_PASSWORD:-no}"
-export CASSANDRA_AUTHORIZER="${CASSANDRA_AUTHORIZER:-CassandraAuthorizer}"
-export CASSANDRA_AUTHENTICATOR="${CASSANDRA_AUTHENTICATOR:-PasswordAuthenticator}"
-
-# Credentials
-export CASSANDRA_USER="${CASSANDRA_USER:-cassandra}"
-export CASSANDRA_KEYSTORE_LOCATION="${CASSANDRA_KEYSTORE_LOCATION:-${CASSANDRA_VOLUME_DIR}/secrets/keystore}"
-export CASSANDRA_TRUSTSTORE_LOCATION="${CASSANDRA_TRUSTSTORE_LOCATION:-${CASSANDRA_VOLUME_DIR}/secrets/truststore}"
-export CASSANDRA_TMP_P12_FILE="${CASSANDRA_TMP_DIR}/keystore.p12"
-export CASSANDRA_SSL_CERT_FILE="${CASSANDRA_VOLUME_DIR}/client.cer.pem"
-export CASSANDRA_SSL_VALIDATE="${CASSANDRA_SSL_VALIDATE:-false}"
-
-# SSL
-# These variables are used by cqlsh
-# SSL_CERTFILE stores the CA public key, it used to validate the server
-export SSL_CERTFILE="${CASSANDRA_SSL_CERT_FILE}"
-# SSL_VALIDATE is used to indicate if the client should check the hostname in the certificate
-export SSL_VALIDATE="${CASSANDRA_SSL_VALIDATE}"
-# SSL_VERSION determines the protocol used by cqlsh when connecting with cassandra, currently TLSv1.2 is the latest available.
-export SSL_VERSION="${SSL_VERSION:-TLSv1_2}"
-EOF
-    if [[ -n "${CASSANDRA_PASSWORD_FILE:-}" ]] && [[ -f "$CASSANDRA_PASSWORD_FILE" ]]; then
-        cat <<"EOF"
-export CASSANDRA_PASSWORD="$(< "${CASSANDRA_PASSWORD_FILE}")"
-EOF
-    else
-        cat <<"EOF"
-export CASSANDRA_PASSWORD="${CASSANDRA_PASSWORD:-}"
-EOF
-    fi
-    if [[ -n "${CASSANDRA_KEYSTORE_PASSWORD_FILE:-}" ]] && [[ -f "$CASSANDRA_KEYSTORE_PASSWORD_FILE" ]]; then
-        cat <<"EOF"
-export CASSANDRA_KEYSTORE_PASSWORD="$(< "${CASSANDRA_KEYSTORE_PASSWORD_FILE}")"
-EOF
-    else
-        cat <<"EOF"
-export CASSANDRA_KEYSTORE_PASSWORD="${CASSANDRA_KEYSTORE_PASSWORD:-cassandra}"
-EOF
-    fi
-    if [[ -n "${CASSANDRA_TRUSTSTORE_PASSWORD_FILE:-}" ]] && [[ -f "$CASSANDRA_TRUSTSTORE_PASSWORD_FILE" ]]; then
-        cat <<"EOF"
-export CASSANDRA_TRUSTSTORE_PASSWORD="$(< "${CASSANDRA_TRUSTSTORE_PASSWORD_FILE}")"
-EOF
-    else
-        cat <<"EOF"
-export CASSANDRA_TRUSTSTORE_PASSWORD="${CASSANDRA_TRUSTSTORE_PASSWORD:-cassandra}"
-EOF
-    fi
-}
-
-########################
 # Change a Cassandra configuration yaml file by setting a property (cannot use yq because it removes comments)
 # Globals:
 #   CASSANDRA_*
@@ -164,6 +34,25 @@ cassandra_yaml_set() {
         replace_in_file "$conf_file" "^(#\s)?(\s*)(\-\s*)?${property}:.*" "\2\3${property}: '${value}'"
     else
         replace_in_file "$conf_file" "^(#\s)?(\s*)(\-\s*)?${property}:.*" "\2\3${property}: ${value}"
+    fi
+}
+
+#########################
+# Set default Cassandra settings if not set
+# Globals:
+#   CASSANDRA_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+cassandra_set_default_host() {
+    if [[ -z "${CASSANDRA_HOST:-}" ]]; then
+        warn "CASSANDRA_HOST not set, defaulting to system hostname"
+        local -r host="$(hostname)"
+        export CASSANDRA_HOST="$host"
+        export CASSANDRA_SEEDS="${CASSANDRA_SEEDS:-$CASSANDRA_HOST}"
+        export CASSANDRA_PEERS="${CASSANDRA_PEERS:-$CASSANDRA_SEEDS}"
     fi
 }
 
@@ -556,7 +445,7 @@ cassandra_setup_java() {
 cassandra_setup_jemalloc() {
     if ! cassandra_is_file_external "cassandra-env.sh"; then
         if [[ -n "$(find_jemalloc_lib)" ]]; then
-            echo "JVM_OPTS=\"\$JVM_OPTS -Dcassandra.libjemalloc=$(find_jemalloc_lib)\"" >> "${CASSANDRA_CONF_DIR}/cassandra-env.sh"
+            echo "JVM_OPTS=\"\$JVM_OPTS -Dcassandra.libjemalloc=$(find_jemalloc_lib)\"" >>"${CASSANDRA_CONF_DIR}/cassandra-env.sh"
         else
             warn "Couldn't find jemalloc installed. Skipping jemalloc configuration."
         fi
@@ -815,7 +704,7 @@ cassandra_custom_init_scripts() {
                 ;;
             *.cql)
                 debug "Executing $f"
-                cassandra_execute "$CASSANDRA_USER" "$CASSANDRA_PASSWORD" < "$f"
+                cassandra_execute "$CASSANDRA_USER" "$CASSANDRA_PASSWORD" <"$f"
                 ;;
             *.cql.gz)
                 debug "Executing $f"
@@ -859,7 +748,7 @@ cassandra_execute() {
     [[ -n "$keyspace" ]] && args+=("-k" "$keyspace")
     if [[ -n "$extra_args" ]]; then
         local extra_args_array=()
-        read -r -a extra_args_array <<< "$extra_args"
+        read -r -a extra_args_array <<<"$extra_args"
         [[ "${#extra_args[@]}" -gt 0 ]] && args+=("${extra_args_array[@]}")
     fi
     args+=("$host")
@@ -1084,7 +973,15 @@ cassandra_start_bg() {
 cassandra_stop() {
     ! is_cassandra_running && return
     info "Stopping Cassandra..."
-    "${CASSANDRA_BIN_DIR}/nodetool" stopdaemon
+    stop_cassandra() {
+        "${CASSANDRA_BIN_DIR}/nodetool" stopdaemon
+        is_cassandra_not_running
+    }
+
+    if ! retry_while "stop_cassandra" "$CASSANDRA_INIT_MAX_RETRIES" "$CASSANDRA_INIT_SLEEP_TIME"; then
+        error "Cassandra failed to stop"
+        exit 1
+    fi
     # Manually remove PID file
     rm -f "$CASSANDRA_PID_FILE"
 }
@@ -1106,6 +1003,19 @@ is_cassandra_running() {
     else
         is_service_running "$pid"
     fi
+}
+
+########################
+# Return true if cassandra is not running
+# Globals:
+#   KONG_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+is_cassandra_not_running() {
+    ! is_cassandra_running
 }
 
 ########################
@@ -1228,7 +1138,7 @@ cassandra_setup_from_environment_variables() {
 #   Path to a libjemalloc shared object file
 #########################
 find_jemalloc_lib() {
-    local -a locations=( "/usr/lib" "/usr/lib64" )
+    local -a locations=("/usr/lib" "/usr/lib64")
     local -r pattern='libjemalloc.so.[0-9]'
     local path
     for dir in "${locations[@]}"; do

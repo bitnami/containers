@@ -13,10 +13,10 @@ set -o pipefail
 . /opt/bitnami/scripts/libos.sh
 
 # Load Cassandra environment variables
-eval "$(cassandra_env)"
+. /opt/bitnami/scripts/cassandra-env.sh
 
 # As we cannot use "local" we will use "readonly" for read-only variables.
-# The scope of "readonly" is global, so we attach "__run_" to avoid conflicts 
+# The scope of "readonly" is global, so we attach "__run_" to avoid conflicts
 # with other variables in libcassandra.sh
 
 info "** Starting Cassandra **"
@@ -26,7 +26,7 @@ info "** Starting Cassandra **"
 # However, some applications may detect at this point that the database is ready.
 # While in other bitnami containers we would stop the database and run it in foreground,
 # we prefer keeping it running in this case.
-# So, in this run.sh script, we first check if Cassandra was already running in 
+# So, in this run.sh script, we first check if Cassandra was already running in
 # one of the two cases:
 #
 #  1) Initial cluster initialization
