@@ -13,11 +13,23 @@ set -o pipefail
 . /opt/bitnami/scripts/libkong.sh
 
 # Load Kong environment variables
-eval "$(kong_env)"
+. /opt/bitnami/scripts/kong-env.sh
+
+# In case we are working with root containers, we need to set the KONG_NGINX_USER environment variable
+# before running Kong
+
+if am_i_root && [[ -z "${KONG_NGINX_USER:-}" ]]; then
+    export KONG_NGINX_USER="${KONG_DAEMON_USER} ${KONG_DAEMON_GROUP}"
+fi
+
 if is_boolean_yes "$KONG_EXIT_AFTER_MIGRATE"; then
     info "** Container configured to just perform the database migration (KONG_EXIT_AFTER_MIGRATE=yes). Exiting now **"
     exit 0
 else
     info "** Starting Kong **"
-    exec kong start
+    if am_i_root; then
+        exec gosu "$KONG_DAEMON_USER" kong start
+    else
+        exec kong start
+    fi
 fi

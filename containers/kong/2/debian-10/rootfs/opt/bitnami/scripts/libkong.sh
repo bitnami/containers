@@ -13,99 +13,6 @@
 . /opt/bitnami/scripts/libvalidations.sh
 
 ########################
-# Load global variables used for Kong configuration.
-# Globals:
-#   KONG_*
-# Arguments:
-#   None
-# Returns:
-#   Series of exports to be used as 'eval' arguments
-#########################
-kong_env() {
-    # Avoid environment settings getting overridden twice
-    if [[ -n "${MODULE:-}" ]]; then
-        return
-    fi
-
-    cat <<"EOF"
-# Bitnami debug
-export MODULE=kong
-export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
-
-# Paths
-export KONG_BASE_DIR="/opt/bitnami/kong"
-export KONG_CONF_DIR="${KONG_BASE_DIR}/conf"
-export KONG_SERVER_DIR="${KONG_BASE_DIR}/server"
-
-export KONG_CONF_FILE="${KONG_CONF_DIR}/kong.conf"
-export KONG_DEFAULT_CONF_FILE="${KONG_CONF_DIR}/kong.conf.default"
-export KONG_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
-
-# Users
-export KONG_DAEMON_USER="${KONG_DAEMON_USER:-kong}"
-export KONG_DAEMON_GROUP="${KONG_DAEMON_GROUP:-kong}"
-
-# Cluster settings
-export KONG_MIGRATE="${KONG_MIGRATE:-no}"
-export KONG_EXIT_AFTER_MIGRATE="${KONG_EXIT_AFTER_MIGRATE:-no}"
-
-# Port and service bind configurations for KONG_PROXY_LISTEN and KONG_ADMIN_LISTEN
-# By setting these separately, we are consistent with other Bitnami solutions
-# However it is still possible to directly set KONG_PROXY_LISTEN and KONG_ADMIN_LISTEN
-export KONG_PROXY_LISTEN_ADDRESS="${KONG_PROXY_LISTEN_ADDRESS:-0.0.0.0}"
-export KONG_PROXY_HTTP_PORT_NUMBER="${KONG_PROXY_HTTP_PORT_NUMBER:-8000}"
-export KONG_PROXY_HTTPS_PORT_NUMBER="${KONG_PROXY_HTTPS_PORT_NUMBER:-8443}"
-export KONG_ADMIN_LISTEN_ADDRESS="${KONG_ADMIN_LISTEN_ADDRESS:-127.0.0.1}"
-export KONG_ADMIN_HTTP_PORT_NUMBER="${KONG_ADMIN_HTTP_PORT_NUMBER:-8001}"
-export KONG_ADMIN_HTTPS_PORT_NUMBER="${KONG_ADMIN_HTTPS_PORT_NUMBER:-8444}"
-
-# Kong configuration
-# These environment variables are used by Kong and allow overriding values in its configuration file
-export KONG_NGINX_DAEMON="off"
-EOF
-
-    if am_i_root; then
-        cat <<"EOF"
-export KONG_NGINX_USER="${KONG_DAEMON_USER} ${KONG_DAEMON_GROUP}"
-EOF
-    fi
-
-    if [[ -f "${KONG_CASSANDRA_PASSWORD_FILE:-}" ]]; then
-        cat <<"EOF"
-export KONG_CASSANDRA_PASSWORD="$(< "${KONG_CASSANDRA_PASSWORD_FILE}")"
-EOF
-    fi
-
-    if [[ -f "${KONG_POSTGRESQL_PASSWORD_FILE:-}" ]]; then
-        cat <<"EOF"
-export KONG_PG_PASSWORD="$(< "${KONG_POSTGRESQL_PASSWORD_FILE}")"
-EOF
-    fi
-
-    # Compound environment variables that form a single Kong configuration entry
-    if [[ -n "${KONG_PROXY_LISTEN:-}" ]]; then
-        cat <<"EOF"
-export KONG_PROXY_LISTEN_OVERRIDE="yes"
-EOF
-    else
-        cat <<"EOF"
-export KONG_PROXY_LISTEN="${KONG_PROXY_LISTEN_ADDRESS}:${KONG_PROXY_HTTP_PORT_NUMBER}, ${KONG_PROXY_LISTEN_ADDRESS}:${KONG_PROXY_HTTPS_PORT_NUMBER} ssl"
-export KONG_PROXY_LISTEN_OVERRIDE="no"
-EOF
-    fi
-    if [[ -n "${KONG_ADMIN_LISTEN:-}" ]]; then
-        cat <<"EOF"
-export KONG_ADMIN_LISTEN_OVERRIDE="yes"
-EOF
-    else
-        cat <<"EOF"
-export KONG_ADMIN_LISTEN="${KONG_ADMIN_LISTEN_ADDRESS}:${KONG_ADMIN_HTTP_PORT_NUMBER}, ${KONG_ADMIN_LISTEN_ADDRESS}:${KONG_ADMIN_HTTPS_PORT_NUMBER} ssl"
-export KONG_ADMIN_LISTEN_OVERRIDE="no"
-EOF
-    fi
-}
-
-########################
 # Validate settings in KONG_* environment variables
 # Globals:
 #   KONG_*
@@ -155,7 +62,7 @@ kong_validate() {
         local -r total="$#"
         for i in $(seq 1 "$((total - 1))"); do
             for j in $(seq "$((i + 1))" "$total"); do
-                if (( "${!i}" == "${!j}" )); then
+                if (("${!i}" == "${!j}")); then
                     print_validation_error "${!i} and ${!j} are bound to the same port"
                 fi
             done
@@ -230,6 +137,7 @@ kong_initialize() {
     info "Initializing Kong"
 
     info "Waiting for database connection to succeed"
+    kong_configure_from_environment_variables
 
     while ! kong_migrations_list_output="$(kong migrations list 2>&1)"; do
         if is_boolean_yes "$KONG_MIGRATE" && [[ "$kong_migrations_list_output" =~ "Database needs bootstrapping"* ]]; then
@@ -249,6 +157,74 @@ kong_initialize() {
             kong migrations finish
         done
     fi
+
+    # Fix server ownership because of running the kong migrate commands as root
+    am_i_root && chown -R "$KONG_DAEMON_USER":"$KONG_DAEMON_GROUP" "$KONG_SERVER_DIR" "$KONG_CONF_DIR"
+
+    # Set return code to avoid issues in previous commands
+    true
+}
+
+########################
+# Set a configuration to Kong's configuration file
+# Globals:
+#   KONG_CONF_FILE
+# Arguments:
+#   $1 - key
+#   $2 - value
+# Returns:
+#   None
+#########################
+kong_conf_set() {
+    local -r key="${1:?missing key}"
+    local -r value="${2:-}"
+
+    # Check if the value was commented or set before
+    if grep -q "^#*${key}\s*=[^#]*" "$KONG_CONF_FILE"; then
+        debug "Updating entry for property '${key}' in configuration file"
+        # Update the existing key (leave trailing space for comments)
+        sed -ri "s|^#*(${key}\s*=)[^#]*|\1 ${value} |" "$KONG_CONF_FILE"
+    else
+        debug "Adding new entry for property '${key}' in configuration file"
+        # Add a new key
+        printf '%s = %s\n' "$key" "$value" >>"$KONG_CONF_FILE"
+    fi
+}
+
+########################
+# Uncomment non-empty entries in Kong configuration
+# Globals:
+#   KONG_CONF_FILE
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+kong_configure_non_empty_values() {
+    # Uncomment all non-empty keys in the main Kong configuration file
+    sed -ri 's/^#+([a-z_ ]+)=(\s*[^# ]+)/\1=\2 /' "$KONG_CONF_FILE"
+
+    # Comment read-only postgres connection parameters again, as default values fail to work properly
+    sed -ri 's/(^pg_ro_.+)=(\s*[^# ]+)/#\1=\2 /' "$KONG_CONF_FILE"
+}
+
+########################
+# Configure Kong configuration files from environment variables
+# Globals:
+#   KONG_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+kong_configure_from_environment_variables() {
+    # Map environment variables to config properties
+    for var in "${!KONG_CFG_@}"; do
+        key="$(echo "$var" | sed -e 's/^KONG_CFG_//g' | tr '[:upper:]' '[:lower:]')"
+
+        value="${!var}"
+        kong_conf_set "$key" "$value"
+    done
 }
 
 ########################
@@ -261,7 +237,7 @@ kong_initialize() {
 #   None
 #########################
 is_kong_running() {
-    if kong health 2>&1 | grep -E "Kong is healthy"  > /dev/null; then
+    if kong health 2>&1 | grep -E "Kong is healthy" >/dev/null; then
         true
     else
         false
@@ -291,13 +267,13 @@ is_kong_not_running() {
 #   None
 #########################
 kong_stop() {
-   local -r retries=5
-   local -r sleep_time=5
+    local -r retries=5
+    local -r sleep_time=5
     kong stop
-   if ! retry_while is_kong_not_running "$retries" "$sleep_time"; then
-       error "Kong failed to shut down"
-       exit 1
-   fi
+    if ! retry_while is_kong_not_running "$retries" "$sleep_time"; then
+        error "Kong failed to shut down"
+        exit 1
+    fi
 }
 
 ########################
@@ -310,13 +286,13 @@ kong_stop() {
 #   None
 #########################
 kong_start_bg() {
-   local -r retries=5
-   local -r sleep_time=5
-   info "Starting kong in background"
-   kong start &
-   if retry_while is_kong_running "$retries" "$sleep_time"; then
-       info "Kong started successfully in background"
-   fi
+    local -r retries=5
+    local -r sleep_time=5
+    info "Starting kong in background"
+    kong start &
+    if retry_while is_kong_running "$retries" "$sleep_time"; then
+        info "Kong started successfully in background"
+    fi
 }
 
 ########################
@@ -330,23 +306,26 @@ kong_start_bg() {
 #########################
 kong_custom_init_scripts() {
     if [[ -n $(find "${KONG_INITSCRIPTS_DIR}/" -type f -regex ".*\.sh") ]]; then
-        info "Loading user's custom files from $KONG_INITSCRIPTS_DIR ...";
+        info "Loading user's custom files from $KONG_INITSCRIPTS_DIR ..."
         local -r tmp_file="/tmp/filelist"
         kong_start_bg
-        find "${KONG_INITSCRIPTS_DIR}/" -type f -regex ".*\.sh" | sort > "$tmp_file"
+        find "${KONG_INITSCRIPTS_DIR}/" -type f -regex ".*\.sh" | sort >"$tmp_file"
         while read -r f; do
             case "$f" in
-                *.sh)
-                    if [[ -x "$f" ]]; then
-                        debug "Executing $f"; "$f"
-                    else
-                        debug "Sourcing $f"; . "$f"
-                    fi
-                    ;;
-                *)
-                    debug "Ignoring $f" ;;
+            *.sh)
+                if [[ -x "$f" ]]; then
+                    debug "Executing $f"
+                    "$f"
+                else
+                    debug "Sourcing $f"
+                    . "$f"
+                fi
+                ;;
+            *)
+                debug "Ignoring $f"
+                ;;
             esac
-        done < $tmp_file
+        done <$tmp_file
         kong_stop
         rm -f "$tmp_file"
     else
