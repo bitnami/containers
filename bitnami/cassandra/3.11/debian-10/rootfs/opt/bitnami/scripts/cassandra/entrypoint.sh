@@ -12,7 +12,7 @@ set -o pipefail
 . /opt/bitnami/scripts/libcassandra.sh
 
 # Load Cassandra environment variables
-eval "$(cassandra_env)"
+. /opt/bitnami/scripts/cassandra-env.sh
 
 print_welcome_page
 
