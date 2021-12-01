@@ -12,7 +12,7 @@ set -o pipefail
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libkong.sh
 
-eval "$(kong_env)"
+. /opt/bitnami/scripts/kong-env.sh
 
 print_welcome_page
 

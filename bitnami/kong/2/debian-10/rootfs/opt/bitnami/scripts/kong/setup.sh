@@ -12,7 +12,7 @@ set -o pipefail
 . /opt/bitnami/scripts/libkong.sh
 
 # Load Kong environment variables
-eval "$(kong_env)"
+. /opt/bitnami/scripts/kong-env.sh
 
 # Ensure Kong environment variables are valid
 kong_validate
