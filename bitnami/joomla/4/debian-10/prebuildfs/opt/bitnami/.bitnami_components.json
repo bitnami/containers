@@ -36,16 +36,16 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "6eb19b355700feff6930dbc9925f3083be864a81e48590035229dc3c34402211",
+        "digest": "cc951d54d598e593dd65ee846ca81a75ae22d53807c000ec7cf4496f5e141ee1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.26-1"
+        "version": "7.4.26-2"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "00722b62c7561929e039877a6e445a4bb782c340890c0a090fdae3c9e1960161",
+        "digest": "3fccec52b33af46e65093016202786ee719b25f19a8c73552335798d30b477a1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-1"
+        "version": "1.0.1-2"
     }
 }
