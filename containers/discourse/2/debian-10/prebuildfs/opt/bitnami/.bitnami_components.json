@@ -29,10 +29,10 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "53575c1af09f423b9a2553b8b9880462f192961f4ada8fafa70a0238b106f26a",
+        "digest": "5753bbbe5052000888c24ef8c918cfc45577878b03cc4dcfe7d53ea562a48e5a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "14.18.1-0"
+        "version": "14.18.2-0"
     },
     "postgresql-client": {
         "arch": "amd64",
@@ -57,10 +57,10 @@
     },
     "uglify-js": {
         "arch": "amd64",
-        "digest": "cd5e910b87179ec076615a0beee361ebe436ba497b739a345c018af39df63e40",
+        "digest": "63268157fb026e888242931e0b49386cd57d23c2953fee2aea5518b2a842d128",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.14.3-0"
+        "version": "3.14.4-0"
     },
     "wait-for-port": {
         "arch": "amd64",
