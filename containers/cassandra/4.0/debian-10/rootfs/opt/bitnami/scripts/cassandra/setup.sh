@@ -14,8 +14,10 @@ set -o pipefail
 . /opt/bitnami/scripts/libcassandra.sh
 
 # Load Cassandra environment variables
-eval "$(cassandra_env)"
+. /opt/bitnami/scripts/cassandra-env.sh
 
+# Set default Cassandra host environment variable
+cassandra_set_default_host
 # Ensure Cassandra environment variables settings are valid
 cassandra_validate
 # Ensure 'daemon' user exists when running as 'root'
