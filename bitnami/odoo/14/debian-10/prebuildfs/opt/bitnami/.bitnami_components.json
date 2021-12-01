@@ -8,10 +8,10 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "53575c1af09f423b9a2553b8b9880462f192961f4ada8fafa70a0238b106f26a",
+        "digest": "5753bbbe5052000888c24ef8c918cfc45577878b03cc4dcfe7d53ea562a48e5a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "14.18.1-0"
+        "version": "14.18.2-0"
     },
     "odoo": {
         "arch": "amd64",
@@ -36,9 +36,9 @@
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "00722b62c7561929e039877a6e445a4bb782c340890c0a090fdae3c9e1960161",
+        "digest": "3fccec52b33af46e65093016202786ee719b25f19a8c73552335798d30b477a1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-1"
+        "version": "1.0.1-2"
     }
 }
