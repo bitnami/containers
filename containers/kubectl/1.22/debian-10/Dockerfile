@@ -14,6 +14,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     tar -zxf /tmp/bitnami/pkg/cache/kubectl-1.22.4-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/kubectl-1.22.4-0-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
+
 RUN mkdir /.kube && chmod g+rwX /.kube
 
 ENV BITNAMI_APP_NAME="kubectl" \
