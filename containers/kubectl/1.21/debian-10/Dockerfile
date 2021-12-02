@@ -14,11 +14,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     tar -zxf /tmp/bitnami/pkg/cache/kubectl-1.21.7-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/kubectl-1.21.7-0-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
-# Create /.kube directory, which is needed for caching
 RUN mkdir /.kube && chmod g+rwX /.kube
 
 ENV BITNAMI_APP_NAME="kubectl" \
-    BITNAMI_IMAGE_VERSION="1.21.7-debian-10-r12" \
+    BITNAMI_IMAGE_VERSION="1.21.7-debian-10-r13" \
     PATH="/opt/bitnami/kubectl/bin:$PATH"
 
 USER 1001
