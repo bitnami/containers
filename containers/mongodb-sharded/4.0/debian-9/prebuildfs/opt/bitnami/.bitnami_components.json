@@ -15,17 +15,17 @@
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "0b6456636342f9f531c7573ef7d93e3ae668398d172d21c42b5fd41d785c1ff3",
+        "digest": "27be6253118f80e04fdf2ba0efad2193d63ae8e045b8056f54da1234bd6ca249",
         "distro": "debian-9",
         "type": "NAMI",
-        "version": "1.0.1-1"
+        "version": "1.0.1-3"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "6d7dbad2c79295df1e52aafb25c50e99c70b6fb8c39e0c732994a78d9403e262",
+        "digest": "2ae04ccaef4e6be19af2d3c6df1df30c5a06e17ebcde2079a5af8ffaca339301",
         "distro": "debian-9",
         "type": "NAMI",
-        "version": "1.0.1-1"
+        "version": "1.0.1-3"
     },
     "yq": {
         "arch": "amd64",
