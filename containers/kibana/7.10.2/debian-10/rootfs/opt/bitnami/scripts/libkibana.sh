@@ -106,7 +106,7 @@ kibana_initialize() {
             info "Setting default configuration"
             kibana_conf_set "pid.file" "$KIBANA_PID_FILE"
             kibana_conf_set "server.host" "$KIBANA_HOST"
-            kibana_conf_set "server.port" "$KIBANA_PORT_NUMBER"
+            kibana_conf_set "server.port" "$KIBANA_PORT_NUMBER" "int"
             kibana_conf_set "elasticsearch.hosts" "$(kibana_sanitize_elasticsearch_hosts "${KIBANA_ELASTICSEARCH_URL}" "${KIBANA_ELASTICSEARCH_PORT_NUMBER}")"
         else
             info "Found mounted configuration directory"
@@ -119,7 +119,7 @@ kibana_initialize() {
         ! is_empty_value "$KIBANA_PASSWORD" && kibana_conf_set "elasticsearch.password" "$KIBANA_PASSWORD"
         ! is_empty_value "$KIBANA_USERNAME" && kibana_conf_set "elasticsearch.username" "$KIBANA_USERNAME"
         if is_boolean_yes "$KIBANA_SERVER_ENABLE_TLS"; then
-            kibana_conf_set "server.ssl.enabled" "true"
+            kibana_conf_set "server.ssl.enabled" "true" "bool"
             if "$KIBANA_SERVER_TLS_USE_PEM"; then
                 kibana_conf_set "server.ssl.certificate" "$KIBANA_SERVER_CERT_LOCATION"
                 kibana_conf_set "server.ssl.key" "$KIBANA_SERVER_KEY_LOCATION"
@@ -191,7 +191,10 @@ kibana_conf_get() {
     local key="${1:?missing key}"
 
     if [[ -r "$KIBANA_CONF_FILE" ]]; then
-        yq eval ".${key}" "$KIBANA_CONF_FILE"
+        local -r res="$(yq eval ".${key}" "$KIBANA_CONF_FILE")"
+        if [[ ! "$res" = "null" ]]; then
+            echo "$res"
+        fi
     fi
 }
 
@@ -291,12 +294,12 @@ is_kibana_not_running() {
 is_kibana_ready() {
     local basePath
     local rewriteBasePath
-    rewriteBasePath=$(kibana_conf_get "[server.rewriteBasePath]")
+    rewriteBasePath=$(kibana_conf_get "server.rewriteBasePath")
     # The default value for is 'server.rewriteBasePath' is 'true' when ommited.'
     # Therefore, we must check the value is not 'true'
-    [[ ! "$rewriteBasePath" = "false" ]] && basePath=$(kibana_conf_get "[server.basePath]")
+    [[ ! "$rewriteBasePath" = "false" ]] && basePath=$(kibana_conf_get "server.basePath")
     if is_kibana_running; then
-        local -r state="$(yq eval ".status.overall.state" <<<"$(curl -s "127.0.0.1:${KIBANA_PORT_NUMBER}${basePath:-}/api/status")")"
+        local -r state="$(yq eval ".status.overall.state" - <<<"$(curl -s "127.0.0.1:${KIBANA_PORT_NUMBER}${basePath:-}/api/status")")"
         [[ "$state" = "green" ]]
     else
         false
