@@ -252,7 +252,7 @@ Pgpool configuration:
 - `PGPOOL_PASSWD_FILE`: The password file for authentication. Defaults to `pool_passwd`.
 - `PGPOOL_NUM_INIT_CHILDREN`: The number of preforked Pgpool-II server processes. It is also the concurrent connections limit to Pgpool-II from clients. Defaults to `32`.
 - `PGPOOL_MAX_POOL`: The maximum number of cached connections in each child process. Defaults to `15`.
-- `PGPOOL_CHILD_MAX_CONNECTIONS`: The maximum number of client connections in each child process. Defaults to `0` which turns off the feature.
+- `PGPOOL_CHILD_MAX_CONNECTIONS`: Specifies the lifetime of a Pgpool-II child process in terms of the number of client connections it can receive. Pgpool-II will terminate the child process after it has served child_max_connections client connections and will immediately spawn a new child process to take its place. Defaults to `0` which turns off the feature.
 - `PGPOOL_CHILD_LIFE_TIME`: The time in seconds to terminate a Pgpool-II child process if it remains idle. Defaults to `300`.
 - `PGPOOL_CLIENT_IDLE_LIMIT`: The time in seconds to disconnect a client if it remains idle since the last query. Defaults to `0` which turns off the feature.
 - `PGPOOL_CONNECTION_LIFE_TIME`: The time in seconds to terminate the cached connections to the PostgreSQL backend. Defaults to `0` which turns off the feature.
