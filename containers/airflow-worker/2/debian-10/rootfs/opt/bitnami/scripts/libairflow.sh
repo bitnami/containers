@@ -322,7 +322,7 @@ airflow_webserver_conf_set() {
 
     local -r file="$AIRFLOW_WEBSERVER_CONF_FILE"
     local entry
-    is_boolean_yes "$is_literal" && entry="${key} = ${value}" || entry="${key} = '${value}'"
+    is_boolean_yes "$is_literal" && entry="${key} = '${value}'" || entry="${key} = ${value}"
     # Check if the value was set before
     if grep -q "^#*\\s*${key} =.*$" "$file"; then
         # Update the existing key
