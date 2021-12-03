@@ -22,9 +22,9 @@
     },
     "spark": {
         "arch": "amd64",
-        "digest": "38367fd69fc870e784bf2a0befea4aa2b43b4cecb36352fa96f28803960dcefe",
+        "digest": "311b3644dc49a0965f49eb046bd4c0ccf3d37e941f0ac7f678bd5a85b0112e05",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.2.0-2"
+        "version": "3.2.0-3"
     }
 }
