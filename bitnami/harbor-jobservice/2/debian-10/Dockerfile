@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.15.1-0" --checksum 4008f3222788aed58591fa7c7bd6d52be083c99a11e19db93ddbb0124ef01765
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.16.1-0" --checksum e7a14c06b08e5a773ac5e640a58adce2c0196b5e82e331df19f11861bceb2c9d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-jobservice" "2.4.0-0" --checksum 625f50b20ef5a0c2eb645234860258e3773f441a94be7e7b5ec1f819bfeb3340
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
@@ -17,7 +17,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-jobservice/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-jobservice" \
-    BITNAMI_IMAGE_VERSION="2.4.0-debian-10-r34" \
+    BITNAMI_IMAGE_VERSION="2.4.0-debian-10-r35" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/harbor-jobservice/bin:$PATH"
 
 VOLUME [ "/etc/jobservice", "/var/log/jobs" ]
