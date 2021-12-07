@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.16.1`, `1.16.1-debian-10-r23`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgbouncer/blob/1.16.1-debian-10-r23/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.16.1`, `1.16.1-debian-10-r24`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgbouncer/blob/1.16.1-debian-10-r24/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pgbouncer GitHub repo](https://github.com/bitnami/bitnami-docker-pgbouncer).
 
@@ -114,8 +114,6 @@ To expose the same database name as the backend, set `PGBOUNCER_DATABASE="$POSTG
 
 ### Other options
 
-- `PGBOUNCER_AUTH_USER`: PgBouncer will use this user to connect to the database and query the PostgreSQL backend for a user and password. Default: **disabled**.
-- `PGBOUNCER_AUTH_QUERY`: PgBouncer will use this query to connect to the database and query the PostgreSQL backend for a user and password. Default: **disabled**.
 - `PGBOUNCER_POOL_MODE` : PgBouncer pool mode. Allowed values: session, transaction and statement. Default: **session**.
 - `PGBOUNCER_INIT_SLEEP_TIME` : PgBouncer initialization sleep time. Default: **10**.
 - `PGBOUNCER_INIT_MAX_RETRIES` : PgBouncer initialization maximum retries. Default: **10**.
