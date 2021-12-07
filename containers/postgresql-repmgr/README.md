@@ -53,7 +53,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`13`, `13-debian-10`, `13.5.0`, `13.5.0-debian-10-r22` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/13.5.0-debian-10-r22/13/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.9.0`, `12.9.0-debian-10-r23` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.9.0-debian-10-r23/12/debian-10/Dockerfile)
 * [`11`, `11-debian-10`, `11.14.0`, `11.14.0-debian-10-r18`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.14.0-debian-10-r18/11/debian-10/Dockerfile)
-* [`10`, `10-debian-10`, `10.19.0`, `10.19.0-debian-10-r23` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.19.0-debian-10-r23/10/debian-10/Dockerfile)
+* [`10`, `10-debian-10`, `10.19.0`, `10.19.0-debian-10-r24` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.19.0-debian-10-r24/10/debian-10/Dockerfile)
 * [`9.6`, `9.6-debian-10`, `9.6.24`, `9.6.24-debian-10-r23` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/9.6.24-debian-10-r23/9.6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql-repmgr GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql-repmgr).
@@ -651,7 +651,7 @@ $ docker-compose up pg-1
 
 - Adds Postgis extension to postgresql, version 2.3.x to Postgresiql 9.6 and version 2.5 to 10, 11 and 12.
 
-# Branch Deprecation Notice
+## Branch Deprecation Notice
 
 PostgreSQL's branch 9.6 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 12-11-2021
 
