@@ -1,4 +1,4 @@
-FROM docker.io/bitnami/minideb:buster-snapshot-20211205T210857Z-amd64
+FROM docker.io/bitnami/minideb:buster-snapshot-20211206T205922Z-amd64
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ENV OS_ARCH="amd64" \
@@ -23,7 +23,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 ENV BITNAMI_APP_NAME="node-snapshot" \
-    BITNAMI_IMAGE_VERSION="12.22.7-prod-debian-10-r54" \
+    BITNAMI_IMAGE_VERSION="12.22.7-prod-debian-10-r55" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:$PATH"
 
 EXPOSE 3000
