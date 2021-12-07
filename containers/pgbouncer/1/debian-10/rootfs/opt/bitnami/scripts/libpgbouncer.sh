@@ -217,16 +217,12 @@ pgbouncer_initialize() {
         if [[ "$PGBOUNCER_DATABASE" != "*" ]]; then
             database_value+=" dbname=$POSTGRESQL_DATABASE"
         fi
-        if ! is_empty_value "$PGBOUNCER_AUTH_USER"; then
-            database_value+=" auth_user=$PGBOUNCER_AUTH_USER"
-        fi
         ini-file set --section "databases" --key "$PGBOUNCER_DATABASE" --value "$database_value" "$PGBOUNCER_CONF_FILE"
         local -r -a key_value_pairs=(
             "listen_port:${PGBOUNCER_PORT}"
             "listen_addr:${PGBOUNCER_LISTEN_ADDRESS}"
             "auth_file:${PGBOUNCER_AUTH_FILE}"
             "auth_type:${PGBOUNCER_AUTH_TYPE}"
-            "auth_query:${PGBOUNCER_AUTH_QUERY}"
             "pidfile:${PGBOUNCER_PID_FILE}"
             "logfile:${PGBOUNCER_LOG_FILE}"
             "admin_users:${POSTGRESQL_USERNAME}"
