@@ -41,7 +41,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`8.1-prod`, `8.1-prod-debian-10`, `8.1.0-prod`, `8.1.0-prod-debian-10-r4` (8.1-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.1.0-prod-debian-10-r4/8.1-prod/debian-10/Dockerfile)
 * [`8.1`, `8.1-debian-10`, `8.1.0`, `8.1.0-debian-10-r4` (8.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.1.0-debian-10-r4/8.1/debian-10/Dockerfile)
 * [`8.0-prod`, `8.0-prod-debian-10`, `8.0.13-prod`, `8.0.13-prod-debian-10-r18` (8.0-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.0.13-prod-debian-10-r18/8.0-prod/debian-10/Dockerfile)
-* [`8.0`, `8.0-debian-10`, `8.0.13`, `8.0.13-debian-10-r18` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.0.13-debian-10-r18/8.0/debian-10/Dockerfile)
+* [`8.0`, `8.0-debian-10`, `8.0.13`, `8.0.13-debian-10-r19` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.0.13-debian-10-r19/8.0/debian-10/Dockerfile)
 * [`7.4-prod`, `7.4-prod-debian-10`, `7.4.26-prod`, `7.4.26-prod-debian-10-r18` (7.4-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.26-prod-debian-10-r18/7.4-prod/debian-10/Dockerfile)
 * [`7.4`, `7.4-debian-10`, `7.4.26`, `7.4.26-debian-10-r18`, `latest` (7.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.26-debian-10-r18/7.4/debian-10/Dockerfile)
 * [`7.3-prod`, `7.3-prod-debian-10`, `7.3.33-prod`, `7.3.33-prod-debian-10-r20` (7.3-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.3.33-prod-debian-10-r20/7.3-prod/debian-10/Dockerfile)
@@ -395,6 +395,10 @@ $ docker-compose up phpfpm
 ### 5.5.30-0 (2015-10-06)
 
 - `/app` directory is no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume are not persisted between Dockerfile `RUN` instructions. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
+
+## Branch Deprecation Notice
+
+PHP's branch 7.3 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 01-10-2022
 
 ## Contributing
 
