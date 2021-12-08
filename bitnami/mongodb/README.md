@@ -49,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5.0`, `5.0-debian-10`, `5.0.5`, `5.0.5-debian-10-r5` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/5.0.5-debian-10-r5/5.0/debian-10/Dockerfile)
-* [`4.4`, `4.4-debian-10`, `4.4.10`, `4.4.10-debian-10-r51`, `latest` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.10-debian-10-r51/4.4/debian-10/Dockerfile)
+* [`4.4`, `4.4-debian-10`, `4.4.10`, `4.4.10-debian-10-r52`, `latest` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.10-debian-10-r52/4.4/debian-10/Dockerfile)
 * [`4.2`, `4.2-debian-10`, `4.2.17`, `4.2.17-debian-10-r72` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.17-debian-10-r72/4.2/debian-10/Dockerfile)
 * [`4.0`, `4.0-debian-9`, `4.0.27`, `4.0.27-debian-9-r82` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.27-debian-9-r82/4.0/debian-9/Dockerfile)
 
@@ -426,7 +426,7 @@ $ docker run --name mongodb-hidden \
   --link mongodb-primary:primary \
   -e MONGODB_REPLICA_SET_MODE=hidden \
   -e MONGODB_ADVERTISED_HOSTNAME=mongodb-hidden \
-  -e MONGODB_INITIAL_PRIMARY_HOST=primary \
+  -e MONGODB_INITIAL_PRIMARY_HOST=mongodb-primary \
   -e MONGODB_INITIAL_PRIMARY_PORT_NUMBER=27017 \
   -e MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password123 \
   -e MONGODB_REPLICA_SET_KEY=replicasetkey123 \
