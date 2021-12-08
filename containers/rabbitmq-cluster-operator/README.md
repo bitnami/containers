@@ -1,10 +1,12 @@
-# Bitnami Docker Image for RabbitMQ Cluster Operator
+# RabbitMQ Cluster Operator packaged by Bitnami
 
 ## What is RabbitMQ Cluster Operator?
 
 > The RabbitMQ Cluster Kubernetes Operator automates provisioning, management, and operations of RabbitMQ clusters running on Kubernetes.
 
 [Overview of RabbitMQ Cluster Operator](https://github.com/rabbitmq/cluster-operator)
+
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
@@ -29,7 +31,7 @@ $ docker run --name rabbitmq-cluster-operator bitnami/rabbitmq-cluster-operator:
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`1`, `1-scratch`, `1.10.0`, `1.10.0-scratch-r2`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq-cluster-operator/blob/1.10.0-scratch-r2/1/scratch/Dockerfile)
+- [`1`, `1-scratch`, `1.10.0`, `1.10.0-scratch-r3`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-rabbitmq-cluster-operator/blob/1.10.0-scratch-r3/1/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rabbitmq-cluster-operator GitHub repo](https://github.com/bitnami/bitnami-docker-rabbitmq-cluster-operator).
 
@@ -67,7 +69,7 @@ To run commands inside this container you can use `docker run`, for example to e
 $ docker run --rm --name rabbitmq-cluster-operator bitnami/rabbitmq-cluster-operator:latest --  --metrics-bind-address :9782
 ```
 
-Check the [official RabbitMQ Cluster Operator documentation](https://github.com/rabbitmq/cluster-operatormd) for more information.
+Check the [official RabbitMQ Cluster Operator documentation](https://github.com/rabbitmq/cluster-operator/tree/main/docs) for more information.
 
 ## Contributing
 
