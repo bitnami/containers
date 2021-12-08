@@ -51,7 +51,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`5.0`, `5.0-debian-10`, `5.0.5`, `5.0.5-debian-10-r4` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/5.0.5-debian-10-r4/5.0/debian-10/Dockerfile)
 * [`4.4`, `4.4-debian-10`, `4.4.10`, `4.4.10-debian-10-r51`, `latest` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.10-debian-10-r51/4.4/debian-10/Dockerfile)
 * [`4.2`, `4.2-debian-10`, `4.2.17`, `4.2.17-debian-10-r71` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.17-debian-10-r71/4.2/debian-10/Dockerfile)
-* [`4.0`, `4.0-debian-9`, `4.0.27`, `4.0.27-debian-9-r81` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.27-debian-9-r81/4.0/debian-9/Dockerfile)
+* [`4.0`, `4.0-debian-9`, `4.0.27`, `4.0.27-debian-9-r82` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.27-debian-9-r82/4.0/debian-9/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
 
@@ -388,7 +388,7 @@ $ docker run --name mongodb-secondary \
   --link mongodb-primary:primary \
   -e MONGODB_REPLICA_SET_MODE=secondary \
   -e MONGODB_ADVERTISED_HOSTNAME=mongodb-secondary \
-  -e MONGODB_INITIAL_PRIMARY_HOST=primary \
+  -e MONGODB_INITIAL_PRIMARY_HOST=mongodb-primary \
   -e MONGODB_INITIAL_PRIMARY_PORT_NUMBER=27017 \
   -e MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password123 \
   -e MONGODB_REPLICA_SET_KEY=replicasetkey123 \
@@ -406,7 +406,7 @@ $ docker run --name mongodb-arbiter \
   --link mongodb-primary:primary \
   -e MONGODB_REPLICA_SET_MODE=arbiter \
   -e MONGODB_ADVERTISED_HOSTNAME=mongodb-arbiter \
-  -e MONGODB_INITIAL_PRIMARY_HOST=primary \
+  -e MONGODB_INITIAL_PRIMARY_HOST=mongodb-primary \
   -e MONGODB_INITIAL_PRIMARY_PORT_NUMBER=27017 \
   -e MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD=password123 \
   -e MONGODB_REPLICA_SET_KEY=replicasetkey123 \
