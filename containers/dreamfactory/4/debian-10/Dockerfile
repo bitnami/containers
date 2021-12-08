@@ -18,12 +18,12 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.26-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.34.1-0" --checksum 3da2501870c9c3efe8cfa47b7bba894d8d97292a5274b682af1eded3b671641b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-3" --checksum cddf51b3cb59d65d5d30e3fe37e99d8d53375ad88f0cc474019a52e6d8b4fc58
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dreamfactory" "4.9.0-2" --checksum 969d7feed0886cd23796e2eb806ac5d2bd38d93536ffa571d2e1d5a433987dd1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dreamfactory" "4.10.0-0" --checksum 046a6b0ccc6e8f73472fb71ebb8935c1821b9245727c2e5bc06b6026c95276f6
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/apache/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
+RUN /opt/bitnami/scripts/apache/postunpack.sh
 RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/dreamfactory/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
@@ -33,7 +33,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="dreamfactory" \
-    BITNAMI_IMAGE_VERSION="4.9.0-debian-10-r39" \
+    BITNAMI_IMAGE_VERSION="4.10.0-debian-10-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
