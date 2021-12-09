@@ -12,7 +12,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq libc6 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.13-0" --checksum 9552e53ccd3b0ec85a82c31c26a1462260e28b7c58770a5c53560afb02ec66d9
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "neo4j" "4.4.0-0" --checksum 08f10a47737fe1a07a4da4d1c8eb108f8620352f71e3b5fc821e7c8ae6b80304
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "neo4j" "4.4.0-1" --checksum 6724fb5cbc701bdbdeb685a5594e247083aa9ff2284e78aa0bdff75dc2210b5b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
 
@@ -20,7 +20,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/neo4j/postunpack.sh
 ENV BITNAMI_APP_NAME="neo4j" \
-    BITNAMI_IMAGE_VERSION="4.4.0-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="4.4.0-debian-10-r7" \
     JAVA_HOME="/opt/bitnami/java" \
     NEO4J_BOLT_PORT_NUMBER="" \
     NEO4J_HOST="" \
