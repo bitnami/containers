@@ -42,7 +42,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`5`, `5-debian-10`, `5.1.1`, `5.1.1-debian-10-r165`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/5.1.1-debian-10-r165/5/debian-10/Dockerfile)
+* [`5`, `5-debian-10`, `5.1.1`, `5.1.1-debian-10-r166`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpmyadmin/blob/5.1.1-debian-10-r166/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpmyadmin GitHub repo](https://github.com/bitnami/bitnami-docker-phpmyadmin).
 
@@ -188,13 +188,11 @@ The phpMyAdmin instance can be customized by specifying environment variables on
 - `DATABASE_SSL_CIPHERS`: List of allowable ciphers for connections when using SSL.
 - `DATABASE_SSL_VERIFY`: Enable SSL certificate validation. Default: **yes**
 - `CONFIGURATION_STORAGE_ENABLE`: Enable phpMyAdmin configuration storage. Default: **no**
-- `CONFIGURATION_STORAGE_DATABASE_CONTROLUSER`: phpMyAdmin configuration storage user. Default: **pma**
-- `CONFIGURATION_STORAGE_DATABASE_CONTROLPASS`: phpMyAdmin configuration storage password.
-- `CONFIGURATION_STORAGE_DATABASE_CONTROLHOST`: phpMyAdmin configuration storage server hostname. Default: **mariadb**
-- `CONFIGURATION_STORAGE_DATABASE_CONTROLPORT`: phpMyAdmin configuration storage server port. Default: **3306**
-- `CONFIGURATION_STORAGE_DATABASE_PMADB`: phpMyAdmin configuration storage database name. Default: **phpmyadmin**
-
-`CONFIGURATION_STORAGE_DATABASE_*` values are used only if `CONFIGURATION_STORAGE_ENABLE` is set to **yes**.
+- `CONFIGURATION_STORAGE_DB_USER`: phpMyAdmin configuration storage database user (ignored unless `CONFIGURATION_STORAGE_ENABLE` is set to **yes**). Default: **pma**
+- `CONFIGURATION_STORAGE_DB_PASSWORD`: phpMyAdmin configuration storage database password (ignored unless `CONFIGURATION_STORAGE_ENABLE` is set to **yes**). No defaults.
+- `CONFIGURATION_STORAGE_DB_HOST`: phpMyAdmin configuration storage database server hostname (ignored unless `CONFIGURATION_STORAGE_ENABLE` is set to **yes**). Default: **mariadb**
+- `CONFIGURATION_STORAGE_DB_PORT_NUMBER`: phpMyAdmin configuration storage database server port (ignored unless `CONFIGURATION_STORAGE_ENABLE` is set to **yes**). Default: **3306**
+- `CONFIGURATION_STORAGE_DB_NAME`: phpMyAdmin configuration storage database name (ignored unless `CONFIGURATION_STORAGE_ENABLE` is set to **yes**). Default: **phpmyadmin**
 
 #### PHP configuration
 
