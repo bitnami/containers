@@ -184,12 +184,12 @@ solr_create_cores() {
 
     is_boolean_yes "$SOLR_ENABLE_AUTHENTICATION" && command_args+=("--user" "${SOLR_ADMIN_USERNAME}:${SOLR_ADMIN_PASSWORD}")
 
-    read -r -a cores <<< "$(tr ',;' ' ' <<< "${SOLR_CORES}")"
+    read -r -a cores <<<"$(tr ',;' ' ' <<<"${SOLR_CORES}")"
     info "Creating cores..."
     for core in "${cores[@]}"; do
         mkdir -p "${SOLR_SERVER_DIR}/solr/${core}/data"
         mkdir -p "${SOLR_SERVER_DIR}/solr/${core}/conf"
-        cp -r "${SOLR_CORE_CONF_DIR}"/* "${SOLR_SERVER_DIR}/solr/${core}/conf/"
+        cp -Lr "${SOLR_CORE_CONF_DIR}"/* "${SOLR_SERVER_DIR}/solr/${core}/conf/"
 
         command_args+=("${protocol}://localhost:${SOLR_PORT_NUMBER}/solr/admin/cores?action=CREATE&name=${core}&instanceDir=${core}&dataDir=data")
 
@@ -235,7 +235,6 @@ solr_update_password() {
         info "Password updated"
     fi
 }
-
 
 #########################
 # Check if the API is ready
