@@ -13,6 +13,13 @@
 . /opt/bitnami/scripts/libvalidations.sh
 . /opt/bitnami/scripts/libpersistence.sh
 
+# Load database library
+if [[ -f /opt/bitnami/scripts/libpostgresqlclient.sh ]]; then
+    . /opt/bitnami/scripts/libpostgresqlclient.sh
+elif [[ -f /opt/bitnami/scripts/libpostgresql.sh ]]; then
+    . /opt/bitnami/scripts/libpostgresql.sh
+fi
+
 # Functions
 
 ########################
@@ -103,13 +110,15 @@ airflow_initialize() {
 
     # Check if Airflow has already been initialized and persisted in a previous run
     local -r app_name="airflow"
+    local -a postgresql_remote_execute_args=("$AIRFLOW_DATABASE_HOST" "$AIRFLOW_DATABASE_PORT_NUMBER" "$AIRFLOW_DATABASE_NAME" "$AIRFLOW_DATABASE_USERNAME" "$AIRFLOW_DATABASE_PASSWORD")
     if ! is_app_initialized "$app_name"; then
         # Delete pid file
         rm -f "$AIRFLOW_PID_FILE"
 
-        airflow_wait_for_postgresql "$AIRFLOW_DATABASE_HOST" "$AIRFLOW_DATABASE_PORT_NUMBER"
-
         # Initialize database
+        info "Trying to connect to the database server"
+        airflow_wait_for_postgresql_connection "${postgresql_remote_execute_args[@]}"
+        info "Populating database"
         airflow_execute_command "initdb" "db init"
 
         airflow_create_admin_user
@@ -119,12 +128,12 @@ airflow_initialize() {
         info "Persisting Airflow installation"
         persist_app "$app_name" "$AIRFLOW_DATA_TO_PERSIST"
     else
-        # Check database connection
-        airflow_wait_for_postgresql "$AIRFLOW_DATABASE_HOST" "$AIRFLOW_DATABASE_PORT_NUMBER"
-
         # Restore persisted data
         info "Restoring persisted Airflow installation"
         restore_persisted_app "$app_name" "$AIRFLOW_DATA_TO_PERSIST"
+
+        info "Trying to connect to the database server"
+        airflow_wait_for_postgresql_connection "${postgresql_remote_execute_args[@]}"
 
         # Upgrade database
         airflow_execute_command "upgradedb" "db upgrade"
@@ -313,7 +322,7 @@ airflow_webserver_conf_set() {
 
     local -r file="$AIRFLOW_WEBSERVER_CONF_FILE"
     local entry
-    is_boolean_yes "$is_literal" && entry="${key} = ${value}" || entry="${key} = '${value}'"
+    is_boolean_yes "$is_literal" && entry="${key} = '${value}'" || entry="${key} = ${value}"
     # Check if the value was set before
     if grep -q "^#*\\s*${key} =.*$" "$file"; then
         # Update the existing key
@@ -403,18 +412,31 @@ airflow_configure_celery_executor() {
 }
 
 ########################
-# Wait for PostgreSQL
+# Wait until the database is accessible with the currently-known credentials
+# Globals:
+#   *
 # Arguments:
-#   None
+#   $1 - database host
+#   $2 - database port
+#   $3 - database name
+#   $4 - database username
+#   $5 - database user password (optional)
 # Returns:
-#   None
+#   true if the database connection succeeded, false otherwise
 #########################
-airflow_wait_for_postgresql() {
-    local -r postgresql_host="${1?Missing host}"
-    local -r postgresql_port="${2?Missing port}"
-
-    info "Waiting for PostgreSQL to be available at ${postgresql_host}:${postgresql_port}..."
-    wait-for-port --host "$postgresql_host" "$postgresql_port"
+airflow_wait_for_postgresql_connection() {
+    local -r db_host="${1:?missing database host}"
+    local -r db_port="${2:?missing database port}"
+    local -r db_name="${3:?missing database name}"
+    local -r db_user="${4:?missing database user}"
+    local -r db_pass="${5:-}"
+    check_postgresql_connection() {
+        echo "SELECT 1" | postgresql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
+    }
+    if ! retry_while "check_postgresql_connection"; then
+        error "Could not connect to the database"
+        return 1
+    fi
 }
 
 ########################
