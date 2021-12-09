@@ -22,7 +22,7 @@
 #########################
 phpmyadmin_validate() {
     debug "Validating settings in PHPMYADMIN_* environment variables..."
-    local error_code=0 empty_env_var
+    local error_code=0
 
     # Auxiliary functions
     print_validation_error() {
@@ -48,13 +48,13 @@ phpmyadmin_validate() {
 
     check_yes_no_value CONFIGURATION_STORAGE_ENABLE
     if is_boolean_yes "$CONFIGURATION_STORAGE_ENABLE"; then
-        for empty_env_var in \
-                "CONFIGURATION_STORAGE_DATABASE_CONTROLHOST" \
-                "CONFIGURATION_STORAGE_DATABASE_CONTROLPORT" \
-                "CONFIGURATION_STORAGE_DATABASE_CONTROLUSER" \
-                "CONFIGURATION_STORAGE_DATABASE_CONTROLPASS" \
-                "CONFIGURATION_STORAGE_DATABASE_PMADB"; do
-            is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set."
+        for ev in \
+                "CONFIGURATION_STORAGE_DB_HOST" \
+                "CONFIGURATION_STORAGE_DB_PORT_NUMBER" \
+                "CONFIGURATION_STORAGE_DB_USER" \
+                "CONFIGURATION_STORAGE_DB_PASSWORD" \
+                "CONFIGURATION_STORAGE_DB_NAME"; do
+            is_empty_value "${!ev}" && print_validation_error "The ${ev} environment variable is empty or not set."
         done
     fi
 
@@ -103,12 +103,13 @@ phpmyadmin_initialize() {
         ! is_empty_value "$DATABASE_SSL_VERIFY" && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['ssl_verify']" "$(php_convert_to_boolean "$DATABASE_SSL_VERIFY")" yes
     fi
 
+    # Configure configuration storage settings
     if is_boolean_yes "$CONFIGURATION_STORAGE_ENABLE"; then
-        phpmyadmin_conf_set "\$cfg['Servers'][\$i]['controlhost']" "$CONFIGURATION_STORAGE_DATABASE_CONTROLHOST" no
-        phpmyadmin_conf_set "\$cfg['Servers'][\$i]['controlport']" "$CONFIGURATION_STORAGE_DATABASE_CONTROLPORT" no
-        phpmyadmin_conf_set "\$cfg['Servers'][\$i]['controluser']" "$CONFIGURATION_STORAGE_DATABASE_CONTROLUSER" no
-        phpmyadmin_conf_set "\$cfg['Servers'][\$i]['controlpass']" "$CONFIGURATION_STORAGE_DATABASE_CONTROLPASS" no
-        phpmyadmin_conf_set "\$cfg['Servers'][\$i]['pmadb']"       "$CONFIGURATION_STORAGE_DATABASE_PMADB"       no
+        phpmyadmin_conf_set "\$cfg['Servers'][\$i]['controlhost']" "$CONFIGURATION_STORAGE_DB_HOST" no
+        phpmyadmin_conf_set "\$cfg['Servers'][\$i]['controlport']" "$CONFIGURATION_STORAGE_DB_PORT_NUMBER" no
+        phpmyadmin_conf_set "\$cfg['Servers'][\$i]['controluser']" "$CONFIGURATION_STORAGE_DB_USER" no
+        phpmyadmin_conf_set "\$cfg['Servers'][\$i]['controlpass']" "$CONFIGURATION_STORAGE_DB_PASSWORD" no
+        phpmyadmin_conf_set "\$cfg['Servers'][\$i]['pmadb']" "$CONFIGURATION_STORAGE_DB_NAME" no
         replace_in_file "$PHPMYADMIN_CONF_FILE" "^(\s*//\s*)?(\\\$cfg\['Servers'\]\[\\\$i\]\['.*']\s*=)" "\2" true
     fi
 
