@@ -187,6 +187,14 @@ The phpMyAdmin instance can be customized by specifying environment variables on
 - `DATABASE_SSL_CA_PATH`: Directory containing trusted SSL CA certificates in PEM format.
 - `DATABASE_SSL_CIPHERS`: List of allowable ciphers for connections when using SSL.
 - `DATABASE_SSL_VERIFY`: Enable SSL certificate validation. Default: **yes**
+- `CONFIGURATION_STORAGE_ENABLE`: Enable phpMyAdmin configuration storage. Default: **no**
+- `CONFIGURATION_STORAGE_DATABASE_CONTROLUSER`: phpMyAdmin configuration storage user. Default: **pma**
+- `CONFIGURATION_STORAGE_DATABASE_CONTROLPASS`: phpMyAdmin configuration storage password.
+- `CONFIGURATION_STORAGE_DATABASE_CONTROLHOST`: phpMyAdmin configuration storage server hostname. Default: **mariadb**
+- `CONFIGURATION_STORAGE_DATABASE_CONTROLPORT`: phpMyAdmin configuration storage server port. Default: **3306**
+- `CONFIGURATION_STORAGE_DATABASE_PMADB`: phpMyAdmin configuration storage database name. Default: **phpmyadmin**
+
+`CONFIGURATION_STORAGE_DATABASE_*` values are used only if `CONFIGURATION_STORAGE_ENABLE` is set to **yes**.
 
 #### PHP configuration
 

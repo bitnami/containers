@@ -22,7 +22,7 @@
 #########################
 phpmyadmin_validate() {
     debug "Validating settings in PHPMYADMIN_* environment variables..."
-    local error_code=0
+    local error_code=0 empty_env_var
 
     # Auxiliary functions
     print_validation_error() {
@@ -45,6 +45,18 @@ phpmyadmin_validate() {
     check_yes_no_value PHPMYADMIN_ALLOW_REMOTE_CONNECTIONS
     is_empty_value "$DATABASE_ALLOW_NO_PASSWORD" || check_yes_no_value DATABASE_ALLOW_NO_PASSWORD
     is_empty_value "$DATABASE_ENABLE_SSL" || check_yes_no_value DATABASE_ENABLE_SSL
+
+    check_yes_no_value CONFIGURATION_STORAGE_ENABLE
+    if is_boolean_yes "$CONFIGURATION_STORAGE_ENABLE"; then
+        for empty_env_var in \
+                "CONFIGURATION_STORAGE_DATABASE_CONTROLHOST" \
+                "CONFIGURATION_STORAGE_DATABASE_CONTROLPORT" \
+                "CONFIGURATION_STORAGE_DATABASE_CONTROLUSER" \
+                "CONFIGURATION_STORAGE_DATABASE_CONTROLPASS" \
+                "CONFIGURATION_STORAGE_DATABASE_PMADB"; do
+            is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set."
+        done
+    fi
 
     return "$error_code"
 }
@@ -89,6 +101,15 @@ phpmyadmin_initialize() {
             phpmyadmin_conf_set "\$cfg['Servers'][\$i]['${database_ssl_option}']" "${!database_ssl_option_env_var}"
         done
         ! is_empty_value "$DATABASE_SSL_VERIFY" && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['ssl_verify']" "$(php_convert_to_boolean "$DATABASE_SSL_VERIFY")" yes
+    fi
+
+    if is_boolean_yes "$CONFIGURATION_STORAGE_ENABLE"; then
+        phpmyadmin_conf_set "\$cfg['Servers'][\$i]['controlhost']" "$CONFIGURATION_STORAGE_DATABASE_CONTROLHOST" no
+        phpmyadmin_conf_set "\$cfg['Servers'][\$i]['controlport']" "$CONFIGURATION_STORAGE_DATABASE_CONTROLPORT" no
+        phpmyadmin_conf_set "\$cfg['Servers'][\$i]['controluser']" "$CONFIGURATION_STORAGE_DATABASE_CONTROLUSER" no
+        phpmyadmin_conf_set "\$cfg['Servers'][\$i]['controlpass']" "$CONFIGURATION_STORAGE_DATABASE_CONTROLPASS" no
+        phpmyadmin_conf_set "\$cfg['Servers'][\$i]['pmadb']"       "$CONFIGURATION_STORAGE_DATABASE_PMADB"       no
+        replace_in_file "$PHPMYADMIN_CONF_FILE" "^(\s*//\s*)?(\\\$cfg\['Servers'\]\[\\\$i\]\['.*']\s*=)" "\2" true
     fi
 
     # Generate random blowfish secret, used for encrypting
