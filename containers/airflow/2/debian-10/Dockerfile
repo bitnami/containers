@@ -10,7 +10,7 @@ ENV BITNAMI_PKG_EXTRA_DIRS="/opt/bitnami/airflow/dags" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libbsd0 libbz2-1.0 libc6 libcom-err2 libcurl4 libedit2 libffi6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmariadb3 libncursesw6 libnettle6 libnghttp2-14 libp11-kit0 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 locales netbase procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-1" --checksum 28dc75dff64df07e67b711d20859c24ebc996db0eaac06138553341d0f769299
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-3" --checksum 9e18c6c3411e702eb16aa60dc77baf3fd9af8d5beb2623936ef3af343d5ffd5b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-5" --checksum 18aaf8247baa258f4e16de86673a3e799cd50bbef2824f0d2ae805c9c2068f11
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "10.19.0-0" --checksum f32958c288efd50fb29133d614ce19dc46ff40add10fc82254b29c8a46df324c
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.1-0" --checksum 3d189e4b1fcdc330fb84c14a7c6fb296deff37d3142d9a17fe0c9a5dba51ef6d
@@ -28,7 +28,7 @@ RUN /opt/bitnami/scripts/airflow/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
     BITNAMI_APP_NAME="airflow" \
-    BITNAMI_IMAGE_VERSION="2.2.2-debian-10-r8" \
+    BITNAMI_IMAGE_VERSION="2.2.2-debian-10-r9" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/airflow/venv/lib/python3.8/site-packages/numpy.libs/:$LD_LIBRARY_PATH" \
@@ -36,7 +36,14 @@ ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
     LNAME="airflow" \
     NSS_WRAPPER_GROUP="/opt/bitnami/airflow/nss_group" \
     NSS_WRAPPER_PASSWD="/opt/bitnami/airflow/nss_passwd" \
-    PATH="/opt/bitnami/common/bin:/opt/bitnami/python/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/git/bin:/opt/bitnami/airflow/venv/bin:$PATH"
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/python/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/git/bin:/opt/bitnami/airflow/venv/bin:$PATH" \
+    POSTGRESQL_CLIENT_CREATE_DATABASE_NAME="" \
+    POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
+    POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME="" \
+    POSTGRESQL_HOST="postgresql" \
+    POSTGRESQL_PORT_NUMBER="5432" \
+    POSTGRESQL_ROOT_PASSWORD="" \
+    POSTGRESQL_ROOT_USER="postgres"
 
 EXPOSE 8080
 
