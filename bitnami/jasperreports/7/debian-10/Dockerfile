@@ -12,7 +12,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl fontconfig gzip libaudit1 libc6 libcap-ng0 libcom-err2 libcurl4 libffi6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjemalloc2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libncurses6 libnettle6 libnghttp2-14 libp11-kit0 libpam0g libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libxml2 procps tar xmlstarlet zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.312-0" --checksum a7e034898281dff05591e74de285ecd69899ddaaff4ce1ea9c09556ac89c9c72
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "9.0.55-0" --checksum a4f34f53b92e8317c1648042f740beadb45eb950f88a0a9c0b9d75912dc975c1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "9.0.56-0" --checksum c4e1f188d56ddcc9a3f6c9ae07c15229b227e4181e4f8b8b6b8aa3dc522c52f8
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.32-0" --checksum 4a211faa9436c9747dfc4374cb9e8a7f9b0065dfc58dd4784cef0f5029c2e65e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.34.1-0" --checksum 3da2501870c9c3efe8cfa47b7bba894d8d97292a5274b682af1eded3b671641b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-3" --checksum cddf51b3cb59d65d5d30e3fe37e99d8d53375ad88f0cc474019a52e6d8b4fc58
@@ -27,7 +27,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="jasperreports" \
-    BITNAMI_IMAGE_VERSION="7.8.1-debian-10-r22" \
+    BITNAMI_IMAGE_VERSION="7.8.1-debian-10-r23" \
     JAVA_HOME="/opt/bitnami/java" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
