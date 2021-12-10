@@ -15,7 +15,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.26-0" --checksum e30f91e2e21a90772e04b795c2db35d1f0f5d934f4fcb2a1d872e50c32fc8bff
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.1-0" --checksum 3d189e4b1fcdc330fb84c14a7c6fb296deff37d3142d9a17fe0c9a5dba51ef6d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-3" --checksum cddf51b3cb59d65d5d30e3fe37e99d8d53375ad88f0cc474019a52e6d8b4fc58
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "matomo" "4.6.1-0" --checksum 51dfcba8869b18f796da293c889220a6ea5d043602747bebef43cb4d9c3961d3
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "matomo" "4.6.2-0" --checksum 17d15b152fb19f45a196dc92d759d9febdd28adde923d2ee2bd98562bbf8a33d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
 RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/cron
@@ -31,7 +31,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="matomo" \
-    BITNAMI_IMAGE_VERSION="4.6.1-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="4.6.2-debian-10-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
