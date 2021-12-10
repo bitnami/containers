@@ -148,7 +148,8 @@ cassandra_validate() {
     check_allowed_port() {
         local validate_port_args=()
         ! am_i_root && validate_port_args+=("-unprivileged")
-        if ! err=$(validate_port "${validate_port_args[@]}" "${!1}"); then
+        validate_port_args+=("${!1}")
+        if ! err=$(validate_port "${validate_port_args[@]}"); then
             print_validation_error "An invalid port was specified in the environment variable $1: $err"
         fi
     }
