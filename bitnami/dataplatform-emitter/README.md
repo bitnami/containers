@@ -1,10 +1,10 @@
-# Data Platform Metrics Emitter packaged by Bitnami
+# Data Platform Blueprint 2 packaged by Bitnami
 
-## What is Data Platform Metrics Emitter?
+## What is Data Platform Blueprint 2?
 
-> The metrics generator for OCTO Data Platform Blueprints includes the most critical metrics to determine the health of the data platform.
+> The metrics generator for OCTO Data Platform Blueprints includes the most critical metrics to determine the health of the data platform. See the Data Platform Blueprint 2 Helm Chart.
 
-[Overview of Data Platform Metrics Emitter](https://github.com/bitnami/dataplatform-emitter)
+[Overview of Data Platform Blueprint 2](https://bitnami.com/stack/data-platform-metrics-emitter)
 
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
@@ -31,8 +31,8 @@ $ docker run --name dataplatform-emitter bitnami/dataplatform-emitter:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`1`, `1-scratch`, `1.0.1`, `1.0.1-scratch-r1` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-dataplatform-emitter/blob/1.0.1-scratch-r1/1/scratch/Dockerfile)
-- [`0`, `0-scratch`, `0.0.11`, `0.0.11-scratch-r0`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-dataplatform-emitter/blob/0.0.11-scratch-r0/0/scratch/Dockerfile)
+- [`1`, `1-scratch`, `1.0.1`, `1.0.1-scratch-r2`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-dataplatform-emitter/blob/1.0.1-scratch-r2/1/scratch/Dockerfile)
+- [`0`, `0-scratch`, `0.0.11`, `0.0.11-scratch-r0` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-dataplatform-emitter/blob/0.0.11-scratch-r0/0/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dataplatform-emitter GitHub repo](https://github.com/bitnami/bitnami-docker-dataplatform-emitter).
 
@@ -53,10 +53,10 @@ $ docker pull bitnami/dataplatform-emitter:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/dataplatform-emitter:latest 'https://github.com/bitnami/bitnami-docker-dataplatform-emitter.git#master:0/scratch'
+$ docker build -t bitnami/dataplatform-emitter:latest 'https://github.com/bitnami/bitnami-docker-dataplatform-emitter.git#master:1/scratch'
 ```
 
-# How to deploy Data Platform Metrics Emitter in Kubernetes?
+# How to deploy Data Platform Blueprint 2 in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Data Platform Blueprint chart](https://github.com/bitnami/charts/tree/master/bitnami/dataplatform-bp1).
 
@@ -75,8 +75,6 @@ To run commands inside this container you can use `docker run`, for example to e
 ```console
 $ docker run --rm --name dataplatform-emitter bitnami/dataplatform-emitter:latest --  --emitter.listen-address :9782
 ```
-
-Check the [official Data Platform Metrics Emitter documentation](https://github.com/bitnami/dataplatform-emitter#configuration) for more information.
 
 ## Contributing
 
