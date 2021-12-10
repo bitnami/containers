@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 * [`3`, `3-debian-10`, `3.0.0`, `3.0.0-debian-10-r53`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.0.0-debian-10-r53/3/debian-10/Dockerfile)
-* [`2`, `2-debian-10`, `2.8.1`, `2.8.1-debian-10-r68` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.1-debian-10-r68/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.8.1`, `2.8.1-debian-10-r69` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.1-debian-10-r69/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
@@ -304,7 +304,7 @@ More info about Apache Kafka listeners can be found in [this great article](http
 
 ### Security
 
-The Bitnami Apache Kafka docker image disables the `PLAINTEXT` listener for security reasons. You can enable the `PLAINTEXT` listener by adding the next environment variable, but remember that this configuration is not recommended for production.
+The Bitnami Apache Kafka docker image disables the PLAINTEXT listener for security reasons. You can enable the PLAINTEXT listener by adding the next environment variable, but remember that this configuration is not recommended for production.
 
 ```console
 ALLOW_PLAINTEXT_LISTENER=yes
@@ -312,8 +312,8 @@ ALLOW_PLAINTEXT_LISTENER=yes
 
 In order to configure authentication, you must configure the Apache Kafka listeners properly. This container assumes the names below will be used for the listeners:
 
-* `INTERNAL`: used for inter-broker communications.
-* `CLIENT`: used for communications with clients that are within the same network as Apache Kafka brokers.
+* INTERNAL: used for inter-broker communications.
+* CLIENT: used for communications with clients that are within the same network as Apache Kafka brokers.
 
 Let's see an example to configure Apache Kafka with `SASL_SSL` authentication for communications with clients, and `SSL` authentication for inter-broker communication.
 
