@@ -1028,11 +1028,8 @@ postgresql_execute_print_output() {
     [[ -n "$db" ]] && args+=("-d" "$db")
     [[ "${#opts[@]}" -gt 0 ]] && args+=("${opts[@]}")
 
-    # Obtain the command specified via stdin
-    local sql_cmd
-    sql_cmd="$(</dev/stdin)"
-    debug "Executing SQL command:\n$sql_cmd"
-    PGPASSWORD=$pass psql "${args[@]}" <<<"$sql_cmd"
+    # Execute the Query/queries from stdin
+    PGPASSWORD=$pass psql "${args[@]}"
 }
 
 ########################
