@@ -267,7 +267,7 @@ To do so, add the following environment variables to your docker-compose:
 +     - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
 +     - KAFKA_CFG_LISTENERS=CLIENT://:9092,EXTERNAL://:9093
 +     - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka:9092,EXTERNAL://localhost:9093
-+     - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
++     - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=CLIENT
 ```
 
 And expose the external port:
@@ -304,7 +304,7 @@ More info about Apache Kafka listeners can be found in [this great article](http
 
 ### Security
 
-The Bitnami Apache Kafka docker image disables the PLAINTEXT listener for security reasons. You can enable the PLAINTEXT listener by adding the next environment variable, but remember that this configuration is not recommended for production.
+The Bitnami Apache Kafka docker image disables the `PLAINTEXT` listener for security reasons. You can enable the `PLAINTEXT` listener by adding the next environment variable, but remember that this configuration is not recommended for production.
 
 ```console
 ALLOW_PLAINTEXT_LISTENER=yes
@@ -312,8 +312,8 @@ ALLOW_PLAINTEXT_LISTENER=yes
 
 In order to configure authentication, you must configure the Apache Kafka listeners properly. This container assumes the names below will be used for the listeners:
 
-* INTERNAL: used for inter-broker communications.
-* CLIENT: used for coummunications with clients that are within the same network as Apache Kafka brokers.
+* `INTERNAL`: used for inter-broker communications.
+* `CLIENT`: used for communications with clients that are within the same network as Apache Kafka brokers.
 
 Let's see an example to configure Apache Kafka with `SASL_SSL` authentication for communications with clients, and `SSL` authentication for inter-broker communication.
 
@@ -323,6 +323,7 @@ The environment variables below should be define to configure the listeners, and
 KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=INTERNAL:SSL,CLIENT:SASL_SSL
 KAFKA_CFG_LISTENERS=INTERNAL://:9093,CLIENT://:9092
 KAFKA_CFG_ADVERTISED_LISTENERS=INTERNAL://kafka:9093,CLIENT://kafka:9092
+KAFKA_CFG_INTER_BROKER_LISTENER_NAME=INTERNAL
 KAFKA_CLIENT_USER=user
 KAFKA_CLIENT_PASSWORD=password
 ```
