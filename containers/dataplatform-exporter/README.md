@@ -1,10 +1,10 @@
-# Data Platform Metrics Exporter packaged by Bitnami
+# Data Platform Blueprint 1 packaged by Bitnami
 
-## What is Data Platform Metrics Exporter?
+## What is Data Platform Blueprint 1?
 
-> The Prometheus exporter for various metrics of OCTO Data Platform Blueprints includes the most critical metrics to determine the health of the data platform.
+> The Prometheus metrics exporter for OCTO Data Platform Blueprints includes the most critical metrics to determine the health of the data platform. See the Data Platform Blueprint 1 Helm Chart.
 
-[Overview of Data Platform Metrics Exporter](https://github.com/bitnami/dataplatform-exporter)
+[Overview of Data Platform Blueprint 1](https://bitnami.com/stack/data-platform-metrics-exporter)
 
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
@@ -31,8 +31,8 @@ $ docker run --name dataplatform-exporter bitnami/dataplatform-exporter:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`1`, `1-scratch`, `1.0.1`, `1.0.1-scratch-r0` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-dataplatform-exporter/blob/1.0.1-scratch-r0/1/scratch/Dockerfile)
-- [`0`, `0-scratch`, `0.0.12`, `0.0.12-scratch-r0`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-dataplatform-exporter/blob/0.0.12-scratch-r0/0/scratch/Dockerfile)
+- [`1`, `1-scratch`, `1.0.1`, `1.0.1-scratch-r1`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-dataplatform-exporter/blob/1.0.1-scratch-r1/1/scratch/Dockerfile)
+- [`0`, `0-scratch`, `0.0.12`, `0.0.12-scratch-r0` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-dataplatform-exporter/blob/0.0.12-scratch-r0/0/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dataplatform-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-dataplatform-exporter).
 
@@ -53,10 +53,10 @@ $ docker pull bitnami/dataplatform-exporter:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/dataplatform-exporter:latest 'https://github.com/bitnami/bitnami-docker-dataplatform-exporter.git#master:0/scratch'
+$ docker build -t bitnami/dataplatform-exporter:latest 'https://github.com/bitnami/bitnami-docker-dataplatform-exporter.git#master:1/scratch'
 ```
 
-# How to deploy Data Platform Metrics Exporter in Kubernetes?
+# How to deploy Data Platform Blueprint 1 in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Data Platform Blueprint chart](https://github.com/bitnami/charts/tree/master/bitnami/dataplatform-bp1).
 
@@ -76,7 +76,7 @@ To run commands inside this container you can use `docker run`, for example to e
 $ docker run --rm --name dataplatform-exporter bitnami/dataplatform-exporter:latest --  --web.listen-address :9782
 ```
 
-Check the [official Data Platform Metrics Exporter documentation](https://github.com/bitnami/dataplatform-exporter#configuration) for more information.
+Check the [official Data Platform Blueprint 1 documentation](https://bitnami.com/stack/data-platform-metrics-exporter#configuration) for more information.
 
 ## Contributing
 
