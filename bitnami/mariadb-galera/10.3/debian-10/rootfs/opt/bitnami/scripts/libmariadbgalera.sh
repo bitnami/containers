@@ -138,15 +138,13 @@ should_bootstrap_implicitly() {
 #   None
 #########################
 has_galera_cluster_other_nodes() {
-    # - This function works on a best-effort basis and only works reliably with Kubernetes pods.
-    # - We are using `getent hosts` to check for the availability of other hosts, but this may not work when the hosts are defined as IP addresses.
-    #   In some environments, there may be no reverse DNS lookup for IPs, so this function may wrongly return "no".
-    #   It should work fine if the hosts are defined as hostnames of Services (usually of a StatefulSet) inside a Kubernetes environment.
+    local local_ip node_ip cluster_address address has_nodes
 
-    local local_ip
-    local node_ip
-    local cluster_address
-    local has_nodes
+    hostname_has_ips() {
+       local hostname="${1:?hostname is required}"
+       [[ "$(getent ahosts "$hostname")" != "" ]] && return 0
+       return 1
+    }
 
     has_nodes="yes"
     cluster_address="$DB_GALERA_CLUSTER_ADDRESS"
@@ -160,7 +158,8 @@ has_galera_cluster_other_nodes() {
             if validate_ipv4 "$(echo "${addresses[0]}" | cut -d':' -f1)"; then
                 has_nodes="yes"
             else
-                if is_hostname_resolved "$(echo "${addresses[0]}" | cut -d':' -f1)"; then
+                address="$(echo "${addresses[0]}" | cut -d':' -f1)"
+                if retry_while "hostname_has_ips $address"; then
                     has_nodes="yes"
                 else
                     has_nodes="no"
@@ -174,7 +173,9 @@ has_galera_cluster_other_nodes() {
                 if validate_ipv4 "$address"; then
                     node_ip="$address"
                 else
-                    is_hostname_resolved "$address" && node_ip="$(dns_lookup "$address")"
+                    if retry_while "hostname_has_ips $address"; then
+                        node_ip="$(dns_lookup "$address")"
+                    fi
                 fi
                 if [[ -n "$node_ip" ]] && [[ "$node_ip" != "$local_ip" ]]; then
                     has_nodes="yes"
