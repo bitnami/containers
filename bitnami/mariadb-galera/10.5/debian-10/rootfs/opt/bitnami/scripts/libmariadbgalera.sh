@@ -160,13 +160,15 @@ has_galera_cluster_other_nodes() {
             else
                 address="$(echo "${addresses[0]}" | cut -d':' -f1)"
                 if retry_while "hostname_has_ips $address"; then
-                    has_nodes="yes"
-                else
-                    has_nodes="no"
+                    for ip in $(getent ahosts "$address" | awk '{print $1}' | uniq); do
+                        if [[ "$ip" != "$local_ip" ]]; then
+                            has_nodes="yes"
+                            break
+                        fi
+                    done
                 fi
             fi
         else
-            has_nodes="no"
             for a in "${addresses[@]}"; do
                 address="$(echo "$a" | cut -d':' -f1)"
                 node_ip=""
