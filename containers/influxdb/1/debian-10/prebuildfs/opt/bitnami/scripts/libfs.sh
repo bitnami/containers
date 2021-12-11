@@ -20,8 +20,13 @@
 owned_by() {
     local path="${1:?path is missing}"
     local owner="${2:?owner is missing}"
+    local group="${3:-}"
 
-    chown "$owner":"$owner" "$path"
+    if [[ -n $group ]]; then
+        chown "$owner":"$group" "$path"
+    else
+        chown "$owner":"$owner" "$path"
+    fi
 }
 
 ########################
@@ -34,11 +39,12 @@ owned_by() {
 #########################
 ensure_dir_exists() {
     local dir="${1:?directory is missing}"
-    local owner="${2:-}"
+    local owner_user="${2:-}"
+    local owner_group="${3:-}"
 
     mkdir -p "${dir}"
-    if [[ -n $owner ]]; then
-        owned_by "$dir" "$owner"
+    if [[ -n $owner_user ]]; then
+        owned_by "$dir" "$owner_user" "$owner_group"
     fi
 }
 
