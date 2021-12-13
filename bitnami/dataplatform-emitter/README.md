@@ -32,7 +32,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 - [`1`, `1-scratch`, `1.0.1`, `1.0.1-scratch-r2`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-dataplatform-emitter/blob/1.0.1-scratch-r2/1/scratch/Dockerfile)
-- [`0`, `0-scratch`, `0.0.11`, `0.0.11-scratch-r0` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-dataplatform-emitter/blob/0.0.11-scratch-r0/0/scratch/Dockerfile)
+- [`0`, `0-scratch`, `0.0.11`, `0.0.11-scratch-r1` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-dataplatform-emitter/blob/0.0.11-scratch-r1/0/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dataplatform-emitter GitHub repo](https://github.com/bitnami/bitnami-docker-dataplatform-emitter).
 
