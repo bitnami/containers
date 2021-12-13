@@ -11,7 +11,7 @@ COPY prebuildfs /
 RUN install_packages acl advancecomp ca-certificates curl file ghostscript gifsicle gzip hostname imagemagick jhead jpegoptim libbsd0 libbz2-1.0 libc6 libcom-err2 libcurl4 libedit2 libffi6 libgcc1 libgcrypt20 libgmp-dev libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjpeg-turbo-progs libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libncurses6 libncursesw6 libnettle6 libnghttp2-14 libp11-kit0 libpq5 libpsl5 libreadline-dev libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl-dev libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxml2-dev libxslt1-dev libxslt1.1 optipng pngcrush pngquant procps rsync sqlite3 tar zlib1g zlib1g-dev
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-5" --checksum 18aaf8247baa258f4e16de86673a3e799cd50bbef2824f0d2ae805c9c2068f11
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-3" --checksum 9e18c6c3411e702eb16aa60dc77baf3fd9af8d5beb2623936ef3af343d5ffd5b
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "uglify-js" "3.14.4-0" --checksum 63268157fb026e888242931e0b49386cd57d23c2953fee2aea5518b2a842d128
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "uglify-js" "3.14.5-0" --checksum ace5c00c36764e3c0d24005bd4c6db24a0ee61f8a6dab315655346571331ee45
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "2.7.5-0" --checksum 72c1bcd8c43dd524ef5a681f2186ef26fd55c91e11db2583599273f7997aab0e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "13.5.0-0" --checksum eb9051af5a9077ff41349b271ffd1029af7088bcf3d1f5ac81c2c6707801fbec
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.18.2-0" --checksum 5753bbbe5052000888c24ef8c918cfc45577878b03cc4dcfe7d53ea562a48e5a
@@ -25,7 +25,7 @@ RUN /opt/bitnami/ruby/bin/gem install --force bundler -v '< 2'
 COPY rootfs /
 RUN /opt/bitnami/scripts/discourse/postunpack.sh
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.7.11-debian-10-r9" \
+    BITNAMI_IMAGE_VERSION="2.7.11-debian-10-r10" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/git/bin:/opt/bitnami/brotli/bin:$PATH" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_NAME="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
