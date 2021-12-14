@@ -15,10 +15,10 @@
     },
     "joomla": {
         "arch": "amd64",
-        "digest": "807103d6102ef0a91472a4539679f5b46d3ded75c7b53495b58cef7d9141e2a7",
+        "digest": "07b41c295eefb16019605c93774299dbb5f78d48f60df035f0dba76ae9dd8fcb",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.0.4-0"
+        "version": "4.0.5-0"
     },
     "libphp": {
         "arch": "amd64",
