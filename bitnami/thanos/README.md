@@ -1,23 +1,27 @@
-# What is Thanos?
+# Thanos packaged by Bitnami
 
-> Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
+## What is Thanos?
 
-[https://thanos.io/](https://thanos.io/)
+> Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.	
 
-# TL;DR
+[Overview of Thanos](https://thanos.io/)
+
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
+## TL;DR
 
 ```console
 $ docker run --name thanos bitnami/thanos:latest
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```console
 $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-thanos/master/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -25,42 +29,42 @@ $ docker-compose up -d
 
 > This [CVE scan report](https://quay.io/repository/bitnami/thanos?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy Thanos in Kubernetes?
+## How to deploy Thanos in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Thanos Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/thanos).
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-scratch`, `0.23.1`, `0.23.1-scratch-r3`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-thanos/blob/0.23.1-scratch-r3/0/scratch/Dockerfile)
+* [`0`, `0-scratch`, `0.23.1`, `0.23.1-scratch-r4`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-thanos/blob/0.23.1-scratch-r4/0/scratch/Dockerfile)
 
-# Connecting to other containers
+## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a different server running inside a container can easily be accessed by your application containers and vice-versa.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
-## Using the Command Line
+### Using the Command Line
 
-### Step 1: Create a network
+#### Step 1: Create a network
 
 ```console
 $ docker network create thanos-network --driver bridge
 ```
 
-### Step 2: Create a volume for Prometheus data
+#### Step 2: Create a volume for Prometheus data
 
 ```console
 $ docker volume create --name prometheus_data
 ```
 
-### Step 3: Launch a Prometheus container within your network
+#### Step 3: Launch a Prometheus container within your network
 
 Create a configuration file **prometheus.yml** for Prometheus as the one below:
 
@@ -91,7 +95,7 @@ $ docker run -d --name "prometheus" \
   bitnami/prometheus
 ```
 
-### Step 4: Launch a Thanos sidecar container within your network
+#### Step 4: Launch a Thanos sidecar container within your network
 
 Use the `docker run` command to launch the Thanos sidecar container using the argument below and overwriting the default command:
 
@@ -105,7 +109,7 @@ $ docker run -d --name "thanos-sidecar" \
   bitnami/thanos sidecar --tsdb.path=/data --prometheus.url=http://prometheus:9090 --grpc-address=0.0.0.0:10901
 ```
 
-### Step 5: Launch a Thanos Query container within your network
+#### Step 5: Launch a Thanos Query container within your network
 
 Use the `docker run` command to launch the Thanos Query container using the argument below and overwriting the default command:
 
@@ -119,9 +123,9 @@ $ docker run -d --name "thanos-query" \
   bitnami/thanos query --grpc-address=0.0.0.0:10901 --http-address=0.0.0.0:9090 --store=thanos-sidecar:10901
 ```
 
-Then you can access your Thanos Query UI at http://localhost:9090/
+Then you can access your Thanos Query UI at `http://localhost:9090/`
 
-## Using Docker Compose
+### Using Docker Compose
 
 You can use the **docker-compose-cluster.yml** available on this repository to deploy an architecture like the one below:
 
@@ -152,7 +156,7 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-minio/maste
 $ docker-compose up -d
 ```
 
-# Configuration
+## Configuration
 
 Thanos can be configured via command-line flags and, depending on them, the same container image can be used to create components with differentes roles:
 
@@ -165,7 +169,7 @@ Thanos can be configured via command-line flags and, depending on them, the same
 
 For further documentation, please check [Thanos documentation](https://github.com/thanos-io/thanos/tree/master/docs).
 
-# Logging
+## Logging
 
 The Bitnami Thanos Docker image sends the container logs to the `stdout`. To view the logs:
 
@@ -175,11 +179,11 @@ $ docker logs thanos
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-thanos/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-thanos/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-thanos/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -189,7 +193,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
 Copyright (c) 2021 Bitnami
 
