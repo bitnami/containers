@@ -152,7 +152,7 @@ has_galera_cluster_other_nodes() {
         has_nodes="no"
     elif [[ -n "$cluster_address" ]]; then
         has_nodes="no"
-        read -r -a local_ips <<< "$(hostname -i)"
+        local_ip=$(hostname -i)
         read -r -a addresses <<< "$(tr ',' ' ' <<< "${cluster_address#*://}")"
         if [[ "${#addresses[@]}" -eq "1" ]]; then
             if validate_ipv4 "$(echo "${addresses[0]}" | cut -d':' -f1)"; then
@@ -179,19 +179,9 @@ has_galera_cluster_other_nodes() {
                         node_ip="$(dns_lookup "$address")"
                     fi
                 fi
-                if [[ -n "$node_ip" ]]; then
+                if [[ -n "$node_ip" ]] && [[ "$node_ip" != "$local_ip" ]]; then
                     has_nodes="yes"
-                    # we now check if *any* of our IPs matches the node IP. In that case, we have to revert has_nodes to no, because it's not in fact a foreign node and check the next.
-                    for local_ip in "${local_ips[@]}"; do
-                        if [[ "$node_ip" == "$local_ip" ]]; then
-                            has_nodes="no"
-                            break
-                        fi
-                    done
-                    # The foreign IP did not match our local IP, so we know that another node exists.
-                    if [[ "$has_nodes" == 'yes' ]]; then
-                        break
-                    fi
+                    break
                 fi
             done
         fi
@@ -736,9 +726,7 @@ get_node_address() {
         local -r retries="60"
         local -r seconds="5"
         retry_while "hostname -i" "$retries" "$seconds" >/dev/null
-        # prefer IPv6 over IPv4 if available
-        # This works by pulling any IPv4 addresses encountered into hold space and emitting it only when the EOF line is encountered
-        printf '%s\nEOF' "$(hostname -i | tr ' ' '\n')" | sed '/:/{;q;};/^EOF$/{;g;q;};h;d'
+        hostname -i
     fi
 }
 
