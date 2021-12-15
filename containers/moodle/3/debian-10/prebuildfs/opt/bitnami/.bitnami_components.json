@@ -36,10 +36,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "c8d79adeecf3f36ff8df387c105398c9f45eb344990f5d1980d3919d556387ae",
+        "digest": "838dfca7642d20a1985fa51a92befa204826d181b13904a7c6ca7e32f6b8dea8",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.26-3"
+        "version": "7.4.26-4"
     },
     "render-template": {
         "arch": "amd64",
