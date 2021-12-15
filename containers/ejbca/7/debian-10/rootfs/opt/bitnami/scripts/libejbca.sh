@@ -519,6 +519,8 @@ ejbca_load_persisted() {
     info "Placing widlfly keystores"
     [[ ! -e "$EJBCA_WILDFLY_TRUSTSTORE_FILE" ]] && ln -s "$EJBCA_TRUSTSTORE_FILE" "$EJBCA_WILDFLY_TRUSTSTORE_FILE"
     [[ ! -e "$EJBCA_WILDFLY_KEYSTORE_FILE" ]] && ln -s "$EJBCA_KEYSTORE_FILE" "$EJBCA_WILDFLY_KEYSTORE_FILE"
+
+    true
 }
 
 ########################
