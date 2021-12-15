@@ -15,9 +15,9 @@
     },
     "wavefront-proxy": {
         "arch": "amd64",
-        "digest": "32abb324463dd2fc999e4f29d84409bd702036ca0fec3a7e99ad0322fdca4c94",
+        "digest": "14a585c4e3184a690fddf4ad0321e0c00ed272d3499dbdd83273f4104a385f98",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.9.0-0"
+        "version": "10.11.0-0"
     }
 }

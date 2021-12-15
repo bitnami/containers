@@ -12,7 +12,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.13-0" --checksum 9552e53ccd3b0ec85a82c31c26a1462260e28b7c58770a5c53560afb02ec66d9
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wavefront-proxy" "10.9.0-0" --checksum 32abb324463dd2fc999e4f29d84409bd702036ca0fec3a7e99ad0322fdca4c94
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wavefront-proxy" "10.11.0-0" --checksum 14a585c4e3184a690fddf4ad0321e0c00ed272d3499dbdd83273f4104a385f98
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
 
@@ -20,7 +20,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/wavefront-proxy/postunpack.sh
 ENV BITNAMI_APP_NAME="wavefront-proxy" \
-    BITNAMI_IMAGE_VERSION="10.9.0-debian-10-r63" \
+    BITNAMI_IMAGE_VERSION="10.11.0-debian-10-r0" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"
 
