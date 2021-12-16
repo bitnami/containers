@@ -11,13 +11,13 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl gzip iproute2 procps tar zlib1g-dev
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-3" --checksum cddf51b3cb59d65d5d30e3fe37e99d8d53375ad88f0cc474019a52e6d8b4fc58
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "consul" "1.11.0-0" --checksum df1cdfbce9bca22402f12d4795bdae81b720850611c3487589be9f492a9b66e8
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "consul" "1.11.1-0" --checksum 1eec464e68aacfe40ff1641248ddcb61b47b87a9a1a03f995f03fa956f72db37
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/consul/postunpack.sh
 ENV BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.11.0-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="1.11.1-debian-10-r0" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/consul/bin:$PATH"
 
 EXPOSE 8300 8301 8500 8600
