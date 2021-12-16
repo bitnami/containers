@@ -5,5 +5,6 @@
   SSLEngine on
   SSLCertificateFile "{{APACHE_CONF_DIR}}/bitnami/certs/server.crt"
   SSLCertificateKeyFile "{{APACHE_CONF_DIR}}/bitnami/certs/server.key"
+  {{additional_https_configuration}}
   {{additional_configuration}}
 </VirtualHost>
