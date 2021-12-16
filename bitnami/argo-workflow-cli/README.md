@@ -2,7 +2,7 @@
 
 ## What is Argo Workflows?
 
-> Argo Workflows is meant to orchestrate Kubernetes jobs in parallel. It uses DAG and step-based workflows 
+> Argo Workflows is meant to orchestrate Kubernetes jobs in parallel. It uses DAG and step-based workflows
 
 [Overview of Argo Workflows](https://argoproj.github.io/workflows)
 
@@ -46,7 +46,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-scratch`, `3.2.4`, `3.2.4-scratch-r0`, `latest` (3/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-acmesolver/blob/3.2.4-scratch-r0/3/scratch/      Dockerfile)
+* [`3`, `3-scratch`, `3.2.5`, `3.2.5-scratch-r0`, `latest` (3/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-argo-workflows/blob/3.2.5-scratch-r0/3/scratch/      Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/argo-workflow-cli GitHub repo](https://github.com/bitnami/bitnami-docker-argo-workflow-cli).
 
