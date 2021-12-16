@@ -4,7 +4,7 @@
 
 > Wavefront HPA Adapter for Kubernetes is a Kubernetes Horizontal Pod Autoscaler adapter. It allows to scale your Kubernetes workloads based on Wavefront metrics.
 
-[Overview of Wavefront HPA Adapter for Kubernetes](https://github.com/wavefrontHQ/wavefront-hpa-adapter)
+[Overview of Wavefront HPA Adapter for Kubernetes](https://github.com/wavefrontHQ/wavefront-kubernetes-adapter)
 
 
 
@@ -31,7 +31,7 @@ $ docker run --name wavefront-hpa-adapter bitnami/wavefront-hpa-adapter:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-scratch`, `0.9.8`, `0.9.8-scratch-r6`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-hpa-adapter/blob/0.9.8-scratch-r6/0/scratch/Dockerfile)
+* [`0`, `0-scratch`, `0.9.8`, `0.9.8-scratch-r7`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-hpa-adapter/blob/0.9.8-scratch-r7/0/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wavefront-hpa-adapter GitHub repo](https://github.com/bitnami/bitnami-docker-wavefront-hpa-adapter).
 
@@ -69,7 +69,7 @@ To run commands inside this container you can use `docker run`, for example to e
 $ docker run --rm --name wavefront-hpa-adapter bitnami/wavefront-hpa-adapter:latest --  --wavefront-url example.wavefront.com
 ```
 
-Check the [official Wavefront HPA Adapter for Kubernetes documentation](https://github.com/wavefrontHQ/wavefront-hpa-adapter/blob/master/docs/configuration.md) for a list of the available parameters.
+Check the [official Wavefront HPA Adapter for Kubernetes documentation](https://github.com/wavefrontHQ/wavefront-kubernetes-adapter/blob/master/docs/configuration.md) for a list of the available parameters.
 
 ## Contributing
 
