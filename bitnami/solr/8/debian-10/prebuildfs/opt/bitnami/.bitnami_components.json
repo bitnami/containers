@@ -15,9 +15,9 @@
     },
     "solr": {
         "arch": "amd64",
-        "digest": "a1e8663c723b38c334d013e8da81e0f596c2b0d9c976b3e2632d4bc47f3a7fd5",
+        "digest": "10d0eb5a3255dc3da87f7c1903ecbb08ff46b4fe213843e1b16b2e9c174d863c",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.11.0-0"
+        "version": "8.11.1-0"
     }
 }
