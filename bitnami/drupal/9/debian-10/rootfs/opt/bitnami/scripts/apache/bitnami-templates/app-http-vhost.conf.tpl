@@ -9,6 +9,7 @@
     {{acl_configuration}}
     {{extra_directory_configuration}}
   </Directory>
+  {{additional_http_configuration}}
   {{additional_configuration}}
   {{htaccess_include}}
 </VirtualHost>
