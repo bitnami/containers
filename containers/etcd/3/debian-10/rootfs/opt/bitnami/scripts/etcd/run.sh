@@ -16,9 +16,6 @@ set -o pipefail
 # Load etcd environment variables
 . /opt/bitnami/scripts/etcd-env.sh
 
-# Constants
-EXEC="$(command -v etcd)"
-
 ! is_empty_value "$ETCD_ROOT_PASSWORD" && unset ETCD_ROOT_PASSWORD
 if [[ -f "$ETCD_NEW_MEMBERS_ENV_FILE" ]]; then
     debug "Loading env vars of existing cluster"
@@ -31,9 +28,15 @@ else
     export ETCD_INITIAL_CLUSTER
 fi
 
+declare -a cmd=("etcd")
+# If provided, run using configuration file
+# Using a configuration file will cause etcd to ignore other flags and environment variables
+[[ -f "$ETCD_CONF_FILE" ]] && cmd+=("--config-file" "$ETCD_CONF_FILE")
+cmd+=("$@")
+
 info "** Starting etcd **"
 if am_i_root; then
-    exec gosu "$ETCD_DAEMON_USER" "${EXEC}" "$@"
+    exec gosu "$ETCD_DAEMON_USER" "${cmd[@]}"
 else
-    exec "${EXEC}" "$@"
+    exec "${cmd[@]}"
 fi

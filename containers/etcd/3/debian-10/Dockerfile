@@ -4,21 +4,22 @@ LABEL maintainer "Bitnami <containers@bitnami.com>"
 ENV HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
-    OS_NAME="linux" \
-    PATH="/opt/bitnami/common/bin:/opt/bitnami/etcd/bin:$PATH"
+    OS_NAME="linux"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages acl ca-certificates curl gzip jq procps tar
+RUN install_packages acl ca-certificates curl gzip procps tar
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.16.1-0" --checksum e7a14c06b08e5a773ac5e640a58adce2c0196b5e82e331df19f11861bceb2c9d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "etcd" "3.5.1-0" --checksum 912653e5c0879fd27c8bb0327bea171d7ae504611ec0a9c8fcc2ec6184766a63
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "etcd" "3.5.1-1" --checksum 424ad409fddf0b8bbb44fae42c1696bfe85ae147acbbbd0489fc75367feaf309
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/etcd/postunpack.sh
 ENV BITNAMI_APP_NAME="etcd" \
-    BITNAMI_IMAGE_VERSION="3.5.1-debian-10-r54" \
-    ETCDCTL_API="3"
+    BITNAMI_IMAGE_VERSION="3.5.1-debian-10-r56" \
+    ETCDCTL_API="3" \
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/etcd/bin:$PATH"
 
 EXPOSE 2379 2380
 
