@@ -2,7 +2,7 @@
 #
 # Bitnami etcd library
 
-# shellcheck disable=SC1090,SC1091
+# shellcheck disable=SC1090,SC1091,SC2119
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/libfile.sh
@@ -13,6 +13,95 @@
 . /opt/bitnami/scripts/libservice.sh
 
 # Functions
+
+########################
+# Write a configuration setting value
+# Globals:
+#   ETCD_CONF_FILE
+# Arguments:
+#   $1 - key
+#   $2 - value
+#   $3 - YAML type (string, int or bool)
+# Returns:
+#   None
+#########################
+etcd_conf_write() {
+    local -r key="${1:?Missing key}"
+    local -r value="${2:-}"
+    local -r type="${3:-string}"
+    local -r tempfile=$(mktemp)
+
+    [[ -z "$value" ]] && return
+    [[ ! -f "$ETCD_CONF_FILE" ]] && touch "$ETCD_CONF_FILE"
+    case "$type" in
+    string)
+        yq eval "(.${key}) |= \"${value}\"" "$ETCD_CONF_FILE" > "$tempfile"
+        ;;
+    bool)
+        yq eval "(.${key}) |= (\"${value}\" | test(\"true\"))" "$ETCD_CONF_FILE" > "$tempfile"
+        ;;
+    raw)
+        yq eval "(.${key}) |= ${value}" "$ETCD_CONF_FILE" > "$tempfile"
+        ;;
+    *)
+        error "Type unknown: ${type}"
+        return 1
+        ;;
+    esac
+    cp "$tempfile" "$ETCD_CONF_FILE"
+}
+
+########################
+# Creates etcd configuration file from environment variables
+# Globals:
+#   ETCD_CFG_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+etcd_setup_from_environment_variables() {
+    ## Except for Client and Peer TLS configuration,
+    ## all etcd settings consists of ETCD_FLAG_NAME
+    ## transformed into flag-name and configured under the yaml config root.
+    local -a client_tls_values=(
+        "ETCD_CFG_CERT_FILE"
+        "ETCD_CFG_KEY_FILE"
+        "ETCD_CFG_CLIENT_CERT_AUTH"
+        "ETCD_CFG_TRUSTED_CA_FILE"
+        "ETCD_CFG_AUTO_TLS"
+        "ETCD_CFG_CA_FILE"
+    )
+    info "Generating etcd config file using env variables"
+    # Map environment variables to config properties for cassandra-env.sh
+    for var in "${!ETCD_CFG_@}"; do
+        value="${!var:-}"
+        if [[ -n "$value" ]]; then
+            type="string"
+            # Detect if value is digit or bool
+            if [[ "$value" =~ ^[+-]?[0-9]+([.][0-9]+)?$ || "$value" =~ ^(true|false)$ ]]; then
+                type="raw"
+            fi
+            if [[ ${client_tls_values[*]} =~ ${var} ]]; then
+                key="$(echo "$var" | sed -e 's/^ETCD_CFG_//g' -e 's/_/-/g' | tr '[:upper:]' '[:lower:]')"
+                etcd_conf_write "client-transport-security.${key}" "$value" "$type"
+            elif [[ "$var" =~ "ETCD_CFG_CLIENT_" ]]; then
+                key="$(echo "$var" | sed -e 's/^ETCD_CFG_CLIENT_//g' -e 's/_/-/g' | tr '[:upper:]' '[:lower:]')"
+                etcd_conf_write "client-transport-security.${key}" "$value" "$type"
+            elif [[ "$var" =~ "ETCD_CFG_PEER_" ]]; then
+                key="$(echo "$var" | sed -e 's/^ETCD_CFG_PEER_//g' -e 's/_/-/g' | tr '[:upper:]' '[:lower:]')"
+                etcd_conf_write "peer-transport-security.${key}" "$value" "$type"
+            else
+                # shellcheck disable=SC2001
+                key="$(echo "$var" | sed -e 's/^ETCD_CFG_//g' -e 's/_/-/g' | tr '[:upper:]' '[:lower:]')"
+                etcd_conf_write "$key" "$value" "$type"
+            fi
+        fi
+    done
+    if am_i_root; then
+        chown "$ETCD_DAEMON_USER" "$ETCD_CONF_FILE"
+    fi
+}
 
 ########################
 # Validate settings in ETCD_* environment variables
@@ -53,13 +142,33 @@ etcd_validate() {
 #   Boolean
 #########################
 is_etcd_running() {
-    local -r pid="$(pgrep -f "^etcd")"
+    local pid
+    pid="$(pgrep -f "^etcd" || true)"
+
+    # etcd does not create any PID file
+    # We regenerate the PID file for each time we query it to avoid getting outdated
+    if [[ -n "${ETCD_PID_FILE:-}" ]]; then
+        echo "$pid" > "$ETCD_PID_FILE"
+    fi
 
     if [[ -n "$pid" ]]; then
         is_service_running "$pid"
     else
         false
     fi
+}
+
+########################
+# Check if etcd is running
+# Globals:
+#   ETCD_PID_FILE
+# Arguments:
+#   None
+# Returns:
+#   Whether etcd is not running
+########################
+is_etcd_not_running() {
+    ! is_etcd_running
 }
 
 ########################
@@ -74,6 +183,7 @@ etcd_stop() {
     ! is_etcd_running && return
 
     info "Stopping etcd"
+    # Ensure process matches etcd binary with or without options
     pid="$(pgrep -f "^etcd")"
     local counter=10
     kill "$pid"
@@ -94,7 +204,10 @@ etcd_start_bg() {
     is_etcd_running && return
 
     info "Starting etcd in background"
-    debug_execute "etcd" &
+    local start_command=("etcd")
+    am_i_root && start_command=("gosu" "$ETCD_DAEMON_USER" "${start_command[@]}")
+    [[ -f "$ETCD_CONF_FILE" ]] && start_command+=("--config-file" "$ETCD_CONF_FILE")
+    debug_execute "${start_command[@]}" &
     sleep 3
 }
 
@@ -130,38 +243,34 @@ etcdctl_get_endpoints() {
        return 1
     }
 
-    if is_boolean_yes "$ETCD_ON_K8S"; then
-        # This piece of code assumes this container is used on a K8s environment
-        # where etcd members are part of a statefulset that uses a headless service
-        # to create a unique FQDN per member. Under these circumstances, the
-        # ETCD_ADVERTISE_CLIENT_URLS env. variable is created as follows:
-        #   SCHEME://POD_NAME.HEADLESS_SVC_DOMAIN:CLIENT_PORT,SCHEME://SVC_DOMAIN:SVC_CLIENT_PORT
-        #
-        # Assuming this, we can extract the HEADLESS_SVC_DOMAIN and obtain
-        # every available endpoint
-        read -r -a advertised_array <<< "$(tr ',;' ' ' <<< "$ETCD_ADVERTISE_CLIENT_URLS")"
-        host="$(parse_uri "${advertised_array[0]}" "host")"
-        port="$(parse_uri "${advertised_array[0]}" "port")"
-        domain="${host#"${ETCD_NAME}."}"
-        # When ETCD_CLUSTER_DOMAIN is set, we use that value instead of extracting
-        # it from ETCD_ADVERTISE_CLIENT_URLS
-        ! is_empty_value "$ETCD_CLUSTER_DOMAIN" && domain="$ETCD_CLUSTER_DOMAIN"
-        # Depending on the K8s distro & the DNS plugin, it might need
-        # a few seconds to associate the POD(s) IP(s) to the headless svc domain
-        if retry_while "hostname_has_ips $domain"; then
-            for ip in $(getent ahosts "$domain" | awk '{print $1}' | uniq); do
-                if retry_while "ip_has_valid_hostname $ip $domain"; then
-                    h="$(getent hosts "$ip" | awk '{print $2}')"
-                    if ! { [[ $only_others = true ]] && [[ "$h" = "$host" ]]; }; then
-                        endpoints+=("${h}:${port}")
-                    fi
+    # This piece of code assumes this code is executed on a K8s environment
+    # where etcd members are part of a statefulset that uses a headless service
+    # to create a unique FQDN per member. Under these circumstances, the
+    # ETCD_ADVERTISE_CLIENT_URLS env. variable is created as follows:
+    #   SCHEME://POD_NAME.HEADLESS_SVC_DOMAIN:CLIENT_PORT,SCHEME://SVC_DOMAIN:SVC_CLIENT_PORT
+    #
+    # Assuming this, we can extract the HEADLESS_SVC_DOMAIN and obtain
+    # every available endpoint
+    read -r -a advertised_array <<< "$(tr ',;' ' ' <<< "$ETCD_ADVERTISE_CLIENT_URLS")"
+    host="$(parse_uri "${advertised_array[0]}" "host")"
+    port="$(parse_uri "${advertised_array[0]}" "port")"
+    domain="${host#"${ETCD_NAME}."}"
+    # When ETCD_CLUSTER_DOMAIN is set, we use that value instead of extracting
+    # it from ETCD_ADVERTISE_CLIENT_URLS
+    ! is_empty_value "$ETCD_CLUSTER_DOMAIN" && domain="$ETCD_CLUSTER_DOMAIN"
+    # Depending on the K8s distro & the DNS plugin, it might need
+    # a few seconds to associate the POD(s) IP(s) to the headless svc domain
+    if retry_while "hostname_has_ips $domain"; then
+        for ip in $(getent ahosts "$domain" | awk '{print $1}' | uniq); do
+            if retry_while "ip_has_valid_hostname $ip $domain"; then
+                h="$(getent hosts "$ip" | awk '{print $2}')"
+                if ! { [[ $only_others = true ]] && [[ "$h" = "$host" ]]; }; then
+                    endpoints+=("${h}:${port}")
                 fi
-            done
-        fi
-        echo "${endpoints[*]}" | tr ' ' ','
-    else
-        echo ""
+            fi
+        done
     fi
+    echo "${endpoints[*]}" | tr ' ' ','
 }
 
 ########################
@@ -199,7 +308,7 @@ etcd_store_member_id() {
     local -a extra_flags
 
     read -r -a extra_flags <<< "$(etcdctl_auth_flags)"
-    extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
+    is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
     if retry_while "etcdctl ${extra_flags[*]} member list" >/dev/null 2>&1; then
         while [[ ! -s "${ETCD_DATA_DIR}/member_id" ]]; do
             # We use 'stdbuf' to ensure memory buffers are flushed to disk
@@ -226,7 +335,8 @@ etcd_configure_rbac() {
 
     ! is_etcd_running && etcd_start_bg
     read -r -a extra_flags <<< "$(etcdctl_auth_flags)"
-    extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
+
+    is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
     if retry_while "etcdctl ${extra_flags[*]} member list" >/dev/null 2>&1; then
         debug_execute etcdctl "${extra_flags[@]}" user add root --interactive=false <<< "$ETCD_ROOT_PASSWORD"
         debug_execute etcdctl "${extra_flags[@]}" user grant-role root root
@@ -286,9 +396,10 @@ is_healthy_etcd_cluster() {
     local return_value=0
     local active_endpoints=0
     local -a extra_flags
+    local -a endpoints_array=()
     local host port
 
-    read -r -a endpoints_array <<< "$(tr ',;' ' ' <<< "$(etcdctl_get_endpoints)")"
+    is_boolean_yes "$ETCD_ON_K8S" && read -r -a endpoints_array <<< "$(tr ',;' ' ' <<< "$(etcdctl_get_endpoints)")"
     local -r cluster_size=${#endpoints_array[@]}
     read -r -a advertised_array <<< "$(tr ',;' ' ' <<< "$ETCD_ADVERTISE_CLIENT_URLS")"
     host="$(parse_uri "${advertised_array[0]}" "host")"
@@ -337,6 +448,36 @@ is_healthy_etcd_cluster() {
     fi
 
     return $return_value
+}
+
+########################
+# Prints initial cluster nodes
+# Globals:
+#   ETCD_*
+# Arguments:
+#   None
+# Returns:
+#   String
+########################
+get_initial_cluster() {
+    local -a endpoints_array=()
+    local scheme port initial_members
+    read -r -a endpoints_array <<< "$(tr ',;' ' ' <<< "$ETCD_INITIAL_CLUSTER")"
+    if [[ ${#endpoints_array[@]} -gt 0 ]] && ! grep -sqE "://" <<< "$ETCD_INITIAL_CLUSTER"; then
+        # This piece of code assumes this container is used on a VM environment
+        # where ETCD_INITIAL_CLUSTER contains a comma-separated list of hostnames,
+        # and recreates it as follows:
+        #   SCHEME://NOTE_NAME:PEER_PORT
+        scheme="$(parse_uri "$ETCD_INITIAL_ADVERTISE_PEER_URLS" "scheme")"
+        port="$(parse_uri "$ETCD_INITIAL_ADVERTISE_PEER_URLS" "port")"
+        for nodePeer in "${endpoints_array[@]}"; do
+                initial_members+=("${nodePeer}=${scheme}://${nodePeer}:$port")
+        done
+        echo "${initial_members[*]}" | tr ' ' ','
+    else
+        # Nothing to do
+        echo "$ETCD_INITIAL_CLUSTER"
+    fi
 }
 
 ########################
@@ -395,6 +536,14 @@ etcd_initialize() {
     local domain
 
     info "Initializing etcd"
+
+    # Generate user configuration if ETCD_CFG_* variables are provided
+    etcd_setup_from_environment_variables
+
+    ETCD_INITIAL_CLUSTER="$(get_initial_cluster)"
+    export ETCD_INITIAL_CLUSTER
+    [[ -f "$ETCD_CONF_FILE" ]] && etcd_conf_write "initial-cluster" "$ETCD_INITIAL_CLUSTER"
+
     read -r -a initial_members <<< "$(tr ',;' ' ' <<< "$ETCD_INITIAL_CLUSTER")"
     if is_mounted_dir_empty "$ETCD_DATA_DIR"; then
         info "There is no data from previous deployments"
@@ -433,7 +582,8 @@ etcd_initialize() {
                 info "Adding new member to existing cluster"
                 ensure_dir_exists "$ETCD_DATA_DIR"
                 read -r -a extra_flags <<< "$(etcdctl_auth_flags)"
-                extra_flags+=("--endpoints=$(etcdctl_get_endpoints)" "--peer-urls=$ETCD_INITIAL_ADVERTISE_PEER_URLS")
+                is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
+                extra_flags+=("--peer-urls=$ETCD_INITIAL_ADVERTISE_PEER_URLS")
                 etcdctl member add "$ETCD_NAME" "${extra_flags[@]}" | grep "^ETCD_" > "$ETCD_NEW_MEMBERS_ENV_FILE"
                 replace_in_file "$ETCD_NEW_MEMBERS_ENV_FILE" "^" "export "
             fi
@@ -445,6 +595,7 @@ etcd_initialize() {
                 if [[ ${#initial_members[@]} -gt 1 ]]; then
                     ETCD_INITIAL_CLUSTER="$(recalculate_initial_cluster)"
                     export ETCD_INITIAL_CLUSTER
+                    [[ -f "$ETCD_CONF_FILE" ]] && etcd_conf_write "initial-cluster" "$ETCD_INITIAL_CLUSTER"
                     restore_args+=(
                         "--name" "$ETCD_NAME"
                         "--initial-cluster" "$ETCD_INITIAL_CLUSTER"
@@ -487,6 +638,7 @@ etcd_initialize() {
                         rm -rf "$ETCD_DATA_DIR"
                         ETCD_INITIAL_CLUSTER="$(recalculate_initial_cluster)"
                         export ETCD_INITIAL_CLUSTER
+                        [[ -f "$ETCD_CONF_FILE" ]] && etcd_conf_write "initial-cluster" "$ETCD_INITIAL_CLUSTER"
                         debug_execute etcdctl snapshot restore "${latest_snapshot_file}" \
                           --name "$ETCD_NAME" \
                           --data-dir "$ETCD_DATA_DIR" \
@@ -504,19 +656,23 @@ etcd_initialize() {
             elif was_etcd_member_removed; then
                 info "Adding new member to existing cluster"
                 read -r -a extra_flags <<< "$(etcdctl_auth_flags)"
-                extra_flags+=("--endpoints=$(etcdctl_get_endpoints)" "--peer-urls=$ETCD_INITIAL_ADVERTISE_PEER_URLS")
+                is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
+                extra_flags+=("--peer-urls=$ETCD_INITIAL_ADVERTISE_PEER_URLS")
                 etcdctl member add "$ETCD_NAME" "${extra_flags[@]}" | grep "^ETCD_" > "$ETCD_NEW_MEMBERS_ENV_FILE"
                 replace_in_file "$ETCD_NEW_MEMBERS_ENV_FILE" "^" "export "
                 debug_execute etcd_store_member_id &
             elif [[ -f "${ETCD_DATA_DIR}/member_id" ]]; then
                 info "Updating member in existing cluster"
                 export ETCD_INITIAL_CLUSTER_STATE=existing
+                [[ -f "$ETCD_CONF_FILE" ]] && etcd_conf_write "initial-cluster-state" "$ETCD_INITIAL_CLUSTER_STATE"
                 read -r -a extra_flags <<< "$(etcdctl_auth_flags)"
-                extra_flags+=("--endpoints=$(etcdctl_get_endpoints true)" "--peer-urls=$ETCD_INITIAL_ADVERTISE_PEER_URLS")
+                is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
+                extra_flags+=("--peer-urls=$ETCD_INITIAL_ADVERTISE_PEER_URLS")
                 etcdctl member update "$(cat "${ETCD_DATA_DIR}/member_id")" "${extra_flags[@]}"
             else
                 info "Member ID wasn't properly stored, the member will try to join the cluster by it's own"
                 export ETCD_INITIAL_CLUSTER_STATE=existing
+                [[ -f "$ETCD_CONF_FILE" ]] && etcd_conf_write "initial-cluster-state" "$ETCD_INITIAL_CLUSTER_STATE"
             fi
         fi
     fi

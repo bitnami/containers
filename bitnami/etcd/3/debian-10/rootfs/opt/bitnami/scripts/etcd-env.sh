@@ -62,8 +62,11 @@ unset etcd_env_vars
 # Paths
 export ETCD_BASE_DIR="/opt/bitnami/etcd"
 export ETCD_VOLUME_DIR="/bitnami/etcd"
-export ETCD_BIN_DIR="${ETCD_BASE_DIR}/sbin"
+export ETCD_BIN_DIR="${ETCD_BASE_DIR}/bin"
 export ETCD_DATA_DIR="${ETCD_VOLUME_DIR}/data"
+export ETCD_CONF_DIR="${ETCD_BASE_DIR}/conf"
+export ETCD_TMP_DIR="${ETCD_BASE_DIR}/tmp"
+export ETCD_CONF_FILE="${ETCD_CONF_DIR}/etcd.yaml"
 export ETCD_SNAPSHOTS_DIR="/snapshots"
 export ETCD_INIT_SNAPSHOTS_DIR="${ETCD_INIT_SNAPSHOTS_DIR:-/init-snapshot}"
 export ETCD_NEW_MEMBERS_ENV_FILE="${ETCD_DATA_DIR}/new_member_envs"
@@ -81,9 +84,9 @@ export ETCD_START_FROM_SNAPSHOT="${ETCD_START_FROM_SNAPSHOT:-no}"
 export ETCD_DISASTER_RECOVERY="${ETCD_DISASTER_RECOVERY:-no}"
 export ETCD_ON_K8S="${ETCD_ON_K8S:-no}"
 export ETCD_INIT_SNAPSHOT_FILENAME="${ETCD_INIT_SNAPSHOT_FILENAME:-}"
+export ETCDCTL_API="${ETCDCTL_API:-3}"
 
 # etcd native environment variables (see https://etcd.io/docs/current/op-guide/configuration)
-export ETCDCTL_API="${ETCDCTL_API:-3}"
 export ETCD_NAME="${ETCD_NAME:-}"
 export ETCD_LOG_LEVEL="${ETCD_LOG_LEVEL:-info}"
 export ETCD_LISTEN_CLIENT_URLS="${ETCD_LISTEN_CLIENT_URLS:-http://0.0.0.0:2379}"
