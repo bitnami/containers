@@ -8,9 +8,9 @@
     },
     "haproxy-dataplaneapi": {
         "arch": "amd64",
-        "digest": "da670d2bac83749ba99328d8b1fa78cfbe826c840f0f015e602f030b1afd59b1",
+        "digest": "7ab83bbd1bdcd07e11457d3f85adc1c4787047ed28b0b172999daa55eb708dbd",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.3-0"
+        "version": "2.4.4-0"
     }
 }
