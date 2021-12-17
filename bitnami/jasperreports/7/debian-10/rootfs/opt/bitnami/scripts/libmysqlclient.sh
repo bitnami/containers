@@ -478,7 +478,7 @@ mysql_upgrade() {
     else
         mysql_start_bg
         is_boolean_yes "${ROOT_AUTH_ENABLED:-false}" && args+=("-p$(get_master_env_var_value ROOT_PASSWORD)")
-        debug_execute "${DB_BIN_DIR}/mysql_upgrade" "${args[@]}"
+        debug_execute "${DB_BIN_DIR}/mysql_upgrade" "${args[@]}" --force
     fi
 }
 
