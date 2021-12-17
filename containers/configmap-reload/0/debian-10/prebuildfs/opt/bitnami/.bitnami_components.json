@@ -1,9 +1,9 @@
 {
     "configmap-reload": {
         "arch": "amd64",
-        "digest": "84d9158fc95767145f22e821b2d07410fc8374bf4b0df3a1220e9a74e11072a2",
+        "digest": "ac4f3003f1cc3f60bc0cb4a1377fa31bdef8e2205a1403c1305f9ed08bedd4eb",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.5.0-0"
+        "version": "0.6.1-0"
     }
 }
