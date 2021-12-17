@@ -9,5 +9,6 @@
   {{proxy_https_configuration}}
   ProxyPass / {{proxy_address}}
   ProxyPassReverse / {{proxy_address}}
+  {{additional_https_configuration}}
   {{additional_configuration}}
 </VirtualHost>
