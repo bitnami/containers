@@ -9,6 +9,8 @@
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/libpersistence.sh
+. /opt/bitnami/scripts/libservice.sh
 
 ########################
 # Validate settings in EJBCA_* env. variables
@@ -214,7 +216,7 @@ ejbca_start_wildfly_bg() {
 
     info "Starting wildfly..."
 
-    if ! [[ -f "$EJBCA_WILDFLY_PID_FILE" ]]; then
+    if ! is_wildfly_running; then
         if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
             "${exec}" "${args[@]}" &
         else
@@ -235,6 +237,14 @@ ejbca_start_wildfly_bg() {
 ejbca_stop_wildfly() {
     info "Stopping wildfly..."
     ejbca_wildfly_command ":shutdown"
+    local counter=10
+    local pid
+    pid="$(get_pid_from_file "$EJBCA_WILDFLY_PID_FILE")"
+    kill "$pid"
+    while [[ "$counter" -ne 0 ]] && is_service_running "$pid"; do
+        sleep 1
+        counter=$((counter - 1))
+    done
 }
 
 #######################
@@ -262,11 +272,12 @@ ejbca_create_management_user() {
 #   None
 #########################
 ejbca_wildfly_deploy() {
-    deployed_file="$EJBCA_WILDFLY_DEPLOY_DIR"/$(basename "$1").deployed
+    local -r file_to_deploy="${1:?Missing file to deploy}"
+    deployed_file="${EJBCA_WILDFLY_DEPLOY_DIR}/$(basename ${file_to_deploy}).deployed"
 
     if [[ ! -f "$deployed_file" ]]; then
-        cp "$1" "$EJBCA_WILDFLY_DEPLOY_DIR"/
-        retry_while "ls $deployed_file" 2>/dev/null
+        cp "$file_to_deploy" "$EJBCA_WILDFLY_DEPLOY_DIR"/
+        retry_while "ls ${deployed_file}" 2>/dev/null
         info "Deployment done"
     else
         info "Already deployed"
@@ -274,7 +285,7 @@ ejbca_wildfly_deploy() {
 }
 
 ########################
-# Check if the console is not ready
+# Wait for mysql connection
 # Globals:
 #   EJBCA_*
 # Arguments:
@@ -282,8 +293,12 @@ ejbca_wildfly_deploy() {
 # Returns:
 #   None
 #########################
-database_not_ready() {
-    echo "select 1" | debug_execute mysql -u"$EJBCA_DATABASE_USERNAME" -p"$EJBCA_DATABASE_PASSWORD" -h"$EJBCA_DATABASE_HOST" -P"$EJBCA_DATABASE_PORT" "$EJBCA_DATABASE_NAME"
+wait_for_mysql_connection() {
+    database_not_ready() {
+        echo "select 1" | debug_execute mysql -u"$EJBCA_DATABASE_USERNAME" -p"$EJBCA_DATABASE_PASSWORD" -h"$EJBCA_DATABASE_HOST" -P"$EJBCA_DATABASE_PORT" "$EJBCA_DATABASE_NAME"
+    }
+
+    retry_while database_not_ready
 }
 
 ########################
@@ -297,10 +312,6 @@ database_not_ready() {
 #########################
 ejbca_create_database() {
     info "Creating database tables and indexes"
-
-    # Wait for the database to be ready
-    retry_while database_not_ready
-
     # Create database structure
     mysql -u"$EJBCA_DATABASE_USERNAME" -p"$EJBCA_DATABASE_PASSWORD" -h"$EJBCA_DATABASE_HOST" -P"$EJBCA_DATABASE_PORT" "$EJBCA_DATABASE_NAME" <"$EJBCA_DB_SCRIPT_TABLES"
     mysql -u"$EJBCA_DATABASE_USERNAME" -p"$EJBCA_DATABASE_PASSWORD" -h"$EJBCA_DATABASE_HOST" -P"$EJBCA_DATABASE_PORT" "$EJBCA_DATABASE_NAME" <"$EJBCA_DB_SCRIPT_INDEXES"
@@ -323,10 +334,10 @@ ejbca_generate_ca() {
     local -r instance_hostname="$(hostname --fqdn)"
 
     info "Generating CA"
-    ejbca_ca="$(ejbca_command ca listcas 2>&1)"
+    ejbca_ca="$(ejbca_execute_command ca listcas 2>&1)"
     if ! grep -q 'CA Name: ' <<<"$ejbca_ca"; then
         info "Init CA"
-        ejbca_command ca init \
+        ejbca_execute_command ca init \
             --dn "CN=$EJBCA_CA_NAME,$EJBCA_BASE_DN" \
             --caname "$EJBCA_CA_NAME" \
             --tokenType "soft" \
@@ -339,7 +350,7 @@ ejbca_generate_ca() {
             -type "x509"
 
         info "Add superadmin user"
-        ejbca_command ra addendentity \
+        ejbca_execute_command ra addendentity \
             --username "$EJBCA_ADMIN_USERNAME" \
             --dn "\"CN=SuperAdmin,$EJBCA_BASE_DN\"" \
             --caname "$EJBCA_CA_NAME" \
@@ -348,7 +359,7 @@ ejbca_generate_ca() {
             --password "$EJBCA_ADMIN_PASSWORD"
     fi
 
-    ejbca_ca="$(ejbca_command ca listcas 2>&1)"
+    ejbca_ca="$(ejbca_execute_command ca listcas 2>&1)"
     if grep -q "CA Name: $EJBCA_CA_NAME" <<<"$ejbca_ca"; then
         existing_management_ca="$(grep "CA Name: $EJBCA_CA_NAME" <<<"$ejbca_ca" | sed 's/.*CA Name: //g')"
 
@@ -361,7 +372,7 @@ ejbca_generate_ca() {
             fi
 
             info "Add RA Entity"
-            ejbca_command ra addendentity \
+            ejbca_execute_command ra addendentity \
                 --username "$end_entity_name" \
                 --dn "\"CN=$instance_hostname,$EJBCA_BASE_DN\"" \
                 --caname "$EJBCA_CA_NAME" \
@@ -372,23 +383,23 @@ ejbca_generate_ca() {
                 --certprofile SERVER
 
             info "Set RA status to new"
-            ejbca_command ra setendentitystatus \
+            ejbca_execute_command ra setendentitystatus \
                 --username "$end_entity_name" \
                 -S 10
 
             info "Set RA entity password"
-            ejbca_command ra setclearpwd \
+            ejbca_execute_command ra setclearpwd \
                 --username "$end_entity_name" \
                 --password "$EJBCA_KEYSTORE_PASSWORD"
 
             info "Export entity certificate"
-            ejbca_command batch \
+            ejbca_execute_command batch \
                 --username "$end_entity_name" \
                 -dir "$EJBCA_TMP_DIR/"
 
-            mv "$EJBCA_TMP_DIR/$end_entity_name.jks" "$EJBCA_TEMP_KEYSTORE_FILE"
+            mv "$EJBCA_TMP_DIR/$end_entity_name.jks" "$EJBCA_WILDFLY_KEYSTORE_FILE"
 
-            ejbca_command roles addrolemember \
+            ejbca_execute_command roles addrolemember \
                 --namespace "" \
                 --role "Super Administrator Role" \
                 --caname "$EJBCA_CA_NAME" \
@@ -408,7 +419,7 @@ ejbca_generate_ca() {
 # Returns:
 #   None
 #########################
-ejbca_command() {
+ejbca_execute_command() {
     "$EJBCA_BIN_DIR"/ejbca.sh "$@" 2>&1
 }
 
@@ -440,87 +451,26 @@ ejbca_create_truststore() {
     local ca_list
 
     info "Load the CAs in the trustkeystore"
-    ejbca_ca="$(ejbca_command ca listcas 2>&1)"
+    ejbca_ca="$(ejbca_execute_command ca listcas 2>&1)"
     if grep -q 'CA Name: ' <<<"$ejbca_ca"; then
         ca_list=("$(grep 'CA Name: ' <<<"$ejbca_ca" | sed 's/.*CA Name: //g')")
         for line in "${ca_list[@]}"; do
-            ejbca_command ca getcacert \
+            ejbca_execute_command ca getcacert \
                 --caname "$line" \
                 -f "$EJBCA_TEMP_CERT" \
                 -der
 
-            if [ -f "$EJBCA_TEMP_CERT" ]; then
+            if [[ -f "$EJBCA_TEMP_CERT" ]]; then
                 ejbca_keytool_command -alias "$line" \
                     -import -trustcacerts \
                     -file "$EJBCA_TEMP_CERT" \
-                    -keystore "$EJBCA_TEMP_TRUSTSTORE_FILE" \
+                    -keystore "$EJBCA_WILDFLY_TRUSTSTORE_FILE" \
                     -storepass "$EJBCA_TRUSTSTORE_PASSWORD" \
                     -noprompt
                 rm "$EJBCA_TEMP_CERT"
             fi
         done
     fi
-}
-
-########################
-# Generate keystores
-# Globals:
-#   EJBCA_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-ejbca_persist_keystores() {
-    info "Persisting keystores"
-
-    # Persist keystores and passwords
-    mv "$EJBCA_TEMP_TRUSTSTORE_FILE" "$EJBCA_TRUSTSTORE_FILE"
-    mv "$EJBCA_TEMP_KEYSTORE_FILE" "$EJBCA_KEYSTORE_FILE"
-    echo "$EJBCA_KEYSTORE_PASSWORD" >"$EJBCA_KEYSTORE_PASSWORD_FILE"
-    echo "$EJBCA_TRUSTSTORE_PASSWORD" >"$EJBCA_TRUSTSTORE_PASSWORD_FILE"
-    echo "$EJBCA_WILDFLY_ADMIN_PASSWORD" >"$EJBCA_WILDFLY_ADMIN_PASSWORD_FILE"
-
-    # Provide keystores to wildfly
-    [[ ! -e "$EJBCA_WILDFLY_TRUSTSTORE_FILE" ]] && ln -s "$EJBCA_TRUSTSTORE_FILE" "$EJBCA_WILDFLY_TRUSTSTORE_FILE"
-    [[ ! -e "$EJBCA_WILDFLY_KEYSTORE_FILE" ]] && ln -s "$EJBCA_KEYSTORE_FILE" "$EJBCA_WILDFLY_KEYSTORE_FILE"
-}
-
-########################
-# Check if there is data persisted
-# Globals:
-#   EJBCA_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-ejbca_is_persisted() {
-    [[ -f "$EJBCA_TRUSTSTORE_FILE" ]] && [[ -f "$EJBCA_KEYSTORE_FILE" ]] && [[ -f "$EJBCA_TRUSTSTORE_PASSWORD_FILE" ]] && [[ -f "$EJBCA_KEYSTORE_PASSWORD_FILE" ]] && [[ -f "$EJBCA_WILDFLY_ADMIN_PASSWORD_FILE" ]]
-}
-
-########################
-# Load persisted passwords
-# Globals:
-#   EJBCA_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-ejbca_load_persisted() {
-    info "Loading persisted keystore passwords"
-
-    read -r EJBCA_KEYSTORE_PASSWORD <"$EJBCA_KEYSTORE_PASSWORD_FILE"
-    read -r EJBCA_TRUSTSTORE_PASSWORD <"$EJBCA_TRUSTSTORE_PASSWORD_FILE"
-    read -r EJBCA_WILDFLY_ADMIN_PASSWORD <"$EJBCA_WILDFLY_ADMIN_PASSWORD_FILE"
-
-    # Provide keystores to wildfly
-    info "Placing widlfly keystores"
-    [[ ! -e "$EJBCA_WILDFLY_TRUSTSTORE_FILE" ]] && ln -s "$EJBCA_TRUSTSTORE_FILE" "$EJBCA_WILDFLY_TRUSTSTORE_FILE"
-    [[ ! -e "$EJBCA_WILDFLY_KEYSTORE_FILE" ]] && ln -s "$EJBCA_KEYSTORE_FILE" "$EJBCA_WILDFLY_KEYSTORE_FILE"
-
-    true
 }
 
 ########################
@@ -554,12 +504,9 @@ ejbca_initialize() {
     am_i_root && configure_permissions_ownership "$EJBCA_TMP_DIR $EJBCA_LOG_DIR" -u "$EJBCA_DAEMON_USER" -g "$EJBCA_DAEMON_GROUP"
     am_i_root && configure_permissions_ownership "$EJBCA_DATA_DIR" -u "$EJBCA_DAEMON_USER" -g "$EJBCA_DAEMON_GROUP" -d "755" -f "644"
 
-    ensure_dir_exists "$EJBCA_DATA_DIR"
 
-    if [[ -f "$EJBCA_TEMP_KEYSTORE_FILE" ]]; then rm -f "$EJBCA_TEMP_KEYSTORE_FILE"; fi
-    if [[ -f "$EJBCA_TEMP_TRUSTSTORE_FILE" ]]; then rm -f "$EJBCA_TEMP_TRUSTSTORE_FILE"; fi
-
-    if ! ejbca_is_persisted; then
+    # Note we need to use wildfly instead of ejbca as directory since the persist_app function relativizes them to /opt/bitnami/wildfly
+    if ! is_app_initialized "wildfly"; then
         info "Deploying EJBCA from scratch"
 
         # Generate random passwords
@@ -578,36 +525,71 @@ ejbca_initialize() {
             ejbca_keytool_command -importkeystore -noprompt \
                 -srckeystore "$EJBCA_SERVER_CERT_FILE" \
                 -srcstorepass "$EJBCA_SERVER_CERT_PASSWORD" \
-                -destkeystore "$EJBCA_TEMP_KEYSTORE_FILE" \
+                -destkeystore "$EJBCA_WILDFLY_KEYSTORE_FILE" \
                 -deststorepass "$EJBCA_KEYSTORE_PASSWORD" \
                 -deststoretype jks
         fi
 
+        wait_for_mysql_connection
         ejbca_create_database
-    else
-        info "Persisted data detected"
 
-        ejbca_load_persisted
-    fi
+        ejba_set_java_opts
 
-    ejba_set_java_opts
+        # Configure Wildfly
+        ejbca_create_management_user
+        ejbca_start_wildfly_bg
+        wait_for_wildfly
+        ejbca_configure_wildfly
 
-    ejbca_create_management_user
-    ejbca_start_wildfly_bg
-    wait_for_wildfly
-    ejbca_configure_wildfly
+        info "Deploying EJBCA application"
+        ejbca_wildfly_deploy "$EJBCA_EAR_FILE"
 
-    info "Deploying EJBCA application"
-    ejbca_wildfly_deploy "$EJBCA_EAR_FILE"
-
-    if ! ejbca_is_persisted; then
+        # Generate keystores
         ejbca_generate_ca
         ejbca_create_truststore
-        ejbca_persist_keystores
+        # Save keystores passwords to files
+        echo "$EJBCA_KEYSTORE_PASSWORD" >"$EJBCA_WILDFLY_KEYSTORE_PASSWORD_FILE"
+        echo "$EJBCA_TRUSTSTORE_PASSWORD" >"$EJBCA_WILDFLY_TRUSTSTORE_PASSWORD_FILE"
+        echo "$EJBCA_WILDFLY_ADMIN_PASSWORD" >"$EJBCA_WILDFLY_ADMIN_PASSWORD_FILE"
+
+        ejbca_configure_wildfly_https
+
+        ejbca_stop_wildfly
+
+        persist_app "wildfly" "$EJBCA_WILDFLY_DATA_TO_PERSIST"
+    else
+        info "Persisted data detected"
+        restore_persisted_app "wildfly" "$EJBCA_WILDFLY_DATA_TO_PERSIST"
+
+        # Load keystores passwords
+        read -r EJBCA_KEYSTORE_PASSWORD <"$EJBCA_WILDFLY_KEYSTORE_PASSWORD_FILE"
+        read -r EJBCA_TRUSTSTORE_PASSWORD <"$EJBCA_WILDFLY_TRUSTSTORE_PASSWORD_FILE"
+        read -r EJBCA_WILDFLY_ADMIN_PASSWORD <"$EJBCA_WILDFLY_ADMIN_PASSWORD_FILE"
+
+        ejbca_start_wildfly_bg
+        wait_for_wildfly
+
+        info "Deploying EJBCA application"
+        ejbca_wildfly_deploy "$EJBCA_EAR_FILE"
+
+        ejbca_stop_wildfly
+        wait_for_mysql_connection
     fi
+}
 
-    ejbca_configure_wildfly_https
-
-    ejbca_stop_wildfly
-
+########################
+# Check if Wildfly is running is running
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_wildfly_running() {
+    local pid
+    pid="$(get_pid_from_file "$EJBCA_WILDFLY_PID_FILE")"
+    if [[ -n "$pid" ]]; then
+        is_service_running "$pid"
+    else
+        false
+    fi
 }
