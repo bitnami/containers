@@ -160,7 +160,7 @@ plugin_dir=${DB_BASE_DIR}/lib/plugin
 [client]
 port=${DB_DEFAULT_PORT_NUMBER}
 socket=${DB_SOCKET_FILE}
-default_character_set=UTF8
+default_character_set=${DB_DEFAULT_CHARACTER_SET}
 plugin_dir=${DB_BASE_DIR}/lib/plugin
 
 [manager]
@@ -732,7 +732,7 @@ mysql_install_db() {
 #   None
 #########################
 mysql_upgrade() {
-    local -a args=("--defaults-file=${DB_CONF_FILE}" "-u" "$DB_ROOT_USER" "--force")
+    local -a args=("--defaults-file=${DB_CONF_FILE}" "-u" "$DB_ROOT_USER")
     local major_version minor_version patch_version
     major_version="$(get_sematic_version "$(mysql_get_version)" 1)"
     minor_version="$(get_sematic_version "$(mysql_get_version)" 2)"
@@ -748,7 +748,7 @@ mysql_upgrade() {
     else
         mysql_start_bg
         is_boolean_yes "${ROOT_AUTH_ENABLED:-false}" && args+=("-p$(get_master_env_var_value ROOT_PASSWORD)")
-        debug_execute "${DB_BIN_DIR}/mysql_upgrade" "${args[@]}"
+        debug_execute "${DB_BIN_DIR}/mysql_upgrade" "${args[@]}" --force
     fi
 }
 
