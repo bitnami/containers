@@ -17,7 +17,7 @@ set -o pipefail
 declare -a cmd=("logstash")
 
 if is_boolean_yes "$LOGSTASH_EXPOSE_API"; then
-    cmd+=("--http.host" "$LOGSTASH_BIND_ADDRESS" "--http.port" "$LOGSTASH_API_PORT_NUMBER")
+    cmd+=("--api.http.host" "$LOGSTASH_BIND_ADDRESS" "--api.http.port" "$LOGSTASH_API_PORT_NUMBER")
 fi
 
 if [[ -n "$LOGSTASH_PIPELINE_CONF_STRING" ]]; then

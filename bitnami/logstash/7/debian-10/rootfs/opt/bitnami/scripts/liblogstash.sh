@@ -264,8 +264,8 @@ logstash_initialize() {
     if is_boolean_yes "$LOGSTASH_EXPOSE_API"; then
         if is_file_writable "$LOGSTASH_CONF_FILE"; then
             info "Enabling Logstash API endpoint"
-            logstash_yml_set "$LOGSTASH_CONF_FILE" '"http.host"' "$LOGSTASH_BIND_ADDRESS"
-            logstash_yml_set "$LOGSTASH_CONF_FILE" '"http.port"' "$LOGSTASH_API_PORT_NUMBER"
+            logstash_yml_set "$LOGSTASH_CONF_FILE" '"api.http.host"' "$LOGSTASH_BIND_ADDRESS"
+            logstash_yml_set "$LOGSTASH_CONF_FILE" '"api.http.port"' "$LOGSTASH_API_PORT_NUMBER"
         else
             warn "The Logstash configuration file '${LOGSTASH_CONF_FILE}' is not writable. Configurations based on environment variables will be passed as command-line arguments instead."
         fi
