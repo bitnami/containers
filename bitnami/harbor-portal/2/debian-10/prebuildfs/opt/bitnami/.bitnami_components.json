@@ -8,10 +8,10 @@
     },
     "harbor": {
         "arch": "amd64",
-        "digest": "1d7199ba6de35c7599a1ef60cede28ed3f390a41226c4303d692a2eb647a1a50",
+        "digest": "4e7679b8e4b2b4db24904bb064c724788c9d8fc287664e7d5c044644d6cc6228",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.0-0"
+        "version": "2.4.1-0"
     },
     "nginx": {
         "arch": "amd64",
