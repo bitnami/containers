@@ -9,14 +9,14 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-adapter-clair" "2.4.0-0" --checksum 1af30dc604b383d3ef911f818c0890dadcf45e0611ae42f36984ab90133722fe
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-adapter-clair" "2.4.1-0" --checksum d86c4d4af55210dd006fe8bc9c2a29888f407e12d516b01429604df0e29cedba
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-adapter-clair/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-adapter-clair" \
-    BITNAMI_IMAGE_VERSION="2.4.0-debian-10-r46" \
+    BITNAMI_IMAGE_VERSION="2.4.1-debian-10-r0" \
     PATH="/opt/bitnami/harbor-adapter-clair/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080
