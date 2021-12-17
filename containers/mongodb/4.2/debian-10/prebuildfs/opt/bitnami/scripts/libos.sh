@@ -446,3 +446,19 @@ generate_sha_hash() {
     echo -n "$str" | "sha${algorithm}sum" | awk '{print $1}'
 }
 
+########################
+# Converts a string to its hexadecimal representation
+# Arguments:
+#   $1 - string
+# Returns:
+#   hexadecimal representation of the string
+#########################
+convert_to_hex() {
+    local -r str=${1:?missing input string}
+    local -i iterator
+    local char
+    for ((iterator=0; iterator<${#str}; iterator++)); do
+        char=${str:iterator:1}
+        printf '%x' "'${char}"
+    done
+}
