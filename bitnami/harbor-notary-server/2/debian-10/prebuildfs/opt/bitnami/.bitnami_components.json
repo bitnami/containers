@@ -8,9 +8,9 @@
     },
     "harbor-notary-server": {
         "arch": "amd64",
-        "digest": "6cd24d0b29b308b8958309e1f1c59e8eca5a0e1d6e6b0051be5b935bfacf8f7f",
+        "digest": "697d6c79d3ed107ea036d7d2c2da0041d7bd4cfe4d050035ec9a27a5f9dd4b6c",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.0-0"
+        "version": "2.4.1-0"
     }
 }
