@@ -8,10 +8,10 @@
     },
     "express": {
         "arch": "amd64",
-        "digest": "ad196d1e8fe95e92fc388b117e1b5b7596074c9238257296411c9086c0f5b249",
+        "digest": "253ee82d80d072c63ca8823d633306df5257370564ecce18f13785e5aa3860fe",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.17.1-3"
+        "version": "4.17.2-0"
     },
     "express-generator": {
         "arch": "amd64",
