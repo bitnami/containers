@@ -14,5 +14,6 @@ PassengerPreStart https://localhost:{{https_port}}/
     PassengerEnabled on
     {{extra_directory_configuration}}
   </Directory>
+  {{additional_https_configuration}}
   {{additional_configuration}}
 </VirtualHost>
