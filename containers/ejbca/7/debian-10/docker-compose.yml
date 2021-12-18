@@ -16,7 +16,7 @@ services:
       - 8080:8080
       - 8443:8443
     volumes:
-      - "ejbca_data:/bitnami/ejbca"
+      - "wildfly_data:/bitnami/wildfly"
     environment:
       - EJBCA_DATABASE_HOST=mariadb
       - EJBCA_DATABASE_NAME=bitnami_ejbca
@@ -25,5 +25,5 @@ services:
 volumes:
   mariadb_data:
     driver: local
-  ejbca_data:
+  wildfly_data:
     driver: local

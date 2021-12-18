@@ -273,7 +273,7 @@ ejbca_create_management_user() {
 #########################
 ejbca_wildfly_deploy() {
     local -r file_to_deploy="${1:?Missing file to deploy}"
-    deployed_file="${EJBCA_WILDFLY_DEPLOY_DIR}/$(basename ${file_to_deploy}).deployed"
+    deployed_file="${EJBCA_WILDFLY_DEPLOY_DIR}/$(basename "$file_to_deploy").deployed"
 
     if [[ ! -f "$deployed_file" ]]; then
         cp "$file_to_deploy" "$EJBCA_WILDFLY_DEPLOY_DIR"/
