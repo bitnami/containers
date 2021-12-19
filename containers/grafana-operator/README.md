@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4`, `4-debian-10`, `4.1.1`, `4.1.1-debian-10-r3` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-operator/blob/4.1.1-debian-10-r3/4/debian-10/Dockerfile)
-* [`3`, `3-debian-10`, `3.10.4`, `3.10.4-debian-10-r55`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-operator/blob/3.10.4-debian-10-r55/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.10.4`, `3.10.4-debian-10-r56`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-operator/blob/3.10.4-debian-10-r56/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana-operator GitHub repo](https://github.com/bitnami/bitnami-docker-grafana-operator).
 
