@@ -18,7 +18,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/couchdb/postunpack.sh
 ENV BITNAMI_APP_NAME="couchdb" \
-    BITNAMI_IMAGE_VERSION="3.2.1-debian-10-r41" \
+    BITNAMI_IMAGE_VERSION="3.2.1-debian-10-r43" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/couchdb/bin:$PATH"
 
