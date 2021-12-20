@@ -209,7 +209,7 @@ pgpool_validate() {
             print_validation_error "The values allowed for $yn are: yes or no"
         fi
     done
-    local positive_values=("PGPOOL_NUM_INIT_CHILDREN" "PGPOOL_MAX_POOL" "PGPOOL_CHILD_MAX_CONNECTIONS" "PGPOOL_CHILD_LIFE_TIME" "PGPOOL_CONNECTION_LIFE_TIME" "PGPOOL_CLIENT_IDLE_LIMIT" "PGPOOL_HEALTH_CHECK_PERIOD" "PGPOOL_HEALTH_CHECK_TIMEOUT" "PGPOOL_HEALTH_CHECK_MAX_RETRIES" "PGPOOL_HEALTH_CHECK_RETRY_DELAY")
+    local positive_values=("PGPOOL_NUM_INIT_CHILDREN" "PGPOOL_MAX_POOL" "PGPOOL_CHILD_MAX_CONNECTIONS" "PGPOOL_CHILD_LIFE_TIME" "PGPOOL_CONNECTION_LIFE_TIME" "PGPOOL_CLIENT_IDLE_LIMIT" "PGPOOL_HEALTH_CHECK_PERIOD" "PGPOOL_HEALTH_CHECK_TIMEOUT" "PGPOOL_HEALTH_CHECK_MAX_RETRIES" "PGPOOL_HEALTH_CHECK_RETRY_DELAY" "PGPOOL_RESERVED_CONNECTIONS")
     for p in "${positive_values[@]}"; do
         if [[ -n "${!p:-}" ]]; then
             if ! is_positive_int "${!p}"; then
@@ -445,6 +445,7 @@ pgpool_create_config() {
     # Connection Pooling settings
     # http://www.pgpool.net/docs/latest/en/html/runtime-config-connection-pooling.html
     [[ -n "${PGPOOL_NUM_INIT_CHILDREN:-}" ]] && pgpool_set_property "num_init_children" "$PGPOOL_NUM_INIT_CHILDREN"
+    [[ -n "${PGPOOL_RESERVED_CONNECTIONS:-}" ]] && pgpool_set_property "reserved_connections" "$PGPOOL_RESERVED_CONNECTIONS"
     pgpool_set_property "max_pool" "$PGPOOL_MAX_POOL"
     [[ -n "${PGPOOL_CHILD_MAX_CONNECTIONS:-}" ]] && pgpool_set_property "child_max_connections" "$PGPOOL_CHILD_MAX_CONNECTIONS"
     [[ -n "${PGPOOL_CHILD_LIFE_TIME:-}" ]] && pgpool_set_property "child_life_time" "$PGPOOL_CHILD_LIFE_TIME"

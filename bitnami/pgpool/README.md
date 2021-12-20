@@ -251,6 +251,7 @@ Pgpool configuration:
 - `PGPOOL_ENABLE_POOL_PASSWD`: Whether to use a password file specified by `PGPOOL_PASSWD_FILE` for authentication. Defaults to `yes`.
 - `PGPOOL_PASSWD_FILE`: The password file for authentication. Defaults to `pool_passwd`.
 - `PGPOOL_NUM_INIT_CHILDREN`: The number of preforked Pgpool-II server processes. It is also the concurrent connections limit to Pgpool-II from clients. Defaults to `32`.
+- `PGPOOL_RESERVED_CONNECTIONS`: When this parameter is set to 1 or greater, incoming connections from clients are not accepted with error message "Sorry, too many clients already", rather than blocked if the number of current connections from clients is more than (num_init_children - reserved_connections). Defaults to `0`.
 - `PGPOOL_MAX_POOL`: The maximum number of cached connections in each child process. Defaults to `15`.
 - `PGPOOL_CHILD_MAX_CONNECTIONS`: Specifies the lifetime of a Pgpool-II child process in terms of the number of client connections it can receive. Pgpool-II will terminate the child process after it has served child_max_connections client connections and will immediately spawn a new child process to take its place. Defaults to `0` which turns off the feature.
 - `PGPOOL_CHILD_LIFE_TIME`: The time in seconds to terminate a Pgpool-II child process if it remains idle. Defaults to `300`.
@@ -541,6 +542,7 @@ Please see the list of environment variables available in the Bitnami Pgpool con
 | PGPOOL_PASSWD_FILE                  | `pool_passwd` |
 | PGPOOL_MAX_POOL                     | `15`          |
 | PGPOOL_NUM_INIT_CHILDREN            | `32`          |
+| PGPOOL_RESERVED_CONNECTIONS         | `0`           |
 | PGPOOL_POSTGRES_CUSTOM_USERS        | nil           |
 | PGPOOL_POSTGRES_CUSTOM_PASSWORDS    | nil           |
 
