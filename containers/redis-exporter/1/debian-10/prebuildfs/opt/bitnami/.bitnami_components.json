@@ -1,9 +1,9 @@
 {
     "redis-exporter": {
         "arch": "amd64",
-        "digest": "7787d442af1edd66e0673eb6d9c39726f3e3bd434aef90ba72ec1101fc064433",
+        "digest": "da4ccda0f7ad82645daa95e7fccd7c2977d5a7bc2d516400aeec2db76a54d3de",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.32.0-0"
+        "version": "1.33.0-0"
     }
 }
