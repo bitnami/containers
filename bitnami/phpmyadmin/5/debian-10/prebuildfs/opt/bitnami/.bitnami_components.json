@@ -15,10 +15,10 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "008181937bfa099765bc77bfde7060e370fafea3203ef5f3834145b74d39d56a",
+        "digest": "26ac0afdd380dd46ff6c1665912c996e4b6d9b331d3da3dedc19c270046386c4",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.0.14-0"
+        "version": "8.0.14-1"
     },
     "mysql-client": {
         "arch": "amd64",
