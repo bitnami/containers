@@ -14,7 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.52-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.32-0" --checksum 4a211faa9436c9747dfc4374cb9e8a7f9b0065dfc58dd4784cef0f5029c2e65e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.27-1" --checksum 2286e3101af00eaba55cdc0aab27a0ea020582a4b1b1f3af9fbf6c4c9fc23017
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-4" --checksum 9b09b8c13e726569fd846abef20228b2e29de456805994e512f3b47f74cf742d
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "owncloud" "10.8.0-0" --checksum ace2cb12127f623362e8de16ef2484f7a4ef94c23336291cbf13853ed9ee3d12
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "owncloud" "10.9.0-0" --checksum 673d66282d4175ab5a2f0aec8837357ceff200732a84a8a4140968b9bcee7540
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
 RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/cron
@@ -32,7 +32,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="owncloud" \
-    BITNAMI_IMAGE_VERSION="10.8.0-debian-10-r128" \
+    BITNAMI_IMAGE_VERSION="10.9.0-debian-10-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
