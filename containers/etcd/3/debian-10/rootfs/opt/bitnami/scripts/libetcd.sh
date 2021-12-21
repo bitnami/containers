@@ -312,7 +312,7 @@ etcd_store_member_id() {
     if retry_while "etcdctl ${extra_flags[*]} member list" >/dev/null 2>&1; then
         while [[ ! -s "${ETCD_DATA_DIR}/member_id" ]]; do
             # We use 'stdbuf' to ensure memory buffers are flushed to disk
-            # so we reduce the chances that the "member_id" file is not created.
+            # so we reduce the chances that the "member_id" file is empty.
             # ref: https://www.gnu.org/software/coreutils/manual/html_node/stdbuf-invocation.html#stdbuf-invocation
             read -r -a advertised_array <<< "$(tr ',;' ' ' <<< "$ETCD_ADVERTISE_CLIENT_URLS")"
             stdbuf -oL etcdctl "${extra_flags[@]}" member list | grep -w "${advertised_array[0]}" | awk -F "," '{ print $1}' > "${ETCD_DATA_DIR}/member_id" || true
