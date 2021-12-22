@@ -31,7 +31,7 @@ $ docker run --name dataplatform-exporter bitnami/dataplatform-exporter:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`1`, `1-scratch`, `1.0.1`, `1.0.1-scratch-r5`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-dataplatform-exporter/blob/1.0.1-scratch-r5/1/scratch/Dockerfile)
+- [`1`, `1-scratch`, `1.0.1`, `1.0.1-scratch-r6`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-dataplatform-exporter/blob/1.0.1-scratch-r6/1/scratch/Dockerfile)
 - [`0`, `0-scratch`, `0.0.12`, `0.0.12-scratch-r5` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-dataplatform-exporter/blob/0.0.12-scratch-r5/0/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dataplatform-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-dataplatform-exporter).
