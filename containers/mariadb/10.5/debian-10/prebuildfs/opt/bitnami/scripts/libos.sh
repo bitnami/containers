@@ -333,7 +333,7 @@ convert_to_mb() {
 #   None
 #########################
 debug_execute() {
-    if ${BITNAMI_DEBUG:-false}; then
+    if is_boolean_yes "${BITNAMI_DEBUG:-false}"; then
         "$@"
     else
         "$@" >/dev/null 2>&1
