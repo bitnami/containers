@@ -31,7 +31,7 @@ $ docker run --name aws-cli bitnami/aws-cli:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.4.6`, `2.4.6-debian-10-r12` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/2.4.6-debian-10-r12/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.4.6`, `2.4.6-debian-10-r13` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/2.4.6-debian-10-r13/2/debian-10/Dockerfile)
 * [`1`, `1-debian-10`, `1.22.24`, `1.22.24-debian-10-r12`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/1.22.24-debian-10-r12/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/aws-cli GitHub repo](https://github.com/bitnami/bitnami-docker-aws-cli).
