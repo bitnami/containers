@@ -2,7 +2,7 @@ name: Release
 on:
   push:
     tags:
-      - "[0-9]+\..*-r[0-9]+"
+      - "[0-9]+.*-r[0-9]+"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -10,4 +10,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Release
-        uses: softprops/action-gh-release
+        uses: softprops/action-gh-release@v1
