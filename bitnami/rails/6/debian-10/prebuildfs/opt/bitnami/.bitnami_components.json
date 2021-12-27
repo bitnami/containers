@@ -36,10 +36,10 @@
     },
     "rails": {
         "arch": "amd64",
-        "digest": "33a652521c5eff82a577fa59d43192f3674ea386e9d4356ed82133a26329e64b",
+        "digest": "db2867213112a43a329131b67aadba45e91b0f2cca9c196ab96c578e5a4cbc03",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "6.1.4-1-1"
+        "version": "6.1.4-1-2"
     },
     "ruby": {
         "arch": "amd64",
