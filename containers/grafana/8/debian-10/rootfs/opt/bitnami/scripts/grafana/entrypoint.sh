@@ -24,7 +24,6 @@ function is_exec() {
     fi;
 }
 
-
 print_welcome_page
 
 if [[ "$1" = "/opt/bitnami/scripts/grafana/run.sh" ]]; then
