@@ -26,7 +26,7 @@ component_unpack() {
     local base_name="${name}-${version}-${OS_NAME}-${OS_ARCH}-${OS_FLAVOUR}"
     local package_sha256=""
     local directory="/opt/bitnami"
-    
+
     # Validate arguments
     shift 2
     while [ "$#" -gt 0 ]; do
@@ -54,7 +54,7 @@ component_unpack() {
             rm "${CACHE_ROOT}/${base_name}.tar.gz.sha256"
         fi
     else
-	curl --remote-name --silent "${DOWNLOAD_URL}/${base_name}.tar.gz"
+	curl --remote-name --silent --show-error --fail "${DOWNLOAD_URL}/${base_name}.tar.gz"
     fi
     if [ -n "$package_sha256" ]; then
         echo "Verifying package integrity"
