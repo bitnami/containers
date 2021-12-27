@@ -102,7 +102,7 @@ grafana_initialize() {
         else
             warn "There are no plugins to install"
         fi
-        return
+        return 255
     fi
 
     # Recover plugins installed when building the image
