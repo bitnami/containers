@@ -8,16 +8,16 @@ ENV OS_ARCH="amd64" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl ghostscript gzip imagemagick libc6 libgmp-dev libncurses6 libreadline-dev libreadline7 libssl-dev libssl1.1 libtinfo6 libxml2-dev libxslt1-dev procps sqlite3 tar wget zlib1g zlib1g-dev
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/ruby-2.7.5-0-linux-amd64-debian-10.tar.gz && \
-    echo "72c1bcd8c43dd524ef5a681f2186ef26fd55c91e11db2583599273f7997aab0e  /tmp/bitnami/pkg/cache/ruby-2.7.5-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/ruby-2.7.5-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/ruby-2.7.5-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/ruby-2.7.5-1-linux-amd64-debian-10.tar.gz && \
+    echo "52bce7e8597d553ded3502f8c8240a68cae74d1b949f6cd65a0f9bcbecce17f7  /tmp/bitnami/pkg/cache/ruby-2.7.5-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/ruby-2.7.5-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/ruby-2.7.5-1-linux-amd64-debian-10.tar.gz
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS    0/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="2.7.5-prod-debian-10-r33" \
+    BITNAMI_IMAGE_VERSION="2.7.5-prod-debian-10-r34" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 EXPOSE 3000
