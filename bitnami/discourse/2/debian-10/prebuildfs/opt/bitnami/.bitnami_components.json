@@ -43,17 +43,17 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "18aaf8247baa258f4e16de86673a3e799cd50bbef2824f0d2ae805c9c2068f11",
+        "digest": "93ea8d3e34cfd2895bcfd147836e60e28244c5e0a51abe42922ed8c34a11108d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.8.12-5"
+        "version": "3.8.12-6"
     },
     "ruby": {
         "arch": "amd64",
-        "digest": "72c1bcd8c43dd524ef5a681f2186ef26fd55c91e11db2583599273f7997aab0e",
+        "digest": "52bce7e8597d553ded3502f8c8240a68cae74d1b949f6cd65a0f9bcbecce17f7",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.7.5-0"
+        "version": "2.7.5-1"
     },
     "uglify-js": {
         "arch": "amd64",
