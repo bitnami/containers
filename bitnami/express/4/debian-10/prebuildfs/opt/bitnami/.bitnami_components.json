@@ -43,10 +43,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "ee2cea8587c04d12425fb0cd1955941a76b3b12fb0f1d600dec2e189eb5efdb0",
+        "digest": "7301922567971177586341f93f851616f5488c575de2fb256c38de725907c341",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.8.12-7"
+        "version": "3.8.12-8"
     },
     "sequelize-cli": {
         "arch": "amd64",
