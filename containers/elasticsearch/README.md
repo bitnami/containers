@@ -52,7 +52,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`7`, `7-debian-10`, `7.16.2`, `7.16.2-debian-10-r11`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.16.2-debian-10-r11/7/debian-10/Dockerfile)
 * [`7.10.2`, `7.10.2-debian-10`, `7.10.2-debian-10-r318` (7.10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.10.2-debian-10-r318/7.10.2/debian-10/Dockerfile)
-* [`6`, `6-debian-10`, `6.8.22`, `6.8.22-debian-10-r10` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.22-debian-10-r10/6/debian-10/Dockerfile)
+* [`6`, `6-debian-10`, `6.8.22`, `6.8.22-debian-10-r11` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.22-debian-10-r11/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch).
 ## Get this image
@@ -488,6 +488,10 @@ $ docker-compose up -d
 
 * Elasticsearch container can be configured as a dedicated node with 4 different types: *master*, *data*, *coordinating* or *ingest*.
   Previously it was only achievable by using a custom `elasticsearch_custom.yml` file. From now on, you can use the environment variables `ELASTICSEARCH_IS_DEDICATED_NODE` & `ELASTICSEARCH_NODE_TYPE` to configure it.
+
+## Branch Deprecation Notice
+
+Elasticsearch's branch 7.10.2 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 01-30-2022
 
 ## Contributing
 
