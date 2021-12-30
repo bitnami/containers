@@ -2,7 +2,7 @@
 #
 # Bitnami NGINX library
 
-# shellcheck disable=SC1091
+# shellcheck disable=SC1090,SC1091
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/libfs.sh
@@ -79,7 +79,7 @@ nginx_configure_port() {
         debug "Setting port number to ${port} in '${file}'"
         # TODO: find an appropriate NGINX parser to avoid 'sed calls'
         nginx_configuration="$(sed -E "s/(listen\s+)[0-9]{1,5};/\1${port};/g" "$file")"
-        echo "$nginx_configuration" > "$file"
+        echo "$nginx_configuration" >"$file"
     fi
 }
 
@@ -145,12 +145,12 @@ nginx_initialize() {
             chown -R "${NGINX_DAEMON_USER:-}" "$NGINX_TMP_DIR"
         fi
         nginx_user_configuration="$(sed -E "s/^(user\s+).*/\1${NGINX_DAEMON_USER:-} ${NGINX_DAEMON_GROUP:-};/g" "$NGINX_CONF_FILE")"
-        is_file_writable "$NGINX_CONF_FILE" && echo "$nginx_user_configuration" > "$NGINX_CONF_FILE"
+        is_file_writable "$NGINX_CONF_FILE" && echo "$nginx_user_configuration" >"$NGINX_CONF_FILE"
     else
         # The "user" directive makes sense only if the master process runs with super-user privileges
         # TODO: find an appropriate NGINX parser to avoid 'sed calls'
         nginx_user_configuration="$(sed -E "s/(^user)/# \1/g" "$NGINX_CONF_FILE")"
-        is_file_writable "$NGINX_CONF_FILE" && echo "$nginx_user_configuration" > "$NGINX_CONF_FILE"
+        is_file_writable "$NGINX_CONF_FILE" && echo "$nginx_user_configuration" >"$NGINX_CONF_FILE"
     fi
     if [[ -n "${NGINX_HTTP_PORT_NUMBER:-}" ]]; then
         nginx_configure_port "$NGINX_HTTP_PORT_NUMBER"
@@ -202,37 +202,37 @@ ensure_nginx_app_configuration_exists() {
     shift
     while [[ "$#" -gt 0 ]]; do
         case "$1" in
-            --hosts \
-            | --server-aliases)
-                var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
-                shift
-                read -r -a "$var_name" <<< "$1"
-                ;;
-            --disable \
-            | --disable-http \
-            | --disable-https \
-            )
-                var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
-                export "${var_name}=yes"
-                ;;
-            --type \
-            | --server-name \
-            | --allow-remote-connections \
-            | --http-port \
-            | --https-port \
-            | --additional-configuration \
-            | --external-configuration \
-            | --document-root \
-            | --extra-directory-configuration \
-            )
-                var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
-                shift
-                export "${var_name}"="$1"
-                ;;
-            *)
-                echo "Invalid command line flag $1" >&2
-                return 1
-                ;;
+        --hosts | \
+            --server-aliases)
+            var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
+            shift
+            read -r -a "$var_name" <<<"$1"
+            ;;
+        --disable | \
+            --disable-http | \
+            --disable-https)
+
+            var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
+            export "${var_name}=yes"
+            ;;
+        --type | \
+            --server-name | \
+            --allow-remote-connections | \
+            --http-port | \
+            --https-port | \
+            --additional-configuration | \
+            --external-configuration | \
+            --document-root | \
+            --extra-directory-configuration)
+
+            var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
+            shift
+            export "${var_name}"="$1"
+            ;;
+        *)
+            echo "Invalid command line flag $1" >&2
+            return 1
+            ;;
         esac
         shift
     done
@@ -290,12 +290,12 @@ absolute_redirect off;"
     local http_server_block="${NGINX_SERVER_BLOCKS_DIR}/${app}-server-block.conf"
     local https_server_block="${NGINX_SERVER_BLOCKS_DIR}/${app}-https-server-block.conf"
     local -r disable_suffix=".disabled"
-    ( is_boolean_yes "$disable" || is_boolean_yes "$disable_http" ) && http_server_block+="$disable_suffix"
-    ( is_boolean_yes "$disable" || is_boolean_yes "$disable_https" ) && https_server_block+="$disable_suffix"
+    (is_boolean_yes "$disable" || is_boolean_yes "$disable_http") && http_server_block+="$disable_suffix"
+    (is_boolean_yes "$disable" || is_boolean_yes "$disable_https") && https_server_block+="$disable_suffix"
     if is_file_writable "$http_server_block"; then
         # Create file with root group write privileges, so it can be modified in non-root containers
         [[ ! -f "$http_server_block" ]] && touch "$http_server_block" && chmod g+rw "$http_server_block"
-        render-template "${template_dir}/${template_name}-http-server-block.conf.tpl" | sed '/^\s*$/d' > "$http_server_block"
+        render-template "${template_dir}/${template_name}-http-server-block.conf.tpl" | sed '/^\s*$/d' >"$http_server_block"
     elif [[ ! -f "$http_server_block" ]]; then
         error "Could not create server block for ${app} at '${http_server_block}'. Check permissions and ownership for parent directories."
         return 1
@@ -305,7 +305,7 @@ absolute_redirect off;"
     if is_file_writable "$https_server_block"; then
         # Create file with root group write privileges, so it can be modified in non-root containers
         [[ ! -f "$https_server_block" ]] && touch "$https_server_block" && chmod g+rw "$https_server_block"
-        render-template "${template_dir}/${template_name}-https-server-block.conf.tpl" | sed '/^\s*$/d' > "$https_server_block"
+        render-template "${template_dir}/${template_name}-https-server-block.conf.tpl" | sed '/^\s*$/d' >"$https_server_block"
     elif [[ ! -f "$https_server_block" ]]; then
         error "Could not create server block for ${app} at '${https_server_block}'. Check permissions and ownership for parent directories."
         return 1
@@ -364,21 +364,21 @@ ensure_nginx_prefix_configuration_exists() {
     shift
     while [[ "$#" -gt 0 ]]; do
         case "$1" in
-            --type \
-            | --allow-remote-connections \
-            | --additional-configuration \
-            | --document-root \
-            | --extra-directory-configuration \
-            | --prefix \
-            )
-                var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
-                shift
-                declare "${var_name}"="$1"
-                ;;
-            *)
-                echo "Invalid command line flag $1" >&2
-                return 1
-                ;;
+        --type | \
+            --allow-remote-connections | \
+            --additional-configuration | \
+            --document-root | \
+            --extra-directory-configuration | \
+            --prefix)
+
+            var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
+            shift
+            declare "${var_name}"="$1"
+            ;;
+        *)
+            echo "Invalid command line flag $1" >&2
+            return 1
+            ;;
         esac
         shift
     done
@@ -407,7 +407,7 @@ absolute_redirect off;"
     if is_file_writable "$prefix_file"; then
         # Create file with root group write privileges, so it can be modified in non-root containers
         [[ ! -f "$prefix_file" ]] && touch "$prefix_file" && chmod g+rw "$prefix_file"
-        render-template "${template_dir}/${template_name}-prefix.conf.tpl" | sed '/^\s*$/d' > "$prefix_file"
+        render-template "${template_dir}/${template_name}-prefix.conf.tpl" | sed '/^\s*$/d' >"$prefix_file"
     elif [[ ! -f "$prefix_file" ]]; then
         error "Could not create web server configuration file for ${app} at '${prefix_file}'. Check permissions and ownership for parent directories."
         return 1
@@ -448,31 +448,31 @@ nginx_update_app_configuration() {
     shift
     while [[ "$#" -gt 0 ]]; do
         case "$1" in
-            --hosts \
-            | --server-aliases)
-                var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
-                shift
-                read -r -a "$var_name" <<< "$1"
-                ;;
+        --hosts | \
+            --server-aliases)
+            var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
+            shift
+            read -r -a "$var_name" <<<"$1"
+            ;;
 
-            # Common flags
-            --server-name \
-            | --enable-http \
-            | --enable-https \
-            | --disable-http \
-            | --disable-https \
-            | --http-port \
-            | --https-port \
-            )
-                var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
-                shift
-                declare "${var_name}=${1}"
-                ;;
+        # Common flags
+        --server-name | \
+            --enable-http | \
+            --enable-https | \
+            --disable-http | \
+            --disable-https | \
+            --http-port | \
+            --https-port)
 
-            *)
-                echo "Invalid command line flag $1" >&2
-                return 1
-                ;;
+            var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
+            shift
+            declare "${var_name}=${1}"
+            ;;
+
+        *)
+            echo "Invalid command line flag $1" >&2
+            return 1
+            ;;
         esac
         shift
     done
@@ -540,5 +540,42 @@ nginx_update_app_configuration() {
         else
             warn "The ${app} server block file '${https_server_block}' is not writable. Configurations based on environment variables will not be applied for this file."
         fi
+    fi
+}
+
+########################
+# Run custom initialization scripts
+# Globals:
+#   NGINX_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+nginx_custom_init_scripts() {
+    if [[ -n $(find "${NGINX_INITSCRIPTS_DIR}/" -type f -regex ".*\.sh") ]]; then
+        info "Loading user's custom files from $NGINX_INITSCRIPTS_DIR ..."
+        local -r tmp_file="/tmp/filelist"
+        find "${NGINX_INITSCRIPTS_DIR}/" -type f -regex ".*\.sh" | sort >"$tmp_file"
+        while read -r f; do
+            case "$f" in
+            *.sh)
+                if [[ -x "$f" ]]; then
+                    debug "Executing $f"
+                    "$f"
+                else
+                    debug "Sourcing $f"
+                    . "$f"
+                fi
+                ;;
+            *)
+                debug "Ignoring $f"
+                ;;
+            esac
+        done <$tmp_file
+        nginx_stop
+        rm -f "$tmp_file"
+    else
+        info "No custom scripts in $NGINX_INITSCRIPTS_DIR"
     fi
 }
