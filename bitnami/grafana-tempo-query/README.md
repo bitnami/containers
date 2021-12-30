@@ -31,7 +31,7 @@ $ docker run --name grafana-tempo-query bitnami/grafana-tempo-query:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.2.1`, `1.2.1-debian-10-r42`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-tempo-query/blob/1.2.1-debian-10-r42/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.2.1`, `1.2.1-debian-10-r43`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-tempo-query/blob/1.2.1-debian-10-r43/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana-tempo-query GitHub repo](https://github.com/bitnami/bitnami-docker-grafana-tempo-query).
 
