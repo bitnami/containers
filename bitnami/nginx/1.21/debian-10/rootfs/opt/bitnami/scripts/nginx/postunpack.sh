@@ -25,8 +25,8 @@ set -o pipefail
 #########################
 nginx_patch_httpoxy_vulnerability() {
     debug "Unsetting HTTP_PROXY header..."
-    echo '# Unset the HTTP_PROXY header' >> "${NGINX_CONF_DIR}/fastcgi_params"
-    echo 'fastcgi_param  HTTP_PROXY         "";' >> "${NGINX_CONF_DIR}/fastcgi_params"
+    echo '# Unset the HTTP_PROXY header' >>"${NGINX_CONF_DIR}/fastcgi_params"
+    echo 'fastcgi_param  HTTP_PROXY         "";' >>"${NGINX_CONF_DIR}/fastcgi_params"
 }
 
 # Load NGINX environment variables
@@ -36,7 +36,7 @@ nginx_patch_httpoxy_vulnerability() {
 rm -rf "${BITNAMI_ROOT_DIR}/certs" "${BITNAMI_ROOT_DIR}/server_blocks"
 
 # Ensure non-root user has write permissions on a set of directories
-for dir in "$NGINX_VOLUME_DIR" "$NGINX_CONF_DIR" "$NGINX_SERVER_BLOCKS_DIR" "${NGINX_CONF_DIR}/bitnami" "$NGINX_LOGS_DIR" "$NGINX_TMP_DIR"; do
+for dir in "$NGINX_VOLUME_DIR" "$NGINX_CONF_DIR" "$NGINX_INITSCRIPTS_DIR" "$NGINX_SERVER_BLOCKS_DIR" "${NGINX_CONF_DIR}/bitnami" "$NGINX_LOGS_DIR" "$NGINX_TMP_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done
