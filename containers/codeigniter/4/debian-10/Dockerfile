@@ -16,7 +16,7 @@ RUN bitnami-pkg install codeigniter-4.1.5-2 --checksum 94a81007602fd4a10b6825824
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="codeigniter" \
-    BITNAMI_IMAGE_VERSION="4.1.5-debian-10-r39" \
+    BITNAMI_IMAGE_VERSION="4.1.5-debian-10-r40" \
     CODEIGNITER_PROJECT_NAME="myapp" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \

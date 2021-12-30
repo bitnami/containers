@@ -45,7 +45,7 @@ The Bitnami CodeIgniter Development Container has been carefully engineered to p
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.1.5`, `4.1.5-debian-10-r39`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/4.1.5-debian-10-r39/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.1.5`, `4.1.5-debian-10-r40`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/4.1.5-debian-10-r40/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/codeigniter GitHub repo](https://github.com/bitnami/bitnami-docker-codeigniter).
 
