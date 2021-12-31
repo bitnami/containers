@@ -22,8 +22,8 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dreamfactory" "4
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/apache/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
+RUN /opt/bitnami/scripts/apache/postunpack.sh
 RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/dreamfactory/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
@@ -33,7 +33,7 @@ ENV ALLOW_EMPTY_PASSWORD="no" \
     APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="dreamfactory" \
-    BITNAMI_IMAGE_VERSION="4.10.0-debian-10-r21" \
+    BITNAMI_IMAGE_VERSION="4.10.0-debian-10-r22" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
