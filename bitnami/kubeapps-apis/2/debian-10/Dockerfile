@@ -17,7 +17,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN ln -s /opt/bitnami/kubeapps-apis/plugins /plugins && ln -s /opt/bitnami/kubeapps-apis/bin/kubeapps-apis /kubeapps-apis
 
 ENV BITNAMI_APP_NAME="kubeapps-apis" \
-    BITNAMI_IMAGE_VERSION="2.4.2-debian-10-r30" \
+    BITNAMI_IMAGE_VERSION="2.4.2-debian-10-r31" \
     PATH="/opt/bitnami/kubeapps-apis/bin:$PATH"
 
 EXPOSE 50051
