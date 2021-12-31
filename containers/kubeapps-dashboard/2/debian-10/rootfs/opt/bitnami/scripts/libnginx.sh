@@ -556,7 +556,6 @@ nginx_custom_init_scripts() {
     if [[ -n $(find "${NGINX_INITSCRIPTS_DIR}/" -type f -regex ".*\.sh") ]]; then
         info "Loading user's custom files from $NGINX_INITSCRIPTS_DIR ..."
         local -r tmp_file="/tmp/filelist"
-        nginx_start_bg
         find "${NGINX_INITSCRIPTS_DIR}/" -type f -regex ".*\.sh" | sort >"$tmp_file"
         while read -r f; do
             case "$f" in
