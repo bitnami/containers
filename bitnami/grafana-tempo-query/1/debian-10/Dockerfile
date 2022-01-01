@@ -20,7 +20,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="grafana-tempo-query" \
-    BITNAMI_IMAGE_VERSION="1.2.1-debian-10-r44" \
+    BITNAMI_IMAGE_VERSION="1.2.1-debian-10-r45" \
     GRPC_STORAGE_PLUGIN_BINARY="/opt/bitnami/grafana-tempo-query/bin/tempo-query" \
     PATH="/opt/bitnami/jaeger-query/bin:/opt/bitnami/grafana-tempo-query/bin:$PATH" \
     SPAN_STORAGE_TYPE="grpc-plugin"
