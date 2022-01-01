@@ -33,7 +33,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10`, `10-debian-10`, `10.9.0`, `10.9.0-debian-10-r9`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.9.0-debian-10-r9/10/debian-10/Dockerfile)
+* [`10`, `10-debian-10`, `10.9.0`, `10.9.0-debian-10-r10`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.9.0-debian-10-r10/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/owncloud GitHub repo](https://github.com/bitnami/bitnami-docker-owncloud).
 
@@ -522,7 +522,7 @@ New versions and releases cadence are not going to be affected. Once a new versi
 
 ## License
 
-Copyright (c) 2021 Bitnami
+Copyright (c) 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
