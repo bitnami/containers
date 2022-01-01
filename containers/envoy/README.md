@@ -31,7 +31,7 @@ $ docker run --name envoy bitnami/envoy:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.20`, `1.20-debian-10`, `1.20.1`, `1.20.1-debian-10-r30`, `latest` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.20.1-debian-10-r30/1.20/debian-10/Dockerfile)
+* [`1.20`, `1.20-debian-10`, `1.20.1`, `1.20.1-debian-10-r31`, `latest` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.20.1-debian-10-r31/1.20/debian-10/Dockerfile)
 * [`1.19`, `1.19-debian-10`, `1.19.1`, `1.19.1-debian-10-r124` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.19.1-debian-10-r124/1.19/debian-10/Dockerfile)
 * [`1.18`, `1.18-debian-10`, `1.18.4`, `1.18.4-debian-10-r126` (1.18/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.18.4-debian-10-r126/1.18/debian-10/Dockerfile)
 * [`1.17`, `1.17-debian-10`, `1.17.4`, `1.17.4-debian-10-r125` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.17.4-debian-10-r125/1.17/debian-10/Dockerfile)
@@ -96,7 +96,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright 2021 Bitnami
+Copyright 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
