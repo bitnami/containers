@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl advancecomp ca-certificates curl file ghostscript gifsicle gzip hostname imagemagick jhead jpegoptim libbsd0 libbz2-1.0 libc6 libcom-err2 libcurl4 libedit2 libffi6 libgcc1 libgcrypt20 libgmp-dev libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjpeg-turbo-progs libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libncurses6 libncursesw6 libnettle6 libnghttp2-14 libp11-kit0 libpq5 libpsl5 libreadline-dev libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl-dev libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxml2-dev libxslt1-dev libxslt1.1 optipng pngcrush pngquant procps rsync sqlite3 tar zlib1g zlib1g-dev
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-9" --checksum acaa7291411c8cb1217ac2aa8dab2324f146752c06afd5c6b0c5b1829365bab0
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-10" --checksum ff93eb9ba98c14c9eea2ac0a6601c7b17306214936ba4f9589745976059b6bcb
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-4" --checksum 53c0f1a5361a68c298f31f6701c8e8a026e77f09805d54ecfeb52cf5998d7d06
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "uglify-js" "3.14.5-0" --checksum ace5c00c36764e3c0d24005bd4c6db24a0ee61f8a6dab315655346571331ee45
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "2.7.5-1" --checksum 52bce7e8597d553ded3502f8c8240a68cae74d1b949f6cd65a0f9bcbecce17f7
@@ -25,7 +25,7 @@ RUN /opt/bitnami/ruby/bin/gem install --force bundler -v '< 2'
 COPY rootfs /
 RUN /opt/bitnami/scripts/discourse/postunpack.sh
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.7.12-debian-10-r8" \
+    BITNAMI_IMAGE_VERSION="2.7.12-debian-10-r9" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/git/bin:/opt/bitnami/brotli/bin:$PATH" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_NAME="" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
