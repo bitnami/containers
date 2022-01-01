@@ -17,7 +17,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN mkdir -p /bitnami/grafana-tempo && chmod g+rwX /bitnami/grafana-tempo
 
 ENV BITNAMI_APP_NAME="grafana-tempo" \
-    BITNAMI_IMAGE_VERSION="1.2.1-debian-10-r33" \
+    BITNAMI_IMAGE_VERSION="1.2.1-debian-10-r34" \
     PATH="/opt/bitnami/grafana-tempo/bin:$PATH"
 
 USER 1001
