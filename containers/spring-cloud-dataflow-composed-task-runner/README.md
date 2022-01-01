@@ -31,7 +31,7 @@ $ docker run --name spring-cloud-dataflow-composed-task-runner bitnami/spring-cl
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.9.1`, `2.9.1-debian-10-r61`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow-composed-task-runner/blob/2.9.1-debian-10-r61/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.9.1`, `2.9.1-debian-10-r62`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow-composed-task-runner/blob/2.9.1-debian-10-r62/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/spring-cloud-dataflow-composed-task-runner GitHub repo](https://github.com/bitnami/bitnami-docker-spring-cloud-dataflow-composed-task-runner).
 
@@ -81,7 +81,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright 2021 Bitnami
+Copyright 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
