@@ -37,7 +37,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`6.0`, `6.0-debian-10`, `6.0.1`, `6.0.1-debian-10-r16`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/6.0.1-debian-10-r16/6.0/debian-10/Dockerfile)
+* [`6.0`, `6.0-debian-10`, `6.0.1`, `6.0.1-debian-10-r17`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/6.0.1-debian-10-r17/6.0/debian-10/Dockerfile)
 * [`5`, `5-debian-10`, `5.0.13`, `5.0.13-debian-10-r16` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/5.0.13-debian-10-r16/5/debian-10/Dockerfile)
 * [`3.1`, `3.1-debian-10`, `3.1.22`, `3.1.22-debian-10-r16` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/3.1.22-debian-10-r16/3.1/debian-10/Dockerfile)
 
@@ -171,7 +171,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright (c) 2021 Bitnami
+Copyright (c) 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
