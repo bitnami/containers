@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="percona-xtrabackup" \
-    BITNAMI_IMAGE_VERSION="2.4.24-debian-10-r104" \
+    BITNAMI_IMAGE_VERSION="2.4.24-debian-10-r105" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mysql/bin:$PATH"
 
 USER 1001
