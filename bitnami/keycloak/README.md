@@ -49,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`16`, `16-debian-10`, `16.1.0`, `16.1.0-debian-10-r0` (16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/16.1.0-debian-10-r0/16/debian-10/Dockerfile)
-* [`15`, `15-debian-10`, `15.1.1`, `15.1.1-debian-10-r14`, `latest` (15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/15.1.1-debian-10-r14/15/debian-10/Dockerfile)
+* [`15`, `15-debian-10`, `15.1.1`, `15.1.1-debian-10-r15`, `latest` (15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/15.1.1-debian-10-r15/15/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak).
 
@@ -297,7 +297,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright 2021 Bitnami
+Copyright 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
