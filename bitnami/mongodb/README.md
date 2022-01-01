@@ -48,7 +48,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`5.0`, `5.0-debian-10`, `5.0.5`, `5.0.5-debian-10-r21` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/5.0.5-debian-10-r21/5.0/debian-10/Dockerfile)
+* [`5.0`, `5.0-debian-10`, `5.0.5`, `5.0.5-debian-10-r22` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/5.0.5-debian-10-r22/5.0/debian-10/Dockerfile)
 * [`4.4`, `4.4-debian-10`, `4.4.11`, `4.4.11-debian-10-r2`, `latest` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.11-debian-10-r2/4.4/debian-10/Dockerfile)
 * [`4.2`, `4.2-debian-10`, `4.2.17`, `4.2.17-debian-10-r95` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.17-debian-10-r95/4.2/debian-10/Dockerfile)
 * [`4.0`, `4.0-debian-9`, `4.0.27`, `4.0.27-debian-9-r105` (4.0/debian-9/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.0.27-debian-9-r105/4.0/debian-9/Dockerfile)
@@ -827,7 +827,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright (c) 2015-2021 Bitnami
+Copyright (c) 2015-2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
