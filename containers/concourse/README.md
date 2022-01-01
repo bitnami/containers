@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.6.0`, `7.6.0-debian-10-r57`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-concourse/blob/7.6.0-debian-10-r57/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.6.0`, `7.6.0-debian-10-r58`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-concourse/blob/7.6.0-debian-10-r58/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/concourse GitHub repo](https://github.com/bitnami/bitnami-docker-concourse).
 
@@ -179,7 +179,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright (c) 2021 Bitnami
+Copyright (c) 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
