@@ -40,7 +40,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8`, `8-debian-10`, `8.3.3`, `8.3.3-debian-10-r17`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/8.3.3-debian-10-r17/8/debian-10/Dockerfile)
+* [`8`, `8-debian-10`, `8.3.3`, `8.3.3-debian-10-r18`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/8.3.3-debian-10-r18/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
 
@@ -274,7 +274,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright (c) 2021 Bitnami
+Copyright (c) 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
