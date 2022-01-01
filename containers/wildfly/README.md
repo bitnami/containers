@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`26`, `26-debian-10`, `26.0.0`, `26.0.0-debian-10-r2` (26/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/26.0.0-debian-10-r2/26/debian-10/Dockerfile)
-* [`25`, `25-debian-10`, `25.0.1`, `25.0.1-debian-10-r52`, `latest` (25/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/25.0.1-debian-10-r52/25/debian-10/Dockerfile)
+* [`25`, `25-debian-10`, `25.0.1`, `25.0.1-debian-10-r53`, `latest` (25/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/25.0.1-debian-10-r53/25/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wildfly GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
 
@@ -348,7 +348,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright (c) 2015-2021 Bitnami
+Copyright (c) 2015-2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
