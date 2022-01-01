@@ -31,7 +31,7 @@ $ docker run --name trivy bitnami/trivy:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.21.0`, `0.21.0-debian-10-r42`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-trivy/blob/0.21.0-debian-10-r42/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.21.0`, `0.21.0-debian-10-r43`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-trivy/blob/0.21.0-debian-10-r43/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/trivy GitHub repo](https://github.com/bitnami/bitnami-docker-trivy).
 
@@ -87,7 +87,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright 2021 Bitnami
+Copyright 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
