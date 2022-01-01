@@ -55,7 +55,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`10.6`, `10.6-debian-10`, `10.6.5`, `10.6.5-debian-10-r43`, `latest` (10.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.6.5-debian-10-r43/10.6/debian-10/Dockerfile)
 * [`10.5`, `10.5-debian-10`, `10.5.13`, `10.5.13-debian-10-r45` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.5.13-debian-10-r45/10.5/debian-10/Dockerfile)
-* [`10.4`, `10.4-debian-10`, `10.4.22`, `10.4.22-debian-10-r45` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.22-debian-10-r45/10.4/debian-10/Dockerfile)
+* [`10.4`, `10.4-debian-10`, `10.4.22`, `10.4.22-debian-10-r46` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.22-debian-10-r46/10.4/debian-10/Dockerfile)
 * [`10.3`, `10.3-debian-10`, `10.3.32`, `10.3.32-debian-10-r46` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.32-debian-10-r46/10.3/debian-10/Dockerfile)
 * [`10.2`, `10.2-debian-10`, `10.2.41`, `10.2.41-debian-10-r46` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.41-debian-10-r46/10.2/debian-10/Dockerfile)
 
@@ -720,7 +720,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright 2021 Bitnami
+Copyright 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
