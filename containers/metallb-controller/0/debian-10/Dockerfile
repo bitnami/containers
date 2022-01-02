@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="metallb-controller" \
-    BITNAMI_IMAGE_VERSION="0.11.0-debian-10-r60" \
+    BITNAMI_IMAGE_VERSION="0.11.0-debian-10-r61" \
     PATH="/opt/bitnami/metallb/bin:$PATH"
 
 USER 1001
