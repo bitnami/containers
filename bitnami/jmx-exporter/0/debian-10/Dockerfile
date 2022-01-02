@@ -20,7 +20,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="jmx-exporter" \
-    BITNAMI_IMAGE_VERSION="0.16.1-debian-10-r167" \
+    BITNAMI_IMAGE_VERSION="0.16.1-debian-10-r168" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 5556
