@@ -23,7 +23,7 @@ RUN bitnami-pkg install express-4.17.2-0 --checksum 253ee82d80d072c63ca8823d6333
 COPY rootfs /
 RUN mkdir -p /dist /app /.npm /.config /.cache /.local && chmod g+rwx /dist /app /.npm /.config /.cache /.local
 ENV BITNAMI_APP_NAME="express" \
-    BITNAMI_IMAGE_VERSION="4.17.2-debian-10-r15" \
+    BITNAMI_IMAGE_VERSION="4.17.2-debian-10-r16" \
     NAMI_PREFIX="/.nami" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
