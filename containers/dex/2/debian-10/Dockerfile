@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN useradd -r -u 1001 -g root dex
 
 ENV BITNAMI_APP_NAME="dex" \
-    BITNAMI_IMAGE_VERSION="2.30.2-debian-10-r44" \
+    BITNAMI_IMAGE_VERSION="2.30.2-debian-10-r45" \
     DEX_FRONTEND_DIR="/opt/bitnami/dex/web" \
     PATH="/opt/bitnami/dex/bin:$PATH"
 
