@@ -51,7 +51,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`14`, `14-debian-10`, `14.1.0`, `14.1.0-debian-10-r50` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/14.1.0-debian-10-r50/14/debian-10/Dockerfile)
-* [`13`, `13-debian-10`, `13.5.0`, `13.5.0-debian-10-r49` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/13.5.0-debian-10-r49/13/debian-10/Dockerfile)
+* [`13`, `13-debian-10`, `13.5.0`, `13.5.0-debian-10-r50` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/13.5.0-debian-10-r50/13/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.9.0`, `12.9.0-debian-10-r50` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.9.0-debian-10-r50/12/debian-10/Dockerfile)
 * [`11`, `11-debian-10`, `11.14.0`, `11.14.0-debian-10-r19`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.14.0-debian-10-r19/11/debian-10/Dockerfile)
 * [`10`, `10-debian-10`, `10.19.0`, `10.19.0-debian-10-r51` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.19.0-debian-10-r51/10/debian-10/Dockerfile)
