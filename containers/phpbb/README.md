@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.3.5`, `3.3.5-debian-10-r83`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.3.5-debian-10-r83/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.3.5`, `3.3.5-debian-10-r84`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.3.5-debian-10-r84/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpbb GitHub repo](https://github.com/bitnami/bitnami-docker-phpbb).
 
@@ -550,7 +550,7 @@ New versions and releases cadence are not going to be affected. Once a new versi
 
 ## License
 
-Copyright (c) 2022 Bitnami
+Copyright &copy; 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
