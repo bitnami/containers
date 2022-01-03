@@ -1130,6 +1130,7 @@ mongodb_configure_hidden() {
 mongodb_configure_arbiter() {
     local -r node="${1:?node is required}"
     local -r port="${2:?port is required}"
+
     mongodb_wait_for_primary_node "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD"
 
     if mongodb_node_currently_in_cluster "$node"; then
