@@ -231,6 +231,10 @@ mongodb_copy_mounted_config() {
 
 ########################
 # Determine the hostname by which to contact the locally running mongo daemon
+# Globals:
+#   MONGODB_*
+# Arguments:
+#   None
 # Returns:
 #   The value of $MONGODB_ADVERTISED_HOSTNAME or the current host address
 ########################
@@ -239,6 +243,23 @@ get_mongo_hostname() {
         echo "$MONGODB_ADVERTISED_HOSTNAME"
     else
         get_machine_ip
+    fi
+}
+
+########################
+# Determine the port on which to contact the locally running mongo daemon
+# Globals:
+#   MONGODB_*
+# Arguments:
+#   None
+# Returns:
+#   The value of $MONGODB_ADVERTISED_PORT_NUMBER or $MONGODB_PORT_NUMBER
+########################
+get_mongo_port() {
+    if [[ -n "$MONGODB_ADVERTISED_PORT_NUMBER" ]]; then
+        echo "$MONGODB_ADVERTISED_PORT_NUMBER"
+    else
+        echo "$MONGODB_PORT_NUMBER"
     fi
 }
 
@@ -746,15 +767,17 @@ mongodb_create_keyfile() {
 #   MONGODB_*
 # Arguments:
 #   $1 - node
+#   $2 - port
 # Returns:
 #   None
 #########################
 mongodb_is_primary_node_initiated() {
     local node="${1:?node is required}"
+    local port="${2:?port is required}"
     local result
     result=$(
         mongodb_execute_print_output "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD" "admin" "127.0.0.1" "$MONGODB_PORT_NUMBER" <<EOF
-rs.initiate({"_id":"$MONGODB_REPLICA_SET_NAME", "members":[{"_id":0,"host":"$node:$MONGODB_PORT_NUMBER","priority":5}]})
+rs.initiate({"_id":"$MONGODB_REPLICA_SET_NAME", "members":[{"_id":0,"host":"$node:$port","priority":5}]})
 EOF
     )
 
@@ -767,7 +790,7 @@ EOF
 
     if ! grep -q "\"ok\" : 1" <<<"$result"; then
         warn "Problem initiating replica set
-            request: rs.initiate({\"_id\":\"$MONGODB_REPLICA_SET_NAME\", \"members\":[{\"_id\":0,\"host\":\"$node:$MONGODB_PORT_NUMBER\",\"priority\":5}]})
+            request: rs.initiate({\"_id\":\"$MONGODB_REPLICA_SET_NAME\", \"members\":[{\"_id\":0,\"host\":\"$node:$port\",\"priority\":5}]})
             response: $result"
         return 1
     fi
@@ -803,18 +826,20 @@ EOF
 #   MONGODB_*
 # Arguments:
 #   $1 - node
+#   $2 - port
 # Returns:
 #   Boolean
 #########################
 mongodb_is_secondary_node_pending() {
     local node="${1:?node is required}"
+    local port="${2:?port is required}"
     local result
 
     mongodb_set_dwc
 
     result=$(
         mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
-rs.add({host: '$node:$MONGODB_PORT_NUMBER'})
+rs.add({host: '$node:$port'})
 EOF
     )
     debug "$result"
@@ -835,18 +860,20 @@ EOF
 #   MONGODB_*
 # Arguments:
 #   $1 - node
+#   $2 - port
 # Returns:
 #   Boolean
 #########################
 mongodb_is_hidden_node_pending() {
     local node="${1:?node is required}"
+    local port="${2:?port is required}"
     local result
 
     mongodb_set_dwc
 
     result=$(
         mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
-rs.add({host: '$node:$MONGODB_PORT_NUMBER', hidden: true, priority: 0})
+rs.add({host: '$node:$port', hidden: true, priority: 0})
 EOF
     )
     # Error code 103 is considered OK.
@@ -865,18 +892,20 @@ EOF
 #   MONGODB_*
 # Arguments:
 #   $1 - node
+#   $2 - port
 # Returns:
 #   Boolean
 #########################
 mongodb_is_arbiter_node_pending() {
     local node="${1:?node is required}"
+    local port="${2:?port is required}"
     local result
 
     mongodb_set_dwc
 
     result=$(
         mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
-rs.addArb('$node:$MONGODB_PORT_NUMBER')
+rs.addArb('$node:$port')
 EOF
     )
     grep -q "\"ok\" : 1" <<<"$result"
@@ -888,16 +917,18 @@ EOF
 #   MONGODB_*
 # Arguments:
 #   $1 - node
+#   $2 - port
 # Returns:
 #   None
 #########################
 mongodb_configure_primary() {
     local -r node="${1:?node is required}"
+    local -r port="${2:?port is required}"
 
     info "Configuring MongoDB primary node"
     wait-for-port --timeout 360 "$MONGODB_PORT_NUMBER"
 
-    if ! retry_while "mongodb_is_primary_node_initiated $node" "$MONGODB_MAX_TIMEOUT"; then
+    if ! retry_while "mongodb_is_primary_node_initiated $node $port" "$MONGODB_MAX_TIMEOUT"; then
         error "MongoDB primary node failed to get configured"
         exit 1
     fi
@@ -1036,11 +1067,13 @@ mongodb_wait_for_primary_node() {
 #   None
 # Arguments:
 #   $1 - node
+#   $2 - port
 # Returns:
 #   None
 #########################
 mongodb_configure_secondary() {
     local -r node="${1:?node is required}"
+    local -r port="${2:?port is required}"
 
     mongodb_wait_for_primary_node "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD"
 
@@ -1048,7 +1081,7 @@ mongodb_configure_secondary() {
         info "Node currently in the cluster"
     else
         info "Adding node to the cluster"
-        if ! retry_while "mongodb_is_secondary_node_pending $node" "$MONGODB_MAX_TIMEOUT"; then
+        if ! retry_while "mongodb_is_secondary_node_pending $node $port" "$MONGODB_MAX_TIMEOUT"; then
             error "Secondary node did not get ready"
             exit 1
         fi
@@ -1062,11 +1095,13 @@ mongodb_configure_secondary() {
 #   None
 # Arguments:
 #   $1 - node
+#   $2 - port
 # Returns:
 #   None
 #########################
 mongodb_configure_hidden() {
     local -r node="${1:?node is required}"
+    local -r port="${2:?port is required}"
 
     mongodb_wait_for_primary_node "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD"
 
@@ -1074,7 +1109,7 @@ mongodb_configure_hidden() {
         info "Node currently in the cluster"
     else
         info "Adding hidden node to the cluster"
-        if ! retry_while "mongodb_is_hidden_node_pending $node" "$MONGODB_MAX_TIMEOUT"; then
+        if ! retry_while "mongodb_is_hidden_node_pending $node $port" "$MONGODB_MAX_TIMEOUT"; then
             error "Hidden node did not get ready"
             exit 1
         fi
@@ -1088,18 +1123,21 @@ mongodb_configure_hidden() {
 #   None
 # Arguments:
 #   $1 - node
+#   $2 - port
 # Returns:
 #   None
 #########################
 mongodb_configure_arbiter() {
     local -r node="${1:?node is required}"
+    local -r port="${2:?port is required}"
+
     mongodb_wait_for_primary_node "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD"
 
     if mongodb_node_currently_in_cluster "$node"; then
         info "Node currently in the cluster"
     else
         info "Configuring MongoDB arbiter node"
-        if ! retry_while "mongodb_is_arbiter_node_pending $node" "$MONGODB_MAX_TIMEOUT"; then
+        if ! retry_while "mongodb_is_arbiter_node_pending $node $port" "$MONGODB_MAX_TIMEOUT"; then
             error "Arbiter node did not get ready"
             exit 1
         fi
@@ -1180,24 +1218,26 @@ EOF
 #########################
 mongodb_configure_replica_set() {
     local node
+    local port
 
     info "Configuring MongoDB replica set..."
 
     node=$(get_mongo_hostname)
+    port=$(get_mongo_port)
     mongodb_restart
 
     case "$MONGODB_REPLICA_SET_MODE" in
     "primary")
-        mongodb_configure_primary "$node"
+        mongodb_configure_primary "$node" "$port"
         ;;
     "secondary")
-        mongodb_configure_secondary "$node"
+        mongodb_configure_secondary "$node" "$port"
         ;;
     "arbiter")
-        mongodb_configure_arbiter "$node"
+        mongodb_configure_arbiter "$node" "$port"
         ;;
     "hidden")
-        mongodb_configure_hidden "$node"
+        mongodb_configure_hidden "$node" "$port"
         ;;
     "dynamic")
         # Do nothing
