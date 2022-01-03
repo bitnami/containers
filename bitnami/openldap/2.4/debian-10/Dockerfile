@@ -16,7 +16,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/openldap/postunpack.sh
 ENV BITNAMI_APP_NAME="openldap" \
-    BITNAMI_IMAGE_VERSION="2.4.59-debian-10-r167" \
+    BITNAMI_IMAGE_VERSION="2.4.59-debian-10-r168" \
     PATH="/opt/bitnami/openldap/bin:/opt/bitnami/openldap/sbin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 1389 1636
