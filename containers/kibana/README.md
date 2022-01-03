@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`7`, `7-debian-10`, `7.16.2`, `7.16.2-debian-10-r13`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/7.16.2-debian-10-r13/7/debian-10/Dockerfile)
-* [`7.10.2`, `7.10.2-debian-10`, `7.10.2-debian-10-r312` (7.10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/7.10.2-debian-10-r312/7.10.2/debian-10/Dockerfile)
+* [`7.10.2`, `7.10.2-debian-10`, `7.10.2-debian-10-r313` (7.10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/7.10.2-debian-10-r313/7.10.2/debian-10/Dockerfile)
 * [`6`, `6-debian-10`, `6.8.22`, `6.8.22-debian-10-r14` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.8.22-debian-10-r14/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kibana GitHub repo](https://github.com/bitnami/bitnami-docker-kibana).
@@ -396,7 +396,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright 2016-2022 Bitnami
+Copyright &copy; 2022 Bitnamii
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
