@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2.5`, `2.5-debian-10`, `2.5.9`, `2.5.9-debian-10-r67`, `latest` (2.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.5.9-debian-10-r67/2.5/debian-10/Dockerfile)
+* [`2.5`, `2.5-debian-10`, `2.5.9`, `2.5.9-debian-10-r68`, `latest` (2.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.5.9-debian-10-r68/2.5/debian-10/Dockerfile)
 * [`2.4`, `2.4-debian-10`, `2.4.59`, `2.4.59-debian-10-r168` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.4.59-debian-10-r168/2.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/openldap GitHub repo](https://github.com/bitnami/bitnami-docker-openldap).
@@ -316,7 +316,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright 2022 Bitnami
+Copyright &copy; 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
