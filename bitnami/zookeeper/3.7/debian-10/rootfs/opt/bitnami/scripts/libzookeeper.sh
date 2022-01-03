@@ -72,6 +72,9 @@ zookeeper_validate() {
 
     check_conflicting_ports ZOO_PORT_NUMBER ZOO_PROMETHEUS_METRICS_PORT_NUMBER
 
+    is_boolean_yes "$ZOO_ENABLE_ADMIN_SERVER" && check_allowed_port ZOO_ADMIN_SERVER_PORT_NUMBER
+    is_boolean_yes "$ZOO_ENABLE_ADMIN_SERVER" && check_conflicting_ports ZOO_PORT_NUMBER ZOO_PROMETHEUS_METRICS_PORT_NUMBER ZOO_ADMIN_SERVER_PORT_NUMBER
+
     # ZooKeeper server users validations
     read -r -a server_users_list <<< "${ZOO_SERVER_USERS//[;, ]/ }"
     read -r -a server_passwords_list <<< "${ZOO_SERVER_PASSWORDS//[;, ]/ }"
@@ -173,6 +176,10 @@ zookeeper_generate_conf() {
     zookeeper_conf_set "$ZOO_CONF_FILE" maxSessionTimeout "$ZOO_MAX_SESSION_TIMEOUT"
     # Set log level
     zookeeper_conf_set "${ZOO_CONF_DIR}/log4j.properties" zookeeper.console.threshold "$ZOO_LOG_LEVEL"
+
+    # Admin web server https://zookeeper.apache.org/doc/r3.5.7/zookeeperAdmin.html#sc_adminserver
+    zookeeper_conf_set "$ZOO_CONF_FILE" admin.serverPort "$ZOO_ADMIN_SERVER_PORT_NUMBER"
+    zookeeper_conf_set "$ZOO_CONF_FILE" admin.enableServer "$(is_boolean_yes "$ZOO_ENABLE_ADMIN_SERVER" && echo "true" || echo "false")"
 
     # Add zookeeper servers to configuration
     server_id_with_jumps="no"
