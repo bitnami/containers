@@ -26,7 +26,7 @@ function is_exec() {
 
 print_welcome_page
 
-if [[ "$1" = "/opt/bitnami/scripts/grafana/run.sh" ]]; then
+if [[ "$1" = "/opt/bitnami/scripts/grafana/run.sh" ]] || ! is_exec "$1"; then
     # This catches the error-code from libgrafana.sh for the immediate exit when the grafana-operator is used. And ensure that the exit code is kept silently.
     /opt/bitnami/scripts/grafana/setup.sh || GRAFANA_OPERATOR_IMMEDIATE_EXIT=$?
     if [[ "${GRAFANA_OPERATOR_IMMEDIATE_EXIT:-0}" -eq 255 ]]; then
