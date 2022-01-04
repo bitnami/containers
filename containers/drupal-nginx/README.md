@@ -37,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`9`, `9-debian-10`, `9.3.0`, `9.3.0-debian-10-r25`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal-nginx/blob/9.3.0-debian-10-r25/9/debian-10/Dockerfile)
+* [`9`, `9-debian-10`, `9.3.0`, `9.3.0-debian-10-r26`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal-nginx/blob/9.3.0-debian-10-r26/9/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-drupal-nginx).
 
@@ -517,7 +517,7 @@ New versions and releases cadence are not going to be affected. Once a new versi
 
 ## License
 
-Copyright (c) 2022 Bitnami
+Copyright &copy; 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
