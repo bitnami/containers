@@ -31,7 +31,7 @@ $ docker run --name jupyterhub bitnami/jupyterhub:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.5.0`, `1.5.0-debian-10-r51`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyterhub/blob/1.5.0-debian-10-r51/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.5.0`, `1.5.0-debian-10-r52`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyterhub/blob/1.5.0-debian-10-r52/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jupyterhub GitHub repo](https://github.com/bitnami/bitnami-docker-jupyterhub).
 
@@ -94,7 +94,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright 2022 Bitnami
+Copyright &copy; 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
