@@ -32,7 +32,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2`, `2-debian-10`, `2.0.1`, `2.0.1-debian-10-r11`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook/blob/2.0.1-debian-10-r11/2/debian-10/Dockerfile)
-* [`1`, `1-debian-10`, `1.5.0`, `1.5.0-debian-10-r51` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook/blob/1.5.0-debian-10-r51/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.5.0`, `1.5.0-debian-10-r52` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook/blob/1.5.0-debian-10-r52/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jupyter-base-notebook GitHub repo](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook).
 
@@ -83,7 +83,7 @@ FROM bitnami/jupyter-base-notebook:latest
 RUN conda install --quiet --yes \
     'matplotlib-base' \
     'scipy' && \
-    conda clean --all -f -y 
+    conda clean --all -f -y
 ```
 
 ## Contributing
@@ -102,7 +102,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright 2022 Bitnami
+Copyright &copy; 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
