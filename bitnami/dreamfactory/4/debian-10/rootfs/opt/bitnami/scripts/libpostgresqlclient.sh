@@ -36,7 +36,9 @@ postgresql_client_validate() {
     }
 
     # Only validate environment variables if any action needs to be performed
-    if [[ -n "$POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME" || -n "$POSTGRESQL_CLIENT_CREATE_DATABASE_NAME" ]]; then
+    local -a database_names
+    read -r -a database_names <<< "$(tr ',;' ' ' <<< "$POSTGRESQL_CLIENT_CREATE_DATABASE_NAMES")"
+    if [[ -n "$POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME" || "${#database_names[@]}" -gt 0 ]]; then
         if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
             empty_password_enabled_warn
         else
@@ -51,8 +53,8 @@ postgresql_client_validate() {
     # When enabling extensions, the DB name must be provided
     local -a extensions
     read -r -a extensions <<< "$(tr ',;' ' ' <<< "$POSTGRESQL_CLIENT_CREATE_DATABASE_EXTENSIONS")"
-    if [[ -z "$POSTGRESQL_CLIENT_CREATE_DATABASE_NAME" && "${#extensions[@]}" -gt 0 ]]; then
-        print_validation_error "POSTGRESQL_CLIENT_CREATE_DATABASE_EXTENSIONS requires POSTGRESQL_CLIENT_CREATE_DATABASE_NAME to be set."
+    if [[ "${#database_names[@]}" -le 0 && "${#extensions[@]}" -gt 0 ]]; then
+        print_validation_error "POSTGRESQL_CLIENT_CREATE_DATABASE_EXTENSIONS requires POSTGRESQL_CLIENT_CREATE_DATABASE_NAMES to be set."
     fi
     return "$error_code"
 }
@@ -67,8 +69,10 @@ postgresql_client_validate() {
 #   None
 #########################
 postgresql_client_initialize() {
+    local -a database_names
+    read -r -a database_names <<< "$(tr ',;' ' ' <<< "$POSTGRESQL_CLIENT_CREATE_DATABASE_NAMES")"
     # Wait for the database to be accessible if any action needs to be performed
-    if [[ -n "$POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME" || -n "$POSTGRESQL_CLIENT_CREATE_DATABASE_NAME" ]]; then
+    if [[ -n "$POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME" || "${#database_names[@]}" -gt 0 ]]; then
         info "Trying to connect to the database server"
         check_postgresql_connection() {
             echo "SELECT 1" | postgresql_remote_execute "$POSTGRESQL_CLIENT_DATABASE_HOST" "$POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER" "postgres" "$POSTGRESQL_CLIENT_POSTGRES_USER" "$POSTGRESQL_CLIENT_POSTGRES_PASSWORD"
@@ -86,20 +90,29 @@ postgresql_client_initialize() {
         postgresql_ensure_user_exists "${args[@]}"
     fi
     # Ensure a database exists in the server (and that the user has write privileges, if specified)
-    if [[ -n "$POSTGRESQL_CLIENT_CREATE_DATABASE_NAME" ]]; then
-        info "Creating database ${POSTGRESQL_CLIENT_CREATE_DATABASE_NAME}"
-        local -a createdb_args=("$POSTGRESQL_CLIENT_CREATE_DATABASE_NAME" "--host" "$POSTGRESQL_CLIENT_DATABASE_HOST" "--port" "$POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER")
-        [[ -n "$POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME" ]] && createdb_args+=("-u" "$POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME")
-        postgresql_ensure_database_exists "${createdb_args[@]}"
-        # Ensure the list of extensions are enabled in the specified database
-        local -a extensions
+    if [[ "${#database_names[@]}" -gt 0 ]]; then
+        local -a createdb_args extensions
         read -r -a extensions <<< "$(tr ',;' ' ' <<< "$POSTGRESQL_CLIENT_CREATE_DATABASE_EXTENSIONS")"
-        if [[ "${#extensions[@]}" -gt 0 ]]; then
-            for extension_to_create in "${extensions[@]}"; do
-                echo "CREATE EXTENSION IF NOT EXISTS ${extension_to_create}" | postgresql_remote_execute "$POSTGRESQL_CLIENT_DATABASE_HOST" "$POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER" "$POSTGRESQL_CLIENT_CREATE_DATABASE_NAME" "$POSTGRESQL_CLIENT_POSTGRES_USER" "$POSTGRESQL_CLIENT_POSTGRES_PASSWORD"
-            done
-        fi
+        for database_name in "${database_names[@]}"; do
+            info "Creating database ${database_name}"
+            createdb_args=("$database_name" "--host" "$POSTGRESQL_CLIENT_DATABASE_HOST" "--port" "$POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER")
+            [[ -n "$POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME" ]] && createdb_args+=("-u" "$POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME")
+            postgresql_ensure_database_exists "${createdb_args[@]}"
+            # Ensure the list of extensions are enabled in the specified database
+            if [[ "${#extensions[@]}" -gt 0 ]]; then
+                for extension_to_create in "${extensions[@]}"; do
+                    echo "CREATE EXTENSION IF NOT EXISTS ${extension_to_create}" | postgresql_remote_execute "$POSTGRESQL_CLIENT_DATABASE_HOST" "$POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER" "$database_name" "$POSTGRESQL_CLIENT_POSTGRES_USER" "$POSTGRESQL_CLIENT_POSTGRES_PASSWORD"
+                done
+            fi
+        done
     fi
+    # Execute a custom SQL script
+    if [[ -n "$POSTGRESQL_CLIENT_EXECUTE_SQL" ]]; then
+        info "Executing custom SQL script"
+        echo "$POSTGRESQL_CLIENT_EXECUTE_SQL" | postgresql_remote_execute "$POSTGRESQL_CLIENT_DATABASE_HOST" "$POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER" "postgres" "$POSTGRESQL_CLIENT_POSTGRES_USER" "$POSTGRESQL_CLIENT_POSTGRES_PASSWORD"
+    fi
+    # Avoid exit code of previous commands to affect the result of this function
+    true
 }
 
 ########################
