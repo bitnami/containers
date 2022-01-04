@@ -40,7 +40,7 @@ You can find the default credentials and available configuration options in the 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.4.2`, `4.4.2-debian-10-r16`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/4.4.2-debian-10-r16/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.4.2`, `4.4.2-debian-10-r17`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-neo4j/blob/4.4.2-debian-10-r17/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/neo4j GitHub repo](https://github.com/bitnami/bitnami-docker-neo4j).
 
@@ -314,7 +314,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 ## License
-Copyright 2022 Bitnami
+Copyright &copy; 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
