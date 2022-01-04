@@ -37,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`4`, `4-debian-10`, `4.10.0`, `4.10.0-debian-10-r25`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.10.0-debian-10-r25/4/debian-10/Dockerfile)
+- [`4`, `4-debian-10`, `4.10.0`, `4.10.0-debian-10-r26`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.10.0-debian-10-r26/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dreamfactory GitHub repo](https://github.com/bitnami/bitnami-docker-dreamfactory).
 
@@ -353,10 +353,11 @@ Available environment variables:
 - `POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the PostgreSQL server. Default: **5432**
 - `POSTGRESQL_CLIENT_POSTGRES_USER`: Database admin user. Default: **root**
 - `POSTGRESQL_CLIENT_POSTGRES_PASSWORD`: Database password for the database admin user. No defaults.
-- `POSTGRESQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the postgresql-client module. No defaults.
+- `POSTGRESQL_CLIENT_CREATE_DATABASE_NAMES`: List of new databases to be created by the postgresql-client module. No defaults.
 - `POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME`: New database user to be created by the postgresql-client module. No defaults.
 - `POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME` user. No defaults.
 - `POSTGRESQL_CLIENT_CREATE_DATABASE_EXTENSIONS`: PostgreSQL extensions to enable in the specified database during the first initialization. No defaults.
+- `POSTGRESQL_CLIENT_EXECUTE_SQL`: SQL code to execute in the PostgreSQL server. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
 ##### Create a MongoDB database for DreamFactory using mongodb-client
