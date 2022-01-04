@@ -21,7 +21,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/sonarqube/postunpack.sh
 ENV BITNAMI_APP_NAME="sonarqube" \
-    BITNAMI_IMAGE_VERSION="9.2.4-debian-10-r12" \
+    BITNAMI_IMAGE_VERSION="9.2.4-debian-10-r13" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH" \
     POSTGRESQL_CLIENT_CREATE_DATABASE_NAME="" \
