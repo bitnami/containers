@@ -32,7 +32,7 @@ $ docker run --name metallb-controller bitnami/metallb-controller:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.11.0`, `0.11.0-debian-10-r61`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-metallb-controller/blob/0.11.0-debian-10-r61/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.11.0`, `0.11.0-debian-10-r62`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-metallb-controller/blob/0.11.0-debian-10-r62/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/metallb-controller GitHub repo](https://github.com/bitnami/bitnami-docker-metallb-controller).
 
@@ -92,7 +92,7 @@ New versions and releases cadence are not going to be affected. Once a new versi
 
 ## License
 
-Copyright 2022 Bitnami
+Copyright &copy; 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
