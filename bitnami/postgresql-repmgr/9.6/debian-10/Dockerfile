@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libbsd0 libc6 libedit2 libffi6 libgcc1 libgmp10 libgnutls30 libhogweed4 libicu63 libidn2-0 libldap-2.4-2 liblzma5 libnettle6 libp11-kit0 libpcre3 libreadline7 libsasl2-2 libsqlite3-0 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 locales procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-repmgr" "9.6.24-1" --checksum 06c01051cd21f523609bbbc91d6a0ad3728d3e1ca6b5a6a8e264d37447d59f0c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-repmgr" "9.6.24-2" --checksum 697b8109b6cf8aeb00cb085328cfe01269eb861a892a761742fc6ecdeabebda5
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
@@ -22,7 +22,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/postgresql-repmgr/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV BITNAMI_APP_NAME="postgresql-repmgr" \
-    BITNAMI_IMAGE_VERSION="9.6.24-debian-10-r52" \
+    BITNAMI_IMAGE_VERSION="9.6.24-debian-10-r53" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
