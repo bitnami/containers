@@ -23,7 +23,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/airflow-scheduler/postunpack.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
     BITNAMI_APP_NAME="airflow-scheduler" \
-    BITNAMI_IMAGE_VERSION="2.2.3-debian-10-r12" \
+    BITNAMI_IMAGE_VERSION="2.2.3-debian-10-r13" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/airflow/venv/lib/python3.8/site-packages/numpy.libs/:$LD_LIBRARY_PATH" \
     LIBNSS_WRAPPER_PATH="/opt/bitnami/common/lib/libnss_wrapper.so" \
     LNAME="airflow" \
