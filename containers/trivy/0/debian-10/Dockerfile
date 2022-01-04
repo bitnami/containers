@@ -17,7 +17,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN mkdir /.cache && chmod g+rwX /.cache
 
 ENV BITNAMI_APP_NAME="trivy" \
-    BITNAMI_IMAGE_VERSION="0.21.0-debian-10-r45" \
+    BITNAMI_IMAGE_VERSION="0.21.0-debian-10-r46" \
     PATH="/opt/bitnami/trivy/bin:$PATH"
 
 USER 1001
