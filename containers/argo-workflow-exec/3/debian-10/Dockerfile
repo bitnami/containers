@@ -15,7 +15,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "argo-workflow-ex
 COPY rootfs /
 RUN /opt/bitnami/scripts/argo-workflow-exec/postunpack.sh
 ENV BITNAMI_APP_NAME="argo-workflow-exec" \
-    BITNAMI_IMAGE_VERSION="3.2.6-debian-10-r12" \
+    BITNAMI_IMAGE_VERSION="3.2.6-debian-10-r13" \
     PATH="/opt/bitnami/kubectl/bin:/opt/bitnami/common/bin:/opt/bitnami/argo-workflow-exec/bin:/opt/bitnami/argo-workflow-exec/hack:$PATH"
 
 USER 1001
