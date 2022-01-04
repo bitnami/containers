@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.4.2`, `1.4.2-debian-10-r80`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/1.4.2-debian-10-r80/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.4.2`, `1.4.2-debian-10-r81`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pushgateway/blob/1.4.2-debian-10-r81/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pushgateway GitHub repo](https://github.com/bitnami/bitnami-docker-pushgateway).
 
@@ -167,7 +167,7 @@ The Bitnami team will review any PR that is created, feel free to create a PR if
 New versions and releases cadence are not going to be affected. Once a new version is released in the upstream project, the Bitnami container image will be updated to use the latest version, supporting the different branches supported by the upstream project as usual.
 
 ## License
-Copyright (c) 2022 Bitnami
+Copyright &copy; 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
