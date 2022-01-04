@@ -32,7 +32,7 @@ $ docker run --name kubectl bitnami/kubectl:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.23`, `1.23-debian-10`, `1.23.1`, `1.23.1-debian-10-r17`, `latest` (1.23/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.23.1-debian-10-r17/1.23/debian-10/Dockerfile)
+* [`1.23`, `1.23-debian-10`, `1.23.1`, `1.23.1-debian-10-r18`, `latest` (1.23/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.23.1-debian-10-r18/1.23/debian-10/Dockerfile)
 * [`1.22`, `1.22-debian-10`, `1.22.5`, `1.22.5-debian-10-r17` (1.22/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.22.5-debian-10-r17/1.22/debian-10/Dockerfile)
 * [`1.21`, `1.21-debian-10`, `1.21.8`, `1.21.8-debian-10-r18` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.21.8-debian-10-r18/1.21/debian-10/Dockerfile)
 * [`1.20`, `1.20-debian-10`, `1.20.14`, `1.20.14-debian-10-r18` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.20.14-debian-10-r18/1.20/debian-10/Dockerfile)
@@ -95,7 +95,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright 2022 Bitnami
+Copyright &copy; 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
