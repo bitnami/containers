@@ -29,10 +29,10 @@
     },
     "osclass": {
         "arch": "amd64",
-        "digest": "ec5855e8cdd6a6b3096b860c8e7db98ae07c105f0af196ee75c41be3f1189536",
+        "digest": "17dfee63aa9f7dc0f441b89cb5bfcc218f7992ad2a70f1ef0f8218b27606113f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.0.0-0"
+        "version": "8.0.1-0"
     },
     "php": {
         "arch": "amd64",
