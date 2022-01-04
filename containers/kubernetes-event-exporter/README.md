@@ -42,7 +42,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.11.0`, `0.11.0-debian-10-r44`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubernetes-event-exporter/blob/0.11.0-debian-10-r44/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.11.0`, `0.11.0-debian-10-r45`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubernetes-event-exporter/blob/0.11.0-debian-10-r45/0/debian-10/Dockerfile)
 
 ## Connecting to other containers
 
@@ -54,7 +54,7 @@ Containers attached to the same network can communicate with each other using th
 
 Kubernetes Event Exporter is a tool created to be run inside a pod running on Kubernetes and as such, it will not work if used as a standalone container.
 
-Configuration is done via a YAML file, when run in Kubernetes, it's in ConfigMap. The tool watches all the events and user has to option to filter out some events, according to their properties. 
+Configuration is done via a YAML file, when run in Kubernetes, it's in ConfigMap. The tool watches all the events and user has to option to filter out some events, according to their properties.
 
 For further documentation, please check [Kubernetes Event Exporter documentation](https://github.com/opsgenie/kubernetes-event-exporter#configuration).
 
@@ -84,7 +84,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright (c) 2022 Bitnami
+Copyright &copy; 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
