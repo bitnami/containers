@@ -38,7 +38,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`17-prod`, `17-prod-debian-10`, `17.0.1-prod`, `17.0.1-prod-debian-10-r66` (17-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/17.0.1-prod-debian-10-r66/17-prod/debian-10/Dockerfile)
+* [`17-prod`, `17-prod-debian-10`, `17.0.1-prod`, `17.0.1-prod-debian-10-r67` (17-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/17.0.1-prod-debian-10-r67/17-prod/debian-10/Dockerfile)
 * [`17`, `17-debian-10`, `17.0.1`, `17.0.1-debian-10-r67`, `latest` (17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/17.0.1-debian-10-r67/17/debian-10/Dockerfile)
 * [`11-prod`, `11-prod-debian-10`, `11.0.13-prod`, `11.0.13-prod-debian-10-r68` (11-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.13-prod-debian-10-r68/11-prod/debian-10/Dockerfile)
 * [`11`, `11-debian-10`, `11.0.13`, `11.0.13-debian-10-r66` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.13-debian-10-r66/11/debian-10/Dockerfile)
@@ -190,7 +190,7 @@ information)
 
 ## License
 
-Copyright (c) 2022 Bitnami
+Copyright &copy; 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
