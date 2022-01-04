@@ -42,7 +42,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 - [`15`, `15-debian-10`, `15.0.20211210`, `15.0.20211210-debian-10-r22`, `latest` (15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/15.0.20211210-debian-10-r22/15/debian-10/Dockerfile)
 - [`14`, `14-debian-10`, `14.0.20211210`, `14.0.20211210-debian-10-r23` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/14.0.20211210-debian-10-r23/14/debian-10/Dockerfile)
-- [`13`, `13-debian-10`, `13.0.20211210`, `13.0.20211210-debian-10-r23` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20211210-debian-10-r23/13/debian-10/Dockerfile)
+- [`13`, `13-debian-10`, `13.0.20211210`, `13.0.20211210-debian-10-r24` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20211210-debian-10-r24/13/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/odoo GitHub repo](https://github.com/bitnami/bitnami-docker-odoo).
 
@@ -233,10 +233,11 @@ Available environment variables:
 - `POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the PostgreSQL server. Default: **5432**
 - `POSTGRESQL_CLIENT_POSTGRES_USER`: Database admin user. Default: **root**
 - `POSTGRESQL_CLIENT_POSTGRES_PASSWORD`: Database password for the database admin user. No default.
-- `POSTGRESQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No default.
-- `POSTGRESQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No default.
+- `POSTGRESQL_CLIENT_CREATE_DATABASE_NAMES`: List of new databases to be created by the postgresql-client module. No default.
+- `POSTGRESQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the postgresql-client module. No default.
 - `POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `POSTGRESQL_CLIENT_CREATE_DATABASE_USER` user. No default.
 - `POSTGRESQL_CLIENT_CREATE_DATABASE_EXTENSIONS`: PostgreSQL extensions to enable in the specified database during the first initialization. No default.
+- `POSTGRESQL_CLIENT_EXECUTE_SQL`: SQL code to execute in the PostgreSQL server. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
 ##### SMTP Configuration
@@ -457,7 +458,7 @@ New versions and releases cadence are not going to be affected. Once a new versi
 
 ## License
 
-Copyright (c) 2022 Bitnami
+Copyright &copy; 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
