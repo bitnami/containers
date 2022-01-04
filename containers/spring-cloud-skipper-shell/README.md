@@ -31,7 +31,7 @@ $ docker run --name spring-cloud-skipper-shell bitnami/spring-cloud-skipper-shel
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.8.1`, `2.8.1-debian-10-r63`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper-shell/blob/2.8.1-debian-10-r63/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.8.1`, `2.8.1-debian-10-r64`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper-shell/blob/2.8.1-debian-10-r64/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/spring-cloud-skipper-shell GitHub repo](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper-shell).
 
@@ -91,7 +91,7 @@ New versions and releases cadence are not going to be affected. Once a new versi
 
 ## License
 
-Copyright 2022 Bitnami
+Copyright &copy; 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
