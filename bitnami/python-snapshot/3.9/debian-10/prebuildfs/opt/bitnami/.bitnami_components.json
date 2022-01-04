@@ -1,9 +1,9 @@
 {
     "python": {
         "arch": "amd64",
-        "digest": "5d2a5efeb7b6ef546f6760f873247910cf780ea08f81967b5ead5b9d62455b10",
+        "digest": "35e568bc3a77fdb858af2152a3b471c3918307ffbfffba2be91f6bc4ebdb4e0c",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.9.9-1"
+        "version": "3.9.9-6"
     }
 }
