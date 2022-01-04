@@ -50,7 +50,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8.0`, `8.0-debian-10`, `8.0.27`, `8.0.27-debian-10-r71`, `latest` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.27-debian-10-r71/8.0/debian-10/Dockerfile)
+* [`8.0`, `8.0-debian-10`, `8.0.27`, `8.0.27-debian-10-r72`, `latest` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.27-debian-10-r72/8.0/debian-10/Dockerfile)
 * [`5.7`, `5.7-debian-10`, `5.7.36`, `5.7.36-debian-10-r52` (5.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.36-debian-10-r52/5.7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mysql GitHub repo](https://github.com/bitnami/bitnami-docker-mysql).
@@ -642,7 +642,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright (c) 2015-2022 Bitnami
+Copyright &copy; 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
