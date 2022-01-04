@@ -40,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`6.0`, `6.0-debian-10`, `6.0.2`, `6.0.2-debian-10-r4` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/6.0.2-debian-10-r4/6.0/debian-10/Dockerfile)
 * [`5.4`, `5.4-debian-10`, `5.4.2`, `5.4.2-debian-10-r4` (5.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/5.4.2-debian-10-r4/5.4/debian-10/Dockerfile)
 * [`5.3`, `5.3-debian-10`, `5.3.13`, `5.3.13-debian-10-r4` (5.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/5.3.13-debian-10-r4/5.3/debian-10/Dockerfile)
-* [`4.4`, `4.4-debian-10`, `4.4.36`, `4.4.36-debian-10-r4` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/4.4.36-debian-10-r4/4.4/debian-10/Dockerfile)
+* [`4.4`, `4.4-debian-10`, `4.4.36`, `4.4.36-debian-10-r5` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/4.4.36-debian-10-r5/4.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/symfony GitHub repo](https://github.com/bitnami/bitnami-docker-symfony).
 
@@ -160,7 +160,7 @@ New versions and releases cadence are not going to be affected. Once a new versi
 
 ## License
 
-Copyright (c) 2015-2022 Bitnami
+Copyright &copy; 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
