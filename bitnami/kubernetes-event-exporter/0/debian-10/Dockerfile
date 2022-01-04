@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="kubernetes-event-exporter" \
-    BITNAMI_IMAGE_VERSION="0.11.0-debian-10-r44" \
+    BITNAMI_IMAGE_VERSION="0.11.0-debian-10-r45" \
     PATH="/opt/bitnami/kubernetes-event-exporter/bin:$PATH"
 
 USER 1001
