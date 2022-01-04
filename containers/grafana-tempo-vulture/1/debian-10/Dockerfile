@@ -16,7 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="grafana-tempo-vulture" \
-    BITNAMI_IMAGE_VERSION="1.2.1-debian-10-r47" \
+    BITNAMI_IMAGE_VERSION="1.2.1-debian-10-r48" \
     PATH="/opt/bitnami/grafana-tempo-vulture/bin:$PATH"
 
 USER 1001
