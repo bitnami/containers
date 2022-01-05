@@ -1,10 +1,10 @@
 {
     "bower": {
         "arch": "amd64",
-        "digest": "a277b2d091258925c65b62ec562ab4dc0846260161b0da8e64d6531840b093db",
+        "digest": "00fef2e9e6245631b7049538639b3098922480e5b75d352d90511f8b6c84a80c",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.8.12-0"
+        "version": "1.8.12-1"
     },
     "express": {
         "arch": "amd64",
