@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.10.2`, `0.10.2-debian-10-r21`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-external-dns/blob/0.10.2-debian-10-r21/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.10.2`, `0.10.2-debian-10-r22`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-external-dns/blob/0.10.2-debian-10-r22/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/external-dns GitHub repo](https://github.com/bitnami/bitnami-docker-external-dns).
 
