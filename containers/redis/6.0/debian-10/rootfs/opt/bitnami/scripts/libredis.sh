@@ -402,5 +402,8 @@ redis_configure_default() {
         if [[ -n "$REDIS_DISABLE_COMMANDS" ]]; then
             redis_disable_unsafe_commands
         fi
+        if [[ -n "$REDIS_ACLFILE" ]]; then
+            redis_conf_set aclfile "$REDIS_ACLFILE"
+        fi
     fi
 }

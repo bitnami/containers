@@ -293,6 +293,26 @@ services:
   ...
 ```
 
+### Enabling Access Control List
+Redis(TM) offers [ACL](https://redis.io/topics/acl) since 6.0 which allows certain connections to be limited in terms of the commands that can be executed and the keys that can be accessed. We strongly recommend enabling ACL in production by specifiying the `REDIS_ACLFILE`.
+
+```console
+$ docker run -name redis -e REDIS_ACLFILE=/opt/bitnami/redis/mounted-etc/users.acl -v /path/to/users.acl:/opt/bitnami/redis/mounted-etc/users.acl bitnami/redis:latest
+```
+
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  redis:
+  ...
+    environment:
+      - REDIS_ACLFILE=/opt/bitnami/redis/mounted-etc/users.acl
+    volumes:
+      - /path/to/users.acl:/opt/bitnami/redis/mounted-etc/users.acl
+  ...
+```
+
 ### Setting up a standalone instance
 
 By default, this image is set up to launch Redis(TM) in standalone mode on port 6379. Should you need to change this behavior, setting the `REDIS_PORT_NUMBER` environment variable will modify the port number. This is not to be confused with `REDIS_MASTER_PORT_NUMBER` or `REDIS_REPLICA_PORT` environment variables that are applicable in replication mode.
