@@ -837,20 +837,77 @@ mongodb_is_secondary_node_pending() {
 
     mongodb_set_dwc
 
+    debug "Adding secondary node ${node}:${port}"
     result=$(
         mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
-rs.add({host: '$node:$port'})
+rs.add({host: '$node:$port', priority: 0, votes: 0})
 EOF
     )
     debug "$result"
-    # Error code 103 is considered OK.
-    # It indicates a possiblely desynced configuration,
-    # which will become resynced when the secondary joins the replicaset.
+
+    # Error code 103 is considered OK
+    # It indicates a possibly desynced configuration, which will become resynced when the secondary joins the replicaset
     # Note: Error NewReplicaSetConfigurationIncompatible rejects the node addition so we need to filter it out
     if { grep -q "\"code\" : 103" <<<"$result"; } && ! { grep -q "NewReplicaSetConfigurationIncompatible" <<<"$result"; }; then
         warn "The ReplicaSet configuration is not aligned with primary node's configuration. Starting secondary node so it syncs with ReplicaSet..."
         return 0
     fi
+    grep -q "\"ok\" : 1" <<<"$result"
+}
+
+########################
+# Get if secondary node is ready to be granted voting rights
+# Globals:
+#   MONGODB_*
+# Arguments:
+#   $1 - node
+#   $2 - port
+# Returns:
+#   Boolean
+#########################
+mongodb_is_secondary_node_ready() {
+    local -r node="${1:?node is required}"
+    local -r port="${2:?port is required}"
+
+    debug "Waiting for the node to be marked as secondary"
+    result=$(
+        mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
+rs.status().members.filter(m => m.name === '$node:$port' && m.stateStr === 'SECONDARY').length === 1
+EOF
+    )
+    debug "$result"
+
+    grep -q "true" <<<"$result"
+}
+
+########################
+# Grant voting rights to secondary node
+# Globals:
+#   MONGODB_*
+# Arguments:
+#   $1 - node
+#   $2 - port
+# Returns:
+#   Boolean
+#########################
+mongodb_configure_secondary_node_voting() {
+    local -r node="${1:?node is required}"
+    local -r port="${2:?port is required}"
+
+    debug "Granting voting rights to the node"
+    local reconfig_cmd="rs.reconfigForPSASet(member, cfg)"
+    [[ "$(mongodb_get_version)" =~ ^4\.(0|2)\. ]] && reconfig_cmd="rs.reconfig(cfg)"
+    result=$(
+        mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
+cfg = rs.conf()
+member = cfg.members.findIndex(m => m.host === '$node:$port')
+cfg.members[member].priority = 1
+cfg.members[member].votes = 1
+$reconfig_cmd
+EOF
+    )
+    debug "$result"
+
     grep -q "\"ok\" : 1" <<<"$result"
 }
 
@@ -871,6 +928,7 @@ mongodb_is_hidden_node_pending() {
 
     mongodb_set_dwc
 
+    debug "Adding hidden node ${node}:${port}"
     result=$(
         mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
 rs.add({host: '$node:$port', hidden: true, priority: 0})
@@ -903,6 +961,7 @@ mongodb_is_arbiter_node_pending() {
 
     mongodb_set_dwc
 
+    debug "Adding arbiter node ${node}:${port}"
     result=$(
         mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
 rs.addArb('$node:$port')
@@ -1086,6 +1145,20 @@ mongodb_configure_secondary() {
             exit 1
         fi
         mongodb_wait_confirmation "$node"
+
+        # Ensure that secondary nodes do not count as voting members until they are fully initialized
+        # https://docs.mongodb.com/manual/reference/method/rs.add/#behavior
+        if ! retry_while "mongodb_is_secondary_node_ready $node $port" "$MONGODB_MAX_TIMEOUT"; then
+            error "Secondary node did not get marked as secondary"
+            exit 1
+        fi
+
+        # Grant voting rights to node
+        # https://docs.mongodb.com/manual/tutorial/modify-psa-replica-set-safely/
+        if ! retry_while "mongodb_configure_secondary_node_voting $node $port" "$MONGODB_MAX_TIMEOUT"; then
+            error "Secondary node did not get marked as secondary"
+            exit 1
+        fi
     fi
 }
 
@@ -1373,6 +1446,19 @@ mongodb_is_file_external() {
     else
         false
     fi
+}
+
+########################
+# Get MongoDB version
+# Globals:
+#   MONGODB_*
+# Arguments:
+#   None
+# Returns:
+#   version
+#########################
+mongodb_get_version() {
+    mongo --version 2>/dev/null | grep 'shell version v' | sed 's/.* v//g'
 }
 
 ########################
