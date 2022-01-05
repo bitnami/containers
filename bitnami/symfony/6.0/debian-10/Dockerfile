@@ -20,7 +20,7 @@ RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/symfony/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="symfony" \
-    BITNAMI_IMAGE_VERSION="6.0.2-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="6.0.2-debian-10-r6" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \
