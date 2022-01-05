@@ -14,7 +14,7 @@ RUN install_packages acl ca-certificates curl gzip libaudit1 libc6 libcap-ng0 li
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.13-0" --checksum 9552e53ccd3b0ec85a82c31c26a1462260e28b7c58770a5c53560afb02ec66d9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "9.0.56-0" --checksum c4e1f188d56ddcc9a3f6c9ae07c15229b227e4181e4f8b8b6b8aa3dc522c52f8
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.32-0" --checksum 4a211faa9436c9747dfc4374cb9e8a7f9b0065dfc58dd4784cef0f5029c2e65e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "reportserver" "3.7.1-6048-0" --checksum d39a952952d3300f4c043435ef446e4f2d3bdd408d7168da9fdc690a00cdb49b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "reportserver" "3.7.1-6048-1" --checksum e0db1d9144b6411fdafacaf97cc6caa33e42f3d980e4003c3bce706bacca0f26
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-4" --checksum 9b09b8c13e726569fd846abef20228b2e29de456805994e512f3b47f74cf742d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
 RUN chmod g+rwX /opt/bitnami
@@ -26,7 +26,7 @@ RUN /opt/bitnami/scripts/reportserver/postunpack.sh
 RUN /opt/bitnami/scripts/tomcat/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="reportserver" \
-    BITNAMI_IMAGE_VERSION="3.7.1-6048-debian-10-r41" \
+    BITNAMI_IMAGE_VERSION="3.7.1-6048-debian-10-r42" \
     JAVA_HOME="/opt/bitnami/java" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
