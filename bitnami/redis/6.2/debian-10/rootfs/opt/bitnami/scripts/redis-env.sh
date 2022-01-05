@@ -36,6 +36,7 @@ redis_env_vars=(
     ALLOW_EMPTY_PASSWORD
     REDIS_PASSWORD
     REDIS_MASTER_PASSWORD
+    REDIS_ACLFILE
     REDIS_TLS_ENABLED
     REDIS_TLS_PORT_NUMBER
     REDIS_TLS_CERT_FILE
@@ -47,7 +48,6 @@ redis_env_vars=(
     REDIS_SENTINEL_HOST
     REDIS_SENTINEL_PORT_NUMBER
     REDIS_TLS_PORT
-    REDIS_ACLFILE
 )
 for env_var in "${redis_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
