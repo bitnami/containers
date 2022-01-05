@@ -20,7 +20,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/geode/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV BITNAMI_APP_NAME="geode" \
-    BITNAMI_IMAGE_VERSION="1.14.2-debian-10-r17" \
+    BITNAMI_IMAGE_VERSION="1.14.2-debian-10-r18" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/geode/bin:$PATH"
 
