@@ -29,10 +29,10 @@
     },
     "reportserver": {
         "arch": "amd64",
-        "digest": "d39a952952d3300f4c043435ef446e4f2d3bdd408d7168da9fdc690a00cdb49b",
+        "digest": "e0db1d9144b6411fdafacaf97cc6caa33e42f3d980e4003c3bce706bacca0f26",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.7.1-6048-0"
+        "version": "3.7.1-6048-1"
     },
     "tomcat": {
         "arch": "amd64",
