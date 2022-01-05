@@ -21,7 +21,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/keycloak/postunpack.sh
 ENV BITNAMI_APP_NAME="keycloak" \
-    BITNAMI_IMAGE_VERSION="15.1.1-debian-10-r18" \
+    BITNAMI_IMAGE_VERSION="15.1.1-debian-10-r19" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/keycloak/bin:$PATH"
 
