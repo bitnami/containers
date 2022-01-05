@@ -47,6 +47,7 @@ redis_env_vars=(
     REDIS_SENTINEL_HOST
     REDIS_SENTINEL_PORT_NUMBER
     REDIS_TLS_PORT
+    REDIS_ACLFILE
 )
 for env_var in "${redis_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -95,6 +96,7 @@ export REDIS_EXTRA_FLAGS="${REDIS_EXTRA_FLAGS:-}"
 export ALLOW_EMPTY_PASSWORD="${ALLOW_EMPTY_PASSWORD:-no}"
 export REDIS_PASSWORD="${REDIS_PASSWORD:-}"
 export REDIS_MASTER_PASSWORD="${REDIS_MASTER_PASSWORD:-}"
+export REDIS_ACLFILE="${REDIS_ACLFILE:-}"
 
 # TLS settings
 export REDIS_TLS_ENABLED="${REDIS_TLS_ENABLED:-no}"
