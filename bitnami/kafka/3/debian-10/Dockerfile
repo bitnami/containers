@@ -24,7 +24,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/kafka/postunpack.sh
 ENV BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="3.0.0-debian-10-r78" \
+    BITNAMI_IMAGE_VERSION="3.0.0-debian-10-r79" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/kafka/bin:$PATH"
 
