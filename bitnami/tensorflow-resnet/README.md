@@ -13,10 +13,10 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 Before running the docker image you first need to download the ResNet model training checkpoint so it will be available for the TensorFlow Serving server.
 
 ```console
-$ mkdir /tmp/model-data
+$ mkdir -p /tmp/model-data/1
 $ cd /tmp/model-data
-$ wget 'http://download.tensorflow.org/models/official/20181001_resnet/savedmodels/resnet_v2_fp32_savedmodel_NHWC_jpg.tar.gz'
-$ tar xzf resnet_v2_fp32_savedmodel_NHWC_jpg.tar.gz --strip-components=2
+$ curl -o resnet_50_classification_1.tar.gz https://storage.googleapis.com/tfhub-modules/tensorflow/resnet_50/classification/1.tar.gz
+$ tar xzf resnet_50_classification_1.tar.gz -C 1
 ```
 
 ### Docker Compose
@@ -47,7 +47,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.7.0`, `2.7.0-debian-10-r5`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/2.7.0-debian-10-r5/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.7.0`, `2.7.0-debian-10-r6`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/2.7.0-debian-10-r6/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tensorflow-resnet GitHub repo](https://github.com/bitnami/bitnami-docker-tensorflow-resnet).
 
