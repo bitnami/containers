@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.7.0`, `2.7.0-debian-10-r58`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/2.7.0-debian-10-r58/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.7.0`, `2.7.0-debian-10-r59`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/2.7.0-debian-10-r59/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tensorflow-serving GitHub repo](https://github.com/bitnami/bitnami-docker-tensorflow-serving).
 
@@ -103,10 +103,10 @@ In this example, we will create a TensorFlow ResNet client instance that will co
 #### Step 1: Download the ResNet trained data
 
 ```console
-$ mkdir /tmp/model-data
-$ curl -o '/tmp/model-data/resnet_v2_fp32_savedmodel_NHWC_jpg.tar.gz' 'http://download.tensorflow.org/models/official/20181001_resnet/savedmodels/resnet_v2_fp32_savedmodel_NHWC_jpg.tar.gz'
+$ mkdir -p /tmp/model-data/1
 $ cd /tmp/model-data
-$ tar xzf resnet_v2_fp32_savedmodel_NHWC_jpg.tar.gz --strip-components=2
+$ curl -o resnet_50_classification_1.tar.gz https://storage.googleapis.com/tfhub-modules/tensorflow/resnet_50/classification/1.tar.gz
+$ tar xzf resnet_50_classification_1.tar.gz -C 1
 ```
 
 #### Step 2: Create a network
