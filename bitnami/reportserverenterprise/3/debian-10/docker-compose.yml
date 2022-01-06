@@ -19,6 +19,7 @@ services:
       - REPORTSERVER_DATABASE_NAME=bitnami_reportserver
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
+      - TOMCAT_EXTRA_JAVA_OPTS=--add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/jdk.internal.ref=ALL-UNNAMED --add-opens=java.base/jdk.internal.reflect=ALL-UNNAMED -Djavax.net.ssl.trustStoreType=JKS -Drs.configdir=/opt/bitnami/reportserver/WEB-INF/classes
     ports:
       - '80:8080'
       - '443:8443'
