@@ -31,7 +31,7 @@ $ docker run --name telegraf bitnami/telegraf:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.21.1`, `1.21.1-debian-10-r18`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-telegraf/blob/1.21.1-debian-10-r18/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.21.2`, `1.21.2-debian-10-r0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-telegraf/blob/1.21.2-debian-10-r0/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/telegraf GitHub repo](https://github.com/bitnami/bitnami-docker-telegraf).
 
