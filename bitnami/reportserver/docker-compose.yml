@@ -22,6 +22,7 @@ services:
       - REPORTSERVER_DATABASE_PORT_NUMBER=3306
       - REPORTSERVER_DATABASE_USER=bn_reportserver
       - REPORTSERVER_DATABASE_NAME=bitnami_reportserver
+      - TOMCAT_EXTRA_JAVA_OPTS=--add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/jdk.internal.ref=ALL-UNNAMED --add-opens=java.base/jdk.internal.reflect=ALL-UNNAMED -Djavax.net.ssl.trustStoreType=JKS -Drs.configdir=/opt/bitnami/reportserver/WEB-INF/classes
 volumes:
   mariadb_data:
     driver: local
