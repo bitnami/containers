@@ -5,15 +5,14 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-#set -o xtrace
+# set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
-. /opt/bitnami/scripts/librails.sh
 . /opt/bitnami/scripts/libbitnami.sh
 . /opt/bitnami/scripts/liblog.sh
 
 # Load Rails environment
-eval "$(rails_env)"
+. /opt/bitnami/scripts/rails-env.sh
 
 print_welcome_page
 

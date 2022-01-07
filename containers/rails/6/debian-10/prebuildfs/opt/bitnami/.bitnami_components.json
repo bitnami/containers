@@ -36,10 +36,10 @@
     },
     "rails": {
         "arch": "amd64",
-        "digest": "e29dc41aba4fa7a796eca7595b93720fbeb8eda0b4df53523627c8b0864eb0e8",
+        "digest": "e21bb9668113df37e88f3148374d13f4e430d1d8f0ad519a5ccc9033d207646e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "6.1.4-4-0"
+        "version": "6.1.4-4-1"
     },
     "ruby": {
         "arch": "amd64",
@@ -47,5 +47,12 @@
         "distro": "debian-10",
         "type": "NAMI",
         "version": "2.6.9-1"
+    },
+    "wait-for-port": {
+        "arch": "amd64",
+        "digest": "53c0f1a5361a68c298f31f6701c8e8a026e77f09805d54ecfeb52cf5998d7d06",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.0.1-4"
     }
 }

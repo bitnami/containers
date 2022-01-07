@@ -5,7 +5,7 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-# set -o xtrace # Uncomment this line for debugging purpose
+# set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
 . /opt/bitnami/scripts/librails.sh
@@ -13,8 +13,8 @@ set -o pipefail
 . /opt/bitnami/scripts/liblog.sh
 
 # Load Rails environment
-eval "$(rails_env)"
+. /opt/bitnami/scripts/rails-env.sh
 
-info "Granting non-root permissions to /app directory"
-mkdir -p /app
-chown -R bitnami:bitnami /app
+# Ensure required directories exist
+ensure_dir_exists "/app"
+configure_permissions_ownership "/app" -d "775" -f "664"
