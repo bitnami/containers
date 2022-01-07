@@ -21,3 +21,6 @@ symfony_validate
 
 # Ensure Symfony app is initialized
 symfony_initialize
+
+# Ensure all folders in /app are writable by the non-root "bitnami" user
+chown -R bitnami:bitnami /app
