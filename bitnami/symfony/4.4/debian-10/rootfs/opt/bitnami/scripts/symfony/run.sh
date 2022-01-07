@@ -15,6 +15,8 @@ set -o pipefail
 # Load Symfony environment
 . /opt/bitnami/scripts/symfony-env.sh
 
+cd /app
+
 declare -a start_flags=("-S" "0.0.0.0:${SYMFONY_PORT_NUMBER}" "-t" "/app/public")
 start_flags+=("$@")
 

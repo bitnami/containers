@@ -11,6 +11,7 @@
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libservice.sh
 . /opt/bitnami/scripts/libvalidations.sh
+
 # Load database library
 .  /opt/bitnami/scripts/libmysqlclient.sh
 
