@@ -6,23 +6,19 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_DATABASE=myapp
-
   express:
-    tty: true # Enables debugging capabilities when attached to this container.
     image: docker.io/bitnami/express:4
-    command: npm run development
+    ports:
+      - '3000:3000'
     environment:
       - PORT=3000
       - NODE_ENV=development
       - DATABASE_URL=mysql://root@mariadb/myapp
-
-      - SKIP_DB_WAIT=0
-      - SKIP_DB_MIGRATION=0
-      - SKIP_NPM_INSTALL=0
-      - SKIP_BOWER_INSTALL=0
+      - EXPRESS_SKIP_DB_WAIT=0
+      - EXPRESS_SKIP_DB_MIGRATION=0
+      - EXPRESS_SKIP_NPM_INSTALL=0
+      - EXPRESS_SKIP_BOWER_INSTALL=0
+    volumes:
+      - './my-project:/app'
     depends_on:
       - mariadb
-    ports:
-      - 3000:3000
-    volumes:
-      - .:/app
