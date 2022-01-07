@@ -6,22 +6,18 @@ services:
     environment:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=my_user
-      - MARIADB_DATABASE=my_database
-      - MARIADB_PASSWORD=my_password
-
+      - MARIADB_USER=bn_myapp
+      - MARIADB_DATABASE=bitnami_myapp
   myapp:
-    tty: true
     image: docker.io/bitnami/laravel:8
+    ports:
+      - '8000:8000'
     environment:
       - DB_HOST=mariadb
-      - DB_USERNAME=my_user
-      - DB_DATABASE=my_database
-      - DB_PASSWORD=my_password
+      - DB_PORT=3306
+      - DB_USERNAME=bn_myapp
+      - DB_DATABASE=bitnami_myapp
+    volumes:
+      - './my-project:/app'
     depends_on:
       - mariadb
-    ports:
-      - 3000:3000
-    volumes:
-      - ./:/app
-    # privileged: true # Privileged mode could be required to run this container under Windows
