@@ -8,10 +8,10 @@
     },
     "laravel": {
         "arch": "amd64",
-        "digest": "00c1efa1f869687e9097bc4038d765bd1614094206dc4c0a08b98fe454ec12e1",
+        "digest": "ca9830a3fa9d351e242b9e72b862ba71a02318a5544bd1570be09514621fad3a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.6.10-0"
+        "version": "8.6.10-2"
     },
     "node": {
         "arch": "amd64",
@@ -34,11 +34,11 @@
         "type": "NAMI",
         "version": "3.8.12-11"
     },
-    "tini": {
+    "wait-for-port": {
         "arch": "amd64",
-        "digest": "9b1f1c095944bac88a62c1b63f3bff1bb123aa7ccd371c908c0e5b41cec2528d",
+        "digest": "53c0f1a5361a68c298f31f6701c8e8a026e77f09805d54ecfeb52cf5998d7d06",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.19.0-1"
+        "version": "1.0.1-4"
     }
 }
