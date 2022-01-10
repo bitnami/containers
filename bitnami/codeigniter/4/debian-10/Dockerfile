@@ -11,7 +11,7 @@ RUN install_packages acl ca-certificates curl gzip libaudit1 libbsd0 libbz2-1.0 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.4.27-5" --checksum 75a6ef827d8d8fd5b645cb3004d49ddd1a7d23a9ab22f68ff4a3bd98f2eb06ca
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.4.22-0" --checksum 0f28660749aa65bc54937c37602dc9464064510ebd0a068b2a3e3be17ffab6e5
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "codeigniter" "4.1.6-1" --checksum efb34cab3e3598cb82750317af884eda139e9d6f45a134ad90b088fa914d6ad1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "codeigniter" "4.1.7-0" --checksum 19c31658f54aeea0d0b690c20ee3ae591578726a5a3a64d66e3c97b56e3148c8
 RUN /build/bitnami-user.sh
 
 COPY rootfs /
@@ -20,7 +20,7 @@ RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
 ENV ALLOW_EMPTY_PASSWORD="no" \
     BITNAMI_APP_NAME="codeigniter" \
-    BITNAMI_IMAGE_VERSION="4.1.6-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="4.1.7-debian-10-r0" \
     MARIADB_HOST="mariadb" \
     MARIADB_PORT_NUMBER="3306" \
     MARIADB_ROOT_PASSWORD="" \

@@ -1,10 +1,10 @@
 {
     "codeigniter": {
         "arch": "amd64",
-        "digest": "efb34cab3e3598cb82750317af884eda139e9d6f45a134ad90b088fa914d6ad1",
+        "digest": "19c31658f54aeea0d0b690c20ee3ae591578726a5a3a64d66e3c97b56e3148c8",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.1.6-1"
+        "version": "4.1.7-0"
     },
     "gosu": {
         "arch": "amd64",
