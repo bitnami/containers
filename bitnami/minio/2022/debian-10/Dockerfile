@@ -1,0 +1,32 @@
+FROM docker.io/bitnami/minideb:buster
+LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+ENV HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-10" \
+    OS_NAME="linux"
+
+COPY prebuildfs /
+# Install required system packages and dependencies
+RUN install_packages acl ca-certificates curl gzip jq libc6 procps tar
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-4" --checksum 53c0f1a5361a68c298f31f6701c8e8a026e77f09805d54ecfeb52cf5998d7d06
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio-client" "2022.1.7-0" --checksum 5f3bed87ed4feaf063d6ae4c646ebcb74c0e11a85b514e295306b5372d50d812
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio" "2022.1.8-0" --checksum d2aab3bdc1bd5987ebed1955a38f5418d0229d4b8f045b1d5ab94075e5e02594
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
+RUN chmod g+rwX /opt/bitnami
+
+COPY rootfs /
+RUN /opt/bitnami/scripts/minio-client/postunpack.sh
+RUN /opt/bitnami/scripts/minio/postunpack.sh
+ENV BITNAMI_APP_NAME="minio" \
+    BITNAMI_IMAGE_VERSION="2022.1.8-debian-10-r0" \
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/minio-client/bin:/opt/bitnami/minio/bin:$PATH"
+
+VOLUME [ "/certs", "/data" ]
+
+EXPOSE 9000 9001
+
+WORKDIR /opt/bitnami/minio-client
+USER 1001
+ENTRYPOINT [ "/opt/bitnami/scripts/minio/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/minio/run.sh" ]
