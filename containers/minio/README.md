@@ -47,7 +47,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2021`, `2021-debian-10`, `2021.12.29`, `2021.12.29-debian-10-r10`, `latest` (2021/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2021.12.29-debian-10-r10/2021/debian-10/Dockerfile)
+* [`2022`, `2022-debian-10`, `2022.1.8`, `2022.1.8-debian-10-r0`, `latest` (2022/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2022.1.8-debian-10-r0/2022/debian-10/Dockerfile)
+* [`2021`, `2021-debian-10`, `2021.12.29`, `2021.12.29-debian-10-r10` (2021/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2021.12.29-debian-10-r10/2021/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/minio GitHub repo](https://github.com/bitnami/bitnami-docker-minio).
 
@@ -68,7 +69,7 @@ $ docker pull bitnami/minio:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/minio:latest 'https://github.com/bitnami/bitnami-docker-minio.git#master:2021/debian-10'
+$ docker build -t bitnami/minio:latest 'https://github.com/bitnami/bitnami-docker-minio.git#master:2022/debian-10'
 ```
 
 ## Persisting your database
