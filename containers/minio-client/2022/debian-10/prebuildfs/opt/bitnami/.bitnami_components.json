@@ -1,0 +1,16 @@
+{
+    "gosu": {
+        "arch": "amd64",
+        "digest": "3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.14.0-0"
+    },
+    "minio-client": {
+        "arch": "amd64",
+        "digest": "5f3bed87ed4feaf063d6ae4c646ebcb74c0e11a85b514e295306b5372d50d812",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "2022.1.7-0"
+    }
+}
