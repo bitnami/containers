@@ -31,8 +31,7 @@ $ docker run --name kong-ingress-controller bitnami/kong-ingress-controller:late
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.0.5`, `2.0.5-debian-10-r50`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/blob/2.0.5-debian-10-r50/2/debian-10/Dockerfile)
-* [`1`, `1-debian-10`, `1.3.1`, `1.3.1-debian-10-r201` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/blob/1.3.1-debian-10-r201/1/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.0.5`, `2.0.5-debian-10-r51`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/blob/2.0.5-debian-10-r51/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kong-ingress-controller GitHub repo](https://github.com/bitnami/bitnami-docker-kong-ingress-controller).
 
@@ -67,10 +66,6 @@ $ docker run --rm --name kong-ingress-controller bitnami/kong-ingress-controller
 ```
 
 Consult the [kong-ingress-controller Reference Documentation](https://docs.konghq.com/kubernetes-ingress-controller/)
-
-## Branch Deprecation Notice
-
-Kong Ingress Controller's branch 1 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 12-16-2021
 
 ## Contributing
 
