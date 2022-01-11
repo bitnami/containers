@@ -9,24 +9,23 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaudit1 libbsd0 libbz2-1.0 libc6 libcap-ng0 libcom-err2 libcurl4 libexpat1 libffi6 libfftw3-double3 libfontconfig1 libfreetype6 libgcc1 libgcrypt20 libglib2.0-0 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblcms2-2 libldap-2.4-2 liblqr-1-0 libltdl7 liblzma5 libmagickcore-6.q16-6 libmagickwand-6.q16-6 libmcrypt4 libmemcached11 libmemcachedutil2 libncurses6 libnettle6 libnghttp2-14 libonig5 libp11-kit0 libpam0g libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsodium23 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5deb1 libtinfo6 libunistring2 libuuid1 libwebp6 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxslt1.1 libzip4 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.4.27-5" --checksum 75a6ef827d8d8fd5b645cb3004d49ddd1a7d23a9ab22f68ff4a3bd98f2eb06ca
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.52-0" --checksum 90dd9776f09a61d4ed0a0c99d31fd1923639c987fe1f367e866dd31b6f6da5ca
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.27-1" --checksum 2286e3101af00eaba55cdc0aab27a0ea020582a4b1b1f3af9fbf6c4c9fc23017
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-4" --checksum 9b09b8c13e726569fd846abef20228b2e29de456805994e512f3b47f74cf742d
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dokuwiki" "20200729.0.0-2" --checksum ef85bcac977f92a43b14dfa89011f240216a3f27936b9e982e0925c42d2c352c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.4.27-6" --checksum 6c8044f64e2439a217bfd6dbe377a73a4bf2b901091b42b69e588dc0e41939a3
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.52-1" --checksum f7134097e1be937a1d6dff36fe32a835ec4279100abc828e58f0563d541895bc
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.27-2" --checksum 63dc5c54bbd2a981bc1fc6d070bf6d3b0024e2d9f359112bd541624a0bb0cec2
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-5" --checksum 9e312b4a7e16a55d08e67c4fd69c91000e4dcc4af149d59915c49375b83852af
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dokuwiki" "20200729.0.0-3" --checksum 4cbd1e0afa3aa24ea0618876a76637917fb058abab00b8f8e786d92222e10eea
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/apache/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
+RUN /opt/bitnami/scripts/apache/postunpack.sh
 RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/dokuwiki/postunpack.sh
-ENV APACHE_ENABLE_CUSTOM_PORTS="no" \
-    APACHE_HTTPS_PORT_NUMBER="" \
+ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="dokuwiki" \
-    BITNAMI_IMAGE_VERSION="20200729.0.0-debian-10-r469" \
+    BITNAMI_IMAGE_VERSION="20200729.0.0-debian-10-r470" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080 8443
