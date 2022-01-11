@@ -9,14 +9,14 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/oauth2-proxy-7.2.1-0-linux-amd64-debian-10.tar.gz && \
-    echo "2ade4100a5ce080bdd02f1788263a9492be193645ab8d70d2d346294472b3eb9  /tmp/bitnami/pkg/cache/oauth2-proxy-7.2.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/oauth2-proxy-7.2.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/oauth2-proxy-7.2.1-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/oauth2-proxy-7.2.1-1-linux-amd64-debian-10.tar.gz && \
+    echo "611493a5e3e4fa3af2139ac5c2c53a758161cfbe63e0e10e2558150e2f6f9685  /tmp/bitnami/pkg/cache/oauth2-proxy-7.2.1-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/oauth2-proxy-7.2.1-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/oauth2-proxy-7.2.1-1-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="oauth2-proxy" \
-    BITNAMI_IMAGE_VERSION="7.2.1-debian-10-r17" \
+    BITNAMI_IMAGE_VERSION="7.2.1-debian-10-r18" \
     PATH="/opt/bitnami/oauth2-proxy/bin:$PATH"
 
 EXPOSE 4180 8080
