@@ -1,16 +1,16 @@
 {
     "jenkins-exporter": {
         "arch": "amd64",
-        "digest": "e855d46e7b5b38d4dd97297e2ff295531eed8f752115bf34cafda0d4befbd5b7",
+        "digest": "0aac27a0521a267e6afc4ca985d44f6e6861341b055fc4db83f572a5fe6eb68e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.20171225.0-4"
+        "version": "0.20171225.0-5"
     },
     "python": {
         "arch": "amd64",
-        "digest": "41346bafdfca45e37e412c4c4c5df351de0119b430243575e78ef63e7c838c7d",
+        "digest": "e8ff93cf01017825e0a1b21e81947499d5da391046663d5dc4b4f9b44335c1c2",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.7.18-14"
+        "version": "2.7.18-15"
     }
 }
