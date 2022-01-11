@@ -14,7 +14,7 @@ services:
       - POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS=1
       - REPMGR_PASSWORD=repmgrpassword
       - REPMGR_PRIMARY_HOST=pg-0
-      - REPMGR_PARTNER_NODES=pg-0,pg-1
+      - REPMGR_PARTNER_NODES=pg-1,pg-0
       - REPMGR_NODE_NAME=pg-0
       - REPMGR_NODE_NETWORK_NAME=pg-0
   pg-1:
