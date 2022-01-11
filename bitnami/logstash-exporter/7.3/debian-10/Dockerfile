@@ -9,14 +9,14 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/logstash-exporter-7.3.0-2-linux-amd64-debian-10.tar.gz && \
-    echo "956302f8898c72e45dc74bd6ac0a1017776290b6b22fba50bb528e122d86af9b  /tmp/bitnami/pkg/cache/logstash-exporter-7.3.0-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/logstash-exporter-7.3.0-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/logstash-exporter-7.3.0-2-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/logstash-exporter-7.3.0-3-linux-amd64-debian-10.tar.gz && \
+    echo "96bf31170f7bd3d9900daef6899330c4abb918c833f362ae7250454cf237f5e6  /tmp/bitnami/pkg/cache/logstash-exporter-7.3.0-3-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/logstash-exporter-7.3.0-3-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/logstash-exporter-7.3.0-3-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="logstash-exporter" \
-    BITNAMI_IMAGE_VERSION="7.3.0-debian-10-r406" \
+    BITNAMI_IMAGE_VERSION="7.3.0-debian-10-r407" \
     PATH="/opt/bitnami/logstash-exporter/bin:$PATH"
 
 EXPOSE 9198
