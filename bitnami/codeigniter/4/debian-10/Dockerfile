@@ -8,29 +8,18 @@ ENV OS_ARCH="amd64" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaudit1 libbsd0 libbz2-1.0 libc6 libcap-ng0 libcom-err2 libcurl4 libexpat1 libffi6 libfftw3-double3 libfontconfig1 libfreetype6 libgcc1 libgcrypt20 libglib2.0-0 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjemalloc2 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblcms2-2 libldap-2.4-2 liblqr-1-0 libltdl7 liblzma5 libmagickcore-6.q16-6 libmagickwand-6.q16-6 libmcrypt4 libmemcached11 libmemcachedutil2 libncurses6 libnettle6 libnghttp2-14 libonig5 libp11-kit0 libpam0g libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsodium23 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5deb1 libtinfo6 libunistring2 libuuid1 libwebp6 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxslt1.1 libzip4 procps sudo tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.4.27-5" --checksum 75a6ef827d8d8fd5b645cb3004d49ddd1a7d23a9ab22f68ff4a3bd98f2eb06ca
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.4.22-0" --checksum 0f28660749aa65bc54937c37602dc9464064510ebd0a068b2a3e3be17ffab6e5
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "codeigniter" "4.1.7-0" --checksum 19c31658f54aeea0d0b690c20ee3ae591578726a5a3a64d66e3c97b56e3148c8
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.4.27-6" --checksum 6c8044f64e2439a217bfd6dbe377a73a4bf2b901091b42b69e588dc0e41939a3
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.4.22-1" --checksum 37ba718ad68506a9ea0705c12f013a6afc7210c82460769ffba0f16759caae95
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "codeigniter" "4.1.7-1" --checksum 896498d1282359653f7566274a6fe5ecdf9b395ad269eed4f946e482e15a150f
 RUN /build/bitnami-user.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/codeigniter/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
-ENV ALLOW_EMPTY_PASSWORD="no" \
-    BITNAMI_APP_NAME="codeigniter" \
-    BITNAMI_IMAGE_VERSION="4.1.7-debian-10-r0" \
-    MARIADB_HOST="mariadb" \
-    MARIADB_PORT_NUMBER="3306" \
-    MARIADB_ROOT_PASSWORD="" \
-    MARIADB_ROOT_USER="root" \
-    MYSQL_CLIENT_CREATE_DATABASE_NAME="" \
-    MYSQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
-    MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES="ALL" \
-    MYSQL_CLIENT_CREATE_DATABASE_USER="" \
-    MYSQL_CLIENT_ENABLE_SSL="no" \
-    MYSQL_CLIENT_SSL_CA_FILE="" \
+ENV BITNAMI_APP_NAME="codeigniter" \
+    BITNAMI_IMAGE_VERSION="4.1.7-debian-10-r1" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/codeigniter/bin:$PATH" \
     PHP_ENABLE_OPCACHE="0"
 
