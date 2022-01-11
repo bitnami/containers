@@ -9,15 +9,15 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/contour-1.19.1-0-linux-amd64-debian-10.tar.gz && \
-    echo "6ba22bae62af84f808b1e7a0474d9a95bb08ae220200c18c545eab6475539a4f  /tmp/bitnami/pkg/cache/contour-1.19.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/contour-1.19.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/contour-1.19.1-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/contour-1.19.1-1-linux-amd64-debian-10.tar.gz && \
+    echo "e8cdda4ff6845680a94ea2557ab7c8e18ba487c4a7a43350030037e66a7cd8bd  /tmp/bitnami/pkg/cache/contour-1.19.1-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/contour-1.19.1-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/contour-1.19.1-1-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
 RUN ln -s /opt/bitnami/contour/bin/contour /bin/contour
 
 ENV BITNAMI_APP_NAME="contour" \
-    BITNAMI_IMAGE_VERSION="1.19.1-debian-10-r56" \
+    BITNAMI_IMAGE_VERSION="1.19.1-debian-10-r57" \
     PATH="/opt/bitnami/contour/bin:$PATH"
 
 USER 1001
