@@ -9,15 +9,15 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip jq procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kubectl-1.23.1-0-linux-amd64-debian-10.tar.gz && \
-    echo "fa7caa12251c51b8d8eac9d4f35182ec76f3868b4ad9c49e33a1a36bc54d2889  /tmp/bitnami/pkg/cache/kubectl-1.23.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/kubectl-1.23.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/kubectl-1.23.1-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kubectl-1.23.1-1-linux-amd64-debian-10.tar.gz && \
+    echo "c31e2f5f9f96816b27e25132d9030b3232b2a30dd75ffd486b91dc8e0fdb7c44  /tmp/bitnami/pkg/cache/kubectl-1.23.1-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/kubectl-1.23.1-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/kubectl-1.23.1-1-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /.kube && chmod g+rwX /.kube
 
 ENV BITNAMI_APP_NAME="kubectl" \
-    BITNAMI_IMAGE_VERSION="1.23.1-debian-10-r23" \
+    BITNAMI_IMAGE_VERSION="1.23.1-debian-10-r24" \
     PATH="/opt/bitnami/kubectl/bin:$PATH"
 
 USER 1001
