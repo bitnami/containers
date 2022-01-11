@@ -1,16 +1,16 @@
 {
     "chartmuseum": {
         "arch": "amd64",
-        "digest": "de10f2d7e5c4832c487630f55d1dd1bde770586c31392d4c664eb434a001badf",
+        "digest": "d82be15e924205f0fcc254673542c80a9361fcf0a13e9ba178ca25b6fee99b06",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.13.1-2"
+        "version": "0.13.1-3"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e",
+        "digest": "16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-0"
+        "version": "1.14.0-1"
     }
 }
