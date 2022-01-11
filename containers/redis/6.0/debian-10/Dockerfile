@@ -9,9 +9,9 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libssl1.1 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-4" --checksum 53c0f1a5361a68c298f31f6701c8e8a026e77f09805d54ecfeb52cf5998d7d06
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis" "6.0.16-2" --checksum 860e600519466aaee1c16e8db3dba8375d6873e53f35d872760ffc112d497a42
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-5" --checksum 1e34030c18f0ec2467fa5f1b1fbad24add217f671c3a61628f7b8671391f9676
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis" "6.0.16-3" --checksum dae4f4917a2fabc54b1818ff1a0c477746e7ea42a0080a264484b9193741b989
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
 RUN chmod g+rwX /opt/bitnami
 RUN ln -s /opt/bitnami/scripts/redis/entrypoint.sh /entrypoint.sh
 RUN ln -s /opt/bitnami/scripts/redis/run.sh /run.sh
@@ -19,7 +19,7 @@ RUN ln -s /opt/bitnami/scripts/redis/run.sh /run.sh
 COPY rootfs /
 RUN /opt/bitnami/scripts/redis/postunpack.sh
 ENV BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="6.0.16-debian-10-r96" \
+    BITNAMI_IMAGE_VERSION="6.0.16-debian-10-r97" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/redis/bin:$PATH"
 
 EXPOSE 6379
