@@ -358,7 +358,6 @@ repmgr_inject_postgresql_configuration() {
     postgresql_set_property "archive_command" "/bin/true"
     postgresql_configure_connections
     postgresql_configure_timezone
-    postgresql_configure_synchronous_replication
     # Redirect logs to POSTGRESQL_LOG_FILE
     postgresql_configure_logging
     postgresql_set_property "logging_collector" "on"
@@ -724,6 +723,10 @@ repmgr_initialize() {
             repmgr_register_primary
             # Allow running custom initialization scripts
             postgresql_custom_init_scripts
+            # Set synchronous replication
+            POSTGRESQL_CLUSTER_APP_NAME="$REPMGR_PARTNER_NODES"
+            export POSTGRESQL_CLUSTER_APP_NAME
+            postgresql_configure_synchronous_replication
         elif is_boolean_yes "$REPMGR_UPGRADE_EXTENSION"; then
             # Upgrade repmgr extension
             postgresql_start_bg

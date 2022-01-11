@@ -11,6 +11,7 @@
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libservice.sh
 . /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/libnet.sh
 
 ########################
 # Configure libnss_wrapper so PostgreSQL commands work with a random user.
@@ -388,9 +389,27 @@ postgresql_configure_replication_parameters() {
 #   None
 #########################
 postgresql_configure_synchronous_replication() {
+    local replication_nodes=""
+    info "Configuring synchronous_replication"
+
+    # Check for comma separate values
+    # When using repmgr, POSTGRESQL_CLUSTER_APP_NAME will contain the list of nodes to be synchronous
+    # This list need to cleaned from other things but node names.
+    if [[ "$POSTGRESQL_CLUSTER_APP_NAME" == *","* ]]; then
+        read -r -a nodes <<<"$(tr ',;' ' ' <<<"${POSTGRESQL_CLUSTER_APP_NAME}")"
+        for node in "${nodes[@]}"; do
+            [[ "$node" =~ ^(([^:/?#]+):)?// ]] || node="tcp://${node}"
+
+            host="$(parse_uri "$node" 'host')"
+            replication_nodes="${replication_nodes}${replication_nodes:+,}\"${host}\""
+        done
+    else
+        replication_nodes="\"${POSTGRESQL_CLUSTER_APP_NAME}\""
+    fi
+
     if ((POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS > 0)); then
         postgresql_set_property "synchronous_commit" "$POSTGRESQL_SYNCHRONOUS_COMMIT_MODE"
-        postgresql_set_property "synchronous_standby_names" "${POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS} (\"${POSTGRESQL_CLUSTER_APP_NAME}\")"
+        postgresql_set_property "synchronous_standby_names" "${POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS} (${replication_nodes})"
     fi
 }
 
