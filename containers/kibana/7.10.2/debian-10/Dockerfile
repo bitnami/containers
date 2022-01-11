@@ -10,15 +10,15 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 libstdc++6 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.16.2-0" --checksum 8200ea4477d139cb9be607a962760075e9240a760b56fb2f1f870a7facbf3e69
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kibana" "7.10.2-3" --checksum 91416851cee9f6dff3bb5a60878cc99cc60f7fcb9f7ffb1346d82126914cecfa
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.16.2-1" --checksum 5277acb6199fc2950117bcf4ebde8de80376adc02725407a587110b63bbbb847
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kibana" "7.10.2-4" --checksum 1f734461c886bda770636fb7efec86fba318a4198667ae1a8064ad785b4fa85d
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/kibana/postunpack.sh
 ENV BITNAMI_APP_NAME="kibana" \
-    BITNAMI_IMAGE_VERSION="7.10.2-debian-10-r318"
+    BITNAMI_IMAGE_VERSION="7.10.2-debian-10-r319"
 
 EXPOSE 5601
 
