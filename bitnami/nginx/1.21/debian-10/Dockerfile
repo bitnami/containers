@@ -9,9 +9,9 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgeoip1 libpcre3 libssl1.1 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-4" --checksum 9b09b8c13e726569fd846abef20228b2e29de456805994e512f3b47f74cf742d
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.21.5-0" --checksum e2c355bf9aacd333d1efd311aa016f412fe701aad136a981f6c5993a3d9bc82f
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-5" --checksum 9e312b4a7e16a55d08e67c4fd69c91000e4dcc4af149d59915c49375b83852af
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.21.5-1" --checksum 44098a9c9231cb790aaf93d572d2b4c4cab3858f9a8d273dbb04e9037b34ede0
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
 RUN chmod g+rwX /opt/bitnami
 RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
 RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
@@ -19,8 +19,7 @@ RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
 ENV BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.21.5-debian-10-r12" \
-    NGINX_ENABLE_CUSTOM_PORTS="no" \
+    BITNAMI_IMAGE_VERSION="1.21.5-debian-10-r13" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/nginx/sbin:$PATH"
