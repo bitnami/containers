@@ -9,16 +9,16 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-registry" "2.4.1-0" --checksum 74eb59d0e655cbe30eaeeacaadec00a04d3fc5695fc022a49714a5257d57e5e0
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.16.2-0" --checksum 8200ea4477d139cb9be607a962760075e9240a760b56fb2f1f870a7facbf3e69
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-registryctl" "2.4.1-0" --checksum 8a90b286a9ea35fc7e9e341769643c55415675078f8e0e4d64eaa3a012441870
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-registry" "2.4.1-1" --checksum fd19413ec52eb1d7c457eac989111d7291469495d5cf9395054f59edae874bfc
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.16.2-1" --checksum 5277acb6199fc2950117bcf4ebde8de80376adc02725407a587110b63bbbb847
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-registryctl" "2.4.1-1" --checksum 5fd017d1782ed98a3025aa91f4276e1be5fdd1014521ef4662e14541694e8208
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-registryctl/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-registryctl" \
-    BITNAMI_IMAGE_VERSION="2.4.1-debian-10-r23" \
+    BITNAMI_IMAGE_VERSION="2.4.1-debian-10-r24" \
     PATH="/opt/bitnami/harbor-registry/bin:/opt/bitnami/common/bin:/opt/bitnami/harbor-registryctl/bin:$PATH"
 
 VOLUME [ "/etc/registry", "/etc/registryctl", "/storage", "/var/lib/registry" ]
