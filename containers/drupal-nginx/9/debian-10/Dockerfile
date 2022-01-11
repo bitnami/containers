@@ -9,34 +9,22 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl dirmngr gnupg gzip libaudit1 libbsd0 libbz2-1.0 libc6 libcap-ng0 libcom-err2 libcurl4 libexpat1 libffi6 libfftw3-double3 libfontconfig1 libfreetype6 libgcc1 libgcrypt20 libgeoip1 libglib2.0-0 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjemalloc2 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblcms2-2 libldap-2.4-2 liblqr-1-0 libltdl7 liblzma5 libmagickcore-6.q16-6 libmagickwand-6.q16-6 libmemcached11 libmemcachedutil2 libncurses6 libnettle6 libnghttp2-14 libonig5 libp11-kit0 libpam0g libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsodium23 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5deb1 libtinfo6 libunistring2 libuuid1 libwebp6 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxslt1.1 libzip4 procps tar unzip zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "8.1.1-5" --checksum 83e4dfd2ee7752a054f4965a4d21dc34ccb735782ee3fe3a2091a18fdbc94732
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.21.5-0" --checksum e2c355bf9aacd333d1efd311aa016f412fe701aad136a981f6c5993a3d9bc82f
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.32-0" --checksum 4a211faa9436c9747dfc4374cb9e8a7f9b0065dfc58dd4784cef0f5029c2e65e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-4" --checksum 9b09b8c13e726569fd846abef20228b2e29de456805994e512f3b47f74cf742d
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "drupal" "9.3.2-0" --checksum 5b973d79a6ca751e0d868f30e87f2fcac987aa80d977fe75687dcdf68f9bef09
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "8.1.1-6" --checksum 7f3c110ff62e5b0a97ba3f2049e0e005e7cd3afe81e86a76f17fc38b4d547d51
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.21.5-1" --checksum 44098a9c9231cb790aaf93d572d2b4c4cab3858f9a8d273dbb04e9037b34ede0
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.32-1" --checksum 727834a55587746f90b159966c9abf2ce31a6effbe83d8c38ee6250641c9a22a
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-5" --checksum 9e312b4a7e16a55d08e67c4fd69c91000e4dcc4af149d59915c49375b83852af
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "drupal" "9.3.2-1" --checksum dc3c56a16b39cb7ebe2212251fc4edd8e11d7fc0758234a8de4572b9256a0302
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
+RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/nginx-php-fpm/postunpack.sh
 RUN /opt/bitnami/scripts/drupal/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
-ENV ALLOW_EMPTY_PASSWORD="no" \
-    BITNAMI_APP_NAME="drupal-nginx" \
-    BITNAMI_IMAGE_VERSION="9.3.2-debian-10-r4" \
-    MARIADB_HOST="mariadb" \
-    MARIADB_PORT_NUMBER="3306" \
-    MARIADB_ROOT_PASSWORD="" \
-    MARIADB_ROOT_USER="root" \
-    MYSQL_CLIENT_CREATE_DATABASE_NAME="" \
-    MYSQL_CLIENT_CREATE_DATABASE_PASSWORD="" \
-    MYSQL_CLIENT_CREATE_DATABASE_PRIVILEGES="ALL" \
-    MYSQL_CLIENT_CREATE_DATABASE_USER="" \
-    MYSQL_CLIENT_ENABLE_SSL="no" \
-    MYSQL_CLIENT_SSL_CA_FILE="" \
-    NGINX_ENABLE_CUSTOM_PORTS="no" \
+ENV BITNAMI_APP_NAME="drupal-nginx" \
+    BITNAMI_IMAGE_VERSION="9.3.2-debian-10-r5" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/nginx/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/drupal/vendor/bin:$PATH"
