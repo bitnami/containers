@@ -999,18 +999,20 @@ mongodb_configure_primary() {
 #   None
 # Arguments:
 #   $1 - node
+#   $2 - port
 # Returns:
 #   Boolean
 #########################
 mongodb_wait_confirmation() {
     local -r node="${1:?node is required}"
+    local -r port="${2:?port is required}"
 
-    debug "Waiting until ${node} is added to the replica set..."
-    if ! retry_while "mongodb_node_currently_in_cluster ${node}" "$MONGODB_MAX_TIMEOUT"; then
-        error "Unable to confirm that ${node} has been added to the replica set!"
+    debug "Waiting until ${node}:${port} is added to the replica set..."
+    if ! retry_while "mongodb_node_currently_in_cluster ${node} ${port}" "$MONGODB_MAX_TIMEOUT"; then
+        error "Unable to confirm that ${node}:${port} has been added to the replica set!"
         exit 1
     else
-        info "Node ${node} is confirmed!"
+        info "Node ${node}:${port} is confirmed!"
     fi
 }
 
@@ -1136,7 +1138,7 @@ mongodb_configure_secondary() {
 
     mongodb_wait_for_primary_node "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD"
 
-    if mongodb_node_currently_in_cluster "$node"; then
+    if mongodb_node_currently_in_cluster "$node" "$port"; then
         info "Node currently in the cluster"
     else
         info "Adding node to the cluster"
@@ -1144,7 +1146,7 @@ mongodb_configure_secondary() {
             error "Secondary node did not get ready"
             exit 1
         fi
-        mongodb_wait_confirmation "$node"
+        mongodb_wait_confirmation "$node" "$port"
 
         # Ensure that secondary nodes do not count as voting members until they are fully initialized
         # https://docs.mongodb.com/manual/reference/method/rs.add/#behavior
@@ -1178,7 +1180,7 @@ mongodb_configure_hidden() {
 
     mongodb_wait_for_primary_node "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD"
 
-    if mongodb_node_currently_in_cluster "$node"; then
+    if mongodb_node_currently_in_cluster "$node" "$port"; then
         info "Node currently in the cluster"
     else
         info "Adding hidden node to the cluster"
@@ -1186,7 +1188,7 @@ mongodb_configure_hidden() {
             error "Hidden node did not get ready"
             exit 1
         fi
-        mongodb_wait_confirmation "$node"
+        mongodb_wait_confirmation "$node" "$port"
     fi
 }
 
@@ -1206,7 +1208,7 @@ mongodb_configure_arbiter() {
 
     mongodb_wait_for_primary_node "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD"
 
-    if mongodb_node_currently_in_cluster "$node"; then
+    if mongodb_node_currently_in_cluster "$node" "$port"; then
         info "Node currently in the cluster"
     else
         info "Configuring MongoDB arbiter node"
@@ -1214,7 +1216,7 @@ mongodb_configure_arbiter() {
             error "Arbiter node did not get ready"
             exit 1
         fi
-        mongodb_wait_confirmation "$node"
+        mongodb_wait_confirmation "$node" "$port"
     fi
 }
 
@@ -1265,11 +1267,13 @@ mongodb_wait_until_sync_complete() {
 #   MONGODB_*
 # Arguments:
 #   $1 - node
+#   $2 - port
 # Returns:
 #   None
 #########################
 mongodb_node_currently_in_cluster() {
     local -r node="${1:?node is required}"
+    local -r port="${2:?port is required}"
     local result
 
     result=$(
@@ -1277,7 +1281,7 @@ mongodb_node_currently_in_cluster() {
 rs.status().members
 EOF
     )
-    grep -q -E "\"${node}(:[0-9]+)?\"" <<<"$result"
+    grep -q -E "\"${node}(:${port})?\"" <<<"$result"
 }
 
 ########################
