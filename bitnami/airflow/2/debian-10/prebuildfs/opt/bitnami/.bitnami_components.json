@@ -1,51 +1,51 @@
 {
     "airflow": {
         "arch": "amd64",
-        "digest": "9fb5bd474d69eee8a63cb72ee28a1acfa7694258a57622d0dbe64eb733ceffdc",
+        "digest": "4dd472950d482e44cc0210666c5af0e41611001bd8a5bbc8e4d246b04d033223",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.2.3-0"
+        "version": "2.2.3-1"
     },
     "git": {
         "arch": "amd64",
-        "digest": "3da2501870c9c3efe8cfa47b7bba894d8d97292a5274b682af1eded3b671641b",
+        "digest": "424d40a4b5af1fcddbfd407ac97543378864d1b4539064ceef428e526bfd4f0e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.34.1-0"
+        "version": "2.34.1-1"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e",
+        "digest": "16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-0"
+        "version": "1.14.0-1"
     },
     "ini-file": {
         "arch": "amd64",
-        "digest": "3d189e4b1fcdc330fb84c14a7c6fb296deff37d3142d9a17fe0c9a5dba51ef6d",
+        "digest": "d7c3c81138361e10e6ddd7eae3ac323740a8477ce395a8c00ab0dba76fd25948",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.4.1-0"
+        "version": "1.4.1-1"
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "f32958c288efd50fb29133d614ce19dc46ff40add10fc82254b29c8a46df324c",
+        "digest": "53e64e567d4563efaea05f4e9e9eead3a3fbec1213a05528a5eeec2d2f8e8a43",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.19.0-0"
+        "version": "10.19.0-1"
     },
     "python": {
         "arch": "amd64",
-        "digest": "18529e5433b2ff7007527ec2fa5b608cb6432e27ec3e6a9f3ab94fcdb7586475",
+        "digest": "c081f7f9663d4d64e7f26d6e6a77b3860ee1f39c309bd564f801c39192042d2f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.8.12-11"
+        "version": "3.8.12-12"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "53c0f1a5361a68c298f31f6701c8e8a026e77f09805d54ecfeb52cf5998d7d06",
+        "digest": "1e34030c18f0ec2467fa5f1b1fbad24add217f671c3a61628f7b8671391f9676",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-4"
+        "version": "1.0.1-5"
     }
 }
