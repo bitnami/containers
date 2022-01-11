@@ -9,10 +9,10 @@ ENV HOME="/app" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages build-essential ca-certificates curl git gzip libc6 libcap2-bin libcom-err2 libgcc1 libgssapi-krb5-2 libicu-dev libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblttng-ust-dev libsqlite3-dev libssl-dev libstdc++6 pkg-config procps tar unzip wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/aspnet-core-5.0.13-0-linux-amd64-debian-10.tar.gz && \
-    echo "fb251c431077c20594578fd9633164e20b74fce440ae94f68ea53f924165a917  /tmp/bitnami/pkg/cache/aspnet-core-5.0.13-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/aspnet-core-5.0.13-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/aspnet-core-5.0.13-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/aspnet-core-5.0.13-1-linux-amd64-debian-10.tar.gz && \
+    echo "b24034cd60ce6108eecd411f04efa7f6b095277f3d0367d609388dba0890edb6  /tmp/bitnami/pkg/cache/aspnet-core-5.0.13-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/aspnet-core-5.0.13-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/aspnet-core-5.0.13-1-linux-amd64-debian-10.tar.gz
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS    0/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
@@ -20,7 +20,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/aspnet-core/postunpack.sh
 ENV BITNAMI_APP_NAME="aspnet-core" \
-    BITNAMI_IMAGE_VERSION="5.0.13-debian-10-r25" \
+    BITNAMI_IMAGE_VERSION="5.0.13-debian-10-r26" \
     DOTNET_CLI_HOME="/app" \
     DOTNET_ROOT="/opt/bitnami/aspnet-core/bin" \
     PATH="/opt/bitnami/aspnet-core/bin:$PATH"
