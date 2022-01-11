@@ -1,44 +1,44 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e",
+        "digest": "16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-0"
+        "version": "1.14.0-1"
     },
     "node": {
         "arch": "amd64",
-        "digest": "5753bbbe5052000888c24ef8c918cfc45577878b03cc4dcfe7d53ea562a48e5a",
+        "digest": "d71d3e408243a79aa4f4b1513fbb31ad3e3ecb6d40f1a5fa884ac355d64188d8",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "14.18.2-0"
+        "version": "14.18.2-1"
     },
     "odoo": {
         "arch": "amd64",
-        "digest": "88182e148e7ad50c769e0508b6b00ebf6c6884c6127f2303cf85018957ca536f",
+        "digest": "16b59dd09620dc6f749fd85f2d733affe0d9a9339d1c25650d58e6db8fad2ca6",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "13.0.20220110-0"
+        "version": "13.0.20220110-1"
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "eb9051af5a9077ff41349b271ffd1029af7088bcf3d1f5ac81c2c6707801fbec",
+        "digest": "f0b3010943243515cfa8249978f690cb6c9e79b91f1aeafe9a3abc59321d43af",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "13.5.0-0"
+        "version": "13.5.0-1"
     },
     "python": {
         "arch": "amd64",
-        "digest": "18529e5433b2ff7007527ec2fa5b608cb6432e27ec3e6a9f3ab94fcdb7586475",
+        "digest": "c081f7f9663d4d64e7f26d6e6a77b3860ee1f39c309bd564f801c39192042d2f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.8.12-11"
+        "version": "3.8.12-12"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "9b09b8c13e726569fd846abef20228b2e29de456805994e512f3b47f74cf742d",
+        "digest": "9e312b4a7e16a55d08e67c4fd69c91000e4dcc4af149d59915c49375b83852af",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-4"
+        "version": "1.0.1-5"
     }
 }
