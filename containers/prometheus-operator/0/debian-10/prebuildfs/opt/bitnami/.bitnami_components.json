@@ -1,9 +1,9 @@
 {
     "prometheus-operator": {
         "arch": "amd64",
-        "digest": "d1d737d1682c98bf256a2f3ec021e840a19c7b5c2f67a1bc65bcc96fa9b46400",
+        "digest": "ce71292922d401b55c25923c7ca47971792621862749f0fd362c83a7f097e8c6",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.53.1-0"
+        "version": "0.53.1-1"
     }
 }
