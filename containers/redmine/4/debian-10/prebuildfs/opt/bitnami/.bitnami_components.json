@@ -1,51 +1,51 @@
 {
     "git": {
         "arch": "amd64",
-        "digest": "3da2501870c9c3efe8cfa47b7bba894d8d97292a5274b682af1eded3b671641b",
+        "digest": "424d40a4b5af1fcddbfd407ac97543378864d1b4539064ceef428e526bfd4f0e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.34.1-0"
+        "version": "2.34.1-1"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e",
+        "digest": "16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-0"
+        "version": "1.14.0-1"
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "0f28660749aa65bc54937c37602dc9464064510ebd0a068b2a3e3be17ffab6e5",
+        "digest": "37ba718ad68506a9ea0705c12f013a6afc7210c82460769ffba0f16759caae95",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.4.22-0"
+        "version": "10.4.22-1"
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "caeddf6f0a758c6575d381061fe1c14fa4a2fbe8eb2ca5d53c54a9f95690c2fe",
+        "digest": "e7c77b459f86d801425c7fc4e3b4ae5d3d8b9d965513608568ecf8a160e9f05b",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "11.14.0-0"
+        "version": "11.14.0-1"
     },
     "redmine": {
         "arch": "amd64",
-        "digest": "4d15d836b42e544f66e7dbb920010effd903f3d0e2d5f15e5f7b68244add3b47",
+        "digest": "87d106d434509308e25935387046a6dc2e5e0476a4b20bd81d46463401854937",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.2.3-0"
+        "version": "4.2.3-1"
     },
     "ruby": {
         "arch": "amd64",
-        "digest": "44e353b2a0312b4ebff7953080128630594fac97f97fc29b5f3ff0bab3b56429",
+        "digest": "f8f60b6c685ff8cd5b7e7f2e9fcd87e9ec6021e9d6dda1d6d829a23a0f2d5c0e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.6.9-1"
+        "version": "2.6.9-2"
     },
     "yq": {
         "arch": "amd64",
-        "digest": "8200ea4477d139cb9be607a962760075e9240a760b56fb2f1f870a7facbf3e69",
+        "digest": "5277acb6199fc2950117bcf4ebde8de80376adc02725407a587110b63bbbb847",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.16.2-0"
+        "version": "4.16.2-1"
     }
 }
