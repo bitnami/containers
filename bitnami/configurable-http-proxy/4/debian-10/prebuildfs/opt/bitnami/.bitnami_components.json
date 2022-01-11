@@ -1,23 +1,23 @@
 {
     "configurable-http-proxy": {
         "arch": "amd64",
-        "digest": "b84a97b61f29f918affd172ecf424bd8326e39509f9549e7ab211d7e88a7544c",
+        "digest": "4a39d01828100c94bf545e3e4b2ee8f323a68247751c003a6ae837d2907268c6",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.5.0-0"
+        "version": "4.5.0-1"
     },
     "node": {
         "arch": "amd64",
-        "digest": "5753bbbe5052000888c24ef8c918cfc45577878b03cc4dcfe7d53ea562a48e5a",
+        "digest": "d71d3e408243a79aa4f4b1513fbb31ad3e3ecb6d40f1a5fa884ac355d64188d8",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "14.18.2-0"
+        "version": "14.18.2-1"
     },
     "python": {
         "arch": "amd64",
-        "digest": "18529e5433b2ff7007527ec2fa5b608cb6432e27ec3e6a9f3ab94fcdb7586475",
+        "digest": "c081f7f9663d4d64e7f26d6e6a77b3860ee1f39c309bd564f801c39192042d2f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.8.12-11"
+        "version": "3.8.12-12"
     }
 }
