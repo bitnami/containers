@@ -1,9 +1,9 @@
 {
     "user-broker": {
         "arch": "amd64",
-        "digest": "b846d04efba51c691eff5073bd95443c2dc8dc38e16daf9565a2d47f34bcbe8a",
+        "digest": "80c8073267f31c8ad16de027ef572489b010dc1b28e2ed99f07665dd75d0bdb4",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.3.1-0"
+        "version": "0.3.1-1"
     }
 }
