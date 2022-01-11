@@ -1,9 +1,9 @@
 {
     "open-service-broker-azure": {
         "arch": "amd64",
-        "digest": "255d87227bc1a2df2da35b2ae96198c70a0013d3cedaa184a7c3c262db566208",
+        "digest": "62654f6290c3a7c33eb2db097a110faebd7f7481fb6b8ba72d0a9f367fe66574",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.8.4-3"
+        "version": "1.8.4-4"
     }
 }
