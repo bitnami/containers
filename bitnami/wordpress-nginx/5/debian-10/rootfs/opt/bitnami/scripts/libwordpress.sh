@@ -417,8 +417,8 @@ wordpress_initialize() {
 #########################
 wp_execute_print_output() {
     # Avoid creating unnecessary cache files at initialization time
-    local -a env=("env" "WP_CLI_CONFIG_PATH=${WORDPRESS_CLI_CONF_FILE}" "WP_CLI_CACHE_DIR=/dev/null")
-    local -a cmd=("${PHP_BIN_DIR}/php" "${WORDPRESS_CLI_BIN_DIR}/wp-cli.phar" "$@")
+    local -a env=("env" "WP_CLI_CONFIG_PATH=${WP_CLI_CONF_FILE}" "WP_CLI_CACHE_DIR=/dev/null")
+    local -a cmd=("${PHP_BIN_DIR}/php" "${WP_CLI_BIN_DIR}/wp-cli.phar" "$@")
     # Allow to specify extra CLI flags, but ensure they are added last
     local -a wp_extra_cli_flags
     read -r -a wp_extra_cli_flags <<< "$WORDPRESS_EXTRA_CLI_ARGS"
