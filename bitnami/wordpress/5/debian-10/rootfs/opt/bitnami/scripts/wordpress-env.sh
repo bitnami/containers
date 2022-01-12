@@ -96,10 +96,6 @@ unset wordpress_env_vars
 # Paths
 export WORDPRESS_BASE_DIR="${BITNAMI_ROOT_DIR}/wordpress"
 export WORDPRESS_CONF_FILE="${WORDPRESS_BASE_DIR}/wp-config.php"
-export WORDPRESS_CLI_BASE_DIR="${BITNAMI_ROOT_DIR}/wp-cli"
-export WORDPRESS_CLI_BIN_DIR="${WORDPRESS_CLI_BASE_DIR}/bin"
-export WORDPRESS_CLI_CONF_DIR="${WORDPRESS_CLI_BASE_DIR}/conf"
-export WORDPRESS_CLI_CONF_FILE="${WORDPRESS_CLI_CONF_DIR}/wp-cli.yml"
 
 # WordPress persistence configuration
 export WORDPRESS_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/wordpress"

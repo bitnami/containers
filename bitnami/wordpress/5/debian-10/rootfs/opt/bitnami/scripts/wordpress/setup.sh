@@ -10,6 +10,9 @@ set -o pipefail
 # Load WordPress environment
 . /opt/bitnami/scripts/wordpress-env.sh
 
+# Load WP-CLI environment for 'wp_execute' (after 'wordpress-env.sh' so that MODULE is not set to a wrong value)
+. /opt/bitnami/scripts/wp-cli-env.sh
+
 # Load PHP environment for 'wp_execute' (after 'wordpress-env.sh' so that MODULE is not set to a wrong value)
 . /opt/bitnami/scripts/php-env.sh
 
