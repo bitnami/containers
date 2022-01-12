@@ -9,15 +9,15 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/mysqld-exporter-0.13.0-1-linux-amd64-debian-10.tar.gz && \
-    echo "856c0bad7c39e48103f390afa4c95ea80c6883b75ca327f1175de98029a9873e  /tmp/bitnami/pkg/cache/mysqld-exporter-0.13.0-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/mysqld-exporter-0.13.0-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/mysqld-exporter-0.13.0-1-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/mysqld-exporter-0.13.0-2-linux-amd64-debian-10.tar.gz && \
+    echo "fc9fe464ffca9478e08ad06588b7a91f3feafcdf628e4be74df48edd7ced23b6  /tmp/bitnami/pkg/cache/mysqld-exporter-0.13.0-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/mysqld-exporter-0.13.0-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/mysqld-exporter-0.13.0-2-linux-amd64-debian-10.tar.gz
 RUN chmod g+rwX /opt/bitnami
 RUN ln -sf /opt/bitnami/mysqld-exporter/bin/mysqld_exporter /bin/mysqld_exporter
 
 ENV BITNAMI_APP_NAME="mysqld-exporter" \
-    BITNAMI_IMAGE_VERSION="0.13.0-debian-10-r210" \
+    BITNAMI_IMAGE_VERSION="0.13.0-debian-10-r211" \
     PATH="/opt/bitnami/mysqld-exporter/bin:$PATH"
 
 EXPOSE 9104
