@@ -434,7 +434,7 @@ pgpool_create_config() {
     info "Generating pgpool.conf file..."
     # Configuring Pgpool-II to use the streaming replication mode since it's the recommended way
     # ref: http://www.pgpool.net/docs/latest/en/html/configuring-pgpool.html
-    cp "${PGPOOL_BASE_DIR}/etc/pgpool.conf.sample-stream" "$PGPOOL_CONF_FILE"
+    cp "${PGPOOL_BASE_DIR}/etc/pgpool.conf.sample" "$PGPOOL_CONF_FILE"
 
     # Connection settings
     # ref: http://www.pgpool.net/docs/latest/en/html/runtime-config-connection.html#RUNTIME-CONFIG-CONNECTION-SETTINGS
