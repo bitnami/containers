@@ -8,9 +8,9 @@
     },
     "harbor-notary-signer": {
         "arch": "amd64",
-        "digest": "ed322072166c200afe89a8a374915cadc3bc5365bc8522b6568ca59c7c7853a0",
+        "digest": "eaac09590aad618e239504753be89fc5a1b3ee40b5ee9a2aa9e477a7948c2654",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.1-2"
+        "version": "2.4.1-3"
     }
 }
