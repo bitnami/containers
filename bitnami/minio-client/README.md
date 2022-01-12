@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2022`, `2022-debian-10`, `2022.1.7`, `2022.1.7-debian-10-r0`, `latest` (2022/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2022.1.7-debian-10-r0/2022/debian-10/Dockerfile)
+* [`2022`, `2022-debian-10`, `2022.1.7`, `2022.1.7-debian-10-r1`, `latest` (2022/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2022.1.7-debian-10-r1/2022/debian-10/Dockerfile)
 * [`2021`, `2021-debian-10`, `2021.12.29`, `2021.12.29-debian-10-r11` (2021/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2021.12.29-debian-10-r11/2021/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/minio-client GitHub repo](https://github.com/bitnami/bitnami-docker-minio-client).
@@ -130,6 +130,10 @@ $ docker run --rm --name minio-client \
 ```
 
 Find more information about the client configuration in the [MinIO(R) Client documentation](https://docs.min.io/docs/minio-admin-complete-guide.html).
+
+## Branch Deprecation Notice
+
+Bitnami Object Storage Client based on MinIO&reg;'s branch 2021 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 02-11-2022
 
 ## Contributing
 
