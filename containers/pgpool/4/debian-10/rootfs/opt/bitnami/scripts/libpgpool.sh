@@ -636,18 +636,6 @@ pgpool_initialize() {
     am_i_root && configure_permissions_ownership "$PGPOOL_TMP_DIR $PGPOOL_LOG_DIR" -u "$PGPOOL_DAEMON_USER" -g "$PGPOOL_DAEMON_GROUP"
     am_i_root && configure_permissions_ownership "$PGPOOL_DATA_DIR" -u "$PGPOOL_DAEMON_USER" -g "$PGPOOL_DAEMON_GROUP" -d "755" -f "644"
 
-    # Wait for postgresql to be running
-    read -r -a nodes <<<"$(tr ',;' ' ' <<<"${PGPOOL_BACKEND_NODES}")"
-    for node in "${nodes[@]}"; do
-        read -r -a fields <<<"$(tr ':' ' ' <<<"${node}")"
-        local host="${fields[1]}"
-        local port="${fields[2]}"
-        if ! retry_while "debug_execute wait-for-port --timeout 5 --host ${host} ${port}"; then
-            error "Could not connect to PostgreSQL at ${host}:${port}"
-            return 1
-        fi
-    done
-
     pgpool_create_pghba
     pgpool_create_config
     pgpool_generate_password_file
