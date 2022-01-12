@@ -15,9 +15,9 @@
     },
     "neo4j": {
         "arch": "amd64",
-        "digest": "1f208158f865540dcc210fd6652b02f7b7a361e2551ca17d129bcf6c6c48dbb0",
+        "digest": "9dd67e3c091c32aafb7029655876f114458530f70021f510c5dbf46e6dc21a66",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.4.2-1"
+        "version": "4.4.3-0"
     }
 }
