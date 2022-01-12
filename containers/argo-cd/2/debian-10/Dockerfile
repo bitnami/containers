@@ -9,17 +9,17 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl git git-lfs gnupg gzip libc6 openssh-server procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kustomize" "4.4.1-0" --checksum f6a639078fe19a9c38ae9fc9904106172047aea73df04b69a2cc84f16e44035b
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ksonnet" "0.13.1-0" --checksum d789f0ddb6cf2351ba09ca3e907ea2e41605067f398aa8fa069bdcfe59a25cd6
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "helm" "3.7.2-0" --checksum 061224e6c20ae4405b022e748fadc0ac9d537e1905162e9cb8f463ad3eb4820a
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum 3e6fc37ca073b10a73a804d39c2f0c028947a1a596382a4f8ebe43dfbaa3a25e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "argo-cd" "2.2.2-0" --checksum a6883b7eb23c23d8c96d0e267b6fae3c6722827c9f10700c0b15c2ac7f18ef9f
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kustomize" "4.4.1-1" --checksum 19e83f80e3f867337f67adac0bee87e260bf572f5a861c2a3a40921f2109588c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ksonnet" "0.13.1-1" --checksum b0a4b540e9c03413eb647c4d32af33de56cda7621875183c7c5e59c6cc6c51f9
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "helm" "3.7.2-1" --checksum 8b90952507f7ad1b37d18bcc243bb849147425caa4e1e8ae1ebb14fcc59a6ce0
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "argo-cd" "2.2.2-1" --checksum acf1fa17a922ecc98bc23a6d9417b48fd2f522ed9918a5ccc0ed58d4512380d8
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/argo-cd/postunpack.sh
 ENV BITNAMI_APP_NAME="argo-cd" \
-    BITNAMI_IMAGE_VERSION="2.2.2-debian-10-r7" \
+    BITNAMI_IMAGE_VERSION="2.2.2-debian-10-r8" \
     LIBNSS_WRAPPER_PATH="/opt/bitnami/common/lib/libnss_wrapper.so" \
     LNAME="argocd" \
     NSS_WRAPPER_GROUP="/opt/bitnami/argo-cd/nss_group" \
