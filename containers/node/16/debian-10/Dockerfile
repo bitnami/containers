@@ -12,16 +12,16 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "c081f7f9663d4d64e7f26d6e6a77b3860ee1f39c309bd564f801c39192042d2f  /tmp/bitnami/pkg/cache/python-3.8.12-12-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/python-3.8.12-12-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/python-3.8.12-12-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-16.13.2-0-linux-amd64-debian-10.tar.gz && \
-    echo "d92a0b4a398da716d9c20bcdca7f55b5a4100e0f1afb750ff8692bfdbfdcd6f4  /tmp/bitnami/pkg/cache/node-16.13.2-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/node-16.13.2-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/node-16.13.2-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-16.13.2-1-linux-amd64-debian-10.tar.gz && \
+    echo "a54bd74dcb2041a2eae5f59d8d86d49f90053fbe284d41b650a0fb584baf11b5  /tmp/bitnami/pkg/cache/node-16.13.2-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/node-16.13.2-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/node-16.13.2-1-linux-amd64-debian-10.tar.gz
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS    0/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 ENV BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="16.13.2-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="16.13.2-debian-10-r1" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:$PATH"
 
 EXPOSE 3000
