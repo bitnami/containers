@@ -36,22 +36,12 @@ declare -a writable_dirs=(
     # However they are not included in the WordPress source tarball, so we create them at this point with proper ownership
     # All of them are used by different wp-cli commands, such as 'wp language', 'wp plugin', or 'wp media', amongst others
     "${WORDPRESS_BASE_DIR}/wp-content/languages" "${WORDPRESS_BASE_DIR}/wp-content/upgrade" "${WORDPRESS_BASE_DIR}/wp-content/uploads"
-    "${WORDPRESS_CLI_BASE_DIR}/.cache" "${WORDPRESS_CLI_BASE_DIR}/.packages"
 )
 for dir in "${writable_dirs[@]}"; do
     ensure_dir_exists "$dir"
     # Use daemon:root ownership for compatibility when running as a non-root user
     configure_permissions_ownership "$dir" -d "g+rwx" -f "g+rw" -u "$WEB_SERVER_DAEMON_USER" -g "root"
 done
-
-# Configure wp-cli
-ensure_dir_exists "$WORDPRESS_CLI_CONF_DIR"
-cat >"$WORDPRESS_CLI_CONF_FILE" <<EOF
-# Global parameter defaults
-path: "${WORDPRESS_BASE_DIR}"
-EOF
-render-template "${BITNAMI_ROOT_DIR}/scripts/wordpress/bitnami-templates/wp.tpl" >"${WORDPRESS_CLI_BIN_DIR}/wp"
-configure_permissions_ownership "${WORDPRESS_CLI_BIN_DIR}/wp" -f "755"
 
 info "Configuring default PHP options for WordPress"
 php_conf_set memory_limit "$PHP_DEFAULT_MEMORY_LIMIT"
