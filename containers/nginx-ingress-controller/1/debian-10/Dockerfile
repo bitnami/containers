@@ -13,6 +13,8 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "012ee310b2148844f03eac1e28e9347dcc4112ec07aa7d6edfcede0b3a2a0e62  /tmp/bitnami/pkg/cache/nginx-ingress-controller-1.1.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/nginx-ingress-controller-1.1.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/nginx-ingress-controller-1.1.1-0-linux-amd64-debian-10.tar.gz
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir -p /opt/bitnami/nginx/conf/geoip && \
     cd /opt/bitnami/nginx/conf/geoip && \
@@ -43,7 +45,7 @@ RUN chgrp -R root /var/log && \
     chmod g+rwX -R /opt/bitnami/nginx/conf && \
     chmod -R g+rwX /opt/bitnami/nginx-ingress-controller /etc/nginx /etc/ingress-controller
 ENV BITNAMI_APP_NAME="nginx-ingress-controller" \
-    BITNAMI_IMAGE_VERSION="1.1.1-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="1.1.1-debian-10-r1" \
     LUA_CPATH="/opt/bitnami/nginx/conf/lua/?.so;/opt/bitnami/lua/lib/lua/5.1/?.so;./?.so;/opt/bitnami/lua/lib/lua/?.so;;" \
     LUA_PATH="/opt/bitnami/lua/share/lua/5.1/?/init.lua;/opt/bitnami/lua/lib/lua/?.lua;/opt/bitnami/lua/lib/lua/5.1/?.lua;/opt/bitnami/nginx/conf/lua/?.lua;;" \
     PATH="/opt/bitnami/nginx-ingress-controller/bin:/opt/bitnami/nginx/sbin:$PATH"
