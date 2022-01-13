@@ -1,17 +1,17 @@
 {
     "brotli": {
         "arch": "amd64",
-        "digest": "f9ae0806a766a6af19e84959ebbfe360037a5196085b120168ff14ab7fe98cbb",
+        "digest": "4988bb25078215353dbb2d778c2ec4006f709a5101a9095e162aee9653a6232d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.9-1"
+        "version": "1.0.9-2"
     },
     "discourse": {
         "arch": "amd64",
-        "digest": "34dabc07377ecb66a6854017943fe2860c7ef200d6894c94ad7bead5edf614aa",
+        "digest": "763c13fa15054cbb4496d152208882062eddc24fd63538ca6ec3e29a467818aa",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.7.12-2"
+        "version": "2.7.13-0"
     },
     "git": {
         "arch": "amd64",
@@ -57,10 +57,10 @@
     },
     "uglify-js": {
         "arch": "amd64",
-        "digest": "e10265515f388fc81d8b91cd40f818b4720e0f6596729696cdf9bae99153eb62",
+        "digest": "d939605e083caadece0cd4284f97a74b5c30f0d88993a1905070b4e717889226",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.14.5-1"
+        "version": "3.14.5-2"
     },
     "wait-for-port": {
         "arch": "amd64",
