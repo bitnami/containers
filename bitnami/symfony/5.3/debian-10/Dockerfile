@@ -12,6 +12,8 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.4.27-7" 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.32-1" --checksum 727834a55587746f90b159966c9abf2ce31a6effbe83d8c38ee6250641c9a22a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "symfony" "5.3.13-2" --checksum d947162a58419d33ef1add6bdcc44e112a8389b5689119ca4aa96f7d0bb74169
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/bitnami-user.sh
 
 COPY rootfs /
@@ -19,7 +21,7 @@ RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/symfony/postunpack.sh
 ENV BITNAMI_APP_NAME="symfony" \
-    BITNAMI_IMAGE_VERSION="5.3.13-debian-10-r13" \
+    BITNAMI_IMAGE_VERSION="5.3.13-debian-10-r14" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/symfony/bin:/opt/bitnami/common/bin:$PATH" \
     PHP_ENABLE_OPCACHE="0"
 
