@@ -13,12 +13,14 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.34.1-1" 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-5" --checksum 1e34030c18f0ec2467fa5f1b1fbad24add217f671c3a61628f7b8671391f9676
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-clair" "2.4.1-3" --checksum 41f3f332a42d90e683caaca2bd7da0521082d1c3650b7e1955822654327fa3fe
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-clair/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-clair" \
-    BITNAMI_IMAGE_VERSION="2.4.1-debian-10-r26" \
+    BITNAMI_IMAGE_VERSION="2.4.1-debian-10-r27" \
     PATH="/opt/bitnami/git/bin:/opt/bitnami/common/bin:/opt/bitnami/harbor-clair/bin:$PATH"
 
 EXPOSE 6060 6061
