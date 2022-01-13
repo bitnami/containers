@@ -1,0 +1,58 @@
+{
+    "git": {
+        "arch": "amd64",
+        "digest": "424d40a4b5af1fcddbfd407ac97543378864d1b4539064ceef428e526bfd4f0e",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "2.34.1-1"
+    },
+    "gosu": {
+        "arch": "amd64",
+        "digest": "16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.14.0-1"
+    },
+    "mysql-client": {
+        "arch": "amd64",
+        "digest": "727834a55587746f90b159966c9abf2ce31a6effbe83d8c38ee6250641c9a22a",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "10.3.32-1"
+    },
+    "node": {
+        "arch": "amd64",
+        "digest": "91f6ab54b35b44aa8cc7f5cdd29a3616faf2bf5d6492ff3086030db9e5fac2f2",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "14.18.3-2"
+    },
+    "python": {
+        "arch": "amd64",
+        "digest": "c081f7f9663d4d64e7f26d6e6a77b3860ee1f39c309bd564f801c39192042d2f",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "3.8.12-12"
+    },
+    "rails": {
+        "arch": "amd64",
+        "digest": "e417762b51a7172667a5f77112989fb959d4c0ce9016a5cc1198e4bd9e1976fc",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "7.0.1-0-0"
+    },
+    "ruby": {
+        "arch": "amd64",
+        "digest": "a08fd87126902d0fa32351fc40378bda8259aeb0587d1b6040e73df83d2130c0",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "2.7.5-2"
+    },
+    "wait-for-port": {
+        "arch": "amd64",
+        "digest": "1e34030c18f0ec2467fa5f1b1fbad24add217f671c3a61628f7b8671391f9676",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.0.1-5"
+    }
+}
