@@ -17,13 +17,15 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.34.1-1" --checksum 424d40a4b5af1fcddbfd407ac97543378864d1b4539064ceef428e526bfd4f0e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "airflow-scheduler" "2.2.3-1" --checksum 8d6071f875141046e2dc0e8f42ff75c0b343f1f61437610759efd1869d28f01e
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/airflow-scheduler/postunpack.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
     BITNAMI_APP_NAME="airflow-scheduler" \
-    BITNAMI_IMAGE_VERSION="2.2.3-debian-10-r20" \
+    BITNAMI_IMAGE_VERSION="2.2.3-debian-10-r21" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/airflow/venv/lib/python3.8/site-packages/numpy.libs/:$LD_LIBRARY_PATH" \
     LIBNSS_WRAPPER_PATH="/opt/bitnami/common/lib/libnss_wrapper.so" \
     LNAME="airflow" \
