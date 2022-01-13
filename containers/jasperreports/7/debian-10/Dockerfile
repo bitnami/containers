@@ -16,7 +16,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "9.0.56-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.32-1" --checksum 727834a55587746f90b159966c9abf2ce31a6effbe83d8c38ee6250641c9a22a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.34.1-1" --checksum 424d40a4b5af1fcddbfd407ac97543378864d1b4539064ceef428e526bfd4f0e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-5" --checksum 9e312b4a7e16a55d08e67c4fd69c91000e4dcc4af149d59915c49375b83852af
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "jasperreports" "7.8.1-1" --checksum 1cd6a778b3cd33c309cdcccc6bb71533678b5824b5acd8fc0dc7b999ab440100
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "jasperreports" "7.8.1-2" --checksum 1323832c7470e3b7ca151857952a0c8ffba2d4a10d2e2c44aec7af8191e794f7
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
 RUN chmod g+rwX /opt/bitnami
 
@@ -26,7 +26,7 @@ RUN /opt/bitnami/scripts/jasperreports/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV BITNAMI_APP_NAME="jasperreports" \
-    BITNAMI_IMAGE_VERSION="7.8.1-debian-10-r56" \
+    BITNAMI_IMAGE_VERSION="7.8.1-debian-10-r57" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:/opt/bitnami/common/bin:$PATH"
 
