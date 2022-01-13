@@ -1,3 +1,7 @@
+# DEPRECATION NOTICE
+
+This image has been deprecated, and will no longer be maintained and updated.
+
 # Python Snapshot packaged by Bitnami
 
 ## What is Python Snapshot?
