@@ -13,10 +13,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "769ce1a25d737bfa7e1b00260c5bc097d7a888eb655dbed2ae1884a0a6114859  /tmp/bitnami/pkg/cache/percona-xtrabackup-2.4.24-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/percona-xtrabackup-2.4.24-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/percona-xtrabackup-2.4.24-1-linux-amd64-debian-10.tar.gz
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="percona-xtrabackup" \
-    BITNAMI_IMAGE_VERSION="2.4.24-debian-10-r114" \
+    BITNAMI_IMAGE_VERSION="2.4.24-debian-10-r115" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mysql/bin:$PATH"
 
 USER 1001
