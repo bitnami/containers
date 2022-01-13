@@ -12,7 +12,7 @@ RUN install_packages acl ca-certificates curl fontconfig gzip libbsd0 libbz2-1.0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-12" --checksum c081f7f9663d4d64e7f26d6e6a77b3860ee1f39c309bd564f801c39192042d2f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-5" --checksum 9e312b4a7e16a55d08e67c4fd69c91000e4dcc4af149d59915c49375b83852af
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "13.5.0-1" --checksum f0b3010943243515cfa8249978f690cb6c9e79b91f1aeafe9a3abc59321d43af
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.18.2-1" --checksum d71d3e408243a79aa4f4b1513fbb31ad3e3ecb6d40f1a5fa884ac355d64188d8
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.18.3-2" --checksum 91f6ab54b35b44aa8cc7f5cdd29a3616faf2bf5d6492ff3086030db9e5fac2f2
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "odoo" "14.0.20220110-1" --checksum d8339d276b728b8730309385e9860c7488aa8cc9ea34917c4ecbf6dd59cdd92e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
 RUN chmod g+rwX /opt/bitnami
@@ -24,7 +24,7 @@ RUN curl -sLO https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.
 COPY rootfs /
 RUN /opt/bitnami/scripts/odoo/postunpack.sh
 ENV BITNAMI_APP_NAME="odoo" \
-    BITNAMI_IMAGE_VERSION="14.0.20220110-debian-10-r2" \
+    BITNAMI_IMAGE_VERSION="14.0.20220110-debian-10-r3" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/odoo/bin:$PATH"
 
 EXPOSE 3000 8069 8072
