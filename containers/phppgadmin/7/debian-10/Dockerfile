@@ -27,7 +27,7 @@ RUN /opt/bitnami/scripts/phppgadmin/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="phppgadmin" \
-    BITNAMI_IMAGE_VERSION="7.13.0-debian-10-r401" \
+    BITNAMI_IMAGE_VERSION="7.13.0-debian-10-r402" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080 8443
