@@ -12,12 +12,14 @@ RUN install_packages acl ca-certificates curl ghostscript gzip imagemagick libc6
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "2.7.5-2" --checksum a08fd87126902d0fa32351fc40378bda8259aeb0587d1b6040e73df83d2130c0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "fluentd" "1.14.4-1" --checksum f9ed77f035c94654711179c4430bf2ad8ef12a99fe2bbbde43ab6ccf7d7ffbd3
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/fluentd/postunpack.sh
 ENV BITNAMI_APP_NAME="fluentd" \
-    BITNAMI_IMAGE_VERSION="1.14.4-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="1.14.4-debian-10-r6" \
     GEM_HOME="/opt/bitnami/fluentd" \
     PATH="/opt/bitnami/ruby/bin:/opt/bitnami/common/bin:/opt/bitnami/fluentd/bin:$PATH"
 
