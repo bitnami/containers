@@ -112,7 +112,7 @@ pgbouncer_validate() {
             elif [[ ! -f "$PGBOUNCER_SERVER_TLS_CA_FILE" ]]; then
                 print_validation_error "The server CA X.509 certificate file in the specified path ${PGBOUNCER_SERVER_TLS_CA_FILE} does not exist"
             fi
-        elif
+        else
             if [[ -z "$PGBOUNCER_SERVER_TLS_CA_FILE" ]]; then
                 print_validation_error "A CA X.509 certificate was not provided. You need to set this value when specifying server_tls_sslmode to verify-ca or verify-full"
             elif [[ ! -f "$PGBOUNCER_SERVER_TLS_CA_FILE" ]]; then
