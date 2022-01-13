@@ -44,7 +44,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 - [`4`, `4-debian-10`, `4.32.2`, `4.32.2-debian-10-r0`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/4.32.2-debian-10-r0/4/debian-10/Dockerfile)
-- [`3`, `3-debian-10`, `3.42.8`, `3.42.8-debian-10-r27` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/3.42.8-debian-10-r27/3/debian-10/Dockerfile)
+- [`3`, `3-debian-10`, `3.42.8`, `3.42.8-debian-10-r28` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/3.42.8-debian-10-r28/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ghost GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
 
