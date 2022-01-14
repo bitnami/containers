@@ -13,10 +13,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "1c603a26b31f09483454a2b64a22eeb0df3254add002020a908a9ec42ce25b2f  /tmp/bitnami/pkg/cache/fluentd-exporter-0.2.0-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/fluentd-exporter-0.2.0-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/fluentd-exporter-0.2.0-2-linux-amd64-debian-10.tar.gz
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="fluentd-exporter" \
-    BITNAMI_IMAGE_VERSION="0.2.0-debian-10-r668" \
+    BITNAMI_IMAGE_VERSION="0.2.0-debian-10-r669" \
     PATH="/opt/bitnami/fluentd-exporter/bin:$PATH"
 
 EXPOSE 9309
