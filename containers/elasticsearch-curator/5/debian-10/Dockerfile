@@ -17,6 +17,8 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "748221c5ba5b88155c626262ebaaab7c10ace3b45a39ca393341c03a5a72992f  /tmp/bitnami/pkg/cache/elasticsearch-curator-5.8.4-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/elasticsearch-curator-5.8.4-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/elasticsearch-curator-5.8.4-1-linux-amd64-debian-10.tar.gz
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
@@ -27,7 +29,7 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV BITNAMI_APP_NAME="elasticsearch-curator" \
-    BITNAMI_IMAGE_VERSION="5.8.4-debian-10-r238" \
+    BITNAMI_IMAGE_VERSION="5.8.4-debian-10-r239" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/elasticsearch-curator/bin:$PATH"
