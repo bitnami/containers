@@ -1,3 +1,7 @@
+# DEPRECATION NOTICE
+
+This image has been deprecated, and will no longer be maintained and updated since the project has been discontinued and no new features.
+
 # What is Keycloak Gatekeeper?
 
 > Keycloak Gatekeeper is an adapter which integrates with the Keycloak authentication service supporting both access tokens in browser cookie or bearer tokens.
