@@ -15,13 +15,15 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.13-1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "9.0.56-1" --checksum 095b851d2a3140501774127d6a3b75d82f4bbbee6bfc5139a0b42fe9a0f1cf80
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-5" --checksum 9e312b4a7e16a55d08e67c4fd69c91000e4dcc4af149d59915c49375b83852af
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/tomcat/postunpack.sh
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="9.0.56-debian-10-r34" \
+    BITNAMI_IMAGE_VERSION="9.0.56-debian-10-r35" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/common/bin:$PATH"
 
