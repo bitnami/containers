@@ -13,12 +13,14 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "5f50fef703e2281c80aceec3f3d98cf1e3d29a98d5a0c43559bc1dac0487f901  /tmp/bitnami/pkg/cache/kiam-3.6.0-5-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/kiam-3.6.0-5-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/kiam-3.6.0-5-linux-amd64-debian-10.tar.gz
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN update-alternatives --set iptables /usr/sbin/iptables-legacy && \
     update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
 
 ENV BITNAMI_APP_NAME="kiam" \
-    BITNAMI_IMAGE_VERSION="3.6.0-debian-10-r417" \
+    BITNAMI_IMAGE_VERSION="3.6.0-debian-10-r418" \
     PATH="/opt/bitnami/kiam/bin:$PATH"
 
 USER 1001
