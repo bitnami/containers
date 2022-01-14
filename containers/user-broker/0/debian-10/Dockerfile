@@ -13,10 +13,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "80c8073267f31c8ad16de027ef572489b010dc1b28e2ed99f07665dd75d0bdb4  /tmp/bitnami/pkg/cache/user-broker-0.3.1-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/user-broker-0.3.1-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/user-broker-0.3.1-1-linux-amd64-debian-10.tar.gz
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="user-broker" \
-    BITNAMI_IMAGE_VERSION="0.3.1-debian-10-r406" \
+    BITNAMI_IMAGE_VERSION="0.3.1-debian-10-r407" \
     PATH="/opt/bitnami/user-broker/bin:$PATH"
 
 EXPOSE 8005 8080
