@@ -14,12 +14,14 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "12.22.8-1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb-client" "4.4.11-1" --checksum 16c1ce1398b6ee27665c150a8202df7fac08a52e4e897197c271952e9aea682f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "parse" "4.10.4-1" --checksum a5ebf7040410f9a208e7fed236fcb31b7e1ce220266904342dcd3df759c42121
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/parse/postunpack.sh
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="4.10.4-debian-10-r89" \
+    BITNAMI_IMAGE_VERSION="4.10.4-debian-10-r90" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/mongodb-client/bin:/opt/bitnami/parse/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 1337 3000
