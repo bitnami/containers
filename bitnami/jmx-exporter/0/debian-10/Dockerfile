@@ -17,10 +17,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "06cb8f4940c848ca4e95762868a1df7c1bceb7efc087ee12d3cac82bbb4f652d  /tmp/bitnami/pkg/cache/jmx-exporter-0.16.1-3-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/jmx-exporter-0.16.1-3-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/jmx-exporter-0.16.1-3-linux-amd64-debian-10.tar.gz
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="jmx-exporter" \
-    BITNAMI_IMAGE_VERSION="0.16.1-debian-10-r177" \
+    BITNAMI_IMAGE_VERSION="0.16.1-debian-10-r178" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 5556
