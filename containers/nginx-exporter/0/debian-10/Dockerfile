@@ -13,11 +13,13 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "79715c828b57700775374c7cf714aca9c7ab6981e99efbd623ecf716ee51410e  /tmp/bitnami/pkg/cache/nginx-exporter-0.10.0-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/nginx-exporter-0.10.0-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/nginx-exporter-0.10.0-1-linux-amd64-debian-10.tar.gz
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN ln -sf /opt/bitnami/nginx-exporter/bin/nginx-prometheus-exporter /usr/bin/exporter
 
 ENV BITNAMI_APP_NAME="nginx-exporter" \
-    BITNAMI_IMAGE_VERSION="0.10.0-debian-10-r20" \
+    BITNAMI_IMAGE_VERSION="0.10.0-debian-10-r21" \
     PATH="/opt/bitnami/nginx-exporter/bin:$PATH"
 
 EXPOSE 9113
