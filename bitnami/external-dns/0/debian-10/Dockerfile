@@ -13,10 +13,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "7142685ce5a567ae66820366f895b1b87474abc63af56bd6c1607c4db3865ccf  /tmp/bitnami/pkg/cache/external-dns-0.10.2-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/external-dns-0.10.2-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/external-dns-0.10.2-1-linux-amd64-debian-10.tar.gz
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="external-dns" \
-    BITNAMI_IMAGE_VERSION="0.10.2-debian-10-r29" \
+    BITNAMI_IMAGE_VERSION="0.10.2-debian-10-r30" \
     PATH="/opt/bitnami/external-dns/bin:$PATH"
 
 EXPOSE 7979
