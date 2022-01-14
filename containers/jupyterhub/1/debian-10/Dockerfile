@@ -17,10 +17,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "28cc02e07bbe2b0c29c85d0a7ba737f491acb0418090dfae3ceb38349a2404e7  /tmp/bitnami/pkg/cache/jupyterhub-1.5.0-3-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/jupyterhub-1.5.0-3-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/jupyterhub-1.5.0-3-linux-amd64-debian-10.tar.gz
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="jupyterhub" \
-    BITNAMI_IMAGE_VERSION="1.5.0-debian-10-r59" \
+    BITNAMI_IMAGE_VERSION="1.5.0-debian-10-r60" \
     PATH="/opt/bitnami/miniconda/bin:/opt/bitnami/miniconda/bin/:$PATH"
 
 USER 1001
