@@ -13,10 +13,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "77115fbf6b35f8529394e37fb683337eacb706596f20f937083a5fb647987ea2  /tmp/bitnami/pkg/cache/elasticsearch-exporter-1.3.0-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/elasticsearch-exporter-1.3.0-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/elasticsearch-exporter-1.3.0-1-linux-amd64-debian-10.tar.gz
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="elasticsearch-exporter" \
-    BITNAMI_IMAGE_VERSION="1.3.0-debian-10-r79" \
+    BITNAMI_IMAGE_VERSION="1.3.0-debian-10-r80" \
     PATH="/opt/bitnami/elasticsearch-exporter/bin:$PATH"
 
 EXPOSE 9114
