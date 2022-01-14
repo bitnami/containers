@@ -231,6 +231,10 @@ mongodb_copy_mounted_config() {
 
 ########################
 # Determine the hostname by which to contact the locally running mongo daemon
+# Globals:
+#   MONGODB_*
+# Arguments:
+#   None
 # Returns:
 #   The value of $MONGODB_ADVERTISED_HOSTNAME or the current host address
 ########################
@@ -239,6 +243,23 @@ get_mongo_hostname() {
         echo "$MONGODB_ADVERTISED_HOSTNAME"
     else
         get_machine_ip
+    fi
+}
+
+########################
+# Determine the port on which to contact the locally running mongo daemon
+# Globals:
+#   MONGODB_*
+# Arguments:
+#   None
+# Returns:
+#   The value of $MONGODB_ADVERTISED_PORT_NUMBER or $MONGODB_PORT_NUMBER
+########################
+get_mongo_port() {
+    if [[ -n "$MONGODB_ADVERTISED_PORT_NUMBER" ]]; then
+        echo "$MONGODB_ADVERTISED_PORT_NUMBER"
+    else
+        echo "$MONGODB_PORT_NUMBER"
     fi
 }
 
@@ -746,15 +767,17 @@ mongodb_create_keyfile() {
 #   MONGODB_*
 # Arguments:
 #   $1 - node
+#   $2 - port
 # Returns:
 #   None
 #########################
 mongodb_is_primary_node_initiated() {
     local node="${1:?node is required}"
+    local port="${2:?port is required}"
     local result
     result=$(
         mongodb_execute_print_output "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD" "admin" "127.0.0.1" "$MONGODB_PORT_NUMBER" <<EOF
-rs.initiate({"_id":"$MONGODB_REPLICA_SET_NAME", "members":[{"_id":0,"host":"$node:$MONGODB_PORT_NUMBER","priority":5}]})
+rs.initiate({"_id":"$MONGODB_REPLICA_SET_NAME", "members":[{"_id":0,"host":"$node:$port","priority":5}]})
 EOF
     )
 
@@ -767,7 +790,7 @@ EOF
 
     if ! grep -q "\"ok\" : 1" <<<"$result"; then
         warn "Problem initiating replica set
-            request: rs.initiate({\"_id\":\"$MONGODB_REPLICA_SET_NAME\", \"members\":[{\"_id\":0,\"host\":\"$node:$MONGODB_PORT_NUMBER\",\"priority\":5}]})
+            request: rs.initiate({\"_id\":\"$MONGODB_REPLICA_SET_NAME\", \"members\":[{\"_id\":0,\"host\":\"$node:$port\",\"priority\":5}]})
             response: $result"
         return 1
     fi
@@ -803,24 +826,27 @@ EOF
 #   MONGODB_*
 # Arguments:
 #   $1 - node
+#   $2 - port
 # Returns:
 #   Boolean
 #########################
 mongodb_is_secondary_node_pending() {
     local node="${1:?node is required}"
+    local port="${2:?port is required}"
     local result
 
     mongodb_set_dwc
 
+    debug "Adding secondary node ${node}:${port}"
     result=$(
         mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
-rs.add({host: '$node:$MONGODB_PORT_NUMBER'})
+rs.add({host: '$node:$port', priority: 0, votes: 0})
 EOF
     )
     debug "$result"
-    # Error code 103 is considered OK.
-    # It indicates a possiblely desynced configuration,
-    # which will become resynced when the secondary joins the replicaset.
+
+    # Error code 103 is considered OK
+    # It indicates a possibly desynced configuration, which will become resynced when the secondary joins the replicaset
     # Note: Error NewReplicaSetConfigurationIncompatible rejects the node addition so we need to filter it out
     if { grep -q "\"code\" : 103" <<<"$result"; } && ! { grep -q "NewReplicaSetConfigurationIncompatible" <<<"$result"; }; then
         warn "The ReplicaSet configuration is not aligned with primary node's configuration. Starting secondary node so it syncs with ReplicaSet..."
@@ -830,23 +856,82 @@ EOF
 }
 
 ########################
+# Get if secondary node is ready to be granted voting rights
+# Globals:
+#   MONGODB_*
+# Arguments:
+#   $1 - node
+#   $2 - port
+# Returns:
+#   Boolean
+#########################
+mongodb_is_secondary_node_ready() {
+    local -r node="${1:?node is required}"
+    local -r port="${2:?port is required}"
+
+    debug "Waiting for the node to be marked as secondary"
+    result=$(
+        mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
+rs.status().members.filter(m => m.name === '$node:$port' && m.stateStr === 'SECONDARY').length === 1
+EOF
+    )
+    debug "$result"
+
+    grep -q "true" <<<"$result"
+}
+
+########################
+# Grant voting rights to secondary node
+# Globals:
+#   MONGODB_*
+# Arguments:
+#   $1 - node
+#   $2 - port
+# Returns:
+#   Boolean
+#########################
+mongodb_configure_secondary_node_voting() {
+    local -r node="${1:?node is required}"
+    local -r port="${2:?port is required}"
+
+    debug "Granting voting rights to the node"
+    local reconfig_cmd="rs.reconfigForPSASet(member, cfg)"
+    [[ "$(mongodb_get_version)" =~ ^4\.(0|2)\. ]] && reconfig_cmd="rs.reconfig(cfg)"
+    result=$(
+        mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
+cfg = rs.conf()
+member = cfg.members.findIndex(m => m.host === '$node:$port')
+cfg.members[member].priority = 1
+cfg.members[member].votes = 1
+$reconfig_cmd
+EOF
+    )
+    debug "$result"
+
+    grep -q "\"ok\" : 1" <<<"$result"
+}
+
+########################
 # Get if hidden node is pending
 # Globals:
 #   MONGODB_*
 # Arguments:
 #   $1 - node
+#   $2 - port
 # Returns:
 #   Boolean
 #########################
 mongodb_is_hidden_node_pending() {
     local node="${1:?node is required}"
+    local port="${2:?port is required}"
     local result
 
     mongodb_set_dwc
 
+    debug "Adding hidden node ${node}:${port}"
     result=$(
         mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
-rs.add({host: '$node:$MONGODB_PORT_NUMBER', hidden: true, priority: 0})
+rs.add({host: '$node:$port', hidden: true, priority: 0})
 EOF
     )
     # Error code 103 is considered OK.
@@ -865,18 +950,21 @@ EOF
 #   MONGODB_*
 # Arguments:
 #   $1 - node
+#   $2 - port
 # Returns:
 #   Boolean
 #########################
 mongodb_is_arbiter_node_pending() {
     local node="${1:?node is required}"
+    local port="${2:?port is required}"
     local result
 
     mongodb_set_dwc
 
+    debug "Adding arbiter node ${node}:${port}"
     result=$(
         mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
-rs.addArb('$node:$MONGODB_PORT_NUMBER')
+rs.addArb('$node:$port')
 EOF
     )
     grep -q "\"ok\" : 1" <<<"$result"
@@ -888,16 +976,18 @@ EOF
 #   MONGODB_*
 # Arguments:
 #   $1 - node
+#   $2 - port
 # Returns:
 #   None
 #########################
 mongodb_configure_primary() {
     local -r node="${1:?node is required}"
+    local -r port="${2:?port is required}"
 
     info "Configuring MongoDB primary node"
     wait-for-port --timeout 360 "$MONGODB_PORT_NUMBER"
 
-    if ! retry_while "mongodb_is_primary_node_initiated $node" "$MONGODB_MAX_TIMEOUT"; then
+    if ! retry_while "mongodb_is_primary_node_initiated $node $port" "$MONGODB_MAX_TIMEOUT"; then
         error "MongoDB primary node failed to get configured"
         exit 1
     fi
@@ -909,18 +999,20 @@ mongodb_configure_primary() {
 #   None
 # Arguments:
 #   $1 - node
+#   $2 - port
 # Returns:
 #   Boolean
 #########################
 mongodb_wait_confirmation() {
     local -r node="${1:?node is required}"
+    local -r port="${2:?port is required}"
 
-    debug "Waiting until ${node} is added to the replica set..."
-    if ! retry_while "mongodb_node_currently_in_cluster ${node}" "$MONGODB_MAX_TIMEOUT"; then
-        error "Unable to confirm that ${node} has been added to the replica set!"
+    debug "Waiting until ${node}:${port} is added to the replica set..."
+    if ! retry_while "mongodb_node_currently_in_cluster ${node} ${port}" "$MONGODB_MAX_TIMEOUT"; then
+        error "Unable to confirm that ${node}:${port} has been added to the replica set!"
         exit 1
     else
-        info "Node ${node} is confirmed!"
+        info "Node ${node}:${port} is confirmed!"
     fi
 }
 
@@ -1036,23 +1128,39 @@ mongodb_wait_for_primary_node() {
 #   None
 # Arguments:
 #   $1 - node
+#   $2 - port
 # Returns:
 #   None
 #########################
 mongodb_configure_secondary() {
     local -r node="${1:?node is required}"
+    local -r port="${2:?port is required}"
 
     mongodb_wait_for_primary_node "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD"
 
-    if mongodb_node_currently_in_cluster "$node"; then
+    if mongodb_node_currently_in_cluster "$node" "$port"; then
         info "Node currently in the cluster"
     else
         info "Adding node to the cluster"
-        if ! retry_while "mongodb_is_secondary_node_pending $node" "$MONGODB_MAX_TIMEOUT"; then
+        if ! retry_while "mongodb_is_secondary_node_pending $node $port" "$MONGODB_MAX_TIMEOUT"; then
             error "Secondary node did not get ready"
             exit 1
         fi
-        mongodb_wait_confirmation "$node"
+        mongodb_wait_confirmation "$node" "$port"
+
+        # Ensure that secondary nodes do not count as voting members until they are fully initialized
+        # https://docs.mongodb.com/manual/reference/method/rs.add/#behavior
+        if ! retry_while "mongodb_is_secondary_node_ready $node $port" "$MONGODB_MAX_TIMEOUT"; then
+            error "Secondary node did not get marked as secondary"
+            exit 1
+        fi
+
+        # Grant voting rights to node
+        # https://docs.mongodb.com/manual/tutorial/modify-psa-replica-set-safely/
+        if ! retry_while "mongodb_configure_secondary_node_voting $node $port" "$MONGODB_MAX_TIMEOUT"; then
+            error "Secondary node did not get marked as secondary"
+            exit 1
+        fi
     fi
 }
 
@@ -1062,23 +1170,25 @@ mongodb_configure_secondary() {
 #   None
 # Arguments:
 #   $1 - node
+#   $2 - port
 # Returns:
 #   None
 #########################
 mongodb_configure_hidden() {
     local -r node="${1:?node is required}"
+    local -r port="${2:?port is required}"
 
     mongodb_wait_for_primary_node "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD"
 
-    if mongodb_node_currently_in_cluster "$node"; then
+    if mongodb_node_currently_in_cluster "$node" "$port"; then
         info "Node currently in the cluster"
     else
         info "Adding hidden node to the cluster"
-        if ! retry_while "mongodb_is_hidden_node_pending $node" "$MONGODB_MAX_TIMEOUT"; then
+        if ! retry_while "mongodb_is_hidden_node_pending $node $port" "$MONGODB_MAX_TIMEOUT"; then
             error "Hidden node did not get ready"
             exit 1
         fi
-        mongodb_wait_confirmation "$node"
+        mongodb_wait_confirmation "$node" "$port"
     fi
 }
 
@@ -1088,22 +1198,25 @@ mongodb_configure_hidden() {
 #   None
 # Arguments:
 #   $1 - node
+#   $2 - port
 # Returns:
 #   None
 #########################
 mongodb_configure_arbiter() {
     local -r node="${1:?node is required}"
+    local -r port="${2:?port is required}"
+
     mongodb_wait_for_primary_node "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD"
 
-    if mongodb_node_currently_in_cluster "$node"; then
+    if mongodb_node_currently_in_cluster "$node" "$port"; then
         info "Node currently in the cluster"
     else
         info "Configuring MongoDB arbiter node"
-        if ! retry_while "mongodb_is_arbiter_node_pending $node" "$MONGODB_MAX_TIMEOUT"; then
+        if ! retry_while "mongodb_is_arbiter_node_pending $node $port" "$MONGODB_MAX_TIMEOUT"; then
             error "Arbiter node did not get ready"
             exit 1
         fi
-        mongodb_wait_confirmation "$node"
+        mongodb_wait_confirmation "$node" "$port"
     fi
 }
 
@@ -1154,11 +1267,13 @@ mongodb_wait_until_sync_complete() {
 #   MONGODB_*
 # Arguments:
 #   $1 - node
+#   $2 - port
 # Returns:
 #   None
 #########################
 mongodb_node_currently_in_cluster() {
     local -r node="${1:?node is required}"
+    local -r port="${2:?port is required}"
     local result
 
     result=$(
@@ -1166,7 +1281,7 @@ mongodb_node_currently_in_cluster() {
 rs.status().members
 EOF
     )
-    grep -q -E "\"${node}(:[0-9]+)?\"" <<<"$result"
+    grep -q -E "\"${node}(:${port})?\"" <<<"$result"
 }
 
 ########################
@@ -1180,24 +1295,26 @@ EOF
 #########################
 mongodb_configure_replica_set() {
     local node
+    local port
 
     info "Configuring MongoDB replica set..."
 
     node=$(get_mongo_hostname)
+    port=$(get_mongo_port)
     mongodb_restart
 
     case "$MONGODB_REPLICA_SET_MODE" in
     "primary")
-        mongodb_configure_primary "$node"
+        mongodb_configure_primary "$node" "$port"
         ;;
     "secondary")
-        mongodb_configure_secondary "$node"
+        mongodb_configure_secondary "$node" "$port"
         ;;
     "arbiter")
-        mongodb_configure_arbiter "$node"
+        mongodb_configure_arbiter "$node" "$port"
         ;;
     "hidden")
-        mongodb_configure_hidden "$node"
+        mongodb_configure_hidden "$node" "$port"
         ;;
     "dynamic")
         # Do nothing
@@ -1333,6 +1450,19 @@ mongodb_is_file_external() {
     else
         false
     fi
+}
+
+########################
+# Get MongoDB version
+# Globals:
+#   MONGODB_*
+# Arguments:
+#   None
+# Returns:
+#   version
+#########################
+mongodb_get_version() {
+    mongo --version 2>/dev/null | grep 'shell version v' | sed 's/.* v//g'
 }
 
 ########################
