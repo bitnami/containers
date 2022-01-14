@@ -11,12 +11,14 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl gzip libc6 libfontconfig procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "grafana" "8.3.3-1" --checksum 58cd2bbf087e5b95e065576d54c429ac82e293a8fe583862eb75f982d31b3fa0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/grafana/postunpack.sh
 ENV BITNAMI_APP_NAME="grafana" \
-    BITNAMI_IMAGE_VERSION="8.3.3-debian-10-r29" \
+    BITNAMI_IMAGE_VERSION="8.3.3-debian-10-r30" \
     PATH="/opt/bitnami/grafana/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 3000
