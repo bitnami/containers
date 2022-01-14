@@ -15,13 +15,15 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-clien
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.13-1" --checksum cf2e298428d67fb30c376ee6638c055afe54cc1f282bab314abc53a34c37be44
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "sonarqube" "9.2.4-2" --checksum 2d2a9344def1145e91c4c65d900ca29c8a0f4e73b65fc2ab1bc1e0d9be6c4223
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/sonarqube/postunpack.sh
 ENV BITNAMI_APP_NAME="sonarqube" \
-    BITNAMI_IMAGE_VERSION="9.2.4-debian-10-r21" \
+    BITNAMI_IMAGE_VERSION="9.2.4-debian-10-r22" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"
 
