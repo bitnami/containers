@@ -243,10 +243,10 @@ mongodb_sharded_configure_replica_set() {
             fi
             ;;
         "secondary")
-            mongodb_configure_secondary "$node"
+            mongodb_configure_secondary "$node" "$MONGODB_PORT_NUMBER"
             ;;
         "arbiter")
-            mongodb_configure_arbiter "$node"
+            mongodb_configure_arbiter "$node" "$MONGODB_PORT_NUMBER"
             ;;
         "dynamic")
             # Do nothing
