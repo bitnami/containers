@@ -13,13 +13,15 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio-client" "2022.1.7-1" --checksum 8ce303efdf2a7d2e3185cdae9c39d7df758e6734f7501e718a2819a98a8755a2
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio" "2021.12.29-1" --checksum 69fa5d0997eb33a7b7f56cb2745a3579c6ea1124f1f55b602a3d339e8e49afd8
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/minio-client/postunpack.sh
 RUN /opt/bitnami/scripts/minio/postunpack.sh
 ENV BITNAMI_APP_NAME="minio" \
-    BITNAMI_IMAGE_VERSION="2021.12.29-debian-10-r13" \
+    BITNAMI_IMAGE_VERSION="2021.12.29-debian-10-r14" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/minio-client/bin:/opt/bitnami/minio/bin:$PATH"
 
 VOLUME [ "/certs", "/data" ]
