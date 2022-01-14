@@ -12,13 +12,15 @@ RUN install_packages acl ca-certificates curl gzip libaio1 libc6 libcom-err2 lib
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.1-1" --checksum d7c3c81138361e10e6ddd7eae3ac323740a8477ce395a8c00ab0dba76fd25948
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql" "8.0.27-1" --checksum 8507eae787c4648fa7ae3ae944796f4e17fe5428e34d9b1f78648c7fd911821d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql/postunpack.sh
 ENV BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="8.0.27-debian-10-r79" \
+    BITNAMI_IMAGE_VERSION="8.0.27-debian-10-r80" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mysql/bin:/opt/bitnami/mysql/sbin:$PATH"
 
 EXPOSE 3306
