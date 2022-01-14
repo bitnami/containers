@@ -14,13 +14,15 @@ RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 lsof netcat-tra
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.312-1" --checksum 2699ce844c410513ef7fd7180c2a0a6e4c740581a4a999ab5e3bed6bbe8be3bc
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "solr" "8.11.1-1" --checksum 1f1b4ce0187df7be49fcbbd3d3ff5b8095f02c8c0c30d3b12b830d35d1f6bfe3
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/solr/postunpack.sh
 ENV BITNAMI_APP_NAME="solr" \
-    BITNAMI_IMAGE_VERSION="8.11.1-debian-10-r26" \
+    BITNAMI_IMAGE_VERSION="8.11.1-debian-10-r27" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/solr/bin:/opt/bitnami/common/bin:$PATH"
 
