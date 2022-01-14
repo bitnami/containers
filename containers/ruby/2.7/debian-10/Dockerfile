@@ -12,12 +12,14 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "a08fd87126902d0fa32351fc40378bda8259aeb0587d1b6040e73df83d2130c0  /tmp/bitnami/pkg/cache/ruby-2.7.5-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/ruby-2.7.5-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/ruby-2.7.5-2-linux-amd64-debian-10.tar.gz
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS    0/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="2.7.5-debian-10-r49" \
+    BITNAMI_IMAGE_VERSION="2.7.5-debian-10-r50" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 EXPOSE 3000
