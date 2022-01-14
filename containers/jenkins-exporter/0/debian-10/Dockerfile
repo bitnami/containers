@@ -17,10 +17,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "0aac27a0521a267e6afc4ca985d44f6e6861341b055fc4db83f572a5fe6eb68e  /tmp/bitnami/pkg/cache/jenkins-exporter-0.20171225.0-5-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/jenkins-exporter-0.20171225.0-5-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/jenkins-exporter-0.20171225.0-5-linux-amd64-debian-10.tar.gz
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="jenkins-exporter" \
-    BITNAMI_IMAGE_VERSION="0.20171225.0-debian-10-r675" \
+    BITNAMI_IMAGE_VERSION="0.20171225.0-debian-10-r676" \
     PATH="/opt/bitnami/jenkins-exporter/venv/bin:$PATH"
 
 EXPOSE 9118
