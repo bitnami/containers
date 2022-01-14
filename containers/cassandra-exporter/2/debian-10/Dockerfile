@@ -17,10 +17,12 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "161417579099ed61bd259bae0477e2901e4b69fe7850b2dc3d292678106dbb85  /tmp/bitnami/pkg/cache/cassandra-exporter-2.3.4-4-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/cassandra-exporter-2.3.4-4-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/cassandra-exporter-2.3.4-4-linux-amd64-debian-10.tar.gz
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="cassandra-exporter" \
-    BITNAMI_IMAGE_VERSION="2.3.4-debian-10-r632" \
+    BITNAMI_IMAGE_VERSION="2.3.4-debian-10-r633" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 8080
