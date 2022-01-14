@@ -17,11 +17,13 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "8d78615bbe731fd0830beb72c32fa41c23da00fea3eb69bba2db48aa099bc06f  /tmp/bitnami/pkg/cache/keycloak-config-cli-4.5.0-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/keycloak-config-cli-4.5.0-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/keycloak-config-cli-4.5.0-1-linux-amd64-debian-10.tar.gz
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN ln -sf /opt/bitnami/keycloak-config-cli/keycloak-config-cli.jar /opt/keycloak-config-cli.jar
 
 ENV BITNAMI_APP_NAME="keycloak-config-cli" \
-    BITNAMI_IMAGE_VERSION="4.5.0-debian-10-r20" \
+    BITNAMI_IMAGE_VERSION="4.5.0-debian-10-r21" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 WORKDIR /opt/bitnami/keycloak-config-cli
