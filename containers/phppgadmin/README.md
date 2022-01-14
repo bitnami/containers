@@ -1,3 +1,7 @@
+# DEPRECATION NOTICE
+
+This image has been deprecated, and will no longer be maintained and updated since the project has been discontinued and no new features. 
+
 # phpPgAdmin packaged by Bitnami
 
 ## What is phpPgAdmin?
