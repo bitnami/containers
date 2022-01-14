@@ -13,12 +13,14 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "11dc6d2d89a826f4186a9ec19ca16f68c9a7c846446081e2a07d2d98f56f2608  /tmp/bitnami/pkg/cache/kubewatch-0.1.0-5-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/kubewatch-0.1.0-5-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/kubewatch-0.1.0-5-linux-amd64-debian-10.tar.gz
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN chown -R 1001:root /opt/bitnami/kubewatch/ && chmod g+rwX /opt/bitnami/kubewatch/
 ENV BITNAMI_APP_NAME="kubewatch" \
-    BITNAMI_IMAGE_VERSION="0.1.0-debian-10-r502" \
+    BITNAMI_IMAGE_VERSION="0.1.0-debian-10-r503" \
     KW_CONFIG="/opt/bitnami/kubewatch" \
     KW_FLOCK_URL="" \
     KW_HIPCHAT_ROOM="" \
