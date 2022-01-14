@@ -17,6 +17,8 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "reportserver" "3.7.1-6050-1" --checksum 246c05af1cc1719d37a6433f798a8192087d1d4108d7b87acdfe472cbe91363d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-5" --checksum 9e312b4a7e16a55d08e67c4fd69c91000e4dcc4af149d59915c49375b83852af
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
@@ -25,7 +27,7 @@ RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/reportserver/postunpack.sh
 RUN /opt/bitnami/scripts/tomcat/postunpack.sh
 ENV BITNAMI_APP_NAME="reportserver" \
-    BITNAMI_IMAGE_VERSION="3.7.1-6050-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="3.7.1-6050-debian-10-r5" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH" \
     TOMCAT_START_RETRIES="60"
