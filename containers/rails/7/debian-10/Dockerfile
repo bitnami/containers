@@ -16,12 +16,14 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.34.1-1" 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-5" --checksum 1e34030c18f0ec2467fa5f1b1fbad24add217f671c3a61628f7b8671391f9676
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rails" "7.0.1-0-0" --checksum e417762b51a7172667a5f77112989fb959d4c0ce9016a5cc1198e4bd9e1976fc
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/bitnami-user.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/rails/postunpack.sh
 ENV BITNAMI_APP_NAME="rails" \
-    BITNAMI_IMAGE_VERSION="7.0.1-0-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="7.0.1-0-debian-10-r1" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/ruby/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 3000
