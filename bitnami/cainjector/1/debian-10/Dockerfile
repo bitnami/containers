@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="cainjector" \
-    BITNAMI_IMAGE_VERSION="1.6.1-debian-10-r69" \
+    BITNAMI_IMAGE_VERSION="1.6.1-debian-10-r70" \
     PATH="/opt/bitnami/cainjector/bin:$PATH"
 
 WORKDIR /opt/bitnami/cainjector
