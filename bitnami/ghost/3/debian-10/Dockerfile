@@ -22,7 +22,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/ghost/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="3.42.8-debian-10-r29" \
+    BITNAMI_IMAGE_VERSION="3.42.8-debian-10-r30" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/ghost/bin:$PATH"
 
 EXPOSE 2368 3000
