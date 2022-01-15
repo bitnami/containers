@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="postgres-exporter" \
-    BITNAMI_IMAGE_VERSION="0.10.0-debian-10-r176" \
+    BITNAMI_IMAGE_VERSION="0.10.0-debian-10-r177" \
     PATH="/opt/bitnami/postgres-exporter/bin:$PATH"
 
 EXPOSE 9187
