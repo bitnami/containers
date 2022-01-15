@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="metallb-controller" \
-    BITNAMI_IMAGE_VERSION="0.11.0-debian-10-r71" \
+    BITNAMI_IMAGE_VERSION="0.11.0-debian-10-r72" \
     PATH="/opt/bitnami/metallb/bin:$PATH"
 
 USER 1001
