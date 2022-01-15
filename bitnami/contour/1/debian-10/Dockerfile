@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN ln -s /opt/bitnami/contour/bin/contour /bin/contour
 
 ENV BITNAMI_APP_NAME="contour" \
-    BITNAMI_IMAGE_VERSION="1.19.1-debian-10-r60" \
+    BITNAMI_IMAGE_VERSION="1.19.1-debian-10-r61" \
     PATH="/opt/bitnami/contour/bin:$PATH"
 
 USER 1001
