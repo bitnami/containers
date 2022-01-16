@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/nats/postunpack.sh
 ENV BITNAMI_APP_NAME="nats" \
-    BITNAMI_IMAGE_VERSION="2.7.0-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="2.7.0-debian-10-r2" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/nats/bin:$PATH"
 
 EXPOSE 4222 6222 8222
