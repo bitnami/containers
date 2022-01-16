@@ -28,7 +28,7 @@ RUN /opt/bitnami/scripts/jasperreports/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV BITNAMI_APP_NAME="jasperreports" \
-    BITNAMI_IMAGE_VERSION="7.8.1-debian-10-r59" \
+    BITNAMI_IMAGE_VERSION="7.8.1-debian-10-r60" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:/opt/bitnami/common/bin:$PATH"
 
