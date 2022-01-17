@@ -22,7 +22,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN mkdir /app && chmod g+rwX /app
 
 ENV BITNAMI_APP_NAME="gradle" \
-    BITNAMI_IMAGE_VERSION="7.3.3-debian-10-r23" \
+    BITNAMI_IMAGE_VERSION="7.3.3-debian-10-r24" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/gradle/bin:$PATH"
 
 WORKDIR /app
