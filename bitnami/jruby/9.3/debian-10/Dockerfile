@@ -12,10 +12,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "c081f7f9663d4d64e7f26d6e6a77b3860ee1f39c309bd564f801c39192042d2f  /tmp/bitnami/pkg/cache/python-3.8.12-12-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/python-3.8.12-12-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/python-3.8.12-12-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-14.18.3-2-linux-amd64-debian-10.tar.gz && \
-    echo "91f6ab54b35b44aa8cc7f5cdd29a3616faf2bf5d6492ff3086030db9e5fac2f2  /tmp/bitnami/pkg/cache/node-14.18.3-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/node-14.18.3-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/node-14.18.3-2-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-14.18.3-4-linux-amd64-debian-10.tar.gz && \
+    echo "db22b165d55c532af7af883535bf9f2dc2c0f6c7fcd86358be93e04e8b537fa0  /tmp/bitnami/pkg/cache/node-14.18.3-4-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/node-14.18.3-4-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/node-14.18.3-4-linux-amd64-debian-10.tar.gz
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/java-11.0.13-1-linux-amd64-debian-10.tar.gz && \
     echo "cf2e298428d67fb30c376ee6638c055afe54cc1f282bab314abc53a34c37be44  /tmp/bitnami/pkg/cache/java-11.0.13-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/java-11.0.13-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
@@ -31,7 +31,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 ENV BITNAMI_APP_NAME="jruby" \
-    BITNAMI_IMAGE_VERSION="9.3.2-0-debian-10-r37" \
+    BITNAMI_IMAGE_VERSION="9.3.2-0-debian-10-r38" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/java/bin:/opt/bitnami/jruby/bin:$PATH"
 
 EXPOSE 3000
