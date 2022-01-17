@@ -1,3 +1,7 @@
+# DEPRECATION NOTICE
+
+This image has been deprecated, and will no longer be maintained and updated since the project has been discontinued and no new features. 
+
 # Open Service Broker for Azure packaged by Bitnami
 
 ## What is Open Service Broker for Azure?
