@@ -96,7 +96,7 @@ pgbouncer_validate() {
 
     # TLS Checks (server)
     if [[ "$PGBOUNCER_SERVER_TLS_SSLMODE" != "disable" ]]; then
-        if [[ "$PGBOUNCER_SERVER_TLS_SSLMODE" != "verify-ca" && "$PGBOUNCER_SERVER_TLS_SSLMODE" != "verify-full" ]]; then 
+        if [[ "$PGBOUNCER_SERVER_TLS_SSLMODE" != "verify-ca" && "$PGBOUNCER_SERVER_TLS_SSLMODE" != "verify-full" ]]; then
             if [[ -z "$PGBOUNCER_SERVER_TLS_CERT_FILE" ]]; then
                 print_validation_error "You must provide a X.509 certificate in order to use server TLS"
             elif [[ ! -f "$PGBOUNCER_SERVER_TLS_CERT_FILE" ]]; then
