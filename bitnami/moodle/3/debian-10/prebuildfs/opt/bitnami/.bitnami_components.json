@@ -22,10 +22,10 @@
     },
     "moodle": {
         "arch": "amd64",
-        "digest": "cd57e52876a22c488b0c4fedc1a7b6253ede4e770472fbf3a41400cf50fc56e7",
+        "digest": "28ac92b37e98a4fa05d4c975817607df97d7997e7110cae762e9149d8d94062a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.11.4-1"
+        "version": "3.11.5-0"
     },
     "mysql-client": {
         "arch": "amd64",
