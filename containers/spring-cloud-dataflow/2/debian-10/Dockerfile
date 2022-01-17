@@ -23,7 +23,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/spring-cloud-dataflow/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV BITNAMI_APP_NAME="spring-cloud-dataflow" \
-    BITNAMI_IMAGE_VERSION="2.9.1-debian-10-r69" \
+    BITNAMI_IMAGE_VERSION="2.9.1-debian-10-r70" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"
 
