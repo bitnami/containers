@@ -21,7 +21,7 @@
 get_system_cert_paths() {
     if [[ "$OS_FLAVOUR" =~ ^(debian|ubuntu)-.*$ ]]; then
         echo "/etc/ssl/certs/"
-    elif [[ "$OS_FLAVOUR" =~ ^(centos|ol|photon)-.*$ ]]; then
+    elif [[ "$OS_FLAVOUR" =~ ^(centos|photon)-.*$ ]]; then
         echo "/etc/pki/tls/certs/"
     else
         # Check the existence of generic paths when OS_FLAVOR does
@@ -51,7 +51,7 @@ install_cert() {
 
     if [[ "$OS_FLAVOUR" =~ ^(debian|ubuntu)-.*$ ]]; then
         cat "$cert" >> /etc/ssl/certs/ca-certificates.crt
-    elif [[ "$OS_FLAVOUR" =~ ^(centos|ol|photon)-.*$ ]]; then
+    elif [[ "$OS_FLAVOUR" =~ ^(centos|photon)-.*$ ]]; then
         cat "$cert" >> /etc/pki/tls/certs/ca-bundle.crt
     else
         # Check the existence of generic ca-bundles when OS_FLAVOR does
