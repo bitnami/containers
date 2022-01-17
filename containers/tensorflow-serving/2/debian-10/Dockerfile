@@ -23,7 +23,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/tensorflow-serving/postunpack.sh
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="2.7.0-debian-10-r68" \
+    BITNAMI_IMAGE_VERSION="2.7.0-debian-10-r69" \
     JAVA_HOME="/opt/bitnami/java"
 
 EXPOSE 8500
