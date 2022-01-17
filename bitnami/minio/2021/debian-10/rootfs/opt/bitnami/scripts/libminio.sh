@@ -77,6 +77,52 @@ is_minio_running() {
 }
 
 ########################
+# Check if MinIO is live
+# Globals:
+#   MINIO_PID
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+########################
+is_minio_live() {
+    local status_code
+    if [[ -z "${MINIO_PID:-}" ]]; then
+        false
+    else
+        if ! is_service_running "$MINIO_PID"; then
+            false
+        else
+            # We use cURL because we need to check the liveness before the client is configured
+            status_code=$(curl --write-out '%{http_code}' --silent --output /dev/null "${MINIO_SCHEME}://127.0.0.1:${MINIO_API_PORT_NUMBER}/minio/health/live")
+            if [[ "$status_code" = "200" ]]; then
+                true
+            else
+                false
+            fi
+        fi
+    fi
+}
+
+########################
+# Wait for MinIO start
+# Globals:
+#   MINIO_STARTUP_TIMEOUT
+# Arguments:
+#   None
+# Returns:
+#   None
+########################
+wait_for_minio() {
+    local waited_time
+    waited_time=0
+    while ! is_minio_live && [[ "$waited_time" -lt "$MINIO_STARTUP_TIMEOUT" ]]; do
+        sleep 5
+        waited_time=$((waited_time+5))
+    done
+}
+
+########################
 # Start MinIO in background and wait until it's ready
 # Globals:
 #   MINIO_*
@@ -111,7 +157,7 @@ minio_start_bg() {
         "${exec}" "${args[@]}" >/dev/null 2>&1 &
     fi
     export MINIO_PID="$!"
-    sleep 10
+    wait_for_minio
 }
 
 ########################
