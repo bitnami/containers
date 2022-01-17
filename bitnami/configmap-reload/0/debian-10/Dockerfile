@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN ln -sf /opt/bitnami/configmap-reload/bin/configmap-reload /bin/configmap-reload
 
 ENV BITNAMI_APP_NAME="configmap-reload" \
-    BITNAMI_IMAGE_VERSION="0.6.1-debian-10-r28" \
+    BITNAMI_IMAGE_VERSION="0.6.1-debian-10-r29" \
     PATH="/opt/bitnami/configmap-reload/bin:$PATH"
 
 EXPOSE 8080
