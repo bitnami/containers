@@ -21,7 +21,7 @@ RUN /opt/bitnami/scripts/codeigniter/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
 ENV BITNAMI_APP_NAME="codeigniter" \
-    BITNAMI_IMAGE_VERSION="4.1.7-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="4.1.7-debian-10-r7" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/codeigniter/bin:$PATH" \
     PHP_ENABLE_OPCACHE="0"
 
