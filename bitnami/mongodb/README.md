@@ -811,6 +811,10 @@ $ docker-compose up mongodb
 - All volumes have been merged at `/bitnami/mongodb`. Now you only need to mount a single volume at `/bitnami/mongodb` for persistence.
 - The logs are always sent to the `stdout` and are no longer collected in the volume.
 
+## Branch Deprecation Notice
+
+MongoDB's branch 4.0 doesn't support Debian 10 which is the default distro for this Bitnami Application Catalog; apart from that, its EOL is closed (April 2022), due to those reasons, this version is now internally tagged as deprecated. This branch will no longer be released in our catalog, but already released container images will still persist in the registries.
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-mongodb/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-mongodb/pulls) with your contribution.
