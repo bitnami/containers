@@ -1,3 +1,7 @@
+# DEPRECATION NOTICE
+
+This image has been deprecated, and will no longer be maintained or updated since the project has been discontinued and will not receive new features.
+
 # User Broker packaged by Bitnami
 
 ## What is User Broker?
