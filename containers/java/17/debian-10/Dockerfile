@@ -27,7 +27,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="17.0.1-debian-10-r80" \
+    BITNAMI_IMAGE_VERSION="17.0.1-debian-10-r81" \
     JAVA_HOME="/opt/bitnami/java" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
