@@ -16,7 +16,7 @@ set -o pipefail
 
 print_welcome_page
 
-if [[ "$*" = "/opt/bitnami/scripts/openresty/run.sh" ]]; then
+if [[ "$1" = "/opt/bitnami/scripts/openresty/run.sh" ]]; then
     info "** Starting OpenResty setup **"
     /opt/bitnami/scripts/openresty/setup.sh
     info "** OpenResty setup finished! **"
