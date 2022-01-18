@@ -22,7 +22,7 @@ if [ ! $EUID -eq 0 ] && [ -e "$LIBNSS_WRAPPER_PATH" ]; then
     echo "LD_PRELOAD=$LIBNSS_WRAPPER_PATH" >> "$SPARK_CONFDIR/spark-env.sh"
 fi
 
-if [[ "$*" = "/opt/bitnami/scripts/spark/run.sh" ]]; then
+if [[ "$1" = "/opt/bitnami/scripts/spark/run.sh" ]]; then
     info "** Starting Spark setup **"
     /opt/bitnami/scripts/spark/setup.sh
     info "** Spark setup finished! **"
