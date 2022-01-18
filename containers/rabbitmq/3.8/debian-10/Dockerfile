@@ -26,7 +26,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/rabbitmq/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.8.27-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="3.8.27-debian-10-r7" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en"
 
