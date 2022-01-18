@@ -1,3 +1,7 @@
+# DEPRECATION NOTICE
+
+This image has been deprecated, and will no longer be maintained nor updated since the upstream project does not support any of the maintained PHP versions.
+
 # OrangeHRM packaged by Bitnami
 
 ## What is OrangeHRM?
