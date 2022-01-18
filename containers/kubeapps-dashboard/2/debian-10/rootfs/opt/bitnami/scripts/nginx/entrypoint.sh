@@ -16,7 +16,7 @@ set -o pipefail
 
 print_welcome_page
 
-if [[ "$*" = "/opt/bitnami/scripts/nginx/run.sh" ]]; then
+if [[ "$1" = "/opt/bitnami/scripts/nginx/run.sh" ]]; then
     info "** Starting NGINX setup **"
     /opt/bitnami/scripts/nginx/setup.sh
     info "** NGINX setup finished! **"
