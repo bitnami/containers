@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="telegraf" \
-    BITNAMI_IMAGE_VERSION="1.21.2-debian-10-r10" \
+    BITNAMI_IMAGE_VERSION="1.21.2-debian-10-r11" \
     PATH="/opt/bitnami/telegraf/bin:$PATH"
 
 USER 1001
