@@ -16,7 +16,7 @@ set -o pipefail
 
 print_welcome_page
 
-if [[ "$*" = "/opt/bitnami/scripts/etcd/run.sh" ]]; then
+if [[ "$1" = "/opt/bitnami/scripts/etcd/run.sh" ]]; then
     info "** Starting etcd setup **"
     /opt/bitnami/scripts/etcd/setup.sh
     info "** etcd setup finished! **"
