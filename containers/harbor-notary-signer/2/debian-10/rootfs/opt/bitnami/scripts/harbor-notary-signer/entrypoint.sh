@@ -12,7 +12,7 @@ set -o pipefail
 
 print_welcome_page
 
-if [[ "$*" = "/opt/bitnami/scripts/harbor-notary-signer/run.sh" ]]; then
+if [[ "$1" = "/opt/bitnami/scripts/harbor-notary-signer/run.sh" ]]; then
     info "** Starting Harbor Notary Signer setup **"
     /opt/bitnami/scripts/harbor-notary-signer/setup.sh
     info "** Harbor Notary Signer setup finished! **"
