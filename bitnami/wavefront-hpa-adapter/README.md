@@ -31,7 +31,7 @@ $ docker run --name wavefront-hpa-adapter bitnami/wavefront-hpa-adapter:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-scratch`, `0.9.8`, `0.9.8-scratch-r8`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-hpa-adapter/blob/0.9.8-scratch-r8/0/scratch/Dockerfile)
+* [`0`, `0-scratch`, `0.9.8`, `0.9.8-scratch-r9`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-hpa-adapter/blob/0.9.8-scratch-r9/0/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wavefront-hpa-adapter GitHub repo](https://github.com/bitnami/bitnami-docker-wavefront-hpa-adapter).
 
@@ -87,7 +87,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright 2021 Bitnami
+Copyright &copy; 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
