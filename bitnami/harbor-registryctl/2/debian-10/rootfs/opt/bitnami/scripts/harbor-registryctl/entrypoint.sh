@@ -12,7 +12,7 @@ set -o pipefail
 
 print_welcome_page
 
-if [[ "$*" = "/opt/bitnami/scripts/harbor-registryctl/run.sh" ]]; then
+if [[ "$1" = "/opt/bitnami/scripts/harbor-registryctl/run.sh" ]]; then
     info "** Starting Harbor Registryctl setup **"
     /opt/bitnami/scripts/harbor-registryctl/setup.sh
     info "** Harbor Registryctl setup finished! **"
