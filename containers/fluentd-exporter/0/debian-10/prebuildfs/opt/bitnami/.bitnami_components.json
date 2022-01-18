@@ -1,9 +1,9 @@
 {
     "fluentd-exporter": {
         "arch": "amd64",
-        "digest": "1c603a26b31f09483454a2b64a22eeb0df3254add002020a908a9ec42ce25b2f",
+        "digest": "5db6d8a328f8fc267e45d6b5806bd3fdd64349991af2aeb25d098b8be4efaa19",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.2.0-2"
+        "version": "0.2.0-23"
     }
 }
