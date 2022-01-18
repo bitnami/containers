@@ -12,7 +12,7 @@ set -o pipefail
 
 print_welcome_page
 
-if [[ "$*" = "/opt/bitnami/scripts/harbor-jobservice/run.sh" ]]; then
+if [[ "$1" = "/opt/bitnami/scripts/harbor-jobservice/run.sh" ]]; then
     info "** Starting Harbor Job Service setup **"
     /opt/bitnami/scripts/harbor-jobservice/setup.sh
     info "** Harbor Job Service setup finished! **"
