@@ -177,13 +177,13 @@ parse_dashboard_conf_get() {
 #########################
 parse_dashboard_wait_for_parse_connection() {
     local -r host="${1:?missing connection string}"
-    # Using the users API endpoint to check that Parse works
-    # Based on https://docs.parseplatform.org/rest/guide/#retrieving-users
+    # Using the health API endpoint to check that Parse works
+    # https://github.com/parse-community/parse-server/blob/release/src/ParseServer.js#L168
     check_parse_connection() {
-        local -r curl_args=("-k" "--header" "X-Parse-Application-Id: ${PARSE_DASHBOARD_PARSE_APP_ID}" "${host}/users")
+        local -r curl_args=("-k" "--header" "X-Parse-Application-Id: ${PARSE_DASHBOARD_PARSE_APP_ID}" "${host}/health")
         local -r res="$(curl "${curl_args[@]}" 2>&1)"
         debug "$res"
-        echo "$res" | grep -q '"results"'
+        echo "$res"
     }
     if ! retry_while "check_parse_connection"; then
         error "Could not connect to Parse"
