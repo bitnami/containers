@@ -12,7 +12,7 @@ set -o pipefail
 
 print_welcome_page
 
-if [[ "$*" = "/opt/bitnami/scripts/harbor-clair/run.sh" ]]; then
+if [[ "$1" = "/opt/bitnami/scripts/harbor-clair/run.sh" ]]; then
     info "** Starting Harbor Clair setup **"
     /opt/bitnami/scripts/harbor-clair/setup.sh
     info "** Harbor Clair setup finished! **"
