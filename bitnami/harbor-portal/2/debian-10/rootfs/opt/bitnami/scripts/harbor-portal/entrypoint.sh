@@ -16,7 +16,7 @@ set -o pipefail
 
 print_welcome_page
 
-if [[ "$*" = "/opt/bitnami/scripts/nginx/run.sh" ]]; then
+if [[ "$1" = "/opt/bitnami/scripts/nginx/run.sh" ]]; then
     info "** Starting Harbor Portal setup **"
     /opt/bitnami/scripts/nginx/setup.sh
     /opt/bitnami/scripts/harbor-portal/setup.sh
