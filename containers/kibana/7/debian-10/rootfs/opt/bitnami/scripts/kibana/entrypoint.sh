@@ -17,7 +17,7 @@ set -o pipefail
 
 print_welcome_page
 
-if [[ "$*" = "/opt/bitnami/scripts/kibana/run.sh" ]]; then
+if [[ "$1" = "/opt/bitnami/scripts/kibana/run.sh" ]]; then
     info "** Starting Kibana setup **"
     /opt/bitnami/scripts/kibana/setup.sh
     info "** Kibana setup finished! **"
