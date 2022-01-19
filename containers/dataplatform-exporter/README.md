@@ -31,7 +31,7 @@ $ docker run --name dataplatform-exporter bitnami/dataplatform-exporter:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`1`, `1-scratch`, `1.0.1`, `1.0.1-scratch-r6`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-dataplatform-exporter/blob/1.0.1-scratch-r6/1/scratch/Dockerfile)
+- [`1`, `1-scratch`, `1.0.1`, `1.0.1-scratch-r7`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-dataplatform-exporter/blob/1.0.1-scratch-r7/1/scratch/Dockerfile)
 - [`0`, `0-scratch`, `0.0.12`, `0.0.12-scratch-r5` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-dataplatform-exporter/blob/0.0.12-scratch-r5/0/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dataplatform-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-dataplatform-exporter).
@@ -78,6 +78,10 @@ $ docker run --rm --name dataplatform-exporter bitnami/dataplatform-exporter:lat
 
 Check the [official Data Platform Blueprint 1 documentation](https://bitnami.com/stack/data-platform-metrics-exporter#configuration) for more information.
 
+## Branch Deprecation Notice
+
+Data Platform Blueprint 1's branch 0 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 01-31-2022
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-dataplatform-exporter/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-dataplatform-exporter/pulls) with your contribution.
@@ -94,7 +98,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright 2021 Bitnami
+Copyright &copy; 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
