@@ -78,11 +78,11 @@ Among other things, the above command creates a container service, named `myapp`
 >
 > If the application directory contained the source code of an existing Laravel application, the Bitnami Laravel Development Container would load the existing application instead of bootstrapping a new one.
 
-After the artisan application server has been launched in the `myapp` service, visit `http://localhost:3000` in your favorite web browser and you'll be greeted by the default Laravel welcome page.
+After the artisan application server has been launched in the `myapp` service, visit `http://localhost:8000` in your favorite web browser and you'll be greeted by the default Laravel welcome page.
 
 > **Note**
 >
-> If no application available at `http://localhost:3000` and you're running Docker on Windows, you might need to uncomment `privileged` setting for `myapp` container. Later, re-launch the Laravel application development environment as stated before.
+> If no application available at `http://localhost:8000` and you're running Docker on Windows, you might need to uncomment `privileged` setting for `myapp` container. Later, re-launch the Laravel application development environment as stated before.
 
 In addition to the Laravel Development Container, the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/bitnami-docker-laravel/master/docker-compose.yml) file also configures a MariaDB service to serve as the database backend of your Laravel application.
 
