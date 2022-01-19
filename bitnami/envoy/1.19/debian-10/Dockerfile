@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="envoy" \
-    BITNAMI_IMAGE_VERSION="1.19.1-debian-10-r136" \
+    BITNAMI_IMAGE_VERSION="1.19.1-debian-10-r137" \
     PATH="/opt/bitnami/envoy/bin:$PATH"
 
 USER 1001
