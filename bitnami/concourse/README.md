@@ -2,7 +2,7 @@
 
 ## What is Concourse?
 
-> Concourse is an open source automation tool. It enables developers to create and configure workflows using YAML.
+> Concourse is an automation system written in Go. It is most commonly used for CI/CD, and is built to scale to any kind of automation pipeline, from simple to complex.
 
 [Overview of Concourse](https://concourse-ci.org/)
 
@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.6.0`, `7.6.0-debian-10-r74`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-concourse/blob/7.6.0-debian-10-r74/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.6.0`, `7.6.0-debian-10-r75`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-concourse/blob/7.6.0-debian-10-r75/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/concourse GitHub repo](https://github.com/bitnami/bitnami-docker-concourse).
 
