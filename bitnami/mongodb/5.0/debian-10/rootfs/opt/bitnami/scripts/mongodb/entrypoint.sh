@@ -16,7 +16,7 @@ set -o pipefail
 
 print_welcome_page
 
-if [[ "$*" = "/opt/bitnami/scripts/mongodb/run.sh" ]]; then
+if [[ "$1" = "/opt/bitnami/scripts/mongodb/run.sh" ]]; then
     info "** Starting MongoDB setup **"
     /opt/bitnami/scripts/mongodb/setup.sh
     info "** MongoDB setup finished! **"
