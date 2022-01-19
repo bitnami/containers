@@ -12,7 +12,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaio1 libc6 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.13-1" --checksum cf2e298428d67fb30c376ee6638c055afe54cc1f282bab314abc53a34c37be44
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wildfly" "25.0.1-1" --checksum 7e6cd5c84b1ea5cb41bc8631b9dc719ab7503439ad671dc8c8b732532739ed66
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wildfly" "25.0.1-2" --checksum 08e2c8ec7fccf3aa14b3d7ea902377670dc7124e00d8da1735639c4d48d31980
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -22,7 +22,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/wildfly/postunpack.sh
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="25.0.1-debian-10-r69" \
+    BITNAMI_IMAGE_VERSION="25.0.1-debian-10-r70" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:/opt/bitnami/common/bin:$PATH" \
     WILDFLY_HOME="/home/wildfly"
