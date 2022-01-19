@@ -1,10 +1,10 @@
-# OAuth 2 Proxy packaged by Bitnami
+# OAuth2 Proxy packaged by Bitnami
 
-## What is OAuth 2 Proxy?
+## What is OAuth2 Proxy?
 
 > A reverse proxy and static file server that provides authentication using Providers (Google, GitHub, and others) to validate accounts by email, domain or group.
 
-[Overview of OAuth 2 Proxy](https://github.com/oauth2-proxy/oauth2-proxy)
+[Overview of OAuth2 Proxy](https://github.com/oauth2-proxy/oauth2-proxy)
 
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.2.1`, `7.2.1-debian-10-r26`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/7.2.1-debian-10-r26/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.2.1`, `7.2.1-debian-10-r27`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/7.2.1-debian-10-r27/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/oauth2-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-oauth2-proxy).
 
