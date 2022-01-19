@@ -17,7 +17,7 @@ set -o pipefail
 
 print_welcome_page
 
-if [[ "$*" = "/opt/bitnami/scripts/rabbitmq/run.sh" ]]; then
+if [[ "$1" = "/opt/bitnami/scripts/rabbitmq/run.sh" ]]; then
     info "** Starting RabbitMQ setup **"
     /opt/bitnami/scripts/rabbitmq/setup.sh
     info "** RabbitMQ setup finished! **"
