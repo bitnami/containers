@@ -16,7 +16,7 @@ set -o pipefail
 
 print_welcome_page
 
-if [[ "$*" = "/opt/bitnami/scripts/elasticsearch/run.sh" ]]; then
+if [[ "$1" = "/opt/bitnami/scripts/elasticsearch/run.sh" ]]; then
     info "** Starting Elasticsearch setup **"
     /opt/bitnami/scripts/elasticsearch/setup.sh
     info "** Elasticsearch setup finished! **"
