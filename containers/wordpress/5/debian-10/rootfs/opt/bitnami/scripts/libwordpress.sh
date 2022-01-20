@@ -236,6 +236,17 @@ wordpress_initialize() {
             fi
             # Configure random keys and salt values
             wp_execute config shuffle-salts
+
+            # Configure keys and salt values
+            ! is_empty_value "$WORDPRESS_AUTH_KEY" && wordpress_conf_set "AUTH_KEY" "$WORDPRESS_AUTH_KEY"
+            ! is_empty_value "$WORDPRESS_SECURE_AUTH_KEY" && wordpress_conf_set "SECURE_AUTH_KEY" "$WORDPRESS_SECURE_AUTH_KEY"
+            ! is_empty_value "$WORDPRESS_LOGGED_IN_KEY" && wordpress_conf_set "LOGGED_IN_KEY" "$WORDPRESS_LOGGED_IN_KEY"
+            ! is_empty_value "$WORDPRESS_NONCE_KEY" && wordpress_conf_set "NONCE_KEY" "$WORDPRESS_NONCE_KEY"
+            ! is_empty_value "$WORDPRESS_AUTH_SALT" && wordpress_conf_set "AUTH_SALT" "$WORDPRESS_AUTH_SALT"
+            ! is_empty_value "$WORDPRESS_SECURE_AUTH_SALT" && wordpress_conf_set "SECURE_AUTH_SALT" "$WORDPRESS_SECURE_AUTH_SALT"
+            ! is_empty_value "$WORDPRESS_LOGGED_IN_SALT" && wordpress_conf_set "LOGGED_IN_SALT" "$WORDPRESS_LOGGED_IN_SALT"
+            ! is_empty_value "$WORDPRESS_NONCE_SALT" && wordpress_conf_set "NONCE_SALT" "$WORDPRESS_NONCE_SALT"
+
             # Enable or disable auto-updates
             # https://wordpress.org/support/article/configuring-automatic-background-updates/#constant-to-configure-core-updates
             if [[ "$WORDPRESS_AUTO_UPDATE_LEVEL" = "minor" ]]; then
