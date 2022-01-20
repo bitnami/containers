@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="wal-g" \
-    BITNAMI_IMAGE_VERSION="1.1.0-debian-10-r153" \
+    BITNAMI_IMAGE_VERSION="1.1.0-debian-10-r154" \
     PATH="/opt/bitnami/wal-g/bin:$PATH"
 
 USER 1001
