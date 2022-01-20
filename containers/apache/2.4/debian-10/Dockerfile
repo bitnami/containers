@@ -21,7 +21,7 @@ RUN /opt/bitnami/scripts/apache/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="apache" \
-    BITNAMI_IMAGE_VERSION="2.4.52-debian-10-r29" \
+    BITNAMI_IMAGE_VERSION="2.4.52-debian-10-r30" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/apache/bin:$PATH"
 
 EXPOSE 8080 8443
