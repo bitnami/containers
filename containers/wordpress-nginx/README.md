@@ -263,6 +263,19 @@ Available environment variables:
 - `WORDPRESS_DATABASE_SSL_CA_FILE`: Path to the database server CA bundle file. No defaults
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
+##### Salt and keys configuration
+
+Authentication unique keys and salts. Specify these values to prevent cookies from being invalidated when creating a new container or when using multiple containers to serve the same WordPress instance. By default these values are generated randomly:
+
+- `WORDPRESS_AUTH_KEY`: Set the value of the `AUTH_KEY` constant in `wp-config.php`
+- `WORDPRESS_SECURE_AUTH_KEY`: Set the value of the `SECURE_AUTH_KEY` constant in `wp-config.php`
+- `WORDPRESS_LOGGED_IN_KEY`: Set the value of the `LOGGED_IN_KEY` constant in `wp-config.php`
+- `WORDPRESS_NONCE_KEY`: Set the value of the `NONCE_KEY` constant in `wp-config.php`
+- `WORDPRESS_AUTH_SALT`: Set the value of the `AUTH_SALT` constant in `wp-config.php`
+- `WORDPRESS_SECURE_AUTH_SALT`: Set the value of the `SECURE_AUTH_SALT` constant in `wp-config.php`
+- `WORDPRESS_LOGGED_IN_SALT`: Set the value of the `LOGGED_IN_SALT` constant in `wp-config.php`
+- `WORDPRESS_NONCE_SALT`: Set the value of the `NONCE_SALT` constant in `wp-config.php`
+
 ##### Create a database for WordPress using mysql-client
 
 - `MYSQL_CLIENT_FLAVOR`: SQL database flavor. Valid values: `mariadb` or `mysql`. Default: **mariadb**
