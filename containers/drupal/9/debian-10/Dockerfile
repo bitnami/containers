@@ -15,7 +15,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "8.1.2-0" --checksum 78d3283136eccf7e154fd2629adb1fe96a50ef3991242596e1926f19a735354b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-5" --checksum 9e312b4a7e16a55d08e67c4fd69c91000e4dcc4af149d59915c49375b83852af
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "drupal" "9.3.2-1" --checksum dc3c56a16b39cb7ebe2212251fc4edd8e11d7fc0758234a8de4572b9256a0302
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "drupal" "9.3.3-2" --checksum fa3c07bec3bd8c9a48c008e6c5717ff4fd76eddf55b067e0653123e9a7420362
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -29,7 +29,7 @@ RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="9.3.2-debian-10-r14" \
+    BITNAMI_IMAGE_VERSION="9.3.3-debian-10-r0" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/drupal/vendor/bin:$PATH"
 
 EXPOSE 8080 8443
