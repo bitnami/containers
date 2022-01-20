@@ -31,7 +31,7 @@ RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="matomo" \
-    BITNAMI_IMAGE_VERSION="4.6.2-debian-10-r38" \
+    BITNAMI_IMAGE_VERSION="4.6.2-debian-10-r39" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080 8443
