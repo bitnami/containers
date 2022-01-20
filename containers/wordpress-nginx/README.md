@@ -37,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`5`, `5-debian-10`, `5.8.3`, `5.8.3-debian-10-r8`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.8.3-debian-10-r8/5/debian-10/Dockerfile)
+- [`5`, `5-debian-10`, `5.8.3`, `5.8.3-debian-10-r9`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.8.3-debian-10-r9/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress-nginx).
 
@@ -262,19 +262,6 @@ Available environment variables:
 - `WORDPRESS_DATABASE_SSL_KEY_FILE`: Path to the database client certificate key file. No defaults
 - `WORDPRESS_DATABASE_SSL_CA_FILE`: Path to the database server CA bundle file. No defaults
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-##### Salt and keys configuration
-
-Authentication unique keys and salts. Specify these values to prevent cookies from being invalidated when creating a new container or when using multiple containers to serve the same WordPress instance. By default these values are generated randomly:
-
-- `WORDPRESS_AUTH_KEY`: Set the value of the `AUTH_KEY` constant in `wp-config.php`
-- `WORDPRESS_SECURE_AUTH_KEY`: Set the value of the `SECURE_AUTH_KEY` constant in `wp-config.php`
-- `WORDPRESS_LOGGED_IN_KEY`: Set the value of the `LOGGED_IN_KEY` constant in `wp-config.php`
-- `WORDPRESS_NONCE_KEY`: Set the value of the `NONCE_KEY` constant in `wp-config.php`
-- `WORDPRESS_AUTH_SALT`: Set the value of the `AUTH_SALT` constant in `wp-config.php`
-- `WORDPRESS_SECURE_AUTH_SALT`: Set the value of the `SECURE_AUTH_SALT` constant in `wp-config.php`
-- `WORDPRESS_LOGGED_IN_SALT`: Set the value of the `LOGGED_IN_SALT` constant in `wp-config.php`
-- `WORDPRESS_NONCE_SALT`: Set the value of the `NONCE_SALT` constant in `wp-config.php`
 
 ##### Create a database for WordPress using mysql-client
 
