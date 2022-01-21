@@ -1,23 +1,23 @@
 {
     "dumb-init": {
         "arch": "amd64",
-        "digest": "c0f832a9ceee7bb697658d90a5233cc8468847b4701029dec16495f0782a93e2",
+        "digest": "d5425adcd16cdd060e57e8173750073e94695efeaaa36fb9332f0e63abf39ea4",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.2.5-0"
+        "version": "1.2.5-1"
     },
     "gitlab-runner-helper": {
         "arch": "amd64",
-        "digest": "e88970943af623640040d2b908b40c83ac67a0725784a9e66679d1164ca5fd99",
+        "digest": "f92a9d92e3c77dac0cd35bafd96c18af2fb01444487cb6b71efc2c2c361e0118",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "14.7.0-0"
+        "version": "14.7.0-1"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc",
+        "digest": "7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-1"
+        "version": "1.14.0-2"
     }
 }
