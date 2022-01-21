@@ -1,24 +1,24 @@
 {
     "git": {
         "arch": "amd64",
-        "digest": "424d40a4b5af1fcddbfd407ac97543378864d1b4539064ceef428e526bfd4f0e",
+        "digest": "c6f5511335c6ea2e98cb02cefc77a67aae6e570a0a15229ab620414d0278525a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.34.1-1"
+        "version": "2.34.1-2"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc",
+        "digest": "7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-1"
+        "version": "1.14.0-2"
     },
     "harbor-clair": {
         "arch": "amd64",
-        "digest": "41f3f332a42d90e683caaca2bd7da0521082d1c3650b7e1955822654327fa3fe",
+        "digest": "d171fe40d3912e00d55f02a0623ce3d31631404800dd2cc0b8e89cfd441a084f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.1-3"
+        "version": "2.4.1-4"
     },
     "wait-for-port": {
         "arch": "amd64",
