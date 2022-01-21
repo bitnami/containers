@@ -1,10 +1,10 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc",
+        "digest": "7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-1"
+        "version": "1.14.0-2"
     },
     "java": {
         "arch": "amd64",
@@ -15,10 +15,10 @@
     },
     "kafka": {
         "arch": "amd64",
-        "digest": "29c5bed69d744e107c2a473947b83222e614b452b7b3cf881834be044d535786",
+        "digest": "844e3cc506d8c22fad9df25e68edcc8d7716de387a08a877f3b8f4ae850192ef",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.8.1-1"
+        "version": "2.8.1-2"
     },
     "render-template": {
         "arch": "amd64",
