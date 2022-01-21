@@ -1,17 +1,17 @@
 {
     "codeigniter": {
         "arch": "amd64",
-        "digest": "896498d1282359653f7566274a6fe5ecdf9b395ad269eed4f946e482e15a150f",
+        "digest": "ec3dda5d1c4e49e67f4dd0b6253c74a30fb8fdfde689063f6ffe57dcaf9acbea",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.1.7-1"
+        "version": "4.1.7-2"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc",
+        "digest": "7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-1"
+        "version": "1.14.0-2"
     },
     "mysql-client": {
         "arch": "amd64",
