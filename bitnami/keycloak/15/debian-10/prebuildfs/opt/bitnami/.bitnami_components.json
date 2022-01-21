@@ -1,10 +1,10 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc",
+        "digest": "7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-1"
+        "version": "1.14.0-2"
     },
     "java": {
         "arch": "amd64",
@@ -15,10 +15,10 @@
     },
     "keycloak": {
         "arch": "amd64",
-        "digest": "8d938d192c4d007b818ebf14f29e031191f157f5898d96ca6ef178c8711820b3",
+        "digest": "82480b4e4f79076f2f0294ace1aba188ec3303afcf92c21ccb5e8c8503f1569b",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "15.1.1-2"
+        "version": "15.1.1-3"
     },
     "wait-for-port": {
         "arch": "amd64",
