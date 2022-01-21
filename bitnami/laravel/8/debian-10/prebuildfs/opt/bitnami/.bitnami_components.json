@@ -1,17 +1,17 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc",
+        "digest": "7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-1"
+        "version": "1.14.0-2"
     },
     "laravel": {
         "arch": "amd64",
-        "digest": "14bcaaa0f492537aa45e2d768fcc7c4fa38355957d51fd9059a6a2dcc7679e8f",
+        "digest": "ba9c586f84fa586afb1f8eae3d4fef41c5e1422dee048c013e8e61745d05556d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.6.10-3"
+        "version": "8.6.10-4"
     },
     "node": {
         "arch": "amd64",
