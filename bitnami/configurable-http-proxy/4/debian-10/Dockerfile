@@ -17,16 +17,16 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "db22b165d55c532af7af883535bf9f2dc2c0f6c7fcd86358be93e04e8b537fa0  /tmp/bitnami/pkg/cache/node-14.18.3-4-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/node-14.18.3-4-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/node-14.18.3-4-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/configurable-http-proxy-4.5.0-1-linux-amd64-debian-10.tar.gz && \
-    echo "4a39d01828100c94bf545e3e4b2ee8f323a68247751c003a6ae837d2907268c6  /tmp/bitnami/pkg/cache/configurable-http-proxy-4.5.0-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/configurable-http-proxy-4.5.0-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/configurable-http-proxy-4.5.0-1-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/configurable-http-proxy-4.5.0-2-linux-amd64-debian-10.tar.gz && \
+    echo "ab5695706745c0d35b034244c0a83dcc52268df5a8b5b32c938a57481ea1973d  /tmp/bitnami/pkg/cache/configurable-http-proxy-4.5.0-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/configurable-http-proxy-4.5.0-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/configurable-http-proxy-4.5.0-2-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="configurable-http-proxy" \
-    BITNAMI_IMAGE_VERSION="4.5.0-debian-10-r178" \
+    BITNAMI_IMAGE_VERSION="4.5.0-debian-10-r179" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/configurable-http-proxy/bin:$PATH"
 
 EXPOSE 3000
