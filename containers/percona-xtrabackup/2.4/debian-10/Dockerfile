@@ -9,16 +9,16 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libaio1 libatomic1 libc6 libcom-err2 libcurl4 libev4 libffi6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 libnettle6 libnghttp2-14 libp11-kit0 libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.1 libstdc++6 libtasn1-6 libunistring2 procps rsync tar wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/percona-xtrabackup-2.4.24-2-linux-amd64-debian-10.tar.gz && \
-    echo "63737cfe895c37cb9ba4beb6be0232f61887f1286f051dece181bd3004cfd51c  /tmp/bitnami/pkg/cache/percona-xtrabackup-2.4.24-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/percona-xtrabackup-2.4.24-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/percona-xtrabackup-2.4.24-2-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/percona-xtrabackup-2.4.24-3-linux-amd64-debian-10.tar.gz && \
+    echo "8b380a6ebfa4071888554207095512a3d8e989a7694591050181a61018f070b5  /tmp/bitnami/pkg/cache/percona-xtrabackup-2.4.24-3-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/percona-xtrabackup-2.4.24-3-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/percona-xtrabackup-2.4.24-3-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="percona-xtrabackup" \
-    BITNAMI_IMAGE_VERSION="2.4.24-debian-10-r122" \
+    BITNAMI_IMAGE_VERSION="2.4.24-debian-10-r123" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mysql/bin:$PATH"
 
 USER 1001
