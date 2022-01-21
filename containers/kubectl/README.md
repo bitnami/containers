@@ -33,7 +33,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.23`, `1.23-debian-10`, `1.23.2`, `1.23.2-debian-10-r1`, `latest` (1.23/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.23.2-debian-10-r1/1.23/debian-10/Dockerfile)
-* [`1.22`, `1.22-debian-10`, `1.22.5`, `1.22.5-debian-10-r32` (1.22/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.22.5-debian-10-r32/1.22/debian-10/Dockerfile)
+* [`1.22`, `1.22-debian-10`, `1.22.6`, `1.22.6-debian-10-r0` (1.22/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.22.6-debian-10-r0/1.22/debian-10/Dockerfile)
 * [`1.21`, `1.21-debian-10`, `1.21.9`, `1.21.9-debian-10-r2` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.21.9-debian-10-r2/1.21/debian-10/Dockerfile)
 * [`1.20`, `1.20-debian-10`, `1.20.15`, `1.20.15-debian-10-r1` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.20.15-debian-10-r1/1.20/debian-10/Dockerfile)
 
