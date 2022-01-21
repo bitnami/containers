@@ -11,7 +11,7 @@ RUN install_packages acl ca-certificates curl gzip libaudit1 libbsd0 libbz2-1.0 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.4.27-8" --checksum 91191e8bdf140a08f873675198c998fa4fabbea0a22fce0791568b5f8c11aaad
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.32-1" --checksum 727834a55587746f90b159966c9abf2ce31a6effbe83d8c38ee6250641c9a22a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "symfony" "5.3.13-2" --checksum d947162a58419d33ef1add6bdcc44e112a8389b5689119ca4aa96f7d0bb74169
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-2" --checksum 7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/bitnami-user.sh
@@ -21,7 +21,7 @@ RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/symfony/postunpack.sh
 ENV BITNAMI_APP_NAME="symfony" \
-    BITNAMI_IMAGE_VERSION="5.3.13-debian-10-r20" \
+    BITNAMI_IMAGE_VERSION="5.3.13-debian-10-r21" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/symfony/bin:/opt/bitnami/common/bin:$PATH" \
     PHP_ENABLE_OPCACHE="0"
 
