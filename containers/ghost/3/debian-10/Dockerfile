@@ -12,8 +12,8 @@ RUN install_packages acl ca-certificates curl gzip jq libaudit1 libbsd0 libbz2-1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-12" --checksum c081f7f9663d4d64e7f26d6e6a77b3860ee1f39c309bd564f801c39192042d2f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.18.3-4" --checksum db22b165d55c532af7af883535bf9f2dc2c0f6c7fcd86358be93e04e8b537fa0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.32-1" --checksum 727834a55587746f90b159966c9abf2ce31a6effbe83d8c38ee6250641c9a22a
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ghost" "3.42.8-1" --checksum 9f83ac5387459cf60294f7e0778e19847196db250337c6d10fcf4843391226cf
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-2" --checksum 7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ghost" "3.42.8-2" --checksum c8f7d37c2e1c0cbea5dd7109c56605249c9a23b6297646bddab6725d641462dc
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -22,7 +22,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/ghost/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="3.42.8-debian-10-r34" \
+    BITNAMI_IMAGE_VERSION="3.42.8-debian-10-r35" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/ghost/bin:$PATH"
 
 EXPOSE 2368 3000
