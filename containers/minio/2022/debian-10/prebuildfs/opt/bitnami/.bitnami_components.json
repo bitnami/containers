@@ -1,17 +1,17 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc",
+        "digest": "7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-1"
+        "version": "1.14.0-2"
     },
     "minio": {
         "arch": "amd64",
-        "digest": "da9c204fb0f34f3442cc3b3382ba9d727747d8370a326f8ab125dc5473b77613",
+        "digest": "8612c2b911082ed383c3d79c9a83074c80886b8b4bf582795b8159996f3d1e9b",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2022.1.8-1"
+        "version": "2022.1.8-2"
     },
     "minio-client": {
         "arch": "amd64",
