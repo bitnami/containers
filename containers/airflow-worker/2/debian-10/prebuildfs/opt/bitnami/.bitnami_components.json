@@ -1,31 +1,31 @@
 {
     "airflow-worker": {
         "arch": "amd64",
-        "digest": "350c16dc21a7dc9f22539764045ccdeee844e2f8f725bc258bf715475e235f32",
+        "digest": "e5fd80bbdea56f32ddb8f92fae558466cc7eb0b6c346fc9d31cd076166c24da1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.2.3-1"
+        "version": "2.2.3-2"
     },
     "git": {
         "arch": "amd64",
-        "digest": "424d40a4b5af1fcddbfd407ac97543378864d1b4539064ceef428e526bfd4f0e",
+        "digest": "c6f5511335c6ea2e98cb02cefc77a67aae6e570a0a15229ab620414d0278525a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.34.1-1"
+        "version": "2.34.1-2"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc",
+        "digest": "7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-1"
+        "version": "1.14.0-2"
     },
     "ini-file": {
         "arch": "amd64",
-        "digest": "d7c3c81138361e10e6ddd7eae3ac323740a8477ce395a8c00ab0dba76fd25948",
+        "digest": "8fc4b049c856c022b49dd27ded8d0f3945a01f1fa8d2196f391ce481b8e95e3a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.4.1-1"
+        "version": "1.4.1-2"
     },
     "postgresql-client": {
         "arch": "amd64",
