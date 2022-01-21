@@ -9,9 +9,9 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.16.2-2" --checksum 1c135708aaa8cb69936471de63563de08e97b7d0bfb4126d41b54a149557c5c0
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-jobservice" "2.4.1-3" --checksum 9bac69ed26ca904229c5b7e21c2ded3823cfed7fbc2b0122c41f08635cdd1cb3
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.16.2-3" --checksum 57c13527238449d93bf5484e486da35f2306ca06db769bc5ac5609ec4fc2ef60
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-jobservice" "2.4.1-4" --checksum 3006853ed5620fca0cf8481d3cd7da24359e2614605c57d81cf559742d9ed2f7
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-2" --checksum 7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-jobservice/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-jobservice" \
-    BITNAMI_IMAGE_VERSION="2.4.1-debian-10-r28" \
+    BITNAMI_IMAGE_VERSION="2.4.1-debian-10-r29" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/harbor-jobservice/bin:$PATH"
 
 VOLUME [ "/etc/jobservice", "/var/log/jobs" ]
