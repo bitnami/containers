@@ -1,10 +1,10 @@
 {
     "elasticsearch-curator": {
         "arch": "amd64",
-        "digest": "aab7294d03b43e3acd2f094f51d445522e36a4d9b879587b8db815bf850f0b6d",
+        "digest": "dfced9c5a8a127fc5e807ea93f4995808677790f8daa6f5296e36772f4f5ffb6",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "5.8.4-2"
+        "version": "5.8.4-3"
     },
     "python": {
         "arch": "amd64",
