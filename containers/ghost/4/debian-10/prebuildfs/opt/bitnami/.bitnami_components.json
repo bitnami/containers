@@ -1,17 +1,17 @@
 {
     "ghost": {
         "arch": "amd64",
-        "digest": "83aae867dff1d8b8ce96fbe53bf1632257f236eef6c633e852f08660c39d0a31",
+        "digest": "2f41d0711e8ecbe30b5d8b65d4ee072312e96b771a308c306b7da7514e291183",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.32.3-0"
+        "version": "4.32.3-1"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc",
+        "digest": "7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-1"
+        "version": "1.14.0-2"
     },
     "mysql-client": {
         "arch": "amd64",
