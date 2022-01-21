@@ -9,20 +9,20 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 libgcc1 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/java-1.8.312-1-linux-amd64-debian-10.tar.gz && \
-    echo "2699ce844c410513ef7fd7180c2a0a6e4c740581a4a999ab5e3bed6bbe8be3bc  /tmp/bitnami/pkg/cache/java-1.8.312-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/java-1.8.312-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/java-1.8.312-1-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jmx-exporter-0.16.1-3-linux-amd64-debian-10.tar.gz && \
-    echo "06cb8f4940c848ca4e95762868a1df7c1bceb7efc087ee12d3cac82bbb4f652d  /tmp/bitnami/pkg/cache/jmx-exporter-0.16.1-3-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/jmx-exporter-0.16.1-3-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/jmx-exporter-0.16.1-3-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/java-1.8.322-0-linux-amd64-debian-10.tar.gz && \
+    echo "e1b8b248cde947fbaa50ebab0f6a0de5181aff576ba8dec8f9981f2abd0c1705  /tmp/bitnami/pkg/cache/java-1.8.322-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/java-1.8.322-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/java-1.8.322-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jmx-exporter-0.16.1-4-linux-amd64-debian-10.tar.gz && \
+    echo "034b30c53498bf61a16d00f01b8ca8d07db9c888ad5054323db4b10f3382a856  /tmp/bitnami/pkg/cache/jmx-exporter-0.16.1-4-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/jmx-exporter-0.16.1-4-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/jmx-exporter-0.16.1-4-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="jmx-exporter" \
-    BITNAMI_IMAGE_VERSION="0.16.1-debian-10-r184" \
+    BITNAMI_IMAGE_VERSION="0.16.1-debian-10-r185" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 5556
