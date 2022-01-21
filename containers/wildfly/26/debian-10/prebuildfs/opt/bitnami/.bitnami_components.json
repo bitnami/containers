@@ -8,16 +8,16 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "cf2e298428d67fb30c376ee6638c055afe54cc1f282bab314abc53a34c37be44",
+        "digest": "f7addf88d61b35543dc6ed9f5ec31fd8a800cec6249d419310fd56e8e9a3499d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "11.0.13-1"
+        "version": "11.0.14-0"
     },
     "wildfly": {
         "arch": "amd64",
-        "digest": "84a3b852bdf5d6479360fdf707bd5d6acf710c8475d46c6176f3643bda2f4cfc",
+        "digest": "96b926a4432cf56b85005dc5f40b5663e356ed82340c25124bbe4520f82cc2e5",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "26.0.0-3"
+        "version": "26.0.1-0"
     }
 }
