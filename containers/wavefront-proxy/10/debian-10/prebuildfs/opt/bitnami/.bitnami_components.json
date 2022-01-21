@@ -1,10 +1,10 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc",
+        "digest": "7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-1"
+        "version": "1.14.0-2"
     },
     "java": {
         "arch": "amd64",
@@ -15,9 +15,9 @@
     },
     "wavefront-proxy": {
         "arch": "amd64",
-        "digest": "d7dbbd2deb98ae7cbba095db45df5d831552629b8b4d3601e6a91909abad5ca8",
+        "digest": "1aff97f14f16fb5a458718ec217aa7252c4a9680c4cd0a8107a1095a996ae276",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.13.0-1"
+        "version": "10.14.0-0"
     }
 }
