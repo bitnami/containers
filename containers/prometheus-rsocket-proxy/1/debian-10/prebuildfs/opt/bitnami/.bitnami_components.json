@@ -1,16 +1,16 @@
 {
     "java": {
         "arch": "amd64",
-        "digest": "e1b8b248cde947fbaa50ebab0f6a0de5181aff576ba8dec8f9981f2abd0c1705",
+        "digest": "064c0df11dedb32c3a3e13c1daac87085ed44ccd816898f11e7a2496ece5d9ee",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.8.322-0"
+        "version": "1.8.322-1"
     },
     "prometheus-rsocket-proxy": {
         "arch": "amd64",
-        "digest": "5076746092910a4b5afc4469f300f81bc3dd034872a4359ce23b4ef4a3252846",
+        "digest": "997a1b720d2071252c5fd6b709297352cf23fbf687b74c21c9df56f38030b99c",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.3.0-2"
+        "version": "1.3.0-3"
     }
 }
