@@ -1,17 +1,17 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc",
+        "digest": "7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-1"
+        "version": "1.14.0-2"
     },
     "java": {
         "arch": "amd64",
-        "digest": "cf2e298428d67fb30c376ee6638c055afe54cc1f282bab314abc53a34c37be44",
+        "digest": "f7addf88d61b35543dc6ed9f5ec31fd8a800cec6249d419310fd56e8e9a3499d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "11.0.13-1"
+        "version": "11.0.14-0"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -29,16 +29,16 @@
     },
     "reportserverenterprise": {
         "arch": "amd64",
-        "digest": "d412980f754ff662112beba1342c4e0bea0d2e96a82486b4cbbc67e92fb81231",
+        "digest": "d8660b0421c6b17ad7ceedb30190f0a840b8cad5ad6d10c5d560b32d087495f4",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.7.1-6052-0"
+        "version": "3.7.1-6052-1"
     },
     "tomcat": {
         "arch": "amd64",
-        "digest": "59ac539ac43dd1fa27cd41d4d6189cf6d0c87c926b164b9347f60aab58d84d59",
+        "digest": "94615d65980e65d4f4fe3dac073160e39a8a91af5f837f47160c523af6ce4e23",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "9.0.56-2"
+        "version": "9.0.58-0"
     }
 }
