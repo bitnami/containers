@@ -95,29 +95,11 @@ pgbouncer_validate() {
     fi
 
     # TLS Checks (server)
-    if [[ "$PGBOUNCER_SERVER_TLS_SSLMODE" != "disable" ]]; then
-        if [[ "$PGBOUNCER_SERVER_TLS_SSLMODE" != "verify-ca" && "$PGBOUNCER_SERVER_TLS_SSLMODE" != "verify-full" ]]; then
-            if [[ -z "$PGBOUNCER_SERVER_TLS_CERT_FILE" ]]; then
-                print_validation_error "You must provide a X.509 certificate in order to use server TLS"
-            elif [[ ! -f "$PGBOUNCER_SERVER_TLS_CERT_FILE" ]]; then
-                print_validation_error "The X.509 server certificate file in the specified path ${PGBOUNCER_SERVER_TLS_CERT_FILE} does not exist"
-            fi
-            if [[ -z "$PGBOUNCER_SERVER_TLS_KEY_FILE" ]]; then
-                print_validation_error "You must provide a private key in order to use server TLS"
-            elif [[ ! -f "$PGBOUNCER_SERVER_TLS_KEY_FILE" ]]; then
-                print_validation_error "The server private key file in the specified path ${PGBOUNCER_SERVER_TLS_KEY_FILE} does not exist"
-            fi
-            if [[ -z "$PGBOUNCER_SERVER_TLS_CA_FILE" ]]; then
-                warn "A CA X.509 certificate was not provided. Server verification will not be performed in TLS connections"
-            elif [[ ! -f "$PGBOUNCER_SERVER_TLS_CA_FILE" ]]; then
-                print_validation_error "The server CA X.509 certificate file in the specified path ${PGBOUNCER_SERVER_TLS_CA_FILE} does not exist"
-            fi
-        else
-            if [[ -z "$PGBOUNCER_SERVER_TLS_CA_FILE" ]]; then
-                print_validation_error "A CA X.509 certificate was not provided. You need to set this value when specifying server_tls_sslmode to verify-ca or verify-full"
-            elif [[ ! -f "$PGBOUNCER_SERVER_TLS_CA_FILE" ]]; then
-                print_validation_error "The server CA X.509 certificate file in the specified path ${PGBOUNCER_SERVER_TLS_CA_FILE} does not exist"
-            fi
+    if [[ "$PGBOUNCER_SERVER_TLS_SSLMODE" == "verify-ca" ]] || [[ "$PGBOUNCER_SERVER_TLS_SSLMODE" == "verify-full" ]]; then
+        if [[ -z "$PGBOUNCER_SERVER_TLS_CA_FILE" ]]; then
+            print_validation_error "A CA X.509 certificate was not provided. You need to set this value when specifying server_tls_sslmode to verify-ca or verify-full"
+        elif [[ ! -f "$PGBOUNCER_SERVER_TLS_CA_FILE" ]]; then
+            print_validation_error "The server CA X.509 certificate file in the specified path ${PGBOUNCER_SERVER_TLS_CA_FILE} does not exist"
         fi
     fi
 
