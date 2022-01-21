@@ -9,14 +9,14 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 libgcc1 locales procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/java-1.8.312-1-linux-amd64-debian-10.tar.gz && \
-    echo "2699ce844c410513ef7fd7180c2a0a6e4c740581a4a999ab5e3bed6bbe8be3bc  /tmp/bitnami/pkg/cache/java-1.8.312-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/java-1.8.312-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/java-1.8.312-1-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/spring-cloud-skipper-shell-2.8.2-0-linux-amd64-debian-10.tar.gz && \
-    echo "523175532fd5fcdb6cf2d63392c6f3f686d7296f81abd50b92d25624d1947efb  /tmp/bitnami/pkg/cache/spring-cloud-skipper-shell-2.8.2-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/spring-cloud-skipper-shell-2.8.2-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/spring-cloud-skipper-shell-2.8.2-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/java-1.8.322-0-linux-amd64-debian-10.tar.gz && \
+    echo "e1b8b248cde947fbaa50ebab0f6a0de5181aff576ba8dec8f9981f2abd0c1705  /tmp/bitnami/pkg/cache/java-1.8.322-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/java-1.8.322-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/java-1.8.322-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/spring-cloud-skipper-shell-2.8.2-1-linux-amd64-debian-10.tar.gz && \
+    echo "f7b89b952041d099d7b881dc2e0c04f9f7956bbd5ff0ba6865f4b9bc138e8a42  /tmp/bitnami/pkg/cache/spring-cloud-skipper-shell-2.8.2-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/spring-cloud-skipper-shell-2.8.2-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/spring-cloud-skipper-shell-2.8.2-1-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -29,7 +29,7 @@ RUN touch /opt/bitnami/spring-cloud-skipper-shell/spring-cloud-skipper-shell.log
 COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV BITNAMI_APP_NAME="spring-cloud-skipper-shell" \
-    BITNAMI_IMAGE_VERSION="2.8.2-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="2.8.2-debian-10-r2" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     PATH="/opt/bitnami/java/bin:$PATH"
