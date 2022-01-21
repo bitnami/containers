@@ -9,21 +9,21 @@ ENV HOME="/opt/bitnami/jupyterhub-singleuser/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 libgcc1 libstdc++6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/miniconda-4.10.3-5-linux-amd64-debian-10.tar.gz && \
-    echo "2389592c9632d6934775010ef8233a9955f55dbd70222f8f9124ba95fac7b49a  /tmp/bitnami/pkg/cache/miniconda-4.10.3-5-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/miniconda-4.10.3-5-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/miniconda-4.10.3-5-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jupyter-base-notebook-1.5.0-2-linux-amd64-debian-10.tar.gz && \
-    echo "4c35ecce964ac931adc3bfd91a96852b1ce3169335ac8ca044f3d91d8a13f056  /tmp/bitnami/pkg/cache/jupyter-base-notebook-1.5.0-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/jupyter-base-notebook-1.5.0-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/jupyter-base-notebook-1.5.0-2-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/miniconda-4.10.3-6-linux-amd64-debian-10.tar.gz && \
+    echo "d0184441f6b2a4ae1ed629db8f31f5bcea024028a5db943fa57320cfd471162e  /tmp/bitnami/pkg/cache/miniconda-4.10.3-6-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/miniconda-4.10.3-6-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/miniconda-4.10.3-6-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jupyter-base-notebook-1.5.0-3-linux-amd64-debian-10.tar.gz && \
+    echo "48112fc2a86c0bb981e9ae4c40386e887f9b839b9103485f62a1fe77b5c205bf  /tmp/bitnami/pkg/cache/jupyter-base-notebook-1.5.0-3-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/jupyter-base-notebook-1.5.0-3-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/jupyter-base-notebook-1.5.0-3-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /opt/bitnami/jupyterhub-singleuser/ && chmod g+rwX /opt/bitnami/jupyterhub-singleuser/
 
 ENV BITNAMI_APP_NAME="jupyter-base-notebook" \
-    BITNAMI_IMAGE_VERSION="1.5.0-debian-10-r67" \
+    BITNAMI_IMAGE_VERSION="1.5.0-debian-10-r68" \
     PATH="/opt/bitnami/miniconda/bin:$PATH"
 
 USER 1001
