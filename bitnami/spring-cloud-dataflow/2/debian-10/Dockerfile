@@ -11,10 +11,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.312-1" --checksum 2699ce844c410513ef7fd7180c2a0a6e4c740581a4a999ab5e3bed6bbe8be3bc
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.16.2-2" --checksum 1c135708aaa8cb69936471de63563de08e97b7d0bfb4126d41b54a149557c5c0
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "spring-cloud-dataflow" "2.9.2-0" --checksum 5c3b1195bc87476b5ad807974cd7cf945bd2de7e1ed20a177bdce448090f15e4
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-1" --checksum 16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.322-1" --checksum 064c0df11dedb32c3a3e13c1daac87085ed44ccd816898f11e7a2496ece5d9ee
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.16.2-3" --checksum 57c13527238449d93bf5484e486da35f2306ca06db769bc5ac5609ec4fc2ef60
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "spring-cloud-dataflow" "2.9.2-1" --checksum 17f130e26fa9f18318852db23d3eff55956af204babc1b1533f9bdd1f2dd3cab
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-2" --checksum 7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -23,7 +23,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/spring-cloud-dataflow/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV BITNAMI_APP_NAME="spring-cloud-dataflow" \
-    BITNAMI_IMAGE_VERSION="2.9.2-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="2.9.2-debian-10-r1" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"
 
