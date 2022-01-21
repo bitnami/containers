@@ -1,9 +1,9 @@
 {
     "kubernetes-event-exporter": {
         "arch": "amd64",
-        "digest": "defa33392707372a76a0ec8deddf6e97acd8c658ed845265eab2281ca50feb57",
+        "digest": "3e0037a42b644966c4325c4e2d7f147482637b1e8a0e2e40fa87081d53e289c9",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.11.0-1"
+        "version": "0.11.0-2"
     }
 }
