@@ -1,16 +1,16 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc",
+        "digest": "7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-1"
+        "version": "1.14.0-2"
     },
     "redis-sentinel": {
         "arch": "amd64",
-        "digest": "3007df13de63e4520cf701bc72a5232c0698c740535d9a369aeac16b1b4a1496",
+        "digest": "4041cec02eba65f8b58fab5e7569da34682d44a4d81a81b49701db4cad64dc74",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "6.2.6-2"
+        "version": "6.2.6-3"
     }
 }
