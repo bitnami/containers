@@ -9,10 +9,10 @@ ENV HOME="/app" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/java-11.0.13-1-linux-amd64-debian-10.tar.gz && \
-    echo "cf2e298428d67fb30c376ee6638c055afe54cc1f282bab314abc53a34c37be44  /tmp/bitnami/pkg/cache/java-11.0.13-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/java-11.0.13-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/java-11.0.13-1-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/java-11.0.14-0-linux-amd64-debian-10.tar.gz && \
+    echo "f7addf88d61b35543dc6ed9f5ec31fd8a800cec6249d419310fd56e8e9a3499d  /tmp/bitnami/pkg/cache/java-11.0.14-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/java-11.0.14-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/java-11.0.14-0-linux-amd64-debian-10.tar.gz
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/gradle-7.3.3-2-linux-amd64-debian-10.tar.gz && \
     echo "5a6516a5a4901431b980860866cf2860ec1fa26356ac8db5ecfe68d6803f3eba  /tmp/bitnami/pkg/cache/gradle-7.3.3-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/gradle-7.3.3-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
@@ -22,7 +22,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN mkdir /app && chmod g+rwX /app
 
 ENV BITNAMI_APP_NAME="gradle" \
-    BITNAMI_IMAGE_VERSION="7.3.3-debian-10-r27" \
+    BITNAMI_IMAGE_VERSION="7.3.3-debian-10-r28" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/gradle/bin:$PATH"
 
 WORKDIR /app
