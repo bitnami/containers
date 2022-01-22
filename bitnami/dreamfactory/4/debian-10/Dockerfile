@@ -15,7 +15,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis-client" "6
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "11.14.0-2" --checksum d3359325d864badb385c99ce52a4f4dd1a8a1630f9fb9907ef1545919e0ea058
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.4.22-1" --checksum 37ba718ad68506a9ea0705c12f013a6afc7210c82460769ffba0f16759caae95
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.27-3" --checksum aa7b45645b0395875b7281b74885a2a36c4d87dc19de87c7ed8b529df8e003a0
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.34.1-2" --checksum c6f5511335c6ea2e98cb02cefc77a67aae6e570a0a15229ab620414d0278525a
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.34.1-3" --checksum fd50ae3e5db7e54d4e3168aebc7d0fe037fc975ae3611c97e0abcbbcc503b2e8
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-5" --checksum 9e312b4a7e16a55d08e67c4fd69c91000e4dcc4af149d59915c49375b83852af
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-2" --checksum 7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dreamfactory" "4.10.1-0" --checksum 8833df2e11b51a20882a1b90f644eeaec38a149c66d3d3e5b7281173247a18c5
@@ -24,8 +24,8 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/apache/postunpack.sh
+RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/dreamfactory/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
@@ -33,7 +33,7 @@ RUN /opt/bitnami/scripts/php-postgresql/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="dreamfactory" \
-    BITNAMI_IMAGE_VERSION="4.10.1-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="4.10.1-debian-10-r1" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/redis/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:/opt/bitnami/common/bin:/opt/bitnami/dreamfactory/bin:$PATH"
 
 EXPOSE 8080 8443
