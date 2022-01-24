@@ -80,6 +80,30 @@ $ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-jasperrepor
 $ docker-compose up -d
 ```
 
+### Provide jasper specific file config
+
+```diff
+  ...
+  jasperreports:
+    image: docker.io/bitnami/jasperreports:7
+    ports:
+      - '80:8080'
+    volumes:
+      - 'jasperreports_data:/bitnami/jasperreports'
+# The line below allows you to provide your own JasperReports configuration files, to be copied to WEB-INF
+# - "./config:/bitnami/jasperreports-mounted-conf"
+    depends_on:
+      - mariadb
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - JASPERREPORTS_DATABASE_HOST=mariadb
+      - JASPERREPORTS_DATABASE_PORT_NUMBER=3306
+      - JASPERREPORTS_DATABASE_USER=bn_jasperreports
+      - JASPERREPORTS_DATABASE_NAME=bitnami_jasperreports
+
+```
+
 ### Using the Docker Command Line
 
 If you want to run the application manually instead of using `docker-compose`, these are the basic steps you need to run:
