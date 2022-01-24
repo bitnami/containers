@@ -1,6 +1,6 @@
 {
     "rmq-default-credential-updater": {
-        "digest": "f9d758111a9c28aba7d0b23d8dd1f36c59f33651afec7473bca3885b9bbe35e1",
+        "digest": "d68f39532954309bfb6af791882a600e99da098c713d2c5ca17ccfb9aefe6049",
         "type": "BLACKSMITH",
         "version": "1.0.1"
     }
