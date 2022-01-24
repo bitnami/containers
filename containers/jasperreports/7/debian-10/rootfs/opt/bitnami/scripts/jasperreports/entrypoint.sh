@@ -22,6 +22,11 @@ if [[ "$1" = "/opt/bitnami/scripts/tomcat/run.sh" ]]; then
     TOMCAT_ENABLE_AUTH="${TOMCAT_ENABLE_AUTH:-no}" /opt/bitnami/scripts/tomcat/setup.sh
     /opt/bitnami/scripts/jasperreports/setup.sh
     /post-init.sh
+     if ! is_dir_empty "/bitnami/jasperreports-mounted-conf"; then
+        info "** User provided config detected **"
+        info "** Copy and overwrite Jasper config located into config folder and replace into WEB-INF Jasper **"
+        cp -r -L /bitnami/jasperreports-mounted-conf/* /opt/bitnami/jasperreports/WEB-INF/
+    fi
     info "** JasperReports setup finished! **"
 fi
 
