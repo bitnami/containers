@@ -6,6 +6,8 @@
 
 [Overview of RabbitMQ Messaging Topology Operator](https://github.com/rabbitmq/messaging-topology-operator)
 
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
 ## TL;DR
 
 ```console
@@ -29,7 +31,7 @@ $ docker run --name rmq-default-credential-updater bitnami/rmq-messaging-topolog
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`1`, `1-scratch`, `1.2.1`, `1.2.1-scratch-r0`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-rmq-default-credential-updater/blob/1.2.1-scratch-r0/1/scratch/Dockerfile)
+- [`1`, `1-scratch`, `1.2.1`, `1.2.1-scratch-r1`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-rmq-default-credential-updater/blob/1.2.1-scratch-r1/1/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rmq-default-credential-updater GitHub repo](https://github.com/bitnami/bitnami-docker-rmq-default-credential-updater).
 
@@ -85,7 +87,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright 2021 Bitnami
+Copyright &copy; 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
