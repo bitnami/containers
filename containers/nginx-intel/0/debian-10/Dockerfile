@@ -1,0 +1,36 @@
+FROM docker.io/bitnami/minideb:buster
+LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+ENV HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-10" \
+    OS_NAME="linux"
+
+COPY prebuildfs /
+# Install required system packages and dependencies
+RUN install_packages acl ca-certificates curl gzip libc6 libgeoip1 libpcre3 libssl1.1 procps tar zlib1g
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "qatengine" "0.6.10-1" --checksum 1f66ffdc20ce30fb79cf1e6b3795774972200d8589d7fcf14206fcc91f1b32c1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-5" --checksum 9e312b4a7e16a55d08e67c4fd69c91000e4dcc4af149d59915c49375b83852af
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx-intel" "0.4.7-4" --checksum c512eec8b2175e8cbb3f67cf84d5d46a951aa4b885c249ce4c40b1631068fcc3
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-2" --checksum 7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN chmod g+rwX /opt/bitnami
+RUN ln -sf /dev/stdout /opt/bitnami/nginx/logs/access.log
+RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
+
+COPY rootfs /
+RUN /opt/bitnami/scripts/nginx/postunpack.sh
+RUN /opt/bitnami/scripts/qatengine/postunpack.sh
+ENV BITNAMI_APP_NAME="nginx-intel" \
+    BITNAMI_IMAGE_VERSION="0.4.7-debian-10-r0" \
+    NGINX_HTTPS_PORT_NUMBER="" \
+    NGINX_HTTP_PORT_NUMBER="" \
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/nginx/sbin:$PATH"
+
+EXPOSE 8080 8443
+
+WORKDIR /app
+USER 1001
+ENTRYPOINT [ "/opt/bitnami/scripts/nginx/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/nginx/run.sh" ]
