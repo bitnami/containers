@@ -12,9 +12,9 @@ RUN install_packages acl ca-certificates curl gzip less libaudit1 libbsd0 libbz2
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-5" --checksum 9e312b4a7e16a55d08e67c4fd69c91000e4dcc4af149d59915c49375b83852af
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.4.27-8" --checksum 91191e8bdf140a08f873675198c998fa4fabbea0a22fce0791568b5f8c11aaad
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wp-cli" "2.5.0-2" --checksum a2378193012ec330be563c1160e8dcfa8576a4c929858ae2d691926d0be6635a
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.21.5-2" --checksum 947761e123cc60d01e9de9a5067f41d5f265f502814a62919e2bde61004c5b27
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.21.5-3" --checksum b9fd800365618d3d86f2fd0b5300c32918ed6d294779c80ca10a592fa1bdeb13
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.32-1" --checksum 727834a55587746f90b159966c9abf2ce31a6effbe83d8c38ee6250641c9a22a
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wordpress" "5.8.3-4" --checksum 22186e22cc63222a0a18261a0ebe80bce10e62dba8f69f92cf87ae18762812f5
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wordpress" "5.8.3-5" --checksum 0386c3f4328d860c3e61bc82f91d2b5c3ecd75ac77491d632742de555150fbf7
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-2" --checksum 7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -22,13 +22,13 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
-RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
+RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN /opt/bitnami/scripts/nginx-php-fpm/postunpack.sh
 RUN /opt/bitnami/scripts/wordpress/postunpack.sh
 RUN /opt/bitnami/scripts/wp-cli/postunpack.sh
 ENV BITNAMI_APP_NAME="wordpress-nginx" \
-    BITNAMI_IMAGE_VERSION="5.8.3-debian-10-r12" \
+    BITNAMI_IMAGE_VERSION="5.8.3-debian-10-r13" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/wp-cli/bin:/opt/bitnami/nginx/sbin:/opt/bitnami/mysql/bin:$PATH"
