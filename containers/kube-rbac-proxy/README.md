@@ -1,15 +1,17 @@
-# Bitnami Docker Image for kube-rbac-proxy
+# Kube RBAC Proxy packaged by Bitnami
 
-## What is kube-rbac-proxy?
+## What is Kube RBAC Proxy?
 
-> kube-rbac-proxy is an HTTP proxy that can perform RBAC authorization against the Kubernetes API.
+> kube-rbac-proxy is an HTTP proxy that can perform RBAC authorization against the Kubernetes API based on the SubjectAccessReview authorization resource.
 
-[Overview of kube-rbac-proxy](https://github.com/brancz/kube-rbac-proxy)
+[Overview of Kube RBAC Proxy](https://github.com/brancz/kube-rbac-proxy)
+
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
 ```console
-$ docker run --name kube-rbac-proxy bitnami/kube-rbac-proxy:latest
+$ docker run --name Kube RBAC Proxy bitnami/kube-rbac-proxy:latest
 ```
 
 ## Why use Bitnami Images?
@@ -29,13 +31,13 @@ $ docker run --name kube-rbac-proxy bitnami/kube-rbac-proxy:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`0`, `0-scratch`, `0.11.0`, `0.11.0-scratch-r0`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-rbac-proxy/blob/0.11.0-scratch-r0/0/scratch/Dockerfile)
+- [`0`, `0-scratch`, `0.11.0`, `0.11.0-scratch-r1`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-rbac-proxy/blob/0.11.0-scratch-r1/0/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kube-rbac-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-kube-rbac-proxy).
 
 ## Get this image
 
-The recommended way to get the Bitnami kube-rbac-proxy Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kube-rbac-proxy).
+The recommended way to get the Bitnami Kube RBAC Proxy Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kube-rbac-proxy).
 
 ```console
 $ docker pull bitnami/kube-rbac-proxy:latest
@@ -64,10 +66,10 @@ Non-root container images add an extra layer of security and are generally recom
 To run commands inside this container you can use `docker run`, for example to execute `kube-rbac-proxy --upstream=http://127.0.0.1:8081/` you can follow the example below:
 
 ```console
-$ docker run --rm --name kube-rbac-proxy bitnami/kube-rbac-proxy:latest --  --upstream=http://127.0.0.1:8081/
+$ docker run --rm --name Kube RBAC Proxy bitnami/kube-rbac-proxy:latest --  --upstream=http://127.0.0.1:8081/
 ```
 
-Check the [official kube-rbac-proxy documentation](https://github.com/brancz/kube-rbac-proxy) for more information.
+Check the [official Kube RBAC Proxy documentation](https://github.com/brancz/kube-rbac-proxy) for more information.
 
 ## Contributing
 
@@ -85,7 +87,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright 2021 Bitnami
+Copyright &copy; 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
