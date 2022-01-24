@@ -1281,7 +1281,7 @@ mongodb_node_currently_in_cluster() {
 rs.status().members
 EOF
     )
-    grep -q -E "\"${node}(:${port})?\"" <<<"$result"
+    grep -q -E "\"${node}:${port}\"" <<<"$result"
 }
 
 ########################
