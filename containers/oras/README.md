@@ -1,16 +1,20 @@
-# What is ORAS?
+# ORAS packaged by Bitnami
+
+## What is ORAS?
 
 > ORAS is a CLI that allows you interact with OCI conformant registries to push and pull your OCI artifacts.
 
-[ORAS](https://github.com/deislabs/oras)
+[Overview of ORAS](https://github.com/deislabs/oras)
 
-# TL;DR
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+
+## TL;DR
 
 ```console
 $ docker run --name oras bitnami/oras:latest
 ```
 
-# Why use Bitnami Images?
+## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
@@ -20,20 +24,20 @@ $ docker run --name oras bitnami/oras:latest
 
 > This [CVE scan report](https://quay.io/repository/bitnami/oras?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# Why use a non-root container?
+## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-scratch`, `0.12.0`, `0.12.0-scratch-r0`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-oras/blob/0.12.0-scratch-r0/0/scratch/Dockerfile)
+* [`0`, `0-scratch`, `0.12.0`, `0.12.0-scratch-r1`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-oras/blob/0.12.0-scratch-r1/0/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/oras GitHub repo](https://github.com/bitnami/bitnami-docker-oras).
 
-# Get this image
+## Get this image
 
 The recommended way to get the Bitnami ORAS Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/oras).
 
@@ -53,9 +57,9 @@ If you wish, you can also build the image yourself.
 $ docker build -t bitnami/oras:latest 'https://github.com/bitnami/bitnami-docker-oras.git#master:0/scratch'
 ```
 
-# Configuration
+## Configuration
 
-## Running commands
+### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `oras --version` you can follow the example below:
 
@@ -63,13 +67,13 @@ To run commands inside this container you can use `docker run`, for example to e
 $ docker run --rm --name oras bitnami/oras:latest --version
 ```
 
-Check the [official ORAS documentation](https://github.com/deislabs/oras/tree/main/docs) for a list of the available commands and parameters.
+Check the [official ORAS documentation](https://oras.land/cli/) for a list of the available commands and parameters.
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-oras/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-oras/pulls) with your contribution.
 
-# Issues
+## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-oras/issues/new). For us to provide better support, be sure to include the following information in your issue:
 
@@ -79,9 +83,9 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
-# License
+## License
 
-Copyright 2021 Bitnami
+Copyright &copy; 2022 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
