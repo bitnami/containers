@@ -1,6 +1,6 @@
 {
     "wavefront-hpa-adapter": {
-        "digest": "c93d89c6cf42bd18627155aea98bb281f23051aff467121ee96de73e504ad687",
+        "digest": "af8ff1f02131f719e26f40dd11edb99a3dca3d903b4244a807e51b61336cd6b1",
         "type": "BLACKSMITH",
         "version": "0.9.8"
     }
