@@ -38,16 +38,16 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.1-prod`, `3.1-prod-debian-10`, `3.1.0-prod`, `3.1.0-prod-debian-10-r22` (3.1-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/3.1.0-prod-debian-10-r22/3.1-prod/debian-10/Dockerfile)
 * [`3.1`, `3.1-debian-10`, `3.1.0`, `3.1.0-debian-10-r22` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/3.1.0-debian-10-r22/3.1/debian-10/Dockerfile)
-* [`3.0-prod`, `3.0-prod-debian-10`, `3.0.3-prod`, `3.0.3-prod-debian-10-r59` (3.0-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/3.0.3-prod-debian-10-r59/3.0-prod/debian-10/Dockerfile)
 * [`3.0`, `3.0-debian-10`, `3.0.3`, `3.0.3-debian-10-r60` (3.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/3.0.3-debian-10-r60/3.0/debian-10/Dockerfile)
-* [`2.7-prod`, `2.7-prod-debian-10`, `2.7.5-prod`, `2.7.5-prod-debian-10-r59` (2.7-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.7.5-prod-debian-10-r59/2.7-prod/debian-10/Dockerfile)
 * [`2.7`, `2.7-debian-10`, `2.7.5`, `2.7.5-debian-10-r59` (2.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.7.5-debian-10-r59/2.7/debian-10/Dockerfile)
-* [`2.6-prod`, `2.6-prod-debian-10`, `2.6.9-prod`, `2.6.9-prod-debian-10-r58` (2.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.9-prod-debian-10-r58/2.6-prod/debian-10/Dockerfile)
-* [`2.6`, `2.6-debian-10`, `2.6.9`, `2.6.9-debian-10-r58`, `latest` (2.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.9-debian-10-r58/2.6/debian-10/Dockerfile)
+* [`2.6`, `2.6-debian-10`, `2.6.9`, `2.6.9-debian-10-r59`, `latest` (2.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.9-debian-10-r59/2.6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ruby GitHub repo](https://github.com/bitnami/bitnami-docker-ruby).
+
+### Deprecation Note (2022-01-21)
+
+The `prod` tags has been removed; from now on just the regular container images will be released.
 
 ### Deprecation Note (2020-08-18)
 
@@ -56,16 +56,6 @@ The formatting convention for `prod` tags has been changed:
 * `BRANCH-debian-10-prod` is now tagged as `BRANCH-prod-debian-10`
 * `VERSION-debian-10-rX-prod` is now tagged as `VERSION-prod-debian-10-rX`
 * `latest-prod` is now deprecated
-
-## What are `prod` tagged containers for?
-
-Containers tagged `prod` are production containers based on [minideb](https://github.com/bitnami/minideb). They contain the minimal dependencies required by an application to work.
-
-They don't include development dependencies, so they are commonly used in multi-stage builds as the target image. Application code and dependencies should be copied from a different container.
-
-The resultant containers only contain the necessary pieces of software to run the application. Therefore, they are smaller and safer.
-
-Learn how to use multi-stage builds to build your production application container in the [example](https://github.com/bitnami/bitnami-docker-ruby/tree/master/example) directory
 
 ## Get this image
 
