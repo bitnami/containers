@@ -22,16 +22,16 @@
     },
     "ksonnet": {
         "arch": "amd64",
-        "digest": "4c855d79eea3d669c11d89689fae9b396113015b06d9b04da0570b05ec619705",
+        "digest": "2764f6ab96b61568479aab176d326e2f0e66a914662f165b77630a66be3bacaf",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.13.1-2"
+        "version": "0.13.1-3"
     },
     "kustomize": {
         "arch": "amd64",
-        "digest": "49d095c2e7fab41f152aca81e03c166e168d87063148fa771e8b9033d852e441",
+        "digest": "11f5998085c070da84c5b413051012c99facd1aae4b9e1b08eca71242c7e95cf",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.4.1-2"
+        "version": "4.4.1-3"
     }
 }
