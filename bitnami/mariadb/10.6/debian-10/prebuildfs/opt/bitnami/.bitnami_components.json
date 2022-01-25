@@ -15,9 +15,9 @@
     },
     "mariadb": {
         "arch": "amd64",
-        "digest": "23610657e91775696875c4ee26ecd7bb706468e0aa2e425922ad57be18d32ce3",
+        "digest": "4bffa65e58d1d19d11184521fa2c160e84a707fd1bf91ec2798c4e34651f623f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.6.5-2"
+        "version": "10.6.5-3"
     }
 }
