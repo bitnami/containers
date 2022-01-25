@@ -9,9 +9,9 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl git git-lfs gzip libc6 openssh-client procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dumb-init" "1.2.5-1" --checksum d5425adcd16cdd060e57e8173750073e94695efeaaa36fb9332f0e63abf39ea4
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-2" --checksum 7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gitlab-runner-helper" "14.7.0-1" --checksum f92a9d92e3c77dac0cd35bafd96c18af2fb01444487cb6b71efc2c2c361e0118
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dumb-init" "1.2.5-2" --checksum 596fe423bf314ad82010930c1683b2205f881aabfd9a3e33c05483a5a89749af
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gitlab-runner-helper" "14.7.0-2" --checksum f4296f6e8b209fc3cd945eed56a4c1305c2515767b5b619670296042092a834d
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN mkdir /home/gitlab-runner && chmod -R g+rwX /home/gitlab-runner && ln -s /opt/bitnami/common/bin/dumb-init /usr/bin/dumb-init && ln -s /opt/bitnami/scripts/gitlab-runner-helper/entrypoint.sh /entrypoint
 ENV BITNAMI_APP_NAME="gitlab-runner-helper" \
-    BITNAMI_IMAGE_VERSION="14.7.0-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="14.7.0-debian-10-r5" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/gitlab-runner-helper/bin:$PATH"
 
 USER 1001
