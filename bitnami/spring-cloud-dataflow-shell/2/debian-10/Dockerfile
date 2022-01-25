@@ -13,10 +13,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "064c0df11dedb32c3a3e13c1daac87085ed44ccd816898f11e7a2496ece5d9ee  /tmp/bitnami/pkg/cache/java-1.8.322-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/java-1.8.322-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/java-1.8.322-1-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/spring-cloud-dataflow-shell-2.9.2-1-linux-amd64-debian-10.tar.gz && \
-    echo "307bebec25e0e389b2f644602dee89512ce5f810f090b11d302148a67783abe0  /tmp/bitnami/pkg/cache/spring-cloud-dataflow-shell-2.9.2-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/spring-cloud-dataflow-shell-2.9.2-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/spring-cloud-dataflow-shell-2.9.2-1-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/spring-cloud-dataflow-shell-2.9.2-2-linux-amd64-debian-10.tar.gz && \
+    echo "29cc8fda050fae3d47753ffc39bbb0e91669808f9f705e8171feac013b72d677  /tmp/bitnami/pkg/cache/spring-cloud-dataflow-shell-2.9.2-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/spring-cloud-dataflow-shell-2.9.2-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/spring-cloud-dataflow-shell-2.9.2-2-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -29,7 +29,7 @@ RUN touch /opt/bitnami/spring-cloud-dataflow-shell/spring-cloud-dataflow-shell.l
 COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV BITNAMI_APP_NAME="spring-cloud-dataflow-shell" \
-    BITNAMI_IMAGE_VERSION="2.9.2-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="2.9.2-debian-10-r5" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     PATH="/opt/bitnami/java/bin:$PATH"
