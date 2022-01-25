@@ -1,38 +1,38 @@
 {
     "bower": {
         "arch": "amd64",
-        "digest": "5bb6fb9500e5a7b5e31c1d6c56051fddb6d9601b29c58e1966a337353bfd342a",
+        "digest": "dc5868ac800dd5d6e2b8172c4906f58c2518c20acfb42bece2d6e7ebcd2a93a4",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.8.12-3"
+        "version": "1.8.12-4"
     },
     "express": {
         "arch": "amd64",
-        "digest": "8a886cd17d5d3d5981624db63b28e24154071f19008ac92bb1ec2018b504f59d",
+        "digest": "5c2b0b0cc56bd43e8aedc959aac2851a65470fe8b1e59e77d0158c37c68d421c",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.17.2-3"
+        "version": "4.17.2-4"
     },
     "express-generator": {
         "arch": "amd64",
-        "digest": "03251f200bf0e17a33f7fecda050a09dc0dbb72af5efce7f341a150b14014a7f",
+        "digest": "49a2dcf628436b74e99f0b24e74f9cdca041f96835dce338f5efbb1533d050d6",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.16.1-3"
+        "version": "4.16.1-4"
     },
     "git": {
         "arch": "amd64",
-        "digest": "fd50ae3e5db7e54d4e3168aebc7d0fe037fc975ae3611c97e0abcbbcc503b2e8",
+        "digest": "3cb223b1dbe1be9280279e2427c850f7080bf6d0b938c2fbe7b2d7a34724c61b",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.34.1-3"
+        "version": "2.34.1-4"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5",
+        "digest": "276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-2"
+        "version": "1.14.0-3"
     },
     "node": {
         "arch": "amd64",
@@ -50,10 +50,10 @@
     },
     "sequelize-cli": {
         "arch": "amd64",
-        "digest": "f4100daec3f658582ef109d4a69833a62c5c1297e65c6a8ba6bb2802ced4da75",
+        "digest": "b85f42283986c59b2ffd651f50f8d45152c9f40807b89a9cce889641cca07168",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "5.5.1-3"
+        "version": "5.5.1-4"
     },
     "wait-for-port": {
         "arch": "amd64",
