@@ -29,23 +29,23 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "7ec72ef51bfb2db2de26350a303c9add379570bad96c33bb58350025e28197c5",
+        "digest": "95e4985fa49fbc08f02d3cef3bef7f3494a8f511985415e41ff272729b1c6d16",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.0.15-2"
+        "version": "8.0.15-3"
     },
     "phpmyadmin": {
         "arch": "amd64",
-        "digest": "d56fb22b6d6a6886751e362889b3f2a0a323e12468e8f55f63d600a55a7d5517",
+        "digest": "8ed5cf5e066be5f746886afaaf9f493572493a41daffbbb6784f61b2a913230e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "5.1.2-0"
+        "version": "5.1.2-1"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "9e312b4a7e16a55d08e67c4fd69c91000e4dcc4af149d59915c49375b83852af",
+        "digest": "81b0642a6d8e9d952a0f6540f2d7481a99b9a12dd42bcb5906ba8014ca80f326",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-5"
+        "version": "1.0.1-6"
     }
 }
