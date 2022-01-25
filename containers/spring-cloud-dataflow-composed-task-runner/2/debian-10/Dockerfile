@@ -12,8 +12,8 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.322-1" --checksum 064c0df11dedb32c3a3e13c1daac87085ed44ccd816898f11e7a2496ece5d9ee
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "spring-cloud-dataflow-composed-task-runner" "2.9.2-1" --checksum ed6ad117f79867e85987640ab594858ca9eef19c1938cb7a74bc5c568a07e52c
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-2" --checksum 7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "spring-cloud-dataflow-composed-task-runner" "2.9.2-2" --checksum 4053cb2ef03dfbdd83eca641c4bc4c5b4e6374daa4be787c7f69a05f104ac52f
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -22,7 +22,7 @@ RUN mkdir /.m2 && chmod -R g+rwX /.m2
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV BITNAMI_APP_NAME="spring-cloud-dataflow-composed-task-runner" \
-    BITNAMI_IMAGE_VERSION="2.9.2-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="2.9.2-debian-10-r5" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"
 
