@@ -10,7 +10,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-5" --checksum 1e34030c18f0ec2467fa5f1b1fbad24add217f671c3a61628f7b8671391f9676
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "influxdb" "2.1.1-2" --checksum 4f07db27f9410d17691db7d48d75b375ff2964e5332a9bb55dd2d8aa5b27b1d3
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "influxdb" "2.1.1-3" --checksum 1c807ce6eb79ec50157d800c5460128e9b2d81a04a7d211e3aad94d60fc53308
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-2" --checksum 7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/influxdb/postunpack.sh
 ENV BITNAMI_APP_NAME="influxdb" \
-    BITNAMI_IMAGE_VERSION="2.1.1-debian-10-r54" \
+    BITNAMI_IMAGE_VERSION="2.1.1-debian-10-r55" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/influxdb/bin:$PATH"
 
 VOLUME [ "/bitnami/influxdb" ]
