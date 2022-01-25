@@ -10,11 +10,11 @@ ENV BITNAMI_PKG_EXTRA_DIRS="/opt/bitnami/airflow/dags" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libbsd0 libbz2-1.0 libc6 libcom-err2 libcurl4 libedit2 libffi6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmariadb3 libncursesw6 libnettle6 libnghttp2-14 libp11-kit0 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 locales netbase procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-5" --checksum 1e34030c18f0ec2467fa5f1b1fbad24add217f671c3a61628f7b8671391f9676
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-6" --checksum 845ff207415b5730cadd45aa3c757ca45a5c9e73bc54c24aa481ddca24eec35d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-12" --checksum c081f7f9663d4d64e7f26d6e6a77b3860ee1f39c309bd564f801c39192042d2f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "10.19.0-1" --checksum 53e64e567d4563efaea05f4e9e9eead3a3fbec1213a05528a5eeec2d2f8e8a43
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.1-3" --checksum 26f2ba99a02266d6f3857a3a11db7ed441d76a2fbc1066a17d4b0b17b047e01d
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.34.1-4" --checksum 3cb223b1dbe1be9280279e2427c850f7080bf6d0b938c2fbe7b2d7a34724c61b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.35.0-0" --checksum 51075db42727d7b14b9941e7d7c063a135e9ad60cc606676d6e817e7d4a607b9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "airflow-worker" "2.2.3-3" --checksum 7893321947f3c168bdfa376c0b7e34c835c1f73fb6750cedb4e897efdaa49b2c
 RUN apt-get update && apt-get upgrade -y && \
@@ -30,7 +30,7 @@ RUN /opt/bitnami/scripts/airflow-worker/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
     BITNAMI_APP_NAME="airflow-worker" \
-    BITNAMI_IMAGE_VERSION="2.2.3-debian-10-r32" \
+    BITNAMI_IMAGE_VERSION="2.2.3-debian-10-r33" \
     C_FORCE_ROOT="True" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
