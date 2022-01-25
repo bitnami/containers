@@ -217,7 +217,7 @@ Available environment variables:
 - `ODOO_PASSWORD`: Odoo application password. Default: **bitnami**
 - `ODOO_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. This is necessary in case you use a database that already has Odoo data. Default: **no**
 - `ODOO_SKIP_MODULES_UPDATE`: Whether to perform initial update of the plugins installed. Default: **no**
-- `ODOO_LOAD_DEMO_DATA`: Whether to load demo data. Default: **yes**
+- `ODOO_LOAD_DEMO_DATA`: Whether to load demo data. Default: **no**
 
 ##### Database connection configuration
 
