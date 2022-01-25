@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8.1`, `8.1-debian-10`, `8.1.2`, `8.1.2-debian-10-r4` (8.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.1.2-debian-10-r4/8.1/debian-10/Dockerfile)
-* [`8.0`, `8.0-debian-10`, `8.0.15`, `8.0.15-debian-10-r6` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.0.15-debian-10-r6/8.0/debian-10/Dockerfile)
+* [`8.0`, `8.0-debian-10`, `8.0.15`, `8.0.15-debian-10-r7` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.0.15-debian-10-r7/8.0/debian-10/Dockerfile)
 * [`7.4`, `7.4-debian-10`, `7.4.27`, `7.4.27-debian-10-r36`, `latest` (7.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.27-debian-10-r36/7.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-php-fpm).
