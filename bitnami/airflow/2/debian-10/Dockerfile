@@ -13,10 +13,10 @@ RUN install_packages acl ca-certificates curl gzip libbsd0 libbz2-1.0 libc6 libc
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-5" --checksum 1e34030c18f0ec2467fa5f1b1fbad24add217f671c3a61628f7b8671391f9676
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-12" --checksum c081f7f9663d4d64e7f26d6e6a77b3860ee1f39c309bd564f801c39192042d2f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "10.19.0-1" --checksum 53e64e567d4563efaea05f4e9e9eead3a3fbec1213a05528a5eeec2d2f8e8a43
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.1-2" --checksum 8fc4b049c856c022b49dd27ded8d0f3945a01f1fa8d2196f391ce481b8e95e3a
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.34.1-3" --checksum fd50ae3e5db7e54d4e3168aebc7d0fe037fc975ae3611c97e0abcbbcc503b2e8
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.1-3" --checksum 26f2ba99a02266d6f3857a3a11db7ed441d76a2fbc1066a17d4b0b17b047e01d
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.34.1-4" --checksum 3cb223b1dbe1be9280279e2427c850f7080bf6d0b938c2fbe7b2d7a34724c61b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-2" --checksum 7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "airflow" "2.2.3-2" --checksum 9fe86bfca8a6c3f3a9f947b21f7ff43ef4dbf1e1dcf0c9e2808449087354a43e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "airflow" "2.2.3-3" --checksum 7bda3b741e8fccf1de665c2a765c66ac4aa499c97bc1ad79d689911cb4cd9b61
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -30,7 +30,7 @@ RUN /opt/bitnami/scripts/airflow/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
     BITNAMI_APP_NAME="airflow" \
-    BITNAMI_IMAGE_VERSION="2.2.3-debian-10-r33" \
+    BITNAMI_IMAGE_VERSION="2.2.3-debian-10-r34" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/airflow/venv/lib/python3.8/site-packages/numpy.libs/:$LD_LIBRARY_PATH" \
