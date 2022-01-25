@@ -1,9 +1,9 @@
 {
     "envoy": {
         "arch": "amd64",
-        "digest": "77a6e2adb80b9e730834938b139fcec948d676278090882f800fe4bbb9e16129",
+        "digest": "20ff7426d439fd2c99fce82a9b74248509e8098b0fd162608d416513a65bcbba",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.19.1-2"
+        "version": "1.19.1-3"
     }
 }
