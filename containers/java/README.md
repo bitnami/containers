@@ -38,14 +38,15 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`17-prod`, `17-prod-debian-10`, `17.0.2-prod`, `17.0.2-prod-debian-10-r0` (17-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/17.0.2-prod-debian-10-r0/17-prod/debian-10/Dockerfile)
 * [`17`, `17-debian-10`, `17.0.2`, `17.0.2-debian-10-r0`, `latest` (17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/17.0.2-debian-10-r0/17/debian-10/Dockerfile)
-* [`11-prod`, `11-prod-debian-10`, `11.0.14-prod`, `11.0.14-prod-debian-10-r3` (11-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.14-prod-debian-10-r3/11-prod/debian-10/Dockerfile)
-* [`11`, `11-debian-10`, `11.0.14`, `11.0.14-debian-10-r2` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.14-debian-10-r2/11/debian-10/Dockerfile)
-* [`1.8-prod`, `1.8-prod-debian-10`, `1.8.322-prod`, `1.8.322-prod-debian-10-r3` (1.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.322-prod-debian-10-r3/1.8-prod/debian-10/Dockerfile)
+* [`11`, `11-debian-10`, `11.0.14`, `11.0.14-debian-10-r3` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.14-debian-10-r3/11/debian-10/Dockerfile)
 * [`1.8`, `1.8-debian-10`, `1.8.322`, `1.8.322-debian-10-r3` (1.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.322-debian-10-r3/1.8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/java GitHub repo](https://github.com/bitnami/bitnami-docker-java).
+
+### Deprecation Note (2022-01-21)
+
+The `prod` tags has been removed; from now on just the regular container images will be released.
 
 ### Deprecation Note (2020-08-18)
 
@@ -54,16 +55,6 @@ The formatting convention for `prod` tags has been changed:
 * `BRANCH-debian-10-prod` is now tagged as `BRANCH-prod-debian-10`
 * `VERSION-debian-10-rX-prod` is now tagged as `VERSION-prod-debian-10-rX`
 * `latest-prod` is now deprecated
-
-## What are `prod` tagged containers for?
-
-Containers tagged `prod` are production containers based on [minideb](https://github.com/bitnami/minideb). They contain the minimal dependencies required by an application to work.
-
-They don't include development dependencies, so they are commonly used in multi-stage builds as the target image. Application code and dependencies should be copied from a different container.
-
-The resultant containers only contain the necessary pieces of software to run the application. Therefore, they are smaller and safer.
-
-Learn how to use multi-stage builds to build your production application container in the [example](https://github.com/bitnami/bitnami-docker-java/tree/master/example) directory
 
 ## Get this image
 
