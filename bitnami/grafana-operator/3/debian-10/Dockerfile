@@ -9,10 +9,10 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/grafana-operator-3.10.4-2-linux-amd64-debian-10.tar.gz && \
-    echo "2e7cdc70824462e28e8d02375874992a74ba12160963afe37288e2043a57a27e  /tmp/bitnami/pkg/cache/grafana-operator-3.10.4-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/grafana-operator-3.10.4-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/grafana-operator-3.10.4-2-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/grafana-operator-3.10.4-3-linux-amd64-debian-10.tar.gz && \
+    echo "fc7cec697252d9cda6c2b8bdf194a01d5c7c7fb2da666b8ef93a58d5a264a4cb  /tmp/bitnami/pkg/cache/grafana-operator-3.10.4-3-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/grafana-operator-3.10.4-3-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/grafana-operator-3.10.4-3-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -20,7 +20,7 @@ RUN ln -sf /opt/bitnami/grafana-operator/bin/grafana-operator /usr/local/bin/gra
 RUN mkdir -p /opt/jsonnet && ln -sf /opt/bitnami/grafonnet-lib/grafonnet /opt/jsonnet/grafonnet
 
 ENV BITNAMI_APP_NAME="grafana-operator" \
-    BITNAMI_IMAGE_VERSION="3.10.4-debian-10-r90" \
+    BITNAMI_IMAGE_VERSION="3.10.4-debian-10-r91" \
     PATH="/opt/bitnami/grafana-operator/bin:$PATH"
 
 EXPOSE 8080
