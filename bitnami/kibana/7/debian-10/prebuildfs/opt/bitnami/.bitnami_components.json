@@ -8,16 +8,16 @@
     },
     "kibana": {
         "arch": "amd64",
-        "digest": "6eb42e9844a14d4b6f74ec5c94d76e4b5a4bf5e61ee67498db8ee694bee2e180",
+        "digest": "c4cc133b7daaa55ba569dcd22346fa901d01b3fa72f9904edc5bdbe207dc8dcd",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.16.3-1"
+        "version": "7.16.3-2"
     },
     "yq": {
         "arch": "amd64",
-        "digest": "e44965c2d2878443baa6c21214be5ce416a0ba34aaa3b23127ceb3aaefc72b4a",
+        "digest": "73d43822094e9e5881673a0d0b69ca20a39af8bff4b5a48070675d1b064c9d59",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.17.2-0"
+        "version": "4.17.2-1"
     }
 }
