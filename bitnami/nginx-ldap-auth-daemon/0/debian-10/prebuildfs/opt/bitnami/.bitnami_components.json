@@ -8,10 +8,10 @@
     },
     "nginx-ldap-auth-daemon": {
         "arch": "amd64",
-        "digest": "eec00f52ef647233d2dce6aa1c19b51213fc99ec45bb3a3aa5aa0beeaf608261",
+        "digest": "6a09cc9495304253d87f3d1f7abb7ff4026b73e7008cb039a47ce2a575aad2b3",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.20200116.0-6"
+        "version": "0.20200116.0-7"
     },
     "python": {
         "arch": "amd64",
