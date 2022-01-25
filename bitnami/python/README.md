@@ -38,20 +38,18 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.10-prod`, `3.10-prod-debian-10`, `3.10.2-prod`, `3.10.2-prod-debian-10-r8` (3.10-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.10.2-prod-debian-10-r8/3.10-prod/debian-10/Dockerfile)
 * [`3.10`, `3.10-debian-10`, `3.10.2`, `3.10.2-debian-10-r8` (3.10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.10.2-debian-10-r8/3.10/debian-10/Dockerfile)
-* [`3.9-prod`, `3.9-prod-debian-10`, `3.9.10-prod`, `3.9.10-prod-debian-10-r4` (3.9-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.9.10-prod-debian-10-r4/3.9-prod/debian-10/Dockerfile)
-* [`3.9`, `3.9-debian-10`, `3.9.10`, `3.9.10-debian-10-r4` (3.9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.9.10-debian-10-r4/3.9/debian-10/Dockerfile)
-* [`3.8-prod`, `3.8-prod-debian-10`, `3.8.12-prod`, `3.8.12-prod-debian-10-r146` (3.8-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.12-prod-debian-10-r146/3.8-prod/debian-10/Dockerfile)
+* [`3.9`, `3.9-debian-10`, `3.9.10`, `3.9.10-debian-10-r5` (3.9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.9.10-debian-10-r5/3.9/debian-10/Dockerfile)
 * [`3.8`, `3.8-debian-10`, `3.8.12`, `3.8.12-debian-10-r145` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.12-debian-10-r145/3.8/debian-10/Dockerfile)
-* [`3.7-prod`, `3.7-prod-debian-10`, `3.7.12-prod`, `3.7.12-prod-debian-10-r139` (3.7-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.12-prod-debian-10-r139/3.7-prod/debian-10/Dockerfile)
 * [`3.7`, `3.7-debian-10`, `3.7.12`, `3.7.12-debian-10-r140`, `latest` (3.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.12-debian-10-r140/3.7/debian-10/Dockerfile)
-* [`3.6-prod`, `3.6-prod-debian-10`, `3.6.15-prod`, `3.6.15-prod-debian-10-r136` (3.6-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.15-prod-debian-10-r136/3.6-prod/debian-10/Dockerfile)
 * [`3.6`, `3.6-debian-10`, `3.6.15`, `3.6.15-debian-10-r136` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.15-debian-10-r136/3.6/debian-10/Dockerfile)
-* [`2-prod`, `2-prod-debian-10`, `2.7.18-prod`, `2.7.18-prod-debian-10-r597` (2-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.18-prod-debian-10-r597/2-prod/debian-10/Dockerfile)
 * [`2`, `2-debian-10`, `2.7.18`, `2.7.18-debian-10-r604` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.18-debian-10-r604/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/python GitHub repo](https://github.com/bitnami/bitnami-docker-python).
+
+### Deprecation Note (2022-01-21)
+
+The `prod` tags has been removed; from now on just the regular container images will be released.
 
 ### Deprecation Note (2020-08-18)
 
@@ -60,16 +58,6 @@ The formatting convention for `prod` tags has been changed:
 * `BRANCH-debian-10-prod` is now tagged as `BRANCH-prod-debian-10`
 * `VERSION-debian-10-rX-prod` is now tagged as `VERSION-prod-debian-10-rX`
 * `latest-prod` is now deprecated
-
-## What are `prod` tagged containers for?
-
-Containers tagged `prod` are production containers based on [minideb](https://github.com/bitnami/minideb). They contain the minimal dependencies required by an application to work.
-
-They don't include development dependencies, so they are commonly used in multi-stage builds as the target image. Application code and dependencies should be copied from a different container.
-
-The resultant containers only contain the necessary pieces of software to run the application. Therefore, they are smaller and safer.
-
-Learn how to use multi-stage builds to build your production application container in the [example](https://github.com/bitnami/bitnami-docker-python/tree/master/example) directory
 
 ## Get this image
 
