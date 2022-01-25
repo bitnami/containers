@@ -8,17 +8,17 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "1dfab0979e651eb629e6e8a8a9083857be8094e975bb205b1d9e7893182aa462",
+        "digest": "a89062869618e23d67447fa4b15994985742dcb67e88a4abd5b1315562d3a202",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "12.22.9-6"
+        "version": "12.22.9-7"
     },
     "parse-dashboard": {
         "arch": "amd64",
-        "digest": "3d2dcb86e3e83c00b8c8f1a36662f086d17dbc26657b2757190ef102c35ccfa9",
+        "digest": "680d66854a4dcbf98cb972f33917fc689a9e1b6b562f59b3fee8f7e94578532a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.3.0-2"
+        "version": "3.3.0-3"
     },
     "python": {
         "arch": "amd64",
