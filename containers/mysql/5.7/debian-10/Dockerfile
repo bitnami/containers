@@ -9,9 +9,9 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaio1 libatomic1 libc6 libgcc1 libncurses6 libsasl2-2 libssl1.1 libstdc++6 libtinfo6 procps psmisc tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.1-2" --checksum 8fc4b049c856c022b49dd27ded8d0f3945a01f1fa8d2196f391ce481b8e95e3a
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql" "5.7.37-1" --checksum ac2db65f5e3b917821b2b37d1cfefbac1f6be1153bf73dc1721e46f0205e8e36
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-2" --checksum 7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.1-3" --checksum 26f2ba99a02266d6f3857a3a11db7ed441d76a2fbc1066a17d4b0b17b047e01d
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql" "5.7.37-2" --checksum eb884fb2c521e0db95f7437d6a400e684800bd2e1197fecdbd728917e94f5b29
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -20,7 +20,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql/postunpack.sh
 ENV BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="5.7.37-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="5.7.37-debian-10-r6" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mysql/bin:/opt/bitnami/mysql/sbin:$PATH"
 
 EXPOSE 3306
