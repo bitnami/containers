@@ -13,17 +13,17 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "2734bf172f6780c4c95ca21b089388bebc06187a9cae6aa7d9c47c034d9ca67b  /tmp/bitnami/pkg/cache/miniconda-4.10.3-7-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/miniconda-4.10.3-7-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/miniconda-4.10.3-7-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jupyter-base-notebook-2.1.0-1-linux-amd64-debian-10.tar.gz && \
-    echo "ee2184687cb83561cdf14d13fae70770224c7bab585c93237181d3fabe2465df  /tmp/bitnami/pkg/cache/jupyter-base-notebook-2.1.0-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/jupyter-base-notebook-2.1.0-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/jupyter-base-notebook-2.1.0-1-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jupyter-base-notebook-2.1.1-0-linux-amd64-debian-10.tar.gz && \
+    echo "d5ada31351e1bce9e71cc59aab554e68766b5385dc74edcdc6bd3e9566c1a23d  /tmp/bitnami/pkg/cache/jupyter-base-notebook-2.1.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/jupyter-base-notebook-2.1.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/jupyter-base-notebook-2.1.1-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /opt/bitnami/jupyterhub-singleuser/ && chmod g+rwX /opt/bitnami/jupyterhub-singleuser/
 
 ENV BITNAMI_APP_NAME="jupyter-base-notebook" \
-    BITNAMI_IMAGE_VERSION="2.1.0-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="2.1.1-debian-10-r0" \
     PATH="/opt/bitnami/miniconda/bin:$PATH"
 
 USER 1001
