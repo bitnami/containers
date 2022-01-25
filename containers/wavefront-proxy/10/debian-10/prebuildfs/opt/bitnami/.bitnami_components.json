@@ -8,16 +8,16 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "f7addf88d61b35543dc6ed9f5ec31fd8a800cec6249d419310fd56e8e9a3499d",
+        "digest": "12dac62c46e7791520530e06a63ae68efd36a7cb34ed31d0c9f922948c145ff3",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "11.0.14-0"
+        "version": "11.0.14-1"
     },
     "wavefront-proxy": {
         "arch": "amd64",
-        "digest": "1aff97f14f16fb5a458718ec217aa7252c4a9680c4cd0a8107a1095a996ae276",
+        "digest": "a191fdbc489717278960bc76571a694aad337bd24693f1a091039b6f65e69ed3",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.14.0-0"
+        "version": "10.14.0-1"
     }
 }
