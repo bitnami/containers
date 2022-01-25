@@ -38,14 +38,15 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8.1-prod`, `8.1-prod-debian-10`, `8.1.2-prod`, `8.1.2-prod-debian-10-r2` (8.1-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.1.2-prod-debian-10-r2/8.1-prod/debian-10/Dockerfile)
-* [`8.1`, `8.1-debian-10`, `8.1.2`, `8.1.2-debian-10-r2` (8.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.1.2-debian-10-r2/8.1/debian-10/Dockerfile)
-* [`8.0-prod`, `8.0-prod-debian-10`, `8.0.15-prod`, `8.0.15-prod-debian-10-r5` (8.0-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.0.15-prod-debian-10-r5/8.0-prod/debian-10/Dockerfile)
+* [`8.1`, `8.1-debian-10`, `8.1.2`, `8.1.2-debian-10-r3` (8.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.1.2-debian-10-r3/8.1/debian-10/Dockerfile)
 * [`8.0`, `8.0-debian-10`, `8.0.15`, `8.0.15-debian-10-r5` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.0.15-debian-10-r5/8.0/debian-10/Dockerfile)
-* [`7.4-prod`, `7.4-prod-debian-10`, `7.4.27-prod`, `7.4.27-prod-debian-10-r35` (7.4-prod/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.27-prod-debian-10-r35/7.4-prod/debian-10/Dockerfile)
 * [`7.4`, `7.4-debian-10`, `7.4.27`, `7.4.27-debian-10-r35`, `latest` (7.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.27-debian-10-r35/7.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-php-fpm).
+
+### Deprecation Note (2022-01-21)
+
+The `prod` tags has been removed; from now on just the regular container images will be released.
 
 ### Deprecation Note (2020-08-18)
 
@@ -54,16 +55,6 @@ The formatting convention for `prod` tags has been changed:
 * `BRANCH-debian-10-prod` is now tagged as `BRANCH-prod-debian-10`
 * `VERSION-debian-10-rX-prod` is now tagged as `VERSION-prod-debian-10-rX`
 * `latest-prod` is now deprecated
-
-## What are `prod` tagged containers for?
-
-Containers tagged `prod` are production containers based on [minideb](https://github.com/bitnami/minideb). They contain the minimal dependencies required by an application to work.
-
-They don't include development dependencies, so they are commonly used in multi-stage builds as the target image. Application code and dependencies should be copied from a different container.
-
-The resultant containers only contain the necessary pieces of software to run the application. Therefore, they are smaller and safer.
-
-Learn how to use multi-stage builds to build your production application container in the [example](https://github.com/bitnami/bitnami-docker-php-fpm/tree/master/example) directory
 
 ## Get this image
 
