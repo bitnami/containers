@@ -1,17 +1,17 @@
 {
     "cassandra": {
         "arch": "amd64",
-        "digest": "3788961e1bd725f42b157d6d6b0a2c1c0f3c336677d5e7da078507a755864e9e",
+        "digest": "dc8d86fe3c17282a7927651b0ddcaa2849607f103c02d4f0ea7afc20287279be",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.0.25-3"
+        "version": "3.0.25-4"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5",
+        "digest": "276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-2"
+        "version": "1.14.0-3"
     },
     "java": {
         "arch": "amd64",
@@ -22,10 +22,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "86f4b70467492980079a0c93b72455b46a5ee6228ac76e3581491670b2101f20",
+        "digest": "7483db5c694c4db7ee9968856e220e814c7cd697701295dc0fd802ba4917a94f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.7.18-17"
+        "version": "2.7.18-18"
     },
     "yq": {
         "arch": "amd64",
