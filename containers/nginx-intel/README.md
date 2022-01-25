@@ -1,12 +1,12 @@
 # NGINX Open Source for Intel packaged by Bitnami
 
-## What is nginx-intel?
+## What is NGINX Open Source for Intel?
 
-> NGINX Open Source for Intel combines the power of NGINX web server with the asynchronous mode OpenSSL, providing significant performance improvements.
+> NGINX Open Source for Intel is a lightweight server, combined with cryptography acceleration for 3rd gen Xeon Scalable Processors (Ice Lake) to get a breakthrough performance improvement.
 
-[Overview of nginx-intel](https://change.me)
+[Overview of NGINX Open Source for Intel](https://github.com/intel/asynch_mode_nginx)
 
-
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
@@ -41,9 +41,9 @@ It requires a 3rd gen Xeon Scalable Processor (Ice Lake) to get a breakthrough p
 
 > This [CVE scan report](https://quay.io/repository/bitnami/nginx-intel?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-## How to deploy nginx-intel in Kubernetes?
+## How to deploy NGINX Open Source for Intel in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami nginx-intel Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/nginx-intel).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami NGINX Open Source for Intel Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/nginx-intel).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
@@ -56,11 +56,11 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.4.7`, `0.4.7-debian-10-r0`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-intel/blob/0.4.7-debian-10-r0/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.4.7`, `0.4.7-debian-10-r1`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-intel/blob/0.4.7-debian-10-r1/0/debian-10/Dockerfile)
 
 ## Get this image
 
-The recommended way to get the Bitnami nginx-intel Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/nginx-intel).
+The recommended way to get the Bitnami NGINX Open Source for Intel Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/nginx-intel).
 
 ```console
 $ docker pull bitnami/nginx-intel:latest
@@ -82,7 +82,7 @@ $ docker build -t bitnami/nginx-intel:latest 'https://github.com/bitnami/bitnami
 
 ## Hosting a static website
 
-This nginx-intel image exposes a volume at `/app`. Content mounted here is served by the default catch-all server block.
+This NGINX Open Source for Intel image exposes a volume at `/app`. Content mounted here is served by the default catch-all server block.
 
 ```console
 $ docker run -v /path/to/app:/app bitnami/nginx-intel:latest
@@ -199,9 +199,9 @@ Write your `my_server_block.conf` file with the SSL configuration and the relati
   }
 ```
 
-#### Step 3: Run the nginx-intel image and open the SSL port
+#### Step 3: Run the NGINX Open Source for Intel image and open the SSL port
 
-Run the nginx-intel image, mounting the certificates directory from your host.
+Run the NGINX Open Source for Intel image, mounting the certificates directory from your host.
 
 ```console
 $ docker run --name nginx \
@@ -272,7 +272,7 @@ server {
 
 ## Logging
 
-The Bitnami nginx-intel Docker image sends the container logs to the `stdout`. To view the logs:
+The Bitnami NGINX Open Source for Intel Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```console
 $ docker logs nginx
@@ -288,7 +288,7 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 
 ## Understand the structure of this image
 
-The Bitnami nginx-intel Docker image is built using a Dockerfile with the structure below:
+The Bitnami NGINX Open Source for Intel Docker image is built using a Dockerfile with the structure below:
 
 ```Dockerfile
 FROM bitnami/minideb
@@ -323,7 +323,7 @@ The Dockerfile has several sections related to:
 
 ## Customize this image
 
-The Bitnami nginx-intel Docker image is designed to be extended so it can be used as the base image for your custom web applications.
+The Bitnami NGINX Open Source for Intel Docker image is designed to be extended so it can be used as the base image for your custom web applications.
 
 > Note: Read the [previous section](#understand-the-structure-of-this-image) to understand the Dockerfile structure before extending this image.
 
@@ -430,8 +430,8 @@ RUN install_packages dirmngr gpg gpg-agent curl build-essential libpcre3-dev zli
 RUN gpg --keyserver pgp.mit.edu --recv-key 520A9993A1C052F8
 ## Download NGINX, verify integrity and extract
 RUN cd /tmp && \
-    curl -O https://change.me/download/nginx-${NGINX_VERSION}.tar.gz && \
-    curl -O https://change.me/download/nginx-${NGINX_VERSION}.tar.gz.asc && \
+    curl -O https://github.com/intel/asynch_mode_nginx/download/nginx-${NGINX_VERSION}.tar.gz && \
+    curl -O https://github.com/intel/asynch_mode_nginx/download/nginx-${NGINX_VERSION}.tar.gz.asc && \
     gpg --verify nginx-${NGINX_VERSION}.tar.gz.asc nginx-${NGINX_VERSION}.tar.gz && \
     tar xzf nginx-${NGINX_VERSION}.tar.gz
 ## Compile NGINX with desired module
@@ -459,7 +459,7 @@ USER 1001
 
 ### Upgrade this image
 
-Bitnami provides up-to-date versions of nginx-intel, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
+Bitnami provides up-to-date versions of NGINX Open Source for Intel, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
 #### Step 1: Get the updated image
 
