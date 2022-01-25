@@ -9,16 +9,16 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nats-exporter-0.9.1-0-linux-amd64-debian-10.tar.gz && \
-    echo "6c890afed2311b454663043c7a47b3b4dc0498aa05056e2abf3a19f84edd5272  /tmp/bitnami/pkg/cache/nats-exporter-0.9.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/nats-exporter-0.9.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/nats-exporter-0.9.1-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/nats-exporter-0.9.1-1-linux-amd64-debian-10.tar.gz && \
+    echo "59d075369b77a091f573ec6d21a9b53c3d8892154545642820fb03f7ab44290c  /tmp/bitnami/pkg/cache/nats-exporter-0.9.1-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/nats-exporter-0.9.1-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/nats-exporter-0.9.1-1-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="nats-exporter" \
-    BITNAMI_IMAGE_VERSION="0.9.1-debian-10-r2" \
+    BITNAMI_IMAGE_VERSION="0.9.1-debian-10-r3" \
     PATH="/opt/bitnami/nats-exporter/bin:$PATH"
 
 EXPOSE 7777
