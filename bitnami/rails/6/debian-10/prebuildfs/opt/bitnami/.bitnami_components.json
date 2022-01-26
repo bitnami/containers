@@ -43,10 +43,10 @@
     },
     "ruby": {
         "arch": "amd64",
-        "digest": "4b1b46f624dd05bed2f0b258a3a88549ad577cc55b817652b06af04e9251b26c",
+        "digest": "6dc3a30ecaa164f3e71beaafecce4e3f32c2e104a0323bc20310b64bab2c1c43",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.6.9-4"
+        "version": "2.6.9-5"
     },
     "wait-for-port": {
         "arch": "amd64",
