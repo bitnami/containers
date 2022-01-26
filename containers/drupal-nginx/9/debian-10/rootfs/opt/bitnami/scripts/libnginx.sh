@@ -78,7 +78,30 @@ nginx_configure_port() {
         local nginx_configuration
         debug "Setting port number to ${port} in '${file}'"
         # TODO: find an appropriate NGINX parser to avoid 'sed calls'
-        nginx_configuration="$(sed -E "s/(listen\s+)[0-9]{1,5};/\1${port};/g" "$file")"
+        nginx_configuration="$(sed -E "s/(listen\s+)[0-9]{1,5}(.*);/\1${port}\2;/g" "$file")"
+        echo "$nginx_configuration" >"$file"
+    fi
+}
+
+########################
+# Configure NGINX directives
+# Globals:
+#   NGINX_CONF_DIR
+# Arguments:
+#    $1 - Directive to modify
+#    $2 - Value
+#    $3 - (optional) Path to server block file
+# Returns:
+#   None
+#########################
+nginx_configure() {
+    local directive=${1:?missing directive}
+    local value=${2:?missing value}
+    local file=${3:-"$NGINX_CONF_FILE"}
+    if is_file_writable "$file"; then
+        local nginx_configuration
+        debug "Setting directive '${directive}' to '${value}' in '${file}'"
+        nginx_configuration="$(sed -E "s/(\s*${directive}\s+)(.+);/\1${value};/g" "$file")"
         echo "$nginx_configuration" >"$file"
     fi
 }
@@ -94,20 +117,34 @@ nginx_configure_port() {
 #########################
 nginx_validate() {
     info "Validating settings in NGINX_* env vars"
+    local error_code=0
+    # Auxiliary functions
+    print_validation_error() {
+        error "$1"
+        error_code=1
+    }
+    check_yes_no_value() {
+        if ! is_yes_no_value "${!1}" && ! is_true_false_value "${!1}"; then
+            print_validation_error "The allowed values for ${1} are: yes no"
+        fi
+    }
+
+    ! is_empty_value "$NGINX_ENABLE_ABSOLUTE_REDIRECT" && check_yes_no_value "NGINX_ENABLE_ABSOLUTE_REDIRECT"
+    ! is_empty_value "$NGINX_ENABLE_PORT_IN_REDIRECT" && check_yes_no_value "NGINX_ENABLE_PORT_IN_REDIRECT"
 
     if [[ -n "${NGINX_HTTP_PORT_NUMBER:-}" ]]; then
         local -a validate_port_args=()
         ! am_i_root && validate_port_args+=("-unprivileged")
         validate_port_args+=("${NGINX_HTTP_PORT_NUMBER}")
         if ! err=$(validate_port "${validate_port_args[@]}"); then
-            error "An invalid port was specified in the environment variable NGINX_HTTP_PORT_NUMBER: $err"
-            exit 1
+            print_validation_error "An invalid port was specified in the environment variable NGINX_HTTP_PORT_NUMBER: $err"
         fi
     fi
 
     if ! is_file_writable "$NGINX_CONF_FILE"; then
         warn "The NGINX configuration file '${NGINX_CONF_FILE}' is not writable by current user. Configurations based on environment variables will not be applied."
     fi
+    return "$error_code"
 }
 
 ########################
@@ -144,8 +181,7 @@ nginx_initialize() {
         if [[ -n "${NGINX_DAEMON_USER:-}" ]]; then
             chown -R "${NGINX_DAEMON_USER:-}" "$NGINX_TMP_DIR"
         fi
-        nginx_user_configuration="$(sed -E "s/^(user\s+).*/\1${NGINX_DAEMON_USER:-} ${NGINX_DAEMON_GROUP:-};/g" "$NGINX_CONF_FILE")"
-        is_file_writable "$NGINX_CONF_FILE" && echo "$nginx_user_configuration" >"$NGINX_CONF_FILE"
+        nginx_configure "user" "${NGINX_DAEMON_USER:-} ${NGINX_DAEMON_GROUP:-}"
     else
         # The "user" directive makes sense only if the master process runs with super-user privileges
         # TODO: find an appropriate NGINX parser to avoid 'sed calls'
@@ -155,6 +191,8 @@ nginx_initialize() {
     if [[ -n "${NGINX_HTTP_PORT_NUMBER:-}" ]]; then
         nginx_configure_port "$NGINX_HTTP_PORT_NUMBER"
     fi
+    nginx_configure "absolute_redirect" "$(is_boolean_yes "$NGINX_ENABLE_ABSOLUTE_REDIRECT" && echo "on" || echo "off" )"
+    nginx_configure "port_in_redirect" "$(is_boolean_yes "$NGINX_ENABLE_PORT_IN_REDIRECT" && echo "on" || echo "off" )"
 }
 
 ########################

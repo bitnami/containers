@@ -37,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`9`, `9-debian-10`, `9.3.3`, `9.3.3-debian-10-r4`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal-nginx/blob/9.3.3-debian-10-r4/9/debian-10/Dockerfile)
+* [`9`, `9-debian-10`, `9.3.3`, `9.3.3-debian-10-r5`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal-nginx/blob/9.3.3-debian-10-r5/9/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-drupal-nginx).
 
@@ -429,6 +429,7 @@ Before extending this image, please note there are certain configuration setting
 - [Adding custom server blocks](https://github.com/bitnami/bitnami-docker-nginx#adding-custom-server-blocks).
 - [Replacing the 'nginx.conf' file](https://github.com/bitnami/bitnami-docker-nginx#full-configuration).
 - [Using custom SSL certificates](https://github.com/bitnami/bitnami-docker-nginx#using-custom-ssl-certificates).
+- [Solving redirection issues](https://github.com/bitnami/bitnami-docker-nginx#solving-redirection-issues).
 
 If your desired customizations cannot be covered using the methods mentioned above, extend the image. To do so, create your own image using a Dockerfile with the format below:
 

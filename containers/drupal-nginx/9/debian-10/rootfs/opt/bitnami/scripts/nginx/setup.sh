@@ -27,8 +27,20 @@ am_i_root && ensure_user_exists "$NGINX_DAEMON_USER" --group "$NGINX_DAEMON_GROU
 # Run init scripts
 nginx_custom_init_scripts
 
+# Validate HTTPS port number
+if [[ -n "${NGINX_HTTPS_PORT_NUMBER:-}" ]]; then
+    validate_port_args=()
+    ! am_i_root && validate_port_args+=("-unprivileged")
+    validate_port_args+=("$NGINX_HTTPS_PORT_NUMBER")
+    if ! err=$(validate_port "${validate_port_args[@]}"); then
+        error "An invalid port was specified in the environment variable NGINX_HTTPS_PORT_NUMBER: $err"
+        exit 1
+    fi
+fi
+
 # Fix logging issue when running as root
 ! am_i_root || chmod o+w "$(readlink /dev/stdout)" "$(readlink /dev/stderr)"
 
 # Initialize NGINX
 nginx_initialize
+
