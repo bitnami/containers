@@ -39,7 +39,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.11.5`, `3.11.5-debian-10-r9`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.11.5-debian-10-r9/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.11.5`, `3.11.5-debian-10-r10`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.11.5-debian-10-r10/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/moodle GitHub repo](https://github.com/bitnami/bitnami-docker-moodle).
 
@@ -220,6 +220,7 @@ Available environment variables:
 - `MOODLE_PASSWORD`: Moodle application password. Default: **bitnami**
 - `MOODLE_EMAIL`: Moodle application email. Default: **user@example.com**
 - `MOODLE_SITE_NAME`: Moodle site name. Default: **New Site**
+- `MOODLE_SITE_NAME`: Moodle www root. No defaults.
 - `MOODLE_SKIP_BOOTSTRAP`: Do not initialize the Moodle database for a new deployment. This is necessary in case you use a database that already has Moodle data. Default: **no**
 
 ##### Use an existing database
