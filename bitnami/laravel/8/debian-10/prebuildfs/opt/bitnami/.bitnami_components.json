@@ -22,10 +22,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "4fd9c79afce23e3ef1335637c60aab07da4fac804bf1e9f6db5769a238687d1c",
+        "digest": "bfaa7105f4f67ef99be5b77c0be693d89c6fa4c14feb3ada97f25cd706b5d1ed",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.1.2-10"
+        "version": "8.1.2-11"
     },
     "python": {
         "arch": "amd64",
@@ -36,9 +36,9 @@
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "1e34030c18f0ec2467fa5f1b1fbad24add217f671c3a61628f7b8671391f9676",
+        "digest": "845ff207415b5730cadd45aa3c757ca45a5c9e73bc54c24aa481ddca24eec35d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-5"
+        "version": "1.0.1-6"
     }
 }
