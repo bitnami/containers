@@ -285,6 +285,10 @@ To configure JasperReports to send email using SMTP you can set the following en
 - `JASPERREPORTS_SMTP_PASSWORD`: SMTP account password.
 - `JASPERREPORTS_SMTP_PROTOCOL`: If specified, SMTP protocol to use. Allowed values: *tls*, *ssl*. No default.
 
+##### JasperReports base URL configuration
+
+- `JASPERREPORTS_USE_ROOT_URL`: JasperReports application default URL. Default: **false** at http://example.com/jasperserver. http://example.com/ if **true**.
+
 #### Examples
 
 ##### SMTP configuration using a Gmail account
@@ -496,7 +500,7 @@ New versions and releases cadence are not going to be affected. Once a new versi
 - The configuration logic is now based on Bash scripts in the *rootfs/* folder.
 - The container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Tomcat daemon was started as the `tomcat` user. From now on, both the container and the Tomcat daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
-## 7.2.0-debian-10-r64
+## 7.2.0-debian-10-r67
 
 - Java distribution has been migrated from AdoptOpenJDK to OpenJDK Liberica. As part of VMware, we have an agreement with Bell Software to distribute the Liberica distribution of OpenJDK. That way, we can provide support & the latest versions and security releases for Java.
 

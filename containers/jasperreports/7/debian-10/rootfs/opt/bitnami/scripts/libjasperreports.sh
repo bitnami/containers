@@ -320,6 +320,13 @@ jasperreports_initialize() {
     # Make Tomcat redirect to /jasperserver
     replace_in_file "$BITNAMI_ROOT_DIR/tomcat/webapps/ROOT/index.jsp" '<%\s*$' '<%\nresponse.sendRedirect("/jasperserver");'
 
+    # Move JasperServer to default Tomcat URL
+    if is_boolean_yes "${JASPERREPORTS_USE_ROOT_URL}"; then 
+        rm -rf "$BITNAMI_ROOT_DIR/tomcat/webapps/ROOT"
+        rm "$BITNAMI_ROOT_DIR/tomcat/webapps/jasperserver"
+        ln -s "$JASPERREPORTS_BASE_DIR" "$BITNAMI_ROOT_DIR/tomcat/webapps/ROOT"
+    fi
+
     # Avoid exit code of previous commands to affect the result of this function
     true
 }
