@@ -9,10 +9,10 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 libgcc1 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/java-1.8.322-1-linux-amd64-debian-10.tar.gz && \
-    echo "064c0df11dedb32c3a3e13c1daac87085ed44ccd816898f11e7a2496ece5d9ee  /tmp/bitnami/pkg/cache/java-1.8.322-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/java-1.8.322-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/java-1.8.322-1-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/java-1.8.322-2-linux-amd64-debian-10.tar.gz && \
+    echo "b4d038090cda6aa243de5dc579a06d642918fbfc2473f114bdb443880e8a0d70  /tmp/bitnami/pkg/cache/java-1.8.322-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/java-1.8.322-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/java-1.8.322-2-linux-amd64-debian-10.tar.gz
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jmx-exporter-0.16.1-5-linux-amd64-debian-10.tar.gz && \
     echo "dde9bc8480486db38ed229ff2edc049fd717c588fcca598d123e5459c47551ed  /tmp/bitnami/pkg/cache/jmx-exporter-0.16.1-5-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/jmx-exporter-0.16.1-5-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
@@ -22,7 +22,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="jmx-exporter" \
-    BITNAMI_IMAGE_VERSION="0.16.1-debian-10-r189" \
+    BITNAMI_IMAGE_VERSION="0.16.1-debian-10-r190" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 5556
