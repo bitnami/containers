@@ -48,7 +48,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.21`, `1.21-debian-10`, `1.21.5`, `1.21.5-debian-10-r26`, `latest` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.21.5-debian-10-r26/1.21/debian-10/Dockerfile)
+* [`1.21`, `1.21-debian-10`, `1.21.6`, `1.21.6-debian-10-r0`, `latest` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.21.6-debian-10-r0/1.21/debian-10/Dockerfile)
 * [`1.20`, `1.20-debian-10`, `1.20.2`, `1.20.2-debian-10-r64` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.20.2-debian-10-r64/1.20/debian-10/Dockerfile)
 
 ## Get this image
@@ -215,6 +215,95 @@ services:
   ...
 ```
 
+### Solving redirection issues
+
+By default redirections issued by NGINX Open Source image will be relative. If you need to activate absolute redirections you can set `NGINX_ENABLE_ABSOLUTE_REDIRECT` to `yes`. You should pay attention to the port where the container is listening, because it won't appear in redirections unless you set also `NGINX_ENABLE_PORT_IN_REDIRECT` to `yes`.
+
+In the following lines you can see different examples what explain how redirections work. All of them will assume that we have the following content in the server block `my_redirect_server_block.conf`:
+
+```nginx
+server {
+  listen 0.0.0.0:8080;
+  server_name www.example.com;
+  root /app;
+  index index.htm index.html;
+  location /test/ {
+    return 301 /index.html;
+  }
+}
+```
+
+#### Default configuration
+
+```console
+$ docker run --name nginx --rm -p 9000:8080 \
+  -v /path/to/my_redirect_server_block.conf:/opt/bitnami/nginx/conf/server_blocks/my_redirect.conf:ro \
+  bitnami/nginx:latest
+```
+
+As mentioned, default redirections issued by NGINX Open Source image will be relative. The client should build the final URL
+
+```console
+$ curl -kI http://localhost:9000/test/
+HTTP/1.1 301 Moved Permanently
+...
+Location: /index.html
+...
+$ curl -w %{redirect_url}\\n -o /dev/null http://localhost:9000/test/
+http://localhost:9000/index.html
+```
+Please keep in mind that some old clients could be not compatible with relative redirections.
+
+#### Absolute redirect enabled
+
+```console
+$ docker run --name nginx --rm -p 9000:8080 \
+  -v /path/to/my_redirect_server_block.conf:/opt/bitnami/nginx/conf/server_blocks/my_redirect.conf:ro \
+  -e NGINX_ENABLE_ABSOLUTE_REDIRECT=yes \
+  bitnami/nginx:latest
+```
+
+As result, the container will reply with a full URL in the `Location` header but it doesn't have the port. This is useful if you are exposing the container in standard ports (80 or 443)
+
+```console
+$ curl -kI http://localhost:9000/test/
+HTTP/1.1 301 Moved Permanently
+...
+Location: http://localhost/index.html
+...
+```
+
+#### Port in redirect enabled
+
+```console
+$ docker run --name nginx --rm -p 9000:8080 \
+  -v /path/to/my_redirect_server_block.conf:/opt/bitnami/nginx/conf/server_blocks/my_redirect.conf:ro \
+  -e NGINX_ENABLE_ABSOLUTE_REDIRECT=yes \
+  -e NGINX_ENABLE_PORT_IN_REDIRECT=yes \
+  bitnami/nginx:latest
+```
+
+In this case the container will include the port where it is listening to in redirections, not the port where it is exposed (in the example `8080` vs `9000`)
+
+```console
+$ curl -kI http://localhost:9000/test/
+HTTP/1.1 301 Moved Permanently
+...
+Location: http://localhost:8080/index.html
+...
+```
+
+To amend this situation and build reachable URLs, you have to run the container listening in the same port that you are exposing
+
+```console
+$ docker run --name nginx --rm -p 9000:9000 \
+  -v /path/to/my_redirect_server_block.conf:/opt/bitnami/nginx/conf/server_blocks/my_redirect.conf:ro \
+  -e NGINX_ENABLE_ABSOLUTE_REDIRECT=yes \
+  -e NGINX_ENABLE_PORT_IN_REDIRECT=yes \
+  -e NGINX_HTTP_PORT_NUMBER=9000
+  bitnami/nginx:latest
+```
+
 ### Full configuration
 
 The image looks for configurations in `/opt/bitnami/nginx/conf/nginx.conf`. You can overwrite the `nginx.conf` file using your own custom configuration file.
@@ -328,6 +417,7 @@ Before extending this image, please note there are certain configuration setting
 - [Adding custom server blocks](#adding-custom-server-blocks).
 - [Replacing the 'nginx.conf' file](#full-configuration).
 - [Using custom SSL certificates](#using-custom-ssl-certificates).
+- [Solving redirection issues](#solving-redirection-issues).
 
 If your desired customizations cannot be covered using the methods mentioned above, extend the image. To do so, create your own image using a Dockerfile with the format below:
 
