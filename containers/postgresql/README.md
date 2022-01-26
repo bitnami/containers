@@ -53,7 +53,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`14`, `14-debian-10`, `14.1.0`, `14.1.0-debian-10-r70` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/14.1.0-debian-10-r70/14/debian-10/Dockerfile)
 * [`13`, `13-debian-10`, `13.5.0`, `13.5.0-debian-10-r70` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/13.5.0-debian-10-r70/13/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.9.0`, `12.9.0-debian-10-r70` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.9.0-debian-10-r70/12/debian-10/Dockerfile)
-* [`11`, `11-debian-10`, `11.14.0`, `11.14.0-debian-10-r40`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.14.0-debian-10-r40/11/debian-10/Dockerfile)
+* [`11`, `11-debian-10`, `11.14.0`, `11.14.0-debian-10-r41`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.14.0-debian-10-r41/11/debian-10/Dockerfile)
 * [`10`, `10-debian-10`, `10.19.0`, `10.19.0-debian-10-r71` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.19.0-debian-10-r71/10/debian-10/Dockerfile)
 * [`9.6`, `9.6-debian-10`, `9.6.24`, `9.6.24-debian-10-r70` (9.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/9.6.24-debian-10-r70/9.6/debian-10/Dockerfile)
 
@@ -832,6 +832,10 @@ $ docker-compose up postgresql
 
 - All volumes have been merged at `/bitnami/postgresql`. Now you only need to mount a single volume at `/bitnami/postgresql` for persistence.
 - The logs are always sent to the `stdout` and are no longer collected in the volume.
+
+## Branch Deprecation Notice
+
+PostgreSQL's branch 9.6 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 12-11-2021
 
 ## Contributing
 
