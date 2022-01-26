@@ -12,11 +12,11 @@ RUN install_packages acl ca-certificates curl gzip jq libaudit1 libbsd0 libbz2-1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.4.27-8" --checksum 91191e8bdf140a08f873675198c998fa4fabbea0a22fce0791568b5f8c11aaad
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.52-3" --checksum 1fdcfb619d0dd3b94dbe770e931f01ebedb2f968b07353226d89ce6452953593
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis-client" "6.0.16-3" --checksum dd2b26a8b8dfe89996bf6406e0e0cb4413c7c740792c53e9dd5448ff694cd69b
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "11.14.0-3" --checksum 7a2458504d4197d0d6be7615bc31b87d058b99accd6397511348fcc4696c44cb
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "11.14.0-4" --checksum 14eda4cc9b632928555461c32babf4474eb41884b7a4fcc04bac27e23eb7887a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.4.22-1" --checksum 37ba718ad68506a9ea0705c12f013a6afc7210c82460769ffba0f16759caae95
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.27-4" --checksum 32bf5ff92df0696ec8bb1b2bf23f47fa0ecc42ca26368482365b20f3e40ca094
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.34.1-4" --checksum 3cb223b1dbe1be9280279e2427c850f7080bf6d0b938c2fbe7b2d7a34724c61b
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-5" --checksum 9e312b4a7e16a55d08e67c4fd69c91000e4dcc4af149d59915c49375b83852af
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.35.0-0" --checksum 51075db42727d7b14b9941e7d7c063a135e9ad60cc606676d6e817e7d4a607b9
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-6" --checksum 81b0642a6d8e9d952a0f6540f2d7481a99b9a12dd42bcb5906ba8014ca80f326
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dreamfactory" "4.10.1-1" --checksum c2b015323be11f3f67f43d8e9b3bbaccfb5074f9c69f25c45b3bad90b68f4dfd
 RUN apt-get update && apt-get upgrade -y && \
@@ -33,7 +33,7 @@ RUN /opt/bitnami/scripts/php-postgresql/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="dreamfactory" \
-    BITNAMI_IMAGE_VERSION="4.10.1-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="4.10.1-debian-10-r5" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/redis/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:/opt/bitnami/common/bin:/opt/bitnami/dreamfactory/bin:$PATH"
 
 EXPOSE 8080 8443

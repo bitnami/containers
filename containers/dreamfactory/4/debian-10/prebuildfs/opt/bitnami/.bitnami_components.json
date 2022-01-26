@@ -15,10 +15,10 @@
     },
     "git": {
         "arch": "amd64",
-        "digest": "3cb223b1dbe1be9280279e2427c850f7080bf6d0b938c2fbe7b2d7a34724c61b",
+        "digest": "51075db42727d7b14b9941e7d7c063a135e9ad60cc606676d6e817e7d4a607b9",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.34.1-4"
+        "version": "2.35.0-0"
     },
     "gosu": {
         "arch": "amd64",
@@ -50,10 +50,10 @@
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "7a2458504d4197d0d6be7615bc31b87d058b99accd6397511348fcc4696c44cb",
+        "digest": "14eda4cc9b632928555461c32babf4474eb41884b7a4fcc04bac27e23eb7887a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "11.14.0-3"
+        "version": "11.14.0-4"
     },
     "redis-client": {
         "arch": "amd64",
@@ -64,9 +64,9 @@
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "9e312b4a7e16a55d08e67c4fd69c91000e4dcc4af149d59915c49375b83852af",
+        "digest": "81b0642a6d8e9d952a0f6540f2d7481a99b9a12dd42bcb5906ba8014ca80f326",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-5"
+        "version": "1.0.1-6"
     }
 }
