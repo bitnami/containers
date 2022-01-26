@@ -52,9 +52,6 @@ nginx_configure_port "$NGINX_DEFAULT_HTTP_PORT_NUMBER"
 # Load additional libraries
 . /opt/bitnami/scripts/libfs.sh
 
-# Configure default HTTPS port
-nginx_configure_port "$NGINX_DEFAULT_HTTPS_PORT_NUMBER" "${NGINX_SERVER_BLOCKS_DIR}/default-https-server-block.conf"
-
 # Users can mount their html sites at /app
 mv "${NGINX_BASE_DIR}/html" /app
 ln -sf /app "${NGINX_BASE_DIR}/html"
@@ -65,3 +62,6 @@ ln -sf /certs "${NGINX_CONF_DIR}/bitnami/certs"
 
 ln -sf "/dev/stdout" "${NGINX_LOGS_DIR}/access.log"
 ln -sf "/dev/stderr" "${NGINX_LOGS_DIR}/error.log"
+
+# Configure default HTTPS port
+nginx_configure_port "$NGINX_DEFAULT_HTTPS_PORT_NUMBER" "${NGINX_SERVER_BLOCKS_DIR}/default-https-server-block.conf"

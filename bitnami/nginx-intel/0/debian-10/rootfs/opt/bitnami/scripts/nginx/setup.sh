@@ -44,5 +44,6 @@ fi
 # Initialize NGINX
 nginx_initialize
 
+
 # Configure HTTPS port number
 [[ -z "$NGINX_HTTPS_PORT_NUMBER" ]] || nginx_configure_port "$NGINX_HTTPS_PORT_NUMBER" "${NGINX_SERVER_BLOCKS_DIR}/default-https-server-block.conf"
