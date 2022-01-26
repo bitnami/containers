@@ -8,10 +8,10 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "064c0df11dedb32c3a3e13c1daac87085ed44ccd816898f11e7a2496ece5d9ee",
+        "digest": "f0e1547d9f9d455e7e5794fe7ed92cc8ce4d5d210eb6772cf0bff5a18e8adf96",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.8.322-1"
+        "version": "1.8.322-3"
     },
     "spring-cloud-dataflow-composed-task-runner": {
         "arch": "amd64",
