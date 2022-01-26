@@ -10,7 +10,7 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl gzip libc6 libgeoip1 libpcre3 libssl1.1 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.21.6-0" --checksum 7c7794bcf81ad27699c712c02c96bd88f0583fc6730a126c2ac57888ce3b08dc
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-6" --checksum 81b0642a6d8e9d952a0f6540f2d7481a99b9a12dd42bcb5906ba8014ca80f326
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kubeapps" "2.4.2-2" --checksum a230239b5436451dbc3e82ecc82281485b977b8bc9ca4256b1b3aa7c6cebcc06
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kubeapps" "2.4.2-3" --checksum 5738d1700158f8bf41acd53334a2e6b85e240fbf48d656d9c24a9c51b1c5cbe3
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -24,7 +24,7 @@ RUN rm -rf /app && \
 RUN chmod -R g+rwX /opt/bitnami/nginx/conf
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
 ENV BITNAMI_APP_NAME="kubeapps-dashboard" \
-    BITNAMI_IMAGE_VERSION="2.4.2-debian-10-r51" \
+    BITNAMI_IMAGE_VERSION="2.4.2-debian-10-r52" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
     PATH="/opt/bitnami/nginx/sbin:/opt/bitnami/common/bin:$PATH"
