@@ -43,7 +43,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.1.1`, `2.1.1-debian-10-r55`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/2.1.1-debian-10-r55/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.1.1`, `2.1.1-debian-10-r56`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/2.1.1-debian-10-r56/2/debian-10/Dockerfile)
 * [`1`, `1-debian-10`, `1.8.5`, `1.8.5-debian-10-r238` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/1.8.5-debian-10-r238/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/influxdb GitHub repo](https://github.com/bitnami/bitnami-docker-influxdb).
@@ -412,6 +412,10 @@ or using Docker Compose:
 ```console
 $ docker-compose up influxdb
 ```
+
+## Branch Deprecation Notice
+
+InfluxDB&trade;'s branch 1 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 02-25-2022
 
 ## Contributing
 
