@@ -9,16 +9,16 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/envoy-1.20.1-3-linux-amd64-debian-10.tar.gz && \
-    echo "64744adfa09887aef793f367c7ab2113714d9143eb8f55d839ebb2f3b89a5b5b  /tmp/bitnami/pkg/cache/envoy-1.20.1-3-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/envoy-1.20.1-3-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/envoy-1.20.1-3-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/envoy-1.20.1-4-linux-amd64-debian-10.tar.gz && \
+    echo "6c12aa32c30452e7c7ca682648887b9824832c6935ce0c5a776377b09666a3c7  /tmp/bitnami/pkg/cache/envoy-1.20.1-4-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/envoy-1.20.1-4-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/envoy-1.20.1-4-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="envoy" \
-    BITNAMI_IMAGE_VERSION="1.20.1-debian-10-r51" \
+    BITNAMI_IMAGE_VERSION="1.20.1-debian-10-r52" \
     PATH="/opt/bitnami/envoy/bin:$PATH"
 
 USER 1001
