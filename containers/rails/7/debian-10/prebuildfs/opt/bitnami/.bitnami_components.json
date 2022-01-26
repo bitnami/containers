@@ -1,10 +1,10 @@
 {
     "git": {
         "arch": "amd64",
-        "digest": "3cb223b1dbe1be9280279e2427c850f7080bf6d0b938c2fbe7b2d7a34724c61b",
+        "digest": "51075db42727d7b14b9941e7d7c063a135e9ad60cc606676d6e817e7d4a607b9",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.34.1-4"
+        "version": "2.35.0-0"
     },
     "gosu": {
         "arch": "amd64",
@@ -22,10 +22,10 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "70338565b39f0c8be869cb05107365dac31a26caf1fe5ba24de171a6dd334375",
+        "digest": "a529a3386f396110186951a0a4a4e1f440440d627041589635f69dbf0bdac116",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "14.18.3-5"
+        "version": "14.18.3-6"
     },
     "python": {
         "arch": "amd64",
@@ -50,9 +50,9 @@
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "1e34030c18f0ec2467fa5f1b1fbad24add217f671c3a61628f7b8671391f9676",
+        "digest": "845ff207415b5730cadd45aa3c757ca45a5c9e73bc54c24aa481ddca24eec35d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-5"
+        "version": "1.0.1-6"
     }
 }
