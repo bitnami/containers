@@ -12,7 +12,7 @@ RUN install_packages acl ca-certificates curl gzip less libaudit1 libbsd0 libbz2
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-6" --checksum 81b0642a6d8e9d952a0f6540f2d7481a99b9a12dd42bcb5906ba8014ca80f326
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.4.27-8" --checksum 91191e8bdf140a08f873675198c998fa4fabbea0a22fce0791568b5f8c11aaad
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.52-3" --checksum 1fdcfb619d0dd3b94dbe770e931f01ebedb2f968b07353226d89ce6452953593
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wp-cli" "2.5.0-3" --checksum a2cd5c15c9cd549b5fc5ef771a25d7016b0d150e70dc423b54db526debb0d40d
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wp-cli" "2.6.0-0" --checksum 8d589caaf145b669d7d3c902680108e32a4964da60dc21b50b69c6ab88dbf039
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.32-1" --checksum 727834a55587746f90b159966c9abf2ce31a6effbe83d8c38ee6250641c9a22a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.27-4" --checksum 32bf5ff92df0696ec8bb1b2bf23f47fa0ecc42ca26368482365b20f3e40ca094
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wordpress" "5.8.3-7" --checksum 04530f7346e5c37236a87391592868432f357b98ada504abf19fab22bb23aa9b
@@ -31,7 +31,7 @@ RUN /opt/bitnami/scripts/wp-cli/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="5.8.3-debian-10-r16" \
+    BITNAMI_IMAGE_VERSION="5.8.3-debian-10-r17" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/wp-cli/bin:/opt/bitnami/mysql/bin:$PATH"
 
 EXPOSE 8080 8443
