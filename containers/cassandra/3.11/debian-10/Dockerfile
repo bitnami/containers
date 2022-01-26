@@ -11,10 +11,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libbz2-1.0 libc6 libgcc1 libjemalloc2 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libtinfo6 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "2.7.18-18" --checksum 7483db5c694c4db7ee9968856e220e814c7cd697701295dc0fd802ba4917a94f
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.322-1" --checksum 064c0df11dedb32c3a3e13c1daac87085ed44ccd816898f11e7a2496ece5d9ee
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-2" --checksum 7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.17.2-0" --checksum e44965c2d2878443baa6c21214be5ce416a0ba34aaa3b23127ceb3aaefc72b4a
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "2.7.18-19" --checksum 5c1a62f69ce2bd0948098e52124be784bc9e5092afed2552e28f241b603eb709
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.322-2" --checksum b4d038090cda6aa243de5dc579a06d642918fbfc2473f114bdb443880e8a0d70
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.17.2-2" --checksum d4477fb9d29cf2cf450dcfc09da4db214d3435b6f4412b139bdddfbb20e8252d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "cassandra" "3.11.11-4" --checksum 522ef2802d5d25827a009cfef8835195538d35058bcda24e055880efc76a2b32
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -26,7 +26,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/cassandra/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.11.11-debian-10-r166" \
+    BITNAMI_IMAGE_VERSION="3.11.11-debian-10-r167" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/cassandra/bin:$PATH"
 
