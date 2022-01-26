@@ -1,10 +1,10 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5",
+        "digest": "276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-2"
+        "version": "1.14.0-3"
     },
     "redis": {
         "arch": "amd64",
@@ -15,9 +15,9 @@
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "1e34030c18f0ec2467fa5f1b1fbad24add217f671c3a61628f7b8671391f9676",
+        "digest": "845ff207415b5730cadd45aa3c757ca45a5c9e73bc54c24aa481ddca24eec35d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-5"
+        "version": "1.0.1-6"
     }
 }
