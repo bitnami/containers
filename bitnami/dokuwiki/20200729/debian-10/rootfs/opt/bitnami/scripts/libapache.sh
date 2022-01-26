@@ -347,7 +347,7 @@ ensure_apache_app_configuration_exists() {
     # Default options
     local type=""
     local -a hosts=("127.0.0.1" "_default_")
-    local server_name
+    local server_name="www.example.com" # Default ServerName in httpd.conf
     local -a server_aliases=("*")
     local allow_remote_connections="yes"
     local disable="no"
@@ -653,7 +653,7 @@ apache_update_app_configuration() {
     local -r app="${1:?missing app}"
     # Default options
     local -a hosts=("127.0.0.1" "_default_")
-    local server_name
+    local server_name="www.example.com" # Default ServerName in httpd.conf
     local -a server_aliases=()
     local enable_http="no"
     local enable_https="no"
