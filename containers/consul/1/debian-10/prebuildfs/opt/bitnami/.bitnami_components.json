@@ -8,16 +8,16 @@
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "7419bc5e2be68eb14c92e321acc843413481cda73323fb8c0d1dda8b1e5aa9d5",
+        "digest": "276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-2"
+        "version": "1.14.0-3"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "9e312b4a7e16a55d08e67c4fd69c91000e4dcc4af149d59915c49375b83852af",
+        "digest": "81b0642a6d8e9d952a0f6540f2d7481a99b9a12dd42bcb5906ba8014ca80f326",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-5"
+        "version": "1.0.1-6"
     }
 }
