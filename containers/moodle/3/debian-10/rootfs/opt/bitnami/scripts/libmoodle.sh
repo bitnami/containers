@@ -332,20 +332,21 @@ moodle_upgrade() {
 #########################
 moodle_configure_wwwroot() {
     local -r http_port="${WEB_SERVER_HTTP_PORT_NUMBER:-"$WEB_SERVER_DEFAULT_HTTP_PORT_NUMBER"}"
+    # Sanitize the hostname including quotes
+    local host="${MOODLE_HOST:+"'${MOODLE_HOST}'"}"
+    # Default value if the hostname isn't provided
+    host="${MOODLE_HOST:-"\$_SERVER['HTTP_HOST']"}"
+
     # sed replacement notes:
     # - The ampersand ('&') is escaped due to sed replacing any non-escaped ampersand characters with the matched string
     # - For the replacement text to be multi-line, an \ needs to be specified to escape the newline character
-    local -r MOODLE_HOST="${MOODLE_HOST:+"'${MOODLE_HOST}'"}"
-    local -r host="${MOODLE_HOST:-"\$_SERVER['HTTP_HOST']"}"
-
     local -r conf_to_replace="if (empty(\$_SERVER['HTTP_HOST'])) {\\
-\$_SERVER['HTTP_HOST'] = '127.0.0.1:${http_port}';\\
+  \$_SERVER['HTTP_HOST'] = '127.0.0.1:${http_port}';\\
 }\\
 if (isset(\$_SERVER['HTTPS']) \&\& \$_SERVER['HTTPS'] == 'on') {\\
-\$CFG->wwwroot   = 'https://' . ${host};\\
+  \$CFG->wwwroot   = 'https://' . ${host};\\
 } else {\\
-\$CFG->wwwroot   = 'http://' . ${host};\\
+  \$CFG->wwwroot   = 'http://' . ${host};\\
 }"
-
     replace_in_file "$MOODLE_CONF_FILE" "\\\$CFG->wwwroot\s*=.*" "$conf_to_replace"
 }

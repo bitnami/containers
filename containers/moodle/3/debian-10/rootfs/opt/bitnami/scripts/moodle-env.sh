@@ -26,6 +26,7 @@ moodle_env_vars=(
     MOODLE_SKIP_BOOTSTRAP
     MOODLE_INSTALL_EXTRA_ARGS
     MOODLE_SITE_NAME
+    MOODLE_HOST
     MOODLE_CRON_MINUTES
     MOODLE_USERNAME
     MOODLE_PASSWORD
@@ -79,8 +80,8 @@ MOODLE_SKIP_BOOTSTRAP="${MOODLE_SKIP_BOOTSTRAP:-"${MOODLE_SKIP_INSTALL:-}"}"
 export MOODLE_SKIP_BOOTSTRAP="${MOODLE_SKIP_BOOTSTRAP:-}" # only used during the first initialization
 export MOODLE_INSTALL_EXTRA_ARGS="${MOODLE_INSTALL_EXTRA_ARGS:-}" # only used during the first initialization
 export MOODLE_SITE_NAME="${MOODLE_SITE_NAME:-New Site}" # only used during the first initialization
-export MOODLE_CRON_MINUTES="${MOODLE_CRON_MINUTES:-1}"
 export MOODLE_HOST="${MOODLE_HOST:-}" # only used during the first initialization
+export MOODLE_CRON_MINUTES="${MOODLE_CRON_MINUTES:-1}"
 
 # Moodle credentials
 export MOODLE_USERNAME="${MOODLE_USERNAME:-user}" # only used during the first initialization
