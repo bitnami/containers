@@ -43,9 +43,9 @@
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "9e312b4a7e16a55d08e67c4fd69c91000e4dcc4af149d59915c49375b83852af",
+        "digest": "81b0642a6d8e9d952a0f6540f2d7481a99b9a12dd42bcb5906ba8014ca80f326",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-5"
+        "version": "1.0.1-6"
     }
 }
