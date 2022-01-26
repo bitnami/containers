@@ -22,10 +22,10 @@
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "7a2458504d4197d0d6be7615bc31b87d058b99accd6397511348fcc4696c44cb",
+        "digest": "14eda4cc9b632928555461c32babf4474eb41884b7a4fcc04bac27e23eb7887a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "11.14.0-3"
+        "version": "11.14.0-4"
     },
     "redmine": {
         "arch": "amd64",
@@ -36,16 +36,16 @@
     },
     "ruby": {
         "arch": "amd64",
-        "digest": "4b1b46f624dd05bed2f0b258a3a88549ad577cc55b817652b06af04e9251b26c",
+        "digest": "6dc3a30ecaa164f3e71beaafecce4e3f32c2e104a0323bc20310b64bab2c1c43",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.6.9-4"
+        "version": "2.6.9-5"
     },
     "yq": {
         "arch": "amd64",
-        "digest": "73d43822094e9e5881673a0d0b69ca20a39af8bff4b5a48070675d1b064c9d59",
+        "digest": "d4477fb9d29cf2cf450dcfc09da4db214d3435b6f4412b139bdddfbb20e8252d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.17.2-1"
+        "version": "4.17.2-2"
     }
 }
