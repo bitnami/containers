@@ -21,6 +21,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 jasperreports_env_vars=(
+    JASPERREPORTS_USE_ROOT_URL
     JASPERREPORTS_DATA_TO_PERSIST
     JASPERREPORTS_HOST
     JASPERREPORTS_SKIP_BOOTSTRAP
@@ -114,3 +115,5 @@ JASPERREPORTS_DATABASE_PASSWORD="${JASPERREPORTS_DATABASE_PASSWORD:-"${MARIADB_D
 export JASPERREPORTS_DATABASE_PASSWORD="${JASPERREPORTS_DATABASE_PASSWORD:-}" # only used during the first initialization
 
 # Custom environment variables may be defined below
+export JASPERREPORTS_USE_ROOT_URL="${JASPERREPORTS_USE_ROOT_URL:-false}" # only used during the first initialization
+
