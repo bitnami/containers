@@ -164,7 +164,7 @@ EOF
             ! is_empty_value "$MATOMO_DATABASE_SSL_CA_FILE" && ini-file set -s "database" -k "ssl_ca" -v "$MATOMO_DATABASE_SSL_CA_FILE" "$MATOMO_CONF_FILE"
             ! is_empty_value "$MATOMO_DATABASE_SSL_CERT_FILE" && ini-file set -s "database" -k "ssl_cert" -v "$MATOMO_DATABASE_SSL_CERT_FILE" "$MATOMO_CONF_FILE"
             ! is_empty_value "$MATOMO_DATABASE_SSL_KEY_FILE" && ini-file set -s "database" -k "ssl_key" -v "$MATOMO_DATABASE_SSL_KEY_FILE" "$MATOMO_CONF_FILE"
-            ! is_boolean_yes "$MATOMO_DATABASE_SSL_KEY_FILE" && ini-file set -s "database" -k "ssl_no_verify" -v "1" "$MATOMO_CONF_FILE"
+            ! is_boolean_yes "$MATOMO_VERIFY_DATABASE_SSL" && ini-file set -s "database" -k "ssl_no_verify" -v "1" "$MATOMO_CONF_FILE"
         fi
 
         # Trusted host check
