@@ -15,9 +15,9 @@
     },
     "kubectl": {
         "arch": "amd64",
-        "digest": "ed332f44907cc71d54d1266e7b6b2994adb878c84f08c3477458d5d1f1cf586d",
+        "digest": "03cfc53991200f115c188eaf1a141f31bb49fc7ab4b3bb7a4b4f52d40b4f622f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.23.2-4"
+        "version": "1.23.3-0"
     }
 }
