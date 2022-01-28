@@ -95,9 +95,19 @@ pgbouncer_validate() {
     fi
 
     # TLS Checks (server)
-    if [[ "$PGBOUNCER_SERVER_TLS_SSLMODE" == "verify-ca" ]] || [[ "$PGBOUNCER_SERVER_TLS_SSLMODE" == "verify-full" ]]; then
+    if [[ "$PGBOUNCER_SERVER_TLS_SSLMODE" != "disable" ]]; then
+        if [[ -z "$PGBOUNCER_SERVER_TLS_CERT_FILE" ]]; then
+            print_validation_error "You must provide a X.509 certificate in order to use server TLS"
+        elif [[ ! -f "$PGBOUNCER_SERVER_TLS_CERT_FILE" ]]; then
+            print_validation_error "The X.509 server certificate file in the specified path ${PGBOUNCER_SERVER_TLS_CERT_FILE} does not exist"
+        fi
+        if [[ -z "$PGBOUNCER_SERVER_TLS_KEY_FILE" ]]; then
+            print_validation_error "You must provide a private key in order to use server TLS"
+        elif [[ ! -f "$PGBOUNCER_SERVER_TLS_KEY_FILE" ]]; then
+            print_validation_error "The server private key file in the specified path ${PGBOUNCER_SERVER_TLS_KEY_FILE} does not exist"
+        fi
         if [[ -z "$PGBOUNCER_SERVER_TLS_CA_FILE" ]]; then
-            print_validation_error "A CA X.509 certificate was not provided. You need to set this value when specifying server_tls_sslmode to verify-ca or verify-full"
+            warn "A CA X.509 certificate was not provided. Server verification will not be performed in TLS connections"
         elif [[ ! -f "$PGBOUNCER_SERVER_TLS_CA_FILE" ]]; then
             print_validation_error "The server CA X.509 certificate file in the specified path ${PGBOUNCER_SERVER_TLS_CA_FILE} does not exist"
         fi
@@ -207,16 +217,19 @@ pgbouncer_initialize() {
         if [[ "$PGBOUNCER_DATABASE" != "*" ]]; then
             database_value+=" dbname=$POSTGRESQL_DATABASE"
         fi
+        if ! is_empty_value "$PGBOUNCER_AUTH_USER"; then
+            database_value+=" auth_user=$PGBOUNCER_AUTH_USER"
+        fi
         ini-file set --section "databases" --key "$PGBOUNCER_DATABASE" --value "$database_value" "$PGBOUNCER_CONF_FILE"
         local -r -a key_value_pairs=(
             "listen_port:${PGBOUNCER_PORT}"
             "listen_addr:${PGBOUNCER_LISTEN_ADDRESS}"
             "auth_file:${PGBOUNCER_AUTH_FILE}"
             "auth_type:${PGBOUNCER_AUTH_TYPE}"
+            "auth_query:${PGBOUNCER_AUTH_QUERY}"
             "pidfile:${PGBOUNCER_PID_FILE}"
             "logfile:${PGBOUNCER_LOG_FILE}"
             "admin_users:${POSTGRESQL_USERNAME}"
-            "stats_users:${PGBOUNCER_STATS_USERS}"
             "client_tls_sslmode:${PGBOUNCER_CLIENT_TLS_SSLMODE}"
             "server_tls_sslmode:${PGBOUNCER_SERVER_TLS_SSLMODE}"
             "query_wait_timeout:${PGBOUNCER_QUERY_WAIT_TIMEOUT}"
@@ -224,8 +237,6 @@ pgbouncer_initialize() {
             "max_client_conn:${PGBOUNCER_MAX_CLIENT_CONN}"
             "max_db_connections:${PGBOUNCER_MAX_DB_CONNECTIONS}"
             "idle_transaction_timeout:${PGBOUNCER_IDLE_TRANSACTION_TIMEOUT}"
-            "server_idle_timeout:${PGBOUNCER_SERVER_IDLE_TIMEOUT}"
-            "server_reset_query:${PGBOUNCER_SERVER_RESET_QUERY}"
             "default_pool_size:${PGBOUNCER_DEFAULT_POOL_SIZE}"
             "min_pool_size:${PGBOUNCER_MIN_POOL_SIZE}"
             "reserve_pool_size:${PGBOUNCER_RESERVE_POOL_SIZE}"
@@ -245,11 +256,11 @@ pgbouncer_initialize() {
         fi
 
         if [[ "$PGBOUNCER_SERVER_TLS_SSLMODE" != "disable" ]]; then
-            ! is_empty_value "$PGBOUNCER_SERVER_TLS_CERT_FILE" && ini-file set --section "pgbouncer" --key "server_tls_cert_file" --value "$PGBOUNCER_SERVER_TLS_CERT_FILE" "$PGBOUNCER_CONF_FILE"
-            ! is_empty_value "$PGBOUNCER_SERVER_TLS_KEY_FILE" && ini-file set --section "pgbouncer" --key "server_tls_key_file" --value "$PGBOUNCER_SERVER_TLS_KEY_FILE" "$PGBOUNCER_CONF_FILE"
+            ini-file set --section "pgbouncer" --key "server_tls_cert_file" --value "$PGBOUNCER_SERVER_TLS_CERT_FILE" "$PGBOUNCER_CONF_FILE"
+            ini-file set --section "pgbouncer" --key "server_tls_key_file" --value "$PGBOUNCER_SERVER_TLS_KEY_FILE" "$PGBOUNCER_CONF_FILE"
             ! is_empty_value "$PGBOUNCER_SERVER_TLS_CA_FILE" && ini-file set --section "pgbouncer" --key "server_tls_ca_file" --value "$PGBOUNCER_SERVER_TLS_CA_FILE" "$PGBOUNCER_CONF_FILE"
-            ! is_empty_value "$PGBOUNCER_SERVER_TLS_PROTOCOLS" && ini-file set --section "pgbouncer" --key "server_tls_protocols" --value "$PGBOUNCER_SERVER_TLS_PROTOCOLS" "$PGBOUNCER_CONF_FILE"
-            ! is_empty_value "$PGBOUNCER_SERVER_TLS_CIPHERS" && ini-file set --section "pgbouncer" --key "server_tls_ciphers" --value "$PGBOUNCER_SERVER_TLS_CIPHERS" "$PGBOUNCER_CONF_FILE"
+            ! is_empty_value "$PGBOUNCER_SERVER_TLS_PROTOCOLS" && ini-file set --section "pgbouncer" --key "server_tls_ca_file" --value "$PGBOUNCER_SERVER_TLS_PROTOCOLS" "$PGBOUNCER_CONF_FILE"
+            ini-file set --section "pgbouncer" --key "server_tls_ciphers" --value "$PGBOUNCER_SERVER_TLS_CIPHERS" "$PGBOUNCER_CONF_FILE"
         fi
     else
         debug "Configuration file is mounted externally, skipping configuration"
