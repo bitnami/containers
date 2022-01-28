@@ -45,21 +45,11 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`17`, `17-debian-10`, `17.4.0`, `17.4.0-debian-10-r10`, `latest` (17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/17.4.0-debian-10-r10/17/debian-10/Dockerfile)
-* [`16`, `16-debian-10`, `16.13.2`, `16.13.2-debian-10-r16` (16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/16.13.2-debian-10-r16/16/debian-10/Dockerfile)
+* [`16`, `16-debian-10`, `16.13.2`, `16.13.2-debian-10-r17` (16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/16.13.2-debian-10-r17/16/debian-10/Dockerfile)
 * [`14`, `14-debian-10`, `14.18.3`, `14.18.3-debian-10-r17` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/14.18.3-debian-10-r17/14/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.22.9`, `12.22.9-debian-10-r11` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.22.9-debian-10-r11/12/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
-
-## What are `prod` tagged containers for?
-
-Containers tagged `prod` are production containers based on [minideb](https://github.com/bitnami/minideb). They contain the minimal dependencies required by an application to work.
-
-They don't include development dependencies, so they are commonly used in multi-stage builds as the target image. Application code and dependencies should be copied from a different container.
-
-The resultant containers only contain the necessary pieces of software to run the application. Therefore, they are smaller and safer.
-
-Learn how to use multi-stage builds to build your production application container in the [example](https://github.com/bitnami/bitnami-docker-node/tree/master/example) directory
 
 ## Get this image
 
