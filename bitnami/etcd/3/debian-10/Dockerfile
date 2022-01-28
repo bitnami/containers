@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.17.2-2" --checksum d4477fb9d29cf2cf450dcfc09da4db214d3435b6f4412b139bdddfbb20e8252d
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.18.1-0" --checksum 40e447d086be7878cbe76e99fa5cc1b004eaaaa5e3c88f1f505bdf500e1da613
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "etcd" "3.5.1-3" --checksum 1701c6528ced4bac3f0ee05ae0cd7623539e023edcce933f069d5f279aa36b19
 RUN apt-get update && apt-get upgrade -y && \
@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/etcd/postunpack.sh
 ENV BITNAMI_APP_NAME="etcd" \
-    BITNAMI_IMAGE_VERSION="3.5.1-debian-10-r96" \
+    BITNAMI_IMAGE_VERSION="3.5.1-debian-10-r97" \
     ETCDCTL_API="3" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/etcd/bin:$PATH"
 
