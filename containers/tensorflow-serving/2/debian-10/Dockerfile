@@ -12,7 +12,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gcc-7 gzip libc6 libgcc1 libstdc++6 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tensorflow-serving" "2.7.0-3" --checksum 3e342a35930575e697717acaf023d7cdaa73f79c78fb2de176e6f327ee3d8814
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tensorflow-serving" "2.7.0-4" --checksum f20c7080e8f7bd76b375edbf6f1cca398830ee56bd2a6c66e3bdcf70adae538b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-6" --checksum 81b0642a6d8e9d952a0f6540f2d7481a99b9a12dd42bcb5906ba8014ca80f326
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
 RUN apt-get update && apt-get upgrade -y && \
@@ -23,7 +23,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/tensorflow-serving/postunpack.sh
 ENV BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="2.7.0-debian-10-r80" \
+    BITNAMI_IMAGE_VERSION="2.7.0-debian-10-r81" \
     JAVA_HOME="/opt/bitnami/java"
 
 EXPOSE 8500
