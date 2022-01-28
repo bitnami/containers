@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="cert-manager-webhook" \
-    BITNAMI_IMAGE_VERSION="1.7.0-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="1.7.0-debian-10-r2" \
     PATH="/opt/bitnami/cert-manager-webhook/bin:$PATH"
 
 WORKDIR /opt/bitnami/cert-manager-webhook
