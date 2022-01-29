@@ -211,9 +211,6 @@ pgbouncer_initialize() {
         # Build DB string based on user preferences
         # Allow for wildcard db config
         local database_value="host=$POSTGRESQL_HOST port=$POSTGRESQL_PORT"
-        if [[ -n "$PGBOUNCER_AUTH_USER" ]]; then
-            database_value+=" auth_user=$PGBOUNCER_AUTH_USER"
-        fi
         if is_boolean_yes "$PGBOUNCER_SET_DATABASE_USER"; then
             database_value+=" user=$POSTGRESQL_USERNAME"
         fi
