@@ -23,7 +23,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/tomcat/postunpack.sh
 ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="10.0.16-debian-10-r8" \
+    BITNAMI_IMAGE_VERSION="10.0.16-debian-10-r9" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/common/bin:$PATH"
 
