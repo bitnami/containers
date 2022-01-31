@@ -22,8 +22,6 @@ $ docker-compose up
 ```
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
-
-
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -48,8 +46,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`16`, `16-debian-10`, `16.1.1`, `16.1.1-debian-10-r5` (16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/16.1.1-debian-10-r5/16/debian-10/Dockerfile)
-* [`15`, `15-debian-10`, `15.1.1`, `15.1.1-debian-10-r43`, `latest` (15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/15.1.1-debian-10-r43/15/debian-10/Dockerfile)
+* [`16`, `16-debian-10`, `16.1.1`, `16.1.1-debian-10-r6`, `latest` (16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/16.1.1-debian-10-r6/16/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak).
 
@@ -70,7 +67,7 @@ $ docker pull bitnami/keycloak:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/keycloak:latest 'https://github.com/bitnami/bitnami-docker-keycloak.git#master:15/debian-10'
+$ docker build -t bitnami/keycloak:latest 'https://github.com/bitnami/bitnami-docker-keycloak.git#master:16/debian-10'
 ```
 
 ## Configuration
@@ -276,10 +273,6 @@ keycloak:
 ```
 
 After that, your changes will be taken into account in the server's behaviour.
-
-## Branch Deprecation Notice
-
-Keycloak's branch 15 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 01-30-2022
 
 ## Contributing
 
