@@ -13,7 +13,7 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl gzip libaio1 libc6 procps rsync tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-6" --checksum 845ff207415b5730cadd45aa3c757ca45a5c9e73bc54c24aa481ddca24eec35d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.14-3" --checksum 1f4876cb7c5709c5dc905f4325b1136b3ab73f71e3e16faa3c877ef84e78e776
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "keycloak" "16.1.1-0" --checksum 50e7744f86a4b7f65d4d1f7e01f1424151bbd15bdec5fbe5a7e616bec6e39a1d
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "keycloak" "16.1.1-1" --checksum 464d21230048d8100b348e89b999013a8599204e5c265c7b3fa08b46f15d73fc
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -23,7 +23,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/keycloak/postunpack.sh
 ENV BITNAMI_APP_NAME="keycloak" \
-    BITNAMI_IMAGE_VERSION="16.1.1-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="16.1.1-debian-10-r7" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/keycloak/bin:$PATH"
 
