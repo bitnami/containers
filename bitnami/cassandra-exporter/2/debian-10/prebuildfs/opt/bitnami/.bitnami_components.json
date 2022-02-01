@@ -1,10 +1,10 @@
 {
     "cassandra-exporter": {
         "arch": "amd64",
-        "digest": "9961bfd2d6fbd561bc9bd7611cef72b122bb2d25343a1fce31462c5810af81de",
+        "digest": "ca25a90a01a3d6b7246ee3ac248bd2a87d212c294da19bde0b2e465c7571dfe1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.3.5-0"
+        "version": "2.3.7-0"
     },
     "java": {
         "arch": "amd64",
