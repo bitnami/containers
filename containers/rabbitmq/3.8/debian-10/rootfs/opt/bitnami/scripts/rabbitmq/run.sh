@@ -15,6 +15,28 @@ set -o pipefail
 # Load RabbitMQ environment variables
 . /opt/bitnami/scripts/rabbitmq-env.sh
 
+# Set up queue rebalance to run in the background after the cluster is up
+if is_boolean_yes "$RABBITMQ_CLUSTER_REBALANCE"; then
+    (
+        current_attempt=1
+        rebalanced=false
+        while [[ "$current_attempt" -le "$RABBITMQ_CLUSTER_REBALANCE_ATTEMPTS" ]]; do
+            if rabbitmqctl cluster_status >/dev/null; then
+                rabbitmq-queues rebalance "all"
+                rebalanced=true
+                break
+            else
+                ((current_attempt++))
+            fi
+        done
+        if is_boolean_yes "$rebalanced"; then
+            info "Cluster rebalanced successfully"
+        else
+            error "Unable to rebalance cluster"
+        fi
+    ) &
+fi
+
 info "** Starting RabbitMQ **"
 cd "$RABBITMQ_BASE_DIR"
 if am_i_root; then
