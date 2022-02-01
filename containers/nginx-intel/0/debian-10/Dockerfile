@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgeoip1 libpcre3 libssl1.1 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "qatengine" "0.6.10-1" --checksum 1f66ffdc20ce30fb79cf1e6b3795774972200d8589d7fcf14206fcc91f1b32c1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "qatengine" "0.6.10-3" --checksum 0781383fe77dead1d8801765eecbfa7ec4ad91c03c2812499b304d992c38a21d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-6" --checksum 81b0642a6d8e9d952a0f6540f2d7481a99b9a12dd42bcb5906ba8014ca80f326
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx-intel" "0.4.7-5" --checksum 8d69c20cfd76565726e64acd0471840dba0a39d020a104e82d744b7864c6f79b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
@@ -23,7 +23,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN /opt/bitnami/scripts/qatengine/postunpack.sh
 ENV BITNAMI_APP_NAME="nginx-intel" \
-    BITNAMI_IMAGE_VERSION="0.4.7-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="0.4.7-debian-10-r4" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/nginx/sbin:$PATH"
