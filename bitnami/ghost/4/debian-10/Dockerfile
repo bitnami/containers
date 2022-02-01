@@ -10,10 +10,10 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq libaudit1 libbz2-1.0 libc6 libcap-ng0 libffi6 libgcc1 libicu63 libjemalloc2 liblzma5 libncurses6 libncursesw6 libpam0g libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 libxml2 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-12" --checksum c081f7f9663d4d64e7f26d6e6a77b3860ee1f39c309bd564f801c39192042d2f
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.18.3-6" --checksum a529a3386f396110186951a0a4a4e1f440440d627041589635f69dbf0bdac116
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.19.0-0" --checksum 556a98f936b3c23e05bd6c23cd0cec135238b239b329161580544697bc332053
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.32-1" --checksum 727834a55587746f90b159966c9abf2ce31a6effbe83d8c38ee6250641c9a22a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ghost" "4.34.1-0" --checksum 4713fe08b0ea02ed0b64b7f706f419bdca568eab2a4f0be9c73b9381f3955959
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ghost" "4.34.2-0" --checksum 2f58cdae602d1d425c5a46b53480c685a42e1ab58825e189f20646cf75702496
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -22,7 +22,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/ghost/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="4.34.1-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="4.34.2-debian-10-r0" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/ghost/bin:$PATH"
 
 EXPOSE 2368 3000
