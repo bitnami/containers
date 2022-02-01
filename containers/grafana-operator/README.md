@@ -67,10 +67,6 @@ $ docker build -t bitnami/grafana-operator:latest 'https://github.com/bitnami/bi
 
 Find how to configure Grafana Operator in its [official documentation](https://github.com/integr8ly/grafana-operator/tree/master/documentation).
 
-## Branch Deprecation Notice
-
-Grafana Operator's branch 3 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 01-31-2022
-
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-grafana-operator/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-grafana-operator/pulls) with your contribution.
