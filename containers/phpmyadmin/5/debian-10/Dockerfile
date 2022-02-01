@@ -12,7 +12,7 @@ RUN install_packages acl ca-certificates curl gzip libaudit1 libbsd0 libbz2-1.0 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "8.0.15-3" --checksum 95e4985fa49fbc08f02d3cef3bef7f3494a8f511985415e41ff272729b1c6d16
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.52-3" --checksum 1fdcfb619d0dd3b94dbe770e931f01ebedb2f968b07353226d89ce6452953593
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.32-1" --checksum 727834a55587746f90b159966c9abf2ce31a6effbe83d8c38ee6250641c9a22a
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "8.0.15-4" --checksum 9b59affa513e6c54574937e0e94616ec061cd7ed0d3e8b0bf8237be335c2b144
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "8.0.15-5" --checksum c2d5df643ffcf391a9bff0fa32c6e602de971008ddba03b5181826e6b4fc9a6a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-6" --checksum 81b0642a6d8e9d952a0f6540f2d7481a99b9a12dd42bcb5906ba8014ca80f326
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "phpmyadmin" "5.1.2-1" --checksum 8ed5cf5e066be5f746886afaaf9f493572493a41daffbbb6784f61b2a913230e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
@@ -28,7 +28,7 @@ RUN /opt/bitnami/scripts/phpmyadmin/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="phpmyadmin" \
-    BITNAMI_IMAGE_VERSION="5.1.2-debian-10-r8" \
+    BITNAMI_IMAGE_VERSION="5.1.2-debian-10-r9" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080 8443
