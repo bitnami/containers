@@ -21,6 +21,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 postgresql_env_vars=(
+    POSTGRESQL_VOLUME_DIR
     POSTGRESQL_DATA_DIR
     POSTGRESQL_INIT_MAX_TIMEOUT
     POSTGRESQL_PGCTLTIMEOUT
@@ -192,7 +193,7 @@ done
 unset postgresql_env_vars
 
 # Paths
-export POSTGRESQL_VOLUME_DIR="/bitnami/postgresql"
+export POSTGRESQL_VOLUME_DIR="${POSTGRESQL_VOLUME_DIR:-/bitnami/postgresql}"
 export POSTGRESQL_BASE_DIR="/opt/bitnami/postgresql"
 POSTGRESQL_DATA_DIR="${POSTGRESQL_DATA_DIR:-"${POSTGRES_DATA_DIR:-}"}"
 POSTGRESQL_DATA_DIR="${POSTGRESQL_DATA_DIR:-"${PGDATA:-}"}"
