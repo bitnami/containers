@@ -38,8 +38,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.1.1`, `4.1.1-debian-10-r50` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-operator/blob/4.1.1-debian-10-r50/4/debian-10/Dockerfile)
-* [`3`, `3-debian-10`, `3.10.4`, `3.10.4-debian-10-r99`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-operator/blob/3.10.4-debian-10-r99/3/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.1.1`, `4.1.1-debian-10-r51`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-operator/blob/4.1.1-debian-10-r51/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana-operator GitHub repo](https://github.com/bitnami/bitnami-docker-grafana-operator).
 
@@ -60,7 +59,7 @@ $ docker pull bitnami/grafana-operator:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/grafana-operator:latest 'https://github.com/bitnami/bitnami-docker-grafana-operator.git#master:3/debian-10'
+$ docker build -t bitnami/grafana-operator:latest 'https://github.com/bitnami/bitnami-docker-grafana-operator.git#master:4/debian-10'
 ```
 
 ## Configuration
