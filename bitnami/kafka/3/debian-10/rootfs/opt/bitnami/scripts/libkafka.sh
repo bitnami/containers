@@ -584,7 +584,7 @@ kafka_configure_client_communications() {
 # Globals:
 #   None
 # Arguments:
-#   $1 - Authentication protocol to use for the client listener
+#   $1 - Authentication protocol to use for the external-client listener
 # Returns:
 #   None
 #########################
@@ -736,7 +736,7 @@ kafka_initialize() {
             external_client_protocol="${BASH_REMATCH[1]}"
             kafka_configure_external_client_communications "$external_client_protocol"
         fi
-        
+
 
         if [[ "${internal_protocol:-}" =~ "SASL" || "${client_protocol:-}" =~ "SASL" || "${external_client_protocol:-}" =~ "SASL" ]] || [[ "${KAFKA_ZOOKEEPER_PROTOCOL}" =~ SASL ]]; then
             if [[ -n "$KAFKA_CFG_SASL_ENABLED_MECHANISMS" ]]; then
