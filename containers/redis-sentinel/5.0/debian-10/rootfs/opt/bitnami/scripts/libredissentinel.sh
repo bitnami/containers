@@ -227,7 +227,7 @@ redis_initialize() {
 
         # TLS configuration
         if is_boolean_yes "$REDIS_SENTINEL_TLS_ENABLED"; then
-            if [[ "$REDIS_SENTINEL_PORT_NUMBER" ==  "26379" ]] && [[ "$REDIS_SENTINEL_TLS_PORT_NUMBER" ==  "26379" ]]; then
+          if ([[ "$REDIS_SENTINEL_PORT_NUMBER" ==  "26379" ]] || [[ "$REDIS_SENTINEL_PORT_NUMBER" ==  "0" ]]) && [[ "$REDIS_SENTINEL_TLS_PORT_NUMBER" ==  "26379" ]]; then
                 # If both ports are set to default values, enable TLS traffic only
                 redis_conf_set port 0
                 redis_conf_set tls-port "$REDIS_SENTINEL_TLS_PORT_NUMBER"
