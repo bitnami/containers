@@ -54,6 +54,7 @@ export SPARK_SSL_TRUSTSTORE_PASSWORD="${SPARK_SSL_TRUSTSTORE_PASSWORD:-}"
 export SPARK_SSL_TRUSTSTORE_FILE="${SPARK_SSL_TRUSTSTORE_FILE:-${SPARK_CONFDIR}/certs/spark-truststore.jks}"
 export SPARK_SSL_NEED_CLIENT_AUTH="${SPARK_SSL_NEED_CLIENT_AUTH:-yes}"
 export SPARK_SSL_PROTOCOL="${SPARK_SSL_PROTOCOL:-TLSv1.2}"
+export SPARK_WEBUI_SSL_PORT="${SPARK_WEBUI_SSL_PORT:-}"
 
 # Monitoring
 export SPARK_METRICS_ENABLED="${SPARK_METRICS_ENABLED:-false}"
@@ -231,6 +232,9 @@ spark_enable_ssl() {
 
     echo "# Spark SSL settings" >>"${SPARK_CONFDIR}/spark-defaults.conf"
     spark_conf_set spark.ssl.enabled "true"
+    if ! is_empty_value "${SPARK_WEBUI_SSL_PORT}"; then
+        spark_conf_set spark.ssl.standalone.port "${SPARK_WEBUI_SSL_PORT}"
+    fi
     spark_conf_set spark.ssl.keyPassword "${SPARK_SSL_KEY_PASSWORD}"
     spark_conf_set spark.ssl.keyStore "${SPARK_SSL_KEYSTORE_FILE}"
     spark_conf_set spark.ssl.keyStorePassword "${SPARK_SSL_KEYSTORE_PASSWORD}"
