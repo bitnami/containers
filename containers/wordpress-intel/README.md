@@ -1,12 +1,12 @@
 # WordPress for Intel packaged by Bitnami
 
-## What is wordpress-intel?
+## What is WordPress for Intel?
 
-> WordPress for Intel combines the most popular blogging application with the power of the NGINX web server using Intel Crypto Acceleration via the asynchronous mode OpenSSL, providing significant performance improvements.
+> WordPress for Intel is the most popular blogging application combined with cryptography acceleration for 3rd gen Xeon Scalable Processors (Ice Lake) to get a breakthrough performance improvement.
 
-[Overview of wordpress-intel](https://change.me)
+[Overview of WordPress for Intel](http://www.wordpress.org/)
 
-
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
