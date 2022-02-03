@@ -233,12 +233,33 @@ elasticsearch_validate() {
         esac
     }
 
+    validate_node_roles() {
+        if [[ "$ELASTICSEARCH_MAJOR_VERSION" -le 6 ]]; then
+            print_validation_error "Node roles are only available in Elasticsearch 7+" && return
+        fi
+
+        read -r -a roles_list <<<"$(tr ',;' ' ' <<<"$ELASTICSEARCH_NODE_ROLES")"
+        if [[ "${#roles_list[@]}" -le 0 ]]; then
+            print_validation_error "The \$ELASTICSEARCH_NODE_ROLES variables can't be empty and it must be a comma separated list. Supported roles are 'master,data,data_content,data_hot,data_warm,data_cold,data_frozen,ingest,ml,remote_cluster_client,transform'" && return
+        fi
+        for role in "${roles_list[@]}"; do
+            case "$role" in
+            master | data | data_content | data_hot | data_warm | data_cold | data_frozen | ingest | ml | remote_cluster_client | transform) ;;
+
+            *)
+                print_validation_error "Invalid node role '$role'. Supported roles are 'master,data,data_content,data_hot,data_warm,data_cold,data_frozen,ingest,ml,remote_cluster_client,transform'"
+                ;;
+            esac
+        done
+    }
+
     debug "Validating settings in ELASTICSEARCH_* env vars..."
     for var in "ELASTICSEARCH_PORT_NUMBER" "ELASTICSEARCH_NODE_PORT_NUMBER"; do
         if ! err=$(validate_port "${!var}"); then
             print_validation_error "An invalid port was specified in the environment variable $var: $err"
         fi
     done
+    is_boolean_yes "$ELASTICSEARCH_USE_NODE_ROLES" && validate_node_roles
     is_boolean_yes "$ELASTICSEARCH_IS_DEDICATED_NODE" && validate_node_type
     if [[ -n "$ELASTICSEARCH_BIND_ADDRESS" ]] && ! validate_ipv4 "$ELASTICSEARCH_BIND_ADDRESS"; then
         print_validation_error "The Bind Address specified in the environment variable ELASTICSEARCH_BIND_ADDRESS is not a valid IPv4"
@@ -290,6 +311,23 @@ elasticsearch_cluster_configuration() {
         fi
     }
 
+    is_node_type_master() {
+        if is_boolean_yes "$ELASTICSEARCH_USE_NODE_ROLES"; then
+            read -r -a roles_list <<<"$(tr ',;' ' ' <<<"$ELASTICSEARCH_NODE_ROLES")"
+            if [[ " ${roles_list[*]} " = *" master "* ]]; then
+                true
+            else
+                false
+            fi
+        else
+            if [[ "$ELASTICSEARCH_NODE_TYPE" = "master" ]]; then
+                true
+            else
+                false
+            fi
+        fi
+    }
+
     info "Configuring Elasticsearch cluster settings..."
     elasticsearch_conf_set network.host "$(get_elasticsearch_hostname)"
     elasticsearch_conf_set network.publish_host "$(get_elasticsearch_hostname)"
@@ -317,7 +355,7 @@ elasticsearch_cluster_configuration() {
         elasticsearch_conf_set discovery.initial_state_timeout "5m"
         elasticsearch_conf_set gateway.recover_after_nodes "$(((total_nodes + 1 + 1) / 2))"
         elasticsearch_conf_set gateway.expected_nodes "$total_nodes"
-        if [[ "$ELASTICSEARCH_NODE_TYPE" = "master" ]] && [[ "$ELASTICSEARCH_MAJOR_VERSION" -gt 6 ]]; then
+        if is_node_type_master && [[ "$ELASTICSEARCH_MAJOR_VERSION" -gt 6 ]]; then
             elasticsearch_conf_set cluster.initial_master_nodes "${master_list[@]}"
         fi
         if [[ -n "$ELASTICSEARCH_MINIMUM_MASTER_NODES" ]]; then
@@ -437,6 +475,39 @@ elasticsearch_configure_node_type() {
     elasticsearch_conf_set node.data "$is_data"
     elasticsearch_conf_set node.ingest "$is_ingest"
     if [[ "$is_data" = "true" || "$is_master" = "true" ]] && [[ -n "$ELASTICSEARCH_FS_SNAPSHOT_REPO_PATH" ]]; then
+        # Configure path.repo to restore snapshots from system repository
+        # It must be set on every master an data node
+        # ref: https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html#snapshots-filesystem-repository
+        elasticsearch_conf_set path.repo "$ELASTICSEARCH_FS_SNAPSHOT_REPO_PATH"
+    fi
+}
+
+########################
+# Configure Elasticsearch node roles
+# Globals:
+#  ELASTICSEARCH_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_configure_node_roles() {
+    debug "Configure Elasticsearch Node roles..."
+
+    local set_repo_path="no"
+    read -r -a roles_list <<<"$(tr ',;' ' ' <<<"$ELASTICSEARCH_NODE_ROLES")"
+    elasticsearch_conf_set node.roles "${roles_list[@]}"
+
+    for role in "${roles_list[@]}"; do
+        case "$role" in
+            master | data | data_content | data_hot | data_warm | data_cold | data_frozen)
+                set_repo_path="yes"
+                ;;
+            *) ;;
+        esac
+    done
+
+    if is_boolean_yes "$set_repo_path" && [[ -n "$ELASTICSEARCH_FS_SNAPSHOT_REPO_PATH" ]]; then
         # Configure path.repo to restore snapshots from system repository
         # It must be set on every master an data node
         # ref: https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html#snapshots-filesystem-repository
@@ -587,7 +658,11 @@ elasticsearch_initialize() {
         is_boolean_yes "$ELASTICSEARCH_ACTION_DESTRUCTIVE_REQUIRES_NAME" && elasticsearch_conf_set action.destructive_requires_name "true"
         is_boolean_yes "$ELASTICSEARCH_LOCK_ALL_MEMORY" && elasticsearch_conf_set bootstrap.memory_lock "true"
         elasticsearch_cluster_configuration
-        elasticsearch_configure_node_type
+        if is_boolean_yes "$ELASTICSEARCH_USE_NODE_ROLES"; then
+            elasticsearch_configure_node_roles
+        else
+            elasticsearch_configure_node_type
+        fi
         elasticsearch_custom_configuration
         ELASTICSEARCH_VERSION="$(elasticsearch_get_version)"
         ELASTICSEARCH_MAJOR_VERSION="$(get_sematic_version "$ELASTICSEARCH_VERSION" 1)"
