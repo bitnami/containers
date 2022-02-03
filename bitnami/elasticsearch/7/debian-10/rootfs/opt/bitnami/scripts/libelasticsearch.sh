@@ -322,7 +322,7 @@ elasticsearch_cluster_configuration() {
         else
             if [[ "$ELASTICSEARCH_NODE_TYPE" = "master" ]]; then
                 true
-            else
+            else 
                 false
             fi
         fi
@@ -497,7 +497,7 @@ elasticsearch_configure_node_roles() {
     local set_repo_path="no"
     read -r -a roles_list <<<"$(tr ',;' ' ' <<<"$ELASTICSEARCH_NODE_ROLES")"
     elasticsearch_conf_set node.roles "${roles_list[@]}"
-
+    
     for role in "${roles_list[@]}"; do
         case "$role" in
             master | data | data_content | data_hot | data_warm | data_cold | data_frozen)
