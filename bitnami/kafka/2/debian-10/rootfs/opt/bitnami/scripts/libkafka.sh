@@ -580,6 +580,36 @@ kafka_configure_client_communications() {
 }
 
 ########################
+# Configure Kafka for external-client communications
+# Globals:
+#   None
+# Arguments:
+#   $1 - Authentication protocol to use for the external-client listener
+# Returns:
+#   None
+#########################
+kafka_configure_external_client_communications() {
+    local -r protocol="${1:?missing environment variable protocol}"
+    local -r allowed_protocols=("PLAINTEXT" "SASL_PLAINTEXT" "SASL_SSL" "SSL")
+    info "Configuring Kafka for external client communications with ${protocol} authentication."
+
+    if [[ "${allowed_protocols[*]}" =~ ${protocol} ]]; then
+        if [[ "$protocol" = "PLAINTEXT" ]]; then
+            warn "External client communications are configured using PLAINTEXT listeners. For safety reasons, do not use this in a production environment."
+        fi
+        if [[ "$protocol" = "SASL_SSL" ]] || [[ "$protocol" = "SSL" ]]; then
+            kafka_configure_ssl
+        fi
+        if [[ "$protocol" = "SSL" ]]; then
+            kafka_server_conf_set ssl.client.auth "$KAFKA_TLS_CLIENT_AUTH"
+        fi
+    else
+        error "Authentication protocol ${protocol} is not supported!"
+        exit 1
+    fi
+}
+
+########################
 # Get Zookeeper TLS settings
 # Globals:
 #   KAFKA_ZOOKEEPER_TLS_*
@@ -693,18 +723,22 @@ kafka_initialize() {
         # - (optional) EXTERNAL: used for communications with consumers/producers on different networks
         local internal_protocol
         local client_protocol
-        if [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" = *"INTERNAL"* ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" = *"CLIENT"* ]]; then
-            if [[ ${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-} =~ INTERNAL:([a-zA-Z_]*) ]]; then
-                internal_protocol="${BASH_REMATCH[1]}"
-                kafka_configure_internal_communications "$internal_protocol"
-            fi
-            if [[ ${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-} =~ CLIENT:([a-zA-Z_]*) ]]; then
-                client_protocol="${BASH_REMATCH[1]}"
-                kafka_configure_client_communications "$client_protocol"
-            fi
+        local external_client_protocol
+        if [[ ${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-} =~ INTERNAL:([a-zA-Z_]*) ]]; then
+            internal_protocol="${BASH_REMATCH[1]}"
+            kafka_configure_internal_communications "$internal_protocol"
+        fi
+        if [[ ${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-} =~ CLIENT:([a-zA-Z_]*) ]]; then
+            client_protocol="${BASH_REMATCH[1]}"
+            kafka_configure_client_communications "$client_protocol"
+        fi
+        if [[ ${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-} =~ EXTERNAL:([a-zA-Z_]*) ]]; then
+            external_client_protocol="${BASH_REMATCH[1]}"
+            kafka_configure_external_client_communications "$external_client_protocol"
         fi
 
-        if [[ "${internal_protocol:-}" =~ "SASL" || "${client_protocol:-}" =~ "SASL" ]] || [[ "${KAFKA_ZOOKEEPER_PROTOCOL}" =~ SASL ]]; then
+
+        if [[ "${internal_protocol:-}" =~ "SASL" || "${client_protocol:-}" =~ "SASL" || "${external_client_protocol:-}" =~ "SASL" ]] || [[ "${KAFKA_ZOOKEEPER_PROTOCOL}" =~ SASL ]]; then
             if [[ -n "$KAFKA_CFG_SASL_ENABLED_MECHANISMS" ]]; then
                 kafka_server_conf_set sasl.enabled.mechanisms "$KAFKA_CFG_SASL_ENABLED_MECHANISMS"
                 kafka_generate_jaas_authentication_file "${internal_protocol:-}" "${client_protocol:-}"
