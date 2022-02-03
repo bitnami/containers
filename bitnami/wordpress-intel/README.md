@@ -36,9 +36,9 @@ It requires a 3rd gen Xeon Scalable Processor (Ice Lake) to get a breakthrough p
 
 > This [CVE scan report](https://quay.io/repository/bitnami/wordpress-intel?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
-# How to deploy wordpress-intel in Kubernetes?
+# How to deploy WordPress for Intel in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami wordpress-intel Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/wordpress-intel).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami WordPress for Intel Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/wordpress-intel).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
@@ -51,13 +51,13 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`5`, `5-debian-10`, `5.8.3`, `5.8.3-debian-10-r0`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.8.3-debian-10-r0/5/debian-10/Dockerfile)
+- [`5`, `5-debian-10`, `5.8.3`, `5.8.3-debian-10-r1`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.8.3-debian-10-r1/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress).
 
 ## Get this image
 
-The recommended way to get the Bitnami wordpress-intel Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/wordpress-intel).
+The recommended way to get the Bitnami WordPress for Intel Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/wordpress-intel).
 
 ```console
 $ docker pull bitnami/wordpress-intel:latest
@@ -77,7 +77,7 @@ $ docker build -t bitnami/wordpress-intel:latest 'https://github.com/bitnami/bit
 
 ## How to use this image
 
-wordpress-intel requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://www.github.com/bitnami/bitnami-docker-mariadb) for the database requirements.
+WordPress for Intel requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://www.github.com/bitnami/bitnami-docker-mariadb) for the database requirements.
 
 ### Run the application using Docker Compose
 
@@ -112,7 +112,7 @@ $ docker run -d --name mariadb \
   bitnami/mariadb:latest
 ```
 
-#### Step 3: Create volumes for wordpress-intel persistence and launch the container
+#### Step 3: Create volumes for WordPress for Intel persistence and launch the container
 
 ```console
 $ docker volume create --name wordpress_data
@@ -135,7 +135,7 @@ If you remove the container all your data will be lost, and the next time you ru
 
 For persistence you should mount a directory at the `/bitnami/wordpress` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should [mount a volume for persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
 
-The above examples define the Docker volumes named `mariadb_data` and `wordpress_data`. The wordpress-intel application state will persist as long as volumes are not removed.
+The above examples define the Docker volumes named `mariadb_data` and `wordpress_data`. The WordPress for Intel application state will persist as long as volumes are not removed.
 
 To avoid inadvertent removal of volumes, you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
@@ -188,7 +188,7 @@ $ docker run -d --name mariadb \
 
 > NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
-#### Step 3. Create the wordpress-intel container with host volumes
+#### Step 3. Create the WordPress for Intel container with host volumes
 
 ```console
 $ docker run -d --name wordpress \
@@ -208,7 +208,7 @@ $ docker run -d --name wordpress \
 
 ### Environment variables
 
-When you start the wordpress-intel image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. Please note that some variables are only considered when the container is started for the first time. If you want to add a new environment variable:
+When you start the WordPress for Intel image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. Please note that some variables are only considered when the container is started for the first time. If you want to add a new environment variable:
 
 - For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wordpress/blob/master/docker-compose.yml) file present in this repository:
 
@@ -236,40 +236,40 @@ Available environment variables:
 
 - `NGINX_HTTP_PORT_NUMBER`: Port used by Nginx for HTTP. Default: **8080**
 - `NGINX_HTTPS_PORT_NUMBER`: Port used by Nginx for HTTPS. Default: **8443**
-- `WORDPRESS_USERNAME`: wordpress-intel application username. Default: **user**
-- `WORDPRESS_PASSWORD`: wordpress-intel application password. Default: **bitnami**
-- `WORDPRESS_EMAIL`: wordpress-intel application email. Default: **user@example.com**
-- `WORDPRESS_FIRST_NAME`: wordpress-intel user first name. Default: **FirstName**
-- `WORDPRESS_LAST_NAME`: wordpress-intel user last name. Default: **LastName**
-- `WORDPRESS_BLOG_NAME`: wordpress-intel blog name. Default: **User's blog**
+- `WORDPRESS_USERNAME`: WordPress for Intel application username. Default: **user**
+- `WORDPRESS_PASSWORD`: WordPress for Intel application password. Default: **bitnami**
+- `WORDPRESS_EMAIL`: WordPress for Intel application email. Default: **user@example.com**
+- `WORDPRESS_FIRST_NAME`: WordPress for Intel user first name. Default: **FirstName**
+- `WORDPRESS_LAST_NAME`: WordPress for Intel user last name. Default: **LastName**
+- `WORDPRESS_BLOG_NAME`: WordPress for Intel blog name. Default: **User's blog**
 - `WORDPRESS_DATA_TO_PERSIST`: Space separated list of files and directories to persist. Use a space to persist no data: `" "`. Default: **"wp-config.php wp-content"**
-- `WORDPRESS_RESET_DATA_PERMISSIONS`: Force resetting ownership/permissions on persisted data when restarting wordpress-intel, otherwise it assumes the ownership/permissions are correct. Ignored when running as non-root. Default: **no**
-- `WORDPRESS_TABLE_PREFIX`: Table prefix to use in wordpress-intel. Default: **wp_**
-- `WORDPRESS_PLUGINS`: List of wordpress-intel plugins to install and activate, separated via commas. Can also be set to `all` to activate all currently installed plugins, or `none` to skip. Default: **none**
-- `WORDPRESS_EXTRA_INSTALL_ARGS`: Extra flags to append to the wordpress-intel 'wp core install' command call. No defaults.
+- `WORDPRESS_RESET_DATA_PERMISSIONS`: Force resetting ownership/permissions on persisted data when restarting WordPress for Intel, otherwise it assumes the ownership/permissions are correct. Ignored when running as non-root. Default: **no**
+- `WORDPRESS_TABLE_PREFIX`: Table prefix to use in WordPress for Intel. Default: **wp_**
+- `WORDPRESS_PLUGINS`: List of WordPress for Intel plugins to install and activate, separated via commas. Can also be set to `all` to activate all currently installed plugins, or `none` to skip. Default: **none**
+- `WORDPRESS_EXTRA_INSTALL_ARGS`: Extra flags to append to the WordPress for Intel 'wp core install' command call. No defaults.
 - `WORDPRESS_EXTRA_CLI_ARGS`: Extra flags to append to all WP-CLI command calls. No defaults.
 - `WORDPRESS_EXTRA_WP_CONFIG_CONTENT`: Extra configuration to append to wp-config.php during install. No defaults.
 - `WORDPRESS_ENABLE_HTTPS`: Whether to use HTTPS by default. Default: **no**
-- `WORDPRESS_SKIP_BOOTSTRAP`: Skip the wordpress-intel installation wizard. This is necessary when providing a database with existing wordpress-intel data. Default: **no**
-- `WORDPRESS_AUTO_UPDATE_LEVEL`: Level of auto-updates to allow for the wordpress-intel core installation. Valid values: `major`, `minor`, `none`. Default: **none**
+- `WORDPRESS_SKIP_BOOTSTRAP`: Skip the WordPress for Intel installation wizard. This is necessary when providing a database with existing WordPress for Intel data. Default: **no**
+- `WORDPRESS_AUTO_UPDATE_LEVEL`: Level of auto-updates to allow for the WordPress for Intel core installation. Valid values: `major`, `minor`, `none`. Default: **none**
 
 ##### Multisite configuration
 
-- `WORDPRESS_ENABLE_MULTISITE`: Enable wordpress-intel Multisite configuration. Default: **no**
-- `WORDPRESS_MULTISITE_HOST`: wordpress-intel hostname/address. Only used for Multisite installations. No defaults.
-- `WORDPRESS_MULTISITE_EXTERNAL_HTTP_PORT_NUMBER`: Port to used by wordpress-intel to generate URLs and links when accessing using HTTP. Will be ignored if multisite mode is not enabled. Default **80**
-- `WORDPRESS_MULTISITE_EXTERNAL_HTTPS_PORT_NUMBER`: Port to used by wordpress-intel to generate URLs and links when accessing using HTTPS. Will be ignored if multisite mode is not enabled. Default **443**
-- `WORDPRESS_MULTISITE_NETWORK_TYPE`: wordpress-intel Multisite network type to enable. Valid values: `subfolder`, `subdirectory`, `subdomain`. Default: **subdomain**
-- `WORDPRESS_MULTISITE_ENABLE_NIP_IO_REDIRECTION`: Whether to enable IP address redirection to nip.io wildcard DNS when enabling wordpress-intel Multisite. This is useful when running on an IP address with subdomain network type. Default: **no**
-- `WORDPRESS_MULTISITE_FILEUPLOAD_MAXK`: Maximum upload file size allowed for wordpress-intel Multisite uploads, in kilobytes. Default: **81920**
+- `WORDPRESS_ENABLE_MULTISITE`: Enable WordPress for Intel Multisite configuration. Default: **no**
+- `WORDPRESS_MULTISITE_HOST`: WordPress for Intel hostname/address. Only used for Multisite installations. No defaults.
+- `WORDPRESS_MULTISITE_EXTERNAL_HTTP_PORT_NUMBER`: Port to used by WordPress for Intel to generate URLs and links when accessing using HTTP. Will be ignored if multisite mode is not enabled. Default **80**
+- `WORDPRESS_MULTISITE_EXTERNAL_HTTPS_PORT_NUMBER`: Port to used by WordPress for Intel to generate URLs and links when accessing using HTTPS. Will be ignored if multisite mode is not enabled. Default **443**
+- `WORDPRESS_MULTISITE_NETWORK_TYPE`: WordPress for Intel Multisite network type to enable. Valid values: `subfolder`, `subdirectory`, `subdomain`. Default: **subdomain**
+- `WORDPRESS_MULTISITE_ENABLE_NIP_IO_REDIRECTION`: Whether to enable IP address redirection to nip.io wildcard DNS when enabling WordPress for Intel Multisite. This is useful when running on an IP address with subdomain network type. Default: **no**
+- `WORDPRESS_MULTISITE_FILEUPLOAD_MAXK`: Maximum upload file size allowed for WordPress for Intel Multisite uploads, in kilobytes. Default: **81920**
 
 ##### Database connection configuration
 
 - `WORDPRESS_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
 - `WORDPRESS_DATABASE_PORT_NUMBER`: Port used by the MariaDB or MySQL server. Default: **3306**
-- `WORDPRESS_DATABASE_NAME`: Database name that wordpress-intel will use to connect with the database. Default: **bitnami_wordpress**
-- `WORDPRESS_DATABASE_USER`: Database user that wordpress-intel will use to connect with the database. Default: **bn_wordpress**
-- `WORDPRESS_DATABASE_PASSWORD`: Database password that wordpress-intel will use to connect with the database. No defaults.
+- `WORDPRESS_DATABASE_NAME`: Database name that WordPress for Intel will use to connect with the database. Default: **bitnami_wordpress**
+- `WORDPRESS_DATABASE_USER`: Database user that WordPress for Intel will use to connect with the database. Default: **bn_wordpress**
+- `WORDPRESS_DATABASE_PASSWORD`: Database password that WordPress for Intel will use to connect with the database. No defaults.
 - `WORDPRESS_ENABLE_DATABASE_SSL`: Whether to enable SSL for database connections. Default: **no**
 - `WORDPRESS_VERIFY_DATABASE_SSL`: Whether to verify the database SSL certificate when SSL is enabled for database connections. Default: **yes**
 - `WORDPRESS_DATABASE_SSL_CERT_FILE`: Path to the database client certificate file. No defaults
@@ -277,7 +277,7 @@ Available environment variables:
 - `WORDPRESS_DATABASE_SSL_CA_FILE`: Path to the database server CA bundle file. No defaults
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-##### Create a database for wordpress-intel using mysql-client
+##### Create a database for WordPress for Intel using mysql-client
 
 - `MYSQL_CLIENT_FLAVOR`: SQL database flavor. Valid values: `mariadb` or `mysql`. Default: **mariadb**
 - `MYSQL_CLIENT_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
@@ -298,7 +298,7 @@ Available environment variables:
 
 ##### SMTP Configuration
 
-To configure wordpress-intel to send email using SMTP you can set the following environment variables:
+To configure WordPress for Intel to send email using SMTP you can set the following environment variables:
 
 - `WORDPRESS_SMTP_HOST`: SMTP host.
 - `WORDPRESS_SMTP_PORT`: SMTP port.
@@ -353,9 +353,9 @@ This would be an example of SMTP configuration using a Gmail account:
       bitnami/wordpress-intel:latest
     ```
 
-##### Connect wordpress-intel container to an existing database
+##### Connect WordPress for Intel container to an existing database
 
-The Bitnami wordpress-intel container supports connecting the wordpress-intel application to an external database. This would be an example of using an external database for wordpress-intel.
+The Bitnami WordPress for Intel container supports connecting the WordPress for Intel application to an external database. This would be an example of using an external database for WordPress for Intel.
 
 - Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-wordpress/blob/master/docker-compose.yml) file present in this repository:
 
@@ -388,11 +388,11 @@ The Bitnami wordpress-intel container supports connecting the wordpress-intel ap
       bitnami/wordpress-intel:latest
     ```
 
-In case the database already contains data from a previous wordpress-intel installation, you need to set the variable `WORDPRESS_SKIP_BOOTSTRAP` to `yes`. Otherwise, the container would execute the installation wizard and could modify the existing data in the database. Note that, when setting `WORDPRESS_SKIP_BOOTSTRAP` to `yes`, values for environment variables such as `WORDPRESS_USERNAME`, `WORDPRESS_PASSWORD` or `WORDPRESS_EMAIL` will be ignored. Make sure that, in this imported database, the table prefix matches the one set in `WORDPRESS_TABLE_PREFIX`.
+In case the database already contains data from a previous WordPress for Intel installation, you need to set the variable `WORDPRESS_SKIP_BOOTSTRAP` to `yes`. Otherwise, the container would execute the installation wizard and could modify the existing data in the database. Note that, when setting `WORDPRESS_SKIP_BOOTSTRAP` to `yes`, values for environment variables such as `WORDPRESS_USERNAME`, `WORDPRESS_PASSWORD` or `WORDPRESS_EMAIL` will be ignored. Make sure that, in this imported database, the table prefix matches the one set in `WORDPRESS_TABLE_PREFIX`.
 
 ## WP-CLI tool
 
-The Bitnami wordpress-intel container includes the command line interface **wp-cli** that can help you to manage and interact with your WP sites. To run this tool, please note you need use the proper system user, **daemon**.
+The Bitnami WordPress for Intel container includes the command line interface **wp-cli** that can help you to manage and interact with your WP sites. To run this tool, please note you need use the proper system user, **daemon**.
 
 This would be an example of using **wp-cli** to display the help menu:
 
@@ -412,7 +412,7 @@ Find more information about parameters available in the tool in the [official do
 
 ## Logging
 
-The Bitnami wordpress-intel Docker image sends the container logs to `stdout`. To view the logs:
+The Bitnami WordPress for Intel Docker image sends the container logs to `stdout`. To view the logs:
 
 ```console
 $ docker logs wordpress
@@ -467,7 +467,7 @@ For the MariaDB database container:
    bitnami/mariadb:latest
 ```
 
-For the wordpress-intel container:
+For the WordPress for Intel container:
 
 ```diff
  $ docker run -d --name wordpress \
@@ -479,7 +479,7 @@ For the wordpress-intel container:
 
 ### Upgrade this image
 
-Bitnami provides up-to-date versions of MariaDB and wordpress-intel, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the wordpress-intel container. For the MariaDB upgrade see https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
+Bitnami provides up-to-date versions of MariaDB and WordPress for Intel, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the WordPress for Intel container. For the MariaDB upgrade see https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
 
 The `bitnami/wordpress-intel:latest` tag always points to the most recent release. To get the most recent release you can simple repull the `latest` tag from the Docker Hub with `docker pull bitnami/wordpress-intel:latest`. However it is recommended to use [tagged versions](https://hub.docker.com/r/bitnami/wordpress-intel/tags/).
 
@@ -519,7 +519,7 @@ $ docker-compose up -d
 
 ## Customize this image
 
-The Bitnami wordpress-intel Docker image is designed to be extended so it can be used as the base image for your custom web applications.
+The Bitnami WordPress for Intel Docker image is designed to be extended so it can be used as the base image for your custom web applications.
 
 ### Extend this image
 
