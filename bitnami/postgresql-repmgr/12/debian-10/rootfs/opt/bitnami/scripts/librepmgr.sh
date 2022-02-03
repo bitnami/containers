@@ -28,7 +28,7 @@ repmgr_get_node_id() {
     else
         num="${REPMGR_NODE_NAME##*-}"
         if [[ "$num" != "" ]]; then
-            num=$((num + 1000))
+            num=$((num + REPMGR_NODE_ID_START_SEED))
             echo "$num"
         fi
     fi
