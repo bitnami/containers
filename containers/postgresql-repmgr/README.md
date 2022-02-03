@@ -52,7 +52,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`14`, `14-debian-10`, `14.1.0`, `14.1.0-debian-10-r79` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/14.1.0-debian-10-r79/14/debian-10/Dockerfile)
 * [`13`, `13-debian-10`, `13.5.0`, `13.5.0-debian-10-r76` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/13.5.0-debian-10-r76/13/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.9.0`, `12.9.0-debian-10-r81` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.9.0-debian-10-r81/12/debian-10/Dockerfile)
-* [`11`, `11-debian-10`, `11.14.0`, `11.14.0-debian-10-r78`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.14.0-debian-10-r78/11/debian-10/Dockerfile)
+* [`11`, `11-debian-10`, `11.14.0`, `11.14.0-debian-10-r79`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.14.0-debian-10-r79/11/debian-10/Dockerfile)
 * [`10`, `10-debian-10`, `10.19.0`, `10.19.0-debian-10-r85` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.19.0-debian-10-r85/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql-repmgr GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql-repmgr).
@@ -527,15 +527,14 @@ Please see the list of environment variables available in the Bitnami PostgreSQL
 | Environment Variable                 | Default value |
 |:-------------------------------------|:--------------|
 | REPMGR_NODE_ID                       | `nil`         |
-| REPMGR_NODE_NAME                     | `nil`         |
 | REPMGR_NODE_ID_START_SEED            | `1000`        |
+| REPMGR_NODE_NAME                     | `nil`         |
 | REPMGR_NODE_NETWORK_NAME             | `nil`         |
 | REPMGR_NODE_PRIORITY                 | `100`         |
 | REPMGR_PARTNER_NODES                 | `nil`         |
 | REPMGR_PRIMARY_HOST                  | `nil`         |
 | REPMGR_NODE_LOCATION                 | `default`     |
 | REPMGR_PRIMARY_PORT                  | `5432`        |
-| REPMGR_NODE_ID                       | `nil`         |
 | REPMGR_PORT_NUMBER                   | `5432`        |
 | REPMGR_LOG_LEVEL                     | `NOTICE`      |
 | REPMGR_START_OPTIONS                 | `nil`         |
