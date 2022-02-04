@@ -15,6 +15,14 @@ set -o pipefail
 . /opt/bitnami/scripts/postgresql-env.sh
 
 flags=("-D" "$POSTGRESQL_DATA_DIR" "--config-file=$POSTGRESQL_CONF_FILE" "--external_pid_file=$POSTGRESQL_PID_FILE" "--hba_file=$POSTGRESQL_PGHBA_FILE")
+
+if [[ -n "${POSTGRESQL_EXTRA_FLAGS:-}" ]]; then
+    read -r -a extra_flags <<< "$POSTGRESQL_EXTRA_FLAGS"
+    flags+=("${extra_flags[@]}")
+fi
+
+flags+=("$@")
+
 cmd=$(command -v postgres)
 
 info "** Starting PostgreSQL **"
