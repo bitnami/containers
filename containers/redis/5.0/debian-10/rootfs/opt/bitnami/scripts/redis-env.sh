@@ -22,6 +22,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # variable will be overridden with the value specified in that file
 redis_env_vars=(
     REDIS_DATA_DIR
+    REDIS_OVERRIDES_FILE
     REDIS_DISABLE_COMMANDS
     REDIS_DATABASE
     REDIS_AOF_ENABLED
@@ -67,8 +68,8 @@ export REDIS_VOLUME_DIR="/bitnami/redis"
 export REDIS_BASE_DIR="${BITNAMI_ROOT_DIR}/redis"
 export REDIS_CONF_DIR="${REDIS_BASE_DIR}/etc"
 export REDIS_DATA_DIR="${REDIS_DATA_DIR:-${REDIS_VOLUME_DIR}/data}"
-export REDIS_OVERRIDES_FILE="${REDIS_MOUNTED_CONF_DIR}/overrides.conf"
 export REDIS_MOUNTED_CONF_DIR="${REDIS_BASE_DIR}/mounted-etc"
+export REDIS_OVERRIDES_FILE="${REDIS_OVERRIDES_FILE:-${REDIS_MOUNTED_CONF_DIR}/overrides.conf}"
 export REDIS_CONF_FILE="${REDIS_CONF_DIR}/redis.conf"
 export REDIS_LOG_DIR="${REDIS_BASE_DIR}/logs"
 export REDIS_LOG_FILE="${REDIS_LOG_DIR}/redis.log"
