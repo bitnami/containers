@@ -51,7 +51,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`6.2`, `6.2-debian-10`, `6.2.6`, `6.2.6-debian-10-r119`, `latest` (6.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.2.6-debian-10-r119/6.2/debian-10/Dockerfile)
 * [`6.0`, `6.0-debian-10`, `6.0.16`, `6.0.16-debian-10-r117` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.0.16-debian-10-r117/6.0/debian-10/Dockerfile)
-* [`5.0`, `5.0-debian-10`, `5.0.14`, `5.0.14-debian-10-r118` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.14-debian-10-r118/5.0/debian-10/Dockerfile)
+* [`5.0`, `5.0-debian-10`, `5.0.14`, `5.0.14-debian-10-r119` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/5.0.14-debian-10-r119/5.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
 
@@ -506,7 +506,7 @@ Refer to the [Redis(TM) configuration](http://redis.io/topics/config) manual for
 
 ### Overriding configuration
 
-Instead of providing a custom redis.conf, you may also choose to provide only settings you wish to override. The image will look for `/opt/bitnami/redis/mounted-etc/overrides.conf`. This will be ignored if custom `redis.conf` is provided.
+Instead of providing a custom `redis.conf`, you may also choose to provide only settings you wish to override. The image will look for `/opt/bitnami/redis/mounted-etc/overrides.conf`. This will be ignored if custom `redis.conf` is provided.
 
 ```console
 $ docker run --name redis \
@@ -522,9 +522,10 @@ services:
   redis:
   ...
     volumes:
-      - /path/to/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf 
+      - /path/to/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf
   ...
 ```
+
 
 ## Logging
 
