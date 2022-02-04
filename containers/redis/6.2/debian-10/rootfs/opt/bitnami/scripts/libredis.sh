@@ -348,22 +348,19 @@ redis_initialize() {
 }
 
 #########################
- # Append include directives to redis.conf
- # Globals:
- #   REDIS_*
- # Arguments:
- #   None
- # Returns:
- #   None
- ########################
-
- redis_append_include_conf() {
-
-     if [[ -f "$REDIS_OVERRIDES_FILE" ]]; then
-         echo "include $REDIS_OVERRIDES_FILE" >> ${REDIS_BASE_DIR}/etc/redis.conf 
-     fi
-
- }
+# Append include directives to redis.conf
+# Globals:
+#   REDIS_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+redis_append_include_conf() {
+    if [[ -f "$REDIS_OVERRIDES_FILE" ]]; then
+        echo "include $REDIS_OVERRIDES_FILE" >> "${REDIS_BASE_DIR}/etc/redis.conf"
+    fi
+}
 
 ########################
 # Configures Redis permissions and general parameters (also used in redis-cluster container)
@@ -423,7 +420,6 @@ redis_configure_default() {
         if [[ -n "$REDIS_ACLFILE" ]]; then
             redis_conf_set aclfile "$REDIS_ACLFILE"
         fi
-
         redis_append_include_conf
     fi
 }
