@@ -54,10 +54,9 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`13`, `13-debian-10`, `13.5.0`, `13.5.0-debian-10-r80` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/13.5.0-debian-10-r80/13/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.9.0`, `12.9.0-debian-10-r80` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.9.0-debian-10-r80/12/debian-10/Dockerfile)
 * [`11`, `11-debian-10`, `11.14.0`, `11.14.0-debian-10-r50` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.14.0-debian-10-r50/11/debian-10/Dockerfile)
-* [`10`, `10-debian-10`, `10.19.0`, `10.19.0-debian-10-r81` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.19.0-debian-10-r81/10/debian-10/Dockerfile)
+* [`10`, `10-debian-10`, `10.19.0`, `10.19.0-debian-10-r82` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.19.0-debian-10-r82/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql).
-
 
 ## Get this image
 
@@ -180,6 +179,12 @@ $ docker-compose up -d
 When the container is executed, it will execute the files with extension `.sh` located at `/docker-entrypoint-preinitdb.d` before initializing or starting postgresql.
 
 In order to have your custom files inside the docker image you can mount them as a volume.
+
+### Passing extra command-line flags to PostgreSQL
+
+Passing extra command-line flags to the postgresql service command is possible through the following env var:
+
+- `POSTGRESQL_EXTRA_FLAGS`: Flags to be appended to the `postgres` startup command. No defaults
 
 ### Initializing a new instance
 
@@ -671,6 +676,19 @@ You can control the parameters used to stop postgresql in the initialization pro
 
  - `POSTGRESQL_PGCTLTIMEOUT` that will set the timeout for the `pg_ctl` command.
  - `POSTGRESQL_SHUTDOWN_MODE` that will indicate the [shutdown mode](https://www.postgresql.org/docs/11/app-pg-ctl.html) used.
+
+### Installing extra locales
+
+The Dockerfile provides two arguments to configure extra locales at build time:
+
+ - `WITH_ALL_LOCALES`: Enable all supported locales. Default: no
+ - `EXTRA_LOCALES`: Comma separated list of extra locales to enable. No defaults
+
+For example, to build an image with support for the `es_ES.UTF-8 UTF-8` locale, you can add the following argument to your build command:
+
+```
+docker build --build-arg EXTRA_LOCALES="es_ES.UTF-8 UTF-8" ...
+```
 
 ### Environment variables aliases
 
