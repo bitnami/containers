@@ -23,7 +23,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN /opt/bitnami/scripts/qatengine/postunpack.sh
 ENV BITNAMI_APP_NAME="nginx-intel" \
-    BITNAMI_IMAGE_VERSION="0.4.7-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="0.4.7-debian-10-r7" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/nginx/sbin:$PATH"
