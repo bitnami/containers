@@ -85,47 +85,16 @@ get_galera_cluster_bootstrap_value() {
 
     # This block evaluate if the cluster needs to be boostraped or not.
     # When the node is marked to bootstrap:
-    # - We want to have bootstrap enabled when executing up to "run.sh" (included), for the first time.
-    #   To do this, we check if the node has already been initialized before with "get_previous_boot".
-    # - For the second "setup.sh" and "run.sh" calls, it will automatically detect the cluster was already bootstrapped, so it disables it.
-    #   That way, the node will join the existing Galera cluster instead of bootstrapping a new one.
-    #   We disable the bootstrap right after processing environment variables in "run.sh" with "set_previous_boot".
-    # - Users can force a bootstrap to happen again on a node, by setting the environment variable "MARIADB_GALERA_FORCE_SAFETOBOOTSTRAP".
-    # - Bootstrapping may happen implicitly when "MARIADB_GALERA_CLUSTER_BOOTSTRAP" is undefined.
-    #   This is mostly expected to happen when running in Kubernetes and the Helm Chart value "galera.bootstrap.bootstrapFromNode" is not set.
+    #  - When it is force by setting DB_GALERA_CLUSTER_BOOTSTRAP
+    #  - When there is not previous boot and not other nodes has been found
     # When the node is not marked to bootstrap, the node will join an existing cluster.
     cluster_bootstrap="no" # initial value
-    if is_boolean_yes "$DB_GALERA_FORCE_SAFETOBOOTSTRAP"; then
+    if is_boolean_yes "$DB_GALERA_CLUSTER_BOOTSTRAP"; then
         cluster_bootstrap="yes"
-    elif ! is_boolean_yes "$(get_previous_boot)"; then
-        if is_boolean_yes "$DB_GALERA_CLUSTER_BOOTSTRAP"; then
-            cluster_bootstrap="yes"
-        elif is_boolean_yes "$(should_bootstrap_implicitly)"; then
-            cluster_bootstrap="yes"
-        fi
+    elif ! is_boolean_yes "$(get_previous_boot)" && ! is_boolean_yes "$(has_galera_cluster_other_nodes)"; then
+        cluster_bootstrap="yes"
     fi
     echo "$cluster_bootstrap"
-}
-
-########################
-# Whether this node should bootstrap if not explicitly stated. 
-# Globals:
-#   DB_*
-# Arguments:
-#   None
-# Returns:
-#   Yes or no
-#########################
-should_bootstrap_implicitly() {
-    bootstrap_implicitly="no"
-    # If bootstrap value is explicitly defined, never bootstrap implicitly.
-    if is_empty_value "$DB_GALERA_CLUSTER_BOOTSTRAP"; then
-        # TODO: Maybe we should only do this if we're sure that this container runs in Kubernetes?
-        if ! is_boolean_yes "$(has_galera_cluster_other_nodes)"; then
-            bootstrap_implicitly="yes"
-        fi
-    fi
-    echo "$bootstrap_implicitly" 
 }
 
 ########################
@@ -138,7 +107,7 @@ should_bootstrap_implicitly() {
 #   None
 #########################
 has_galera_cluster_other_nodes() {
-    local local_ip node_ip cluster_address address has_nodes
+    local node_ip cluster_address address has_nodes
 
     hostname_has_ips() {
        local hostname="${1:?hostname is required}"
@@ -159,12 +128,14 @@ has_galera_cluster_other_nodes() {
                 has_nodes="yes"
             else
                 address="$(echo "${addresses[0]}" | cut -d':' -f1)"
-                if retry_while "hostname_has_ips $address"; then
+                if retry_while "hostname_has_ips $address" 2 2; then
                     for ip in $(getent ahosts "$address" | awk '{print $1}' | uniq); do
-                        if [[ "$ip" != "$local_ip" ]]; then
-                            has_nodes="yes"
-                            break
-                        fi
+                        for local_ip in "${local_ips[@]}"; do
+                            if [[ "$ip" != "$local_ip" ]]; then
+                                has_nodes="yes"
+                                break
+                            fi
+                        done
                     done
                 fi
             fi
@@ -175,7 +146,7 @@ has_galera_cluster_other_nodes() {
                 if validate_ipv4 "$address"; then
                     node_ip="$address"
                 else
-                    if retry_while "hostname_has_ips $address"; then
+                    if retry_while "hostname_has_ips $address" 2 2; then
                         node_ip="$(dns_lookup "$address")"
                     fi
                 fi
@@ -545,6 +516,10 @@ mysql_initialize() {
         ensure_dir_exists "$dir"
         am_i_root && chown "$DB_DAEMON_USER:$DB_DAEMON_GROUP" "$dir"
     done
+
+    if is_boolean_yes "$(get_previous_boot)" && ! is_boolean_yes "$DB_GALERA_CLUSTER_BOOTSTRAP"; then
+        warn "This node was previouly booted, you may need to force bootstrapping in one of the nodes."
+    fi
 
     if is_file_writable "$DB_CONF_FILE"; then
         if ! is_mounted_dir_empty "$DB_GALERA_MOUNTED_CONF_DIR"; then
