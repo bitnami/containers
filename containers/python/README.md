@@ -43,7 +43,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`3.8`, `3.8-debian-10`, `3.8.12`, `3.8.12-debian-10-r156` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.12-debian-10-r156/3.8/debian-10/Dockerfile)
 * [`3.7`, `3.7-debian-10`, `3.7.12`, `3.7.12-debian-10-r150`, `latest` (3.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.12-debian-10-r150/3.7/debian-10/Dockerfile)
 * [`3.6`, `3.6-debian-10`, `3.6.15`, `3.6.15-debian-10-r145` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.6.15-debian-10-r145/3.6/debian-10/Dockerfile)
-* [`2`, `2-debian-10`, `2.7.18`, `2.7.18-debian-10-r614` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.18-debian-10-r614/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.7.18`, `2.7.18-debian-10-r615` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.18-debian-10-r615/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/python GitHub repo](https://github.com/bitnami/bitnami-docker-python).
 
@@ -161,6 +161,10 @@ or using Docker Compose:
 ```console
 $ docker-compose up python
 ```
+
+## Branch Deprecation Notice
+
+Python's branch 3.6 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 03-04-2022
 
 ## Contributing
 
