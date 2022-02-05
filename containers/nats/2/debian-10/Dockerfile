@@ -11,7 +11,7 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl gzip procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-6" --checksum 81b0642a6d8e9d952a0f6540f2d7481a99b9a12dd42bcb5906ba8014ca80f326
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nats" "2.7.1-0" --checksum bbd7a04cb678d8ca0c19d0a584703135ffd8ea1f8ab10e4ff15d9b2ad83c6ed8
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nats" "2.7.2-0" --checksum 8f8a65849f9986a2c60d44fd6c0c4da6e36efbf065b141886c4f2f553dc87bbc
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/nats/postunpack.sh
 ENV BITNAMI_APP_NAME="nats" \
-    BITNAMI_IMAGE_VERSION="2.7.1-debian-10-r9" \
+    BITNAMI_IMAGE_VERSION="2.7.2-debian-10-r0" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/nats/bin:$PATH"
 
 EXPOSE 4222 6222 8222

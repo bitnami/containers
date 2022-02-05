@@ -8,10 +8,10 @@
     },
     "nats": {
         "arch": "amd64",
-        "digest": "bbd7a04cb678d8ca0c19d0a584703135ffd8ea1f8ab10e4ff15d9b2ad83c6ed8",
+        "digest": "8f8a65849f9986a2c60d44fd6c0c4da6e36efbf065b141886c4f2f553dc87bbc",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.7.1-0"
+        "version": "2.7.2-0"
     },
     "render-template": {
         "arch": "amd64",
