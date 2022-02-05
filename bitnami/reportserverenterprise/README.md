@@ -38,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 - [`4`, `4-debian-10`, `4.0.0-6054`, `4.0.0-6054-debian-10-r0` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/4.0.0-6054-debian-10-r0/4/debian-10/Dockerfile)
-- [`3`, `3-debian-10`, `3.7.1-6052`, `3.7.1-6052-debian-10-r15`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/3.7.1-6052-debian-10-r15/3/debian-10/Dockerfile)
+- [`3`, `3-debian-10`, `3.7.1-6052`, `3.7.1-6052-debian-10-r16`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/3.7.1-6052-debian-10-r16/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/reportserverenterprise GitHub repo](https://github.com/bitnami/bitnami-docker-reportserverenterprise).
 
