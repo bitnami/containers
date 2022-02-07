@@ -9,7 +9,7 @@ services:
       - MARIADB_USER=bn_reportserver
       - MARIADB_DATABASE=bitnami_reportserver
   reportserver:
-    image: docker.io/bitnami/reportserver:3
+    image: docker.io/bitnami/reportserver:4
     ports:
       - '80:8080'
       - '443:8443'
