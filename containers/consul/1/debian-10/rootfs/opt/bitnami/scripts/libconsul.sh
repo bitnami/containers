@@ -134,10 +134,10 @@ consul_initialize() {
         export CONSUL_NODE_NAME="$machine_ip"
     fi
 
-    if [[ -n "$CONSUL_BIND_INTERFACE" ]] && [[ -z "${CONSUL_BIND_ADDRESS:-}" ]]; then
-        info "CONSUL_BIND_INTERFACE was set to $CONSUL_BIND_INTERFACE and CONSUL_BIND_ADDRESS was not set, obtaining bind address"
+    if [[ -n "$CONSUL_BIND_INTERFACE" ]] && [[ -z "${CONSUL_BIND_ADDR:-}" ]]; then
+        info "CONSUL_BIND_INTERFACE was set to $CONSUL_BIND_INTERFACE and CONSUL_BIND_ADDR was not set, obtaining bind address"
         local -r bind_address=$(ip -o -4 addr list "$CONSUL_BIND_INTERFACE" | head -n1 | awk '{print $4}' | cut -d/ -f1)
-        export CONSUL_BIND_ADDRESS="$bind_address"
+        export CONSUL_BIND_ADDR="$bind_address"
     fi
 
     if is_dir_empty "${CONSUL_DATA_DIR}"; then
