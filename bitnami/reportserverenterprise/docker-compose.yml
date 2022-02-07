@@ -11,7 +11,7 @@ services:
     volumes:
       - 'mariadb_data:/bitnami'
   reportserverenterprise:
-    image: docker.io/bitnami/reportserverenterprise:3
+    image: docker.io/bitnami/reportserverenterprise:4
     environment:
       - MARIADB_HOST=mariadb
       - MARIADB_PORT_NUMBER=3306
