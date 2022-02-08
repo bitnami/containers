@@ -15,7 +15,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.52-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wp-cli" "2.6.0-0" --checksum 8d589caaf145b669d7d3c902680108e32a4964da60dc21b50b69c6ab88dbf039
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.32-1" --checksum 727834a55587746f90b159966c9abf2ce31a6effbe83d8c38ee6250641c9a22a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.27-5" --checksum ccfc41ab4067ffd79421713ca7e16b6bfdc7fc73183853cf363c8de9d842e66b
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wordpress" "5.9.0-1" --checksum 8ce2b2906225f7095f409e0fd136e90c1d9dade7cd45ef38c62506b9f14cef95
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wordpress" "5.9.0-2" --checksum 6605d67bb828fa0dc068b80e31446b5a136bc2a41698e42b8613ab8f0edc5dd6
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -31,7 +31,7 @@ RUN /opt/bitnami/scripts/wp-cli/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="wordpress" \
-    BITNAMI_IMAGE_VERSION="5.9.0-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="5.9.0-debian-10-r5" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/wp-cli/bin:/opt/bitnami/mysql/bin:$PATH"
 
 EXPOSE 8080 8443
