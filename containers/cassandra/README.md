@@ -208,6 +208,7 @@ cassandra:
  - `CASSANDRA_DATACENTER`: Datacenter name for the cluster. Ignored in **SimpleSnitch** endpoint snitch. Default: **dc1**.
  - `CASSANDRA_RACK`: Rack name for the cluster. Ignored in **SimpleSnitch** endpoint snitch. Default: **rack1**.
  - `CASSANDRA_ENABLE_USER_DEFINED_FUNCTIONS`: User defined functions. Default: **false**.
+ - `CASSANDRA_ENABLE_SCRIPTED_USER_DEFINED_FUNCTIONS`: User defined scripted functions. Default: **false**
  - `CASSANDRA_BROADCAST_ADDRESS`: The public IP address this node uses to broadcast to other nodes outside the network or across regions in multiple-region EC2 deployments. This option is commented out by default (if not provided, Apache Cassandra will use "listen_address"). No defaults.
  - `CASSANDRA_COMMITLOG_DIR`: Directory where the commit logs will be stored. Default: **/bitnami/cassandra/data/commitlog**
 

@@ -207,6 +207,7 @@ cassandra_validate() {
     check_true_false_value CASSANDRA_ENABLE_REMOTE_CONNECTIONS
     check_true_false_value CASSANDRA_CLIENT_ENCRYPTION
     check_true_false_value CASSANDRA_ENABLE_USER_DEFINED_FUNCTIONS
+    check_true_false_value CASSANDRA_ENABLE_SCRIPTED_USER_DEFINED_FUNCTIONS
     check_positive_value CASSANDRA_NUM_TOKENS
     check_positive_value CASSANDRA_INIT_MAX_RETRIES
     check_positive_value CASSANDRA_CQL_MAX_RETRIES
@@ -390,6 +391,7 @@ cassandra_setup_cluster() {
         cassandra_yaml_set "seeds" "$CASSANDRA_SEEDS"
         cassandra_yaml_set "start_rpc" "$CASSANDRA_ENABLE_RPC" "no"
         cassandra_yaml_set "enable_user_defined_functions" "$CASSANDRA_ENABLE_USER_DEFINED_FUNCTIONS" "no"
+        cassandra_yaml_set "enable_scripted_user_defined_functions" "$CASSANDRA_ENABLE_SCRIPTED_USER_DEFINED_FUNCTIONS" "no"
         cassandra_yaml_set "rpc_address" "$rpc_address"
         cassandra_yaml_set "broadcast_rpc_address" "$host"
         cassandra_yaml_set "endpoint_snitch" "$CASSANDRA_ENDPOINT_SNITCH"
