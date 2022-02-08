@@ -365,6 +365,7 @@ repmgr_inject_postgresql_configuration() {
     postgresql_set_property "log_filename" "postgresql.log"
     is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && postgresql_configure_tls
     is_boolean_yes "$POSTGRESQL_ENABLE_TLS" && [[ -n $POSTGRESQL_TLS_CA_FILE ]] && postgresql_tls_auth_configuration
+    is_boolean_yes "$REPMGR_USE_PGREWIND" && postgresql_set_property "wal_log_hints" "on"
     cp "$POSTGRESQL_CONF_FILE" "${POSTGRESQL_MOUNTED_CONF_DIR}/postgresql.conf"
 }
 
@@ -570,6 +571,26 @@ repmgr_clone_primary() {
 }
 
 ########################
+# Execute pg_rewind to get data from the primary node
+# Globals:
+#   REPMGR_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+repmgr_pgrewind() {
+    info "Running pg_rewind data to primary node..."
+    local -r flags=("-D" "$POSTGRESQL_DATA_DIR" "--source-server" "host=${REPMGR_CURRENT_PRIMARY_HOST} port=${REPMGR_CURRENT_PRIMARY_PORT} user=${REPMGR_USERNAME} dbname=${REPMGR_DATABASE}")
+
+    if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
+        PGPASSFILE="$REPMGR_PASSFILE_PATH" debug_execute "${POSTGRESQL_BIN_DIR}/pg_rewind" "${flags[@]}"
+    else
+        PGPASSWORD="$REPMGR_PASSWORD" debug_execute "${POSTGRESQL_BIN_DIR}/pg_rewind" "${flags[@]}"
+    fi
+}
+
+########################
 # Rejoin node
 # Globals:
 #   REPMGR_*
@@ -581,11 +602,16 @@ repmgr_clone_primary() {
 repmgr_rewind() {
     info "Rejoining node..."
 
-    debug "Deleting old data..."
-    rm -rf "$POSTGRESQL_DATA_DIR" && ensure_dir_exists "$POSTGRESQL_DATA_DIR"
-
-    debug "Cloning data from primary node..."
-    repmgr_clone_primary
+    ensure_dir_exists "$POSTGRESQL_DATA_DIR"
+    if is_boolean_yes "$REPMGR_USE_PGREWIND"; then
+        info "Using pg_rewind to primary node..."
+        if ! repmgr_pgrewind; then
+            warn "pg_rewind failed, resorting to data cloning"
+            repmgr_clone_primary
+        fi
+    else
+        repmgr_clone_primary
+    fi
 }
 
 ########################
@@ -692,12 +718,7 @@ repmgr_initialize() {
 
     if [[ "$REPMGR_ROLE" = "standby" ]]; then
         repmgr_wait_primary_node || exit 1
-        # TODO: better way to detect it's a 1st boot
-        if [[ ! -f "$POSTGRESQL_CONF_FILE" ]] || ! is_boolean_yes "$REPMGR_SWITCH_ROLE"; then
-            repmgr_clone_primary
-        else
-            repmgr_rewind
-        fi
+        repmgr_rewind
     fi
     postgresql_initialize
     if ! repmgr_is_file_external "postgresql.conf"; then
