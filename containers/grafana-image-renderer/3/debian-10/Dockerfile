@@ -17,10 +17,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "556a98f936b3c23e05bd6c23cd0cec135238b239b329161580544697bc332053  /tmp/bitnami/pkg/cache/node-14.19.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/node-14.19.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/node-14.19.0-0-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/grafana-image-renderer-3.3.0-4-linux-amd64-debian-10.tar.gz && \
-    echo "7ad0155ca46a8bc15716fd4f7d29cd5f5eebbae395ca072a76da8a977a99f259  /tmp/bitnami/pkg/cache/grafana-image-renderer-3.3.0-4-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/grafana-image-renderer-3.3.0-4-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/grafana-image-renderer-3.3.0-4-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/grafana-image-renderer-3.3.0-30-linux-amd64-debian-10.tar.gz && \
+    echo "f383bf2b2b8e30e84cb71c2c3b31587fa3e4e8ca757d3b52dc351c3cdf46961e  /tmp/bitnami/pkg/cache/grafana-image-renderer-3.3.0-30-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/grafana-image-renderer-3.3.0-30-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/grafana-image-renderer-3.3.0-30-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -29,7 +29,7 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
     install_packages google-chrome-unstable
 
 ENV BITNAMI_APP_NAME="grafana-image-renderer" \
-    BITNAMI_IMAGE_VERSION="3.3.0-debian-10-r77" \
+    BITNAMI_IMAGE_VERSION="3.3.0-debian-10-r78" \
     HTTP_HOST="0.0.0.0" \
     HTTP_PORT="8080" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:$PATH"
