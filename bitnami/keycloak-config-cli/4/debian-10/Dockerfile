@@ -13,17 +13,17 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "1f4876cb7c5709c5dc905f4325b1136b3ab73f71e3e16faa3c877ef84e78e776  /tmp/bitnami/pkg/cache/java-11.0.14-3-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/java-11.0.14-3-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/java-11.0.14-3-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/keycloak-config-cli-4.6.1-1-linux-amd64-debian-10.tar.gz && \
-    echo "164115d7ee5a931dfc97c6257a5c13fb59e79e3ff6a76d9a710bf133dfd2bfa0  /tmp/bitnami/pkg/cache/keycloak-config-cli-4.6.1-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/keycloak-config-cli-4.6.1-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/keycloak-config-cli-4.6.1-1-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/keycloak-config-cli-4.6.1-30-linux-amd64-debian-10.tar.gz && \
+    echo "31b7c4030bd800f495e8dabb1241a3da76b4fdf59e389e6f09f9f1b939a7c041  /tmp/bitnami/pkg/cache/keycloak-config-cli-4.6.1-30-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/keycloak-config-cli-4.6.1-30-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/keycloak-config-cli-4.6.1-30-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN ln -sf /opt/bitnami/keycloak-config-cli/keycloak-config-cli.jar /opt/keycloak-config-cli.jar
 
 ENV BITNAMI_APP_NAME="keycloak-config-cli" \
-    BITNAMI_IMAGE_VERSION="4.6.1-debian-10-r21" \
+    BITNAMI_IMAGE_VERSION="4.6.1-debian-10-r22" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 WORKDIR /opt/bitnami/keycloak-config-cli
