@@ -37,7 +37,7 @@ You can find the default credentials and available configuration options in the 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.2.3`, `2.2.3-debian-10-r47`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker/blob/2.2.3-debian-10-r47/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.2.3`, `2.2.3-debian-10-r48`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker/blob/2.2.3-debian-10-r48/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow-worker).
 
@@ -93,10 +93,9 @@ If you want to run the application manually instead of using `docker-compose`, t
     bitnami/redis:latest
   ```
 
-4. Create volumes for Airflow persistence and launch the container
+4. Launch the Apache Airflow Worker web container
 
   ```console
-  $ docker volume create --name airflow_data
   $ docker run -d --name airflow -p 8080:8080 \
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
     -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
@@ -109,14 +108,12 @@ If you want to run the application manually instead of using `docker-compose`, t
     -e AIRFLOW_USERNAME=user \
     -e AIRFLOW_EMAIL=user@example.com \
     --net airflow-tier \
-    --volume airflow_data:/bitnami \
     bitnami/airflow:latest
   ```
 
-5. Create volumes for Airflow Scheduler persistence and launch the container
+5. Launch the Apache Airflow Worker scheduler container
 
   ```console
-  $ docker volume create --name airflow_scheduler_data
   $ docker run -d --name airflow-scheduler \
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
     -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
@@ -126,14 +123,12 @@ If you want to run the application manually instead of using `docker-compose`, t
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
     -e AIRFLOW_LOAD_EXAMPLES=yes \
     --net airflow-tier \
-    --volume airflow_scheduler_data:/bitnami \
     bitnami/airflow-scheduler:latest
   ```
 
-6. Create volumes for Airflow Worker persistence and launch the container
+6. Launch the Apache Airflow Worker worker container
 
   ```console
-  $ docker volume create --name airflow_worker_data
   $ docker run -d --name airflow-worker \
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
     -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
@@ -143,7 +138,6 @@ If you want to run the application manually instead of using `docker-compose`, t
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
     -e AIRFLOW_QUEUE=new_queue \
     --net airflow-tier \
-    --volume airflow_worker_data:/bitnami \
     bitnami/airflow-worker:latest
   ```
 
@@ -151,11 +145,9 @@ Access your application at `http://your-ip:8080`
 
 ### Persisting your application
 
-If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
+The Bitnami Airflow container relies on the PostgreSQL database & Redis to persist the data. This means that Airflow does not persist anything. To avoid loss of data, you should mount volumes for persistence of [PostgreSQL data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database) and [Redis(TM) data](https://github.com/bitnami/bitnami-docker-redis#persisting-your-database)
 
-For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount volumes for persistence of [PostgreSQL data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database) and [Redis(TM) data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database)
-
-The above examples define docker volumes namely `postgresql_data`, `redis_data`, `airflow_data`, `airflow_scheduler_data` and `airflow_worker_data`. The Airflow Worker application state will persist as long as these volumes are not removed.
+The above examples define docker volumes namely `postgresql_data`, and `redis_data`. The Airflow application state will persist as long as these volumes are not removed.
 
 To avoid inadvertent removal of these volumes you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
@@ -173,13 +165,13 @@ services:
       - POSTGRESQL_USERNAME=bn_airflow
       - POSTGRESQL_PASSWORD=bitnami1
     volumes:
-      - /path/to/airflow-persistence:/bitnami
+      - /path/to/postgresql-persistence:/bitnami
   redis:
     image: 'bitnami/redis:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - /path/to/airflow-persistence:/bitnami
+      - /path/to/redis-persistence:/bitnami
   airflow-worker:
     image: bitnami/airflow-worker:latest
     environment:
@@ -190,8 +182,6 @@ services:
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
       - AIRFLOW_DATABASE_PASSWORD=bitnami1
       - AIRFLOW_LOAD_EXAMPLES=yes
-    volumes:
-      - /path/to/airflow-persistence:/bitnami
   airflow-scheduler:
     image: bitnami/airflow-scheduler:latest
     environment:
@@ -202,8 +192,6 @@ services:
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
       - AIRFLOW_DATABASE_PASSWORD=bitnami1
       - AIRFLOW_LOAD_EXAMPLES=yes
-    volumes:
-      - /path/to/airflow-persistence:/bitnami
   airflow:
     image: bitnami/airflow:latest
     environment:
@@ -218,8 +206,6 @@ services:
       - AIRFLOW_EMAIL=user@example.com
     ports:
       - '8080:8080'
-    volumes:
-      - /path/to/airflow-persistence:/bitnami
 ```
 
 #### Mount host directories as data volumes using the Docker command line
@@ -252,7 +238,7 @@ services:
     bitnami/redis:latest
   ```
 
-4. Create the Airflow container with host volumes
+4. Create the Airflow container
 
   ```console
   $ docker run -d --name airflow -p 8080:8080 \
@@ -267,11 +253,10 @@ services:
     -e AIRFLOW_USERNAME=user \
     -e AIRFLOW_EMAIL=user@example.com \
     --net airflow-tier \
-    --volume /path/to/airflow-persistence:/bitnami \
     bitnami/airflow:latest
   ```
 
-5. Create the Airflow Scheduler container with host volumes
+5. Create the Airflow Scheduler container
 
   ```console
   $ docker run -d --name airflow-scheduler \
@@ -283,11 +268,10 @@ services:
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
     -e AIRFLOW_LOAD_EXAMPLES=yes \
     --net airflow-tier \
-    --volume /path/to/airflow-scheduler-persistence:/bitnami \
     bitnami/airflow-scheduler:latest
   ```
 
-6. Create the Airflow Worker container with host volumes
+6. Create the Airflow Worker container
 
   ```console
   $ docker run -d --name airflow-worker \
@@ -298,7 +282,6 @@ services:
     -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
     -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
     --net airflow-tier \
-    --volume /path/to/airflow-worker-persistence:/bitnami \
     bitnami/airflow-worker:latest
   ```
 
@@ -371,7 +354,6 @@ $ docker run -d --name airflow -p 8080:8080 \
     -e AIRFLOW_PASSWORD=bitnami123 \
     -e AIRFLOW_USERNAME=user \
     -e AIRFLOW_EMAIL=user@example.com \
-    --volume airflow_data:/bitnami \
     bitnami/airflow:latest
 ```
 
