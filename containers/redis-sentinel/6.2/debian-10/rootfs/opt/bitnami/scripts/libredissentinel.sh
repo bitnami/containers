@@ -80,7 +80,9 @@ redis_validate() {
     is_positive_int "$REDIS_SENTINEL_DOWN_AFTER_MILLISECONDS" || print_validation_error "Invalid down-after-milliseconds value (only positive integers allowed)"
     is_positive_int "$REDIS_SENTINEL_FAILOVER_TIMEOUT" || print_validation_error "Invalid failover-timeout value (only positive integers allowed)"
 
-    check_allowed_port REDIS_SENTINEL_PORT_NUMBER
+    if ! is_boolean_yes "$REDIS_SENTINEL_TLS_ENABLED" || [[ "$REDIS_SENTINEL_PORT_NUMBER" != "0" ]]; then
+        check_allowed_port REDIS_SENTINEL_PORT_NUMBER
+    fi
     check_resolved_hostname "$REDIS_MASTER_HOST"
 
     if is_boolean_yes "$REDIS_SENTINEL_TLS_ENABLED"; then
