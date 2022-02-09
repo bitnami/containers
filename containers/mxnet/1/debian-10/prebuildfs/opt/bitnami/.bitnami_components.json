@@ -8,10 +8,10 @@
     },
     "mxnet": {
         "arch": "amd64",
-        "digest": "b94714d137f1d33c6337e7bcee3bb627d01572fd69a8dc7ea95a8f60cf763814",
+        "digest": "1963a86b086f0d65ef07065cfcb7f2f5d0da74fe4ce2fa2d3bf75109e31590d3",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.9.0-2"
+        "version": "1.9.0-30"
     },
     "python": {
         "arch": "amd64",
