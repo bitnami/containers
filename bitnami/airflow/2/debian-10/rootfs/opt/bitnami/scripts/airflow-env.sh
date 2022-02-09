@@ -79,8 +79,6 @@ unset airflow_env_vars
 export AIRFLOW_BASE_DIR="${BITNAMI_ROOT_DIR}/airflow"
 export AIRFLOW_HOME="${AIRFLOW_BASE_DIR}"
 export AIRFLOW_BIN_DIR="${AIRFLOW_BASE_DIR}/venv/bin"
-export AIRFLOW_VOLUME_DIR="/bitnami/airflow"
-export AIRFLOW_DATA_DIR="${AIRFLOW_BASE_DIR}/data"
 export AIRFLOW_LOGS_DIR="${AIRFLOW_BASE_DIR}/logs"
 export AIRFLOW_SCHEDULER_LOGS_DIR="${AIRFLOW_LOGS_DIR}/scheduler"
 export AIRFLOW_LOG_FILE="${AIRFLOW_LOGS_DIR}/airflow-webserver.log"
@@ -88,7 +86,6 @@ export AIRFLOW_CONF_FILE="${AIRFLOW_BASE_DIR}/airflow.cfg"
 export AIRFLOW_WEBSERVER_CONF_FILE="${AIRFLOW_BASE_DIR}/webserver_config.py"
 export AIRFLOW_TMP_DIR="${AIRFLOW_BASE_DIR}/tmp"
 export AIRFLOW_PID_FILE="${AIRFLOW_TMP_DIR}/airflow-webserver.pid"
-export AIRFLOW_DATA_TO_PERSIST="$AIRFLOW_DATA_DIR"
 export AIRFLOW_DAGS_DIR="${AIRFLOW_BASE_DIR}/dags"
 
 # System users (when running with a privileged user)

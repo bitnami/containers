@@ -15,14 +15,11 @@ set -o pipefail
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libos.sh
 
-for dir in "$AIRFLOW_VOLUME_DIR" "$AIRFLOW_BASE_DIR" "$AIRFLOW_DATA_DIR"; do
-    ensure_dir_exists "$dir"
-done
-
+ensure_dir_exists "$AIRFLOW_BASE_DIR"
 # Ensure the needed directories exist with write permissions
 for dir in "$AIRFLOW_TMP_DIR" "$AIRFLOW_LOGS_DIR" "$AIRFLOW_SCHEDULER_LOGS_DIR" "$AIRFLOW_DAGS_DIR"; do
     ensure_dir_exists "$dir"
     configure_permissions_ownership "$dir" -d "775" -f "664" -g "root"
 done
 
-chmod -R g+rwX /bitnami "$AIRFLOW_VOLUME_DIR" "$AIRFLOW_BASE_DIR"
+chmod -R g+rwX "$AIRFLOW_BASE_DIR"
