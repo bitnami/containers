@@ -95,7 +95,7 @@ airflow_initialize() {
     info "Initializing Airflow ..."
 
     # Change permissions if running as root
-    for dir in "$AIRFLOW_DATA_DIR" "$AIRFLOW_TMP_DIR" "$AIRFLOW_LOGS_DIR" "$AIRFLOW_DAGS_DIR"; do
+    for dir in "$AIRFLOW_TMP_DIR" "$AIRFLOW_LOGS_DIR" "$AIRFLOW_DAGS_DIR"; do
         ensure_dir_exists "$dir"
         am_i_root && chown "$AIRFLOW_DAEMON_USER:$AIRFLOW_DAEMON_GROUP" "$dir"
     done
@@ -108,73 +108,27 @@ airflow_initialize() {
         info "Configuration file found, loading configuration"
     fi
 
-    # Check if Airflow has already been initialized and persisted in a previous run
-    local -r app_name="airflow"
-    local -a postgresql_remote_execute_args=("$AIRFLOW_DATABASE_HOST" "$AIRFLOW_DATABASE_PORT_NUMBER" "$AIRFLOW_DATABASE_NAME" "$AIRFLOW_DATABASE_USERNAME" "$AIRFLOW_DATABASE_PASSWORD")
-    if ! is_app_initialized "$app_name"; then
+    info "Trying to connect to the database server"
+    airflow_wait_for_postgresql_connection
+    # Check if the Airflow database has been already initialized
+    if ! debug_execute airflow db check-migrations; then
         # Delete pid file
         rm -f "$AIRFLOW_PID_FILE"
 
         # Initialize database
-        info "Trying to connect to the database server"
-        airflow_wait_for_postgresql_connection "${postgresql_remote_execute_args[@]}"
         info "Populating database"
-        airflow_execute_command "initdb" "db init"
+        debug_execute airflow db init
 
         airflow_create_admin_user
-
         airflow_create_pool
-
-        info "Persisting Airflow installation"
-        persist_app "$app_name" "$AIRFLOW_DATA_TO_PERSIST"
     else
-        # Restore persisted data
-        info "Restoring persisted Airflow installation"
-        restore_persisted_app "$app_name" "$AIRFLOW_DATA_TO_PERSIST"
-
-        info "Trying to connect to the database server"
-        airflow_wait_for_postgresql_connection "${postgresql_remote_execute_args[@]}"
-
         # Upgrade database
-        airflow_execute_command "upgradedb" "db upgrade"
-
-        # Change the permissions after restoring the persisted data in case we are root
-        for dir in "$AIRFLOW_DATA_DIR" "$AIRFLOW_TMP_DIR" "$AIRFLOW_LOGS_DIR"; do
-            ensure_dir_exists "$dir"
-            am_i_root && chown "$AIRFLOW_DAEMON_USER:$AIRFLOW_DAEMON_GROUP" "$dir"
-        done
+        info "Upgrading database schema"
+        debug_execute airflow db upgrade
         true # Avoid return false when I am not root
     fi
 }
 
-########################
-# Executes airflow command
-# Globals:
-#   AIRFLOW_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-airflow_execute_command() {
-    local oldCommand="${1?Missing old command}"
-    local newCommand="${2?Missing new command}"
-    local flags="${3:-}"
-
-    # The commands can contain more than one argument. Convert them to an array
-    IFS=' ' read -ra oldCommand <<<"$oldCommand"
-    IFS=' ' read -ra newCommand <<<"$newCommand"
-
-    # Execute commands depending on the version
-    command=("${oldCommand[@]}")
-    [[ "${BITNAMI_IMAGE_VERSION:0:1}" == "2" ]] && command=("${newCommand[@]}")
-
-    # Add flags if provided
-    [[ -n "$flags" ]] && IFS=' ' read -ra flags <<<"$flags" && command+=("${flags[@]}")
-
-    debug "Executing ${AIRFLOW_BIN_DIR}/airflow ${command[*]}"
-    debug_execute "${AIRFLOW_BIN_DIR}/airflow" "${command[@]}"
-}
 
 ########################
 # Generate Airflow conf file
@@ -187,7 +141,7 @@ airflow_execute_command() {
 #########################
 airflow_generate_config() {
     # Generate Airflow default files
-    airflow_execute_command "version" "version"
+    debug_execute airflow version
 
     # Setup Airflow base URL
     airflow_configure_base_url
@@ -414,28 +368,16 @@ airflow_configure_celery_executor() {
 }
 
 ########################
-# Wait until the database is accessible with the currently-known credentials
+# Wait until the database is accessible
 # Globals:
-#   *
+#   None
 # Arguments:
-#   $1 - database host
-#   $2 - database port
-#   $3 - database name
-#   $4 - database username
-#   $5 - database user password (optional)
+#   None
 # Returns:
 #   true if the database connection succeeded, false otherwise
 #########################
 airflow_wait_for_postgresql_connection() {
-    local -r db_host="${1:?missing database host}"
-    local -r db_port="${2:?missing database port}"
-    local -r db_name="${3:?missing database name}"
-    local -r db_user="${4:?missing database user}"
-    local -r db_pass="${5:-}"
-    check_postgresql_connection() {
-        echo "SELECT 1" | postgresql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
-    }
-    if ! retry_while "check_postgresql_connection"; then
+    if ! retry_while "debug_execute airflow db check"; then
         error "Could not connect to the database"
         return 1
     fi
@@ -450,7 +392,7 @@ airflow_wait_for_postgresql_connection() {
 #########################
 airflow_create_admin_user() {
     info "Creating Airflow admin user"
-    airflow_execute_command "create_user" "users create" "-r Admin -u ${AIRFLOW_USERNAME} -e ${AIRFLOW_EMAIL} -p ${AIRFLOW_PASSWORD} -f ${AIRFLOW_FIRSTNAME} -l ${AIRFLOW_LASTNAME}"
+    debug_execute airflow users create -r "Admin" -u "$AIRFLOW_USERNAME" -e "$AIRFLOW_EMAIL" -p "$AIRFLOW_PASSWORD" -f "$AIRFLOW_FIRSTNAME" -l "$AIRFLOW_LASTNAME"
 }
 
 ########################
@@ -463,7 +405,7 @@ airflow_create_admin_user() {
 airflow_create_pool() {
     if [[ -n "$AIRFLOW_POOL_NAME" ]] && [[ -n "$AIRFLOW_POOL_SIZE" ]] && [[ -n "$AIRFLOW_POOL_DESC" ]]; then
         info "Creating Airflow pool"
-        airflow_execute_command "pool" "pool" "-s ${AIRFLOW_POOL_NAME} ${AIRFLOW_POOL_SIZE} ${AIRFLOW_POOL_DESC}"
+        debug_execute airflow pool -s "$AIRFLOW_POOL_NAME" "$AIRFLOW_POOL_SIZE" "$AIRFLOW_POOL_DESC"
     fi
 }
 

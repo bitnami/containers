@@ -47,7 +47,7 @@ airflow_worker_validate() {
 #########################
 airflow_worker_initialize() {
     # Change permissions if running as root
-    for dir in "$AIRFLOW_TMP_DIR" "$AIRFLOW_LOGS_DIR" "$AIRFLOW_DATA_DIR"; do
+    for dir in "$AIRFLOW_TMP_DIR" "$AIRFLOW_LOGS_DIR"; do
         ensure_dir_exists "$dir"
         am_i_root && chown "$AIRFLOW_DAEMON_USER:$AIRFLOW_DAEMON_GROUP" "$dir"
     done
@@ -60,29 +60,13 @@ airflow_worker_initialize() {
         info "Configuration file found, loading configuration"
     fi
 
-    # Check if Airflow has already been initialized and persisted in a previous run
-    local -r app_name="airflow"
-    local -a postgresql_remote_execute_args=("$AIRFLOW_DATABASE_HOST" "$AIRFLOW_DATABASE_PORT_NUMBER" "$AIRFLOW_DATABASE_NAME" "$AIRFLOW_DATABASE_USERNAME" "$AIRFLOW_DATABASE_PASSWORD")
-    if ! is_app_initialized "$app_name"; then
-        airflow_wait_for_postgresql_connection "${postgresql_remote_execute_args[@]}"
-
-        info "Persisting Airflow installation"
-        persist_app "$app_name" "$AIRFLOW_DATA_TO_PERSIST"
-    else
-        # Check database connection
-        airflow_wait_for_postgresql_connection "${postgresql_remote_execute_args[@]}"
-
-        # Restore persisted data
-        info "Restoring persisted Airflow installation"
-        restore_persisted_app "$app_name" "$AIRFLOW_DATA_TO_PERSIST"
-
-        # Change the permissions after restoring the persisted data in case we are root
-        for dir in "$AIRFLOW_DATA_DIR" "$AIRFLOW_TMP_DIR" "$AIRFLOW_LOGS_DIR"; do
-            ensure_dir_exists "$dir"
-            am_i_root && chown "$AIRFLOW_DAEMON_USER:$AIRFLOW_DAEMON_GROUP" "$dir"
-        done
-        true # Avoid return false when I am not root
-    fi
+    info "Trying to connect to the database server"
+    airflow_wait_for_postgresql_connection
+    # Change the permissions after restoring the persisted data in case we are root
+    for dir in "$AIRFLOW_TMP_DIR" "$AIRFLOW_LOGS_DIR"; do
+        ensure_dir_exists "$dir"
+        am_i_root && chown "$AIRFLOW_DAEMON_USER:$AIRFLOW_DAEMON_GROUP" "$dir"
+    done
 
     # Wait for airflow webserver to be available
     info "Waiting for Airflow Webserser to be up"
@@ -104,7 +88,7 @@ airflow_worker_initialize() {
 #########################
 airflow_worker_generate_config() {
     # Generate Airflow default files
-    airflow_execute_command "version" "version"
+    debug_execute airflow version
 
     # Configure Airflow Hostname
     [[ -n "$AIRFLOW_HOSTNAME_CALLABLE" ]] && airflow_conf_set "core" "hostname_callable" "$AIRFLOW_HOSTNAME_CALLABLE"
