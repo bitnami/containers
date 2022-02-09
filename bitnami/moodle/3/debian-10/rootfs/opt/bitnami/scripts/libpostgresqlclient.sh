@@ -73,7 +73,7 @@ postgresql_client_initialize() {
     read -r -a database_names <<< "$(tr ',;' ' ' <<< "$POSTGRESQL_CLIENT_CREATE_DATABASE_NAMES")"
     # Wait for the database to be accessible if any action needs to be performed
     if [[ -n "$POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME" || "${#database_names[@]}" -gt 0 ]]; then
-        info "Trying to connect to the Postgresql database server"
+        info "Trying to connect to the database server"
         check_postgresql_connection() {
             echo "SELECT 1" | postgresql_remote_execute "$POSTGRESQL_CLIENT_DATABASE_HOST" "$POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER" "postgres" "$POSTGRESQL_CLIENT_POSTGRES_USER" "$POSTGRESQL_CLIENT_POSTGRES_PASSWORD"
         }

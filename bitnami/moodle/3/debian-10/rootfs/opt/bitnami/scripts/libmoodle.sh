@@ -137,8 +137,8 @@ moodle_initialize() {
         db_user="$MOODLE_DATABASE_USER"
         db_pass="$MOODLE_DATABASE_PASSWORD"
         [[ "$db_type" = "mariadb" || "$db_type" = "mysqli" ]] && moodle_wait_for_mysql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
-        [[ "$db_type" = "pgsql" ]] && moodle_wait_for_postgresql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass" 
-       
+        [[ "$db_type" = "pgsql" ]] && moodle_wait_for_postgresql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
+
         # Create Moodle install argument list, allowing to pass custom options via 'MOODLE_INSTALL_EXTRA_ARGS'
         local -a moodle_install_args=("--dbtype=${db_type}" "--dbhost=${db_host}" "--dbport=${db_port}" "--dbname=${db_name}" "--dbuser=${db_user}" "--dbpass=${db_pass}")
         local -a extra_args
@@ -151,11 +151,10 @@ moodle_initialize() {
             # Create the configuration file and populate the database
             moodle_install "${moodle_install_args[@]}"
             # Configure additional settings in the database according to user inputs
-            local -a db_execute_args=("$db_host" "$db_port" "$db_name" "$db_user" "$db_pass")
-            # Configure no-reply e-mail address for SMTP
             local db_remote_execute="mysql_remote_execute"
             [[ "$db_type" = "pgsql" ]] && db_remote_execute="postgresql_remote_execute"
-
+            local -a db_execute_args=("$db_host" "$db_port" "$db_name" "$db_user" "$db_pass")
+            # Configure no-reply e-mail address for SMTP
             echo "INSERT INTO mdl_config (name, value) VALUES ('noreplyaddress', '${MOODLE_EMAIL}')" | "$db_remote_execute" "${db_execute_args[@]}"
             # Additional Bitnami customizations
             echo "UPDATE mdl_course SET summary='Moodle powered by Bitnami' WHERE id='1'" | "$db_remote_execute" "${db_execute_args[@]}"
@@ -168,7 +167,7 @@ UPDATE mdl_config SET value='${MOODLE_SMTP_USER}' WHERE name='smtpuser';
 UPDATE mdl_config SET value='${MOODLE_SMTP_PASSWORD}' WHERE name='smtppass';
 UPDATE mdl_config SET value='${MOODLE_SMTP_PROTOCOL}' WHERE name='smtpsecure';
 EOF
-                fi
+            fi
         else
             info "An already initialized Moodle database was provided, it will not be re-initialized"
             # Create the configuration file
@@ -266,7 +265,6 @@ moodle_wait_for_mysql_connection () {
         error "Could not connect to the database"
         return 1
     fi
-
 }
 
 ########################
@@ -295,7 +293,6 @@ moodle_wait_for_postgresql_connection  () {
         error "Could not connect to the database"
         return 1
     fi
-    
 }
 
 ########################

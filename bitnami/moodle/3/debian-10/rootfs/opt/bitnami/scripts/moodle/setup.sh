@@ -19,6 +19,13 @@ elif [[ -f /opt/bitnami/scripts/mariadb-env.sh ]]; then
     . /opt/bitnami/scripts/mariadb-env.sh
 fi
 
+# Load PostgreSQL Client environment for 'postgresql_remote_execute' (after 'discourse-env.sh' so that MODULE is not set to a wrong value)
+if [[ -f /opt/bitnami/scripts/postgresql-client-env.sh ]]; then
+    . /opt/bitnami/scripts/postgresql-client-env.sh
+elif [[ -f /opt/bitnami/scripts/postgresql-env.sh ]]; then
+    . /opt/bitnami/scripts/postgresql-env.sh
+fi
+
 # Load PHP environment for cron configuration (after 'moodle-env.sh' so that MODULE is not set to a wrong value)
 . /opt/bitnami/scripts/php-env.sh
 
