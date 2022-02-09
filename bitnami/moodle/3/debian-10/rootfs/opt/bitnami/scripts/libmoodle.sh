@@ -21,6 +21,12 @@ elif [[ -f /opt/bitnami/scripts/libmariadb.sh ]]; then
     . /opt/bitnami/scripts/libmariadb.sh
 fi
 
+if [[ -f /opt/bitnami/scripts/libpostgresqlclient.sh ]]; then
+    . /opt/bitnami/scripts/libpostgresqlclient.sh
+elif [[ -f /opt/bitnami/scripts/libpostgresql.sh ]]; then
+    . /opt/bitnami/scripts/libpostgresql.sh
+fi
+
 ########################
 # Validate settings in MOODLE_* env vars
 # Globals:
@@ -76,7 +82,7 @@ moodle_validate() {
     fi
 
     # Support for MySQL and MariaDB
-    check_multi_value "MOODLE_DATABASE_TYPE" "mysqli mariadb"
+    check_multi_value "MOODLE_DATABASE_TYPE" "mysqli mariadb pgsql"
 
     # Check that the web server is properly set up
     web_server_validate || print_validation_error "Web server validation failed"
@@ -130,8 +136,9 @@ moodle_initialize() {
         db_name="$MOODLE_DATABASE_NAME"
         db_user="$MOODLE_DATABASE_USER"
         db_pass="$MOODLE_DATABASE_PASSWORD"
-        [[ "$db_type" = "mariadb" || "$db_type" = "mysqli" ]] && moodle_wait_for_mysql_db_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
-
+        [[ "$db_type" = "mariadb" || "$db_type" = "mysqli" ]] && moodle_wait_for_mysql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
+        [[ "$db_type" = "pgsql" ]] && moodle_wait_for_postgresql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass" 
+       
         # Create Moodle install argument list, allowing to pass custom options via 'MOODLE_INSTALL_EXTRA_ARGS'
         local -a moodle_install_args=("--dbtype=${db_type}" "--dbhost=${db_host}" "--dbport=${db_port}" "--dbname=${db_name}" "--dbuser=${db_user}" "--dbpass=${db_pass}")
         local -a extra_args
@@ -144,21 +151,24 @@ moodle_initialize() {
             # Create the configuration file and populate the database
             moodle_install "${moodle_install_args[@]}"
             # Configure additional settings in the database according to user inputs
-            local -a mysql_execute_args=("$db_host" "$db_port" "$db_name" "$db_user" "$db_pass")
+            local -a db_execute_args=("$db_host" "$db_port" "$db_name" "$db_user" "$db_pass")
             # Configure no-reply e-mail address for SMTP
-            echo "INSERT INTO mdl_config (name, value) VALUES ('noreplyaddress', '${MOODLE_EMAIL}')" | mysql_remote_execute "${mysql_execute_args[@]}"
+            local db_remote_execute="mysql_remote_execute"
+            [[ "$db_type" = "pgsql" ]] && db_remote_execute="postgresql_remote_execute"
+
+            echo "INSERT INTO mdl_config (name, value) VALUES ('noreplyaddress', '${MOODLE_EMAIL}')" | "$db_remote_execute" "${db_execute_args[@]}"
             # Additional Bitnami customizations
-            echo "UPDATE mdl_course SET summary='Moodle powered by Bitnami' WHERE id='1'" | mysql_remote_execute "${mysql_execute_args[@]}"
+            echo "UPDATE mdl_course SET summary='Moodle powered by Bitnami' WHERE id='1'" | "$db_remote_execute" "${db_execute_args[@]}"
             # SMTP configuration
             if ! is_empty_value "$MOODLE_SMTP_HOST"; then
                 info "Configuring SMTP credentials"
-                mysql_remote_execute "${mysql_execute_args[@]}" <<EOF
+                "$db_remote_execute" "${db_execute_args[@]}" <<EOF
 UPDATE mdl_config SET value='${MOODLE_SMTP_HOST}:${MOODLE_SMTP_PORT_NUMBER}' WHERE name='smtphosts';
 UPDATE mdl_config SET value='${MOODLE_SMTP_USER}' WHERE name='smtpuser';
 UPDATE mdl_config SET value='${MOODLE_SMTP_PASSWORD}' WHERE name='smtppass';
 UPDATE mdl_config SET value='${MOODLE_SMTP_PROTOCOL}' WHERE name='smtpsecure';
 EOF
-            fi
+                fi
         else
             info "An already initialized Moodle database was provided, it will not be re-initialized"
             # Create the configuration file
@@ -184,7 +194,8 @@ EOF
         db_name="$(moodle_conf_get "\$CFG->dbname")"
         db_user="$(moodle_conf_get "\$CFG->dbuser")"
         db_pass="$(moodle_conf_get "\$CFG->dbpass")"
-        [[ "$db_type" = "mariadb" || "$db_type" = "mysqli" ]] && moodle_wait_for_mysql_db_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
+        [[ "$db_type" = "mariadb" || "$db_type" = "mysqli" ]] && moodle_wait_for_mysql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
+        [[ "$db_type" = "pgsql" ]] && moodle_wait_for_postgresql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
 
         # Perform Moodle database schema upgrade
         info "Running database upgrade"
@@ -242,7 +253,7 @@ moodle_conf_get() {
 # Returns:
 #   true if the database connection succeeded, false otherwise
 #########################
-moodle_wait_for_mysql_db_connection() {
+moodle_wait_for_mysql_connection () {
     local -r db_host="${1:?missing database host}"
     local -r db_port="${2:?missing database port}"
     local -r db_name="${3:?missing database name}"
@@ -255,6 +266,36 @@ moodle_wait_for_mysql_db_connection() {
         error "Could not connect to the database"
         return 1
     fi
+
+}
+
+########################
+# Wait until a PostgreSQL database is accessible with the currently-known credentials
+# Globals:
+#   *
+# Arguments:
+#   $1 - database host
+#   $2 - database port
+#   $3 - database name
+#   $4 - database username
+#   $5 - database user password (optional)
+# Returns:
+#   true if the database connection succeeded, false otherwise
+#########################
+moodle_wait_for_postgresql_connection  () {
+    local -r db_host="${1:?missing database host}"
+    local -r db_port="${2:?missing database port}"
+    local -r db_name="${3:?missing database name}"
+    local -r db_user="${4:?missing database user}"
+    local -r db_pass="${5:-}"
+    check_postgresql_connection() {
+        echo "SELECT 1" | postgresql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
+    }
+    if ! retry_while "check_postgresql_connection"; then
+        error "Could not connect to the database"
+        return 1
+    fi
+    
 }
 
 ########################

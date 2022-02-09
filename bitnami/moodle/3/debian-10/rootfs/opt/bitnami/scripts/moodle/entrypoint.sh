@@ -22,6 +22,7 @@ if [[ "$1" = "/opt/bitnami/scripts/moodle/run.sh" || "$1" = "/opt/bitnami/script
     /opt/bitnami/scripts/"$(web_server_type)"/setup.sh
     /opt/bitnami/scripts/php/setup.sh
     /opt/bitnami/scripts/mysql-client/setup.sh
+    /opt/bitnami/scripts/postgresql-client/setup.sh
     /opt/bitnami/scripts/moodle/setup.sh
     /post-init.sh
     info "** Moodle setup finished! **"
