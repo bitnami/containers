@@ -12,7 +12,7 @@ RUN install_packages acl ca-certificates curl gzip jq libbz2-1.0 libc6 libcom-er
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-12" --checksum c081f7f9663d4d64e7f26d6e6a77b3860ee1f39c309bd564f801c39192042d2f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "12.22.10-0" --checksum 60d25c9c1c9737e94ae5bc670ed0a9484647653f1f63fefe59ad647ca7af533a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb-client" "4.4.12-3" --checksum 3656c5d61c92e45d2b21c2c502cc28dcf09ed6d8fbd463caee2d8137ab6565db
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "parse" "4.10.4-2" --checksum ff53c89463ba10bef69b848f3a171a4ace043abbb00f95e06dd176704bbb93ec
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "parse" "4.10.4-30" --checksum 7221f0606f0cf25c9e830b27b0534924750a886c8d1d3699f2a35021d02138d8
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -21,7 +21,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/parse/postunpack.sh
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="4.10.4-debian-10-r115" \
+    BITNAMI_IMAGE_VERSION="4.10.4-debian-10-r116" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/mongodb-client/bin:/opt/bitnami/parse/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 1337 3000
