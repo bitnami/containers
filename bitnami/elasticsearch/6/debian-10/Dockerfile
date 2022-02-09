@@ -16,7 +16,7 @@ RUN install_packages acl ca-certificates curl gzip hostname libc6 procps tar zli
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.19.1-0" --checksum fc3246374edb10a2d65df05c27187396ade8f91cb86e38b071704dcadde13802
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.14-3" --checksum 1f4876cb7c5709c5dc905f4325b1136b3ab73f71e3e16faa3c877ef84e78e776
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "elasticsearch" "6.8.23-0" --checksum 9e89db303df7fedfc339b7b70bb7b67e27344dde0487a1556f71fec0ef5eafa9
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "elasticsearch" "6.8.23-30" --checksum ad142131b4c994a80e3ba633890d5d88dcf59c310cd0b729b8687219c45f435f
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -25,7 +25,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/elasticsearch/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="6.8.23-debian-10-r22" \
+    BITNAMI_IMAGE_VERSION="6.8.23-debian-10-r23" \
     JAVA_HOME="/opt/bitnami/java" \
     LD_LIBRARY_PATH="/opt/bitnami/elasticsearch/jdk/lib:/opt/bitnami/elasticsearch/jdk/lib/server:$LD_LIBRARY_PATH"
 
