@@ -8,10 +8,10 @@
     },
     "jruby": {
         "arch": "amd64",
-        "digest": "a4b0d26fe906a424f0db799c9e8aed9f5b76d3b3d6dccf087c6b5b1838b5120b",
+        "digest": "8969b2b828c542d5c9a30305f8eed4c64c6670fea540bff78d9f5361e7c63e3a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "9.3.3-0-2"
+        "version": "9.3.3-0-3"
     },
     "node": {
         "arch": "amd64",
@@ -22,9 +22,9 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "c081f7f9663d4d64e7f26d6e6a77b3860ee1f39c309bd564f801c39192042d2f",
+        "digest": "5aa3fd465e5e0d6fe86e984121ffb2c02a34b44a8c9cd9cce9b18d3181534b68",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.8.12-12"
+        "version": "3.8.12-30"
     }
 }
