@@ -225,7 +225,7 @@ Available environment variables:
 
 ##### Use an existing database
 
-- `MOODLE_DATABASE_TYPE`: Database type. Valid values: *mariadb*, *mysqli*. Default: **mariadb**
+- `MOODLE_DATABASE_TYPE`: Database type. Valid values: *mariadb*, *mysqli*, *pgsql*. Default: **mariadb**
 - `MOODLE_DATABASE_HOST`: Hostname for database server. Default: **mariadb**
 - `MOODLE_DATABASE_PORT_NUMBER`: Port used by database server. Default: **3306**
 - `MOODLE_DATABASE_NAME`: Database name that Moodle will use to connect with the database. Default: **bitnami_moodle**
@@ -251,6 +251,19 @@ Available environment variables:
 - `MYSQL_CLIENT_SSL_CA_FILE`: Path to the SSL CA file for the new database. No defaults
 - `MYSQL_CLIENT_SSL_CERT_FILE`: Path to the SSL CA file for the new database. No defaults
 - `MYSQL_CLIENT_SSL_KEY_FILE`: Path to the SSL CA file for the new database. No defaults
+- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+
+##### Create a database for Moodle using postgresql-client
+
+- `POSTGRESQL_CLIENT_DATABASE_HOST`: Hostname for the PostgreSQL server. Default: **postgresql**
+- `POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the PostgreSQL server. Default: **5432**
+- `POSTGRESQL_CLIENT_POSTGRES_USER`: Database admin user. Default: **root**
+- `POSTGRESQL_CLIENT_POSTGRES_PASSWORD`: Database password for the database admin user. No defaults.
+- `POSTGRESQL_CLIENT_CREATE_DATABASE_NAMES`: List of new databases to be created by the postgresql-client module. No defaults.
+- `POSTGRESQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the postgresql-client module. No defaults.
+- `POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `POSTGRESQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
+- `POSTGRESQL_CLIENT_CREATE_DATABASE_EXTENSIONS`: PostgreSQL extensions to enable in the specified database during the first initialization. No defaults.
+- `POSTGRESQL_CLIENT_EXECUTE_SQL`: SQL code to execute in the PostgreSQL server. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
 ##### SMTP Configuration
