@@ -1,6 +1,6 @@
 {
     "kube-rbac-proxy": {
-        "digest": "9fae3c8ee1921d36c1566646fd65558c0c2105b07e29742c18ead4161ac6eb43",
+        "digest": "329c8439aa6352f1a1be6c6acfcd1f2eb30aa768344d4629902c6352e5d599ad",
         "type": "BLACKSMITH",
         "version": "0.11.0"
     }
