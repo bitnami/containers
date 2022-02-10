@@ -28,6 +28,8 @@ moodle_env_vars=(
     MOODLE_SITE_NAME
     MOODLE_HOST
     MOODLE_CRON_MINUTES
+    MOODLE_REVERSEPROXY
+    MOODLE_SSLPROXY
     MOODLE_USERNAME
     MOODLE_PASSWORD
     MOODLE_DATABASE_MIN_VERSION
@@ -82,6 +84,8 @@ export MOODLE_INSTALL_EXTRA_ARGS="${MOODLE_INSTALL_EXTRA_ARGS:-}" # only used du
 export MOODLE_SITE_NAME="${MOODLE_SITE_NAME:-New Site}" # only used during the first initialization
 export MOODLE_HOST="${MOODLE_HOST:-}" # only used during the first initialization
 export MOODLE_CRON_MINUTES="${MOODLE_CRON_MINUTES:-1}"
+export MOODLE_REVERSEPROXY="${MOODLE_REVERSEPROXY:-no}" # only used during the first initialization
+export MOODLE_SSLPROXY="${MOODLE_SSLPROXY:-no}" # only used during the first initialization
 
 # Moodle credentials
 export MOODLE_USERNAME="${MOODLE_USERNAME:-user}" # only used during the first initialization
