@@ -13,6 +13,7 @@ set -o pipefail
 # Load libraries
 . /opt/bitnami/scripts/libbitnami.sh
 . /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libfs.sh
 
 print_welcome_page
 
