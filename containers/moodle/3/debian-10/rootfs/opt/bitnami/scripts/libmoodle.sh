@@ -50,16 +50,16 @@ moodle_validate() {
             print_validation_error "The allowed values for ${1} are: ${2}"
         fi
     }
+    check_yes_no_value() {
+        if ! is_yes_no_value "${!1}" && ! is_true_false_value "${!1}"; then
+            print_validation_error "The allowed values for ${1} are: yes no"
+        fi
+    }
     check_valid_port() {
         local port_var="${1:?missing port variable}"
         local err
         if ! err="$(validate_port "${!port_var}")"; then
             print_validation_error "An invalid port was specified in the environment variable ${port_var}: ${err}."
-        fi
-    }
-    check_yes_no_value() {
-        if ! is_yes_no_value "${!1}" && ! is_true_false_value "${!1}"; then
-            print_validation_error "The allowed values for ${1} are: yes no"
         fi
     }
 
@@ -92,7 +92,7 @@ moodle_validate() {
     # Check that the web server is properly set up
     web_server_validate || print_validation_error "Web server validation failed"
 
-    # Check support for reverseproxy and sslproxy feature
+    # Check yes/no env. variables
     check_yes_no_value "MOODLE_REVERSEPROXY"
     check_yes_no_value "MOODLE_SSLPROXY"
 
@@ -188,7 +188,6 @@ EOF
         fi
         # Change wwwroot configuration so the Moodle site can be accessible from anywhere
         moodle_configure_wwwroot
-
         # Turn on Moodle's reverseproxy (also sslproxy if using ssl) so we can use the reverse proxy
         moodle_configure_reverseproxy
 
@@ -386,7 +385,6 @@ moodle_configure_wwwroot() {
     local host="${MOODLE_HOST:+"'${MOODLE_HOST}'"}"
     # Default value if the hostname isn't provided
     host="${host:-"\$_SERVER['HTTP_HOST']"}"
-
     # sed replacement notes:
     # - The ampersand ('&') is escaped due to sed replacing any non-escaped ampersand characters with the matched string
     # - For the replacement text to be multi-line, an \ needs to be specified to escape the newline character
@@ -401,8 +399,16 @@ if (isset(\$_SERVER['HTTPS']) \&\& \$_SERVER['HTTPS'] == 'on') {\\
     replace_in_file "$MOODLE_CONF_FILE" "\\\$CFG->wwwroot\s*=.*" "$conf_to_replace"
 }
 
+########################
+# Configure Moodle reverse proxy
+# Globals:
+#   *
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
 moodle_configure_reverseproxy() {
-
     # Checking the reverseproxy setting values
     is_boolean_yes "$MOODLE_REVERSEPROXY" && echo "\$CFG->reverseproxy = true;" >> "$MOODLE_CONF_FILE"
     # Checking the sslproxy setting values

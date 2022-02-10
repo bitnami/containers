@@ -39,7 +39,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.11.5`, `3.11.5-debian-10-r26`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.11.5-debian-10-r26/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.11.5`, `3.11.5-debian-10-r27`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.11.5-debian-10-r27/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/moodle GitHub repo](https://github.com/bitnami/bitnami-docker-moodle).
 
@@ -289,13 +289,13 @@ To configure Moodle&trade; to send email using SMTP you can set the following en
 - `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
 - `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
 
-##### Example
+##### Examples
 
 This would be an example of SMTP configuration using a Gmail account:
 
- * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-moodle/blob/master/docker-compose.yml) file present in this repository:
+* Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-moodle/blob/master/docker-compose.yml) file present in this repository:
 
-```yaml
+  ```yaml
   moodle:
     ...
     environment:
@@ -308,8 +308,9 @@ This would be an example of SMTP configuration using a Gmail account:
       - MOODLE_SMTP_PASSWORD=your_password
       - MOODLE_SMTP_PROTOCOL=tls
   ...
-```
- * For manual execution:
+  ```
+
+* For manual execution:
 
   ```console
   $ docker run -d --name moodle -p 80:8080 -p 443:8443 \
@@ -327,9 +328,9 @@ This would be an example of SMTP configuration using a Gmail account:
 
 This would be an instance ready to be put behind the NGINX load balancer.
 
- * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-moodle/blob/master/docker-compose.yml) file present in this repository:
+* Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-moodle/blob/master/docker-compose.yml) file present in this repository:
 
-```yaml
+  ```yaml
   moodle:
     ...
     environment:
@@ -337,8 +338,9 @@ This would be an instance ready to be put behind the NGINX load balancer.
       - MOODLE_REVERSEPROXY=true
       - MOODLE_SSLPROXY=true
   ...
-```
- * For manual execution:
+  ```
+
+* For manual execution:
 
   ```console
   $ docker run -d --name moodle -p 80:8080 -p 443:8443 \
