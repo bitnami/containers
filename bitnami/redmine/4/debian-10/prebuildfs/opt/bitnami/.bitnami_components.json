@@ -22,10 +22,10 @@
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "14eda4cc9b632928555461c32babf4474eb41884b7a4fcc04bac27e23eb7887a",
+        "digest": "8127e3cbaac59311d15b7808e193018489cf8c6291bfac0d04a496d15dbdfe0d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "11.14.0-4"
+        "version": "11.15.0-0"
     },
     "redmine": {
         "arch": "amd64",
