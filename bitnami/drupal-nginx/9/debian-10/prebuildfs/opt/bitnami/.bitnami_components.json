@@ -15,10 +15,10 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "727834a55587746f90b159966c9abf2ce31a6effbe83d8c38ee6250641c9a22a",
+        "digest": "d60d87b07b9bddd4762dbbaa3e6096ccc66b854fd01a63c142c2fe17a6b67c64",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.3.32-1"
+        "version": "10.3.32-30"
     },
     "nginx": {
         "arch": "amd64",
