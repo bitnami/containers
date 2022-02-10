@@ -220,8 +220,10 @@ Available environment variables:
 - `MOODLE_PASSWORD`: Moodle application password. Default: **bitnami**
 - `MOODLE_EMAIL`: Moodle application email. Default: **user@example.com**
 - `MOODLE_SITE_NAME`: Moodle site name. Default: **New Site**
-- `MOODLE_SITE_NAME`: Moodle www root. No defaults.
 - `MOODLE_SKIP_BOOTSTRAP`: Do not initialize the Moodle database for a new deployment. This is necessary in case you use a database that already has Moodle data. Default: **no**
+- `MOODLE_HOST`: Allows you to configure Moodle's wwwroot feature. Ex: example.com. By default it is a PHP superglobal variable. Default: **$_SERVER['HTTP_HOST']**
+- `MOODLE_REVERSEPROXY`: Allows you to activate the reverseproxy feature of Moodle. Default: **no**
+- `MOODLE_SSLPROXY`: Allows you to activate the sslproxy feature of Moodle. Default: **no**
 
 ##### Use an existing database
 
@@ -318,6 +320,31 @@ This would be an example of SMTP configuration using a Gmail account:
     --env MOODLE_SMTP_USER=your_email@gmail.com \
     --env MOODLE_SMTP_PASSWORD=your_password \
     --env MOODLE_SMTP_PROTOCOL=tls \
+    --network moodle-tier \
+    --volume /path/to/moodle-persistence:/bitnami \
+    bitnami/moodle:latest
+  ```
+
+This would be an instance ready to be put behind the NGINX load balancer.
+
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-moodle/blob/master/docker-compose.yml) file present in this repository:
+
+```yaml
+  moodle:
+    ...
+    environment:
+      - MOODLE_HOST=example.com
+      - MOODLE_REVERSEPROXY=true
+      - MOODLE_SSLPROXY=true
+  ...
+```
+ * For manual execution:
+
+  ```console
+  $ docker run -d --name moodle -p 80:8080 -p 443:8443 \
+    --env MOODLE_HOST=example.com \
+    --env MOODLE_REVERSEPROXY=true \
+    --env MOODLE_SSLPROXY=true \
     --network moodle-tier \
     --volume /path/to/moodle-persistence:/bitnami \
     bitnami/moodle:latest
