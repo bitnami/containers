@@ -1,17 +1,17 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980",
+        "digest": "ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-3"
+        "version": "1.14.0-4"
     },
     "laravel": {
         "arch": "amd64",
-        "digest": "3226c00be030504d2b6f2bfc6322e99deb57fb4f526e2bf1952ddd8f506f18ce",
+        "digest": "f35d4873b98b9afd35d038b24b97d02cde00e2393e169a7289f60af6d34ab2af",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.6.11-0"
+        "version": "8.6.11-1"
     },
     "node": {
         "arch": "amd64",
@@ -22,23 +22,23 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "7a7bef14775f5f7a0c662d902f671f7dffad3a170ef04655e651bd3892db9d3b",
+        "digest": "8cb53977e066b6cc16931de1224738132f3f5969f5ee73cc15934c49b057e039",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.1.2-12"
+        "version": "8.1.2-13"
     },
     "python": {
         "arch": "amd64",
-        "digest": "5aa3fd465e5e0d6fe86e984121ffb2c02a34b44a8c9cd9cce9b18d3181534b68",
+        "digest": "48db897c12810ff5f17a323e9b4a0cc2812e673d66f94feb9d90e3abb28e664b",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.8.12-30"
+        "version": "3.8.12-31"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "845ff207415b5730cadd45aa3c757ca45a5c9e73bc54c24aa481ddca24eec35d",
+        "digest": "0ef01592ac0331fb1b486122aac3434cd103c3488652a871951a533037d277f8",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-6"
+        "version": "1.0.1-7"
     }
 }
