@@ -9,16 +9,16 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/memcached-exporter-0.9.0-30-linux-amd64-debian-10.tar.gz && \
-    echo "e76068d80da1d9380f0730e8f838ebddfba93b6999c52b9fd7f81976ee06ca56  /tmp/bitnami/pkg/cache/memcached-exporter-0.9.0-30-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/memcached-exporter-0.9.0-30-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/memcached-exporter-0.9.0-30-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/memcached-exporter-0.9.0-31-linux-amd64-debian-10.tar.gz && \
+    echo "3842b0d2dcfc658bd62ce68f2038ebf0ed644b626a3ba8569f141dd197fcbf8a  /tmp/bitnami/pkg/cache/memcached-exporter-0.9.0-31-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/memcached-exporter-0.9.0-31-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/memcached-exporter-0.9.0-31-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="memcached-exporter" \
-    BITNAMI_IMAGE_VERSION="0.9.0-debian-10-r297" \
+    BITNAMI_IMAGE_VERSION="0.9.0-debian-10-r298" \
     PATH="/opt/bitnami/memcached-exporter/bin:$PATH"
 
 EXPOSE 9150
