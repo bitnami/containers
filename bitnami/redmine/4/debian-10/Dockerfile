@@ -9,13 +9,13 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl ghostscript gsfonts gzip imagemagick libaudit1 libbsd0 libc6 libcap-ng0 libcom-err2 libcurl4 libedit2 libffi6 libgcc1 libgcrypt20 libgmp-dev libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjemalloc2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmariadb3 libncurses6 libnettle6 libnghttp2-14 libp11-kit0 libpam0g libpq5 libpsl5 libreadline-dev libreadline7 librtmp1 libsasl2-2 libssh2-1 libssl-dev libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxml2-dev libxslt1-dev libxslt1.1 procps sqlite3 tar zlib1g zlib1g-dev
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.19.1-0" --checksum fc3246374edb10a2d65df05c27187396ade8f91cb86e38b071704dcadde13802
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "2.6.9-5" --checksum 6dc3a30ecaa164f3e71beaafecce4e3f32c2e104a0323bc20310b64bab2c1c43
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.19.1-1" --checksum 1863ee94778156c1cb56e24f07083d2e7f00cc1ba04d697c5d5ceb10965a0ee8
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "2.6.9-6" --checksum 3f2f379b4f03398186ff726649ebb043821fb5c70673edb4b6b902bf8a8d4baf
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "11.15.0-0" --checksum 8127e3cbaac59311d15b7808e193018489cf8c6291bfac0d04a496d15dbdfe0d
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.4.22-30" --checksum 3062fed4c28d61e5e8c33fe10e6b4de573893dc663ff8e929f81e9b7e26932aa
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.35.1-0" --checksum 2566d89a20e9794698ad0868e8ea0b73cf27343d552c00c5278379c47aa62d29
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redmine" "4.2.3-3" --checksum 86cf34defd685fe04ad767567bd4a09cd92db91991af1e30ddfe19eaa5ea7e3a
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.4.22-31" --checksum beb1168be90630c7403f15631ef31c7a6816746e335ada02c8a34c899c96218c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.35.1-1" --checksum d6e13f2b43164f885489658fbd8b95c9a006064d3389093712b179315dbf265d
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redmine" "4.2.3-4" --checksum 5b82e6cc5222f21051f598f90af6314530a833b8d7af1611f1588baa79dffa05
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-4" --checksum ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -24,7 +24,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/redmine/postunpack.sh
 ENV BITNAMI_APP_NAME="redmine" \
-    BITNAMI_IMAGE_VERSION="4.2.3-debian-10-r115" \
+    BITNAMI_IMAGE_VERSION="4.2.3-debian-10-r116" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:$PATH"
 
 EXPOSE 3000
