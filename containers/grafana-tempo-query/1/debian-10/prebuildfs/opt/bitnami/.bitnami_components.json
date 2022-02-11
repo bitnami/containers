@@ -1,16 +1,16 @@
 {
     "grafana-tempo-query": {
         "arch": "amd64",
-        "digest": "76ee8489deb6a39ef6e5339ac525b941c0f06176555d3b6a60147e3d137a84d3",
+        "digest": "e43c76aa9f319f8edd88396845a247ac4b7e084fd04f0205a20227ccb26a6b0e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.3.1-0"
+        "version": "1.3.1-1"
     },
     "jaeger-query": {
         "arch": "amd64",
-        "digest": "8dae7a7eb06ad1f756164d51cb81d662b2da247b6aae93ad08c46415466f7f99",
+        "digest": "b918a6fad0b962a5c490e4d0863c6b4f3b44418e5279d271bb510e390b275fb9",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.31.0-0"
+        "version": "1.31.0-1"
     }
 }
