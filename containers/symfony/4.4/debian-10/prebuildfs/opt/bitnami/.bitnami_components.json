@@ -1,30 +1,30 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980",
+        "digest": "ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-3"
+        "version": "1.14.0-4"
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "d60d87b07b9bddd4762dbbaa3e6096ccc66b854fd01a63c142c2fe17a6b67c64",
+        "digest": "4489feca3a65fbd733774d193b02914187451c6edf27855ebc5756e45a9f299e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.3.32-30"
+        "version": "10.3.32-31"
     },
     "php": {
         "arch": "amd64",
-        "digest": "07055f9b5405a626990aaf1573ef1340664e302b3730949bcbb7c83712338074",
+        "digest": "6058fe96e8d9e8c40156a0a054318ec21ed9992bd7865f72e641e18dff5d26ac",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.27-10"
+        "version": "7.4.27-11"
     },
     "symfony": {
         "arch": "amd64",
-        "digest": "8e88afa3dba3b580b5dec30f6e2e66b297d7dd89ab64f40a6a9b732469f0b3d7",
+        "digest": "9d374835d40ad356ec803894e507f0b0813dacdb66add1f83865d08d78684ff5",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.4.37-0"
+        "version": "4.4.37-1"
     }
 }
