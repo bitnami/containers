@@ -9,11 +9,11 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq libbz2-1.0 libc6 libcom-err2 libcurl4 libffi6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libncursesw6 libnettle6 libnghttp2-14 libp11-kit0 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-30" --checksum 5aa3fd465e5e0d6fe86e984121ffb2c02a34b44a8c9cd9cce9b18d3181534b68
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-31" --checksum 48db897c12810ff5f17a323e9b4a0cc2812e673d66f94feb9d90e3abb28e664b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "12.22.10-0" --checksum 60d25c9c1c9737e94ae5bc670ed0a9484647653f1f63fefe59ad647ca7af533a
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb-client" "4.4.12-3" --checksum 3656c5d61c92e45d2b21c2c502cc28dcf09ed6d8fbd463caee2d8137ab6565db
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "parse" "4.10.4-30" --checksum 7221f0606f0cf25c9e830b27b0534924750a886c8d1d3699f2a35021d02138d8
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb-client" "4.4.12-4" --checksum 93f7064900a0046c4c727cf12d814d0bdbc8c2b0adf7029c84c428e35622f472
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "parse" "4.10.4-31" --checksum 8be4b2749fe3830967c8403497f548ee99e9c375cac3db5661ccf0d22e2e100d
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-4" --checksum ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -21,7 +21,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/parse/postunpack.sh
 ENV BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="4.10.4-debian-10-r117" \
+    BITNAMI_IMAGE_VERSION="4.10.4-debian-10-r118" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/mongodb-client/bin:/opt/bitnami/parse/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 1337 3000
