@@ -15,10 +15,10 @@
     },
     "qatengine": {
         "arch": "amd64",
-        "digest": "836d03c752fb56154bc354af34cc29d49bdeaf178fe76a4f2c6b306bc117fef1",
+        "digest": "b22557e65a19857d481a536e8e98c26bdb89f1a01beb79781bbc0d6332fe6044",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.6.10-4"
+        "version": "0.6.11-2"
     },
     "render-template": {
         "arch": "amd64",
