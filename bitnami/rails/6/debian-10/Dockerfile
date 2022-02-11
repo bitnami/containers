@@ -8,14 +8,14 @@ ENV OS_ARCH="amd64" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl ghostscript gzip imagemagick libaudit1 libbz2-1.0 libc6 libcap-ng0 libcom-err2 libcurl4 libffi6 libgcc1 libgcrypt20 libgmp-dev libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjemalloc2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmariadb3 libncurses6 libncursesw6 libnettle6 libnghttp2-14 libp11-kit0 libpam0g libpq5 libpsl5 libreadline-dev libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl-dev libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libxml2 libxml2-dev libxslt1-dev procps sqlite3 sudo tar zlib1g zlib1g-dev
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-30" --checksum 5aa3fd465e5e0d6fe86e984121ffb2c02a34b44a8c9cd9cce9b18d3181534b68
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "2.6.9-5" --checksum 6dc3a30ecaa164f3e71beaafecce4e3f32c2e104a0323bc20310b64bab2c1c43
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-31" --checksum 48db897c12810ff5f17a323e9b4a0cc2812e673d66f94feb9d90e3abb28e664b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "2.6.9-6" --checksum 3f2f379b4f03398186ff726649ebb043821fb5c70673edb4b6b902bf8a8d4baf
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.19.0-0" --checksum 556a98f936b3c23e05bd6c23cd0cec135238b239b329161580544697bc332053
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.32-30" --checksum d60d87b07b9bddd4762dbbaa3e6096ccc66b854fd01a63c142c2fe17a6b67c64
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.35.1-0" --checksum 2566d89a20e9794698ad0868e8ea0b73cf27343d552c00c5278379c47aa62d29
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-6" --checksum 845ff207415b5730cadd45aa3c757ca45a5c9e73bc54c24aa481ddca24eec35d
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rails" "6.1.4-4-4" --checksum 10bbfb40c77734cd9db5511aead7bd64f053f42292bb5313089f538ba9e2aba6
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.32-31" --checksum 4489feca3a65fbd733774d193b02914187451c6edf27855ebc5756e45a9f299e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.35.1-1" --checksum d6e13f2b43164f885489658fbd8b95c9a006064d3389093712b179315dbf265d
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-7" --checksum 0ef01592ac0331fb1b486122aac3434cd103c3488652a871951a533037d277f8
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rails" "6.1.4-4-5" --checksum 51cde726da34332e07cb691dae1fb73ef507c931350cd2af69627f8f72635a7b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-4" --checksum ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/bitnami-user.sh
@@ -23,7 +23,7 @@ RUN /build/bitnami-user.sh
 COPY rootfs /
 RUN /opt/bitnami/scripts/rails/postunpack.sh
 ENV BITNAMI_APP_NAME="rails" \
-    BITNAMI_IMAGE_VERSION="6.1.4-4-debian-10-r37" \
+    BITNAMI_IMAGE_VERSION="6.1.4-4-debian-10-r38" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/ruby/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 3000
