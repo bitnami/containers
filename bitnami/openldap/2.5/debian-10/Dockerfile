@@ -9,8 +9,8 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 libltdl7 liblz4-1 libnss3-tools libsasl2-2 libsnappy1v5 libssl1.1 libstdc++6 libwiredtiger0 libwrap0 libzstd1 mdbtools procps psmisc tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "openldap" "2.5.11-1" --checksum 66be77271712b1a1b81d104c7dc530efe8f2988ef3300647cf7357d0ef5e0560
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "openldap" "2.5.11-2" --checksum 16a14a5f2ef4ca9af19e32a41a04c7b488a232f7f76fcc5225dc85c40b02359c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-4" --checksum ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -18,7 +18,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/openldap/postunpack.sh
 ENV BITNAMI_APP_NAME="openldap" \
-    BITNAMI_IMAGE_VERSION="2.5.11-debian-10-r20" \
+    BITNAMI_IMAGE_VERSION="2.5.11-debian-10-r21" \
     PATH="/opt/bitnami/openldap/bin:/opt/bitnami/openldap/sbin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 1389 1636
