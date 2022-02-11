@@ -1,16 +1,16 @@
 {
     "kong-ingress-controller": {
         "arch": "amd64",
-        "digest": "89e8ff3a39b43819f007477780029cd2099cf873c311d861a3d18cd4c385e551",
+        "digest": "81923942e6e9520fdbffdc1d09c3e6792321a17aeca57215331834dc67862be4",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.2.0-0"
+        "version": "2.2.0-1"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "845ff207415b5730cadd45aa3c757ca45a5c9e73bc54c24aa481ddca24eec35d",
+        "digest": "0ef01592ac0331fb1b486122aac3434cd103c3488652a871951a533037d277f8",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-6"
+        "version": "1.0.1-7"
     }
 }
