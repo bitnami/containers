@@ -1,30 +1,30 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980",
+        "digest": "ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-3"
+        "version": "1.14.0-4"
     },
     "nginx-intel": {
         "arch": "amd64",
-        "digest": "8d69c20cfd76565726e64acd0471840dba0a39d020a104e82d744b7864c6f79b",
+        "digest": "26c48cc07a81601d0d97a96ddde6d22c51b8a07063e29fa158b39c0510541d1c",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.4.7-5"
+        "version": "0.4.7-6"
     },
     "qatengine": {
         "arch": "amd64",
-        "digest": "0781383fe77dead1d8801765eecbfa7ec4ad91c03c2812499b304d992c38a21d",
+        "digest": "836d03c752fb56154bc354af34cc29d49bdeaf178fe76a4f2c6b306bc117fef1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.6.10-3"
+        "version": "0.6.10-4"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "81b0642a6d8e9d952a0f6540f2d7481a99b9a12dd42bcb5906ba8014ca80f326",
+        "digest": "ed811d10882450d4755b893d5e034a0dd912cdb4f261dd332ddf6363411cc0ba",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-6"
+        "version": "1.0.1-7"
     }
 }
