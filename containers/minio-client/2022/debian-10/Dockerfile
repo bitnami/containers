@@ -9,8 +9,8 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio-client" "2022.2.7-0" --checksum 68be651c55b00e999540258fe2990c4a438f25c944580a4cbd57eebaf8d7d673
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio-client" "2022.2.7-1" --checksum 3539bf6f2b66e3bddc78448b88785f91089720f0640d88a708b50461eacba926
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-4" --checksum ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -18,7 +18,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/minio-client/postunpack.sh
 ENV BITNAMI_APP_NAME="minio-client" \
-    BITNAMI_IMAGE_VERSION="2022.2.7-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="2022.2.7-debian-10-r4" \
     PATH="/opt/bitnami/minio-client/bin:/opt/bitnami/common/bin:$PATH"
 
 WORKDIR /opt/bitnami/minio-client
