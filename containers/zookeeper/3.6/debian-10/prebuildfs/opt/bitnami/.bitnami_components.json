@@ -1,30 +1,30 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980",
+        "digest": "ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-3"
+        "version": "1.14.0-4"
     },
     "java": {
         "arch": "amd64",
-        "digest": "1f4876cb7c5709c5dc905f4325b1136b3ab73f71e3e16faa3c877ef84e78e776",
+        "digest": "6dbd1da27fbf2f1a92fcf8e58bf873736aa65428cdaff26708ec7506e03cc8e7",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "11.0.14-3"
+        "version": "11.0.14-4"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "845ff207415b5730cadd45aa3c757ca45a5c9e73bc54c24aa481ddca24eec35d",
+        "digest": "0ef01592ac0331fb1b486122aac3434cd103c3488652a871951a533037d277f8",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-6"
+        "version": "1.0.1-7"
     },
     "zookeeper": {
         "arch": "amd64",
-        "digest": "1cc5ab0afd6815e6589164668b77c99d3041d76727cf0d42d639b409aaae91a6",
+        "digest": "29af9c5a1303446ac66be70f183cedf03066b13979991c88f8a86ccb87d28cca",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.6.3-8"
+        "version": "3.6.3-9"
     }
 }
