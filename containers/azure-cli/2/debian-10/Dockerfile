@@ -9,21 +9,21 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libbz2-1.0 libc6 libffi6 libgcc1 liblzma5 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libtinfo6 procps tar wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/python-3.7.12-30-linux-amd64-debian-10.tar.gz && \
-    echo "d795bb85ecfe96c314eac957d2fc9a97fc9a2d4a88bd0939411bdcc47a967c94  /tmp/bitnami/pkg/cache/python-3.7.12-30-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/python-3.7.12-30-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/python-3.7.12-30-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/azure-cli-2.33.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "b477a40e18f81a3facf5074da260192771ffd59439e76b97382270b0af4d53a0  /tmp/bitnami/pkg/cache/azure-cli-2.33.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/azure-cli-2.33.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/azure-cli-2.33.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/python-3.7.12-31-linux-amd64-debian-10.tar.gz && \
+    echo "09d527409470507c89fca4f764a2ba54fdc9f27879c61e5c77d5df943d4e51ba  /tmp/bitnami/pkg/cache/python-3.7.12-31-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/python-3.7.12-31-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/python-3.7.12-31-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/azure-cli-2.33.0-1-linux-amd64-debian-10.tar.gz && \
+    echo "efbd2e28e80a7d7ce9917ea786c5f34819de9e794b69b6966161909f984ce8bd  /tmp/bitnami/pkg/cache/azure-cli-2.33.0-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/azure-cli-2.33.0-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/azure-cli-2.33.0-1-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /.azure /.azcopy && chmod g+rwX /.azure /.azcopy /bin
 
 ENV BITNAMI_APP_NAME="azure-cli" \
-    BITNAMI_IMAGE_VERSION="2.33.0-debian-10-r2" \
+    BITNAMI_IMAGE_VERSION="2.33.0-debian-10-r3" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/azure-cli/bin:/opt/bitnami/azure-cli/venv/bin:$PATH"
 
 USER 1001
