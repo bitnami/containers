@@ -1,44 +1,44 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "1fdcfb619d0dd3b94dbe770e931f01ebedb2f968b07353226d89ce6452953593",
+        "digest": "4705387b2f4ef926d0bde06738df29db4abd61583cedc83d238b8b7e10e3f6b8",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.52-3"
+        "version": "2.4.52-4"
     },
     "dokuwiki": {
         "arch": "amd64",
-        "digest": "b5277e2d49bf6dc886306302b7ae73e1b31f123e5ad2959aae6f0a084ac1975c",
+        "digest": "adb87cd7d0c120164ac8f9db39863505de356ee2177875eb08995d9547a7216e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "20200729.0.0-6"
+        "version": "20200729.0.0-7"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980",
+        "digest": "ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-3"
+        "version": "1.14.0-4"
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "ccfc41ab4067ffd79421713ca7e16b6bfdc7fc73183853cf363c8de9d842e66b",
+        "digest": "bff2748eb1fb7b9ebcd40a5b660985e17cdccecb0acda003a453d84de99c61bc",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.27-5"
+        "version": "7.4.27-6"
     },
     "php": {
         "arch": "amd64",
-        "digest": "07055f9b5405a626990aaf1573ef1340664e302b3730949bcbb7c83712338074",
+        "digest": "6058fe96e8d9e8c40156a0a054318ec21ed9992bd7865f72e641e18dff5d26ac",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.27-10"
+        "version": "7.4.27-11"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "81b0642a6d8e9d952a0f6540f2d7481a99b9a12dd42bcb5906ba8014ca80f326",
+        "digest": "ed811d10882450d4755b893d5e034a0dd912cdb4f261dd332ddf6363411cc0ba",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-6"
+        "version": "1.0.1-7"
     }
 }
