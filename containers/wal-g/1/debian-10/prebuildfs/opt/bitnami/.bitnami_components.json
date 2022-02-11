@@ -1,9 +1,9 @@
 {
     "wal-g": {
         "arch": "amd64",
-        "digest": "40bf71510459e9376564b5fa1db32ab944ea8ceb400fc857cc2feb7a3a19982d",
+        "digest": "2845f5cc837658b997dcfaec0fd1fe807ae38c0c1ad9d7466f9c775e2defd8da",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.1.0-3"
+        "version": "1.1.0-4"
     }
 }
