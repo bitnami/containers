@@ -1,30 +1,30 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980",
+        "digest": "ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-3"
+        "version": "1.14.0-4"
     },
     "harbor-core": {
         "arch": "amd64",
-        "digest": "af124c34a170dcfce8c6d370a649bd3e00f4c7646bca0ed9808a07ddcea13b10",
+        "digest": "dc1f164c70178b4a6e901c72df7d248ea4e1fc2c65a4b40e7719fc7f44ce1969",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.1-8"
+        "version": "2.4.1-9"
     },
     "ini-file": {
         "arch": "amd64",
-        "digest": "26f2ba99a02266d6f3857a3a11db7ed441d76a2fbc1066a17d4b0b17b047e01d",
+        "digest": "4b6ca846c7fa01787df6080853184ddc0188950f6380ebb154c1c87c51bac644",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.4.1-3"
+        "version": "1.4.1-4"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "845ff207415b5730cadd45aa3c757ca45a5c9e73bc54c24aa481ddca24eec35d",
+        "digest": "0ef01592ac0331fb1b486122aac3434cd103c3488652a871951a533037d277f8",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-6"
+        "version": "1.0.1-7"
     }
 }
