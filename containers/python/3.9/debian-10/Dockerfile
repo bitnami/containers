@@ -8,10 +8,10 @@ ENV OS_ARCH="amd64" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages build-essential ca-certificates curl git gzip libbz2-1.0 libc6 libffi6 liblzma5 libncursesw6 libreadline7 libsqlite3-0 libsqlite3-dev libssl-dev libssl1.1 libtinfo6 pkg-config procps tar unzip wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/python-3.9.10-18-linux-amd64-debian-10.tar.gz && \
-    echo "dfa4a30d89ba1be24a181fa7381bf00eeae21df0cd868687aa23d148c4f1c62c  /tmp/bitnami/pkg/cache/python-3.9.10-18-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/python-3.9.10-18-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/python-3.9.10-18-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/python-3.9.10-19-linux-amd64-debian-10.tar.gz && \
+    echo "687bbcd5ea98e59850de3a452d8686e923492a0ef02828c5c1a0262e24cd6b16  /tmp/bitnami/pkg/cache/python-3.9.10-19-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/python-3.9.10-19-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/python-3.9.10-19-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
@@ -19,7 +19,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 ENV BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="3.9.10-debian-10-r22" \
+    BITNAMI_IMAGE_VERSION="3.9.10-debian-10-r23" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 8000
