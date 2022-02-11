@@ -1,6 +1,6 @@
 {
     "influxdb-relay": {
-        "digest": "16c31258dab21df2f539f8103c5181f812b5826dda7a2ff7d6bde788eb38c53e",
+        "digest": "a20f7850cb16913e66b13910c068268e29ecef1fd8b378cfd25cc2b60b12dae1",
         "type": "BLACKSMITH",
         "version": "0.20200717.0"
     }
