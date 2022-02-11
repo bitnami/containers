@@ -10,8 +10,8 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libsqlite3-dev libssl-dev locales procps tar wget zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.14-3" --checksum 1f4876cb7c5709c5dc905f4325b1136b3ab73f71e3e16faa3c877ef84e78e776
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.14-4" --checksum 6dbd1da27fbf2f1a92fcf8e58bf873736aa65428cdaff26708ec7506e03cc8e7
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-4" --checksum ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
@@ -27,7 +27,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV BITNAMI_APP_NAME="java" \
-    BITNAMI_IMAGE_VERSION="11.0.14-debian-10-r20" \
+    BITNAMI_IMAGE_VERSION="11.0.14-debian-10-r21" \
     JAVA_HOME="/opt/bitnami/java" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
