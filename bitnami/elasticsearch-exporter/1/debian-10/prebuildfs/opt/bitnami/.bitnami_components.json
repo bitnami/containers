@@ -1,9 +1,9 @@
 {
     "elasticsearch-exporter": {
         "arch": "amd64",
-        "digest": "08b37f69624b1f4e3b23b024f86f32b2a6d65dd85485edecccaed08746205f77",
+        "digest": "9d8e2b9e795f0d1e97721eb54e1c2198f1b7abee7a062868fe23371891b4126b",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.3.0-3"
+        "version": "1.3.0-4"
     }
 }
