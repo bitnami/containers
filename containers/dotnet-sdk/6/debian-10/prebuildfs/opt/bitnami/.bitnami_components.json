@@ -1,9 +1,9 @@
 {
     "dotnet-sdk": {
         "arch": "amd64",
-        "digest": "1f65878ef627404c76d4e48c9a43fdaa4c0f1e2d260707058c3ff0abb8be4dd5",
+        "digest": "62e15a379730403a3a332fe6f06ca3cf5eff28c60301bd2e944b925149f6ace2",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "6.0.102-0"
+        "version": "6.0.102-1"
     }
 }
