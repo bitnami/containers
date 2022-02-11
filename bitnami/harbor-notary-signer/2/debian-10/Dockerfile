@@ -9,8 +9,8 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-notary-signer" "2.4.1-6" --checksum 4b8cf849e068fd15ebf37c128df27522f295fb6642c6b9c3b28a483f2d2a5197
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-notary-signer" "2.4.1-7" --checksum b170d8102629bea9aa1fc5f722a82006c20582e8208ad9e3a1ada00fbe796aaf
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-4" --checksum ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -18,7 +18,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-notary-signer/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-notary-signer" \
-    BITNAMI_IMAGE_VERSION="2.4.1-debian-10-r54" \
+    BITNAMI_IMAGE_VERSION="2.4.1-debian-10-r55" \
     PATH="/opt/bitnami/harbor-notary-signer/bin:/opt/bitnami/common/bin:$PATH" \
     SERVICE_NAME="notary_signer"
 
