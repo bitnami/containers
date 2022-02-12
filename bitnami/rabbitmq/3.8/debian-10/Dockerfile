@@ -10,9 +10,9 @@ ENV HOME="/opt/bitnami/rabbitmq/.rabbitmq" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 libssl1.1 libstdc++6 libtinfo6 locales procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "erlang" "24.2.1-0" --checksum 5a39ab107968ae3ec4dee0be125d2dca4661a35c81dadd26eb47e18d133b4782
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rabbitmq" "3.8.27-4" --checksum 38c2e29729ab6a3d62f2c08dd5e40e5e34b70109661e2c159c673e8d19e4f81e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-4" --checksum ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "erlang" "24.2.1-1" --checksum 2b37b6fd69b90b60f5633e122c94676f0936b662c811a96a4f7884799ae8baaa
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rabbitmq" "3.8.27-5" --checksum 0adac638d427d8332b70bbdc5f9af3726c4cdedef43b504826a0d462ab0d10cd
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -26,7 +26,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/rabbitmq/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.8.27-debian-10-r26" \
+    BITNAMI_IMAGE_VERSION="3.8.27-debian-10-r27" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en"
 
