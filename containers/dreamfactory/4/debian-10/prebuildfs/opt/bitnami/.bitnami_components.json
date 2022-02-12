@@ -50,10 +50,10 @@
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "8127e3cbaac59311d15b7808e193018489cf8c6291bfac0d04a496d15dbdfe0d",
+        "digest": "2caf5ecd7149938f602f9f24eb356e9cb1a6c800d6296cefb73ad3a15ccf89ba",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "11.15.0-0"
+        "version": "11.15.0-1"
     },
     "redis-client": {
         "arch": "amd64",
