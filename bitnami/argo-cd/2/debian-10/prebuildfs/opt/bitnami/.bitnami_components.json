@@ -1,37 +1,37 @@
 {
     "argo-cd": {
         "arch": "amd64",
-        "digest": "87d8143bc6fdc035a5b88d9b61bdc9987023f42b29b35bbb930568bccb42937e",
+        "digest": "e7d1709cace797a94f333c94669ebff041e729ef27b562e86d28e0423801f454",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.2.5-0"
+        "version": "2.2.5-1"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980",
+        "digest": "ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-3"
+        "version": "1.14.0-4"
     },
     "helm": {
         "arch": "amd64",
-        "digest": "3377b554cbd3461aa0213d3bfc4da04f89fa0068388ef9b39651a6c31a311fd9",
+        "digest": "8a38c29be559d10367c1e5fdca9eeffe930a119275455ec2f010198de5d747c8",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.8.0-0"
+        "version": "3.8.0-1"
     },
     "ksonnet": {
         "arch": "amd64",
-        "digest": "2764f6ab96b61568479aab176d326e2f0e66a914662f165b77630a66be3bacaf",
+        "digest": "3b610986535c1d353a57b9ae83560760e3f970b3c74c493ea3226769cc6216f4",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.13.1-3"
+        "version": "0.13.1-4"
     },
     "kustomize": {
         "arch": "amd64",
-        "digest": "785513667bd5d6eb97514b876edfa3577b9effd665611f3a759aedf448fedaed",
+        "digest": "040f7cbcd104cc77ce163f419a6013f8b406f91d31c8efa1d0404aeed9c8abc3",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.5.1-0"
+        "version": "4.5.2-1"
     }
 }

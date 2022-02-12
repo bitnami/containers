@@ -9,11 +9,11 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl git git-lfs gnupg gzip libc6 openssh-server procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kustomize" "4.5.1-0" --checksum 785513667bd5d6eb97514b876edfa3577b9effd665611f3a759aedf448fedaed
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ksonnet" "0.13.1-3" --checksum 2764f6ab96b61568479aab176d326e2f0e66a914662f165b77630a66be3bacaf
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "helm" "3.8.0-0" --checksum 3377b554cbd3461aa0213d3bfc4da04f89fa0068388ef9b39651a6c31a311fd9
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-3" --checksum 276ab5a0be4b05e136ec468d62c8f9cc4f40d9664c55f01f16a9f1209ba16980
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "argo-cd" "2.2.5-0" --checksum 87d8143bc6fdc035a5b88d9b61bdc9987023f42b29b35bbb930568bccb42937e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kustomize" "4.5.2-1" --checksum 040f7cbcd104cc77ce163f419a6013f8b406f91d31c8efa1d0404aeed9c8abc3
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ksonnet" "0.13.1-4" --checksum 3b610986535c1d353a57b9ae83560760e3f970b3c74c493ea3226769cc6216f4
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "helm" "3.8.0-1" --checksum 8a38c29be559d10367c1e5fdca9eeffe930a119275455ec2f010198de5d747c8
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-4" --checksum ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "argo-cd" "2.2.5-1" --checksum e7d1709cace797a94f333c94669ebff041e729ef27b562e86d28e0423801f454
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -21,7 +21,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/argo-cd/postunpack.sh
 ENV BITNAMI_APP_NAME="argo-cd" \
-    BITNAMI_IMAGE_VERSION="2.2.5-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="2.2.5-debian-10-r5" \
     LIBNSS_WRAPPER_PATH="/opt/bitnami/common/lib/libnss_wrapper.so" \
     LNAME="argocd" \
     NSS_WRAPPER_GROUP="/opt/bitnami/argo-cd/nss_group" \
