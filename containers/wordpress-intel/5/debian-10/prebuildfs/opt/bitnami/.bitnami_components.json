@@ -8,10 +8,10 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "4489feca3a65fbd733774d193b02914187451c6edf27855ebc5756e45a9f299e",
+        "digest": "fc61221a2e1a66f5dc47ab07cae39f0c20fc0d2cf7d716f72bf0c5b9d740a932",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.3.32-31"
+        "version": "10.3.34-0"
     },
     "nginx-intel": {
         "arch": "amd64",
