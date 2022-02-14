@@ -42,6 +42,8 @@ ghost_env_vars=(
     GHOST_DATABASE_NAME
     GHOST_DATABASE_USER
     GHOST_DATABASE_PASSWORD
+    GHOST_DATABASE_ENABLE_SSL
+    GHOST_DATABASE_SSL_CA_FILE
     BLOG_TITLE
     SMTP_HOST
     SMTP_PORT
@@ -125,5 +127,7 @@ GHOST_DATABASE_USER="${GHOST_DATABASE_USER:-"${MARIADB_DATABASE_USER:-}"}"
 export GHOST_DATABASE_USER="${GHOST_DATABASE_USER:-bn_ghost}" # only used during the first initialization
 GHOST_DATABASE_PASSWORD="${GHOST_DATABASE_PASSWORD:-"${MARIADB_DATABASE_PASSWORD:-}"}"
 export GHOST_DATABASE_PASSWORD="${GHOST_DATABASE_PASSWORD:-}" # only used during the first initialization
+export GHOST_DATABASE_ENABLE_SSL="${GHOST_DATABASE_ENABLE_SSL:-no}" # only used during the first initialization
+export GHOST_DATABASE_SSL_CA_FILE="${GHOST_DATABASE_SSL_CA_FILE:-}" # only used during the first initialization
 
 # Custom environment variables may be defined below

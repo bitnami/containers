@@ -147,6 +147,9 @@ ghost_validate() {
     ! is_empty_value "$GHOST_DATABASE_HOST" && check_resolved_hostname "$GHOST_DATABASE_HOST"
     ! is_empty_value "$GHOST_DATABASE_PORT_NUMBER" && check_valid_port "GHOST_DATABASE_PORT_NUMBER"
 
+    # Validate SSL configuration
+    ! is_empty_value "$GHOST_DATABASE_ENABLE_SSL" && check_yes_no_value "GHOST_DATABASE_ENABLE_SSL"
+
     # Validate credentials
     check_empty_value "GHOST_PASSWORD"
     # ref: https://github.com/TryGhost/Ghost/issues/9150
@@ -179,7 +182,7 @@ ghost_validate() {
 # Arguments:
 #   $1 - Variable name
 #   $2 - Value to assign to the variable
-#   $3 - YAML type (string, int or bool)
+#   $3 - YAML type (string, int, bool or json)
 # Returns:
 #   None
 #########################
@@ -191,13 +194,16 @@ ghost_conf_set() {
 
     case "$type" in
     string)
-        jq "(.${key}) |= \"${value}\"" "$GHOST_CONF_FILE" >"$tempfile"
+        jq "(.${key}) |= \"${value}\"" "$GHOST_CONF_FILE" > "$tempfile"
         ;;
     int)
-        jq "(.${key}) |= (${value} | tonumber)" "$GHOST_CONF_FILE" >"$tempfile"
+        jq "(.${key}) |= (${value} | tonumber)" "$GHOST_CONF_FILE" > "$tempfile"
         ;;
     bool)
-        jq "(.${key}) |= (\"${value}\" | test(\"true\"))" "$GHOST_CONF_FILE" >"$tempfile"
+        jq "(.${key}) |= (\"${value}\" | test(\"true\"))" "$GHOST_CONF_FILE" > "$tempfile"
+        ;;
+    json)
+        jq "(.${key}) |= ${value}" "$GHOST_CONF_FILE" > "$tempfile"
         ;;
     *)
         error "Type unknown: ${type}"
@@ -246,20 +252,33 @@ ghost_initialize() {
         ghost_wait_for_mysql_connection "$GHOST_DATABASE_HOST" "$GHOST_DATABASE_PORT_NUMBER" "$GHOST_DATABASE_NAME" "$GHOST_DATABASE_USER" "$GHOST_DATABASE_PASSWORD"
         # Configure database
         info "Configuring database"
-        jq '.' >"$GHOST_CONF_FILE" <<EOF
-{
-  "database": {
-    "client": "mysql",
-    "connection": {
-      "host": "${GHOST_DATABASE_HOST}",
-      "port": ${GHOST_DATABASE_PORT_NUMBER},
-      "database": "${GHOST_DATABASE_NAME}",
-      "user": "${GHOST_DATABASE_USER}",
-      "password": "${GHOST_DATABASE_PASSWORD}"
-    }
-  }
-}
-EOF
+        jq -n -r \
+            --arg host "$GHOST_DATABASE_HOST" \
+            --arg port "$GHOST_DATABASE_PORT_NUMBER" \
+            --arg database "$GHOST_DATABASE_NAME" \
+            --arg user "$GHOST_DATABASE_USER" \
+            --arg password "$GHOST_DATABASE_PASSWORD" \
+            '{
+              "database": {
+                "client": "mysql",
+                "connection": {
+                  host: $host,
+                  port: $port|tonumber,
+                  database: $database,
+                  user: $user,
+                  password: $password,
+                  ssl: false
+                }
+              }
+            }' > "$GHOST_CONF_FILE"
+
+        if ! is_empty_value "$GHOST_DATABASE_SSL_CA_FILE"; then
+            ca_json="{\"ca\": \"$(cat "${GHOST_DATABASE_SSL_CA_FILE}")\"}"
+            ghost_conf_set "database.connection.ssl" "$ca_json" "json"
+        elif is_boolean_yes "$GHOST_DATABASE_ENABLE_SSL"; then
+            ghost_conf_set "database.connection.ssl" true "bool"
+        fi
+
         am_i_root && chown "${GHOST_DAEMON_USER}:root" "$GHOST_CONF_FILE"
         if ! is_boolean_yes "$GHOST_SKIP_BOOTSTRAP"; then
             # Setup Ghost
