@@ -48,7 +48,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`5.0`, `5.0-debian-10`, `5.0.6`, `5.0.6-debian-10-r17` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/5.0.6-debian-10-r17/5.0/debian-10/Dockerfile)
+* [`5.0`, `5.0-debian-10`, `5.0.6`, `5.0.6-debian-10-r18` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/5.0.6-debian-10-r18/5.0/debian-10/Dockerfile)
 * [`4.4`, `4.4-debian-10`, `4.4.12`, `4.4.12-debian-10-r27`, `latest` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.12-debian-10-r27/4.4/debian-10/Dockerfile)
 * [`4.2`, `4.2-debian-10`, `4.2.18`, `4.2.18-debian-10-r31` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.18-debian-10-r31/4.2/debian-10/Dockerfile)
 
@@ -323,10 +323,6 @@ $ docker-compose up mongodb-sharded
 
 - `3.6.16-centos-7-r49`, `4.0.14-centos-7-r29`, and `4.2.2-centos-7-r41` are considered the latest images based on CentOS.
 - Standard supported distros: Debian & OEL.
-
-## Branch Deprecation Notice
-
-MongoDB&reg;'s branch 4.0 doesn't support Debian 10 which is the default distro for this Bitnami Application Catalog; apart from that, its EOL is closed (April 2022), due to those reasons, this version is now internally tagged as deprecated. This branch will no longer be released in our catalog, but already released container images will still persist in the registries.
 
 ## Contributing
 
