@@ -12,7 +12,7 @@ RUN install_packages acl ca-certificates cron curl gzip libaudit1 libbsd0 libbz2
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.4.27-11" --checksum 6058fe96e8d9e8c40156a0a054318ec21ed9992bd7865f72e641e18dff5d26ac
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.52-4" --checksum 4705387b2f4ef926d0bde06738df29db4abd61583cedc83d238b8b7e10e3f6b8
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-7" --checksum 0ef01592ac0331fb1b486122aac3434cd103c3488652a871951a533037d277f8
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.32-31" --checksum 4489feca3a65fbd733774d193b02914187451c6edf27855ebc5756e45a9f299e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.34-0" --checksum fc61221a2e1a66f5dc47ab07cae39f0c20fc0d2cf7d716f72bf0c5b9d740a932
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.27-6" --checksum bff2748eb1fb7b9ebcd40a5b660985e17cdccecb0acda003a453d84de99c61bc
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-7" --checksum ed811d10882450d4755b893d5e034a0dd912cdb4f261dd332ddf6363411cc0ba
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "magento" "2.4.3-6" --checksum 4718d6e17aab4338c3ba12bfa514340e2ea28a0ebc0000eec99a9cd3fa218f6c
@@ -31,7 +31,7 @@ RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="magento" \
-    BITNAMI_IMAGE_VERSION="2.4.3-debian-10-r124" \
+    BITNAMI_IMAGE_VERSION="2.4.3-debian-10-r125" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/common/bin:/opt/bitnami/mysql/bin:/opt/bitnami/magento/bin:$PATH"
 
 EXPOSE 8080 8443
