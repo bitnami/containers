@@ -1,23 +1,23 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53",
+        "digest": "6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-4"
+        "version": "1.14.0-5"
     },
     "nginx-ldap-auth-daemon": {
         "arch": "amd64",
-        "digest": "baade11760e7b4941eccd869b32139e13d7273162ab789efdf9a89f20506691f",
+        "digest": "bd42f22c8bd00a113486c878b3903664cb58d5a5fc916e72b7ffd0b021c7d8aa",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.20200116.0-8"
+        "version": "0.20200116.0-9"
     },
     "python": {
         "arch": "amd64",
-        "digest": "687bbcd5ea98e59850de3a452d8686e923492a0ef02828c5c1a0262e24cd6b16",
+        "digest": "ffc2c8171b0c9afe33b9b131e9e0483757f78f15ab539bc56a2391659f282c75",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.9.10-19"
+        "version": "3.9.10-20"
     }
 }
