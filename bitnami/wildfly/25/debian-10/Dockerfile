@@ -11,9 +11,9 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaio1 libc6 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.14-4" --checksum 6dbd1da27fbf2f1a92fcf8e58bf873736aa65428cdaff26708ec7506e03cc8e7
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wildfly" "25.0.1-32" --checksum 3588e6ed02f2ecaeacbb0fc6e70c9e447d0506bb80f8f5b97d5c6951fe9633ea
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-4" --checksum ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.14-5" --checksum 8e9d15dc54b3cf57e7f3b92efbb1e01ed07f002889034ec7703b62efb8265243
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wildfly" "25.0.1-33" --checksum b091c06150b3f600bf25ad5d84a90091e8163b4a5b279c8391afe6833b2af814
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-5" --checksum 6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -22,7 +22,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/wildfly/postunpack.sh
 ENV BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="25.0.1-debian-10-r95" \
+    BITNAMI_IMAGE_VERSION="25.0.1-debian-10-r96" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:/opt/bitnami/common/bin:$PATH" \
     WILDFLY_HOME="/home/wildfly"
