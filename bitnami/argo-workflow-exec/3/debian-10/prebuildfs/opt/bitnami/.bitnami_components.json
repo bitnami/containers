@@ -1,23 +1,23 @@
 {
     "argo-workflow-exec": {
         "arch": "amd64",
-        "digest": "0b429cade3bc84e9103b8429e799924f333b3eb37a352e083cffcdd9949887a2",
+        "digest": "2a51df33f883dd15116bbf3b59b17a6a515c35b1875b369211c75a98a270bc68",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.2.8-1"
+        "version": "3.2.8-2"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53",
+        "digest": "6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-4"
+        "version": "1.14.0-5"
     },
     "kubectl": {
         "arch": "amd64",
-        "digest": "a41dbb98e5d60a730a7d6ff56f574206fbb58add8de4bfc946afd366ef5f52e2",
+        "digest": "8bbee363c2a90b6abb64be508c7997d592c1a7911633bc36964ba9580678baad",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.23.3-1"
+        "version": "1.23.3-2"
     }
 }
