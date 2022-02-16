@@ -1,37 +1,37 @@
 {
     "git": {
         "arch": "amd64",
-        "digest": "d6e13f2b43164f885489658fbd8b95c9a006064d3389093712b179315dbf265d",
+        "digest": "e5feed054f6c6e0497502e5c0551070241f543966491e962ce1f51780f6b170e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.35.1-1"
+        "version": "2.35.1-2"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53",
+        "digest": "6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-4"
+        "version": "1.14.0-5"
     },
     "java": {
         "arch": "amd64",
-        "digest": "5bea54f21135133d1d0df7486e419d204f846d8acac4c83e1c6359a703fc9244",
+        "digest": "3ce0c1dc975421abe79ffa5d459b4562802312f299a86576d1a169fe2d38f5d9",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.8.322-5"
+        "version": "1.8.322-6"
     },
     "jenkins": {
         "arch": "amd64",
-        "digest": "c02452db0a7f3fdfa8f57c50e2a09213245a5342ab93905b7e37287f8ad488a5",
+        "digest": "d044c087ac05562ca31a4e564152d0ac405049a212bad3c67bff4b29649bb1e8",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.319.3-1"
+        "version": "2.319.3-2"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "ed811d10882450d4755b893d5e034a0dd912cdb4f261dd332ddf6363411cc0ba",
+        "digest": "4694f01476c5a457a71f280562df45ea542bdf3f9b298ff87643a89ea365f5fb",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-7"
+        "version": "1.0.1-8"
     }
 }
