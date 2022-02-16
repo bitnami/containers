@@ -8,16 +8,16 @@ ENV OS_ARCH="amd64" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl docker git gzip jq procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kubectl" "1.23.3-1" --checksum a41dbb98e5d60a730a7d6ff56f574206fbb58add8de4bfc946afd366ef5f52e2
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-4" --checksum ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "argo-workflow-exec" "3.2.8-1" --checksum 0b429cade3bc84e9103b8429e799924f333b3eb37a352e083cffcdd9949887a2
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kubectl" "1.23.3-2" --checksum 8bbee363c2a90b6abb64be508c7997d592c1a7911633bc36964ba9580678baad
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-5" --checksum 6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "argo-workflow-exec" "3.2.8-2" --checksum 2a51df33f883dd15116bbf3b59b17a6a515c35b1875b369211c75a98a270bc68
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/argo-workflow-exec/postunpack.sh
 ENV BITNAMI_APP_NAME="argo-workflow-exec" \
-    BITNAMI_IMAGE_VERSION="3.2.8-debian-10-r10" \
+    BITNAMI_IMAGE_VERSION="3.2.8-debian-10-r11" \
     PATH="/opt/bitnami/kubectl/bin:/opt/bitnami/common/bin:/opt/bitnami/argo-workflow-exec/bin:/opt/bitnami/argo-workflow-exec/hack:$PATH"
 
 USER 1001
