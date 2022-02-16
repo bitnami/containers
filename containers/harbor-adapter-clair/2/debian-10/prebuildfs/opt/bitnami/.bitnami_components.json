@@ -1,16 +1,16 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53",
+        "digest": "6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-4"
+        "version": "1.14.0-5"
     },
     "harbor-adapter-clair": {
         "arch": "amd64",
-        "digest": "8583b4b4b62e13d4e0adc9b8a02219e49e5ce45671ce810477a7b6891f293820",
+        "digest": "d189991092cf3e9dba8983d157a8e444c32a7cca1769bad1528cc537be0811a7",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.1-8"
+        "version": "2.4.1-9"
     }
 }
