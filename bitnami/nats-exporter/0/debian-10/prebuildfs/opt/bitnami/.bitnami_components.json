@@ -1,9 +1,9 @@
 {
     "nats-exporter": {
         "arch": "amd64",
-        "digest": "300d063766dbfe40d380b97e29afa9fd869213e67a01b5b4a4fbfd314f7d18f0",
+        "digest": "4076e0be0aaf072d59dac9fadbb5f198e8c28dbbbae53900a1a55fe2eac767fc",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.9.1-2"
+        "version": "0.9.1-3"
     }
 }
