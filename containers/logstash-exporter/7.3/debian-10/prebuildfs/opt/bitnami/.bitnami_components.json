@@ -1,9 +1,9 @@
 {
     "logstash-exporter": {
         "arch": "amd64",
-        "digest": "04da366b9d553789ad203a975e709f30f95f8e3993d550749c58540647805c85",
+        "digest": "2fcdae01dcfed4b08e6fc0a021acfbab1f9e9f2d4941009c68058869fdc74b6e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.3.0-6"
+        "version": "7.3.0-7"
     }
 }
