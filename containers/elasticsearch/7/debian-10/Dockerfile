@@ -13,10 +13,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip hostname libasound2-dev libc6 libfreetype6 libfreetype6-dev libgcc1 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.20.1-0" --checksum c6b43a85b826ec03572ad2227df7a37e4cd475196efbe9789c9d5d8c425065b5
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.14-4" --checksum 6dbd1da27fbf2f1a92fcf8e58bf873736aa65428cdaff26708ec7506e03cc8e7
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-4" --checksum ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "elasticsearch" "7.17.0-1" --checksum e7e8666b8b21b9f7cc015c7edb13ef89341c15db5fd30111e1a18ee649b96cfe
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.20.1-1" --checksum 5a5d183286140781203d11d468d4f84371c5808ee86471c7ee445f8d3cef0eb6
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.14-5" --checksum 8e9d15dc54b3cf57e7f3b92efbb1e01ed07f002889034ec7703b62efb8265243
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-5" --checksum 6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "elasticsearch" "7.17.0-2" --checksum b0c2210b9f4868791fd6ca9a0573061ab55cfd06777b85325dfa868419df4f18
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -25,7 +25,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/elasticsearch/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="7.17.0-debian-10-r12" \
+    BITNAMI_IMAGE_VERSION="7.17.0-debian-10-r13" \
     JAVA_HOME="/opt/bitnami/java" \
     LD_LIBRARY_PATH="/opt/bitnami/elasticsearch/jdk/lib:/opt/bitnami/elasticsearch/jdk/lib/server:$LD_LIBRARY_PATH"
 
