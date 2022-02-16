@@ -9,8 +9,8 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 procps rpm tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-adapter-trivy" "2.4.1-7" --checksum e5d9854bf65ae62cc236d4d38a0035972c68e544c1c163f03cb014fbbdb16417
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-4" --checksum ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-adapter-trivy" "2.4.1-8" --checksum de67e992d61cd0f9fee670abf803f8c7c92170b933665f976e20f21076e52ef8
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-5" --checksum 6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -18,7 +18,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-adapter-trivy/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-adapter-trivy" \
-    BITNAMI_IMAGE_VERSION="2.4.1-debian-10-r58" \
+    BITNAMI_IMAGE_VERSION="2.4.1-debian-10-r59" \
     PATH="/opt/bitnami/harbor-adapter-trivy/bin:/opt/bitnami/common/bin:$PATH"
 
 WORKDIR /opt/bitnami/harbor-adapter-trivy
