@@ -1,6 +1,6 @@
 {
     "rmq-messaging-topology-operator": {
-        "digest": "d49e8e63ddc4a7ba7b73a075cf6c7ea77f7a14daf8ed791c62898b4973db2e04",
+        "digest": "6c6c69947e5ca8aa952f9ca9f91a5aa8131a6da11e2d7496376b112316c7eca4",
         "type": "BLACKSMITH",
         "version": "1.4.0"
     }
