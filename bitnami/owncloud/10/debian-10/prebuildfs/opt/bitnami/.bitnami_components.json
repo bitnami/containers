@@ -15,17 +15,17 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "cc5fc24a02b820878dd9cab4a177e336ae586aad3b1665e052a04a55aad346b8",
+        "digest": "169b17649e6687a7d38c49f594d122044d5a1b8c897995bfc07c57a5bc4458ff",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.28-0"
+        "version": "7.4.28-1"
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "fc61221a2e1a66f5dc47ab07cae39f0c20fc0d2cf7d716f72bf0c5b9d740a932",
+        "digest": "e4111d4f7ed30cafbf80e97f6fae69787445517a7a18c5a0dcca23360cf185ae",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.3.34-0"
+        "version": "10.3.34-1"
     },
     "owncloud": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "f95689727bb3bc335de8347f5188bb37b2cd62a35518c8e810981e5a549003d6",
+        "digest": "54e6b41ed87ed76ea41b5e9edca5eb79be84c404ed2151b7245084997eefce08",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.28-0"
+        "version": "7.4.28-1"
     },
     "render-template": {
         "arch": "amd64",
