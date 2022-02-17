@@ -31,7 +31,7 @@ $ docker run --name Kube RBAC Proxy bitnami/kube-rbac-proxy:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`0`, `0-scratch`, `0.11.0`, `0.11.0-scratch-r3`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-rbac-proxy/blob/0.11.0-scratch-r3/0/scratch/Dockerfile)
+- [`0`, `0-scratch`, `0.11.0`, `0.11.0-scratch-r4`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-rbac-proxy/blob/0.11.0-scratch-r4/0/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kube-rbac-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-kube-rbac-proxy).
 
