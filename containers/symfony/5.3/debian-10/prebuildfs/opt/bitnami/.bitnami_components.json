@@ -1,24 +1,24 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53",
+        "digest": "6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-4"
+        "version": "1.14.0-5"
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "fc61221a2e1a66f5dc47ab07cae39f0c20fc0d2cf7d716f72bf0c5b9d740a932",
+        "digest": "e4111d4f7ed30cafbf80e97f6fae69787445517a7a18c5a0dcca23360cf185ae",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.3.34-0"
+        "version": "10.3.34-1"
     },
     "php": {
         "arch": "amd64",
-        "digest": "6058fe96e8d9e8c40156a0a054318ec21ed9992bd7865f72e641e18dff5d26ac",
+        "digest": "54e6b41ed87ed76ea41b5e9edca5eb79be84c404ed2151b7245084997eefce08",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.27-11"
+        "version": "7.4.28-1"
     },
     "symfony": {
         "arch": "amd64",
