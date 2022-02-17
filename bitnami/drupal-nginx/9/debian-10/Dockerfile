@@ -14,19 +14,19 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.21.6-2
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.34-1" --checksum e4111d4f7ed30cafbf80e97f6fae69787445517a7a18c5a0dcca23360cf185ae
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-8" --checksum 4694f01476c5a457a71f280562df45ea542bdf3f9b298ff87643a89ea365f5fb
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-5" --checksum 6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "drupal" "9.3.6-0" --checksum 460869c7e6a55d8f377fbb3cbf18a0bc8c81456b10b2818e048f82000eb1568d
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "drupal" "9.3.6-1" --checksum 0e577d60b23160b349f084911669fdacbb51aa79f8529c13904f7612b305f4c0
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
+RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/nginx-php-fpm/postunpack.sh
 RUN /opt/bitnami/scripts/drupal/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV BITNAMI_APP_NAME="drupal-nginx" \
-    BITNAMI_IMAGE_VERSION="9.3.6-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="9.3.6-debian-10-r1" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/nginx/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/drupal/vendor/bin:$PATH"
