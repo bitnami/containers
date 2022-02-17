@@ -11,7 +11,7 @@
         "digest": "7f84eab7a8a3e47cd5fea7c8bfa70db023e4cce0b6d7b185a9deec537b077e93",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.9.0-32"
+        "version": "1.9.0-33"
     },
     "python": {
         "arch": "amd64",
