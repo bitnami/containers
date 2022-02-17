@@ -1,10 +1,10 @@
 {
     "cassandra": {
         "arch": "amd64",
-        "digest": "8a20f65451c8f18b7d14c4341fd40ef04f8eddc4b7e451e425579a4bc45b626d",
+        "digest": "c7848a2d710fca8ff0a769d979d29b5f7bf6447431c6a5d79297b200959949ce",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.0.2-1"
+        "version": "4.0.3-0"
     },
     "gosu": {
         "arch": "amd64",
@@ -29,9 +29,9 @@
     },
     "yq": {
         "arch": "amd64",
-        "digest": "c6b43a85b826ec03572ad2227df7a37e4cd475196efbe9789c9d5d8c425065b5",
+        "digest": "5a5d183286140781203d11d468d4f84371c5808ee86471c7ee445f8d3cef0eb6",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.20.1-0"
+        "version": "4.20.1-1"
     }
 }
