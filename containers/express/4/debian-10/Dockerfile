@@ -11,12 +11,12 @@ RUN install_packages acl ca-certificates curl gzip libbz2-1.0 libc6 libcom-err2 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-32" --checksum 0649a1688896cf6ee9a9fd4d554ac33f364f498fca6d8be67a95f8111e7dad4f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.19.0-2" --checksum d1c0e36b98ba6464fcf517c50d35d212d8bf7626cd99838f361bbe1c47319e5e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "sequelize-cli" "5.5.1-6" --checksum 6a21abf8f11aee37388c7f4edb087b0833d8f618d6855fa7cff65ff6e9a7feaa
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.35.1-2" --checksum e5feed054f6c6e0497502e5c0551070241f543966491e962ce1f51780f6b170e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.35.1-3" --checksum e5feed054f6c6e0497502e5c0551070241f543966491e962ce1f51780f6b170e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "express-generator" "4.16.1-6" --checksum fae4f374196bee45755b5bea63cc80ca2cdeaf800408c3433eae912090517f0f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "bower" "1.8.12-6" --checksum 2c5d26107cfc1f74ac5dde1e650f6899091511667fe92777e7777b84dea46e81
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-8" --checksum 4b509978f6d0a4c3b958deeb3490241cda60e4412c138da665192631d60f70de
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-5" --checksum 6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "express" "4.17.2-6" --checksum 05b3683cf7e21f14179dec7c9ed3f1d638f818fac998c9baa49aa77952f27581
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "express" "4.17.3-0" --checksum 9dca714929ffcc225e02f1dc74306c5796b7d24b04ca1a81d4dc5b25b8c66526
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/bitnami-user.sh
@@ -25,7 +25,7 @@ COPY rootfs /
 RUN mkdir -p /dist /app /.npm /.config /.cache /.local && chmod g+rwX /dist /app /.npm /.config /.cache /.local
 RUN /opt/bitnami/scripts/express/postunpack.sh
 ENV BITNAMI_APP_NAME="express" \
-    BITNAMI_IMAGE_VERSION="4.17.2-debian-10-r59" \
+    BITNAMI_IMAGE_VERSION="4.17.3-debian-10-r0" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/sequelize-cli/bin:/opt/bitnami/git/bin:/opt/bitnami/bower/bin:/opt/bitnami/common/bin:/opt/bitnami/express/bin:$PATH"
 
 EXPOSE 3000
