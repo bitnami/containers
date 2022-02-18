@@ -4,13 +4,13 @@
         "digest": "f3df8a60779b88b85dae92d2eac34f8167c8755753eed6be40e905fe764e5ad0",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.5.2-0"
+        "version": "2.5.2-1"
     },
     "haproxy-dataplaneapi": {
         "arch": "amd64",
         "digest": "44ba050bcd87efb0e6ad7c58877014397d9613b2dfde32dc044e1308e42b282b",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.4-32"
+        "version": "2.4.4-33"
     }
 }
