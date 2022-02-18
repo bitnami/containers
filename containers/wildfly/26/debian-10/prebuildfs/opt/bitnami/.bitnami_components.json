@@ -11,13 +11,13 @@
         "digest": "8e9d15dc54b3cf57e7f3b92efbb1e01ed07f002889034ec7703b62efb8265243",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "11.0.14-5"
+        "version": "11.0.14-6"
     },
     "wildfly": {
         "arch": "amd64",
         "digest": "d7dc4756b86180b542f503c1a510c433f3d862800dec3217b56450e12a014d87",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "26.0.1-7"
+        "version": "26.0.1-8"
     }
 }
