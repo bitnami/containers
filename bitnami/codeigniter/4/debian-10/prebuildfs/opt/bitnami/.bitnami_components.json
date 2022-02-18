@@ -4,27 +4,27 @@
         "digest": "8a34b4d717794c6ed8ba8cb965136817922b42c844f92f56c1d66ae8e07bb725",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.1.8-2"
+        "version": "4.1.8-3"
     },
     "gosu": {
         "arch": "amd64",
         "digest": "6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-5"
+        "version": "1.14.0-6"
     },
     "mysql-client": {
         "arch": "amd64",
         "digest": "8288beee2fdd5a1421d45d9d823bc181b7350ee4eb54d91522fc0b4d2a370ceb",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.4.24-1"
+        "version": "10.4.24-2"
     },
     "php": {
         "arch": "amd64",
         "digest": "54e6b41ed87ed76ea41b5e9edca5eb79be84c404ed2151b7245084997eefce08",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.28-1"
+        "version": "7.4.28-2"
     }
 }
