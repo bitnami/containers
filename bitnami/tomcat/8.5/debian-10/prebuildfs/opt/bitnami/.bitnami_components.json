@@ -11,20 +11,20 @@
         "digest": "8e9d15dc54b3cf57e7f3b92efbb1e01ed07f002889034ec7703b62efb8265243",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "11.0.14-5"
+        "version": "11.0.14-6"
     },
     "render-template": {
         "arch": "amd64",
         "digest": "4694f01476c5a457a71f280562df45ea542bdf3f9b298ff87643a89ea365f5fb",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-8"
+        "version": "1.0.1-9"
     },
     "tomcat": {
         "arch": "amd64",
         "digest": "80798fd91cd7e655d9f6aa04fd9902169548cfe55b55088410c1843e7f639b60",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.5.75-9"
+        "version": "8.5.75-10"
     }
 }
