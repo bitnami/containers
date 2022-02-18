@@ -11,13 +11,13 @@
         "digest": "ded129607ed6efe93b2a8da5f5fca57e3fe7157d36356dcf5710a9c4e3caf73e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "5.0.14-32"
+        "version": "5.0.14-33"
     },
     "wait-for-port": {
         "arch": "amd64",
         "digest": "4b509978f6d0a4c3b958deeb3490241cda60e4412c138da665192631d60f70de",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-8"
+        "version": "1.0.1-9"
     }
 }
