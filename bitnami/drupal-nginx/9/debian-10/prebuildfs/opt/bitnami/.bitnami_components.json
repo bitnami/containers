@@ -4,7 +4,7 @@
         "digest": "0e577d60b23160b349f084911669fdacbb51aa79f8529c13904f7612b305f4c0",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "9.3.6-1"
+        "version": "9.3.6-2"
     },
     "gosu": {
         "arch": "amd64",
@@ -18,27 +18,27 @@
         "digest": "e4111d4f7ed30cafbf80e97f6fae69787445517a7a18c5a0dcca23360cf185ae",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.3.34-1"
+        "version": "10.3.34-2"
     },
     "nginx": {
         "arch": "amd64",
         "digest": "98f17555522a3756114507c278671d0e2cf13291c1616a2b446b62e66703902f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.21.6-2"
+        "version": "1.21.6-3"
     },
     "php": {
         "arch": "amd64",
         "digest": "d6409dcd07619b5a22b9e177b06d8044853f92e1eefa566373d8cc9db35f904f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.1.3-0"
+        "version": "8.1.3-1"
     },
     "render-template": {
         "arch": "amd64",
         "digest": "4694f01476c5a457a71f280562df45ea542bdf3f9b298ff87643a89ea365f5fb",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-8"
+        "version": "1.0.1-9"
     }
 }
