@@ -11,13 +11,13 @@
         "digest": "9b49dd85ef4f35427e5b371b8cd71fd993d9b5ef7ce612de506c1af0783064bd",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.7.12-32"
+        "version": "3.7.12-33"
     },
     "pytorch": {
         "arch": "amd64",
         "digest": "d2eeab88cd5cdcf8438559a79e9011d52d9bd518e6227b7c59cf57766cc1b835",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.10.2-3"
+        "version": "1.10.2-4"
     }
 }
