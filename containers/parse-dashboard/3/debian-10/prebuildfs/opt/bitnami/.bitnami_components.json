@@ -11,20 +11,20 @@
         "digest": "8d2996e363a66d94c6b633bd0550de723b884725a4b2c182199989b3a9eaaec1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "12.22.10-2"
+        "version": "12.22.10-3"
     },
     "parse-dashboard": {
         "arch": "amd64",
         "digest": "7b0964ea24984ef443f7029c8b2c8bf2e5438d2bc30747a2d8258643796846e6",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.3.0-5"
+        "version": "3.3.0-6"
     },
     "python": {
         "arch": "amd64",
         "digest": "0649a1688896cf6ee9a9fd4d554ac33f364f498fca6d8be67a95f8111e7dad4f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.8.12-32"
+        "version": "3.8.12-33"
     }
 }
