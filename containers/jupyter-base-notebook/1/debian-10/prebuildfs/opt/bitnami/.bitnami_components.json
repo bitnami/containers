@@ -4,13 +4,13 @@
         "digest": "9c0e01776017ce072bc16eea8e5f7b46f1c6ce62ac1654b98f30dcb6d7b13b9e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.5.0-32"
+        "version": "1.5.0-33"
     },
     "miniconda": {
         "arch": "amd64",
         "digest": "3c671cf31696ec6e7971de5ece2257d05a6555d29eac464765fa842e5db705bf",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.11.0-0"
+        "version": "4.11.0-1"
     }
 }
