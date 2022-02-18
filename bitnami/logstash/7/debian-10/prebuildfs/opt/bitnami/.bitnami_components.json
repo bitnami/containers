@@ -4,27 +4,27 @@
         "digest": "6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-5"
+        "version": "1.14.0-6"
     },
     "java": {
         "arch": "amd64",
         "digest": "8e9d15dc54b3cf57e7f3b92efbb1e01ed07f002889034ec7703b62efb8265243",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "11.0.14-5"
+        "version": "11.0.14-6"
     },
     "logstash": {
         "arch": "amd64",
         "digest": "01b8da106ad148df1139145cf009d4776120452fefcd3aba8885fe4dfb1a6ba8",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.17.0-2"
+        "version": "7.17.0-3"
     },
     "yq": {
         "arch": "amd64",
         "digest": "5a5d183286140781203d11d468d4f84371c5808ee86471c7ee445f8d3cef0eb6",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.20.1-1"
+        "version": "4.20.1-2"
     }
 }
