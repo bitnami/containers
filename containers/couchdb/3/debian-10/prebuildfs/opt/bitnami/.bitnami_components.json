@@ -4,7 +4,7 @@
         "digest": "a7c2cd3cc3e4245eb08fc5859a18084ea2bec880f7e3c9ef15c62cc541f71d70",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.2.1-6"
+        "version": "3.2.1-7"
     },
     "gosu": {
         "arch": "amd64",
@@ -18,13 +18,13 @@
         "digest": "a947aad3f8cab0ff7c76506e1ea09156dfd442a6842500d1b8203f735b0e6b84",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.4.1-5"
+        "version": "1.4.1-6"
     },
     "wait-for-port": {
         "arch": "amd64",
         "digest": "4b509978f6d0a4c3b958deeb3490241cda60e4412c138da665192631d60f70de",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-8"
+        "version": "1.0.1-9"
     }
 }
