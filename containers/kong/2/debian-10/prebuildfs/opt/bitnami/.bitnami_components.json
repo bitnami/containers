@@ -4,13 +4,13 @@
         "digest": "6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-5"
+        "version": "1.14.0-6"
     },
     "kong": {
         "arch": "amd64",
         "digest": "a68b0bf33c318cbdc6c461be10728de2621b9bb982e17373821311e04f5bddab",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.7.1-3"
+        "version": "2.7.1-4"
     }
 }
