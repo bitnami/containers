@@ -11,20 +11,20 @@
         "digest": "30a359e3e5fab286f6004b165d2d1111b83cf68490afd13a35131464bf143d96",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.1-10"
+        "version": "2.4.1-11"
     },
     "ini-file": {
         "arch": "amd64",
         "digest": "a947aad3f8cab0ff7c76506e1ea09156dfd442a6842500d1b8203f735b0e6b84",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.4.1-5"
+        "version": "1.4.1-6"
     },
     "wait-for-port": {
         "arch": "amd64",
         "digest": "4b509978f6d0a4c3b958deeb3490241cda60e4412c138da665192631d60f70de",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-8"
+        "version": "1.0.1-9"
     }
 }
