@@ -11,6 +11,6 @@
         "digest": "7deb9eb62fe85a77eb5f701e3352cbc78142e62cc2eb47c0edb533756b544455",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2022.2.16-0"
+        "version": "2022.2.16-1"
     }
 }
