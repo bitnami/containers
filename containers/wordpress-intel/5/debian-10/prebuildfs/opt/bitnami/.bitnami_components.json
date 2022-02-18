@@ -11,48 +11,48 @@
         "digest": "e4111d4f7ed30cafbf80e97f6fae69787445517a7a18c5a0dcca23360cf185ae",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.3.34-1"
+        "version": "10.3.34-2"
     },
     "nginx-intel": {
         "arch": "amd64",
         "digest": "e7924e45eb2f6ff901a8deef6159a9c964f99aec73bc752f2cc8db68d0bc7a4f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.4.7-7"
+        "version": "0.4.7-8"
     },
     "php": {
         "arch": "amd64",
         "digest": "54e6b41ed87ed76ea41b5e9edca5eb79be84c404ed2151b7245084997eefce08",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.28-1"
+        "version": "7.4.28-2"
     },
     "qatengine": {
         "arch": "amd64",
         "digest": "b37daa55e544d3a25a19c257a3e49371e6e634c41cd69bb3b90ca316c793dadd",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.6.11-3"
+        "version": "0.6.11-4"
     },
     "render-template": {
         "arch": "amd64",
         "digest": "4694f01476c5a457a71f280562df45ea542bdf3f9b298ff87643a89ea365f5fb",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-8"
+        "version": "1.0.1-9"
     },
     "wordpress": {
         "arch": "amd64",
         "digest": "63c42401482377ed238f7eea9cafc1d418fa8e5d79741aca930280031aaaf154",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "5.9.0-5"
+        "version": "5.9.0-6"
     },
     "wp-cli": {
         "arch": "amd64",
         "digest": "b9ff8ce30dc4066f9a09722f4327e8987554252fda65db266e9e68d31ec99589",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.6.0-2"
+        "version": "2.6.0-3"
     }
 }
