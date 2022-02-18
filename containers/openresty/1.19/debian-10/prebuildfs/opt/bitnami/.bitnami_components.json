@@ -11,6 +11,6 @@
         "digest": "fee72398d3dac9744e2bae2cb8f65c9a6058abe0a3f33398c8570b1c8c90d442",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.19.9-1-5"
+        "version": "1.19.9-1-6"
     }
 }
