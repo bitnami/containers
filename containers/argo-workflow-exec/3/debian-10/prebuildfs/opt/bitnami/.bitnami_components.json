@@ -4,20 +4,20 @@
         "digest": "2a51df33f883dd15116bbf3b59b17a6a515c35b1875b369211c75a98a270bc68",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.2.8-2"
+        "version": "3.2.8-3"
     },
     "gosu": {
         "arch": "amd64",
         "digest": "6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-5"
+        "version": "1.14.0-6"
     },
     "kubectl": {
         "arch": "amd64",
-        "digest": "8bbee363c2a90b6abb64be508c7997d592c1a7911633bc36964ba9580678baad",
+        "digest": "0931d0145f2537ec2b22cb5d337c16e7c1bdc7b8b063103b8ded36526494ca53",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.23.3-2"
+        "version": "1.23.4-0"
     }
 }
