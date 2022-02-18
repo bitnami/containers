@@ -4,13 +4,13 @@
         "digest": "3ce0c1dc975421abe79ffa5d459b4562802312f299a86576d1a169fe2d38f5d9",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.8.322-6"
+        "version": "1.8.322-7"
     },
     "jmx-exporter": {
         "arch": "amd64",
         "digest": "aee9a235264d51a1f1844b4bc5c6016df598d24654acacfc57ee848d1f5c03b7",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.16.1-6"
+        "version": "0.16.1-7"
     }
 }
