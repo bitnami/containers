@@ -11,13 +11,13 @@
         "digest": "b9d79630fdbebfc0232f0d8f8367755fced5509fba9de5affe03986f36d3f72e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.17.0-2"
+        "version": "7.17.0-3"
     },
     "yq": {
         "arch": "amd64",
         "digest": "5a5d183286140781203d11d468d4f84371c5808ee86471c7ee445f8d3cef0eb6",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.20.1-1"
+        "version": "4.20.1-2"
     }
 }
