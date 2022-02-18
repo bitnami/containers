@@ -4,34 +4,34 @@
         "digest": "547301c2f6ab6cf6c17dee9ebb76c04bf122024db1bed033d58d69208b13212e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.2.5-2"
+        "version": "2.2.5-3"
     },
     "gosu": {
         "arch": "amd64",
         "digest": "6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-5"
+        "version": "1.14.0-6"
     },
     "helm": {
         "arch": "amd64",
         "digest": "8ef06f47a0a68457511a5fe342a744608ce8b55b323e765cc37241974a0cd96f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.8.0-2"
+        "version": "3.8.0-3"
     },
     "ksonnet": {
         "arch": "amd64",
         "digest": "8f4c68b1ed1fcbba8a7f4ca8f3d396ead5ecbc8d77f6d8de502bef94f47dfa31",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.13.1-5"
+        "version": "0.13.1-6"
     },
     "kustomize": {
         "arch": "amd64",
         "digest": "36bd1af0b15f3f8bae64101a5f5decf1c1c3a30809bf2bf7146e7a8981882938",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.5.2-2"
+        "version": "4.5.2-3"
     }
 }
