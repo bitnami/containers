@@ -9,11 +9,11 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq libaudit1 libbz2-1.0 libc6 libcap-ng0 libffi6 libgcc1 libicu63 libjemalloc2 liblzma5 libncurses6 libncursesw6 libpam0g libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 libxml2 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-32" --checksum 0649a1688896cf6ee9a9fd4d554ac33f364f498fca6d8be67a95f8111e7dad4f
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.19.0-2" --checksum d1c0e36b98ba6464fcf517c50d35d212d8bf7626cd99838f361bbe1c47319e5e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.34-1" --checksum e4111d4f7ed30cafbf80e97f6fae69787445517a7a18c5a0dcca23360cf185ae
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-33" --checksum 0649a1688896cf6ee9a9fd4d554ac33f364f498fca6d8be67a95f8111e7dad4f
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.19.0-3" --checksum d1c0e36b98ba6464fcf517c50d35d212d8bf7626cd99838f361bbe1c47319e5e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.34-2" --checksum e4111d4f7ed30cafbf80e97f6fae69787445517a7a18c5a0dcca23360cf185ae
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-5" --checksum 6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ghost" "4.36.1-0" --checksum 1ef4c8c2e5f1efef12532685d5fe28205ec4ca6af18a13b438049b806052a68f
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ghost" "4.36.1-1" --checksum 1ef4c8c2e5f1efef12532685d5fe28205ec4ca6af18a13b438049b806052a68f
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -22,7 +22,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/ghost/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="4.36.1-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="4.36.1-debian-10-r1" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/ghost/bin:$PATH"
 
 EXPOSE 2368 3000
