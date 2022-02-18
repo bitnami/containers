@@ -4,28 +4,28 @@
         "digest": "2c5d26107cfc1f74ac5dde1e650f6899091511667fe92777e7777b84dea46e81",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.8.12-6"
+        "version": "1.8.12-7"
     },
     "express": {
         "arch": "amd64",
         "digest": "9dca714929ffcc225e02f1dc74306c5796b7d24b04ca1a81d4dc5b25b8c66526",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.17.3-0"
+        "version": "4.17.3-1"
     },
     "express-generator": {
         "arch": "amd64",
         "digest": "fae4f374196bee45755b5bea63cc80ca2cdeaf800408c3433eae912090517f0f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.16.1-6"
+        "version": "4.16.1-7"
     },
     "git": {
         "arch": "amd64",
         "digest": "e5feed054f6c6e0497502e5c0551070241f543966491e962ce1f51780f6b170e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.35.1-3"
+        "version": "2.35.1-4"
     },
     "gosu": {
         "arch": "amd64",
@@ -39,27 +39,27 @@
         "digest": "d1c0e36b98ba6464fcf517c50d35d212d8bf7626cd99838f361bbe1c47319e5e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "14.19.0-2"
+        "version": "14.19.0-3"
     },
     "python": {
         "arch": "amd64",
         "digest": "0649a1688896cf6ee9a9fd4d554ac33f364f498fca6d8be67a95f8111e7dad4f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.8.12-32"
+        "version": "3.8.12-33"
     },
     "sequelize-cli": {
         "arch": "amd64",
         "digest": "6a21abf8f11aee37388c7f4edb087b0833d8f618d6855fa7cff65ff6e9a7feaa",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "5.5.1-6"
+        "version": "5.5.1-7"
     },
     "wait-for-port": {
         "arch": "amd64",
         "digest": "4b509978f6d0a4c3b958deeb3490241cda60e4412c138da665192631d60f70de",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-8"
+        "version": "1.0.1-9"
     }
 }
