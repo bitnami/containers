@@ -43,7 +43,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`2.6`, `2.6-debian-10`, `2.6.1`, `2.6.1-debian-10-r26`, `latest` (2.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.6.1-debian-10-r26/2.6/debian-10/Dockerfile)
 * [`2.5`, `2.5-debian-10`, `2.5.11`, `2.5.11-debian-10-r26` (2.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.5.11-debian-10-r26/2.5/debian-10/Dockerfile)
-* [`2.4`, `2.4-debian-10`, `2.4.59`, `2.4.59-debian-10-r212` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.4.59-debian-10-r212/2.4/debian-10/Dockerfile)
+* [`2.4`, `2.4-debian-10`, `2.4.59`, `2.4.59-debian-10-r213` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.4.59-debian-10-r213/2.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/openldap GitHub repo](https://github.com/bitnami/bitnami-docker-openldap).
 
@@ -314,6 +314,10 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Output of `docker info`
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+
+## Branch Deprecation Notice
+
+OpenLDAP's branch 2.4 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 03-17-2022
 
 ## License
 
