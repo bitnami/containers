@@ -9,16 +9,16 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/external-dns-0.10.2-32-linux-amd64-debian-10.tar.gz && \
-    echo "a24265726654ae3cb511c0de4930c637cdcd94c8da23c10129cc1256aae0015b  /tmp/bitnami/pkg/cache/external-dns-0.10.2-32-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/external-dns-0.10.2-32-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/external-dns-0.10.2-32-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/external-dns-0.10.2-33-linux-amd64-debian-10.tar.gz && \
+    echo "a24265726654ae3cb511c0de4930c637cdcd94c8da23c10129cc1256aae0015b  /tmp/bitnami/pkg/cache/external-dns-0.10.2-33-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/external-dns-0.10.2-33-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/external-dns-0.10.2-33-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="external-dns" \
-    BITNAMI_IMAGE_VERSION="0.10.2-debian-10-r63" \
+    BITNAMI_IMAGE_VERSION="0.10.2-debian-10-r64" \
     PATH="/opt/bitnami/external-dns/bin:$PATH"
 
 EXPOSE 7979
