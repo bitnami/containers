@@ -4,20 +4,20 @@
         "digest": "6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-5"
+        "version": "1.14.0-6"
     },
     "java": {
         "arch": "amd64",
         "digest": "3ce0c1dc975421abe79ffa5d459b4562802312f299a86576d1a169fe2d38f5d9",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.8.322-6"
+        "version": "1.8.322-7"
     },
     "solr": {
         "arch": "amd64",
         "digest": "c9f0fe40bbffc9be6b5cf66e16717ebc8ab638a1aca183d2ccbe5d1e283ec74c",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.11.1-5"
+        "version": "8.11.1-6"
     }
 }
