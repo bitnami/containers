@@ -11,13 +11,13 @@
         "digest": "8e9d15dc54b3cf57e7f3b92efbb1e01ed07f002889034ec7703b62efb8265243",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "11.0.14-5"
+        "version": "11.0.14-6"
     },
     "neo4j": {
         "arch": "amd64",
         "digest": "a5e3bba059cfd3d995502e1127308a738a9345be116857824a49f8f935b27fd8",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.4.4-1"
+        "version": "4.4.4-2"
     }
 }
