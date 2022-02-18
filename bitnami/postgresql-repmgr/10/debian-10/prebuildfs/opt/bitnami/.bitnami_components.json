@@ -4,13 +4,13 @@
         "digest": "6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-5"
+        "version": "1.14.0-6"
     },
     "postgresql-repmgr": {
         "arch": "amd64",
         "digest": "c6eead87b7087e4b5f4f949b11f6454ea71a6a80c91c8f038fdb2feba06ab863",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.20.0-3"
+        "version": "10.20.0-4"
     }
 }
