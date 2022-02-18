@@ -4,13 +4,13 @@
         "digest": "3ce0c1dc975421abe79ffa5d459b4562802312f299a86576d1a169fe2d38f5d9",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.8.322-6"
+        "version": "1.8.322-7"
     },
     "spring-cloud-skipper-shell": {
         "arch": "amd64",
         "digest": "1ced4ef94059a652af53d34dc1039225acf548e120fb5f6301c3b13eea532cf9",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.8.2-5"
+        "version": "2.8.2-6"
     }
 }
