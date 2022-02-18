@@ -11,13 +11,13 @@
         "digest": "bd42f22c8bd00a113486c878b3903664cb58d5a5fc916e72b7ffd0b021c7d8aa",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.20200116.0-9"
+        "version": "0.20200116.0-10"
     },
     "python": {
         "arch": "amd64",
         "digest": "ffc2c8171b0c9afe33b9b131e9e0483757f78f15ab539bc56a2391659f282c75",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.9.10-20"
+        "version": "3.9.10-21"
     }
 }
