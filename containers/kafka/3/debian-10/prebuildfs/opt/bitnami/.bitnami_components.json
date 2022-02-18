@@ -11,27 +11,27 @@
         "digest": "8e9d15dc54b3cf57e7f3b92efbb1e01ed07f002889034ec7703b62efb8265243",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "11.0.14-5"
+        "version": "11.0.14-6"
     },
     "kafka": {
         "arch": "amd64",
         "digest": "dd85cc10cdf2dd5f4a9ca18fca2f1d566e9d2ae427ab02cc33bbe91765c33a19",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.1.0-6"
+        "version": "3.1.0-7"
     },
     "render-template": {
         "arch": "amd64",
         "digest": "4694f01476c5a457a71f280562df45ea542bdf3f9b298ff87643a89ea365f5fb",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-8"
+        "version": "1.0.1-9"
     },
     "wait-for-port": {
         "arch": "amd64",
         "digest": "4b509978f6d0a4c3b958deeb3490241cda60e4412c138da665192631d60f70de",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-8"
+        "version": "1.0.1-9"
     }
 }
