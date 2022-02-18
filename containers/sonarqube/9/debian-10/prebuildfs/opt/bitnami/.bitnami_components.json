@@ -11,20 +11,20 @@
         "digest": "8e9d15dc54b3cf57e7f3b92efbb1e01ed07f002889034ec7703b62efb8265243",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "11.0.14-5"
+        "version": "11.0.14-6"
     },
     "postgresql-client": {
         "arch": "amd64",
         "digest": "16a63d70f2e993902e13c5674a09da4f1cd83831856bd30360f3956c0c5051a8",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "13.6.0-2"
+        "version": "13.6.0-3"
     },
     "sonarqube": {
         "arch": "amd64",
         "digest": "18a87f622cb9bb92d6679784587c617eafc82ad93195000b5657db528bb2b568",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "9.3.0-2"
+        "version": "9.3.0-3"
     }
 }
