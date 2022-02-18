@@ -11,20 +11,20 @@
         "digest": "3ce0c1dc975421abe79ffa5d459b4562802312f299a86576d1a169fe2d38f5d9",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.8.322-6"
+        "version": "1.8.322-7"
     },
     "spring-cloud-dataflow": {
         "arch": "amd64",
         "digest": "3913c812270dc3695bc07d3a41bf8f29968bbd867d3a90b270cd9e39ecae5459",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.9.2-5"
+        "version": "2.9.2-6"
     },
     "yq": {
         "arch": "amd64",
         "digest": "5a5d183286140781203d11d468d4f84371c5808ee86471c7ee445f8d3cef0eb6",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.20.1-1"
+        "version": "4.20.1-2"
     }
 }
