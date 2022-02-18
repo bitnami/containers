@@ -4,27 +4,27 @@
         "digest": "8e9d15dc54b3cf57e7f3b92efbb1e01ed07f002889034ec7703b62efb8265243",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "11.0.14-5"
+        "version": "11.0.14-6"
     },
     "jruby": {
         "arch": "amd64",
         "digest": "9563376c60cb85ba81499724aa39ef764004ee321fa8fee5a2f1b573eb16e57e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "9.3.3-0-6"
+        "version": "9.3.3-0-7"
     },
     "node": {
         "arch": "amd64",
         "digest": "d1c0e36b98ba6464fcf517c50d35d212d8bf7626cd99838f361bbe1c47319e5e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "14.19.0-2"
+        "version": "14.19.0-3"
     },
     "python": {
         "arch": "amd64",
         "digest": "0649a1688896cf6ee9a9fd4d554ac33f364f498fca6d8be67a95f8111e7dad4f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.8.12-32"
+        "version": "3.8.12-33"
     }
 }
