@@ -11,13 +11,13 @@
         "digest": "a947aad3f8cab0ff7c76506e1ea09156dfd442a6842500d1b8203f735b0e6b84",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.4.1-5"
+        "version": "1.4.1-6"
     },
     "mysql": {
         "arch": "amd64",
         "digest": "afcf85bb074d62b27a6cdaf305c21792e8f32f9ad059dee8bc52ad31fd251783",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.0.28-4"
+        "version": "8.0.28-5"
     }
 }
