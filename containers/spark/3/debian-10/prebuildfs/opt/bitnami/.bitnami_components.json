@@ -11,20 +11,20 @@
         "digest": "3ce0c1dc975421abe79ffa5d459b4562802312f299a86576d1a169fe2d38f5d9",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.8.322-6"
+        "version": "1.8.322-7"
     },
     "python": {
         "arch": "amd64",
         "digest": "0649a1688896cf6ee9a9fd4d554ac33f364f498fca6d8be67a95f8111e7dad4f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.8.12-32"
+        "version": "3.8.12-33"
     },
     "spark": {
         "arch": "amd64",
         "digest": "16d5e371a0e2106d9319ad0160c4c2a0b05b6103e8296ffeac481db74030c541",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.2.1-5"
+        "version": "3.2.1-6"
     }
 }
