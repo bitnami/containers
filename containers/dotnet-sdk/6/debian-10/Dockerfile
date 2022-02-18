@@ -9,10 +9,10 @@ ENV HOME="/app" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages build-essential ca-certificates curl git gzip libc6 libcap2-bin libgcc1 libicu-dev liblttng-ust-dev libsqlite3-dev libssl-dev libstdc++6 pkg-config procps tar unzip wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/dotnet-sdk-6.0.200-0-linux-amd64-debian-10.tar.gz && \
-    echo "ae54c7a1096c4b214cc19b2be74b93e85d2dbba141e9d962e370a23502ddc6eb  /tmp/bitnami/pkg/cache/dotnet-sdk-6.0.200-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/dotnet-sdk-6.0.200-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/dotnet-sdk-6.0.200-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/dotnet-sdk-6.0.200-1-linux-amd64-debian-10.tar.gz && \
+    echo "ae54c7a1096c4b214cc19b2be74b93e85d2dbba141e9d962e370a23502ddc6eb  /tmp/bitnami/pkg/cache/dotnet-sdk-6.0.200-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/dotnet-sdk-6.0.200-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/dotnet-sdk-6.0.200-1-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
@@ -22,7 +22,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/dotnet-sdk/postunpack.sh
 ENV BITNAMI_APP_NAME="dotnet-sdk" \
-    BITNAMI_IMAGE_VERSION="6.0.200-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="6.0.200-debian-10-r1" \
     DOTNET_CLI_HOME="/app" \
     DOTNET_ROOT="/opt/bitnami/dotnet-sdk/bin" \
     PATH="/opt/bitnami/dotnet-sdk/bin:$PATH"
