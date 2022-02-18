@@ -9,20 +9,20 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/wait-for-port-1.0.1-8-linux-amd64-debian-10.tar.gz && \
-    echo "4b509978f6d0a4c3b958deeb3490241cda60e4412c138da665192631d60f70de  /tmp/bitnami/pkg/cache/wait-for-port-1.0.1-8-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/wait-for-port-1.0.1-8-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/wait-for-port-1.0.1-8-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kong-ingress-controller-2.2.1-0-linux-amd64-debian-10.tar.gz && \
-    echo "d159574809c2d133e42b1376a8d4661d1a5ad99112d91435b57cddeb3a1f47cf  /tmp/bitnami/pkg/cache/kong-ingress-controller-2.2.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/kong-ingress-controller-2.2.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/kong-ingress-controller-2.2.1-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/wait-for-port-1.0.1-9-linux-amd64-debian-10.tar.gz && \
+    echo "4b509978f6d0a4c3b958deeb3490241cda60e4412c138da665192631d60f70de  /tmp/bitnami/pkg/cache/wait-for-port-1.0.1-9-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/wait-for-port-1.0.1-9-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/wait-for-port-1.0.1-9-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kong-ingress-controller-2.2.1-1-linux-amd64-debian-10.tar.gz && \
+    echo "d159574809c2d133e42b1376a8d4661d1a5ad99112d91435b57cddeb3a1f47cf  /tmp/bitnami/pkg/cache/kong-ingress-controller-2.2.1-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/kong-ingress-controller-2.2.1-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/kong-ingress-controller-2.2.1-1-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="kong-ingress-controller" \
-    BITNAMI_IMAGE_VERSION="2.2.1-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="2.2.1-debian-10-r1" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/kong-ingress-controller/bin:$PATH"
 
 USER 1001
