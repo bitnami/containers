@@ -4,13 +4,13 @@
         "digest": "8e9d15dc54b3cf57e7f3b92efbb1e01ed07f002889034ec7703b62efb8265243",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "11.0.14-5"
+        "version": "11.0.14-6"
     },
     "keycloak-config-cli": {
         "arch": "amd64",
         "digest": "95b761142f12a58dc405cc196191c2f7eb704e17a1968cfdd928fb6f0d545aea",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.7.0-1"
+        "version": "4.7.0-2"
     }
 }
