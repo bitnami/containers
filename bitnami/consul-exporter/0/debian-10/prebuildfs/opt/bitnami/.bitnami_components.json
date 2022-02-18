@@ -4,6 +4,6 @@
         "digest": "edbd0222e65388df76d80e6a16f71b73874ac1a528eade4c34b64674a7107068",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.8.0-2"
+        "version": "0.8.0-3"
     }
 }
