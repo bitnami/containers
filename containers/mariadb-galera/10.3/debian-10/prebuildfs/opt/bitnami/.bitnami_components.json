@@ -11,13 +11,13 @@
         "digest": "a947aad3f8cab0ff7c76506e1ea09156dfd442a6842500d1b8203f735b0e6b84",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.4.1-5"
+        "version": "1.4.1-6"
     },
     "mariadb-galera": {
         "arch": "amd64",
         "digest": "31fa4c9678d17efc2f9acc3f446d96f1c80822d101298b64f08cfb9e56fa58bb",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.3.34-2"
+        "version": "10.3.34-3"
     }
 }
