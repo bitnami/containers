@@ -4,20 +4,20 @@
         "digest": "6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-5"
+        "version": "1.14.0-6"
     },
     "ini-file": {
         "arch": "amd64",
         "digest": "a947aad3f8cab0ff7c76506e1ea09156dfd442a6842500d1b8203f735b0e6b84",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.4.1-5"
+        "version": "1.4.1-6"
     },
     "mariadb": {
         "arch": "amd64",
         "digest": "efd161330e7aff9366e7d04f5be96dbc43e99484ef5febd954bfc337d4a55fb2",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.3.34-1"
+        "version": "10.3.34-2"
     }
 }
