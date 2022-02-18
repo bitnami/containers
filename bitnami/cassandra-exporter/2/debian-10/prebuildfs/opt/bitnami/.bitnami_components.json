@@ -4,13 +4,13 @@
         "digest": "884a66121289ea3b0561d7a53c826c3e796987e9f31c22b2cddf24ca3eb85f5e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.3.7-2"
+        "version": "2.3.7-3"
     },
     "java": {
         "arch": "amd64",
         "digest": "8e9d15dc54b3cf57e7f3b92efbb1e01ed07f002889034ec7703b62efb8265243",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "11.0.14-5"
+        "version": "11.0.14-6"
     }
 }
