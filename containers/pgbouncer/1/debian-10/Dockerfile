@@ -12,7 +12,7 @@ RUN install_packages acl ca-certificates curl gzip libaudit1 libbsd0 libc-ares2 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-9" --checksum 4b509978f6d0a4c3b958deeb3490241cda60e4412c138da665192631d60f70de
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "10.20.0-3" --checksum 90e96788ce3e47d1148f8fac65d14c6b8bfa084544a8cb983399537156dd2620
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.1-6" --checksum a947aad3f8cab0ff7c76506e1ea09156dfd442a6842500d1b8203f735b0e6b84
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-5" --checksum 6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-6" --checksum 6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "pgbouncer" "1.16.1-6" --checksum 4377cd58a0ce1ad1fda8e274eeb7dcfbdb13e16d42e086515355d23469fdf882
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -27,7 +27,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 RUN /opt/bitnami/scripts/pgbouncer/postunpack.sh
 ENV BITNAMI_APP_NAME="pgbouncer" \
-    BITNAMI_IMAGE_VERSION="1.16.1-debian-10-r97" \
+    BITNAMI_IMAGE_VERSION="1.16.1-debian-10-r98" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
