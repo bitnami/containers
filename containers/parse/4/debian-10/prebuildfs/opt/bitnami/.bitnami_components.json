@@ -4,14 +4,14 @@
         "digest": "6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-5"
+        "version": "1.14.0-6"
     },
     "mongodb-client": {
         "arch": "amd64",
         "digest": "91dbf114c756e57dbeb3b1c29e1aaaf2f7bdf7ef03fd4d8227f088fa6ec2a33a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.4.12-5"
+        "version": "4.4.12-6"
     },
     "node": {
         "arch": "amd64",
