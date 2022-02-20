@@ -10,7 +10,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libbsd0 libc6 libexpat1 libfontconfig1 libfreetype6 libgcc1 libgcrypt20 libgd3 libgeoip1 libgpg-error0 libicu63 libjbig0 libjpeg62-turbo liblzma5 libpcre3 libpng16-16 libssl1.1 libstdc++6 libtiff5 libuuid1 libwebp6 libx11-6 libxau6 libxcb1 libxdmcp6 libxml2 libxpm4 libxslt1.1 libzstd1 perl procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "openresty" "1.19.9-1-6" --checksum fee72398d3dac9744e2bae2cb8f65c9a6058abe0a3f33398c8570b1c8c90d442
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-5" --checksum 6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-6" --checksum 6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -18,7 +18,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/openresty/postunpack.sh
 ENV BITNAMI_APP_NAME="openresty" \
-    BITNAMI_IMAGE_VERSION="1.19.9-1-debian-10-r190" \
+    BITNAMI_IMAGE_VERSION="1.19.9-1-debian-10-r191" \
     PATH="/opt/bitnami/openresty/bin:/opt/bitnami/openresty/luajit/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080 8443
