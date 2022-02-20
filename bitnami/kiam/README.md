@@ -32,7 +32,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4`, `4-debian-10`, `4.2.0`, `4.2.0-debian-10-r98` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kiam/blob/4.2.0-debian-10-r98/4/debian-10/Dockerfile)
-* [`3`, `3-debian-10`, `3.6.0`, `3.6.0-debian-10-r450`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kiam/blob/3.6.0-debian-10-r450/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.6.0`, `3.6.0-debian-10-r451`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kiam/blob/3.6.0-debian-10-r451/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kiam GitHub repo](https://github.com/bitnami/bitnami-docker-kiam).
 
@@ -67,6 +67,10 @@ $ docker run --rm --name Kiam bitnami/kiam:latest -- --version
 ```
 
 Check the [official Kiam documentation](https://github.com/uswitch/kiam/tree/master/docs) for a list of the available parameters.
+
+## Branch Deprecation Notice
+
+Kiam's branch 3 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 03-17-2022
 
 ## Contributing
 
