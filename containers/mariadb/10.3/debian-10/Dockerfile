@@ -10,7 +10,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaio1 libaudit1 libc6 libcap-ng0 libgcc1 libicu63 libjemalloc2 liblzma5 libncurses6 libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 procps psmisc tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.1-6" --checksum a947aad3f8cab0ff7c76506e1ea09156dfd442a6842500d1b8203f735b0e6b84
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mariadb" "10.3.34-2" --checksum efd161330e7aff9366e7d04f5be96dbc43e99484ef5febd954bfc337d4a55fb2
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mariadb" "10.3.34-3" --checksum df79b31fe89be886e771e2f0d597abb929ae86233c727dfc5106e2733c398ae9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-6" --checksum 6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -20,7 +20,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY rootfs /
 RUN /opt/bitnami/scripts/mariadb/postunpack.sh
 ENV BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.3.34-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="10.3.34-debian-10-r6" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 
 EXPOSE 3306
