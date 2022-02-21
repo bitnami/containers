@@ -8,21 +8,21 @@ ENV HOME="/" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip libc6 procps tar wget
+RUN install_packages ca-certificates curl gzip libc6 libssl1.1 procps tar wget
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/haproxy-dataplaneapi-2.4.5-0-linux-amd64-debian-10.tar.gz && \
     echo "fdf187c8d42f37c62e4638b79424e115eb9100b53879ee8a2b74284823761641  /tmp/bitnami/pkg/cache/haproxy-dataplaneapi-2.4.5-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/haproxy-dataplaneapi-2.4.5-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/haproxy-dataplaneapi-2.4.5-0-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/haproxy-2.5.3-0-linux-amd64-debian-10.tar.gz && \
-    echo "980dccc62b45059062169a6b16ba70443b258893647a5ba5882d020993a2e594  /tmp/bitnami/pkg/cache/haproxy-2.5.3-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/haproxy-2.5.3-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/haproxy-2.5.3-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/haproxy-2.5.3-1-linux-amd64-debian-10.tar.gz && \
+    echo "da107d812169c3e89ee95817faa284f6180069c9664f2f376c8ba9b6ac024319  /tmp/bitnami/pkg/cache/haproxy-2.5.3-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/haproxy-2.5.3-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/haproxy-2.5.3-1-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="haproxy" \
-    BITNAMI_IMAGE_VERSION="2.5.3-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="2.5.3-debian-10-r1" \
     PATH="/opt/bitnami/haproxy-dataplaneapi/bin:/opt/bitnami/haproxy/sbin:$PATH"
 
 USER 1001
