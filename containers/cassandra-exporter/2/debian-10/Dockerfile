@@ -22,7 +22,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="cassandra-exporter" \
-    BITNAMI_IMAGE_VERSION="2.3.7-debian-10-r18" \
+    BITNAMI_IMAGE_VERSION="2.3.7-debian-10-r19" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 8080
