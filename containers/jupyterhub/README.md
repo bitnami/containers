@@ -10,9 +10,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ## TL;DR
 
-```console
-$ docker run --name jupyterhub bitnami/jupyterhub:latest
-```
+This image is meant to run in a Kubernetes cluster.
 
 ## Why use Bitnami Images?
 
@@ -31,7 +29,7 @@ $ docker run --name jupyterhub bitnami/jupyterhub:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.5.0`, `1.5.0-debian-10-r98`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyterhub/blob/1.5.0-debian-10-r98/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.5.0`, `1.5.0-debian-10-r99`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyterhub/blob/1.5.0-debian-10-r99/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jupyterhub GitHub repo](https://github.com/bitnami/bitnami-docker-jupyterhub).
 
