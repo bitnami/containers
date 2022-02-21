@@ -15,9 +15,9 @@
     },
     "mysql": {
         "arch": "amd64",
-        "digest": "afcf85bb074d62b27a6cdaf305c21792e8f32f9ad059dee8bc52ad31fd251783",
+        "digest": "fb81453006d07f139a56bbed538a4af8832796c961a4e525a72db099590297e6",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.0.28-5"
+        "version": "8.0.28-6"
     }
 }
