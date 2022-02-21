@@ -24,13 +24,13 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/qatengine/postunpack.sh
-RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
+RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN /opt/bitnami/scripts/nginx-php-fpm/postunpack.sh
 RUN /opt/bitnami/scripts/wordpress/postunpack.sh
 RUN /opt/bitnami/scripts/wp-cli/postunpack.sh
 ENV BITNAMI_APP_NAME="wordpress-intel" \
-    BITNAMI_IMAGE_VERSION="5.9.0-debian-10-r12" \
+    BITNAMI_IMAGE_VERSION="5.9.0-debian-10-r13" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/wp-cli/bin:/opt/bitnami/nginx/sbin:/opt/bitnami/mysql/bin:$PATH"
