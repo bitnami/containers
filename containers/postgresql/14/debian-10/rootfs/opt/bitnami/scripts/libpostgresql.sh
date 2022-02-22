@@ -567,8 +567,6 @@ postgresql_clean_from_restart() {
 #########################
 postgresql_initialize() {
     info "Initializing PostgreSQL database..."
-    postgresql_clean_from_restart
-
     # This fixes an issue where the trap would kill the entrypoint.sh, if a PID was left over from a previous run
     # Exec replaces the process without creating a new one, and when the container is restarted it may have the same PID
     rm -f "$POSTGRESQL_PID_FILE"
