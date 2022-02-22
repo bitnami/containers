@@ -22,17 +22,17 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "e4111d4f7ed30cafbf80e97f6fae69787445517a7a18c5a0dcca23360cf185ae",
+        "digest": "ac406fd038f4e46388452ae0a9b631044d0846934be7d80a4aec21a251fe2596",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.3.34-2"
+        "version": "10.3.34-3"
     },
     "opencart": {
         "arch": "amd64",
-        "digest": "353357a000a9d9e9aceed120e349b910cd9c877aa25858825c8107a561341a95",
+        "digest": "695cdfcbcd74086dcb8ae9fd03eef446c394f1e5c618ccf9699b2ca1e35dd3d2",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.0.3-8-3"
+        "version": "3.0.3-8-4"
     },
     "php": {
         "arch": "amd64",
