@@ -16,9 +16,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
+RUN chown -R 1001:1001 /opt/bitnami/fluent-bit
 
 ENV BITNAMI_APP_NAME="fluent-bit" \
-    BITNAMI_IMAGE_VERSION="1.8.12-debian-10-r24" \
+    BITNAMI_IMAGE_VERSION="1.8.12-debian-10-r25" \
     PATH="/opt/bitnami/fluent-bit/bin:$PATH"
 
 EXPOSE 2020
