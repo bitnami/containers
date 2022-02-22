@@ -9,10 +9,10 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip iptables procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kiam-3.6.0-31-linux-amd64-debian-10.tar.gz && \
-    echo "7db74e12f71f98a793ef0f0a957aca03e3b0f13a29d1521b2210a1bbd2426a27  /tmp/bitnami/pkg/cache/kiam-3.6.0-31-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/kiam-3.6.0-31-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/kiam-3.6.0-31-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kiam-3.6.0-32-linux-amd64-debian-10.tar.gz && \
+    echo "749137e8a276dc080eb377c78b40f685b21b77a1bc51961dfe9e38df8de56742  /tmp/bitnami/pkg/cache/kiam-3.6.0-32-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/kiam-3.6.0-32-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/kiam-3.6.0-32-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -20,7 +20,7 @@ RUN update-alternatives --set iptables /usr/sbin/iptables-legacy && \
     update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
 
 ENV BITNAMI_APP_NAME="kiam" \
-    BITNAMI_IMAGE_VERSION="3.6.0-debian-10-r451" \
+    BITNAMI_IMAGE_VERSION="3.6.0-debian-10-r452" \
     PATH="/opt/bitnami/kiam/bin:$PATH"
 
 USER 1001
