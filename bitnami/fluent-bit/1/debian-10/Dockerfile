@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN chown -R 1001:1001 /opt/bitnami/fluent-bit
 
 ENV BITNAMI_APP_NAME="fluent-bit" \
-    BITNAMI_IMAGE_VERSION="1.8.12-debian-10-r25" \
+    BITNAMI_IMAGE_VERSION="1.8.12-debian-10-r26" \
     PATH="/opt/bitnami/fluent-bit/bin:$PATH"
 
 EXPOSE 2020
