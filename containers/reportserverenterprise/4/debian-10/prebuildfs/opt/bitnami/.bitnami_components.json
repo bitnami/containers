@@ -15,10 +15,10 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "e4111d4f7ed30cafbf80e97f6fae69787445517a7a18c5a0dcca23360cf185ae",
+        "digest": "ac406fd038f4e46388452ae0a9b631044d0846934be7d80a4aec21a251fe2596",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.3.34-2"
+        "version": "10.3.34-3"
     },
     "render-template": {
         "arch": "amd64",
