@@ -25,6 +25,8 @@ trap "postgresql_stop" EXIT
 am_i_root && ensure_user_exists "$POSTGRESQL_DAEMON_USER" --group "$POSTGRESQL_DAEMON_GROUP"
 # Fix logging issue when running as root
 am_i_root && chmod o+w "$(readlink /dev/stdout)"
+# Remove flags and postmaster files from a previous run
+postgresql_clean_from_restart
 # Allow running custom pre-initialization scripts
 postgresql_custom_pre_init_scripts
 # Ensure PostgreSQL is initialized
