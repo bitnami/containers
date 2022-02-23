@@ -2,7 +2,7 @@
 
 ## What is Golang?
 
-> Go is an object oriented programming language with sensible primitives, static typing and reflection. It also supports packages for efficient management of dependencies.	
+> Go is an object oriented programming language with sensible primitives, static typing and reflection. It also supports packages for efficient management of dependencies.
 
 [Overview of Golang](https://golang.org/)
 
@@ -37,7 +37,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.17`, `1.17-debian-10`, `1.17.7`, `1.17.7-debian-10-r10` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.17.7-debian-10-r10/1.17/debian-10/Dockerfile)
+* [`1.17`, `1.17-debian-10`, `1.17.7`, `1.17.7-debian-10-r11` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.17.7-debian-10-r11/1.17/debian-10/Dockerfile)
 * [`1.16`, `1.16-debian-10`, `1.16.14`, `1.16.14-debian-10-r10`, `latest` (1.16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.16.14-debian-10-r10/1.16/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/golang GitHub repo](https://github.com/bitnami/bitnami-docker-golang).
