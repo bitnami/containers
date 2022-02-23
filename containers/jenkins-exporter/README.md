@@ -34,9 +34,15 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.20171225.0`, `0.20171225.0-debian-10-r713`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins-exporter/blob/0.20171225.0-debian-10-r713/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.20171225.0`, `0.20171225.0-debian-10-r714`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins-exporter/blob/0.20171225.0-debian-10-r714/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jenkins-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-jenkins-exporter).
+
+### Container Deprecation Notice
+
+Jenkins Exporter container is no longer maintained by VMware Application Catalog and is now internally tagged as to be deprecated. This container will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 03-23-2022
+
+With the deprecation of this container, the metrics functionality for the Jenkins Helm chart is deprecated as well.
 
 ## Get this image
 
