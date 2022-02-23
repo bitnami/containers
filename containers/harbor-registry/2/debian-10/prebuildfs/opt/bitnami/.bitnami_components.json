@@ -8,9 +8,9 @@
     },
     "harbor-registry": {
         "arch": "amd64",
-        "digest": "3fab41220e87a5223cb5ca9eec8caa572b7e808aa504198a91408b024b9ac0d5",
+        "digest": "0ae4f421097f0288ba398b777d7b74cea4b8327eaab4297203b6518f77555b1f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.1-33"
+        "version": "2.4.1-34"
     }
 }
