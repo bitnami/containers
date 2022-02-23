@@ -15,10 +15,10 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "3ce0c1dc975421abe79ffa5d459b4562802312f299a86576d1a169fe2d38f5d9",
+        "digest": "8e9d15dc54b3cf57e7f3b92efbb1e01ed07f002889034ec7703b62efb8265243",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.8.322-7"
+        "version": "11.0.14-6"
     },
     "jenkins": {
         "arch": "amd64",
