@@ -16,6 +16,10 @@ $ docker run -it --network host -v $HOME/.kubewatch.yaml:/root/.kubewatch.yaml -
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
 
+## Deprecation Notice
+
+Kubewatch is no longer maintained by upstream and is now internally tagged as to be deprecated. This image will no longer be released in our catalog a month after this notice is published, but already released images will still persist in the registries. Valid to be removed starting on: 03-23-2022
+
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -43,7 +47,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.1.0`, `0.1.0-debian-10-r542`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.1.0-debian-10-r542/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.1.0`, `0.1.0-debian-10-r543`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubewatch/blob/0.1.0-debian-10-r543/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubewatch GitHub repo](https://github.com/bitnami/bitnami-docker-kubewatch).
 
