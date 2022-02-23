@@ -11,7 +11,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libbz2-1.0 libc6 libgcc1 libjemalloc2 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libtinfo6 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "2.7.18-23" --checksum 02d84add8b8aacf57eaa3207633960601d61870c38758b2658e4a4d964c24f5c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "2.7.18-24" --checksum 227de616a5daa4f3f62d54a9d7fef29848fc0e0d4b8a4893b4796e9669a39b86
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.322-7" --checksum 3ce0c1dc975421abe79ffa5d459b4562802312f299a86576d1a169fe2d38f5d9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-6" --checksum 6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.20.2-0" --checksum cf127534dd75da82d58377bfd0d84f47fe1760830336a44365372805e48fe343
@@ -26,7 +26,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/cassandra/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.0.26-debian-10-r10" \
+    BITNAMI_IMAGE_VERSION="3.0.26-debian-10-r11" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/cassandra/bin:$PATH"
 
