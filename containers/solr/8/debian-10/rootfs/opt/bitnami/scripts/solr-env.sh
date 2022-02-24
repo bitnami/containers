@@ -65,7 +65,7 @@ export SOLR_PID_DIR="${SOLR_BASE_DIR}/tmp"
 export SOLR_LOGS_DIR="${SOLR_BASE_DIR}/logs"
 export SOLR_SERVER_DIR="${SOLR_BASE_DIR}/server"
 
-# Persitence
+# Persistence
 export SOLR_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/solr"
 export SOLR_DATA_TO_PERSIST="server/solr"
 
