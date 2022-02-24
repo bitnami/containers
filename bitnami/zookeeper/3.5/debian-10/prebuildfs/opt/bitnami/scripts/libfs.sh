@@ -74,8 +74,9 @@ is_dir_empty() {
 #   boolean
 #########################
 is_mounted_dir_empty() {
-    local dir="${1:?missing directory}"
-
+    local -r path="${1:?missing directory}"
+    # Calculate real path in order to avoid issues with symlinks
+    local -r dir="$(realpath "$path")"
     if is_dir_empty "$dir" || find "$dir" -mindepth 1 -maxdepth 1 -not -name ".snapshot" -not -name "lost+found" -exec false {} +; then
         true
     else
