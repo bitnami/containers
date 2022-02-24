@@ -29,10 +29,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "54e6b41ed87ed76ea41b5e9edca5eb79be84c404ed2151b7245084997eefce08",
+        "digest": "85c2d062266714acb395e522f8c337e88ab6b9bd07800cb34ad227b86f144743",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.28-2"
+        "version": "7.4.28-3"
     },
     "prestashop": {
         "arch": "amd64",
