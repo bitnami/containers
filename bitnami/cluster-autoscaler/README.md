@@ -2,7 +2,7 @@
 
 ## What is Cluster Autoscaler?
 
-> Cluster Autoscaler is a component that automatically adjusts the size of a Kubernetes Cluster so that all pods have a place to run and there are no unneeded nodes
+> Cluster Autoscaler is a component that automatically adjusts the size of a Kubernetes Cluster so that all pods have a place to run and there are no unneeded nodes.
 
 [Overview of Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler)
 
@@ -65,7 +65,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.23.0`, `1.23.0-debian-10-r46`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cluster-autoscaler/blob/1.23.0-debian-10-r46/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.23.0`, `1.23.0-debian-10-r47`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cluster-autoscaler/blob/1.23.0-debian-10-r47/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cluster-autoscaler GitHub repo](https://github.com/bitnami/bitnami-docker-cluster-autoscaler).
 
