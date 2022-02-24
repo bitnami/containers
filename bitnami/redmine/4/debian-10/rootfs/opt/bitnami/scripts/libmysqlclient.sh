@@ -929,12 +929,17 @@ mysql_conf_set() {
     local -r key="${1:?key missing}"
     local -r value="${2:?value missing}"
     read -r -a sections <<<"${3:-mysqld}"
-    local -r file="${4:-"$DB_CONF_FILE"}"
+    local -r ignore_inline_comments="${4:-no}"
+    local -r file="${5:-"$DB_CONF_FILE"}"
     info "Setting ${key} option"
     debug "Setting ${key} to '${value}' in ${DB_FLAVOR} configuration file ${file}"
     # Check if the configuration exists in the file
     for section in "${sections[@]}"; do
-        ini-file set --section "$section" --key "$key" --value "$value" "$file"
+        if is_boolean_yes "$ignore_inline_comments"; then
+            ini-file set --ignore-inline-comments --section "$section" --key "$key" --value "$value" "$file"
+        else
+            ini-file set --section "$section" --key "$key" --value "$value" "$file"
+        fi
     done
 }
 
