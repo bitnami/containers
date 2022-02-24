@@ -48,7 +48,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.5.2`, `3.5.2-debian-10-r20`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.5.2-debian-10-r20/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.5.2`, `3.5.2-debian-10-r21`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.5.2-debian-10-r21/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/etcd GitHub repo](https://github.com/bitnami/bitnami-docker-etcd).
 
@@ -116,7 +116,7 @@ Finally we create a new container instance to launch the Etcd client and connect
 $ docker run -it --rm \
     --network app-tier \
     --env ALLOW_NONE_AUTHENTICATION=yes \
-    bitnami/etcd:latest Etcdctl --endpoints http://etcd-server:2379 put /message Hello
+    bitnami/etcd:latest etcdctl --endpoints http://etcd-server:2379 put /message Hello
 ```
 
 ### Using Docker Compose
