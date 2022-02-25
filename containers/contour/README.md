@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.20.0`, `1.20.0-debian-10-r7`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-contour/blob/1.20.0-debian-10-r7/1/debian-10/Dockerfile)
+* [`1.20`, `1.20-debian-10`, `1.20.1`, `1.20.1-debian-10-r0` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-contour/blob/1.20.1-debian-10-r0/1.20/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/contour GitHub repo](https://github.com/bitnami/bitnami-docker-contour).
 
@@ -62,7 +62,7 @@ $ docker pull bitnami/contour:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/contour:latest 'https://github.com/bitnami/bitnami-docker-contour.git#master:1/debian-10'
+
 ```
 
 ## Persisting your application
@@ -160,6 +160,12 @@ Re-create your container from the new image.
 ```console
 $ docker run --name contour bitnami/contour:latest
 ```
+
+## Notable Changes
+
+# 1.20.0-debian-10-r8 Rename branch 1.20
+
+- Branch 1 has been renamed into branch 1.20 in order to follow the upstream [Contour major versions](https://github.com/projectcontour/contour/releases).
 
 ## Contributing
 
