@@ -82,7 +82,9 @@ export CONSUL_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
 
 # System users (when running with a privileged user)
 export CONSUL_DAEMON_USER="consul"
+export CONSUL_SYSTEM_USER="$CONSUL_DAEMON_USER"
 export CONSUL_DAEMON_GROUP="consul"
+export CONSUL_SYSTEM_GROUP="$CONSUL_DAEMON_GROUP"
 
 # Consul runtime settings
 export CONSUL_RPC_PORT_NUMBER="${CONSUL_RPC_PORT_NUMBER:-8300}"
