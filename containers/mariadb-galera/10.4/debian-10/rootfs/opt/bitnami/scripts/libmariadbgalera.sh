@@ -362,12 +362,10 @@ EOF
 mysql_galera_configure_ssl() {
     if is_boolean_yes "$DB_ENABLE_TLS" && ! grep -q "socket.ssl_cert=" "$DB_TLS_CERT_FILE"; then
         info "Setting ENABLE_TLS"
-        cat >> "$DB_CONF_FILE" <<EOF
-ssl_cert=${DB_TLS_CERT_FILE}
-ssl_key=${DB_TLS_KEY_FILE}
-ssl_ca=${DB_TLS_CA_FILE}
-wsrep_provider_options="socket.ssl_cert=${DB_TLS_CERT_FILE};socket.ssl_key=${DB_TLS_KEY_FILE};socket.ssl_ca=${DB_TLS_CA_FILE}"
-EOF
+        mysql_conf_set "ssl_cert" "${DB_TLS_CERT_FILE}" "mariadb"
+        mysql_conf_set "ssl_key" "${DB_TLS_KEY_FILE}" "mariadb"
+        mysql_conf_set "ssl_ca" "${DB_TLS_CA_FILE}" "mariadb"
+        mysql_conf_set "wsrep_provider_options" "'socket.ssl_cert=${DB_TLS_CERT_FILE};socket.ssl_key=${DB_TLS_KEY_FILE};socket.ssl_ca=${DB_TLS_CA_FILE}'" "mariadb" "yes"
     fi
 
     # Avoid exit code of previous commands to affect the result of this function
@@ -1585,12 +1583,17 @@ mysql_conf_set() {
     local -r key="${1:?key missing}"
     local -r value="${2:?value missing}"
     read -r -a sections <<<"${3:-mysqld}"
-    local -r file="${4:-"$DB_CONF_FILE"}"
+    local -r ignore_inline_comments="${4:-no}"
+    local -r file="${5:-"$DB_CONF_FILE"}"
     info "Setting ${key} option"
     debug "Setting ${key} to '${value}' in ${DB_FLAVOR} configuration file ${file}"
     # Check if the configuration exists in the file
     for section in "${sections[@]}"; do
-        ini-file set --section "$section" --key "$key" --value "$value" "$file"
+        if is_boolean_yes "$ignore_inline_comments"; then
+            ini-file set --ignore-inline-comments --section "$section" --key "$key" --value "$value" "$file"
+        else
+            ini-file set --section "$section" --key "$key" --value "$value" "$file"
+        fi
     done
 }
 
