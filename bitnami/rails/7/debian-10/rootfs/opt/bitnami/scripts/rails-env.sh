@@ -66,12 +66,16 @@ export PATH="${BITNAMI_ROOT_DIR}/ruby/bin:${BITNAMI_ROOT_DIR}/mysql/bin:${BITNAM
 
 # Database configuration
 RAILS_DATABASE_TYPE="${RAILS_DATABASE_TYPE:-"${DATABASE_TYPE:-}"}"
-export RAILS_DATABASE_TYPE="${RAILS_DATABASE_TYPE:-mariadb}" # only used during the first initialization
+export RAILS_DATABASE_TYPE="${RAILS_DATABASE_TYPE:-mariadb}"
+export DATABASE_TYPE="$RAILS_DATABASE_TYPE" # only used during the first initialization
 RAILS_DATABASE_HOST="${RAILS_DATABASE_HOST:-"${DATABASE_HOST:-}"}"
-export RAILS_DATABASE_HOST="${RAILS_DATABASE_HOST:-mariadb}" # only used during the first initialization
+export RAILS_DATABASE_HOST="${RAILS_DATABASE_HOST:-mariadb}"
+export DATABASE_HOST="$RAILS_DATABASE_HOST" # only used during the first initialization
 RAILS_DATABASE_PORT_NUMBER="${RAILS_DATABASE_PORT_NUMBER:-"${DATABASE_PORT_NUMBER:-}"}"
-export RAILS_DATABASE_PORT_NUMBER="${RAILS_DATABASE_PORT_NUMBER:-3306}" # only used during the first initialization
+export RAILS_DATABASE_PORT_NUMBER="${RAILS_DATABASE_PORT_NUMBER:-3306}"
+export DATABASE_PORT_NUMBER="$RAILS_DATABASE_PORT_NUMBER" # only used during the first initialization
 RAILS_DATABASE_NAME="${RAILS_DATABASE_NAME:-"${DATABASE_NAME:-}"}"
-export RAILS_DATABASE_NAME="${RAILS_DATABASE_NAME:-bitnami_myapp}" # only used during the first initialization
+export RAILS_DATABASE_NAME="${RAILS_DATABASE_NAME:-bitnami_myapp}"
+export DATABASE_NAME="$RAILS_DATABASE_NAME" # only used during the first initialization
 
 # Custom environment variables may be defined below
