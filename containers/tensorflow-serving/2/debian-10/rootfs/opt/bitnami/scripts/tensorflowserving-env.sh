@@ -53,7 +53,7 @@ export TENSORFLOW_SERVING_LOGS_DIR="${TENSORFLOW_SERVING_BASE_DIR}/logs"
 export TENSORFLOW_SERVING_LOGS_FILE="${TENSORFLOW_SERVING_LOGS_DIR}/tensorflow-serving.log"
 export PATH="${TENSORFLOW_SERVING_BASE_DIR}/serving/bazel-bin/tensorflow_serving/model_servers/:${PATH}"
 
-# Persitence
+# Persistence
 export TENSORFLOW_SERVING_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/tensorflow-serving"
 export TENSORFLOW_SERVING_MODEL_DATA="${BITNAMI_VOLUME_DIR}/model-data"
 
