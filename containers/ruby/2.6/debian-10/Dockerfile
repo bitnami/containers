@@ -7,11 +7,11 @@ ENV OS_ARCH="amd64" \
 
 COPY prebuildfs /
 # Install required system packages and dependencies
-RUN install_packages build-essential ca-certificates curl ghostscript git gzip imagemagick libc6 libgmp-dev libncurses6 libreadline-dev libreadline7 libsqlite3-dev libssl-dev libssl1.1 libtinfo6 libxml2-dev libxslt1-dev pkg-config procps sqlite3 tar unzip wget zlib1g zlib1g-dev
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/ruby-2.6.9-8-linux-amd64-debian-10.tar.gz && \
-    echo "e02d967e42ddbafdcf871527051ef50a7828cdc0e316bf301d3e143abbea774a  /tmp/bitnami/pkg/cache/ruby-2.6.9-8-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/ruby-2.6.9-8-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/ruby-2.6.9-8-linux-amd64-debian-10.tar.gz
+RUN install_packages build-essential ca-certificates curl git gzip libc6 libncurses6 libreadline-dev libreadline7 libsqlite3-dev libssl-dev libssl1.1 libtinfo6 pkg-config procps sqlite3 tar unzip wget zlib1g
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/ruby-2.6.9-9-linux-amd64-debian-10.tar.gz && \
+    echo "6e65b0783358aee1dccf51c84874bba0a3a3a66f14d5d284ec94dba06a9fc510  /tmp/bitnami/pkg/cache/ruby-2.6.9-9-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/ruby-2.6.9-9-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/ruby-2.6.9-9-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
@@ -19,7 +19,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="2.6.9-debian-10-r92" \
+    BITNAMI_IMAGE_VERSION="2.6.9-debian-10-r93" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 EXPOSE 3000
