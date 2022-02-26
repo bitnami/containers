@@ -29,10 +29,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "338b60596e8a45b8a55ab2831bcc05a804d423da70c296e737c41616ab11f104",
+        "digest": "5c171174be6888598db66cc9f7ce56431257109397c2a83904b86d81dd32368f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.8.12-35"
+        "version": "3.8.12-36"
     },
     "rails": {
         "arch": "amd64",
@@ -43,10 +43,10 @@
     },
     "ruby": {
         "arch": "amd64",
-        "digest": "e02d967e42ddbafdcf871527051ef50a7828cdc0e316bf301d3e143abbea774a",
+        "digest": "6e65b0783358aee1dccf51c84874bba0a3a3a66f14d5d284ec94dba06a9fc510",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.6.9-8"
+        "version": "2.6.9-9"
     },
     "wait-for-port": {
         "arch": "amd64",
