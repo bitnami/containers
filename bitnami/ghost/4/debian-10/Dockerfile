@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq libaudit1 libbz2-1.0 libc6 libcap-ng0 libffi6 libgcc1 libicu63 libjemalloc2 liblzma5 libncurses6 libncursesw6 libpam0g libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 libxml2 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-35" --checksum 338b60596e8a45b8a55ab2831bcc05a804d423da70c296e737c41616ab11f104
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-36" --checksum 5c171174be6888598db66cc9f7ce56431257109397c2a83904b86d81dd32368f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.19.0-3" --checksum d1c0e36b98ba6464fcf517c50d35d212d8bf7626cd99838f361bbe1c47319e5e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.34-3" --checksum ac406fd038f4e46388452ae0a9b631044d0846934be7d80a4aec21a251fe2596
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-6" --checksum 6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664
@@ -22,7 +22,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/ghost/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV BITNAMI_APP_NAME="ghost" \
-    BITNAMI_IMAGE_VERSION="4.37.0-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="4.37.0-debian-10-r1" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/ghost/bin:$PATH"
 
 EXPOSE 2368 3000
