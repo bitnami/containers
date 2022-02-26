@@ -1,10 +1,10 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "1d5e4e1025c8ac058cfcfcc2c75328633fcd4a0b654ab21a79bcd111609f4263",
+        "digest": "a95264737aaeada58b5e3e42b865a9c953b71802472538c0a4529cdb9f3f7e2c",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.52-6"
+        "version": "2.4.52-7"
     },
     "gosu": {
         "arch": "amd64",
@@ -29,10 +29,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "85c2d062266714acb395e522f8c337e88ab6b9bd07800cb34ad227b86f144743",
+        "digest": "f88eaca2c2d0a6626717675499d9ef42a6a5796508048c30da91164f970581d3",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.28-3"
+        "version": "7.4.28-4"
     },
     "prestashop": {
         "arch": "amd64",
