@@ -11,7 +11,7 @@ RUN install_packages acl ca-certificates curl gzip libaudit1 libbsd0 libbz2-1.0 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.4.28-4" --checksum f88eaca2c2d0a6626717675499d9ef42a6a5796508048c30da91164f970581d3
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.4.24-3" --checksum 80bf46b728b91a708f223819ce789ad3f81f9c6b38878e8f547a46356cbfa0a6
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-6" --checksum 6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "codeigniter" "4.1.8-3" --checksum 8a34b4d717794c6ed8ba8cb965136817922b42c844f92f56c1d66ae8e07bb725
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "codeigniter" "4.1.9-0" --checksum 533b91f36e7b3d9fd722d53163fbbd34fd05420020c6a118f06f6c632f56edfe
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/bitnami-user.sh
@@ -21,7 +21,7 @@ RUN /opt/bitnami/scripts/codeigniter/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
 ENV BITNAMI_APP_NAME="codeigniter" \
-    BITNAMI_IMAGE_VERSION="4.1.8-debian-10-r32" \
+    BITNAMI_IMAGE_VERSION="4.1.9-debian-10-r0" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/codeigniter/bin:$PATH" \
     PHP_ENABLE_OPCACHE="0"
 
