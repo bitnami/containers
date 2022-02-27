@@ -32,7 +32,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4`, `4-debian-10`, `4.2.0`, `4.2.0-debian-10-r104` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kiam/blob/4.2.0-debian-10-r104/4/debian-10/Dockerfile)
-* [`3`, `3-debian-10`, `3.6.0`, `3.6.0-debian-10-r455`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kiam/blob/3.6.0-debian-10-r455/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.6.0`, `3.6.0-debian-10-r456`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kiam/blob/3.6.0-debian-10-r456/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kiam GitHub repo](https://github.com/bitnami/bitnami-docker-kiam).
 
