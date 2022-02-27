@@ -22,7 +22,7 @@ RUN chown -R 1001:1001 /opt/bitnami/prometheus
 
 RUN mkdir -p /opt/bitnami/prometheus/data/ && chmod g+rwX /opt/bitnami/prometheus/data/
 ENV BITNAMI_APP_NAME="prometheus" \
-    BITNAMI_IMAGE_VERSION="2.33.4-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="2.33.4-debian-10-r4" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
 EXPOSE 9090
