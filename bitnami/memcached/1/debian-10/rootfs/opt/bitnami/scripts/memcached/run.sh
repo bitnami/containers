@@ -26,7 +26,7 @@ args=("-u" "$MEMCACHED_DAEMON_USER" "-p" "$MEMCACHED_PORT_NUMBER" "-v")
 [[ -n "$MEMCACHED_THREADS" ]] && args+=("-t" "$MEMCACHED_THREADS")
 [[ -n "$MEMCACHED_MAX_ITEM_SIZE" ]] && args+=("-I" "$MEMCACHED_MAX_ITEM_SIZE")
 # Extra flags
-read -r -a extra_flags <<< "$MEMCACHED_EXTRA_FLAGS"
+read -r -a extra_flags <<<"$MEMCACHED_EXTRA_FLAGS"
 [[ "${#extra_flags[@]}" -gt 0 ]] && args+=("${extra_flags[@]}")
 args+=("$@")
 

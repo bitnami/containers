@@ -54,7 +54,7 @@ memcached_validate() {
         print_validation_error "The variable MEMCACHED_THREADS must be positive integer"
     fi
 
-    # Memcached Threads validation
+    # Memcached Item size validation
     if [[ -n "${MEMCACHED_MAX_ITEM_SIZE}" ]] && ! is_positive_int "${MEMCACHED_MAX_ITEM_SIZE}"; then
         print_validation_error "The variable MEMCACHED_MAX_ITEM_SIZE must be positive integer"
     fi
@@ -119,7 +119,7 @@ memcached_enable_authentication() {
     memcached_create_user "${user}" "${password}"
 
     debug "Generating config file '${SASL_CONF_FILE}'"
-    cat > "${SASL_CONF_FILE}" <<EOF
+    cat >"${SASL_CONF_FILE}" <<EOF
 mech_list: plain
 sasldb_path: ${SASL_DB_FILE}
 EOF
