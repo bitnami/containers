@@ -48,7 +48,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.6.14`, `1.6.14-debian-10-r17`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.6.14-debian-10-r17/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.6.14`, `1.6.14-debian-10-r18`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-memcached/blob/1.6.14-debian-10-r18/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/memcached GitHub repo](https://github.com/bitnami/bitnami-docker-memcached).
 
@@ -203,7 +203,7 @@ services:
 
 ### Specify max item size (slab size)
 
-By default, the Bitnami Memcached container will not specify any max item size and will start with Memcached defaults (1048576 ~ 1 megabyte). You can specify a different value with the `MEMCACHED_MAX_ITEM_SIZE` environment variable. Only numeric values are accepted - use `8388608` instead of `8m`
+By default, the Memcached container will not specify any max item size and will start with Memcached defaults (1048576 ~ 1 megabyte). You can specify a different value with the `MEMCACHED_MAX_ITEM_SIZE` environment variable. Only numeric values are accepted - use `8388608` instead of `8m`
 
 ```console
 $ docker run --name memcached -e MEMCACHED_MAX_ITEM_SIZE=8388608 bitnami/memcached:latest
