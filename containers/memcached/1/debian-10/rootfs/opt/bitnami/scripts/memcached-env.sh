@@ -30,6 +30,7 @@ memcached_env_vars=(
     MEMCACHED_CACHE_SIZE
     MEMCACHED_MAX_CONNECTIONS
     MEMCACHED_THREADS
+    MEMCACHED_MAX_ITEM_SIZE
 )
 for env_var in "${memcached_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -71,5 +72,6 @@ export MEMCACHED_MAX_TIMEOUT="${MEMCACHED_MAX_TIMEOUT:-5}"
 export MEMCACHED_CACHE_SIZE="${MEMCACHED_CACHE_SIZE:-}"
 export MEMCACHED_MAX_CONNECTIONS="${MEMCACHED_MAX_CONNECTIONS:-}"
 export MEMCACHED_THREADS="${MEMCACHED_THREADS:-}"
+export MEMCACHED_MAX_ITEM_SIZE="${MEMCACHED_MAX_ITEM_SIZE:-}"
 
 # Custom environment variables may be defined below
