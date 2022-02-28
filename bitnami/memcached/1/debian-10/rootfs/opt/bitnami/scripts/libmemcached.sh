@@ -54,6 +54,11 @@ memcached_validate() {
         print_validation_error "The variable MEMCACHED_THREADS must be positive integer"
     fi
 
+    # Memcached Threads validation
+    if [[ -n "${MEMCACHED_MAX_ITEM_SIZE}" ]] && ! is_positive_int "${MEMCACHED_MAX_ITEM_SIZE}"; then
+        print_validation_error "The variable MEMCACHED_MAX_ITEM_SIZE must be positive integer"
+    fi
+
     [[ "${error_code}" -eq 0 ]] || exit "$error_code"
 }
 

@@ -201,6 +201,25 @@ services:
   ...
 ```
 
+### Specify max item size (slab size)
+
+By default, the Bitnami Memcached container will not specify any max item size and will start with Memcached defaults (1048576 ~ 1 megabyte). You can specify a different value with the `MEMCACHED_MAX_ITEM_SIZE` environment variable. Only numeric values are accepted - use `8388608` instead of `8m`
+
+```console
+$ docker run --name memcached -e MEMCACHED_MAX_ITEM_SIZE=8388608 bitnami/memcached:latest
+```
+
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-memcached/blob/master/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  memcached:
+  ...
+    environment:
+      - MEMCACHED_MAX_ITEM_SIZE=8388608
+  ...
+```
+
 ### Creating the Memcached admin user
 
 Authentication on the Memcached server is disabled by default. To enable authentication, specify the password for the Memcached admin user using the `MEMCACHED_PASSWORD` environment variable (or in the content of the file specified in `MEMCACHED_PASSWORD_FILE`).
