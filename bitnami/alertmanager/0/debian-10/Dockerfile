@@ -9,10 +9,10 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/alertmanager-0.23.0-6-linux-amd64-debian-10.tar.gz && \
-    echo "d2b8b59b36bf1c607452d5b85c1ef9978ce944f864d0437668e3f1b1ca72365f  /tmp/bitnami/pkg/cache/alertmanager-0.23.0-6-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/alertmanager-0.23.0-6-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/alertmanager-0.23.0-6-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/alertmanager-0.23.0-7-linux-amd64-debian-10.tar.gz && \
+    echo "54f6648d2ca1f07a93daa210705e25d13f43745d061522f0203d32d67f0c61c2  /tmp/bitnami/pkg/cache/alertmanager-0.23.0-7-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/alertmanager-0.23.0-7-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/alertmanager-0.23.0-7-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN ln -sf /opt/bitnami/alertmanager/conf /etc/alertmanager
@@ -21,7 +21,7 @@ RUN chmod g+rwX /opt/bitnami
 
 RUN mkdir -p /opt/bitnami/alertmanager/data/ && chmod g+rwX /opt/bitnami/alertmanager/data/
 ENV BITNAMI_APP_NAME="alertmanager" \
-    BITNAMI_IMAGE_VERSION="0.23.0-debian-10-r180" \
+    BITNAMI_IMAGE_VERSION="0.23.0-debian-10-r181" \
     PATH="/opt/bitnami/alertmanager/bin:$PATH"
 
 EXPOSE 9093
