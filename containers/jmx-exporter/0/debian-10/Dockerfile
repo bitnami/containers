@@ -20,9 +20,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
+RUN chown -R 1001:1001 /opt/bitnami/jmx-exporter
 
 ENV BITNAMI_APP_NAME="jmx-exporter" \
-    BITNAMI_IMAGE_VERSION="0.16.1-debian-10-r223" \
+    BITNAMI_IMAGE_VERSION="0.16.1-debian-10-r224" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 5556
