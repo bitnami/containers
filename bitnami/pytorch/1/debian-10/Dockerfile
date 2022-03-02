@@ -9,9 +9,9 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libbz2-1.0 libc6 libffi6 libgcc1 libgomp1 liblzma5 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.7.12-36" --checksum 73dc62dc970b33015e075a5063476086de5330ce4f06611c14bb4be1c0bee601
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "pytorch" "1.10.2-4" --checksum d2eeab88cd5cdcf8438559a79e9011d52d9bd518e6227b7c59cf57766cc1b835
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-6" --checksum 6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.7.12-37" --checksum 7bb42e6ee98da00ca0d1f741faed4ab77a193773e1a1d1e08dcc01db4cd02c56
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "pytorch" "1.10.2-5" --checksum 19e920158423b370bcdd9354f682f0095f90fedb2802cf54aef65144f8a6d458
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/pytorch/postunpack.sh
 ENV BITNAMI_APP_NAME="pytorch" \
-    BITNAMI_IMAGE_VERSION="1.10.2-debian-10-r25" \
+    BITNAMI_IMAGE_VERSION="1.10.2-debian-10-r26" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/python3.7/site-packages/torch/lib/:/opt/bitnami/python/lib/python3.7/site-packages/PIL/.libs/:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:$PATH"
 
