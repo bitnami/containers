@@ -103,11 +103,11 @@ Additionally a helper symlink `/app` is present that points to the webapps deplo
 $ docker cp /path/to/app.war tomcat:/app
 ```
 
-In case you want to create a custom image that already contains your application war file, you need to add it to the `/opt/bitnami/tomcat/webapps_default` folder. In the example below we create a forked image with an extra `.war` file.
+In case you want to create a custom image that already contains your application war file, you need to add it to the `/opt/bitnami/tomcat/webapps` folder. In the example below we create a forked image with an extra `.war` file.
 
 ```Dockerfile
 FROM bitnami/tomcat:9.0
-COPY sample.war /opt/bitnami/tomcat/webapps_default
+COPY sample.war /opt/bitnami/tomcat/webapps
 ```
 
 **Note!**
@@ -155,6 +155,7 @@ The Apache Tomcat instance can be customized by specifying environment variables
 - `TOMCAT_ENABLE_AUTH`: Whether to enable authentication for Apache Tomcat manager application. Default: **yes**
 - `TOMCAT_ENABLE_AJP`: Whether to enable the Apache Tomcat AJP connector. Default: **no**
 - `TOMCAT_EXTRA_JAVA_OPTS`: Additional Java settings for Apache Tomcat. No defaults.
+- `TOMCAT_INSTALL_DEFAULT_WEBAPPS`: Adds default webapps (ROOT, manager, host-manager, etc.) for deployment. Default: **yes**
 
 #### Creating a custom user
 
