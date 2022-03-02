@@ -8,15 +8,15 @@ ENV OS_ARCH="amd64" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libbz2-1.0 libc6 libcom-err2 libcurl4 libffi6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libncursesw6 libnettle6 libnghttp2-14 libp11-kit0 libpsl5 libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 procps sudo tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-36" --checksum 5c171174be6888598db66cc9f7ce56431257109397c2a83904b86d81dd32368f
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.19.0-3" --checksum d1c0e36b98ba6464fcf517c50d35d212d8bf7626cd99838f361bbe1c47319e5e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "sequelize-cli" "5.5.1-7" --checksum 6a21abf8f11aee37388c7f4edb087b0833d8f618d6855fa7cff65ff6e9a7feaa
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.35.1-4" --checksum e5feed054f6c6e0497502e5c0551070241f543966491e962ce1f51780f6b170e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "express-generator" "4.16.1-7" --checksum fae4f374196bee45755b5bea63cc80ca2cdeaf800408c3433eae912090517f0f
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "bower" "1.8.12-7" --checksum 2c5d26107cfc1f74ac5dde1e650f6899091511667fe92777e7777b84dea46e81
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-9" --checksum 4b509978f6d0a4c3b958deeb3490241cda60e4412c138da665192631d60f70de
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-6" --checksum 6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "express" "4.17.3-1" --checksum 9dca714929ffcc225e02f1dc74306c5796b7d24b04ca1a81d4dc5b25b8c66526
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-37" --checksum 3272da2099afdae735a7d3fb199e83f3bd74b44ebf6953e2f9a3dd0ad45091d1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.19.0-4" --checksum 0649af9ad2856d01d574146b62c840d3a330f2e85227a2ae73ec6500737ccccc
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "sequelize-cli" "5.5.1-8" --checksum 01d999017f6852a67b58aafe191e7c60decac22e2fcef6252a5d3d4964839d02
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.35.1-5" --checksum da12ba7cebb03c4eb983ba2248daf0ed5399be1bd8fa9d2d3931614ce6079ff6
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "express-generator" "4.16.1-8" --checksum 27539ad157fbe90d36b91ef6760d225919ff5e929b4e698e6b051a2c77e1e46e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "bower" "1.8.12-8" --checksum d7bd0d251bb6f7a1ce771bd953c53e4ba7d0bb22ab4f29f92b3e0ba0cbe644bf
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-10" --checksum 35c818ba3f4b5aae905959bc7d3a5e81fc63786e3c662b604612c0aa7fcda8fd
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "express" "4.17.3-2" --checksum 399947e2f0edbfc2b40bd401e18f3a59e087e8d1d57c92faa1370e418afbef67
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/bitnami-user.sh
@@ -25,7 +25,7 @@ COPY rootfs /
 RUN mkdir -p /dist /app /.npm /.config /.cache /.local && chmod g+rwX /dist /app /.npm /.config /.cache /.local
 RUN /opt/bitnami/scripts/express/postunpack.sh
 ENV BITNAMI_APP_NAME="express" \
-    BITNAMI_IMAGE_VERSION="4.17.3-debian-10-r12" \
+    BITNAMI_IMAGE_VERSION="4.17.3-debian-10-r13" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/sequelize-cli/bin:/opt/bitnami/git/bin:/opt/bitnami/bower/bin:/opt/bitnami/common/bin:/opt/bitnami/express/bin:$PATH"
 
 EXPOSE 3000
