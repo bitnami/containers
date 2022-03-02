@@ -1,51 +1,51 @@
 {
     "git": {
         "arch": "amd64",
-        "digest": "e5feed054f6c6e0497502e5c0551070241f543966491e962ce1f51780f6b170e",
+        "digest": "da12ba7cebb03c4eb983ba2248daf0ed5399be1bd8fa9d2d3931614ce6079ff6",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.35.1-4"
+        "version": "2.35.1-5"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664",
+        "digest": "d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-6"
+        "version": "1.14.0-7"
     },
     "jasperreports": {
         "arch": "amd64",
-        "digest": "814c4cf528a55b8770c317a1dda7ae44e8466ed107f071d0b52b8c384a35af2d",
+        "digest": "149c3b1c81432bf40d051b1240dfb947d9d8224d52593ff653fe1f82508e56d4",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.8.1-33"
+        "version": "7.8.1-34"
     },
     "java": {
         "arch": "amd64",
-        "digest": "3ce0c1dc975421abe79ffa5d459b4562802312f299a86576d1a169fe2d38f5d9",
+        "digest": "d5670d09ac0e679ae28306e417e77e91b44051908ca3a82259efcd70764b996f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.8.322-7"
+        "version": "1.8.322-8"
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "ac406fd038f4e46388452ae0a9b631044d0846934be7d80a4aec21a251fe2596",
+        "digest": "bb0089c26028b568dbe8b8875d39cca3c7835c582dda4fcbdcbed599320c57fe",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.3.34-3"
+        "version": "10.3.34-4"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "4694f01476c5a457a71f280562df45ea542bdf3f9b298ff87643a89ea365f5fb",
+        "digest": "97c2ae4b001c5937e888b920bee7b1a40a076680caac53ded6d10f6207d54565",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-9"
+        "version": "1.0.1-10"
     },
     "tomcat": {
         "arch": "amd64",
-        "digest": "f6f3600acc829e773a223f2f76f65b512451cfb9b1a0b6feca580de4fa7bf95e",
+        "digest": "b5969e9f721752c4feadafdefa987b13f35203dfa1c32797784f931653e62ecd",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "9.0.59-0"
+        "version": "9.0.59-1"
     }
 }
