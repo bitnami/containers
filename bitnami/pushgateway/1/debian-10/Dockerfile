@@ -9,16 +9,16 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/pushgateway-1.4.2-33-linux-amd64-debian-10.tar.gz && \
-    echo "6216cedfb5221534b50ef22c7e606a792d474fa5cab933d57c7afbda64da9123  /tmp/bitnami/pkg/cache/pushgateway-1.4.2-33-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/pushgateway-1.4.2-33-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/pushgateway-1.4.2-33-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/pushgateway-1.4.2-34-linux-amd64-debian-10.tar.gz && \
+    echo "dc5a12bcb88635d6d2188eb7d2dbf8e49af713e3ef1f5f2bd882078e27512cf1  /tmp/bitnami/pkg/cache/pushgateway-1.4.2-34-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/pushgateway-1.4.2-34-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/pushgateway-1.4.2-34-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="pushgateway" \
-    BITNAMI_IMAGE_VERSION="1.4.2-debian-10-r134" \
+    BITNAMI_IMAGE_VERSION="1.4.2-debian-10-r135" \
     PATH="/opt/bitnami/pushgateway/bin:$PATH"
 
 EXPOSE 9091
