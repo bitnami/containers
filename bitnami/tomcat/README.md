@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`10`, `10-debian-10`, `10.0.17`, `10.0.17-debian-10-r1` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/10.0.17-debian-10-r1/10/debian-10/Dockerfile)
-* [`9.0`, `9.0-debian-10`, `9.0.59`, `9.0.59-debian-10-r1`, `latest` (9.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.59-debian-10-r1/9.0/debian-10/Dockerfile)
+* [`9.0`, `9.0-debian-10`, `9.0.59`, `9.0.59-debian-10-r2`, `latest` (9.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.59-debian-10-r2/9.0/debian-10/Dockerfile)
 * [`8.5`, `8.5-debian-10`, `8.5.76`, `8.5.76-debian-10-r0` (8.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.76-debian-10-r0/8.5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tomcat GitHub repo](https://github.com/bitnami/bitnami-docker-tomcat).
@@ -155,7 +155,7 @@ The Apache Tomcat instance can be customized by specifying environment variables
 - `TOMCAT_ENABLE_AUTH`: Whether to enable authentication for Apache Tomcat manager application. Default: **yes**
 - `TOMCAT_ENABLE_AJP`: Whether to enable the Apache Tomcat AJP connector. Default: **no**
 - `TOMCAT_EXTRA_JAVA_OPTS`: Additional Java settings for Apache Tomcat. No defaults.
-- `TOMCAT_INSTALL_DEFAULT_WEBAPPS`: Adds default webapps (ROOT, manager, host-manager, etc.) for deployment. Default: **yes**
+- `TOMCAT_INSTALL_DEFAULT_WEBAPPS`: Whether to add default webapps (ROOT, manager, host-manager, etc.) for deployment. Default: **yes**
 
 #### Creating a custom user
 
