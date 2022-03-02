@@ -1,23 +1,23 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664",
+        "digest": "d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-6"
+        "version": "1.14.0-7"
     },
     "mxnet": {
         "arch": "amd64",
-        "digest": "7f84eab7a8a3e47cd5fea7c8bfa70db023e4cce0b6d7b185a9deec537b077e93",
+        "digest": "b5203b5ef1bc94125d22c7421393df9b33325b2899bdc314febd50b7ff03a75c",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.9.0-34"
+        "version": "1.9.0-35"
     },
     "python": {
         "arch": "amd64",
-        "digest": "5c171174be6888598db66cc9f7ce56431257109397c2a83904b86d81dd32368f",
+        "digest": "3272da2099afdae735a7d3fb199e83f3bd74b44ebf6953e2f9a3dd0ad45091d1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.8.12-36"
+        "version": "3.8.12-37"
     }
 }
