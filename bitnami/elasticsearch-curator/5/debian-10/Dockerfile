@@ -9,14 +9,14 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libbz2-1.0 libc6 libffi6 liblzma5 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libtinfo6 locales procps tar wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/python-3.9.10-24-linux-amd64-debian-10.tar.gz && \
-    echo "7269fd86b2c69677c3856c2de9b4f9cec3ce92204168243da1b77b8f9c12acaa  /tmp/bitnami/pkg/cache/python-3.9.10-24-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/python-3.9.10-24-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/python-3.9.10-24-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/elasticsearch-curator-5.8.4-7-linux-amd64-debian-10.tar.gz && \
-    echo "7d6f96a17e4335a6132de8708aca86caf81540314f4c43c428067a5901a800db  /tmp/bitnami/pkg/cache/elasticsearch-curator-5.8.4-7-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/elasticsearch-curator-5.8.4-7-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/elasticsearch-curator-5.8.4-7-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/python-3.9.10-25-linux-amd64-debian-10.tar.gz && \
+    echo "31df1e20144b858c7c5e1087e8fe3eb1131fd71bc88039992ee215d39380919d  /tmp/bitnami/pkg/cache/python-3.9.10-25-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/python-3.9.10-25-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/python-3.9.10-25-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/elasticsearch-curator-5.8.4-8-linux-amd64-debian-10.tar.gz && \
+    echo "eba3a4967c1119fbeb72a916508111e601ccd803bb828b10acffa2151f5cfaa6  /tmp/bitnami/pkg/cache/elasticsearch-curator-5.8.4-8-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/elasticsearch-curator-5.8.4-8-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/elasticsearch-curator-5.8.4-8-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -29,7 +29,7 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV BITNAMI_APP_NAME="elasticsearch-curator" \
-    BITNAMI_IMAGE_VERSION="5.8.4-debian-10-r270" \
+    BITNAMI_IMAGE_VERSION="5.8.4-debian-10-r271" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/elasticsearch-curator/bin:$PATH"
