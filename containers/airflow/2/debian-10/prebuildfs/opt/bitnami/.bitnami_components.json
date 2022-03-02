@@ -8,44 +8,44 @@
     },
     "git": {
         "arch": "amd64",
-        "digest": "e5feed054f6c6e0497502e5c0551070241f543966491e962ce1f51780f6b170e",
+        "digest": "da12ba7cebb03c4eb983ba2248daf0ed5399be1bd8fa9d2d3931614ce6079ff6",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.35.1-4"
+        "version": "2.35.1-5"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664",
+        "digest": "d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-6"
+        "version": "1.14.0-7"
     },
     "ini-file": {
         "arch": "amd64",
-        "digest": "a947aad3f8cab0ff7c76506e1ea09156dfd442a6842500d1b8203f735b0e6b84",
+        "digest": "7a4f45cbebd2e242278060415dd1a3f0dbe68991fdcaea5bb311e8de54a3e027",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.4.1-6"
+        "version": "1.4.1-7"
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "90e96788ce3e47d1148f8fac65d14c6b8bfa084544a8cb983399537156dd2620",
+        "digest": "351886297b1300f9430bed82c58a9ec4c35101de73ee9bf8bb33b3c7fff76801",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.20.0-3"
+        "version": "10.20.0-4"
     },
     "python": {
         "arch": "amd64",
-        "digest": "5c171174be6888598db66cc9f7ce56431257109397c2a83904b86d81dd32368f",
+        "digest": "3272da2099afdae735a7d3fb199e83f3bd74b44ebf6953e2f9a3dd0ad45091d1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.8.12-36"
+        "version": "3.8.12-37"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "4b509978f6d0a4c3b958deeb3490241cda60e4412c138da665192631d60f70de",
+        "digest": "35c818ba3f4b5aae905959bc7d3a5e81fc63786e3c662b604612c0aa7fcda8fd",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-9"
+        "version": "1.0.1-10"
     }
 }
