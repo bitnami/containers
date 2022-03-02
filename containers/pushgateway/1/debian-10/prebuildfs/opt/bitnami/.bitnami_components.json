@@ -1,9 +1,9 @@
 {
     "pushgateway": {
         "arch": "amd64",
-        "digest": "6216cedfb5221534b50ef22c7e606a792d474fa5cab933d57c7afbda64da9123",
+        "digest": "dc5a12bcb88635d6d2188eb7d2dbf8e49af713e3ef1f5f2bd882078e27512cf1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.4.2-33"
+        "version": "1.4.2-34"
     }
 }
