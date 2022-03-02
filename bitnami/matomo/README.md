@@ -398,7 +398,7 @@ To configure Matomo to send email using SMTP you can set the following environme
  - `SMTP_PORT`: Matomo SMTP port.
  - `SMTP_USER`: Matomo SMTP account user.
  - `SMTP_PASSWORD`: Matomo SMTP account password.
- - `SMTP_PROTOCOL`: Matomo SMTP protocol to use. Available protocols are: "ssl", "tls". No default.
+ - `SMTP_PROTOCOL`: Matomo SMTP protocol to use. Available protocols are: "ssl", "tls", "none". No default.
  - `SMTP_AUTH`: Matomo SMTP authentication mechanism to use. Available mechanisms are: "Plain", "Login", "Crammd5". Default: **Plain**.
 
 This would be an example of SMTP configuration using a Gmail account:
