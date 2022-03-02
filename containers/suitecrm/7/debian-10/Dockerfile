@@ -13,7 +13,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.4.28-5" 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.52-8" --checksum 93e282918042188b83e20d054c3b97c7cd2d0417e459d36c8e328aa8836f645b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.34-4" --checksum bb0089c26028b568dbe8b8875d39cca3c7835c582dda4fcbdcbed599320c57fe
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.28-3" --checksum 5d76ba9ab947c2a96717eaa78803cfaa8acf35128f30035a26a1f22c2da92f37
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "suitecrm" "7.12.4-4" --checksum 1a1e09dd614a81675a4a21f6bcbfaba54c124e0a90cff97c18df64c3749626e5
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "suitecrm" "7.12.5-0" --checksum 5942c50fc16abcc3dc62c5cc3c7eddeef24e4ec6a3731b82a40998d35304c86b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-10" --checksum 97c2ae4b001c5937e888b920bee7b1a40a076680caac53ded6d10f6207d54565
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
@@ -30,7 +30,7 @@ RUN /opt/bitnami/scripts/suitecrm/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     BITNAMI_APP_NAME="suitecrm" \
-    BITNAMI_IMAGE_VERSION="7.12.4-debian-10-r17" \
+    BITNAMI_IMAGE_VERSION="7.12.5-debian-10-r0" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080 8443
