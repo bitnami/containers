@@ -11,13 +11,13 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl fontconfig gzip libaudit1 libc6 libcap-ng0 libcom-err2 libcurl4 libffi6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjemalloc2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libncurses6 libnettle6 libnghttp2-14 libp11-kit0 libpam0g libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libxml2 procps tar xmlstarlet zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.322-7" --checksum 3ce0c1dc975421abe79ffa5d459b4562802312f299a86576d1a169fe2d38f5d9
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "9.0.59-0" --checksum f6f3600acc829e773a223f2f76f65b512451cfb9b1a0b6feca580de4fa7bf95e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.34-3" --checksum ac406fd038f4e46388452ae0a9b631044d0846934be7d80a4aec21a251fe2596
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.35.1-4" --checksum e5feed054f6c6e0497502e5c0551070241f543966491e962ce1f51780f6b170e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-9" --checksum 4694f01476c5a457a71f280562df45ea542bdf3f9b298ff87643a89ea365f5fb
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "jasperreports" "7.8.1-33" --checksum 814c4cf528a55b8770c317a1dda7ae44e8466ed107f071d0b52b8c384a35af2d
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-6" --checksum 6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.322-8" --checksum d5670d09ac0e679ae28306e417e77e91b44051908ca3a82259efcd70764b996f
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "9.0.59-1" --checksum b5969e9f721752c4feadafdefa987b13f35203dfa1c32797784f931653e62ecd
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.34-4" --checksum bb0089c26028b568dbe8b8875d39cca3c7835c582dda4fcbdcbed599320c57fe
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.35.1-5" --checksum da12ba7cebb03c4eb983ba2248daf0ed5399be1bd8fa9d2d3931614ce6079ff6
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-10" --checksum 97c2ae4b001c5937e888b920bee7b1a40a076680caac53ded6d10f6207d54565
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "jasperreports" "7.8.1-34" --checksum 149c3b1c81432bf40d051b1240dfb947d9d8224d52593ff653fe1f82508e56d4
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -28,7 +28,7 @@ RUN /opt/bitnami/scripts/jasperreports/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV BITNAMI_APP_NAME="jasperreports" \
-    BITNAMI_IMAGE_VERSION="7.8.1-debian-10-r83" \
+    BITNAMI_IMAGE_VERSION="7.8.1-debian-10-r84" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:/opt/bitnami/common/bin:$PATH"
 
