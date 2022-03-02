@@ -1,37 +1,37 @@
 {
     "cassandra": {
         "arch": "amd64",
-        "digest": "36bd1728f2a8d175aac1c5f2c716fb6002a40c2a5dbc72306a258f5b6bd4517f",
+        "digest": "e6719d243f6c2f099e9cf70dbf05a17a5ec4cba9c14d17a0d5430323625770ab",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.11.12-2"
+        "version": "3.11.12-3"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664",
+        "digest": "d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-6"
+        "version": "1.14.0-7"
     },
     "java": {
         "arch": "amd64",
-        "digest": "3ce0c1dc975421abe79ffa5d459b4562802312f299a86576d1a169fe2d38f5d9",
+        "digest": "d5670d09ac0e679ae28306e417e77e91b44051908ca3a82259efcd70764b996f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.8.322-7"
+        "version": "1.8.322-8"
     },
     "python": {
         "arch": "amd64",
-        "digest": "d8de642930163ff6bd2e82b46a46584df2f2d63bdf594c934cda2d284351b421",
+        "digest": "fd52077cc4ff3286c0b4094f30fc392f741b662268eeffd8259ffbdbc22d7bd5",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.7.18-25"
+        "version": "2.7.18-26"
     },
     "yq": {
         "arch": "amd64",
-        "digest": "4a2289448b8cfe68482c1316d901a1f68692194085b6f0b05c64538bdf3858f8",
+        "digest": "d0927015892d9e13182fbf5242b41d75de0bf5eca43106bb1c0f0f936b05144a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.21.1-0"
+        "version": "4.21.1-1"
     }
 }
