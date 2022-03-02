@@ -37,7 +37,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`7`, `7-debian-10`, `7.17.0`, `7.17.0-debian-10-r20`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/7.17.0-debian-10-r20/7/debian-10/Dockerfile)
-* [`6`, `6-debian-10`, `6.8.23`, `6.8.23-debian-10-r43` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.8.23-debian-10-r43/6/debian-10/Dockerfile)
+* [`6`, `6-debian-10`, `6.8.23`, `6.8.23-debian-10-r44` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/6.8.23-debian-10-r44/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kibana GitHub repo](https://github.com/bitnami/bitnami-docker-kibana).
 
@@ -376,6 +376,10 @@ $ docker-compose up kibana
 
 - `ELASTICSEARCH_URL` parameter has been renamed to `KIBANA_ELASTICSEARCH_URL`.
 - `ELASTICSEARCH_PORT` parameter has been renamed to `KIBANA_ELASTICSEARCH_PORT`.
+
+## Branch Deprecation Notice
+
+Kibana's branch 6 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 04-01-2022
 
 ## Contributing
 
