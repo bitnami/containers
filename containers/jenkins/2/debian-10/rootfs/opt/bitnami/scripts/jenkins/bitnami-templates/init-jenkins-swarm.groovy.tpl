@@ -5,6 +5,7 @@ import hudson.security.csrf.DefaultCrumbIssuer;
 import jenkins.security.QueueItemAuthenticatorConfiguration;
 import org.jenkinsci.plugins.authorizeproject.*;
 import org.jenkinsci.plugins.authorizeproject.strategy.*;
+import org.jenkinsci.plugins.matrixauth.*;
 import jenkins.model.*;
 import jenkins.install.*;
 import hudson.security.*;
@@ -43,61 +44,61 @@ println " [bitnami/groovy-init-jenkins-with-slaves] Setting Authorization Strate
 def strategy = new GlobalMatrixAuthorizationStrategy()
 // Setting Slave Permissions
 // Slave Permissions
-strategy.add(hudson.model.Computer.BUILD, slaveUsername)
-strategy.add(hudson.model.Computer.CONFIGURE, slaveUsername)
-strategy.add(hudson.model.Computer.CONNECT, slaveUsername)
-strategy.add(hudson.model.Computer.CREATE, slaveUsername)
-strategy.add(hudson.model.Computer.DELETE, slaveUsername)
-strategy.add(hudson.model.Computer.DISCONNECT, slaveUsername)
+strategy.add(hudson.model.Computer.BUILD, new PermissionEntry(AuthorizationType.USER, slaveUsername))
+strategy.add(hudson.model.Computer.CONFIGURE, new PermissionEntry(AuthorizationType.USER, slaveUsername))
+strategy.add(hudson.model.Computer.CONNECT, new PermissionEntry(AuthorizationType.USER, slaveUsername))
+strategy.add(hudson.model.Computer.CREATE, new PermissionEntry(AuthorizationType.USER, slaveUsername))
+strategy.add(hudson.model.Computer.DELETE, new PermissionEntry(AuthorizationType.USER, slaveUsername))
+strategy.add(hudson.model.Computer.DISCONNECT, new PermissionEntry(AuthorizationType.USER, slaveUsername))
 // Overall Permissions
-strategy.add(hudson.model.Hudson.READ, slaveUsername)
+strategy.add(hudson.model.Hudson.READ, new PermissionEntry(AuthorizationType.USER, slaveUsername))
 // Setting System Permissions
 // System Permissions
-strategy.add(hudson.model.Computer.BUILD, systemUsername)
-strategy.add(hudson.model.Computer.CONFIGURE, systemUsername)
-strategy.add(hudson.model.Computer.CONNECT, systemUsername)
-strategy.add(hudson.model.Computer.CREATE, systemUsername)
-strategy.add(hudson.model.Computer.DELETE, systemUsername)
-strategy.add(hudson.model.Computer.DISCONNECT, systemUsername)
+strategy.add(hudson.model.Computer.BUILD, new PermissionEntry(AuthorizationType.USER, systemUsername))
+strategy.add(hudson.model.Computer.CONFIGURE, new PermissionEntry(AuthorizationType.USER, systemUsername))
+strategy.add(hudson.model.Computer.CONNECT, new PermissionEntry(AuthorizationType.USER, systemUsername))
+strategy.add(hudson.model.Computer.CREATE, new PermissionEntry(AuthorizationType.USER, systemUsername))
+strategy.add(hudson.model.Computer.DELETE, new PermissionEntry(AuthorizationType.USER, systemUsername))
+strategy.add(hudson.model.Computer.DISCONNECT, new PermissionEntry(AuthorizationType.USER, systemUsername))
 // Overall Permissions
-strategy.add(hudson.model.Hudson.READ, systemUsername)
+strategy.add(hudson.model.Hudson.READ, new PermissionEntry(AuthorizationType.USER, systemUsername))
 // Setting Admin Permissions
 // Admin Permissions
-strategy.add(hudson.model.Computer.BUILD, adminUsername)
-strategy.add(hudson.model.Computer.CONFIGURE, adminUsername)
-strategy.add(hudson.model.Computer.CONNECT, adminUsername)
-strategy.add(hudson.model.Computer.CREATE, adminUsername)
-strategy.add(hudson.model.Computer.DELETE, adminUsername)
-strategy.add(hudson.model.Computer.DISCONNECT, adminUsername)
+strategy.add(hudson.model.Computer.BUILD, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(hudson.model.Computer.CONFIGURE, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(hudson.model.Computer.CONNECT, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(hudson.model.Computer.CREATE, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(hudson.model.Computer.DELETE, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(hudson.model.Computer.DISCONNECT, new PermissionEntry(AuthorizationType.USER, adminUsername))
 //  Credential Permissions
-strategy.add(com.cloudbees.plugins.credentials.CredentialsProvider.CREATE, adminUsername)
-strategy.add(com.cloudbees.plugins.credentials.CredentialsProvider.DELETE, adminUsername)
-strategy.add(com.cloudbees.plugins.credentials.CredentialsProvider.MANAGE_DOMAINS, adminUsername)
-strategy.add(com.cloudbees.plugins.credentials.CredentialsProvider.UPDATE, adminUsername)
-strategy.add(com.cloudbees.plugins.credentials.CredentialsProvider.VIEW, adminUsername)
+strategy.add(com.cloudbees.plugins.credentials.CredentialsProvider.CREATE, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(com.cloudbees.plugins.credentials.CredentialsProvider.DELETE, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(com.cloudbees.plugins.credentials.CredentialsProvider.MANAGE_DOMAINS, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(com.cloudbees.plugins.credentials.CredentialsProvider.UPDATE, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(com.cloudbees.plugins.credentials.CredentialsProvider.VIEW, new PermissionEntry(AuthorizationType.USER, adminUsername))
 //  Overall Permissions
-strategy.add(hudson.model.Hudson.ADMINISTER, adminUsername)
-strategy.add(hudson.PluginManager.CONFIGURE_UPDATECENTER, adminUsername)
-strategy.add(hudson.model.Hudson.READ, adminUsername)
-strategy.add(hudson.model.Hudson.RUN_SCRIPTS, adminUsername)
-strategy.add(hudson.PluginManager.UPLOAD_PLUGINS, adminUsername)
+strategy.add(hudson.model.Hudson.ADMINISTER, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(hudson.PluginManager.CONFIGURE_UPDATECENTER, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(hudson.model.Hudson.READ, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(hudson.model.Hudson.RUN_SCRIPTS, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(hudson.PluginManager.UPLOAD_PLUGINS, new PermissionEntry(AuthorizationType.USER, adminUsername))
 //  Job Permissions
-strategy.add(hudson.model.Item.BUILD, adminUsername)
-strategy.add(hudson.model.Item.CANCEL, adminUsername)
-strategy.add(hudson.model.Item.CONFIGURE, adminUsername)
-strategy.add(hudson.model.Item.CREATE, adminUsername)
-strategy.add(hudson.model.Item.DELETE, adminUsername)
-strategy.add(hudson.model.Item.DISCOVER, adminUsername)
-strategy.add(hudson.model.Item.READ, adminUsername)
-strategy.add(hudson.model.Item.WORKSPACE, adminUsername)
+strategy.add(hudson.model.Item.BUILD, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(hudson.model.Item.CANCEL, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(hudson.model.Item.CONFIGURE, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(hudson.model.Item.CREATE, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(hudson.model.Item.DELETE, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(hudson.model.Item.DISCOVER, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(hudson.model.Item.READ, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(hudson.model.Item.WORKSPACE, new PermissionEntry(AuthorizationType.USER, adminUsername))
 //  Run Permissions
-strategy.add(hudson.model.Run.DELETE, adminUsername)
-strategy.add(hudson.model.Run.UPDATE, adminUsername)
+strategy.add(hudson.model.Run.DELETE, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(hudson.model.Run.UPDATE, new PermissionEntry(AuthorizationType.USER, adminUsername))
 //  View Permissions
-strategy.add(hudson.model.View.CONFIGURE, adminUsername)
-strategy.add(hudson.model.View.CREATE, adminUsername)
-strategy.add(hudson.model.View.DELETE, adminUsername)
-strategy.add(hudson.model.View.READ, adminUsername)
+strategy.add(hudson.model.View.CONFIGURE, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(hudson.model.View.CREATE, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(hudson.model.View.DELETE, new PermissionEntry(AuthorizationType.USER, adminUsername))
+strategy.add(hudson.model.View.READ, new PermissionEntry(AuthorizationType.USER, adminUsername))
 jenkins.setAuthorizationStrategy(strategy);
 println " [bitnami/groovy-init-jenkins-with-slaves] Authorization Strategy set"
 
