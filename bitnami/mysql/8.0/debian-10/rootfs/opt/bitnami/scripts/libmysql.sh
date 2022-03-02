@@ -350,7 +350,8 @@ mysql_custom_init_scripts() {
                 *.sql)
                     [[ "$DB_REPLICATION_MODE" = "slave" ]] && warn "Custom SQL initdb is not supported on slave nodes, ignoring $f" && continue
                     wait_for_mysql_access "$DB_ROOT_USER"
-                    if ! mysql_execute "$DB_DATABASE" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" < "$f"; then
+                    # Temporarily disabling autocommit to increase performance when importing huge files
+                    if ! mysql_execute_print_output "$DB_DATABASE" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<< "SET autocommit=0; source ${f}; COMMIT;"; then
                         error "Failed executing $f"
                         return 1
                     fi
@@ -358,7 +359,9 @@ mysql_custom_init_scripts() {
                 *.sql.gz)
                     [[ "$DB_REPLICATION_MODE" = "slave" ]] && warn "Custom SQL initdb is not supported on slave nodes, ignoring $f" && continue
                     wait_for_mysql_access "$DB_ROOT_USER"
-                    if ! gunzip -c "$f" | mysql_execute "$DB_DATABASE" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD"; then
+                    # In this case, it is best to pipe the uncompressed SQL commands directly to the 'mysql' command as extraction may cause problems
+                    # e.g. lack of disk space, permission issues...
+                    if ! gunzip -c "$f" | mysql_execute_print_output "$DB_DATABASE" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD"; then
                         error "Failed executing $f"
                         return 1
                     fi
@@ -511,10 +514,16 @@ mysql_execute_print_output() {
     [[ "${#extra_opts[@]}" -gt 0 ]] && args+=("${extra_opts[@]}")
 
     # Obtain the command specified via stdin
-    local mysql_cmd
-    mysql_cmd="$(</dev/stdin)"
-    debug "Executing SQL command:\n$mysql_cmd"
-    "$DB_BIN_DIR/mysql" "${args[@]}" <<<"$mysql_cmd"
+    if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+        local mysql_cmd
+        mysql_cmd="$(</dev/stdin)"
+        debug "Executing SQL command:\n$mysql_cmd"
+        "$DB_BIN_DIR/mysql" "${args[@]}" <<<"$mysql_cmd"
+    else
+        # Do not store the command(s) as a variable, to avoid issues when importing large files
+        # https://github.com/bitnami/bitnami-docker-mariadb/issues/251
+        "$DB_BIN_DIR/mysql" "${args[@]}"
+    fi
 }
 
 ########################
