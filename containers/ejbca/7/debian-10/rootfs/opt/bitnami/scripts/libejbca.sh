@@ -11,6 +11,7 @@
 . /opt/bitnami/scripts/libvalidations.sh
 . /opt/bitnami/scripts/libpersistence.sh
 . /opt/bitnami/scripts/libservice.sh
+. /opt/bitnami/scripts/libfile.sh
 
 ########################
 # Validate settings in EJBCA_* env. variables
@@ -565,6 +566,10 @@ ejbca_initialize() {
         read -r EJBCA_KEYSTORE_PASSWORD <"$EJBCA_WILDFLY_KEYSTORE_PASSWORD_FILE"
         read -r EJBCA_TRUSTSTORE_PASSWORD <"$EJBCA_WILDFLY_TRUSTSTORE_PASSWORD_FILE"
         read -r EJBCA_WILDFLY_ADMIN_PASSWORD <"$EJBCA_WILDFLY_ADMIN_PASSWORD_FILE"
+
+        # Adapt the MariaDB driver version to the new one
+        local -r pluginJar="$(basename "$EJBCA_WILDFLY_DEPLOY_DIR"/mariadb*)"
+        replace_in_file "${EJBCA_WILDFLY_STANDALONE_XML_FILE}" "<driver>mariadb-java-client-.*.jar</driver>" "<driver>${pluginJar}</driver>"
 
         ejbca_start_wildfly_bg
         wait_for_wildfly
