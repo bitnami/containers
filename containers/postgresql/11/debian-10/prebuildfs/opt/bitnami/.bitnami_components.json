@@ -1,16 +1,16 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664",
+        "digest": "d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-6"
+        "version": "1.14.0-7"
     },
     "postgresql": {
         "arch": "amd64",
-        "digest": "bab57fe05a4e6d12846992abc7b74117f210a3ff7aabdce1210ba48cc718ae3b",
+        "digest": "0bccd35d08a04bd743c8a5f0da6a47ab2f8b20438e07127a757c039daebaddfa",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "11.15.0-5"
+        "version": "11.15.0-6"
     }
 }
