@@ -1,16 +1,16 @@
 {
     "java": {
         "arch": "amd64",
-        "digest": "3ce0c1dc975421abe79ffa5d459b4562802312f299a86576d1a169fe2d38f5d9",
+        "digest": "d5670d09ac0e679ae28306e417e77e91b44051908ca3a82259efcd70764b996f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.8.322-7"
+        "version": "1.8.322-8"
     },
     "spring-cloud-skipper-shell": {
         "arch": "amd64",
-        "digest": "1ced4ef94059a652af53d34dc1039225acf548e120fb5f6301c3b13eea532cf9",
+        "digest": "e40800ea467f98fb7814dde8b7a6cb231ffc92d53642d0abe21de9509e367692",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.8.2-6"
+        "version": "2.8.2-7"
     }
 }
