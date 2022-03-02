@@ -1,9 +1,9 @@
 {
     "kubewatch": {
         "arch": "amd64",
-        "digest": "d4f6f95f849db434ccc2250770fa0c3f8ad4ca8766b27a7b74d3b2ae8adc3f7b",
+        "digest": "e108d5411c66699a5785afc1a040e0acf50136bd07e17471aebaf3bd903efef9",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.1.0-33"
+        "version": "0.1.0-34"
     }
 }
