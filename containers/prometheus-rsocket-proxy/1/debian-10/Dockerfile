@@ -9,21 +9,21 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 libgcc1 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/java-1.8.322-7-linux-amd64-debian-10.tar.gz && \
-    echo "3ce0c1dc975421abe79ffa5d459b4562802312f299a86576d1a169fe2d38f5d9  /tmp/bitnami/pkg/cache/java-1.8.322-7-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/java-1.8.322-7-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/java-1.8.322-7-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-rsocket-proxy-1.4.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "e0f7449f57f90461906e5ab5849be6142553f2c4c1dcaa18bdc694f190090ab1  /tmp/bitnami/pkg/cache/prometheus-rsocket-proxy-1.4.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/prometheus-rsocket-proxy-1.4.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/prometheus-rsocket-proxy-1.4.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/java-1.8.322-8-linux-amd64-debian-10.tar.gz && \
+    echo "d5670d09ac0e679ae28306e417e77e91b44051908ca3a82259efcd70764b996f  /tmp/bitnami/pkg/cache/java-1.8.322-8-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/java-1.8.322-8-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/java-1.8.322-8-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-rsocket-proxy-1.4.0-1-linux-amd64-debian-10.tar.gz && \
+    echo "783cd82236dd95a5d91650b0ad4f90442b627209bf06420abcd3664b7801ad13  /tmp/bitnami/pkg/cache/prometheus-rsocket-proxy-1.4.0-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/prometheus-rsocket-proxy-1.4.0-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/prometheus-rsocket-proxy-1.4.0-1-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN touch /opt/bitnami/prometheus-rsocket-proxy/prometheus-rsocket-proxy.log && chmod -R g+rwX /opt/bitnami/prometheus-rsocket-proxy
 
 ENV BITNAMI_APP_NAME="prometheus-rsocket-proxy" \
-    BITNAMI_IMAGE_VERSION="1.4.0-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="1.4.0-debian-10-r5" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 WORKDIR /opt/bitnami/prometheus-rsocket-proxy
