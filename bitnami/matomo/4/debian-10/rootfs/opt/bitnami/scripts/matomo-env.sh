@@ -29,6 +29,9 @@ matomo_env_vars=(
     MATOMO_HOST
     MATOMO_WEBSITE_NAME
     MATOMO_WEBSITE_HOST
+    MATOMO_PROXY_CLIENT_HEADER
+    MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL
+    MATOMO_ENABLE_FORCE_SSL
     MATOMO_ENABLE_PROXY_URI_HEADER
     MATOMO_ENABLE_TRUSTED_HOST_CHECK
     MATOMO_ENABLE_DATABASE_SSL
@@ -80,6 +83,12 @@ export MATOMO_DATA_TO_PERSIST="${MATOMO_DATA_TO_PERSIST:-config/config.ini.php m
 # Matomo configuration
 export MATOMO_SKIP_BOOTSTRAP="${MATOMO_SKIP_BOOTSTRAP:-}" # only used during the first initialization
 
+# Reverse Proxy Configuration options
+export MATOMO_PROXY_CLIENT_HEADER="${MATOMO_PROXY_CLIENT_HEADER:-}"
+export MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL="${MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL:-no}"
+export MATOMO_ENABLE_FORCE_SSL="${MATOMO_ENABLE_FORCE_SSL:-no}"
+export MATOMO_ENABLE_PROXY_URI_HEADER="${MATOMO_ENABLE_PROXY_URI_HEADER:-no}"
+
 # Matomo credentials
 export MATOMO_USERNAME="${MATOMO_USERNAME:-user}" # only used during the first initialization
 export MATOMO_PASSWORD="${MATOMO_PASSWORD:-bitnami}" # only used during the first initialization
@@ -87,7 +96,6 @@ export MATOMO_EMAIL="${MATOMO_EMAIL:-user@example.com}" # only used during the f
 export MATOMO_HOST="${MATOMO_HOST:-127.0.0.1}" # only used during the first initialization
 export MATOMO_WEBSITE_NAME="${MATOMO_WEBSITE_NAME:-example}" # only used during the first initialization
 export MATOMO_WEBSITE_HOST="${MATOMO_WEBSITE_HOST:-https://example.org}" # only used during the first initialization
-export MATOMO_ENABLE_PROXY_URI_HEADER="${MATOMO_ENABLE_PROXY_URI_HEADER:-no}" # only used during the first initialization
 export MATOMO_ENABLE_TRUSTED_HOST_CHECK="${MATOMO_ENABLE_TRUSTED_HOST_CHECK:-no}" # only used during the first initialization
 export MATOMO_ENABLE_DATABASE_SSL="${MATOMO_ENABLE_DATABASE_SSL:-no}" # only used during the first initialization
 export MATOMO_DATABASE_SSL_CA_FILE="${MATOMO_DATABASE_SSL_CA_FILE:-}" # only used during the first initialization

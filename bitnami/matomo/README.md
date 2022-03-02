@@ -279,7 +279,6 @@ When you start the Matomo image, you can adjust the configuration of the instanc
  - `MATOMO_EMAIL`: Matomo application email. Default: **user@example.com**
  - `MATOMO_WEBSITE_NAME`: Name of a website to track in Matomo. Default: **example**
  - `MATOMO_WEBSITE_HOST`: Website's host or domain to track in Matomo. Default: **https://example.org**
- - `MATOMO_ENABLE_PROXY_URI_HEADER`: Enable 'proxy_uri_header' in Matomo configuration file. Default: **no**
  - `MATOMO_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. Default: **no**
  - `MATOMO_ENABLE_DATABASE_SSL`: Whether to enable SSL for database connections in the Matomo configuration file. Default: **no**
  - `MATOMO_DATABASE_SSL_CA_FILE`: Path to the database server CA bundle file. No defaults.
@@ -326,6 +325,12 @@ To configure Matomo to send email using SMTP you can set the following environme
 - `MATOMO_SMTP_USER`: SMTP account user.
 - `MATOMO_SMTP_PASSWORD`: SMTP account password.
 - `MATOMO_SMTP_PROTOCOL`: SMTP protocol.
+
+#### Reverse proxy configuration options
+ - `MATOMO_ENABLE_PROXY_URI_HEADER`: Enable 'proxy_uri_header' in Matomo configuration file. Default: **no**
+ - `MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL`: Enable 'assume_secure_protocol' in Matomo configuration file. Default: **no**
+ - `MATOMO_ENABLE_FORCE_SSL`: Enable 'force_ssl' in Matomo configuration file. Default: **no**
+ - `MATOMO_PROXY_CLIENT_HEADER`: Specify the the client IP HTTP Header. Usually 'HTTP_X_FORWARDED_FOR'. No defaults.
 
 ###### Example
 
@@ -433,6 +438,44 @@ This would be an example of SMTP configuration using a Gmail account:
    -e SMTP_PORT=587 \
    -e SMTP_USER=your_email@gmail.com \
    -e SMTP_PASSWORD=your_password \
+   -v /your/local/path/bitnami/matomo:/bitnami \
+ bitnami/matomo:latest
+```
+#### Reverse proxy configuration
+
+If you are connecting through a reverse proxy (https-to-http) and Matomo is not automatically detecting it you can add configuration manually:
+
+ - `MATOMO_PROXY_CLIENT_HEADER`: Specify the the client IP HTTP Header. Usually 'HTTP_X_FORWARDED_FOR'. No defaults.
+ - `MATOMO_ENABLE_FORCE_SSL`: Enable 'force_ssl' in Matomo configuration file. Default: **no**
+ - `MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL`: Enable 'assume_secure_protocol' in Matomo configuration file. Default: **no**
+ - `MATOMO_ENABLE_PROXY_URI_HEADER`: Enable 'proxy_uri_header' in Matomo configuration file. Default: **no**
+
+This would be an example of reverse proxy configuration:
+
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-matomo/blob/master/docker-compose.yml) file present in this repository:
+
+```yaml
+  application:
+  ...
+    environment:
+      - MATOMO_PROXY_CLIENT_HEADER=HTTP_X_FORWARDED_FOR
+      - MATOMO_ENABLE_FORCE_SSL=yes
+      - MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL=yes
+  ...
+```
+
+ * For manual execution:
+
+```console
+ $ docker run -d --name matomo -p 80:80 -p 443:443 \
+   --net matomo_network \
+   -e MARIADB_HOST=mariadb \
+   -e MARIADB_PORT_NUMBER=3306 \
+   -e MATOMO_DATABASE_USER=bn_matomo \
+   -e MATOMO_DATABASE_NAME=bitnami_matomo \
+   -e MATOMO_PROXY_CLIENT_HEADER=HTTP_X_FORWARDED_FOR \
+   -e MATOMO_ENABLE_FORCE_SSL=yes \
+   -e MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL=yes \
    -v /your/local/path/bitnami/matomo:/bitnami \
  bitnami/matomo:latest
 ```
