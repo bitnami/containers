@@ -31,6 +31,7 @@ tomcat_env_vars=(
     TOMCAT_ENABLE_AJP
     TOMCAT_START_RETRIES
     TOMCAT_EXTRA_JAVA_OPTS
+    TOMCAT_INSTALL_DEFAULT_WEBAPPS
     JAVA_OPTS
 )
 for env_var in "${tomcat_env_vars[@]}"; do

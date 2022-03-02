@@ -180,7 +180,7 @@ EOF
         # Use tomcat:root ownership for compatibility when running as a non-root user
         am_i_root && configure_permissions_ownership "$TOMCAT_WEBAPPS_DIR" -d "775" -f "664" -u "$TOMCAT_DAEMON_USER" -g "root"
 
-        if is_boolean_yes "$TOMCAT_INSTALL_DEFAULT_WEBAPPS"; then 
+        if is_boolean_yes "$TOMCAT_INSTALL_DEFAULT_WEBAPPS"; then
             info "Deploying Tomcat from scratch"
             cp -rp "$TOMCAT_BASE_DIR"/webapps_default/* "$TOMCAT_WEBAPPS_DIR"
         else
