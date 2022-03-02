@@ -68,7 +68,7 @@ matomo_validate() {
     fi
 
     # Check yes no values
-    for yes_no_var in "MATOMO_ENABLE_DATABASE_SSL" "MATOMO_ENABLE_PROXY_URI_HEADER" "MATOMO_VERIFY_DATABASE_SSL"; do
+    for yes_no_var in "MATOMO_ENABLE_DATABASE_SSL" "MATOMO_ENABLE_PROXY_URI_HEADER" "MATOMO_VERIFY_DATABASE_SSL" "MATOMO_ENABLE_FORCE_SSL" "MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL"; do
         check_yes_no_value "${yes_no_var}"
     done
 
@@ -149,15 +149,28 @@ EOF
             ini-file set -s "database" -k "tables_prefix" -v "matomo_" "$MATOMO_CONF_FILE"
         fi
 
-        # Configuration options
-
+        # Reverse Proxy Configuration options
         if is_boolean_yes "$MATOMO_ENABLE_PROXY_URI_HEADER"; then
             info "Configuring Matomo to use the HTTP_X_FORWARDED_URI header"
             ini-file set -s "General" -k "proxy_uri_header" -v "1" "$MATOMO_CONF_FILE"
         fi
 
+        if ! is_empty_value "$MATOMO_PROXY_CLIENT_HEADER"; then
+        info "Configuring Matomo to check proxy_client_headers for client IP"
+            ini-file set -s "General" -k "proxy_client_headers[]" -v "$MATOMO_PROXY_CLIENT_HEADER" "$MATOMO_CONF_FILE"
+        fi
+
+        if is_boolean_yes "$MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL"; then
+            info "Configuring Matomo to always assume secure protocol"
+            ini-file set -s "General" -k "assume_secure_protocol" -v "1" "$MATOMO_CONF_FILE"
+        fi
+
+        if is_boolean_yes "$MATOMO_ENABLE_FORCE_SSL"; then
+            info "Configuring Matomo to force ssl"
+            ini-file set -s "General" -k "force_ssl" -v "1" "$MATOMO_CONF_FILE"
+        fi
+
         # Database SSL
-        ini-file set -s "General" -k "force_ssl" -v "0" "$MATOMO_CONF_FILE"
         if is_boolean_yes "$MATOMO_ENABLE_DATABASE_SSL"; then
             info "Enabling database SSL"
             ini-file set -s "database" -k "enable_ssl" -v "1" "$MATOMO_CONF_FILE"
