@@ -9,10 +9,10 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq libbz2-1.0 libc6 libffi6 libgcc1 liblzma5 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-36" --checksum 5c171174be6888598db66cc9f7ce56431257109397c2a83904b86d81dd32368f
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "12.22.10-3" --checksum 8d2996e363a66d94c6b633bd0550de723b884725a4b2c182199989b3a9eaaec1
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "parse-dashboard" "3.3.0-6" --checksum 7b0964ea24984ef443f7029c8b2c8bf2e5438d2bc30747a2d8258643796846e6
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-6" --checksum 6f8fd2267481ffbe899a7f93b7b3076cd78dd70b7b9835bed79414932a749664
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-37" --checksum 3272da2099afdae735a7d3fb199e83f3bd74b44ebf6953e2f9a3dd0ad45091d1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "12.22.10-4" --checksum d294bbf768d7c3efcd9ba39a5cb2ddb6487cb328dead59d342a8e071d2e1a78d
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "parse-dashboard" "3.3.0-7" --checksum 1a7de4dc24a982b4e2872be46d9b99d993ebffa360726ebe3871ab61b686cb52
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -20,7 +20,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/parse-dashboard/postunpack.sh
 ENV BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="3.3.0-debian-10-r55" \
+    BITNAMI_IMAGE_VERSION="3.3.0-debian-10-r56" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/parse-dashboard/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 3000 4040
