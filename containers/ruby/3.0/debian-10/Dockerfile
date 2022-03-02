@@ -8,10 +8,10 @@ ENV OS_ARCH="amd64" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages build-essential ca-certificates curl git gzip libc6 libncurses6 libreadline-dev libreadline7 libsqlite3-dev libssl-dev libssl1.1 libtinfo6 pkg-config procps sqlite3 tar unzip wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/ruby-3.0.3-34-linux-amd64-debian-10.tar.gz && \
-    echo "35f9805209aa7518da02c7a0c5ee649a164eaf6f80758d158abfd735f4cacfd0  /tmp/bitnami/pkg/cache/ruby-3.0.3-34-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/ruby-3.0.3-34-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/ruby-3.0.3-34-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/ruby-3.0.3-35-linux-amd64-debian-10.tar.gz && \
+    echo "419565255f7c5659a060a14c04a93e14a2b7b0ce8503414056e1caf19e818f10  /tmp/bitnami/pkg/cache/ruby-3.0.3-35-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/ruby-3.0.3-35-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/ruby-3.0.3-35-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
@@ -19,7 +19,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
 ENV BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="3.0.3-debian-10-r94" \
+    BITNAMI_IMAGE_VERSION="3.0.3-debian-10-r95" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 EXPOSE 3000
