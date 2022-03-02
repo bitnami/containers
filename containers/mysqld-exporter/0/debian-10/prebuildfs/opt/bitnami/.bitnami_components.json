@@ -1,9 +1,9 @@
 {
     "mysqld-exporter": {
         "arch": "amd64",
-        "digest": "d3068d0fab8840a35e63176c8a6f1bb4db68a9eb412a64ac948a6be1bf62649d",
+        "digest": "b2009bd883060c29f0fcf07254c72088f4bddbfd3b15c0c05f15c66096c21800",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.13.0-7"
+        "version": "0.13.0-8"
     }
 }
