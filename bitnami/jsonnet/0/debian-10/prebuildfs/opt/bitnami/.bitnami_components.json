@@ -1,9 +1,9 @@
 {
     "jsonnet": {
         "arch": "amd64",
-        "digest": "7a68e23dc1e6adf721ff5af0a8fa78b232287e4d6cb8c084781b3719972f8a7f",
+        "digest": "26e066d51b2795f0c172c541032ee1fc94f8f2ad1342c256c768dc80a5812d22",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.18.0-7"
+        "version": "0.18.0-8"
     }
 }
