@@ -54,7 +54,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`10.5`, `10.5-debian-10`, `10.5.15`, `10.5.15-debian-10-r14` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.5.15-debian-10-r14/10.5/debian-10/Dockerfile)
 * [`10.4`, `10.4-debian-10`, `10.4.24`, `10.4.24-debian-10-r14` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.24-debian-10-r14/10.4/debian-10/Dockerfile)
 * [`10.3`, `10.3-debian-10`, `10.3.34`, `10.3.34-debian-10-r16` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.34-debian-10-r16/10.3/debian-10/Dockerfile)
-* [`10.2`, `10.2-debian-10`, `10.2.43`, `10.2.43-debian-10-r13` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.43-debian-10-r13/10.2/debian-10/Dockerfile)
+* [`10.2`, `10.2-debian-10`, `10.2.43`, `10.2.43-debian-10-r14` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.43-debian-10-r14/10.2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb).
 
@@ -189,6 +189,8 @@ When the container is executed for the first time, it will execute the files wit
 In order to have your custom files inside the docker image you can mount them as a volume.
 
 Take into account those scripts are treated differently depending on the extension. While the `.sh` scripts are executed in all the nodes; the `.sql` and `.sql.gz` scripts are only executed in the master nodes. The reason behind this differentiation is that the `.sh` scripts allow adding conditions to determine what is the node running the script, while these conditions can't be set using `.sql` nor `sql.gz` files. This way it is possible to cover different use cases depending on their needs.
+
+> NOTE: If you are importing large databases, it is recommended to import them as `.sql` instead of `.sql.gz`, as the latter one needs to be decompressed on the fly and not allowing for additional optimizations to import large files.
 
 ### Passing extra command-line flags to mysqld startup
 
