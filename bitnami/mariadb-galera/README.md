@@ -432,6 +432,8 @@ A **zero downtime** MariaDB Galera [replication](https://dev.mysql.com/doc/refma
 
 In a MariaDB Galera cluster the first node should be a bootstrap node (started with `MARIADB_GALERA_CLUSTER_BOOTSTRAP=yes`). The other nodes in the cluster should not be started with this environment variable, instead the `MARIADB_GALERA_CLUSTER_ADDRESS` variable should be specified. All the nodes in the MariaDB Galera cluster are in read-write mode and therefore offers high availability for high traffic applications.
 
+MariaDB Galera cluster requires every node can connect to each other. If you run the MariaDB Galera nodes in isolated networks (for example, traditional Docker `bridge` networks on different hosts without Kubernetes), you must make sure every node knows its connectable public IP address (the IP of each host). You should add extra flags to MARIADB_EXTRA_FLAGS `--wsrep_provider_options=ist.recv_addr=<PUBLIC_IP>:4568;ist.recv_bind=0.0.0.0:4568 --wsrep_node_incoming_address=<PUBLIC_IP> --wsrep_sst_receive_address=<PUBLIC_IP>` and publish all MariaDB Galera ports to host by `-p 3306:3306,4444:4444,4567:4567,4568:4568`. Another choice is using the Docker `host` network which makes every node can connect to each other without extra flags.
+
 #### Step 1: Bootstrap the cluster
 
 The first step is to start the MariaDB Galera bootstrap node.
