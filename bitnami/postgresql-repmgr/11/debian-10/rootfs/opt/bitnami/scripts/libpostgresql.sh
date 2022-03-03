@@ -400,7 +400,8 @@ postgresql_configure_synchronous_replication() {
         for node in "${nodes[@]}"; do
             [[ "$node" =~ ^(([^:/?#]+):)?// ]] || node="tcp://${node}"
 
-            host="$(parse_uri "$node" 'host')"
+            # repmgr is only using the first segment of the FQDN as the application name
+            host="$(parse_uri "$node" 'host' | awk -F. '{print $1}')"
             replication_nodes="${replication_nodes}${replication_nodes:+,}\"${host}\""
         done
     else
