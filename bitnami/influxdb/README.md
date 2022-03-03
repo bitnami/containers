@@ -43,8 +43,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.1.1`, `2.1.1-debian-10-r80`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/2.1.1-debian-10-r80/2/debian-10/Dockerfile)
-* [`1`, `1-debian-10`, `1.8.5`, `1.8.5-debian-10-r264` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/1.8.5-debian-10-r264/1/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.1.1`, `2.1.1-debian-10-r79`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/2.1.1-debian-10-r79/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/influxdb GitHub repo](https://github.com/bitnami/bitnami-docker-influxdb).
 
@@ -167,7 +166,6 @@ $ docker-compose up -d
 
 InfluxDB (TM) can be configured via environment variables or using a configuration file (`influxdb.conf`). If a configuration option is not specified in either the configuration file or in an environment variable, InfluxDB (TM) uses its internal default configuration.
 
-- If you are using v1, variables must be prefixed by `INFLUXDB_`, find more [here](https://docs.influxdata.com/influxdb/v1.8/administration/config/).
 - If you are using v2, variables must be prefixed by `INFLUXD_`, find more [here](https://docs.influxdata.com/influxdb/v2.0/reference/config-options).
 
 > Note: The settings at the environment variables override the equivalent options in the configuration file."
@@ -248,28 +246,7 @@ services:
 
 ### Creating a database on first run
 
-If you are using InfluxDB (TM) v1 you can pass `INFLUXDB_DB` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the InfluxDB (TM) client.
-
-```console
-$ docker run --name influxdb \
-    -e INFLUXDB_ADMIN_USER_PASSWORD=password123 \
-    -e INFLUXDB_DB=my_database \
-    bitnami/influxdb:1-debian-10
-```
-
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-influxdb/blob/master/docker-compose.yml) file present in this repository:
-
-```yaml
-services:
-  influxdb:
-  ...
-    environment:
-      - INFLUXDB_ADMIN_USER_PASSWORD=password123
-      - INFLUXDB_DB=my_database
-  ...
-```
-
-For If you are using InfluxDB (TM) v2 you can pass `INFLUXDB_USER_BUCKET` environment variable when running the image for the first time, a new bucket will be created. This is useful if your application requires that a bucket already exists, saving you from having to manually create the bucket using the InfluxDB (TM) CLI.
+For InfluxDB (TM) v2 you can pass `INFLUXDB_USER_BUCKET` environment variable when running the image for the first time, a new bucket will be created. This is useful if your application requires that a bucket already exists, saving you from having to manually create the bucket using the InfluxDB (TM) CLI.
 
 ```console
 $ docker run --name influxdb \
@@ -412,10 +389,6 @@ or using Docker Compose:
 ```console
 $ docker-compose up influxdb
 ```
-
-## Branch Deprecation Notice
-
-InfluxDB&trade;'s branch 1 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 02-25-2022
 
 ## Contributing
 
