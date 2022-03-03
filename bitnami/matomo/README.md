@@ -39,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.7.1`, `4.7.1-debian-10-r18`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/4.7.1-debian-10-r18/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.7.1`, `4.7.1-debian-10-r19`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-matomo/blob/4.7.1-debian-10-r19/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/matomo GitHub repo](https://github.com/bitnami/bitnami-docker-matomo).
 
@@ -287,6 +287,47 @@ When you start the Matomo image, you can adjust the configuration of the instanc
  - `MATOMO_VERIFY_DATABASE_SSL`: Whether to verify the database SSL certificate when SSL is enabled. Default: **yes**
  - `BITNAMI_DEBUG`: Increase verbosity on initialization logs. Default **false**
 
+#### Reverse proxy configuration options
+ 
+If you are connecting through a reverse proxy (https-to-http) and Matomo is not automatically detecting it you can add configuration manually:
+
+ - `MATOMO_ENABLE_PROXY_URI_HEADER`: Enable 'proxy_uri_header' in Matomo configuration file. Default: **no**
+ - `MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL`: Enable 'assume_secure_protocol' in Matomo configuration file. Default: **no**
+ - `MATOMO_ENABLE_FORCE_SSL`: Enable 'force_ssl' in Matomo configuration file. Default: **no**
+ - `MATOMO_PROXY_CLIENT_HEADER`: Specify the the client IP HTTP Header. Usually 'HTTP_X_FORWARDED_FOR'. No defaults.
+
+##### Example
+
+This would be an example of reverse proxy configuration:
+
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-matomo/blob/master/docker-compose.yml) file present in this repository:
+
+```yaml
+  application:
+  ...
+    environment:
+      - MATOMO_PROXY_CLIENT_HEADER=HTTP_X_FORWARDED_FOR
+      - MATOMO_ENABLE_FORCE_SSL=yes
+      - MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL=yes
+  ...
+```
+
+ * For manual execution:
+
+```console
+ $ docker run -d --name matomo -p 80:80 -p 443:443 \
+   --net matomo_network \
+   -e MARIADB_HOST=mariadb \
+   -e MARIADB_PORT_NUMBER=3306 \
+   -e MATOMO_DATABASE_USER=bn_matomo \
+   -e MATOMO_DATABASE_NAME=bitnami_matomo \
+   -e MATOMO_PROXY_CLIENT_HEADER=HTTP_X_FORWARDED_FOR \
+   -e MATOMO_ENABLE_FORCE_SSL=yes \
+   -e MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL=yes \
+   -v /your/local/path/bitnami/matomo:/bitnami \
+ bitnami/matomo:latest
+```
+
 #### Use an existing database
 
 - `MATOMO_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
@@ -316,23 +357,18 @@ When you start the Matomo image, you can adjust the configuration of the instanc
 - `MYSQL_CLIENT_SSL_KEY_FILE`: Path to the SSL CA file for the new database. No defaults
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-###### SMTP Configuration
+#### SMTP Configuration
 
 To configure Matomo to send email using SMTP you can set the following environment variables:
 
-- `MATOMO_SMTP_HOST`: SMTP host.
-- `MATOMO_SMTP_PORT`: SMTP port.
-- `MATOMO_SMTP_USER`: SMTP account user.
-- `MATOMO_SMTP_PASSWORD`: SMTP account password.
-- `MATOMO_SMTP_PROTOCOL`: SMTP protocol.
+- `MATOMO_SMTP_HOST`: Matomo SMTP host.
+- `MATOMO_SMTP_PORT`: Matomo SMTP port.
+- `MATOMO_SMTP_USER`: Matomo SMTP account user.
+- `MATOMO_SMTP_PASSWORD`: Matomo SMTP account password.
+- `MATOMO_SMTP_PROTOCOL`: Matomo SMTP protocol to use. Available protocols are: "ssl", "tls", "none". No default.
+- `MATOMO_SMTP_AUTH`: Matomo SMTP authentication mechanism to use. Available mechanisms are: "Plain", "Login", "Crammd5". Default: **Plain**.
 
-#### Reverse proxy configuration options
- - `MATOMO_ENABLE_PROXY_URI_HEADER`: Enable 'proxy_uri_header' in Matomo configuration file. Default: **no**
- - `MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL`: Enable 'assume_secure_protocol' in Matomo configuration file. Default: **no**
- - `MATOMO_ENABLE_FORCE_SSL`: Enable 'force_ssl' in Matomo configuration file. Default: **no**
- - `MATOMO_PROXY_CLIENT_HEADER`: Specify the the client IP HTTP Header. Usually 'HTTP_X_FORWARDED_FOR'. No defaults.
-
-###### Example
+##### Example
 
 This would be an example of SMTP configuration using a Gmail account:
 
@@ -393,91 +429,6 @@ application:
 
 ```console
  $ docker run -d -e MATOMO_PASSWORD=my_password -p 80:80 --name matomo -v /your/local/path/bitnami/matomo:/bitnami --net=matomo_network bitnami/matomo
-```
-
-#### SMTP Configuration
-
-To configure Matomo to send email using SMTP you can set the following environment variables:
-
- - `SMTP_HOST`: Matomo SMTP host.
- - `SMTP_PORT`: Matomo SMTP port.
- - `SMTP_USER`: Matomo SMTP account user.
- - `SMTP_PASSWORD`: Matomo SMTP account password.
- - `SMTP_PROTOCOL`: Matomo SMTP protocol to use. Available protocols are: "ssl", "tls", "none". No default.
- - `SMTP_AUTH`: Matomo SMTP authentication mechanism to use. Available mechanisms are: "Plain", "Login", "Crammd5". Default: **Plain**.
-
-This would be an example of SMTP configuration using a Gmail account:
-
- * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-matomo/blob/master/docker-compose.yml) file present in this repository:
-
-```yaml
-  application:
-  ...
-    environment:
-      - SMTP_HOST=smtp.gmail.com
-      - SMTP_USER=your_email@gmail.com
-      - SMTP_PASSWORD=your_password
-      - SMTP_PROTOCOL=tls
-      - SMTP_AUTH=Plain
-      - SMTP_PORT=587
-  ...
-```
-
- * For manual execution:
-
-```console
- $ docker run -d --name matomo -p 80:80 -p 443:443 \
-   --net matomo_network \
-   -e MARIADB_HOST=mariadb \
-   -e MARIADB_PORT_NUMBER=3306 \
-   -e MATOMO_DATABASE_USER=bn_matomo \
-   -e MATOMO_DATABASE_NAME=bitnami_matomo \
-   -e SMTP_HOST=smtp.gmail.com \
-   -e SMTP_PROTOCOL=TLS \
-   -e SMTP_AUTH=Plain \
-   -e SMTP_PORT=587 \
-   -e SMTP_USER=your_email@gmail.com \
-   -e SMTP_PASSWORD=your_password \
-   -v /your/local/path/bitnami/matomo:/bitnami \
- bitnami/matomo:latest
-```
-#### Reverse proxy configuration
-
-If you are connecting through a reverse proxy (https-to-http) and Matomo is not automatically detecting it you can add configuration manually:
-
- - `MATOMO_PROXY_CLIENT_HEADER`: Specify the the client IP HTTP Header. Usually 'HTTP_X_FORWARDED_FOR'. No defaults.
- - `MATOMO_ENABLE_FORCE_SSL`: Enable 'force_ssl' in Matomo configuration file. Default: **no**
- - `MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL`: Enable 'assume_secure_protocol' in Matomo configuration file. Default: **no**
- - `MATOMO_ENABLE_PROXY_URI_HEADER`: Enable 'proxy_uri_header' in Matomo configuration file. Default: **no**
-
-This would be an example of reverse proxy configuration:
-
- * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-matomo/blob/master/docker-compose.yml) file present in this repository:
-
-```yaml
-  application:
-  ...
-    environment:
-      - MATOMO_PROXY_CLIENT_HEADER=HTTP_X_FORWARDED_FOR
-      - MATOMO_ENABLE_FORCE_SSL=yes
-      - MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL=yes
-  ...
-```
-
- * For manual execution:
-
-```console
- $ docker run -d --name matomo -p 80:80 -p 443:443 \
-   --net matomo_network \
-   -e MARIADB_HOST=mariadb \
-   -e MARIADB_PORT_NUMBER=3306 \
-   -e MATOMO_DATABASE_USER=bn_matomo \
-   -e MATOMO_DATABASE_NAME=bitnami_matomo \
-   -e MATOMO_PROXY_CLIENT_HEADER=HTTP_X_FORWARDED_FOR \
-   -e MATOMO_ENABLE_FORCE_SSL=yes \
-   -e MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL=yes \
-   -v /your/local/path/bitnami/matomo:/bitnami \
- bitnami/matomo:latest
 ```
 
 ## Customize this image
