@@ -241,10 +241,16 @@ mysql_execute_print_output() {
     [[ "${#extra_opts[@]}" -gt 0 ]] && args+=("${extra_opts[@]}")
 
     # Obtain the command specified via stdin
-    local mysql_cmd
-    mysql_cmd="$(</dev/stdin)"
-    debug "Executing SQL command:\n$mysql_cmd"
-    "$DB_BIN_DIR/mysql" "${args[@]}" <<<"$mysql_cmd"
+    if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+        local mysql_cmd
+        mysql_cmd="$(</dev/stdin)"
+        debug "Executing SQL command:\n$mysql_cmd"
+        "$DB_BIN_DIR/mysql" "${args[@]}" <<<"$mysql_cmd"
+    else
+        # Do not store the command(s) as a variable, to avoid issues when importing large files
+        # https://github.com/bitnami/bitnami-docker-mariadb/issues/251
+        "$DB_BIN_DIR/mysql" "${args[@]}"
+    fi
 }
 
 ########################
