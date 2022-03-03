@@ -43,7 +43,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.1.1`, `2.1.1-debian-10-r79`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/2.1.1-debian-10-r79/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.1.1`, `2.1.1-debian-10-r81`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/2.1.1-debian-10-r81/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/influxdb GitHub repo](https://github.com/bitnami/bitnami-docker-influxdb).
 
@@ -166,7 +166,7 @@ $ docker-compose up -d
 
 InfluxDB (TM) can be configured via environment variables or using a configuration file (`influxdb.conf`). If a configuration option is not specified in either the configuration file or in an environment variable, InfluxDB (TM) uses its internal default configuration.
 
-- If you are using v2, variables must be prefixed by `INFLUXD_`, find more [here](https://docs.influxdata.com/influxdb/v2.0/reference/config-options).
+Variables must be prefixed by `INFLUXD_`, find more [here](https://docs.influxdata.com/influxdb/v2.0/reference/config-options).
 
 > Note: The settings at the environment variables override the equivalent options in the configuration file."
 
@@ -245,6 +245,7 @@ services:
 ```
 
 ### Creating a database on first run
+
 
 For InfluxDB (TM) v2 you can pass `INFLUXDB_USER_BUCKET` environment variable when running the image for the first time, a new bucket will be created. This is useful if your application requires that a bucket already exists, saving you from having to manually create the bucket using the InfluxDB (TM) CLI.
 

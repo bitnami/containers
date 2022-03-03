@@ -17,7 +17,6 @@ eval "$(influxdb_env)"
 
 info "** Starting InfluxDB **"
 start_command=("${INFLUXDB_BIN_DIR}/influxd" "$@")
-[[ "$(influxdb_branch)" = "1" ]] && start_command=("${start_command[@]}" "-config" "$INFLUXDB_CONF_FILE")
 am_i_root && start_command=("gosu" "$INFLUXDB_DAEMON_USER" "${start_command[@]}")
 
 if [[ -f "$INFLUXDB_CONF_FILE" ]]; then
