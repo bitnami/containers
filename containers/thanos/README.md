@@ -2,7 +2,7 @@
 
 ## What is Thanos?
 
-> Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.	
+> Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
 [Overview of Thanos](https://thanos.io/)
 
@@ -42,7 +42,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-scratch`, `0.24.0`, `0.24.0-scratch-r10`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-thanos/blob/0.24.0-scratch-r10/0/scratch/Dockerfile)
+* [`0`, `0-scratch`, `0.25.0`, `0.25.0-scratch-r0`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-thanos/blob/0.25.0-scratch-r0/0/scratch/Dockerfile)
 
 ## Connecting to other containers
 
