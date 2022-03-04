@@ -39,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.20200116.0`, `0.20200116.0-debian-10-r602`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ldap-auth-daemon/blob/0.20200116.0-debian-10-r602/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.20200116.0`, `0.20200116.0-debian-10-r603`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ldap-auth-daemon/blob/0.20200116.0-debian-10-r603/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nginx-ldap-auth-daemon GitHub repo](https://github.com/bitnami/bitnami-docker-nginx-ldap-auth-daemon).
 
@@ -268,6 +268,10 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Output of `docker info`
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+
+## Deprecation Notice
+
+NGINX LDAP Auth daemon is no longer maintained by upstream and is now internally tagged as to be deprecated. This image will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 03-25-2022
 
 ## License
 
