@@ -17,7 +17,7 @@ readonly installdir=$(dirname "$(dirname "$cmd")")
 cd "$installdir"
 
 info "Running Harbor Notary Server migrations"
-"$installdir"/migrate.sh
+"$installdir"/migrations/migrate.sh
 
 info "** Starting Harbor Notary Server **"
 exec "$cmd" "${flags[@]}"
