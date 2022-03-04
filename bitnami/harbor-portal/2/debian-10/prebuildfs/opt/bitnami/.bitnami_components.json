@@ -1,30 +1,30 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "ec62006ece7e0b49c65926e458ba2b71d6d251552118b1378840b1803dbb3d53",
+        "digest": "d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.14.0-4"
+        "version": "1.14.0-7"
     },
     "harbor": {
         "arch": "amd64",
-        "digest": "3a93ac88f4a80bbf363f3ae77fc5ad7bec9d2e16d30dd9825faa0bf1e568d999",
+        "digest": "7a5db4e16ab9ab5bd3e53a281364c1fbeb457e95d00b27def1945afdc8587dde",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.1-4"
+        "version": "2.4.1-8"
     },
     "nginx": {
         "arch": "amd64",
-        "digest": "856199a51e9ba3144a8b97b2a587162b8c8aa11a7c04fde5592bda6a7a7ce5a0",
+        "digest": "305f5b0413081f7911932bc7144c478858444e16e7ef917123f50455a490c427",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.21.6-1"
+        "version": "1.21.6-4"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "ed811d10882450d4755b893d5e034a0dd912cdb4f261dd332ddf6363411cc0ba",
+        "digest": "97c2ae4b001c5937e888b920bee7b1a40a076680caac53ded6d10f6207d54565",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-7"
+        "version": "1.0.1-10"
     }
 }
