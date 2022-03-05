@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="metallb-speaker" \
-    BITNAMI_IMAGE_VERSION="0.12.1-debian-10-r14" \
+    BITNAMI_IMAGE_VERSION="0.12.1-debian-10-r15" \
     PATH="/opt/bitnami/metallb-speaker/bin:$PATH"
 
 USER 1001
