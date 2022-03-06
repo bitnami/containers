@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN ln -sf /opt/bitnami/mysqld-exporter/bin/mysqld_exporter /bin/mysqld_exporter
 
 ENV BITNAMI_APP_NAME="mysqld-exporter" \
-    BITNAMI_IMAGE_VERSION="0.14.0-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="0.14.0-debian-10-r1" \
     PATH="/opt/bitnami/mysqld-exporter/bin:$PATH"
 
 EXPOSE 9104
