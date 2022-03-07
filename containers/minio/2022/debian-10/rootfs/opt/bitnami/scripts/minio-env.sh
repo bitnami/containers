@@ -31,8 +31,6 @@ minio_env_vars=(
     MINIO_FORCE_NEW_KEYS
     MINIO_ROOT_USER
     MINIO_ROOT_PASSWORD
-    MINIO_ACCESS_KEY
-    MINIO_SECRET_KEY
 )
 for env_var in "${minio_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -71,9 +69,7 @@ export MINIO_STARTUP_TIMEOUT="${MINIO_STARTUP_TIMEOUT:-10}"
 
 # MinIO security
 export MINIO_FORCE_NEW_KEYS="${MINIO_FORCE_NEW_KEYS:-no}"
-MINIO_ROOT_USER="${MINIO_ROOT_USER:-"${MINIO_ACCESS_KEY:-}"}"
 export MINIO_ROOT_USER="${MINIO_ROOT_USER:-minio}"
-MINIO_ROOT_PASSWORD="${MINIO_ROOT_PASSWORD:-"${MINIO_SECRET_KEY:-}"}"
 export MINIO_ROOT_PASSWORD="${MINIO_ROOT_PASSWORD:-miniosecret}"
 
 # Custom environment variables may be defined below
