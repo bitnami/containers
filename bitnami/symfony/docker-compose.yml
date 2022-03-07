@@ -9,7 +9,7 @@ services:
       - MARIADB_USER=bn_myapp
       - MARIADB_DATABASE=bitnami_myapp
   myapp:
-    image: docker.io/bitnami/symfony:4.4
+    image: docker.io/bitnami/symfony:6.0
     ports:
       - '8000:8000'
     environment:
