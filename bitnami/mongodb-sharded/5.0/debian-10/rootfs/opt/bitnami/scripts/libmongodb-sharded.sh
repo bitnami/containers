@@ -365,7 +365,7 @@ mongodb_sharded_set_cfg_server_host_conf() {
     local -r conf_file_name="${conf_file_path#"$MONGODB_CONF_DIR"}"
 
     if ! mongodb_is_file_external "$conf_file_name"; then
-        mongodb_config_apply_regex "configDB:.*" "configDB: $MONGODB_CFG_REPLICA_SET_NAME/$MONGODB_CFG_PRIMARY_HOST:$MONGODB_PORT_NUMBER" "$conf_file_path"
+        mongodb_config_apply_regex "configDB:.*" "configDB: $MONGODB_CFG_REPLICA_SET_NAME/$MONGODB_CFG_PRIMARY_HOST:$MONGODB_CFG_PRIMARY_PORT_NUMBER" "$conf_file_path"
     else
         debug "$conf_file_name mounted. Skipping setting config server host"
     fi
