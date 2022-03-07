@@ -43,7 +43,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`8`, `8-debian-10`, `8.0.1`, `8.0.1-debian-10-r58` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-osclass/blob/8.0.1-debian-10-r58/8/debian-10/Dockerfile)
+- [`8`, `8-debian-10`, `8.0.1`, `8.0.1-debian-10-r59`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-osclass/blob/8.0.1-debian-10-r59/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/osclass GitHub repo](https://github.com/bitnami/bitnami-docker-osclass).
 
@@ -64,7 +64,7 @@ $ docker pull bitnami/osclass:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-
+$ docker build -t bitnami/osclass:latest 'https://github.com/bitnami/bitnami-docker-osclass.git#master:8/debian-10'
 ```
 
 ## How to use this image
