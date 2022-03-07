@@ -13,7 +13,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kustomize" "4.5.
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ksonnet" "0.13.1-7" --checksum d0add05910e38e57f69c2ed7bb208ba89a68867495ef0d40e40124b7a58c4ab0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "helm" "3.8.0-4" --checksum 6c6f04df1656d3019431ba713ae9fa4077443fb1015449dbd2c090d9a86e9077
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "argo-cd" "2.2.5-4" --checksum 620b17b13a2f136c60e3311653b220658eef041a811d9af4b04498bc8eec67f6
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "argo-cd" "2.3.0-0" --checksum 920c47c24bc090380cf573acf358b22bb7a8c70a66de149ed495da4a0ce9c591
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -21,7 +21,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/argo-cd/postunpack.sh
 ENV BITNAMI_APP_NAME="argo-cd" \
-    BITNAMI_IMAGE_VERSION="2.2.5-debian-10-r25" \
+    BITNAMI_IMAGE_VERSION="2.3.0-debian-10-r0" \
     LIBNSS_WRAPPER_PATH="/opt/bitnami/common/lib/libnss_wrapper.so" \
     LNAME="argocd" \
     NSS_WRAPPER_GROUP="/opt/bitnami/argo-cd/nss_group" \
