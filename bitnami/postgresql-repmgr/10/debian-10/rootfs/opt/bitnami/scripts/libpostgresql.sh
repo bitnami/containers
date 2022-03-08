@@ -158,6 +158,8 @@ postgresql_validate() {
 postgresql_create_config() {
     info "postgresql.conf file not detected. Generating it..."
     cp "$POSTGRESQL_BASE_DIR/share/postgresql.conf.sample" "$POSTGRESQL_CONF_FILE"
+    # Configure port
+    postgresql_set_property "port" "$POSTGRESQL_PORT_NUMBER"
     # Update default value for 'include_dir' directive
     # ref: https://github.com/postgres/postgres/commit/fb9c475597c245562a28d1e916b575ac4ec5c19f#diff-f5544d9b6d218cc9677524b454b41c60
     if ! grep include_dir "$POSTGRESQL_CONF_FILE" >/dev/null; then
@@ -765,7 +767,7 @@ postgresql_start_bg() {
     else
         "${pg_ctl_cmd[@]}" "start" "${pg_ctl_flags[@]}" >/dev/null 2>&1
     fi
-    local pg_isready_args=("-U" "postgres")
+    local pg_isready_args=("-U" "postgres" "-p" "$POSTGRESQL_PORT_NUMBER")
     local counter=$POSTGRESQL_INIT_MAX_TIMEOUT
     while ! "$POSTGRESQL_BIN_DIR"/pg_isready "${pg_isready_args[@]}" >/dev/null 2>&1; do
         sleep 1
@@ -1043,7 +1045,7 @@ postgresql_execute_print_output() {
     local opts
     read -r -a opts <<<"${@:4}"
 
-    local args=("-U" "$user")
+    local args=("-U" "$user" "-p" "$POSTGRESQL_PORT_NUMBER")
     [[ -n "$db" ]] && args+=("-d" "$db")
     [[ "${#opts[@]}" -gt 0 ]] && args+=("${opts[@]}")
 
@@ -1271,7 +1273,6 @@ EOF
         postgresql_ensure_user_has_database_privileges "${grant_flags[@]}"
     fi
 }
-
 
 ########################
 # Retrieves the WAL directory in use by PostgreSQL / to use if not initialized yet
