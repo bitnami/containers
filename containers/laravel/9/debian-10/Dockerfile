@@ -12,7 +12,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.12-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "8.1.3-4" --checksum e6a36a336ec72ebb0b74c175058978c9f367f1192e1d5cbf04eabbb95351c8ab
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.19.0-4" --checksum 0649af9ad2856d01d574146b62c840d3a330f2e85227a2ae73ec6500737ccccc
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-10" --checksum 35c818ba3f4b5aae905959bc7d3a5e81fc63786e3c662b604612c0aa7fcda8fd
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "laravel" "9.1.0-0" --checksum 149fa9061a2926b7bb97821abceaa0c20b8d5382d2c567a8f890ce8e4e65d2e0
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "laravel" "9.1.1-0" --checksum 3df3d1a93dcb634e4522c1028fc72fbb3058a5a3ed3e75977b9151cee68fb6b4
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -22,7 +22,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/laravel/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
 ENV BITNAMI_APP_NAME="laravel" \
-    BITNAMI_IMAGE_VERSION="9.1.0-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="9.1.1-debian-10-r0" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/node/bin:/opt/bitnami/common/bin:$PATH" \
     PHP_ENABLE_OPCACHE="0"
