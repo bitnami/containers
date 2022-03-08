@@ -48,8 +48,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`5.0`, `5.0-debian-10`, `5.0.6`, `5.0.6-debian-10-r33` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/5.0.6-debian-10-r33/5.0/debian-10/Dockerfile)
-* [`4.4`, `4.4-debian-10`, `4.4.13`, `4.4.13-debian-10-r5`, `latest` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.13-debian-10-r5/4.4/debian-10/Dockerfile)
+* [`5.0`, `5.0-debian-10`, `5.0.6`, `5.0.6-debian-10-r34`, `latest` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/5.0.6-debian-10-r34/5.0/debian-10/Dockerfile)
+* [`4.4`, `4.4-debian-10`, `4.4.13`, `4.4.13-debian-10-r5` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.13-debian-10-r5/4.4/debian-10/Dockerfile)
 * [`4.2`, `4.2-debian-10`, `4.2.19`, `4.2.19-debian-10-r5` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.19-debian-10-r5/4.2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
@@ -71,7 +71,7 @@ $ docker pull bitnami/mongodb:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/mongodb:latest 'https://github.com/bitnami/bitnami-docker-mongodb.git#master:4.4/debian-10'
+$ docker build -t bitnami/mongodb:latest 'https://github.com/bitnami/bitnami-docker-mongodb.git#master:5.0/debian-10'
 ```
 
 ## Persisting your database
