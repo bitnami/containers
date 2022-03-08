@@ -9,10 +9,10 @@ ENV HOME="/app" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages build-essential ca-certificates curl git gzip libc6 libcap2-bin libcom-err2 libgcc1 libgssapi-krb5-2 libicu-dev libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblttng-ust-dev libsqlite3-dev libssl-dev libstdc++6 pkg-config procps tar unzip wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/dotnet-5.0.14-4-linux-amd64-debian-10.tar.gz && \
-    echo "2d1e02c0191819bc65b7a2c4bfc55642696f81b7c335692a8be6a471db0f862a  /tmp/bitnami/pkg/cache/dotnet-5.0.14-4-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/dotnet-5.0.14-4-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/dotnet-5.0.14-4-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/dotnet-5.0.15-0-linux-amd64-debian-10.tar.gz && \
+    echo "2ae39b0aed3c8f273a8d940713f4c21626eed33c66f68a80f3c34fffa4c1b629  /tmp/bitnami/pkg/cache/dotnet-5.0.15-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/dotnet-5.0.15-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/dotnet-5.0.15-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
@@ -22,7 +22,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/dotnet/postunpack.sh
 ENV BITNAMI_APP_NAME="dotnet" \
-    BITNAMI_IMAGE_VERSION="5.0.14-debian-10-r25" \
+    BITNAMI_IMAGE_VERSION="5.0.15-debian-10-r0" \
     DOTNET_CLI_HOME="/app" \
     DOTNET_ROOT="/opt/bitnami/dotnet/bin" \
     PATH="/opt/bitnami/dotnet/bin:$PATH"
