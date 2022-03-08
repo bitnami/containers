@@ -49,10 +49,10 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`14`, `14-debian-10`, `14.2.0`, `14.2.0-debian-10-r21` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/14.2.0-debian-10-r21/14/debian-10/Dockerfile)
+* [`14`, `14-debian-10`, `14.2.0`, `14.2.0-debian-10-r22`, `latest` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/14.2.0-debian-10-r22/14/debian-10/Dockerfile)
 * [`13`, `13-debian-10`, `13.6.0`, `13.6.0-debian-10-r24` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/13.6.0-debian-10-r24/13/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.10.0`, `12.10.0-debian-10-r24` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.10.0-debian-10-r24/12/debian-10/Dockerfile)
-* [`11`, `11-debian-10`, `11.15.0`, `11.15.0-debian-10-r23`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.15.0-debian-10-r23/11/debian-10/Dockerfile)
+* [`11`, `11-debian-10`, `11.15.0`, `11.15.0-debian-10-r23` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.15.0-debian-10-r23/11/debian-10/Dockerfile)
 * [`10`, `10-debian-10`, `10.20.0`, `10.20.0-debian-10-r27` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.20.0-debian-10-r27/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql-repmgr GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql-repmgr).
@@ -74,7 +74,7 @@ $ docker pull bitnami/postgresql-repmgr:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/postgresql-repmgr:latest 'https://github.com/bitnami/bitnami-docker-postgresql-repmgr.git#master:11/debian-10'
+$ docker build -t bitnami/postgresql-repmgr:latest 'https://github.com/bitnami/bitnami-docker-postgresql-repmgr.git#master:14/debian-10'
 ```
 
 ## Persisting your application
