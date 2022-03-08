@@ -31,8 +31,8 @@ $ docker run --name Kiam bitnami/kiam:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.2.0`, `4.2.0-debian-10-r115` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kiam/blob/4.2.0-debian-10-r115/4/debian-10/Dockerfile)
-* [`3`, `3-debian-10`, `3.6.0`, `3.6.0-debian-10-r465`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kiam/blob/3.6.0-debian-10-r465/3/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.2.0`, `4.2.0-debian-10-r116`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kiam/blob/4.2.0-debian-10-r116/4/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.6.0`, `3.6.0-debian-10-r465` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kiam/blob/3.6.0-debian-10-r465/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kiam GitHub repo](https://github.com/bitnami/bitnami-docker-kiam).
 
@@ -53,7 +53,7 @@ $ docker pull bitnami/kiam:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/kiam:latest 'https://github.com/bitnami/bitnami-docker-kiam.git#master:3/debian-10'
+$ docker build -t bitnami/kiam:latest 'https://github.com/bitnami/bitnami-docker-kiam.git#master:4/debian-10'
 ```
 
 ## Configuration
