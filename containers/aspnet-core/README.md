@@ -37,9 +37,9 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`6.0`, `6.0-debian-10`, `6.0.2`, `6.0.2-debian-10-r25`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/6.0.2-debian-10-r25/6.0/debian-10/Dockerfile)
-* [`5`, `5-debian-10`, `5.0.14`, `5.0.14-debian-10-r25` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/5.0.14-debian-10-r25/5/debian-10/Dockerfile)
-* [`3.1`, `3.1-debian-10`, `3.1.22`, `3.1.22-debian-10-r80` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/3.1.22-debian-10-r80/3.1/debian-10/Dockerfile)
+* [`6.0`, `6.0-debian-10`, `6.0.3`, `6.0.3-debian-10-r-1`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/6.0.3-debian-10-r-1/6.0/debian-10/Dockerfile)
+* [`5`, `5-debian-10`, `5.0.15`, `5.0.15-debian-10-r0` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/5.0.15-debian-10-r0/5/debian-10/Dockerfile)
+* [`3.1`, `3.1-debian-10`, `3.1.23`, `3.1.23-debian-10-r-1` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/3.1.23-debian-10-r-1/3.1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/aspnet-core GitHub repo](https://github.com/bitnami/bitnami-docker-aspnet-core).
 
