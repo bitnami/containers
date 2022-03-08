@@ -181,10 +181,10 @@ has_galera_cluster_other_nodes() {
 #########################
 get_galera_cluster_address_value() {
     local cluster_address
-    if is_boolean_yes "$(get_galera_cluster_bootstrap_value)"; then
-        cluster_address="gcomm://"
-    else
+    if ! is_boolean_yes "$(get_galera_cluster_bootstrap_value)" && is_boolean_yes "$(has_galera_cluster_other_nodes)"; then
         cluster_address="$DB_GALERA_CLUSTER_ADDRESS"
+    else
+        cluster_address="gcomm://"
     fi
     debug "Set Galera cluster address to ${cluster_address}"
     echo "$cluster_address"
