@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 * [`3`, `3-debian-10`, `3.1.0`, `3.1.0-debian-10-r37`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.1.0-debian-10-r37/3/debian-10/Dockerfile)
-* [`2`, `2-debian-10`, `2.8.1`, `2.8.1-debian-10-r150` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.1-debian-10-r150/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.8.1`, `2.8.1-debian-10-r151` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.1-debian-10-r151/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
@@ -200,7 +200,7 @@ The configuration can easily be setup with the Bitnami Apache Kafka Docker image
 * `KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL`: SASL mechanism to use for inter broker communications. No defaults.
 * `KAFKA_TLS_CLIENT_AUTH`: Configures kafka brokers to request client authentication. Allowed values: `required`, `requested`, `none`. Defaults: **required**.
 * `KAFKA_TLS_TYPE`: Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`. Defaults: **JKS**.
-* `KAFKA_CLIENT_USERS`: Additional users to `KAFKA_CLIENT_USER` that will be created into Zookeeper when using SASL_SCRAM for client communications. Separated by commas. Default: **user**
+* `KAFKA_CLIENT_USERS`: Users that will be created into Zookeeper when using SASL for client communications. Separated by commas. Default: **user**
 * `KAFKA_CLIENT_PASSWORDS`: Passwords for the users specified at`KAFKA_CLIENT_USERS`. Separated by commas. Default: **bitnami**
 * `KAFKA_CFG_MAX_PARTITION_FETCH_BYTES`:  The maximum amount of data per-partition the server will return. Default: 1048576
 * `KAFKA_CFG_MAX_REQUEST_SIZE`: The maximum size of a request in bytes. Default: 1048576
@@ -324,8 +324,8 @@ KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=INTERNAL:SSL,CLIENT:SASL_SSL
 KAFKA_CFG_LISTENERS=INTERNAL://:9093,CLIENT://:9092
 KAFKA_CFG_ADVERTISED_LISTENERS=INTERNAL://kafka:9093,CLIENT://kafka:9092
 KAFKA_CFG_INTER_BROKER_LISTENER_NAME=INTERNAL
-KAFKA_CLIENT_USER=user
-KAFKA_CLIENT_PASSWORD=password
+KAFKA_CLIENT_USERS=user
+KAFKA_CLIENT_PASSWORDS=password
 ```
 
 You **must** also use your own certificates for SSL. You can drop your Java Key Stores or PEM files into `/opt/bitnami/kafka/config/certs`. If the JKS or PEM certs are password protected (recommended), you will need to provide it to get access to the keystores:
@@ -370,8 +370,8 @@ services:
       - KAFKA_CFG_ADVERTISED_LISTENERS=SASL_SSL://:9092
       - KAFKA_ZOOKEEPER_USER=kafka
       - KAFKA_ZOOKEEPER_PASSWORD=kafka_password
-      - KAFKA_CLIENT_USER=user
-      - KAFKA_CLIENT_PASSWORD=password
+      - KAFKA_CLIENT_USERS=user
+      - KAFKA_CLIENT_PASSWORDS=password
       - KAFKA_CERTIFICATE_PASSWORD=certificatePassword123
       - KAFKA_TLS_TYPE=JKS # or PEM
     volumes:
@@ -415,9 +415,8 @@ When configuring your broker to use `SASL` or `SASL_SSL` for inter-broker commun
 
 When configuring Apache Kafka with `SASL` or `SASL_SSL` for communications with clients, you can provide your the SASL credentials using this environment variables:
 
-* `KAFKA_CLIENT_USER`: Apache Kafka client user. Default: **user**
-* `KAFKA_CLIENT_PASSWORD`: Apache Kafka client user password. Default: **bitnami**
-
+* `KAFKA_CLIENT_USERS`: Apache Kafka client user. Default: **user**
+* `KAFKA_CLIENT_PASSWORDS`: Apache Kafka client user password. Default: **bitnami**
 #### Apache Kafka ZooKeeper client configuration
 
 There are different options of configuration to connect a Zookeeper server.
