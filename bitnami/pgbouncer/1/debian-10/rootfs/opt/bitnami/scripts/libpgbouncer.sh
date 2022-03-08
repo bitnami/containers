@@ -220,6 +220,7 @@ pgbouncer_initialize() {
             "pidfile:${PGBOUNCER_PID_FILE}"
             "logfile:${PGBOUNCER_LOG_FILE}"
             "admin_users:${POSTGRESQL_USERNAME}"
+            "stats_users:${PGBOUNCER_STATS_USERS}"
             "client_tls_sslmode:${PGBOUNCER_CLIENT_TLS_SSLMODE}"
             "server_tls_sslmode:${PGBOUNCER_SERVER_TLS_SSLMODE}"
             "server_tls_ca_file:${PGBOUNCER_SERVER_TLS_CA_FILE}"
