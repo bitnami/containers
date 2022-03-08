@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2022`, `2022-debian-10`, `2022.3.3`, `2022.3.3-debian-10-r3`, `latest` (2022/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2022.3.3-debian-10-r3/2022/debian-10/Dockerfile)
+* [`2022`, `2022-debian-10`, `2022.3.3`, `2022.3.3-debian-10-r4`, `latest` (2022/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2022.3.3-debian-10-r4/2022/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/minio-client GitHub repo](https://github.com/bitnami/bitnami-docker-minio-client).
 
@@ -87,8 +87,8 @@ Use the `--network app-tier` argument to the `docker run` command to attach the 
 
 ```console
 $ docker run -d --name minio-server \
-    --env MINIO_ACCESS_KEY="minio-access-key" \
-    --env MINIO_SECRET_KEY="minio-secret-key" \
+    --env MINIO_ROOT_USER="minio-root-user" \
+    --env MINIO_ROOT_PASSWORD="minio-root-password" \
     --network app-tier \
     bitnami/minio:latest
 ```
@@ -99,9 +99,9 @@ Finally we create a new container instance to launch the MinIO(R) client and con
 
 ```console
 $ docker run --rm --name minio-client \
-    --env MINIO_SERVER_HOST="minio" \
-    --env MINIO_SERVER_ACCESS_KEY="minio-access-key" \
-    --env MINIO_SERVER_SECRET_KEY="minio-secret-key" \
+    --env MINIO_SERVER_HOST="minio-server" \
+    --env MINIO_SERVER_ACCESS_KEY="minio-root-user" \
+    --env MINIO_SERVER_SECRET_KEY="minio-root-password" \
     --network app-tier \
     bitnami/minio-client \
     mb minio/my-bucket
