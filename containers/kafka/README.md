@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 * [`3`, `3-debian-10`, `3.1.0`, `3.1.0-debian-10-r39`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.1.0-debian-10-r39/3/debian-10/Dockerfile)
-* [`2`, `2-debian-10`, `2.8.1`, `2.8.1-debian-10-r152` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.1-debian-10-r152/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.8.1`, `2.8.1-debian-10-r153` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.1-debian-10-r153/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
@@ -417,7 +417,6 @@ When configuring Apache Kafka with `SASL` or `SASL_SSL` for communications with 
 
 * `KAFKA_CLIENT_USERS`: Apache Kafka client user. Default: **user**
 * `KAFKA_CLIENT_PASSWORDS`: Apache Kafka client user password. Default: **bitnami**
-
 #### Apache Kafka ZooKeeper client configuration
 
 There are different options of configuration to connect a Zookeeper server.
