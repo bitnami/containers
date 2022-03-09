@@ -113,6 +113,27 @@ apache_configure_https_port() {
 }
 
 ########################
+# Configure Apache's ServerTokens directive
+# Globals:
+#   APACHE_CONF_DIR
+# Arguments:
+#   $1 - Value for ServerTokens directive
+# Returns:
+#   None
+#########################
+apache_configure_server_tokens() {
+    local -r value=${1:?missing value}
+    local -r server_tokens_exp="s|^\s*ServerTokens\s+\w+\s*$|ServerTokens ${value}|"
+    local apache_configuration
+
+     if [[ -w "$APACHE_CONF_FILE" ]]; then
+        debug "Configuring ServerTokens ${value} on file ${APACHE_CONF_FILE}"
+        apache_configuration="$(sed -E -e "$server_tokens_exp" "$APACHE_CONF_FILE")"
+        echo "$apache_configuration" > "$APACHE_CONF_FILE"
+    fi
+}
+
+########################
 # Enable a module in the Apache configuration file
 # Globals:
 #   APACHE_CONF_FILE
