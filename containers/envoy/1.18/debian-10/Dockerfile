@@ -9,16 +9,16 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/envoy-1.18.6-1-linux-amd64-debian-10.tar.gz && \
-    echo "1a58ca1d3a83618a7902e24c33a7b2fc63b6dde651e252064460cd817a9bc8e0  /tmp/bitnami/pkg/cache/envoy-1.18.6-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/envoy-1.18.6-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/envoy-1.18.6-1-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/envoy-1.18.6-2-linux-amd64-debian-10.tar.gz && \
+    echo "b16c491d5368a2a4255d2337626cc63de60d3a0c083f75bf1b5527c958d8a7e7  /tmp/bitnami/pkg/cache/envoy-1.18.6-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/envoy-1.18.6-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/envoy-1.18.6-2-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="envoy" \
-    BITNAMI_IMAGE_VERSION="1.18.6-debian-10-r15" \
+    BITNAMI_IMAGE_VERSION="1.18.6-debian-10-r16" \
     PATH="/opt/bitnami/envoy/bin:$PATH"
 
 USER 1001
