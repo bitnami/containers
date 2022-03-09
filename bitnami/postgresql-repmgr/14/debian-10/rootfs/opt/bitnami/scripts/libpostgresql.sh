@@ -158,6 +158,8 @@ postgresql_validate() {
 postgresql_create_config() {
     info "postgresql.conf file not detected. Generating it..."
     cp "$POSTGRESQL_BASE_DIR/share/postgresql.conf.sample" "$POSTGRESQL_CONF_FILE"
+    # Configure port
+    postgresql_set_property "port" "$POSTGRESQL_PORT_NUMBER"
     # Update default value for 'include_dir' directive
     # ref: https://github.com/postgres/postgres/commit/fb9c475597c245562a28d1e916b575ac4ec5c19f#diff-f5544d9b6d218cc9677524b454b41c60
     if ! grep include_dir "$POSTGRESQL_CONF_FILE" >/dev/null; then
@@ -765,7 +767,7 @@ postgresql_start_bg() {
     else
         "${pg_ctl_cmd[@]}" "start" "${pg_ctl_flags[@]}" >/dev/null 2>&1
     fi
-    local pg_isready_args=("-U" "postgres")
+    local pg_isready_args=("-U" "postgres" "-p" "$POSTGRESQL_PORT_NUMBER")
     local counter=$POSTGRESQL_INIT_MAX_TIMEOUT
     while ! "$POSTGRESQL_BIN_DIR"/pg_isready "${pg_isready_args[@]}" >/dev/null 2>&1; do
         sleep 1
@@ -908,9 +910,11 @@ postgresql_slave_init_db() {
 #########################
 postgresql_configure_recovery() {
     info "Setting up streaming replication slave..."
+
+    local -r escaped_password="${POSTGRESQL_REPLICATION_PASSWORD//\&/\\&}"
     local -r psql_major_version="$(postgresql_get_major_version)"
     if ((psql_major_version >= 12)); then
-        postgresql_set_property "primary_conninfo" "host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT_NUMBER} user=${POSTGRESQL_REPLICATION_USER} password=${POSTGRESQL_REPLICATION_PASSWORD} application_name=${POSTGRESQL_CLUSTER_APP_NAME}" "$POSTGRESQL_CONF_FILE"
+        postgresql_set_property "primary_conninfo" "host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT_NUMBER} user=${POSTGRESQL_REPLICATION_USER} password=${escaped_password} application_name=${POSTGRESQL_CLUSTER_APP_NAME}" "$POSTGRESQL_CONF_FILE"
         postgresql_set_property "promote_trigger_file" "/tmp/postgresql.trigger.${POSTGRESQL_MASTER_PORT_NUMBER}" "$POSTGRESQL_CONF_FILE"
         touch "$POSTGRESQL_DATA_DIR"/standby.signal
     else
@@ -918,7 +922,7 @@ postgresql_configure_recovery() {
         chmod 600 "$POSTGRESQL_RECOVERY_FILE"
         am_i_root && chown "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" "$POSTGRESQL_RECOVERY_FILE"
         postgresql_set_property "standby_mode" "on" "$POSTGRESQL_RECOVERY_FILE"
-        postgresql_set_property "primary_conninfo" "host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT_NUMBER} user=${POSTGRESQL_REPLICATION_USER} password=${POSTGRESQL_REPLICATION_PASSWORD} application_name=${POSTGRESQL_CLUSTER_APP_NAME}" "$POSTGRESQL_RECOVERY_FILE"
+        postgresql_set_property "primary_conninfo" "host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT_NUMBER} user=${POSTGRESQL_REPLICATION_USER} password=${escaped_password} application_name=${POSTGRESQL_CLUSTER_APP_NAME}" "$POSTGRESQL_RECOVERY_FILE"
         postgresql_set_property "trigger_file" "/tmp/postgresql.trigger.${POSTGRESQL_MASTER_PORT_NUMBER}" "$POSTGRESQL_RECOVERY_FILE"
     fi
 }
@@ -1043,7 +1047,7 @@ postgresql_execute_print_output() {
     local opts
     read -r -a opts <<<"${@:4}"
 
-    local args=("-U" "$user")
+    local args=("-U" "$user" "-p" "${POSTGRESQL_PORT_NUMBER:-5432}")
     [[ -n "$db" ]] && args+=("-d" "$db")
     [[ "${#opts[@]}" -gt 0 ]] && args+=("${opts[@]}")
 
@@ -1271,7 +1275,6 @@ EOF
         postgresql_ensure_user_has_database_privileges "${grant_flags[@]}"
     fi
 }
-
 
 ########################
 # Retrieves the WAL directory in use by PostgreSQL / to use if not initialized yet
