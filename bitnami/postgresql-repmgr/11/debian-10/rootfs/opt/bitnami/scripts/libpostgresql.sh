@@ -910,9 +910,11 @@ postgresql_slave_init_db() {
 #########################
 postgresql_configure_recovery() {
     info "Setting up streaming replication slave..."
+
+    local -r escaped_password="${POSTGRESQL_REPLICATION_PASSWORD//\&/\\&}"
     local -r psql_major_version="$(postgresql_get_major_version)"
     if ((psql_major_version >= 12)); then
-        postgresql_set_property "primary_conninfo" "host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT_NUMBER} user=${POSTGRESQL_REPLICATION_USER} password=${POSTGRESQL_REPLICATION_PASSWORD} application_name=${POSTGRESQL_CLUSTER_APP_NAME}" "$POSTGRESQL_CONF_FILE"
+        postgresql_set_property "primary_conninfo" "host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT_NUMBER} user=${POSTGRESQL_REPLICATION_USER} password=${escaped_password} application_name=${POSTGRESQL_CLUSTER_APP_NAME}" "$POSTGRESQL_CONF_FILE"
         postgresql_set_property "promote_trigger_file" "/tmp/postgresql.trigger.${POSTGRESQL_MASTER_PORT_NUMBER}" "$POSTGRESQL_CONF_FILE"
         touch "$POSTGRESQL_DATA_DIR"/standby.signal
     else
@@ -920,7 +922,7 @@ postgresql_configure_recovery() {
         chmod 600 "$POSTGRESQL_RECOVERY_FILE"
         am_i_root && chown "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" "$POSTGRESQL_RECOVERY_FILE"
         postgresql_set_property "standby_mode" "on" "$POSTGRESQL_RECOVERY_FILE"
-        postgresql_set_property "primary_conninfo" "host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT_NUMBER} user=${POSTGRESQL_REPLICATION_USER} password=${POSTGRESQL_REPLICATION_PASSWORD} application_name=${POSTGRESQL_CLUSTER_APP_NAME}" "$POSTGRESQL_RECOVERY_FILE"
+        postgresql_set_property "primary_conninfo" "host=${POSTGRESQL_MASTER_HOST} port=${POSTGRESQL_MASTER_PORT_NUMBER} user=${POSTGRESQL_REPLICATION_USER} password=${escaped_password} application_name=${POSTGRESQL_CLUSTER_APP_NAME}" "$POSTGRESQL_RECOVERY_FILE"
         postgresql_set_property "trigger_file" "/tmp/postgresql.trigger.${POSTGRESQL_MASTER_PORT_NUMBER}" "$POSTGRESQL_RECOVERY_FILE"
     fi
 }
@@ -1045,7 +1047,7 @@ postgresql_execute_print_output() {
     local opts
     read -r -a opts <<<"${@:4}"
 
-    local args=("-U" "$user" "-p" "$POSTGRESQL_PORT_NUMBER")
+    local args=("-U" "$user" "-p" "${POSTGRESQL_PORT_NUMBER:-5432}")
     [[ -n "$db" ]] && args+=("-d" "$db")
     [[ "${#opts[@]}" -gt 0 ]] && args+=("${opts[@]}")
 
