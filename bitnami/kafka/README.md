@@ -417,6 +417,7 @@ When configuring Apache Kafka with `SASL` or `SASL_SSL` for communications with 
 
 * `KAFKA_CLIENT_USERS`: Apache Kafka client user. Default: **user**
 * `KAFKA_CLIENT_PASSWORDS`: Apache Kafka client user password. Default: **bitnami**
+
 #### Apache Kafka ZooKeeper client configuration
 
 There are different options of configuration to connect a Zookeeper server.
