@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="airflow-exporter" \
-    BITNAMI_IMAGE_VERSION="0.20220215.0-debian-10-r20" \
+    BITNAMI_IMAGE_VERSION="0.20220215.0-debian-10-r21" \
     PATH="/opt/bitnami/airflow-exporter/bin:$PATH"
 
 EXPOSE 9112
