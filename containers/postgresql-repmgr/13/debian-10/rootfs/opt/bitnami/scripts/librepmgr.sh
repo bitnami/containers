@@ -495,7 +495,7 @@ pg_ctl_options='-o "--config-file=\"${POSTGRESQL_CONF_FILE}\" --external_pid_fil
 pg_basebackup_options='$waldir_option'
 EOF
 
-    if is_boolean_yes "$REPMGR_FENCE_OLD_PRIMARY"; then
+   if is_boolean_yes "$REPMGR_FENCE_OLD_PRIMARY"; then
         cat <<EOF >>"${REPMGR_CONF_FILE}.tmp" 
 child_nodes_disconnect_command='/bin/bash -c ". /opt/bitnami/scripts/libpostgresql.sh && . /opt/bitnami/scripts/postgresql-env.sh && postgresql_stop && kill -TERM 1"'
 EOF
@@ -504,13 +504,32 @@ EOF
 child_nodes_check_interval=${REPMGR_CHILD_NODES_CHECK_INTERVAL}
 EOF
         fi
-
         if [[ -v REPMGR_CHILD_NODES_CONNECTED_MIN_COUNT ]]; then
             cat <<EOF >>"${REPMGR_CONF_FILE}.tmp"
 child_nodes_connected_min_count=${REPMGR_CHILD_NODES_CONNECTED_MIN_COUNT}
 EOF
         fi
+        if [[ -v REPMGR_CHILD_NODES_DISCONNECT_TIMEOUT ]]; then
+            cat <<EOF >>"${REPMGR_CONF_FILE}.tmp"
+child_nodes_disconnect_timeout=${REPMGR_CHILD_NODES_DISCONNECT_TIMEOUT}
+EOF
+        fi
+    fi
 
+    if [[ "$REPMGR_FENCE_OLD_PRIMARY" == "true" ]]; then
+        cat <<EOF >>"${REPMGR_CONF_FILE}.tmp" 
+child_nodes_disconnect_command='/bin/bash -c ". /opt/bitnami/scripts/libpostgresql.sh && . /opt/bitnami/scripts/postgresql-env.sh && postgresql_stop && kill -TERM 1"'
+EOF
+        if [[ -v REPMGR_CHILD_NODES_CHECK_INTERVAL ]]; then
+            cat <<EOF >>"${REPMGR_CONF_FILE}.tmp"
+child_nodes_check_interval=${REPMGR_CHILD_NODES_CHECK_INTERVAL}
+EOF
+        fi
+        if [[ -v REPMGR_CHILD_NODES_CONNECTED_MIN_COUNT ]]; then
+            cat <<EOF >>"${REPMGR_CONF_FILE}.tmp"
+child_nodes_connected_min_count=${REPMGR_CHILD_NODES_CONNECTED_MIN_COUNT}
+EOF
+        fi
         if [[ -v REPMGR_CHILD_NODES_DISCONNECT_TIMEOUT ]]; then
             cat <<EOF >>"${REPMGR_CONF_FILE}.tmp"
 child_nodes_disconnect_timeout=${REPMGR_CHILD_NODES_DISCONNECT_TIMEOUT}
