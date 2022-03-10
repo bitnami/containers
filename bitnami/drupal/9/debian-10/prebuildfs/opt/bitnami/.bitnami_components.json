@@ -1,10 +1,10 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "93e282918042188b83e20d054c3b97c7cd2d0417e459d36c8e328aa8836f645b",
+        "digest": "03ac0ec2bfa3084e947bd7c54e9c1539d3569ddcf58f5f6a1766ac197f645f55",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.52-8"
+        "version": "2.4.52-9"
     },
     "drupal": {
         "arch": "amd64",
