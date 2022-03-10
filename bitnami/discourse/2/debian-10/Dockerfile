@@ -14,7 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "2.7.5-35" --checksum 98d92c65fc296f915a23ee5893fab07177f02274ec33887fb2e080c02e401dd4
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "13.6.0-4" --checksum 10c4c8870775aa837cc37c243b20cde2efd166482aab0df90974c105884ea210
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.19.0-4" --checksum 0649af9ad2856d01d574146b62c840d3a330f2e85227a2ae73ec6500737ccccc
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.35.1-5" --checksum da12ba7cebb03c4eb983ba2248daf0ed5399be1bd8fa9d2d3931614ce6079ff6
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.35.1-6" --checksum 75c0294b7af868721549926139e6ddbec9548fbd0e69c7e199d640a4531d858b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "brotli" "1.0.9-8" --checksum a9e53945655ab217802f413378f82a93c20a624a52495a52eb853cb945309e0e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "discourse" "2.8.1-1" --checksum b19dd963d0efdb284930630b6ba506fc1abbf7f68a97782412b0ff9901d07223
@@ -26,7 +26,7 @@ RUN /opt/bitnami/ruby/bin/gem install --force bundler -v '< 2'
 COPY rootfs /
 RUN /opt/bitnami/scripts/discourse/postunpack.sh
 ENV BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.8.1-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="2.8.1-debian-10-r6" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/git/bin:/opt/bitnami/brotli/bin:$PATH"
 
 EXPOSE 3000
