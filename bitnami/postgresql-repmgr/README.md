@@ -52,7 +52,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`14`, `14-debian-10`, `14.2.0`, `14.2.0-debian-10-r23`, `latest` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/14.2.0-debian-10-r23/14/debian-10/Dockerfile)
 * [`13`, `13-debian-10`, `13.6.0`, `13.6.0-debian-10-r26` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/13.6.0-debian-10-r26/13/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.10.0`, `12.10.0-debian-10-r26` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.10.0-debian-10-r26/12/debian-10/Dockerfile)
-* [`11`, `11-debian-10`, `11.15.0`, `11.15.0-debian-10-r25` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.15.0-debian-10-r25/11/debian-10/Dockerfile)
+* [`11`, `11-debian-10`, `11.15.0`, `11.15.0-debian-10-r26` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.15.0-debian-10-r26/11/debian-10/Dockerfile)
 * [`10`, `10-debian-10`, `10.20.0`, `10.20.0-debian-10-r29` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.20.0-debian-10-r29/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql-repmgr GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql-repmgr).
@@ -548,10 +548,10 @@ Please see the list of environment variables available in the Bitnami PostgreSQL
 | REPMGR_DATABASE                        | `repmgr`      |
 | REPMGR_PASSWORD                        | `nil`         |
 | REPMGR_PASSWORD_FILE                   | `nil`         |
-| REPMGR_FENCE_OLD_PRIMARY               | `nil`         |
-| REPMGR_CHILD_NODES_CHECK_INTERVAL      | `nil`         |
-| REPMGR_CHILD_NODES_CONNECTED_MIN_COUNT | `nil`         |
-| REPMGR_CHILD_NODES_DISCONNECT_TIMEOUT  | `nil`         |
+| REPMGR_FENCE_OLD_PRIMARY               | `no`          |
+| REPMGR_CHILD_NODES_CHECK_INTERVAL      | `5`           |
+| REPMGR_CHILD_NODES_CONNECTED_MIN_COUNT | `1`           |
+| REPMGR_CHILD_NODES_DISCONNECT_TIMEOUT  | `30`          |
 | REPMGR_USE_PASSFILE                    | `nil`         |
 | POSTGRESQL_USERNAME                    | `postgres`    |
 | POSTGRESQL_DATABASE                    | `nil`         |
@@ -568,7 +568,7 @@ Please see the list of environment variables available in the Bitnami PostgreSQL
 | POSTGRESQL_TLS_KEY_FILE                | `nil`         |
 | POSTGRESQL_TLS_CA_FILE                 | `nil`         |
 | POSTGRESQL_TLS_CRL_FILE                | `nil`         |
-| POSTGRESQL_TLS_PREFER_SERVER_CIPHERS   | `yes`         |
+| POSTGRESQL_TLS_PREFER_SERVER_CIPHERS | `yes`         |
 
 ## Logging
 
