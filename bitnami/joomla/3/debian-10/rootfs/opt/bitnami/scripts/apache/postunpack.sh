@@ -59,6 +59,7 @@ apache_setup_bitnami_config() {
 Include "${APACHE_CONF_DIR}/extra/httpd-default.conf"
 PidFile "${APACHE_PID_FILE}"
 TraceEnable Off
+ServerTokens ${APACHE_SERVER_TOKENS}
 Include "${APACHE_CONF_DIR}/deflate.conf"
 IncludeOptional "${APACHE_VHOSTS_DIR}/*.conf"
 Include "${APACHE_CONF_DIR}/bitnami/bitnami.conf"
