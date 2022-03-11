@@ -140,7 +140,7 @@ kong_initialize() {
     kong_configure_from_environment_variables
 
     while ! kong_migrations_list_output="$(kong migrations list 2>&1)"; do
-        if is_boolean_yes "$KONG_MIGRATE" && [[ "$kong_migrations_list_output" =~ "Database needs bootstrapping"* ]]; then
+        if is_boolean_yes "$KONG_MIGRATE" && [[ "$kong_migrations_list_output" =~ "Database needs bootstrapping"* ]] || [[ "$kong_migrations_list_output" =~ "migrations available" ]]; then
             break
         fi
         debug "$kong_migrations_list_output"
