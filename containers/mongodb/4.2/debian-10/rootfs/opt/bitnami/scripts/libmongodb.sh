@@ -1161,6 +1161,14 @@ mongodb_configure_secondary() {
             error "Secondary node did not get marked as secondary"
             exit 1
         fi
+
+        # Mark node as readable. This is necessary in cases where the PVC is lost
+        if is_boolean_yes "$MONGODB_SET_SECONDARY_OK"; then
+            mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" <<EOF
+rs.secondaryOk()
+EOF
+        fi
+
     fi
 }
 
