@@ -2,7 +2,7 @@
 
 ## What is AWS CLI?
 
-> The AWS Command Line Interface (CLI) allows you to manage your AWS services from a single tool. Use it to control multiple services and automate actions through scripts. 
+> The AWS Command Line Interface (CLI) allows you to manage your AWS services from a single tool. Use it to control multiple services and automate actions through scripts.
 
 [Overview of AWS CLI](https://aws.amazon.com/cli/)
 
@@ -32,7 +32,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2`, `2-debian-10`, `2.4.25`, `2.4.25-debian-10-r3`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/2.4.25-debian-10-r3/2/debian-10/Dockerfile)
-* [`1`, `1-debian-10`, `1.22.73`, `1.22.73-debian-10-r2` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/1.22.73-debian-10-r2/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.22.74`, `1.22.74-debian-10-r0` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/1.22.74-debian-10-r0/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/aws-cli GitHub repo](https://github.com/bitnami/bitnami-docker-aws-cli).
 
