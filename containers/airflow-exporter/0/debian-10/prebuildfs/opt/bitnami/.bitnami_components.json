@@ -1,9 +1,9 @@
 {
     "airflow-exporter": {
         "arch": "amd64",
-        "digest": "c71710475f643f51d33a29c694cfc286bcbe5df6b83080599125ffb35c2ad310",
+        "digest": "e1c3c20fba972e9535dd432e90b0c6039636729c4626c11f5195f69c15dd5ce6",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.20220215.0-3"
+        "version": "0.20220314.0-0"
     }
 }
