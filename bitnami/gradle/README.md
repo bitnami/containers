@@ -2,7 +2,7 @@
 
 ## What is Gradle?
 
-> Gradle is an open source automation tool to compile, deploy, and package software for any platform. It supports multiple languages such as Java,  C/C++, and JavaScript. 
+> Gradle is an open source automation tool to compile, deploy, and package software for any platform. It supports multiple languages such as Java,  C/C++, and JavaScript.
 
 [Overview of Gradle](https://gradle.org/)
 
@@ -38,7 +38,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.4.1`, `7.4.1-debian-10-r4`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-gradle/blob/7.4.1-debian-10-r4/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.4.1`, `7.4.1-debian-10-r5`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-gradle/blob/7.4.1-debian-10-r5/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/gradle GitHub repo](https://github.com/bitnami/bitnami-docker-gradle).
 
