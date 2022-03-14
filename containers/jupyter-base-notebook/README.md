@@ -2,7 +2,7 @@
 
 ## What is Jupyter Base Notebook?
 
-> Jupyter Base Notebook is an instance of Jupyter Notebook for your JupyterHub installation. The Base flavor contains the essential Python 3 packages and the JupyterLab user interface. 
+> Jupyter Base Notebook is an instance of Jupyter Notebook for your JupyterHub installation. The Base flavor contains the essential Python 3 packages and the JupyterLab user interface.
 
 [Overview of Jupyter Base Notebook](https://github.com/jupyter/docker-stacks)
 
@@ -31,7 +31,7 @@ $ docker run --name jupyter-base-notebook bitnami/jupyter-base-notebook:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.2.1`, `2.2.1-debian-10-r2`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook/blob/2.2.1-debian-10-r2/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.2.2`, `2.2.2-debian-10-r0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook/blob/2.2.2-debian-10-r0/2/debian-10/Dockerfile)
 * [`1`, `1-debian-10`, `1.5.0`, `1.5.0-debian-10-r118` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook/blob/1.5.0-debian-10-r118/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jupyter-base-notebook GitHub repo](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook).
