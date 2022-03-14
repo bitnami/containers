@@ -13,16 +13,16 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "d536188559c2b1a4176f8ffc1b50cdaf878fb2152cc69dbf94659a2b1fe76e46  /tmp/bitnami/pkg/cache/haproxy-dataplaneapi-2.5.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/haproxy-dataplaneapi-2.5.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/haproxy-dataplaneapi-2.5.1-0-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/haproxy-2.5.4-1-linux-amd64-debian-10.tar.gz && \
-    echo "84baa1d9b07a87e13c13fee54680c9828c1c929bf506d3a2937dd71297f6ec39  /tmp/bitnami/pkg/cache/haproxy-2.5.4-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/haproxy-2.5.4-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/haproxy-2.5.4-1-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/haproxy-2.5.5-0-linux-amd64-debian-10.tar.gz && \
+    echo "538921c4e0ee08373b542fd65b694edf5cac4ffcdad740c2f88183ffa072c5b9  /tmp/bitnami/pkg/cache/haproxy-2.5.5-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/haproxy-2.5.5-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/haproxy-2.5.5-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="haproxy" \
-    BITNAMI_IMAGE_VERSION="2.5.4-debian-10-r16" \
+    BITNAMI_IMAGE_VERSION="2.5.5-debian-10-r0" \
     PATH="/opt/bitnami/haproxy-dataplaneapi/bin:/opt/bitnami/haproxy/sbin:$PATH"
 
 USER 1001
