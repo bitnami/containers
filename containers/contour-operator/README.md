@@ -31,7 +31,7 @@ $ docker run --name contour-operator bitnami/contour-operator:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`1`, `1-scratch`, `1.19.1`, `1.19.1-scratch-r5`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-contour-operator/blob/1.19.1-scratch-r5/1/scratch/Dockerfile)
+- [`1.20`, `1.20-scratch`, `1.20.1`, `1.20.1-scratch-r0` (1.20/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-contour-operator/blob/1.20.1-scratch-r0/1.20/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/contour-operator GitHub repo](https://github.com/bitnami/bitnami-docker-contour-operator).
 
@@ -52,7 +52,7 @@ $ docker pull bitnami/contour-operator:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/contour-operator:latest 'https://github.com/bitnami/bitnami-docker-contour-operator.git#master:1/scratch'
+
 ```
 
 ## Why use a non-root container?
@@ -70,6 +70,12 @@ $ docker run --rm --name contour-operator bitnami/contour-operator:latest --  -c
 ```
 
 Check the [official Contour Operator documentation](https://github.com/projectcontour/contour-operator) for more information.
+
+## Notable changes
+
+# 1.19.1-scratch-r6 Rename branch 1.20
+
+- Branch 1 has been renamed into branch 1.20 in order to follow the upstream [Contour major versions](https://github.com/projectcontour/contour/releases).
 
 ## Contributing
 
