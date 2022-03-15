@@ -157,7 +157,7 @@ consul_initialize() {
     # Create an extra config file with the contents of the CONSUL_LOCAL_CONFIG env var
     if [[ -n ${CONSUL_LOCAL_CONFIG} ]]; then
         info "Configuring local config..."
-        cat >"${CONSUL_LOCAL_CONF_FILE}" <<<"${CONSUL_LOCAL_CONFIG}"
+        cat >"${CONSUL_LOCAL_FILE}" <<<"${CONSUL_LOCAL_CONFIG}"
     fi
 
     consul_configure_encryption
