@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl dirmngr gnupg gzip libaudit1 libbsd0 libbz2-1.0 libc6 libcap-ng0 libcom-err2 libcurl4 libexpat1 libffi6 libfftw3-double3 libfontconfig1 libfreetype6 libgcc1 libgcrypt20 libgeoip1 libglib2.0-0 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjemalloc2 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblcms2-2 libldap-2.4-2 liblqr-1-0 libltdl7 liblzma5 libmagickcore-6.q16-6 libmagickwand-6.q16-6 libmemcached11 libmemcachedutil2 libncurses6 libnettle6 libnghttp2-14 libonig5 libp11-kit0 libpam0g libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsodium23 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5deb1 libtinfo6 libunistring2 libuuid1 libwebp6 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxslt1.1 libzip4 procps tar unzip zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "8.1.3-4" --checksum e6a36a336ec72ebb0b74c175058978c9f367f1192e1d5cbf04eabbb95351c8ab
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "8.1.4-0" --checksum b4224d63477fb4e701363de894175d15c1c7d3bff464abe679a0e8d539d94db0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.21.6-4" --checksum 305f5b0413081f7911932bc7144c478858444e16e7ef917123f50455a490c427
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.34-4" --checksum bb0089c26028b568dbe8b8875d39cca3c7835c582dda4fcbdcbed599320c57fe
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-10" --checksum 97c2ae4b001c5937e888b920bee7b1a40a076680caac53ded6d10f6207d54565
@@ -20,13 +20,13 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
+RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN /opt/bitnami/scripts/nginx-php-fpm/postunpack.sh
 RUN /opt/bitnami/scripts/drupal/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV BITNAMI_APP_NAME="drupal-nginx" \
-    BITNAMI_IMAGE_VERSION="9.3.7-debian-10-r11" \
+    BITNAMI_IMAGE_VERSION="9.3.7-debian-10-r12" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/nginx/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/drupal/vendor/bin:$PATH"
