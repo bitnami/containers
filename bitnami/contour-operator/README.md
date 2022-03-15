@@ -31,7 +31,7 @@ $ docker run --name contour-operator bitnami/contour-operator:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`1.20`, `1.20-scratch`, `1.20.1`, `1.20.1-scratch-r0` (1.20/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-contour-operator/blob/1.20.1-scratch-r0/1.20/scratch/Dockerfile)
+- [`1.20`, `1.20-scratch`, `1.20.1`, `1.20.1-scratch-r1` (1.20/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-contour-operator/blob/1.20.1-scratch-r1/1.20/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/contour-operator GitHub repo](https://github.com/bitnami/bitnami-docker-contour-operator).
 
