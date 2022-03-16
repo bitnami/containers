@@ -31,7 +31,7 @@ $ docker run --name jupyter-base-notebook bitnami/jupyter-base-notebook:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.2.2`, `2.2.2-debian-10-r2`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook/blob/2.2.2-debian-10-r2/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.2.2`, `2.2.2-debian-10-r3`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook/blob/2.2.2-debian-10-r3/2/debian-10/Dockerfile)
 * [`1`, `1-debian-10`, `1.5.0`, `1.5.0-debian-10-r120` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook/blob/1.5.0-debian-10-r120/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jupyter-base-notebook GitHub repo](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook).
@@ -79,11 +79,12 @@ In the following example, the base notebook image is used to add `scipy` and `ma
 
 ```Dockerfile
 FROM bitnami/jupyter-base-notebook:latest
-
+USER root
 RUN conda install --quiet --yes \
     'matplotlib-base' \
     'scipy' && \
     conda clean --all -f -y
+USER 1001
 ```
 
 ## Contributing
