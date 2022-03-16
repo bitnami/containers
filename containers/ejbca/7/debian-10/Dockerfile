@@ -24,7 +24,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/ejbca/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV BITNAMI_APP_NAME="ejbca" \
-    BITNAMI_IMAGE_VERSION="7.4.3-2-debian-10-r111" \
+    BITNAMI_IMAGE_VERSION="7.4.3-2-debian-10-r112" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/ejbca/bin:$PATH"
 
