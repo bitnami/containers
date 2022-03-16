@@ -280,14 +280,18 @@ And expose the external port:
 +     - '9093:9093'
 ```
 
+**Note**: To connect from an external machine, change `localhost` above to your host's external IP/hostname and include `EXTERNAL://0.0.0.0:9093` in `KAFKA_CFG_LISTENERS` to allow for remote connections. 
+
 #### Producer and consumer using external client
 
-These clients, from the host, will use `localhost` to connect to Apache Kafka.
+These clients, from the same host, will use `localhost` to connect to Apache Kafka.
 
 ```console
 kafka-console-producer.sh --broker-list 127.0.0.1:9093 --topic test
 kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9093 --topic test --from-beginning
 ```
+
+If running these commands from another machine, change the address accordingly. 
 
 #### Producer and consumer using internal client
 
