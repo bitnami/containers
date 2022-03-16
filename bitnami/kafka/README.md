@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 * [`3`, `3-debian-10`, `3.1.0`, `3.1.0-debian-10-r46`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.1.0-debian-10-r46/3/debian-10/Dockerfile)
-* [`2`, `2-debian-10`, `2.8.1`, `2.8.1-debian-10-r159` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.1-debian-10-r159/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.8.1`, `2.8.1-debian-10-r160` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.1-debian-10-r160/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
@@ -280,7 +280,7 @@ And expose the external port:
 +     - '9093:9093'
 ```
 
-**Note**: To connect from an external machine, change `localhost` above to your host's external IP/hostname and include `EXTERNAL://0.0.0.0:9093` in `KAFKA_CFG_LISTENERS` to allow for remote connections. 
+**Note**: To connect from an external machine, change `localhost` above to your host's external IP/hostname and include `EXTERNAL://0.0.0.0:9093` in `KAFKA_CFG_LISTENERS` to allow for remote connections.
 
 #### Producer and consumer using external client
 
@@ -291,7 +291,7 @@ kafka-console-producer.sh --broker-list 127.0.0.1:9093 --topic test
 kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9093 --topic test --from-beginning
 ```
 
-If running these commands from another machine, change the address accordingly. 
+If running these commands from another machine, change the address accordingly.
 
 #### Producer and consumer using internal client
 
