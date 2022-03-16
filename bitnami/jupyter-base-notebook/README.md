@@ -77,7 +77,7 @@ Check the [official Jupyter Notebook documentation](https://jupyter.readthedocs.
 To add more python packages, you need to create a Dockerfile extending the current image, and the commands to install the desired packages.
 In the following example, the base notebook image is used to add `scipy` and `matplotlib`.
 
-```
+```Dockerfile
 FROM bitnami/jupyter-base-notebook:latest
 
 RUN conda install --quiet --yes \
