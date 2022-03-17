@@ -15,10 +15,10 @@
     },
     "harbor-clair": {
         "arch": "amd64",
-        "digest": "cce8e6d99fb06b0ff6f82c117368fd52bb567bb7eef692bcb0e222ff36f0bdf2",
+        "digest": "6d6d86bbe1d38d22c5ecc1f5b9cb96c8844d676c472afc37e8761f6c7c95a856",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.1-12"
+        "version": "2.4.2-0"
     },
     "wait-for-port": {
         "arch": "amd64",
