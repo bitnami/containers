@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libbz2-1.0 libc6 libffi6 libgmp10 libgnutls30 libhogweed4 libidn2-0 libldap-2.4-2 liblzma5 libncursesw6 libnettle6 libp11-kit0 libreadline7 libsasl2-2 libsqlite3-0 libssl1.1 libtasn1-6 libtinfo6 libunistring2 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.9.10-27" --checksum 650c160b4f0ad2ab4a47a83742cc8666ff936095031756955c6b02943420329a
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.9.11-0" --checksum da372206e2c2635ff79c72cb77e8b2e8ab1cc03066a76f1d1deccd53a332dcbf
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx-ldap-auth-daemon" "0.20200116.0-11" --checksum dbdd6fd0fcb3f890f37dd023dea4ccf002e43f31a0469ffaefa2447894e17230
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
@@ -18,7 +18,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 ENV BITNAMI_APP_NAME="nginx-ldap-auth-daemon" \
-    BITNAMI_IMAGE_VERSION="0.20200116.0-debian-10-r615" \
+    BITNAMI_IMAGE_VERSION="0.20200116.0-debian-10-r616" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/nginx-ldap-auth-daemon/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8888
