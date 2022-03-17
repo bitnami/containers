@@ -11,7 +11,7 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl gzip libc6 libgeoip1 libpcre3 libssl1.1 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.21.6-4" --checksum 305f5b0413081f7911932bc7144c478858444e16e7ef917123f50455a490c427
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-10" --checksum 97c2ae4b001c5937e888b920bee7b1a40a076680caac53ded6d10f6207d54565
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor" "2.4.1-8" --checksum 7a5db4e16ab9ab5bd3e53a281364c1fbeb457e95d00b27def1945afdc8587dde
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor" "2.4.2-0" --checksum dc9cc7f2cadc5f9f332c4f7c4d5335802115acd556c2d063d24d40cd7d415e90
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -23,7 +23,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN /opt/bitnami/scripts/harbor-portal/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-portal" \
-    BITNAMI_IMAGE_VERSION="2.4.1-debian-10-r70" \
+    BITNAMI_IMAGE_VERSION="2.4.2-debian-10-r0" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
     PATH="/opt/bitnami/nginx/sbin:/opt/bitnami/common/bin:$PATH"
