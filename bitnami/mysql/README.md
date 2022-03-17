@@ -189,6 +189,10 @@ Take into account those scripts are treated differently depending on the extensi
 
 > NOTE: If you are importing large databases, it is recommended to import them as `.sql` instead of `.sql.gz`, as the latter one needs to be decompressed on the fly and not allowing for additional optimizations to import large files.
 
+### Running scripts on start
+
+Same semantics as [Initializing a new instance](#initializing-a-new-instance), except these scripts will always run (after `/docker-entrypoint-initdb.d/` scripts, if they exist.) The file directory to place your start scripts is: `/docker-entrypoint-startdb.d`.
+
 ### Setting the root password on first run
 
 The root user and password can easily be setup with the Bitnami MySQL Docker image using the following environment variables:
