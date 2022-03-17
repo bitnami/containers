@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-registry" "2.4.1-36" --checksum 6d024fe534d2237367325e2fc79f8dedc5b0af3ca2b0b85f972e227b8fe54b2e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-registry" "2.4.2-0" --checksum 348925b4645f2aeffc2d89ae0ceb26d185912bef20da4130412f65cdcec22fa2
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -18,7 +18,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-registry/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-registry" \
-    BITNAMI_IMAGE_VERSION="2.4.1-debian-10-r88" \
+    BITNAMI_IMAGE_VERSION="2.4.2-debian-10-r0" \
     PATH="/opt/bitnami/harbor-registry/bin:/opt/bitnami/common/bin:$PATH"
 
 VOLUME [ "/etc/registry", "/storage", "/var/lib/registry" ]
