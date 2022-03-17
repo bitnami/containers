@@ -624,18 +624,18 @@ mysql_copy_mounted_config() {
 }
 
 ########################
-# Run custom initialization scripts
+# Run custom scripts
 # Globals:
 #   DB_*
 # Arguments:
-#   None
+#   $1 - 'init' or 'start' ('init' runs on first container start, 'start' runs everytime the container starts)
 # Returns:
 #   None
 #########################
-mysql_custom_init_scripts() {
-    if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|sql\|sql.gz\)") ]] && [[ ! -f "$DB_VOLUME_DIR/.user_scripts_initialized" ]] ; then
-        info "Loading user's custom files from /docker-entrypoint-initdb.d";
-        for f in /docker-entrypoint-initdb.d/*; do
+mysql_custom_scripts() {
+    if [[ -n $(find /docker-entrypoint-"$1"db.d/ -type f -regex ".*\.\(sh\|sql\|sql.gz\)") ]] && { [[ ! -f "$DB_VOLUME_DIR/.user_scripts_initialized" ]] || [[ $1 == 'start' ]]; } then
+        info "Loading user's custom files from /docker-entrypoint-$1db.d";
+        for f in /docker-entrypoint-"$1"db.d/*; do
             case "$f" in
                 *.sh)
                     if [[ -x "$f" ]]; then
@@ -650,7 +650,7 @@ mysql_custom_init_scripts() {
                         wait_for_mysql_access "$DB_ROOT_USER"
                         debug "Executing $f"; mysql_execute "$DB_DATABASE" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" < "$f"
                     else
-                        warn "Custom SQL initdb is not supported on non-primary nodes, ignoring $f"
+                        warn "Custom SQL $1db is not supported on non-primary nodes, ignoring $f"
                     fi
                     ;;
                 *.sql.gz)
@@ -659,7 +659,7 @@ mysql_custom_init_scripts() {
                         wait_for_mysql_access "$DB_ROOT_USER"
                         debug "Executing $f"; gunzip -c "$f" | mysql_execute "$DB_DATABASE" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD"
                     else
-                        warn "Custom SQL initdb is not supported on non-primary nodes, ignoring $f"
+                        warn "Custom SQL $1db is not supported on non-primary nodes, ignoring $f"
                     fi
                     ;;
                 *)
