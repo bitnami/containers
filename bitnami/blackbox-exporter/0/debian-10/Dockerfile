@@ -9,16 +9,16 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/blackbox-exporter-0.19.0-8-linux-amd64-debian-10.tar.gz && \
-    echo "0d56bcfaae5ea25668694ac5f56cd165f84b178c56b3a38c6ebb0a6ff9deecbb  /tmp/bitnami/pkg/cache/blackbox-exporter-0.19.0-8-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/blackbox-exporter-0.19.0-8-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/blackbox-exporter-0.19.0-8-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/blackbox-exporter-0.20.0-0-linux-amd64-debian-10.tar.gz && \
+    echo "8fc956b21e6bc615ee3ca8aca4ec676be078bd49ec6ccfce01ea0a3d1cd53a85  /tmp/bitnami/pkg/cache/blackbox-exporter-0.20.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/blackbox-exporter-0.20.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/blackbox-exporter-0.20.0-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="blackbox-exporter" \
-    BITNAMI_IMAGE_VERSION="0.19.0-debian-10-r293" \
+    BITNAMI_IMAGE_VERSION="0.20.0-debian-10-r0" \
     PATH="/opt/bitnami/blackbox-exporter/bin:$PATH"
 
 EXPOSE 9115
