@@ -50,7 +50,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8.0`, `8.0-debian-10`, `8.0.28`, `8.0.28-debian-10-r41`, `latest` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.28-debian-10-r41/8.0/debian-10/Dockerfile)
+* [`8.0`, `8.0-debian-10`, `8.0.28`, `8.0.28-debian-10-r42`, `latest` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.28-debian-10-r42/8.0/debian-10/Dockerfile)
 * [`5.7`, `5.7-debian-10`, `5.7.37`, `5.7.37-debian-10-r57` (5.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.37-debian-10-r57/5.7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mysql GitHub repo](https://github.com/bitnami/bitnami-docker-mysql).
@@ -188,10 +188,6 @@ In order to have your custom files inside the docker image you can mount them as
 Take into account those scripts are treated differently depending on the extension. While the `.sh` scripts are executed in all the nodes; the `.sql` and `.sql.gz` scripts are only executed in the master nodes. The reason behind this differentiation is that the `.sh` scripts allow adding conditions to determine what is the node running the script, while these conditions can't be set using `.sql` nor `sql.gz` files. This way it is possible to cover different use cases depending on their needs.
 
 > NOTE: If you are importing large databases, it is recommended to import them as `.sql` instead of `.sql.gz`, as the latter one needs to be decompressed on the fly and not allowing for additional optimizations to import large files.
-
-### Running scripts on start
-
-Same semantics as [Initializing a new instance](#initializing-a-new-instance), except these scripts will always run (after `/docker-entrypoint-initdb.d/` scripts, if they exist.) The file directory to place your start scripts is: `/docker-entrypoint-startdb.d`.
 
 ### Setting the root password on first run
 
