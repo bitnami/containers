@@ -331,7 +331,7 @@ EOF
 #   None
 #########################
 mysql_custom_scripts() {
-    if [[ -n $(find /docker-entrypoint-"$1"db.d/ -type f -regex ".*\.\(sh\|sql\|sql.gz\)") ]] && { [[ ! -f "$DB_DATA_DIR/.user_scripts_initialized" ]] || [[ $1 = start ]]; } then
+    if [[ -n $(find /docker-entrypoint-"$1"db.d/ -type f -regex ".*\.\(sh\|sql\|sql.gz\)") ]] && { [[ ! -f "$DB_DATA_DIR/.user_scripts_initialized" ]] || [[ $1 == start ]]; } then
         info "Loading user's custom files from /docker-entrypoint-$1db.d";
         for f in /docker-entrypoint-"$1"db.d/*; do
             debug "Executing $f"
