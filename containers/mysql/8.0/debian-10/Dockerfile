@@ -16,6 +16,7 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /docker-entrypoint-initdb.d
+RUN mkdir /docker-entrypoint-startdb.d
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql/postunpack.sh

@@ -30,7 +30,9 @@ fi
 # Ensure MySQL is initialized
 mysql_initialize
 # Allow running custom initialization scripts
-mysql_custom_init_scripts
+mysql_custom_scripts 'init'
+# Allow running custom start scripts
+mysql_custom_scripts 'start'
 # Stop MySQL before flagging it as fully initialized.
 # Relying only on the trap defined above could produce a race condition.
 mysql_stop
