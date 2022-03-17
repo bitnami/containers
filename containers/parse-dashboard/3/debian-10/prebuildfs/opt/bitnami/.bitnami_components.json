@@ -22,9 +22,9 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "54bdd2c14565f9c0d5409717e25f8f007d0a003d3c3cc53a999841aef8c8ab50",
+        "digest": "8a5e34b6a48a68854c609ba898041b97dad1cd0d337ff709abae78a96f5f5dfe",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.8.12-38"
+        "version": "3.8.13-0"
     }
 }
