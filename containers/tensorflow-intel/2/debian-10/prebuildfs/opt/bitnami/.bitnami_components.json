@@ -15,9 +15,9 @@
     },
     "tensorflow-intel": {
         "arch": "amd64",
-        "digest": "052e2c3e042d840c4d77b21b6f34f3b9fbdc5965efeec555010a00f2cc4df1c0",
+        "digest": "032632f7a59b3d244ee28ee81687507e56b6a6151cb4b1e1e9c993be70bdbc29",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.8.0-0"
+        "version": "2.8.0-1"
     }
 }
