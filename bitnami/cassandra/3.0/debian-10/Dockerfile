@@ -15,7 +15,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "2.7.18-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.322-8" --checksum d5670d09ac0e679ae28306e417e77e91b44051908ca3a82259efcd70764b996f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.22.1-0" --checksum 9b8c8ea8b9074c1f94e0e87cf934f052da35e1655d80b4c2afad665541670425
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "cassandra" "3.0.26-3" --checksum e9521bede618ceec4d8e0db40236a653deeb033fad3ee754f010a9061ccca5b0
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "cassandra" "3.0.26-4" --checksum e9521bede618ceec4d8e0db40236a653deeb033fad3ee754f010a9061ccca5b0
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -26,7 +26,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/cassandra/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.0.26-debian-10-r33" \
+    BITNAMI_IMAGE_VERSION="3.0.26-debian-10-r34" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/cassandra/bin:$PATH"
 
