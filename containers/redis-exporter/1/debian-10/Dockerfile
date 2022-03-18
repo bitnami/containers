@@ -9,16 +9,16 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/redis-exporter-1.36.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "1fd676d60f616e3aeaec149e6610ff682e9c919c23852079eb25fea2d896570e  /tmp/bitnami/pkg/cache/redis-exporter-1.36.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/redis-exporter-1.36.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/redis-exporter-1.36.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/redis-exporter-1.37.0-0-linux-amd64-debian-10.tar.gz && \
+    echo "2eaf9de6df8eb73eacbb3fa22136b7ab41712face621d964a19e326f2be028ae  /tmp/bitnami/pkg/cache/redis-exporter-1.37.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/redis-exporter-1.37.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/redis-exporter-1.37.0-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="redis-exporter" \
-    BITNAMI_IMAGE_VERSION="1.36.0-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="1.37.0-debian-10-r0" \
     PATH="/opt/bitnami/redis-exporter/bin:$PATH"
 
 EXPOSE 9121
