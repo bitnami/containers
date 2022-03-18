@@ -158,8 +158,6 @@ postgresql_validate() {
 postgresql_create_config() {
     info "postgresql.conf file not detected. Generating it..."
     cp "$POSTGRESQL_BASE_DIR/share/postgresql.conf.sample" "$POSTGRESQL_CONF_FILE"
-    # Configure port
-    postgresql_set_property "port" "$POSTGRESQL_PORT_NUMBER"
     # Update default value for 'include_dir' directive
     # ref: https://github.com/postgres/postgres/commit/fb9c475597c245562a28d1e916b575ac4ec5c19f#diff-f5544d9b6d218cc9677524b454b41c60
     if ! grep include_dir "$POSTGRESQL_CONF_FILE" >/dev/null; then
@@ -603,6 +601,8 @@ postgresql_initialize() {
     chmod go-rwx "$POSTGRESQL_DATA_DIR" || warn "Lack of permissions on data directory!"
 
     is_boolean_yes "$POSTGRESQL_ALLOW_REMOTE_CONNECTIONS" && is_boolean_yes "$create_pghba_file" && postgresql_create_pghba && postgresql_allow_local_connection
+    # Configure port
+    postgresql_set_property "port" "$POSTGRESQL_PORT_NUMBER"
 
     if ! is_dir_empty "$POSTGRESQL_DATA_DIR"; then
         info "Deploying PostgreSQL with persisted data..."
