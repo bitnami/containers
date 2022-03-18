@@ -36,10 +36,10 @@
     },
     "prestashop": {
         "arch": "amd64",
-        "digest": "c30b77f879a815e10c10b09fedbe865134f776e4dc83e5b63f3f981635c85c95",
+        "digest": "a7a6aede953bb8303608e08bac4aa44757c0790b22bab40eb6a9a6750c8d13bb",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.7.8-4-0"
+        "version": "1.7.8-5-0"
     },
     "render-template": {
         "arch": "amd64",
