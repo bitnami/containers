@@ -8,10 +8,10 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "0649af9ad2856d01d574146b62c840d3a330f2e85227a2ae73ec6500737ccccc",
+        "digest": "806082b15c0eb60e4baca497519b4c0cc9cd636d7a944e9943ebc1b9632fabdc",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "14.19.0-4"
+        "version": "14.19.1-0"
     },
     "odoo": {
         "arch": "amd64",
