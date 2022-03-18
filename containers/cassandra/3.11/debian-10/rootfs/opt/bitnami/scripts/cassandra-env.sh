@@ -21,6 +21,10 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 cassandra_env_vars=(
+    CASSANDRA_VOLUME_DIR
+    CASSANDRA_DATA_DIR
+    CASSANDRA_COMMITLOG_DIR
+    CASSANDRA_MOUNTED_CONF_DIR
     CASSANDRA_CLIENT_ENCRYPTION
     CASSANDRA_CLUSTER_NAME
     CASSANDRA_DATACENTER
@@ -77,14 +81,14 @@ unset cassandra_env_vars
 export CASSANDRA_BASE_DIR="${BITNAMI_ROOT_DIR}/cassandra"
 export CASSANDRA_BIN_DIR="${CASSANDRA_BASE_DIR}/bin"
 export CASSANDRA_CONF_DIR="${CASSANDRA_BASE_DIR}/conf"
-export CASSANDRA_VOLUME_DIR="/bitnami/cassandra"
-export CASSANDRA_DATA_DIR="${CASSANDRA_VOLUME_DIR}/data"
-export CASSANDRA_COMMITLOG_DIR="${CASSANDRA_DATA_DIR}/commitlog"
+export CASSANDRA_VOLUME_DIR="${CASSANDRA_VOLUME_DIR:-/bitnami/cassandra}"
+export CASSANDRA_DATA_DIR="${CASSANDRA_DATA_DIR:-${CASSANDRA_VOLUME_DIR}/data}"
+export CASSANDRA_COMMITLOG_DIR="${CASSANDRA_COMMITLOG_DIR:-${CASSANDRA_DATA_DIR}/commitlog}"
 export CASSANDRA_DEFAULT_CONF_DIR="${CASSANDRA_BASE_DIR}/conf.default"
 export CASSANDRA_HISTORY_DIR="${HOME}/.cassandra"
 export CASSANDRA_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
 export CASSANDRA_LOG_DIR="${CASSANDRA_BASE_DIR}/logs"
-export CASSANDRA_MOUNTED_CONF_DIR="${CASSANDRA_VOLUME_DIR}/conf"
+export CASSANDRA_MOUNTED_CONF_DIR="${CASSANDRA_MOUNTED_CONF_DIR:-${CASSANDRA_VOLUME_DIR}/conf}"
 export CASSANDRA_TMP_DIR="${CASSANDRA_BASE_DIR}/tmp"
 export JAVA_BASE_DIR="${BITNAMI_ROOT_DIR}/java"
 export JAVA_BIN_DIR="${JAVA_BASE_DIR}/bin"
@@ -101,7 +105,7 @@ export PATH="${CASSANDRA_BIN_DIR}:${JAVA_BIN_DIR}:${PYTHON_BIN_DIR}:${PATH}"
 export CASSANDRA_DAEMON_USER="cassandra"
 export CASSANDRA_DAEMON_GROUP="cassandra"
 
-# Cassandra cluste serttings
+# Cassandra cluster serttings
 export CASSANDRA_CLIENT_ENCRYPTION="${CASSANDRA_CLIENT_ENCRYPTION:-false}"
 export CASSANDRA_CLUSTER_NAME="${CASSANDRA_CLUSTER_NAME:-My Cluster}"
 export CASSANDRA_DATACENTER="${CASSANDRA_DATACENTER:-dc1}"
