@@ -13,10 +13,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "8a5e34b6a48a68854c609ba898041b97dad1cd0d337ff709abae78a96f5f5dfe  /tmp/bitnami/pkg/cache/python-3.8.13-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/python-3.8.13-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/python-3.8.13-0-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-14.19.0-4-linux-amd64-debian-10.tar.gz && \
-    echo "0649af9ad2856d01d574146b62c840d3a330f2e85227a2ae73ec6500737ccccc  /tmp/bitnami/pkg/cache/node-14.19.0-4-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/node-14.19.0-4-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/node-14.19.0-4-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-14.19.1-0-linux-amd64-debian-10.tar.gz && \
+    echo "806082b15c0eb60e4baca497519b4c0cc9cd636d7a944e9943ebc1b9632fabdc  /tmp/bitnami/pkg/cache/node-14.19.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/node-14.19.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/node-14.19.1-0-linux-amd64-debian-10.tar.gz
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/grafana-image-renderer-3.4.1-1-linux-amd64-debian-10.tar.gz && \
     echo "135e2a1dbc6503059d60ba982aab7a69d5f953df1822fba1b5f0b083ffb41eac  /tmp/bitnami/pkg/cache/grafana-image-renderer-3.4.1-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/grafana-image-renderer-3.4.1-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
@@ -29,7 +29,7 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
     install_packages google-chrome-unstable
 
 ENV BITNAMI_APP_NAME="grafana-image-renderer" \
-    BITNAMI_IMAGE_VERSION="3.4.1-debian-10-r19" \
+    BITNAMI_IMAGE_VERSION="3.4.1-debian-10-r20" \
     HTTP_HOST="0.0.0.0" \
     HTTP_PORT="8080" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:$PATH"
