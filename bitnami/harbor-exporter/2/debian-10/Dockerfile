@@ -18,7 +18,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-exporter/postunpack.sh
 ENV BITNAMI_APP_NAME="harbor-exporter" \
-    BITNAMI_IMAGE_VERSION="2.4.2-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="2.4.2-debian-10-r2" \
     PATH="/opt/bitnami/harbor-exporter/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 9090
