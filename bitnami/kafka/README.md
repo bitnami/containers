@@ -43,8 +43,9 @@ Non-root container images add an extra layer of security and are generally recom
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
-* [`3`, `3-debian-10`, `3.1.0`, `3.1.0-debian-10-r51`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.1.0-debian-10-r51/3/debian-10/Dockerfile)
-* [`2`, `2-debian-10`, `2.8.1`, `2.8.1-debian-10-r164` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.1-debian-10-r164/2/debian-10/Dockerfile)
+* [`3.1`, `3.1-debian-10`, `3.1.0`, `3.1.0-debian-10-r51`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.1.0-debian-10-r51/3.1/debian-10/Dockerfile)
+* [`3.0`, `3.0-debian-10`, `3.0.1`, `3.0.1-debian-10-r0` (3.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.0.1-debian-10-r0/3.0/debian-10/Dockerfile)
+* [`2.8`, `2.8-debian-10`, `2.8.1`, `2.8.1-debian-10-r164` (2.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.1-debian-10-r164/2.8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
@@ -67,7 +68,7 @@ $ docker pull bitnami/kafka:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-docker build -t bitnami/kafka:latest 'https://github.com/bitnami/bitnami-docker-kafka.git#master:3/debian-10'
+docker build -t bitnami/kafka:latest 'https://github.com/bitnami/bitnami-docker-kafka.git#master:3.1/debian-10'
 ```
 
 ## Persisting your data
@@ -729,6 +730,10 @@ $ docker-compose up kafka
 ```
 
 ## Notable Changes
+
+### Branches rename
+
+Branch 2 has been renamed to 2.8 and branch 3 has been splited into branches 3.0 and 3.1 mirroing the upstream [Apache Apache Kafka's naming policy](https://kafka.apache.org/downloads)
 
 ### 3.0.0-debian-10-r0
 
