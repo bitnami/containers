@@ -15,17 +15,17 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "d294bbf768d7c3efcd9ba39a5cb2ddb6487cb328dead59d342a8e071d2e1a78d",
+        "digest": "806082b15c0eb60e4baca497519b4c0cc9cd636d7a944e9943ebc1b9632fabdc",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "12.22.10-4"
+        "version": "14.19.1-0"
     },
     "parse": {
         "arch": "amd64",
-        "digest": "cf290bdd182d3dd676a36bde98836dfb8a57b6b9c60035b2b0218587218d14ca",
+        "digest": "8f2e5eedfe959085ca91fd90d0dd60a2a0c31c4822c52dc5e80a82a29cd356fb",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "5.1.1-0"
+        "version": "5.1.1-1"
     },
     "python": {
         "arch": "amd64",
