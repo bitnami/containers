@@ -8,10 +8,10 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "d294bbf768d7c3efcd9ba39a5cb2ddb6487cb328dead59d342a8e071d2e1a78d",
+        "digest": "6e635b4dbf839d3d43cf54540081f01405710ce2fb3b313e368cd1f1d9c8847a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "12.22.10-4"
+        "version": "12.22.11-0"
     },
     "parse-dashboard": {
         "arch": "amd64",
