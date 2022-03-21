@@ -17,7 +17,7 @@ set -o pipefail
 
 # Ensure required directories exist
 chmod g+rwX "$JENKINS_BASE_DIR"
-for dir in "$JENKINS_HOME" "${JENKINS_BASE_DIR}/plugins" "$JENKINS_TMP_DIR" "$JENKINS_LOGS_DIR"; do
+for dir in "$JENKINS_VOLUME_DIR" "$JENKINS_HOME" "${JENKINS_BASE_DIR}/plugins" "$JENKINS_TMP_DIR" "$JENKINS_LOGS_DIR"; do
     ensure_dir_exists "$dir"
     configure_permissions_ownership "$dir" -d "775" -f "664"
 done
