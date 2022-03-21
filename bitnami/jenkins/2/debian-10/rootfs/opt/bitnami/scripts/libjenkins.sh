@@ -338,3 +338,46 @@ jenkins_add_custom_file() {
         echo "$action $relpath : $reason" >> "${JENKINS_LOGS_DIR}/copy_reference_file.log"
     fi
 }
+
+########################
+# Run custom initialization scripts
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+jenkins_custom_init_scripts() {
+    if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|groovy\)") ]] && [[ ! -f "${JENKINS_VOLUME_DIR}/.user_scripts_initialized" ]] ; then
+        info "Loading user's custom files from /docker-entrypoint-initdb.d";
+        for f in /docker-entrypoint-initdb.d/*; do
+            debug "Executing $f"
+            case "$f" in
+                *.sh)
+                    if [[ -x "$f" ]]; then
+                        if ! "$f"; then
+                            error "Failed executing $f"
+                            return 1
+                        fi
+                    else
+                        warn "Sourcing $f as it is not executable by the current user, any error may cause initialization to fail"
+                        . "$f"
+                    fi
+                    ;;
+                *.groovy)
+                    cp "$f" "${JENKINS_HOME}/init.groovy.d"
+                    jenkins_start_bg
+                    jenkins_stop
+                    # Rotate the logs in Jenkins
+                    mv "$JENKINS_LOG_FILE" "${JENKINS_LOGS_DIR}/jenkins.initscripts.log"
+                    rm "${JENKINS_HOME}/init.groovy.d/$(basename $f)"
+                    ;;
+                *)
+                    warn "Skipping $f, supported formats are: .sh .sql .sql.gz"
+                    ;;
+            esac
+        done
+        touch "${JENKINS_VOLUME_DIR}/.user_scripts_initialized"
+    fi
+}
