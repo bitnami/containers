@@ -22,8 +22,9 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/spring-cloud-skipper/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
-ENV BITNAMI_APP_NAME="spring-cloud-skipper" \
-    BITNAMI_IMAGE_VERSION="2.8.2-debian-10-r64" \
+ENV APP_VERSION="2.8.2" \
+    BITNAMI_APP_NAME="spring-cloud-skipper" \
+    BITNAMI_IMAGE_VERSION="2.8.2-debian-10-r65" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"
 
