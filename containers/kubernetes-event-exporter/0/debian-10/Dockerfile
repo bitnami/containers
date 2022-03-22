@@ -17,8 +17,9 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV BITNAMI_APP_NAME="kubernetes-event-exporter" \
-    BITNAMI_IMAGE_VERSION="0.11.0-debian-10-r118" \
+ENV APP_VERSION="0.11.0" \
+    BITNAMI_APP_NAME="kubernetes-event-exporter" \
+    BITNAMI_IMAGE_VERSION="0.11.0-debian-10-r119" \
     PATH="/opt/bitnami/kubernetes-event-exporter/bin:$PATH"
 
 USER 1001
