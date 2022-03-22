@@ -21,8 +21,9 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV BITNAMI_APP_NAME="haproxy" \
-    BITNAMI_IMAGE_VERSION="2.5.5-debian-10-r7" \
+ENV APP_VERSION="2.5.5" \
+    BITNAMI_APP_NAME="haproxy" \
+    BITNAMI_IMAGE_VERSION="2.5.5-debian-10-r8" \
     PATH="/opt/bitnami/haproxy-dataplaneapi/bin:/opt/bitnami/haproxy/sbin:$PATH"
 
 USER 1001
