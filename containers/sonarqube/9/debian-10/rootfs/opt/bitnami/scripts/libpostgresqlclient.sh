@@ -169,7 +169,7 @@ postgresql_execute_print_output() {
     local opts
     read -r -a opts <<<"${@:4}"
 
-    local args=("-U" "$user")
+    local args=("-U" "$user" "-p" "${POSTGRESQL_PORT_NUMBER:-5432}")
     [[ -n "$db" ]] && args+=("-d" "$db")
     [[ "${#opts[@]}" -gt 0 ]] && args+=("${opts[@]}")
 
@@ -397,7 +397,6 @@ EOF
         postgresql_ensure_user_has_database_privileges "${grant_flags[@]}"
     fi
 }
-
 
 ########################
 # Retrieves the WAL directory in use by PostgreSQL / to use if not initialized yet
