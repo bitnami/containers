@@ -18,8 +18,9 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir -p "/cosign-keys" && chmod -R 777 "/cosign-keys"
 
-ENV BITNAMI_APP_NAME="cosign" \
-    BITNAMI_IMAGE_VERSION="1.6.0-debian-10-r11" \
+ENV APP_VERSION="1.6.0" \
+    BITNAMI_APP_NAME="cosign" \
+    BITNAMI_IMAGE_VERSION="1.6.0-debian-10-r12" \
     PATH="/opt/bitnami/cosign/bin:$PATH"
 
 WORKDIR /cosign-keys
