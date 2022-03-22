@@ -755,9 +755,7 @@ rabbitmq_initialize() {
         am_i_root && chown -R "$RABBITMQ_DAEMON_USER:$RABBITMQ_DAEMON_GROUP" "$dir"
     done
 
-    # Use realpath to avoid symlink issues
-    # ref: https://github.com/bitnami/bitnami-docker-rabbitmq/pull/184
-    if ! is_mounted_dir_empty "$(realpath "$RABBITMQ_DATA_DIR")"; then
+    if ! is_mounted_dir_empty "$RABBITMQ_DATA_DIR"; then
         info "Persisted data detected. Restoring..."
         if is_boolean_yes "$RABBITMQ_FORCE_BOOT" && ! is_dir_empty "${RABBITMQ_DATA_DIR}/${RABBITMQ_NODE_NAME}"; then
             # ref: https://www.rabbitmq.com/rabbitmqctl.8.html#force_boot
