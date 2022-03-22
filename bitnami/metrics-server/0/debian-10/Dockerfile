@@ -18,8 +18,9 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 RUN chown -R 1001:root /opt/bitnami/metrics-server && chmod -R g+rwX /opt/bitnami/metrics-server
-ENV BITNAMI_APP_NAME="metrics-server" \
-    BITNAMI_IMAGE_VERSION="0.6.1-debian-10-r39" \
+ENV APP_VERSION="0.6.1" \
+    BITNAMI_APP_NAME="metrics-server" \
+    BITNAMI_IMAGE_VERSION="0.6.1-debian-10-r40" \
     PATH="/opt/bitnami/metrics-server/bin:$PATH"
 
 EXPOSE 8443
