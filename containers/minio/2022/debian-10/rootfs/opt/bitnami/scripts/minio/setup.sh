@@ -32,8 +32,8 @@ if is_boolean_yes "$MINIO_SKIP_CLIENT"; then
     debug "Skipping MinIO client configuration..."
 else
     if [[ "$MINIO_SERVER_SCHEME" = "https" ]]; then
-        [[ ! -d "${MINIO_CLIENT_CONFIG_DIR}/certs/CAs" ]] && mkdir -p "${MINIO_CLIENT_CONFIG_DIR}/certs/CAs"
-        cp "${MINIO_CERTS_DIR}/CAs/public.crt" "${MINIO_CLIENT_CONFIG_DIR}/certs/CAs/"
+        [[ ! -d "${MINIO_CLIENT_CONF_DIR}/certs/CAs" ]] && mkdir -p "${MINIO_CLIENT_CONF_DIR}/certs/CAs"
+        cp "${MINIO_CERTS_DIR}/CAs/public.crt" "${MINIO_CLIENT_CONF_DIR}/certs/CAs/"
     fi
     # Start MinIO server in background
     minio_start_bg
