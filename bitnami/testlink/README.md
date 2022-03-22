@@ -1,3 +1,7 @@
+# DEPRECATION NOTICE
+
+This image has been deprecated, and will no longer be maintained nor updated.
+
 # TestLink packaged by Bitnami
 
 ## What is TestLink?
