@@ -50,7 +50,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`5.0`, `5.0-debian-10`, `5.0.6`, `5.0.6-debian-10-r52`, `latest` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/5.0.6-debian-10-r52/5.0/debian-10/Dockerfile)
 * [`4.4`, `4.4-debian-10`, `4.4.13`, `4.4.13-debian-10-r19` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.13-debian-10-r19/4.4/debian-10/Dockerfile)
-* [`4.2`, `4.2-debian-10`, `4.2.19`, `4.2.19-debian-10-r19` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.19-debian-10-r19/4.2/debian-10/Dockerfile)
+* [`4.2`, `4.2-debian-10`, `4.2.19`, `4.2.19-debian-10-r20` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.19-debian-10-r20/4.2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
 
@@ -335,7 +335,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Host OS and version
 - Docker version (`docker version`)
 - Output of `docker info`
-- Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
+- Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 ## License
