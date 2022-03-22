@@ -18,8 +18,9 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/tensorflow-intel/postunpack.sh
-ENV BITNAMI_APP_NAME="tensorflow-intel" \
-    BITNAMI_IMAGE_VERSION="2.8.0-debian-10-r5" \
+ENV APP_VERSION="2.8.0" \
+    BITNAMI_APP_NAME="tensorflow-intel" \
+    BITNAMI_IMAGE_VERSION="2.8.0-debian-10-r6" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:$PATH"
 
 WORKDIR /app
