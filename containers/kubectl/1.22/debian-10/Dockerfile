@@ -18,8 +18,9 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /.kube && chmod g+rwX /.kube
 
-ENV BITNAMI_APP_NAME="kubectl" \
-    BITNAMI_IMAGE_VERSION="1.22.8-debian-10-r2" \
+ENV APP_VERSION="1.22.8" \
+    BITNAMI_APP_NAME="kubectl" \
+    BITNAMI_IMAGE_VERSION="1.22.8-debian-10-r3" \
     PATH="/opt/bitnami/kubectl/bin:$PATH"
 
 USER 1001
