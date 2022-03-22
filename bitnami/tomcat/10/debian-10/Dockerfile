@@ -12,7 +12,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libssl1.1 procps tar xmlstarlet zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.14-7" --checksum 900545c4f346a0ece8abf2caf64fd9d4ab7514967d4614d716bf7362b24f828b
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "10.0.18-0" --checksum 101cbf7b60c8f2df8c317525b8f150ddf5fef600c6e55f250f9fc62855fc672e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "10.0.18-1" --checksum 08e4450db3ee2d3ea6a892e64244ff6acd6a8cff3e7f0ad1fb180ebb965769b4
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-10" --checksum 97c2ae4b001c5937e888b920bee7b1a40a076680caac53ded6d10f6207d54565
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
@@ -22,8 +22,9 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/tomcat/postunpack.sh
-ENV BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="10.0.18-debian-10-r7" \
+ENV APP_VERSION="10.0.18" \
+    BITNAMI_APP_NAME="tomcat" \
+    BITNAMI_IMAGE_VERSION="10.0.18-debian-10-r8" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/common/bin:$PATH"
 
