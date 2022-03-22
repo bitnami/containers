@@ -21,9 +21,10 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV AWS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt" \
+ENV APP_VERSION="2.4.27" \
+    AWS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt" \
     BITNAMI_APP_NAME="aws-cli" \
-    BITNAMI_IMAGE_VERSION="2.4.27-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="2.4.27-debian-10-r6" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/aws-cli/bin:/opt/bitnami/aws-cli/venv/bin:$PATH"
 
 USER 1001
