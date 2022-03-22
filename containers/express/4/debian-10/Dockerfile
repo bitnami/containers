@@ -24,8 +24,9 @@ RUN /build/bitnami-user.sh
 COPY rootfs /
 RUN mkdir -p /dist /app /.npm /.config /.cache /.local && chmod g+rwX /dist /app /.npm /.config /.cache /.local
 RUN /opt/bitnami/scripts/express/postunpack.sh
-ENV BITNAMI_APP_NAME="express" \
-    BITNAMI_IMAGE_VERSION="4.17.3-debian-10-r32" \
+ENV APP_VERSION="4.17.3" \
+    BITNAMI_APP_NAME="express" \
+    BITNAMI_IMAGE_VERSION="4.17.3-debian-10-r33" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/sequelize-cli/bin:/opt/bitnami/git/bin:/opt/bitnami/bower/bin:/opt/bitnami/common/bin:/opt/bitnami/express/bin:$PATH"
 
 EXPOSE 3000
