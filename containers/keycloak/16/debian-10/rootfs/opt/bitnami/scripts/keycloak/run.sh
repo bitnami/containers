@@ -21,6 +21,7 @@ conf_file="$(basename "$KEYCLOAK_CONF_FILE")"
 start_command=("${KEYCLOAK_BIN_DIR}/standalone.sh" "-Djboss.bind.address=${KEYCLOAK_BIND_ADDRESS}" "-Djboss.bind.address.private=${KEYCLOAK_BIND_ADDRESS}" "-Dkeycloak.hostname.fixed.httpPort=${KEYCLOAK_HTTP_PORT}" "-c=${conf_file}" -b "0.0.0.0")
 is_boolean_yes "$KEYCLOAK_ENABLE_TLS" && start_command=("${start_command[@]}" "-Dkeycloak.hostname.fixed.httpsPort=${KEYCLOAK_HTTPS_PORT}")
 is_boolean_yes "$KEYCLOAK_ENABLE_STATISTICS" && start_command=("${start_command[@]}" "-Djboss.bind.address.management=0.0.0.0")
+! is_empty_value "$KEYCLOAK_FRONTEND_URL" && start_command=("${start_command[@]}" "-Dkeycloak.frontendUrl=${KEYCLOAK_FRONTEND_URL}")
 # Add extra args
 if [[ -n "$KEYCLOAK_EXTRA_ARGS" ]]; then
     read -r -a extra_args <<<"$KEYCLOAK_EXTRA_ARGS"
