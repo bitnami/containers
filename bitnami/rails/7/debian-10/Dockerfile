@@ -22,8 +22,9 @@ RUN /build/bitnami-user.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/rails/postunpack.sh
-ENV BITNAMI_APP_NAME="rails" \
-    BITNAMI_IMAGE_VERSION="7.0.2-3-debian-10-r13" \
+ENV APP_VERSION="7.0.2-3" \
+    BITNAMI_APP_NAME="rails" \
+    BITNAMI_IMAGE_VERSION="7.0.2-3-debian-10-r14" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/ruby/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 3000
