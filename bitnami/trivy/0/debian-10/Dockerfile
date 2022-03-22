@@ -18,8 +18,9 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /.cache && chmod g+rwX /.cache
 
-ENV BITNAMI_APP_NAME="trivy" \
-    BITNAMI_IMAGE_VERSION="0.24.4-debian-10-r4" \
+ENV APP_VERSION="0.24.4" \
+    BITNAMI_APP_NAME="trivy" \
+    BITNAMI_IMAGE_VERSION="0.24.4-debian-10-r5" \
     PATH="/opt/bitnami/trivy/bin:$PATH"
 
 USER 1001
