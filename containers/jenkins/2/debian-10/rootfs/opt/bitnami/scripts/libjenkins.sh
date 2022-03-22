@@ -3,6 +3,7 @@
 # Bitnami Jenkins library
 
 # shellcheck disable=SC1091
+# shellcheck disable=SC1090
 
 # Load generic libraries
 . /opt/bitnami/scripts/libfile.sh
@@ -22,7 +23,7 @@
 #########################
 is_jenkins_running() {
     local pid
-    pgrep -f "^java.*-jar ${JENKINS_BASE_DIR}/jenkins.war" > "$JENKINS_PID_FILE"
+    pgrep -f "^java.*-jar ${JENKINS_BASE_DIR}/jenkins.war" >"$JENKINS_PID_FILE"
     pid="$(get_pid_from_file "$JENKINS_PID_FILE")"
     if [[ -n "$pid" ]]; then
         is_service_running "$pid"
@@ -65,7 +66,7 @@ jenkins_stop() {
 jenkins_start_bg() {
     local -a args
     if [[ -n "${JAVA_OPTS:-}" ]]; then
-        read -r -a java_opts <<< "$JAVA_OPTS"
+        read -r -a java_opts <<<"$JAVA_OPTS"
         args+=("${java_opts[@]}")
     fi
     args+=("-Duser.home=${JENKINS_HOME}" "-jar" "${JENKINS_BASE_DIR}/jenkins.war" "--httpListenAddress=127.0.0.1")
@@ -75,9 +76,9 @@ jenkins_start_bg() {
     if am_i_root; then
         touch "$JENKINS_LOG_FILE"
         configure_permissions_ownership "$JENKINS_LOG_FILE" -u "$JENKINS_DAEMON_USER" -g "$JENKINS_DAEMON_GROUP"
-        gosu "$JENKINS_DAEMON_USER" java "${args[@]}" >> "$JENKINS_LOG_FILE" 2>&1 &
+        gosu "$JENKINS_DAEMON_USER" java "${args[@]}" >>"$JENKINS_LOG_FILE" 2>&1 &
     else
-        java "${args[@]}" >> "$JENKINS_LOG_FILE" 2>&1 &
+        java "${args[@]}" >>"$JENKINS_LOG_FILE" 2>&1 &
     fi
     wait_for_log_entry "Jenkins is fully up and running" "$JENKINS_LOG_FILE" 36 10
 }
@@ -213,7 +214,7 @@ jenkins_initialize() {
         am_i_root && configure_permissions_ownership "${JENKINS_HOME}/plugins" -d "755" -f "644" -u "$JENKINS_DAEMON_USER" -g "$JENKINS_DAEMON_GROUP"
         if ! is_mounted_dir_empty "$JENKINS_MOUNTED_CONTENT_DIR"; then
             info "Moving custom mounted files to Jenkins home directory"
-            echo "--- Copying files at $(date)" >> "${JENKINS_LOGS_DIR}/copy_reference_file.log"
+            echo "--- Copying files at $(date)" >>"${JENKINS_LOGS_DIR}/copy_reference_file.log"
             find "$JENKINS_MOUNTED_CONTENT_DIR" \( -type f -o -type l \) | xargs -I % -P10 bash -c '. /opt/bitnami/scripts/libjenkins.sh && jenkins_add_custom_file %'
         fi
         # Initialize Jenkins
@@ -221,7 +222,7 @@ jenkins_initialize() {
             # Create init groovy script and initialize Jenkins
             info "Creating init script"
             ensure_dir_exists "${JENKINS_HOME}/init.groovy.d"
-            jnlp_port="${JENKINS_JNLP_PORT_NUMBER:-"$JENKINS_DEFAULT_JNLP_PORT_NUMBER"}" render-template "$init_jenkins_groovy_tpl" > "${JENKINS_HOME}/init.groovy.d/init-jenkins.groovy"
+            jnlp_port="${JENKINS_JNLP_PORT_NUMBER:-"$JENKINS_DEFAULT_JNLP_PORT_NUMBER"}" render-template "$init_jenkins_groovy_tpl" >"${JENKINS_HOME}/init.groovy.d/init-jenkins.groovy"
             jenkins_start_bg
             # Configure host
             ! is_empty_value "$JENKINS_HOST" && jenkins_configure_host "$JENKINS_HOST"
@@ -271,8 +272,8 @@ jenkins_configure_host() {
         return 1
     else
         configure_host_tmp=$(mktemp)
-        url="${base_url}" render-template "$configure_host_groovy_tpl" > "$configure_host_tmp"
-        jenkins_cli_execute "groovy" "=" < "$configure_host_tmp"
+        url="${base_url}" render-template "$configure_host_groovy_tpl" >"$configure_host_tmp"
+        jenkins_cli_execute "groovy" "=" <"$configure_host_tmp"
         rm "$configure_host_tmp"
     fi
 }
@@ -333,9 +334,9 @@ jenkins_add_custom_file() {
         fi
     fi
     if [[ -z "$reason" ]]; then
-        echo "$action $relpath" >> "${JENKINS_LOGS_DIR}/copy_reference_file.log"
+        echo "$action $relpath" >>"${JENKINS_LOGS_DIR}/copy_reference_file.log"
     else
-        echo "$action $relpath : $reason" >> "${JENKINS_LOGS_DIR}/copy_reference_file.log"
+        echo "$action $relpath : $reason" >>"${JENKINS_LOGS_DIR}/copy_reference_file.log"
     fi
 }
 
@@ -349,33 +350,33 @@ jenkins_add_custom_file() {
 #   None
 #########################
 jenkins_custom_init_scripts() {
-    if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|groovy\)") ]] && [[ ! -f "${JENKINS_VOLUME_DIR}/.user_scripts_initialized" ]] ; then
-        info "Loading user's custom files from /docker-entrypoint-initdb.d";
+    if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\|groovy\)") ]] && [[ ! -f "${JENKINS_VOLUME_DIR}/.user_scripts_initialized" ]]; then
+        info "Loading user's custom files from /docker-entrypoint-initdb.d"
         for f in /docker-entrypoint-initdb.d/*; do
             debug "Executing $f"
             case "$f" in
-                *.sh)
-                    if [[ -x "$f" ]]; then
-                        if ! "$f"; then
-                            error "Failed executing $f"
-                            return 1
-                        fi
-                    else
-                        warn "Sourcing $f as it is not executable by the current user, any error may cause initialization to fail"
-                        . "$f"
+            *.sh)
+                if [[ -x "$f" ]]; then
+                    if ! "$f"; then
+                        error "Failed executing $f"
+                        return 1
                     fi
-                    ;;
-                *.groovy)
-                    cp "$f" "${JENKINS_HOME}/init.groovy.d"
-                    jenkins_start_bg
-                    jenkins_stop
-                    # Rotate the logs in Jenkins
-                    mv "$JENKINS_LOG_FILE" "${JENKINS_LOGS_DIR}/jenkins.initscripts.log"
-                    rm "${JENKINS_HOME}/init.groovy.d/$(basename $f)"
-                    ;;
-                *)
-                    warn "Skipping $f, supported formats are: .sh .sql .sql.gz"
-                    ;;
+                else
+                    warn "Sourcing $f as it is not executable by the current user, any error may cause initialization to fail"
+                    . "$f"
+                fi
+                ;;
+            *.groovy)
+                cp "$f" "${JENKINS_HOME}/init.groovy.d"
+                jenkins_start_bg
+                jenkins_stop
+                # Rotate the logs in Jenkins
+                mv "$JENKINS_LOG_FILE" "${JENKINS_LOGS_DIR}/jenkins.initscripts.log"
+                rm "${JENKINS_HOME}/init.groovy.d/$(basename "$f")"
+                ;;
+            *)
+                warn "Skipping $f, supported formats are: .sh .sql .sql.gz"
+                ;;
             esac
         done
         touch "${JENKINS_VOLUME_DIR}/.user_scripts_initialized"

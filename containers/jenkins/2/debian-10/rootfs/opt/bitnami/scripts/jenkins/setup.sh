@@ -25,5 +25,6 @@ fi
 
 # Ensure Jenkins is initialized
 jenkins_initialize
+
 # Allow running custom initialization scripts
 jenkins_custom_init_scripts
