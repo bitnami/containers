@@ -52,7 +52,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`14`, `14-debian-10`, `14.2.0`, `14.2.0-debian-10-r39`, `latest` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/14.2.0-debian-10-r39/14/debian-10/Dockerfile)
 * [`13`, `13-debian-10`, `13.6.0`, `13.6.0-debian-10-r39` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/13.6.0-debian-10-r39/13/debian-10/Dockerfile)
-* [`12`, `12-debian-10`, `12.10.0`, `12.10.0-debian-10-r39` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.10.0-debian-10-r39/12/debian-10/Dockerfile)
+* [`12`, `12-debian-10`, `12.10.0`, `12.10.0-debian-10-r40` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.10.0-debian-10-r40/12/debian-10/Dockerfile)
 * [`11`, `11-debian-10`, `11.15.0`, `11.15.0-debian-10-r39` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.15.0-debian-10-r39/11/debian-10/Dockerfile)
 * [`10`, `10-debian-10`, `10.20.0`, `10.20.0-debian-10-r39` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.20.0-debian-10-r39/10/debian-10/Dockerfile)
 
@@ -861,7 +861,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Host OS and version
 - Docker version (`docker version`)
 - Output of `docker info`
-- Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
+- Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 ## License
