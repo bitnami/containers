@@ -22,7 +22,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 ENV BITNAMI_APP_NAME="jupyterhub" \
-    BITNAMI_IMAGE_VERSION="1.5.0-debian-10-r123" \
+    BITNAMI_IMAGE_VERSION="1.5.0-debian-10-r124" \
     PATH="/opt/bitnami/miniconda/bin:/opt/bitnami/miniconda/bin/:$PATH"
 
 USER 1001
