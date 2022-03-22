@@ -38,7 +38,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.10`, `3.10-debian-10`, `3.10.3`, `3.10.3-debian-10-r6`, `latest` (3.10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.10.3-debian-10-r6/3.10/debian-10/Dockerfile)
+* [`3.10`, `3.10-debian-10`, `3.10.3`, `3.10.3-debian-10-r7`, `latest` (3.10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.10.3-debian-10-r7/3.10/debian-10/Dockerfile)
 * [`3.9`, `3.9-debian-10`, `3.9.11`, `3.9.11-debian-10-r6` (3.9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.9.11-debian-10-r6/3.9/debian-10/Dockerfile)
 * [`3.8`, `3.8-debian-10`, `3.8.13`, `3.8.13-debian-10-r5` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.13-debian-10-r5/3.8/debian-10/Dockerfile)
 * [`3.7`, `3.7-debian-10`, `3.7.13`, `3.7.13-debian-10-r6` (3.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.13-debian-10-r6/3.7/debian-10/Dockerfile)
@@ -177,7 +177,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Host OS and version
 - Docker version (`docker version`)
 - Output of `docker info`
-- Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
+- Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive
 information)
 
