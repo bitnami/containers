@@ -21,8 +21,9 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/solr/postunpack.sh
-ENV BITNAMI_APP_NAME="solr" \
-    BITNAMI_IMAGE_VERSION="8.11.1-debian-10-r90" \
+ENV APP_VERSION="8.11.1" \
+    BITNAMI_APP_NAME="solr" \
+    BITNAMI_IMAGE_VERSION="8.11.1-debian-10-r91" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/solr/bin:/opt/bitnami/common/bin:$PATH"
 
