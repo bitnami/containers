@@ -17,8 +17,9 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV BITNAMI_APP_NAME="wavefront-prometheus-storage-adapter" \
-    BITNAMI_IMAGE_VERSION="1.0.5-debian-10-r121" \
+ENV APP_VERSION="1.0.5" \
+    BITNAMI_APP_NAME="wavefront-prometheus-storage-adapter" \
+    BITNAMI_IMAGE_VERSION="1.0.5-debian-10-r122" \
     PATH="/opt/bitnami/wavefront-prometheus-storage-adapter/bin:$PATH"
 
 USER 1001
