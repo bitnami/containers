@@ -21,8 +21,9 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV BITNAMI_APP_NAME="kong-ingress-controller" \
-    BITNAMI_IMAGE_VERSION="2.2.1-debian-10-r33" \
+ENV APP_VERSION="2.2.1" \
+    BITNAMI_APP_NAME="kong-ingress-controller" \
+    BITNAMI_IMAGE_VERSION="2.2.1-debian-10-r34" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/kong-ingress-controller/bin:$PATH"
 
 USER 1001
