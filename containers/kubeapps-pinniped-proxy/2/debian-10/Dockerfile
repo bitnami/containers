@@ -17,8 +17,9 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV BITNAMI_APP_NAME="kubeapps-pinniped-proxy" \
-    BITNAMI_IMAGE_VERSION="2.4.3-debian-10-r38" \
+ENV APP_VERSION="2.4.3" \
+    BITNAMI_APP_NAME="kubeapps-pinniped-proxy" \
+    BITNAMI_IMAGE_VERSION="2.4.3-debian-10-r39" \
     PATH="/opt/bitnami/kubeapps-pinniped-proxy/bin:$PATH"
 
 USER 1001
