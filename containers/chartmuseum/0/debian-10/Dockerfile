@@ -17,8 +17,9 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/chartmuseum/postunpack.sh
-ENV BITNAMI_APP_NAME="chartmuseum" \
-    BITNAMI_IMAGE_VERSION="0.14.0-debian-10-r48" \
+ENV APP_VERSION="0.14.0" \
+    BITNAMI_APP_NAME="chartmuseum" \
+    BITNAMI_IMAGE_VERSION="0.14.0-debian-10-r49" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/chartmuseum/bin:$PATH"
 
 USER 1001
