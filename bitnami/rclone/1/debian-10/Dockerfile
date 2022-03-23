@@ -17,8 +17,9 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV BITNAMI_APP_NAME="rclone" \
-    BITNAMI_IMAGE_VERSION="1.57.0-debian-10-r134" \
+ENV APP_VERSION="1.57.0" \
+    BITNAMI_APP_NAME="rclone" \
+    BITNAMI_IMAGE_VERSION="1.57.0-debian-10-r135" \
     PATH="/opt/bitnami/rclone/bin:$PATH"
 
 USER 1001
