@@ -21,8 +21,9 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/neo4j/postunpack.sh
-ENV BITNAMI_APP_NAME="neo4j" \
-    BITNAMI_IMAGE_VERSION="4.4.4-debian-10-r37" \
+ENV APP_VERSION="4.4.4" \
+    BITNAMI_APP_NAME="neo4j" \
+    BITNAMI_IMAGE_VERSION="4.4.4-debian-10-r38" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/neo4j/bin:/opt/bitnami/common/bin:$PATH"
 
