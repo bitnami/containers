@@ -48,7 +48,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.17.1`, `7.17.1-debian-10-r15`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.17.1-debian-10-r15/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.17.1`, `7.17.1-debian-10-r16`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.17.1-debian-10-r16/7/debian-10/Dockerfile)
 * [`6`, `6-debian-10`, `6.8.23`, `6.8.23-debian-10-r64` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.23-debian-10-r64/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch).
@@ -501,7 +501,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 * Host OS and version
 * Docker version (`docker version`)
 * Output of `docker info`
-* Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
+* Version of this container
 * The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 ## License
