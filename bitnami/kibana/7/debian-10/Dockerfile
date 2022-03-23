@@ -19,8 +19,9 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/kibana/postunpack.sh
-ENV BITNAMI_APP_NAME="kibana" \
-    BITNAMI_IMAGE_VERSION="7.17.1-debian-10-r14"
+ENV APP_VERSION="7.17.1" \
+    BITNAMI_APP_NAME="kibana" \
+    BITNAMI_IMAGE_VERSION="7.17.1-debian-10-r15"
 
 EXPOSE 5601
 
