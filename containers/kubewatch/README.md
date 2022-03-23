@@ -1,3 +1,7 @@
+# DEPRECATION NOTICE
+
+Since the upstream project is not maintained, this image has been deprecated, and will no longer be maintained nor updated.
+
 # Kubewatch packaged by Bitnami
 
 ## What is Kubewatch?
@@ -15,10 +19,6 @@ $ docker run -it --network host -v $HOME/.kubewatch.yaml:/root/.kubewatch.yaml -
 ```
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
-
-## Deprecation Notice
-
-Kubewatch is no longer maintained by upstream and is now internally tagged as to be deprecated. This image will no longer be released in our catalog a month after this notice is published, but already released images will still persist in the registries. Valid to be removed starting on: 03-23-2022
 
 ## Why use Bitnami Images?
 
