@@ -16,8 +16,9 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN touch /.flyrc && chmod g+rwX /.flyrc
 
-ENV BITNAMI_APP_NAME="concourse" \
-    BITNAMI_IMAGE_VERSION="7.7.0-debian-10-r11" \
+ENV APP_VERSION="7.7.0" \
+    BITNAMI_APP_NAME="concourse" \
+    BITNAMI_IMAGE_VERSION="7.7.0-debian-10-r12" \
     PATH="/opt/bitnami/concourse/bin:$PATH"
 
 CMD [ "/opt/bitnami/concourse/bin/concourse", "--help" ]
