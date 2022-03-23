@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`6.2`, `6.2-debian-10`, `6.2.6`, `6.2.6-debian-10-r162`, `latest` (6.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.2.6-debian-10-r162/6.2/debian-10/Dockerfile)
+* [`6.2`, `6.2-debian-10`, `6.2.6`, `6.2.6-debian-10-r163`, `latest` (6.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.2.6-debian-10-r163/6.2/debian-10/Dockerfile)
 * [`6.0`, `6.0-debian-10`, `6.0.16`, `6.0.16-debian-10-r161` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/6.0.16-debian-10-r161/6.0/debian-10/Dockerfile)
 * [`5.0`, `5.0-debian-10`, `5.0.14`, `5.0.14-debian-10-r162` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-sentinel/blob/5.0.14-debian-10-r162/5.0/debian-10/Dockerfile)
 
@@ -414,7 +414,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Host OS and version
 - Docker version (`docker version`)
 - Output of `docker info`
-- Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
+- Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 ## License
