@@ -17,8 +17,9 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV BITNAMI_APP_NAME="wavefront-adapter-for-istio" \
-    BITNAMI_IMAGE_VERSION="0.1.5-debian-10-r336" \
+ENV APP_VERSION="0.1.5" \
+    BITNAMI_APP_NAME="wavefront-adapter-for-istio" \
+    BITNAMI_IMAGE_VERSION="0.1.5-debian-10-r337" \
     PATH="/opt/bitnami/wavefront-adapter-for-istio/bin:$PATH"
 
 EXPOSE 37671
