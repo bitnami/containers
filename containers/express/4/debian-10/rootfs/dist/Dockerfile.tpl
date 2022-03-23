@@ -1,5 +1,6 @@
-## Dockerfile for building production image
-FROM bitnami/express:{{BITNAMI_IMAGE_VERSION}}
+## Dockerfile for building production image.
+## Consider replacing below rolling tag by a digest or a immutable tag
+FROM bitnami/express:{{APP_VERSION}}
 LABEL maintainer "John Smith <john.smith@acme.com>"
 
 ENV DISABLE_WELCOME_MESSAGE=1
