@@ -23,8 +23,9 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/jenkins/postunpack.sh
-ENV BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.332.1-debian-10-r10" \
+ENV APP_VERSION="2.332.1" \
+    BITNAMI_APP_NAME="jenkins" \
+    BITNAMI_IMAGE_VERSION="2.332.1-debian-10-r11" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/git/bin:$PATH"
 
