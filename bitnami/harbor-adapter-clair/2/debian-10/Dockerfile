@@ -17,8 +17,9 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-adapter-clair/postunpack.sh
-ENV BITNAMI_APP_NAME="harbor-adapter-clair" \
-    BITNAMI_IMAGE_VERSION="2.4.2-debian-10-r6" \
+ENV APP_VERSION="2.4.2" \
+    BITNAMI_APP_NAME="harbor-adapter-clair" \
+    BITNAMI_IMAGE_VERSION="2.4.2-debian-10-r7" \
     PATH="/opt/bitnami/harbor-adapter-clair/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080
