@@ -18,8 +18,9 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 RUN ln -s /opt/bitnami/contour/bin/contour /bin/contour
 
-ENV BITNAMI_APP_NAME="contour" \
-    BITNAMI_IMAGE_VERSION="1.20.1-debian-10-r26" \
+ENV APP_VERSION="1.20.1" \
+    BITNAMI_APP_NAME="contour" \
+    BITNAMI_IMAGE_VERSION="1.20.1-debian-10-r27" \
     PATH="/opt/bitnami/contour/bin:$PATH"
 
 USER 1001
