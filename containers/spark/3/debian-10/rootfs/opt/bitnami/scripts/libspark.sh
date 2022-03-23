@@ -25,7 +25,9 @@ spark_env() {
     cat <<"EOF"
 # Spark directories
 export SPARK_BASEDIR="/opt/bitnami/spark"
+export SPARK_VOLUMEDIR="/bitnami/spark"
 export SPARK_CONFDIR="${SPARK_BASEDIR}/conf"
+export SPARK_MOUNTED_CONFDIR="${SPARK_VOLUMEDIR}/conf"
 export SPARK_WORKDIR="${SPARK_BASEDIR}/work"
 export SPARK_CONF_FILE="${SPARK_CONFDIR}/spark-defaults.conf"
 export SPARK_LOGDIR="${SPARK_BASEDIR}/logs"
@@ -63,6 +65,22 @@ export SPARK_METRICS_ENABLED="${SPARK_METRICS_ENABLED:-false}"
 export SPARK_DAEMON_USER="spark"
 export SPARK_DAEMON_GROUP="spark"
 EOF
+}
+
+########################
+# Copy mounted configuration files
+# Globals:
+#   SPARK_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+spark_copy_mounted_config() {
+    if ! is_dir_empty "$SPARK_MOUNTED_CONFDIR"; then
+        info "Found mounted configuration files in ${SPARK_MOUNTED_CONFDIR}. Copying them to ${SPARK_CONFDIR}"
+        cp -Lr "$SPARK_MOUNTED_CONFDIR"/* "$SPARK_CONFDIR"
+    fi
 }
 
 ########################
@@ -307,7 +325,7 @@ spark_conf_set() {
 spark_initialize() {
     ensure_dir_exists "$SPARK_WORKDIR"
     am_i_root && chown "$SPARK_DAEMON_USER:$SPARK_DAEMON_GROUP" "$SPARK_WORKDIR"
-
+    spark_copy_mounted_config
     if [[ ! -f "$SPARK_CONF_FILE" ]]; then
         # Generate default config file
         spark_generate_conf_file
