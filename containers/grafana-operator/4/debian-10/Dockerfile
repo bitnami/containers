@@ -19,8 +19,9 @@ RUN chmod g+rwX /opt/bitnami
 RUN ln -sf /opt/bitnami/grafana-operator/bin/grafana-operator /usr/local/bin/grafana-operator
 RUN mkdir -p /opt/jsonnet && ln -sf /opt/bitnami/grafonnet-lib/grafonnet /opt/jsonnet/grafonnet
 
-ENV BITNAMI_APP_NAME="grafana-operator" \
-    BITNAMI_IMAGE_VERSION="4.2.0-debian-10-r27" \
+ENV APP_VERSION="4.2.0" \
+    BITNAMI_APP_NAME="grafana-operator" \
+    BITNAMI_IMAGE_VERSION="4.2.0-debian-10-r28" \
     PATH="/opt/bitnami/grafana-operator/bin:$PATH"
 
 EXPOSE 8080
