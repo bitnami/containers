@@ -17,8 +17,9 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV BITNAMI_APP_NAME="grafana-tempo-vulture" \
-    BITNAMI_IMAGE_VERSION="1.3.2-debian-10-r26" \
+ENV APP_VERSION="1.3.2" \
+    BITNAMI_APP_NAME="grafana-tempo-vulture" \
+    BITNAMI_IMAGE_VERSION="1.3.2-debian-10-r27" \
     PATH="/opt/bitnami/grafana-tempo-vulture/bin:$PATH"
 
 USER 1001
