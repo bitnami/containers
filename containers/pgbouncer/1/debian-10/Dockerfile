@@ -13,7 +13,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "10.20.0-4" --checksum 351886297b1300f9430bed82c58a9ec4c35101de73ee9bf8bb33b3c7fff76801
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.1-7" --checksum 7a4f45cbebd2e242278060415dd1a3f0dbe68991fdcaea5bb311e8de54a3e027
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "pgbouncer" "1.16.1-7" --checksum 66d71b41214828967ee1e1c3ab97ad085174f1c19d86c42437e07c3bea4294df
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "pgbouncer" "1.17.0-0" --checksum 61805e9a2d6825a7807cbe4332441d55628506bd5cc493cd14fd1f0c20e4b6fd
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -26,9 +26,9 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 RUN /opt/bitnami/scripts/pgbouncer/postunpack.sh
-ENV APP_VERSION="1.16.1" \
+ENV APP_VERSION="1.17.0" \
     BITNAMI_APP_NAME="pgbouncer" \
-    BITNAMI_IMAGE_VERSION="1.16.1-debian-10-r129" \
+    BITNAMI_IMAGE_VERSION="1.17.0-debian-10-r0" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
