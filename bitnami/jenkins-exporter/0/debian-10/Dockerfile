@@ -21,8 +21,9 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV BITNAMI_APP_NAME="jenkins-exporter" \
-    BITNAMI_IMAGE_VERSION="0.20171225.0-debian-10-r740" \
+ENV APP_VERSION="0.20171225.0" \
+    BITNAMI_APP_NAME="jenkins-exporter" \
+    BITNAMI_IMAGE_VERSION="0.20171225.0-debian-10-r741" \
     PATH="/opt/bitnami/jenkins-exporter/venv/bin:$PATH"
 
 EXPOSE 9118
