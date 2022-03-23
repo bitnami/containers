@@ -25,8 +25,9 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 RUN /opt/bitnami/scripts/rabbitmq/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
-ENV BITNAMI_APP_NAME="rabbitmq" \
-    BITNAMI_IMAGE_VERSION="3.8.28-debian-10-r0" \
+ENV APP_VERSION="3.8.28" \
+    BITNAMI_APP_NAME="rabbitmq" \
+    BITNAMI_IMAGE_VERSION="3.8.28-debian-10-r1" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en"
 
