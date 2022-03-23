@@ -25,8 +25,9 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV BITNAMI_APP_NAME="configurable-http-proxy" \
-    BITNAMI_IMAGE_VERSION="4.5.1-debian-10-r28" \
+ENV APP_VERSION="4.5.1" \
+    BITNAMI_APP_NAME="configurable-http-proxy" \
+    BITNAMI_IMAGE_VERSION="4.5.1-debian-10-r29" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/configurable-http-proxy/bin:$PATH"
 
 EXPOSE 3000
