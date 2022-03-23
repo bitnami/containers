@@ -20,8 +20,9 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/minio-client/postunpack.sh
 RUN /opt/bitnami/scripts/minio/postunpack.sh
-ENV BITNAMI_APP_NAME="minio" \
-    BITNAMI_IMAGE_VERSION="2022.3.22-debian-10-r0" \
+ENV APP_VERSION="2022.3.22" \
+    BITNAMI_APP_NAME="minio" \
+    BITNAMI_IMAGE_VERSION="2022.3.22-debian-10-r1" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/minio-client/bin:/opt/bitnami/minio/bin:$PATH"
 
 VOLUME [ "/certs", "/data" ]
