@@ -107,7 +107,7 @@ express_validate() {
 #   None
 #########################
 express_initialize() {
-    # Devlopers use the /app mountpoint
+    # Developers use the /app mountpoint
     if is_dir_empty "/app"; then
         info "Creating Express application in /app"
         cd /app || return 1
@@ -154,7 +154,7 @@ express_initialize() {
         if [[ ! -f Dockerfile ]]; then
             info "Adding Dockerfile"
             cp /dist/Dockerfile.tpl Dockerfile
-            sed -i 's/{{BITNAMI_IMAGE_VERSION}}/'"$BITNAMI_IMAGE_VERSION"'/g' Dockerfile
+            sed -i 's/{{APP_VERSION}}/'"$APP_VERSION"'/g' Dockerfile
             [[ ! -f bower.json ]] && sed -i '/^RUN bower install/d' Dockerfile
 
             if [[ ! -f .dockerignore ]]; then
