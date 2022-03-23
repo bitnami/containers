@@ -17,8 +17,9 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV BITNAMI_APP_NAME="memcached-exporter" \
-    BITNAMI_IMAGE_VERSION="0.9.0-debian-10-r335" \
+ENV APP_VERSION="0.9.0" \
+    BITNAMI_APP_NAME="memcached-exporter" \
+    BITNAMI_IMAGE_VERSION="0.9.0-debian-10-r336" \
     PATH="/opt/bitnami/memcached-exporter/bin:$PATH"
 
 EXPOSE 9150
