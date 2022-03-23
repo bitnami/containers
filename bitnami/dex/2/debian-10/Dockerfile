@@ -17,8 +17,9 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN useradd -r -u 1001 -g root dex
 
-ENV BITNAMI_APP_NAME="dex" \
-    BITNAMI_IMAGE_VERSION="2.31.0-debian-10-r37" \
+ENV APP_VERSION="2.31.0" \
+    BITNAMI_APP_NAME="dex" \
+    BITNAMI_IMAGE_VERSION="2.31.0-debian-10-r38" \
     DEX_FRONTEND_DIR="/opt/bitnami/dex/web" \
     PATH="/opt/bitnami/dex/bin:$PATH"
 
