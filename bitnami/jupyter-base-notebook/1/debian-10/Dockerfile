@@ -22,8 +22,9 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /opt/bitnami/jupyterhub-singleuser/ && chmod g+rwX /opt/bitnami/jupyterhub-singleuser/
 
-ENV BITNAMI_APP_NAME="jupyter-base-notebook" \
-    BITNAMI_IMAGE_VERSION="1.5.0-debian-10-r126" \
+ENV APP_VERSION="1.5.0" \
+    BITNAMI_APP_NAME="jupyter-base-notebook" \
+    BITNAMI_IMAGE_VERSION="1.5.0-debian-10-r127" \
     PATH="/opt/bitnami/miniconda/bin:$PATH"
 
 USER 1001
