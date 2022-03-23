@@ -40,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`8.1`, `8.1-debian-10`, `8.1.4`, `8.1.4-debian-10-r7`, `latest` (8.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.1.4-debian-10-r7/8.1/debian-10/Dockerfile)
 * [`8.0`, `8.0-debian-10`, `8.0.17`, `8.0.17-debian-10-r7` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.0.17-debian-10-r7/8.0/debian-10/Dockerfile)
-* [`7.4`, `7.4-debian-10`, `7.4.28`, `7.4.28-debian-10-r35` (7.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.28-debian-10-r35/7.4/debian-10/Dockerfile)
+* [`7.4`, `7.4-debian-10`, `7.4.28`, `7.4.28-debian-10-r36` (7.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.28-debian-10-r36/7.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-php-fpm).
 
@@ -396,7 +396,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Host OS and version
 - Docker version (`docker version`)
 - Output of `docker info`
-- Version of this container (`echo $BITNAMI_IMAGE_VERSION` inside the container)
+- Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 ## License
