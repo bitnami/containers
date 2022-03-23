@@ -20,7 +20,7 @@ RUN ln -s /opt/bitnami/kubeapps-apis/plugins /plugins && ln -s /opt/bitnami/kube
 
 ENV APP_VERSION="2.4.3" \
     BITNAMI_APP_NAME="kubeapps-apis" \
-    BITNAMI_IMAGE_VERSION="2.4.3-debian-10-r41" \
+    BITNAMI_IMAGE_VERSION="2.4.3-debian-10-r42" \
     PATH="/opt/bitnami/kubeapps-apis/bin:$PATH"
 
 EXPOSE 50051
