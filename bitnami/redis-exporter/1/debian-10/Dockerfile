@@ -17,8 +17,9 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV BITNAMI_APP_NAME="redis-exporter" \
-    BITNAMI_IMAGE_VERSION="1.37.0-debian-10-r4" \
+ENV APP_VERSION="1.37.0" \
+    BITNAMI_APP_NAME="redis-exporter" \
+    BITNAMI_IMAGE_VERSION="1.37.0-debian-10-r5" \
     PATH="/opt/bitnami/redis-exporter/bin:$PATH"
 
 EXPOSE 9121
