@@ -176,7 +176,7 @@ $ docker-compose up -d
 The Bitnami Docker OpenLDAP can be easily setup with the following environment variables:
 
 - `LDAP_PORT_NUMBER`: The port OpenLDAP is listening for requests. Default: **1389** (non privileged port)
-- `LDAP_ROOT`: LDAP database root node of the LDAP tree. Default: **dc=example,dc=org**
+- `LDAP_ROOT`: LDAP baseDN (or suffix) of the LDAP tree. Default: **dc=example,dc=org**
 - `LDAP_ADMIN_USERNAME`: LDAP database admin user. Default: **admin**
 - `LDAP_ADMIN_PASSWORD`: LDAP database admin password. Default: **adminpassword**
 - `LDAP_CONFIG_ADMIN_ENABLED`: Whether to create a configuration admin user. Default: **no**.
