@@ -16,8 +16,9 @@ RUN apt-get update && apt-get upgrade -y && \
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/argo-workflow-exec/postunpack.sh
-ENV BITNAMI_APP_NAME="argo-workflow-exec" \
-    BITNAMI_IMAGE_VERSION="3.3.0-debian-10-r7" \
+ENV APP_VERSION="3.3.0" \
+    BITNAMI_APP_NAME="argo-workflow-exec" \
+    BITNAMI_IMAGE_VERSION="3.3.0-debian-10-r8" \
     PATH="/opt/bitnami/kubectl/bin:/opt/bitnami/common/bin:/opt/bitnami/argo-workflow-exec/bin:/opt/bitnami/argo-workflow-exec/hack:$PATH"
 
 USER 1001
