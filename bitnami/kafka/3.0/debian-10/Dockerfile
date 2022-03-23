@@ -27,7 +27,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/kafka/postunpack.sh
 ENV APP_VERSION="3.0.1" \
     BITNAMI_APP_NAME="kafka" \
-    BITNAMI_IMAGE_VERSION="3.0.1-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="3.0.1-debian-10-r2" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/kafka/bin:$PATH"
 
