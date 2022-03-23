@@ -17,8 +17,9 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/openresty/postunpack.sh
-ENV BITNAMI_APP_NAME="openresty" \
-    BITNAMI_IMAGE_VERSION="1.19.9-1-debian-10-r220" \
+ENV APP_VERSION="1.19.9-1" \
+    BITNAMI_APP_NAME="openresty" \
+    BITNAMI_IMAGE_VERSION="1.19.9-1-debian-10-r221" \
     PATH="/opt/bitnami/openresty/bin:/opt/bitnami/openresty/luajit/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080 8443
