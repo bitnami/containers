@@ -24,7 +24,7 @@ RUN chmod g+rwX /opt/bitnami
 ENV APP_VERSION="2.4.27" \
     AWS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt" \
     BITNAMI_APP_NAME="aws-cli" \
-    BITNAMI_IMAGE_VERSION="2.4.27-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="2.4.27-debian-10-r7" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/aws-cli/bin:/opt/bitnami/aws-cli/venv/bin:$PATH"
 
 USER 1001
