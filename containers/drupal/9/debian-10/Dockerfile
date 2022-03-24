@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl dirmngr gnupg gzip libaudit1 libbsd0 libbz2-1.0 libc6 libcap-ng0 libcom-err2 libcurl4 libexpat1 libffi6 libfftw3-double3 libfontconfig1 libfreetype6 libgcc1 libgcrypt20 libglib2.0-0 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjemalloc2 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblcms2-2 libldap-2.4-2 liblqr-1-0 libltdl7 liblzma5 libmagickcore-6.q16-6 libmagickwand-6.q16-6 libmemcached11 libmemcachedutil2 libncurses6 libnettle6 libnghttp2-14 libonig5 libp11-kit0 libpam0g libpcre3 libpng16-16 libpq5 libpsl5 libreadline7 librtmp1 libsasl2-2 libsodium23 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5deb1 libtinfo6 libunistring2 libuuid1 libwebp6 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxslt1.1 libzip4 procps tar unzip zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "8.1.4-1" --checksum 98abcf57700a76e78a76eca54a1baae4a2c968688e4302a74cafb627a6964ca6
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "8.1.4-2" --checksum e4cde8bbf28cdf57831fcff9248fd33d52369f9a1bae1331653e4b7c7367ed5d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.53-0" --checksum 716e4948a2c40f0a0cc5b1656052aeef916a79152250b0b6c1392dd1187f575a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.34-4" --checksum bb0089c26028b568dbe8b8875d39cca3c7835c582dda4fcbdcbed599320c57fe
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "8.1.4-0" --checksum bae56da96f912d9b1ba743d3e82d09463b1941381a978ce4ca42fc8a23fa2020
@@ -30,7 +30,7 @@ ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     APP_VERSION="9.3.9" \
     BITNAMI_APP_NAME="drupal" \
-    BITNAMI_IMAGE_VERSION="9.3.9-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="9.3.9-debian-10-r2" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/drupal/vendor/bin:$PATH"
 
 EXPOSE 8080 8443
