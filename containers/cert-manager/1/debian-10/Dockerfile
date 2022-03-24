@@ -9,17 +9,17 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/cert-manager-1.7.1-4-linux-amd64-debian-10.tar.gz && \
-    echo "f9f462c4babd3a711c5135e7dd64a94e5d93f3bf00975638e4340c66e46c5188  /tmp/bitnami/pkg/cache/cert-manager-1.7.1-4-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/cert-manager-1.7.1-4-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/cert-manager-1.7.1-4-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/cert-manager-1.7.2-0-linux-amd64-debian-10.tar.gz && \
+    echo "ccf65ec5fb4f8475701371b46ce31aad41f719e7ec943c0c8234c3c5b188cbe9  /tmp/bitnami/pkg/cache/cert-manager-1.7.2-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/cert-manager-1.7.2-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/cert-manager-1.7.2-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="1.7.1" \
+ENV APP_VERSION="1.7.2" \
     BITNAMI_APP_NAME="cert-manager" \
-    BITNAMI_IMAGE_VERSION="1.7.1-debian-10-r44" \
+    BITNAMI_IMAGE_VERSION="1.7.2-debian-10-r0" \
     PATH="/opt/bitnami/cert-manager/bin:$PATH"
 
 WORKDIR /opt/bitnami/cert-manager
