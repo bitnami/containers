@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="0.11.0" \
     BITNAMI_APP_NAME="external-dns" \
-    BITNAMI_IMAGE_VERSION="0.11.0-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="0.11.0-debian-10-r2" \
     PATH="/opt/bitnami/external-dns/bin:$PATH"
 
 EXPOSE 7979
