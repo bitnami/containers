@@ -9,17 +9,17 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/acmesolver-1.7.1-4-linux-amd64-debian-10.tar.gz && \
-    echo "ba2bd615cf7e7ea781baa4b128f352d4080ce1295463c3e2ec3ecb4c4fd4d307  /tmp/bitnami/pkg/cache/acmesolver-1.7.1-4-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/acmesolver-1.7.1-4-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/acmesolver-1.7.1-4-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/acmesolver-1.7.2-0-linux-amd64-debian-10.tar.gz && \
+    echo "192c1d38cc15f33d18f923b1523c0f6fd7acd25451fdaec5d70c5f5425d17997  /tmp/bitnami/pkg/cache/acmesolver-1.7.2-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/acmesolver-1.7.2-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/acmesolver-1.7.2-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="1.7.1" \
+ENV APP_VERSION="1.7.2" \
     BITNAMI_APP_NAME="acmesolver" \
-    BITNAMI_IMAGE_VERSION="1.7.1-debian-10-r45" \
+    BITNAMI_IMAGE_VERSION="1.7.2-debian-10-r0" \
     PATH="/opt/bitnami/acmesolver/bin:$PATH"
 
 WORKDIR /opt/bitnami/acmesolver
