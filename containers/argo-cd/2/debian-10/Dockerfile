@@ -22,7 +22,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/argo-cd/postunpack.sh
 ENV APP_VERSION="2.3.1" \
     BITNAMI_APP_NAME="argo-cd" \
-    BITNAMI_IMAGE_VERSION="2.3.1-debian-10-r12" \
+    BITNAMI_IMAGE_VERSION="2.3.1-debian-10-r13" \
     LIBNSS_WRAPPER_PATH="/opt/bitnami/common/lib/libnss_wrapper.so" \
     LNAME="argocd" \
     NSS_WRAPPER_GROUP="/opt/bitnami/argo-cd/nss_group" \
