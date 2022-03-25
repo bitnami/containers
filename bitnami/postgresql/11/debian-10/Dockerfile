@@ -28,7 +28,7 @@ RUN /opt/bitnami/scripts/postgresql/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV APP_VERSION="11.15.0" \
     BITNAMI_APP_NAME="postgresql" \
-    BITNAMI_IMAGE_VERSION="11.15.0-debian-10-r42" \
+    BITNAMI_IMAGE_VERSION="11.15.0-debian-10-r43" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
