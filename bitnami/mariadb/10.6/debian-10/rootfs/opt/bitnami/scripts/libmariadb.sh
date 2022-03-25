@@ -2,7 +2,7 @@
 #
 # Bitnami MySQL library
 
-# shellcheck disable=SC1090,SC1091
+# shellcheck disable=SC1090,SC1091,SC2119,SC2120
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/libfile.sh
@@ -25,6 +25,7 @@
 mysql_extra_flags() {
     local randNumber
     local -a dbExtraFlags=()
+    # shellcheck disable=SC2153
     read -r -a userExtraFlags <<< "$DB_EXTRA_FLAGS"
 
     if [[ -n "$DB_REPLICATION_MODE" ]]; then
