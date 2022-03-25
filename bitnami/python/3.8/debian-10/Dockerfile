@@ -8,10 +8,10 @@ ENV OS_ARCH="amd64" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages build-essential ca-certificates curl git gzip libbz2-1.0 libc6 libffi6 liblzma5 libncursesw6 libreadline7 libsqlite3-0 libsqlite3-dev libssl-dev libssl1.1 libtinfo6 pkg-config procps tar unzip wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/python-3.8.13-1-linux-amd64-debian-10.tar.gz && \
-    echo "2ac3d5028d8f8fc44cbf4b71e948458c1ae53c12a052ae62229fd52bf14191a6  /tmp/bitnami/pkg/cache/python-3.8.13-1-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/python-3.8.13-1-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/python-3.8.13-1-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/python-3.8.13-2-linux-amd64-debian-10.tar.gz && \
+    echo "704fe6b545280ae027303b4ec875b495ee6da2256b3d8f877467077b0f031a60  /tmp/bitnami/pkg/cache/python-3.8.13-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/python-3.8.13-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/python-3.8.13-2-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
@@ -20,7 +20,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 
 ENV APP_VERSION="3.8.13" \
     BITNAMI_APP_NAME="python" \
-    BITNAMI_IMAGE_VERSION="3.8.13-debian-10-r8" \
+    BITNAMI_IMAGE_VERSION="3.8.13-debian-10-r9" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
 EXPOSE 8000
