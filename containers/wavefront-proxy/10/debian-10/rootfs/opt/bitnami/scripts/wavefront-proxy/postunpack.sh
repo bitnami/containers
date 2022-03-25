@@ -14,3 +14,5 @@ ln -s /opt/bitnami /opt/wavefront
 ln -s /opt/bitnami/wavefront-proxy/etc /etc/wavefront/wavefront-proxy
 ln -s /opt/bitnami/wavefront-proxy/tmp /var/spool/wavefront-proxy
 ln -s /opt/bitnami/wavefront-proxy/scripts/run.sh /run.sh
+# Starting frow v11.x.x we also need this symlink
+ln -s /opt/bitnami/wavefront-proxy/bin/wavefront-proxy.jar /opt/wavefront/wavefront-proxy/wavefront-proxy.jar
