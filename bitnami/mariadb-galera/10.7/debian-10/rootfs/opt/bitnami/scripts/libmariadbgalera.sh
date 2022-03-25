@@ -2,7 +2,7 @@
 #
 # Bitnami MySQL Galera library
 
-# shellcheck disable=SC1090,SC1091
+# shellcheck disable=SC1090,SC1091,SC2119,SC2120
 
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libfs.sh
@@ -51,7 +51,7 @@ set_previous_boot() {
 #########################
 mysql_extra_flags() {
     local -a dbExtraFlags=()
-    read -r -a userExtraFlags <<< "$DB_EXTRA_FLAGS"
+    read -r -a userExtraFlags <<< "${DB_EXTRA_FLAGS?}"
 
     # This avoids a non-writable configuration file break a Galera Cluster, due to lack of proper Galera clustering configuration
     # This is especially important for the MariaDB Galera chart, in which the 'my.cnf' configuration file is mounted by default
