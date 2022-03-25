@@ -41,7 +41,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4`, `4-debian-10`, `4.0.1`, `4.0.1-debian-10-r4`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/4.0.1-debian-10-r4/4/debian-10/Dockerfile)
-* [`3`, `3-debian-10`, `3.3.0`, `3.3.0-debian-10-r79` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/3.3.0-debian-10-r79/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.3.0`, `3.3.0-debian-10-r80` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse-dashboard/blob/3.3.0-debian-10-r80/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse-dashboard GitHub repo](https://github.com/bitnami/bitnami-docker-parse-dashboard).
 
