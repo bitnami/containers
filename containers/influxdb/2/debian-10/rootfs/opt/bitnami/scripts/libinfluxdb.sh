@@ -171,7 +171,6 @@ influxdb_validate() {
     }
 
     # InfluxDB secret files validations
-    local -a user_envs=("INFLUXDB_ADMIN_USER" "INFLUXDB_USER" "INFLUXDB_READ_USER" "INFLUXDB_WRITE_USER")
     local -a pwd_file_envs=("INFLUXDB_ADMIN_USER_PASSWORD_FILE" "INFLUXDB_ADMIN_USER_TOKEN_FILE" "INFLUXDB_USER_PASSWORD_FILE")
 
     for pwd_file in "${pwd_file_envs[@]}"; do
