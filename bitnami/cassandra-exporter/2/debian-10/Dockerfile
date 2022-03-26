@@ -13,17 +13,17 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "900545c4f346a0ece8abf2caf64fd9d4ab7514967d4614d716bf7362b24f828b  /tmp/bitnami/pkg/cache/java-11.0.14-7-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/java-11.0.14-7-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/java-11.0.14-7-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/cassandra-exporter-2.3.7-4-linux-amd64-debian-10.tar.gz && \
-    echo "67fcdd971aa388141e796f177bc53fadc23e1326739c959758b8aac9544acd95  /tmp/bitnami/pkg/cache/cassandra-exporter-2.3.7-4-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/cassandra-exporter-2.3.7-4-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/cassandra-exporter-2.3.7-4-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/cassandra-exporter-2.3.8-0-linux-amd64-debian-10.tar.gz && \
+    echo "63d15bf1d066a0b15e97370b9f02aefa14cb612700db24917ee7fdcbdc8b0f1d  /tmp/bitnami/pkg/cache/cassandra-exporter-2.3.8-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/cassandra-exporter-2.3.8-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/cassandra-exporter-2.3.8-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="2.3.7" \
+ENV APP_VERSION="2.3.8" \
     BITNAMI_APP_NAME="cassandra-exporter" \
-    BITNAMI_IMAGE_VERSION="2.3.7-debian-10-r51" \
+    BITNAMI_IMAGE_VERSION="2.3.8-debian-10-r0" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 8080
