@@ -21,7 +21,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/memcached/postunpack.sh
 ENV APP_VERSION="1.6.14" \
     BITNAMI_APP_NAME="memcached" \
-    BITNAMI_IMAGE_VERSION="1.6.14-debian-10-r42" \
+    BITNAMI_IMAGE_VERSION="1.6.14-debian-10-r43" \
     PATH="/opt/bitnami/memcached/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 11211
