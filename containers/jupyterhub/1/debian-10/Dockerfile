@@ -23,7 +23,7 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="1.5.0" \
     BITNAMI_APP_NAME="jupyterhub" \
-    BITNAMI_IMAGE_VERSION="1.5.0-debian-10-r127" \
+    BITNAMI_IMAGE_VERSION="1.5.0-debian-10-r128" \
     PATH="/opt/bitnami/miniconda/bin:/opt/bitnami/miniconda/bin/:$PATH"
 
 USER 1001
