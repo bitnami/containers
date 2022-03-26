@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="0.12.1" \
     BITNAMI_APP_NAME="metallb-speaker" \
-    BITNAMI_IMAGE_VERSION="0.12.1-debian-10-r35" \
+    BITNAMI_IMAGE_VERSION="0.12.1-debian-10-r36" \
     PATH="/opt/bitnami/metallb-speaker/bin:$PATH"
 
 USER 1001
