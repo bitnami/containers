@@ -20,7 +20,7 @@ RUN mkdir -p /bitnami/grafana-tempo && chmod g+rwX /bitnami/grafana-tempo
 
 ENV APP_VERSION="1.3.2" \
     BITNAMI_APP_NAME="grafana-tempo" \
-    BITNAMI_IMAGE_VERSION="1.3.2-debian-10-r26" \
+    BITNAMI_IMAGE_VERSION="1.3.2-debian-10-r27" \
     PATH="/opt/bitnami/grafana-tempo/bin:$PATH"
 
 USER 1001
