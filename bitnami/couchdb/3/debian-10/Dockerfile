@@ -21,7 +21,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/couchdb/postunpack.sh
 ENV APP_VERSION="3.2.1" \
     BITNAMI_APP_NAME="couchdb" \
-    BITNAMI_IMAGE_VERSION="3.2.1-debian-10-r132" \
+    BITNAMI_IMAGE_VERSION="3.2.1-debian-10-r133" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/couchdb/bin:$PATH"
 
