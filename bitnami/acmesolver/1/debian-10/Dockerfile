@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="1.7.2" \
     BITNAMI_APP_NAME="acmesolver" \
-    BITNAMI_IMAGE_VERSION="1.7.2-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="1.7.2-debian-10-r2" \
     PATH="/opt/bitnami/acmesolver/bin:$PATH"
 
 WORKDIR /opt/bitnami/acmesolver
