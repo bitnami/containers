@@ -400,7 +400,7 @@ ensure_apache_app_configuration_exists() {
             | --server-aliases)
                 var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
                 shift
-                read -r -a "$var_name" <<< "$1"
+                read -r -a "${var_name?}" <<< "$1"
                 ;;
             --disable \
             | --disable-http \
@@ -467,7 +467,7 @@ ensure_apache_app_configuration_exists() {
         allow_override="None"
         htaccess_include="Include \"${APACHE_HTACCESS_DIR}/${app}-htaccess.conf\""
     else
-        allow_override="$allow_override"
+        # allow_override is already set to the expected value
         htaccess_include=""
     fi
     # ACL configuration
@@ -609,7 +609,7 @@ ensure_apache_prefix_configuration_exists() {
         allow_override="None"
         htaccess_include="Include \"${APACHE_HTACCESS_DIR}/${app}-htaccess.conf\""
     else
-        allow_override="$allow_override"
+        # allow_override is already set to the expected value
         htaccess_include=""
     fi
     # ACL configuration
@@ -694,14 +694,18 @@ apache_update_app_configuration() {
             | --server-aliases)
                 var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
                 shift
-                read -r -a "$var_name" <<< "$1"
+                read -r -a "${var_name?}" <<< "$1"
                 ;;
             # Common flags
-            --server-name \
-            | --enable-http \
+            --enable-http \
             | --enable-https \
             | --disable-http \
             | --disable-https \
+            )
+                var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
+                declare "${var_name}=yes"
+                ;;
+            --server-name \
             | --http-port \
             | --https-port \
             )
