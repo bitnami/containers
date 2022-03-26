@@ -392,10 +392,6 @@ web_server_update_app_configuration() {
             --hosts \
             | --server-name \
             | --server-aliases \
-            | --enable-http \
-            | --enable-https \
-            | --disable-http \
-            | --disable-https \
             | --http-port \
             | --https-port \
             )
