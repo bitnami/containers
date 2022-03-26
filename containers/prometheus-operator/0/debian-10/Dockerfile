@@ -21,7 +21,7 @@ RUN ln -sf /opt/bitnami/prometheus-operator/bin/operator /bin/operator
 
 ENV APP_VERSION="0.55.0" \
     BITNAMI_APP_NAME="prometheus-operator" \
-    BITNAMI_IMAGE_VERSION="0.55.0-debian-10-r16" \
+    BITNAMI_IMAGE_VERSION="0.55.0-debian-10-r17" \
     PATH="/opt/bitnami/prometheus-operator/bin:$PATH"
 
 EXPOSE 8080
