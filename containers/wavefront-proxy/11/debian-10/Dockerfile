@@ -23,7 +23,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/wavefront-proxy/postunpack.sh
 ENV APP_VERSION="11.0.0" \
     BITNAMI_APP_NAME="wavefront-proxy" \
-    BITNAMI_IMAGE_VERSION="11.0.0-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="11.0.0-debian-10-r1" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"
 
