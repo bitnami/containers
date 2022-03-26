@@ -486,31 +486,35 @@ nginx_update_app_configuration() {
     shift
     while [[ "$#" -gt 0 ]]; do
         case "$1" in
-        --hosts | \
-            --server-aliases)
-            var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
-            shift
-            read -r -a "$var_name" <<<"$1"
-            ;;
+            --hosts \
+            | --server-aliases \
+            )
+                var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
+                shift
+                read -r -a "$var_name" <<<"$1"
+                ;;
+            # Common flags
+            --enable-http \
+            | --enable-https \
+            | --disable-http \
+            | --disable-https \
+            )
+                var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
+                declare "${var_name}=yes"
+                ;;
+            --server-name \
+            | --http-port \
+            | --https-port \
+            )
+                var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
+                shift
+                declare "${var_name}=${1}"
+                ;;
 
-        # Common flags
-        --server-name | \
-            --enable-http | \
-            --enable-https | \
-            --disable-http | \
-            --disable-https | \
-            --http-port | \
-            --https-port)
-
-            var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
-            shift
-            declare "${var_name}=${1}"
-            ;;
-
-        *)
-            echo "Invalid command line flag $1" >&2
-            return 1
-            ;;
+            *)
+                echo "Invalid command line flag $1" >&2
+                return 1
+                ;;
         esac
         shift
     done
