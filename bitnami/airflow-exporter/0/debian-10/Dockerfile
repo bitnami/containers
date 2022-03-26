@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="0.20220314.0" \
     BITNAMI_APP_NAME="airflow-exporter" \
-    BITNAMI_IMAGE_VERSION="0.20220314.0-debian-10-r13" \
+    BITNAMI_IMAGE_VERSION="0.20220314.0-debian-10-r14" \
     PATH="/opt/bitnami/airflow-exporter/bin:$PATH"
 
 EXPOSE 9112
