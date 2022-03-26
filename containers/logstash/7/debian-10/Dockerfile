@@ -24,7 +24,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/logstash/postunpack.sh
 ENV APP_VERSION="7.17.1" \
     BITNAMI_APP_NAME="logstash" \
-    BITNAMI_IMAGE_VERSION="7.17.1-debian-10-r25" \
+    BITNAMI_IMAGE_VERSION="7.17.1-debian-10-r26" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/logstash/bin:$PATH"
 
