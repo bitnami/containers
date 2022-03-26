@@ -25,7 +25,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/jenkins/postunpack.sh
 ENV APP_VERSION="2.332.1" \
     BITNAMI_APP_NAME="jenkins" \
-    BITNAMI_IMAGE_VERSION="2.332.1-debian-10-r13" \
+    BITNAMI_IMAGE_VERSION="2.332.1-debian-10-r14" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/git/bin:$PATH"
 
