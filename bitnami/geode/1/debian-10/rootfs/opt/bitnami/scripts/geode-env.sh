@@ -9,6 +9,7 @@
 # 4. Environment variables set externally (i.e. current Bash context/Dockerfile/userdata)
 
 # Load logging library
+# shellcheck disable=SC1090,SC1091
 . /opt/bitnami/scripts/liblog.sh
 
 export BITNAMI_ROOT_DIR="/opt/bitnami"
