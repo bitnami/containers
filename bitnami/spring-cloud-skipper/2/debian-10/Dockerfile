@@ -24,7 +24,7 @@ RUN /opt/bitnami/scripts/spring-cloud-skipper/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="2.8.3" \
     BITNAMI_APP_NAME="spring-cloud-skipper" \
-    BITNAMI_IMAGE_VERSION="2.8.3-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="2.8.3-debian-10-r2" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"
 
