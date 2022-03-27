@@ -22,7 +22,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
 ENV APP_VERSION="1.20.2" \
     BITNAMI_APP_NAME="nginx" \
-    BITNAMI_IMAGE_VERSION="1.20.2-debian-10-r124" \
+    BITNAMI_IMAGE_VERSION="1.20.2-debian-10-r125" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/nginx/sbin:$PATH"
