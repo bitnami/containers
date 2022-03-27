@@ -9,19 +9,19 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-operator-0.55.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "774f83797ec6aa5e18db4e6d108afba0f73ee2b1479f570d4d15a4f9909fa09e  /tmp/bitnami/pkg/cache/prometheus-operator-0.55.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/prometheus-operator-0.55.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/prometheus-operator-0.55.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-operator-0.55.1-0-linux-amd64-debian-10.tar.gz && \
+    echo "3fafba58cd622692f9f537b2ebf063f62e9109e10b23553cdcb3daaafce3b7f1  /tmp/bitnami/pkg/cache/prometheus-operator-0.55.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/prometheus-operator-0.55.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/prometheus-operator-0.55.1-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN ln -sf /opt/bitnami/prometheus-operator/bin/prometheus-config-reloader /bin/prometheus-config-reloader
 RUN ln -sf /opt/bitnami/prometheus-operator/bin/operator /bin/operator
 
-ENV APP_VERSION="0.55.0" \
+ENV APP_VERSION="0.55.1" \
     BITNAMI_APP_NAME="prometheus-operator" \
-    BITNAMI_IMAGE_VERSION="0.55.0-debian-10-r17" \
+    BITNAMI_IMAGE_VERSION="0.55.1-debian-10-r0" \
     PATH="/opt/bitnami/prometheus-operator/bin:$PATH"
 
 EXPOSE 8080
