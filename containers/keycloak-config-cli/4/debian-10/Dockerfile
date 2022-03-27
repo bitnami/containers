@@ -24,7 +24,7 @@ RUN ln -sf /opt/bitnami/keycloak-config-cli/keycloak-config-cli.jar /opt/keycloa
 
 ENV APP_VERSION="4.8.1" \
     BITNAMI_APP_NAME="keycloak-config-cli" \
-    BITNAMI_IMAGE_VERSION="4.8.1-debian-10-r16" \
+    BITNAMI_IMAGE_VERSION="4.8.1-debian-10-r17" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 WORKDIR /opt/bitnami/keycloak-config-cli
