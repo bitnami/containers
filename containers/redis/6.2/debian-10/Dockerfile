@@ -22,7 +22,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/redis/postunpack.sh
 ENV APP_VERSION="6.2.6" \
     BITNAMI_APP_NAME="redis" \
-    BITNAMI_IMAGE_VERSION="6.2.6-debian-10-r168" \
+    BITNAMI_IMAGE_VERSION="6.2.6-debian-10-r169" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/redis/bin:$PATH"
 
 EXPOSE 6379
