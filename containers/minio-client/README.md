@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2022`, `2022-debian-10`, `2022.3.17`, `2022.3.17-debian-10-r8`, `latest` (2022/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2022.3.17-debian-10-r8/2022/debian-10/Dockerfile)
+* [`2022`, `2022-debian-10`, `2022.3.17`, `2022.3.17-debian-10-r9`, `latest` (2022/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2022.3.17-debian-10-r9/2022/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/minio-client GitHub repo](https://github.com/bitnami/bitnami-docker-minio-client).
 
