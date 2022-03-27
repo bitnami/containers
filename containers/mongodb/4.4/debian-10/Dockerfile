@@ -22,7 +22,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb/postunpack.sh
 ENV APP_VERSION="4.4.13" \
     BITNAMI_APP_NAME="mongodb" \
-    BITNAMI_IMAGE_VERSION="4.4.13-debian-10-r23" \
+    BITNAMI_IMAGE_VERSION="4.4.13-debian-10-r24" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:$PATH"
 
 EXPOSE 27017
