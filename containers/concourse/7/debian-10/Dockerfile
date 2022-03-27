@@ -18,7 +18,7 @@ RUN touch /.flyrc && chmod g+rwX /.flyrc
 
 ENV APP_VERSION="7.7.0" \
     BITNAMI_APP_NAME="concourse" \
-    BITNAMI_IMAGE_VERSION="7.7.0-debian-10-r14" \
+    BITNAMI_IMAGE_VERSION="7.7.0-debian-10-r15" \
     PATH="/opt/bitnami/concourse/bin:$PATH"
 
 CMD [ "/opt/bitnami/concourse/bin/concourse", "--help" ]
