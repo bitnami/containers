@@ -24,7 +24,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/sonarqube/postunpack.sh
 ENV APP_VERSION="8.9.7" \
     BITNAMI_APP_NAME="sonarqube" \
-    BITNAMI_IMAGE_VERSION="8.9.7-debian-10-r44" \
+    BITNAMI_IMAGE_VERSION="8.9.7-debian-10-r45" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"
 
