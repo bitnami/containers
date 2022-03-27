@@ -23,7 +23,7 @@ RUN /opt/bitnami/scripts/geode/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="1.14.4" \
     BITNAMI_APP_NAME="geode" \
-    BITNAMI_IMAGE_VERSION="1.14.4-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="1.14.4-debian-10-r4" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/geode/bin:$PATH"
 
