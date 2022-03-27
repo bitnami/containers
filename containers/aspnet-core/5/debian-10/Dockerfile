@@ -23,7 +23,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/aspnet-core/postunpack.sh
 ENV APP_VERSION="5.0.15" \
     BITNAMI_APP_NAME="aspnet-core" \
-    BITNAMI_IMAGE_VERSION="5.0.15-debian-10-r17" \
+    BITNAMI_IMAGE_VERSION="5.0.15-debian-10-r18" \
     DOTNET_CLI_HOME="/app" \
     DOTNET_ROOT="/opt/bitnami/aspnet-core/bin" \
     PATH="/opt/bitnami/aspnet-core/bin:$PATH"
