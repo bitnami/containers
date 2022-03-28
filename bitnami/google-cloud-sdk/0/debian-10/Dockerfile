@@ -24,7 +24,7 @@ RUN mkdir /.config /.gsutil && chmod g+rwX /.config /.gsutil
 
 ENV APP_VERSION="0.378.0" \
     BITNAMI_APP_NAME="google-cloud-sdk" \
-    BITNAMI_IMAGE_VERSION="0.378.0-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="0.378.0-debian-10-r5" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/google-cloud-sdk/bin:$PATH"
 
 USER 1001
