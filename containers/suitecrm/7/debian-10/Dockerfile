@@ -23,15 +23,15 @@ RUN sed -i -e '/pam_loginuid.so/ s/^#*/#/' /etc/pam.d/cron
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
-RUN /opt/bitnami/scripts/apache/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
+RUN /opt/bitnami/scripts/apache/postunpack.sh
 RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/suitecrm/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     APP_VERSION="7.12.5" \
     BITNAMI_APP_NAME="suitecrm" \
-    BITNAMI_IMAGE_VERSION="7.12.5-debian-10-r24" \
+    BITNAMI_IMAGE_VERSION="7.12.5-debian-10-r25" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080 8443
