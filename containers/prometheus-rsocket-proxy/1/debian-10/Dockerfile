@@ -24,7 +24,7 @@ RUN touch /opt/bitnami/prometheus-rsocket-proxy/prometheus-rsocket-proxy.log && 
 
 ENV APP_VERSION="1.4.0" \
     BITNAMI_APP_NAME="prometheus-rsocket-proxy" \
-    BITNAMI_IMAGE_VERSION="1.4.0-debian-10-r30" \
+    BITNAMI_IMAGE_VERSION="1.4.0-debian-10-r31" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 WORKDIR /opt/bitnami/prometheus-rsocket-proxy
