@@ -22,7 +22,7 @@ COPY rootfs /
 RUN chmod -R g+rwX /opt/bitnami/cluster-autoscaler/
 ENV APP_VERSION="1.23.0" \
     BITNAMI_APP_NAME="cluster-autoscaler" \
-    BITNAMI_IMAGE_VERSION="1.23.0-debian-10-r78" \
+    BITNAMI_IMAGE_VERSION="1.23.0-debian-10-r79" \
     PATH="/opt/bitnami/cluster-autoscaler/bin:$PATH"
 
 WORKDIR /opt/bitnami/cluster-autoscaler
