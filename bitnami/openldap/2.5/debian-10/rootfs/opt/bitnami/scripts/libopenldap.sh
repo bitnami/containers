@@ -465,7 +465,9 @@ ldap_initialize() {
             ldap_configure_tls
         fi
         # Initialize OpenLDAP with schemas/tree structure
-        ldap_add_schemas
+        if is_boolean_yes "$LDAP_ADD_SCHEMAS"; then
+            ldap_add_schemas
+        fi
         if [[ -f "$LDAP_CUSTOM_SCHEMA_FILE" ]]; then
             ldap_add_custom_schema
         fi
