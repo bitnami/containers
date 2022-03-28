@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="0.9.1" \
     BITNAMI_APP_NAME="nats-exporter" \
-    BITNAMI_IMAGE_VERSION="0.9.1-debian-10-r62" \
+    BITNAMI_IMAGE_VERSION="0.9.1-debian-10-r63" \
     PATH="/opt/bitnami/nats-exporter/bin:$PATH"
 
 EXPOSE 7777
