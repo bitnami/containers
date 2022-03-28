@@ -9,7 +9,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 ENV APP_VERSION="10" \
     BITNAMI_APP_NAME="bitnami-shell" \
-    BITNAMI_IMAGE_VERSION="10-debian-10-r378" \
+    BITNAMI_IMAGE_VERSION="10-debian-10-r379" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-10" \
     OS_NAME="linux"
