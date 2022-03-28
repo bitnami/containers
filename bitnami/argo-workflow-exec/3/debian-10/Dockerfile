@@ -18,7 +18,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/argo-workflow-exec/postunpack.sh
 ENV APP_VERSION="3.3.1" \
     BITNAMI_APP_NAME="argo-workflow-exec" \
-    BITNAMI_IMAGE_VERSION="3.3.1-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="3.3.1-debian-10-r4" \
     PATH="/opt/bitnami/kubectl/bin:/opt/bitnami/common/bin:/opt/bitnami/argo-workflow-exec/bin:/opt/bitnami/argo-workflow-exec/hack:$PATH"
 
 USER 1001
