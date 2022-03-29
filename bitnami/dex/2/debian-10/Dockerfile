@@ -19,7 +19,7 @@ RUN useradd -r -u 1001 -g root dex
 
 ENV APP_VERSION="2.31.1" \
     BITNAMI_APP_NAME="dex" \
-    BITNAMI_IMAGE_VERSION="2.31.1-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="2.31.1-debian-10-r4" \
     DEX_FRONTEND_DIR="/opt/bitnami/dex/web" \
     PATH="/opt/bitnami/dex/bin:$PATH"
 
