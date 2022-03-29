@@ -20,7 +20,7 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="0.11.0" \
     BITNAMI_APP_NAME="apache-exporter" \
-    BITNAMI_IMAGE_VERSION="0.11.0-debian-10-r99" \
+    BITNAMI_IMAGE_VERSION="0.11.0-debian-10-r100" \
     PATH="/opt/bitnami/apache-exporter/bin:$PATH"
 
 EXPOSE 9117
