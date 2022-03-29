@@ -20,7 +20,7 @@ RUN ln -sf /opt/bitnami/consul-exporter/bin/consul_exporter /bin/consul_exporter
 
 ENV APP_VERSION="0.8.0" \
     BITNAMI_APP_NAME="consul-exporter" \
-    BITNAMI_IMAGE_VERSION="0.8.0-debian-10-r43" \
+    BITNAMI_IMAGE_VERSION="0.8.0-debian-10-r44" \
     PATH="/opt/bitnami/consul-exporter/bin:$PATH"
 
 EXPOSE 9107
