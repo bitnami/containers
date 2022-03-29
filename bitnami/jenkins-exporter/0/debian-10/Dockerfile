@@ -23,7 +23,7 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="0.20171225.0" \
     BITNAMI_APP_NAME="jenkins-exporter" \
-    BITNAMI_IMAGE_VERSION="0.20171225.0-debian-10-r746" \
+    BITNAMI_IMAGE_VERSION="0.20171225.0-debian-10-r747" \
     PATH="/opt/bitnami/jenkins-exporter/venv/bin:$PATH"
 
 EXPOSE 9118
