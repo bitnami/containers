@@ -20,7 +20,7 @@ RUN mkdir /.kube && chmod g+rwX /.kube
 
 ENV APP_VERSION="1.22.8" \
     BITNAMI_APP_NAME="kubectl" \
-    BITNAMI_IMAGE_VERSION="1.22.8-debian-10-r8" \
+    BITNAMI_IMAGE_VERSION="1.22.8-debian-10-r9" \
     PATH="/opt/bitnami/kubectl/bin:$PATH"
 
 USER 1001
