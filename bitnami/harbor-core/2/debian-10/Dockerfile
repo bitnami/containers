@@ -11,7 +11,7 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-10" --checksum 35c818ba3f4b5aae905959bc7d3a5e81fc63786e3c662b604612c0aa7fcda8fd
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.1-7" --checksum 7a4f45cbebd2e242278060415dd1a3f0dbe68991fdcaea5bb311e8de54a3e027
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-core" "2.4.2-0" --checksum 9624c6356a55bc1800eea4b6a897cafb7f95170e2af86ea85b045872abbef0ab
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-core" "2.4.2-1" --checksum b3928a4d3a70a80ffdd09f2fbc014f0b057b74390ae97b968b2494c0ca01dfce
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -21,7 +21,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-core/postunpack.sh
 ENV APP_VERSION="2.4.2" \
     BITNAMI_APP_NAME="harbor-core" \
-    BITNAMI_IMAGE_VERSION="2.4.2-debian-10-r11" \
+    BITNAMI_IMAGE_VERSION="2.4.2-debian-10-r12" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/harbor-core/bin:$PATH"
 
 VOLUME [ "/data", "/etc/core" ]
