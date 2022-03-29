@@ -25,7 +25,7 @@ RUN /opt/bitnami/scripts/spark/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="3.2.1" \
     BITNAMI_APP_NAME="spark" \
-    BITNAMI_IMAGE_VERSION="3.2.1-debian-10-r56" \
+    BITNAMI_IMAGE_VERSION="3.2.1-debian-10-r57" \
     JAVA_HOME="/opt/bitnami/java" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/spark/venv/lib/python3.8/site-packages/numpy.libs/:$LD_LIBRARY_PATH" \
     LIBNSS_WRAPPER_PATH="/opt/bitnami/common/lib/libnss_wrapper.so" \
