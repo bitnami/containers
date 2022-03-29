@@ -14,7 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.53-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.3.34-4" --checksum bb0089c26028b568dbe8b8875d39cca3c7835c582dda4fcbdcbed599320c57fe
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.28-4" --checksum 216cab0049a1737702a17c924ed7c20128347adc605e6b78fd40db3064c92f5c
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-10" --checksum 97c2ae4b001c5937e888b920bee7b1a40a076680caac53ded6d10f6207d54565
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "joomla" "3.10.6-3" --checksum d9a576e1400cd21ff4167fcdc03d538b3c91006d3cfbcc3c656852b6a60923d1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "joomla" "3.10.7-0" --checksum 1b790ab584424d9c529d82c64b86a8b582802b257a5ac23327a69ca6dfc24442
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -28,9 +28,9 @@ RUN /opt/bitnami/scripts/joomla/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="3.10.6" \
+    APP_VERSION="3.10.7" \
     BITNAMI_APP_NAME="joomla" \
-    BITNAMI_IMAGE_VERSION="3.10.6-debian-10-r38" \
+    BITNAMI_IMAGE_VERSION="3.10.7-debian-10-r0" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080 8443
