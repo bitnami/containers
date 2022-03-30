@@ -22,10 +22,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "540ca94a39d500ed9e6bba61cda5ff89929d7959b80daf5b3e1e44327bc9f336",
+        "digest": "b281a322a22f995110241a35835803432ac7f86ee8d746cd4ca160776ee92e1b",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.1.4-3"
+        "version": "8.1.4-4"
     },
     "python": {
         "arch": "amd64",
