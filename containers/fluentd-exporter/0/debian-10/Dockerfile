@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="0.2.0" \
     BITNAMI_APP_NAME="fluentd-exporter" \
-    BITNAMI_IMAGE_VERSION="0.2.0-debian-10-r742" \
+    BITNAMI_IMAGE_VERSION="0.2.0-debian-10-r743" \
     PATH="/opt/bitnami/fluentd-exporter/bin:$PATH"
 
 EXPOSE 9309
