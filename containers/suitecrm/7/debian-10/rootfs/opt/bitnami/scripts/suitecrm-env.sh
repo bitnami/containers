@@ -66,8 +66,8 @@ unset suitecrm_env_vars
 
 # Paths
 export SUITECRM_BASE_DIR="${BITNAMI_ROOT_DIR}/suitecrm"
-export SUITECRM_CONF_FILE="${SUITECRM_BASE_DIR}/config.php"
-export SUITECRM_SILENT_INSTALL_CONF_FILE="${SUITECRM_BASE_DIR}/config_si.php"
+export SUITECRM_CONF_FILE="${SUITECRM_BASE_DIR}/public/legacy/config.php"
+export SUITECRM_SILENT_INSTALL_CONF_FILE="${SUITECRM_BASE_DIR}/public/legacy/config_si.php"
 
 # SuiteCRM persistence configuration
 export SUITECRM_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/suitecrm"

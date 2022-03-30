@@ -21,6 +21,12 @@ elif [[ -f /opt/bitnami/scripts/libmariadb.sh ]]; then
     . /opt/bitnami/scripts/libmariadb.sh
 fi
 
+# Rewrite env variables if SuiteCRM 7 is detected
+if [[ ! -d "${SUITECRM_BASE_DIR}/public" ]]; then
+    export SUITECRM_CONF_FILE="${SUITECRM_BASE_DIR}/config.php"
+    export SUITECRM_SILENT_INSTALL_CONF_FILE="${SUITECRM_BASE_DIR}/config_si.php"
+fi
+
 ########################
 # Validate settings in SUITECRM_* env vars
 # Globals:
@@ -68,13 +74,9 @@ suitecrm_validate() {
     check_yes_no_value "SUITECRM_ENABLE_HTTPS"
 
     # Validate credentials
-    if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
-        warn "You set the environment variable ALLOW_EMPTY_PASSWORD=${ALLOW_EMPTY_PASSWORD}. For safety reasons, do not use this flag in a production environment."
-    else
-        for empty_env_var in "SUITECRM_DATABASE_PASSWORD" "SUITECRM_PASSWORD"; do
-            is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
-        done
-    fi
+    for empty_env_var in "SUITECRM_DATABASE_PASSWORD" "SUITECRM_PASSWORD"; do
+        is_empty_value "${!empty_env_var}" && print_validation_error "The ${empty_env_var} environment variable is empty or not set."
+    done
 
     # Validate SMTP credentials
     if ! is_empty_value "$SUITECRM_SMTP_HOST"; then
@@ -121,22 +123,34 @@ suitecrm_initialize() {
 
         local -r template_dir="${BITNAMI_ROOT_DIR}/scripts/suitecrm/bitnami-templates"
         if ! is_boolean_yes "$SUITECRM_SKIP_BOOTSTRAP"; then
-            # Render configuration file for silent install ('config_si.php')
-            (
-                export url_protocol=http
-                is_boolean_yes "$SUITECRM_ENABLE_HTTPS" && url_protocol=https
-                render-template "${template_dir}/config_si.php.tpl" > "$SUITECRM_SILENT_INSTALL_CONF_FILE"
-            )
-            web_server_start
-            suitecrm_pass_wizard
-            # Configure SMTP via application wizard
-            if ! is_empty_value "$SUITECRM_SMTP_HOST"; then
-                info "Configuring SMTP"
-                suitecrm_pass_smtp_wizard
+            # If SuiteCRM 7, use legacy install wizard
+            if [[ ! -d "${SUITECRM_BASE_DIR}/public" ]]; then
+                # Render configuration file for silent install ('config_si.php')
+                (
+                    export url_protocol=http
+                    is_boolean_yes "$SUITECRM_ENABLE_HTTPS" && url_protocol=https
+                    render-template "${template_dir}/config_si.php.tpl" > "$SUITECRM_SILENT_INSTALL_CONF_FILE"
+                )
+                web_server_start
+                suitecrm_7_pass_wizard
+                # Configure SMTP via application wizard
+                if ! is_empty_value "$SUITECRM_SMTP_HOST"; then
+                    info "Configuring SMTP"
+                    suitecrm_pass_smtp_wizard
+                fi
+                web_server_stop
+                # Delete configuration file for silent install as it's not needed anymore
+                rm "$SUITECRM_SILENT_INSTALL_CONF_FILE"
+            else
+                suitecrm_pass_wizard
+                # Configure SMTP via application wizard
+                if ! is_empty_value "$SUITECRM_SMTP_HOST"; then
+                    web_server_start
+                    info "Configuring SMTP"
+                    suitecrm_pass_smtp_wizard
+                    web_server_stop
+                fi
             fi
-            web_server_stop
-            # Delete configuration file for silent install as it's not needed anymore
-            rm "$SUITECRM_SILENT_INSTALL_CONF_FILE"
 
         else
             info "An already initialized SuiteCRM database was provided, configuration will be skipped"
@@ -340,6 +354,36 @@ suitecrm_pass_smtp_wizard() {
 #   true if the wizard succeeded, false otherwise
 #########################
 suitecrm_pass_wizard() {
+    local -a install_args
+    local url_protocol=http
+    info "Running setup wizard"
+    is_boolean_yes "$SUITECRM_ENABLE_HTTPS" && url_protocol=https
+
+    install_args=(
+        "--site_host=${url_protocol}://${SUITECRM_HOST}"
+        "--site_username=${SUITECRM_USERNAME}"
+        "--site_password=${SUITECRM_PASSWORD}"
+        "--db_username=${SUITECRM_DATABASE_USER}"
+        "--db_password=${SUITECRM_DATABASE_PASSWORD}"
+        "--db_host=${SUITECRM_DATABASE_HOST}"
+        "--db_port=${SUITECRM_DATABASE_PORT_NUMBER}"
+        "--db_name=${SUITECRM_DATABASE_NAME}"
+        "--no-interaction"
+    )
+
+    suitecrm_execute suitecrm:app:install "${install_args[@]}"
+}
+
+########################
+# Pass SuiteCRM 7 wizard
+# Globals:
+#   *
+# Arguments:
+#   None
+# Returns:
+#   true if the wizard succeeded, false otherwise
+#########################
+suitecrm_7_pass_wizard() {
     local -r port="${APACHE_HTTP_PORT_NUMBER:-"$APACHE_DEFAULT_HTTP_PORT_NUMBER"}"
     local wizard_url curl_output
     local -a curl_opts curl_data_opts
@@ -409,4 +453,23 @@ require_once 'include/upload_file.php';
 UploadStream::register();
 require('modules/Administration/UpgradeAccess.php');
 EOF
+}
+
+########################
+# Execute SuiteCRM console command
+# Globals:
+#   *
+# Arguments:
+#   None
+# Returns:
+#   true if the wizard succeeded, false otherwise
+#########################
+suitecrm_execute() {
+    local -a cmd=("php" "${SUITECRM_BASE_DIR}/bin/console" "$@")
+    # Run as web server user to avoid having to change permissions/ownership afterwards
+    if am_i_root; then
+        debug_execute gosu "$WEB_SERVER_DAEMON_USER" "${cmd[@]}"
+    else
+        debug_execute "${cmd[@]}"
+    fi
 }
