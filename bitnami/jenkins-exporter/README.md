@@ -1,3 +1,7 @@
+# DEPRECATION NOTICE
+
+Since the upstream project is not maintained, this image has been deprecated, and will no longer be maintained nor updated.
+
 # Jenkins Exporter packaged by Bitnami
 
 ## What is Jenkins Exporter?
@@ -37,12 +41,6 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`0`, `0-debian-10`, `0.20171225.0`, `0.20171225.0-debian-10-r748`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins-exporter/blob/0.20171225.0-debian-10-r748/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jenkins-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-jenkins-exporter).
-
-### Container Deprecation Notice
-
-Jenkins Exporter container is no longer maintained by VMware Application Catalog and is now internally tagged as to be deprecated. This container will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 03-23-2022
-
-With the deprecation of this container, the metrics functionality for the Jenkins Helm chart is deprecated as well.
 
 ## Get this image
 
