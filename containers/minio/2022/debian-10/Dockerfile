@@ -22,7 +22,7 @@ RUN /opt/bitnami/scripts/minio-client/postunpack.sh
 RUN /opt/bitnami/scripts/minio/postunpack.sh
 ENV APP_VERSION="2022.3.26" \
     BITNAMI_APP_NAME="minio" \
-    BITNAMI_IMAGE_VERSION="2022.3.26-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="2022.3.26-debian-10-r4" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/minio-client/bin:/opt/bitnami/minio/bin:$PATH"
 
 VOLUME [ "/certs", "/data" ]
