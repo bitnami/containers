@@ -22,7 +22,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/parse/postunpack.sh
 ENV APP_VERSION="5.2.0" \
     BITNAMI_APP_NAME="parse" \
-    BITNAMI_IMAGE_VERSION="5.2.0-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="5.2.0-debian-10-r5" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/mongodb-client/bin:/opt/bitnami/parse/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 1337 3000
