@@ -22,7 +22,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN mkdir -p /opt/bitnami/alertmanager/data/ && chmod g+rwX /opt/bitnami/alertmanager/data/
 ENV APP_VERSION="0.24.0" \
     BITNAMI_APP_NAME="alertmanager" \
-    BITNAMI_IMAGE_VERSION="0.24.0-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="0.24.0-debian-10-r5" \
     PATH="/opt/bitnami/alertmanager/bin:$PATH"
 
 EXPOSE 9093
