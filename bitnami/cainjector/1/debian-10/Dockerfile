@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="1.7.2" \
     BITNAMI_APP_NAME="cainjector" \
-    BITNAMI_IMAGE_VERSION="1.7.2-debian-10-r5" \
+    BITNAMI_IMAGE_VERSION="1.7.2-debian-10-r6" \
     PATH="/opt/bitnami/cainjector/bin:$PATH"
 
 WORKDIR /opt/bitnami/cainjector
