@@ -21,7 +21,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/pgpool/postunpack.sh
 ENV APP_VERSION="4.3.1" \
     BITNAMI_APP_NAME="pgpool" \
-    BITNAMI_IMAGE_VERSION="4.3.1-debian-10-r39" \
+    BITNAMI_IMAGE_VERSION="4.3.1-debian-10-r40" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/common/bin:/opt/bitnami/pgpool/bin:$PATH"
 
 EXPOSE 5432
