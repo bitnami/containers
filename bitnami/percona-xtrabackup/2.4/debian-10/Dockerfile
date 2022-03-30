@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="2.4.24" \
     BITNAMI_APP_NAME="percona-xtrabackup" \
-    BITNAMI_IMAGE_VERSION="2.4.24-debian-10-r188" \
+    BITNAMI_IMAGE_VERSION="2.4.24-debian-10-r189" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mysql/bin:$PATH"
 
 USER 1001
