@@ -20,7 +20,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/mxnet/postunpack.sh
 ENV APP_VERSION="1.9.0" \
     BITNAMI_APP_NAME="mxnet" \
-    BITNAMI_IMAGE_VERSION="1.9.0-debian-10-r89" \
+    BITNAMI_IMAGE_VERSION="1.9.0-debian-10-r90" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:$PATH"
 
