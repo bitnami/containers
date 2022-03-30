@@ -23,7 +23,7 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="2.2.1" \
     BITNAMI_APP_NAME="kong-ingress-controller" \
-    BITNAMI_IMAGE_VERSION="2.2.1-debian-10-r41" \
+    BITNAMI_IMAGE_VERSION="2.2.1-debian-10-r42" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/kong-ingress-controller/bin:$PATH"
 
 USER 1001
