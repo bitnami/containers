@@ -17,7 +17,7 @@ RUN /build/bitnami-user.sh
 COPY rootfs /
 ENV APP_VERSION="2.35.1" \
     BITNAMI_APP_NAME="git" \
-    BITNAMI_IMAGE_VERSION="2.35.1-debian-10-r59" \
+    BITNAMI_IMAGE_VERSION="2.35.1-debian-10-r60" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/git/bin:$PATH"
 
