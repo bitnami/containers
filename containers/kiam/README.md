@@ -35,7 +35,7 @@ Kiam is no longer maintained by upstream and is now internally tagged as to be d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.2.0`, `4.2.0-debian-10-r137`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kiam/blob/4.2.0-debian-10-r137/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.2.0`, `4.2.0-debian-10-r138`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kiam/blob/4.2.0-debian-10-r138/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kiam GitHub repo](https://github.com/bitnami/bitnami-docker-kiam).
 
