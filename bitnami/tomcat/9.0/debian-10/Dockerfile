@@ -24,7 +24,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/tomcat/postunpack.sh
 ENV APP_VERSION="9.0.60" \
     BITNAMI_APP_NAME="tomcat" \
-    BITNAMI_IMAGE_VERSION="9.0.60-debian-10-r16" \
+    BITNAMI_IMAGE_VERSION="9.0.60-debian-10-r17" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/common/bin:$PATH"
 
