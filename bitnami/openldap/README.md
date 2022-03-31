@@ -194,7 +194,7 @@ The Bitnami Docker OpenLDAP can be easily setup with the following environment v
 
 You can bootstrap the contents of your database by putting LDIF files in the directory `/ldifs` (or the one you define in `LDAP_CUSTOM_LDIF_DIR`). Those may only contain content underneath your base DN (set by `LDAP_ROOT`). You can **not** set configuration for e.g. `cn=config` in those files.
 
-Check the official [OpenLDAP Configuration Reference](https://www.openldap.org/doc/admin24/guide.html) for more information about how to configure OpenLDAP.
+Check the official [OpenLDAP Configuration Reference](https://www.openldap.org/doc/admin25/guide.html) for more information about how to configure OpenLDAP.
 
 ### Securing OpenLDAP traffic
 
