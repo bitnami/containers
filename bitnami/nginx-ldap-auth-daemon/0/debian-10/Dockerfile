@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 ENV APP_VERSION="0.20200116.0" \
     BITNAMI_APP_NAME="nginx-ldap-auth-daemon" \
-    BITNAMI_IMAGE_VERSION="0.20200116.0-debian-10-r629" \
+    BITNAMI_IMAGE_VERSION="0.20200116.0-debian-10-r630" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/nginx-ldap-auth-daemon/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8888
