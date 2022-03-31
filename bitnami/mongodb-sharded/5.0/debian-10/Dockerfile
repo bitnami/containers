@@ -25,7 +25,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb-sharded/postunpack.sh
 ENV APP_VERSION="5.0.6" \
     BITNAMI_APP_NAME="mongodb-sharded" \
-    BITNAMI_IMAGE_VERSION="5.0.6-debian-10-r60" \
+    BITNAMI_IMAGE_VERSION="5.0.6-debian-10-r61" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mongodb/bin:$PATH"
 
 EXPOSE 27017
