@@ -23,6 +23,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # variable will be overridden with the value specified in that file
 rabbitmq_env_vars=(
     RABBITMQ_CONF_FILE
+    RABBITMQ_DEFINITIONS_FILE
     RABBITMQ_SECURE_PASSWORD
     RABBITMQ_CLUSTER_NODE_NAME
     RABBITMQ_CLUSTER_PARTITION_HANDLING
@@ -99,6 +100,7 @@ export RABBITMQ_CONF_ENV_FILE="${RABBITMQ_CONF_DIR}/rabbitmq-env.conf"
 export RABBITMQ_HOME_DIR="${RABBITMQ_BASE_DIR}/.rabbitmq"
 export RABBITMQ_LIB_DIR="${RABBITMQ_BASE_DIR}/var/lib/rabbitmq"
 export RABBITMQ_LOGS_DIR="${RABBITMQ_BASE_DIR}/var/log/rabbitmq"
+export RABBITMQ_DEFINITIONS_FILE="${RABBITMQ_DEFINITIONS_FILE:-/app/load_definition.json}"
 export RABBITMQ_PLUGINS_DIR="${RABBITMQ_BASE_DIR}/plugins"
 export RABBITMQ_MOUNTED_CONF_DIR="${RABBITMQ_VOLUME_DIR}/conf"
 export PATH="${RABBITMQ_BIN_DIR}:${PATH}"
