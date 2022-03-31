@@ -110,7 +110,11 @@ rabbitmq_validate() {
     check_fqdn "RABBITMQ_NODE_NAME"
 
     if is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS"; then
-        is_boolean_yes "$RABBITMQ_SECURE_PASSWORD" && print_validation_error "The RABBITMQ_LOAD_DEFINITIONS and RABBITMQ_SECURE_PASSWORD environment variables cannot be enabled at once."
+        if [[ -f "$RABBITMQ_DEFINITIONS_FILE" ]]; then
+            is_boolean_yes "$RABBITMQ_SECURE_PASSWORD" && grep -q '"users"' "$RABBITMQ_DEFINITIONS_FILE" && warn 'A definition file with "users" was found. The RABBITMQ_SECURE_PASSWORD environment variables will be ignored.'
+        else
+            print_validation_error "The definitions file $RABBITMQ_DEFINITIONS_FILE is not found. Please ensure that the path is correct or change the RABBITMQ_DEFINITIONS_FILE variable."
+        fi
     elif [[ -z "$RABBITMQ_PASSWORD" ]]; then
         print_validation_error "You must indicate a password"
     fi
@@ -362,7 +366,7 @@ default_permissions.write = .*
 EOF
 
         # When loading definitions, default vhost and user/pass won't be created: https://www.rabbitmq.com/definitions.html#import-on-boot
-        if ! is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS"; then
+        if ! is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS" || ! grep -q '"users"' "$RABBITMQ_DEFINITIONS_FILE"; then
             cat <<EOF
 default_vhost = ${RABBITMQ_VHOST}
 default_user = ${RABBITMQ_USERNAME}
@@ -372,6 +376,11 @@ EOF
             echo
         fi
 
+        if is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS"; then
+            cat <<EOF
+load_definitions = ${RABBITMQ_DEFINITIONS_FILE}
+EOF
+        fi
         rabbitmq_print_networking_configuration
         rabbitmq_print_management_configuration
         rabbitmq_print_ldap_configuration
