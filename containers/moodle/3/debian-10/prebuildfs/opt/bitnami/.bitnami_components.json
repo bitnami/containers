@@ -36,10 +36,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "9914b16aafb3b3a347ea9fe4f8b2a31002e242e23b5ce4492311ca119041e584",
+        "digest": "4d49b52d64b513996834a32b3881c55b922be0f04fe6d4b6499078f8574237c8",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.28-11"
+        "version": "7.4.28-12"
     },
     "postgresql-client": {
         "arch": "amd64",
