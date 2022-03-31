@@ -27,7 +27,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/discourse/postunpack.sh
 ENV APP_VERSION="2.8.2" \
     BITNAMI_APP_NAME="discourse" \
-    BITNAMI_IMAGE_VERSION="2.8.2-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="2.8.2-debian-10-r7" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/git/bin:/opt/bitnami/brotli/bin:$PATH"
 
 EXPOSE 3000
