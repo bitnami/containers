@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="1.0.5" \
     BITNAMI_APP_NAME="wavefront-prometheus-storage-adapter" \
-    BITNAMI_IMAGE_VERSION="1.0.5-debian-10-r130" \
+    BITNAMI_IMAGE_VERSION="1.0.5-debian-10-r131" \
     PATH="/opt/bitnami/wavefront-prometheus-storage-adapter/bin:$PATH"
 
 USER 1001
