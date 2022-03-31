@@ -23,7 +23,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/dotnet/postunpack.sh
 ENV APP_VERSION="3.1.23" \
     BITNAMI_APP_NAME="dotnet" \
-    BITNAMI_IMAGE_VERSION="3.1.23-debian-10-r21" \
+    BITNAMI_IMAGE_VERSION="3.1.23-debian-10-r22" \
     DOTNET_CLI_HOME="/app" \
     DOTNET_ROOT="/opt/bitnami/dotnet/bin" \
     PATH="/opt/bitnami/dotnet/bin:$PATH"
