@@ -21,7 +21,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/parse-dashboard/postunpack.sh
 ENV APP_VERSION="4.0.1" \
     BITNAMI_APP_NAME="parse-dashboard" \
-    BITNAMI_IMAGE_VERSION="4.0.1-debian-10-r10" \
+    BITNAMI_IMAGE_VERSION="4.0.1-debian-10-r11" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/parse-dashboard/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 3000 4040
