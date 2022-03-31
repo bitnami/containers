@@ -19,7 +19,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-exporter/postunpack.sh
 ENV APP_VERSION="2.4.2" \
     BITNAMI_APP_NAME="harbor-exporter" \
-    BITNAMI_IMAGE_VERSION="2.4.2-debian-10-r14" \
+    BITNAMI_IMAGE_VERSION="2.4.2-debian-10-r15" \
     PATH="/opt/bitnami/harbor-exporter/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 9090
