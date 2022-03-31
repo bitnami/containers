@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="1.4.2" \
     BITNAMI_APP_NAME="pushgateway" \
-    BITNAMI_IMAGE_VERSION="1.4.2-debian-10-r163" \
+    BITNAMI_IMAGE_VERSION="1.4.2-debian-10-r164" \
     PATH="/opt/bitnami/pushgateway/bin:$PATH"
 
 EXPOSE 9091
