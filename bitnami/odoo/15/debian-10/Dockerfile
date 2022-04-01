@@ -27,7 +27,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/odoo/postunpack.sh
 ENV APP_VERSION="15.0.20220310" \
     BITNAMI_APP_NAME="odoo" \
-    BITNAMI_IMAGE_VERSION="15.0.20220310-debian-10-r17" \
+    BITNAMI_IMAGE_VERSION="15.0.20220310-debian-10-r18" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/odoo/bin:$PATH"
 
 EXPOSE 3000 8069 8072
