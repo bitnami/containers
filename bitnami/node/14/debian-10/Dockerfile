@@ -24,7 +24,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 
 ENV APP_VERSION="14.19.1" \
     BITNAMI_APP_NAME="node" \
-    BITNAMI_IMAGE_VERSION="14.19.1-debian-10-r13" \
+    BITNAMI_IMAGE_VERSION="14.19.1-debian-10-r14" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:$PATH"
 
 EXPOSE 3000
