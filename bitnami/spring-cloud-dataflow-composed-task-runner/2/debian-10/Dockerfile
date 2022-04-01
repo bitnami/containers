@@ -23,7 +23,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="2.9.3" \
     BITNAMI_APP_NAME="spring-cloud-dataflow-composed-task-runner" \
-    BITNAMI_IMAGE_VERSION="2.9.3-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="2.9.3-debian-10-r7" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"
 
