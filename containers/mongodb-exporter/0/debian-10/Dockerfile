@@ -20,7 +20,7 @@ RUN ln -sf /opt/bitnami/mongodb-exporter/bin/mongodb_exporter /bin/mongodb_expor
 
 ENV APP_VERSION="0.31.1" \
     BITNAMI_APP_NAME="mongodb-exporter" \
-    BITNAMI_IMAGE_VERSION="0.31.1-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="0.31.1-debian-10-r1" \
     PATH="/opt/bitnami/mongodb-exporter/bin:$PATH"
 
 EXPOSE 9216
