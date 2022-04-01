@@ -2,7 +2,7 @@ version: '2'
 
 services:
   mariadb:
-    image: docker.io/bitnami/mariadb:10.3
+    image: docker.io/bitnami/mariadb:10.6
     environment:
       - MARIADB_USER=bn_reportserver
       - MARIADB_DATABASE=bitnami_reportserver
