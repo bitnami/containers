@@ -8,10 +8,10 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "bb0089c26028b568dbe8b8875d39cca3c7835c582dda4fcbdcbed599320c57fe",
+        "digest": "14329a8ec0a649ecb9ffb37085a547183748efedea8ed029801ab9b381ab7173",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.3.34-4"
+        "version": "10.6.7-4"
     },
     "nginx-intel": {
         "arch": "amd64",
@@ -22,17 +22,17 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "4d49b52d64b513996834a32b3881c55b922be0f04fe6d4b6499078f8574237c8",
+        "digest": "5804e270fbfe723a104662e4ca39f71f661827b0eeb870e8acf63b28d63276d0",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.28-12"
+        "version": "7.4.28-13"
     },
     "qatengine": {
         "arch": "amd64",
-        "digest": "eaadd4303f1b51690bf5bc391a27403d79c9f12f00e3a6fba7088bf9d4fcc326",
+        "digest": "4d158fe5d91dca3c4224f382a36ba21a7d14436239accf0f27625d2ac1543806",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.6.11-6"
+        "version": "0.6.12-0"
     },
     "render-template": {
         "arch": "amd64",
