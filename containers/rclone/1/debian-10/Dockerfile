@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="1.58.0" \
     BITNAMI_APP_NAME="rclone" \
-    BITNAMI_IMAGE_VERSION="1.58.0-debian-10-r3" \
+    BITNAMI_IMAGE_VERSION="1.58.0-debian-10-r4" \
     PATH="/opt/bitnami/rclone/bin:$PATH"
 
 USER 1001
