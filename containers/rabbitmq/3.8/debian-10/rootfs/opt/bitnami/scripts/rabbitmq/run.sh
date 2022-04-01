@@ -37,6 +37,9 @@ if is_boolean_yes "$RABBITMQ_CLUSTER_REBALANCE"; then
     ) &
 fi
 
+# Resources limits: maximum number of open file descriptors
+[[ -n "${RABBITMQ_ULIMIT_NOFILES:-}" ]] && info "Setting file discripton limit to ${RABBITMQ_ULIMIT_NOFILES}" && ulimit -n "${RABBITMQ_ULIMIT_NOFILES}"
+
 info "** Starting RabbitMQ **"
 cd "$RABBITMQ_BASE_DIR"
 if am_i_root; then

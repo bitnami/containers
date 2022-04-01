@@ -755,9 +755,6 @@ rabbitmq_initialize() {
     chmod 400 "${RABBITMQ_HOME_DIR}/.erlang.cookie"
     ln -sf "${RABBITMQ_HOME_DIR}/.erlang.cookie" "${RABBITMQ_LIB_DIR}/.erlang.cookie"
 
-    # Resources limits: maximum number of open file descriptors
-    [[ -n "${RABBITMQ_ULIMIT_NOFILES:-}" ]] && ulimit -n "${RABBITMQ_ULIMIT_NOFILES}"
-
     debug "Ensuring expected directories/files exist..."
     for dir in "$RABBITMQ_DATA_DIR" "$RABBITMQ_LIB_DIR" "$RABBITMQ_HOME_DIR"; do
         ensure_dir_exists "$dir"
@@ -776,7 +773,10 @@ rabbitmq_initialize() {
     else
         ! is_rabbitmq_running && rabbitmq_start_bg
         if is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS"; then
-            debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" add_user "$RABBITMQ_USERNAME" "$RABBITMQ_PASSWORD"
+            if ! grep -q '"users"' "$RABBITMQ_DEFINITIONS_FILE"; then
+                debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" add_user "$RABBITMQ_USERNAME" "$RABBITMQ_PASSWORD"
+                debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" set_user_tags "$RABBITMQ_USERNAME" administrator
+            fi
         elif is_boolean_yes "$RABBITMQ_SECURE_PASSWORD"; then
             rabbitmq_change_password "$RABBITMQ_USERNAME" "$RABBITMQ_PASSWORD"
         fi
