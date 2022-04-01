@@ -9,18 +9,18 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kubeapps-apis-2.4.3-6-linux-amd64-debian-10.tar.gz && \
-    echo "85f0d016218b3a97a24a14cf6d7a3b1a6bcdf6ffb90953c30932a92070f1bae8  /tmp/bitnami/pkg/cache/kubeapps-apis-2.4.3-6-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/kubeapps-apis-2.4.3-6-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/kubeapps-apis-2.4.3-6-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kubeapps-apis-2.4.4-0-linux-amd64-debian-10.tar.gz && \
+    echo "3776b234a6e06604970b3a8b1f49d4fd4946dee5a4865b6af9d00ce7cd5fe1f9  /tmp/bitnami/pkg/cache/kubeapps-apis-2.4.4-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/kubeapps-apis-2.4.4-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/kubeapps-apis-2.4.4-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN ln -s /opt/bitnami/kubeapps-apis/plugins /plugins && ln -s /opt/bitnami/kubeapps-apis/bin/kubeapps-apis /kubeapps-apis
 
-ENV APP_VERSION="2.4.3" \
+ENV APP_VERSION="2.4.4" \
     BITNAMI_APP_NAME="kubeapps-apis" \
-    BITNAMI_IMAGE_VERSION="2.4.3-debian-10-r50" \
+    BITNAMI_IMAGE_VERSION="2.4.4-debian-10-r0" \
     PATH="/opt/bitnami/kubeapps-apis/bin:$PATH"
 
 EXPOSE 50051
