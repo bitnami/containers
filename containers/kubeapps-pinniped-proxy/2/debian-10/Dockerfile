@@ -9,17 +9,17 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 libgcc1 libssl1.1 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kubeapps-pinniped-proxy-2.4.3-4-linux-amd64-debian-10.tar.gz && \
-    echo "ae62a2e2e622f628db2271c31a9eccd8675814822f9af192c72e77a524299c51  /tmp/bitnami/pkg/cache/kubeapps-pinniped-proxy-2.4.3-4-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/kubeapps-pinniped-proxy-2.4.3-4-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/kubeapps-pinniped-proxy-2.4.3-4-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kubeapps-pinniped-proxy-2.4.4-0-linux-amd64-debian-10.tar.gz && \
+    echo "bc37349307657a69aed15d6bf7ab87b01eaffbc78f9f1e5f0a3ebf1c8dce9dc2  /tmp/bitnami/pkg/cache/kubeapps-pinniped-proxy-2.4.4-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/kubeapps-pinniped-proxy-2.4.4-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/kubeapps-pinniped-proxy-2.4.4-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="2.4.3" \
+ENV APP_VERSION="2.4.4" \
     BITNAMI_APP_NAME="kubeapps-pinniped-proxy" \
-    BITNAMI_IMAGE_VERSION="2.4.3-debian-10-r47" \
+    BITNAMI_IMAGE_VERSION="2.4.4-debian-10-r0" \
     PATH="/opt/bitnami/kubeapps-pinniped-proxy/bin:$PATH"
 
 USER 1001
