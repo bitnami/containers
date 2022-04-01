@@ -366,7 +366,7 @@ default_permissions.write = .*
 EOF
 
         # When loading definitions, default vhost and user/pass won't be created: https://www.rabbitmq.com/definitions.html#import-on-boot
-        if ! is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS" || ! grep -q '"users"' "$RABBITMQ_DEFINITIONS_FILE"; then
+        if ! is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS"; then
             cat <<EOF
 default_vhost = ${RABBITMQ_VHOST}
 default_user = ${RABBITMQ_USERNAME}
@@ -775,8 +775,12 @@ rabbitmq_initialize() {
         fi
     else
         ! is_rabbitmq_running && rabbitmq_start_bg
-
-        if is_boolean_yes "$RABBITMQ_SECURE_PASSWORD"; then
+        if is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS"; then
+            if ! grep -q '"users"' "$RABBITMQ_DEFINITIONS_FILE"; then
+                debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" add_user "$RABBITMQ_USERNAME" "$RABBITMQ_PASSWORD"
+                debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" set_user_tags "$RABBITMQ_USERNAME" administrator
+            fi
+        elif is_boolean_yes "$RABBITMQ_SECURE_PASSWORD"; then
             rabbitmq_change_password "$RABBITMQ_USERNAME" "$RABBITMQ_PASSWORD"
         fi
 
