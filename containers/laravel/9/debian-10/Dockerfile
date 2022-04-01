@@ -23,7 +23,7 @@ RUN /opt/bitnami/scripts/laravel/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
 ENV APP_VERSION="9.1.3" \
     BITNAMI_APP_NAME="laravel" \
-    BITNAMI_IMAGE_VERSION="9.1.3-debian-10-r2" \
+    BITNAMI_IMAGE_VERSION="9.1.3-debian-10-r3" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/node/bin:/opt/bitnami/common/bin:$PATH" \
     PHP_ENABLE_OPCACHE="0"
