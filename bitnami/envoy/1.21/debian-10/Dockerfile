@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="1.21.1" \
     BITNAMI_APP_NAME="envoy" \
-    BITNAMI_IMAGE_VERSION="1.21.1-debian-10-r36" \
+    BITNAMI_IMAGE_VERSION="1.21.1-debian-10-r37" \
     PATH="/opt/bitnami/envoy/bin:$PATH"
 
 USER 1001
