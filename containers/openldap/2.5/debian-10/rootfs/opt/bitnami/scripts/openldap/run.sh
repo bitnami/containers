@@ -25,7 +25,7 @@ flags=("-h" "ldap://:${LDAP_PORT_NUMBER}/ ldapi:///")
 is_boolean_yes "$LDAP_ENABLE_TLS" && flags=("-h" "ldap://:${LDAP_PORT_NUMBER}/ ldaps://:${LDAP_LDAPS_PORT_NUMBER}/ ldapi:///")
 
 # Add "@" so users can add extra command line flags
-flags+=("-F" "${LDAP_CONF_DIR}/slapd.d" "-d" "256" "$@")
+flags+=("-F" "${LDAP_CONF_DIR}/slapd.d" "-d" "$LDAP_LOGLEVEL" "$@")
 
 info "** Starting slapd **"
 am_i_root && flags=("-u" "$LDAP_DAEMON_USER" "${flags[@]}")
