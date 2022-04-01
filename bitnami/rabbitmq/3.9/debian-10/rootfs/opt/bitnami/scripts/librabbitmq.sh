@@ -755,9 +755,6 @@ rabbitmq_initialize() {
     chmod 400 "${RABBITMQ_HOME_DIR}/.erlang.cookie"
     ln -sf "${RABBITMQ_HOME_DIR}/.erlang.cookie" "${RABBITMQ_LIB_DIR}/.erlang.cookie"
 
-    # Resources limits: maximum number of open file descriptors
-    [[ -n "${RABBITMQ_ULIMIT_NOFILES:-}" ]] && ulimit -n "${RABBITMQ_ULIMIT_NOFILES}"
-
     debug "Ensuring expected directories/files exist..."
     for dir in "$RABBITMQ_DATA_DIR" "$RABBITMQ_LIB_DIR" "$RABBITMQ_HOME_DIR"; do
         ensure_dir_exists "$dir"
