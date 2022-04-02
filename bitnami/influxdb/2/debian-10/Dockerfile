@@ -20,7 +20,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/influxdb/postunpack.sh
 ENV APP_VERSION="2.1.1" \
     BITNAMI_APP_NAME="influxdb" \
-    BITNAMI_IMAGE_VERSION="2.1.1-debian-10-r110" \
+    BITNAMI_IMAGE_VERSION="2.1.1-debian-10-r111" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/influxdb/bin:$PATH"
 
 VOLUME [ "/bitnami/influxdb" ]
