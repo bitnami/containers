@@ -24,7 +24,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/zookeeper/postunpack.sh
 ENV APP_VERSION="3.7.0" \
     BITNAMI_APP_NAME="zookeeper" \
-    BITNAMI_IMAGE_VERSION="3.7.0-debian-10-r335"
+    BITNAMI_IMAGE_VERSION="3.7.0-debian-10-r336"
 
 EXPOSE 2181 2888 3888 8080
 
