@@ -24,7 +24,7 @@ RUN chown -R 1001:1001 /opt/bitnami/jmx-exporter
 
 ENV APP_VERSION="0.16.1" \
     BITNAMI_APP_NAME="jmx-exporter" \
-    BITNAMI_IMAGE_VERSION="0.16.1-debian-10-r256" \
+    BITNAMI_IMAGE_VERSION="0.16.1-debian-10-r257" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 5556
