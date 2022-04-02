@@ -23,7 +23,7 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="2.3.8" \
     BITNAMI_APP_NAME="cassandra-exporter" \
-    BITNAMI_IMAGE_VERSION="2.3.8-debian-10-r6" \
+    BITNAMI_IMAGE_VERSION="2.3.8-debian-10-r7" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
 EXPOSE 8080
