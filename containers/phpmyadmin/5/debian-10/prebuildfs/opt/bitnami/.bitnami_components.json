@@ -22,17 +22,17 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "bb0089c26028b568dbe8b8875d39cca3c7835c582dda4fcbdcbed599320c57fe",
+        "digest": "14329a8ec0a649ecb9ffb37085a547183748efedea8ed029801ab9b381ab7173",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.3.34-4"
+        "version": "10.6.7-4"
     },
     "php": {
         "arch": "amd64",
-        "digest": "d1b04e1bf645237a4394302568ee4be262725d028c2969e8c4e035908c00c437",
+        "digest": "c1eb19759c4c84d3faed303b395acf52d954b24d6adea6d3feba79690ad3626e",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.0.17-6"
+        "version": "8.0.17-7"
     },
     "phpmyadmin": {
         "arch": "amd64",
