@@ -20,7 +20,7 @@ RUN ln -sf /opt/bitnami/configmap-reload/bin/configmap-reload /bin/configmap-rel
 
 ENV APP_VERSION="0.7.1" \
     BITNAMI_APP_NAME="configmap-reload" \
-    BITNAMI_IMAGE_VERSION="0.7.1-debian-10-r50" \
+    BITNAMI_IMAGE_VERSION="0.7.1-debian-10-r51" \
     PATH="/opt/bitnami/configmap-reload/bin:$PATH"
 
 EXPOSE 8080
