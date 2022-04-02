@@ -8,10 +8,10 @@
     },
     "kibana": {
         "arch": "amd64",
-        "digest": "cce2a5d884acdc98eb33a58f1b964d987190c4662099f81d4d86103f95e016c9",
+        "digest": "573f9d408e8888eba94728686419ebaf9680945505451fc4594f2a08c8f3c866",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.17.1-0"
+        "version": "7.17.2-0"
     },
     "yq": {
         "arch": "amd64",
