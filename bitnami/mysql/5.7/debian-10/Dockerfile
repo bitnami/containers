@@ -21,7 +21,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/mysql/postunpack.sh
 ENV APP_VERSION="5.7.37" \
     BITNAMI_APP_NAME="mysql" \
-    BITNAMI_IMAGE_VERSION="5.7.37-debian-10-r72" \
+    BITNAMI_IMAGE_VERSION="5.7.37-debian-10-r73" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mysql/bin:/opt/bitnami/mysql/sbin:$PATH"
 
 EXPOSE 3306
