@@ -20,7 +20,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 
 ENV APP_VERSION="8.1.4" \
     BITNAMI_APP_NAME="php-fpm" \
-    BITNAMI_IMAGE_VERSION="8.1.4-debian-10-r19" \
+    BITNAMI_IMAGE_VERSION="8.1.4-debian-10-r20" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:$PATH"
 
 EXPOSE 9000
