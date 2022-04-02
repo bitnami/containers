@@ -30,7 +30,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV APP_VERSION="2.9.3" \
     BITNAMI_APP_NAME="spring-cloud-dataflow-shell" \
-    BITNAMI_IMAGE_VERSION="2.9.3-debian-10-r7" \
+    BITNAMI_IMAGE_VERSION="2.9.3-debian-10-r8" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     PATH="/opt/bitnami/java/bin:$PATH"
