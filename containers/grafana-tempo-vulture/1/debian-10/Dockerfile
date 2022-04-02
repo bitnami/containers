@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="1.3.2" \
     BITNAMI_APP_NAME="grafana-tempo-vulture" \
-    BITNAMI_IMAGE_VERSION="1.3.2-debian-10-r36" \
+    BITNAMI_IMAGE_VERSION="1.3.2-debian-10-r37" \
     PATH="/opt/bitnami/grafana-tempo-vulture/bin:$PATH"
 
 USER 1001
