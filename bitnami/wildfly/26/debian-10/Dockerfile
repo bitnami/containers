@@ -23,7 +23,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/wildfly/postunpack.sh
 ENV APP_VERSION="26.0.1" \
     BITNAMI_APP_NAME="wildfly" \
-    BITNAMI_IMAGE_VERSION="26.0.1-debian-10-r69" \
+    BITNAMI_IMAGE_VERSION="26.0.1-debian-10-r70" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:/opt/bitnami/common/bin:$PATH" \
     WILDFLY_HOME="/home/wildfly"
