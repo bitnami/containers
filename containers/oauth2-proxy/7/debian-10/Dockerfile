@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="7.2.1" \
     BITNAMI_APP_NAME="oauth2-proxy" \
-    BITNAMI_IMAGE_VERSION="7.2.1-debian-10-r98" \
+    BITNAMI_IMAGE_VERSION="7.2.1-debian-10-r99" \
     PATH="/opt/bitnami/oauth2-proxy/bin:$PATH"
 
 EXPOSE 4180 8080
