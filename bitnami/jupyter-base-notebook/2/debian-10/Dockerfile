@@ -24,7 +24,7 @@ RUN mkdir /opt/bitnami/jupyterhub-singleuser/ && chmod g+rwX /opt/bitnami/jupyte
 
 ENV APP_VERSION="2.2.2" \
     BITNAMI_APP_NAME="jupyter-base-notebook" \
-    BITNAMI_IMAGE_VERSION="2.2.2-debian-10-r19" \
+    BITNAMI_IMAGE_VERSION="2.2.2-debian-10-r20" \
     PATH="/opt/bitnami/miniconda/bin:$PATH"
 
 USER 1001
