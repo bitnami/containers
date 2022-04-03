@@ -20,7 +20,7 @@ RUN ln -s /opt/bitnami/contour/bin/contour /bin/contour
 
 ENV APP_VERSION="1.20.1" \
     BITNAMI_APP_NAME="contour" \
-    BITNAMI_IMAGE_VERSION="1.20.1-debian-10-r37" \
+    BITNAMI_IMAGE_VERSION="1.20.1-debian-10-r38" \
     PATH="/opt/bitnami/contour/bin:$PATH"
 
 USER 1001
