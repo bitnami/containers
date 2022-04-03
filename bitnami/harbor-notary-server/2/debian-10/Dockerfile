@@ -19,7 +19,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-notary-server/postunpack.sh
 ENV APP_VERSION="2.4.2" \
     BITNAMI_APP_NAME="harbor-notary-server" \
-    BITNAMI_IMAGE_VERSION="2.4.2-debian-10-r16" \
+    BITNAMI_IMAGE_VERSION="2.4.2-debian-10-r17" \
     PATH="/opt/bitnami/harbor-notary-server/bin:/opt/bitnami/common/bin:$PATH" \
     SERVICE_NAME="notary_server"
 
