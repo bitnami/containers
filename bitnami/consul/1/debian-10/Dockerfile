@@ -20,7 +20,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/consul/postunpack.sh
 ENV APP_VERSION="1.11.4" \
     BITNAMI_APP_NAME="consul" \
-    BITNAMI_IMAGE_VERSION="1.11.4-debian-10-r31" \
+    BITNAMI_IMAGE_VERSION="1.11.4-debian-10-r32" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/consul/bin:$PATH"
 
 EXPOSE 8300 8301 8500 8600
