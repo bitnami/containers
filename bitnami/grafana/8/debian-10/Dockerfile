@@ -19,7 +19,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/grafana/postunpack.sh
 ENV APP_VERSION="8.4.5" \
     BITNAMI_APP_NAME="grafana" \
-    BITNAMI_IMAGE_VERSION="8.4.5-debian-10-r2" \
+    BITNAMI_IMAGE_VERSION="8.4.5-debian-10-r3" \
     PATH="/opt/bitnami/grafana/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 3000
