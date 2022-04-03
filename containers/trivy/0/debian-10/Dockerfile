@@ -20,7 +20,7 @@ RUN mkdir /.cache && chmod g+rwX /.cache
 
 ENV APP_VERSION="0.25.0" \
     BITNAMI_APP_NAME="trivy" \
-    BITNAMI_IMAGE_VERSION="0.25.0-debian-10-r2" \
+    BITNAMI_IMAGE_VERSION="0.25.0-debian-10-r3" \
     PATH="/opt/bitnami/trivy/bin:$PATH"
 
 USER 1001
