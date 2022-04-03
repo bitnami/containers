@@ -31,7 +31,7 @@ ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     APP_VERSION="8.1.0" \
     BITNAMI_APP_NAME="suitecrm" \
-    BITNAMI_IMAGE_VERSION="8.1.0-debian-10-r4" \
+    BITNAMI_IMAGE_VERSION="8.1.0-debian-10-r5" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080 8443
