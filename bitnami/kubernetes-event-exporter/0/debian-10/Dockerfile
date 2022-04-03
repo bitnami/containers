@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="0.11.0" \
     BITNAMI_APP_NAME="kubernetes-event-exporter" \
-    BITNAMI_IMAGE_VERSION="0.11.0-debian-10-r129" \
+    BITNAMI_IMAGE_VERSION="0.11.0-debian-10-r130" \
     PATH="/opt/bitnami/kubernetes-event-exporter/bin:$PATH"
 
 USER 1001
