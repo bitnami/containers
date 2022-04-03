@@ -24,7 +24,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/keycloak/postunpack.sh
 ENV APP_VERSION="16.1.1" \
     BITNAMI_APP_NAME="keycloak" \
-    BITNAMI_IMAGE_VERSION="16.1.1-debian-10-r66" \
+    BITNAMI_IMAGE_VERSION="16.1.1-debian-10-r67" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/keycloak/bin:$PATH"
 
