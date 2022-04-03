@@ -21,7 +21,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/mariadb/postunpack.sh
 ENV APP_VERSION="10.7.3" \
     BITNAMI_APP_NAME="mariadb" \
-    BITNAMI_IMAGE_VERSION="10.7.3-debian-10-r15" \
+    BITNAMI_IMAGE_VERSION="10.7.3-debian-10-r16" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 
 EXPOSE 3306
