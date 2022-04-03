@@ -19,7 +19,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-registry/postunpack.sh
 ENV APP_VERSION="2.4.2" \
     BITNAMI_APP_NAME="harbor-registry" \
-    BITNAMI_IMAGE_VERSION="2.4.2-debian-10-r16" \
+    BITNAMI_IMAGE_VERSION="2.4.2-debian-10-r17" \
     PATH="/opt/bitnami/harbor-registry/bin:/opt/bitnami/common/bin:$PATH"
 
 VOLUME [ "/etc/registry", "/storage", "/var/lib/registry" ]
