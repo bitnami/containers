@@ -15,10 +15,10 @@
     },
     "minio-client": {
         "arch": "amd64",
-        "digest": "158e416c9a738a3080757f0b76bbe9eaf4f7b0645986ff8b133cf59c3a6f7777",
+        "digest": "fb5df7ee7e5912204e1e1320ca1014e34b87e0ff87562f7f99180d1deb0c50b9",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2022.3.31-0"
+        "version": "2022.4.1-0"
     },
     "wait-for-port": {
         "arch": "amd64",
