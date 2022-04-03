@@ -30,7 +30,7 @@ ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     APP_VERSION="8.0.1" \
     BITNAMI_APP_NAME="osclass" \
-    BITNAMI_IMAGE_VERSION="8.0.1-debian-10-r84" \
+    BITNAMI_IMAGE_VERSION="8.0.1-debian-10-r85" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080 8443
