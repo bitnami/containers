@@ -20,7 +20,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/pytorch/postunpack.sh
 ENV APP_VERSION="1.11.0" \
     BITNAMI_APP_NAME="pytorch" \
-    BITNAMI_IMAGE_VERSION="1.11.0-debian-10-r9" \
+    BITNAMI_IMAGE_VERSION="1.11.0-debian-10-r10" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/python3.7/site-packages/torch/lib/:/opt/bitnami/python/lib/python3.7/site-packages/PIL/.libs/:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:$PATH"
 
