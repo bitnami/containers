@@ -20,7 +20,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/etcd/postunpack.sh
 ENV APP_VERSION="3.5.2" \
     BITNAMI_APP_NAME="etcd" \
-    BITNAMI_IMAGE_VERSION="3.5.2-debian-10-r57" \
+    BITNAMI_IMAGE_VERSION="3.5.2-debian-10-r58" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/etcd/bin:$PATH"
 
 EXPOSE 2379 2380
