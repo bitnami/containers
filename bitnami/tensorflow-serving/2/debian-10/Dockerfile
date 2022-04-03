@@ -24,7 +24,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/tensorflow-serving/postunpack.sh
 ENV APP_VERSION="2.8.0" \
     BITNAMI_APP_NAME="tensorflow-serving" \
-    BITNAMI_IMAGE_VERSION="2.8.0-debian-10-r45" \
+    BITNAMI_IMAGE_VERSION="2.8.0-debian-10-r46" \
     JAVA_HOME="/opt/bitnami/java"
 
 EXPOSE 8500
