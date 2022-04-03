@@ -19,7 +19,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/kong/postunpack.sh
 ENV APP_VERSION="2.8.0" \
     BITNAMI_APP_NAME="kong" \
-    BITNAMI_IMAGE_VERSION="2.8.0-debian-10-r17" \
+    BITNAMI_IMAGE_VERSION="2.8.0-debian-10-r18" \
     PATH="/opt/bitnami/kong/bin:/opt/bitnami/kong/openresty/bin:/opt/bitnami/kong/openresty/luajit/bin:/opt/bitnami/kong/openresty/nginx/sbin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8000 8001 8443 8444
