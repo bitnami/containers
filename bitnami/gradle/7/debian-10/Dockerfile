@@ -23,7 +23,7 @@ RUN mkdir /app && chmod g+rwX /app
 
 ENV APP_VERSION="7.4.2" \
     BITNAMI_APP_NAME="gradle" \
-    BITNAMI_IMAGE_VERSION="7.4.2-debian-10-r2" \
+    BITNAMI_IMAGE_VERSION="7.4.2-debian-10-r3" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/gradle/bin:$PATH"
 
 WORKDIR /app
