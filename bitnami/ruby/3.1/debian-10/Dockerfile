@@ -20,7 +20,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 
 ENV APP_VERSION="3.1.1" \
     BITNAMI_APP_NAME="ruby" \
-    BITNAMI_IMAGE_VERSION="3.1.1-debian-10-r40" \
+    BITNAMI_IMAGE_VERSION="3.1.1-debian-10-r41" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 
 EXPOSE 3000
