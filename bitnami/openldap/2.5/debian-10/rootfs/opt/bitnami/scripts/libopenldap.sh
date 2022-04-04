@@ -56,6 +56,7 @@ export LDAP_CONFIG_ADMIN_USERNAME="${LDAP_CONFIG_ADMIN_USERNAME:-admin}"
 export LDAP_CONFIG_ADMIN_DN="${LDAP_CONFIG_ADMIN_USERNAME/#/cn=},cn=config"
 export LDAP_CONFIG_ADMIN_PASSWORD="${LDAP_CONFIG_ADMIN_PASSWORD:-configpassword}"
 export LDAP_ENCRYPTED_CONFIG_ADMIN_PASSWORD="$(echo -n $LDAP_CONFIG_ADMIN_PASSWORD | slappasswd -n -T /dev/stdin)"
+export LDAP_ADD_SCHEMAS="${LDAP_EXTRA_SCHEMAS:-yes}"
 export LDAP_EXTRA_SCHEMAS="${LDAP_EXTRA_SCHEMAS:-cosine,inetorgperson,nis}"
 export LDAP_SKIP_DEFAULT_TREE="${LDAP_SKIP_DEFAULT_TREE:-no}"
 export LDAP_USERS="${LDAP_USERS:-user01,user02}"
@@ -464,19 +465,19 @@ ldap_initialize() {
         if is_boolean_yes "$LDAP_ENABLE_TLS"; then
             ldap_configure_tls
         fi
-        if is_boolean_yes "$LDAP_SKIP_DEFAULT_TREE"; then
-            info "Skipping default schemas/tree structure"
-        else
-            # Initialize OpenLDAP with schemas/tree structure
+        # Initialize OpenLDAP with schemas/tree structure
+        if is_boolean_yes "$LDAP_ADD_SCHEMAS"; then
             ldap_add_schemas
-            if [[ -f "$LDAP_CUSTOM_SCHEMA_FILE" ]]; then
-                ldap_add_custom_schema
-            fi
-            if ! is_dir_empty "$LDAP_CUSTOM_LDIF_DIR"; then
-                ldap_add_custom_ldifs
-            else
-                ldap_create_tree
-            fi
+        fi
+        if [[ -f "$LDAP_CUSTOM_SCHEMA_FILE" ]]; then
+            ldap_add_custom_schema
+        fi
+        if ! is_dir_empty "$LDAP_CUSTOM_LDIF_DIR"; then
+            ldap_add_custom_ldifs
+        elif is_boolean_no "$LDAP_SKIP_DEFAULT_TREE"; then
+            ldap_create_tree
+        else
+            info "Skipping default schemas/tree structure"
         fi
         ldap_stop
     fi
