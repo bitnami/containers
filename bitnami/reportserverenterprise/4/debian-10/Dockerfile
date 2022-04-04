@@ -28,7 +28,7 @@ RUN /opt/bitnami/scripts/reportserver/postunpack.sh
 RUN /opt/bitnami/scripts/tomcat/postunpack.sh
 ENV APP_VERSION="4.1.0-6058" \
     BITNAMI_APP_NAME="reportserverenterprise" \
-    BITNAMI_IMAGE_VERSION="4.1.0-6058-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="4.1.0-6058-debian-10-r2" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH" \
     TOMCAT_START_RETRIES="60"
