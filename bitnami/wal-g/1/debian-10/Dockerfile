@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="1.1.0" \
     BITNAMI_APP_NAME="wal-g" \
-    BITNAMI_IMAGE_VERSION="1.1.0-debian-10-r225" \
+    BITNAMI_IMAGE_VERSION="1.1.0-debian-10-r226" \
     PATH="/opt/bitnami/wal-g/bin:$PATH"
 
 USER 1001
