@@ -210,6 +210,7 @@ elasticsearch_validate_kernel() {
 #########################
 elasticsearch_validate() {
     local error_code=0
+    local es_version es_major_version
 
     # Auxiliary functions
     print_validation_error() {
@@ -234,13 +235,9 @@ elasticsearch_validate() {
     }
 
     validate_node_roles() {
-        if [[ "$ELASTICSEARCH_MAJOR_VERSION" -le 6 ]]; then
-            print_validation_error "Node roles are only available in Elasticsearch 7+" && return
-        fi
-
         read -r -a roles_list <<<"$(tr ',;' ' ' <<<"$ELASTICSEARCH_NODE_ROLES")"
         if [[ "${#roles_list[@]}" -le 0 ]]; then
-            print_validation_error "The \$ELASTICSEARCH_NODE_ROLES variables can't be empty and it must be a comma separated list. Supported roles are 'master,data,data_content,data_hot,data_warm,data_cold,data_frozen,ingest,ml,remote_cluster_client,transform'" && return
+            warn "Setting ELASTICSEARCH_NODE_ROLES is empty and ELASTICSEARCH_IS_DEDICATED_NODE is set to true, Elasticsearch will be configured as coordinating-only node."
         fi
         for role in "${roles_list[@]}"; do
             case "$role" in
@@ -253,26 +250,67 @@ elasticsearch_validate() {
         done
     }
 
+    es_version="$(elasticsearch_get_version)"
+    es_major_version="$(get_sematic_version "$es_version" 1)"
+
     debug "Validating settings in ELASTICSEARCH_* env vars..."
-    for var in "ELASTICSEARCH_PORT_NUMBER" "ELASTICSEARCH_NODE_PORT_NUMBER"; do
+    for var in "ELASTICSEARCH_HTTP_PORT_NUMBER" "ELASTICSEARCH_TRANSPORT_PORT_NUMBER"; do
         if ! err=$(validate_port "${!var}"); then
             print_validation_error "An invalid port was specified in the environment variable $var: $err"
         fi
     done
-    is_boolean_yes "$ELASTICSEARCH_USE_NODE_ROLES" && validate_node_roles
-    is_boolean_yes "$ELASTICSEARCH_IS_DEDICATED_NODE" && validate_node_type
+
+    if ! is_boolean_yes "$ELASTICSEARCH_IS_DEDICATED_NODE"; then
+        warn "Setting ELASTICSEARCH_IS_DEDICATED_NODE is disabled."
+        warn "ELASTICSEARCH_NODE_ROLES and ELASTICSEARCH_NODE_TYPE will be ignored and Elasticsearch will asume all different roles."
+    else
+        # Node types deprecated in Elasticsearch 8
+        if [[ -n "$ELASTICSEARCH_NODE_TYPE" ]] && [[ "$es_major_version" -ge 8 ]] ; then
+            print_validation_error "Setting ELASTICSEARCH_NODE_TYPE is not available when using Elasticsearch 8, use ELASTICSEARCH_NODE_ROLES instead."
+        fi
+        # Node roles introduced in Elasticsearch 7
+        if [[ -n "$ELASTICSEARCH_NODE_ROLES" ]] && [[ "$es_major_version" -lt 7 ]] ; then
+            print_validation_error "Setting ELASTICSEARCH_NODE_ROLES is not available when using Elasticsearch 6, use ELASTICSEARCH_NODE_TYPE instead."
+        fi
+
+        if [[ "$es_major_version" -le 6 ]]; then
+            validate_node_type
+        elif [[ "$es_major_version" -ge 8 ]]; then
+            validate_node_roles
+        elif [[ "$es_major_version" -eq 7 ]]; then
+            if [[ -n "$ELASTICSEARCH_NODE_TYPE" ]]; then
+                warn "Setting ELASTICSEARCH_NODE_TYPE will be deprecated soon. We recommend using ELASTICSEARCH_NODE_ROLES instead."
+                validate_node_type
+            else
+                validate_node_roles
+            fi
+        fi
+    fi
+
     if [[ -n "$ELASTICSEARCH_BIND_ADDRESS" ]] && ! validate_ipv4 "$ELASTICSEARCH_BIND_ADDRESS"; then
         print_validation_error "The Bind Address specified in the environment variable ELASTICSEARCH_BIND_ADDRESS is not a valid IPv4"
     fi
 
     if is_boolean_yes "$ELASTICSEARCH_ENABLE_SECURITY"; then
-        check_multi_value "ELASTICSEARCH_TLS_VERIFICATION_MODE" "full certificate none"
-        if is_boolean_yes "$ELASTICSEARCH_TLS_USE_PEM"; then
-            if [[ ! -f "$ELASTICSEARCH_NODE_CERT_LOCATION" ]] || [[ ! -f "$ELASTICSEARCH_NODE_KEY_LOCATION" ]] || [[ ! -f "$ELASTICSEARCH_CA_CERT_LOCATION" ]]; then
-                print_validation_error "In order to configure the TLS encryption for Elasticsearch you must provide your node key, certificate and a valid certification_authority certificate."
+        if ! is_boolean_yes "$ELASTICSEARCH_SKIP_TRANSPORT_TLS"; then
+            check_multi_value "ELASTICSEARCH_TLS_VERIFICATION_MODE" "full certificate none"
+            if is_boolean_yes "$ELASTICSEARCH_TRANSPORT_TLS_USE_PEM"; then
+                if [[ ! -f "$ELASTICSEARCH_TRANSPORT_TLS_NODE_CERT_LOCATION" ]] || [[ ! -f "$ELASTICSEARCH_TRANSPORT_TLS_NODE_KEY_LOCATION" ]] || [[ ! -f "$ELASTICSEARCH_TRANSPORT_TLS_CA_CERT_LOCATION" ]]; then
+                    print_validation_error "In order to configure the TLS encryption for Elasticsearch Transport you must provide your node key, certificate and a valid certification_authority certificate."
+                fi
+            elif [[ ! -f "$ELASTICSEARCH_TRANSPORT_TLS_KEYSTORE_LOCATION" ]] || [[ ! -f "$ELASTICSEARCH_TRANSPORT_TLS_TRUSTSTORE_LOCATION" ]]; then
+                print_validation_error "In order to configure the TLS encryption for Elasticsearch Transport with JKS/PKCS12 certs you must mount a valid keystore and truststore."
             fi
-        elif [[ ! -f "$ELASTICSEARCH_KEYSTORE_LOCATION" ]] || [[ ! -f "$ELASTICSEARCH_TRUSTSTORE_LOCATION" ]]; then
-            print_validation_error "In order to configure the TLS encryption for Elasticsearch with JKS/PKCS12 certs you must mount a valid keystore and truststore."
+        fi
+
+        if is_boolean_yes "$ELASTICSEARCH_ENABLE_REST_TLS"; then
+            if is_boolean_yes "$ELASTICSEARCH_HTTP_TLS_USE_PEM"; then
+                if [[ ! -f "$ELASTICSEARCH_HTTP_TLS_NODE_CERT_LOCATION" ]] || [[ ! -f "$ELASTICSEARCH_HTTP_TLS_NODE_KEY_LOCATION" ]] || [[ ! -f "$ELASTICSEARCH_HTTP_TLS_CA_CERT_LOCATION" ]]; then
+                    print_validation_error "In order to configure the TLS encryption for Elasticsearch you must provide your node key, certificate and a valid certification_authority certificate."
+                fi
+            elif [[ ! -f "$ELASTICSEARCH_HTTP_TLS_KEYSTORE_LOCATION" ]] || [[ ! -f "$ELASTICSEARCH_HTTP_TLS_TRUSTSTORE_LOCATION" ]]; then
+                print_validation_error "In order to configure the TLS encryption for Elasticsearch with JKS/PKCS12 certs you must mount a valid keystore and truststore."
+            fi
         fi
     fi
 
@@ -312,19 +350,23 @@ elasticsearch_cluster_configuration() {
     }
 
     is_node_type_master() {
-        if is_boolean_yes "$ELASTICSEARCH_USE_NODE_ROLES"; then
-            read -r -a roles_list <<<"$(tr ',;' ' ' <<<"$ELASTICSEARCH_NODE_ROLES")"
-            if [[ " ${roles_list[*]} " = *" master "* ]]; then
-                true
+        if is_boolean_yes "$ELASTICSEARCH_IS_DEDICATED_NODE"; then
+            if [[ -n "$ELASTICSEARCH_NODE_TYPE" ]]; then
+                if [[ "$ELASTICSEARCH_NODE_TYPE" = "master" ]]; then
+                    true
+                else
+                    false
+                fi
             else
-                false
+                read -r -a roles_list <<<"$(tr ',;' ' ' <<<"$ELASTICSEARCH_NODE_ROLES")"
+                if [[ " ${roles_list[*]} " = *" master "* ]]; then
+                    true
+                else
+                    false
+                fi
             fi
         else
-            if [[ "$ELASTICSEARCH_NODE_TYPE" = "master" ]]; then
-                true
-            else 
-                false
-            fi
+            true
         fi
     }
 
@@ -345,28 +387,31 @@ elasticsearch_cluster_configuration() {
         if [[ -n "$ELASTICSEARCH_TOTAL_NODES" ]]; then
             total_nodes=$ELASTICSEARCH_TOTAL_NODES
         fi
-        ELASTICSEARCH_VERSION="$(elasticsearch_get_version)"
-        ELASTICSEARCH_MAJOR_VERSION="$(get_sematic_version "$ELASTICSEARCH_VERSION" 1)"
-        if [[ "$ELASTICSEARCH_MAJOR_VERSION" -le 6 ]]; then
+        es_version="$(elasticsearch_get_version)"
+        es_major_version="$(get_sematic_version "$es_version" 1)"
+        if [[ "$es_major_version" -le 6 ]]; then
+            # discovery.zen.minimum_master_nodes deprecated and ignored in Elasticsearch 7, removed in Elasticsearch 8
+            if [[ -n "$ELASTICSEARCH_MINIMUM_MASTER_NODES" ]]; then
+                debug "Setting minimum master nodes for quorum to $ELASTICSEARCH_MINIMUM_MASTER_NODES..."
+                elasticsearch_conf_set discovery.zen.minimum_master_nodes "$ELASTICSEARCH_MINIMUM_MASTER_NODES"
+            elif [[ "${#host_list[@]}" -gt 2 ]]; then
+                local min_masters=""
+                min_masters=$(((${#host_list[@]} / 2) + 1))
+                debug "Calculating minimum master nodes for quorum: $min_masters..."
+                elasticsearch_conf_set discovery.zen.minimum_master_nodes "$min_masters"
+            fi
+            # Replaced by discovery.seed_hosts in Elasticsearch 7, removed in Elasticsearch 8
             elasticsearch_conf_set discovery.zen.ping.unicast.hosts "${host_list[@]}"
+            # Below settings were removed in Elasticsearch 7.8
+            elasticsearch_conf_set gateway.recover_after_nodes "$(((total_nodes + 1 + 1) / 2))"
+            elasticsearch_conf_set gateway.expected_nodes "$total_nodes"
         else
             elasticsearch_conf_set discovery.seed_hosts "${host_list[@]}"
+            if is_node_type_master; then
+                elasticsearch_conf_set cluster.initial_master_nodes "${master_list[@]}"
+            fi
         fi
         elasticsearch_conf_set discovery.initial_state_timeout "5m"
-        elasticsearch_conf_set gateway.recover_after_nodes "$(((total_nodes + 1 + 1) / 2))"
-        elasticsearch_conf_set gateway.expected_nodes "$total_nodes"
-        if is_node_type_master && [[ "$ELASTICSEARCH_MAJOR_VERSION" -gt 6 ]]; then
-            elasticsearch_conf_set cluster.initial_master_nodes "${master_list[@]}"
-        fi
-        if [[ -n "$ELASTICSEARCH_MINIMUM_MASTER_NODES" ]]; then
-            debug "Setting minimum master nodes for quorum to $ELASTICSEARCH_MINIMUM_MASTER_NODES..."
-            elasticsearch_conf_set discovery.zen.minimum_master_nodes "$ELASTICSEARCH_MINIMUM_MASTER_NODES"
-        elif [[ "${#host_list[@]}" -gt 2 ]]; then
-            local min_masters=""
-            min_masters=$(((${#host_list[@]} / 2) + 1))
-            debug "Calculating minimum master nodes for quorum: $min_masters..."
-            elasticsearch_conf_set discovery.zen.minimum_master_nodes "$min_masters"
-        fi
     else
         elasticsearch_conf_set "discovery.type" "single-node"
     fi
@@ -381,39 +426,50 @@ elasticsearch_cluster_configuration() {
 # Returns:
 #   None
 #########################
-elasticsearch_tls_configuration(){
-    info "Configuring Elasticsearch TLS settings..."
-    elasticsearch_conf_set xpack.security.enabled "true"
-    elasticsearch_conf_set xpack.security.http.ssl.enabled "$ELASTICSEARCH_ENABLE_REST_TLS"
+elasticsearch_transport_tls_configuration(){
+    info "Configuring Elasticsearch Transport TLS settings..."
     elasticsearch_conf_set xpack.security.transport.ssl.enabled "true"
     elasticsearch_conf_set xpack.security.transport.ssl.verification_mode "$ELASTICSEARCH_TLS_VERIFICATION_MODE"
 
-    if is_boolean_yes "$ELASTICSEARCH_TLS_USE_PEM"; then
+    if is_boolean_yes "$ELASTICSEARCH_TRANSPORT_TLS_USE_PEM"; then
         debug "Configuring Transport Layer TLS settings using PEM certificates..."
-        ! is_empty_value "$ELASTICSEARCH_KEY_PASSWORD" && elasticsearch_set_key_value "xpack.security.transport.ssl.secure_key_passphrase" "$ELASTICSEARCH_KEY_PASSWORD"
-        elasticsearch_conf_set xpack.security.transport.ssl.key "$ELASTICSEARCH_NODE_KEY_LOCATION"
-        elasticsearch_conf_set xpack.security.transport.ssl.certificate "$ELASTICSEARCH_NODE_CERT_LOCATION"
-        elasticsearch_conf_set xpack.security.transport.ssl.certificate_authorities "$ELASTICSEARCH_CA_CERT_LOCATION"
-        if is_boolean_yes "$ELASTICSEARCH_ENABLE_REST_TLS"; then
-            debug "Configuring REST API TLS settings using PEM certificates..."
-            ! is_empty_value "$ELASTICSEARCH_KEY_PASSWORD" && elasticsearch_set_key_value "xpack.security.http.ssl.secure_key_passphrase" "$ELASTICSEARCH_KEY_PASSWORD"
-            elasticsearch_conf_set xpack.security.http.ssl.key "$ELASTICSEARCH_NODE_KEY_LOCATION"
-            elasticsearch_conf_set xpack.security.http.ssl.certificate "$ELASTICSEARCH_NODE_CERT_LOCATION"
-            elasticsearch_conf_set xpack.security.http.ssl.certificate_authorities "$ELASTICSEARCH_CA_CERT_LOCATION"
-        fi
+        ! is_empty_value "$ELASTICSEARCH_TRANSPORT_TLS_KEY_PASSWORD" && elasticsearch_set_key_value "xpack.security.transport.ssl.secure_key_passphrase" "$ELASTICSEARCH_TRANSPORT_TLS_KEY_PASSWORD"
+        elasticsearch_conf_set xpack.security.transport.ssl.key "$ELASTICSEARCH_TRANSPORT_TLS_NODE_KEY_LOCATION"
+        elasticsearch_conf_set xpack.security.transport.ssl.certificate "$ELASTICSEARCH_TRANSPORT_TLS_NODE_CERT_LOCATION"
+        elasticsearch_conf_set xpack.security.transport.ssl.certificate_authorities "$ELASTICSEARCH_TRANSPORT_TLS_CA_CERT_LOCATION"
     else
         debug "Configuring Transport Layer TLS settings using JKS/PKCS certificates..."
-        ! is_empty_value "$ELASTICSEARCH_KEYSTORE_PASSWORD" && elasticsearch_set_key_value "xpack.security.transport.ssl.keystore.secure_password" "$ELASTICSEARCH_KEYSTORE_PASSWORD"
-        ! is_empty_value "$ELASTICSEARCH_TRUSTSTORE_PASSWORD" && elasticsearch_set_key_value "xpack.security.transport.ssl.truststore.secure_password" "$ELASTICSEARCH_TRUSTSTORE_PASSWORD"
-        elasticsearch_conf_set xpack.security.transport.ssl.keystore.path "$ELASTICSEARCH_KEYSTORE_LOCATION"
-        elasticsearch_conf_set xpack.security.transport.ssl.truststore.path "$ELASTICSEARCH_TRUSTSTORE_LOCATION"
-        if is_boolean_yes "$ELASTICSEARCH_ENABLE_REST_TLS"; then
-            debug "Configuring REST API TLS settings using JKS/PKCS certificates..."
-            ! is_empty_value "$ELASTICSEARCH_KEYSTORE_PASSWORD" && elasticsearch_set_key_value "xpack.security.http.ssl.keystore.secure_password" "$ELASTICSEARCH_KEYSTORE_PASSWORD"
-            ! is_empty_value "$ELASTICSEARCH_TRUSTSTORE_PASSWORD" && elasticsearch_set_key_value "xpack.security.http.ssl.truststore.secure_password" "$ELASTICSEARCH_TRUSTSTORE_PASSWORD"
-            elasticsearch_conf_set xpack.security.http.ssl.keystore.path "$ELASTICSEARCH_KEYSTORE_LOCATION"
-            elasticsearch_conf_set xpack.security.http.ssl.truststore.path "$ELASTICSEARCH_TRUSTSTORE_LOCATION"
-        fi
+        ! is_empty_value "$ELASTICSEARCH_TRANSPORT_TLS_KEYSTORE_PASSWORD" && elasticsearch_set_key_value "xpack.security.transport.ssl.keystore.secure_password" "$ELASTICSEARCH_TRANSPORT_TLS_KEYSTORE_PASSWORD"
+        ! is_empty_value "$ELASTICSEARCH_TRANSPORT_TLS_TRUSTSTORE_PASSWORD" && elasticsearch_set_key_value "xpack.security.transport.ssl.truststore.secure_password" "$ELASTICSEARCH_TRANSPORT_TLS_TRUSTSTORE_PASSWORD"
+        elasticsearch_conf_set xpack.security.transport.ssl.keystore.path "$ELASTICSEARCH_TRANSPORT_TLS_KEYSTORE_LOCATION"
+        elasticsearch_conf_set xpack.security.transport.ssl.truststore.path "$ELASTICSEARCH_TRANSPORT_TLS_TRUSTSTORE_LOCATION"
+    fi
+}
+
+########################
+# Configure Elasticsearch TLS settings
+# Globals:
+#   ELASTICSEARCH_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_http_tls_configuration(){
+    info "Configuring Elasticsearch HTTP TLS settings..."
+    elasticsearch_conf_set xpack.security.http.ssl.enabled "true"
+    if is_boolean_yes "$ELASTICSEARCH_HTTP_TLS_USE_PEM"; then
+        debug "Configuring REST API TLS settings using PEM certificates..."
+        ! is_empty_value "$ELASTICSEARCH_HTTP_TLS_KEY_PASSWORD" && elasticsearch_set_key_value "xpack.security.http.ssl.secure_key_passphrase" "$ELASTICSEARCH_HTTP_TLS_KEY_PASSWORD"
+        elasticsearch_conf_set xpack.security.http.ssl.key "$ELASTICSEARCH_HTTP_TLS_NODE_KEY_LOCATION"
+        elasticsearch_conf_set xpack.security.http.ssl.certificate "$ELASTICSEARCH_HTTP_TLS_NODE_CERT_LOCATION"
+        elasticsearch_conf_set xpack.security.http.ssl.certificate_authorities "$ELASTICSEARCH_HTTP_TLS_CA_CERT_LOCATION"
+    else
+        debug "Configuring REST API TLS settings using JKS/PKCS certificates..."
+        ! is_empty_value "$ELASTICSEARCH_HTTP_TLS_KEYSTORE_PASSWORD" && elasticsearch_set_key_value "xpack.security.http.ssl.keystore.secure_password" "$ELASTICSEARCH_HTTP_TLS_KEYSTORE_PASSWORD"
+        ! is_empty_value "$ELASTICSEARCH_HTTP_TLS_TRUSTSTORE_PASSWORD" && elasticsearch_set_key_value "xpack.security.http.ssl.truststore.secure_password" "$ELASTICSEARCH_HTTP_TLS_TRUSTSTORE_PASSWORD"
+        elasticsearch_conf_set xpack.security.http.ssl.keystore.path "$ELASTICSEARCH_HTTP_TLS_KEYSTORE_LOCATION"
+        elasticsearch_conf_set xpack.security.http.ssl.truststore.path "$ELASTICSEARCH_HTTP_TLS_TRUSTSTORE_LOCATION"
     fi
 }
 
@@ -469,6 +525,7 @@ elasticsearch_configure_node_type() {
     else
         is_master="true"
         is_data="true"
+        is_ingest="true"
     fi
     debug "Configure Elasticsearch Node type..."
     elasticsearch_conf_set node.master "$is_master"
@@ -483,7 +540,14 @@ elasticsearch_configure_node_type() {
 }
 
 ########################
-# Configure Elasticsearch node roles
+# Configure Elasticsearch node roles.
+# There are 3 scenarios:
+# * If ELASTICSEARCH_IS_DEDICATED_NODE is disabled, 'node.roles' is omitted and Elasticsearch assumes all the roles (check docs).
+# * Otherwise, 'node.roles' with a list of roles provided with ELASTICSEARCH_NODE_ROLES.
+# * In addition, if ELASTICSEARCH_NODE_ROLES is empty, node.roles will be configured empty, meaning that the role is 'coordinating-only'.
+#
+# Docs ref: https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html
+#
 # Globals:
 #  ELASTICSEARCH_*
 # Arguments:
@@ -496,16 +560,21 @@ elasticsearch_configure_node_roles() {
 
     local set_repo_path="no"
     read -r -a roles_list <<<"$(tr ',;' ' ' <<<"$ELASTICSEARCH_NODE_ROLES")"
-    elasticsearch_conf_set node.roles "${roles_list[@]}"
-    
-    for role in "${roles_list[@]}"; do
-        case "$role" in
-            master | data | data_content | data_hot | data_warm | data_cold | data_frozen)
-                set_repo_path="yes"
-                ;;
-            *) ;;
-        esac
-    done
+    if is_boolean_yes "$ELASTICSEARCH_IS_DEDICATED_NODE"; then
+        elasticsearch_conf_set node.roles "${roles_list[@]}"
+        for role in "${roles_list[@]}"; do
+            case "$role" in
+                master | data | data_content | data_hot | data_warm | data_cold | data_frozen)
+                    set_repo_path="yes"
+                    ;;
+                *) ;;
+            esac
+        done
+    else
+        set_repo_path="yes"
+    fi
+
+
 
     if is_boolean_yes "$set_repo_path" && [[ -n "$ELASTICSEARCH_FS_SNAPSHOT_REPO_PATH" ]]; then
         # Configure path.repo to restore snapshots from system repository
@@ -563,12 +632,16 @@ elasticsearch_set_heap_size() {
     debug "Setting '-Xmx${heap_size} -Xms${heap_size}' heap options..."
     # Elasticsearch > 7.10 encourages to customize the heap settings through a file in 'jvm.options.d'
     # Previous versions need to update the 'jvm.options' file
-    if [[ "$es_major_version" -ge 7 && "$es_minor_version" -gt 10 ]]; then
+    if [[ "$es_major_version" -ge 8 ]] || [[ "$es_major_version" -ge 7 && "$es_minor_version" -gt 10 ]]; then
         debug "Setting Xmx and Xms options in heap.options file"
         cat >"${ELASTICSEARCH_CONF_DIR}/jvm.options.d/heap.options" <<EOF
 -Xms${heap_size}
 -Xmx${heap_size}
 EOF
+        am_i_root && chown "$ELASTICSEARCH_DAEMON_USER:$ELASTICSEARCH_DAEMON_GROUP" "${ELASTICSEARCH_CONF_DIR}/jvm.options.d/heap.options"
+
+        # Avoid exit code of previous commands to affect the result of this function
+        true
     elif [[ -n "$es_major_version" ]]; then
         # If the version is less than 7.10, set using the legacy approach by updating the 'jvm.options' file
         debug "Updating Xmx and Xms values in jvm.options file"
@@ -647,32 +720,35 @@ elasticsearch_initialize() {
         am_i_root && is_mounted_dir_empty "$dir" && chown -R "$ELASTICSEARCH_DAEMON_USER:$ELASTICSEARCH_DAEMON_GROUP" "$dir"
     done
 
+    es_version="$(elasticsearch_get_version)"
+    es_major_version="$(get_sematic_version "$es_version" 1)"
+    es_minor_version="$(get_sematic_version "$es_version" 2)"
+
     if [[ -f "$ELASTICSEARCH_CONF_FILE" ]]; then
         info "Custom configuration file detected, using it..."
     else
         info "Setting default configuration"
         touch "$ELASTICSEARCH_CONF_FILE"
-        elasticsearch_conf_set http.port "$ELASTICSEARCH_PORT_NUMBER"
+        elasticsearch_conf_set http.port "$ELASTICSEARCH_HTTP_PORT_NUMBER"
         elasticsearch_conf_set path.data "${data_dirs_list[@]}"
-        elasticsearch_conf_set transport.tcp.port "$ELASTICSEARCH_NODE_PORT_NUMBER"
-        is_boolean_yes "$ELASTICSEARCH_ACTION_DESTRUCTIVE_REQUIRES_NAME" && elasticsearch_conf_set action.destructive_requires_name "true"
+        elasticsearch_conf_set transport.port "$ELASTICSEARCH_TRANSPORT_PORT_NUMBER"
+        [[ -n "$ELASTICSEARCH_ACTION_DESTRUCTIVE_REQUIRES_NAME" ]] && elasticsearch_conf_set action.destructive_requires_name "$(is_boolean_yes "$ELASTICSEARCH_ACTION_DESTRUCTIVE_REQUIRES_NAME" && echo "true" || echo "false")"
         is_boolean_yes "$ELASTICSEARCH_LOCK_ALL_MEMORY" && elasticsearch_conf_set bootstrap.memory_lock "true"
         elasticsearch_cluster_configuration
-        if is_boolean_yes "$ELASTICSEARCH_USE_NODE_ROLES"; then
-            elasticsearch_configure_node_roles
-        else
+        if [[ -n "$ELASTICSEARCH_NODE_TYPE" ]]; then
             elasticsearch_configure_node_type
+        else
+            elasticsearch_configure_node_roles
         fi
         elasticsearch_custom_configuration
-        ELASTICSEARCH_VERSION="$(elasticsearch_get_version)"
-        ELASTICSEARCH_MAJOR_VERSION="$(get_sematic_version "$ELASTICSEARCH_VERSION" 1)"
-        ELASTICSEARCH_MINOR_VERSION="$(get_sematic_version "$ELASTICSEARCH_VERSION" 2)"
         # X-Pack settings.
         # Elasticsearch <= 7.10.2 is packaged without x-pack.
-        if [[ "$ELASTICSEARCH_MAJOR_VERSION" -ge 7 && "$ELASTICSEARCH_MINOR_VERSION" -gt 10 ]]; then
+        if [[ "$es_major_version" -ge 8 ]] || [[ "$es_major_version" -ge 7 && "$es_minor_version" -gt 10 ]]; then
+            elasticsearch_conf_set xpack.security.enabled "$(is_boolean_yes "$ELASTICSEARCH_ENABLE_SECURITY" && echo "true" || echo "false")"
+            ! is_empty_value "$ELASTICSEARCH_PASSWORD" && elasticsearch_set_key_value "bootstrap.password" "$ELASTICSEARCH_PASSWORD"
             if is_boolean_yes "$ELASTICSEARCH_ENABLE_SECURITY"; then
-                elasticsearch_set_key_value "bootstrap.password" "$ELASTICSEARCH_PASSWORD"
-                elasticsearch_tls_configuration
+                is_boolean_yes "$ELASTICSEARCH_ENABLE_REST_TLS" && elasticsearch_http_tls_configuration
+                ! is_boolean_yes "$ELASTICSEARCH_SKIP_TRANSPORT_TLS" && elasticsearch_transport_tls_configuration
                 if is_boolean_yes "$ELASTICSEARCH_ENABLE_FIPS_MODE"; then
                     elasticsearch_conf_set xpack.security.fips_mode.enabled "true"
                     elasticsearch_conf_set xpack.security.authc.password_hashing.algorithm "pbkdf2"
@@ -690,8 +766,6 @@ elasticsearch_initialize() {
         fi
     fi
 
-    es_version="$(elasticsearch_get_version)"
-    es_major_version="$(get_sematic_version "$es_version" 1)"
     if is_file_writable "${ELASTICSEARCH_CONF_DIR}/jvm.options" && ([[ "$es_major_version" -le 6 ]] || is_file_writable "${ELASTICSEARCH_CONF_DIR}/jvm.options.d"); then
         if is_boolean_yes "$ELASTICSEARCH_DISABLE_JVM_HEAP_DUMP"; then
             info "Disabling JVM heap dumps..."
@@ -803,6 +877,10 @@ elasticsearch_set_key_value() {
 
     debug "Storing key: ${key}"
     elasticsearch-keystore add --stdin --force "$key" <<<"$value"
+
+    am_i_root && chown "$ELASTICSEARCH_DAEMON_USER:$ELASTICSEARCH_DAEMON_GROUP" "${ELASTICSEARCH_CONF_DIR}/elasticsearch.keystore"
+    # Avoid exit code of previous commands to affect the result of this function
+    true
 }
 
 ########################
@@ -851,7 +929,13 @@ elasticsearch_custom_init_scripts() {
 #   version
 #########################
 elasticsearch_get_version() {
-    ES_JAVA_OPTS="-Xms1m -Xmx10m" elasticsearch --version | grep Version: | awk -F "," '{print $1}' | awk -F ":" '{print $2}'
+    if [[ -f "$ELASTICSEARCH_CONF_FILE" ]]; then
+        ES_JAVA_OPTS="-Xms1m -Xmx20m" elasticsearch --version | grep Version: | awk -F "," '{print $1}' | awk -F ":" '{print $2}'
+    else
+        touch "$ELASTICSEARCH_CONF_FILE"
+        ES_JAVA_OPTS="-Xms1m -Xmx20m" elasticsearch --version | grep Version: | awk -F "," '{print $1}' | awk -F ":" '{print $2}'
+        rm "$ELASTICSEARCH_CONF_FILE"
+    fi
 }
 
 ########################
@@ -909,7 +993,7 @@ elasticsearch_healthcheck() {
     is_boolean_yes "$ELASTICSEARCH_ENABLE_REST_TLS" && protocol="https" && command_args+=("-k")
     is_boolean_yes "$ELASTICSEARCH_ENABLE_SECURITY" && command_args+=("--user" "elastic:${ELASTICSEARCH_PASSWORD}")
 
-    command_args+=("${protocol}://${host}:${ELASTICSEARCH_PORT_NUMBER}/_cluster/health?local=true")
+    command_args+=("${protocol}://${host}:${ELASTICSEARCH_HTTP_PORT_NUMBER}/_cluster/health?local=true")
 
     if ! "$exec" "${command_args[@]}" >/dev/null; then
         return 1
