@@ -48,7 +48,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.17.2`, `7.17.2-debian-10-r1`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.17.2-debian-10-r1/7/debian-10/Dockerfile)
+* [`8`, `8-debian-10`, `8.1.2`, `8.1.2-debian-10-r-1`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/8.1.2-debian-10-r-1/8/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.17.2`, `7.17.2-debian-10-r2` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.17.2-debian-10-r2/7/debian-10/Dockerfile)
 * [`6`, `6-debian-10`, `6.8.23`, `6.8.23-debian-10-r76` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/6.8.23-debian-10-r76/6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch).
@@ -69,7 +70,7 @@ $ docker pull bitnami/elasticsearch:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/elasticsearch:latest 'https://github.com/bitnami/bitnami-docker-elasticsearch.git#master:7/debian-10'
+$ docker build -t bitnami/elasticsearch:latest 'https://github.com/bitnami/bitnami-docker-elasticsearch.git#master:8/debian-10'
 ```
 
 ## Persisting your application
