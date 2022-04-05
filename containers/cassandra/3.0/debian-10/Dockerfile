@@ -27,7 +27,7 @@ RUN /opt/bitnami/scripts/cassandra/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="3.0.26" \
     BITNAMI_APP_NAME="cassandra" \
-    BITNAMI_IMAGE_VERSION="3.0.26-debian-10-r49" \
+    BITNAMI_IMAGE_VERSION="3.0.26-debian-10-r50" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/cassandra/bin:$PATH"
 
