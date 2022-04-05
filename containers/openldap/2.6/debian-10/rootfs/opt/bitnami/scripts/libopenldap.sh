@@ -474,7 +474,7 @@ ldap_initialize() {
         fi
         if ! is_dir_empty "$LDAP_CUSTOM_LDIF_DIR"; then
             ldap_add_custom_ldifs
-        elif is_boolean_no "$LDAP_SKIP_DEFAULT_TREE"; then
+        elif ! is_boolean_yes "$LDAP_SKIP_DEFAULT_TREE"; then
             ldap_create_tree
         else
             info "Skipping default schemas/tree structure"
