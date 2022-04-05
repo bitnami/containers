@@ -22,10 +22,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "5804e270fbfe723a104662e4ca39f71f661827b0eeb870e8acf63b28d63276d0",
+        "digest": "87ccb74e0bc94674ae0183d7e805e30cc564be7cba337675d27679c36bea8930",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.4.28-13"
+        "version": "8.0.17-8"
     },
     "qatengine": {
         "arch": "amd64",
