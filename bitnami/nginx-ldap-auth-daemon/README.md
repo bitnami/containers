@@ -1,3 +1,7 @@
+# DEPRECATION NOTICE
+
+Since the upstream project is not maintained, this image has been deprecated, and will no longer be maintained nor updated.
+
 # NGINX LDAP Auth daemon packaged by Bitnami
 
 ## What is NGINX LDAP Auth daemon?
