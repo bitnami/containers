@@ -20,7 +20,6 @@ RUN mkdir -p "/cosign-keys" && chmod -R 777 "/cosign-keys"
 
 ENV APP_VERSION="1.7.1" \
     BITNAMI_APP_NAME="cosign" \
-    BITNAMI_IMAGE_VERSION="1.7.1-debian-10-r0" \
     PATH="/opt/bitnami/cosign/bin:$PATH"
 
 WORKDIR /cosign-keys
