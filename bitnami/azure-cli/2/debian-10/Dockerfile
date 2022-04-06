@@ -13,18 +13,18 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "3d9135de077d698658de5a6ff002895d4fc15bac71f02fe910b8df45acbd2ec6  /tmp/bitnami/pkg/cache/python-3.7.13-2-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/python-3.7.13-2-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/python-3.7.13-2-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/azure-cli-2.34.1-0-linux-amd64-debian-10.tar.gz && \
-    echo "74cf274a1e6e50e76865a16e55fe613c61e5a6876b51f20cec0e8375e3078206  /tmp/bitnami/pkg/cache/azure-cli-2.34.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/azure-cli-2.34.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/azure-cli-2.34.1-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/azure-cli-2.35.0-0-linux-amd64-debian-10.tar.gz && \
+    echo "b3e627a0eb5788fc54d3be8b570f2906417f61955c3511da48348e36542827b9  /tmp/bitnami/pkg/cache/azure-cli-2.35.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/azure-cli-2.35.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/azure-cli-2.35.0-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /.azure /.azcopy && chmod g+rwX /.azure /.azcopy /bin
 
-ENV APP_VERSION="2.34.1" \
+ENV APP_VERSION="2.35.0" \
     BITNAMI_APP_NAME="azure-cli" \
-    BITNAMI_IMAGE_VERSION="2.34.1-debian-10-r32" \
+    BITNAMI_IMAGE_VERSION="2.35.0-debian-10-r0" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/azure-cli/bin:/opt/bitnami/azure-cli/venv/bin:$PATH"
 
 USER 1001
