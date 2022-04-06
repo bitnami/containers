@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="0.12.1" \
     BITNAMI_APP_NAME="metallb-controller" \
-    BITNAMI_IMAGE_VERSION="0.12.1-debian-10-r45" \
+    BITNAMI_IMAGE_VERSION="0.12.1-debian-10-r46" \
     PATH="/opt/bitnami/metallb/bin:$PATH"
 
 USER 1001
