@@ -22,7 +22,7 @@ RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/symfony/postunpack.sh
 ENV APP_VERSION="6.0.7" \
     BITNAMI_APP_NAME="symfony" \
-    BITNAMI_IMAGE_VERSION="6.0.7-debian-10-r1" \
+    BITNAMI_IMAGE_VERSION="6.0.7-debian-10-r2" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/symfony/bin:/opt/bitnami/common/bin:$PATH" \
     PHP_ENABLE_OPCACHE="0"
 
