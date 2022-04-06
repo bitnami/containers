@@ -23,8 +23,7 @@ RUN ln -s /opt/bitnami/scripts/zookeeper/run.sh /run.sh
 COPY rootfs /
 RUN /opt/bitnami/scripts/zookeeper/postunpack.sh
 ENV APP_VERSION="3.8.0" \
-    BITNAMI_APP_NAME="zookeeper" \
-    BITNAMI_IMAGE_VERSION="3.8.0-debian-10-r20"
+    BITNAMI_APP_NAME="zookeeper"
 
 EXPOSE 2181 2888 3888 8080
 
