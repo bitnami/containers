@@ -268,14 +268,8 @@ elasticsearch_validate() {
         if [[ -n "$ELASTICSEARCH_NODE_TYPE" ]] && [[ "$es_major_version" -ge 8 ]] ; then
             print_validation_error "Setting ELASTICSEARCH_NODE_TYPE is not available when using Elasticsearch 8, use ELASTICSEARCH_NODE_ROLES instead."
         fi
-        # Node roles introduced in Elasticsearch 7
-        if [[ -n "$ELASTICSEARCH_NODE_ROLES" ]] && [[ "$es_major_version" -lt 7 ]] ; then
-            print_validation_error "Setting ELASTICSEARCH_NODE_ROLES is not available when using Elasticsearch 6, use ELASTICSEARCH_NODE_TYPE instead."
-        fi
 
-        if [[ "$es_major_version" -le 6 ]]; then
-            validate_node_type
-        elif [[ "$es_major_version" -ge 8 ]]; then
+        if [[ "$es_major_version" -ge 8 ]]; then
             validate_node_roles
         elif [[ "$es_major_version" -eq 7 ]]; then
             if [[ -n "$ELASTICSEARCH_NODE_TYPE" ]]; then
@@ -389,27 +383,9 @@ elasticsearch_cluster_configuration() {
         fi
         es_version="$(elasticsearch_get_version)"
         es_major_version="$(get_sematic_version "$es_version" 1)"
-        if [[ "$es_major_version" -le 6 ]]; then
-            # discovery.zen.minimum_master_nodes deprecated and ignored in Elasticsearch 7, removed in Elasticsearch 8
-            if [[ -n "$ELASTICSEARCH_MINIMUM_MASTER_NODES" ]]; then
-                debug "Setting minimum master nodes for quorum to $ELASTICSEARCH_MINIMUM_MASTER_NODES..."
-                elasticsearch_conf_set discovery.zen.minimum_master_nodes "$ELASTICSEARCH_MINIMUM_MASTER_NODES"
-            elif [[ "${#host_list[@]}" -gt 2 ]]; then
-                local min_masters=""
-                min_masters=$(((${#host_list[@]} / 2) + 1))
-                debug "Calculating minimum master nodes for quorum: $min_masters..."
-                elasticsearch_conf_set discovery.zen.minimum_master_nodes "$min_masters"
-            fi
-            # Replaced by discovery.seed_hosts in Elasticsearch 7, removed in Elasticsearch 8
-            elasticsearch_conf_set discovery.zen.ping.unicast.hosts "${host_list[@]}"
-            # Below settings were removed in Elasticsearch 7.8
-            elasticsearch_conf_set gateway.recover_after_nodes "$(((total_nodes + 1 + 1) / 2))"
-            elasticsearch_conf_set gateway.expected_nodes "$total_nodes"
-        else
-            elasticsearch_conf_set discovery.seed_hosts "${host_list[@]}"
-            if is_node_type_master; then
-                elasticsearch_conf_set cluster.initial_master_nodes "${master_list[@]}"
-            fi
+        elasticsearch_conf_set discovery.seed_hosts "${host_list[@]}"
+        if is_node_type_master; then
+            elasticsearch_conf_set cluster.initial_master_nodes "${master_list[@]}"
         fi
         elasticsearch_conf_set discovery.initial_state_timeout "5m"
     else
@@ -766,7 +742,7 @@ elasticsearch_initialize() {
         fi
     fi
 
-    if is_file_writable "${ELASTICSEARCH_CONF_DIR}/jvm.options" && ([[ "$es_major_version" -le 6 ]] || is_file_writable "${ELASTICSEARCH_CONF_DIR}/jvm.options.d"); then
+    if is_file_writable "${ELASTICSEARCH_CONF_DIR}/jvm.options" && is_file_writable "${ELASTICSEARCH_CONF_DIR}/jvm.options.d"; then
         if is_boolean_yes "$ELASTICSEARCH_DISABLE_JVM_HEAP_DUMP"; then
             info "Disabling JVM heap dumps..."
             replace_in_file "${ELASTICSEARCH_CONF_DIR}/jvm.options" "-XX:[+]HeapDumpOnOutOfMemoryError" "# -XX:+HeapDumpOnOutOfMemoryError"
