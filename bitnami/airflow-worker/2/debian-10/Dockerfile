@@ -31,7 +31,7 @@ RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
     APP_VERSION="2.2.5" \
     BITNAMI_APP_NAME="airflow-worker" \
-    BITNAMI_IMAGE_VERSION="2.2.5-debian-10-r0" \
+    BITNAMI_IMAGE_VERSION="2.2.5-debian-10-r1" \
     C_FORCE_ROOT="True" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
