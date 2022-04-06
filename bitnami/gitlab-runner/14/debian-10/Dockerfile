@@ -21,7 +21,7 @@ COPY rootfs /
 RUN mkdir /home/gitlab-runner && chmod -R g+rwX /home/gitlab-runner && ln -s /opt/bitnami/common/bin/dumb-init /usr/bin/dumb-init && ln -s /opt/bitnami/scripts/gitlab-runner/entrypoint.sh /entrypoint
 ENV APP_VERSION="14.9.1" \
     BITNAMI_APP_NAME="gitlab-runner" \
-    BITNAMI_IMAGE_VERSION="14.9.1-debian-10-r13" \
+    BITNAMI_IMAGE_VERSION="14.9.1-debian-10-r14" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/gitlab-runner/bin:$PATH"
 
 USER 1001
