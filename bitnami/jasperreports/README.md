@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`8`, `8-debian-10`, `8.0.0`, `8.0.0-debian-10-r16`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/8.0.0-debian-10-r16/8/debian-10/Dockerfile)
+- [`8`, `8-debian-10`, `8.0.0`, `8.0.0-debian-10-r17`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jasperreports/blob/8.0.0-debian-10-r17/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jasperreports GitHub repo](https://github.com/bitnami/bitnami-docker-jasperreports).
 
@@ -482,6 +482,10 @@ If you encountered a problem running this container, you can file an [issue](htt
 - Output of `docker info`
 - Version of this container
 - The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+
+## Branch Deprecation Notice
+
+JasperReports's branch 7.x.x is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 05-05-2022
 
 ### Community supported solution
 
