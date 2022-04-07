@@ -4,7 +4,7 @@
 
 > Kubeapps Pinniped Proxy is one of the main components of Kubeapps, a Web-based application deployment and management tool for Kubernetes clusters. It is used to handle OIDC requests.
 
-[Overview of Kubeapps Pinniped Proxy](https://github.com/kubeapps/kubeapps)
+[Overview of Kubeapps Pinniped Proxy](https://github.com/vmware-tanzu/kubeapps)
 
 
 
@@ -35,11 +35,11 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.4.4`, `2.4.4-debian-10-r6`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-pinniped-proxy/blob/2.4.4-debian-10-r6/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.4.4`, `2.4.4-debian-10-r7`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-pinniped-proxy/blob/2.4.4-debian-10-r7/2/debian-10/Dockerfile)
 
 ## Configuration
 
-For further documentation, please check [here](https://github.com/kubeapps/kubeapps/tree/master/cmd/pinniped-proxy).
+For further documentation, please check [here](https://github.com/vmware-tanzu/kubeapps/tree/master/cmd/pinniped-proxy).
 
 ## Contributing
 
