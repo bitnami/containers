@@ -227,6 +227,8 @@ The configuration can easily be setup with the Bitnami Apache ZooKeeper Docker i
  - `ZOO_ENABLE_ADMIN_SERVER`: Enable [admin server](https://zookeeper.apache.org/doc/r3.5.7/zookeeperAdmin.html#sc_adminserver). Default: **yes**
  - `ZOO_ADMIN_SERVER_PORT_NUMBER`: [Admin server](https://zookeeper.apache.org/doc/r3.5.7/zookeeperAdmin.html#sc_adminserver) port. Default: **8080**
 
+Additionally, any environment variable beginning with `ZOO_CFG_` can be used to configure any Zookeeper parameter. For example, use `ZOO_CFG_ssl_quorum_hostnameVerification` in order to configure `ssl.quorum.hostnameVerification`.
+
 ```console
 $ docker run --name zookeeper -e ZOO_SERVER_ID=1 bitnami/zookeeper:latest
 ```
