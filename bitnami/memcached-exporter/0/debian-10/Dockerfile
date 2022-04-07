@@ -19,7 +19,6 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="0.9.0" \
     BITNAMI_APP_NAME="memcached-exporter" \
-    BITNAMI_IMAGE_VERSION="0.9.0-debian-10-r349" \
     PATH="/opt/bitnami/memcached-exporter/bin:$PATH"
 
 EXPOSE 9150
