@@ -26,7 +26,6 @@ RUN /opt/bitnami/scripts/elasticsearch/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="7.17.2" \
     BITNAMI_APP_NAME="elasticsearch" \
-    BITNAMI_IMAGE_VERSION="7.17.2-debian-10-r4" \
     ES_JAVA_HOME="/opt/bitnami/java" \
     JAVA_HOME="/opt/bitnami/java" \
     LD_LIBRARY_PATH="/opt/bitnami/elasticsearch/jdk/lib:/opt/bitnami/elasticsearch/jdk/lib/server:$LD_LIBRARY_PATH"
