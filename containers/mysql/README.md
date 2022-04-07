@@ -50,7 +50,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8.0`, `8.0-debian-10`, `8.0.28`, `8.0.28-debian-10-r61`, `latest` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.28-debian-10-r61/8.0/debian-10/Dockerfile)
+* [`8.0`, `8.0-debian-10`, `8.0.28`, `8.0.28-debian-10-r62`, `latest` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.28-debian-10-r62/8.0/debian-10/Dockerfile)
 * [`5.7`, `5.7-debian-10`, `5.7.37`, `5.7.37-debian-10-r77` (5.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.37-debian-10-r77/5.7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mysql GitHub repo](https://github.com/bitnami/bitnami-docker-mysql).
@@ -520,6 +520,13 @@ $ docker-compose logs mysql
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+
+### Slow query logs
+
+By default MySQL doesn't enable [slow query log](https://dev.mysql.com/doc/refman/8.0/en/slow-query-log.html) to record the SQL queries that take a long time to perform. You can modify these settings using the following environment variables:
+
+- `MYSQL_ENABLE_SLOW_QUERY`: Whether to enable slow query logs. Default: `0`
+- `MYSQL_LONG_QUERY_TIME`: How much time, in seconds, defines a slow query. Default: `10.0`
 
 ### Slow filesystems
 
