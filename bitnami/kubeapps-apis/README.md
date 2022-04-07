@@ -4,7 +4,7 @@
 
 > The Kubeapps APIs are a component of the Kubeapps application. They are a collection of APIs for creating user experiences to manage packaged Kubernetes applications.
 
-[Overview of Kubeapps APIs](https://kubeapps.com/)
+[Overview of Kubeapps APIs](https://github.com/vmware-tanzu/kubeapps)
 
 
 
@@ -35,11 +35,11 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.4.4`, `2.4.4-debian-10-r6`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-apis/blob/2.4.4-debian-10-r6/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.4.4`, `2.4.4-debian-10-r7`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-apis/blob/2.4.4-debian-10-r7/2/debian-10/Dockerfile)
 
 ## Configuration
 
-For further documentation, please check [here](https://github.com/kubeapps/kubeapps/tree/master/cmd/kubeapps-apis).
+For further documentation, please check [here](https://github.com/vmware-tanzu/kubeapps/tree/main/cmd/kubeapps-apis).
 
 ## Contributing
 
