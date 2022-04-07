@@ -19,7 +19,6 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/minio-client/postunpack.sh
 ENV APP_VERSION="2022.4.1" \
     BITNAMI_APP_NAME="minio-client" \
-    BITNAMI_IMAGE_VERSION="2022.4.1-debian-10-r4" \
     PATH="/opt/bitnami/minio-client/bin:/opt/bitnami/common/bin:$PATH"
 
 WORKDIR /opt/bitnami/minio-client
