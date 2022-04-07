@@ -4,7 +4,7 @@
 
 > Kubeapps is a web-based UI for launching and managing applications on Kubernetes. It allows users to deploy trusted applications and operators to control users access to the cluster.
 
-[Overview of Kubeapps](https://kubeapps.com)
+[Overview of Kubeapps](https://github.com/vmware-tanzu/kubeapps)
 
 
 
@@ -39,11 +39,11 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.4.3`, `2.4.3-debian-10-r43`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-dashboard/blob/2.4.3-debian-10-r43/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.4.4`, `2.4.4-debian-10-r0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-dashboard/blob/2.4.4-debian-10-r0/2/debian-10/Dockerfile)
 
 ## Configuration
 
-For further documentation, please check [here](https://github.com/kubeapps/kubeapps/tree/master/docs).
+For further documentation, please check [here](https://github.com/vmware-tanzu/kubeapps/tree/main/docs).
 
 ## Contributing
 
