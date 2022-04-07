@@ -4,7 +4,7 @@
 
 > Kubeapps Kubeops is one of the main components of Kubeapps, a Web-based application deployment and management tool for Kubernetes clusters. It adds an endpoint to access the Helm API & K8s resources.
 
-[Overview of Kubeapps Kubeops](https://github.com/kubeapps/kubeapps)
+[Overview of Kubeapps Kubeops](https://github.com/vmware-tanzu/kubeapps)
 
 
 
@@ -35,11 +35,11 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-scratch`, `2.4.4`, `2.4.4-scratch-r0`, `latest` (2/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-kubeops/blob/2.4.4-scratch-r0/2/scratch/Dockerfile)
+* [`2`, `2-scratch`, `2.4.4`, `2.4.4-scratch-r1`, `latest` (2/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-kubeops/blob/2.4.4-scratch-r1/2/scratch/Dockerfile)
 
 ## Configuration
 
-For further documentation, please check [here](https://github.com/kubeapps/kubeapps/tree/master/cmd/kubeops).
+For further documentation, please check [here](https://github.com/vmware-tanzu/kubeapps/tree/master/cmd/kubeops).
 
 ## Contributing
 
