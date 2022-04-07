@@ -19,7 +19,6 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="2.4.4" \
     BITNAMI_APP_NAME="kubeapps-pinniped-proxy" \
-    BITNAMI_IMAGE_VERSION="2.4.4-debian-10-r5" \
     PATH="/opt/bitnami/kubeapps-pinniped-proxy/bin:$PATH"
 
 USER 1001
