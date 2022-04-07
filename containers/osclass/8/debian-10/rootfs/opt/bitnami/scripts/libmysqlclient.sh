@@ -132,10 +132,14 @@ mysql_client_initialize() {
 #   None
 #########################
 mysql_client_wrap_binary_for_ssl() {
-    local -r wrapper_file="${DB_BIN_DIR}/mysql"
+    local wrapper_file="${DB_BIN_DIR}/mysql"
+    # In MySQL Client 10.6, mysql is a link to the mariadb binary
+    if [[ -f "${DB_BIN_DIR}/mariadb" ]]; then
+        wrapper_file="${DB_BIN_DIR}/mariadb"
+    fi
     local -r wrapped_binary_file="${DB_BASE_DIR}/.bin/mysql"
     local -a ssl_opts=()
-    read -r -a ssl_opts <<< "$(mysql_client_extra_opts)"
+    read -r -a ssl_opts <<<"$(mysql_client_extra_opts)"
 
     mv "$wrapper_file" "$wrapped_binary_file"
     cat >"$wrapper_file" <<EOF
