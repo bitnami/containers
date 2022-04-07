@@ -132,10 +132,14 @@ mysql_client_initialize() {
 #   None
 #########################
 mysql_client_wrap_binary_for_ssl() {
-    local -r wrapper_file="${DB_BIN_DIR}/mysql"
+    local wrapper_file="${DB_BIN_DIR}/mysql"
+    # In MySQL Client 10.6, mysql is a link to the mariadb binary
+    if [[ -f "${DB_BIN_DIR}/mariadb" ]]; then
+        wrapper_file="${DB_BIN_DIR}/mariadb"
+    fi
     local -r wrapped_binary_file="${DB_BASE_DIR}/.bin/mysql"
     local -a ssl_opts=()
-    read -r -a ssl_opts <<< "$(mysql_client_extra_opts)"
+    read -r -a ssl_opts <<<"$(mysql_client_extra_opts)"
 
     mv "$wrapper_file" "$wrapped_binary_file"
     cat >"$wrapper_file" <<EOF
@@ -975,6 +979,8 @@ mysql_update_custom_config() {
     ! is_empty_value "$DB_BIND_ADDRESS" && mysql_conf_set "bind_address" "$DB_BIND_ADDRESS"
     ! is_empty_value "$DB_AUTHENTICATION_PLUGIN" && mysql_conf_set "default_authentication_plugin" "$DB_AUTHENTICATION_PLUGIN"
     ! is_empty_value "$DB_SQL_MODE" && mysql_conf_set "sql_mode" "$DB_SQL_MODE"
+    ! is_empty_value "$DB_ENABLE_SLOW_QUERY" && mysql_conf_set "slow_query_log" "$DB_ENABLE_SLOW_QUERY"
+    ! is_empty_value "$DB_LONG_QUERY_TIME" && mysql_conf_set "long_query_time" "$DB_LONG_QUERY_TIME"
 
     # Avoid exit code of previous commands to affect the result of this function
     true
