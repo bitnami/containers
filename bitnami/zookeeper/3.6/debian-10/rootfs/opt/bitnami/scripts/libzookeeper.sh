@@ -146,6 +146,24 @@ zookeeper_initialize() {
 }
 
 ########################
+# Configure Zookeeper configuration files from environment variables
+# Globals:
+#   ZOO_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+zookeeper_configure_from_environment_variables() {
+    # Map environment variables to config properties
+    for var in "${!ZOO_CFG_@}"; do
+        key="$(echo "$var" | sed -e 's/^ZOO_CFG_//g' -e 's/_/\./g')"
+        value="${!var}"
+        zookeeper_conf_set "$ZOO_CONF_FILE" "$key" "$value"
+    done
+}
+
+########################
 # Generate the configuration files for ZooKeeper
 # Globals:
 #   ZOO_*
@@ -224,6 +242,8 @@ zookeeper_generate_conf() {
         zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.trustStore.location "$ZOO_TLS_QUORUM_TRUSTSTORE_FILE"
         [[ -n "$ZOO_TLS_QUORUM_TRUSTSTORE_PASSWORD" ]] && zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.trustStore.password "$ZOO_TLS_QUORUM_TRUSTSTORE_PASSWORD"
     fi
+
+    zookeeper_configure_from_environment_variables
 }
 
 ########################
