@@ -54,7 +54,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3.8`, `3.8-debian-10`, `3.8.0`, `3.8.0-debian-10-r21`, `latest` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.8.0-debian-10-r21/3.8/debian-10/Dockerfile)
-* [`3.7`, `3.7-debian-10`, `3.7.0`, `3.7.0-debian-10-r340` (3.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.7.0-debian-10-r340/3.7/debian-10/Dockerfile)
+* [`3.7`, `3.7-debian-10`, `3.7.0`, `3.7.0-debian-10-r341` (3.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.7.0-debian-10-r341/3.7/debian-10/Dockerfile)
 * [`3.6`, `3.6-debian-10`, `3.6.3`, `3.6.3-debian-10-r298` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.6.3-debian-10-r298/3.6/debian-10/Dockerfile)
 * [`3.5`, `3.5-debian-10`, `3.5.9`, `3.5.9-debian-10-r179` (3.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.5.9-debian-10-r179/3.5/debian-10/Dockerfile)
 
@@ -226,8 +226,6 @@ The configuration can easily be setup with the Bitnami Apache ZooKeeper Docker i
  - `ZOO_TLS_QUORUM_CLIENT_AUTH`: Specifies options to authenticate TLS connections from clients. Available values are: `none`, `want`, `need`. Default: **need**
  - `ZOO_ENABLE_ADMIN_SERVER`: Enable [admin server](https://zookeeper.apache.org/doc/r3.5.7/zookeeperAdmin.html#sc_adminserver). Default: **yes**
  - `ZOO_ADMIN_SERVER_PORT_NUMBER`: [Admin server](https://zookeeper.apache.org/doc/r3.5.7/zookeeperAdmin.html#sc_adminserver) port. Default: **8080**
-
-Additionally, any environment variable beginning with `ZOO_CFG_` can be used to configure any Zookeeper parameter. For example, use `ZOO_CFG_ssl_quorum_hostnameVerification` in order to configure `ssl.quorum.hostnameVerification`.
 
 ```console
 $ docker run --name zookeeper -e ZOO_SERVER_ID=1 bitnami/zookeeper:latest
