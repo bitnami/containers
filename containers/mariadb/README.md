@@ -52,7 +52,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`10.7`, `10.7-debian-10`, `10.7.3`, `10.7.3-debian-10-r19`, `latest` (10.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.7.3-debian-10-r19/10.7/debian-10/Dockerfile)
 * [`10.6`, `10.6-debian-10`, `10.6.7`, `10.6.7-debian-10-r49` (10.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.6.7-debian-10-r49/10.6/debian-10/Dockerfile)
-* [`10.5`, `10.5-debian-10`, `10.5.15`, `10.5.15-debian-10-r50` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.5.15-debian-10-r50/10.5/debian-10/Dockerfile)
+* [`10.5`, `10.5-debian-10`, `10.5.15`, `10.5.15-debian-10-r51` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.5.15-debian-10-r51/10.5/debian-10/Dockerfile)
 * [`10.4`, `10.4-debian-10`, `10.4.24`, `10.4.24-debian-10-r50` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.24-debian-10-r50/10.4/debian-10/Dockerfile)
 * [`10.3`, `10.3-debian-10`, `10.3.34`, `10.3.34-debian-10-r52` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.34-debian-10-r52/10.3/debian-10/Dockerfile)
 * [`10.2`, `10.2-debian-10`, `10.2.43`, `10.2.43-debian-10-r49` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.43-debian-10-r49/10.2/debian-10/Dockerfile)
@@ -345,6 +345,13 @@ services:
       - MARIADB_SKIP_TEST_DB=yes
   ...
 ```
+
+### Slow query logs
+
+By default MariaDB doesn't enable [slow query log](https://mariadb.com/kb/en/slow-query-log-overview/) to record the SQL queries that take a long time to perform. You can modify these settings using the following environment variables:
+
+- `MARIADB_ENABLE_SLOW_QUERY`: Whether to enable slow query logs. Default: `0`
+- `MARIADB_LONG_QUERY_TIME`: How much time, in seconds, defines a slow query. Default: `10.0`
 
 ### Slow filesystems
 
