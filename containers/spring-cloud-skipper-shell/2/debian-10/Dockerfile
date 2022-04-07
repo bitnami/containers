@@ -30,7 +30,6 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV APP_VERSION="2.8.4" \
     BITNAMI_APP_NAME="spring-cloud-skipper-shell" \
-    BITNAMI_IMAGE_VERSION="2.8.4-debian-10-r0" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
     PATH="/opt/bitnami/java/bin:$PATH"
