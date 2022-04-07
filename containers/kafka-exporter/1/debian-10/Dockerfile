@@ -19,7 +19,6 @@ RUN chmod g+rwX /opt/bitnami
 
 ENV APP_VERSION="1.4.2" \
     BITNAMI_APP_NAME="kafka-exporter" \
-    BITNAMI_IMAGE_VERSION="1.4.2-debian-10-r197" \
     PATH="/opt/bitnami/kafka-exporter/bin:$PATH"
 
 EXPOSE 9308
