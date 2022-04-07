@@ -216,7 +216,7 @@ This new feature is not mutually exclusive, which means it is possible to listen
     ```console
     $ docker run --name openldap \
         -v /path/to/certs:/opt/bitnami/openldap/certs \
-        -v /path/to/openldap-data-persistence:/bitnami/openldap/data \
+        -v /path/to/openldap-data-persistence:/bitnami/openldap/ \
         -e ALLOW_EMPTY_PASSWORD=yes \
         -e LDAP_ENABLE_TLS=yes \
         -e LDAP_TLS_CERT_FILE=/opt/bitnami/openldap/certs/openldap.crt \
@@ -240,7 +240,7 @@ This new feature is not mutually exclusive, which means it is possible to listen
         ...
         volumes:
           - /path/to/certs:/opt/bitnami/openldap/certs
-          - /path/to/openldap-data-persistence:/bitnami/openldap/data
+          - /path/to/openldap-data-persistence:/bitnami/openldap/
       ...
     ```
 
