@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libfontconfig procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "grafana" "8.4.5-0" --checksum bc7b5c637f8a180538e414a3b60753a1bae469f5aa3ff90b201f27c8d903b9f5
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "grafana" "8.4.5-1" --checksum bc7b5c637f8a180538e414a3b60753a1bae469f5aa3ff90b201f27c8d903b9f5
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
