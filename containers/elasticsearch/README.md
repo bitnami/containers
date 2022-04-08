@@ -49,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8`, `8-debian-10`, `8.1.2`, `8.1.2-debian-10-r3`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/8.1.2-debian-10-r3/8/debian-10/Dockerfile)
-* [`7`, `7-debian-10`, `7.17.2`, `7.17.2-debian-10-r5` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.17.2-debian-10-r5/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.17.2`, `7.17.2-debian-10-r6` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.17.2-debian-10-r6/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch).
 ## Get this image
