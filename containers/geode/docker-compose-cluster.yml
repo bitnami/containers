@@ -1,0 +1,55 @@
+version: '2.1'
+
+services:
+  geode-locator:
+    image: docker.io/bitnami/geode:1
+    environment:
+      - GEODE_NODE_NAME=locator
+      - GEODE_NODE_TYPE=locator
+      - GEODE_ADVERTISED_HOSTNAME=geode-locator
+      - GEODE_ENABLE_SECURITY=yes
+      - GEODE_SECURITY_PASSWORD=some_password
+    healthcheck:
+      test: gfsh status locator --dir /bitnami/geode/data >/dev/null 2>&1 || exit 1
+    ports:
+      - 7070:7070
+    volumes:
+      - 'geode_locator_data:/bitnami/geode'
+  geode-server-0:
+    image: docker.io/bitnami/geode:1
+    environment:
+      - GEODE_NODE_NAME=server-0
+      - GEODE_NODE_TYPE=server
+      - GEODE_LOCATORS=geode-locator[10334]
+      - GEODE_ADVERTISED_HOSTNAME=geode-server-0
+      - GEODE_ENABLE_SECURITY=yes
+      - GEODE_SECURITY_PASSWORD=some_password
+    healthcheck:
+      test: gfsh status server --dir /bitnami/geode/data >/dev/null 2>&1 || exit 1
+    volumes:
+      - 'geode_server_0_data:/bitnami/geode'
+    depends_on:
+      - geode-locator
+  geode-server-1:
+    image: docker.io/bitnami/geode:1
+    environment:
+      - GEODE_NODE_NAME=server-1
+      - GEODE_NODE_TYPE=server
+      - GEODE_LOCATORS=geode-locator[10334]
+      - GEODE_ADVERTISED_HOSTNAME=geode-server-1
+      - GEODE_ENABLE_SECURITY=yes
+      - GEODE_SECURITY_PASSWORD=some_password
+    healthcheck:
+      test: gfsh status server --dir /bitnami/geode/data >/dev/null 2>&1 || exit 1
+    volumes:
+      - 'geode_server_1_data:/bitnami/geode'
+    depends_on:
+      - geode-locator
+
+volumes:
+  geode_locator_data:
+    driver: local
+  geode_server_0_data:
+    driver: local
+  geode_server_1_data:
+    driver: local
