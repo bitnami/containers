@@ -8,15 +8,14 @@
 
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
+⚠️ Please note that according to [this note](https://github.com/uswitch/kiam#-%EF%B8%8Fthis-project-is-in-maintenance-mode-%EF%B8%8F-) in the upstream project, Kiam maintainers are only accepting patches/bug fixes but no new features.
+From Bitnami, we will update the container image and Helm chart, as usual, bundling the upstream software on top of an updated base image and dependencies.
+
 ## TL;DR
 
 ```console
 $ docker run --name Kiam bitnami/kiam:latest
 ```
-
-## Deprecation Notice
-
-Kiam is no longer maintained by upstream and is now internally tagged as to be deprecated. This image will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 04-28-2022
 
 ## Why use Bitnami Images?
 
@@ -35,7 +34,7 @@ Kiam is no longer maintained by upstream and is now internally tagged as to be d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.2.0`, `4.2.0-debian-10-r146`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kiam/blob/4.2.0-debian-10-r146/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.2.0`, `4.2.0-debian-10-r147`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kiam/blob/4.2.0-debian-10-r147/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kiam GitHub repo](https://github.com/bitnami/bitnami-docker-kiam).
 
