@@ -1,0 +1,51 @@
+{
+    "apache": {
+        "arch": "amd64",
+        "digest": "f7134097e1be937a1d6dff36fe32a835ec4279100abc828e58f0563d541895bc",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "2.4.52-1"
+    },
+    "gosu": {
+        "arch": "amd64",
+        "digest": "16f1a317859b06ae82e816b30f98f28b4707d18fe6cc3881bff535192a7715dc",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.14.0-1"
+    },
+    "libphp": {
+        "arch": "amd64",
+        "digest": "63dc5c54bbd2a981bc1fc6d070bf6d3b0024e2d9f359112bd541624a0bb0cec2",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "7.4.27-2"
+    },
+    "php": {
+        "arch": "amd64",
+        "digest": "b33c5253d44671839fd5dd01e1965f1d4d35d00eb10a8481e307303c0344d515",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "7.4.27-7"
+    },
+    "phppgadmin": {
+        "arch": "amd64",
+        "digest": "2139f2e5e95e2e42bef82988210ffebd6aaec1b79daed053f105086da6d65a75",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "7.13.0-1"
+    },
+    "postgresql-client": {
+        "arch": "amd64",
+        "digest": "e7c77b459f86d801425c7fc4e3b4ae5d3d8b9d965513608568ecf8a160e9f05b",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "11.14.0-1"
+    },
+    "render-template": {
+        "arch": "amd64",
+        "digest": "9e312b4a7e16a55d08e67c4fd69c91000e4dcc4af149d59915c49375b83852af",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.0.1-5"
+    }
+}
