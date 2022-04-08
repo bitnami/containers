@@ -1,0 +1,32 @@
+version: '2'
+services:
+  mariadb:
+    image: docker.io/bitnami/mariadb:10.3
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_testlink
+      - MARIADB_DATABASE=bitnami_testlink
+    volumes:
+      - 'mariadb_data:/bitnami/mariadb'
+  testlink:
+    image: docker.io/bitnami/testlink:1
+    ports:
+      - '80:8080'
+      - '443:8443'
+    environment:
+      - TESTLINK_DATABASE_HOST=mariadb
+      - TESTLINK_DATABASE_PORT_NUMBER=3306
+      - TESTLINK_DATABASE_USER=bn_testlink
+      - TESTLINK_DATABASE_NAME=bitnami_testlink
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - 'testlink_data:/bitnami/testlink'
+    depends_on:
+      - mariadb
+volumes:
+  mariadb_data:
+    driver: local
+  testlink_data:
+    driver: local
