@@ -154,6 +154,9 @@ pid_file=${DB_PID_FILE}
 max_allowed_packet=16M
 bind_address=${DB_DEFAULT_BIND_ADDRESS}
 log_error=${DB_LOGS_DIR}/mysqld.log
+slow_query_log=${DB_ENABLE_SLOW_QUERY}
+slow_query_log_file=${DB_LOGS_DIR}/mysqld.log
+long_query_time=${DB_LONG_QUERY_TIME}
 character_set_server=${DB_DEFAULT_CHARACTER_SET}
 collation_server=${DB_DEFAULT_COLLATE}
 plugin_dir=${DB_BASE_DIR}/lib/plugin
@@ -1249,6 +1252,8 @@ mysql_update_custom_config() {
     ! is_empty_value "$DB_BIND_ADDRESS" && mysql_conf_set "bind_address" "$DB_BIND_ADDRESS"
     ! is_empty_value "$DB_AUTHENTICATION_PLUGIN" && mysql_conf_set "default_authentication_plugin" "$DB_AUTHENTICATION_PLUGIN"
     ! is_empty_value "$DB_SQL_MODE" && mysql_conf_set "sql_mode" "$DB_SQL_MODE"
+    ! is_empty_value "$DB_ENABLE_SLOW_QUERY" && mysql_conf_set "slow_query_log" "$DB_ENABLE_SLOW_QUERY"
+    ! is_empty_value "$DB_LONG_QUERY_TIME" && mysql_conf_set "long_query_time" "$DB_LONG_QUERY_TIME"
 
     # Avoid exit code of previous commands to affect the result of this function
     true
