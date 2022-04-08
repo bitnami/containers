@@ -1,0 +1,7 @@
+version: '2'
+
+services:
+  open-service-broker-azure:
+    image: docker.io/bitnami/open-service-broker-azure:1
+    ports:
+      - '8080:8080'
