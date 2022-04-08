@@ -1,0 +1,11 @@
+version: '2'
+services:
+  logstash:
+    image: docker.io/bitnami/logstash:8
+    ports:
+      - 8080:8080
+    volumes:
+      - logstash_data:/bitnami
+volumes:
+  logstash_data:
+    driver: local
