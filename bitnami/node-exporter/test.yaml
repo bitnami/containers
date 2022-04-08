@@ -1,0 +1,22 @@
+## This is test deployment for Kubernetes platforms.
+## This is not intended to be used in production.
+##
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: test-node-exporter
+  name: test-node-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-node-exporter
+  template:
+    metadata:
+      labels:
+        app: test-node-exporter
+    spec:
+      containers:
+      - image: bitnami/node-exporter
+        name: node-exporter
