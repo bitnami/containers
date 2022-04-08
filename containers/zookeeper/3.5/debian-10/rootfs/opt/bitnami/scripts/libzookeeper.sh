@@ -46,7 +46,7 @@ zookeeper_validate() {
 
         for i in $(seq 1 "$((total - 1))"); do
             for j in $(seq "$((i + 1))" "$total"); do
-                if (( "${!i}" == "${!j}" )); then
+                if (("${!i}" == "${!j}")); then
                     print_validation_error "${!i} and ${!j} are bound to the same port"
                 fi
             done
@@ -76,8 +76,8 @@ zookeeper_validate() {
     is_boolean_yes "$ZOO_ENABLE_ADMIN_SERVER" && check_conflicting_ports ZOO_PORT_NUMBER ZOO_PROMETHEUS_METRICS_PORT_NUMBER ZOO_ADMIN_SERVER_PORT_NUMBER
 
     # ZooKeeper server users validations
-    read -r -a server_users_list <<< "${ZOO_SERVER_USERS//[;, ]/ }"
-    read -r -a server_passwords_list <<< "${ZOO_SERVER_PASSWORDS//[;, ]/ }"
+    read -r -a server_users_list <<<"${ZOO_SERVER_USERS//[;, ]/ }"
+    read -r -a server_passwords_list <<<"${ZOO_SERVER_PASSWORDS//[;, ]/ }"
     if [[ ${#server_users_list[@]} -ne ${#server_passwords_list[@]} ]]; then
         print_validation_error "ZOO_SERVER_USERS and ZOO_SERVER_PASSWORDS lists should have the same length"
     fi
@@ -86,9 +86,9 @@ zookeeper_validate() {
     if [[ -n $ZOO_SERVERS ]]; then
         server_id_with_jumps="no"
         [[ "$ZOO_SERVERS" == *"::"* ]] && server_id_with_jumps="yes"
-        read -r -a zookeeper_servers_list <<< "${ZOO_SERVERS//[;, ]/ }"
+        read -r -a zookeeper_servers_list <<<"${ZOO_SERVERS//[;, ]/ }"
         for server in "${zookeeper_servers_list[@]}"; do
-            if  is_boolean_yes "$server_id_with_jumps"; then
+            if is_boolean_yes "$server_id_with_jumps"; then
                 if ! echo "$server" | grep -q -E "^[^:]+:[^:]+:[^:]+::[1-9][0-9]*$"; then
                     print_validation_error "Zookeeper server ${server} should follow the next syntax: host:port:port::id. Example: zookeeper:2888:3888::1"
                 fi
@@ -135,7 +135,7 @@ zookeeper_initialize() {
 
     if is_dir_empty "$ZOO_DATA_DIR"; then
         info "Deploying ZooKeeper from scratch..."
-        echo "$ZOO_SERVER_ID" > "${ZOO_DATA_DIR}/myid"
+        echo "$ZOO_SERVER_ID" >"${ZOO_DATA_DIR}/myid"
 
         if is_boolean_yes "$ZOO_ENABLE_AUTH" && [[ $ZOO_SERVER_ID -eq 1 ]] && [[ -n $ZOO_SERVER_USERS ]]; then
             zookeeper_configure_acl
@@ -143,24 +143,6 @@ zookeeper_initialize() {
     else
         info "Deploying ZooKeeper with persisted data..."
     fi
-}
-
-########################
-# Configure Zookeeper configuration files from environment variables
-# Globals:
-#   ZOO_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-zookeeper_configure_from_environment_variables() {
-    # Map environment variables to config properties
-    for var in "${!ZOO_CFG_@}"; do
-        key="$(echo "$var" | sed -e 's/^ZOO_CFG_//g' -e 's/_/\./g')"
-        value="${!var}"
-        zookeeper_conf_set "$ZOO_CONF_FILE" "$key" "$value"
-    done
 }
 
 ########################
@@ -174,7 +156,7 @@ zookeeper_configure_from_environment_variables() {
 #########################
 zookeeper_generate_conf() {
     cp "${ZOO_CONF_DIR}/zoo_sample.cfg" "$ZOO_CONF_FILE"
-    echo >> "$ZOO_CONF_FILE"
+    echo >>"$ZOO_CONF_FILE"
 
     zookeeper_conf_set "$ZOO_CONF_FILE" tickTime "$ZOO_TICK_TIME"
     zookeeper_conf_set "$ZOO_CONF_FILE" initLimit "$ZOO_INIT_LIMIT"
@@ -202,11 +184,11 @@ zookeeper_generate_conf() {
     # Add zookeeper servers to configuration
     server_id_with_jumps="no"
     [[ "$ZOO_SERVERS" == *"::"* ]] && server_id_with_jumps="yes"
-    read -r -a zookeeper_servers_list <<< "${ZOO_SERVERS//[;, ]/ }"
+    read -r -a zookeeper_servers_list <<<"${ZOO_SERVERS//[;, ]/ }"
     if [[ ${#zookeeper_servers_list[@]} -gt 1 ]]; then
         if is_boolean_yes "$server_id_with_jumps"; then
             for server in "${zookeeper_servers_list[@]}"; do
-                read -r -a srv <<< "${server//::/ }"
+                read -r -a srv <<<"${server//::/ }"
                 info "Adding server: ${srv[0]} with id: ${srv[1]}"
                 zookeeper_conf_set "$ZOO_CONF_FILE" "server.${srv[1]}" "${srv[0]};${ZOO_PORT_NUMBER}"
             done
@@ -215,7 +197,7 @@ zookeeper_generate_conf() {
             for server in "${zookeeper_servers_list[@]}"; do
                 info "Adding server: ${server}"
                 zookeeper_conf_set "$ZOO_CONF_FILE" "server.$i" "${server};${ZOO_PORT_NUMBER}"
-                (( i++ ))
+                ((i++))
             done
         fi
     else
@@ -242,8 +224,25 @@ zookeeper_generate_conf() {
         zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.trustStore.location "$ZOO_TLS_QUORUM_TRUSTSTORE_FILE"
         [[ -n "$ZOO_TLS_QUORUM_TRUSTSTORE_PASSWORD" ]] && zookeeper_conf_set "$ZOO_CONF_FILE" ssl.quorum.trustStore.password "$ZOO_TLS_QUORUM_TRUSTSTORE_PASSWORD"
     fi
-
     zookeeper_configure_from_environment_variables
+}
+
+########################
+# Configure Zookeeper configuration files from environment variables
+# Globals:
+#   ZOO_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+zookeeper_configure_from_environment_variables() {
+    # Map environment variables to config properties
+    for var in "${!ZOO_CFG_@}"; do
+        key="$(echo "$var" | sed -e 's/^ZOO_CFG_//g' -e 's/_/\./g')"
+        value="${!var}"
+        zookeeper_conf_set "$ZOO_CONF_FILE" "$key" "$value"
+    done
 }
 
 ########################
@@ -320,7 +319,7 @@ zookeeper_conf_set() {
     if grep -q -E "^\s*#*\s*${key}=" "$filename"; then
         replace_in_file "$filename" "^\s*#*\s*${key}=.*" "${key}=${value}"
     else
-        echo "${key}=${value}" >> "$filename"
+        echo "${key}=${value}" >>"$filename"
     fi
 }
 
@@ -335,11 +334,11 @@ zookeeper_conf_set() {
 #########################
 zookeeper_create_jaas_file() {
     info "Creating jaas file..."
-    read -r -a server_users_list <<< "${ZOO_SERVER_USERS//[;, ]/ }"
-    read -r -a server_passwords_list <<< "${ZOO_SERVER_PASSWORDS//[;, ]/ }"
+    read -r -a server_users_list <<<"${ZOO_SERVER_USERS//[;, ]/ }"
+    read -r -a server_passwords_list <<<"${ZOO_SERVER_PASSWORDS//[;, ]/ }"
 
     local zookeeper_server_user_passwords=""
-    for i in $(seq 0 $(( ${#server_users_list[@]} - 1 ))); do
+    for i in $(seq 0 $((${#server_users_list[@]} - 1))); do
         zookeeper_server_user_passwords="${zookeeper_server_user_passwords}\n   user_${server_users_list[i]}=\"${server_passwords_list[i]}\""
     done
     zookeeper_server_user_passwords="${zookeeper_server_user_passwords#\\n   };"
@@ -403,7 +402,7 @@ zookeeper_export_jvmflags() {
     local -r value="${1:?value is required}"
 
     export JVMFLAGS="${JVMFLAGS} ${value}"
-    echo "export JVMFLAGS=\"${JVMFLAGS}\"" > "${ZOO_CONF_DIR}/java.env"
+    echo "export JVMFLAGS=\"${JVMFLAGS}\"" >"${ZOO_CONF_DIR}/java.env"
 }
 
 ########################
@@ -453,7 +452,7 @@ zookeeper_stop() {
 #########################
 zookeeper_ensure_backwards_compatibility() {
     mkdir -p "/opt/bitnami/base"
-    cat > "/opt/bitnami/base/functions" <<EOF
+    cat >"/opt/bitnami/base/functions" <<EOF
 #!/bin/bash
 
 # Load Generic Libraries
