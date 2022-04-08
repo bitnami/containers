@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  redis-sentinel:
+    image: docker.io/bitnami/redis-sentinel:6.2
+    volumes:
+      - redis-sentinel_data:/bitnami
+  redis:
+    image: docker.io/bitnami/redis:6.2
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - redis_data:/bitnami
+volumes:
+  redis-sentinel_data:
+    driver: local
+  redis_data:
+    driver: local
