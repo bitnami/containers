@@ -1,0 +1,9 @@
+{
+    "service-catalog": {
+        "arch": "amd64",
+        "digest": "3b431b0aa0ee431597e71679d202b1e5c6725da784ecdfd31be3b6de039c102d",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "0.3.1-2"
+    }
+}
