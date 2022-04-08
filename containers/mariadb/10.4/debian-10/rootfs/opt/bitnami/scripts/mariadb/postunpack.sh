@@ -28,4 +28,4 @@ done
 ln -sf "$DB_BASE_DIR/plugin" "$DB_BASE_DIR/lib/plugin"
 
 # Redirect all logging to stdout
-ln -sf /dev/stdout "$DB_LOGS_DIR/mysqld.log"
+ln -sf "/proc/1/fd/1" "$DB_LOGS_DIR/mysqld.log"
