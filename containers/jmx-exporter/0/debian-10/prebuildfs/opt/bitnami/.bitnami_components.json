@@ -1,0 +1,16 @@
+{
+    "java": {
+        "arch": "amd64",
+        "digest": "d5670d09ac0e679ae28306e417e77e91b44051908ca3a82259efcd70764b996f",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.8.322-8"
+    },
+    "jmx-exporter": {
+        "arch": "amd64",
+        "digest": "22365375b0cfe703dc915b947ec680b37390bebdcd627a408b16b296c16478b2",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "0.16.1-8"
+    }
+}
