@@ -1,0 +1,30 @@
+version: '2'
+services:
+  postgresql:
+    image: docker.io/bitnami/postgresql:11
+    volumes:
+      - 'postgresql_data:/bitnami/postgresql'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - POSTGRESQL_USERNAME=bn_redmine
+      - POSTGRESQL_DATABASE=bitnami_redmine
+  redmine:
+    image: docker.io/bitnami/redmine:4
+    ports:
+      - '80:3000'
+    volumes:
+      - 'redmine_data:/bitnami/redmine'
+    depends_on:
+      - postgresql
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDMINE_DATABASE_TYPE=postgresql
+      - REDMINE_DATABASE_HOST=postgresql
+      - REDMINE_DATABASE_PORT_NUMBER=5432
+      - REDMINE_DATABASE_USER=bn_redmine
+      - REDMINE_DATABASE_NAME=bitnami_redmine
+volumes:
+  postgresql_data:
+    driver: local
+  redmine_data:
+    driver: local
