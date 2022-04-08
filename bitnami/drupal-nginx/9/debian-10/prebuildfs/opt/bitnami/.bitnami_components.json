@@ -1,0 +1,44 @@
+{
+    "drupal": {
+        "arch": "amd64",
+        "digest": "4fe12a0904c646d12e28a7b1bfc345c2e9dfcd2a9d769cb342996d377e7ed351",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "9.3.9-0"
+    },
+    "gosu": {
+        "arch": "amd64",
+        "digest": "d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.14.0-7"
+    },
+    "mysql-client": {
+        "arch": "amd64",
+        "digest": "14329a8ec0a649ecb9ffb37085a547183748efedea8ed029801ab9b381ab7173",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "10.6.7-4"
+    },
+    "nginx": {
+        "arch": "amd64",
+        "digest": "305f5b0413081f7911932bc7144c478858444e16e7ef917123f50455a490c427",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.21.6-4"
+    },
+    "php": {
+        "arch": "amd64",
+        "digest": "3df7b2bd7159f9627fbc2dc1ae5ea9464306c983edc53e4207fa3cc0e05755ea",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "8.1.4-9"
+    },
+    "render-template": {
+        "arch": "amd64",
+        "digest": "97c2ae4b001c5937e888b920bee7b1a40a076680caac53ded6d10f6207d54565",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.0.1-10"
+    }
+}
