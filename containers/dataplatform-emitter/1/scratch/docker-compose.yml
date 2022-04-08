@@ -1,0 +1,4 @@
+version: '2'
+services:
+  dataplatform-emitter:
+    image: docker.io/bitnami/dataplatform-emitter:1
