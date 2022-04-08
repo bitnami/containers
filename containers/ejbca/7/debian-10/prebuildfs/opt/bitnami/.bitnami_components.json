@@ -1,0 +1,37 @@
+{
+    "ejbca": {
+        "arch": "amd64",
+        "digest": "79b207983ce3fbf498e9da68d496b92b140a80b18648463c14a23cdffb01af36",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "7.4.3-2-7"
+    },
+    "gosu": {
+        "arch": "amd64",
+        "digest": "d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.14.0-7"
+    },
+    "java": {
+        "arch": "amd64",
+        "digest": "d5670d09ac0e679ae28306e417e77e91b44051908ca3a82259efcd70764b996f",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.8.322-8"
+    },
+    "mysql-client": {
+        "arch": "amd64",
+        "digest": "14329a8ec0a649ecb9ffb37085a547183748efedea8ed029801ab9b381ab7173",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "10.6.7-4"
+    },
+    "wildfly": {
+        "arch": "amd64",
+        "digest": "bd45269cbe0ede67add50d124f0353f11e02da3b787299fef0b764aba30a54a8",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "14.0.1-29"
+    }
+}
