@@ -1,0 +1,4 @@
+version: '2'
+services:
+  rabbitmq-cluster-operator:
+    image: docker.io/bitnami/rabbitmq-cluster-operator:1
