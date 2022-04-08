@@ -1,0 +1,23 @@
+{
+    "gosu": {
+        "arch": "amd64",
+        "digest": "d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.14.0-7"
+    },
+    "python": {
+        "arch": "amd64",
+        "digest": "adb7d70d8080d38dab0ca6f1b0d7efce772b168621b6edcc4c65009c740f9b5e",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "3.9.12-1"
+    },
+    "tensorflow-intel": {
+        "arch": "amd64",
+        "digest": "032632f7a59b3d244ee28ee81687507e56b6a6151cb4b1e1e9c993be70bdbc29",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "2.8.0-1"
+    }
+}
