@@ -1,0 +1,9 @@
+{
+    "wavefront-prometheus-storage-adapter": {
+        "arch": "amd64",
+        "digest": "e1811add7669afcd381561ad3530461abb79d3eee507680f370cd537ad656642",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.0.5-7"
+    }
+}
