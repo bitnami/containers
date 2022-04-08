@@ -979,6 +979,8 @@ mysql_update_custom_config() {
     ! is_empty_value "$DB_BIND_ADDRESS" && mysql_conf_set "bind_address" "$DB_BIND_ADDRESS"
     ! is_empty_value "$DB_AUTHENTICATION_PLUGIN" && mysql_conf_set "default_authentication_plugin" "$DB_AUTHENTICATION_PLUGIN"
     ! is_empty_value "$DB_SQL_MODE" && mysql_conf_set "sql_mode" "$DB_SQL_MODE"
+    ! is_empty_value "$DB_ENABLE_SLOW_QUERY" && mysql_conf_set "slow_query_log" "$DB_ENABLE_SLOW_QUERY"
+    ! is_empty_value "$DB_LONG_QUERY_TIME" && mysql_conf_set "long_query_time" "$DB_LONG_QUERY_TIME"
 
     # Avoid exit code of previous commands to affect the result of this function
     true
