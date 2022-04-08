@@ -12,7 +12,7 @@ RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 libicu63 libssl
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-10" --checksum 35c818ba3f4b5aae905959bc7d3a5e81fc63786e3c662b604612c0aa7fcda8fd
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.1-7" --checksum 7a4f45cbebd2e242278060415dd1a3f0dbe68991fdcaea5bb311e8de54a3e027
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "couchdb" "3.2.1-8" --checksum 06a33067ead82c5bbc5277b8a5b35ea0b9b36a1ca7acedab60771e709a0f51ab
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "couchdb" "3.2.1-9" --checksum 94c1226983b395663ad91d40c7df89f92a35d7a86eb7da9dea6f38987c8529b1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
