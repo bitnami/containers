@@ -1,0 +1,4 @@
+version: '2'
+services:
+  envoy:
+    image: docker.io/bitnami/envoy:1.21
