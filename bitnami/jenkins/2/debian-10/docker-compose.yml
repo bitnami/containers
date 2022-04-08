@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  jenkins:
+    image: docker.io/bitnami/jenkins:2
+    ports:
+      - '80:8080'
+    environment:
+      - JENKINS_PASSWORD=bitnami
+    volumes:
+      - 'jenkins_data:/bitnami/jenkins'
+
+volumes:
+  jenkins_data:
+    driver: local
