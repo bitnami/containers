@@ -7,29 +7,6 @@ set -o xtrace # Uncomment this line for debugging purpose
 
 TARGET_DIR="."
 
-# App and repo that will be used as base
-BASE_REPO="https://github.com/bitnami/bitnami-docker-wordpress"
-
-function joinStrings() { 
-    local a=("${@:3}")
-    printf "%s" "$2${a[@]/#/$1}"
-}
-
-function moveFilesExcluding() {
-    local -r dest="${1:?Missing destination directory}"
-    shift
-    local -r excludeFiles=("$@")
-echo "Files to exclude: ${excludeFiles[@]}" 
-    mkdir -p "$dest"   
-
-    local -r f_exclude_flags=($(joinStrings ' -and ! -name ' "${excludeFiles[@]}")) 
-echo "${f_exclude_flags[@]}"
-    find . -depth 1 ! -name "${f_exclude_flags[@]}" | while read -r file; do
-        cp -a "$file" "${dest}/"
-        rm -Rf "$file"
-    done    
-}
-
 function queryRepos() {
     local page=0
     local repos="[]" # Initial empty JSON array
@@ -57,18 +34,10 @@ function getContainerRepos() {
     echo "$container_repos"
 }
 
-# Commits a directory
-function commitChanges() { 
-    git config user.name "Bitnami Containers"
-    git config user.email "containers@bitnami.com"
-    
-    git diff --exit-code || (git add -A && git commit -m "Sync ${name} files")
-}
-
 function pushChanges() {
     git config user.name "Bitnami Containers"
     git config user.email "containers@bitnami.com"
-    git push
+    git push origin main
 }
 
 function mergeRepos() {
@@ -92,8 +61,7 @@ function mergeRepos() {
         (
             cd "$TARGET_DIR"
             mkdir -p "containers/${name}" # Create directory for the app
-            # Back up the README.md to avoid getting merge conflicts
-            #mv README.md README.md.back
+
             # clone the repositoy outside of this one
             git clone "$repo_url" ../temporal/"$name"
             (
@@ -103,16 +71,9 @@ function mergeRepos() {
             )
             # Fetch the old repo and merge maintaining history
             git remote add --fetch "$name" "../temporal/${name}"
-            git merge "${name}/master" --allow-unrelated-histories --no-log --no-ff -Xtheirs #--no-commit
-            #git checkout main "${special_files[@]}"
+            git merge "${name}/master" --allow-unrelated-histories --no-log --no-ff -Xtheirs
             git remote remove "$name"
             rm -Rf ../temporal/"$name"
-            # Move the content to the app directory
-            # moveFilesExcluding "containers/${name}" "${static_files[@]}" "README.md.back" "${special_files[@]}" "${apps[@]}"
-            # Recover README.md
-            #mv README.md.back README.md
-            #commitChanges
-exit 0
         )
     done
 
