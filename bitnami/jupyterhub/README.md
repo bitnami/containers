@@ -29,7 +29,7 @@ This image is meant to run in a Kubernetes cluster.
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.5.0`, `1.5.0-debian-10-r140`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyterhub/blob/1.5.0-debian-10-r140/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.5.0`, `1.5.0-debian-10-r141`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyterhub/blob/1.5.0-debian-10-r141/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jupyterhub GitHub repo](https://github.com/bitnami/bitnami-docker-jupyterhub).
 
