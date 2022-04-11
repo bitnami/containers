@@ -9,9 +9,9 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-registry" "2.4.2-1" --checksum 0b1f2d087aae2c529541dcda9e28fa9061f4fe8507149e63cae7eef6780408dd
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-registry" "2.5.0-0" --checksum 285b263847d38ca3cc70ff4799e1dc6fffa5c9f302b01b18a15951475a61bd8a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.24.2-0" --checksum 6671445790516400883182abf5e957645260585b8a9f9432a8a6b63b045b6559
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-registryctl" "2.4.2-2" --checksum 526c9cc335ee995a884f9413d4d440b931eaa8d4d2a9dd62ad137949b73bcfe9
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-registryctl" "2.5.0-0" --checksum c6902656625c88d70a69a3dcaf87728af1e9a5463422fc26864c14ed626fec09
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-registryctl/postunpack.sh
-ENV APP_VERSION="2.4.2" \
+ENV APP_VERSION="2.5.0" \
     BITNAMI_APP_NAME="harbor-registryctl" \
     PATH="/opt/bitnami/harbor-registry/bin:/opt/bitnami/common/bin:/opt/bitnami/harbor-registryctl/bin:$PATH"
 
