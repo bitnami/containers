@@ -1,0 +1,17 @@
+name: Sync containers repositories
+
+on:
+  schedule:
+    # Every day at 1 AM
+    - cron: '0 1 * * *'
+jobs:
+  build:
+    name: Trigger Site Rebuild
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout bitnami/containers
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.BITNAMI_BOT_SECRET }}
+      - name: Fetch
+        run: ./scripts/fetch-commits.sh
