@@ -1,9 +1,13 @@
 name: Sync containers repositories
 
 on:
-  schedule:
-    # Every day at 1 AM
-    - cron: '0 1 * * *'
+#  schedule:
+#    # Every day at 1 AM
+#    - cron: '0 1 * * *'
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'Test manually'
 jobs:
   build:
     name: Trigger Site Rebuild
