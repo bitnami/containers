@@ -773,7 +773,7 @@ elasticsearch_initialize() {
         fi
         if is_boolean_yes "$ELASTICSEARCH_DISABLE_GC_LOGS"; then
             info "Disabling JVM GC logs..."
-            replace_in_file "${ELASTICSEARCH_CONF_DIR}/jvm.options" "8:-Xloggc:logs[/]gc.log" "# 8:-Xloggc:logs/gc.log"
+            replace_in_file "${ELASTICSEARCH_CONF_DIR}/jvm.options" "(^.*logs[/]gc.log.*$)" "# \1"
         fi
         elasticsearch_set_heap_size
     else
