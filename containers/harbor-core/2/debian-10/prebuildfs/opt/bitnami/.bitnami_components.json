@@ -8,10 +8,10 @@
     },
     "harbor-core": {
         "arch": "amd64",
-        "digest": "b3928a4d3a70a80ffdd09f2fbc014f0b057b74390ae97b968b2494c0ca01dfce",
+        "digest": "a2135090721d6d1ceb17b21e01ad73928f5501a1360d37165cf43a0306adeea7",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.2-1"
+        "version": "2.5.0-0"
     },
     "ini-file": {
         "arch": "amd64",
