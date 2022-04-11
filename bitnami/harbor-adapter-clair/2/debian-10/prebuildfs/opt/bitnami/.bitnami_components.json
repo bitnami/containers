@@ -8,9 +8,9 @@
     },
     "harbor-adapter-clair": {
         "arch": "amd64",
-        "digest": "99e4be7a005e15f826f2673584f29cc298796c8a3cc14466cc5fc4bdc00b7e6d",
+        "digest": "e2c50247cacbc1a7a67bcb5d5d7ec87c74f557a4e4dbfcc66a3b0b671f7884b4",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.2-1"
+        "version": "2.5.0-0"
     }
 }
