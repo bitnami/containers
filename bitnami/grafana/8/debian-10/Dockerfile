@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libfontconfig procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "grafana" "8.4.5-1" --checksum bc7b5c637f8a180538e414a3b60753a1bae469f5aa3ff90b201f27c8d903b9f5
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "grafana" "8.4.6-0" --checksum 098710350ea614279edfde56ce1f98dded088a6ca44696b8a2591e4059425676
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -17,7 +17,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/grafana/postunpack.sh
-ENV APP_VERSION="8.4.5" \
+ENV APP_VERSION="8.4.6" \
     BITNAMI_APP_NAME="grafana" \
     PATH="/opt/bitnami/grafana/bin:/opt/bitnami/common/bin:$PATH"
 
