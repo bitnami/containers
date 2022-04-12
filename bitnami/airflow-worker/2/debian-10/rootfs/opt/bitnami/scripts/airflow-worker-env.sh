@@ -38,9 +38,9 @@ airflow_worker_env_vars=(
     AIRFLOW_REDIS_USE_SSL
     REDIS_HOST
     REDIS_PORT_NUMBER
-    REDIS_DATABASE
     REDIS_USER
     REDIS_PASSWORD
+    REDIS_DATABASE
 )
 for env_var in "${airflow_worker_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -89,8 +89,8 @@ export AIRFLOW_DATABASE_USE_SSL="${AIRFLOW_DATABASE_USE_SSL:-no}"
 export AIRFLOW_REDIS_USE_SSL="${AIRFLOW_REDIS_USE_SSL:-no}"
 export REDIS_HOST="${REDIS_HOST:-redis}"
 export REDIS_PORT_NUMBER="${REDIS_PORT_NUMBER:-6379}"
-export REDIS_DATABASE="${REDIS_DATABASE:-1}"
 export REDIS_USER="${REDIS_USER:-}"
 export REDIS_PASSWORD="${REDIS_PASSWORD:-}"
+export REDIS_DATABASE="${REDIS_DATABASE:-1}"
 
 # Custom environment variables may be defined below
