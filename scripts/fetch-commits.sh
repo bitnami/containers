@@ -37,12 +37,9 @@ function getContainerRepos() {
 }
 
 # Commits a directory
-function commitChanges() { 
+function gitConfigure() { 
     git config user.name "Bitnami Containers"
     git config user.email "containers@bitnami.com"
-    
-    # git diff --exit-code --quiet <commit-A> <commit-b>
-    git diff --exit-code || (git add -A && git commit -m "Sync ${name} files")
 }
 
 function pushChanges() {
@@ -88,6 +85,8 @@ syncCommit() {
 
 function syncRepos() {
     local -r repos="$(getContainerRepos)"
+    
+    gitConfigure # Configure Git client
     
     mkdir -p "$TARGET_DIR"
    
