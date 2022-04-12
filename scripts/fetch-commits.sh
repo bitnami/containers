@@ -58,7 +58,7 @@ function findCommitsToSync() {
     # Find the commit that doesn't have changes respect the container folder
     # Get the last commit message in the container folder
     local shift=$((COMMIT_SHIFT + 1))
-    local -r last_commit_message="$(git log -n "$shift" --pretty=tformat:"%s" ./containers/"$origin_name" | tail -n 1)"
+    local -r last_commit_message="$(git log -n "$shift" --pretty=tformat:"%s" -- ./containers/"$origin_name" | tail -n 1)"
     # Search on the container origin repo the ID for the latest commit we have locally in the container folder
     local -r last_synced_commit_id="$(git rev-list "$origin_name"/master --grep="${last_commit_message}")"
     local commits_to_sync=""
