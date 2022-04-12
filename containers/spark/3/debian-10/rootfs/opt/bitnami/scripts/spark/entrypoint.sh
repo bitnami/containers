@@ -28,5 +28,24 @@ if [[ "$1" = "/opt/bitnami/scripts/spark/run.sh" ]]; then
     info "** Spark setup finished! **"
 fi
 
+# Spark has an special 'driver' command which is an alias for spark-submit
+# https://github.com/apache/spark/blob/master/resource-managers/kubernetes/docker/src/main/dockerfiles/spark/entrypoint.sh
+case "$1" in
+  driver)
+    shift 1
+    CMD=(
+        "/opt/bitnami/spark/bin/spark-submit"
+        --master "${SPARK_MASTER_URL}"
+        --conf "spark.jars.ivy=/tmp/.ivy"
+        --deploy-mode client
+        "$@"
+    )
+    ;;
+  *)
+    # Non-spark-on-k8s command provided, proceeding in pass-through mode
+    CMD=("$@")
+    ;;
+esac
+
 echo ""
-exec "$@"
+exec "${CMD[@]}"
