@@ -13,7 +13,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip hostname libasound2-dev libc6 libfreetype6 libfreetype6-dev libgcc1 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.24.2-0" --checksum 6671445790516400883182abf5e957645260585b8a9f9432a8a6b63b045b6559
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.24.4-0" --checksum b6da9c162bd8e43de7cd0cf32ea699415d2bd1f9399ae38d8fe0a5eed1598721
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "17.0.2-10" --checksum 70dbc5d64a8ae02f4898685ccaf993e0469ad804c87961e1e3b1a41046292a39
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "elasticsearch" "8.1.2-1" --checksum 204d2bbf54380f97069207c3d792e437bef211bb334aeba9a350798fed06a335
