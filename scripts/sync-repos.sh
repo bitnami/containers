@@ -14,7 +14,7 @@ function queryRepos() {
 
     while [[ "$page" -gt -1 ]]; do
         # Query only the public repos since we won't add private containers to bitnami/containers
-        page_repos="$(curl -H 'Content-Type: application/json' -H 'Accept: application/json' "https://api.github.com/orgs/bitnami/repos?type=public&per_page=${repos_per_page}&page=${page}&archived=false")"
+        page_repos="$(curl -H 'Content-Type: application/json' -H 'Accept: application/json' "https://api.github.com/orgs/bitnami/repos?type=public&per_page=${repos_per_page}&page=${page}")"
         repos="$(jq -s 'reduce .[] as $x ([]; . + $x)' <(echo "$repos") <(echo "$page_repos"))"     
         n_repos="$(jq length <<< "$page_repos")"   
         if [[ "$n_repos" -lt "$repos_per_page" ]]; then
@@ -29,7 +29,7 @@ function queryRepos() {
 
 function getContainerRepos() {
     local -r repos="$(queryRepos)"
-    local -r container_repos="$(jq -r '[ .[] | select(.name | test("bitnami-docker-.")) ]' <<< "$repos")"
+    local -r container_repos="$(jq -r '[ .[] | select(.name | test("bitnami-docker-.")) | select(.archived == false) ]' <<< "$repos")"
     echo "$container_repos" > /tmp/repos
     echo "$container_repos"
 }
