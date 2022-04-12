@@ -1,5 +1,0 @@
-version: '2'
-
-services:
-  kubewatch:
-    image: docker.io/bitnami/kubewatch:0

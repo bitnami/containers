@@ -1,7 +1,0 @@
-version: '2'
-
-services:
-  keycloak-gatekeeper:
-    image: docker.io/bitnami/keycloak-gatekeeper:10
-    ports:
-      - '3000:3000'
