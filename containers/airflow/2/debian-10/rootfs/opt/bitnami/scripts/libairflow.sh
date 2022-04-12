@@ -129,7 +129,6 @@ airflow_initialize() {
     fi
 }
 
-
 ########################
 # Generate Airflow conf file
 # Globals:
@@ -356,7 +355,7 @@ airflow_configure_celery_executor() {
     # Configure celery Redis url
     local -r redis_user=$(airflow_encode_url "$REDIS_USER")
     local -r redis_password=$(airflow_encode_url "$REDIS_PASSWORD")
-    airflow_conf_set "celery" "broker_url" "redis://${redis_user}:${redis_password}@${REDIS_HOST}:${REDIS_PORT_NUMBER}/1"
+    airflow_conf_set "celery" "broker_url" "redis://${redis_user}:${redis_password}@${REDIS_HOST}:${REDIS_PORT_NUMBER}/${REDIS_DATABASE}"
     is_boolean_yes "$AIRFLOW_REDIS_USE_SSL" && airflow_conf_set "celery" "redis_backend_use_ssl" "true"
 
     # Configure celery backend
