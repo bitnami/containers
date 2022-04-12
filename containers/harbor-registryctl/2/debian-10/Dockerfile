@@ -10,7 +10,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-registry" "2.5.0-0" --checksum 285b263847d38ca3cc70ff4799e1dc6fffa5c9f302b01b18a15951475a61bd8a
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.24.2-0" --checksum 6671445790516400883182abf5e957645260585b8a9f9432a8a6b63b045b6559
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.24.3-0" --checksum 6cb749e7cdf243eb2ece3c27f07b01413f030430150748bdd94f91a00e169efa
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-registryctl" "2.5.0-0" --checksum c6902656625c88d70a69a3dcaf87728af1e9a5463422fc26864c14ed626fec09
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
