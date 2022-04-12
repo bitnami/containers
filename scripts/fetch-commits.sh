@@ -92,12 +92,12 @@ function syncRepos() {
    
     # Build array of app names since we need to exclude them when moving files
     local apps=("mock")
-    local -r urls=($(echo "$repos" | jq -r '.[].html_url'))
+    local -r urls=($(echo "$repos" | jq -r '.[].html_url' | sort | uniq))
     for repo_url in "${urls[@]}"; do
         name="${repo_url:42}" # 42 is the length of https://github.com/bitnami/bitnami-docker-
         apps=("${apps[@]}" "$name")
     done
-    echo "$repos" | jq -r '.[].html_url' | while read -r repo_url; do
+    echo "$repos" | jq -r '.[].html_url' | sort | uniq | while read -r repo_url; do
         name="${repo_url:42}" # 42 is the length of https://github.com/bitnami/bitnami-docker-
         (
             cd "$TARGET_DIR" 
