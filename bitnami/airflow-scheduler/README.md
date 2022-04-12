@@ -315,6 +315,7 @@ The Apache Airflow Scheduler instance can be customized by specifying environmen
 - `AIRFLOW_REDIS_USE_SSL`: Set to yes if Redis(TM) uses SSL. Default: **no**
 - `REDIS_HOST`: Hostname for Redis(TM) server. Default: **redis**
 - `REDIS_PORT_NUMBER`: Port used by Redis(TM) server. Default: **6379**
+- `REDIS_DATABASE`: Database number for Redis(TM) server. Default: **1**
 - `REDIS_USER`: USER that Apache Airflow Scheduler will use to connect with Redis(TM). No defaults.
 - `REDIS_PASSWORD`: Password that Apache Airflow Scheduler will use to connect with Redis(TM). No defaults.
 
