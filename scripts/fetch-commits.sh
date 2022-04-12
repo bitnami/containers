@@ -62,7 +62,7 @@ function findCommitsToSync() {
     # Search on the container origin repo the ID for the latest commit we have locally in the container folder
     local -r last_synced_commit_id="$(git rev-list "$origin_name"/master --grep="${last_commit_message}")"
     local commits_to_sync=""
-    local max=20 # If we need to sync more than 20 commits there must be something wrong since we run the job on a daily basis
+    local max=100 # If we need to sync more than 100 commits there must be something wrong since we run the job on a daily basis
     for commit in "${commits[@]}"; do
         if [[ "$commit" != "$last_synced_commit_id" ]] && [[ "$max" -gt "0" ]]; then
             commits_to_sync="${commit} ${commits_to_sync}"
