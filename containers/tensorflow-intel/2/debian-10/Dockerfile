@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libbz2-1.0 libc6 libffi6 libgcc1 liblzma5 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.9.12-1" --checksum adb7d70d8080d38dab0ca6f1b0d7efce772b168621b6edcc4c65009c740f9b5e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.9.12-2" --checksum 7438a99db3eb2229543806b155fb19d179f8359d2d171c891ffe0857f9b97d49
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tensorflow-intel" "2.8.0-1" --checksum 032632f7a59b3d244ee28ee81687507e56b6a6151cb4b1e1e9c993be70bdbc29
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
