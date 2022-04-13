@@ -307,6 +307,8 @@ etcdctl_auth_flags() {
 etcd_store_member_id() {
     local -a extra_flags
 
+    info "Obtaining cluster member ID"
+    etcd_start_bg
     read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
     is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
     if retry_while "etcdctl ${extra_flags[*]} member list" >/dev/null 2>&1; then
@@ -317,8 +319,9 @@ etcd_store_member_id() {
             read -r -a advertised_array <<<"$(tr ',;' ' ' <<<"$ETCD_ADVERTISE_CLIENT_URLS")"
             stdbuf -oL etcdctl "${extra_flags[@]}" member list | grep -w "${advertised_array[0]}" | awk -F "," '{ print $1}' >"${ETCD_DATA_DIR}/member_id" || true
         done
-        debug "Stored member ID: $(cat "${ETCD_DATA_DIR}/member_id")"
+        info "Stored member ID: $(cat "${ETCD_DATA_DIR}/member_id")"
     fi
+    etcd_stop
 }
 
 ########################
@@ -604,7 +607,7 @@ etcd_initialize() {
                     )
                 fi
                 debug_execute etcdctl snapshot restore "${ETCD_INIT_SNAPSHOTS_DIR}/${ETCD_INIT_SNAPSHOT_FILENAME}" "${restore_args[@]}"
-                debug_execute etcd_store_member_id &
+                etcd_store_member_id
             else
                 error "There was no snapshot to restore!"
                 exit 1
@@ -620,7 +623,7 @@ etcd_initialize() {
             else
                 ! is_empty_value "$ETCD_ROOT_PASSWORD" && etcd_configure_rbac
             fi
-            debug_execute etcd_store_member_id &
+            etcd_store_member_id
         fi
     else
         info "Detected data from previous deployments"
@@ -645,7 +648,7 @@ etcd_initialize() {
                             --initial-cluster "$ETCD_INITIAL_CLUSTER" \
                             --initial-cluster-token "$ETCD_INITIAL_CLUSTER_TOKEN" \
                             --initial-advertise-peer-urls "$ETCD_INITIAL_ADVERTISE_PEER_URLS"
-                        debug_execute etcd_store_member_id &
+                        etcd_store_member_id
                     else
                         error "There was no snapshot to restore!"
                         exit 1
@@ -660,7 +663,7 @@ etcd_initialize() {
                 extra_flags+=("--peer-urls=$ETCD_INITIAL_ADVERTISE_PEER_URLS")
                 etcdctl member add "$ETCD_NAME" "${extra_flags[@]}" | grep "^ETCD_" >"$ETCD_NEW_MEMBERS_ENV_FILE"
                 replace_in_file "$ETCD_NEW_MEMBERS_ENV_FILE" "^" "export "
-                debug_execute etcd_store_member_id &
+                etcd_store_member_id
             elif [[ -f "${ETCD_DATA_DIR}/member_id" ]]; then
                 info "Updating member in existing cluster"
                 export ETCD_INITIAL_CLUSTER_STATE=existing
