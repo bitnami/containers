@@ -164,6 +164,34 @@ wordpress_validate() {
 }
 
 ########################
+# Configure database settings in wp-config.php
+# Globals:
+#   WORDPRESS_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+wordpress_set_db_settings() {
+    # Configure database credentials
+    wordpress_conf_set "DB_NAME" "$WORDPRESS_DATABASE_NAME"
+    wordpress_conf_set "DB_USER" "$WORDPRESS_DATABASE_USER"
+    wordpress_conf_set "DB_PASSWORD" "$WORDPRESS_DATABASE_PASSWORD"
+    wordpress_conf_set "DB_HOST" "${WORDPRESS_DATABASE_HOST}:${WORDPRESS_DATABASE_PORT_NUMBER}"
+    # Configure database SSL/TLS connections
+    if is_boolean_yes "$WORDPRESS_ENABLE_DATABASE_SSL"; then
+        ! is_empty_value "$WORDPRESS_DATABASE_SSL_KEY_FILE" && wordpress_conf_set "MYSQL_SSL_KEY" "$WORDPRESS_DATABASE_SSL_KEY_FILE"
+        ! is_empty_value "$WORDPRESS_DATABASE_SSL_CERT_FILE" && wordpress_conf_set "MYSQL_SSL_CERT" "$WORDPRESS_DATABASE_SSL_CERT_FILE"
+        ! is_empty_value "$WORDPRESS_DATABASE_SSL_CA_FILE" && wordpress_conf_set "MYSQL_SSL_CA" "$WORDPRESS_DATABASE_SSL_CA_FILE"
+        local wp_mysqli_client_flags="MYSQLI_CLIENT_SSL"
+        if ! is_boolean_yes "$WORDPRESS_VERIFY_DATABASE_SSL"; then
+            wp_mysqli_client_flags+=" | MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT"
+        fi
+        wordpress_conf_set "MYSQL_CLIENT_FLAGS" "$wp_mysqli_client_flags" yes
+    fi
+}
+
+########################
 # Ensure WordPress is initialized
 # Globals:
 #   WORDPRESS_*
@@ -218,22 +246,7 @@ wordpress_initialize() {
             ! is_boolean_yes "$WORDPRESS_ENABLE_MULTISITE" && wordpress_configure_urls
             # The only variable/non-constant in the entire configuration file is '$table_prefix'
             replace_in_file "$WORDPRESS_CONF_FILE" "^(\s*\\\$table_prefix\s*=\s*).*" "\1'$WORDPRESS_TABLE_PREFIX';"
-            # Configure database credentials
-            wordpress_conf_set "DB_NAME" "$WORDPRESS_DATABASE_NAME"
-            wordpress_conf_set "DB_USER" "$WORDPRESS_DATABASE_USER"
-            wordpress_conf_set "DB_PASSWORD" "$WORDPRESS_DATABASE_PASSWORD"
-            wordpress_conf_set "DB_HOST" "${WORDPRESS_DATABASE_HOST}:${WORDPRESS_DATABASE_PORT_NUMBER}"
-            # Configure database SSL/TLS connections
-            if is_boolean_yes "$WORDPRESS_ENABLE_DATABASE_SSL"; then
-                ! is_empty_value "$WORDPRESS_DATABASE_SSL_KEY_FILE" && wordpress_conf_set "MYSQL_SSL_KEY" "$WORDPRESS_DATABASE_SSL_KEY_FILE"
-                ! is_empty_value "$WORDPRESS_DATABASE_SSL_CERT_FILE" && wordpress_conf_set "MYSQL_SSL_CERT" "$WORDPRESS_DATABASE_SSL_CERT_FILE"
-                ! is_empty_value "$WORDPRESS_DATABASE_SSL_CA_FILE" && wordpress_conf_set "MYSQL_SSL_CA" "$WORDPRESS_DATABASE_SSL_CA_FILE"
-                local wp_mysqli_client_flags="MYSQLI_CLIENT_SSL"
-                if ! is_boolean_yes "$WORDPRESS_VERIFY_DATABASE_SSL"; then
-                    wp_mysqli_client_flags+=" | MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT"
-                fi
-                wordpress_conf_set "MYSQL_CLIENT_FLAGS" "$wp_mysqli_client_flags" yes
-            fi
+            wordpress_set_db_settings
             # Configure random keys and salt values
             wp_execute config shuffle-salts
 
@@ -290,7 +303,7 @@ wordpress_initialize() {
             fi
             # Allow to specify extra CLI flags, but ensure they are added last
             local -a wp_extra_install_flags
-            read -r -a wp_extra_install_flags <<< "$WORDPRESS_EXTRA_INSTALL_ARGS"
+            read -r -a wp_extra_install_flags <<<"$WORDPRESS_EXTRA_INSTALL_ARGS"
             [[ "${#wp_extra_install_flags[@]}" -gt 0 ]] && wp_install_flags+=("${wp_extra_install_flags[@]}")
             # Run installation command, which differs between normal and Multisite installations
             if is_boolean_yes "$WORDPRESS_ENABLE_MULTISITE"; then
@@ -312,7 +325,7 @@ wordpress_initialize() {
                 wp_execute plugin activate "${install_plugins_args[@]}"
             elif [[ "$WORDPRESS_PLUGINS" != "none" ]]; then
                 local -a plugins_to_install
-                read -r -a plugins_to_install <<< "$(echo "$WORDPRESS_PLUGINS" | tr ',;' ' ')"
+                read -r -a plugins_to_install <<<"$(echo "$WORDPRESS_PLUGINS" | tr ',;' ' ')"
                 if [[ "${#plugins_to_install[@]}" -gt 0 ]]; then
                     info "Installing and activating plugins: ${plugins_to_install[*]}"
                     install_plugins_args+=("${plugins_to_install[@]}")
@@ -358,7 +371,7 @@ wordpress_initialize() {
                 # If not deleted, the previously configured credentials will not be taken into account
                 # and the user will be forced to re-launch the plugin wizard right after logging in the admin panel
                 local wp_mail_options_to_delete
-                read -r -a wp_mail_options_to_delete <<< "$(wp_execute_print_output option list --search='*wp_mail*' --field=option_name | tr '\n' ' ')"
+                read -r -a wp_mail_options_to_delete <<<"$(wp_execute_print_output option list --search='*wp_mail*' --field=option_name | tr '\n' ' ')"
                 wp_execute option delete "${wp_mail_options_to_delete[@]}"
             fi
         else
@@ -383,6 +396,25 @@ wordpress_initialize() {
         restore_persisted_app "$app_name" "$WORDPRESS_DATA_TO_PERSIST"
         info "Trying to connect to the database server"
         local db_name db_user db_pass db_host db_port
+        if is_boolean_yes "$WORDPRESS_OVERRIDE_DATABASE_SETTINGS"; then
+            info "Overriding the database configuration in wp-config.php with the provided environment variables"
+            # Make the wp-config.php file writable to change the db settings
+            local wp_config_path wp_config_perms
+            wp_config_path="$(readlink -f "$WORDPRESS_CONF_FILE")"
+            wp_config_perms="$(stat -c "%a" "$WORDPRESS_CONF_FILE")"
+            if am_i_root; then
+                ! is_file_writable "$wp_config_path" && configure_permissions_ownership "$wp_config_path" -f "775" -u "$WEB_SERVER_DAEMON_USER" -g "root"
+            else
+                ! is_file_writable "$wp_config_path" && configure_permissions_ownership "$wp_config_path" -f "775"
+            fi
+            wordpress_set_db_settings
+            # Make it non-writable again
+            if am_i_root; then
+                is_file_writable "$wp_config_path" && configure_permissions_ownership "$wp_config_path" -f "$wp_config_perms" -u "$WEB_SERVER_DAEMON_USER" -g "root"
+            else
+                is_file_writable "$wp_config_path" && configure_permissions_ownership "$wp_config_path" -f "$wp_config_perms"
+            fi
+        fi
         db_name="$(wordpress_conf_get "DB_NAME")"
         db_user="$(wordpress_conf_get "DB_USER")"
         db_pass="$(wordpress_conf_get "DB_PASSWORD")"
@@ -432,7 +464,7 @@ wp_execute_print_output() {
     local -a cmd=("${PHP_BIN_DIR}/php" "${WP_CLI_BIN_DIR}/wp-cli.phar" "$@")
     # Allow to specify extra CLI flags, but ensure they are added last
     local -a wp_extra_cli_flags
-    read -r -a wp_extra_cli_flags <<< "$WORDPRESS_EXTRA_CLI_ARGS"
+    read -r -a wp_extra_cli_flags <<<"$WORDPRESS_EXTRA_CLI_ARGS"
     [[ "${#wp_extra_cli_flags[@]}" -gt 0 ]] && cmd+=("${wp_extra_cli_flags[@]}")
     # Run as web server user to avoid having to change permissions/ownership afterwards
     if am_i_root; then
@@ -468,7 +500,7 @@ wordpress_conf_append() {
     local -r conf="${1:?conf missing}"
     # This is basically escaping the newline character, for sed
     local conf_without_newlines
-    conf_without_newlines="$(awk '{ printf "%s\\n", $0 }' <<< "$conf")"
+    conf_without_newlines="$(awk '{ printf "%s\\n", $0 }' <<<"$conf")"
     replace_in_file "$WORDPRESS_CONF_FILE" "(/\* That's all, stop editing\! .*)" "${conf_without_newlines}\n\1"
 }
 
@@ -586,7 +618,8 @@ EOF
 wordpress_configure_urls() {
     # Set URL to dynamic value, depending on which host WordPress is accessed from (to be overridden later)
     # Note that wp-config.php is officially indented via tabs, not spaces
-    wordpress_conf_append "$(cat <<"EOF"
+    wordpress_conf_append "$(
+        cat <<"EOF"
 /**
  * The WP_SITEURL and WP_HOME options are configured to access from any hostname or IP address.
  * If you want to access only from an specific domain, you can modify them. For example:
@@ -600,7 +633,7 @@ if ( defined( 'WP_CLI' ) ) {
 EOF
     )"
     local wp_url_protocol="http"
-    ( is_boolean_yes "$WORDPRESS_ENABLE_HTTPS" || [[ "$WORDPRESS_SCHEME" = "https" ]] ) && wp_url_protocol="https"
+    (is_boolean_yes "$WORDPRESS_ENABLE_HTTPS" || [[ "$WORDPRESS_SCHEME" = "https" ]]) && wp_url_protocol="https"
     local wp_url_string="'${wp_url_protocol}://' . \$_SERVER['HTTP_HOST'] . '/'"
     wordpress_conf_set "WP_HOME" "$wp_url_string" yes
     wordpress_conf_set "WP_SITEURL" "$wp_url_string" yes
