@@ -1,10 +1,10 @@
 {
     "git": {
         "arch": "amd64",
-        "digest": "75c0294b7af868721549926139e6ddbec9548fbd0e69c7e199d640a4531d858b",
+        "digest": "7efd8c57f04630e8d4f385bbd838722fdccf92a57108540909fbc7c84e45b417",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.35.1-6"
+        "version": "2.35.2-0"
     },
     "gosu": {
         "arch": "amd64",
@@ -43,10 +43,10 @@
     },
     "ruby": {
         "arch": "amd64",
-        "digest": "98d92c65fc296f915a23ee5893fab07177f02274ec33887fb2e080c02e401dd4",
+        "digest": "e1123e8eb7fa89f5aaeafda30e5c65372cba6ff6c2dc88b7037d367ebb3e5863",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.7.5-35"
+        "version": "2.7.6-0"
     },
     "wait-for-port": {
         "arch": "amd64",
