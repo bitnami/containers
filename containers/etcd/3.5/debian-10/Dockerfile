@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.24.3-0" --checksum 6cb749e7cdf243eb2ece3c27f07b01413f030430150748bdd94f91a00e169efa
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.24.4-0" --checksum b6da9c162bd8e43de7cd0cf32ea699415d2bd1f9399ae38d8fe0a5eed1598721
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "etcd" "3.5.2-0" --checksum 01cc2b4382191deee9a3eec9ad5f9fd8cf2b8afda7883ff2ffa497f58fdfb2a2
 RUN apt-get update && apt-get upgrade -y && \
