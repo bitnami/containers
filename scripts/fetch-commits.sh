@@ -8,6 +8,7 @@ set -o xtrace # Uncomment this line for debugging purpose
 TARGET_DIR="."
 
 COMMIT_SHIFT="${1:-0}" # Used when you push commits manually
+CONTAINER="${2:-}" # USed when we want to sync a single container
 
 function queryRepos() {
     local page=0
@@ -45,7 +46,7 @@ function gitConfigure() {
 function pushChanges() {
     git config user.name "Bitnami Containers"
     git config user.email "containers@bitnami.com"
-    git push
+    git push origin main
 }
 
 function findCommitsToSync() {
@@ -70,7 +71,7 @@ function findCommitsToSync() {
         max=$((max - 1))
     done
     
-    [[ "$max" -eq "0" ]] && echo "Last commit not found into the original repo history" && exit 1 
+    [[ "$max" -eq "0" ]] && echo "Last commit not found into the original repo history" && return 1
     printf "$commits_to_sync"
 }
 
@@ -83,33 +84,47 @@ syncCommit() {
     rm  -f "$patch_file"
 }
 
-function syncRepos() {
-    local -r repos="$(getContainerRepos)"
-    
-    gitConfigure # Configure Git client
-    
-    mkdir -p "$TARGET_DIR"
-   
-    # Build array of app names since we need to exclude them when moving files
-    local apps=("mock")
-    local -r urls=($(echo "$repos" | jq -r '.[].html_url' | sort | uniq))
-    for repo_url in "${urls[@]}"; do
-        name="${repo_url:42}" # 42 is the length of https://github.com/bitnami/bitnami-docker-
-        apps=("${apps[@]}" "$name")
-    done
-    echo "$repos" | jq -r '.[].html_url' | sort | uniq | while read -r repo_url; do
-        name="${repo_url:42}" # 42 is the length of https://github.com/bitnami/bitnami-docker-
-        (
-            cd "$TARGET_DIR" 
-            # Fetch the old repo master
-            git remote add --fetch "$name" "$repo_url"
-            read -r -a commits_to_sync <<< "$(findCommitsToSync "$name")"
+syncContainerCommits() {
+    local -r name="${1:?Missing container name}"
+    local -r repo_url="https://github.com/bitnami/bitnami-docker-${name}"
+    (
+        cd "$TARGET_DIR" 
+        # Fetch the old repo master
+        git remote add --fetch "$name" "$repo_url"
+        read -r -a commits_to_sync <<< "$(findCommitsToSync "$name")"
+        if [[ "${#commits_to_sync[@]}" -eq "0" ]]; then
+            echo "Nothing to sync for ${name}"
+        else
             for commit in "${commits_to_sync[@]}"; do
                 syncCommit "$commit" "$name"
-	    done
-            git remote remove "$name"
-        )
-    done
+            done
+        fi
+        git remote remove "$name"
+    )
+}
+
+function syncRepos() {
+
+    gitConfigure # Configure Git client
+    mkdir -p "$TARGET_DIR"
+
+    if [[ -z "$CONTAINER" ]]; then
+        local -r repos="$(getContainerRepos)"        
+       
+        # Build array of app names since we need to exclude them when moving files
+        local apps=("mock")
+        local -r urls=($(echo "$repos" | jq -r '.[].html_url' | sort | uniq))
+        for repo_url in "${urls[@]}"; do
+            name="${repo_url:42}" # 42 is the length of https://github.com/bitnami/bitnami-docker-
+            apps=("${apps[@]}" "$name")
+        done
+        echo "$repos" | jq -r '.[].html_url' | sort | uniq | while read -r repo_url; do
+            name="${repo_url:42}" # 42 is the length of https://github.com/bitnami/bitnami-docker-
+            syncContainerCommits "$name"
+        done
+    else 
+        syncContainerCommits "$CONTAINER" 
+    fi
 
     pushChanges
 }
