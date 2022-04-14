@@ -14,7 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-3" --checksum a328c8fb3db9e60d3aa19eb7ca31de5da372affcb3d7c0d73610b4a19b634f94
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "10.20.0-5" --checksum efc2ccb03c4f0998d86e688d488e45aa534f27e317b253e7fcf037b7c78b7469
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.1-7" --checksum 7a4f45cbebd2e242278060415dd1a3f0dbe68991fdcaea5bb311e8de54a3e027
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.35.2-0" --checksum 7efd8c57f04630e8d4f385bbd838722fdccf92a57108540909fbc7c84e45b417
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.35.3-0" --checksum e90db17df802cff6fad25b150731cbd53d1e28c85e3aebe4b918ca9504090a4f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "airflow-worker" "2.2.5-0" --checksum 34aeef87de5b3bfcd42e516e995d0e580075b2c3550dc6a3a9a398ab7291ff7c
 RUN apt-get update && apt-get upgrade -y && \
