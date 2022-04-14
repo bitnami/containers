@@ -12,7 +12,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "2.7.6-0" --checksum e1123e8eb7fa89f5aaeafda30e5c65372cba6ff6c2dc88b7037d367ebb3e5863
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.19.1-0" --checksum 806082b15c0eb60e4baca497519b4c0cc9cd636d7a944e9943ebc1b9632fabdc
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.7-4" --checksum 14329a8ec0a649ecb9ffb37085a547183748efedea8ed029801ab9b381ab7173
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.35.2-0" --checksum 7efd8c57f04630e8d4f385bbd838722fdccf92a57108540909fbc7c84e45b417
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.35.3-0" --checksum e90db17df802cff6fad25b150731cbd53d1e28c85e3aebe4b918ca9504090a4f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-10" --checksum 35c818ba3f4b5aae905959bc7d3a5e81fc63786e3c662b604612c0aa7fcda8fd
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rails" "7.0.2-3-1" --checksum d978e110631bc102620a0381fb59bf33e9e62a6e60371fdf7041f39fa08aadc8
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
