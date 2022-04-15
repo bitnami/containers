@@ -12,7 +12,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.14-7" --checksum 900545c4f346a0ece8abf2caf64fd9d4ab7514967d4614d716bf7362b24f828b
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.24.4-0" --checksum b6da9c162bd8e43de7cd0cf32ea699415d2bd1f9399ae38d8fe0a5eed1598721
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.24.5-0" --checksum bdae511963f6a46ad128f41f9a6f2eec8c56fbb4929619fcd54232edfec6209e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "logstash" "7.17.2-0" --checksum 3b890a8267b479fc8815445082431f542acb80f332ef0ce490409ec220af7f1e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
