@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 libpcre3 libssl1.1 libyaml-0-2 perl procps tar zlib1g zlib1g-dev
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kong" "2.8.1-0" --checksum ed9ab2aeb2b11104d63f1d1892502ee8c9a3aba0b923e51a0a7b5ea29f56fd4f
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kong" "2.8.1-1" --checksum a8c3c9d391a215ea4f1424e43f987c78bc235e6840b04427743d6be539b20635
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
