@@ -116,7 +116,7 @@ $ docker run -d --name ejbca \
   --env EJBCA_DATABASE_HOST=mariadb \
   --env EJBCA_DATABASE_NAME=bitnami_ejbca \
   --network ejbca-network \
-  --volume wildfly_data:/bitnami/wildfly \
+  --volume ejbca_data:/bitnami/wildfly \
   bitnami/ejbca:latest
 ```
 
