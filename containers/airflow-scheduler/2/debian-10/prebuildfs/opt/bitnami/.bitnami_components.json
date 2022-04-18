@@ -8,10 +8,10 @@
     },
     "git": {
         "arch": "amd64",
-        "digest": "e90db17df802cff6fad25b150731cbd53d1e28c85e3aebe4b918ca9504090a4f",
+        "digest": "30924cdaed3ea73d8c91a3a460fe917ae14a6a83f1c231c019c2444e6dc517fa",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.35.3-0"
+        "version": "2.36.0-0"
     },
     "gosu": {
         "arch": "amd64",
