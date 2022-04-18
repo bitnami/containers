@@ -653,12 +653,22 @@ zookeeper_get_tls_config() {
 #   None
 #########################
 kafka_configure_from_environment_variables() {
+    # List of special cases to apply to the variables
+    local -r exception_regexps=(
+        "s/sasl.ssl/sasl_ssl/g"
+        "s/sasl.plaintext/sasl_plaintext/g"
+    )
     # Map environment variables to config properties
     for var in "${!KAFKA_CFG_@}"; do
         key="$(echo "$var" | sed -e 's/^KAFKA_CFG_//g' -e 's/_/\./g' | tr '[:upper:]' '[:lower:]')"
 
         # Exception for the camel case in this environment variable
         [[ "$var" == "KAFKA_CFG_ZOOKEEPER_CLIENTCNXNSOCKET" ]] && key="zookeeper.clientCnxnSocket"
+
+        # Apply exception regexps
+        for regex in "${exception_regexps[@]}"; do
+            key="$(echo "$key" | sed "$regex")"
+        done
 
         value="${!var}"
         kafka_server_conf_set "$key" "$value"
@@ -736,7 +746,6 @@ kafka_initialize() {
             external_client_protocol="${BASH_REMATCH[1]}"
             kafka_configure_external_client_communications "$external_client_protocol"
         fi
-
 
         if [[ "${internal_protocol:-}" =~ "SASL" || "${client_protocol:-}" =~ "SASL" || "${external_client_protocol:-}" =~ "SASL" ]] || [[ "${KAFKA_ZOOKEEPER_PROTOCOL}" =~ SASL ]]; then
             if [[ -n "$KAFKA_CFG_SASL_ENABLED_MECHANISMS" ]]; then
