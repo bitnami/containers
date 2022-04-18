@@ -315,7 +315,9 @@ minio_regenerate_keys() {
     fi
     echo "$MINIO_ROOT_USER" > "${MINIO_DATA_DIR}/.root_user"
     echo "$MINIO_ROOT_PASSWORD" > "${MINIO_DATA_DIR}/.root_password"
-    chmod 600 "${MINIO_DATA_DIR}/.root_user" "${MINIO_DATA_DIR}/.root_password"
+    if ! chmod 600 "${MINIO_DATA_DIR}/.root_user" "${MINIO_DATA_DIR}/.root_password" ; then
+        warn "Unable to set secure permissions on key files ${MINIO_DATA_DIR}/.root_*"
+    fi
 
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
