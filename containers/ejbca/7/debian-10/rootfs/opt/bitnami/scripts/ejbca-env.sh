@@ -36,6 +36,12 @@ ejbca_env_vars=(
     EJBCA_DATABASE_PASSWORD
     EJBCA_CA_NAME
     JAVA_OPTS
+    EJBCA_SMTP_HOST
+    EJBCA_SMTP_PORT
+    EJBCA_SMTP_FROM_ADDRESS
+    EJBCA_SMTP_TLS
+    EJBCA_SMTP_USERNAME
+    EJBCA_SMTP_PASSWORD
 )
 for env_var in "${ejbca_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -55,6 +61,7 @@ export BITNAMI_VOLUME_DIR="/bitnami"
 export EJBCA_BASE_DIR="/opt/bitnami/ejbca"
 export EJBCA_BIN_DIR="${EJBCA_BASE_DIR}/bin"
 export EJBCA_TMP_DIR="${EJBCA_BASE_DIR}/tmp"
+export EJBCA_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
 export EJBCA_DATABASE_SCRIPTS_DIR="${EJBCA_BASE_DIR}/sql-scripts"
 
 # Persistence
@@ -107,6 +114,12 @@ export EJBCA_DATABASE_USERNAME="${EJBCA_DATABASE_USERNAME:-}"
 export EJBCA_DATABASE_PASSWORD="${EJBCA_DATABASE_PASSWORD:-}"
 export EJBCA_CA_NAME="${EJBCA_CA_NAME:-ManagementCA}"
 export JAVA_OPTS="${JAVA_OPTS:--Xms2048m -Xmx2048m -XX:MetaspaceSize=192M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Dhibernate.dialect=org.hibernate.dialect.MySQL5Dialect -Dhibernate.dialect.storage_engine=innodb}"
+export EJBCA_SMTP_HOST="${EJBCA_SMTP_HOST:-localhost}"
+export EJBCA_SMTP_PORT="${EJBCA_SMTP_PORT:-25}"
+export EJBCA_SMTP_FROM_ADDRESS="${EJBCA_SMTP_FROM_ADDRESS:-user@example.com}"
+export EJBCA_SMTP_TLS="${EJBCA_SMTP_TLS:-false}"
+export EJBCA_SMTP_USERNAME="${EJBCA_SMTP_USERNAME:-}"
+export EJBCA_SMTP_PASSWORD="${EJBCA_SMTP_PASSWORD:-}"
 
 # EJBCA environment variables.
 export EJBCA_HOME="${EJBCA_BASE_DIR}"
