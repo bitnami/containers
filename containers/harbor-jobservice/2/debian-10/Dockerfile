@@ -10,7 +10,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.24.5-0" --checksum bdae511963f6a46ad128f41f9a6f2eec8c56fbb4929619fcd54232edfec6209e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-jobservice" "2.4.2-1" --checksum b31863a1296df35127a6c3c8f49eff0f5a44e3bbb19dfd9eb93f1603baeae097
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-jobservice" "2.5.0-0" --checksum 2d7f8cef81a43bf29bda8ada05bd2f2f41ba56e7d07da8dd325e83fc8a1c4e0f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -18,7 +18,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-jobservice/postunpack.sh
-ENV APP_VERSION="2.4.2" \
+ENV APP_VERSION="2.5.0" \
     BITNAMI_APP_NAME="harbor-jobservice" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/harbor-jobservice/bin:$PATH"
 
