@@ -23,5 +23,8 @@ am_i_root && ensure_user_exists "$KIBANA_DAEMON_USER" --group "$KIBANA_DAEMON_GR
 # Ensure kibana is initialized
 kibana_initialize
 
+# Create kibana_system user, if necessary
+is_boolean_yes "$KIBANA_CREATE_USER" && kibana_create_system_user
+
 # Ensure custom initialization scripts are executed
 kibana_custom_init_scripts
