@@ -18,3 +18,6 @@ ejbca_validate
 
 # Ensure ejbca is initialized
 ejbca_initialize
+
+# Launch init scripts
+ejbca_custom_init_scripts
