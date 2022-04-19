@@ -15,6 +15,7 @@ services:
     ports:
       - 8080:8080
       - 8443:8443
+      - 8009:8009
     volumes:
       - "wildfly_data:/bitnami/wildfly"
     environment:
