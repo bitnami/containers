@@ -45,6 +45,15 @@ kibana_validate() {
     # Warn users in case the configuration file is not writable
     is_file_writable "$KIBANA_CONF_FILE" || warn "The Kibana configuration file '${KIBANA_CONF_FILE}' is not writable. Configurations based on environment variables will not be applied for this file."
 
+    if is_boolean_yes "$KIBANA_CREATE_USER"; then
+        if is_empty_value "$KIBANA_PASSWORD"; then
+            print_validation_error "The variable KIBANA_CREATE_USER is set but no KIBANA_PASSWORD provided for the kibana_system user."
+        fi
+        if is_empty_value "$KIBANA_ELASTICSEARCH_PASSWORD"; then
+            print_validation_error "Password for the 'elastic' user is required in order to create the kibana_system user. Please provide it using the variable KIBANA_ELASTICSEARCH_PASSWORD."
+        fi
+    fi
+
     # User inputs
     check_empty_value "KIBANA_ELASTICSEARCH_URL"
     check_empty_value "KIBANA_HOST"
@@ -116,8 +125,10 @@ kibana_initialize() {
             fi
         fi
         # Override configuration
-        ! is_empty_value "$KIBANA_PASSWORD" && kibana_conf_set "elasticsearch.password" "$KIBANA_PASSWORD"
-        ! is_empty_value "$KIBANA_USERNAME" && kibana_conf_set "elasticsearch.username" "$KIBANA_USERNAME"
+        if ! is_empty_value "$KIBANA_PASSWORD"; then
+            kibana_conf_set "elasticsearch.username" "kibana_system"
+            kibana_conf_set "elasticsearch.password" "$KIBANA_PASSWORD"
+        fi
         if is_boolean_yes "$KIBANA_SERVER_ENABLE_TLS"; then
             kibana_conf_set "server.ssl.enabled" "true" "bool"
             if "$KIBANA_SERVER_TLS_USE_PEM"; then
@@ -396,5 +407,51 @@ kibana_custom_init_scripts() {
 
         is_kibana_running && stop_service_using_pid "$KIBANA_PID_FILE"
         retry_while "is_kibana_not_running"
+    fi
+}
+
+########################
+# Waits for Elasticsearch to be available and creates the user 'kibana_user', if it doesn't exists
+# Globals:
+#   KIBANA_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+kibana_create_system_user() {
+    local -r retries="60"
+    local -r sleep_time="5"
+    local url
+    url=$(kibana_sanitize_elasticsearch_hosts "${KIBANA_ELASTICSEARCH_URL}" "${KIBANA_ELASTICSEARCH_PORT_NUMBER}")
+    check_elasticsearch() {
+        local status_code="000"
+        status_code=$(curl -L -s -k -o /dev/null "${url}" -w "%{http_code}")
+        debug "Attempted to connect with Elasticserach. Status code: $status_code"
+        # Any status code different to 000 will be considered valid
+        [[ "$status_code" != "000" ]]
+    }
+
+    info "Waiting for Elasticsearch to be ready."
+    # Wait for elasticsearch to be available
+    if ! retry_while "check_elasticsearch" "$retries" "$sleep_time"; then
+        error "Timeout waiting for the Elasticsearch to respond"
+        return 1
+    fi
+
+    # Check kibana_system user doesn't exists
+    status_code=$(curl -L -s -k -o /dev/null -u "kibana_system:${KIBANA_PASSWORD}" "${url}" -w "%{http_code}")
+    if [[ "$status_code" == "401" ]]; then
+        info "Setting password for user 'kibana_system'"
+        curl -L -s -k -o /dev/null -X POST -u "elastic:${KIBANA_ELASTICSEARCH_PASSWORD}" -H "Content-Type: application/json" "${url}/_security/user/kibana_system/_password" -d "{\"password\":\"${KIBANA_PASSWORD}\"}"
+        status_code=$(curl -L -s -k -o /dev/null -u "kibana_system:${KIBANA_PASSWORD}" "${url}" -w "%{http_code}")
+        if [[ "$status_code" == "200" ]]; then
+            info "Password for kibana_system successfully configured"
+        else
+            error "An error occurred while configuring kibana_system user"
+            return 1
+        fi
+    else
+        info "Skipping 'kibana_system' user creation. User already exists. Status code: ${status_code}"
     fi
 }
