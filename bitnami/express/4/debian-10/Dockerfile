@@ -11,7 +11,7 @@ RUN install_packages acl ca-certificates curl gzip libbz2-1.0 libc6 libcom-err2 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-3" --checksum a328c8fb3db9e60d3aa19eb7ca31de5da372affcb3d7c0d73610b4a19b634f94
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.19.1-0" --checksum 806082b15c0eb60e4baca497519b4c0cc9cd636d7a944e9943ebc1b9632fabdc
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "sequelize-cli" "5.5.1-8" --checksum 01d999017f6852a67b58aafe191e7c60decac22e2fcef6252a5d3d4964839d02
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.35.3-0" --checksum e90db17df802cff6fad25b150731cbd53d1e28c85e3aebe4b918ca9504090a4f
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.36.0-0" --checksum 30924cdaed3ea73d8c91a3a460fe917ae14a6a83f1c231c019c2444e6dc517fa
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "express-generator" "4.16.1-8" --checksum 27539ad157fbe90d36b91ef6760d225919ff5e929b4e698e6b051a2c77e1e46e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "bower" "1.8.12-8" --checksum d7bd0d251bb6f7a1ce771bd953c53e4ba7d0bb22ab4f29f92b3e0ba0cbe644bf
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-10" --checksum 35c818ba3f4b5aae905959bc7d3a5e81fc63786e3c662b604612c0aa7fcda8fd
