@@ -584,7 +584,7 @@ solr_initialize() {
         info "Configuring file permissions for Solr"
         ensure_dir_exists "$SOLR_VOLUME_DIR"
 
-        rm -f "${SOLR_TMP_DIR}/solr*.pid"
+        rm -f "$SOLR_PID_FILE"
 
         if is_boolean_yes "$SOLR_ENABLE_CLOUD_MODE"; then
             info "Deploying Solr Cloud from scratch"
