@@ -21,6 +21,10 @@ $ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-influxdb-rel
 $ docker-compose up
 ```
 
+## Deprecation Notice
+
+InfluxDB Relay&trade; is no longer maintained by upstream and is now internally tagged as to be deprecated. This image will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 04-28-2022
+
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -47,7 +51,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-scratch`, `0.20200717.0`, `0.20200717.0-scratch-r18`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb-relay/blob/0.20200717.0-scratch-r18/0/scratch/Dockerfile)
+* [`0`, `0-scratch`, `0.20200717.0`, `0.20200717.0-scratch-r19`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb-relay/blob/0.20200717.0-scratch-r19/0/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/influxdb-relay GitHub repo](https://github.com/bitnami/bitnami-docker-influxdb-relay).
 
