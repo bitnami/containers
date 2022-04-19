@@ -40,7 +40,7 @@ minio_distributed_drives() {
     local -a nodes
 
     if ! is_empty_value "$MINIO_DISTRIBUTED_NODES"; then
-        read -r -a nodes <<< "$(tr ',;' ' ' <<< "${MINIO_DISTRIBUTED_NODES}")"
+        read -r -a nodes <<<"$(tr ',;' ' ' <<<"${MINIO_DISTRIBUTED_NODES}")"
         for node in "${nodes[@]}"; do
             drive="$(parse_uri "${MINIO_SCHEME}://${node}" "path")"
             drives+=("$drive")
@@ -118,7 +118,7 @@ wait_for_minio() {
     waited_time=0
     while ! is_minio_live && [[ "$waited_time" -lt "$MINIO_STARTUP_TIMEOUT" ]]; do
         sleep 5
-        waited_time=$((waited_time+5))
+        waited_time=$((waited_time + 5))
     done
 }
 
@@ -137,7 +137,7 @@ minio_start_bg() {
     local -a nodes
 
     if is_boolean_yes "$MINIO_DISTRIBUTED_MODE_ENABLED"; then
-        read -r -a nodes <<< "$(tr ',;' ' ' <<< "${MINIO_DISTRIBUTED_NODES}")"
+        read -r -a nodes <<<"$(tr ',;' ' ' <<<"${MINIO_DISTRIBUTED_NODES}")"
         for node in "${nodes[@]}"; do
             if is_distributed_ellipses_syntax; then
                 args+=("${MINIO_SCHEME}://${node}")
@@ -177,7 +177,7 @@ minio_stop() {
             if [[ "$counter" -le 0 ]]; then
                 break
             fi
-            sleep 1;
+            sleep 1
             counter=$((counter - 1))
         done
     else
@@ -223,8 +223,8 @@ minio_validate() {
         if [[ -z "${MINIO_DISTRIBUTED_NODES:-}" ]]; then
             print_validation_error "Distributed mode is enabled. Nodes must be indicated setting the environment variable MINIO_DISTRIBUTED_NODES"
         else
-            read -r -a nodes <<< "$(tr ',;' ' ' <<< "${MINIO_DISTRIBUTED_NODES}")"
-            if ! is_distributed_ellipses_syntax && ([[ "${#nodes[@]}" -lt 4 ]] || (( "${#nodes[@]}" % 2 ))); then
+            read -r -a nodes <<<"$(tr ',;' ' ' <<<"${MINIO_DISTRIBUTED_NODES}")"
+            if ! is_distributed_ellipses_syntax && ([[ "${#nodes[@]}" -lt 4 ]] || (("${#nodes[@]}" % 2))); then
                 print_validation_error "Number of nodes must even and greater than 4."
             fi
         fi
@@ -268,10 +268,10 @@ minio_validate() {
 #########################
 minio_create_default_buckets() {
     if [[ -n "$MINIO_DEFAULT_BUCKETS" ]]; then
-        read -r -a buckets <<< "$(tr ',;' ' ' <<< "${MINIO_DEFAULT_BUCKETS}")"
+        read -r -a buckets <<<"$(tr ',;' ' ' <<<"${MINIO_DEFAULT_BUCKETS}")"
         info "Creating default buckets..."
         for b in "${buckets[@]}"; do
-            read -r -a bucket_info <<< "$(tr ':' ' ' <<< "${b}")"
+            read -r -a bucket_info <<<"$(tr ':' ' ' <<<"${b}")"
             if ! minio_client_bucket_exists "local/${bucket_info[0]}"; then
                 if [[ -n "${MINIO_REGION_NAME:-}" ]]; then
                     minio_client_execute mb "--region" "${MINIO_REGION_NAME}" "local/${bucket_info[0]}"
@@ -313,10 +313,11 @@ minio_regenerate_keys() {
             error_code=1
         fi
     fi
-    echo "$MINIO_ROOT_USER" > "${MINIO_DATA_DIR}/.root_user"
-    echo "$MINIO_ROOT_PASSWORD" > "${MINIO_DATA_DIR}/.root_password"
-    chmod 600 "${MINIO_DATA_DIR}/.root_user" "${MINIO_DATA_DIR}/.root_password"
-
+    echo "$MINIO_ROOT_USER" >"${MINIO_DATA_DIR}/.root_user"
+    echo "$MINIO_ROOT_PASSWORD" >"${MINIO_DATA_DIR}/.root_password"
+    if ! chmod 600 "${MINIO_DATA_DIR}/.root_user" "${MINIO_DATA_DIR}/.root_password"; then
+        warn "Unable to set secure permissions on key files ${MINIO_DATA_DIR}/.root_*"
+    fi
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
@@ -332,7 +333,7 @@ minio_regenerate_keys() {
 #########################
 minio_node_hostname() {
     if is_boolean_yes "$MINIO_DISTRIBUTED_MODE_ENABLED"; then
-        read -r -a nodes <<< "$(tr ',;' ' ' <<< "${MINIO_DISTRIBUTED_NODES}")"
+        read -r -a nodes <<<"$(tr ',;' ' ' <<<"${MINIO_DISTRIBUTED_NODES}")"
         for node in "${nodes[@]}"; do
             [[ $(get_machine_ip) = $(dns_lookup "$node") ]] && echo "$node" && return
         done
