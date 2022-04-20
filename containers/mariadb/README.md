@@ -32,9 +32,6 @@ $ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-
-> This [CVE scan report](https://quay.io/repository/bitnami/mariadb?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
-
 ## How to deploy MariaDB in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami MariaDB Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/mariadb).
@@ -51,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`10.7`, `10.7-debian-10`, `10.7.3`, `10.7.3-debian-10-r31`, `latest` (10.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.7.3-debian-10-r31/10.7/debian-10/Dockerfile)
-* [`10.6`, `10.6-debian-10`, `10.6.7`, `10.6.7-debian-10-r60` (10.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.6.7-debian-10-r60/10.6/debian-10/Dockerfile)
+* [`10.6`, `10.6-debian-10`, `10.6.7`, `10.6.7-debian-10-r61` (10.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.6.7-debian-10-r61/10.6/debian-10/Dockerfile)
 * [`10.5`, `10.5-debian-10`, `10.5.15`, `10.5.15-debian-10-r63` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.5.15-debian-10-r63/10.5/debian-10/Dockerfile)
 * [`10.4`, `10.4-debian-10`, `10.4.24`, `10.4.24-debian-10-r63` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.24-debian-10-r63/10.4/debian-10/Dockerfile)
 * [`10.3`, `10.3-debian-10`, `10.3.34`, `10.3.34-debian-10-r64` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.34-debian-10-r64/10.3/debian-10/Dockerfile)
@@ -356,7 +353,6 @@ By default MariaDB doesn't enable [slow query log](https://mariadb.com/kb/en/slo
 ### Slow filesystems
 
 In some platforms, the filesystem used for persistence could be slow. That could cause the database to take extra time to be ready. If that's the case, you can configure the `MARIADB_INIT_SLEEP_TIME` environment variable to make the initialization script to wait extra time (in seconds) before proceeding with the configuration operations.
-
 
 ### Setting up a replication cluster
 
