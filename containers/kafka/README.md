@@ -28,8 +28,6 @@ $ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-> This [CVE scan report](https://quay.io/repository/bitnami/kafka?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
-
 ## How to deploy Apache Apache Kafka in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Apache Apache Kafka Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/kafka).
@@ -43,9 +41,9 @@ Non-root container images add an extra layer of security and are generally recom
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
-* [`3.1`, `3.1-debian-10`, `3.1.0`, `3.1.0-debian-10-r82`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.1.0-debian-10-r82/3.1/debian-10/Dockerfile)
+* [`3.1`, `3.1-debian-10`, `3.1.0`, `3.1.0-debian-10-r83`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.1.0-debian-10-r83/3.1/debian-10/Dockerfile)
 * [`3.0`, `3.0-debian-10`, `3.0.1`, `3.0.1-debian-10-r28` (3.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.0.1-debian-10-r28/3.0/debian-10/Dockerfile)
-* [`2.8`, `2.8-debian-10`, `2.8.1`, `2.8.1-debian-10-r194` (2.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.1-debian-10-r194/2.8/debian-10/Dockerfile)
+* [`2.8`, `2.8-debian-10`, `2.8.1`, `2.8.1-debian-10-r195` (2.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.1-debian-10-r195/2.8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
