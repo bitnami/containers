@@ -30,9 +30,6 @@ $ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-
-> This [CVE scan report](https://quay.io/repository/bitnami/node?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
-
 ## How to deploy Node.js in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Node.js Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/node).
@@ -46,7 +43,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`17`, `17-debian-10`, `17.9.0`, `17.9.0-debian-10-r12`, `latest` (17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/17.9.0-debian-10-r12/17/debian-10/Dockerfile)
 * [`16`, `16-debian-10`, `16.14.2`, `16.14.2-debian-10-r34` (16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/16.14.2-debian-10-r34/16/debian-10/Dockerfile)
-* [`14`, `14-debian-10`, `14.19.1`, `14.19.1-debian-10-r31` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/14.19.1-debian-10-r31/14/debian-10/Dockerfile)
+* [`14`, `14-debian-10`, `14.19.1`, `14.19.1-debian-10-r32` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/14.19.1-debian-10-r32/14/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.22.12`, `12.22.12-debian-10-r14` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.22.12-debian-10-r14/12/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
