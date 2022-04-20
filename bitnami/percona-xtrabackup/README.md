@@ -28,7 +28,7 @@ $ docker run --name percona-xtrabackup bitnami/percona-xtrabackup:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8`, `8-debian-10`, `8.0.27-19`, `8.0.27-19-debian-10-r74`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-percona-xtrabackup/blob/8.0.27-19-debian-10-r74/8/debian-10/Dockerfile)
+* [`8`, `8-debian-10`, `8.0.27-19`, `8.0.27-19-debian-10-r75`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-percona-xtrabackup/blob/8.0.27-19-debian-10-r75/8/debian-10/Dockerfile)
 * [`2.4`, `2.4-debian-10`, `2.4.24`, `2.4.24-debian-10-r209` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-percona-xtrabackup/blob/2.4.24-debian-10-r209/2.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/percona-xtrabackup GitHub repo](https://github.com/bitnami/bitnami-docker-percona-xtrabackup).
