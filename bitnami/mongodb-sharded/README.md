@@ -30,9 +30,6 @@ $ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-
-> This [CVE scan report](https://quay.io/repository/bitnami/mongodb?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
-
 ## How to deploy MongoDB&reg; Sharded in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami MongoDB&reg; Sharded Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/mongodb-sharded).
@@ -49,8 +46,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5.0`, `5.0-debian-10`, `5.0.7`, `5.0.7-debian-10-r7`, `latest` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/5.0.7-debian-10-r7/5.0/debian-10/Dockerfile)
-* [`4.4`, `4.4-debian-10`, `4.4.13`, `4.4.13-debian-10-r47` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.13-debian-10-r47/4.4/debian-10/Dockerfile)
-* [`4.2`, `4.2-debian-10`, `4.2.19`, `4.2.19-debian-10-r48` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.19-debian-10-r48/4.2/debian-10/Dockerfile)
+* [`4.4`, `4.4-debian-10`, `4.4.13`, `4.4.13-debian-10-r48` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.13-debian-10-r48/4.4/debian-10/Dockerfile)
+* [`4.2`, `4.2-debian-10`, `4.2.19`, `4.2.19-debian-10-r49` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.19-debian-10-r49/4.2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
 
