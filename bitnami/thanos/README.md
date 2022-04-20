@@ -26,8 +26,8 @@ $ docker-compose up -d
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-
-> This [CVE scan report](https://quay.io/repository/bitnami/thanos?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
+* All our images are based on minideb a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* Bitnami container images are released daily with the latest distribution packages available.
 
 ## How to deploy Thanos in Kubernetes?
 
@@ -42,7 +42,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-scratch`, `0.25.2`, `0.25.2-scratch-r3`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-thanos/blob/0.25.2-scratch-r3/0/scratch/Dockerfile)
+* [`0`, `0-scratch`, `0.25.2`, `0.25.2-scratch-r4`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-thanos/blob/0.25.2-scratch-r4/0/scratch/Dockerfile)
 
 ## Connecting to other containers
 
