@@ -29,16 +29,13 @@ $ docker-compose up
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-
-> This [CVE scan report](https://quay.io/repository/bitnami/symfony?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
-
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
 * [`6.0`, `6.0-debian-10`, `6.0.7`, `6.0.7-debian-10-r15`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/6.0.7-debian-10-r15/6.0/debian-10/Dockerfile)
-* [`5.4`, `5.4-debian-10`, `5.4.7`, `5.4.7-debian-10-r15` (5.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/5.4.7-debian-10-r15/5.4/debian-10/Dockerfile)
+* [`5.4`, `5.4-debian-10`, `5.4.7`, `5.4.7-debian-10-r16` (5.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/5.4.7-debian-10-r16/5.4/debian-10/Dockerfile)
 * [`4.4`, `4.4-debian-10`, `4.4.40`, `4.4.40-debian-10-r15` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/4.4.40-debian-10-r15/4.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/symfony GitHub repo](https://github.com/bitnami/bitnami-docker-symfony).
