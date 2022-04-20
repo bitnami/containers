@@ -537,15 +537,19 @@ elasticsearch_configure_node_roles() {
     local set_repo_path="no"
     read -r -a roles_list <<<"$(tr ',;' ' ' <<<"$ELASTICSEARCH_NODE_ROLES")"
     if is_boolean_yes "$ELASTICSEARCH_IS_DEDICATED_NODE"; then
-        elasticsearch_conf_set node.roles "${roles_list[@]}"
-        for role in "${roles_list[@]}"; do
-            case "$role" in
-                master | data | data_content | data_hot | data_warm | data_cold | data_frozen)
-                    set_repo_path="yes"
-                    ;;
-                *) ;;
-            esac
-        done
+        if [[ "${#roles_list[@]}" -eq 0 ]]; then
+            elasticsearch_conf_write node.roles "[]" int
+        else
+            elasticsearch_conf_set node.roles "${roles_list[@]}"
+            for role in "${roles_list[@]}"; do
+                case "$role" in
+                    master | data | data_content | data_hot | data_warm | data_cold | data_frozen)
+                        set_repo_path="yes"
+                        ;;
+                    *) ;;
+                esac
+            done
+        fi
     else
         set_repo_path="yes"
     fi
