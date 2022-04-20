@@ -23,8 +23,6 @@ $ docker run --name mongodb-exporter bitnami/mongodb-exporter:latest
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-> This [CVE scan report](https://quay.io/repository/bitnami/mongodb-exporter?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
-
 ## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
@@ -34,7 +32,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.31.2`, `0.31.2-debian-10-r11`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb-exporter/blob/0.31.2-debian-10-r11/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.31.2`, `0.31.2-debian-10-r12`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb-exporter/blob/0.31.2-debian-10-r12/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb-exporter).
 
