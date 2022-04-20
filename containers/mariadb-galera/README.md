@@ -34,8 +34,6 @@ $ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-> This [CVE scan report](https://quay.io/repository/bitnami/mariadb-galera?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
-
 ## How to deploy MariaDB Galera in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami MariaDB Galera Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/mariadb-galera).
@@ -54,10 +52,10 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`10.7`, `10.7-debian-10`, `10.7.3`, `10.7.3-debian-10-r26`, `latest` (10.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.7.3-debian-10-r26/10.7/debian-10/Dockerfile)
-* [`10.6`, `10.6-debian-10`, `10.6.7`, `10.6.7-debian-10-r56` (10.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.6.7-debian-10-r56/10.6/debian-10/Dockerfile)
+* [`10.6`, `10.6-debian-10`, `10.6.7`, `10.6.7-debian-10-r57` (10.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.6.7-debian-10-r57/10.6/debian-10/Dockerfile)
 * [`10.5`, `10.5-debian-10`, `10.5.15`, `10.5.15-debian-10-r57` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.5.15-debian-10-r57/10.5/debian-10/Dockerfile)
 * [`10.4`, `10.4-debian-10`, `10.4.24`, `10.4.24-debian-10-r57` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.24-debian-10-r57/10.4/debian-10/Dockerfile)
-* [`10.3`, `10.3-debian-10`, `10.3.34`, `10.3.34-debian-10-r63` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.34-debian-10-r63/10.3/debian-10/Dockerfile)
+* [`10.3`, `10.3-debian-10`, `10.3.34`, `10.3.34-debian-10-r64` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.34-debian-10-r64/10.3/debian-10/Dockerfile)
 * [`10.2`, `10.2-debian-10`, `10.2.43`, `10.2.43-debian-10-r62` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.43-debian-10-r62/10.2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb-galera GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb-galera).
@@ -707,7 +705,6 @@ $ docker-compose up mariadb
 
 - `10.1.43-centos-7-r78`, `10.2.30-centos-7-r40`, `10.3.21-centos-7-r41`, and `10.4.11-centos-7-r32` are considered the latest images based on CentOS.
 - Standard supported distros: Debian & OEL.
-
 
 ## Contributing
 
