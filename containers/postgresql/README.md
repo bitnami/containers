@@ -32,9 +32,6 @@ $ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-
-> This [CVE scan report](https://quay.io/repository/bitnami/postgresql?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
-
 ## How to deploy PostgreSQL in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami PostgreSQL Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/postgresql).
@@ -50,7 +47,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`14`, `14-debian-10`, `14.2.0`, `14.2.0-debian-10-r70`, `latest` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/14.2.0-debian-10-r70/14/debian-10/Dockerfile)
+* [`14`, `14-debian-10`, `14.2.0`, `14.2.0-debian-10-r72`, `latest` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/14.2.0-debian-10-r72/14/debian-10/Dockerfile)
 * [`13`, `13-debian-10`, `13.6.0`, `13.6.0-debian-10-r68` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/13.6.0-debian-10-r68/13/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.10.0`, `12.10.0-debian-10-r69` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.10.0-debian-10-r69/12/debian-10/Dockerfile)
 * [`11`, `11-debian-10`, `11.15.0`, `11.15.0-debian-10-r69` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.15.0-debian-10-r69/11/debian-10/Dockerfile)
