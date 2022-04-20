@@ -23,15 +23,12 @@ $ docker run --name trivy bitnami/trivy:latest
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-
-> This [CVE scan report](https://quay.io/repository/bitnami/trivy?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
-
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.26.0`, `0.26.0-debian-10-r4`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-trivy/blob/0.26.0-debian-10-r4/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.26.0`, `0.26.0-debian-10-r5`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-trivy/blob/0.26.0-debian-10-r5/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/trivy GitHub repo](https://github.com/bitnami/bitnami-docker-trivy).
 
