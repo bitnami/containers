@@ -27,8 +27,6 @@ $ docker-compose up -d
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 
-> This [CVE scan report](https://quay.io/repository/bitnami/kubernetes-event-exporter?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
-
 ## How to deploy Kubernetes Event Exporter in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Kubernetes Event Exporter Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/kubernetes-event-exporter).
@@ -42,7 +40,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.11.0`, `0.11.0-debian-10-r146`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubernetes-event-exporter/blob/0.11.0-debian-10-r146/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.11.0`, `0.11.0-debian-10-r147`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubernetes-event-exporter/blob/0.11.0-debian-10-r147/0/debian-10/Dockerfile)
 
 ## Connecting to other containers
 
