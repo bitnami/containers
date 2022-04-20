@@ -20,9 +20,6 @@ $ docker run --name kubeapps-asset-syncer bitnami/kubeapps-asset-syncer:latest
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 
-
-> This [CVE scan report](https://quay.io/repository/bitnami/kubeapps-asset-syncer?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
-
 ## How to deploy Kubeapps Asset Syncer in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Kubeapps Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/kubeapps).
@@ -36,7 +33,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-scratch`, `2.4.4`, `2.4.4-scratch-r2`, `latest` (2/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-asset-syncer/blob/2.4.4-scratch-r2/2/scratch/Dockerfile)
+* [`2`, `2-scratch`, `2.4.4`, `2.4.4-scratch-r3`, `latest` (2/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubeapps-asset-syncer/blob/2.4.4-scratch-r3/2/scratch/Dockerfile)
 
 ## Configuration
 
