@@ -31,7 +31,6 @@ You can find the available configuration options in the [Environment Variables](
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
-> This [CVE scan report](https://quay.io/repository/bitnami/elasticsearch?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
 
 ## How to deploy Elasticsearch in Kubernetes?
 
@@ -48,8 +47,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8`, `8-debian-10`, `8.1.2`, `8.1.2-debian-10-r14`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/8.1.2-debian-10-r14/8/debian-10/Dockerfile)
-* [`7`, `7-debian-10`, `7.17.2`, `7.17.2-debian-10-r17` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.17.2-debian-10-r17/7/debian-10/Dockerfile)
+* [`8`, `8-debian-10`, `8.1.2`, `8.1.2-debian-10-r15`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/8.1.2-debian-10-r15/8/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.17.2`, `7.17.2-debian-10-r18` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.17.2-debian-10-r18/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch).
 ## Get this image
