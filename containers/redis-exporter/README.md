@@ -23,9 +23,6 @@ $ docker run --name redis-exporter bitnami/redis-exporter:latest
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-
-> This [CVE scan report](https://quay.io/repository/bitnami/redis-exporter?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
-
 ## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
@@ -35,7 +32,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.37.0`, `1.37.0-debian-10-r32`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-exporter/blob/1.37.0-debian-10-r32/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.37.0`, `1.37.0-debian-10-r33`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-exporter/blob/1.37.0-debian-10-r33/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-redis-exporter).
 
@@ -84,7 +81,6 @@ $ docker run --name redis-exporter-node1 --network redis-exporter-network bitnam
 #### Step 3: Run another containers
 
 We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
-
 
 ## Configuration
 
