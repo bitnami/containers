@@ -26,9 +26,6 @@ You can find the default credentials and available configuration options in the 
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-
-> This [CVE scan report](https://quay.io/repository/bitnami/tomcat?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
-
 ## How to deploy Apache Apache Tomcat in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Apache Apache Tomcat Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/tomcat).
@@ -44,8 +41,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10`, `10-debian-10`, `10.0.20`, `10.0.20-debian-10-r17`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/10.0.20-debian-10-r17/10/debian-10/Dockerfile)
-* [`9.0`, `9.0-debian-10`, `9.0.62`, `9.0.62-debian-10-r17` (9.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.62-debian-10-r17/9.0/debian-10/Dockerfile)
+* [`10`, `10-debian-10`, `10.0.20`, `10.0.20-debian-10-r18`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/10.0.20-debian-10-r18/10/debian-10/Dockerfile)
+* [`9.0`, `9.0-debian-10`, `9.0.62`, `9.0.62-debian-10-r18` (9.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.62-debian-10-r18/9.0/debian-10/Dockerfile)
 * [`8.5`, `8.5-debian-10`, `8.5.78`, `8.5.78-debian-10-r17` (8.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.78-debian-10-r17/8.5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tomcat GitHub repo](https://github.com/bitnami/bitnami-docker-tomcat).
