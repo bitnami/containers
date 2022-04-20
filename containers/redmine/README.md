@@ -26,8 +26,6 @@ $ docker-compose up -d
 - All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 - Bitnami container images are released daily with the latest distribution packages available.
 
-> This [CVE scan report](https://quay.io/repository/bitnami/redmine?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
-
 ## How to deploy Redmine in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Redmine Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/redmine).
@@ -39,7 +37,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`5`, `5-debian-10`, `5.0.0`, `5.0.0-debian-10-r1`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/5.0.0-debian-10-r1/5/debian-10/Dockerfile)
+- [`5`, `5-debian-10`, `5.0.0`, `5.0.0-debian-10-r3`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/5.0.0-debian-10-r3/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redmine GitHub repo](https://github.com/bitnami/bitnami-docker-redmine).
 
