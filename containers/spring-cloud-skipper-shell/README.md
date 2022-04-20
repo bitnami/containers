@@ -23,15 +23,12 @@ $ docker run --name spring-cloud-skipper-shell bitnami/spring-cloud-skipper-shel
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-
-> This [CVE scan report](https://quay.io/repository/bitnami/spring-cloud-skipper-shell?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
-
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.8.4`, `2.8.4-debian-10-r13`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper-shell/blob/2.8.4-debian-10-r13/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.8.4`, `2.8.4-debian-10-r14`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper-shell/blob/2.8.4-debian-10-r14/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/spring-cloud-skipper-shell GitHub repo](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper-shell).
 
