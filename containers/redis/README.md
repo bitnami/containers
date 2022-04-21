@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`6.2`, `6.2-debian-10`, `6.2.6`, `6.2.6-debian-10-r193`, `latest` (6.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.2.6-debian-10-r193/6.2/debian-10/Dockerfile)
-* [`6.0`, `6.0-debian-10`, `6.0.16`, `6.0.16-debian-10-r190` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.0.16-debian-10-r190/6.0/debian-10/Dockerfile)
+* [`6.0`, `6.0-debian-10`, `6.0.16`, `6.0.16-debian-10-r191` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.0.16-debian-10-r191/6.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
 
