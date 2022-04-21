@@ -783,12 +783,12 @@ EOF
 
     # Code 23 is considered OK
     # It indicates that the node is already initialized
-    if grep -q "\"code\" : 23" <<<"$result"; then
+    if grep -q "already initialized" <<<"$result"; then
         warn "Node already initialized."
         return 0
     fi
 
-    if ! grep -q "\"ok\" : 1" <<<"$result"; then
+    if ! grep -q "ok: 1" <<<"$result"; then
         warn "Problem initiating replica set
             request: rs.initiate({\"_id\":\"$MONGODB_REPLICA_SET_NAME\", \"members\":[{\"_id\":0,\"host\":\"$node:$port\",\"priority\":5}]})
             response: $result"
@@ -812,7 +812,7 @@ mongodb_set_dwc() {
 db.adminCommand({"setDefaultRWConcern" : 1, "defaultWriteConcern" : {"w" : "majority"}})
 EOF
     )
-    if grep -q "\"ok\" : 1" <<<"$result"; then
+    if grep -q "ok: 1" <<<"$result"; then
         debug 'Setting Default Write Concern to {"setDefaultRWConcern" : 1, "defaultWriteConcern" : {"w" : "majority"}}'
         return 0
     else
@@ -848,11 +848,11 @@ EOF
     # Error code 103 is considered OK
     # It indicates a possibly desynced configuration, which will become resynced when the secondary joins the replicaset
     # Note: Error NewReplicaSetConfigurationIncompatible rejects the node addition so we need to filter it out
-    if { grep -q "\"code\" : 103" <<<"$result"; } && ! { grep -q "NewReplicaSetConfigurationIncompatible" <<<"$result"; }; then
+    if { grep -q "code: 103" <<<"$result"; } && ! { grep -q "NewReplicaSetConfigurationIncompatible" <<<"$result"; }; then
         warn "The ReplicaSet configuration is not aligned with primary node's configuration. Starting secondary node so it syncs with ReplicaSet..."
         return 0
     fi
-    grep -q "\"ok\" : 1" <<<"$result"
+    grep -q "ok: 1" <<<"$result"
 }
 
 ########################
@@ -908,7 +908,7 @@ EOF
     )
     debug "$result"
 
-    grep -q "\"ok\" : 1" <<<"$result"
+    grep -q "ok: 1" <<<"$result"
 }
 
 ########################
@@ -937,11 +937,11 @@ EOF
     # Error code 103 is considered OK.
     # It indicates a possiblely desynced configuration,
     # which will become resynced when the hidden joins the replicaset.
-    if grep -q "\"code\" : 103" <<<"$result"; then
+    if grep -q "code: 103" <<<"$result"; then
         warn "The ReplicaSet configuration is not aligned with primary node's configuration. Starting hidden node so it syncs with ReplicaSet..."
         return 0
     fi
-    grep -q "\"ok\" : 1" <<<"$result"
+    grep -q "ok: 1" <<<"$result"
 }
 
 ########################
@@ -967,7 +967,7 @@ mongodb_is_arbiter_node_pending() {
 rs.addArb('$node:$port')
 EOF
     )
-    grep -q "\"ok\" : 1" <<<"$result"
+    grep -q "ok: 1" <<<"$result"
 }
 
 ########################
@@ -1060,7 +1060,7 @@ mongodb_is_node_available() {
 db.getUsers()
 EOF
     )
-    if ! grep -q "\"user\" :" <<<"$result"; then
+    if ! grep -q "user:" <<<"$result"; then
         # If no password was provided on first run
         # it may be the case that DB is up but has no users
         [[ -z $password ]] && grep -q "\[\ \]" <<<"$result"
@@ -1242,11 +1242,11 @@ mongodb_is_not_in_sync() {
 
     result=$(
         mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
-db.printSlaveReplicationInfo()
+db.printSecondaryReplicationInfo()
 EOF
     )
 
-    grep -q -E "^[[:space:]]*0 secs" <<<"$result"
+    grep -q -E "'0 secs" <<<"$result"
 }
 
 ########################
@@ -1289,7 +1289,7 @@ mongodb_node_currently_in_cluster() {
 rs.status().members
 EOF
     )
-    grep -q -E "\"${node}:${port}\"" <<<"$result"
+    grep -q -E "'${node}:${port}'" <<<"$result"
 }
 
 ########################
@@ -1470,7 +1470,7 @@ mongodb_is_file_external() {
 #   version
 #########################
 mongodb_get_version() {
-    mongo --version 2>/dev/null | grep 'shell version v' | sed 's/.* v//g'
+    mongod --version 2>/dev/null | awk -F\" '/"version"/ {print $4}'
 }
 
 ########################
@@ -1582,7 +1582,7 @@ mongodb_execute_print_output() {
     fi
     [[ -n "$database" ]] && args+=("$database")
 
-    "$MONGODB_BIN_DIR/mongo" "${args[@]}"
+    "$MONGODB_BIN_DIR/mongosh" "${args[@]}"
 }
 
 ########################
@@ -1641,5 +1641,5 @@ mongodb_execute() {
     fi
     [[ -n "$database" ]] && args+=("$database")
 
-    "$MONGODB_BIN_DIR/mongo" "${args[@]}"
+    "$MONGODB_BIN_DIR/mongosh" "${args[@]}"
 }
