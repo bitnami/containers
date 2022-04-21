@@ -116,7 +116,7 @@ phpmyadmin_initialize() {
     # Configure allow deny order/rules settings
     ! is_empty_value "$CONFIGURATION_ALLOWDENY_ORDER" && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['AllowDeny']['order']" "$ALLOWDENY_ORDER"
     ! is_empty_value "$CONFIGURATION_ALLOWDENY_RULES" && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['AllowDeny']['rules']" "array($ALLOWDENY_RULES)" yes
-
+    
     # Generate random blowfish secret, used for encrypting
     info "Setting blowfish_secret option to a randomly generated value"
     local blowfish_secret
