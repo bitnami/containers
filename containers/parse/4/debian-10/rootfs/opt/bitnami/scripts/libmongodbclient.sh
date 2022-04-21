@@ -129,5 +129,5 @@ mongodb_execute() {
     fi
     [[ -n "$database" ]] && args+=("$database")
 
-    "$MONGODB_BIN_DIR/mongo" "${args[@]}"
+    "$MONGODB_BIN_DIR/mongosh" "${args[@]}"
 }
