@@ -190,6 +190,8 @@ The phpMyAdmin instance can be customized by specifying environment variables on
 - `CONFIGURATION_STORAGE_DB_HOST`: phpMyAdmin configuration storage database server hostname (ignored unless `CONFIGURATION_STORAGE_ENABLE` is set to **yes**). Default: **mariadb**
 - `CONFIGURATION_STORAGE_DB_PORT_NUMBER`: phpMyAdmin configuration storage database server port (ignored unless `CONFIGURATION_STORAGE_ENABLE` is set to **yes**). Default: **3306**
 - `CONFIGURATION_STORAGE_DB_NAME`: phpMyAdmin configuration storage database name (ignored unless `CONFIGURATION_STORAGE_ENABLE` is set to **yes**). Default: **phpmyadmin**
+- `CONFIGURATION_ALLOWDENY_ORDER`: Set the AllowDeny order. If your rule order is empty, then IP authorization is disabled. Available values are: `deny,allow`, `allow,deny`, `explicit`. No defaults.
+- `CONFIGURATION_ALLOWDENY_RULES`: Array of strings to allow or deny hosts/user to connect to the database. The value must be literal, following the format `'allow' | 'deny' <username> [from] <ipmask>`. No defaults.
 
 #### PHP configuration
 
