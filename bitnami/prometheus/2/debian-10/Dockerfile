@@ -9,10 +9,10 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-2.34.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "a0c217312914c7492851622bddbb7ebf2763a128a2d2c8dee049cee8149d2d95  /tmp/bitnami/pkg/cache/prometheus-2.34.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/prometheus-2.34.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/prometheus-2.34.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-2.35.0-0-linux-amd64-debian-10.tar.gz && \
+    echo "e542d685dc7eb322846d3593a4cdb6b31c3798677ab6d047850a9d74b155d299  /tmp/bitnami/pkg/cache/prometheus-2.35.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/prometheus-2.35.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/prometheus-2.35.0-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -21,7 +21,7 @@ RUN ln -sf /opt/bitnami/prometheus/data /prometheus
 RUN chown -R 1001:1001 /opt/bitnami/prometheus
 
 RUN mkdir -p /opt/bitnami/prometheus/data/ && chmod g+rwX /opt/bitnami/prometheus/data/
-ENV APP_VERSION="2.34.0" \
+ENV APP_VERSION="2.35.0" \
     BITNAMI_APP_NAME="prometheus" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
