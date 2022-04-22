@@ -11,7 +11,14 @@
         "digest": "0669320707ad927e3715e0e203bfbc9de1912bf492c99ba3910f2bf75380ece4",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.4.13-1"
+        "version": "4.4.13-2"
+    },
+    "mongodb-shell": {
+        "arch": "amd64",
+        "digest": "13407d9f6a5ae6b0895faf702da3e919c03354349506b2bcf19da0a3545e7f8c",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.3.1-0"
     },
     "render-template": {
         "arch": "amd64",
