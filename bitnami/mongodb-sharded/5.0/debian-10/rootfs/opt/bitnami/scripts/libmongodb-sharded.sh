@@ -23,13 +23,13 @@ mongodb_sharded_shard_currently_in_cluster() {
     local -r replicaset="${1:?node is required}"
     local result
 
-    result=$(mongodb_execute_print_output "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD" "admin" "$MONGODB_MONGOS_HOST" "$MONGODB_MONGOS_PORT_NUMBER" <<EOF
+    result=$(
+        mongodb_execute_print_output "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD" "admin" "$MONGODB_MONGOS_HOST" "$MONGODB_MONGOS_PORT_NUMBER" <<EOF
 db.adminCommand({ listShards: 1 })
 EOF
-)
-   grep -q "id.*$replicaset" <<< "$result"
+    )
+    grep -q "id.*$replicaset" <<<"$result"
 }
-
 
 ###############
 # Initialize MongoDB (mongod) service with sharded configuration
@@ -105,7 +105,7 @@ mongodb_sharded_validate() {
     local error_code=0
 
     if ! (mongodb_validate); then
-      error_code=1
+        error_code=1
     fi
 
     # Auxiliary functions
@@ -116,39 +116,39 @@ mongodb_sharded_validate() {
     if [[ -z "$MONGODB_SHARDING_MODE" ]]; then
         print_validation_error "You need to speficy one of the sharding modes: mongos, shardsvr or configsvr"
     fi
-    if [[ "$MONGODB_SHARDING_MODE" = "mongos" ]] || { [[ "$MONGODB_SHARDING_MODE" = "shardsvr" ]] && [[ "$MONGODB_REPLICA_SET_MODE" = "primary" ]] ;}; then
+    if [[ "$MONGODB_SHARDING_MODE" = "mongos" ]] || { [[ "$MONGODB_SHARDING_MODE" = "shardsvr" ]] && [[ "$MONGODB_REPLICA_SET_MODE" = "primary" ]]; }; then
         if [[ -z "$MONGODB_ROOT_PASSWORD" ]]; then
-          print_validation_error "Missing root password for the Config Server. Set MONGODB_ROOT_PASSWORD"
+            print_validation_error "Missing root password for the Config Server. Set MONGODB_ROOT_PASSWORD"
         fi
     fi
 
     if [[ "$MONGODB_SHARDING_MODE" =~ (shardsvr|configsvr) ]]; then
         if [[ -z "$MONGODB_REPLICA_SET_MODE" ]]; then
-          print_validation_error "Sharding requires setting replica set mode. Set MONGODB_REPLICA_SET_MODE"
+            print_validation_error "Sharding requires setting replica set mode. Set MONGODB_REPLICA_SET_MODE"
         fi
     fi
 
     if [[ "$MONGODB_SHARDING_MODE" = "mongos" ]]; then
         if [[ -z "$MONGODB_CFG_PRIMARY_HOST" ]]; then
-          print_validation_error "Missing primary host for the Config Server. Set MONGODB_CFG_PRIMARY_HOST"
+            print_validation_error "Missing primary host for the Config Server. Set MONGODB_CFG_PRIMARY_HOST"
         fi
         if [[ -z "$MONGODB_CFG_REPLICA_SET_NAME" ]]; then
-          print_validation_error "Missing replica set name  for the Config Server. Set MONGODB_CFG_REPLICA_SET_NAME"
+            print_validation_error "Missing replica set name  for the Config Server. Set MONGODB_CFG_REPLICA_SET_NAME"
         fi
         if [[ -z "$MONGODB_REPLICA_SET_KEY" ]]; then
-          print_validation_error "Missing replica set key for the Config Server. Set MONGODB_REPLICA_SET_KEY"
+            print_validation_error "Missing replica set key for the Config Server. Set MONGODB_REPLICA_SET_KEY"
         fi
     fi
 
     if [[ "$MONGODB_SHARDING_MODE" = "shardsvr" ]] && [[ "$MONGODB_REPLICA_SET_MODE" = "primary" ]]; then
         if [[ -z "$MONGODB_MONGOS_HOST" ]]; then
-          print_validation_error "Missing mongos host for registration. Set MONGODB_MONGOS_HOST"
+            print_validation_error "Missing mongos host for registration. Set MONGODB_MONGOS_HOST"
         fi
     fi
 
     if [[ "$MONGODB_SHARDING_MODE" = "configsvr" ]]; then
         if [[ "$MONGODB_REPLICA_SET_MODE" = "arbiter" ]]; then
-          print_validation_error "Arbiters are not allowed in Config Server replicasets"
+            print_validation_error "Arbiters are not allowed in Config Server replicasets"
         fi
     fi
 
@@ -212,11 +212,12 @@ mongodb_sharded_is_join_shard_pending() {
     local -r password="${5:?password is required}"
     local result
 
-    result=$(mongodb_execute_print_output "$user" "$password" "admin" "$mongos_host" "$mongos_port" <<EOF
+    result=$(
+        mongodb_execute_print_output "$user" "$password" "admin" "$mongos_host" "$mongos_port" <<EOF
 sh.addShard("$shard_connection_string")
 EOF
-)
-    grep -q "\"ok\" : 1" <<< "$result"
+    )
+    grep -q "ok: 1" <<<"$result"
 }
 
 ########################
@@ -237,20 +238,20 @@ mongodb_sharded_configure_replica_set() {
     mongodb_restart
 
     case "$MONGODB_REPLICA_SET_MODE" in
-        "primary" )
-            if [[ "$MONGODB_SHARDING_MODE" =~ ^(configsvr|shardsvr)$ ]]; then
-                mongodb_sharded_reconfigure_svr_primary "$node"
-            fi
-            ;;
-        "secondary")
-            mongodb_configure_secondary "$node" "$MONGODB_PORT_NUMBER"
-            ;;
-        "arbiter")
-            mongodb_configure_arbiter "$node" "$MONGODB_PORT_NUMBER"
-            ;;
-        "dynamic")
-            # Do nothing
-            ;;
+    "primary")
+        if [[ "$MONGODB_SHARDING_MODE" =~ ^(configsvr|shardsvr)$ ]]; then
+            mongodb_sharded_reconfigure_svr_primary "$node"
+        fi
+        ;;
+    "secondary")
+        mongodb_configure_secondary "$node" "$MONGODB_PORT_NUMBER"
+        ;;
+    "arbiter")
+        mongodb_configure_arbiter "$node" "$MONGODB_PORT_NUMBER"
+        ;;
+    "dynamic")
+        # Do nothing
+        ;;
     esac
 
     if [[ "$MONGODB_REPLICA_SET_MODE" = "secondary" ]]; then
@@ -270,11 +271,12 @@ mongodb_sharded_configure_replica_set() {
 mongodb_sharded_initiate_svr_primary() {
     mongodb_sharded_is_svr_initiated() {
         local result
-        result=$(mongodb_execute_print_output "" "" "" "127.0.0.1" <<EOF
+        result=$(
+            mongodb_execute_print_output "" "" "" "127.0.0.1" <<EOF
 rs.initiate({"_id":"$MONGODB_REPLICA_SET_NAME", "protocolVersion":1, "members":[{"_id":0,"host":"127.0.0.1:$MONGODB_PORT_NUMBER"}]})
 EOF
         )
-        grep -q "\"ok\" : 1" <<< "$result"
+        grep -q "ok: 1" <<<"$result"
     }
 
     mongodb_start_bg
@@ -301,11 +303,12 @@ mongodb_sharded_is_svr_primary_reconfigured() {
     local -r node="${1:?node is required}"
     local result
 
-    result=$(mongodb_execute_print_output "root" "$MONGODB_ROOT_PASSWORD" "admin" "$node" "$MONGODB_PORT_NUMBER" <<EOF
+    result=$(
+        mongodb_execute_print_output "root" "$MONGODB_ROOT_PASSWORD" "admin" "$node" "$MONGODB_PORT_NUMBER" <<EOF
 rs.reconfig({"_id":"$MONGODB_REPLICA_SET_NAME","configsvr": $([[ "$MONGODB_SHARDING_MODE" = "configsvr" ]] && echo "true" || echo "false"),"protocolVersion":1,"members":[{"_id":0,"host":"$node:$MONGODB_PORT_NUMBER","priority":5}]})
 EOF
-)
-    grep -q "\"ok\" : 1" <<< "$result"
+    )
+    grep -q "ok: 1" <<<"$result"
 }
 
 ########################
