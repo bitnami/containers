@@ -1,10 +1,10 @@
 {
     "elasticsearch": {
         "arch": "amd64",
-        "digest": "fddd9946770c7fa6893ee6c57f9c1f17763998ddcc20a5b95dd29cb96e735bb3",
+        "digest": "7c4e49fda89a0f8c98c322fcb049a5d27325f2db65c07b7691be0b71e72e7328",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "7.17.2-1"
+        "version": "7.17.3-0"
     },
     "gosu": {
         "arch": "amd64",
