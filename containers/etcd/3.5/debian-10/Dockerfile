@@ -11,14 +11,14 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl gzip procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.24.5-0" --checksum bdae511963f6a46ad128f41f9a6f2eec8c56fbb4929619fcd54232edfec6209e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "etcd" "3.5.3-0" --checksum 020d712f6522180f3eb092fc306fd7ca4d556307ae657032e9c283c3f8fd8a9f
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "etcd" "3.5.4-0" --checksum bfc4ad1f99f9091adae878e640d0c917822f43d620e7ab4a719e4396cc51adab
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/etcd/postunpack.sh
-ENV APP_VERSION="3.5.3" \
+ENV APP_VERSION="3.5.4" \
     BITNAMI_APP_NAME="etcd" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/etcd/bin:$PATH"
 
