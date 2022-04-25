@@ -188,6 +188,7 @@ The configuration can easily be setup with the Bitnami Apache Kafka Docker image
 * `KAFKA_INTER_BROKER_PASSWORD`: Apache Kafka inter broker communication password. Default: **bitnami**.
 * `KAFKA_CERTIFICATE_PASSWORD`: Password for certificates. No defaults.
 * `KAFKA_HEAP_OPTS`: Apache Kafka's Java Heap size. Default: **-Xmx1024m -Xms1024m**.
+* `KAFKA_ENABLE_KRAFT`: Enable KRaft (Kafka without Zookeeper). Default: **no**.
 * `KAFKA_ZOOKEEPER_PROTOCOL`: Authentication protocol for Zookeeper connections. Allowed protocols: **PLAINTEXT**, **SASL**, **SSL**, and **SASL_SSL**. Defaults: **PLAINTEXT**.
 * `KAFKA_ZOOKEEPER_USER`: Apache Kafka Zookeeper user for SASL authentication. No defaults.
 * `KAFKA_ZOOKEEPER_PASSWORD`: Apache Kafka Zookeeper user password for SASL authentication. No defaults.
@@ -252,6 +253,47 @@ To deploy it, run the following command in the directory where the `docker-compo
 ```
 docker-compose up -d
 ```
+
+### Kafka without Zookeeper (KRaft)
+
+Apache Kafka Raft (KRaft) makes use of a new quorum controller service in Kafka which replaces the previous controller and makes use of an event-based variant of the Raft consensus protocol.
+This greatly simplifies Kafka’s architecture by consolidating responsibility for metadata into Kafka itself, rather than splitting it between two different systems: ZooKeeper and Kafka.
+
+More Info can be found here: https://developer.confluent.io/learn/kraft/
+
+***Note: KRaft is in early access and should be used in development only. It is not suitable for production.***
+
+Configuration here has been crafted from the [Kraft Repo](https://github.com/apache/kafka/tree/trunk/config/kraft).
+
+```diff
+version: "3"
+services:
+-  zookeeper:
+-    image: 'bitnami/zookeeper:latest'
+-    ports:
+-      - '2181:2181'
+-    environment:
+-      - ALLOW_ANONYMOUS_LOGIN=yes
+  kafka:
+    image: 'bitnami/kafka:latest'
+    ports:
+      - '9092:9092'
+    environment:
++      - KAFKA_ENABLE_KRAFT=yes
++      - KAFKA_CFG_PROCESS_ROLES=broker,controller
++      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+-      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
++      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
++      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+       - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092
+       - KAFKA_BROKER_ID=1
++      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@127.0.0.1:9093
+-      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+-    depends_on:
+-      - zookeeper
+```
+
 
 ### Accessing Apache Kafka with internal and external clients
 
