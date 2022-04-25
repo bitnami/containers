@@ -238,6 +238,32 @@ kafka_validate() {
         fi
     }
 
+    if [[ -n "$KAFKA_ENABLE_KRAFT" ]]; then
+        if [[ -n "$KAFKA_CFG_BROKER_ID" ]]; then
+            warn "KAFKA_CFG_BROKER_ID Must match what is set in KAFKA_CFG_CONTROLLER_QUORUM_VOTERS"
+        else
+            print_validation_error "KRaft requires KAFKA_CFG_BROKER_ID to be set for the quorum controller"
+        fi
+        if [[ -n "$KAFKA_CFG_CONTROLLER_QUORUM_VOTERS" ]]; then
+            warn "KAFKA_CFG_CONTROLLER_QUORUM_VOTERS must match brokers set with KAFKA_CFG_BROKER_ID"
+        else
+            print_validation_error "KRaft requires KAFKA_CFG_CONTROLLER_QUORUM_VOTERS to be set"
+        fi
+        if [[ -z "$KAFKA_CFG_CONTROLLER_LISTENER_NAMES" ]]; then
+            print_validation_error "KRaft requires KAFKA_CFG_CONTROLLER_LISTENER_NAMES to be set"
+        fi
+        if [[ -n "$KAFKA_CFG_PROCESS_ROLES" ]]; then
+            warn "KAFKA_CFG_PROCESS_ROLES must include 'controller' for KRaft"
+        else
+            print_validation_error "KAFKA_CFG_PROCESS_ROLES must be set to enable KRaft m,model"
+        fi
+        if [[ -n "$KAFKA_CFG_LISTENERS" ]]; then
+            warn "KAFKA_CFG_LISTENERS must include a listener for CONTROLLER"
+        else
+            print_validation_error "KRaft requires KAFKA_CFG_LISTENERS to be set"
+        fi
+    fi
+
     if [[ ${KAFKA_CFG_LISTENERS:-} =~ INTERNAL://:([0-9]*) ]]; then
         internal_port="${BASH_REMATCH[1]}"
         check_allowed_listener_port "$internal_port"
@@ -691,6 +717,28 @@ kafka_configure_producer_consumer_message_sizes() {
     if [[ -n "$KAFKA_CFG_MAX_PARTITION_FETCH_BYTES" ]]; then
         kafka_common_conf_set "$KAFKA_CONF_DIR/consumer.properties" max.partition.fetch.bytes "$KAFKA_CFG_MAX_PARTITION_FETCH_BYTES"
     fi
+}
+
+########################
+# Initialize KRaft
+# Globals:
+#   KAFKA_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+kraft_initialize() {
+    info "Initializing KRaft..."
+
+    if [[ -z "$KAFKA_CLUSTER_ID" ]]; then
+        warn "KAFKA_CLUSTER_ID not set - If using multiple nodes then you must use the same Cluster ID for each one"
+        KAFKA_CLUSTER_ID="$($KAFKA_HOME/bin/kafka-storage.sh random-uuid)"
+        info "Generated Kafka cluster ID '${KAFKA_CLUSTER_ID}'"
+    fi
+
+    info "Formatting storage directories to add metadata..."
+    debug_execute "$KAFKA_HOME/bin/kafka-storage.sh" format --config ${KAFKA_CONF_FILE} --cluster-id ${KAFKA_CLUSTER_ID} --ignore-formatted
 }
 
 ########################
