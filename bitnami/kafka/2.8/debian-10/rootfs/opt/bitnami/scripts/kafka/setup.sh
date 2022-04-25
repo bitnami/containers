@@ -21,8 +21,8 @@ if [[ -z "${KAFKA_CFG_BROKER_ID:-}" ]]; then
     if [[ -n "${BROKER_ID_COMMAND:-}" ]]; then
         KAFKA_CFG_BROKER_ID="$(eval "${BROKER_ID_COMMAND:-}")"
         export KAFKA_CFG_BROKER_ID
-    else
-        # By default auto allocate broker ID
+    elif [[ -z "$KAFKA_ENABLE_KRAFT" ]]; then
+        # By default auto allocate broker ID unless KRaft is enabled
         export KAFKA_CFG_BROKER_ID=-1
     fi
 fi
@@ -43,5 +43,9 @@ for dir in "$KAFKA_LOG_DIR" "$KAFKA_CONF_DIR" "$KAFKA_MOUNTED_CONF_DIR" "$KAFKA_
 done
 # Ensure Kafka is initialized
 kafka_initialize
+# If KRaft is enabled initialize
+if is_boolean_yes "$KAFKA_ENABLE_KRAFT"; then
+    kraft_initialize
+fi
 # Ensure custom initialization scripts are executed
 kafka_custom_init_scripts
