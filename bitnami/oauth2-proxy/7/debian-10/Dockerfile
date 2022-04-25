@@ -16,6 +16,7 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
+RUN chown -R 1001:1001 /opt/bitnami/oauth2-proxy
 
 ENV APP_VERSION="7.2.1" \
     BITNAMI_APP_NAME="oauth2-proxy" \
