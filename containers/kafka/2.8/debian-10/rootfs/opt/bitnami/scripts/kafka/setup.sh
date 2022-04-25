@@ -21,7 +21,7 @@ if [[ -z "${KAFKA_CFG_BROKER_ID:-}" ]]; then
     if [[ -n "${BROKER_ID_COMMAND:-}" ]]; then
         KAFKA_CFG_BROKER_ID="$(eval "${BROKER_ID_COMMAND:-}")"
         export KAFKA_CFG_BROKER_ID
-    elif [[ -z "$KAFKA_ENABLE_KRAFT" ]]; then
+    elif ! is_boolean_yes "$KAFKA_ENABLE_KRAFT"; then
         # By default auto allocate broker ID unless KRaft is enabled
         export KAFKA_CFG_BROKER_ID=-1
     fi

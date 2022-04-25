@@ -238,7 +238,7 @@ kafka_validate() {
         fi
     }
 
-    if [[ -n "$KAFKA_ENABLE_KRAFT" ]]; then
+    if is_boolean_yes "$KAFKA_ENABLE_KRAFT"; then
         if [[ -n "$KAFKA_CFG_BROKER_ID" ]]; then
             warn "KAFKA_CFG_BROKER_ID Must match what is set in KAFKA_CFG_CONTROLLER_QUORUM_VOTERS"
         else
@@ -731,14 +731,14 @@ kafka_configure_producer_consumer_message_sizes() {
 kraft_initialize() {
     info "Initializing KRaft..."
 
-    if [[ -z "$KAFKA_CLUSTER_ID" ]]; then
-        warn "KAFKA_CLUSTER_ID not set - If using multiple nodes then you must use the same Cluster ID for each one"
-        KAFKA_CLUSTER_ID="$($KAFKA_HOME/bin/kafka-storage.sh random-uuid)"
-        info "Generated Kafka cluster ID '${KAFKA_CLUSTER_ID}'"
+    if [[ -z "$KAFKA_KRAFT_CLUSTER_ID" ]]; then
+        warn "KAFKA_KRAFT_CLUSTER_ID not set - If using multiple nodes then you must use the same Cluster ID for each one"
+        KAFKA_KRAFT_CLUSTER_ID="$("${KAFKA_HOME}/bin/kafka-storage.sh" random-uuid)"
+        info "Generated Kafka cluster ID '${KAFKA_KRAFT_CLUSTER_ID}'"
     fi
 
     info "Formatting storage directories to add metadata..."
-    debug_execute "$KAFKA_HOME/bin/kafka-storage.sh" format --config ${KAFKA_CONF_FILE} --cluster-id ${KAFKA_CLUSTER_ID} --ignore-formatted
+    debug_execute "$KAFKA_HOME/bin/kafka-storage.sh" format --config "$KAFKA_CONF_FILE" --cluster-id "$KAFKA_KRAFT_CLUSTER_ID" --ignore-formatted
 }
 
 ########################
