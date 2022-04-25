@@ -30,7 +30,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`1.22`, `1.22-debian-10`, `1.22.0`, `1.22.0-debian-10-r3`, `latest` (1.22/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.22.0-debian-10-r3/1.22/debian-10/Dockerfile)
 * [`1.21`, `1.21-debian-10`, `1.21.1`, `1.21.1-debian-10-r60` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.21.1-debian-10-r60/1.21/debian-10/Dockerfile)
-* [`1.20`, `1.20-debian-10`, `1.20.2`, `1.20.2-debian-10-r60` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.20.2-debian-10-r60/1.20/debian-10/Dockerfile)
+* [`1.20`, `1.20-debian-10`, `1.20.2`, `1.20.2-debian-10-r61` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.20.2-debian-10-r61/1.20/debian-10/Dockerfile)
 * [`1.19`, `1.19-debian-10`, `1.19.3`, `1.19.3-debian-10-r60` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.19.3-debian-10-r60/1.19/debian-10/Dockerfile)
 * [`1.18`, `1.18-debian-10`, `1.18.6`, `1.18.6-debian-10-r61` (1.18/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.18.6-debian-10-r61/1.18/debian-10/Dockerfile)
 
@@ -77,6 +77,10 @@ $ docker run --rm -v /path/to/your/envoy.yaml:/opt/bitnami/envoy/conf/envoy.yaml
 ```
 
 Visit the [official envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/configuration) for all the available configurations.
+
+## Branch Deprecation Notice
+
+Envoy's branch 1.18 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 05-21-2022
 
 ## Contributing
 
