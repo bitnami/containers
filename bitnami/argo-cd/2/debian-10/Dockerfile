@@ -19,13 +19,10 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
+
 RUN /opt/bitnami/scripts/argo-cd/postunpack.sh
 ENV APP_VERSION="2.3.3" \
     BITNAMI_APP_NAME="argo-cd" \
-    LIBNSS_WRAPPER_PATH="/opt/bitnami/common/lib/libnss_wrapper.so" \
-    LNAME="argocd" \
-    NSS_WRAPPER_GROUP="/opt/bitnami/argo-cd/nss_group" \
-    NSS_WRAPPER_PASSWD="/opt/bitnami/argo-cd/nss_passwd" \
     PATH="/opt/bitnami/kustomize/bin:/opt/bitnami/ksonnet/bin:/opt/bitnami/helm/bin:/opt/bitnami/common/bin:/opt/bitnami/argo-cd/bin:/opt/bitnami/argo-cd/hack:$PATH"
 
 USER 1001
