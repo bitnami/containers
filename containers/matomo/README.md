@@ -515,7 +515,7 @@ volumes:
 
 ## Notable Changes
 
-### 3.14.1-debian-10-r79
+### 3.14.1-debian-10-r82
 
 - The size of the container image has been decreased.
 - The configuration logic is now based on Bash scripts in the *rootfs/* folder.
