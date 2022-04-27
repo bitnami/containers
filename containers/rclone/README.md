@@ -28,7 +28,7 @@ $ docker run --name rclone bitnami/rclone:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.58.0`, `1.58.0-debian-10-r29`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rclone/blob/1.58.0-debian-10-r29/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.58.0`, `1.58.0-debian-10-r30`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-rclone/blob/1.58.0-debian-10-r30/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rclone GitHub repo](https://github.com/bitnami/bitnami-docker-rclone).
 
