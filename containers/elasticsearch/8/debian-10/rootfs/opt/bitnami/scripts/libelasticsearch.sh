@@ -250,6 +250,14 @@ elasticsearch_validate() {
         done
     }
 
+    # Temporary fix until ELASTICSEARCH_NODE_TYPE is removed to ensure the correct permissions to run 'elasticsearch --version'
+    debug "Ensuring expected directories/files exist..."
+    am_i_root && ensure_user_exists "$ELASTICSEARCH_DAEMON_USER" --group "$ELASTICSEARCH_DAEMON_GROUP"
+    for dir in "$ELASTICSEARCH_TMP_DIR" "$ELASTICSEARCH_LOGS_DIR" "$ELASTICSEARCH_PLUGINS_DIR" "$ELASTICSEARCH_BASE_DIR/modules" "$ELASTICSEARCH_CONF_DIR"; do
+        ensure_dir_exists "$dir"
+        am_i_root && chown -R "$ELASTICSEARCH_DAEMON_USER:$ELASTICSEARCH_DAEMON_GROUP" "$dir"
+    done
+    
     es_version="$(elasticsearch_get_version)"
     es_major_version="$(get_sematic_version "$es_version" 1)"
 
@@ -574,13 +582,10 @@ elasticsearch_configure_node_roles() {
 #   None
 #########################
 elasticsearch_set_heap_size() {
-    local heap_size es_version es_major_version es_minor_version
+    local heap_size
 
     # Remove heap.options if it already exists
     rm -f "${ELASTICSEARCH_CONF_DIR}/jvm.options.d/heap.options"
-    es_version="$(elasticsearch_get_version)"
-    es_major_version="$(get_sematic_version "$es_version" 1)"
-    es_minor_version="$(get_sematic_version "$es_version" 2)"
 
     if [[ -n "$ELASTICSEARCH_HEAP_SIZE" ]]; then
         debug "Using specified values for Xmx and Xms heap options..."
@@ -609,29 +614,15 @@ elasticsearch_set_heap_size() {
             heap_size=32768m
         fi
     fi
-    debug "Setting '-Xmx${heap_size} -Xms${heap_size}' heap options..."
-    # Elasticsearch > 7.10 encourages to customize the heap settings through a file in 'jvm.options.d'
-    # Previous versions need to update the 'jvm.options' file
-    if [[ "$es_major_version" -ge 8 ]] || [[ "$es_major_version" -ge 7 && "$es_minor_version" -gt 10 ]]; then
-        debug "Setting Xmx and Xms options in heap.options file"
-        cat >"${ELASTICSEARCH_CONF_DIR}/jvm.options.d/heap.options" <<EOF
+    debug "Setting '-Xmx${heap_size} -Xms${heap_size}' heap options..."    
+    cat >"${ELASTICSEARCH_CONF_DIR}/jvm.options.d/heap.options" <<EOF
 -Xms${heap_size}
 -Xmx${heap_size}
 EOF
-        am_i_root && chown "$ELASTICSEARCH_DAEMON_USER:$ELASTICSEARCH_DAEMON_GROUP" "${ELASTICSEARCH_CONF_DIR}/jvm.options.d/heap.options"
+    am_i_root && chown "$ELASTICSEARCH_DAEMON_USER:$ELASTICSEARCH_DAEMON_GROUP" "${ELASTICSEARCH_CONF_DIR}/jvm.options.d/heap.options"
 
-        # Avoid exit code of previous commands to affect the result of this function
-        true
-    elif [[ -n "$es_major_version" ]]; then
-        # If the version is less than 7.10, set using the legacy approach by updating the 'jvm.options' file
-        debug "Updating Xmx and Xms values in jvm.options file"
-        replace_in_file "${ELASTICSEARCH_CONF_DIR}/jvm.options" "-Xmx[0-9]+[mg]+" "-Xmx${heap_size}"
-        replace_in_file "${ELASTICSEARCH_CONF_DIR}/jvm.options" "-Xms[0-9]+[mg]+" "-Xms${heap_size}"
-    else
-        # This condition should never happen, as it would only trigger when '--version' fails or prints unknown output
-        error "Could not detect Elasticsearch version"
-        return 1
-    fi
+    # Avoid exit code of previous commands to affect the result of this function
+    true
 }
 
 ########################
@@ -670,7 +661,6 @@ migrate_old_data() {
 #   None
 #########################
 elasticsearch_initialize() {
-    local es_version es_major_version es_minor_version
     info "Configuring/Initializing Elasticsearch..."
 
     # This fixes an issue where the trap would kill the entrypoint.sh, if a PID was left over from a previous run
@@ -700,10 +690,6 @@ elasticsearch_initialize() {
         am_i_root && is_mounted_dir_empty "$dir" && chown -R "$ELASTICSEARCH_DAEMON_USER:$ELASTICSEARCH_DAEMON_GROUP" "$dir"
     done
 
-    es_version="$(elasticsearch_get_version)"
-    es_major_version="$(get_sematic_version "$es_version" 1)"
-    es_minor_version="$(get_sematic_version "$es_version" 2)"
-
     if [[ -f "$ELASTICSEARCH_CONF_FILE" ]]; then
         info "Custom configuration file detected, using it..."
     else
@@ -722,27 +708,20 @@ elasticsearch_initialize() {
         fi
         elasticsearch_custom_configuration
         # X-Pack settings.
-        # Elasticsearch <= 7.10.2 is packaged without x-pack.
-        if [[ "$es_major_version" -ge 8 ]] || [[ "$es_major_version" -ge 7 && "$es_minor_version" -gt 10 ]]; then
-            elasticsearch_conf_set xpack.security.enabled "$(is_boolean_yes "$ELASTICSEARCH_ENABLE_SECURITY" && echo "true" || echo "false")"
-            ! is_empty_value "$ELASTICSEARCH_PASSWORD" && elasticsearch_set_key_value "bootstrap.password" "$ELASTICSEARCH_PASSWORD"
-            if is_boolean_yes "$ELASTICSEARCH_ENABLE_SECURITY"; then
-                is_boolean_yes "$ELASTICSEARCH_ENABLE_REST_TLS" && elasticsearch_http_tls_configuration
-                ! is_boolean_yes "$ELASTICSEARCH_SKIP_TRANSPORT_TLS" && elasticsearch_transport_tls_configuration
-                if is_boolean_yes "$ELASTICSEARCH_ENABLE_FIPS_MODE"; then
-                    elasticsearch_conf_set xpack.security.fips_mode.enabled "true"
-                    elasticsearch_conf_set xpack.security.authc.password_hashing.algorithm "pbkdf2"
-                fi
+        elasticsearch_conf_set xpack.security.enabled "$(is_boolean_yes "$ELASTICSEARCH_ENABLE_SECURITY" && echo "true" || echo "false")"
+        ! is_empty_value "$ELASTICSEARCH_PASSWORD" && elasticsearch_set_key_value "bootstrap.password" "$ELASTICSEARCH_PASSWORD"
+        if is_boolean_yes "$ELASTICSEARCH_ENABLE_SECURITY"; then
+            is_boolean_yes "$ELASTICSEARCH_ENABLE_REST_TLS" && elasticsearch_http_tls_configuration
+            ! is_boolean_yes "$ELASTICSEARCH_SKIP_TRANSPORT_TLS" && elasticsearch_transport_tls_configuration
+            if is_boolean_yes "$ELASTICSEARCH_ENABLE_FIPS_MODE"; then
+                elasticsearch_conf_set xpack.security.fips_mode.enabled "true"
+                elasticsearch_conf_set xpack.security.authc.password_hashing.algorithm "pbkdf2"
             fi
-            # Latest Elasticseach releases install x-pack-ml  by default. Since we have faced some issues with this library on certain platforms,
-            # currently we are disabling this machine learning module whatsoever by defining "xpack.ml.enabled=false" in the "elasicsearch.yml" file
-            if [[ ! -d "${ELASTICSEARCH_BASE_DIR}/modules/x-pack-ml/platform/linux-x86_64/lib" ]]; then
-                elasticsearch_conf_set xpack.ml.enabled "false"
-            fi
-        else
-            if is_boolean_yes "$ELASTICSEARCH_ENABLE_SECURITY"; then
-                warn "Elasticsearch Security (X-Pack) is only available in version 7.11 or higher."
-            fi
+        fi
+        # Latest Elasticseach releases install x-pack-ml  by default. Since we have faced some issues with this library on certain platforms,
+        # currently we are disabling this machine learning module whatsoever by defining "xpack.ml.enabled=false" in the "elasicsearch.yml" file
+        if [[ ! -d "${ELASTICSEARCH_BASE_DIR}/modules/x-pack-ml/platform/linux-x86_64/lib" ]]; then
+            elasticsearch_conf_set xpack.ml.enabled "false"
         fi
     fi
 
@@ -909,11 +888,13 @@ elasticsearch_custom_init_scripts() {
 #   version
 #########################
 elasticsearch_get_version() {
+    local -a elasticsearch_cmd=("elasticsearch" "--version")
+    am_i_root && elasticsearch_cmd=("gosu" "$ELASTICSEARCH_DAEMON_USER" "${elasticsearch_cmd[@]}")
     if [[ -f "$ELASTICSEARCH_CONF_FILE" ]]; then
-        ES_JAVA_OPTS="-Xms1m -Xmx20m" elasticsearch --version | grep Version: | awk -F "," '{print $1}' | awk -F ":" '{print $2}'
+        ES_JAVA_OPTS="-Xms1m -Xmx20m" "${elasticsearch_cmd[@]}" | grep Version: | awk -F "," '{print $1}' | awk -F ":" '{print $2}'
     else
         touch "$ELASTICSEARCH_CONF_FILE"
-        ES_JAVA_OPTS="-Xms1m -Xmx20m" elasticsearch --version | grep Version: | awk -F "," '{print $1}' | awk -F ":" '{print $2}'
+        ES_JAVA_OPTS="-Xms1m -Xmx20m" "${elasticsearch_cmd[@]}" | grep Version: | awk -F "," '{print $1}' | awk -F ":" '{print $2}'
         rm "$ELASTICSEARCH_CONF_FILE"
     fi
 }
