@@ -7,6 +7,7 @@ services:
       - RABBITMQ_NODE_NAME=rabbit@stats
       - RABBITMQ_ERL_COOKIE=s3cr3tc00ki3
       - RABBITMQ_SECURE_PASSWORD=yes
+      - RABBITMQ_LOGS=-
     ports:
       - '15672:15672'
     volumes:

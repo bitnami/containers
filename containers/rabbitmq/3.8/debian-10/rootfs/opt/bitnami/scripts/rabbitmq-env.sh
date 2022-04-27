@@ -150,8 +150,6 @@ export RABBITMQ_LDAP_USER_DN_PATTERN="${RABBITMQ_LDAP_USER_DN_PATTERN:-}"
 # RabbitMQ native environment variables (see https://www.rabbitmq.com/relocate.html)
 export RABBITMQ_MNESIA_BASE="$RABBITMQ_DATA_DIR"
 
-# Print all log messages to standard output
-
 # SSL/TLS configuration
 export RABBITMQ_NODE_SSL_PORT_NUMBER="${RABBITMQ_NODE_SSL_PORT_NUMBER:-5671}"
 RABBITMQ_SSL_CACERTFILE="${RABBITMQ_SSL_CACERTFILE:-"${RABBITMQ_SSL_CACERT_FILE:-}"}"
