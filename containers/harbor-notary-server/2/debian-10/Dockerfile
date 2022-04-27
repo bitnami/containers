@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-notary-server" "2.5.0-0" --checksum 8efeea52b2ce2abb900f36db46d3f5000879af70ce440f04abd2d23e7f4cf2b0
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-notary-server" "2.5.0-1" --checksum 9085c2d734d1e95bd3a578bc8b26f94305c322cdb73d5536c4593d551d7e7538
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
