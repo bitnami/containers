@@ -9,16 +9,16 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/trivy-0.27.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "65861b9acf3fafa35a48ead080f6c17f9d14c5804d67c614c930d4baf00bd6a9  /tmp/bitnami/pkg/cache/trivy-0.27.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/trivy-0.27.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/trivy-0.27.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/trivy-0.27.1-0-linux-amd64-debian-10.tar.gz && \
+    echo "fef2d786b0426971e6a5a8d7fd6b477caa9afa2d458ec52aca71004196d689dd  /tmp/bitnami/pkg/cache/trivy-0.27.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/trivy-0.27.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/trivy-0.27.1-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /.cache && chmod g+rwX /.cache
 
-ENV APP_VERSION="0.27.0" \
+ENV APP_VERSION="0.27.1" \
     BITNAMI_APP_NAME="trivy" \
     PATH="/opt/bitnami/trivy/bin:$PATH"
 
