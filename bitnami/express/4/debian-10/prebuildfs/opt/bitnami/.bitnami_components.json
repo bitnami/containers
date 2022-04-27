@@ -50,10 +50,10 @@
     },
     "sequelize-cli": {
         "arch": "amd64",
-        "digest": "01d999017f6852a67b58aafe191e7c60decac22e2fcef6252a5d3d4964839d02",
+        "digest": "a25d0961bd3004d9f098f69ba04317c983ab7c2a2677a61593b13ea3c704fae1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "5.5.1-8"
+        "version": "6.4.1-0"
     },
     "wait-for-port": {
         "arch": "amd64",
