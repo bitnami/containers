@@ -28,7 +28,7 @@ $ docker run --name kong-ingress-controller bitnami/kong-ingress-controller:late
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.3.1`, `2.3.1-debian-10-r18`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/blob/2.3.1-debian-10-r18/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.3.1`, `2.3.1-debian-10-r19`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong-ingress-controller/blob/2.3.1-debian-10-r19/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kong-ingress-controller GitHub repo](https://github.com/bitnami/bitnami-docker-kong-ingress-controller).
 
