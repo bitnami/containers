@@ -21,6 +21,7 @@ services:
       - RABBITMQ_LDAP_SERVERS=openldap
       - RABBITMQ_LDAP_SERVERS_PORT=1389
       - RABBITMQ_LDAP_USER_DN_PATTERN=cn=$${username},ou=users,dc=example,dc=org
+      - RABBITMQ_LOGS=-
   openldap:
     image: 'docker.io/bitnami/openldap:latest'
     ports:
