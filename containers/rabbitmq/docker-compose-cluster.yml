@@ -20,6 +20,7 @@ services:
       - RABBITMQ_CLUSTER_NODE_NAME=rabbit@stats
       - RABBITMQ_ERL_COOKIE=s3cr3tc00ki3
       - RABBITMQ_SECURE_PASSWORD=yes
+      - RABBITMQ_LOGS=-
     volumes:
       - 'rabbitmqdisc1_data:/bitnami/rabbitmq/mnesia'
   queue-ram1:
@@ -30,6 +31,7 @@ services:
       - RABBITMQ_CLUSTER_NODE_NAME=rabbit@stats
       - RABBITMQ_ERL_COOKIE=s3cr3tc00ki3
       - RABBITMQ_SECURE_PASSWORD=yes
+      - RABBITMQ_LOGS=-
     volumes:
       - 'rabbitmqram1_data:/bitnami/rabbitmq/mnesia'
 
