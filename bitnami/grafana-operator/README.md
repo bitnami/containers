@@ -36,7 +36,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.2.0`, `4.2.0-debian-10-r62`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-operator/blob/4.2.0-debian-10-r62/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.3.0`, `4.3.0-debian-10-r0`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-operator/blob/4.3.0-debian-10-r0/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana-operator GitHub repo](https://github.com/bitnami/bitnami-docker-grafana-operator).
 
