@@ -36,7 +36,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.18`, `1.18-debian-10`, `1.18.1`, `1.18.1-debian-10-r16`, `latest` (1.18/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.18.1-debian-10-r16/1.18/debian-10/Dockerfile)
-* [`1.17`, `1.17-debian-10`, `1.17.9`, `1.17.9-debian-10-r15` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.17.9-debian-10-r15/1.17/debian-10/Dockerfile)
+* [`1.17`, `1.17-debian-10`, `1.17.9`, `1.17.9-debian-10-r16` (1.17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-golang/blob/1.17.9-debian-10-r16/1.17/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/golang GitHub repo](https://github.com/bitnami/bitnami-docker-golang).
 
