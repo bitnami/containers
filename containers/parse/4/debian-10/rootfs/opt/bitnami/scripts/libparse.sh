@@ -128,7 +128,7 @@ parse_initialize() {
 
         parse_conf_set "serverURL" "$server_url"
         parse_conf_set "databaseURI" "$connection_string"
-        is_boolean_yes "$PARSE_ENABLE_CLOUD_CODE" && parse_conf_set "cloud" "./cloud/main.js"
+        is_boolean_yes "$PARSE_ENABLE_CLOUD_CODE" && parse_conf_set "cloud" "${PARSE_BASE_DIR}/cloud/main.js"
     else
         warn "Parse config.json detected in persistence. Persisting configuration files is deprecated"
         cp "$persisted_conf_file" "$PARSE_CONF_FILE"
