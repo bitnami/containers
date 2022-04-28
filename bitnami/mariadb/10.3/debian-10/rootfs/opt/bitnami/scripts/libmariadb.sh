@@ -171,8 +171,6 @@ plugin_dir=${DB_BASE_DIR}/lib/plugin
 port=${DB_DEFAULT_PORT_NUMBER}
 socket=${DB_SOCKET_FILE}
 pid_file=${DB_PID_FILE}
-
-!include ${DB_CONF_DIR}/bitnami/my_custom.cnf
 EOF
 }
 
@@ -272,6 +270,9 @@ mysql_initialize() {
         if is_file_writable "${DB_CONF_DIR}/bitnami/my_custom.cnf"; then
             info "Injecting custom configuration 'my_custom.cnf'"
             cat "${DB_CONF_DIR}/my_custom.cnf" > "${DB_CONF_DIR}/bitnami/my_custom.cnf"
+            if ! grep --silent "!include ${DB_CONF_DIR}/bitnami/my_custom.cnf" "${DB_CONF_FILE}"; then
+                echo "!include ${DB_CONF_DIR}/bitnami/my_custom.cnf" >> "${DB_CONF_FILE}"
+            fi
         else
             warn "Could not inject custom configuration for the ${DB_FLAVOR} configuration file '$DB_CONF_DIR/bitnami/my_custom.cnf' because it is not writable."
         fi
