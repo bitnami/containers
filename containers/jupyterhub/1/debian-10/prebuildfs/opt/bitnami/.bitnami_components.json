@@ -8,9 +8,9 @@
     },
     "miniconda": {
         "arch": "amd64",
-        "digest": "7d7b0982510dd8f036024aa748523c9974e398347d2cda91fe2541482a0d21cd",
+        "digest": "099f8b0b999bf71f4753404b1e1f3edc1b7ae910b54f45e7f0373df0fd8c7005",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.11.0-2"
+        "version": "4.11.0-3"
     }
 }
