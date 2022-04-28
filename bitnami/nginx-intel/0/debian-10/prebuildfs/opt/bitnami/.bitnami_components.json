@@ -8,10 +8,10 @@
     },
     "nginx-intel": {
         "arch": "amd64",
-        "digest": "e786e5ed69339bcaeb8ded298341182bc6cea88fb740a39f80561c30c50d35a4",
+        "digest": "b5bfc368393d6a1243a132be0f11d70948daff75be1f37eaa1e0c8038f041310",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.4.7-10"
+        "version": "0.4.7-11"
     },
     "qatengine": {
         "arch": "amd64",
