@@ -203,10 +203,10 @@ parse_conf_get() {
 parse_wait_for_mongodb_connection() {
     local -r connection_string="${1:?missing connection string}"
     check_mongodb_connection() {
-        local -r mongo_args=("--host" "$connection_string" "--eval" "db.stats()")
-        local -r res=$(mongo "${mongo_args[@]}")
+        local -r mongo_args=("$connection_string" "--eval" "db.stats()")
+        local -r res=$(mongosh "${mongo_args[@]}")
         debug "$res"
-        echo "$res" | grep -q '"ok" : 1'
+        echo "$res" | grep -q 'ok: 1'
     }
     if ! retry_while "check_mongodb_connection"; then
         error "Could not connect to the database"
