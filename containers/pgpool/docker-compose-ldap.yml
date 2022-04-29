@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   pg-0:
-    image: docker.io/bitnami/postgresql-repmgr:11
+    image: docker.io/bitnami/postgresql-repmgr:14
     ports:
       - 5432
     volumes:
@@ -18,7 +18,7 @@ services:
       - REPMGR_NODE_NETWORK_NAME=pg-0
       - REPMGR_PGHBA_TRUST_ALL=yes
   pg-1:
-    image: docker.io/bitnami/postgresql-repmgr:11
+    image: docker.io/bitnami/postgresql-repmgr:14
     ports:
       - 5432
     volumes:
