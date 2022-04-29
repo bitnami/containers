@@ -10,7 +10,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libsqlite3-dev libssl-dev locales procps tar wget zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "17.0.2-10" --checksum 70dbc5d64a8ae02f4898685ccaf993e0469ad804c87961e1e3b1a41046292a39
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "17.0.3-0" --checksum 55796cb971bbd807c7437e0a2ea965553721268568b3c910a6cbef467535ea5f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -26,7 +26,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
-ENV APP_VERSION="17.0.2" \
+ENV APP_VERSION="17.0.3" \
     BITNAMI_APP_NAME="java" \
     JAVA_HOME="/opt/bitnami/java" \
     LANG="en_US.UTF-8" \
