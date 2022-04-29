@@ -112,6 +112,12 @@ in the primary node and MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD in the rest of nod
         error_code=1
     }
 
+    check_yes_no_value() {
+        if ! is_yes_no_value "${!1}" && ! is_true_false_value "${!1}"; then
+            print_validation_error "The allowed values for ${1} are: yes no"
+        fi
+    }
+
     if [[ -n "$MONGODB_REPLICA_SET_MODE" ]]; then
         if [[ -z "$MONGODB_ADVERTISED_HOSTNAME" ]]; then
             warn "In order to use hostnames instead of IPs your should set MONGODB_ADVERTISED_HOSTNAME"
@@ -151,6 +157,9 @@ Available options are 'primary/secondary/arbiter/hidden'"
             print_validation_error "$error_message"
         fi
     fi
+
+    check_yes_no_value "MONGODB_ENABLE_MAJORITY_READ"
+    [[ "$(mongodb_get_version)" =~ ^5\..\. ]] && ! is_boolean_yes "$MONGODB_ENABLE_MAJORITY_READ" && warn "MONGODB_ENABLE_MAJORITY_READ=${MONGODB_ENABLE_MAJORITY_READ} Will be ignored in MongoDB 5.0"
 
     if [[ -n "$MONGODB_REPLICA_SET_KEY" ]] && ((${#MONGODB_REPLICA_SET_KEY} < 5)); then
         error_message="MONGODB_REPLICA_SET_KEY must be, at least, 5 characters long!"
@@ -242,7 +251,7 @@ get_mongo_hostname() {
     if [[ -n "$MONGODB_ADVERTISED_HOSTNAME" ]]; then
         echo "$MONGODB_ADVERTISED_HOSTNAME"
     else
-        get_machine_ip
+        hostname
     fi
 }
 
@@ -392,7 +401,7 @@ mongodb_is_mongodb_started() {
     local result
 
     result=$(
-        mongodb_execute_print_output 2>/dev/null <<EOF
+        mongodb_execute_print_output <<EOF
 db
 EOF
     )
@@ -626,7 +635,7 @@ mongodb_set_replicasetmode_conf() {
             mongodb_config_apply_regex "replSetName:.*" "replSetName: $MONGODB_REPLICA_SET_NAME" "$conf_file_path"
         fi
         if [[ -n "$MONGODB_ENABLE_MAJORITY_READ" ]]; then
-            mongodb_config_apply_regex "enableMajorityReadConcern:.*" "enableMajorityReadConcern: $({ is_boolean_yes "$MONGODB_ENABLE_MAJORITY_READ" && echo 'true'; } || echo 'false')" "$conf_file_path"
+            mongodb_config_apply_regex "enableMajorityReadConcern:.*" "enableMajorityReadConcern: $({ (is_boolean_yes "$MONGODB_ENABLE_MAJORITY_READ" || [[ "$(mongodb_get_version)" =~ ^5\..\. ]]) && echo 'true'; } || echo 'false')" "$conf_file_path"
         fi
     else
         debug "$conf_file_name mounted. Skipping replicaset mode enabling"
@@ -1557,7 +1566,7 @@ mongodb_custom_init_scripts() {
 #   $3 - Database where to run the queries
 #   $4 - Host (default to result of get_mongo_hostname function)
 #   $5 - Port (default $MONGODB_PORT_NUMBER)
-#   $6 - Extra arguments (default $MONGODB_CLIENT_EXTRA_FLAGS)
+#   $6 - Extra arguments (default $MONGODB_SHELL_EXTRA_FLAGS)
 # Returns:
 #   output of mongo query
 ########################
@@ -1567,7 +1576,7 @@ mongodb_execute_print_output() {
     local -r database="${3:-}"
     local -r host="${4:-$(get_mongo_hostname)}"
     local -r port="${5:-$MONGODB_PORT_NUMBER}"
-    local -r extra_args="${6:-$MONGODB_CLIENT_EXTRA_FLAGS}"
+    local -r extra_args="${6:-$MONGODB_SHELL_EXTRA_FLAGS}"
     local final_user="$user"
     # If password is empty it means no auth, do not specify user
     [[ -z "$password" ]] && final_user=""
@@ -1598,7 +1607,7 @@ mongodb_execute_print_output() {
 #   $3 - Database where to run the queries
 #   $4 - Host (default to result of get_mongo_hostname function)
 #   $5 - Port (default $MONGODB_PORT_NUMBER)
-#   $6 - Extra arguments (default $MONGODB_CLIENT_EXTRA_FLAGS)
+#   $6 - Extra arguments (default $MONGODB_SHELL_EXTRA_FLAGS)
 # Returns:
 #   None
 ########################
@@ -1616,7 +1625,7 @@ mongodb_execute() {
 #   $3 - Database where to run the queries
 #   $4 - Host (default to result of get_mongo_hostname function)
 #   $5 - Port (default $MONGODB_PORT_NUMBER)
-#   $6 - Extra arguments (default $MONGODB_CLIENT_EXTRA_FLAGS)
+#   $6 - Extra arguments (default $MONGODB_SHELL_EXTRA_FLAGS)
 # Returns:
 #   None
 ########################
@@ -1626,7 +1635,7 @@ mongodb_execute() {
     local -r database="${3:-}"
     local -r host="${4:-$(get_mongo_hostname)}"
     local -r port="${5:-$MONGODB_PORT_NUMBER}"
-    local -r extra_args="${6:-$MONGODB_CLIENT_EXTRA_FLAGS}"
+    local -r extra_args="${6:-$MONGODB_SHELL_EXTRA_FLAGS}"
     local final_user="$user"
     # If password is empty it means no auth, do not specify user
     [[ -z "$password" ]] && final_user=""
