@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`4`, `4-debian-10`, `4.11.0`, `4.11.0-debian-10-r16`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.11.0-debian-10-r16/4/debian-10/Dockerfile)
+- [`4`, `4-debian-10`, `4.11.0`, `4.11.0-debian-10-r17`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.11.0-debian-10-r17/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dreamfactory GitHub repo](https://github.com/bitnami/bitnami-docker-dreamfactory).
 
@@ -356,18 +356,6 @@ Available environment variables:
 - `POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `POSTGRESQL_CLIENT_CREATE_DATABASE_USERNAME` user. No defaults.
 - `POSTGRESQL_CLIENT_CREATE_DATABASE_EXTENSIONS`: PostgreSQL extensions to enable in the specified database during the first initialization. No defaults.
 - `POSTGRESQL_CLIENT_EXECUTE_SQL`: SQL code to execute in the PostgreSQL server. No defaults.
-- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-##### Create a MongoDB database for DreamFactory using mongodb-client
-
-- `MONGODB_CLIENT_DATABASE_HOST`: Hostname for the MongoDB server. Default: **mongodb**
-- `MONGODB_CLIENT_DATABASE_PORT_NUMBER`: Port used by the MongoDB server. Default: **27017**
-- `MONGODB_CLIENT_DATABASE_ROOT_USER`: Database admin user. Default: **root**
-- `MONGODB_CLIENT_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No defaults.
-- `MONGODB_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mongodb-client module. No defaults.
-- `MONGODB_CLIENT_CREATE_DATABASE_USERNAME`: New database user to be created by the mongodb-client module. No defaults.
-- `MONGODB_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MONGODB_CLIENT_CREATE_DATABASE_USERNAME` user. No defaults.
-- `MONGODB_CLIENT_EXTRA_FLAGS`: Extra flags when using the mongodb-client during initialization. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
 ##### SMTP Configuration
