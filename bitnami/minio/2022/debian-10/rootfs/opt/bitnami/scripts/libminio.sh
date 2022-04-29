@@ -151,7 +151,7 @@ minio_start_bg() {
 
     is_minio_running && return
     info "Starting MinIO in background..."
-    if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+    if  is_boolean_yes "${BITNAMI_DEBUG}"; then
         "${exec}" "${args[@]}" &
     else
         "${exec}" "${args[@]}" >/dev/null 2>&1 &
@@ -247,6 +247,14 @@ minio_validate() {
             print_validation_error "The HTTP log file specified at the environment variable MINIO_HTTP_TRACE is not writtable by current user \"$(id -u)\""
         fi
     fi
+    shopt -s nocasematch
+    if ! is_dir_empty "${MINIO_CERTS_DIR}" && [[ "${MINIO_SCHEME}" == "http" ]] && [[ "${MINIO_SERVER_URL}" == "http://"* ]]; then
+        warn "Certificates provided but 'http' scheme in use. Please set MINIO_SCHEME and/or MINIO_SERVER_URL variables"
+    fi
+    if [[ "${MINIO_SCHEME}" != "http" ]] && [[  "${MINIO_SCHEME}" != "https" ]]; then
+        print_validation_error "The values allowed for MINIO_SCHEME are only [http, https]"
+    fi
+    shopt -u nocasematch
 
     check_yes_no_value MINIO_SKIP_CLIENT
     check_yes_no_value MINIO_DISTRIBUTED_MODE_ENABLED
@@ -254,7 +262,7 @@ minio_validate() {
     check_allowed_port MINIO_CONSOLE_PORT_NUMBER
     check_allowed_port MINIO_API_PORT_NUMBER
 
-    [[ "$error_code" -eq 0 ]] || exit "$error_code"
+    return "$error_code"
 }
 
 ########################
