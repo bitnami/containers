@@ -44,7 +44,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5`, `5-debian-10`, `5.2.0`, `5.2.0-debian-10-r35`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/5.2.0-debian-10-r35/5/debian-10/Dockerfile)
-* [`4`, `4-debian-10`, `4.10.9`, `4.10.9-debian-10-r32` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/4.10.9-debian-10-r32/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.10.9`, `4.10.9-debian-10-r33` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/4.10.9-debian-10-r33/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/parse GitHub repo](https://github.com/bitnami/bitnami-docker-parse).
 
@@ -232,16 +232,16 @@ Available environment variables:
 - `PARSE_DATABASE_PASSWORD`: Database password that Parse will use to connect with the database. No default.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-###### Create a MongoDB database for DreamFactory using mongodb-client
+###### Create a MongoDB database for DreamFactory using mongodb-shell
 
-- `MONGODB_CLIENT_DATABASE_HOST`: Hostname for the MongoDB server. Default: **mongodb**
-- `MONGODB_CLIENT_DATABASE_PORT_NUMBER`: Port used by the MongoDB server. Default: **27017**
-- `MONGODB_CLIENT_DATABASE_ROOT_USER`: Database admin user. Default: **root**
-- `MONGODB_CLIENT_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No defaults.
-- `MONGODB_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mongodb-client module. No defaults.
-- `MONGODB_CLIENT_CREATE_DATABASE_USERNAME`: New database user to be created by the mongodb-client module. No defaults.
-- `MONGODB_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MONGODB_CLIENT_CREATE_DATABASE_USERNAME` user. No defaults.
-- `MONGODB_CLIENT_EXTRA_FLAGS`: Extra flags when using the mongodb-client during initialization. No defaults.
+- `MONGODB_SHELL_DATABASE_HOST`: Hostname for the MongoDB server. Default: **mongodb**
+- `MONGODB_SHELL_DATABASE_PORT_NUMBER`: Port used by the MongoDB server. Default: **27017**
+- `MONGODB_SHELL_DATABASE_ROOT_USER`: Database admin user. Default: **root**
+- `MONGODB_SHELL_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No defaults.
+- `MONGODB_SHELL_CREATE_DATABASE_NAME`: New database to be created by the mongodb-shell module. No defaults.
+- `MONGODB_SHELL_CREATE_DATABASE_USERNAME`: New database user to be created by the mongodb-shell module. No defaults.
+- `MONGODB_SHELL_CREATE_DATABASE_PASSWORD`: Database password for the `MONGODB_SHELL_CREATE_DATABASE_USERNAME` user. No defaults.
+- `MONGODB_SHELL_EXTRA_FLAGS`: Extra flags when using the mongodb-shell during initialization. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
 ### How to deploy your Cloud functions with Parse Cloud Code?
