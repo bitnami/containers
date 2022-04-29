@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.3.1`, `4.3.1-debian-10-r66`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.3.1-debian-10-r66/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.3.1`, `4.3.1-debian-10-r67`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.3.1-debian-10-r67/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pgpool GitHub repo](https://github.com/bitnami/bitnami-docker-pgpool).
 
@@ -155,7 +155,7 @@ networks:
     driver: bridge
 services:
   pg-0:
-    image: bitnami/postgresql-repmgr:11
+    image: bitnami/postgresql-repmgr:14
     ports:
       - 5432
     volumes:
@@ -171,7 +171,7 @@ services:
       - REPMGR_NODE_NAME=pg-0
       - REPMGR_NODE_NETWORK_NAME=pg-0
   pg-1:
-    image: bitnami/postgresql-repmgr:11
+    image: bitnami/postgresql-repmgr:14
     ports:
       - 5432
     volumes:
@@ -276,7 +276,7 @@ Pgpool configuration:
 - `PGPOOL_POSTGRES_CUSTOM_PASSWORDS`: List of comma or semicolon separated list for postgresql user passwords. These are the corresponding passwords for the users in `PGPOOL_POSTGRES_CUSTOM_USERS`. No defaults.
 - `PGPOOL_AUTO_FAILBACK`: Enables pgpool `[auto_failback](https://www.pgpool.net/docs/latest/en/html/runtime-config-failover.html)`. Default to `no`.
 - `PGPOOL_BACKEND_APPLICATION_NAMES`: Comma separated list of backend nodes `application_name`. No defaults.
-- `PGPOOL_AUTHENTICATION_METHOD`: Specifies the authentication method('md5', 'scram-sha-256'). Defaults to `md5`
+- `PGPOOL_AUTHENTICATION_METHOD`: Specifies the authentication method('md5', 'scram-sha-256'). Defaults to `scram-sha-256`.
 - `PGPOOL_AES_KEY`: Specifies the AES encryption key used for 'scram-sha-256' passwords. Defaults to `random string`.
 
 PostgreSQL with Replication Manager:
@@ -589,6 +589,10 @@ $ docker-compose up pgpool
 ```
 
 ## Notable Changes
+
+### 4.3.1-debian-10-r67
+
+- The ENV `PGPOOL_AUTHENTICATION_METHOD` default value has been changed from `md5` to `scram-sha-256` as our `bitnami/postgresql-repmgr:latest` image now uses PSQL v14, which has `scram-sha-256` as the default auth method.
 
 ### 4.1.1-debian-10-r35
 
