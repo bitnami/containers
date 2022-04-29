@@ -11,7 +11,7 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 lsof netcat-traditional procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.322-8" --checksum d5670d09ac0e679ae28306e417e77e91b44051908ca3a82259efcd70764b996f
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.332-0" --checksum ea45a7908b8a86363659aa7e3953a1308af86db3ffa1656e46036c8e1f7c659a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "solr" "8.11.1-7" --checksum dc6035aa6abf722ac025ff953b57f0e121e781a26cf412e176a57574c86487b1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
