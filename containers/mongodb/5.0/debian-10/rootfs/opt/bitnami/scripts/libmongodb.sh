@@ -251,7 +251,7 @@ get_mongo_hostname() {
     if [[ -n "$MONGODB_ADVERTISED_HOSTNAME" ]]; then
         echo "$MONGODB_ADVERTISED_HOSTNAME"
     else
-        get_machine_ip
+        hostname
     fi
 }
 
@@ -401,7 +401,7 @@ mongodb_is_mongodb_started() {
     local result
 
     result=$(
-        mongodb_execute_print_output 2>/dev/null <<EOF
+        mongodb_execute_print_output <<EOF
 db
 EOF
     )
@@ -1566,7 +1566,7 @@ mongodb_custom_init_scripts() {
 #   $3 - Database where to run the queries
 #   $4 - Host (default to result of get_mongo_hostname function)
 #   $5 - Port (default $MONGODB_PORT_NUMBER)
-#   $6 - Extra arguments (default $MONGODB_CLIENT_EXTRA_FLAGS)
+#   $6 - Extra arguments (default $MONGODB_SHELL_EXTRA_FLAGS)
 # Returns:
 #   output of mongo query
 ########################
@@ -1576,7 +1576,7 @@ mongodb_execute_print_output() {
     local -r database="${3:-}"
     local -r host="${4:-$(get_mongo_hostname)}"
     local -r port="${5:-$MONGODB_PORT_NUMBER}"
-    local -r extra_args="${6:-$MONGODB_CLIENT_EXTRA_FLAGS}"
+    local -r extra_args="${6:-$MONGODB_SHELL_EXTRA_FLAGS}"
     local final_user="$user"
     # If password is empty it means no auth, do not specify user
     [[ -z "$password" ]] && final_user=""
@@ -1607,7 +1607,7 @@ mongodb_execute_print_output() {
 #   $3 - Database where to run the queries
 #   $4 - Host (default to result of get_mongo_hostname function)
 #   $5 - Port (default $MONGODB_PORT_NUMBER)
-#   $6 - Extra arguments (default $MONGODB_CLIENT_EXTRA_FLAGS)
+#   $6 - Extra arguments (default $MONGODB_SHELL_EXTRA_FLAGS)
 # Returns:
 #   None
 ########################
@@ -1625,7 +1625,7 @@ mongodb_execute() {
 #   $3 - Database where to run the queries
 #   $4 - Host (default to result of get_mongo_hostname function)
 #   $5 - Port (default $MONGODB_PORT_NUMBER)
-#   $6 - Extra arguments (default $MONGODB_CLIENT_EXTRA_FLAGS)
+#   $6 - Extra arguments (default $MONGODB_SHELL_EXTRA_FLAGS)
 # Returns:
 #   None
 ########################
@@ -1635,7 +1635,7 @@ mongodb_execute() {
     local -r database="${3:-}"
     local -r host="${4:-$(get_mongo_hostname)}"
     local -r port="${5:-$MONGODB_PORT_NUMBER}"
-    local -r extra_args="${6:-$MONGODB_CLIENT_EXTRA_FLAGS}"
+    local -r extra_args="${6:-$MONGODB_SHELL_EXTRA_FLAGS}"
     local final_user="$user"
     # If password is empty it means no auth, do not specify user
     [[ -z "$password" ]] && final_user=""
