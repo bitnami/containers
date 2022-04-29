@@ -36,7 +36,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 - [`9`, `9-debian-10`, `9.3.0`, `9.3.0-debian-10-r64`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/9.3.0-debian-10-r64/9/debian-10/Dockerfile)
-- [`8`, `8-debian-10`, `8.9.8`, `8.9.8-debian-10-r23` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/8.9.8-debian-10-r23/8/debian-10/Dockerfile)
+- [`8`, `8-debian-10`, `8.9.8`, `8.9.8-debian-10-r24` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/8.9.8-debian-10-r24/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/sonarqube GitHub repo](https://github.com/bitnami/bitnami-docker-sonarqube).
 
