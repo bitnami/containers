@@ -112,6 +112,12 @@ in the primary node and MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD in the rest of nod
         error_code=1
     }
 
+    check_yes_no_value() {
+        if ! is_yes_no_value "${!1}" && ! is_true_false_value "${!1}"; then
+            print_validation_error "The allowed values for ${1} are: yes no"
+        fi
+    }
+
     if [[ -n "$MONGODB_REPLICA_SET_MODE" ]]; then
         if [[ -z "$MONGODB_ADVERTISED_HOSTNAME" ]]; then
             warn "In order to use hostnames instead of IPs your should set MONGODB_ADVERTISED_HOSTNAME"
@@ -151,6 +157,9 @@ Available options are 'primary/secondary/arbiter/hidden'"
             print_validation_error "$error_message"
         fi
     fi
+
+    check_yes_no_value "MONGODB_ENABLE_MAJORITY_READ"
+    [[ "$(mongodb_get_version)" =~ ^5\..\. ]] && ! is_boolean_yes "$MONGODB_ENABLE_MAJORITY_READ" && warn "MONGODB_ENABLE_MAJORITY_READ=${MONGODB_ENABLE_MAJORITY_READ} Will be ignored in MongoDB 5.0"
 
     if [[ -n "$MONGODB_REPLICA_SET_KEY" ]] && ((${#MONGODB_REPLICA_SET_KEY} < 5)); then
         error_message="MONGODB_REPLICA_SET_KEY must be, at least, 5 characters long!"
@@ -626,7 +635,7 @@ mongodb_set_replicasetmode_conf() {
             mongodb_config_apply_regex "replSetName:.*" "replSetName: $MONGODB_REPLICA_SET_NAME" "$conf_file_path"
         fi
         if [[ -n "$MONGODB_ENABLE_MAJORITY_READ" ]]; then
-            mongodb_config_apply_regex "enableMajorityReadConcern:.*" "enableMajorityReadConcern: $({ is_boolean_yes "$MONGODB_ENABLE_MAJORITY_READ" && echo 'true'; } || echo 'false')" "$conf_file_path"
+            mongodb_config_apply_regex "enableMajorityReadConcern:.*" "enableMajorityReadConcern: $({ (is_boolean_yes "$MONGODB_ENABLE_MAJORITY_READ" || [[ "$(mongodb_get_version)" =~ ^5\..\. ]]) && echo 'true'; } || echo 'false')" "$conf_file_path"
         fi
     else
         debug "$conf_file_name mounted. Skipping replicaset mode enabling"
