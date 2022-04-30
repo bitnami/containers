@@ -154,15 +154,23 @@ sonarqube_initialize() {
 
         if ! is_boolean_yes "$SONARQUBE_SKIP_BOOTSTRAP"; then
             # Unfortunately SonarQube does not provide a CLI to perform actions like enabling authentication or to reset credentials
-
-            # Pasword hashing algorithm defined in https://github.com/SonarSource/sonarqube/blob/master/server/sonar-webserver-auth/src/main/java/org/sonar/server/authentication/CredentialsLocalAuthentication.java#L191
-            # Note: As of version 8.6, admin user account is forced to reset the password, we disable this behavior with 'reset_password=f'
             info "Configuring user credentials"
-            local salt encrypted_password
-            salt="$(generate_random_string -t alphanumeric -c 40)"
-            encrypted_password="$(generate_sha_hash "--${salt}--${SONARQUBE_PASSWORD}--")"
+            local sonarqube_default_username="admin"
+            local sonarqube_default_password="admin"
+            local sonarqube_api_url="http://127.0.0.1:${SONARQUBE_PORT_NUMBER}/api"
+            local -a curl_opts=(
+                "--silent"
+                "--request" "POST"
+                "--user" "${sonarqube_default_username}:${sonarqube_default_password}"
+                "--data-urlencode" "login=${sonarqube_default_username}"
+                "--data-urlencode" "previousPassword=${sonarqube_default_password}"
+                "--data-urlencode" "password=${SONARQUBE_PASSWORD}"
+            )
+            debug_execute curl "${curl_opts[@]}" "${sonarqube_api_url}/users/change_password"
+
+            # Update the username and email as well
             postgresql_remote_execute "${postgresql_execute_args[@]}" <<EOF
-UPDATE users SET login = '${SONARQUBE_USERNAME}', email = '${SONARQUBE_EMAIL}', salt = '${salt}', crypted_password = '${encrypted_password}', hash_method = 'SHA1', reset_password = 'f' WHERE login = 'admin';
+UPDATE users SET login = '${SONARQUBE_USERNAME}', email = '${SONARQUBE_EMAIL}' WHERE login = '${sonarqube_default_username}';
 EOF
 
             # SMTP configuration
@@ -228,7 +236,8 @@ sonarqube_start_bg() {
             debug_execute "${SONARQUBE_BIN_DIR}/sonar.sh" "start"
         fi
         info "Waiting for SonarQube to start..."
-        wait_for_log_entry "SonarQube is up" "$SONARQUBE_LOG_FILE" "$SONARQUBE_START_TIMEOUT" "1"
+        # Use a RegEx to support both SonarQube 8 & 9 formats
+        wait_for_log_entry "SonarQube is (up|operational)" "$SONARQUBE_LOG_FILE" "$SONARQUBE_START_TIMEOUT" "1"
     )
 }
 
