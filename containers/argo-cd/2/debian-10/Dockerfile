@@ -19,7 +19,6 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
-
 RUN /opt/bitnami/scripts/argo-cd/postunpack.sh
 ENV APP_VERSION="2.3.3" \
     BITNAMI_APP_NAME="argo-cd" \
