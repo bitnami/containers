@@ -10,13 +10,6 @@ set -o pipefail
 # Load Neo4j environment
 . /opt/bitnami/scripts/neo4j-env.sh
 
-# Load MongoDB&reg; Client environment for 'mongodb_remote_execute' (after 'neo4j-env.sh' so that MODULE is not set to a wrong value)
-if [[ -f /opt/bitnami/scripts/mongodb-client-env.sh ]]; then
-    . /opt/bitnami/scripts/mongodb-client-env.sh
-elif [[ -f /opt/bitnami/scripts/mongodb-env.sh ]]; then
-    . /opt/bitnami/scripts/mongodb-env.sh
-fi
-
 # Load libraries
 . /opt/bitnami/scripts/libneo4j.sh
 
