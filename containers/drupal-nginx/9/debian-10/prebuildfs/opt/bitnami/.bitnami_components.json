@@ -22,10 +22,10 @@
     },
     "nginx": {
         "arch": "amd64",
-        "digest": "6e20a2ae0a878612ca23df22ae64afeb3c5a6a74cce13f20c550cb79bf7af79d",
+        "digest": "0998ed0dfcd1655f309642eada2681f3e604d7849899e0146ca6846d1a86dbd6",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.21.6-6"
+        "version": "1.21.6-7"
     },
     "php": {
         "arch": "amd64",
