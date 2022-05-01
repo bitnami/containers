@@ -35,7 +35,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.8.0`, `1.8.0-debian-10-r3`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cosign/blob/1.8.0-debian-10-r3/1/debian-10/      Dockerfile)
+* [`1`, `1-debian-10`, `1.8.0`, `1.8.0-debian-10-r4`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cosign/blob/1.8.0-debian-10-r4/1/debian-10/      Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cosign GitHub repo](https://github.com/bitnami/bitnami-docker-cosign).
 
