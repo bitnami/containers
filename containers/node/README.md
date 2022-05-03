@@ -42,7 +42,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`18`, `18-debian-10`, `18.1.0`, `18.1.0-debian-10-r0`, `latest` (18/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/18.1.0-debian-10-r0/18/debian-10/Dockerfile)
-* [`17`, `17-debian-10`, `17.9.0`, `17.9.0-debian-10-r25` (17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/17.9.0-debian-10-r25/17/debian-10/Dockerfile)
+* [`17`, `17-debian-10`, `17.9.0`, `17.9.0-debian-10-r26` (17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/17.9.0-debian-10-r26/17/debian-10/Dockerfile)
 * [`16`, `16-debian-10`, `16.15.0`, `16.15.0-debian-10-r7` (16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/16.15.0-debian-10-r7/16/debian-10/Dockerfile)
 * [`14`, `14-debian-10`, `14.19.1`, `14.19.1-debian-10-r45` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/14.19.1-debian-10-r45/14/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.22.12`, `12.22.12-debian-10-r27` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.22.12-debian-10-r27/12/debian-10/Dockerfile)
@@ -350,6 +350,10 @@ $ docker-compose up node
 ### 4.1.1-0-r01 (2015-10-07)
 
 - `/app` directory is no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume are not persisted between Dockerfile `RUN` instructions. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
+
+## Branch Deprecation Notice
+
+Node.js's branch 12 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 06-03-2022
 
 ## Contributing
 
