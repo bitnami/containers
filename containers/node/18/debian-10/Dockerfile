@@ -12,17 +12,17 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "a328c8fb3db9e60d3aa19eb7ca31de5da372affcb3d7c0d73610b4a19b634f94  /tmp/bitnami/pkg/cache/python-3.8.13-3-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/python-3.8.13-3-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/python-3.8.13-3-linux-amd64-debian-10.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-18.0.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "373ca6b1a5d9de71dc35810409310ad0d61ebd0958db89c7404da31fce7e02de  /tmp/bitnami/pkg/cache/node-18.0.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/node-18.0.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/node-18.0.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-18.1.0-0-linux-amd64-debian-10.tar.gz && \
+    echo "dabe4f036c9ac6f0461c00f83ce94a14cd86e81d29cea6fda93bcfc5d0bae01d  /tmp/bitnami/pkg/cache/node-18.1.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/node-18.1.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/node-18.1.0-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS    0/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
-ENV APP_VERSION="18.0.0" \
+ENV APP_VERSION="18.1.0" \
     BITNAMI_APP_NAME="node" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:$PATH"
 
