@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`6.2`, `6.2-debian-10`, `6.2.7`, `6.2.7-debian-10-r5`, `latest` (6.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.2.7-debian-10-r5/6.2/debian-10/Dockerfile)
-* [`6.0`, `6.0-debian-10`, `6.0.16`, `6.0.16-debian-10-r202` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.0.16-debian-10-r202/6.0/debian-10/Dockerfile)
+* [`6.0`, `6.0-debian-10`, `6.0.16`, `6.0.16-debian-10-r203` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.0.16-debian-10-r203/6.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
 
@@ -432,7 +432,7 @@ Starting with version 6, Redis(TM) adds the support for SSL/TLS connections. Sho
 
  - `REDIS_TLS_ENABLED`: Whether to enable TLS for traffic or not. Defaults to `no`.
  - `REDIS_TLS_PORT`: Port used for TLS secure traffic. Defaults to `6379`.
- - `REDIS_TLS_CERT_FILE`: File containing the certificate file for the TSL traffic. No defaults.
+ - `REDIS_TLS_CERT_FILE`: File containing the certificate file for the TLS traffic. No defaults.
  - `REDIS_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
  - `REDIS_TLS_CA_FILE`: File containing the CA of the certificate. No defaults.
  - `REDIS_TLS_DH_PARAMS_FILE`: File containing DH params (in order to support DH based ciphers). No defaults.
