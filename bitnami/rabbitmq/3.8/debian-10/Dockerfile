@@ -11,7 +11,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 libssl1.1 libstdc++6 libtinfo6 locales procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "erlang" "24.3.3-0" --checksum ab2a407d35b2c460897cc224751e7404181f3f9050491de93b9916419dae81de
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "erlang" "24.3.4-0" --checksum d76848fe46e2ef34dfd93a07eeb0c6cadaa9b4d01fd0745c4e4c9eb3f2e681a0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rabbitmq" "3.8.30-0" --checksum 9bc4592cac2aeaadfa42697d7024fa3c35f89213c13c335ac2a7f0f53b863358
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
