@@ -28,9 +28,9 @@ $ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released daily with the latest distribution packages available.
 
-## How to deploy Apache Apache Kafka in Kubernetes?
+## How to deploy Apache Kafka in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Apache Apache Kafka Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/kafka).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Apache Kafka Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/kafka).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
 
@@ -773,11 +773,11 @@ $ docker-compose up kafka
 
 ### Branches rename
 
-Branch 2 has been renamed to 2.8 and branch 3 has been splited into branches 3.0 and 3.1 mirroing the upstream [Apache Apache Kafka's naming policy](https://kafka.apache.org/downloads)
+Branch 2 has been renamed to 2.8 and branch 3 has been splited into branches 3.0 and 3.1 mirroing the upstream [Apache Kafka's naming policy](https://kafka.apache.org/downloads)
 
 ### 3.0.0-debian-10-r0
 
-* Apache Apache Kafka 3.0 deprecates the `--zookeper` flag in shell commands. Related operations such as topic creation require the use of updated flags. Please, refer to [Apache Kafka's official release notes](https://downloads.apache.org/kafka/3.0.0/RELEASE_NOTES.html) for further information on the changes introduced by this version.
+* Apache Kafka 3.0 deprecates the `--zookeper` flag in shell commands. Related operations such as topic creation require the use of updated flags. Please, refer to [Apache Kafka's official release notes](https://downloads.apache.org/kafka/3.0.0/RELEASE_NOTES.html) for further information on the changes introduced by this version.
 
 ### 2.5.0-debian-10-r111
 
