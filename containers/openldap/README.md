@@ -40,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2.6`, `2.6-debian-10`, `2.6.1`, `2.6.1-debian-10-r100`, `latest` (2.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.6.1-debian-10-r100/2.6/debian-10/Dockerfile)
-* [`2.5`, `2.5-debian-10`, `2.5.11`, `2.5.11-debian-10-r101` (2.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.5.11-debian-10-r101/2.5/debian-10/Dockerfile)
+* [`2.5`, `2.5-debian-10`, `2.5.11`, `2.5.11-debian-10-r102` (2.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.5.11-debian-10-r102/2.5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/openldap GitHub repo](https://github.com/bitnami/bitnami-docker-openldap).
 
@@ -202,7 +202,7 @@ OpenLDAP clients and servers are capable of using the Transport Layer Security (
 
  - `LDAP_ENABLE_TLS`: Whether to enable TLS for traffic or not. Defaults to `no`.
  - `LDAP_LDAPS_PORT_NUMBER`: Port used for TLS secure traffic. Defaults to `1636`.
- - `LDAP_TLS_CERT_FILE`: File containing the certificate file for the TSL traffic. No defaults.
+ - `LDAP_TLS_CERT_FILE`: File containing the certificate file for the TLS traffic. No defaults.
  - `LDAP_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
  - `LDAP_TLS_CA_FILE`: File containing the CA of the certificate. No defaults.
  - `LDAP_TLS_DH_PARAMS_FILE`: File containing the DH parameters. No defaults.
