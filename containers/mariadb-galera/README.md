@@ -55,7 +55,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`10.6`, `10.6-debian-10`, `10.6.7`, `10.6.7-debian-10-r70` (10.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.6.7-debian-10-r70/10.6/debian-10/Dockerfile)
 * [`10.5`, `10.5-debian-10`, `10.5.15`, `10.5.15-debian-10-r70` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.5.15-debian-10-r70/10.5/debian-10/Dockerfile)
 * [`10.4`, `10.4-debian-10`, `10.4.24`, `10.4.24-debian-10-r70` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.24-debian-10-r70/10.4/debian-10/Dockerfile)
-* [`10.3`, `10.3-debian-10`, `10.3.34`, `10.3.34-debian-10-r76` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.34-debian-10-r76/10.3/debian-10/Dockerfile)
+* [`10.3`, `10.3-debian-10`, `10.3.34`, `10.3.34-debian-10-r77` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.34-debian-10-r77/10.3/debian-10/Dockerfile)
 * [`10.2`, `10.2-debian-10`, `10.2.43`, `10.2.43-debian-10-r75` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.43-debian-10-r75/10.2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb-galera GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb-galera).
@@ -386,7 +386,7 @@ Refer to the [OpenLDAP Administrator's Guide](https://www.openldap.org/doc/admin
 To secure the traffic you must mount the certificates files and set the following environment variables in all the cluster members:
 
 - `MARIADB_ENABLE_TLS`: Whether to enable TLS for traffic. Defaults to `no`.
-- `MARIADB_TLS_CERT_FILE`: File containing the certificate file for the TSL traffic. No defaults.
+- `MARIADB_TLS_CERT_FILE`: File containing the certificate file for the TLS traffic. No defaults.
 - `MARIADB_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
 - `MARIADB_TLS_CA_FILE`: File containing the CA of the certificate. No defaults.
 
