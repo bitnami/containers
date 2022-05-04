@@ -13,7 +13,7 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl gzip jq libc6 libgcc1 ncurses-bin procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.332-0" --checksum ea45a7908b8a86363659aa7e3953a1308af86db3ffa1656e46036c8e1f7c659a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "geode" "1.14.4-0" --checksum a958da3d95469e6396b9c2f542d1de8354e003b684889c096f624399cf15823f
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "geode" "1.14.4-1" --checksum 85c3259b97955e99d0113a66900e89b250c00cacefab4c2d727bc44e3274b91c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
