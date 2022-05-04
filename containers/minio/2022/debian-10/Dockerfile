@@ -11,7 +11,7 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl gzip jq libc6 procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-10" --checksum 35c818ba3f4b5aae905959bc7d3a5e81fc63786e3c662b604612c0aa7fcda8fd
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio-client" "2022.4.26-0" --checksum c8da700c8e51e6d22d291e02dc565d72abe93c41f8d541c8140e0738337ab1f0
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio" "2022.4.30-0" --checksum b92346bdb707f8d84ab4f55f6c257bcfbea988dd8b7815a7356e53a6847fda2b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio" "2022.5.3-0" --checksum 0ad80b6601bf85aad642a9a860a4fc49039f8a9e1b7f5236594f380ea9060a9b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -20,7 +20,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/minio-client/postunpack.sh
 RUN /opt/bitnami/scripts/minio/postunpack.sh
-ENV APP_VERSION="2022.4.30" \
+ENV APP_VERSION="2022.5.3" \
     BITNAMI_APP_NAME="minio" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/minio-client/bin:/opt/bitnami/minio/bin:$PATH"
 
