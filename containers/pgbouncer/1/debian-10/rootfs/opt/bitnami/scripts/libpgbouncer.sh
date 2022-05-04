@@ -249,7 +249,7 @@ pgbouncer_initialize() {
             ini-file set --section "pgbouncer" --key "client_tls_ciphers" --value "$PGBOUNCER_CLIENT_TLS_CIPHERS" "$PGBOUNCER_CONF_FILE"
         fi
 
-        if [[ "$PGBOUNCER_SERVER_TLS_SSLMODE" != "disable" ]] || ! is_empty "$PGBOUNCER_SERVER_TLS_CERT_FILE" || ! is_empty "$PGBOUNCER_SERVER_TLS_KEY_FILE"; then
+        if [[ "$PGBOUNCER_SERVER_TLS_SSLMODE" != "disable" ]] || ! is_empty_value "$PGBOUNCER_SERVER_TLS_CERT_FILE" || ! is_empty_value "$PGBOUNCER_SERVER_TLS_KEY_FILE"; then
             ini-file set --section "pgbouncer" --key "server_tls_ciphers" --value "$PGBOUNCER_SERVER_TLS_CIPHERS" "$PGBOUNCER_CONF_FILE"
             ini-file set --section "pgbouncer" --key "server_tls_protocols" --value "$PGBOUNCER_SERVER_TLS_PROTOCOLS" "$PGBOUNCER_CONF_FILE"
         fi
