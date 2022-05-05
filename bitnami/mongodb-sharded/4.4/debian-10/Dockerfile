@@ -13,7 +13,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb-shell" "
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.25.1-0" --checksum 863b0a81f75feed5c08bb5c1c5b280469b10c7cee9232ecbf613544755a7433c
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-10" --checksum 35c818ba3f4b5aae905959bc7d3a5e81fc63786e3c662b604612c0aa7fcda8fd
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-10" --checksum 97c2ae4b001c5937e888b920bee7b1a40a076680caac53ded6d10f6207d54565
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb" "4.4.13-2" --checksum 0669320707ad927e3715e0e203bfbc9de1912bf492c99ba3910f2bf75380ece4
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb" "4.4.14-0" --checksum 10da5b4da349b6466bbee94b3c968c978caab0e9151f9a79505fde0cc3b5206a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -24,7 +24,7 @@ RUN ln -s /opt/bitnami/scripts/mongodb-sharded/run.sh /run.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb-sharded/postunpack.sh
-ENV APP_VERSION="4.4.13" \
+ENV APP_VERSION="4.4.14" \
     BITNAMI_APP_NAME="mongodb-sharded" \
     PATH="/opt/bitnami/mongodb/bin:/opt/bitnami/common/bin:$PATH"
 
