@@ -35,9 +35,12 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
+* [`8.1`, `8.1-debian-11`, `8.1.5`, `8.1.5-debian-11-r-1`, `latest` (8.1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.1.5-debian-11-r-1/8.1/debian-11/Dockerfile)
 * [`8.1`, `8.1-debian-10`, `8.1.5`, `8.1.5-debian-10-r15`, `latest` (8.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.1.5-debian-10-r15/8.1/debian-10/Dockerfile)
+* [`8.0`, `8.0-debian-11`, `8.0.18`, `8.0.18-debian-11-r-1` (8.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.0.18-debian-11-r-1/8.0/debian-11/Dockerfile)
 * [`8.0`, `8.0-debian-10`, `8.0.18`, `8.0.18-debian-10-r16` (8.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.0.18-debian-10-r16/8.0/debian-10/Dockerfile)
-* [`7.4`, `7.4-debian-10`, `7.4.29`, `7.4.29-debian-10-r15` (7.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.29-debian-10-r15/7.4/debian-10/Dockerfile)
+* [`7.4`, `7.4-debian-11`, `7.4.29`, `7.4.29-debian-11-r-1` (7.4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.29-debian-11-r-1/7.4/debian-11/Dockerfile)
+* [`7.4`, `7.4-debian-10`, `7.4.29`, `7.4.29-debian-10-r16` (7.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.29-debian-10-r16/7.4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-php-fpm).
 
@@ -70,7 +73,7 @@ $ docker pull bitnami/php-fpm:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/php-fpm 'https://github.com/bitnami/bitnami-docker-php-fpm.git#master:8.1/debian-10'
+$ docker build -t bitnami/php-fpm 'https://github.com/bitnami/bitnami-docker-php-fpm.git#master:8.1/debian-11'$ docker build -t bitnami/php-fpm 'https://github.com/bitnami/bitnami-docker-php-fpm.git#master:8.1/debian-10'
 ```
 
 ## Connecting to other containers
