@@ -36,7 +36,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`17`, `17-debian-11`, `17.0.3`, `17.0.3-debian-11-r-1`, `latest` (17/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/17.0.3-debian-11-r-1/17/debian-11/Dockerfile)
-* [`17`, `17-debian-10`, `17.0.3`, `17.0.3-debian-10-r5`, `latest` (17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/17.0.3-debian-10-r5/17/debian-10/Dockerfile)
+* [`17`, `17-debian-10`, `17.0.3`, `17.0.3-debian-10-r6`, `latest` (17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/17.0.3-debian-10-r6/17/debian-10/Dockerfile)
 * [`11`, `11-debian-11`, `11.0.15`, `11.0.15-debian-11-r-1` (11/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.15-debian-11-r-1/11/debian-11/Dockerfile)
 * [`11`, `11-debian-10`, `11.0.15`, `11.0.15-debian-10-r6` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.15-debian-10-r6/11/debian-10/Dockerfile)
 * [`1.8`, `1.8-debian-11`, `1.8.332`, `1.8.332-debian-11-r-1` (1.8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.332-debian-11-r-1/1.8/debian-11/Dockerfile)
