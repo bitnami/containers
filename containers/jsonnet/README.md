@@ -28,7 +28,8 @@ $ docker run --name jsonnet bitnami/jsonnet:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.18.0`, `0.18.0-debian-10-r132`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jsonnet/blob/0.18.0-debian-10-r132/0/debian-10/Dockerfile)
+* [`0`, `0-debian-11`, `0.18.0`, `0.18.0-debian-11-r-1`, `latest` (0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-jsonnet/blob/0.18.0-debian-11-r-1/0/debian-11/Dockerfile)
+* [`0`, `0-debian-10`, `0.18.0`, `0.18.0-debian-10-r133`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jsonnet/blob/0.18.0-debian-10-r133/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jsonnet GitHub repo](https://github.com/bitnami/bitnami-docker-jsonnet).
 
@@ -49,7 +50,7 @@ $ docker pull bitnami/jsonnet:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/jsonnet:latest 'https://github.com/bitnami/bitnami-docker-jsonnet.git#master:0/debian-10'
+$ docker build -t bitnami/jsonnet:latest 'https://github.com/bitnami/bitnami-docker-jsonnet.git#master:0/debian-11'$ docker build -t bitnami/jsonnet:latest 'https://github.com/bitnami/bitnami-docker-jsonnet.git#master:0/debian-10'
 ```
 
 ## Configuration
