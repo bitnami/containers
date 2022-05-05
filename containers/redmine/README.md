@@ -37,7 +37,8 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`5`, `5-debian-10`, `5.0.0`, `5.0.0-debian-10-r16`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/5.0.0-debian-10-r16/5/debian-10/Dockerfile)
+- [`5`, `5-debian-11`, `5.0.0`, `5.0.0-debian-11-r-1`, `latest` (5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/5.0.0-debian-11-r-1/5/debian-11/Dockerfile)
+- [`5`, `5-debian-10`, `5.0.0`, `5.0.0-debian-10-r17`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redmine/blob/5.0.0-debian-10-r17/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redmine GitHub repo](https://github.com/bitnami/bitnami-docker-redmine).
 
@@ -58,7 +59,7 @@ $ docker pull bitnami/redmine:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/redmine:latest 'https://github.com/bitnami/bitnami-docker-redmine.git#master:5/debian-10'
+$ docker build -t bitnami/redmine:latest 'https://github.com/bitnami/bitnami-docker-redmine.git#master:5/debian-11'$ docker build -t bitnami/redmine:latest 'https://github.com/bitnami/bitnami-docker-redmine.git#master:5/debian-10'
 ```
 
 ## How to use this image
