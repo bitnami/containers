@@ -35,9 +35,12 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
+* [`17`, `17-debian-11`, `17.0.3`, `17.0.3-debian-11-r-1`, `latest` (17/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/17.0.3-debian-11-r-1/17/debian-11/Dockerfile)
 * [`17`, `17-debian-10`, `17.0.3`, `17.0.3-debian-10-r5`, `latest` (17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/17.0.3-debian-10-r5/17/debian-10/Dockerfile)
+* [`11`, `11-debian-11`, `11.0.15`, `11.0.15-debian-11-r-1` (11/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.15-debian-11-r-1/11/debian-11/Dockerfile)
 * [`11`, `11-debian-10`, `11.0.15`, `11.0.15-debian-10-r5` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.15-debian-10-r5/11/debian-10/Dockerfile)
-* [`1.8`, `1.8-debian-10`, `1.8.332`, `1.8.332-debian-10-r5` (1.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.332-debian-10-r5/1.8/debian-10/Dockerfile)
+* [`1.8`, `1.8-debian-11`, `1.8.332`, `1.8.332-debian-11-r-1` (1.8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.332-debian-11-r-1/1.8/debian-11/Dockerfile)
+* [`1.8`, `1.8-debian-10`, `1.8.332`, `1.8.332-debian-10-r6` (1.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.332-debian-10-r6/1.8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/java GitHub repo](https://github.com/bitnami/bitnami-docker-java).
 
@@ -70,7 +73,7 @@ $ docker pull bitnami/java:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/java 'https://github.com/bitnami/bitnami-docker-java.git#master:17/debian-10'
+$ docker build -t bitnami/java 'https://github.com/bitnami/bitnami-docker-java.git#master:17/debian-11'$ docker build -t bitnami/java 'https://github.com/bitnami/bitnami-docker-java.git#master:17/debian-10'
 ```
 
 ## Configuration
