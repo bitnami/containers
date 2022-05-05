@@ -10,7 +10,7 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl gzip libaudit1 libbz2-1.0 libc6 libcap-ng0 libcom-err2 libcurl4 libffi6 libgcc1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmariadb3 libncurses6 libncursesw6 libnettle6 libnghttp2-14 libp11-kit0 libpam0g libpq5 libpsl5 libreadline-dev libreadline7 librtmp1 libsasl2-2 libsqlite3-0 libssh2-1 libssl-dev libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libxml2 procps sqlite3 sudo tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-3" --checksum a328c8fb3db9e60d3aa19eb7ca31de5da372affcb3d7c0d73610b4a19b634f94
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "2.7.6-0" --checksum e1123e8eb7fa89f5aaeafda30e5c65372cba6ff6c2dc88b7037d367ebb3e5863
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.19.1-0" --checksum 806082b15c0eb60e4baca497519b4c0cc9cd636d7a944e9943ebc1b9632fabdc
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.19.2-0" --checksum b3370c72fa6879fb21f6c2c250fa61fa7029befbb53da1535f9b895ead5d8acd
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.7-4" --checksum 14329a8ec0a649ecb9ffb37085a547183748efedea8ed029801ab9b381ab7173
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.36.0-0" --checksum 30924cdaed3ea73d8c91a3a460fe917ae14a6a83f1c231c019c2444e6dc517fa
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-10" --checksum 35c818ba3f4b5aae905959bc7d3a5e81fc63786e3c662b604612c0aa7fcda8fd
