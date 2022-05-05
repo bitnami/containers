@@ -8,9 +8,9 @@
     },
     "openldap": {
         "arch": "amd64",
-        "digest": "e9f02838b655c63b779bf19d43a1efce521d6b473014dc173376cbd4b16f9a97",
+        "digest": "2f13fa82674d3cea590a2d3879c69f217d5925f7f6f4dce23deb298c3591381c",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.6.1-5"
+        "version": "2.6.2-0"
     }
 }
