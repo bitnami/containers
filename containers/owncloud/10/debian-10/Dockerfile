@@ -25,8 +25,8 @@ RUN ln -sf /dev/stdout /opt/bitnami/apache/logs/access_log && \
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
-RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/apache/postunpack.sh
+RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/owncloud/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \

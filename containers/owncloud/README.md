@@ -31,7 +31,8 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10`, `10-debian-10`, `10.9.1`, `10.9.1-debian-10-r106`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.9.1-debian-10-r106/10/debian-10/Dockerfile)
+* [`10`, `10-debian-11`, `10.9.1`, `10.9.1-debian-11-r-1`, `latest` (10/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.9.1-debian-11-r-1/10/debian-11/Dockerfile)
+* [`10`, `10-debian-10`, `10.9.1`, `10.9.1-debian-10-r107`, `latest` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.9.1-debian-10-r107/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/owncloud GitHub repo](https://github.com/bitnami/bitnami-docker-owncloud).
 
@@ -52,7 +53,7 @@ $ docker pull bitnami/owncloud:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/owncloud:latest 'https://github.com/bitnami/bitnami-docker-owncloud.git#master:10/debian-10'
+$ docker build -t bitnami/owncloud:latest 'https://github.com/bitnami/bitnami-docker-owncloud.git#master:10/debian-11'$ docker build -t bitnami/owncloud:latest 'https://github.com/bitnami/bitnami-docker-owncloud.git#master:10/debian-10'
 ```
 
 ## How to use this image
