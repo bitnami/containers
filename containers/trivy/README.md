@@ -28,8 +28,7 @@ $ docker run --name trivy bitnami/trivy:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-11`, `0.27.1`, `0.27.1-debian-11-r-1`, `latest` (0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-trivy/blob/0.27.1-debian-11-r-1/0/debian-11/Dockerfile)
-* [`0`, `0-debian-10`, `0.27.1`, `0.27.1-debian-10-r10`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-trivy/blob/0.27.1-debian-10-r10/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.27.1`, `0.27.1-debian-10-r11`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-trivy/blob/0.27.1-debian-10-r11/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/trivy GitHub repo](https://github.com/bitnami/bitnami-docker-trivy).
 
@@ -50,7 +49,7 @@ $ docker pull bitnami/trivy:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/trivy:latest 'https://github.com/bitnami/bitnami-docker-trivy.git#master:0/debian-11'$ docker build -t bitnami/trivy:latest 'https://github.com/bitnami/bitnami-docker-trivy.git#master:0/debian-10'
+$ docker build -t bitnami/trivy:latest 'https://github.com/bitnami/bitnami-docker-trivy.git#master:0/debian-10'
 ```
 
 ## Why use a non-root container?
