@@ -32,7 +32,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.35.0`, `2.35.0-debian-10-r13`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.35.0-debian-10-r13/2/debian-10/Dockerfile)
+* [`2`, `2-debian-11`, `2.35.0`, `2.35.0-debian-11-r-1`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.35.0-debian-11-r-1/2/debian-11/Dockerfile)
+* [`2`, `2-debian-10`, `2.35.0`, `2.35.0-debian-10-r14`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.35.0-debian-10-r14/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prometheus GitHub repo](https://github.com/bitnami/bitnami-docker-prometheus).
 
@@ -53,7 +54,7 @@ $ docker pull bitnami/prometheus:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/prometheus:latest 'https://github.com/bitnami/bitnami-docker-prometheus.git#master:2/debian-10'
+$ docker build -t bitnami/prometheus:latest 'https://github.com/bitnami/bitnami-docker-prometheus.git#master:2/debian-11'$ docker build -t bitnami/prometheus:latest 'https://github.com/bitnami/bitnami-docker-prometheus.git#master:2/debian-10'
 ```
 
 ## Persisting your database
