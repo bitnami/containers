@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`3.5`, `3.5-debian-11`, `3.5.4`, `3.5.4-debian-11-r-1`, `latest` (3.5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.5.4-debian-11-r-1/3.5/debian-11/Dockerfile)
 * [`3.5`, `3.5-debian-10`, `3.5.4`, `3.5.4-debian-10-r11`, `latest` (3.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.5.4-debian-10-r11/3.5/debian-10/Dockerfile)
 * [`3.4`, `3.4-debian-11`, `3.4.18`, `3.4.18-debian-11-r-1` (3.4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.4.18-debian-11-r-1/3.4/debian-11/Dockerfile)
-* [`3.4`, `3.4-debian-10`, `3.4.18`, `3.4.18-debian-10-r35` (3.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.4.18-debian-10-r35/3.4/debian-10/Dockerfile)
+* [`3.4`, `3.4-debian-10`, `3.4.18`, `3.4.18-debian-10-r36` (3.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.4.18-debian-10-r36/3.4/debian-10/Dockerfile)
 * [`3.3`, `3.3-debian-11`, `3.3.27`, `3.3.27-debian-11-r-1` (3.3/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.27-debian-11-r-1/3.3/debian-11/Dockerfile)
 * [`3.3`, `3.3-debian-10`, `3.3.27`, `3.3.27-debian-10-r35` (3.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.27-debian-10-r35/3.3/debian-10/Dockerfile)
 
