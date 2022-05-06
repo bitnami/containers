@@ -28,13 +28,11 @@ $ docker run --name envoy bitnami/envoy:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.22`, `1.22-debian-11`, `1.22.0`, `1.22.0-debian-11-r-1`, `latest` (1.22/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.22.0-debian-11-r-1/1.22/debian-11/Dockerfile)
 * [`1.22`, `1.22-debian-10`, `1.22.0`, `1.22.0-debian-10-r14`, `latest` (1.22/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.22.0-debian-10-r14/1.22/debian-10/Dockerfile)
 * [`1.21`, `1.21-debian-10`, `1.21.1`, `1.21.1-debian-10-r70` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.21.1-debian-10-r70/1.21/debian-10/Dockerfile)
-* [`1.20`, `1.20-debian-11`, `1.20.3`, `1.20.3-debian-11-r-1` (1.20/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.20.3-debian-11-r-1/1.20/debian-11/Dockerfile)
 * [`1.20`, `1.20-debian-10`, `1.20.3`, `1.20.3-debian-10-r9` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.20.3-debian-10-r9/1.20/debian-10/Dockerfile)
 * [`1.19`, `1.19-debian-10`, `1.19.4`, `1.19.4-debian-10-r10` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.19.4-debian-10-r10/1.19/debian-10/Dockerfile)
-* [`1.18`, `1.18-debian-10`, `1.18.6`, `1.18.6-debian-10-r72` (1.18/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.18.6-debian-10-r72/1.18/debian-10/Dockerfile)
+* [`1.18`, `1.18-debian-10`, `1.18.6`, `1.18.6-debian-10-r73` (1.18/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.18.6-debian-10-r73/1.18/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/envoy GitHub repo](https://github.com/bitnami/bitnami-docker-envoy).
 
@@ -55,7 +53,7 @@ $ docker pull bitnami/envoy:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/envoy:latest 'https://github.com/bitnami/bitnami-docker-envoy.git#master:1.22/debian-11'$ docker build -t bitnami/envoy:latest 'https://github.com/bitnami/bitnami-docker-envoy.git#master:1.22/debian-10'
+$ docker build -t bitnami/envoy:latest 'https://github.com/bitnami/bitnami-docker-envoy.git#master:1.22/debian-10'
 ```
 
 ## Configuration
