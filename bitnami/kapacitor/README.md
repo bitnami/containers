@@ -26,8 +26,7 @@ $ docker run --name kapacitor bitnami/kapacitor:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-11`, `1.6.4`, `1.6.4-debian-11-r-1`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kapacitor/blob/1.6.4-debian-11-r-1/1/debian-11/Dockerfile)
-* [`1`, `1-debian-10`, `1.6.4`, `1.6.4-debian-10-r50`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kapacitor/blob/1.6.4-debian-10-r50/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.6.4`, `1.6.4-debian-10-r51`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kapacitor/blob/1.6.4-debian-10-r51/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kapacitor GitHub repo](https://github.com/bitnami/bitnami-docker-kapacitor).
 
@@ -48,7 +47,7 @@ $ docker pull bitnami/kapacitor:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/kapacitor:latest 'https://github.com/bitnami/bitnami-docker-kapacitor.git#master:1/debian-11'$ docker build -t bitnami/kapacitor:latest 'https://github.com/bitnami/bitnami-docker-kapacitor.git#master:1/debian-10'
+$ docker build -t bitnami/kapacitor:latest 'https://github.com/bitnami/bitnami-docker-kapacitor.git#master:1/debian-10'
 ```
 
 # Persisting your application
