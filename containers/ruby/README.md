@@ -35,13 +35,9 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.1`, `3.1-debian-11`, `3.1.2`, `3.1.2-debian-11-r-1`, `latest` (3.1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/3.1.2-debian-11-r-1/3.1/debian-11/Dockerfile)
-* [`3.1`, `3.1-debian-10`, `3.1.2`, `3.1.2-debian-10-r23`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/3.1.2-debian-10-r23/3.1/debian-10/Dockerfile)
-* [`3.0`, `3.0-debian-11`, `3.0.4`, `3.0.4-debian-11-r-1` (3.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/3.0.4-debian-11-r-1/3.0/debian-11/Dockerfile)
+* [`3.1`, `3.1-debian-10`, `3.1.2`, `3.1.2-debian-10-r24`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/3.1.2-debian-10-r24/3.1/debian-10/Dockerfile)
 * [`3.0`, `3.0-debian-10`, `3.0.4`, `3.0.4-debian-10-r23` (3.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/3.0.4-debian-10-r23/3.0/debian-10/Dockerfile)
-* [`2.7`, `2.7-debian-11`, `2.7.6`, `2.7.6-debian-11-r-1` (2.7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.7.6-debian-11-r-1/2.7/debian-11/Dockerfile)
 * [`2.7`, `2.7-debian-10`, `2.7.6`, `2.7.6-debian-10-r23` (2.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.7.6-debian-10-r23/2.7/debian-10/Dockerfile)
-* [`2.6`, `2.6-debian-11`, `2.6.10`, `2.6.10-debian-11-r-1` (2.6/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.10-debian-11-r-1/2.6/debian-11/Dockerfile)
 * [`2.6`, `2.6-debian-10`, `2.6.10`, `2.6.10-debian-10-r23` (2.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.10-debian-10-r23/2.6/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ruby GitHub repo](https://github.com/bitnami/bitnami-docker-ruby).
@@ -75,7 +71,7 @@ $ docker pull bitnami/ruby:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/ruby:latest 'https://github.com/bitnami/bitnami-docker-ruby.git#master:3.1/debian-11'$ docker build -t bitnami/ruby:latest 'https://github.com/bitnami/bitnami-docker-ruby.git#master:3.1/debian-10'
+$ docker build -t bitnami/ruby:latest 'https://github.com/bitnami/bitnami-docker-ruby.git#master:3.1/debian-10'
 ```
 
 ## Entering the REPL
