@@ -35,8 +35,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
+- [`9`, `9-debian-11`, `9.4.0`, `9.4.0-debian-11-r-1`, `latest` (9/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/9.4.0-debian-11-r-1/9/debian-11/Dockerfile)
 - [`9`, `9-debian-10`, `9.4.0`, `9.4.0-debian-10-r6`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/9.4.0-debian-10-r6/9/debian-10/Dockerfile)
-- [`8`, `8-debian-10`, `8.9.8`, `8.9.8-debian-10-r30` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/8.9.8-debian-10-r30/8/debian-10/Dockerfile)
+- [`8`, `8-debian-10`, `8.9.8`, `8.9.8-debian-10-r31` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-sonarqube/blob/8.9.8-debian-10-r31/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/sonarqube GitHub repo](https://github.com/bitnami/bitnami-docker-sonarqube).
 
@@ -57,7 +58,7 @@ $ docker pull bitnami/sonarqube:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/sonarqube:latest 'https://github.com/bitnami/bitnami-docker-sonarqube.git#master:9/debian-10'
+$ docker build -t bitnami/sonarqube:latest 'https://github.com/bitnami/bitnami-docker-sonarqube.git#master:9/debian-11'$ docker build -t bitnami/sonarqube:latest 'https://github.com/bitnami/bitnami-docker-sonarqube.git#master:9/debian-10'
 ```
 
 ## How to use this image
