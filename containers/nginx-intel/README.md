@@ -53,8 +53,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-11`, `0.4.7`, `0.4.7-debian-11-r-1`, `latest` (0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-intel/blob/0.4.7-debian-11-r-1/0/debian-11/Dockerfile)
-* [`0`, `0-debian-10`, `0.4.7`, `0.4.7-debian-10-r99`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-intel/blob/0.4.7-debian-10-r99/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.4.7`, `0.4.7-debian-10-r100`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-intel/blob/0.4.7-debian-10-r100/0/debian-10/Dockerfile)
 
 ## Get this image
 
@@ -75,7 +74,7 @@ $ docker pull bitnami/nginx-intel:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/nginx-intel:latest 'https://github.com/bitnami/bitnami-docker-nginx-intel.git#master:0/debian-11'$ docker build -t bitnami/nginx-intel:latest 'https://github.com/bitnami/bitnami-docker-nginx-intel.git#master:0/debian-10'
+$ docker build -t bitnami/nginx-intel:latest 'https://github.com/bitnami/bitnami-docker-nginx-intel.git#master:0/debian-10'
 ```
 
 ## Hosting a static website
