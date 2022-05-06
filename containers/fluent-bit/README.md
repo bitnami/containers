@@ -32,8 +32,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-11`, `1.9.3`, `1.9.3-debian-11-r-1`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/1.9.3-debian-11-r-1/1/debian-11/Dockerfile)
-* [`1`, `1-debian-10`, `1.9.3`, `1.9.3-debian-10-r8`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/1.9.3-debian-10-r8/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.9.3`, `1.9.3-debian-10-r9`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluent-bit/blob/1.9.3-debian-10-r9/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluent-bit GitHub repo](https://github.com/bitnami/bitnami-docker-fluent-bit).
 
@@ -54,7 +53,7 @@ $ docker pull bitnami/fluent-bit:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/fluent-bit:latest 'https://github.com/bitnami/bitnami-docker-fluent-bit.git#master:1/debian-11'$ docker build -t bitnami/fluent-bit:latest 'https://github.com/bitnami/bitnami-docker-fluent-bit.git#master:1/debian-10'
+$ docker build -t bitnami/fluent-bit:latest 'https://github.com/bitnami/bitnami-docker-fluent-bit.git#master:1/debian-10'
 ```
 
 ## Connecting to other containers
