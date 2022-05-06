@@ -29,7 +29,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8`, `8-debian-11`, `8.0.28-20`, `8.0.28-20-debian-11-r-1`, `latest` (8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-percona-xtrabackup/blob/8.0.28-20-debian-11-r-1/8/debian-11/Dockerfile)
-* [`8`, `8-debian-10`, `8.0.28-20`, `8.0.28-20-debian-10-r8`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-percona-xtrabackup/blob/8.0.28-20-debian-10-r8/8/debian-10/Dockerfile)
+* [`8`, `8-debian-10`, `8.0.28-20`, `8.0.28-20-debian-10-r9`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-percona-xtrabackup/blob/8.0.28-20-debian-10-r9/8/debian-10/Dockerfile)
 * [`2.4`, `2.4-debian-11`, `2.4.25`, `2.4.25-debian-11-r-1` (2.4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-percona-xtrabackup/blob/2.4.25-debian-11-r-1/2.4/debian-11/Dockerfile)
 * [`2.4`, `2.4-debian-10`, `2.4.25`, `2.4.25-debian-10-r9` (2.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-percona-xtrabackup/blob/2.4.25-debian-10-r9/2.4/debian-10/Dockerfile)
 
