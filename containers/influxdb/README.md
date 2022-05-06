@@ -41,7 +41,8 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.2.0`, `2.2.0-debian-10-r23`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/2.2.0-debian-10-r23/2/debian-10/Dockerfile)
+* [`2`, `2-debian-11`, `2.2.0`, `2.2.0-debian-11-r-1`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/2.2.0-debian-11-r-1/2/debian-11/Dockerfile)
+* [`2`, `2-debian-10`, `2.2.0`, `2.2.0-debian-10-r24`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/2.2.0-debian-10-r24/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/influxdb GitHub repo](https://github.com/bitnami/bitnami-docker-influxdb).
 
@@ -62,7 +63,7 @@ $ docker pull bitnami/influxdb:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/influxdb:latest 'https://github.com/bitnami/bitnami-docker-influxdb.git#master:2/debian-10'
+$ docker build -t bitnami/influxdb:latest 'https://github.com/bitnami/bitnami-docker-influxdb.git#master:2/debian-11'$ docker build -t bitnami/influxdb:latest 'https://github.com/bitnami/bitnami-docker-influxdb.git#master:2/debian-10'
 ```
 
 ## Persisting your application
