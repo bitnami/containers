@@ -28,8 +28,7 @@ $ docker run --name grafana-tempo-vulture bitnami/grafana-tempo-vulture:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.4.1`, `1.4.1-debian-10-r0`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-tempo-vulture/blob/1.4.1-debian-10-r0/1/debian-10/Dockerfile)
-* [`1`, `1-debian-11`, `1.4.0`, `1.4.0-debian-11-r-1`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-tempo-vulture/blob/1.4.0-debian-11-r-1/1/debian-11/Dockerfile)
+* [`1`, `1-debian-10`, `1.4.1`, `1.4.1-debian-10-r1`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-tempo-vulture/blob/1.4.1-debian-10-r1/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana-tempo-vulture GitHub repo](https://github.com/bitnami/bitnami-docker-grafana-tempo-vulture).
 
@@ -50,7 +49,7 @@ $ docker pull bitnami/grafana-tempo-vulture:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/grafana-tempo-vulture:latest 'https://github.com/bitnami/bitnami-docker-grafana-tempo-vulture.git#master:1/debian-10'$ docker build -t bitnami/grafana-tempo-vulture:latest 'https://github.com/bitnami/bitnami-docker-grafana-tempo-vulture.git#master:1/debian-11'
+$ docker build -t bitnami/grafana-tempo-vulture:latest 'https://github.com/bitnami/bitnami-docker-grafana-tempo-vulture.git#master:1/debian-10'
 ```
 
 ## Why use a non-root container?
