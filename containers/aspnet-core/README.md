@@ -35,9 +35,12 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
+* [`6.0`, `6.0-debian-11`, `6.0.4`, `6.0.4-debian-11-r-1`, `latest` (6.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/6.0.4-debian-11-r-1/6.0/debian-11/Dockerfile)
 * [`6.0`, `6.0-debian-10`, `6.0.4`, `6.0.4-debian-10-r22`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/6.0.4-debian-10-r22/6.0/debian-10/Dockerfile)
+* [`5`, `5-debian-11`, `5.0.16`, `5.0.16-debian-11-r-1` (5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/5.0.16-debian-11-r-1/5/debian-11/Dockerfile)
 * [`5`, `5-debian-10`, `5.0.16`, `5.0.16-debian-10-r22` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/5.0.16-debian-10-r22/5/debian-10/Dockerfile)
-* [`3.1`, `3.1-debian-10`, `3.1.24`, `3.1.24-debian-10-r22` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/3.1.24-debian-10-r22/3.1/debian-10/Dockerfile)
+* [`3.1`, `3.1-debian-11`, `3.1.24`, `3.1.24-debian-11-r-1` (3.1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/3.1.24-debian-11-r-1/3.1/debian-11/Dockerfile)
+* [`3.1`, `3.1-debian-10`, `3.1.24`, `3.1.24-debian-10-r23` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/3.1.24-debian-10-r23/3.1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/aspnet-core GitHub repo](https://github.com/bitnami/bitnami-docker-aspnet-core).
 
@@ -58,7 +61,7 @@ $ docker pull bitnami/aspnet-core:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/aspnet-core:latest 'https://github.com/bitnami/bitnami-docker-aspnet-core.git#master:6.0/debian-10'
+$ docker build -t bitnami/aspnet-core:latest 'https://github.com/bitnami/bitnami-docker-aspnet-core.git#master:6.0/debian-11'$ docker build -t bitnami/aspnet-core:latest 'https://github.com/bitnami/bitnami-docker-aspnet-core.git#master:6.0/debian-10'
 ```
 
 ## Persisting your application
