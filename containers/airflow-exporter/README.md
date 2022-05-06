@@ -32,8 +32,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-11`, `0.20220314.0`, `0.20220314.0-debian-11-r-1`, `latest` (0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-exporter/blob/0.20220314.0-debian-11-r-1/0/debian-11/Dockerfile)
-* [`0`, `0-debian-10`, `0.20220314.0`, `0.20220314.0-debian-10-r53`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-exporter/blob/0.20220314.0-debian-10-r53/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.20220314.0`, `0.20220314.0-debian-10-r54`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-exporter/blob/0.20220314.0-debian-10-r54/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-airflow-exporter).
 
@@ -54,7 +53,7 @@ $ docker pull bitnami/airflow-exporter:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/airflow-exporter:latest 'https://github.com/bitnami/bitnami-docker-airflow-exporter.git#master:0/debian-11'$ docker build -t bitnami/airflow-exporter:latest 'https://github.com/bitnami/bitnami-docker-airflow-exporter.git#master:0/debian-10'
+$ docker build -t bitnami/airflow-exporter:latest 'https://github.com/bitnami/bitnami-docker-airflow-exporter.git#master:0/debian-10'
 ```
 
 ## Connecting to other containers
