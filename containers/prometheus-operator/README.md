@@ -36,8 +36,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-11`, `0.56.1`, `0.56.1-debian-11-r-1`, `latest` (0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus-operator/blob/0.56.1-debian-11-r-1/0/debian-11/Dockerfile)
-* [`0`, `0-debian-10`, `0.56.1`, `0.56.1-debian-10-r1`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus-operator/blob/0.56.1-debian-10-r1/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.56.1`, `0.56.1-debian-10-r2`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus-operator/blob/0.56.1-debian-10-r2/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prometheus-operator GitHub repo](https://github.com/bitnami/bitnami-docker-prometheus-operator).
 
@@ -58,7 +57,7 @@ $ docker pull bitnami/prometheus-operator:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/prometheus-operator:latest 'https://github.com/bitnami/bitnami-docker-prometheus-operator.git#master:0/debian-11'$ docker build -t bitnami/prometheus-operator:latest 'https://github.com/bitnami/bitnami-docker-prometheus-operator.git#master:0/debian-10'
+$ docker build -t bitnami/prometheus-operator:latest 'https://github.com/bitnami/bitnami-docker-prometheus-operator.git#master:0/debian-10'
 ```
 
 ## Configuration
