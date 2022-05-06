@@ -32,8 +32,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-11`, `0.9.2`, `0.9.2-debian-11-r-1`, `latest` (0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats-exporter/blob/0.9.2-debian-11-r-1/0/debian-11/Dockerfile)
-* [`0`, `0-debian-10`, `0.9.2`, `0.9.2-debian-10-r29`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats-exporter/blob/0.9.2-debian-10-r29/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.9.2`, `0.9.2-debian-10-r30`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nats-exporter/blob/0.9.2-debian-10-r30/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nats-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-nats-exporter).
 
@@ -54,7 +53,7 @@ $ docker pull bitnami/nats-exporter:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/nats-exporter:latest 'https://github.com/bitnami/bitnami-docker-nats-exporter.git#master:0/debian-11'$ docker build -t bitnami/nats-exporter:latest 'https://github.com/bitnami/bitnami-docker-nats-exporter.git#master:0/debian-10'
+$ docker build -t bitnami/nats-exporter:latest 'https://github.com/bitnami/bitnami-docker-nats-exporter.git#master:0/debian-10'
 ```
 
 ## Connecting to other containers
