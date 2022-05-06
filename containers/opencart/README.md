@@ -41,8 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-11`, `3.0.3-8`, `3.0.3-8-debian-11-r-1`, `latest` (3/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-8-debian-11-r-1/3/debian-11/Dockerfile)
-* [`3`, `3-debian-10`, `3.0.3-8`, `3.0.3-8-debian-10-r238`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-8-debian-10-r238/3/debian-10/Dockerfile)
+* [`3`, `3-debian-10`, `3.0.3-8`, `3.0.3-8-debian-10-r239`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-opencart/blob/3.0.3-8-debian-10-r239/3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/opencart GitHub repo](https://github.com/bitnami/bitnami-docker-opencart).
 
@@ -63,7 +62,7 @@ $ docker pull bitnami/opencart:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/opencart:latest 'https://github.com/bitnami/bitnami-docker-opencart.git#master:3/debian-11'$ docker build -t bitnami/opencart:latest 'https://github.com/bitnami/bitnami-docker-opencart.git#master:3/debian-10'
+$ docker build -t bitnami/opencart:latest 'https://github.com/bitnami/bitnami-docker-opencart.git#master:3/debian-10'
 ```
 
 ## How to use this image
