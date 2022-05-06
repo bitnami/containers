@@ -45,8 +45,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8`, `8-debian-11`, `8.2.0`, `8.2.0-debian-11-r-1`, `latest` (8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/8.2.0-debian-11-r-1/8/debian-11/Dockerfile)
-* [`8`, `8-debian-10`, `8.2.0`, `8.2.0-debian-10-r2`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/8.2.0-debian-10-r2/8/debian-10/Dockerfile)
+* [`8`, `8-debian-10`, `8.2.0`, `8.2.0-debian-10-r3`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/8.2.0-debian-10-r3/8/debian-10/Dockerfile)
 * [`7`, `7-debian-10`, `7.17.3`, `7.17.3-debian-10-r15` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash/blob/7.17.3-debian-10-r15/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/logstash GitHub repo](https://github.com/bitnami/bitnami-docker-logstash).
@@ -68,7 +67,7 @@ $ docker pull bitnami/logstash:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/logstash:latest 'https://github.com/bitnami/bitnami-docker-logstash.git#master:8/debian-11'$ docker build -t bitnami/logstash:latest 'https://github.com/bitnami/bitnami-docker-logstash.git#master:8/debian-10'
+$ docker build -t bitnami/logstash:latest 'https://github.com/bitnami/bitnami-docker-logstash.git#master:8/debian-10'
 ```
 
 ## Persisting your application
