@@ -41,8 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-11`, `7.7.1`, `7.7.1-debian-11-r-1`, `latest` (7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-concourse/blob/7.7.1-debian-11-r-1/7/debian-11/Dockerfile)
-* [`7`, `7-debian-10`, `7.7.1`, `7.7.1-debian-10-r35`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-concourse/blob/7.7.1-debian-10-r35/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.7.1`, `7.7.1-debian-10-r36`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-concourse/blob/7.7.1-debian-10-r36/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/concourse GitHub repo](https://github.com/bitnami/bitnami-docker-concourse).
 
@@ -63,7 +62,7 @@ $ docker pull bitnami/concourse:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/concourse:latest 'https://github.com/bitnami/bitnami-docker-concourse.git#master:7/debian-11'$ docker build -t bitnami/concourse:latest 'https://github.com/bitnami/bitnami-docker-concourse.git#master:7/debian-10'
+$ docker build -t bitnami/concourse:latest 'https://github.com/bitnami/bitnami-docker-concourse.git#master:7/debian-10'
 ```
 
 ## Persisting your application
