@@ -30,7 +30,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.4.2`, `2.4.2-debian-10-r58`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/2.4.2-debian-10-r58/2/debian-10/Dockerfile)
+* [`2`, `2-debian-11`, `2.4.2`, `2.4.2-debian-11-r-1`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/2.4.2-debian-11-r-1/2/debian-11/Dockerfile)
+* [`2`, `2-debian-10`, `2.4.2`, `2.4.2-debian-10-r59`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kube-state-metrics/blob/2.4.2-debian-10-r59/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kube-state-metrics GitHub repo](https://github.com/bitnami/bitnami-docker-kube-state-metrics).
 
@@ -51,7 +52,7 @@ $ docker pull bitnami/kube-state-metrics:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/kube-state-metrics:latest 'https://github.com/bitnami/bitnami-docker-kube-state-metrics.git#master:2/debian-10'
+$ docker build -t bitnami/kube-state-metrics:latest 'https://github.com/bitnami/bitnami-docker-kube-state-metrics.git#master:2/debian-11'$ docker build -t bitnami/kube-state-metrics:latest 'https://github.com/bitnami/bitnami-docker-kube-state-metrics.git#master:2/debian-10'
 ```
 
 ## Configuration
