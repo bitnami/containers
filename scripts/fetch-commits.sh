@@ -46,7 +46,7 @@ function gitConfigure() {
 function pushChanges() {
     git config user.name "Bitnami Containers"
     git config user.email "containers@bitnami.com"
-    git push origin main
+#    git push origin main
 }
 
 function findCommitsToSync() {
@@ -96,7 +96,13 @@ syncContainerCommits() {
             echo "Nothing to sync for ${name}"
         else
             for commit in "${commits_to_sync[@]}"; do
-                syncCommit "$commit" "$name"
+                # If the commit is a merge, it has more than one parent, use the second to avoid re-applying an old commit
+                actual_merge_commit_id="$(git log --pretty=%P -n 1 "$commit" | awk '{print $2}')"
+                if [[ -n "$actual_merge_commit_id" ]]; then
+                  syncCommit "$actual_merge_commit_id" "$name"
+                else
+                  syncCommit "$commit" "$name"
+                fi
             done
         fi
         git remote remove "$name"
