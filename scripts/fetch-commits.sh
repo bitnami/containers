@@ -46,7 +46,7 @@ function gitConfigure() {
 function pushChanges() {
     git config user.name "Bitnami Containers"
     git config user.email "containers@bitnami.com"
-#    git push origin main
+    git push origin main
 }
 
 function findCommitsToSync() {
