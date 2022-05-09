@@ -74,7 +74,7 @@ export PATH="${BITNAMI_ROOT_DIR}/common/bin:${PATH}"
 
 # JasperReports persistence configuration
 export JASPERREPORTS_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/jasperreports"
-export JASPERREPORTS_DATA_TO_PERSIST="${JASPERREPORTS_DATA_TO_PERSIST:-buildomatic/default_master.properties buildomatic/conf_source/db/mysql/db.template.properties .jrsks .jrsksp}"
+export JASPERREPORTS_DATA_TO_PERSIST="${JASPERREPORTS_DATA_TO_PERSIST:-buildomatic/default_master.properties buildomatic/conf_source/db/mysql/db.template.properties buildomatic/conf_source/db/postgresql/db.template.properties .jrsks .jrsksp}"
 
 # System users (when running with a privileged user)
 export JASPERREPORTS_DAEMON_USER="tomcat"
@@ -104,6 +104,7 @@ JASPERREPORTS_SMTP_PROTOCOL="${JASPERREPORTS_SMTP_PROTOCOL:-"${SMTP_PROTOCOL:-}"
 export JASPERREPORTS_SMTP_PROTOCOL="${JASPERREPORTS_SMTP_PROTOCOL:-}" # only used during the first initialization
 
 # Database configuration
+export JASPERREPORTS_DATABASE_TYPE="${JASPERREPORTS_DATABASE_TYPE:-mariadb}" # only used during the first initialization
 export JASPERREPORTS_DEFAULT_DATABASE_HOST="mariadb" # only used at build time
 JASPERREPORTS_DATABASE_HOST="${JASPERREPORTS_DATABASE_HOST:-"${MARIADB_HOST:-}"}"
 export JASPERREPORTS_DATABASE_HOST="${JASPERREPORTS_DATABASE_HOST:-$JASPERREPORTS_DEFAULT_DATABASE_HOST}" # only used during the first initialization
