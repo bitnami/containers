@@ -16,7 +16,7 @@ set -o pipefail
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/liblog.sh
 
-# Copy default configuration file
+# Copy and configure configuration file
 cp "${JASPERREPORTS_CONF_DIR}/sample_conf/mysql_master.properties" "$JASPERREPORTS_CONF_FILE"
 
 # Delete duplicate example MySQL configuration lines in the configuration file so it does not break the jasperreports_conf_set function
