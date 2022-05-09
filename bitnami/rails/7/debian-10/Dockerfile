@@ -15,14 +15,14 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.19.2-0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.7-4" --checksum 14329a8ec0a649ecb9ffb37085a547183748efedea8ed029801ab9b381ab7173
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.36.1-0" --checksum e00f740b66faf2808cb8983a39b186d43a8367730512c402df78751a9cefbfc1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-10" --checksum 35c818ba3f4b5aae905959bc7d3a5e81fc63786e3c662b604612c0aa7fcda8fd
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rails" "7.0.2-4-0" --checksum a45245255440a00739ce2d660af0f2996bb7498a488fcedff6d16d876de354bf
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rails" "7.0.3-0-0" --checksum ad111e16280dabbf66b56b619ae53bf760d2483c649a8ffadbc3f8522cff7b2b
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/bitnami-user.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/rails/postunpack.sh
-ENV APP_VERSION="7.0.2-4" \
+ENV APP_VERSION="7.0.3-0" \
     BITNAMI_APP_NAME="rails" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:$PATH"
 
