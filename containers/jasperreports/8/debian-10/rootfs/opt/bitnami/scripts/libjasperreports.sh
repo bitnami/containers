@@ -13,13 +13,20 @@
 . /opt/bitnami/scripts/libpersistence.sh
 . /opt/bitnami/scripts/libservice.sh
 
-# Load database library
+# Load MYSQL/MariaDB database library
 if [[ -f /opt/bitnami/scripts/libmysqlclient.sh ]]; then
     . /opt/bitnami/scripts/libmysqlclient.sh
 elif [[ -f /opt/bitnami/scripts/libmysql.sh ]]; then
     . /opt/bitnami/scripts/libmysql.sh
 elif [[ -f /opt/bitnami/scripts/libmariadb.sh ]]; then
     . /opt/bitnami/scripts/libmariadb.sh
+fi
+
+# Load PostgreSQL database library
+if [[ -f /opt/bitnami/scripts/libpostgresqlclient.sh ]]; then
+    . /opt/bitnami/scripts/libpostgresqlclient.sh
+elif [[ -f /opt/bitnami/scripts/libpostgresql.sh ]]; then
+    . /opt/bitnami/scripts/libpostgresql.sh
 fi
 
 ########################
@@ -68,6 +75,8 @@ jasperreports_validate() {
         fi
     }
 
+    check_multi_value "JASPERREPORTS_DATABASE_TYPE" "mysql mariadb postgresql"
+
     check_empty_value "JASPERREPORTS_HOST"
     check_yes_no_value "JASPERREPORTS_SKIP_BOOTSTRAP"
     ! is_empty_value "$JASPERREPORTS_DATABASE_HOST" && check_resolved_hostname "$JASPERREPORTS_DATABASE_HOST"
@@ -105,19 +114,47 @@ jasperreports_validate() {
 #   None
 #########################
 jasperreports_configure_db() {
+    local db_type client_version
+
+    db_type="$JASPERREPORTS_DATABASE_TYPE"
+
+    if [[ "$db_type" = "postgresql" ]]; then
+        jasperreports_conf_set "dbType" "postgresql"
+    else
+        jasperreports_conf_set "dbType" "mysql"
+    fi
     jasperreports_conf_set "dbPort" "$JASPERREPORTS_DATABASE_PORT_NUMBER"
     jasperreports_conf_set "dbHost" "$JASPERREPORTS_DATABASE_HOST"
     ! is_boolean_yes "$ALLOW_EMPTY_PASSWORD" && jasperreports_conf_set "dbPassword" "$JASPERREPORTS_DATABASE_PASSWORD"
     jasperreports_conf_set "dbUsername" "$JASPERREPORTS_DATABASE_USER"
     jasperreports_conf_set "js.dbName" "$JASPERREPORTS_DATABASE_NAME"
-    # Extract MariaDB client version from the library jar. We do it at initialization time to avoid issues when updating
-    local -r mariadb_client_jar="$(realpath "${JASPERREPORTS_CONF_DIR}/conf_source/db/mysql/jdbc"/mariadb-java-client-*)"
-    local mariadb_client_version="${mariadb_client_jar##*-}"
-    mariadb_client_version="${mariadb_client_version%.jar}"
-    # Setting the admin database url (which will be the same as JASPERREPORTS_DATABASE_NAME), which is used by the installer
-    # to perform several checks
-    jasperreports_conf_set "admin.jdbcUrl" "jdbc:mysql://${JASPERREPORTS_DATABASE_HOST}:${JASPERREPORTS_DATABASE_PORT_NUMBER}/${JASPERREPORTS_DATABASE_NAME}" "${JASPERREPORTS_CONF_DIR}/conf_source/db/mysql/db.template.properties"
-    jasperreports_conf_set "maven.jdbc.version" "${mariadb_client_version}"
+    
+    # Extract DB client version from the library jar. We do it at initialization time to avoid issues when updating
+    if [[ "$db_type" = "postgresql" ]]; then
+        local -r postgresql_client_jar="$(realpath "${JASPERREPORTS_CONF_DIR}/conf_source/db/postgresql/jdbc"/postgresql-*)"
+        client_version="${postgresql_client_jar##*-}"
+        client_version="${client_version%.jar}"
+        # Setting the admin database url (which will be the same as JASPERREPORTS_DATABASE_NAME), which is used by the installer
+        # to perform several checks
+        jasperreports_conf_set "admin.jdbcUrl" "jdbc:postgresql://${JASPERREPORTS_DATABASE_HOST}:${JASPERREPORTS_DATABASE_PORT_NUMBER}/${JASPERREPORTS_DATABASE_NAME}" "${JASPERREPORTS_CONF_DIR}/conf_source/db/postgresql/db.template.properties"
+
+        # Override default mysql configuration to PostgreSQL
+        jasperreports_conf_set "maven.jdbc.artifactId" "postgresql"
+        jasperreports_conf_set "jdbcDriverClass" "org.postgresql.Driver"
+        jasperreports_conf_set "jdbcDataSourceClass" "org.postgresql.ds.PGConnectionPoolDataSource"
+        jasperreports_conf_set "maven.jdbc.groupId" "org.postgresql"
+        jasperreports_conf_set "maven.jdbc.artifactId" "postgresql"
+    else
+
+        # Extract MariaDB client version from the library jar. We do it at initialization time to avoid issues when updating
+        local -r mariadb_client_jar="$(realpath "${JASPERREPORTS_CONF_DIR}/conf_source/db/mysql/jdbc"/mariadb-java-client-*)"
+        client_version="${mariadb_client_jar##*-}"
+        client_version="${client_version%.jar}"
+        # Setting the admin database url (which will be the same as JASPERREPORTS_DATABASE_NAME), which is used by the installer
+        # to perform several checks
+        jasperreports_conf_set "admin.jdbcUrl" "jdbc:mysql://${JASPERREPORTS_DATABASE_HOST}:${JASPERREPORTS_DATABASE_PORT_NUMBER}/${JASPERREPORTS_DATABASE_NAME}" "${JASPERREPORTS_CONF_DIR}/conf_source/db/mysql/db.template.properties"
+    fi
+    jasperreports_conf_set "maven.jdbc.version" "${client_version}"
 }
 
 ########################
@@ -152,10 +189,24 @@ jasperreports_configure_smtp() {
 #   None
 #########################
 jasperreports_configure_user() {
+    local db_type
+    db_type="$JASPERREPORTS_DATABASE_TYPE"
+
     info "Configuring users"
+
     # Change the default user username and mail using the database
-    mysql_remote_execute "$JASPERREPORTS_DATABASE_HOST" "$JASPERREPORTS_DATABASE_PORT_NUMBER" "$JASPERREPORTS_DATABASE_NAME" "$JASPERREPORTS_DATABASE_USER" "$JASPERREPORTS_DATABASE_PASSWORD" <<<"UPDATE JIUser SET username='${JASPERREPORTS_USERNAME}' WHERE id=1"
-    mysql_remote_execute "$JASPERREPORTS_DATABASE_HOST" "$JASPERREPORTS_DATABASE_PORT_NUMBER" "$JASPERREPORTS_DATABASE_NAME" "$JASPERREPORTS_DATABASE_USER" "$JASPERREPORTS_DATABASE_PASSWORD" <<<"UPDATE JIUser SET emailAddress='${JASPERREPORTS_EMAIL}' WHERE id=1"
+    if [[ "$db_type" = "postgresql" ]]; then
+        postgresql_remote_execute "$JASPERREPORTS_DATABASE_HOST" "$JASPERREPORTS_DATABASE_PORT_NUMBER" "$JASPERREPORTS_DATABASE_NAME" "$JASPERREPORTS_DATABASE_USER" "$JASPERREPORTS_DATABASE_PASSWORD" <<-EOF
+            UPDATE JIUser SET emailAddress='${JASPERREPORTS_EMAIL}' WHERE id=1;
+            UPDATE JIUser SET username='${JASPERREPORTS_USERNAME}' WHERE id=1;
+EOF
+
+    else
+        mysql_remote_execute "$JASPERREPORTS_DATABASE_HOST" "$JASPERREPORTS_DATABASE_PORT_NUMBER" "$JASPERREPORTS_DATABASE_NAME" "$JASPERREPORTS_DATABASE_USER" "$JASPERREPORTS_DATABASE_PASSWORD" <<-EOF
+            UPDATE JIUser SET emailAddress='${JASPERREPORTS_EMAIL}' WHERE id=1;
+            UPDATE JIUser SET username='${JASPERREPORTS_USERNAME}' WHERE id=1;
+EOF
+    fi
 
     # Change the default user password using the export-import scripts
     # Based on https://community.jaspersoft.com/documentation/jasperreports-server-administration-guide/v550/import-and-export-through-command-line
@@ -177,13 +228,22 @@ jasperreports_configure_user() {
 #   None
 #########################
 jasperreports_run_install_scripts() {
+    local db_type
+    db_type="$JASPERREPORTS_DATABASE_TYPE"
+
     info "Executing installation scripts"
 
     # In order to allow empty passwords and permission issues with the ant scripts, we will use the manual database initialization steps detailed in
     # the official installation guide: https://community.jaspersoft.com/wiki/installation-steps-war-file-binary-distribution
     # Using source to avoid generating too much output
-    mysql_remote_execute "$JASPERREPORTS_DATABASE_HOST" "$JASPERREPORTS_DATABASE_PORT_NUMBER" "$JASPERREPORTS_DATABASE_NAME" "$JASPERREPORTS_DATABASE_USER" "$JASPERREPORTS_DATABASE_PASSWORD" <<<"SOURCE ${JASPERREPORTS_CONF_DIR}/install_resources/sql/mysql/js-create.ddl"
-    mysql_remote_execute "$JASPERREPORTS_DATABASE_HOST" "$JASPERREPORTS_DATABASE_PORT_NUMBER" "$JASPERREPORTS_DATABASE_NAME" "$JASPERREPORTS_DATABASE_USER" "$JASPERREPORTS_DATABASE_PASSWORD" <<<"SOURCE ${JASPERREPORTS_CONF_DIR}/install_resources/sql/mysql/quartz.ddl"
+    if [[ "$db_type" = "postgresql" ]]; then
+        postgresql_remote_execute "$JASPERREPORTS_DATABASE_HOST" "$JASPERREPORTS_DATABASE_PORT_NUMBER" "$JASPERREPORTS_DATABASE_NAME" "$JASPERREPORTS_DATABASE_USER" "$JASPERREPORTS_DATABASE_PASSWORD" <<<"\i ${JASPERREPORTS_CONF_DIR}/install_resources/sql/postgresql/js-create.ddl"
+        postgresql_remote_execute "$JASPERREPORTS_DATABASE_HOST" "$JASPERREPORTS_DATABASE_PORT_NUMBER" "$JASPERREPORTS_DATABASE_NAME" "$JASPERREPORTS_DATABASE_USER" "$JASPERREPORTS_DATABASE_PASSWORD" <<<"\i ${JASPERREPORTS_CONF_DIR}/install_resources/sql/postgresql/quartz.ddl"
+
+    else
+        mysql_remote_execute "$JASPERREPORTS_DATABASE_HOST" "$JASPERREPORTS_DATABASE_PORT_NUMBER" "$JASPERREPORTS_DATABASE_NAME" "$JASPERREPORTS_DATABASE_USER" "$JASPERREPORTS_DATABASE_PASSWORD" <<<"SOURCE ${JASPERREPORTS_CONF_DIR}/install_resources/sql/mysql/js-create.ddl"
+        mysql_remote_execute "$JASPERREPORTS_DATABASE_HOST" "$JASPERREPORTS_DATABASE_PORT_NUMBER" "$JASPERREPORTS_DATABASE_NAME" "$JASPERREPORTS_DATABASE_USER" "$JASPERREPORTS_DATABASE_PASSWORD" <<<"SOURCE ${JASPERREPORTS_CONF_DIR}/install_resources/sql/mysql/quartz.ddl"
+    fi
 
     # We need to move to the buildomatic folder to execute scripts
     cd "${JASPERREPORTS_CONF_DIR}" || exit
@@ -257,6 +317,7 @@ jasperreports_run_upgrade_scripts() {
 #########################
 jasperreports_initialize() {
     # Check if JasperReports has already been initialized and persisted in a previous run
+    local db_type db_host db_port db_name db_user db_pass
     local -r app_name="jasperreports"
 
     if ! [[ -e "$BITNAMI_ROOT_DIR/tomcat/webapps/jasperserver" ]]; then
@@ -270,7 +331,14 @@ jasperreports_initialize() {
         # Use daemon:root ownership for compatibility when running as a non-root user
         am_i_root && configure_permissions_ownership "$JASPERREPORTS_VOLUME_DIR" -d "775" -f "664" -u "$JASPERREPORTS_DAEMON_USER" -g "root"
         info "Trying to connect to the database server"
-        jasperreports_wait_for_mysql_connection "$JASPERREPORTS_DATABASE_HOST" "$JASPERREPORTS_DATABASE_PORT_NUMBER" "$JASPERREPORTS_DATABASE_NAME" "$JASPERREPORTS_DATABASE_USER" "$JASPERREPORTS_DATABASE_PASSWORD"
+        db_type="$JASPERREPORTS_DATABASE_TYPE"
+        db_host="$JASPERREPORTS_DATABASE_HOST"
+        db_port="$JASPERREPORTS_DATABASE_PORT_NUMBER"
+        db_name="$JASPERREPORTS_DATABASE_NAME"
+        db_user="$JASPERREPORTS_DATABASE_USER"
+        db_pass="$JASPERREPORTS_DATABASE_PASSWORD"
+        [[ "$db_type" = "mariadb" || "$db_type" = "mysql" ]] && jasperreports_wait_for_mysql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
+        [[ "$db_type" = "postgresql" ]] && jasperreports_wait_for_postgresql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
 
         # Configure JasperReports based on environment variables
         info "Configuring JasperReports with settings provided via environment variables"
@@ -309,14 +377,16 @@ jasperreports_initialize() {
         info "Restoring persisted JasperReports installation"
         restore_persisted_app "$app_name" "$JASPERREPORTS_DATA_TO_PERSIST"
         info "Trying to connect to the database server"
-        local db_host db_port db_name db_user db_pass
+        local db_type db_host db_port db_name db_user db_pass
+        db_type="$(jasperreports_conf_get "dbType")"
         db_host="$(jasperreports_conf_get "dbHost")"
         db_port="$(jasperreports_conf_get "dbPort")"
         db_name="$(jasperreports_conf_get "js.dbName")"
         db_user="$(jasperreports_conf_get "dbUsername")"
         # Adding true as the password may not be set
         db_pass="$(jasperreports_conf_get "dbPassword" || true)"
-        jasperreports_wait_for_mysql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
+        [[ "$db_type" = "mariadb" || "$db_type" = "mysql" ]] && jasperreports_wait_for_mysql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
+        [[ "$db_type" = "postgresql" ]] && jasperreports_wait_for_postgresql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
         jasperreports_run_upgrade_scripts
         jasperreports_run_deployment_scripts
     fi
@@ -395,6 +465,34 @@ jasperreports_conf_get() {
     local sanitized_pattern
     sanitized_pattern="^\s*(//\s*)?$(sed 's/[]\[^$.*/]/\\&/g' <<<"$key")\s*=(.*)"
     grep -E "$sanitized_pattern" "$JASPERREPORTS_CONF_FILE" | sed -E "s|${sanitized_pattern}|\2|" | tr -d "\"' "
+}
+
+########################
+# Wait until the database is accessible with the currently-known credentials
+# Globals:
+#   *
+# Arguments:
+#   $1 - database host
+#   $2 - database port
+#   $3 - database name
+#   $4 - database username
+#   $5 - database user password (optional)
+# Returns:
+#   true if the database connection succeeded, false otherwise
+#########################
+jasperreports_wait_for_postgresql_connection() {
+    local -r db_host="${1:?missing database host}"
+    local -r db_port="${2:?missing database port}"
+    local -r db_name="${3:?missing database name}"
+    local -r db_user="${4:?missing database user}"
+    local -r db_pass="${5:-}"
+    check_postgresql_connection() {
+        echo "SELECT 1" | postgresql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
+    }
+    if ! retry_while "check_postgresql_connection"; then
+        error "Could not connect to the database"
+        return 1
+    fi
 }
 
 ########################
