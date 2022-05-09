@@ -30,7 +30,7 @@ RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APP_VERSION="8.0.0" \
     BITNAMI_APP_NAME="jasperreports" \
     JAVA_HOME="/opt/bitnami/java" \
-    PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:$PATH"
+    PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/mysql/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/git/bin:$PATH"
 
 EXPOSE 8009 8080 8443
 

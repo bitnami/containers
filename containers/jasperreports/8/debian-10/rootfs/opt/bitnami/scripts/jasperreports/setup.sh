@@ -19,6 +19,13 @@ elif [[ -f /opt/bitnami/scripts/mariadb-env.sh ]]; then
     . /opt/bitnami/scripts/mariadb-env.sh
 fi
 
+# Load PostgreSQL client environment for 'postgresql_remote_execute'
+if [[ -f /opt/bitnami/scripts/postgresql-client-env.sh ]]; then
+    . /opt/bitnami/scripts/postgresql-client-env.sh
+elif [[ -f /opt/bitnami/scripts/postgresql-env.sh ]]; then
+    . /opt/bitnami/scripts/postgresql-env.sh
+fi
+
 # Load libraries
 . /opt/bitnami/scripts/libjasperreports.sh
 
