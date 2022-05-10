@@ -12,7 +12,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libssl1.1 procps tar xmlstarlet zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.15-0" --checksum 255bc547614ce8052f416a74c58cfb916f724876315f15b816e0eb98b2bded35
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "8.5.78-0" --checksum 2632737c2a6146c76b01fea828b27a8c785bb15b11e89c2e6fba9c4cb3029442
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "8.5.78-1" --checksum c67268dccdb081675f08d7d84ab7286afdb643d3779896b0841d6def4e90eeca
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-10" --checksum 97c2ae4b001c5937e888b920bee7b1a40a076680caac53ded6d10f6207d54565
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
