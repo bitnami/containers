@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4.0`, `4.0-debian-10`, `4.0.3`, `4.0.3-debian-10-r68`, `latest` (4.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/4.0.3-debian-10-r68/4.0/debian-10/Dockerfile)
-* [`3.11`, `3.11-debian-10`, `3.11.12`, `3.11.12-debian-10-r74` (3.11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.12-debian-10-r74/3.11/debian-10/Dockerfile)
+* [`3.11`, `3.11-debian-10`, `3.11.12`, `3.11.12-debian-10-r75` (3.11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.12-debian-10-r75/3.11/debian-10/Dockerfile)
 * [`3.0`, `3.0-debian-10`, `3.0.26`, `3.0.26-debian-10-r73` (3.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.0.26-debian-10-r73/3.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cassandra GitHub repo](https://github.com/bitnami/bitnami-docker-cassandra).
@@ -546,6 +546,10 @@ $ docker-compose up cassandra
 ### 3.11.2-r22
 
 - The Apache Cassandra container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Apache Cassandra daemon was started as the `cassandra` user. From now on, both the container and the Apache Cassandra daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
+
+## Branch Deprecation Notice
+
+Apache Cassandra's branches 3.0.x and 3.11.x requires Python 2.7 which is EOL hence those branches are now internally tagged as to be deprecated. Those branches will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 06-09-2022
 
 ## Contributing
 
