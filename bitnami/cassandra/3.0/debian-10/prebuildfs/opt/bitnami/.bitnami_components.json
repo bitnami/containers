@@ -15,10 +15,10 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "d5670d09ac0e679ae28306e417e77e91b44051908ca3a82259efcd70764b996f",
+        "digest": "ea45a7908b8a86363659aa7e3953a1308af86db3ffa1656e46036c8e1f7c659a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.8.322-8"
+        "version": "1.8.332-0"
     },
     "python": {
         "arch": "amd64",
@@ -29,9 +29,9 @@
     },
     "yq": {
         "arch": "amd64",
-        "digest": "bdae511963f6a46ad128f41f9a6f2eec8c56fbb4929619fcd54232edfec6209e",
+        "digest": "863b0a81f75feed5c08bb5c1c5b280469b10c7cee9232ecbf613544755a7433c",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.24.5-0"
+        "version": "4.25.1-0"
     }
 }

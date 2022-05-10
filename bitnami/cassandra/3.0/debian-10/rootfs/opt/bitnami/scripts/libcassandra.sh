@@ -830,7 +830,9 @@ wait_for_nodetool_up() {
     debug "Checking status with nodetool"
 
     check_function_nodetool() {
-        local -r check_cmd=("${CASSANDRA_BIN_DIR}/nodetool")
+        # Using legacy RMI URL parsing to avoid URISyntaxException: 'Malformed IPv6 address at index 7: rmi://[127.0.0.1]:7199' error
+        # https://community.datastax.com/questions/13764/java-version-for-cassandra-3113.html
+        local -r check_cmd=("${CASSANDRA_BIN_DIR}/nodetool" "-Dcom.sun.jndi.rmiURLParsing=legacy")
         local -r check_args=("status" "--port" "$CASSANDRA_JMX_PORT_NUMBER")
         local -r machine_ip="$(dns_lookup "$CASSANDRA_HOST" "v4")"
         local -r check_regex="UN\s*(${CASSANDRA_HOST}|${machine_ip}|127.0.0.1)"
@@ -977,7 +979,9 @@ cassandra_stop() {
     ! is_cassandra_running && return
     info "Stopping Cassandra..."
     stop_cassandra() {
-        "${CASSANDRA_BIN_DIR}/nodetool" stopdaemon
+        # Using legacy RMI URL parsing to avoid URISyntaxException: 'Malformed IPv6 address at index 7: rmi://[127.0.0.1]:7199' error
+        # https://community.datastax.com/questions/13764/java-version-for-cassandra-3113.html
+        "${CASSANDRA_BIN_DIR}/nodetool" "-Dcom.sun.jndi.rmiURLParsing=legacy" stopdaemon
         is_cassandra_not_running
     }
 
