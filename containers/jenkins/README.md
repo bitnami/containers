@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.332.2`, `2.332.2-debian-10-r24`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.332.2-debian-10-r24/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.332.2`, `2.332.2-debian-10-r25`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jenkins/blob/2.332.2-debian-10-r25/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jenkins GitHub repo](https://github.com/bitnami/bitnami-docker-jenkins).
 
@@ -181,7 +181,7 @@ Available environment variables:
 - `JENKINS_EXTERNAL_HTTP_PORT_NUMBER`: Port to used by Jenkins to generate URLs and links when accessing using HTTP. Default: **80**
 - `JENKINS_EXTERNAL_HTTPS_PORT_NUMBER`: Port to used by Jenkins to generate URLs and links when accessing using HTTPS. Default: **443**
 - `JENKINS_JNLP_PORT_NUMBER`: Port used by Jenkins for JNLP. Default: **50000**
-- `JENKINS_ENABLE_HTTPS`: Enable serving Jenkins through HTTPS instead of HTTP. Default: **no**
+- `JENKINS_FORCE_HTTPS`: Enable serving Jenkins only through HTTPS. Default: **no**
 - `JENKINS_SKIP_BOOTSTRAP`: Skip performing the initial bootstrapping. Default: **no**
 
 ##### JAVA configuration
@@ -359,6 +359,11 @@ $ docker run -d -p 80:8080 --name jenkins \
 > NOTE: The default `admin` user with this setup will not be created. It should be done separately.
 
 ## Notable Changes
+
+### 2.332.2-debian-10-r21
+
+- HTTPS and HTTP support are enabled by default.
+- `JENKINS_ENABLE_HTTPS` has been renamed to `JENKINS_FORCE_HTTPS`.
 
 ### 2.277.4-debian-10-r19
 
