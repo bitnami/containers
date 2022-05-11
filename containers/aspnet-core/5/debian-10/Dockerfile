@@ -9,10 +9,10 @@ ENV HOME="/app" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages build-essential ca-certificates curl git gzip libc6 libcap2-bin libcom-err2 libgcc1 libgssapi-krb5-2 libicu-dev libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblttng-ust-dev libsqlite3-dev libssl-dev libstdc++6 pkg-config procps tar unzip wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/aspnet-core-5.0.16-0-linux-amd64-debian-10.tar.gz && \
-    echo "27a72fbb2ff9c66cc24b5eddc08dafef57c5dbc6d6e874c61cf31f5b1a2bb2c0  /tmp/bitnami/pkg/cache/aspnet-core-5.0.16-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/aspnet-core-5.0.16-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/aspnet-core-5.0.16-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/aspnet-core-5.0.17-0-linux-amd64-debian-10.tar.gz && \
+    echo "c24d64ba4ef8e983932b2bee1953a901187716e801c945ed728c132ca90e3367  /tmp/bitnami/pkg/cache/aspnet-core-5.0.17-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/aspnet-core-5.0.17-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/aspnet-core-5.0.17-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
@@ -21,7 +21,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/aspnet-core/postunpack.sh
-ENV APP_VERSION="5.0.16" \
+ENV APP_VERSION="5.0.17" \
     BITNAMI_APP_NAME="aspnet-core" \
     DOTNET_CLI_HOME="/app" \
     DOTNET_ROOT="/opt/bitnami/aspnet-core/bin" \
