@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`16`, `16-debian-10`, `16.1.1`, `16.1.1-debian-10-r103`, `latest` (16/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/16.1.1-debian-10-r103/16/debian-10/Dockerfile)
+* [`17`, `17-debian-10`, `17.0.1`, `17.0.1-debian-10-r0`, `latest` (17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/17.0.1-debian-10-r0/17/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak).
 
@@ -65,7 +65,7 @@ $ docker pull bitnami/keycloak:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/keycloak:latest 'https://github.com/bitnami/bitnami-docker-keycloak.git#master:16/debian-10'
+$ docker build -t bitnami/keycloak:latest 'https://github.com/bitnami/bitnami-docker-keycloak.git#master:17/debian-10'
 ```
 
 ## Configuration
@@ -102,7 +102,7 @@ The listening port and listening address can be configured with the following en
 
 ### Extra arguments to Keycloak startup
 
-In case you want to add extra flags to the Keycloak `standalone.sh` command, use the `KEYCLOAK_EXTRA_ARGS` variable. Example:
+In case you want to add extra flags to the Keycloak use the `KEYCLOAK_EXTRA_ARGS` variable. Example:
 
 ```console
 $ docker run --name keycloak \
@@ -148,74 +148,6 @@ Apart from that, the following environment variables must be set:
  - `KEYCLOAK_TLS_KEYSTORE_PASSWORD`: Password for accessing the keystore. No defaults.
  - `KEYCLOAK_TLS_TRUSTSTORE_PASSWORD`: Password for accessing the truststore. No defaults.
 
-### Cluster configuration
-
-The Bitnami Keycloak Docker image allows configuring a highly available cluster. In order to do so, two elements must be configured: the service discovery mechanism and the caching settings.
-
-Service discovery is configured by setting the following variables:
-
-- `KEYCLOAK_JGROUPS_DISCOVERY_PROTOCOL`: Sets the protocol that Keycloak nodes would use to discover new peers. Check the [official jgroups documentation](http://www.jgroups.org/javadoc3/org/jgroups/protocols/) for the list of available protocols. No defaults.
-- `KEYCLOAK_JGROUPS_DISCOVERY_PROPERTIES`: Sets the properties for the discovery protocol set in `KEYCLOAK_JGROUPS_DISCOVERY_PROTOCOL`. It is a comma-separated list of `key=>value` pairs. No defaults.
-- `KEYCLOAK_JGROUPS_TRANSPORT_STACK`: Transport stack for the discovery protocol set in `KEYCLOAK_JGROUPS_DISCOVERY_PROTOCOL`. Default: **tcp**.
-
-Caching is configured by setting the following variables:
-
-- `KEYCLOAK_CACHE_OWNERS_COUNT`: Number of nodes that will replicate cached data. Default: **1**.
-- `KEYCLOAK_AUTH_CACHE_OWNERS_COUNT`: Number of nodes that will replicate cached authentication data. Default: **1**.
-
-In the example below we will configure a 3-node keycloak cluster with a database-based discovery protocol (JDBC_PING):
-
-```yaml
-version: "2"
-services:
-  postgresql:
-    image: "docker.io/bitnami/postgresql:11"
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - POSTGRESQL_USERNAME=bn_keycloak
-      - POSTGRESQL_DATABASE=bitnami_keycloak
-    volumes:
-      - "postgresql_data:/bitnami/postgresql"
-  keycloak-1:
-    image: docker.io/bitnami/keycloak:latest
-    ports:
-      - "80:8080"
-    environment:
-      - KEYCLOAK_CREATE_ADMIN_USER=true
-      - KEYCLOAK_JGROUPS_DISCOVERY_PROTOCOL=JDBC_PING
-      - 'KEYCLOAK_JGROUPS_DISCOVERY_PROPERTIES=datasource_jndi_name=>java:jboss/datasources/KeycloakDS, initialize_sql=>"CREATE TABLE IF NOT EXISTS JGROUPSPING ( own_addr varchar(200) NOT NULL, cluster_name varchar(200) NOT NULL, created timestamp default current_timestamp, ping_data BYTEA, constraint PK_JGROUPSPING PRIMARY KEY (own_addr, cluster_name))"'
-      - KEYCLOAK_CACHE_OWNERS_COUNT=3
-      - KEYCLOAK_AUTH_CACHE_OWNERS_COUNT=3
-    depends_on:
-      - postgresql
-  keycloak-2:
-    image: docker.io/bitnami/keycloak:latest
-    ports:
-      - "81:8080"
-    depends_on:
-      - postgresql
-    environment:
-      - KEYCLOAK_JGROUPS_DISCOVERY_PROTOCOL=JDBC_PING
-      - 'KEYCLOAK_JGROUPS_DISCOVERY_PROPERTIES=datasource_jndi_name=>java:jboss/datasources/KeycloakDS, initialize_sql=>"CREATE TABLE IF NOT EXISTS JGROUPSPING ( own_addr varchar(200) NOT NULL, cluster_name varchar(200) NOT NULL, created timestamp default current_timestamp, ping_data BYTEA, constraint PK_JGROUPSPING PRIMARY KEY (own_addr, cluster_name))"'
-      - KEYCLOAK_CACHE_OWNERS_COUNT=3
-      - KEYCLOAK_AUTH_CACHE_OWNERS_COUNT=3
-  keycloak-3:
-    image: docker.io/bitnami/keycloak:latest
-    ports:
-      - "82:8080"
-    depends_on:
-      - postgresql
-    environment:
-      - KEYCLOAK_JGROUPS_DISCOVERY_PROTOCOL=JDBC_PING
-      - 'KEYCLOAK_JGROUPS_DISCOVERY_PROPERTIES=datasource_jndi_name=>java:jboss/datasources/KeycloakDS, initialize_sql=>"CREATE TABLE IF NOT EXISTS JGROUPSPING ( own_addr varchar(200) NOT NULL, cluster_name varchar(200) NOT NULL, created timestamp default current_timestamp, ping_data BYTEA, constraint PK_JGROUPSPING PRIMARY KEY (own_addr, cluster_name))"'
-      - KEYCLOAK_CACHE_OWNERS_COUNT=3
-      - KEYCLOAK_AUTH_CACHE_OWNERS_COUNT=3
-volumes:
-  postgresql_data:
-    driver: local
-```
-
-In case of adding a reverse proxy, you need to set the `KEYCLOAK_PROXY_ADDRESS_FORWARDING` to `true.
 
 ### Adding custom themes
 
@@ -253,7 +185,7 @@ The Bitnami Keycloak container can activate different set of statistics (databas
 
 #### Full configuration
 
-The image looks for configuration files (e.g. `standalone-ha.xml`) in the `/bitnami/keycloak/configuration/` directory, this directory can be changed by setting the KEYCLOAK_MOUNTED_CONF_DIR environment variable.
+The image looks for configuration files in the `/bitnami/keycloak/configuration/` directory, this directory can be changed by setting the KEYCLOAK_MOUNTED_CONF_DIR environment variable.
 
 ```console
 $ docker run --name keycloak \
@@ -275,6 +207,13 @@ After that, your changes will be taken into account in the server's behaviour.
 ## Branch Deprecation Notice
 
 Keycloak's branch 16 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 05-05-2022
+
+## Notable Changes
+
+### 17-debian-10
+
+Keycloak 17 is powered by Quarkus and to deploy it in production mode it is necessary to set up TLS.
+To do this you need to set `KEYCLOAK_PRODUCTION` to **true** and configure TLS
 
 ## Contributing
 
