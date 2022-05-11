@@ -168,7 +168,7 @@ jenkins_validate() {
     check_conflicting_ports "JENKINS_HTTP_PORT_NUMBER" "JENKINS_HTTPS_PORT_NUMBER" "JENKINS_JNLP_PORT_NUMBER"
 
     # Validate host
-    check_yes_no_value "JENKINS_ENABLE_HTTPS"
+    check_yes_no_value "JENKINS_FORCE_HTTPS"
     if ! is_empty_value "$JENKINS_HOST"; then
         check_resolved_hostname "$JENKINS_HOST"
         [[ "$JENKINS_HOST" =~ localhost ]] && print_validation_error "JENKINS_HOST must be set to an actual hostname, localhost values are not allowed."
@@ -258,9 +258,9 @@ jenkins_configure_host() {
     local base_url
     local scheme
 
-    is_boolean_yes "$JENKINS_ENABLE_HTTPS" && scheme="https" || scheme="http"
+    is_boolean_yes "$JENKINS_FORCE_HTTPS" && scheme="https" || scheme="http"
     base_url="${scheme}://${hostname}"
-    if is_boolean_yes "$JENKINS_ENABLE_HTTPS"; then
+    if is_boolean_yes "$JENKINS_FORCE_HTTPS"; then
         [[ "$JENKINS_EXTERNAL_HTTPS_PORT_NUMBER" != "443" ]] && base_url+=":${JENKINS_EXTERNAL_HTTPS_PORT_NUMBER}"
     else
         [[ "$JENKINS_EXTERNAL_HTTP_PORT_NUMBER" != "80" ]] && base_url+=":${JENKINS_EXTERNAL_HTTP_PORT_NUMBER}"

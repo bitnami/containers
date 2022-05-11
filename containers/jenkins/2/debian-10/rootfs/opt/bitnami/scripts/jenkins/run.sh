@@ -16,21 +16,23 @@ set -o pipefail
 
 declare -a args
 if [[ -n "${JAVA_OPTS:-}" ]]; then
-    read -r -a java_opts <<< "$JAVA_OPTS"
+    read -r -a java_opts <<<"$JAVA_OPTS"
     args+=("${java_opts[@]}")
 fi
 args+=("-Duser.home=${JENKINS_HOME}" "-jar" "${JENKINS_BASE_DIR}/jenkins.war")
-if is_boolean_yes "$JENKINS_ENABLE_HTTPS"; then
+if is_boolean_yes "$JENKINS_FORCE_HTTPS"; then
     args+=(
         "--httpPort=-1"
         "--httpsPort=${JENKINS_HTTPS_PORT_NUMBER:-"$JENKINS_DEFAULT_HTTPS_PORT_NUMBER"}"
         "--httpsListenAddress=${JENKINS_HTTPS_LISTEN_ADDRESS:-"$JENKINS_DEFAULT_HTTPS_LISTEN_ADDRESS"}"
     )
 else
-   args+=(
-       "--httpPort=${JENKINS_HTTP_PORT_NUMBER:-"$JENKINS_DEFAULT_HTTP_PORT_NUMBER"}"
-       "--httpListenAddress=${JENKINS_HTTP_LISTEN_ADDRESS:-"$JENKINS_DEFAULT_HTTP_LISTEN_ADDRESS"}"
-   )
+    args+=(
+        "--httpPort=${JENKINS_HTTP_PORT_NUMBER:-"$JENKINS_DEFAULT_HTTP_PORT_NUMBER"}"
+        "--httpListenAddress=${JENKINS_HTTP_LISTEN_ADDRESS:-"$JENKINS_DEFAULT_HTTP_LISTEN_ADDRESS"}"
+        "--httpsPort=${JENKINS_HTTPS_PORT_NUMBER:-"$JENKINS_DEFAULT_HTTPS_PORT_NUMBER"}"
+        "--httpsListenAddress=${JENKINS_HTTPS_LISTEN_ADDRESS:-"$JENKINS_DEFAULT_HTTPS_LISTEN_ADDRESS"}"
+    )
 fi
 args+=("$@")
 
