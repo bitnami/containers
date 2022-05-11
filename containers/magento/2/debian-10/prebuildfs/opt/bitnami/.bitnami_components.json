@@ -15,10 +15,10 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "9f326fd5052f77278fb195ec64e739a36593d826e9f1cf3a0f76fe31da4ae55e",
+        "digest": "12c6e7c45d7fe2595a54ede9af3c7899a90daf779103450191e7dc880206c21d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.1.5-0"
+        "version": "8.1.6-0"
     },
     "magento": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "a3cb00a122c8dea1bf67136767cb4efd98812a5daec4c068c9200bb58c9bc876",
+        "digest": "5a54f59880dd5071417843344c77792edfe1bddbd6768520eb00a19aa26cc771",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.1.5-0"
+        "version": "8.1.6-0"
     },
     "render-template": {
         "arch": "amd64",
