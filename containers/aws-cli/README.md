@@ -29,7 +29,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2`, `2-debian-10`, `2.6.4`, `2.6.4-debian-10-r0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/2.6.4-debian-10-r0/2/debian-10/Dockerfile)
-* [`1`, `1-debian-10`, `1.23.11`, `1.23.11-debian-10-r0` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/1.23.11-debian-10-r0/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.23.12`, `1.23.12-debian-10-r0` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aws-cli/blob/1.23.12-debian-10-r0/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/aws-cli GitHub repo](https://github.com/bitnami/bitnami-docker-aws-cli).
 
