@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8`, `8-debian-10`, `8.2.0`, `8.2.0-debian-10-r8`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/8.2.0-debian-10-r8/8/debian-10/Dockerfile)
-* [`7`, `7-debian-10`, `7.17.3`, `7.17.3-debian-10-r18` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.17.3-debian-10-r18/7/debian-10/Dockerfile)
+* [`7`, `7-debian-10`, `7.17.3`, `7.17.3-debian-10-r19` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.17.3-debian-10-r19/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch).
 ## Get this image
@@ -484,10 +484,6 @@ $ docker-compose up -d
 
 * Elasticsearch container can be configured as a dedicated node with 4 different types: *master*, *data*, *coordinating* or *ingest*.
   Previously it was only achievable by using a custom `elasticsearch_custom.yml` file. From now on, you can use the environment variables `ELASTICSEARCH_IS_DEDICATED_NODE` & `ELASTICSEARCH_NODE_TYPE` to configure it.
-
-## Branch Deprecation Notice
-
-Elasticsearch's branch 6 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 04-01-2022
 
 ## Contributing
 
