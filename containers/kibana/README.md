@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8`, `8-debian-10`, `8.2.0`, `8.2.0-debian-10-r7`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/8.2.0-debian-10-r7/8/debian-10/Dockerfile)
+* [`8`, `8-debian-10`, `8.2.0`, `8.2.0-debian-10-r8`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/8.2.0-debian-10-r8/8/debian-10/Dockerfile)
 * [`7`, `7-debian-10`, `7.17.3`, `7.17.3-debian-10-r6` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/7.17.3-debian-10-r6/7/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kibana GitHub repo](https://github.com/bitnami/bitnami-docker-kibana).
@@ -375,10 +375,6 @@ $ docker-compose up kibana
 
 - `ELASTICSEARCH_URL` parameter has been renamed to `KIBANA_ELASTICSEARCH_URL`.
 - `ELASTICSEARCH_PORT` parameter has been renamed to `KIBANA_ELASTICSEARCH_PORT`.
-
-## Branch Deprecation Notice
-
-Kibana's branch 6 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 04-01-2022
 
 ## Contributing
 
