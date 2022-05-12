@@ -1,6 +1,6 @@
 # Wavefront Adapter for Istio packaged by Bitnami
 
-## Deprecation Notice
+## Container Deprecation Notice
 
 Wavefront Adapter for Istio is no longer maintained by upstream and is now internally tagged as to be deprecated. This image will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 05-25-2022
 
@@ -32,7 +32,7 @@ $ docker run --name wavefront-adapter-for-istio bitnami/wavefront-adapter-for-is
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.1.5`, `0.1.5-debian-10-r387`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-adapter-for-istio/blob/0.1.5-debian-10-r387/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.1.5`, `0.1.5-debian-10-r388`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-adapter-for-istio/blob/0.1.5-debian-10-r388/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wavefront-adapter-for-istio GitHub repo](https://github.com/bitnami/bitnami-docker-wavefront-adapter-for-istio).
 
