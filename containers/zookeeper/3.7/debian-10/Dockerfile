@@ -13,7 +13,7 @@ RUN install_packages acl ca-certificates curl gzip libc6 netcat procps tar zlib1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-10" --checksum 35c818ba3f4b5aae905959bc7d3a5e81fc63786e3c662b604612c0aa7fcda8fd
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.15-0" --checksum 255bc547614ce8052f416a74c58cfb916f724876315f15b816e0eb98b2bded35
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "zookeeper" "3.7.0-11" --checksum 28cb252ec32e20f4a777347ac032cb09a0f05ef59f274f5d37bda1f18c4c9ccc
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "zookeeper" "3.7.1-0" --checksum 1c8afc5fed250e11131eba8240b14d01af530864fc3620d15a087f103ce22913
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -22,7 +22,7 @@ RUN ln -s /opt/bitnami/scripts/zookeeper/run.sh /run.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/zookeeper/postunpack.sh
-ENV APP_VERSION="3.7.0" \
+ENV APP_VERSION="3.7.1" \
     BITNAMI_APP_NAME="zookeeper"
 
 EXPOSE 2181 2888 3888 8080
