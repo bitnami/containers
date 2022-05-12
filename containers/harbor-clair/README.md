@@ -1,5 +1,11 @@
 # Harbor Clair packaged by Bitnami
 
+## Container Deprecation Notice
+
+Harbor Clair container is no longer maintained by upstream and is now internally tagged as to be deprecated. This image will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 06-09-2022
+
+With the deprecation of this container, the Clair functionality for the Harbor Helm chart is deprecated as well.
+
 ## What is Harbor Clair?
 
 > Harbor Clair is an optional component of Harbor. Clair is an open source project for the static analysis of vulnerabilities in application containers
@@ -41,13 +47,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.5.0`, `2.5.0-debian-10-r31`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-clair/blob/2.5.0-debian-10-r31/2/debian-10/Dockerfile)
-
-## Container Deprecation Notice
-
-Harbor Clair container is no longer maintained by upstream and is now internally tagged as to be deprecated. This image will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 06-09-2022
-
-With the deprecation of this container, the Clair functionality for the Harbor Helm chart is deprecated as well.
+* [`2`, `2-debian-10`, `2.5.0`, `2.5.0-debian-10-r32`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-clair/blob/2.5.0-debian-10-r32/2/debian-10/Dockerfile)
 
 ## Configuration
 
