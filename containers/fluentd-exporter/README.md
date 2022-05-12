@@ -1,5 +1,9 @@
 # Fluentd Exporter packaged by Bitnami
 
+## Container Deprecation Notice
+
+Fluentd Exporter container is no longer maintained by upstream and is now internally tagged as to be deprecated. This image will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 06-12-2022
+
 ## What is Fluentd Exporter?
 
 > Simple server that scrapes fluentd metrics endpoint and exports them as Prometheus metrics.
@@ -32,7 +36,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.2.0`, `0.2.0-debian-10-r785`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-debian-10-r785/0/debian-10/Dockerfile)
+* [`0`, `0-debian-10`, `0.2.0`, `0.2.0-debian-10-r786`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd-exporter/blob/0.2.0-debian-10-r786/0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd-exporter).
 
