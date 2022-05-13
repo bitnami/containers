@@ -47,11 +47,11 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`14`, `14-debian-10`, `14.2.0`, `14.2.0-debian-10-r95`, `latest` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/14.2.0-debian-10-r95/14/debian-10/Dockerfile)
-* [`13`, `13-debian-10`, `13.6.0`, `13.6.0-debian-10-r92` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/13.6.0-debian-10-r92/13/debian-10/Dockerfile)
+* [`14`, `14-debian-10`, `14.3.0`, `14.3.0-debian-10-r-1`, `latest` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/14.3.0-debian-10-r-1/14/debian-10/Dockerfile)
+* [`13`, `13-debian-10`, `13.7.0`, `13.7.0-debian-10-r0` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/13.7.0-debian-10-r0/13/debian-10/Dockerfile)
 * [`12`, `12-debian-10`, `12.10.0`, `12.10.0-debian-10-r93` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.10.0-debian-10-r93/12/debian-10/Dockerfile)
-* [`11`, `11-debian-10`, `11.15.0`, `11.15.0-debian-10-r93` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.15.0-debian-10-r93/11/debian-10/Dockerfile)
-* [`10`, `10-debian-10`, `10.20.0`, `10.20.0-debian-10-r93` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.20.0-debian-10-r93/10/debian-10/Dockerfile)
+* [`11`, `11-debian-10`, `11.16.0`, `11.16.0-debian-10-r-1` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.16.0-debian-10-r-1/11/debian-10/Dockerfile)
+* [`10`, `10-debian-10`, `10.21.0`, `10.21.0-debian-10-r-1` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.21.0-debian-10-r-1/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql).
 
