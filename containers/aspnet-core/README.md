@@ -37,7 +37,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`6.0`, `6.0-debian-10`, `6.0.5`, `6.0.5-debian-10-r1`, `latest` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/6.0.5-debian-10-r1/6.0/debian-10/Dockerfile)
 * [`5`, `5-debian-10`, `5.0.17`, `5.0.17-debian-10-r1` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/5.0.17-debian-10-r1/5/debian-10/Dockerfile)
-* [`3.1`, `3.1-debian-10`, `3.1.25`, `3.1.25-debian-10-r1` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/3.1.25-debian-10-r1/3.1/debian-10/Dockerfile)
+* [`3.1`, `3.1-debian-10`, `3.1.25`, `3.1.25-debian-10-r2` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/3.1.25-debian-10-r2/3.1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/aspnet-core GitHub repo](https://github.com/bitnami/bitnami-docker-aspnet-core).
 
@@ -152,6 +152,10 @@ Re-create your container from the new image.
 ```console
 $ docker run --name aspnet-core bitnami/aspnet-core:latest
 ```
+
+## Branch Deprecation Notice
+
+ASP.NET's branch 5 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 06-12-2022
 
 ## Contributing
 
