@@ -15,10 +15,10 @@
     },
     "kafka": {
         "arch": "amd64",
-        "digest": "c47a7cdba80620d3fdece1f048104f579e11aaf10353eade6599781d2d6abfea",
+        "digest": "05c481a2db30a9a1c0ee4f0752c3889b76d762e403d25bb4c1229afcda60385d",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.1.0-10"
+        "version": "3.1.1-0"
     },
     "render-template": {
         "arch": "amd64",
