@@ -1,5 +1,11 @@
 # Logstash Exporter packaged by Bitnami
 
+ ## Container Deprecation Notice
+
+Logstash Exporter container is no longer maintained by upstream and is now internally tagged as to be deprecated. This image will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 05-04-2022
+
+With the deprecation of this container, the metrics functionality for the Logstash Helm chart is deprecated as well.
+
 ## What is Logstash Exporter?
 
 > Logstash Exporter makes it easy to export logstash metrics in Prometheus format.
@@ -39,15 +45,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7.3`, `7.3-debian-10`, `7.3.0`, `7.3.0-debian-10-r526`, `latest` (7.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash-exporter/blob/7.3.0-debian-10-r526/7.3/debian-10/Dockerfile)
+* [`7.3`, `7.3-debian-10`, `7.3.0`, `7.3.0-debian-10-r527`, `latest` (7.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-logstash-exporter/blob/7.3.0-debian-10-r527/7.3/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/logstash-exporter GitHub repo](https://github.com/bitnami/bitnami-docker-logstash-exporter).
-
-### Container Deprecation Notice
-
-Logstash Exporter container is no longer maintained by upstream and is now internally tagged as to be deprecated. This image will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 05-04-2022
-
-With the deprecation of this container, the metrics functionality for the Logstash Helm chart is deprecated as well.
 
 ## Get this image
 
