@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`17`, `17-debian-10`, `17.0.1`, `17.0.1-debian-10-r0`, `latest` (17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/17.0.1-debian-10-r0/17/debian-10/Dockerfile)
+* [`17`, `17-debian-10`, `17.0.1`, `17.0.1-debian-10-r1`, `latest` (17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/17.0.1-debian-10-r1/17/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak).
 
@@ -206,7 +206,7 @@ After that, your changes will be taken into account in the server's behaviour.
 
 ## Branch Deprecation Notice
 
-Keycloak's branch 16 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 05-05-2022
+Keycloak's branch 17 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 06-12-2022
 
 ## Notable Changes
 
