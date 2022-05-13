@@ -13,7 +13,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.4.29-0" 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.53-0" --checksum 716e4948a2c40f0a0cc5b1656052aeef916a79152250b0b6c1392dd1187f575a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis-client" "6.0.16-34" --checksum 2745d45d8cf3ff0bda5ccb890700047f2d295f195216fb7186b6db0bb139c766
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "11.15.0-5" --checksum 43a49afcdf3e6571973c5dfd1a0aff1b5507fe1822dfd9487e3460e114857fda
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "11.16.0-0" --checksum d79676cf09b1852d4dd1d26c0643f09c67f9ed63f3895f21fa87cc65484a432a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.7-4" --checksum 14329a8ec0a649ecb9ffb37085a547183748efedea8ed029801ab9b381ab7173
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.29-0" --checksum 9210dbecb1d2a49c0c971efe3cec0415e0800b86f6676e4453d44ab88dd68dac
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.36.1-0" --checksum e00f740b66faf2808cb8983a39b186d43a8367730512c402df78751a9cefbfc1
