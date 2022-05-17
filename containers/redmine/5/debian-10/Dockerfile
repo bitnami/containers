@@ -15,7 +15,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "3.0.4-0" 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "11.16.0-0" --checksum d79676cf09b1852d4dd1d26c0643f09c67f9ed63f3895f21fa87cc65484a432a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.7-4" --checksum 14329a8ec0a649ecb9ffb37085a547183748efedea8ed029801ab9b381ab7173
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.36.1-0" --checksum e00f740b66faf2808cb8983a39b186d43a8367730512c402df78751a9cefbfc1
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redmine" "5.0.0-1" --checksum 502ce12090d4283ba4aeb780f71abceb63f0faac09f6f74b1610e60bcb94d5f0
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redmine" "5.0.1-0" --checksum 5b25040ae34e4eaf3e0f2bf0e8b50db248a49cfca2cf068c32e12bead3dbcfb5
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -23,7 +23,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/redmine/postunpack.sh
-ENV APP_VERSION="5.0.0" \
+ENV APP_VERSION="5.0.1" \
     BITNAMI_APP_NAME="redmine" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:$PATH"
 

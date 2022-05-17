@@ -29,10 +29,10 @@
     },
     "redmine": {
         "arch": "amd64",
-        "digest": "502ce12090d4283ba4aeb780f71abceb63f0faac09f6f74b1610e60bcb94d5f0",
+        "digest": "5b25040ae34e4eaf3e0f2bf0e8b50db248a49cfca2cf068c32e12bead3dbcfb5",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "5.0.0-1"
+        "version": "5.0.1-0"
     },
     "ruby": {
         "arch": "amd64",
