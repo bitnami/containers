@@ -9,15 +9,15 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/telegraf-1.22.3-0-linux-amd64-debian-10.tar.gz && \
-    echo "81ac554a59447a63ecd184a4afcdd833dc6f2f06ddebd7d38a768191e6ab3054  /tmp/bitnami/pkg/cache/telegraf-1.22.3-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/telegraf-1.22.3-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/telegraf-1.22.3-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/telegraf-1.22.4-0-linux-amd64-debian-10.tar.gz && \
+    echo "27af4976f4124bd63d91af76e022e4d65c60c6b175d1227475e7b30aa815552f  /tmp/bitnami/pkg/cache/telegraf-1.22.4-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/telegraf-1.22.4-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/telegraf-1.22.4-0-linux-amd64-debian-10.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="1.22.3" \
+ENV APP_VERSION="1.22.4" \
     BITNAMI_APP_NAME="telegraf" \
     PATH="/opt/bitnami/telegraf/bin:$PATH"
 
