@@ -9,10 +9,10 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jaeger-query-1.34.0-0-linux-amd64-debian-10.tar.gz && \
-    echo "162b55ec92be571a711b1aa7177221c04d6f1844726ab7137a8f3b3852088c0a  /tmp/bitnami/pkg/cache/jaeger-query-1.34.0-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/jaeger-query-1.34.0-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/jaeger-query-1.34.0-0-linux-amd64-debian-10.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jaeger-query-1.34.1-0-linux-amd64-debian-10.tar.gz && \
+    echo "9fe3dc62b68fd23a202bb73d900a590229e276e7d6d9a6cd3a392a47982d931c  /tmp/bitnami/pkg/cache/jaeger-query-1.34.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/jaeger-query-1.34.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/jaeger-query-1.34.1-0-linux-amd64-debian-10.tar.gz
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/grafana-tempo-query-1.4.1-0-linux-amd64-debian-10.tar.gz && \
     echo "03163bd09955c3c1b7aa53a018613632cb886b2dcce956e627d6f300a8ffb32c  /tmp/bitnami/pkg/cache/grafana-tempo-query-1.4.1-0-linux-amd64-debian-10.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/grafana-tempo-query-1.4.1-0-linux-amd64-debian-10.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
