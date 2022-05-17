@@ -28,7 +28,8 @@ $ docker run --name kubectl bitnami/kubectl:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.23`, `1.23-debian-10`, `1.23.6`, `1.23.6-debian-10-r26`, `latest` (1.23/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.23.6-debian-10-r26/1.23/debian-10/Dockerfile)
+* [`1.24`, `1.24-debian-10`, `1.24.0`, `1.24.0-debian-10-r0`, `latest` (1.24/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.24.0-debian-10-r0/1.24/debian-10/Dockerfile)
+* [`1.23`, `1.23-debian-10`, `1.23.6`, `1.23.6-debian-10-r26` (1.23/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.23.6-debian-10-r26/1.23/debian-10/Dockerfile)
 * [`1.22`, `1.22-debian-10`, `1.22.9`, `1.22.9-debian-10-r26` (1.22/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.22.9-debian-10-r26/1.22/debian-10/Dockerfile)
 * [`1.21`, `1.21-debian-10`, `1.21.12`, `1.21.12-debian-10-r26` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.21.12-debian-10-r26/1.21/debian-10/Dockerfile)
 
@@ -51,7 +52,7 @@ $ docker pull bitnami/kubectl:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/kubectl:latest 'https://github.com/bitnami/bitnami-docker-kubectl.git#master:1.23/debian-10'
+$ docker build -t bitnami/kubectl:latest 'https://github.com/bitnami/bitnami-docker-kubectl.git#master:1.24/debian-10'
 ```
 
 ## Configuration
@@ -73,6 +74,10 @@ It's possible to load your own configuration, which is useful if you want to con
 ```console
 $ docker run --rm --name kubectl -v /path/to/your/kube/config:/.kube/config bitnami/kubectl:latest
 ```
+
+## Branch Deprecation Notice
+
+Kubectl's branch 1.21 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 06-17-2022
 
 ## Contributing
 
