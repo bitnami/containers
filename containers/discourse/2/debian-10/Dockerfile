@@ -14,7 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7"
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-10" --checksum 35c818ba3f4b5aae905959bc7d3a5e81fc63786e3c662b604612c0aa7fcda8fd
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "2.7.6-0" --checksum e1123e8eb7fa89f5aaeafda30e5c65372cba6ff6c2dc88b7037d367ebb3e5863
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "13.7.0-0" --checksum c47d8c57a5317ae17cff33145bc3205d06c3678a8674425c4eeb3b432eb90ebb
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.19.2-0" --checksum b3370c72fa6879fb21f6c2c250fa61fa7029befbb53da1535f9b895ead5d8acd
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.19.3-0" --checksum 1f82279c7a88cfa1a1bf03e8d10064a00dba5b7b21923c0dd7cbca7e712a6aa3
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.36.1-0" --checksum e00f740b66faf2808cb8983a39b186d43a8367730512c402df78751a9cefbfc1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "brotli" "1.0.9-8" --checksum a9e53945655ab217802f413378f82a93c20a624a52495a52eb853cb945309e0e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "discourse" "2.8.3-0" --checksum 0129159beec00d030c6101b2d3e344c10a0268ebb1e8ef3bf94cdec6be44dee2
