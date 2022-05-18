@@ -117,7 +117,7 @@ keycloak_configure_database() {
     keycloak_conf_set "db" "postgres"
     keycloak_conf_set "db-username" "$KEYCLOAK_DATABASE_USER"
     keycloak_conf_set "db-password" "$KEYCLOAK_DATABASE_PASSWORD"
-    keycloak_conf_set "db-url" "jdbc:postgresql://${KEYCLOAK_DATABASE_HOST}:${KEYCLOAK_DATABASE_PORT}/${KEYCLOAK_DATABASE_NAME}"
+    keycloak_conf_set "db-url" "jdbc:postgresql://${KEYCLOAK_DATABASE_HOST}:${KEYCLOAK_DATABASE_PORT}/${KEYCLOAK_DATABASE_NAME}?currentSchema=${KEYCLOAK_DATABASE_SCHEMA:-public}"
     debug_execute kc.sh build --db postgres
 }
 
