@@ -11,16 +11,16 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl git git-lfs gnupg gzip libc6 openssh-server procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kustomize" "4.5.4-0" --checksum 839883a4eb57d7bb3ab7cf274dd3cc30c621673c5288c24f6e99fb327fc73d6a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ksonnet" "0.13.1-7" --checksum d0add05910e38e57f69c2ed7bb208ba89a68867495ef0d40e40124b7a58c4ab0
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "helm" "3.8.2-0" --checksum 8b526fe787c357983604792fcc63eb607b59b811a1f4e81e2bcf323bddcd1f00
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "helm" "3.9.0-0" --checksum 3458cbe1f612ae0f09e5c2e13ea2645aa50797cd8153dcfe7303ea089cde99c7
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "argo-cd" "2.3.3-1" --checksum b77bbbfc5b928c6e726a63c449707b2fc0c3ed016d98a7ec01b8d8b6d9494611
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "argo-cd" "2.3.4-0" --checksum f247fbfc9ea8afe6ddc99a294393dc8def56efa6b9a99c9726ce3af4a5d28922
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/argo-cd/postunpack.sh
-ENV APP_VERSION="2.3.3" \
+ENV APP_VERSION="2.3.4" \
     BITNAMI_APP_NAME="argo-cd" \
     PATH="/opt/bitnami/kustomize/bin:/opt/bitnami/ksonnet/bin:/opt/bitnami/helm/bin:/opt/bitnami/common/bin:/opt/bitnami/argo-cd/bin:/opt/bitnami/argo-cd/hack:$PATH"
 
