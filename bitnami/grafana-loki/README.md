@@ -2,7 +2,7 @@
 
 ## What is Grafana Loki?
 
-> Loki is a horizontally scalable, highly available, multi-tenant log aggregation system. Features integration with Prometheus, real-time log tailing and full persistence to object storage.
+> Grafana Loki is a horizontally scalable, highly available, and multi-tenant log aggregation system. It provides real-time long tailing and full persistence to object storage. 
 
 [Overview of Grafana Loki](https://grafana.com/oss/loki/)
 
@@ -28,7 +28,7 @@ $ docker run --name grafana-loki bitnami/grafana-loki:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.5.0`, `2.5.0-debian-10-r6`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-loki/blob/2.5.0-debian-10-r6/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.5.0`, `2.5.0-debian-10-r7`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-loki/blob/2.5.0-debian-10-r7/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana-loki GitHub repo](https://github.com/bitnami/bitnami-docker-grafana-loki).
 
