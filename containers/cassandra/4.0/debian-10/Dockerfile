@@ -11,11 +11,11 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libbz2-1.0 libc6 libffi6 libgcc1 libjemalloc2 liblzma5 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libtinfo6 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.9.12-2" --checksum 7438a99db3eb2229543806b155fb19d179f8359d2d171c891ffe0857f9b97d49
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.322-8" --checksum d5670d09ac0e679ae28306e417e77e91b44051908ca3a82259efcd70764b996f
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.9.13-0" --checksum 09235ef424c11f87c2001b4c40c5ec7fdbef5e65ee65d96f175d3581479c7575
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.332-0" --checksum ea45a7908b8a86363659aa7e3953a1308af86db3ffa1656e46036c8e1f7c659a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.24.5-0" --checksum bdae511963f6a46ad128f41f9a6f2eec8c56fbb4929619fcd54232edfec6209e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "cassandra" "4.0.3-3" --checksum 005e80732b9a7c83cf93a98c9bd740204d684db47a9fde786453af7e6b43f560
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.25.1-0" --checksum 863b0a81f75feed5c08bb5c1c5b280469b10c7cee9232ecbf613544755a7433c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "cassandra" "4.0.4-0" --checksum 7ac71e494a95ef6d5a9778a929de9c822c5276bcf6cf0c26811ac29ce7e6df59
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -25,7 +25,7 @@ RUN ln -s /opt/bitnami/scripts/cassandra/run.sh /run.sh
 COPY rootfs /
 RUN /opt/bitnami/scripts/cassandra/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
-ENV APP_VERSION="4.0.3" \
+ENV APP_VERSION="4.0.4" \
     BITNAMI_APP_NAME="cassandra" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/cassandra/bin:$PATH"
