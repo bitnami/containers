@@ -8,10 +8,10 @@
     },
     "pgpool": {
         "arch": "amd64",
-        "digest": "4cb29de95010007b464f9cb77eeb329dfda57410b2d1ae64b56c7a7d19d62b9f",
+        "digest": "1ff92d881cb02f544a8b1e8616c811cbf8b6b35df2ab1af68b84d3f4133941f5",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.3.1-3"
+        "version": "4.3.2-0"
     },
     "postgresql-client": {
         "arch": "amd64",
