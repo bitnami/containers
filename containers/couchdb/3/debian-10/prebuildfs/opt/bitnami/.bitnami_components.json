@@ -1,10 +1,10 @@
 {
     "couchdb": {
         "arch": "amd64",
-        "digest": "94c1226983b395663ad91d40c7df89f92a35d7a86eb7da9dea6f38987c8529b1",
+        "digest": "fa600b667630a0695d48d4386929103a7520b5b3dde754513a24639490056b4f",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.2.1-9"
+        "version": "3.2.2-0"
     },
     "gosu": {
         "arch": "amd64",
@@ -15,10 +15,10 @@
     },
     "ini-file": {
         "arch": "amd64",
-        "digest": "7a4f45cbebd2e242278060415dd1a3f0dbe68991fdcaea5bb311e8de54a3e027",
+        "digest": "75421d34b46b37ff2d3c04e30f7b67a5b4bf77f116b72b0c7428e4815deab9d3",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.4.1-7"
+        "version": "1.4.2-0"
     },
     "wait-for-port": {
         "arch": "amd64",

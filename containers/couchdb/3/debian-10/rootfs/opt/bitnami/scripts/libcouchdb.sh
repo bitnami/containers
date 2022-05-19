@@ -133,6 +133,7 @@ couchdb_update_vm_args_file() { # TODO Confirm that works
     couchdb_vm_args_set "-name" "$COUCHDB_NODENAME"
     couchdb_vm_args_set "-kernel inet_dist_listen_min" "$COUCHDB_CLUSTER_PORT_NUMBER"
     couchdb_vm_args_set "-kernel inet_dist_listen_max" "$COUCHDB_CLUSTER_PORT_NUMBER"
+    couchdb_vm_args_set "-setcookie" "$COUCHDB_SECRET"
 }
 
 ########################
