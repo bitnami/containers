@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaio1 libatomic1 libc6 libgcc1 libncurses6 libsasl2-2 libssl1.1 libstdc++6 libtinfo6 procps psmisc tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.1-7" --checksum 7a4f45cbebd2e242278060415dd1a3f0dbe68991fdcaea5bb311e8de54a3e027
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.2-0" --checksum 75421d34b46b37ff2d3c04e30f7b67a5b4bf77f116b72b0c7428e4815deab9d3
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql" "5.7.38-0" --checksum fba86c021d20d1601a9973b8b6b97eb92d601246fcba7440e260ff612945f8f5
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
