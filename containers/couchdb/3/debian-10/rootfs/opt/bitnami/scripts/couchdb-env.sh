@@ -65,6 +65,6 @@ export COUCHDB_BIND_ADDRESS="${COUCHDB_BIND_ADDRESS:-}"
 export COUCHDB_CREATE_DATABASES="${COUCHDB_CREATE_DATABASES:-yes}"
 export COUCHDB_USER="${COUCHDB_USER:-admin}"
 export COUCHDB_PASSWORD="${COUCHDB_PASSWORD:-couchdb}"
-export COUCHDB_SECRET="${COUCHDB_SECRET:-}"
+export COUCHDB_SECRET="${COUCHDB_SECRET:-bitnami}"
 
 # Custom environment variables may be defined below
