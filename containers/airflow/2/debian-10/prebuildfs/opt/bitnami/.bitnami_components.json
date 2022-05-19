@@ -22,10 +22,10 @@
     },
     "ini-file": {
         "arch": "amd64",
-        "digest": "7a4f45cbebd2e242278060415dd1a3f0dbe68991fdcaea5bb311e8de54a3e027",
+        "digest": "75421d34b46b37ff2d3c04e30f7b67a5b4bf77f116b72b0c7428e4815deab9d3",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.4.1-7"
+        "version": "1.4.2-0"
     },
     "postgresql-client": {
         "arch": "amd64",
