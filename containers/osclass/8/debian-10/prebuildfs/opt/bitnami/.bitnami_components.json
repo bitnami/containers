@@ -29,10 +29,10 @@
     },
     "osclass": {
         "arch": "amd64",
-        "digest": "045fb225ce7cd3520662964ffedaebd9b40b0311897f2f30108c502c11d30f50",
+        "digest": "71771d6ce934074c45152f9f6d43d9fa5bfea898116a8aba79b747bc70f95019",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "8.0.1-7"
+        "version": "8.0.2-0"
     },
     "php": {
         "arch": "amd64",
@@ -43,9 +43,9 @@
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "97c2ae4b001c5937e888b920bee7b1a40a076680caac53ded6d10f6207d54565",
+        "digest": "af5ec81cfb8e8420fe6af80a77d40da25e0f7e136abb6dde27267c97fb27cf8b",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-10"
+        "version": "1.0.3-0"
     }
 }
