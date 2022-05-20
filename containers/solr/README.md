@@ -37,7 +37,8 @@ You can find the available configuration options in the [Environment Variables](
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8`, `8-debian-10`, `8.11.1`, `8.11.1-debian-10-r147`, `latest` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.11.1-debian-10-r147/8/debian-10/Dockerfile)
+* [`9`, `9-debian-10`, `9.0.0`, `9.0.0-debian-10-r0`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/9.0.0-debian-10-r0/9/debian-10/Dockerfile)
+* [`8`, `8-debian-10`, `8.11.1`, `8.11.1-debian-10-r147` (8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.11.1-debian-10-r147/8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/solr GitHub repo](https://github.com/bitnami/bitnami-docker-solr).
 
@@ -58,7 +59,7 @@ $ docker pull bitnami/solr:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/solr:latest 'https://github.com/bitnami/bitnami-docker-solr.git#master:8/debian-10'
+$ docker build -t bitnami/solr:latest 'https://github.com/bitnami/bitnami-docker-solr.git#master:9/debian-10'
 ```
 
 ## Persisting your application
@@ -154,6 +155,7 @@ When you start the solr image, you can adjust the configuration of the instance 
 - `SOLR_CORES`: List of core names to create at first run separated by either a space, (` `), a comma (`,`) or a semicolon (`;`). No default. (E.g.: '**my_core_en,my_core_es**')
 - `SOLR_CORE_CONF_DIR`: Configuration directory to copy when creating a new core. Default: **data_driven_schema_configs**
 - `SOLR_OPTS`: List of Solr server options and flags separated by either a space, (` `), a comma (`,`) or a semicolon (`;`). No default. (E.g.: '**-XX:+AggressiveOpts -XX:G1HeapRegionSize=8m**')
+- `SOLR_JETTY_HOST`: Configuration to listen on a specific IP address or host name.Default: **0.0.0.0**
 
 Cluster related environment variables:
 
