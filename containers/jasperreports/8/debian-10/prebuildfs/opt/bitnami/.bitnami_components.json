@@ -34,18 +34,25 @@
         "type": "NAMI",
         "version": "10.6.7-4"
     },
-    "render-template": {
+    "postgresql-client": {
         "arch": "amd64",
-        "digest": "97c2ae4b001c5937e888b920bee7b1a40a076680caac53ded6d10f6207d54565",
+        "digest": "d79676cf09b1852d4dd1d26c0643f09c67f9ed63f3895f21fa87cc65484a432a",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.0.1-10"
+        "version": "11.16.0-0"
+    },
+    "render-template": {
+        "arch": "amd64",
+        "digest": "af5ec81cfb8e8420fe6af80a77d40da25e0f7e136abb6dde27267c97fb27cf8b",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.0.3-0"
     },
     "tomcat": {
         "arch": "amd64",
-        "digest": "19b1e7b113180f5a17a1155d36a23d5da65e741337d8f89c0e97a9fb6535921c",
+        "digest": "cb374369f41bd7594c4b6e112dc471a5e4663db192b6d4565c585a3cef74481b",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "9.0.62-0"
+        "version": "9.0.63-0"
     }
 }

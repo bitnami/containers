@@ -10,47 +10,6 @@
 . /opt/bitnami/scripts/libvalidations.sh
 
 ########################
-# Checks if PostgreSQL is running
-# Globals:
-#   DB_TMP_DIR
-# Arguments:
-#   None
-# Returns:
-#   Boolean
-#########################
-is_postgresql_running() {
-    local pid
-    pid="$(get_pid_from_file "$DB_PID_FILE")"
-
-    if [[ -z "$pid" ]]; then
-        false
-    else
-        is_service_running "$pid"
-    fi
-}
-
-########################
-# Wait for PostgreSQL to be running
-# Globals:
-#   DB_TMP_DIR
-#   DB_STARTUP_WAIT_RETRIES
-#   DB_STARTUP_WAIT_SLEEP_TIME
-# Arguments:
-#   None
-# Returns:
-#   Boolean
-#########################
-wait_for_postgresql() {
-    local pid
-    local -r retries="${DB_STARTUP_WAIT_RETRIES:-300}"
-    local -r sleep_time="${DB_STARTUP_WAIT_SLEEP_TIME:-2}"
-    if ! retry_while is_postgresql_running "$retries" "$sleep_time"; then
-        error "PostgreSQL failed to start"
-        return 1
-    fi
-}
-
-########################
 # Validate settings in POSTGRESQL_CLIENT_* environment variables
 # Globals:
 #   POSTGRESQL_CLIENT_*
