@@ -128,9 +128,9 @@ jasperreports_configure_db() {
     ! is_boolean_yes "$ALLOW_EMPTY_PASSWORD" && jasperreports_conf_set "dbPassword" "$JASPERREPORTS_DATABASE_PASSWORD"
     jasperreports_conf_set "dbUsername" "$JASPERREPORTS_DATABASE_USER"
     jasperreports_conf_set "js.dbName" "$JASPERREPORTS_DATABASE_NAME"
-    
-    # Extract DB client version from the library jar. We do it at initialization time to avoid issues when updating
+
     if [[ "$db_type" = "postgresql" ]]; then
+        # Extract PostgreSQL client version from the library jar. We do it at initialization time to avoid issues when updating
         local -r postgresql_client_jar="$(realpath "${JASPERREPORTS_CONF_DIR}/conf_source/db/postgresql/jdbc"/postgresql-*)"
         client_version="${postgresql_client_jar##*-}"
         client_version="${client_version%.jar}"
@@ -145,7 +145,6 @@ jasperreports_configure_db() {
         jasperreports_conf_set "maven.jdbc.groupId" "org.postgresql"
         jasperreports_conf_set "maven.jdbc.artifactId" "postgresql"
     else
-
         # Extract MariaDB client version from the library jar. We do it at initialization time to avoid issues when updating
         local -r mariadb_client_jar="$(realpath "${JASPERREPORTS_CONF_DIR}/conf_source/db/mysql/jdbc"/mariadb-java-client-*)"
         client_version="${mariadb_client_jar##*-}"
@@ -374,6 +373,15 @@ jasperreports_initialize() {
         info "Persisting JasperReports installation"
         persist_app "$app_name" "$JASPERREPORTS_DATA_TO_PERSIST"
     else
+        # Compatibility with previous container images for newly added persisted file
+        local -r postgresql_conf_file="buildomatic/conf_source/db/postgresql/db.template.properties"
+        if [[ " ${JASPERREPORTS_DATA_TO_PERSIST} " = *" ${postgresql_conf_file} "* && ! -e "${JASPERREPORTS_VOLUME_DIR}/${postgresql_conf_file}" ]]; then
+            warn "Could not find required file ${JASPERREPORTS_VOLUME_DIR}/${postgresql_conf_file}, it will be created"
+            ensure_dir_exists "$(dirname "${JASPERREPORTS_VOLUME_DIR}/${postgresql_conf_file}")"
+            am_i_root && configure_permissions_ownership "$(dirname "${JASPERREPORTS_VOLUME_DIR}/${postgresql_conf_file}")" -d "775" -f "664" -u "$JASPERREPORTS_DAEMON_USER" -g "root"
+            cp "${JASPERREPORTS_BASE_DIR}/${postgresql_conf_file}" "${JASPERREPORTS_VOLUME_DIR}/${postgresql_conf_file}"
+        fi
+
         info "Restoring persisted JasperReports installation"
         restore_persisted_app "$app_name" "$JASPERREPORTS_DATA_TO_PERSIST"
         info "Trying to connect to the database server"
