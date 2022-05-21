@@ -9,8 +9,8 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 libicu63 libssl1.1 libstdc++6 libtinfo6 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.1-10" --checksum 35c818ba3f4b5aae905959bc7d3a5e81fc63786e3c662b604612c0aa7fcda8fd
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.2-0" --checksum 75421d34b46b37ff2d3c04e30f7b67a5b4bf77f116b72b0c7428e4815deab9d3
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.3-0" --checksum 0603c8eaf6d24e76563431e36e512da06bfebb3a06ede31b3e84d9879213c162
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.3-0" --checksum 2c9ca79a0586a4ec64c66aceda27ebab1ea877dc63982203b5eb71150e00a5e9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "couchdb" "3.2.2-0" --checksum fa600b667630a0695d48d4386929103a7520b5b3dde754513a24639490056b4f
 RUN apt-get update && apt-get upgrade -y && \
