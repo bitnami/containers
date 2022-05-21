@@ -13,7 +13,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7"
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.25.1-0" --checksum 863b0a81f75feed5c08bb5c1c5b280469b10c7cee9232ecbf613544755a7433c
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "3.0.4-0" --checksum 28a542e5a0cb321d91a712cafb95c6429acd0fde252e22a2f8fb28a23c066a45
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "11.16.0-0" --checksum d79676cf09b1852d4dd1d26c0643f09c67f9ed63f3895f21fa87cc65484a432a
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.7-4" --checksum 14329a8ec0a649ecb9ffb37085a547183748efedea8ed029801ab9b381ab7173
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-0" --checksum a288a3866c8d3b06951b6781c79a6e3551e99c159aafa1d3dfcaa3e54db93ea7
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.36.1-0" --checksum e00f740b66faf2808cb8983a39b186d43a8367730512c402df78751a9cefbfc1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redmine" "5.0.1-0" --checksum 5b25040ae34e4eaf3e0f2bf0e8b50db248a49cfca2cf068c32e12bead3dbcfb5
 RUN apt-get update && apt-get upgrade -y && \
