@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip iproute2 ldap-utils libaio1 libaudit1 libc6 libcap-ng0 libgcc1 libicu63 liblzma5 libncurses6 libnss-ldapd libpam-ldapd libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 nslcd procps psmisc rsync socat tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.1-7" --checksum 7a4f45cbebd2e242278060415dd1a3f0dbe68991fdcaea5bb311e8de54a3e027
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.3-0" --checksum 2c9ca79a0586a4ec64c66aceda27ebab1ea877dc63982203b5eb71150e00a5e9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mariadb-galera" "10.6.7-2" --checksum c624bb6982d666bfa6149985bea17c436f53504f68cd8fd080e05ed7c4b07650
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
