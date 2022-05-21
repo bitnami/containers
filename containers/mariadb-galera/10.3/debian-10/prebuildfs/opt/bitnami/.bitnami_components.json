@@ -8,10 +8,10 @@
     },
     "ini-file": {
         "arch": "amd64",
-        "digest": "7a4f45cbebd2e242278060415dd1a3f0dbe68991fdcaea5bb311e8de54a3e027",
+        "digest": "2c9ca79a0586a4ec64c66aceda27ebab1ea877dc63982203b5eb71150e00a5e9",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.4.1-7"
+        "version": "1.4.3-0"
     },
     "mariadb-galera": {
         "arch": "amd64",
