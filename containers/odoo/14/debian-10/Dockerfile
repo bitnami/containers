@@ -10,7 +10,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl fontconfig gzip libbsd0 libbz2-1.0 libc6 libcap2-bin libcom-err2 libedit2 libffi6 libfreetype6 libgcc1 libgmp10 libgnutls30 libgssapi-krb5-2 libhogweed4 libicu63 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libncursesw6 libnettle6 libp11-kit0 libpng16-16 libpq5 libreadline7 libsasl2-2 libsqlite3-0 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libx11-6 libxcb1 libxext6 libxml2 libxrender1 libxslt1.1 procps tar xfonts-75dpi xfonts-base zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-3" --checksum a328c8fb3db9e60d3aa19eb7ca31de5da372affcb3d7c0d73610b4a19b634f94
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.1-10" --checksum 97c2ae4b001c5937e888b920bee7b1a40a076680caac53ded6d10f6207d54565
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-0" --checksum af5ec81cfb8e8420fe6af80a77d40da25e0f7e136abb6dde27267c97fb27cf8b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "13.7.0-0" --checksum c47d8c57a5317ae17cff33145bc3205d06c3678a8674425c4eeb3b432eb90ebb
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.19.3-0" --checksum 1f82279c7a88cfa1a1bf03e8d10064a00dba5b7b21923c0dd7cbca7e712a6aa3
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "odoo" "14.0.20220510-0" --checksum 95eefb062822830070974e365b6d45ae31f16ce777f827f93a1bdd52e79a81c7
