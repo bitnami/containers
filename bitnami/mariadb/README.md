@@ -47,11 +47,11 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10.7`, `10.7-debian-10`, `10.7.3`, `10.7.3-debian-10-r61`, `latest` (10.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.7.3-debian-10-r61/10.7/debian-10/Dockerfile)
-* [`10.6`, `10.6-debian-10`, `10.6.7`, `10.6.7-debian-10-r91` (10.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.6.7-debian-10-r91/10.6/debian-10/Dockerfile)
-* [`10.5`, `10.5-debian-10`, `10.5.15`, `10.5.15-debian-10-r92` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.5.15-debian-10-r92/10.5/debian-10/Dockerfile)
-* [`10.4`, `10.4-debian-10`, `10.4.24`, `10.4.24-debian-10-r92` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.24-debian-10-r92/10.4/debian-10/Dockerfile)
-* [`10.3`, `10.3-debian-10`, `10.3.34`, `10.3.34-debian-10-r93` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.34-debian-10-r93/10.3/debian-10/Dockerfile)
+* [`10.7`, `10.7-debian-10`, `10.7.4`, `10.7.4-debian-10-r-1`, `latest` (10.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.7.4-debian-10-r-1/10.7/debian-10/Dockerfile)
+* [`10.6`, `10.6-debian-10`, `10.6.8`, `10.6.8-debian-10-r-1` (10.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.6.8-debian-10-r-1/10.6/debian-10/Dockerfile)
+* [`10.5`, `10.5-debian-10`, `10.5.16`, `10.5.16-debian-10-r-1` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.5.16-debian-10-r-1/10.5/debian-10/Dockerfile)
+* [`10.4`, `10.4-debian-10`, `10.4.25`, `10.4.25-debian-10-r-1` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.25-debian-10-r-1/10.4/debian-10/Dockerfile)
+* [`10.3`, `10.3-debian-10`, `10.3.35`, `10.3.35-debian-10-r0` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.35-debian-10-r0/10.3/debian-10/Dockerfile)
 * [`10.2`, `10.2-debian-10`, `10.2.43`, `10.2.43-debian-10-r90` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.2.43-debian-10-r90/10.2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb).
