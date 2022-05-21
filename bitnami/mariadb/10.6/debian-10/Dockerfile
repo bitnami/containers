@@ -9,8 +9,8 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaio1 libaudit1 libc6 libcap-ng0 libgcc1 libicu63 liblzma5 libncurses6 libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 procps psmisc tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.2-0" --checksum 75421d34b46b37ff2d3c04e30f7b67a5b4bf77f116b72b0c7428e4815deab9d3
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mariadb" "10.6.7-4" --checksum fa411cdaf3becb843a9f3e8651a593c8dcffbbabb6534ec8100f08414cd9d425
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.3-0" --checksum 2c9ca79a0586a4ec64c66aceda27ebab1ea877dc63982203b5eb71150e00a5e9
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mariadb" "10.6.8-0" --checksum cc57fcf13257720372ad80bf42a05cdaedcc92e0c97f7bb90ce04077bb6fe4f1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -19,7 +19,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mariadb/postunpack.sh
-ENV APP_VERSION="10.6.7" \
+ENV APP_VERSION="10.6.8" \
     BITNAMI_APP_NAME="mariadb" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 

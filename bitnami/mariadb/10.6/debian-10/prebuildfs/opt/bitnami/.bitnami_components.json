@@ -8,16 +8,16 @@
     },
     "ini-file": {
         "arch": "amd64",
-        "digest": "75421d34b46b37ff2d3c04e30f7b67a5b4bf77f116b72b0c7428e4815deab9d3",
+        "digest": "2c9ca79a0586a4ec64c66aceda27ebab1ea877dc63982203b5eb71150e00a5e9",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.4.2-0"
+        "version": "1.4.3-0"
     },
     "mariadb": {
         "arch": "amd64",
-        "digest": "fa411cdaf3becb843a9f3e8651a593c8dcffbbabb6534ec8100f08414cd9d425",
+        "digest": "cc57fcf13257720372ad80bf42a05cdaedcc92e0c97f7bb90ce04077bb6fe4f1",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.6.7-4"
+        "version": "10.6.8-0"
     }
 }
