@@ -8,10 +8,10 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "ea45a7908b8a86363659aa7e3953a1308af86db3ffa1656e46036c8e1f7c659a",
+        "digest": "255bc547614ce8052f416a74c58cfb916f724876315f15b816e0eb98b2bded35",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "1.8.332-0"
+        "version": "11.0.15-0"
     },
     "solr": {
         "arch": "amd64",
