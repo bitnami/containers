@@ -41,7 +41,8 @@ Non-root container images add an extra layer of security and are generally recom
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
-* [`3.1`, `3.1-debian-10`, `3.1.1`, `3.1.1-debian-10-r5`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.1.1-debian-10-r5/3.1/debian-10/Dockerfile)
+* [`3.2`, `3.2-debian-10`, `3.2.0`, `3.2.0-debian-10-r0`, `latest` (3.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.2.0-debian-10-r0/3.2/debian-10/Dockerfile)
+* [`3.1`, `3.1-debian-10`, `3.1.1`, `3.1.1-debian-10-r5` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.1.1-debian-10-r5/3.1/debian-10/Dockerfile)
 * [`3.0`, `3.0-debian-10`, `3.0.1`, `3.0.1-debian-10-r57` (3.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.0.1-debian-10-r57/3.0/debian-10/Dockerfile)
 * [`2.8`, `2.8-debian-10`, `2.8.1`, `2.8.1-debian-10-r223` (2.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.1-debian-10-r223/2.8/debian-10/Dockerfile)
 
@@ -66,7 +67,7 @@ $ docker pull bitnami/kafka:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-docker build -t bitnami/kafka:latest 'https://github.com/bitnami/bitnami-docker-kafka.git#master:3.1/debian-10'
+docker build -t bitnami/kafka:latest 'https://github.com/bitnami/bitnami-docker-kafka.git#master:3.2/debian-10'
 ```
 
 ## Persisting your data
@@ -858,6 +859,10 @@ Configuration changes. Most environment variables now start with `KAFKA_CFG_`, a
 ### 0.10.2.1-r0
 
 * New Bitnami release
+
+## Branch Deprecation Notice
+
+Apache Kafka's branch 2.8.x is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 06-20-2022
 
 ## Contributing
 
