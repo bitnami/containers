@@ -29,9 +29,9 @@
     },
     "kustomize": {
         "arch": "amd64",
-        "digest": "839883a4eb57d7bb3ab7cf274dd3cc30c621673c5288c24f6e99fb327fc73d6a",
+        "digest": "86f5558a101847e3d60eaa83333adb6f290264c8c54dc92013726f93ae676d93",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "4.5.4-0"
+        "version": "4.5.5-0"
     }
 }
