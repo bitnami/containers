@@ -12,7 +12,7 @@ RUN install_packages acl ca-certificates cron curl gzip libaudit1 libbsd0 libbz2
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "8.1.6-0" --checksum 5a54f59880dd5071417843344c77792edfe1bddbd6768520eb00a19aa26cc771
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.53-0" --checksum 716e4948a2c40f0a0cc5b1656052aeef916a79152250b0b6c1392dd1187f575a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.3-0" --checksum 0603c8eaf6d24e76563431e36e512da06bfebb3a06ede31b3e84d9879213c162
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.7-4" --checksum 14329a8ec0a649ecb9ffb37085a547183748efedea8ed029801ab9b381ab7173
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-0" --checksum a288a3866c8d3b06951b6781c79a6e3551e99c159aafa1d3dfcaa3e54db93ea7
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "8.1.6-0" --checksum 12c6e7c45d7fe2595a54ede9af3c7899a90daf779103450191e7dc880206c21d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-0" --checksum af5ec81cfb8e8420fe6af80a77d40da25e0f7e136abb6dde27267c97fb27cf8b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "magento" "2.4.4-0" --checksum 7f91a6f37cc1531669714eaf13e4cc18d7311717d14258b28b04672bb1141279
