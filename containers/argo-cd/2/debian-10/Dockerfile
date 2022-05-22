@@ -9,7 +9,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl git git-lfs gnupg gzip libc6 openssh-server procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kustomize" "4.5.4-0" --checksum 839883a4eb57d7bb3ab7cf274dd3cc30c621673c5288c24f6e99fb327fc73d6a
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kustomize" "4.5.5-0" --checksum 86f5558a101847e3d60eaa83333adb6f290264c8c54dc92013726f93ae676d93
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ksonnet" "0.13.1-7" --checksum d0add05910e38e57f69c2ed7bb208ba89a68867495ef0d40e40124b7a58c4ab0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "helm" "3.9.0-0" --checksum 3458cbe1f612ae0f09e5c2e13ea2645aa50797cd8153dcfe7303ea089cde99c7
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
