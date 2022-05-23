@@ -37,7 +37,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5`, `5-debian-10`, `5.2.0`, `5.2.0-debian-10-r13`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak-config-cli/blob/5.2.0-debian-10-r13/5/debian-10/Dockerfile)
-* [`4`, `4-debian-10`, `4.9.0`, `4.9.0-debian-10-r44` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak-config-cli/blob/4.9.0-debian-10-r44/4/debian-10/Dockerfile)
+* [`4`, `4-debian-10`, `4.9.0`, `4.9.0-debian-10-r45` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak-config-cli/blob/4.9.0-debian-10-r45/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak-config-cli GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak-config-cli).
 
