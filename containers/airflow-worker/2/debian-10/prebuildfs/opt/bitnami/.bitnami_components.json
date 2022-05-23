@@ -4,7 +4,7 @@
         "digest": "ef2b0bf0096b4d3b2c5700c95bd10f8733525f496beab1d138d5437fc7f4dc26",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.3.0-1"
+        "version": "2.3.0-2"
     },
     "git": {
         "arch": "amd64",
