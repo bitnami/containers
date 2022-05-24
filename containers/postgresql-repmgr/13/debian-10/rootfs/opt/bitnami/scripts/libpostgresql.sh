@@ -939,6 +939,7 @@ postgresql_configure_recovery() {
 postgresql_configure_logging() {
     [[ -n "$POSTGRESQL_PGAUDIT_LOG" ]] && postgresql_set_property "pgaudit.log" "$POSTGRESQL_PGAUDIT_LOG"
     [[ -n "$POSTGRESQL_PGAUDIT_LOG_CATALOG" ]] && postgresql_set_property "pgaudit.log_catalog" "$POSTGRESQL_PGAUDIT_LOG_CATALOG"
+    [[ -n "$POSTGRESQL_PGAUDIT_LOG_PARAMETER" ]] && postgresql_set_property "pgaudit.log_parameter" "$POSTGRESQL_PGAUDIT_LOG_PARAMETER"
     [[ -n "$POSTGRESQL_LOG_CONNECTIONS" ]] && postgresql_set_property "log_connections" "$POSTGRESQL_LOG_CONNECTIONS"
     [[ -n "$POSTGRESQL_LOG_DISCONNECTIONS" ]] && postgresql_set_property "log_disconnections" "$POSTGRESQL_LOG_DISCONNECTIONS"
     [[ -n "$POSTGRESQL_LOG_HOSTNAME" ]] && postgresql_set_property "log_hostname" "$POSTGRESQL_LOG_HOSTNAME"
