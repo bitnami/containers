@@ -35,7 +35,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.1`, `3.1-debian-10`, `3.1.2`, `3.1.2-debian-10-r39`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/3.1.2-debian-10-r39/3.1/debian-10/Dockerfile)
+* [`3.1`, `3.1-debian-10`, `3.1.2`, `3.1.2-debian-10-r40`, `latest` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/3.1.2-debian-10-r40/3.1/debian-10/Dockerfile)
 * [`3.0`, `3.0-debian-10`, `3.0.4`, `3.0.4-debian-10-r39` (3.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/3.0.4-debian-10-r39/3.0/debian-10/Dockerfile)
 * [`2.7`, `2.7-debian-10`, `2.7.6`, `2.7.6-debian-10-r39` (2.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.7.6-debian-10-r39/2.7/debian-10/Dockerfile)
 * [`2.6`, `2.6-debian-10`, `2.6.10`, `2.6.10-debian-10-r39` (2.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-ruby/blob/2.6.10-debian-10-r39/2.6/debian-10/Dockerfile)
@@ -304,6 +304,10 @@ $ docker-compose up ruby
 ### 2.2.3-0-r01 (2015-08-26)
 
 - Permissions fixed so `bitnami` user can install gems without needing `sudo`.
+
+## Branch Deprecation Notice
+
+Ruby's branch 2.6 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 06-24-2022
 
 ## Contributing
 
