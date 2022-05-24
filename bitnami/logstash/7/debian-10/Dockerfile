@@ -13,7 +13,7 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.15-0" --checksum 255bc547614ce8052f416a74c58cfb916f724876315f15b816e0eb98b2bded35
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.25.1-0" --checksum 863b0a81f75feed5c08bb5c1c5b280469b10c7cee9232ecbf613544755a7433c
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "logstash" "7.17.3-0" --checksum bd27e98c3892d9228334a81f7b8a43373dc312df0d0c1c10d9f1c1d4a2f37f9e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "logstash" "7.17.4-0" --checksum c2c7635a59e2eb7151a3269edbc23be0e923d455bb87874c34a6978e2b6e7113
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -22,7 +22,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/logstash/postunpack.sh
-ENV APP_VERSION="7.17.3" \
+ENV APP_VERSION="7.17.4" \
     BITNAMI_APP_NAME="logstash" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/logstash/bin:$PATH"
