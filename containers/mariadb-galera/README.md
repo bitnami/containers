@@ -51,7 +51,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10.7`, `10.7-debian-10`, `10.7.4`, `10.7.4-debian-10-r2`, `latest` (10.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.7.4-debian-10-r2/10.7/debian-10/Dockerfile)
+* [`10.7`, `10.7-debian-10`, `10.7.4`, `10.7.4-debian-10-r3`, `latest` (10.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.7.4-debian-10-r3/10.7/debian-10/Dockerfile)
 * [`10.6`, `10.6-debian-10`, `10.6.8`, `10.6.8-debian-10-r2` (10.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.6.8-debian-10-r2/10.6/debian-10/Dockerfile)
 * [`10.5`, `10.5-debian-10`, `10.5.16`, `10.5.16-debian-10-r2` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.5.16-debian-10-r2/10.5/debian-10/Dockerfile)
 * [`10.4`, `10.4-debian-10`, `10.4.25`, `10.4.25-debian-10-r2` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.25-debian-10-r2/10.4/debian-10/Dockerfile)
@@ -705,6 +705,10 @@ $ docker-compose up mariadb
 
 - `10.1.43-centos-7-r78`, `10.2.30-centos-7-r40`, `10.3.21-centos-7-r41`, and `10.4.11-centos-7-r32` are considered the latest images based on CentOS.
 - Standard supported distros: Debian & OEL.
+
+## Branch Deprecation Notice
+
+MariaDB Galera's branch 10.2 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 06-24-2022
 
 ## Contributing
 
