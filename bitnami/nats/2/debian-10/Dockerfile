@@ -11,14 +11,14 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl gzip procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-0" --checksum af5ec81cfb8e8420fe6af80a77d40da25e0f7e136abb6dde27267c97fb27cf8b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nats" "2.8.2-0" --checksum d88afe195a2ece404154078dcef98d03cc2075a7272d1333221f761cf059ded8
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nats" "2.8.3-0" --checksum 1746da1bec7ee2f23acacf4d6e08ece6489a29edd1604aa2b77de7166b6293d1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/nats/postunpack.sh
-ENV APP_VERSION="2.8.2" \
+ENV APP_VERSION="2.8.3" \
     BITNAMI_APP_NAME="nats" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/nats/bin:$PATH"
 
