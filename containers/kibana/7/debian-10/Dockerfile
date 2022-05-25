@@ -12,14 +12,14 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl gzip libc6 libexpat1 libgcc1 libnss3 libstdc++6 procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.25.1-0" --checksum 863b0a81f75feed5c08bb5c1c5b280469b10c7cee9232ecbf613544755a7433c
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kibana" "7.17.3-0" --checksum a255c145a59e592d7a1474880585302e864be58b27569ddc737079defd2a6a9d
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kibana" "7.17.4-0" --checksum 499ffd4588e91a80e590ed66a84038974cd7492846f8b6b9824aad43ba85097a
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/kibana/postunpack.sh
-ENV APP_VERSION="7.17.3" \
+ENV APP_VERSION="7.17.4" \
     BITNAMI_APP_NAME="kibana"
 
 EXPOSE 5601
