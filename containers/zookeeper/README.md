@@ -53,7 +53,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`3.8`, `3.8-debian-10`, `3.8.0`, `3.8.0-debian-10-r67`, `latest` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.8.0-debian-10-r67/3.8/debian-10/Dockerfile)
 * [`3.7`, `3.7-debian-10`, `3.7.1`, `3.7.1-debian-10-r11` (3.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.7.1-debian-10-r11/3.7/debian-10/Dockerfile)
 * [`3.6`, `3.6-debian-10`, `3.6.3`, `3.6.3-debian-10-r344` (3.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.6.3-debian-10-r344/3.6/debian-10/Dockerfile)
-* [`3.5`, `3.5-debian-10`, `3.5.9`, `3.5.9-debian-10-r224` (3.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.5.9-debian-10-r224/3.5/debian-10/Dockerfile)
+* [`3.5`, `3.5-debian-10`, `3.5.9`, `3.5.9-debian-10-r225` (3.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.5.9-debian-10-r225/3.5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
 
@@ -581,6 +581,10 @@ $ docker-compose up zookeeper
 ### 3.4.10-r0
 
 - New release
+
+## Branch Deprecation Notice
+
+Apache ZooKeeper's branch 3.5 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 06-25-2022
 
 ## Contributing
 
