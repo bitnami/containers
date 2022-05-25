@@ -15,7 +15,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "8.0.19-0" --checksum d9e9fcca0331bffb09d452b89757c49e3186c3d142c3cf442d75698e76432ee4
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.3-0" --checksum 2c9ca79a0586a4ec64c66aceda27ebab1ea877dc63982203b5eb71150e00a5e9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-0" --checksum af5ec81cfb8e8420fe6af80a77d40da25e0f7e136abb6dde27267c97fb27cf8b
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "matomo" "4.10.0-0" --checksum 4a3b43920898a28f227e27b80c6faeef3ecda444cd7b8a258ebf8c495ba3d563
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "matomo" "4.10.1-0" --checksum ac33f73385436fca437866abfc1761646fc26511644a49e81889aa298eced70f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -30,7 +30,7 @@ RUN /opt/bitnami/scripts/matomo/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="4.10.0" \
+    APP_VERSION="4.10.1" \
     BITNAMI_APP_NAME="matomo" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
