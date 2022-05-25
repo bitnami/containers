@@ -16,7 +16,7 @@ RUN install_packages acl ca-certificates curl gzip hostname libasound2-dev libc6
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.25.1-0" --checksum 863b0a81f75feed5c08bb5c1c5b280469b10c7cee9232ecbf613544755a7433c
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "17.0.3-0" --checksum 55796cb971bbd807c7437e0a2ea965553721268568b3c910a6cbef467535ea5f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "elasticsearch" "8.2.0-1" --checksum a72fcfdb872be7ec4d19f8d629d3838de53482172e1b59f85b6edf6c3cfacdda
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "elasticsearch" "8.2.1-0" --checksum f42b4ee9082a5169702d614dffd9ee6eca3a0676303f046b64b6b20bbd54280a
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -24,7 +24,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/elasticsearch/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
-ENV APP_VERSION="8.2.0" \
+ENV APP_VERSION="8.2.1" \
     BITNAMI_APP_NAME="elasticsearch" \
     ES_JAVA_HOME="/opt/bitnami/java" \
     JAVA_HOME="/opt/bitnami/java" \
