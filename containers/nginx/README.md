@@ -45,7 +45,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.21`, `1.21-debian-10`, `1.21.6`, `1.21.6-debian-10-r117`, `latest` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.21.6-debian-10-r117/1.21/debian-10/Dockerfile)
+* [`1.21`, `1.21-debian-10`, `1.21.6`, `1.21.6-debian-10-r118`, `latest` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.21.6-debian-10-r118/1.21/debian-10/Dockerfile)
 * [`1.20`, `1.20-debian-10`, `1.20.2`, `1.20.2-debian-10-r183` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.20.2-debian-10-r183/1.20/debian-10/Dockerfile)
 
 ## Get this image
@@ -609,6 +609,10 @@ $ docker-compose up nginx
 
 - This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
 - The recommended mount point for adding custom server blocks changes from `/opt/bitnami/nginx/conf/vhosts` to `/opt/bitnami/nginx/conf/server_blocks`. Remember to update your Docker Compose files to user the new mount point.
+
+## Branch Deprecation Notice
+
+NGINX Open Source's branch 1.20 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 06-25-2022
 
 ## Contributing
 
