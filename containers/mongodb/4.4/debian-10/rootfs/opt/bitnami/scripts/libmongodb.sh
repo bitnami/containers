@@ -119,9 +119,6 @@ in the primary node and MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD in the rest of nod
     }
 
     if [[ -n "$MONGODB_REPLICA_SET_MODE" ]]; then
-        if [[ -z "$MONGODB_ADVERTISED_HOSTNAME" ]]; then
-            warn "In order to use hostnames instead of IPs your should set MONGODB_ADVERTISED_HOSTNAME"
-        fi
         if [[ "$MONGODB_REPLICA_SET_MODE" =~ ^(secondary|arbiter|hidden) ]]; then
             if [[ -z "$MONGODB_INITIAL_PRIMARY_HOST" ]]; then
                 error_message="In order to configure MongoDB as a secondary or arbiter node \
@@ -248,7 +245,9 @@ mongodb_copy_mounted_config() {
 #   The value of $MONGODB_ADVERTISED_HOSTNAME or the current host address
 ########################
 get_mongo_hostname() {
-    if [[ -n "$MONGODB_ADVERTISED_HOSTNAME" ]]; then
+    if is_boolean_yes "$MONGODB_ADVERTISE_IP"; then
+        get_machine_ip
+    elif [[ -n "$MONGODB_ADVERTISED_HOSTNAME" ]]; then
         echo "$MONGODB_ADVERTISED_HOSTNAME"
     else
         hostname
