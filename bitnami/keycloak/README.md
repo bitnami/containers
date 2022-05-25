@@ -213,8 +213,7 @@ Keycloak's branch 17 is no longer maintained by upstream and is now internally t
 
 ### 17-debian-10
 
-Keycloak 17 is powered by Quarkus and to deploy it in production mode it is necessary to set up TLS.
-To do this you need to set `KEYCLOAK_PRODUCTION` to **true** and configure TLS
+Keycloak 17 is powered by Quarkus, and quite a things have changed. Most notably, `KEYCLOAK_PRODUCTION` should be set to **true** and `KEYCLOAK_PROXY` mode should be configured taking into account the information from [keycloak](https://www.keycloak.org/server/reverseproxy). If using anything other than `edge`, you must configure TLS.
 
 ## Contributing
 
