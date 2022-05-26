@@ -1,9 +1,9 @@
 {
     "trivy": {
         "arch": "amd64",
-        "digest": "20450889fd1ed6abdab80dc65cf015726f70d680a158e31092c79e9044104aab",
+        "digest": "737ba6a0f8dad7b103816d65bee53f5f79f64ad84b862f5e86b5562e66e38f77",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "0.28.0-0"
+        "version": "0.28.1-0"
     }
 }
