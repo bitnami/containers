@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`18`, `18-debian-10`, `18.0.0`, `18.0.0-debian-10-r5`, `latest` (18/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/18.0.0-debian-10-r5/18/debian-10/Dockerfile)
-* [`17`, `17-debian-10`, `17.0.1`, `17.0.1-debian-10-r10` (17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/17.0.1-debian-10-r10/17/debian-10/Dockerfile)
+* [`17`, `17-debian-10`, `17.0.1`, `17.0.1-debian-10-r11` (17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/17.0.1-debian-10-r11/17/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak).
 
@@ -213,7 +213,8 @@ Keycloak's branch 17 is no longer maintained by upstream and is now internally t
 
 ### 17-debian-10
 
-Keycloak 17 is powered by Quarkus, and quite a things have changed. Most notably, `KEYCLOAK_PRODUCTION` should be set to **true** and `KEYCLOAK_PROXY` mode should be configured taking into account the information from [keycloak](https://www.keycloak.org/server/reverseproxy). If using anything other than `edge`, you must configure TLS.
+Keycloak 17 is powered by Quarkus and to deploy it in production mode it is necessary to set up TLS.
+To do this you need to set `KEYCLOAK_PRODUCTION` to **true** and configure TLS
 
 ## Contributing
 
@@ -244,3 +245,4 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
