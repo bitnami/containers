@@ -10,7 +10,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 libpcre3 libprotobuf-dev libssl1.1 libyaml-0-2 perl procps tar zlib1g zlib1g-dev
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kong" "2.8.1-5" --checksum 7acfa4873a8c13a8fbff4823754591a6fce90bc253d99e7622cf07148e8b558d
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kong" "2.8.1-6" --checksum 47b17af917517ad0a76fc9f083f1f255a545abb43e573b7514694e84226c89f6
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
