@@ -14,7 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.53-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-0" --checksum a288a3866c8d3b06951b6781c79a6e3551e99c159aafa1d3dfcaa3e54db93ea7
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "8.0.19-0" --checksum d9e9fcca0331bffb09d452b89757c49e3186c3d142c3cf442d75698e76432ee4
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-0" --checksum af5ec81cfb8e8420fe6af80a77d40da25e0f7e136abb6dde27267c97fb27cf8b
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "phpmyadmin" "5.1.3-3" --checksum 474969e2f578ab26510f1261cb2235ee8a71ac0df616f66a4435a73a19fc81fd
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "phpmyadmin" "5.2.0-0" --checksum c04c07391855a97f095b53c3a04f213e95a7540063bf8d16bec8bab694b9303f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -27,7 +27,7 @@ RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/phpmyadmin/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="5.1.3" \
+    APP_VERSION="5.2.0" \
     BITNAMI_APP_NAME="phpmyadmin" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
