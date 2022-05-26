@@ -41,8 +41,15 @@ keycloak_validate() {
         fi
     }
     if is_boolean_yes "$KEYCLOAK_PRODUCTION"; then
-        if ! is_boolean_yes "$KEYCLOAK_ENABLE_TLS"; then
-            print_validation_error "You need to have the TLS enable. Please set the KEYCLOAK_ENABLE_TLS variable to true"
+        if [[ "$KEYCLOAK_PROXY" == "edge" ]]; then
+            # https://www.keycloak.org/server/reverseproxy
+            if is_boolean_yes "$KEYCLOAK_ENABLE_TLS"; then
+                print_validation_error "TLS and proxy=edge are not compatible. Please set the KEYCLOAK_ENABLE_TLS variable to false when using KEYCLOAK_PROXY=edge. Review # https://www.keycloak.org/server/reverseproxy for more information about proxy settings."
+            fi
+        else
+            ! is_boolean_yes "$KEYCLOAK_ENABLE_TLS"
+            # keycloak proxy passthrough/reencrypt requires tls
+            print_validation_error "You need to have TLS enabled. Please set the KEYCLOAK_ENABLE_TLS variable to true"
         fi
     fi
 
@@ -92,14 +99,14 @@ keycloak_conf_set() {
     debug "Setting ${key} to '${value}' in Keycloak configuration"
     # Sanitize key (sed does not support fixed string substitutions)
     local sanitized_pattern
-    sanitized_pattern="^\s*(#\s*)?$(sed 's/[]\[^$.*/]/\\&/g' <<< "$key")\s*=\s*(.*)"
+    sanitized_pattern="^\s*(#\s*)?$(sed 's/[]\[^$.*/]/\\&/g' <<<"$key")\s*=\s*(.*)"
     local entry="${key} = ${value}"
     # Check if the configuration exists in the file
     if grep -q -E "$sanitized_pattern" "${KEYCLOAK_CONF_DIR}/${KEYCLOAK_CONF_FILE}"; then
         # It exists, so replace the line
         replace_in_file "${KEYCLOAK_CONF_DIR}/${KEYCLOAK_CONF_FILE}" "$sanitized_pattern" "$entry"
     else
-        echo "$entry" >> "${KEYCLOAK_CONF_DIR}/${KEYCLOAK_CONF_FILE}"
+        echo "$entry" >>"${KEYCLOAK_CONF_DIR}/${KEYCLOAK_CONF_FILE}"
     fi
 }
 
@@ -117,7 +124,7 @@ keycloak_configure_database() {
     keycloak_conf_set "db" "postgres"
     keycloak_conf_set "db-username" "$KEYCLOAK_DATABASE_USER"
     keycloak_conf_set "db-password" "$KEYCLOAK_DATABASE_PASSWORD"
-    keycloak_conf_set "db-url" "jdbc:postgresql://${KEYCLOAK_DATABASE_HOST}:${KEYCLOAK_DATABASE_PORT}/${KEYCLOAK_DATABASE_NAME}?currentSchema=${KEYCLOAK_DATABASE_SCHEMA:-public}"
+    keycloak_conf_set "db-url" "jdbc:postgresql://${KEYCLOAK_DATABASE_HOST}:${KEYCLOAK_DATABASE_PORT}/${KEYCLOAK_DATABASE_NAME}?currentSchema=${KEYCLOAK_DATABASE_SCHEMA}"
     debug_execute kc.sh build --db postgres
 }
 
@@ -133,7 +140,6 @@ keycloak_configure_database() {
 keycloak_configure_cache() {
     info "Configuring cache count"
     keycloak_conf_set "cache" "$KEYCLOAK_CACHE_TYPE"
-    ! is_empty_value "$KEYCLOAK_CACHE_STACK" && debug_execute kc.sh build --cache-stack="${KEYCLOAK_CACHE_STACK}"
 }
 
 ########################
@@ -151,7 +157,7 @@ keycloak_configure_metrics() {
 }
 
 ########################
-# Configure hostname 
+# Configure hostname
 # Globals:
 #   KEYCLOAK_*
 # Arguments:
@@ -159,13 +165,13 @@ keycloak_configure_metrics() {
 # Returns:
 #   None
 #########################
-keycloak_configure_hostname(){
+keycloak_configure_hostname() {
     info "Configuring hostname settings"
     keycloak_conf_set "hostname-strict" "false"
 }
 
 ########################
-# Configure http 
+# Configure http
 # Globals:
 #   KEYCLOAK_*
 # Arguments:
@@ -173,7 +179,7 @@ keycloak_configure_hostname(){
 # Returns:
 #   None
 #########################
-keycloak_configure_http(){
+keycloak_configure_http() {
     info "Configuring http settings"
     keycloak_conf_set "http-enabled" "true"
     keycloak_conf_set "https-stric" "false"
@@ -209,7 +215,7 @@ keycloak_configure_proxy() {
     keycloak_conf_set "proxy" "${KEYCLOAK_PROXY}"
 }
 
- ########################
+########################
 # Configure database settings
 # Globals:
 #   KEYCLOAK_*
@@ -291,3 +297,4 @@ keycloak_custom_init_scripts() {
         touch "$KEYCLOAK_VOLUME_DIR"/.user_scripts_initialized
     fi
 }
+
