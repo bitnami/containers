@@ -29,10 +29,10 @@
     },
     "owncloud": {
         "arch": "amd64",
-        "digest": "b2d17d5fe503b3ef8ac334a79a830f9ddbee517b7c477e3d64b94c105e6a7301",
+        "digest": "8b5871feb13624f6273186fba7eb471e6baab497618dc3684ef18705332ca985",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "10.9.1-6"
+        "version": "10.10.0-0"
     },
     "php": {
         "arch": "amd64",

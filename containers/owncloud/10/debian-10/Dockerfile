@@ -14,7 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.53-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-0" --checksum a288a3866c8d3b06951b6781c79a6e3551e99c159aafa1d3dfcaa3e54db93ea7
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.29-0" --checksum 9210dbecb1d2a49c0c971efe3cec0415e0800b86f6676e4453d44ab88dd68dac
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-0" --checksum af5ec81cfb8e8420fe6af80a77d40da25e0f7e136abb6dde27267c97fb27cf8b
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "owncloud" "10.9.1-6" --checksum b2d17d5fe503b3ef8ac334a79a830f9ddbee517b7c477e3d64b94c105e6a7301
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "owncloud" "10.10.0-0" --checksum 8b5871feb13624f6273186fba7eb471e6baab497618dc3684ef18705332ca985
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -31,7 +31,7 @@ RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/owncloud/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="10.9.1" \
+    APP_VERSION="10.10.0" \
     BITNAMI_APP_NAME="owncloud" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
