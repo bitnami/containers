@@ -242,7 +242,7 @@ mongodb_copy_mounted_config() {
 # Arguments:
 #   None
 # Returns:
-#   The value of $MONGODB_ADVERTISED_HOSTNAME or the current host address
+#   The value of get_machine_ip, $MONGODB_ADVERTISED_HOSTNAME or the current host address
 ########################
 get_mongo_hostname() {
     if is_boolean_yes "$MONGODB_ADVERTISE_IP"; then
