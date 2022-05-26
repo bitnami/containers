@@ -45,8 +45,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`5.0`, `5.0-debian-10`, `5.0.8`, `5.0.8-debian-10-r27`, `latest` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/5.0.8-debian-10-r27/5.0/debian-10/Dockerfile)
-* [`4.4`, `4.4-debian-10`, `4.4.14`, `4.4.14-debian-10-r18` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.14-debian-10-r18/4.4/debian-10/Dockerfile)
+* [`5.0`, `5.0-debian-10`, `5.0.9`, `5.0.9-debian-10-r-1`, `latest` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/5.0.9-debian-10-r-1/5.0/debian-10/Dockerfile)
+* [`4.4`, `4.4-debian-10`, `4.4.14`, `4.4.14-debian-10-r19` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.14-debian-10-r19/4.4/debian-10/Dockerfile)
 * [`4.2`, `4.2-debian-10`, `4.2.20`, `4.2.20-debian-10-r18` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.20-debian-10-r18/4.2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
@@ -350,7 +350,7 @@ A [replication](https://docs.mongodb.com/manual/replication/) cluster can easily
  - `MONGODB_PORT_NUMBER`: The port each MongoDB&reg; will use. Default: **27017**
  - `MONGODB_INITIAL_PRIMARY_HOST`: MongoDB&reg; initial primary host, once the replicaset is created any node can be eventually promoted to be the primary. No defaults.
  - `MONGODB_INITIAL_PRIMARY_PORT_NUMBER`: MongoDB&reg; initial primary node port, as seen by other nodes. Default: **27017**
- - `MONGODB_ADVERTISED_HOSTNAME`: MongoDB&reg; advertised hostname. Defaults to the container hostname. Setting this env var makes the nodes of the replica set to be configured with a custom hostname instead of the internal container hostname.
+ - `MONGODB_ADVERTISED_HOSTNAME`: MongoDB&reg; advertised hostname. No defaults. It is recommended to pass this environment variable if you experience issues with ephemeral IPs. Setting this env var makes the nodes of the replica set to be configured with a hostname instead of the machine IP.
  - `MONGODB_ADVERTISE_IP`: MongoDB&reg; advertised hostname is set to container ip. Default: **false**. Overrides `MONGODB_ADVERTISED_HOSTNAME` 
  - `MONGODB_ADVERTISED_PORT_NUMBER`: MongoDB&reg; advertised port number. No defaults. It is recommended to pass this environment variable if you have a proxy port forwarding requests to container.
  - `MONGODB_REPLICA_SET_KEY`: MongoDB&reg; replica set key. Length should be greater than 5 characters and should not contain any special characters. Required for all nodes. No default.
