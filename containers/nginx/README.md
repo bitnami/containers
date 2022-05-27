@@ -45,7 +45,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.22`, `1.22-debian-10`, `1.22.0`, `1.22.0-debian-10-r0`, `latest` (1.22/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.22.0-debian-10-r0/1.22/debian-10/Dockerfile)
+* [`1.22`, `1.22-debian-10`, `1.22.0`, `1.22.0-debian-10-r1`, `latest` (1.22/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.22.0-debian-10-r1/1.22/debian-10/Dockerfile)
 * [`1.21`, `1.21-debian-10`, `1.21.6`, `1.21.6-debian-10-r119` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.21.6-debian-10-r119/1.21/debian-10/Dockerfile)
 * [`1.20`, `1.20-debian-10`, `1.20.2`, `1.20.2-debian-10-r185` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.20.2-debian-10-r185/1.20/debian-10/Dockerfile)
 
