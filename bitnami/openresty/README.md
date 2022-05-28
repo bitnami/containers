@@ -37,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.21`, `1.21-debian-10`, `1.21.4-1`, `1.21.4-1-debian-10-r0` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openresty/blob/1.21.4-1-debian-10-r0/1.21/debian-10/Dockerfile)
+* [`1.21`, `1.21-debian-10`, `1.21.4-1`, `1.21.4-1-debian-10-r1` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openresty/blob/1.21.4-1-debian-10-r1/1.21/debian-10/Dockerfile)
 * [`1.19`, `1.19-debian-10`, `1.19.9-1`, `1.19.9-1-debian-10-r284`, `latest` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openresty/blob/1.19.9-1-debian-10-r284/1.19/debian-10/Dockerfile)
 
 ## Get this image
@@ -442,6 +442,10 @@ or using Docker Compose:
 ```console
 $ docker-compose up openresty
 ```
+
+## Branch Deprecation Notice
+
+OpenResty's branch 1.19 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 06-28-2022
 
 ## Contributing
 
