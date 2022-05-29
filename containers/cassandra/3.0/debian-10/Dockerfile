@@ -14,7 +14,7 @@ RUN install_packages acl ca-certificates curl gzip libbz2-1.0 libc6 libgcc1 libj
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "2.7.18-26" --checksum fd52077cc4ff3286c0b4094f30fc392f741b662268eeffd8259ffbdbc22d7bd5
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.332-0" --checksum ea45a7908b8a86363659aa7e3953a1308af86db3ffa1656e46036c8e1f7c659a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.25.1-0" --checksum 863b0a81f75feed5c08bb5c1c5b280469b10c7cee9232ecbf613544755a7433c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.25.2-0" --checksum 3f8882ec1dcc0e9b50cdc848fb6e7bed7f0dd80caeef72d33c2209e9e80c2a9f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "cassandra" "3.0.27-0" --checksum 79c03245e4ebc14fec773188d10111e3b2e8acbbe44ec9b1e3e564da34860ac2
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
