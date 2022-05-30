@@ -1,7 +1,7 @@
 version: '2'
 services:
   mongodb:
-    image: docker.io/bitnami/mongodb:4.4
+    image: docker.io/bitnami/mongodb:5.0
     volumes:
       - 'mongodb_data:/bitnami/mongodb'
     environment:
