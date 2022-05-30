@@ -12,7 +12,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq libc6 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.15-0" --checksum 255bc547614ce8052f416a74c58cfb916f724876315f15b816e0eb98b2bded35
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "neo4j" "4.4.7-0" --checksum 03576ce93dd2483ea7437830ec27fe03be617c36078f268050249cd85ecab3c7
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "neo4j" "4.4.7-1" --checksum 9737bd39bb4745128be70e531bda2e306ad5f7780a3fb595c7cbe2a013e04d6c
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
