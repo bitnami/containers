@@ -8,7 +8,8 @@ set -o xtrace # Uncomment this line for debugging purpose
 TARGET_DIR="."
 
 COMMIT_SHIFT="${1:-0}" # Used when you push commits manually
-CONTAINER="${2:-}" # USed when we want to sync a single container
+CONTAINER="${2:-}" # Used when we want to sync a single container
+SKIP_COMMIT_ID="${3:-}" # Used in some cases when a patch does not apply because it was applied as part of a PR
 
 function queryRepos() {
     local page=0
@@ -58,12 +59,14 @@ function findCommitsToSync() {
     local shift=$((COMMIT_SHIFT + 1))
     local -r last_commit_message="$(git log -n "$shift" --pretty=tformat:"%s" -- ./containers/"$origin_name" | tail -n 1)"
     # Search on the container origin repo the ID for the latest commit we have locally in the container folder
-    local -r last_synced_commit_id="$(git rev-list "$origin_name"/master --grep="${last_commit_message}")"
+    local -r last_synced_commit_id="$(git rev-list "$origin_name"/master --grep="${last_commit_message}" | head -1)"
     local commits_to_sync=""
     local max=100 # If we need to sync more than 100 commits there must be something wrong since we run the job on a daily basis
     for commit in "${commits[@]}"; do
         if [[ "$commit" != "$last_synced_commit_id" ]] && [[ "$max" -gt "0" ]]; then
-            commits_to_sync="${commit} ${commits_to_sync}"
+            if [[ "$commit" != "$SKIP_COMMIT_ID" ]]; then
+              commits_to_sync="${commit} ${commits_to_sync}"
+            fi
         else
             # We reached the last commit synced
             break
@@ -99,9 +102,9 @@ syncContainerCommits() {
                 # If the commit is a merge, it has more than one parent, use the second to avoid re-applying an old commit
                 actual_merge_commit_id="$(git log --pretty=%P -n 1 "$commit" | awk '{print $2}')"
                 if [[ -n "$actual_merge_commit_id" ]]; then
-                  syncCommit "$actual_merge_commit_id" "$name"
+                    syncCommit "$actual_merge_commit_id" "$name"
                 else
-                  syncCommit "$commit" "$name"
+                    syncCommit "$commit" "$name"
                 fi
             done
         fi
