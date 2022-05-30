@@ -12,14 +12,14 @@ RUN install_packages acl ca-certificates curl gzip libc6 libcom-err2 libcurl4 li
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.36.1-0" --checksum e00f740b66faf2808cb8983a39b186d43a8367730512c402df78751a9cefbfc1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.3-0" --checksum 0603c8eaf6d24e76563431e36e512da06bfebb3a06ede31b3e84d9879213c162
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-clair" "2.5.0-1" --checksum 5dc2285d1b09ab5b5b3694a4c1ec7115298ec30d57911d8182c68bd0b59a150b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-clair" "2.5.1-0" --checksum a21d3d764d738bba30744bf003d7f19aa3c90b94ea310da1c0137c93cc22638d
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-clair/postunpack.sh
-ENV APP_VERSION="2.5.0" \
+ENV APP_VERSION="2.5.1" \
     BITNAMI_APP_NAME="harbor-clair" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/git/bin:/opt/bitnami/harbor-clair/bin:$PATH"
 
