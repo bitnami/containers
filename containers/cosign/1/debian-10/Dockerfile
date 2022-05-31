@@ -17,6 +17,7 @@ RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir -p "/cosign-keys" && chmod -R 777 "/cosign-keys"
+RUN mkdir /.sigstore && chmod g+rwX /.sigstore
 
 ENV APP_VERSION="1.8.0" \
     BITNAMI_APP_NAME="cosign" \
