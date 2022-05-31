@@ -28,6 +28,7 @@ for dir in "$ODOO_ADDONS_DIR" "$ODOO_CONF_DIR" "$ODOO_DATA_DIR" "$ODOO_LOGS_DIR"
     # Use daemon:root ownership for compatibility when running as a non-root user
     configure_permissions_ownership "$dir" -d "775" -f "664" -u "$ODOO_DAEMON_USER" -g "root"
 done
+
 # Use daemon user ownership for compatibility when running as a non-root user
 chown "$ODOO_DAEMON_USER" "$ODOO_BASE_DIR"
 
