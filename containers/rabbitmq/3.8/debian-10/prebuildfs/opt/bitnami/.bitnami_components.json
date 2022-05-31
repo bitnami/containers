@@ -15,9 +15,9 @@
     },
     "rabbitmq": {
         "arch": "amd64",
-        "digest": "0539007d24d4e341aa5944bdb9e22e7135ea4ccb543b802cc6c7e6c348065028",
+        "digest": "7d68c420aa4e6892ae7e01041c272df032abc4a87834895b91c0a8fb1783f272",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "3.8.32-0"
+        "version": "3.8.33-0"
     }
 }
