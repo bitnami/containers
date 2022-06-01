@@ -1,10 +1,10 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "716e4948a2c40f0a0cc5b1656052aeef916a79152250b0b6c1392dd1187f575a",
+        "digest": "5de812053f045705420cc1ce0431ab801e413c4a46373ea2162d015c2b92b414",
         "distro": "debian-10",
         "type": "NAMI",
-        "version": "2.4.53-0"
+        "version": "2.4.53-1"
     },
     "gosu": {
         "arch": "amd64",
