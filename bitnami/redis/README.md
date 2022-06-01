@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`6.2`, `6.2-debian-10`, `6.2.7`, `6.2.7-debian-10-r32` (6.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.2.7-debian-10-r32/6.2/debian-10/Dockerfile)
-* [`6.0`, `6.0-debian-10`, `6.0.16`, `6.0.16-debian-10-r229` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.0.16-debian-10-r229/6.0/debian-10/Dockerfile)
+* [`6.0`, `6.0-debian-10`, `6.0.16`, `6.0.16-debian-10-r230` (6.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.0.16-debian-10-r230/6.0/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
 
@@ -639,6 +639,10 @@ docker-compose up -d
 
 - All volumes have been merged at `/bitnami/redis`. Now you only need to mount a single volume at `/bitnami/redis` for persistence.
 - The logs are always sent to the `stdout` and are no longer collected in the volume.
+
+## Branch Deprecation Notice
+
+Redis&trade;'s branch 6.0 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 07-01-2022
 
 ## Contributing
 
