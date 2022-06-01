@@ -80,6 +80,9 @@ keycloak_validate() {
         fi
     done
 
+    # Deprecation warnings
+    is_empty_value "${KEYCLOAK_FRONTEND_URL:-}" || warn "The usage of 'KEYCLOAK_FRONTEND_URL' is deprecated and will soon be removed. Use 'KC_HOSTNAME' instead."
+
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
