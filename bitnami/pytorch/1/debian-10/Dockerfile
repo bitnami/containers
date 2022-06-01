@@ -9,8 +9,8 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libbz2-1.0 libc6 libffi6 libgcc1 libgomp1 libjemalloc2 liblzma5 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtcmalloc-minimal4 libtinfo6 numactl procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.7.13-3" --checksum 3c762deccd57447e5a1f0ae9fb16a664b59739506601dc272d8735f342c6c8cf
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "pytorch" "1.11.0-0" --checksum 2c11a9a21993663ba00e8a4a03422cce9286f219aef108cf4353a8ff2eb4fc91
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-3" --checksum a328c8fb3db9e60d3aa19eb7ca31de5da372affcb3d7c0d73610b4a19b634f94
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "pytorch" "1.11.0-1" --checksum b976f9912dff38b10ce4136f97ce2b31f8cc315fdc5777a25322da93a164175f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
