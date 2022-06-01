@@ -28,7 +28,7 @@ $ docker run --name envoy bitnami/envoy:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.22`, `1.22-debian-10`, `1.22.0`, `1.22.0-debian-10-r38`, `latest` (1.22/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.22.0-debian-10-r38/1.22/debian-10/Dockerfile)
+* [`1.22`, `1.22-debian-10`, `1.22.0`, `1.22.0-debian-10-r39`, `latest` (1.22/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.22.0-debian-10-r39/1.22/debian-10/Dockerfile)
 * [`1.21`, `1.21-debian-10`, `1.21.2`, `1.21.2-debian-10-r19` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.21.2-debian-10-r19/1.21/debian-10/Dockerfile)
 * [`1.20`, `1.20-debian-10`, `1.20.3`, `1.20.3-debian-10-r33` (1.20/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.20.3-debian-10-r33/1.20/debian-10/Dockerfile)
 * [`1.19`, `1.19-debian-10`, `1.19.4`, `1.19.4-debian-10-r34` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.19.4-debian-10-r34/1.19/debian-10/Dockerfile)
