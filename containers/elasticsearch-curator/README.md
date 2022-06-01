@@ -2,6 +2,10 @@
 
 ## What is Elasticsearch Curator?
 
+## Container Deprecation Notice
+
+Elasticsearch Curator container is no longer maintained by upstream and is now internally tagged as to be deprecated. This image will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 07-01-2022
+
 > Elasticsearch Curator is a tool that helps curate and manage indices and snapshots in Elasticsearch clusters.
 
 [Overview of Elasticsearch Curator](https://github.com/elastic/curator)
@@ -39,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`5`, `5-debian-10`, `5.8.4`, `5.8.4-debian-10-r358`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-curator/blob/5.8.4-debian-10-r358/5/debian-10/Dockerfile)
+* [`5`, `5-debian-10`, `5.8.4`, `5.8.4-debian-10-r359`, `latest` (5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch-curator/blob/5.8.4-debian-10-r359/5/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch-curator GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch-curator).
 
