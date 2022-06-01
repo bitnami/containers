@@ -15,12 +15,12 @@ function queryRepos() {
     while [[ "$page" -gt -1 ]]; do
         # Query only the public repos since we won't add private containers to bitnami/containers
         page_repos="$(curl -H 'Content-Type: application/json' -H 'Accept: application/json' "https://api.github.com/orgs/bitnami/repos?type=public&per_page=${repos_per_page}&page=${page}")"
-        repos="$(jq -s 'reduce .[] as $x ([]; . + $x)' <(echo "$repos") <(echo "$page_repos"))"     
-        n_repos="$(jq length <<< "$page_repos")"   
+        repos="$(jq -s 'reduce .[] as $x ([]; . + $x)' <(echo "$repos") <(echo "$page_repos"))"
+        n_repos="$(jq length <<< "$page_repos")"
         if [[ "$n_repos" -lt "$repos_per_page" ]]; then
           page="-1"
         else
-          page="$((page + 1))" 
+          page="$((page + 1))"
         fi
     done
 
@@ -36,7 +36,7 @@ function getContainerRepos() {
 
 function pushChanges() {
     git config user.name "Bitnami Containers"
-    git config user.email "containers@bitnami.com"
+    git config user.email "bitnami-bot@vmware.com"
     git push origin main
 }
 
@@ -46,9 +46,9 @@ function mergeRepos() {
     local -r static_files=(. .git containers)
     # Files that will checkout bitnami/containers main branch on every sync
     local -r special_files=(CONTRIBUTING.md CODE_OF_CONDUCT.md LICENSE.md .github scripts)
-    
+
     mkdir -p "$TARGET_DIR"
-   
+
     # Build array of app names since we need to exclude them when moving files
     local apps=("mock")
     local -r urls=($(echo "$repos" | jq -r '.[].html_url'))
