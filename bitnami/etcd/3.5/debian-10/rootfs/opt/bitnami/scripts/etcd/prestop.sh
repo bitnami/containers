@@ -19,7 +19,8 @@ if is_empty_value "${endpoints}"; then
 fi
 read -r -a extra_flags <<< "$(etcdctl_auth_flags)"
 extra_flags+=("--endpoints=${endpoints}" "--debug=true")
-# We use 'stdbuf' to ensure memory buffers are flushed to disk
+# We use 'sync' to ensure memory buffers are flushed to disk
 # so we reduce the chances that the "member_removal.log" file is empty.
-# ref: https://www.gnu.org/software/coreutils/manual/html_node/stdbuf-invocation.html#stdbuf-invocation
-stdbuf -oL etcdctl member remove "$(cat "${ETCD_DATA_DIR}/member_id")" "${extra_flags[@]}" > "$(dirname "$ETCD_DATA_DIR")/member_removal.log"
+# ref: https://man7.org/linux/man-pages/man1/sync.1.html
+etcdctl member remove "$(cat "${ETCD_DATA_DIR}/member_id")" "${extra_flags[@]}" > "$(dirname "$ETCD_DATA_DIR")/member_removal.log"
+sync -d "$(dirname "$ETCD_DATA_DIR")/member_removal.log"
