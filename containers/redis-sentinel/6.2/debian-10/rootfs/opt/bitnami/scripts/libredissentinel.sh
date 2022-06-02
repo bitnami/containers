@@ -221,8 +221,10 @@ redis_initialize() {
         [[ -z "$REDIS_SENTINEL_ANNOUNCE_IP" ]] || redis_conf_set "sentinel announce-ip" "${REDIS_SENTINEL_ANNOUNCE_IP}"
         [[ -z "$REDIS_SENTINEL_ANNOUNCE_PORT" ]] || redis_conf_set "sentinel announce-port" "${REDIS_SENTINEL_ANNOUNCE_PORT}"
         # Sentinel's configuration was refactored for Redis 6.2 and hostname's support now has to be enabled using a configuration parameter
-        [[ $(redis_version --major) -ge 6 ]] && [[ $(redis_version --minor) -ge 2 ]] && redis_conf_set "sentinel resolve-hostnames" "${REDIS_SENTINEL_RESOLVE_HOSTNAMES}"
-        [[ $(redis_version --major) -ge 6 ]] && [[ $(redis_version --minor) -ge 2 ]] && redis_conf_set "sentinel announce-hostnames" "${REDIS_SENTINEL_ANNOUNCE_HOSTNAMES}"
+        if { [[ $(redis_version --major) -ge 6 ]] && [[ $(redis_version --minor) -ge 2 ]]; } || [[ $(redis_version --major) -ge 7 ]]; then
+            redis_conf_set "sentinel resolve-hostnames" "${REDIS_SENTINEL_RESOLVE_HOSTNAMES}"
+            redis_conf_set "sentinel announce-hostnames" "${REDIS_SENTINEL_ANNOUNCE_HOSTNAMES}"
+        fi
 
         # Sentinel Configuration (maybe overwritten by more specific init blocks like TLS configuration)
         redis_conf_set port "$REDIS_SENTINEL_PORT_NUMBER"
