@@ -35,7 +35,7 @@ if is_boolean_yes "$MINIO_SKIP_CLIENT"; then
 else
     if [[ "$MINIO_SERVER_SCHEME" == "https" ]]; then
         [[ ! -d "${MINIO_CLIENT_CONF_DIR}/certs" ]] && mkdir -p "${MINIO_CLIENT_CONF_DIR}/certs"
-        [[ -d "${MINIO_CERTS_DIR}/CAs" ]] && cp -r "${MINIO_CERTS_DIR}/CAs" "${MINIO_CLIENT_CONF_DIR}/certs"
+        [[ -d "${MINIO_CERTS_DIR}/CAs" ]] && cp -r "${MINIO_CERTS_DIR}/CAs/" "${MINIO_CLIENT_CONF_DIR}/certs/CAs"
     fi
     # Start MinIO server in background
     minio_start_bg
