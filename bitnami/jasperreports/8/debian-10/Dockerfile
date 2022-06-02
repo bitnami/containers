@@ -18,7 +18,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-clien
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-0" --checksum a288a3866c8d3b06951b6781c79a6e3551e99c159aafa1d3dfcaa3e54db93ea7
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.36.1-0" --checksum e00f740b66faf2808cb8983a39b186d43a8367730512c402df78751a9cefbfc1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-0" --checksum af5ec81cfb8e8420fe6af80a77d40da25e0f7e136abb6dde27267c97fb27cf8b
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "jasperreports" "8.0.0-34" --checksum f6305c16737954ec737ca27ac6d8df7da0a77f232ecc3183d447842912e2a846
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "jasperreports" "8.0.2-0" --checksum d03d8fb5a3dc44f6ed3abd02fc56a3fe518f4c4e015abea7bdb96c683c40c2b4
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -28,7 +28,7 @@ RUN /opt/bitnami/scripts/tomcat/postunpack.sh
 RUN /opt/bitnami/scripts/jasperreports/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
-ENV APP_VERSION="8.0.0" \
+ENV APP_VERSION="8.0.2" \
     BITNAMI_APP_NAME="jasperreports" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:$PATH"
