@@ -29,7 +29,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2`, `2-debian-10`, `2.3.0`, `2.3.0-debian-10-r22`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook/blob/2.3.0-debian-10-r22/2/debian-10/Dockerfile)
-* [`1`, `1-debian-10`, `1.5.0`, `1.5.0-debian-10-r191` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook/blob/1.5.0-debian-10-r191/1/debian-10/Dockerfile)
+* [`1`, `1-debian-10`, `1.5.0`, `1.5.0-debian-10-r192` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook/blob/1.5.0-debian-10-r192/1/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jupyter-base-notebook GitHub repo](https://github.com/bitnami/bitnami-docker-jupyter-base-notebook).
 
