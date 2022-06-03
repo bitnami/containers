@@ -12,7 +12,7 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc1 libssl1.1 libstdc++6 libtinfo6 locales procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "erlang" "24.3.4-0" --checksum d76848fe46e2ef34dfd93a07eeb0c6cadaa9b4d01fd0745c4e4c9eb3f2e681a0
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rabbitmq" "3.10.4-0" --checksum 0bf7e2862ee56f4bdb910a4beac26a746c68b1e29bdb12bad2dc168acf0cf3b7
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rabbitmq" "3.10.5-0" --checksum ece5c9a09d8366e2416c87b19b84563d96933cff1f6c732e0f5831679afe59e1
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -25,7 +25,7 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 RUN /opt/bitnami/scripts/rabbitmq/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
-ENV APP_VERSION="3.10.4" \
+ENV APP_VERSION="3.10.5" \
     BITNAMI_APP_NAME="rabbitmq" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en"
