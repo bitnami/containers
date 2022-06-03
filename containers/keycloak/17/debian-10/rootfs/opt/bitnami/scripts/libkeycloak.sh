@@ -140,7 +140,9 @@ keycloak_configure_database() {
 keycloak_configure_cache() {
     info "Configuring cache count"
     keycloak_conf_set "cache" "$KEYCLOAK_CACHE_TYPE"
-    ! is_empty_value "$KEYCLOAK_CACHE_STACK" && debug_execute kc.sh build --cache-stack="${KEYCLOAK_CACHE_STACK}"
+    if ! is_empty_value "$KEYCLOAK_CACHE_STACK"; then
+        debug_execute kc.sh build --cache-stack="${KEYCLOAK_CACHE_STACK}"
+    fi
 }
 
 ########################
