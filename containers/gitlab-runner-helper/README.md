@@ -36,7 +36,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`15`, `15-debian-10`, `15.0.0`, `15.0.0-debian-10-r1`, `latest` (15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-gitlab-runner-helper/blob/15.0.0-debian-10-r1/15/debian-10/      Dockerfile)
-* [`14`, `14-debian-10`, `14.10.1`, `14.10.1-debian-10-r27` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-gitlab-runner-helper/blob/14.10.1-debian-10-r27/14/debian-10/      Dockerfile)
+* [`14`, `14-debian-10`, `14.10.1`, `14.10.1-debian-10-r28` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-gitlab-runner-helper/blob/14.10.1-debian-10-r28/14/debian-10/      Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/gitlab-runner-helper GitHub repo](https://github.com/bitnami/bitnami-docker-gitlab-runner-helper).
 
@@ -111,6 +111,10 @@ $ docker run --rm --name gitlab-runner-helper bitnami/gitlab-runner–helper:lat
 ```
 
 Check the [official Gitlab Runner Helper documentation](https://docs.gitlab.com/runner/configuration/advanced-configuration.html#helper-image) for the list of the available parameters.
+
+## Branch Deprecation Notice
+
+Gitlab Runner Helper's branch 14 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 07-03-2022
 
 ## Contributing
 
