@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`4`, `4-debian-10`, `4.11.0`, `4.11.0-debian-10-r48`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.11.0-debian-10-r48/4/debian-10/Dockerfile)
+- [`4`, `4-debian-10`, `4.11.0`, `4.11.0-debian-10-r49`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.11.0-debian-10-r49/4/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dreamfactory GitHub repo](https://github.com/bitnami/bitnami-docker-dreamfactory).
 
@@ -106,7 +106,7 @@ $ docker run -d --name mongodb \
   bitnami/mongob:latest
 ```
 
-#### Step 4: Create a volume for Redis(TM) persistence and create a Redis(TM) container
+#### Step 4: Create a volume for Redis(R) persistence and create a Redis(R) container
 
 ```console
 $ docker volume create --name redis_data
@@ -296,12 +296,12 @@ Available environment variables:
 - `DREAMFACTORY_DATABASE_PASSWORD`: Database password that DreamFactory will use to connect with the database. No default.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-##### Redis(TM) connection configuration
+##### Redis(R) connection configuration
 
-- `DREAMFACTORY_ENABLE_REDIS`: Whether to enable a Redis(TM) cache server for DreamFactory. Default: **yes**
-- `DREAMFACTORY_REDIS_HOST`: Hostname for the Redis(TM) cache server. Default: **redis**
-- `DREAMFACTORY_REDIS_PORT_NUMBER`: Port used by Redis(TM) cache server. Default: **6379**
-- `DREAMFACTORY_REDIS_PASSWORD`: Password for the Redis(TM) cache server user. No default.
+- `DREAMFACTORY_ENABLE_REDIS`: Whether to enable a Redis(R) cache server for DreamFactory. Default: **yes**
+- `DREAMFACTORY_REDIS_HOST`: Hostname for the Redis(R) cache server. Default: **redis**
+- `DREAMFACTORY_REDIS_PORT_NUMBER`: Port used by Redis(R) cache server. Default: **6379**
+- `DREAMFACTORY_REDIS_PASSWORD`: Password for the Redis(R) cache server user. No default.
 
 ##### Create an extra MariaDB service for DreamFactory
 
@@ -522,7 +522,7 @@ For the DreamFactory container:
 
 ### Upgrade this image
 
-Bitnami provides up-to-date versions of MariaDB, MongoDB&reg;, PostgreSQL, Redis(TM) and DreamFactory, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the DreamFactory container. For the MariaDB upgrade see https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image. For the MongoDB® upgrade see https://github.com/bitnami/bitnami-docker-mongodb/blob/master/README.md#upgrade-this-image. For the Redis(TM) upgrade see https://github.com/bitnami/bitnami-docker-redis/blob/master/README.md#upgrade-this-image
+Bitnami provides up-to-date versions of MariaDB, MongoDB&reg;, PostgreSQL, Redis(R) and DreamFactory, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the DreamFactory container. For the MariaDB upgrade see https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image. For the MongoDB® upgrade see https://github.com/bitnami/bitnami-docker-mongodb/blob/master/README.md#upgrade-this-image. For the Redis(R) upgrade see https://github.com/bitnami/bitnami-docker-redis/blob/master/README.md#upgrade-this-image
 
 The `bitnami/dreamfactory:latest` tag always points to the most recent release. To get the most recent release you can simple repull the `latest` tag from the Docker Hub with `docker pull bitnami/dreamfactory:latest`. However it is recommended to use [tagged versions](https://hub.docker.com/r/bitnami/dreamfactory/tags/).
 
@@ -544,7 +544,7 @@ $ docker-compose stop dreamfactory
 
 Follow the steps in [Backing up your container](#backing-up-your-container) to take a snapshot of the current application state.
 
-Additionally, snapshot the [MariaDB](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container), [MongoDB&reg;](https://github.com/bitnami/bitnami-docker-mongodb#step-2-stop-and-backup-the-currently-running-container) and [Redis(TM)](https://github.com/bitnami/bitnami-docker-redis#step-2-stop-and-backup-the-currently-running-container) data.
+Additionally, snapshot the [MariaDB](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container), [MongoDB&reg;](https://github.com/bitnami/bitnami-docker-mongodb#step-2-stop-and-backup-the-currently-running-container) and [Redis(R)](https://github.com/bitnami/bitnami-docker-redis#step-2-stop-and-backup-the-currently-running-container) data.
 
 You can use these snapshots to restore the application state should the upgrade fail.
 
