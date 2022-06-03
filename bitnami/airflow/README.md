@@ -33,7 +33,7 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.3.0`, `2.3.0-debian-10-r11`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/2.3.0-debian-10-r11/2/debian-10/Dockerfile)
+* [`2`, `2-debian-10`, `2.3.1`, `2.3.1-debian-10-r0`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow/blob/2.3.1-debian-10-r0/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow).
 
@@ -43,7 +43,7 @@ To run this application you need [Docker Engine](https://www.docker.com/products
 
 ## How to use this image
 
-Airflow requires access to a PostgreSQL database to store information. We will use our very own [PostgreSQL image](https://www.github.com/bitnami/bitnami-docker-postgresql) for the database requirements. Additionally, if you pretend to use the `CeleryExecutor`, you will also need an [Airflow Scheduler](https://www.github.com/bitnami/bitnami-docker-airflow-scheduler), one or more [Airflow Workers](https://www.github.com/bitnami/bitnami-docker-airflow-worker) and a [Redis(TM) server](https://www.github.com/bitnami/bitnami-docker-redis).
+Airflow requires access to a PostgreSQL database to store information. We will use our very own [PostgreSQL image](https://www.github.com/bitnami/bitnami-docker-postgresql) for the database requirements. Additionally, if you pretend to use the `CeleryExecutor`, you will also need an [Airflow Scheduler](https://www.github.com/bitnami/bitnami-docker-airflow-scheduler), one or more [Airflow Workers](https://www.github.com/bitnami/bitnami-docker-airflow-worker) and a [Redis(R) server](https://www.github.com/bitnami/bitnami-docker-redis).
 
 ### Using Docker Compose
 
@@ -77,7 +77,7 @@ If you want to run the application manually instead of using `docker-compose`, t
     bitnami/postgresql:latest
   ```
 
-3. Create a volume for Redis(TM) persistence and create a Redis(TM) container
+3. Create a volume for Redis(R) persistence and create a Redis(R) container
 
   ```console
   $ docker volume create --name redis_data
@@ -141,7 +141,7 @@ Access your application at `http://your-ip:8080`
 
 ### Persisting your application
 
-The Bitnami Airflow container relies on the PostgreSQL database & Redis to persist the data. This means that Airflow does not persist anything. To avoid loss of data, you should mount volumes for persistence of [PostgreSQL data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database) and [Redis(TM) data](https://github.com/bitnami/bitnami-docker-redis#persisting-your-database)
+The Bitnami Airflow container relies on the PostgreSQL database & Redis to persist the data. This means that Airflow does not persist anything. To avoid loss of data, you should mount volumes for persistence of [PostgreSQL data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database) and [Redis(R) data](https://github.com/bitnami/bitnami-docker-redis#persisting-your-database)
 
 The above examples define docker volumes namely `postgresql_data`, and `redis_data`. The Airflow application state will persist as long as these volumes are not removed.
 
@@ -224,7 +224,7 @@ services:
     bitnami/postgresql:latest
   ```
 
-3. Create the Redis(TM) container with host volumes
+3. Create the Redis(R) container with host volumes
 
   ```console
   $ docker run -d --name redis \
@@ -325,12 +325,12 @@ The Airflow instance can be customized by specifying environment variables on th
 - `AIRFLOW_DATABASE_USERNAME`: Database user that Airflow will use to connect with the database. Default: **bn_airflow**
 - `AIRFLOW_DATABASE_PASSWORD`: Database password that Airflow will use to connect with the database. No defaults.
 - `AIRFLOW_DATABASE_USE_SSL`: Set to yes if the database is using SSL. Default: **no**
-- `AIRFLOW_REDIS_USE_SSL`: Set to yes if Redis(TM) uses SSL. Default: **no**
-- `REDIS_HOST`: Hostname for Redis(TM) server. Default: **redis**
-- `REDIS_PORT_NUMBER`: Port used by Redis(TM) server. Default: **6379**
-- `REDIS_USER`: User that Airflow will use to connect with Redis(TM). No defaults.
-- `REDIS_PASSWORD`: Password that Airflow will use to connect with Redis(TM). No defaults.
-- `REDIS_DATABASE`: Database number for Redis(TM) server. Default: **1**
+- `AIRFLOW_REDIS_USE_SSL`: Set to yes if Redis(R) uses SSL. Default: **no**
+- `REDIS_HOST`: Hostname for Redis(R) server. Default: **redis**
+- `REDIS_PORT_NUMBER`: Port used by Redis(R) server. Default: **6379**
+- `REDIS_USER`: User that Airflow will use to connect with Redis(R). No defaults.
+- `REDIS_PASSWORD`: Password that Airflow will use to connect with Redis(R). No defaults.
+- `REDIS_DATABASE`: Database number for Redis(R) server. Default: **1**
 
 ###### Airflow LDAP authentication
 
