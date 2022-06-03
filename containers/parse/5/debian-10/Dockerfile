@@ -11,7 +11,7 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl gzip jq libbz2-1.0 libc6 libcom-err2 libffi6 libgcc1 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncursesw6 libreadline7 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-3" --checksum a328c8fb3db9e60d3aa19eb7ca31de5da372affcb3d7c0d73610b4a19b634f94
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.19.3-0" --checksum 1f82279c7a88cfa1a1bf03e8d10064a00dba5b7b21923c0dd7cbca7e712a6aa3
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb-shell" "1.4.2-0" --checksum 10f7f0266c1bb42cb257ef364697bee5d43e670acaec8de7ed2855902c9eb98c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb-shell" "1.5.0-0" --checksum ab840925a52827b7a0ff38d891f4446e1e72d11c2308d15f4d58ae148b414544
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "parse" "5.2.1-0" --checksum 2d303e80109983cbfb3e2bf2330cd6f3c88db691672f4ed092d461e003862732
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
 RUN apt-get update && apt-get upgrade -y && \
