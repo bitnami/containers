@@ -31,7 +31,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`2`, `2-debian-10`, `2.8.3`, `2.8.3-debian-10-r42`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.8.3-debian-10-r42/2/debian-10/Dockerfile)
+- [`2`, `2-debian-10`, `2.8.3`, `2.8.3-debian-10-r43`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-discourse/blob/2.8.3-debian-10-r43/2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/discourse GitHub repo](https://github.com/bitnami/bitnami-docker-discourse).
 
@@ -312,9 +312,9 @@ Available environment variables:
 
 ##### Redis connection configuration
 
-- `DISCOURSE_REDIS_HOST`: Hostname for Redis(TM). Default: **redis**
-- `DISCOURSE_REDIS_PORT_NUMBER`: Port used by Redis(TM). Default: **6379**
-- `DISCOURSE_REDIS_PASSWORD`: Password for Redis(TM).
+- `DISCOURSE_REDIS_HOST`: Hostname for Redis(R). Default: **redis**
+- `DISCOURSE_REDIS_PORT_NUMBER`: Port used by Redis(R). Default: **6379**
+- `DISCOURSE_REDIS_PASSWORD`: Password for Redis(R).
 
 ##### Create a database for Discourse using postgresql-client
 
