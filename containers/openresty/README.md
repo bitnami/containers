@@ -38,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.21`, `1.21-debian-10`, `1.21.4-1`, `1.21.4-1-debian-10-r6` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openresty/blob/1.21.4-1-debian-10-r6/1.21/debian-10/Dockerfile)
-* [`1.19`, `1.19-debian-10`, `1.19.9-1`, `1.19.9-1-debian-10-r289`, `latest` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openresty/blob/1.19.9-1-debian-10-r289/1.19/debian-10/Dockerfile)
+* [`1.19`, `1.19-debian-10`, `1.19.9-1`, `1.19.9-1-debian-10-r290`, `latest` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openresty/blob/1.19.9-1-debian-10-r290/1.19/debian-10/Dockerfile)
 
 ## Get this image
 
