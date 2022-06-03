@@ -44,7 +44,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`3.2`, `3.2-debian-10`, `3.2.0`, `3.2.0-debian-10-r10`, `latest` (3.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.2.0-debian-10-r10/3.2/debian-10/Dockerfile)
 * [`3.1`, `3.1-debian-10`, `3.1.1`, `3.1.1-debian-10-r17` (3.1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.1.1-debian-10-r17/3.1/debian-10/Dockerfile)
 * [`3.0`, `3.0-debian-10`, `3.0.1`, `3.0.1-debian-10-r70` (3.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.0.1-debian-10-r70/3.0/debian-10/Dockerfile)
-* [`2.8`, `2.8-debian-10`, `2.8.1`, `2.8.1-debian-10-r235` (2.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.1-debian-10-r235/2.8/debian-10/Dockerfile)
+* [`2.8`, `2.8-debian-10`, `2.8.1`, `2.8.1-debian-10-r236` (2.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.1-debian-10-r236/2.8/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
