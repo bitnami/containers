@@ -28,7 +28,7 @@ $ docker run --name wavefront-proxy bitnami/wavefront-proxy:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`11`, `11-debian-10`, `11.1.0`, `11.1.0-debian-10-r21`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-proxy/blob/11.1.0-debian-10-r21/11/debian-10/Dockerfile)
+* [`11`, `11-debian-10`, `11.1.0`, `11.1.0-debian-10-r22`, `latest` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-proxy/blob/11.1.0-debian-10-r22/11/debian-10/Dockerfile)
 * [`10`, `10-debian-10`, `10.14.0`, `10.14.0-debian-10-r127` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-proxy/blob/10.14.0-debian-10-r127/10/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wavefront-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-wavefront-proxy).
