@@ -10,4 +10,5 @@ XGBOOST_WORKSPACE="/app"
 # Ensure non-root user has write permissions on the workspace
 ensure_dir_exists "$XGBOOST_WORKSPACE"
 
-chmod -R g+rwX "$XGBOOST_WORKSPACE" "/opt/bitnami/python"
+chmod -R g+rwX "$XGBOOST_WORKSPACE"
+

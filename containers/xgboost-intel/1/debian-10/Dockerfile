@@ -15,6 +15,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7"
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
+RUN mkdir /.local && chmod g+rwX /.local
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/xgboost-intel/postunpack.sh
