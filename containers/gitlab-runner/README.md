@@ -36,7 +36,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`15`, `15-debian-10`, `15.0.0`, `15.0.0-debian-10-r3`, `latest` (15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-gitlab-runner/blob/15.0.0-debian-10-r3/15/debian-10/      Dockerfile)
-* [`14`, `14-debian-10`, `14.10.1`, `14.10.1-debian-10-r28` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-gitlab-runner/blob/14.10.1-debian-10-r28/14/debian-10/      Dockerfile)
+* [`14`, `14-debian-10`, `14.10.1`, `14.10.1-debian-10-r29` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-gitlab-runner/blob/14.10.1-debian-10-r29/14/debian-10/      Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/gitlab-runner GitHub repo](https://github.com/bitnami/bitnami-docker-gitlab-runner).
 
