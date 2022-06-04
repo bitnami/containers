@@ -13,7 +13,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libbsd0 libbz2-1.0 libc6 libedit2 libffi6 libgcc1 libgmp10 libgnutls30 libhogweed4 libicu63 libidn2-0 libldap-2.4-2 liblz4-1 liblzma5 libncurses6 libnettle6 libp11-kit0 libpcre3 libreadline7 libsasl2-2 libsqlite3-0 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 libzstd1 locales procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-7" --checksum d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql" "14.3.0-2" --checksum 8e3c3c2328cda6c04a67644d524e9b9ec321bd3dfdd46bfad7ab507eafc6732a
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql" "14.3.0-3" --checksum 399a43d6765c0744198580aefba99dc8fc56b0ec9ac0c1670eaba5f2b38c88dd
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
