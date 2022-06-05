@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`18`, `18-debian-10`, `18.0.0`, `18.0.0-debian-10-r9`, `latest` (18/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/18.0.0-debian-10-r9/18/debian-10/Dockerfile)
-* [`17`, `17-debian-10`, `17.0.1`, `17.0.1-debian-10-r14` (17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/17.0.1-debian-10-r14/17/debian-10/Dockerfile)
+* [`17`, `17-debian-10`, `17.0.1`, `17.0.1-debian-10-r15` (17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/17.0.1-debian-10-r15/17/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak).
 
