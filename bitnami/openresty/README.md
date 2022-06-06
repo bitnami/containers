@@ -37,8 +37,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.21`, `1.21-debian-10`, `1.21.4-1`, `1.21.4-1-debian-10-r9` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openresty/blob/1.21.4-1-debian-10-r9/1.21/debian-10/Dockerfile)
-* [`1.19`, `1.19-debian-10`, `1.19.9-1`, `1.19.9-1-debian-10-r293`, `latest` (1.19/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-openresty/blob/1.19.9-1-debian-10-r293/1.19/debian-10/Dockerfile)
+* [`1.21`, `1.21-debian-11`, `1.21.4-1`, `1.21.4-1-debian-11-r-1` (1.21/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-openresty/blob/1.21.4-1-debian-11-r-1/1.21/debian-11/Dockerfile)
+* [`1.19`, `1.19-debian-11`, `1.19.9-1`, `1.19.9-1-debian-11-r0`, `latest` (1.19/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-openresty/blob/1.19.9-1-debian-11-r0/1.19/debian-11/Dockerfile)
 
 ## Get this image
 
@@ -59,7 +59,7 @@ $ docker pull bitnami/openresty:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/openresty:latest 'https://github.com/bitnami/bitnami-docker-openresty.git#master:1.19/debian-10'
+$ docker build -t bitnami/openresty:latest 'https://github.com/bitnami/bitnami-docker-openresty.git#master:1.19/debian-11'
 ```
 
 ## Hosting a static website
