@@ -1,0 +1,5 @@
+version: '2'
+
+services:
+  dex:
+    image: docker.io/bitnami/dex:2
