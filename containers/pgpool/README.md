@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-10`, `4.3.2`, `4.3.2-debian-10-r15`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.3.2-debian-10-r15/4/debian-10/Dockerfile)
+* [`4`, `4-debian-11`, `4.3.2`, `4.3.2-debian-11-r0`, `latest` (4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgpool/blob/4.3.2-debian-11-r0/4/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pgpool GitHub repo](https://github.com/bitnami/bitnami-docker-pgpool).
 
@@ -64,7 +64,7 @@ $ docker pull bitnami/pgpool:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/pgpool:latest 'https://github.com/bitnami/bitnami-docker-pgpool.git#master:4/debian-10'
+$ docker build -t bitnami/pgpool:latest 'https://github.com/bitnami/bitnami-docker-pgpool.git#master:4/debian-11'
 ```
 
 ## Connecting to other containers
