@@ -47,9 +47,9 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4.0`, `4.0-debian-10`, `4.0.4`, `4.0.4-debian-10-r17`, `latest` (4.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/4.0.4-debian-10-r17/4.0/debian-10/Dockerfile)
-* [`3.11`, `3.11-debian-10`, `3.11.13`, `3.11.13-debian-10-r20` (3.11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.13-debian-10-r20/3.11/debian-10/Dockerfile)
-* [`3.0`, `3.0-debian-10`, `3.0.27`, `3.0.27-debian-10-r19` (3.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.0.27-debian-10-r19/3.0/debian-10/Dockerfile)
+* [`4.0`, `4.0-debian-11`, `4.0.4`, `4.0.4-debian-11-r-1`, `latest` (4.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/4.0.4-debian-11-r-1/4.0/debian-11/Dockerfile)
+* [`3.11`, `3.11-debian-11`, `3.11.13`, `3.11.13-debian-11-r-1` (3.11/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.13-debian-11-r-1/3.11/debian-11/Dockerfile)
+* [`3.0`, `3.0-debian-11`, `3.0.27`, `3.0.27-debian-11-r0` (3.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.0.27-debian-11-r0/3.0/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cassandra GitHub repo](https://github.com/bitnami/bitnami-docker-cassandra).
 
@@ -70,7 +70,7 @@ $ docker pull bitnami/cassandra:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/cassandra:latest 'https://github.com/bitnami/bitnami-docker-cassandra.git#master:4.0/debian-10'
+$ docker build -t bitnami/cassandra:latest 'https://github.com/bitnami/bitnami-docker-cassandra.git#master:4.0/debian-11'
 ```
 
 ## Persisting your application
