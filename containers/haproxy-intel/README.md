@@ -35,7 +35,7 @@ Optimized containers fully leverage 3rd gen Intel(R) Xeon(R) Scalable Processor 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.6.0`, `2.6.0-debian-10-r5`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-haproxy-intel/blob/2.6.0-debian-10-r5/2/debian-10/Dockerfile)
+* [`2`, `2-debian-11`, `2.6.0`, `2.6.0-debian-11-r0`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-haproxy-intel/blob/2.6.0-debian-11-r0/2/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/haproxy-intel GitHub repo](https://github.com/bitnami/bitnami-docker-haproxy-intel).
 
@@ -56,7 +56,7 @@ $ docker pull bitnami/haproxy-intel:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/haproxy-intel:latest 'https://github.com/bitnami/bitnami-docker-haproxy-intel.git#master:2/debian-10'
+$ docker build -t bitnami/haproxy-intel:latest 'https://github.com/bitnami/bitnami-docker-haproxy-intel.git#master:2/debian-11'
 ```
 
 ## Why use a non-root container?
