@@ -39,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-10`, `3.2.2`, `3.2.2-debian-10-r16`, `latest` (3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-couchdb/blob/3.2.2-debian-10-r16/3/debian-10/Dockerfile)
+* [`3`, `3-debian-11`, `3.2.2`, `3.2.2-debian-11-r0`, `latest` (3/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-couchdb/blob/3.2.2-debian-11-r0/3/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/couchdb GitHub repo](https://github.com/bitnami/bitnami-docker-couchdb).
 
@@ -60,7 +60,7 @@ $ docker pull bitnami/couchdb:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/couchdb:latest 'https://github.com/bitnami/bitnami-docker-couchdb.git#master:3/debian-10'
+$ docker build -t bitnami/couchdb:latest 'https://github.com/bitnami/bitnami-docker-couchdb.git#master:3/debian-11'
 ```
 
 ## Persisting your application
