@@ -42,7 +42,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.12.0`, `1.12.0-debian-10-r3`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-inc-intel/blob/1.12.0-debian-10-r3/1/debian-10/Dockerfile)
+* [`1`, `1-debian-11`, `1.12.0`, `1.12.0-debian-11-r0`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-inc-intel/blob/1.12.0-debian-11-r0/1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/inc-intel GitHub repo](https://github.com/bitnami/bitnami-docker-inc-intel).
 
@@ -63,7 +63,7 @@ $ docker pull bitnami/inc-intel:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/inc-intel 'https://github.com/bitnami/bitnami-docker-inc-intel.git#master:1/debian-10'
+$ docker build -t bitnami/inc-intel 'https://github.com/bitnami/bitnami-docker-inc-intel.git#master:1/debian-11'
 ```
 
 ## Entering the REPL
