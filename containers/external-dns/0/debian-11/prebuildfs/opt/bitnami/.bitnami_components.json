@@ -1,0 +1,9 @@
+{
+    "external-dns": {
+        "arch": "amd64",
+        "digest": "340b59b973f23d00cb987b093378b1d3403fb572a727b2ea4f3bffeb28862cf6",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "0.12.0-0"
+    }
+}
