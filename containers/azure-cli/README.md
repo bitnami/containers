@@ -28,7 +28,7 @@ $ docker run --name azure-cli bitnami/azure-cli:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.37.0`, `2.37.0-debian-10-r12`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-azure-cli/blob/2.37.0-debian-10-r12/2/debian-10/Dockerfile)
+* [`2`, `2-debian-11`, `2.37.0`, `2.37.0-debian-11-r0`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-azure-cli/blob/2.37.0-debian-11-r0/2/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/azure-cli GitHub repo](https://github.com/bitnami/bitnami-docker-azure-cli).
 
@@ -49,7 +49,7 @@ $ docker pull bitnami/azure-cli:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/azure-cli:latest 'https://github.com/bitnami/bitnami-docker-azure-cli.git#master:2/debian-10'
+$ docker build -t bitnami/azure-cli:latest 'https://github.com/bitnami/bitnami-docker-azure-cli.git#master:2/debian-11'
 ```
 
 ## Configuration
