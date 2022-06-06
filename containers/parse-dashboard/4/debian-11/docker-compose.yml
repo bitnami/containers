@@ -1,0 +1,6 @@
+version: '2'
+services:
+  parse-dashboard:
+    image: docker.io/bitnami/parse-dashboard:4
+    # Overriding entrypoint so the container does not exit and we can run some basic tests
+    entrypoint: tail -f /dev/null
