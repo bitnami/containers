@@ -39,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.11.0`, `1.11.0-debian-10-r69`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pytorch/blob/1.11.0-debian-10-r69/1/debian-10/Dockerfile)
+* [`1`, `1-debian-11`, `1.11.0`, `1.11.0-debian-11-r0`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-pytorch/blob/1.11.0-debian-11-r0/1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pytorch GitHub repo](https://github.com/bitnami/bitnami-docker-pytorch).
 
@@ -60,7 +60,7 @@ $ docker pull bitnami/pytorch:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/pytorch 'https://github.com/bitnami/bitnami-docker-pytorch.git#master:1/debian-10'
+$ docker build -t bitnami/pytorch 'https://github.com/bitnami/bitnami-docker-pytorch.git#master:1/debian-11'
 ```
 
 ## Entering the REPL
