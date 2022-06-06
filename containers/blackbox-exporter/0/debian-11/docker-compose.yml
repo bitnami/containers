@@ -1,0 +1,5 @@
+version: '2'
+
+services:
+  blackbox-exporter:
+    image: docker.io/bitnami/blackbox-exporter:0
