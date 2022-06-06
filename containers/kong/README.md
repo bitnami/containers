@@ -39,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.8.1`, `2.8.1-debian-10-r57`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong/blob/2.8.1-debian-10-r57/2/debian-10/Dockerfile)
+* [`2`, `2-debian-11`, `2.8.1`, `2.8.1-debian-11-r0`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kong/blob/2.8.1-debian-11-r0/2/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kong GitHub repo](https://github.com/bitnami/bitnami-docker-kong).
 
@@ -60,7 +60,7 @@ $ docker pull bitnami/kong:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/kong:latest 'https://github.com/bitnami/bitnami-docker-kong.git#master:2/debian-10'
+$ docker build -t bitnami/kong:latest 'https://github.com/bitnami/bitnami-docker-kong.git#master:2/debian-11'
 ```
 
 ## Connecting to other containers
