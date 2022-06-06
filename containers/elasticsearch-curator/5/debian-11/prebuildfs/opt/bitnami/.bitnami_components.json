@@ -1,0 +1,16 @@
+{
+    "elasticsearch-curator": {
+        "arch": "amd64",
+        "digest": "f2ff273861ddd249dda1cdde4f5caed15ed47cfb445dafa51e4d084775385f73",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "5.8.4-0"
+    },
+    "python": {
+        "arch": "amd64",
+        "digest": "30a95e9a200ac61754319a6ef764709a3c2e08f6fe21433bf935038f7308a7fb",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "3.9.13-0"
+    }
+}
