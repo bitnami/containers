@@ -35,11 +35,11 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.10`, `3.10-debian-10`, `3.10.4`, `3.10.4-debian-10-r69`, `latest` (3.10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.10.4-debian-10-r69/3.10/debian-10/Dockerfile)
-* [`3.9`, `3.9-debian-10`, `3.9.13`, `3.9.13-debian-10-r17` (3.9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.9.13-debian-10-r17/3.9/debian-10/Dockerfile)
-* [`3.8`, `3.8-debian-10`, `3.8.13`, `3.8.13-debian-10-r79` (3.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.13-debian-10-r79/3.8/debian-10/Dockerfile)
-* [`3.7`, `3.7-debian-10`, `3.7.13`, `3.7.13-debian-10-r80` (3.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.13-debian-10-r80/3.7/debian-10/Dockerfile)
-* [`2`, `2-debian-10`, `2.7.18`, `2.7.18-debian-10-r732` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.18-debian-10-r732/2/debian-10/Dockerfile)
+* [`3.10`, `3.10-debian-11`, `3.10.4`, `3.10.4-debian-11-r0`, `latest` (3.10/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.10.4-debian-11-r0/3.10/debian-11/Dockerfile)
+* [`3.9`, `3.9-debian-11`, `3.9.13`, `3.9.13-debian-11-r-1` (3.9/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.9.13-debian-11-r-1/3.9/debian-11/Dockerfile)
+* [`3.8`, `3.8-debian-11`, `3.8.13`, `3.8.13-debian-11-r-1` (3.8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.13-debian-11-r-1/3.8/debian-11/Dockerfile)
+* [`3.7`, `3.7-debian-11`, `3.7.13`, `3.7.13-debian-11-r-1` (3.7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.13-debian-11-r-1/3.7/debian-11/Dockerfile)
+* [`2`, `2-debian-11`, `2.7.18`, `2.7.18-debian-11-r-1` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.18-debian-11-r-1/2/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/python GitHub repo](https://github.com/bitnami/bitnami-docker-python).
 
@@ -72,7 +72,7 @@ $ docker pull bitnami/python:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/python 'https://github.com/bitnami/bitnami-docker-python.git#master:3.10/debian-10'
+$ docker build -t bitnami/python 'https://github.com/bitnami/bitnami-docker-python.git#master:3.10/debian-11'
 ```
 
 ## Entering the REPL
