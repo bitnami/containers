@@ -32,7 +32,7 @@ $ docker run --name wavefront-adapter-for-istio bitnami/wavefront-adapter-for-is
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-10`, `0.1.5`, `0.1.5-debian-10-r409`, `latest` (0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-adapter-for-istio/blob/0.1.5-debian-10-r409/0/debian-10/Dockerfile)
+* [`0`, `0-debian-11`, `0.1.5`, `0.1.5-debian-11-r0`, `latest` (0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-adapter-for-istio/blob/0.1.5-debian-11-r0/0/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wavefront-adapter-for-istio GitHub repo](https://github.com/bitnami/bitnami-docker-wavefront-adapter-for-istio).
 
@@ -53,7 +53,7 @@ $ docker pull bitnami/wavefront-adapter-for-istio:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/wavefront-adapter-for-istio:latest 'https://github.com/bitnami/bitnami-docker-wavefront-adapter-for-istio.git#master:0/debian-10'
+$ docker build -t bitnami/wavefront-adapter-for-istio:latest 'https://github.com/bitnami/bitnami-docker-wavefront-adapter-for-istio.git#master:0/debian-11'
 ```
 
 ## Why use a non-root container?

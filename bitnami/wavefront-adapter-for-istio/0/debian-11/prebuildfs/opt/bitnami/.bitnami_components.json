@@ -1,0 +1,9 @@
+{
+    "wavefront-adapter-for-istio": {
+        "arch": "amd64",
+        "digest": "cec34ae877091421277c1d43bd2bef9db8eeae2915f1188f9c266145c67de65d",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "0.1.5-0"
+    }
+}
