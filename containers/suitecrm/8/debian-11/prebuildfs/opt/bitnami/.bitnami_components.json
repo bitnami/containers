@@ -29,10 +29,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "d38fb355bfac2af98f7020f09a6421bfeaaf4ec34aaeaccaf398aca1dd0984ed",
+        "digest": "f5efd4a0d34dec3ca4d78c6e00300015ff319edbf574467a81ee9c95bc4d241a",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.19-2"
+        "version": "8.0.19-3"
     },
     "render-template": {
         "arch": "amd64",
@@ -43,9 +43,9 @@
     },
     "suitecrm": {
         "arch": "amd64",
-        "digest": "bb715d3e0a14413231bb187cab6d5962993a37470609b8ad18833aeb3385d62a",
+        "digest": "ba3ac5a0c9ef60748ce73a541c9d3495a695ce075e14c70ef7c78b97d28b53df",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.1-0"
+        "version": "8.1.2-0"
     }
 }
