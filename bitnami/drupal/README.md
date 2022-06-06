@@ -41,7 +41,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`9`, `9-debian-10`, `9.3.15`, `9.3.15-debian-10-r4`, `latest` (9/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/9.3.15-debian-10-r4/9/debian-10/Dockerfile)
+* [`9`, `9-debian-11`, `9.3.15`, `9.3.15-debian-11-r0`, `latest` (9/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/9.3.15-debian-11-r0/9/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal GitHub repo](https://github.com/bitnami/bitnami-docker-drupal).
 
@@ -62,7 +62,7 @@ $ docker pull bitnami/drupal:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/drupal:latest 'https://github.com/bitnami/bitnami-docker-drupal.git#master:9/debian-10'
+$ docker build -t bitnami/drupal:latest 'https://github.com/bitnami/bitnami-docker-drupal.git#master:9/debian-11'
 ```
 
 ## How to use this image
