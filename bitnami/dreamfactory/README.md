@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`4`, `4-debian-10`, `4.11.0`, `4.11.0-debian-10-r52`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.11.0-debian-10-r52/4/debian-10/Dockerfile)
+- [`4`, `4-debian-11`, `4.11.0`, `4.11.0-debian-11-r0`, `latest` (4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.11.0-debian-11-r0/4/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dreamfactory GitHub repo](https://github.com/bitnami/bitnami-docker-dreamfactory).
 
@@ -56,7 +56,7 @@ $ docker pull bitnami/dreamfactory:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/dreamfactory:latest 'https://github.com/bitnami/bitnami-docker-dreamfactory.git#master:4/debian-10'
+$ docker build -t bitnami/dreamfactory:latest 'https://github.com/bitnami/bitnami-docker-dreamfactory.git#master:4/debian-11'
 ```
 
 ## How to use this image
