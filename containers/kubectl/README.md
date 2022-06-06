@@ -28,10 +28,10 @@ $ docker run --name kubectl bitnami/kubectl:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.24`, `1.24-debian-10`, `1.24.1`, `1.24.1-debian-10-r10`, `latest` (1.24/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.24.1-debian-10-r10/1.24/debian-10/Dockerfile)
-* [`1.23`, `1.23-debian-10`, `1.23.7`, `1.23.7-debian-10-r10` (1.23/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.23.7-debian-10-r10/1.23/debian-10/Dockerfile)
-* [`1.22`, `1.22-debian-10`, `1.22.10`, `1.22.10-debian-10-r10` (1.22/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.22.10-debian-10-r10/1.22/debian-10/Dockerfile)
-* [`1.21`, `1.21-debian-10`, `1.21.13`, `1.21.13-debian-10-r11` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.21.13-debian-10-r11/1.21/debian-10/Dockerfile)
+* [`1.24`, `1.24-debian-11`, `1.24.1`, `1.24.1-debian-11-r-1`, `latest` (1.24/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.24.1-debian-11-r-1/1.24/debian-11/Dockerfile)
+* [`1.23`, `1.23-debian-11`, `1.23.7`, `1.23.7-debian-11-r0` (1.23/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.23.7-debian-11-r0/1.23/debian-11/Dockerfile)
+* [`1.22`, `1.22-debian-11`, `1.22.10`, `1.22.10-debian-11-r-1` (1.22/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.22.10-debian-11-r-1/1.22/debian-11/Dockerfile)
+* [`1.21`, `1.21-debian-11`, `1.21.13`, `1.21.13-debian-11-r-1` (1.21/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.21.13-debian-11-r-1/1.21/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubectl GitHub repo](https://github.com/bitnami/bitnami-docker-kubectl).
 
@@ -52,7 +52,7 @@ $ docker pull bitnami/kubectl:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/kubectl:latest 'https://github.com/bitnami/bitnami-docker-kubectl.git#master:1.24/debian-10'
+$ docker build -t bitnami/kubectl:latest 'https://github.com/bitnami/bitnami-docker-kubectl.git#master:1.24/debian-11'
 ```
 
 ## Configuration
