@@ -1,0 +1,30 @@
+{
+    "gosu": {
+        "arch": "amd64",
+        "digest": "da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.14.0-0"
+    },
+    "harbor": {
+        "arch": "amd64",
+        "digest": "1e0dda729ac9c62657dacfa1c18234adc8fab84842892fc450f8e538da891af2",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "2.5.1-0"
+    },
+    "nginx": {
+        "arch": "amd64",
+        "digest": "87dbf69bc5beb55529a719be21778a067853036ebac4f42d2106cf2f35717757",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.22.0-0"
+    },
+    "render-template": {
+        "arch": "amd64",
+        "digest": "8b992a5ee513c5eaca52b19232b21a93588ddf4c4850be4d47c6f19b11d1d90a",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.3-1"
+    }
+}
