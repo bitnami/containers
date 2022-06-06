@@ -51,12 +51,12 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10.7`, `10.7-debian-10`, `10.7.4`, `10.7.4-debian-10-r16`, `latest` (10.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.7.4-debian-10-r16/10.7/debian-10/Dockerfile)
-* [`10.6`, `10.6-debian-10`, `10.6.8`, `10.6.8-debian-10-r15` (10.6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.6.8-debian-10-r15/10.6/debian-10/Dockerfile)
-* [`10.5`, `10.5-debian-10`, `10.5.16`, `10.5.16-debian-10-r15` (10.5/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.5.16-debian-10-r15/10.5/debian-10/Dockerfile)
-* [`10.4`, `10.4-debian-10`, `10.4.25`, `10.4.25-debian-10-r15` (10.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.25-debian-10-r15/10.4/debian-10/Dockerfile)
-* [`10.3`, `10.3-debian-10`, `10.3.35`, `10.3.35-debian-10-r14` (10.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.35-debian-10-r14/10.3/debian-10/Dockerfile)
-* [`10.2`, `10.2-debian-10`, `10.2.44`, `10.2.44-debian-10-r14` (10.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.44-debian-10-r14/10.2/debian-10/Dockerfile)
+* [`10.7`, `10.7-debian-11`, `10.7.4`, `10.7.4-debian-11-r-1`, `latest` (10.7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.7.4-debian-11-r-1/10.7/debian-11/Dockerfile)
+* [`10.6`, `10.6-debian-11`, `10.6.8`, `10.6.8-debian-11-r-1` (10.6/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.6.8-debian-11-r-1/10.6/debian-11/Dockerfile)
+* [`10.5`, `10.5-debian-11`, `10.5.16`, `10.5.16-debian-11-r-1` (10.5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.5.16-debian-11-r-1/10.5/debian-11/Dockerfile)
+* [`10.4`, `10.4-debian-11`, `10.4.25`, `10.4.25-debian-11-r-1` (10.4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.25-debian-11-r-1/10.4/debian-11/Dockerfile)
+* [`10.3`, `10.3-debian-11`, `10.3.35`, `10.3.35-debian-11-r-1` (10.3/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.35-debian-11-r-1/10.3/debian-11/Dockerfile)
+* [`10.2`, `10.2-debian-11`, `10.2.44`, `10.2.44-debian-11-r0` (10.2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.2.44-debian-11-r0/10.2/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mariadb-galera GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb-galera).
 
