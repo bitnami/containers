@@ -26,7 +26,7 @@ This image is meant to run in a Kubernetes cluster.
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.5.0`, `1.5.0-debian-10-r176`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyterhub/blob/1.5.0-debian-10-r176/1/debian-10/Dockerfile)
+* [`1`, `1-debian-11`, `1.5.0`, `1.5.0-debian-11-r0`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-jupyterhub/blob/1.5.0-debian-11-r0/1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jupyterhub GitHub repo](https://github.com/bitnami/bitnami-docker-jupyterhub).
 
@@ -47,7 +47,7 @@ $ docker pull bitnami/jupyterhub:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/jupyterhub:latest 'https://github.com/bitnami/bitnami-docker-jupyterhub.git#master:1/debian-10'
+$ docker build -t bitnami/jupyterhub:latest 'https://github.com/bitnami/bitnami-docker-jupyterhub.git#master:1/debian-11'
 ```
 
 ## Why use a non-root container?
