@@ -1,0 +1,16 @@
+{
+    "gradle": {
+        "arch": "amd64",
+        "digest": "9ba80663fdba69f72e669ac606be1993eb2b0323e900eb1f46195da30fe9bfa5",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "7.4.2-0"
+    },
+    "java": {
+        "arch": "amd64",
+        "digest": "fe6b65886a6b1f545508e272efbf422054ee030c867f94ebec2f93c5518252de",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "11.0.15-0"
+    }
+}
