@@ -30,14 +30,14 @@ $ docker-compose up -d
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami SuiteCRM Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/suitecrm).
 
-Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
 
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8`, `8-debian-11`, `8.1.1`, `8.1.1-debian-11-r0`, `latest` (8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/8.1.1-debian-11-r0/8/debian-11/Dockerfile)
+* [`8`, `8-debian-11`, `8.1.2`, `8.1.2-debian-11-r0`, `latest` (8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/8.1.2-debian-11-r0/8/debian-11/Dockerfile)
 * [`7`, `7-debian-11`, `7.12.6`, `7.12.6-debian-11-r0` (7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.12.6-debian-11-r0/7/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/suitecrm GitHub repo](https://github.com/bitnami/bitnami-docker-suitecrm).
