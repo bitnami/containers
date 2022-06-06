@@ -32,7 +32,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-10`, `7.3.0`, `7.3.0-debian-10-r6`, `latest` (7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/7.3.0-debian-10-r6/7/debian-10/Dockerfile)
+* [`7`, `7-debian-11`, `7.3.0`, `7.3.0-debian-11-r0`, `latest` (7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/7.3.0-debian-11-r0/7/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/oauth2-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-oauth2-proxy).
 
@@ -53,7 +53,7 @@ $ docker pull bitnami/oauth2-proxy:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/oauth2-proxy:latest 'https://github.com/bitnami/bitnami-docker-oauth2-proxy.git#master:7/debian-10'
+$ docker build -t bitnami/oauth2-proxy:latest 'https://github.com/bitnami/bitnami-docker-oauth2-proxy.git#master:7/debian-11'
 ```
 
 ## Connecting to other containers
