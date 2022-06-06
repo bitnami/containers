@@ -1,0 +1,65 @@
+{
+    "bower": {
+        "arch": "amd64",
+        "digest": "fe6732dcbca8e51e4eb42bbbb1a19b993735310297525f0fac21bed647b48089",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.8.12-0"
+    },
+    "express": {
+        "arch": "amd64",
+        "digest": "29acf14df27beed3926c87ed3c683bff0b8a98f37cf7cc26585777f51f9428a4",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "4.18.1-0"
+    },
+    "express-generator": {
+        "arch": "amd64",
+        "digest": "44c076bd2dadd1901637f1f46112f7b36bd548887dcd7b7aab480d743fed05d5",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "4.16.1-0"
+    },
+    "git": {
+        "arch": "amd64",
+        "digest": "c15ff3fff7478e74922d560c5c4ffcb8d11bff92975f81591b62742902edd731",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "2.36.1-0"
+    },
+    "gosu": {
+        "arch": "amd64",
+        "digest": "da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.14.0-0"
+    },
+    "node": {
+        "arch": "amd64",
+        "digest": "97cffecfb637e5758197e4eb14d50b42048768eba242da4b534f1d8bacbd6958",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "14.19.3-0"
+    },
+    "python": {
+        "arch": "amd64",
+        "digest": "79af9dcbaa89c4047d2d24b4a4c2ae17b771fe94972734379b9e50ef3dec3442",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "3.8.13-1"
+    },
+    "sequelize-cli": {
+        "arch": "amd64",
+        "digest": "ddbe9550efc4b8b1d0d4a85c846b05ea7ea30a868835a76e0c00e102d0ab4252",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "6.4.1-0"
+    },
+    "wait-for-port": {
+        "arch": "amd64",
+        "digest": "1013e2ebbe58e5dc8f3c79fc952f020fc5306ba48463803cacfbed7779173924",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.3-0"
+    }
+}
