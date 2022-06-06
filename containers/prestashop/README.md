@@ -30,7 +30,7 @@ $ docker-compose up -d
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami PrestaShop Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/prestashop).
 
-Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
 
 ## Why use a non-root container?
 
@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.7`, `1.7-debian-10`, `1.7.8-6`, `1.7.8-6-debian-10-r10`, `latest` (1.7/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.8-6-debian-10-r10/1.7/debian-10/Dockerfile)
+* [`1.7`, `1.7-debian-11`, `1.7.8-6`, `1.7.8-6-debian-11-r0`, `latest` (1.7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.8-6-debian-11-r0/1.7/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prestashop GitHub repo](https://github.com/bitnami/bitnami-docker-prestashop).
 
@@ -62,7 +62,7 @@ $ docker pull bitnami/prestashop:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/prestashop:latest 'https://github.com/bitnami/bitnami-docker-prestashop.git#master:1.7/debian-10'
+$ docker build -t bitnami/prestashop:latest 'https://github.com/bitnami/bitnami-docker-prestashop.git#master:1.7/debian-11'
 ```
 
 ## How to use this image
