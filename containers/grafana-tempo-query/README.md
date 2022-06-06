@@ -28,7 +28,7 @@ $ docker run --name grafana-tempo-query bitnami/grafana-tempo-query:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.4.1`, `1.4.1-debian-10-r29`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-tempo-query/blob/1.4.1-debian-10-r29/1/debian-10/Dockerfile)
+* [`1`, `1-debian-11`, `1.4.1`, `1.4.1-debian-11-r0`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana-tempo-query/blob/1.4.1-debian-11-r0/1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana-tempo-query GitHub repo](https://github.com/bitnami/bitnami-docker-grafana-tempo-query).
 
@@ -49,7 +49,7 @@ $ docker pull bitnami/grafana-tempo-query:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/grafana-tempo-query:latest 'https://github.com/bitnami/bitnami-docker-grafana-tempo-query.git#master:1/debian-10'
+$ docker build -t bitnami/grafana-tempo-query:latest 'https://github.com/bitnami/bitnami-docker-grafana-tempo-query.git#master:1/debian-11'
 ```
 
 ## Why use a non-root container?
