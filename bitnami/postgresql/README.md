@@ -47,11 +47,11 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`14`, `14-debian-10`, `14.3.0`, `14.3.0-debian-10-r24`, `latest` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/14.3.0-debian-10-r24/14/debian-10/Dockerfile)
-* [`13`, `13-debian-10`, `13.7.0`, `13.7.0-debian-10-r23` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/13.7.0-debian-10-r23/13/debian-10/Dockerfile)
-* [`12`, `12-debian-10`, `12.11.0`, `12.11.0-debian-10-r23` (12/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.11.0-debian-10-r23/12/debian-10/Dockerfile)
-* [`11`, `11-debian-10`, `11.16.0`, `11.16.0-debian-10-r23` (11/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.16.0-debian-10-r23/11/debian-10/Dockerfile)
-* [`10`, `10-debian-10`, `10.21.0`, `10.21.0-debian-10-r23` (10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.21.0-debian-10-r23/10/debian-10/Dockerfile)
+* [`14`, `14-debian-11`, `14.3.0`, `14.3.0-debian-11-r-1`, `latest` (14/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/14.3.0-debian-11-r-1/14/debian-11/Dockerfile)
+* [`13`, `13-debian-11`, `13.7.0`, `13.7.0-debian-11-r0` (13/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/13.7.0-debian-11-r0/13/debian-11/Dockerfile)
+* [`12`, `12-debian-11`, `12.11.0`, `12.11.0-debian-11-r-1` (12/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.11.0-debian-11-r-1/12/debian-11/Dockerfile)
+* [`11`, `11-debian-11`, `11.16.0`, `11.16.0-debian-11-r-1` (11/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.16.0-debian-11-r-1/11/debian-11/Dockerfile)
+* [`10`, `10-debian-11`, `10.21.0`, `10.21.0-debian-11-r-1` (10/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.21.0-debian-11-r-1/10/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql).
 
@@ -72,7 +72,7 @@ $ docker pull bitnami/postgresql:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/postgresql:latest 'https://github.com/bitnami/bitnami-docker-postgresql.git#master:14/debian-10'
+$ docker build -t bitnami/postgresql:latest 'https://github.com/bitnami/bitnami-docker-postgresql.git#master:14/debian-11'
 ```
 
 ## Persisting your database
