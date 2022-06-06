@@ -355,8 +355,12 @@ magento_initialize() {
         fi
 
         # Perform database schema upgrade
-        info "Upgrading database schema"
-        magento_execute setup:upgrade
+        if ! is_boolean_yes "$MAGENTO_KEEP_STATIC" && [[ "$MAGENTO_MODE" != "production" ]]; then
+            info "Upgrading database schema"
+            magento_execute setup:upgrade
+        else
+            magento_execute setup:upgrade --keep-generated
+        fi
     fi
 
     # Magento includes a command for setting up the cron jobs via the 'cron:install' command
