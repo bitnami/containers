@@ -1,0 +1,6 @@
+version: '2'
+services:
+  rclone:
+    image: docker.io/bitnami/pgpool:4
+    # Overriding entrypoint so the container does not exit and we can run some basic tests
+    entrypoint: tail -f /dev/null
