@@ -1,0 +1,37 @@
+{
+    "cassandra": {
+        "arch": "amd64",
+        "digest": "8685c6860b94c2611ea3fc275d864d93d432a59d5ab5d0a17a62705a5a158d8f",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "4.0.4-0"
+    },
+    "gosu": {
+        "arch": "amd64",
+        "digest": "da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.14.0-0"
+    },
+    "java": {
+        "arch": "amd64",
+        "digest": "02a91d298bbe3bb5d240f635802a50b2970b19eba960c1804b7275f88a944bb3",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.8.333-0"
+    },
+    "python": {
+        "arch": "amd64",
+        "digest": "30a95e9a200ac61754319a6ef764709a3c2e08f6fe21433bf935038f7308a7fb",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "3.9.13-0"
+    },
+    "yq": {
+        "arch": "amd64",
+        "digest": "58fc2dcc9eda8b5e88ef23081c14384a33ac4736d7238d490416fb4c5c633994",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "4.25.2-0"
+    }
+}
