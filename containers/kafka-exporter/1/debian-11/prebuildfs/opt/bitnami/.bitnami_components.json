@@ -1,0 +1,9 @@
+{
+    "kafka-exporter": {
+        "arch": "amd64",
+        "digest": "397d48fad50a90570d94746b0a6adb1dbf1e0322848a92b66631cb1003133149",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.4.2-0"
+    }
+}
