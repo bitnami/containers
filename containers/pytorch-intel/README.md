@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.10`, `1.10-debian-10`, `1.10.2`, `1.10.2-debian-10-r42`, `latest` (1.10/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-pytorch-intel/blob/1.10.2-debian-10-r42/1.10/debian-10/Dockerfile)
+* [`1.10`, `1.10-debian-11`, `1.10.2`, `1.10.2-debian-11-r0`, `latest` (1.10/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-pytorch-intel/blob/1.10.2-debian-11-r0/1.10/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pytorch-intel GitHub repo](https://github.com/bitnami/bitnami-docker-pytorch-intel).
 
@@ -64,7 +64,7 @@ $ docker pull bitnami/pytorch-intel:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/pytorch-intel 'https://github.com/bitnami/bitnami-docker-pytorch-intel.git#master:1.10/debian-10'
+$ docker build -t bitnami/pytorch-intel 'https://github.com/bitnami/bitnami-docker-pytorch-intel.git#master:1.10/debian-11'
 ```
 
 ## Entering the REPL
