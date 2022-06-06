@@ -1,0 +1,65 @@
+{
+    "brotli": {
+        "arch": "amd64",
+        "digest": "315d4718cd711e7babbb6e490ed06c09f4e34a0dbc584a3ce17d35c8cbac99c8",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.9-0"
+    },
+    "discourse": {
+        "arch": "amd64",
+        "digest": "2346efa6d0322b4a64bd458cf36295ce8c2e19a927714fdfe92d87aefb910a97",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "2.8.3-0"
+    },
+    "git": {
+        "arch": "amd64",
+        "digest": "c15ff3fff7478e74922d560c5c4ffcb8d11bff92975f81591b62742902edd731",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "2.36.1-0"
+    },
+    "gosu": {
+        "arch": "amd64",
+        "digest": "da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.14.0-0"
+    },
+    "node": {
+        "arch": "amd64",
+        "digest": "97cffecfb637e5758197e4eb14d50b42048768eba242da4b534f1d8bacbd6958",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "14.19.3-0"
+    },
+    "postgresql-client": {
+        "arch": "amd64",
+        "digest": "ff80edd08ce09e9425b73764d44354641073f0cf1eb8a5aeab64222cbe68d8a8",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "13.7.0-0"
+    },
+    "python": {
+        "arch": "amd64",
+        "digest": "79af9dcbaa89c4047d2d24b4a4c2ae17b771fe94972734379b9e50ef3dec3442",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "3.8.13-1"
+    },
+    "ruby": {
+        "arch": "amd64",
+        "digest": "4517967d38c836fa718978c1cd8527c4f22fbda7b06c81f7d78c5435a983a49f",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "2.7.6-0"
+    },
+    "wait-for-port": {
+        "arch": "amd64",
+        "digest": "1013e2ebbe58e5dc8f3c79fc952f020fc5306ba48463803cacfbed7779173924",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.3-0"
+    }
+}
