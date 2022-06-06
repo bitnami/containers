@@ -28,7 +28,7 @@ $ docker run --name wavefront-prometheus-storage-adapter bitnami/wavefront-prome
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-10`, `1.0.5`, `1.0.5-debian-10-r194`, `latest` (1/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-prometheus-storage-adapter/blob/1.0.5-debian-10-r194/1/debian-10/Dockerfile)
+* [`1`, `1-debian-11`, `1.0.5`, `1.0.5-debian-11-r0`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-prometheus-storage-adapter/blob/1.0.5-debian-11-r0/1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wavefront-prometheus-storage-adapter GitHub repo](https://github.com/bitnami/bitnami-docker-wavefront-prometheus-storage-adapter).
 
@@ -49,7 +49,7 @@ $ docker pull bitnami/wavefront-prometheus-storage-adapter:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/wavefront-prometheus-storage-adapter:latest 'https://github.com/bitnami/bitnami-docker-wavefront-prometheus-storage-adapter.git#master:1/debian-10'
+$ docker build -t bitnami/wavefront-prometheus-storage-adapter:latest 'https://github.com/bitnami/bitnami-docker-wavefront-prometheus-storage-adapter.git#master:1/debian-11'
 ```
 
 ## Why use a non-root container?
