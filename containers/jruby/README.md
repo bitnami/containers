@@ -35,7 +35,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`9.3`, `9.3-debian-10`, `9.3.4-0`, `9.3.4-0-debian-10-r72`, `latest` (9.3/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-jruby/blob/9.3.4-0-debian-10-r72/9.3/debian-10/Dockerfile)
+* [`9.3`, `9.3-debian-11`, `9.3.4-0`, `9.3.4-0-debian-11-r0`, `latest` (9.3/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-jruby/blob/9.3.4-0-debian-11-r0/9.3/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/jruby GitHub repo](https://github.com/bitnami/bitnami-docker-jruby).
 
@@ -56,7 +56,7 @@ $ docker pull bitnami/jruby:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/jruby:latest 'https://github.com/bitnami/bitnami-docker-jruby.git#master:9.3/debian-10'
+$ docker build -t bitnami/jruby:latest 'https://github.com/bitnami/bitnami-docker-jruby.git#master:9.3/debian-11'
 ```
 
 ## Entering the JRuby Interactive Console
