@@ -30,7 +30,7 @@ $ docker-compose up -d
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Ghost Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/ghost).
 
-Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
 
 ## Why use a non-root container?
 
@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`5`, `5-debian-11`, `5.2.2`, `5.2.2-debian-11-r0`, `latest` (5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/5.2.2-debian-11-r0/5/debian-11/Dockerfile)
+- [`5`, `5-debian-11`, `5.2.2`, `5.2.2-debian-11-r1`, `latest` (5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/5.2.2-debian-11-r1/5/debian-11/Dockerfile)
 - [`4`, `4-debian-11`, `4.48.1`, `4.48.1-debian-11-r0` (4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-ghost/blob/4.48.1-debian-11-r0/4/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/ghost GitHub repo](https://github.com/bitnami/bitnami-docker-ghost).
@@ -68,7 +68,7 @@ $ docker build -t bitnami/ghost:latest 'https://github.com/bitnami/bitnami-docke
 
 ## How to use this image
 
-Ghost requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://www.github.com/bitnami/bitnami-docker-mariadb) for the database requirements.
+Ghost requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MySQL](https://www.github.com/bitnami/bitnami-docker-mysql) for the database requirements.
 
 ### Run the application using Docker Compose
 
@@ -89,18 +89,18 @@ If you want to run the application manually instead of using `docker-compose`, t
 $ docker network create ghost-network
 ```
 
-#### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
+#### Step 2: Create a volume for MySQL persistence and create a MySQL container
 
 ```console
-$ docker volume create --name mariadb_data
-$ docker run -d --name mariadb \
+$ docker volume create --name mysql_data
+$ docker run -d --name mysql \
   --env ALLOW_EMPTY_PASSWORD=yes \
-  --env MARIADB_USER=bn_ghost \
-  --env MARIADB_PASSWORD=bitnami \
-  --env MARIADB_DATABASE=bitnami_ghost \
+  --env MYSQL_USER=bn_ghost \
+  --env MYSQL_PASSWORD=bitnami \
+  --env MYSQL_DATABASE=bitnami_ghost \
   --network ghost-network \
-  --volume mariadb_data:/bitnami/mariadb \
-  bitnami/mariadb:latest
+  --volume mysql_data:/bitnami/mysql \
+  bitnami/mysql:latest
 ```
 
 #### Step 3: Create volumes for Ghost persistence and launch the container
@@ -124,9 +124,9 @@ Access your application at `http://your-ip/`
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a directory at the `/bitnami/ghost` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should [mount a volume for persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
+For persistence you should mount a directory at the `/bitnami/ghost` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should [mount a volume for persistence of the MySQL data](https://github.com/bitnami/bitnami-docker-mysql#persisting-your-database).
 
-The above examples define the Docker volumes named `mariadb_data` and `ghost_data`. The Ghost application state will persist as long as volumes are not removed.
+The above examples define the Docker volumes named `mysql_data` and `ghost_data`. The Ghost application state will persist as long as volumes are not removed.
 
 To avoid inadvertent removal of volumes, you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
@@ -135,11 +135,11 @@ To avoid inadvertent removal of volumes, you can [mount host directories as data
 This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-ghost/blob/master/docker-compose.yml) file present in this repository:
 
 ```diff
-   mariadb:
+   mysql:
      ...
      volumes:
--      - 'mariadb_data:/bitnami/mariadb'
-+      - /path/to/mariadb-persistence:/bitnami/mariadb
+-      - 'mysql_data:/bitnami/mysql'
++      - /path/to/mysql-persistence:/bitnami/mysql
    ...
    ghost:
      ...
@@ -148,7 +148,7 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 +      - /path/to/ghost-persistence:/bitnami/ghost
    ...
 -volumes:
--  mariadb_data:
+-  mysql_data:
 -    driver: local
 -  ghost_data:
 -    driver: local
@@ -164,17 +164,17 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 $ docker network create ghost-network
 ```
 
-#### Step 2. Create a MariaDB container with host volume
+#### Step 2. Create a MySQL container with host volume
 
 ```console
-$ docker run -d --name mariadb \
+$ docker run -d --name mysql \
   --env ALLOW_EMPTY_PASSWORD=yes \
-  --env MARIADB_USER=bn_ghost \
-  --env MARIADB_PASSWORD=bitnami \
-  --env MARIADB_DATABASE=bitnami_ghost \
+  --env MYSQL_USER=bn_ghost \
+  --env MYSQL_PASSWORD=bitnami \
+  --env MYSQL_DATABASE=bitnami_ghost \
   --network ghost-network \
-  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
-  bitnami/mariadb:latest
+  --volume /path/to/mysql-persistence:/bitnami/mysql \
+  bitnami/mysql:latest
 ```
 
 #### Step 3. Create the Ghost container with host volumes
@@ -234,7 +234,7 @@ Available environment variables:
 
 ##### Database connection configuration
 
-- `GHOST_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
+- `GHOST_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mysql**
 - `GHOST_DATABASE_PORT_NUMBER`: Port used by the MariaDB or MySQL server. Default: **3306**
 - `GHOST_DATABASE_NAME`: Database name that Ghost will use to connect with the database. Default: **bitnami_ghost**
 - `GHOST_DATABASE_USER`: Database user that Ghost will use to connect with the database. Default: **bn_ghost**
@@ -245,7 +245,7 @@ Available environment variables:
 
 ##### Create a database for Ghost using mysql-client
 
-- `MYSQL_CLIENT_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
+- `MYSQL_CLIENT_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mysql**
 - `MYSQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the MariaDB or MySQL server. Default: **3306**
 - `MYSQL_CLIENT_DATABASE_ROOT_USER`: Database admin user. Default: **root**
 - `MYSQL_CLIENT_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No default.
@@ -317,8 +317,8 @@ The Bitnami Ghost container supports connecting the Ghost application to an exte
        ghost:
          ...
          environment:
-    -      - GHOST_DATABASE_HOST=mariadb
-    +      - GHOST_DATABASE_HOST=mariadb_host
+    -      - GHOST_DATABASE_HOST=mysql
+    +      - GHOST_DATABASE_HOST=mysql_host
            - GHOST_DATABASE_PORT_NUMBER=3306
            - GHOST_DATABASE_NAME=ghost_db
            - GHOST_DATABASE_USER=ghost_user
@@ -333,7 +333,7 @@ The Bitnami Ghost container supports connecting the Ghost application to an exte
     $ docker run -d --name ghost\
       -p 8080:8080 -p 8443:8443 \
       --network ghost-network \
-      --env GHOST_DATABASE_HOST=mariadb_host \
+      --env GHOST_DATABASE_HOST=mysql_host \
       --env GHOST_DATABASE_PORT_NUMBER=3306 \
       --env GHOST_DATABASE_NAME=ghost_db \
       --env GHOST_DATABASE_USER=ghost_user \
@@ -391,14 +391,14 @@ $ docker run --rm -v /path/to/ghost-backups:/backups --volumes-from ghost busybo
 
 Restoring a backup is as simple as mounting the backup as volumes in the containers.
 
-For the MariaDB database container:
+For the MySQL database container:
 
 ```diff
- $ docker run -d --name mariadb \
+ $ docker run -d --name mysql \
    ...
--  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
-+  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
-   bitnami/mariadb:latest
+-  --volume /path/to/mysql-persistence:/bitnami/mysql \
++  --volume /path/to/mysql-backups/latest:/bitnami/mysql \
+   bitnami/mysql:latest
 ```
 
 For the Ghost container:
@@ -413,7 +413,7 @@ For the Ghost container:
 
 ### Upgrade this image
 
-Bitnami provides up-to-date versions of MariaDB and Ghost, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Ghost container. For the MariaDB upgrade see: https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
+Bitnami provides up-to-date versions of MySQL and Ghost, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Ghost container. For the MySQL upgrade see: https://github.com/bitnami/bitnami-docker-mysql/blob/master/README.md#upgrade-this-image
 
 The `bitnami/ghost:latest` tag always points to the most recent release. To get the most recent release you can simple repull the `latest` tag from the Docker Hub with `docker pull bitnami/ghost:latest`. However it is recommended to use [tagged versions](https://hub.docker.com/r/bitnami/ghost/tags/).
 
