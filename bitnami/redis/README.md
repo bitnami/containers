@@ -49,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`7.0`, `7.0-debian-11`, `7.0.0`, `7.0.0-debian-11-r0`, `latest` (7.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/7.0.0-debian-11-r0/7.0/debian-11/Dockerfile)
 * [`6.2`, `6.2-debian-11`, `6.2.7`, `6.2.7-debian-11-r-1` (6.2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.2.7-debian-11-r-1/6.2/debian-11/Dockerfile)
-* [`6.0`, `6.0-debian-11`, `6.0.16`, `6.0.16-debian-11-r-1` (6.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.0.16-debian-11-r-1/6.0/debian-11/Dockerfile)
+* [`6.0`, `6.0-debian-11`, `6.0.16`, `6.0.16-debian-11-r0` (6.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.0.16-debian-11-r0/6.0/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
 
