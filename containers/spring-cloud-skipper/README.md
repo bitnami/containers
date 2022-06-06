@@ -39,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-10`, `2.8.4`, `2.8.4-debian-10-r59`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper/blob/2.8.4-debian-10-r59/2/debian-10/Dockerfile)
+* [`2`, `2-debian-11`, `2.8.4`, `2.8.4-debian-11-r0`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper/blob/2.8.4-debian-11-r0/2/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/spring-cloud-skipper GitHub repo](https://github.com/bitnami/bitnami-docker-spring-cloud-skipper).
 
@@ -60,7 +60,7 @@ $ docker pull bitnami/spring-cloud-skipper:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/spring-cloud-skipper:latest 'https://github.com/bitnami/bitnami-docker-spring-cloud-skipper.git#master:2/debian-10'
+$ docker build -t bitnami/spring-cloud-skipper:latest 'https://github.com/bitnami/bitnami-docker-spring-cloud-skipper.git#master:2/debian-11'
 ```
 
 ## Configuration
