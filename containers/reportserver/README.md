@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`4`, `4-debian-10`, `4.1.0-6063`, `4.1.0-6063-debian-10-r20`, `latest` (4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserver/blob/4.1.0-6063-debian-10-r20/4/debian-10/Dockerfile)
+- [`4`, `4-debian-11`, `4.1.0-6063`, `4.1.0-6063-debian-11-r0`, `latest` (4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserver/blob/4.1.0-6063-debian-11-r0/4/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/reportserver GitHub repo](https://github.com/bitnami/bitnami-docker-reportserver).
 
@@ -56,7 +56,7 @@ $ docker pull bitnami/reportserver:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/reportserver:latest 'https://github.com/bitnami/bitnami-docker-reportserver.git#master:4/debian-10'
+$ docker build -t bitnami/reportserver:latest 'https://github.com/bitnami/bitnami-docker-reportserver.git#master:4/debian-11'
 ```
 
 ## How to use this image
