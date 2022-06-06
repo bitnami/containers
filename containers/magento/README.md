@@ -36,7 +36,8 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
-* [`2`, `2-debian-10`, `2.4.4`, `2.4.4-debian-10-r27`, `latest` (2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.4.4-debian-10-r27/2/debian-10/Dockerfile)
+
+* [`2`, `2-debian-11`, `2.4.4`, `2.4.4-debian-11-r0`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-magento/blob/2.4.4-debian-11-r0/2/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/magento GitHub repo](https://github.com/bitnami/bitnami-docker-magento).
 
@@ -57,7 +58,7 @@ $ docker pull bitnami/magento:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/magento:latest 'https://github.com/bitnami/bitnami-docker-magento.git#master:2/debian-10'
+$ docker build -t bitnami/magento:latest 'https://github.com/bitnami/bitnami-docker-magento.git#master:2/debian-11'
 ```
 
 ## How to use this image
