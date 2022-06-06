@@ -1,0 +1,30 @@
+FROM docker.io/bitnami/minideb:bullseye
+LABEL maintainer "Bitnami <containers@bitnami.com>"
+
+ENV HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-11" \
+    OS_NAME="linux"
+
+COPY prebuildfs /
+# Install required system packages and dependencies
+RUN install_packages acl ca-certificates curl gzip iproute2 ldap-utils libaio1 libaudit1 libc6 libcap-ng0 libcrypt1 libgcc-s1 libicu67 libjemalloc2 libldap-common liblzma5 libncurses6 libnss-ldapd libpam-ldapd libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 nslcd procps psmisc rsync socat tar zlib1g
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.3-0" --checksum ef1f6d1ca9e4873f82cf5037078b55524596ca2755262948f23571767bfd4101
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mariadb-galera" "10.2.44-1" --checksum 3a7b05ac420adc0ccea112118015071ea61ef00a735faef5323a47a6458159b2
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
+RUN apt-get update && apt-get upgrade -y && \
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN chmod g+rwX /opt/bitnami
+RUN mkdir /docker-entrypoint-initdb.d
+
+COPY rootfs /
+RUN /opt/bitnami/scripts/mariadb-galera/postunpack.sh
+ENV APP_VERSION="10.2.44" \
+    BITNAMI_APP_NAME="mariadb-galera" \
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
+
+EXPOSE 3306 4444 4567 4568
+
+USER 1001
+ENTRYPOINT [ "/opt/bitnami/scripts/mariadb-galera/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/mariadb-galera/run.sh" ]
