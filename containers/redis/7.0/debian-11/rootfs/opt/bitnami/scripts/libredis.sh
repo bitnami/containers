@@ -388,6 +388,10 @@ redis_configure_default() {
         cp "${REDIS_MOUNTED_CONF_DIR}/redis.conf" "${REDIS_BASE_DIR}/etc/redis.conf"
     else
         info "Setting Redis config file"
+        if is_boolean_yes "$ALLOW_EMPTY_PASSWORD"; then
+            # Allow remote connections without password
+            redis_conf_set protected-mode no
+        fi
         is_boolean_yes "$REDIS_ALLOW_REMOTE_CONNECTIONS" && redis_conf_set bind "0.0.0.0 ::" # Allow remote connections
         # Enable AOF https://redis.io/topics/persistence#append-only-file
         # Leave default fsync (every second)
