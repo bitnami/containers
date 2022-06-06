@@ -1,0 +1,23 @@
+{
+    "gosu": {
+        "arch": "amd64",
+        "digest": "da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.14.0-0"
+    },
+    "influxdb": {
+        "arch": "amd64",
+        "digest": "40033bb4aab3d50b258ed40f0f62702fb8d2f0367c10a243f4f9b7214193b597",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "2.2.0-0"
+    },
+    "wait-for-port": {
+        "arch": "amd64",
+        "digest": "1013e2ebbe58e5dc8f3c79fc952f020fc5306ba48463803cacfbed7779173924",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.3-0"
+    }
+}
