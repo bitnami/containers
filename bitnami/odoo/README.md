@@ -38,9 +38,9 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`15`, `15-debian-10`, `15.0.20220510`, `15.0.20220510-debian-10-r20`, `latest` (15/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/15.0.20220510-debian-10-r20/15/debian-10/Dockerfile)
-- [`14`, `14-debian-10`, `14.0.20220510`, `14.0.20220510-debian-10-r23` (14/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/14.0.20220510-debian-10-r23/14/debian-10/Dockerfile)
-- [`13`, `13-debian-10`, `13.0.20220510`, `13.0.20220510-debian-10-r17` (13/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20220510-debian-10-r17/13/debian-10/Dockerfile)
+- [`15`, `15-debian-11`, `15.0.20220510`, `15.0.20220510-debian-11-r0`, `latest` (15/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/15.0.20220510-debian-11-r0/15/debian-11/Dockerfile)
+- [`14`, `14-debian-11`, `14.0.20220510`, `14.0.20220510-debian-11-r-1` (14/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/14.0.20220510-debian-11-r-1/14/debian-11/Dockerfile)
+- [`13`, `13-debian-11`, `13.0.20220510`, `13.0.20220510-debian-11-r-1` (13/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20220510-debian-11-r-1/13/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/odoo GitHub repo](https://github.com/bitnami/bitnami-docker-odoo).
 
@@ -61,7 +61,7 @@ $ docker pull bitnami/odoo:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/odoo:latest 'https://github.com/bitnami/bitnami-docker-odoo.git#master:15/debian-10'
+$ docker build -t bitnami/odoo:latest 'https://github.com/bitnami/bitnami-docker-odoo.git#master:15/debian-11'
 ```
 
 ## How to use this image
