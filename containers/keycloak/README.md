@@ -44,8 +44,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`18`, `18-debian-10`, `18.0.0`, `18.0.0-debian-10-r9`, `latest` (18/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/18.0.0-debian-10-r9/18/debian-10/Dockerfile)
-* [`17`, `17-debian-10`, `17.0.1`, `17.0.1-debian-10-r15` (17/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/17.0.1-debian-10-r15/17/debian-10/Dockerfile)
+* [`18`, `18-debian-11`, `18.0.0`, `18.0.0-debian-11-r-1`, `latest` (18/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/18.0.0-debian-11-r-1/18/debian-11/Dockerfile)
+* [`17`, `17-debian-11`, `17.0.1`, `17.0.1-debian-11-r0` (17/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/17.0.1-debian-11-r0/17/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/keycloak GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak).
 
@@ -66,7 +66,7 @@ $ docker pull bitnami/keycloak:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/keycloak:latest 'https://github.com/bitnami/bitnami-docker-keycloak.git#master:18/debian-10'
+$ docker build -t bitnami/keycloak:latest 'https://github.com/bitnami/bitnami-docker-keycloak.git#master:18/debian-11'
 ```
 
 ## Configuration
