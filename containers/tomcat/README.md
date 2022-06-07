@@ -30,7 +30,7 @@ You can find the default credentials and available configuration options in the 
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Apache Apache Tomcat Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/tomcat).
 
-Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
 
 ## Why use a non-root container?
 
@@ -42,7 +42,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`10`, `10-debian-11`, `10.0.21`, `10.0.21-debian-11-r0`, `latest` (10/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/10.0.21-debian-11-r0/10/debian-11/Dockerfile)
-* [`9.0`, `9.0-debian-11`, `9.0.63`, `9.0.63-debian-11-r0` (9.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.63-debian-11-r0/9.0/debian-11/Dockerfile)
+* [`9.0`, `9.0-debian-11`, `9.0.63`, `9.0.63-debian-11-r1` (9.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.63-debian-11-r1/9.0/debian-11/Dockerfile)
 * [`8.5`, `8.5-debian-11`, `8.5.79`, `8.5.79-debian-11-r0` (8.5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.79-debian-11-r0/8.5/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tomcat GitHub repo](https://github.com/bitnami/bitnami-docker-tomcat).
