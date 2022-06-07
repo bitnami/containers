@@ -8,10 +8,10 @@
     },
     "dreamfactory": {
         "arch": "amd64",
-        "digest": "0ca6bf6487beaab72915bcf069829457ba9c1b46f9e6abbdb867c6b4ea9cad21",
+        "digest": "8286cd9b9eeb43feca439f2fe252c0a3eb95689bf5624e2e66961ce0b906ae18",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.11.0-0"
+        "version": "4.11.1-0"
     },
     "git": {
         "arch": "amd64",
@@ -43,10 +43,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "22ef0a218356668b0472405430cc0215ad11044358e3536a53ea8fe693ce6921",
+        "digest": "478c807e2f5c1c67c70188ab590fc5a00ded9566d2d0dca17ef974c3f9ede91a",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.4.29-2"
+        "version": "7.4.29-3"
     },
     "postgresql-client": {
         "arch": "amd64",
