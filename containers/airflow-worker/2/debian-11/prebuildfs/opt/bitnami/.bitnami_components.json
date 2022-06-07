@@ -39,7 +39,7 @@
         "digest": "79af9dcbaa89c4047d2d24b4a4c2ae17b771fe94972734379b9e50ef3dec3442",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.13-1"
+        "version": "3.8.13-2"
     },
     "wait-for-port": {
         "arch": "amd64",
