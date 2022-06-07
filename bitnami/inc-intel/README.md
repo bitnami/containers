@@ -1,12 +1,12 @@
-# Intel Neural Compressor (INC) Container for Intel packaged by Bitnami
+# Intel Neural Compressor packaged by Bitnami
 
 ## What is Intel Neural Compressor?
 
-> Intel® Neural Compressor (INC) is an open-source Python library designed to help optimize inference solutions on popular deep-learning frameworks. It applies quantization, pruning, and knowledge distillation methods to achieve optimal product objectives.
+> Intel&reg; Neural Compressor (INC) is an open-source Python library designed to help quickly optimize inference solutions on popular deep-learning frameworks.
 
-[Overview of Intel Neural Compressor](https://github.com/intel/neural-compressor)
+[Overview of Intel Neural Compressor](https://intel.github.io/neural-compressor)
 
-This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
@@ -42,7 +42,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-11`, `1.12.0`, `1.12.0-debian-11-r0`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-inc-intel/blob/1.12.0-debian-11-r0/1/debian-11/Dockerfile)
+* [`1`, `1-debian-11`, `1.12.0`, `1.12.0-debian-11-r1`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-inc-intel/blob/1.12.0-debian-11-r1/1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/inc-intel GitHub repo](https://github.com/bitnami/bitnami-docker-inc-intel).
 
@@ -96,7 +96,7 @@ $ docker run -it --name inc -v /path/to/app:/app bitnami/inc-intel \
 
 **Further Reading:**
 
-  - [Intel Neural Compressor documentation](https://github.com/intel/neural-compressordocs/stable/index.html)
+  - [Intel Neural Compressor documentation](https://intel.github.io/neural-compressordocs/stable/index.html)
 
 ## Maintenance
 
