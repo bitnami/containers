@@ -34,7 +34,7 @@ $ docker-compose up
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Etcd Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/etcd).
 
-Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
 
 ## Why use a non-root container?
 
@@ -46,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3.5`, `3.5-debian-11`, `3.5.4`, `3.5.4-debian-11-r0`, `latest` (3.5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.5.4-debian-11-r0/3.5/debian-11/Dockerfile)
-* [`3.4`, `3.4-debian-11`, `3.4.18`, `3.4.18-debian-11-r0` (3.4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.4.18-debian-11-r0/3.4/debian-11/Dockerfile)
+* [`3.4`, `3.4-debian-11`, `3.4.18`, `3.4.18-debian-11-r1` (3.4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.4.18-debian-11-r1/3.4/debian-11/Dockerfile)
 * [`3.3`, `3.3-debian-11`, `3.3.27`, `3.3.27-debian-11-r0` (3.3/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.27-debian-11-r0/3.3/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/etcd GitHub repo](https://github.com/bitnami/bitnami-docker-etcd).
