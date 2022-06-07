@@ -32,7 +32,7 @@ $ docker-compose up -d
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Apache Kafka Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/kafka).
 
-Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
 
 ## Why use a non-root container?
 
@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 * [`3.2`, `3.2-debian-11`, `3.2.0`, `3.2.0-debian-11-r0`, `latest` (3.2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.2.0-debian-11-r0/3.2/debian-11/Dockerfile)
 * [`3.1`, `3.1-debian-11`, `3.1.1`, `3.1.1-debian-11-r0` (3.1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.1.1-debian-11-r0/3.1/debian-11/Dockerfile)
-* [`3.0`, `3.0-debian-11`, `3.0.1`, `3.0.1-debian-11-r0` (3.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.0.1-debian-11-r0/3.0/debian-11/Dockerfile)
+* [`3.0`, `3.0-debian-11`, `3.0.1`, `3.0.1-debian-11-r1` (3.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.0.1-debian-11-r1/3.0/debian-11/Dockerfile)
 * [`2.8`, `2.8-debian-11`, `2.8.1`, `2.8.1-debian-11-r0` (2.8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/2.8.1-debian-11-r0/2.8/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
