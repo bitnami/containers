@@ -36,7 +36,7 @@ $ docker-compose up -d
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami MySQL Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/mysql).
 
-Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
 
 ## Why use a non-root container?
 
@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8.0`, `8.0-debian-11`, `8.0.29`, `8.0.29-debian-11-r0`, `latest` (8.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/8.0.29-debian-11-r0/8.0/debian-11/Dockerfile)
-* [`5.7`, `5.7-debian-11`, `5.7.38`, `5.7.38-debian-11-r0` (5.7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.38-debian-11-r0/5.7/debian-11/Dockerfile)
+* [`5.7`, `5.7-debian-11`, `5.7.38`, `5.7.38-debian-11-r1` (5.7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mysql/blob/5.7.38-debian-11-r1/5.7/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mysql GitHub repo](https://github.com/bitnami/bitnami-docker-mysql).
 
