@@ -34,7 +34,7 @@ $ docker-compose up -d
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami MongoDB&reg; Sharded Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/mongodb-sharded).
 
-Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
 
 ## Why use a non-root container?
 
@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`5.0`, `5.0-debian-10`, `5.0.9`, `5.0.9-debian-10-r6`, `latest` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/5.0.9-debian-10-r6/5.0/debian-10/Dockerfile)
 * [`4.4`, `4.4-debian-10`, `4.4.14`, `4.4.14-debian-10-r21` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.14-debian-10-r21/4.4/debian-10/Dockerfile)
-* [`4.2`, `4.2-debian-10`, `4.2.20`, `4.2.20-debian-10-r26` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.20-debian-10-r26/4.2/debian-10/Dockerfile)
+* [`4.2`, `4.2-debian-10`, `4.2.20`, `4.2.20-debian-10-r27` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.20-debian-10-r27/4.2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
 
