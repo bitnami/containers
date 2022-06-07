@@ -31,7 +31,7 @@ $ docker-compose up -d
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the
 [Bitnami Odoo Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/odoo).
 
-Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
 
 ## Supported tags and respective `Dockerfile` links
 
@@ -40,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 - [`15`, `15-debian-11`, `15.0.20220510`, `15.0.20220510-debian-11-r0`, `latest` (15/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/15.0.20220510-debian-11-r0/15/debian-11/Dockerfile)
 - [`14`, `14-debian-11`, `14.0.20220510`, `14.0.20220510-debian-11-r0` (14/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/14.0.20220510-debian-11-r0/14/debian-11/Dockerfile)
-- [`13`, `13-debian-11`, `13.0.20220510`, `13.0.20220510-debian-11-r0` (13/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20220510-debian-11-r0/13/debian-11/Dockerfile)
+- [`13`, `13-debian-11`, `13.0.20220510`, `13.0.20220510-debian-11-r1` (13/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-odoo/blob/13.0.20220510-debian-11-r1/13/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/odoo GitHub repo](https://github.com/bitnami/bitnami-docker-odoo).
 
