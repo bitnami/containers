@@ -40,7 +40,7 @@ Non-root container images add an extra layer of security and are generally recom
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Apache Cassandra Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/cassandra).
 
-Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
 
 ## Supported tags and respective `Dockerfile` links
 
@@ -49,7 +49,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`4.0`, `4.0-debian-11`, `4.0.4`, `4.0.4-debian-11-r0`, `latest` (4.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/4.0.4-debian-11-r0/4.0/debian-11/Dockerfile)
 * [`3.11`, `3.11-debian-11`, `3.11.13`, `3.11.13-debian-11-r0` (3.11/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.11.13-debian-11-r0/3.11/debian-11/Dockerfile)
-* [`3.0`, `3.0-debian-11`, `3.0.27`, `3.0.27-debian-11-r0` (3.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.0.27-debian-11-r0/3.0/debian-11/Dockerfile)
+* [`3.0`, `3.0-debian-11`, `3.0.27`, `3.0.27-debian-11-r1` (3.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-cassandra/blob/3.0.27-debian-11-r1/3.0/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/cassandra GitHub repo](https://github.com/bitnami/bitnami-docker-cassandra).
 

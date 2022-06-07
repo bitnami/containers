@@ -25,7 +25,7 @@
         "digest": "9411d0fad772ff7c50bf3bb9f5d808d558d0c51a6891eab55415d0693bb31c93",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.7.18-0"
+        "version": "2.7.18-2"
     },
     "yq": {
         "arch": "amd64",
