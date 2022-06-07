@@ -39,7 +39,7 @@ services:
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Apache ZooKeeper Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/zookeeper).
 
-Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
 
 ## Why use a non-root container?
 
@@ -53,7 +53,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`3.8`, `3.8-debian-11`, `3.8.0`, `3.8.0-debian-11-r0`, `latest` (3.8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.8.0-debian-11-r0/3.8/debian-11/Dockerfile)
 * [`3.7`, `3.7-debian-11`, `3.7.1`, `3.7.1-debian-11-r0` (3.7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.7.1-debian-11-r0/3.7/debian-11/Dockerfile)
 * [`3.6`, `3.6-debian-11`, `3.6.3`, `3.6.3-debian-11-r0` (3.6/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.6.3-debian-11-r0/3.6/debian-11/Dockerfile)
-* [`3.5`, `3.5-debian-11`, `3.5.10`, `3.5.10-debian-11-r0` (3.5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.5.10-debian-11-r0/3.5/debian-11/Dockerfile)
+* [`3.5`, `3.5-debian-11`, `3.5.10`, `3.5.10-debian-11-r1` (3.5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.5.10-debian-11-r1/3.5/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
 
