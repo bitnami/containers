@@ -1,12 +1,12 @@
-# PyTorch Container for Intel packaged by Bitnami
+# PyTorch for Intel packaged by Bitnami
 
 ## What is PyTorch for Intel?
 
-> PyTorch is an open-source deep learning framework that accelerates the transition from prototyping research to production. This container is equipped with a performance-optimized PyTorch deep learning framework on Intel platforms.
+> PyTorch is an open-source deep learning framework that accelerates the path from research to production. Equipped with a performance-optimized PyTorch deep learning framework on Intel platforms.  
 
-[Overview of PyTorch for Intel](https://github.com/intel/intel-extension-for-pytorch)
+[Overview of PyTorch for Intel](https://pytorch.org/)
 
-This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.10`, `1.10-debian-11`, `1.10.2`, `1.10.2-debian-11-r0`, `latest` (1.10/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-pytorch-intel/blob/1.10.2-debian-11-r0/1.10/debian-11/Dockerfile)
+* [`1.10`, `1.10-debian-11`, `1.10.2`, `1.10.2-debian-11-r1`, `latest` (1.10/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-pytorch-intel/blob/1.10.2-debian-11-r1/1.10/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pytorch-intel GitHub repo](https://github.com/bitnami/bitnami-docker-pytorch-intel).
 
@@ -97,7 +97,7 @@ $ docker run -it --name pytorch -v /path/to/app:/app bitnami/pytorch-intel \
 
 **Further Reading:**
 
-  - [pytorch documentation](https://github.com/intel/intel-extension-for-pytorchdocs/stable/index.html)
+  - [pytorch documentation](https://pytorch.org/docs/stable/index.html)
 
 ## Maintenance
 
