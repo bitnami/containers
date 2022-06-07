@@ -1,5 +1,7 @@
 # Bitnami Containers
 
+Bitnami is currently working on unifying all container sources repositories into a single location. In the meantime, it will be synchronized in a daily manner to receive all the updates from the other repositories.
+
 > NOTE: We use the latest commit to know the missing ones to sync. Do not edit this repository manually or the sync will be broken.
 >       If you edit this repo please run the sync workflow manually providing:
 >        - how many commits you added into the `shift` parameter.
