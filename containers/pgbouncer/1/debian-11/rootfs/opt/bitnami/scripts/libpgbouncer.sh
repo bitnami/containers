@@ -204,6 +204,9 @@ pgbouncer_initialize() {
         if is_boolean_yes "$PGBOUNCER_SET_DATABASE_USER"; then
             database_value+=" user=$POSTGRESQL_USERNAME"
         fi
+        if is_boolean_yes "$PGBOUNCER_SET_DATABASE_PASSWORD"; then
+            database_value+=" password=$POSTGRESQL_PASSWORD"
+        fi
         if [[ "$PGBOUNCER_DATABASE" != "*" ]]; then
             database_value+=" dbname=$POSTGRESQL_DATABASE"
         fi
