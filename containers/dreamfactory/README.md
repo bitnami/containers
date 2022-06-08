@@ -24,7 +24,7 @@ $ docker-compose up -d
 - Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 - All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
 - All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
-- Bitnami container images are released daily with the latest distribution packages available.
+- Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 ## Why use a non-root container?
 
@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`4`, `4-debian-11`, `4.11.1`, `4.11.1-debian-11-r0`, `latest` (4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.11.1-debian-11-r0/4/debian-11/Dockerfile)
+- [`4`, `4-debian-11`, `4.11.1`, `4.11.1-debian-11-r1`, `latest` (4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-dreamfactory/blob/4.11.1-debian-11-r1/4/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dreamfactory GitHub repo](https://github.com/bitnami/bitnami-docker-dreamfactory).
 
