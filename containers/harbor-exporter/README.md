@@ -24,7 +24,7 @@ $ docker-compose up
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on minideb a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
-* Bitnami container images are released daily with the latest distribution packages available.
+* Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 ## How to deploy Harbor in Kubernetes?
 
@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-11`, `2.5.1`, `2.5.1-debian-11-r1`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-exporter/blob/2.5.1-debian-11-r1/2/debian-11/Dockerfile)
+* [`2`, `2-debian-11`, `2.5.1`, `2.5.1-debian-11-r2`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-exporter/blob/2.5.1-debian-11-r2/2/debian-11/Dockerfile)
 
 ## Configuration
 
