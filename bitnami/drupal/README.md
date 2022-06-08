@@ -34,14 +34,14 @@ Non-root container images add an extra layer of security and are generally recom
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Drupal Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/drupal).
 
-Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
 
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`9`, `9-debian-11`, `9.3.15`, `9.3.15-debian-11-r0`, `latest` (9/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/9.3.15-debian-11-r0/9/debian-11/Dockerfile)
+* [`9`, `9-debian-11`, `9.3.15`, `9.3.15-debian-11-r1`, `latest` (9/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/9.3.15-debian-11-r1/9/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/drupal GitHub repo](https://github.com/bitnami/bitnami-docker-drupal).
 
