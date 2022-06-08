@@ -24,7 +24,7 @@ You can find the default credentials and available configuration options in the 
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
-* Bitnami container images are released daily with the latest distribution packages available.
+* Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 ## How to deploy Apache Apache Tomcat in Kubernetes?
 
@@ -42,7 +42,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`10`, `10-debian-11`, `10.0.21`, `10.0.21-debian-11-r1`, `latest` (10/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/10.0.21-debian-11-r1/10/debian-11/Dockerfile)
-* [`9.0`, `9.0-debian-11`, `9.0.63`, `9.0.63-debian-11-r1` (9.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.63-debian-11-r1/9.0/debian-11/Dockerfile)
+* [`9.0`, `9.0-debian-11`, `9.0.63`, `9.0.63-debian-11-r2` (9.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.63-debian-11-r2/9.0/debian-11/Dockerfile)
 * [`8.5`, `8.5-debian-11`, `8.5.79`, `8.5.79-debian-11-r1` (8.5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.79-debian-11-r1/8.5/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/tomcat GitHub repo](https://github.com/bitnami/bitnami-docker-tomcat).
