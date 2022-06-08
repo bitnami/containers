@@ -13,7 +13,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.19.3-0" --checksum 97cffecfb637e5758197e4eb14d50b42048768eba242da4b534f1d8bacbd6958
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-0" --checksum b47e1015fc1c9ce456f134ffd5b6ac6960c3f369c96fcd37319e9289b29a1047
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ghost" "5.2.2-0" --checksum 65a3b8eb33ed2997c05099a45cc013c9a956605bcd1f630649b01b5f4129d16f
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ghost" "5.2.2-1" --checksum fd66716817c871afb2da7dcade691dc9f88ae09b5e9045591e119180d5dfff9b
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
