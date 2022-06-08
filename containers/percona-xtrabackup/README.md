@@ -21,7 +21,7 @@ $ docker run --name percona-xtrabackup bitnami/percona-xtrabackup:latest
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
-* Bitnami container images are released daily with the latest distribution packages available.
+* Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 ## Supported tags and respective `Dockerfile` links
 
@@ -29,7 +29,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8`, `8-debian-11`, `8.0.28-21`, `8.0.28-21-debian-11-r1`, `latest` (8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-percona-xtrabackup/blob/8.0.28-21-debian-11-r1/8/debian-11/Dockerfile)
-* [`2.4`, `2.4-debian-11`, `2.4.26`, `2.4.26-debian-11-r1` (2.4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-percona-xtrabackup/blob/2.4.26-debian-11-r1/2.4/debian-11/Dockerfile)
+* [`2.4`, `2.4-debian-11`, `2.4.26`, `2.4.26-debian-11-r2` (2.4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-percona-xtrabackup/blob/2.4.26-debian-11-r2/2.4/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/percona-xtrabackup GitHub repo](https://github.com/bitnami/bitnami-docker-percona-xtrabackup).
 
