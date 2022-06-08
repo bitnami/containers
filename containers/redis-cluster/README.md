@@ -28,7 +28,7 @@ $ docker-compose up -d
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
-* Bitnami container images are released daily with the latest distribution packages available.
+* Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 ## How to deploy Redis(R) Cluster in Kubernetes?
 
@@ -41,7 +41,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7.0`, `7.0-debian-11`, `7.0.0`, `7.0.0-debian-11-r1`, `latest` (7.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/7.0.0-debian-11-r1/7.0/debian-11/Dockerfile)
+* [`7.0`, `7.0-debian-11`, `7.0.1`, `7.0.1-debian-11-r0`, `latest` (7.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/7.0.1-debian-11-r0/7.0/debian-11/Dockerfile)
 * [`6.2`, `6.2-debian-11`, `6.2.7`, `6.2.7-debian-11-r1` (6.2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/6.2.7-debian-11-r1/6.2/debian-11/Dockerfile)
 * [`6.0`, `6.0-debian-11`, `6.0.16`, `6.0.16-debian-11-r1` (6.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis-cluster/blob/6.0.16-debian-11-r1/6.0/debian-11/Dockerfile)
 
