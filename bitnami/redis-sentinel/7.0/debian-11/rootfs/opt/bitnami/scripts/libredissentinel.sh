@@ -37,7 +37,7 @@ redis_conf_set() {
     if grep -q "^\s*$key .*" "$REDIS_SENTINEL_CONF_FILE"; then
         replace_in_file "$REDIS_SENTINEL_CONF_FILE" "^\s*${key} .*" "${key} ${value}" false
     else
-        printf '\n%s %s' "$key" "$value" >> "$REDIS_SENTINEL_CONF_FILE"
+        printf '\n%s %s' "$key" "$value" >>"$REDIS_SENTINEL_CONF_FILE"
     fi
 }
 
@@ -131,19 +131,19 @@ redis_version() {
     # Parse optional CLI flags
     if [[ "$#" -gt 0 ]]; then
         case "$1" in
-            --major)
-                version="1"
-                ;;
-            --minor)
-                version="2"
-                ;;
-            --patch)
-                version="3"
-                ;;
-            *)
-                echo "Invalid command line flag ${1}" >&2
-                return 1
-                ;;
+        --major)
+            version="1"
+            ;;
+        --minor)
+            version="2"
+            ;;
+        --patch)
+            version="3"
+            ;;
+        *)
+            echo "Invalid command line flag ${1}" >&2
+            return 1
+            ;;
         esac
         complete_version="false"
     fi
@@ -225,13 +225,15 @@ redis_initialize() {
             redis_conf_set "sentinel resolve-hostnames" "${REDIS_SENTINEL_RESOLVE_HOSTNAMES}"
             redis_conf_set "sentinel announce-hostnames" "${REDIS_SENTINEL_ANNOUNCE_HOSTNAMES}"
         fi
+        # This directive is only available in Redis 7
+        [[ $(redis_version --major) -ge 7 ]] && redis_conf_set "SENTINEL master-reboot-down-after-period" "${REDIS_MASTER_SET} ${REDIS_SENTINEL_MASTER_REBOOT_DOWN_AFTER_PERIOD}"
 
         # Sentinel Configuration (maybe overwritten by more specific init blocks like TLS configuration)
         redis_conf_set port "$REDIS_SENTINEL_PORT_NUMBER"
 
         # TLS configuration
         if is_boolean_yes "$REDIS_SENTINEL_TLS_ENABLED"; then
-          if ([[ "$REDIS_SENTINEL_PORT_NUMBER" ==  "26379" ]] || [[ "$REDIS_SENTINEL_PORT_NUMBER" ==  "0" ]]) && [[ "$REDIS_SENTINEL_TLS_PORT_NUMBER" ==  "26379" ]]; then
+            if { [[ "$REDIS_SENTINEL_PORT_NUMBER" == "26379" ]] || [[ "$REDIS_SENTINEL_PORT_NUMBER" == "0" ]]; } && [[ "$REDIS_SENTINEL_TLS_PORT_NUMBER" == "26379" ]]; then
                 # If both ports are set to default values, enable TLS traffic only
                 redis_conf_set port 0
                 redis_conf_set tls-port "$REDIS_SENTINEL_TLS_PORT_NUMBER"
