@@ -28,7 +28,7 @@ $ docker-compose up -d
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
-* Bitnami container images are released daily with the latest distribution packages available.
+* Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 ## Supported tags and respective `Dockerfile` links
 
@@ -37,7 +37,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`6`, `6-debian-11`, `6.0.300`, `6.0.300-debian-11-r1`, `latest` (6/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet-sdk/blob/6.0.300-debian-11-r1/6/debian-11/Dockerfile)
 * [`5`, `5-debian-11`, `5.0.408`, `5.0.408-debian-11-r1` (5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet-sdk/blob/5.0.408-debian-11-r1/5/debian-11/Dockerfile)
-* [`3.1`, `3.1-debian-11`, `3.1.419`, `3.1.419-debian-11-r1` (3.1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet-sdk/blob/3.1.419-debian-11-r1/3.1/debian-11/Dockerfile)
+* [`3.1`, `3.1-debian-11`, `3.1.419`, `3.1.419-debian-11-r2` (3.1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet-sdk/blob/3.1.419-debian-11-r2/3.1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/dotnet-sdk GitHub repo](https://github.com/bitnami/bitnami-docker-dotnet-sdk).
 
