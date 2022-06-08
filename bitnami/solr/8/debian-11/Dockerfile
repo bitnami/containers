@@ -24,7 +24,7 @@ RUN /opt/bitnami/scripts/solr/postunpack.sh
 ENV APP_VERSION="8.11.1" \
     BITNAMI_APP_NAME="solr" \
     JAVA_HOME="/opt/bitnami/java" \
-    PATH="/opt/bitnami/java/bin:/opt/bitnami/solr/bin:/opt/bitnami/common/bin:$PATH"
+    PATH="/opt/bitnami/java/bin:/opt/bitnami/solr/bin:/opt/bitnami/solr/contrib/prometheus-exporter/bin:/opt/bitnami/solr/prometheus-exporter/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8983
 
