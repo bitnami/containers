@@ -32,7 +32,7 @@ $ docker-compose up -d
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
-* Bitnami container images are released daily with the latest distribution packages available.
+* Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 ## How to deploy MariaDB Galera in Kubernetes?
 
@@ -52,7 +52,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`10.7`, `10.7-debian-11`, `10.7.4`, `10.7.4-debian-11-r1`, `latest` (10.7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.7.4-debian-11-r1/10.7/debian-11/Dockerfile)
-* [`10.6`, `10.6-debian-11`, `10.6.8`, `10.6.8-debian-11-r0` (10.6/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.6.8-debian-11-r0/10.6/debian-11/Dockerfile)
+* [`10.6`, `10.6-debian-11`, `10.6.8`, `10.6.8-debian-11-r1` (10.6/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.6.8-debian-11-r1/10.6/debian-11/Dockerfile)
 * [`10.5`, `10.5-debian-11`, `10.5.16`, `10.5.16-debian-11-r1` (10.5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.5.16-debian-11-r1/10.5/debian-11/Dockerfile)
 * [`10.4`, `10.4-debian-11`, `10.4.25`, `10.4.25-debian-11-r1` (10.4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.25-debian-11-r1/10.4/debian-11/Dockerfile)
 * [`10.3`, `10.3-debian-11`, `10.3.35`, `10.3.35-debian-11-r1` (10.3/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.3.35-debian-11-r1/10.3/debian-11/Dockerfile)
