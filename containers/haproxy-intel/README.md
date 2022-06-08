@@ -4,7 +4,7 @@
 
 > HAProxy is a high-performance, open-source load balancer and reverse proxy for TCP and HTTP applications. This image is optimized with Intel&reg; QuickAssist Technology OpenSSL* Engine (QAT_Engine).
 
-[Overview of HAProxy for Intel](http://www.haproxy.org/)
+[Overview of HAProxy for Intel](https://www.haproxy.org/)
 
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
@@ -35,7 +35,7 @@ Optimized containers fully leverage 3rd gen Intel(R) Xeon(R) Scalable Processor 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-11`, `2.6.0`, `2.6.0-debian-11-r0`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-haproxy-intel/blob/2.6.0-debian-11-r0/2/debian-11/Dockerfile)
+* [`2`, `2-debian-11`, `2.6.0`, `2.6.0-debian-11-r1`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-haproxy-intel/blob/2.6.0-debian-11-r1/2/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/haproxy-intel GitHub repo](https://github.com/bitnami/bitnami-docker-haproxy-intel).
 
