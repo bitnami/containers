@@ -30,7 +30,7 @@ $ docker-compose up -d
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami phpBB Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/phpbb).
 
-Bitnami containers can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters.
+Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
 
 ## Why use a non-root container?
 
@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-11`, `3.3.7`, `3.3.7-debian-11-r0`, `latest` (3/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.3.7-debian-11-r0/3/debian-11/Dockerfile)
+* [`3`, `3-debian-11`, `3.3.7`, `3.3.7-debian-11-r1`, `latest` (3/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-phpbb/blob/3.3.7-debian-11-r1/3/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/phpbb GitHub repo](https://github.com/bitnami/bitnami-docker-phpbb).
 
