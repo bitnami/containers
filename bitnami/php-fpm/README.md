@@ -28,15 +28,15 @@ $ docker-compose up -d
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
-* Bitnami container images are released daily with the latest distribution packages available.
+* Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8.1`, `8.1-debian-11`, `8.1.6`, `8.1.6-debian-11-r2`, `latest` (8.1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.1.6-debian-11-r2/8.1/debian-11/Dockerfile)
-* [`8.0`, `8.0-debian-11`, `8.0.19`, `8.0.19-debian-11-r2` (8.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.0.19-debian-11-r2/8.0/debian-11/Dockerfile)
+* [`8.1`, `8.1-debian-11`, `8.1.7`, `8.1.7-debian-11-r0`, `latest` (8.1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.1.7-debian-11-r0/8.1/debian-11/Dockerfile)
+* [`8.0`, `8.0-debian-11`, `8.0.20`, `8.0.20-debian-11-r-1` (8.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/8.0.20-debian-11-r-1/8.0/debian-11/Dockerfile)
 * [`7.4`, `7.4-debian-11`, `7.4.30`, `7.4.30-debian-11-r0` (7.4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-php-fpm/blob/7.4.30-debian-11-r0/7.4/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/php-fpm GitHub repo](https://github.com/bitnami/bitnami-docker-php-fpm).
