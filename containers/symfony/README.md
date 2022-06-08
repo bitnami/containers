@@ -27,7 +27,7 @@ $ docker-compose up
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
-* Bitnami container images are released daily with the latest distribution packages available.
+* Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 ## Supported tags and respective `Dockerfile` links
 
@@ -36,7 +36,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`6.0`, `6.0-debian-11`, `6.0.9`, `6.0.9-debian-11-r1`, `latest` (6.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/6.0.9-debian-11-r1/6.0/debian-11/Dockerfile)
 * [`5.4`, `5.4-debian-11`, `5.4.9`, `5.4.9-debian-11-r1` (5.4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/5.4.9-debian-11-r1/5.4/debian-11/Dockerfile)
-* [`4.4`, `4.4-debian-11`, `4.4.42`, `4.4.42-debian-11-r1` (4.4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/4.4.42-debian-11-r1/4.4/debian-11/Dockerfile)
+* [`4.4`, `4.4-debian-11`, `4.4.42`, `4.4.42-debian-11-r2` (4.4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/4.4.42-debian-11-r2/4.4/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/symfony GitHub repo](https://github.com/bitnami/bitnami-docker-symfony).
 
