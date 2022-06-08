@@ -30,7 +30,7 @@ You can find the default credentials and available configuration options in the 
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
-* Bitnami container images are released daily with the latest distribution packages available.
+* Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 ## Why use a non-root container?
 
@@ -50,7 +50,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`14`, `14-debian-11`, `14.3.0`, `14.3.0-debian-11-r1`, `latest` (14/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/14.3.0-debian-11-r1/14/debian-11/Dockerfile)
 * [`13`, `13-debian-11`, `13.7.0`, `13.7.0-debian-11-r1` (13/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/13.7.0-debian-11-r1/13/debian-11/Dockerfile)
 * [`12`, `12-debian-11`, `12.11.0`, `12.11.0-debian-11-r1` (12/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.11.0-debian-11-r1/12/debian-11/Dockerfile)
-* [`11`, `11-debian-11`, `11.16.0`, `11.16.0-debian-11-r1` (11/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.16.0-debian-11-r1/11/debian-11/Dockerfile)
+* [`11`, `11-debian-11`, `11.16.0`, `11.16.0-debian-11-r2` (11/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.16.0-debian-11-r2/11/debian-11/Dockerfile)
 * [`10`, `10-debian-11`, `10.21.0`, `10.21.0-debian-11-r1` (10/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.21.0-debian-11-r1/10/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql-repmgr GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql-repmgr).
