@@ -28,7 +28,7 @@ $ docker-compose up -d
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
-* Bitnami container images are released daily with the latest distribution packages available.
+* Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 ## How to deploy NGINX Open Source in Kubernetes?
 
@@ -46,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.22`, `1.22-debian-11`, `1.22.0`, `1.22.0-debian-11-r1`, `latest` (1.22/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.22.0-debian-11-r1/1.22/debian-11/Dockerfile)
-* [`1.21`, `1.21-debian-11`, `1.21.6`, `1.21.6-debian-11-r1` (1.21/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.21.6-debian-11-r1/1.21/debian-11/Dockerfile)
+* [`1.21`, `1.21-debian-11`, `1.21.6`, `1.21.6-debian-11-r2` (1.21/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.21.6-debian-11-r2/1.21/debian-11/Dockerfile)
 * [`1.20`, `1.20-debian-11`, `1.20.2`, `1.20.2-debian-11-r1` (1.20/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.20.2-debian-11-r1/1.20/debian-11/Dockerfile)
 
 ## Get this image
