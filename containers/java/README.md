@@ -35,7 +35,8 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`17`, `17-debian-11`, `17.0.3`, `17.0.3-debian-11-r2`, `latest` (17/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/17.0.3-debian-11-r2/17/debian-11/Dockerfile)
+* [`18`, `18-debian-11`, `18.0.1`, `18.0.1-debian-11-r0`, `latest` (18/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/18.0.1-debian-11-r0/18/debian-11/Dockerfile)
+* [`17`, `17-debian-11`, `17.0.3`, `17.0.3-debian-11-r2` (17/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/17.0.3-debian-11-r2/17/debian-11/Dockerfile)
 * [`11`, `11-debian-11`, `11.0.15`, `11.0.15-debian-11-r2` (11/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.15-debian-11-r2/11/debian-11/Dockerfile)
 * [`1.8`, `1.8-debian-11`, `1.8.333`, `1.8.333-debian-11-r2` (1.8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.333-debian-11-r2/1.8/debian-11/Dockerfile)
 
@@ -70,7 +71,7 @@ $ docker pull bitnami/java:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/java 'https://github.com/bitnami/bitnami-docker-java.git#master:17/debian-11'
+$ docker build -t bitnami/java 'https://github.com/bitnami/bitnami-docker-java.git#master:18/debian-11'
 ```
 
 ## Configuration
