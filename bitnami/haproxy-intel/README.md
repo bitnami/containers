@@ -25,7 +25,7 @@ Optimized containers fully leverage 3rd gen Intel(R) Xeon(R) Scalable Processor 
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
-* Bitnami container images are released daily with the latest distribution packages available.
+* Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 
 > This [CVE scan report](https://quay.io/repository/bitnami/haproxy-intel?tab=tags) contains a security report with all open CVEs. To get the list of actionable security issues, find the "latest" tag, click the vulnerability report link under the corresponding "Security scan" field and then select the "Only show fixable" filter on the next page.
@@ -35,7 +35,7 @@ Optimized containers fully leverage 3rd gen Intel(R) Xeon(R) Scalable Processor 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-11`, `2.6.0`, `2.6.0-debian-11-r1`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-haproxy-intel/blob/2.6.0-debian-11-r1/2/debian-11/Dockerfile)
+* [`2`, `2-debian-11`, `2.6.0`, `2.6.0-debian-11-r2`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-haproxy-intel/blob/2.6.0-debian-11-r2/2/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/haproxy-intel GitHub repo](https://github.com/bitnami/bitnami-docker-haproxy-intel).
 
