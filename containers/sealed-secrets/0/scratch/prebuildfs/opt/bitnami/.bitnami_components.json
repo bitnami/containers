@@ -1,6 +1,6 @@
 {
     "sealed-secrets": {
-        "digest": "f45b07c7643e3f23c9823ad9db0793c0bb862da40115d89b1637031d673b173a",
+        "digest": "2c7a5b8615373d41f5a50cad913eaff46ccb85d82d76d406643fda098fe213a2",
         "type": "BLACKSMITH",
         "version": "0.18.0"
     }
