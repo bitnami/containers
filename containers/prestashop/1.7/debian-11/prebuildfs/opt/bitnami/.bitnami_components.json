@@ -1,10 +1,10 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "7e1ba6846eaf9acc3b97ee6b6768383c337d4bcdb39a863affb83b6e16d8c332",
+        "digest": "d6ead7637955f94ec4821b1d2ceccb36fb91b8f4ee4aef3bf4287c588be2f1b4",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.4.53-2"
+        "version": "2.4.54-0"
     },
     "gosu": {
         "arch": "amd64",
@@ -15,10 +15,10 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "5aec15a79f05dbde6790b90bb0b0fe400b9ce4d161d1004e7770debe53803961",
+        "digest": "eb642c232bfcbf339ac38df9d021ec3ef6da82fdb84e79115ae083ed8326b3dd",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.4.30-0"
+        "version": "7.4.30-1"
     },
     "mysql-client": {
         "arch": "amd64",
