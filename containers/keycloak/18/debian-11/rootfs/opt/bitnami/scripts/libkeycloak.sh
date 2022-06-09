@@ -40,6 +40,7 @@ keycloak_validate() {
             print_validation_error "An invalid port was specified in the environment variable ${port_var}: ${err}."
         fi
     }
+
     if is_boolean_yes "$KEYCLOAK_PRODUCTION"; then
         if [[ "$KEYCLOAK_PROXY" == "edge" ]]; then
             # https://www.keycloak.org/server/reverseproxy
@@ -205,6 +206,7 @@ keycloak_configure_http() {
 keycloak_configure_loglevel() {
     info "Configuring log level"
     keycloak_conf_set "log-level" "${KEYCLOAK_LOG_LEVEL}"
+    keycloak_conf_set "log-console-output" "${KEYCLOAK_LOG_OUTPUT}"
 }
 
 ########################
