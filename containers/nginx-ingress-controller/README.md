@@ -23,7 +23,7 @@ $ docker run --name nginx-ingress-controller bitnami/nginx-ingress-controller:la
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 * All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
-* Bitnami container images are released daily with the latest distribution packages available.
+* Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 ## How to deploy NGINX Ingress Controller in Kubernetes?
 
@@ -34,7 +34,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deploy
 ## Supported tags and respective `Dockerfile` links
 
 
-* [`1`, `1-debian-11`, `1.2.1`, `1.2.1-debian-11-r1`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/blob/1.2.1-debian-11-r1/1/debian-11/Dockerfile)
+* [`1`, `1-debian-11`, `1.2.1`, `1.2.1-debian-11-r2`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/blob/1.2.1-debian-11-r2/1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/nginx-ingress-controller GitHub repo](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller).
 
