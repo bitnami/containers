@@ -26,4 +26,4 @@ ENV APP_VERSION="2.3.4" \
 
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/argo-cd/entrypoint.sh" ]
-CMD [ "--help" ]
+CMD [ "argocd", "--help" ]
