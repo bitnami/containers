@@ -1,6 +1,6 @@
 {
     "rabbitmq-cluster-operator": {
-        "digest": "c2a755582591c5c6b76244b325b7eecbcd69cd0bbdf4ef87b65c196719f053d9",
+        "digest": "5022d0ee653d43f75a8bb1d9d241281be5c678d4c7acc70a1a94bb86db2ca8c0",
         "type": "BLACKSMITH",
         "version": "1.13.1"
     }
