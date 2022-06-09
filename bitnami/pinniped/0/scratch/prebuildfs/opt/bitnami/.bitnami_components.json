@@ -1,0 +1,7 @@
+{
+    "pinniped": {
+        "digest": "ba91f8d968706140c0b293acdf7840fe7327661992db256b97721d84273c62f4",
+        "type": "BLACKSMITH",
+        "version": "0.18.0"
+    }
+}
