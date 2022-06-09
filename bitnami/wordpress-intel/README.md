@@ -32,7 +32,7 @@ It requires a 3rd gen Xeon Scalable Processor (Ice Lake) to get a breakthrough p
 - Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 - All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
 - All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
-- Bitnami container images are released daily with the latest distribution packages available.
+- Bitnami container images are released on a regular basis with the latest distribution packages available.
 
 # How to deploy WordPress for Intel in Kubernetes?
 
@@ -49,7 +49,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`5`, `5-debian-11`, `5.9.3`, `5.9.3-debian-11-r1`, `latest` (5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.9.3-debian-11-r1/5/debian-11/Dockerfile)
+- [`5`, `5-debian-11`, `5.9.3`, `5.9.3-debian-11-r2`, `latest` (5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.9.3-debian-11-r2/5/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress).
 
