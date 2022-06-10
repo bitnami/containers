@@ -4,27 +4,27 @@
         "digest": "da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-0"
+        "version": "1.14.0-150"
     },
     "java": {
         "arch": "amd64",
         "digest": "02a91d298bbe3bb5d240f635802a50b2970b19eba960c1804b7275f88a944bb3",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.8.333-0"
+        "version": "1.8.333-150"
     },
     "python": {
         "arch": "amd64",
         "digest": "79af9dcbaa89c4047d2d24b4a4c2ae17b771fe94972734379b9e50ef3dec3442",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.13-2"
+        "version": "3.8.13-150"
     },
     "spark": {
         "arch": "amd64",
         "digest": "b5d35eb7ab1e078e598eed9b5c237ccd86f91400f1462229f2e5a611f55e0268",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.2.1-0"
+        "version": "3.2.1-150"
     }
 }
