@@ -9,9 +9,9 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl git git-lfs gzip libc6 openssh-client procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dumb-init" "1.2.5-0" --checksum eb2507a10791eb84d6291b9f25d75d40b001bdd4bc56d389c11710ac9013e768
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gitlab-runner-helper" "14.10.1-0" --checksum 6e1c1d9bb3cd3939712114a5bcf7de6c8547f0ae9d7596271dfe8435efe69088
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dumb-init" "1.2.5-150" --checksum eb2507a10791eb84d6291b9f25d75d40b001bdd4bc56d389c11710ac9013e768
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gitlab-runner-helper" "14.10.1-150" --checksum 6e1c1d9bb3cd3939712114a5bcf7de6c8547f0ae9d7596271dfe8435efe69088
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
