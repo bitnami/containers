@@ -4,20 +4,20 @@
         "digest": "76f1a07c13a4fabd97fe452dce8ef135d0c23c5a69e2fdc52db5b86e290a77ad",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.6-1"
+        "version": "1.14.6-150"
     },
     "gosu": {
         "arch": "amd64",
         "digest": "da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-0"
+        "version": "1.14.0-150"
     },
     "ruby": {
         "arch": "amd64",
         "digest": "00b238602b8c973e7a85e45f2f24bbe9cf200802ea37578e7689b3cc0a3415b7",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.1.2-0"
+        "version": "3.1.2-150"
     }
 }
