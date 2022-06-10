@@ -9,10 +9,10 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl git git-lfs gzip libc6 openssh-client procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dumb-init" "1.2.5-0" --checksum eb2507a10791eb84d6291b9f25d75d40b001bdd4bc56d389c11710ac9013e768
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "docker-machine" "0.16.2-0" --checksum 886baeffa017cb857c4903c17854152b885005ca4d5a32c4a218e44594da62dd
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gitlab-runner" "15.0.0-0" --checksum 9e65bf7d4e19ef870dd9d80cb227762d47dab9f35d3e1924097cc086966d57b7
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dumb-init" "1.2.5-150" --checksum eb2507a10791eb84d6291b9f25d75d40b001bdd4bc56d389c11710ac9013e768
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "docker-machine" "0.16.2-150" --checksum 886baeffa017cb857c4903c17854152b885005ca4d5a32c4a218e44594da62dd
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gitlab-runner" "15.0.0-150" --checksum 9e65bf7d4e19ef870dd9d80cb227762d47dab9f35d3e1924097cc086966d57b7
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
