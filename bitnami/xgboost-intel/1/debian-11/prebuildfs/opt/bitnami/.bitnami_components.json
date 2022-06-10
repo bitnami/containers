@@ -4,20 +4,20 @@
         "digest": "da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-0"
+        "version": "1.14.0-150"
     },
     "python": {
         "arch": "amd64",
         "digest": "ab83304d6c47f91ce2b41a01d2892a8a99ecce948615fb329ee3de0b3a6792b9",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.10.5-0"
+        "version": "3.10.5-150"
     },
     "xgboost-intel": {
         "arch": "amd64",
         "digest": "e099b325768c32ac0a55f93166843f7ebec13f637d799b6551f49aff400ed772",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.6.1-0"
+        "version": "1.6.1-150"
     }
 }
