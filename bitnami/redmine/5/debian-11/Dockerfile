@@ -15,7 +15,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "3.0.4-0" 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "11.16.0-0" --checksum 1204401fc614c448f61983e4bc1136b9ba0475c77b2f3ff497ffea59c2879a01
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-0" --checksum b47e1015fc1c9ce456f134ffd5b6ac6960c3f369c96fcd37319e9289b29a1047
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.36.1-0" --checksum c15ff3fff7478e74922d560c5c4ffcb8d11bff92975f81591b62742902edd731
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redmine" "5.0.1-0" --checksum 2a81b824a1943dc61d571290dedc890b43094bca906c696bd464fe631960adb3
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redmine" "5.0.1-1" --checksum ec0b293eeeafab7af1af8a3eb6736024b91060f8898a942acec4d71b9168c4af
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
