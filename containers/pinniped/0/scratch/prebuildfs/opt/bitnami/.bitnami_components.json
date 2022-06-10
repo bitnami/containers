@@ -1,6 +1,6 @@
 {
     "pinniped": {
-        "digest": "ba91f8d968706140c0b293acdf7840fe7327661992db256b97721d84273c62f4",
+        "digest": "f7a2f8298981378e0bf09ec651a25a67aa3abb842e3096131ba290d8e02fe45f",
         "type": "BLACKSMITH",
         "version": "0.18.0"
     }
