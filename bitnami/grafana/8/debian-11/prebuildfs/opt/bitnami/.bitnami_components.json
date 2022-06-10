@@ -4,13 +4,13 @@
         "digest": "da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-0"
+        "version": "1.14.0-150"
     },
     "grafana": {
         "arch": "amd64",
         "digest": "ae135fc0c11dfc39804d15e01d97c0c28742cdc05fccd7862b862b4db6132f81",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.5.5-0"
+        "version": "8.5.5-150"
     }
 }
