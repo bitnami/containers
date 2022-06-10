@@ -4,13 +4,13 @@
         "digest": "da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-0"
+        "version": "1.14.0-150"
     },
     "postgresql": {
         "arch": "amd64",
         "digest": "ce176ca20cd6523f6764d8ff02a531db9e33e878416fc2bfb1855d181ba1dc38",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "12.11.0-3"
+        "version": "12.11.0-150"
     }
 }
