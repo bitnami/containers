@@ -9,10 +9,10 @@ ENV HOME="/app" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages build-essential ca-certificates curl git gzip libc6 libcap2-bin libgcc-s1 libicu-dev liblttng-ust-dev libsqlite3-dev libssl-dev libstdc++6 pkg-config procps tar unzip wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/dotnet-sdk-6.0.300-0-linux-amd64-debian-11.tar.gz && \
-    echo "01b0a6608b6df7c88034f763da29942debdc45c98d51f12c7f142039cfbaf895  /tmp/bitnami/pkg/cache/dotnet-sdk-6.0.300-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/dotnet-sdk-6.0.300-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/dotnet-sdk-6.0.300-0-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/dotnet-sdk-6.0.300-150-linux-amd64-debian-11.tar.gz && \
+    echo "01b0a6608b6df7c88034f763da29942debdc45c98d51f12c7f142039cfbaf895  /tmp/bitnami/pkg/cache/dotnet-sdk-6.0.300-150-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/dotnet-sdk-6.0.300-150-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/dotnet-sdk-6.0.300-150-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
