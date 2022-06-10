@@ -9,8 +9,8 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libevent-2.1-7 libsasl2-2 libsasl2-modules procps sasl2-bin tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "memcached" "1.6.15-0" --checksum 0f717af5c53843c3fe20edbb606aaf56a2229fa999aa9701cc2cd1b67495dd53
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "memcached" "1.6.15-150" --checksum 0f717af5c53843c3fe20edbb606aaf56a2229fa999aa9701cc2cd1b67495dd53
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
