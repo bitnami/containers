@@ -4,27 +4,27 @@
         "digest": "da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-0"
+        "version": "1.14.0-150"
     },
     "java": {
         "arch": "amd64",
         "digest": "fe6b65886a6b1f545508e272efbf422054ee030c867f94ebec2f93c5518252de",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.15-0"
+        "version": "11.0.15-150"
     },
     "keycloak": {
         "arch": "amd64",
         "digest": "5effc2e7500e5e8b7bdb8c1690d52c53c77a7a3dd346b60d895b9532b0ce1815",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "17.0.1-1"
+        "version": "17.0.1-150"
     },
     "wait-for-port": {
         "arch": "amd64",
         "digest": "1013e2ebbe58e5dc8f3c79fc952f020fc5306ba48463803cacfbed7779173924",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.3-0"
+        "version": "1.0.3-150"
     }
 }
