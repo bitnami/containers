@@ -9,10 +9,10 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq libc6 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.3-0" --checksum 1013e2ebbe58e5dc8f3c79fc952f020fc5306ba48463803cacfbed7779173924
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio-client" "2022.5.9-0" --checksum 45600b14a64b02b4b59df59643d553c1051943b5fc66264b447b1d5a0d6bf914
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio" "2022.6.7-0" --checksum 8f00ea8201ae8f19001b47442488d9958ae187df0967b13aca36eafa53e16d97
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.3-150" --checksum 1013e2ebbe58e5dc8f3c79fc952f020fc5306ba48463803cacfbed7779173924
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio-client" "2022.5.9-150" --checksum 45600b14a64b02b4b59df59643d553c1051943b5fc66264b447b1d5a0d6bf914
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio" "2022.6.7-150" --checksum 8f00ea8201ae8f19001b47442488d9958ae187df0967b13aca36eafa53e16d97
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
