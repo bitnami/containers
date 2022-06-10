@@ -4,6 +4,6 @@
         "digest": "23f8e06041e1215731e7c6edf82909e70be22a2f950e7dc7edf47e5225033599",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.7-0"
+        "version": "8.1.7-150"
     }
 }
