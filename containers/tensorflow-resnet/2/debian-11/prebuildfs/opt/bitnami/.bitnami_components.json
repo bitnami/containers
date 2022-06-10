@@ -4,13 +4,13 @@
         "digest": "da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-0"
+        "version": "1.14.0-150"
     },
     "tensorflow-resnet": {
         "arch": "amd64",
         "digest": "060be1a56f7d73d4413ac7ffa9d351d999eaff1f1cba3f913ed45117ab6562aa",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.8.2-0"
+        "version": "2.8.2-150"
     }
 }
