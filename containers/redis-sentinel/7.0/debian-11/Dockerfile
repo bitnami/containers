@@ -10,8 +10,8 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libssl1.1 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis-sentinel" "7.0.1-0" --checksum 82ae6b667fd646bc246f32f22d23831b17aaff03b0e3d5877d0261dda28b959c
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-0" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis-sentinel" "7.0.1-150" --checksum 82ae6b667fd646bc246f32f22d23831b17aaff03b0e3d5877d0261dda28b959c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
