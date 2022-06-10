@@ -4,13 +4,13 @@
         "digest": "da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-0"
+        "version": "1.14.0-150"
     },
     "openresty": {
         "arch": "amd64",
         "digest": "27872f27219904d41f0733727a69ebafd562ec5b30f9b84ce7fe4f218532f8d8",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.21.4-1-0"
+        "version": "1.21.4-1-150"
     }
 }
