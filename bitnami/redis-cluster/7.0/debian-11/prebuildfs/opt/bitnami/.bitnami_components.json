@@ -4,13 +4,13 @@
         "digest": "da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-0"
+        "version": "1.14.0-150"
     },
     "redis": {
         "arch": "amd64",
         "digest": "33e3f5ecf1836d5c73acb61c04ae778289a55d8c7599270f24ddcc247e63b9d3",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.0.1-0"
+        "version": "7.0.1-150"
     }
 }
