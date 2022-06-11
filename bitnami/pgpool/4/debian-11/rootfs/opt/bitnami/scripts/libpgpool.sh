@@ -250,7 +250,7 @@ pgpool_validate() {
         print_validation_error "The values allowed for PGPOOL_AUTHENTICATION_METHOD: md5,scram-sha-256"
     fi
 
-    # check for required environment variables for scram-sha-256 based authentication 
+    # check for required environment variables for scram-sha-256 based authentication
     if [[ "$PGPOOL_AUTHENTICATION_METHOD" = "scram-sha-256" ]]; then
         # If scram-sha-256 is enabled, pg_pool_password cannot be disabled
         if ! is_boolean_yes "$PGPOOL_ENABLE_POOL_PASSWD"; then
@@ -298,8 +298,8 @@ pgpool_healthcheck() {
         # look up backends that are marked offline
         for node in $(echo "${backends}" | grep "down" | tr -d ' '); do
             IFS="|" read -ra node_info <<< "$node"
-            local -r node_id="${node_info[0]}"
-            local -r node_host="${node_info[1]}"
+            local node_id="${node_info[0]}"
+            local node_host="${node_info[1]}"
             if [[ $(PGCONNECT_TIMEOUT=3 PGPASSWORD="${PGPOOL_POSTGRES_PASSWORD}" psql -U "${PGPOOL_POSTGRES_USERNAME}" \
                 -d postgres -h "${node_host}" -p "${PGPOOL_PORT_NUMBER}" -tA -c "SELECT 1" || true) == 1 ]]; then
                 # attach backend if it has come back online
@@ -547,7 +547,7 @@ pgpool_generate_password_file() {
 
         if [[ "$PGPOOL_AUTHENTICATION_METHOD" = "scram-sha-256" ]]; then
 
-            if is_file_writable "$PGPOOLKEYFILE"; then 
+            if is_file_writable "$PGPOOLKEYFILE"; then
                 # Creating a PGPOOLKEYFILE as it is writeable
                 echo "$PGPOOL_AES_KEY" > "$PGPOOLKEYFILE"
                 # Fix permissions for PGPOOLKEYFILE
