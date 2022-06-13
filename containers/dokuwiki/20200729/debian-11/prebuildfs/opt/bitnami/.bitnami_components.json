@@ -25,7 +25,7 @@
         "digest": "eb642c232bfcbf339ac38df9d021ec3ef6da82fdb84e79115ae083ed8326b3dd",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.4.30-1"
+        "version": "7.4.30-150"
     },
     "php": {
         "arch": "amd64",
