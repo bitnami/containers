@@ -1,0 +1,28 @@
+{
+    "phases": {
+      "package": {
+        "context": {
+          "resources": {
+            "url": "{SHA_ARCHIVE}",
+            "path": "/containers/acmeresolver/1/debian-11"
+          }
+        },
+        "actions": [
+          {
+            "action_id": "container-image-package",
+            "params": {
+                "application": {
+                    "details": {
+                        "name": "acmeresolver",
+                        "tag": "1.8.0-debian-11-r5"
+                    }
+                }
+            }
+          },
+          {
+            "action_id": "container-image-lint"
+          }
+        ]
+      }
+    }
+  }
