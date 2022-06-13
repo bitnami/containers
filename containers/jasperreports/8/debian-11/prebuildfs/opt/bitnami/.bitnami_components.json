@@ -53,6 +53,6 @@
         "digest": "a180cb51f5488fc6b8ff59800ea7af80f8a9f29286b51cb1c343f8af06bf83f5",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.0.64-0"
+        "version": "9.0.64-150"
     }
 }
