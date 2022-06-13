@@ -36,7 +36,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3.10`, `3.10-debian-11`, `3.10.5`, `3.10.5-debian-11-r4`, `latest` (3.10/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.10.5-debian-11-r4/3.10/debian-11/Dockerfile)
-* [`3.9`, `3.9-debian-11`, `3.9.13`, `3.9.13-debian-11-r4` (3.9/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.9.13-debian-11-r4/3.9/debian-11/Dockerfile)
+* [`3.9`, `3.9-debian-11`, `3.9.13`, `3.9.13-debian-11-r5` (3.9/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.9.13-debian-11-r5/3.9/debian-11/Dockerfile)
 * [`3.8`, `3.8-debian-11`, `3.8.13`, `3.8.13-debian-11-r5` (3.8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.8.13-debian-11-r5/3.8/debian-11/Dockerfile)
 * [`3.7`, `3.7-debian-11`, `3.7.13`, `3.7.13-debian-11-r5` (3.7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/3.7.13-debian-11-r5/3.7/debian-11/Dockerfile)
 * [`2`, `2-debian-11`, `2.7.18`, `2.7.18-debian-11-r5` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-python/blob/2.7.18-debian-11-r5/2/debian-11/Dockerfile)
@@ -157,6 +157,10 @@ or using Docker Compose:
 ```console
 $ docker-compose up python
 ```
+
+## Branch Deprecation Notice
+
+Python's branch 2 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 07-13-2022
 
 ## Contributing
 
