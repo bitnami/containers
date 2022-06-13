@@ -33,13 +33,6 @@ zookeeper_validate() {
         error_code=1
     }
 
-    # ZooKeeper authentication validations
-    if is_boolean_yes "$ALLOW_ANONYMOUS_LOGIN"; then
-        warn "You have set the environment variable ALLOW_ANONYMOUS_LOGIN=${ALLOW_ANONYMOUS_LOGIN}. For safety reasons, do not use this flag in a production environment."
-    elif ! is_boolean_yes "$ZOO_ENABLE_AUTH"; then
-        print_validation_error "The ZOO_ENABLE_AUTH environment variable does not configure authentication. Set the environment variable ALLOW_ANONYMOUS_LOGIN=yes to allow unauthenticated users to connect to ZooKeeper."
-    fi
-
     # ZooKeeper port validations
     check_conflicting_ports() {
         local -r total="$#"
@@ -74,6 +67,30 @@ zookeeper_validate() {
 
     is_boolean_yes "$ZOO_ENABLE_ADMIN_SERVER" && check_allowed_port ZOO_ADMIN_SERVER_PORT_NUMBER
     is_boolean_yes "$ZOO_ENABLE_ADMIN_SERVER" && check_conflicting_ports ZOO_PORT_NUMBER ZOO_PROMETHEUS_METRICS_PORT_NUMBER ZOO_ADMIN_SERVER_PORT_NUMBER
+
+    # ZooKeeper client-server authentication validations
+    if is_boolean_yes "$ALLOW_ANONYMOUS_LOGIN"; then
+        warn "You have set the environment variable ALLOW_ANONYMOUS_LOGIN=${ALLOW_ANONYMOUS_LOGIN}. For safety reasons, do not use this flag in a production environment."
+    elif ! is_boolean_yes "$ZOO_ENABLE_AUTH"; then
+        print_validation_error "The ZOO_ENABLE_AUTH environment variable does not configure authentication. Set the environment variable ALLOW_ANONYMOUS_LOGIN=yes to allow unauthenticated users to connect to ZooKeeper."
+    fi
+
+    # ZooKeeper server-server authentication validations
+    if is_boolean_yes "$ZOO_ENABLE_QUORUM_AUTH"; then
+        if is_empty_value "$ZOO_QUORUM_LEARNER_USER" || is_empty_value "$ZOO_QUORUM_LEARNER_PASSWORD"; then
+            print_validation_error "The ZOO_QUORUM_LEARNER_USER and ZOO_QUORUM_LEARNER_USER environment variables are not set. They are required if using ZOO_ENABLE_QUORUM_AUTH=yes."
+        fi
+
+        if is_empty_value "$ZOO_QUORUM_SERVER_USERS" || is_empty_value "$ZOO_QUORUM_SERVER_PASSWORDS"; then
+            print_validation_error "The ZOO_QUORUM_SERVER_USERS and ZOO_QUORUM_SERVER_PASSWORDS environment variables are not set. They are required if using ZOO_ENABLE_QUORUM_AUTH=yes."
+        fi
+
+        read -r -a quorum_server_users_list <<<"${ZOO_QUORUM_SERVER_USERS//[;, ]/ }"
+        read -r -a quorum_server_passwords_list <<<"${ZOO_QUORUM_SERVER_PASSWORDS//[;, ]/ }"
+        if [[ ${#quorum_server_users_list[@]} -ne ${#quorum_server_passwords_list[@]} ]]; then
+            print_validation_error "ZOO_QUORUM_SERVER_USERS and ZOO_QUORUM_SERVER_PASSWORDS lists should have the same length"
+        fi
+    fi
 
     # ZooKeeper server users validations
     read -r -a server_users_list <<<"${ZOO_SERVER_USERS//[;, ]/ }"
@@ -123,7 +140,12 @@ zookeeper_initialize() {
         zookeeper_generate_conf
         zookeeper_configure_heap_size "$ZOO_HEAP_SIZE"
         if is_boolean_yes "$ZOO_ENABLE_AUTH"; then
-            zookeeper_enable_authentication "$ZOO_CONF_FILE"
+            zookeeper_enable_client_server_authentication "$ZOO_CONF_FILE"
+        fi
+        if is_boolean_yes "$ZOO_ENABLE_QUORUM_AUTH"; then
+            zookeeper_enable_server_server_authentication "$ZOO_CONF_FILE"
+        fi
+        if is_boolean_yes "$ZOO_ENABLE_QUORUM_AUTH" || is_boolean_yes "$ZOO_ENABLE_AUTH"; then
             zookeeper_create_jaas_file
         fi
         if is_boolean_yes "$ZOO_ENABLE_PROMETHEUS_METRICS"; then
@@ -266,7 +288,7 @@ zookeeper_configure_heap_size() {
 }
 
 ########################
-# Enable authentication for ZooKeeper
+# Enable authentication for ZooKeeper client-server communications
 # Globals:
 #   None
 # Arguments:
@@ -274,12 +296,32 @@ zookeeper_configure_heap_size() {
 # Returns:
 #   None
 #########################
-zookeeper_enable_authentication() {
+zookeeper_enable_client_server_authentication() {
     local -r filename="${1:?filename is required}"
 
     info "Enabling authentication..."
     zookeeper_conf_set "$filename" authProvider.1 org.apache.zookeeper.server.auth.SASLAuthenticationProvider
     zookeeper_conf_set "$filename" requireClientAuthScheme sasl
+}
+
+########################
+# Enable authentication for ZooKeeper server-server communications
+# Globals:
+#   None
+# Arguments:
+#   $1 - filename
+# Returns:
+#   None
+#########################
+zookeeper_enable_server_server_authentication() {
+    local -r filename="${1:?filename is required}"
+
+    info "Enabling authentication..."
+    zookeeper_conf_set "$filename" quorum.auth.enableSasl true
+    zookeeper_conf_set "$filename" quorum.auth.learnerRequireSasl true
+    zookeeper_conf_set "$filename" quorum.auth.serverRequireSasl true
+    zookeeper_conf_set "$filename" quorum.auth.learner.saslLoginContext QuorumLearner
+    zookeeper_conf_set "$filename" quorum.auth.server.saslLoginContext QuorumServer
 }
 
 ########################
@@ -334,27 +376,52 @@ zookeeper_conf_set() {
 #########################
 zookeeper_create_jaas_file() {
     info "Creating jaas file..."
-    read -r -a server_users_list <<<"${ZOO_SERVER_USERS//[;, ]/ }"
-    read -r -a server_passwords_list <<<"${ZOO_SERVER_PASSWORDS//[;, ]/ }"
+    local jaas_content
+    if is_boolean_yes "$ZOO_ENABLE_AUTH"; then
+        read -r -a server_users_list <<<"${ZOO_SERVER_USERS//[;, ]/ }"
+        read -r -a server_passwords_list <<<"${ZOO_SERVER_PASSWORDS//[;, ]/ }"
 
-    local zookeeper_server_user_passwords=""
-    for i in $(seq 0 $((${#server_users_list[@]} - 1))); do
-        zookeeper_server_user_passwords="${zookeeper_server_user_passwords}\n   user_${server_users_list[i]}=\"${server_passwords_list[i]}\""
-    done
-    zookeeper_server_user_passwords="${zookeeper_server_user_passwords#\\n   };"
+        local zookeeper_server_user_passwords=""
+        for i in $(seq 0 $((${#server_users_list[@]} - 1))); do
+            zookeeper_server_user_passwords="${zookeeper_server_user_passwords}\n   user_${server_users_list[i]}=\"${server_passwords_list[i]}\""
+        done
+        zookeeper_server_user_passwords="${zookeeper_server_user_passwords#\\n   };"
 
-    # TODO: Indent properly
-    cat >"${ZOO_CONF_DIR}/zoo_jaas.conf" <<EOF
+        jaas_content+="
 Client {
     org.apache.zookeeper.server.auth.DigestLoginModule required
-    username="$ZOO_CLIENT_USER"
-    password="$ZOO_CLIENT_PASSWORD";
+    username=\"${ZOO_CLIENT_USER}\"
+    password=\"${ZOO_CLIENT_PASSWORD}\";
 };
 Server {
     org.apache.zookeeper.server.auth.DigestLoginModule required
     $(echo -e -n "${zookeeper_server_user_passwords}")
+};"
+    fi
+
+    if is_boolean_yes "$ZOO_ENABLE_QUORUM_AUTH"; then
+        read -r -a quorum_server_users_list <<<"${ZOO_QUORUM_SERVER_USERS//[;, ]/ }"
+        read -r -a quorum_server_passwords_list <<<"${ZOO_QUORUM_SERVER_PASSWORDS//[;, ]/ }"
+
+        local zookeeper_quorum_server_user_passwords=""
+        for i in $(seq 0 $((${#quorum_server_users_list[@]} - 1))); do
+            zookeeper_quorum_server_user_passwords="${zookeeper_quorum_server_user_passwords}\n   user_${quorum_server_users_list[i]}=\"${quorum_server_passwords_list[i]}\""
+        done
+        zookeeper_quorum_server_user_passwords="${zookeeper_quorum_server_user_passwords#\\n   };"
+
+        jaas_content+="
+QuorumLearner {
+       org.apache.zookeeper.server.auth.DigestLoginModule required
+       username=\"${ZOO_QUORUM_LEARNER_USER}\"
+       password=\"${ZOO_QUORUM_LEARNER_PASSWORD}\";
 };
-EOF
+QuorumServer {
+       org.apache.zookeeper.server.auth.DigestLoginModule required
+        $(echo -e -n "${zookeeper_quorum_server_user_passwords}")
+};
+"
+    fi
+    echo "${jaas_content}" > "${ZOO_CONF_DIR}/zoo_jaas.conf"
     zookeeper_export_jvmflags "-Djava.security.auth.login.config=${ZOO_CONF_DIR}/zoo_jaas.conf"
 
     # Restrict file permissions
