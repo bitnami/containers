@@ -9,7 +9,7 @@ services:
       - MYSQL_USER=bn_wordpress
       - MYSQL_DATABASE=bitnami_wordpress
   wordpress:
-    image: docker.io/bitnami/wordpress:5
+    image: docker.io/bitnami/wordpress:6
     ports:
       - '80:8080'
       - '443:8443'
