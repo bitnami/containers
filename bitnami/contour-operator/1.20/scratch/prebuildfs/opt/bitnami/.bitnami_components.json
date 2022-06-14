@@ -1,7 +1,7 @@
 {
     "contour-operator": {
-        "digest": "1cf82ed06b90427543aec2d1ee8ce920df1a2f78e26022f83f8d9f43b54af38b",
+        "digest": "16273437a19f5fa22eefeb1e9ad85cc400349afe6604f67f3213b30c02fc0efc",
         "type": "BLACKSMITH",
-        "version": "1.20.1"
+        "version": "1.20.2"
     }
 }
