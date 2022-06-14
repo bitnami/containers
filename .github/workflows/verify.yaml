@@ -1,11 +1,6 @@
 name: 'VIB'
 on: # rebuild any PRs and main branch changes
-  pull_request_target:
-    types:
-      - opened
-      - reopened
-      - synchronize
-      - labeled
+  pull_request:
     branches:
       - main
       - bitnami:main
@@ -20,13 +15,8 @@ jobs:
     outputs:
       container: ${{ steps.get-container.outputs.container }}
       result: ${{ steps.get-container.outputs.result }}
+      flavors: ${{ steps.get-container.outputs.flavors }}
     steps:
-      - uses: actions/checkout@v2
-        name: 'Checkout Repository'
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          fetch-depth: 0
       - id: get-container
         name: 'Get modified containers'
         run: |
@@ -37,13 +27,17 @@ jobs:
           files_changed="$(echo $files_changed_data | jq -r '.[] | .filename')"
           # Adding || true to avoid "Process exited with code 1" errors
           containers_dirs_changed="$(echo "$files_changed" | xargs dirname | grep -o "containers/[^/]*" | sort | uniq || true)"
+          flavors=($(echo "$files_changed" | xargs dirname | grep -o "containers/.*/.*/[^/]*" | sort | uniq || true))
+          flavors_json=$(printf "%s\n" "${flavors[@]}" | jq -R . | jq -cs .)
           # Using grep -c as a better alternative to wc -l when dealing with empty strings."
           num_containers_changed="$(echo "$containers_dirs_changed" | grep -c "containers" || true)"
 
           if [[ "$num_containers_changed" -eq "1" ]]; then
             # Changes done in only one container -> OK
             container_name=$(echo "$containers_dirs_changed" | sed "s|containers/||g")
+            echo "::set-output name=result::ok"
             echo "::set-output name=container::${container_name}"
+            echo "::set-output name=flavors::${flavors_json}"
           elif [[ "$num_containers_changed" -le "0" ]]; then
             # Changes done in the containers/ folder but not inside a container subfolder -> SKIP
             echo "::set-output name=error::No changes detected in containers. The rest of the tests will be skipped."
@@ -67,6 +61,10 @@ jobs:
     needs: get-container
     if: ${{ needs.get-container.outputs.result == 'ok' && contains(github.event.pull_request.labels.*.name, 'verify') }}
     name: Verify
+    # TODO
+    strategy:
+      matrix:
+        flavor:  ${{ fromJSON(needs.get-container.outputs.flavors) }}
     steps:
       - uses: actions/checkout@v2
         name: 'Checkout Repository'
@@ -76,5 +74,11 @@ jobs:
       - uses: vmware-labs/vmware-image-builder-action@main
         name: Verify ${{ needs.get-container.outputs.container }}
         with:
-          config: ${{ needs.get-container.outputs.container }}
-          pipeline: ${{ needs.get-container.outputs.container }}/1/debian-11/vib-verify.json
+          pipeline: vib-verify.json
+        env:
+          # Path with docker resources
+          PATH:  ${{ matrix.flavor }}
+          # Container name
+          CONTAINER: ${{ needs.get-container.outputs.container }}
+          # TODO: Retrieve version
+          TAG: latest

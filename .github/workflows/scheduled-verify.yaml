@@ -1,0 +1,62 @@
+name: Scheduled VIB
+on:
+  schedule:
+    - cron: "?/15 * * * *"
+  workflow_dispatch:
+    inputs:
+      container:
+        description: Force VIB verification with this container
+        required: false
+env:
+  CSP_API_URL: https://console.cloud.vmware.com
+  CSP_API_TOKEN: ${{ secrets.CSP_API_TOKEN }}
+  VIB_PUBLIC_URL: https://cp.bromelia.vmware.com
+jobs:
+  get-container:
+    runs-on: ubuntu-latest
+    name: Get random container
+    outputs:
+      container: ${{ steps.get-container.outputs.container }}
+      flavors: ${{ steps.get-container.outputs.flavors }}
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout Repository
+        with:
+          ref: main
+      - id: get-container
+        name: Get random container
+        run: |
+          container_name="${{ github.event.inputs.container }}"
+          if [ -z "$container_name" ]; then
+            containers=(containers/*)
+            random_index=$(( $RANDOM % ${#containers[@]} ))
+            container_name=$(echo "${containers[$random_index]}" | sed "s|containers/||g")
+          fi
+          flavors=(containers/${container_name}/*/*/)
+          flavors_json=$(printf "%s\n" "${flavors[@]}" | jq -R . | jq -cs .)
+          echo "::set-output name=container::${container_name}"
+          echo "::set-output name=flavors::${flavors_json}"
+  vib-verify:
+    runs-on: ubuntu-latest
+    needs: get-container
+    name: Verify
+    strategy:
+      matrix:
+        flavor:  ${{ fromJSON(needs.get-container.outputs.flavors) }}
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout Repository
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+      - uses: vmware-labs/vmware-image-builder-action@main
+        name: Verify ${{ needs.get-container.outputs.container }}
+        with:
+          pipeline: vib-verify.json
+        env:
+          # Path with docker resources
+          PATH:  ${{ matrix.flavor }}
+          # Container name
+          CONTAINER: ${{ needs.get-container.outputs.container }}
+          # TODO: Retrieve version
+          TAG: latest

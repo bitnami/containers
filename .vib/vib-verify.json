@@ -1,0 +1,28 @@
+{
+  "phases": {
+    "package": {
+      "context": {
+        "resources": {
+          "url": "{SHA_ARCHIVE}",
+          "path": "{PATH}"
+        }
+      },
+      "actions": [
+        {
+          "action_id": "container-image-package",
+          "params": {
+              "application": {
+                  "details": {
+                      "name": "{CONTAINER}",
+                      "tag": "{TAG}"
+                  }
+              }
+          }
+        },
+        {
+          "action_id": "container-image-lint"
+        }
+      ]
+    }
+  }
+}
