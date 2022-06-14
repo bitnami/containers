@@ -35,7 +35,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`5`, `5-debian-11`, `5.9.3`, `5.9.3-debian-11-r6`, `latest` (5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/5.9.3-debian-11-r6/5/debian-11/Dockerfile)
+- [`6`, `6-debian-11`, `6.0.0`, `6.0.0-debian-11-r0`, `latest` (6/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress-nginx/blob/6.0.0-debian-11-r0/6/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress-nginx GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress-nginx).
 
@@ -56,7 +56,7 @@ $ docker pull bitnami/wordpress-nginx:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/wordpress-nginx:latest 'https://github.com/bitnami/bitnami-docker-wordpress-nginx.git#master:5/debian-11'
+$ docker build -t bitnami/wordpress-nginx:latest 'https://github.com/bitnami/bitnami-docker-wordpress-nginx.git#master:6/debian-11'
 ```
 
 ## How to use this image
