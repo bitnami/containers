@@ -19,12 +19,12 @@ function queryRepos() {
     while [[ "$page" -gt -1 ]]; do
         # Query only the public repos since we won't add private containers to bitnami/containers
         page_repos="$(curl -H 'Content-Type: application/json' -H 'Accept: application/json' "https://api.github.com/orgs/bitnami/repos?type=public&per_page=${repos_per_page}&page=${page}")"
-        repos="$(jq -s 'reduce .[] as $x ([]; . + $x)' <(echo "$repos") <(echo "$page_repos"))"     
-        n_repos="$(jq length <<< "$page_repos")"   
+        repos="$(jq -s 'reduce .[] as $x ([]; . + $x)' <(echo "$repos") <(echo "$page_repos"))"
+        n_repos="$(jq length <<< "$page_repos")"
         if [[ "$n_repos" -lt "$repos_per_page" ]]; then
           page="-1"
         else
-          page="$((page + 1))" 
+          page="$((page + 1))"
         fi
     done
 
@@ -39,14 +39,14 @@ function getContainerRepos() {
 }
 
 # Commits a directory
-function gitConfigure() { 
+function gitConfigure() {
     git config user.name "Bitnami Containers"
-    git config user.email "containers@bitnami.com"
+    git config user.email "bitnami-bot@vmware.com"
 }
 
 function pushChanges() {
     git config user.name "Bitnami Containers"
-    git config user.email "containers@bitnami.com"
+    git config user.email "bitnami-bot@vmware.com"
     git push origin main
 }
 
@@ -73,7 +73,7 @@ function findCommitsToSync() {
         fi
         max=$((max - 1))
     done
-    
+
     [[ "$max" -eq "0" ]] && echo "Last commit not found into the original repo history" && return 1
     printf "$commits_to_sync"
 }
@@ -91,7 +91,7 @@ syncContainerCommits() {
     local -r name="${1:?Missing container name}"
     local -r repo_url="https://github.com/bitnami/bitnami-docker-${name}"
     (
-        cd "$TARGET_DIR" 
+        cd "$TARGET_DIR"
         # Fetch the old repo master
         git remote add --fetch "$name" "$repo_url"
         read -r -a commits_to_sync <<< "$(findCommitsToSync "$name")"
@@ -118,8 +118,8 @@ function syncRepos() {
     mkdir -p "$TARGET_DIR"
 
     if [[ -z "$CONTAINER" ]]; then
-        local -r repos="$(getContainerRepos)"        
-       
+        local -r repos="$(getContainerRepos)"
+
         # Build array of app names since we need to exclude them when moving files
         local apps=("mock")
         local -r urls=($(echo "$repos" | jq -r '.[].html_url' | sort | uniq))
@@ -131,8 +131,8 @@ function syncRepos() {
             name="${repo_url:42}" # 42 is the length of https://github.com/bitnami/bitnami-docker-
             syncContainerCommits "$name"
         done
-    else 
-        syncContainerCommits "$CONTAINER" 
+    else
+        syncContainerCommits "$CONTAINER"
     fi
 
     pushChanges
