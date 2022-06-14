@@ -46,8 +46,7 @@ keycloak_validate() {
             if is_boolean_yes "$KEYCLOAK_ENABLE_TLS"; then
                 print_validation_error "TLS and proxy=edge are not compatible. Please set the KEYCLOAK_ENABLE_TLS variable to false when using KEYCLOAK_PROXY=edge. Review # https://www.keycloak.org/server/reverseproxy for more information about proxy settings."
             fi
-        else
-            ! is_boolean_yes "$KEYCLOAK_ENABLE_TLS"
+        elif ! is_boolean_yes "$KEYCLOAK_ENABLE_TLS"; then
             # keycloak proxy passthrough/reencrypt requires tls
             print_validation_error "You need to have TLS enabled. Please set the KEYCLOAK_ENABLE_TLS variable to true"
         fi
