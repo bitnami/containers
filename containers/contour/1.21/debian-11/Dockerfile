@@ -9,16 +9,16 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/contour-1.21.0-150-linux-amd64-debian-11.tar.gz && \
-    echo "39f903f7af5e226055c09bb8a8b74dbb23e59a1d73257030b6fbe3cc5373d5cd  /tmp/bitnami/pkg/cache/contour-1.21.0-150-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/contour-1.21.0-150-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/contour-1.21.0-150-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/contour-1.21.1-0-linux-amd64-debian-11.tar.gz && \
+    echo "319a9845f1417e1ce355a2a5172279295646d53ebcafa988d46890175ba013f8  /tmp/bitnami/pkg/cache/contour-1.21.1-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/contour-1.21.1-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/contour-1.21.1-0-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN ln -s /opt/bitnami/contour/bin/contour /bin/contour
 
-ENV APP_VERSION="1.21.0" \
+ENV APP_VERSION="1.21.1" \
     BITNAMI_APP_NAME="contour" \
     PATH="/opt/bitnami/contour/bin:$PATH"
 
