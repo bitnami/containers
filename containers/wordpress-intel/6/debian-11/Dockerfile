@@ -15,7 +15,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "8.0.20-150
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wp-cli" "2.6.0-150" --checksum 1d47407703e824d0d6c17ea6720947f7d55dd7db657e997b0411259de1cdc688
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx-intel" "0.4.7-150" --checksum 44de37f9129978dedc313743f7deb0c1bc537bf799be3cb149e3e9eeebf9a37a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-150" --checksum b47e1015fc1c9ce456f134ffd5b6ac6960c3f369c96fcd37319e9289b29a1047
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wordpress" "6.0.0-151" --checksum 5d0c5512e905126b47e82ce856c23b9583160057a1b7bf5275253b6b58f872f4
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wordpress" "6.0.0-152" --checksum 286c5c7f11228418680cb872774f91bd8b52fc65bee03be7e55dd5dbba1c8314
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
