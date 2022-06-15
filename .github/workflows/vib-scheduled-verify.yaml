@@ -47,8 +47,7 @@ jobs:
       - uses: actions/checkout@v2
         name: Checkout Repository
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: main
       - uses: vmware-labs/vmware-image-builder-action@main
         name: Verify ${{ needs.get-container.outputs.container }}
         with:

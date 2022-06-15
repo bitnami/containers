@@ -1,9 +1,14 @@
 name: VIB
 on: # rebuild any PRs and main branch changes
-  pull_request:
+  pull_request_target:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - labeled
     branches:
-      - main
-      - bitnami:main
+      - master
+      - bitnami:master
 env:
   CSP_API_URL: https://console.cloud.vmware.com
   CSP_API_TOKEN: ${{ secrets.CSP_API_TOKEN }}
@@ -61,7 +66,6 @@ jobs:
     needs: get-container
     if: ${{ needs.get-container.outputs.result == 'ok' && contains(github.event.pull_request.labels.*.name, 'verify') }}
     name: Verify
-    # TODO
     strategy:
       matrix:
         flavor:  ${{ fromJSON(needs.get-container.outputs.flavors) }}
