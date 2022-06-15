@@ -23,6 +23,23 @@
           "action_id": "container-image-lint"
         }
       ]
+    },
+    "verify": {
+      "context": {
+        "resources": {
+          "url": "{VIB_ENV_URL}",
+          "path": "{VIB_ENV_PATH}"
+        }
+      },
+      "actions": [
+        {
+          "action_id": "trivy",
+          "params": {
+            "threshold": "CRITICAL",
+            "vuln_type": ["OS"]
+          }
+        }
+      ]
     }
   }
 }
