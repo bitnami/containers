@@ -11,12 +11,12 @@
         {
           "action_id": "container-image-package",
           "params": {
-              "application": {
-                  "details": {
-                      "name": "{VIB_ENV_CONTAINER}",
-                      "tag": "{VIB_ENV_TAG}"
-                  }
+            "application": {
+              "details": {
+                "name": "{VIB_ENV_CONTAINER}",
+                "tag": "{VIB_ENV_TAG}"
               }
+            }
           }
         },
         {
