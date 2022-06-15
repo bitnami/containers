@@ -22,9 +22,9 @@
     },
     "sonarqube": {
         "arch": "amd64",
-        "digest": "bd2e9dea3865076e21015a745bcca3959574d9d9f80ea9a35218626d6700ee91",
+        "digest": "d3f1cee2ab8996b000f791ae6a9b31e4dacd5aab068f9711aec4d509c4e9ca07",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.4.0-150"
+        "version": "9.5.0-0"
     }
 }
