@@ -1,7 +1,8 @@
 name: Scheduled VIB
 on:
-  schedule:
-    - cron: "?/15 * * * *"
+  # Scheduled workflow disabled due to an error in vmware-image-builder-action
+  # schedule:
+  #   - cron: "?/15 * * * *"
   workflow_dispatch:
     inputs:
       container:
