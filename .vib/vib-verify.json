@@ -4,7 +4,7 @@
       "context": {
         "resources": {
           "url": "{SHA_ARCHIVE}",
-          "path": "{PATH}"
+          "path": "{VIB_ENV_PATH}"
         }
       },
       "actions": [
@@ -13,8 +13,8 @@
           "params": {
               "application": {
                   "details": {
-                      "name": "{CONTAINER}",
-                      "tag": "{TAG}"
+                      "name": "{VIB_ENV_CONTAINER}",
+                      "tag": "{VIB_ENV_TAG}"
                   }
               }
           }

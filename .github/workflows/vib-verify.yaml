@@ -1,4 +1,4 @@
-name: 'VIB'
+name: VIB
 on: # rebuild any PRs and main branch changes
   pull_request:
     branches:
@@ -11,14 +11,14 @@ env:
 jobs:
   get-container:
     runs-on: ubuntu-latest
-    name: 'Get modified containers'
+    name: Get modified containers
     outputs:
       container: ${{ steps.get-container.outputs.container }}
       result: ${{ steps.get-container.outputs.result }}
       flavors: ${{ steps.get-container.outputs.flavors }}
     steps:
       - id: get-container
-        name: 'Get modified containers'
+        name: Get modified containers
         run: |
           # Using the Github API to detect the files changed as git merge-base stops working when the branch is behind
           # and jitterbit/get-changed-files does not support pull_request_target
@@ -50,7 +50,7 @@ jobs:
       # Using actions/github-scripts because using exit 1 in the script above would not provide any output
       # Source: https://github.community/t/no-output-on-process-completed-with-exit-code-1/123821/3
       - id: show-error
-        name: 'Show error'
+        name: Show error
         if: ${{ steps.get-container.outputs.result == 'fail' }}
         uses: actions/github-script@v3
         with:
@@ -67,7 +67,7 @@ jobs:
         flavor:  ${{ fromJSON(needs.get-container.outputs.flavors) }}
     steps:
       - uses: actions/checkout@v2
-        name: 'Checkout Repository'
+        name: Checkout Repository
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
@@ -77,8 +77,8 @@ jobs:
           pipeline: vib-verify.json
         env:
           # Path with docker resources
-          PATH:  ${{ matrix.flavor }}
+          VIB_ENV_PATH: ${{ matrix.flavor }}
           # Container name
-          CONTAINER: ${{ needs.get-container.outputs.container }}
+          VIB_ENV_CONTAINER: ${{ needs.get-container.outputs.container }}
           # TODO: Retrieve version
-          TAG: latest
+          VIB_ENV_TAG: latest

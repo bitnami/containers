@@ -55,8 +55,8 @@ jobs:
           pipeline: vib-verify.json
         env:
           # Path with docker resources
-          PATH:  ${{ matrix.flavor }}
+          VIB_ENV_PATH:  ${{ matrix.flavor }}
           # Container name
-          CONTAINER: ${{ needs.get-container.outputs.container }}
+          VIB_ENV_CONTAINER: ${{ needs.get-container.outputs.container }}
           # TODO: Retrieve version
-          TAG: latest
+          VIB_ENV_TAG: latest
