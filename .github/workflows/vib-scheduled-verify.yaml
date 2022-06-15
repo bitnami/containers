@@ -53,6 +53,9 @@ jobs:
         with:
           pipeline: vib-verify.json
         env:
+          # This workflow is not triggered by any git event. Instead of using SHA_ARCHIVE we are
+          # setting directly the main branch url.
+          VIB_ENV_URL: https://api.github.com/repos/bitnami/containers/tarball/main
           # Path with docker resources
           VIB_ENV_PATH:  ${{ matrix.flavor }}
           # Container name
