@@ -1,0 +1,28 @@
+{
+  "phases": {
+    "package": {
+      "context": {
+        "resources": {
+          "url": "{SHA_ARCHIVE}",
+          "path": "{VIB_ENV_PATH}"
+        }
+      },
+      "actions": [
+        {
+          "action_id": "container-image-package",
+          "params": {
+            "application": {
+              "details": {
+                "name": "{VIB_ENV_CONTAINER}",
+                "tag": "{VIB_ENV_TAG}"
+              }
+            }
+          }
+        },
+        {
+          "action_id": "container-image-lint"
+        }
+      ]
+    }
+  }
+}
