@@ -9,15 +9,15 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/envoy-1.21.3-150-linux-amd64-debian-11.tar.gz && \
-    echo "55c20c668f02b5f96b138709bc0270ae6c5a4c24e875e4a54480410af3e2b994  /tmp/bitnami/pkg/cache/envoy-1.21.3-150-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/envoy-1.21.3-150-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/envoy-1.21.3-150-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/envoy-1.21.4-0-linux-amd64-debian-11.tar.gz && \
+    echo "d297dc9c034418ddbad227fbab2c0367659a66033ddbf3320398d9e43c97b657  /tmp/bitnami/pkg/cache/envoy-1.21.4-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/envoy-1.21.4-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/envoy-1.21.4-0-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="1.21.3" \
+ENV APP_VERSION="1.21.4" \
     BITNAMI_APP_NAME="envoy" \
     PATH="/opt/bitnami/envoy/bin:$PATH"
 
