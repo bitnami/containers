@@ -51,7 +51,7 @@ jobs:
       - uses: vmware-labs/vmware-image-builder-action@main
         name: Verify ${{ needs.get-container.outputs.container }}
         with:
-          pipeline: vib-verify.json
+          pipeline: vib-scheduled-verify.json
         env:
           # This workflow is not triggered by any git event. Instead of using SHA_ARCHIVE we are
           # setting directly the main branch url.
