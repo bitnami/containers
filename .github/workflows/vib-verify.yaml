@@ -66,13 +66,11 @@ jobs:
       matrix:
         flavor:  ${{ fromJSON(needs.get-container.outputs.flavors) }}
     steps:
-      - id: get-vib-json
-        name: Download vib-verify.json file
-        run: |
-          # bitnami/containers repository is around 2Gb. We can reduce a lot downloading only this file and not the whole repository
-          URL=https://raw.githubusercontent.com/${{ github.event.pull_request.head.repo.full_name }}/${{ github.event.pull_request.head.ref }}/.vib/vib-verify.json
-          mkdir -p containers/.vib
-          curl -s --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -X GET -G "$URL" -o containers/.vib/verify.json
+      - uses: actions/checkout@v2
+        name: Checkout Repository
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
       - uses: vmware-labs/vmware-image-builder-action@main
         name: Verify ${{ needs.get-container.outputs.container }}
         with:
