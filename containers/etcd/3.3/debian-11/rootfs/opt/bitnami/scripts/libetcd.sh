@@ -292,7 +292,7 @@ etcdctl_auth_flags() {
         [[ -f "$ETCD_CERT_FILE" ]] && [[ -f "$ETCD_KEY_FILE" ]] && authFlags+=("--cert" "$ETCD_CERT_FILE" "--key" "$ETCD_KEY_FILE")
         [[ -f "$ETCD_TRUSTED_CA_FILE" ]] && authFlags+=("--cacert" "$ETCD_TRUSTED_CA_FILE")
     fi
-    echo "${authFlags[@]}"
+    echo "${authFlags[@]:-}"
 }
 
 ########################
@@ -311,15 +311,15 @@ etcd_store_member_id() {
     etcd_start_bg
     read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
     is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
-    if retry_while "etcdctl ${extra_flags[*]} member list" >/dev/null 2>&1; then
+    if retry_while "etcdctl ${extra_flags[*]:-} member list" >/dev/null 2>&1; then
         while is_empty_value "$member_id"; do
             read -r -a advertised_array <<<"$(tr ',;' ' ' <<<"$ETCD_ADVERTISE_CLIENT_URLS")"
-            member_id="$(etcdctl "${extra_flags[@]}" member list | grep -w "${advertised_array[0]}" | awk -F "," '{ print $1}' || true)"
+            member_id="$(etcdctl "${extra_flags[@]:-}" member list | grep -w "${advertised_array[0]}" | awk -F "," '{ print $1}' || true)"
         done
         # We use 'sync' to ensure memory buffers are flushed to disk
         # so we reduce the chances that the "member_id" file is empty.
         # ref: https://man7.org/linux/man-pages/man1/sync.1.html
-        echo "$member_id" > "${ETCD_DATA_DIR}/member_id"
+        echo "$member_id" >"${ETCD_DATA_DIR}/member_id"
         sync -d "${ETCD_DATA_DIR}/member_id"
         info "Stored member ID: $(cat "${ETCD_DATA_DIR}/member_id")"
     fi
