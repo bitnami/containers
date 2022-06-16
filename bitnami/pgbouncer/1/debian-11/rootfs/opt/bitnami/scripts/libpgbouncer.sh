@@ -213,6 +213,9 @@ pgbouncer_initialize() {
         if ! is_empty_value "$PGBOUNCER_AUTH_USER"; then
             database_value+=" auth_user=$PGBOUNCER_AUTH_USER"
         fi
+        if ! is_empty_value "$PGBOUNCER_CONNECT_QUERY"; then
+            database_value+=" connect_query='$PGBOUNCER_CONNECT_QUERY'"
+        fi
         ini-file set --section "databases" --key "$PGBOUNCER_DATABASE" --value "$database_value" "$PGBOUNCER_CONF_FILE"
         local -r -a key_value_pairs=(
             "listen_port:${PGBOUNCER_PORT}"
