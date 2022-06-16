@@ -13,15 +13,15 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "1013e2ebbe58e5dc8f3c79fc952f020fc5306ba48463803cacfbed7779173924  /tmp/bitnami/pkg/cache/wait-for-port-1.0.3-150-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/wait-for-port-1.0.3-150-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/wait-for-port-1.0.3-150-linux-amd64-debian-11.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kong-ingress-controller-2.3.1-150-linux-amd64-debian-11.tar.gz && \
-    echo "97d0c414dcf3b396efa3efecc2bafb318cbd30598b76b3dd82d85ceba1161589  /tmp/bitnami/pkg/cache/kong-ingress-controller-2.3.1-150-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/kong-ingress-controller-2.3.1-150-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/kong-ingress-controller-2.3.1-150-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kong-ingress-controller-2.4.0-0-linux-amd64-debian-11.tar.gz && \
+    echo "b881f284fdbac4cf13f76b8d82e63e9b142553238b038b837c8728f9045da898  /tmp/bitnami/pkg/cache/kong-ingress-controller-2.4.0-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/kong-ingress-controller-2.4.0-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/kong-ingress-controller-2.4.0-0-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="2.3.1" \
+ENV APP_VERSION="2.4.0" \
     BITNAMI_APP_NAME="kong-ingress-controller" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/kong-ingress-controller/bin:$PATH"
 
