@@ -13,7 +13,7 @@ COPY prebuildfs /
 RUN install_packages acl ca-certificates curl fontconfig gzip libaudit1 libbrotli1 libbsd0 libc6 libcap-ng0 libcom-err2 libcurl4 libedit2 libffi7 libgcc-s1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed6 libicu67 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmd0 libncurses6 libnettle8 libnghttp2-14 libp11-kit0 libpam0g libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 procps tar xmlstarlet zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.333-150" --checksum 02a91d298bbe3bb5d240f635802a50b2970b19eba960c1804b7275f88a944bb3
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "9.0.64-150" --checksum a180cb51f5488fc6b8ff59800ea7af80f8a9f29286b51cb1c343f8af06bf83f5
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "9.0.64-151" --checksum 58915f5bf4cd26241ac6cdbbc2cd6c0d8fce5f8aa44de8ddd5056e100cf67aab
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "11.16.0-150" --checksum 1204401fc614c448f61983e4bc1136b9ba0475c77b2f3ff497ffea59c2879a01
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-150" --checksum b47e1015fc1c9ce456f134ffd5b6ac6960c3f369c96fcd37319e9289b29a1047
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.36.1-150" --checksum c15ff3fff7478e74922d560c5c4ffcb8d11bff92975f81591b62742902edd731
