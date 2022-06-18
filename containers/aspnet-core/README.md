@@ -35,8 +35,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`6.0`, `6.0-debian-11`, `6.0.6`, `6.0.6-debian-11-r0`, `latest` (6.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/6.0.6-debian-11-r0/6.0/debian-11/Dockerfile)
-* [`5`, `5-debian-11`, `5.0.17`, `5.0.17-debian-11-r5` (5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/5.0.17-debian-11-r5/5/debian-11/Dockerfile)
+* [`6.0`, `6.0-debian-11`, `6.0.6`, `6.0.6-debian-11-r1`, `latest` (6.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/6.0.6-debian-11-r1/6.0/debian-11/Dockerfile)
 * [`3.1`, `3.1-debian-11`, `3.1.26`, `3.1.26-debian-11-r0` (3.1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/3.1.26-debian-11-r0/3.1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/aspnet-core GitHub repo](https://github.com/bitnami/bitnami-docker-aspnet-core).
@@ -152,10 +151,6 @@ Re-create your container from the new image.
 ```console
 $ docker run --name aspnet-core bitnami/aspnet-core:latest
 ```
-
-## Branch Deprecation Notice
-
-ASP.NET's branch 5 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 06-12-2022
 
 ## Contributing
 
