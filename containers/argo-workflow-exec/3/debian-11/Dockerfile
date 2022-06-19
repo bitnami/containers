@@ -8,7 +8,7 @@ ENV OS_ARCH="amd64" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl docker git gzip jq procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kubectl" "1.23.7-150" --checksum fd8fcfd38373af3d484c9a4733c6633b34da922d084517122080023baddd3799
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kubectl" "1.23.8-0" --checksum 5437272c5f4c94cd1b4a02ce7909008ac654661347ddb1d386d93d5a04556a52
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "argo-workflow-exec" "3.3.6-150" --checksum 3e8ca4c0e9c057a1c87a425ddc3b975815ba96068b21ad9b3397bb1e48b271de
 RUN apt-get update && apt-get upgrade -y && \
