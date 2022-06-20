@@ -69,6 +69,7 @@ airflow_scheduler_initialize() {
     done
 
     # Wait for airflow webserver to be available
+    info "Waiting for Airflow Webserser to be up"
     airflow_scheduler_wait_for_webserver "$AIRFLOW_WEBSERVER_HOST" "$AIRFLOW_WEBSERVER_PORT_NUMBER"
     [[ "$AIRFLOW_EXECUTOR" == "CeleryExecutor" || "$AIRFLOW_EXECUTOR" == "CeleryKubernetesExecutor"  ]] && wait-for-port --host "$REDIS_HOST" "$REDIS_PORT_NUMBER"
 
