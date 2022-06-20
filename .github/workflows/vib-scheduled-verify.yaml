@@ -1,8 +1,7 @@
 name: Scheduled VIB
 on:
-  # Scheduled workflow disabled due to an error in vmware-image-builder-action
-  # schedule:
-  #   - cron: "?/15 * * * *"
+  schedule:
+    - cron: "?/15 * * * *"
   workflow_dispatch:
     inputs:
       container:
@@ -42,6 +41,7 @@ jobs:
     needs: get-container
     name: Verify
     strategy:
+      fail-fast: false
       matrix:
         flavor:  ${{ fromJSON(needs.get-container.outputs.flavors) }}
     steps:
