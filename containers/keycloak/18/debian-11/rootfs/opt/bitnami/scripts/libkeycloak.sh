@@ -187,7 +187,7 @@ keycloak_configure_hostname() {
 keycloak_configure_http() {
     info "Configuring http settings"
     keycloak_conf_set "http-enabled" "true"
-    keycloak_conf_set "https-stric" "false"
+    keycloak_conf_set "http-relative-path" "${KEYCLOAK_HTTP_RELATIVE_PATH}"
     keycloak_conf_set "http-port" "${KEYCLOAK_HTTP_PORT}"
     keycloak_conf_set "https-port" "${KEYCLOAK_HTTPS_PORT}"
 }
