@@ -12,7 +12,7 @@ COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaudit1 libc6 libcap-ng0 libgcc-s1 libicu67 liblzma5 libncurses6 libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 procps tar xmlstarlet zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.15-150" --checksum fe6b65886a6b1f545508e272efbf422054ee030c867f94ebec2f93c5518252de
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "9.0.64-151" --checksum 58915f5bf4cd26241ac6cdbbc2cd6c0d8fce5f8aa44de8ddd5056e100cf67aab
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "9.0.64-152" --checksum 04f970d589c9540b37caf70dbc35e2d91ed93254761d81ebf18845ffb544fd28
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-150" --checksum b47e1015fc1c9ce456f134ffd5b6ac6960c3f369c96fcd37319e9289b29a1047
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "reportserver" "4.1.0-6064-150" --checksum 2b76303f59f546ae91e4bb9def04ea8a9116e55e1df84c1cbab5bcc7363683a3
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-150" --checksum 8b992a5ee513c5eaca52b19232b21a93588ddf4c4850be4d47c6f19b11d1d90a
