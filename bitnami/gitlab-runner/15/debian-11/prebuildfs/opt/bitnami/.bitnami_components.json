@@ -15,10 +15,10 @@
     },
     "gitlab-runner": {
         "arch": "amd64",
-        "digest": "9e65bf7d4e19ef870dd9d80cb227762d47dab9f35d3e1924097cc086966d57b7",
+        "digest": "71d08d57f25bd294dfb03f9c6774bd18a6f52818a7357d6303948e60e42934aa",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "15.0.0-150"
+        "version": "15.1.0-0"
     },
     "gosu": {
         "arch": "amd64",
