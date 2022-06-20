@@ -16,7 +16,7 @@ RUN install_packages acl ca-certificates curl gzip hostname libasound2-dev libc6
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.25.2-150" --checksum 58fc2dcc9eda8b5e88ef23081c14384a33ac4736d7238d490416fb4c5c633994
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "17.0.3-150" --checksum 3641fab618ebea99ea7d4fe840a27f255159fdfb4f8aa77954b02d93162a4217
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "elasticsearch" "8.2.3-0" --checksum 153a29efe5f913d5b33ca25b244fdc13914a62648ece843a634fae72a43d4822
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "elasticsearch" "8.2.3-1" --checksum 7d1fcebf2bd3e77238e67bccfaccc388526a7d457f03e0638691f56e73c0bec5
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami

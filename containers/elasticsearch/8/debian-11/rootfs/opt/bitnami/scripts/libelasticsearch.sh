@@ -469,7 +469,7 @@ elasticsearch_http_tls_configuration(){
 elasticsearch_custom_configuration() {
     local custom_conf_file="${ELASTICSEARCH_CONF_DIR}/my_elasticsearch.yml"
     local -r tempfile=$(mktemp)
-    [[ ! -f "$custom_conf_file" ]] && return
+    [[ ! -s "$custom_conf_file" ]] && return
     info "Adding custom configuration"
     yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' "$ELASTICSEARCH_CONF_FILE" "$custom_conf_file" >"$tempfile"
     cp "$tempfile" "$ELASTICSEARCH_CONF_FILE"
