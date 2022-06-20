@@ -16,7 +16,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "10.21.0-150" --checksum c9d6f09bac47484b4d4aaec3d48018c46d4102fb35abebeb62ef7a3496125e4c
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.3-150" --checksum ef1f6d1ca9e4873f82cf5037078b55524596ca2755262948f23571767bfd4101
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.36.1-150" --checksum c15ff3fff7478e74922d560c5c4ffcb8d11bff92975f81591b62742902edd731
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "airflow" "2.3.2-151" --checksum 04589b61a3e54748e7f2a7f29e05d00512767dc9839aa60b7686ea2c1bc403d6
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "airflow" "2.3.2-152" --checksum b74088ce002b19eb176f305c7b3fe5c1a2fa47bd4d9f133559bb0ce10cccefab
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
