@@ -1,6 +1,11 @@
 name: VIB
 on: # rebuild any PRs and main branch changes
-  pull_request:
+  pull_request_target:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - labeled
     branches:
       - main
       - bitnami:main
