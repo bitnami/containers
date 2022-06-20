@@ -529,7 +529,7 @@ volumes:
     driver: local
 ```
 
-And the run docker-compose using:
+And then run docker-compose using:
 
 ```console
 $ docker-compose up --detach --scale mongodb-primary=1 --scale mongodb-secondary=3 --scale mongodb-arbiter=1
