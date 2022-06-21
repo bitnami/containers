@@ -1,6 +1,4 @@
 FROM docker.io/bitnami/minideb:bullseye
-LABEL maintainer "Bitnami <containers@bitnami.com>"
-
 ENV HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-11" \
@@ -14,7 +12,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.54-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-150" --checksum b47e1015fc1c9ce456f134ffd5b6ac6960c3f369c96fcd37319e9289b29a1047
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "8.0.20-150" --checksum 7dab47ea9fff600df715d20eb26749f534b0ab5b83a71bf974a5d2657dfad26e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-150" --checksum 8b992a5ee513c5eaca52b19232b21a93588ddf4c4850be4d47c6f19b11d1d90a
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "joomla" "3.10.9-150" --checksum 1c04f05c08bacf232d6b2416cc8c643cd614a0912636254e48641327cb38cfcb
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "joomla" "3.10.10-0" --checksum 15dcbff25b213ccde25c8a56596e854b1e8af1f88ce04f77625468fd2cff67b0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -28,7 +26,7 @@ RUN /opt/bitnami/scripts/joomla/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="3.10.9" \
+    APP_VERSION="3.10.10" \
     BITNAMI_APP_NAME="joomla" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
