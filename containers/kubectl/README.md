@@ -28,10 +28,9 @@ $ docker run --name kubectl bitnami/kubectl:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.24`, `1.24-debian-11`, `1.24.1`, `1.24.1-debian-11-r7`, `latest` (1.24/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.24.1-debian-11-r7/1.24/debian-11/Dockerfile)
+* [`1.24`, `1.24-debian-11`, `1.24.2`, `1.24.2-debian-11-r0`, `latest` (1.24/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.24.2-debian-11-r0/1.24/debian-11/Dockerfile)
 * [`1.23`, `1.23-debian-11`, `1.23.8`, `1.23.8-debian-11-r1` (1.23/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.23.8-debian-11-r1/1.23/debian-11/Dockerfile)
 * [`1.22`, `1.22-debian-11`, `1.22.11`, `1.22.11-debian-11-r1` (1.22/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.22.11-debian-11-r1/1.22/debian-11/Dockerfile)
-* [`1.21`, `1.21-debian-11`, `1.21.14`, `1.21.14-debian-11-r1` (1.21/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.21.14-debian-11-r1/1.21/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kubectl GitHub repo](https://github.com/bitnami/bitnami-docker-kubectl).
 
@@ -74,10 +73,6 @@ It's possible to load your own configuration, which is useful if you want to con
 ```console
 $ docker run --rm --name kubectl -v /path/to/your/kube/config:/.kube/config bitnami/kubectl:latest
 ```
-
-## Branch Deprecation Notice
-
-Kubectl's branch 1.21 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 06-17-2022
 
 ## Contributing
 
