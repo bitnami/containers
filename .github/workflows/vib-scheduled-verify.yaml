@@ -1,8 +1,7 @@
 name: Scheduled VIB
 on:
-  # Scheduled workflow disabled due to an error in vmware-image-builder-action
-  # schedule:
-  #   - cron: "?/15 * * * *"
+  schedule:
+    - cron: "?/15 * * * *"
   workflow_dispatch:
     inputs:
       container:
@@ -42,6 +41,7 @@ jobs:
     needs: get-container
     name: Verify
     strategy:
+      fail-fast: false
       matrix:
         flavor:  ${{ fromJSON(needs.get-container.outputs.flavors) }}
     steps:
@@ -52,11 +52,8 @@ jobs:
       - uses: vmware-labs/vmware-image-builder-action@main
         name: Verify ${{ needs.get-container.outputs.container }}
         with:
-          pipeline: vib-scheduled-verify.json
+          pipeline: vib-verify.json
         env:
-          # This workflow is not triggered by any git event. Instead of using SHA_ARCHIVE we are
-          # setting directly the main branch url.
-          VIB_ENV_URL: https://api.github.com/repos/bitnami/containers/tarball/main
           # Path with docker resources
           VIB_ENV_PATH:  ${{ matrix.flavor }}
           # Container name
