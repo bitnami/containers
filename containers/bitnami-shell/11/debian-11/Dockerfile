@@ -1,5 +1,4 @@
 FROM docker.io/bitnami/minideb:bullseye
-LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY prebuildfs /
 # Install required system packages and dependencies
