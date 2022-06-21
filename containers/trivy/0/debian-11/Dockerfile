@@ -9,16 +9,16 @@ ENV HOME="/" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/trivy-0.28.1-150-linux-amd64-debian-11.tar.gz && \
-    echo "57b46d505b560e62aba2c128e0dab3e9ab0bec870a6c5f9019a81cefa968d940  /tmp/bitnami/pkg/cache/trivy-0.28.1-150-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/trivy-0.28.1-150-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/trivy-0.28.1-150-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/trivy-0.29.1-0-linux-amd64-debian-11.tar.gz && \
+    echo "83744a9a4088dfa93fa91cb4672a9db1a34c47f1934c9ba9979ef02939a4b074  /tmp/bitnami/pkg/cache/trivy-0.29.1-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/trivy-0.29.1-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/trivy-0.29.1-0-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /.cache && chmod g+rwX /.cache
 
-ENV APP_VERSION="0.28.1" \
+ENV APP_VERSION="0.29.1" \
     BITNAMI_APP_NAME="trivy" \
     PATH="/opt/bitnami/trivy/bin:$PATH"
 
