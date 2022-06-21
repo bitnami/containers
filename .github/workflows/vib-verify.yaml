@@ -67,6 +67,7 @@ jobs:
     if: ${{ needs.get-container.outputs.result == 'ok' && contains(github.event.pull_request.labels.*.name, 'verify') }}
     name: Verify
     strategy:
+      fail-fast: false
       matrix:
         flavor:  ${{ fromJSON(needs.get-container.outputs.flavors) }}
     steps:
