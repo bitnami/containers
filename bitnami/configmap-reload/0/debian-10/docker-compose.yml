@@ -1,6 +1,0 @@
-version: '2'
-services:
-  configmap-reload:
-    image: docker.io/bitnami/configmap-reload:0
-    ports:
-      - 8080:8080
