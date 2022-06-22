@@ -1,8 +1,0 @@
-version: '2'
-
-services:
-  oauth2-proxy:
-    image: docker.io/bitnami/oauth2-proxy:7
-    ports:
-      - '8080:8080'
-      - '4180:4180'
