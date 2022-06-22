@@ -1,7 +1,0 @@
-version: '2'
-
-services:
-  configurable-http-proxy:
-    image: docker.io/bitnami/configurable-http-proxy:4
-    ports:
-      - 8000:8000
