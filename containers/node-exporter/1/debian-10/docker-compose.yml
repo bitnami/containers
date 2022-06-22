@@ -1,5 +1,0 @@
-version: '2'
-
-services:
-  node-exporter:
-    image: docker.io/bitnami/node-exporter:1
