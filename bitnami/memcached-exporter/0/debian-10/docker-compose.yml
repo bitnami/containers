@@ -1,6 +1,0 @@
-version: '2'
-services:
-  memcached-exporter:
-    image: docker.io/bitnami/memcached-exporter:0
-    ports:
-      - 9150:9150
