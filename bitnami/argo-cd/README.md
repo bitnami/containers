@@ -35,7 +35,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-11`, `2.3.4`, `2.3.4-debian-11-r3`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-argo-cd/blob/2.3.4-debian-11-r3/2/debian-11/      Dockerfile)
+* [`2`, `2-debian-11`, `2.4.2`, `2.4.2-debian-11-r0`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-argo-cd/blob/2.4.2-debian-11-r0/2/debian-11/      Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/argo-cd GitHub repo](https://github.com/bitnami/bitnami-docker-argo-cd).
 
@@ -56,7 +56,7 @@ $ docker pull bitnami/argo-cd:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/argo-cd 'https://github.com/bitnami/bitnami-docker-argo-cd.git#master:7/debian-10'
+$ docker build -t bitnami/argo-cd:latest 'https://github.com/bitnami/bitnami-docker-argo-cd.git#master:2/debian-11'
 ```
 
 ## Maintenance
