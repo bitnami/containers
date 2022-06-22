@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`5.0`, `5.0-debian-10`, `5.0.9`, `5.0.9-debian-10-r12`, `latest` (5.0/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/5.0.9-debian-10-r12/5.0/debian-10/Dockerfile)
 * [`4.4`, `4.4-debian-10`, `4.4.15`, `4.4.15-debian-10-r1` (4.4/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.4.15-debian-10-r1/4.4/debian-10/Dockerfile)
-* [`4.2`, `4.2-debian-10`, `4.2.21`, `4.2.21-debian-10-r1` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.21-debian-10-r1/4.2/debian-10/Dockerfile)
+* [`4.2`, `4.2-debian-10`, `4.2.21`, `4.2.21-debian-10-r2` (4.2/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/4.2.21-debian-10-r2/4.2/debian-10/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
 
@@ -320,10 +320,6 @@ $ docker-compose up mongodb-sharded
 
 - `3.6.16-centos-7-r49`, `4.0.14-centos-7-r29`, and `4.2.2-centos-7-r41` are considered the latest images based on CentOS.
 - Standard supported distros: Debian & OEL.
-
-## Branch Deprecation Notice
-
-MongoDB&reg; Sharded's branch 4.0 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 06-12-2022
 
 ## Contributing
 
