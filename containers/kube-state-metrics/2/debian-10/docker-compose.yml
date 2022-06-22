@@ -1,8 +1,0 @@
-version: '2'
-
-services:
-  kube-state-metrics:
-    image: docker.io/bitnami/kube-state-metrics:2
-    ports:
-      - '8080:8080'
-      - '8081:8081'
