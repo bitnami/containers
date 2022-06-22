@@ -1,4 +1,0 @@
-version: '2'
-services:
-  telegraf:
-    image: docker.io/bitnami/telegraf:1
