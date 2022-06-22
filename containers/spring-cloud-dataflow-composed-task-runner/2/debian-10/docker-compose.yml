@@ -1,5 +1,0 @@
-version: '2'
-
-services:
-  spring-cloud-dataflow-composed-task-runner:
-    image: docker.io/bitnami/spring-cloud-dataflow-composed-task-runner:2
