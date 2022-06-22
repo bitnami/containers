@@ -1,4 +1,0 @@
-version: '2'
-services:
-  google-cloud-sdk:
-    image: docker.io/bitnami/google-cloud-sdk:0
