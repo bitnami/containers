@@ -1,9 +1,0 @@
-version: '2'
-
-services:
-  nats:
-    image: docker.io/bitnami/nats:2
-    ports:
-      - '4222:4222'
-      - '6222:6222'
-      - '8222:8222'
