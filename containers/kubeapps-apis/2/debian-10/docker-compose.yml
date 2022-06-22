@@ -1,4 +1,0 @@
-version: '2'
-services:
-  kubeapps-apis:
-    image: docker.io/bitnami/kubeapps-apis:2
