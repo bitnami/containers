@@ -1,5 +1,0 @@
-version: '2'
-
-services:
-  cainjector:
-    image: docker.io/bitnami/cainjector:1
