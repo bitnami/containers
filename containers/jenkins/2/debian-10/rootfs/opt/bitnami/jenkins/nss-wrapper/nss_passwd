@@ -1,1 +1,0 @@
-jenkins:x:1001:0:Jenkins:/opt/bitnami/jenkins/jenkins_home:/bin/false
