@@ -47,7 +47,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`1.22`, `1.22-debian-11`, `1.22.0`, `1.22.0-debian-11-r7`, `latest` (1.22/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.22.0-debian-11-r7/1.22/debian-11/Dockerfile)
 * [`1.21`, `1.21-debian-11`, `1.21.6`, `1.21.6-debian-11-r7` (1.21/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.21.6-debian-11-r7/1.21/debian-11/Dockerfile)
-* [`1.20`, `1.20-debian-11`, `1.20.2`, `1.20.2-debian-11-r7` (1.20/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.20.2-debian-11-r7/1.20/debian-11/Dockerfile)
+* [`1.20`, `1.20-debian-11`, `1.20.2`, `1.20.2-debian-11-r8` (1.20/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.20.2-debian-11-r8/1.20/debian-11/Dockerfile)
 
 ## Get this image
 
@@ -611,6 +611,8 @@ $ docker-compose up nginx
 - The recommended mount point for adding custom server blocks changes from `/opt/bitnami/nginx/conf/vhosts` to `/opt/bitnami/nginx/conf/server_blocks`. Remember to update your Docker Compose files to user the new mount point.
 
 ## Branch Deprecation Notice
+
+NGINX Open Source's branch 1.21 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 07-22-2022
 
 NGINX Open Source's branch 1.20 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 06-25-2022
 
