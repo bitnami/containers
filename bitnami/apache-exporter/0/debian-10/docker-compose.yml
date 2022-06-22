@@ -1,6 +1,0 @@
-version: '2'
-services:
-  apache-exporter:
-    image: docker.io/bitnami/apache-exporter:0
-    ports:
-      - 9117:9117
