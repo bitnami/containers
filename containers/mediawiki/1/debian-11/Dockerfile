@@ -1,6 +1,4 @@
 FROM docker.io/bitnami/minideb:bullseye
-LABEL maintainer "Bitnami <containers@bitnami.com>"
-
 ENV HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-11" \
@@ -14,7 +12,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.54-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-150" --checksum b47e1015fc1c9ce456f134ffd5b6ac6960c3f369c96fcd37319e9289b29a1047
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.30-150" --checksum eb642c232bfcbf339ac38df9d021ec3ef6da82fdb84e79115ae083ed8326b3dd
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-150" --checksum 8b992a5ee513c5eaca52b19232b21a93588ddf4c4850be4d47c6f19b11d1d90a
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mediawiki" "1.37.2-0" --checksum 55f0ec43919acf2b42e9957ee3c59030121c96e547f14366b151d1f6e525a4bb
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mediawiki" "1.38.1-150" --checksum 06a928ad4dfbf140475ec305311f089d410fff10f36977918a96996ac42e0157
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -32,7 +30,7 @@ RUN /opt/bitnami/scripts/mediawiki/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="1.37.2" \
+    APP_VERSION="1.38.1" \
     BITNAMI_APP_NAME="mediawiki" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
