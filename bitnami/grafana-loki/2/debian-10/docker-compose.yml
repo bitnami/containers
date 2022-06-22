@@ -1,4 +1,0 @@
-version: '2'
-services:
-  grafana-loki:
-    image: docker.io/bitnami/grafana-loki:2
