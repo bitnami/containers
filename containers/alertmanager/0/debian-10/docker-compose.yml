@@ -1,7 +1,0 @@
-version: '2'
-
-services:
-  alertmanager:
-    image: docker.io/bitnami/alertmanager:0
-    ports:
-      - '9093:9093'
