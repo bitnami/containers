@@ -22,7 +22,7 @@
         {
           "action_id": "container-image-lint",
           "params": {
-            "threshold": "warning"
+            "threshold": "error"
           }
         }
       ]
