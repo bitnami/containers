@@ -1,4 +1,0 @@
-version: '2'
-services:
-  git:
-    image: docker.io/bitnami/git:2
