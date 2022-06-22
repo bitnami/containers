@@ -1,8 +1,0 @@
-version: '2'
-
-services:
-  xgboost:
-    tty: true
-    image: docker.io/bitnami/xgboost-intel:1
-    volumes:
-      - '.:/app'
