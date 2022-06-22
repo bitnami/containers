@@ -1,6 +1,0 @@
-version: '2'
-services:
-  nats-exporter:
-    image: docker.io/bitnami/nats-exporter:0
-    ports:
-      - 7777:7777
