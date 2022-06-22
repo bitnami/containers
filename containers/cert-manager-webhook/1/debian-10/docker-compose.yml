@@ -1,5 +1,0 @@
-version: '2'
-
-services:
-  cert-manager-webhook:
-    image: docker.io/bitnami/cert-manager-webhook:1
