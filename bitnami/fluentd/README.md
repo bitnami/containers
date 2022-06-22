@@ -34,7 +34,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-11`, `1.14.6`, `1.14.6-debian-11-r7`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.14.6-debian-11-r7/1/debian-11/Dockerfile)
+* [`1`, `1-debian-11`, `1.14.6`, `1.14.6-debian-11-r8`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.14.6-debian-11-r8/1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd).
 
@@ -213,7 +213,6 @@ Here is an example of extending the image installing custom Fluentd plugins:
 
 ```Dockerfile
 FROM bitnami/fluentd
-LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ### Install custom Fluentd plugins
 RUN fluent-gem install 'fluent-plugin-docker_metadata_filter'
