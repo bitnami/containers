@@ -1,5 +1,0 @@
-version: '2'
-
-services:
-  spring-cloud-skipper-shell:
-    image: docker.io/bitnami/spring-cloud-skipper-shell:2
