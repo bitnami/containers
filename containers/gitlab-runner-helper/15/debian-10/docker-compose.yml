@@ -1,4 +1,0 @@
-version: '2'
-services:
-  gitlab-runner-helper:
-    image: docker.io/bitnami/gitlab-runner-helper:15
