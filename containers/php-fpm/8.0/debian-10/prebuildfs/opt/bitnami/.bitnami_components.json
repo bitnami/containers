@@ -1,9 +1,0 @@
-{
-    "php": {
-        "arch": "amd64",
-        "digest": "77232ce4057fe59f5a7dffc03d2e127404854ab194b31a95652c36f846a22446",
-        "distro": "debian-10",
-        "type": "NAMI",
-        "version": "8.0.19-1"
-    }
-}
