@@ -1,8 +1,0 @@
-version: '2'
-
-services:
-  prometheus-rsocket-proxy:
-    image: docker.io/bitnami/prometheus-rsocket-proxy:1
-    ports:
-      - '8080:8080'
-      - '7001:7001'
