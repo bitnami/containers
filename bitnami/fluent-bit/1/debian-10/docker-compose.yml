@@ -1,7 +1,0 @@
-version: '2'
-
-services:
-  fluent-bit:
-    image: docker.io/bitnami/fluent-bit:1
-    ports:
-      - '2020:2020'
