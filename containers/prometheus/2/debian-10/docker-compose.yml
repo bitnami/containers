@@ -1,7 +1,0 @@
-version: '2'
-
-services:
-  prometheus:
-    image: docker.io/bitnami/prometheus:2
-    ports:
-      - '9090:9090'
