@@ -1,7 +1,0 @@
-version: '2'
-
-services:
-  openresty:
-    image: docker.io/bitnami/openresty:1.21
-    ports:
-      - '80:8080'
