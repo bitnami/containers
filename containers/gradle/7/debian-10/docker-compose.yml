@@ -1,8 +1,0 @@
-version: '2'
-services:
-  gradle:
-    image: docker.io/bitnami/gradle:7
-    # Overriding entrypoint so the container does not exit and we can run some basic tests
-    entrypoint: tail -f /dev/null
-    volumes:
-      - .:/app
