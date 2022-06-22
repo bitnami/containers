@@ -1,7 +1,0 @@
-version: '2'
-
-services:
-  elasticsearch-exporter:
-    image: docker.io/bitnami/elasticsearch-exporter:1
-    ports:
-      - '9114:9114'
