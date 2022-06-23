@@ -41,7 +41,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`8`, `8-debian-11`, `8.0.2`, `8.0.2-debian-11-r7`, `latest` (8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-osclass/blob/8.0.2-debian-11-r7/8/debian-11/Dockerfile)
+- [`8`, `8-debian-11`, `8.0.2`, `8.0.2-debian-11-r8`, `latest` (8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-osclass/blob/8.0.2-debian-11-r8/8/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/osclass GitHub repo](https://github.com/bitnami/bitnami-docker-osclass).
 
@@ -481,7 +481,6 @@ Here is an example of extending the image with the following modifications:
 
 ```Dockerfile
 FROM bitnami/osclass
-LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ## Change user to perform privileged actions
 USER 0
