@@ -13,6 +13,10 @@ set -o nounset
 # Load etcd environment settings
 . /opt/bitnami/scripts/etcd-env.sh
 
+if is_boolean_yes "$ETCD_DISABLE_PRESTOP"; then
+    return 0
+fi
+
 endpoints="$(etcdctl_get_endpoints true)"
 if is_empty_value "${endpoints}"; then
     exit 0
@@ -22,5 +26,5 @@ extra_flags+=("--endpoints=${endpoints}" "--debug=true")
 # We use 'sync' to ensure memory buffers are flushed to disk
 # so we reduce the chances that the "member_removal.log" file is empty.
 # ref: https://man7.org/linux/man-pages/man1/sync.1.html
-etcdctl member remove "$(cat "${ETCD_DATA_DIR}/member_id")" "${extra_flags[@]}" > "$(dirname "$ETCD_DATA_DIR")/member_removal.log"
+etcdctl member remove "$(get_member_id)" "${extra_flags[@]}" > "$(dirname "$ETCD_DATA_DIR")/member_removal.log"
 sync -d "$(dirname "$ETCD_DATA_DIR")/member_removal.log"
