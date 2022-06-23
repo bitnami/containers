@@ -38,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.21`, `1.21-debian-11`, `1.21.4-1`, `1.21.4-1-debian-11-r7` (1.21/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-openresty/blob/1.21.4-1-debian-11-r7/1.21/debian-11/Dockerfile)
-* [`1.19`, `1.19-debian-11`, `1.19.9-1`, `1.19.9-1-debian-11-r7`, `latest` (1.19/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-openresty/blob/1.19.9-1-debian-11-r7/1.19/debian-11/Dockerfile)
+* [`1.19`, `1.19-debian-11`, `1.19.9-1`, `1.19.9-1-debian-11-r8`, `latest` (1.19/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-openresty/blob/1.19.9-1-debian-11-r8/1.19/debian-11/Dockerfile)
 
 ## Get this image
 
@@ -334,7 +334,6 @@ Here is an example of extending the image with the following modifications:
 
 ```Dockerfile
 FROM bitnami/openresty
-LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ## Change user to perform privileged actions
 USER 0
