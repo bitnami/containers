@@ -36,7 +36,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`15`, `15-debian-11`, `15.1.0`, `15.1.0-debian-11-r0`, `latest` (15/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-gitlab-runner/blob/15.1.0-debian-11-r0/15/debian-11/      Dockerfile)
-* [`14`, `14-debian-11`, `14.10.1`, `14.10.1-debian-11-r7` (14/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-gitlab-runner/blob/14.10.1-debian-11-r7/14/debian-11/      Dockerfile)
+* [`14`, `14-debian-11`, `14.10.1`, `14.10.1-debian-11-r8` (14/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-gitlab-runner/blob/14.10.1-debian-11-r8/14/debian-11/      Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/gitlab-runner GitHub repo](https://github.com/bitnami/bitnami-docker-gitlab-runner).
 
@@ -57,7 +57,7 @@ $ docker pull bitnami/gitlab-runner:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/gitlab-runner 'https://github.com/bitnami/bitnami-docker-gitlab-runner.git#master:7/debian-10'
+$ docker build -t bitnami/gitlab-runner:latest 'https://github.com/bitnami/bitnami-docker-gitlab-runner.git#master:15/debian-11'
 ```
 
 ## Maintenance
