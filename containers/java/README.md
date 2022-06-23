@@ -35,7 +35,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`18`, `18-debian-11`, `18.0.1`, `18.0.1-debian-11-r4`, `latest` (18/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/18.0.1-debian-11-r4/18/debian-11/Dockerfile)
+* [`18`, `18-debian-11`, `18.0.1`, `18.0.1-debian-11-r5`, `latest` (18/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/18.0.1-debian-11-r5/18/debian-11/Dockerfile)
 * [`17`, `17-debian-11`, `17.0.3`, `17.0.3-debian-11-r7` (17/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/17.0.3-debian-11-r7/17/debian-11/Dockerfile)
 * [`11`, `11-debian-11`, `11.0.15`, `11.0.15-debian-11-r7` (11/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.15-debian-11-r7/11/debian-11/Dockerfile)
 * [`1.8`, `1.8-debian-11`, `1.8.333`, `1.8.333-debian-11-r7` (1.8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.333-debian-11-r7/1.8/debian-11/Dockerfile)
@@ -103,7 +103,7 @@ java:
 
 In case you are replacing the default [minideb](https://github.com/bitnami/minideb) base image with a custom base image (based on Debian), it is possible to replace the default truststore located in the `/opt/bitnami/java/lib/security` folder. This is done by setting the `JAVA_EXTRA_SECURITY_DIR` docker build ARG variable, which needs to point to a location that contains a *cacerts* file that would substitute the originally bundled truststore. In the following example we will use a minideb fork that contains a custom *cacerts* file in the */bitnami/java/extra-security* folder:
 
-- In the Dockerfile, replace `FROM docker.io/bitnami/minideb:buster` to use a custom image, defined with the `MYJAVAFORK:TAG` placeholder:
+- In the Dockerfile, replace `FROM docker.io/bitnami/minideb:latest` to use a custom image, defined with the `MYJAVAFORK:TAG` placeholder:
 
 ```diff
 - FROM bitnami/minideb:latest
