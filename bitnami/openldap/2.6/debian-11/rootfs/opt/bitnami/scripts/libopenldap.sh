@@ -50,12 +50,10 @@ export LDAP_ROOT="${LDAP_ROOT:-dc=example,dc=org}"
 export LDAP_ADMIN_USERNAME="${LDAP_ADMIN_USERNAME:-admin}"
 export LDAP_ADMIN_DN="${LDAP_ADMIN_USERNAME/#/cn=},${LDAP_ROOT}"
 export LDAP_ADMIN_PASSWORD="${LDAP_ADMIN_PASSWORD:-adminpassword}"
-export LDAP_ENCRYPTED_ADMIN_PASSWORD="$(echo -n $LDAP_ADMIN_PASSWORD | slappasswd -n -T /dev/stdin)"
 export LDAP_CONFIG_ADMIN_ENABLED="${LDAP_CONFIG_ADMIN_ENABLED:-no}"
 export LDAP_CONFIG_ADMIN_USERNAME="${LDAP_CONFIG_ADMIN_USERNAME:-admin}"
 export LDAP_CONFIG_ADMIN_DN="${LDAP_CONFIG_ADMIN_USERNAME/#/cn=},cn=config"
 export LDAP_CONFIG_ADMIN_PASSWORD="${LDAP_CONFIG_ADMIN_PASSWORD:-configpassword}"
-export LDAP_ENCRYPTED_CONFIG_ADMIN_PASSWORD="$(echo -n $LDAP_CONFIG_ADMIN_PASSWORD | slappasswd -n -T /dev/stdin)"
 export LDAP_ADD_SCHEMAS="${LDAP_ADD_SCHEMAS:-yes}"
 export LDAP_EXTRA_SCHEMAS="${LDAP_EXTRA_SCHEMAS:-cosine,inetorgperson,nis}"
 export LDAP_SKIP_DEFAULT_TREE="${LDAP_SKIP_DEFAULT_TREE:-no}"
@@ -67,6 +65,29 @@ export LDAP_ENABLE_TLS="${LDAP_ENABLE_TLS:-no}"
 export LDAP_ULIMIT_NOFILES="${LDAP_ULIMIT_NOFILES:-1024}"
 export LDAP_ALLOW_ANON_BINDING="${LDAP_ALLOW_ANON_BINDING:-yes}"
 export LDAP_LOGLEVEL="${LDAP_LOGLEVEL:-256}"
+
+# By setting an environment variable matching *_FILE to a file path, the prefixed environment
+# variable will be overridden with the value specified in that file
+ldap_env_vars=(
+    LDAP_ADMIN_PASSWORD
+    LDAP_CONFIG_ADMIN_PASSWORD
+)
+for env_var in "${ldap_env_vars[@]}"; do
+    file_env_var="${env_var}_FILE"
+    if [[ -n "${!file_env_var:-}" ]]; then
+        if [[ -r "${!file_env_var:-}" ]]; then
+            export "${env_var}=$(< "${!file_env_var}")"
+            unset "${file_env_var}"
+        else
+            warn "Skipping export of '${env_var}'. '${!file_env_var:-}' is not readable."
+        fi
+    fi
+done
+unset ldap_env_vars
+
+# Setting encrypted admin passwords
+export LDAP_ENCRYPTED_ADMIN_PASSWORD="$(echo -n $LDAP_ADMIN_PASSWORD | slappasswd -n -T /dev/stdin)"
+export LDAP_ENCRYPTED_CONFIG_ADMIN_PASSWORD="$(echo -n $LDAP_CONFIG_ADMIN_PASSWORD | slappasswd -n -T /dev/stdin)"
 EOF
 }
 
