@@ -1,6 +1,4 @@
 FROM docker.io/bitnami/minideb:bullseye
-LABEL maintainer "Bitnami <containers@bitnami.com>"
-
 ENV OS_ARCH="amd64" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
