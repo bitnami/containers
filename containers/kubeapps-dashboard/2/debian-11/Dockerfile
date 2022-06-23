@@ -1,6 +1,4 @@
 FROM docker.io/bitnami/minideb:bullseye
-LABEL maintainer "Bitnami <containers@bitnami.com>"
-
 ENV OS_ARCH="amd64" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
@@ -8,7 +6,7 @@ ENV OS_ARCH="amd64" \
 COPY prebuildfs /
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libcrypt1 libgeoip1 libpcre3 libssl1.1 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.22.0-150" --checksum 87dbf69bc5beb55529a719be21778a067853036ebac4f42d2106cf2f35717757
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.22.0-151" --checksum 4c1cffbf2d5f9f767bc364dd341d540be918dea9022f434c1d608819736cf718
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-150" --checksum 8b992a5ee513c5eaca52b19232b21a93588ddf4c4850be4d47c6f19b11d1d90a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kubeapps" "2.4.5-150" --checksum 3616b9a3b99e67cb14d6ac243c50d7762124b1c54555494e11f9a4206bf86078
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
