@@ -1,6 +1,4 @@
 FROM docker.io/bitnami/minideb:bullseye
-LABEL maintainer "Bitnami <containers@bitnami.com>"
-
 ENV HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-11" \
@@ -8,6 +6,7 @@ ENV HOME="/" \
     PATH="/opt/bitnami/redis-sentinel/bin:/opt/bitnami/common/bin:$PATH"
 
 COPY prebuildfs /
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libssl1.1 procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis-sentinel" "6.0.16-150" --checksum 051604a468752e9528307d0595cc60b1041577e53cbb578fda443e83cf3adfe6
