@@ -1,6 +1,4 @@
 FROM docker.io/bitnami/minideb:bullseye
-LABEL maintainer "Bitnami <containers@bitnami.com>"
-
 ENV OS_ARCH="amd64" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
@@ -8,6 +6,7 @@ ENV OS_ARCH="amd64" \
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 
 COPY prebuildfs /
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libsqlite3-dev libssl-dev locales procps tar wget zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "17.0.3-150" --checksum 3641fab618ebea99ea7d4fe840a27f255159fdfb4f8aa77954b02d93162a4217
