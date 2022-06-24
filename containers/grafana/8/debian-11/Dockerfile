@@ -1,12 +1,11 @@
 FROM docker.io/bitnami/minideb:bullseye
-LABEL maintainer "Bitnami <containers@bitnami.com>"
-
 ENV HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
 COPY prebuildfs /
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libfontconfig procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "grafana" "8.5.6-0" --checksum 92c5f89da7e473ca808a3ce3ef9b45b2efa9ef2a2d596a223d8920281d436b40
