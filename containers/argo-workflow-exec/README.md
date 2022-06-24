@@ -39,7 +39,7 @@ Deploying Bitnami applications as Helm Charts is the easiest way to get started 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-11`, `3.3.7`, `3.3.7-debian-11-r0`, `latest` (3/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-argo-workflow-exec/blob/3.3.7-debian-11-r0/3/debian-11/      Dockerfile)
+* [`3`, `3-debian-11`, `3.3.8`, `3.3.8-debian-11-r0`, `latest` (3/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-argo-workflow-exec/blob/3.3.8-debian-11-r0/3/debian-11/      Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/argo-workflow-exec GitHub repo](https://github.com/bitnami/bitnami-docker-argo-workflow-exec).
 
@@ -60,7 +60,7 @@ $ docker pull bitnami/argo-workflow-exec:[TAG]
 If you wish, you can also build the image yourself.
 
 ```console
-$ docker build -t bitnami/argo-workflow-exec 'https://github.com/bitnami/bitnami-docker-argo-workflow-exec.git#master:7/debian-10'
+$ docker build -t bitnami/argo-workflow-exec:latest 'https://github.com/bitnami/bitnami-docker-argo-workflow-exec.git#master:3/debian-11'
 ```
 
 ## Maintenance
