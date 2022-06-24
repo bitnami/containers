@@ -31,7 +31,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10`, `10-debian-11`, `10.10.0`, `10.10.0-debian-11-r6`, `latest` (10/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.10.0-debian-11-r6/10/debian-11/Dockerfile)
+* [`10`, `10-debian-11`, `10.10.0`, `10.10.0-debian-11-r7`, `latest` (10/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-owncloud/blob/10.10.0-debian-11-r7/10/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/owncloud GitHub repo](https://github.com/bitnami/bitnami-docker-owncloud).
 
@@ -435,7 +435,6 @@ Here is an example of extending the image with the following modifications:
 
 ```Dockerfile
 FROM bitnami/owncloud
-LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ## Install 'vim'
 RUN install_packages vim
