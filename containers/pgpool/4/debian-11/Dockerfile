@@ -1,12 +1,11 @@
 FROM docker.io/bitnami/minideb:bullseye
-LABEL maintainer "Bitnami <containers@bitnami.com>"
-
 ENV HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
 COPY prebuildfs /
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip ldap-utils libaudit1 libbsd0 libc6 libcap-ng0 libcrypt1 libedit2 libffi7 libgcc-s1 libgmp10 libgnutls30 libhogweed6 libicu67 libidn2-0 libldap-2.4-2 libldap-common liblzma5 libmd0 libnettle8 libnss-ldapd libp11-kit0 libpam-ldapd libpam0g libsasl2-2 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 nslcd procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "10.21.0-150" --checksum c9d6f09bac47484b4d4aaec3d48018c46d4102fb35abebeb62ef7a3496125e4c
