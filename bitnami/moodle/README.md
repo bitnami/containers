@@ -38,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4`, `4-debian-11`, `4.0.1`, `4.0.1-debian-11-r6`, `latest` (4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/4.0.1-debian-11-r6/4/debian-11/Dockerfile)
-* [`3`, `3-debian-11`, `3.11.7`, `3.11.7-debian-11-r7` (3/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.11.7-debian-11-r7/3/debian-11/Dockerfile)
+* [`3`, `3-debian-11`, `3.11.7`, `3.11.7-debian-11-r8` (3/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.11.7-debian-11-r8/3/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/moodle GitHub repo](https://github.com/bitnami/bitnami-docker-moodle).
 
@@ -372,7 +372,7 @@ To use `EXTRA_LOCALES`, you have two options:
   ```yaml
   moodle:
   ...
-    # image: 'bitnami/moodle:3' # remove this line !
+    # image: 'bitnami/moodle:4' # remove this line !
     build:
       context: .
       dockerfile: Dockerfile
@@ -381,7 +381,7 @@ To use `EXTRA_LOCALES`, you have two options:
   ...
   ```
 
-* For manual execution, clone the repository and run the following command inside the `3/debian-10` directory:
+* For manual execution, clone the repository and run the following command inside the `4/debian-11` directory:
 
   ```console
   $ docker build -t bitnami/moodle:latest --build-arg EXTRA_LOCALES="fr_FR.UTF-8 UTF-8, de_DE.UTF-8 UTF-8, it_IT.UTF-8 UTF-8, es_ES.UTF-8 UTF-8" .
@@ -398,7 +398,7 @@ To use `WITH_ALL_LOCALES`, you have two options:
   ```yaml
   moodle:
   ...
-    # image: 'bitnami/moodle:3' # remove this line !
+    # image: 'bitnami/moodle:4' # remove this line !
     build:
       context: .
       dockerfile: Dockerfile
@@ -407,7 +407,7 @@ To use `WITH_ALL_LOCALES`, you have two options:
   ...
   ```
 
-* For manual execution, clone the repository and run the following command inside the `3/debian-10` directory:
+* For manual execution, clone the repository and run the following command inside the `4/debian-11` directory:
 
   ```console
   $ docker build -t bitnami/moodle:latest --build-arg WITH_ALL_LOCALES=yes .
@@ -561,7 +561,6 @@ Here is an example of extending the image with the following modifications:
 
 ```Dockerfile
 FROM bitnami/moodle
-LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ## Install 'vim'
 RUN install_packages vim
