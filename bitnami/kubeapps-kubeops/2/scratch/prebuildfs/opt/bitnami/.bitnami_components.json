@@ -1,7 +1,7 @@
 {
     "kubeapps-kubeops": {
-        "digest": "815739087bed86517b8d7d487c470746475b1e98c67aaec9f4400b4a948272c8",
+        "digest": "ed5a294518c8262fa8e9d764281d23a1d1fcc835cf77bc82d8d293133ce1ac2e",
         "type": "BLACKSMITH",
-        "version": "2.4.5"
+        "version": "2.4.6"
     }
 }
