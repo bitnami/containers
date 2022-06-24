@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # shellcheck disable=SC1091
-
 set -o errexit
 set -o pipefail
 set -o nounset
@@ -21,10 +20,10 @@ endpoints="$(etcdctl_get_endpoints true)"
 if is_empty_value "${endpoints}"; then
     exit 0
 fi
-read -r -a extra_flags <<< "$(etcdctl_auth_flags)"
+read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
 extra_flags+=("--endpoints=${endpoints}" "--debug=true")
 # We use 'sync' to ensure memory buffers are flushed to disk
 # so we reduce the chances that the "member_removal.log" file is empty.
 # ref: https://man7.org/linux/man-pages/man1/sync.1.html
-etcdctl member remove "$(get_member_id)" "${extra_flags[@]}" > "$(dirname "$ETCD_DATA_DIR")/member_removal.log"
+etcdctl member remove "$(get_member_id)" "${extra_flags[@]}" >"$(dirname "$ETCD_DATA_DIR")/member_removal.log"
 sync -d "$(dirname "$ETCD_DATA_DIR")/member_removal.log"
