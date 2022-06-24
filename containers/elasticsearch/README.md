@@ -47,7 +47,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8`, `8-debian-11`, `8.2.3`, `8.2.3-debian-11-r2`, `latest` (8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/8.2.3-debian-11-r2/8/debian-11/Dockerfile)
+* [`8`, `8-debian-11`, `8.2.3`, `8.2.3-debian-11-r3`, `latest` (8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/8.2.3-debian-11-r3/8/debian-11/Dockerfile)
 * [`7`, `7-debian-11`, `7.17.4`, `7.17.4-debian-11-r8` (7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.17.4-debian-11-r8/7/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/elasticsearch GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch).
@@ -345,8 +345,8 @@ The Bitnami Elasticsearch image provides a way to create your custom image insta
 
 To create your own image providing plugins execute the flowing command:
 
-```
-docker build --build-arg ELASTICSEARCH_PLUGINS=<plugin1,plugin2,...> https://github.com/bitnami/bitnami-docker-elasticsearch.git#:7/debian-10 -t my-elasticsearch
+```console
+$ docker build --build-arg ELASTICSEARCH_PLUGINS=<plugin1,plugin2,...> -t bitnami/elasticsearch:latest 'https://github.com/bitnami/bitnami-docker-elasticsearch.git#master:8/debian-11'
 ```
 
 The command above will build the image providing this GitHub repository as build context, and will pass the list of plugins to install to the build logic.
