@@ -5,12 +5,13 @@ ENV HOME="/" \
     OS_NAME="linux"
 
 COPY prebuildfs /
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl git git-lfs gzip libc6 openssh-client procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dumb-init" "1.2.5-150" --checksum eb2507a10791eb84d6291b9f25d75d40b001bdd4bc56d389c11710ac9013e768
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "docker-machine" "0.16.2-150" --checksum 886baeffa017cb857c4903c17854152b885005ca4d5a32c4a218e44594da62dd
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gitlab-runner" "14.10.1-150" --checksum b60cd4e586db4ded9c554aacec7c54c1caba8696471ed9c2bebeb14334f3a841
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gitlab-runner" "14.10.1-151" --checksum d40e5296a99caff31701e375b67c5eb820a8f21a4455ff29a2c26b3faa41a8af
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
