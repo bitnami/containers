@@ -38,7 +38,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8`, `8-debian-11`, `8.5.6`, `8.5.6-debian-11-r2`, `latest` (8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/8.5.6-debian-11-r2/8/debian-11/Dockerfile)
+* [`8`, `8-debian-11`, `8.5.6`, `8.5.6-debian-11-r3`, `latest` (8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/8.5.6-debian-11-r3/8/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
 
@@ -126,7 +126,7 @@ grafana:
 You can customize this image and include the plugins you desire editing the list of plugins avilable in the script (see the variable "grafana_plugin_list") and build your own image as shown below:
 
 ```console
-$ cd 8/debian-10
+$ cd 8/debian-11
 $ docker build -t your-custom-grafana .
 ```
 
