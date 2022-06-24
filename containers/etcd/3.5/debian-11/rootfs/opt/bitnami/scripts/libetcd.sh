@@ -292,7 +292,7 @@ etcdctl_auth_flags() {
         [[ -f "$ETCD_CERT_FILE" ]] && [[ -f "$ETCD_KEY_FILE" ]] && authFlags+=("--cert" "$ETCD_CERT_FILE" "--key" "$ETCD_KEY_FILE")
         [[ -f "$ETCD_TRUSTED_CA_FILE" ]] && authFlags+=("--cacert" "$ETCD_TRUSTED_CA_FILE")
     fi
-    echo "${authFlags[@]:-}"
+    echo "${authFlags[@]}"
 }
 
 ########################
@@ -314,10 +314,10 @@ etcd_store_member_id() {
     etcd_start_bg
     read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
     is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
-    if retry_while "etcdctl ${extra_flags[*]:-} member list" >/dev/null 2>&1; then
+    if retry_while "etcdctl ${extra_flags[*]} member list" >/dev/null 2>&1; then
         while is_empty_value "$member_id"; do
             read -r -a advertised_array <<<"$(tr ',;' ' ' <<<"$ETCD_ADVERTISE_CLIENT_URLS")"
-            member_id="$(etcdctl "${extra_flags[@]:-}" member list | grep -w "${advertised_array[0]}" | awk -F "," '{ print $1}' || true)"
+            member_id="$(etcdctl "${extra_flags[@]}" member list | grep -w "${advertised_array[0]}" | awk -F "," '{ print $1}' || true)"
         done
         # We use 'sync' to ensure memory buffers are flushed to disk
         # so we reduce the chances that the "member_id" file is empty.
@@ -704,7 +704,7 @@ etcd_initialize() {
 #########################
 add_self_to_cluster() {
     local -a extra_flags
-    read -r -a extra_flags <<< "$(etcdctl_auth_flags)"
+    read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
     # is_healthy_etcd_cluster will also set ETCD_ACTIVE_ENDPOINTS
     while ! is_healthy_etcd_cluster; do
         warn "Cluster not healthy, not adding self to cluster for now, keeping trying..."
@@ -715,7 +715,7 @@ add_self_to_cluster() {
 
     if is_empty_value "$(get_member_id)"; then
         extra_flags+=("--endpoints=${ETCD_ACTIVE_ENDPOINTS}" "--peer-urls=$ETCD_INITIAL_ADVERTISE_PEER_URLS")
-        while ! etcdctl member add "$ETCD_NAME" "${extra_flags[@]}"  | grep "^ETCD_" > "$ETCD_NEW_MEMBERS_ENV_FILE"; do
+        while ! etcdctl member add "$ETCD_NAME" "${extra_flags[@]}" | grep "^ETCD_" >"$ETCD_NEW_MEMBERS_ENV_FILE"; do
             warn "Failed to add self to cluster, keeping trying..."
             sleep 10
         done
@@ -739,27 +739,24 @@ add_self_to_cluster() {
 #########################
 get_member_id() {
     if ! is_boolean_yes "$ETCD_DISABLE_STORE_MEMBER_ID"; then
-        if ! -s "${ETCD_DATA_DIR}/member_id"; then
-           echo ""
+        if [[ ! -s "${ETCD_DATA_DIR}/member_id" ]]; then
+            echo ""
             return 0
         fi
         cat "${ETCD_DATA_DIR}/member_id"
         return 0
     fi
-    ETCD_ACTIVE_ENDPOINTS=${ETCD_ACTIVE_ENDPOINTS:-}
-    if is_empty_value "$ETCD_ACTIVE_ENDPOINTS"; then
-        is_healthy_etcd_cluster
-    fi
     local ret
     local -a extra_flags
-    read -r -a extra_flags <<< "$(etcdctl_auth_flags)"
+    read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
     extra_flags+=("--endpoints=${ETCD_ACTIVE_ENDPOINTS}")
-    ret=$(etcdctl "${extra_flags[@]}" member list | grep -w "$ETCD_INITIAL_ADVERTISE_PEER_URLS" | awk -F "," '{ print $1}')
+    ret=$(etcdctl "${extra_flags[@]}" member list | grep -w "$ETCD_INITIAL_ADVERTISE_PEER_URLS" | awk -F "," '{ print $1 }')
     # if not return zero
-    info "member id: $ret"
-    if [[ $? -ne 0 ]]; then
+    if is_empty_value "$ret"; then
+        info "No member id found"
         echo ""
     else
+        info "member id: $ret"
         echo "$ret"
     fi
 }
