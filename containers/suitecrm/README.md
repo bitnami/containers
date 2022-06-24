@@ -38,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8`, `8-debian-11`, `8.1.2`, `8.1.2-debian-11-r7`, `latest` (8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/8.1.2-debian-11-r7/8/debian-11/Dockerfile)
-* [`7`, `7-debian-11`, `7.12.6`, `7.12.6-debian-11-r6` (7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.12.6-debian-11-r6/7/debian-11/Dockerfile)
+* [`7`, `7-debian-11`, `7.12.6`, `7.12.6-debian-11-r7` (7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.12.6-debian-11-r7/7/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/suitecrm GitHub repo](https://github.com/bitnami/bitnami-docker-suitecrm).
 
@@ -455,7 +455,6 @@ Here is an example of extending the image with the following modifications:
 
 ```Dockerfile
 FROM bitnami/suitecrm
-LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ## Install 'vim'
 RUN install_packages vim
@@ -490,7 +489,6 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 
 ```Dockerfile
 FROM bitnami/suitecrm
-LABEL maintainer "Bitnami <containers@bitnami.com>"
 ## Install keys
 RUN openssl genrsa -out /opt/bitnami/suitecrm/Api/V8/OAuth2/private.key 2048 && \
     openssl rsa -in /opt/bitnami/suitecrm/Api/V8/OAuth2/private.key -pubout -out /opt/bitnami/suitecrm/Api/V8/OAuth2/public.key && \
