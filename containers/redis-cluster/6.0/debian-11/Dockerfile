@@ -1,12 +1,11 @@
 FROM docker.io/bitnami/minideb:bullseye
-LABEL maintainer "Bitnami <containers@bitnami.com>"
-
 ENV HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
 COPY prebuildfs /
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libssl1.1 procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis" "6.0.16-150" --checksum 67fcad1d07e80540a875f37baa473cae28947ba4b45664d7412091b05ebc95dc
