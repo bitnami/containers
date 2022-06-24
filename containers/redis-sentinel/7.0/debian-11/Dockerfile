@@ -6,6 +6,7 @@ ENV HOME="/" \
     PATH="/opt/bitnami/redis-sentinel/bin:/opt/bitnami/common/bin:$PATH"
 
 COPY prebuildfs /
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libssl1.1 procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis-sentinel" "7.0.2-0" --checksum b5e74047e4004ee119a87bb4c92b803b467fa686914e0aa76adc28a1b58b8d78
