@@ -1,5 +1,4 @@
 FROM scratch
-LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 COPY prebuildfs /
 
