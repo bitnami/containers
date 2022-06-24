@@ -1,6 +1,7 @@
 FROM docker.io/bitnami/minideb:bullseye
 
 COPY prebuildfs /
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages curl procps
 RUN apt-get update && apt-get upgrade -y && \
