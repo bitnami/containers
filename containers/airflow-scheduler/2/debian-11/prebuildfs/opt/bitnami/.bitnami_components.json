@@ -1,17 +1,17 @@
 {
     "airflow-scheduler": {
         "arch": "amd64",
-        "digest": "c627ef708fa5cc9dff5365501ec0643314adf748467f6e32ab01f76aa5569c28",
+        "digest": "920b59181bbd5a06c0bf0f8b1985e747bd192b51ee46c2eee60aad465d635c4b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.3.2-151"
+        "version": "2.3.2-152"
     },
     "git": {
         "arch": "amd64",
-        "digest": "c15ff3fff7478e74922d560c5c4ffcb8d11bff92975f81591b62742902edd731",
+        "digest": "a7adf946a3e5d1b7e9f18abd4bbf112780a41ea797bdd3f067f87dfea07e85d6",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.36.1-150"
+        "version": "2.36.1-151"
     },
     "gosu": {
         "arch": "amd64",
