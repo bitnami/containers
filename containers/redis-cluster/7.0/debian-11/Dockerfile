@@ -5,6 +5,7 @@ ENV HOME="/" \
     OS_NAME="linux"
 
 COPY prebuildfs /
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libssl1.1 procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis" "7.0.2-0" --checksum fdf76de0b9ec9840e6ca259fb5abcc9d6e883294de1c8388bf1f7c4952a6cc21
