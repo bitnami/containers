@@ -34,7 +34,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-11`, `1.14.6`, `1.14.6-debian-11-r8`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.14.6-debian-11-r8/1/debian-11/Dockerfile)
+* [`1`, `1-debian-11`, `1.14.6`, `1.14.6-debian-11-r9`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-fluentd/blob/1.14.6-debian-11-r9/1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/fluentd GitHub repo](https://github.com/bitnami/bitnami-docker-fluentd).
 
@@ -157,7 +157,7 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 The Bitnami Fluentd Open Source Docker image is built using a Dockerfile with the structure below:
 
 ```Dockerfile
-FROM bitnami/minideb:buster
+FROM bitnami/minideb
 ...
 COPY prebuildfs /
 ## Install required system packages and dependencies
