@@ -53,7 +53,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-11`, `0.4.7`, `0.4.7-debian-11-r7`, `latest` (0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-intel/blob/0.4.7-debian-11-r7/0/debian-11/Dockerfile)
+* [`0`, `0-debian-11`, `0.4.7`, `0.4.7-debian-11-r8`, `latest` (0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-intel/blob/0.4.7-debian-11-r8/0/debian-11/Dockerfile)
 
 ## Get this image
 
@@ -412,9 +412,9 @@ To add a custom NGINX module, it is necessary to compile NGINX with that module 
 Below is an example Dockerfile to build and install the NGINX Perl module (`ngx_http_perl_module`) over to the Bitnami image:
 
 ```Dockerfile
-ARG NGINX_VERSION=1.19.6
-ARG BITNAMI_NGINX_REVISION=r1
-ARG BITNAMI_NGINX_TAG=${NGINX_VERSION}-debian-10-${BITNAMI_NGINX_REVISION}
+ARG NGINX_VERSION=1.22.0
+ARG BITNAMI_NGINX_REVISION=r0
+ARG BITNAMI_NGINX_TAG=${NGINX_VERSION}-debian-11-${BITNAMI_NGINX_REVISION}
 
 FROM bitnami/nginx-intel:${BITNAMI_NGINX_TAG} AS builder
 USER root
