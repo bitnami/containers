@@ -1,17 +1,17 @@
 {
     "airflow-worker": {
         "arch": "amd64",
-        "digest": "4e0d78a8fda9f90c5932ec7fbf9a30592a233db6d439b99b3a7b1ff49aa95279",
+        "digest": "b163426ae0ca60d01e4a8de6347410e24fc3d9eba21984550f4cb3e987359624",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.3.2-151"
+        "version": "2.3.2-152"
     },
     "git": {
         "arch": "amd64",
-        "digest": "c15ff3fff7478e74922d560c5c4ffcb8d11bff92975f81591b62742902edd731",
+        "digest": "a7adf946a3e5d1b7e9f18abd4bbf112780a41ea797bdd3f067f87dfea07e85d6",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.36.1-150"
+        "version": "2.36.1-151"
     },
     "gosu": {
         "arch": "amd64",
