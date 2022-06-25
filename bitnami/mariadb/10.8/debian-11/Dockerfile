@@ -5,6 +5,7 @@ ENV HOME="/" \
     OS_NAME="linux"
 
 COPY prebuildfs /
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaio1 libaudit1 libc6 libcap-ng0 libcrypt1 libgcc-s1 libicu67 liblzma5 libncurses6 libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 procps psmisc tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.3-150" --checksum ef1f6d1ca9e4873f82cf5037078b55524596ca2755262948f23571767bfd4101
