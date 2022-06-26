@@ -5,10 +5,11 @@ ENV HOME="/" \
     OS_NAME="linux"
 
 COPY prebuildfs /
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-registry" "2.5.1-150" --checksum a8b7aaa1012864723deea2e14702d9b7c0126d1e6f899ae78c2a38437492a791
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.25.2-150" --checksum 58fc2dcc9eda8b5e88ef23081c14384a33ac4736d7238d490416fb4c5c633994
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.25.3-0" --checksum a937d298205d3f7e8fcaa3ddbd24934cb2b809bcea54a1c0b3e3f29aa61428ac
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-registryctl" "2.5.1-150" --checksum a5907ad80fa8d1507980f20511ffb901c4362a234e7e302d5dad3842ccae2e25
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
 RUN apt-get update && apt-get upgrade -y && \
