@@ -6,6 +6,7 @@ ENV OS_ARCH="amd64" \
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 
 COPY prebuildfs /
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libsqlite3-dev libssl-dev locales procps tar wget zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "18.0.1-150" --checksum 5ef6ca4fe6778df34eeed563033c19f789d93e274a38748c171d97034a2cd6ae
