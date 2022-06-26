@@ -5,9 +5,10 @@ ENV HOME="/" \
     OS_NAME="linux"
 
 COPY prebuildfs /
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libbz2-1.0 libc6 libcom-err2 libcrypt1 libffi7 libgcc-s1 libgomp1 libgssapi-krb5-2 libjemalloc2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncursesw6 libnsl2 libreadline8 libsqlite3-0 libssl1.1 libstdc++6 libtcmalloc-minimal4 libtinfo6 libtirpc3 numactl procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-150" --checksum 79af9dcbaa89c4047d2d24b4a4c2ae17b771fe94972734379b9e50ef3dec3442
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-151" --checksum 1b28fa915312f8c1fc5b4a1a4381c06ffc599e9cc1331b500c8fd012e96ba6f0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "pytorch" "1.11.0-150" --checksum fade8d579ebae02ff124abc2aa3e4a5d64c9340343b3f4e66ac575d6c3d9bbc1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
 RUN apt-get update && apt-get upgrade -y && \
