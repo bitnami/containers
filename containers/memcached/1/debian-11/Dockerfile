@@ -5,6 +5,7 @@ ENV HOME="/" \
     OS_NAME="linux"
 
 COPY prebuildfs /
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libevent-2.1-7 libsasl2-2 libsasl2-modules procps sasl2-bin tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "memcached" "1.6.15-150" --checksum 0f717af5c53843c3fe20edbb606aaf56a2229fa999aa9701cc2cd1b67495dd53
