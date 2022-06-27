@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.7`, `1.7-debian-11`, `1.7.8-6`, `1.7.8-6-debian-11-r6`, `latest` (1.7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.8-6-debian-11-r6/1.7/debian-11/Dockerfile)
+* [`1.7`, `1.7-debian-11`, `1.7.8-6`, `1.7.8-6-debian-11-r7`, `latest` (1.7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-prestashop/blob/1.7.8-6-debian-11-r7/1.7/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prestashop GitHub repo](https://github.com/bitnami/bitnami-docker-prestashop).
 
@@ -459,7 +459,6 @@ Here is an example of extending the image with the following modifications:
 
 ```Dockerfile
 FROM bitnami/prestashop
-LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ## Change user to perform privileged actions
 USER 0
