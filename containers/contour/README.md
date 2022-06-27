@@ -41,7 +41,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`1.21`, `1.21-debian-11`, `1.21.1`, `1.21.1-debian-11-r3`, `latest` (1.21/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-contour/blob/1.21.1-debian-11-r3/1.21/debian-11/Dockerfile)
 * [`1.21`, `1.21-debian-10`, `1.21.1`, `1.21.1-debian-10-r-1`, `latest` (1.21/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-contour/blob/1.21.1-debian-10-r-1/1.21/debian-10/Dockerfile)
-* [`1.20`, `1.20-debian-11`, `1.20.2`, `1.20.2-debian-11-r3` (1.20/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-contour/blob/1.20.2-debian-11-r3/1.20/debian-11/Dockerfile)
+* [`1.20`, `1.20-debian-11`, `1.20.2`, `1.20.2-debian-11-r4` (1.20/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-contour/blob/1.20.2-debian-11-r4/1.20/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/contour GitHub repo](https://github.com/bitnami/bitnami-docker-contour).
 
