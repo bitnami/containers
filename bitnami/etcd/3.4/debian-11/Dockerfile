@@ -8,7 +8,7 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.25.2-150" --checksum 58fc2dcc9eda8b5e88ef23081c14384a33ac4736d7238d490416fb4c5c633994
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.25.3-0" --checksum a937d298205d3f7e8fcaa3ddbd24934cb2b809bcea54a1c0b3e3f29aa61428ac
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "etcd" "3.4.18-150" --checksum 33ed4da3e2492d36dc78e3340349f09d638052dde97a966b928583b7d3ba6975
 RUN apt-get update && apt-get upgrade -y && \
