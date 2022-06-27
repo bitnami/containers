@@ -15,7 +15,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-15
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "9.0.64-152" --checksum 04f970d589c9540b37caf70dbc35e2d91ed93254761d81ebf18845ffb544fd28
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "11.16.0-150" --checksum 1204401fc614c448f61983e4bc1136b9ba0475c77b2f3ff497ffea59c2879a01
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-150" --checksum b47e1015fc1c9ce456f134ffd5b6ac6960c3f369c96fcd37319e9289b29a1047
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.36.1-150" --checksum c15ff3fff7478e74922d560c5c4ffcb8d11bff92975f81591b62742902edd731
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.36.1-151" --checksum a7adf946a3e5d1b7e9f18abd4bbf112780a41ea797bdd3f067f87dfea07e85d6
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-150" --checksum 8b992a5ee513c5eaca52b19232b21a93588ddf4c4850be4d47c6f19b11d1d90a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "jasperreports" "8.0.2-150" --checksum 4f47b844a8c916253090ff114d158d050d566c716e3706e3dcccfdbddc313dae
 RUN apt-get update && apt-get upgrade -y && \
