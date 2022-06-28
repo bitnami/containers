@@ -64,8 +64,9 @@ function findCommitsToSync() {
     local max=100 # If we need to sync more than 100 commits there must be something wrong since we run the job on a daily basis
     for commit in "${commits[@]}"; do
         if [[ "$commit" != "$last_synced_commit_id" ]] && [[ "$max" -gt "0" ]]; then
-            if [[ "$commit" != "$SKIP_COMMIT_ID" ]]; then
-              commits_to_sync="${commit} ${commits_to_sync}"
+            actual_commit_id="$(plainCommit "${commit}")"
+            if [[ "$commit" != "$SKIP_COMMIT_ID" ]] && [[ ! $commits_to_sync =~ (^|[[:space:]])$actual_commit_id($|[[:space:]]) ]]; then
+              commits_to_sync="${actual_commit_id} ${commits_to_sync}"
             fi
         else
             # We reached the last commit synced
@@ -76,6 +77,16 @@ function findCommitsToSync() {
 
     [[ "$max" -eq "0" ]] && echo "Last commit not found into the original repo history" && return 1
     printf "$commits_to_sync"
+}
+
+function plainCommit() {
+    local commit="${1:?Missing commit}"
+    local result="$commit"
+    actual_merge_commit_id="$(git log --pretty=%P -n 1 "$commit" | awk '{print $2}')"
+    if [[ -n "$actual_merge_commit_id" ]]; then
+        result="$(plainCommit $actual_merge_commit_id)"
+    fi
+    printf "$result"
 }
 
 syncCommit() {
@@ -99,13 +110,7 @@ syncContainerCommits() {
             echo "Nothing to sync for ${name}"
         else
             for commit in "${commits_to_sync[@]}"; do
-                # If the commit is a merge, it has more than one parent, use the second to avoid re-applying an old commit
-                actual_merge_commit_id="$(git log --pretty=%P -n 1 "$commit" | awk '{print $2}')"
-                if [[ -n "$actual_merge_commit_id" ]]; then
-                    syncCommit "$actual_merge_commit_id" "$name"
-                else
-                    syncCommit "$commit" "$name"
-                fi
+                syncCommit "$commit" "$name"
             done
         fi
         git remote remove "$name"
