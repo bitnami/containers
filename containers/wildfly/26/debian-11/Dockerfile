@@ -11,7 +11,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaio1 libc6 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.15-150" --checksum fe6b65886a6b1f545508e272efbf422054ee030c867f94ebec2f93c5518252de
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wildfly" "26.1.1-151" --checksum e882915233fe7750650efba8e5bbf082cb19587aeea4c4d78e0a249cf5f8d84c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wildfly" "26.1.1-152" --checksum 3812c623822d7a4f7ff8b07ed0139168faf5772ea6a76a5d46d0230137761a95
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
