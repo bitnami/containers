@@ -12,16 +12,16 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "b5da8d3ba35cfc97401b7698008ca9822d5a4365819802874b58f030255ce5c8  /tmp/bitnami/pkg/cache/python-3.7.13-151-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/python-3.7.13-151-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/python-3.7.13-151-linux-amd64-debian-11.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/google-cloud-sdk-0.391.0-0-linux-amd64-debian-11.tar.gz && \
-    echo "dad8533fcdf14a32e7b524801123315ac7bc154e40417b42f8325fce3bcaba5e  /tmp/bitnami/pkg/cache/google-cloud-sdk-0.391.0-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/google-cloud-sdk-0.391.0-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/google-cloud-sdk-0.391.0-0-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/google-cloud-sdk-0.392.0-0-linux-amd64-debian-11.tar.gz && \
+    echo "283ba94c2d8ddcbd9b43a1fe9d727c980340a27da90bddb03a441ac9cb43dab3  /tmp/bitnami/pkg/cache/google-cloud-sdk-0.392.0-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/google-cloud-sdk-0.392.0-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/google-cloud-sdk-0.392.0-0-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /.config /.gsutil && chmod g+rwX /.config /.gsutil
 
-ENV APP_VERSION="0.391.0" \
+ENV APP_VERSION="0.392.0" \
     BITNAMI_APP_NAME="google-cloud-sdk" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/google-cloud-sdk/bin:$PATH"
 
