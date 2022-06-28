@@ -304,4 +304,3 @@ keycloak_custom_init_scripts() {
         touch "$KEYCLOAK_VOLUME_DIR"/.user_scripts_initialized
     fi
 }
-
