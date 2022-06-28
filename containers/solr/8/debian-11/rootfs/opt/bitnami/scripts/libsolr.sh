@@ -195,7 +195,7 @@ solr_create_cores() {
 
         info "Creating solr core: ${core}"
 
-        if ! debug_execute "$exec" "${command_args[@]}" >/dev/null; then
+        if ! debug_execute "$exec" "${command_args[@]}"; then
             error "There was an error when creating the core"
             exit 1
         else
