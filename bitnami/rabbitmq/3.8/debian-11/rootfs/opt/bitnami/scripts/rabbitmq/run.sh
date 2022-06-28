@@ -38,7 +38,16 @@ if is_boolean_yes "$RABBITMQ_CLUSTER_REBALANCE"; then
 fi
 
 # Resources limits: maximum number of open file descriptors
-[[ -n "${RABBITMQ_ULIMIT_NOFILES:-}" ]] && info "Setting file discripton limit to ${RABBITMQ_ULIMIT_NOFILES}" && ulimit -n "${RABBITMQ_ULIMIT_NOFILES}"
+if [[ -n "${RABBITMQ_ULIMIT_NOFILES:-}" ]]; then
+    current_limit=$(ulimit -n)
+    if [ "$current_limit" != "unlimited" ]; then
+        # shellcheck disable=SC2086
+        if [ $RABBITMQ_ULIMIT_NOFILES -gt $current_limit ]; then
+            info "Setting file description limit to $RABBITMQ_ULIMIT_NOFILES"
+            ulimit -n $RABBITMQ_ULIMIT_NOFILES
+        fi
+    fi
+fi
 
 info "** Starting RabbitMQ **"
 cd "$RABBITMQ_BASE_DIR"
