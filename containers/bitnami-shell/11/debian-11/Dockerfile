@@ -9,7 +9,9 @@ RUN apt-get update && apt-get upgrade -y && \
 
 ENV APP_VERSION="11" \
     BITNAMI_APP_NAME="bitnami-shell" \
+    HOME="/" \
     OS_ARCH="amd64" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
+USER 1001
