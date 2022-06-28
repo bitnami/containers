@@ -73,14 +73,11 @@ keycloak_validate() {
     check_allowed_port KEYCLOAK_HTTP_PORT
     check_allowed_port KEYCLOAK_HTTPS_PORT
 
-    for var in KEYCLOAK_CREATE_ADMIN_USER KEYCLOAK_ENABLE_TLS KEYCLOAK_ENABLE_STATISTICS; do
+    for var in KEYCLOAK_ENABLE_TLS KEYCLOAK_ENABLE_STATISTICS; do
         if ! is_true_false_value "${!var}"; then
             print_validation_error "The allowed values for $var are [true, false]"
         fi
     done
-
-    # Deprecation warnings
-    is_empty_value "$KEYCLOAK_FRONTEND_URL" || warn "The usage of 'KEYCLOAK_FRONTEND_URL' is deprecated and will soon be removed. Use 'KC_HOSTNAME' instead."
 
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
@@ -127,7 +124,6 @@ keycloak_configure_database() {
     keycloak_conf_set "db-username" "$KEYCLOAK_DATABASE_USER"
     keycloak_conf_set "db-password" "$KEYCLOAK_DATABASE_PASSWORD"
     keycloak_conf_set "db-url" "jdbc:postgresql://${KEYCLOAK_DATABASE_HOST}:${KEYCLOAK_DATABASE_PORT}/${KEYCLOAK_DATABASE_NAME}?currentSchema=${KEYCLOAK_DATABASE_SCHEMA}"
-    debug_execute kc.sh build --db postgres
 }
 
 ########################
@@ -141,10 +137,8 @@ keycloak_configure_database() {
 #########################
 keycloak_configure_cache() {
     info "Configuring cache count"
+    ! is_empty_value "$KEYCLOAK_CACHE_STACK" && keycloak_conf_set "cache-stack" "${KEYCLOAK_CACHE_STACK}"
     keycloak_conf_set "cache" "$KEYCLOAK_CACHE_TYPE"
-    if ! is_empty_value "$KEYCLOAK_CACHE_STACK"; then
-        debug_execute kc.sh build --cache-stack="${KEYCLOAK_CACHE_STACK}"
-    fi
 }
 
 ########################
@@ -172,6 +166,7 @@ keycloak_configure_metrics() {
 #########################
 keycloak_configure_hostname() {
     info "Configuring hostname settings"
+    ! is_empty_value "$KEYCLOAK_HOSTNAME" && keycloak_conf_set "hostname" "${KEYCLOAK_HOSTNAME}"
     keycloak_conf_set "hostname-strict" "false"
 }
 
@@ -231,10 +226,11 @@ keycloak_configure_proxy() {
 #########################
 keycloak_configure_tls() {
     info "Configuring TLS by setting keystore and truststore"
-    keycloak_conf_set "https-key-store-file" "${KEYCLOAK_TLS_KEYSTORE_FILE}"
-    keycloak_conf_set "https-trust-store-file" "${KEYCLOAK_TLS_TRUSTSTORE_FILE}"
     ! is_empty_value "$KEYCLOAK_TLS_KEYSTORE_PASSWORD" && keycloak_conf_set "https-key-store-password" "${KEYCLOAK_TLS_KEYSTORE_PASSWORD}"
     ! is_empty_value "$KEYCLOAK_TLS_TRUSTSTORE_PASSWORD" && keycloak_conf_set "https-trust-store-password" "${KEYCLOAK_TLS_TRUSTSTORE_PASSWORD}"
+    keycloak_conf_set "https-key-store-file" "${KEYCLOAK_TLS_KEYSTORE_FILE}"
+    keycloak_conf_set "https-trust-store-file" "${KEYCLOAK_TLS_TRUSTSTORE_FILE}"
+
 }
 
 ########################
