@@ -1,3 +1,6 @@
+[![Scheduled VIB](https://github.com/bitnami/containers/actions/workflows/vib-scheduled-verify.yaml/badge.svg)](https://github.com/bitnami/containers/actions/workflows/vib-scheduled-verify.yaml)
+[![Sync containers repositories](https://github.com/bitnami/containers/actions/workflows/sync.yaml/badge.svg)](https://github.com/bitnami/containers/actions/workflows/sync.yaml)
+
 # Bitnami Containers
 
 Bitnami is currently working on unifying all container sources repositories into a single location. In the meantime, it will be synchronized in a daily manner to receive all the updates from the other repositories.
