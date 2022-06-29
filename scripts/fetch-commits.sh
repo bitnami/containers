@@ -178,5 +178,5 @@ syncRepos() {
     pushChanges
 }
 
-apt-get update >/dev/null && apt-get install -y git-filter-repo > /dev/null
+sudo apt-get update >/dev/null && sudo apt-get install -y git-filter-repo > /dev/null
 syncRepos
