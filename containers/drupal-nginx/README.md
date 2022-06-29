@@ -445,7 +445,6 @@ Here is an example of extending the image with the following modifications:
 
 ```Dockerfile
 FROM bitnami/drupal-nginx
-LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ### Install 'vim'
 RUN install_packages vim
