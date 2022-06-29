@@ -11,7 +11,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaio1 libaudit1 libc6 libcap-ng0 libgcc-s1 libicu67 liblzma5 libncurses6 libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.333-150" --checksum 02a91d298bbe3bb5d240f635802a50b2970b19eba960c1804b7275f88a944bb3
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wildfly" "14.0.1-151" --checksum 91f60441324fd1bdafe6e91fdf6491bddf626406f43ce31da20368ab909fbd3c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wildfly" "14.0.1-152" --checksum 8746d7945ee9a26428ba1b292774a79703900f64b613ec58f6c672f3e05a6c01
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-150" --checksum b47e1015fc1c9ce456f134ffd5b6ac6960c3f369c96fcd37319e9289b29a1047
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ejbca" "7.4.3-2-0" --checksum 80eb0162c1f140945314cbed75d7581efd9ba78468932691f7492f5d6849d96f
