@@ -7,7 +7,7 @@ services:
       - --web.listen-address=0.0.0.0:9100
   # Prepare Prometheus Configuration
   prepare-prometheus:
-    image: docker.io/bitnami/minideb:buster
+    image: docker.io/bitnami/minideb:latest
     command:
       - /bin/bash
       - -ec
@@ -68,7 +68,7 @@ services:
       - MINIO_DEFAULT_BUCKETS=thanos
   # Prepare Object Store configuration
   prepare-object-store-conf:
-    image: docker.io/bitnami/minideb:buster
+    image: docker.io/bitnami/minideb:latest
     command:
       - /bin/bash
       - -ec
