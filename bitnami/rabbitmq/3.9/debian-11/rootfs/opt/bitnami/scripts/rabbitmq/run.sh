@@ -38,7 +38,7 @@ if is_boolean_yes "$RABBITMQ_CLUSTER_REBALANCE"; then
 fi
 
 # Resources limits: maximum number of open file descriptors
-if [[ -n "${RABBITMQ_ULIMIT_NOFILES:-}" ]]; then
+if [ -n "${RABBITMQ_ULIMIT_NOFILES:-}" ]; then
     current_limit=$(ulimit -n)
     if [ "$current_limit" != "unlimited" ]; then
         # shellcheck disable=SC2086
