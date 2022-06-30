@@ -49,7 +49,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`6`, `6-debian-11`, `6.0.0`, `6.0.0-debian-11-r7`, `latest` (6/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/6.0.0-debian-11-r7/6/debian-11/Dockerfile)
+- [`6`, `6-debian-11`, `6.0.0`, `6.0.0-debian-11-r8`, `latest` (6/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/6.0.0-debian-11-r8/6/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress).
 
@@ -576,6 +576,10 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 +      - PHP_MEMORY_LIMIT=512m
      ...
 ```
+
+## Branch Deprecation Notice
+
+WordPress for Intel's branch 5.x.x is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 07-29-2022
 
 ## Contributing
 
