@@ -15,10 +15,10 @@
     },
     "git": {
         "arch": "amd64",
-        "digest": "a7adf946a3e5d1b7e9f18abd4bbf112780a41ea797bdd3f067f87dfea07e85d6",
+        "digest": "75341efddd4113ca16df9815f6e015881c73f71c66c412a43e2ed7cc4fa7f177",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.36.1-151"
+        "version": "2.37.0-0"
     },
     "gosu": {
         "arch": "amd64",
@@ -43,10 +43,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "1b28fa915312f8c1fc5b4a1a4381c06ffc599e9cc1331b500c8fd012e96ba6f0",
+        "digest": "a831df58c181297ce77597daf2364175cbb9f211f7755ca8d8c8b5918ad9ce24",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.13-151"
+        "version": "3.8.13-152"
     },
     "ruby": {
         "arch": "amd64",
