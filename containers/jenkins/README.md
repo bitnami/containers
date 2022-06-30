@@ -285,7 +285,6 @@ Here is an example of extending the image with the following modifications:
 
 ```Dockerfile
 FROM bitnami/jenkins
-LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ## Change user to perform privileged actions
 USER 0
