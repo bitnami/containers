@@ -38,7 +38,7 @@ getContainerRepos() {
     local result=""
     while read -r repo_url; do
         result="${result} ${repo_url:42}"
-    done < <(echo "$container_repos" | jq -r '.[].html_url' | uniq)
+    done < <(echo "$container_repos" | jq -r '.[].html_url' | uniq | sort)
     echo "$result"
 }
 
