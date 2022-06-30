@@ -3,22 +3,23 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-set -o xtrace # Uncomment this line for debugging purpose
+#set -o xtrace # Uncomment this line for debugging purpose
 
 TARGET_DIR="."
 
 COMMIT_SHIFT="${1:-0}" # Used when you push commits manually
 CONTAINER="${2:-}" # Used when we want to sync a single container
 SKIP_COMMIT_ID="${3:-}" # Used in some cases when a patch does not apply because it was applied as part of a PR
+SPECIAL_FILES=("CONTRIBUTING.md" "CODE_OF_CONDUCT.md" "LICENSE.md" ".github") # Files to remove in new repos
 
-function queryRepos() {
+queryRepos() {
     local page=0
     local repos="[]" # Initial empty JSON array
     local -r repos_per_page="100"
 
     while [[ "$page" -gt -1 ]]; do
         # Query only the public repos since we won't add private containers to bitnami/containers
-        page_repos="$(curl -H 'Content-Type: application/json' -H 'Accept: application/json' "https://api.github.com/orgs/bitnami/repos?type=public&per_page=${repos_per_page}&page=${page}")"
+        page_repos="$(curl -sH 'Content-Type: application/json' -H 'Accept: application/json' "https://api.github.com/orgs/bitnami/repos?type=public&per_page=${repos_per_page}&page=${page}")"
         repos="$(jq -s 'reduce .[] as $x ([]; . + $x)' <(echo "$repos") <(echo "$page_repos"))"
         n_repos="$(jq length <<< "$page_repos")"
         if [[ "$n_repos" -lt "$repos_per_page" ]]; then
@@ -31,29 +32,28 @@ function queryRepos() {
     echo "$repos"
 }
 
-function getContainerRepos() {
+getContainerRepos() {
     local -r repos="$(queryRepos)"
-    # Get only bitnami-docker-* not archived repos
     local -r container_repos="$(jq -r '[ .[] | select(.name | test("bitnami-docker-.")) | select(.archived == false) ]' <<< "$repos")"
-    echo "$container_repos"
+    local result=""
+    while read -r repo_url; do
+        result="${result} ${repo_url:42}"
+    done < <(echo "$container_repos" | jq -r '.[].html_url' | uniq | sort)
+    echo "$result"
 }
 
 # Commits a directory
-function gitConfigure() {
-    git config user.name "Bitnami Containers"
-    git config user.email "bitnami-bot@vmware.com"
+gitConfigure() {
+    git config --global user.name "Bitnami Containers"
+    git config --global user.email "bitnami-bot@vmware.com"
 }
 
-function pushChanges() {
-    git config user.name "Bitnami Containers"
-    git config user.email "bitnami-bot@vmware.com"
-    git push origin main
+pushChanges() {
+    git push origin "$(git rev-parse --abbrev-ref HEAD)"
 }
 
-function findCommitsToSync() {
+findCommitsToSync() {
     local origin_name="${1:?Missing origin name}"
-    # Get all commits IDs on the origin
-    local -r commits=($(git rev-list "${origin_name}/master" -- .))
     # Find the commit that doesn't have changes respect the container folder
     # Get the last commit message in the container folder
     local shift=$((COMMIT_SHIFT + 1))
@@ -62,6 +62,9 @@ function findCommitsToSync() {
     local -r last_synced_commit_id="$(git rev-list "$origin_name"/master --grep="${last_commit_message}" | head -1)"
     local commits_to_sync=""
     local max=100 # If we need to sync more than 100 commits there must be something wrong since we run the job on a daily basis
+    # Get all commits IDs on the origin
+    local commits=()
+    while IFS='' read -r line; do commits+=("$line"); done < <(git rev-list "${origin_name}/master" -- .)
     for commit in "${commits[@]}"; do
         if [[ "$commit" != "$last_synced_commit_id" ]] && [[ "$max" -gt "0" ]]; then
             actual_commit_id="$(plainCommit "${commit}")"
@@ -76,17 +79,17 @@ function findCommitsToSync() {
     done
 
     [[ "$max" -eq "0" ]] && echo "Last commit not found into the original repo history" && return 1
-    printf "$commits_to_sync"
+    echo "$commits_to_sync"
 }
 
-function plainCommit() {
+plainCommit() {
     local commit="${1:?Missing commit}"
     local result="$commit"
     actual_merge_commit_id="$(git log --pretty=%P -n 1 "$commit" | awk '{print $2}')"
     if [[ -n "$actual_merge_commit_id" ]]; then
-        result="$(plainCommit $actual_merge_commit_id)"
+        result="$(plainCommit "${actual_merge_commit_id}")"
     fi
-    printf "$result"
+    echo "$result"
 }
 
 syncCommit() {
@@ -117,24 +120,56 @@ syncContainerCommits() {
     )
 }
 
-function syncRepos() {
+syncNewContainer() {
+    local -r container="${1:?Missing container name}"
+    mkdir -p "${TARGET_DIR}/containers/${container}" # Create directory for the app
+    # clone the repositoy outside of this one
+    git clone "https://github.com/bitnami/bitnami-docker-${container}" "/tmp/${container}"
+    cd "/tmp/${container}" || exit
+    # Remove special files
+    rm -rf "${SPECIAL_FILES[@]}" || true
+    git add -A
+    git commit -qm "Remove CONTRIBUTING.md CODE_OF_CONDUCT.md and LICENSE.md. Now these files are are in the root"
+    cd - || exit
+    # Rewrite history to remove special files.
+    for file in "${SPECIAL_FILES[@]}"; do
+        git filter-repo --quiet --source "/tmp/${container}" --target "/tmp/${container}" --invert-paths --force --path "${file}"
+    done
+    # Rewrite history to point files to containers/${container}
+    git-filter-repo --quiet --source "/tmp/${container}" --target "/tmp/${container}" --to-subdirectory-filter "containers/${container}" --force
 
+    # Fetch the old repo and merge maintaining history
+    git remote add --fetch "$container" "/tmp/${container}"
+    git merge "${container}/master" --allow-unrelated-histories --no-log --no-ff -Xtheirs -qm "Merge bitnami-docker-${container} into bitnami/containers"
+    git remote remove "$container"
+    rm -Rf  "/tmp/${container}"
+}
+
+syncRepos() {
     gitConfigure # Configure Git client
     mkdir -p "$TARGET_DIR"
 
     if [[ -z "$CONTAINER" ]]; then
         local -r repos="$(getContainerRepos)"
-
-        # Build array of app names since we need to exclude them when moving files
-        local apps=("mock")
-        local -r urls=($(echo "$repos" | jq -r '.[].html_url' | sort | uniq))
-        for repo_url in "${urls[@]}"; do
-            name="${repo_url:42}" # 42 is the length of https://github.com/bitnami/bitnami-docker-
-            apps=("${apps[@]}" "$name")
+        # Sync changes
+        for container in $repos; do
+            if [[ -d  "${TARGET_DIR}/containers/${container}" ]]; then
+                echo "Syncing container: ${container}"
+                syncContainerCommits "$container"
+            else
+                echo "Add new container: ${container}"
+                syncNewContainer "$container"
+            fi
         done
-        echo "$repos" | jq -r '.[].html_url' | sort | uniq | while read -r repo_url; do
-            name="${repo_url:42}" # 42 is the length of https://github.com/bitnami/bitnami-docker-
-            syncContainerCommits "$name"
+        # Clean deprecated
+        cd  "${TARGET_DIR}/containers" || exit
+        for container in *; do
+            if [[ ! $repos =~ (^|[[:space:]])$container($|[[:space:]]) ]]; then
+                echo "Removing container: ${container}"
+                rm -rf "${container}"
+                git add "${container}"
+                git commit -q -m "Remove deprecated container ${container}"
+            fi
         done
     else
         syncContainerCommits "$CONTAINER"
@@ -143,4 +178,5 @@ function syncRepos() {
     pushChanges
 }
 
+pip install git-filter-repo==2.34.0
 syncRepos
