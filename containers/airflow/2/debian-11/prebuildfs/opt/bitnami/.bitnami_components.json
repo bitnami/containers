@@ -36,10 +36,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "1b28fa915312f8c1fc5b4a1a4381c06ffc599e9cc1331b500c8fd012e96ba6f0",
+        "digest": "a831df58c181297ce77597daf2364175cbb9f211f7755ca8d8c8b5918ad9ce24",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.13-151"
+        "version": "3.8.13-152"
     },
     "wait-for-port": {
         "arch": "amd64",
