@@ -8,7 +8,7 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq libbz2-1.0 libc6 libcom-err2 libcrypt1 libffi7 libgcc-s1 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncursesw6 libnsl2 libreadline8 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 libtirpc3 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-151" --checksum 1b28fa915312f8c1fc5b4a1a4381c06ffc599e9cc1331b500c8fd012e96ba6f0
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-152" --checksum a831df58c181297ce77597daf2364175cbb9f211f7755ca8d8c8b5918ad9ce24
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.19.3-150" --checksum 97cffecfb637e5758197e4eb14d50b42048768eba242da4b534f1d8bacbd6958
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb-shell" "1.5.0-150" --checksum 566114f192eb2f387e0f8a640eaab07369c493f922d2f1767d1da81e316de383
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "parse" "4.10.12-0" --checksum 23b82224c362489862125aa34fb7b6108739181092afb6b2254d21cca9e632c8
