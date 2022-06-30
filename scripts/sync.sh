@@ -19,7 +19,7 @@ queryRepos() {
 
     while [[ "$page" -gt -1 ]]; do
         # Query only the public repos since we won't add private containers to bitnami/containers
-        page_repos="$(curl -sH 'Content-Type: application/json' -H 'Accept: application/json' "https://api.github.com/orgs/bitnami/repos?type=public&sort=updated&direction=desc&per_page=${repos_per_page}&page=${page}")"
+        page_repos="$(curl -sH 'Content-Type: application/json' -H 'Accept: application/json' "https://api.github.com/orgs/bitnami/repos?type=public&per_page=${repos_per_page}&page=${page}")"
         repos="$(jq -s 'reduce .[] as $x ([]; . + $x)' <(echo "$repos") <(echo "$page_repos"))"
         n_repos="$(jq length <<< "$page_repos")"
         if [[ "$n_repos" -lt "$repos_per_page" ]]; then
@@ -44,20 +44,16 @@ getContainerRepos() {
 
 # Commits a directory
 gitConfigure() {
-    git config user.name "Bitnami Containers"
-    git config user.email "bitnami-bot@vmware.com"
+    git config --global user.name "Bitnami Containers"
+    git config --global user.email "bitnami-bot@vmware.com"
 }
 
 pushChanges() {
-    git config user.name "Bitnami Containers"
-    git config user.email "bitnami-bot@vmware.com"
     git push origin "$(git rev-parse --abbrev-ref HEAD)"
 }
 
 findCommitsToSync() {
     local origin_name="${1:?Missing origin name}"
-    # Get all commits IDs on the origin
-    local -r commits=($(git rev-list "${origin_name}/master" -- .))
     # Find the commit that doesn't have changes respect the container folder
     # Get the last commit message in the container folder
     local shift=$((COMMIT_SHIFT + 1))
@@ -66,6 +62,9 @@ findCommitsToSync() {
     local -r last_synced_commit_id="$(git rev-list "$origin_name"/master --grep="${last_commit_message}" | head -1)"
     local commits_to_sync=""
     local max=100 # If we need to sync more than 100 commits there must be something wrong since we run the job on a daily basis
+    # Get all commits IDs on the origin
+    local commits=()
+    while IFS='' read -r line; do commits+=("$line"); done < <(git rev-list "${origin_name}/master" -- .)
     for commit in "${commits[@]}"; do
         if [[ "$commit" != "$last_synced_commit_id" ]] && [[ "$max" -gt "0" ]]; then
             actual_commit_id="$(plainCommit "${commit}")"
@@ -88,7 +87,7 @@ plainCommit() {
     local result="$commit"
     actual_merge_commit_id="$(git log --pretty=%P -n 1 "$commit" | awk '{print $2}')"
     if [[ -n "$actual_merge_commit_id" ]]; then
-        result="$(plainCommit $actual_merge_commit_id)"
+        result="$(plainCommit "${actual_merge_commit_id}")"
     fi
     echo "$result"
 }
@@ -128,17 +127,17 @@ syncNewContainer() {
     git clone "https://github.com/bitnami/bitnami-docker-${container}" "/tmp/${container}"
     cd "/tmp/${container}" || exit
     # Remove special files
-    rm -rf ${SPECIAL_FILES[@]} || true
+    rm -rf "${SPECIAL_FILES[@]}" || true
     git add -A
     git commit -qm "Remove CONTRIBUTING.md CODE_OF_CONDUCT.md and LICENSE.md. Now these files are are in the root"
     cd - || exit
     # Rewrite history to remove special files.
-    for file in ${SPECIAL_FILES[@]}; do
+    for file in "${SPECIAL_FILES[@]}"; do
         git filter-repo --quiet --source "/tmp/${container}" --target "/tmp/${container}" --invert-paths --force --path "${file}"
     done
     # Rewrite history to point files to containers/${container}
     git-filter-repo --quiet --source "/tmp/${container}" --target "/tmp/${container}" --to-subdirectory-filter "containers/${container}" --force
-    
+
     # Fetch the old repo and merge maintaining history
     git remote add --fetch "$container" "/tmp/${container}"
     git merge "${container}/master" --allow-unrelated-histories --no-log --no-ff -Xtheirs -qm "Merge bitnami-docker-${container} into bitnami/containers"
@@ -153,15 +152,16 @@ syncRepos() {
     if [[ -z "$CONTAINER" ]]; then
         local -r repos="$(getContainerRepos)"
         # Sync changes
-        for container in ${repos[@]}; do
-            echo "Syncing container: ${container}"
+        for container in $repos; do
             if [[ -d  "${TARGET_DIR}/containers/${container}" ]]; then
+                echo "Syncing container: ${container}"
                 syncContainerCommits "$container"
             else
+                echo "Add new container: ${container}"
                 syncNewContainer "$container"
             fi
         done
-        # Clean deprecated 
+        # Clean deprecated
         cd  "${TARGET_DIR}/containers" || exit
         for container in *; do
             if [[ ! $repos =~ (^|[[:space:]])$container($|[[:space:]]) ]]; then
@@ -178,5 +178,5 @@ syncRepos() {
     pushChanges
 }
 
-sudo apt-get update >/dev/null && sudo apt-get install -y git-filter-repo > /dev/null
+pip install git-filter-repo==2.34.0
 syncRepos

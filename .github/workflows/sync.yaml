@@ -7,14 +7,14 @@ on:
   workflow_dispatch:
     inputs:
       shift:
-        description: 'Commits to shift if you edited the containers folder'     
+        description: 'Commits to shift if you edited the containers folder'
         default: '0'
       container:
-        description: 'Sync only the container specified'     
+        description: 'Sync only the container specified'
         default: ''
 jobs:
   build:
-    name: Trigger Site Rebuild
+    name: Trigger Containers Synchronization
     runs-on: ubuntu-latest
     steps:
       - name: Checkout bitnami/containers
@@ -22,5 +22,5 @@ jobs:
         with:
           token: ${{ secrets.BITNAMI_BOT_SECRET }}
           fetch-depth: 0
-      - name: Fetch
-        run: ./scripts/fetch-commits.sh ${{ github.event.inputs.shift }} ${{ github.event.inputs.container }} 
+      - name: Sync Containers
+        run: ./scripts/sync.sh ${{ github.event.inputs.shift }} ${{ github.event.inputs.container }}
