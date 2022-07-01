@@ -1,0 +1,9 @@
+{
+    "envoy-intel": {
+        "arch": "amd64",
+        "digest": "6419d2e40cb6f8080397f798d6d81daee58bc9b42b30bd28403ef803dcad101f",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.20.6-0"
+    }
+}
