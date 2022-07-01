@@ -228,7 +228,7 @@ solr_update_password() {
 
     info "Updating user password"
 
-    if ! debug_execute "$exec" "${command_args[@]}" >/dev/null; then
+    if ! debug_execute "$exec" "${command_args[@]}"; then
         error "There was an error when updating the user password"
         exit 1
     else
@@ -259,7 +259,7 @@ solr_check_api() {
 
     command_args+=("--silent" "--user" "${username}:${password}" "${protocol}://localhost:${SOLR_PORT_NUMBER}/api/" "-H" "'Content-type:application/json'")
 
-    if ! debug_execute "$exec" "${command_args[@]}" >/dev/null; then
+    if ! debug_execute "$exec" "${command_args[@]}"; then
         return 1
     fi
 }
@@ -303,7 +303,7 @@ solr_create_cloud_user() {
 
     info "Creating user: ${username}"
 
-    if ! debug_execute "$exec" "${command_args[@]}" >/dev/null; then
+    if ! debug_execute "$exec" "${command_args[@]}"; then
         error "There was an error when creating the user"
         exit 1
     else
@@ -342,7 +342,7 @@ solr_create_collection() {
             fi
         fi
 
-        if ! debug_execute "$exec" "${command_args[@]}" >/dev/null; then
+        if ! debug_execute "$exec" "${command_args[@]}"; then
             error "There was an error when creating the collection"
             exit 1
         else
@@ -417,7 +417,7 @@ solr_is_zk_initialized() {
 
     info "Checking if solr has been initialized in zookeeper"
 
-    if ! debug_execute "$exec" "${command_args[@]}" 2>/dev/null; then
+    if ! debug_execute "$exec" "${command_args[@]}"; then
         info "Zookeeper was not initialized."
         return 1
     else
