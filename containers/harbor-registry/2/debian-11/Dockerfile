@@ -8,7 +8,7 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-registry" "2.5.1-150" --checksum a8b7aaa1012864723deea2e14702d9b7c0126d1e6f899ae78c2a38437492a791
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-registry" "2.5.2-0" --checksum 3fa2fc6e552c05e302659599a842789a3a092a28d01750f16ac91581174125e2
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -16,7 +16,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-registry/postunpack.sh
-ENV APP_VERSION="2.5.1" \
+ENV APP_VERSION="2.5.2" \
     BITNAMI_APP_NAME="harbor-registry" \
     PATH="/opt/bitnami/harbor-registry/bin:/opt/bitnami/common/bin:$PATH"
 
