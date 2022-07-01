@@ -21,11 +21,9 @@ if [[ -f "$ETCD_NEW_MEMBERS_ENV_FILE" ]]; then
     debug "Loading env vars of existing cluster"
     . "$ETCD_NEW_MEMBERS_ENV_FILE"
 else
-    # We do not rely on the original value of ETCD_INITIAL_CLUSTER even
-    # when bootstrapping a new cluster since we cannot assume
-    # that all nodes will come-up healthy
-    ETCD_INITIAL_CLUSTER="$(recalculate_initial_cluster)"
-    export ETCD_INITIAL_CLUSTER
+    # We rely on the original value of ETCD_INITIAL_CLUSTER
+    # when bootstrapping a new cluster since 
+    # we need all intial members to calcualte a same cluster_id
 fi
 
 declare -a cmd=("etcd")
