@@ -8,10 +8,10 @@
     },
     "discourse": {
         "arch": "amd64",
-        "digest": "3b74fadbe604955d24a5a60f27983109da82563e069bee4699e224c0f1d0ee58",
+        "digest": "c13edabb33e6498fa76db9d1bd8eb5489951fe259cc1ca7f6266e94199aaf4de",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.8.4-0"
+        "version": "2.8.5-0"
     },
     "git": {
         "arch": "amd64",
