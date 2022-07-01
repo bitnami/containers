@@ -534,7 +534,7 @@ influxdb_initialize() {
 #   None
 #########################
 influxdb_custom_init_scripts() {
-    if [[ -n $(find "${INFLUXDB_INITSCRIPTS_DIR}/" -type f -regex ".*\.\(sh\|txt\)") ]] && [[ ! -f "${INFLUXDB_INITSCRIPTS_DIR}/.user_scripts_initialized" ]]; then
+    if [[ -n $(find "${INFLUXDB_INITSCRIPTS_DIR}/" -type f -regex ".*\.\(sh\|txt\)") ]] && [[ ! -f "${INFLUXDB_VOLUME_DIR}/.user_scripts_initialized" ]]; then
         info "Loading user's custom files from ${INFLUXDB_INITSCRIPTS_DIR} ..."
         local -r tmp_file="/tmp/filelist"
         if ! is_influxdb_running; then
