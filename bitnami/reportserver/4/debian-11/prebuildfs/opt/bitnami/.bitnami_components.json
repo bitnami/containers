@@ -29,16 +29,16 @@
     },
     "reportserver": {
         "arch": "amd64",
-        "digest": "b3a3423939cc26e626ca502f1d89c5980b8f2a097609b856af7955f548b7766c",
+        "digest": "5c243e27fffc777b6164f85ae92d453c80200f2f5db2582702bce1d07eb0876f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.1.0-6065-0"
+        "version": "4.2.0-6066-0"
     },
     "tomcat": {
         "arch": "amd64",
-        "digest": "04f970d589c9540b37caf70dbc35e2d91ed93254761d81ebf18845ffb544fd28",
+        "digest": "2f92b7e5ee72db383c816832949dc898f74830cdc7541ac44cb6a40594427a54",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.0.64-152"
+        "version": "9.0.64-153"
     }
 }
