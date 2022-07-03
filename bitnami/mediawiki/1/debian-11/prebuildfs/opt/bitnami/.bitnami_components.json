@@ -22,10 +22,10 @@
     },
     "mediawiki": {
         "arch": "amd64",
-        "digest": "06a928ad4dfbf140475ec305311f089d410fff10f36977918a96996ac42e0157",
+        "digest": "64095a0997821dac542b7751bf988b65413da72c477af75c6e569da169d56843",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.38.1-150"
+        "version": "1.38.2-0"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "036d6748844efb2b3809b39c4e5bf0f75fcf167e226297699d72d13583c7bcde",
+        "digest": "fbe51ff8a457127ebbc75df5624879763d22770d2b5b0647b87bbb75770c31ad",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.4.30-150"
+        "version": "7.4.30-151"
     },
     "render-template": {
         "arch": "amd64",
