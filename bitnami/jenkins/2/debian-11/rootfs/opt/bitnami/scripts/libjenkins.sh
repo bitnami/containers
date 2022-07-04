@@ -228,6 +228,8 @@ jenkins_initialize() {
             ! is_empty_value "$JENKINS_HOST" && jenkins_configure_host "$JENKINS_HOST"
             # Rotate the logs in Jenkins to clean the Jenkins warnings before actually configuring the app
             jenkins_stop
+            # Generate jenkins.jks
+            "${JAVA_HOME}/bin/keytool" -genkey -keypass "${JENKINS_KEYSTORE_PASSWORD}" -storepass "${JENKINS_KEYSTORE_PASSWORD}" -keystore "${JENKINS_HOME}/jenkins.jks" -dname "CN=${JENKINS_HOST}, O=${JENKINS_HOST}" -alias "${JENKINS_HOST}"
             mv "$JENKINS_LOG_FILE" "${JENKINS_LOGS_DIR}/jenkins.firstboot.log"
             rm "${JENKINS_HOME}/init.groovy.d/init-jenkins.groovy"
         else
