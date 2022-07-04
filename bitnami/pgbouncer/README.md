@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-11`, `1.17.0`, `1.17.0-debian-11-r12`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgbouncer/blob/1.17.0-debian-11-r12/1/debian-11/Dockerfile)
+* [`1`, `1-debian-11`, `1.17.0`, `1.17.0-debian-11-r13`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-pgbouncer/blob/1.17.0-debian-11-r13/1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pgbouncer GitHub repo](https://github.com/bitnami/bitnami-docker-pgbouncer).
 
@@ -85,7 +85,7 @@ The Bitnami PgBouncer container requires a running PostgreSQL installation to co
 - `POSTGRESQL_HOST`: Backend PostgreSQL hostname. Default: **postgresql**.
 - `POSTGRESQL_PORT`: Backend PostgreSQL port. Default: **5432**.
 - `PGBOUNCER_SET_DATABASE_USER`: Whether to include the backend PostgreSQL username in the database string. Default **no**.
-- `PGBOUNCER_SET_DATABASE_PASSWORD`: Whether to include the backend PostgreSQL password in the database string. Default **no**
+- `PGBOUNCER_SET_DATABASE_PASSWORD`: Whether to include the backend PostgreSQL password in the database string. Default **no**.
 - `PGBOUNCER_CONNECT_QUERY`: Query which will be executed after a connection is established. No Defaults.
 
 ### Port and address binding
