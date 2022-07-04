@@ -1,10 +1,10 @@
 {
     "git": {
         "arch": "amd64",
-        "digest": "c15ff3fff7478e74922d560c5c4ffcb8d11bff92975f81591b62742902edd731",
+        "digest": "75341efddd4113ca16df9815f6e015881c73f71c66c412a43e2ed7cc4fa7f177",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.36.1-150"
+        "version": "2.37.0-0"
     },
     "gosu": {
         "arch": "amd64",
@@ -22,10 +22,10 @@
     },
     "jenkins": {
         "arch": "amd64",
-        "digest": "89394cca5f34e4bd2ac6a4d813ccbd25bde411ff62b1208419e6ed82c4e94e36",
+        "digest": "23b49c9f7e9feb754f550fd93b7cc80be06de788ae1c3e081968d44ae8338f99",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.332.3-150"
+        "version": "2.346.1-0"
     },
     "render-template": {
         "arch": "amd64",
