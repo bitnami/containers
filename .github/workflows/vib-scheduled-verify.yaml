@@ -45,6 +45,8 @@ jobs:
       matrix:
         flavor:  ${{ fromJSON(needs.get-container.outputs.flavors) }}
     steps:
+      - name: Install dependencies
+        run: pip install git-filter-repo==2.34.0
       - uses: actions/checkout@v2
         name: Checkout Repository
         with:

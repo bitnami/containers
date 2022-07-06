@@ -64,12 +64,12 @@ findCommitsToSync() {
     local max=100 # If we need to sync more than 100 commits there must be something wrong since we run the job on a daily basis
     # Get all commits IDs on the origin
     local commits=()
-    while IFS='' read -r line; do commits+=("$line"); done < <(git rev-list "${origin_name}/master" -- .)
+    # Get the revision list in topological order ignoring merge commits
+    while IFS='' read -r line; do commits+=("$line"); done < <(git rev-list --topo-order --no-merges "${origin_name}/master" -- .)
     for commit in "${commits[@]}"; do
         if [[ "$commit" != "$last_synced_commit_id" ]] && [[ "$max" -gt "0" ]]; then
-            actual_commit_id="$(plainCommit "${commit}")"
-            if [[ "$commit" != "$SKIP_COMMIT_ID" ]] && [[ ! $commits_to_sync =~ (^|[[:space:]])$actual_commit_id($|[[:space:]]) ]]; then
-              commits_to_sync="${actual_commit_id} ${commits_to_sync}"
+            if [[ "$commit" != "$SKIP_COMMIT_ID" ]]; then
+              commits_to_sync="${commit} ${commits_to_sync}"
             fi
         else
             # We reached the last commit synced
@@ -80,16 +80,6 @@ findCommitsToSync() {
 
     [[ "$max" -eq "0" ]] && echo "Last commit not found into the original repo history" && return 1
     echo "$commits_to_sync"
-}
-
-plainCommit() {
-    local commit="${1:?Missing commit}"
-    local result="$commit"
-    actual_merge_commit_id="$(git log --pretty=%P -n 1 "$commit" | awk '{print $2}')"
-    if [[ -n "$actual_merge_commit_id" ]]; then
-        result="$(plainCommit "${actual_merge_commit_id}")"
-    fi
-    echo "$result"
 }
 
 syncCommit() {
@@ -178,5 +168,4 @@ syncRepos() {
     pushChanges
 }
 
-pip install git-filter-repo==2.34.0
 syncRepos
