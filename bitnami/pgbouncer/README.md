@@ -97,11 +97,11 @@ The listening port and listening address can be configured with the following en
 
 ### Extra arguments to PgBouncer startup
 
-In case you want to add extra flags to the PgBouncer command, use the `PGBOUNCER_EXTRA_ARGS` variable. Example:
+In case you want to add extra flags to the PgBouncer command, use the `PGBOUNCER_EXTRA_FLAGS` variable. Example:
 
 ```console
 $ docker run --name pgbouncer \
-  -e PGBOUNCER_EXTRA_ARGS="--verbose" \
+  -e PGBOUNCER_EXTRA_FLAGS="--verbose" \
   bitnami/pgbouncer:latest
 ```
 
