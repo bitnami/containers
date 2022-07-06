@@ -12,7 +12,7 @@ services:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
   redis:
-    image: docker.io/bitnami/redis:6.0
+    image: docker.io/bitnami/redis:7.0
     volumes:
       - 'redis_data:/bitnami'
     environment:
