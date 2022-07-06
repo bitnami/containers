@@ -43,10 +43,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "fbe51ff8a457127ebbc75df5624879763d22770d2b5b0647b87bbb75770c31ad",
+        "digest": "dd2a897f8089d5329b09f6982d8f7a2a0baace75afbe50500a3036f24753a604",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.4.30-151"
+        "version": "7.4.30-152"
     },
     "postgresql-client": {
         "arch": "amd64",
@@ -57,10 +57,10 @@
     },
     "redis-client": {
         "arch": "amd64",
-        "digest": "2c42c7a01f2a56d1ffa7d2269a092871ab80b7f839f72e9f3a38e808996eb4fd",
+        "digest": "2f11b353a7435a7c28ee248ffe381055fd922d247e168163da0acbf5b645b6c2",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.0.16-150"
+        "version": "7.0.2-0"
     },
     "render-template": {
         "arch": "amd64",
