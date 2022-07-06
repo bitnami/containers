@@ -9,7 +9,7 @@ services:
       - MARIADB_USER=bn_dreamfactory
       - MARIADB_DATABASE=bitnami_dreamfactory
   redis:
-    image: docker.io/bitnami/redis:6.0
+    image: docker.io/bitnami/redis:7.0
     volumes:
       - 'redis_data:/bitnami/redis'
     environment:
