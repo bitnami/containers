@@ -19,10 +19,10 @@ jobs:
       container: ${{ steps.get-container.outputs.container }}
       flavors: ${{ steps.get-container.outputs.flavors }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         name: Checkout Repository
         with:
-          ref: main
+          fetch-depth: 0
       - id: get-container
         name: Get random container
         run: |
@@ -33,7 +33,13 @@ jobs:
             container_name=$(echo "${containers[$random_index]}" | sed "s|containers/||g")
           fi
           flavors=(containers/${container_name}/*/*/)
-          flavors_json=$(printf "%s\n" "${flavors[@]}" | jq -R . | jq -cs .)
+          flavors_json="["
+          for flavor in "${flavors[@]}"; do
+            tag="$(git log --pretty=tformat:"%s" -n 1 --grep=" release$" --author bitnami-bot@vmware.com --author containers@bitnami.com --author containers-bot@bitnami.com -- ${flavor} | awk '{print $1}')"
+            flavors_json+="{\"path\": \"${flavor}\", \"tag\": \"${tag}\"},"
+          done;
+          flavors_json="${flavors_json/%,/]}"
+
           echo "::set-output name=container::${container_name}"
           echo "::set-output name=flavors::${flavors_json}"
   vib-verify:
@@ -47,18 +53,15 @@ jobs:
     steps:
       - name: Install dependencies
         run: pip install git-filter-repo==2.34.0
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         name: Checkout Repository
-        with:
-          ref: main
       - uses: vmware-labs/vmware-image-builder-action@main
         name: Verify ${{ needs.get-container.outputs.container }}
         with:
           pipeline: vib-verify.json
         env:
           # Path with docker resources
-          VIB_ENV_PATH:  ${{ matrix.flavor }}
+          VIB_ENV_PATH:  ${{ matrix.flavor.path }}
           # Container name
           VIB_ENV_CONTAINER: ${{ needs.get-container.outputs.container }}
-          # TODO: Retrieve version
-          VIB_ENV_TAG: latest
+          VIB_ENV_TAG: ${{ matrix.flavor.tag }}
