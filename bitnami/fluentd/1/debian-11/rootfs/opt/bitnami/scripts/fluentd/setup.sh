@@ -32,3 +32,5 @@ if am_i_root && [[ "$FLUENTD_DAEMON_USER" != "root" ]]; then
         chown "$FLUENTD_DAEMON_USER:$FLUENTD_DAEMON_GROUP" "$dir"
     done
 fi
+
+fluentd_custom_init_scripts

@@ -9,7 +9,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libcrypt1 libgcc-s1 libjemalloc-dev libncurses5-dev libreadline-dev libreadline8 libssl-dev libssl1.1 libstdc++6 libtinfo6 procps sqlite3 tar wget zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "3.1.2-150" --checksum 00b238602b8c973e7a85e45f2f24bbe9cf200802ea37578e7689b3cc0a3415b7
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-151" --checksum 089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "fluentd" "1.15.0-0" --checksum 474c226f6c2dcf0f09fb239389334d267e880e2cd60c7c70f7fe701182f5dcee
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
