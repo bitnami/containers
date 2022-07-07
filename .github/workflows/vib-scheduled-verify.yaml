@@ -33,7 +33,13 @@ jobs:
             container_name=$(echo "${containers[$random_index]}" | sed "s|containers/||g")
           fi
           flavors=(containers/${container_name}/*/*/)
-          flavors_json=$(printf "%s\n" "${flavors[@]}" | jq -R . | jq -cs .)
+          flavors_json="["
+          for flavor in "${flavors[@]}"; do
+            tag="$(git log --pretty=tformat:"%s" -n 1 --grep=" release$" --author bitnami-bot@vmware.com --author containers@bitnami.com --author containers-bot@bitnami.com -- ${flavor}|awk '{print $1}')"
+            flavors_json+="{\"path\": \"${flavor}\", \"tag\": \"${tag}\"},"
+          done;
+          flavors_json="${flavors_json/%,/]}"
+
           echo "::set-output name=container::${container_name}"
           echo "::set-output name=flavors::${flavors_json}"
   vib-verify:
@@ -57,8 +63,7 @@ jobs:
           pipeline: vib-verify.json
         env:
           # Path with docker resources
-          VIB_ENV_PATH:  ${{ matrix.flavor }}
+          VIB_ENV_PATH:  ${{ matrix.flavor.path }}
           # Container name
           VIB_ENV_CONTAINER: ${{ needs.get-container.outputs.container }}
-          # TODO: Retrieve version
-          VIB_ENV_TAG: latest
+          VIB_ENV_TAG: ${{ matrix.flavor.tag }}
