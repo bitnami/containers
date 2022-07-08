@@ -1,10 +1,10 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b",
+        "digest": "089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-150"
+        "version": "1.14.0-151"
     },
     "laravel": {
         "arch": "amd64",
@@ -22,10 +22,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "0d28aa2b388960ce4aa9666a80491049403dfb08f6f72dca340e05597b3274c9",
+        "digest": "eea7530f8d8d5f14c7eca5e67533563a7e5293628cd244e6378d3f4c2779bfe6",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.7-151"
+        "version": "8.1.8-0"
     },
     "python": {
         "arch": "amd64",
