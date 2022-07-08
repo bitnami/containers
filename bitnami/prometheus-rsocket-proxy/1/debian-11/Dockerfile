@@ -12,10 +12,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "02a91d298bbe3bb5d240f635802a50b2970b19eba960c1804b7275f88a944bb3  /tmp/bitnami/pkg/cache/java-1.8.333-150-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/java-1.8.333-150-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/java-1.8.333-150-linux-amd64-debian-11.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-rsocket-proxy-1.4.0-150-linux-amd64-debian-11.tar.gz && \
-    echo "f730f4d1ab2af2277dedfb98ad545f618e310bbbddf117567103d8dce5395650  /tmp/bitnami/pkg/cache/prometheus-rsocket-proxy-1.4.0-150-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/prometheus-rsocket-proxy-1.4.0-150-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/prometheus-rsocket-proxy-1.4.0-150-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/prometheus-rsocket-proxy-1.4.0-151-linux-amd64-debian-11.tar.gz && \
+    echo "61bd4176fa805fb9e9064c2e89aa5fadc4d10dad209ede78b9795fe183fae855  /tmp/bitnami/pkg/cache/prometheus-rsocket-proxy-1.4.0-151-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/prometheus-rsocket-proxy-1.4.0-151-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/prometheus-rsocket-proxy-1.4.0-151-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
