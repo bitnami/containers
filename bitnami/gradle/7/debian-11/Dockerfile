@@ -12,10 +12,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "fe6b65886a6b1f545508e272efbf422054ee030c867f94ebec2f93c5518252de  /tmp/bitnami/pkg/cache/java-11.0.15-150-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/java-11.0.15-150-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/java-11.0.15-150-linux-amd64-debian-11.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/gradle-7.4.2-150-linux-amd64-debian-11.tar.gz && \
-    echo "9ba80663fdba69f72e669ac606be1993eb2b0323e900eb1f46195da30fe9bfa5  /tmp/bitnami/pkg/cache/gradle-7.4.2-150-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/gradle-7.4.2-150-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/gradle-7.4.2-150-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/gradle-7.4.2-151-linux-amd64-debian-11.tar.gz && \
+    echo "1f6ddc3c8a2714af726ca6dde13b9d1ab90ff00adfedbf3492ff6c79ecb45bef  /tmp/bitnami/pkg/cache/gradle-7.4.2-151-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/gradle-7.4.2-151-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/gradle-7.4.2-151-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN mkdir /app && chmod g+rwX /app
