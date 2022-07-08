@@ -237,6 +237,8 @@ pgbouncer_initialize() {
             "max_client_conn:${PGBOUNCER_MAX_CLIENT_CONN}"
             "max_db_connections:${PGBOUNCER_MAX_DB_CONNECTIONS}"
             "idle_transaction_timeout:${PGBOUNCER_IDLE_TRANSACTION_TIMEOUT}"
+            "server_idle_timeout:${PGBOUNCER_SERVER_IDLE_TIMEOUT}"
+            "server_reset_query:${PGBOUNCER_SERVER_RESET_QUERY}"
             "default_pool_size:${PGBOUNCER_DEFAULT_POOL_SIZE}"
             "min_pool_size:${PGBOUNCER_MIN_POOL_SIZE}"
             "reserve_pool_size:${PGBOUNCER_RESERVE_POOL_SIZE}"
