@@ -10,7 +10,7 @@ RUN install_packages acl ca-certificates curl gzip libaudit1 libbrotli1 libbsd0 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "8.0.21-1" --checksum 8de753b93e302f5f2e2dcae661a9af2c38762b9ff23200ecd78228e2636aba3c
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-150" --checksum b47e1015fc1c9ce456f134ffd5b6ac6960c3f369c96fcd37319e9289b29a1047
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "symfony" "4.4.43-0" --checksum 35862ee9bdacff15fed9faab12e50e93f48dde71dfb842b2ab863e2216b87844
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-151" --checksum 089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/bitnami-user.sh
