@@ -1,30 +1,30 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b",
+        "digest": "089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-150"
+        "version": "1.14.0-151"
     },
     "harbor-registry": {
         "arch": "amd64",
-        "digest": "3fa2fc6e552c05e302659599a842789a3a092a28d01750f16ac91581174125e2",
+        "digest": "3aaa6d0a8b82c0fe1a055421d0c7747e5d45dcc21658493e325b4de73e04b7a7",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.5.2-0"
+        "version": "2.5.3-0"
     },
     "harbor-registryctl": {
         "arch": "amd64",
-        "digest": "01b73b928ddce801a34edabf26e4f5aa98187d7460840ee0ef142b8afcc0c538",
+        "digest": "f19e4ae90baf33270245e2c344a6e3d237db17fca573ed15c0153661dda55c9c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.5.2-0"
+        "version": "2.5.3-0"
     },
     "yq": {
         "arch": "amd64",
-        "digest": "a937d298205d3f7e8fcaa3ddbd24934cb2b809bcea54a1c0b3e3f29aa61428ac",
+        "digest": "042fde05fc288b0b4dc0e0de0348990e95e75c2222927f5c961ea239167a0a6f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.25.3-0"
+        "version": "4.25.3-1"
     }
 }
