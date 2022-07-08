@@ -13,7 +13,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template"
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "13.7.0-150" --checksum ff80edd08ce09e9425b73764d44354641073f0cf1eb8a5aeab64222cbe68d8a8
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.19.3-150" --checksum 97cffecfb637e5758197e4eb14d50b42048768eba242da4b534f1d8bacbd6958
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "odoo" "15.0.20220610-150" --checksum 341b6f4ed32b25b590d0be6a9564d0f7d339427724a3f1709c204c7996ee1f6e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-151" --checksum 089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
