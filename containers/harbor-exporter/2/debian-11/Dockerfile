@@ -8,15 +8,15 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-exporter" "2.5.2-0" --checksum a20d70bb4b4367c3f0028ce33a0562958de74fd94b7fb1c74a2b372cc49538a9
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-exporter" "2.5.3-0" --checksum 05637333f996d9295fa621cb39830942f89078eb73a2ae9bd3564d8f85b581da
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-151" --checksum 089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-exporter/postunpack.sh
-ENV APP_VERSION="2.5.2" \
+ENV APP_VERSION="2.5.3" \
     BITNAMI_APP_NAME="harbor-exporter" \
     PATH="/opt/bitnami/harbor-exporter/bin:/opt/bitnami/common/bin:$PATH"
 
