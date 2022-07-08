@@ -1,17 +1,17 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b",
+        "digest": "089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-150"
+        "version": "1.14.0-151"
     },
     "mongodb-shell": {
         "arch": "amd64",
-        "digest": "566114f192eb2f387e0f8a640eaab07369c493f922d2f1767d1da81e316de383",
+        "digest": "d01f90cda1a2fbef6261c73cd7486c9ba0999ea5ee33ec457711127466e5af56",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.5.0-150"
+        "version": "1.5.0-151"
     },
     "node": {
         "arch": "amd64",
