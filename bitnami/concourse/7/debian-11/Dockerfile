@@ -7,10 +7,10 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip iproute2 libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/concourse-7.8.1-0-linux-amd64-debian-11.tar.gz && \
-    echo "28f9d5506ca98b3acd35e82fd905c900105343aaba7acb5638a682f904801124  /tmp/bitnami/pkg/cache/concourse-7.8.1-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/concourse-7.8.1-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/concourse-7.8.1-0-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/concourse-7.8.1-1-linux-amd64-debian-11.tar.gz && \
+    echo "7ca338c686bb56f76e6ca83b75b29470388b51bf2ced9822b1f7bd59bcd2c2a6  /tmp/bitnami/pkg/cache/concourse-7.8.1-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/concourse-7.8.1-1-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/concourse-7.8.1-1-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN touch /.flyrc && chmod g+rwX /.flyrc
