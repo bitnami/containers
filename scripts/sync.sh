@@ -57,9 +57,12 @@ findCommitsToSync() {
     # Find the commit that doesn't have changes respect the container folder
     # Get the last commit message in the container folder
     local shift=$((COMMIT_SHIFT + 1))
-    local -r last_commit_message="$(git log -n "$shift" --pretty=tformat:"%s" -- ./containers/"$origin_name" | tail -n 1)"
+    # Use author date also to distinguish several commits with the same subject.
+    local -r last_commit_date_message="$(git log -n "$shift" --pretty=tformat:"%ad----%s" -- ./containers/"$origin_name" | tail -n 1)"
+    local -r last_commit_date="${last_commit_date_message%----*}"
+    local -r last_commit_message="${last_commit_date_message#*----}"
     # Search on the container origin repo the ID for the latest commit we have locally in the container folder
-    local -r last_synced_commit_id="$(git rev-list "$origin_name"/master --grep="${last_commit_message}" | head -1)"
+    local -r last_synced_commit_id="$(git rev-list "$origin_name"/master --since="${last_commit_date}" --grep="${last_commit_message}" | head -1)"
     local commits_to_sync=""
     local max=100 # If we need to sync more than 100 commits there must be something wrong since we run the job on a daily basis
     # Get all commits IDs on the origin
@@ -118,8 +121,6 @@ syncNewContainer() {
     cd "/tmp/${container}" || exit
     # Remove special files
     rm -rf "${SPECIAL_FILES[@]}" || true
-    git add -A
-    git commit -qm "Remove CONTRIBUTING.md CODE_OF_CONDUCT.md and LICENSE.md. Now these files are are in the root"
     cd - || exit
     # Rewrite history to remove special files.
     for file in "${SPECIAL_FILES[@]}"; do
