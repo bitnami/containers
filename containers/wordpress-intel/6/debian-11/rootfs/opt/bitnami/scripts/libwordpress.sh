@@ -227,7 +227,7 @@ wordpress_initialize() {
 
     # Check if WordPress has already been initialized and persisted in a previous run
     local -r app_name="wordpress"
-    if ! is_app_initialized "$app_name"; then
+    if ! is_app_initialized "$app_name" || [[ ! -f "$WORDPRESS_CONF_FILE" ]]; then
         # Ensure WordPress persisted directories exist (i.e. when a volume has been mounted to /bitnami)
         info "Ensuring WordPress directories exist"
         ensure_dir_exists "$WORDPRESS_VOLUME_DIR"
