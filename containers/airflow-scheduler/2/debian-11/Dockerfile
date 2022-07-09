@@ -14,7 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "10.21.0-150" --checksum c9d6f09bac47484b4d4aaec3d48018c46d4102fb35abebeb62ef7a3496125e4c
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.3-150" --checksum ef1f6d1ca9e4873f82cf5037078b55524596ca2755262948f23571767bfd4101
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.37.0-0" --checksum 75341efddd4113ca16df9815f6e015881c73f71c66c412a43e2ed7cc4fa7f177
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "airflow-scheduler" "2.3.2-152" --checksum 920b59181bbd5a06c0bf0f8b1985e747bd192b51ee46c2eee60aad465d635c4b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "airflow-scheduler" "2.3.3-0" --checksum bab88b7d8616324fc5de2b7620acbbd45d8267de2d323846a91da868fa274d8f
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -22,7 +22,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/airflow-scheduler/postunpack.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
-    APP_VERSION="2.3.2" \
+    APP_VERSION="2.3.3" \
     BITNAMI_APP_NAME="airflow-scheduler" \
     LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/airflow/venv/lib/python3.8/site-packages/numpy.libs/:$LD_LIBRARY_PATH" \
     LIBNSS_WRAPPER_PATH="/opt/bitnami/common/lib/libnss_wrapper.so" \
