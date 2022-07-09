@@ -12,7 +12,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb-shell" "
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.25.3-2" --checksum 84ce4016efca8b6a6713d69e9d7c19003d4a530f8b420fb8cdcaa9cf9af47ee6
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.3-150" --checksum 1013e2ebbe58e5dc8f3c79fc952f020fc5306ba48463803cacfbed7779173924
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-150" --checksum 8b992a5ee513c5eaca52b19232b21a93588ddf4c4850be4d47c6f19b11d1d90a
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb" "5.0.9-1" --checksum 9629da9a997eec03314f1628281aa9820f1e2a09eb7b444dbdd1f7f7a5c6dc54
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb" "5.0.9-2" --checksum 6f0f382ec3f0d02353995764e2bc1a5ce0b53099767c255bd53e48f0e41dd246
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-151" --checksum 089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
