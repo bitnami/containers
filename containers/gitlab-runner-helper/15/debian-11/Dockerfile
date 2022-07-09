@@ -9,7 +9,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl git git-lfs gzip libc6 openssh-client procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dumb-init" "1.2.5-150" --checksum eb2507a10791eb84d6291b9f25d75d40b001bdd4bc56d389c11710ac9013e768
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-151" --checksum 089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gitlab-runner-helper" "15.1.0-1" --checksum fd20b5e616c517485ece5af0882273697dc5f431e7d1476137f2e882a2d2a0f7
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
