@@ -9,9 +9,9 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc-s1 libssl1.1 libstdc++6 libtinfo6 locales procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-151" --checksum 089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "erlang" "24.3.4-150" --checksum 1d1491a2dd0c467d9e968c85c5c7014fef59d521fabdda67f9f9583ed1030547
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rabbitmq" "3.8.34-150" --checksum a667e510c6d7d179c6f3fc582ac4fd8ae8d129ed5975c791e31b3d731fc6027b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rabbitmq" "3.8.34-151" --checksum 528a68b955842f2beefdebd686e516202dc6c13c66b1035aa0e41e2783f4ac15
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
