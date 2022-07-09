@@ -38,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`4`, `4-debian-11`, `4.0.1`, `4.0.1-debian-11-r11`, `latest` (4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/4.0.1-debian-11-r11/4/debian-11/Dockerfile)
-* [`3`, `3-debian-11`, `3.11.7`, `3.11.7-debian-11-r12` (3/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.11.7-debian-11-r12/3/debian-11/Dockerfile)
+* [`3`, `3-debian-11`, `3.11.7`, `3.11.7-debian-11-r13` (3/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-moodle/blob/3.11.7-debian-11-r13/3/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/moodle GitHub repo](https://github.com/bitnami/bitnami-docker-moodle).
 
