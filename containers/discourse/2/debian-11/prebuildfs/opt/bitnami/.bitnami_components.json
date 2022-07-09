@@ -22,17 +22,17 @@
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b",
+        "digest": "089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-150"
+        "version": "1.14.0-151"
     },
     "node": {
         "arch": "amd64",
-        "digest": "97cffecfb637e5758197e4eb14d50b42048768eba242da4b534f1d8bacbd6958",
+        "digest": "4580c44a68dab8200beed1d6c1a2397c854722ada2b81d9564b20388336453f9",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.19.3-150"
+        "version": "14.20.0-0"
     },
     "postgresql-client": {
         "arch": "amd64",
