@@ -8,9 +8,9 @@
     },
     "miniconda": {
         "arch": "amd64",
-        "digest": "201be5831fa6788ceab41d328f488129e26dade81be94d3316fbec854841050d",
+        "digest": "91a9876f5d4d23f12114b728e9408ad5e3d014d854991b756ce6ce4ebf431224",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.12.0-150"
+        "version": "4.12.0-151"
     }
 }
