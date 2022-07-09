@@ -9,9 +9,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq libc6 procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.3-150" --checksum 1013e2ebbe58e5dc8f3c79fc952f020fc5306ba48463803cacfbed7779173924
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio-client" "2022.6.26-0" --checksum 991922be66ec817c5ca563578176bc2e085df179bcaf647724e5136afb9fec00
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio" "2022.7.4-0" --checksum 6ae61c82d0d626247dc2cd94f27726700c444e8442fe525b36a279c662a22433
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-150" --checksum da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio-client" "2022.7.6-0" --checksum b4fa8350835180345ff38655ddf86bc45a69ef6215694be4f0104201576db66b
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio" "2022.7.8-0" --checksum 19432f34dce83b460cddbc0243848391d967c8fa8cb9e0b7fee7b73b7bb53546
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-151" --checksum 089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -19,7 +19,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/minio-client/postunpack.sh
 RUN /opt/bitnami/scripts/minio/postunpack.sh
-ENV APP_VERSION="2022.7.4" \
+ENV APP_VERSION="2022.7.8" \
     BITNAMI_APP_NAME="minio" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/minio-client/bin:/opt/bitnami/minio/bin:$PATH"
 
