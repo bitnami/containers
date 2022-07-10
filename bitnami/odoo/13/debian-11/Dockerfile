@@ -12,7 +12,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-150" --checksum 8b992a5ee513c5eaca52b19232b21a93588ddf4c4850be4d47c6f19b11d1d90a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "13.7.0-150" --checksum ff80edd08ce09e9425b73764d44354641073f0cf1eb8a5aeab64222cbe68d8a8
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.20.0-0" --checksum 4580c44a68dab8200beed1d6c1a2397c854722ada2b81d9564b20388336453f9
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "odoo" "13.0.20220610-150" --checksum cae488cfdc06c55c7245fc13d778b60523dd40b0b54d5eccc672e449dc9ce12c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "odoo" "13.0.20220710-0" --checksum 1d0f85cdcde524d1d4bfd43e513c103b7eb724a1c3b29620689fbea06921900d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-151" --checksum 089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -24,7 +24,7 @@ RUN curl -sLO https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/odoo/postunpack.sh
-ENV APP_VERSION="13.0.20220610" \
+ENV APP_VERSION="13.0.20220710" \
     BITNAMI_APP_NAME="odoo" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/odoo/bin:$PATH"
 
