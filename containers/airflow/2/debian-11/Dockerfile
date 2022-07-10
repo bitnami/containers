@@ -14,7 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "10.21.0-150" --checksum c9d6f09bac47484b4d4aaec3d48018c46d4102fb35abebeb62ef7a3496125e4c
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.3-150" --checksum ef1f6d1ca9e4873f82cf5037078b55524596ca2755262948f23571767bfd4101
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.37.0-0" --checksum 75341efddd4113ca16df9815f6e015881c73f71c66c412a43e2ed7cc4fa7f177
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "airflow" "2.3.2-153" --checksum ac19709f9cd61d5c1ccea5eb664c012e5c5855019d91f5eae9b37cb83b0185e1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "airflow" "2.3.3-0" --checksum d084dabd79755d55d32a6afcb771c7de5cd3df32bd74112441ae5dab16a3c3c7
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -27,7 +27,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/airflow/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
-    APP_VERSION="2.3.2" \
+    APP_VERSION="2.3.3" \
     BITNAMI_APP_NAME="airflow" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
