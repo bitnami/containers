@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`6`, `6-debian-11`, `6.0.0`, `6.0.0-debian-11-r11`, `latest` (6/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/6.0.0-debian-11-r11/6/debian-11/Dockerfile)
+- [`6`, `6-debian-11`, `6.0.0`, `6.0.0-debian-11-r12`, `latest` (6/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/6.0.0-debian-11-r12/6/debian-11/Dockerfile)
 - [`6`, `6-debian-10`, `6.0.0`, `6.0.0-debian-10-r-1`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/6.0.0-debian-10-r-1/6/debian-10/Dockerfile)
 - [`5`, `5-debian-11`, `5.9.3`, `5.9.3-debian-11-r15` (5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.9.3-debian-11-r15/5/debian-11/Dockerfile)
 
@@ -246,6 +246,7 @@ Available environment variables:
 - `WORDPRESS_ENABLE_HTTPS`: Whether to use HTTPS by default. Default: **no**
 - `WORDPRESS_SKIP_BOOTSTRAP`: Skip the WordPress installation wizard. This is necessary when providing a database with existing WordPress data. Default: **no**
 - `WORDPRESS_AUTO_UPDATE_LEVEL`: Level of auto-updates to allow for the WordPress core installation. Valid values: `major`, `minor`, `none`. Default: **none**
+- `WORDPRESS_ENABLE_REVERSE_PROXY`: Enable WordPress support for reverse proxy headers. Default: **no**
 
 ##### Salt and keys configuration
 
