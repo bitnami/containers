@@ -50,7 +50,7 @@ jobs:
       fail-fast: false
       matrix:
         flavor:  ${{ fromJSON(needs.get-container.outputs.flavors) }}
-        registry: ${{ secrets.OCI_REGISTRIES }}
+        registry: ${{ fromJSON(secrets.OCI_REGISTRIES) }}
     steps:
       - name: Install dependencies
         run: pip install git-filter-repo==2.34.0
