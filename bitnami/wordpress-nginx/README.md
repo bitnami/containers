@@ -248,6 +248,7 @@ Available environment variables:
 - `WORDPRESS_MULTISITE_NETWORK_TYPE`: WordPress Multisite network type to enable. Valid values: `subfolder`, `subdirectory`, `subdomain`. Default: **subdomain**
 - `WORDPRESS_MULTISITE_ENABLE_NIP_IO_REDIRECTION`: Whether to enable IP address redirection to nip.io wildcard DNS when enabling WordPress Multisite. This is useful when running on an IP address with subdomain network type. Default: **no**
 - `WORDPRESS_MULTISITE_FILEUPLOAD_MAXK`: Maximum upload file size allowed for WordPress Multisite uploads, in kilobytes. Default: **81920**
+- `WORDPRESS_ENABLE_REVERSE_PROXY`: Enable WordPress support for reverse proxy headers. Default: **no**
 
 ##### Database connection configuration
 
