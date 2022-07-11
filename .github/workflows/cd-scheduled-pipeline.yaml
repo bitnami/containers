@@ -50,7 +50,6 @@ jobs:
       fail-fast: false
       matrix:
         flavor:  ${{ fromJSON(needs.get-container.outputs.flavors) }}
-        registry: ${{ fromJSON(secrets.OCI_REGISTRIES) }}
     steps:
       - name: Install dependencies
         run: pip install git-filter-repo==2.34.0
@@ -66,6 +65,6 @@ jobs:
           # Container name
           VIB_ENV_CONTAINER: ${{ needs.get-container.outputs.container }}
           VIB_ENV_TAG: ${{ matrix.flavor.tag }}
-          VIB_ENV_REGISTRY_URL: ${{ matrix.registry.url }}
-          VIB_ENV_REGISTRY_USERNAME: ${{ matrix.registry.username }}
-          VIB_ENV_REGISTRY_PASSWORD:  ${{ matrix.registry.password }}
+          VIB_ENV_REGISTRY_URL: ${{ secrets.OCI_REGISTRY_URL }}
+          VIB_ENV_REGISTRY_USERNAME: ${{ secrets.OCI_REGISTRY_USERNAME }}
+          VIB_ENV_REGISTRY_PASSWORD:  ${{ secrets.OCI_REGISTRY_PASSWORD }}
