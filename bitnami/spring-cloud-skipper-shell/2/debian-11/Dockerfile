@@ -8,10 +8,10 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 libgcc-s1 locales procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/java-1.8.333-150-linux-amd64-debian-11.tar.gz && \
-    echo "02a91d298bbe3bb5d240f635802a50b2970b19eba960c1804b7275f88a944bb3  /tmp/bitnami/pkg/cache/java-1.8.333-150-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/java-1.8.333-150-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/java-1.8.333-150-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/java-1.8.333-151-linux-amd64-debian-11.tar.gz && \
+    echo "e0b96c241eeb16c7ba019193535c4d5c2b447a479d7f2056081f496eafbb94c7  /tmp/bitnami/pkg/cache/java-1.8.333-151-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/java-1.8.333-151-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/java-1.8.333-151-linux-amd64-debian-11.tar.gz
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/spring-cloud-skipper-shell-2.8.4-151-linux-amd64-debian-11.tar.gz && \
     echo "bb25c9a943fdad2fd32b758860e0fa331d4e22f9428491b7a9f2959291fd20dd  /tmp/bitnami/pkg/cache/spring-cloud-skipper-shell-2.8.4-151-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/spring-cloud-skipper-shell-2.8.4-151-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
