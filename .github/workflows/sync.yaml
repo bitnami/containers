@@ -17,6 +17,8 @@ jobs:
     name: Trigger Containers Synchronization
     runs-on: ubuntu-latest
     steps:
+      - name: Install dependencies
+        run: pip install git-filter-repo==2.34.0
       - name: Checkout bitnami/containers
         uses: actions/checkout@v3
         with:
