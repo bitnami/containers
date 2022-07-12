@@ -235,19 +235,21 @@ elasticsearch_validate() {
     }
 
     validate_node_roles() {
-        read -r -a roles_list <<<"$(tr ',;' ' ' <<<"$ELASTICSEARCH_NODE_ROLES")"
-        if [[ "${#roles_list[@]}" -le 0 ]]; then
-            warn "Setting ELASTICSEARCH_NODE_ROLES is empty and ELASTICSEARCH_IS_DEDICATED_NODE is set to true, Elasticsearch will be configured as coordinating-only node."
-        fi
-        for role in "${roles_list[@]}"; do
-            case "$role" in
-            master | data | data_content | data_hot | data_warm | data_cold | data_frozen | ingest | ml | remote_cluster_client | transform) ;;
+        if [ -n "$ELASTICSEARCH_NODE_ROLES" ]; then
+            read -r -a roles_list <<<"$(tr ',;' ' ' <<<"$ELASTICSEARCH_NODE_ROLES")"
+            if [[ "${#roles_list[@]}" -le 0 ]]; then
+                warn "Setting ELASTICSEARCH_NODE_ROLES is empty and ELASTICSEARCH_IS_DEDICATED_NODE is set to true, Elasticsearch will be configured as coordinating-only node."
+            fi
+            for role in "${roles_list[@]}"; do
+                case "$role" in
+                master | data | data_content | data_hot | data_warm | data_cold | data_frozen | ingest | ml | remote_cluster_client | transform) ;;
 
-            *)
-                print_validation_error "Invalid node role '$role'. Supported roles are 'master,data,data_content,data_hot,data_warm,data_cold,data_frozen,ingest,ml,remote_cluster_client,transform'"
-                ;;
-            esac
-        done
+                *)
+                    print_validation_error "Invalid node role '$role'. Supported roles are 'master,data,data_content,data_hot,data_warm,data_cold,data_frozen,ingest,ml,remote_cluster_client,transform'"
+                    ;;
+                esac
+            done
+        fi
     }
 
     # Temporary fix until ELASTICSEARCH_NODE_TYPE is removed to ensure the correct permissions to run 'elasticsearch --version'
@@ -257,7 +259,7 @@ elasticsearch_validate() {
         ensure_dir_exists "$dir"
         am_i_root && chown -R "$ELASTICSEARCH_DAEMON_USER:$ELASTICSEARCH_DAEMON_GROUP" "$dir"
     done
-    
+
     es_version="$(elasticsearch_get_version)"
     es_major_version="$(get_sematic_version "$es_version" 1)"
 
@@ -360,9 +362,13 @@ elasticsearch_cluster_configuration() {
                     false
                 fi
             else
-                read -r -a roles_list <<<"$(tr ',;' ' ' <<<"$ELASTICSEARCH_NODE_ROLES")"
-                if [[ " ${roles_list[*]} " = *" master "* ]]; then
-                    true
+                if [ -n "$ELASTICSEARCH_NODE_ROLES" ]; then
+                    read -r -a roles_list <<<"$(tr ',;' ' ' <<<"$ELASTICSEARCH_NODE_ROLES")"
+                    if [[ " ${roles_list[*]} " = *" master "* ]]; then
+                        true
+                    else
+                        false
+                    fi
                 else
                     false
                 fi
@@ -614,7 +620,7 @@ elasticsearch_set_heap_size() {
             heap_size=32768m
         fi
     fi
-    debug "Setting '-Xmx${heap_size} -Xms${heap_size}' heap options..."    
+    debug "Setting '-Xmx${heap_size} -Xms${heap_size}' heap options..."
     cat >"${ELASTICSEARCH_CONF_DIR}/jvm.options.d/heap.options" <<EOF
 -Xms${heap_size}
 -Xmx${heap_size}
