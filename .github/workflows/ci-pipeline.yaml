@@ -1,4 +1,4 @@
-name: VIB
+name: CI Pipeline
 on: # rebuild any PRs and main branch changes
   pull_request_target:
     types:
@@ -71,11 +71,16 @@ jobs:
       matrix:
         flavor:  ${{ fromJSON(needs.get-container.outputs.flavors) }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         name: Checkout Repository
+        # Required to search the latest commit with the tag
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          fetch-depth: 0
+      - id: get-tag
+        name: Get latest image tag
+        run: |
+          tag="$(git log --pretty=tformat:"%s" -n 1 --grep=" release$" --author bitnami-bot@vmware.com --author containers@bitnami.com --author containers-bot@bitnami.com --  ${{ matrix.flavor }} | awk '{print $1}')"
+          echo "::set-output name=tag::${tag}"
       - uses: vmware-labs/vmware-image-builder-action@main
         name: Verify ${{ needs.get-container.outputs.container }}
         with:
@@ -85,5 +90,4 @@ jobs:
           VIB_ENV_PATH: ${{ matrix.flavor }}
           # Container name
           VIB_ENV_CONTAINER: ${{ needs.get-container.outputs.container }}
-          # TODO: Retrieve version
-          VIB_ENV_TAG: latest
+          VIB_ENV_TAG: ${{ steps.get-tag.outputs.tag }}
