@@ -43,7 +43,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 - [`6`, `6-debian-11`, `6.0.0`, `6.0.0-debian-11-r12`, `latest` (6/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/6.0.0-debian-11-r12/6/debian-11/Dockerfile)
 - [`6`, `6-debian-10`, `6.0.0`, `6.0.0-debian-10-r-1`, `latest` (6/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/6.0.0-debian-10-r-1/6/debian-10/Dockerfile)
-- [`5`, `5-debian-11`, `5.9.3`, `5.9.3-debian-11-r15` (5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.9.3-debian-11-r15/5/debian-11/Dockerfile)
+- [`5`, `5-debian-11`, `5.9.3`, `5.9.3-debian-11-r16` (5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wordpress/blob/5.9.3-debian-11-r16/5/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wordpress GitHub repo](https://github.com/bitnami/bitnami-docker-wordpress).
 
