@@ -43,7 +43,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`18`, `18-debian-11`, `18.5.0`, `18.5.0-debian-11-r0`, `latest` (18/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/18.5.0-debian-11-r0/18/debian-11/Dockerfile)
 * [`16`, `16-debian-11`, `16.16.0`, `16.16.0-debian-11-r0` (16/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/16.16.0-debian-11-r0/16/debian-11/Dockerfile)
-* [`14`, `14-debian-11`, `14.20.0`, `14.20.0-debian-11-r0` (14/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/14.20.0-debian-11-r0/14/debian-11/Dockerfile)
+* [`14`, `14-debian-11`, `14.20.0`, `14.20.0-debian-11-r1` (14/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/14.20.0-debian-11-r1/14/debian-11/Dockerfile)
 * [`12`, `12-debian-11`, `12.22.12`, `12.22.12-debian-11-r14` (12/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-node/blob/12.22.12-debian-11-r14/12/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/node GitHub repo](https://github.com/bitnami/bitnami-docker-node).
