@@ -15,9 +15,9 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "e0b96c241eeb16c7ba019193535c4d5c2b447a479d7f2056081f496eafbb94c7",
+        "digest": "1f4d76b18ae5c1952c991332f02bd79c3979be7a7038923cdc4e7d8bfe3705e3",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.8.333-151"
+        "version": "1.8.333-152"
     }
 }
