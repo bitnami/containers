@@ -17,7 +17,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-clien
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-150" --checksum b47e1015fc1c9ce456f134ffd5b6ac6960c3f369c96fcd37319e9289b29a1047
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.30-150" --checksum eb642c232bfcbf339ac38df9d021ec3ef6da82fdb84e79115ae083ed8326b3dd
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-150" --checksum 8b992a5ee513c5eaca52b19232b21a93588ddf4c4850be4d47c6f19b11d1d90a
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "moodle" "3.11.7-150" --checksum 2b8149007828897f9c19281173651ec1240606338651deac2ab76a50a36f8aab
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "moodle" "3.11.8-0" --checksum de390b3cad307d0eb1f3dbe6c19c3040ae1598139cc0e17b1d4f9907e8d64da8
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-151" --checksum 089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -38,7 +38,7 @@ RUN /opt/bitnami/scripts/moodle/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="3.11.7" \
+    APP_VERSION="3.11.8" \
     BITNAMI_APP_NAME="moodle" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
