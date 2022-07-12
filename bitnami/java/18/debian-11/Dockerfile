@@ -9,7 +9,7 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libsqlite3-dev libssl-dev locales procps tar wget zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "18.0.1-1-0" --checksum 712e3a51cc18bebe9e90d77e6e62e923b2ca1ecf30413dbae9af1837fb0e4003
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "18.0.1-1-1" --checksum 6e82bdf67f2ce8eedf1aa8693735484e241e7b3d72eb35abbcec3f379ad960dc
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-151" --checksum 089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
