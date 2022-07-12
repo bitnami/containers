@@ -1,12 +1,11 @@
-# Temporary workflow to train publish actions. It will be removed in a close future
-name: Scheduled CD
+name: Scheduled CI pipeline
 on:
   schedule:
     - cron: "?/15 * * * *"
   workflow_dispatch:
     inputs:
       container:
-        description: Force VIB publication with this container
+        description: Force VIB verification with this container
         required: false
 env:
   CSP_API_URL: https://console.cloud.vmware.com
@@ -43,10 +42,10 @@ jobs:
 
           echo "::set-output name=container::${container_name}"
           echo "::set-output name=flavors::${flavors_json}"
-  vib-publish:
+  vib-verify:
     runs-on: ubuntu-latest
     needs: get-container
-    name: Publish
+    name: VIB verify
     strategy:
       fail-fast: false
       matrix:
@@ -57,15 +56,12 @@ jobs:
       - uses: actions/checkout@v3
         name: Checkout Repository
       - uses: vmware-labs/vmware-image-builder-action@main
-        name: Publish ${{ needs.get-container.outputs.container }}
+        name: Verify ${{ needs.get-container.outputs.container }}
         with:
-          pipeline: vib-publish.json
+          pipeline: vib-verify.json
         env:
           # Path with docker resources
           VIB_ENV_PATH:  ${{ matrix.flavor.path }}
           # Container name
           VIB_ENV_CONTAINER: ${{ needs.get-container.outputs.container }}
           VIB_ENV_TAG: ${{ matrix.flavor.tag }}
-          VIB_ENV_REGISTRY_URL: ${{ secrets.OCI_REGISTRY_URL }}
-          VIB_ENV_REGISTRY_USERNAME: ${{ secrets.OCI_REGISTRY_USERNAME }}
-          VIB_ENV_REGISTRY_PASSWORD:  ${{ secrets.OCI_REGISTRY_PASSWORD }}
