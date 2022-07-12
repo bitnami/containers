@@ -89,6 +89,7 @@ wordpress_validate() {
     check_yes_no_value "WORDPRESS_RESET_DATA_PERMISSIONS"
     check_yes_no_value "WORDPRESS_SKIP_BOOTSTRAP"
     check_multi_value "WORDPRESS_AUTO_UPDATE_LEVEL" "major minor none"
+    check_yes_no_value "WORDPRESS_ENABLE_REVERSE_PROXY"
 
     # Multisite validations
     check_yes_no_value "WORDPRESS_ENABLE_MULTISITE"
@@ -243,6 +244,7 @@ wordpress_initialize() {
         if is_file_writable "$WORDPRESS_CONF_FILE"; then
             # Set miscellaneous configurations
             wordpress_conf_set "FS_METHOD" "direct"
+            is_boolean_yes "$WORDPRESS_ENABLE_REVERSE_PROXY" && wordpress_configure_reverse_proxy
             ! is_boolean_yes "$WORDPRESS_ENABLE_MULTISITE" && wordpress_configure_urls
             # The only variable/non-constant in the entire configuration file is '$table_prefix'
             replace_in_file "$WORDPRESS_CONF_FILE" "^(\s*\\\$table_prefix\s*=\s*).*" "\1'$WORDPRESS_TABLE_PREFIX';"
@@ -604,6 +606,33 @@ if ( !defined( 'WP_CLI' ) ) {
 	});
 }
 EOF
+}
+
+########################
+# Configure reverse proxy headers
+# Globals:
+#   *
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+wordpress_configure_reverse_proxy() {
+    wordpress_conf_append "$(
+        cat <<"EOF"
+/**
+ * Handle potential reverse proxy headers. Ref:
+ *  - https://wordpress.org/support/article/faq-installation/#how-can-i-get-wordpress-working-when-im-behind-a-reverse-proxy
+ *  - https://wordpress.org/support/article/administration-over-ssl/#using-a-reverse-proxy
+ */
+if ( ! empty( $_SERVER['HTTP_X_FORWARDED_HOST'] ) ) {
+	$_SERVER['HTTP_HOST'] = $_SERVER['HTTP_X_FORWARDED_HOST'];
+}
+if ( ! empty( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) \&\& 'https' === $_SERVER['HTTP_X_FORWARDED_PROTO'] ) {
+	$_SERVER['HTTPS'] = 'on';
+}
+EOF
+    )"
 }
 
 ########################
