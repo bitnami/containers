@@ -8,10 +8,10 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "fe6b65886a6b1f545508e272efbf422054ee030c867f94ebec2f93c5518252de",
+        "digest": "036b876a7a2546e5639cb5557d152ec14a3492ca37132dc99e8bd2e3b8ce1ecd",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.15-150"
+        "version": "11.0.15-1-0"
     },
     "kafka": {
         "arch": "amd64",
