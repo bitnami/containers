@@ -1,10 +1,10 @@
 {
     "java": {
         "arch": "amd64",
-        "digest": "fe6b65886a6b1f545508e272efbf422054ee030c867f94ebec2f93c5518252de",
+        "digest": "036b876a7a2546e5639cb5557d152ec14a3492ca37132dc99e8bd2e3b8ce1ecd",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.15-150"
+        "version": "11.0.15-1-0"
     },
     "jruby": {
         "arch": "amd64",
@@ -15,10 +15,10 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "97cffecfb637e5758197e4eb14d50b42048768eba242da4b534f1d8bacbd6958",
+        "digest": "4580c44a68dab8200beed1d6c1a2397c854722ada2b81d9564b20388336453f9",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.19.3-150"
+        "version": "14.20.0-0"
     },
     "python": {
         "arch": "amd64",
