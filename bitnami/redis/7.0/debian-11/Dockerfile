@@ -9,7 +9,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libssl1.1 procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.3-150" --checksum 1013e2ebbe58e5dc8f3c79fc952f020fc5306ba48463803cacfbed7779173924
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis" "7.0.2-0" --checksum fdf76de0b9ec9840e6ca259fb5abcc9d6e883294de1c8388bf1f7c4952a6cc21
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis" "7.0.3-0" --checksum ed0844422687208853a7bb88958d5a4e2084819f060794fd56281bd7ac695c3e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-151" --checksum 089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -19,7 +19,7 @@ RUN ln -s /opt/bitnami/scripts/redis/run.sh /run.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/redis/postunpack.sh
-ENV APP_VERSION="7.0.2" \
+ENV APP_VERSION="7.0.3" \
     BITNAMI_APP_NAME="redis" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/redis/bin:$PATH"
 
