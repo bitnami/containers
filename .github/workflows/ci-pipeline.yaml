@@ -71,8 +71,6 @@ jobs:
       matrix:
         flavor:  ${{ fromJSON(needs.get-container.outputs.flavors) }}
     steps:
-      - name: Install dependencies
-        run: pip install git-filter-repo==2.34.0
       - uses: actions/checkout@v3
         name: Checkout Repository
         # Required to search the latest commit with the tag
