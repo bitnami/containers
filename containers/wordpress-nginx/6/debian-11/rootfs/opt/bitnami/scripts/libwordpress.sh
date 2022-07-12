@@ -620,18 +620,16 @@ EOF
 wordpress_configure_reverse_proxy() {
     wordpress_conf_append "$(
         cat <<"EOF"
-
 /**
  * Handle potential reverse proxy headers. Ref:
  *  - https://wordpress.org/support/article/faq-installation/#how-can-i-get-wordpress-working-when-im-behind-a-reverse-proxy
  *  - https://wordpress.org/support/article/administration-over-ssl/#using-a-reverse-proxy
  */
 if ( ! empty( $_SERVER['HTTP_X_FORWARDED_HOST'] ) ) {
-    $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_X_FORWARDED_HOST'];
+	$_SERVER['HTTP_HOST'] = $_SERVER['HTTP_X_FORWARDED_HOST'];
 }
-
 if ( ! empty( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) \&\& 'https' === $_SERVER['HTTP_X_FORWARDED_PROTO'] ) {
-    $_SERVER['HTTPS'] = 'on';
+	$_SERVER['HTTPS'] = 'on';
 }
 EOF
     )"
@@ -651,7 +649,6 @@ wordpress_configure_urls() {
     # Note that wp-config.php is officially indented via tabs, not spaces
     wordpress_conf_append "$(
         cat <<"EOF"
-
 /**
  * The WP_SITEURL and WP_HOME options are configured to access from any hostname or IP address.
  * If you want to access only from an specific domain, you can modify them. For example:
