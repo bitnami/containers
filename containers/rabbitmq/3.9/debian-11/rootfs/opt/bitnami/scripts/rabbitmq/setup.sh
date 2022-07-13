@@ -22,4 +22,5 @@ trap "rabbitmq_stop" EXIT
 am_i_root && ensure_user_exists "$RABBITMQ_DAEMON_USER" --group "$RABBITMQ_DAEMON_GROUP"
 # Ensure RabbitMQ is initialized
 rabbitmq_initialize
-
+# Load custom init scripts
+rabbitmq_custom_init_scripts
