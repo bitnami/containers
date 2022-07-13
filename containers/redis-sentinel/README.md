@@ -396,10 +396,6 @@ $ docker-compose up redis
 
 - The Redis(R) sentinel container has been migrated to a non-root container approach. Previously the container run as `root` user and the redis daemon was started as `redis` user. From now own, both the container and the redis daemon run as user `1001`. As a consequence, the configuration files are writable by the user running the redis process. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
-## Branch Deprecation Notice
-
-Redis&reg; Sentinel's branch 6.0 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 07-01-2022
-
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-redis-sentinel/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-redis-sentinel/pulls) with your contribution.
