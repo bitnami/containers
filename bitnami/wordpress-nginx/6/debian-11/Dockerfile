@@ -11,9 +11,9 @@ RUN install_packages acl ca-certificates curl gzip less libaudit1 libbrotli1 lib
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-150" --checksum 8b992a5ee513c5eaca52b19232b21a93588ddf4c4850be4d47c6f19b11d1d90a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "8.0.21-1" --checksum 8de753b93e302f5f2e2dcae661a9af2c38762b9ff23200ecd78228e2636aba3c
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wp-cli" "2.6.0-151" --checksum b426a51a33d93a22917e843161af356f733e806293bab5b93ddacf9b4041a5b7
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.22.0-152" --checksum b3b69cb01d9289df0b365ce675ae4297a93022696db94f8cd31a1f443244963d
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.22.0-153" --checksum b3b69cb01d9289df0b365ce675ae4297a93022696db94f8cd31a1f443244963d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-150" --checksum b47e1015fc1c9ce456f134ffd5b6ac6960c3f369c96fcd37319e9289b29a1047
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wordpress" "6.0.0-159" --checksum 4cbcdc903c936cdef62d204166fa6a6653a961520c4f4e6b5200f101a6b63d86
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wordpress" "6.0.1-0" --checksum 40d0bd37d6b8aee7f1567e12d5cb0c690d86682b4f951d02239ee35e05663ef5
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-151" --checksum 089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -26,7 +26,7 @@ RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/nginx-php-fpm/postunpack.sh
 RUN /opt/bitnami/scripts/wordpress/postunpack.sh
 RUN /opt/bitnami/scripts/wp-cli/postunpack.sh
-ENV APP_VERSION="6.0.0" \
+ENV APP_VERSION="6.0.1" \
     BITNAMI_APP_NAME="wordpress-nginx" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
