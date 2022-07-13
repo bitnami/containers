@@ -8,7 +8,7 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libcrypt1 libgeoip1 libpcre3 libssl1.1 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.22.0-152" --checksum b3b69cb01d9289df0b365ce675ae4297a93022696db94f8cd31a1f443244963d
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.22.0-153" --checksum b3b69cb01d9289df0b365ce675ae4297a93022696db94f8cd31a1f443244963d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-150" --checksum 8b992a5ee513c5eaca52b19232b21a93588ddf4c4850be4d47c6f19b11d1d90a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor" "2.5.3-0" --checksum b843e6f543d8a8495f0d5263c7675aa9ce7eebf02026487a81d9a1a7e9c27a95
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-151" --checksum 089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900
