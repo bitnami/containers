@@ -786,3 +786,39 @@ rabbitmq_initialize() {
         fi
     fi
 }
+
+########################
+# Run custom initialization scripts
+# Globals:
+#   RABBITMQ_*
+# Arguments:
+#   None
+# Returns:z<
+#   None
+#########################
+rabbitmq_custom_init_scripts() {
+    if [[ -n $(find "${RABBITMQ_INITSCRIPTS_DIR}/" -type f -regex ".*\.sh") ]]; then
+        info "Loading user's custom files from $RABBITMQ_INITSCRIPTS_DIR ..."
+        local -r tmp_file="/tmp/filelist"
+        find "${RABBITMQ_INITSCRIPTS_DIR}/" -type f -regex ".*\.sh" | sort >"$tmp_file"
+        while read -r f; do
+            case "$f" in
+            *.sh)
+                if [[ -x "$f" ]]; then
+                    debug "Executing $f"
+                    "$f"
+                else
+                    debug "Sourcing $f"
+                    . "$f"
+                fi
+                ;;
+            *)
+                debug "Ignoring $f"
+                ;;
+            esac
+        done <$tmp_file
+        rm -f "$tmp_file"
+    else
+        info "No custom scripts in $RABBITMQ_INITSCRIPTS_DIR"
+    fi
+}
