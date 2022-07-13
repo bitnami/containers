@@ -534,6 +534,40 @@ recalculate_initial_cluster() {
 }
 
 ########################
+# Globals:
+#   ETCD_*
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+########################
+check_auth() {
+  local return_value=0;
+  info "Check to see if auth is enabled or root user already exists"
+  ! is_etcd_running && etcd_start_bg
+  test_root_user="$(etcdctl user get root 2>&1 || true)"
+  case $test_root_user in
+      *"user name not found"*)
+          info "ETCD root user not found, continuing setup";
+          return_value=0;;
+      *"Error: etcdserver: permission denied"*)
+          info "ETCD auth is already enabled, skipping setup";
+          return_value=1;;
+      *"User: root"*)
+          info "ETCD root user already exists, skipping setup";
+          return_value=1;;
+      *"user name is empty"*)
+          info "ETCD auth is already enabled, skipping setup";
+          return_value=1;;
+      *)
+          warn "Unknown output, skipping setup";
+          return_value=1;;
+  esac
+  etcd_stop
+  return $return_value
+}
+
+########################
 # Ensure etcd is initialized
 # Globals:
 #   ETCD_*
@@ -686,6 +720,10 @@ etcd_initialize() {
                 export ETCD_INITIAL_CLUSTER_STATE=existing
                 [[ -f "$ETCD_CONF_FILE" ]] && etcd_conf_write "initial-cluster-state" "$ETCD_INITIAL_CLUSTER_STATE"
             fi
+        fi
+        if check_auth; then
+            info "auth disabled"
+            ! is_empty_value "$ETCD_ROOT_PASSWORD" && etcd_configure_rbac
         fi
     fi
 
