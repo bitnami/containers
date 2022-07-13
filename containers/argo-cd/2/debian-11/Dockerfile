@@ -12,14 +12,14 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kustomize" "4.5.
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ksonnet" "0.13.1-150" --checksum 0e608e49226f8e76f8f41b4178e5435129a35c221add67e7af2787b4c1b4c0f0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "helm" "3.9.0-150" --checksum b790f3ffad50bf2a32f5e828ea6beda51b5c6983a8f2f5662d6f1ec63bfb2f37
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-151" --checksum 089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "argo-cd" "2.4.5-0" --checksum ab277d54a5bc9fe47492b05a5baf09a329ee68a5f9c865c9ffc5525d3a71f036
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "argo-cd" "2.4.6-0" --checksum cf6bd0b7a84798db3e900a83055c6942b9c227b53339c844a3bd7fd022e70342
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/argo-cd/postunpack.sh
-ENV APP_VERSION="2.4.5" \
+ENV APP_VERSION="2.4.6" \
     BITNAMI_APP_NAME="argo-cd" \
     PATH="/opt/bitnami/kustomize/bin:/opt/bitnami/ksonnet/bin:/opt/bitnami/helm/bin:/opt/bitnami/common/bin:/opt/bitnami/argo-cd/bin:/opt/bitnami/argo-cd/hack:$PATH"
 
