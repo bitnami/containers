@@ -2,7 +2,7 @@ name: CD Pipeline
 on: # rebuild any PRs and main branch changes
   push:
     branches:
-      - master
+      - main
     paths:
       - 'containers/**'
 env:
