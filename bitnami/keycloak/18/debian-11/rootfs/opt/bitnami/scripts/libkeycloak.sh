@@ -119,11 +119,14 @@ keycloak_conf_set() {
 #   None
 #########################
 keycloak_configure_database() {
+    local jdbc_params
+    jdbc_params="$(echo "$KEYCLOAK_JDBC_PARAMS" | sed -E '/^$|^\&.+$/!s/^/\&/;s/\&/\\&/g')"
+
     info "Configuring database settings"
     keycloak_conf_set "db" "postgres"
     keycloak_conf_set "db-username" "$KEYCLOAK_DATABASE_USER"
     keycloak_conf_set "db-password" "$KEYCLOAK_DATABASE_PASSWORD"
-    keycloak_conf_set "db-url" "jdbc:postgresql://${KEYCLOAK_DATABASE_HOST}:${KEYCLOAK_DATABASE_PORT}/${KEYCLOAK_DATABASE_NAME}?currentSchema=${KEYCLOAK_DATABASE_SCHEMA}"
+    keycloak_conf_set "db-url" "jdbc:postgresql://${KEYCLOAK_DATABASE_HOST}:${KEYCLOAK_DATABASE_PORT}/${KEYCLOAK_DATABASE_NAME}?currentSchema=${KEYCLOAK_DATABASE_SCHEMA}${jdbc_params}"
 }
 
 ########################
