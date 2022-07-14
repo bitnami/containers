@@ -439,7 +439,7 @@ setup_etcd_active_endpoints() {
 is_healthy_etcd_cluster() {
     local return_value=0
     local active_endpoints cluster_size
-    read -r active_endpoints cluster_size <<< $(setup_etcd_active_endpoints)
+    read -r active_endpoints cluster_size <<<"$(setup_etcd_active_endpoints)"
 
     if is_boolean_yes "$ETCD_DISASTER_RECOVERY"; then
         if [[ -f "/snapshots/.disaster_recovery" ]]; then
