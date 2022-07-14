@@ -14,7 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-15
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-150" --checksum 8b992a5ee513c5eaca52b19232b21a93588ddf4c4850be4d47c6f19b11d1d90a
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.15-1-0" --checksum 036b876a7a2546e5639cb5557d152ec14a3492ca37132dc99e8bd2e3b8ce1ecd
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.37.1-0" --checksum d28184ee6b82ef162f7480dc3c80efa6d0bdd4c57632363fbfb7326286373f27
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "jenkins" "2.346.1-1" --checksum 51dffd6bf6469def35e510f5f42948d0166ac06ed91207a8a3143585a4a516dd
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "jenkins" "2.346.2-0" --checksum fa9f24bbe57d3ca03cc92f05b3789fcc1df3a5f5b520f3f6463478a8db474522
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -22,7 +22,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/jenkins/postunpack.sh
-ENV APP_VERSION="2.346.1" \
+ENV APP_VERSION="2.346.2" \
     BITNAMI_APP_NAME="jenkins" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/git/bin:$PATH"
