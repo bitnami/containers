@@ -32,7 +32,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-11`, `2.36.2`, `2.36.2-debian-11-r7`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.36.2-debian-11-r7/2/debian-11/Dockerfile)
+* [`2`, `2-debian-11`, `2.37.0`, `2.37.0-debian-11-r0`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-prometheus/blob/2.37.0-debian-11-r0/2/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/prometheus GitHub repo](https://github.com/bitnami/bitnami-docker-prometheus).
 
