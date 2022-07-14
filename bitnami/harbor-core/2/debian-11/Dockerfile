@@ -10,7 +10,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.3-150" --checksum 1013e2ebbe58e5dc8f3c79fc952f020fc5306ba48463803cacfbed7779173924
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.3-150" --checksum ef1f6d1ca9e4873f82cf5037078b55524596ca2755262948f23571767bfd4101
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-core" "2.5.3-0" --checksum b24a8165579816449b415bf9c9f53484e743ede513a913216696b5d3774f255c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-core" "2.5.3-1" --checksum 4046ffdc12e2cf26135832bfb4a4a78e2b4c2514947aa78811f63a3e09eebbfc
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-151" --checksum 089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
