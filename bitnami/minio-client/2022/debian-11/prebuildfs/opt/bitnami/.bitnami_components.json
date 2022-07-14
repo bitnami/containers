@@ -8,9 +8,9 @@
     },
     "minio-client": {
         "arch": "amd64",
-        "digest": "b4fa8350835180345ff38655ddf86bc45a69ef6215694be4f0104201576db66b",
+        "digest": "ab6234999a1b286a917649214f23c8073057113e901f89d9b215d5f82d05e1e9",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2022.7.6-0"
+        "version": "2022.7.11-0"
     }
 }
