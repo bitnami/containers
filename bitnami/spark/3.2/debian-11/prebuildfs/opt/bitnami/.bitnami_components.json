@@ -8,10 +8,10 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "e0b96c241eeb16c7ba019193535c4d5c2b447a479d7f2056081f496eafbb94c7",
+        "digest": "1f4d76b18ae5c1952c991332f02bd79c3979be7a7038923cdc4e7d8bfe3705e3",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.8.333-151"
+        "version": "1.8.333-152"
     },
     "python": {
         "arch": "amd64",
@@ -22,9 +22,9 @@
     },
     "spark": {
         "arch": "amd64",
-        "digest": "2bd2e65b8fcdd12eb081595e96412460ec604f94d1c57488ed61467d686f4ac4",
+        "digest": "4f124a0bb26008eed0a07e03603c0f420c06f17aab786a8c8a96d17e4967bf3a",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.2.1-152"
+        "version": "3.2.1-153"
     }
 }
