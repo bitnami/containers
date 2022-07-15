@@ -20,9 +20,9 @@ jobs:
       - id: get-container
         name: Get modified containers
         run: |
-          if [[ "${{ github.event.push.forced }}" == "false" ]]; then
+          if [[ "${{ github.event.forced }}" == "false" ]]; then
             # Get all commits associated to the push
-            commits=($(echo ${{ github.event.push.commits }} | jq -r '.commits[] | .url'))
+            commits=($(echo ${{ github.event.commits }} | jq -r '.commits[] | .url'))
             flavors=()
             for commit_url in "${commits[@]}"; do
               # Using the Github API to detect the files changed as git merge-base stops working when the branch is behind
