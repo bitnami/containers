@@ -16,10 +16,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "4580c44a68dab8200beed1d6c1a2397c854722ada2b81d9564b20388336453f9  /tmp/bitnami/pkg/cache/node-14.20.0-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/node-14.20.0-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/node-14.20.0-0-linux-amd64-debian-11.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/configurable-http-proxy-4.5.1-150-linux-amd64-debian-11.tar.gz && \
-    echo "3ff716ec1ca406f035f1913abf2487279e386153a375f4c41c399a6efdd9dce6  /tmp/bitnami/pkg/cache/configurable-http-proxy-4.5.1-150-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/configurable-http-proxy-4.5.1-150-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/configurable-http-proxy-4.5.1-150-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/configurable-http-proxy-4.5.1-151-linux-amd64-debian-11.tar.gz && \
+    echo "d914305ab328e73aeafe6170c6a6dc4507aca2ed560c595614cebe4802ce2d4d  /tmp/bitnami/pkg/cache/configurable-http-proxy-4.5.1-151-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/configurable-http-proxy-4.5.1-151-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/configurable-http-proxy-4.5.1-151-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
