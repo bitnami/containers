@@ -32,7 +32,7 @@ Optimized containers fully leverage 3rd gen Intel(R) Xeon(R) Scalable Processor 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.20`, `1.20-debian-11`, `1.20.6`, `1.20.6-debian-11-r3`, `latest` (1.20/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy-intel/blob/1.20.6-debian-11-r3/1.20/debian-11/Dockerfile)
+* [`1.20`, `1.20-debian-11`, `1.20.6`, `1.20.6-debian-11-r4`, `latest` (1.20/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy-intel/blob/1.20.6-debian-11-r4/1.20/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/envoy-intel GitHub repo](https://github.com/bitnami/bitnami-docker-envoy-intel).
 
