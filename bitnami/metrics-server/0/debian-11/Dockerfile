@@ -8,10 +8,10 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/metrics-server-0.6.1-150-linux-amd64-debian-11.tar.gz && \
-    echo "b7b1f7695f91eb7537c3a0c693573eba214aa744c396c1f7162b590e514fadd2  /tmp/bitnami/pkg/cache/metrics-server-0.6.1-150-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/metrics-server-0.6.1-150-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/metrics-server-0.6.1-150-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/metrics-server-0.6.1-151-linux-amd64-debian-11.tar.gz && \
+    echo "311a76abdd073e89a4c7bbbe2ba18c5f498428fd69e4298b0a7a43d71a02c981  /tmp/bitnami/pkg/cache/metrics-server-0.6.1-151-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/metrics-server-0.6.1-151-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/metrics-server-0.6.1-151-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
