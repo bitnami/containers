@@ -18,7 +18,7 @@ jobs:
       containers: ${{ steps.get-containers.outputs.containers }}
     steps:
       - id: get-containers
-        name: Get modifed containers path
+        name: Get modified containers path
         env:
           GITHUB_COMMITS: ${{ toJson(github.event.commits) }}
         run: |
