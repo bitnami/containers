@@ -36,7 +36,7 @@ jobs:
             done
 
             if [[ "${#containers[@]}" -le "0" ]]; then
-              echo "::set-output name=error::No changes detected in containers. The rest of the tests will be skipped."
+              echo "No changes detected in containers. The rest of the steps will be skipped."
               echo "::set-output name=result::skip"
             else
               containers_json=$(printf "%s\n" "${containers[@]}" | jq -R . | jq -cs .)
@@ -44,8 +44,8 @@ jobs:
               echo "::set-output name=containers::${containers_json}"
             fi
           else
+            echo "Forced push detected. CD pipeline will be skipped"
             echo "::set-output name=result::skip"
-            echo "::set-output name=error::Forced push detected. CD pipeline will be skipped"
           fi
   vib-publish:
     runs-on: ubuntu-latest
