@@ -1,38 +1,38 @@
 {
     "bower": {
         "arch": "amd64",
-        "digest": "fe6732dcbca8e51e4eb42bbbb1a19b993735310297525f0fac21bed647b48089",
+        "digest": "2b1982b8212bb74f82dacc26be8cc895df00a5f08b82370c3f8ef1ddb712e81d",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.8.12-150"
+        "version": "1.8.12-151"
     },
     "express": {
         "arch": "amd64",
-        "digest": "29acf14df27beed3926c87ed3c683bff0b8a98f37cf7cc26585777f51f9428a4",
+        "digest": "ad3962ff389e55ba22640e548092ec3000ab416234afa5111f63aeec017ecd2d",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.18.1-150"
+        "version": "4.18.1-151"
     },
     "express-generator": {
         "arch": "amd64",
-        "digest": "44c076bd2dadd1901637f1f46112f7b36bd548887dcd7b7aab480d743fed05d5",
+        "digest": "34666b6db5852515c08e4f2256af3f7b3977d20950a2e5588b67a753b09f06d3",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.16.1-150"
+        "version": "4.16.1-151"
     },
     "git": {
         "arch": "amd64",
-        "digest": "75341efddd4113ca16df9815f6e015881c73f71c66c412a43e2ed7cc4fa7f177",
+        "digest": "39ea3040baa552b4760c1100a3713f86493620c0a74121c1ceba50fe17341878",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.37.0-0"
+        "version": "2.37.1-1"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900",
+        "digest": "0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-151"
+        "version": "1.14.0-152"
     },
     "node": {
         "arch": "amd64",
