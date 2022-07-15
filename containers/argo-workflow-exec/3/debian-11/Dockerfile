@@ -7,9 +7,9 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl docker git gzip jq procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kubectl" "1.23.8-1" --checksum 00118c76ca3b2b01eaa304b43b7ed07ef9c300844118f0490d4c34442f77efe2
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-151" --checksum 089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "argo-workflow-exec" "3.3.8-0" --checksum ca62031e2ac9008883030e39de9778a28d8a54bb35d16a1acb13cce47de23174
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kubectl" "1.23.9-1" --checksum 11692019da351a97b1aa4fa7739224c9a66c37b48c6c1416d34d107731d31172
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "argo-workflow-exec" "3.3.8-1" --checksum f6ea3a6b5209a2f633344710ed036fc79a44055e4358d7fbfcf1d0fe957e9ae8
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 
