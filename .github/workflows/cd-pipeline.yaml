@@ -49,7 +49,7 @@ jobs:
           fi
   vib-publish:
     runs-on: ubuntu-latest
-    needs: get-container
+    needs: get-containers
     if: ${{ needs.get-containers.outputs.result == 'ok' }}
     name: publish
     strategy:
