@@ -62,7 +62,7 @@ findCommitsToSync() {
     local -r last_commit_date="${last_commit_date_message%----*}"
     local -r last_commit_message="${last_commit_date_message#*----}"
     # Search on the container origin repo the ID for the latest commit we have locally in the container folder
-    local -r last_synced_commit_id="$(git rev-list "$origin_name"/master --since="${last_commit_date}" --grep="${last_commit_message}" | head -1)"
+    local -r last_synced_commit_id="$(git rev-list "$origin_name"/master --since="${last_commit_date}" --grep="${last_commit_message}" --no-merges --date-order --reverse | head -1)"
     local commits_to_sync=""
     local max=100 # If we need to sync more than 100 commits there must be something wrong since we run the job on a daily basis
     # Get all commits IDs on the origin
