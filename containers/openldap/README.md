@@ -40,7 +40,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`2.6`, `2.6-debian-11`, `2.6.2`, `2.6.2-debian-11-r14`, `latest` (2.6/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.6.2-debian-11-r14/2.6/debian-11/Dockerfile)
-* [`2.5`, `2.5-debian-11`, `2.5.12`, `2.5.12-debian-11-r14` (2.5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.5.12-debian-11-r14/2.5/debian-11/Dockerfile)
+* [`2.5`, `2.5-debian-11`, `2.5.13`, `2.5.13-debian-11-r0` (2.5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-openldap/blob/2.5.13-debian-11-r0/2.5/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/openldap GitHub repo](https://github.com/bitnami/bitnami-docker-openldap).
 
