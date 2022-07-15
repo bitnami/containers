@@ -12,7 +12,7 @@ env:
 jobs:
   get-containers:
     runs-on: ubuntu-latest
-    name: Get modifed containers path
+    name: Get modified containers path
     outputs:
       result: ${{ steps.get-containers.outputs.result }}
       containers: ${{ steps.get-containers.outputs.containers }}
