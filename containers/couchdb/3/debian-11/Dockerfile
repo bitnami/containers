@@ -9,9 +9,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc-s1 libicu67 libssl1.1 libstdc++6 libtinfo6 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.3-150" --checksum 1013e2ebbe58e5dc8f3c79fc952f020fc5306ba48463803cacfbed7779173924
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.3-150" --checksum ef1f6d1ca9e4873f82cf5037078b55524596ca2755262948f23571767bfd4101
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-151" --checksum 089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "couchdb" "3.2.2-150" --checksum 92c2b5fdc1ad2a23a76c64dbb0870665037b5c626d8db3a76ed5af8eb1d33d72
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.3-151" --checksum 3f23f4fff5bd0ebead5b1a59c450e7b9806198864ff9c765439df14bfb9e1cf4
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "couchdb" "3.2.2-151" --checksum b722dfaaef484fda5d49c90f50d87ea8983c96fc5b787cdcc9a8ed4aaa8463e5
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
