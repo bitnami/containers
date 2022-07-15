@@ -19,14 +19,17 @@ jobs:
     steps:
       - id: get-container
         name: Get modified containers
+        env:
+          GITHUB_COMMITS: ${{ toJson(github.event.commits) }}
         run: |
           if [[ "${{ github.event.forced }}" == "false" ]]; then
             # Get all commits associated to the push
-            commits=($(echo ${{ github.event.commits }} | jq -r '.commits[] | .url'))
+            commits=($(echo "${GITHUB_COMMITS}" | jq -r '.[] | .id'))
             flavors=()
-            for commit_url in "${commits[@]}"; do
+            for commit in "${commits[@]}"; do
               # Using the Github API to detect the files changed as git merge-base stops working when the branch is behind
-              files_changed_data=$(curl -s --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -X GET -G "$commit_url")
+              URL="https://api.github.com/repos/${{ github.repository }}/commits/${commit}"
+              files_changed_data=$(curl -s --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -X GET -G "$URL")
               files_changed="$(echo $files_changed_data | jq -r '.files[] | .filename')"
               # Adding || true to avoid "Process exited with code 1" errors
               flavors+=($(echo "$files_changed" | xargs dirname | grep -o "containers/[^/]*/[^/]*/[^/]*" | sort | uniq || true))
@@ -48,7 +51,7 @@ jobs:
       # Source: https://github.community/t/no-output-on-process-completed-with-exit-code-1/123821/3
       - id: show-error
         name: Show error
-        if: ${{ steps.get-container.outputs.result == 'fail' }}
+        if: ${{ steps.get-container.outputs.result != 'ok' }}
         uses: actions/github-script@v3
         with:
           script: |
