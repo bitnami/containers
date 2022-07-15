@@ -1,16 +1,16 @@
 {
     "jupyter-base-notebook": {
         "arch": "amd64",
-        "digest": "5ec6f4ad30c9d487d78a5585a21325a9c41e69e46fd68fc729a86fad6841f8c1",
+        "digest": "491f5c54b8afb1ebdddfba0a34647a91ce32f913504fed06047ab3438a3711b1",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.5.0-150"
+        "version": "1.5.0-151"
     },
     "miniconda": {
         "arch": "amd64",
-        "digest": "91a9876f5d4d23f12114b728e9408ad5e3d014d854991b756ce6ce4ebf431224",
+        "digest": "54562193edb2be58d871e34d0c8238c7f4edc59d30950bd256fbf42103941afa",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.12.0-151"
+        "version": "4.12.0-152"
     }
 }
