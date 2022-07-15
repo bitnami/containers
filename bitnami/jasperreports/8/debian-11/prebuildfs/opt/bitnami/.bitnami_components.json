@@ -1,31 +1,31 @@
 {
     "git": {
         "arch": "amd64",
-        "digest": "75341efddd4113ca16df9815f6e015881c73f71c66c412a43e2ed7cc4fa7f177",
+        "digest": "39ea3040baa552b4760c1100a3713f86493620c0a74121c1ceba50fe17341878",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.37.0-0"
+        "version": "2.37.1-1"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900",
+        "digest": "0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-151"
+        "version": "1.14.0-152"
     },
     "jasperreports": {
         "arch": "amd64",
-        "digest": "4f47b844a8c916253090ff114d158d050d566c716e3706e3dcccfdbddc313dae",
+        "digest": "ccfef96c0dfe1c72b50993f8cf03ea47eb43447130af7b529d8ef296a3b24d48",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.2-150"
+        "version": "8.0.2-151"
     },
     "java": {
         "arch": "amd64",
-        "digest": "1f4d76b18ae5c1952c991332f02bd79c3979be7a7038923cdc4e7d8bfe3705e3",
+        "digest": "7ce94aacf3e51f137d94316b7767e590e7f827c0268f0d5336fd65cc7192aae8",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.8.333-152"
+        "version": "1.8.333-153"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -50,9 +50,9 @@
     },
     "tomcat": {
         "arch": "amd64",
-        "digest": "e4ee50b59b9ea53a6c943b7bd4cfd05bcf55991cecf41a40f34f6dc7a2449c8a",
+        "digest": "7e7d3452bcbb57a598cc7509c9a1668e0c1e55b874ab76d137a1ae73b836cb70",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.0.64-154"
+        "version": "9.0.64-155"
     }
 }
