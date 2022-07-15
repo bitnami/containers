@@ -8,8 +8,8 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio-client" "2022.7.11-0" --checksum ab6234999a1b286a917649214f23c8073057113e901f89d9b215d5f82d05e1e9
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-151" --checksum 089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio-client" "2022.7.11-1" --checksum 6579b1f7b2f7e3427c72b1fa1583b76efdece1a0fe9b23613087526414fe6ba2
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
