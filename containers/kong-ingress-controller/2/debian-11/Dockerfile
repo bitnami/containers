@@ -12,10 +12,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "1013e2ebbe58e5dc8f3c79fc952f020fc5306ba48463803cacfbed7779173924  /tmp/bitnami/pkg/cache/wait-for-port-1.0.3-150-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/wait-for-port-1.0.3-150-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/wait-for-port-1.0.3-150-linux-amd64-debian-11.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kong-ingress-controller-2.5.0-0-linux-amd64-debian-11.tar.gz && \
-    echo "1ad60d871e52f00d282b86561e180d0eb02f180934c84864e95d5bcaf4102b32  /tmp/bitnami/pkg/cache/kong-ingress-controller-2.5.0-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/kong-ingress-controller-2.5.0-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/kong-ingress-controller-2.5.0-0-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kong-ingress-controller-2.5.0-1-linux-amd64-debian-11.tar.gz && \
+    echo "b003e2877bb65cea9279253ffba406132153b28113b7e02673e6e07a4aa8c85b  /tmp/bitnami/pkg/cache/kong-ingress-controller-2.5.0-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/kong-ingress-controller-2.5.0-1-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/kong-ingress-controller-2.5.0-1-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
