@@ -1,23 +1,23 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900",
+        "digest": "0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-151"
+        "version": "1.14.0-152"
     },
     "python": {
         "arch": "amd64",
-        "digest": "9b6a2b7a34a78f345642e820908847ace622527eb7a79dbcfe5f5e788a9e60f3",
+        "digest": "78fe75b1b8bfe3f23835bd30c2ba222c3be60903893c9d4aeacc455468461609",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.10.5-152"
+        "version": "3.10.5-153"
     },
     "xgboost-intel": {
         "arch": "amd64",
-        "digest": "e099b325768c32ac0a55f93166843f7ebec13f637d799b6551f49aff400ed772",
+        "digest": "d49d5574cdab9690c82b9ade0a4d6d0998ab36ba30ac13fea8152f0a33746b90",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.6.1-150"
+        "version": "1.6.1-151"
     }
 }
