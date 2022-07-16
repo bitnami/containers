@@ -8,9 +8,9 @@
     },
     "spring-cloud-dataflow-shell": {
         "arch": "amd64",
-        "digest": "7c68cc9a83c095e90002f0ab575f376e539e2d6e07e648f75479bbe80d05161e",
+        "digest": "0c5854a8016a60dcb95df2b294258df350275a35964743f317bcd06d99035528",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.9.4-151"
+        "version": "2.9.4-152"
     }
 }
