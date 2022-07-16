@@ -29,7 +29,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`11`, `11-debian-11`, `11.3.0`, `11.3.0-debian-11-r6`, `latest` (11/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-proxy/blob/11.3.0-debian-11-r6/11/debian-11/Dockerfile)
-* [`10`, `10-debian-11`, `10.14.0`, `10.14.0-debian-11-r14` (10/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-proxy/blob/10.14.0-debian-11-r14/10/debian-11/Dockerfile)
+* [`10`, `10-debian-11`, `10.14.0`, `10.14.0-debian-11-r15` (10/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wavefront-proxy/blob/10.14.0-debian-11-r15/10/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wavefront-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-wavefront-proxy).
 
