@@ -9,9 +9,9 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc-s1 libssl1.1 libstdc++6 libtinfo6 locales procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-151" --checksum 089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "erlang" "24.3.4-150" --checksum 1d1491a2dd0c467d9e968c85c5c7014fef59d521fabdda67f9f9583ed1030547
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rabbitmq" "3.9.21-0" --checksum a5af7a84a14e182ee08cd0ec2c0ca16b89403fdf0bf208b4cc07defc7b07bd0a
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "erlang" "24.3.4-151" --checksum ec5e4c0d95f7f7b5d1823448c150e467681f4155181a382b27a9bf4610c38518
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rabbitmq" "3.9.20-152" --checksum e819e4f19de6515f6a9b0137f620002a6d74a5e8f47abcfb0aa03fdffe8fdcfc
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -24,7 +24,7 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 RUN /opt/bitnami/scripts/rabbitmq/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
-ENV APP_VERSION="3.9.21" \
+ENV APP_VERSION="3.9.20" \
     BITNAMI_APP_NAME="rabbitmq" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en"
