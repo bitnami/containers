@@ -53,7 +53,7 @@ is_jenkins_not_running() {
 jenkins_stop() {
     is_jenkins_not_running && return
     info "Stopping Jenkins"
-    stop_service_using_pid "$JENKINS_PID_FILE"
+    stop_service_using_pid "$JENKINS_PID_FILE" 15
 }
 
 ########################
