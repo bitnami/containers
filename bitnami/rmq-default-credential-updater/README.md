@@ -28,7 +28,7 @@ $ docker run --name rmq-default-credential-updater bitnami/rmq-default-credentia
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`1`, `1-scratch`, `1.0.2`, `1.0.2-scratch-r4`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-rmq-default-credential-updater/blob/1.0.2-scratch-r4/1/scratch/Dockerfile)
+- [`1`, `1-scratch`, `1.0.2`, `1.0.2-scratch-r5`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-rmq-default-credential-updater/blob/1.0.2-scratch-r5/1/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/rmq-default-credential-updater GitHub repo](https://github.com/bitnami/bitnami-docker-rmq-default-credential-updater).
 
