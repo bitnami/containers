@@ -30,7 +30,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-scratch`, `0.13.0`, `0.13.0-scratch-r0`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-oras/blob/0.13.0-scratch-r0/0/scratch/Dockerfile)
+* [`0`, `0-scratch`, `0.13.0`, `0.13.0-scratch-r1`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-oras/blob/0.13.0-scratch-r1/0/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/oras GitHub repo](https://github.com/bitnami/bitnami-docker-oras).
 
