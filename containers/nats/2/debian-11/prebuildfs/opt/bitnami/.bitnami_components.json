@@ -8,16 +8,16 @@
     },
     "nats": {
         "arch": "amd64",
-        "digest": "529786810a61ea0e3518702a9618110a2088524f74d3a7b57acbd2da74b8418b",
+        "digest": "5a88bf9e156e005a493e3e055eb1ff9d8ac97b084789f0429af32806aea7bae7",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.8.4-151"
+        "version": "2.8.4-152"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "8b992a5ee513c5eaca52b19232b21a93588ddf4c4850be4d47c6f19b11d1d90a",
+        "digest": "9690a34674f152e55c71a55275265314ed1bb29e0be8a75d7880488509f70deb",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.3-150"
+        "version": "1.0.3-151"
     }
 }
