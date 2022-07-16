@@ -12,10 +12,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "7ce94aacf3e51f137d94316b7767e590e7f827c0268f0d5336fd65cc7192aae8  /tmp/bitnami/pkg/cache/java-1.8.333-153-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/java-1.8.333-153-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/java-1.8.333-153-linux-amd64-debian-11.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/spring-cloud-skipper-shell-2.8.4-151-linux-amd64-debian-11.tar.gz && \
-    echo "bb25c9a943fdad2fd32b758860e0fa331d4e22f9428491b7a9f2959291fd20dd  /tmp/bitnami/pkg/cache/spring-cloud-skipper-shell-2.8.4-151-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/spring-cloud-skipper-shell-2.8.4-151-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/spring-cloud-skipper-shell-2.8.4-151-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/spring-cloud-skipper-shell-2.8.4-152-linux-amd64-debian-11.tar.gz && \
+    echo "8d2d90d7262456c4fa4542460f4e4e8f162744dd10265bde018557975a4d86b2  /tmp/bitnami/pkg/cache/spring-cloud-skipper-shell-2.8.4-152-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/spring-cloud-skipper-shell-2.8.4-152-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/spring-cloud-skipper-shell-2.8.4-152-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
