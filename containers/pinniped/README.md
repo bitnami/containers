@@ -28,7 +28,7 @@ $ docker run --name pinniped bitnami/pinniped:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`0`, `0-scratch`, `0.18.0`, `0.18.0-scratch-r5`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-pinniped/blob/0.18.0-scratch-r5/0/scratch/Dockerfile)
+- [`0`, `0-scratch`, `0.18.0`, `0.18.0-scratch-r6`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/bitnami-docker-pinniped/blob/0.18.0-scratch-r6/0/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/pinniped GitHub repo](https://github.com/bitnami/bitnami-docker-pinniped).
 
