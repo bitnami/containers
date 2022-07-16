@@ -12,10 +12,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "7ce94aacf3e51f137d94316b7767e590e7f827c0268f0d5336fd65cc7192aae8  /tmp/bitnami/pkg/cache/java-1.8.333-153-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/java-1.8.333-153-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/java-1.8.333-153-linux-amd64-debian-11.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/spring-cloud-dataflow-shell-2.9.4-151-linux-amd64-debian-11.tar.gz && \
-    echo "7c68cc9a83c095e90002f0ab575f376e539e2d6e07e648f75479bbe80d05161e  /tmp/bitnami/pkg/cache/spring-cloud-dataflow-shell-2.9.4-151-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/spring-cloud-dataflow-shell-2.9.4-151-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/spring-cloud-dataflow-shell-2.9.4-151-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/spring-cloud-dataflow-shell-2.9.4-152-linux-amd64-debian-11.tar.gz && \
+    echo "0c5854a8016a60dcb95df2b294258df350275a35964743f317bcd06d99035528  /tmp/bitnami/pkg/cache/spring-cloud-dataflow-shell-2.9.4-152-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/spring-cloud-dataflow-shell-2.9.4-152-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/spring-cloud-dataflow-shell-2.9.4-152-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
