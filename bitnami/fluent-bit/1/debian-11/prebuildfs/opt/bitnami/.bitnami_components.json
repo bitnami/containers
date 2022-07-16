@@ -1,9 +1,9 @@
 {
     "fluent-bit": {
         "arch": "amd64",
-        "digest": "fa89096e996743d0f33f71863762e3cee692133479380e2840d50f65ef5ec465",
+        "digest": "461c8c6ce8f978b0a44e43ffc5b84dc47cf6caa11ad89cd8ff4f4982a93aa2cb",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.9.5-0"
+        "version": "1.9.6-0"
     }
 }
