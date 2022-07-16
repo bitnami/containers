@@ -15,9 +15,9 @@
     },
     "solr": {
         "arch": "amd64",
-        "digest": "0cecdaf5a3df8fccb5b63aa4bec14c3214c33021cd2fd113c5a448a46a87e376",
+        "digest": "57ad978b15f81312f87529ee2bdc5262dcd97f93827a73c299ee8d4a8b36d198",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.0.0-150"
+        "version": "9.0.0-151"
     }
 }
