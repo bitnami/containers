@@ -15,16 +15,16 @@
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "1013e2ebbe58e5dc8f3c79fc952f020fc5306ba48463803cacfbed7779173924",
+        "digest": "0694ae67645c416d9f6875e90c0f7cef379b4ac8030a6a5b8b5cc9ca77c6975d",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.3-150"
+        "version": "1.0.3-152"
     },
     "zookeeper": {
         "arch": "amd64",
-        "digest": "16a6d31e8bb76bbbf1a202340f03f7911baf61be6471d245fefd64e4291b6d05",
+        "digest": "6353569153506a0c740438f7deee2bdf13b9bdbf9d0a0b2b3966b030872772bc",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.0-151"
+        "version": "3.8.0-152"
     }
 }
