@@ -8,9 +8,9 @@
     },
     "prometheus-rsocket-proxy": {
         "arch": "amd64",
-        "digest": "61bd4176fa805fb9e9064c2e89aa5fadc4d10dad209ede78b9795fe183fae855",
+        "digest": "8affe178f5ef4391b6fd3e2121f23a4135acff0ef9e86491456c6b4df50c87ec",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.4.0-151"
+        "version": "1.4.0-152"
     }
 }
