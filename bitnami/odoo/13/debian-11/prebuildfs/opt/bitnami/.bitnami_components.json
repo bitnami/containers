@@ -1,44 +1,44 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900",
+        "digest": "0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-151"
+        "version": "1.14.0-152"
     },
     "node": {
         "arch": "amd64",
-        "digest": "4580c44a68dab8200beed1d6c1a2397c854722ada2b81d9564b20388336453f9",
+        "digest": "1308eadfadd439cc82f4ca51185828f49cac7b38fcafd783e24f52c7c2768b4b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.20.0-0"
+        "version": "14.20.0-1"
     },
     "odoo": {
         "arch": "amd64",
-        "digest": "1d0f85cdcde524d1d4bfd43e513c103b7eb724a1c3b29620689fbea06921900d",
+        "digest": "8d9eac7ea4b6000a700ddc4512c2e65662ebf926235e0d515bdfc10268ddd8f5",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "13.0.20220710-0"
+        "version": "13.0.20220710-1"
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "ff80edd08ce09e9425b73764d44354641073f0cf1eb8a5aeab64222cbe68d8a8",
+        "digest": "d31563d3fc5c6ed578d11e32e6a6a43401a8a3a87aea000af8e0a1ba38c5a1f3",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "13.7.0-150"
+        "version": "13.7.0-151"
     },
     "python": {
         "arch": "amd64",
-        "digest": "a831df58c181297ce77597daf2364175cbb9f211f7755ca8d8c8b5918ad9ce24",
+        "digest": "c33962b71ef103d071804f57720a34bada903c9a9bec1fbeddf57e97a5bd6279",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.13-152"
+        "version": "3.8.13-153"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "8b992a5ee513c5eaca52b19232b21a93588ddf4c4850be4d47c6f19b11d1d90a",
+        "digest": "9690a34674f152e55c71a55275265314ed1bb29e0be8a75d7880488509f70deb",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.3-150"
+        "version": "1.0.3-151"
     }
 }
