@@ -8,7 +8,7 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libcrypt1 libgcc-s1 libjemalloc-dev libncurses5-dev libreadline-dev libreadline8 libssl-dev libssl1.1 libstdc++6 libtinfo6 procps sqlite3 tar wget zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "3.1.2-150" --checksum 00b238602b8c973e7a85e45f2f24bbe9cf200802ea37578e7689b3cc0a3415b7
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "3.1.2-151" --checksum 986d7ff50c9b7a30c67f87ac726130b794162ba3cdd3950ddff7aa0ff4ea2940
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "fluentd" "1.15.0-1" --checksum 95a9f818ff81bab3a2f6d3e620dc0d2ae36a7efbb1c6657b9dc5d11b400b2d18
 RUN apt-get update && apt-get upgrade -y && \
