@@ -28,11 +28,11 @@ jobs:
         run: |
           container_name="${{ github.event.inputs.container }}"
           if [ -z "$container_name" ]; then
-            containers=(containers/*)
+            containers=(bitnami/*)
             random_index=$(( $RANDOM % ${#containers[@]} ))
-            container_name=$(echo "${containers[$random_index]}" | sed "s|containers/||g")
+            container_name=$(echo "${containers[$random_index]}" | sed "s|bitnami/||g")
           fi
-          flavors=(containers/${container_name}/*/*/)
+          flavors=(bitnami/${container_name}/*/*/)
           flavors_json="["
           for flavor in "${flavors[@]}"; do
             tag="$(git log --pretty=tformat:"%s" -n 1 --grep=" release$" --author bitnami-bot@vmware.com --author containers@bitnami.com --author containers-bot@bitnami.com -- ${flavor} | awk '{print $1}')"
