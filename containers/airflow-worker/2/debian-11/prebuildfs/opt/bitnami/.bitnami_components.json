@@ -29,23 +29,23 @@
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "c9d6f09bac47484b4d4aaec3d48018c46d4102fb35abebeb62ef7a3496125e4c",
+        "digest": "115eb173951cb02a87b553e857075f7c09a1d3f0dfd891d61b2b91fcbe556e95",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.21.0-150"
+        "version": "10.21.0-151"
     },
     "python": {
         "arch": "amd64",
-        "digest": "a831df58c181297ce77597daf2364175cbb9f211f7755ca8d8c8b5918ad9ce24",
+        "digest": "c33962b71ef103d071804f57720a34bada903c9a9bec1fbeddf57e97a5bd6279",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.13-152"
+        "version": "3.8.13-153"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "1013e2ebbe58e5dc8f3c79fc952f020fc5306ba48463803cacfbed7779173924",
+        "digest": "0694ae67645c416d9f6875e90c0f7cef379b4ac8030a6a5b8b5cc9ca77c6975d",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.3-150"
+        "version": "1.0.3-152"
     }
 }
