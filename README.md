@@ -1,4 +1,4 @@
-[![CI Scheduled VIB](https://github.com/bitnami/containers/actions/workflows/ci-scheduled-pipeline.yaml/badge.svg)](https://github.com/bitnami/containers/actions/workflows/vib-scheduled-verify.yaml)
+[![Scheduled CI pipeline](https://github.com/bitnami/containers/actions/workflows/ci-scheduled-pipeline.yaml/badge.svg)](https://github.com/bitnami/containers/actions/workflows/ci-scheduled-pipeline.yaml)
 
 # Bitnami Containers
 
