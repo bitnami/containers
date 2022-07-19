@@ -96,11 +96,12 @@ syncDeprecations() {
             git commit -q -m "Remove deprecated container ${container}"
         else
             # Clean deprecated branches
-            git clone --depth 1 "https://github.com/bitnami/bitnami-docker-${container}" "/tmp/${container}"
+            git clone --quiet --depth 1 "https://github.com/bitnami/bitnami-docker-${container}" "/tmp/${container}"
             cd "${container}" || exit
             for branch in *; do
                 if [[ -d "${branch}" ]] && [[ ! -d "/tmp/${container}/${branch}" ]]; then
                     # Branch exists in bitnami/containers but it doesn't in bitnami-docker repo
+                    echo "Removing branch: ${container}/${branch}"
                     rm -rf "${branch}"
                     git add "${branch}"
                     git commit -q -m "Remove deprecated branch ${container}/${branch}"
