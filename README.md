@@ -1,5 +1,3 @@
-[![Scheduled CI pipeline](https://github.com/bitnami/containers/actions/workflows/ci-scheduled-pipeline.yaml/badge.svg)](https://github.com/bitnami/containers/actions/workflows/ci-scheduled-pipeline.yaml)
-
 # Bitnami Containers
 
 Bitnami is currently working on unifying all container sources repositories into a single location. In the meantime, it will be synchronized in a daily manner to receive all the updates from the other repositories.
