@@ -1,5 +1,0 @@
-version: '2'
-
-services:
-  argo-cd:
-    image: docker.io/bitnami/argo-cd:2
