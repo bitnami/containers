@@ -82,7 +82,7 @@ jobs:
           tag="$(git log --pretty=tformat:"%s" -n 1 --grep=" release$" --author bitnami-bot@vmware.com --author containers@bitnami.com --author containers-bot@bitnami.com --  ${{ matrix.flavor }} | awk '{print $1}')"
           echo "::set-output name=tag::${tag}"
       - uses: vmware-labs/vmware-image-builder-action@main
-        name: Verify ${{ needs.get-container.outputs.container }}
+        name: Verify
         with:
           pipeline: vib-verify.json
         env:
