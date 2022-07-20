@@ -48,7 +48,7 @@ jobs:
               echo "::set-output name=result::skip"
             else
               # Look for the modified branch in Readme content
-              branch="$(echo ${readme_object} | jq -r '.patch' | grep -o "\`latest\` ([^)]*)"  | sort -u | sed -nr "s|\`latest\` \((.+)/Dockerfile\)|\1|p")"
+              branch="$(echo ${readme_object} | jq -r '.patch' | grep -o "([^/]*/[^/]*/Dockerfile)" | sort -u | sed -nr "s|\((.+)/Dockerfile\)|\1|p")"
               if [[ ! -z "${branch}" ]]; then
                 echo "::set-output name=result::ok"
                 echo "::set-output name=container::${container_name}"
