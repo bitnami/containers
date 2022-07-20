@@ -43,8 +43,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-11`, `4.1.5`, `4.1.5-debian-11-r8`, `latest` (4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/4.1.5-debian-11-r8/4/debian-11/Dockerfile)
-* [`3`, `3-debian-11`, `3.10.10`, `3.10.10-debian-11-r7` (3/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.10.10-debian-11-r7/3/debian-11/Dockerfile)
+* [`4`, `4-debian-11`, `4.1.5`, `4.1.5-debian-11-r9`, `latest` (4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/4.1.5-debian-11-r9/4/debian-11/Dockerfile)
+* [`3`, `3-debian-11`, `3.10.10`, `3.10.10-debian-11-r8` (3/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-joomla/blob/3.10.10-debian-11-r8/3/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/joomla GitHub repo](https://github.com/bitnami/bitnami-docker-joomla).
 
