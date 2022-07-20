@@ -33,17 +33,31 @@ jobs:
           # Adding || true to avoid "Process exited with code 1" errors
           containers_dirs_changed="$(echo "$files_changed" | xargs dirname | grep -o "bitnami/[^/]*" | sort | uniq || true)"
           flavors=($(echo "$files_changed" | xargs dirname | grep -o "bitnami/[^/]*/[^/]*/[^/]*" | sort | uniq || true))
+          container_name=$(echo "$containers_dirs_changed" | sed "s|bitnami/||g")
 
           if [[ "${#flavors[@]}" -eq "1" ]]; then
             # Changes done in only one container -> OK
-            container_name=$(echo "$containers_dirs_changed" | sed "s|bitnami/||g")
             echo "::set-output name=result::ok"
             echo "::set-output name=container::${container_name}"
             echo "::set-output name=path::${flavors[0]}"
           elif [[ "${#flavors[@]}" -le "0" ]]; then
-            # Changes done in the containers/ folder but not inside a container subfolder -> SKIP
-            echo "::set-output name=error::No changes detected in containers. The rest of the tests will be skipped."
-            echo "::set-output name=result::skip"
+            # Changes done in the containers/ folder but not inside a container subfolder -> Look for readme changes
+            readme_object="$(echo $files_changed_data | jq -r '[ .[] | select(.filename | test("bitnami/[^/]+/README.md"))] | first')"
+            if [[ "${readme_object}" == "null" ]]; then
+              echo "::set-output name=error::No changes detected in containers. The rest of the tests will be skipped."
+              echo "::set-output name=result::skip"
+            else
+              # Look for the modified branch in Readme content
+              branch="$(echo ${readme_object} | jq -r '.patch' | grep -o "\`latest\` ([^)]*)"  | sort -u | sed -nr "s|\`latest\` \((.+)/Dockerfile\)|\1|p")"
+              if [[ ! -z "${branch}" ]]; then
+                echo "::set-output name=result::ok"
+                echo "::set-output name=container::${container_name}"
+                echo "::set-output name=path::bitnami/${container_name}/${branch}"
+              else
+                echo "::set-output name=error::No changes detected in containers. The rest of the tests will be skipped."
+                echo "::set-output name=result::skip"
+              fi
+            fi
           else
             # Changes done in more than container -> SKIP
             echo -e "::set-output name=error::Changes detected in more than one container directory:\n${containers_dirs_changed}\nIt is strongly advised to change only one container in a PR. The rest of the tests will be skipped."
