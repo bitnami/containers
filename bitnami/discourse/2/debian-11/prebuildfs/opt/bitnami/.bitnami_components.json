@@ -1,65 +1,65 @@
 {
     "brotli": {
         "arch": "amd64",
-        "digest": "315d4718cd711e7babbb6e490ed06c09f4e34a0dbc584a3ce17d35c8cbac99c8",
+        "digest": "ba4c4d26d232f8d91d1143078a633ba7c5ae33f5c4182684400ffb7bbc0ed262",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.9-150"
+        "version": "1.0.9-151"
     },
     "discourse": {
         "arch": "amd64",
-        "digest": "e5cbabc140c5c2e2dd0e45fc08a991c14b15af9437b0b11f7d7149c69221e2ca",
+        "digest": "311191ac01dc5c48a2f802e3073bbd8f76b0834c35e583143b9cb47df4e9e997",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.8.6-0"
+        "version": "2.8.6-1"
     },
     "git": {
         "arch": "amd64",
-        "digest": "d28184ee6b82ef162f7480dc3c80efa6d0bdd4c57632363fbfb7326286373f27",
+        "digest": "39ea3040baa552b4760c1100a3713f86493620c0a74121c1ceba50fe17341878",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.37.1-0"
+        "version": "2.37.1-1"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "089bb11a3bc6031c5a91ab5f9534e9e7e41b928d10d72a3986f16bb61d3a9900",
+        "digest": "0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-151"
+        "version": "1.14.0-152"
     },
     "node": {
         "arch": "amd64",
-        "digest": "4580c44a68dab8200beed1d6c1a2397c854722ada2b81d9564b20388336453f9",
+        "digest": "1308eadfadd439cc82f4ca51185828f49cac7b38fcafd783e24f52c7c2768b4b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.20.0-0"
+        "version": "14.20.0-1"
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "ff80edd08ce09e9425b73764d44354641073f0cf1eb8a5aeab64222cbe68d8a8",
+        "digest": "d31563d3fc5c6ed578d11e32e6a6a43401a8a3a87aea000af8e0a1ba38c5a1f3",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "13.7.0-150"
+        "version": "13.7.0-151"
     },
     "python": {
         "arch": "amd64",
-        "digest": "a831df58c181297ce77597daf2364175cbb9f211f7755ca8d8c8b5918ad9ce24",
+        "digest": "c33962b71ef103d071804f57720a34bada903c9a9bec1fbeddf57e97a5bd6279",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.13-152"
+        "version": "3.8.13-153"
     },
     "ruby": {
         "arch": "amd64",
-        "digest": "4517967d38c836fa718978c1cd8527c4f22fbda7b06c81f7d78c5435a983a49f",
+        "digest": "842a1467306f1acb0648a972252150435af822938dc2e4c26063a26e8b2fcf88",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.7.6-150"
+        "version": "2.7.6-151"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "1013e2ebbe58e5dc8f3c79fc952f020fc5306ba48463803cacfbed7779173924",
+        "digest": "0694ae67645c416d9f6875e90c0f7cef379b4ac8030a6a5b8b5cc9ca77c6975d",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.3-150"
+        "version": "1.0.3-152"
     }
 }
