@@ -1,0 +1,23 @@
+{
+    "grafana-image-renderer": {
+        "arch": "amd64",
+        "digest": "ed46484a15b67c612d1749c2b2d70f97454058d6bf8af6f295e47f924881b350",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "3.4.2-150"
+    },
+    "node": {
+        "arch": "amd64",
+        "digest": "97cffecfb637e5758197e4eb14d50b42048768eba242da4b534f1d8bacbd6958",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "14.19.3-150"
+    },
+    "python": {
+        "arch": "amd64",
+        "digest": "a831df58c181297ce77597daf2364175cbb9f211f7755ca8d8c8b5918ad9ce24",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "3.8.13-152"
+    }
+}

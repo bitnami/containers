@@ -1,0 +1,16 @@
+{
+    "java": {
+        "arch": "amd64",
+        "digest": "fe6b65886a6b1f545508e272efbf422054ee030c867f94ebec2f93c5518252de",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "11.0.15-150"
+    },
+    "keycloak-config-cli": {
+        "arch": "amd64",
+        "digest": "9e2027c4bb9fedc49bbae6630f00c092ba278a7f770bbf55a169614f755f7e87",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "5.2.1-0"
+    }
+}

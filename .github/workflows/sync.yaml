@@ -1,0 +1,26 @@
+name: Sync containers repositories
+
+on:
+  schedule:
+    # Every day at 1 AM
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+    inputs:
+      shift:
+        description: 'Commits to shift if you edited the containers folder'
+        default: '0'
+      container:
+        description: 'Sync only the container specified'
+        default: ''
+jobs:
+  build:
+    name: Trigger Containers Synchronization
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout bitnami/containers
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.BITNAMI_BOT_SECRET }}
+          fetch-depth: 0
+      - name: Sync Containers
+        run: ./scripts/sync.sh ${{ github.event.inputs.shift }} ${{ github.event.inputs.container }}

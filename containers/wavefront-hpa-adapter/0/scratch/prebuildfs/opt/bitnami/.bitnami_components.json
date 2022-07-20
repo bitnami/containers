@@ -1,0 +1,9 @@
+{
+    "wavefront-hpa-adapter": {
+        "arch": "amd64",
+        "digest": "04e3a5549ed05c88118553fb11f99afd42453b7070cc10fbdbbaf6a0fccdb2b8",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "0.9.8-150"
+    }
+}

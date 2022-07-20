@@ -1,0 +1,9 @@
+{
+    "thanos": {
+        "arch": "amd64",
+        "digest": "8d4fc6e997edfe05e7cc984bf8ff4c1ab6682f824f7898871769365281aab4fe",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "0.26.0-150"
+    }
+}

@@ -1,0 +1,44 @@
+{
+    "gosu": {
+        "arch": "amd64",
+        "digest": "d6280b6f647a62bf6edc74dc8e526bfff63ddd8067dcb8540843f47203d9ccf1",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.14.0-7"
+    },
+    "mongodb": {
+        "arch": "amd64",
+        "digest": "366dec4b426a417e4c23c21a091ab9651b768e9876f1dcf2df3e058c1ad75d11",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "4.2.21-0"
+    },
+    "mongodb-shell": {
+        "arch": "amd64",
+        "digest": "ab840925a52827b7a0ff38d891f4446e1e72d11c2308d15f4d58ae148b414544",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.5.0-0"
+    },
+    "render-template": {
+        "arch": "amd64",
+        "digest": "af5ec81cfb8e8420fe6af80a77d40da25e0f7e136abb6dde27267c97fb27cf8b",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.0.3-0"
+    },
+    "wait-for-port": {
+        "arch": "amd64",
+        "digest": "0603c8eaf6d24e76563431e36e512da06bfebb3a06ede31b3e84d9879213c162",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "1.0.3-0"
+    },
+    "yq": {
+        "arch": "amd64",
+        "digest": "9d54d437755a325a8d2fbccd89cc4d8ae0f49bd2dfd64e06f864eaf401c6555f",
+        "distro": "debian-10",
+        "type": "NAMI",
+        "version": "4.25.3-0"
+    }
+}

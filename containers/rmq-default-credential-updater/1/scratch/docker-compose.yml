@@ -1,0 +1,4 @@
+version: '2'
+services:
+  rmq-default-credential-updater:
+    image: docker.io/bitnami/rmq-default-credential-updater:1

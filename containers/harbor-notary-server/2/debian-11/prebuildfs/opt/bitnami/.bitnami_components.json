@@ -1,0 +1,16 @@
+{
+    "gosu": {
+        "arch": "amd64",
+        "digest": "da4a2f759ccc57c100d795b71ab297f48b31c4dd7578d773d963bbd49c42bd7b",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.14.0-150"
+    },
+    "harbor-notary-server": {
+        "arch": "amd64",
+        "digest": "fba7653571dd0aa78686c78fc2979a13e8b792f82145bcbd75c9a59242dee34a",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "2.5.2-0"
+    }
+}
