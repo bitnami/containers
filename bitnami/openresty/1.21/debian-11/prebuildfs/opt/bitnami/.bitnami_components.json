@@ -1,0 +1,16 @@
+{
+    "gosu": {
+        "arch": "amd64",
+        "digest": "0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.14.0-152"
+    },
+    "openresty": {
+        "arch": "amd64",
+        "digest": "f95779c9c63890346449884fe792862e36f3ec25a7b85b443acb9e27d9484873",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.21.4-1-151"
+    }
+}

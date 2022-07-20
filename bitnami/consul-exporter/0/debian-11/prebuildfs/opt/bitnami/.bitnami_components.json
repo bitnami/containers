@@ -1,0 +1,9 @@
+{
+    "consul-exporter": {
+        "arch": "amd64",
+        "digest": "6f8eca25d1703e3d6bb6330d02e0dbca469a8e5691efd1f14a9b070463a6dbb2",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "0.8.0-152"
+    }
+}

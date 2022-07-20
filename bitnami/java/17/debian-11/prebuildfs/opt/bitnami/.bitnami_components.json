@@ -1,0 +1,16 @@
+{
+    "gosu": {
+        "arch": "amd64",
+        "digest": "0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.14.0-152"
+    },
+    "java": {
+        "arch": "amd64",
+        "digest": "7f419b8b952d11185d669ffb079efae491e862080ae30407fd986e43ad9050a4",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "17.0.3-1-1"
+    }
+}

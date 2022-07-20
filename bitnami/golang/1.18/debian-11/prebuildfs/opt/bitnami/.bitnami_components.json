@@ -1,0 +1,9 @@
+{
+    "golang": {
+        "arch": "amd64",
+        "digest": "9f9d5f01cb2ed3c91d1437e84f69c8b8f0534cfdc76eb74e6cb9843b3191be27",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.18.4-1"
+    }
+}

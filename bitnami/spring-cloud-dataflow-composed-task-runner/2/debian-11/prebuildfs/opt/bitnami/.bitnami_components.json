@@ -1,0 +1,23 @@
+{
+    "gosu": {
+        "arch": "amd64",
+        "digest": "0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.14.0-152"
+    },
+    "java": {
+        "arch": "amd64",
+        "digest": "7ce94aacf3e51f137d94316b7767e590e7f827c0268f0d5336fd65cc7192aae8",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.8.333-153"
+    },
+    "spring-cloud-dataflow-composed-task-runner": {
+        "arch": "amd64",
+        "digest": "a53d13a1f26425c8464fc5d935b942e928912e59c0a17a5ca3be6535f8815fce",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "2.9.4-152"
+    }
+}

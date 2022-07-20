@@ -1,0 +1,9 @@
+{
+    "ruby": {
+        "arch": "amd64",
+        "digest": "1d5295193176cac03c44762c2a86025a03b1dbc12e7b7c13c79c13a085f27656",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "3.0.4-151"
+    }
+}

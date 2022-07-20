@@ -1,0 +1,5 @@
+version: '2'
+
+services:
+  pushgateway:
+    image: docker.io/bitnami/pushgateway:1
