@@ -11,14 +11,14 @@ RUN install_packages acl ca-certificates curl git git-lfs gzip libc6 openssh-cli
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dumb-init" "1.2.5-151" --checksum 6af98ffaa7d8585ab128bdb8f322295eadb2d9857f8507f2e7c67bff4274c3e3
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "docker-machine" "0.16.2-151" --checksum 9555865e19d874afffdeae0fc977cc32592dc51da67ed69b6a0ba9677bd4f4fd
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gitlab-runner" "15.1.1-0" --checksum f97378ceb4e5076ce18094ffbb800d021425f67515bd3d36d3dac97c513791f2
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gitlab-runner" "15.2.0-0" --checksum 5bacc05a3bfdab456912e51d2fa67c5d76ba25d58b126f9c0f7a3f2ce89505a3
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN mkdir /home/gitlab-runner && chmod -R g+rwX /home/gitlab-runner && ln -s /opt/bitnami/common/bin/dumb-init /usr/bin/dumb-init && ln -s /opt/bitnami/scripts/gitlab-runner/entrypoint.sh /entrypoint
-ENV APP_VERSION="15.1.1" \
+ENV APP_VERSION="15.2.0" \
     BITNAMI_APP_NAME="gitlab-runner" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/gitlab-runner/bin:$PATH"
 
