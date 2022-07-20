@@ -47,11 +47,11 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`14`, `14-debian-11`, `14.4.0`, `14.4.0-debian-11-r10`, `latest` (14/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/14.4.0-debian-11-r10/14/debian-11/Dockerfile)
-* [`13`, `13-debian-11`, `13.7.0`, `13.7.0-debian-11-r16` (13/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/13.7.0-debian-11-r16/13/debian-11/Dockerfile)
-* [`12`, `12-debian-11`, `12.11.0`, `12.11.0-debian-11-r15` (12/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.11.0-debian-11-r15/12/debian-11/Dockerfile)
-* [`11`, `11-debian-11`, `11.16.0`, `11.16.0-debian-11-r16` (11/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.16.0-debian-11-r16/11/debian-11/Dockerfile)
-* [`10`, `10-debian-11`, `10.21.0`, `10.21.0-debian-11-r16` (10/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.21.0-debian-11-r16/10/debian-11/Dockerfile)
+* [`14`, `14-debian-11`, `14.4.0`, `14.4.0-debian-11-r11`, `latest` (14/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/14.4.0-debian-11-r11/14/debian-11/Dockerfile)
+* [`13`, `13-debian-11`, `13.7.0`, `13.7.0-debian-11-r17` (13/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/13.7.0-debian-11-r17/13/debian-11/Dockerfile)
+* [`12`, `12-debian-11`, `12.11.0`, `12.11.0-debian-11-r16` (12/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.11.0-debian-11-r16/12/debian-11/Dockerfile)
+* [`11`, `11-debian-11`, `11.16.0`, `11.16.0-debian-11-r17` (11/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.16.0-debian-11-r17/11/debian-11/Dockerfile)
+* [`10`, `10-debian-11`, `10.21.0`, `10.21.0-debian-11-r18` (10/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/10.21.0-debian-11-r18/10/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/postgresql-repmgr GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql-repmgr).
 
