@@ -1,0 +1,4 @@
+version: '2'
+services:
+  kube-rbac-proxy:
+    image: docker.io/bitnami/kube-rbac-proxy:0

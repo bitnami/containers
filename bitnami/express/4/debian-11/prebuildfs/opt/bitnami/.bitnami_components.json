@@ -1,0 +1,65 @@
+{
+    "bower": {
+        "arch": "amd64",
+        "digest": "2b1982b8212bb74f82dacc26be8cc895df00a5f08b82370c3f8ef1ddb712e81d",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.8.12-151"
+    },
+    "express": {
+        "arch": "amd64",
+        "digest": "ad3962ff389e55ba22640e548092ec3000ab416234afa5111f63aeec017ecd2d",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "4.18.1-151"
+    },
+    "express-generator": {
+        "arch": "amd64",
+        "digest": "34666b6db5852515c08e4f2256af3f7b3977d20950a2e5588b67a753b09f06d3",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "4.16.1-151"
+    },
+    "git": {
+        "arch": "amd64",
+        "digest": "39ea3040baa552b4760c1100a3713f86493620c0a74121c1ceba50fe17341878",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "2.37.1-1"
+    },
+    "gosu": {
+        "arch": "amd64",
+        "digest": "0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.14.0-152"
+    },
+    "node": {
+        "arch": "amd64",
+        "digest": "4580c44a68dab8200beed1d6c1a2397c854722ada2b81d9564b20388336453f9",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "14.20.0-0"
+    },
+    "python": {
+        "arch": "amd64",
+        "digest": "a831df58c181297ce77597daf2364175cbb9f211f7755ca8d8c8b5918ad9ce24",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "3.8.13-152"
+    },
+    "sequelize-cli": {
+        "arch": "amd64",
+        "digest": "ddbe9550efc4b8b1d0d4a85c846b05ea7ea30a868835a76e0c00e102d0ab4252",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "6.4.1-150"
+    },
+    "wait-for-port": {
+        "arch": "amd64",
+        "digest": "1013e2ebbe58e5dc8f3c79fc952f020fc5306ba48463803cacfbed7779173924",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.3-150"
+    }
+}

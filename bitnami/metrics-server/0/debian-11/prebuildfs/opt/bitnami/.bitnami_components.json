@@ -1,0 +1,9 @@
+{
+    "metrics-server": {
+        "arch": "amd64",
+        "digest": "311a76abdd073e89a4c7bbbe2ba18c5f498428fd69e4298b0a7a43d71a02c981",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "0.6.1-151"
+    }
+}

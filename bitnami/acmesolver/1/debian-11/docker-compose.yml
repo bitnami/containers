@@ -1,0 +1,5 @@
+version: '2'
+
+services:
+  acmesolver:
+    image: docker.io/bitnami/acmesolver:1

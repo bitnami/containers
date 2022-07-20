@@ -1,0 +1,9 @@
+{
+    "kubeapps-apprepository-controller": {
+        "arch": "amd64",
+        "digest": "bd6cde3cce8f25cfaf6a74791d114892bf2bd57de034051829efda33b6861768",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "2.4.6-1"
+    }
+}

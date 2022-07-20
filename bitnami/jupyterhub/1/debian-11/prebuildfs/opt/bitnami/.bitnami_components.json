@@ -1,0 +1,16 @@
+{
+    "jupyterhub": {
+        "arch": "amd64",
+        "digest": "e3647ee06f5628783853b89a7e5c5f2be12a57eeb067606837447b1acf269ae0",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.5.0-3"
+    },
+    "miniconda": {
+        "arch": "amd64",
+        "digest": "54562193edb2be58d871e34d0c8238c7f4edc59d30950bd256fbf42103941afa",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "4.12.0-152"
+    }
+}

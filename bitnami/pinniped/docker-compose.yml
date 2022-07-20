@@ -1,0 +1,4 @@
+version: '2'
+services:
+  pinniped:
+    image: docker.io/bitnami/pinniped:0

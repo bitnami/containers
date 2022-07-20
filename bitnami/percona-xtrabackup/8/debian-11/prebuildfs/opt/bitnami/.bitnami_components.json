@@ -1,0 +1,9 @@
+{
+    "percona-xtrabackup": {
+        "arch": "amd64",
+        "digest": "bf8f53d5d73edddfa8967caf80fcf76bf9ece579296e66d28ddfa4f7e19cfae0",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "8.0.29-22-0"
+    }
+}

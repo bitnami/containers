@@ -1,0 +1,58 @@
+{
+    "apache": {
+        "arch": "amd64",
+        "digest": "903fc542776eb549981738f68fdd6435b2c8683686114500f157258dcfdc9617",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "2.4.54-152"
+    },
+    "gosu": {
+        "arch": "amd64",
+        "digest": "0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.14.0-152"
+    },
+    "libphp": {
+        "arch": "amd64",
+        "digest": "d7376736b414738dcb1cedbb1c7da5e895e4f78aee0a0e8604b75cd1a0cd8804",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "8.1.8-1"
+    },
+    "magento": {
+        "arch": "amd64",
+        "digest": "f44a8bc2759d675a4c1dd02e70d65df515b1bd9fd475cfc9ceecc595c6c2056a",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "2.4.4-151"
+    },
+    "mysql-client": {
+        "arch": "amd64",
+        "digest": "c85e4be9bcee70c86c7bc7e13742e2d97810ad8f7d6154f8b66811b6cc4d0948",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "10.6.8-151"
+    },
+    "php": {
+        "arch": "amd64",
+        "digest": "3831b94cc047527852d5b11c4a2d02a046aee70030489d7a8c0ea46ca0945229",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "8.1.8-2"
+    },
+    "render-template": {
+        "arch": "amd64",
+        "digest": "9690a34674f152e55c71a55275265314ed1bb29e0be8a75d7880488509f70deb",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.3-151"
+    },
+    "wait-for-port": {
+        "arch": "amd64",
+        "digest": "0694ae67645c416d9f6875e90c0f7cef379b4ac8030a6a5b8b5cc9ca77c6975d",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.3-152"
+    }
+}

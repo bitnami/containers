@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  tensorflow:
+    tty: true
+    image: docker.io/bitnami/tensorflow-intel:2
+    volumes:
+      - '.:/app'

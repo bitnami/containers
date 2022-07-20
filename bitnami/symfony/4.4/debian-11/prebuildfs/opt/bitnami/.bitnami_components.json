@@ -1,0 +1,30 @@
+{
+    "gosu": {
+        "arch": "amd64",
+        "digest": "0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.14.0-152"
+    },
+    "mysql-client": {
+        "arch": "amd64",
+        "digest": "c85e4be9bcee70c86c7bc7e13742e2d97810ad8f7d6154f8b66811b6cc4d0948",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "10.6.8-151"
+    },
+    "php": {
+        "arch": "amd64",
+        "digest": "f499949a4130c12bafdb2c4c411a5425544876e9b98da7b36ad0176aae757b3e",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "8.0.21-3"
+    },
+    "symfony": {
+        "arch": "amd64",
+        "digest": "b0b8a9f8d025fe4b6581994c698e8d6cdef083b159195d9be2e38061755e8e46",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "4.4.43-1"
+    }
+}

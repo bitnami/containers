@@ -1,0 +1,51 @@
+{
+    "git": {
+        "arch": "amd64",
+        "digest": "39ea3040baa552b4760c1100a3713f86493620c0a74121c1ceba50fe17341878",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "2.37.1-1"
+    },
+    "gosu": {
+        "arch": "amd64",
+        "digest": "0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.14.0-152"
+    },
+    "mysql-client": {
+        "arch": "amd64",
+        "digest": "c85e4be9bcee70c86c7bc7e13742e2d97810ad8f7d6154f8b66811b6cc4d0948",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "10.6.8-151"
+    },
+    "postgresql-client": {
+        "arch": "amd64",
+        "digest": "af1e11b86d796e8fa2bc229d475f5037a201d727869a10e33e669b715e128d28",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "11.16.0-151"
+    },
+    "redmine": {
+        "arch": "amd64",
+        "digest": "6a596e7108b705bb24557f49214f0d2bac4a7d32aa1a9eff719af019e46475d7",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "5.0.2-1"
+    },
+    "ruby": {
+        "arch": "amd64",
+        "digest": "1d5295193176cac03c44762c2a86025a03b1dbc12e7b7c13c79c13a085f27656",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "3.0.4-151"
+    },
+    "yq": {
+        "arch": "amd64",
+        "digest": "502f4119e04d7a74508a38d64cccfc332e08fe42335828129d2bf5e694fbec32",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "4.26.1-1"
+    }
+}
