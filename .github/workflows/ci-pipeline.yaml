@@ -20,7 +20,7 @@ jobs:
     outputs:
       container: ${{ steps.get-container.outputs.container }}
       result: ${{ steps.get-container.outputs.result }}
-      flavors: ${{ steps.get-container.outputs.flavors }}
+      path: ${{ steps.get-container.outputs.path }}
     steps:
       - id: get-container
         name: Get modified containers
@@ -33,17 +33,14 @@ jobs:
           # Adding || true to avoid "Process exited with code 1" errors
           containers_dirs_changed="$(echo "$files_changed" | xargs dirname | grep -o "bitnami/[^/]*" | sort | uniq || true)"
           flavors=($(echo "$files_changed" | xargs dirname | grep -o "bitnami/[^/]*/[^/]*/[^/]*" | sort | uniq || true))
-          flavors_json=$(printf "%s\n" "${flavors[@]}" | jq -R . | jq -cs .)
-          # Using grep -c as a better alternative to wc -l when dealing with empty strings."
-          num_containers_changed="$(echo "$containers_dirs_changed" | grep -c "bitnami" || true)"
 
-          if [[ "$num_containers_changed" -eq "1" ]]; then
+          if [[ "${#flavors[@]}" -eq "1" ]]; then
             # Changes done in only one container -> OK
             container_name=$(echo "$containers_dirs_changed" | sed "s|bitnami/||g")
             echo "::set-output name=result::ok"
             echo "::set-output name=container::${container_name}"
-            echo "::set-output name=flavors::${flavors_json}"
-          elif [[ "$num_containers_changed" -le "0" ]]; then
+            echo "::set-output name=path::${flavors[0]}"
+          elif [[ "${#flavors[@]}" -le "0" ]]; then
             # Changes done in the containers/ folder but not inside a container subfolder -> SKIP
             echo "::set-output name=error::No changes detected in containers. The rest of the tests will be skipped."
             echo "::set-output name=result::skip"
@@ -66,10 +63,6 @@ jobs:
     needs: get-container
     if: ${{ needs.get-container.outputs.result == 'ok' && contains(github.event.pull_request.labels.*.name, 'verify') }}
     name: Verify
-    strategy:
-      fail-fast: false
-      matrix:
-        flavor:  ${{ fromJSON(needs.get-container.outputs.flavors) }}
     steps:
       - uses: actions/checkout@v3
         name: Checkout Repository
@@ -79,15 +72,15 @@ jobs:
       - id: get-tag
         name: Get latest image tag
         run: |
-          tag="$(git log --pretty=tformat:"%s" -n 1 --grep=" release$" --author bitnami-bot@vmware.com --author containers@bitnami.com --author containers-bot@bitnami.com --  ${{ matrix.flavor }} | awk '{print $1}')"
+          tag="$(git log --pretty=tformat:"%s" -n 1 --grep=" release$" --author bitnami-bot@vmware.com --author containers@bitnami.com --author containers-bot@bitnami.com --  ${{ needs.get-container.outputs.path }} | awk '{print $1}')"
           echo "::set-output name=tag::${tag}"
       - uses: vmware-labs/vmware-image-builder-action@main
-        name: Verify ${{ needs.get-container.outputs.container }}
+        name: Verify
         with:
           pipeline: vib-verify.json
         env:
           # Path with docker resources
-          VIB_ENV_PATH: ${{ matrix.flavor }}
+          VIB_ENV_PATH: ${{ needs.get-container.outputs.path }}
           # Container name
           VIB_ENV_CONTAINER: ${{ needs.get-container.outputs.container }}
           VIB_ENV_TAG: ${{ steps.get-tag.outputs.tag }}
