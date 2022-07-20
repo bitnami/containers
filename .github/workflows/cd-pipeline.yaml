@@ -34,7 +34,7 @@ jobs:
               # Adding || true to avoid "Process exited with code 1" errors
               containers+=($(echo "$files_changed" | xargs dirname | grep -o "bitnami/[^/]*/[^/]*/[^/]*" | sort | uniq || true))
               # Changes done in readme files?
-              readme_object="$(echo $files_changed_data | jq -r '[ .[] | select(.filename | test("bitnami/[^/]+/README.md"))] | first')"
+              readme_object="$(echo $files_changed_data | jq -r '[ .files[] | select(.filename | test("bitnami/[^/]+/README.md"))] | first')"
               if [[ "${readme_object}" != "null" ]]; then
                 # Look for modified branch in Readme content
                 container_name="$(echo ${readme_object} | jq -r '.filename' | sed -nr "s|bitnami/([^/]+)/README.md|\1|p")"
