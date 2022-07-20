@@ -39,7 +39,7 @@ jobs:
             container_name=$(echo "$containers_dirs_changed" | sed "s|bitnami/||g")
             echo "::set-output name=result::ok"
             echo "::set-output name=container::${container_name}"
-            echo "::set-output name=path::${flavor[0]}"
+            echo "::set-output name=path::${flavors[0]}"
           elif [[ "${#flavors[@]}" -le "0" ]]; then
             # Changes done in the containers/ folder but not inside a container subfolder -> SKIP
             echo "::set-output name=error::No changes detected in containers. The rest of the tests will be skipped."
