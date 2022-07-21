@@ -38,6 +38,7 @@ jobs:
           # creating env variable "on the fly"
           echo "TRIAGE_TEAM_STRING=$TRIAGE_TEAM_STRING" >> $GITHUB_ENV
       - name: Assign to a person to work on it
+        if: ${{ github.actor != 'bitnami-bot'  }}
         uses: pozil/auto-assign-issue@v1.7.3
         with:
           numOfAssignee: 1
