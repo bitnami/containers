@@ -41,7 +41,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-11`, `2.3.0`, `2.3.0-debian-11-r8`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/2.3.0-debian-11-r8/2/debian-11/Dockerfile)
+* [`2`, `2-debian-11`, `2.3.0`, `2.3.0-debian-11-r9`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-influxdb/blob/2.3.0-debian-11-r9/2/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/influxdb GitHub repo](https://github.com/bitnami/bitnami-docker-influxdb).
 
