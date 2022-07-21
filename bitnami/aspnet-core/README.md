@@ -35,8 +35,8 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`6.0`, `6.0-debian-11`, `6.0.7`, `6.0.7-debian-11-r1`, `latest` (6.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/6.0.7-debian-11-r1/6.0/debian-11/Dockerfile)
-* [`3.1`, `3.1-debian-11`, `3.1.27`, `3.1.27-debian-11-r2` (3.1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/3.1.27-debian-11-r2/3.1/debian-11/Dockerfile)
+* [`6.0`, `6.0-debian-11`, `6.0.7`, `6.0.7-debian-11-r2`, `latest` (6.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/6.0.7-debian-11-r2/6.0/debian-11/Dockerfile)
+* [`3.1`, `3.1-debian-11`, `3.1.27`, `3.1.27-debian-11-r4` (3.1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-aspnet-core/blob/3.1.27-debian-11-r4/3.1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/aspnet-core GitHub repo](https://github.com/bitnami/bitnami-docker-aspnet-core).
 
