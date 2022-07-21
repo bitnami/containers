@@ -37,8 +37,8 @@ You can find the available configuration options in the [Environment Variables](
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`9`, `9-debian-11`, `9.0.0`, `9.0.0-debian-11-r16`, `latest` (9/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/9.0.0-debian-11-r16/9/debian-11/Dockerfile)
-* [`8`, `8-debian-11`, `8.11.2`, `8.11.2-debian-11-r8` (8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.11.2-debian-11-r8/8/debian-11/Dockerfile)
+* [`9`, `9-debian-11`, `9.0.0`, `9.0.0-debian-11-r17`, `latest` (9/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/9.0.0-debian-11-r17/9/debian-11/Dockerfile)
+* [`8`, `8-debian-11`, `8.11.2`, `8.11.2-debian-11-r9` (8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.11.2-debian-11-r9/8/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/solr GitHub repo](https://github.com/bitnami/bitnami-docker-solr).
 
