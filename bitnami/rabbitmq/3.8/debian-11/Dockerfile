@@ -11,7 +11,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc-s1 libssl1.1 libstdc++6 libtinfo6 locales procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "erlang" "24.3.4-151" --checksum ec5e4c0d95f7f7b5d1823448c150e467681f4155181a382b27a9bf4610c38518
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rabbitmq" "3.8.35-153" --checksum e98ba255c7c2fe4993c2f95fe72cc723874fbc9acf559b32dddc173258116911
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rabbitmq" "3.8.35-154" --checksum f6cc86b8c66844cd3c7e89b04e99a5ea15bca01b98ecf0b3d1cf65e475fc52b4
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami

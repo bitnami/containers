@@ -8,10 +8,10 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 libssl1.1 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/qatengine-0.6.13-0-linux-amd64-debian-11.tar.gz && \
-    echo "849e1784ec8acb41f99abfb37bd11de8d3083c893677477a2c749665b4bfbfe0  /tmp/bitnami/pkg/cache/qatengine-0.6.13-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/qatengine-0.6.13-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/qatengine-0.6.13-0-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/qatengine-0.6.13-1-linux-amd64-debian-11.tar.gz && \
+    echo "8b69088e320b1266a3729b36fd2300bd59a17b5db373ce02df2a508cf407731a  /tmp/bitnami/pkg/cache/qatengine-0.6.13-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/qatengine-0.6.13-1-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/qatengine-0.6.13-1-linux-amd64-debian-11.tar.gz
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/haproxy-dataplaneapi-2.5.4-1-linux-amd64-debian-11.tar.gz && \
     echo "d72aaba5cd9fc7d387875fd8968f4530b76099daa7b161169e66266a401ac77e  /tmp/bitnami/pkg/cache/haproxy-dataplaneapi-2.5.4-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/haproxy-dataplaneapi-2.5.4-1-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
