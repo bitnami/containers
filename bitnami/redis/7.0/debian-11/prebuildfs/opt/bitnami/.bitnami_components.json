@@ -11,7 +11,7 @@
         "digest": "295130284b985759f807eaf8c93018a93ae890d7a9d64c19f363f59c1c5cf17c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.0.4-0"
+        "version": "7.0.4-1"
     },
     "wait-for-port": {
         "arch": "amd64",
