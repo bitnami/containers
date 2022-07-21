@@ -47,7 +47,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`14`, `14-debian-11`, `14.4.0`, `14.4.0-debian-11-r11`, `latest` (14/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/14.4.0-debian-11-r11/14/debian-11/Dockerfile)
+* [`14`, `14-debian-11`, `14.4.0`, `14.4.0-debian-11-r12`, `latest` (14/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/14.4.0-debian-11-r12/14/debian-11/Dockerfile)
 * [`13`, `13-debian-11`, `13.7.0`, `13.7.0-debian-11-r18` (13/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/13.7.0-debian-11-r18/13/debian-11/Dockerfile)
 * [`12`, `12-debian-11`, `12.11.0`, `12.11.0-debian-11-r17` (12/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/12.11.0-debian-11-r17/12/debian-11/Dockerfile)
 * [`11`, `11-debian-11`, `11.16.0`, `11.16.0-debian-11-r18` (11/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql-repmgr/blob/11.16.0-debian-11-r18/11/debian-11/Dockerfile)
