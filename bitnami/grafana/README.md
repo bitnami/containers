@@ -38,8 +38,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`9`, `9-debian-11`, `9.0.3`, `9.0.3-debian-11-r0`, `latest` (9/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/9.0.3-debian-11-r0/9/debian-11/Dockerfile)
-* [`8`, `8-debian-11`, `8.5.9`, `8.5.9-debian-11-r0` (8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/8.5.9-debian-11-r0/8/debian-11/Dockerfile)
+* [`9`, `9-debian-11`, `9.0.4`, `9.0.4-debian-11-r0`, `latest` (9/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/9.0.4-debian-11-r0/9/debian-11/Dockerfile)
+* [`8`, `8-debian-11`, `8.5.9`, `8.5.9-debian-11-r1` (8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/8.5.9-debian-11-r1/8/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
 
@@ -256,6 +256,10 @@ You can still build your custom image adding your custom plugins or install them
 ### 6.7.2-debian-10-r18
 
 - Grafana doesn't ship the [`grafana-image-renderer` plugin](https://github.com/grafana/grafana-image-renderer/) by default anymore since it's not compatible with K8s distros with IPv6 disable. Instead, the `GF_INSTALL_PLUGINS` environment variable is set by default including this plugin so it's installed during the container's initialization, users can easily avoid it by overwriting the environment variable.
+
+## Branch Deprecation Notice
+
+Grafana's branch 8.x.x is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 08-18-2022
 
 ## Contributing
 
