@@ -35,8 +35,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`15`, `15-debian-11`, `15.1.0`, `15.1.0-debian-11-r9`, `latest` (15/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-gitlab-runner/blob/15.1.0-debian-11-r9/15/debian-11/      Dockerfile)
-* [`14`, `14-debian-11`, `14.10.1`, `14.10.1-debian-11-r16` (14/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-gitlab-runner/blob/14.10.1-debian-11-r16/14/debian-11/      Dockerfile)
+* [`15`, `15-debian-11`, `15.2.0`, `15.2.0-debian-11-r0`, `latest` (15/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-gitlab-runner/blob/15.2.0-debian-11-r0/15/debian-11/      Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/gitlab-runner GitHub repo](https://github.com/bitnami/bitnami-docker-gitlab-runner).
 
@@ -111,10 +110,6 @@ $ docker run --rm --name gitlab-runner bitnami/gitlab-runner:latest --help
 ```
 
 Check the [official Gitlab Runner documentation](https://docs.gitlab.com/runner/commands/) for the list of the available parameters.
-
-## Branch Deprecation Notice
-
-Gitlab Runner's branch 14 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 07-03-2022
 
 ## Contributing
 
