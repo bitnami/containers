@@ -1,9 +1,0 @@
-{
-    "kubeapps-assetsvc": {
-        "arch": "amd64",
-        "digest": "39e4c9bf2dd2d68dbbd3d3632535bf76bd54457b0709030b669cc39d74afc0af",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "2.4.5-150"
-    }
-}
