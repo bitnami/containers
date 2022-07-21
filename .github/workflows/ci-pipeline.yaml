@@ -17,6 +17,12 @@ jobs:
   get-container:
     runs-on: ubuntu-latest
     name: Get modified containers
+    if: |
+      github.event.pull_request.state != 'closed' &&
+      (
+        (github.event.action == 'labeled' && github.event.label.name == 'verify') ||
+        (github.event.action != 'labeled' && contains(github.event.pull_request.labels.*.name, 'verify'))
+      )
     outputs:
       container: ${{ steps.get-container.outputs.container }}
       result: ${{ steps.get-container.outputs.result }}
