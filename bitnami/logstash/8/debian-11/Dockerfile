@@ -11,7 +11,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.15-1-1" --checksum 6d176a8b3c894c608106fee2cf10aaf3771015defb0b7e08fe60ce6c9c1cd342
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.25.3-2" --checksum 84ce4016efca8b6a6713d69e9d7c19003d4a530f8b420fb8cdcaa9cf9af47ee6
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.26.1-1" --checksum 502f4119e04d7a74508a38d64cccfc332e08fe42335828129d2bf5e694fbec32
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "logstash" "8.3.2-1" --checksum 31dce620518daa7cb013dca504ad4db0ff047b0b6980efcb9f0d7165bfdc292f
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
 RUN apt-get update && apt-get upgrade -y && \
