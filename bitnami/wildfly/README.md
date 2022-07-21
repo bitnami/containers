@@ -45,7 +45,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`26`, `26-debian-11`, `26.1.1`, `26.1.1-debian-11-r17`, `latest` (26/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/26.1.1-debian-11-r17/26/debian-11/Dockerfile)
+* [`26`, `26-debian-11`, `26.1.1`, `26.1.1-debian-11-r18`, `latest` (26/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-wildfly/blob/26.1.1-debian-11-r18/26/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/wildfly GitHub repo](https://github.com/bitnami/bitnami-docker-wildfly).
 
