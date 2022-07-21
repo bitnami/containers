@@ -413,6 +413,10 @@ redis_configure_default() {
             [[ -n "$REDIS_TLS_DH_PARAMS_FILE" ]] && redis_conf_set tls-dh-params-file "$REDIS_TLS_DH_PARAMS_FILE"
             redis_conf_set tls-auth-clients "$REDIS_TLS_AUTH_CLIENTS"
         fi
+        # Multithreading configuration
+        ! is_empty_value "$REDIS_IO_THREADS_DO_READS" && redis_conf_set "io-threads-do-reads" "$REDIS_IO_THREADS_DO_READS"
+        ! is_empty_value "$REDIS_IO_THREADS" && redis_conf_set "io-threads" "$REDIS_IO_THREADS"
+
         if [[ -n "$REDIS_PASSWORD" ]]; then
             redis_conf_set requirepass "$REDIS_PASSWORD"
         else

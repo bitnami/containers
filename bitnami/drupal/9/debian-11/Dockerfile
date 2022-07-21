@@ -14,7 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "8.1.8-1" --checksum d7376736b414738dcb1cedbb1c7da5e895e4f78aee0a0e8604b75cd1a0cd8804
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-151" --checksum 9690a34674f152e55c71a55275265314ed1bb29e0be8a75d7880488509f70deb
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "drupal" "9.4.2-1" --checksum 311e4421e07762e9de80a2d4b624d54957ed5629f3950001ef18d582236f13f1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "drupal" "9.4.3-0" --checksum cf9ed159d07a50eb07a9813c2e770d0dd6d0ed2249e3aea16e5866a3ec04532f
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -27,7 +27,7 @@ RUN /opt/bitnami/scripts/drupal/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="9.4.2" \
+    APP_VERSION="9.4.3" \
     BITNAMI_APP_NAME="drupal" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/drupal/vendor/bin:$PATH"
 
