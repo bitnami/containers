@@ -54,7 +54,7 @@ jobs:
               echo "::set-output name=result::skip"
             else
               # Look for the modified branch in Readme content
-              branch="$(echo ${readme_object} | jq -r '.patch' | grep -o "([^/]*/[^/]*/Dockerfile)" | sort -u | sed -nr "s|\((.+)/Dockerfile\)|\1|p")"
+              branch="$(echo ${readme_object} | jq -r '.patch' | grep -o "([^/]*/[^/]*/Dockerfile)" | sort -u | head -n 1 | sed -nr "s|\((.+)/Dockerfile\)|\1|p")"
               if [[ ! -z "${branch}" ]]; then
                 echo "::set-output name=result::ok"
                 echo "::set-output name=container::${container_name}"
@@ -86,16 +86,20 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         name: Checkout Repository
-        # Required to search the latest commit with the tag
         with:
+          # Required to search the latest commit with the tag
           fetch-depth: 0
+          # labeled events trigger the event with the latest commit in main
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
       - id: get-tag
         name: Get latest image tag
         run: |
           # Now EAM commits has the following format "[bitnami/<container>] Release <tag>"
           tag="$(git log --pretty=tformat:"%s" -n 1 --grep="[R|r]elease" --author bitnami-bot@vmware.com --author containers@bitnami.com --author containers-bot@bitnami.com -- ${{ needs.get-container.outputs.path }} | sed "s|\[.*\]||" | sed "s|[R|r]elease||" | sed "s|[[:space:]]*||")"
           if [[ -z "${tag}" ]]; then
-            core.setFailed('No tag found for: ${{ needs.get-container.outputs.path }}')
+            echo "No tag found for: ${{ needs.get-container.outputs.path }}"
+            exit 1
           else
             echo "::set-output name=tag::${tag}"
           fi
