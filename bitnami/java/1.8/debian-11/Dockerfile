@@ -9,7 +9,7 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc-s1 libsqlite3-dev libssl-dev locales procps tar wget
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.333-153" --checksum 7ce94aacf3e51f137d94316b7767e590e7f827c0268f0d5336fd65cc7192aae8
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.342-0" --checksum 8f73ab6158f088f418caafcb5fd9981cf53076f38d8f9aba49acbcbadd6ac8da
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -25,7 +25,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
-ENV APP_VERSION="1.8.333" \
+ENV APP_VERSION="1.8.342" \
     BITNAMI_APP_NAME="java" \
     JAVA_HOME="/opt/bitnami/java" \
     LANG="en_US.UTF-8" \
