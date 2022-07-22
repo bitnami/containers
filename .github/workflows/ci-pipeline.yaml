@@ -37,8 +37,8 @@ jobs:
           files_changed_data=$(curl -s --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -X GET -G "$URL")
           files_changed="$(echo $files_changed_data | jq -r '.[] | .filename')"
           # Adding || true to avoid "Process exited with code 1" errors
-          containers_dirs_changed="$(echo "$files_changed" | xargs dirname | grep -o "bitnami/[^/]*" | sort | uniq || true)"
-          flavors=($(echo "$files_changed" | xargs dirname | grep -o "bitnami/[^/]*/[^/]*/[^/]*" | sort | uniq || true))
+          containers_dirs_changed="$(echo "$files_changed" | xargs dirname | grep -o "^bitnami/[^/]*" | sort | uniq || true)"
+          flavors=($(echo "$files_changed" | xargs dirname | grep -o "^bitnami/[^/]*/[^/]*/[^/]*" | sort | uniq || true))
           container_name=$(echo "$containers_dirs_changed" | sed "s|bitnami/||g")
 
           if [[ "${#flavors[@]}" -eq "1" ]]; then
@@ -48,7 +48,7 @@ jobs:
             echo "::set-output name=path::${flavors[0]}"
           elif [[ "${#flavors[@]}" -le "0" ]]; then
             # Changes done in the containers/ folder but not inside a container subfolder -> Look for readme changes
-            readme_object="$(echo $files_changed_data | jq -r '[ .[] | select(.filename | test("bitnami/[^/]+/README.md"))] | first')"
+            readme_object="$(echo $files_changed_data | jq -r '[ .[] | select(.filename | test("^bitnami/[^/]+/README.md"))] | first')"
             if [[ "${readme_object}" == "null" ]]; then
               echo "::set-output name=error::No changes detected in containers. The rest of the tests will be skipped."
               echo "::set-output name=result::skip"
