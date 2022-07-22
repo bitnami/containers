@@ -92,8 +92,13 @@ jobs:
       - id: get-tag
         name: Get latest image tag
         run: |
-          tag="$(git log --pretty=tformat:"%s" -n 1 --grep=" release$" --author bitnami-bot@vmware.com --author containers@bitnami.com --author containers-bot@bitnami.com --  ${{ needs.get-container.outputs.path }} | awk '{print $1}')"
-          echo "::set-output name=tag::${tag}"
+          # Now EAM commits has the following format "[bitnami/<container>] Release <tag>"
+          tag="$(git log --pretty=tformat:"%s" -n 1 --grep="[R|r]elease" --author bitnami-bot@vmware.com --author containers@bitnami.com --author containers-bot@bitnami.com -- ${{ needs.get-container.outputs.path }} | sed "s|\[.*\]||" | sed "s|[R|r]elease||" | sed "s|[[:space:]]*||")"
+          if [[ -z "${tag}" ]]; then
+            core.setFailed('No tag found for: ${{ needs.get-container.outputs.path }}')
+          else
+            echo "::set-output name=tag::${tag}"
+          fi
       - uses: vmware-labs/vmware-image-builder-action@main
         name: Verify
         with:
