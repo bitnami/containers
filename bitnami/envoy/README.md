@@ -29,7 +29,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1.23`, `1.23-debian-11`, `1.23.0`, `1.23.0-debian-11-r1`, `latest` (1.23/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.23.0-debian-11-r1/1.23/debian-11/Dockerfile)
-* [`1.22`, `1.22-debian-11`, `1.22.2`, `1.22.2-debian-11-r13` (1.22/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.22.2-debian-11-r13/1.22/debian-11/Dockerfile)
+* [`1.22`, `1.22-debian-11`, `1.22.2`, `1.22.2-debian-11-r14` (1.22/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.22.2-debian-11-r14/1.22/debian-11/Dockerfile)
 * [`1.21`, `1.21-debian-11`, `1.21.4`, `1.21.4-debian-11-r13` (1.21/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.21.4-debian-11-r13/1.21/debian-11/Dockerfile)
 * [`1.20`, `1.20-debian-11`, `1.20.7`, `1.20.7-debian-11-r0` (1.20/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.20.7-debian-11-r0/1.20/debian-11/Dockerfile)
 * [`1.19`, `1.19-debian-11`, `1.19.5`, `1.19.5-debian-11-r14` (1.19/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-envoy/blob/1.19.5-debian-11-r14/1.19/debian-11/Dockerfile)
