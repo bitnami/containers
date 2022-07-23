@@ -39,7 +39,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`9`, `9-debian-11`, `9.0.4`, `9.0.4-debian-11-r0`, `latest` (9/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/9.0.4-debian-11-r0/9/debian-11/Dockerfile)
-* [`8`, `8-debian-11`, `8.5.9`, `8.5.9-debian-11-r1` (8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/8.5.9-debian-11-r1/8/debian-11/Dockerfile)
+* [`8`, `8-debian-11`, `8.5.9`, `8.5.9-debian-11-r2` (8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-grafana/blob/8.5.9-debian-11-r2/8/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/grafana GitHub repo](https://github.com/bitnami/bitnami-docker-grafana).
 
