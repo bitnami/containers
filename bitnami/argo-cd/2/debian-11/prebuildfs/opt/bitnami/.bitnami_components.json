@@ -15,10 +15,10 @@
     },
     "helm": {
         "arch": "amd64",
-        "digest": "aa15a6446a00db4e6f300171fc300869d3f99163788dd73a6c13e0f202a4e230",
+        "digest": "48618accb2aad08762e8b5aadbe66f4a63fa449467038ed8629958ecf8f420db",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.9.1-1"
+        "version": "3.9.2-0"
     },
     "ksonnet": {
         "arch": "amd64",
