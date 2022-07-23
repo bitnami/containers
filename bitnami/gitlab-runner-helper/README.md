@@ -35,7 +35,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`15`, `15-debian-11`, `15.2.0`, `15.2.0-debian-11-r0`, `latest` (15/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-gitlab-runner-helper/blob/15.2.0-debian-11-r0/15/debian-11/      Dockerfile)
+* [`15`, `15-debian-11`, `15.2.0`, `15.2.0-debian-11-r1`, `latest` (15/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-gitlab-runner-helper/blob/15.2.0-debian-11-r1/15/debian-11/      Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/gitlab-runner-helper GitHub repo](https://github.com/bitnami/bitnami-docker-gitlab-runner-helper).
 
