@@ -15,10 +15,10 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "7ce94aacf3e51f137d94316b7767e590e7f827c0268f0d5336fd65cc7192aae8",
+        "digest": "8f73ab6158f088f418caafcb5fd9981cf53076f38d8f9aba49acbcbadd6ac8da",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.8.333-153"
+        "version": "1.8.342-0"
     },
     "python": {
         "arch": "amd64",
