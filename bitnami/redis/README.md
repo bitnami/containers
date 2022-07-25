@@ -271,7 +271,7 @@ services:
   ...
 ```
 
-### Enabling/Setting multithreading 
+### Enabling/Setting multithreading
 
 Redis 6.0 features a [new multi-threading model](https://segmentfault.com/a/1190000040376111/en). You can set both `io-threads` and `io-threads-do-reads` though the env vars `REDIS_IO_THREADS` and `REDIS_IO_THREADS_DO_READS`
 
