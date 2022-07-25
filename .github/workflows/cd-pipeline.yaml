@@ -84,7 +84,7 @@ jobs:
         name: Get image tag and container name
         run: |
           # Now EAM commits has the following format "[bitnami/<container>] Release <tag>"
-          tag="$(git log --pretty=tformat:"%s" -n 1 --grep="[R|r]elease" --author bitnami-bot@vmware.com --author containers@bitnami.com --author containers-bot@bitnami.com -- ${{ matrix.container }} | sed "s|\[.*\]||" | sed "s|\(.*\)||" | sed "s|[R|r]elease||" | awk '{print $1}')"
+          tag="$(git log --pretty=tformat:"%s" -n 1 --grep="[R|r]elease" --author bitnami-bot@vmware.com --author containers@bitnami.com --author containers-bot@bitnami.com -- ${{ matrix.container }} | sed "s|\[.*\]||" | sed "s|[R|r]elease||" | awk '{print $1}')"
           if [[ -z "${tag}" ]]; then
             echo "No tag found for: ${{ matrix.container }}"
             exit 1
