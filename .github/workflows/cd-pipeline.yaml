@@ -84,15 +84,14 @@ jobs:
         name: Get image tag and container name
         run: |
           # Now EAM commits has the following format "[bitnami/<container>] Release <tag>"
-          tag="$(git log --pretty=tformat:"%s" -n 1 --grep="[R|r]elease" --author bitnami-bot@vmware.com --author containers@bitnami.com --author containers-bot@bitnami.com -- ${{ matrix.container }} | sed "s|\[.*\]||" | sed "s|[R|r]elease||" | sed "s|[[:space:]]*||")"
+          tag="$(git log --pretty=tformat:"%s" -n 1 --grep="[R|r]elease" --author bitnami-bot@vmware.com --author containers@bitnami.com --author containers-bot@bitnami.com -- ${{ matrix.container }} | sed "s|\[.*\]||" | sed "s|[R|r]elease||" | awk '{print $1}')"
           if [[ -z "${tag}" ]]; then
-            echo "No tag found for: ${{ needs.get-container.outputs.path }}"
+            echo "No tag found for: ${{ matrix.container }}"
             exit 1
           else
             name="$(echo "${{ matrix.container }}" | awk -F '/' '{print $2}')"
             echo "::set-output name=tag::${tag}"
             echo "::set-output name=name::${name}"
-            echo "::set-output name=tag::${tag}"
           fi
       - uses: vmware-labs/vmware-image-builder-action@main
         name: "Publish ${{ steps.get-container-metadata.outputs.name }}: ${{ steps.get-container-metadata.outputs.tag }}"
