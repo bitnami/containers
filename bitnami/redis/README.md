@@ -47,8 +47,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7.0`, `7.0-debian-11`, `7.0.4`, `7.0.4-debian-11-r4`, `latest` (7.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/7.0.4-debian-11-r4/7.0/debian-11/Dockerfile)
-* [`6.2`, `6.2-debian-11`, `6.2.7`, `6.2.7-debian-11-r18` (6.2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.2.7-debian-11-r18/6.2/debian-11/Dockerfile)
+* [`7.0`, `7.0-debian-11`, `7.0.4`, `7.0.4-debian-11-r5`, `latest` (7.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/7.0.4-debian-11-r5/7.0/debian-11/Dockerfile)
+* [`6.2`, `6.2-debian-11`, `6.2.7`, `6.2.7-debian-11-r19` (6.2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.2.7-debian-11-r19/6.2/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
 
@@ -269,6 +269,14 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
   ...
+```
+
+### Enabling/Setting multithreading 
+
+Redis 6.0 features a [new multi-threading model](https://segmentfault.com/a/1190000040376111/en). You can set both `io-threads` and `io-threads-do-reads` though the env vars `REDIS_IO_THREADS` and `REDIS_IO_THREADS_DO_READS`
+
+```console
+$ docker run --name redis -e REDIS_IO_THREADS=4 -e REDIS_IO_THREADS_DO_READS=true bitnami/redis:latest
 ```
 
 ### Disabling AOF persistence
