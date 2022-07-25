@@ -53,7 +53,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`10.8`, `10.8-debian-11`, `10.8.3`, `10.8.3-debian-11-r11`, `latest` (10.8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.8.3-debian-11-r11/10.8/debian-11/Dockerfile)
 * [`10.8`, `10.8-debian-10`, `10.8.3`, `10.8.3-debian-10-r-1`, `latest` (10.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.8.3-debian-10-r-1/10.8/debian-10/Dockerfile)
-* [`10.7`, `10.7-debian-11`, `10.7.4`, `10.7.4-debian-11-r22` (10.7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.7.4-debian-11-r22/10.7/debian-11/Dockerfile)
+* [`10.7`, `10.7-debian-11`, `10.7.4`, `10.7.4-debian-11-r23` (10.7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.7.4-debian-11-r23/10.7/debian-11/Dockerfile)
 * [`10.6`, `10.6-debian-11`, `10.6.8`, `10.6.8-debian-11-r17` (10.6/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.6.8-debian-11-r17/10.6/debian-11/Dockerfile)
 * [`10.5`, `10.5-debian-11`, `10.5.16`, `10.5.16-debian-11-r19` (10.5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.5.16-debian-11-r19/10.5/debian-11/Dockerfile)
 * [`10.4`, `10.4-debian-11`, `10.4.25`, `10.4.25-debian-11-r18` (10.4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb-galera/blob/10.4.25-debian-11-r18/10.4/debian-11/Dockerfile)
@@ -612,6 +612,8 @@ or using Docker Compose:
 ```console
 $ docker-compose logs mariadb
 ```
+
+To increase the verbosity on intialization or add extra debug information, you can assign the `BITNAMI_DEBUG` environment variable to `true`.
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
