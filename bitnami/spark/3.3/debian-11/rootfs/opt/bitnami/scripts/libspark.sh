@@ -64,6 +64,9 @@ export SPARK_METRICS_ENABLED="${SPARK_METRICS_ENABLED:-false}"
 # System Users
 export SPARK_DAEMON_USER="spark"
 export SPARK_DAEMON_GROUP="spark"
+
+# Paths
+export SPARK_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
 EOF
 }
 
@@ -354,5 +357,41 @@ spark_initialize() {
         fi
     else
         info "Detected mounted configuration file..."
+    fi
+}
+
+########################
+# Run custom initialization scripts
+# Globals:
+#   SPARK_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+spark_custom_init_scripts() {
+    if [[ -n $(find "${SPARK_INITSCRIPTS_DIR}/" -type f -regex ".*\.sh") ]]; then
+        info "Loading user's custom files from $SPARK_INITSCRIPTS_DIR ..."
+        local -r tmp_file="/tmp/filelist"
+        find "${SPARK_INITSCRIPTS_DIR}/" -type f -regex ".*\.sh" | sort >"$tmp_file"
+        while read -r f; do
+            case "$f" in
+            *.sh)
+                if [[ -x "$f" ]]; then
+                    debug "Executing $f"
+                    "$f"
+                else
+                    debug "Sourcing $f"
+                    . "$f"
+                fi
+                ;;
+            *)
+                debug "Ignoring $f"
+                ;;
+            esac
+        done <$tmp_file
+        rm -f "$tmp_file"
+    else
+        info "No custom scripts in $SPARK_INITSCRIPTS_DIR"
     fi
 }
