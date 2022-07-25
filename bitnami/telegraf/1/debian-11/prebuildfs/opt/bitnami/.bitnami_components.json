@@ -1,9 +1,9 @@
 {
     "telegraf": {
         "arch": "amd64",
-        "digest": "b9d08076c9811de6c0cbee6e42a2e89f4549d1b6f8f4987ce2be680a6ac1409f",
+        "digest": "cffc262aecb01a24bad76f0371c23d2a6118d6fe23646d2fb9279db32a244dcc",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.23.0-0"
+        "version": "1.23.2-0"
     }
 }
