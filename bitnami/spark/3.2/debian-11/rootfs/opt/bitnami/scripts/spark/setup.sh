@@ -23,3 +23,6 @@ am_i_root && ensure_user_exists "$SPARK_DAEMON_USER" --group "$SPARK_DAEMON_GROU
 
 # Ensure Spark is initialized
 spark_initialize
+
+# Run custom initialization scripts
+spark_custom_init_scripts
