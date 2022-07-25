@@ -10,7 +10,7 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc-s1 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.333-153" --checksum 7ce94aacf3e51f137d94316b7767e590e7f827c0268f0d5336fd65cc7192aae8
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.342-0" --checksum 8f73ab6158f088f418caafcb5fd9981cf53076f38d8f9aba49acbcbadd6ac8da
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "spring-cloud-dataflow-composed-task-runner" "2.9.4-152" --checksum a53d13a1f26425c8464fc5d935b942e928912e59c0a17a5ca3be6535f8815fce
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
 RUN apt-get update && apt-get upgrade -y && \

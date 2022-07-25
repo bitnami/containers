@@ -11,7 +11,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl fontconfig fonts-dejavu-extra gzip libaudit1 libc6 libcap-ng0 libgcc-s1 libicu67 liblzma5 libncurses6 libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 procps tar xmlstarlet zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.15-1-1" --checksum 6d176a8b3c894c608106fee2cf10aaf3771015defb0b7e08fe60ce6c9c1cd342
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "9.0.64-156" --checksum 7653ef1f7e9c0056326b7dd2d81b676fd79e3e5e7ce7a1295371269273d489d0
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "9.0.65-0" --checksum cc5ec8f674abfb18c745f3656356aa83344bc0d9ff24024bffd3f85ef485514c
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-151" --checksum c85e4be9bcee70c86c7bc7e13742e2d97810ad8f7d6154f8b66811b6cc4d0948
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "reportserverenterprise" "4.2.0-6066-1" --checksum 109db27c64793361b58f07b7e39b3444e40ace91f385abdaa6ddced324895326
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-151" --checksum 9690a34674f152e55c71a55275265314ed1bb29e0be8a75d7880488509f70deb

@@ -8,15 +8,15 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/envoy-1.20.6-1-linux-amd64-debian-11.tar.gz && \
-    echo "28c1ef9426ef92136f03d1c614a2233c9f53cd577f600be0727208c6093f8371  /tmp/bitnami/pkg/cache/envoy-1.20.6-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/envoy-1.20.6-1-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/envoy-1.20.6-1-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/envoy-1.20.7-0-linux-amd64-debian-11.tar.gz && \
+    echo "5d0d60368bcfaef719faa1edf99a8bb124b30a6da62d3717f3cc1f269ebe9788  /tmp/bitnami/pkg/cache/envoy-1.20.7-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/envoy-1.20.7-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/envoy-1.20.7-0-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="1.20.6" \
+ENV APP_VERSION="1.20.7" \
     BITNAMI_APP_NAME="envoy" \
     PATH="/opt/bitnami/envoy/bin:$PATH"
 

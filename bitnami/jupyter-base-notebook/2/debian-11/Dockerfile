@@ -12,10 +12,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "54562193edb2be58d871e34d0c8238c7f4edc59d30950bd256fbf42103941afa  /tmp/bitnami/pkg/cache/miniconda-4.12.0-152-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/miniconda-4.12.0-152-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/miniconda-4.12.0-152-linux-amd64-debian-11.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jupyter-base-notebook-2.3.1-151-linux-amd64-debian-11.tar.gz && \
-    echo "3f16da1513f5a9a3b91da5c520b5452b37fc5f0c47744639cd377faf28c74c5c  /tmp/bitnami/pkg/cache/jupyter-base-notebook-2.3.1-151-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/jupyter-base-notebook-2.3.1-151-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/jupyter-base-notebook-2.3.1-151-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jupyter-base-notebook-2.3.1-152-linux-amd64-debian-11.tar.gz && \
+    echo "63b6c4ccd4c28d718052b2017cf89e3c9a9ee6067d752763dcf44d1083f997a1  /tmp/bitnami/pkg/cache/jupyter-base-notebook-2.3.1-152-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/jupyter-base-notebook-2.3.1-152-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/jupyter-base-notebook-2.3.1-152-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
