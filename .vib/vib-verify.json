@@ -35,10 +35,7 @@
             "threshold": "CRITICAL",
             "vuln_type": [
               "OS"
-            ],
-            "application": {
-              "kind": "CONTAINER_IMAGE"
-            }
+            ]
           }
         },
         {
@@ -47,10 +44,7 @@
             "threshold": "CRITICAL",
             "package_type": [
               "OS"
-            ],
-            "application": {
-              "kind": "CONTAINER_IMAGE"
-            }
+            ]
           }
         }
       ]
