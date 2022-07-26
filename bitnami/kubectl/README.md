@@ -28,7 +28,7 @@ $ docker run --name kubectl bitnami/kubectl:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.24`, `1.24-debian-11`, `1.24.3`, `1.24.3-debian-11-r3`, `latest` (1.24/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.24.3-debian-11-r3/1.24/debian-11/Dockerfile)
+* [`1.24`, `1.24-debian-11`, `1.24.3`, `1.24.3-debian-11-r4`, `latest` (1.24/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.24.3-debian-11-r4/1.24/debian-11/Dockerfile)
 * [`1.23`, `1.23-debian-11`, `1.23.9`, `1.23.9-debian-11-r11` (1.23/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.23.9-debian-11-r11/1.23/debian-11/Dockerfile)
 * [`1.22`, `1.22-debian-11`, `1.22.12`, `1.22.12-debian-11-r11` (1.22/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kubectl/blob/1.22.12-debian-11-r11/1.22/debian-11/Dockerfile)
 
