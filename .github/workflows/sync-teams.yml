@@ -32,8 +32,8 @@ jobs:
             cp .github/workflows/.env .github/workflows/.env-copy
             sed '1d' .github/workflows/.env-copy > .github/workflows/.env
             echo "BITNAMI_TEAM='$TEAM_MEMBERS'" | cat - .github/workflows/.env > .github/workflows/.env-copy && mv .github/workflows/.env-copy .github/workflows/.env
-            git config user.name "Support Bot"
-            git config user.email "<>"
+            git config user.name "bitnami-bot"
+            git config user.email "bitnami-bot@vmware.com"
             git commit -s -m"[bitnami-bot] Updating Bitnami team members" .github/workflows/.env 
             git push
           else
