@@ -36,7 +36,6 @@ jobs:
         uses: pozil/auto-assign-issue@v1.7.3
         with:
           numOfAssignee: 1
-          #assignees: ${{ env.TRIAGE_TEAM_STRING }}
           removePreviousAssignees: false
           teams: ${{ env.TRIAGE_TEAM_NAME }}
           repo-token: "${{ secrets.BITNAMI_BOT_TOKEN }}"

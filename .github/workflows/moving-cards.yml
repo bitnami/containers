@@ -70,7 +70,6 @@ jobs:
         uses: pozil/auto-assign-issue@v1.7.3
         with:
           numOfAssignee: 1
-          # assignees: ${{ env.SUPPORT_TEAM_STRING }}
           removePreviousAssignees: true
           teams: ${{ env.SUPPORT_TEAM_NAME }}
           repo-token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
