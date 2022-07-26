@@ -45,9 +45,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.23`, `1.23-debian-11`, `1.23.1`, `1.23.1-debian-11-r1`, `latest` (1.23/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.23.1-debian-11-r1/1.23/debian-11/Dockerfile)
-* [`1.22`, `1.22-debian-11`, `1.22.0`, `1.22.0-debian-11-r19` (1.22/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.22.0-debian-11-r19/1.22/debian-11/Dockerfile)
-* [`1.21`, `1.21-debian-11`, `1.21.6`, `1.21.6-debian-11-r19` (1.21/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.21.6-debian-11-r19/1.21/debian-11/Dockerfile)
+* [`1.23`, `1.23-debian-11`, `1.23.1`, `1.23.1-debian-11-r2`, `latest` (1.23/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.23.1-debian-11-r2/1.23/debian-11/Dockerfile)
+* [`1.22`, `1.22-debian-11`, `1.22.0`, `1.22.0-debian-11-r20` (1.22/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.22.0-debian-11-r20/1.22/debian-11/Dockerfile)
+* [`1.21`, `1.21-debian-11`, `1.21.6`, `1.21.6-debian-11-r20` (1.21/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx/blob/1.21.6-debian-11-r20/1.21/debian-11/Dockerfile)
 
 ## Get this image
 
