@@ -35,10 +35,16 @@
             "threshold": "CRITICAL",
             "vuln_type": [
               "OS"
-            ],
-            "application": {
-              "kind": "CONTAINER_IMAGE"
-            }
+            ]
+          }
+        },
+        {
+          "action_id": "grype",
+          "params": {
+            "threshold": "CRITICAL",
+            "package_type": [
+              "OS"
+            ]
           }
         }
       ]
