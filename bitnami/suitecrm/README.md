@@ -38,7 +38,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8`, `8-debian-11`, `8.1.2`, `8.1.2-debian-11-r20`, `latest` (8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/8.1.2-debian-11-r20/8/debian-11/Dockerfile)
-* [`7`, `7-debian-11`, `7.12.6`, `7.12.6-debian-11-r19` (7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.12.6-debian-11-r19/7/debian-11/Dockerfile)
+* [`7`, `7-debian-11`, `7.12.6`, `7.12.6-debian-11-r21` (7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-suitecrm/blob/7.12.6-debian-11-r21/7/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/suitecrm GitHub repo](https://github.com/bitnami/bitnami-docker-suitecrm).
 
