@@ -1,8 +1,8 @@
 name: '[Support] Synchronize team members in the .env file'
 on:
   schedule:
-    # Each 15 mins for testin
-    - cron: '*/15 * * * *'
+    # Daily
+    - cron: '0 1 * * *'
 permissions:
   repository-projects: write
 
