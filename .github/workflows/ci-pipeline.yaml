@@ -168,6 +168,7 @@ jobs:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           remove-labels: "auto-merge"
       - name: Disable auto-merge
+        if: ${{ needs.vib-verify.result == 'failure' }}
         run: |
           curl --request POST \
           --url https://api.github.com/graphql \
