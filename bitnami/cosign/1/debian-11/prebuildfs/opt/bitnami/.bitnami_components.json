@@ -1,9 +1,9 @@
 {
     "cosign": {
         "arch": "amd64",
-        "digest": "045437f7df76a93e076ae5dfd2491d0dc7596afd1a5698c7514de0ca57ca4d94",
+        "digest": "ca7916594c448f416c99031e89ab90bf9ccb25e3774c2df701841d95747de21e",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.9.0-151"
+        "version": "1.10.0-0"
     }
 }

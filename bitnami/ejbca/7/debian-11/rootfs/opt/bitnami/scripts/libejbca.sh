@@ -111,6 +111,7 @@ wildfly_not_ready() {
 #   None
 #########################
 ejbca_configure_wildfly() {
+    # The configuration of Wildfly in EJBCA https://doc.primekey.com/ejbca790/ejbca-installation/application-servers/wildfly-24
     info "Creating data source"
     local -r pluginJar="$(basename "$EJBCA_WILDFLY_DEPLOY_DIR"/mariadb*)"
     ejbca_wildfly_command "data-source add --name=ejbcads --driver-name=\"${pluginJar}\" --connection-url=\"jdbc:mysql://${EJBCA_DATABASE_HOST}:${EJBCA_DATABASE_PORT}/${EJBCA_DATABASE_NAME}\" --jndi-name=\"java:/EjbcaDS\" --use-ccm=true --driver-class=\"org.mariadb.jdbc.Driver\" --user-name=\"${EJBCA_DATABASE_USERNAME}\" --password=\"${EJBCA_DATABASE_PASSWORD}\" --validate-on-match=true --background-validation=false --prepared-statements-cache-size=50 --share-prepared-statements=true --min-pool-size=5 --max-pool-size=150 --pool-prefill=true --transaction-isolation=TRANSACTION_READ_COMMITTED --check-valid-connection-sql=\"select 1;\""
@@ -118,20 +119,18 @@ ejbca_configure_wildfly() {
     wait_for_wildfly
 
     info "Configure WildFly Remoting"
-    ejbca_wildfly_command "/subsystem=remoting/http-connector=http-remoting-connector:write-attribute(name=connector-ref,value=remoting)"
-    ejbca_wildfly_command "/socket-binding-group=standard-sockets/socket-binding=remoting:add(port=4447,interface=management)"
-    ejbca_wildfly_command "/subsystem=undertow/server=default-server/http-listener=remoting:add(socket-binding=remoting,enable-http2=true)"
-    ejbca_wildfly_command "/subsystem=infinispan/cache-container=ejb:remove()"
-    ejbca_wildfly_command "/subsystem=infinispan/cache-container=server:remove()"
-    ejbca_wildfly_command "/subsystem=infinispan/cache-container=web:remove()"
-    ejbca_wildfly_command "/subsystem=ejb3/cache=distributable:remove()"
-    ejbca_wildfly_command "/subsystem=ejb3/passivation-store=infinispan:remove()"
-    ejbca_wildfly_command ":reload"
+    ejbca_wildfly_command '/subsystem=remoting/http-connector=http-remoting-connector:write-attribute(name=connector-ref,value=remoting)'
+    ejbca_wildfly_command '/socket-binding-group=standard-sockets/socket-binding=remoting:add(port=4447,interface=management)'
+    ejbca_wildfly_command '/subsystem=undertow/server=default-server/http-listener=remoting:add(socket-binding=remoting,enable-http2=true)'
+    ejbca_wildfly_command ':reload'
     wait_for_wildfly
 
     info "Configure logging"
-    ejbca_wildfly_command "/subsystem=logging/logger=org.ejbca:add(level=INFO)"
-    ejbca_wildfly_command "/subsystem=logging/logger=org.cesecore:add(level=INFO)"
+    ejbca_wildfly_command '/subsystem=logging/logger=org.cesecore.audit.impl.log4j.Log4jDevice:add(level=INFO)'
+    ejbca_wildfly_command '/subsystem=logging/logger=org.ejbca:add(level=INFO)'
+    ejbca_wildfly_command '/subsystem=logging/logger=org.cesecore:add(level=INFO)'
+    ejbca_wildfly_command '/subsystem=undertow/server=default-server/host=default-host/setting=access-log:add(pattern="%h %t \"%r\" %s \"%{i,User-Agent}\"", relative-to=jboss.server.log.dir, directory=access-logs)'
+    ejbca_wildfly_command '/subsystem=logging/logger=io.undertow.accesslog:add(level=INFO)'
 
     info "Remove the ExampleDS DataSource"
     ejbca_wildfly_command '/subsystem=ee/service=default-bindings:remove()'
