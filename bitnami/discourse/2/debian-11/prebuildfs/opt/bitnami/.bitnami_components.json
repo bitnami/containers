@@ -43,10 +43,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "c5a4c246e2373d5f2ecc2c08fca804c7551366c8a2a00f66b185bcc5c759b81e",
+        "digest": "fc8c6ac004003336b18f369076c354332d6411827bf542d8fc4823f34e073556",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.13-154"
+        "version": "3.8.13-156"
     },
     "ruby": {
         "arch": "amd64",
