@@ -9,7 +9,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libcrypt1 libgcc-s1 libpcre3 libprotobuf-dev libssl1.1 libyaml-0-2 perl procps tar zlib1g zlib1g-dev
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kong" "2.8.1-11" --checksum 64eca7f459958c4e886df95adede0a3f0f45cc4c39b0f03347399a5e183ddbdd
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kong" "2.8.1-12" --checksum 135e12accfe0fdb997e2756c6a463b4d9dbdd0ce9dfa156201b2fef0afa960a6
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
