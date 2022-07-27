@@ -14,11 +14,11 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ```console
 $ mkdir ~/myapp && cd ~/myapp
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-rails/master/docker-compose.yml
+$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/rails/docker-compose.yml
 $ docker-compose up
 ```
 
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [MariaDB container](https://github.com/bitnami/bitnami-docker-mariadb#readme) for a more secure deployment.
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [MariaDB container](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#readme) for a more secure deployment.
 
 ## Why use Bitnami Images?
 
@@ -34,10 +34,10 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-11`, `7.0.3-0`, `7.0.3-0-debian-11-r9`, `latest` (7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-rails/blob/7.0.3-0-debian-11-r9/7/debian-11/Dockerfile)
-* [`6`, `6-debian-11`, `6.1.6-0`, `6.1.6-0-debian-11-r9` (6/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-rails/blob/6.1.6-0-debian-11-r9/6/debian-11/Dockerfile)
+* [`7`, `7-debian-11`, `7.0.3-1`, `7.0.3-1-debian-11-r0`, `latest` (7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/rails/7/debian-11/Dockerfile)
+* [`6`, `6-debian-11`, `6.1.6-0`, `6.1.6-0-debian-11-r9` (6/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/rails/6/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/rails GitHub repo](https://github.com/bitnami/bitnami-docker-rails).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Introduction
 
@@ -58,10 +58,10 @@ mkdir ~/myapp
 cd ~/myapp
 ```
 
-Download the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/bitnami-docker-rails/master/docker-compose.yml) file in the application directory:
+Download the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/containers/main/bitnami/rails/docker-compose.yml) file in the application directory:
 
 ```console
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-rails/master/docker-compose.yml
+$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/rails/docker-compose.yml
 ```
 
 Finally launch the Rails application development environment using:
@@ -78,7 +78,7 @@ Among other things, the above command creates a container service, named `myapp`
 
 After the WEBrick application server has been launched in the `myapp` service, visit `http://localhost:3000` in your favourite web browser and you'll be greeted by the default Rails welcome page.
 
-In addition to the Rails Development Container, the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/bitnami-docker-rails/master/docker-compose.yml) file also configures a MariaDB service to serve as the database backend of your Rails application.
+In addition to the Rails Development Container, the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/containers/main/bitnami/rails/docker-compose.yml) file also configures a MariaDB service to serve as the database backend of your Rails application.
 
 ## Executing commands
 
@@ -139,7 +139,7 @@ Following are a few examples of launching some commonly used Rails development c
 
 You can configure the MariaDB hostname and database name to use for development purposes using the environment variables **DATABASE_HOST** & **DATABASE_NAME**.
 
-For example, you can configure your Rails app to use the `development-db` database running on the `my-mariadb` MariaDB server by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-rails/blob/master/docker-compose.yml) file present in this repository:
+For example, you can configure your Rails app to use the `development-db` database running on the `my-mariadb` MariaDB server by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/rails/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -159,7 +159,7 @@ or Sidekiq.
 For these cases, it is possible to re-use this container to be run as an additional
 service in your docker-compose file by modifying the command executed.
 
-For example, you could run a Sidekiq container by adding the following to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-rails/blob/master/docker-compose.yml) file present in this repository:
+For example, you could run a Sidekiq container by adding the following to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/rails/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -199,11 +199,11 @@ When the `myapp` service container is restarted, it will install all the missing
 
 # Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-rails/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-rails/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/blob/main/bitnami/rails/issues), or submit a [pull request](https://github.com/bitnami/containers/blob/main/bitnami/rails/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-rails/issues/new). Be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/blob/main/bitnami/rails/issues/new). Be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
