@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 * [`3.2`, `3.2-debian-11`, `3.2.0`, `3.2.0-debian-11-r19`, `latest` (3.2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.2.0-debian-11-r19/3.2/debian-11/Dockerfile)
 * [`3.1`, `3.1-debian-11`, `3.1.1`, `3.1.1-debian-11-r18` (3.1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.1.1-debian-11-r18/3.1/debian-11/Dockerfile)
-* [`3.0`, `3.0-debian-11`, `3.0.1`, `3.0.1-debian-11-r18` (3.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.0.1-debian-11-r18/3.0/debian-11/Dockerfile)
+* [`3.0`, `3.0-debian-11`, `3.0.1`, `3.0.1-debian-11-r19` (3.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kafka/blob/3.0.1-debian-11-r19/3.0/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/kafka GitHub repo](https://github.com/bitnami/bitnami-docker-kafka).
 
