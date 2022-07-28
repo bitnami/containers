@@ -22,7 +22,7 @@ $ tar xzf resnet_50_classification_1.tar.gz -C 1
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-tensorflow-resnet/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/tensorflow-resnet/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -44,9 +44,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-11`, `2.9.1`, `2.9.1-debian-11-r5`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/2.9.1-debian-11-r5/2/debian-11/Dockerfile)
+* [`2`, `2-debian-11`, `2.9.1`, `2.9.1-debian-11-r6`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/tensorflow-resnet/2/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/tensorflow-resnet GitHub repo](https://github.com/bitnami/bitnami-docker-tensorflow-resnet).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Prerequisites
 
@@ -60,10 +60,10 @@ Running TensorFlow ResNet client with the TensorFlow Serving server is the recom
 
 #### Run the application using Docker Compose
 
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/blob/master/docker-compose.yml) file. Run the application using it as shown below:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/tensorflow-resnet/docker-compose.yml) file. Run the application using it as shown below:
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-tensorflow-resnet/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/tensorflow-resnet/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -93,7 +93,7 @@ If you want to run the application manually instead of using docker-compose, the
 
 ## Upgrade this application
 
-Bitnami provides up-to-date versions of Tensorflow-Serving and TensorFlow ResNet client, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the TensorFlow ResNet client container. For the Tensorflow-Serving upgrade see https://github.com/bitnami/bitnami-docker-tensorflow-serving/blob/master/README.md#upgrade-this-image
+Bitnami provides up-to-date versions of Tensorflow-Serving and TensorFlow ResNet client, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the TensorFlow ResNet client container. For the Tensorflow-Serving upgrade see https://github.com/bitnami/containers/blob/main/bitnami/tensorflow-serving/blob/master/README.md#upgrade-this-image
 
 1. Get the updated images:
 
@@ -112,7 +112,7 @@ Bitnami provides up-to-date versions of Tensorflow-Serving and TensorFlow ResNet
 $ rsync -a tensorflow-resnet-persistence tensorflow-resnet-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
-Additionally, [snapshot the TensorFlow Serving data](https://github.com/bitnami/bitnami-docker-mariadb#step-2-stop-and-backup-the-currently-running-container)
+Additionally, [snapshot the TensorFlow Serving data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#step-2-stop-and-backup-the-currently-running-container)
 
 You can use these snapshots to restore the application state should the upgrade fail.
 
@@ -173,17 +173,11 @@ Tensorflow Resnet can be customized by specifying environment variables on the f
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/pulls) with your contribution.
+We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-tensorflow-resnet/issues/new). For us to provide better support, be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`$ docker version`)
-- Output of `$ docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 
