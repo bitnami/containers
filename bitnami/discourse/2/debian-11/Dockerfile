@@ -16,7 +16,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-clien
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.20.0-1" --checksum 1308eadfadd439cc82f4ca51185828f49cac7b38fcafd783e24f52c7c2768b4b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.37.1-1" --checksum 39ea3040baa552b4760c1100a3713f86493620c0a74121c1ceba50fe17341878
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "brotli" "1.0.9-151" --checksum ba4c4d26d232f8d91d1143078a633ba7c5ae33f5c4182684400ffb7bbc0ed262
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "discourse" "2.8.6-1" --checksum 311191ac01dc5c48a2f802e3073bbd8f76b0834c35e583143b9cb47df4e9e997
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "discourse" "2.8.7-0" --checksum 958a93216992df7636315c382da36cd6296b37329b4b06a265b732b206f8b387
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -24,7 +24,7 @@ RUN /opt/bitnami/ruby/bin/gem install --force bundler -v '< 2'
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/discourse/postunpack.sh
-ENV APP_VERSION="2.8.6" \
+ENV APP_VERSION="2.8.7" \
     BITNAMI_APP_NAME="discourse" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/git/bin:/opt/bitnami/brotli/bin:$PATH"
 
