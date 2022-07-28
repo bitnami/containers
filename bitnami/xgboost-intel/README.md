@@ -17,14 +17,14 @@ $ docker run -it --name xgboost-intel bitnami/xgboost-intel
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-xgboost-intel/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/xgboost-intel/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
 ## Why use Intel optimized containers
 
 New instructions, coupled with algorithmic and software innovations, deliver breakthrough performance for the industry's most widely deployed cryptographic ciphers. Encryption is becoming pervasive with most organizations increasingly adopting encryption for application execution, data in flight, and data storage. 3rd gen Intel® Xeon® Scalable Processor (Ice Lake) cores and architecture, offers several new instructions for encryption acceleration.
- 
+
 This solution requires 3rd gen Intel Xeon Scalable Processor (Ice Lake) to get a breakthrough performance improvement.
 
 ## Why use Bitnami Images?
@@ -47,9 +47,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-11`, `1.6.1`, `1.6.1-debian-11-r18`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-xgboost-intel/blob/1.6.1-debian-11-r18/1/debian-11/Dockerfile)
+* [`1`, `1-debian-11`, `1.6.1`, `1.6.1-debian-11-r19`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/xgboost-intel/1/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/xgboost-intel GitHub repo](https://github.com/bitnami/bitnami-docker-xgboost-intel).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Get this image
 
@@ -65,10 +65,12 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull bitnami/xgboost-intel:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build -t bitnami/xgboost-intel 'https://github.com/bitnami/bitnami-docker-xgboost-intel.git#master:1/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## Entering the REPL
@@ -145,17 +147,11 @@ $ docker-compose up xgboost-intel
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-xgboost-intel/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-xgboost-intel/pulls) with your contribution.
+We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-xgboost-intel/issues/new). For us to provide better support, be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`$ docker version`)
-- Output of `$ docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 
