@@ -220,7 +220,7 @@ redis_validate() {
         elif [[ ! -f "$REDIS_TLS_KEY_FILE" ]]; then
             print_validation_error "The private key file in the specified path ${REDIS_TLS_KEY_FILE} does not exist"
         fi
-        if [[ ! -f "$REDIS_TLS_KEY_FILE_PASS" ]]; then
+        if [[ -n "$REDIS_TLS_KEY_FILE_PASS" ]] && [[ ! -f "$REDIS_TLS_KEY_FILE_PASS" ]]; then
             print_validation_error "The passphrase for the private key file in the specified path ${REDIS_TLS_KEY_FILE_PASS} does not exist"
         fi
         if [[ -z "$REDIS_TLS_CA_FILE" ]]; then
@@ -412,7 +412,9 @@ redis_configure_default() {
             fi
             redis_conf_set tls-cert-file "$REDIS_TLS_CERT_FILE"
             redis_conf_set tls-key-file "$REDIS_TLS_KEY_FILE"
-            redis_conf_set tls-key-file-pass "$REDIS_TLS_KEY_FILE_PASS"
+            if [[ -n "$REDIS_TLS_KEY_FILE_PASS" ]]
+                redis_conf_set tls-key-file-pass "$REDIS_TLS_KEY_FILE_PASS"
+            fi
             redis_conf_set tls-ca-cert-file "$REDIS_TLS_CA_FILE"
             [[ -n "$REDIS_TLS_DH_PARAMS_FILE" ]] && redis_conf_set tls-dh-params-file "$REDIS_TLS_DH_PARAMS_FILE"
             redis_conf_set tls-auth-clients "$REDIS_TLS_AUTH_CLIENTS"
