@@ -17,7 +17,7 @@ $ docker run -it --name java bitnami/java
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-java/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/java/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -35,12 +35,12 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`18`, `18-debian-11`, `18.0.1-1`, `18.0.1-1-debian-11-r8`, `latest` (18/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/18.0.1-1-debian-11-r8/18/debian-11/Dockerfile)
-* [`17`, `17-debian-11`, `17.0.3-1`, `17.0.3-1-debian-11-r6` (17/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/17.0.3-1-debian-11-r6/17/debian-11/Dockerfile)
-* [`11`, `11-debian-11`, `11.0.15-1`, `11.0.15-1-debian-11-r7` (11/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/11.0.15-1-debian-11-r7/11/debian-11/Dockerfile)
-* [`1.8`, `1.8-debian-11`, `1.8.342`, `1.8.342-debian-11-r1` (1.8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-java/blob/1.8.342-debian-11-r1/1.8/debian-11/Dockerfile)
+* [`18`, `18-debian-11`, `18.0.1-1`, `18.0.1-1-debian-11-r8`, `latest` (18/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/java/18/debian-11/Dockerfile)
+* [`17`, `17-debian-11`, `17.0.3-1`, `17.0.3-1-debian-11-r6` (17/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/java/17/debian-11/Dockerfile)
+* [`11`, `11-debian-11`, `11.0.15-1`, `11.0.15-1-debian-11-r7` (11/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/java/11/debian-11/Dockerfile)
+* [`1.8`, `1.8-debian-11`, `1.8.342`, `1.8.342-debian-11-r2` (1.8/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/java/1.8/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/java GitHub repo](https://github.com/bitnami/bitnami-docker-java).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ### Deprecation Note (2022-01-21)
 
@@ -68,10 +68,12 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull bitnami/java:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build -t bitnami/java 'https://github.com/bitnami/bitnami-docker-java.git#master:18/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
@@ -164,18 +166,11 @@ $ docker-compose up java
 
 ## Contributing
 
-We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-java/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-java/pulls) with your contribution.
+We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-java/issues/new). For us to provide better support, be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive
-information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 
