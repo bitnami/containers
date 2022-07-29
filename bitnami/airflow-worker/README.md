@@ -13,7 +13,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ### Docker Compose
 
 ```console
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-airflow-worker/master/docker-compose.yml
+$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/airflow-worker/docker-compose.yml
 $ docker-compose up
 ```
 
@@ -33,9 +33,9 @@ You can find the default credentials and available configuration options in the 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-11`, `2.3.3`, `2.3.3-debian-11-r8`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-airflow-worker/blob/2.3.3-debian-11-r8/2/debian-11/Dockerfile)
+* [`2`, `2-debian-11`, `2.3.3`, `2.3.3-debian-11-r9`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/airflow-worker/2/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/airflow GitHub repo](https://github.com/bitnami/bitnami-docker-airflow-worker).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Prerequisites
 
@@ -44,14 +44,14 @@ To run this application you need [Docker Engine](https://www.docker.com/products
 ## How to use this image
 
 Airflow Worker is a component of an Airflow solution configuring with the `CeleryExecutor`. Hence, you will need to rest of Airflow components for this image to work.
-You will need an [Airflow Webserver](https://www.github.com/bitnami/bitnami-docker-airflow), an [Airflow Scheduler](https://www.github.com/bitnami/bitnami-docker-airflow-scheduler), a [PostgreSQL database](https://www.github.com/bitnami/bitnami-docker-postgresql) and a [Redis(R) server](https://www.github.com/bitnami/bitnami-docker-redis).
+You will need an [Airflow Webserver](https://github.com/bitnami/containers/tree/main/bitnami/airflow), an [Airflow Scheduler](https://github.com/bitnami/containers/tree/main/bitnami/airflow-scheduler), a [PostgreSQL database](https://github.com/bitnami/containers/tree/main/bitnami/postgresql) and a [Redis(R) server](https://github.com/bitnami/containers/tree/main/bitnami/redis).
 
 ### Using Docker Compose
 
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-airflow-worker/blob/master/docker-compose.yml) file. Run the application using it as shown below:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/airflow-worker/docker-compose.yml) file. Run the application using it as shown below:
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-airflow-worker/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/airflow-worker/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -141,7 +141,7 @@ Access your application at `http://your-ip:8080`
 
 ### Persisting your application
 
-The Bitnami Airflow container relies on the PostgreSQL database & Redis to persist the data. This means that Airflow does not persist anything. To avoid loss of data, you should mount volumes for persistence of [PostgreSQL data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database) and [Redis(R) data](https://github.com/bitnami/bitnami-docker-redis#persisting-your-database)
+The Bitnami Airflow container relies on the PostgreSQL database & Redis to persist the data. This means that Airflow does not persist anything. To avoid loss of data, you should mount volumes for persistence of [PostgreSQL data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#persisting-your-database) and [Redis(R) data](https://github.com/bitnami/containers/blob/main/bitnami/redis#persisting-your-database)
 
 The above examples define docker volumes namely `postgresql_data`, and `redis_data`. The Airflow application state will persist as long as these volumes are not removed.
 
@@ -363,17 +363,11 @@ $ docker run -d --name airflow -p 8080:8080 \
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-airflow-worker/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-airflow-worker/pulls) with your contribution.
+We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-airflow-worker/issues/new). For us to provide better support, be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`$ docker version`)
-- Output of `$ docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 
