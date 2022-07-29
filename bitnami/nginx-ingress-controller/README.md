@@ -34,9 +34,9 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deploy
 ## Supported tags and respective `Dockerfile` links
 
 
-* [`1`, `1-debian-11`, `1.3.0`, `1.3.0-debian-11-r5`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/blob/1.3.0-debian-11-r5/1/debian-11/Dockerfile)
+* [`1`, `1-debian-11`, `1.3.0`, `1.3.0-debian-11-r6`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/nginx-ingress-controller/1/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/nginx-ingress-controller GitHub repo](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Configuration
 
@@ -44,12 +44,12 @@ For further documentation, please check [here](https://github.com/kubernetes/ing
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/issues), or submit a [pull
-request](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/blob/main/bitnami/nginx-ingress-controller/issues), or submit a [pull
+request](https://github.com/bitnami/containers/blob/main/bitnami/nginx-ingress-controller/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-nginx-ingress-controller/issues/new). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
