@@ -8,7 +8,7 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libcom-err2 libcrypt1 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libltdl7 libnsl2 libnss3-tools libsasl2-2 libssl1.1 libtirpc3 libwiredtiger0 libwrap0 mdbtools procps psmisc tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "openldap" "2.5.13-1" --checksum c47d7f3b607d1372bdf9035c45d3c1b7291d9046eb97b904b4186b55db7d7bc9
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "openldap" "2.5.13-2" --checksum 5bc6cc2d5d3995e26cea3dca3068f129a6430d690a6a59884129c3b85496bcb7
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
