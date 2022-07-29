@@ -1,4 +1,4 @@
-name: "[CI/CD] Pipeline"
+name: '[CI/CD] Pipeline'
 on: # rebuild any PRs and main branch changes
   push:
     branches:
@@ -100,7 +100,7 @@ jobs:
             echo "::set-output name=result::skip"
           fi
       - uses: vmware-labs/vmware-image-builder-action@main
-        name: "Publish ${{ steps.get-container-metadata.outputs.name }}: ${{ steps.get-container-metadata.outputs.tag }}"
+        name: 'Publish ${{ steps.get-container-metadata.outputs.name }}: ${{ steps.get-container-metadata.outputs.tag }}'
         if: ${{ steps.get-container-metadata.outputs.result == 'ok' }}
         with:
           pipeline: vib-publish.json

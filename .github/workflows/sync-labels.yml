@@ -1,4 +1,4 @@
-name: 'Synchronize labels from the vms repository'
+name: '[Support] Synchronize labels from the vms repository'
 on:
   schedule:
     # Daily
