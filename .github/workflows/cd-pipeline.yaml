@@ -96,7 +96,7 @@ jobs:
               echo "::set-output name=result::ok"
             fi
           else
-            # Container the container folder doesn't exists we are assuming a deprecation
+            # Container folder doesn't exists we are assuming a deprecation
             echo "::set-output name=result::skip"
           fi
       - uses: vmware-labs/vmware-image-builder-action@main
