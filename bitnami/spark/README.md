@@ -13,7 +13,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ### Docker Compose
 
 ```console
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-spark/master/docker-compose.yml
+$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/spark/docker-compose.yml
 $ docker-compose up
 ```
 
@@ -43,11 +43,11 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.3`, `3.3-debian-11`, `3.3.0`, `3.3.0-debian-11-r13`, `latest` (3.3/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-spark/blob/3.3.0-debian-11-r13/3.3/debian-11/Dockerfile)
-* [`3.2`, `3.2-debian-11`, `3.2.2`, `3.2.2-debian-11-r3` (3.2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-spark/blob/3.2.2-debian-11-r3/3.2/debian-11/Dockerfile)
-* [`3.1`, `3.1-debian-11`, `3.1.3`, `3.1.3-debian-11-r17` (3.1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-spark/blob/3.1.3-debian-11-r17/3.1/debian-11/Dockerfile)
+* [`3.3`, `3.3-debian-11`, `3.3.0`, `3.3.0-debian-11-r14`, `latest` (3.3/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/spark/3.3/debian-11/Dockerfile)
+* [`3.2`, `3.2-debian-11`, `3.2.2`, `3.2.2-debian-11-r4` (3.2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/spark/3.2/debian-11/Dockerfile)
+* [`3.1`, `3.1-debian-11`, `3.1.3`, `3.1.3-debian-11-r18` (3.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/spark/3.1/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/spark GitHub repo](https://github.com/bitnami/bitnami-docker-spark).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Get this image
 
@@ -65,10 +65,12 @@ in the Docker Hub Registry.
 $ docker pull bitnami/spark:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-docker build -t bitnami/spark:latest 'https://github.com/bitnami/bitnami-docker-spark.git#master:3.3/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
@@ -77,7 +79,7 @@ docker build -t bitnami/spark:latest 'https://github.com/bitnami/bitnami-docker-
 
 When you start the spark image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
-* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-spark/blob/master/docker-compose.yml) file present in this repository:
+* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/spark/docker-compose.yml) file present in this repository:
 
 ```yaml
 spark:
@@ -273,7 +275,7 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 $ docker run -v /path/to/spark-backups/latest:/bitnami/spark bitnami/spark:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-spark/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/spark/docker-compose.yml) file present in this repository:
 
 
 ```yaml
@@ -343,17 +345,11 @@ $ docker-compose up spark
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-spark/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-spark/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-spark/issues/new). For us to provide better support, be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 

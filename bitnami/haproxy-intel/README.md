@@ -35,9 +35,9 @@ Optimized containers fully leverage 3rd gen Intel(R) Xeon(R) Scalable Processor 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-11`, `2.6.2`, `2.6.2-debian-11-r3`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-haproxy-intel/blob/2.6.2-debian-11-r3/2/debian-11/Dockerfile)
+* [`2`, `2-debian-11`, `2.6.2`, `2.6.2-debian-11-r4`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/haproxy-intel/2/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/haproxy-intel GitHub repo](https://github.com/bitnami/bitnami-docker-haproxy-intel).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Get this image
 
@@ -53,10 +53,12 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull bitnami/haproxy-intel:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build -t bitnami/haproxy-intel:latest 'https://github.com/bitnami/bitnami-docker-haproxy-intel.git#master:2/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## Why use a non-root container?
@@ -71,7 +73,7 @@ In order for the container to work, you need to mount your custom `haproxy.cfg` 
 $ docker run --rm --name haproxy \
     --cpuset-cpus 0-7 \
     -v <TLS_key_local_path>:/etc/ssl/certs/tls.pem \
-    -v <configuration_file_local_path>:/bitnami/haproxy/conf/haproxy.cfg \ 
+    -v <configuration_file_local_path>:/bitnami/haproxy/conf/haproxy.cfg \
     bitnami/haproxy-intel:latest
 ```
 
@@ -98,7 +100,7 @@ nbthread <number>
     eather in  foreground or background.
     On some platforms supporting CPU affinity, the default "nbthread" value is automatically
     set to the number of CPUs the process is bound to upon startup.
- 
+
 cpu-map [auto:]<process-set>[/<thread-set>] <cpu-set>...
     It is possible to bind a process or a thread to a specific CPU set. This means
     that the process or the thread will never run on other CPUs. The "cpu-map"
@@ -114,7 +116,7 @@ cpu-map [auto:]<process-set>[/<thread-set>] <cpu-set>...
     CPU sets.
 
 insecure-fork-wanted
-    By default HAProxy tries hard to prevent any thread and process creation after it starts.  
+    By default HAProxy tries hard to prevent any thread and process creation after it starts.
     Due to QAT software requires the creation of threads in the background,
     when running in non-root mode, this option will disable this protection.
 ```
@@ -122,17 +124,11 @@ Check the [official HAProxy for Intel documentation](http://cbonte.github.io/hap
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-haproxy-intel/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-haproxy-intel/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-haproxy-intel/issues/new). For us to provide better support, be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 

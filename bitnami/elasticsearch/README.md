@@ -17,7 +17,7 @@ $ docker run --name elasticsearch bitnami/elasticsearch:latest
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-elasticsearch/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/elasticsearch/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -47,10 +47,10 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8`, `8-debian-11`, `8.3.2`, `8.3.2-debian-11-r4`, `latest` (8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/8.3.2-debian-11-r4/8/debian-11/Dockerfile)
-* [`7`, `7-debian-11`, `7.17.5`, `7.17.5-debian-11-r8` (7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/7.17.5-debian-11-r8/7/debian-11/Dockerfile)
+* [`8`, `8-debian-11`, `8.3.3`, `8.3.3-debian-11-r0`, `latest` (8/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/elasticsearch/8/debian-11/Dockerfile)
+* [`7`, `7-debian-11`, `7.17.5`, `7.17.5-debian-11-r10` (7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/elasticsearch/7/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/elasticsearch GitHub repo](https://github.com/bitnami/bitnami-docker-elasticsearch).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 ## Get this image
 
 The recommended way to get the Bitnami Elasticsearch Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/elasticsearch).
@@ -65,10 +65,12 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull bitnami/elasticsearch:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build -t bitnami/elasticsearch:latest 'https://github.com/bitnami/bitnami-docker-elasticsearch.git#master:8/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## Persisting your application
@@ -83,7 +85,7 @@ $ docker run \
     bitnami/elasticsearch:latest
 ```
 
-or by making a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/master/docker-compose.yml) file present in this repository:
+or by making a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/elasticsearch/docker-compose.yml) file present in this repository:
 
 ```yaml
 elasticsearch:
@@ -310,7 +312,7 @@ $ docker run -d --name elasticsearch \
     bitnami/elasticsearch:latest
 ```
 
-or by changing the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-elasticsearch/blob/master/docker-compose.yml) file present in this repository:
+or by changing the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/elasticsearch/docker-compose.yml) file present in this repository:
 
 ```yaml
 elasticsearch:
@@ -346,7 +348,7 @@ The Bitnami Elasticsearch image provides a way to create your custom image insta
 To create your own image providing plugins execute the flowing command:
 
 ```console
-$ docker build --build-arg ELASTICSEARCH_PLUGINS=<plugin1,plugin2,...> -t bitnami/elasticsearch:latest 'https://github.com/bitnami/bitnami-docker-elasticsearch.git#master:8/debian-11'
+$ docker build --build-arg ELASTICSEARCH_PLUGINS=<plugin1,plugin2,...> -t bitnami/elasticsearch:latest 'https://github.com/bitnami/containers/blob/main/bitnami/elasticsearch.git#master:8/debian-11'
 ```
 
 The command above will build the image providing this GitHub repository as build context, and will pass the list of plugins to install to the build logic.
@@ -487,11 +489,11 @@ $ docker-compose up -d
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-elasticsearch/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-elasticsearch/pulls) with your contribution.
+We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-elasticsearch/issues/new). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to include the following information in your issue:
 
 * Host OS and version
 * Docker version (`docker version`)

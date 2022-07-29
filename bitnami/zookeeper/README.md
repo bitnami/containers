@@ -50,11 +50,11 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.8`, `3.8-debian-11`, `3.8.0`, `3.8.0-debian-11-r20`, `latest` (3.8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.8.0-debian-11-r20/3.8/debian-11/Dockerfile)
-* [`3.7`, `3.7-debian-11`, `3.7.1`, `3.7.1-debian-11-r24` (3.7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.7.1-debian-11-r24/3.7/debian-11/Dockerfile)
-* [`3.6`, `3.6-debian-11`, `3.6.3`, `3.6.3-debian-11-r24` (3.6/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-zookeeper/blob/3.6.3-debian-11-r24/3.6/debian-11/Dockerfile)
+* [`3.8`, `3.8-debian-11`, `3.8.0`, `3.8.0-debian-11-r21`, `latest` (3.8/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/zookeeper/3.8/debian-11/Dockerfile)
+* [`3.7`, `3.7-debian-11`, `3.7.1`, `3.7.1-debian-11-r25` (3.7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/zookeeper/3.7/debian-11/Dockerfile)
+* [`3.6`, `3.6-debian-11`, `3.6.3`, `3.6.3-debian-11-r25` (3.6/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/zookeeper/3.6/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/zookeeper GitHub repo](https://github.com/bitnami/bitnami-docker-zookeeper).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Get this image
 
@@ -64,18 +64,18 @@ The recommended way to get the Bitnami Apache ZooKeeper Docker Image is to pull 
 $ docker pull bitnami/zookeeper:latest
 ```
 
-To use a specific version, you can pull a versioned tag. You can view the
-[list of available versions](https://hub.docker.com/r/bitnami/zookeeper/tags/)
-in the Docker Hub Registry.
+To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/zookeeper/tags/) in the Docker Hub Registry.
 
 ```console
 $ docker pull bitnami/zookeeper:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-docker build -t bitnami/zookeeper:latest 'https://github.com/bitnami/bitnami-docker-zookeeper.git#master:3.8/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## Persisting your data
@@ -92,7 +92,7 @@ The image exposes a volume at `/bitnami/zookeeper` for the Apache ZooKeeper data
 $ docker run -v /path/to/zookeeper-persistence:/bitnami/zookeeper bitnami/zookeeper:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-zookeeper/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/zookeeper/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -227,7 +227,7 @@ The configuration can easily be setup with the Bitnami Apache ZooKeeper Docker i
 $ docker run --name zookeeper -e ZOO_SERVER_ID=1 bitnami/zookeeper:latest
 ```
 
-or modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-zookeeper/blob/master/docker-compose.yml) file present in this repository:
+or modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/zookeeper/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -309,7 +309,7 @@ $ docker run -it -e ZOO_ENABLE_AUTH=yes \
                bitnami/zookeeper
 ```
 
-or modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-zookeeper/blob/master/docker-compose.yml) file present in this repository:
+or modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/zookeeper/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -583,17 +583,11 @@ $ docker-compose up zookeeper
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-zookeeper/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-zookeeper/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-zookeeper/issues/new). For us to provide better support, be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 

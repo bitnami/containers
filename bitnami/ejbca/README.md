@@ -17,7 +17,7 @@ $ docker run --name ejbca bitnami/ejbca:latest
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-ejbca/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/ejbca/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -41,9 +41,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-11`, `7.9.0-2`, `7.9.0-2-debian-11-r1`, `latest` (7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-ejbca/blob/7.9.0-2-debian-11-r1/7/debian-11/Dockerfile)
+* [`7`, `7-debian-11`, `7.9.0-2`, `7.9.0-2-debian-11-r2`, `latest` (7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/ejbca/7/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/ejbca GitHub repo](https://github.com/bitnami/bitnami-docker-ejbca).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Get this image
 
@@ -59,22 +59,24 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull bitnami/ejbca:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build -t bitnami/ejbca:latest 'https://github.com/bitnami/bitnami-docker-ejbca.git#master:7/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## How to use this image
 
-EJBCA requires access to a MySQL or MariaDB database to store information. We'll use our very own [MariaDB image](https://www.github.com/bitnami/bitnami-docker-mariadb) for the database requirements.
+EJBCA requires access to a MySQL or MariaDB database to store information. We'll use our very own [MariaDB image](https://github.com/bitnami/containers/tree/main/bitnami/mariadb) for the database requirements.
 
 ### Run the application using Docker Compose
 
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-ejbca/blob/master/docker-compose.yml) file. Run the application using it as shown below:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/ejbca/docker-compose.yml) file. Run the application using it as shown below:
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-ejbca/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/ejbca/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -132,7 +134,7 @@ $ docker run \
     bitnami/ejbca:latest
 ```
 
-You can also do this with a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-ejbca/blob/master/docker-compose.yml) file present in this repository:
+You can also do this with a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/ejbca/docker-compose.yml) file present in this repository:
 
 ```diff
    ejbca:
@@ -234,17 +236,11 @@ Due to the mentioned changes, the automatic upgrade from previous image versions
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-ejbca/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-ejbca/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-ejbca/issues). For us to provide better support, be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 

@@ -17,7 +17,7 @@ $ docker run --name mongodb bitnami/mongodb:latest
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-mongodb/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/mongodb/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -45,9 +45,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`5.0`, `5.0-debian-11`, `5.0.9`, `5.0.9-debian-11-r9`, `latest` (5.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mongodb/blob/5.0.9-debian-11-r9/5.0/debian-11/Dockerfile)
+* [`5.0`, `5.0-debian-11`, `5.0.10`, `5.0.10-debian-11-r1`, `latest` (5.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mongodb/5.0/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/mongodb GitHub repo](https://github.com/bitnami/bitnami-docker-mongodb).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Get this image
 
@@ -63,10 +63,12 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull bitnami/mongodb:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build -t bitnami/mongodb:latest 'https://github.com/bitnami/bitnami-docker-mongodb.git#master:5.0/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## Persisting your database
@@ -81,7 +83,7 @@ $ docker run \
     bitnami/mongodb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mongodb/docker-compose.yml) file present in this repository:
 
 ```diff
  ...
@@ -184,7 +186,7 @@ Passing extra command-line flags to the mongod service command is possible throu
 $ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_EXTRA_FLAGS='--wiredTigerCacheSizeGB=2' bitnami/mongodb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mongodb/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -207,7 +209,7 @@ Configuring the system log verbosity level is possible through the following env
 $ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_SYSTEM_LOG_VERBOSITY='3' bitnami/mongodb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mongodb/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -235,7 +237,7 @@ To enable IPv6 support, you can execute:
 $ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_ENABLE_IPV6=yes bitnami/mongodb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mongodb/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -257,7 +259,7 @@ Enabling/disabling [directoryPerDB](https://docs.mongodb.com/manual/reference/co
 $ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_ENABLE_DIRECTORY_PER_DB=yes bitnami/mongodb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mongodb/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -279,7 +281,7 @@ Enabling/disabling [journal](https://docs.mongodb.com/manual/reference/configura
 $ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_ENABLE_JOURNAL=true bitnami/mongodb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mongodb/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -300,7 +302,7 @@ $ docker run --name mongodb \
   -e MONGODB_ROOT_PASSWORD=password123 bitnami/mongodb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mongodb/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -323,7 +325,7 @@ $ docker run --name mongodb \
   -e MONGODB_DATABASE=my_database bitnami/mongodb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mongodb/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mongodb/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -809,17 +811,11 @@ $ docker-compose up mongodb
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-mongodb/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-mongodb/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-mongodb/issues/new). For us to provide better support, be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 

@@ -8,17 +8,17 @@
     },
     "minio": {
         "arch": "amd64",
-        "digest": "17b0156bafda7d5dbafb0e64c832d9b0cd2c5a8fa8708e1f7426d9c4c50e41aa",
+        "digest": "7ea30154122c6bb26a072a091ef4851b9fb74345c892efeb025e6627b845f327",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2022.7.17-0"
+        "version": "2022.7.26-0"
     },
     "minio-client": {
         "arch": "amd64",
-        "digest": "48e197cf1818f7c08295ddac2e408c1611d0649cec94b39f455d5510b0a24c8f",
+        "digest": "0554914e95d4463456de96f37c918e2350a1c8f75c467cd1ece6f28115309a8d",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2022.7.15-0"
+        "version": "2022.7.24-0"
     },
     "wait-for-port": {
         "arch": "amd64",

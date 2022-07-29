@@ -17,7 +17,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.30-151" --checksum acb478d77e1a246f734cfe777e99e52521c1a0700a65e796f4dbe0a46ac71d67
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.37.1-1" --checksum 39ea3040baa552b4760c1100a3713f86493620c0a74121c1ceba50fe17341878
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-151" --checksum 9690a34674f152e55c71a55275265314ed1bb29e0be8a75d7880488509f70deb
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dreamfactory" "4.11.1-151" --checksum 160f0779e6d378108628eba60f2ec3679d3e63c749e81e609d4647f0a71c7c77
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dreamfactory" "4.12.0-0" --checksum 8d1fc8b6e4ca9b51dd3c293b00d666ee635d3d5bfac10d883d9c3879101f4585
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -31,7 +31,7 @@ RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/php-postgresql/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="4.11.1" \
+    APP_VERSION="4.12.0" \
     BITNAMI_APP_NAME="dreamfactory" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/common/bin:/opt/bitnami/apache/bin:/opt/bitnami/redis/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:/opt/bitnami/git/bin:/opt/bitnami/dreamfactory/bin:$PATH"
 

@@ -11,7 +11,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-drupal/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/drupal/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -41,10 +41,10 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`9`, `9-debian-11`, `9.4.3`, `9.4.3-debian-11-r1`, `latest` (9/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/9.4.3-debian-11-r1/9/debian-11/Dockerfile)
-* [`7`, `7-debian-11`, `7.91.0`, `7.91.0-debian-11-r1` (7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-drupal/blob/7.91.0-debian-11-r1/7/debian-11/Dockerfile)
+* [`9`, `9-debian-11`, `9.4.4`, `9.4.4-debian-11-r0`, `latest` (9/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/drupal/9/debian-11/Dockerfile)
+* [`7`, `7-debian-11`, `7.91.0`, `7.91.0-debian-11-r2` (7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/drupal/7/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/drupal GitHub repo](https://github.com/bitnami/bitnami-docker-drupal).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Get this image
 
@@ -60,22 +60,24 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull bitnami/drupal:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build -t bitnami/drupal:latest 'https://github.com/bitnami/bitnami-docker-drupal.git#master:9/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## How to use this image
 
-Drupal requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://www.github.com/bitnami/bitnami-docker-mariadb) for the database requirements.
+Drupal requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://github.com/bitnami/containers/tree/main/bitnami/mariadb) for the database requirements.
 
 ### Run the application using Docker Compose
 
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-drupal/blob/master/docker-compose.yml) file. Run the application using it as shown below:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/drupal/docker-compose.yml) file. Run the application using it as shown below:
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-drupal/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/drupal/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -124,7 +126,7 @@ Access your application at `http://your-ip:8080/`
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a directory at the `/bitnami/drupal` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should mount a volume for persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
+For persistence you should mount a directory at the `/bitnami/drupal` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should mount a volume for persistence of the MariaDB data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#persisting-your-database).
 
 The above examples define the Docker volumes named mariadb_data and drupal_data. The Drupal application state will persist as long as volumes are not removed.
 
@@ -132,7 +134,7 @@ To avoid inadvertent removal of volumes, you can mount host directories as data 
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-drupal/blob/master/docker-compose.yml) file present in this repository:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/drupal/docker-compose.yml) file present in this repository:
 
 ```diff
    mariadb:
@@ -197,7 +199,7 @@ $ docker run -d --name drupal \
 
 When you start the Drupal image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-drupal/blob/master/docker-compose.yml) file present in this repository:
+ * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/drupal/docker-compose.yml) file present in this repository:
 
 ```yaml
 drupal:
@@ -286,7 +288,7 @@ To configure Drupal to send email using SMTP you can set the following environme
 
 This would be an example of SMTP configuration using a Gmail account:
 
- * Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-drupal/blob/master/docker-compose.yml) file present in this repository:
+ * Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/drupal/docker-compose.yml) file present in this repository:
 
 ```yaml
   drupal:
@@ -387,7 +389,7 @@ For the Drupal container:
 
 ### Upgrade this image
 
-Bitnami provides up-to-date versions of MariaDB and Drupal, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Drupal container. For the MariaDB upgrade see: https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
+Bitnami provides up-to-date versions of MariaDB and Drupal, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Drupal container. For the MariaDB upgrade see: https://github.com/bitnami/containers/tree/main/bitnami/mariadb#upgrade-this-image
 
 #### Step 1: Get the updated image
 
@@ -432,9 +434,9 @@ The Bitnami Drupal Docker image is designed to be extended so it can be used as 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
 - Settings that can be adapted using environment variables. For instance, you can change the ports used by Apache for HTTP and HTTPS, by setting the environment variables `APACHE_HTTP_PORT_NUMBER` and `APACHE_HTTPS_PORT_NUMBER` respectively.
-- [Adding custom virtual hosts](https://github.com/bitnami/bitnami-docker-apache#adding-custom-virtual-hosts).
-- [Replacing the 'httpd.conf' file](https://github.com/bitnami/bitnami-docker-apache#full-configuration).
-- [Using custom SSL certificates](https://github.com/bitnami/bitnami-docker-apache#using-custom-ssl-certificates).
+- [Adding custom virtual hosts](https://github.com/bitnami/containers/blob/main/bitnami/apache#adding-custom-virtual-hosts).
+- [Replacing the 'httpd.conf' file](https://github.com/bitnami/containers/blob/main/bitnami/apache#full-configuration).
+- [Using custom SSL certificates](https://github.com/bitnami/containers/blob/main/bitnami/apache#using-custom-ssl-certificates).
 
 If your desired customizations cannot be covered using the methods mentioned above, extend the image. To do so, create your own image using a Dockerfile with the format below:
 
@@ -470,7 +472,7 @@ ENV APACHE_HTTPS_PORT_NUMBER=8143
 EXPOSE 8181 8143
 ```
 
-Based on the extended image, you can update the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-drupal/blob/master/docker-compose.yml) file present in this repository to add other features:
+Based on the extended image, you can update the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/drupal/docker-compose.yml) file present in this repository to add other features:
 
 ```diff
    drupal:
@@ -509,11 +511,11 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 
 # Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-drupal/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-drupal/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/blob/main/bitnami/drupal/issues), or submit a [pull request](https://github.com/bitnami/containers/blob/main/bitnami/drupal/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-drupal/issues/new). Be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/blob/main/bitnami/drupal/issues/new). Be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)

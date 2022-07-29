@@ -17,7 +17,7 @@ $ docker run --name minio-client bitnami/minio-client:latest
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-minio-client/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/minio-client/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -39,9 +39,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2022`, `2022-debian-11`, `2022.7.24`, `2022.7.24-debian-11-r0`, `latest` (2022/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-minio/blob/2022.7.24-debian-11-r0/2022/debian-11/Dockerfile)
+* [`2022`, `2022-debian-11`, `2022.7.24`, `2022.7.24-debian-11-r1`, `latest` (2022/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/minio/2022/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/minio-client GitHub repo](https://github.com/bitnami/bitnami-docker-minio-client).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Get this image
 
@@ -57,15 +57,17 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull bitnami/minio-client:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build -t bitnami/minio-client:latest 'https://github.com/bitnami/bitnami-docker-minio-client.git#master:2022/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## Connecting to other containers
 
-Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a MinIO(R) Client can be used to access other running containers such as [MinIO(R) server](https://github.com/bitnami/bitnami-docker-minio).
+Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a MinIO(R) Client can be used to access other running containers such as [MinIO(R) server](https://github.com/bitnami/containers/blob/main/bitnami/minio).
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
@@ -130,17 +132,11 @@ Find more information about the client configuration in the [MinIO(R) Client doc
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-minio-client/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-minio-client/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-minio-client/issues/new). For us to provide better support, be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 

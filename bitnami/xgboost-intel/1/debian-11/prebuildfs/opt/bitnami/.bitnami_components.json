@@ -8,10 +8,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "6ec112fdf7d07f1457c28ef70a492eda1ff8451311d33c660428a894254266ae",
+        "digest": "4134271882a5cc15818aa4be71d62f53fb4cccbdbb5136aab542fd3735233a3b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.10.5-154"
+        "version": "3.10.5-157"
     },
     "xgboost-intel": {
         "arch": "amd64",

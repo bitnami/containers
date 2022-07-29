@@ -17,7 +17,7 @@ $ docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-redis/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/redis/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -47,10 +47,10 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7.0`, `7.0-debian-11`, `7.0.4`, `7.0.4-debian-11-r5`, `latest` (7.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/7.0.4-debian-11-r5/7.0/debian-11/Dockerfile)
-* [`6.2`, `6.2-debian-11`, `6.2.7`, `6.2.7-debian-11-r19` (6.2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-redis/blob/6.2.7-debian-11-r19/6.2/debian-11/Dockerfile)
+* [`7.0`, `7.0-debian-11`, `7.0.4`, `7.0.4-debian-11-r6`, `latest` (7.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/redis/7.0/debian-11/Dockerfile)
+* [`6.2`, `6.2-debian-11`, `6.2.7`, `6.2.7-debian-11-r20` (6.2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/redis/6.2/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/redis GitHub repo](https://github.com/bitnami/bitnami-docker-redis).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Get this image
 
@@ -66,15 +66,17 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull bitnami/redis:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build -t bitnami/redis:latest 'https://github.com/bitnami/bitnami-docker-redis.git#master:7.0/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## Persisting your database
 
-Redis(R) provides a different range of [persistence options](https://redis.io/topics/persistence). This contanier uses *AOF persistence by default* but it is easy to overwrite that configuration in a `docker-compose.yaml` file with this entry `command: /opt/bitnami/scripts/redis/run.sh --appendonly no`. Alternatively, you may use the `REDIS_AOF_ENABLED` env variable as explained in [Disabling AOF persistence](https://github.com/bitnami/bitnami-docker-redis#disabling-aof-persistence).
+Redis(R) provides a different range of [persistence options](https://redis.io/topics/persistence). This contanier uses *AOF persistence by default* but it is easy to overwrite that configuration in a `docker-compose.yaml` file with this entry `command: /opt/bitnami/scripts/redis/run.sh --appendonly no`. Alternatively, you may use the `REDIS_AOF_ENABLED` env variable as explained in [Disabling AOF persistence](https://github.com/bitnami/containers/blob/main/bitnami/redis#disabling-aof-persistence).
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
@@ -87,7 +89,7 @@ $ docker run \
     bitnami/redis:latest
 ```
 
-You can also do this by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository:
+You can also do this by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -184,7 +186,7 @@ For security reasons, you may want to disable some commands. You can specify the
 $ docker run --name redis -e REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG bitnami/redis:latest
 ```
 
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository:
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -215,7 +217,7 @@ Passing extra command-line flags to the redis service command is possible by add
 $ docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest /opt/bitnami/scripts/redis/run.sh --maxmemory 100mb
 ```
 
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository:
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -237,7 +239,7 @@ Passing the `REDIS_PASSWORD` environment variable when running the image for the
 $ docker run --name redis -e REDIS_PASSWORD=password123 bitnami/redis:latest
 ```
 
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository:
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -260,7 +262,7 @@ By default the Redis(R) image expects all the available passwords to be set. In 
 $ docker run --name redis -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis:latest
 ```
 
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository:
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -287,7 +289,7 @@ Redis(R) offers different [options](https://redis.io/topics/persistence) when it
 $ docker run --name redis -e REDIS_AOF_ENABLED=no bitnami/redis:latest
 ```
 
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository:
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -306,7 +308,7 @@ Redis(R) offers [ACL](https://redis.io/topics/acl) since 6.0 which allows certai
 $ docker run -name redis -e REDIS_ACLFILE=/opt/bitnami/redis/mounted-etc/users.acl -v /path/to/users.acl:/opt/bitnami/redis/mounted-etc/users.acl bitnami/redis:latest
 ```
 
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository:
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -327,7 +329,7 @@ By default, this image is set up to launch Redis(R) in standalone mode on port 6
 $ docker run --name redis -e REDIS_PORT_NUMBER=7000 -p 7000:7000 bitnami/redis:latest
 ```
 
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository:
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -481,7 +483,7 @@ When enabling TLS, conventional standard traffic is disabled by default. However
       ...
     ```
 
-Alternatively, you may also provide with this configuration in your [custom](https://github.com/bitnami/bitnami-docker-redis#configuration-file) configuration file.
+Alternatively, you may also provide with this configuration in your [custom](https://github.com/bitnami/containers/blob/main/bitnami/redis#configuration-file) configuration file.
 
 ### Configuration file
 
@@ -495,7 +497,7 @@ $ docker run --name redis \
     bitnami/redis:latest
 ```
 
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository:
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -520,7 +522,7 @@ $ docker run --name redis \
     bitnami/redis:latest
 ```
 
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose.yml) file present in this repository:
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -650,17 +652,11 @@ docker-compose up -d
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-redis/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-redis/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-redis/issues/new). For us to provide better support, be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 Copyright &copy; 2022 Bitnami

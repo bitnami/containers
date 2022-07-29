@@ -32,9 +32,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7`, `7-debian-11`, `7.3.0`, `7.3.0-debian-11-r20`, `latest` (7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-oauth2-proxy/blob/7.3.0-debian-11-r20/7/debian-11/Dockerfile)
+* [`7`, `7-debian-11`, `7.3.0`, `7.3.0-debian-11-r21`, `latest` (7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/oauth2-proxy/7/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/oauth2-proxy GitHub repo](https://github.com/bitnami/bitnami-docker-oauth2-proxy).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Get this image
 
@@ -50,10 +50,12 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull bitnami/oauth2-proxy:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build -t bitnami/oauth2-proxy:latest 'https://github.com/bitnami/bitnami-docker-oauth2-proxy.git#master:7/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## Connecting to other containers
@@ -141,12 +143,12 @@ $ docker run --name oauth2-proxy bitnami/oauth2-proxy:latest
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-oauth2-proxy/issues), or submit a [pull
-request](https://github.com/bitnami/bitnami-docker-oauth2-proxy/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/blob/main/bitnami/oauth2-proxy/issues), or submit a [pull
+request](https://github.com/bitnami/containers/blob/main/bitnami/oauth2-proxy/pulls) with your contribution.
 
 ## Issues
 
-<!-- If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-oauth2-proxy/issues/new). For us to provide better support, be sure to include the following information in your issue: -->
+<!-- If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to include the following information in your issue: -->
 
 - Host OS and version
 - Docker version (`docker version`)

@@ -17,7 +17,7 @@ $ docker run --name dotnet bitnami/dotnet:latest
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-dotnet/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/dotnet/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -35,11 +35,11 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`6.0`, `6.0-debian-11`, `6.0.7`, `6.0.7-debian-11-r6`, `latest` (6.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet/blob/6.0.7-debian-11-r6/6.0/debian-11/Dockerfile)
-* [`5`, `5-debian-11`, `5.0.17`, `5.0.17-debian-11-r18` (5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet/blob/5.0.17-debian-11-r18/5/debian-11/Dockerfile)
-* [`3.1`, `3.1-debian-11`, `3.1.27`, `3.1.27-debian-11-r9` (3.1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-dotnet/blob/3.1.27-debian-11-r9/3.1/debian-11/Dockerfile)
+* [`6.0`, `6.0-debian-11`, `6.0.7`, `6.0.7-debian-11-r7`, `latest` (6.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/dotnet/6.0/debian-11/Dockerfile)
+* [`5`, `5-debian-11`, `5.0.17`, `5.0.17-debian-11-r19` (5/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/dotnet/5/debian-11/Dockerfile)
+* [`3.1`, `3.1-debian-11`, `3.1.27`, `3.1.27-debian-11-r10` (3.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/dotnet/3.1/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/dotnet GitHub repo](https://github.com/bitnami/bitnami-docker-dotnet).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Get this image
 
@@ -55,10 +55,12 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull bitnami/dotnet:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build -t bitnami/dotnet:latest 'https://github.com/bitnami/bitnami-docker-dotnet.git#master:6.0/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## Persisting your application
@@ -73,7 +75,7 @@ $ docker run \
     bitnami/dotnet:latest
 ```
 
-You can also do this with a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-dotnet/blob/master/docker-compose.yml) file present in this repository:
+You can also do this with a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/dotnet/docker-compose.yml) file present in this repository:
 
 ```yaml
 dotnet:
@@ -155,17 +157,11 @@ $ docker run --name dotnet bitnami/dotnet:latest
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-dotnet/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-dotnet/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-dotnet/issues/new). For us to provide better support, be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 

@@ -17,7 +17,7 @@ $ docker run --name solr bitnami/solr:latest
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-solr/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/solr/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -37,10 +37,10 @@ You can find the available configuration options in the [Environment Variables](
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`9`, `9-debian-11`, `9.0.0`, `9.0.0-debian-11-r19`, `latest` (9/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/9.0.0-debian-11-r19/9/debian-11/Dockerfile)
-* [`8`, `8-debian-11`, `8.11.2`, `8.11.2-debian-11-r13` (8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-solr/blob/8.11.2-debian-11-r13/8/debian-11/Dockerfile)
+* [`9`, `9-debian-11`, `9.0.0`, `9.0.0-debian-11-r20`, `latest` (9/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/solr/9/debian-11/Dockerfile)
+* [`8`, `8-debian-11`, `8.11.2`, `8.11.2-debian-11-r14` (8/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/solr/8/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/solr GitHub repo](https://github.com/bitnami/bitnami-docker-solr).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Get this image
 
@@ -56,10 +56,12 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull bitnami/solr:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build -t bitnami/solr:latest 'https://github.com/bitnami/bitnami-docker-solr.git#master:9/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## Persisting your application
@@ -74,7 +76,7 @@ To avoid inadvertent removal of this volume you can [mount host directories as d
 $ docker run -v /path/to/solr-persistence:/bitnami bitnami/solr:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-solr/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/solr/docker-compose.yml) file present in this repository:
 
 ```yaml
 solr:
@@ -184,7 +186,7 @@ SSL related environment variables:
 
 #### Specifying Environment Variables using Docker Compose
 
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-solr/blob/master/docker-compose.yml) file present in this repository:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/solr/docker-compose.yml) file present in this repository:
 
 ```yaml
 solr:
@@ -206,7 +208,7 @@ In order to load your own configuration files, you will have to make them availa
 
 #### Using Docker Compose
 
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-solr/blob/master/docker-compose.yml) file present in this repository:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/solr/docker-compose.yml) file present in this repository:
 
 ```yaml
 solr:
@@ -316,17 +318,11 @@ $ docker-compose up solr
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-solr/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-solr/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-solr/issues/new). For us to provide better support, be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 Copyright &copy; 2022 Bitnami

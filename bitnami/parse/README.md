@@ -13,7 +13,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-parse/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/parse/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -43,10 +43,10 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`5`, `5-debian-11`, `5.2.4`, `5.2.4-debian-11-r10`, `latest` (5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/5.2.4-debian-11-r10/5/debian-11/Dockerfile)
-* [`4`, `4-debian-11`, `4.10.13`, `4.10.13-debian-11-r10` (4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-parse/blob/4.10.13-debian-11-r10/4/debian-11/Dockerfile)
+* [`5`, `5-debian-11`, `5.2.4`, `5.2.4-debian-11-r11`, `latest` (5/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/parse/5/debian-11/Dockerfile)
+* [`4`, `4-debian-11`, `4.10.13`, `4.10.13-debian-11-r11` (4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/parse/4/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/parse GitHub repo](https://github.com/bitnami/bitnami-docker-parse).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Prerequisites
 
@@ -60,10 +60,10 @@ Running Parse with a database server is the recommended way. You can either use 
 
 ### Run the application using Docker Compose
 
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-parse/blob/master/docker-compose.yml) file. Run the application using it as shown below:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/parse/docker-compose.yml) file. Run the application using it as shown below:
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-parse/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/parse/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -97,7 +97,7 @@ Then you can access your application at `http://your-ip/parse`
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MongoDB&reg; data](https://github.com/bitnami/bitnami-docker-mongodb#persisting-your-database).
+For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the MongoDB&reg; data](https://github.com/bitnami/containers/blob/main/bitnami/mongodb#persisting-your-database).
 
 The above examples define docker volumes namely `mongodb_data` and `parse_data`. The Parse application state will persist as long as these volumes are not removed.
 
@@ -107,7 +107,7 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 
 #### Mount host directories as data volumes with Docker Compose
 
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-parse/blob/master/docker-compose.yml) file present in this repository:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/parse/docker-compose.yml) file present in this repository:
 
 ```yaml
   mongodb:
@@ -154,7 +154,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 ## Upgrade this application
 
-Bitnami provides up-to-date versions of Mongodb and Parse, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Parse container. For the Mongodb upgrade see https://github.com/bitnami/bitnami-docker-mongodb/blob/master/README.md#upgrade-this-image
+Bitnami provides up-to-date versions of Mongodb and Parse, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Parse container. For the Mongodb upgrade see https://github.com/bitnami/containers/blob/main/bitnami/mongodb/blob/master/README.md#upgrade-this-image
 
 1. Get the updated images:
 
@@ -173,7 +173,7 @@ Bitnami provides up-to-date versions of Mongodb and Parse, including security pa
 $ rsync -a /path/to/parse-persistence /path/to/parse-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
-Additionally, [snapshot the MongoDB&reg; data](https://github.com/bitnami/bitnami-docker-mongodb#step-2-stop-and-backup-the-currently-running-container)
+Additionally, [snapshot the MongoDB&reg; data](https://github.com/bitnami/containers/blob/main/bitnami/mongodb#step-2-stop-and-backup-the-currently-running-container)
 
 You can use these snapshots to restore the application state should the upgrade fail.
 
@@ -193,7 +193,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 When you start the parse image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-parse/blob/master/docker-compose.yml) file present in this repository:
+ * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/parse/docker-compose.yml) file present in this repository:
 
 ```yaml
 parse:
@@ -327,17 +327,11 @@ Find more information about Cloud Code and Cloud functions in the [official docu
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-parse/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-parse/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-parse/issues/new). For us to provide better support, be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 

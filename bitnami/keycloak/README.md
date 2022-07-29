@@ -17,7 +17,7 @@ $ docker run --name keycloak bitnami/keycloak:latest
 ### Docker Compose
 
 ```console
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-keycloak/master/docker-compose.yml
+$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/keycloak/docker-compose.yml
 $ docker-compose up
 ```
 
@@ -44,9 +44,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`18`, `18-debian-11`, `18.0.2`, `18.0.2-debian-11-r11`, `latest` (18/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-keycloak/blob/18.0.2-debian-11-r11/18/debian-11/Dockerfile)
+* [`18`, `18-debian-11`, `18.0.2`, `18.0.2-debian-11-r13`, `latest` (18/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/keycloak/18/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/keycloak GitHub repo](https://github.com/bitnami/bitnami-docker-keycloak).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Get this image
 
@@ -62,10 +62,12 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull bitnami/keycloak:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build -t bitnami/keycloak:latest 'https://github.com/bitnami/bitnami-docker-keycloak.git#master:18/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
@@ -213,17 +215,11 @@ To do this you need to set `KEYCLOAK_PRODUCTION` to **true** and configure TLS
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-keycloak/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-keycloak/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-keycloak/issues/new). For us to provide better support, be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 
