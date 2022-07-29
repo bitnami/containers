@@ -12,7 +12,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "8.0.21-4" 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.54-152" --checksum 903fc542776eb549981738f68fdd6435b2c8683686114500f157258dcfdc9617
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-151" --checksum c85e4be9bcee70c86c7bc7e13742e2d97810ad8f7d6154f8b66811b6cc4d0948
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "8.0.21-1" --checksum f4495e4344887007c7596c92ddca98271a36d6776940db1e55bd43cf159afb01
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "suitecrm" "7.12.6-151" --checksum 71678df5025235184c072bdd0e7f59e78900314cf8332d3d186ebe41c8c8aec3
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "suitecrm" "7.12.6-152" --checksum 80c79283783557ece29fc81bd128ed92f9faac33d821af5c2bec79579feba98d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-151" --checksum 9690a34674f152e55c71a55275265314ed1bb29e0be8a75d7880488509f70deb
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
 RUN apt-get update && apt-get upgrade -y && \
