@@ -11,7 +11,7 @@
 ## TL;DR
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-reportserverenterprise/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/reportserverenterprise/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -35,9 +35,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`4`, `4-debian-11`, `4.2.0-6066`, `4.2.0-6066-debian-11-r8`, `latest` (4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/4.2.0-6066-debian-11-r8/4/debian-11/Dockerfile)
+- [`4`, `4-debian-11`, `4.2.0-6066`, `4.2.0-6066-debian-11-r9`, `latest` (4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/reportserverenterprise/4/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/reportserverenterprise GitHub repo](https://github.com/bitnami/bitnami-docker-reportserverenterprise).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Get this image
 
@@ -53,22 +53,24 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull bitnami/reportserverenterprise:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build -t bitnami/reportserverenterprise:latest 'https://github.com/bitnami/bitnami-docker-reportserverenterprise.git#master:4/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## How to use this image
 
-ReportServer Enterprise requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://www.github.com/bitnami/bitnami-docker-mariadb) for the database requirements.
+ReportServer Enterprise requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://github.com/bitnami/containers/tree/main/bitnami/mariadb) for the database requirements.
 
 ### Run the application using Docker Compose
 
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/master/docker-compose.yml) file. Run the application using it as shown below:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/reportserverenterprise/docker-compose.yml) file. Run the application using it as shown below:
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-reportserverenterprise/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/reportserverenterprise/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -117,7 +119,7 @@ Access your application at `http://your-ip/`
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a directory at the `/bitnami/reportserverenterprise` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should [mount a volume for persistence of the MariaDB data](https://github.com/bitnami/bitnami-docker-mariadb#persisting-your-database).
+For persistence you should mount a directory at the `/bitnami/reportserverenterprise` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should [mount a volume for persistence of the MariaDB data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#persisting-your-database).
 
 The above examples define the Docker volumes named `mariadb_data` and `reportserver_data`. The ReportServer Enterprise application state will persist as long as volumes are not removed.
 
@@ -125,7 +127,7 @@ To avoid inadvertent removal of volumes, you can [mount host directories as data
 
 ### Mount host directories as data volumes with Docker Compose
 
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/master/docker-compose.yml) file present in this repository:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/reportserverenterprise/docker-compose.yml) file present in this repository:
 
 ```diff
    mariadb:
@@ -190,7 +192,7 @@ $ docker run -d --name reportserver \
 
 When you start the ReportServer Enterprise image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
-- For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/master/docker-compose.yml) file present in this repository:
+- For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/reportserverenterprise/docker-compose.yml) file present in this repository:
 
     ```yaml
     reportserver:
@@ -260,7 +262,7 @@ To configure ReportServer Enterprise to send email using SMTP you can set the fo
 
 This would be an example of SMTP configuration using a Gmail account:
 
-- Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/master/docker-compose.yml) file present in this repository:
+- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/reportserverenterprise/docker-compose.yml) file present in this repository:
 
     ```yaml
       reportserver:
@@ -295,7 +297,7 @@ This would be an example of SMTP configuration using a Gmail account:
 
 The Bitnami ReportServer Enterprise container supports connecting the ReportServer Enterprise application to an external database. This would be an example of using an external database for ReportServer Enterprise.
 
-- Modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-reportserverenterprise/blob/master/docker-compose.yml) file present in this repository:
+- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/reportserverenterprise/docker-compose.yml) file present in this repository:
 
     ```diff
        reportserver:
@@ -397,7 +399,7 @@ For the ReportServer Enterprise container:
 
 ### Upgrade this image
 
-Bitnami provides up-to-date versions of MariaDB and ReportServer Enterprise, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the ReportServer Enterprise container. For the MariaDB upgrade see: https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#upgrade-this-image
+Bitnami provides up-to-date versions of MariaDB and ReportServer Enterprise, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the ReportServer Enterprise container. For the MariaDB upgrade see: https://github.com/bitnami/containers/tree/main/bitnami/mariadb#upgrade-this-image
 
 The `bitnami/reportserverenterprise:latest` tag always points to the most recent release. To get the most recent release you can simple repull the `latest` tag from the Docker Hub with `docker pull bitnami/reportserverenterprise:latest`. However it is recommended to use [tagged versions](https://hub.docker.com/r/bitnami/reportserverenterprise/tags/).
 
@@ -456,17 +458,11 @@ More information is available from the [ReportServer website](https://reportserv
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-reportserverenterprise/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-reportserverenterprise/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-reportserverenterprise/issues/new). Be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ### Community supported solution
 
