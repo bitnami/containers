@@ -13,7 +13,7 @@ jobs:
       - name: Repo checkout
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.BITNAMI_BOT_TOKEN }}
           fetch-depth: 1
       - name: Load .env file
         uses: xom9ikk/dotenv@v1.0.2
@@ -23,7 +23,7 @@ jobs:
         run: |
           TEAM_MEMBERS=$(curl --request GET \
           --url https://api.github.com/orgs/bitnami/teams/developers/members \
-          --header 'authorization: Bearer ${{ secrets.BITNAMI_BOT_TOKEN }}' \
+          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           --header 'content-type: application/json' \
           | jq 'sort_by(.login)|map(.login)|join(",")')
           TEAM_MEMBERS='['${TEAM_MEMBERS//','/'","'}']'
