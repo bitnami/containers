@@ -23,7 +23,7 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
       # Host for accessing ownCloud
       # note: this setting will only be applied on the first run
-      # ref: https://github.com/bitnami/bitnami-docker-owncloud#configuration
+      # ref: https://github.com/bitnami/containers/tree/main/bitnami/discourse#configuration
       - OWNCLOUD_HOST=localhost
     volumes:
       - 'owncloud_data:/bitnami/owncloud'
