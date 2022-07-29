@@ -11,7 +11,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-tomcat/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/tomcat/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -41,11 +41,11 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10`, `10-debian-11`, `10.0.23`, `10.0.23-debian-11-r0`, `latest` (10/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/10.0.23-debian-11-r0/10/debian-11/Dockerfile)
-* [`9.0`, `9.0-debian-11`, `9.0.65`, `9.0.65-debian-11-r4` (9.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/9.0.65-debian-11-r4/9.0/debian-11/Dockerfile)
-* [`8.5`, `8.5-debian-11`, `8.5.81`, `8.5.81-debian-11-r16` (8.5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-tomcat/blob/8.5.81-debian-11-r16/8.5/debian-11/Dockerfile)
+* [`10`, `10-debian-11`, `10.0.23`, `10.0.23-debian-11-r0`, `latest` (10/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/tomcat/10/debian-11/Dockerfile)
+* [`9.0`, `9.0-debian-11`, `9.0.65`, `9.0.65-debian-11-r4` (9.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/tomcat/9.0/debian-11/Dockerfile)
+* [`8.5`, `8.5-debian-11`, `8.5.81`, `8.5.81-debian-11-r17` (8.5/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/tomcat/8.5/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/tomcat GitHub repo](https://github.com/bitnami/bitnami-docker-tomcat).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Get this image
 
@@ -61,10 +61,12 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull bitnami/tomcat:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build -t bitnami/tomcat:latest 'https://github.com/bitnami/bitnami-docker-tomcat.git#master:10/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## Persisting your application
@@ -77,7 +79,7 @@ For persistence you should mount a directory at the `/bitnami` path. If the moun
 $ docker run -v /path/to/tomcat-persistence:/bitnami bitnami/tomcat:latest
 ```
 
-Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-tomcat/blob/master/docker-compose.yml) file present in this repository:
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/tomcat/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -162,7 +164,7 @@ Additionally you can specify a user name for the management user using the `TOMC
 
 #### Specifying Environment variables using Docker Compose
 
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-tomcat/blob/master/docker-compose.yml) file present in this repository:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/tomcat/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -302,17 +304,11 @@ $ docker-compose up tomcat
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-tomcat/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-tomcat/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-tomcat/issues/new). For us to provide better support, be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 

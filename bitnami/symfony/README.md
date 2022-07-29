@@ -14,11 +14,11 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ```console
 $ mkdir ~/myapp && cd ~/myapp
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-symfony/master/docker-compose.yml
+$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/symfony/docker-compose.yml
 $ docker-compose up
 ```
 
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [MariaDB container](https://github.com/bitnami/bitnami-docker-mariadb#readme) for a more secure deployment.
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [MariaDB container](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#readme) for a more secure deployment.
 
 ## Why use Bitnami Images?
 
@@ -34,12 +34,12 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`6.1`, `6.1-debian-11`, `6.1.2`, `6.1.2-debian-11-r12`, `latest` (6.1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/6.1.2-debian-11-r12/6.1/debian-11/Dockerfile)
-* [`6.0`, `6.0-debian-11`, `6.0.10`, `6.0.10-debian-11-r11` (6.0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/6.0.10-debian-11-r11/6.0/debian-11/Dockerfile)
-* [`5.4`, `5.4-debian-11`, `5.4.10`, `5.4.10-debian-11-r9` (5.4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/5.4.10-debian-11-r9/5.4/debian-11/Dockerfile)
-* [`4.4`, `4.4-debian-11`, `4.4.43`, `4.4.43-debian-11-r10` (4.4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-symfony/blob/4.4.43-debian-11-r10/4.4/debian-11/Dockerfile)
+* [`6.1`, `6.1-debian-11`, `6.1.2`, `6.1.2-debian-11-r12`, `latest` (6.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/symfony/6.1/debian-11/Dockerfile)
+* [`6.0`, `6.0-debian-11`, `6.0.10`, `6.0.10-debian-11-r12` (6.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/symfony/6.0/debian-11/Dockerfile)
+* [`5.4`, `5.4-debian-11`, `5.4.10`, `5.4.10-debian-11-r10` (5.4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/symfony/5.4/debian-11/Dockerfile)
+* [`4.4`, `4.4-debian-11`, `4.4.43`, `4.4.43-debian-11-r11` (4.4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/symfony/4.4/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/symfony GitHub repo](https://github.com/bitnami/bitnami-docker-symfony).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Introduction
 
@@ -60,10 +60,10 @@ $ mkdir ~/myapp
 $ cd ~/myapp
 ```
 
-Download the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/bitnami-docker-symfony/master/docker-compose.yml) file in the application directory:
+Download the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/containers/main/bitnami/symfony/docker-compose.yml) file in the application directory:
 
 ```console
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-symfony/master/docker-compose.yml
+$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/symfony/docker-compose.yml
 ```
 
 Set a few environment variables in the `docker-compose.yml`:
@@ -139,7 +139,7 @@ Following are a few examples:
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-symfony/issues/new). Be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/blob/main/bitnami/symfony/issues/new). Be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
