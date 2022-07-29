@@ -17,7 +17,7 @@ $ docker run -it --name argo-cd bitnami/argo-cd
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-argo-cd/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/argo-cd/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -35,9 +35,9 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-11`, `2.4.7`, `2.4.7-debian-11-r6`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-argo-cd/blob/2.4.7-debian-11-r6/2/debian-11/      Dockerfile)
+* [`2`, `2-debian-11`, `2.4.8`, `2.4.8-debian-11-r0`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/argo-cd/2/debian-11/      Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/argo-cd GitHub repo](https://github.com/bitnami/bitnami-docker-argo-cd).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Get this image
 
@@ -53,10 +53,12 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull bitnami/argo-cd:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build -t bitnami/argo-cd:latest 'https://github.com/bitnami/bitnami-docker-argo-cd.git#master:2/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## Maintenance
@@ -113,18 +115,11 @@ Check the [official Argo CD documentation](https://argo-cd.readthedocs.io/en/sta
 
 ## Contributing
 
-We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-argo-cd/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-argo-cd/pulls) with your contribution.
+We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-argo-cd/issues/new). For us to provide better support, be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive
-information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 
