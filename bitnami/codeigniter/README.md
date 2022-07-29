@@ -14,11 +14,11 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ```console
 $ mkdir ~/myapp && cd ~/myapp
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-codeigniter/master/docker-compose.yml
+$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/codeigniter/docker-compose.yml
 $ docker-compose up
 ```
 
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [MariaDB container](https://github.com/bitnami/bitnami-docker-mariadb#readme) for a more secure deployment.
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [MariaDB container](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#readme) for a more secure deployment.
 
 ## Why use Bitnami Images?
 
@@ -42,9 +42,9 @@ The Bitnami CodeIgniter Development Container has been carefully engineered to p
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-11`, `4.2.1`, `4.2.1-debian-11-r14`, `latest` (4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-codeigniter/blob/4.2.1-debian-11-r14/4/debian-11/Dockerfile)
+* [`4`, `4-debian-11`, `4.2.1`, `4.2.1-debian-11-r15`, `latest` (4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/codeigniter/4/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/codeigniter GitHub repo](https://github.com/bitnami/bitnami-docker-codeigniter).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Getting started
 
@@ -57,10 +57,10 @@ $ mkdir ~/myapp
 $ cd ~/myapp
 ```
 
-Download the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/bitnami-docker-codeigniter/master/docker-compose.yml) file in the application directory:
+Download the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/containers/main/bitnami/codeigniter/docker-compose.yml) file in the application directory:
 
 ```console
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-codeigniter/master/docker-compose.yml
+$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/codeigniter/docker-compose.yml
 ```
 
 Finally launch the CodeIgniter application development environment using:
@@ -101,7 +101,7 @@ Following are a few examples:
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-codeigniter/issues/new). Be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/blob/main/bitnami/codeigniter/issues/new). Be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
