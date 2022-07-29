@@ -13,7 +13,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-kibana/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/kibana/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -35,10 +35,10 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8`, `8-debian-11`, `8.3.2`, `8.3.2-debian-11-r8`, `latest` (8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/8.3.2-debian-11-r8/8/debian-11/Dockerfile)
-* [`7`, `7-debian-11`, `7.17.5`, `7.17.5-debian-11-r11` (7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kibana/blob/7.17.5-debian-11-r11/7/debian-11/Dockerfile)
+* [`8`, `8-debian-11`, `8.3.3`, `8.3.3-debian-11-r0`, `latest` (8/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kibana/8/debian-11/Dockerfile)
+* [`7`, `7-debian-11`, `7.17.5`, `7.17.5-debian-11-r11` (7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kibana/7/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/kibana GitHub repo](https://github.com/bitnami/bitnami-docker-kibana).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Get this image
 
@@ -54,20 +54,22 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull bitnami/kibana:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build -t bitnami/kibana:latest 'https://github.com/bitnami/bitnami-docker-kibana.git#master:8/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## How to use this image
 
 ### Run the application using Docker Compose
 
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-kibana/blob/master/docker-compose.yml) file. Run the application using it as shown below:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/kibana/docker-compose.yml) file. Run the application using it as shown below:
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-kibana/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/kibana/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -101,7 +103,7 @@ Then you can access your application at `http://your-ip:5601/`
 
 If you remove the container all your data and configurations will be lost, and the next time you run the image the application will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the Elasticsearch data](https://github.com/bitnami/bitnami-docker-elasticsearch#persisting-your-application).
+For persistence you should mount a volume at the `/bitnami` path. Additionally you should mount a volume for [persistence of the Elasticsearch data](https://github.com/bitnami/containers/blob/main/bitnami/elasticsearch#persisting-your-application).
 
 The above examples define docker volumes namely `elasticsearch_data` and `kibana_data`. The Kibana application state will persist as long as these volumes are not removed.
 
@@ -111,7 +113,7 @@ To avoid inadvertent removal of these volumes you can [mount host directories as
 $ docker run -v /path/to/kibana-persistence:/bitnami/kibana bitnami/kibana:latest
 ```
 
-or modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-kibana/blob/master/docker-compose.yml) file present in this repository:
+or modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/kibana/docker-compose.yml) file present in this repository:
 
 ```yaml
 kibana:
@@ -209,7 +211,7 @@ When you start the kibana image, you can adjust the configuration of the instanc
 
 #### Specifying Environment Variables using Docker Compose
 
-This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-kibana/blob/master/docker-compose.yml) file present in this repository:
+This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/kibana/docker-compose.yml) file present in this repository:
 
 ```yaml
 kibana:
@@ -243,7 +245,7 @@ Run the Kibana image, mounting a directory from your host.
 $ docker run --name kibana -v /path/to/kibana-persistence:/bitnami bitnami/kibana:latest
 ```
 
-or modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-kibana/blob/master/docker-compose.yml) file present in this repository:
+or modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/kibana/docker-compose.yml) file present in this repository:
 
 ```yaml
 kibana:
@@ -328,7 +330,7 @@ Next, take a snapshot of the persistent volume `/path/to/kibana-persistence` usi
 $ rsync -a /path/to/kibana-persistence /path/to/kibana-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
-Additionally, [snapshot the Elasticsearch data](https://github.com/bitnami/bitnami-docker-elasticsearch#step-2-stop-and-backup-the-currently-running-container)
+Additionally, [snapshot the Elasticsearch data](https://github.com/bitnami/containers/blob/main/bitnami/elasticsearch#step-2-stop-and-backup-the-currently-running-container)
 
 You can use these snapshots to restore the application state should the upgrade fail.
 
@@ -378,17 +380,11 @@ $ docker-compose up kibana
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-kibana/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-kibana/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-kibana/issues/new). For us to provide better support, be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 
