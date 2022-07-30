@@ -26,9 +26,9 @@ $ docker run --name kapacitor bitnami/kapacitor:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-11`, `1.6.4`, `1.6.4-debian-11-r19`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-kapacitor/blob/1.6.4-debian-11-r19/1/debian-11/Dockerfile)
+* [`1`, `1-debian-11`, `1.6.4`, `1.6.4-debian-11-r20`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kapacitor/1/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/kapacitor GitHub repo](https://github.com/bitnami/bitnami-docker-kapacitor).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 # Get this image
 
@@ -44,10 +44,12 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull bitnami/kapacitor:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build -t bitnami/kapacitor:latest 'https://github.com/bitnami/bitnami-docker-kapacitor.git#master:1/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 # Persisting your application
@@ -76,11 +78,11 @@ Check the [official Kapacitor documentation](https://docs.influxdata.com/kapacit
 
 # Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-kapacitor/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-kapacitor/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/blob/main/bitnami/kapacitor/issues), or submit a [pull request](https://github.com/bitnami/containers/blob/main/bitnami/kapacitor/pulls) with your contribution.
 
 # Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-kapacitor/issues/new). For us to provide better support, be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)
