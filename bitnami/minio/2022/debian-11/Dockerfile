@@ -9,7 +9,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq libc6 procps tar
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.3-152" --checksum 0694ae67645c416d9f6875e90c0f7cef379b4ac8030a6a5b8b5cc9ca77c6975d
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio-client" "2022.7.24-0" --checksum 0554914e95d4463456de96f37c918e2350a1c8f75c467cd1ece6f28115309a8d
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio-client" "2022.7.29-0" --checksum ab627d6ea5c8d49456d704fb8d6c6e306c97b3a49db76a6d4b3ea8c05f5a676e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio" "2022.7.26-0" --checksum 7ea30154122c6bb26a072a091ef4851b9fb74345c892efeb025e6627b845f327
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
 RUN apt-get update && apt-get upgrade -y && \
