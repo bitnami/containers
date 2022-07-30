@@ -17,7 +17,7 @@ $ docker run --name couchdb bitnami/couchdb:latest
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-couchdb/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/couchdb/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -39,9 +39,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-11`, `3.2.2`, `3.2.2-debian-11-r19`, `latest` (3/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-couchdb/blob/3.2.2-debian-11-r19/3/debian-11/Dockerfile)
+* [`3`, `3-debian-11`, `3.2.2`, `3.2.2-debian-11-r20`, `latest` (3/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/couchdb/3/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/couchdb GitHub repo](https://github.com/bitnami/bitnami-docker-couchdb).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Get this image
 
@@ -57,10 +57,12 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull bitnami/couchdb:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build -t bitnami/couchdb:latest 'https://github.com/bitnami/bitnami-docker-couchdb.git#master:3/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## Persisting your application
@@ -75,7 +77,7 @@ $ docker run \
     bitnami/couchdb:latest
 ```
 
-You can also do this with a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-couchdb/blob/master/docker-compose.yml) file present in this repository:
+You can also do this with a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/couchdb/docker-compose.yml) file present in this repository:
 
 ```yaml
 couchdb:
@@ -134,7 +136,7 @@ You can specify these environment variables in the `docker run` command:
 $ docker run --name couchdb -e COUCHDB_PORT_NUMBER=7777 bitnami/couchdb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-couchdb/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/couchdb/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -353,17 +355,11 @@ $ docker run --name couchdb bitnami/couchdb:latest
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-couchdb/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-couchdb/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-couchdb/issues/new). Be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ### Community supported solution
 
