@@ -40,9 +40,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-11`, `0.6.1`, `0.6.1-debian-11-r21`, `latest` (0/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-metrics-server/blob/0.6.1-debian-11-r21/0/debian-11/Dockerfile)
+* [`0`, `0-debian-11`, `0.6.1`, `0.6.1-debian-11-r22`, `latest` (0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/metrics-server/0/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/metrics-server GitHub repo](https://github.com/bitnami/bitnami-docker-metrics-server).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Configuration
 
@@ -52,12 +52,12 @@ For further documentation, please check [here](https://github.com/kubernetes-inc
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-metrics-server/issues), or submit a [pull
-request](https://github.com/bitnami/bitnami-docker-metrics-server/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/blob/main/bitnami/metrics-server/issues), or submit a [pull
+request](https://github.com/bitnami/containers/blob/main/bitnami/metrics-server/pulls) with your contribution.
 
 ## Issues
 
-<!-- If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-metrics-server/issues/new). For us to provide better support, be sure to include the following information in your issue: -->
+<!-- If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to include the following information in your issue: -->
 
 - Host OS and version
 - Docker version (`docker version`)
