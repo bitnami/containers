@@ -13,8 +13,8 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 This container is part of the [Harbor solution](https://github.com/bitnami/charts/tree/master/bitnami/harbor) that is primarily intended to be deployed in Kubernetes. You can deploy Harbor solution and then enable this specific container with the command below:
 
 ```console
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-harbor-portal/master/docker-compose.yml
-$ curl -L https://github.com/bitnami/bitnami-docker-harbor-portal/archive/master.tar.gz | tar xz --strip=1 --wildcards '*-master/config'
+$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/harbor-portal/docker-compose.yml
+$ curl -L https://github.com/bitnami/containers/blob/main/bitnami/harbor-portal/archive/master.tar.gz | tar xz --strip=1 --wildcards '*-master/config'
 $ docker-compose up
 ```
 
@@ -38,9 +38,9 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-11`, `2.5.3`, `2.5.3-debian-11-r4`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-harbor-adapter-trivy/blob/2.5.3-debian-11-r4/2/debian-11/Dockerfile)
+* [`2`, `2-debian-11`, `2.5.3`, `2.5.3-debian-11-r5`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/harbor-adapter-trivy/2/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/harbor-adapter-trivy GitHub repo](https://github.com/bitnami/bitnami-docker-harbor-adapter-trivy).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Get this image
 
@@ -56,10 +56,12 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull bitnami/harbor-adapter-trivy:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build -t bitnami/harbor-adapter-trivy:latest 'https://github.com/bitnami/bitnami-docker-harbor-adapter-trivy.git#master:2/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## Persisting your application
@@ -74,7 +76,7 @@ $ docker run \
     bitnami/harbor-adapter-trivy:latest
 ```
 
-You can also do this with a minor change to the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-harbor-adapter-trivy/blob/master/docker-compose.yml) file present in this repository:
+You can also do this with a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/harbor-adapter-trivy/docker-compose.yml) file present in this repository:
 
 ```yaml
 harbor-adapter-trivy:
@@ -162,17 +164,11 @@ $ docker run --name harbor-adapter-trivy bitnami/harbor-adapter-trivy:latest
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-harbor-adapter-trivy/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-harbor-adapter-trivy/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-harbor-adapter-trivy/issues/new). For us to provide better support, be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 
