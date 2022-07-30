@@ -29,10 +29,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "fc8c6ac004003336b18f369076c354332d6411827bf542d8fc4823f34e073556",
+        "digest": "90a2d048ed71588dfff55262b4522e3ee49418b7ea6e560054bf50988ae1265f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.13-156"
+        "version": "3.8.13-157"
     },
     "rails": {
         "arch": "amd64",
