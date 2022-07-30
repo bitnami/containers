@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`14`, `14-debian-11`, `14.4.0`, `14.4.0-debian-11-r18`, `latest` (14/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/14/debian-11/Dockerfile)
-* [`13`, `13-debian-11`, `13.7.0`, `13.7.0-debian-11-r27` (13/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/13/debian-11/Dockerfile)
+* [`13`, `13-debian-11`, `13.7.0`, `13.7.0-debian-11-r28` (13/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/13/debian-11/Dockerfile)
 * [`12`, `12-debian-11`, `12.11.0`, `12.11.0-debian-11-r27` (12/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/12/debian-11/Dockerfile)
 * [`11`, `11-debian-11`, `11.16.0`, `11.16.0-debian-11-r28` (11/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/11/debian-11/Dockerfile)
 * [`10`, `10-debian-11`, `10.21.0`, `10.21.0-debian-11-r27` (10/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/10/debian-11/Dockerfile)
