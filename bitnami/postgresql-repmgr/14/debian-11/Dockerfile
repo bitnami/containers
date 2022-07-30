@@ -8,7 +8,7 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libbsd0 libc6 libedit2 libffi7 libgcc-s1 libgmp10 libgnutls30 libhogweed6 libicu67 libidn2-0 libldap-2.4-2 liblzma5 libmd0 libnettle8 libp11-kit0 libpcre3 libreadline8 libsasl2-2 libsqlite3-0 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 locales procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-repmgr" "14.4.0-7" --checksum 1ded9433e7967df4cf470d78d321a8119352621cff9d49ad1105e5b277996a1c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-repmgr" "14.4.0-8" --checksum dec475d533fa24b347719bd9abb1692a6f11703eee91d4fc480d67af953445b6
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
