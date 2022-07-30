@@ -28,9 +28,9 @@ $ docker run --name git bitnami/git:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-11`, `2.37.1`, `2.37.1-debian-11-r5`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-git/blob/2.37.1-debian-11-r5/2/debian-11/Dockerfile)
+* [`2`, `2-debian-11`, `2.37.1`, `2.37.1-debian-11-r6`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/git/2/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/git GitHub repo](https://github.com/bitnami/bitnami-docker-git).
+Subscribe to project updates by watching the [bitnami/git GitHub repo](https://github.com/bitnami/containers/blob/main/bitnami/git).
 
 ## Get this image
 
@@ -46,10 +46,12 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull bitnami/git:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build -t bitnami/git:latest 'https://github.com/bitnami/bitnami-docker-git.git#master:2/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
@@ -69,7 +71,7 @@ $ docker run --name git bitnami/git:latest git --version
 - The `ENTRYPOINT` of the container has been modified to load a proper NSS environment that enables git ssh connections when running the container as non-root.
 - The `CMD` is also changed to enter the Bash shell.
 
-If you were using the container without replacing the entrypoint [`ENTRYPOINT [ "git" ]`](https://github.com/bitnami/bitnami-docker-git/blob/af46ea91cebed3de1a863cb9969210688131b4e9/2/debian-10/Dockerfile#L19), make sure you specify the `git` command now:
+If you were using the container without replacing the entrypoint [`ENTRYPOINT [ "git" ]`](https://github.com/bitnami/containers/blob/main/bitnami/git/blob/af46ea91cebed3de1a863cb9969210688131b4e9/2/debian-10/Dockerfile#L19), make sure you specify the `git` command now:
 
 ```diff
 -docker run bitnami/git:latest --version
@@ -78,17 +80,11 @@ If you were using the container without replacing the entrypoint [`ENTRYPOINT [ 
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-git/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-git/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-git/issues/new). For us to provide better support, be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 
