@@ -8,10 +8,10 @@
     },
     "mongodb-shell": {
         "arch": "amd64",
-        "digest": "5d43b3dd95e641c8341345607e446a0f9865e92d4337dc53840cfa4717062a4d",
+        "digest": "7cacb1d701aa3bb63c192073f7da1f9d1c8b3413c4f2676768722656f39abd8e",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.5.3-0"
+        "version": "1.5.4-0"
     },
     "node": {
         "arch": "amd64",
@@ -29,9 +29,9 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "90a2d048ed71588dfff55262b4522e3ee49418b7ea6e560054bf50988ae1265f",
+        "digest": "5e09dc3db2d81167c999fb6ef5391a2204b3a93a2e30581785728b7fdc427f8f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.13-157"
+        "version": "3.8.13-158"
     }
 }
