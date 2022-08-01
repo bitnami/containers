@@ -14,11 +14,11 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ```console
 $ mkdir ~/myapp && cd ~/myapp
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-express/master/docker-compose.yml
+$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/express/docker-compose.yml
 $ docker-compose up
 ```
 
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [MongoDB&reg; container](https://github.com/bitnami/bitnami-docker-mongodb#readme) for a more secure deployment.
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [MongoDB&reg; container](https://github.com/bitnami/containers/blob/main/bitnami/mongodb#readme) for a more secure deployment.
 
 ## Why use Bitnami Images?
 
@@ -34,9 +34,9 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-11`, `4.18.1`, `4.18.1-debian-11-r23`, `latest` (4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-express/blob/4.18.1-debian-11-r23/4/debian-11/Dockerfile)
+* [`4`, `4-debian-11`, `4.18.1`, `4.18.1-debian-11-r24`, `latest` (4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/express/4/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/codiad GitHub repo](https://github.com/bitnami/bitnami-docker-codiad).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Introduction
 
@@ -57,10 +57,10 @@ mkdir ~/myapp
 cd ~/myapp
 ```
 
-Download the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/bitnami-docker-express/master/docker-compose.yml) file in the application directory:
+Download the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/containers/main/bitnami/express/docker-compose.yml) file in the application directory:
 
 ```console
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-express/master/docker-compose.yml
+$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/express/docker-compose.yml
 ```
 
 Finally launch the Express application development environment using:
@@ -77,7 +77,7 @@ Among other things, the above command creates a container service, named `myapp`
 
 After the Node application server has been launched in the `myapp` service, visit `http://localhost:3000` in your favorite web browser and you'll be greeted by the default Express welcome page.
 
-In addition to the Express Development Container, the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/bitnami-docker-express/master/docker-compose.yml) file also configures a MongoDB&reg; service to serve as the NoSQL database backend of your Express application.
+In addition to the Express Development Container, the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/containers/main/bitnami/express/docker-compose.yml) file also configures a MongoDB&reg; service to serve as the NoSQL database backend of your Express application.
 
 ## Executing commands
 
@@ -142,7 +142,7 @@ The Express Development Container generates a Dockerfile in your working directo
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-express/issues/new). Be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/blob/main/bitnami/express/issues/new). Be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)

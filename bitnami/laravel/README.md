@@ -14,11 +14,11 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ```console
 $ mkdir ~/myapp && cd ~/myapp
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-laravel/master/docker-compose.yml
+$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/laravel/docker-compose.yml
 $ docker-compose up
 ```
 
-**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [MariaDB container](https://github.com/bitnami/bitnami-docker-mariadb#readme) for a more secure deployment.
+**Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [MariaDB container](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#readme) for a more secure deployment.
 
 ## Why use Bitnami Images?
 
@@ -34,9 +34,9 @@ $ docker-compose up
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`9`, `9-debian-11`, `9.3.1`, `9.3.1-debian-11-r2`, `latest` (9/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-laravel/blob/9.3.1-debian-11-r2/9/debian-11/Dockerfile)
+* [`9`, `9-debian-11`, `9.3.1`, `9.3.1-debian-11-r3`, `latest` (9/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/laravel/9/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/laravel GitHub repo](https://github.com/bitnami/bitnami-docker-laravel).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Introduction
 
@@ -57,10 +57,10 @@ mkdir ~/myapp
 cd ~/myapp
 ```
 
-Download the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/bitnami-docker-laravel/master/docker-compose.yml) file in the application directory:
+Download the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/containers/main/bitnami/laravel/docker-compose.yml) file in the application directory:
 
 ```console
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-laravel/master/docker-compose.yml
+$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/laravel/docker-compose.yml
 ```
 
 Finally launch the Laravel application development environment using:
@@ -81,7 +81,7 @@ After the artisan application server has been launched in the `myapp` service, v
 >
 > If no application available at `http://localhost:8000` and you're running Docker on Windows, you might need to uncomment `privileged` setting for `myapp` container. Later, re-launch the Laravel application development environment as stated before.
 
-In addition to the Laravel Development Container, the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/bitnami-docker-laravel/master/docker-compose.yml) file also configures a MariaDB service to serve as the database backend of your Laravel application.
+In addition to the Laravel Development Container, the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/containers/main/bitnami/laravel/docker-compose.yml) file also configures a MariaDB service to serve as the database backend of your Laravel application.
 
 ## Executing commands
 
@@ -127,7 +127,7 @@ Following are a few examples of launching some commonly used Laravel development
 
 # Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-laravel/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-laravel/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/blob/main/bitnami/laravel/issues), or submit a [pull request](https://github.com/bitnami/containers/blob/main/bitnami/laravel/pulls) with your contribution.
 
 ## Special Thanks
 
@@ -137,7 +137,7 @@ We want to thank the following individuals for reporting vulnerabilities respons
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-laravel/issues/new). Be sure to include the following information in your issue:
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/blob/main/bitnami/laravel/issues/new). Be sure to include the following information in your issue:
 
 - Host OS and version
 - Docker version (`docker version`)

@@ -17,7 +17,7 @@ $ docker run --name mariadb -e ALLOW_EMPTY_PASSWORD=yes bitnami/mariadb:latest
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-mariadb/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/mariadb/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -47,15 +47,15 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10.8`, `10.8-debian-11`, `10.8.3`, `10.8.3-debian-11-r11`, `latest` (10.8/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.8.3-debian-11-r11/10.8/debian-11/Dockerfile)
-* [`10.8`, `10.8-debian-10`, `10.8.3`, `10.8.3-debian-10-r-1`, `latest` (10.8/debian-10/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.8.3-debian-10-r-1/10.8/debian-10/Dockerfile)
-* [`10.7`, `10.7-debian-11`, `10.7.4`, `10.7.4-debian-11-r21` (10.7/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.7.4-debian-11-r21/10.7/debian-11/Dockerfile)
-* [`10.6`, `10.6-debian-11`, `10.6.8`, `10.6.8-debian-11-r19` (10.6/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.6.8-debian-11-r19/10.6/debian-11/Dockerfile)
-* [`10.5`, `10.5-debian-11`, `10.5.16`, `10.5.16-debian-11-r22` (10.5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.5.16-debian-11-r22/10.5/debian-11/Dockerfile)
-* [`10.4`, `10.4-debian-11`, `10.4.25`, `10.4.25-debian-11-r21` (10.4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.4.25-debian-11-r21/10.4/debian-11/Dockerfile)
-* [`10.3`, `10.3-debian-11`, `10.3.35`, `10.3.35-debian-11-r21` (10.3/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-mariadb/blob/10.3.35-debian-11-r21/10.3/debian-11/Dockerfile)
+* [`10.8`, `10.8-debian-11`, `10.8.3`, `10.8.3-debian-11-r12`, `latest` (10.8/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb/10.8/debian-11/Dockerfile)
+* [`10.8`, `10.8-debian-10`, `10.8.3`, `10.8.3-debian-10-r-1`, `latest` (10.8/debian-10/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb/10.8/debian-10/Dockerfile)
+* [`10.7`, `10.7-debian-11`, `10.7.4`, `10.7.4-debian-11-r22` (10.7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb/10.7/debian-11/Dockerfile)
+* [`10.6`, `10.6-debian-11`, `10.6.8`, `10.6.8-debian-11-r20` (10.6/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb/10.6/debian-11/Dockerfile)
+* [`10.5`, `10.5-debian-11`, `10.5.16`, `10.5.16-debian-11-r23` (10.5/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb/10.5/debian-11/Dockerfile)
+* [`10.4`, `10.4-debian-11`, `10.4.25`, `10.4.25-debian-11-r22` (10.4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb/10.4/debian-11/Dockerfile)
+* [`10.3`, `10.3-debian-11`, `10.3.35`, `10.3.35-debian-11-r22` (10.3/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb/10.3/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/mariadb GitHub repo](https://github.com/bitnami/bitnami-docker-mariadb).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Get this image
 
@@ -73,12 +73,12 @@ in the Docker Hub Registry.
 $ docker pull bitnami/mariadb:[TAG]
 ```
 
-If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/bitnami-docker-mariadb.git
-$ cd bitnami-docker-mariadb/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/mariadb:latest .
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## Persisting your database
@@ -94,7 +94,7 @@ $ docker run \
     bitnami/mariadb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mariadb/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -201,7 +201,7 @@ Passing extra command-line flags to the mysqld service command is possible throu
 $ docker run --name mariadb -e ALLOW_EMPTY_PASSWORD=yes -e MARIADB_EXTRA_FLAGS='--max-connect-errors=1000 --max_connections=155' bitnami/mariadb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mariadb/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -234,7 +234,7 @@ Passing the `MARIADB_ROOT_PASSWORD` environment variable when running the image 
 $ docker run --name mariadb -e MARIADB_ROOT_PASSWORD=password123 bitnami/mariadb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mariadb/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -255,7 +255,7 @@ By default the MariaDB image expects all the available passwords to be set. In o
 $ docker run --name mariadb -e ALLOW_EMPTY_PASSWORD=yes bitnami/mariadb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mariadb/docker-compose.yml) file present in this repository:
 
 
 ```yaml
@@ -278,7 +278,7 @@ $ docker run --name mariadb \
     bitnami/mariadb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mariadb/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -303,7 +303,7 @@ $ docker run --name mariadb \
   bitnami/mariadb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mariadb/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -332,7 +332,7 @@ $ docker run --name mariadb \
     bitnami/mariadb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mariadb/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -371,7 +371,7 @@ A **zero downtime** MariaDB master-slave [replication](https://dev.mysql.com/doc
 
 In a replication cluster you can have one master and zero or more slaves. When replication is enabled the master node is in read-write mode, while the slaves are in read-only mode. For best performance its advisable to limit the reads to the slaves.
 
-> **Note**: you can use the [mariadb-galera image](https://github.com/bitnami/bitnami-docker-mariadb-galera) to set up a master-master replication cluster
+> **Note**: you can use the [mariadb-galera image](https://github.com/bitnami/containers/blob/main/bitnami/mariadb-galera) to set up a master-master replication cluster
 #### Step 1: Create the replication master
 
 The first step is to start the MariaDB master.
@@ -477,7 +477,7 @@ $ docker run --name mariadb \
     bitnami/mariadb:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-mariadb/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mariadb/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -713,17 +713,11 @@ $ docker-compose up -d
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-mariadb/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-mariadb/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-mariadb/issues/new). For us to provide better support, be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 

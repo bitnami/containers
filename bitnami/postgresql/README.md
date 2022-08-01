@@ -17,7 +17,7 @@ $ docker run --name postgresql bitnami/postgresql:latest
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/bitnami-docker-postgresql/master/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/postgresql/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -47,13 +47,13 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`14`, `14-debian-11`, `14.4.0`, `14.4.0-debian-11-r16`, `latest` (14/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/14.4.0-debian-11-r16/14/debian-11/Dockerfile)
-* [`13`, `13-debian-11`, `13.7.0`, `13.7.0-debian-11-r26` (13/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/13.7.0-debian-11-r26/13/debian-11/Dockerfile)
-* [`12`, `12-debian-11`, `12.11.0`, `12.11.0-debian-11-r25` (12/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/12.11.0-debian-11-r25/12/debian-11/Dockerfile)
-* [`11`, `11-debian-11`, `11.16.0`, `11.16.0-debian-11-r26` (11/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/11.16.0-debian-11-r26/11/debian-11/Dockerfile)
-* [`10`, `10-debian-11`, `10.21.0`, `10.21.0-debian-11-r25` (10/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-postgresql/blob/10.21.0-debian-11-r25/10/debian-11/Dockerfile)
+* [`14`, `14-debian-11`, `14.4.0`, `14.4.0-debian-11-r19`, `latest` (14/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/14/debian-11/Dockerfile)
+* [`13`, `13-debian-11`, `13.7.0`, `13.7.0-debian-11-r29` (13/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/13/debian-11/Dockerfile)
+* [`12`, `12-debian-11`, `12.11.0`, `12.11.0-debian-11-r28` (12/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/12/debian-11/Dockerfile)
+* [`11`, `11-debian-11`, `11.16.0`, `11.16.0-debian-11-r29` (11/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/11/debian-11/Dockerfile)
+* [`10`, `10-debian-11`, `10.21.0`, `10.21.0-debian-11-r28` (10/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/10/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/postgresql GitHub repo](https://github.com/bitnami/bitnami-docker-postgresql).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Get this image
 
@@ -69,10 +69,12 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull bitnami/postgresql:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build -t bitnami/postgresql:latest 'https://github.com/bitnami/bitnami-docker-postgresql.git#master:14/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## Persisting your database
@@ -87,7 +89,7 @@ $ docker run \
     bitnami/postgresql:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -197,7 +199,7 @@ In the above commands you may have noticed the use of the `POSTGRESQL_PASSWORD` 
 $ docker run --name postgresql -e POSTGRESQL_PASSWORD=password123 bitnami/postgresql:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -221,7 +223,7 @@ By passing the `POSTGRESQL_DATABASE` environment variable when running the image
 $ docker run --name postgresql -e POSTGRESQL_DATABASE=my_database bitnami/postgresql:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -240,7 +242,7 @@ You can also create a restricted database user that only has permissions for the
 $ docker run --name postgresql -e POSTGRESQL_USERNAME=my_user -e POSTGRESQL_PASSWORD=password123 -e POSTGRESQL_DATABASE=my_database bitnami/postgresql:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -541,7 +543,7 @@ When enabling TLS, PostgreSQL will support both standard and encrypted traffic b
       ...
     ```
 
-Alternatively, you may also provide this configuration in your [custom](https://github.com/bitnami/bitnami-docker-postgresql#configuration-file) configuration file.
+Alternatively, you may also provide this configuration in your [custom](https://github.com/bitnami/containers/tree/main/bitnami/postgresql#configuration-file) configuration file.
 
 ### Configuration file
 
@@ -655,7 +657,7 @@ $ docker run --name postgresql \
   bitnami/postgresql:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-postgresql/blob/master/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -849,17 +851,11 @@ $ docker-compose up postgresql
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-postgresql/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-postgresql/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-postgresql/issues/new). For us to provide better support, be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 

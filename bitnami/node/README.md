@@ -41,10 +41,10 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`18`, `18-debian-11`, `18.7.0`, `18.7.0-debian-11-r0`, `latest` (18/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/node/18/debian-11/Dockerfile)
-* [`16`, `16-debian-11`, `16.16.0`, `16.16.0-debian-11-r9` (16/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/node/16/debian-11/Dockerfile)
-* [`14`, `14-debian-11`, `14.20.0`, `14.20.0-debian-11-r6` (14/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/node/14/debian-11/Dockerfile)
-* [`12`, `12-debian-11`, `12.22.12`, `12.22.12-debian-11-r20` (12/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/node/12/debian-11/Dockerfile)
+* [`18`, `18-debian-11`, `18.7.0`, `18.7.0-debian-11-r1`, `latest` (18/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/node/18/debian-11/Dockerfile)
+* [`16`, `16-debian-11`, `16.16.0`, `16.16.0-debian-11-r10` (16/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/node/16/debian-11/Dockerfile)
+* [`14`, `14-debian-11`, `14.20.0`, `14.20.0-debian-11-r7` (14/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/node/14/debian-11/Dockerfile)
+* [`12`, `12-debian-11`, `12.22.12`, `12.22.12-debian-11-r21` (12/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/node/12/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 

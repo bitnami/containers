@@ -17,7 +17,7 @@ $ docker run -it --name Etcd bitnami/etcd
 ### Docker Compose
 
 ```console
-$ curl -LO https://raw.githubusercontent.com/bitnami/bitnami-docker-etcd/master/docker-compose.yml
+$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/etcd/docker-compose.yml
 $ docker-compose up
 ```
 
@@ -45,11 +45,11 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.5`, `3.5-debian-11`, `3.5.4`, `3.5.4-debian-11-r19`, `latest` (3.5/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.5.4-debian-11-r19/3.5/debian-11/Dockerfile)
-* [`3.4`, `3.4-debian-11`, `3.4.19`, `3.4.19-debian-11-r6` (3.4/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.4.19-debian-11-r6/3.4/debian-11/Dockerfile)
-* [`3.3`, `3.3-debian-11`, `3.3.27`, `3.3.27-debian-11-r20` (3.3/debian-11/Dockerfile)](https://github.com/bitnami/bitnami-docker-etcd/blob/3.3.27-debian-11-r20/3.3/debian-11/Dockerfile)
+* [`3.5`, `3.5-debian-11`, `3.5.4`, `3.5.4-debian-11-r20`, `latest` (3.5/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/etcd/3.5/debian-11/Dockerfile)
+* [`3.4`, `3.4-debian-11`, `3.4.19`, `3.4.19-debian-11-r7` (3.4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/etcd/3.4/debian-11/Dockerfile)
+* [`3.3`, `3.3-debian-11`, `3.3.27`, `3.3.27-debian-11-r21` (3.3/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/etcd/3.3/debian-11/Dockerfile)
 
-Subscribe to project updates by watching the [bitnami/etcd GitHub repo](https://github.com/bitnami/bitnami-docker-etcd).
+Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Prerequisites
 
@@ -71,10 +71,12 @@ in the Docker Hub Registry.
 $ docker pull bitnami/etcd:[TAG]
 ```
 
-If you wish, you can also build the image yourself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build -t bitnami/etcd:latest 'https://github.com/bitnami/bitnami-docker-etcd.git#master:3.5/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## Connecting to other containers
@@ -167,7 +169,7 @@ $ docker run --name Etcd -v /path/to/Etcd.conf.yml:/opt/bitnami/Etcd/conf/etcd.c
 
 After that, your configuration will be taken into account in the server's behaviour.
 
-You can also do this by changing the [`docker-compose.yml`](https://github.com/bitnami/bitnami-docker-etcd/blob/master/docker-compose.yml) file present in this repository:
+You can also do this by changing the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/etcd/docker-compose.yml) file present in this repository:
 
 ```yaml
 Etcd:
@@ -207,17 +209,11 @@ For further documentation, please check [Etcd documentation](https://coreos.com/
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/bitnami-docker-etcd/issues), or submit a [pull request](https://github.com/bitnami/bitnami-docker-etcd/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/bitnami-docker-etcd/issues/new). For us to provide better support, be sure to include the following information in your issue:
-
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 

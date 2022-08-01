@@ -47,9 +47,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.10`, `3.10-debian-11`, `3.10.6`, `3.10.6-debian-11-r7`, `latest` (3.10/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/rabbitmq/3.10/debian-11/Dockerfile)
-* [`3.9`, `3.9-debian-11`, `3.9.21`, `3.9.21-debian-11-r6` (3.9/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/rabbitmq/3.9/debian-11/Dockerfile)
-* [`3.8`, `3.8-debian-11`, `3.8.35`, `3.8.35-debian-11-r5` (3.8/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/rabbitmq/3.8/debian-11/Dockerfile)
+* [`3.10`, `3.10-debian-11`, `3.10.6`, `3.10.6-debian-11-r8`, `latest` (3.10/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/rabbitmq/3.10/debian-11/Dockerfile)
+* [`3.9`, `3.9-debian-11`, `3.9.21`, `3.9.21-debian-11-r7` (3.9/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/rabbitmq/3.9/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
@@ -575,10 +574,6 @@ The following parameters have been renamed:
 | `RABBITMQ_NODENAME`        | `RABBITMQ_NODE_NAME`         |
 | `RABBITMQ_CLUSTERNODENAME` | `RABBITMQ_CLUSTER_NODE_NAME` |
 | `RABBITMQ_MANAGERPORT`     | `RABBITMQ_MANAGER_PORT`      |
-
-## Branch Deprecation Notice
-
-RabbitMQ's branch 3.8 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 07-31-2022
 
 ## Contributing
 
