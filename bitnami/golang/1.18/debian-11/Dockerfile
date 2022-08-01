@@ -7,15 +7,15 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages build-essential ca-certificates curl git gzip libc6 pkg-config procps tar unzip wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/golang-1.18.4-1-linux-amd64-debian-11.tar.gz && \
-    echo "9f9d5f01cb2ed3c91d1437e84f69c8b8f0534cfdc76eb74e6cb9843b3191be27  /tmp/bitnami/pkg/cache/golang-1.18.4-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/golang-1.18.4-1-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/golang-1.18.4-1-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/golang-1.18.5-0-linux-amd64-debian-11.tar.gz && \
+    echo "8949e868a163432c8c373aef98b00950ef67d8bbe112f0ef989287f9ce7ae907  /tmp/bitnami/pkg/cache/golang-1.18.5-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/golang-1.18.5-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/golang-1.18.5-0-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN mkdir -p "/go/src" "/go/bin" && chmod -R 777 "/go"
 
-ENV APP_VERSION="1.18.4" \
+ENV APP_VERSION="1.18.5" \
     BITNAMI_APP_NAME="golang" \
     GOCACHE="/go/.cache" \
     GOPATH="/go" \
