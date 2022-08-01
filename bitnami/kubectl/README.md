@@ -30,7 +30,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`1.24`, `1.24-debian-11`, `1.24.3`, `1.24.3-debian-11-r6`, `latest` (1.24/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kubectl/1.24/debian-11/Dockerfile)
 * [`1.23`, `1.23-debian-11`, `1.23.9`, `1.23.9-debian-11-r14` (1.23/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kubectl/1.23/debian-11/Dockerfile)
-* [`1.22`, `1.22-debian-11`, `1.22.12`, `1.22.12-debian-11-r13` (1.22/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kubectl/1.22/debian-11/Dockerfile)
+* [`1.22`, `1.22-debian-11`, `1.22.12`, `1.22.12-debian-11-r14` (1.22/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kubectl/1.22/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
