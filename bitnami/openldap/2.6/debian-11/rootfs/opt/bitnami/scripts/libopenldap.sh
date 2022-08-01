@@ -514,16 +514,23 @@ ldap_initialize() {
 #   None
 #########################
 ldap_custom_init_scripts() {
-    if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\)") ]] && [[ ! -f "$LDAP_DATA_DIR/.user_scripts_initialized" ]] ; then
+    if [[ -n $(find /docker-entrypoint-initdb.d/ -type f -regex ".*\.\(sh\)") ]] ; then
         info "Loading user's custom files from /docker-entrypoint-initdb.d";
+        touch "$LDAP_DATA_DIR"/.user_scripts_initialized
         for f in /docker-entrypoint-initdb.d/*; do
-            debug "Executing $f"
             case "$f" in
                 *.sh)
                     if [[ -x "$f" ]]; then
-                        if ! "$f"; then
-                            error "Failed executing $f"
-                            return 1
+                        if grep -R "$f" "${LDAP_DATA_DIR}/.user_scripts_initialized"; then
+                            debug "Skipping $f, was executed."
+                        else
+                            debug "Executing $f ..."
+                            if ! "$f"; then
+                                error "Failed executing $f"
+                                return 1
+                            else
+                                echo "$f\n" >> "${LDAP_DATA_DIR}/.user_scripts_initialized"
+                            fi
                         fi
                     else
                         warn "Sourcing $f as it is not executable by the current user, any error may cause initialization to fail"
@@ -535,7 +542,6 @@ ldap_custom_init_scripts() {
                     ;;
             esac
         done
-        touch "$LDAP_DATA_DIR"/.user_scripts_initialized
     fi
 }
 
