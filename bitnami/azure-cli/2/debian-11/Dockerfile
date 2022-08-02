@@ -12,16 +12,16 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "f46f2991faefbc85ea01b5ee9b888b5c34f4492dc0fe8019a2ca5092e1f8a7de  /tmp/bitnami/pkg/cache/python-3.7.13-158-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/python-3.7.13-158-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/python-3.7.13-158-linux-amd64-debian-11.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/azure-cli-2.38.0-0-linux-amd64-debian-11.tar.gz && \
-    echo "092d94a02399dcec71389d41473ac4654acbb7a411e4f8c96a57a6eeeba0772c  /tmp/bitnami/pkg/cache/azure-cli-2.38.0-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/azure-cli-2.38.0-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/azure-cli-2.38.0-0-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/azure-cli-2.39.0-0-linux-amd64-debian-11.tar.gz && \
+    echo "a2c8b2365eb5a67721831b13dc45d2e477e63ce62906df91a52af7dd21a9cda2  /tmp/bitnami/pkg/cache/azure-cli-2.39.0-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/azure-cli-2.39.0-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/azure-cli-2.39.0-0-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /.azure /.azcopy && chmod g+rwX /.azure /.azcopy /bin
 
-ENV APP_VERSION="2.38.0" \
+ENV APP_VERSION="2.39.0" \
     BITNAMI_APP_NAME="azure-cli" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/azure-cli/bin:/opt/bitnami/azure-cli/venv/bin:$PATH"
 
