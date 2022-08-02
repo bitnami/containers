@@ -56,7 +56,7 @@ As part of the release process, the Bitnami container images are analyzed for vu
 * [Trivy](https://github.com/aquasecurity/trivy)
 * [Grype](https://github.com/anchore/grype)
 
-This scanning process is triggerer via a GH action for every PR, regardless of its nature or origin.
+This scanning process is triggered via a GH action for every PR, regardless of its nature or origin.
 
 ## Contributing
 
