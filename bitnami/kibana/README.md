@@ -36,7 +36,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8`, `8-debian-11`, `8.3.3`, `8.3.3-debian-11-r1`, `latest` (8/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kibana/8/debian-11/Dockerfile)
-* [`7`, `7-debian-11`, `7.17.5`, `7.17.5-debian-11-r12` (7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kibana/7/debian-11/Dockerfile)
+* [`7`, `7-debian-11`, `7.17.5`, `7.17.5-debian-11-r13` (7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kibana/7/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
