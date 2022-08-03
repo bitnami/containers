@@ -15,10 +15,10 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "f4495e4344887007c7596c92ddca98271a36d6776940db1e55bd43cf159afb01",
+        "digest": "7f3636987ca9be9c80a8f97bc1240417d5d970dba0d49495d8fcf71f2e6b3026",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.21-1"
+        "version": "8.0.22-0"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -29,10 +29,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "bcb4d971d502982bfeb7c0ce195c6aa2483eeeca054d335df7c438651460546d",
+        "digest": "9354070c3c63952b5b2d9ae2dc548a3ca5438f1ddf1126b5c1788a0407ba0527",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.21-4"
+        "version": "8.0.22-0"
     },
     "render-template": {
         "arch": "amd64",
@@ -43,9 +43,9 @@
     },
     "suitecrm": {
         "arch": "amd64",
-        "digest": "d211930ad06231f589f4d696ee1e5244f9ed00686a112f972f08a78c20f4ef4f",
+        "digest": "345b465593694960102d8ebab22bfbebe35efb6b9bad969502e1da35485ee52a",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.2-151"
+        "version": "8.1.2-152"
     }
 }
