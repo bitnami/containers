@@ -228,7 +228,7 @@ Available environment variables:
 
 ##### Use an existing database
 
-- `MOODLE_DATABASE_TYPE`: Database type. Valid values: *mariadb*, *mysqli*, *pgsql*. Default: **mariadb**
+- `MOODLE_DATABASE_TYPE`: Database type. Valid values: *mariadb*, *mysqli*, *pgsql*, *auroramysql*. Default: **mariadb**
 - `MOODLE_DATABASE_HOST`: Hostname for database server. Default: **mariadb**
 - `MOODLE_DATABASE_PORT_NUMBER`: Port used by database server. Default: **3306**
 - `MOODLE_DATABASE_NAME`: Database name that Moodle will use to connect with the database. Default: **bitnami_moodle**
