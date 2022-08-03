@@ -1,10 +1,10 @@
 {
     "ghost": {
         "arch": "amd64",
-        "digest": "10f0822fcae75e25d6ab5cba98f813506d86fdef89150220720065cd94c81236",
+        "digest": "d8fcd04f3031e6934f3bec1b339baf7a2484cbb757eb6a35dac54d8c28de76ed",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.5.0-0"
+        "version": "5.7.0-0"
     },
     "gosu": {
         "arch": "amd64",
@@ -29,9 +29,9 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "90a2d048ed71588dfff55262b4522e3ee49418b7ea6e560054bf50988ae1265f",
+        "digest": "794ffe6e51952c04b68e764dac569319451f4faca8d3aa77f1c2b12c69b2cc02",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.13-157"
+        "version": "3.8.13-160"
     }
 }
