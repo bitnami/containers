@@ -1,5 +1,9 @@
 # ReportServer Enterprise packaged by Bitnami
 
+## Container Deprecation Notice
+
+ReportServer Enterprise is now internally tagged as deprecated due to termination of the agreement. This image will no longer be released in our catalog after this notice is published, but already released container images will still persist in the registries.
+
 ## What is ReportServer Enterprise?
 
 > ReportServer is the enterprise business intelligence platform. It integrates multiple reporting engines, dashboards and ad-hoc analytics, with scripting capabilities to for deep customization..
