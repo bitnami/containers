@@ -10,7 +10,7 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libbz2-1.0 libc6 libcom-err2 libcrypt1 libffi7 libgcc-s1 libgssapi-krb5-2 libjemalloc2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncursesw6 libnsl2 libreadline8 libsqlite3-0 libssl1.1 libtinfo6 libtirpc3 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.9.13-158" --checksum f073ed86586a7442f2d382bdb78f0807056bc932b2a3051db496c16833b16c96
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.9.13-160" --checksum 54fa0fc02b4b9dba24aa055828076f1d109b64820978066d25c998183343ade0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.342-0" --checksum 8f73ab6158f088f418caafcb5fd9981cf53076f38d8f9aba49acbcbadd6ac8da
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.27.2-0" --checksum bbe97d7488f4ff9421342d5cc45881b55944c802fced3a992a988365ce1c30fe

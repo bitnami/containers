@@ -8,11 +8,11 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq libaudit1 libbz2-1.0 libc6 libcap-ng0 libcom-err2 libcrypt1 libffi7 libgcc-s1 libgssapi-krb5-2 libicu67 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncurses6 libncursesw6 libnsl2 libpam0g libreadline8 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 libtirpc3 libxml2 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-160" --checksum 794ffe6e51952c04b68e764dac569319451f4faca8d3aa77f1c2b12c69b2cc02
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-161" --checksum b70dd71a46e9e0cbedb6b55cdab60c315046102387da00b08b787e5c74354cbf
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.20.0-1" --checksum 1308eadfadd439cc82f4ca51185828f49cac7b38fcafd783e24f52c7c2768b4b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-151" --checksum c85e4be9bcee70c86c7bc7e13742e2d97810ad8f7d6154f8b66811b6cc4d0948
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ghost" "5.7.0-0" --checksum d8fcd04f3031e6934f3bec1b339baf7a2484cbb757eb6a35dac54d8c28de76ed
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ghost" "5.7.1-0" --checksum 1fce17fbcb5d52947d0ac827360331dcc523e643603fb795f66b91cc977a885c
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -20,7 +20,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/ghost/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
-ENV APP_VERSION="5.7.0" \
+ENV APP_VERSION="5.7.1" \
     BITNAMI_APP_NAME="ghost" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/ghost/bin:$PATH"
 
