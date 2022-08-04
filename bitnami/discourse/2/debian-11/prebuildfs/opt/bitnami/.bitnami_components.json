@@ -8,10 +8,10 @@
     },
     "discourse": {
         "arch": "amd64",
-        "digest": "958a93216992df7636315c382da36cd6296b37329b4b06a265b732b206f8b387",
+        "digest": "bd120eab1a7403e691f608f57b574a9782391fe1c4a46ce40752cfa560f922c2",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.8.7-0"
+        "version": "2.8.7-1"
     },
     "git": {
         "arch": "amd64",
@@ -43,10 +43,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "90a2d048ed71588dfff55262b4522e3ee49418b7ea6e560054bf50988ae1265f",
+        "digest": "da00c1d0e1afe717bba77c5e432a0ee3298be1923ea0e26e107417c9ddd312f3",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.13-157"
+        "version": "3.8.13-159"
     },
     "ruby": {
         "arch": "amd64",

@@ -26,7 +26,7 @@ $ docker run --name kapacitor bitnami/kapacitor:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-11`, `1.6.4`, `1.6.4-debian-11-r20`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kapacitor/1/debian-11/Dockerfile)
+* [`1`, `1-debian-11`, `1.6.4`, `1.6.4-debian-11-r21`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kapacitor/1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 

@@ -13,7 +13,7 @@ RUN install_packages acl ca-certificates curl fontconfig fonts-dejavu-extra gzip
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.15-1-1" --checksum 6d176a8b3c894c608106fee2cf10aaf3771015defb0b7e08fe60ce6c9c1cd342
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "9.0.65-0" --checksum cc5ec8f674abfb18c745f3656356aa83344bc0d9ff24024bffd3f85ef485514c
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-151" --checksum c85e4be9bcee70c86c7bc7e13742e2d97810ad8f7d6154f8b66811b6cc4d0948
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "reportserverenterprise" "4.2.0-6066-1" --checksum 109db27c64793361b58f07b7e39b3444e40ace91f385abdaa6ddced324895326
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "reportserverenterprise" "4.2.0-6068-0" --checksum c2e95eaa8acb9d3e59cfe042cccb6da8845f4dce20bd7f1a6883d576a7e37dc5
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-151" --checksum 9690a34674f152e55c71a55275265314ed1bb29e0be8a75d7880488509f70deb
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
 RUN apt-get update && apt-get upgrade -y && \
@@ -25,7 +25,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/reportserver/postunpack.sh
 RUN /opt/bitnami/scripts/tomcat/postunpack.sh
-ENV APP_VERSION="4.2.0-6066" \
+ENV APP_VERSION="4.2.0-6068" \
     BITNAMI_APP_NAME="reportserverenterprise" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH" \

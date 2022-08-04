@@ -49,6 +49,15 @@ $ docker-compose up -d
 
 > Remember to replace the `APP` placeholder in the example command above with the correct value.
 
+## Vulnerability scan in Bitnami container images
+
+As part of the release process, the Bitnami container images are analyzed for vulnerabilities. At this moment, we are using two different tools:
+
+* [Trivy](https://github.com/aquasecurity/trivy)
+* [Grype](https://github.com/anchore/grype)
+
+This scanning process is triggered via a GH action for every PR affecting the source code of the containers, regardless of its nature or origin.
+
 ## Contributing
 
 We'd love for you to contribute to those container images. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues/new/choose), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
