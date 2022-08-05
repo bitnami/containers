@@ -719,6 +719,26 @@ rabbitmq_join_cluster() {
 }
 
 ########################
+# Declare a new virtual host
+# Globals:
+#   BITNAMI_DEBUG
+#   RABBITMQ_BIN_DIR
+# Arguments:
+#   $1 - Name
+# Returns:
+#   None
+#########################
+rabbitmq_declare_vhost() {
+    local name="${1:?name is required}"
+    debug "Declaring vhost '${name}'..."
+
+    if ! debug_execute "${RABBITMQ_BIN_DIR}/rabbitmqctl" add_vhost -- "${name}"; then
+        error "Couldn't declared vhost '${name}'."
+        return 1
+    fi
+}
+
+########################
 # Ensure RabbitMQ is initialized
 # Globals:
 #   RABBITMQ_*
@@ -779,6 +799,12 @@ rabbitmq_initialize() {
             fi
         elif is_boolean_yes "$RABBITMQ_SECURE_PASSWORD"; then
             rabbitmq_change_password "$RABBITMQ_USERNAME" "$RABBITMQ_PASSWORD"
+        fi
+
+        if [[ -n "${RABBITMQ_VHOSTS:-}" ]]; then
+            for vhost in ${RABBITMQ_VHOSTS}; do
+                rabbitmq_declare_vhost "${vhost}"
+            done
         fi
 
         if [[ "$RABBITMQ_NODE_TYPE" != "stats" ]] && [[ -n "$RABBITMQ_CLUSTER_NODE_NAME" ]]; then
