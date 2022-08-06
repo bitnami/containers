@@ -14,7 +14,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.15-1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.3-152" --checksum 0694ae67645c416d9f6875e90c0f7cef379b4ac8030a6a5b8b5cc9ca77c6975d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-151" --checksum 9690a34674f152e55c71a55275265314ed1bb29e0be8a75d7880488509f70deb
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kafka" "3.2.0-151" --checksum e58317668b612a0ab6219a7d42eca114a2e46d8cdc08f88e84b070b922d3781c
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kafka" "3.2.1-0" --checksum 8aca39e96e3b8a5f3bcfc4a2f82958f6f36ac19ec611e15fee5632260a8a5834
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -24,7 +24,7 @@ RUN ln -s /opt/bitnami/scripts/kafka/run.sh /run.sh
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/kafka/postunpack.sh
-ENV APP_VERSION="3.2.0" \
+ENV APP_VERSION="3.2.1" \
     BITNAMI_APP_NAME="kafka" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/kafka/bin:$PATH"

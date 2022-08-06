@@ -8,7 +8,7 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.26.1-1" --checksum 502f4119e04d7a74508a38d64cccfc332e08fe42335828129d2bf5e694fbec32
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.27.2-0" --checksum bbe97d7488f4ff9421342d5cc45881b55944c802fced3a992a988365ce1c30fe
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "harbor-jobservice" "2.5.3-1" --checksum d5d24bbab80f7d8ea9922043e30a0665aa05cfae855b7faca0f4a45aa4adc1e2
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
 RUN apt-get update && apt-get upgrade -y && \

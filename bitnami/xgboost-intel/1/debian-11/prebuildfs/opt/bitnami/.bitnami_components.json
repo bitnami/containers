@@ -8,16 +8,16 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "4134271882a5cc15818aa4be71d62f53fb4cccbdbb5136aab542fd3735233a3b",
+        "digest": "268a125a624f6ab839234df68d405001f8f9092db3081490af12c4d5b6c3df3c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.10.5-157"
+        "version": "3.10.6-2"
     },
     "xgboost-intel": {
         "arch": "amd64",
-        "digest": "d49d5574cdab9690c82b9ade0a4d6d0998ab36ba30ac13fea8152f0a33746b90",
+        "digest": "d280d1d9039e2cf08f1a3d410c4460055327ecd0012799d5081a0a9d8816319f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.6.1-151"
+        "version": "1.6.1-152"
     }
 }
