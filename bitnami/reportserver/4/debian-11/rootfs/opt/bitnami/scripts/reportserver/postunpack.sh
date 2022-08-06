@@ -18,11 +18,6 @@ set -o pipefail
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/liblog.sh
 
-# Symlink for ReportServer Enterprise
-if [[ -d "${BITNAMI_ROOT_DIR}/reportserverenterprise" ]]; then
-    ln -s "${BITNAMI_ROOT_DIR}/reportserverenterprise" "$REPORTSERVER_BASE_DIR"
-fi
-
 # Ensure the required config files exist
 touch "${REPORTSERVER_CONF_DIR}"/{persistence,reportserver,rsinit}.properties
 
