@@ -10,7 +10,7 @@ RUN install_packages acl ca-certificates curl gzip libaudit1 libbrotli1 libbsd0 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "8.0.22-0" --checksum 9354070c3c63952b5b2d9ae2dc548a3ca5438f1ddf1126b5c1788a0407ba0527
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-151" --checksum c85e4be9bcee70c86c7bc7e13742e2d97810ad8f7d6154f8b66811b6cc4d0948
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "codeigniter" "4.2.2-0" --checksum b2ae002ae04b93ee1f6b5913fddd46cee6b3bb589c8dafe38b82337ffb0523ca
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "codeigniter" "4.2.3-0" --checksum 253ec00ec5eafea65c0d6bbb1d0e93fb929aede4d9e04bc1c878b670bdc69d48
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/bitnami-user.sh
@@ -19,7 +19,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/codeigniter/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
-ENV APP_VERSION="4.2.2" \
+ENV APP_VERSION="4.2.3" \
     BITNAMI_APP_NAME="codeigniter" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/codeigniter/bin:$PATH" \
     PHP_ENABLE_OPCACHE="0"
