@@ -8,15 +8,15 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/blackbox-exporter-0.21.1-2-linux-amd64-debian-11.tar.gz && \
-    echo "5508ae32a9350512d99a134e4d8a74f82bae3bae955dcf56c1c5927969646309  /tmp/bitnami/pkg/cache/blackbox-exporter-0.21.1-2-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/blackbox-exporter-0.21.1-2-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/blackbox-exporter-0.21.1-2-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/blackbox-exporter-0.22.0-0-linux-amd64-debian-11.tar.gz && \
+    echo "3ca7ed9d41f5c5c60f2fc3899ba593c116951b4a259894416f9f2a81c80ef703  /tmp/bitnami/pkg/cache/blackbox-exporter-0.22.0-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/blackbox-exporter-0.22.0-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/blackbox-exporter-0.22.0-0-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="0.21.1" \
+ENV APP_VERSION="0.22.0" \
     BITNAMI_APP_NAME="blackbox-exporter" \
     PATH="/opt/bitnami/blackbox-exporter/bin:$PATH"
 
