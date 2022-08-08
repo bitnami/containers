@@ -17,7 +17,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.20.0-1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.37.1-1" --checksum 39ea3040baa552b4760c1100a3713f86493620c0a74121c1ceba50fe17341878
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "brotli" "1.0.9-151" --checksum ba4c4d26d232f8d91d1143078a633ba7c5ae33f5c4182684400ffb7bbc0ed262
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "discourse" "2.8.7-1" --checksum bd120eab1a7403e691f608f57b574a9782391fe1c4a46ce40752cfa560f922c2
-RUN apt-get update && apt-get upgrade -y && \
+RUN apt-get update && apt-get upgrade -y && apt-get install sudo runit -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN /opt/bitnami/ruby/bin/gem install --force bundler -v '< 2'

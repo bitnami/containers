@@ -18,11 +18,10 @@ set -o pipefail
 cd "$DISCOURSE_BASE_DIR"
 
 declare -a cmd=(
-    "bundle" "exec" "passenger" "start"
-    "--user" "$DISCOURSE_DAEMON_USER"
-    "-e" "$DISCOURSE_ENV"
+    chpst -u "$DISCOURSE_DAEMON_USER" -U "$DISCOURSE_DAEMON_USER" "bundle" "exec" "config/unicorn_launcher"
+    "-E" "$DISCOURSE_ENV"
     "-p" "$DISCOURSE_PORT_NUMBER"
-    "--spawn-method" "$DISCOURSE_PASSENGER_SPAWN_METHOD"
+    "-c" "config/unicorn.conf.rb"
 )
 
 # Append extra flags specified via environment variables
@@ -33,4 +32,4 @@ if [[ -n "$DISCOURSE_PASSENGER_EXTRA_FLAGS" ]]; then
 fi
 
 info "** Starting Discourse **"
-exec "${cmd[@]}" "$@"
+USER=$DISCOURSE_DAEMON_USER exec "${cmd[@]}" "$@"

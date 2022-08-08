@@ -259,6 +259,11 @@ discourse_create_conf_file() {
         discourse_conf_set "smtp_enable_start_tls" "$([[ "$DISCOURSE_SMTP_PROTOCOL" = "tls" ]] && echo "true" || echo "false")"
         discourse_conf_set "smtp_authentication" "$DISCOURSE_SMTP_AUTH"
     fi
+
+    if ! is_empty_value "$DISCOURSE_SERVE_STATIC_ASSETS"; then
+        discourse_conf_set "serve_static_assets" "$DISCOURSE_SERVE_STATIC_ASSETS"
+    fi
+
     # Extra configuration
     ! is_empty_value "$DISCOURSE_EXTRA_CONF_CONTENT" && echo "$DISCOURSE_EXTRA_CONF_CONTENT" >> "$DISCOURSE_CONF_FILE"
 }

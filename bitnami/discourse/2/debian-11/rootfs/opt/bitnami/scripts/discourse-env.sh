@@ -22,6 +22,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 discourse_env_vars=(
+    DISCOURSE_SERVE_STATIC_ASSETS
     DISCOURSE_DATA_TO_PERSIST
     DISCOURSE_ENABLE_HTTPS
     DISCOURSE_EXTERNAL_HTTP_PORT_NUMBER
@@ -92,6 +93,8 @@ export DISCOURSE_CONF_FILE="${DISCOURSE_BASE_DIR}/config/discourse.conf"
 export PATH="${BITNAMI_ROOT_DIR}/common/bin:${BITNAMI_ROOT_DIR}/brotli/bin:${BITNAMI_ROOT_DIR}/git/bin:${PATH}"
 
 # Discourse persistence configuration
+DISCOURSE_SERVE_STATIC_ASSETS="${DISCOURSE_SERVE_STATIC_ASSETS:-true}"
+export DISCOURSE_SERVE_STATIC_ASSETS="${DISCOURSE_SERVE_STATIC_ASSETS:-true}"
 export DISCOURSE_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/discourse"
 export DISCOURSE_DATA_TO_PERSIST="${DISCOURSE_DATA_TO_PERSIST:-plugins public/backups public/uploads}"
 
