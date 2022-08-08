@@ -29,7 +29,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8.0`, `8.0-debian-11`, `8.0.28-20`, `8.0.28-20-debian-11-r0`, `latest` (8.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/percona-mysql/8.0/debian-11/Dockerfile)
-* [`5.7`, `5.7-debian-11`, `5.7.38-41`, `5.7.38-41-debian-11-r-1` (5.7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/percona-mysql/5.7/debian-11/Dockerfile)
+* [`5.7`, `5.7-debian-11`, `5.7.38-41`, `5.7.38-41-debian-11-r0` (5.7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/percona-mysql/5.7/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
