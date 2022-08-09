@@ -16,10 +16,9 @@ jobs:
       - id: install-tool
         name: Install and configure SRP Tool
         run: |
-          curl -so /tmp/srp-cli.tgz https://srp-cli.s3.amazonaws.com/srp-cli-latest.tgz
-          tar -xzf /tmp/srp-cli.tgz -C /usr/bin/
+          curl -SsLfo /tmp/srp-cli.tgz https://srp-cli.s3.amazonaws.com/srp-cli-latest.tgz
+          sudo tar xf /tmp/srp-cli.tgz -C /usr/local/bin/
           srp config --srp-endpoint ${BAC_SRP_ENDPOINT}
-          srp config auth --client-id=${BAC_SRP_CLIENT_ID} --client-secret=${BAC_SRP_CLIENT_SECRET}
       - uses: actions/checkout@v3
         name: Checkout Repository
         with:
@@ -28,9 +27,8 @@ jobs:
           submodules: true
       - id: build-report
         name: Build SRP report
-        env:
-          SRP_UID: "uid.obj.build.github(instance='github.com',namespace='${GITHUB_REPOSITORY}',ref='${GITHUB_REF}',action='${GITHUB_ACTION}',build_id='${GITHUB_RUN_ID}_${GITHUB_RUN_ATTEMPT}')"
         run: |
+          export SRP_UID="uid.obj.build.github(instance='github.com',namespace='${GITHUB_REPOSITORY}',ref='${GITHUB_REF}',action='${GITHUB_ACTION}',build_id='${GITHUB_RUN_ID}_${GITHUB_RUN_ATTEMPT}')"
           srp provenance source --verbose --scm-type git \
             --name "bac-containers" --path . --saveto ./source-provenance.json \
             --comp-uid "${SRP_UID}"  --build-number "${GITHUB_RUN_ID}" \
@@ -42,4 +40,6 @@ jobs:
           path: source-provenance.json
       # - id: submit-report
       #   name: Submit SRP report
-      #   run: srp metadata submit --path ./source-provenance.json
+      # run: |
+      #   srp config auth --client-id=${BAC_SRP_CLIENT_ID} --client-secret=${BAC_SRP_CLIENT_SECRET}
+      #   srp metadata submit --path ./source-provenance.json
