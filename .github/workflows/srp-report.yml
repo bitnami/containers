@@ -3,7 +3,7 @@ on:
   schedule:
     # Hourly
     - cron: '0 7 * * *'
-  workflow_dipatch:
+  workflow_dispatch:
 
 env:
   BAC_SRP_ENDPOINT: https://apigw.vmware.com/v1/s1/api/helix-beta
