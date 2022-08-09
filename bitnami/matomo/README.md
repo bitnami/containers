@@ -2,7 +2,7 @@
 
 ## What is Matomo?
 
-> Matomo, formerly known as Piwik, is a real time web analytics program. It provides detailed reports on website visitors: the search engines and keywords they used,  popular pages, and much more.
+> Matomo, formerly known as Piwik, is a real time web analytics program. It provides detailed reports on website visitors.
 
 [Overview of Matomo](https://matomo.org/)
 
@@ -37,7 +37,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4`, `4-debian-11`, `4.11.0`, `4.11.0-debian-11-r2`, `latest` (4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/matomo/4/debian-11/Dockerfile)
+* [`4`, `4-debian-11`, `4.11.0`, `4.11.0-debian-11-r3`, `latest` (4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/matomo/4/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
