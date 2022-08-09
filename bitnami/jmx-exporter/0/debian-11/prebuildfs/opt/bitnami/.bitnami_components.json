@@ -1,16 +1,16 @@
 {
     "java": {
         "arch": "amd64",
-        "digest": "c252c0b479c9a882cb4e447b3610beedaf11f152d04bf16a5a36c24c98378098",
+        "digest": "4d90bf2066c8d6605ac771e9b97c1188f4491d458fcb56956eeead6a18f70ac4",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.8.345-0"
+        "version": "1.8.345-1"
     },
     "jmx-exporter": {
         "arch": "amd64",
-        "digest": "379d282205c4fa57753cf69dffaf33eab63ab60f1fc05c1375ab29d022d69d7b",
+        "digest": "f84fd1b07ad604edde46e656288d2e7f6e2c3373af82ada8d3f8b29d73b1bfc9",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.17.0-151"
+        "version": "0.17.0-152"
     }
 }
