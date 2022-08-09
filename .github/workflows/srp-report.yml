@@ -1,7 +1,6 @@
 name: '[SRP] Secure Release Pipeline Report'
 on:
   schedule:
-    # Hourly
     - cron: '0 7 * * *'
   workflow_dispatch:
 
@@ -38,8 +37,8 @@ jobs:
         with:
           name: source-provenance
           path: source-provenance.json
-      # - id: submit-report
-      #   name: Submit SRP report
-      # run: |
-      #   srp config auth --client-id=${BAC_SRP_CLIENT_ID} --client-secret=${BAC_SRP_CLIENT_SECRET}
-      #   srp metadata submit --path ./source-provenance.json
+      - id: submit-report
+        name: Submit SRP report
+        run: |
+          srp config auth --client-id=${BAC_SRP_CLIENT_ID} --client-secret=${BAC_SRP_CLIENT_SECRET}
+          srp metadata submit --path ./source-provenance.json
