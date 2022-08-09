@@ -4,6 +4,13 @@ ENV HOME="/" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/wordpress-nginx" \
+      org.opencontainers.image.title="wordpress-nginx" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="6.0.1"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
@@ -13,7 +20,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "8.0.22-1" 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wp-cli" "2.6.0-153" --checksum 63b52e992b32b8a7708fa176b05dede536e1c8dbacd4d21fe977bbc1e6b378c4
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.23.1-1" --checksum b77b19f3cce1d5f59a83a2035b2f59763447ffe29ac4a267e417582a2cc5c4ea
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-152" --checksum 3c4757f1064b7a1648886658f05706957cf165c57fa922f4a6ebb757a19034cb
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wordpress" "6.0.1-4" --checksum 7e4c9a2afd239de8510e8ab0ad7bf2153a22053cfde9e3c5289f24c89f946214
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wordpress" "6.0.1-5" --checksum 97f6c76706f37e69be2fe2aa665447a51837bf99af2d80a3386a73cdd48f6854
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
