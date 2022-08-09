@@ -8,7 +8,7 @@ LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/laravel" \
       org.opencontainers.image.title="laravel" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="9.3.2"
+      org.opencontainers.image.version="9.3.3"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -18,7 +18,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "8.1.9-1" --checksum ff5638eef2ef5b8cd3c876ff76eb6f8e5b74e727006fa17c186599e5aafbb118
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.20.0-2" --checksum 127f7b97bd46468ce62bc5cd9868371ca2c4c1e7201f6271a309b34a17b97d90
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.3-153" --checksum 8c8e324ab6e7b7d76b4655182d6ea5f6550edfc9e32bec92228e678c26fc8b16
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "laravel" "9.3.2-2" --checksum 1c764a145fb05df9df0568b997fbdce124fbd5bcb21f2c1b3d39792042e1c681
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "laravel" "9.3.3-0" --checksum 4a4bb698f8bc551cfca77a360441a33578f4cc09ff9997db645704be90f089cb
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -27,7 +27,7 @@ RUN /build/bitnami-user.sh
 COPY rootfs /
 RUN /opt/bitnami/scripts/laravel/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
-ENV APP_VERSION="9.3.2" \
+ENV APP_VERSION="9.3.3" \
     BITNAMI_APP_NAME="laravel" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/node/bin:/opt/bitnami/common/bin:$PATH" \
