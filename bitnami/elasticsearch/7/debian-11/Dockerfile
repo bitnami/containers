@@ -12,10 +12,10 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip hostname libasound2-dev libc6 libfreetype6 libfreetype6-dev libgcc1 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.26.1-1" --checksum 502f4119e04d7a74508a38d64cccfc332e08fe42335828129d2bf5e694fbec32
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "17.0.3-1-1" --checksum 7f419b8b952d11185d669ffb079efae491e862080ae30407fd986e43ad9050a4
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "elasticsearch" "7.17.5-2" --checksum 045de03fce7e13594f430422a42a16715985fac7fcbcaa60b7f5f778a378192e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.27.2-1" --checksum 44d0058c0fffa1ccc89c081ed3e5c897489fa02580a839cfe1d37b2ca771f237
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "17.0.4-8-1" --checksum f885c61100c0e0beee1046d4209af52580bd41c73b2897b7a6cd712eab105929
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "elasticsearch" "7.17.5-3" --checksum 1bcb50bddd3da4cce9639a683813d0844a25a861834066e20214abf956758c38
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami

@@ -412,10 +412,8 @@ redis_configure_default() {
             fi
             redis_conf_set tls-cert-file "$REDIS_TLS_CERT_FILE"
             redis_conf_set tls-key-file "$REDIS_TLS_KEY_FILE"
-            if [[ -n "$REDIS_TLS_KEY_FILE_PASS" ]]
-                redis_conf_set tls-key-file-pass "$REDIS_TLS_KEY_FILE_PASS"
-            fi
             redis_conf_set tls-ca-cert-file "$REDIS_TLS_CA_FILE"
+            ! is_empty_value "$REDIS_TLS_KEY_FILE_PASS" && redis_conf_set tls-key-file-pass "$REDIS_TLS_KEY_FILE_PASS"
             [[ -n "$REDIS_TLS_DH_PARAMS_FILE" ]] && redis_conf_set tls-dh-params-file "$REDIS_TLS_DH_PARAMS_FILE"
             redis_conf_set tls-auth-clients "$REDIS_TLS_AUTH_CLIENTS"
         fi

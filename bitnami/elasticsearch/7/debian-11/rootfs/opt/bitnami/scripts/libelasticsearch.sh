@@ -401,7 +401,7 @@ elasticsearch_cluster_configuration() {
         if is_node_type_master; then
             elasticsearch_conf_set cluster.initial_master_nodes "${master_list[@]}"
         fi
-        elasticsearch_conf_set discovery.initial_state_timeout "5m"
+        elasticsearch_conf_set discovery.initial_state_timeout "10m"
     else
         elasticsearch_conf_set "discovery.type" "single-node"
     fi

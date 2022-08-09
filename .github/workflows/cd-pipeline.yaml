@@ -1,4 +1,4 @@
-name: CD Pipeline
+name: '[CI/CD] CD Pipeline'
 on: # rebuild any PRs and main branch changes
   push:
     branches:
@@ -83,18 +83,25 @@ jobs:
       - id: get-container-metadata
         name: Get image tag and container name
         run: |
-          # Now EAM commits has the following format "[bitnami/<container>] Release <tag>"
-          tag="$(git log --pretty=tformat:"%s" -n 1 --grep="[R|r]elease" --author bitnami-bot@vmware.com --author containers@bitnami.com --author containers-bot@bitnami.com -- ${{ matrix.container }} | sed "s|\[.*\]||" | sed "s|[R|r]elease||" | awk '{print $1}')"
-          if [[ -z "${tag}" ]]; then
-            echo "No tag found for: ${{ matrix.container }}"
-            exit 1
+          if [[ -d "${{ matrix.container }}" ]]; then
+            # Now EAM commits has the following format "[bitnami/<container>] Release <tag>"
+            tag="$(git log --pretty=tformat:"%s" -n 1 --grep="[R|r]elease" --author bitnami-bot@vmware.com --author containers@bitnami.com --author containers-bot@bitnami.com -- ${{ matrix.container }} | sed "s|\[.*\]||" | sed "s|[R|r]elease||" | awk '{print $1}')"
+            if [[ -z "${tag}" ]]; then
+              echo "No tag found for: ${{ matrix.container }}"
+              exit 1
+            else
+              name="$(echo "${{ matrix.container }}" | awk -F '/' '{print $2}')"
+              echo "::set-output name=tag::${tag}"
+              echo "::set-output name=name::${name}"
+              echo "::set-output name=result::ok"
+            fi
           else
-            name="$(echo "${{ matrix.container }}" | awk -F '/' '{print $2}')"
-            echo "::set-output name=tag::${tag}"
-            echo "::set-output name=name::${name}"
+            # Container folder doesn't exists we are assuming a deprecation
+            echo "::set-output name=result::skip"
           fi
       - uses: vmware-labs/vmware-image-builder-action@main
-        name: "Publish ${{ steps.get-container-metadata.outputs.name }}: ${{ steps.get-container-metadata.outputs.tag }}"
+        name: 'Publish ${{ steps.get-container-metadata.outputs.name }}: ${{ steps.get-container-metadata.outputs.tag }}'
+        if: ${{ steps.get-container-metadata.outputs.result == 'ok' }}
         with:
           pipeline: vib-publish.json
         env:

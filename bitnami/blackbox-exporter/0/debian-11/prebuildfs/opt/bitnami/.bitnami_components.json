@@ -1,9 +1,9 @@
 {
     "blackbox-exporter": {
         "arch": "amd64",
-        "digest": "5508ae32a9350512d99a134e4d8a74f82bae3bae955dcf56c1c5927969646309",
+        "digest": "bfeb8b8909ecca4c82d6f8f03fd3d18fa2688a578e638b53c8876321044732bd",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.21.1-2"
+        "version": "0.22.0-1"
     }
 }
