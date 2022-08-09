@@ -2,7 +2,7 @@
 
 ## What is Pinniped?
 
-> Pinniped is an identity service provider for Kubernetes. Provides a consistent, unified login experience across all your clusters, allowing enteprise IDP protocols.
+> Pinniped is an identity service provider for Kubernetes. It supplies a consistent and unified login experience across all your clusters. Pinniped is securely integrated with enterprise IDP protocols.
 
 [Overview of Pinniped](https://pinniped.dev/)
 
@@ -28,7 +28,7 @@ $ docker run --name pinniped bitnami/pinniped:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`0`, `0-scratch`, `0.18.0`, `0.18.0-scratch-r7`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/pinniped/0/scratch/Dockerfile)
+- [`0`, `0-scratch`, `0.18.0`, `0.18.0-scratch-r8`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/pinniped/0/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
