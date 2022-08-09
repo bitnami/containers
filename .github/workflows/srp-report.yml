@@ -7,7 +7,7 @@ on:
 env:
   BAC_SRP_ENDPOINT: https://apigw.vmware.com/v1/s1/api/helix-beta
   BAC_SRP_CLIENT_ID: ${{ secrets.BAC_SRP_CLIENT_ID }}
-  BAC_SRP_CLIENT_SECRET: ${{ secrets.BAC_SRP_CLIENT_ID }}
+  BAC_SRP_CLIENT_SECRET: ${{ secrets.BAC_SRP_CLIENT_SECRET }}
 
 jobs:
   report:
@@ -34,6 +34,7 @@ jobs:
             --name "bac-containers" --path . --saveto ./source-provenance.json \
             --comp-uid "${SRP_UID}" --build-number "${GITHUB_RUN_ID}" \
             --version "1.0" --all-ephemeral true --build-type release
+          echo "::set-output name=uid::${SRP_UID}"
       - name: Archive SRP report
         uses: actions/upload-artifact@v3
         with:
@@ -42,4 +43,4 @@ jobs:
       - id: submit-report
         name: Submit SRP report
         run: |
-          srp metadata submit --path ./source-provenance.json
+          srp metadata submit --verbose --path ./source-provenance.json --uid "uid.mtd.provenance_2_5.fragment(obj_uid=${{ steps.build-report.outputs.uid }},revision='')"
