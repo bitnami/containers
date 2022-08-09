@@ -22,10 +22,10 @@
     },
     "magento": {
         "arch": "amd64",
-        "digest": "a030826e014a9a07920c16cd16311cc92b9c0270d78db990c6c6443599eb38d9",
+        "digest": "ab7d159c9263722d4f02d6fc7506d78395b708a8a30ee144d29567b905990bd9",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.4.4-152"
+        "version": "2.4.5-0"
     },
     "mysql-client": {
         "arch": "amd64",
