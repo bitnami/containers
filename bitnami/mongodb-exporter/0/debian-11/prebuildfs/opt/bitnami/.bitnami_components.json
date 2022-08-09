@@ -1,9 +1,9 @@
 {
     "mongodb-exporter": {
         "arch": "amd64",
-        "digest": "7424904b99e5e9a14aa0ddacd83f7d8d3dd329b5b759a1b7cd547fce7c319af1",
+        "digest": "f554b5e8ee5fbe7d0820bf7d452b4790dbb6c7942a609a03a1f086d52b8e9701",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.34.0-0"
+        "version": "0.34.0-1"
     }
 }
