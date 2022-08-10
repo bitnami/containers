@@ -8,8 +8,8 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libssl1.1 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis" "7.0.4-0" --checksum 295130284b985759f807eaf8c93018a93ae890d7a9d64c19f363f59c1c5cf17c
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis" "7.0.4-2" --checksum 743799735f6f03b4e00257e264b7170e259f4cd4d99a03f959d248d36e0eb6ec
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami

@@ -1,9 +1,9 @@
 {
     "memcached-exporter": {
         "arch": "amd64",
-        "digest": "08f2a7912afeaf0332587aeaf3fd3297300145142a4c299fcff41ba6dd7bbe5f",
+        "digest": "d0f36d4e7bb3f89a2dfc3d9a3d009fc5b5af6347caab45563a623b9de9c9f919",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.10.0-2"
+        "version": "0.10.0-3"
     }
 }

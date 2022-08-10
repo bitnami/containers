@@ -2,7 +2,7 @@ version: '2'
 
 services:
   mongodb-primary:
-    image: docker.io/bitnami/mongodb:5.0
+    image: docker.io/bitnami/mongodb:6.0
     environment:
       - MONGODB_ADVERTISED_HOSTNAME=mongodb-primary
       - MONGODB_REPLICA_SET_MODE=primary
@@ -12,7 +12,7 @@ services:
       - 'mongodb_master_data:/bitnami/mongodb'
 
   mongodb-secondary:
-    image: docker.io/bitnami/mongodb:5.0
+    image: docker.io/bitnami/mongodb:6.0
     depends_on:
       - mongodb-primary
     environment:
@@ -23,7 +23,7 @@ services:
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
 
   mongodb-arbiter:
-    image: docker.io/bitnami/mongodb:5.0
+    image: docker.io/bitnami/mongodb:6.0
     depends_on:
       - mongodb-primary
     environment:

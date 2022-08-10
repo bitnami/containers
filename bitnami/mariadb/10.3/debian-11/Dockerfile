@@ -4,13 +4,20 @@ ENV HOME="/" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mariadb" \
+      org.opencontainers.image.title="mariadb" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="10.3.35"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaio1 libaudit1 libc6 libcap-ng0 libcrypt1 libgcc-s1 libicu67 libjemalloc2 liblzma5 libncurses6 libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 procps psmisc tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.3-151" --checksum 3f23f4fff5bd0ebead5b1a59c450e7b9806198864ff9c765439df14bfb9e1cf4
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mariadb" "10.3.35-151" --checksum a0916f8e6b0363d266c92e2ba5eb1ded0c765623a29fa56db0bf66a0a881d2aa
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.3-152" --checksum 0017b950b7eb0faa7580ef23342adbbfa2038d55c3dafdf1c8761788122f718e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mariadb" "10.3.35-152" --checksum f2f65ae36a0f801621c82099e874b00a26f1b2b05c93d205fcbd432ab9c486b0
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami

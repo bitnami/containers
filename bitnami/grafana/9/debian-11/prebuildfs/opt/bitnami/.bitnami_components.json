@@ -1,16 +1,16 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0",
+        "digest": "d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-152"
+        "version": "1.14.0-153"
     },
     "grafana": {
         "arch": "amd64",
-        "digest": "65de15ee3b8a20f55f55db0e84767de01c019ad50071e836b5a05f44ae695017",
+        "digest": "710304a165b923d77ebc8a7f915c2401fa70efb28bd391cfe6330e0652666e27",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.0.5-0"
+        "version": "9.0.6-1"
     }
 }
