@@ -7,7 +7,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages acl ca-certificates curl git git-lfs gnupg gzip libc6 procps tar
+RUN install_packages acl ca-certificates curl git git-lfs gnupg gzip libc6 procps tar ssh
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kustomize" "4.5.7-0" --checksum dbddb58d16fd55744dff6e0d295388a70531cd057f1cbc4e685216635a54c0ed
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ksonnet" "0.13.1-151" --checksum aae808c3b053381c23ca11ce24303a489129ff509c827f25e1ba4fce2797bb40
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "helm" "3.9.2-0" --checksum 48618accb2aad08762e8b5aadbe66f4a63fa449467038ed8629958ecf8f420db
