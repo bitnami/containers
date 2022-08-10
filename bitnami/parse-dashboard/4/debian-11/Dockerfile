@@ -8,10 +8,10 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq libbz2-1.0 libc6 libcom-err2 libcrypt1 libffi7 libgcc-s1 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncursesw6 libnsl2 libreadline8 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 libtirpc3 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-162" --checksum d76f7dc3f654aabdb0473c6d5a31c471088207f5145e1a2b4ddbbc839c5cc12a
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "12.22.12-152" --checksum 90d4e7c47a0b44636a194efb44d68b9122db8a02bd45aab0b8936e37af99c6b8
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "parse-dashboard" "4.1.4-1" --checksum abc7c21a57666ce9623990a4ffcd1becffc1a7f95a0fc457beeb1f80ebd80dbe
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-163" --checksum 7fee6c4aa71af5fca03cfd65b0982032b334c5baa71254743594a22463770e4f
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "12.22.12-153" --checksum 12b2da0d95dcd427a6fb4b8475c9e16bbd1f5ebfa36a2b0ad547a0d8bffd7a74
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "parse-dashboard" "4.1.4-2" --checksum 2ecff8baa33ae58480e08be3bfc8983d4e95db158bfda77c855f7766e7376fd9
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami

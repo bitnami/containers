@@ -47,11 +47,11 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`14`, `14-debian-11`, `14.4.0`, `14.4.0-debian-11-r22`, `latest` (14/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/14/debian-11/Dockerfile)
-* [`13`, `13-debian-11`, `13.7.0`, `13.7.0-debian-11-r32` (13/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/13/debian-11/Dockerfile)
-* [`12`, `12-debian-11`, `12.11.0`, `12.11.0-debian-11-r31` (12/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/12/debian-11/Dockerfile)
-* [`11`, `11-debian-11`, `11.16.0`, `11.16.0-debian-11-r32` (11/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/11/debian-11/Dockerfile)
-* [`10`, `10-debian-11`, `10.21.0`, `10.21.0-debian-11-r31` (10/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/10/debian-11/Dockerfile)
+* [`14`, `14-debian-11`, `14.4.0`, `14.4.0-debian-11-r23`, `latest` (14/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/14/debian-11/Dockerfile)
+* [`13`, `13-debian-11`, `13.7.0`, `13.7.0-debian-11-r33` (13/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/13/debian-11/Dockerfile)
+* [`12`, `12-debian-11`, `12.11.0`, `12.11.0-debian-11-r32` (12/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/12/debian-11/Dockerfile)
+* [`11`, `11-debian-11`, `11.16.0`, `11.16.0-debian-11-r33` (11/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/11/debian-11/Dockerfile)
+* [`10`, `10-debian-11`, `10.21.0`, `10.21.0-debian-11-r33` (10/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/10/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 

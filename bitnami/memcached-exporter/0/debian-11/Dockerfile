@@ -8,10 +8,10 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/memcached-exporter-0.10.0-2-linux-amd64-debian-11.tar.gz && \
-    echo "08f2a7912afeaf0332587aeaf3fd3297300145142a4c299fcff41ba6dd7bbe5f  /tmp/bitnami/pkg/cache/memcached-exporter-0.10.0-2-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/memcached-exporter-0.10.0-2-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/memcached-exporter-0.10.0-2-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/memcached-exporter-0.10.0-3-linux-amd64-debian-11.tar.gz && \
+    echo "d0f36d4e7bb3f89a2dfc3d9a3d009fc5b5af6347caab45563a623b9de9c9f919  /tmp/bitnami/pkg/cache/memcached-exporter-0.10.0-3-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/memcached-exporter-0.10.0-3-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/memcached-exporter-0.10.0-3-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
