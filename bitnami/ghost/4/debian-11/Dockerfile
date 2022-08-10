@@ -4,6 +4,13 @@ ENV HOME="/" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ghost" \
+      org.opencontainers.image.title="ghost" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="4.48.2"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
@@ -12,7 +19,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.20.0-2" --checksum 127f7b97bd46468ce62bc5cd9868371ca2c4c1e7201f6271a309b34a17b97d90
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-152" --checksum 3c4757f1064b7a1648886658f05706957cf165c57fa922f4a6ebb757a19034cb
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ghost" "4.48.2-4" --checksum 89ecac78dfd9abdd689b5b4d950a8b79e351b07a61c64a58a823b7de1e558643
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ghost" "4.48.2-5" --checksum 6ae4cc4bd0b4c1595035a5bd4102557355da7e00299a865fe3f313fc839a6448
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
