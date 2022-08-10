@@ -1,10 +1,10 @@
 {
     "consul": {
         "arch": "amd64",
-        "digest": "7023bc5b07eb1e4dddcb0678f1e4235b23d056d830484e17e343ada0112615c7",
+        "digest": "aee81b0759a32f6e237ab90b1b8f2b674c5427aedcdf7670da32bf99bff0c5c7",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.12.3-2"
+        "version": "1.12.3-3"
     },
     "gosu": {
         "arch": "amd64",
