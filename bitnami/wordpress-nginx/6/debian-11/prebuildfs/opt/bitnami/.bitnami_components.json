@@ -22,10 +22,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "9db7fc9a4c7083406fad1c07b0ff8f27a6236431d904dc0a98a5060df1f8ee15",
+        "digest": "ff5638eef2ef5b8cd3c876ff76eb6f8e5b74e727006fa17c186599e5aafbb118",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.22-1"
+        "version": "8.1.9-1"
     },
     "render-template": {
         "arch": "amd64",
@@ -39,7 +39,7 @@
         "digest": "97f6c76706f37e69be2fe2aa665447a51837bf99af2d80a3386a73cdd48f6854",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.0.1-5"
+        "version": "6.0.1-6"
     },
     "wp-cli": {
         "arch": "amd64",
