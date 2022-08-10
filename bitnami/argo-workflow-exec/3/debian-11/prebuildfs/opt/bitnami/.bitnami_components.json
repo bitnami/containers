@@ -1,10 +1,10 @@
 {
     "argo-workflow-exec": {
         "arch": "amd64",
-        "digest": "1e9ecc022767fee635c7b1deac24675ca74825b3e7343f61a5df8b1bc82df0d8",
+        "digest": "672ee5cfb6d20c53e0ff45be848d3529420cacae1b5888b44e6ddf287e3f8996",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.3.8-2"
+        "version": "3.3.9-0"
     },
     "gosu": {
         "arch": "amd64",
