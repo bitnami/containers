@@ -9,7 +9,7 @@ LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/aws-cli" \
       org.opencontainers.image.title="aws-cli" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.25.48"
+      org.opencontainers.image.version="1.25.49"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -19,15 +19,15 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "b94d68d38b7da4e8271eb89986deb6162a700ed3cbf5e8608327edf7d1e4f5cd  /tmp/bitnami/pkg/cache/python-3.9.13-163-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/python-3.9.13-163-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/python-3.9.13-163-linux-amd64-debian-11.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/aws-cli-1.25.48-1-linux-amd64-debian-11.tar.gz && \
-    echo "b9245b4588a59734e7df8ee73d9ba4ccd41879d1a2adc833aa358b230670de35  /tmp/bitnami/pkg/cache/aws-cli-1.25.48-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/aws-cli-1.25.48-1-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/aws-cli-1.25.48-1-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/aws-cli-1.25.49-0-linux-amd64-debian-11.tar.gz && \
+    echo "272cb7b8ae6eeab8335e8f480c59581de06ffbb343ba60f12da39b3dc5140b31  /tmp/bitnami/pkg/cache/aws-cli-1.25.49-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/aws-cli-1.25.49-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/aws-cli-1.25.49-0-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="1.25.48" \
+ENV APP_VERSION="1.25.49" \
     AWS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt" \
     BITNAMI_APP_NAME="aws-cli" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/aws-cli/bin:/opt/bitnami/aws-cli/venv/bin:$PATH"
