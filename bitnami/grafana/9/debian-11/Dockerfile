@@ -9,13 +9,13 @@ LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/grafana" \
       org.opencontainers.image.title="grafana" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="9.0.6"
+      org.opencontainers.image.version="9.0.7"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libfontconfig procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "grafana" "9.0.6-2" --checksum ab67fae103f82096cd27916a9e2e8ba68b9108bdf91ca7070e409dcab0082213
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "grafana" "9.0.7-0" --checksum 63a70f2b19344a670c6d9c6572fe03b3ab87aae70b5dcab0b8f83f9e45a91366
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -23,7 +23,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/grafana/postunpack.sh
-ENV APP_VERSION="9.0.6" \
+ENV APP_VERSION="9.0.7" \
     BITNAMI_APP_NAME="grafana" \
     PATH="/opt/bitnami/grafana/bin:/opt/bitnami/common/bin:$PATH"
 
