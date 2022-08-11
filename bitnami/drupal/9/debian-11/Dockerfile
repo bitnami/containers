@@ -4,6 +4,13 @@ ENV HOME="/" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/drupal" \
+      org.opencontainers.image.title="drupal" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="9.4.5"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
@@ -14,7 +21,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "1
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "8.1.9-1" --checksum ca41ef5392494586f7980d6e00ec247033517ecf811090956dc21d8505bb88cd
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-152" --checksum 7909504f3232654c427681ecc8ed4b8599a2df0f17f26ff769a83ed167d05b69
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "drupal" "9.4.5-0" --checksum 80aabce6aa1190a3c6bdf9cc7e65fb647de7b7518cd1b51ea2393df7403caa46
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "drupal" "9.4.5-1" --checksum 4a895c35acc37a3b5cba2b61db9be13b164671a0788be7a5a0b07131dc57c518
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
