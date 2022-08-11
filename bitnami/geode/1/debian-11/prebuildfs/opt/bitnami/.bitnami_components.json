@@ -1,10 +1,10 @@
 {
     "geode": {
         "arch": "amd64",
-        "digest": "a39449178ef405cf8770b6c7c3f4ffc687f1e569f379c8b797c6714e74da7f20",
+        "digest": "df401bcd2bbf589c517973f7ed152e15c7d14f54faadcf6d07a4509743754f91",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.15.0-2"
+        "version": "1.15.0-4"
     },
     "gosu": {
         "arch": "amd64",

@@ -107,7 +107,7 @@ geode_validate() {
         if ! is_empty_value "$GEODE_SECURITY_TLS_COMPONENTS"; then
             check_empty_value "GEODE_SECURITY_TLS_PROTOCOLS"
             if [[ ! -f "$GEODE_SECURITY_TLS_KEYSTORE_FILE" || ! -f "$GEODE_SECURITY_TLS_TRUSTSTORE_FILE" ]]; then
-                print_validation_error "In order to configure the TLS encryption for Apache Geode with JKS certs you must mount your geode.keystore.jks and geode.truststore.jks certs to the ${GEODE_MOUNTED_CONF_DIR}/certs directory."
+                print_validation_error "In order to configure the TLS encryption for Apache Geode with JKS certs you must mount your geode.keystore.jks and geode.truststore.jks certs to the ${GEODE_CONF_DIR}/certs directory."
             fi
         else
             # Security is enabled but TLS is not. Therefore, authentication using Security Manager is mandatory
@@ -283,10 +283,10 @@ geode_configure_security_tls() {
     geode_conf_set "ssl-enabled-components" "$GEODE_SECURITY_TLS_COMPONENTS" "$GEODE_SEC_CONF_FILE"
     geode_conf_set "ssl-endpoint-identification-enabled" "$(is_boolean_yes "$GEODE_SECURITY_TLS_ENDPOINT_IDENTIFICATION_ENABLED" && echo "true" || echo "false")" "$GEODE_SEC_CONF_FILE"
     geode_conf_set "ssl-require-authentication" "$(is_boolean_yes "$GEODE_SECURITY_TLS_REQUIRE_AUTHENTICATION" && echo "true" || echo "false")" "$GEODE_SEC_CONF_FILE"
-    geode_conf_set "ssl-keystore" "$GEODE_SECURITY_TLS_KEYSTORE_FILE" "$GEODE_SEC_CONF_FILE"
     ! is_empty_value "$GEODE_SECURITY_TLS_KEYSTORE_PASSWORD" && geode_conf_set "ssl-keystore-password" "$GEODE_SECURITY_TLS_KEYSTORE_PASSWORD" "$GEODE_SEC_CONF_FILE"
-    geode_conf_set "ssl-truststore" "$GEODE_SECURITY_TLS_TRUSTSTORE_FILE" "$GEODE_SEC_CONF_FILE"
     ! is_empty_value "$GEODE_SECURITY_TLS_TRUSTSTORE_PASSWORD" && geode_conf_set "ssl-truststore-password" "$GEODE_SECURITY_TLS_TRUSTSTORE_PASSWORD" "$GEODE_SEC_CONF_FILE"
+    geode_conf_set "ssl-keystore" "$GEODE_SECURITY_TLS_KEYSTORE_FILE" "$GEODE_SEC_CONF_FILE"
+    geode_conf_set "ssl-truststore" "$GEODE_SECURITY_TLS_TRUSTSTORE_FILE" "$GEODE_SEC_CONF_FILE"
 }
 
 ########################
@@ -302,6 +302,7 @@ geode_wait_for_locator_connection() {
     local -r locator="${1:?missing locator host}"
     local -r user="${2:-}"
     local -r pass="${3:-}"
+    local -r sleep_min=2
 
     check_locator_connection() {
         local -a connet_flags=("--locator=${locator}")
@@ -319,7 +320,7 @@ geode_wait_for_locator_connection() {
         debug_execute gfsh -e "connect ${connet_flags[*]}" -e "status cluster-config-service"
     }
     # We use a random sleep time between retries to avoid colissions
-    if ! retry_while "check_locator_connection" "12" "$(generate_random_string --type numeric --count 1)"; then
+    if ! retry_while "check_locator_connection" "12" "$((sleep_min + $(generate_random_string --type numeric --count 1)))"; then
         error "Could not connect to the locator"
         return 1
     fi
@@ -368,6 +369,7 @@ geode_initialize_cache_server() {
             # This configuration is not persisted. Therefore, we also need to generate it
             # during container recreations
             geode_configure_sample_security_manager
+            ! is_empty_value "$GEODE_SECURITY_TLS_COMPONENTS" && geode_configure_security_tls
         fi
         info "Trying to connect to locators"
         read -r -a locators <<< "$(tr ',;' ' ' <<< "${GEODE_LOCATORS/%,/}")"
