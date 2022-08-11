@@ -4,11 +4,19 @@ ENV HOME="/" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="12.12.0-debian-11-r0" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/postgresql-repmgr" \
+      org.opencontainers.image.title="postgresql-repmgr" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="12.12.0"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libbsd0 libc6 libedit2 libffi7 libgcc-s1 libgmp10 libgnutls30 libhogweed6 libicu67 libidn2-0 libldap-2.4-2 liblzma5 libmd0 libnettle8 libp11-kit0 libpcre3 libreadline8 libsasl2-2 libsqlite3-0 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 locales procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-repmgr" "12.11.0-160" --checksum 362463a875ddbb9db0362ae996f6bd0b5916bda95b7b99c58ebfaa615c3a90c2
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-repmgr" "12.12.0-0" --checksum 461bd9fbcce7de470b579201ec6a6d3015ebfc96e22e02c227d477aac1093986
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -22,7 +30,7 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 RUN /opt/bitnami/scripts/postgresql-repmgr/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
-ENV APP_VERSION="12.11.0" \
+ENV APP_VERSION="12.12.0" \
     BITNAMI_APP_NAME="postgresql-repmgr" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
