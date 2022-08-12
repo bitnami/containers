@@ -5,6 +5,13 @@ ENV HOME="/" \
     OS_NAME="linux"
 
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="7.1.3-debian-11-r12" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/schema-registry" \
+      org.opencontainers.image.title="schema-registry" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="7.1.3"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
