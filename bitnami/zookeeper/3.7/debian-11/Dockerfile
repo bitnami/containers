@@ -5,6 +5,14 @@ ENV HOME="/" \
     OS_NAME="linux" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/zookeeper/bin:$PATH"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="3.7.1-debian-11-r31" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/zookeeper" \
+      org.opencontainers.image.title="zookeeper" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="3.7.1"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
