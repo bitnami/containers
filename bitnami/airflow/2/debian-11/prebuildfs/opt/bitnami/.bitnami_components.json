@@ -8,10 +8,10 @@
     },
     "git": {
         "arch": "amd64",
-        "digest": "cac709be5709568fc93602ec97f27c1ae02b6314980f3e046649a0ee30a801e6",
+        "digest": "e695c1e29ff39cd54da23d2d5c3703d7d767a1d17d42ca85b3581d6e2d171bca",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.37.1-2"
+        "version": "2.37.2-0"
     },
     "gosu": {
         "arch": "amd64",
@@ -29,17 +29,17 @@
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "e883fbdf39fe1d5aeef262ceee58f35fd2f8cc91968f2395e74e34f1ef44dc6f",
+        "digest": "d98d0d09430861a8eb051b661f9d42452ae1d7c22f2cb7ad7a7364a95bb6d201",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.21.0-152"
+        "version": "10.22.0-0"
     },
     "python": {
         "arch": "amd64",
-        "digest": "7fee6c4aa71af5fca03cfd65b0982032b334c5baa71254743594a22463770e4f",
+        "digest": "2bf41f60dccdcf65842d993083c2dcb27ab48a8a514fdeb1778e9b09f3e4a203",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.13-163"
+        "version": "3.8.13-165"
     },
     "wait-for-port": {
         "arch": "amd64",
