@@ -6,6 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="1.13.0-debian-11-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/consul" \
       org.opencontainers.image.title="consul" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -17,7 +18,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages acl ca-certificates curl gzip iproute2 procps tar zlib1g-dev
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-152" --checksum 7909504f3232654c427681ecc8ed4b8599a2df0f17f26ff769a83ed167d05b69
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "consul" "1.13.0-0" --checksum 40d98ab076e96929c14c6388ff0c13b3774e9ac8d70a2e3cd04c9a654701917e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "consul" "1.13.0-1" --checksum 946bbef221abe5fc1f9b359d4f9652e2e3519b55c84ed931ac3fb78cbb76ab99
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
