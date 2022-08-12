@@ -3,6 +3,14 @@ ENV OS_ARCH="amd64" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="6.0.11-debian-11-r5" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/symfony" \
+      org.opencontainers.image.title="symfony" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="6.0.11"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
