@@ -6,6 +6,13 @@ ENV HOME="/" \
     PATH="/opt/bitnami/tensorflow-serving/bin:/opt/bitnami/tensorflow-serving/serving/bazel-bin/tensorflow_serving/model_servers:/opt/bitnami/common/bin:$PATH"
 
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="2.9.1-debian-11-r13" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/tensorflow-serving" \
+      org.opencontainers.image.title="tensorflow-serving" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="2.9.1"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
