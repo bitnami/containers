@@ -5,13 +5,20 @@ ENV HOME="/" \
     OS_NAME="linux"
 
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="7.9.0-2-debian-11-r7" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ejbca" \
+      org.opencontainers.image.title="ejbca" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="7.9.0-2"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaio1 libaudit1 libc6 libcap-ng0 libgcc-s1 libicu67 liblzma5 libncurses6 libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.15-1-2" --checksum 1a5468c7b552dfc8a33c5c9b214dbf7dd143a5f008cc3aa2e0418fab5eb16c5c
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wildfly" "26.1.1-154" --checksum cb5e0d377d4fd64faa2d5321fa786ec61fde994a176048dc957cca7caee1c7ad
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wildfly" "26.1.1-155" --checksum b887c1ac1627ec7de0b3c509f1c2a3e91d86d4d53029dcc7a88061d03bc16b1b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-152" --checksum 3c4757f1064b7a1648886658f05706957cf165c57fa922f4a6ebb757a19034cb
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ejbca" "7.9.0-2-2" --checksum ce65e57c0fb58ee37bf3d5fcf25ce79fa0697e81e895f6a1391511096a539992
