@@ -4,6 +4,14 @@ ENV HOME="/" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="0.12.2-debian-11-r6" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/external-dns" \
+      org.opencontainers.image.title="external-dns" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="0.12.2"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
