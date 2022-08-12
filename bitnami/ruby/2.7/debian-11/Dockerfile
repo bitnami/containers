@@ -3,6 +3,14 @@ ENV OS_ARCH="amd64" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="2.7.6-debian-11-r28" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ruby" \
+      org.opencontainers.image.title="ruby" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="2.7.6"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
