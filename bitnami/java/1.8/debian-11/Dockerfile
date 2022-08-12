@@ -4,6 +4,13 @@ ENV OS_ARCH="amd64" \
     OS_NAME="linux"
 
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="1.8.345-debian-11-r2" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/java" \
+      org.opencontainers.image.title="java" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="1.8.345"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
