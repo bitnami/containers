@@ -237,13 +237,10 @@ repmgr_get_primary_node() {
             repmgr_wait_primary_node || repmgr_switchover_standby
 
         else
-
             info "Upstream detected: primary_host: '${upstream_host}:${upstream_port}'"
 
             primary_host="$upstream_host"
             primary_port="$upstream_port"
-
-
         fi
     fi
 
@@ -271,21 +268,18 @@ repmgr_switchover_standby() {
     primary_host=""
     primary_port="${REPMGR_PORT_NUMBER}"
 
-    info "Switchover from standby to primary . After unavailable primary for '$timeout' seconds . Assuming the primary role..."
+info "Primary node is unavailable. Assuming primary role..."
 
-    echo "promote_me" >> "$REPMGR_PROMOTE_STANDBY_LOCK_FILE_NAME"
+    touch "$REPMGR_PROMOTE_STANDBY_LOCK_FILE_NAME"
 
     debug "Marking node to be promoted from standby to primary by writing the following file: '$REPMGR_PROMOTE_STANDBY_LOCK_FILE_NAME' "
 
     [[ -n "$primary_host" ]] && debug "Primary node: '${primary_host}:${primary_port}'"
-    echo "$primary_host"
-    echo "$primary_port"
+
 }
 
-
-
 ########################
-# Standby follow.
+# Standby promote.
 # Globals:
 #   REPMGR_*
 # Arguments:
@@ -304,7 +298,6 @@ repmgr_standby_promote() {
     fi
 
 }
-
 
 ########################
 # Generates env vars for the node
@@ -538,7 +531,6 @@ repmgr_generate_repmgr_config() {
     # set the "--waldir" option accordingly
     local -r waldir=$(postgresql_get_waldir)
     local -r waldir_option=$([[ -n "$waldir" ]] && echo "--waldir=$waldir")
-    local -r randomize=$(( ( RANDOM % 10 )  + 5 ))
 
     cat <<EOF >>"${REPMGR_CONF_FILE}.tmp"
 event_notification_command='${REPMGR_EVENTS_DIR}/router.sh %n %e %s "%t" "%d"'
@@ -555,7 +547,7 @@ failover='automatic'
 promote_command='$(repmgr_get_env_password) repmgr standby promote -f "${REPMGR_CONF_FILE}" --log-level DEBUG --verbose'
 follow_command='$(repmgr_get_env_password) repmgr standby follow -f "${REPMGR_CONF_FILE}" -W --log-level DEBUG --verbose'
 reconnect_attempts='${REPMGR_RECONNECT_ATTEMPTS}'
-reconnect_interval=$(expr $randomize + $REPMGR_RECONNECT_INTERVAL 2>/dev/null  || echo "$REPMGR_RECONNECT_INTERVAL")
+reconnect_interval=$(( 5 + REPMGR_RECONNECT_INTERVAL + $(generate_random_string --type numeric --count 1) ))
 log_level='${REPMGR_LOG_LEVEL}'
 priority='${REPMGR_NODE_PRIORITY}'
 degraded_monitoring_timeout='${REPMGR_DEGRADED_MONITORING_TIMEOUT}'
@@ -630,11 +622,9 @@ EOF
 #########################
 repmgr_wait_primary_node() {
     local return_value=1
-    local -i timeout="${REPMGR_WAIT_PRIMARY_TIME:-60}"
-    local -i randomize=$(( ( RANDOM % 20 )  + 1 ))
-    local -i step="${REPMGR_WAIT_PRIMARY_STEP:-10}"
-    local -i tries=$((timeout / step))
-    local -i max_tries=$(( $randomize + $tries  ))
+    local -i timeout="${REPMGR_WAIT_PRIMARY_TIME}"
+    local -i step=$(( REPMGR_WAIT_PRIMARY_STEP + $(generate_random_string --type numeric --count 1) ))
+    local -i max_tries=$((timeout / step))
     local schemata
     info "Waiting for primary node..."
     debug "Wait for schema $REPMGR_DATABASE.repmgr on '${REPMGR_CURRENT_PRIMARY_HOST}:${REPMGR_CURRENT_PRIMARY_PORT}', will try $max_tries times with $step delay seconds (TIMEOUT=$timeout)"
@@ -674,7 +664,6 @@ repmgr_wait_primary_node() {
     done
     return $return_value
 }
-
 
 ########################
 # Clones data from primary node
