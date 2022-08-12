@@ -4,6 +4,14 @@ ENV HOME="/app" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="7.5.1-debian-11-r2" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/gradle" \
+      org.opencontainers.image.title="gradle" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="7.5.1"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
