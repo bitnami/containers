@@ -271,7 +271,7 @@ repmgr_switchover_standby() {
     primary_host=""
     primary_port="${REPMGR_PORT_NUMBER}"
 
-    info "Switchover from standby to primary . After unavailable primary for '$timeout' seconds . Assuming the primary role..."
+info "Primary node is unavailable. Assuming primary role..."
 
     echo "promote_me" >> "$REPMGR_PROMOTE_STANDBY_LOCK_FILE_NAME"
 
