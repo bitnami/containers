@@ -273,7 +273,7 @@ repmgr_switchover_standby() {
 
 info "Primary node is unavailable. Assuming primary role..."
 
-    echo "promote_me" >> "$REPMGR_PROMOTE_STANDBY_LOCK_FILE_NAME"
+    touch "$REPMGR_PROMOTE_STANDBY_LOCK_FILE_NAME"
 
     debug "Marking node to be promoted from standby to primary by writing the following file: '$REPMGR_PROMOTE_STANDBY_LOCK_FILE_NAME' "
 
