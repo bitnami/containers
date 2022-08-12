@@ -675,7 +675,6 @@ repmgr_wait_primary_node() {
     return $return_value
 }
 
-
 ########################
 # Clones data from primary node
 # Globals:
