@@ -22,17 +22,17 @@
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "c36c823d21ed1c114369c7335ffe72df1c53e57214861702a10fc290f7350e48",
+        "digest": "5dd1afba3aca8070dae723f9ab2253cbc6ff5622f4f0f522332181f57c8ce958",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "13.7.0-152"
+        "version": "13.8.0-0"
     },
     "python": {
         "arch": "amd64",
-        "digest": "b5a9c05c7a8d88677c7cef6fb804f1902e30ca81e4aaa90da40931df038e7ca9",
+        "digest": "8bdb9f9a613271a5c32dae7c0eb2d28959cd1f18fc82805f2289d6069ff7b501",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.10.6-5"
+        "version": "3.10.6-6"
     },
     "render-template": {
         "arch": "amd64",
