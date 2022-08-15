@@ -5,6 +5,14 @@ ENV HOME="/" \
     OS_NAME="linux" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/kibana/bin:$PATH"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="8.3.3-debian-11-r6" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kibana" \
+      org.opencontainers.image.title="kibana" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="8.3.3"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies

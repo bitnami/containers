@@ -4,19 +4,27 @@ ENV HOME="/" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="1.43.1-debian-11-r0" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/redis-exporter" \
+      org.opencontainers.image.title="redis-exporter" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="1.43.1"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/redis-exporter-1.43.0-2-linux-amd64-debian-11.tar.gz && \
-    echo "b9f18b2bc1286aa66c8ad109e85c09a84a53b220059f93f574b60dbd493c25fc  /tmp/bitnami/pkg/cache/redis-exporter-1.43.0-2-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/redis-exporter-1.43.0-2-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/redis-exporter-1.43.0-2-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/redis-exporter-1.43.1-0-linux-amd64-debian-11.tar.gz && \
+    echo "7e35df80db54c39305031e72640811e4dc8536cbe33b84312c4b3bda8400dfd7  /tmp/bitnami/pkg/cache/redis-exporter-1.43.1-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/redis-exporter-1.43.1-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/redis-exporter-1.43.1-0-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="1.43.0" \
+ENV APP_VERSION="1.43.1" \
     BITNAMI_APP_NAME="redis-exporter" \
     PATH="/opt/bitnami/redis-exporter/bin:$PATH"
 

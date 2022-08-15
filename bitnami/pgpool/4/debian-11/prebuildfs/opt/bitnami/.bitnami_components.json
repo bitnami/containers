@@ -15,10 +15,10 @@
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "21e6c6714581038253e473feed7872cabba07c3024f661901705e26b869751d3",
+        "digest": "18cdf4daa5c8425b98dac864a52c29da56467cf76b4a5c0520ba591ccd33fbef",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.4.0-2"
+        "version": "14.5.0-0"
     },
     "wait-for-port": {
         "arch": "amd64",

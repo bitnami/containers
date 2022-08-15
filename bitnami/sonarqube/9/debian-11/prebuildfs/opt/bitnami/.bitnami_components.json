@@ -15,10 +15,10 @@
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "c36c823d21ed1c114369c7335ffe72df1c53e57214861702a10fc290f7350e48",
+        "digest": "5dd1afba3aca8070dae723f9ab2253cbc6ff5622f4f0f522332181f57c8ce958",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "13.7.0-152"
+        "version": "13.8.0-0"
     },
     "sonarqube": {
         "arch": "amd64",
