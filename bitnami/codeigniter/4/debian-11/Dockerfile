@@ -5,11 +5,11 @@ ENV OS_ARCH="amd64" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.2.3-debian-11-r2" \
+      org.opencontainers.image.ref.name="4.2.4-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/codeigniter" \
       org.opencontainers.image.title="codeigniter" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="4.2.3"
+      org.opencontainers.image.version="4.2.4"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -18,7 +18,7 @@ RUN install_packages acl ca-certificates curl gzip libaudit1 libbrotli1 libbsd0 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "8.0.22-1" --checksum 9db7fc9a4c7083406fad1c07b0ff8f27a6236431d904dc0a98a5060df1f8ee15
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-152" --checksum 3c4757f1064b7a1648886658f05706957cf165c57fa922f4a6ebb757a19034cb
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "codeigniter" "4.2.3-1" --checksum 0ad5d21ff441dbfeb573b42579ddd6e5d5b4326fade0c8091c3eb60ae8ca5688
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "codeigniter" "4.2.4-0" --checksum 6841add02f24ee1840f454a3a86e59cc341be66c8d7ddfc1749c4016e80d3288
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/bitnami-user.sh
@@ -27,7 +27,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/codeigniter/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
-ENV APP_VERSION="4.2.3" \
+ENV APP_VERSION="4.2.4" \
     BITNAMI_APP_NAME="codeigniter" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/codeigniter/bin:$PATH" \
     PHP_ENABLE_OPCACHE="0"
