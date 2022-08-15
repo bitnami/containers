@@ -3,14 +3,22 @@ ENV OS_ARCH="amd64" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="12.22.12-debian-11-r27" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/node" \
+      org.opencontainers.image.title="node" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="12.22.12"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages build-essential ca-certificates curl git gzip libbz2-1.0 libc6 libcom-err2 libcrypt1 libffi7 libgcc-s1 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncursesw6 libnsl2 libreadline8 libsqlite3-0 libsqlite3-dev libssl-dev libssl1.1 libstdc++6 libtinfo6 libtirpc3 pkg-config procps tar unzip wget zlib1g
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/python-3.8.13-164-linux-amd64-debian-11.tar.gz && \
-    echo "3908ffa59bfa43c84081a4803d79ac26ce1647f020ad97ffb264bdbcaa134163  /tmp/bitnami/pkg/cache/python-3.8.13-164-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/python-3.8.13-164-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/python-3.8.13-164-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/python-3.8.13-165-linux-amd64-debian-11.tar.gz && \
+    echo "2bf41f60dccdcf65842d993083c2dcb27ab48a8a514fdeb1778e9b09f3e4a203  /tmp/bitnami/pkg/cache/python-3.8.13-165-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/python-3.8.13-165-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/python-3.8.13-165-linux-amd64-debian-11.tar.gz
 RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/node-12.22.12-153-linux-amd64-debian-11.tar.gz && \
     echo "12b2da0d95dcd427a6fb4b8475c9e16bbd1f5ebfa36a2b0ad547a0d8bffd7a74  /tmp/bitnami/pkg/cache/node-12.22.12-153-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/node-12.22.12-153-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \

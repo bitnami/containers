@@ -4,6 +4,14 @@ ENV HOME="/" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="4.12.0-debian-11-r4" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/dreamfactory" \
+      org.opencontainers.image.title="dreamfactory" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="4.12.0"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
@@ -12,10 +20,10 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.4.30-156
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.54-154" --checksum 5a352475f0d887b8489e41d0c7f2e40c814899208ac53e4cf2b8b9ae96dc41b9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redis-client" "7.0.4-1" --checksum 349b9c18c902e387326fe43381b5a323d7b73b5b32a9baa1834b2d5648b61a3a
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "11.16.0-152" --checksum 61628b9756eac7d4dcc7a9c2c6498f379ad2dbf97b0e1be6beac85720de140fe
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "11.17.0-0" --checksum 6fc185dfa4cac2f2338d9900835f74b94f023cf53c99edf0966ee0f66b43ed2b
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-152" --checksum 3c4757f1064b7a1648886658f05706957cf165c57fa922f4a6ebb757a19034cb
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.30-152" --checksum 0a783cb719a50d8b30ab5f9af77c9f22258f060dd2cdf709b8852132c6148ad3
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.37.1-2" --checksum cac709be5709568fc93602ec97f27c1ae02b6314980f3e046649a0ee30a801e6
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.37.2-0" --checksum e695c1e29ff39cd54da23d2d5c3703d7d767a1d17d42ca85b3581d6e2d171bca
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-152" --checksum 7909504f3232654c427681ecc8ed4b8599a2df0f17f26ff769a83ed167d05b69
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "dreamfactory" "4.12.0-1" --checksum 83c37aca89bc52763c22282ec3c3e65a6b7a80bc2ca2615288b0b3af94fc3d3a
 RUN apt-get update && apt-get upgrade -y && \
