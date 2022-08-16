@@ -6,11 +6,11 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="7.12.6-debian-11-r29" \
+      org.opencontainers.image.ref.name="7.12.7-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/suitecrm" \
       org.opencontainers.image.title="suitecrm" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="7.12.6"
+      org.opencontainers.image.version="7.12.7"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -20,7 +20,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "8.0.22-1" 
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.54-154" --checksum 5a352475f0d887b8489e41d0c7f2e40c814899208ac53e4cf2b8b9ae96dc41b9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.9-0" --checksum cebce7505cdf9a25aa92950d2d0b4f6678905c2c1aa4ade97d69b01b2848a266
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "8.0.22-1" --checksum 1af064539b6d283201bc3331f7c9b9c7470c6eefd884539b184277df879e8bcc
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "suitecrm" "7.12.6-153" --checksum 4365974650e504c21fa8b776290cfd51cdee7413d4621ae319e61da5f71603dc
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "suitecrm" "7.12.7-0" --checksum 3a53653096abb937f9ab84c566a80a8c58b4152145dd1715ddff99374dc87b42
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-152" --checksum 7909504f3232654c427681ecc8ed4b8599a2df0f17f26ff769a83ed167d05b69
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
 RUN apt-get update && apt-get upgrade -y && \
@@ -36,7 +36,7 @@ RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/suitecrm/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="7.12.6" \
+    APP_VERSION="7.12.7" \
     BITNAMI_APP_NAME="suitecrm" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
