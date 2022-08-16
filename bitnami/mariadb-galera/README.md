@@ -398,7 +398,7 @@ $ docker run --name mariadb \
   -v /path/to/key.pem:/bitnami/mariadb/certs/key.pem:ro
   -v /path/to/ca.pem:/bitnami/mariadb/certs/ca.pem:ro
   -e ALLOW_EMPTY_PASSWORD=yes \
-  -e MARIADB_ENABLE_SSL=yes \
+  -e MARIADB_ENABLE_TLS=yes \
   -e MARIADB_TLS_CERT_FILE=/bitnami/mariadb/certs/cert.pem \
   -e MARIADB_TLS_KEY_FILE=/bitnami/mariadb/certs/key.pem \
   -e MARIADB_TLS_CA_FILE=/bitnami/mariadb/certs/ca.pem \
