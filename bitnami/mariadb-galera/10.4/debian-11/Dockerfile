@@ -6,18 +6,18 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="10.4.25-debian-11-r26" \
+      org.opencontainers.image.ref.name="10.4.26-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mariadb-galera" \
       org.opencontainers.image.title="mariadb-galera" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="10.4.25"
+      org.opencontainers.image.version="10.4.26"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip iproute2 ldap-utils libaio1 libaudit1 libc6 libcap-ng0 libcrypt1 libgcc-s1 libicu67 libjemalloc2 libldap-common liblzma5 libncurses6 libnss-ldapd libpam-ldapd libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 nslcd procps psmisc rsync socat tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.3-152" --checksum 0017b950b7eb0faa7580ef23342adbbfa2038d55c3dafdf1c8761788122f718e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mariadb-galera" "10.4.25-152" --checksum 83cca508d2eedf76db18a067bcd397919b40d528c9dd7c6532ab201d934d612a
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mariadb-galera" "10.4.26-0" --checksum a8d1a5792372619085d98969a8d90d2f0203ab27e288afe2d18870ea489e5371
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -26,7 +26,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mariadb-galera/postunpack.sh
-ENV APP_VERSION="10.4.25" \
+ENV APP_VERSION="10.4.26" \
     BITNAMI_APP_NAME="mariadb-galera" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 
