@@ -6,10 +6,11 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="6.0.1-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mongodb-sharded" \
       org.opencontainers.image.title="mongodb-sharded" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="6.0.0"
+      org.opencontainers.image.version="6.0.1"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -19,7 +20,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb-shell" "
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.27.2-1" --checksum 44d0058c0fffa1ccc89c081ed3e5c897489fa02580a839cfe1d37b2ca771f237
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.3-153" --checksum 8c8e324ab6e7b7d76b4655182d6ea5f6550edfc9e32bec92228e678c26fc8b16
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-152" --checksum 7909504f3232654c427681ecc8ed4b8599a2df0f17f26ff769a83ed167d05b69
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb" "6.0.0-0" --checksum bb6941c84b38a4e9c4ceabff0343935831e65bdceffb54d4bc5c2968da187278
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mongodb" "6.0.1-0" --checksum 1fe49c9829fd079bf6eec3adf3abc9bfcdb1d285e0e0ba509cf75d0c21625335
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -30,7 +31,7 @@ RUN ln -s /opt/bitnami/scripts/mongodb-sharded/run.sh /run.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb-sharded/postunpack.sh
-ENV APP_VERSION="6.0.0" \
+ENV APP_VERSION="6.0.1" \
     BITNAMI_APP_NAME="mongodb-sharded" \
     PATH="/opt/bitnami/mongodb/bin:/opt/bitnami/common/bin:$PATH"
 
