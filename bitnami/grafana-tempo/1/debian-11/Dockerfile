@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.4.1-debian-11-r28" \
+      org.opencontainers.image.ref.name="1.4.1-debian-11-r29" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/grafana-tempo" \
       org.opencontainers.image.title="grafana-tempo" \
       org.opencontainers.image.vendor="VMware, Inc." \
