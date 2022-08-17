@@ -5,11 +5,11 @@ ENV OS_ARCH="amd64" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.4.6-debian-11-r18" \
+      org.opencontainers.image.ref.name="2.5.0-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kubeapps-dashboard" \
       org.opencontainers.image.title="kubeapps-dashboard" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.4.6"
+      org.opencontainers.image.version="2.5.0"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -17,7 +17,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages acl ca-certificates curl gzip libc6 libcrypt1 libgeoip1 libpcre3 libssl1.1 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "1.23.1-1" --checksum b77b19f3cce1d5f59a83a2035b2f59763447ffe29ac4a267e417582a2cc5c4ea
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-152" --checksum 7909504f3232654c427681ecc8ed4b8599a2df0f17f26ff769a83ed167d05b69
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kubeapps" "2.4.6-2" --checksum 07bbe5e7e4e00beda2aeba682c49ebf57acd8284a24d748ae4f98caa8bca03ab
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kubeapps" "2.5.0-0" --checksum 8e36db7a73f5c977a4afe8469daed08a9c69c1e9b95a6714e7f4e52de61e49cd
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -30,7 +30,7 @@ RUN rm -rf /app && \
     mv /opt/bitnami/kubeapps/build /app
 RUN chmod -R g+rwX /opt/bitnami/nginx/conf
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
-ENV APP_VERSION="2.4.6" \
+ENV APP_VERSION="2.5.0" \
     BITNAMI_APP_NAME="kubeapps-dashboard" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
