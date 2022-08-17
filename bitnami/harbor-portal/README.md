@@ -12,7 +12,7 @@
 
 ```console
 $ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/harbor-portal/docker-compose.yml
-$ curl -L https://github.com/bitnami/containers/blob/main/bitnami/harbor-portal/archive/master.tar.gz | tar xz --strip=1 --wildcards '*-master/config'
+$ curl -L https://github.com/bitnami/containers/archive/main.tar.gz | tar xz --strip=1 --wildcards '*-main/bitnami/harbor-portal/config' && mv bitnami/harbor-portal/config . && rm -rf bitnami
 $ docker-compose up
 ```
 
