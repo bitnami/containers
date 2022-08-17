@@ -6,18 +6,18 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="10.4.25-debian-11-r28" \
+      org.opencontainers.image.ref.name="10.4.26-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mariadb" \
       org.opencontainers.image.title="mariadb" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="10.4.25"
+      org.opencontainers.image.version="10.4.26"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaio1 libaudit1 libc6 libcap-ng0 libcrypt1 libgcc-s1 libicu67 libjemalloc2 liblzma5 libncurses6 libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 procps psmisc tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.3-152" --checksum 0017b950b7eb0faa7580ef23342adbbfa2038d55c3dafdf1c8761788122f718e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mariadb" "10.4.25-152" --checksum 49013e40604170abc5dbc40e2ff555ba9681e3313b8b5d1f74dc8cf57eeb2964
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mariadb" "10.4.26-0" --checksum 20837f44dfd644ebecd2f5a27d9b8510cbf90bdb8d441e1b0fccfb69f4f0563d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -26,7 +26,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mariadb/postunpack.sh
-ENV APP_VERSION="10.4.25" \
+ENV APP_VERSION="10.4.26" \
     BITNAMI_APP_NAME="mariadb" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 

@@ -8,7 +8,7 @@ ARG EXTRA_LOCALES=""
 ARG WITH_ALL_LOCALES="no"
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.0.2-debian-11-r11" \
+      org.opencontainers.image.ref.name="4.0.2-debian-11-r12" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/moodle" \
       org.opencontainers.image.title="moodle" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ RUN install_packages acl ca-certificates cron curl gzip libaudit1 libbrotli1 lib
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "7.4.30-156" --checksum 9a2008341bef6242b06933fac4651d8dfbd29d4139b7ea732964d2ba26842ebb
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "2.4.54-154" --checksum 5a352475f0d887b8489e41d0c7f2e40c814899208ac53e4cf2b8b9ae96dc41b9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "13.8.0-0" --checksum 5dd1afba3aca8070dae723f9ab2253cbc6ff5622f4f0f522332181f57c8ce958
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-152" --checksum 3c4757f1064b7a1648886658f05706957cf165c57fa922f4a6ebb757a19034cb
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.9-0" --checksum cebce7505cdf9a25aa92950d2d0b4f6678905c2c1aa4ade97d69b01b2848a266
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "libphp" "7.4.30-152" --checksum 0a783cb719a50d8b30ab5f9af77c9f22258f060dd2cdf709b8852132c6148ad3
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-152" --checksum 7909504f3232654c427681ecc8ed4b8599a2df0f17f26ff769a83ed167d05b69
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "moodle" "4.0.2-2" --checksum cef93ff5af2d20cf528fcdbdfccc622922b6d9d5537282a02ec1f1f676dcb17b

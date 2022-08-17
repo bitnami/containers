@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="5.0.2-debian-11-r18" \
+      org.opencontainers.image.ref.name="5.0.2-debian-11-r19" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/redmine" \
       org.opencontainers.image.title="redmine" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -20,7 +20,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-15
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.27.2-1" --checksum 44d0058c0fffa1ccc89c081ed3e5c897489fa02580a839cfe1d37b2ca771f237
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "3.0.4-152" --checksum 31c2f63de32635f535f7ae9e382dc06e63b96532f26cf26121d63559628d317d
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "11.17.0-0" --checksum 6fc185dfa4cac2f2338d9900835f74b94f023cf53c99edf0966ee0f66b43ed2b
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.8-152" --checksum 3c4757f1064b7a1648886658f05706957cf165c57fa922f4a6ebb757a19034cb
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.9-0" --checksum cebce7505cdf9a25aa92950d2d0b4f6678905c2c1aa4ade97d69b01b2848a266
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "git" "2.37.2-0" --checksum e695c1e29ff39cd54da23d2d5c3703d7d767a1d17d42ca85b3581d6e2d171bca
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "redmine" "5.0.2-2" --checksum eabc38934ffa9867b274d0b63d9b4b37f9877842a8b296c489e7b2163fca8958
 RUN apt-get update && apt-get upgrade -y && \
