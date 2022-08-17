@@ -8,17 +8,10 @@
     },
     "dreamfactory": {
         "arch": "amd64",
-        "digest": "83c37aca89bc52763c22282ec3c3e65a6b7a80bc2ca2615288b0b3af94fc3d3a",
+        "digest": "a80e27dd5a853e641cb958c176b08d9f7ff0619755b6d134e66bddbde2d062b8",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.12.0-1"
-    },
-    "git": {
-        "arch": "amd64",
-        "digest": "e695c1e29ff39cd54da23d2d5c3703d7d767a1d17d42ca85b3581d6e2d171bca",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "2.37.2-0"
+        "version": "4.12.0-2"
     },
     "gosu": {
         "arch": "amd64",
@@ -36,17 +29,17 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "3c4757f1064b7a1648886658f05706957cf165c57fa922f4a6ebb757a19034cb",
+        "digest": "cebce7505cdf9a25aa92950d2d0b4f6678905c2c1aa4ade97d69b01b2848a266",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.6.8-152"
+        "version": "10.6.9-0"
     },
     "php": {
         "arch": "amd64",
-        "digest": "9a2008341bef6242b06933fac4651d8dfbd29d4139b7ea732964d2ba26842ebb",
+        "digest": "6e5b46318457095a276d5b2a9ab467e90642fece8f5d9e2704aa846e31a6961e",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.4.30-156"
+        "version": "7.4.30-157"
     },
     "postgresql-client": {
         "arch": "amd64",
