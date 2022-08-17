@@ -5,7 +5,7 @@ ENV OS_ARCH="amd64" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="9.3.7-0-debian-11-r1" \
+      org.opencontainers.image.ref.name="9.3.7-0-debian-11-r2" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jruby" \
       org.opencontainers.image.title="jruby" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -27,10 +27,10 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
     echo "1a5468c7b552dfc8a33c5c9b214dbf7dd143a5f008cc3aa2e0418fab5eb16c5c  /tmp/bitnami/pkg/cache/java-11.0.15-1-2-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
     tar -zxf /tmp/bitnami/pkg/cache/java-11.0.15-1-2-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
     rm -rf /tmp/bitnami/pkg/cache/java-11.0.15-1-2-linux-amd64-debian-11.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jruby-9.3.7-0-1-linux-amd64-debian-11.tar.gz && \
-    echo "add49e79445ca4ed5295252f43d443f8845f10047fe415610a2468be5da5f850  /tmp/bitnami/pkg/cache/jruby-9.3.7-0-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/jruby-9.3.7-0-1-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/jruby-9.3.7-0-1-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jruby-9.3.7-0-2-linux-amd64-debian-11.tar.gz && \
+    echo "167fd6e6604dabe423e11abc5b58b16ac83cd835dd997eae9f9db42c2423f85d  /tmp/bitnami/pkg/cache/jruby-9.3.7-0-2-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/jruby-9.3.7-0-2-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/jruby-9.3.7-0-2-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
