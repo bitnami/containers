@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.30.4-debian-11-r9" \
+      org.opencontainers.image.ref.name="0.30.4-debian-11-r10" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/trivy" \
       org.opencontainers.image.title="trivy" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -16,10 +16,10 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/trivy-0.30.4-3-linux-amd64-debian-11.tar.gz && \
-    echo "34a0909ce0e69000543aead09ff79c6ec8ed762e3a2758f35107afe565058a5d  /tmp/bitnami/pkg/cache/trivy-0.30.4-3-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/trivy-0.30.4-3-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/trivy-0.30.4-3-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/trivy-0.30.4-4-linux-amd64-debian-11.tar.gz && \
+    echo "5b6ccd092a26cdcd02d0cb2019435c26516839748a3739c967337e2d005ac772  /tmp/bitnami/pkg/cache/trivy-0.30.4-4-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/trivy-0.30.4-4-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/trivy-0.30.4-4-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
