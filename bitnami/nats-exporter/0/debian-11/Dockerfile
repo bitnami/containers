@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.9.3-debian-11-r29" \
+      org.opencontainers.image.ref.name="0.9.3-debian-11-r30" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/nats-exporter" \
       org.opencontainers.image.title="nats-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
