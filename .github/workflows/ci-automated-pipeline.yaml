@@ -151,5 +151,5 @@ jobs:
         with:
           numOfAssignee: 1
           removePreviousAssignees: true
-          teams: ${{ env.TRIAGE_TEAM }}
+          teams: build-maintainers
           repo-token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
