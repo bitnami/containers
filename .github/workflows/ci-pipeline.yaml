@@ -90,11 +90,12 @@ jobs:
           VIB_ENV_CONTAINER: ${{ steps.get-container-metadata.outputs.name  }}
           VIB_ENV_TAG: ${{ steps.get-container-metadata.outputs.tag }}
   verify-all:
-    # Ensure all containers passed the varification
+    # Ensure all containers passed the verification
     runs-on: ubuntu-latest
     name: Verify
     needs: vib-verify
+    if: ${{ always() }}
     steps:
       - name: Verify
-        if: ${{ needs.vib-verify.result != 'success' }}
+        if: ${{ needs.vib-verify.result != 'success' && needs.vib-verify.result != 'skipped'}}
         run: exit 1
