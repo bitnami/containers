@@ -15,17 +15,10 @@
     },
     "express-generator": {
         "arch": "amd64",
-        "digest": "c8b7b506b6612b666e65f7177d749f2e812b3e0dac9ced61ae4ca8d1e19cade3",
+        "digest": "bb1eb2b7d5e20da8b1416258def9f1d0559cfdcf01505655791df6c32147263d",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.16.1-152"
-    },
-    "git": {
-        "arch": "amd64",
-        "digest": "e695c1e29ff39cd54da23d2d5c3703d7d767a1d17d42ca85b3581d6e2d171bca",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "2.37.2-0"
+        "version": "4.16.1-153"
     },
     "gosu": {
         "arch": "amd64",
