@@ -1,4 +1,4 @@
-# Bitnami Percona Server for MySQL Stack
+# Percona Server for MySQL packaged by Bitnami
 
 ## What is Percona Server for MySQL?
 
@@ -6,7 +6,7 @@
 
 [Overview of Percona Server for MySQL](https://www.percona.com/software/mysql-database)
 
-
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
@@ -28,7 +28,7 @@ $ docker run --name percona-mysql bitnami/percona-mysql:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8.0`, `8.0-debian-11`, `8.0.29-21`, `8.0.29-21-debian-11-r2`, `latest` (8.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/percona-mysql/8.0/debian-11/Dockerfile)
+* [`8.0`, `8.0-debian-11`, `8.0.29-21`, `8.0.29-21-debian-11-r3`, `latest` (8.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/percona-mysql/8.0/debian-11/Dockerfile)
 * [`5.7`, `5.7-debian-11`, `5.7.39-42`, `5.7.39-42-debian-11-r0` (5.7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/percona-mysql/5.7/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
