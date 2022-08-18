@@ -1,11 +1,13 @@
 name: '[CI/CD] CI Pipeline for automated PRs'
-on: # rebuild any PRs and main branch changes
+on: # Triggered only on open PR events done by bitnami-bot on containers folders
   pull_request_target:
     types:
       - opened
     branches:
       - main
       - bitnami:main
+    paths:
+      - 'bitnami/**'
 env:
   CSP_API_URL: https://console.cloud.vmware.com
   CSP_API_TOKEN: ${{ secrets.CSP_API_TOKEN }}

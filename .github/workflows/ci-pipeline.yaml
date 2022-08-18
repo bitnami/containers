@@ -49,7 +49,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: get-containers
     if: ${{ needs.get-containers.outputs.result == 'ok' && contains(github.event.pull_request.labels.*.name, 'verify') }}
-    name: Verify
+    name: Verify container
+    continue-on-error: false
     strategy:
       fail-fast: false
       matrix:
@@ -79,6 +80,7 @@ jobs:
           fi
       - uses: vmware-labs/vmware-image-builder-action@main
         name: Verify
+        if: ${{ steps.get-container-metadata.outputs.result == 'ok' }}
         with:
           pipeline: vib-verify.json
         env:
@@ -87,3 +89,12 @@ jobs:
           # Container name
           VIB_ENV_CONTAINER: ${{ steps.get-container-metadata.outputs.name  }}
           VIB_ENV_TAG: ${{ steps.get-container-metadata.outputs.tag }}
+  verify-all:
+    # Ensure all containers passed the varification
+    runs-on: ubuntu-latest
+    name: Verify
+    needs: vib-verify
+    steps:
+      - name: Verify
+        if: ${{ needs.vib-verify.result != 'success' }}
+        run: exit 1
