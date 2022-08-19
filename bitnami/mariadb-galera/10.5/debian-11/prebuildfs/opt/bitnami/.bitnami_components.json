@@ -18,6 +18,6 @@
         "digest": "50f011589bdeb6f14bb921e846fd66797988d485fa094d46c0a70320e1d96651",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.5.17-0"
+        "version": "10.5.17-1"
     }
 }
