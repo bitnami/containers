@@ -310,8 +310,9 @@ is_kibana_ready() {
     # Therefore, we must check the value is not 'true'
     [[ ! "$rewriteBasePath" = "false" ]] && basePath=$(kibana_conf_get "server.basePath")
     if is_kibana_running; then
-        local -r level="$(yq eval ".status.overall.level" - <<<"$(curl -s "127.0.0.1:${KIBANA_PORT_NUMBER}${basePath:-}/api/status")")"
-        [[ "$level" = "available" ]]
+        local -r status="$(yq eval ".status.overall" - <<<"$(curl -s "127.0.0.1:${KIBANA_PORT_NUMBER}${basePath:-}/api/status")")"
+        [[ $(echo $status | yq eval ".state") = "green" ]] && return # Kibana 7
+        [[ $(echo $status | yq eval ".level") = "available" ]] && return # Kibana 8
     else
         false
     fi
