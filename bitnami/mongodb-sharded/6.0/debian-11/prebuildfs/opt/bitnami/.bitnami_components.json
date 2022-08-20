@@ -8,10 +8,10 @@
     },
     "mongodb": {
         "arch": "amd64",
-        "digest": "1fe49c9829fd079bf6eec3adf3abc9bfcdb1d285e0e0ba509cf75d0c21625335",
+        "digest": "e883a5a3f61929ecf77bd7e1790093a814df60300096adf281998195e617888a",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.0.1-0"
+        "version": "6.0.1-1"
     },
     "mongodb-shell": {
         "arch": "amd64",
