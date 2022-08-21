@@ -17,7 +17,7 @@ services:
     depends_on:
       - zookeeper
   ksql:
-    image: docker.io/bitnami/ksql:7.1
+    image: docker.io/bitnami/ksql:7.2
     environment:
       - KSQL_BOOTSTRAP_SERVERS=kafka:9092
     volumes:
