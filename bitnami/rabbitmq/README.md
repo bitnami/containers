@@ -190,6 +190,7 @@ Available variables:
 #### Node and cluster configuration
 
 * `RABBITMQ_VHOST`: RabbitMQ application vhost. Default: **/**
+* `RABBITMQ_VHOSTS`: List of additional virtual host (vhost), separated by space. E.g.: **/shared /prioritized /tasks**
 * `RABBITMQ_USERNAME`: RabbitMQ application username. Default: **user**
 * `RABBITMQ_PASSWORD`: RabbitMQ application password. Default: **bitnami**
 * `RABBITMQ_SECURE_PASSWORD`: Whether to set the RabbitMQ password securely. This is incompatible with loading external RabbitMQ definitions. Default: **no**
