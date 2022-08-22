@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.2.2-debian-11-r28" \
+      org.opencontainers.image.ref.name="3.2.2-debian-11-r29" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/couchdb" \
       org.opencontainers.image.title="couchdb" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -19,7 +19,7 @@ RUN install_packages acl ca-certificates curl gzip libc6 libgcc-s1 libicu67 libs
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.3-153" --checksum 8c8e324ab6e7b7d76b4655182d6ea5f6550edfc9e32bec92228e678c26fc8b16
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.3-152" --checksum 0017b950b7eb0faa7580ef23342adbbfa2038d55c3dafdf1c8761788122f718e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "couchdb" "3.2.2-153" --checksum dd52c754560a38fab814f71f8f15bcb7ebaeeb940edad448fc558a08a52b0a55
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "couchdb" "3.2.2-154" --checksum 8053851f601f48cd1eccb347b2a7cc9bd48ace01118ac3cfd2faee57d7a94393
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
