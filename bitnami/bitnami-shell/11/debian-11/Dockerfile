@@ -1,5 +1,13 @@
 FROM docker.io/bitnami/minideb:bullseye
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="11-debian-11-r27" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/bitnami-shell" \
+      org.opencontainers.image.title="bitnami-shell" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="11"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies

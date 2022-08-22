@@ -4,14 +4,22 @@ ENV HOME="/" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="0.6.1-debian-11-r30" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/metrics-server" \
+      org.opencontainers.image.title="metrics-server" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="0.6.1"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/metrics-server-0.6.1-151-linux-amd64-debian-11.tar.gz && \
-    echo "311a76abdd073e89a4c7bbbe2ba18c5f498428fd69e4298b0a7a43d71a02c981  /tmp/bitnami/pkg/cache/metrics-server-0.6.1-151-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/metrics-server-0.6.1-151-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/metrics-server-0.6.1-151-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/metrics-server-0.6.1-152-linux-amd64-debian-11.tar.gz && \
+    echo "57efe1780014b99d2962042d29fe9fa9d4ff9a7e50c31f67bc518f496919df97  /tmp/bitnami/pkg/cache/metrics-server-0.6.1-152-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/metrics-server-0.6.1-152-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/metrics-server-0.6.1-152-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami

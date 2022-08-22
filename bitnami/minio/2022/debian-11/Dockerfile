@@ -4,14 +4,22 @@ ENV HOME="/" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="2022.8.13-debian-11-r1" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/minio" \
+      org.opencontainers.image.title="minio" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="2022.8.13"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq libc6 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.3-152" --checksum 0694ae67645c416d9f6875e90c0f7cef379b4ac8030a6a5b8b5cc9ca77c6975d
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio-client" "2022.7.29-0" --checksum ab627d6ea5c8d49456d704fb8d6c6e306c97b3a49db76a6d4b3ea8c05f5a676e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio" "2022.8.5-0" --checksum 2ec329008e96588b86eb18e0829b4e92dc6fd4cbb23429fdb65421f29f1a33a9
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.3-153" --checksum 8c8e324ab6e7b7d76b4655182d6ea5f6550edfc9e32bec92228e678c26fc8b16
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio-client" "2022.8.11-0" --checksum 4b18a55a3a9fd500fd5e6be62cfe434001415fb82550cedcd3eef57e39da3127
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "minio" "2022.8.13-0" --checksum d691a71781c201b7d4d9dfb3944b49b2150027c5675255d4889f0f179227ce89
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -19,7 +27,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/minio-client/postunpack.sh
 RUN /opt/bitnami/scripts/minio/postunpack.sh
-ENV APP_VERSION="2022.8.5" \
+ENV APP_VERSION="2022.8.13" \
     BITNAMI_APP_NAME="minio" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/minio-client/bin:/opt/bitnami/minio/bin:$PATH"
 

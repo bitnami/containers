@@ -4,19 +4,27 @@ ENV HOME="/" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="1.23.4-debian-11-r1" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/telegraf" \
+      org.opencontainers.image.title="telegraf" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="1.23.4"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/telegraf-1.23.3-0-linux-amd64-debian-11.tar.gz && \
-    echo "9bfef0675fc566f3e7ae7d76418f351d901e7104e1906533a16e3f797caf4436  /tmp/bitnami/pkg/cache/telegraf-1.23.3-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/telegraf-1.23.3-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/telegraf-1.23.3-0-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/telegraf-1.23.4-0-linux-amd64-debian-11.tar.gz && \
+    echo "344ab27d7e86b0b9e94dea3ef1996fa50440a90798b1568add6501f8e093446d  /tmp/bitnami/pkg/cache/telegraf-1.23.4-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/telegraf-1.23.4-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/telegraf-1.23.4-0-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="1.23.3" \
+ENV APP_VERSION="1.23.4" \
     BITNAMI_APP_NAME="telegraf" \
     PATH="/opt/bitnami/telegraf/bin:$PATH"
 

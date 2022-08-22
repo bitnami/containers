@@ -4,14 +4,22 @@ ENV HOME="/" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="0.13.4-debian-11-r11" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/metallb-speaker" \
+      org.opencontainers.image.title="metallb-speaker" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="0.13.4"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/metallb-speaker-0.13.4-0-linux-amd64-debian-11.tar.gz && \
-    echo "b704694180b5bf447b3e70172a03a8abed8f555fa28a7b6eafd776c8bae0b46c  /tmp/bitnami/pkg/cache/metallb-speaker-0.13.4-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/metallb-speaker-0.13.4-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/metallb-speaker-0.13.4-0-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/metallb-speaker-0.13.4-1-linux-amd64-debian-11.tar.gz && \
+    echo "0d4e67b23d5d1857cdb4db272735c60956a5443bc6b32af887c163607511af70  /tmp/bitnami/pkg/cache/metallb-speaker-0.13.4-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/metallb-speaker-0.13.4-1-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/metallb-speaker-0.13.4-1-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami

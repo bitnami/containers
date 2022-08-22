@@ -234,6 +234,7 @@ cassandra_validate() {
     done
 
     check_true_false_value CASSANDRA_SSL_VALIDATE
+    check_true_false_value CASSANDRA_AUTOMATIC_SSTABLE_UPGRADE
 
     if ((${#CASSANDRA_PASSWORD} > 512)); then
         print_validation_error "The password cannot be longer than 512 characters. Set the environment variable CASSANDRA_PASSWORD with a shorter value"
@@ -403,6 +404,10 @@ cassandra_setup_cluster() {
 
         if [[ -n "$CASSANDRA_BROADCAST_ADDRESS" ]]; then
             cassandra_yaml_set "broadcast_address" "$CASSANDRA_BROADCAST_ADDRESS"
+        fi
+
+        if [[ -n "$CASSANDRA_AUTOMATIC_SSTABLE_UPGRADE" ]]; then
+            cassandra_yaml_set "automatic_sstable_upgrade" "$CASSANDRA_AUTOMATIC_SSTABLE_UPGRADE"
         fi
 
         cassandra_config="$(sed -E "/client_encryption_options:.*/ {N;N; s/client_encryption_options:[^\n]*(\n\s{4}#.*)?\n\s{4}enabled:.*/client_encryption_options:\1\n    enabled: $CASSANDRA_CLIENT_ENCRYPTION/g}" "$CASSANDRA_CONF_FILE")"

@@ -404,6 +404,10 @@ mysql_galera_update_custom_config() {
     local default_auth_string="${DB_GALERA_DEFAULT_MARIABACKUP_USER}:${DB_GALERA_DEFAULT_MARIABACKUP_PASSWORD}"
     [[ "$galera_auth_string" != "$default_auth_string" ]] && mysql_conf_set "wsrep_sst_auth" "$galera_auth_string" "galera"
 
+    # Sanitize triple quotes produced by ini-file when using special characters like "`"
+    # https://github.com/bitnami/charts/issues/10880
+    replace_in_file "$DB_CONF_FILE" "=\"\"\"(.*)\"\"\"" "=\1"
+
     # Avoid exit code of previous commands to affect the result of this function
     true
 }

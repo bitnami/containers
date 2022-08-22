@@ -4,20 +4,28 @@ ENV HOME="/" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="2.4.0-debian-11-r0" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/influxdb" \
+      org.opencontainers.image.title="influxdb" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="2.4.0"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc-s1 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.3-152" --checksum 0694ae67645c416d9f6875e90c0f7cef379b4ac8030a6a5b8b5cc9ca77c6975d
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "influxdb" "2.3.0-1" --checksum 9ec31bfd768b6c73ecc78c91e185f15e80b2e1c9ee06d536a3a557c9b4622a99
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.3-153" --checksum 8c8e324ab6e7b7d76b4655182d6ea5f6550edfc9e32bec92228e678c26fc8b16
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "influxdb" "2.4.0-0" --checksum dc179a42855ed905bd19434ff50a89a56e0e7a4ca34ea47995a335af0c2f271e
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/influxdb/postunpack.sh
-ENV APP_VERSION="2.3.0" \
+ENV APP_VERSION="2.4.0" \
     BITNAMI_APP_NAME="influxdb" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/influxdb/bin:$PATH"
 

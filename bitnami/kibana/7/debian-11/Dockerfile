@@ -5,13 +5,21 @@ ENV HOME="/" \
     OS_NAME="linux" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/kibana/bin:$PATH"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="7.17.5-debian-11-r20" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kibana" \
+      org.opencontainers.image.title="kibana" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="7.17.5"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libexpat1 libgcc-s1 libnss3 libstdc++6 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.27.2-0" --checksum bbe97d7488f4ff9421342d5cc45881b55944c802fced3a992a988365ce1c30fe
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-152" --checksum 0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kibana" "7.17.5-2" --checksum 13280bbf6ecc27769dbb44170641ea571a4032a876f3c5139a67097e5cfe2125
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.27.2-1" --checksum 44d0058c0fffa1ccc89c081ed3e5c897489fa02580a839cfe1d37b2ca771f237
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "kibana" "7.17.5-3" --checksum 02b9a575a38849ca218cceafd73dafb964316eb636ef6884d3c5c8771f02f4af
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami

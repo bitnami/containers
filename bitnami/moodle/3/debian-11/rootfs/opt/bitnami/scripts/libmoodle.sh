@@ -87,7 +87,7 @@ moodle_validate() {
     fi
 
     # Support for MySQL and MariaDB
-    check_multi_value "MOODLE_DATABASE_TYPE" "mysqli mariadb pgsql"
+    check_multi_value "MOODLE_DATABASE_TYPE" "mysqli mariadb pgsql auroramysql"
 
     # Check that the web server is properly set up
     web_server_validate || print_validation_error "Web server validation failed"
@@ -145,7 +145,7 @@ moodle_initialize() {
         db_name="$MOODLE_DATABASE_NAME"
         db_user="$MOODLE_DATABASE_USER"
         db_pass="$MOODLE_DATABASE_PASSWORD"
-        [[ "$db_type" = "mariadb" || "$db_type" = "mysqli" ]] && moodle_wait_for_mysql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
+        [[ "$db_type" = "mariadb" || "$db_type" = "mysqli" || "$db_type" = "auroramysql" ]] && moodle_wait_for_mysql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
         [[ "$db_type" = "pgsql" ]] && moodle_wait_for_postgresql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
 
         # Create Moodle install argument list, allowing to pass custom options via 'MOODLE_INSTALL_EXTRA_ARGS'
@@ -204,7 +204,7 @@ EOF
         db_name="$(moodle_conf_get "\$CFG->dbname")"
         db_user="$(moodle_conf_get "\$CFG->dbuser")"
         db_pass="$(moodle_conf_get "\$CFG->dbpass")"
-        [[ "$db_type" = "mariadb" || "$db_type" = "mysqli" ]] && moodle_wait_for_mysql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
+        [[ "$db_type" = "mariadb" || "$db_type" = "mysqli" || "$db_type" = "auroramysql" ]] && moodle_wait_for_mysql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
         [[ "$db_type" = "pgsql" ]] && moodle_wait_for_postgresql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
 
         # Perform Moodle database schema upgrade

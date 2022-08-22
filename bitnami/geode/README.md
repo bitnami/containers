@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-11`, `1.15.0`, `1.15.0-debian-11-r14`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/geode/1/debian-11/Dockerfile)
+* [`1`, `1-debian-11`, `1.15.0`, `1.15.0-debian-11-r19`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/geode/1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
@@ -198,9 +198,9 @@ Available environment variables:
 * `GEODE_SECURITY_TLS_PROTOCOLS`: Comma-separated list of valid protocols versions for TCP/IP connections with TLS encryption enabled. Default: **any**
 * `GEODE_SECURITY_TLS_REQUIRE_AUTHENTICATION`: Enable two-way authentication via TLS. Default: **no**
 * `GEODE_SECURITY_TLS_ENDPOINT_IDENTIFICATION_ENABLED`: Enable server hostname validation using server certificates. Default: **no**
-* `GEODE_SECURITY_TLS_KEYSTORE_FILE`: Path to the key store file. Default: **/bitnami/geode/config/certs/geode.keystore.jks**
+* `GEODE_SECURITY_TLS_KEYSTORE_FILE`: Path to the key store file. Default: **/opt/bitnami/geode/config/certs/geode.keystore.jks**
 * `GEODE_SECURITY_TLS_KEYSTORE_PASSWORD`: Key store file. No defaults.
-* `GEODE_SECURITY_TLS_TRUSTSTORE_FILE`: Path to the trust store file. Default: **/bitnami/geode/config/certs/geode.truststore.jks**
+* `GEODE_SECURITY_TLS_TRUSTSTORE_FILE`: Path to the trust store file. Default: **/opt/bitnami/geode/config/certs/geode.truststore.jks**
 * `GEODE_SECURITY_TLS_TRUSTSTORE_PASSWORD`: Trust store password. No defaults.
 
 #### Apache Geode cluster configuration
@@ -244,7 +244,7 @@ You can also configure TLS for authentication between members and to protect you
 
 > Note: TLS authentication can be alone or in conjunction with the authentication provided by the Security Manager
 
-To configure TLS, you must use your own certificates. You can drop your Java Key Stores into `/bitnami/geode/config/certs`. If the JKS certs are password protected (recommended), you will need to provide them also setting `GEODE_SECURITY_TLS_KEYSTORE_PASSWORD` and `GEODE_SECURITY_TLS_TRUSTSTORE_PASSWORD`.
+To configure TLS, you must use your own certificates. You can mount your Java Key Stores into `/opt/bitnami/geode/config/certs`. If the JKS certs are password protected (recommended), you will need to provide them also setting `GEODE_SECURITY_TLS_KEYSTORE_PASSWORD` and `GEODE_SECURITY_TLS_TRUSTSTORE_PASSWORD`.
 
 > If your Java Key Stores are mounted in a different location than `/opt/bitnami/geode/config/certs/geode.keystore.jks` and `/opt/bitnami/geode/config/certs/geode.truststore.jks`, set the environment variables `GEODE_SECURITY_TLS_KEYSTORE_FILE` and `GEODE_SECURITY_TLS_TRUSTSTORE_FILE` with the name of the path where you mounted your key store and trust store files, respectively.
 
@@ -278,8 +278,8 @@ services:
       - GEODE_SECURITY_TLS_TRUSTSTORE_PASSWORD=pass123
 
     volumes:
-      - './geode.keystore.jks:/bitnami/geode/config/certs/geode.keystore.jks:ro'
-      - './geode.truststore.jks:/bitnami/geode/config/certs/geode.truststore.jks:ro'
+      - './geode.keystore.jks:/opt/bitnami/geode/config/certs/geode.keystore.jks:ro'
+      - './geode.truststore.jks:/opt/bitnami/geode/config/certs/geode.truststore.jks:ro'
 ```
 
 ### Setting up an Apache Geode Cluster
@@ -518,6 +518,12 @@ Or using Docker Compose:
 ```console
 $ docker-compose up geode
 ```
+
+## Notable Changes
+
+### 1.15.0-debian-11-r16
+
+* Default value for `GEODE_SECURITY_TLS_KEYSTORE_FILE` and `GEODE_SECURITY_TLS_TRUSTSTORE_FILE` updated to **/opt/bitnami/geode/config/certs/geode.keystore.jks** and **/opt/bitnami/geode/config/certs/geode.truststore.jks** respectively
 
 ## Contributing
 

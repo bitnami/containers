@@ -47,7 +47,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2.4`, `2.4-debian-11`, `2.4.54`, `2.4.54-debian-11-r20`, `latest` (2.4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/apache/2.4/debian-11/Dockerfile)
+* [`2.4`, `2.4-debian-11`, `2.4.54`, `2.4.54-debian-11-r26`, `latest` (2.4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/apache/2.4/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
@@ -480,6 +480,10 @@ $ docker-compose up apache
 ](https://docs.bitnami.com/containers/how-to/create-amp-environment-containers/)
 
 ## Notable Changes
+
+### 2.4.54-debian-11-r22
+
+- Removed the [Apache PageSpeed Module (`mod_pagespeed`)](https://developers.google.com/speed/pagespeed/module).
 
 ### 2.4.43-debian-10-r66
 

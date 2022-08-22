@@ -1,44 +1,44 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0",
+        "digest": "d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-152"
+        "version": "1.14.0-153"
     },
     "java": {
         "arch": "amd64",
-        "digest": "6d176a8b3c894c608106fee2cf10aaf3771015defb0b7e08fe60ce6c9c1cd342",
+        "digest": "1a5468c7b552dfc8a33c5c9b214dbf7dd143a5f008cc3aa2e0418fab5eb16c5c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.15-1-1"
+        "version": "11.0.15-1-2"
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "c85e4be9bcee70c86c7bc7e13742e2d97810ad8f7d6154f8b66811b6cc4d0948",
+        "digest": "cebce7505cdf9a25aa92950d2d0b4f6678905c2c1aa4ade97d69b01b2848a266",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.6.8-151"
+        "version": "10.6.9-0"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "9690a34674f152e55c71a55275265314ed1bb29e0be8a75d7880488509f70deb",
+        "digest": "7909504f3232654c427681ecc8ed4b8599a2df0f17f26ff769a83ed167d05b69",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.3-151"
+        "version": "1.0.3-152"
     },
     "reportserver": {
         "arch": "amd64",
-        "digest": "b9556741cf630c017dccd24fad9778d6965e2e5c63094c5364f43cf3c59d5e34",
+        "digest": "6d9fefc9629ef86f8a0d99029bd1f5b85689971eac0244e3df4dc56a32fae5f7",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.2.0-6068-0"
+        "version": "4.2.0-6070-0"
     },
     "tomcat": {
         "arch": "amd64",
-        "digest": "cc5ec8f674abfb18c745f3656356aa83344bc0d9ff24024bffd3f85ef485514c",
+        "digest": "6fd7ac5bbbd7d98ff24981d2c860947d76a09fbd8756efde0a54dabb7c182483",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.0.65-0"
+        "version": "9.0.65-2"
     }
 }

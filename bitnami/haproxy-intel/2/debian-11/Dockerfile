@@ -4,28 +4,36 @@ ENV HOME="/" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="2.6.3-debian-11-r0" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/haproxy-intel" \
+      org.opencontainers.image.title="haproxy-intel" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="2.6.3"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 libssl1.1 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/qatengine-0.6.14-0-linux-amd64-debian-11.tar.gz && \
-    echo "1d3dbcc9f98ad8373674cb3d725682061a04e321626ad750a9f73f4b1004d502  /tmp/bitnami/pkg/cache/qatengine-0.6.14-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/qatengine-0.6.14-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/qatengine-0.6.14-0-linux-amd64-debian-11.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/haproxy-dataplaneapi-2.6.0-0-linux-amd64-debian-11.tar.gz && \
-    echo "41a3045242680b85e153729eb905604e916b0f1fd11ff9a3adbba8a575e36d21  /tmp/bitnami/pkg/cache/haproxy-dataplaneapi-2.6.0-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/haproxy-dataplaneapi-2.6.0-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/haproxy-dataplaneapi-2.6.0-0-linux-amd64-debian-11.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/haproxy-2.6.2-0-linux-amd64-debian-11.tar.gz && \
-    echo "9aa7be08d311a143594a2ebbb6bc112938a79bc2c75fc98223658248bae8fd92  /tmp/bitnami/pkg/cache/haproxy-2.6.2-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/haproxy-2.6.2-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/haproxy-2.6.2-0-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/qatengine-0.6.14-1-linux-amd64-debian-11.tar.gz && \
+    echo "e54efe09faa1e3fe55bada6f178341670d423bc928669e17e33d7416202e14e2  /tmp/bitnami/pkg/cache/qatengine-0.6.14-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/qatengine-0.6.14-1-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/qatengine-0.6.14-1-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/haproxy-dataplaneapi-2.6.0-1-linux-amd64-debian-11.tar.gz && \
+    echo "f95fb721441bf02fe10754c5c87400d1877016d5a812d78e60477fe8b948b94c  /tmp/bitnami/pkg/cache/haproxy-dataplaneapi-2.6.0-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/haproxy-dataplaneapi-2.6.0-1-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/haproxy-dataplaneapi-2.6.0-1-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/haproxy-2.6.3-0-linux-amd64-debian-11.tar.gz && \
+    echo "d3e3605b0fe750c8a1ba6c2ddcdccc96f620790f525e0de6a442bf3720555427  /tmp/bitnami/pkg/cache/haproxy-2.6.3-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/haproxy-2.6.3-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/haproxy-2.6.3-0-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN ln -s /opt/bitnami/common/lib/engines-1.1/* /usr/lib/x86_64-linux-gnu/engines-1.1/
 
-ENV APP_VERSION="2.6.2" \
+ENV APP_VERSION="2.6.3" \
     BITNAMI_APP_NAME="haproxy-intel" \
     PATH="/opt/bitnami/haproxy-dataplaneapi/bin:/opt/bitnami/haproxy/sbin:$PATH"
 

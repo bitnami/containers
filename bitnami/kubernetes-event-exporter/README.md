@@ -4,7 +4,7 @@
 
 > Kubernetes Event Exporter makes it easy to export Kubernetes events to other tools, thereby enabling better event observability, custom alerts and aggregation.
 
-[Overview of Kubernetes Event Exporter](https://github.com/opsgenie/kubernetes-event-exporter)
+[Overview of Kubernetes Event Exporter](https://github.com/resmoio/kubernetes-event-exporter)
 
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
@@ -40,7 +40,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-11`, `0.11.0`, `0.11.0-debian-11-r22`, `latest` (0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kubernetes-event-exporter/0/debian-11/Dockerfile)
+* [`0`, `0-debian-11`, `0.11.0`, `0.11.0-debian-11-r28`, `latest` (0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kubernetes-event-exporter/0/debian-11/Dockerfile)
 
 ## Connecting to other containers
 
@@ -54,7 +54,7 @@ Kubernetes Event Exporter is a tool created to be run inside a pod running on Ku
 
 Configuration is done via a YAML file, when run in Kubernetes, it's in ConfigMap. The tool watches all the events and user has to option to filter out some events, according to their properties.
 
-For further documentation, please check [Kubernetes Event Exporter documentation](https://github.com/opsgenie/kubernetes-event-exporter#configuration).
+For further documentation, please check [Kubernetes Event Exporter documentation](https://github.com/resmoio/kubernetes-event-exporter#configuration).
 
 ## Logging
 

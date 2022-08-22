@@ -6,10 +6,10 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates gzip tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/sealed-secrets-0.18.1-1-linux-amd64-debian-11.tar.gz && \
-    echo "b7e34d136c8cac3c06b74307297f400395fad04cdb3efb029bb40656cd9ae5c3  /tmp/bitnami/pkg/cache/sealed-secrets-0.18.1-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/sealed-secrets-0.18.1-1-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/sealed-secrets-0.18.1-1-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/sealed-secrets-0.18.1-2-linux-amd64-debian-11.tar.gz && \
+    echo "d58bbb38cf5a54f69a93cbe043fc0fec34df3a873c646768c40b77b55cdf338c  /tmp/bitnami/pkg/cache/sealed-secrets-0.18.1-2-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/sealed-secrets-0.18.1-2-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/sealed-secrets-0.18.1-2-linux-amd64-debian-11.tar.gz
 
 ######
 

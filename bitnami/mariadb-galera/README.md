@@ -51,12 +51,12 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`10.8`, `10.8-debian-11`, `10.8.3`, `10.8.3-debian-11-r16`, `latest` (10.8/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb-galera/10.8/debian-11/Dockerfile)
-* [`10.7`, `10.7-debian-11`, `10.7.4`, `10.7.4-debian-11-r27` (10.7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb-galera/10.7/debian-11/Dockerfile)
-* [`10.6`, `10.6-debian-11`, `10.6.8`, `10.6.8-debian-11-r21` (10.6/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb-galera/10.6/debian-11/Dockerfile)
-* [`10.5`, `10.5-debian-11`, `10.5.16`, `10.5.16-debian-11-r23` (10.5/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb-galera/10.5/debian-11/Dockerfile)
-* [`10.4`, `10.4-debian-11`, `10.4.25`, `10.4.25-debian-11-r22` (10.4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb-galera/10.4/debian-11/Dockerfile)
-* [`10.3`, `10.3-debian-11`, `10.3.35`, `10.3.35-debian-11-r24` (10.3/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb-galera/10.3/debian-11/Dockerfile)
+* [`10.8`, `10.8-debian-11`, `10.8.4`, `10.8.4-debian-11-r1`, `latest` (10.8/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb-galera/10.8/debian-11/Dockerfile)
+* [`10.7`, `10.7-debian-11`, `10.7.5`, `10.7.5-debian-11-r1` (10.7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb-galera/10.7/debian-11/Dockerfile)
+* [`10.6`, `10.6-debian-11`, `10.6.9`, `10.6.9-debian-11-r1` (10.6/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb-galera/10.6/debian-11/Dockerfile)
+* [`10.5`, `10.5-debian-11`, `10.5.17`, `10.5.17-debian-11-r1` (10.5/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb-galera/10.5/debian-11/Dockerfile)
+* [`10.4`, `10.4-debian-11`, `10.4.26`, `10.4.26-debian-11-r1` (10.4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb-galera/10.4/debian-11/Dockerfile)
+* [`10.3`, `10.3-debian-11`, `10.3.36`, `10.3.36-debian-11-r1` (10.3/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb-galera/10.3/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
@@ -182,7 +182,7 @@ $ docker-compose up -d
 
 ### Initializing a new instance
 
-When the container is executed for the first time, it will execute the files with extensions `.sh`, `.sql` and `.sql.gz` located at `/docker-entrypoint-initdb.d`.
+When the container is executed for the first time, it will execute the files with extensions `.sh`, `.sql` and `.sql.gz` located at `/docker-entrypoint-startdb.d`.
 
 In order to have your custom files inside the docker image you can mount them as a volume.
 
@@ -398,7 +398,7 @@ $ docker run --name mariadb \
   -v /path/to/key.pem:/bitnami/mariadb/certs/key.pem:ro
   -v /path/to/ca.pem:/bitnami/mariadb/certs/ca.pem:ro
   -e ALLOW_EMPTY_PASSWORD=yes \
-  -e MARIADB_ENABLE_SSL=yes \
+  -e MARIADB_ENABLE_TLS=yes \
   -e MARIADB_TLS_CERT_FILE=/bitnami/mariadb/certs/cert.pem \
   -e MARIADB_TLS_KEY_FILE=/bitnami/mariadb/certs/key.pem \
   -e MARIADB_TLS_CA_FILE=/bitnami/mariadb/certs/ca.pem \

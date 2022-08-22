@@ -4,14 +4,22 @@ ENV HOME="/" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="1.24.0-debian-11-r28" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cluster-autoscaler" \
+      org.opencontainers.image.title="cluster-autoscaler" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="1.24.0"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/cluster-autoscaler-1.24.0-151-linux-amd64-debian-11.tar.gz && \
-    echo "f3886ec51291b9ca58eb729b261b8a1f741c6b8dfd452432ebaa0599eee94b58  /tmp/bitnami/pkg/cache/cluster-autoscaler-1.24.0-151-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/cluster-autoscaler-1.24.0-151-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/cluster-autoscaler-1.24.0-151-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/cluster-autoscaler-1.24.0-152-linux-amd64-debian-11.tar.gz && \
+    echo "13ddc2555540202d4bd800a41db1f52ece4630a7c6fe4e9b3f275cf94631bd30  /tmp/bitnami/pkg/cache/cluster-autoscaler-1.24.0-152-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/cluster-autoscaler-1.24.0-152-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/cluster-autoscaler-1.24.0-152-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami

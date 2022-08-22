@@ -4,14 +4,22 @@ ENV HOME="/" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="1.9.1-debian-11-r12" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/acmesolver" \
+      org.opencontainers.image.title="acmesolver" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="1.9.1"
+
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/acmesolver-1.9.1-0-linux-amd64-debian-11.tar.gz && \
-    echo "4d1ebb7ac36df4407f50f4cd0db995f6bf5f04480b50d49e85a33cba03b6340b  /tmp/bitnami/pkg/cache/acmesolver-1.9.1-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/acmesolver-1.9.1-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/acmesolver-1.9.1-0-linux-amd64-debian-11.tar.gz
+RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/acmesolver-1.9.1-1-linux-amd64-debian-11.tar.gz && \
+    echo "d806ce40608a9da4b90b73754d0e41d86141d7502ed7f3e4a42d8a4bc68e8434  /tmp/bitnami/pkg/cache/acmesolver-1.9.1-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf /tmp/bitnami/pkg/cache/acmesolver-1.9.1-1-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
+    rm -rf /tmp/bitnami/pkg/cache/acmesolver-1.9.1-1-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
