@@ -1,4 +1,4 @@
-# Bitnami Confluent Schema Registry Stack
+# Confluent Schema Registry packaged by Bitnami
 
 ## What is Confluent Schema Registry?
 
@@ -6,7 +6,7 @@
 
 [Overview of Confluent Schema Registry](https://www.confluent.io)
 
-
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
@@ -28,11 +28,12 @@ $ docker run --name schema-registry bitnami/schema-registry:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7.1`, `7.1-debian-11`, `7.1.3`, `7.1.3-debian-11-r8`, `latest` (7.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/7.1/debian-11/Dockerfile)
-* [`7.0`, `7.0-debian-11`, `7.0.5`, `7.0.5-debian-11-r4` (7.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/7.0/debian-11/Dockerfile)
-* [`6.2`, `6.2-debian-11`, `6.2.6`, `6.2.6-debian-11-r5` (6.2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/6.2/debian-11/Dockerfile)
-* [`6.1`, `6.1-debian-11`, `6.1.7`, `6.1.7-debian-11-r4` (6.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/6.1/debian-11/Dockerfile)
-* [`6.0`, `6.0-debian-11`, `6.0.9`, `6.0.9-debian-11-r3` (6.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/6.0/debian-11/Dockerfile)
+* [`7.2`, `7.2-debian-11`, `7.2.1`, `7.2.1-debian-11-r1`, `latest` (7.2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/7.2/debian-11/Dockerfile)
+* [`7.1`, `7.1-debian-11`, `7.1.3`, `7.1.3-debian-11-r15` (7.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/7.1/debian-11/Dockerfile)
+* [`7.0`, `7.0-debian-11`, `7.0.5`, `7.0.5-debian-11-r11` (7.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/7.0/debian-11/Dockerfile)
+* [`6.2`, `6.2-debian-11`, `6.2.6`, `6.2.6-debian-11-r12` (6.2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/6.2/debian-11/Dockerfile)
+* [`6.1`, `6.1-debian-11`, `6.1.7`, `6.1.7-debian-11-r11` (6.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/6.1/debian-11/Dockerfile)
+* [`6.0`, `6.0-debian-11`, `6.0.9`, `6.0.9-debian-11-r10` (6.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/6.0/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
@@ -57,6 +58,10 @@ $ git clone https://github.com/bitnami/containers.git
 $ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 $ docker build -t bitnami/APP:latest .
 ```
+
+## Branch Deprecation Notice
+
+Confluent Schema Registry's branch 6.0.x is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 09-24-2022
 
 ## Contributing
 

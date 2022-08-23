@@ -1,0 +1,37 @@
+{
+    "gosu": {
+        "arch": "amd64",
+        "digest": "d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.14.0-153"
+    },
+    "ini-file": {
+        "arch": "amd64",
+        "digest": "0017b950b7eb0faa7580ef23342adbbfa2038d55c3dafdf1c8761788122f718e",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.4.3-152"
+    },
+    "mysql-shell": {
+        "arch": "amd64",
+        "digest": "1e71d5c92968af791c818070e4d5e37d67cd2159f92ceba32ec070dfe422d924",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "8.0.30-0"
+    },
+    "percona-mysql": {
+        "arch": "amd64",
+        "digest": "f02b65f8f04c08333c5785cb2fda9369d4644642eb4488ffc2d90d6b80db9f26",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "5.7.39-42-0"
+    },
+    "percona-xtrabackup-binary": {
+        "arch": "amd64",
+        "digest": "aa23284e1bea5befa0cc015f440d9fb6556a3da905a277a0e3f1d51e86bc3a0e",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "8.0.29-22-0"
+    }
+}

@@ -41,10 +41,9 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`18`, `18-debian-11`, `18.7.0`, `18.7.0-debian-11-r2`, `latest` (18/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/node/18/debian-11/Dockerfile)
-* [`16`, `16-debian-11`, `16.16.0`, `16.16.0-debian-11-r12` (16/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/node/16/debian-11/Dockerfile)
-* [`14`, `14-debian-11`, `14.20.0`, `14.20.0-debian-11-r8` (14/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/node/14/debian-11/Dockerfile)
-* [`12`, `12-debian-11`, `12.22.12`, `12.22.12-debian-11-r22` (12/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/node/12/debian-11/Dockerfile)
+* [`18`, `18-debian-11`, `18.7.0`, `18.7.0-debian-11-r9`, `latest` (18/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/node/18/debian-11/Dockerfile)
+* [`16`, `16-debian-11`, `16.17.0`, `16.17.0-debian-11-r2` (16/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/node/16/debian-11/Dockerfile)
+* [`14`, `14-debian-11`, `14.20.0`, `14.20.0-debian-11-r15` (14/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/node/14/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
@@ -351,10 +350,6 @@ $ docker-compose up node
 ### 4.1.1-0-r01 (2015-10-07)
 
 - `/app` directory is no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume are not persisted between Dockerfile `RUN` instructions. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
-
-## Branch Deprecation Notice
-
-Node.js's branch 12 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 06-03-2022
 
 ## Contributing
 

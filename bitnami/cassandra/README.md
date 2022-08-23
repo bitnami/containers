@@ -47,7 +47,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`4.0`, `4.0-debian-11`, `4.0.5`, `4.0.5-debian-11-r5`, `latest` (4.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/cassandra/4.0/debian-11/Dockerfile)
+* [`4.0`, `4.0-debian-11`, `4.0.5`, `4.0.5-debian-11-r12`, `latest` (4.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/cassandra/4.0/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
@@ -208,6 +208,7 @@ cassandra:
  - `CASSANDRA_ENABLE_SCRIPTED_USER_DEFINED_FUNCTIONS`: User defined scripted functions. Default: **false**
  - `CASSANDRA_BROADCAST_ADDRESS`: The public IP address this node uses to broadcast to other nodes outside the network or across regions in multiple-region EC2 deployments. This option is commented out by default (if not provided, Apache Cassandra will use "listen_address"). No defaults.
  - `CASSANDRA_COMMITLOG_DIR`: Directory where the commit logs will be stored. Default: **/bitnami/cassandra/data/commitlog**
+ - `CASSANDRA_AUTOMATIC_SSTABLE_UPGRADE`: Automatically upgrade sstables after upgrade - if there is no ordinary compaction to do, the oldest non-upgraded sstable will get upgraded to the latest version. Default: **false**.
 
 Additionally, any environment variable beginning with the following prefix will be mapped to its corresponding Apache Cassandra key in the proper file:
 

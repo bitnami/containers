@@ -1,23 +1,23 @@
 {
     "geode": {
         "arch": "amd64",
-        "digest": "9bc5d0682035adea0156f1cf53bcc763550ae3b667ff34893b6f4af9bbc98876",
+        "digest": "df401bcd2bbf589c517973f7ed152e15c7d14f54faadcf6d07a4509743754f91",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.15.0-1"
+        "version": "1.15.0-4"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "0c751c7e2ec0bc900a19dbec0306d6294fe744ddfb0fa64197ba1a36040092f0",
+        "digest": "d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-152"
+        "version": "1.14.0-153"
     },
     "java": {
         "arch": "amd64",
-        "digest": "8f73ab6158f088f418caafcb5fd9981cf53076f38d8f9aba49acbcbadd6ac8da",
+        "digest": "4d90bf2066c8d6605ac771e9b97c1188f4491d458fcb56956eeead6a18f70ac4",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.8.342-0"
+        "version": "1.8.345-1"
     }
 }

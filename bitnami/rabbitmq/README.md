@@ -47,8 +47,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.10`, `3.10-debian-11`, `3.10.7`, `3.10.7-debian-11-r1`, `latest` (3.10/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/rabbitmq/3.10/debian-11/Dockerfile)
-* [`3.9`, `3.9-debian-11`, `3.9.22`, `3.9.22-debian-11-r0` (3.9/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/rabbitmq/3.9/debian-11/Dockerfile)
+* [`3.10`, `3.10-debian-11`, `3.10.7`, `3.10.7-debian-11-r8`, `latest` (3.10/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/rabbitmq/3.10/debian-11/Dockerfile)
+* [`3.9`, `3.9-debian-11`, `3.9.22`, `3.9.22-debian-11-r7` (3.9/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/rabbitmq/3.9/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
@@ -190,6 +190,7 @@ Available variables:
 #### Node and cluster configuration
 
 * `RABBITMQ_VHOST`: RabbitMQ application vhost. Default: **/**
+* `RABBITMQ_VHOSTS`: List of additional virtual host (vhost), separated by space. E.g.: **/shared /prioritized /tasks**
 * `RABBITMQ_USERNAME`: RabbitMQ application username. Default: **user**
 * `RABBITMQ_PASSWORD`: RabbitMQ application password. Default: **bitnami**
 * `RABBITMQ_SECURE_PASSWORD`: Whether to set the RabbitMQ password securely. This is incompatible with loading external RabbitMQ definitions. Default: **no**

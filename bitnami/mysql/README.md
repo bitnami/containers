@@ -47,8 +47,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`8.0`, `8.0-debian-11`, `8.0.30`, `8.0.30-debian-11-r3`, `latest` (8.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mysql/8.0/debian-11/Dockerfile)
-* [`5.7`, `5.7-debian-11`, `5.7.39`, `5.7.39-debian-11-r3` (5.7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mysql/5.7/debian-11/Dockerfile)
+* [`8.0`, `8.0-debian-11`, `8.0.30`, `8.0.30-debian-11-r10`, `latest` (8.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mysql/8.0/debian-11/Dockerfile)
+* [`5.7`, `5.7-debian-11`, `5.7.39`, `5.7.39-debian-11-r11` (5.7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mysql/5.7/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
@@ -178,7 +178,7 @@ $ docker-compose up -d
 
 ### Initializing a new instance
 
-When the container is executed for the first time, it will execute the files with extensions `.sh`, `.sql` and `.sql.gz` located at `/docker-entrypoint-initdb.d`.
+When the container is executed for the first time, it will execute the files with extensions `.sh`, `.sql` and `.sql.gz` located at `/docker-entrypoint-startdb.d`.
 
 In order to have your custom files inside the docker image you can mount them as a volume.
 

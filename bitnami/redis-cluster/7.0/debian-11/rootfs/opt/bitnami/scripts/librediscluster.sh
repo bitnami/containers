@@ -91,6 +91,13 @@ redis_cluster_override_conf() {
         redis_conf_set tls-cluster yes
         redis_conf_set tls-replication yes
     fi
+    # Multithreading configuration
+    if ! is_empty_value "$REDIS_IO_THREADS_DO_READS"; then
+        redis_conf_set "io-threads-do-reads" "$REDIS_IO_THREADS_DO_READS"
+    fi
+    if ! is_empty_value "$REDIS_IO_THREADS"; then
+        redis_conf_set "io-threads" "$REDIS_IO_THREADS"
+    fi
 }
 
 ########################

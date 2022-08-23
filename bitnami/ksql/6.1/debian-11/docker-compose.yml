@@ -1,0 +1,34 @@
+version: '2'
+
+services:
+  zookeeper:
+    image: docker.io/bitnami/zookeeper:3.8
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    volumes:
+      - 'zookeeper_data:/bitnami/zookeeper'
+  kafka:
+    image: docker.io/bitnami/kafka:3.2
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    volumes:
+      - 'kafka_data:/bitnami/kafka'
+    depends_on:
+      - zookeeper
+  ksql:
+    image: docker.io/bitnami/ksql:6.1
+    environment:
+      - KSQL_BOOTSTRAP_SERVERS=kafka:9092
+    volumes:
+      - 'ksql_data:/bitnami/ksql'
+    depends_on:
+      - kafka
+
+volumes:
+  zookeeper_data:
+    driver: local
+  kafka_data:
+    driver: local
+  ksql_data:
+    driver: local
