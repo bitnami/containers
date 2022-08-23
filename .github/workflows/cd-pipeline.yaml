@@ -59,6 +59,7 @@ jobs:
     name: Publish
     strategy:
       fail-fast: false
+      max-parallel: 2
       matrix:
         container: ${{ fromJSON(needs.get-containers.outputs.containers) }}
     steps:

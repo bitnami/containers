@@ -36,9 +36,14 @@ jobs:
           files_changed="$(echo $files_changed_data | jq -r '.[] | .filename')"
           # Adding || true to avoid "Process exited with code 1" errors
           flavors=($(echo "$files_changed" | xargs dirname | grep -o "^bitnami/[^/]*/[^/]*/[^/]*" | sort | uniq || true))
+          assets=($(echo "$files_changed" | xargs dirname | sed -nr "s|bitnami/([^/]*)/.*|\1|p" | sort | uniq || true))
+          non_readme_files=$(echo "$files_changed" | grep -vc "\.md" || true)
 
-          if [[ "${#flavors[@]}" -le "0" ]]; then
-            echo "No changes detected in containers. The rest of the steps will be skipped."
+          if [[ "$non_readme_files" -le "0" ]]; then
+            # The only changes are .md files -> SKIP
+            echo "::set-output name=result::skip"
+          elif [[ "${#assets[@]}" -ne "1" ]]; then
+            echo "Changes should affect to only one asset. You are currently modifying: ${assets[@]}"
             echo "::set-output name=result::skip"
           else
             containers_json=$(printf "%s\n" "${flavors[@]}" | jq -R . | jq -cs .)
@@ -53,6 +58,7 @@ jobs:
     continue-on-error: false
     strategy:
       fail-fast: false
+      max-parallel: 2
       matrix:
         container: ${{ fromJSON(needs.get-containers.outputs.containers) }}
     steps:

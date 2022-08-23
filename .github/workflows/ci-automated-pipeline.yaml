@@ -65,9 +65,9 @@ jobs:
             echo "::set-output name=container::${container_name}"
             echo "::set-output name=path::${flavors[0]}"
           else
-            # No changes detected or there are changes done in more than one container -> SKIP
+            # No changes detected or there are changes done in more than one container -> FAIL. It doesn't make sense in automated PRs.
             echo -e "::set-output name=error::No changes detected or there are changes done in more than one container:\n${containers_dirs_changed}\n. The rest of the tests will be skipped."
-            echo "::set-output name=result::skip"
+            echo "::set-output name=result::fail"
           fi
       # Using actions/github-scripts because using exit 1 in the script above would not provide any output
       # Source: https://github.community/t/no-output-on-process-completed-with-exit-code-1/123821/3
@@ -135,7 +135,7 @@ jobs:
             }' \
           --fail
       - name: Manual review required
-        if: ${{ needs.vib-verify.result == 'failure' }}
+        if: ${{ needs.vib-verify.result != 'success' }}
         run: |
           curl --request POST \
           --url https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments \
@@ -146,7 +146,7 @@ jobs:
             }' \
           --fail
       - name: Assign to a person to work on it
-        if: ${{ needs.vib-verify.result == 'failure' }}
+        if: ${{ needs.vib-verify.result != 'success' }}
         uses: pozil/auto-assign-issue@v1.9.0
         with:
           numOfAssignee: 1
