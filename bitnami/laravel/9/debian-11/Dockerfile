@@ -5,11 +5,11 @@ ENV OS_ARCH="amd64" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="9.3.4-debian-11-r2" \
+      org.opencontainers.image.ref.name="9.3.5-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/laravel" \
       org.opencontainers.image.title="laravel" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="9.3.4"
+      org.opencontainers.image.version="9.3.5"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -19,7 +19,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "php" "8.1.9-4" --checksum b91ccc390048e92e6ab5449327fc0915512f5db2d0ad62771e4d5c90bc6422b9
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.20.0-2" --checksum 127f7b97bd46468ce62bc5cd9868371ca2c4c1e7201f6271a309b34a17b97d90
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.3-153" --checksum 8c8e324ab6e7b7d76b4655182d6ea5f6550edfc9e32bec92228e678c26fc8b16
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "laravel" "9.3.4-0" --checksum cf745294d6dc9b578f73b1abb4a72db1163035bc88b4c349f02304dc71854fd1
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "laravel" "9.3.5-0" --checksum e50972e4bddd616f8781f2df8223eadce59297c88888fcfa7d369661fd524bc6
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
@@ -28,7 +28,7 @@ RUN /build/bitnami-user.sh
 COPY rootfs /
 RUN /opt/bitnami/scripts/laravel/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
-ENV APP_VERSION="9.3.4" \
+ENV APP_VERSION="9.3.5" \
     BITNAMI_APP_NAME="laravel" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/node/bin:/opt/bitnami/common/bin:$PATH" \
