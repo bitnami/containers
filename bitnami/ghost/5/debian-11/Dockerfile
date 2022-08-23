@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="5.7.1-debian-11-r6" \
+      org.opencontainers.image.ref.name="5.7.1-debian-11-r7" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ghost" \
       org.opencontainers.image.title="ghost" \
       org.opencontainers.image.vendor="VMware, Inc." \
