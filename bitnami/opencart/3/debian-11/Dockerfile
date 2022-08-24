@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.0.3-8-debian-11-r28" \
+      org.opencontainers.image.ref.name="3.0.3-8-debian-11-r29" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/opencart" \
       org.opencontainers.image.title="opencart" \
       org.opencontainers.image.vendor="VMware, Inc." \
