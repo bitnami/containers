@@ -726,7 +726,7 @@ elasticsearch_initialize() {
         fi
         # Latest Elasticseach releases install x-pack-ml  by default. Since we have faced some issues with this library on certain platforms,
         # currently we are disabling this machine learning module whatsoever by defining "xpack.ml.enabled=false" in the "elasicsearch.yml" file
-        if [[ ! -d "${ELASTICSEARCH_BASE_DIR}/modules/x-pack-ml/platform/linux-x86_64/lib" ]]; then
+        if is_dir_empty "${ELASTICSEARCH_BASE_DIR}/modules/x-pack-ml/platform/linux-"*; then
             elasticsearch_conf_set xpack.ml.enabled "false"
         fi
     fi
