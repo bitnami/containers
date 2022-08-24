@@ -2,7 +2,6 @@ name: '[CI/CD] CI Pipeline'
 on: # rebuild any PRs and main branch changes
   pull_request_target:
     types:
-      - opened
       - reopened
       - synchronize
       - labeled
@@ -14,33 +13,7 @@ env:
   CSP_API_TOKEN: ${{ secrets.CSP_API_TOKEN }}
   VIB_PUBLIC_URL: https://cp.bromelia.vmware.com
 jobs:
-  auto-pr-triage:
-    runs-on: ubuntu-latest
-    name: Triage for automated PRs
-    if: |
-      contains(github.event.pull_request.title, 'Release') &&
-      github.event.action == 'opened' &&
-      github.actor == 'bitnami-bot'
-    steps:
-      # Enables auto-merge and adds necessary labels for automated releases' PRs
-      - id: labeling
-        name: Label PR
-        uses: andymckay/labeler@1.0.4
-        with:
-          # We can't use GITHUB_TOKEN because the labeling needs to trigger a new CI pipeline
-          repo-token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
-          add-labels: "verify, auto-merge"
-      - id: auto-merge
-        name: Enable auto-merge
-        run: |
-          curl --request POST \
-          --url https://api.github.com/graphql \
-          --header 'authorization: Bearer ${{ secrets.BITNAMI_BOT_TOKEN }}' \
-          --data '{
-            "query": "mutation { enablePullRequestAutoMerge(input: {pullRequestId: \"${{ github.event.pull_request.node_id }}\", mergeMethod: SQUASH}) { clientMutationId }}"
-            }' \
-          --fail
-  get-container:
+  get-containers:
     runs-on: ubuntu-latest
     name: Get modified containers
     if: |
@@ -50,11 +23,10 @@ jobs:
         (github.event.action != 'labeled' && contains(github.event.pull_request.labels.*.name, 'verify'))
       )
     outputs:
-      container: ${{ steps.get-container.outputs.container }}
-      result: ${{ steps.get-container.outputs.result }}
-      path: ${{ steps.get-container.outputs.path }}
+      result: ${{ steps.get-containers.outputs.result }}
+      containers: ${{ steps.get-containers.outputs.containers }}
     steps:
-      - id: get-container
+      - id: get-containers
         name: Get modified containers
         run: |
           # Using the Github API to detect the files changed as git merge-base stops working when the branch is behind
@@ -63,136 +35,73 @@ jobs:
           files_changed_data=$(curl -s --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -X GET -G "$URL")
           files_changed="$(echo $files_changed_data | jq -r '.[] | .filename')"
           # Adding || true to avoid "Process exited with code 1" errors
-          containers_dirs_changed="$(echo "$files_changed" | xargs dirname | grep -o "^bitnami/[^/]*" | sort | uniq || true)"
           flavors=($(echo "$files_changed" | xargs dirname | grep -o "^bitnami/[^/]*/[^/]*/[^/]*" | sort | uniq || true))
-          container_name=$(echo "$containers_dirs_changed" | sed "s|bitnami/||g")
+          assets=($(echo "$files_changed" | xargs dirname | sed -nr "s|bitnami/([^/]*)/.*|\1|p" | sort | uniq || true))
+          non_readme_files=$(echo "$files_changed" | grep -vc "\.md" || true)
 
-          if [[ "${#flavors[@]}" -eq "1" ]]; then
-            # Changes done in only one container -> OK
-            echo "::set-output name=result::ok"
-            echo "::set-output name=container::${container_name}"
-            echo "::set-output name=path::${flavors[0]}"
-          elif [[ "${#flavors[@]}" -le "0" ]]; then
-            # Changes done in the containers/ folder but not inside a container subfolder -> Look for readme changes
-            readme_object="$(echo $files_changed_data | jq -r '[ .[] | select(.filename | test("^bitnami/[^/]+/README.md"))] | first')"
-            if [[ "${readme_object}" == "null" ]]; then
-              echo "::set-output name=error::No changes detected in containers. The rest of the tests will be skipped."
-              echo "::set-output name=result::skip"
-            else
-              # Look for the modified branch in Readme content
-              branch="$(echo ${readme_object} | jq -r '.patch' | grep -o "([^/]*/[^/]*/Dockerfile)" | sort -u | head -n 1 | sed -nr "s|\((.+)/Dockerfile\)|\1|p")"
-              if [[ ! -z "${branch}" ]]; then
-                echo "::set-output name=result::ok"
-                echo "::set-output name=container::${container_name}"
-                echo "::set-output name=path::bitnami/${container_name}/${branch}"
-              else
-                echo "::set-output name=error::No changes detected in containers. The rest of the tests will be skipped."
-                echo "::set-output name=result::skip"
-              fi
-            fi
-          else
-            # Changes done in more than container -> SKIP
-            echo -e "::set-output name=error::Changes detected in more than one container directory:\n${containers_dirs_changed}\nIt is strongly advised to change only one container in a PR. The rest of the tests will be skipped."
+          if [[ "$non_readme_files" -le "0" ]]; then
+            # The only changes are .md files -> SKIP
             echo "::set-output name=result::skip"
+          elif [[ "${#assets[@]}" -ne "1" ]]; then
+            echo "Changes should affect to only one asset. You are currently modifying: ${assets[@]}"
+            echo "::set-output name=result::skip"
+          else
+            containers_json=$(printf "%s\n" "${flavors[@]}" | jq -R . | jq -cs .)
+            echo "::set-output name=result::ok"
+            echo "::set-output name=containers::${containers_json}"
           fi
-      # Using actions/github-scripts because using exit 1 in the script above would not provide any output
-      # Source: https://github.community/t/no-output-on-process-completed-with-exit-code-1/123821/3
-      - id: show-error
-        name: Show error
-        if: ${{ steps.get-container.outputs.result == 'fail' }}
-        uses: actions/github-script@v3
-        with:
-          script: |
-              core.setFailed('${{ steps.get-container.outputs.error }}')
   vib-verify:
     runs-on: ubuntu-latest
-    needs: get-container
-    if: ${{ needs.get-container.outputs.result == 'ok' && contains(github.event.pull_request.labels.*.name, 'verify') }}
-    name: Verify
+    needs: get-containers
+    if: ${{ needs.get-containers.outputs.result == 'ok' && contains(github.event.pull_request.labels.*.name, 'verify') }}
+    name: Verify container
+    continue-on-error: false
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        container: ${{ fromJSON(needs.get-containers.outputs.containers) }}
     steps:
       - uses: actions/checkout@v3
         name: Checkout Repository
         with:
-          # Required to search the latest commit with the tag
-          fetch-depth: 0
+          # Full history is not required anymore
+          fetch-depth: 1
           # labeled events trigger the event with the latest commit in main
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
-      - id: get-tag
-        name: Get latest image tag
+      - id: get-container-metadata
+        name: Get image tag and container name
         run: |
-          # Now EAM commits has the following format "[bitnami/<container>] Release <tag>"
-          tag="$(git log --pretty=tformat:"%s" -n 1 --grep="[R|r]elease" --author bitnami-bot@vmware.com --author containers@bitnami.com --author containers-bot@bitnami.com -- ${{ needs.get-container.outputs.path }} | sed "s|\[.*\]||" | sed "s|[R|r]elease||" | awk '{print $1}')"
-          if [[ -z "${tag}" ]]; then
-            echo "No tag found for: ${{ needs.get-container.outputs.path }}"
-            exit 1
-          else
+          if [[ -d "${{ matrix.container }}" ]]; then
+            name="$(echo "${{ matrix.container }}" | awk -F '/' '{print $2}')"
+            # Build a tag based on current SHA
+            tag="$(echo "${{ matrix.container }}" | awk -F '/' -v run_number="${GITHUB_RUN_NUMBER}" '{printf "%s-rc.%s", $3, run_number}')"
             echo "::set-output name=tag::${tag}"
+            echo "::set-output name=name::${name}"
+            echo "::set-output name=result::ok"
+          else
+            # Container folder doesn't exists we are assuming a deprecation
+            echo "::set-output name=result::skip"
           fi
       - uses: vmware-labs/vmware-image-builder-action@main
         name: Verify
+        if: ${{ steps.get-container-metadata.outputs.result == 'ok' }}
         with:
           pipeline: vib-verify.json
         env:
           # Path with docker resources
-          VIB_ENV_PATH: ${{ needs.get-container.outputs.path }}
+          VIB_ENV_PATH: ${{ matrix.container }}
           # Container name
-          VIB_ENV_CONTAINER: ${{ needs.get-container.outputs.container }}
-          VIB_ENV_TAG: ${{ steps.get-tag.outputs.tag }}
-  auto-pr-review:
+          VIB_ENV_CONTAINER: ${{ steps.get-container-metadata.outputs.name  }}
+          VIB_ENV_TAG: ${{ steps.get-container-metadata.outputs.tag }}
+  verify-all:
+    # Ensure all containers passed the verification
     runs-on: ubuntu-latest
+    name: Verify
     needs: vib-verify
-    name: Reviewal for automated PRs
-    if: |
-      always() &&
-      github.actor == 'bitnami-bot' &&
-      contains(github.event.pull_request.labels.*.name, 'auto-merge')
+    if: ${{ always() }}
     steps:
-      # Approves the CI's PR if the 'VIB Verify' job succeeded
-      # Approved by the 'github-actions' user. A PR can't be approved by its author
-      - name: Approval
-        if: ${{ needs.vib-verify.result == 'success' }}
-        run: |
-          curl --request POST \
-          --url https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/reviews \
-          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-          --header 'content-type: application/json' \
-          --data '{
-            "event": "APPROVE"
-            }' \
-          --fail
-      - name: Remove auto-merge label
-        if: ${{ needs.vib-verify.result == 'failure' }}
-        uses: andymckay/labeler@1.0.4
-        with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          remove-labels: "auto-merge"
-      - name: Disable auto-merge
-        if: ${{ needs.vib-verify.result == 'failure' }}
-        run: |
-          curl --request POST \
-          --url https://api.github.com/graphql \
-          --header 'authorization: Bearer ${{ secrets.BITNAMI_BOT_TOKEN }}' \
-          --data '{
-            "query": "mutation { disablePullRequestAutoMerge(input: {pullRequestId: \"${{ github.event.pull_request.node_id }}\"}) { clientMutationId }}"
-            }' \
-          --fail
-      - name: Manual review required
-        if: ${{ needs.vib-verify.result == 'failure' }}
-        run: |
-          curl --request POST \
-          --url https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments \
-          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-          --header 'content-type: application/json' \
-          --data '{
-            "body": "There has been an error during the automated release process. Manual revision is now required."
-            }' \
-          --fail
-          curl --request POST \
-          --url https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/requested_reviewers \
-          --header 'authorization: Bearer ${{ secrets.BITNAMI_BOT_TOKEN }}' \
-          --header 'content-type: application/json' \
-          --data '{
-            "reviewers": ["fmulero"]
-            }' \
-          --fail
+      - name: Verify
+        if: ${{ needs.vib-verify.result != 'success' && needs.vib-verify.result != 'skipped'}}
+        run: exit 1
