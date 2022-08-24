@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.59.1-debian-11-r4" \
+      org.opencontainers.image.ref.name="1.59.1-debian-11-r5" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/rclone" \
       org.opencontainers.image.title="rclone" \
       org.opencontainers.image.vendor="VMware, Inc." \
