@@ -15,6 +15,13 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 FROM scratch
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="0.18.0-scratch-r9" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pinniped" \
+      org.opencontainers.image.title="pinniped" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="0.18.0"
 COPY prebuildfs /
 COPY rootfs /
 COPY --from=builder /opt/bitnami/pinniped/bin /
