@@ -6,11 +6,11 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.3.3-debian-11-r16" \
+      org.opencontainers.image.ref.name="2.3.4-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/airflow-scheduler" \
       org.opencontainers.image.title="airflow-scheduler" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.3.3"
+      org.opencontainers.image.version="2.3.4"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -21,7 +21,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "10.22.0-0" --checksum d98d0d09430861a8eb051b661f9d42452ae1d7c22f2cb7ad7a7364a95bb6d201
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.3-152" --checksum 0017b950b7eb0faa7580ef23342adbbfa2038d55c3dafdf1c8761788122f718e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "airflow-scheduler" "2.3.3-2" --checksum a184bf9c8908ed1e69713da2654492823e1e4fd1951429dff1d2d08cfd0a5f7a
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "airflow-scheduler" "2.3.4-0" --checksum fe6af7b1b8651ea46441bb0cd02595be7d3ecf3d792c1fe6e96e222de96bc109
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -34,7 +34,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/airflow-scheduler/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
-    APP_VERSION="2.3.3" \
+    APP_VERSION="2.3.4" \
     BITNAMI_APP_NAME="airflow-scheduler" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
