@@ -7,7 +7,7 @@ ENV HOME="/" \
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.0.5-debian-11-r12" \
+      org.opencontainers.image.ref.name="4.0.5-debian-11-r13" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cassandra" \
       org.opencontainers.image.title="cassandra" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.9.13-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.345-1" --checksum 4d90bf2066c8d6605ac771e9b97c1188f4491d458fcb56956eeead6a18f70ac4
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "yq" "4.27.2-1" --checksum 44d0058c0fffa1ccc89c081ed3e5c897489fa02580a839cfe1d37b2ca771f237
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "cassandra" "4.0.5-1" --checksum f3daf03dc5ecf4896f320fecae914e1d844ae579aa246ffe3b09fc179b562f61
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "cassandra" "4.0.5-2" --checksum 6f92e1765a8ebdfdbbcee968b59917b1c0f2737d568eaee7e6c12bdaa26277eb
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
