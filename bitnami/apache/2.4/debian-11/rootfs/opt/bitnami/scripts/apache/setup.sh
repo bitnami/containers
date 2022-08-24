@@ -61,3 +61,6 @@ fi
 
 # Fix logging issue when running as root
 ! am_i_root || chmod o+w "$(readlink /dev/stdout)" "$(readlink /dev/stderr)"
+
+# Allow to know when setup is done (used by startupProbe)
+date > /tmp/bitnami-setup-done
