@@ -829,26 +829,50 @@ cassandra_execute_with_retries() {
 #   None
 #########################
 wait_for_nodetool_up() {
-    local -r retries="${2:-$CASSANDRA_INIT_MAX_RETRIES}"
-    local -r sleep_time="${3:-$CASSANDRA_INIT_SLEEP_TIME}"
+    local -r retries="${1:-$CASSANDRA_INIT_MAX_RETRIES}"
+    local -r sleep_time="${2:-$CASSANDRA_INIT_SLEEP_TIME}"
 
     debug "Checking status with nodetool"
 
-    check_function_nodetool() {
+    check_function_nodetool_node_ip() {
         # Using legacy RMI URL parsing to avoid URISyntaxException: 'Malformed IPv6 address at index 7: rmi://[127.0.0.1]:7199' error
         # https://community.datastax.com/questions/13764/java-version-for-cassandra-3113.html
         local -r check_cmd=("${CASSANDRA_BIN_DIR}/nodetool" "-Dcom.sun.jndi.rmiURLParsing=legacy")
         local -r check_args=("status" "--port" "$CASSANDRA_JMX_PORT_NUMBER")
         local -r machine_ip="$(dns_lookup "$CASSANDRA_HOST" "v4")"
         local -r check_regex="UN\s*(${CASSANDRA_HOST}|${machine_ip}|127.0.0.1)"
+
         local output="/dev/null"
         if [[ "$BITNAMI_DEBUG" = "true" ]]; then
             output="/dev/stdout"
         fi
+
         "${check_cmd[@]}" "${check_args[@]}" | grep -E "${check_regex}" >"${output}"
     }
 
-    if retry_while check_function_nodetool "$retries" "$sleep_time"; then
+    check_function_nodetool_node_count() {
+        # Using legacy RMI URL parsing to avoid URISyntaxException: 'Malformed IPv6 address at index 7: rmi://[127.0.0.1]:7199' error
+        # https://community.datastax.com/questions/13764/java-version-for-cassandra-3113.html
+        local -r check_cmd=("${CASSANDRA_BIN_DIR}/nodetool" "-Dcom.sun.jndi.rmiURLParsing=legacy")
+        local -r check_args=("status" "--port" "$CASSANDRA_JMX_PORT_NUMBER")
+        local -r machine_ip="$(dns_lookup "$CASSANDRA_HOST" "v4")"
+        local -r check_regex="UN\s*"
+        read -r -a host_list <<<"$(tr ',;' ' ' <<<"$CASSANDRA_NODES")"
+        local -r expected_node_count="${#host_list[@]}"
+        local actual_node_count
+
+        local output="/dev/null"
+        if [[ "$BITNAMI_DEBUG" = "true" ]]; then
+            output="/dev/stdout"
+        fi
+
+        actual_node_count=$("${check_cmd[@]}" "${check_args[@]}" | grep -c "${check_regex}" || true)
+        if [[ "$expected_node_count" != "$actual_node_count" ]]; then
+            false
+        fi
+    }
+
+    if retry_while check_function_nodetool_node_ip "$retries" "$sleep_time"; then
         info "Nodetool reported the successful startup of Cassandra"
         true
     else
@@ -858,6 +882,20 @@ wait_for_nodetool_up() {
             "${check_cmd[@]}" "${check_args[@]}"
         fi
         exit 1
+    fi
+
+    if [[ -n "$CASSANDRA_NODES" ]]; then
+        if retry_while check_function_nodetool_node_count "$retries" "$sleep_time"; then
+            info "All nodes reached the UN status (Up/Normal)"
+            true
+        else
+            error "Some nodes did not reach the UN status (Up/Normal)"
+            if [[ "$BITNAMI_DEBUG" = "true" ]]; then
+                error "Nodetool output"
+                "${check_cmd[@]}" "${check_args[@]}"
+            fi
+            exit 1
+        fi
     fi
 }
 
