@@ -6,11 +6,11 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.3.3-debian-11-r17" \
+      org.opencontainers.image.ref.name="2.3.4-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/airflow-worker" \
       org.opencontainers.image.title="airflow-worker" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.3.3"
+      org.opencontainers.image.version="2.3.4"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -21,7 +21,7 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "10.22.0-0" --checksum d98d0d09430861a8eb051b661f9d42452ae1d7c22f2cb7ad7a7364a95bb6d201
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.3-152" --checksum 0017b950b7eb0faa7580ef23342adbbfa2038d55c3dafdf1c8761788122f718e
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "airflow-worker" "2.3.3-2" --checksum 0abf0c682986a03dfb889bbfe79d9d5e6d954c0c850fd0f445f4e6306461742a
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "airflow-worker" "2.3.4-0" --checksum 9f52c58136f8578e640e2b4e03e558bca3331d28d66cd9ca38a57237a77738c8
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -34,7 +34,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/airflow-worker/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
-    APP_VERSION="2.3.3" \
+    APP_VERSION="2.3.4" \
     BITNAMI_APP_NAME="airflow-worker" \
     C_FORCE_ROOT="True" \
     LANG="en_US.UTF-8" \
