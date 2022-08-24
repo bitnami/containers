@@ -6,7 +6,7 @@ ENV HOME="/opt/bitnami/jupyterhub-singleuser/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.3.1-debian-11-r31" \
+      org.opencontainers.image.ref.name="2.3.1-debian-11-r32" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jupyter-base-notebook" \
       org.opencontainers.image.title="jupyter-base-notebook" \
       org.opencontainers.image.vendor="VMware, Inc." \
