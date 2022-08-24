@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="15.0.20220810-debian-11-r3" \
+      org.opencontainers.image.ref.name="15.0.20220810-debian-11-r5" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/odoo" \
       org.opencontainers.image.title="odoo" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -25,10 +25,12 @@ RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-15
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
-RUN curl -sLO https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.buster_amd64.deb && \
-    echo "dfab5506104447eef2530d1adb9840ee3a67f30caaad5e9bcb8743ef2f9421bd  wkhtmltox_0.12.5-1.buster_amd64.deb" | sha256sum -c - && \
-    dpkg -i wkhtmltox_0.12.5-1.buster_amd64.deb && \
-    rm wkhtmltox_0.12.5-1.buster_amd64.deb
+RUN if [ "$OS_ARCH" = "amd64" ]; then \
+    curl -sLO "https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.buster_${OS_ARCH}.deb" && \
+    echo "dfab5506104447eef2530d1adb9840ee3a67f30caaad5e9bcb8743ef2f9421bd  wkhtmltox_0.12.5-1.buster_${OS_ARCH}.deb" | sha256sum -c - && \
+    dpkg -i "wkhtmltox_0.12.5-1.buster_${OS_ARCH}.deb" && \
+    rm wkhtmltox_0.12.5-1.buster_${OS_ARCH}.deb \
+    ; fi
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/odoo/postunpack.sh
