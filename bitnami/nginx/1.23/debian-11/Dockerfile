@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.23.1-debian-11-r12" \
+      org.opencontainers.image.ref.name="1.23.1-debian-11-r13" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/nginx" \
       org.opencontainers.image.title="nginx" \
       org.opencontainers.image.vendor="VMware, Inc." \
