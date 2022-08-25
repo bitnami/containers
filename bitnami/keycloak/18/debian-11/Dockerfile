@@ -7,7 +7,7 @@ ENV HOME="/" \
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="18.0.2-debian-11-r24" \
+      org.opencontainers.image.ref.name="18.0.2-debian-11-r25" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/keycloak" \
       org.opencontainers.image.title="keycloak" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -19,7 +19,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages acl ca-certificates curl gzip libaio1 libc6 procps rsync tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.3-153" --checksum 8c8e324ab6e7b7d76b4655182d6ea5f6550edfc9e32bec92228e678c26fc8b16
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.15-1-2" --checksum 1a5468c7b552dfc8a33c5c9b214dbf7dd143a5f008cc3aa2e0418fab5eb16c5c
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "keycloak" "18.0.2-5" --checksum 3823392d8aaac961de70c3b0215a0f84beaad05f91d51835f2b1d24fef06db7f
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "keycloak" "18.0.2-6" --checksum a780c583da334dfaf37371be8722d2d8b403cef9a9352cdb547f2e2f5b9e63bf
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
