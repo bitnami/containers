@@ -1,0 +1,4 @@
+version: '2'
+services:
+  istio-proxyv2:
+    image: docker.io/bitnami/istio-proxyv2:1.13
