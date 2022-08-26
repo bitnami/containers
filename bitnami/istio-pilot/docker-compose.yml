@@ -1,0 +1,4 @@
+version: '2'
+services:
+  istio-pilot:
+    image: docker.io/bitnami/istio-pilot:1.14
