@@ -7,7 +7,7 @@ ENV HOME="/" \
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="9.0.65-debian-11-r13" \
+      org.opencontainers.image.ref.name="9.0.65-debian-11-r14" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/tomcat" \
       org.opencontainers.image.title="tomcat" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -18,7 +18,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libssl1.1 procps tar xmlstarlet zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.15-1-2" --checksum 1a5468c7b552dfc8a33c5c9b214dbf7dd143a5f008cc3aa2e0418fab5eb16c5c
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "9.0.65-2" --checksum 6fd7ac5bbbd7d98ff24981d2c860947d76a09fbd8756efde0a54dabb7c182483
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tomcat" "9.0.65-3" --checksum 53b13e476d1d8364852ad073c5f31550658e7d82874e194fd3e4793d238413b8
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-152" --checksum 7909504f3232654c427681ecc8ed4b8599a2df0f17f26ff769a83ed167d05b69
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
 RUN apt-get update && apt-get upgrade -y && \

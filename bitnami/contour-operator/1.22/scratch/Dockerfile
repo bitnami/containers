@@ -15,6 +15,13 @@ RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stac
 
 FROM scratch
 
+LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
+      org.opencontainers.image.description="Application packaged by Bitnami" \
+      org.opencontainers.image.ref.name="1.22.0-scratch-r3" \
+      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/contour-operator" \
+      org.opencontainers.image.title="contour-operator" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="1.22.0"
 COPY prebuildfs /
 COPY rootfs /
 COPY --from=builder /opt/bitnami/contour-operator/bin/contour-operator /contour-operator
