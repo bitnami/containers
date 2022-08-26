@@ -263,7 +263,7 @@ moodle_conf_get() {
 # Returns:
 #   true if the database connection succeeded, false otherwise
 #########################
-moodle_wait_for_mysql_connection () {
+moodle_wait_for_mysql_connection() {
     local -r db_host="${1:?missing database host}"
     local -r db_port="${2:?missing database port}"
     local -r db_name="${3:?missing database name}"
@@ -291,7 +291,7 @@ moodle_wait_for_mysql_connection () {
 # Returns:
 #   true if the database connection succeeded, false otherwise
 #########################
-moodle_wait_for_postgresql_connection  () {
+moodle_wait_for_postgresql_connection() {
     local -r db_host="${1:?missing database host}"
     local -r db_port="${2:?missing database port}"
     local -r db_name="${3:?missing database name}"
@@ -410,9 +410,9 @@ if (isset(\$_SERVER['HTTPS']) \&\& \$_SERVER['HTTPS'] == 'on') {\\
 #########################
 moodle_configure_reverseproxy() {
     # Checking the reverseproxy setting values
-    is_boolean_yes "$MOODLE_REVERSEPROXY" && echo "\$CFG->reverseproxy = true;" >> "$MOODLE_CONF_FILE"
+    is_boolean_yes "$MOODLE_REVERSEPROXY" && echo "\$CFG->reverseproxy = true;" >>"$MOODLE_CONF_FILE"
     # Checking the sslproxy setting values
-    is_boolean_yes "$MOODLE_SSLPROXY" && echo "\$CFG->sslproxy = true;" >> "$MOODLE_CONF_FILE"
+    is_boolean_yes "$MOODLE_SSLPROXY" && echo "\$CFG->sslproxy = true;" >>"$MOODLE_CONF_FILE"
 
     true
 }
