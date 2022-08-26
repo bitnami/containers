@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.9.1-debian-11-r11" \
+      org.opencontainers.image.ref.name="1.9.1-debian-11-r12" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cert-manager" \
       org.opencontainers.image.title="cert-manager" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -16,10 +16,11 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/cert-manager-1.9.1-1-linux-amd64-debian-11.tar.gz && \
-    echo "f58e2915e0e284b0a2757fdcffdcb5cb77512cf9671377455492f43e6bf4208d  /tmp/bitnami/pkg/cache/cert-manager-1.9.1-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/cert-manager-1.9.1-1-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/cert-manager-1.9.1-1-linux-amd64-debian-11.tar.gz
+RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+    curl -SsLf https://downloads.bitnami.com/files/stacksmith/cert-manager-1.9.1-1-linux-amd64-debian-11.tar.gz -o cert-manager-1.9.1-1-linux-amd64-debian-11.tar.gz && \
+    echo "f58e2915e0e284b0a2757fdcffdcb5cb77512cf9671377455492f43e6bf4208d  cert-manager-1.9.1-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf cert-manager-1.9.1-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    rm -rf cert-manager-1.9.1-1-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami

@@ -7,7 +7,7 @@ ENV HOME="/" \
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="11.3.0-debian-11-r22" \
+      org.opencontainers.image.ref.name="11.3.0-debian-11-r23" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/wavefront-proxy" \
       org.opencontainers.image.title="wavefront-proxy" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -18,7 +18,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar zlib1g
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.15-1-2" --checksum 1a5468c7b552dfc8a33c5c9b214dbf7dd143a5f008cc3aa2e0418fab5eb16c5c
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wavefront-proxy" "11.3.0-4" --checksum 0deef6a74ed7425add4f1dcd2229ff3d31317160b08dc14a780bc44f67f084ee
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wavefront-proxy" "11.3.0-5" --checksum 3f88fcb365f56777761ab1b4b773b2c0a2d81a1c6847e129bd29648cd49ee356
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives

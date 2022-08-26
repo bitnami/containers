@@ -5,7 +5,7 @@ ENV OS_ARCH="amd64" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="7.0.3-1-debian-11-r6" \
+      org.opencontainers.image.ref.name="7.0.3-1-debian-11-r7" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/rails" \
       org.opencontainers.image.title="rails" \
       org.opencontainers.image.vendor="VMware, Inc." \

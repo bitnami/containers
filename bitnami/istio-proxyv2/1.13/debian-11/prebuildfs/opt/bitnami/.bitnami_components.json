@@ -1,0 +1,16 @@
+{
+    "envoy": {
+        "arch": "amd64",
+        "digest": "fa9ada6acb45636407c999ffcaf00c629d94a22754906f4cbcf6c85dfee0a7a1",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.22.5-0"
+    },
+    "istio-proxyv2": {
+        "arch": "amd64",
+        "digest": "f514bf1e790413e1b58f32cb937cb616f7580941b5bd6cca57aabe402bacd65a",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.13.7-1"
+    }
+}
