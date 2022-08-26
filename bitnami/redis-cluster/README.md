@@ -145,6 +145,30 @@ services:
 
 Refer to the [Redis(R) configuration](http://redis.io/topics/config) manual for the complete list of configuration options.
 
+### Overriding configuration
+
+Instead of providing a custom `redis.conf`, you may also choose to provide only settings you wish to override. The image will look for `/opt/bitnami/redis/mounted-etc/overrides.conf`. This will be ignored if custom `redis.conf` is provided.
+
+```console
+$ docker run --name redis \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -v /path/to/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf \
+    bitnami/redis:latest
+```
+
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  redis:
+  ...
+    volumes:
+      - /path/to/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf
+  ...
+```
+
+### Environment variables
+
 The following env vars are supported for this container:
 
 | Name                                    | Description                                                                                                                                                        |
