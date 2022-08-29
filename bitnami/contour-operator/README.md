@@ -30,7 +30,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 - [`1.22`, `1.22-scratch`, `1.22.0`, `1.22.0-scratch-r3`, `latest` (1.22/scratch/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/contour-operator/1.22/scratch/Dockerfile)
 - [`1.21`, `1.21-scratch`, `1.21.1`, `1.21.1-scratch-r3` (1.21/scratch/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/contour-operator/1.21/scratch/Dockerfile)
-- [`1.20`, `1.20-scratch`, `1.20.2`, `1.20.2-scratch-r5` (1.20/scratch/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/contour-operator/1.20/scratch/Dockerfile)
+- [`1.20`, `1.20-scratch`, `1.20.2`, `1.20.2-scratch-r6` (1.20/scratch/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/contour-operator/1.20/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 

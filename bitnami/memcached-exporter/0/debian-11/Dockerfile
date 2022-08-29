@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.10.0-debian-11-r26" \
+      org.opencontainers.image.ref.name="0.10.0-debian-11-r27" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/memcached-exporter" \
       org.opencontainers.image.title="memcached-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -15,11 +15,14 @@ LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/memcached-exporter-0.10.0-3-linux-amd64-debian-11.tar.gz && \
-    echo "d0f36d4e7bb3f89a2dfc3d9a3d009fc5b5af6347caab45563a623b9de9c9f919  /tmp/bitnami/pkg/cache/memcached-exporter-0.10.0-3-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/memcached-exporter-0.10.0-3-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/memcached-exporter-0.10.0-3-linux-amd64-debian-11.tar.gz
+RUN install_packages ca-certificates curl gzip procps tar
+RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+    if [ ! -f memcached-exporter-0.10.0-4-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/memcached-exporter-0.10.0-4-linux-amd64-debian-11.tar.gz -O ; \
+    fi && \
+    echo "31fabf6b88a882c19a84d9cdac4c21dc170fd73cd636a524dcc4003f6fd19cfc  memcached-exporter-0.10.0-4-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf memcached-exporter-0.10.0-4-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    rm -rf memcached-exporter-0.10.0-4-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
