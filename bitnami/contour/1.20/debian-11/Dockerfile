@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.20.2-debian-11-r27" \
+      org.opencontainers.image.ref.name="1.20.2-debian-11-r28" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/contour" \
       org.opencontainers.image.title="contour" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -15,11 +15,14 @@ LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/contour-1.20.2-2-linux-amd64-debian-11.tar.gz && \
-    echo "e40618470a24ca340e73468526591ae9a728bd96fc168810c555f7491ae0e614  /tmp/bitnami/pkg/cache/contour-1.20.2-2-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/contour-1.20.2-2-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/contour-1.20.2-2-linux-amd64-debian-11.tar.gz
+RUN install_packages ca-certificates curl gzip procps tar
+RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+    if [ ! -f contour-1.20.2-3-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/contour-1.20.2-3-linux-amd64-debian-11.tar.gz -O ; \
+    fi && \
+    echo "14b71a21033b0df70f3a1827d8749977d45cccf46778afd5de60da31fb4c8f0f  contour-1.20.2-3-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf contour-1.20.2-3-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    rm -rf contour-1.20.2-3-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami

@@ -7,7 +7,7 @@ ENV HOME="/" \
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.9.5-debian-11-r3" \
+      org.opencontainers.image.ref.name="2.9.5-debian-11-r4" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/spring-cloud-dataflow-composed-task-runner" \
       org.opencontainers.image.title="spring-cloud-dataflow-composed-task-runner" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -17,9 +17,9 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc-s1 procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.345-1" --checksum 4d90bf2066c8d6605ac771e9b97c1188f4491d458fcb56956eeead6a18f70ac4
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "spring-cloud-dataflow-composed-task-runner" "2.9.5-0" --checksum 53eca99d7ddfdbdd9ff98b0bdd4fe5e58cdc38c391ea9d1e926f92809e2be49c
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "1.8.345-2" --checksum b244bc8c1f972d20fac8019cf97fb05ce6cd8be2034ca11f52243c8bd96aaa23
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "spring-cloud-dataflow-composed-task-runner" "2.9.5-1" --checksum 66beee610480598e13864bf42dbc8a1caa19a4f77c82bf58dc44dcef61b086ad
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-154" --checksum e36c3d90f4fbfbe989f40947fa7c8ab817f12fcf97d3aef893c753a20ce976ab
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami

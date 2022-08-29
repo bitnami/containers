@@ -6,7 +6,7 @@ ENV OS_ARCH="amd64" \
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="18.0.1-1-debian-11-r18" \
+      org.opencontainers.image.ref.name="18.0.1-1-debian-11-r19" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/java" \
       org.opencontainers.image.title="java" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -16,8 +16,8 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libsqlite3-dev libssl-dev locales procps tar wget zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "18.0.1-1-3" --checksum ea796d102d1f91c09cabc05ee58bfd0fb6e6e7047756af9ff9f09000b4a48151
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "18.0.1-1-4" --checksum 8fd7b25d843ef91b0bd2f0b3a1917324514b498b4acd8abccf86ffbb7136a6c7
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-154" --checksum e36c3d90f4fbfbe989f40947fa7c8ab817f12fcf97d3aef893c753a20ce976ab
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
