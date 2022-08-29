@@ -6,7 +6,7 @@ ENV HOME="/opt/bitnami/jupyterhub-singleuser/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.5.0-debian-11-r31" \
+      org.opencontainers.image.ref.name="1.5.0-debian-11-r32" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jupyter-base-notebook" \
       org.opencontainers.image.title="jupyter-base-notebook" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -15,15 +15,21 @@ LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip libc6 libcrypt1 libgcc-s1 libstdc++6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/miniconda-4.12.0-153-linux-amd64-debian-11.tar.gz && \
-    echo "c75734873158bdab70125b4e18cc93ef0cb884a7716a0f67a6a2f728ab852bcc  /tmp/bitnami/pkg/cache/miniconda-4.12.0-153-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/miniconda-4.12.0-153-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/miniconda-4.12.0-153-linux-amd64-debian-11.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/jupyter-base-notebook-1.5.0-152-linux-amd64-debian-11.tar.gz && \
-    echo "ca70ca530ab21a5c6f41d3884765997dd7831b29cf82a66945166f029cafb2db  /tmp/bitnami/pkg/cache/jupyter-base-notebook-1.5.0-152-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/jupyter-base-notebook-1.5.0-152-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/jupyter-base-notebook-1.5.0-152-linux-amd64-debian-11.tar.gz
+RUN install_packages ca-certificates curl gzip libc6 libcrypt1 libgcc-s1 libstdc++6 procps tar
+RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+    if [ ! -f miniconda-4.12.0-154-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/miniconda-4.12.0-154-linux-amd64-debian-11.tar.gz -O ; \
+    fi && \
+    echo "60138bae1b7541d2ecae75367eaa5ef158f6845dcb86ff746fc8402bdcae716b  miniconda-4.12.0-154-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf miniconda-4.12.0-154-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    rm -rf miniconda-4.12.0-154-linux-amd64-debian-11.tar.gz
+RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+    if [ ! -f jupyter-base-notebook-1.5.0-153-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/jupyter-base-notebook-1.5.0-153-linux-amd64-debian-11.tar.gz -O ; \
+    fi && \
+    echo "bc05c93912ea76eb68dfc7fe070b0cedcdab1528e37f3118b2dd8c8a3df18251  jupyter-base-notebook-1.5.0-153-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf jupyter-base-notebook-1.5.0-153-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    rm -rf jupyter-base-notebook-1.5.0-153-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
