@@ -25,6 +25,7 @@ jobs:
         name: Label PR
         uses: andymckay/labeler@1.0.4
         with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
           add-labels: "verify, auto-merge"
       - id: auto-merge
         name: Enable auto-merge

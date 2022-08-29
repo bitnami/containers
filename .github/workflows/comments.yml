@@ -51,5 +51,6 @@ jobs:
         if: ${{ contains(github.event.issue.labels.*.name, 'solved') }}
         uses: andymckay/labeler@1.0.4
         with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
           add-labels: "triage"
           remove-labels: "solved"
