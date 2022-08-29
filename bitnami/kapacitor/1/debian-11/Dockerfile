@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.6.5-debian-11-r0" \
+      org.opencontainers.image.ref.name="1.6.5-debian-11-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kapacitor" \
       org.opencontainers.image.title="kapacitor" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -15,11 +15,14 @@ LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kapacitor-1.6.5-0-linux-amd64-debian-11.tar.gz && \
-    echo "11af3306192d2d6dc87cdf718ce16cbb602bfc25d40f1a98eaa5629c9b075979  /tmp/bitnami/pkg/cache/kapacitor-1.6.5-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/kapacitor-1.6.5-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/kapacitor-1.6.5-0-linux-amd64-debian-11.tar.gz
+RUN install_packages ca-certificates curl gzip procps tar
+RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+    if [ ! -f kapacitor-1.6.5-1-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/kapacitor-1.6.5-1-linux-amd64-debian-11.tar.gz -O ; \
+    fi && \
+    echo "0f2625c116214f67efec31faa7ea02e8ae6bcaed87ca42b453e75ec253d14555  kapacitor-1.6.5-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf kapacitor-1.6.5-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    rm -rf kapacitor-1.6.5-1-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
