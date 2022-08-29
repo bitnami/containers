@@ -5,7 +5,7 @@ ENV OS_ARCH="amd64" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.18.5-debian-11-r8" \
+      org.opencontainers.image.ref.name="1.18.5-debian-11-r9" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/golang" \
       org.opencontainers.image.title="golang" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -14,11 +14,14 @@ LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages build-essential ca-certificates curl git gzip libc6 pkg-config procps tar unzip wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/golang-1.18.5-1-linux-amd64-debian-11.tar.gz && \
-    echo "adb33e4957e044156b175017d12b92ab56d5050ce19e95cedf123d0c9991aaf8  /tmp/bitnami/pkg/cache/golang-1.18.5-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/golang-1.18.5-1-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/golang-1.18.5-1-linux-amd64-debian-11.tar.gz
+RUN install_packages build-essential ca-certificates curl git gzip libc6 pkg-config procps tar unzip
+RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+    if [ ! -f golang-1.18.5-2-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/golang-1.18.5-2-linux-amd64-debian-11.tar.gz -O ; \
+    fi && \
+    echo "cb4eacf75c43bff9a622cccbffa558c3b632fc6be85ee3c36ac783743a416b63  golang-1.18.5-2-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf golang-1.18.5-2-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    rm -rf golang-1.18.5-2-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN mkdir -p "/go/src" "/go/bin" && chmod -R 777 "/go"

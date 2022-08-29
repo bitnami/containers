@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.5.0-debian-11-r10" \
+      org.opencontainers.image.ref.name="1.5.0-debian-11-r11" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/elasticsearch-exporter" \
       org.opencontainers.image.title="elasticsearch-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -15,11 +15,14 @@ LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/elasticsearch-exporter-1.5.0-2-linux-amd64-debian-11.tar.gz && \
-    echo "e6a7a81cbe076e4b79ce006e5a49b88ca8943166f7ef775617f8afa7a8d73e3e  /tmp/bitnami/pkg/cache/elasticsearch-exporter-1.5.0-2-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/elasticsearch-exporter-1.5.0-2-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/elasticsearch-exporter-1.5.0-2-linux-amd64-debian-11.tar.gz
+RUN install_packages ca-certificates curl gzip procps tar
+RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+    if [ ! -f elasticsearch-exporter-1.5.0-3-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/elasticsearch-exporter-1.5.0-3-linux-amd64-debian-11.tar.gz -O ; \
+    fi && \
+    echo "ed987043f9a5b26e5c3d6fbaa1c6447a1a21571e936975b2d5c17c6c178de8fc  elasticsearch-exporter-1.5.0-3-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf elasticsearch-exporter-1.5.0-3-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    rm -rf elasticsearch-exporter-1.5.0-3-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
