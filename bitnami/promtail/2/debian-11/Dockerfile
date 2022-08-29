@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.6.1-debian-11-r13" \
+      org.opencontainers.image.ref.name="2.6.1-debian-11-r14" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/promtail" \
       org.opencontainers.image.title="promtail" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -15,11 +15,14 @@ LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/promtail-2.6.1-1-linux-amd64-debian-11.tar.gz && \
-    echo "485f516b68bf02b865f26c50ffc9888be63a4b348dbfcaa36d53daffbfba347f  /tmp/bitnami/pkg/cache/promtail-2.6.1-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/promtail-2.6.1-1-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/promtail-2.6.1-1-linux-amd64-debian-11.tar.gz
+RUN install_packages ca-certificates curl gzip libc6 procps tar
+RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+    if [ ! -f promtail-2.6.1-2-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/promtail-2.6.1-2-linux-amd64-debian-11.tar.gz -O ; \
+    fi && \
+    echo "d0df301a461f976cd829c96bfa898b53badd00df49850b8d15ecc561e330f1cf  promtail-2.6.1-2-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf promtail-2.6.1-2-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    rm -rf promtail-2.6.1-2-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
