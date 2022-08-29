@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-11`, `2.346.3`, `2.346.3-debian-11-r2`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/jenkins/2/debian-11/Dockerfile)
+* [`2`, `2-debian-11`, `2.346.3`, `2.346.3-debian-11-r3`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/jenkins/2/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
@@ -296,7 +296,7 @@ RUN install_packages vim
 USER 1001
 ```
 
-### Preinstalling plugins
+### Installing plugins
 
 To download and install a set of plugins and their dependencies, use the [Plugin Installation Manager tool](https://github.com/jenkinsci/plugin-installation-manager-tool). You can find information about how to use this tool in the guide below:
 
@@ -314,7 +314,7 @@ $ docker run -d --name jenkins -p 80:8080 \
 
 ### Skipping Bitnami initialization
 
-By default, when running this image, Bitnami implement some logic in order to configure it for working out of the box. This initialization consists of creating the user and password, preparing data to persist, installing some plugins, configuring permissions, creating the `JENKINS_HOME`, etc. You can skip it in two ways:
+By default, when running this image, Bitnami implement some logic in order to configure it for working out of the box. This initialization consists of creating the user and password, preparing data to persist, configuring permissions, creating the `JENKINS_HOME`, etc. You can skip it in two ways:
 
 - Setting the `JENKINS_SKIP_BOOTSTRAP` environment variable to `yes`.
 - Attaching a volume with a custom `JENKINS_HOME` that contains a functional Jenkins installation.
@@ -361,6 +361,10 @@ $ docker run -d -p 80:8080 --name jenkins \
 
 ## Notable Changes
 
+### 2.346.3-debian-11-r3
+
+- The preinstalled plugins were removed.
+
 ### 2.332.2-debian-10-r21
 
 - HTTPS and HTTP support are enabled by default.
@@ -371,7 +375,7 @@ $ docker run -d -p 80:8080 --name jenkins \
 - The size of the container image has been decreased.
 - The configuration logic is now based on Bash scripts in the *rootfs/* folder.
 - Only the Jenkins Home directory is persisted.
-- The `install-plugins.sh` script has been deprecated. Instead use the Plugin Installation Manager Tool as explained in the [Preinstalling Plugins](#preinstalling-plugins) section.
+- The `install-plugins.sh` script has been deprecated. Instead use the Plugin Installation Manager Tool as explained in the [Installing Plugins](#installing-plugins) section.
 - The `DISABLE_JENKINS_INITIALIZATION` environment variable was renamed to `JENKINS_SKIP_BOOTSTRAP`.
 
 ### 2.263.3-debian-10-rXX
