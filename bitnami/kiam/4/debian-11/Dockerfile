@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.2.0-debian-11-r30" \
+      org.opencontainers.image.ref.name="4.2.0-debian-11-r31" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kiam" \
       org.opencontainers.image.title="kiam" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -15,11 +15,14 @@ LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip iptables procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kiam-4.2.0-152-linux-amd64-debian-11.tar.gz && \
-    echo "a5289dffc457b9465b6f5a9985b94fa01d71ab11a8defe1597adac2e1cc76bb4  /tmp/bitnami/pkg/cache/kiam-4.2.0-152-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/kiam-4.2.0-152-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/kiam-4.2.0-152-linux-amd64-debian-11.tar.gz
+RUN install_packages ca-certificates curl gzip iptables procps tar
+RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+    if [ ! -f kiam-4.2.0-153-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/kiam-4.2.0-153-linux-amd64-debian-11.tar.gz -O ; \
+    fi && \
+    echo "a4eaa63788d33842a41bc2d390858712f076baf4b4e29953ec4f0bc7d02930b8  kiam-4.2.0-153-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf kiam-4.2.0-153-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    rm -rf kiam-4.2.0-153-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
