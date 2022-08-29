@@ -35,9 +35,9 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.10`, `3.10-debian-11`, `3.10.6`, `3.10.6-debian-11-r11`, `latest` (3.10/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/python/3.10/debian-11/Dockerfile)
+* [`3.10`, `3.10-debian-11`, `3.10.6`, `3.10.6-debian-11-r12`, `latest` (3.10/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/python/3.10/debian-11/Dockerfile)
 * [`3.9`, `3.9-debian-11`, `3.9.13`, `3.9.13-debian-11-r38` (3.9/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/python/3.9/debian-11/Dockerfile)
-* [`3.8`, `3.8-debian-11`, `3.8.13`, `3.8.13-debian-11-r42` (3.8/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/python/3.8/debian-11/Dockerfile)
+* [`3.8`, `3.8-debian-11`, `3.8.13`, `3.8.13-debian-11-r43` (3.8/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/python/3.8/debian-11/Dockerfile)
 * [`3.7`, `3.7-debian-11`, `3.7.13`, `3.7.13-debian-11-r41` (3.7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/python/3.7/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
