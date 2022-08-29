@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.9.1-debian-11-r23" \
+      org.opencontainers.image.ref.name="2.9.1-debian-11-r24" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/tensorflow-intel" \
       org.opencontainers.image.title="tensorflow-intel" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -16,9 +16,9 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libbz2-1.0 libc6 libcom-err2 libcrypt1 libffi7 libgcc-s1 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncursesw6 libnsl2 libreadline8 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 libtirpc3 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.9.13-164" --checksum 84dc1804c30767dba8197459b7d20b77279f80ee52fdfd126487d179d124346f
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tensorflow-intel" "2.9.1-152" --checksum 67f0400ba5ebd96e198ec95008fba9437b8c71f8bd1c3f1f4bedcc3d002df4c9
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.9.13-165" --checksum 5051fbf8187b68b029cdf43e2fbae05619fa21e6770224c16ac6150242fc30b2
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "tensorflow-intel" "2.9.1-153" --checksum f959bace506b9c5372cc18561a9774912456762567063179550f5dc593435abb
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-154" --checksum e36c3d90f4fbfbe989f40947fa7c8ab817f12fcf97d3aef893c753a20ce976ab
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
