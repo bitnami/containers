@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.7.1-debian-11-r30" \
+      org.opencontainers.image.ref.name="0.7.1-debian-11-r31" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/configmap-reload" \
       org.opencontainers.image.title="configmap-reload" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -15,11 +15,14 @@ LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/configmap-reload-0.7.1-152-linux-amd64-debian-11.tar.gz && \
-    echo "4672c2dafff2acfacfd59cb6ad2669da8bbf450b50200ee0f64a2e4e5029d77a  /tmp/bitnami/pkg/cache/configmap-reload-0.7.1-152-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/configmap-reload-0.7.1-152-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/configmap-reload-0.7.1-152-linux-amd64-debian-11.tar.gz
+RUN install_packages ca-certificates curl gzip procps tar
+RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+    if [ ! -f configmap-reload-0.7.1-153-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/configmap-reload-0.7.1-153-linux-amd64-debian-11.tar.gz -O ; \
+    fi && \
+    echo "d57038b61463ec0cc42238db8a2426a030eaf6643e447321374f4c3798bcf1ff  configmap-reload-0.7.1-153-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf configmap-reload-0.7.1-153-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    rm -rf configmap-reload-0.7.1-153-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami

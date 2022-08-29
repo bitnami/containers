@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.22.13-debian-11-r2" \
+      org.opencontainers.image.ref.name="1.22.13-debian-11-r3" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kubectl" \
       org.opencontainers.image.title="kubectl" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -15,11 +15,14 @@ LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl git gzip jq procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/kubectl-1.22.13-0-linux-amd64-debian-11.tar.gz && \
-    echo "1034cfeb41e996cdc994264f647c0c267ab1c79b7e88a24818b7c71c6c34cc70  /tmp/bitnami/pkg/cache/kubectl-1.22.13-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/kubectl-1.22.13-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/kubectl-1.22.13-0-linux-amd64-debian-11.tar.gz
+RUN install_packages ca-certificates curl gzip jq procps tar
+RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+    if [ ! -f kubectl-1.22.13-1-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/kubectl-1.22.13-1-linux-amd64-debian-11.tar.gz -O ; \
+    fi && \
+    echo "fbedde165a535402d3f53e589c088ffb36e861ee053f4147104be02807a93187  kubectl-1.22.13-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf kubectl-1.22.13-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    rm -rf kubectl-1.22.13-1-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami

@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.9.5-debian-11-r3" \
+      org.opencontainers.image.ref.name="2.9.5-debian-11-r4" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/spring-cloud-dataflow-shell" \
       org.opencontainers.image.title="spring-cloud-dataflow-shell" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -15,15 +15,21 @@ LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip libc6 libgcc-s1 locales procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/java-1.8.345-1-linux-amd64-debian-11.tar.gz && \
-    echo "4d90bf2066c8d6605ac771e9b97c1188f4491d458fcb56956eeead6a18f70ac4  /tmp/bitnami/pkg/cache/java-1.8.345-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/java-1.8.345-1-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/java-1.8.345-1-linux-amd64-debian-11.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/spring-cloud-dataflow-shell-2.9.5-0-linux-amd64-debian-11.tar.gz && \
-    echo "50b057796b160eb9d3030c803dc793a48c2c9e98a2f9294ce40de52cc08baa76  /tmp/bitnami/pkg/cache/spring-cloud-dataflow-shell-2.9.5-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/spring-cloud-dataflow-shell-2.9.5-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/spring-cloud-dataflow-shell-2.9.5-0-linux-amd64-debian-11.tar.gz
+RUN install_packages ca-certificates curl gzip libc6 libgcc-s1 locales procps tar
+RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+    if [ ! -f java-1.8.345-2-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/java-1.8.345-2-linux-amd64-debian-11.tar.gz -O ; \
+    fi && \
+    echo "b244bc8c1f972d20fac8019cf97fb05ce6cd8be2034ca11f52243c8bd96aaa23  java-1.8.345-2-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf java-1.8.345-2-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    rm -rf java-1.8.345-2-linux-amd64-debian-11.tar.gz
+RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+    if [ ! -f spring-cloud-dataflow-shell-2.9.5-1-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/spring-cloud-dataflow-shell-2.9.5-1-linux-amd64-debian-11.tar.gz -O ; \
+    fi && \
+    echo "f31cd50d6b4581b2d037a2eabff17eb29abc1cb9ce15024f67fe677eed972c0d  spring-cloud-dataflow-shell-2.9.5-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf spring-cloud-dataflow-shell-2.9.5-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    rm -rf spring-cloud-dataflow-shell-2.9.5-1-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami

@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.23.4-debian-11-r2" \
+      org.opencontainers.image.ref.name="1.23.4-debian-11-r3" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/telegraf" \
       org.opencontainers.image.title="telegraf" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -15,11 +15,14 @@ LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip libc6 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/telegraf-1.23.4-0-linux-amd64-debian-11.tar.gz && \
-    echo "344ab27d7e86b0b9e94dea3ef1996fa50440a90798b1568add6501f8e093446d  /tmp/bitnami/pkg/cache/telegraf-1.23.4-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/telegraf-1.23.4-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/telegraf-1.23.4-0-linux-amd64-debian-11.tar.gz
+RUN install_packages ca-certificates curl gzip libc6 procps tar
+RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+    if [ ! -f telegraf-1.23.4-1-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/telegraf-1.23.4-1-linux-amd64-debian-11.tar.gz -O ; \
+    fi && \
+    echo "20b913582b788c59cc8cfbc5c6ad111bc19ff3d3c2a83025d28af1cb215d7069  telegraf-1.23.4-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf telegraf-1.23.4-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    rm -rf telegraf-1.23.4-1-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
