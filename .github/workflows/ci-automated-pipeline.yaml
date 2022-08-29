@@ -140,4 +140,11 @@ jobs:
           numOfAssignee: 1
           removePreviousAssignees: true
           teams: build-maintainers
-          repo-token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Move into In Progress
+        uses: peter-evans/create-or-update-project-card@v2
+        if: ${{ needs.vib-verify.result != 'success' }}
+        with:
+          project-name: Support
+          column-name: From Bitnami
+          token: "${{ secrets.GITHUB_TOKEN }}"
