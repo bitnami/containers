@@ -5,7 +5,7 @@ ENV OS_ARCH="amd64" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.7.13-debian-11-r41" \
+      org.opencontainers.image.ref.name="3.7.13-debian-11-r42" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/python" \
       org.opencontainers.image.title="python" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -16,12 +16,12 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages build-essential ca-certificates curl git gzip libbz2-1.0 libc6 libcom-err2 libcrypt1 libffi7 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncursesw6 libnsl2 libreadline8 libsqlite3-0 libsqlite3-dev libssl-dev libssl1.1 libtinfo6 libtirpc3 pkg-config procps tar unzip wget zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f python-3.7.13-166-linux-amd64-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/python-3.7.13-166-linux-amd64-debian-11.tar.gz -O ; \
+    if [ ! -f python-3.7.13-167-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/python-3.7.13-167-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
-    echo "e26eaba446d1fe7570374ba8c7696104d6f9242a82599c17dd1e37afbdd819a7  python-3.7.13-166-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf python-3.7.13-166-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
-    rm -rf python-3.7.13-166-linux-amd64-debian-11.tar.gz
+    echo "39b3ee57881cc28df099e5c7d2ab7e945b259ab0821be1961a522df6b70c2832  python-3.7.13-167-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf python-3.7.13-167-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf python-3.7.13-167-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
