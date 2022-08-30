@@ -7,7 +7,7 @@ ENV HOME="/" \
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="7.1.3-debian-11-r16" \
+      org.opencontainers.image.ref.name="7.1.3-debian-11-r17" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/schema-registry" \
       org.opencontainers.image.title="schema-registry" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -17,9 +17,9 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 netcat-traditional procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.15-1-2" --checksum 1a5468c7b552dfc8a33c5c9b214dbf7dd143a5f008cc3aa2e0418fab5eb16c5c
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "schema-registry" "7.1.3-1" --checksum fb29831adadb4c61279611d11905e90b1592d5cdf3b1097c052dad161a2a64ef
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.15-1-3" --checksum 7214b8ab81c9d919f87f027590ca80c198f65fe50c5e2886d8e5e20691aee8d7
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "schema-registry" "7.1.3-2" --checksum 68d5149027f3df6c146b1d135b469661e1582edbffbb5e09ce7e5b6b21103430
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-154" --checksum e36c3d90f4fbfbe989f40947fa7c8ab817f12fcf97d3aef893c753a20ce976ab
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
