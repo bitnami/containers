@@ -28,7 +28,7 @@ $ docker run --name rabbitmq-cluster-operator bitnami/rabbitmq-cluster-operator:
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`1`, `1-scratch`, `1.14.0`, `1.14.0-scratch-r5`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/rabbitmq-cluster-operator/1/scratch/Dockerfile)
+- [`1`, `1-scratch`, `1.14.0`, `1.14.0-scratch-r6`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/rabbitmq-cluster-operator/1/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
