@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.58.0-debian-11-r13" \
+      org.opencontainers.image.ref.name="0.58.0-debian-11-r14" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/prometheus-operator" \
       org.opencontainers.image.title="prometheus-operator" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -15,12 +15,14 @@ LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip procps tar wget
+RUN install_packages ca-certificates curl gzip procps tar
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    curl -SsLf https://downloads.bitnami.com/files/stacksmith/prometheus-operator-0.58.0-1-linux-amd64-debian-11.tar.gz -o prometheus-operator-0.58.0-1-linux-amd64-debian-11.tar.gz && \
-    echo "2d3e46b39d9f84ea40ac9fe3fc2f3ab5d53f33ffffd73f8d9e856f1c2aea08c5  prometheus-operator-0.58.0-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf prometheus-operator-0.58.0-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
-    rm -rf prometheus-operator-0.58.0-1-linux-amd64-debian-11.tar.gz
+    if [ ! -f prometheus-operator-0.58.0-2-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/prometheus-operator-0.58.0-2-linux-amd64-debian-11.tar.gz -O ; \
+    fi && \
+    echo "7a720488737838b8ed8bd594ce9f3b97ae331e28f4400607bb9802edb17e0497  prometheus-operator-0.58.0-2-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf prometheus-operator-0.58.0-2-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    rm -rf prometheus-operator-0.58.0-2-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami

@@ -1,30 +1,30 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449",
+        "digest": "e36c3d90f4fbfbe989f40947fa7c8ab817f12fcf97d3aef893c753a20ce976ab",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-153"
+        "version": "1.14.0-154"
     },
     "node": {
         "arch": "amd64",
-        "digest": "1746fa1ffc5334d5ae88292dec4e40eff36b00a1a11ab49b8be0cdf206f82232",
+        "digest": "8e8fb9f8c5852147b47c1ae5c653292774ec8c15623f2f6859fad71a8bd208a9",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "16.17.0-0"
+        "version": "16.17.0-1"
     },
     "parse-dashboard": {
         "arch": "amd64",
-        "digest": "2ecff8baa33ae58480e08be3bfc8983d4e95db158bfda77c855f7766e7376fd9",
+        "digest": "c4751bfb5cd1079f8b8db2bf57cdd14b2080b859cdec487b9a8b846a35fb93cc",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.1.4-2"
+        "version": "4.1.4-3"
     },
     "python": {
         "arch": "amd64",
-        "digest": "2bf41f60dccdcf65842d993083c2dcb27ab48a8a514fdeb1778e9b09f3e4a203",
+        "digest": "9a5fba755f6c8d60eacc80f366f3fbaa57d003913e48c31ba337037bb69e37b3",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.13-165"
+        "version": "3.8.13-166"
     }
 }

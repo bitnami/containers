@@ -1,9 +1,9 @@
 {
     "oauth2-proxy": {
         "arch": "amd64",
-        "digest": "5e1c6eae0fea140cdc69cb0f3b6defb1d159f54d6756f4ff70aae8b615f5fba5",
+        "digest": "a3a9b9a1456834825ade9dc48aadf1de909a9327dd9423032b4482f9550d5998",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.3.0-152"
+        "version": "7.3.0-153"
     }
 }
