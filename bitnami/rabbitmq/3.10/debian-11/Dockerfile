@@ -7,7 +7,7 @@ ENV HOME="/opt/bitnami/rabbitmq/.rabbitmq" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.10.7-debian-11-r8" \
+      org.opencontainers.image.ref.name="3.10.7-debian-11-r9" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/rabbitmq" \
       org.opencontainers.image.title="rabbitmq" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -17,9 +17,9 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libgcc-s1 libssl1.1 libstdc++6 libtinfo6 locales procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-154" --checksum e36c3d90f4fbfbe989f40947fa7c8ab817f12fcf97d3aef893c753a20ce976ab
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "erlang" "24.3.4-152" --checksum 50d1547af3f9123d05dea9b3dd3ce3e53acc7e695ef8ab1dc16620e48d38fd31
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rabbitmq" "3.10.7-1" --checksum 25c4ea249d74b960c7028efc2f90d49405059311adcfdfbb947a0cc44e15dae5
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "rabbitmq" "3.10.7-2" --checksum e996540ba3c266a6c02e5ab63dc66f725a0565ff0a525afc7e93affcb49ba707
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
