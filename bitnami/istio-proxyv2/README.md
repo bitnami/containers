@@ -29,7 +29,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 - [`1.14`, `1.14-debian-11`, `1.14.3`, `1.14.3-debian-11-r0`, `latest` (1.14/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/istio-proxyv2/1.14/debian-11/Dockerfile)
-- [`1.13`, `1.13-debian-11`, `1.13.7`, `1.13.7-debian-11-r0` (1.13/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/istio-proxyv2/1.13/debian-11/Dockerfile)
+- [`1.13`, `1.13-debian-11`, `1.13.7`, `1.13.7-debian-11-r1` (1.13/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/istio-proxyv2/1.13/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
