@@ -47,11 +47,11 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`14`, `14-debian-11`, `14.5.0`, `14.5.0-debian-11-r6`, `latest` (14/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/14/debian-11/Dockerfile)
-* [`13`, `13-debian-11`, `13.8.0`, `13.8.0-debian-11-r7` (13/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/13/debian-11/Dockerfile)
-* [`12`, `12-debian-11`, `12.12.0`, `12.12.0-debian-11-r7` (12/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/12/debian-11/Dockerfile)
+* [`14`, `14-debian-11`, `14.5.0`, `14.5.0-debian-11-r7`, `latest` (14/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/14/debian-11/Dockerfile)
+* [`13`, `13-debian-11`, `13.8.0`, `13.8.0-debian-11-r8` (13/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/13/debian-11/Dockerfile)
+* [`12`, `12-debian-11`, `12.12.0`, `12.12.0-debian-11-r8` (12/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/12/debian-11/Dockerfile)
 * [`11`, `11-debian-11`, `11.17.0`, `11.17.0-debian-11-r8` (11/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/11/debian-11/Dockerfile)
-* [`10`, `10-debian-11`, `10.22.0`, `10.22.0-debian-11-r7` (10/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/10/debian-11/Dockerfile)
+* [`10`, `10-debian-11`, `10.22.0`, `10.22.0-debian-11-r8` (10/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/10/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 

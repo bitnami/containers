@@ -2,7 +2,7 @@ FROM docker.io/bitnami/minideb:bullseye
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="11-debian-11-r29" \
+      org.opencontainers.image.ref.name="11-debian-11-r30" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/bitnami-shell" \
       org.opencontainers.image.title="bitnami-shell" \
       org.opencontainers.image.vendor="VMware, Inc." \

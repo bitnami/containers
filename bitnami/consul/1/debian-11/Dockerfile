@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.13.1-debian-11-r5" \
+      org.opencontainers.image.ref.name="1.13.1-debian-11-r6" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/consul" \
       org.opencontainers.image.title="consul" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -16,9 +16,9 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip iproute2 procps tar zlib1g-dev
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-152" --checksum 7909504f3232654c427681ecc8ed4b8599a2df0f17f26ff769a83ed167d05b69
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "consul" "1.13.1-0" --checksum acb4de3495b6b72f257e786262420cbae5c517501ab4e1b9218c63db4caeb9e2
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "render-template" "1.0.3-153" --checksum c1f2cdabdcc920512e8936ab2c8a033e1aeb97801fa026f0b12432581bf849ae
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-154" --checksum e36c3d90f4fbfbe989f40947fa7c8ab817f12fcf97d3aef893c753a20ce976ab
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "consul" "1.13.1-1" --checksum 81cec67a2649f6fbb62f5aeb8bbecf337a925399748b68d6b1e4692e27b709fb
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami

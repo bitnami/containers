@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="8.0.30-debian-11-r11" \
+      org.opencontainers.image.ref.name="8.0.30-debian-11-r12" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mysql" \
       org.opencontainers.image.title="mysql" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -16,9 +16,9 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaio1 libc6 libcom-err2 libgcc-s1 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libsasl2-2 libssl1.1 libstdc++6 libtinfo6 libtirpc3 procps psmisc tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.3-152" --checksum 0017b950b7eb0faa7580ef23342adbbfa2038d55c3dafdf1c8761788122f718e
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql" "8.0.30-1" --checksum b8434dd5d6061c7f5d23e8c6d9e953847f5ef25e09fa8d01693e1decb3037c8a
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ini-file" "1.4.3-153" --checksum 4692a063a41c8382fbf1629f92bb91cc3064d50b25bddeb7e1b299c749e39afd
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql" "8.0.30-2" --checksum ddf021b2f6dc7e8730a3b96acbeb64e9883d52306f94447c6d9ed67da7c2798a
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-154" --checksum e36c3d90f4fbfbe989f40947fa7c8ab817f12fcf97d3aef893c753a20ce976ab
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami

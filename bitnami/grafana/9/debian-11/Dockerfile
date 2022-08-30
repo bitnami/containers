@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="9.1.1-debian-11-r1" \
+      org.opencontainers.image.ref.name="9.1.1-debian-11-r2" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/grafana" \
       org.opencontainers.image.title="grafana" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -16,8 +16,8 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 libfontconfig procps tar
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "grafana" "9.1.1-0" --checksum 9aa6aebe1bc830a27ee253f980fe12cc13e858ce4c2041c531a6026ec2e82fb6
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "grafana" "9.1.1-1" --checksum 649cfc9d7d395286ef080a128211d88186dbbb923c9acafcc647332fa7347fba
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-154" --checksum e36c3d90f4fbfbe989f40947fa7c8ab817f12fcf97d3aef893c753a20ce976ab
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami

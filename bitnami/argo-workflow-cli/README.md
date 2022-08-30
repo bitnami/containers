@@ -43,7 +43,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-scratch`, `3.3.9`, `3.3.9-scratch-r1`, `latest` (3/scratch/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/argo-workflows/3/scratch/      Dockerfile)
+* [`3`, `3-scratch`, `3.3.9`, `3.3.9-scratch-r2`, `latest` (3/scratch/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/argo-workflows/3/scratch/      Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 

@@ -7,7 +7,7 @@ ENV HOME="/" \
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="7.9.0-2-debian-11-r11" \
+      org.opencontainers.image.ref.name="7.9.0-2-debian-11-r12" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ejbca" \
       org.opencontainers.image.title="ejbca" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -17,11 +17,11 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libaio1 libaudit1 libc6 libcap-ng0 libgcc-s1 libicu67 liblzma5 libncurses6 libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 procps tar zlib1g
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.15-1-2" --checksum 1a5468c7b552dfc8a33c5c9b214dbf7dd143a5f008cc3aa2e0418fab5eb16c5c
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wildfly" "26.1.1-156" --checksum 84385e5c755ad0ce65f8df896708b20e4a068358a53958dbb4f0d957126920ab
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.9-0" --checksum cebce7505cdf9a25aa92950d2d0b4f6678905c2c1aa4ade97d69b01b2848a266
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ejbca" "7.9.0-2-2" --checksum ce65e57c0fb58ee37bf3d5fcf25ce79fa0697e81e895f6a1391511096a539992
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "java" "11.0.15-1-3" --checksum 7214b8ab81c9d919f87f027590ca80c198f65fe50c5e2886d8e5e20691aee8d7
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wildfly" "26.1.1-158" --checksum 17001caa64a6ac25076d8b1725afc433da62de54723f8b62544cd92ead756302
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "mysql-client" "10.6.9-1" --checksum 14ae2f6d8d5f4e3a9e4cf62d5a3da80587a20651a5920dbc4ac89afdaf06f8c0
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-154" --checksum e36c3d90f4fbfbe989f40947fa7c8ab817f12fcf97d3aef893c753a20ce976ab
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ejbca" "7.9.0-2-3" --checksum fb84fdda89139baad364e5eda7c3d3b0a4fcc4ae41e4da5c767a916f99ee5f66
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
