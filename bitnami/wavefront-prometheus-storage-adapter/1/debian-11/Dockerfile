@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.0.5-debian-11-r31" \
+      org.opencontainers.image.ref.name="1.0.5-debian-11-r32" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/wavefront-prometheus-storage-adapter" \
       org.opencontainers.image.title="wavefront-prometheus-storage-adapter" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -15,12 +15,14 @@ LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip procps tar wget
+RUN install_packages ca-certificates curl gzip procps tar
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    curl -SsLf https://downloads.bitnami.com/files/stacksmith/wavefront-prometheus-storage-adapter-1.0.5-152-linux-amd64-debian-11.tar.gz -o wavefront-prometheus-storage-adapter-1.0.5-152-linux-amd64-debian-11.tar.gz && \
-    echo "28a94dc831eb69dc478d6872f456adb028c363c5dddf4732832e67fe528d8182  wavefront-prometheus-storage-adapter-1.0.5-152-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf wavefront-prometheus-storage-adapter-1.0.5-152-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
-    rm -rf wavefront-prometheus-storage-adapter-1.0.5-152-linux-amd64-debian-11.tar.gz
+    if [ ! -f wavefront-prometheus-storage-adapter-1.0.5-153-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/wavefront-prometheus-storage-adapter-1.0.5-153-linux-amd64-debian-11.tar.gz -O ; \
+    fi && \
+    echo "0c81fe01fcf84793a5fc5448d293ea83d986056ae8eb6b71cf4f80abc799f11d  wavefront-prometheus-storage-adapter-1.0.5-153-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf wavefront-prometheus-storage-adapter-1.0.5-153-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    rm -rf wavefront-prometheus-storage-adapter-1.0.5-153-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
