@@ -10,6 +10,7 @@ on:
 permissions:
   issues: write
   repository-projects: write
+  pull-requests: write
 
 # To fix the concurrency when for example more than one label is added
 concurrency:
