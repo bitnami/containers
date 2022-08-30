@@ -19,7 +19,7 @@ RUN install_packages acl advancecomp ca-certificates curl file gifsicle git gzip
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "python" "3.8.13-165" --checksum 2bf41f60dccdcf65842d993083c2dcb27ab48a8a514fdeb1778e9b09f3e4a203
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.0.3-153" --checksum 8c8e324ab6e7b7d76b4655182d6ea5f6550edfc9e32bec92228e678c26fc8b16
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "ruby" "2.7.6-152" --checksum e540186296667507c027334b500b6058952398e9b98c1e9ebd62f2b3775e61bc
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "13.8.0-0" --checksum 5dd1afba3aca8070dae723f9ab2253cbc6ff5622f4f0f522332181f57c8ce958
+RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "postgresql-client" "14.5.0-0" --checksum 18cdf4daa5c8425b98dac864a52c29da56467cf76b4a5c0520ba591ccd33fbef
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "node" "14.20.0-2" --checksum 127f7b97bd46468ce62bc5cd9868371ca2c4c1e7201f6271a309b34a17b97d90
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "brotli" "1.0.9-152" --checksum a63e73736813c091efd0d20cd1f1bc0c1276a09b05dac609ee46ece34d223692
 RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "gosu" "1.14.0-153" --checksum d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449
