@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.11.1-debian-11-r1" \
+      org.opencontainers.image.ref.name="0.11.1-debian-11-r2" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/postgres-exporter" \
       org.opencontainers.image.title="postgres-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -15,11 +15,14 @@ LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/postgres-exporter-0.11.1-0-linux-amd64-debian-11.tar.gz && \
-    echo "b70e1978d62dca6e9f2412fe690d2c46fd240fbfd90a2d7af11d49e91d0ffd9b  /tmp/bitnami/pkg/cache/postgres-exporter-0.11.1-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/postgres-exporter-0.11.1-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/postgres-exporter-0.11.1-0-linux-amd64-debian-11.tar.gz
+RUN install_packages ca-certificates curl gzip procps tar
+RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+    if [ ! -f postgres-exporter-0.11.1-1-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/postgres-exporter-0.11.1-1-linux-amd64-debian-11.tar.gz -O ; \
+    fi && \
+    echo "68c1ea1394bfa0adf10308c2512df826b345eece1213e11264e66f2d4de695f5  postgres-exporter-0.11.1-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf postgres-exporter-0.11.1-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    rm -rf postgres-exporter-0.11.1-1-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
