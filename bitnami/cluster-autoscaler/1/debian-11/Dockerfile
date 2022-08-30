@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.24.0-debian-11-r29" \
+      org.opencontainers.image.ref.name="1.24.0-debian-11-r30" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cluster-autoscaler" \
       org.opencontainers.image.title="cluster-autoscaler" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -15,11 +15,14 @@ LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/cluster-autoscaler-1.24.0-152-linux-amd64-debian-11.tar.gz && \
-    echo "13ddc2555540202d4bd800a41db1f52ece4630a7c6fe4e9b3f275cf94631bd30  /tmp/bitnami/pkg/cache/cluster-autoscaler-1.24.0-152-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/cluster-autoscaler-1.24.0-152-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/cluster-autoscaler-1.24.0-152-linux-amd64-debian-11.tar.gz
+RUN install_packages ca-certificates curl gzip procps tar
+RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+    if [ ! -f cluster-autoscaler-1.24.0-153-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/cluster-autoscaler-1.24.0-153-linux-amd64-debian-11.tar.gz -O ; \
+    fi && \
+    echo "3572431aa3a5e287ee968e8dadd92d0bd15a1936e174c787bd85ca8870d350ab  cluster-autoscaler-1.24.0-153-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf cluster-autoscaler-1.24.0-153-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    rm -rf cluster-autoscaler-1.24.0-153-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
