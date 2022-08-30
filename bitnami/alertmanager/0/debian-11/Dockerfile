@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.24.0-debian-11-r30" \
+      org.opencontainers.image.ref.name="0.24.0-debian-11-r31" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/alertmanager" \
       org.opencontainers.image.title="alertmanager" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -17,12 +17,12 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip procps tar
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f alertmanager-0.24.0-154-linux-amd64-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/alertmanager-0.24.0-154-linux-amd64-debian-11.tar.gz -O ; \
+    if [ ! -f alertmanager-0.24.0-155-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/alertmanager-0.24.0-155-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
-    echo "200038663683ef06de1e80311c2e693088512240c95fd27eb57e570e6e3a9ae3  alertmanager-0.24.0-154-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf alertmanager-0.24.0-154-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
-    rm -rf alertmanager-0.24.0-154-linux-amd64-debian-11.tar.gz
+    echo "200038663683ef06de1e80311c2e693088512240c95fd27eb57e570e6e3a9ae3  alertmanager-0.24.0-155-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf alertmanager-0.24.0-155-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf alertmanager-0.24.0-155-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN ln -sf /opt/bitnami/alertmanager/conf /etc/alertmanager
