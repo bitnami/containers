@@ -15,10 +15,10 @@
     },
     "logstash": {
         "arch": "amd64",
-        "digest": "5c15b2ce6f26bdc56b5eb33618f0c2ec82b2c7e9a878cd3eef4ff408fedaca36",
+        "digest": "15e4893be83b554f20344b15e47ff4b507267f0ef49c818c1bdf1a5f3e2dbf99",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.4.0-1"
+        "version": "8.4.1-0"
     },
     "yq": {
         "arch": "amd64",
