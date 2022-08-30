@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.6.4-debian-11-r1" \
+      org.opencontainers.image.ref.name="2.6.4-debian-11-r2" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/haproxy" \
       org.opencontainers.image.title="haproxy" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -15,15 +15,21 @@ LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip libc6 libssl1.1 procps tar wget
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/haproxy-dataplaneapi-2.6.0-1-linux-amd64-debian-11.tar.gz && \
-    echo "f95fb721441bf02fe10754c5c87400d1877016d5a812d78e60477fe8b948b94c  /tmp/bitnami/pkg/cache/haproxy-dataplaneapi-2.6.0-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/haproxy-dataplaneapi-2.6.0-1-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/haproxy-dataplaneapi-2.6.0-1-linux-amd64-debian-11.tar.gz
-RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/haproxy-2.6.4-0-linux-amd64-debian-11.tar.gz && \
-    echo "5faeeed5f47bcf01cb88e2ed3c69d07182373f8d27ee7a3706da2cfcc8b23639  /tmp/bitnami/pkg/cache/haproxy-2.6.4-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf /tmp/bitnami/pkg/cache/haproxy-2.6.4-0-linux-amd64-debian-11.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-    rm -rf /tmp/bitnami/pkg/cache/haproxy-2.6.4-0-linux-amd64-debian-11.tar.gz
+RUN install_packages ca-certificates curl gzip libc6 libssl1.1 procps tar
+RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+    if [ ! -f haproxy-dataplaneapi-2.6.0-2-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/haproxy-dataplaneapi-2.6.0-2-linux-amd64-debian-11.tar.gz -O ; \
+    fi && \
+    echo "22519edc1bfeef288ad7665f2b9ff6dc9c2a9820f53ebf800aea2aa64e8f58f4  haproxy-dataplaneapi-2.6.0-2-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf haproxy-dataplaneapi-2.6.0-2-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    rm -rf haproxy-dataplaneapi-2.6.0-2-linux-amd64-debian-11.tar.gz
+RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+    if [ ! -f haproxy-2.6.4-1-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/haproxy-2.6.4-1-linux-amd64-debian-11.tar.gz -O ; \
+    fi && \
+    echo "ee9269a73635c2976e1e587c5ff6c345b081b51d076855b3ce35c5209a94210e  haproxy-2.6.4-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf haproxy-2.6.4-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    rm -rf haproxy-2.6.4-1-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
