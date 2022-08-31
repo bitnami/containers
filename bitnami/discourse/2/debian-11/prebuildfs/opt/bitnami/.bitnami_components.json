@@ -8,10 +8,10 @@
     },
     "discourse": {
         "arch": "amd64",
-        "digest": "d96a3785ba2a836b9f5058efe30f191b0cde5923d79228f3b0fa535a0d203285",
+        "digest": "c735edd739ed7dab59cb23809923da8cef645c7d38e0e134ba302d2442ea25f3",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.8.8-1"
+        "version": "2.8.8-2"
     },
     "gosu": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "9a5fba755f6c8d60eacc80f366f3fbaa57d003913e48c31ba337037bb69e37b3",
+        "digest": "6e21552dc6c19b01247f3ec7bcd0401e6192519fe206e136e205ac6c3b842e7b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.13-166"
+        "version": "3.8.13-167"
     },
     "ruby": {
         "arch": "amd64",
