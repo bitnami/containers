@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.8.1-debian-11-r43" \
+      org.opencontainers.image.ref.name="2.8.1-debian-11-r44" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kong" \
       org.opencontainers.image.title="kong" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -24,12 +24,12 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf gosu-1.14.0-154-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf gosu-1.14.0-154-linux-amd64-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f kong-2.8.1-20-linux-amd64-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/kong-2.8.1-20-linux-amd64-debian-11.tar.gz -O ; \
+    if [ ! -f kong-2.8.1-21-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/kong-2.8.1-21-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
-    echo "ee0c2784ae8a8e774a2654c77158c10b996196accae1089478df84f4f494f473  kong-2.8.1-20-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf kong-2.8.1-20-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf kong-2.8.1-20-linux-amd64-debian-11.tar.gz
+    echo "07c4ba851d0221a01ac92fbfae703fe5d8e0d351a4384dd6aff88c2124888b93  kong-2.8.1-21-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf kong-2.8.1-21-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf kong-2.8.1-21-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
