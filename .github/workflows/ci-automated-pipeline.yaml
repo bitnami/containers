@@ -141,3 +141,10 @@ jobs:
           removePreviousAssignees: true
           teams: build-maintainers
           repo-token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
+      - name: Move into From Bitnami
+        uses: peter-evans/create-or-update-project-card@v2
+        if: ${{ needs.vib-verify.result != 'success' }}
+        with:
+          project-name: Support
+          column-name: From Bitnami
+          token: "${{ secrets.GITHUB_TOKEN }}"
