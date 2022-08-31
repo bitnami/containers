@@ -148,5 +148,5 @@ jobs:
           project-name: Support
           column-name: From Bitnami
           token: "${{ secrets.GITHUB_TOKEN }}"
-          # The action by default uses github.event.issue.number and PRs don't have that field
+          # The action by default uses github.event.issue.number but PRs don't have that field
           issue-number: ${{ github.event.number }}
