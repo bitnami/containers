@@ -1,10 +1,10 @@
 {
     "airflow": {
         "arch": "amd64",
-        "digest": "d2cdb01b40b0a631dcfa0d97560a569e4b856b80607439a4b67dcc76ae443de6",
+        "digest": "32425375517dfe654f6161c060f3eaa28181cbe3334dc793ecd9297c61900088",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.3.4-0"
+        "version": "2.3.4-1"
     },
     "gosu": {
         "arch": "amd64",
@@ -29,10 +29,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "9a5fba755f6c8d60eacc80f366f3fbaa57d003913e48c31ba337037bb69e37b3",
+        "digest": "6e21552dc6c19b01247f3ec7bcd0401e6192519fe206e136e205ac6c3b842e7b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.13-166"
+        "version": "3.8.13-167"
     },
     "wait-for-port": {
         "arch": "amd64",
