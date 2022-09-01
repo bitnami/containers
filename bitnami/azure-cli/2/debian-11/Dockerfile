@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.39.0-debian-11-r9" \
+      org.opencontainers.image.ref.name="2.39.0-debian-11-r10" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/azure-cli" \
       org.opencontainers.image.title="azure-cli" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -17,18 +17,18 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip libbz2-1.0 libc6 libcom-err2 libcrypt1 libffi7 libgcc-s1 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncursesw6 libnsl2 libreadline8 libsqlite3-0 libssl1.1 libtinfo6 libtirpc3 procps tar zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f python-3.7.13-166-linux-amd64-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/python-3.7.13-166-linux-amd64-debian-11.tar.gz -O ; \
+    if [ ! -f python-3.7.13-167-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/python-3.7.13-167-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
-    echo "e26eaba446d1fe7570374ba8c7696104d6f9242a82599c17dd1e37afbdd819a7  python-3.7.13-166-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf python-3.7.13-166-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
-    rm -rf python-3.7.13-166-linux-amd64-debian-11.tar.gz
+    echo "39b3ee57881cc28df099e5c7d2ab7e945b259ab0821be1961a522df6b70c2832  python-3.7.13-167-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf python-3.7.13-167-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf python-3.7.13-167-linux-amd64-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f azure-cli-2.39.0-2-linux-amd64-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/azure-cli-2.39.0-2-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
     echo "a5ff2af8f000a36232ee0dddc847ea6c37566d2e67fa3d3adb4239f592640c87  azure-cli-2.39.0-2-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf azure-cli-2.39.0-2-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    tar -zxf azure-cli-2.39.0-2-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf azure-cli-2.39.0-2-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
