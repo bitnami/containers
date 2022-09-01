@@ -44,7 +44,7 @@ jobs:
         with:
           project-name: Support
           # If the author comes from Bitnami, send it to Bitnami. Otherwise, all to Triage
-          column-name: ${{ (contains(fromJson(env.BITNAMI_TEAM), github.actor)) && 'From Bitnami' || 'Triage' }}
+          column-name: ${{ (github.actor == 'bitnami-bot' || (!contains(fromJson(env.BITNAMI_TEAM), github.actor))) && 'Triage' || 'From Bitnami' }}
           token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
           issue-number: ${{ github.event_name != 'issues' && github.event.number || github.event.issue.number }}
       - name: Triage labeling
@@ -52,7 +52,7 @@ jobs:
         uses: andymckay/labeler@1.0.4
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          add-labels: ${{ (!contains(fromJson(env.BITNAMI_TEAM), github.actor)) && 'triage' || ((github.actor == 'bitnami-bot') && 'bitnami, auto-merge' || 'bitnami') }}
+          add-labels: ${{ (github.actor == 'bitnami-bot' || (!contains(fromJson(env.BITNAMI_TEAM), github.actor))) && 'triage' || 'bitnami' }}
           # For reopened issues
           remove-labels: "solved"
       - name: Verify labeling

@@ -142,6 +142,11 @@ jobs:
       always() &&
       github.actor == 'bitnami-bot'
     needs: verification-summary
+      - name: Automerge labeling
+        uses: andymckay/labeler@1.0.4
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          add-labels: auto-merge
       - name: Enable auto-merge feature
         if: ${{ needs.verification-summary.result == 'success' }}
         uses: reitermarkus/automerge@v2.1.2
