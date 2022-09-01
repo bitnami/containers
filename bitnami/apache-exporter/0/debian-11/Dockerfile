@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.11.0-debian-11-r34" \
+      org.opencontainers.image.ref.name="0.11.0-debian-11-r35" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/apache-exporter" \
       org.opencontainers.image.title="apache-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/apache-exporter-0.11.0-154-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
     echo "083e935154d7b9029b4e46d01aa751cabb847f4cd7420cc0d5db44f4469ab78b  apache-exporter-0.11.0-154-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf apache-exporter-0.11.0-154-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    tar -zxf apache-exporter-0.11.0-154-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf apache-exporter-0.11.0-154-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives

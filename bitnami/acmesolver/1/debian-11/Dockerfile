@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.9.1-debian-11-r14" \
+      org.opencontainers.image.ref.name="1.9.1-debian-11-r15" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/acmesolver" \
       org.opencontainers.image.title="acmesolver" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/acmesolver-1.9.1-2-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
     echo "8d2dba574b419baa8da1894b1d58544d15cf22f29d8f2788407dffa246a7b0ef  acmesolver-1.9.1-2-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf acmesolver-1.9.1-2-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    tar -zxf acmesolver-1.9.1-2-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf acmesolver-1.9.1-2-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives

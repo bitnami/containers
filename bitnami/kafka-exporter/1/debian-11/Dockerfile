@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.6.0-debian-11-r1" \
+      org.opencontainers.image.ref.name="1.6.0-debian-11-r2" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kafka-exporter" \
       org.opencontainers.image.title="kafka-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/kafka-exporter-1.6.0-1-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
     echo "990dc3a8b1d2f61a2830957f4572640aec0631035ffc77b68f89766a88c919b2  kafka-exporter-1.6.0-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf kafka-exporter-1.6.0-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    tar -zxf kafka-exporter-1.6.0-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf kafka-exporter-1.6.0-1-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives

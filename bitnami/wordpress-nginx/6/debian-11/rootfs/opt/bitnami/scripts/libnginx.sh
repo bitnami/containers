@@ -128,18 +128,21 @@ nginx_validate() {
             print_validation_error "The allowed values for ${1} are: yes no"
         fi
     }
+    check_valid_port() {
+        local port_var="${1:?missing port variable}"
+        local validate_port_args=()
+        local err
+        ! am_i_root && validate_port_args+=("-unprivileged")
+        if ! err="$(validate_port "${validate_port_args[@]}" "${!port_var}")"; then
+            print_validation_error "An invalid port was specified in the environment variable ${port_var}: ${err}."
+        fi
+    }
 
     ! is_empty_value "$NGINX_ENABLE_ABSOLUTE_REDIRECT" && check_yes_no_value "NGINX_ENABLE_ABSOLUTE_REDIRECT"
     ! is_empty_value "$NGINX_ENABLE_PORT_IN_REDIRECT" && check_yes_no_value "NGINX_ENABLE_PORT_IN_REDIRECT"
 
-    if [[ -n "${NGINX_HTTP_PORT_NUMBER:-}" ]]; then
-        local -a validate_port_args=()
-        ! am_i_root && validate_port_args+=("-unprivileged")
-        validate_port_args+=("${NGINX_HTTP_PORT_NUMBER}")
-        if ! err=$(validate_port "${validate_port_args[@]}"); then
-            print_validation_error "An invalid port was specified in the environment variable NGINX_HTTP_PORT_NUMBER: $err"
-        fi
-    fi
+    ! is_empty_value "$NGINX_HTTP_PORT_NUMBER" && check_valid_port "NGINX_HTTP_PORT_NUMBER"
+    ! is_empty_value "$NGINX_HTTPS_PORT_NUMBER" && check_valid_port "NGINX_HTTPS_PORT_NUMBER"
 
     if ! is_file_writable "$NGINX_CONF_FILE"; then
         warn "The NGINX configuration file '${NGINX_CONF_FILE}' is not writable by current user. Configurations based on environment variables will not be applied."
@@ -188,8 +191,13 @@ nginx_initialize() {
         nginx_user_configuration="$(sed -E "s/(^user)/# \1/g" "$NGINX_CONF_FILE")"
         is_file_writable "$NGINX_CONF_FILE" && echo "$nginx_user_configuration" >"$NGINX_CONF_FILE"
     fi
+    # Configure HTTP port number
     if [[ -n "${NGINX_HTTP_PORT_NUMBER:-}" ]]; then
         nginx_configure_port "$NGINX_HTTP_PORT_NUMBER"
+    fi
+    # Configure HTTPS port number
+    if [[ -n "${NGINX_HTTPS_PORT_NUMBER:-}" ]]; then
+        nginx_configure_port "$NGINX_HTTPS_PORT_NUMBER" "${NGINX_SERVER_BLOCKS_DIR}/default-https-server-block.conf"
     fi
     nginx_configure "absolute_redirect" "$(is_boolean_yes "$NGINX_ENABLE_ABSOLUTE_REDIRECT" && echo "on" || echo "off" )"
     nginx_configure "port_in_redirect" "$(is_boolean_yes "$NGINX_ENABLE_PORT_IN_REDIRECT" && echo "on" || echo "off" )"

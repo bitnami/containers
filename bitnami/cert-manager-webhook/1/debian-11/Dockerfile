@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.9.1-debian-11-r11" \
+      org.opencontainers.image.ref.name="1.9.1-debian-11-r12" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cert-manager-webhook" \
       org.opencontainers.image.title="cert-manager-webhook" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/cert-manager-webhook-1.9.1-2-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
     echo "0df445c4ca4d34baf573dedf4875f575622d4870a613ee51866bb9c41e38f8e3  cert-manager-webhook-1.9.1-2-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf cert-manager-webhook-1.9.1-2-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    tar -zxf cert-manager-webhook-1.9.1-2-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf cert-manager-webhook-1.9.1-2-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives

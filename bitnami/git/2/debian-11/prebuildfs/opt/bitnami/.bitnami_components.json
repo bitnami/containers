@@ -1,10 +1,10 @@
 {
     "git": {
         "arch": "amd64",
-        "digest": "99292b80296148ec1d50efd4247b678776db4cef7c5b8471677bfc0413bacba4",
+        "digest": "3b4d06d50463474afdcecfd62db33965949a6b38fec296f161913d78d92567d4",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.37.2-1"
+        "version": "2.37.3-0"
     },
     "gosu": {
         "arch": "amd64",

@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.6.5-debian-11-r1" \
+      org.opencontainers.image.ref.name="1.6.5-debian-11-r2" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kapacitor" \
       org.opencontainers.image.title="kapacitor" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/kapacitor-1.6.5-1-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
     echo "0f2625c116214f67efec31faa7ea02e8ae6bcaed87ca42b453e75ec253d14555  kapacitor-1.6.5-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf kapacitor-1.6.5-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    tar -zxf kapacitor-1.6.5-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf kapacitor-1.6.5-1-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives

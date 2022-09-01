@@ -39,7 +39,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3`, `3-debian-11`, `3.2.2`, `3.2.2-debian-11-r30`, `latest` (3/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/couchdb/3/debian-11/Dockerfile)
+* [`3`, `3-debian-11`, `3.2.2`, `3.2.2-debian-11-r31`, `latest` (3/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/couchdb/3/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
@@ -212,45 +212,9 @@ $ docker logs couchdb
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-## Understand the structure of this image
-
-The Bitnami CouchDB Docker image is built using a Dockerfile with the structure below:
-
-```Dockerfile
-FROM bitnami/minideb
-...
-## Install required system packages and dependencies
-RUN install_packages xxx yyy zzz
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "couchdb" "a.b.c-0"
-...
-COPY rootfs /
-RUN /opt/bitnami/scripts/couchdb/postunpack.sh
-...
-ENV BITNAMI_APP_NAME="couchdb" ...
-VOLUME [ "/bitnami/couchdb" ]
-EXPOSE 5984 4369 9100
-USER 1001
-...
-ENTRYPOINT [ "/opt/bitnami/scripts/couchdb/entrypoint.sh" ]
-CMD [ "/opt/bitnami/scripts/couchdb/run.sh" ]
-```
-
-The Dockerfile has several sections related to:
-
-- Components installation
-- Components static configuration
-- Environment variables
-- Ports to be exposed
-- User
-  - Note that once the user is set to 1001, privileged commands cannot be executed any longer.
-- Entrypoint and command
-  - Take into account that these actions are not executed until the container is started.
-
 ## Customize this image
 
 The Bitnami CouchDB Docker image is designed to be extended so it can be used as the base image where you can add custom configuration files or other packages.
-
-> Note: Read the [previous section](#understand-the-structure-of-this-image) to understand the Dockerfile structure before extending this image.
 
 ### Extend this image
 
