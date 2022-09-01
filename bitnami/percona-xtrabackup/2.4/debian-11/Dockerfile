@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.4.26-debian-11-r31" \
+      org.opencontainers.image.ref.name="2.4.26-debian-11-r32" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/percona-xtrabackup" \
       org.opencontainers.image.title="percona-xtrabackup" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/percona-xtrabackup-2.4.26-153-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
     echo "b1509ed6693f3db5196aaf3dd3574278c680a31f898344da5ceda76aff1f8675  percona-xtrabackup-2.4.26-153-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf percona-xtrabackup-2.4.26-153-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    tar -zxf percona-xtrabackup-2.4.26-153-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf percona-xtrabackup-2.4.26-153-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives

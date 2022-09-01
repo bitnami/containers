@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.4.3-debian-11-r32" \
+      org.opencontainers.image.ref.name="1.4.3-debian-11-r33" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pushgateway" \
       org.opencontainers.image.title="pushgateway" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/pushgateway-1.4.3-154-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
     echo "76a92a23475fe6df93707c9dd08cd36f5079b2cce34f815970899177f1089e65  pushgateway-1.4.3-154-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf pushgateway-1.4.3-154-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    tar -zxf pushgateway-1.4.3-154-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf pushgateway-1.4.3-154-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
