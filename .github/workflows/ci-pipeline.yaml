@@ -142,6 +142,7 @@ jobs:
       always() &&
       github.actor == 'bitnami-bot'
     needs: verification-summary
+    steps:
       - name: Automerge labeling
         uses: andymckay/labeler@1.0.4
         with:
