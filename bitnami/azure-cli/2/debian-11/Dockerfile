@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.39.0-debian-11-r10" \
+      org.opencontainers.image.ref.name="2.39.0-debian-11-r11" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/azure-cli" \
       org.opencontainers.image.title="azure-cli" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -24,12 +24,12 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf python-3.7.13-167-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf python-3.7.13-167-linux-amd64-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f azure-cli-2.39.0-2-linux-amd64-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/azure-cli-2.39.0-2-linux-amd64-debian-11.tar.gz -O ; \
+    if [ ! -f azure-cli-2.39.0-3-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/azure-cli-2.39.0-3-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
-    echo "a5ff2af8f000a36232ee0dddc847ea6c37566d2e67fa3d3adb4239f592640c87  azure-cli-2.39.0-2-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf azure-cli-2.39.0-2-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf azure-cli-2.39.0-2-linux-amd64-debian-11.tar.gz
+    echo "bcda2c8542bab7360ce16f26e5ee9084ecf6a397a9673a35f5affd0e9304db66  azure-cli-2.39.0-3-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf azure-cli-2.39.0-3-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf azure-cli-2.39.0-3-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
