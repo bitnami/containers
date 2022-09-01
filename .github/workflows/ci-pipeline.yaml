@@ -2,7 +2,6 @@ name: '[CI/CD] CI Pipeline'
 on: # rebuild any PRs and main branch changes
   pull_request_target:
     types:
-      - reopened
       - synchronize
       - labeled
     branches:
@@ -57,7 +56,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: get-containers
     if: ${{ needs.get-containers.outputs.result == 'ok' && contains(github.event.pull_request.labels.*.name, 'verify') }}
-    name: Verify
+    name: VIB Verify
     continue-on-error: false
     strategy:
       fail-fast: false
@@ -112,13 +111,15 @@ jobs:
     # Ensure all containers passed the verification
     runs-on: ubuntu-latest
     name: Verification Summary
-    needs: get-containers, vib-verify
+    needs:
+      - get-containers
+      - vib-verify
     if: ${{ always() }}
     steps:
       - name: Verification Summary
         run: |
-          if [[ "${{ needs.get-containers.result }} != "success" ]]; then
-            echo -e "Verification is required."
+          if [[ "${{ needs.get-containers.result }}" != "success" ]]; then
+            echo "Verification is required."
             echo " If you've just created this PR, don't worry about this message. Bitnami Team has to review it and make possible the verification."
             exit 1
           else
@@ -126,7 +127,7 @@ jobs:
               echo "It seems these changes don't involve any container"
             else
               if [[ "${{ needs.vib-verify.result }}" != "success" ]]; then
-                echo -e "Verification is required"
+                echo "Verification is required"
                 echo "Please review previous jobs to get more information"
                 exit 1
               else
@@ -134,25 +135,30 @@ jobs:
               fi
             fi
           fi
-      - name: Approval
-        if: ${{ github.actor == 'bitnami-bot' && needs.vib-verify.result == 'success' }}
-        run: |
-          curl --request POST \
-          --url https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/reviews \
-          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-          --header 'content-type: application/json' \
-          --data '{
-            "event": "APPROVE"
-            }' \
-          --fail
+  auto-pr-review:
+    runs-on: ubuntu-latest
+    name: Reviewal for automated PRs
+    if: |
+      always() &&
+      github.actor == 'bitnami-bot'
+    needs: verification-summary
+      - name: Enable auto-merge feature
+        if: ${{ needs.verification-summary.result == 'success' }}
+        uses: reitermarkus/automerge@v2.1.2
+        with:
+          token: ${{ secrets.BITNAMI_BOT_TOKEN }}
+          merge-method: squash
+          pull-request: ${{ github.event.number }}
+      - name: PR Approval
+        if: ${{ needs.verification-summary.result == 'success' }}
+        uses: hmarr/auto-approve-action@v2.4.0
+        with:
+          pull-request-number: ${{ github.event.number }}
       - name: Manual review required
-        if: ${{ github.actor == 'bitnami-bot' && needs.vib-verify.result != 'success' }}
-        run: |
-          curl --request POST \
-          --url https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments \
-          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-          --header 'content-type: application/json' \
-          --data '{
-            "body": "There has been an error during the automated release process. Manual revision is now required."
-            }' \
-          --fail
+        if: ${{ needs.vib-verify.result != 'success' }}
+        uses: peter-evans/create-or-update-comment@v2.0.0
+        with:
+          issue-number: ${{ github.event.number }}
+          body: |
+            There has been an error during the automated release process. Manual revision is now required.
+            Please check the related [action_run#${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for more information.

@@ -17,7 +17,6 @@ concurrency:
 
 jobs:
   label-card:
-    if: ${{ github.actor != 'bitnami-bot' }}
     runs-on: ubuntu-latest
     steps:
       - name: Repo checkout
@@ -54,7 +53,6 @@ jobs:
           add-labels: "solved"
           remove-labels: "in-progress, on-hold, triage"
   assign-assignee-if-needed:
-    if: ${{ github.actor != 'bitnami-bot' && (!contains(github.event.issue.labels.*.name, 'auto-merge')) }}
     runs-on: ubuntu-latest
     steps:
       - name: Repo checkout
