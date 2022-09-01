@@ -95,6 +95,7 @@ moodle_validate() {
     # Check yes/no env. variables
     check_yes_no_value "MOODLE_REVERSEPROXY"
     check_yes_no_value "MOODLE_SSLPROXY"
+    check_yes_no_value "MOODLE_LOCAL_CACHE_DIR"
 
     return "$error_code"
 }
@@ -190,6 +191,8 @@ EOF
         moodle_configure_wwwroot
         # Turn on Moodle's reverseproxy (also sslproxy if using ssl) so we can use the reverse proxy
         moodle_configure_reverseproxy
+        # Configure local cache directory for improved performance with clusters
+        moodle_configure_localcachedir
 
         info "Persisting Moodle installation"
         persist_app "$app_name" "$MOODLE_DATA_TO_PERSIST"
@@ -397,6 +400,29 @@ if (isset(\$_SERVER['HTTPS']) \&\& \$_SERVER['HTTPS'] == 'on') {\\
   \$CFG->wwwroot   = 'http://' . ${host};\\
 }"
     replace_in_file "$MOODLE_CONF_FILE" "\\\$CFG->wwwroot\s*=.*" "$conf_to_replace"
+}
+
+########################
+# Configure Moodle local cache directory
+# Globals:
+#   *
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+moodle_configure_localcachedir() {
+    # Checking the local_cache_dir setting value
+    if is_boolean_yes "$MOODLE_LOCAL_CACHE_DIR"; then
+        # Create local cache directory
+        mkdir -vp /var/local/cache && \
+        chown -Rc 0:1 /var/local/cache && \
+        chmod ug+rwx /var/local/cache
+        # Configure localcachedir
+        echo "\$CFG->localcachedir = '/var/local/cache';" >> "$MOODLE_CONF_FILE"
+    fi
+
+    true
 }
 
 ########################

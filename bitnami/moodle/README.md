@@ -225,6 +225,7 @@ Available environment variables:
 - `MOODLE_HOST`: Allows you to configure Moodle's wwwroot feature. Ex: example.com. By default it is a PHP superglobal variable. Default: **$_SERVER['HTTP_HOST']**
 - `MOODLE_REVERSEPROXY`: Allows you to activate the reverseproxy feature of Moodle. Default: **no**
 - `MOODLE_SSLPROXY`: Allows you to activate the sslproxy feature of Moodle. Default: **no**
+- `MOODLE_LOCAL_CACHE_DIR`: Sets Moodle's localcachedir to local file system. Recommended when clustering Moodle. Default: **no**
 
 ##### Use an existing database
 
