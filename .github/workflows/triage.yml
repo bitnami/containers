@@ -52,7 +52,7 @@ jobs:
         uses: andymckay/labeler@1.0.4
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          add-labels: ${{ (!contains(fromJson(env.BITNAMI_TEAM), github.actor)) && 'triage' || ((github.actor == 'bitnami-bot') && 'bitnami, automerge' || 'bitnami') }}
+          add-labels: ${{ (!contains(fromJson(env.BITNAMI_TEAM), github.actor)) && 'triage' || ((github.actor == 'bitnami-bot') && 'bitnami, auto-merge' || 'bitnami') }}
           # For reopened issues
           remove-labels: "solved"
       - name: Verify labeling
