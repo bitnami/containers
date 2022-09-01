@@ -1,9 +1,0 @@
-{
-    "istio-pilot": {
-        "arch": "amd64",
-        "digest": "51258cf4718cd74b4131612fffab85982716eefc50a49980a5d9a0b5375747b8",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.13.7-1"
-    }
-}
