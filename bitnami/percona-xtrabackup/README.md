@@ -29,7 +29,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`8`, `8-debian-11`, `8.0.29-22`, `8.0.29-22-debian-11-r14`, `latest` (8/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/percona-xtrabackup/8/debian-11/Dockerfile)
-* [`2.4`, `2.4-debian-11`, `2.4.26`, `2.4.26-debian-11-r31` (2.4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/percona-xtrabackup/2.4/debian-11/Dockerfile)
+* [`2.4`, `2.4-debian-11`, `2.4.26`, `2.4.26-debian-11-r32` (2.4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/percona-xtrabackup/2.4/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
