@@ -70,12 +70,6 @@ strategy.add(hudson.model.Computer.CONNECT, new PermissionEntry(AuthorizationTyp
 strategy.add(hudson.model.Computer.CREATE, new PermissionEntry(AuthorizationType.USER, adminUsername))
 strategy.add(hudson.model.Computer.DELETE, new PermissionEntry(AuthorizationType.USER, adminUsername))
 strategy.add(hudson.model.Computer.DISCONNECT, new PermissionEntry(AuthorizationType.USER, adminUsername))
-//  Credential Permissions
-strategy.add(com.cloudbees.plugins.credentials.CredentialsProvider.CREATE, new PermissionEntry(AuthorizationType.USER, adminUsername))
-strategy.add(com.cloudbees.plugins.credentials.CredentialsProvider.DELETE, new PermissionEntry(AuthorizationType.USER, adminUsername))
-strategy.add(com.cloudbees.plugins.credentials.CredentialsProvider.MANAGE_DOMAINS, new PermissionEntry(AuthorizationType.USER, adminUsername))
-strategy.add(com.cloudbees.plugins.credentials.CredentialsProvider.UPDATE, new PermissionEntry(AuthorizationType.USER, adminUsername))
-strategy.add(com.cloudbees.plugins.credentials.CredentialsProvider.VIEW, new PermissionEntry(AuthorizationType.USER, adminUsername))
 //  Overall Permissions
 strategy.add(hudson.model.Hudson.ADMINISTER, new PermissionEntry(AuthorizationType.USER, adminUsername))
 strategy.add(hudson.PluginManager.CONFIGURE_UPDATECENTER, new PermissionEntry(AuthorizationType.USER, adminUsername))
@@ -161,13 +155,6 @@ println " [bitnami/groovy-init-jenkins] master-slave set"
 println " [bitnami/groovy-init-jenkins] Setting master executors to 0"
 jenkins.setNumExecutors(0);
 println " [bitnami/groovy-init-jenkins] master executors set"
-
-// Setting email address
-println " [bitnami/groovy-init-jenkins] Configuring Jenkins adminstrator email address"
-location = jenkins.model.JenkinsLocationConfiguration.get()
-location.setAdminAddress("{{JENKINS_EMAIL}}")
-println " [bitnami/groovy-init-jenkins] Jenkins email is set to '{{JENKINS_EMAIL}}'"
-location.save()
 
 jenkins.save()
 
