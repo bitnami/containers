@@ -5,7 +5,7 @@ ENV OS_ARCH="amd64" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.7.6-debian-11-r33" \
+      org.opencontainers.image.ref.name="2.7.6-debian-11-r34" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ruby" \
       org.opencontainers.image.title="ruby" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -20,7 +20,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/ruby-2.7.6-153-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
     echo "b1dcd98e0cbf8f896619e60e3867bbd7c63e28a319a4d57833f1698d9d2f7e6d  ruby-2.7.6-153-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf ruby-2.7.6-153-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    tar -zxf ruby-2.7.6-153-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf ruby-2.7.6-153-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
