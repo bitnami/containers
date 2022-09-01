@@ -6,7 +6,7 @@ ENV HOME="/app" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="6.0.8-debian-11-r6" \
+      org.opencontainers.image.ref.name="6.0.8-debian-11-r7" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/dotnet" \
       org.opencontainers.image.title="dotnet" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/dotnet-6.0.8-2-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
     echo "1fe69461600ede1c87e3e5e69b134d1108f82ef35b9c6e7504dd7fadfa6d312c  dotnet-6.0.8-2-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf dotnet-6.0.8-2-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    tar -zxf dotnet-6.0.8-2-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf dotnet-6.0.8-2-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
