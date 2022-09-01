@@ -7,7 +7,7 @@ ENV HOME="/" \
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.346.3-debian-11-r4" \
+      org.opencontainers.image.ref.name="2.346.3-debian-11-r5" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jenkins" \
       org.opencontainers.image.title="jenkins" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -39,12 +39,12 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf gosu-1.14.0-154-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf gosu-1.14.0-154-linux-amd64-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f jenkins-2.346.3-3-linux-amd64-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/jenkins-2.346.3-3-linux-amd64-debian-11.tar.gz -O ; \
+    if [ ! -f jenkins-2.346.3-4-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/jenkins-2.346.3-4-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
-    echo "2982be1fd525e16c1834d81fce96d47af22cd5d9d0c4bbc50abee19e7ac5badf  jenkins-2.346.3-3-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf jenkins-2.346.3-3-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf jenkins-2.346.3-3-linux-amd64-debian-11.tar.gz
+    echo "95b9593ec28852468ea28024db2ab4c24b344e52a888fe9734ebaac5d91a2ad9  jenkins-2.346.3-4-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf jenkins-2.346.3-4-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf jenkins-2.346.3-4-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
