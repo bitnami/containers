@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.5.0-debian-11-r11" \
+      org.opencontainers.image.ref.name="1.5.0-debian-11-r12" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/elasticsearch-exporter" \
       org.opencontainers.image.title="elasticsearch-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/elasticsearch-exporter-1.5.0-3-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
     echo "ed987043f9a5b26e5c3d6fbaa1c6447a1a21571e936975b2d5c17c6c178de8fc  elasticsearch-exporter-1.5.0-3-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf elasticsearch-exporter-1.5.0-3-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    tar -zxf elasticsearch-exporter-1.5.0-3-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf elasticsearch-exporter-1.5.0-3-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
