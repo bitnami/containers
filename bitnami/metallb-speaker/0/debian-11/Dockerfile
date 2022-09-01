@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.13.4-debian-11-r13" \
+      org.opencontainers.image.ref.name="0.13.4-debian-11-r14" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/metallb-speaker" \
       org.opencontainers.image.title="metallb-speaker" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/metallb-speaker-0.13.4-2-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
     echo "e009399bbd164ee958ed284a5e1b15db1905bcd0a2829b43e06ed527d3ca11da  metallb-speaker-0.13.4-2-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf metallb-speaker-0.13.4-2-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    tar -zxf metallb-speaker-0.13.4-2-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf metallb-speaker-0.13.4-2-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
