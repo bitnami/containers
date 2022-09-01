@@ -197,8 +197,12 @@ zookeeper_generate_conf() {
     zookeeper_conf_set "$ZOO_CONF_FILE" 4lw.commands.whitelist "$ZOO_4LW_COMMANDS_WHITELIST"
     zookeeper_conf_set "$ZOO_CONF_FILE" maxSessionTimeout "$ZOO_MAX_SESSION_TIMEOUT"
     # Set log level
-    zookeeper_conf_set "${ZOO_CONF_DIR}/log4j.properties" zookeeper.console.threshold "$ZOO_LOG_LEVEL"
-
+    if [ -f "${ZOO_CONF_DIR}/logback.xml" ]; then
+      # Zookeeper 3.8+
+      xmlstarlet edit -L -u "/configuration/property[@name='zookeeper.console.threshold']/@value" -v "$ZOO_LOG_LEVEL" "${ZOO_CONF_DIR}/logback.xml"
+    else
+      zookeeper_conf_set "${ZOO_CONF_DIR}/log4j.properties" zookeeper.console.threshold "$ZOO_LOG_LEVEL"
+    fi
     # Admin web server https://zookeeper.apache.org/doc/r3.5.7/zookeeperAdmin.html#sc_adminserver
     zookeeper_conf_set "$ZOO_CONF_FILE" admin.serverPort "$ZOO_ADMIN_SERVER_PORT_NUMBER"
     zookeeper_conf_set "$ZOO_CONF_FILE" admin.enableServer "$(is_boolean_yes "$ZOO_ENABLE_ADMIN_SERVER" && echo "true" || echo "false")"
@@ -421,7 +425,7 @@ QuorumServer {
 };
 "
     fi
-    echo "${jaas_content}" > "${ZOO_CONF_DIR}/zoo_jaas.conf"
+    echo "${jaas_content}" >"${ZOO_CONF_DIR}/zoo_jaas.conf"
     zookeeper_export_jvmflags "-Djava.security.auth.login.config=${ZOO_CONF_DIR}/zoo_jaas.conf"
 
     # Restrict file permissions
