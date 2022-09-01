@@ -8,10 +8,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "02e5a66908664141ad80a1d40b390a71e8cec13771cb38600c322d36747fb298",
+        "digest": "84801ae4aee44f17012410d30a7d45e7e30ff842469fea2e5196050142713efc",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.10.6-7"
+        "version": "3.10.6-8"
     },
     "scikit-learn-intel": {
         "arch": "amd64",
