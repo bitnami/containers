@@ -6,11 +6,11 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.25.65-debian-11-r0" \
+      org.opencontainers.image.ref.name="1.25.66-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/aws-cli" \
       org.opencontainers.image.title="aws-cli" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.25.65"
+      org.opencontainers.image.version="1.25.66"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -24,17 +24,17 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf python-3.9.13-166-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf python-3.9.13-166-linux-amd64-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f aws-cli-1.25.65-0-linux-amd64-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/aws-cli-1.25.65-0-linux-amd64-debian-11.tar.gz -O ; \
+    if [ ! -f aws-cli-1.25.66-0-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/aws-cli-1.25.66-0-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
-    echo "a13ad66be10bce1a791694fa58b9d0110461b4d180fe13036f0197292ec33adf  aws-cli-1.25.65-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf aws-cli-1.25.65-0-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf aws-cli-1.25.65-0-linux-amd64-debian-11.tar.gz
+    echo "1521151775626007e45a8296ae836a7e30109cafd4ab81460487a14f910182f3  aws-cli-1.25.66-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf aws-cli-1.25.66-0-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf aws-cli-1.25.66-0-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="1.25.65" \
+ENV APP_VERSION="1.25.66" \
     AWS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt" \
     BITNAMI_APP_NAME="aws-cli" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/aws-cli/bin:/opt/bitnami/aws-cli/venv/bin:$PATH"
