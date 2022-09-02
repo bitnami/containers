@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.6.0-debian-11-r6" \
+      org.opencontainers.image.ref.name="2.6.0-debian-11-r7" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/harbor-exporter" \
       org.opencontainers.image.title="harbor-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -17,12 +17,12 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f harbor-exporter-2.6.0-2-linux-amd64-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/harbor-exporter-2.6.0-2-linux-amd64-debian-11.tar.gz -O ; \
+    if [ ! -f harbor-exporter-2.6.0-3-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/harbor-exporter-2.6.0-3-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
-    echo "d160c828257cdee26ff70b0bae9be0215b7a3f5fb40abb7998dd98242fd7a421  harbor-exporter-2.6.0-2-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf harbor-exporter-2.6.0-2-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf harbor-exporter-2.6.0-2-linux-amd64-debian-11.tar.gz
+    echo "ebb89a997cab6b1753e05d0cac546dfca789b4409401b42cd55c1041aab63977  harbor-exporter-2.6.0-3-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf harbor-exporter-2.6.0-3-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf harbor-exporter-2.6.0-3-linux-amd64-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f gosu-1.14.0-154-linux-amd64-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-amd64-debian-11.tar.gz -O ; \

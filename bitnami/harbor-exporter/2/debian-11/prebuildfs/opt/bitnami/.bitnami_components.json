@@ -8,9 +8,9 @@
     },
     "harbor-exporter": {
         "arch": "amd64",
-        "digest": "d160c828257cdee26ff70b0bae9be0215b7a3f5fb40abb7998dd98242fd7a421",
+        "digest": "ebb89a997cab6b1753e05d0cac546dfca789b4409401b42cd55c1041aab63977",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.6.0-2"
+        "version": "2.6.0-3"
     }
 }
