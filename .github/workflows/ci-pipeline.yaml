@@ -161,11 +161,6 @@ jobs:
       contains(github.event.pull_request.title, 'Release') &&
       github.actor == 'bitnami-bot'
     steps:
-      - name: Automerge labeling
-        uses: andymckay/labeler@1.0.4
-        with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          add-labels: auto-merge
       - name: Enable auto-merge feature
         if: ${{ needs.verification-summary.result == 'success' }}
         uses: reitermarkus/automerge@v2.1.2
@@ -186,6 +181,12 @@ jobs:
           body: |
             There has been an error during the automated release process. Manual revision is now required.
             Please check the related [action_run#${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for more information.
+      - name: Remove Automerge label
+        if: ${{ needs.verification-summary.result != 'success' }}
+        uses: andymckay/labeler@1.0.4
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          remove-labels: auto-merge
       - name: Send to the board
         if: ${{ needs.verification-summary.result != 'success' }}
         uses: peter-evans/create-or-update-project-card@v2
