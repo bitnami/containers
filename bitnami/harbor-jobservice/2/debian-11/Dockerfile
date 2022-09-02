@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.6.0-debian-11-r1" \
+      org.opencontainers.image.ref.name="2.6.0-debian-11-r2" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/harbor-jobservice" \
       org.opencontainers.image.title="harbor-jobservice" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -24,12 +24,12 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf yq-4.27.3-0-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf yq-4.27.3-0-linux-amd64-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f harbor-jobservice-2.6.0-1-linux-amd64-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/harbor-jobservice-2.6.0-1-linux-amd64-debian-11.tar.gz -O ; \
+    if [ ! -f harbor-jobservice-2.6.0-2-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/harbor-jobservice-2.6.0-2-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
-    echo "59f9c70414c5099187ef6e15e36184df0b5bbeb67fa24965376de218d437f5b1  harbor-jobservice-2.6.0-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf harbor-jobservice-2.6.0-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf harbor-jobservice-2.6.0-1-linux-amd64-debian-11.tar.gz
+    echo "c11c3c4596a5ab8916a071cffda3c7c20ecfd089a01b7ba16d2092d0c100dc94  harbor-jobservice-2.6.0-2-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf harbor-jobservice-2.6.0-2-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf harbor-jobservice-2.6.0-2-linux-amd64-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f gosu-1.14.0-154-linux-amd64-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-amd64-debian-11.tar.gz -O ; \
