@@ -198,13 +198,13 @@ is_ldap_not_running() {
 ldap_start_bg() {
     local -r retries="${1:-12}"
     local -r sleep_time="${2:-1}"
-
     local -a flags=("-h" "ldap://:${LDAP_PORT_NUMBER}/ ldapi:/// " "-F" "${LDAP_CONF_DIR}/slapd.d" "-d" "$LDAP_LOGLEVEL")
+
     if is_ldap_not_running; then
         info "Starting OpenLDAP server in background"
         ulimit -n "$LDAP_ULIMIT_NOFILES"
         am_i_root && flags=("-u" "$LDAP_DAEMON_USER" "${flags[@]}")
-        debug_execute slapd "${flags[@]}"&
+        debug_execute slapd "${flags[@]}" &
         if ! retry_while is_ldap_running "$retries" "$sleep_time"; then
             error "OpenLDAP failed to start"
             return 1
