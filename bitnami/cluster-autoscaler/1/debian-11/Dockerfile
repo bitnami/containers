@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.24.0-debian-11-r30" \
+      org.opencontainers.image.ref.name="1.24.0-debian-11-r31" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cluster-autoscaler" \
       org.opencontainers.image.title="cluster-autoscaler" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/cluster-autoscaler-1.24.0-153-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
     echo "3572431aa3a5e287ee968e8dadd92d0bd15a1936e174c787bd85ca8870d350ab  cluster-autoscaler-1.24.0-153-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf cluster-autoscaler-1.24.0-153-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    tar -zxf cluster-autoscaler-1.24.0-153-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf cluster-autoscaler-1.24.0-153-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
