@@ -22,6 +22,7 @@ concurrency:
 jobs:
   # For any opened or reopened issue, should be sent into Triage
   send_to_board:
+    if: ${{ github.actor != 'bitnami-bot' }}
     runs-on: ubuntu-latest
     steps:
       - name: Repo checkout
@@ -44,7 +45,7 @@ jobs:
         with:
           project-name: Support
           # If the author comes from Bitnami, send it to Bitnami. Otherwise, all to Triage
-          column-name: ${{ (github.actor == 'bitnami-bot' || (!contains(fromJson(env.BITNAMI_TEAM), github.actor))) && 'Triage' || 'From Bitnami' }}
+          column-name: ${{ (contains(fromJson(env.BITNAMI_TEAM), github.actor)) && 'From Bitnami' || 'Triage' }}
           token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
           issue-number: ${{ github.event_name != 'issues' && github.event.number || github.event.issue.number }}
       - name: Triage labeling
@@ -52,16 +53,6 @@ jobs:
         uses: andymckay/labeler@1.0.4
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          add-labels: ${{ (github.actor == 'bitnami-bot' || (!contains(fromJson(env.BITNAMI_TEAM), github.actor))) && 'triage' || 'bitnami' }}
+          add-labels: ${{ (!contains(fromJson(env.BITNAMI_TEAM), github.actor)) && 'triage' || 'bitnami' }}
           # For reopened issues
           remove-labels: "solved"
-      - name: Verify labeling
-        # Only if it is a PR triggered from EAM.
-        # This step triggers CI pipeline
-        if: |
-          github.actor == 'bitnami-bot' && github.event_name != 'issues' &&
-          contains(github.event.pull_request.title, 'Release')
-        uses: andymckay/labeler@1.0.4
-        with:
-          repo-token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
-          add-labels: verify
