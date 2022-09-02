@@ -136,7 +136,7 @@ jobs:
         run: |
           if [[ "${{ needs.get-containers.result }}" != "success" ]]; then
             echo "Verification is required."
-            echo " If you've just created this PR, don't worry about this message. Bitnami Team has to review it and make possible the verification."
+            echo "If you've just created this PR, don't worry about this message. Bitnami Team has to review it and make the verification possible."
             exit 1
           else
             if [[ "${{ needs.get-containers.outputs.result }}" == "skip" ]]; then
