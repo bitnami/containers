@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="7.3.0-debian-11-r29" \
+      org.opencontainers.image.ref.name="7.3.0-debian-11-r30" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/oauth2-proxy" \
       org.opencontainers.image.title="oauth2-proxy" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/oauth2-proxy-7.3.0-153-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
     echo "a3a9b9a1456834825ade9dc48aadf1de909a9327dd9423032b4482f9550d5998  oauth2-proxy-7.3.0-153-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf oauth2-proxy-7.3.0-153-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    tar -zxf oauth2-proxy-7.3.0-153-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf oauth2-proxy-7.3.0-153-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
