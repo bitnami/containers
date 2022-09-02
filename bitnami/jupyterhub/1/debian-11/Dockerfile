@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.5.0-debian-11-r31" \
+      org.opencontainers.image.ref.name="1.5.0-debian-11-r32" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jupyterhub" \
       org.opencontainers.image.title="jupyterhub" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,14 +21,14 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/miniconda-4.12.0-154-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
     echo "60138bae1b7541d2ecae75367eaa5ef158f6845dcb86ff746fc8402bdcae716b  miniconda-4.12.0-154-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf miniconda-4.12.0-154-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    tar -zxf miniconda-4.12.0-154-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf miniconda-4.12.0-154-linux-amd64-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f jupyterhub-1.5.0-5-linux-amd64-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/jupyterhub-1.5.0-5-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
     echo "5fb16b375a297326a262a101906ea0a684bd0a593a162ea70ed20f36beb32691  jupyterhub-1.5.0-5-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf jupyterhub-1.5.0-5-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    tar -zxf jupyterhub-1.5.0-5-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf jupyterhub-1.5.0-5-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
