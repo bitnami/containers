@@ -6,7 +6,7 @@ ENV HOME="/app" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.1.422-debian-11-r6" \
+      org.opencontainers.image.ref.name="3.1.422-debian-11-r7" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/dotnet-sdk" \
       org.opencontainers.image.title="dotnet-sdk" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/dotnet-sdk-3.1.422-1-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
     echo "5e54d61895fdaf45bb15afeadbe4e95dffea62190e1933c6ac4b660d98d3041b  dotnet-sdk-3.1.422-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf dotnet-sdk-3.1.422-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    tar -zxf dotnet-sdk-3.1.422-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf dotnet-sdk-3.1.422-1-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
