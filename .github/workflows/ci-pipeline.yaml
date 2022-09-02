@@ -33,12 +33,13 @@ jobs:
     runs-on: ubuntu-latest
     name: Get modified containers
     if: |
-      contains(github.event.pull_request.title, 'Release') &&
-      github.actor == 'bitnami-bot' ||
       github.event.pull_request.state != 'closed' &&
       (
-        (github.event.action == 'labeled' && github.event.label.name == 'verify') ||
-        (github.event.action != 'labeled' && contains(github.event.pull_request.labels.*.name, 'verify'))
+        (contains(github.event.pull_request.title, 'Release') && github.actor == 'bitnami-bot') ||
+        (
+          (github.event.action == 'labeled' && github.event.label.name == 'verify') ||
+          (github.event.action != 'labeled' && contains(github.event.pull_request.labels.*.name, 'verify'))
+        )
       )
     outputs:
       result: ${{ steps.get-containers.outputs.result }}
@@ -157,6 +158,7 @@ jobs:
     needs: verification-summary
     if: |
       always() &&
+      contains(github.event.pull_request.title, 'Release') &&
       github.actor == 'bitnami-bot'
     steps:
       - name: Automerge labeling
