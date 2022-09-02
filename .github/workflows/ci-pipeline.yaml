@@ -185,6 +185,7 @@ jobs:
             There has been an error during the automated release process. Manual revision is now required.
             Please check the related [action_run#${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for more information.
       - name: Send to the board
+        if: ${{ needs.verification-summary.result != 'success' }}
         uses: peter-evans/create-or-update-project-card@v2
         with:
           project-name: Support
