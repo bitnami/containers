@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.5.13-debian-11-r21" \
+      org.opencontainers.image.ref.name="2.5.13-debian-11-r22" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/openldap" \
       org.opencontainers.image.title="openldap" \
       org.opencontainers.image.vendor="VMware, Inc." \
