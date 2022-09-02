@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="5.2.4-debian-11-r21" \
+      org.opencontainers.image.ref.name="5.2.4-debian-11-r22" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/parse" \
       org.opencontainers.image.title="parse" \
       org.opencontainers.image.vendor="VMware, Inc." \
