@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.2.0-debian-11-r31" \
+      org.opencontainers.image.ref.name="4.2.0-debian-11-r32" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kiam" \
       org.opencontainers.image.title="kiam" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/kiam-4.2.0-153-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
     echo "a4eaa63788d33842a41bc2d390858712f076baf4b4e29953ec4f0bc7d02930b8  kiam-4.2.0-153-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf kiam-4.2.0-153-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    tar -zxf kiam-4.2.0-153-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf kiam-4.2.0-153-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
