@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.9.7-debian-11-r6" \
+      org.opencontainers.image.ref.name="1.9.7-debian-11-r7" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/fluent-bit" \
       org.opencontainers.image.title="fluent-bit" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/fluent-bit-1.9.7-1-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
     echo "84cb6e194d4c17d8e80eb4a4dfe2a79c318d60a10a1b719d5333512f41e9d01b  fluent-bit-1.9.7-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf fluent-bit-1.9.7-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    tar -zxf fluent-bit-1.9.7-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf fluent-bit-1.9.7-1-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
