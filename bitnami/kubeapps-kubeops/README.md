@@ -1,5 +1,9 @@
 # Kubeapps Kubeops packaged by Bitnami
 
+## Container Deprecation Notice
+
+Kubeapps Kubeops container is no longer maintained by upstream and is now internally tagged as to be deprecated. This image will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 10-02-2022
+
 ## What is Kubeapps Kubeops?
 
 > Kubeapps Kubeops is one of the main components of Kubeapps, a Web-based application deployment and management tool for Kubernetes clusters. It adds an endpoint to access the Helm API & K8s resources.
