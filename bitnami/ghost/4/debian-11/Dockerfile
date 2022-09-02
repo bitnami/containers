@@ -6,11 +6,11 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.48.3-debian-11-r0" \
+      org.opencontainers.image.ref.name="4.48.4-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ghost" \
       org.opencontainers.image.title="ghost" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="4.48.3"
+      org.opencontainers.image.version="4.48.4"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -45,12 +45,12 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf gosu-1.14.0-154-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf gosu-1.14.0-154-linux-amd64-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f ghost-4.48.3-0-linux-amd64-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/ghost-4.48.3-0-linux-amd64-debian-11.tar.gz -O ; \
+    if [ ! -f ghost-4.48.4-1-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/ghost-4.48.4-1-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
-    echo "8ff60e5c955a6e3ffbbcbc95bb36d88dd01d3c6e26431aaa6fb14aac76553f1a  ghost-4.48.3-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf ghost-4.48.3-0-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf ghost-4.48.3-0-linux-amd64-debian-11.tar.gz
+    echo "41ae465c69d11de44a4d2e8cc2c3f9e472c4249a6d1db4fcc1ac9f21596bbb02  ghost-4.48.4-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf ghost-4.48.4-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf ghost-4.48.4-1-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -58,7 +58,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/ghost/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
-ENV APP_VERSION="4.48.3" \
+ENV APP_VERSION="4.48.4" \
     BITNAMI_APP_NAME="ghost" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/ghost/bin:$PATH"
 
