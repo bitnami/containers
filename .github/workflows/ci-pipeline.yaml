@@ -161,7 +161,7 @@ jobs:
         with:
           pull-request-number: ${{ github.event.number }}
       - name: Manual review required
-        if: ${{ needs.vib-verify.result != 'success' }}
+        if: ${{ needs.verification-summary.result != 'success' }}
         uses: peter-evans/create-or-update-comment@v2.0.0
         with:
           issue-number: ${{ github.event.number }}
