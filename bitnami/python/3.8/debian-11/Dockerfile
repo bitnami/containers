@@ -5,7 +5,7 @@ ENV OS_ARCH="amd64" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.8.13-debian-11-r44" \
+      org.opencontainers.image.ref.name="3.8.13-debian-11-r45" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/python" \
       org.opencontainers.image.title="python" \
       org.opencontainers.image.vendor="VMware, Inc." \
