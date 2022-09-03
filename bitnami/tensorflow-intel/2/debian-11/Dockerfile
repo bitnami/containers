@@ -6,11 +6,11 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.9.1-debian-11-r25" \
+      org.opencontainers.image.ref.name="2.9.2-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/tensorflow-intel" \
       org.opencontainers.image.title="tensorflow-intel" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.9.1"
+      org.opencontainers.image.version="2.9.2"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -24,12 +24,12 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf python-3.9.13-166-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf python-3.9.13-166-linux-amd64-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f tensorflow-intel-2.9.1-153-linux-amd64-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/tensorflow-intel-2.9.1-153-linux-amd64-debian-11.tar.gz -O ; \
+    if [ ! -f tensorflow-intel-2.9.2-0-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/tensorflow-intel-2.9.2-0-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
-    echo "f959bace506b9c5372cc18561a9774912456762567063179550f5dc593435abb  tensorflow-intel-2.9.1-153-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf tensorflow-intel-2.9.1-153-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf tensorflow-intel-2.9.1-153-linux-amd64-debian-11.tar.gz
+    echo "f596d6abe10695d29cfc67bd73ae821996700056d780b7fdb492b7625b033c79  tensorflow-intel-2.9.2-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf tensorflow-intel-2.9.2-0-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf tensorflow-intel-2.9.2-0-linux-amd64-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f gosu-1.14.0-154-linux-amd64-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-amd64-debian-11.tar.gz -O ; \
@@ -43,7 +43,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/tensorflow-intel/postunpack.sh
-ENV APP_VERSION="2.9.1" \
+ENV APP_VERSION="2.9.2" \
     BITNAMI_APP_NAME="tensorflow-intel" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:$PATH"
 
