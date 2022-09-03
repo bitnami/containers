@@ -6,11 +6,11 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.10.13-debian-11-r20" \
+      org.opencontainers.image.ref.name="4.10.14-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/parse" \
       org.opencontainers.image.title="parse" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="4.10.13"
+      org.opencontainers.image.version="4.10.14"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -38,12 +38,12 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf mongodb-shell-1.5.4-2-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf mongodb-shell-1.5.4-2-linux-amd64-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f parse-4.10.13-3-linux-amd64-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/parse-4.10.13-3-linux-amd64-debian-11.tar.gz -O ; \
+    if [ ! -f parse-4.10.14-0-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/parse-4.10.14-0-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
-    echo "5d1f828a209c9c17620324dbaf592a39f8094f2ae83c36f72f7a126977bd76af  parse-4.10.13-3-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf parse-4.10.13-3-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf parse-4.10.13-3-linux-amd64-debian-11.tar.gz
+    echo "22a802a1814fc98e9ad2946c35bf37230535fbbecbb181317e45726a84a27acf  parse-4.10.14-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf parse-4.10.14-0-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf parse-4.10.14-0-linux-amd64-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f gosu-1.14.0-154-linux-amd64-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-amd64-debian-11.tar.gz -O ; \
@@ -57,7 +57,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/parse/postunpack.sh
-ENV APP_VERSION="4.10.13" \
+ENV APP_VERSION="4.10.14" \
     BITNAMI_APP_NAME="parse" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/parse/bin:/opt/bitnami/common/bin:$PATH"
 
