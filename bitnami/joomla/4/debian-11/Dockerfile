@@ -6,11 +6,11 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.2.1-debian-11-r1" \
+      org.opencontainers.image.ref.name="4.2.2-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/joomla" \
       org.opencontainers.image.title="joomla" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="4.2.1"
+      org.opencontainers.image.version="4.2.2"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -52,12 +52,12 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf render-template-1.0.3-153-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf render-template-1.0.3-153-linux-amd64-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f joomla-4.2.1-0-linux-amd64-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/joomla-4.2.1-0-linux-amd64-debian-11.tar.gz -O ; \
+    if [ ! -f joomla-4.2.2-0-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/joomla-4.2.2-0-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
-    echo "3c291cfb525ea756aba13390132286bf7c1bbca37893a915929e0bb25d00a345  joomla-4.2.1-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf joomla-4.2.1-0-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf joomla-4.2.1-0-linux-amd64-debian-11.tar.gz
+    echo "ec409587ec22155719b23fba424f73c85bc510967ea7af37ed7acb15dac0b747  joomla-4.2.2-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf joomla-4.2.2-0-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf joomla-4.2.2-0-linux-amd64-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f gosu-1.14.0-154-linux-amd64-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-amd64-debian-11.tar.gz -O ; \
@@ -77,7 +77,7 @@ RUN /opt/bitnami/scripts/joomla/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="4.2.1" \
+    APP_VERSION="4.2.2" \
     BITNAMI_APP_NAME="joomla" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
