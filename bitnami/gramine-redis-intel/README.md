@@ -23,7 +23,11 @@ $ docker-compose up -d
 
 ## Why use Intel optimized containers
 
-Optimized containers fully leverage 3rd gen Intel® Xeon® Scalable Processor (Ice Lake) cores and architecture. Intel® AVX-512 instructions have been further improved to accelerate performance for HPC/AI across a diverse set of workloads, including 3D modeling, scientific simulation, financial analytics, machine learning and AI, image processing, visualization, digital content creation, and data compression.  This wider vectorization speeds computation processes per clock, increasing frequency over the prior generation. New instructions, coupled with algorithmic and software innovations, also deliver breakthrough performance for the industry's most widely deployed cryptographic ciphers. Security is becoming more pervasive with most organizations increasingly adopting encryption for application execution, data in flight, and data storage.
+Encryption is becoming pervasive with most organizations increasingly adopting encryption for application execution, data in flight, and data storage. Intel(R) 3rd gen Xeon(R) Scalable Processor (Ice Lake) cores and architecture, offers several new instructions for encryption acceleration. These new instructions, coupled with algorithmic and software innovations, deliver breakthrough performance for the industry's most widely deployed cryptographic ciphers.
+
+This solution accelerates the processing of the Transport Layer Security (TLS) significantly by using built-in Intel crypto acceleration included in the latest Intel 3rd gen Xeon Scalable Processor (Ice Lake). For more information, refer to Intel's documentation.
+
+It requires a 3rd gen Xeon Scalable Processor (Ice Lake) to get a breakthrough performance improvement.
 
 ## Why use Bitnami Images?
 
@@ -43,13 +47,13 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-11`, `1.2.0`, `1.2.0-debian-11-r0`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/gramine-redis-intel/1/debian-11/Dockerfile)
+* [`1`, `1-debian-11`, `1.2.0`, `1.2.0-debian-11-r1`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/gramine-redis-intel/1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
 ## Get this image
 
-The recommended way to get the Bitnami Pytorch Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/gramine-redis-intel).
+The recommended way to get the Bitnami Redis(R) with Intel SGX Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/gramine-redis-intel).
 
 ```console
 $ docker pull bitnami/gramine-redis-intel:latest
@@ -71,7 +75,7 @@ $ docker build -t bitnami/APP:latest .
 
 **Further Reading:**
 
-  - [Gramine Redis documentation](https://github.com/gramineproject/gramine)
+  - [Gramine Redis(R) documentation](https://github.com/gramineproject/gramine)
 
 ## Maintenance
 
