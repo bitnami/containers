@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.15.0-debian-11-r18" \
+      org.opencontainers.image.ref.name="0.15.0-debian-11-r19" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/chartmuseum" \
       org.opencontainers.image.title="chartmuseum" \
       org.opencontainers.image.vendor="VMware, Inc." \
