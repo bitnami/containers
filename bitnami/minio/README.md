@@ -175,6 +175,7 @@ services:
 >
 > 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
 > 2. In your application container, use the hostname `minio` to connect to the MinIO(R) server. Use the environment variables `MINIO_SERVER_ACCESS_KEY` and `MINIO_SERVER_SECRET_KEY` to configure the credentials to access the MinIO(R) server.
+> 3. Make sure that the environment varialbes `MINIO_ROOT_PASSWORD` and `MINIO_SERVER_SECRET_KEY` meet the 8 character minium length requirement enforced by MinIO(R).
 
 Launch the containers using:
 
