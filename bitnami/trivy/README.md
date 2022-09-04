@@ -28,7 +28,7 @@ $ docker run --name trivy bitnami/trivy:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-debian-11`, `0.31.3`, `0.31.3-debian-11-r1`, `latest` (0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/trivy/0/debian-11/Dockerfile)
+* [`0`, `0-debian-11`, `0.31.3`, `0.31.3-debian-11-r2`, `latest` (0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/trivy/0/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
