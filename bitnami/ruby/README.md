@@ -35,7 +35,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.1`, `3.1-debian-11`, `3.1.2`, `3.1.2-debian-11-r34`, `latest` (3.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/ruby/3.1/debian-11/Dockerfile)
+* [`3.1`, `3.1-debian-11`, `3.1.2`, `3.1.2-debian-11-r35`, `latest` (3.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/ruby/3.1/debian-11/Dockerfile)
 * [`3.0`, `3.0-debian-11`, `3.0.4`, `3.0.4-debian-11-r33` (3.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/ruby/3.0/debian-11/Dockerfile)
 * [`2.7`, `2.7-debian-11`, `2.7.6`, `2.7.6-debian-11-r34` (2.7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/ruby/2.7/debian-11/Dockerfile)
 
