@@ -5,7 +5,7 @@ ENV OS_ARCH="amd64" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="14.20.0-debian-11-r18" \
+      org.opencontainers.image.ref.name="14.20.0-debian-11-r19" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/node" \
       org.opencontainers.image.title="node" \
       org.opencontainers.image.vendor="VMware, Inc." \
