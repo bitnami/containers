@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.7.1-debian-11-r32" \
+      org.opencontainers.image.ref.name="0.7.1-debian-11-r33" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/configmap-reload" \
       org.opencontainers.image.title="configmap-reload" \
       org.opencontainers.image.vendor="VMware, Inc." \
