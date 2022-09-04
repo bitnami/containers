@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="5.2.0-debian-11-r33" \
+      org.opencontainers.image.ref.name="5.2.0-debian-11-r34" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/phpmyadmin" \
       org.opencontainers.image.title="phpmyadmin" \
       org.opencontainers.image.vendor="VMware, Inc." \
