@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.1.4-debian-11-r21" \
+      org.opencontainers.image.ref.name="4.1.4-debian-11-r24" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/parse-dashboard" \
       org.opencontainers.image.title="parse-dashboard" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -31,12 +31,12 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf node-16.17.0-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf node-16.17.0-1-linux-amd64-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f parse-dashboard-4.1.4-3-linux-amd64-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/parse-dashboard-4.1.4-3-linux-amd64-debian-11.tar.gz -O ; \
+    if [ ! -f parse-dashboard-4.1.4-4-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/parse-dashboard-4.1.4-4-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
-    echo "c4751bfb5cd1079f8b8db2bf57cdd14b2080b859cdec487b9a8b846a35fb93cc  parse-dashboard-4.1.4-3-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf parse-dashboard-4.1.4-3-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf parse-dashboard-4.1.4-3-linux-amd64-debian-11.tar.gz
+    echo "a42fe43fc312b5dbe43411d3362e3ee0c7b6c3c3ea575e4b756332610b572736  parse-dashboard-4.1.4-4-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf parse-dashboard-4.1.4-4-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf parse-dashboard-4.1.4-4-linux-amd64-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f gosu-1.14.0-154-linux-amd64-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-amd64-debian-11.tar.gz -O ; \
