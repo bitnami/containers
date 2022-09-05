@@ -249,7 +249,7 @@ discourse_create_conf_file() {
     discourse_conf_set "redis_host" "$DISCOURSE_REDIS_HOST"
     discourse_conf_set "redis_port" "$DISCOURSE_REDIS_PORT_NUMBER"
     discourse_conf_set "redis_password" "$DISCOURSE_REDIS_PASSWORD"
-    discourse_conf_set "redis_use_ssl" "${DISCOURSE_REDIS_USE_SSL:-false}"
+    discourse_conf_set "redis_use_ssl" "$DISCOURSE_REDIS_USE_SSL"
     # SMTP credentials
     if ! is_empty_value "$DISCOURSE_SMTP_HOST"; then
         info "Enabling SMTP"
