@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.6.1-debian-11-r33" \
+      org.opencontainers.image.ref.name="0.6.1-debian-11-r34" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/metrics-server" \
       org.opencontainers.image.title="metrics-server" \
       org.opencontainers.image.vendor="VMware, Inc." \
