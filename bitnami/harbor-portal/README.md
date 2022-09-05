@@ -12,7 +12,7 @@
 
 ```console
 $ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/harbor-portal/docker-compose.yml
-$ curl -L https://github.com/bitnami/containers/archive/main.tar.gz | tar xz --strip=5 --wildcards '*main/bitnami/harbor-portal/2/debian-11/config'
+$ curl -L https://github.com/bitnami/containers/archive/main.tar.gz | tar xz --strip=1 --wildcards '*-main/bitnami/harbor-portal/config' && mv bitnami/harbor-portal/config . && rm -rf bitnami
 $ docker-compose up
 ```
 
@@ -41,7 +41,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-11`, `2.5.3`, `2.5.3-debian-11-r15`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/harbor-portal/2/debian-11/Dockerfile)
+* [`2`, `2-debian-11`, `2.6.0`, `2.6.0-debian-11-r0`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/harbor-portal/2/debian-11/Dockerfile)
 
 ## Configuration
 
