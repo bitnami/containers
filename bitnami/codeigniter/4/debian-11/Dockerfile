@@ -5,11 +5,11 @@ ENV OS_ARCH="amd64" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.2.5-debian-11-r2" \
+      org.opencontainers.image.ref.name="4.2.6-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/codeigniter" \
       org.opencontainers.image.title="codeigniter" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="4.2.5"
+      org.opencontainers.image.version="4.2.6"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -37,12 +37,12 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf gosu-1.14.0-154-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf gosu-1.14.0-154-linux-amd64-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f codeigniter-4.2.5-0-linux-amd64-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/codeigniter-4.2.5-0-linux-amd64-debian-11.tar.gz -O ; \
+    if [ ! -f codeigniter-4.2.6-0-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/codeigniter-4.2.6-0-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
-    echo "6bae4d7c1d5085c73ccbdab95d777415c85a16b4292c8146af756d323d896f0e  codeigniter-4.2.5-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf codeigniter-4.2.5-0-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf codeigniter-4.2.5-0-linux-amd64-debian-11.tar.gz
+    echo "88069394584c36aa63c439a34d11e0e38b15233124e0cae51b81391467ac5fba  codeigniter-4.2.6-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf codeigniter-4.2.6-0-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf codeigniter-4.2.6-0-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN /build/bitnami-user.sh
@@ -51,7 +51,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/codeigniter/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
-ENV APP_VERSION="4.2.5" \
+ENV APP_VERSION="4.2.6" \
     BITNAMI_APP_NAME="codeigniter" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/codeigniter/bin:$PATH" \
     PHP_ENABLE_OPCACHE="0"
