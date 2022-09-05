@@ -34,7 +34,7 @@ services:
       - chartmuseum
     environment:
       - CORE_KEY=change-this-key
-      - _REDIS_URL=redis:6379,100,
+      - _REDIS_URL_CORE=redis://redis:6379/0
       - SYNC_REGISTRY=false
       - CHART_CACHE_DRIVER=redis
       - _REDIS_URL_REG=redis://redis:6379/1
