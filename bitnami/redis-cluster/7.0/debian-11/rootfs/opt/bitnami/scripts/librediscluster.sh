@@ -215,7 +215,7 @@ redis_cluster_update_ips() {
             fi
             host_2_ip_array["$node"]="$newIP"
         done
-        sed -i "s/<NEWIP>//g" "${REDIS_DATA_DIR}/nodes.conf"
+        replace_in_file "${REDIS_DATA_DIR}/nodes.conf" "<NEWIP>:" ":" false
         declare -p host_2_ip_array >"${REDIS_DATA_DIR}/nodes.sh"
     fi
 }
