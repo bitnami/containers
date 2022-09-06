@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.2.0-debian-11-r32" \
+      org.opencontainers.image.ref.name="4.2.0-debian-11-r33" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kiam" \
       org.opencontainers.image.title="kiam" \
       org.opencontainers.image.vendor="VMware, Inc." \

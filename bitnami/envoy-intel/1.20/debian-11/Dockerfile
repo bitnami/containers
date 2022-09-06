@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.20.7-debian-11-r13" \
+      org.opencontainers.image.ref.name="1.20.7-debian-11-r14" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/envoy-intel" \
       org.opencontainers.image.title="envoy-intel" \
       org.opencontainers.image.vendor="VMware, Inc." \

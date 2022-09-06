@@ -44,7 +44,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`5`, `5-debian-11`, `5.2.5`, `5.2.5-debian-11-r0`, `latest` (5/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/parse/5/debian-11/Dockerfile)
-* [`4`, `4-debian-11`, `4.10.14`, `4.10.14-debian-11-r0` (4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/parse/4/debian-11/Dockerfile)
+* [`4`, `4-debian-11`, `4.10.14`, `4.10.14-debian-11-r1` (4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/parse/4/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
