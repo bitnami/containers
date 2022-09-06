@@ -1,10 +1,7 @@
 FROM docker.io/bitnami/minideb:bullseye
-ENV HOME="/" \
-    OS_ARCH="amd64" \
-    OS_FLAVOUR="debian-11" \
-    OS_NAME="linux"
 
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
+
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.ref.name="9.0.65-debian-11-r17" \
@@ -12,6 +9,11 @@ LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.title="tomcat" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="9.0.65"
+
+ENV HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-11" \
+    OS_NAME="linux"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
