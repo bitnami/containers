@@ -6,11 +6,11 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="5.13.0-debian-11-r1" \
+      org.opencontainers.image.ref.name="5.13.1-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ghost" \
       org.opencontainers.image.title="ghost" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="5.13.0"
+      org.opencontainers.image.version="5.13.1"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -45,12 +45,12 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf gosu-1.14.0-154-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf gosu-1.14.0-154-linux-amd64-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f ghost-5.13.0-0-linux-amd64-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/ghost-5.13.0-0-linux-amd64-debian-11.tar.gz -O ; \
+    if [ ! -f ghost-5.13.1-0-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/ghost-5.13.1-0-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
-    echo "13354addbdaca7604b345fe6794b94444a2c51b92045143c83976cfdf7c22580  ghost-5.13.0-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf ghost-5.13.0-0-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf ghost-5.13.0-0-linux-amd64-debian-11.tar.gz
+    echo "f47b372e5ed255c26ee01aac876a723e9ca13cd134658a894571105dd71604cf  ghost-5.13.1-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf ghost-5.13.1-0-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf ghost-5.13.1-0-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -58,7 +58,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/ghost/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
-ENV APP_VERSION="5.13.0" \
+ENV APP_VERSION="5.13.1" \
     BITNAMI_APP_NAME="ghost" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/ghost/bin:$PATH"
 
