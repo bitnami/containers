@@ -413,14 +413,7 @@ if (isset(\$_SERVER['HTTPS']) \&\& \$_SERVER['HTTPS'] == 'on') {\\
 #########################
 moodle_configure_localcachedir() {
     # Checking the local_cache_dir setting value
-    if is_boolean_yes "$MOODLE_LOCAL_CACHE_DIR"; then
-        # Create local cache directory
-        mkdir -p /var/local/cache && \
-        chown -R 0:1 /var/local/cache && \
-        chmod ug+rwx /var/local/cache
-        # Configure localcachedir
-        echo "\$CFG->localcachedir = '/var/local/cache';" >> "$MOODLE_CONF_FILE"
-    fi
+    is_boolean_yes "$MOODLE_LOCAL_CACHE_DIR" && echo "\$CFG->localcachedir = '/var/local/cache';" >> "$MOODLE_CONF_FILE"
 
     true
 }
