@@ -1,16 +1,17 @@
 FROM docker.io/bitnami/minideb:bullseye
-ENV HOME="/" \
-    OS_ARCH="amd64" \
-    OS_FLAVOUR="debian-11" \
-    OS_NAME="linux"
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.2.0-debian-11-r1" \
+      org.opencontainers.image.ref.name="1.2.0-debian-11-r2" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/gramine-redis-intel" \
       org.opencontainers.image.title="gramine-redis-intel" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.2.0"
+
+ENV HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-11" \
+    OS_NAME="linux"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -24,12 +25,12 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf redis-7.0.4-3-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf redis-7.0.4-3-linux-amd64-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f python-3.10.6-8-linux-amd64-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/python-3.10.6-8-linux-amd64-debian-11.tar.gz -O ; \
+    if [ ! -f python-3.10.7-0-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/python-3.10.7-0-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
-    echo "84801ae4aee44f17012410d30a7d45e7e30ff842469fea2e5196050142713efc  python-3.10.6-8-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf python-3.10.6-8-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf python-3.10.6-8-linux-amd64-debian-11.tar.gz
+    echo "dfce5c950d2ade541dc24b0425f872b67c0406a50ae00b78666ce3257ab12677  python-3.10.7-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf python-3.10.7-0-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf python-3.10.7-0-linux-amd64-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f gramine-redis-intel-1.2.0-0-linux-amd64-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/gramine-redis-intel-1.2.0-0-linux-amd64-debian-11.tar.gz -O ; \
