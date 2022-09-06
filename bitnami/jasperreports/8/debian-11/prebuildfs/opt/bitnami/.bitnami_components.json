@@ -8,10 +8,10 @@
     },
     "jasperreports": {
         "arch": "amd64",
-        "digest": "fbab4bb67de22e7aaf8bd6c6080d367a95ee05116884482d3c521f094e17974f",
+        "digest": "17c43daff37ada19f64d64389dafb8940a1a2660c156af93aad942452e520eb7",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.2-154"
+        "version": "8.1.0-0"
     },
     "java": {
         "arch": "amd64",
