@@ -210,11 +210,12 @@ redis_cluster_update_ips() {
             # The node can be new if we are updating the cluster, so catch the unbound variable error
             if [[ ${host_2_ip_array[$node]+true} ]]; then
                 echo "Changing old IP ${host_2_ip_array[$node]} by the new one ${newIP}"
-                nodesFile=$(sed "s/ ${host_2_ip_array[$node]}:/ $newIP:/g" "${REDIS_DATA_DIR}/nodes.conf")
+                nodesFile=$(sed "s/ ${host_2_ip_array[$node]}:/ $newIP<NEWIP>:/g" "${REDIS_DATA_DIR}/nodes.conf")
                 echo "$nodesFile" >"${REDIS_DATA_DIR}/nodes.conf"
             fi
             host_2_ip_array["$node"]="$newIP"
         done
+        replace_in_file "${REDIS_DATA_DIR}/nodes.conf" "<NEWIP>:" ":" false
         declare -p host_2_ip_array >"${REDIS_DATA_DIR}/nodes.sh"
     fi
 }

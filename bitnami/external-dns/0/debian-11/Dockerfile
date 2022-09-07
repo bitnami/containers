@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.12.2-debian-11-r12" \
+      org.opencontainers.image.ref.name="0.12.2-debian-11-r14" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/external-dns" \
       org.opencontainers.image.title="external-dns" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/external-dns-0.12.2-2-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
     echo "184e258e6dd59910322cb813ccffdb28671d270408e422209d6e311f9171cbc0  external-dns-0.12.2-2-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf external-dns-0.12.2-2-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    tar -zxf external-dns-0.12.2-2-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf external-dns-0.12.2-2-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives

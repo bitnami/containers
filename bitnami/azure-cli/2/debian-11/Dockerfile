@@ -6,11 +6,11 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.39.0-debian-11-r11" \
+      org.opencontainers.image.ref.name="2.40.0-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/azure-cli" \
       org.opencontainers.image.title="azure-cli" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.39.0"
+      org.opencontainers.image.version="2.40.0"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -24,18 +24,18 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf python-3.7.13-167-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf python-3.7.13-167-linux-amd64-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f azure-cli-2.39.0-3-linux-amd64-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/azure-cli-2.39.0-3-linux-amd64-debian-11.tar.gz -O ; \
+    if [ ! -f azure-cli-2.40.0-0-linux-amd64-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/azure-cli-2.40.0-0-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
-    echo "bcda2c8542bab7360ce16f26e5ee9084ecf6a397a9673a35f5affd0e9304db66  azure-cli-2.39.0-3-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf azure-cli-2.39.0-3-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf azure-cli-2.39.0-3-linux-amd64-debian-11.tar.gz
+    echo "1293a63ca7c710fef9853c488070d2caab55a1c12adeeedd1568411dc6c0898c  azure-cli-2.40.0-0-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
+    tar -zxf azure-cli-2.40.0-0-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf azure-cli-2.40.0-0-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /.azure /.azcopy && chmod g+rwX /.azure /.azcopy /bin
 
-ENV APP_VERSION="2.39.0" \
+ENV APP_VERSION="2.40.0" \
     BITNAMI_APP_NAME="azure-cli" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/azure-cli/bin:/opt/bitnami/azure-cli/venv/bin:$PATH"
 

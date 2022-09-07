@@ -15,16 +15,16 @@
     },
     "parse-dashboard": {
         "arch": "amd64",
-        "digest": "c4751bfb5cd1079f8b8db2bf57cdd14b2080b859cdec487b9a8b846a35fb93cc",
+        "digest": "a42fe43fc312b5dbe43411d3362e3ee0c7b6c3c3ea575e4b756332610b572736",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.1.4-3"
+        "version": "4.1.4-4"
     },
     "python": {
         "arch": "amd64",
-        "digest": "9a5fba755f6c8d60eacc80f366f3fbaa57d003913e48c31ba337037bb69e37b3",
+        "digest": "6e21552dc6c19b01247f3ec7bcd0401e6192519fe206e136e205ac6c3b842e7b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.13-166"
+        "version": "3.8.13-167"
     }
 }

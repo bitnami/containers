@@ -1,16 +1,17 @@
 FROM docker.io/bitnami/minideb:bullseye
-ENV HOME="/" \
-    OS_ARCH="amd64" \
-    OS_FLAVOUR="debian-11" \
-    OS_NAME="linux"
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.3.4-debian-11-r2" \
+      org.opencontainers.image.ref.name="2.3.4-debian-11-r4" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/airflow-scheduler" \
       org.opencontainers.image.title="airflow-scheduler" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.3.4"
+
+ENV HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-11" \
+    OS_NAME="linux"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]

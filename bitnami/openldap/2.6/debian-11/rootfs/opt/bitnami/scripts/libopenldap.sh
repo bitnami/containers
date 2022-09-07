@@ -29,10 +29,11 @@ export LDAP_BIN_DIR="${LDAP_BASE_DIR}/bin"
 export LDAP_SBIN_DIR="${LDAP_BASE_DIR}/sbin"
 export LDAP_CONF_DIR="${LDAP_BASE_DIR}/etc"
 export LDAP_SHARE_DIR="${LDAP_BASE_DIR}/share"
+export LDAP_VAR_DIR="${LDAP_BASE_DIR}/var"
 export LDAP_VOLUME_DIR="/bitnami/openldap"
 export LDAP_DATA_DIR="${LDAP_VOLUME_DIR}/data"
 export LDAP_ONLINE_CONF_DIR="${LDAP_VOLUME_DIR}/slapd.d"
-export LDAP_PID_FILE="${LDAP_BASE_DIR}/var/run/slapd.pid"
+export LDAP_PID_FILE="${LDAP_VAR_DIR}/run/slapd.pid"
 export LDAP_CUSTOM_LDIF_DIR="${LDAP_CUSTOM_LDIF_DIR:-/ldifs}"
 export LDAP_CUSTOM_SCHEMA_FILE="${LDAP_CUSTOM_SCHEMA_FILE:-/schema/custom.ldif}"
 export PATH="${LDAP_BIN_DIR}:${LDAP_SBIN_DIR}:$PATH"
@@ -196,12 +197,19 @@ is_ldap_not_running() {
 #   None
 #########################
 ldap_start_bg() {
-    local -a flags=("-h" "ldap://:${LDAP_PORT_NUMBER}/ ldapi:/// " "-F" "${LDAP_CONF_DIR}/slapd.d")
+    local -r retries="${1:-12}"
+    local -r sleep_time="${2:-1}"
+    local -a flags=("-h" "ldap://:${LDAP_PORT_NUMBER}/ ldapi:/// " "-F" "${LDAP_CONF_DIR}/slapd.d" "-d" "$LDAP_LOGLEVEL")
+
     if is_ldap_not_running; then
         info "Starting OpenLDAP server in background"
         ulimit -n "$LDAP_ULIMIT_NOFILES"
         am_i_root && flags=("-u" "$LDAP_DAEMON_USER" "${flags[@]}")
-        debug_execute slapd "${flags[@]}"
+        debug_execute slapd "${flags[@]}" &
+        if ! retry_while is_ldap_running "$retries" "$sleep_time"; then
+            error "OpenLDAP failed to start"
+            return 1
+        fi
     fi
 }
 
@@ -248,7 +256,12 @@ ldap_create_online_configuration() {
     info "Creating LDAP online configuration"
 
     ! am_i_root && replace_in_file "${LDAP_SHARE_DIR}/slapd.ldif" "uidNumber=0" "uidNumber=$(id -u)"
-    debug_execute slapadd -F "$LDAP_ONLINE_CONF_DIR" -n 0 -l "${LDAP_SHARE_DIR}/slapd.ldif"
+    local -a flags=(-F "$LDAP_ONLINE_CONF_DIR" -n 0 -l "${LDAP_SHARE_DIR}/slapd.ldif")
+    if am_i_root; then
+        debug_execute gosu "$LDAP_DAEMON_USER" slapadd "${flags[@]}"
+    else
+        debug_execute slapadd "${flags[@]}"
+    fi
 }
 
 ########################
@@ -452,7 +465,7 @@ ldap_add_custom_ldifs() {
 #########################
 ldap_configure_permissions() {
   debug "Ensuring expected directories/files exist..."
-  for dir in "$LDAP_SHARE_DIR" "$LDAP_DATA_DIR" "$LDAP_ONLINE_CONF_DIR"; do
+  for dir in "$LDAP_SHARE_DIR" "$LDAP_DATA_DIR" "$LDAP_ONLINE_CONF_DIR" "$LDAP_VAR_DIR"; do
       ensure_dir_exists "$dir"
       if am_i_root; then
           chown -R "$LDAP_DAEMON_USER:$LDAP_DAEMON_GROUP" "$dir"

@@ -15,9 +15,9 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "44a685c2a95a8a70f982f32154027bf83ec58cd19f362f48ccb760efb464bfe5",
+        "digest": "95a42c490d3c824bd0ace8bf72a1ccd15100551ffe00babd2a4eab96c2248722",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.9.13-166"
+        "version": "3.9.14-0"
     }
 }

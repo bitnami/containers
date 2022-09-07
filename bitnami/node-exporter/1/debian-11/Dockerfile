@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.3.1-debian-11-r31" \
+      org.opencontainers.image.ref.name="1.3.1-debian-11-r33" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/node-exporter" \
       org.opencontainers.image.title="node-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/node-exporter-1.3.1-154-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
     echo "cf955f9e2f7ccf2107d25add3794dbe49354acaa4064ac36d78f73738fd29b8f  node-exporter-1.3.1-154-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf node-exporter-1.3.1-154-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    tar -zxf node-exporter-1.3.1-154-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf node-exporter-1.3.1-154-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives

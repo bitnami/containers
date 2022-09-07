@@ -1,28 +1,32 @@
 FROM docker.io/bitnami/minideb:bullseye
-ENV HOME="/" \
-    OS_ARCH="amd64" \
-    OS_FLAVOUR="debian-11" \
-    OS_NAME="linux"
+
+ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.24.4-debian-11-r4" \
+      org.opencontainers.image.ref.name="1.24.4-debian-11-r6" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kubectl" \
       org.opencontainers.image.title="kubectl" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.24.4"
+
+ENV HOME="/" \
+    OS_ARCH="${TARGETARCH:-amd64}" \
+    OS_FLAVOUR="debian-11" \
+    OS_NAME="linux"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl gzip jq procps tar
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f kubectl-1.24.4-1-linux-amd64-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/kubectl-1.24.4-1-linux-amd64-debian-11.tar.gz -O ; \
+    if [ ! -f kubectl-1.24.4-1-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/kubectl-1.24.4-1-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/kubectl-1.24.4-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    echo "d851848ddc1deceedf996003ffc7366f1d7e46c319e245f27afa3349c04a33c9  kubectl-1.24.4-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf kubectl-1.24.4-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf kubectl-1.24.4-1-linux-amd64-debian-11.tar.gz
+    sha256sum -c kubectl-1.24.4-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf kubectl-1.24.4-1-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf kubectl-1.24.4-1-linux-${OS_ARCH}-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami

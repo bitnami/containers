@@ -99,6 +99,43 @@ harbor_jobservice_validate() {
     fi
 }
 
+
+########################
+# Check if Harbor Core API is reported as healthy
+# Globals:
+#   CORE_URL
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_harbor_core_ready() {
+    not_empty_env_var "CORE_URL"
+
+    local -r status="$(yq eval '.components[]|select(.name == "core").status' - <<<"$(curl -s "${CORE_URL}/api/v2.0/health")")"
+    [[ "$status" = "healthy" ]]
+}
+
+########################
+# Waits for Harbor Core to be ready
+# Times out after 60 seconds
+# Globals:
+#   INFLUXDB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+########################
+wait_for_harbor_core() {
+    info "Waiting for Harbor Core to be started and ready"
+    if ! retry_while "is_harbor_core_ready"; then
+        error "Timeout waiting for Harbor Core to be available"
+        return 1
+    fi
+}
+
+
 # Ensure Harbor Job Service settings are valid
 harbor_jobservice_validate
 install_custom_certs
+wait_for_harbor_core

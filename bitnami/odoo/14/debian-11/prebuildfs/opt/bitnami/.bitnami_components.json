@@ -29,10 +29,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "6e21552dc6c19b01247f3ec7bcd0401e6192519fe206e136e205ac6c3b842e7b",
+        "digest": "65934e9dc4f3e47bd5d50e082931d40e9e2e8a2b10c6f059e67da2b6c1ad38cb",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.13-167"
+        "version": "3.8.14-0"
     },
     "render-template": {
         "arch": "amd64",

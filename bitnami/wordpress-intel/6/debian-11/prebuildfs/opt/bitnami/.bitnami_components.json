@@ -15,10 +15,10 @@
     },
     "nginx-intel": {
         "arch": "amd64",
-        "digest": "4aafdae5e8ee3e85d96ccd086762e800b8b2574a7b512355ce7052bc89650626",
+        "digest": "0b1bf76436d2010a04d1307e6d6e2519c226885cadd402be53f865ebebd6d4bd",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.4.7-153"
+        "version": "0.4.7-154"
     },
     "php": {
         "arch": "amd64",

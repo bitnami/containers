@@ -17,15 +17,21 @@ set -o pipefail
 . /opt/bitnami/scripts/liblog.sh
 
 info "Updating PID files location"
+# PIDDIR appears in branch 8 
 replace_in_file "${SONARQUBE_BIN_DIR}/sonar.sh" "PIDDIR=\"\.\"" "PIDDIR=\"../../pids\""
+# PIDFile appears in branch 9
+replace_in_file "${SONARQUBE_BIN_DIR}/sonar.sh" "PIDFILE=\".*" "PIDFILE=\"/opt/bitnami/sonarqube/pids/\$APP_NAME.pid\""
 
-info "Updating log file location"
-replace_in_file "${SONARQUBE_CONF_DIR}/wrapper.conf" "\.\./\.\./sonar\.YYYYMMDD\.log" "../../sonar.log"
+# The file wrapper.conf only exist in branch 8.
+if [[ -f "${SONARQUBE_CONF_DIR}/wrapper.conf" ]]; then
+    info "Updating log file location"
+    replace_in_file "${SONARQUBE_CONF_DIR}/wrapper.conf" "\.\./\.\./sonar\.YYYYMMDD\.log" "../../sonar.log"
 
-# Log rotation will be handled externally
-# Refer to "Log Rotation" section in https://docs.sonarqube.org/latest/instance-administration/system-info/
-info "Disabling log rolling"
-replace_in_file "${SONARQUBE_CONF_DIR}/wrapper.conf" "^[#\s]*wrapper.logfile.rollmode\s*=.*" "wrapper.logfile.rollmode=NONE"
+    # Log rotation will be handled externally
+    # Refer to "Log Rotation" section in https://docs.sonarqube.org/latest/instance-administration/system-info/
+    info "Disabling log rolling"
+    replace_in_file "${SONARQUBE_CONF_DIR}/wrapper.conf" "^[#\s]*wrapper.logfile.rollmode\s*=.*" "wrapper.logfile.rollmode=NONE"
+fi
 
 # Ensure the SonarQube base directory exists and has proper permissions
 # Based on https://github.com/SonarSource/docker-sonarqube/blob/master/9/community/Dockerfile#L129

@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.22.5-debian-11-r5" \
+      org.opencontainers.image.ref.name="1.22.5-debian-11-r7" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/envoy" \
       org.opencontainers.image.title="envoy" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/envoy-1.22.5-1-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
     echo "1aff8660226bfc9000f62bed7d6d7c628bc06605e718090f2528f702189ef90d  envoy-1.22.5-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf envoy-1.22.5-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    tar -zxf envoy-1.22.5-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf envoy-1.22.5-1-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives

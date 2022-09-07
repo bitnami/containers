@@ -6,7 +6,7 @@ ENV HOME="/" \
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.6.0-debian-11-r0" \
+      org.opencontainers.image.ref.name="2.6.0-debian-11-r2" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kube-state-metrics" \
       org.opencontainers.image.title="kube-state-metrics" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/kube-state-metrics-2.6.0-1-linux-amd64-debian-11.tar.gz -O ; \
     fi && \
     echo "3ec94f4f336982549fbc5e33430f34c5efe7196947df0ff56a1ad8ee6b3b939b  kube-state-metrics-2.6.0-1-linux-amd64-debian-11.tar.gz" | sha256sum -c - && \
-    tar -zxf kube-state-metrics-2.6.0-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --wildcards '*/files' && \
+    tar -zxf kube-state-metrics-2.6.0-1-linux-amd64-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf kube-state-metrics-2.6.0-1-linux-amd64-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives

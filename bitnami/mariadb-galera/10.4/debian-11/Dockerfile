@@ -1,16 +1,17 @@
 FROM docker.io/bitnami/minideb:bullseye
-ENV HOME="/" \
-    OS_ARCH="amd64" \
-    OS_FLAVOUR="debian-11" \
-    OS_NAME="linux"
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="10.4.26-debian-11-r4" \
+      org.opencontainers.image.ref.name="10.4.26-debian-11-r6" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mariadb-galera" \
       org.opencontainers.image.title="mariadb-galera" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="10.4.26"
+
+ENV HOME="/" \
+    OS_ARCH="amd64" \
+    OS_FLAVOUR="debian-11" \
+    OS_NAME="linux"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
