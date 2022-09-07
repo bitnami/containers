@@ -1,10 +1,10 @@
 {
     "drupal": {
         "arch": "amd64",
-        "digest": "8925744d87d12b2adc4c56df71b8e29233b12d55f7eb9e85b15b5dacca66446b",
+        "digest": "f1c835dca0267fa965124fd3ac2ce59f9b5d9cf5e26f8adb061e58d541cbc050",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.91.0-3"
+        "version": "7.92.0-0"
     },
     "gosu": {
         "arch": "amd64",
