@@ -90,13 +90,13 @@ jobs:
         name: 'Publish ${{ steps.get-container-metadata.outputs.name }}: ${{ steps.get-container-metadata.outputs.tag }}'
         if: ${{ steps.get-container-metadata.outputs.result == 'ok' }}
         with:
-          pipeline: vib-publish.json
+          pipeline: ${{ steps.get-container-metadata.outputs.name }}/vib-publish.json
         env:
           # Path with docker resources
           VIB_ENV_PATH:  ${{ matrix.container }}
           # Container name
           VIB_ENV_CONTAINER: ${{ steps.get-container-metadata.outputs.name }}
           VIB_ENV_TAG: ${{ steps.get-container-metadata.outputs.tag }}
-          VIB_ENV_REGISTRY_URL: ${{ secrets.OCI_REGISTRY_URL }}
-          VIB_ENV_REGISTRY_USERNAME: ${{ secrets.OCI_REGISTRY_USERNAME }}
-          VIB_ENV_REGISTRY_PASSWORD:  ${{ secrets.OCI_REGISTRY_PASSWORD }}
+          VIB_ENV_REGISTRY_URL: ${{ secrets.STAGING_MARKETPLACE_REGISTRY_URL }}
+          VIB_ENV_REGISTRY_USERNAME: ${{ secrets.STAGING_MARKETPLACE_USER }}
+          VIB_ENV_REGISTRY_PASSWORD:  ${{ secrets.STAGING_MARKETPLACE_PASSWORD }}

@@ -117,7 +117,7 @@ jobs:
         name: Verify
         if: ${{ steps.get-container-metadata.outputs.result == 'ok' }}
         with:
-          pipeline: vib-verify.json
+          pipeline: ${{ steps.get-container-metadata.outputs.name }}/vib-verify.json
         env:
           # Path with docker resources
           VIB_ENV_PATH: ${{ matrix.container }}
