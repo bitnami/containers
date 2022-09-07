@@ -438,9 +438,12 @@ setup_etcd_active_endpoints() {
 ########################
 is_healthy_etcd_cluster() {
     local return_value=0
-    local active_endpoints cluster_size
+    local active_endpoints cluster_size host port
     read -r active_endpoints cluster_size ETCD_ACTIVE_ENDPOINTS <<<"$(setup_etcd_active_endpoints)"
     export ETCD_ACTIVE_ENDPOINTS
+
+    host="$(hostname -f)"
+    port="$ETCD_PORT"
 
     if is_boolean_yes "$ETCD_DISASTER_RECOVERY"; then
         if [[ -f "/snapshots/.disaster_recovery" ]]; then
