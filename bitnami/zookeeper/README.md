@@ -51,8 +51,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3.8`, `3.8-debian-11`, `3.8.0`, `3.8.0-debian-11-r32`, `latest` (3.8/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/zookeeper/3.8/debian-11/Dockerfile)
-* [`3.7`, `3.7-debian-11`, `3.7.1`, `3.7.1-debian-11-r36` (3.7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/zookeeper/3.7/debian-11/Dockerfile)
-* [`3.6`, `3.6-debian-11`, `3.6.3`, `3.6.3-debian-11-r36` (3.6/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/zookeeper/3.6/debian-11/Dockerfile)
+* [`3.7`, `3.7-debian-11`, `3.7.1`, `3.7.1-debian-11-r37` (3.7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/zookeeper/3.7/debian-11/Dockerfile)
+* [`3.6`, `3.6-debian-11`, `3.6.3`, `3.6.3-debian-11-r37` (3.6/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/zookeeper/3.6/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
