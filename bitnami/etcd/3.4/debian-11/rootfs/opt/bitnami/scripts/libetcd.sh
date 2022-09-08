@@ -392,7 +392,7 @@ is_new_etcd_cluster() {
 }
 
 ########################
-# Setup ETCD_ACTIVE_ENDPOINTS environment variable, will return the number of active endpoints, cluster size (including not active member) and the ETCD_ACTIVE_ENDPOINTS (which is also export)
+# Setup ETCD_ACTIVE_ENDPOINTS environment variable, will return the number of active endpoints , cluster size (including not active member) and the ETCD_ACTIVE_ENDPOINTS (which is also export)
 # Globals:
 #   ETCD_*
 # Arguments:
