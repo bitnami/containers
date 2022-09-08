@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3.10`, `3.10-debian-11`, `3.10.7`, `3.10.7-debian-11-r12`, `latest` (3.10/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/rabbitmq/3.10/debian-11/Dockerfile)
-* [`3.9`, `3.9-debian-11`, `3.9.22`, `3.9.22-debian-11-r12` (3.9/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/rabbitmq/3.9/debian-11/Dockerfile)
+* [`3.9`, `3.9-debian-11`, `3.9.22`, `3.9.22-debian-11-r13` (3.9/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/rabbitmq/3.9/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
