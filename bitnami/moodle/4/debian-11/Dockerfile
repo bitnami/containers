@@ -6,7 +6,7 @@ ARG WITH_ALL_LOCALES="no"
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.0.3-debian-11-r5" \
+      org.opencontainers.image.ref.name="4.0.3-debian-11-r6" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/moodle" \
       org.opencontainers.image.title="moodle" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -30,13 +30,13 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf php-7.4.30-160-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf php-7.4.30-160-linux-${OS_ARCH}-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f apache-2.4.54-155-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/apache-2.4.54-155-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/apache-2.4.54-155-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f apache-2.4.54-156-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/apache-2.4.54-156-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/apache-2.4.54-156-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c apache-2.4.54-155-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf apache-2.4.54-155-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf apache-2.4.54-155-linux-${OS_ARCH}-debian-11.tar.gz
+    sha256sum -c apache-2.4.54-156-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf apache-2.4.54-156-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf apache-2.4.54-156-linux-${OS_ARCH}-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f postgresql-client-13.8.0-1-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/postgresql-client-13.8.0-1-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
