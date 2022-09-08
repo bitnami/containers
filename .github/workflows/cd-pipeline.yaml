@@ -91,8 +91,8 @@ jobs:
         run: |
           csp_auth_token=$(curl -s -H 'Content-Type: application/x-www-form-urlencoded' -X POST -d "grant_type=refresh_token&api_token=${{ secrets.STAGING_MARKETPLACE_API_TOKEN }}" https://console.cloud.vmware.com/csp/gateway/am/api/auth/api-tokens/authorize | jq -r .access_token)
           repo_info=$(curl -s -X POST -H "Content-Type: application/json" -H "csp-auth-token:$csp_auth_token" -d '{"withCredentials":true, "storageType":"OCI"}' https://gtwstg.market.csp.vmware.com/api/v1/repositories/transient)
-          marketplace_user=$(echo "$repo_info" | jq -r .response.repodetails.username)
-          marketplace_passwd=$(echo "$repo_info" | jq -r .response.repodetails.token)
+          marketplace_user=$(echo "$repo_info" | jq -re .response.repodetails.username)
+          marketplace_passwd=$(echo "$repo_info" | jq -re .response.repodetails.token)
           echo "::add-mask::${marketplace_user}"
           echo "::add-mask::${marketplace_passwd}"
           echo "::set-output name=marketplace_user::${marketplace_user}"
