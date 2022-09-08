@@ -28,7 +28,7 @@ $ docker run --name jupyter-base-notebook bitnami/jupyter-base-notebook:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-11`, `2.3.1`, `2.3.1-debian-11-r35`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/jupyter-base-notebook/2/debian-11/Dockerfile)
+* [`2`, `2-debian-11`, `2.3.1`, `2.3.1-debian-11-r36`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/jupyter-base-notebook/2/debian-11/Dockerfile)
 * [`1`, `1-debian-11`, `1.5.0`, `1.5.0-debian-11-r35` (1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/jupyter-base-notebook/1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
