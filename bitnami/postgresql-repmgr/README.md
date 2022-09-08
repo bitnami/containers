@@ -47,11 +47,11 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`14`, `14-debian-11`, `14.5.0`, `14.5.0-debian-11-r9`, `latest` (14/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql-repmgr/14/debian-11/Dockerfile)
-* [`13`, `13-debian-11`, `13.8.0`, `13.8.0-debian-11-r11` (13/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql-repmgr/13/debian-11/Dockerfile)
-* [`12`, `12-debian-11`, `12.12.0`, `12.12.0-debian-11-r11` (12/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql-repmgr/12/debian-11/Dockerfile)
-* [`11`, `11-debian-11`, `11.17.0`, `11.17.0-debian-11-r11` (11/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql-repmgr/11/debian-11/Dockerfile)
-* [`10`, `10-debian-11`, `10.22.0`, `10.22.0-debian-11-r11` (10/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql-repmgr/10/debian-11/Dockerfile)
+* [`14`, `14-debian-11`, `14.5.0`, `14.5.0-debian-11-r10`, `latest` (14/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql-repmgr/14/debian-11/Dockerfile)
+* [`13`, `13-debian-11`, `13.8.0`, `13.8.0-debian-11-r12` (13/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql-repmgr/13/debian-11/Dockerfile)
+* [`12`, `12-debian-11`, `12.12.0`, `12.12.0-debian-11-r12` (12/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql-repmgr/12/debian-11/Dockerfile)
+* [`11`, `11-debian-11`, `11.17.0`, `11.17.0-debian-11-r12` (11/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql-repmgr/11/debian-11/Dockerfile)
+* [`10`, `10-debian-11`, `10.22.0`, `10.22.0-debian-11-r12` (10/debian-11/Dockerfile)](https://github.com/bitnami/containers/tree/main/bitnami/postgresql-repmgr/10/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
