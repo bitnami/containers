@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.12.0-debian-11-r12" \
+      org.opencontainers.image.ref.name="4.12.0-debian-11-r13" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/dreamfactory" \
       org.opencontainers.image.title="dreamfactory" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -28,13 +28,13 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf php-7.4.30-160-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf php-7.4.30-160-linux-${OS_ARCH}-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f apache-2.4.54-155-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/apache-2.4.54-155-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/apache-2.4.54-155-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f apache-2.4.54-156-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/apache-2.4.54-156-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/apache-2.4.54-156-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c apache-2.4.54-155-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf apache-2.4.54-155-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf apache-2.4.54-155-linux-${OS_ARCH}-debian-11.tar.gz
+    sha256sum -c apache-2.4.54-156-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf apache-2.4.54-156-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf apache-2.4.54-156-linux-${OS_ARCH}-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f redis-client-7.0.4-2-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/redis-client-7.0.4-2-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
