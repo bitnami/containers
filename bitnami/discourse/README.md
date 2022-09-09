@@ -317,7 +317,7 @@ Available environment variables:
 - `DISCOURSE_REDIS_HOST`: Hostname for Redis(R). Default: **redis**
 - `DISCOURSE_REDIS_PORT_NUMBER`: Port used by Redis(R). Default: **6379**
 - `DISCOURSE_REDIS_PASSWORD`: Password for Redis(R).
-- `DISCOURSE_REDIS_USE_SSL`: Defines if SSL should be used to communicate with Redis(R). Default: **false**
+- `DISCOURSE_REDIS_USE_SSL`: Defines if SSL should be used to communicate with Redis(R). Default: **no**
 
 ##### Create a database for Discourse using postgresql-client
 
