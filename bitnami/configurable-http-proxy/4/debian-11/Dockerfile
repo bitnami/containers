@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.5.2-debian-11-r6" \
+      org.opencontainers.image.ref.name="4.5.3-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/configurable-http-proxy" \
       org.opencontainers.image.title="configurable-http-proxy" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="4.5.2"
+      org.opencontainers.image.version="4.5.3"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -36,18 +36,18 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf node-14.20.0-3-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf node-14.20.0-3-linux-${OS_ARCH}-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f configurable-http-proxy-4.5.2-1-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/configurable-http-proxy-4.5.2-1-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/configurable-http-proxy-4.5.2-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f configurable-http-proxy-4.5.3-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/configurable-http-proxy-4.5.3-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/configurable-http-proxy-4.5.3-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c configurable-http-proxy-4.5.2-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf configurable-http-proxy-4.5.2-1-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf configurable-http-proxy-4.5.2-1-linux-${OS_ARCH}-debian-11.tar.gz
+    sha256sum -c configurable-http-proxy-4.5.3-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf configurable-http-proxy-4.5.3-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf configurable-http-proxy-4.5.3-0-linux-${OS_ARCH}-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="4.5.2" \
+ENV APP_VERSION="4.5.3" \
     BITNAMI_APP_NAME="configurable-http-proxy" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/configurable-http-proxy/bin:$PATH"
 
