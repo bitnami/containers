@@ -32,7 +32,6 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`1.22`, `1.22-debian-11`, `1.22.5`, `1.22.5-debian-11-r9` (1.22/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/envoy/1.22/debian-11/Dockerfile)
 * [`1.21`, `1.21-debian-11`, `1.21.5`, `1.21.5-debian-11-r15` (1.21/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/envoy/1.21/debian-11/Dockerfile)
 * [`1.20`, `1.20-debian-11`, `1.20.7`, `1.20.7-debian-11-r15` (1.20/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/envoy/1.20/debian-11/Dockerfile)
-* [`1.19`, `1.19-debian-11`, `1.19.5`, `1.19.5-debian-11-r29` (1.19/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/envoy/1.19/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
@@ -79,10 +78,6 @@ $ docker run --rm -v /path/to/your/envoy.yaml:/opt/bitnami/envoy/conf/envoy.yaml
 ```
 
 Visit the [official envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/configuration) for all the available configurations.
-
-## Branch Deprecation Notice
-
-Envoy's branch 1.19 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 09-08-2022
 
 ## Contributing
 
