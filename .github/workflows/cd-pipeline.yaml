@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Get modified containers path
     if: |
-      github.event.pusher.name == 'bitnami-bot' &&
+      github.event.head_commit.author.name == 'Bitnami Bot' &&
       github.event.forced == false
     outputs:
       result: ${{ steps.get-containers.outputs.result }}
