@@ -36,7 +36,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`9`, `9-debian-11`, `9.4.5`, `9.4.5-debian-11-r7`, `latest` (9/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/drupal-nginx/9/debian-11/Dockerfile)
-* [`7`, `7-debian-11`, `7.92.0`, `7.92.0-debian-11-r1` (7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/drupal-nginx/7/debian-11/Dockerfile)
+* [`7`, `7-debian-11`, `7.92.0`, `7.92.0-debian-11-r2` (7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/drupal-nginx/7/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
