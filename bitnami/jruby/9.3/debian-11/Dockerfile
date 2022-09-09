@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="9.3.7-0-debian-11-r9" \
+      org.opencontainers.image.ref.name="9.3.7-0-debian-11-r10" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jruby" \
       org.opencontainers.image.title="jruby" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -43,13 +43,13 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf java-11.0.15-1-3-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf java-11.0.15-1-3-linux-${OS_ARCH}-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f jruby-9.3.7-0-3-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/jruby-9.3.7-0-3-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/jruby-9.3.7-0-3-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f jruby-9.3.7-0-4-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/jruby-9.3.7-0-4-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/jruby-9.3.7-0-4-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c jruby-9.3.7-0-3-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf jruby-9.3.7-0-3-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf jruby-9.3.7-0-3-linux-${OS_ARCH}-debian-11.tar.gz
+    sha256sum -c jruby-9.3.7-0-4-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf jruby-9.3.7-0-4-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf jruby-9.3.7-0-4-linux-${OS_ARCH}-debian-11.tar.gz
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
