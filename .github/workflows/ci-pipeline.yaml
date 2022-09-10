@@ -2,25 +2,44 @@ name: '[CI/CD] CI Pipeline'
 on: # rebuild any PRs and main branch changes
   pull_request_target:
     types:
-      - reopened
+      - opened
       - synchronize
       - labeled
     branches:
       - main
       - bitnami:main
+permissions:
+  issues: write
+  pull-requests: write
 env:
   CSP_API_URL: https://console.cloud.vmware.com
   CSP_API_TOKEN: ${{ secrets.CSP_API_TOKEN }}
   VIB_PUBLIC_URL: https://cp.bromelia.vmware.com
 jobs:
+  auto-pr-triage:
+    runs-on: ubuntu-latest
+    name: Triage for automated PRs
+    if: |
+      contains(github.event.pull_request.title, 'Release') &&
+      github.actor == 'bitnami-bot'
+    steps:
+      # Enables auto-merge and adds necessary labels for automated releases' PRs
+      - id: labeling
+        name: Label PR
+        uses: andymckay/labeler@1.0.4
+        with:
+          add-labels: "verify, auto-merge"
   get-containers:
     runs-on: ubuntu-latest
     name: Get modified containers
     if: |
       github.event.pull_request.state != 'closed' &&
       (
-        (github.event.action == 'labeled' && github.event.label.name == 'verify') ||
-        (github.event.action != 'labeled' && contains(github.event.pull_request.labels.*.name, 'verify'))
+        (contains(github.event.pull_request.title, 'Release') && github.actor == 'bitnami-bot') ||
+        (
+          (github.event.action == 'labeled' && github.event.label.name == 'verify') ||
+          (github.event.action != 'labeled' && contains(github.event.pull_request.labels.*.name, 'verify'))
+        )
       )
     outputs:
       result: ${{ steps.get-containers.outputs.result }}
@@ -53,8 +72,8 @@ jobs:
   vib-verify:
     runs-on: ubuntu-latest
     needs: get-containers
-    if: ${{ needs.get-containers.outputs.result == 'ok' && contains(github.event.pull_request.labels.*.name, 'verify') }}
-    name: Verify container
+    if: ${{ needs.get-containers.outputs.result == 'ok' }}
+    name: VIB Verify
     continue-on-error: false
     strategy:
       fail-fast: false
@@ -75,11 +94,21 @@ jobs:
         run: |
           if [[ -d "${{ matrix.container }}" ]]; then
             name="$(echo "${{ matrix.container }}" | awk -F '/' '{print $2}')"
-            # Build a tag based on current SHA
-            tag="$(echo "${{ matrix.container }}" | awk -F '/' -v run_number="${GITHUB_RUN_NUMBER}" '{printf "%s-rc.%s", $3, run_number}')"
-            echo "::set-output name=tag::${tag}"
-            echo "::set-output name=name::${name}"
-            echo "::set-output name=result::ok"
+            tag=""
+            if [[ "${{ github.actor }}" == "bitnami-bot" ]]; then
+              tag="$(grep -oE "org.opencontainers.image.ref.name=\".+\"" ${{ matrix.container }}/Dockerfile | sed -nr "s|org.opencontainers.image.ref.name=\"(.+)\"|\1|p")"
+            else
+              # Build a tag based on current RUN number
+              tag="$(echo "${{ matrix.container }}" | awk -F '/' -v run_number="${GITHUB_RUN_NUMBER}" '{printf "%s-rc.%s", $3, run_number}')"
+            fi
+            if [[ -z "${tag}" ]]; then
+              echo "No tag found for: ${{ matrix.container }}"
+              exit 1
+            else
+              echo "::set-output name=tag::${tag}"
+              echo "::set-output name=name::${name}"
+              echo "::set-output name=result::ok"
+            fi
           else
             # Container folder doesn't exists we are assuming a deprecation
             echo "::set-output name=result::skip"
@@ -88,20 +117,82 @@ jobs:
         name: Verify
         if: ${{ steps.get-container-metadata.outputs.result == 'ok' }}
         with:
-          pipeline: vib-verify.json
+          pipeline: ${{ steps.get-container-metadata.outputs.name }}/vib-verify.json
         env:
           # Path with docker resources
           VIB_ENV_PATH: ${{ matrix.container }}
           # Container name
           VIB_ENV_CONTAINER: ${{ steps.get-container-metadata.outputs.name  }}
           VIB_ENV_TAG: ${{ steps.get-container-metadata.outputs.tag }}
-  verify-all:
+  verification-summary:
     # Ensure all containers passed the verification
     runs-on: ubuntu-latest
-    name: Verify
-    needs: vib-verify
+    name: Verification Summary
+    needs:
+      - get-containers
+      - vib-verify
     if: ${{ always() }}
     steps:
-      - name: Verify
-        if: ${{ needs.vib-verify.result != 'success' && needs.vib-verify.result != 'skipped'}}
-        run: exit 1
+      - name: Verification Summary
+        run: |
+          if [[ "${{ needs.get-containers.result }}" != "success" ]]; then
+            echo "Verification is required."
+            echo "If you've just created this PR, don't worry about this message. Bitnami Team has to review it and make the verification possible."
+            exit 1
+          else
+            if [[ "${{ needs.get-containers.outputs.result }}" == "skip" ]]; then
+              echo "It seems these changes don't involve any container"
+            else
+              if [[ "${{ needs.vib-verify.result }}" != "success" ]]; then
+                echo "Verification is required"
+                echo "Please review previous jobs to get more information"
+                exit 1
+              else
+                echo "Well done! Everything looks good. Please wait for the Bitnami Team review."
+              fi
+            fi
+          fi
+  auto-pr-review:
+    runs-on: ubuntu-latest
+    name: Reviewal for automated PRs
+    needs: verification-summary
+    if: |
+      always() &&
+      contains(github.event.pull_request.title, 'Release') &&
+      github.actor == 'bitnami-bot'
+    steps:
+      - name: Enable auto-merge feature
+        if: ${{ needs.verification-summary.result == 'success' }}
+        uses: reitermarkus/automerge@v2.1.2
+        with:
+          token: ${{ secrets.BITNAMI_BOT_TOKEN }}
+          merge-method: squash
+          pull-request: ${{ github.event.number }}
+      - name: PR Approval
+        if: ${{ needs.verification-summary.result == 'success' }}
+        uses: hmarr/auto-approve-action@v2.4.0
+        with:
+          pull-request-number: ${{ github.event.number }}
+      - name: Manual review required
+        if: ${{ needs.verification-summary.result != 'success' }}
+        uses: peter-evans/create-or-update-comment@v2.0.0
+        with:
+          issue-number: ${{ github.event.number }}
+          body: |
+            There has been an error during the automated release process. Manual revision is now required.
+            Please check the related [action_run#${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for more information.
+      - name: Remove Automerge label
+        if: ${{ needs.verification-summary.result != 'success' }}
+        uses: andymckay/labeler@1.0.4
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          remove-labels: auto-merge
+      - name: Send to the board
+        if: ${{ needs.verification-summary.result != 'success' }}
+        uses: peter-evans/create-or-update-project-card@v2
+        with:
+          project-name: Support
+          # If the author comes from Bitnami, send it to Bitnami. Otherwise, all to Triage
+          column-name: From Bitnami
+          token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
+          issue-number: ${{ github.event.number }}

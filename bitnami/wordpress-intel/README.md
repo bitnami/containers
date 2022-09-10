@@ -19,7 +19,7 @@ $ docker-compose up -d
 
 ## Why use Intel optimized containers
 
-Encryption is becoming pervasive with most organizations increasingly adopting encryption for application execution, data in flight, and data storage. Intel® 3rd gen Xeon® Scalable Processor (Ice Lake) cores and architecture, offers several new instructions for encryption acceleration. These new instructions, coupled with algorithmic and software innovations, deliver breakthrough performance for the industry's most widely deployed cryptographic ciphers.
+Encryption is becoming pervasive with most organizations increasingly adopting encryption for application execution, data in flight, and data storage. Intel(R) 3rd gen Xeon(R) Scalable Processor (Ice Lake) cores and architecture, offers several new instructions for encryption acceleration. These new instructions, coupled with algorithmic and software innovations, deliver breakthrough performance for the industry's most widely deployed cryptographic ciphers.
 
 This solution accelerates the processing of the Transport Layer Security (TLS) significantly by using built-in Intel crypto acceleration included in the latest Intel 3rd gen Xeon Scalable Processor (Ice Lake). For more information, refer to [Intel’s documentation](https://software.intel.com/content/www/us/en/develop/articles/wordpress-tuning-guide-on-xeon-systems.html).
 
@@ -49,7 +49,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`6`, `6-debian-11`, `6.0.2`, `6.0.2-debian-11-r0`, `latest` (6/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/wordpress/6/debian-11/Dockerfile)
+- [`6`, `6-debian-11`, `6.0.2`, `6.0.2-debian-11-r4`, `latest` (6/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/wordpress/6/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 

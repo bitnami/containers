@@ -1,10 +1,10 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "28b4021842650460745bdf6985972c6ec32ef2698240ff610ce6a94412b5bfcd",
+        "digest": "02139f0200bd1955b5ddd624b33a6893d42480cc02bf966ce0198a8e24f686a4",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.4.54-155"
+        "version": "2.4.54-156"
     },
     "gosu": {
         "arch": "amd64",
@@ -15,10 +15,10 @@
     },
     "joomla": {
         "arch": "amd64",
-        "digest": "3c291cfb525ea756aba13390132286bf7c1bbca37893a915929e0bb25d00a345",
+        "digest": "ec409587ec22155719b23fba424f73c85bc510967ea7af37ed7acb15dac0b747",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.2.1-0"
+        "version": "4.2.2-0"
     },
     "libphp": {
         "arch": "amd64",

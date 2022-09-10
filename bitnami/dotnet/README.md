@@ -35,8 +35,8 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`6`, `6-debian-11`, `6.0.8`, `6.0.8-debian-11-r7`, `latest` (6/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/dotnet/6/debian-11/Dockerfile)
-* [`3.1`, `3.1-debian-11`, `3.1.28`, `3.1.28-debian-11-r6` (3.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/dotnet/3.1/debian-11/Dockerfile)
+* [`6`, `6-debian-11`, `6.0.8`, `6.0.8-debian-11-r10`, `latest` (6/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/dotnet/6/debian-11/Dockerfile)
+* [`3.1`, `3.1-debian-11`, `3.1.28`, `3.1.28-debian-11-r10` (3.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/dotnet/3.1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 

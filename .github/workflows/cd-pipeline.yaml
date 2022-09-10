@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Get modified containers path
     if: |
-      github.event.pusher.name == 'bitnami-bot' &&
+      github.event.head_commit.author.username == 'bitnami-bot' &&
       github.event.forced == false
     outputs:
       result: ${{ steps.get-containers.outputs.result }}
@@ -86,17 +86,28 @@ jobs:
             # Container folder doesn't exists we are assuming a deprecation
             echo "::set-output name=result::skip"
           fi
+      - id: get-registry-credentials
+        name: Get staging marketplace's registry credentials
+        run: |
+          csp_auth_token=$(curl -s -H 'Content-Type: application/x-www-form-urlencoded' -X POST -d "grant_type=refresh_token&api_token=${{ secrets.STAGING_MARKETPLACE_API_TOKEN }}" https://console.cloud.vmware.com/csp/gateway/am/api/auth/api-tokens/authorize | jq -re .access_token)
+          repo_info=$(curl -s -X POST -H "Content-Type: application/json" -H "csp-auth-token:$csp_auth_token" -d '{"withCredentials":true, "storageType":"OCI"}' https://gtwstg.market.csp.vmware.com/api/v1/repositories/transient)
+          marketplace_user=$(echo "$repo_info" | jq -re .response.repodetails.username)
+          marketplace_passwd=$(echo "$repo_info" | jq -re .response.repodetails.token)
+          echo "::add-mask::${marketplace_user}"
+          echo "::add-mask::${marketplace_passwd}"
+          echo "::set-output name=marketplace_user::${marketplace_user}"
+          echo "::set-output name=marketplace_passwd::${marketplace_passwd}"
       - uses: vmware-labs/vmware-image-builder-action@main
         name: 'Publish ${{ steps.get-container-metadata.outputs.name }}: ${{ steps.get-container-metadata.outputs.tag }}'
         if: ${{ steps.get-container-metadata.outputs.result == 'ok' }}
         with:
-          pipeline: vib-publish.json
+          pipeline: ${{ steps.get-container-metadata.outputs.name }}/vib-publish.json
         env:
           # Path with docker resources
           VIB_ENV_PATH:  ${{ matrix.container }}
           # Container name
           VIB_ENV_CONTAINER: ${{ steps.get-container-metadata.outputs.name }}
           VIB_ENV_TAG: ${{ steps.get-container-metadata.outputs.tag }}
-          VIB_ENV_REGISTRY_URL: ${{ secrets.OCI_REGISTRY_URL }}
-          VIB_ENV_REGISTRY_USERNAME: ${{ secrets.OCI_REGISTRY_USERNAME }}
-          VIB_ENV_REGISTRY_PASSWORD:  ${{ secrets.OCI_REGISTRY_PASSWORD }}
+          VIB_ENV_REGISTRY_URL: ${{ secrets.STAGING_MARKETPLACE_REGISTRY_URL }}
+          VIB_ENV_REGISTRY_USERNAME: ${{ steps.get-registry-credentials.outputs.marketplace_user }}
+          VIB_ENV_REGISTRY_PASSWORD: ${{ steps.get-registry-credentials.outputs.marketplace_passwd }}

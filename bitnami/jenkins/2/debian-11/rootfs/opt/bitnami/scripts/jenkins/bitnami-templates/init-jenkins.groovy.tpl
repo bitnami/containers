@@ -46,13 +46,6 @@ println " [bitnami/groovy-init-jenkins] Setting master-slave security"
 jenkins.getInjector().getInstance(AdminWhitelistRule.class).setMasterKillSwitch(false);
 println " [bitnami/groovy-init-jenkins] master-slave security set"
 
-// Setting email address
-println " [bitnami/groovy-init-jenkins] Configuring Jenkins adminstrator email address"
-location = jenkins.model.JenkinsLocationConfiguration.get()
-location.setAdminAddress("{{JENKINS_EMAIL}}")
-location.save()
-println " [bitnami/groovy-init-jenkins] Jenkins email is set to '{{JENKINS_EMAIL}}'"
-
 jenkins.save()
 
 // Complete wizard

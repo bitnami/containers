@@ -8,16 +8,16 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "44a685c2a95a8a70f982f32154027bf83ec58cd19f362f48ccb760efb464bfe5",
+        "digest": "180a7c52ed6d6bd4df559aa5527ee8305a52117434550243a29779d66d8fc5c4",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.9.13-166"
+        "version": "3.9.14-1"
     },
     "tensorflow-intel": {
         "arch": "amd64",
-        "digest": "f959bace506b9c5372cc18561a9774912456762567063179550f5dc593435abb",
+        "digest": "f596d6abe10695d29cfc67bd73ae821996700056d780b7fdb492b7625b033c79",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.9.1-153"
+        "version": "2.9.2-0"
     }
 }

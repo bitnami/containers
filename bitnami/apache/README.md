@@ -47,7 +47,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2.4`, `2.4-debian-11`, `2.4.54`, `2.4.54-debian-11-r29`, `latest` (2.4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/apache/2.4/debian-11/Dockerfile)
+* [`2.4`, `2.4-debian-11`, `2.4.54`, `2.4.54-debian-11-r33`, `latest` (2.4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/apache/2.4/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
@@ -290,46 +290,9 @@ $ docker-compose logs apache
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-## Understand the structure of this image
-
-The Bitnami Apache Docker image is built using a Dockerfile with the structure below:
-
-```Dockerfile
-FROM bitnami/minideb
-...
-## Install required system packages and dependencies
-RUN install_packages xxx yyy zzz
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "apache" "aa.bb.cc-dd"
-...
-COPY rootfs /
-
-ENV ...
-
-EXPOSE 8080 8443
-
-WORKDIR /app
-USER 1001
-ENTRYPOINT [ "/opt/bitnami/scripts/apache/entrypoint.sh" ]
-CMD [ "/opt/bitnami/scripts/apache/run.sh" ]
-```
-
-The Dockerfile has several sections related to:
-
-- Components installation
-- Components static configuration
-- Environment variables
-- Volumes
-- Ports to be exposed
-- Working directory and user
-  - Note that once the user is set to 1001, unprivileged commands cannot be executed any longer.
-- Entrypoint and command
-  - Take into account that these actions are not executed until the container is started.
-
 ## Customize this image
 
 The Bitnami Apache Docker image is designed to be extended so it can be used as the base image for your custom web applications.
-
-> Note: Read the [previous section](#understand-the-structure-of-this-image) to understand the Dockerfile structure before extending this image.
 
 ### Extend this image
 
