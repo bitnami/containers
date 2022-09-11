@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.6.0-debian-11-r5" \
+      org.opencontainers.image.ref.name="2.6.0-debian-11-r6" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/harbor-jobservice" \
       org.opencontainers.image.title="harbor-jobservice" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -20,13 +20,13 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip libc6 procps tar
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f yq-4.27.3-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/yq-4.27.3-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/yq-4.27.3-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f yq-4.27.5-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/yq-4.27.5-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/yq-4.27.5-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c yq-4.27.3-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf yq-4.27.3-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf yq-4.27.3-0-linux-${OS_ARCH}-debian-11.tar.gz
+    sha256sum -c yq-4.27.5-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf yq-4.27.5-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf yq-4.27.5-0-linux-${OS_ARCH}-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f harbor-jobservice-2.6.0-2-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/harbor-jobservice-2.6.0-2-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
