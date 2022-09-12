@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="7.3.0-debian-11-r33" \
+      org.opencontainers.image.ref.name="7.3.0-debian-11-r34" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/oauth2-proxy" \
       org.opencontainers.image.title="oauth2-proxy" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     fi && \
     sha256sum -c oauth2-proxy-7.3.0-153-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf oauth2-proxy-7.3.0-153-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf oauth2-proxy-7.3.0-153-linux-${OS_ARCH}-debian-11.tar.gz
+    rm -rf oauth2-proxy-7.3.0-153-linux-${OS_ARCH}-debian-11.tar.gz oauth2-proxy-7.3.0-153-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
