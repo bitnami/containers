@@ -35,9 +35,9 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.19`, `1.19-debian-11`, `1.19.1`, `1.19.1-debian-11-r1`, `latest` (1.19/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/golang/1.19/debian-11/Dockerfile)
-* [`1.18`, `1.18-debian-11`, `1.18.6`, `1.18.6-debian-11-r1` (1.18/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/golang/1.18/debian-11/Dockerfile)
-* [`1.17`, `1.17-debian-11`, `1.17.13`, `1.17.13-debian-11-r13` (1.17/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/golang/1.17/debian-11/Dockerfile)
+* [`1.19`, `1.19-debian-11`, `1.19.1`, `1.19.1-debian-11-r2`, `latest` (1.19/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/golang/1.19/debian-11/Dockerfile)
+* [`1.18`, `1.18-debian-11`, `1.18.6`, `1.18.6-debian-11-r2` (1.18/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/golang/1.18/debian-11/Dockerfile)
+* [`1.17`, `1.17-debian-11`, `1.17.13`, `1.17.13-debian-11-r14` (1.17/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/golang/1.17/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
@@ -165,10 +165,6 @@ Re-create your container from the new image.
 ```console
 $ docker run --name golang bitnami/golang:latest
 ```
-
-## Branch Deprecation Notice
-
-Golang's branch 1.17 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 09-08-2022
 
 ## Contributing
 

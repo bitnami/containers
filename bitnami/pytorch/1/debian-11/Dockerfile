@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.12.1-debian-11-r11" \
+      org.opencontainers.image.ref.name="1.12.1-debian-11-r12" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pytorch" \
       org.opencontainers.image.title="pytorch" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     fi && \
     sha256sum -c python-3.8.14-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf python-3.8.14-1-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf python-3.8.14-1-linux-${OS_ARCH}-debian-11.tar.gz
+    rm -rf python-3.8.14-1-linux-${OS_ARCH}-debian-11.tar.gz python-3.8.14-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f pytorch-1.12.1-2-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/pytorch-1.12.1-2-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
@@ -34,7 +34,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     fi && \
     sha256sum -c pytorch-1.12.1-2-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf pytorch-1.12.1-2-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf pytorch-1.12.1-2-linux-${OS_ARCH}-debian-11.tar.gz
+    rm -rf pytorch-1.12.1-2-linux-${OS_ARCH}-debian-11.tar.gz pytorch-1.12.1-2-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
@@ -42,7 +42,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     fi && \
     sha256sum -c gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz
+    rm -rf gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami

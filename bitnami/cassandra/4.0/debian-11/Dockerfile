@@ -5,7 +5,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.0.6-debian-11-r3" \
+      org.opencontainers.image.ref.name="4.0.6-debian-11-r4" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cassandra" \
       org.opencontainers.image.title="cassandra" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -45,13 +45,13 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f yq-4.27.3-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/yq-4.27.3-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/yq-4.27.3-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f yq-4.27.5-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/yq-4.27.5-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/yq-4.27.5-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c yq-4.27.3-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf yq-4.27.3-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf yq-4.27.3-0-linux-${OS_ARCH}-debian-11.tar.gz
+    sha256sum -c yq-4.27.5-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf yq-4.27.5-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf yq-4.27.5-0-linux-${OS_ARCH}-debian-11.tar.gz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f cassandra-4.0.6-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/cassandra-4.0.6-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
