@@ -267,13 +267,10 @@ repmgr_switchover_standby() {
 
     primary_host=""
     primary_port="${REPMGR_PORT_NUMBER}"
-
-info "Primary node is unavailable. Assuming primary role..."
-
+    
+    info "Primary node is unavailable. Assuming primary role..."
     touch "$REPMGR_PROMOTE_STANDBY_LOCK_FILE_NAME"
-
     debug "Marking node to be promoted from standby to primary by writing the following file: '$REPMGR_PROMOTE_STANDBY_LOCK_FILE_NAME' "
-
     [[ -n "$primary_host" ]] && debug "Primary node: '${primary_host}:${primary_port}'"
 
 }
