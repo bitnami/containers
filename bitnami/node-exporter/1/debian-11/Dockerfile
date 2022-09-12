@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.3.1-debian-11-r36" \
+      org.opencontainers.image.ref.name="1.3.1-debian-11-r37" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/node-exporter" \
       org.opencontainers.image.title="node-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     fi && \
     sha256sum -c node-exporter-1.3.1-154-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf node-exporter-1.3.1-154-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf node-exporter-1.3.1-154-linux-${OS_ARCH}-debian-11.tar.gz
+    rm -rf node-exporter-1.3.1-154-linux-${OS_ARCH}-debian-11.tar.gz node-exporter-1.3.1-154-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
