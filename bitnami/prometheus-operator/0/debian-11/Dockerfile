@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.59.0-debian-11-r3" \
+      org.opencontainers.image.ref.name="0.59.0-debian-11-r4" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/prometheus-operator" \
       org.opencontainers.image.title="prometheus-operator" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     fi && \
     sha256sum -c prometheus-operator-0.59.0-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf prometheus-operator-0.59.0-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf prometheus-operator-0.59.0-0-linux-${OS_ARCH}-debian-11.tar.gz
+    rm -rf prometheus-operator-0.59.0-0-linux-${OS_ARCH}-debian-11.tar.gz prometheus-operator-0.59.0-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
