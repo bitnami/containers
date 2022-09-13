@@ -15,9 +15,9 @@
     },
     "tensorflow-serving": {
         "arch": "amd64",
-        "digest": "5a3f6dd66582f622918b00078fa16f83b31ae8ad73472ffea1d8cba254d1db9a",
+        "digest": "90856c28be232bc9d02141fa69edacd5eb166871d30498ec80e3190e87698e57",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.9.1-3"
+        "version": "2.10.0-0"
     }
 }

@@ -5,11 +5,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.9.1-debian-11-r24" \
+      org.opencontainers.image.ref.name="2.10.0-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/tensorflow-serving" \
       org.opencontainers.image.title="tensorflow-serving" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.9.1"
+      org.opencontainers.image.version="2.10.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,13 +22,13 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gcc-10 gzip libc6 libgcc-s1 libstdc++6 procps tar
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f tensorflow-serving-2.9.1-3-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/tensorflow-serving-2.9.1-3-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/tensorflow-serving-2.9.1-3-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f tensorflow-serving-2.10.0-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/tensorflow-serving-2.10.0-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/tensorflow-serving-2.10.0-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c tensorflow-serving-2.9.1-3-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf tensorflow-serving-2.9.1-3-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf tensorflow-serving-2.9.1-3-linux-${OS_ARCH}-debian-11.tar.gz tensorflow-serving-2.9.1-3-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    sha256sum -c tensorflow-serving-2.10.0-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf tensorflow-serving-2.10.0-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf tensorflow-serving-2.10.0-0-linux-${OS_ARCH}-debian-11.tar.gz tensorflow-serving-2.10.0-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f render-template-1.0.3-153-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/render-template-1.0.3-153-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
@@ -52,7 +52,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/tensorflow-serving/postunpack.sh
-ENV APP_VERSION="2.9.1" \
+ENV APP_VERSION="2.10.0" \
     BITNAMI_APP_NAME="tensorflow-serving" \
     JAVA_HOME="/opt/bitnami/java"
 
