@@ -22,7 +22,6 @@ concurrency:
 jobs:
   # For any opened or reopened issue, should be sent into Triage
   send_to_board:
-    if: ${{ github.actor != 'bitnami-bot' }}
     runs-on: ubuntu-latest
     steps:
       - name: Repo checkout
@@ -34,6 +33,7 @@ jobs:
         with:
           path: .github/workflows/
       - name: Assign to a person to work on it
+        if: ${{ github.actor != 'bitnami-bot' }}
         uses: pozil/auto-assign-issue@v1.9.0
         with:
           numOfAssignee: 1
@@ -53,6 +53,6 @@ jobs:
         uses: andymckay/labeler@1.0.4
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          add-labels: ${{ (!contains(fromJson(env.BITNAMI_TEAM), github.actor)) && 'triage' || 'bitnami' }}
+          add-labels: ${{ github.actor == 'bitnami-bot' && 'auto-merge' || ((!contains(fromJson(env.BITNAMI_TEAM), github.actor)) && 'triage' || 'bitnami') }}
           # For reopened issues
           remove-labels: "solved"
