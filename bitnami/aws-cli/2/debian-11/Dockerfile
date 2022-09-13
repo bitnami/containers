@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.7.31-debian-11-r0" \
+      org.opencontainers.image.ref.name="2.7.31-debian-11-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/aws-cli" \
       org.opencontainers.image.title="aws-cli" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     fi && \
     sha256sum -c python-3.9.14-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf python-3.9.14-1-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf python-3.9.14-1-linux-${OS_ARCH}-debian-11.tar.gz
+    rm -rf python-3.9.14-1-linux-${OS_ARCH}-debian-11.tar.gz python-3.9.14-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f aws-cli-2.7.31-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/aws-cli-2.7.31-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
@@ -34,7 +34,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     fi && \
     sha256sum -c aws-cli-2.7.31-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf aws-cli-2.7.31-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf aws-cli-2.7.31-0-linux-${OS_ARCH}-debian-11.tar.gz
+    rm -rf aws-cli-2.7.31-0-linux-${OS_ARCH}-debian-11.tar.gz aws-cli-2.7.31-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
