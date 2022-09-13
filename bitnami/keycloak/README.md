@@ -77,9 +77,8 @@ $ docker build -t bitnami/APP:latest .
 
 The Bitnami Keycloak container can create a default admin user by setting the following environment variables:
 
-- `KEYCLOAK_CREATE_ADMIN_USER`: Create administrator user on boot. Default: **true**.
-- `KEYCLOAK_ADMIN_USER`: Administrator default user. Default: **user**.
-- `KEYCLOAK_ADMIN_PASSWORD`: Administrator default password. Default: **bitnami**.
+- `KEYCLOAK_ADMIN_USER`: Administrator default user. (e.g. `user`). No defaults.
+- `KEYCLOAK_ADMIN_PASSWORD`: Administrator default password. (e.g. `bitnami`). No defaults.
 - `KEYCLOAK_MANAGEMENT_USER`: WildFly default management user. Default: **manager**.
 - `KEYCLOAK_MANAGEMENT_PASSWORD`: WildFly default management password. Default: **bitnami1**.
 
