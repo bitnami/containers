@@ -310,8 +310,9 @@ is_kibana_ready() {
     # Therefore, we must check the value is not 'true'
     [[ ! "$rewriteBasePath" = "false" ]] && basePath=$(kibana_conf_get "server.basePath")
     if is_kibana_running; then
-        local -r state="$(yq eval ".status.overall.state" - <<<"$(curl -s "127.0.0.1:${KIBANA_PORT_NUMBER}${basePath:-}/api/status")")"
-        [[ "$state" = "green" ]]
+        # Kibana 7 expects .status.overall.state to be 'green', while 8 expects .status.overall.level to be 'available'
+        local -r status="$(yq eval '.status.overall | pick(["state", "level"]) | .[]' - <<<"$(curl -s "127.0.0.1:${KIBANA_PORT_NUMBER}${basePath:-}/api/status")")"
+        [[ "$status" = "green" || "$status" = "available" ]] && return
     else
         false
     fi
