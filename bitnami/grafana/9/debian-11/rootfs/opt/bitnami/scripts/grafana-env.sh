@@ -22,6 +22,8 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 grafana_env_vars=(
+    GRAFANA_TMP_DIR
+    GRAFANA_PID_FILE
     GRAFANA_DEFAULT_PLUGINS_DIR
     GF_PATHS_HOME
     GF_PATHS_CONFIG
@@ -31,6 +33,10 @@ grafana_env_vars=(
     GF_PATHS_PROVISIONING
     GF_INSTALL_PLUGINS
     GF_INSTALL_PLUGINS_SKIP_TLS
+    GF_FEATURE_TOGGLES
+    GRAFANA_MIGRATION_LOCK
+    GRAFANA_SLEEP_TIME
+    GRAFANA_RETRY_ATTEMPTS
     GRAFANA_PLUGINS
 )
 for env_var in "${grafana_env_vars[@]}"; do
@@ -49,6 +55,8 @@ unset grafana_env_vars
 # Grafana paths
 export GRAFANA_BASE_DIR="${BITNAMI_ROOT_DIR}/grafana"
 export GRAFANA_BIN_DIR="${GRAFANA_BASE_DIR}/bin"
+export GRAFANA_TMP_DIR="${GRAFANA_TMP_DIR:-${GRAFANA_BASE_DIR}/tmp}"
+export GRAFANA_PID_FILE="${GRAFANA_PID_FILE:-${GRAFANA_TMP_DIR}/grafana.pid}"
 export PATH="${GRAFANA_BIN_DIR}:${BITNAMI_ROOT_DIR}/common/bin:${PATH}"
 export GRAFANA_DEFAULT_PLUGINS_DIR="${GRAFANA_DEFAULT_PLUGINS_DIR:-${GRAFANA_BASE_DIR}/default-plugins}"
 
@@ -66,6 +74,10 @@ export GF_PATHS_PROVISIONING="${GF_PATHS_PROVISIONING:-${GRAFANA_BASE_DIR}/conf/
 GF_INSTALL_PLUGINS="${GF_INSTALL_PLUGINS:-"${GRAFANA_PLUGINS:-}"}"
 export GF_INSTALL_PLUGINS="${GF_INSTALL_PLUGINS:-}"
 export GF_INSTALL_PLUGINS_SKIP_TLS="${GF_INSTALL_PLUGINS_SKIP_TLS:-yes}"
+export GF_FEATURE_TOGGLES="${GF_FEATURE_TOGGLES:-}"
+export GRAFANA_MIGRATION_LOCK="${GRAFANA_MIGRATION_LOCK:-false}"
+export GRAFANA_SLEEP_TIME="${GRAFANA_SLEEP_TIME:-10}"
+export GRAFANA_RETRY_ATTEMPTS="${GRAFANA_RETRY_ATTEMPTS:-12}"
 
 # Grafana Operator configuration
 export GF_OP_PATHS_CONFIG="/etc/grafana/grafana.ini"
