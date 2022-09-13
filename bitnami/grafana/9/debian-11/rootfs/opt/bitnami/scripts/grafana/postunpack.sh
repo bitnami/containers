@@ -29,6 +29,9 @@ for dir in "$(grafana_env_var_value PATHS_DATA)" "$(grafana_env_var_value PATHS_
     configure_permissions_ownership "$dir" -d "775" -f "664" -u "$GRAFANA_DAEMON_USER" -g "root"
 done
 
+# Use grafana:root ownership for compatibility when running as a non-root user
+configure_permissions_ownership "$(grafana_env_var_value PATHS_CONFIG)" -f "664" -u "$GRAFANA_DAEMON_USER" -g "root"
+
 # Ensure permissions to parent directories of configs
 # Used when replacing configs with symlinks for grafana-operator compatibility
 for dir in "$(grafana_env_var_value PATHS_CONFIG)" "$(grafana_env_var_value PATHS_DATA)" "$(grafana_env_var_value PATHS_LOGS)" "$(grafana_env_var_value PATHS_PROVISIONING)"; do
