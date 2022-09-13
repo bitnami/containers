@@ -230,11 +230,11 @@ owncloud_initialize() {
     am_i_root && configure_permissions_ownership "${OWNCLOUD_BASE_DIR}/.htaccess" -f "440"
 
     # Configure PHP options provided via envvars in .user.ini (which overrides configuration in php.ini)
-    configure_permissions_ownership "${OWNCLOUD_BASE_DIR}/.user.ini" -f "660"
+    am_i_root && configure_permissions_ownership "${OWNCLOUD_BASE_DIR}/.user.ini" -f "660"
     php_set_runtime_config "${OWNCLOUD_BASE_DIR}/.user.ini"
     # Ensure that the .user.ini files cannot be written to by the web server user
     # This file allows for PHP-FPM to set application-specific PHP settings, and could be a security risk if left writable
-    configure_permissions_ownership "${OWNCLOUD_BASE_DIR}/.user.ini" -f "440"
+    am_i_root && configure_permissions_ownership "${OWNCLOUD_BASE_DIR}/.user.ini" -f "440"
 
     # Ensure ownCloud cron jobs are created when running setup with a root user
     # https://doc.owncloud.com/server/admin_manual/configuration/server/background_jobs_configuration.html#cron
