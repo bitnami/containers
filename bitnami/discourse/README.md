@@ -285,8 +285,8 @@ Available environment variables:
 ##### User and Site configuration
 
 - `DISCOURSE_ENABLE_HTTPS`: Whether to use HTTPS by default. Default: **no**
-- `DISCOURSE_EXTERNAL_HTTP_PORT_NUMBER`: Port to used by WordPress to generate URLs and links when accessing using HTTP. Will be ignored if multisite mode is not enabled. Default **80**
-- `DISCOURSE_EXTERNAL_HTTPS_PORT_NUMBER`: Port to used by WordPress to generate URLs and links when accessing using HTTPS. Will be ignored if multisite mode is not enabled. Default **443**
+- `DISCOURSE_EXTERNAL_HTTP_PORT_NUMBER`: Port to used by Discourse to generate URLs and links when accessing using HTTP. Will be ignored if multisite mode is not enabled. Default **80**
+- `DISCOURSE_EXTERNAL_HTTPS_PORT_NUMBER`: Port to used by Discourse to generate URLs and links when accessing using HTTPS. Will be ignored if multisite mode is not enabled. Default **443**
 - `DISCOURSE_USERNAME`: Discourse application username. Default: **user**
 - `DISCOURSE_PASSWORD`: Discourse application password. Default: **bitnami123**
 - `DISCOURSE_EMAIL`: Discourse application email. Default: **user@example.com**
