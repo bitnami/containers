@@ -3,7 +3,8 @@ on:
   project_card:
     types:
       - moved
-
+permissions:
+  issues: read 
 jobs:
   debugJob:    
     name: Print event
@@ -14,13 +15,16 @@ jobs:
         GITHUB_CONTEXT: ${{ toJson(github) }}
       run: |
         echo "$GITHUB_CONTEXT"
-    - name: Get Issue
-      id: getissue
-      uses: actions-cool/issues-helper@v3
-      with:
-        actions: get-issue
+    - name: Get issue info
+        id: get-issue
+        run: |
+          issue_info=$(curl -s --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -X GET -G ${{ github.project_card.content_url }})
+          assignees=$(echo $issue_info | jq -r '.assignees')
+          creator=$(echo $issue_info | jq -r '.user.login')
+          echo "::set-output name=assignees::${assignees}"
+          echo "::set-output name=creator::${creator}"
     - name: Dump getissue outputs
       env:
-        ISSUE_OUTPUTS: ${{ toJson(steps.getissue.outputs) }}
+        ISSUE_OUTPUTS: ${{ toJson(steps.get-issue.outputs) }}
       run: |
         echo "$ISSUE_OUTPUTS"
