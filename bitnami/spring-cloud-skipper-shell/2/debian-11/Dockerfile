@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.8.5-debian-11-r10" \
+      org.opencontainers.image.ref.name="2.8.6-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/spring-cloud-skipper-shell" \
       org.opencontainers.image.title="spring-cloud-skipper-shell" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.8.5"
+      org.opencontainers.image.version="2.8.6"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,13 +28,13 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf java-1.8.345-2-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf java-1.8.345-2-linux-${OS_ARCH}-debian-11.tar.gz java-1.8.345-2-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f spring-cloud-skipper-shell-2.8.5-1-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/spring-cloud-skipper-shell-2.8.5-1-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/spring-cloud-skipper-shell-2.8.5-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f spring-cloud-skipper-shell-2.8.6-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/spring-cloud-skipper-shell-2.8.6-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/spring-cloud-skipper-shell-2.8.6-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c spring-cloud-skipper-shell-2.8.5-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf spring-cloud-skipper-shell-2.8.5-1-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf spring-cloud-skipper-shell-2.8.5-1-linux-${OS_ARCH}-debian-11.tar.gz spring-cloud-skipper-shell-2.8.5-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    sha256sum -c spring-cloud-skipper-shell-2.8.6-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf spring-cloud-skipper-shell-2.8.6-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf spring-cloud-skipper-shell-2.8.6-0-linux-${OS_ARCH}-debian-11.tar.gz spring-cloud-skipper-shell-2.8.6-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -46,7 +46,7 @@ RUN touch /opt/bitnami/spring-cloud-skipper-shell/spring-cloud-skipper-shell.log
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
-ENV APP_VERSION="2.8.5" \
+ENV APP_VERSION="2.8.6" \
     BITNAMI_APP_NAME="spring-cloud-skipper-shell" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
