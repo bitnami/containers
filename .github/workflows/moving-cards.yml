@@ -18,6 +18,7 @@ jobs:
     outputs:
       assignees: ${{ steps.get-issue-step.outputs.assignees }}
       creator: ${{ steps.get-issue-step.outputs.creator }}
+      type: ${{ steps.get-issue-step.outputs.type }}
     steps:
       - name: Get issue info
         id: get-issue-step
@@ -25,8 +26,14 @@ jobs:
           issue_info=$(curl -s --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -X GET -G ${{ github.event.project_card.content_url }})
           assignees="$(echo $issue_info | jq -r '.assignees')"
           creator="$(echo $issue_info | jq -r '.user.login')"
+          pull_request="$(echo $issue_info | jq -r '.pull_request' | )"
+          type="pull_request"
+          if [[ "${pull_request}" == "null" ]]; then
+            type="issue"
+          fi
           echo "::set-output name=assignees::${assignees}"
           echo "::set-output name=creator::${creator}"
+          echo "::set-output name=type::${type}"
   label-card:
     runs-on: ubuntu-latest
     needs:
@@ -46,11 +53,13 @@ jobs:
         if: ${{ github.event.project_card.column_id == env.TRIAGE_COLUMN_ID }}
         uses: andymckay/labeler@1.0.4
         with:
-          add-labels: ${{ needs.get-issue.outputs.creator == 'bitnami-bot' && 'auto-merge' || 'triage' }}
+          add-labels: ${{ (needs.get-issue.outputs.creator == 'bitnami-bot' && needs.get-issue.outputs.type != 'issue') && 'auto-merge' || 'triage' }}
           remove-labels: "on-hold, in-progress, solved"
       - name: Triage labeling - verify
-        # Only if moved into triage and the creator is bitnami-bot
-        if: ${{ github.event.project_card.column_id == env.TRIAGE_COLUMN_ID && needs.get-issue.outputs.creator == 'bitnami-bot' }}
+        # Only if moved into triage, the creator is bitnami-bot and it is a PR
+        if: |
+          github.event.project_card.column_id == env.TRIAGE_COLUMN_ID &&
+          needs.get-issue.outputs.creator == 'bitnami-bot' && needs.get-issue.outputs.type != 'issue'
         uses: andymckay/labeler@1.0.4
         with:
           add-labels: verify
