@@ -44,7 +44,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`19`, `19-debian-11`, `19.0.1`, `19.0.1-debian-11-r2`, `latest` (19/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/keycloak/19/debian-11/Dockerfile)
+* [`19`, `19-debian-11`, `19.0.2`, `19.0.2-debian-11-r0`, `latest` (19/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/keycloak/19/debian-11/Dockerfile)
 * [`18`, `18-debian-11`, `18.0.2`, `18.0.2-debian-11-r28` (18/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/keycloak/18/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
@@ -213,6 +213,10 @@ After that, your changes will be taken into account in the server's behaviour.
 
 Keycloak 17 is powered by Quarkus and to deploy it in production mode it is necessary to set up TLS.
 To do this you need to set `KEYCLOAK_PRODUCTION` to **true** and configure TLS
+
+## Branch Deprecation Notice
+
+Keycloak's branch 18 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 10-12-2022
 
 ## Contributing
 
