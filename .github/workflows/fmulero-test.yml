@@ -1,0 +1,16 @@
+name: '[FMULERO] Cards movements test'
+on:
+  project_card:
+    types:
+      - moved
+
+jobs:
+  printJob:    
+    name: Print event
+    runs-on: ubuntu-latest
+    steps:
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: |
+        echo "$GITHUB_CONTEXT"
