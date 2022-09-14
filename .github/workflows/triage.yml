@@ -9,10 +9,6 @@ on:
     types:
       - reopened
       - opened
-permissions:
-  repository-projects: write
-  issues: write
-  pull-requests: write
 jobs:
   # For any opened or reopened issue, should be sent into Triage
   send_to_board:
@@ -26,14 +22,6 @@ jobs:
         uses: xom9ikk/dotenv@v1.0.2
         with:
           path: .github/workflows/
-      - name: Assign to a person to work on it
-        if: ${{ github.actor != 'bitnami-bot' }}
-        uses: pozil/auto-assign-issue@v1.9.0
-        with:
-          numOfAssignee: 1
-          removePreviousAssignees: false
-          teams: ${{ env.TRIAGE_TEAM_NAME }}
-          repo-token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
       - name: Send to the board
         uses: peter-evans/create-or-update-project-card@v2
         with:
@@ -43,19 +31,3 @@ jobs:
           column-name: ${{ (github.actor == 'bitnami-bot' || (!contains(fromJson(env.BITNAMI_TEAM), github.actor))) && 'Triage' || 'From Bitnami' }}
           token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
           issue-number: ${{ github.event_name != 'issues' && github.event.number || github.event.issue.number }}
-      - name: Triage labeling
-        # Only if moved into Solved
-        uses: andymckay/labeler@1.0.4
-        with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          add-labels: ${{ github.actor == 'bitnami-bot' && 'auto-merge' || ((!contains(fromJson(env.BITNAMI_TEAM), github.actor)) && 'triage' || 'bitnami') }}
-          # For reopened issues
-          remove-labels: "solved"
-      - name: Verify labeling
-        # Only if the actor is bitnami-bot
-        if: ${{ github.actor == 'bitnami-bot' }}
-        uses: andymckay/labeler@1.0.4
-        with:
-          # BITNAMI_BOT required to trigger CI workflows
-          repo-token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
-          add-labels: verify

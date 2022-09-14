@@ -3,6 +3,7 @@ name: '[Support] Cards movements'
 on:
   project_card:
     types:
+      - created
       - moved
 
 permissions:
@@ -42,20 +43,26 @@ jobs:
       # Now handling the needed labeling
       - name: Triage labeling
         # Only if moved into triage
-        if: ${{ github.event.project_card.column_id == env.TRIAGE_COLUMN_ID  }}
+        if: ${{ github.event.project_card.column_id == env.TRIAGE_COLUMN_ID }}
         uses: andymckay/labeler@1.0.4
         with:
-          add-labels: "triage"
+          add-labels: ${{ needs.get-issue.outputs.creator == 'bitnami-bot' && 'auto-merge' || 'triage' }}
           remove-labels: "on-hold, in-progress, solved"
+      - name: Triage labeling - verify
+        # Only if moved into triage and the creator is bitnami-bot
+        if: ${{ github.event.project_card.column_id == env.TRIAGE_COLUMN_ID && needs.get-issue.outputs.creator == 'bitnami-bot' }}
+        uses: andymckay/labeler@1.0.4
+        with:
+          add-labels: verify
+          # Required to trigger CI workflow
+          repo-token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
       - name: From Bitnami labeling
         # NOTE: This step has to be modified when a new column for automated PR is added
-        if: |
-          github.event.project_card.column_id == env.BITNAMI_COLUMN_ID &&
-          (needs.get-issue.outputs.creator == 'bitnami-bot')
+        if: ${{ github.event.project_card.column_id == env.BITNAMI_COLUMN_ID }}
         uses: andymckay/labeler@1.0.4
         with:
-          add-labels: "review-required"
-          remove-labels: "auto-merge"
+          add-labels: ${{ needs.get-issue.outputs.creator == 'bitnami-bot' && 'review-required' || 'bitnami' }}
+          remove-labels: ${{ needs.get-issue.outputs.creator == 'bitnami-bot' && 'auto-merge' || 'on-hold, in-progress, solved' }}
       - name: On hold labeling
         # Only if moved into on hold
         if: ${{ github.event.project_card.column_id == env.ON_HOLD_COLUMN_ID  }}
@@ -83,6 +90,7 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - get-issue
+    if: ${{ needs.get-issue.outputs.creator != 'bitnami-bot' }}
     steps:
       - name: Repo checkout
         uses: actions/checkout@v3
@@ -92,11 +100,20 @@ jobs:
         uses: xom9ikk/dotenv@v1.0.2
         with:
           path: .github/workflows/
+      # NOTE: The assignment rules has to be changed when the new column for automated PR is added
       - name: Assign to a person to work on it
-        # Only if nobody is assigned or moved into In progress FROM Triage
+        # Assign when there is nobody assigned or the card is new
+        if: ${{ needs.get-issue.outputs.assignees == '[]' || github.event.action == 'created' }}
+        uses: pozil/auto-assign-issue@v1.9.0
+        with:
+          numOfAssignee: 1
+          teams: ${{ github.event.project_card.column_id == env.BITNAMI_COLUMN_ID && env.SUPPORT_TEAM_NAME || env.TRIAGE_TEAM_NAME }}
+          repo-token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
+      - name: Reassign when moved into 'In progress' from 'Triage'
+        # Reassigned when moved into In progress FROM Triage
         if: |
-          needs.get-issue.outputs.assignees == '[]' ||
-          github.event.project_card.column_id == env.IN_PROGRESS_COLUMN_ID && github.event.changes != null && github.event.changes.column_id &&
+          github.event.action == 'moved' && needs.get-issue.outputs.assignees != '[]' &&
+          github.event.project_card.column_id == env.IN_PROGRESS_COLUMN_ID &&
           github.event.changes.column_id.from == env.TRIAGE_COLUMN_ID
         uses: pozil/auto-assign-issue@v1.9.0
         with:
@@ -104,4 +121,3 @@ jobs:
           removePreviousAssignees: true
           teams: ${{ env.SUPPORT_TEAM_NAME }}
           repo-token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
-        # NOTE: New assignment rule has to be added when the new column for automated PR is added
