@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.4.11-debian-11-r4" \
+      org.opencontainers.image.ref.name="2.4.11-debian-11-r5" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/argo-cd" \
       org.opencontainers.image.title="argo-cd" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     fi && \
     sha256sum -c kustomize-4.5.7-2-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf kustomize-4.5.7-2-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf kustomize-4.5.7-2-linux-${OS_ARCH}-debian-11.tar.gz
+    rm -rf kustomize-4.5.7-2-linux-${OS_ARCH}-debian-11.tar.gz kustomize-4.5.7-2-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f ksonnet-0.13.1-153-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/ksonnet-0.13.1-153-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
@@ -34,7 +34,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     fi && \
     sha256sum -c ksonnet-0.13.1-153-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf ksonnet-0.13.1-153-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf ksonnet-0.13.1-153-linux-${OS_ARCH}-debian-11.tar.gz
+    rm -rf ksonnet-0.13.1-153-linux-${OS_ARCH}-debian-11.tar.gz ksonnet-0.13.1-153-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f helm-3.9.4-1-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/helm-3.9.4-1-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
@@ -42,7 +42,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     fi && \
     sha256sum -c helm-3.9.4-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf helm-3.9.4-1-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf helm-3.9.4-1-linux-${OS_ARCH}-debian-11.tar.gz
+    rm -rf helm-3.9.4-1-linux-${OS_ARCH}-debian-11.tar.gz helm-3.9.4-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
@@ -50,7 +50,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     fi && \
     sha256sum -c gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz
+    rm -rf gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f argo-cd-2.4.11-1-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/argo-cd-2.4.11-1-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
@@ -58,7 +58,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     fi && \
     sha256sum -c argo-cd-2.4.11-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf argo-cd-2.4.11-1-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf argo-cd-2.4.11-1-linux-${OS_ARCH}-debian-11.tar.gz
+    rm -rf argo-cd-2.4.11-1-linux-${OS_ARCH}-debian-11.tar.gz argo-cd-2.4.11-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
