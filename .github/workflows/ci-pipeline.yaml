@@ -2,7 +2,6 @@ name: '[CI/CD] CI Pipeline'
 on: # rebuild any PRs and main branch changes
   pull_request_target:
     types:
-      - opened
       - synchronize
       - labeled
     branches:
@@ -16,26 +15,13 @@ env:
   CSP_API_TOKEN: ${{ secrets.CSP_API_TOKEN }}
   VIB_PUBLIC_URL: https://cp.bromelia.vmware.com
 jobs:
-  auto-pr-triage:
-    runs-on: ubuntu-latest
-    name: Triage for automated PRs
-    if: |
-      contains(github.event.pull_request.title, 'Release') &&
-      github.actor == 'bitnami-bot'
-    steps:
-      # Enables auto-merge and adds necessary labels for automated releases' PRs
-      - id: labeling
-        name: Label PR
-        uses: andymckay/labeler@1.0.4
-        with:
-          add-labels: "verify, auto-merge"
   get-containers:
     runs-on: ubuntu-latest
     name: Get modified containers
     if: |
       github.event.pull_request.state != 'closed' &&
       (
-        (contains(github.event.pull_request.title, 'Release') && github.actor == 'bitnami-bot') ||
+        github.event.pull_request.user.login == 'bitnami-bot' ||
         (
           (github.event.action == 'labeled' && github.event.label.name == 'verify') ||
           (github.event.action != 'labeled' && contains(github.event.pull_request.labels.*.name, 'verify'))
@@ -95,7 +81,7 @@ jobs:
           if [[ -d "${{ matrix.container }}" ]]; then
             name="$(echo "${{ matrix.container }}" | awk -F '/' '{print $2}')"
             tag=""
-            if [[ "${{ github.actor }}" == "bitnami-bot" ]]; then
+            if [[ "${{ github.event.pull_request.user.login }}" == "bitnami-bot" ]]; then
               tag="$(grep -oE "org.opencontainers.image.ref.name=\".+\"" ${{ matrix.container }}/Dockerfile | sed -nr "s|org.opencontainers.image.ref.name=\"(.+)\"|\1|p")"
             else
               # Build a tag based on current RUN number
@@ -158,8 +144,7 @@ jobs:
     needs: verification-summary
     if: |
       always() &&
-      contains(github.event.pull_request.title, 'Release') &&
-      github.actor == 'bitnami-bot'
+      github.event.pull_request.user.login == 'bitnami-bot'
     steps:
       - name: Enable auto-merge feature
         if: ${{ needs.verification-summary.result == 'success' }}
@@ -178,21 +163,8 @@ jobs:
         uses: peter-evans/create-or-update-comment@v2.0.0
         with:
           issue-number: ${{ github.event.number }}
+          # Necessary to trigger support workflows
+          token: ${{ secrets.BITNAMI_BOT_TOKEN }}
           body: |
             There has been an error during the automated release process. Manual revision is now required.
             Please check the related [action_run#${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for more information.
-      - name: Remove Automerge label
-        if: ${{ needs.verification-summary.result != 'success' }}
-        uses: andymckay/labeler@1.0.4
-        with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          remove-labels: auto-merge
-      - name: Send to the board
-        if: ${{ needs.verification-summary.result != 'success' }}
-        uses: peter-evans/create-or-update-project-card@v2
-        with:
-          project-name: Support
-          # If the author comes from Bitnami, send it to Bitnami. Otherwise, all to Triage
-          column-name: From Bitnami
-          token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
-          issue-number: ${{ github.event.number }}

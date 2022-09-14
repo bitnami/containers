@@ -13,7 +13,6 @@ permissions:
   repository-projects: write
   issues: write
   pull-requests: write
-
 jobs:
   # For any opened or reopened issue, should be sent into Triage
   send_to_board:
@@ -40,7 +39,8 @@ jobs:
         with:
           project-name: Support
           # If the author comes from Bitnami, send it to Bitnami. Otherwise, all to Triage
-          column-name: ${{ (contains(fromJson(env.BITNAMI_TEAM), github.actor)) && 'From Bitnami' || 'Triage' }}
+          # NOTE: This step has to be modified when the new column for automated PR is added
+          column-name: ${{ (github.actor == 'bitnami-bot' || (!contains(fromJson(env.BITNAMI_TEAM), github.actor))) && 'Triage' || 'From Bitnami' }}
           token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
           issue-number: ${{ github.event_name != 'issues' && github.event.number || github.event.issue.number }}
       - name: Triage labeling
@@ -51,3 +51,11 @@ jobs:
           add-labels: ${{ github.actor == 'bitnami-bot' && 'auto-merge' || ((!contains(fromJson(env.BITNAMI_TEAM), github.actor)) && 'triage' || 'bitnami') }}
           # For reopened issues
           remove-labels: "solved"
+      - name: Verify labeling
+        # Only if the actor is bitnami-bot
+        if: ${{ github.actor == 'bitnami-bot' }}
+        uses: andymckay/labeler@1.0.4
+        with:
+          # BITNAMI_BOT required to trigger CI workflows
+          repo-token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
+          add-labels: verify

@@ -47,6 +47,15 @@ jobs:
         with:
           add-labels: "triage"
           remove-labels: "on-hold, in-progress, solved"
+      - name: From Bitnami labeling
+        # NOTE: This step has to be modified when a new column for automated PR is added
+        if: |
+          github.event.project_card.column_id == env.BITNAMI_COLUMN_ID &&
+          (needs.get-issue.outputs.creator == 'bitnami-bot')
+        uses: andymckay/labeler@1.0.4
+        with:
+          add-labels: "review-required"
+          remove-labels: "auto-merge"
       - name: On hold labeling
         # Only if moved into on hold
         if: ${{ github.event.project_card.column_id == env.ON_HOLD_COLUMN_ID  }}
@@ -95,3 +104,4 @@ jobs:
           removePreviousAssignees: true
           teams: ${{ env.SUPPORT_TEAM_NAME }}
           repo-token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
+        # NOTE: New assignment rule has to be added when the new column for automated PR is added
