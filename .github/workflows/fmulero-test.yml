@@ -1,11 +1,11 @@
-name: '[FMULERO] Cards movements test'
+name: '[Support] Debug events'
 on:
   project_card:
     types:
       - moved
 
 jobs:
-  printJob:    
+  debugJob:    
     name: Print event
     runs-on: ubuntu-latest
     steps:
@@ -14,3 +14,13 @@ jobs:
         GITHUB_CONTEXT: ${{ toJson(github) }}
       run: |
         echo "$GITHUB_CONTEXT"
+    - name: Get Issue
+      id: getissue
+      uses: actions-cool/issues-helper@v3
+      with:
+        actions: get-issue
+    - name: Dump getissue outputs
+      env:
+        ISSUE_OUTPUTS: ${{ toJson(steps.getissue.outputs) }}
+      run: |
+        echo "$ISSUE_OUTPUTS"
