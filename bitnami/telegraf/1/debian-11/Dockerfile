@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.23.4-debian-11-r8" \
+      org.opencontainers.image.ref.name="1.23.4-debian-11-r9" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/telegraf" \
       org.opencontainers.image.title="telegraf" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     fi && \
     sha256sum -c telegraf-1.23.4-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf telegraf-1.23.4-1-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf telegraf-1.23.4-1-linux-${OS_ARCH}-debian-11.tar.gz
+    rm -rf telegraf-1.23.4-1-linux-${OS_ARCH}-debian-11.tar.gz telegraf-1.23.4-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
