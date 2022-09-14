@@ -18,7 +18,7 @@ jobs:
     - name: Get issue info
       id: get-issue
       run: |
-        issue_info=$(curl -s --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -X GET -G ${{ github.project_card.content_url }})
+        issue_info=$(curl -s --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -X GET -G ${{ github.event.project_card.content_url }})
         assignees=$(echo $issue_info | jq -r '.assignees')
         creator=$(echo $issue_info | jq -r '.user.login')
         echo "::set-output name=assignees::${assignees}"
