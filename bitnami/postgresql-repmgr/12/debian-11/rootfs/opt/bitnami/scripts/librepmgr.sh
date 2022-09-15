@@ -868,7 +868,7 @@ repmgr_initialize() {
             repmgr_upgrade_extension
         else
             debug "Skipping repmgr configuration..."
-            debug "Checking if node is marked for promotion "
+            debug "Checking if node is marked for promotion"
             if [[ ! -f "$REPMGR_PRIMARY_ROLE_LOCK_FILE_NAME" && -f "$REPMGR_PROMOTE_STANDBY_LOCK_FILE_NAME"  ]] ; then
                 info "Promoting old Standby to Primary"
                 postgresql_start_bg
