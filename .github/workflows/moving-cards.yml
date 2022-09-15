@@ -53,7 +53,7 @@ jobs:
         if: ${{ github.event.project_card.column_id == env.TRIAGE_COLUMN_ID }}
         uses: andymckay/labeler@1.0.4
         with:
-          add-labels: ${{ (needs.get-issue.outputs.creator == 'bitnami-bot' && needs.get-issue.outputs.type != 'issue') && 'auto-merge' || 'triage' }}
+          add-labels: ${{ (needs.get-issue.outputs.creator == 'bitnami-bot' && needs.get-issue.outputs.type != 'issue') && 'automated, auto-merge' || 'triage' }}
           remove-labels: "on-hold, in-progress, solved"
       - name: Triage labeling - verify
         # Only if moved into triage, the creator is bitnami-bot and it is a PR

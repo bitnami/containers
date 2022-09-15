@@ -21,11 +21,8 @@ jobs:
     if: |
       github.event.pull_request.state != 'closed' &&
       (
-        github.event.pull_request.user.login == 'bitnami-bot' ||
-        (
-          (github.event.action == 'labeled' && github.event.label.name == 'verify') ||
-          (github.event.action != 'labeled' && contains(github.event.pull_request.labels.*.name, 'verify'))
-        )
+        (github.event.action == 'labeled' && github.event.label.name == 'verify') ||
+        (github.event.action != 'labeled' && contains(github.event.pull_request.labels.*.name, 'verify'))
       )
     outputs:
       result: ${{ steps.get-containers.outputs.result }}
