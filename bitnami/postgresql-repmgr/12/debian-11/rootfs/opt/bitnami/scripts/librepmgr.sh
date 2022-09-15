@@ -263,8 +263,6 @@ repmgr_get_primary_node() {
 #########################
 
 repmgr_switchover_standby() {
-    local -i timeout="${REPMGR_WAIT_PRIMARY_TIME:-60}"
-
     primary_host=""
     primary_port="${REPMGR_PORT_NUMBER}"
     
