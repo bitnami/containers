@@ -12,7 +12,6 @@ set -o pipefail
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libos.sh
 
-
 # Load solr environment variables
 . /opt/bitnami/scripts/solr-env.sh
 
