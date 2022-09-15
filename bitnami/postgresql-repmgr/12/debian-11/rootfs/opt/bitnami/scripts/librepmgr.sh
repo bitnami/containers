@@ -619,8 +619,8 @@ repmgr_wait_primary_node() {
     for ((i = 0; i <= timeout; i += step)); do
 
         if [[ -z "$REPMGR_CURRENT_PRIMARY_HOST" ]] ; then
-          # because primary could be down while standby turn on, so the primary host could not be get from upstream at that momement
-          # asking on each step help to give the primary the opportunity to come back
+           # The primary node may not be available at the time the standby node turns on
+           # Asking partner nodes who the primary node is to give it an opportunity to come back
           debug "Getting new primary from upstream"
 
           readarray -t upstream_node < <(repmgr_get_upstream_node)
