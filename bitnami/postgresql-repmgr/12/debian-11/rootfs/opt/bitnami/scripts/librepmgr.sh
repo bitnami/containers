@@ -222,23 +222,16 @@ repmgr_get_primary_node() {
         fi
     else
         if [[ -z "$upstream_host" ]]; then
-
             info "No upstream detected: primary_host: '${REPMGR_PRIMARY_HOST}:${REPMGR_PRIMARY_PORT}'"
             info "No upstream detected: node_network: '${REPMGR_NODE_NETWORK_NAME}:${REPMGR_PORT_NUMBER}'"
-
             if [[ "${REPMGR_PRIMARY_HOST}:${REPMGR_PRIMARY_PORT}" != "${REPMGR_NODE_NETWORK_NAME}:${REPMGR_PORT_NUMBER}" ]]; then
-
                 debug "Primary hosts differences"
-
                 primary_host="$REPMGR_PRIMARY_HOST"
                 primary_port="$REPMGR_PRIMARY_PORT"
             fi
-
             repmgr_wait_primary_node || repmgr_switchover_standby
-
         else
             info "Upstream detected: primary_host: '${upstream_host}:${upstream_port}'"
-
             primary_host="$upstream_host"
             primary_port="$upstream_port"
         fi
@@ -873,7 +866,7 @@ repmgr_initialize() {
             repmgr_upgrade_extension
         else
             debug "Skipping repmgr configuration..."
-            debug "Checking if node is marked for promotion "
+            debug "Checking if node is marked for promotion"
             if [[ ! -f "$REPMGR_PRIMARY_ROLE_LOCK_FILE_NAME" && -f "$REPMGR_PROMOTE_STANDBY_LOCK_FILE_NAME"  ]] ; then
                 info "Promoting old Standby to Primary"
                 postgresql_start_bg
