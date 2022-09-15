@@ -46,7 +46,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3.5`, `3.5-debian-11`, `3.5.4`, `3.5.4-debian-11-r36`, `latest` (3.5/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/etcd/3.5/debian-11/Dockerfile)
-* [`3.4`, `3.4-debian-11`, `3.4.20`, `3.4.20-debian-11-r13` (3.4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/etcd/3.4/debian-11/Dockerfile)
+* [`3.4`, `3.4-debian-11`, `3.4.21`, `3.4.21-debian-11-r0` (3.4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/etcd/3.4/debian-11/Dockerfile)
 * [`3.3`, `3.3-debian-11`, `3.3.27`, `3.3.27-debian-11-r37` (3.3/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/etcd/3.3/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
