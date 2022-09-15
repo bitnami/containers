@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="7.8.2-debian-11-r18" \
+      org.opencontainers.image.ref.name="7.8.2-debian-11-r19" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/concourse" \
       org.opencontainers.image.title="concourse" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -25,7 +25,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     fi && \
     sha256sum -c concourse-7.8.2-2-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf concourse-7.8.2-2-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf concourse-7.8.2-2-linux-${OS_ARCH}-debian-11.tar.gz
+    rm -rf concourse-7.8.2-2-linux-${OS_ARCH}-debian-11.tar.gz concourse-7.8.2-2-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN apt-get update && apt-get upgrade -y && \
     rm -r /var/lib/apt/lists /var/cache/apt/archives
 RUN touch /.flyrc && chmod g+rwX /.flyrc

@@ -22,9 +22,9 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "5f945eb2ef6d119784a1e56182df4fbe2494fcd27f7d12e982191425b64a3fdc",
+        "digest": "db663172870944bd72ee6d6321a92ec3252402ca8d8b6fa89b65840957e86e9d",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.23-1"
+        "version": "8.0.23-2"
     }
 }

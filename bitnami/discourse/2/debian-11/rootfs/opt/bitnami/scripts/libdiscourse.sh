@@ -88,7 +88,7 @@ discourse_validate() {
     ! is_empty_value "$DISCOURSE_DATABASE_PORT_NUMBER" && check_valid_port "DISCOURSE_DATABASE_PORT_NUMBER"
     ! is_empty_value "$DISCOURSE_REDIS_HOST" && check_resolved_hostname "$DISCOURSE_REDIS_HOST"
     ! is_empty_value "$DISCOURSE_REDIS_PORT_NUMBER" && check_valid_port "DISCOURSE_REDIS_PORT_NUMBER"
-    ! is_empty_value "$DISCOURSE_REDIS_USE_SSL" && check_yes_no_value "$DISCOURSE_REDIS_USE_SSL"
+    ! is_empty_value "$DISCOURSE_REDIS_USE_SSL" && check_yes_no_value "DISCOURSE_REDIS_USE_SSL"
     if ! is_file_writable "$DISCOURSE_CONF_FILE"; then
         warn "The Discourse configuration file ${DISCOURSE_CONF_FILE} is not writable. Configurations specified via environment variables will not be applied to this file."
         is_boolean_yes "$DISCOURSE_ENABLE_CONF_PERSISTENCE" && warn "The DISCOURSE_ENABLE_CONF_PERSISTENCE configuration is enabled but the ${DISCOURSE_CONF_FILE} file is not writable. The file will not be persisted."

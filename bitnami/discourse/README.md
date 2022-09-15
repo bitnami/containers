@@ -31,7 +31,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-- [`2`, `2-debian-11`, `2.8.8`, `2.8.8-debian-11-r11`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/discourse/2/debian-11/Dockerfile)
+- [`2`, `2-debian-11`, `2.8.8`, `2.8.8-debian-11-r12`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/discourse/2/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
@@ -285,8 +285,8 @@ Available environment variables:
 ##### User and Site configuration
 
 - `DISCOURSE_ENABLE_HTTPS`: Whether to use HTTPS by default. Default: **no**
-- `DISCOURSE_EXTERNAL_HTTP_PORT_NUMBER`: Port to used by WordPress to generate URLs and links when accessing using HTTP. Will be ignored if multisite mode is not enabled. Default **80**
-- `DISCOURSE_EXTERNAL_HTTPS_PORT_NUMBER`: Port to used by WordPress to generate URLs and links when accessing using HTTPS. Will be ignored if multisite mode is not enabled. Default **443**
+- `DISCOURSE_EXTERNAL_HTTP_PORT_NUMBER`: Port to used by Discourse to generate URLs and links when accessing using HTTP. Will be ignored if multisite mode is not enabled. Default **80**
+- `DISCOURSE_EXTERNAL_HTTPS_PORT_NUMBER`: Port to used by Discourse to generate URLs and links when accessing using HTTPS. Will be ignored if multisite mode is not enabled. Default **443**
 - `DISCOURSE_USERNAME`: Discourse application username. Default: **user**
 - `DISCOURSE_PASSWORD`: Discourse application password. Default: **bitnami123**
 - `DISCOURSE_EMAIL`: Discourse application email. Default: **user@example.com**
