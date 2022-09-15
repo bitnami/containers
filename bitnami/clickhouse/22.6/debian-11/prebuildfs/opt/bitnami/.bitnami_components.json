@@ -1,0 +1,16 @@
+{
+    "clickhouse": {
+        "arch": "amd64",
+        "digest": "bfd22ffbd95363c957105b95a7d8df81377ab3fae3c10b53c6b63c2db31b1dea",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "22.6.7-0"
+    },
+    "gosu": {
+        "arch": "amd64",
+        "digest": "e36c3d90f4fbfbe989f40947fa7c8ab817f12fcf97d3aef893c753a20ce976ab",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.14.0-154"
+    }
+}
