@@ -1,9 +1,9 @@
 {
     "rclone": {
         "arch": "amd64",
-        "digest": "230858c94ab4adf772b66afa7b9d9bc7a846c73ccc82db5bd78c5bfc803d43ba",
+        "digest": "e56f9788b7f2d53fc2f9a4fdfa1ab57af9f650061ec3f0b67014f097bda279a2",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.59.1-1"
+        "version": "1.59.2-0"
     }
 }
