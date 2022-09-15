@@ -22,21 +22,16 @@ jobs:
         uses: xom9ikk/dotenv@v1.0.2
         with:
           path: .github/workflows/
-      - name: Get creator
-        id: get-creator
+      - name: Get author
+        id: get-issue
         run: |
-          result=""
-          if [[ "${{github.event_name }}" == "issues" ]]; then
-            result="${{ github.event.issue.user.login }}"
-          else
-            result="${{ github.event.pull_request.user.login }}"
-          fi
-          echo "::set-output name=result::${result}"
+          author="${{ github.event.issue != null && github.event.issue.user.login || github.event.pull_request.user.login }}"
+          echo "::set-output name=author::${author}"
       - name: Send to the board
         uses: peter-evans/create-or-update-project-card@v2
         with:
           project-name: Support
           # If the author comes from Bitnami, send it to Bitnami. Otherwise, all to Triage
-          column-name: ${{ (!contains(fromJson(env.BITNAMI_TEAM), step.get-creator.outputs.result)) && 'Triage' || 'From Bitnami' }}
+          column-name: ${{ (!contains(fromJson(env.BITNAMI_TEAM), step.get-issue.outputs.author)) && 'Triage' || 'From Bitnami' }}
           token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
           issue-number: ${{ github.event_name != 'issues' && github.event.number || github.event.issue.number }}
