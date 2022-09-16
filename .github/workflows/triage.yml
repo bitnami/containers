@@ -22,12 +22,16 @@ jobs:
         uses: xom9ikk/dotenv@v1.0.2
         with:
           path: .github/workflows/
+      - name: Get author
+        id: get-issue
+        run: |
+          author="${{ github.event.issue != null && github.event.issue.user.login || github.event.pull_request.user.login }}"
+          echo "::set-output name=author::${author}"
       - name: Send to the board
         uses: peter-evans/create-or-update-project-card@v2
         with:
           project-name: Support
           # If the author comes from Bitnami, send it to Bitnami. Otherwise, all to Triage
-          # NOTE: This step has to be modified when the new column for automated PR is added
-          column-name: ${{ (github.actor == 'bitnami-bot' || (!contains(fromJson(env.BITNAMI_TEAM), github.actor))) && 'Triage' || 'From Bitnami' }}
+          column-name: ${{ (!contains(fromJson(env.BITNAMI_TEAM), step.get-issue.outputs.author)) && 'Triage' || 'From Bitnami' }}
           token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
           issue-number: ${{ github.event_name != 'issues' && github.event.number || github.event.issue.number }}
