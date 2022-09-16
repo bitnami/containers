@@ -110,7 +110,7 @@ jobs:
     needs:
       - get-issue
     # The job shouldn't run for new PRs created by bitnami-bot
-    if: ${{ github.event.action != 'created' || needs.get-issue.outputs.author != 'bitnami-bot' || needs.get-issue.outputs.issue != 'pull_request'}}
+    if: ${{ github.event.action != 'created' || needs.get-issue.outputs.author != 'bitnami-bot' || needs.get-issue.outputs.type != 'pull_request'}}
     steps:
       - name: Repo checkout
         uses: actions/checkout@v3
