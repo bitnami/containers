@@ -109,8 +109,10 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - get-issue
-    # The job shouldn't run for new PRs created by bitnami-bot
-    if: ${{ github.event.action != 'created' || needs.get-issue.outputs.author != 'bitnami-bot' || needs.get-issue.outputs.type != 'pull_request'}}
+    # The job shouldn't run for solved cards or new PRs created by bitnami-bot
+    if: |
+      github.event.project_card.column_id != env.SOLVED_COLUMN_ID &&
+      (github.event.action != 'created' || needs.get-issue.outputs.type != 'pull_request' || needs.get-issue.outputs.author != 'bitnami-bot')
     steps:
       - name: Repo checkout
         uses: actions/checkout@v3
