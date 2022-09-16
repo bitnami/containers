@@ -410,9 +410,9 @@ if (isset(\$_SERVER['HTTPS']) \&\& \$_SERVER['HTTPS'] == 'on') {\\
 #########################
 moodle_configure_reverseproxy() {
     # Checking the reverseproxy setting values
-    is_boolean_yes "$MOODLE_REVERSEPROXY" && echo "\$CFG->reverseproxy = true;" >>"$MOODLE_CONF_FILE"
+    is_boolean_yes "$MOODLE_REVERSEPROXY" && sed -i '/^require/i $CFG->reverseproxy = true;' "$MOODLE_CONF_FILE"
     # Checking the sslproxy setting values
-    is_boolean_yes "$MOODLE_SSLPROXY" && echo "\$CFG->sslproxy = true;" >>"$MOODLE_CONF_FILE"
+    is_boolean_yes "$MOODLE_SSLPROXY" && sed -i '/^require/i $CFG->sslproxy = true;' "$MOODLE_CONF_FILE"
 
     true
 }
