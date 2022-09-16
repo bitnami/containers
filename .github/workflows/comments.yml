@@ -32,7 +32,7 @@ jobs:
       - name: Move into Pending
         uses: peter-evans/create-or-update-project-card@v2
         if: |
-          (github.actor != 'bitnami-bot' || github.event.issue.pull_request != null) &&
+          (github.actor != 'bitnami-bot' || github.event.issue.pull_request == null) &&
           (!contains(github.event.issue.labels.*.name, 'bitnami')) && contains(fromJson(env.BITNAMI_TEAM), github.actor)
         with:
           project-name: Support
@@ -40,7 +40,7 @@ jobs:
       - name: Move into In Progress
         uses: peter-evans/create-or-update-project-card@v2
         if: |
-          (github.actor != 'bitnami-bot' || github.event.issue.pull_request != null) &&
+          (github.actor != 'bitnami-bot' || github.event.issue.pull_request == null) &&
           contains(github.event.issue.labels.*.name, 'in-progress') && (!contains(fromJson(env.BITNAMI_TEAM), github.actor))
         with:
           project-name: Support
@@ -48,7 +48,7 @@ jobs:
       - name: Move into Triage
         uses: peter-evans/create-or-update-project-card@v2
         if: |
-          (github.actor != 'bitnami-bot' || github.event.issue.pull_request != null) &&
+          (github.actor != 'bitnami-bot' || github.event.issue.pull_request == null) &&
           ((contains(github.event.issue.labels.*.name, 'triage')) || (contains(github.event.issue.labels.*.name, 'solved'))) && (!contains(fromJson(env.BITNAMI_TEAM), github.actor))
         with:
           project-name: Support
