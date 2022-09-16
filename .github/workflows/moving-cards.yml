@@ -19,6 +19,7 @@ jobs:
       assignees: ${{ steps.get-issue-step.outputs.assignees }}
       author: ${{ steps.get-issue-step.outputs.author }}
       type: ${{ steps.get-issue-step.outputs.type }}
+      draft: ${{ steps.get-issue-step.outputs.draft }}
     steps:
       - name: Get issue info
         id: get-issue-step
@@ -27,6 +28,7 @@ jobs:
           assignees="$(echo $issue_info | jq -r '.assignees')"
           author="$(echo $issue_info | jq -r '.user.login')"
           pull_request="$(echo $issue_info | jq -r '.pull_request')"
+          draft="$(echo $issue_info | jq -r '.draft' | sed -r "s|null|false|g")"
           type="pull_request"
           if [[ "${pull_request}" == "null" ]]; then
             type="issue"
@@ -34,6 +36,7 @@ jobs:
           echo "::set-output name=assignees::${assignees}"
           echo "::set-output name=author::${author}"
           echo "::set-output name=type::${type}"
+          echo "::set-output name=draft::${draft}"
   label-card:
     runs-on: ubuntu-latest
     needs:
@@ -55,22 +58,22 @@ jobs:
         with:
           add-labels: ${{ (needs.get-issue.outputs.author == 'bitnami-bot' && needs.get-issue.outputs.type != 'issue') && 'automated, auto-merge' || 'triage' }}
           remove-labels: on-hold, in-progress, solved
-      - name: Triage labeling - verify
-        # Only if moved into triage, the author is bitnami-bot and it is a PR
-        if: |
-          github.event.project_card.column_id == env.TRIAGE_COLUMN_ID &&
-          needs.get-issue.outputs.author == 'bitnami-bot' && needs.get-issue.outputs.type != 'issue'
-        uses: andymckay/labeler@1.0.4
-        with:
-          add-labels: verify
-          # Required to trigger CI workflow
-          repo-token: ${{ secrets.BITNAMI_BOT_TOKEN }}
       - name: From Bitnami labeling
         if: ${{ github.event.project_card.column_id == env.BITNAMI_COLUMN_ID }}
         uses: andymckay/labeler@1.0.4
         with:
           add-labels: bitnami
           remove-labels: on-hold, in-progress, triage, solved
+      - name: Verify labeling
+        # Only if moved into bitnami column and the PR is ready for review
+        if: |
+          github.event.project_card.column_id == env.BITNAMI_COLUMN_ID &&
+          needs.get-issue.outputs.type == 'pull_request' && needs.get-issue.outputs.draft == 'false'
+        uses: andymckay/labeler@1.0.4
+        with:
+          add-labels: verify
+          # Required to trigger CI workflow
+          repo-token: ${{ secrets.BITNAMI_BOT_TOKEN }}
       - name: Build Maintenance labeling
         if: ${{ github.event.project_card.column_id == env.BUILD_MAINTENANCE_COLUMN_ID }}
         uses: andymckay/labeler@1.0.4

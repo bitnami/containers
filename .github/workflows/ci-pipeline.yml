@@ -139,14 +139,17 @@ jobs:
     runs-on: ubuntu-latest
     name: Reviewal for automated PRs
     needs: verification-summary
+    # This job will be executed when the PR was created by bitnami-bot and it has the 'auto-merge' label
     if: |
       always() &&
+      contains(github.event.pull_request.labels.*.name, 'auto-merge') &&
       github.event.pull_request.user.login == 'bitnami-bot'
     steps:
       - name: Enable auto-merge feature
         if: ${{ needs.verification-summary.result == 'success' }}
         uses: reitermarkus/automerge@v2.1.2
         with:
+          # Necessary to trigger CD workflow
           token: ${{ secrets.BITNAMI_BOT_TOKEN }}
           merge-method: squash
           pull-request: ${{ github.event.number }}
