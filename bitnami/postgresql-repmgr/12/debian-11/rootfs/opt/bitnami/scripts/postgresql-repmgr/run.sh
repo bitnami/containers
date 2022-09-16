@@ -5,7 +5,7 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-# set -o xtrace # Uncomment this line for debugging purpose
+# set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
 . /opt/bitnami/scripts/liblog.sh
@@ -15,7 +15,7 @@ set -o pipefail
 # Load PostgreSQL & repmgr environment variables
 . /opt/bitnami/scripts/postgresql-env.sh
 
-readonly repmgr_flags=("--pid-file=$REPMGR_PID_FILE" "-f" "$REPMGR_CONF_FILE" "--daemonize=false")
+readonly repmgr_flags=("-f" "$REPMGR_CONF_FILE" "--daemonize=false")
 readonly repmgr_cmd=$(command -v repmgrd)
 
 postgresql_start_bg true
