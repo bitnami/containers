@@ -56,13 +56,13 @@ jobs:
         if: ${{ github.event.project_card.column_id == env.TRIAGE_COLUMN_ID }}
         uses: andymckay/labeler@1.0.4
         with:
-          add-labels: ${{ (needs.get-issue.outputs.author == 'bitnami-bot' && needs.get-issue.outputs.type != 'issue') && 'automated, auto-merge' || 'triage' }}
+          add-labels: triage
           remove-labels: on-hold, in-progress, solved
       - name: From Bitnami labeling
         if: ${{ github.event.project_card.column_id == env.BITNAMI_COLUMN_ID }}
         uses: andymckay/labeler@1.0.4
         with:
-          add-labels: bitnami
+          add-labels: ${{ (needs.get-issue.outputs.author == 'bitnami-bot' && needs.get-issue.outputs.type == 'pull_request') && 'automated, auto-merge' || 'bitnami' }}
           remove-labels: on-hold, in-progress, triage, solved
       - name: Verify labeling
         # Only if moved into bitnami column and the PR is ready for review
