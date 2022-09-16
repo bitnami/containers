@@ -45,7 +45,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`3.3`, `3.3-debian-11`, `3.3.0`, `3.3.0-debian-11-r30`, `latest` (3.3/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/spark/3.3/debian-11/Dockerfile)
 * [`3.2`, `3.2-debian-11`, `3.2.2`, `3.2.2-debian-11-r19` (3.2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/spark/3.2/debian-11/Dockerfile)
-* [`3.1`, `3.1-debian-11`, `3.1.3`, `3.1.3-debian-11-r33` (3.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/spark/3.1/debian-11/Dockerfile)
+* [`3.1`, `3.1-debian-11`, `3.1.3`, `3.1.3-debian-11-r34` (3.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/spark/3.1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
