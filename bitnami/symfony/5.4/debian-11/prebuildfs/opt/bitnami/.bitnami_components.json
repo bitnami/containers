@@ -15,10 +15,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "5f945eb2ef6d119784a1e56182df4fbe2494fcd27f7d12e982191425b64a3fdc",
+        "digest": "a17043c3bc38c09f25749466f79f39d4cd3826a46723f07c83795aaac7bdc5e3",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.23-1"
+        "version": "8.0.23-3"
     },
     "symfony": {
         "arch": "amd64",

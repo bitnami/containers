@@ -15,9 +15,9 @@
     },
     "spring-cloud-dataflow-composed-task-runner": {
         "arch": "amd64",
-        "digest": "66beee610480598e13864bf42dbc8a1caa19a4f77c82bf58dc44dcef61b086ad",
+        "digest": "5828ce19b8d7b84aee91101f7c612041c9ff3d7f995ffc436b0333ef15c1aab7",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.9.5-1"
+        "version": "2.9.6-0"
     }
 }
