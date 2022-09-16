@@ -11,5 +11,5 @@ eval "$(spark_env)"
 
 for dir in "$SPARK_TMPDIR" "$SPARK_LOGDIR" "$SPARK_CONFDIR" "$SPARK_WORKDIR" "$SPARK_JARSDIR"; do
     ensure_dir_exists "$dir"
+    configure_permissions_ownership "$dir" -d "775" -f "664" -g "root"
 done
-chmod -R g+rwX "$SPARK_LOGDIR" "$SPARK_TMPDIR" "$SPARK_CONFDIR" "$SPARK_WORKDIR" "$SPARK_JARSDIR"
