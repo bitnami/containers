@@ -1071,7 +1071,7 @@ EOF
     if ! grep -q "user:" <<<"$result"; then
         # If no password was provided on first run
         # it may be the case that DB is up but has no users
-        [[ -z $password ]] && grep -q "\[\ \]" <<<"$result"
+        [[ -z $password ]] && grep -q "\[\]" <<<"$result"
     fi
 }
 
