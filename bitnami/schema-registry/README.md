@@ -28,7 +28,7 @@ $ docker run --name schema-registry bitnami/schema-registry:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7.2`, `7.2-debian-11`, `7.2.1`, `7.2.1-debian-11-r9`, `latest` (7.2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/7.2/debian-11/Dockerfile)
+* [`7.2`, `7.2-debian-11`, `7.2.1`, `7.2.1-debian-11-r10`, `latest` (7.2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/7.2/debian-11/Dockerfile)
 * [`7.1`, `7.1-debian-11`, `7.1.3`, `7.1.3-debian-11-r23` (7.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/7.1/debian-11/Dockerfile)
 * [`7.0`, `7.0-debian-11`, `7.0.5`, `7.0.5-debian-11-r19` (7.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/7.0/debian-11/Dockerfile)
 * [`6.2`, `6.2-debian-11`, `6.2.6`, `6.2.6-debian-11-r20` (6.2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/6.2/debian-11/Dockerfile)
