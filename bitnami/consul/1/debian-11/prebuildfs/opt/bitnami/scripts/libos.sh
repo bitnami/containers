@@ -464,3 +464,37 @@ convert_to_hex() {
         printf '%x' "'${char}"
     done
 }
+
+########################
+# Get boot time
+# Globals:
+#   None
+# Arguments:
+#   None
+# Returns:
+#   Boot time metadata
+#########################
+get_boot_time() {
+    stat /proc --format=%Y
+}
+
+########################
+# Get machine ID
+# Globals:
+#   None
+# Arguments:
+#   None
+# Returns:
+#   Machine ID
+#########################
+get_machine_id() {
+    local machine_id
+    if [[ -f /etc/machine-id ]]; then
+        machine_id="$(cat /etc/machine-id)"
+    fi
+    if [[ -z "$machine_id" ]]; then
+        # Fallback to the boot-time, which will at least ensure a unique ID in the current session
+        machine_id="$(get_boot_time)"
+    fi
+    echo "$machine_id"
+}

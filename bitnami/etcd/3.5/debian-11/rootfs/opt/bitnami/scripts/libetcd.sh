@@ -694,9 +694,15 @@ etcd_initialize() {
                 export ETCD_INITIAL_CLUSTER_STATE=existing
                 [[ -f "$ETCD_CONF_FILE" ]] && etcd_conf_write "initial-cluster-state" "$ETCD_INITIAL_CLUSTER_STATE"
                 read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
-                is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
                 extra_flags+=("--peer-urls=$ETCD_INITIAL_ADVERTISE_PEER_URLS")
-                etcdctl member update "$member_id" "${extra_flags[@]}"
+                if is_boolean_yes "$ETCD_ON_K8S"; then
+                    extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
+                    etcdctl member update "$member_id" "${extra_flags[@]}"
+                else
+                    etcd_start_bg
+                    etcdctl member update "$member_id" "${extra_flags[@]}"
+                    etcd_stop
+                fi
             else
                 info "Member ID wasn't properly stored, the member will try to join the cluster by it's own"
                 export ETCD_INITIAL_CLUSTER_STATE=existing
