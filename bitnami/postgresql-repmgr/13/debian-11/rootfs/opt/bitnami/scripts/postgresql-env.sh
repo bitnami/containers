@@ -383,7 +383,6 @@ export REPMGR_PRIMARY_ROLE_LOCK_FILE_NAME="$REPMGR_LOCK_DIR/master.lock"
 export REPMGR_STANDBY_ROLE_LOCK_FILE_NAME="$REPMGR_LOCK_DIR/standby.lock"
 export REPMGR_BIN_DIR="$REPMGR_BASE_DIR/bin"
 export REPMGR_CONF_FILE="$REPMGR_CONF_DIR/repmgr.conf"
-export REPMGR_PID_FILE="$REPMGR_TMP_DIR/repmgr.pid"
 export REPMGR_DATA_DIR="${REPMGR_DATA_DIR:-${REPMGR_VOLUME_DIR}/repmgr/data}"
 
 # Settings (Replication Manager)
