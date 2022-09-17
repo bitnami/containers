@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.5.1-debian-11-r5" \
+      org.opencontainers.image.ref.name="2.5.1-debian-11-r6" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kubeapps-dashboard" \
       org.opencontainers.image.title="kubeapps-dashboard" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -17,15 +17,15 @@ ENV OS_ARCH="${TARGETARCH:-amd64}" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages acl ca-certificates curl gzip libc6 libcrypt1 libgeoip1 libpcre3 libssl1.1 procps tar zlib1g
+RUN install_packages acl ca-certificates curl gzip libcrypt1 libgeoip1 libpcre3 libssl1.1 procps tar zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f nginx-1.23.1-3-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/nginx-1.23.1-3-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/nginx-1.23.1-3-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f nginx-1.23.1-4-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/nginx-1.23.1-4-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/nginx-1.23.1-4-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c nginx-1.23.1-3-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf nginx-1.23.1-3-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf nginx-1.23.1-3-linux-${OS_ARCH}-debian-11.tar.gz nginx-1.23.1-3-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    sha256sum -c nginx-1.23.1-4-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf nginx-1.23.1-4-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf nginx-1.23.1-4-linux-${OS_ARCH}-debian-11.tar.gz nginx-1.23.1-4-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f render-template-1.0.3-153-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/render-template-1.0.3-153-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
