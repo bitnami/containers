@@ -1,0 +1,113 @@
+name: '[CI/CD] CD Pipeline'
+on: # rebuild any PRs and main branch changes
+  push:
+    branches:
+      - main
+    paths:
+      - 'bitnami/**'
+env:
+  CSP_API_URL: https://console.cloud.vmware.com
+  CSP_API_TOKEN: ${{ secrets.CSP_API_TOKEN }}
+  VIB_PUBLIC_URL: https://cp.bromelia.vmware.com
+jobs:
+  get-containers:
+    runs-on: ubuntu-latest
+    name: Get modified containers path
+    if: |
+      github.event.head_commit.author.username == 'bitnami-bot' &&
+      github.event.forced == false
+    outputs:
+      result: ${{ steps.get-containers.outputs.result }}
+      containers: ${{ steps.get-containers.outputs.containers }}
+    steps:
+      - id: get-containers
+        name: Get modified containers path
+        env:
+          GITHUB_COMMITS: ${{ toJson(github.event.commits) }}
+        run: |
+          # Get all commits associated to the push
+          commits=($(echo "${GITHUB_COMMITS}" | jq -r '.[] | .id'))
+          containers=()
+          for commit in "${commits[@]}"; do
+            containers_in_commit=()
+            # Using the Github API to detect the files changed as git merge-base stops working when the branch is behind
+            URL="https://api.github.com/repos/${{ github.repository }}/commits/${commit}"
+            files_changed_data=$(curl -s --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -X GET -G "$URL")
+            files_changed="$(echo $files_changed_data | jq -r '.files[] | .filename')"
+            # Adding || true to avoid "Process exited with code 1" errors
+            containers_in_commit+=($(echo "$files_changed" | xargs dirname | grep -o "^bitnami/[^/]*/[^/]*/[^/]*" | sort | uniq || true))
+            for container in "${containers_in_commit[@]}"; do
+              if [[ ! $containers =~ (^|[[:space:]])$container($|[[:space:]]) ]]; then
+                # Avoid duplicates
+                containers+=("${container}")
+              fi
+            done
+          done
+
+          if [[ "${#containers[@]}" -le "0" ]]; then
+            echo "No changes detected in containers. The rest of the steps will be skipped."
+            echo "::set-output name=result::skip"
+          else
+            containers_json=$(printf "%s\n" "${containers[@]}" | jq -R . | jq -cs .)
+            echo "::set-output name=result::ok"
+            echo "::set-output name=containers::${containers_json}"
+          fi
+  vib-publish:
+    runs-on: ubuntu-latest
+    needs: get-containers
+    if: ${{ needs.get-containers.outputs.result == 'ok' }}
+    name: Publish
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        container: ${{ fromJSON(needs.get-containers.outputs.containers) }}
+    steps:
+      - uses: actions/checkout@v3
+        name: Checkout Repository
+        # Full history is not required anymore
+        with:
+          fetch-depth: 1
+      - id: get-container-metadata
+        name: Get image tag and container name
+        run: |
+          if [[ -d "${{ matrix.container }}" ]]; then
+            tag="$(grep -oE "org.opencontainers.image.ref.name=\".+\"" ${{ matrix.container }}/Dockerfile | sed -nr "s|org.opencontainers.image.ref.name=\"(.+)\"|\1|p")"
+            if [[ -z "${tag}" ]]; then
+              echo "No tag found for: ${{ matrix.container }}"
+              exit 1
+            else
+              name="$(echo "${{ matrix.container }}" | awk -F '/' '{print $2}')"
+              echo "::set-output name=tag::${tag}"
+              echo "::set-output name=name::${name}"
+              echo "::set-output name=result::ok"
+            fi
+          else
+            # Container folder doesn't exists we are assuming a deprecation
+            echo "::set-output name=result::skip"
+          fi
+      - id: get-registry-credentials
+        name: Get staging marketplace's registry credentials
+        run: |
+          csp_auth_token=$(curl -s -H 'Content-Type: application/x-www-form-urlencoded' -X POST -d "grant_type=refresh_token&api_token=${{ secrets.STAGING_MARKETPLACE_API_TOKEN }}" https://console.cloud.vmware.com/csp/gateway/am/api/auth/api-tokens/authorize | jq -re .access_token)
+          repo_info=$(curl -s -X POST -H "Content-Type: application/json" -H "csp-auth-token:$csp_auth_token" -d '{"withCredentials":true, "storageType":"OCI"}' https://gtwstg.market.csp.vmware.com/api/v1/repositories/transient)
+          marketplace_user=$(echo "$repo_info" | jq -re .response.repodetails.username)
+          marketplace_passwd=$(echo "$repo_info" | jq -re .response.repodetails.token)
+          echo "::add-mask::${marketplace_user}"
+          echo "::add-mask::${marketplace_passwd}"
+          echo "::set-output name=marketplace_user::${marketplace_user}"
+          echo "::set-output name=marketplace_passwd::${marketplace_passwd}"
+      - uses: vmware-labs/vmware-image-builder-action@main
+        name: 'Publish ${{ steps.get-container-metadata.outputs.name }}: ${{ steps.get-container-metadata.outputs.tag }}'
+        if: ${{ steps.get-container-metadata.outputs.result == 'ok' }}
+        with:
+          pipeline: ${{ steps.get-container-metadata.outputs.name }}/vib-publish.json
+        env:
+          # Path with docker resources
+          VIB_ENV_PATH:  ${{ matrix.container }}
+          # Container name
+          VIB_ENV_CONTAINER: ${{ steps.get-container-metadata.outputs.name }}
+          VIB_ENV_TAG: ${{ steps.get-container-metadata.outputs.tag }}
+          VIB_ENV_REGISTRY_URL: ${{ secrets.STAGING_MARKETPLACE_REGISTRY_URL }}
+          VIB_ENV_REGISTRY_USERNAME: ${{ steps.get-registry-credentials.outputs.marketplace_user }}
+          VIB_ENV_REGISTRY_PASSWORD: ${{ steps.get-registry-credentials.outputs.marketplace_passwd }}

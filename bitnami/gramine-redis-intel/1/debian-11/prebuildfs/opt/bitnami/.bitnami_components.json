@@ -1,0 +1,30 @@
+{
+    "gosu": {
+        "arch": "amd64",
+        "digest": "e36c3d90f4fbfbe989f40947fa7c8ab817f12fcf97d3aef893c753a20ce976ab",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.14.0-154"
+    },
+    "gramine-redis-intel": {
+        "arch": "amd64",
+        "digest": "b5edda10ef261a0052e8400a8a83cc473fb5496ccde5ef4630a00ec0ec3e0af1",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.2.0-0"
+    },
+    "python": {
+        "arch": "amd64",
+        "digest": "0f70c7555c3269e92a30cfd10768d6d7e0177a5e1b29148a5786428dc60036c0",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "3.10.7-1"
+    },
+    "redis": {
+        "arch": "amd64",
+        "digest": "88d418ff4ced6262a27a1ea18294e410110dc8c4ad5449d3ae7d6fa9e087b6ba",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "7.0.4-3"
+    }
+}

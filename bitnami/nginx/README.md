@@ -45,8 +45,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1.23`, `1.23-debian-11`, `1.23.1`, `1.23.1-debian-11-r12`, `latest` (1.23/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/nginx/1.23/debian-11/Dockerfile)
-* [`1.22`, `1.22-debian-11`, `1.22.0`, `1.22.0-debian-11-r30` (1.22/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/nginx/1.22/debian-11/Dockerfile)
+* [`1.23`, `1.23-debian-11`, `1.23.1`, `1.23.1-debian-11-r21`, `latest` (1.23/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/nginx/1.23/debian-11/Dockerfile)
+* [`1.22`, `1.22-debian-11`, `1.22.0`, `1.22.0-debian-11-r38` (1.22/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/nginx/1.22/debian-11/Dockerfile)
 
 ## Get this image
 
@@ -367,46 +367,9 @@ $ docker-compose logs nginx
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
-## Understand the structure of this image
-
-The Bitnami NGINX Open Source Docker image is built using a Dockerfile with the structure below:
-
-```Dockerfile
-FROM bitnami/minideb
-...
-## Install required system packages and dependencies
-RUN install_packages xxx yyy zzz
-RUN . /opt/bitnami/scripts/libcomponent.sh && component_unpack "nginx" "a.b.c-0"
-...
-COPY rootfs /
-RUN /opt/bitnami/scripts/nginx/postunpack.sh
-...
-ENV BITNAMI_APP_NAME="nginx" ...
-EXPOSE 8080 8443
-WORKDIR /app
-USER 1001
-...
-ENTRYPOINT [ "/opt/bitnami/scripts/nginx/entrypoint.sh" ]
-CMD [ "/opt/bitnami/scripts/nginx/run.sh" ]
-```
-
-The Dockerfile has several sections related to:
-
-- Components installation
-- Components static configuration
-- Environment variables
-- Volumes
-- Ports to be exposed
-- Working directory and user
-  - Note that once the user is set to 1001, unprivileged commands cannot be executed any longer.
-- Entrypoint and command
-  - Take into account that these actions are not executed until the container is started.
-
 ## Customize this image
 
 The Bitnami NGINX Open Source Docker image is designed to be extended so it can be used as the base image for your custom web applications.
-
-> Note: Read the [previous section](#understand-the-structure-of-this-image) to understand the Dockerfile structure before extending this image.
 
 ### Extend this image
 

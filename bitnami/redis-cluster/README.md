@@ -41,8 +41,8 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`7.0`, `7.0-debian-11`, `7.0.4`, `7.0.4-debian-11-r8`, `latest` (7.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/redis-cluster/7.0/debian-11/Dockerfile)
-* [`6.2`, `6.2-debian-11`, `6.2.7`, `6.2.7-debian-11-r23` (6.2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/redis-cluster/6.2/debian-11/Dockerfile)
+* [`7.0`, `7.0-debian-11`, `7.0.4`, `7.0.4-debian-11-r16`, `latest` (7.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/redis-cluster/7.0/debian-11/Dockerfile)
+* [`6.2`, `6.2-debian-11`, `6.2.7`, `6.2.7-debian-11-r31` (6.2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/redis-cluster/6.2/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
@@ -144,6 +144,30 @@ services:
 ```
 
 Refer to the [Redis(R) configuration](http://redis.io/topics/config) manual for the complete list of configuration options.
+
+### Overriding configuration
+
+Instead of providing a custom `redis.conf`, you may also choose to provide only settings you wish to override. The image will look for `/opt/bitnami/redis/mounted-etc/overrides.conf`. This will be ignored if custom `redis.conf` is provided.
+
+```console
+$ docker run --name redis \
+    -e ALLOW_EMPTY_PASSWORD=yes \
+    -v /path/to/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf \
+    bitnami/redis:latest
+```
+
+Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redis/docker-compose.yml) file present in this repository:
+
+```yaml
+services:
+  redis:
+  ...
+    volumes:
+      - /path/to/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf
+  ...
+```
+
+### Environment variables
 
 The following env vars are supported for this container:
 

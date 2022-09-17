@@ -1,44 +1,44 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449",
+        "digest": "e36c3d90f4fbfbe989f40947fa7c8ab817f12fcf97d3aef893c753a20ce976ab",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-153"
+        "version": "1.14.0-154"
     },
     "laravel": {
         "arch": "amd64",
-        "digest": "cf745294d6dc9b578f73b1abb4a72db1163035bc88b4c349f02304dc71854fd1",
+        "digest": "a1dbacf95515390baa32fe15e08ac2a67f704f3a21ce82422bb5850e3c23b1df",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.3.4-0"
+        "version": "9.3.7-0"
     },
     "node": {
         "arch": "amd64",
-        "digest": "127f7b97bd46468ce62bc5cd9868371ca2c4c1e7201f6271a309b34a17b97d90",
+        "digest": "49946e0443d8f479f296c79589fea205126b6f6faa6b4474e5dd713b36d8167c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.20.0-2"
+        "version": "14.20.0-3"
     },
     "php": {
         "arch": "amd64",
-        "digest": "b91ccc390048e92e6ab5449327fc0915512f5db2d0ad62771e4d5c90bc6422b9",
+        "digest": "2a822eb0e3f2d78200c214fffeffd6aa7e15f5089bd1af5e20c70135f487eb16",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.9-4"
+        "version": "8.1.10-2"
     },
     "python": {
         "arch": "amd64",
-        "digest": "2bf41f60dccdcf65842d993083c2dcb27ab48a8a514fdeb1778e9b09f3e4a203",
+        "digest": "b81946d0fc75ce5dd9518d601920b6da4b24fbd87ca81a4cbd59404dd893764f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.13-165"
+        "version": "3.8.14-1"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "8c8e324ab6e7b7d76b4655182d6ea5f6550edfc9e32bec92228e678c26fc8b16",
+        "digest": "74a09c2208af7316f32ee3ee8479d70b20ad54f1a989e84b6417e23c1f07c147",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.3-153"
+        "version": "1.0.3-154"
     }
 }

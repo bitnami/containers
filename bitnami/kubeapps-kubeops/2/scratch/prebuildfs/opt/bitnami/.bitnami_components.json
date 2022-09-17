@@ -1,9 +1,9 @@
 {
     "kubeapps-kubeops": {
         "arch": "amd64",
-        "digest": "a778eadadfee3d782d9f4632c53cdfc1efad412676111adafbc1adc3a2eb89d8",
+        "digest": "b436cc121629de3283d9a2d9ab97fcb818d5c49e692aa3c19c2cf4356a8d171b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.5.0-0"
+        "version": "2.5.1-0"
     }
 }

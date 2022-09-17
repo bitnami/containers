@@ -9,6 +9,15 @@
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libvalidations.sh
 
+# Load database library
+if [[ -f /opt/bitnami/scripts/libmysqlclient.sh ]]; then
+    . /opt/bitnami/scripts/libmysqlclient.sh
+elif [[ -f /opt/bitnami/scripts/libmysql.sh ]]; then
+    . /opt/bitnami/scripts/libmysql.sh
+elif [[ -f /opt/bitnami/scripts/libmariadb.sh ]]; then
+    . /opt/bitnami/scripts/libmariadb.sh
+fi
+
 ########################
 # Print the value of a Grafana environment variable
 # Globals:
@@ -119,8 +128,121 @@ grafana_initialize() {
     # Install plugins
     grafana_install_plugins
 
+    # Configure Grafana feature toggles
+    ! is_empty_value "$GF_FEATURE_TOGGLES" && grafana_conf_set "feature_toggles" "enable" "$GF_FEATURE_TOGGLES"
+
+    # If using an external database, avoid nodes collition during migration
+    if is_boolean_yes "$GRAFANA_MIGRATION_LOCK"; then
+        grafana_migrate_db
+    fi
+
     # Avoid exit code of previous commands to affect the result of this function
     true
+}
+
+########################
+# Runs Grafana migration using a database lock to avoid collision with other Grafana nodes
+# If database is locked, wait until unlocked and continue. Otherwise, run Grafana to perform migration.
+# Globals:
+#   GRAFANA_CFG_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+grafana_migrate_db() {
+    local -r db_host="${GRAFANA_CFG_DATABASE_HOST:-mysql}"
+    local -r db_port="${GRAFANA_CFG_DATABASE_PORT:-3306}"
+    local -r db_name="${GRAFANA_CFG_DATABASE_NAME:-}"
+    local -r db_user="${GRAFANA_CFG_DATABASE_USER:-}"
+    local -r db_pass="${GRAFANA_CFG_DATABASE_PASSWORD:-}"
+
+    local -r grafana_host="${GRAFANA_CFG_SERVER_HTTP_ADDR:-localhost}"
+    local -r grafana_port="${GRAFANA_CFG_SERVER_HTTP_PORT:-3000}"
+    local -r grafana_protocol="${GRAFANA_CFG_SERVER_PROTOCOL:-http}"
+
+    local -r sleep_time="${GRAFANA_SLEEP_TIME:-5}"
+    local -r retries="${GRAFANA_RETRY_ATTEMPTS:-12}"
+
+    lock_db() {
+        debug_execute mysql_remote_execute_print_output "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass" <<EOF
+create table db_lock(
+id INT PRIMARY KEY
+);
+EOF
+    }
+    release_db() {
+        debug_execute mysql_remote_execute_print_output "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass" <<EOF
+drop table if exists db_lock;
+EOF
+    }
+    is_db_unlocked() {
+        local result
+
+        result=$(mysql_remote_execute_print_output "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass" <<EOF
+show tables like 'db_lock';
+EOF
+)
+        if grep -q "db_lock" <<<"$result"; then
+            return 1
+        else
+            return 0
+        fi
+    }
+
+    if lock_db; then
+        info "Starting Grafana database migration"
+        grafana_start_bg
+        # Grafana will start listening HTTP connections once the database initialization has succeeded
+        if ! retry_while "debug_execute curl --silent ${grafana_protocol}://${grafana_host}:${grafana_port}" "$retries" "$sleep_time"; then
+            error "Grafana failed to start in the background. Releasing database lock before exit."
+            # Release the lock
+            release_db
+            return 1
+        fi
+        grafana_stop
+        # Release the lock
+        release_db
+        info "Grafana database migration completed. Lock released."
+    else
+        info "Grafana database migration in progress detected. Waiting for lock to be released before initializing Grafana"
+        if ! retry_while "is_db_unlocked" "$retries" "$sleep_time"; then
+            error "Failed waiting for database lock to be released. If there is no migration in progress, manually drop table 'db_lock' from the grafana database"
+            return 1
+        fi
+    fi
+}
+
+########################
+# Start Grafana in background
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+grafana_start_bg() {
+    local cmd="grafana-server"
+    local -a args=(
+        # Based on https://github.com/grafana/grafana/blob/v8.2.5/packaging/docker/run.sh
+        "--homepath=${GF_PATHS_HOME}"
+        "--config=${GF_PATHS_CONFIG}"
+        "--packaging=docker"
+        "--pidfile=${GRAFANA_PID_FILE}"
+        "cfg:default.log.mode=console"
+        "cfg:default.paths.data=${GF_PATHS_DATA}"
+        "cfg:default.paths.logs=${GF_PATHS_LOGS}"
+        "cfg:default.paths.plugins=${GF_PATHS_PLUGINS}"
+        "cfg:default.paths.provisioning=${GF_PATHS_PROVISIONING}"
+    )
+
+    cd "$GRAFANA_BASE_DIR" || return
+
+    info "Starting Grafana in background"
+    if am_i_root; then
+        debug_execute gosu "$GRAFANA_DAEMON_USER" "$cmd" "${args[@]}" &
+    else
+        debug_execute "$cmd" "${args[@]}" &
+    fi
 }
 
 ########################

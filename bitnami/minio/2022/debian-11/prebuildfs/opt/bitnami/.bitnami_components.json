@@ -1,30 +1,30 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449",
+        "digest": "e36c3d90f4fbfbe989f40947fa7c8ab817f12fcf97d3aef893c753a20ce976ab",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-153"
+        "version": "1.14.0-154"
     },
     "minio": {
         "arch": "amd64",
-        "digest": "ae34cb2c97b1988768eafeff0f6258dfbc3be872651424c0fbd15e62dcdf0a60",
+        "digest": "0b8568130722ff76accc2fa972004c84454b0aae1485b7255633d96559074d70",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2022.8.22-0"
+        "version": "2022.9.7-0"
     },
     "minio-client": {
         "arch": "amd64",
-        "digest": "4b18a55a3a9fd500fd5e6be62cfe434001415fb82550cedcd3eef57e39da3127",
+        "digest": "ec03cdf0a6bdcd9d6a8bad989f09b0818edec9a23f60616beaddc06e2328a44f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2022.8.11-0"
+        "version": "2022.8.28-0"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "8c8e324ab6e7b7d76b4655182d6ea5f6550edfc9e32bec92228e678c26fc8b16",
+        "digest": "74a09c2208af7316f32ee3ee8479d70b20ad54f1a989e84b6417e23c1f07c147",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.3-153"
+        "version": "1.0.3-154"
     }
 }

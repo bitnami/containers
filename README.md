@@ -1,5 +1,5 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/bitnami/containers/blob/main/CONTRIBUTING.md)
-[![[CI/CD] CD Pipeline](https://github.com/bitnami/containers/actions/workflows/cd-pipeline.yaml/badge.svg)](https://github.com/bitnami/containers/actions/workflows/cd-pipeline.yaml)
+[![[CI/CD] CD Pipeline](https://github.com/bitnami/containers/actions/workflows/cd-pipeline.yml/badge.svg)](https://github.com/bitnami/containers/actions/workflows/cd-pipeline.yml)
 
 # The Bitnami Containers Library
 

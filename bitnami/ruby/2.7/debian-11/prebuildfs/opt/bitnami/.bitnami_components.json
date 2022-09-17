@@ -1,9 +1,9 @@
 {
     "ruby": {
         "arch": "amd64",
-        "digest": "e540186296667507c027334b500b6058952398e9b98c1e9ebd62f2b3775e61bc",
+        "digest": "b1dcd98e0cbf8f896619e60e3867bbd7c63e28a319a4d57833f1698d9d2f7e6d",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.7.6-152"
+        "version": "2.7.6-153"
     }
 }

@@ -1,0 +1,36 @@
+name: '[Support] Debug events'
+on:
+  project_card:
+    types:
+      - moved
+permissions:
+  issues: read 
+jobs:
+  debugJob:    
+    name: Print event
+    runs-on: ubuntu-latest
+    steps:
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: |
+        echo "$GITHUB_CONTEXT"
+    - name: Get issue info
+      id: get-issue
+      run: |
+        issue_info=$(curl -s --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -X GET -G "${{ github.event.project_card.content_url }}" )
+        assignees="$(echo $issue_info | jq -r '.assignees')"
+        creator="$(echo $issue_info | jq -r '.user.login')"
+        pull_request="$(echo $issue_info | jq -r '.pull_request')"
+        type="pull_request"
+        if [[ "${pull_request}" == "null" ]]; then
+          type="issue"
+        fi
+        echo "::set-output name=assignees::${assignees}"
+        echo "::set-output name=creator::${creator}"
+        echo "::set-output name=type::${type}"
+    - name: Dump getissue outputs
+      env:
+        ISSUE_OUTPUTS: ${{ toJson(steps.get-issue.outputs) }}
+      run: |
+        echo "$ISSUE_OUTPUTS"

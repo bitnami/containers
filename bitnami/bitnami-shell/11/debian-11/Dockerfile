@@ -1,8 +1,10 @@
 FROM docker.io/bitnami/minideb:bullseye
 
+ARG TARGETARCH
+
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="11-debian-11-r28" \
+      org.opencontainers.image.ref.name="11-debian-11-r35" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/bitnami-shell" \
       org.opencontainers.image.title="bitnami-shell" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -18,7 +20,7 @@ RUN apt-get update && apt-get upgrade -y && \
 ENV APP_VERSION="11" \
     BITNAMI_APP_NAME="bitnami-shell" \
     HOME="/" \
-    OS_ARCH="amd64" \
+    OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 

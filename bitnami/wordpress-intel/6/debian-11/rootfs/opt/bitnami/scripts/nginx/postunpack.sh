@@ -46,6 +46,8 @@ nginx_patch_httpoxy_vulnerability
 
 # Configure default HTTP port
 nginx_configure_port "$NGINX_DEFAULT_HTTP_PORT_NUMBER"
+# Configure default HTTPS port
+nginx_configure_port "$NGINX_DEFAULT_HTTPS_PORT_NUMBER" "${BITNAMI_ROOT_DIR}/scripts/nginx/server_blocks/default-https-server-block.conf"
 
 # shellcheck disable=SC1091
 

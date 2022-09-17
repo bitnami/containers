@@ -28,7 +28,7 @@ $ docker run --name sealed-secrets bitnami/sealed-secrets:latest
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`0`, `0-scratch`, `0.18.1`, `0.18.1-scratch-r3`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/sealed-secrets/0/scratch/Dockerfile)
+* [`0`, `0-scratch`, `0.18.2`, `0.18.2-scratch-r1`, `latest` (0/scratch/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/sealed-secrets/0/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 

@@ -23,7 +23,7 @@ $ docker-compose up -d
 
 ## Why use Intel optimized containers
 
-New instructions, coupled with algorithmic and software innovations, deliver breakthrough performance for the industry's most widely deployed cryptographic ciphers. Encryption is becoming pervasive with most organizations increasingly adopting encryption for application execution, data in flight, and data storage. 3rd gen Intel® Xeon® Scalable Processor (Ice Lake) cores and architecture, offers several new instructions for encryption acceleration.
+New instructions, coupled with algorithmic and software innovations, deliver breakthrough performance for the industry's most widely deployed cryptographic ciphers. Encryption is becoming pervasive with most organizations increasingly adopting encryption for application execution, data in flight, and data storage. 3rd gen Intel(R) Xeon(R) Scalable Processor (Ice Lake) cores and architecture, offers several new instructions for encryption acceleration.
 
 This solution requires 3rd gen Intel Xeon Scalable Processor (Ice Lake) to get a breakthrough performance improvement.
 
@@ -45,7 +45,7 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`2`, `2-debian-11`, `2.9.1`, `2.9.1-debian-11-r23`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/tensorflow-intel/2/debian-11/Dockerfile)
+* [`2`, `2-debian-11`, `2.9.2`, `2.9.2-debian-11-r4`, `latest` (2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/tensorflow-intel/2/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 

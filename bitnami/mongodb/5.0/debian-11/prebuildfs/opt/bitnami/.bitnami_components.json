@@ -1,44 +1,44 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "d3ae0109be24e8bc56f97359b8290b91243454de946dd60bd8520a0896a88449",
+        "digest": "e36c3d90f4fbfbe989f40947fa7c8ab817f12fcf97d3aef893c753a20ce976ab",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-153"
+        "version": "1.14.0-154"
     },
     "mongodb": {
         "arch": "amd64",
-        "digest": "1753298894980c0af9366d94cafb87af3c4b61cfbbd51b054580778df8ac67f6",
+        "digest": "d64a9d57c22d770c0597af08d08ce6a9c7558a6540adb03a4d5727bdfb34dfa2",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.0.11-1"
+        "version": "5.0.12-0"
     },
     "mongodb-shell": {
         "arch": "amd64",
-        "digest": "b906d79b47081b2fad1b142a2f737355075b20be86a189b15d88a5617117e5fd",
+        "digest": "77e3526b982f5fc7160827d41d2fae83a4c3dd3c88dec6fa2b2ce4cbb0078ef8",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.5.4-1"
+        "version": "1.5.4-2"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "7909504f3232654c427681ecc8ed4b8599a2df0f17f26ff769a83ed167d05b69",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.0.3-152"
-    },
-    "wait-for-port": {
-        "arch": "amd64",
-        "digest": "8c8e324ab6e7b7d76b4655182d6ea5f6550edfc9e32bec92228e678c26fc8b16",
+        "digest": "c1f2cdabdcc920512e8936ab2c8a033e1aeb97801fa026f0b12432581bf849ae",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "1.0.3-153"
     },
-    "yq": {
+    "wait-for-port": {
         "arch": "amd64",
-        "digest": "44d0058c0fffa1ccc89c081ed3e5c897489fa02580a839cfe1d37b2ca771f237",
+        "digest": "74a09c2208af7316f32ee3ee8479d70b20ad54f1a989e84b6417e23c1f07c147",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.27.2-1"
+        "version": "1.0.3-154"
+    },
+    "yq": {
+        "arch": "amd64",
+        "digest": "ba43314727b7797557eee675a9e3cd4bf1d396c0b1fcce544e828ca9521256e6",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "4.27.5-0"
     }
 }
