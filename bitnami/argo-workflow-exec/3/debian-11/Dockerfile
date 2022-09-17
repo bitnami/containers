@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.3.9-debian-11-r12" \
+      org.opencontainers.image.ref.name="3.3.9-debian-11-r13" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/argo-workflow-exec" \
       org.opencontainers.image.title="argo-workflow-exec" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -19,13 +19,13 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages acl ca-certificates curl gzip jq procps tar
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f kubectl-1.23.10-1-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/kubectl-1.23.10-1-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/kubectl-1.23.10-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f kubectl-1.23.11-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/kubectl-1.23.11-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/kubectl-1.23.11-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c kubectl-1.23.10-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf kubectl-1.23.10-1-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf kubectl-1.23.10-1-linux-${OS_ARCH}-debian-11.tar.gz kubectl-1.23.10-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    sha256sum -c kubectl-1.23.11-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf kubectl-1.23.11-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf kubectl-1.23.11-0-linux-${OS_ARCH}-debian-11.tar.gz kubectl-1.23.11-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
