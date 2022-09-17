@@ -271,3 +271,140 @@ remove_logrotate_conf() {
     local logrotate_conf_dir="/etc/logrotate.d"
     rm -f "${logrotate_conf_dir}/${service_name}"
 }
+
+########################
+# Generate a Systemd configuration file
+# Arguments:
+#   $1 - Service name
+# Flags:
+#   --exec-start - Start command (required)
+#   --exec-stop - Stop command (optional)
+#   --exec-reload - Reload command (optional)
+#   --name - Service full name (e.g. Apache HTTP Server, defaults to $1)
+#   --restart - When to restart the Systemd service after being stopped (defaults to always)
+#   --pid-file - Service PID file (required when --restart is set to always)
+#   --type - Systemd unit type (defaults to forking)
+#   --user - System user to start the service with
+#   --group - System group to start the service with
+#   --environment - Environment variable to define (multiple --environment options may be passed)
+# Returns:
+#   None
+#########################
+generate_systemd_conf() {
+    local -r service_name="${1:?service name is missing}"
+    local -r systemd_units_dir="/etc/systemd/system"
+    local -r service_file="${systemd_units_dir}/bitnami.${service_name}.service"
+    # Default values
+    local name="$service_name"
+    local type="forking"
+    local user=""
+    local group=""
+    local environment=""
+    local exec_start=""
+    local exec_stop=""
+    local exec_reload=""
+    local restart="always"
+    local pid_file=""
+    # Parse CLI flags
+    shift
+    while [[ "$#" -gt 0 ]]; do
+        case "$1" in
+            --name \
+            | --type \
+            | --user \
+            | --group \
+            | --exec-start \
+            | --exec-stop \
+            | --exec-reload \
+            | --restart \
+            | --pid-file \
+            )
+                var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
+                shift
+                declare "$var_name"="${1:?"$var_name" is missing}"
+                ;;
+            --environment)
+                shift
+                # It is possible to add multiple environment lines
+                [[ -n "$environment" ]] && environment+=$'\n'
+                environment+="Environment=${1:?"environment" is missing}"
+                ;;
+            *)
+                echo "Invalid command line flag ${1}" >&2
+                return 1
+                ;;
+        esac
+        shift
+    done
+    # Validate inputs
+    local error="no"
+    if [[ -z "$exec_start" ]]; then
+        error "The --exec-start option is required"
+        error="yes"
+    fi
+    if [[ "$restart" = "always" && -z "$pid_file" ]]; then
+        error "The --restart option cannot be set to 'always' if --pid-file is not set"
+        error="yes"
+    fi
+    if [[ "$error" != "no" ]]; then
+        return 1
+    fi
+    # Generate the Systemd unit
+    cat > "$service_file" <<EOF
+[Unit]
+Description=Bitnami service for ${name}
+# Starting/stopping the main bitnami service should cause the same effect for this service
+PartOf=bitnami.service
+
+[Service]
+Type=${type}
+ExecStart=${exec_start}
+EOF
+    # Optional stop and reload commands
+    if [[ -n "$exec_stop" ]]; then
+        cat >> "$service_file" <<EOF
+ExecStop=${exec_stop}
+EOF
+    fi
+    if [[ -n "$exec_reload" ]]; then
+        cat >> "$service_file" <<EOF
+ExecReload=${exec_reload}
+EOF
+    fi
+    # User and group
+    if [[ -n "$user" ]]; then
+        cat >> "$service_file" <<EOF
+User=${user}
+EOF
+    fi
+    if [[ -n "$group" ]]; then
+        cat >> "$service_file" <<EOF
+Group=${group}
+EOF
+    fi
+    # PID file allows to determine if the main process is running properly (for Restart=always)
+    if [[ -n "$pid_file" ]]; then
+        cat >> "$service_file" <<EOF
+PIDFile=${pid_file}
+EOF
+    fi
+    # Environment flags (may be specified multiple times in a unit)
+    if [[ -n "$environment" ]]; then
+        cat >> "$service_file" <<< "$environment"
+    fi
+    cat >> "$service_file" <<EOF
+Restart=${restart}
+# Optimizations
+TimeoutSec=5min
+IgnoreSIGPIPE=no
+KillMode=mixed
+# Limits
+LimitNOFILE=infinity
+# Configure output to appear in instance console output
+StandardOutput=journal+console
+
+[Install]
+# Enabling/disabling the main bitnami service should cause the same effect for this service
+WantedBy=bitnami.service
+EOF
+}
