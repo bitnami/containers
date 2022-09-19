@@ -117,24 +117,24 @@ jobs:
     if: ${{ always() }}
     steps:
       - name: Verification Summary
-        run: |
-          if [[ "${{ needs.get-containers.result }}" != "success" ]]; then
-            echo "Verification is required."
-            echo "If you've just created this PR, don't worry about this message. Bitnami Team has to review it and make the verification possible."
-            exit 1
-          else
-            if [[ "${{ needs.get-containers.outputs.result }}" == "skip" ]]; then
-              echo "It seems these changes don't involve any container"
-            else
-              if [[ "${{ needs.vib-verify.result }}" != "success" ]]; then
-                echo "Verification is required"
-                echo "Please review previous jobs to get more information"
-                exit 1
+        uses: actions/github-script@v6
+        with:
+          script: |
+            if ("${{ needs.get-containers.result }}" != "success" ) {
+              core.info("If you've just created this PR, don't worry about this message. Bitnami Team has to review it and make the verification possible.")
+              core.notice("Verification is required.")
+            } else {
+              if ("${{ needs.get-containers.outputs.result }}" == "skip" ) {
+                core.info("It seems these changes don't involve any container")
               else
-                echo "Well done! Everything looks good. Please wait for the Bitnami Team review."
+                if ("${{ needs.vib-verify.result }}" != "success" ) {
+                  core.info("Please review previous jobs to get more information")
+                  core.notice("Verification is required")
+                else
+                  core.info("Well done! Everything looks good. Please wait for the Bitnami Team review.")
+                fi
               fi
-            fi
-          fi
+            }
   auto-pr-review:
     runs-on: ubuntu-latest
     name: Reviewal for automated PRs
