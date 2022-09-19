@@ -1,10 +1,10 @@
 {
     "ghost": {
         "arch": "amd64",
-        "digest": "de688a1ec7ca25bbeb7bec35cbc7978f21cf66236c34d10c2db4fbedbef2fc26",
+        "digest": "d2ee8ee019633273194c895fdb6e78a7abd35467bf5b927336e64be9d988fb14",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.14.2-0"
+        "version": "5.15.0-0"
     },
     "gosu": {
         "arch": "amd64",
