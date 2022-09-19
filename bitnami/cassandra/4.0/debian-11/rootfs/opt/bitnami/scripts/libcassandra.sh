@@ -839,7 +839,7 @@ wait_for_nodetool_up() {
         # https://community.datastax.com/questions/13764/java-version-for-cassandra-3113.html
         local -r check_cmd=("${CASSANDRA_BIN_DIR}/nodetool" "-Dcom.sun.jndi.rmiURLParsing=legacy")
         local -r check_args=("status" "--port" "$CASSANDRA_JMX_PORT_NUMBER")
-        local -r machine_ip="$(dns_lookup "$CASSANDRA_HOST" "v4")"
+        local -r machine_ip="$(dns_lookup "${CASSANDRA_BROADCAST_ADDRESS:-$CASSANDRA_HOST}" "v4")"
         local -r check_regex="UN\s*(${CASSANDRA_HOST}|${machine_ip}|127.0.0.1)"
 
         local output="/dev/null"
@@ -855,7 +855,7 @@ wait_for_nodetool_up() {
         # https://community.datastax.com/questions/13764/java-version-for-cassandra-3113.html
         local -r check_cmd=("${CASSANDRA_BIN_DIR}/nodetool" "-Dcom.sun.jndi.rmiURLParsing=legacy")
         local -r check_args=("status" "--port" "$CASSANDRA_JMX_PORT_NUMBER")
-        local -r machine_ip="$(dns_lookup "$CASSANDRA_HOST" "v4")"
+        local -r machine_ip="$(dns_lookup "${CASSANDRA_BROADCAST_ADDRESS:-$CASSANDRA_HOST}" "v4")"
         local -r check_regex="UN\s*"
         read -r -a host_list <<<"$(tr ',;' ' ' <<<"$CASSANDRA_NODES")"
         local -r expected_node_count="${#host_list[@]}"
