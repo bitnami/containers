@@ -87,7 +87,7 @@ jobs:
             echo "::set-output name=result::skip"
           fi
       - id: get-registry-credentials
-        name: Get staging marketplace's registry credentials
+        name: Get marketplace's registry credentials
         run: |
           csp_auth_token=$(curl -s -H 'Content-Type: application/x-www-form-urlencoded' -X POST -d "grant_type=refresh_token&api_token=${{ secrets.PROD_MARKETPLACE_API_TOKEN }}" https://console.cloud.vmware.com/csp/gateway/am/api/auth/api-tokens/authorize | jq -re .access_token)
           repo_info=$(curl -s -X POST -H "Content-Type: application/json" -H "csp-auth-token:$csp_auth_token" -d '{"withCredentials":true, "storageType":"OCI"}' https://gtw.marketplace.cloud.vmware.com/api/v1/repositories/transient)
