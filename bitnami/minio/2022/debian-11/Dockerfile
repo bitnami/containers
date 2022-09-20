@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2022.9.7-debian-11-r6" \
+      org.opencontainers.image.ref.name="2022.9.17-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/minio" \
       org.opencontainers.image.title="minio" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2022.9.7"
+      org.opencontainers.image.version="2022.9.17"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -36,13 +36,13 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf minio-client-2022.9.16-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf minio-client-2022.9.16-0-linux-${OS_ARCH}-debian-11.tar.gz minio-client-2022.9.16-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f minio-2022.9.7-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/minio-2022.9.7-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/minio-2022.9.7-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f minio-2022.9.17-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/minio-2022.9.17-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/minio-2022.9.17-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c minio-2022.9.7-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf minio-2022.9.7-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf minio-2022.9.7-0-linux-${OS_ARCH}-debian-11.tar.gz minio-2022.9.7-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    sha256sum -c minio-2022.9.17-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf minio-2022.9.17-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf minio-2022.9.17-0-linux-${OS_ARCH}-debian-11.tar.gz minio-2022.9.17-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
@@ -58,7 +58,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/minio-client/postunpack.sh
 RUN /opt/bitnami/scripts/minio/postunpack.sh
-ENV APP_VERSION="2022.9.7" \
+ENV APP_VERSION="2022.9.17" \
     BITNAMI_APP_NAME="minio" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/minio-client/bin:/opt/bitnami/minio/bin:$PATH"
 
