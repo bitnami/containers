@@ -222,6 +222,7 @@ The configuration can easily be setup with the Bitnami Apache ZooKeeper Docker i
  - `ZOO_TLS_QUORUM_CLIENT_AUTH`: Specifies options to authenticate TLS connections from clients. Available values are: `none`, `want`, `need`. Default: **need**
  - `ZOO_ENABLE_ADMIN_SERVER`: Enable [admin server](https://zookeeper.apache.org/doc/r3.5.7/zookeeperAdmin.html#sc_adminserver). Default: **yes**
  - `ZOO_ADMIN_SERVER_PORT_NUMBER`: [Admin server](https://zookeeper.apache.org/doc/r3.5.7/zookeeperAdmin.html#sc_adminserver) port. Default: **8080**
+ - `ZOO_PEER_TYPE`: Zookeeper Node [Peer type](https://zookeeper.apache.org/doc/r3.6.3/zookeeperObservers.html). Default: No Defaults
 
 ```console
 $ docker run --name zookeeper -e ZOO_SERVER_ID=1 bitnami/zookeeper:latest
@@ -331,6 +332,8 @@ A Apache ZooKeeper (https://zookeeper.apache.org/doc/r3.1.2/zookeeperAdmin.html)
  - `ZOO_SERVERS`: Comma, space or semi-colon separated list of servers.This can be done with or without specifying the ID of the server in the ensemble. No defaults. Examples:
   - without Server ID - zoo1:2888:3888,zoo2:2888:3888
   - with Server ID - zoo1:2888:3888::1,zoo2:2888:3888::2
+  - without Server ID And Observers - zoo1:2888:3888,zoo2:2888:3888:observer
+  - with Server ID And Observers - zoo1:2888:3888::1,zoo2:2888:3888:observer::2
 
 For reliable Apache ZooKeeper service, you should deploy Apache ZooKeeper in a cluster known as an ensemble. As long as a majority of the ensemble are up, the service will be available. Because Apache ZooKeeper requires a majority, it is best to use an odd number of machines. For example, with four machines Apache ZooKeeper can only handle the failure of a single machine; if two machines fail, the remaining two machines do not constitute a majority. However, with five machines Apache ZooKeeper can handle the failure of two machines.
 
