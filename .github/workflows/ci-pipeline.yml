@@ -116,7 +116,7 @@ jobs:
       - vib-verify
     if: ${{ always() }}
     steps:
-      - name: Retrieve Verification Summary
+      - name: Check Status
         uses: actions/github-script@v6
         with:
           script: |
@@ -126,17 +126,15 @@ jobs:
               description = "If you've just created this PR, don't worry about this message. Bitnami Team has to review it and make the verification possible."
               core.warning(description)
               state = 'pending'
+            } else if ("${{ needs.get-containers.outputs.result }}" == "skip" ) {
+              description = "It seems these changes don't involve any container"
+              core.warning(description)
+            } else if ("${{ needs.vib-verify.result }}" != "success" ) {
+              description = "Please review previous jobs to get more information"
+              core.error(description)
+              state = 'error'
             } else {
-              if ("${{ needs.get-containers.outputs.result }}" == "skip" ) {
-                description = "It seems these changes don't involve any container"
-                core.warning(description)
-              } else {
-                if ("${{ needs.vib-verify.result }}" != "success" ) {
-                  description = "Please review previous jobs to get more information"
-                  core.error(description)
-                  state = 'error'
-                }
-              }
+              core.notice(description)
             }
             try {
               await github.rest.repos.createCommitStatus({
