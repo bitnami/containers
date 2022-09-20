@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="9.3.7-debian-11-r5" \
+      org.opencontainers.image.ref.name="9.3.8-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/laravel" \
       org.opencontainers.image.title="laravel" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="9.3.7"
+      org.opencontainers.image.version="9.3.8"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
@@ -51,13 +51,13 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf wait-for-port-1.0.3-154-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf wait-for-port-1.0.3-154-linux-${OS_ARCH}-debian-11.tar.gz wait-for-port-1.0.3-154-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f laravel-9.3.7-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/laravel-9.3.7-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/laravel-9.3.7-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f laravel-9.3.8-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/laravel-9.3.8-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/laravel-9.3.8-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c laravel-9.3.7-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf laravel-9.3.7-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf laravel-9.3.7-0-linux-${OS_ARCH}-debian-11.tar.gz laravel-9.3.7-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    sha256sum -c laravel-9.3.8-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf laravel-9.3.8-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf laravel-9.3.8-0-linux-${OS_ARCH}-debian-11.tar.gz laravel-9.3.8-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
@@ -73,7 +73,7 @@ RUN /build/bitnami-user.sh
 COPY rootfs /
 RUN /opt/bitnami/scripts/laravel/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
-ENV APP_VERSION="9.3.7" \
+ENV APP_VERSION="9.3.8" \
     BITNAMI_APP_NAME="laravel" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/node/bin:/opt/bitnami/common/bin:$PATH" \
