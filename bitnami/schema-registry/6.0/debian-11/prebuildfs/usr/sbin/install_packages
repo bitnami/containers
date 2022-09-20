@@ -1,9 +1,10 @@
 #!/bin/sh
-set -e
-set -u
-export DEBIAN_FRONTEND=noninteractive
+set -eu
+
 n=0
 max=2
+export DEBIAN_FRONTEND=noninteractive
+
 until [ $n -gt $max ]; do
     set +e
     (
@@ -21,4 +22,4 @@ until [ $n -gt $max ]; do
     echo "apt failed, retrying"
     n=$(($n + 1))
 done
-rm -r /var/lib/apt/lists /var/cache/apt/archives
+apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
