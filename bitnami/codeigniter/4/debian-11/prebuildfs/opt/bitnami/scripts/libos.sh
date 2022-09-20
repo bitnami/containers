@@ -197,6 +197,8 @@ am_i_root() {
 #   --version - Distro version
 #   --branch - Distro branch
 #   --codename - Distro codename
+#   --name - Distro name
+#   --pretty-name - Distro pretty name
 # Returns:
 #   String
 #########################
@@ -222,6 +224,12 @@ get_os_metadata() {
         ;;
     --codename)
         get_os_release_metadata VERSION_CODENAME
+        ;;
+    --name)
+        get_os_release_metadata NAME
+        ;;
+    --pretty-name)
+        get_os_release_metadata PRETTY_NAME
         ;;
     *)
         error "Unknown flag ${flag_name}"
