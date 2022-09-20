@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.37.3-debian-11-r6" \
+      org.opencontainers.image.ref.name="2.37.3-debian-11-r7" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/git" \
       org.opencontainers.image.title="git" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -35,7 +35,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf git-2.37.3-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf git-2.37.3-0-linux-${OS_ARCH}-debian-11.tar.gz git-2.37.3-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN apt-get update && apt-get upgrade -y && \
-    rm -r /var/lib/apt/lists /var/cache/apt/archives
+    apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 ENV APP_VERSION="2.37.3" \
