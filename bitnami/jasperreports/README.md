@@ -284,7 +284,7 @@ To configure JasperReports to send email using SMTP you can set the following en
 - `JASPERREPORTS_SMTP_PORT_NUMBER`: SMTP port.
 - `JASPERREPORTS_SMTP_USER`: SMTP account user.
 - `JASPERREPORTS_SMTP_PASSWORD`: SMTP account password.
-- `JASPERREPORTS_SMTP_PROTOCOL`: If specified, SMTP protocol to use. Allowed values: *tls*, *ssl*. No default.
+- `JASPERREPORTS_SMTP_PROTOCOL`: If specified, SMTP protocol to use. Allowed values: *smtp*, *tls*, *ssl*. Default: **smtp**.
 
 ##### JasperReports base URL configuration
 
