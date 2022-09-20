@@ -10,6 +10,7 @@ on: # rebuild any PRs and main branch changes
 permissions:
   issues: write
   pull-requests: write
+  statuses: write
 env:
   CSP_API_URL: https://console.cloud.vmware.com
   CSP_API_TOKEN: ${{ secrets.CSP_API_TOKEN }}
@@ -21,8 +22,7 @@ jobs:
     if: |
       github.event.pull_request.state != 'closed' &&
       (
-        (github.event.action == 'labeled' && github.event.label.name == 'verify') ||
-        (github.event.action != 'labeled' && contains(github.event.pull_request.labels.*.name, 'verify'))
+        contains(github.event.pull_request.labels.*.name, 'verify') || (github.event.action == 'labeled' && github.event.label.name == 'verify')
       )
     outputs:
       result: ${{ steps.get-containers.outputs.result }}
@@ -116,24 +116,41 @@ jobs:
       - vib-verify
     if: ${{ always() }}
     steps:
-      - name: Verification Summary
+      - name: Retrieve Verification Summary
         uses: actions/github-script@v6
         with:
           script: |
+            state = 'success'
+            description = 'Well done! Everything looks good. Please wait for the Bitnami Team review.'
             if ("${{ needs.get-containers.result }}" != "success" ) {
-              core.info("If you've just created this PR, don't worry about this message. Bitnami Team has to review it and make the verification possible.")
-              core.notice("Verification is required.")
+              description = "If you've just created this PR, don't worry about this message. Bitnami Team has to review it and make the verification possible."
+              core.warning(description)
+              state = 'pending'
             } else {
               if ("${{ needs.get-containers.outputs.result }}" == "skip" ) {
-                core.info("It seems these changes don't involve any container")
-              else
+                description = "It seems these changes don't involve any container"
+                core.warning(description)
+              } else {
                 if ("${{ needs.vib-verify.result }}" != "success" ) {
-                  core.info("Please review previous jobs to get more information")
-                  core.notice("Verification is required")
-                else
-                  core.info("Well done! Everything looks good. Please wait for the Bitnami Team review.")
-                fi
-              fi
+                  description = "Please review previous jobs to get more information"
+                  core.error(description)
+                  state = 'error'
+                }
+              }
+            }
+            try {
+              await github.rest.repos.createCommitStatus({
+                context: `${context.workflow} / Verification Summary (${context.eventName})`,
+                owner: context.payload.repository.owner.login,
+                repo: context.payload.repository.name,
+                sha: context.payload.pull_request.head.sha,
+                target_url: `${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`,
+                description: description,
+                state: state
+              })
+              core.info(`Updated build status: ${state}`)
+            } catch (error) {
+              core.setFailed(error.message)
             }
   auto-pr-review:
     runs-on: ubuntu-latest
