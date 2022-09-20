@@ -22,10 +22,10 @@
     },
     "parse": {
         "arch": "amd64",
-        "digest": "a204640c889ae57e0e22ad2b15c128fbec66ca0cac2af784cbe33eed722ef9bc",
+        "digest": "508d7bb8128d2c862e263292eefb4546c4adca0d426b646625a5cfca26112d4b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.2.5-0"
+        "version": "5.2.6-0"
     },
     "python": {
         "arch": "amd64",
