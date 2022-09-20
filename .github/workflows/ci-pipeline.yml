@@ -21,7 +21,7 @@ jobs:
     if: |
       github.event.pull_request.state != 'closed' &&
       (
-        contains(github.event.pull_request.labels.*.name, 'verify') || (github.event.action == 'labeled' && (github.event.label.name == 'verify'))
+        contains(github.event.pull_request.labels.*.name, 'verify') || (github.event.action == 'labeled' && github.event.label.name == 'verify')
       )
     outputs:
       result: ${{ steps.get-containers.outputs.result }}
