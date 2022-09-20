@@ -110,7 +110,7 @@ jobs:
   verification-summary:
     # Ensure all containers passed the verification
     runs-on: ubuntu-latest
-    name: Verification Summary
+    name: Check Matrix Outcome
     needs:
       - get-containers
       - vib-verify
