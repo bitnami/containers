@@ -15,10 +15,10 @@
     },
     "mongodb-shell": {
         "arch": "amd64",
-        "digest": "77e3526b982f5fc7160827d41d2fae83a4c3dd3c88dec6fa2b2ce4cbb0078ef8",
+        "digest": "106b6f4394fe3f4886a09f9d0b3b1dca753e1187068177d3ffde32b2794eb619",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.5.4-2"
+        "version": "1.6.0-0"
     },
     "render-template": {
         "arch": "amd64",
