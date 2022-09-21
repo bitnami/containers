@@ -8,10 +8,10 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "7214b8ab81c9d919f87f027590ca80c198f65fe50c5e2886d8e5e20691aee8d7",
+        "digest": "98cbaca6fc1aca76fdbfc11ee57d05924adc956401396375c4be43c5c671dca5",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.15-1-3"
+        "version": "11.0.16-0"
     },
     "postgresql-client": {
         "arch": "amd64",
