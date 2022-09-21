@@ -123,7 +123,7 @@ jobs:
             state = 'success'
             description = 'Well done! Everything looks good. Please wait for the Bitnami Team review.'
             if ("${{ needs.get-containers.result }}" != "success" ) {
-              description = "If you've just created this PR, don't worry about this message. Bitnami Team has to review it and make the verification possible."
+              description = "If you've just created this PR, don't worry about this message. The Bitnami Team has to review it and make the verification possible."
               core.warning(description)
               state = 'pending'
             } else if ("${{ needs.get-containers.outputs.result }}" == "skip" ) {
