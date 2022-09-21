@@ -8,17 +8,17 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "14ae2f6d8d5f4e3a9e4cf62d5a3da80587a20651a5920dbc4ac89afdaf06f8c0",
+        "digest": "8a1d2ee97e1e6b337254b886f99392ea181cc1708965212e776b205dd61731a2",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.6.9-1"
+        "version": "10.6.10-0"
     },
     "php": {
         "arch": "amd64",
-        "digest": "a17043c3bc38c09f25749466f79f39d4cd3826a46723f07c83795aaac7bdc5e3",
+        "digest": "9e74baed2d48536f078de6ec63cf5618d4815aba1d76666e2b42805cc698674c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.23-3"
+        "version": "8.0.23-4"
     },
     "symfony": {
         "arch": "amd64",
