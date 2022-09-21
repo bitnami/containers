@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.24.0-debian-11-r38" \
+      org.opencontainers.image.ref.name="0.24.0-debian-11-r39" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/alertmanager" \
       org.opencontainers.image.title="alertmanager" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -28,7 +28,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf alertmanager-0.24.0-155-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf alertmanager-0.24.0-155-linux-${OS_ARCH}-debian-11.tar.gz alertmanager-0.24.0-155-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN apt-get update && apt-get upgrade -y && \
-    rm -r /var/lib/apt/lists /var/cache/apt/archives
+    apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN ln -sf /opt/bitnami/alertmanager/conf /etc/alertmanager
 RUN ln -sf /opt/bitnami/alertmanager/data /alertmanager
 RUN chmod g+rwX /opt/bitnami
