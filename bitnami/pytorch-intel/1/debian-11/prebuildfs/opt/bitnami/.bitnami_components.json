@@ -15,9 +15,9 @@
     },
     "pytorch-intel": {
         "arch": "amd64",
-        "digest": "607a7ac733ce025ec8d9a76ed2e416fc8c3323c4cbb684752bcfd0b87c0ef0c5",
+        "digest": "76b2b2ae6878e0d3ec623aba1cdef2fa5adb8f928b226695638ef8e5f62d1f18",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.12.1-4"
+        "version": "1.12.1-5"
     }
 }
