@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.12.1-debian-11-r15" \
+      org.opencontainers.image.ref.name="1.12.1-debian-11-r16" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pytorch-intel" \
       org.opencontainers.image.title="pytorch-intel" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -45,7 +45,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     rm -rf gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN apt-get autoremove --purge -y curl && \
     apt-get update && apt-get upgrade -y && \
-    rm -r /var/lib/apt/lists /var/cache/apt/archives
+    apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
