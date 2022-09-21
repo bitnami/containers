@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.12.1-debian-11-r16" \
+      org.opencontainers.image.ref.name="1.12.1-debian-11-r17" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pytorch-intel" \
       org.opencontainers.image.title="pytorch-intel" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -28,13 +28,13 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf python-3.8.14-1-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf python-3.8.14-1-linux-${OS_ARCH}-debian-11.tar.gz python-3.8.14-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f pytorch-intel-1.12.1-4-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/pytorch-intel-1.12.1-4-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/pytorch-intel-1.12.1-4-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f pytorch-intel-1.12.1-5-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/pytorch-intel-1.12.1-5-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/pytorch-intel-1.12.1-5-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c pytorch-intel-1.12.1-4-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf pytorch-intel-1.12.1-4-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf pytorch-intel-1.12.1-4-linux-${OS_ARCH}-debian-11.tar.gz pytorch-intel-1.12.1-4-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    sha256sum -c pytorch-intel-1.12.1-5-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf pytorch-intel-1.12.1-5-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf pytorch-intel-1.12.1-5-linux-${OS_ARCH}-debian-11.tar.gz pytorch-intel-1.12.1-5-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
