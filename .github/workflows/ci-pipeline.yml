@@ -10,6 +10,7 @@ on: # rebuild any PRs and main branch changes
 permissions:
   issues: write
   pull-requests: write
+  statuses: write
 env:
   CSP_API_URL: https://console.cloud.vmware.com
   CSP_API_TOKEN: ${{ secrets.CSP_API_TOKEN }}
@@ -109,31 +110,46 @@ jobs:
   verification-summary:
     # Ensure all containers passed the verification
     runs-on: ubuntu-latest
-    name: Verification Summary
+    name: Check Matrix Outcome
     needs:
       - get-containers
       - vib-verify
     if: ${{ always() }}
     steps:
-      - name: Verification Summary
-        run: |
-          if [[ "${{ needs.get-containers.result }}" != "success" ]]; then
-            echo "Verification is required."
-            echo "If you've just created this PR, don't worry about this message. Bitnami Team has to review it and make the verification possible."
-            exit 1
-          else
-            if [[ "${{ needs.get-containers.outputs.result }}" == "skip" ]]; then
-              echo "It seems these changes don't involve any container"
-            else
-              if [[ "${{ needs.vib-verify.result }}" != "success" ]]; then
-                echo "Verification is required"
-                echo "Please review previous jobs to get more information"
-                exit 1
-              else
-                echo "Well done! Everything looks good. Please wait for the Bitnami Team review."
-              fi
-            fi
-          fi
+      - name: Check Status
+        uses: actions/github-script@v6
+        with:
+          script: |
+            state = 'success'
+            description = 'Well done! Everything looks good. Please wait for the Bitnami Team review.'
+            if ("${{ needs.get-containers.result }}" != "success" ) {
+              description = "If you've just created this PR, don't worry about this message. The Bitnami Team has to review it and make the verification possible."
+              core.warning(description)
+              state = 'pending'
+            } else if ("${{ needs.get-containers.outputs.result }}" == "skip" ) {
+              description = "It seems these changes don't involve any container"
+              core.warning(description)
+            } else if ("${{ needs.vib-verify.result }}" != "success" ) {
+              description = "Please review previous jobs to get more information"
+              core.error(description)
+              state = 'error'
+            } else {
+              core.notice(description)
+            }
+            try {
+              await github.rest.repos.createCommitStatus({
+                context: `${context.workflow} / Verification Summary (${context.eventName})`,
+                owner: context.payload.repository.owner.login,
+                repo: context.payload.repository.name,
+                sha: context.payload.pull_request.head.sha,
+                target_url: `${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`,
+                description: description,
+                state: state
+              })
+              core.info(`Updated build status: ${state}`)
+            } catch (error) {
+              core.setFailed(error.message)
+            }
   auto-pr-review:
     runs-on: ubuntu-latest
     name: Reviewal for automated PRs
