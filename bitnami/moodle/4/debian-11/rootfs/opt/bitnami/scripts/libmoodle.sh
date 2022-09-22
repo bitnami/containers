@@ -320,7 +320,7 @@ moodle_install() {
     local -a moodle_install_args=(
         "${PHP_BIN_DIR}/php"
         "admin/cli/install.php"
-        "--lang=en"
+        "--lang="${MOODLE_LANG}"
         "--chmod=2775"
         "--wwwroot=http://localhost:${http_port}"
         "--dataroot=${MOODLE_DATA_DIR}"
