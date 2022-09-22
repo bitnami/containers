@@ -714,7 +714,7 @@ EOF
 
     if [[ -n "$MONGODB_METRICS_USERNAME" ]] && [[ -n "$MONGODB_METRICS_PASSWORD" ]]; then
         info "Creating '$MONGODB_METRICS_USERNAME' user..."
-        mongodb_execute 'root' "$MONGODB_ROOT_PASSWORD" "" "127.0.0.1" <<EOF
+        mongodb_execute "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD" "" "127.0.0.1" <<EOF
 db.getSiblingDB('admin').createUser({ user: '$MONGODB_METRICS_USERNAME', pwd: '$MONGODB_METRICS_PASSWORD', roles: [{role: 'clusterMonitor', db: 'admin'},{ role: 'read', db: 'local' }] })
 EOF
     fi
