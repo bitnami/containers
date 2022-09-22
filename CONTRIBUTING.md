@@ -9,6 +9,8 @@ Any type of contribution is welcome: new features, bug fixes, documentation impr
 1. Fork this repository, develop, and test your changes.
 2. Submit a pull request.
 
+***NOTE***: To make the Pull Requests' (PRs) testing and merging process easier, please submit changes to multiple containers in separate PRs.
+
 ### Requirements
 
 When submitting a PR make sure that:
