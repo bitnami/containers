@@ -43,8 +43,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.3`, `3.3-debian-11`, `3.3.0`, `3.3.0-debian-11-r31`, `latest` (3.3/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/spark/3.3/debian-11/Dockerfile)
-* [`3.2`, `3.2-debian-11`, `3.2.2`, `3.2.2-debian-11-r22` (3.2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/spark/3.2/debian-11/Dockerfile)
+* [`3.3`, `3.3-debian-11`, `3.3.0`, `3.3.0-debian-11-r32`, `latest` (3.3/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/spark/3.3/debian-11/Dockerfile)
+* [`3.2`, `3.2-debian-11`, `3.2.2`, `3.2.2-debian-11-r21` (3.2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/spark/3.2/debian-11/Dockerfile)
 * [`3.1`, `3.1-debian-11`, `3.1.3`, `3.1.3-debian-11-r35` (3.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/spark/3.1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
