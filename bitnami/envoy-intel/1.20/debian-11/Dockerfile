@@ -18,7 +18,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip libc6 procps tar
+RUN install_packages ca-certificates curl libc6 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f envoy-intel-1.20.7-1-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/envoy-intel-1.20.7-1-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
