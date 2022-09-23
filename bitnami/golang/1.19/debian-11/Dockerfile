@@ -17,7 +17,7 @@ ENV OS_ARCH="${TARGETARCH:-amd64}" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages build-essential ca-certificates curl git gzip libc6 pkg-config procps tar unzip
+RUN install_packages build-essential ca-certificates curl git libc6 pkg-config procps unzip
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f golang-1.19.1-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/golang-1.19.1-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
