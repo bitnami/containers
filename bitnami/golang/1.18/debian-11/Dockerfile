@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.18.6-debian-11-r5" \
+      org.opencontainers.image.ref.name="1.18.6-debian-11-r6" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/golang" \
       org.opencontainers.image.title="golang" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -17,7 +17,7 @@ ENV OS_ARCH="${TARGETARCH:-amd64}" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages build-essential ca-certificates curl git gzip libc6 pkg-config procps tar unzip
+RUN install_packages build-essential ca-certificates curl git libc6 pkg-config procps unzip
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f golang-1.18.6-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/golang-1.18.6-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
