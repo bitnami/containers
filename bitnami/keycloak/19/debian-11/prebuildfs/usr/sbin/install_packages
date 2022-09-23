@@ -1,9 +1,10 @@
 #!/bin/sh
-set -e
-set -u
-export DEBIAN_FRONTEND=noninteractive
+set -eu
+
 n=0
 max=2
+export DEBIAN_FRONTEND=noninteractive
+
 until [ $n -gt $max ]; do
     set +e
     (
