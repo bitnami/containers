@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.6.0-debian-11-r7" \
+      org.opencontainers.image.ref.name="2.6.0-debian-11-r8" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kube-state-metrics" \
       org.opencontainers.image.title="kube-state-metrics" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -18,7 +18,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip libc6 procps tar
+RUN install_packages ca-certificates curl libc6 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f kube-state-metrics-2.6.0-1-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/kube-state-metrics-2.6.0-1-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
