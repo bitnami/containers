@@ -5,7 +5,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="17.0.4-8-debian-11-r15" \
+      org.opencontainers.image.ref.name="17.0.4-8-debian-11-r16" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/java" \
       org.opencontainers.image.title="java" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -18,7 +18,7 @@ ENV OS_ARCH="${TARGETARCH:-amd64}" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages acl ca-certificates curl gzip libc6 libsqlite3-dev libssl-dev locales procps tar wget zlib1g
+RUN install_packages ca-certificates curl libc6 libsqlite3-dev libssl-dev locales procps wget zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f java-17.0.4-8-2-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/java-17.0.4-8-2-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
