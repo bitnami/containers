@@ -46,7 +46,7 @@
         "digest": "9130703a114610a0f99387049082e49a525046231490345bdd7aaeda0e97c224",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.0.2-3"
+        "version": "6.0.2-4"
     },
     "wp-cli": {
         "arch": "amd64",
