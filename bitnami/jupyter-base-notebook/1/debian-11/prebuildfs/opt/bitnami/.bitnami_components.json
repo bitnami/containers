@@ -8,9 +8,16 @@
     },
     "miniconda": {
         "arch": "amd64",
-        "digest": "60138bae1b7541d2ecae75367eaa5ef158f6845dcb86ff746fc8402bdcae716b",
+        "digest": "bc9647618d0c17409ee678fd5a5877fb72ecfc783a6269326892484a82981c07",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.12.0-154"
+        "version": "4.12.0-156"
+    },
+    "tini": {
+        "arch": "amd64",
+        "digest": "50b38ec9a9be93542fe7d46c68f8a5d6f127acff24c3a7153edbb2849a474433",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "0.19.0-154"
     }
 }
