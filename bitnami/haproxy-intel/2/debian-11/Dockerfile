@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.6.5-debian-11-r6" \
+      org.opencontainers.image.ref.name="2.6.6-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/haproxy-intel" \
       org.opencontainers.image.title="haproxy-intel" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.6.5"
+      org.opencontainers.image.version="2.6.6"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -36,19 +36,19 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf haproxy-dataplaneapi-2.6.1-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf haproxy-dataplaneapi-2.6.1-0-linux-${OS_ARCH}-debian-11.tar.gz haproxy-dataplaneapi-2.6.1-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f haproxy-2.6.5-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/haproxy-2.6.5-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/haproxy-2.6.5-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f haproxy-2.6.6-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/haproxy-2.6.6-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/haproxy-2.6.6-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c haproxy-2.6.5-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf haproxy-2.6.5-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf haproxy-2.6.5-0-linux-${OS_ARCH}-debian-11.tar.gz haproxy-2.6.5-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    sha256sum -c haproxy-2.6.6-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf haproxy-2.6.6-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf haproxy-2.6.6-0-linux-${OS_ARCH}-debian-11.tar.gz haproxy-2.6.6-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN ln -s /opt/bitnami/common/lib/engines-1.1/* /usr/lib/x86_64-linux-gnu/engines-1.1/
 
-ENV APP_VERSION="2.6.5" \
+ENV APP_VERSION="2.6.6" \
     BITNAMI_APP_NAME="haproxy-intel" \
     PATH="/opt/bitnami/haproxy-dataplaneapi/bin:/opt/bitnami/haproxy/sbin:$PATH"
 
