@@ -45,8 +45,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`3.5`, `3.5-debian-11`, `3.5.5`, `3.5.5-debian-11-r3`, `latest` (3.5/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/etcd/3.5/debian-11/Dockerfile)
-* [`3.4`, `3.4-debian-11`, `3.4.21`, `3.4.21-debian-11-r2` (3.4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/etcd/3.4/debian-11/Dockerfile)
+* [`3.5`, `3.5-debian-11`, `3.5.5`, `3.5.5-debian-11-r2`, `latest` (3.5/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/etcd/3.5/debian-11/Dockerfile)
+* [`3.4`, `3.4-debian-11`, `3.4.21`, `3.4.21-debian-11-r3` (3.4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/etcd/3.4/debian-11/Dockerfile)
 * [`3.3`, `3.3-debian-11`, `3.3.27`, `3.3.27-debian-11-r39` (3.3/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/etcd/3.3/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
