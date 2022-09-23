@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.11.0-debian-11-r38" \
+      org.opencontainers.image.ref.name="0.11.0-debian-11-r39" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kubernetes-event-exporter" \
       org.opencontainers.image.title="kubernetes-event-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -18,7 +18,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip procps tar
+RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f kubernetes-event-exporter-0.11.0-153-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/kubernetes-event-exporter-0.11.0-153-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
