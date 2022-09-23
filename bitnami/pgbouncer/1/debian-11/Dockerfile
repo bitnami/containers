@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.17.0-debian-11-r40" \
+      org.opencontainers.image.ref.name="1.17.0-debian-11-r41" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pgbouncer" \
       org.opencontainers.image.title="pgbouncer" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -18,7 +18,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages acl ca-certificates curl gzip libaudit1 libbsd0 libc-ares2 libc6 libcap-ng0 libedit2 libevent-2.1-7 libffi7 libgcc-s1 libgmp10 libgnutls30 libhogweed6 libicu67 libidn2-0 libldap-2.4-2 liblzma5 libmd0 libnettle8 libp11-kit0 libpam0g libsasl2-2 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 locales procps tar zlib1g
+RUN install_packages ca-certificates curl libaudit1 libbsd0 libc-ares2 libc6 libcap-ng0 libedit2 libevent-2.1-7 libffi7 libgcc-s1 libgmp10 libgnutls30 libhogweed6 libicu67 libidn2-0 libldap-2.4-2 liblzma5 libmd0 libnettle8 libp11-kit0 libpam0g libsasl2-2 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 locales procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f wait-for-port-1.0.3-154-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/wait-for-port-1.0.3-154-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
@@ -59,7 +59,8 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     sha256sum -c pgbouncer-1.17.0-155-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf pgbouncer-1.17.0-155-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf pgbouncer-1.17.0-155-linux-${OS_ARCH}-debian-11.tar.gz pgbouncer-1.17.0-155-linux-${OS_ARCH}-debian-11.tar.gz.sha256
-RUN apt-get update && apt-get upgrade -y && \
+RUN apt-get autoremove --purge -y ca-certificates && \
+    apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
