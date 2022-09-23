@@ -8,10 +8,10 @@
     },
     "inc-intel": {
         "arch": "amd64",
-        "digest": "bfa6613e30bbddf8b37e596f012a05ee3765a3c10590a7c7d541df300a5eca9d",
+        "digest": "6a678df82e95b90e9634296b361c68991442bcea88ce8bedc3448162f031124e",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.13.1-1"
+        "version": "1.14.0-0"
     },
     "python": {
         "arch": "amd64",
