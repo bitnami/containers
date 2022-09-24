@@ -75,6 +75,6 @@ export CLICKHOUSE_INTERSERVER_HTTP_PORT="${CLICKHOUSE_INTERSERVER_HTTP_PORT:-900
 # ClickHouse system parameters
 export CLICKHOUSE_DAEMON_USER="clickhouse"
 export CLICKHOUSE_DAEMON_GROUP="bitnami"
-export PATH="${CLICKHOUSE_BASE_DIR}/venv/bin:$PATH"
+export PATH="${CLICKHOUSE_BASE_DIR}/bin:${BITNAMI_ROOT_DIR}/common/bin:$PATH"
 
 # Custom environment variables may be defined below
