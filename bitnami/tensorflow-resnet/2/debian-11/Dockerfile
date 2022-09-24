@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.10.0-debian-11-r4" \
+      org.opencontainers.image.ref.name="2.10.0-debian-11-r5" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/tensorflow-resnet" \
       org.opencontainers.image.title="tensorflow-resnet" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -18,7 +18,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages acl ca-certificates curl gcc-10 gzip libc6 libgcc-s1 libstdc++6 procps tar
+RUN install_packages ca-certificates curl gcc-10 libc6 libgcc-s1 libstdc++6 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f tensorflow-resnet-2.10.0-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/tensorflow-resnet-2.10.0-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
