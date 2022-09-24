@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.32.0-debian-11-r0" \
+      org.opencontainers.image.ref.name="0.32.0-debian-11-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/trivy" \
       org.opencontainers.image.title="trivy" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -18,7 +18,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip procps tar
+RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f trivy-0.32.0-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/trivy-0.32.0-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
