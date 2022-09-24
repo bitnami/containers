@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="7.8.2-debian-11-r21" \
+      org.opencontainers.image.ref.name="7.8.2-debian-11-r22" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/concourse" \
       org.opencontainers.image.title="concourse" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -17,7 +17,7 @@ ENV OS_ARCH="${TARGETARCH:-amd64}" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip iproute2 iptables libc6 procps tar
+RUN install_packages ca-certificates curl iproute2 iptables libc6 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f concourse-7.8.2-2-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/concourse-7.8.2-2-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
