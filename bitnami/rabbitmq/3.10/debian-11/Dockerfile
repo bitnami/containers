@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.10.7-debian-11-r17" \
+      org.opencontainers.image.ref.name="3.10.7-debian-11-r18" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/rabbitmq" \
       org.opencontainers.image.title="rabbitmq" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -19,7 +19,7 @@ ENV HOME="/opt/bitnami/rabbitmq/.rabbitmq" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages acl ca-certificates curl gzip libc6 libgcc-s1 libssl1.1 libstdc++6 libtinfo6 locales procps tar zlib1g
+RUN install_packages ca-certificates curl libc6 libgcc-s1 libssl1.1 libstdc++6 libtinfo6 locales procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
