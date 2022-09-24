@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.5.1-debian-11-r8" \
+      org.opencontainers.image.ref.name="2.5.1-debian-11-r9" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kubeapps-pinniped-proxy" \
       org.opencontainers.image.title="kubeapps-pinniped-proxy" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -18,7 +18,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip libc6 libgcc-s1 libssl1.1 procps tar
+RUN install_packages ca-certificates curl libc6 libgcc-s1 libssl1.1 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f kubeapps-pinniped-proxy-2.5.1-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/kubeapps-pinniped-proxy-2.5.1-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
