@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.4.12-debian-11-r2" \
+      org.opencontainers.image.ref.name="2.4.12-debian-11-r3" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/argo-cd" \
       org.opencontainers.image.title="argo-cd" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -18,7 +18,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages acl ca-certificates curl git git-lfs gnupg gzip libc6 openssh-client procps tar
+RUN install_packages ca-certificates curl git git-lfs gnupg libc6 openssh-client procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f kustomize-4.5.7-2-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/kustomize-4.5.7-2-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
