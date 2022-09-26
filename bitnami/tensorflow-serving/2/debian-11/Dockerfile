@@ -20,7 +20,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gcc-10 gzip libc6 libgcc-s1 libstdc++6 procps tar
+RUN install_packages ca-certificates curl gcc-10 libc6 libgcc-s1 libstdc++6 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f tensorflow-serving-2.10.0-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/tensorflow-serving-2.10.0-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
