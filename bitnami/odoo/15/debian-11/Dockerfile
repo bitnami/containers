@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="15.0.20220810-debian-11-r14" \
+      org.opencontainers.image.ref.name="15.0.20220910-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/odoo" \
       org.opencontainers.image.title="odoo" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="15.0.20220810"
+      org.opencontainers.image.version="15.0.20220910"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -44,21 +44,21 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf postgresql-client-13.8.0-1-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf postgresql-client-13.8.0-1-linux-${OS_ARCH}-debian-11.tar.gz postgresql-client-13.8.0-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f node-14.20.0-3-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/node-14.20.0-3-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/node-14.20.0-3-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f node-14.20.1-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/node-14.20.1-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/node-14.20.1-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c node-14.20.0-3-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf node-14.20.0-3-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf node-14.20.0-3-linux-${OS_ARCH}-debian-11.tar.gz node-14.20.0-3-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    sha256sum -c node-14.20.1-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf node-14.20.1-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf node-14.20.1-0-linux-${OS_ARCH}-debian-11.tar.gz node-14.20.1-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f odoo-15.0.20220810-1-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/odoo-15.0.20220810-1-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/odoo-15.0.20220810-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f odoo-15.0.20220910-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/odoo-15.0.20220910-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/odoo-15.0.20220910-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c odoo-15.0.20220810-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf odoo-15.0.20220810-1-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf odoo-15.0.20220810-1-linux-${OS_ARCH}-debian-11.tar.gz odoo-15.0.20220810-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    sha256sum -c odoo-15.0.20220910-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf odoo-15.0.20220910-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf odoo-15.0.20220910-0-linux-${OS_ARCH}-debian-11.tar.gz odoo-15.0.20220910-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
@@ -79,7 +79,7 @@ RUN if [ "$OS_ARCH" = "amd64" ]; then \
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/odoo/postunpack.sh
-ENV APP_VERSION="15.0.20220810" \
+ENV APP_VERSION="15.0.20220910" \
     BITNAMI_APP_NAME="odoo" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/odoo/bin:$PATH"
 
