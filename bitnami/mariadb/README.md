@@ -48,7 +48,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`10.9`, `10.9-debian-11`, `10.9.3`, `10.9.3-debian-11-r1`, `latest` (10.9/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb/10.9/debian-11/Dockerfile)
-* [`10.8`, `10.8-debian-11`, `10.8.5`, `10.8.5-debian-11-r1` (10.8/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb/10.8/debian-11/Dockerfile)
+* [`10.8`, `10.8-debian-11`, `10.8.5`, `10.8.5-debian-11-r2` (10.8/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb/10.8/debian-11/Dockerfile)
 * [`10.7`, `10.7-debian-11`, `10.7.6`, `10.7.6-debian-11-r1` (10.7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb/10.7/debian-11/Dockerfile)
 * [`10.6`, `10.6-debian-11`, `10.6.10`, `10.6.10-debian-11-r2` (10.6/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb/10.6/debian-11/Dockerfile)
 * [`10.5`, `10.5-debian-11`, `10.5.17`, `10.5.17-debian-11-r12` (10.5/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/mariadb/10.5/debian-11/Dockerfile)
