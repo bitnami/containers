@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.10.7-debian-11-r18" \
+      org.opencontainers.image.ref.name="3.10.8-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/rabbitmq" \
       org.opencontainers.image.title="rabbitmq" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="3.10.7"
+      org.opencontainers.image.version="3.10.8"
 
 ENV HOME="/opt/bitnami/rabbitmq/.rabbitmq" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -37,13 +37,13 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf erlang-24.3.4-153-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf erlang-24.3.4-153-linux-${OS_ARCH}-debian-11.tar.gz erlang-24.3.4-153-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f rabbitmq-3.10.7-2-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/rabbitmq-3.10.7-2-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/rabbitmq-3.10.7-2-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f rabbitmq-3.10.8-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/rabbitmq-3.10.8-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/rabbitmq-3.10.8-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c rabbitmq-3.10.7-2-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf rabbitmq-3.10.7-2-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf rabbitmq-3.10.7-2-linux-${OS_ARCH}-debian-11.tar.gz rabbitmq-3.10.7-2-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    sha256sum -c rabbitmq-3.10.8-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf rabbitmq-3.10.8-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf rabbitmq-3.10.8-0-linux-${OS_ARCH}-debian-11.tar.gz rabbitmq-3.10.8-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -56,7 +56,7 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 RUN /opt/bitnami/scripts/rabbitmq/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
-ENV APP_VERSION="3.10.7" \
+ENV APP_VERSION="3.10.8" \
     BITNAMI_APP_NAME="rabbitmq" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en"
