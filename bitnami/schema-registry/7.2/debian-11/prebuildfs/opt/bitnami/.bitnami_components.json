@@ -15,9 +15,9 @@
     },
     "schema-registry": {
         "arch": "amd64",
-        "digest": "f66c535f2b1a1c85977ff82012a508a65b5b3c856b934d6eb608f43c49a52070",
+        "digest": "ef6e03b93c61d5b508a48dbe538a9cde947403d0480607d73c73c31dfd3f4743",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.2.1-1"
+        "version": "7.2.2-0"
     }
 }
