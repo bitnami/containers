@@ -30,10 +30,9 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`7.2`, `7.2-debian-11`, `7.2.1`, `7.2.1-debian-11-r12`, `latest` (7.2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/7.2/debian-11/Dockerfile)
 * [`7.1`, `7.1-debian-11`, `7.1.4`, `7.1.4-debian-11-r0` (7.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/7.1/debian-11/Dockerfile)
-* [`7.0`, `7.0-debian-11`, `7.0.6`, `7.0.6-debian-11-r0` (7.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/7.0/debian-11/Dockerfile)
+* [`7.0`, `7.0-debian-11`, `7.0.6`, `7.0.6-debian-11-r1` (7.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/7.0/debian-11/Dockerfile)
 * [`6.2`, `6.2-debian-11`, `6.2.7`, `6.2.7-debian-11-r0` (6.2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/6.2/debian-11/Dockerfile)
 * [`6.1`, `6.1-debian-11`, `6.1.8`, `6.1.8-debian-11-r1` (6.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/6.1/debian-11/Dockerfile)
-* [`6.0`, `6.0-debian-11`, `6.0.10`, `6.0.10-debian-11-r0` (6.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/6.0/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
@@ -58,10 +57,6 @@ $ git clone https://github.com/bitnami/containers.git
 $ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 $ docker build -t bitnami/APP:latest .
 ```
-
-## Branch Deprecation Notice
-
-Confluent Schema Registry's branch 6.0.x is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 09-24-2022
 
 ## Contributing
 
