@@ -8,17 +8,17 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "49946e0443d8f479f296c79589fea205126b6f6faa6b4474e5dd713b36d8167c",
+        "digest": "82532cfe58e59f8b085f6c9e83ec6d51a2abeb1be7240e979f790418c9513d73",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.20.0-3"
+        "version": "14.20.1-0"
     },
     "odoo": {
         "arch": "amd64",
-        "digest": "e31245a99e155cb28db015958240d05d647d23e3527afa0762a53f425c4ff4a3",
+        "digest": "74a4271447c407403a435baa039d85c5425cafd022333f49e7aea1383e171d3e",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "15.0.20220810-1"
+        "version": "15.0.20220910-0"
     },
     "postgresql-client": {
         "arch": "amd64",
