@@ -23,7 +23,7 @@ jobs:
 
           if [[ "${#assets[@]}" -ne "1" ]]; then
             echo "::set-output name=result::skip"
-            echo "::set-output name=message::Label cannot be set, there are changes in several assets: ${assets[@]}"
+            echo "::set-output name=message::Label cannot be set, cannot infer a single label from: ${assets[@]}"
             echo "::set-output name=name::NONE"
           else
             echo "::set-output name=result::ok"
