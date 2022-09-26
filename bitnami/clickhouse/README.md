@@ -41,7 +41,7 @@ Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deploy
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`22.8`, `22.8-debian-11`, `22.8.5`, `22.8.5-debian-11-r5`, `latest` (22.8/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/clickhouse/22.8/debian-11/Dockerfile)
+* [`22.8`, `22.8-debian-11`, `22.8.5`, `22.8.5-debian-11-r6`, `latest` (22.8/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/clickhouse/22.8/debian-11/Dockerfile)
 * [`22.7`, `22.7-debian-11`, `22.7.5`, `22.7.5-debian-11-r3` (22.7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/clickhouse/22.7/debian-11/Dockerfile)
 * [`22.6`, `22.6-debian-11`, `22.6.8`, `22.6.8-debian-11-r2` (22.6/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/clickhouse/22.6/debian-11/Dockerfile)
 * [`22.5`, `22.5-debian-11`, `22.5.4`, `22.5.4-debian-11-r3` (22.5/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/clickhouse/22.5/debian-11/Dockerfile)
