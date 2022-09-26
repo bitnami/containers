@@ -5,13 +5,13 @@ on:
       - opened
 permissions:
   pull-requests: write
+  issues: write
 jobs:
-  # For any opened or reopened issue, should be sent into Triage
-  send_to_board:
+  assign-label:
     runs-on: ubuntu-latest
     steps:
       - id: get-asset
-        name: Get modified containers
+        name: Get modified assets
         run: |
           # Using the Github API to detect the files changed as git merge-base stops working when the branch is behind
           # and jitterbit/get-changed-files does not support pull_request_target
@@ -23,7 +23,7 @@ jobs:
 
           if [[ "${#assets[@]}" -ne "1" ]]; then
             echo "::set-output name=result::skip"
-            echo "::set-output name=message::Label cannot be set, there are changes in serveral assets: ${assets[@]}"
+            echo "::set-output name=message::Label cannot be set, there are changes in several assets: ${assets[@]}"
             echo "::set-output name=name::NONE"
           else
             echo "::set-output name=result::ok"
@@ -39,8 +39,8 @@ jobs:
             } else {
               core.info("${{ steps.get-asset.outputs.message }}")
             }
-      - name: Triage labeling
+      - name: Labeling
         if: ${{ steps.get-asset.outputs.result == 'ok' }}
         uses: andymckay/labeler@1.0.4
         with:
-          add-labels: ${{ steps.get-asset.outputs.name }}
+          add-labels: "${{ steps.get-asset.outputs.name }}"
