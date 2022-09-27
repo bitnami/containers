@@ -106,12 +106,12 @@ zookeeper_validate() {
         read -r -a zookeeper_servers_list <<<"${ZOO_SERVERS//[;, ]/ }"
         for server in "${zookeeper_servers_list[@]}"; do
             if is_boolean_yes "$server_id_with_jumps"; then
-                if ! echo "$server" | grep -q -E "^[^[:space:]]+:[[:digit:]]+:[[:digit:]]+::[[:digit:]]+$"; then
-                    print_validation_error "Zookeeper server ${server} should follow the next syntax: host:port:port::id. Example: zookeeper:2888:3888::1"
+                if ! echo "$server" | grep -q -E "^[^[:space:]]+:[[:digit:]]+:[[:digit:]]+(:observer|:participant)?::[[:digit:]]+$"; then
+                    print_validation_error "Zookeeper server ${server} should follow the next syntax: host:port:port::id. Example: zookeeper:2888:3888::1 zookeeper:2888:3888:observer::1"
                 fi
             else
-                if ! echo "$server" | grep -q -E "^[^[:space:]]+:[[:digit:]]+:[[:digit:]]+$"; then
-                    print_validation_error "Zookeeper server ${server} should follow the next syntax: host:port:port. Example: zookeeper:2888:3888"
+                if ! echo "$server" | grep -q -E "^[^[:space:]]+:[[:digit:]]+:[[:digit:]]+(:observer|:participant)?$"; then
+                    print_validation_error "Zookeeper server ${server} should follow the next syntax: host:port:port. Example: zookeeper:2888:3888 zookeeper:2888:3888:observer"
                 fi
             fi
         done
@@ -119,6 +119,13 @@ zookeeper_validate() {
 
     check_multi_value "ZOO_TLS_CLIENT_AUTH" "none want need"
     check_multi_value "ZOO_TLS_QUORUM_CLIENT_AUTH" "none want need"
+
+    # ZooKeeper server peerType validations
+    if [[ -n "$ZOO_PEER_TYPE" ]]; then
+        if [[ "$ZOO_PEER_TYPE" != "observer" ]] && [[ "$ZOO_PEER_TYPE" != "participant" ]]; then
+            print_validation_error  "The ZOO_PEER_TYPE environment ${ZOO_PEER_TYPE} should be one of [observer/participant]"
+        fi
+    fi
 
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
@@ -164,6 +171,11 @@ zookeeper_initialize() {
         fi
     else
         info "Deploying ZooKeeper with persisted data..."
+    fi
+
+    # ZooKeeper set server peerType
+    if [[ -n "$ZOO_PEER_TYPE" ]]; then
+        zookeeper_conf_set "$ZOO_CONF_FILE" peerType "$ZOO_PEER_TYPE"
     fi
 }
 
