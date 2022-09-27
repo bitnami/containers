@@ -66,14 +66,27 @@ jobs:
           remove-labels: on-hold, in-progress, triage, solved
       - name: Verify labeling
         # Only if moved into bitnami column and the PR is ready for review
+        # This step uses a github-script to add the label intentionally.
+        # Consecutive calls to andymckay/labeler@1.0.4 can remove previous assigned labels, see https://github.com/andymckay/labeler/issues/40
         if: |
           github.event.project_card.column_id == env.BITNAMI_COLUMN_ID &&
           needs.get-issue.outputs.type == 'pull_request' && needs.get-issue.outputs.draft == 'false'
-        uses: andymckay/labeler@1.0.4
+        uses: actions/github-script@v6
         with:
-          add-labels: verify
           # Required to trigger CI workflow
-          repo-token: ${{ secrets.BITNAMI_BOT_TOKEN }}
+          github-token: ${{ secrets.BITNAMI_BOT_TOKEN }}
+          script: |
+            try {
+              await github.rest.issues.addLabels({
+                owner: context.payload.repository.owner.login,
+                repo: context.payload.repository.name,
+                issue_number: context.payload.pull_request.number,
+                labels: ['verify']
+              })
+              core.info(`Updated labels in ${context.payload.pull_request.number}. Added: 'verify'`)
+            } catch (error) {
+              core.setFailed(error.message)
+            }
       - name: Build Maintenance labeling
         if: ${{ github.event.project_card.column_id == env.BUILD_MAINTENANCE_COLUMN_ID }}
         uses: andymckay/labeler@1.0.4
