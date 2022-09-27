@@ -20,6 +20,7 @@ jobs:
       author: ${{ steps.get-issue-step.outputs.author }}
       type: ${{ steps.get-issue-step.outputs.type }}
       draft: ${{ steps.get-issue-step.outputs.draft }}
+      number: ${{ steps.get-issue-step.outputs.number }}
     steps:
       - name: Get issue info
         id: get-issue-step
