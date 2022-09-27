@@ -66,7 +66,8 @@ jobs:
           remove-labels: on-hold, in-progress, triage, solved
       - name: Verify labeling
         # Only if moved into bitnami column and the PR is ready for review
-        # This step uses a github-script to add the label intentionally. Consecutive calls to andymckay/labeler@1.0.4 can remove previous assigned labels
+        # This step uses a github-script to add the label intentionally.
+        # Consecutive calls to andymckay/labeler@1.0.4 can remove previous assigned labels, see https://github.com/andymckay/labeler/issues/40
         if: |
           github.event.project_card.column_id == env.BITNAMI_COLUMN_ID &&
           needs.get-issue.outputs.type == 'pull_request' && needs.get-issue.outputs.draft == 'false'
