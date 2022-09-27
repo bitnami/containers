@@ -208,10 +208,14 @@ jenkins_initialize() {
 
     if is_mounted_dir_empty "$JENKINS_HOME"; then
         # Plugins
-        debug "Moving plugins to $JENKINS_HOME"
-        ensure_dir_exists "${JENKINS_HOME}/plugins"
-        mv "${JENKINS_BASE_DIR}/plugins"/* "${JENKINS_HOME}/plugins"
-        am_i_root && configure_permissions_ownership "${JENKINS_HOME}/plugins" -d "755" -f "644" -u "$JENKINS_DAEMON_USER" -g "$JENKINS_DAEMON_GROUP"
+        if ! is_dir_empty "${JENKINS_BASE_DIR}/plugins"; then
+            debug "Moving plugins to $JENKINS_HOME"
+            ensure_dir_exists "${JENKINS_HOME}/plugins"
+            mv "${JENKINS_BASE_DIR}/plugins"/* "${JENKINS_HOME}/plugins"
+            am_i_root && configure_permissions_ownership "${JENKINS_HOME}/plugins" -d "755" -f "644" -u "$JENKINS_DAEMON_USER" -g "$JENKINS_DAEMON_GROUP"
+        else
+            debug "${JENKINS_BASE_DIR}/plugins is empty, assuming a restart"
+        fi
         if ! is_mounted_dir_empty "$JENKINS_MOUNTED_CONTENT_DIR"; then
             info "Moving custom mounted files to Jenkins home directory"
             echo "--- Copying files at $(date)" >>"${JENKINS_LOGS_DIR}/copy_reference_file.log"
