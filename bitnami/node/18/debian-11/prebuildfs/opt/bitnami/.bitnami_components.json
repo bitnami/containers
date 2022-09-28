@@ -1,10 +1,10 @@
 {
     "node": {
         "arch": "amd64",
-        "digest": "f6287b32d6672d06b0a6790107c56bcaca0708c6c9cc4adcefaef3cf9a92f71f",
+        "digest": "7e60fe49a3528d519fbc180cee5c2b2b7250b64d507b6ea71075b23ae333a9d4",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.9.1-0"
+        "version": "18.10.0-0"
     },
     "python": {
         "arch": "amd64",
