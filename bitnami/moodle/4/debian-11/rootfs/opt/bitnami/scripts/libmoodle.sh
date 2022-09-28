@@ -388,14 +388,20 @@ moodle_configure_wwwroot() {
     # sed replacement notes:
     # - The ampersand ('&') is escaped due to sed replacing any non-escaped ampersand characters with the matched string
     # - For the replacement text to be multi-line, an \ needs to be specified to escape the newline character
-    local -r conf_to_replace="if (empty(\$_SERVER['HTTP_HOST'])) {\\
+    local conf_to_replace="if (empty(\$_SERVER['HTTP_HOST'])) {\\
   \$_SERVER['HTTP_HOST'] = '127.0.0.1:${http_port}';\\
-}\\
+}"
+    if is_boolean_yes "$MOODLE_SSLPROXY"; then
+        conf_to_replace="$conf_to_replace\\
+\$CFG->wwwroot   = 'https://' . ${host};"
+    else
+        conf_to_replace="$conf_to_replace\\
 if (isset(\$_SERVER['HTTPS']) \&\& \$_SERVER['HTTPS'] == 'on') {\\
   \$CFG->wwwroot   = 'https://' . ${host};\\
 } else {\\
   \$CFG->wwwroot   = 'http://' . ${host};\\
 }"
+    fi
     replace_in_file "$MOODLE_CONF_FILE" "\\\$CFG->wwwroot\s*=.*" "$conf_to_replace"
 }
 
