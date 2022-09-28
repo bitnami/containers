@@ -26,7 +26,8 @@ This image is meant to run in a Kubernetes cluster.
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-11`, `1.5.0`, `1.5.0-debian-11-r41`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/jupyterhub/1/debian-11/Dockerfile)
+* [`3`, `3-debian-11`, `3.0.0`, `3.0.0-debian-11-r0`, `latest` (3/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/jupyterhub/3/debian-11/Dockerfile)
+* [`1`, `1-debian-11`, `1.5.0`, `1.5.0-debian-11-r41` (1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/jupyterhub/1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
@@ -71,6 +72,10 @@ Check the [official Jupyter Hub documentation](https://jupyterhub.readthedocs.io
 ```console
 $ docker run --rm --name jupyterhub bitnami/jupyterhub:latest --help-all
 ```
+
+## Branch Deprecation Notice
+
+JupyterHub's branch 1 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 10-28-2022
 
 ## Contributing
 
