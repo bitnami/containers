@@ -5,7 +5,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="18.0.1-1-debian-11-r29" \
+      org.opencontainers.image.ref.name="18.0.1-1-debian-11-r30" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/java" \
       org.opencontainers.image.title="java" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -18,15 +18,15 @@ ENV OS_ARCH="${TARGETARCH:-amd64}" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libc6 libsqlite3-dev libssl-dev locales procps wget zlib1g
+RUN install_packages ca-certificates curl libsqlite3-dev libssl-dev locales procps wget zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f java-18.0.1-1-4-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/java-18.0.1-1-4-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/java-18.0.1-1-4-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f java-18.0.1-1-5-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/java-18.0.1-1-5-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/java-18.0.1-1-5-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c java-18.0.1-1-4-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf java-18.0.1-1-4-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf java-18.0.1-1-4-linux-${OS_ARCH}-debian-11.tar.gz java-18.0.1-1-4-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    sha256sum -c java-18.0.1-1-5-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf java-18.0.1-1-5-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf java-18.0.1-1-5-linux-${OS_ARCH}-debian-11.tar.gz java-18.0.1-1-5-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
