@@ -1,0 +1,23 @@
+{
+    "jupyter-base-notebook": {
+        "arch": "amd64",
+        "digest": "c2e54852265b251e13e0006c1a26a78224c7dbb9f12caff9327f960e5c322b36",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "3.0.0-2"
+    },
+    "miniconda": {
+        "arch": "amd64",
+        "digest": "0ce4d37088c0efd4218c86f1fe0f0461e5daeae94dc9a651e213ed2d7a766f10",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "4.12.0-157"
+    },
+    "tini": {
+        "arch": "amd64",
+        "digest": "50b38ec9a9be93542fe7d46c68f8a5d6f127acff24c3a7153edbb2849a474433",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "0.19.0-154"
+    }
+}
