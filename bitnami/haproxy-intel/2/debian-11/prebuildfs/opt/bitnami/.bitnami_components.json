@@ -15,9 +15,9 @@
     },
     "qatengine": {
         "arch": "amd64",
-        "digest": "9c0e33d7f8d76f959ae54375c7b813db088791601f8c1cb7e3e9dcbcaea70bde",
+        "digest": "ef497fc4f1ec8fd3ace5df76edd510bf6b96838c429a7047e94048741f52d923",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.6.15-0"
+        "version": "0.6.15-1"
     }
 }
