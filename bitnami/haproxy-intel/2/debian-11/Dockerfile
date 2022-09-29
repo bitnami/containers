@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.6.6-debian-11-r1" \
+      org.opencontainers.image.ref.name="2.6.6-debian-11-r2" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/haproxy-intel" \
       org.opencontainers.image.title="haproxy-intel" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -18,15 +18,15 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libc6 libssl1.1 procps
+RUN install_packages ca-certificates curl libssl1.1 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f qatengine-0.6.15-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/qatengine-0.6.15-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/qatengine-0.6.15-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f qatengine-0.6.15-1-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/qatengine-0.6.15-1-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/qatengine-0.6.15-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c qatengine-0.6.15-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf qatengine-0.6.15-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf qatengine-0.6.15-0-linux-${OS_ARCH}-debian-11.tar.gz qatengine-0.6.15-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    sha256sum -c qatengine-0.6.15-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf qatengine-0.6.15-1-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf qatengine-0.6.15-1-linux-${OS_ARCH}-debian-11.tar.gz qatengine-0.6.15-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f haproxy-dataplaneapi-2.6.1-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/haproxy-dataplaneapi-2.6.1-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
