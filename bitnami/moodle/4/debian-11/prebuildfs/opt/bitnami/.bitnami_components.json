@@ -22,10 +22,10 @@
     },
     "moodle": {
         "arch": "amd64",
-        "digest": "aa799eca653beb8bc8f5f96c80d8e56e9913785a1bfa4a5f830ccfd6ad81eda0",
+        "digest": "65c113dd56935488a3a20c274080fecd4bdf5fd3e962c854450ada7b69c4f1be",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.0.4-0"
+        "version": "4.0.4-1"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "357ee81bdee9215f6d60ad83c1b4a7987a37cac1d23b45301f761ad4469e1c13",
+        "digest": "754e7b04ae9e332b70f949686f46cd7e861163d979de1b3ee69d904791561b5c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.4.30-164"
+        "version": "7.4.30-165"
     },
     "postgresql-client": {
         "arch": "amd64",
