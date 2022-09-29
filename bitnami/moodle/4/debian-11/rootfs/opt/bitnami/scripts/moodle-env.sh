@@ -87,6 +87,7 @@ export MOODLE_HOST="${MOODLE_HOST:-}" # only used during the first initializatio
 export MOODLE_CRON_MINUTES="${MOODLE_CRON_MINUTES:-1}"
 export MOODLE_REVERSEPROXY="${MOODLE_REVERSEPROXY:-no}"
 export MOODLE_SSLPROXY="${MOODLE_SSLPROXY:-no}"
+export MOODLE_LANG="${MOODLE_LANG:-en}"
 
 # Moodle credentials
 export MOODLE_USERNAME="${MOODLE_USERNAME:-user}" # only used during the first initialization
