@@ -1,10 +1,10 @@
 {
     "bower": {
         "arch": "amd64",
-        "digest": "614bdeafb32751fc7f52e7b67fee02aa9c03b0b66de9069c69903f268a5c72f7",
+        "digest": "ff69d7c9ff6c671b47091bee3f384a7034781fb05b6e53c6507caf29e0370605",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.8.12-153"
+        "version": "1.8.13-0"
     },
     "express": {
         "arch": "amd64",
@@ -43,10 +43,10 @@
     },
     "sequelize-cli": {
         "arch": "amd64",
-        "digest": "7945823d0a6fdf546c585da9b49bc12f0aaa43a61248e4b4fec9bb3bbdd43eea",
+        "digest": "9082c54092925da98b34a7963080dea436ca0fd262966aa6067ea0b1fe94b30c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.4.1-153"
+        "version": "6.5.1-0"
     },
     "wait-for-port": {
         "arch": "amd64",
