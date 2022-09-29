@@ -27,7 +27,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`3`, `3-debian-11`, `3.0.0`, `3.0.0-debian-11-r0`, `latest` (3/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/jupyterhub/3/debian-11/Dockerfile)
-* [`1`, `1-debian-11`, `1.5.0`, `1.5.0-debian-11-r41` (1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/jupyterhub/1/debian-11/Dockerfile)
+* [`1`, `1-debian-11`, `1.5.0`, `1.5.0-debian-11-r42` (1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/jupyterhub/1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
