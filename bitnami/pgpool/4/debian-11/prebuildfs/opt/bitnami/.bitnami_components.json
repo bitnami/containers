@@ -11,7 +11,7 @@
         "digest": "b16b9790e06727bb016686c33761762bf9b6301eea39f5c409dde2d287fa9f9a",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.3.3-1"
+        "version": "4.3.3-2"
     },
     "postgresql-client": {
         "arch": "amd64",
