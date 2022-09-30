@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.38.3-debian-11-r0" \
+      org.opencontainers.image.ref.name="1.38.4-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mediawiki" \
       org.opencontainers.image.title="mediawiki" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.38.3"
+      org.opencontainers.image.version="1.38.4"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -60,13 +60,13 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf render-template-1.0.3-153-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf render-template-1.0.3-153-linux-${OS_ARCH}-debian-11.tar.gz render-template-1.0.3-153-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f mediawiki-1.38.3-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/mediawiki-1.38.3-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/mediawiki-1.38.3-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f mediawiki-1.38.4-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/mediawiki-1.38.4-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/mediawiki-1.38.4-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c mediawiki-1.38.3-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf mediawiki-1.38.3-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf mediawiki-1.38.3-0-linux-${OS_ARCH}-debian-11.tar.gz mediawiki-1.38.3-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    sha256sum -c mediawiki-1.38.4-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf mediawiki-1.38.4-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf mediawiki-1.38.4-0-linux-${OS_ARCH}-debian-11.tar.gz mediawiki-1.38.4-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
@@ -87,7 +87,7 @@ RUN /opt/bitnami/scripts/mediawiki/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="1.38.3" \
+    APP_VERSION="1.38.4" \
     BITNAMI_APP_NAME="mediawiki" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
