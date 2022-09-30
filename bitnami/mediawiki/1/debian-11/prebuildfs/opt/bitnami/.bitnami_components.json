@@ -22,10 +22,10 @@
     },
     "mediawiki": {
         "arch": "amd64",
-        "digest": "3b5372d0a3d89b055015bfdb97e2d53a9a877d0646ad19c0c62ea679e52ddcf0",
+        "digest": "67fd2178c35db4cb2a51f27fc827379ae7433ce02443347777ba7710b5437733",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.38.3-0"
+        "version": "1.38.4-0"
     },
     "mysql-client": {
         "arch": "amd64",
