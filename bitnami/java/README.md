@@ -35,7 +35,7 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`19`, `19-debian-11`, `19.0.0`, `19.0.0-debian-11-r-1`, `latest` (19/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/java/19/debian-11/Dockerfile)
+* [`19`, `19-debian-11`, `19.0.0`, `19.0.0-debian-11-r0`, `latest` (19/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/java/19/debian-11/Dockerfile)
 * [`18`, `18-debian-11`, `18.0.1-1`, `18.0.1-1-debian-11-r30` (18/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/java/18/debian-11/Dockerfile)
 * [`17`, `17-debian-11`, `17.0.4-8`, `17.0.4-8-debian-11-r18` (17/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/java/17/debian-11/Dockerfile)
 * [`11`, `11-debian-11`, `11.0.16`, `11.0.16-debian-11-r3` (11/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/java/11/debian-11/Dockerfile)
@@ -164,6 +164,10 @@ $ docker-compose up java
 ### 1.8.252-debian-10-r0, 11.0.7-debian-10-r7, and 15.0.1-debian-10-r20
 
 - Java distribution has been migrated from AdoptOpenJDK to OpenJDK Liberica. As part of VMware, we have an agreement with Bell Software to distribute the Liberica distribution of OpenJDK. That way, we can provide support & the latest versions and security releases for Java.
+
+## Branch Deprecation Notice
+
+Java's branch 18 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 10-29-2022
 
 ## Contributing
 
