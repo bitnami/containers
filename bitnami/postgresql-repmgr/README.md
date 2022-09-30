@@ -549,6 +549,7 @@ Please see the list of environment variables available in the Bitnami PostgreSQL
 | REPMGR_PASSWORD                        | `nil`         |
 | REPMGR_PASSWORD_FILE                   | `nil`         |
 | REPMGR_FENCE_OLD_PRIMARY               | `no`          |
+| REPMGR_FAILOVER                        | `automatic`   |
 | REPMGR_CHILD_NODES_CHECK_INTERVAL      | `5`           |
 | REPMGR_CHILD_NODES_CONNECTED_MIN_COUNT | `1`           |
 | REPMGR_CHILD_NODES_DISCONNECT_TIMEOUT  | `30`          |
