@@ -124,6 +124,10 @@ repmgr_validate() {
         print_validation_error "The allowed values for REPMGR_UPGRADE_EXTENSION are: yes or no."
     fi
 
+    if ! [[ "$REPMGR_FAILOVER" =~ ^(automatic|manual)$ ]]; then
+        print_validation_error "The allowed values for REPMGR_FAILOVER are: automatic or manual."
+    fi
+    
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
@@ -481,7 +485,7 @@ node_id=$(repmgr_get_node_id)
 node_name='${REPMGR_NODE_NAME}'
 location='${REPMGR_NODE_LOCATION}'
 conninfo='user=${REPMGR_USERNAME} $(repmgr_get_conninfo_password) host=${REPMGR_NODE_NETWORK_NAME} dbname=${REPMGR_DATABASE} port=${REPMGR_PORT_NUMBER} connect_timeout=${REPMGR_CONNECT_TIMEOUT}'
-failover='automatic'
+failover='${REPMGR_FAILOVER}'
 promote_command='$(repmgr_get_env_password) repmgr standby promote -f "${REPMGR_CONF_FILE}" --log-level DEBUG --verbose'
 follow_command='$(repmgr_get_env_password) repmgr standby follow -f "${REPMGR_CONF_FILE}" -W --log-level DEBUG --verbose'
 reconnect_attempts='${REPMGR_RECONNECT_ATTEMPTS}'
