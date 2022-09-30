@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="6.0.12-debian-11-r11" \
+      org.opencontainers.image.ref.name="6.0.13-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/symfony" \
       org.opencontainers.image.title="symfony" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="6.0.12"
+      org.opencontainers.image.version="6.0.13"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
@@ -35,13 +35,13 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf mysql-client-10.6.10-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf mysql-client-10.6.10-0-linux-${OS_ARCH}-debian-11.tar.gz mysql-client-10.6.10-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f symfony-6.0.12-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/symfony-6.0.12-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/symfony-6.0.12-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f symfony-6.0.13-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/symfony-6.0.13-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/symfony-6.0.13-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c symfony-6.0.12-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf symfony-6.0.12-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf symfony-6.0.12-0-linux-${OS_ARCH}-debian-11.tar.gz symfony-6.0.12-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    sha256sum -c symfony-6.0.13-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf symfony-6.0.13-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf symfony-6.0.13-0-linux-${OS_ARCH}-debian-11.tar.gz symfony-6.0.13-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
@@ -58,7 +58,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/symfony/postunpack.sh
-ENV APP_VERSION="6.0.12" \
+ENV APP_VERSION="6.0.13" \
     BITNAMI_APP_NAME="symfony" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/symfony/bin:/opt/bitnami/common/bin:$PATH" \
     PHP_ENABLE_OPCACHE="0"
