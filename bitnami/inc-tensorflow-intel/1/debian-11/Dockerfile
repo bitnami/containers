@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.14.0-debian-11-r2" \
+      org.opencontainers.image.ref.name="1.14.1-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/inc-tensorflow-intel" \
       org.opencontainers.image.title="inc-tensorflow-intel" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.14.0"
+      org.opencontainers.image.version="1.14.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,13 +28,13 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf python-3.9.14-1-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf python-3.9.14-1-linux-${OS_ARCH}-debian-11.tar.gz python-3.9.14-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f inc-tensorflow-intel-1.14.0-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/inc-tensorflow-intel-1.14.0-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/inc-tensorflow-intel-1.14.0-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f inc-tensorflow-intel-1.14.1-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/inc-tensorflow-intel-1.14.1-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/inc-tensorflow-intel-1.14.1-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c inc-tensorflow-intel-1.14.0-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf inc-tensorflow-intel-1.14.0-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf inc-tensorflow-intel-1.14.0-0-linux-${OS_ARCH}-debian-11.tar.gz inc-tensorflow-intel-1.14.0-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    sha256sum -c inc-tensorflow-intel-1.14.1-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf inc-tensorflow-intel-1.14.1-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf inc-tensorflow-intel-1.14.1-0-linux-${OS_ARCH}-debian-11.tar.gz inc-tensorflow-intel-1.14.1-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
@@ -50,7 +50,7 @@ RUN mkdir /.local && chmod g+rwX /.local
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/inc-intel/postunpack.sh
-ENV APP_VERSION="1.14.0" \
+ENV APP_VERSION="1.14.1" \
     BITNAMI_APP_NAME="inc-tensorflow-intel" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:$PATH"
 
