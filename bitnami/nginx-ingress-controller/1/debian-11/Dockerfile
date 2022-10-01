@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.3.1-debian-11-r15" \
+      org.opencontainers.image.ref.name="1.4.0-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/nginx-ingress-controller" \
       org.opencontainers.image.title="nginx-ingress-controller" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.3.1"
+      org.opencontainers.image.version="1.4.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -20,13 +20,13 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libbrotli1 libcap2-bin libcom-err2 libcrypt1 libcurl4 libcurl4-openssl-dev libffi7 libgcc-s1 libgcrypt20 libgeoip-dev libgeoip1 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed6 libicu67 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblua5.1-0 liblua5.1-dev liblzma5 libnettle8 libnghttp2-14 libp11-kit0 libpcre3 libpcre3-dev libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl-dev libssl1.1 libstdc++6 libtasn1-6 libunistring2 libxml2 procps zlib1g zlib1g-dev
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f nginx-ingress-controller-1.3.1-8-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/nginx-ingress-controller-1.3.1-8-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/nginx-ingress-controller-1.3.1-8-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f nginx-ingress-controller-1.4.0-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/nginx-ingress-controller-1.4.0-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/nginx-ingress-controller-1.4.0-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c nginx-ingress-controller-1.3.1-8-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf nginx-ingress-controller-1.3.1-8-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf nginx-ingress-controller-1.3.1-8-linux-${OS_ARCH}-debian-11.tar.gz nginx-ingress-controller-1.3.1-8-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    sha256sum -c nginx-ingress-controller-1.4.0-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf nginx-ingress-controller-1.4.0-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf nginx-ingress-controller-1.4.0-0-linux-${OS_ARCH}-debian-11.tar.gz nginx-ingress-controller-1.4.0-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -62,7 +62,7 @@ RUN chgrp -R root /var/log && \
     chmod g+rwX -R /opt/bitnami/nginx/conf && \
     chmod -R g+rwX /opt/bitnami/nginx-ingress-controller /etc/nginx /etc/ingress-controller && \
     chmod g+rwX -R /tmp/nginx
-ENV APP_VERSION="1.3.1" \
+ENV APP_VERSION="1.4.0" \
     BITNAMI_APP_NAME="nginx-ingress-controller" \
     LUA_CPATH="/opt/bitnami/nginx/conf/lua/?.so;/opt/bitnami/lua/lib/lua/5.1/?.so;./?.so;/opt/bitnami/lua/lib/lua/?.so;;" \
     LUA_PATH="/opt/bitnami/lua/share/lua/5.1/?/init.lua;/opt/bitnami/lua/lib/lua/?.lua;/opt/bitnami/lua/lib/lua/5.1/?.lua;/opt/bitnami/nginx/conf/lua/?.lua;;" \
