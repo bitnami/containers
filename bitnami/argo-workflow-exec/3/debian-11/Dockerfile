@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.4.0-debian-11-r2" \
+      org.opencontainers.image.ref.name="3.4.1-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/argo-workflow-exec" \
       org.opencontainers.image.title="argo-workflow-exec" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="3.4.0"
+      org.opencontainers.image.version="3.4.1"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
@@ -35,19 +35,19 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f argo-workflow-exec-3.4.0-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/argo-workflow-exec-3.4.0-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/argo-workflow-exec-3.4.0-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f argo-workflow-exec-3.4.1-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/argo-workflow-exec-3.4.1-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/argo-workflow-exec-3.4.1-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c argo-workflow-exec-3.4.0-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf argo-workflow-exec-3.4.0-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf argo-workflow-exec-3.4.0-0-linux-${OS_ARCH}-debian-11.tar.gz argo-workflow-exec-3.4.0-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    sha256sum -c argo-workflow-exec-3.4.1-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf argo-workflow-exec-3.4.1-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf argo-workflow-exec-3.4.1-0-linux-${OS_ARCH}-debian-11.tar.gz argo-workflow-exec-3.4.1-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/argo-workflow-exec/postunpack.sh
-ENV APP_VERSION="3.4.0" \
+ENV APP_VERSION="3.4.1" \
     BITNAMI_APP_NAME="argo-workflow-exec" \
     PATH="/opt/bitnami/kubectl/bin:/opt/bitnami/common/bin:/opt/bitnami/argo-workflow-exec/bin:/opt/bitnami/argo-workflow-exec/hack:$PATH"
 
