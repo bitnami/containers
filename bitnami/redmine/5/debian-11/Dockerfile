@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="5.0.2-debian-11-r35" \
+      org.opencontainers.image.ref.name="5.0.3-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/redmine" \
       org.opencontainers.image.title="redmine" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="5.0.2"
+      org.opencontainers.image.version="5.0.3"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -52,13 +52,13 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf mysql-client-10.6.10-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf mysql-client-10.6.10-0-linux-${OS_ARCH}-debian-11.tar.gz mysql-client-10.6.10-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f redmine-5.0.2-4-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/redmine-5.0.2-4-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/redmine-5.0.2-4-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f redmine-5.0.3-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/redmine-5.0.3-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/redmine-5.0.3-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c redmine-5.0.2-4-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf redmine-5.0.2-4-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf redmine-5.0.2-4-linux-${OS_ARCH}-debian-11.tar.gz redmine-5.0.2-4-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    sha256sum -c redmine-5.0.3-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf redmine-5.0.3-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf redmine-5.0.3-0-linux-${OS_ARCH}-debian-11.tar.gz redmine-5.0.3-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
@@ -74,7 +74,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/redmine/postunpack.sh
-ENV APP_VERSION="5.0.2" \
+ENV APP_VERSION="5.0.3" \
     BITNAMI_APP_NAME="redmine" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:$PATH"
 
