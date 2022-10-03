@@ -5,7 +5,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.15.0-debian-11-r32" \
+      org.opencontainers.image.ref.name="1.15.0-debian-11-r33" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/geode" \
       org.opencontainers.image.title="geode" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -44,7 +44,8 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     sha256sum -c geode-1.15.0-5-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf geode-1.15.0-5-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf geode-1.15.0-5-linux-${OS_ARCH}-debian-11.tar.gz geode-1.15.0-5-linux-${OS_ARCH}-debian-11.tar.gz.sha256
-RUN apt-get update && apt-get upgrade -y && \
+RUN apt-get autoremove --purge -y curl && \
+    apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
