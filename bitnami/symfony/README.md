@@ -35,7 +35,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`6.1`, `6.1-debian-11`, `6.1.5`, `6.1.5-debian-11-r1`, `latest` (6.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/symfony/6.1/debian-11/Dockerfile)
-* [`6.0`, `6.0-debian-11`, `6.0.13`, `6.0.13-debian-11-r0` (6.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/symfony/6.0/debian-11/Dockerfile)
+* [`6.0`, `6.0-debian-11`, `6.0.13`, `6.0.13-debian-11-r1` (6.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/symfony/6.0/debian-11/Dockerfile)
 * [`5.4`, `5.4-debian-11`, `5.4.13`, `5.4.13-debian-11-r0` (5.4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/symfony/5.4/debian-11/Dockerfile)
 * [`4.4`, `4.4-debian-11`, `4.4.46`, `4.4.46-debian-11-r0` (4.4/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/symfony/4.4/debian-11/Dockerfile)
 
