@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.5.3-debian-11-r7" \
+      org.opencontainers.image.ref.name="4.5.3-debian-11-r8" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/configurable-http-proxy" \
       org.opencontainers.image.title="configurable-http-proxy" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -43,7 +43,8 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     sha256sum -c configurable-http-proxy-4.5.3-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf configurable-http-proxy-4.5.3-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf configurable-http-proxy-4.5.3-0-linux-${OS_ARCH}-debian-11.tar.gz configurable-http-proxy-4.5.3-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
-RUN apt-get update && apt-get upgrade -y && \
+RUN apt-get autoremove --purge -y curl && \
+    apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
