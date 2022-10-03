@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.37.3-debian-11-r11" \
+      org.opencontainers.image.ref.name="2.38.0-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/git" \
       org.opencontainers.image.title="git" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.37.3"
+      org.opencontainers.image.version="2.38.0"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
@@ -17,7 +17,7 @@ ENV OS_ARCH="${TARGETARCH:-amd64}" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libbrotli1 libc6 libcom-err2 libcurl4 libffi7 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed6 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 libnettle8 libnghttp2-14 libp11-kit0 libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.1 libtasn1-6 libunistring2 procps ssh zlib1g
+RUN install_packages ca-certificates curl libbrotli1 libcom-err2 libcurl4 libffi7 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed6 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 libnettle8 libnghttp2-14 libp11-kit0 libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.1 libtasn1-6 libunistring2 procps ssh zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
@@ -27,18 +27,19 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f git-2.37.3-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/git-2.37.3-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/git-2.37.3-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f git-2.38.0-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/git-2.38.0-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/git-2.38.0-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c git-2.37.3-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf git-2.37.3-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf git-2.37.3-0-linux-${OS_ARCH}-debian-11.tar.gz git-2.37.3-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
-RUN apt-get update && apt-get upgrade -y && \
+    sha256sum -c git-2.38.0-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf git-2.38.0-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf git-2.38.0-0-linux-${OS_ARCH}-debian-11.tar.gz git-2.38.0-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+RUN apt-get autoremove --purge -y curl && \
+    apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
-ENV APP_VERSION="2.37.3" \
+ENV APP_VERSION="2.38.0" \
     BITNAMI_APP_NAME="git" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/git/bin:$PATH"
