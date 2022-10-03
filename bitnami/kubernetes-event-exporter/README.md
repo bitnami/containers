@@ -41,7 +41,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 * [`1`, `1-debian-11`, `1.0.0`, `1.0.0-debian-11-r0`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kubernetes-event-exporter/1/debian-11/Dockerfile)
-* [`0`, `0-debian-11`, `0.11.0`, `0.11.0-debian-11-r42` (0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kubernetes-event-exporter/0/debian-11/Dockerfile)
+* [`0`, `0-debian-11`, `0.11.0`, `0.11.0-debian-11-r43` (0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kubernetes-event-exporter/0/debian-11/Dockerfile)
 
 ## Connecting to other containers
 
