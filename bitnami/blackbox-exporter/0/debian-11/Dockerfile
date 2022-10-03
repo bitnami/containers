@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.22.0-debian-11-r19" \
+      org.opencontainers.image.ref.name="0.22.0-debian-11-r20" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/blackbox-exporter" \
       org.opencontainers.image.title="blackbox-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -27,7 +27,8 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     sha256sum -c blackbox-exporter-0.22.0-2-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf blackbox-exporter-0.22.0-2-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf blackbox-exporter-0.22.0-2-linux-${OS_ARCH}-debian-11.tar.gz blackbox-exporter-0.22.0-2-linux-${OS_ARCH}-debian-11.tar.gz.sha256
-RUN apt-get update && apt-get upgrade -y && \
+RUN apt-get autoremove --purge -y curl && \
+    apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
