@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.6.6-debian-11-r3" \
+      org.opencontainers.image.ref.name="2.6.6-debian-11-r4" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/haproxy-intel" \
       org.opencontainers.image.title="haproxy-intel" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -43,7 +43,8 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     sha256sum -c haproxy-2.6.6-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf haproxy-2.6.6-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf haproxy-2.6.6-0-linux-${OS_ARCH}-debian-11.tar.gz haproxy-2.6.6-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
-RUN apt-get update && apt-get upgrade -y && \
+RUN apt-get autoremove --purge -y curl && \
+    apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN ln -s /opt/bitnami/common/lib/engines-1.1/* /usr/lib/x86_64-linux-gnu/engines-1.1/
