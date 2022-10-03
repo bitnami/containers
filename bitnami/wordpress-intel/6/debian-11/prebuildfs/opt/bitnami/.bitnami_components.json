@@ -15,17 +15,17 @@
     },
     "nginx-intel": {
         "arch": "amd64",
-        "digest": "6e282bc9fe7de66a1823c57a5ed5b39e158fe1c4f7eb3277043f57691383f37f",
+        "digest": "7e86abdc72e32d00edcbc5d78ee61b50f60d3763c4762d054f09449713f3ad6f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.4.8-0"
+        "version": "0.4.8-1"
     },
     "php": {
         "arch": "amd64",
-        "digest": "8b7f6e4a53866d7e274976a8bbcba1f51beaa1617c33849664e9868e52f00c75",
+        "digest": "8eab8159b76a36a425033e5d9811009f25af860da4c9bef9d48cd4044eb6617e",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.24-1"
+        "version": "8.0.24-2"
     },
     "qatengine": {
         "arch": "amd64",
