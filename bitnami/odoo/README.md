@@ -226,6 +226,7 @@ Available environment variables:
 - `ODOO_DATABASE_ADMIN_USER`: Database admin user that Odoo will use to connect with the database. Default: **postgres**
 - `ODOO_DATABASE_ADMIN_PASSWORD`: Database admin password that Odoo will use to connect with the database. No default.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+- `ODOO_ADDONS_DIR`: Set up a custom directory for addons - useful to mount a custom volume of addons, separate from the main persistence volume. Default: **/bitnami/odoo/addons**
 
 ##### Create a database for Odoo using postgresql-client
 
