@@ -32,7 +32,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 * [`7.1`, `7.1-debian-11`, `7.1.4`, `7.1.4-debian-11-r3` (7.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/ksql/7.1/debian-11/Dockerfile)
 * [`7.0`, `7.0-debian-11`, `7.0.6`, `7.0.6-debian-11-r3` (7.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/ksql/7.0/debian-11/Dockerfile)
 * [`6.2`, `6.2-debian-11`, `6.2.7`, `6.2.7-debian-11-r2` (6.2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/ksql/6.2/debian-11/Dockerfile)
-* [`6.1`, `6.1-debian-11`, `6.1.8`, `6.1.8-debian-11-r2` (6.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/ksql/6.1/debian-11/Dockerfile)
+* [`6.1`, `6.1-debian-11`, `6.1.8`, `6.1.8-debian-11-r3` (6.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/ksql/6.1/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
