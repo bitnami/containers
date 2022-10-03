@@ -98,7 +98,7 @@ jasperreports_validate() {
         done
         is_empty_value "$JASPERREPORTS_SMTP_PORT_NUMBER" && print_validation_error "The JASPERREPORTS_SMTP_PORT_NUMBER environment variable is empty or not set."
         ! is_empty_value "$JASPERREPORTS_SMTP_PORT_NUMBER" && check_valid_port "JASPERREPORTS_SMTP_PORT_NUMBER"
-        ! is_empty_value "$JASPERREPORTS_SMTP_PROTOCOL" && check_multi_value "JASPERREPORTS_SMTP_PROTOCOL" "smtp ssl tls"
+        ! is_empty_value "$JASPERREPORTS_SMTP_PROTOCOL" && check_multi_value "JASPERREPORTS_SMTP_PROTOCOL" "smtp smtps ssl tls"
     fi
 
     return "$error_code"
