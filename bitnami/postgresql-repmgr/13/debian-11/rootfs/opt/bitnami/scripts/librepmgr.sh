@@ -123,7 +123,7 @@ repmgr_validate() {
     if ! is_yes_no_value "$REPMGR_UPGRADE_EXTENSION"; then
         print_validation_error "The allowed values for REPMGR_UPGRADE_EXTENSION are: yes or no."
     fi
-    
+
     if ! [[ "$REPMGR_FAILOVER" =~ ^(automatic|manual)$ ]]; then
         print_validation_error "The allowed values for REPMGR_FAILOVER are: automatic or manual."
     fi
