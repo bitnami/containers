@@ -22,17 +22,17 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "dc1c7c40076cf2b27213a56c0cff7b7836ef85d65b1522685876a100c23f502d",
+        "digest": "26c17b7d30541a87686f1b34bc73927d38d3c5e93282f4f5e9c0c11513ecc8cb",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.4.30-154"
+        "version": "7.4.32-0"
     },
     "php": {
         "arch": "amd64",
-        "digest": "754e7b04ae9e332b70f949686f46cd7e861163d979de1b3ee69d904791561b5c",
+        "digest": "3839124f0754125166db3281b77dcf688803ee25ed776a56b3a158f6b1885ff9",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.4.30-165"
+        "version": "7.4.32-0"
     },
     "render-template": {
         "arch": "amd64",
