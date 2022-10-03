@@ -127,7 +127,7 @@ repmgr_validate() {
     if ! [[ "$REPMGR_FAILOVER" =~ ^(automatic|manual)$ ]]; then
         print_validation_error "The allowed values for REPMGR_FAILOVER are: automatic or manual."
     fi
-    
+
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
 
