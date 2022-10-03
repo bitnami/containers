@@ -14,7 +14,8 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages curl procps
-RUN apt-get update && apt-get upgrade -y && \
+RUN apt-get autoremove --purge -y curl && \
+    apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 ENV APP_VERSION="11" \
