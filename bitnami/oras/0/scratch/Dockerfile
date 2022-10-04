@@ -29,7 +29,7 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.15.0-scratch-r0" \
+      org.opencontainers.image.ref.name="0.15.0-scratch-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/oras" \
       org.opencontainers.image.title="oras" \
       org.opencontainers.image.vendor="VMware, Inc." \
