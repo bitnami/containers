@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="8.0.24-debian-11-r2" \
+      org.opencontainers.image.ref.name="8.0.24-debian-11-r3" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/php-fpm" \
       org.opencontainers.image.title="php-fpm" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -26,7 +26,8 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     sha256sum -c php-8.0.24-2-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf php-8.0.24-2-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf php-8.0.24-2-linux-${OS_ARCH}-debian-11.tar.gz php-8.0.24-2-linux-${OS_ARCH}-debian-11.tar.gz.sha256
-RUN apt-get update && apt-get upgrade -y && \
+RUN apt-get autoremove --purge -y curl && \
+    apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS    0/' /etc/login.defs && \
