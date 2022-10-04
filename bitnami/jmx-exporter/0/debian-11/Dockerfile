@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.17.2-debian-11-r3" \
+      org.opencontainers.image.ref.name="0.17.2-debian-11-r4" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jmx-exporter" \
       org.opencontainers.image.title="jmx-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -35,7 +35,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     sha256sum -c jmx-exporter-0.17.2-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf jmx-exporter-0.17.2-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf jmx-exporter-0.17.2-0-linux-${OS_ARCH}-debian-11.tar.gz jmx-exporter-0.17.2-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
-RUN apt-get autoremove --purge -y ca-certificates && \
+RUN apt-get autoremove --purge -y curl ca-certificates && \
     apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
