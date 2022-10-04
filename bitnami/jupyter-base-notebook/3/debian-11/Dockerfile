@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.0.0-debian-11-r2" \
+      org.opencontainers.image.ref.name="3.0.0-debian-11-r3" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jupyter-base-notebook" \
       org.opencontainers.image.title="jupyter-base-notebook" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -36,14 +36,15 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     tar -zxf miniconda-4.12.0-157-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf miniconda-4.12.0-157-linux-${OS_ARCH}-debian-11.tar.gz miniconda-4.12.0-157-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f jupyter-base-notebook-3.0.0-3-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/jupyter-base-notebook-3.0.0-3-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/jupyter-base-notebook-3.0.0-3-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f jupyter-base-notebook-3.0.0-4-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/jupyter-base-notebook-3.0.0-4-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/jupyter-base-notebook-3.0.0-4-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c jupyter-base-notebook-3.0.0-3-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf jupyter-base-notebook-3.0.0-3-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf jupyter-base-notebook-3.0.0-3-linux-${OS_ARCH}-debian-11.tar.gz jupyter-base-notebook-3.0.0-3-linux-${OS_ARCH}-debian-11.tar.gz.sha256
-RUN apt-get update && apt-get upgrade -y && \
+    sha256sum -c jupyter-base-notebook-3.0.0-4-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf jupyter-base-notebook-3.0.0-4-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf jupyter-base-notebook-3.0.0-4-linux-${OS_ARCH}-debian-11.tar.gz jupyter-base-notebook-3.0.0-4-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+RUN apt-get autoremove --purge -y curl && \
+    apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /opt/bitnami/jupyterhub-singleuser/ && chmod g+rwX /opt/bitnami/jupyterhub-singleuser/
