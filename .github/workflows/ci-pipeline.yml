@@ -122,6 +122,7 @@ jobs:
         name: Check Status
         uses: actions/github-script@v6
         with:
+          result-encoding: string
           script: |
             state = 'success'
             description = 'Well done! Everything looks good. Please wait for the Bitnami Team review.'
@@ -139,7 +140,6 @@ jobs:
             } else {
               core.notice(description)
             }
-            core.setOutput('state', state)
             try {
               await github.rest.repos.createCommitStatus({
                 context: `${context.workflow} / Verification Summary (${context.eventName})`,
@@ -154,6 +154,7 @@ jobs:
             } catch (error) {
               core.setFailed(error.message)
             }
+            return state
   auto-pr-review:
     runs-on: ubuntu-latest
     name: Reviewal for automated PRs
