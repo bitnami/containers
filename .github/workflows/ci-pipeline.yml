@@ -115,7 +115,7 @@ jobs:
       - get-containers
       - vib-verify
     outputs:
-      result: ${{ steps.get-status.outputs.state }}
+      result: ${{ steps.get-status.outputs.result }}
     if: ${{ always() }}
     steps:
       - id: get-status
