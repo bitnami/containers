@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.32.1-debian-11-r1" \
+      org.opencontainers.image.ref.name="0.32.1-debian-11-r2" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/trivy" \
       org.opencontainers.image.title="trivy" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -27,7 +27,8 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     sha256sum -c trivy-0.32.1-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf trivy-0.32.1-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
     rm -rf trivy-0.32.1-0-linux-${OS_ARCH}-debian-11.tar.gz trivy-0.32.1-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
-RUN apt-get update && apt-get upgrade -y && \
+RUN apt-get autoremove --purge -y curl && \
+    apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /.cache && chmod g+rwX /.cache
