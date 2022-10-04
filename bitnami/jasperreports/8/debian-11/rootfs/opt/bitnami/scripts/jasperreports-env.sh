@@ -102,7 +102,7 @@ export JASPERREPORTS_SMTP_USER="${JASPERREPORTS_SMTP_USER:-}" # only used during
 JASPERREPORTS_SMTP_PASSWORD="${JASPERREPORTS_SMTP_PASSWORD:-"${SMTP_PASSWORD:-}"}"
 export JASPERREPORTS_SMTP_PASSWORD="${JASPERREPORTS_SMTP_PASSWORD:-}" # only used during the first initialization
 JASPERREPORTS_SMTP_PROTOCOL="${JASPERREPORTS_SMTP_PROTOCOL:-"${SMTP_PROTOCOL:-}"}"
-export JASPERREPORTS_SMTP_PROTOCOL="${JASPERREPORTS_SMTP_PROTOCOL:-}" # only used during the first initialization
+export JASPERREPORTS_SMTP_PROTOCOL="${JASPERREPORTS_SMTP_PROTOCOL:-smtp}" # only used during the first initialization
 
 # Database configuration
 export JASPERREPORTS_DATABASE_TYPE="${JASPERREPORTS_DATABASE_TYPE:-mariadb}" # only used during the first initialization
