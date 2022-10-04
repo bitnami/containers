@@ -9,7 +9,7 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl gzip tar
+RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     if [ ! -f rmq-messaging-topology-operator-1.8.0-1-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
       curl -SsLf https://downloads.bitnami.com/files/stacksmith/rmq-messaging-topology-operator-1.8.0-1-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
@@ -17,7 +17,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     fi && \
     sha256sum -c rmq-messaging-topology-operator-1.8.0-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
     tar -zxf rmq-messaging-topology-operator-1.8.0-1-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf rmq-messaging-topology-operator-1.8.0-1-linux-${OS_ARCH}-debian-11.tar.gz
+    rm -rf rmq-messaging-topology-operator-1.8.0-1-linux-${OS_ARCH}-debian-11.tar.gz rmq-messaging-topology-operator-1.8.0-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 
 ######
 
@@ -29,7 +29,7 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.8.0-scratch-r2" \
+      org.opencontainers.image.ref.name="1.8.0-scratch-r3" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/rmq-messaging-topology-operator" \
       org.opencontainers.image.title="rmq-messaging-topology-operator" \
       org.opencontainers.image.vendor="VMware, Inc." \
