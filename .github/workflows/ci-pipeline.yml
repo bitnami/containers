@@ -115,7 +115,7 @@ jobs:
       - get-containers
       - vib-verify
     outputs:
-      result: ${{ steps.get-status.outputs.result }}
+      result: ${{ steps.get-status.outputs.state }}
     if: ${{ always() }}
     steps:
       - id: get-status
@@ -139,7 +139,7 @@ jobs:
             } else {
               core.notice(description)
             }
-            core.setOutput('result', state)
+            core.setOutput('state', state)
             try {
               await github.rest.repos.createCommitStatus({
                 context: `${context.workflow} / Verification Summary (${context.eventName})`,
