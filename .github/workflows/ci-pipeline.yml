@@ -114,9 +114,12 @@ jobs:
     needs:
       - get-containers
       - vib-verify
+    outputs:
+      result: ${{ steps.get-status.outputs.result }}
     if: ${{ always() }}
     steps:
-      - name: Check Status
+      - id: get-status
+        name: Check Status
         uses: actions/github-script@v6
         with:
           script: |
@@ -136,6 +139,7 @@ jobs:
             } else {
               core.notice(description)
             }
+            core.setOutput('result', state)
             try {
               await github.rest.repos.createCommitStatus({
                 context: `${context.workflow} / Verification Summary (${context.eventName})`,
@@ -161,7 +165,7 @@ jobs:
       github.event.pull_request.user.login == 'bitnami-bot'
     steps:
       - name: Enable auto-merge feature
-        if: ${{ needs.verification-summary.result == 'success' }}
+        if: ${{ needs.verification-summary.outputs.result == 'success' }}
         uses: reitermarkus/automerge@v2.1.2
         with:
           # Necessary to trigger CD workflow
@@ -169,12 +173,12 @@ jobs:
           merge-method: squash
           pull-request: ${{ github.event.number }}
       - name: PR Approval
-        if: ${{ needs.verification-summary.result == 'success' }}
+        if: ${{ needs.verification-summary.outputs.result == 'success' }}
         uses: hmarr/auto-approve-action@v2.4.0
         with:
           pull-request-number: ${{ github.event.number }}
       - name: Manual review required
-        if: ${{ needs.verification-summary.result != 'success' }}
+        if: ${{ needs.verification-summary.outputs.result != 'success' }}
         uses: peter-evans/create-or-update-comment@v2.0.0
         with:
           issue-number: ${{ github.event.number }}
