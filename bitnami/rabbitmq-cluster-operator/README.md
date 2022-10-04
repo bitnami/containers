@@ -29,7 +29,7 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 
 - [`2`, `2-scratch`, `2.0.0`, `2.0.0-scratch-r2`, `latest` (2/scratch/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/rabbitmq-cluster-operator/2/scratch/Dockerfile)
-- [`1`, `1-scratch`, `1.14.0`, `1.14.0-scratch-r7` (1/scratch/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/rabbitmq-cluster-operator/1/scratch/Dockerfile)
+- [`1`, `1-scratch`, `1.14.0`, `1.14.0-scratch-r8` (1/scratch/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/rabbitmq-cluster-operator/1/scratch/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
