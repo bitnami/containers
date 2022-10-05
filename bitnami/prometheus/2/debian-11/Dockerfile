@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.38.0-debian-11-r16" \
+      org.opencontainers.image.ref.name="2.39.0-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/prometheus" \
       org.opencontainers.image.title="prometheus" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.38.0"
+      org.opencontainers.image.version="2.39.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -20,13 +20,13 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f prometheus-2.38.0-1-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/prometheus-2.38.0-1-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/prometheus-2.38.0-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
+    if [ ! -f prometheus-2.39.0-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/prometheus-2.39.0-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
+      curl -SsLf https://downloads.bitnami.com/files/stacksmith/prometheus-2.39.0-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
     fi && \
-    sha256sum -c prometheus-2.38.0-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf prometheus-2.38.0-1-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf prometheus-2.38.0-1-linux-${OS_ARCH}-debian-11.tar.gz prometheus-2.38.0-1-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    sha256sum -c prometheus-2.39.0-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
+    tar -zxf prometheus-2.39.0-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+    rm -rf prometheus-2.39.0-0-linux-${OS_ARCH}-debian-11.tar.gz prometheus-2.39.0-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
 RUN apt-get autoremove --purge -y curl && \
     apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
@@ -36,7 +36,7 @@ RUN ln -sf /opt/bitnami/prometheus/data /prometheus
 RUN chown -R 1001:1001 /opt/bitnami/prometheus
 
 RUN mkdir -p /opt/bitnami/prometheus/data/ && chmod g+rwX /opt/bitnami/prometheus/data/
-ENV APP_VERSION="2.38.0" \
+ENV APP_VERSION="2.39.0" \
     BITNAMI_APP_NAME="prometheus" \
     PATH="/opt/bitnami/prometheus/bin:$PATH"
 
