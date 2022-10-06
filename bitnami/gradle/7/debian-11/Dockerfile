@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="7.5.1-debian-11-r20" \
+      org.opencontainers.image.ref.name="7.5.1-debian-11-r21" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/gradle" \
       org.opencontainers.image.title="gradle" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -20,13 +20,14 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    for COMPONENT in \
-      "java-11.0.16-0-linux-${OS_ARCH}-debian-11" \
-      "gradle-7.5.1-2-linux-${OS_ARCH}-debian-11" ; \
-    do \
+    COMPONENTS=( \
+      "java-11.0.16-1-linux-${OS_ARCH}-debian-11" \
+      "gradle-7.5.1-3-linux-${OS_ARCH}-debian-11" \
+    ) && \
+    for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
-        curl -SsLf https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz -O ; \
-        curl -SsLf https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz.sha256 -O ; \
+        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz" -O ; \
+        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz.sha256" -O ; \
       fi && \
       sha256sum -c "${COMPONENT}.tar.gz.sha256" && \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
