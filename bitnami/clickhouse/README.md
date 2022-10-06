@@ -43,9 +43,9 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 
 * [`22.8`, `22.8-debian-11`, `22.8.6`, `22.8.6-debian-11-r2`, `latest` (22.8/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/clickhouse/22.8/debian-11/Dockerfile)
 * [`22.7`, `22.7-debian-11`, `22.7.6`, `22.7.6-debian-11-r2` (22.7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/clickhouse/22.7/debian-11/Dockerfile)
-* [`22.6`, `22.6-debian-11`, `22.6.8`, `22.6.8-debian-11-r5` (22.6/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/clickhouse/22.6/debian-11/Dockerfile)
-* [`22.5`, `22.5-debian-11`, `22.5.4`, `22.5.4-debian-11-r6` (22.5/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/clickhouse/22.5/debian-11/Dockerfile)
-* [`22.3`, `22.3-debian-11`, `22.3.13`, `22.3.13-debian-11-r1` (22.3/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/clickhouse/22.3/debian-11/Dockerfile)
+* [`22.6`, `22.6-debian-11`, `22.6.9`, `22.6.9-debian-11-r-1` (22.6/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/clickhouse/22.6/debian-11/Dockerfile)
+* [`22.5`, `22.5-debian-11`, `22.5.4`, `22.5.4-debian-11-r7` (22.5/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/clickhouse/22.5/debian-11/Dockerfile)
+* [`22.3`, `22.3-debian-11`, `22.3.13`, `22.3.13-debian-11-r2` (22.3/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/clickhouse/22.3/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
