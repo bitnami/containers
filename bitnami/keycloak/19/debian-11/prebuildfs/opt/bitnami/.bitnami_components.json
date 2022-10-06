@@ -1,30 +1,30 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "e36c3d90f4fbfbe989f40947fa7c8ab817f12fcf97d3aef893c753a20ce976ab",
+        "digest": "f21869b27c26b9c3053bce8b419a0fdf1dc45fcf13a7c2058e0afb6996d3687f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-154"
+        "version": "1.14.0-155"
     },
     "java": {
         "arch": "amd64",
-        "digest": "98cbaca6fc1aca76fdbfc11ee57d05924adc956401396375c4be43c5c671dca5",
+        "digest": "c375579c55ee13d9561dcfaeba0338a6c2f5233dc386ead63dbbb67cc974fcdb",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.16-0"
+        "version": "11.0.16-1"
     },
     "keycloak": {
         "arch": "amd64",
-        "digest": "2688d903cd848df64dc563ccec4a8f5f49a206b43a7514005d6458c9d52f16c2",
+        "digest": "8355b51e2a800713c4fedc054ad408b0809b6fa28086404e2a366908bc7f2444",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "19.0.2-0"
+        "version": "19.0.3-0"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "74a09c2208af7316f32ee3ee8479d70b20ad54f1a989e84b6417e23c1f07c147",
+        "digest": "8833550a6f165e2a0f1250cc327d92a3f85b151cb1f49cd0ee4bee0fdf20a21b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.3-154"
+        "version": "1.0.3-155"
     }
 }
