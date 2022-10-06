@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="8.0.29-22-debian-11-r26" \
+      org.opencontainers.image.ref.name="8.0.29-22-debian-11-r28" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/percona-xtrabackup" \
       org.opencontainers.image.title="percona-xtrabackup" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -20,14 +20,19 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libaio1 libbrotli1 libc6 libcom-err2 libcurl4 libev4 libffi7 libgcc-s1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed6 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 libnettle8 libnghttp2-14 libp11-kit0 libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.1 libstdc++6 libtasn1-6 libunistring2 procps rsync zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f percona-xtrabackup-8.0.29-22-2-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/percona-xtrabackup-8.0.29-22-2-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/percona-xtrabackup-8.0.29-22-2-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
-    fi && \
-    sha256sum -c percona-xtrabackup-8.0.29-22-2-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf percona-xtrabackup-8.0.29-22-2-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf percona-xtrabackup-8.0.29-22-2-linux-${OS_ARCH}-debian-11.tar.gz percona-xtrabackup-8.0.29-22-2-linux-${OS_ARCH}-debian-11.tar.gz.sha256
-RUN apt-get autoremove --purge -y ca-certificates && \
+    COMPONENTS=( \
+      "percona-xtrabackup-8.0.29-22-2-linux-${OS_ARCH}-debian-11" \
+    ) && \
+    for COMPONENT in "${COMPONENTS[@]}"; do \
+      if [ ! -f "${COMPONENT}.tar.gz" ]; then \
+        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz" -O ; \
+        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz.sha256" -O ; \
+      fi && \
+      sha256sum -c "${COMPONENT}.tar.gz.sha256" && \
+      tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+      rm -rf "${COMPONENT}.tar.gz{,sha256}" ; \
+    done
+RUN apt-get autoremove --purge -y curl ca-certificates && \
     apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
