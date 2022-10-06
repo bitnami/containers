@@ -6,7 +6,7 @@ ARG WITH_ALL_LOCALES="no"
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="11.17.0-debian-11-r23" \
+      org.opencontainers.image.ref.name="11.17.0-debian-11-r24" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/postgresql" \
       org.opencontainers.image.title="postgresql" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -24,7 +24,7 @@ RUN install_packages ca-certificates curl libbsd0 libbz2-1.0 libedit2 libffi7 li
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     for COMPONENT in \
       "gosu-1.14.0-154-linux-${OS_ARCH}-debian-11" \
-      "postgresql-11.17.0-10-linux-${OS_ARCH}-debian-11" ; \
+      "postgresql-11.17.0-11-linux-${OS_ARCH}-debian-11" ; \
     do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
         curl -SsLf https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz -O ; \
