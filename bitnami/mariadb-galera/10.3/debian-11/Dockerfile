@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="10.3.36-debian-11-r16" \
+      org.opencontainers.image.ref.name="10.3.36-debian-11-r17" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mariadb-galera" \
       org.opencontainers.image.title="mariadb-galera" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -18,16 +18,17 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl iproute2 ldap-utils libaio1 libaudit1 libc6 libcap-ng0 libcrypt1 libgcc-s1 libicu67 libjemalloc2 libldap-common liblzma5 libncurses6 libpam-ldapd libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 nslcd procps psmisc rsync socat zlib1g
+RUN install_packages ca-certificates curl iproute2 ldap-utils libaio1 libaudit1 libcap-ng0 libcrypt1 libgcc-s1 libicu67 libjemalloc2 libldap-common liblzma5 libncurses6 libpam-ldapd libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 nslcd procps psmisc rsync socat zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    for COMPONENT in \
-      "ini-file-1.4.3-153-linux-${OS_ARCH}-debian-11" \
-      "mariadb-galera-10.3.36-2-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.14.0-154-linux-${OS_ARCH}-debian-11" ; \
-    do \
+    COMPONENTS=( \
+      "ini-file-1.4.3-154-linux-${OS_ARCH}-debian-11" \
+      "mariadb-galera-10.3.36-3-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
+    ) && \
+    for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
-        curl -SsLf https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz -O ; \
-        curl -SsLf https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz.sha256 -O ; \
+        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz" -O ; \
+        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz.sha256" -O ; \
       fi && \
       sha256sum -c "${COMPONENT}.tar.gz.sha256" && \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
