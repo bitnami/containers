@@ -1,9 +1,9 @@
 {
     "argo-workflow-controller": {
         "arch": "amd64",
-        "digest": "44771711ec69c4b8937454dfbbbd4c28d52b81d3444c8aca6f522cb1be7e7169",
+        "digest": "62d41822cc7a6a412ab2326c451766aceddae35efbf3b06c98ecf6657c7c13cd",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.4.1-0"
+        "version": "3.4.1-1"
     }
 }
