@@ -40,8 +40,8 @@ Non-root container images add an extra layer of security and are generally recom
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`1`, `1-debian-11`, `1.0.0`, `1.0.0-debian-11-r0`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kubernetes-event-exporter/1/debian-11/Dockerfile)
-* [`0`, `0-debian-11`, `0.11.0`, `0.11.0-debian-11-r43` (0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kubernetes-event-exporter/0/debian-11/Dockerfile)
+* [`1`, `1-debian-11`, `1.0.0`, `1.0.0-debian-11-r1`, `latest` (1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kubernetes-event-exporter/1/debian-11/Dockerfile)
+* [`0`, `0-debian-11`, `0.11.0`, `0.11.0-debian-11-r44` (0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kubernetes-event-exporter/0/debian-11/Dockerfile)
 
 ## Connecting to other containers
 
@@ -66,6 +66,10 @@ $ docker logs kubernetes-event-exporter
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
+
+## Branch Deprecation Notice
+
+Kubernetes Event Exporter's branch 0 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 11-05-2022
 
 ## Contributing
 
