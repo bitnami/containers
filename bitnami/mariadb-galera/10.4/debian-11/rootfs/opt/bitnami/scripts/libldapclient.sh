@@ -56,9 +56,9 @@ EOF
 ldap_openldap_config_path() {
     local openldap_config
     case "$OS_FLAVOUR" in
-        debian-*|ubuntu-*) openldap_config=/etc/ldap/ldap.conf ;;
-        centos-*|photon-*) openldap_config=/etc/openldap/ldap.conf ;;
-        *) error "Unsupported OS flavor ${OS_FLAVOUR}" && exit 1 ;;
+    debian-* | ubuntu-*) openldap_config=/etc/ldap/ldap.conf ;;
+    centos-* | photon-* | redhatubi-*) openldap_config=/etc/openldap/ldap.conf ;;
+    *) error "Unsupported OS flavor ${OS_FLAVOUR}" && exit 1 ;;
     esac
     echo "$openldap_config"
 }
@@ -74,6 +74,8 @@ ldap_openldap_config_path() {
 #########################
 ldap_configure_permissions() {
     ensure_dir_exists "/var/run/nslcd" && configure_permissions_ownership "/var/run/nslcd" -u "root" -g "root" -d "775"
+    # The nslcd.conf file may not exist in distros like UBI, so we need to create it first
+    touch "/etc/nslcd.conf"
     configure_permissions_ownership "/etc/nslcd.conf" -u "root" -g "root" -f "660"
     configure_permissions_ownership "$(ldap_openldap_config_path)" -u "root" -g "root" -f "660"
 }
@@ -91,19 +93,19 @@ ldap_create_nslcd_config() {
     if am_i_root; then
         chown "root:${LDAP_NSLCD_GROUP}" "/etc/nslcd.conf"
         chown -R "${LDAP_NSLCD_USER}:${LDAP_NSLCD_GROUP}" "/var/run/nslcd"
-        cat > "/etc/nslcd.conf" <<EOF
+        cat >"/etc/nslcd.conf" <<EOF
 # The user and group nslcd should run as
 uid $LDAP_NSLCD_USER
 gid $LDAP_NSLCD_GROUP
 EOF
     else
-        cat > "/etc/nslcd.conf" <<EOF
+        cat >"/etc/nslcd.conf" <<EOF
 # Comment out uid,gid to avoid attempting change user/group to run as
 # uid
 # gid
 EOF
     fi
-    cat >> "/etc/nslcd.conf" <<EOF
+    cat >>"/etc/nslcd.conf" <<EOF
 nss_initgroups_ignoreusers $LDAP_NSS_INITGROUPS_IGNOREUSERS
 
 # The location at which the LDAP server(s) should be reachable.
@@ -115,30 +117,30 @@ binddn $LDAP_BIND_DN
 bindpw $LDAP_BIND_PASSWORD
 EOF
     if [[ -n "${LDAP_BASE_LOOKUP}" ]]; then
-        cat >>"/etc/nslcd.conf"<<EOF
+        cat >>"/etc/nslcd.conf" <<EOF
 base passwd $LDAP_BASE_LOOKUP
 EOF
     fi
     if [[ -n "${LDAP_SCOPE}" ]]; then
-        cat >>"/etc/nslcd.conf"<<EOF
+        cat >>"/etc/nslcd.conf" <<EOF
 # The search scope
 scope $LDAP_SCOPE
 EOF
     fi
     if [[ -n "${LDAP_SEARCH_FILTER}" ]]; then
-        cat >>"/etc/nslcd.conf"<<EOF
+        cat >>"/etc/nslcd.conf" <<EOF
 # LDAP search filter to use for posix users
 filter passwd (objectClass=$LDAP_SEARCH_FILTER)
 EOF
     fi
     if [[ -n "${LDAP_SEARCH_MAP}" ]]; then
-        cat >>"/etc/nslcd.conf"<<EOF
+        cat >>"/etc/nslcd.conf" <<EOF
 # Used for lookup of custom attributes
 map passwd uid $LDAP_SEARCH_MAP
 EOF
     fi
     if [[ -n "${LDAP_TLS_REQCERT}" ]]; then
-        cat >>"/etc/nslcd.conf"<<EOF
+        cat >>"/etc/nslcd.conf" <<EOF
 # TLS options
 tls_reqcert $LDAP_TLS_REQCERT
 EOF
@@ -158,7 +160,7 @@ EOF
 #   None
 #########################
 ldap_create_openldap_config() {
-    cat >>"$(ldap_openldap_config_path)"<<EOF
+    cat >>"$(ldap_openldap_config_path)" <<EOF
 BASE $LDAP_BASE
 URI $LDAP_URI
 
@@ -180,7 +182,7 @@ EOF
 #########################
 ldap_create_pam_config() {
     local filename="${1:?ip is missing}"
-    cat > "/etc/pam.d/${filename}" << EOF
+    cat >"/etc/pam.d/${filename}" <<EOF
 auth     required  pam_ldap.so  try_first_pass debug
 account  required  pam_ldap.so  debug
 EOF
