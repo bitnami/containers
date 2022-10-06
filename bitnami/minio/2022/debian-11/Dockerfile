@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2022.9.25-debian-11-r1" \
+      org.opencontainers.image.ref.name="2022.10.5-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/minio" \
       org.opencontainers.image.title="minio" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2022.9.25"
+      org.opencontainers.image.version="2022.10.5"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -20,37 +20,21 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl jq libc6 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f wait-for-port-1.0.3-154-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/wait-for-port-1.0.3-154-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/wait-for-port-1.0.3-154-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
-    fi && \
-    sha256sum -c wait-for-port-1.0.3-154-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf wait-for-port-1.0.3-154-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf wait-for-port-1.0.3-154-linux-${OS_ARCH}-debian-11.tar.gz wait-for-port-1.0.3-154-linux-${OS_ARCH}-debian-11.tar.gz.sha256
-RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f minio-client-2022.9.16-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/minio-client-2022.9.16-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/minio-client-2022.9.16-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
-    fi && \
-    sha256sum -c minio-client-2022.9.16-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf minio-client-2022.9.16-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf minio-client-2022.9.16-0-linux-${OS_ARCH}-debian-11.tar.gz minio-client-2022.9.16-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
-RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f minio-2022.9.25-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/minio-2022.9.25-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/minio-2022.9.25-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
-    fi && \
-    sha256sum -c minio-2022.9.25-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf minio-2022.9.25-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf minio-2022.9.25-0-linux-${OS_ARCH}-debian-11.tar.gz minio-2022.9.25-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
-RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
-    fi && \
-    sha256sum -c gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    COMPONENTS=( \
+      "wait-for-port-1.0.3-154-linux-${OS_ARCH}-debian-11" \
+      "minio-client-2022.10.6-0-linux-${OS_ARCH}-debian-11" \
+      "minio-2022.10.5-0-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.14.0-154-linux-${OS_ARCH}-debian-11" \
+    ) && \
+    for COMPONENT in "${COMPONENTS[@]}"; do \
+      if [ ! -f "${COMPONENT}.tar.gz" ]; then \
+        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz" -O ; \
+        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz.sha256" -O ; \
+      fi && \
+      sha256sum -c "${COMPONENT}.tar.gz.sha256" && \
+      tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+      rm -rf "${COMPONENT}.tar.gz{,sha256}" ; \
+    done
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
@@ -58,7 +42,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/minio-client/postunpack.sh
 RUN /opt/bitnami/scripts/minio/postunpack.sh
-ENV APP_VERSION="2022.9.25" \
+ENV APP_VERSION="2022.10.5" \
     BITNAMI_APP_NAME="minio" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/minio-client/bin:/opt/bitnami/minio/bin:$PATH"
 
