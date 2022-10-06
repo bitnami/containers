@@ -41,8 +41,8 @@ Non-root container images add an extra layer of security and are generally recom
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
-* [`3.2`, `3.2-debian-11`, `3.2.3`, `3.2.3-debian-11-r5`, `latest` (3.2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kafka/3.2/debian-11/Dockerfile)
-* [`3.1`, `3.1-debian-11`, `3.1.2`, `3.1.2-debian-11-r5` (3.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kafka/3.1/debian-11/Dockerfile)
+* [`3.2`, `3.2-debian-11`, `3.2.3`, `3.2.3-debian-11-r6`, `latest` (3.2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kafka/3.2/debian-11/Dockerfile)
+* [`3.1`, `3.1-debian-11`, `3.1.2`, `3.1.2-debian-11-r6` (3.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kafka/3.1/debian-11/Dockerfile)
 * [`3.0`, `3.0-debian-11`, `3.0.2`, `3.0.2-debian-11-r5` (3.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/kafka/3.0/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
