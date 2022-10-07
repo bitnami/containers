@@ -1,9 +1,9 @@
 {
     "postgres-exporter": {
         "arch": "amd64",
-        "digest": "68c1ea1394bfa0adf10308c2512df826b345eece1213e11264e66f2d4de695f5",
+        "digest": "e01b7356965187b5405fc211cc9c3046733008dcba151820ad82fd75ecec92d4",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.11.1-1"
+        "version": "0.11.1-2"
     }
 }
