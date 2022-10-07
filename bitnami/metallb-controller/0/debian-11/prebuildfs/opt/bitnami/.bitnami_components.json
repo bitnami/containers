@@ -1,9 +1,9 @@
 {
     "metallb": {
         "arch": "amd64",
-        "digest": "57dc0ad57298a2a0978d232b4d419a4ba93692ab649f06e8978c0cd31daceb48",
+        "digest": "4c3bbcec8f167d7886bec96664e0ecf70270bd84426b15f9bbcd1a5b38f15e12",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.13.5-0"
+        "version": "0.13.5-1"
     }
 }
