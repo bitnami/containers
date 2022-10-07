@@ -1,9 +1,9 @@
 {
     "node-exporter": {
         "arch": "amd64",
-        "digest": "e361211004ca2ccc2b546e84c36e886caf9f89bac875b2414fa1cc67c2349c12",
+        "digest": "bea72cc3abb3a06029ae2bfb8f5677c94c82146e24ca54ab6d9f75dc3d6903d3",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.4.0-0"
+        "version": "1.4.0-1"
     }
 }
