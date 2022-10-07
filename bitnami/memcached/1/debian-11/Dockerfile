@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.6.17-debian-11-r13" \
+      org.opencontainers.image.ref.name="1.6.17-debian-11-r14" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/memcached" \
       org.opencontainers.image.title="memcached" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -18,23 +18,21 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libc6 libevent-2.1-7 libsasl2-2 libsasl2-modules procps sasl2-bin
+RUN install_packages ca-certificates curl libevent-2.1-7 libsasl2-2 libsasl2-modules procps sasl2-bin
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f memcached-1.6.17-0-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/memcached-1.6.17-0-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/memcached-1.6.17-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
-    fi && \
-    sha256sum -c memcached-1.6.17-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf memcached-1.6.17-0-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf memcached-1.6.17-0-linux-${OS_ARCH}-debian-11.tar.gz memcached-1.6.17-0-linux-${OS_ARCH}-debian-11.tar.gz.sha256
-RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    if [ ! -f gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz ]; then \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -O ; \
-      curl -SsLf https://downloads.bitnami.com/files/stacksmith/gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz.sha256 -O ; \
-    fi && \
-    sha256sum -c gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz.sha256 && \
-    tar -zxf gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-    rm -rf gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz gosu-1.14.0-154-linux-${OS_ARCH}-debian-11.tar.gz.sha256
+    COMPONENTS=( \
+      "memcached-1.6.17-1-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
+    ) && \
+    for COMPONENT in "${COMPONENTS[@]}"; do \
+      if [ ! -f "${COMPONENT}.tar.gz" ]; then \
+        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz" -O ; \
+        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz.sha256" -O ; \
+      fi && \
+      sha256sum -c "${COMPONENT}.tar.gz.sha256" && \
+      tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+      rm -rf "${COMPONENT}.tar.gz{,sha256}" ; \
+    done
 RUN apt-get autoremove --purge -y curl && \
     apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
