@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="22.6.8-debian-11-r5" \
+      org.opencontainers.image.ref.name="22.6.9-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/clickhouse" \
       org.opencontainers.image.title="clickhouse" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="22.6.8"
+      org.opencontainers.image.version="22.6.9"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -20,13 +20,14 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl procps xmlstarlet
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    for COMPONENT in \
-      "gosu-1.14.0-154-linux-${OS_ARCH}-debian-11" \
-      "clickhouse-22.6.8-0-linux-${OS_ARCH}-debian-11" ; \
-    do \
+    COMPONENTS=( \
+      "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
+      "clickhouse-22.6.9-0-linux-${OS_ARCH}-debian-11" \
+    ) && \
+    for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
-        curl -SsLf https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz -O ; \
-        curl -SsLf https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz.sha256 -O ; \
+        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz" -O ; \
+        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz.sha256" -O ; \
       fi && \
       sha256sum -c "${COMPONENT}.tar.gz.sha256" && \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
@@ -39,7 +40,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/clickhouse/postunpack.sh
-ENV APP_VERSION="22.6.8" \
+ENV APP_VERSION="22.6.9" \
     BITNAMI_APP_NAME="clickhouse" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/clickhouse/bin:$PATH" \
     clickhouseCTL_API="3"
