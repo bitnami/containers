@@ -5,7 +5,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="8.9.9-debian-11-r35" \
+      org.opencontainers.image.ref.name="8.9.9-debian-11-r36" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/sonarqube" \
       org.opencontainers.image.title="sonarqube" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -19,17 +19,18 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages acl ca-certificates curl libbsd0 libc6 libedit2 libffi7 libgcc-s1 libgmp10 libgnutls30 libhogweed6 libicu67 libidn2-0 libldap-2.4-2 liblzma5 libmd0 libnettle8 libp11-kit0 libsasl2-2 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 procps zlib1g
+RUN install_packages acl ca-certificates curl libbsd0 libedit2 libffi7 libgcc-s1 libgmp10 libgnutls30 libhogweed6 libicu67 libidn2-0 libldap-2.4-2 liblzma5 libmd0 libnettle8 libp11-kit0 libsasl2-2 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    for COMPONENT in \
-      "postgresql-client-13.8.0-1-linux-${OS_ARCH}-debian-11" \
-      "java-11.0.16-0-linux-${OS_ARCH}-debian-11" \
-      "sonarqube-8.9.9-8-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.14.0-154-linux-${OS_ARCH}-debian-11" ; \
-    do \
+    COMPONENTS=( \
+      "postgresql-client-13.8.0-2-linux-${OS_ARCH}-debian-11" \
+      "java-11.0.16-1-linux-${OS_ARCH}-debian-11" \
+      "sonarqube-8.9.9-9-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
+    ) && \
+    for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
-        curl -SsLf https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz -O ; \
-        curl -SsLf https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz.sha256 -O ; \
+        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz" -O ; \
+        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz.sha256" -O ; \
       fi && \
       sha256sum -c "${COMPONENT}.tar.gz.sha256" && \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
