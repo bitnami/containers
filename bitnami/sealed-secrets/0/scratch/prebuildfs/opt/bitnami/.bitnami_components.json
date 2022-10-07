@@ -1,9 +1,9 @@
 {
     "sealed-secrets": {
         "arch": "amd64",
-        "digest": "50c7f3a6c5954983553b54d3921cfba5ac7c2e01a2a74538bbb19ab0e4058190",
+        "digest": "daedeb550ccb3796e536f3e51a33b0b4911d5a64c9a9c81fbaf69420a25b5bf1",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.18.5-0"
+        "version": "0.18.5-1"
     }
 }
