@@ -1,9 +1,9 @@
 {
     "concourse": {
         "arch": "amd64",
-        "digest": "f38343fbfd1fea1f83a4739f44d5ec82bae7ca2004244279676ecef2e97c85b7",
+        "digest": "20aa02f761e11c47429db0c7ef26183b3507499c519941ad4b946ee327c321a4",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.8.2-2"
+        "version": "7.8.2-3"
     }
 }
