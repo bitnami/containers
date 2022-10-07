@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.6.1-debian-11-r28" \
+      org.opencontainers.image.ref.name="2.6.1-debian-11-r29" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/promtail" \
       org.opencontainers.image.title="promtail" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -18,10 +18,10 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libc6 procps
+RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "promtail-2.6.1-2-linux-${OS_ARCH}-debian-11" \
+      "promtail-2.6.1-3-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
