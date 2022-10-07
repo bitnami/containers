@@ -1,58 +1,58 @@
 {
     "bower": {
         "arch": "amd64",
-        "digest": "ff69d7c9ff6c671b47091bee3f384a7034781fb05b6e53c6507caf29e0370605",
+        "digest": "59393a97b8fccf5c73b879f7002c737fc3cabebd996d3a116570254b5c9389cf",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.8.13-0"
+        "version": "1.8.13-1"
     },
     "express": {
         "arch": "amd64",
-        "digest": "1c3838e898fc7f906ab7f7dadbb7bba314b55beeb7e69d38a3e9e5e69b6beeb8",
+        "digest": "8b4c432f2e0c78f6543e83e11ba1a56e13ec256d0e15acf767331d5fbd2cd7c8",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.18.1-153"
+        "version": "4.18.1-154"
     },
     "express-generator": {
         "arch": "amd64",
-        "digest": "171660c7beb9cd806a8851bec5efad60db34a49b37942755e41470620d28a942",
+        "digest": "e4fc9333e18df86f0f617222e805945ca081ceb01435de15d7cc6e0fc74c176f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.16.1-154"
+        "version": "4.16.1-155"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "e36c3d90f4fbfbe989f40947fa7c8ab817f12fcf97d3aef893c753a20ce976ab",
+        "digest": "f21869b27c26b9c3053bce8b419a0fdf1dc45fcf13a7c2058e0afb6996d3687f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-154"
+        "version": "1.14.0-155"
     },
     "node": {
         "arch": "amd64",
-        "digest": "82532cfe58e59f8b085f6c9e83ec6d51a2abeb1be7240e979f790418c9513d73",
+        "digest": "39d830676988d92eb0cc0d3b340384a60cf87fe4af9ee6caa5a2558b69dee8db",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.20.1-0"
+        "version": "14.20.1-1"
     },
     "python": {
         "arch": "amd64",
-        "digest": "b81946d0fc75ce5dd9518d601920b6da4b24fbd87ca81a4cbd59404dd893764f",
+        "digest": "82f68137917ed04f98cf39ef3ec2cc95f05f93f1456ca9709ba9d98c5a0bed1b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.14-1"
+        "version": "3.8.14-2"
     },
     "sequelize-cli": {
         "arch": "amd64",
-        "digest": "9082c54092925da98b34a7963080dea436ca0fd262966aa6067ea0b1fe94b30c",
+        "digest": "326b633e52cdb4eb73bb8bf4302fc7d47c7f2d6d7c617f44ec354a01ea21fd4e",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.5.1-0"
+        "version": "6.5.1-1"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "74a09c2208af7316f32ee3ee8479d70b20ad54f1a989e84b6417e23c1f07c147",
+        "digest": "8833550a6f165e2a0f1250cc327d92a3f85b151cb1f49cd0ee4bee0fdf20a21b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.3-154"
+        "version": "1.0.3-155"
     }
 }
