@@ -35,11 +35,11 @@ $ docker-compose up -d
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
 
-* [`19`, `19-debian-11`, `19.0.0`, `19.0.0-debian-11-r2`, `latest` (19/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/java/19/debian-11/Dockerfile)
+* [`19`, `19-debian-11`, `19.0.0`, `19.0.0-debian-11-r3`, `latest` (19/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/java/19/debian-11/Dockerfile)
 * [`18`, `18-debian-11`, `18.0.1-1`, `18.0.1-1-debian-11-r32` (18/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/java/18/debian-11/Dockerfile)
-* [`17`, `17-debian-11`, `17.0.4-8`, `17.0.4-8-debian-11-r20` (17/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/java/17/debian-11/Dockerfile)
-* [`11`, `11-debian-11`, `11.0.16`, `11.0.16-debian-11-r5` (11/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/java/11/debian-11/Dockerfile)
-* [`1.8`, `1.8-debian-11`, `1.8.345`, `1.8.345-debian-11-r20` (1.8/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/java/1.8/debian-11/Dockerfile)
+* [`17`, `17-debian-11`, `17.0.4-8`, `17.0.4-8-debian-11-r21` (17/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/java/17/debian-11/Dockerfile)
+* [`11`, `11-debian-11`, `11.0.16`, `11.0.16-debian-11-r6` (11/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/java/11/debian-11/Dockerfile)
+* [`1.8`, `1.8-debian-11`, `1.8.345`, `1.8.345-debian-11-r21` (1.8/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/java/1.8/debian-11/Dockerfile)
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
