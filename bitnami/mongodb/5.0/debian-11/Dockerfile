@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="5.0.13-debian-11-r2" \
+      org.opencontainers.image.ref.name="5.0.13-debian-11-r3" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mongodb" \
       org.opencontainers.image.title="mongodb" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -18,19 +18,20 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libbrotli1 libc6 libcom-err2 libcurl4 libffi7 libgcc-s1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed6 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libnettle8 libnghttp2-14 libp11-kit0 libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.1 libtasn1-6 libunistring2 numactl procps zlib1g
+RUN install_packages ca-certificates curl libbrotli1 libcom-err2 libcurl4 libffi7 libgcc-s1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed6 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libnettle8 libnghttp2-14 libp11-kit0 libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.1 libtasn1-6 libunistring2 numactl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    for COMPONENT in \
-      "mongodb-shell-1.6.0-0-linux-${OS_ARCH}-debian-11" \
-      "yq-4.28.1-0-linux-${OS_ARCH}-debian-11" \
-      "wait-for-port-1.0.3-154-linux-${OS_ARCH}-debian-11" \
-      "render-template-1.0.3-153-linux-${OS_ARCH}-debian-11" \
-      "mongodb-5.0.13-0-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.14.0-154-linux-${OS_ARCH}-debian-11" ; \
-    do \
+    COMPONENTS=( \
+      "mongodb-shell-1.6.0-1-linux-${OS_ARCH}-debian-11" \
+      "yq-4.28.1-1-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.3-155-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.3-154-linux-${OS_ARCH}-debian-11" \
+      "mongodb-5.0.13-1-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
+    ) && \
+    for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
-        curl -SsLf https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz -O ; \
-        curl -SsLf https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz.sha256 -O ; \
+        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz" -O ; \
+        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz.sha256" -O ; \
       fi && \
       sha256sum -c "${COMPONENT}.tar.gz.sha256" && \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
