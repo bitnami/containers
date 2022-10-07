@@ -1,30 +1,30 @@
 {
     "java": {
         "arch": "amd64",
-        "digest": "98cbaca6fc1aca76fdbfc11ee57d05924adc956401396375c4be43c5c671dca5",
+        "digest": "c375579c55ee13d9561dcfaeba0338a6c2f5233dc386ead63dbbb67cc974fcdb",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.16-0"
+        "version": "11.0.16-1"
     },
     "jruby": {
         "arch": "amd64",
-        "digest": "3b86a2083af8b242cbb27e7ba5593410b38d694d9a33b327cd6c316a757b7d37",
+        "digest": "841d303825b8efd39ce46ac2faed8d4701ba50a93d7721fc170be5c255bde4dc",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.3.8-0-1"
+        "version": "9.3.8-0-2"
     },
     "node": {
         "arch": "amd64",
-        "digest": "82532cfe58e59f8b085f6c9e83ec6d51a2abeb1be7240e979f790418c9513d73",
+        "digest": "39d830676988d92eb0cc0d3b340384a60cf87fe4af9ee6caa5a2558b69dee8db",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.20.1-0"
+        "version": "14.20.1-1"
     },
     "python": {
         "arch": "amd64",
-        "digest": "b81946d0fc75ce5dd9518d601920b6da4b24fbd87ca81a4cbd59404dd893764f",
+        "digest": "82f68137917ed04f98cf39ef3ec2cc95f05f93f1456ca9709ba9d98c5a0bed1b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.14-1"
+        "version": "3.8.14-2"
     }
 }
