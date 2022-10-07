@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.4.3-debian-11-r46" \
+      org.opencontainers.image.ref.name="1.4.3-debian-11-r47" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pushgateway" \
       org.opencontainers.image.title="pushgateway" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "pushgateway-1.4.3-154-linux-${OS_ARCH}-debian-11" \
+      "pushgateway-1.4.3-155-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
