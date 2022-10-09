@@ -36,12 +36,9 @@ Non-root container images add an extra layer of security and are generally recom
 
 ## Supported tags and respective `Dockerfile` links
 
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/).
+Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
-
-* [`1.22`, `1.22-debian-11`, `1.22.1`, `1.22.1-debian-11-r11`, `latest` (1.22/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/contour/1.22/debian-11/Dockerfile)
-* [`1.21`, `1.21-debian-11`, `1.21.1`, `1.21.1-debian-11-r40` (1.21/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/contour/1.21/debian-11/Dockerfile)
-* [`1.20`, `1.20-debian-11`, `1.20.2`, `1.20.2-debian-11-r42` (1.20/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/contour/1.20/debian-11/Dockerfile)
+You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
