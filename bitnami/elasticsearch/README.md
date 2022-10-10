@@ -110,7 +110,7 @@ elasticsearch:
 
 ## Connecting to other containers
 
-Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a Elasticsearch server running inside a container can easily be accessed by your application containers.
+Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), an Elasticsearch server running inside a container can easily be accessed by your application containers.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
@@ -210,7 +210,7 @@ Available variables:
 * `ELASTICSEARCH_EXTRA_FLAGS`: Extra command-line arguments for the `elasticsearch` daemon
 * `ELASTICSEARCH_CLUSTER_NAME`: The Elasticsearch Cluster Name. Default: **elasticsearch-cluster**
 * `ELASTICSEARCH_CLUSTER_HOSTS`: List of elasticsearch hosts to set the cluster. Available separators are ' ', ',' and ';'. No defaults.
-* `ELASTICSEARCH_CLUSTER_MASTER_HOSTS`: List of elasticsearch master-eligible hosts. Available separators are ' ', ',' and ';'. If no values are provided, it will have the same value than `ELASTICSEARCH_CLUSTER_HOSTS`.
+* `ELASTICSEARCH_CLUSTER_MASTER_HOSTS`: List of elasticsearch master-eligible hosts. Available separators are ' ', ',' and ';'. If no values are provided, it will have the same value as `ELASTICSEARCH_CLUSTER_HOSTS`.
 * `ELASTICSEARCH_IS_DEDICATED_NODE`: Elasticsearch node to behave as a 'dedicated node'. Default: **no**
 * `ELASTICSEARCH_NODE_TYPE`: Elasticsearch node type when behaving as a 'dedicated node'. Valid values: *master*, *data*, *coordinating* or *ingest*.
 * `ELASTICSEARCH_NODE_NAME`: Elasticsearch node name. No defaults.
@@ -231,13 +231,13 @@ A cluster can easily be setup with the Bitnami Elasticsearch Docker Image using 
 * `ELASTICSEARCH_CLUSTER_HOSTS`: List of elasticsearch hosts to set the cluster. Available separators are ' ', ',' and ';'. No defaults.
 * `ELASTICSEARCH_CLIENT_NODE`: Elasticsearch node to behave as a 'smart router' for Kibana app. Default: **false**
 * `ELASTICSEARCH_NODE_NAME`: Elasticsearch node name. No defaults.
-* `ELASTICSEARCH_MINIMUM_MASTER_NODES`: Minimum Elasticsearch master nodes for quorum. No defaults.
+* `ELASTICSEARCH_MINIMUM_MASTER_NODES`: Minimum Elasticsearch master nodes for a quorum. No defaults.
 
 For larger cluster, you can setup 'dedicated nodes' using the following environment variables:
 
 * `ELASTICSEARCH_IS_DEDICATED_NODE`: Elasticsearch node to behave as a 'dedicated node'. Default: **no**
 * `ELASTICSEARCH_NODE_TYPE`: Elasticsearch node type when behaving as a 'dedicated node'. Valid values: *master*, *data*, *coordinating* or *ingest*.
-* `ELASTICSEARCH_CLUSTER_MASTER_HOSTS`: List of elasticsearch master-eligible hosts. Available separators are ' ', ',' and ';'. If no values are provided, it will have the same value than `ELASTICSEARCH_CLUSTER_HOSTS`.
+* `ELASTICSEARCH_CLUSTER_MASTER_HOSTS`: List of elasticsearch master-eligible hosts. Available separators are ' ', ',' and ';'. If no values are provided, it will have the same value as `ELASTICSEARCH_CLUSTER_HOSTS`.
 * `ELASTICSEARCH_TOTAL_NODES`: Number of master + data nodes, it's used to calculate `gateway.expected_nodes` and `gateway.recover_after_nodes` parameters. If not set, those parameters are calculated using `ELASTICSEARCH_CLUSTER_HOSTS`. No defaults.
 
 Find more information about 'dedicated nodes' in the [official documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html).
@@ -248,7 +248,7 @@ Find more information about 'dedicated nodes' in the [official documentation](ht
 $ docker network create elasticsearch_network
 ```
 
-#### Step 2: Create a first node.
+#### Step 2: Create the first node.
 
 ```console
 $ docker run --name elasticsearch-node1 \
@@ -260,7 +260,7 @@ $ docker run --name elasticsearch-node1 \
   bitnami/elasticsearch:latest
 ```
 
-In the above command the container is added to a cluster named `elasticsearch-cluster` using the `ELASTICSEARCH_CLUSTER_NAME`. The `ELASTICSEARCH_CLUSTER_HOSTS` parameter set the name of the nodes that set the cluster so we will need to launch other container for the second node. Finally the `ELASTICSEARCH_NODE_NAME` parameter allows to indicate a known name for the node, otherwise elasticsearch will generate a randon one.
+In the above command the container is added to a cluster named `elasticsearch-cluster` using the `ELASTICSEARCH_CLUSTER_NAME`. The `ELASTICSEARCH_CLUSTER_HOSTS` parameter set the name of the nodes that set the cluster so we will need to launch other container for the second node. Finally the `ELASTICSEARCH_NODE_NAME` parameter allows to indicate a known name for the node, otherwise elasticsearch will generate a random one.
 
 #### Step 3: Create a second node
 
@@ -444,11 +444,11 @@ $ docker-compose up elasticsearch
 ### 7.12.0-debian-10-r0
 
 * Elasticsearch 7.12.0 version or later are licensed under the Elastic License that is not currently accepted as an Open Source license by the Open Source Initiative (OSI).
-* Elasticsearch 7.12.0 version or later are including x-pack plugin installed by default. Follow official documentation to use it.
+* Elasticsearch 7.12.0 version or later are including x-pack plugin installed by default. Follow the official documentation to use it.
 
 ### 6.8.5-debian-9-r0, 6.8.5-ol-7-r1, 7.4.2-debian-9-r10, 7.4.2-ol-7-r27
 
-* Arbitrary user ID(s) when running the container with a non-privileged user are not supported (only `1001` UID is allowed).
+* Arbitrary user ID(s) when running the container with a non-privileged user is not supported (only `1001` UID is allowed).
 * This is temporary solution while Elasticsearch maintainers address an issue with ownership/permissions when installing plugins. Issue reported at: https://github.com/bitnami/bitnami-docker-elasticsearch/issues/50
 
 ### 6.8.2-debian-9-r36, 6.8.2-ol-7-r36, 7.3.1-debian-9-r8, 7.3.1-ol-7-r13
@@ -487,7 +487,7 @@ $ docker-compose up -d
 
 ## Contributing
 
-We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submiting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
