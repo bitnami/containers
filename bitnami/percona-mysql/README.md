@@ -27,9 +27,7 @@ $ docker run --name percona-mysql bitnami/percona-mysql:latest
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
-
-* [`8.0`, `8.0-debian-11`, `8.0.29-21`, `8.0.29-21-debian-11-r19`, `latest` (8.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/percona-mysql/8.0/debian-11/Dockerfile)
-* [`5.7`, `5.7-debian-11`, `5.7.39-42`, `5.7.39-42-debian-11-r16` (5.7/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/percona-mysql/5.7/debian-11/Dockerfile)
+You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
