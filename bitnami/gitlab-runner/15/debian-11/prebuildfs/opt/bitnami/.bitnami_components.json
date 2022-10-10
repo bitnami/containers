@@ -1,30 +1,30 @@
 {
     "docker-machine": {
         "arch": "amd64",
-        "digest": "12aa80f8959086bd1ad68104a12e2490b66bee26949a4050d612e3d41e63058d",
+        "digest": "0e527ad95c8343a80fd49a9298f578221602fbb6d7bb98c278319c31195df05c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.16.2-153"
+        "version": "0.16.2-154"
     },
     "dumb-init": {
         "arch": "amd64",
-        "digest": "40f42ee4af6e04192a41f4e099403b16aa92fc1a047249e6d63715d92b77c672",
+        "digest": "b17e28e1449b1eeb85b12b1f55919d257d29f83bad1eb3524afd2dd600e899d9",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.2.5-153"
+        "version": "1.2.5-154"
     },
     "gitlab-runner": {
         "arch": "amd64",
-        "digest": "7859c4a04cada56dca51fa1d30a3528f2a8ba0f5eff158aaeb42e909efdf6cf8",
+        "digest": "158cc14c6021184ee22e3c5c87f5634716ca3b30d03ba72509b4a3eec51a2c8c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "15.4.0-0"
+        "version": "15.4.0-1"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "e36c3d90f4fbfbe989f40947fa7c8ab817f12fcf97d3aef893c753a20ce976ab",
+        "digest": "f21869b27c26b9c3053bce8b419a0fdf1dc45fcf13a7c2058e0afb6996d3687f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-154"
+        "version": "1.14.0-155"
     }
 }

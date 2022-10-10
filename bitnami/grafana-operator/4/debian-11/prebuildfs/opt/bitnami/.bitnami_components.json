@@ -1,9 +1,9 @@
 {
     "grafana-operator": {
         "arch": "amd64",
-        "digest": "d7c617169e95964db74c2d0b56ceba304eb01e574464cb95173955b225c2a723",
+        "digest": "e71dbb1840ad2a646dc1ea017ee2657861958e5f1ed5b3455400d9534e99eb04",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.6.0-1"
+        "version": "4.7.0-1"
     }
 }

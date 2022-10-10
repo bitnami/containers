@@ -1,51 +1,51 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "e36c3d90f4fbfbe989f40947fa7c8ab817f12fcf97d3aef893c753a20ce976ab",
+        "digest": "f21869b27c26b9c3053bce8b419a0fdf1dc45fcf13a7c2058e0afb6996d3687f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-154"
+        "version": "1.14.0-155"
     },
     "jasperreports": {
         "arch": "amd64",
-        "digest": "17c43daff37ada19f64d64389dafb8940a1a2660c156af93aad942452e520eb7",
+        "digest": "1d9fcc4b6d9b1071a7aad4a6c6d200b5aaa792fa3581db6f22fa874031b9324a",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.0-0"
+        "version": "8.1.0-1"
     },
     "java": {
         "arch": "amd64",
-        "digest": "b244bc8c1f972d20fac8019cf97fb05ce6cd8be2034ca11f52243c8bd96aaa23",
+        "digest": "b1be7e5123db5121091938641cf6e02ff0e3753e7ff90edf2a9689902fa781cb",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.8.345-2"
+        "version": "1.8.345-3"
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "8a1d2ee97e1e6b337254b886f99392ea181cc1708965212e776b205dd61731a2",
+        "digest": "0fda0610f58dd980bcf431d256d3fbad89b58f915af3d9a642b1588057d353f5",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.6.10-0"
+        "version": "10.6.10-1"
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "d34624cbd7e1905269ad7d873efe3cad0687bcf52dd822c84ad70c61bca180de",
+        "digest": "79a7b6d2166094ea4acf7631689c59445cab80f04dc414e86365ff27e018a454",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.17.0-1"
+        "version": "11.17.0-2"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "c1f2cdabdcc920512e8936ab2c8a033e1aeb97801fa026f0b12432581bf849ae",
+        "digest": "cb0a32f121f58797a77247fe41ae2b9f9b705bdf170f55015963c667edca6360",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.3-153"
+        "version": "1.0.3-154"
     },
     "tomcat": {
         "arch": "amd64",
-        "digest": "1db8854359f51582bfb01878d600e582dfcdb01456cc8276a0ace34e0543440f",
+        "digest": "e4261b73b49c6aada46f6d3fd137e316cea0191ae35ea158a940827031c5248c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.0.65-4"
+        "version": "9.0.68-0"
     }
 }
