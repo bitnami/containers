@@ -30,8 +30,7 @@ $ docker-compose up -d
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
-
-* [`10`, `10-debian-11`, `10.11.0`, `10.11.0-debian-11-r5`, `latest` (10/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/owncloud/10/debian-11/Dockerfile)
+You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
