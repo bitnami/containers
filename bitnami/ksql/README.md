@@ -27,12 +27,7 @@ $ docker run --name ksql bitnami/ksql:latest
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
-
-* [`7.2`, `7.2-debian-11`, `7.2.2`, `7.2.2-debian-11-r4`, `latest` (7.2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/ksql/7.2/debian-11/Dockerfile)
-* [`7.1`, `7.1-debian-11`, `7.1.4`, `7.1.4-debian-11-r5` (7.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/ksql/7.1/debian-11/Dockerfile)
-* [`7.0`, `7.0-debian-11`, `7.0.6`, `7.0.6-debian-11-r5` (7.0/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/ksql/7.0/debian-11/Dockerfile)
-* [`6.2`, `6.2-debian-11`, `6.2.7`, `6.2.7-debian-11-r3` (6.2/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/ksql/6.2/debian-11/Dockerfile)
-* [`6.1`, `6.1-debian-11`, `6.1.8`, `6.1.8-debian-11-r4` (6.1/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/ksql/6.1/debian-11/Dockerfile)
+You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
