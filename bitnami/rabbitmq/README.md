@@ -46,9 +46,7 @@ Non-root container images add an extra layer of security and are generally recom
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
-
-* [`3.10`, `3.10-debian-11`, `3.10.8`, `3.10.8-debian-11-r5`, `latest` (3.10/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/rabbitmq/3.10/debian-11/Dockerfile)
-* [`3.9`, `3.9-debian-11`, `3.9.23`, `3.9.23-debian-11-r4` (3.9/debian-11/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/rabbitmq/3.9/debian-11/Dockerfile)
+You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
