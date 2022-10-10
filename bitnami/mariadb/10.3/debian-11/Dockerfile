@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="10.3.36-debian-11-r18" \
+      org.opencontainers.image.ref.name="10.3.36-debian-11-r19" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mariadb" \
       org.opencontainers.image.title="mariadb" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -44,7 +44,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/mariadb/postunpack.sh
 ENV APP_VERSION="10.3.36" \
     BITNAMI_APP_NAME="mariadb" \
-    PATH="/opt/bitnami/common/bin:/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/common/sbin:/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 
 EXPOSE 3306
 
