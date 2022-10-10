@@ -105,9 +105,8 @@ The Bitnami Docker Kong can be easily setup with the following environment varia
 
 This container also supports configuring Kong via environment values starting with `KONG_`. For instance, by setting the `KONG_LOG_LEVEL` environment variable, Kong will take into account this value rather than the property set in `kong.conf`. It is recommended to set the following environment variables:
 
-- `KONG_DATABASE`: Database type used. Valid values: **postgres**, **cassandra** or **off**. Default: **postgres**
+- `KONG_DATABASE`: Database type used. Valid values: **postgres** or **off**. Default: **postgres**
 - For PostgreSQL database: `KONG_PG_HOST`, `KONG_PG_PORT`, `KONG_PG_TIMEOUT`, `KONG_PG_USER`, `KONG_PG_PASSWORD`.
-- For Cassandra database: `KONG_CASSANDRA_CONTACT_POINTS`, `KONG_CASSANDRA_PORT`, `KONG_CASSANDRA_KEYSPACE`, `KONG_CASSANDRA_CONSISTENCY`, `KONG_CASSANDRA_USERNAME`, `KONG_CASSANDRA_PASSWORD`, `KONG_CASSANDRA_LB_POLICY`, `KONG_CASSANDRA_REPL_STRATEGY`, `KONG_CASSANDRA_REPL_FACTOR`, `KONG_CASSANDRA_DATA_CENTERS`.
 
 Check the official [Kong Configuration Reference](https://docs.konghq.com/latest/configuration/#environment-variables) for the full list of configurable properties.
 
