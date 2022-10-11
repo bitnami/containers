@@ -29,10 +29,10 @@
     },
     "matomo": {
         "arch": "amd64",
-        "digest": "6ffc7edaf27c4209fb92350decf8cf963cf686d150f88db30d3b56f77f1c801c",
+        "digest": "ae1464d4a876f5ddd1c349929b94f878fe345ae7d9afaf779a41a8e9d96aadcc",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.11.0-3"
+        "version": "4.12.0-0"
     },
     "mysql-client": {
         "arch": "amd64",
