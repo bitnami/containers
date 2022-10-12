@@ -519,7 +519,7 @@ get_machine_id() {
 get_disk_device_id() {
     local device_id=""
     if grep -q ^/dev /proc/mounts; then
-        device_id="$(grep -q ^/dev /proc/mounts | awk '$2 == "/" { print $1 }' | tail -1)"
+        device_id="$(grep ^/dev /proc/mounts | awk '$2 == "/" { print $1 }' | tail -1)"
     fi
     # If it could not be autodetected, fallback to /dev/sda1 as a default
     if [[ -z "$device_id" || ! -b "$device_id" ]]; then
@@ -538,7 +538,7 @@ get_disk_device_id() {
 #   Root disk ID
 #########################
 get_root_disk_device_id() {
-    get_disk_device_id | sed 's/[0-9]\+$//'
+    get_disk_device_id | sed -E 's/p?[0-9]+$//'
 }
 
 ########################
