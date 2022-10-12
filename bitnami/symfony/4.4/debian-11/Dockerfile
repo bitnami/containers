@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.4.46-debian-11-r3" \
+      org.opencontainers.image.ref.name="4.4.47-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/symfony" \
       org.opencontainers.image.title="symfony" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="4.4.46"
+      org.opencontainers.image.version="4.4.47"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
@@ -22,7 +22,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "php-8.0.24-3-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.10-1-linux-${OS_ARCH}-debian-11" \
-      "symfony-4.4.46-1-linux-${OS_ARCH}-debian-11" \
+      "symfony-4.4.47-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -32,7 +32,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       fi && \
       sha256sum -c "${COMPONENT}.tar.gz.sha256" && \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-      rm -rf "${COMPONENT}.tar.gz{,sha256}" ; \
+      rm -rf "${COMPONENT}".tar.gz{,.sha256} ; \
     done
 RUN apt-get autoremove --purge -y curl && \
     apt-get update && apt-get upgrade -y && \
@@ -43,7 +43,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/symfony/postunpack.sh
-ENV APP_VERSION="4.4.46" \
+ENV APP_VERSION="4.4.47" \
     BITNAMI_APP_NAME="symfony" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/symfony/bin:/opt/bitnami/common/bin:$PATH" \
     PHP_ENABLE_OPCACHE="0"
