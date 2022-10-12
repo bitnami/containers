@@ -677,7 +677,7 @@ repmgr_rewind() {
     info "Rejoining node..."
 
     ensure_dir_exists "$POSTGRESQL_DATA_DIR"
-    if is_boolean_yes "$REPMGR_USE_PGREWIND"; then
+    if is_boolean_yes "$REPMGR_USE_PGREWIND" && ! is_boolean_yes "$REPMGR_SWITCH_ROLE"; then
         info "Using pg_rewind to primary node..."
         if ! repmgr_pgrewind; then
             warn "pg_rewind failed, resorting to data cloning"
