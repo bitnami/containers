@@ -644,6 +644,17 @@ repmgr_clone_primary() {
 #########################
 repmgr_pgrewind() {
     info "Running pg_rewind data to primary node..."
+
+    postgresql_create_pghba
+    postgresql_copy_custom_configuration
+
+    info "Starting PostgreSQL in background..."
+    local -r pg_ctl_flags=("-w" "-D" "$POSTGRESQL_DATA_DIR" "-o" "-F --config-file=$POSTGRESQL_CONF_FILE --external_pid_file=$POSTGRESQL_PID_FILE --hba_file=$POSTGRESQL_PGHBA_FILE")
+    "$POSTGRESQL_BIN_DIR"/pg_ctl "start" "${pg_ctl_flags[@]}"
+
+    info "Stopping PostgreSQL..."
+    "$POSTGRESQL_BIN_DIR"/pg_ctl "stop" "${pg_ctl_flags[@]}"
+
     local -r flags=("-D" "$POSTGRESQL_DATA_DIR" "--source-server" "host=${REPMGR_CURRENT_PRIMARY_HOST} port=${REPMGR_CURRENT_PRIMARY_PORT} user=${REPMGR_USERNAME} dbname=${REPMGR_DATABASE}")
 
     if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
