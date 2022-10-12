@@ -210,6 +210,7 @@ repmgr_get_primary_node() {
     local upstream_port
     local primary_host=""
     local primary_port="$REPMGR_PRIMARY_PORT"
+    local switch_role="no"
 
     readarray -t upstream_node < <(repmgr_get_upstream_node)
     upstream_host=${upstream_node[0]}
@@ -224,7 +225,7 @@ repmgr_get_primary_node() {
         else
             info "Current master is '${upstream_host}:${upstream_port}'. Cloning/rewinding it and acting as a standby node..."
             rm -f "$REPMGR_PRIMARY_ROLE_LOCK_FILE_NAME"
-            export REPMGR_SWITCH_ROLE="yes"
+            switch_role="yes"
             primary_host="$upstream_host"
             primary_port="$upstream_port"
         fi
@@ -243,6 +244,7 @@ repmgr_get_primary_node() {
     [[ -n "$primary_host" ]] && debug "Primary node: '${primary_host}:${primary_port}'"
     echo "$primary_host"
     echo "$primary_port"
+    echo "$switch_role"
 }
 
 ########################
@@ -259,10 +261,12 @@ repmgr_set_role() {
     local primary_node
     local primary_host
     local primary_port
+    local switch_role
 
     readarray -t primary_node < <(repmgr_get_primary_node)
     primary_host=${primary_node[0]}
     primary_port=${primary_node[1]:-$REPMGR_PRIMARY_PORT}
+    switch_role=${primary_node[2]}
 
     if [[ "$REPMGR_NODE_TYPE" = "data" ]]; then
       if [[ -z "$primary_host" ]]; then
@@ -281,6 +285,7 @@ repmgr_set_role() {
 export REPMGR_ROLE="$role"
 export REPMGR_CURRENT_PRIMARY_HOST="$primary_host"
 export REPMGR_CURRENT_PRIMARY_PORT="$primary_port"
+export REPMGR_SWITCH_ROLE="$switch_role"
 EOF
 }
 
