@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.12.2-debian-11-r26" \
+      org.opencontainers.image.ref.name="0.12.2-debian-11-r27" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/external-dns" \
       org.opencontainers.image.title="external-dns" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -30,7 +30,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       fi && \
       sha256sum -c "${COMPONENT}.tar.gz.sha256" && \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-      rm -rf "${COMPONENT}.tar.gz{,sha256}" ; \
+      rm -rf "${COMPONENT}".tar.gz{,.sha256} ; \
     done
 RUN apt-get autoremove --purge -y curl && \
     apt-get update && apt-get upgrade -y && \
