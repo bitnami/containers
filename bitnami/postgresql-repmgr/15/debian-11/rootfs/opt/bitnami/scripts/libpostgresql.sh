@@ -180,6 +180,22 @@ postgresql_create_config() {
 }
 
 ########################
+# Copy the files if there is an User injected configuration
+# Globals:
+#   POSTGRESQL_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+postgresql_copy_custom_configuration() {
+    if [[ -d "$POSTGRESQL_MOUNTED_CONF_DIR" ]] && compgen -G "$POSTGRESQL_MOUNTED_CONF_DIR"/* >/dev/null; then
+        debug "Copying files from $POSTGRESQL_MOUNTED_CONF_DIR to $POSTGRESQL_CONF_DIR"
+        cp -fr "$POSTGRESQL_MOUNTED_CONF_DIR"/. "$POSTGRESQL_CONF_DIR"
+    fi
+}
+
+########################
 # Create ldap auth configuration in pg_hba,
 # but keeps postgres user to authenticate locally
 # Globals:
@@ -590,10 +606,8 @@ postgresql_initialize() {
     rm -f "$POSTGRESQL_PID_FILE"
 
     # User injected custom configuration
-    if [[ -d "$POSTGRESQL_MOUNTED_CONF_DIR" ]] && compgen -G "$POSTGRESQL_MOUNTED_CONF_DIR"/* >/dev/null; then
-        debug "Copying files from $POSTGRESQL_MOUNTED_CONF_DIR to $POSTGRESQL_CONF_DIR"
-        cp -fr "$POSTGRESQL_MOUNTED_CONF_DIR"/. "$POSTGRESQL_CONF_DIR"
-    fi
+    postgresql_copy_custom_configuration
+
     local create_conf_file=yes
     local create_pghba_file=yes
 
