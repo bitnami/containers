@@ -15,10 +15,10 @@
     },
     "mysql-shell": {
         "arch": "amd64",
-        "digest": "c9cfdb90904f7a8dd9618042fb58fbe1225a732558189d0a0a07a7f13edd81bb",
+        "digest": "225120ea2d0895135274a3d3e316bb968250304a82b01751f7a53bfdf7c9b07e",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.30-2"
+        "version": "8.0.31-0"
     },
     "percona-mysql": {
         "arch": "amd64",
