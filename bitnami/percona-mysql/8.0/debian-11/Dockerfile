@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="8.0.29-21-debian-11-r20" \
+      org.opencontainers.image.ref.name="8.0.29-21-debian-11-r21" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/percona-mysql" \
       org.opencontainers.image.title="percona-mysql" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -24,7 +24,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "percona-xtrabackup-binary-8.0.29-22-2-linux-${OS_ARCH}-debian-11" \
       "ini-file-1.4.3-154-linux-${OS_ARCH}-debian-11" \
       "percona-mysql-8.0.29-21-2-linux-${OS_ARCH}-debian-11" \
-      "mysql-shell-8.0.30-2-linux-${OS_ARCH}-debian-11" \
+      "mysql-shell-8.0.31-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -34,7 +34,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       fi && \
       sha256sum -c "${COMPONENT}.tar.gz.sha256" && \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-      rm -rf "${COMPONENT}.tar.gz{,sha256}" ; \
+      rm -rf "${COMPONENT}".tar.gz{,.sha256} ; \
     done
 RUN apt-get autoremove --purge -y curl && \
     apt-get update && apt-get upgrade -y && \
