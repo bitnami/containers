@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="7.92.0-debian-11-r12" \
+      org.opencontainers.image.ref.name="7.92.0-debian-11-r13" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/drupal-nginx" \
       org.opencontainers.image.title="drupal-nginx" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -35,7 +35,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       fi && \
       sha256sum -c "${COMPONENT}.tar.gz.sha256" && \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
-      rm -rf "${COMPONENT}.tar.gz{,sha256}" ; \
+      rm -rf "${COMPONENT}".tar.gz{,.sha256} ; \
     done
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
