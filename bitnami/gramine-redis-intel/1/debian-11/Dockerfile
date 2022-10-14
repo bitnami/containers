@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.2.0-debian-11-r13" \
+      org.opencontainers.image.ref.name="1.2.0-debian-11-r14" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/gramine-redis-intel" \
       org.opencontainers.image.title="gramine-redis-intel" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,7 +22,7 @@ RUN install_packages binutils ca-certificates curl libbrotli1 libbz2-1.0 libc6 l
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "redis-7.0.5-1-linux-${OS_ARCH}-debian-11" \
-      "python-3.10.7-2-linux-${OS_ARCH}-debian-11" \
+      "python-3.10.8-0-linux-${OS_ARCH}-debian-11" \
       "gramine-redis-intel-1.2.0-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
     ) && \
