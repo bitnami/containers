@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="6.2.7-debian-11-r47" \
+      org.opencontainers.image.ref.name="6.2.7-debian-11-r48" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/redis" \
       org.opencontainers.image.title="redis" \
       org.opencontainers.image.vendor="VMware, Inc." \
