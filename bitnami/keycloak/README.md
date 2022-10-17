@@ -111,6 +111,14 @@ $ docker run --name keycloak \
   bitnami/keycloak:latest
 ```
 
+Or, if you need flags which are applied directly to keycloak executable, you can use `KEYCLOAK_EXTRA_ARGS_PREPENDED` variable. Example:
+
+```console
+$ docker run --name keycloak \
+  -e KEYCLOAK_EXTRA_ARGS_PREPENDED="--spi-login-protocol-openid-connect-legacy-logout-redirect-uri=true" \
+  bitnami/keycloak:latest
+```
+
 ### Initializing a new instance
 
 When the container is launched, it will execute the files with extension `.sh` located at `/docker-entrypoint-initdb.d`.

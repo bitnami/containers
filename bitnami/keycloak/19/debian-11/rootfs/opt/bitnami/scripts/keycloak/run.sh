@@ -21,7 +21,15 @@ conf_file="${KEYCLOAK_CONF_DIR}/${KEYCLOAK_CONF_FILE}"
 
 is_boolean_yes "$KEYCLOAK_PRODUCTION" && start_param="start" || start_param="start-dev"
 
-start_command=("${KEYCLOAK_BIN_DIR}/kc.sh" "-cf" "$conf_file" "$start_param")
+start_command=("${KEYCLOAK_BIN_DIR}/kc.sh" "-cf" "$conf_file")
+
+# Prepend extra args
+if [[ -n "$KEYCLOAK_EXTRA_ARGS_PREPENDED" ]]; then
+    read -r -a extra_args_prepended <<<"$KEYCLOAK_EXTRA_ARGS_PREPENDED"
+    start_command+=("${extra_args_prepended[@]}")
+fi
+
+start_command+=("$start_param")
 
 # Add extra args
 if [[ -n "$KEYCLOAK_EXTRA_ARGS" ]]; then
