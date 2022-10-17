@@ -8,17 +8,17 @@
     },
     "kubeapps": {
         "arch": "amd64",
-        "digest": "fc6ac831190db8abc953853936dda20f7186830f8ec17c8c9c6f8bed4414f8df",
+        "digest": "5257ca7a47bdd63bc55bde07ba3b3ed7261b5b7553578902ee69647f3c58ceaf",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.5.1-0"
+        "version": "2.6.0-0"
     },
     "nginx": {
         "arch": "amd64",
-        "digest": "9f2408a47108ddb2d2adae8e6417eef7bdc6b00ef5dfae5ec191101048bf0100",
+        "digest": "9a8c4614980cb5a8a45f691ec7883332e6fa63f219d428cfb5e9dadd15ea1616",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.23.1-7"
+        "version": "1.23.1-8"
     },
     "render-template": {
         "arch": "amd64",
