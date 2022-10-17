@@ -187,6 +187,7 @@ By default, this container bundles a generic set of jar files but the default im
 
 ```Dockerfile
 FROM bitnami/spark
+USER 1001
 RUN curl https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.11.704/aws-java-sdk-bundle-1.11.704.jar --output /opt/bitnami/spark/jars/aws-java-sdk-bundle-1.11.704.jar
 ```
 
@@ -199,11 +200,10 @@ Go to https://spark.apache.org/downloads.html and copy the download url bundling
 ```Dockerfile
 FROM bitnami/spark:3.0.0
 
-USER root
+USER 1001
 RUN rm -r /opt/bitnami/spark/jars && \
     curl --location http://mirror.cc.columbia.edu/pub/software/apache/spark/spark-3.0.0/spark-3.0.0-bin-hadoop2.7.tgz | \
     tar --extract --gzip --strip=1 --directory /opt/bitnami/spark/ spark-3.0.0-bin-hadoop2.7/jars/
-USER 1001
 ```
 
 You can check the Hadoop version by running the following commands in the new container image:
@@ -254,14 +254,14 @@ We need to mount two volumes in a container we will use to create the backup: a 
 
 ```console
 $ docker run --rm -v /path/to/spark-backups:/backups --volumes-from spark busybox \
-  cp -a /bitnami/spark:latest /backups/latest
+  cp -a /bitnami/spark /backups/latest
 ```
 
 or using Docker Compose:
 
 ```console
 $ docker run --rm -v /path/to/spark-backups:/backups --volumes-from `docker-compose ps -q spark` busybox \
-  cp -a /bitnami/spark:latest /backups/latest
+  cp -a /bitnami/spark /backups/latest
 ```
 
 ### Restoring a backup
