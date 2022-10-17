@@ -8,10 +8,10 @@
     },
     "gramine-redis-intel": {
         "arch": "amd64",
-        "digest": "b5edda10ef261a0052e8400a8a83cc473fb5496ccde5ef4630a00ec0ec3e0af1",
+        "digest": "fa665f4ab6cfb5232c67d450fba8da1c1cfc8df9d9bf8606ce9a26c3e036a8f0",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.2.0-0"
+        "version": "1.3.1-0"
     },
     "python": {
         "arch": "amd64",
