@@ -11,6 +11,7 @@
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libservice.sh
 . /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/libversion.sh
 
 ########################
 # Validate settings in KONG_* environment variables
@@ -78,21 +79,10 @@ kong_validate() {
         # PostgreSQL is the default database type
         check_password_file KONG_POSTGRESQL_PASSWORD_FILE
         [[ -n "${KONG_PG_HOST:-}" ]] && check_resolved_hostname "${KONG_PG_HOST:-}"
-        if [[ -n "${!KONG_CASSANDRA_@}" ]]; then
-            warn "KONG_DATABASE is empty or set to 'postgres', so the following environment variables will be ignored: ${!KONG_CASSANDRA_@}"
-        fi
-    elif [[ "${KONG_DATABASE:-}" = "cassandra" ]]; then
-        check_password_file KONG_CASSANDRA_PASSWORD_FILE
-        for cassandra_contact_point in $(echo "${CASSANDRA_CONTACT_POINTS:-}" | sed -r 's/[, ]+/\n/'); do
-            check_resolved_hostname "${cassandra_contact_point}"
-        done
-        if [[ -n "${!KONG_PG_@}" ]]; then
-            warn "KONG_DATABASE is set to 'cassandra', so the following environment variables will be ignored: ${!KONG_PG_@}"
-        fi
     elif [[ "${KONG_DATABASE:-}" = "off" ]]; then
         warn "KONG_DATABASE is set to 'off', Kong will run but data will not be persisted"
     else
-        print_validation_error "Wrong value '${KONG_DATABASE}' passed to KONG_DATABASE. Valid values: 'off', 'cassandra', 'postgres'"
+        print_validation_error "Wrong value '${KONG_DATABASE}' passed to KONG_DATABASE. Valid values: 'off', 'postgres'"
     fi
 
     # Listen addresses and port validations
@@ -331,4 +321,49 @@ kong_custom_init_scripts() {
     else
         info "No custom scripts in $KONG_INITSCRIPTS_DIR"
     fi
+}
+########################
+# Find the path to the opentelemetry include files
+# Globals:
+#   KONG_*
+# Arguments:
+#   None
+# Returns:
+#   Path to opentelemetry include dir
+#########################
+find_opentelemetry_source() {
+    local path
+    path="$(find "$KONG_BASE_DIR" -name "opentelemetry" -print | grep "include")"
+    echo "$path"
+}
+
+########################
+# Installs opentelemetry plugin
+# Globals:
+#   None
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+install_opentelemetry() {
+    local -r sourceDir="$(find_opentelemetry_source)"
+    local -r destinationDir="/usr/local/kong/include"
+    mkdir -p "$destinationDir"
+    ln -s "$sourceDir" "${destinationDir}/opentelemetry"
+}
+
+########################
+# Returns kong major version
+# Globals:
+#   None
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+get_kong_major_version() {
+    kong_version="$("${KONG_BASE_DIR}/bin/kong" version)"
+    major_version="$(get_sematic_version "$kong_version" 1)"
+    echo "${major_version:-0}"
 }
