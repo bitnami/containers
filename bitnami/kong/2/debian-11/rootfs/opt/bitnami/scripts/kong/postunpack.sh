@@ -27,3 +27,7 @@ kong_conf_set nginx_daemon off
 kong_conf_set lua_package_path
 kong_conf_set nginx_user
 kong_configure_non_empty_values
+if [ "$(get_kong_major_version)" = "3" ]; then
+    # Link opentelemetry files to the expected location
+    install_opentelemetry
+fi
