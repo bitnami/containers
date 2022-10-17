@@ -699,14 +699,14 @@ We need to mount two volumes in a container we will use to create the backup: a 
 
 ```console
 $ docker run --rm -v /path/to/kafka-backups:/backups --volumes-from kafka busybox \
-  cp -a /bitnami/kafka:latest /backups/latest
+  cp -a /bitnami/kafka /backups/latest
 ```
 
 Or using Docker Compose:
 
 ```console
 $ docker run --rm -v /path/to/kafka-backups:/backups --volumes-from `docker-compose ps -q kafka` busybox \
-  cp -a /bitnami/kafka:latest /backups/latest
+  cp -a /bitnami/kafka /backups/latest
 ```
 
 ### Restoring a backup
