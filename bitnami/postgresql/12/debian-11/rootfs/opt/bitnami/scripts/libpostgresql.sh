@@ -603,7 +603,7 @@ postgresql_initialize() {
     is_boolean_yes "$POSTGRESQL_ALLOW_REMOTE_CONNECTIONS" && is_boolean_yes "$create_pghba_file" && postgresql_create_pghba && postgresql_allow_local_connection
     # Configure port
     postgresql_set_property "port" "$POSTGRESQL_PORT_NUMBER"
-
+    is_empty_value "$POSTGRESQL_DEFAULT_TOAST_COMPRESSION" || postgresql_set_property "default_toast_compression" "$POSTGRESQL_DEFAULT_TOAST_COMPRESSION"
     if ! is_dir_empty "$POSTGRESQL_DATA_DIR"; then
         info "Deploying PostgreSQL with persisted data..."
         export POSTGRESQL_FIRST_BOOT="no"
