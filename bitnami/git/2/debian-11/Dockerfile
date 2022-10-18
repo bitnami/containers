@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.38.0-debian-11-r4" \
+      org.opencontainers.image.ref.name="2.38.1-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/git" \
       org.opencontainers.image.title="git" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.38.0"
+      org.opencontainers.image.version="2.38.1"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
@@ -21,7 +21,7 @@ RUN install_packages ca-certificates curl libbrotli1 libcom-err2 libcurl4 libffi
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
-      "git-2.38.0-1-linux-${OS_ARCH}-debian-11" \
+      "git-2.38.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -36,7 +36,7 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
-ENV APP_VERSION="2.38.0" \
+ENV APP_VERSION="2.38.1" \
     BITNAMI_APP_NAME="git" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/git/bin:$PATH"
