@@ -220,10 +220,6 @@ After that, your changes will be taken into account in the server's behaviour.
 Keycloak 17 is powered by Quarkus and to deploy it in production mode it is necessary to set up TLS.
 To do this you need to set `KEYCLOAK_PRODUCTION` to **true** and configure TLS
 
-## Branch Deprecation Notice
-
-Keycloak's branch 18 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 10-12-2022
-
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
