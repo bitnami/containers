@@ -487,7 +487,7 @@ $ docker-compose up -d
 
 ## Contributing
 
-We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submiting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+We'd love for you to contribute to this Docker image. You can request new features by creating an [issue], or submitting a [pull](https://github.com/bitnami/containers/pulls) request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
