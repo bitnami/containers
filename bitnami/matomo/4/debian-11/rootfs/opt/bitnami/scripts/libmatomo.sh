@@ -159,6 +159,11 @@ EOF
         info "Configuring Matomo to check proxy_client_headers for client IP"
             ini-file set -s "General" -k "proxy_client_headers[]" -v "$MATOMO_PROXY_CLIENT_HEADER" "$MATOMO_CONF_FILE"
         fi
+        
+        if ! is_empty_value "$MATOMO_PROXY_HOST_HEADER"; then
+        info "Configuring Matomo to check proxy_host_headers for client IP"
+            ini-file set -s "General" -k "proxy_host_headers[]" -v "$MATOMO_PROXY_HOST_HEADER" "$MATOMO_CONF_FILE"
+        fi        
 
         if is_boolean_yes "$MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL"; then
             info "Configuring Matomo to always assume secure protocol"
