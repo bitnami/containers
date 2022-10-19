@@ -83,7 +83,9 @@ export TOMCAT_INSTALL_DEFAULT_WEBAPPS="${TOMCAT_INSTALL_DEFAULT_WEBAPPS:-yes}"
 
 # Default JVM configuration
 export JAVA_HOME="${BITNAMI_ROOT_DIR}/java"
-export JAVA_OPTS="${JAVA_OPTS:--Djava.awt.headless=true -XX:+UseG1GC -Dfile.encoding=UTF-8 -Duser.home=${TOMCAT_HOME}}"
+
+# @see https://community.jaspersoft.com/wiki/when-utf-8-special-characters-are-included-output-file-name-while-scheduling-it-might-lead-file
+export JAVA_OPTS="${JAVA_OPTS:--Djava.awt.headless=true -XX:+UseG1GC -Dfile.encoding=UTF-8 -Duser.home=${TOMCAT_HOME} -Dmail.mime.splitlongparameters=false}"
 
 # Other parameters
 export PATH="${TOMCAT_BASE_DIR}/bin:${JAVA_HOME}/bin:${BITNAMI_ROOT_DIR}/common/bin:${PATH}"
