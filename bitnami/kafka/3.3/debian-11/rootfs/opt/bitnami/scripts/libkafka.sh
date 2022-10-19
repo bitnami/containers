@@ -240,12 +240,28 @@ kafka_validate() {
 
     if is_boolean_yes "$KAFKA_ENABLE_KRAFT"; then
         if [[ -n "$KAFKA_CFG_BROKER_ID" ]]; then
-            warn "KAFKA_CFG_BROKER_ID Must match what is set in KAFKA_CFG_CONTROLLER_QUORUM_VOTERS"
+            old_IFS=$IFS
+            IFS=','
+            read -a voters <<< "$KAFKA_CFG_CONTROLLER_QUORUM_VOTERS"
+            IFS=${old_IFS}
+            broker_id_matched=false
+            for voter in "${voters[@]}"; do
+                if [[ "$voter" == *"$KAFKA_CFG_BROKER_ID"* ]]; then
+                    broker_id_matched=true
+                    break
+                fi
+            done
+
+            if [[ "$broker_id_matched" == false ]]; then
+                warn "KAFKA_CFG_BROKER_ID Must match what is set in KAFKA_CFG_CONTROLLER_QUORUM_VOTERS"
+            fi
         else
             print_validation_error "KRaft requires KAFKA_CFG_BROKER_ID to be set for the quorum controller"
         fi
         if [[ -n "$KAFKA_CFG_CONTROLLER_QUORUM_VOTERS" ]]; then
-            warn "KAFKA_CFG_CONTROLLER_QUORUM_VOTERS must match brokers set with KAFKA_CFG_BROKER_ID"
+            if [[ "$broker_id_matched" == false ]]; then
+                warn "KAFKA_CFG_CONTROLLER_QUORUM_VOTERS must match brokers set with KAFKA_CFG_BROKER_ID"
+            fi 
         else
             print_validation_error "KRaft requires KAFKA_CFG_CONTROLLER_QUORUM_VOTERS to be set"
         fi
@@ -253,12 +269,40 @@ kafka_validate() {
             print_validation_error "KRaft requires KAFKA_CFG_CONTROLLER_LISTENER_NAMES to be set"
         fi
         if [[ -n "$KAFKA_CFG_PROCESS_ROLES" ]]; then
-            warn "KAFKA_CFG_PROCESS_ROLES must include 'controller' for KRaft"
+            old_IFS=$IFS
+            IFS=','
+            read -a roles <<< "$KAFKA_CFG_PROCESS_ROLES"
+            IFS=${old_IFS}
+            controller_exists=false
+            for val in "${roles[@]}";
+            do
+            if [ $val == "controller" ]; then
+                controller_exists=true
+                break
+            fi
+            done
+            if [[ "$controller_exists" == false ]]; then
+                warn "KAFKA_CFG_PROCESS_ROLES must include 'controller' for KRaft"
+            fi
         else
-            print_validation_error "KAFKA_CFG_PROCESS_ROLES must be set to enable KRaft m,model"
+            print_validation_error "KAFKA_CFG_PROCESS_ROLES must be set to enable KRaft model"
         fi
         if [[ -n "$KAFKA_CFG_LISTENERS" ]]; then
-            warn "KAFKA_CFG_LISTENERS must include a listener for CONTROLLER"
+            old_IFS=$IFS
+            IFS=','
+            read -a listener <<< "$KAFKA_CFG_LISTENERS"
+            IFS=${old_IFS}
+            controller_exists=false
+            for val in "${listener[@]}";
+            do
+            if [[ $val == *"CONTROLLER"* ]]; then
+                controller_exists=true
+                break
+            fi
+            done
+            if [[ "$controller_exists" == false ]]; then
+                warn "KAFKA_CFG_LISTENERS must include a listener for CONTROLLER"
+            fi
         else
             print_validation_error "KRaft requires KAFKA_CFG_LISTENERS to be set"
         fi
