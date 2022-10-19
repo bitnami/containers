@@ -197,7 +197,7 @@ When the `myapp` service container is restarted, it will install all the missing
 
 # Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/blob/main/bitnami/rails/issues), or submit a [pull request](https://github.com/bitnami/containers/blob/main/bitnami/rails/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/blob/main/bitnami/rails/issues) or submitting a [pull request](https://github.com/bitnami/containers/blob/main/bitnami/rails/pulls) with your contribution.
 
 ## Issues
 
