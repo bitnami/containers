@@ -446,14 +446,14 @@ We need to mount two volumes in a container we will use to create the backup: a 
 
 ```console
 $ docker run --rm -v /path/to/geode-backups:/backups --volumes-from geode busybox \
-  cp -a /bitnami/geode:latest /backups/latest
+  cp -a /bitnami/geode /backups/latest
 ```
 
 Or using Docker Compose:
 
 ```console
 $ docker run --rm -v /path/to/geode-backups:/backups --volumes-from `docker-compose ps -q geode` busybox \
-  cp -a /bitnami/geode:latest /backups/latest
+  cp -a /bitnami/geode /backups/latest
 ```
 
 ### Restoring a backup
@@ -526,7 +526,7 @@ $ docker-compose up geode
 
 ## Contributing
 
-We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
