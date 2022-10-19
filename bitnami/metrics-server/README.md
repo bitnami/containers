@@ -51,7 +51,7 @@ For further documentation, please check [here](https://github.com/kubernetes-inc
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/blob/main/bitnami/metrics-server/issues), or submit a [pull
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/blob/main/bitnami/metrics-server/issues) or submitting a [pull
 request](https://github.com/bitnami/containers/blob/main/bitnami/metrics-server/pulls) with your contribution.
 
 ## Issues
