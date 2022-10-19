@@ -101,7 +101,6 @@ jobs:
         if: ${{ steps.get-container-metadata.outputs.result == 'ok' }}
         with:
           pipeline: ${{ steps.get-container-metadata.outputs.name }}/vib-verify.json
-          retry-count: 6
         env:
           # Path with docker resources
           VIB_ENV_PATH: ${{ matrix.container }}
