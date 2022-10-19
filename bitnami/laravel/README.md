@@ -126,7 +126,7 @@ Following are a few examples of launching some commonly used Laravel development
 
 # Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/blob/main/bitnami/laravel/issues), or submit a [pull request](https://github.com/bitnami/containers/blob/main/bitnami/laravel/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/blob/main/bitnami/laravel/issues) or submitting a [pull request](https://github.com/bitnami/containers/blob/main/bitnami/laravel/pulls) with your contribution.
 
 ## Special Thanks
 
