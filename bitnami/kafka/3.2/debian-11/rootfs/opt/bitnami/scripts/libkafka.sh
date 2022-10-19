@@ -240,8 +240,10 @@ kafka_validate() {
 
     if is_boolean_yes "$KAFKA_ENABLE_KRAFT"; then
         if [[ -n "$KAFKA_CFG_BROKER_ID" ]]; then
+            old_IFS=$IFS
             IFS=','
             read -a voters <<< "$KAFKA_CFG_CONTROLLER_QUORUM_VOTERS"
+            IFS=${old_IFS}
             broker_id_matched=false
             for voter in "${voters[@]}"; do
                 if [[ "$voter" == *"$KAFKA_CFG_BROKER_ID"* ]]; then
@@ -267,8 +269,10 @@ kafka_validate() {
             print_validation_error "KRaft requires KAFKA_CFG_CONTROLLER_LISTENER_NAMES to be set"
         fi
         if [[ -n "$KAFKA_CFG_PROCESS_ROLES" ]]; then
+            old_IFS=$IFS
             IFS=','
             read -a roles <<< "$KAFKA_CFG_PROCESS_ROLES"
+            IFS=${old_IFS}
             controller_exists=false
             for val in "${roles[@]}";
             do
@@ -284,8 +288,10 @@ kafka_validate() {
             print_validation_error "KAFKA_CFG_PROCESS_ROLES must be set to enable KRaft model"
         fi
         if [[ -n "$KAFKA_CFG_LISTENERS" ]]; then
+            old_IFS=$IFS
             IFS=','
             read -a listener <<< "$KAFKA_CFG_LISTENERS"
+            IFS=${old_IFS}
             controller_exists=false
             for val in "${listener[@]}";
             do
