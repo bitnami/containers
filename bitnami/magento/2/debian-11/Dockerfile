@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.4.5-debian-11-r23" \
+      org.opencontainers.image.ref.name="2.4.5-p1-debian-11-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/magento" \
       org.opencontainers.image.title="magento" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.4.5"
+      org.opencontainers.image.version="2.4.5-p1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -27,7 +27,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "mysql-client-10.6.10-1-linux-${OS_ARCH}-debian-11" \
       "libphp-8.1.11-1-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.3-154-linux-${OS_ARCH}-debian-11" \
-      "magento-2.4.5-13-linux-${OS_ARCH}-debian-11" \
+      "magento-2.4.5-p1-14-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -53,7 +53,7 @@ RUN /opt/bitnami/scripts/magento/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="2.4.5" \
+    APP_VERSION="2.4.5-p1" \
     BITNAMI_APP_NAME="magento" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/common/bin:/opt/bitnami/mysql/bin:/opt/bitnami/magento/bin:$PATH"
 
