@@ -172,7 +172,7 @@ jasperreports_configure_smtp() {
     jasperreports_conf_set "quartz.mail.sender.protocol" "$JASPERREPORTS_SMTP_PROTOCOL"
     jasperreports_conf_set "quartz.mail.sender.username" "$JASPERREPORTS_SMTP_USER"
     jasperreports_conf_set "quartz.mail.sender.password" "$JASPERREPORTS_SMTP_PASSWORD"
-    jasperreports_conf_set "quartz.mail.sender.from" "$JASPERREPORTS_SMTP_USER"
+    jasperreports_conf_set "quartz.mail.sender.from" "$JASPERREPORTS_SMTP_EMAIL"
     # We only need to configure the URL when sending reports via email, so the user gets the proper URL for accessing the report
     # Source: https://community.jaspersoft.com/documentation/tibco-jasperreports-server-installation-guide/v720/configuring-report-scheduling
     jasperreports_conf_set "quartz.web.deployment.uri" "$JASPERREPORTS_HOST"
