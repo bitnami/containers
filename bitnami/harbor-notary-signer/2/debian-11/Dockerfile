@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.6.0-debian-11-r21" \
+      org.opencontainers.image.ref.name="2.6.1-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/harbor-notary-signer" \
       org.opencontainers.image.title="harbor-notary-signer" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.6.0"
+      org.opencontainers.image.version="2.6.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -18,10 +18,10 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libc6 procps
+RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "harbor-notary-signer-2.6.0-2-linux-${OS_ARCH}-debian-11" \
+      "harbor-notary-signer-2.6.1-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -40,7 +40,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-notary-signer/postunpack.sh
-ENV APP_VERSION="2.6.0" \
+ENV APP_VERSION="2.6.1" \
     BITNAMI_APP_NAME="harbor-notary-signer" \
     PATH="/opt/bitnami/harbor-notary-signer/bin:/opt/bitnami/common/bin:$PATH" \
     SERVICE_NAME="notary_signer"
