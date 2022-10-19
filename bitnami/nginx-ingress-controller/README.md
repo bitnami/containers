@@ -45,7 +45,7 @@ For further documentation, please check [here](https://github.com/kubernetes/ing
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/blob/main/bitnami/nginx-ingress-controller/issues), or submit a [pull
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/blob/main/bitnami/nginx-ingress-controller/issues) or submitting a [pull
 request](https://github.com/bitnami/containers/blob/main/bitnami/nginx-ingress-controller/pulls) with your contribution.
 
 ## Issues
