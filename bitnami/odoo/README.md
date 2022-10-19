@@ -215,7 +215,6 @@ Available environment variables:
 - `ODOO_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. This is necessary in case you use a database that already has Odoo data. Default: **no**
 - `ODOO_SKIP_MODULES_UPDATE`: Whether to perform initial update of the plugins installed. Default: **no**
 - `ODOO_LOAD_DEMO_DATA`: Whether to load demo data. Default: **no**
-- `ODOO_ADDONS_DIR`: Set up a custom directory for addons - useful to mount a custom volume of addons, separate from the main persistence volume. Default: **/bitnami/odoo/addons**
 
 ##### Database connection configuration
 
@@ -434,7 +433,7 @@ $ docker-compose up -d
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
