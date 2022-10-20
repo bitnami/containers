@@ -58,7 +58,7 @@ To use a specific version, you can pull a versioned tag. You can view the [list 
 $ docker pull bitnami/ejbca:[TAG]
 ```
 
-If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values:
 
 ```console
 $ git clone https://github.com/bitnami/containers.git
