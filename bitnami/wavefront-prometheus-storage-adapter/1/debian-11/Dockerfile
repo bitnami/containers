@@ -22,6 +22,7 @@ RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "wavefront-prometheus-storage-adapter-1.0.5-155-linux-${OS_ARCH}-debian-11" \
+      "wavefront-prometheus-storage-adapter-1.0.5-154-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
