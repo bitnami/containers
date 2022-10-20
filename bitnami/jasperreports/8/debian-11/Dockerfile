@@ -5,7 +5,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="8.1.0-debian-11-r12" \
+      org.opencontainers.image.ref.name="8.1.0-debian-11-r13" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jasperreports" \
       org.opencontainers.image.title="jasperreports" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages acl ca-certificates curl fontconfig git libaudit1 libbsd0 libcap-ng0 libedit2 libffi7 libgcc-s1 libgmp10 libgnutls30 libhogweed6 libicu67 libidn2-0 libldap-2.4-2 liblzma5 libmd0 libncurses6 libnettle8 libp11-kit0 libpam0g libsasl2-2 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 procps xmlstarlet zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-1.8.345-3-linux-${OS_ARCH}-debian-11" \
+      "java-1.8.352-0-linux-${OS_ARCH}-debian-11" \
       "tomcat-9.0.68-0-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-11.17.0-2-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.10-1-linux-${OS_ARCH}-debian-11" \
