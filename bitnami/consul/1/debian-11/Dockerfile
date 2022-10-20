@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.13.2-debian-11-r8" \
+      org.opencontainers.image.ref.name="1.13.3-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/consul" \
       org.opencontainers.image.title="consul" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.13.2"
+      org.opencontainers.image.version="1.13.3"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,7 +23,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "render-template-1.0.3-154-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
-      "consul-1.13.2-1-linux-${OS_ARCH}-debian-11" \
+      "consul-1.13.3-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,7 +41,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/consul/postunpack.sh
-ENV APP_VERSION="1.13.2" \
+ENV APP_VERSION="1.13.3" \
     BITNAMI_APP_NAME="consul" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/consul/bin:$PATH"
 
