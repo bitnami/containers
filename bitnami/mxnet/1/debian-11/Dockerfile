@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.9.1-debian-11-r49" \
+      org.opencontainers.image.ref.name="1.9.1-debian-11-r50" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mxnet" \
       org.opencontainers.image.title="mxnet" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,7 +22,7 @@ RUN install_packages ca-certificates curl libaec0 libaom0 libarmadillo10 libarpa
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.8.15-0-linux-${OS_ARCH}-debian-11" \
-      "mxnet-1.9.1-155-linux-${OS_ARCH}-debian-11" \
+      "mxnet-1.9.1-156-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
