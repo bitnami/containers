@@ -22,10 +22,10 @@
     },
     "ksonnet": {
         "arch": "amd64",
-        "digest": "9a09e8c678994d62acd0070b03161423ef396389e6848ac50b529d2f29bd811a",
+        "digest": "f27fccae8c980448c9bd9ccda3053526d911dd34e376a49c2fea3d94b0f78927",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.13.1-153"
+        "version": "0.13.1-154"
     },
     "kustomize": {
         "arch": "amd64",
