@@ -330,7 +330,7 @@ $ docker run --name mysql-slave --link mysql-master:master \
   -e MYSQL_REPLICATION_MODE=slave \
   -e MYSQL_REPLICATION_USER=my_repl_user \
   -e MYSQL_REPLICATION_PASSWORD=my_repl_password \
-  -e MYSQL_MASTER_HOST=master \
+  -e MYSQL_MASTER_HOST=mysql-master \
   -e MYSQL_MASTER_ROOT_PASSWORD=master_root_password \
   bitnami/mysql:latest
 ```
