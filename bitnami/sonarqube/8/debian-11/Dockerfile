@@ -5,11 +5,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="8.9.9-debian-11-r40" \
+      org.opencontainers.image.ref.name="8.9.10-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/sonarqube" \
       org.opencontainers.image.title="sonarqube" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="8.9.9"
+      org.opencontainers.image.version="8.9.10"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,8 +23,8 @@ RUN install_packages acl ca-certificates curl libbsd0 libedit2 libffi7 libgcc-s1
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "postgresql-client-13.8.0-2-linux-${OS_ARCH}-debian-11" \
-      "java-11.0.16-1-linux-${OS_ARCH}-debian-11" \
-      "sonarqube-8.9.9-9-linux-${OS_ARCH}-debian-11" \
+      "java-11.0.17-7-0-linux-${OS_ARCH}-debian-11" \
+      "sonarqube-8.9.10-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -43,7 +43,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/sonarqube/postunpack.sh
-ENV APP_VERSION="8.9.9" \
+ENV APP_VERSION="8.9.10" \
     BITNAMI_APP_NAME="sonarqube" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"

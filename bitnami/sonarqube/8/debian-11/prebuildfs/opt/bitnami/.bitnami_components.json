@@ -8,10 +8,10 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "c375579c55ee13d9561dcfaeba0338a6c2f5233dc386ead63dbbb67cc974fcdb",
+        "digest": "972009952c7ab083836ce1943c7768daac74ec3cbea63eb5994b38e7c9794b75",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.16-1"
+        "version": "11.0.17-7-0"
     },
     "postgresql-client": {
         "arch": "amd64",
@@ -22,9 +22,9 @@
     },
     "sonarqube": {
         "arch": "amd64",
-        "digest": "c7bdc6b507b5b626e9bc503a68574a2932294b87ea6344c98556162d8ea85318",
+        "digest": "ce09b73711bbaeacbd588efb71f34243456da36b3d2368a4728203defc15ef59",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.9.9-9"
+        "version": "8.9.10-0"
     }
 }
