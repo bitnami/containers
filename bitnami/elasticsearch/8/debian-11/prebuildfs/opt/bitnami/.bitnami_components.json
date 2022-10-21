@@ -15,16 +15,16 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "9fb08202e7fe23c367eb8ed3a5f1606c0d918f0d6a53b018fdfbd45ae8aad0b1",
+        "digest": "80118497ee85dc9dd701766b1f35396921269f52b4b7963e22de742877366030",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "17.0.4-8-3"
+        "version": "17.0.5-8-0"
     },
     "yq": {
         "arch": "amd64",
-        "digest": "d4700bc42fd4a0ceb9981c1f1b7868c03db743cabc2275ebc1bf1fe7df897b9a",
+        "digest": "791e1f5ec1d37b46390741dae197e8b83c4243fe59198a96be7b92aeaddf9160",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.28.1-1"
+        "version": "4.28.2-0"
     }
 }
