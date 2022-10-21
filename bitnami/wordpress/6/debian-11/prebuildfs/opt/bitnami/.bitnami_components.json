@@ -50,9 +50,9 @@
     },
     "wp-cli": {
         "arch": "amd64",
-        "digest": "a329398a1ac5ce4199b6daed357680e15fef9f4a01c67d3a507df04b51efc14f",
+        "digest": "c3f00ff2a5023a3012518c7f8c98aa6d5caebf9c3bbbf8808a10a57dc0793973",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.7.0-0"
+        "version": "2.7.1-0"
     }
 }
