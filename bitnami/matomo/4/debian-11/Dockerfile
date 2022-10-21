@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.12.1-debian-11-r0" \
+      org.opencontainers.image.ref.name="4.12.2-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/matomo" \
       org.opencontainers.image.title="matomo" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="4.12.1"
+      org.opencontainers.image.version="4.12.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -27,7 +27,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "libphp-8.1.11-1-linux-${OS_ARCH}-debian-11" \
       "ini-file-1.4.3-154-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.3-154-linux-${OS_ARCH}-debian-11" \
-      "matomo-4.12.1-0-linux-${OS_ARCH}-debian-11" \
+      "matomo-4.12.2-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -52,7 +52,7 @@ RUN /opt/bitnami/scripts/matomo/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="4.12.1" \
+    APP_VERSION="4.12.2" \
     BITNAMI_APP_NAME="matomo" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
