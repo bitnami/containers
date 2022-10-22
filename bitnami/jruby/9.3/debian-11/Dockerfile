@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="9.3.8-0-debian-11-r12" \
+      org.opencontainers.image.ref.name="9.3.8-0-debian-11-r13" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jruby" \
       org.opencontainers.image.title="jruby" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,7 +22,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.8.15-0-linux-${OS_ARCH}-debian-11" \
       "node-14.20.1-1-linux-${OS_ARCH}-debian-11" \
-      "java-11.0.16-1-linux-${OS_ARCH}-debian-11" \
+      "java-11.0.17-7-0-linux-${OS_ARCH}-debian-11" \
       "jruby-9.3.8-0-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
