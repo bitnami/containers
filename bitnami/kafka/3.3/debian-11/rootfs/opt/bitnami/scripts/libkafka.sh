@@ -239,10 +239,17 @@ kafka_validate() {
     }
 
     if is_boolean_yes "$KAFKA_ENABLE_KRAFT"; then
-        if [[ -n "$KAFKA_CFG_BROKER_ID" ]]; then
+        if [[ -z "$KAFKA_CFG_BROKER_ID" ]]; then
+	        print_validation_error "KRaft requires KAFKA_CFG_BROKER_ID to be set for the quorum controller"
+	    fi
+        if [[ -z "$KAFKA_CFG_CONTROLLER_QUORUM_VOTERS" ]]; then
+	        print_validation_error "KRaft requires KAFKA_CFG_CONTROLLER_QUORUM_VOTERS to be set"
+	    fi
+
+        if [[ -n "$KAFKA_CFG_BROKER_ID" ]] && [[ -n "$KAFKA_CFG_CONTROLLER_QUORUM_VOTERS" ]]; then
             old_IFS=$IFS
             IFS=','
-            read -a voters <<< "$KAFKA_CFG_CONTROLLER_QUORUM_VOTERS"
+            read -r -a voters <<< "$KAFKA_CFG_CONTROLLER_QUORUM_VOTERS"
             IFS=${old_IFS}
             broker_id_matched=false
             for voter in "${voters[@]}"; do
@@ -251,20 +258,12 @@ kafka_validate() {
                     break
                 fi
             done
-
+        
             if [[ "$broker_id_matched" == false ]]; then
-                warn "KAFKA_CFG_BROKER_ID Must match what is set in KAFKA_CFG_CONTROLLER_QUORUM_VOTERS"
+                warn "KAFKA_CFG_BROKER_ID must match what is set in KAFKA_CFG_CONTROLLER_QUORUM_VOTERS"
             fi
-        else
-            print_validation_error "KRaft requires KAFKA_CFG_BROKER_ID to be set for the quorum controller"
         fi
-        if [[ -n "$KAFKA_CFG_CONTROLLER_QUORUM_VOTERS" ]]; then
-            if [[ "$broker_id_matched" == false ]]; then
-                warn "KAFKA_CFG_CONTROLLER_QUORUM_VOTERS must match brokers set with KAFKA_CFG_BROKER_ID"
-            fi 
-        else
-            print_validation_error "KRaft requires KAFKA_CFG_CONTROLLER_QUORUM_VOTERS to be set"
-        fi
+
         if [[ -z "$KAFKA_CFG_CONTROLLER_LISTENER_NAMES" ]]; then
             print_validation_error "KRaft requires KAFKA_CFG_CONTROLLER_LISTENER_NAMES to be set"
         fi
