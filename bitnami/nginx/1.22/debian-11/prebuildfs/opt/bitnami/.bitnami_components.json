@@ -8,10 +8,10 @@
     },
     "nginx": {
         "arch": "amd64",
-        "digest": "df94c4c4ef818fe8b79e0633c5392be89b05a4fe403566d429a5dd6b3c21275e",
+        "digest": "934fe861738a1c62343908780b9798c4976c63ab1acd3ddba5f18370a1565d59",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.22.1-0"
+        "version": "1.22.1-1"
     },
     "render-template": {
         "arch": "amd64",
