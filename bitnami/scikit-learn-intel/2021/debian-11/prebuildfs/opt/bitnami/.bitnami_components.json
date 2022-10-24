@@ -8,16 +8,16 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "3a789bf5486155ba7677c009468940a9c26a9d21c8c53d65b335e7c26a5fba17",
+        "digest": "5e62e52fac43cd431f66d39b42c4f9d49ef08ebac64d06c9a7c31b73ab34738e",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.10.8-0"
+        "version": "3.9.15-0"
     },
     "scikit-learn-intel": {
         "arch": "amd64",
-        "digest": "f422f49fc132f3437f3b68286cd9e8ff34db14ee495bdeb133216c8ba5364e3e",
+        "digest": "3579c28e8e65a6842cd49c67c6f07b281c4136e02a81c56ae9d022d8dd088b22",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2021.6.3-2"
+        "version": "2021.7.0-0"
     }
 }
