@@ -73,15 +73,19 @@ jobs:
         run: |
           if [[ -d "${{ matrix.container }}" ]]; then
             tag="$(grep -oE "org.opencontainers.image.ref.name=\".+\"" ${{ matrix.container }}/Dockerfile | sed -nr "s|org.opencontainers.image.ref.name=\"(.+)\"|\1|p")"
+            asset_version="$(grep -oE "org.opencontainers.image.version=\".+\"" ${{ matrix.container }}/Dockerfile | sed -nr "s|org.opencontainers.image.version=\"(.+)\"|\1|p")"
             if [[ -z "${tag}" ]]; then
               echo "No tag found for: ${{ matrix.container }}"
               exit 1
             else
               name="$(echo "${{ matrix.container }}" | awk -F '/' '{print $2}')"
               branch="$(echo "${{ matrix.container }}" | awk -F '/' '{print $3}')"
+              distro="$(echo "${{ matrix.container }}" | awk -F '/' '{print $4}')"
               echo "::set-output name=tag::${tag}"
+              echo "::set-output name=asset_version::${asset_version}"
               echo "::set-output name=name::${name}"
               echo "::set-output name=branch::${branch}"
+              echo "::set-output name=distro::${distro}"
               echo "::set-output name=result::ok"
             fi
           else
@@ -118,6 +122,11 @@ jobs:
           # Container name
           VIB_ENV_CONTAINER: ${{ steps.get-container-metadata.outputs.name }}
           VIB_ENV_TAG: ${{ steps.get-container-metadata.outputs.tag }}
+          VIB_ENV_ASSET_VERSION: ${{ steps.get-container-metadata.outputs.asset_version }}
+          VIB_ENV_DISTRO: ${{ steps.get-container-metadata.outputs.distro }}
           VIB_ENV_REGISTRY_URL: ${{ secrets.PROD_MARKETPLACE_REGISTRY_URL }}
           VIB_ENV_REGISTRY_USERNAME: ${{ steps.get-registry-credentials.outputs.marketplace_user }}
           VIB_ENV_REGISTRY_PASSWORD: ${{ steps.get-registry-credentials.outputs.marketplace_passwd }}
+          VIB_ENV_OSM_URL: ${{ secrets.OSM_URL }}
+          VIB_ENV_OSM_USERNAME: ${{ secrets.OSM_USERNAME }}
+          VIB_ENV_OSM_PASSWORD: ${{ secrets.OSM_PASSWORD }}

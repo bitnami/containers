@@ -50,6 +50,20 @@
               "OS"
             ]
           }
+        },
+        {
+          "action_id": "osspi-application",
+          "params": {
+            "osm": {
+              "product_name": "bac-{VIB_ENV_CONTAINER}",
+              "product_version": "{VIB_ENV_ASSET_VERSION}-{VIB_ENV_DISTRO}-container",
+              "url": "{VIB_ENV_OSM_URL}",
+              "authn": {
+                "username": "{VIB_ENV_OSM_USERNAME}",
+                "password": "{VIB_ENV_OSM_PASSWORD}"
+              }
+            }
+          }
         }
       ]
     },
