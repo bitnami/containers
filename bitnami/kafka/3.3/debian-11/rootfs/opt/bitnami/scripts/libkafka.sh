@@ -240,11 +240,11 @@ kafka_validate() {
 
     if is_boolean_yes "$KAFKA_ENABLE_KRAFT"; then
         if [[ -z "$KAFKA_CFG_BROKER_ID" ]]; then
-	        print_validation_error "KRaft requires KAFKA_CFG_BROKER_ID to be set for the quorum controller"
-	    fi
+            print_validation_error "KRaft requires KAFKA_CFG_BROKER_ID to be set for the quorum controller"
+        fi
         if [[ -z "$KAFKA_CFG_CONTROLLER_QUORUM_VOTERS" ]]; then
-	        print_validation_error "KRaft requires KAFKA_CFG_CONTROLLER_QUORUM_VOTERS to be set"
-	    fi
+            print_validation_error "KRaft requires KAFKA_CFG_CONTROLLER_QUORUM_VOTERS to be set"
+        fi
 
         if [[ -n "$KAFKA_CFG_BROKER_ID" ]] && [[ -n "$KAFKA_CFG_CONTROLLER_QUORUM_VOTERS" ]]; then
             old_IFS=$IFS
@@ -258,7 +258,7 @@ kafka_validate() {
                     break
                 fi
             done
-        
+
             if [[ "$broker_id_matched" == false ]]; then
                 warn "KAFKA_CFG_BROKER_ID must match what is set in KAFKA_CFG_CONTROLLER_QUORUM_VOTERS"
             fi
@@ -376,7 +376,6 @@ kafka_validate() {
     check_multi_value "KAFKA_TLS_CLIENT_AUTH" "none requested required"
     [[ "$error_code" -eq 0 ]] || return "$error_code"
 }
-
 ########################
 # Generate JAAS authentication file
 # Globals:
