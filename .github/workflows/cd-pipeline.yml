@@ -46,11 +46,11 @@ jobs:
 
           if [[ "${#containers[@]}" -le "0" ]]; then
             echo "No changes detected in containers. The rest of the steps will be skipped."
-            echo "::set-output name=result::skip"
+            echo "result=skip" >> $GITHUB_OUTPUT
           else
             containers_json=$(printf "%s\n" "${containers[@]}" | jq -R . | jq -cs .)
-            echo "::set-output name=result::ok"
-            echo "::set-output name=containers::${containers_json}"
+            echo "result=ok" >> $GITHUB_OUTPUT
+            echo "containers=${containers_json}" >> $GITHUB_OUTPUT
           fi
   vib-publish:
     runs-on: ubuntu-latest
@@ -79,14 +79,14 @@ jobs:
             else
               name="$(echo "${{ matrix.container }}" | awk -F '/' '{print $2}')"
               branch="$(echo "${{ matrix.container }}" | awk -F '/' '{print $3}')"
-              echo "::set-output name=tag::${tag}"
-              echo "::set-output name=name::${name}"
-              echo "::set-output name=branch::${branch}"
-              echo "::set-output name=result::ok"
+              echo "tag=${tag}" >> $GITHUB_OUTPUT
+              echo "name=${name}" >> $GITHUB_OUTPUT
+              echo "branch=${branch}" >> $GITHUB_OUTPUT
+              echo "result=ok" >> $GITHUB_OUTPUT
             fi
           else
             # Container folder doesn't exists we are assuming a deprecation
-            echo "::set-output name=result::skip"
+            echo "result=skip" >> $GITHUB_OUTPUT
           fi
       - id: get-registry-credentials
         name: Get marketplace's registry credentials
@@ -97,8 +97,8 @@ jobs:
           marketplace_passwd=$(echo "$repo_info" | jq -re .response.repodetails.token)
           echo "::add-mask::${marketplace_user}"
           echo "::add-mask::${marketplace_passwd}"
-          echo "::set-output name=marketplace_user::${marketplace_user}"
-          echo "::set-output name=marketplace_passwd::${marketplace_passwd}"
+          echo "marketplace_user=${marketplace_user}" >> $GITHUB_OUTPUT
+          echo "marketplace_passwd=${marketplace_passwd}" >> $GITHUB_OUTPUT
       - id: get-dsl-filepath
         name: Get pipeline DSL filepath
         run: |
@@ -106,7 +106,7 @@ jobs:
           if [[ -d ".vib/${dsl_path}/${{ steps.get-container-metadata.outputs.branch }}" ]]; then
             dsl_path="${dsl_path}/${{ steps.get-container-metadata.outputs.branch }}"
           fi
-          echo "::set-output name=dsl_path::${dsl_path}"
+          echo "dsl_path=${dsl_path}" >> $GITHUB_OUTPUT
       - uses: vmware-labs/vmware-image-builder-action@main
         name: 'Publish ${{ steps.get-container-metadata.outputs.name }}: ${{ steps.get-container-metadata.outputs.tag }}'
         if: ${{ steps.get-container-metadata.outputs.result == 'ok' }}
