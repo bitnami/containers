@@ -5,7 +5,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="9.7.0-debian-11-r1" \
+      org.opencontainers.image.ref.name="9.7.0-debian-11-r2" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/sonarqube" \
       org.opencontainers.image.title="sonarqube" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -23,7 +23,7 @@ RUN install_packages acl ca-certificates curl libbsd0 libedit2 libffi7 libgcc-s1
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "postgresql-client-13.8.0-2-linux-${OS_ARCH}-debian-11" \
-      "java-11.0.17-7-0-linux-${OS_ARCH}-debian-11" \
+      "java-11.0.17-7-1-linux-${OS_ARCH}-debian-11" \
       "sonarqube-9.7.0-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
     ) && \
