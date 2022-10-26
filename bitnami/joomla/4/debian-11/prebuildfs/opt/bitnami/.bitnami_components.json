@@ -15,17 +15,17 @@
     },
     "joomla": {
         "arch": "amd64",
-        "digest": "ee4926601a3950308090fa29fa66c9489ea0dd58e40edc09137a4eb8ac1adf4c",
+        "digest": "f8487a1b2fdb9dabdc54881319ee0e008500967451e77ce705431d37578eb47c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.2.3-1"
+        "version": "4.2.4-0"
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "0897e1f2043b83f09ef447790713fa15ad2b83c1a51e64062916c8b4f4ec8684",
+        "digest": "a63f65e9c77c714171712a8c4f0a27542b750dc9bc43a4f3693380990e7b9acb",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.24-1"
+        "version": "8.0.25-0"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "706be28d9740ee4274589414f3cd612e0b9a7a070ebeb3256a55f3846965c5ec",
+        "digest": "104bdf492c9547ed70b6566469746ff300a817eb8111420f9a6d5ad34c89e044",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.24-4"
+        "version": "8.0.25-1"
     },
     "render-template": {
         "arch": "amd64",
