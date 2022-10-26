@@ -240,11 +240,11 @@ kafka_validate() {
 
     if is_boolean_yes "$KAFKA_ENABLE_KRAFT"; then
         if [[ -z "$KAFKA_CFG_BROKER_ID" ]]; then
-	        print_validation_error "KRaft requires KAFKA_CFG_BROKER_ID to be set for the quorum controller"
-	    fi
+            print_validation_error "KRaft requires KAFKA_CFG_BROKER_ID to be set for the quorum controller"
+        fi
         if [[ -z "$KAFKA_CFG_CONTROLLER_QUORUM_VOTERS" ]]; then
-	        print_validation_error "KRaft requires KAFKA_CFG_CONTROLLER_QUORUM_VOTERS to be set"
-	    fi
+            print_validation_error "KRaft requires KAFKA_CFG_CONTROLLER_QUORUM_VOTERS to be set"
+        fi
 
         if [[ -n "$KAFKA_CFG_BROKER_ID" ]] && [[ -n "$KAFKA_CFG_CONTROLLER_QUORUM_VOTERS" ]]; then
             old_IFS=$IFS
@@ -258,7 +258,7 @@ kafka_validate() {
                     break
                 fi
             done
-        
+
             if [[ "$broker_id_matched" == false ]]; then
                 warn "KAFKA_CFG_BROKER_ID must match what is set in KAFKA_CFG_CONTROLLER_QUORUM_VOTERS"
             fi
@@ -376,7 +376,6 @@ kafka_validate() {
     check_multi_value "KAFKA_TLS_CLIENT_AUTH" "none requested required"
     [[ "$error_code" -eq 0 ]] || return "$error_code"
 }
-
 ########################
 # Generate JAAS authentication file
 # Globals:
@@ -560,6 +559,25 @@ kafka_configure_ssl() {
         file_to_multiline_property() {
             awk 'NR > 1{print line" \\"}{line=$0;}END{print $0" "}' <"${1:?missing file}"
         }
+        remove_previous_cert_value() {
+            local key="${1:?missing key}"
+            files=(
+                "${KAFKA_CONF_FILE}"
+                "${KAFKA_CONF_DIR}/producer.properties"
+                "${KAFKA_CONF_DIR}/consumer.properties"
+            )
+            for file in "${files[@]}"; do
+                if grep -q "^[#\\s]*$key\s*=.*" "$file"; then
+                    # Delete all lines from the certificate beginning to its end
+                    sed -i "/^[#\\s]*$key\s*=.*-----BEGIN/,/-----END/d" "$file"
+                fi
+            done
+        }
+        # We need to remove the previous cert value
+        # kafka_common_conf_set uses replace_in_file, which can't match multiple lines
+        remove_previous_cert_value ssl.keystore.key
+        remove_previous_cert_value ssl.keystore.certificate.chain
+        remove_previous_cert_value ssl.truststore.certificates
         configure_both ssl.keystore.key "$(file_to_multiline_property "${KAFKA_CERTS_DIR}/kafka.keystore.key")"
         configure_both ssl.keystore.certificate.chain "$(file_to_multiline_property "${KAFKA_CERTS_DIR}/kafka.keystore.pem")"
         configure_both ssl.truststore.certificates "$(file_to_multiline_property "${kafka_truststore_location}")"
