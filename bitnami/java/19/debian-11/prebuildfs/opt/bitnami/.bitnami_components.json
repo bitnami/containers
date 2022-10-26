@@ -8,9 +8,9 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "72389377402ab5cb1d1b8dbf13fbdc38f1ba02682068a3a2a78d2f95f78208b4",
+        "digest": "301148a1344cbc98720b2d9076d2895b404a333b9c1d12d7ee10f38f9fc4d68c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "19.0.0-1"
+        "version": "19.0.1-11-0"
     }
 }
