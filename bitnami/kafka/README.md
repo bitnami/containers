@@ -185,7 +185,7 @@ $ docker-compose up -d
 The configuration can easily be setup with the Bitnami Apache Kafka Docker image using the following environment variables:
 
 * `ALLOW_PLAINTEXT_LISTENER`: Allow to use the PLAINTEXT listener. Default: **no**.
-* `KAFKA_INTER_BROKER_USER`: Apache Kafka inter broker communication user. Default: admin. Default: **user**.
+* `KAFKA_INTER_BROKER_USER`: Apache Kafka inter broker communication user. Default: **user**.
 * `KAFKA_INTER_BROKER_PASSWORD`: Apache Kafka inter broker communication password. Default: **bitnami**.
 * `KAFKA_CERTIFICATE_PASSWORD`: Password for certificates. No defaults.
 * `KAFKA_HEAP_OPTS`: Apache Kafka's Java Heap size. Default: **-Xmx1024m -Xms1024m**.
