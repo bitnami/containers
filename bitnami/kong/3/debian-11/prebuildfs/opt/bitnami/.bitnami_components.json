@@ -8,9 +8,9 @@
     },
     "kong": {
         "arch": "amd64",
-        "digest": "75efc51222a2aa0ac0d8da0c0fb5f64c57669ea09650995663a52f22eb6c9f5e",
+        "digest": "35ee709dc97b82118af9e0e74c4547d870020b0d88fc670c38332697f91ee1af",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.0.0-9"
+        "version": "3.0.0-10"
     }
 }
