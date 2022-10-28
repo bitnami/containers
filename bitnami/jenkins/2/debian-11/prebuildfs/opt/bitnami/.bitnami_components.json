@@ -11,7 +11,7 @@
         "digest": "972009952c7ab083836ce1943c7768daac74ec3cbea63eb5994b38e7c9794b75",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.17-7-0"
+        "version": "11.0.17-7-1"
     },
     "jenkins": {
         "arch": "amd64",
