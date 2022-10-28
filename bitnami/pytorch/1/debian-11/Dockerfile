@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.12.1-debian-11-r28" \
+      org.opencontainers.image.ref.name="1.13.0-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pytorch" \
       org.opencontainers.image.title="pytorch" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.12.1"
+      org.opencontainers.image.version="1.13.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ RUN install_packages ca-certificates curl libbz2-1.0 libcom-err2 libcrypt1 libff
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.8.15-1-linux-${OS_ARCH}-debian-11" \
-      "pytorch-1.12.1-3-linux-${OS_ARCH}-debian-11" \
+      "pytorch-1.13.0-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -42,7 +42,7 @@ RUN mkdir /.local && chmod g+rwX /.local
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/pytorch/postunpack.sh
-ENV APP_VERSION="1.12.1" \
+ENV APP_VERSION="1.13.0" \
     BITNAMI_APP_NAME="pytorch" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:$PATH"
 
