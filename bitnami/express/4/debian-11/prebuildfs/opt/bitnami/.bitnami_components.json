@@ -36,17 +36,17 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "88e943f67e0ca48fc1395ed0f15f2a91bec1e2fedc3b417b6e04fca797fae225",
+        "digest": "dfff2a0c97569492baf7268622f81669339e3abc3751f22b9f9c66dce796eff2",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.15-0"
+        "version": "3.8.15-1"
     },
     "sequelize-cli": {
         "arch": "amd64",
-        "digest": "326b633e52cdb4eb73bb8bf4302fc7d47c7f2d6d7c617f44ec354a01ea21fd4e",
+        "digest": "95d4182b757d81097a191e200eef3d47e5c22f2918cb568b7125c92c4df86eba",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.5.1-1"
+        "version": "6.5.2-0"
     },
     "wait-for-port": {
         "arch": "amd64",

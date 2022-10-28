@@ -43,21 +43,30 @@ keycloak_validate() {
     if is_boolean_yes "$KEYCLOAK_PRODUCTION"; then
         if [[ "$KEYCLOAK_PROXY" == "edge" ]]; then
             # https://www.keycloak.org/server/reverseproxy
-            if is_boolean_yes "$KEYCLOAK_ENABLE_TLS"; then
-                print_validation_error "TLS and proxy=edge are not compatible. Please set the KEYCLOAK_ENABLE_TLS variable to false when using KEYCLOAK_PROXY=edge. Review # https://www.keycloak.org/server/reverseproxy for more information about proxy settings."
+            if is_boolean_yes "$KEYCLOAK_ENABLE_HTTPS"; then
+                print_validation_error "TLS and proxy=edge are not compatible. Please set the KEYCLOAK_ENABLE_HTTPS variable to false when using KEYCLOAK_PROXY=edge. Review # https://www.keycloak.org/server/reverseproxy for more information about proxy settings."
             fi
-        elif ! is_boolean_yes "$KEYCLOAK_ENABLE_TLS"; then
+        elif ! is_boolean_yes "$KEYCLOAK_ENABLE_HTTPS"; then
             # keycloak proxy passthrough/reencrypt requires tls
-            print_validation_error "You need to have TLS enabled. Please set the KEYCLOAK_ENABLE_TLS variable to true"
+            print_validation_error "You need to have TLS enabled. Please set the KEYCLOAK_ENABLE_HTTPS variable to true"
         fi
     fi
 
-    if is_boolean_yes "$KEYCLOAK_ENABLE_TLS"; then
-        if is_empty_value "$KEYCLOAK_TLS_TRUSTSTORE_FILE"; then
-            print_validation_error "Path to the TLS truststore file not defined. Please set the KEYCLOAK_TLS_TRUSTSTORE_FILE variable to the mounted truststore"
-        fi
-        if is_empty_value "$KEYCLOAK_TLS_KEYSTORE_FILE"; then
-            print_validation_error "Path to the TLS keystore file not defined. Please set the KEYCLOAK_TLS_KEYSTORE_FILE variable to the mounted keystore"
+    if is_boolean_yes "$KEYCLOAK_ENABLE_HTTPS"; then
+        if is_boolean_yes "$KEYCLOAK_HTTPS_USE_PEM"; then
+            if is_empty_value "$KEYCLOAK_HTTPS_CERTIFICATE_FILE"; then
+                print_validation_error "Path to the TLS certificate not defined. Please set the KEYCLOAK_HTTPS_CERTIFICATE_FILE variable to the mounted PEM certificate"
+            fi
+            if is_empty_value "$KEYCLOAK_HTTPS_CERTIFICATE_KEY_FILE"; then
+                print_validation_error "Path to the TLS key not defined. Please set the KEYCLOAK_HTTPS_CERTIFICATE_KEY_FILE variable to the mounted PEM key"
+            fi
+        else
+            if is_empty_value "$KEYCLOAK_HTTPS_TRUST_STORE_FILE"; then
+                print_validation_error "Path to the TLS truststore file not defined. Please set the KEYCLOAK_HTTPS_TRUST_STORE_FILE variable to the mounted truststore"
+            fi
+            if is_empty_value "$KEYCLOAK_HTTPS_KEY_STORE_FILE"; then
+                print_validation_error "Path to the TLS keystore file not defined. Please set the KEYCLOAK_HTTPS_KEY_STORE_FILE variable to the mounted keystore"
+            fi
         fi
     fi
 
@@ -73,7 +82,7 @@ keycloak_validate() {
     check_allowed_port KEYCLOAK_HTTP_PORT
     check_allowed_port KEYCLOAK_HTTPS_PORT
 
-    for var in KEYCLOAK_ENABLE_TLS KEYCLOAK_ENABLE_STATISTICS; do
+    for var in KEYCLOAK_ENABLE_HTTPS KEYCLOAK_ENABLE_STATISTICS; do
         if ! is_true_false_value "${!var}"; then
             print_validation_error "The allowed values for $var are [true, false]"
         fi
@@ -220,19 +229,39 @@ keycloak_configure_proxy() {
 }
 
 ########################
-# Configure database settings
+# Configure HTTPS settings
 # Globals:
 #   KEYCLOAK_*
 # Arguments:
 # Returns:
 #   None
 #########################
-keycloak_configure_tls() {
-    info "Configuring TLS by setting keystore and truststore"
-    ! is_empty_value "$KEYCLOAK_TLS_KEYSTORE_PASSWORD" && keycloak_conf_set "https-key-store-password" "${KEYCLOAK_TLS_KEYSTORE_PASSWORD}"
-    ! is_empty_value "$KEYCLOAK_TLS_TRUSTSTORE_PASSWORD" && keycloak_conf_set "https-trust-store-password" "${KEYCLOAK_TLS_TRUSTSTORE_PASSWORD}"
-    keycloak_conf_set "https-key-store-file" "${KEYCLOAK_TLS_KEYSTORE_FILE}"
-    keycloak_conf_set "https-trust-store-file" "${KEYCLOAK_TLS_TRUSTSTORE_FILE}"
+keycloak_configure_https() {
+    info "Configuring Keycloak HTTPS settings"
+    if is_boolean_yes "$KEYCLOAK_HTTPS_USE_PEM"; then
+        keycloak_conf_set "https-certificate-file" "${KEYCLOAK_HTTPS_CERTIFICATE_FILE}"
+        keycloak_conf_set "https-certificate-key-file" "${KEYCLOAK_HTTPS_CERTIFICATE_KEY_FILE}"
+    else
+        ! is_empty_value "$KEYCLOAK_HTTPS_KEY_STORE_PASSWORD" && keycloak_conf_set "https-key-store-password" "${KEYCLOAK_HTTPS_KEY_STORE_PASSWORD}"
+        ! is_empty_value "$KEYCLOAK_HTTPS_TRUST_STORE_PASSWORD" && keycloak_conf_set "https-trust-store-password" "${KEYCLOAK_HTTPS_TRUST_STORE_PASSWORD}"
+        keycloak_conf_set "https-key-store-file" "${KEYCLOAK_HTTPS_KEY_STORE_FILE}"
+        keycloak_conf_set "https-trust-store-file" "${KEYCLOAK_HTTPS_TRUST_STORE_FILE}"
+    fi
+}
+
+########################
+# Configure SPI TLS settings
+# Globals:
+#   KEYCLOAK_*
+# Arguments:
+# Returns:
+#   None
+#########################
+keycloak_configure_spi_tls() {
+    info "Configuring Keycloak SPI TLS settings"
+    ! is_empty_value "$KEYCLOAK_SPI_TRUSTSTORE_PASSWORD" && keycloak_conf_set "spi-truststore-file-password" "${KEYCLOAK_SPI_TRUSTSTORE_PASSWORD}"
+    ! is_empty_value "$KEYCLOAK_SPI_TRUSTSTORE_FILE_HOSTNAME_VERIFICATION_POLICY" && keycloak_conf_set "spi-truststore-file-hostname-verification-policy" "${KEYCLOAK_SPI_TRUSTSTORE_FILE_HOSTNAME_VERIFICATION_POLICY}"
+    keycloak_conf_set "spi-truststore-file-file" "${KEYCLOAK_SPI_TRUSTSTORE_FILE}"
 
 }
 
@@ -266,7 +295,8 @@ keycloak_initialize() {
     keycloak_configure_cache
     keycloak_configure_loglevel
     keycloak_configure_proxy
-    is_boolean_yes "$KEYCLOAK_ENABLE_TLS" && keycloak_configure_tls
+    is_boolean_yes "$KEYCLOAK_ENABLE_HTTPS" && keycloak_configure_https
+    ! is_empty_value "$KEYCLOAK_SPI_TRUSTSTORE_FILE" && keycloak_configure_spi_tls
     true
 }
 

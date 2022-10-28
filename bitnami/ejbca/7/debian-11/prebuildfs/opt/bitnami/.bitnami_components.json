@@ -1,10 +1,10 @@
 {
     "ejbca": {
         "arch": "amd64",
-        "digest": "fb84fdda89139baad364e5eda7c3d3b0a4fcc4ae41e4da5c767a916f99ee5f66",
+        "digest": "872e419159f20cc85c82593f17e7c471c034528d2af29189b2cd4828a56a8b61",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.9.0-2-3"
+        "version": "7.10.0-2-0"
     },
     "gosu": {
         "arch": "amd64",
@@ -18,7 +18,7 @@
         "digest": "972009952c7ab083836ce1943c7768daac74ec3cbea63eb5994b38e7c9794b75",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.17-7-0"
+        "version": "11.0.17-7-1"
     },
     "mysql-client": {
         "arch": "amd64",

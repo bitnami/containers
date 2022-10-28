@@ -11,7 +11,7 @@
         "digest": "e482df0561ee639bf2602c4e91f4ee1a48285ad5e2bdc994c7c37825664d7a82",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.8.352-0"
+        "version": "1.8.352-1"
     },
     "spring-cloud-skipper": {
         "arch": "amd64",
