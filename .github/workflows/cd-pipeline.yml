@@ -122,11 +122,8 @@ jobs:
           # Container name
           VIB_ENV_CONTAINER: ${{ steps.get-container-metadata.outputs.name }}
           VIB_ENV_TAG: ${{ steps.get-container-metadata.outputs.tag }}
-          VIB_ENV_ASSET_VERSION: ${{ steps.get-container-metadata.outputs.asset_version }}
-          VIB_ENV_DISTRO: ${{ steps.get-container-metadata.outputs.distro }}
           VIB_ENV_REGISTRY_URL: ${{ secrets.PROD_MARKETPLACE_REGISTRY_URL }}
           VIB_ENV_REGISTRY_USERNAME: ${{ steps.get-registry-credentials.outputs.marketplace_user }}
           VIB_ENV_REGISTRY_PASSWORD: ${{ steps.get-registry-credentials.outputs.marketplace_passwd }}
-          VIB_ENV_OSM_URL: ${{ secrets.OSM_URL }}
-          VIB_ENV_OSM_USERNAME: ${{ secrets.OSM_USERNAME }}
-          VIB_ENV_OSM_PASSWORD: ${{ secrets.OSM_PASSWORD }}
+          VIB_ENV_OSM_PRODUCT_NAME: main-catalog-${{ steps.get-container-metadata.outputs.name }}
+          VIB_ENV_OSM_RELEASE: ${{ steps.get-container-metadata.outputs.asset_version }}-${{ steps.get-container-metadata.outputs.distro }}-container
