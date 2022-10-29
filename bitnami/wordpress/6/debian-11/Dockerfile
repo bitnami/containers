@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="6.0.3-debian-11-r3" \
+      org.opencontainers.image.ref.name="6.0.3-debian-11-r4" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/wordpress" \
       org.opencontainers.image.title="wordpress" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,7 +22,7 @@ RUN install_packages acl ca-certificates curl less libaudit1 libbrotli1 libbsd0 
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "render-template-1.0.3-154-linux-${OS_ARCH}-debian-11" \
-      "php-8.1.12-1-linux-${OS_ARCH}-debian-11" \
+      "php-8.1.12-2-linux-${OS_ARCH}-debian-11" \
       "apache-2.4.54-157-linux-${OS_ARCH}-debian-11" \
       "wp-cli-2.7.1-0-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.10-1-linux-${OS_ARCH}-debian-11" \
