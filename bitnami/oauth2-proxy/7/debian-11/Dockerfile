@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="7.3.0-debian-11-r50" \
+      org.opencontainers.image.ref.name="7.4.0-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/oauth2-proxy" \
       org.opencontainers.image.title="oauth2-proxy" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="7.3.0"
+      org.opencontainers.image.version="7.4.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -21,7 +21,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "oauth2-proxy-7.3.0-154-linux-${OS_ARCH}-debian-11" \
+      "oauth2-proxy-7.4.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -38,7 +38,7 @@ RUN apt-get autoremove --purge -y curl && \
 RUN chmod g+rwX /opt/bitnami
 RUN chown -R 1001:1001 /opt/bitnami/oauth2-proxy
 
-ENV APP_VERSION="7.3.0" \
+ENV APP_VERSION="7.4.0" \
     BITNAMI_APP_NAME="oauth2-proxy" \
     PATH="/opt/bitnami/oauth2-proxy/bin:$PATH"
 
