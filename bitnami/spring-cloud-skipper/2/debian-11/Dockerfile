@@ -5,7 +5,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.8.6-debian-11-r15" \
+      org.opencontainers.image.ref.name="2.8.6-debian-11-r16" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/spring-cloud-skipper" \
       org.opencontainers.image.title="spring-cloud-skipper" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -23,7 +23,7 @@ RUN install_packages ca-certificates curl libgcc-s1 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "java-1.8.352-1-linux-${OS_ARCH}-debian-11" \
-      "yq-4.28.2-0-linux-${OS_ARCH}-debian-11" \
+      "yq-4.29.2-0-linux-${OS_ARCH}-debian-11" \
       "spring-cloud-skipper-2.8.6-1-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
     ) && \
