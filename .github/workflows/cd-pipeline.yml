@@ -73,15 +73,19 @@ jobs:
         run: |
           if [[ -d "${{ matrix.container }}" ]]; then
             tag="$(grep -oE "org.opencontainers.image.ref.name=\".+\"" ${{ matrix.container }}/Dockerfile | sed -nr "s|org.opencontainers.image.ref.name=\"(.+)\"|\1|p")"
+            asset_version="$(grep -oE "org.opencontainers.image.version=\".+\"" ${{ matrix.container }}/Dockerfile | sed -nr "s|org.opencontainers.image.version=\"(.+)\"|\1|p")"
             if [[ -z "${tag}" ]]; then
               echo "No tag found for: ${{ matrix.container }}"
               exit 1
             else
               name="$(echo "${{ matrix.container }}" | awk -F '/' '{print $2}')"
               branch="$(echo "${{ matrix.container }}" | awk -F '/' '{print $3}')"
+              distro="$(echo "${{ matrix.container }}" | awk -F '/' '{print $4}')"
               echo "tag=${tag}" >> $GITHUB_OUTPUT
+              echo "asset_version=${asset_version}" >> $GITHUB_OUTPUT
               echo "name=${name}" >> $GITHUB_OUTPUT
               echo "branch=${branch}" >> $GITHUB_OUTPUT
+              echo "distro=${distro}" >> $GITHUB_OUTPUT
               echo "result=ok" >> $GITHUB_OUTPUT
             fi
           else
@@ -121,3 +125,5 @@ jobs:
           VIB_ENV_REGISTRY_URL: ${{ secrets.PROD_MARKETPLACE_REGISTRY_URL }}
           VIB_ENV_REGISTRY_USERNAME: ${{ steps.get-registry-credentials.outputs.marketplace_user }}
           VIB_ENV_REGISTRY_PASSWORD: ${{ steps.get-registry-credentials.outputs.marketplace_passwd }}
+          VIB_ENV_OSM_PRODUCT_NAME: main-catalog-${{ steps.get-container-metadata.outputs.name }}
+          VIB_ENV_OSM_RELEASE: ${{ steps.get-container-metadata.outputs.asset_version }}-${{ steps.get-container-metadata.outputs.distro }}-container
