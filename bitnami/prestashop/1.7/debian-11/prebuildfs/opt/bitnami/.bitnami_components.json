@@ -15,10 +15,10 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "402497e0c72e0d6ca251cc28550dfb7e23619562015b79531d78da39319839af",
+        "digest": "fe1d5fdedbb7b4e76d44024ec560aeb9eb00772b393bd35906e53d3e9a414246",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.4.32-1"
+        "version": "7.4.33-0"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -29,10 +29,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "5188e5b2ebb343d40424dc151cc06c304f543355db2cab2133acedf798a615ea",
+        "digest": "1fa54dd8b1e5b9bf63797ddda107aa0a9e821659f7be01867286056b89ac6eb6",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.4.32-4"
+        "version": "7.4.33-0"
     },
     "prestashop": {
         "arch": "amd64",
