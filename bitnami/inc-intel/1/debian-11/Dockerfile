@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.14.1-debian-11-r10" \
+      org.opencontainers.image.ref.name="1.14.2-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/inc-intel" \
       org.opencontainers.image.title="inc-intel" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.14.1"
+      org.opencontainers.image.version="1.14.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ RUN install_packages ca-certificates curl libbz2-1.0 libcom-err2 libcrypt1 libff
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.9.15-1-linux-${OS_ARCH}-debian-11" \
-      "inc-intel-1.14.1-1-linux-${OS_ARCH}-debian-11" \
+      "inc-intel-1.14.2-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -41,7 +41,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/inc-intel/postunpack.sh
-ENV APP_VERSION="1.14.1" \
+ENV APP_VERSION="1.14.2" \
     BITNAMI_APP_NAME="inc-intel" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:$PATH"
 
