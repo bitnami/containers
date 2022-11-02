@@ -52,18 +52,7 @@ pgbouncer_validate() {
         fi
     }
 
-    check_ip_value() {
-        if ! validate_ipv4 "${!1}"; then
-            if ! is_hostname_resolved "${!1}"; then
-                print_validation_error "The value for $1 should be an IPv4 address or it must be a resolvable hostname"
-            else
-                debug "Hostname resolvable for $1"
-            fi
-        fi
-    }
-
     check_valid_port "PGBOUNCER_PORT"
-    check_ip_value "PGBOUNCER_LISTEN_ADDRESS"
     check_multi_value "PGBOUNCER_AUTH_TYPE" "any cert md5 hba pam plain scram-sha-256 trust"
     ! is_empty_value "$PGBOUNCER_POOL_MODE" && check_multi_value "PGBOUNCER_POOL_MODE" "session statement transaction"
     if [[ "$PGBOUNCER_AUTH_TYPE" = "trust" ]]; then
