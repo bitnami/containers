@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="5.0.13-debian-11-r9" \
+      org.opencontainers.image.ref.name="5.0.13-debian-11-r10" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mongodb-sharded" \
       org.opencontainers.image.title="mongodb-sharded" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,7 +22,7 @@ RUN install_packages ca-certificates curl libbrotli1 libcom-err2 libcurl4 libffi
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "mongodb-shell-1.6.0-1-linux-${OS_ARCH}-debian-11" \
-      "yq-4.29.1-0-linux-${OS_ARCH}-debian-11" \
+      "yq-4.29.2-0-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.3-155-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.3-154-linux-${OS_ARCH}-debian-11" \
       "mongodb-5.0.13-1-linux-${OS_ARCH}-debian-11" \
