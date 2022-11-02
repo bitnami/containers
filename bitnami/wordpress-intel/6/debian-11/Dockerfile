@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="6.0.3-debian-11-r6" \
+      org.opencontainers.image.ref.name="6.1.0-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/wordpress-intel" \
       org.opencontainers.image.title="wordpress-intel" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="6.0.3"
+      org.opencontainers.image.version="6.1.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -27,7 +27,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "wp-cli-2.7.1-0-linux-${OS_ARCH}-debian-11" \
       "nginx-intel-0.4.8-2-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.10-1-linux-${OS_ARCH}-debian-11" \
-      "wordpress-6.0.3-3-linux-${OS_ARCH}-debian-11" \
+      "wordpress-6.1.0-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -52,7 +52,7 @@ RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/nginx-php-fpm/postunpack.sh
 RUN /opt/bitnami/scripts/wordpress/postunpack.sh
 RUN /opt/bitnami/scripts/wp-cli/postunpack.sh
-ENV APP_VERSION="6.0.3" \
+ENV APP_VERSION="6.1.0" \
     BITNAMI_APP_NAME="wordpress-intel" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
