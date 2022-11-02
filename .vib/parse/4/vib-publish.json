@@ -49,15 +49,6 @@
               "OS"
             ]
           }
-        },
-        {
-          "action_id": "osspi-application",
-          "params": {
-            "osm": {
-              "product_name": "{VIB_ENV_OSM_PRODUCT_NAME}",
-              "product_version": "{VIB_ENV_OSM_RELEASE}"
-            }
-          }
         }
       ]
     },
