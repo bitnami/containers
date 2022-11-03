@@ -34,7 +34,7 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.20.0-scratch-r4" \
+      org.opencontainers.image.ref.name="0.20.0-scratch-r5" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pinniped" \
       org.opencontainers.image.title="pinniped" \
       org.opencontainers.image.vendor="VMware, Inc." \
