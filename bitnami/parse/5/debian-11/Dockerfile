@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="5.3.0-debian-11-r1" \
+      org.opencontainers.image.ref.name="5.3.0-debian-11-r2" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/parse" \
       org.opencontainers.image.title="parse" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,7 +22,7 @@ RUN install_packages ca-certificates curl jq libbz2-1.0 libcom-err2 libcrypt1 li
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.8.15-1-linux-${OS_ARCH}-debian-11" \
-      "node-14.21.0-0-linux-${OS_ARCH}-debian-11" \
+      "node-14.21.1-0-linux-${OS_ARCH}-debian-11" \
       "mongodb-shell-1.6.0-1-linux-${OS_ARCH}-debian-11" \
       "parse-5.3.0-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
