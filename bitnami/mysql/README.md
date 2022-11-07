@@ -386,7 +386,7 @@ The above command scales up the number of slaves to `3`. You can scale down in t
 
 ### Configuration file
 
-The image looks for user-defined configurations in `/opt/bitnami/mysql/conf/my_custom.cnf`. Create a file named `my_custom.cnf` and mount it at `/opt/bitnami/mysql/conf/my_custom.cnf`.
+The image looks for user-defined configurations in `/opt/bitnami/mysql/conf/bitnami/my_custom.cnf`. Create a file named `my_custom.cnf` and mount it at `/opt/bitnami/mysql/conf/bitnami/my_custom.cnf`.
 
 For example, in order to override the `max_allowed_packet` directive:
 
@@ -403,7 +403,7 @@ max_allowed_packet=32M
 $ docker run --name mysql \
     -p 3306:3306 \
     -e ALLOW_EMPTY_PASSWORD=yes \
-    -v /path/to/my_custom.cnf:/opt/bitnami/mysql/conf/my_custom.cnf:ro \
+    -v /path/to/my_custom.cnf:/opt/bitnami/mysql/conf/bitnami/my_custom.cnf:ro \
     -v /path/to/mysql-persistence:/bitnami/mysql/data \
     bitnami/mysql:latest
 ```
@@ -416,7 +416,7 @@ services:
   ...
     volumes:
       - /path/to/mysql-persistence:/bitnami/mysql/data
-      - /path/to/my_custom.cnf:/opt/bitnami/mysql/conf/my_custom.cnf:ro
+      - /path/to/my_custom.cnf:/opt/bitnami/mysql/conf/bitnami/my_custom.cnf:ro
   ...
 ```
 
@@ -492,7 +492,7 @@ services:
     ports:
       - '3306:3307'
     volumes:
-      - /path/to/my_custom.cnf:/opt/bitnami/mysql/conf/my_custom.cnf:ro
+      - /path/to/my_custom.cnf:/opt/bitnami/mysql/conf/bitnami/my_custom.cnf:ro
       - data:/bitnami/mysql/data
 volumes:
   data:
