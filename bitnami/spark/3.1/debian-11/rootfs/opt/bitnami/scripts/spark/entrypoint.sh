@@ -43,6 +43,14 @@ case "$1" in
     ;;
   executor)
     shift 1
+
+    set +o pipefail
+
+    env | grep SPARK_JAVA_OPT_ | sort -t_ -k4 -n | sed 's/[^=]*=\(.*\)/\1/g' > /tmp/java_opts.txt
+    readarray -t SPARK_EXECUTOR_JAVA_OPTS < /tmp/java_opts.txt
+
+    set -o pipefail
+
     CMD=(
       ${JAVA_HOME}/bin/java
       "${SPARK_EXECUTOR_JAVA_OPTS[@]}"
