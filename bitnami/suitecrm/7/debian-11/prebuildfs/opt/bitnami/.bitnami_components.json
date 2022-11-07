@@ -46,6 +46,6 @@
         "digest": "07bfb5b34bbddbfeeb3a40b83fdd6ed59cde8182f5d46c3fee1943896453788a",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.12.7-2"
+        "version": "7.12.7-3"
     }
 }

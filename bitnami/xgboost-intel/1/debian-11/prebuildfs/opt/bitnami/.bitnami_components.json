@@ -15,9 +15,9 @@
     },
     "xgboost-intel": {
         "arch": "amd64",
-        "digest": "f3f34a8f16d511e449f48af7f34b9ea05a9b926477fe05852b161c2276fe5fd7",
+        "digest": "aade2f008906280542ca9c2037a77b1fa40f75bd7835e9a60055b47e0daf63b0",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.7.0-0"
+        "version": "1.7.1-0"
     }
 }

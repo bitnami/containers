@@ -34,7 +34,7 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.4.3-scratch-r0" \
+      org.opencontainers.image.ref.name="3.4.3-scratch-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/argo-workflow-controller" \
       org.opencontainers.image.title="argo-workflow-controller" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -42,6 +42,7 @@ LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
 
 COPY prebuildfs /
 COPY rootfs /
+COPY --from=builder /opt/bitnami/../../usr/share/zoneinfo /usr/share/zoneinfo
 COPY --from=builder /opt/bitnami/argo-workflow-controller/bin/workflow-controller /workflow-controller
 
 USER 1001
