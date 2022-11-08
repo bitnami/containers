@@ -288,7 +288,7 @@ minio_create_default_buckets() {
                 fi
                 if [ ${#bucket_info[@]} -eq 2 ]; then
                     info "Setting policy ${bucket_info[1]} for local bucket ${bucket_info[0]}"
-                    minio_client_execute policy set "${bucket_info[1]}" local/"${bucket_info[0]}"/
+                    minio_client_execute anonymous set "${bucket_info[1]}" local/"${bucket_info[0]}"/
                 fi
             else
                 info "Bucket local/${bucket_info[0]} already exists, skipping creation."

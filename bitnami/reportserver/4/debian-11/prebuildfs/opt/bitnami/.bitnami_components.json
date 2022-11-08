@@ -8,10 +8,10 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "c375579c55ee13d9561dcfaeba0338a6c2f5233dc386ead63dbbb67cc974fcdb",
+        "digest": "972009952c7ab083836ce1943c7768daac74ec3cbea63eb5994b38e7c9794b75",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.16-1"
+        "version": "11.0.17-7-1"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -29,10 +29,10 @@
     },
     "reportserver": {
         "arch": "amd64",
-        "digest": "4f66be6e9ed822d68bbaf7802857f02ace3483fbbe1c72573f92440ece1f7a65",
+        "digest": "ba6a1872624e0a985aaaa372e62efc0694b5cad894b62f6abf51b30cbbed700f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.3.0-6078-1"
+        "version": "4.3.0-6080-0"
     },
     "tomcat": {
         "arch": "amd64",

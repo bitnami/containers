@@ -8,23 +8,23 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "c375579c55ee13d9561dcfaeba0338a6c2f5233dc386ead63dbbb67cc974fcdb",
+        "digest": "972009952c7ab083836ce1943c7768daac74ec3cbea63eb5994b38e7c9794b75",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.16-1"
+        "version": "11.0.17-7-1"
     },
     "logstash": {
         "arch": "amd64",
-        "digest": "aa721c9d92002eefaa676c00405c625ea97fab954883c16aa3f3dcf529d8ea40",
+        "digest": "68355e24c9338c11e4c1e2efcb7872a782e0769475a4577aa8780a1c291f2bd0",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.17.6-2"
+        "version": "7.17.7-0"
     },
     "yq": {
         "arch": "amd64",
-        "digest": "d4700bc42fd4a0ceb9981c1f1b7868c03db743cabc2275ebc1bf1fe7df897b9a",
+        "digest": "41f8d881c6685e406467d4353e51da99578622fb670a527acc2b43ffbb252fcb",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.28.1-1"
+        "version": "4.29.2-0"
     }
 }

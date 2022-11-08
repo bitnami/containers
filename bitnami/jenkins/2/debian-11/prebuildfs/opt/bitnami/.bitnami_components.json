@@ -8,17 +8,17 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "c375579c55ee13d9561dcfaeba0338a6c2f5233dc386ead63dbbb67cc974fcdb",
+        "digest": "972009952c7ab083836ce1943c7768daac74ec3cbea63eb5994b38e7c9794b75",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.16-1"
+        "version": "11.0.17-7-1"
     },
     "jenkins": {
         "arch": "amd64",
-        "digest": "4d954d332aab55499de5cd51f811e44f7f9001e0b5314a2750611ecd7c57f8b7",
+        "digest": "c6f43306b29ee51f41fd20d07c5803b8eca13b375ab8f67096fbc0b725a89324",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.361.2-1"
+        "version": "2.361.3-0"
     },
     "render-template": {
         "arch": "amd64",

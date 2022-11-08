@@ -142,7 +142,7 @@ keycloak:
 
 ### TLS Encryption
 
-The Bitnami Keycloak Docker image allows configuring TLS encryption between nodes and between server-client. This is done by mounting in `/opt/bitnami/keycloak/certs` two files:
+The Bitnami Keycloak Docker image allows configuring HTTPS/TLS encription. This is done by mounting in `/opt/bitnami/keycloak/certs` two files:
 
  - `keystore`: File with the server keystore
  - `truststore`: File with the server truststore
@@ -151,12 +151,22 @@ The Bitnami Keycloak Docker image allows configuring TLS encryption between node
 
 Apart from that, the following environment variables must be set:
 
- - `KEYCLOAK_ENABLE_TLS`: Enable TLS encryption using the keystore. Default: **false**.
- - `KEYCLOAK_TLS_KEYSTORE_FILE`: Path to the keystore file (e.g. `/opt/bitnami/keycloak/certs/keystore.jks`). No defaults.
- - `KEYCLOAK_TLS_TRUSTSTORE_FILE`: Path to the truststore file (e.g. `/opt/bitnami/keycloak/certs/truststore.jks`). No defaults.
- - `KEYCLOAK_TLS_KEYSTORE_PASSWORD`: Password for accessing the keystore. No defaults.
- - `KEYCLOAK_TLS_TRUSTSTORE_PASSWORD`: Password for accessing the truststore. No defaults.
+ - `KEYCLOAK_ENABLE_HTTPS`: Enable TLS encryption using the keystore. Default: **false**.
+ - `KEYCLOAK_HTTPS_KEY_STORE_FILE`: Path to the keystore file (e.g. `/opt/bitnami/keycloak/certs/keystore.jks`). No defaults.
+ - `KEYCLOAK_HTTPS_TRUST_STORE_FILE`: Path to the truststore file (e.g. `/opt/bitnami/keycloak/certs/truststore.jks`). No defaults.
+ - `KEYCLOAK_HTTPS_KEY_STORE_PASSWORD`: Password for accessing the keystore. No defaults.
+ - `KEYCLOAK_HTTPS_TRUST_STORE_PASSWORD`: Password for accessing the truststore. No defaults.
+ - `KEYCLOAK_HTTPS_USE_PEM`: Set to true to configure HTTPS using PEM certificates'. Default: **false**.
+ - `KEYCLOAK_HTTPS_CERTIFICATE_FILE`: Path to the PEM certificate file (e.g. `/opt/bitnami/keycloak/certs/tls.crt`). No defaults.
+ - `KEYCLOAK_HTTPS_CERTIFICATE_KEY_FILE`: Path to the PEM key file (e.g. `/opt/bitnami/keycloak/certs/tls.key`). No defaults.
 
+### SPI TLS truststore
+
+The Bitnami Keycloak Docker image supports configuring a truststore for HTTP/TLS connection with Keycloak SPIs.
+
+ - `KEYCLOAK_SPI_TRUSTSTORE_FILE`: Path to the Keycloak SPI truststore file (e.g. `/opt/bitnami/keycloak/certs-spi/truststore.jks`). No defaults.
+ - `KEYCLOAK_SPI_TRUSTSTORE_PASSWORD`: Password for decrypting the SPI truststore file. No defaults.
+ - `KEYCLOAK_SPI_TRUSTSTORE_FILE_HOSTNAME_VERIFICATION_POLICY`: Hostname verification policy for SPI connection over HTTPS/TLS
 
 ### Adding custom themes
 
@@ -215,6 +225,17 @@ After that, your changes will be taken into account in the server's behaviour.
 
 ## Notable Changes
 
+### 19-debian-11-r4
+
+- TLS environment variables have been renamed to match upstream.
+  - `KEYCLOAK_ENABLE_TLS` was renamed as `KEYCLOAK_ENABLE_HTTPS`.
+  - `KEYCLOAK_TLS_KEYSTORE_FILE` was renamed as `KEYCLOAK_TLS_KEY_STORE_FILE`.
+  - `KEYCLOAK_TLS_TRUSTSTORE_FILE` was renamed as `KEYCLOAK_TLS_TRUST_STORE_FILE`.
+  - `KEYCLOAK_TLS_KEYSTORE_PASSWORD` was renamed as `KEYCLOAK_TLS_KEY_STORE_PASSWORD`.
+  - `KEYCLOAK_TLS_TRUSTSTORE_PASSWORD` was renamed as `KEYCLOAK_TLS_TRUST_STORE_PASSWORD`.
+- HTTPS/TLS can now be configured using PEM certificates.
+- Added support to add SPI truststore file.
+
 ### 17-debian-10
 
 Keycloak 17 is powered by Quarkus and to deploy it in production mode it is necessary to set up TLS.
@@ -222,7 +243,7 @@ To do this you need to set `KEYCLOAK_PRODUCTION` to **true** and configure TLS
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 

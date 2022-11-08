@@ -24,6 +24,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 matomo_env_vars=(
     MATOMO_DATA_TO_PERSIST
     MATOMO_SKIP_BOOTSTRAP
+    MATOMO_PROXY_HOST_HEADER
     MATOMO_PROXY_CLIENT_HEADER
     MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL
     MATOMO_ENABLE_FORCE_SSL
@@ -85,6 +86,7 @@ export MATOMO_DATA_TO_PERSIST="${MATOMO_DATA_TO_PERSIST:-config/config.ini.php m
 export MATOMO_SKIP_BOOTSTRAP="${MATOMO_SKIP_BOOTSTRAP:-}" # only used during the first initialization
 
 # Reverse Proxy Configuration options
+export MATOMO_PROXY_HOST_HEADER="${MATOMO_PROXY_HOST_HEADER:-}" # only used during the first initialization
 export MATOMO_PROXY_CLIENT_HEADER="${MATOMO_PROXY_CLIENT_HEADER:-}" # only used during the first initialization
 export MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL="${MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL:-no}" # only used during the first initialization
 export MATOMO_ENABLE_FORCE_SSL="${MATOMO_ENABLE_FORCE_SSL:-no}" # only used during the first initialization

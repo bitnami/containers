@@ -315,6 +315,7 @@ schema_registry_initialize() {
             if [[ "${protocols[*]}" =~ https ]]; then
                 schema_registry_conf_set "ssl.keystore.location" "${SCHEMA_REGISTRY_CERTS_DIR}/ssl.keystore.jks"
                 [[ -n "$SCHEMA_REGISTRY_SSL_KEYSTORE_PASSWORD" ]] && schema_registry_conf_set "ssl.keystore.password" "$SCHEMA_REGISTRY_SSL_KEYSTORE_PASSWORD"
+                [[ -n "$SCHEMA_REGISTRY_SSL_KEY_PASSWORD" ]] && schema_registry_conf_set "ssl.key.password" "$SCHEMA_REGISTRY_SSL_KEY_PASSWORD"
                 [[ -f "${SCHEMA_REGISTRY_CERTS_DIR}/ssl.truststore.jks" ]] && schema_registry_conf_set "ssl.truststore.location" "${SCHEMA_REGISTRY_CERTS_DIR}/ssl.truststore.jks"
                 [[ -n "$SCHEMA_REGISTRY_SSL_TRUSTSTORE_PASSWORD" ]] && schema_registry_conf_set "ssl.truststore.password" "$SCHEMA_REGISTRY_SSL_TRUSTSTORE_PASSWORD"
             fi

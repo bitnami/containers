@@ -8,9 +8,9 @@
     },
     "harbor-adapter-trivy": {
         "arch": "amd64",
-        "digest": "9c541782bf256da2e82b493965acca55869bb6706f4fb0e9b97d3fbe74b8e67c",
+        "digest": "40471216275a49d1877e88722be29213eeb1f98b41660d75b83c415b203f1300",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.6.0-1"
+        "version": "2.6.1-0"
     }
 }

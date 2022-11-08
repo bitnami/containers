@@ -330,7 +330,7 @@ $ docker run --name mysql-slave --link mysql-master:master \
   -e MYSQL_REPLICATION_MODE=slave \
   -e MYSQL_REPLICATION_USER=my_repl_user \
   -e MYSQL_REPLICATION_PASSWORD=my_repl_password \
-  -e MYSQL_MASTER_HOST=master \
+  -e MYSQL_MASTER_HOST=mysql-master \
   -e MYSQL_MASTER_ROOT_PASSWORD=master_root_password \
   bitnami/mysql:latest
 ```
@@ -633,7 +633,7 @@ $ docker-compose up -d
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 

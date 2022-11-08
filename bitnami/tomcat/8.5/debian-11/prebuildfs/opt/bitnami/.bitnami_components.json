@@ -8,10 +8,10 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "c375579c55ee13d9561dcfaeba0338a6c2f5233dc386ead63dbbb67cc974fcdb",
+        "digest": "972009952c7ab083836ce1943c7768daac74ec3cbea63eb5994b38e7c9794b75",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.16-1"
+        "version": "11.0.17-7-1"
     },
     "render-template": {
         "arch": "amd64",
@@ -22,9 +22,9 @@
     },
     "tomcat": {
         "arch": "amd64",
-        "digest": "a4a21ea254aff458ea71802033ddf35a9ef723fa8d2f43a332bc3ded059126f4",
+        "digest": "e6b10bbe001dd25322c908b9ba9fe3cdfeedaebdec14baa201734c2b33c88bdf",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.5.83-0"
+        "version": "8.5.83-1"
     }
 }

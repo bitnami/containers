@@ -158,6 +158,7 @@ zookeeper_initialize() {
         if is_boolean_yes "$ZOO_ENABLE_PROMETHEUS_METRICS"; then
             zookeeper_enable_prometheus_metrics "$ZOO_CONF_FILE"
         fi
+        zookeeper_export_jvmflags "-Dzookeeper.electionPortBindRetry=0"
     else
         info "User injected custom configuration detected!"
     fi

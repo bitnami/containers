@@ -15,23 +15,23 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "39d830676988d92eb0cc0d3b340384a60cf87fe4af9ee6caa5a2558b69dee8db",
+        "digest": "519635d16f8f5380e5d400dcb21f90c6bbd452479d9ef20a3f848ed3bc473f7b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.20.1-1"
+        "version": "14.21.1-0"
     },
     "parse": {
         "arch": "amd64",
-        "digest": "06f0d8dd9ac0fe5ed1711f6a8e10bade07b6aed5c3d8a36806216e40351d204a",
+        "digest": "d91738ca273ea2bd4b5f5be2924cebbc5941d50cb7466f760253f94ebdf50bc8",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.2.8-0"
+        "version": "5.3.1-0"
     },
     "python": {
         "arch": "amd64",
-        "digest": "88e943f67e0ca48fc1395ed0f15f2a91bec1e2fedc3b417b6e04fca797fae225",
+        "digest": "dfff2a0c97569492baf7268622f81669339e3abc3751f22b9f9c66dce796eff2",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.15-0"
+        "version": "3.8.15-1"
     }
 }

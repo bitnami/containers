@@ -8,16 +8,16 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "88e943f67e0ca48fc1395ed0f15f2a91bec1e2fedc3b417b6e04fca797fae225",
+        "digest": "dfff2a0c97569492baf7268622f81669339e3abc3751f22b9f9c66dce796eff2",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.15-0"
+        "version": "3.8.15-1"
     },
     "pytorch": {
         "arch": "amd64",
-        "digest": "72a7969076cb5c5fbd5279a04cd2c7ee83d33e4501c0e6dce419991c3e3b2e77",
+        "digest": "fafc5b9bc2456614d4c6d3276ef49bd0696778932a008ef9a4ddc2d294e0631a",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.12.1-3"
+        "version": "1.13.0-0"
     }
 }

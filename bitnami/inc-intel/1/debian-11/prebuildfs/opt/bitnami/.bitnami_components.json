@@ -8,16 +8,16 @@
     },
     "inc-intel": {
         "arch": "amd64",
-        "digest": "9c19273e0ddd5ea9883b945350d7af8c2cbeca686436f01a86c4b0d74f045b6f",
+        "digest": "7f0724501f6eaefd5006dc4bf5fea8b07c9dbb3cad534f792fb3ee0556138dc8",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.1-1"
+        "version": "1.14.2-0"
     },
     "python": {
         "arch": "amd64",
-        "digest": "5e62e52fac43cd431f66d39b42c4f9d49ef08ebac64d06c9a7c31b73ab34738e",
+        "digest": "ca91943ef1c9cc9637845cbb697dad40b995b7033dc03cf76c1ca03998c81c0b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.9.15-0"
+        "version": "3.9.15-1"
     }
 }

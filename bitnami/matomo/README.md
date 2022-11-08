@@ -290,8 +290,8 @@ If you are connecting through a reverse proxy (https-to-http) and Matomo is not 
  - `MATOMO_ENABLE_PROXY_URI_HEADER`: Enable 'proxy_uri_header' in Matomo configuration file. Default: **no**
  - `MATOMO_ENABLE_ASSUME_SECURE_PROTOCOL`: Enable 'assume_secure_protocol' in Matomo configuration file. Default: **no**
  - `MATOMO_ENABLE_FORCE_SSL`: Enable 'force_ssl' in Matomo configuration file. Default: **no**
- - `MATOMO_PROXY_CLIENT_HEADER`: Specify the the client IP HTTP Header. Usually 'HTTP_X_FORWARDED_FOR'. No defaults.
- - `MATOMO_PROXY_HOST_HEADER`: Specify the the host IP HTTP Header. Usually 'HTTP_X_FORWARDED_HOST'. No defaults.
+ - `MATOMO_PROXY_CLIENT_HEADER`: Specify the client IP HTTP Header. Usually 'HTTP_X_FORWARDED_FOR'. No defaults.
+ - `MATOMO_PROXY_HOST_HEADER`: Specify the host IP HTTP Header. Usually 'HTTP_X_FORWARDED_HOST'. No defaults.
 
 ##### Example
 

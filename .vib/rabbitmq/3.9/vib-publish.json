@@ -1,0 +1,77 @@
+{
+  "context": {
+    "resources": {
+      "url": "{SHA_ARCHIVE}",
+      "path": "{VIB_ENV_PATH}"
+    }
+  },
+  "phases": {
+    "package": {
+      "actions": [
+        {
+          "action_id": "container-image-package",
+          "params": {
+            "application": {
+              "details": {
+                "name": "{VIB_ENV_CONTAINER}",
+                "tag": "{VIB_ENV_TAG}"
+              }
+            },
+            "architectures": [
+              "linux/amd64"
+            ]
+          }
+        },
+        {
+          "action_id": "container-image-lint",
+          "params": {
+            "threshold": "error"
+          }
+        }
+      ]
+    },
+    "verify": {
+      "actions": [
+        {
+          "action_id": "trivy",
+          "params": {
+            "threshold": "CRITICAL",
+            "vuln_type": [
+              "OS"
+            ]
+          }
+        },
+        {
+          "action_id": "grype",
+          "params": {
+            "threshold": "CRITICAL",
+            "package_type": [
+              "OS"
+            ]
+          }
+        }
+      ]
+    },
+    "publish": {
+      "actions": [
+        {
+          "action_id": "container-image-publish",
+          "params": {
+            "application": {
+              "details": {
+                "name": "{VIB_ENV_CONTAINER}",
+                "tag": "{VIB_ENV_TAG}"
+              }
+            },
+            "repository": {
+              "kind": "OCI",
+              "url": "{VIB_ENV_REGISTRY_URL}",
+              "username": "{VIB_ENV_REGISTRY_USERNAME}",
+              "password":  "{VIB_ENV_REGISTRY_PASSWORD}"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
