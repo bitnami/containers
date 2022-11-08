@@ -77,8 +77,10 @@ jobs:
               echo "No tag found for: ${{ matrix.container }}"
               exit 1
             else
+              rolling_tags="$(yq '.rolling-tags' ${{ matrix.container }}/tags-info.yaml -o json | jq -c)"
               name="$(echo "${{ matrix.container }}" | awk -F '/' '{print $2}')"
               branch="$(echo "${{ matrix.container }}" | awk -F '/' '{print $3}')"
+              echo "rolling_tags=${rolling_tags}" >> $GITHUB_OUTPUT
               echo "tag=${tag}" >> $GITHUB_OUTPUT
               echo "name=${name}" >> $GITHUB_OUTPUT
               echo "branch=${branch}" >> $GITHUB_OUTPUT
@@ -118,6 +120,7 @@ jobs:
           # Container name
           VIB_ENV_CONTAINER: ${{ steps.get-container-metadata.outputs.name }}
           VIB_ENV_TAG: ${{ steps.get-container-metadata.outputs.tag }}
+          VIB_ENV_ROLLING_TAGS: ${{ steps.get-container-metadata.outputs.rolling_tags }}
           VIB_ENV_REGISTRY_URL: ${{ secrets.PROD_MARKETPLACE_REGISTRY_URL }}
           VIB_ENV_REGISTRY_USERNAME: ${{ steps.get-registry-credentials.outputs.marketplace_user }}
           VIB_ENV_REGISTRY_PASSWORD: ${{ steps.get-registry-credentials.outputs.marketplace_passwd }}
