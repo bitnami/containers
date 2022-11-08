@@ -1,5 +1,9 @@
 # Apache Geode packaged by Bitnami
 
+## Container Deprecation Notice
+
+Apache Geode's container image is longer maintained and is now internally tagged to be deprecated. This container image will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 12-08-2022
+
 ## What is Apache Geode?
 
 > Apache Geode is a data management platform that provides advanced capabilities for data-intensive applications.
