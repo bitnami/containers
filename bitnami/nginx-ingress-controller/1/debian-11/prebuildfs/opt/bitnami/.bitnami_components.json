@@ -1,9 +1,9 @@
 {
     "nginx-ingress-controller": {
         "arch": "amd64",
-        "digest": "116010a46db7ba9a34701aef7de0561aec1f23473f799a3941a6ea8a4c335ce4",
+        "digest": "14df1b6c5574d672dd13e9b282521a94ae09959603c9d5f8455fb3c649f1ee80",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.4.0-4"
+        "version": "1.5.1-0"
     }
 }
