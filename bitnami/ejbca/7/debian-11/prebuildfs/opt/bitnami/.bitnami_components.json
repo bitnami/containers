@@ -22,16 +22,16 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "0fda0610f58dd980bcf431d256d3fbad89b58f915af3d9a642b1588057d353f5",
+        "digest": "c4bdede83fe1cef62481e4ff88c32b7af5797bea7cd2415ca98aca00ae897042",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.6.10-1"
+        "version": "10.6.11-0"
     },
     "wildfly": {
         "arch": "amd64",
-        "digest": "427064ed40bbadc27e98925214265fedf8445f1321a00e8c536c3eac7426cc15",
+        "digest": "ec1bc6fa93ef2d49db9f27a96b859a2ec79cbc1b62d22d2b515ec2bc18cda344",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "26.1.2-1"
+        "version": "26.1.2-2"
     }
 }
