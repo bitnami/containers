@@ -8,10 +8,10 @@
     },
     "gitlab-runner-helper": {
         "arch": "amd64",
-        "digest": "fe81cf98377b64e562f77c4b546e77568e058150288d2195b5725db508f3d53b",
+        "digest": "36de63a2a43f991f1c0b0d3318c3440751b4059c5e57fb0baf29501bde78585e",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "15.5.0-0"
+        "version": "15.5.0-1"
     },
     "gosu": {
         "arch": "amd64",
