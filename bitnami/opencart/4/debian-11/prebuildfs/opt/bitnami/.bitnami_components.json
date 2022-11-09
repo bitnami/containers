@@ -22,10 +22,10 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "0fda0610f58dd980bcf431d256d3fbad89b58f915af3d9a642b1588057d353f5",
+        "digest": "c4bdede83fe1cef62481e4ff88c32b7af5797bea7cd2415ca98aca00ae897042",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.6.10-1"
+        "version": "10.6.11-0"
     },
     "opencart": {
         "arch": "amd64",
