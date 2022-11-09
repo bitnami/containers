@@ -8,17 +8,17 @@
     },
     "ini-file": {
         "arch": "amd64",
-        "digest": "c2830edde0e37b0d97444caf3e560ac19f006b8ff6dccc8a3ac575fb3526741e",
+        "digest": "bf97f0becbc1f7af6e84b187909e6f6d16a924fbe88456f7f72f9c59e1616b9b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.4.3-154"
+        "version": "1.4.4-0"
     },
     "pgbouncer": {
         "arch": "amd64",
-        "digest": "ffc6ca76c1fb5ed1204f465fa6bf15b1f2f3aeafef4ff33bc71eecb7b2cf50a5",
+        "digest": "0c771cb59e8ca662c8dc333d05a68d5b50268e9d4fd55a9c5efb32ce4fa8ee2d",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.17.0-156"
+        "version": "1.17.0-157"
     },
     "postgresql-client": {
         "arch": "amd64",
@@ -29,9 +29,9 @@
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "8833550a6f165e2a0f1250cc327d92a3f85b151cb1f49cd0ee4bee0fdf20a21b",
+        "digest": "e72ab0985310f6108f77bc573939cf6b4b27867d6a61cb914d3cfedac60d306c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.3-155"
+        "version": "1.0.5-0"
     }
 }
