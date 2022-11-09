@@ -29,17 +29,17 @@
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "cb0a32f121f58797a77247fe41ae2b9f9b705bdf170f55015963c667edca6360",
+        "digest": "f0e1eb23624312a8ee0c4e5bab439960831424ecd76c88bdc24141a338406f05",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.3-154"
+        "version": "1.0.4-0"
     },
     "wordpress": {
         "arch": "amd64",
-        "digest": "21b973180368876bf18de9f1f25b12da1073a584117ab254ce7d81695f52cf1c",
+        "digest": "24a52d257152d6ed71ec4a81e809f28be4796cca7bdae8cd88a0db1c07dc88a3",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.1.0-3"
+        "version": "6.1.0-4"
     },
     "wp-cli": {
         "arch": "amd64",
