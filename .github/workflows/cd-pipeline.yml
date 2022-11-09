@@ -109,7 +109,7 @@ jobs:
             dsl_path="${dsl_path}/${{ steps.get-container-metadata.outputs.branch }}"
           fi
           echo "dsl_path=${dsl_path}" >> $GITHUB_OUTPUT
-      - uses: vmware-labs/vmware-image-builder-action@main
+      - uses: vmware-labs/vmware-image-builder-action@0.4.7
         name: 'Publish ${{ steps.get-container-metadata.outputs.name }}: ${{ steps.get-container-metadata.outputs.tag }}'
         if: ${{ steps.get-container-metadata.outputs.result == 'ok' }}
         with:
