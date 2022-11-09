@@ -15,16 +15,16 @@
     },
     "jenkins": {
         "arch": "amd64",
-        "digest": "c6f43306b29ee51f41fd20d07c5803b8eca13b375ab8f67096fbc0b725a89324",
+        "digest": "28856028097e1adc4994d83ef6bd1625b3f8bf0a28fec6b77a8b3235942e65b5",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.361.3-0"
+        "version": "2.361.3-1"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "cb0a32f121f58797a77247fe41ae2b9f9b705bdf170f55015963c667edca6360",
+        "digest": "f0e1eb23624312a8ee0c4e5bab439960831424ecd76c88bdc24141a338406f05",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.3-154"
+        "version": "1.0.4-0"
     }
 }
