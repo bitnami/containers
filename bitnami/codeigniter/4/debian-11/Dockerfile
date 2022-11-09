@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.2.10-debian-11-r0" \
+      org.opencontainers.image.ref.name="4.2.10-debian-11-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/codeigniter" \
       org.opencontainers.image.title="codeigniter" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ RUN install_packages ca-certificates curl libaudit1 libbrotli1 libbsd0 libbz2-1.
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "php-8.0.25-2-linux-${OS_ARCH}-debian-11" \
-      "mysql-client-10.6.10-1-linux-${OS_ARCH}-debian-11" \
+      "mysql-client-10.6.11-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
       "codeigniter-4.2.10-0-linux-${OS_ARCH}-debian-11" \
     ) && \
