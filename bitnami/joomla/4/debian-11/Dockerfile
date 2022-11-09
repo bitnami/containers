@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.2.4-debian-11-r4" \
+      org.opencontainers.image.ref.name="4.2.5-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/joomla" \
       org.opencontainers.image.title="joomla" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="4.2.4"
+      org.opencontainers.image.version="4.2.5"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "mysql-client-10.6.10-1-linux-${OS_ARCH}-debian-11" \
       "libphp-8.0.25-0-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.3-154-linux-${OS_ARCH}-debian-11" \
-      "joomla-4.2.4-0-linux-${OS_ARCH}-debian-11" \
+      "joomla-4.2.5-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -51,7 +51,7 @@ RUN /opt/bitnami/scripts/joomla/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="4.2.4" \
+    APP_VERSION="4.2.5" \
     BITNAMI_APP_NAME="joomla" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
