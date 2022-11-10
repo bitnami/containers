@@ -5,7 +5,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="8.1.0-debian-11-r19" \
+      org.opencontainers.image.ref.name="8.1.0-debian-11-r20" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jasperreports" \
       org.opencontainers.image.title="jasperreports" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -23,10 +23,10 @@ RUN install_packages acl ca-certificates curl fontconfig git libaudit1 libbsd0 l
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "java-1.8.352-1-linux-${OS_ARCH}-debian-11" \
-      "tomcat-9.0.68-0-linux-${OS_ARCH}-debian-11" \
-      "postgresql-client-11.17.0-2-linux-${OS_ARCH}-debian-11" \
-      "mysql-client-10.6.10-1-linux-${OS_ARCH}-debian-11" \
-      "render-template-1.0.3-154-linux-${OS_ARCH}-debian-11" \
+      "tomcat-9.0.68-1-linux-${OS_ARCH}-debian-11" \
+      "postgresql-client-11.18.0-0-linux-${OS_ARCH}-debian-11" \
+      "mysql-client-10.6.11-0-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.4-0-linux-${OS_ARCH}-debian-11" \
       "jasperreports-8.1.0-1-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
     ) && \
