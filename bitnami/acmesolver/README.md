@@ -2,7 +2,7 @@
 
 ## What is ACME Solver?
 
-> ACME Solver is a part of the Cert Manager project. It will ensure certificates are valid and up to date periodically, and attempt to renew certificates at an appropriate time before expiry.
+> ACME Solver is a part of the cert-manager project. It will ensure certificates are valid and up to date periodically, and attempt to renew certificates at an appropriate time before expiry.
 > Cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources.
 
 [Overview of ACME Solver](https://github.com/jetstack/cert-manager)
