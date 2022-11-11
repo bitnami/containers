@@ -1,11 +1,11 @@
-# Cert Manager packaged by Bitnami
+# cert-manager packaged by Bitnami
 
-## What is Cert Manager?
+## What is cert-manager?
 
-> Cert Manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources.
+> cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources.
 > Cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources.
 
-[Overview of Cert Manager](https://github.com/jetstack/cert-manager)
+[Overview of cert-manager](https://github.com/jetstack/cert-manager)
 
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
