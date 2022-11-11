@@ -15,10 +15,10 @@
     },
     "ini-file": {
         "arch": "amd64",
-        "digest": "c2830edde0e37b0d97444caf3e560ac19f006b8ff6dccc8a3ac575fb3526741e",
+        "digest": "bf97f0becbc1f7af6e84b187909e6f6d16a924fbe88456f7f72f9c59e1616b9b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.4.3-154"
+        "version": "1.4.4-0"
     },
     "libphp": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "0fda0610f58dd980bcf431d256d3fbad89b58f915af3d9a642b1588057d353f5",
+        "digest": "c4bdede83fe1cef62481e4ff88c32b7af5797bea7cd2415ca98aca00ae897042",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.6.10-1"
+        "version": "10.6.11-0"
     },
     "php": {
         "arch": "amd64",
@@ -50,9 +50,9 @@
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "cb0a32f121f58797a77247fe41ae2b9f9b705bdf170f55015963c667edca6360",
+        "digest": "f0e1eb23624312a8ee0c4e5bab439960831424ecd76c88bdc24141a338406f05",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.3-154"
+        "version": "1.0.4-0"
     }
 }
