@@ -22,17 +22,17 @@
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "0fda0610f58dd980bcf431d256d3fbad89b58f915af3d9a642b1588057d353f5",
+        "digest": "c4bdede83fe1cef62481e4ff88c32b7af5797bea7cd2415ca98aca00ae897042",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.6.10-1"
+        "version": "10.6.11-0"
     },
     "osclass": {
         "arch": "amd64",
-        "digest": "5997932a410a651b473382a8ac96ad23fe5b625a6e5e3a4e215fde16420232fa",
+        "digest": "1c4e241a9a1de164de57c528f695f4339c0b456802a2f9de3b2535dc0a62073f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.2-154"
+        "version": "8.0.2-155"
     },
     "php": {
         "arch": "amd64",
@@ -43,9 +43,9 @@
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "cb0a32f121f58797a77247fe41ae2b9f9b705bdf170f55015963c667edca6360",
+        "digest": "f0e1eb23624312a8ee0c4e5bab439960831424ecd76c88bdc24141a338406f05",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.3-154"
+        "version": "1.0.4-0"
     }
 }
