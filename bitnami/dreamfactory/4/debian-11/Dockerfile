@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.12.0-debian-11-r35" \
+      org.opencontainers.image.ref.name="4.12.0-debian-11-r36" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/dreamfactory" \
       org.opencontainers.image.title="dreamfactory" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -24,10 +24,10 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "php-7.4.33-0-linux-${OS_ARCH}-debian-11" \
       "apache-2.4.54-157-linux-${OS_ARCH}-debian-11" \
       "redis-client-7.0.5-1-linux-${OS_ARCH}-debian-11" \
-      "postgresql-client-11.17.0-2-linux-${OS_ARCH}-debian-11" \
+      "postgresql-client-11.18.0-0-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.11-0-linux-${OS_ARCH}-debian-11" \
       "libphp-7.4.33-0-linux-${OS_ARCH}-debian-11" \
-      "render-template-1.0.3-154-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.4-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
       "dreamfactory-4.12.0-4-linux-${OS_ARCH}-debian-11" \
     ) && \
