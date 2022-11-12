@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.6.3-debian-11-r60" \
+      org.opencontainers.image.ref.name="3.6.3-debian-11-r61" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/zookeeper" \
       org.opencontainers.image.title="zookeeper" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl netcat procps xmlstarlet zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "wait-for-port-1.0.3-155-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.5-0-linux-${OS_ARCH}-debian-11" \
       "java-11.0.17-7-1-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
       "zookeeper-3.6.3-156-linux-${OS_ARCH}-debian-11" \
