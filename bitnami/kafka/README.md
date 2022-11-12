@@ -860,6 +860,10 @@ Configuration changes. Most environment variables now start with `KAFKA_CFG_`, a
 
 * New Bitnami release
 
+## Branch Deprecation Notice
+
+Apache Kafka's branch 3.0 is no longer maintained by upstream and is now internally tagged as to be deprecated. This branch will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 12-09-2022
+
 ## Contributing
 
 We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
