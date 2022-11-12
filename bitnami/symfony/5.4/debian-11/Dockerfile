@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="5.4.15-debian-11-r4" \
+      org.opencontainers.image.ref.name="5.4.15-debian-11-r5" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/symfony" \
       org.opencontainers.image.title="symfony" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ RUN install_packages ca-certificates curl libaudit1 libbrotli1 libbsd0 libbz2-1.
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "php-8.0.25-2-linux-${OS_ARCH}-debian-11" \
-      "mysql-client-10.6.10-1-linux-${OS_ARCH}-debian-11" \
+      "mysql-client-10.6.11-0-linux-${OS_ARCH}-debian-11" \
       "symfony-5.4.15-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
     ) && \
