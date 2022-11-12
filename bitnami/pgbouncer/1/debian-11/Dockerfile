@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.17.0-debian-11-r58" \
+      org.opencontainers.image.ref.name="1.17.0-debian-11-r59" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pgbouncer" \
       org.opencontainers.image.title="pgbouncer" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,7 +22,7 @@ RUN install_packages ca-certificates curl libaudit1 libbsd0 libc-ares2 libcap-ng
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "wait-for-port-1.0.5-0-linux-${OS_ARCH}-debian-11" \
-      "postgresql-client-14.5.0-2-linux-${OS_ARCH}-debian-11" \
+      "postgresql-client-14.6.0-0-linux-${OS_ARCH}-debian-11" \
       "ini-file-1.4.4-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
       "pgbouncer-1.17.0-157-linux-${OS_ARCH}-debian-11" \
