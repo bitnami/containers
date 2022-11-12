@@ -3,6 +3,7 @@ services:
   couchdb:
     image: docker.io/bitnami/couchdb:3
     environment:
+      - COUCHDB_USER=admin
       - COUCHDB_PASSWORD=couchdb
     ports:
       - '5984:5984'
