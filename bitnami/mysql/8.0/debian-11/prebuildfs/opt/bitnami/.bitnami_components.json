@@ -8,10 +8,10 @@
     },
     "ini-file": {
         "arch": "amd64",
-        "digest": "c2830edde0e37b0d97444caf3e560ac19f006b8ff6dccc8a3ac575fb3526741e",
+        "digest": "bf97f0becbc1f7af6e84b187909e6f6d16a924fbe88456f7f72f9c59e1616b9b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.4.3-154"
+        "version": "1.4.4-0"
     },
     "mysql": {
         "arch": "amd64",
