@@ -96,7 +96,7 @@ jobs:
             # Container folder doesn't exists we are assuming a deprecation
             echo "result=skip" >> $GITHUB_OUTPUT
           fi
-      - uses: vmware-labs/vmware-image-builder-action@0.4.10
+      - uses: vmware-labs/vmware-image-builder-action@0.4.11
         name: Verify
         if: ${{ steps.get-container-metadata.outputs.result == 'ok' }}
         with:
