@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.4.2-debian-11-r5" \
+      org.opencontainers.image.ref.name="2.4.2-debian-11-r6" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/airflow-scheduler" \
       org.opencontainers.image.title="airflow-scheduler" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -23,7 +23,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "wait-for-port-1.0.5-0-linux-${OS_ARCH}-debian-11" \
       "python-3.9.15-1-linux-${OS_ARCH}-debian-11" \
-      "postgresql-client-10.22.0-2-linux-${OS_ARCH}-debian-11" \
+      "postgresql-client-10.23.0-0-linux-${OS_ARCH}-debian-11" \
       "ini-file-1.4.4-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
       "airflow-scheduler-2.4.2-1-linux-${OS_ARCH}-debian-11" \
