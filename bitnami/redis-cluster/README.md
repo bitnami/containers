@@ -181,6 +181,8 @@ The following env vars are supported for this container:
 | `REDIS_CLUSTER_REPLICAS`                | Number of replicas for every master that the cluster will have.                                                                                                    |
 | `REDIS_NODES`                           | String delimited by spaces containing the hostnames of all of the nodes that will be part of the cluster                                                           |
 | `REDIS_CLUSTER_ANNOUNCE_IP`             | IP that the node should announce, used for non dynamic ip environents                                                                                              |
+| `REDIS_CLUSTER_ANNOUNCE_PORT`           | Port that the node should announce, used for non dynamic ip environents                                                                                            |
+| `REDIS_CLUSTER_ANNOUNCE_BUS_PORT`       | The cluster bus port to announce                                                                                                                                   |
 | `REDIS_CLUSTER_DYNAMIC_IPS`             | Set to `no` if your Redis(R) cluster will be created with statical IPs. Default: `yes`                                                                             |
 | `REDIS_TLS_ENABLED`                     | Whether to enable TLS for traffic or not. Defaults to `no`.                                                                                                        |
 | `REDIS_TLS_PORT`                        | Port used for TLS secure traffic. Defaults to `6379`.                                                                                                              |

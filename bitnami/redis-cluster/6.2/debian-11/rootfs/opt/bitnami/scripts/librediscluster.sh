@@ -94,8 +94,8 @@ redis_cluster_override_conf() {
     if ! is_empty_value "$REDIS_CLUSTER_ANNOUNCE_PORT"; then
         redis_conf_set "cluster-announce-port" "$REDIS_CLUSTER_ANNOUNCE_PORT"
     fi
-    if ! is_empty_value "$CLUSTER_ANNOUNCE_BUS_PORT"; then
-        redis_conf_set "cluster-announce-bus-port" "$CLUSTER_ANNOUNCE_BUS_PORT"
+    if ! is_empty_value "$REDIS_CLUSTER_ANNOUNCE_BUS_PORT"; then
+        redis_conf_set "cluster-announce-bus-port" "$REDIS_CLUSTER_ANNOUNCE_BUS_PORT"
     fi
     # Multithreading configuration
     if ! is_empty_value "$REDIS_IO_THREADS_DO_READS"; then
