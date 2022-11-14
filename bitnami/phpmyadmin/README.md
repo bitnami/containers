@@ -175,6 +175,8 @@ The phpMyAdmin instance can be customized by specifying environment variables on
 - `PHPMYADMIN_ABSOLUTE_URI`: If specified, absolute URL to phpMyAdmin when generating links. No defaults
 - `DATABASE_ALLOW_NO_PASSWORD`: Whether to allow logins without a password. Default: **yes**
 - `DATABASE_HOST`: Database server host. Default: **mariadb**
+- `DATABASE_USER`: Database username.
+- `DATABASE_PASSWORD`: Database password.
 - `DATABASE_PORT_NUMBER`: Database server port. Default: **3306**
 - `DATABASE_ENABLE_SSL`: Whether to enable SSL for the connection between phpMyAdmin and the MySQL server to secure the connection. Default: **no**
 - `DATABASE_SSL_KEY`: Path to the client key file when using SSL. Default: **no**
