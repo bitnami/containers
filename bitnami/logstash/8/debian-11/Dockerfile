@@ -6,11 +6,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="8.5.0-debian-11-r4" \
+      org.opencontainers.image.ref.name="8.5.1-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/logstash" \
       org.opencontainers.image.title="logstash" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="8.5.0"
+      org.opencontainers.image.version="8.5.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -24,8 +24,8 @@ RUN install_packages ca-certificates curl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "java-11.0.17-7-1-linux-${OS_ARCH}-debian-11" \
-      "yq-4.30.2-0-linux-${OS_ARCH}-debian-11" \
-      "logstash-8.5.0-0-linux-${OS_ARCH}-debian-11" \
+      "yq-4.30.4-0-linux-${OS_ARCH}-debian-11" \
+      "logstash-8.5.1-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -45,7 +45,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/logstash/postunpack.sh
-ENV APP_VERSION="8.5.0" \
+ENV APP_VERSION="8.5.1" \
     BITNAMI_APP_NAME="logstash" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/logstash/bin:$PATH"
