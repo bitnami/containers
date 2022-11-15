@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="6.0.2-debian-11-r16" \
+      org.opencontainers.image.ref.name="6.0.3-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mongodb" \
       org.opencontainers.image.title="mongodb" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="6.0.2"
+      org.opencontainers.image.version="6.0.3"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,10 +22,10 @@ RUN install_packages ca-certificates curl libbrotli1 libcom-err2 libcurl4 libffi
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "mongodb-shell-1.6.0-1-linux-${OS_ARCH}-debian-11" \
-      "yq-4.30.1-0-linux-${OS_ARCH}-debian-11" \
+      "yq-4.30.3-0-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.5-0-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.4-0-linux-${OS_ARCH}-debian-11" \
-      "mongodb-6.0.2-1-linux-${OS_ARCH}-debian-11" \
+      "mongodb-6.0.3-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -44,7 +44,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb/postunpack.sh
-ENV APP_VERSION="6.0.2" \
+ENV APP_VERSION="6.0.3" \
     BITNAMI_APP_NAME="mongodb" \
     PATH="/opt/bitnami/mongodb/bin:/opt/bitnami/common/bin:$PATH"
 
