@@ -40,7 +40,7 @@ php_conf_set memory_limit "$PHP_DEFAULT_MEMORY_LIMIT"
 # Fix DOKU_INC, since we split application from state, DokuWiki's plugins and templates need to know where they live
 info "Fix DOKU_INC variable"
 auto_prepend_file="$DOKUWIKI_BASE_DIR/conf/auto_prepend.php"
-printf '<?php\ndefine("DOKU_INC", "%s/");\n' "$DOKUWIKI_BASE_DIR" >>$auto_prepend_file
+printf '<?php\ndefine("DOKU_INC", "%s/");\n' "$DOKUWIKI_BASE_DIR" >>"$auto_prepend_file"
 php_conf_set auto_prepend_file "$auto_prepend_file"
 
 # Enable default web server configuration for DokuWiki
