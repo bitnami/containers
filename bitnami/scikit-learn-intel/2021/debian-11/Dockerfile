@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2021.7.0-debian-11-r7" \
+      org.opencontainers.image.ref.name="2021.7.1-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/scikit-learn-intel" \
       org.opencontainers.image.title="scikit-learn-intel" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2021.7.0"
+      org.opencontainers.image.version="2021.7.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ RUN install_packages ca-certificates curl libbz2-1.0 libcom-err2 libcrypt1 libff
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.9.15-2-linux-${OS_ARCH}-debian-11" \
-      "scikit-learn-intel-2021.7.0-0-linux-${OS_ARCH}-debian-11" \
+      "scikit-learn-intel-2021.7.1-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -42,7 +42,7 @@ RUN mkdir /.local && chmod g+rwX /.local
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/scikit-learn-intel/postunpack.sh
-ENV APP_VERSION="2021.7.0" \
+ENV APP_VERSION="2021.7.1" \
     BITNAMI_APP_NAME="scikit-learn-intel" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:$PATH"
 
