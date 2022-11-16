@@ -15,9 +15,9 @@
     },
     "scikit-learn-intel": {
         "arch": "amd64",
-        "digest": "3579c28e8e65a6842cd49c67c6f07b281c4136e02a81c56ae9d022d8dd088b22",
+        "digest": "03fd5452e6bad8f5287b6240865ee92abd4063a9a4dcdf417886d6c1c135f718",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2021.7.0-0"
+        "version": "2021.7.1-0"
     }
 }
