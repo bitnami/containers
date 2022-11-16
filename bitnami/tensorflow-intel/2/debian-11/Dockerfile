@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.10.0-debian-11-r20" \
+      org.opencontainers.image.ref.name="2.10.1-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/tensorflow-intel" \
       org.opencontainers.image.title="tensorflow-intel" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.10.0"
+      org.opencontainers.image.version="2.10.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ RUN install_packages ca-certificates curl libbz2-1.0 libcom-err2 libcrypt1 libff
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.9.15-2-linux-${OS_ARCH}-debian-11" \
-      "tensorflow-intel-2.10.0-1-linux-${OS_ARCH}-debian-11" \
+      "tensorflow-intel-2.10.1-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -41,7 +41,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/tensorflow-intel/postunpack.sh
-ENV APP_VERSION="2.10.0" \
+ENV APP_VERSION="2.10.1" \
     BITNAMI_APP_NAME="tensorflow-intel" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:$PATH"
 
