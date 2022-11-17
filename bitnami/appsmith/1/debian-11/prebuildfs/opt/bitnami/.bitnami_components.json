@@ -1,0 +1,65 @@
+{
+    "appsmith": {
+        "arch": "amd64",
+        "digest": "3f0a20327a1b57ca924434a3113434133de989ba74dee60de2b377e44daa5e03",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.8.8-0"
+    },
+    "gosu": {
+        "arch": "amd64",
+        "digest": "f21869b27c26b9c3053bce8b419a0fdf1dc45fcf13a7c2058e0afb6996d3687f",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.14.0-155"
+    },
+    "java": {
+        "arch": "amd64",
+        "digest": "972009952c7ab083836ce1943c7768daac74ec3cbea63eb5994b38e7c9794b75",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "11.0.17-7-1"
+    },
+    "mongodb-shell": {
+        "arch": "amd64",
+        "digest": "62f93a1f29257014cb2ce2183e7ee9fcf926321f5fb592a7e1033107230e1baf",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.6.0-1"
+    },
+    "nginx": {
+        "arch": "amd64",
+        "digest": "8643036fdd3909a1f96fc8d2d09fa936c5c77cdb0ff424223f856b7a75c5e924",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.23.2-1"
+    },
+    "node": {
+        "arch": "amd64",
+        "digest": "4116530a13d5a1d33cdde22778351bd5becc8f2344daa37a4c5a0c9659619e24",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "16.18.1-0"
+    },
+    "python": {
+        "arch": "amd64",
+        "digest": "12887092173822ca8be66e0431a14fadb8bec7e01b97b666e0a04da57b99eb69",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "3.8.15-2"
+    },
+    "render-template": {
+        "arch": "amd64",
+        "digest": "f0e1eb23624312a8ee0c4e5bab439960831424ecd76c88bdc24141a338406f05",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.4-0"
+    },
+    "wait-for-port": {
+        "arch": "amd64",
+        "digest": "e72ab0985310f6108f77bc573939cf6b4b27867d6a61cb914d3cfedac60d306c",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.5-0"
+    }
+}
