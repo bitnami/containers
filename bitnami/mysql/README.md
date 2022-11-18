@@ -492,7 +492,7 @@ services:
     ports:
       - '3306:3307'
     volumes:
-      - /path/to/my_custom.cnf:/opt/bitnami/mysql/conf/bitnami/my_custom.cnf:ro
+      - /path/to/my_custom.cnf:/opt/bitnami/mysql/conf/my_custom.cnf:ro
       - data:/bitnami/mysql/data
 volumes:
   data:
