@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="16.0.20221015-debian-11-r8" \
+      org.opencontainers.image.ref.name="16.0.20221115-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/odoo" \
       org.opencontainers.image.title="odoo" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="16.0.20221015"
+      org.opencontainers.image.version="16.0.20221115"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -25,7 +25,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "render-template-1.0.4-0-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-13.9.0-0-linux-${OS_ARCH}-debian-11" \
       "node-14.21.1-0-linux-${OS_ARCH}-debian-11" \
-      "odoo-16.0.20221015-0-linux-${OS_ARCH}-debian-11" \
+      "odoo-16.0.20221115-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -49,7 +49,7 @@ RUN if [ "$OS_ARCH" = "amd64" ]; then \
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/odoo/postunpack.sh
-ENV APP_VERSION="16.0.20221015" \
+ENV APP_VERSION="16.0.20221115" \
     BITNAMI_APP_NAME="odoo" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/odoo/bin:$PATH"
 
