@@ -240,7 +240,7 @@ to_host_and_port() {
 
     if [ "${#host_and_port[*]}" -eq "1" ]; then
         if is_boolean_yes "$REDIS_TLS_ENABLED"; then
-            host_and_port=("${host_and_port[0]}" "${REDIS_TLS_PORT}")
+            host_and_port=("${host_and_port[0]}" "${REDIS_TLS_PORT_NUMBER}")
         else
             host_and_port=("${host_and_port[0]}" "${REDIS_PORT_NUMBER}")
         fi
