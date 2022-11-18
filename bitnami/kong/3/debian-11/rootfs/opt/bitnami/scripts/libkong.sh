@@ -352,18 +352,3 @@ install_opentelemetry() {
     mkdir -p "$destinationDir"
     ln -s "$sourceDir" "${destinationDir}/opentelemetry"
 }
-
-########################
-# Returns kong major version
-# Globals:
-#   None
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-get_kong_major_version() {
-    kong_version="$("${KONG_BASE_DIR}/bin/kong" version)"
-    major_version="$(get_sematic_version "$kong_version" 1)"
-    echo "${major_version:-0}"
-}
