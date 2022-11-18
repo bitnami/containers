@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.5.1-debian-11-r4" \
+      org.opencontainers.image.ref.name="1.5.1-debian-11-r5" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/nginx-ingress-controller" \
       org.opencontainers.image.title="nginx-ingress-controller" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -51,6 +51,8 @@ RUN setcap    cap_net_bind_service=+ep /usr/local/nginx/sbin/nginx && \
 RUN setcap    cap_net_bind_service=+ep /nginx-ingress-controller && \
     setcap -v cap_net_bind_service=+ep /nginx-ingress-controller
 RUN mkdir -p /etc/ingress-controller/auth /etc/ingress-controller/ssl
+RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
+    ln -sf /dev/stderr /var/log/nginx/error.log
 ENV APP_VERSION="1.5.1" \
     BITNAMI_APP_NAME="nginx-ingress-controller" \
     LD_LIBRARY_PATH="/lib:/usr/lib:/usr/local/lib:/modules_mount/etc/nginx/modules/otel" \
