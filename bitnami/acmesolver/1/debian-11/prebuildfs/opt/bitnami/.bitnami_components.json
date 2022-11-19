@@ -1,9 +1,9 @@
 {
     "acmesolver": {
         "arch": "amd64",
-        "digest": "ddc4ca81ca273fd2adb57b9fa1f29ea5b3fcfce33ba44b33089167555c9c733e",
+        "digest": "c124855af840791374375ff76cfe48e5b4a2abf5fb0243c5a2b459c42c2b3a41",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.10.0-0"
+        "version": "1.10.1-0"
     }
 }
