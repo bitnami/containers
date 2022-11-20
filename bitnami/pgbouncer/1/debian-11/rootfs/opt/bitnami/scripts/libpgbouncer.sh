@@ -217,9 +217,13 @@ pgbouncer_initialize() {
             database_value+=" connect_query='${PGBOUNCER_CONNECT_QUERY}'"
         fi
         ini-file set --section "databases" --key "$PGBOUNCER_DATABASE" --value "$database_value" "$PGBOUNCER_CONF_FILE"
+        i=0; while true; VAR_NAME="DATABASE${i}_DSN"; do if [ -z "${!VAR_NAME+x}" ]; then break; else dsn=${!VAR_NAME}; echo \$dsn; ini-file set --section databases --key "$(echo $dsn | cut -d = -f 1)" --value "$(echo $dsn | cut -d = -f 2-)" "$PGBOUNCER_CONF_FILE"; i=$(( $i + 1 )); fi; done;
         local -r -a key_value_pairs=(
             "listen_port:${PGBOUNCER_PORT}"
             "listen_addr:${PGBOUNCER_LISTEN_ADDRESS}"
+            "unix_socket_dir:${PGBOUNCER_SOCKET_DIR}"
+            "unix_socket_mode:${PGBOUNCER_SOCKET_MODE}"
+            "unix_socket_group:${PGBOUNCER_SOCKET_GROUP}"
             "auth_file:${PGBOUNCER_AUTH_FILE}"
             "auth_type:${PGBOUNCER_AUTH_TYPE}"
             "auth_query:${PGBOUNCER_AUTH_QUERY}"
@@ -243,6 +247,10 @@ pgbouncer_initialize() {
             "min_pool_size:${PGBOUNCER_MIN_POOL_SIZE}"
             "reserve_pool_size:${PGBOUNCER_RESERVE_POOL_SIZE}"
             "ignore_startup_parameters:${PGBOUNCER_IGNORE_STARTUP_PARAMETERS}"
+            "log_connections:{$PGBOUNCER_LOG_CONNECTIONS}"
+            "log_disconnections:{$PGBOUNCER_LOG_CONNECTIONS}"
+            "log_pooler_errors:{$PGBOUNCER_LOG_POOLER_ERRORS}"
+            "log_stats:{$PGBOUNCER_LOG_STATS}"
         )
         for pair in "${key_value_pairs[@]}"; do
             local key value
