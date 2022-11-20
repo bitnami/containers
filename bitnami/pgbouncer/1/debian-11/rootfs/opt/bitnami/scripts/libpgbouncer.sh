@@ -251,6 +251,7 @@ pgbouncer_initialize() {
             "log_disconnections:{$PGBOUNCER_LOG_CONNECTIONS}"
             "log_pooler_errors:{$PGBOUNCER_LOG_POOLER_ERRORS}"
             "log_stats:{$PGBOUNCER_LOG_STATS}"
+            "stats_period:{$PGBOUNCER_STATS_PERIOD}"
         )
         for pair in "${key_value_pairs[@]}"; do
             local key value
