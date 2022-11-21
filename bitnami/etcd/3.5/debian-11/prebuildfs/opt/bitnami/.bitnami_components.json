@@ -1,10 +1,10 @@
 {
     "etcd": {
         "arch": "amd64",
-        "digest": "83cb31342af4b898223f50af4bfa5a7f206450547854601331e1855ac1c2798d",
+        "digest": "b410146402257ca6020614b9fd859ac7d34c18b0c5f131f585cdfdc3334540f3",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.5.5-2"
+        "version": "3.5.6-0"
     },
     "gosu": {
         "arch": "amd64",
