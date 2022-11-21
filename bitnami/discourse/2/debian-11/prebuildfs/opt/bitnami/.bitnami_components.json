@@ -22,24 +22,24 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "39d830676988d92eb0cc0d3b340384a60cf87fe4af9ee6caa5a2558b69dee8db",
+        "digest": "519635d16f8f5380e5d400dcb21f90c6bbd452479d9ef20a3f848ed3bc473f7b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.20.1-1"
+        "version": "14.21.1-0"
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "588dd87aabfeb3e4a144b5592bfbf49f8676b528aeca00dcf7900c2a4c1a248a",
+        "digest": "b87c848185afbf29237165e05d1e7e316bc38c2c0b89df3eea3cdc14d5f2875a",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.5.0-2"
+        "version": "14.6.0-0"
     },
     "python": {
         "arch": "amd64",
-        "digest": "88e943f67e0ca48fc1395ed0f15f2a91bec1e2fedc3b417b6e04fca797fae225",
+        "digest": "12887092173822ca8be66e0431a14fadb8bec7e01b97b666e0a04da57b99eb69",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.15-0"
+        "version": "3.8.15-2"
     },
     "ruby": {
         "arch": "amd64",
@@ -50,9 +50,9 @@
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "8833550a6f165e2a0f1250cc327d92a3f85b151cb1f49cd0ee4bee0fdf20a21b",
+        "digest": "e72ab0985310f6108f77bc573939cf6b4b27867d6a61cb914d3cfedac60d306c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.3-155"
+        "version": "1.0.5-0"
     }
 }
