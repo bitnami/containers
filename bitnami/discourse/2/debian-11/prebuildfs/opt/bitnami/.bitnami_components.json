@@ -8,10 +8,10 @@
     },
     "discourse": {
         "arch": "amd64",
-        "digest": "e897366cab6a0347f780408ce875c12d282561c4912f485e1831235b1b540289",
+        "digest": "cb103967c97ec61de689375838b0a3b0346c73e79ebac89b790c1657fe3bc58e",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.8.9-1"
+        "version": "2.8.11-0"
     },
     "gosu": {
         "arch": "amd64",
