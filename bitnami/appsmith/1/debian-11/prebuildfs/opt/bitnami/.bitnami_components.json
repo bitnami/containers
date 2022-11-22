@@ -1,10 +1,10 @@
 {
     "appsmith": {
         "arch": "amd64",
-        "digest": "3f0a20327a1b57ca924434a3113434133de989ba74dee60de2b377e44daa5e03",
+        "digest": "10843c102b5a9eb4b1146a46930a3e86e9539a2d639d75dcd73556918400a182",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.8.8-0"
+        "version": "1.8.9-0"
     },
     "gosu": {
         "arch": "amd64",
