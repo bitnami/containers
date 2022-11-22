@@ -263,7 +263,7 @@ This greatly simplifies Kafka’s architecture by consolidating responsibility f
 
 More Info can be found here: https://developer.confluent.io/learn/kraft/
 
-> **NOTE:** KRaft is in early access and should be used in development only. It is not suitable for production.
+> **NOTE:** According to [KIP-833](https://cwiki.apache.org/confluence/display/KAFKA/KIP-833%3A+Mark+KRaft+as+Production+Ready), KRaft is now in a production-ready state.
 
 Configuration here has been crafted from the [Kraft Repo](https://github.com/apache/kafka/tree/trunk/config/kraft).
 
