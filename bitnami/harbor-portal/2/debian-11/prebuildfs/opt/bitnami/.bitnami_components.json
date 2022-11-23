@@ -8,23 +8,23 @@
     },
     "harbor": {
         "arch": "amd64",
-        "digest": "a91a260084c489fb6192df29c4e73e75c84f3f17cc8d1d9e9adf2cf581f80d0f",
+        "digest": "a6598a59c07a0c8636ad48fb738a86fbc5b732cfafdc03956c86197508247a57",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.6.1-0"
+        "version": "2.6.2-0"
     },
     "nginx": {
         "arch": "amd64",
-        "digest": "234ea65b35b51d7a486578ddf1d49ecbda4fbd71ad09f531d8368ce2c45f4e97",
+        "digest": "8643036fdd3909a1f96fc8d2d09fa936c5c77cdb0ff424223f856b7a75c5e924",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.23.2-0"
+        "version": "1.23.2-1"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "cb0a32f121f58797a77247fe41ae2b9f9b705bdf170f55015963c667edca6360",
+        "digest": "f0e1eb23624312a8ee0c4e5bab439960831424ecd76c88bdc24141a338406f05",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.3-154"
+        "version": "1.0.4-0"
     }
 }
