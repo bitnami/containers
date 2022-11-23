@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="8.0.2-debian-11-r56" \
+      org.opencontainers.image.ref.name="8.0.2-debian-11-r57" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/osclass" \
       org.opencontainers.image.title="osclass" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -24,7 +24,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "php-8.0.25-2-linux-${OS_ARCH}-debian-11" \
       "apache-2.4.54-157-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.11-0-linux-${OS_ARCH}-debian-11" \
-      "libphp-8.0.25-0-linux-${OS_ARCH}-debian-11" \
+      "libphp-8.0.26-0-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.4-0-linux-${OS_ARCH}-debian-11" \
       "osclass-8.0.2-155-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
