@@ -1,0 +1,44 @@
+{
+    "git": {
+        "arch": "amd64",
+        "digest": "32f12c3ed2d9cf4c739826278da6d97dac27cf92f42513430207d8cf719d45b8",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "2.38.1-1"
+    },
+    "gitea": {
+        "arch": "amd64",
+        "digest": "b1afd462ae7b1d68fa4a7ae7766bc423c3331a1a2d65b7b31853bec789ba06be",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.17.3-0"
+    },
+    "gosu": {
+        "arch": "amd64",
+        "digest": "7969f4cc8ad0a260f891cccf5694686a513f4706b48771d605645be1f3f072e2",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.14.0-156"
+    },
+    "ini-file": {
+        "arch": "amd64",
+        "digest": "bf97f0becbc1f7af6e84b187909e6f6d16a924fbe88456f7f72f9c59e1616b9b",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.4.4-0"
+    },
+    "render-template": {
+        "arch": "amd64",
+        "digest": "f0e1eb23624312a8ee0c4e5bab439960831424ecd76c88bdc24141a338406f05",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.4-0"
+    },
+    "wait-for-port": {
+        "arch": "amd64",
+        "digest": "e72ab0985310f6108f77bc573939cf6b4b27867d6a61cb914d3cfedac60d306c",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.5-0"
+    }
+}
