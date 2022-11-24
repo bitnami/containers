@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.6.1-debian-11-r6" \
+      org.opencontainers.image.ref.name="2.6.1-debian-11-r7" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kubeapps-dashboard" \
       org.opencontainers.image.title="kubeapps-dashboard" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,9 +21,9 @@ RUN install_packages ca-certificates curl libcrypt1 libgeoip1 libpcre3 libssl1.1
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "nginx-1.23.2-1-linux-${OS_ARCH}-debian-11" \
-      "render-template-1.0.4-0-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.4-1-linux-${OS_ARCH}-debian-11" \
       "kubeapps-2.6.1-0-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
