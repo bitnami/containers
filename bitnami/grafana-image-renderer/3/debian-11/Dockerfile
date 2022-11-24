@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.6.2-debian-11-r0" \
+      org.opencontainers.image.ref.name="3.6.2-debian-11-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/grafana-image-renderer" \
       org.opencontainers.image.title="grafana-image-renderer" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,8 +22,8 @@ RUN install_packages ca-certificates chromium curl fonts-freefont-ttf fonts-ipaf
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.8.15-2-linux-${OS_ARCH}-debian-11" \
-      "node-16.18.1-0-linux-${OS_ARCH}-debian-11" \
-      "grafana-image-renderer-3.6.2-0-linux-${OS_ARCH}-debian-11" \
+      "node-16.18.1-1-linux-${OS_ARCH}-debian-11" \
+      "grafana-image-renderer-3.6.2-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
