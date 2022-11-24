@@ -1,31 +1,31 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "f21869b27c26b9c3053bce8b419a0fdf1dc45fcf13a7c2058e0afb6996d3687f",
+        "digest": "7969f4cc8ad0a260f891cccf5694686a513f4706b48771d605645be1f3f072e2",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-155"
+        "version": "1.14.0-156"
     },
     "jasperreports": {
         "arch": "amd64",
-        "digest": "1d9fcc4b6d9b1071a7aad4a6c6d200b5aaa792fa3581db6f22fa874031b9324a",
+        "digest": "cf1d75da7c84bee1d9ea84fae557d834892c1f07ced82df03a22d36f292e64ef",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.0-1"
+        "version": "8.1.0-2"
     },
     "java": {
         "arch": "amd64",
-        "digest": "e482df0561ee639bf2602c4e91f4ee1a48285ad5e2bdc994c7c37825664d7a82",
+        "digest": "1214b3b5e02e9ea11c64f67dda24648ded9f896552bafb7ceaabea026a61cba7",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.8.352-1"
+        "version": "1.8.352-2"
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "c4bdede83fe1cef62481e4ff88c32b7af5797bea7cd2415ca98aca00ae897042",
+        "digest": "5c67ad12863f967c435da9070c023bf5342c83f2a82d03c7e822cfbc28c342d1",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.6.11-0"
+        "version": "10.6.11-1"
     },
     "postgresql-client": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "f0e1eb23624312a8ee0c4e5bab439960831424ecd76c88bdc24141a338406f05",
+        "digest": "045804695ee2c857d91f28ba623f8c5f6898f5ae9016ee78504d3af76411c261",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.4-0"
+        "version": "1.0.4-1"
     },
     "tomcat": {
         "arch": "amd64",
