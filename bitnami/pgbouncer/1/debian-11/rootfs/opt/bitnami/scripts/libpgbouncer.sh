@@ -217,7 +217,20 @@ pgbouncer_initialize() {
             database_value+=" connect_query='${PGBOUNCER_CONNECT_QUERY}'"
         fi
         ini-file set --section "databases" --key "$PGBOUNCER_DATABASE" --value "$database_value" "$PGBOUNCER_CONF_FILE"
-        i=0; while true; VAR_NAME="DATABASE${i}_DSN"; do if [ -z "${!VAR_NAME+x}" ]; then break; else dsn=${!VAR_NAME}; echo \$dsn; ini-file set --section databases --key "$(echo $dsn | cut -d = -f 1)" --value "$(echo $dsn | cut -d = -f 2-)" "$PGBOUNCER_CONF_FILE"; i=$(( $i + 1 )); fi; done;
+
+        i=0; 
+        while true; VAR_NAME="DATABASE${i}_DSN"; 
+        do 
+            if [ -z "${!VAR_NAME+x}" ]; then
+                break;
+            else
+                dsn=${!VAR_NAME};
+                echo "conntection: $dsn";
+                ini-file set --section databases --key "$(echo $dsn | cut -d = -f 1)" --value "$(echo $dsn | cut -d = -f 2-)" "$PGBOUNCER_CONF_FILE";
+                i=$(( $i + 1 ));
+            fi;
+        done;
+
         local -r -a key_value_pairs=(
             "listen_port:${PGBOUNCER_PORT}"
             "listen_addr:${PGBOUNCER_LISTEN_ADDRESS}"
