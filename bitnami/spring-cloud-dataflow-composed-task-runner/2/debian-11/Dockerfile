@@ -22,9 +22,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libgcc-s1 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-1.8.352-1-linux-${OS_ARCH}-debian-11" \
+      "java-1.8.352-2-linux-${OS_ARCH}-debian-11" \
       "spring-cloud-dataflow-composed-task-runner-2.9.6-1-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
