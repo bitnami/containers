@@ -5,7 +5,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.361.4-debian-11-r2" \
+      org.opencontainers.image.ref.name="2.361.4-debian-11-r3" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jenkins" \
       org.opencontainers.image.title="jenkins" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,9 +22,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl fontconfig git libfontconfig1 openssh-client procps unzip zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "render-template-1.0.4-0-linux-${OS_ARCH}-debian-11" \
-      "java-11.0.17-7-1-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.4-1-linux-${OS_ARCH}-debian-11" \
+      "java-11.0.17-7-2-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
       "jenkins-2.361.4-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
