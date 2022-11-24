@@ -5,7 +5,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.3.0-6080-debian-11-r7" \
+      org.opencontainers.image.ref.name="4.3.0-6080-debian-11-r8" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/reportserver" \
       org.opencontainers.image.title="reportserver" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,12 +22,12 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libaudit1 libcap-ng0 libgcc-s1 libicu67 liblzma5 libncurses6 libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 procps xmlstarlet zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-11.0.17-7-1-linux-${OS_ARCH}-debian-11" \
-      "tomcat-9.0.69-0-linux-${OS_ARCH}-debian-11" \
-      "mysql-client-10.6.11-0-linux-${OS_ARCH}-debian-11" \
+      "java-11.0.17-7-2-linux-${OS_ARCH}-debian-11" \
+      "tomcat-9.0.69-1-linux-${OS_ARCH}-debian-11" \
+      "mysql-client-10.6.11-1-linux-${OS_ARCH}-debian-11" \
       "reportserver-4.3.0-6080-0-linux-${OS_ARCH}-debian-11" \
-      "render-template-1.0.4-0-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.4-1-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
