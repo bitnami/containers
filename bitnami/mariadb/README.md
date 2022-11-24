@@ -176,10 +176,7 @@ $ docker-compose up -d
 
 ### Initializing a new instance
 
-The container can execute custom files on the first start and on every start. Files with extensions `.sh`, `.sql` and `.sql.gz` are supported.
-
-- Files in `/docker-entrypoint-initdb.d` will only execute on the first container start.
-- Files in `/docker-entrypoint-startdb.d` will execute on every container start.
+When the container is executed for the first time, it will execute the files with extensions `.sh`, `.sql` and `.sql.gz` located at `/docker-entrypoint-startdb.d`.
 
 In order to have your custom files inside the docker image you can mount them as a volume.
 
