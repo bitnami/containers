@@ -354,11 +354,11 @@ ejbca_generate_ca() {
             --caname "$EJBCA_CA_NAME" \
             --tokenType "soft" \
             --tokenPass "null" \
-            --keytype "$EJBCA_CA_KEYTYPE" \
-            --keyspec "$EJBCA_CA_KEYSPEC" \
-            -v "$EJBCA_CA_CERT_VALIDITY" \
-            --policy "$EJBCA_CA_CERT_POLICY_ID" \
-            -s "$EJBCA_CA_CERT_SIGNATURE_ALGORITHM" \
+            --keytype "RSA" \
+            --keyspec "3072" \
+            -v "3652" \
+            --policy "null" \
+            -s "SHA256WithRSA" \
             -type "x509"
 
         info "Add superadmin user"
@@ -565,14 +565,8 @@ ejbca_initialize() {
         export EJBCA_KEYSTORE_PASSWORD
         EJBCA_WILDFLY_ADMIN_PASSWORD="${EJBCA_WILDFLY_ADMIN_PASSWORD:-$(generate_random_string -t alphanumeric)}"
         export EJBCA_WILDFLY_ADMIN_PASSWORD
-
-        ## Initial certificate setup
-        export EJBCA_BASE_DN="${EJBCA_BASE_DN:-O=Example CA,C=SE,UID=c-$(generate_random_string -t alphanumeric)}"
-        export EJBCA_CA_KEYTYPE="${EJBCA_CA_KEYTYPE:-RSA}"
-        export EJBCA_CA_KEYSPEC="${EJBCA_CA_KEYSPEC:-3072}"
-        export EJBCA_CA_CERT_VALIDITY="${EJBCA_CA_CERT_VALIDITY:-3652}"
-        export EJBCA_CA_CERT_POLICY_ID="${EJBCA_CA_CERT_POLICY_ID:-null}"
-        export EJBCA_CA_CERT_SIGNATURE_ALGORITHM="${EJBCA_CA_CERT_SIGNATURE_ALGORITHM:-SHA256WithRSA}"
+        EJBCA_BASE_DN="${EJBCA_BASE_DN:-O=Example CA,C=SE,UID=c-$(generate_random_string -t alphanumeric)}"
+        export EJBCA_BASE_DN
 
         # Check if external keystore
         if [[ -f "$EJBCA_SERVER_CERT_FILE" && -n "$EJBCA_SERVER_CERT_PASSWORD" ]]; then

@@ -5,7 +5,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="7.10.0-2-debian-11-r8" \
+      org.opencontainers.image.ref.name="7.10.0-2-debian-11-r9" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ejbca" \
       org.opencontainers.image.title="ejbca" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,11 +22,11 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages acl ca-certificates curl libaio1 libaudit1 libcap-ng0 libgcc-s1 libicu67 liblzma5 libncurses6 libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-11.0.17-7-1-linux-${OS_ARCH}-debian-11" \
-      "wildfly-26.1.2-2-linux-${OS_ARCH}-debian-11" \
-      "mysql-client-10.6.11-0-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
-      "ejbca-7.10.0-2-0-linux-${OS_ARCH}-debian-11" \
+      "java-11.0.17-7-2-linux-${OS_ARCH}-debian-11" \
+      "wildfly-26.1.2-3-linux-${OS_ARCH}-debian-11" \
+      "mysql-client-10.6.11-1-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
+      "ejbca-7.10.0-2-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
