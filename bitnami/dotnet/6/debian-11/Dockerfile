@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="6.0.11-debian-11-r4" \
+      org.opencontainers.image.ref.name="6.0.11-debian-11-r5" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/dotnet" \
       org.opencontainers.image.title="dotnet" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages build-essential ca-certificates curl git libcap2-bin libgcc-s1 libicu-dev liblttng-ust-dev libsqlite3-dev libssl-dev libstdc++6 pkg-config procps unzip wget zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "dotnet-6.0.11-0-linux-${OS_ARCH}-debian-11" \
+      "dotnet-6.0.11-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
