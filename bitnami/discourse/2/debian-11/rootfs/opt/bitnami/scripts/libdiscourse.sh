@@ -243,6 +243,8 @@ discourse_create_conf_file() {
     # Database credentials
     discourse_conf_set "db_host" "$DISCOURSE_DATABASE_HOST"
     discourse_conf_set "db_port" "$DISCOURSE_DATABASE_PORT_NUMBER"
+    discourse_conf_set "db_backup_host" "$DISCOURSE_DB_BACKUP_HOST"
+    discourse_conf_set "db_backup_port" "$DISCOURSE_DB_BACKUP_PORT"
     discourse_conf_set "db_username" "$DISCOURSE_DATABASE_USER"
     discourse_conf_set "db_password" "$DISCOURSE_DATABASE_PASSWORD"
     discourse_conf_set "db_name" "$DISCOURSE_DATABASE_NAME"
