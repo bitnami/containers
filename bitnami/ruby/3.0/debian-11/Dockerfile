@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.0.4-debian-11-r61" \
+      org.opencontainers.image.ref.name="3.0.4-debian-11-r62" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ruby" \
       org.opencontainers.image.title="ruby" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -20,7 +20,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages build-essential ca-certificates curl git libcrypt1 libreadline-dev libreadline8 libsqlite3-dev libssl-dev libssl1.1 libtinfo6 pkg-config procps sqlite3 unzip wget zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "ruby-3.0.4-154-linux-${OS_ARCH}-debian-11" \
+      "ruby-3.0.4-155-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
