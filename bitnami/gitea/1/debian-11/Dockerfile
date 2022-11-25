@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.17.3-debian-11-r0" \
+      org.opencontainers.image.ref.name="1.17.3-debian-11-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/gitea" \
       org.opencontainers.image.title="gitea" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,9 +22,9 @@ RUN install_packages acl ca-certificates curl libbrotli1 libcom-err2 libcurl4 li
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
-      "wait-for-port-1.0.5-0-linux-${OS_ARCH}-debian-11" \
-      "render-template-1.0.4-0-linux-${OS_ARCH}-debian-11" \
-      "ini-file-1.4.4-0-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.5-1-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.4-1-linux-${OS_ARCH}-debian-11" \
+      "ini-file-1.4.4-1-linux-${OS_ARCH}-debian-11" \
       "git-2.38.1-1-linux-${OS_ARCH}-debian-11" \
       "gitea-1.17.3-0-linux-${OS_ARCH}-debian-11" \
     ) && \
