@@ -109,10 +109,10 @@ gitea_initialize() {
     local database_port="${GITEA_DATABASE_HOST#*:}"
     if is_empty_value "$database_port" || [[ "$database_port" == "$database_host" ]]; then
         if [[ "${GITEA_DATABASE_TYPE}" == "mysql" ]]; then
-            database_port="3306"
+            database_port="${GITEA_DATABASE_PORT_NUMBER:-3306}"
         else
             # Postgresql default port
-            database_port="5432"
+            database_port="${GITEA_DATABASE_PORT_NUMBER:-5432}"
         fi
     fi
     info "Waiting for database connection..."
@@ -262,7 +262,7 @@ gitea_pass_wizard() {
     debug "Install"
     curl_data_opts=(
         "--data-urlencode" "db_type=${GITEA_DATABASE_TYPE}"
-        "--data-urlencode" "db_host=${GITEA_DATABASE_HOST}"
+        "--data-urlencode" "db_host=${GITEA_DATABASE_HOST}:${GITEA_DATABASE_PORT_NUMBER}"
         "--data-urlencode" "db_user=${GITEA_DATABASE_USERNAME}"
         "--data-urlencode" "db_passwd=${GITEA_DATABASE_PASSWORD}"
         "--data-urlencode" "db_name=${GITEA_DATABASE_NAME}"

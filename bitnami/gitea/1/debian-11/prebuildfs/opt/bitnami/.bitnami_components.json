@@ -22,23 +22,23 @@
     },
     "ini-file": {
         "arch": "amd64",
-        "digest": "bf97f0becbc1f7af6e84b187909e6f6d16a924fbe88456f7f72f9c59e1616b9b",
+        "digest": "9b5793ab94c63d6384a29c88c06b3e33cf718112edc8358ac54ada72072c3f3e",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.4.4-0"
+        "version": "1.4.4-1"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "f0e1eb23624312a8ee0c4e5bab439960831424ecd76c88bdc24141a338406f05",
+        "digest": "045804695ee2c857d91f28ba623f8c5f6898f5ae9016ee78504d3af76411c261",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.4-0"
+        "version": "1.0.4-1"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "e72ab0985310f6108f77bc573939cf6b4b27867d6a61cb914d3cfedac60d306c",
+        "digest": "6b1bd6f534ef27b696922dcbdc0e377ac1a7db1e2bc1ff688ae0fa80bbfcb618",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-0"
+        "version": "1.0.5-1"
     }
 }
