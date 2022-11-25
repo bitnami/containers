@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.6.2-debian-11-r4" \
+      org.opencontainers.image.ref.name="2.6.2-debian-11-r5" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/harbor-core" \
       org.opencontainers.image.title="harbor-core" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,10 +21,10 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "wait-for-port-1.0.5-0-linux-${OS_ARCH}-debian-11" \
-      "ini-file-1.4.4-0-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.5-1-linux-${OS_ARCH}-debian-11" \
+      "ini-file-1.4.4-1-linux-${OS_ARCH}-debian-11" \
       "harbor-core-2.6.2-0-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
