@@ -5,7 +5,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.0.7-debian-11-r10" \
+      org.opencontainers.image.ref.name="4.0.7-debian-11-r11" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cassandra" \
       org.opencontainers.image.title="cassandra" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -23,8 +23,8 @@ RUN install_packages ca-certificates curl libbz2-1.0 libcom-err2 libcrypt1 libff
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.9.15-2-linux-${OS_ARCH}-debian-11" \
-      "java-1.8.352-1-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.14.0-155-linux-${OS_ARCH}-debian-11" \
+      "java-1.8.352-2-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
       "yq-4.30.4-0-linux-${OS_ARCH}-debian-11" \
       "cassandra-4.0.7-0-linux-${OS_ARCH}-debian-11" \
     ) && \
