@@ -29,10 +29,10 @@
     },
     "ruby": {
         "arch": "amd64",
-        "digest": "b935f61e9aa80c9874bcc6f4220f172b4a17cb6c4f6fbfcc9fbec6b64869d066",
+        "digest": "0a86cae5a2016a5b9826307613ad20b6084d3078d68378f507c8895805d0e957",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.0.4-155"
+        "version": "3.0.5-0"
     },
     "yq": {
         "arch": "amd64",
