@@ -22,10 +22,10 @@
     },
     "percona-mysql": {
         "arch": "amd64",
-        "digest": "3400bf3fa6f2ed155e7d743198757b8f94d9c4bba6850f14c14214c0cbc30cbb",
+        "digest": "c3651ebe8fa0ba772739dc6aaffe360a48148c23e28141ee99eb2e3eb7243634",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.7.39-42-3"
+        "version": "5.7.40-43-0"
     },
     "percona-xtrabackup-binary": {
         "arch": "amd64",
