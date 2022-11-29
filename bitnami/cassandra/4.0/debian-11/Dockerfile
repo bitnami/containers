@@ -5,7 +5,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.0.7-debian-11-r11" \
+      org.opencontainers.image.ref.name="4.0.7-debian-11-r12" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cassandra" \
       org.opencontainers.image.title="cassandra" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,10 +22,10 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libbz2-1.0 libcom-err2 libcrypt1 libffi7 libgcc-s1 libgssapi-krb5-2 libjemalloc2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncursesw6 libnsl2 libreadline8 libsqlite3-0 libssl1.1 libtinfo6 libtirpc3 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "python-3.9.15-2-linux-${OS_ARCH}-debian-11" \
+      "python-3.9.15-3-linux-${OS_ARCH}-debian-11" \
       "java-1.8.352-2-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
-      "yq-4.30.4-0-linux-${OS_ARCH}-debian-11" \
+      "yq-4.30.5-0-linux-${OS_ARCH}-debian-11" \
       "cassandra-4.0.7-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
