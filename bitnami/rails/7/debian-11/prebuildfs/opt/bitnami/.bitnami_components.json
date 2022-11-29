@@ -15,31 +15,31 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "8fccadb21076f52eb22e57df6e44876590381fc2a4d012d857a8d8337addbee5",
+        "digest": "327a18f5d80ad375b953c28f9d86e5727f74a57a65b5ed2df78e0d3b9945afca",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.21.1-1"
+        "version": "18.12.1-1"
     },
     "python": {
         "arch": "amd64",
-        "digest": "12887092173822ca8be66e0431a14fadb8bec7e01b97b666e0a04da57b99eb69",
+        "digest": "40824441f50b8a5b6459c804b79b1fc61ed9ecd55abe1055783afa9f16e2295c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.15-2"
+        "version": "3.8.15-3"
     },
     "rails": {
         "arch": "amd64",
-        "digest": "5da827a1271c247f65a9223523d977c1b40e232af72ce71b8132f63fbaa9b746",
+        "digest": "8c353b795294fa8d69c990c9c7a9b72b250fbc0ffdc75e8902295d7ab053062d",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.0.4-0-2"
+        "version": "7.0.4-0-3"
     },
     "ruby": {
         "arch": "amd64",
-        "digest": "6af98ee1d97465411484ddb6e48cb22e63f94b2342bf15f9d77e979d5580a55b",
+        "digest": "d0803716969d694a0eea032de94eaea9269079f0bd17ddbe653bd18848338290",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.7.7-0"
+        "version": "3.1.3-0"
     },
     "wait-for-port": {
         "arch": "amd64",
