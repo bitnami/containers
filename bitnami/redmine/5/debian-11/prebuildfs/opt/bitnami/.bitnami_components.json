@@ -15,10 +15,10 @@
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "74daab704db85cbd0018dea2d0994c89a24eab4b3c0d31f9f632ad617c2943a4",
+        "digest": "b52b264c1ed3c900d650d320317d66287e15a734ab6e94de10270c939cc6ab75",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.18.0-0"
+        "version": "15.1.0-0"
     },
     "redmine": {
         "arch": "amd64",
@@ -36,9 +36,9 @@
     },
     "yq": {
         "arch": "amd64",
-        "digest": "27072388381f935c0b6e063084c30f0cf3cf11303e36ff1ffeadd2444ad7dce7",
+        "digest": "4262069ceb64e0e33d8f5af5fa4b7d06760a2b96ab2388418823a3c4346e9258",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.30.4-0"
+        "version": "4.30.5-0"
     }
 }
