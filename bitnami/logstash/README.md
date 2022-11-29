@@ -32,7 +32,7 @@ $ docker-compose up -d
 
 ## How to deploy Logstash in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Logstash Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/logstash).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Logstash Chart GitHub repository](https://github.com/bitnami/charts/tree/main/bitnami/logstash).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
 
@@ -187,7 +187,7 @@ The Bitnami Logstash image provides a way to create your custom image installing
 To create your own image providing plugins execute the flowing command:
 
 ```console
-$ docker build --build-arg LOGSTASH_PLUGINS=<plugin1,plugin2,...> -t bitnami/logstash:latest 'https://github.com/bitnami/containers/blob/main/bitnami/logstash.git#master:8/debian-11'
+$ docker build --build-arg LOGSTASH_PLUGINS=<plugin1,plugin2,...> -t bitnami/logstash:latest 'https://github.com/bitnami/containers/blob/main/bitnami/logstash.git#main:8/debian-11'
 ```
 
 The command above will build the image providing this GitHub repository as build context, and will pass the list of plugins to install to the build logic.
