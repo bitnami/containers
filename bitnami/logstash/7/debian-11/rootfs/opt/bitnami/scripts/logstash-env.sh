@@ -77,7 +77,6 @@ export LOGSTASH_VOLUME_DIR="/bitnami/logstash"
 export LOGSTASH_DATA_DIR="${LOGSTASH_VOLUME_DIR}/data"
 export LOGSTASH_MOUNTED_CONF_DIR="${LOGSTASH_VOLUME_DIR}/config"
 export LOGSTASH_MOUNTED_PIPELINE_CONF_DIR="${LOGSTASH_VOLUME_DIR}/pipeline"
-export PATH="${LOGSTASH_BIN_DIR}:${BITNAMI_ROOT_DIR}/common/bin:${PATH}"
 
 # System users (when running with a privileged user)
 export LOGSTASH_DAEMON_USER="logstash"
@@ -112,5 +111,11 @@ export LOGSTASH_ENABLE_STDOUT_OUTPUT="${LOGSTASH_ENABLE_STDOUT_OUTPUT:-yes}"
 export LOGSTASH_ENABLE_ELASTICSEARCH_OUTPUT="${LOGSTASH_ENABLE_ELASTICSEARCH_OUTPUT:-no}"
 export LOGSTASH_ELASTICSEARCH_HOST="${LOGSTASH_ELASTICSEARCH_HOST:-elasticsearch}"
 export LOGSTASH_ELASTICSEARCH_PORT_NUMBER="${LOGSTASH_ELASTICSEARCH_PORT_NUMBER:-9200}"
+
+# Default JVM configuration
+export JAVA_HOME="${BITNAMI_ROOT_DIR}/java"
+
+# Other parameters
+export PATH="${LOGSTASH_BIN_DIR}:${JAVA_HOME}/bin:${BITNAMI_ROOT_DIR}/common/bin:${PATH}"
 
 # Custom environment variables may be defined below
