@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="8.5.2-debian-11-r1" \
+      org.opencontainers.image.ref.name="8.5.2-debian-11-r2" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kibana" \
       org.opencontainers.image.title="kibana" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libexpat1 libgcc-s1 libnss3 libstdc++6 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "yq-4.30.4-0-linux-${OS_ARCH}-debian-11" \
+      "yq-4.30.5-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
       "kibana-8.5.2-0-linux-${OS_ARCH}-debian-11" \
     ) && \
