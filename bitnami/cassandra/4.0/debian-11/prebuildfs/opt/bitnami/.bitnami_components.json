@@ -22,16 +22,16 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "31c466238eba9f390783ffb2f6c4bafd2d3780c32e38061b0599bf9df2219404",
+        "digest": "8ddea3093ebd92ca0712ebd3874f3b42279c770207bf5d39aa374b2d0ddff8e6",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.9.15-2"
+        "version": "3.9.15-3"
     },
     "yq": {
         "arch": "amd64",
-        "digest": "27072388381f935c0b6e063084c30f0cf3cf11303e36ff1ffeadd2444ad7dce7",
+        "digest": "4262069ceb64e0e33d8f5af5fa4b7d06760a2b96ab2388418823a3c4346e9258",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.30.4-0"
+        "version": "4.30.5-0"
     }
 }
