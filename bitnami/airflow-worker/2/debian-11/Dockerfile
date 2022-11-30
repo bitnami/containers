@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.4.3-debian-11-r4" \
+      org.opencontainers.image.ref.name="2.4.3-debian-11-r5" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/airflow-worker" \
       org.opencontainers.image.title="airflow-worker" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,8 +22,8 @@ RUN install_packages ca-certificates curl libbsd0 libbz2-1.0 libcdt5 libcgraph6 
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "wait-for-port-1.0.5-1-linux-${OS_ARCH}-debian-11" \
-      "python-3.9.15-2-linux-${OS_ARCH}-debian-11" \
-      "postgresql-client-11.18.0-0-linux-${OS_ARCH}-debian-11" \
+      "python-3.9.15-3-linux-${OS_ARCH}-debian-11" \
+      "postgresql-client-15.1.0-0-linux-${OS_ARCH}-debian-11" \
       "ini-file-1.4.4-1-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
       "airflow-worker-2.4.3-0-linux-${OS_ARCH}-debian-11" \
