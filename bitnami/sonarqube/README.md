@@ -1,12 +1,12 @@
-# SonarQube packaged by Bitnami
+# SonarQube&trade; packaged by Bitnami
 
-## What is SonarQube?
+## What is SonarQube&trade;?
 
-> SonarQube is an open source quality management platform that analyzes and measures code's technical quality. It enables developers to detect code issues, vulnerabilities, and bugs in early stages.
+> SonarQube&trade; is an open source quality management platform that analyzes and measures code's technical quality. It enables developers to detect code issues, vulnerabilities, and bugs in early stages.
 
-[Overview of SonarQube](http://www.sonarqube.org)
+[Overview of SonarQube&trade;](http://www.sonarqube.org)
 
-Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement. SonarQube is a registered trademark of SonarSource SA.
 
 ## TL;DR
 
@@ -40,7 +40,7 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 
 ## Get this image
 
-The recommended way to get the Bitnami SonarQube Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/sonarqube).
+The recommended way to get the Bitnami SonarQube&trade; Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/sonarqube).
 
 ```console
 $ docker pull bitnami/sonarqube:latest
@@ -62,7 +62,7 @@ $ docker build -t bitnami/APP:latest .
 
 ## How to use this image
 
-SonarQube requires access to a PostgreSQL database to store information. We'll use the [Bitnami Docker Image for PostgreSQL](https://github.com/bitnami/containers/tree/main/bitnami/postgresql) for the database requirements.
+SonarQube&trade; requires access to a PostgreSQL database to store information. We'll use the [Bitnami Docker Image for PostgreSQL](https://github.com/bitnami/containers/tree/main/bitnami/postgresql) for the database requirements.
 
 ### Run the application using Docker Compose
 
@@ -97,7 +97,7 @@ $ docker run -d --name postgresql \
   bitnami/postgresql:latest
 ```
 
-#### Step 3: Create volumes for SonarQube persistence and launch the container
+#### Step 3: Create volumes for SonarQube&trade; persistence and launch the container
 
 ```console
 $ docker volume create --name sonarqube_data
@@ -120,7 +120,7 @@ If you remove the container all your data will be lost, and the next time you ru
 
 For persistence you should mount a directory at the `/bitnami/sonarqube` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should [mount a volume for persistence of the PostgreSQL data](https://github.com/bitnami/containers/tree/main/bitnami/postgresql#persisting-your-database).
 
-The above examples define the Docker volumes named `postgresql_data` and `sonarqube_data`. The SonarQube application state will persist as long as volumes are not removed.
+The above examples define the Docker volumes named `postgresql_data` and `sonarqube_data`. The SonarQube&trade; application state will persist as long as volumes are not removed.
 
 To avoid inadvertent removal of volumes, you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
@@ -171,7 +171,7 @@ $ docker run -d --name postgresql \
   bitnami/postgresql:latest
 ```
 
-#### Step 3. Create the SonarQube container with host volumes
+#### Step 3. Create the SonarQube&trade; container with host volumes
 
 ```console
 $ docker run -d --name sonarqube \
@@ -189,7 +189,7 @@ $ docker run -d --name sonarqube \
 
 ### Environment variables
 
-When you start the SonarQube image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
+When you start the SonarQube&trade; image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
 - For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/sonarqube/docker-compose.yml) file present in this repository:
 
@@ -215,15 +215,15 @@ Available environment variables:
 
 ##### User and Site configuration
 
-- `SONARQUBE_USERNAME`: SonarQube application username. Default: **admin**
-- `SONARQUBE_PASSWORD`: SonarQube application password. Default: **bitnami**
-- `SONARQUBE_EMAIL`: SonarQube application email. Default: **user@example.com**
-- `SONARQUBE_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. This is necessary in case you use a database that already has SonarQube data. Default: **no**
-- `SONARQUBE_PORT_NUMBER`: SonarQube Web application port number. Default: **9000**
-- `SONARQUBE_ELASTICSEARCH_PORT_NUMBER`: SonarQube Elasticsearch application port number. Default: **9001**
-- `SONARQUBE_WEB_CONTEXT`: SonarQube prefix used to access to the application. Default: **/**
-- `SONARQUBE_MAX_HEAP_SIZE`: Maximum heap size for SonarQube services (CE, Search and Web). No defaults.
-- `SONARQUBE_MIN_HEAP_SIZE`: Minimum heap size for SonarQube services (CE, Search and Web). No defaults.
+- `SONARQUBE_USERNAME`: SonarQube&trade; application username. Default: **admin**
+- `SONARQUBE_PASSWORD`: SonarQube&trade; application password. Default: **bitnami**
+- `SONARQUBE_EMAIL`: SonarQube&trade; application email. Default: **user@example.com**
+- `SONARQUBE_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. This is necessary in case you use a database that already has SonarQube&trade; data. Default: **no**
+- `SONARQUBE_PORT_NUMBER`: SonarQube&trade; Web application port number. Default: **9000**
+- `SONARQUBE_ELASTICSEARCH_PORT_NUMBER`: SonarQube&trade; Elasticsearch application port number. Default: **9001**
+- `SONARQUBE_WEB_CONTEXT`: SonarQube&trade; prefix used to access to the application. Default: **/**
+- `SONARQUBE_MAX_HEAP_SIZE`: Maximum heap size for SonarQube&trade; services (CE, Search and Web). No defaults.
+- `SONARQUBE_MIN_HEAP_SIZE`: Minimum heap size for SonarQube&trade; services (CE, Search and Web). No defaults.
 - `SONARQUBE_CE_JAVA_ADD_OPTS`: Additional Java options for Compute Engine. No defaults.
 - `SONARQUBE_ELASTICSEARCH_JAVA_ADD_OPTS`: Additional Java options for Elasticsearch. No defaults.
 - `SONARQUBE_WEB_JAVA_ADD_OPTS`: Additional Java options for Web. No defaults.
@@ -234,12 +234,12 @@ Available environment variables:
 
 - `SONARQUBE_DATABASE_HOST`: Hostname for PostgreSQL server. Default: **postgresql**
 - `SONARQUBE_DATABASE_PORT_NUMBER`: Port used by the PostgreSQL server. Default: **5432**
-- `SONARQUBE_DATABASE_NAME`: Database name that SonarQube will use to connect with the database. Default: **bitnami_sonarqube**
-- `SONARQUBE_DATABASE_USER`: Database user that SonarQube will use to connect with the database. Default: **bn_sonarqube**
-- `SONARQUBE_DATABASE_PASSWORD`: Database password that SonarQube will use to connect with the database. No default.
+- `SONARQUBE_DATABASE_NAME`: Database name that SonarQube&trade; will use to connect with the database. Default: **bitnami_sonarqube**
+- `SONARQUBE_DATABASE_USER`: Database user that SonarQube&trade; will use to connect with the database. Default: **bn_sonarqube**
+- `SONARQUBE_DATABASE_PASSWORD`: Database password that SonarQube&trade; will use to connect with the database. No default.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-##### Create a database for SonarQube using postgresql-client
+##### Create a database for SonarQube&trade; using postgresql-client
 
 - `POSTGRESQL_CLIENT_DATABASE_HOST`: Hostname for the PostgreSQL server. Default: **postgresql**
 - `POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the PostgreSQL server. Default: **5432**
@@ -254,7 +254,7 @@ Available environment variables:
 
 ##### SMTP Configuration
 
-To configure SonarQube to send email using SMTP you can set the following environment variables:
+To configure SonarQube&trade; to send email using SMTP you can set the following environment variables:
 
 - `SONARQUBE_SMTP_HOST`: SMTP host.
 - `SONARQUBE_SMTP_PORT_NUMBER`: SMTP port.
@@ -299,9 +299,9 @@ This would be an example of SMTP configuration using a Gmail account:
       bitnami/sonarqube:latest
     ```
 
-##### Connect SonarQube container to an existing database
+##### Connect SonarQube&trade; container to an existing database
 
-The Bitnami SonarQube container supports connecting the SonarQube application to an external database. This would be an example of using an external database for SonarQube.
+The Bitnami SonarQube&trade; container supports connecting the SonarQube&trade; application to an external database. This would be an example of using an external database for SonarQube&trade;.
 
 - Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/sonarqube/docker-compose.yml) file present in this repository:
 
@@ -334,11 +334,11 @@ The Bitnami SonarQube container supports connecting the SonarQube application to
       bitnami/sonarqube:latest
     ```
 
-In case the database already contains data from a previous SonarQube installation, you need to set the variable `SONARQUBE_SKIP_BOOTSTRAP` to `yes`. Otherwise, the container would execute the installation wizard and could modify the existing data in the database. Note that, when setting `SONARQUBE_SKIP_BOOTSTRAP` to `yes`, values for environment variables such as `SONARQUBE_USERNAME`, `SONARQUBE_PASSWORD` or `SONARQUBE_EMAIL` will be ignored.
+In case the database already contains data from a previous SonarQube&trade; installation, you need to set the variable `SONARQUBE_SKIP_BOOTSTRAP` to `yes`. Otherwise, the container would execute the installation wizard and could modify the existing data in the database. Note that, when setting `SONARQUBE_SKIP_BOOTSTRAP` to `yes`, values for environment variables such as `SONARQUBE_USERNAME`, `SONARQUBE_PASSWORD` or `SONARQUBE_EMAIL` will be ignored.
 
 ## Logging
 
-The Bitnami SonarQube Docker image sends the container logs to `stdout`. To view the logs:
+The Bitnami SonarQube&trade; Docker image sends the container logs to `stdout`. To view the logs:
 
 ```console
 $ docker logs sonarqube
@@ -393,7 +393,7 @@ For the PostgreSQL database container:
    bitnami/postgresql:latest
 ```
 
-For the SonarQube container:
+For the SonarQube&trade; container:
 
 ```diff
  $ docker run -d --name sonarqube \
@@ -405,7 +405,7 @@ For the SonarQube container:
 
 ### Upgrade this image
 
-Bitnami provides up-to-date versions of PostgreSQL and SonarQube, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the SonarQube container. For the PostgreSQL upgrade see: https://github.com/bitnami/containers/tree/main/bitnami/postgresql/blob/master/README.md#upgrade-this-image
+Bitnami provides up-to-date versions of PostgreSQL and SonarQube&trade;, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the SonarQube&trade; container. For the PostgreSQL upgrade see: https://github.com/bitnami/containers/tree/main/bitnami/postgresql/blob/master/README.md#upgrade-this-image
 
 The `bitnami/sonarqube:latest` tag always points to the most recent release. To get the most recent release you can simple repull the `latest` tag from the Docker Hub with `docker pull bitnami/sonarqube:latest`. However it is recommended to use [tagged versions](https://hub.docker.com/r/bitnami/sonarqube/tags/).
 
@@ -449,8 +449,8 @@ $ docker-compose up -d
 
 - The size of the container image has been decreased.
 - The configuration logic is now based on Bash scripts in the *rootfs/* folder.
-- The SonarQube container image has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the SonarQube daemon was started as the `sonarqube` user. From now on, both the container and the SonarQube daemon run as user `1001`. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile, or `user: root` in `docker-compose.yml`. Consequences:
-  - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the SonarQube site by exporting its content, and importing it on a new SonarQube container. Follow the steps in [Backing up your container](#backing-up-your-container) and [Restoring a backup](#restoring-a-backup) to migrate the data between the old and new container.
+- The SonarQube&trade; container image has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the SonarQube&trade; daemon was started as the `sonarqube` user. From now on, both the container and the SonarQube&trade; daemon run as user `1001`. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile, or `user: root` in `docker-compose.yml`. Consequences:
+  - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the SonarQube&trade; site by exporting its content, and importing it on a new SonarQube&trade; container. Follow the steps in [Backing up your container](#backing-up-your-container) and [Restoring a backup](#restoring-a-backup) to migrate the data between the old and new container.
 
 ## Contributing
 
