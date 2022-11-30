@@ -8,10 +8,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "31c466238eba9f390783ffb2f6c4bafd2d3780c32e38061b0599bf9df2219404",
+        "digest": "8ddea3093ebd92ca0712ebd3874f3b42279c770207bf5d39aa374b2d0ddff8e6",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.9.15-2"
+        "version": "3.9.15-3"
     },
     "tensorflow-intel": {
         "arch": "amd64",
