@@ -15,17 +15,17 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "8fccadb21076f52eb22e57df6e44876590381fc2a4d012d857a8d8337addbee5",
+        "digest": "327a18f5d80ad375b953c28f9d86e5727f74a57a65b5ed2df78e0d3b9945afca",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.21.1-1"
+        "version": "18.12.1-1"
     },
     "python": {
         "arch": "amd64",
-        "digest": "12887092173822ca8be66e0431a14fadb8bec7e01b97b666e0a04da57b99eb69",
+        "digest": "40824441f50b8a5b6459c804b79b1fc61ed9ecd55abe1055783afa9f16e2295c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.15-2"
+        "version": "3.8.15-3"
     },
     "rails": {
         "arch": "amd64",
