@@ -524,6 +524,9 @@ ldap_initialize() {
         if [[ -f "$LDAP_CUSTOM_SCHEMA_FILE" ]]; then
             ldap_add_custom_schema
         fi
+        if ! is_dir_empty "$LDAP_CUSTOM_SCHEMA_DIR"; then
+            ldap_add_custom_schemas
+        fi
         if ! is_dir_empty "$LDAP_CUSTOM_LDIF_DIR"; then
             ldap_add_custom_ldifs
         elif ! is_boolean_yes "$LDAP_SKIP_DEFAULT_TREE"; then
