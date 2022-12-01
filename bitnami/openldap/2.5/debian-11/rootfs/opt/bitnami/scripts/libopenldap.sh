@@ -110,14 +110,6 @@ ldap_validate() {
         error "$1"
         error_code=1
     }
-    check_allowed_port() {
-        local port_var="${1:?missing port variable}"
-        local validate_port_args=()
-        ! am_i_root && validate_port_args+=("-unprivileged")
-        if ! err=$(validate_port "${validate_port_args[@]}" "${!port_var}"); then
-            print_validation_error "An invalid port was specified in the environment variable ${port_var}: ${err}."
-        fi
-    }
     for var in LDAP_SKIP_DEFAULT_TREE LDAP_ENABLE_TLS; do
         if ! is_yes_no_value "${!var}"; then
             print_validation_error "The allowed values for $var are: yes or no"
@@ -153,8 +145,6 @@ ldap_validate() {
             print_validation_error "LDAP_PORT_NUMBER and LDAP_LDAPS_PORT_NUMBER are bound to the same port!"
         fi
     fi
-    [[ -n "$LDAP_PORT_NUMBER" ]] && check_allowed_port LDAP_PORT_NUMBER
-    [[ -n "$LDAP_LDAPS_PORT_NUMBER" ]] && check_allowed_port LDAP_LDAPS_PORT_NUMBER
 
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }
