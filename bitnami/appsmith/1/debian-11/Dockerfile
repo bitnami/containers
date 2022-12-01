@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.8.10-debian-11-r4" \
+      org.opencontainers.image.ref.name="1.8.11-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/appsmith" \
       org.opencontainers.image.title="appsmith" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.8.10"
+      org.opencontainers.image.version="1.8.11"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,10 +26,10 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "render-template-1.0.4-1-linux-${OS_ARCH}-debian-11" \
       "node-16.18.1-1-linux-${OS_ARCH}-debian-11" \
       "nginx-1.23.2-1-linux-${OS_ARCH}-debian-11" \
-      "mongodb-shell-1.6.0-1-linux-${OS_ARCH}-debian-11" \
+      "mongodb-shell-1.6.1-1-linux-${OS_ARCH}-debian-11" \
       "java-11.0.17-7-2-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
-      "appsmith-1.8.10-0-linux-${OS_ARCH}-debian-11" \
+      "appsmith-1.8.11-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,7 +47,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/appsmith/postunpack.sh
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
-ENV APP_VERSION="1.8.10" \
+ENV APP_VERSION="1.8.11" \
     BITNAMI_APP_NAME="appsmith" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \

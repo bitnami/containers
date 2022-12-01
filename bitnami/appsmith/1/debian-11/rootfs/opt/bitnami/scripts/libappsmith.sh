@@ -180,9 +180,8 @@ appsmith_backend_stop() {
 
 ########################
 # Get a configuration setting value from the configuration file(s)
-#     ref: https://geode.apache.org/docs/guide/112/reference/topics/gemfire_properties.html
 # Globals:
-#   GEODE_*
+#   APPSMITH_*
 # Arguments:
 #   $1 - property key
 #   $2 - configuration file (optional)
