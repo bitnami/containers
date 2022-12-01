@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2022.11.26-debian-11-r1" \
+      org.opencontainers.image.ref.name="2022.11.29-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/minio" \
       org.opencontainers.image.title="minio" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2022.11.26"
+      org.opencontainers.image.version="2022.11.29"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,7 +23,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "wait-for-port-1.0.5-1-linux-${OS_ARCH}-debian-11" \
       "minio-client-2022.11.17-1-linux-${OS_ARCH}-debian-11" \
-      "minio-2022.11.26-0-linux-${OS_ARCH}-debian-11" \
+      "minio-2022.11.29-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -42,7 +42,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/minio-client/postunpack.sh
 RUN /opt/bitnami/scripts/minio/postunpack.sh
-ENV APP_VERSION="2022.11.26" \
+ENV APP_VERSION="2022.11.29" \
     BITNAMI_APP_NAME="minio" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/minio-client/bin:/opt/bitnami/minio/bin:$PATH"
 
