@@ -8,9 +8,9 @@
     },
     "openresty": {
         "arch": "amd64",
-        "digest": "6115d56053477e931a18c260837f950ac9076943e4a80e18d9a04f9a6fa86968",
+        "digest": "d5e6e4c0f76f78194695cd812c6372e1a3b0ddc21fe9c7452b84a5f94f1947e0",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.21.4-1-154"
+        "version": "1.21.4-1-155"
     }
 }
