@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.4.3-debian-11-r5" \
+      org.opencontainers.image.ref.name="2.5.0-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/airflow-scheduler" \
       org.opencontainers.image.title="airflow-scheduler" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.4.3"
+      org.opencontainers.image.version="2.5.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "postgresql-client-15.1.0-0-linux-${OS_ARCH}-debian-11" \
       "ini-file-1.4.4-1-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
-      "airflow-scheduler-2.4.3-0-linux-${OS_ARCH}-debian-11" \
+      "airflow-scheduler-2.5.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -51,7 +51,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/airflow-scheduler/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
-    APP_VERSION="2.4.3" \
+    APP_VERSION="2.5.0" \
     BITNAMI_APP_NAME="airflow-scheduler" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
