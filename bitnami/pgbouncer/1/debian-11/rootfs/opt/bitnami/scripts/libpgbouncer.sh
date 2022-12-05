@@ -219,7 +219,7 @@ pgbouncer_initialize() {
         ini-file set --section "databases" --key "$PGBOUNCER_DATABASE" --value "$database_value" "$PGBOUNCER_CONF_FILE"
 
         i=0; 
-        while true; VAR_NAME="DATABASE${i}_DSN"; 
+        while true; VAR_NAME="PGBOUNCER_DSN_${i}"; 
         do 
             if [ -z "${!VAR_NAME+x}" ]; then
                 break;
@@ -261,7 +261,7 @@ pgbouncer_initialize() {
             "reserve_pool_size:${PGBOUNCER_RESERVE_POOL_SIZE}"
             "ignore_startup_parameters:${PGBOUNCER_IGNORE_STARTUP_PARAMETERS}"
             "log_connections:{$PGBOUNCER_LOG_CONNECTIONS}"
-            "log_disconnections:{$PGBOUNCER_LOG_CONNECTIONS}"
+            "log_disconnections:{$PGBOUNCER_LOG_DISCONNECTIONS}"
             "log_pooler_errors:{$PGBOUNCER_LOG_POOLER_ERRORS}"
             "log_stats:{$PGBOUNCER_LOG_STATS}"
             "stats_period:{$PGBOUNCER_STATS_PERIOD}"
