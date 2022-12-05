@@ -271,6 +271,9 @@ pgbouncer_initialize() {
             "server_login_retry:{$PGBOUNCER_SERVER_LOGIN_RETRY}"
             "client_login_timeout:{$PGBOUNCER_CLIENT_LOGIN_TIMEOUT}"
             "autodb_idle_timeout:{$PGBOUNCER_AUTODB_IDLE_TIMEOUT}"
+            "query_timeout:{$PGBOUNCER_QUERY_TIMEOUT}"
+            "query_wait_timeout:{$PGBOUNCER_QUERY_WAIT_TIMEOUT}"
+            "client_idle_timeout:{$PGBOUNCER_CLIENT_IDLE_TIMEOUT}"
         )
         for pair in "${key_value_pairs[@]}"; do
             local key value
