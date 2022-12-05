@@ -265,6 +265,12 @@ pgbouncer_initialize() {
             "log_pooler_errors:{$PGBOUNCER_LOG_POOLER_ERRORS}"
             "log_stats:{$PGBOUNCER_LOG_STATS}"
             "stats_period:{$PGBOUNCER_STATS_PERIOD}"
+            "server_lifetime:{$PGBOUNCER_SERVER_LIFETIME}"
+            "server_idle_timeout:{$PGBOUNCER_SERVER_IDLE_TIMEOUT}"
+            "server_connect_timeout:{$PGBOUNCER_SERVER_CONNECT_TIMEOUT}"
+            "server_login_retry:{$PGBOUNCER_SERVER_LOGIN_RETRY}"
+            "client_login_timeout:{$PGBOUNCER_CLIENT_LOGIN_TIMEOUT}"
+            "autodb_idle_timeout:{$PGBOUNCER_AUTODB_IDLE_TIMEOUT}"
         )
         for pair in "${key_value_pairs[@]}"; do
             local key value
