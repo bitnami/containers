@@ -1,10 +1,10 @@
 {
     "configurable-http-proxy": {
         "arch": "amd64",
-        "digest": "6673a35650499706641d9b2b7e62c67e0507027a852cf9b056be7ea0fc5a420c",
+        "digest": "46dac042bb507bf31ce449b68c2e78ec36fa7084f6f5ed5cc38e45014ec46b0f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.5.3-1"
+        "version": "4.5.4-0"
     },
     "node": {
         "arch": "amd64",
