@@ -36,10 +36,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "40824441f50b8a5b6459c804b79b1fc61ed9ecd55abe1055783afa9f16e2295c",
+        "digest": "302a5685b31b10e47ce9d10eba01cb299d3ba3e66fb6a824c90e4acdbb123ea1",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.15-3"
+        "version": "3.8.15-4"
     },
     "ruby": {
         "arch": "amd64",
