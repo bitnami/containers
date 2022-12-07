@@ -369,7 +369,7 @@ ldap_add_custom_schema() {
 #########################
 ldap_add_custom_schemas() {
     info "Adding custom schemas : $LDAP_CUSTOM_SCHEMA_DIR ..."
-    find "$LDAP_CUSTOM_SCHEMA_DIR" -maxdepth 1 \( -type f -o -type l \) -iname '*.ldif' -print0 | sort -z | xargs --null -I{} bash -c ". /opt/bitnami/scripts/libos.sh && debug_execute slapadd -F \"$LDAP_ONLINE_CONF_DIR\" -n 0 -l {}"    
+    find "$LDAP_CUSTOM_SCHEMA_DIR" -maxdepth 1 \( -type f -o -type l \) -iname '*.ldif' -print0 | sort -z | xargs --null -I{} bash -c ". /opt/bitnami/scripts/libos.sh && debug_execute slapadd -F \"$LDAP_ONLINE_CONF_DIR\" -n 0 -l {}"
     ldap_stop
     while is_ldap_running; do sleep 1; done
     ldap_start_bg
