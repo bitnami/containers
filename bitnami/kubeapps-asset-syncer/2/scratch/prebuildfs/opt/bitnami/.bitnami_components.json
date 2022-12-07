@@ -1,9 +1,9 @@
 {
     "kubeapps-asset-syncer": {
         "arch": "amd64",
-        "digest": "baae335ff7a21e504ce6ee0f30a6c88f3bc2f9c9a2e17cf08b1c0b557d830f4d",
+        "digest": "4aaff965a0d2d789946e5aece275b72e71a90a37b571416503a143723ac71c03",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.6.1-0"
+        "version": "2.6.2-0"
     }
 }
