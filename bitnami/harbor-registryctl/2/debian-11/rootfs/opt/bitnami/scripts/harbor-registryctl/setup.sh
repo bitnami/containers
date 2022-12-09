@@ -13,6 +13,9 @@ set -o pipefail
 . /opt/bitnami/scripts/libvalidations.sh
 . /opt/bitnami/scripts/libharbor.sh
 
+# Load environment
+. /opt/bitnami/scripts/harbor-registryctl-env.sh
+
 # Auxiliar Functions
 
 ########################
@@ -49,21 +52,6 @@ not_empty_config_option() {
 }
 
 ########################
-# Ensures an environment_variable
-# Arguments:
-#   $1 - env_var
-# Returns:
-#   None
-#########################
-not_empty_env_var() {
-    local env_var="${1:?missing env_var}"
-    if [[ -z "${!env_var:-}" ]]; then
-        error "The environment variable \"$env_var\" must be set!"
-        exit 1
-    fi
-}
-
-########################
 # Validate Registryctl settings
 # Arguments:
 #   None
@@ -71,7 +59,7 @@ not_empty_env_var() {
 #   None
 #########################
 harbor_registryctl_validate() {
-    info "Validating Harbor Registryctl settings..."
+    info "Validating harbor-registryctl settings..."
 
     if [[ ! -f "/etc/registryctl/config.yml" ]]; then
         error "No configuration file was detected. Please mount your configuration file at \"/etc/registryctl/config.yml\""
@@ -80,7 +68,6 @@ harbor_registryctl_validate() {
 
     not_empty_config_option "protocol"
     not_empty_config_option "port"
-    not_empty_env_var "JOBSERVICE_SECRET"
 
     if [[ "$(harbor_registryctl_conf_get "protocol")" != "http" ]] &&
         [[ "$(harbor_registryctl_conf_get "protocol")" != "https" ]]; then
@@ -95,6 +82,6 @@ harbor_registryctl_validate() {
     fi
 }
 
-# Ensure Harbor Registryctl settings are valid
+# Ensure harbor-registryctl settings are valid
 harbor_registryctl_validate
 install_custom_certs
