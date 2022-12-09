@@ -4,7 +4,7 @@
         "digest": "c1a4727e244fc1129e2bc4ce708e8822e2f95c819ca8f2a63bd85168bb6c27e6",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.5.0-0"
+        "version": "2.5.0-1"
     },
     "gosu": {
         "arch": "amd64",
@@ -29,10 +29,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "8ddea3093ebd92ca0712ebd3874f3b42279c770207bf5d39aa374b2d0ddff8e6",
+        "digest": "9a983efb0d4322a940f479c95983a78dbb02e8f3cc6e23b8b51b388add024b20",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.9.15-3"
+        "version": "3.9.16-0"
     },
     "wait-for-port": {
         "arch": "amd64",
