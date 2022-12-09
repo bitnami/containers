@@ -5,13 +5,23 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-#set -o xtrace
+# set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
 . /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libos.sh
 
-readonly cmd=$(command -v harbor_jobservice)
-readonly flags=("-c" "/etc/jobservice/config.yml" "$@")
+# Load harbor-jobservice environment
+. /opt/bitnami/scripts/harbor-jobservice-env.sh
 
-info "** Starting Harbor Job Service **"
-exec "${cmd}" "${flags[@]}"
+CMD="$(command -v harbor_jobservice)"
+FLAGS=("-c" "/etc/jobservice/config.yml" "$@")
+
+cd "$HARBOR_JOBSERVICE_BASE_DIR"
+
+info "** Starting harbor-jobservice **"
+if am_i_root; then
+    exec gosu "$HARBOR_JOBSERVICE_DAEMON_USER" "$CMD" "${FLAGS[@]}"
+else
+    exec "$CMD" "${FLAGS[@]}"
+fi
