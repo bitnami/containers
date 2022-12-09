@@ -11,7 +11,7 @@
         "digest": "8643036fdd3909a1f96fc8d2d09fa936c5c77cdb0ff424223f856b7a75c5e924",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.23.2-1"
+        "version": "1.23.2-2"
     },
     "render-template": {
         "arch": "amd64",
