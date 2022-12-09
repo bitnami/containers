@@ -597,7 +597,7 @@ etcd_initialize() {
                     hostname_has_N_ips() {
                         local -r hostname="${1:?hostname is required}"
                         local -r n=${2:?number of ips is required}
-                        [[ $(getent ahosts "$hostname" | awk '{print $1}' | uniq | wc -l) / $n -ge 1 ]] && return 0
+                        [[ $(getent ahosts "$hostname" | awk '{print $1}' | uniq | wc -l) -ge $n ]] && return 0
                         return 1
                     }
                     if ! retry_while "hostname_has_N_ips $domain ${#initial_members[@]}"; then
