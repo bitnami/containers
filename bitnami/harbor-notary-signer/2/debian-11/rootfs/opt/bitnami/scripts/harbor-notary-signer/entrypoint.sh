@@ -5,7 +5,7 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-#set -o xtrace
+# set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
 . /opt/bitnami/scripts/libbitnami.sh
@@ -13,9 +13,9 @@ set -o pipefail
 print_welcome_page
 
 if [[ "$1" = "/opt/bitnami/scripts/harbor-notary-signer/run.sh" ]]; then
-    info "** Starting Harbor Notary Signer setup **"
+    info "** Starting harbor-notary-signer setup **"
     /opt/bitnami/scripts/harbor-notary-signer/setup.sh
-    info "** Harbor Notary Signer setup finished! **"
+    info "** harbor-notary-signer setup finished! **"
 fi
 
 echo ""
