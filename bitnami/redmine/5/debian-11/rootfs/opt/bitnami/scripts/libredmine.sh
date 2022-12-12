@@ -473,6 +473,7 @@ redmine_migrate_database() {
 #########################
 redmine_ensure_gems() {
     cd "$REDMINE_BASE_DIR" || false
-    bundle config unset deployment
-    bundle install
+    info "Ensuring all rubygems are installed"
+    debug_execute bundle config unset deployment
+    debug_execute bundle install
 }
