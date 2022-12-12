@@ -22,6 +22,9 @@ fi
 # Load libraries
 . /opt/bitnami/scripts/libredmine.sh
 
+# Ensure Redmine has all the necessary gems
+redmine_ensure_gems
+
 # Ensure Redmine environment variables are valid
 redmine_validate
 
