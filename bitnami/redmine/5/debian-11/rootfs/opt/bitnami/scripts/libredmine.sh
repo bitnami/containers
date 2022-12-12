@@ -459,3 +459,20 @@ redmine_migrate_database() {
     redmine_rake_execute "db:migrate" >/dev/null 2>&1
     redmine_rake_execute "redmine:plugins:migrate" >/dev/null 2>&1
 }
+
+########################
+# Install additional Rubygems if needed
+# Plugins might require additional plugins, which are not shipped with the default
+# bundle. In order to keep Redmine operative, we need to install them additionally.
+# Globals:
+#   REDMINE_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+redmine_ensure_gems() {
+    cd "$REDMINE_BASE_DIR" || false
+    bundle config unset deployment
+    bundle install
+}
