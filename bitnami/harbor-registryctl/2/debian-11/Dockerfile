@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.6.2-debian-11-r8" \
+      org.opencontainers.image.ref.name="2.6.2-debian-11-r10" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/harbor-registryctl" \
       org.opencontainers.image.title="harbor-registryctl" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,8 +21,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "harbor-registry-2.6.2-0-linux-${OS_ARCH}-debian-11" \
       "yq-4.30.5-0-linux-${OS_ARCH}-debian-11" \
+      "harbor-registry-2.6.2-0-linux-${OS_ARCH}-debian-11" \
       "harbor-registryctl-2.6.2-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
     ) && \
@@ -44,7 +44,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-registryctl/postunpack.sh
 ENV APP_VERSION="2.6.2" \
     BITNAMI_APP_NAME="harbor-registryctl" \
-    PATH="/opt/bitnami/harbor-registry/bin:/opt/bitnami/common/bin:/opt/bitnami/harbor-registryctl/bin:$PATH"
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/harbor-registry/bin:/opt/bitnami/harbor-registryctl/bin:$PATH"
 
 VOLUME [ "/etc/registry", "/etc/registryctl", "/storage", "/var/lib/registry" ]
 

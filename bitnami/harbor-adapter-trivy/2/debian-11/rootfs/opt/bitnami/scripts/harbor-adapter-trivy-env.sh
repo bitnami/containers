@@ -40,9 +40,12 @@ done
 unset harbor_adapter_trivy_env_vars
 
 # Paths
-export SCANNER_TRIVY_VOLUME_DIR="${SCANNER_TRIVY_VOLUME_DIR:-/bitnami/harbor-adapter-trivy}"
+export SCANNER_TRIVY_BASE_DIR="${BITNAMI_ROOT_DIR}/harbor-adapter-trivy"
+export SCANNER_TRIVY_VOLUME_DIR="${SCANNER_TRIVY_VOLUME_DIR:-${BITNAMI_VOLUME_DIR}/harbor-adapter-trivy}"
 export SCANNER_TRIVY_CACHE_DIR="${SCANNER_TRIVY_CACHE_DIR:-${SCANNER_TRIVY_VOLUME_DIR}/.cache/trivy}"
 export SCANNER_TRIVY_REPORTS_DIR="${SCANNER_TRIVY_REPORTS_DIR:-${SCANNER_TRIVY_VOLUME_DIR}/.cache/reports}"
+
+# System users
 export SCANNER_TRIVY_DAEMON_USER="trivy-scanner"
 export SCANNER_TRIVY_DAEMON_GROUP="trivy-scanner"
 

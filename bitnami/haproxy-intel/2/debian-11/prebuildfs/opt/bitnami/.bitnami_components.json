@@ -8,10 +8,10 @@
     },
     "haproxy-dataplaneapi": {
         "arch": "amd64",
-        "digest": "37dc48e133cf6b45d06e7bfd3e5e37b977da4e9a41ad89c5c5a56940b5c1de56",
+        "digest": "d52a67dc3c012d44254461dc6ef5855ba3dab102f9c6d59c7d8f36b7131408e4",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.7.0-0"
+        "version": "2.7.1-0"
     },
     "qatengine": {
         "arch": "amd64",

@@ -5,12 +5,15 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-# set -o xtrace
+# set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libvalidations.sh
 . /opt/bitnami/scripts/libharbor.sh
+
+# Load environment
+. /opt/bitnami/scripts/harbor-registry-env.sh
 
 # Auxiliar Functions
 
@@ -22,7 +25,7 @@ set -o pipefail
 #   None
 #########################
 harbor_registry_validate() {
-    info "Validating Harbor Registry settings..."
+    info "Validating harbor-registry settings..."
 
     if [[ ! -f "/etc/registry/config.yml" ]]; then
         error "No configuration file was detected. Please mount your configuration file at \"/etc/registry/config.yml\""
@@ -30,6 +33,6 @@ harbor_registry_validate() {
     fi
 }
 
-# Ensure Harbor Registry settings are valid
+# Ensure harbor-registry settings are valid
 harbor_registry_validate
 install_custom_certs

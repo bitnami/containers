@@ -25,6 +25,6 @@
         "digest": "0ff2fd26e71766cae774d93c5eb489fa7d7cd2a8af0616d1d08824f9cde2f99f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.5.84-2"
+        "version": "8.5.84-3"
     }
 }

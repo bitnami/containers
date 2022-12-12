@@ -1,9 +1,9 @@
 {
     "promtail": {
         "arch": "amd64",
-        "digest": "58865638e981c0f2591e65346f954255b9f4dd2faad333378eda642ad89a689b",
+        "digest": "ae92accaa8fe789c16f54550758b41cccbea9ac752b403b828d1c34a076ca5ad",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.7.0-1"
+        "version": "2.7.1-0"
     }
 }
