@@ -27,7 +27,7 @@ limit_time_real = 150
 ; log_handler = [':INFO']
 ; log_level = info
 ; logfile = {{ODOO_LOG_FILE}}
-longpolling_port = {{ODOO_LONGPOLLING_PORT_NUMBER}}
+gevent_port = {{ODOO_LONGPOLLING_PORT_NUMBER}}
 ; https://www.odoo.com/es_ES/forum/ayuda-1/could-not-obtain-lock-on-row-in-relation-ir-cron-74519
 max_cron_threads = 1
 pidfile = {{ODOO_PID_FILE}}
