@@ -50,10 +50,10 @@
     },
     "redis-client": {
         "arch": "amd64",
-        "digest": "7479e99b80ec66856b17439a20335bb6c285362f39927e61aebc0f87faee951f",
+        "digest": "aaa61a0e84d3b649d47d99920339d8d208eb336b6d13323dfe1e51c4eb3a317d",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.0.5-1"
+        "version": "7.0.6-0"
     },
     "render-template": {
         "arch": "amd64",
