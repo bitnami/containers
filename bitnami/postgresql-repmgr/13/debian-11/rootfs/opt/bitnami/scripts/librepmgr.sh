@@ -655,7 +655,13 @@ repmgr_pgrewind() {
     info "Stopping PostgreSQL..."
     "$POSTGRESQL_BIN_DIR"/pg_ctl "stop" "${pg_ctl_flags[@]}"
 
-    local -r flags=("-D" "$POSTGRESQL_DATA_DIR" "--no-ensure-shutdown" "--source-server" "host=${REPMGR_CURRENT_PRIMARY_HOST} port=${REPMGR_CURRENT_PRIMARY_PORT} user=${REPMGR_USERNAME} dbname=${REPMGR_DATABASE}")
+    local -r psql_major_version="$(postgresql_get_major_version)"
+
+    local flags=("-D" "$POSTGRESQL_DATA_DIR" "--source-server" "host=${REPMGR_CURRENT_PRIMARY_HOST} port=${REPMGR_CURRENT_PRIMARY_PORT} user=${REPMGR_USERNAME} dbname=${REPMGR_DATABASE}")
+
+    if [[ "$psql_major_version" -gt "12" ]]; then
+        flags+=("--no-ensure-shutdown")
+    fi
 
     if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
         PGPASSFILE="$REPMGR_PASSFILE_PATH" debug_execute "${POSTGRESQL_BIN_DIR}/pg_rewind" "${flags[@]}"
