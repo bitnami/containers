@@ -329,7 +329,7 @@ And expose the external port:
 These clients, from the same host, will use `localhost` to connect to Apache Kafka.
 
 ```console
-kafka-console-producer.sh --broker-list 127.0.0.1:9093 --topic test
+kafka-console-producer.sh --bootstrap-server 127.0.0.1:9093 --topic test
 kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9093 --topic test --from-beginning
 ```
 
