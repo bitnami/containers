@@ -97,13 +97,13 @@ cassandra:
 
 ## Connecting to other containers
 
-Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a Apache Cassandra server running inside a container can easily be accessed by your application containers.
+Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), an Apache Cassandra server running inside a container can easily be accessed by your application containers.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
 ### Using the Command Line
 
-In this example, we will create a Apache Cassandra client instance that will connect to the server instance that is running on the same docker network as the client.
+In this example, we will create an Apache Cassandra client instance that will connect to the server instance that is running on the same docker network as the client.
 
 #### Step 1: Create a network
 

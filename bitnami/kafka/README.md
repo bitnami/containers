@@ -94,13 +94,13 @@ kafka:
 
 ## Connecting to other containers
 
-Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a Apache Kafka server running inside a container can easily be accessed by your application containers.
+Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), an Apache Kafka server running inside a container can easily be accessed by your application containers.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
 ### Using the Command Line
 
-In this example, we will create a Apache Kafka client instance that will connect to the server instance that is running on the same docker network as the client.
+In this example, we will create an Apache Kafka client instance that will connect to the server instance that is running on the same docker network as the client.
 
 #### Step 1: Create a network
 
@@ -389,7 +389,7 @@ Keep in mind the following notes:
 * When prompted to enter a password, use the same one for all.
 * Set the Common Name or FQDN values to your Apache Kafka container hostname, e.g. `kafka.example.com`. After entering this value, when prompted "What is your first and last name?", enter this value as well.
   * As an alternative, you can disable host name verification setting the environment variable `KAFKA_CFG_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM` to an empty string.
-* When setting up a Apache Kafka Cluster (check [this section](#setting-up-a-kafka-cluster) for more information), each Apache Kafka broker and logical client needs its own keystore. You will have to repeat the process for each of the brokers in the cluster.
+* When setting up an Apache Kafka Cluster (check [this section](#setting-up-a-kafka-cluster) for more information), each Apache Kafka broker and logical client needs its own keystore. You will have to repeat the process for each of the brokers in the cluster.
 
 The following docker-compose file is an example showing how to mount your JKS certificates protected by the password `certificatePassword123`. Additionally it is specifying the Apache Kafka container hostname and the credentials for the client and zookeeper users.
 
@@ -498,9 +498,9 @@ In order to authenticate Apache Kafka against a Zookeeper server with `SASL_SSL`
 
 > Note: You **must** also use your own certificates for SSL. You can mount your Java Key Stores (`zookeeper.keystore.jks` and `zookeeper.truststore.jks`) or PEM files (`zookeeper.keystore.pem`, `zookeeper.keystore.key` and `zookeeper.truststore.pem`) into `/opt/bitnami/kafka/conf/certs`. If client authentication is `none` or `want` in Zookeeper, the cert files are optional.
 
-### Setting up a Apache Kafka Cluster
+### Setting up an Apache Kafka Cluster
 
-A Apache Kafka cluster can easily be setup with the Bitnami Apache Kafka Docker image using the following environment variables:
+An Apache Kafka cluster can easily be setup with the Bitnami Apache Kafka Docker image using the following environment variables:
 
  - `KAFKA_CFG_ZOOKEEPER_CONNECT`: Comma separated host:port pairs, each corresponding to a Zookeeper Server.
 
@@ -561,7 +561,7 @@ $ docker run --name kafka3 \
   bitnami/kafka:latest
 ```
 
-You now have a Apache Kafka cluster up and running. You can scale the cluster by adding/removing slaves without incurring any downtime.
+You now have an Apache Kafka cluster up and running. You can scale the cluster by adding/removing slaves without incurring any downtime.
 
 With Docker Compose, topic replication can be setup using:
 
