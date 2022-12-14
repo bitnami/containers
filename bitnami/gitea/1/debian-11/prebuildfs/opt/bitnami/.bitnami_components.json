@@ -1,10 +1,10 @@
 {
     "git": {
         "arch": "amd64",
-        "digest": "32f12c3ed2d9cf4c739826278da6d97dac27cf92f42513430207d8cf719d45b8",
+        "digest": "bcfde989b7726dc61bbbc4b79d7c55c3e42fe658de202fb613b8eddfb17261ee",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.38.1-1"
+        "version": "2.39.0-0"
     },
     "gitea": {
         "arch": "amd64",
