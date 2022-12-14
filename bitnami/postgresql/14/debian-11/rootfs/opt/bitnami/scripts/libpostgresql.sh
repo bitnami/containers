@@ -653,6 +653,9 @@ postgresql_initialize() {
 
     # Delete conf files generated on first run
     rm -f "$POSTGRESQL_DATA_DIR"/postgresql.conf "$POSTGRESQL_DATA_DIR"/pg_hba.conf
+
+    # Stop postgresql
+    postgresql_stop
 }
 
 ########################
