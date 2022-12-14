@@ -340,7 +340,7 @@ If running these commands from another machine, change the address accordingly.
 These clients, from other containers on the same Docker network, will use the kafka container service hostname to connect to Apache Kafka.
 
 ```console
-kafka-console-producer.sh --broker-list kafka:9092 --topic test
+kafka-console-producer.sh --bootstrap-server kafka:9092 --topic test
 kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic test --from-beginning
 ```
 
@@ -363,7 +363,7 @@ In order to configure authentication, you must configure the Apache Kafka listen
 
 Let's see an example to configure Apache Kafka with `SASL_SSL` authentication for communications with clients, and `SSL` authentication for inter-broker communication.
 
-The environment variables below should be define to configure the listeners, and the SASL credentials for client communications:
+The environment variables below should be defined to configure the listeners, and the SASL credentials for client communications:
 
 ```console
 KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=INTERNAL:SSL,CLIENT:SASL_SSL
@@ -438,7 +438,7 @@ Use this to generate messages using a secure setup:
 
 ```console
 export KAFKA_OPTS="-Djava.security.auth.login.config=/opt/bitnami/kafka/conf/kafka_jaas.conf"
-kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic test --producer.config /opt/bitnami/kafka/conf/producer.properties
+kafka-console-producer.sh --bootstrap-server 127.0.0.1:9092 --topic test --producer.config /opt/bitnami/kafka/conf/producer.properties
 ```
 
 Use this to consume messages using a secure setup
@@ -459,7 +459,7 @@ When configuring your broker to use `SASL` or `SASL_SSL` for inter-broker commun
 
 #### Apache Kafka client configuration
 
-When configuring Apache Kafka with `SASL` or `SASL_SSL` for communications with clients, you can provide your the SASL credentials using this environment variables:
+When configuring Apache Kafka with `SASL` or `SASL_SSL` for communications with clients, you can provide the SASL credentials using this environment variables:
 
 * `KAFKA_CLIENT_USERS`: Apache Kafka client user. Default: **user**
 * `KAFKA_CLIENT_PASSWORDS`: Apache Kafka client user password. Default: **bitnami**
