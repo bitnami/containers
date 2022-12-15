@@ -8,17 +8,17 @@
     },
     "laravel": {
         "arch": "amd64",
-        "digest": "cdd1f34b33300110488d4c44805f5906d29ffadb571bc99127fbf9d56ac9d7b3",
+        "digest": "87830a0bf9a661e3b4d7f70d0056ea28a162439a25a27bc6d3db3ef7d9f78b07",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.3.12-0"
+        "version": "9.4.0-0"
     },
     "node": {
         "arch": "amd64",
-        "digest": "8fccadb21076f52eb22e57df6e44876590381fc2a4d012d857a8d8337addbee5",
+        "digest": "8ae4f78854fece62ada7eb585fd1177777125d2585cf474c58707752dc68497f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.21.1-1"
+        "version": "14.21.2-0"
     },
     "php": {
         "arch": "amd64",
