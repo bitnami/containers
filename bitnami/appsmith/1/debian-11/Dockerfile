@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.8.12-debian-11-r0" \
+      org.opencontainers.image.ref.name="1.8.12-debian-11-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/appsmith" \
       org.opencontainers.image.title="appsmith" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -24,8 +24,8 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "python-3.8.16-0-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.5-1-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.4-1-linux-${OS_ARCH}-debian-11" \
-      "node-16.18.1-1-linux-${OS_ARCH}-debian-11" \
-      "nginx-1.23.2-2-linux-${OS_ARCH}-debian-11" \
+      "node-16.19.0-0-linux-${OS_ARCH}-debian-11" \
+      "nginx-1.23.3-0-linux-${OS_ARCH}-debian-11" \
       "mongodb-shell-1.6.1-1-linux-${OS_ARCH}-debian-11" \
       "java-11.0.17-7-2-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
