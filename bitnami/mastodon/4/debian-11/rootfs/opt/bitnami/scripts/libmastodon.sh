@@ -108,8 +108,8 @@ mastodon_validate() {
     check_true_false "MASTODON_S3_ENABLED"
 
     if is_boolean_yes "$MASTODON_S3_ENABLED"; then
-        check_empty_value "MASTODON_S3_HOST"
-        check_resolved_hostname "$MASTODON_S3_HOST"
+        check_empty_value "MASTODON_S3_HOSTNAME"
+        check_resolved_hostname "$MASTODON_S3_HOSTNAME"
         check_valid_port "MASTODON_S3_PORT_NUMBER"
         check_empty_value "MASTODON_S3_ALIAS"
         check_empty_value "MASTODON_S3_ENDPOINT"
@@ -283,7 +283,7 @@ mastodon_wait_for_postgresql_connection() {
         debug "$res"
         echo "$res" | grep -q '1 row'
     }
-    if ! retry_while "check_postgresql_connection" "$MASTODON_STARTUP_ATTEMPTS"; then
+    if ! retry_while "debug_execute check_postgresql_connection" "$MASTODON_STARTUP_ATTEMPTS"; then
         error "Could not connect to the database"
         return 1
     fi
@@ -302,7 +302,7 @@ mastodon_wait_for_elasticsearch_connection() {
     local -r connection_string="${1:?missing connection string}"
     info "Waiting for Elasticsearch to be ready at $connection_string"
     check_elasticsearch_connection() {
-        local curl_args=("-k" "$connection_string")
+        local curl_args=("-k" "$connection_string" "--max-time" "5")
         if ! is_empty_value "${MASTODON_ELASTICSEARCH_PASSWORD:-}"; then
             curl_args+=("-u" "$MASTODON_ELASTICSEARCH_USER:$MASTODON_ELASTICSEARCH_PASSWORD")
         fi
@@ -310,7 +310,7 @@ mastodon_wait_for_elasticsearch_connection() {
         debug "$res"
         echo "$res" | grep -q 'You Know'
     }
-    if ! retry_while "check_elasticsearch_connection" "$MASTODON_STARTUP_ATTEMPTS"; then
+    if ! retry_while "debug_execute check_elasticsearch_connection" "$MASTODON_STARTUP_ATTEMPTS"; then
         error "Could not connect to the database"
         return 1
     fi
@@ -325,16 +325,11 @@ mastodon_wait_for_elasticsearch_connection() {
 # Returns: None
 #########################
 mastodon_wait_for_s3_connection() {
-    local -r connection_string="${1:?missing connection string}"
-    info "Waiting for S3 to be ready at $connection_string"
-    check_s3_connection() {
-        local -r curl_args=("-k" "$connection_string")
-        local -r res=$(curl "${curl_args[@]}" 2>&1)
-        debug "$res"
-        echo "$res" | grep -q 'NoSuchBucket'
-    }
-    if ! retry_while "check_s3_connection" "$MASTODON_STARTUP_ATTEMPTS"; then
-        error "Could not connect to the database"
+    local -r host="${1:?missing host}"
+    local -r port="${2:?missing port}"
+    info "Waiting for S3 to be ready at ${MASTODON_S3_PROTOCOL}://${host}:${port}"
+    if ! retry_while "debug_execute wait-for-port --host ${host} ${port}" "$MASTODON_STARTUP_ATTEMPTS"; then
+        error "Could not connect to S3"
         return 1
     fi
     info "S3 instance is ready"
@@ -357,7 +352,7 @@ mastodon_wait_for_redis_connection() {
         debug "$res"
         echo "$res" | grep -q 'PONG'
     }
-    if ! retry_while "check_redis_connection" "$MASTODON_STARTUP_ATTEMPTS"; then
+    if ! retry_while "debug_execute check_redis_connection" "$MASTODON_STARTUP_ATTEMPTS"; then
         error "Could not connect to Redis"
         return 1
     fi
@@ -378,12 +373,12 @@ mastodon_wait_for_web_connection() {
     check_web_connection() {
         # We use the /health endpoint to check if the web server is ready
         # https://github.com/mastodon/mastodon/blob/main/config/initializers/1_hosts.rb#L34
-        local -r curl_args=("${connection_string}/health")
+        local -r curl_args=("${connection_string}/health" "--max-time" "5")
         local -r res=$(curl "${curl_args[@]}" 2>&1)
         debug "$res"
         echo "$res" | grep -q 'OK'
     }
-    if ! retry_while "check_web_connection" "$MASTODON_STARTUP_ATTEMPTS"; then
+    if ! retry_while "debug_execute check_web_connection" "$MASTODON_STARTUP_ATTEMPTS"; then
         error "Could not connect to the Web server"
         return 1
     fi
@@ -416,7 +411,7 @@ mastodon_initialize() {
         # https://github.com/mastodon/mastodon/blob/main/chart/templates/deployment-web.yaml#L89
         if is_boolean_yes "$MASTODON_S3_ENABLED"; then
             info "Waiting for S3 connection"
-            mastodon_wait_for_s3_connection "$MASTODON_S3_ENDPOINT"
+            mastodon_wait_for_s3_connection "$MASTODON_S3_HOSTNAME" "$MASTODON_S3_PORT_NUMBER"
         fi
 
         local -r psql_connection_string="postgresql://${MASTODON_DATABASE_USERNAME}:${MASTODON_DATABASE_PASSWORD}@${MASTODON_DATABASE_HOST}:${MASTODON_DATABASE_PORT_NUMBER}/${MASTODON_DATABASE_NAME}"
