@@ -36,10 +36,10 @@
     },
     "redis-client": {
         "arch": "amd64",
-        "digest": "aaa61a0e84d3b649d47d99920339d8d208eb336b6d13323dfe1e51c4eb3a317d",
+        "digest": "4fe3c81d6175a56324b6f94ab79bf881f06d2a10823d78b580b729e6d5bb02d6",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.0.6-0"
+        "version": "7.0.7-0"
     },
     "ruby": {
         "arch": "amd64",
