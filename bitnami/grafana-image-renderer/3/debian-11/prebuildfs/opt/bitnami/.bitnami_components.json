@@ -8,10 +8,10 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "02c19388db4ac3c8d8d614285a7092714836f87c45cf2ab39982361346816749",
+        "digest": "14ee50e198ce5a739e1040de6428ed438fe5b1d45819a14e87f39c7d3d900197",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "16.18.1-1"
+        "version": "16.19.0-0"
     },
     "python": {
         "arch": "amd64",
