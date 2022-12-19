@@ -22,9 +22,9 @@
     },
     "redis": {
         "arch": "amd64",
-        "digest": "985baa5af26a4987c33b2fa5e1287b1be455860f294713c5404a418c3e67867e",
+        "digest": "53412ccf729c44b0ec18559477977874ac885cdc7a2a0f1cc5fc51db6885061f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.0.6-0"
+        "version": "7.0.7-0"
     }
 }
