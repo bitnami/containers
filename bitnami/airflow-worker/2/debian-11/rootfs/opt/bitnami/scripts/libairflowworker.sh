@@ -47,8 +47,8 @@ airflow_worker_validate() {
 #########################
 airflow_worker_initialize() {
     # Remove airflow-worker.pid file if exists to prevent error after WSL restarts
-    if [ -f /opt/bitnami/airflow/tmp/airflow-worker.pid ]; then
-        rm /opt/bitnami/airflow/tmp/airflow-worker.pid
+    if [ -f $AIRFLOW_PID_FILE ]; then
+        rm $AIRFLOW_PID_FILE
     fi
 
     # Change permissions if running as root
