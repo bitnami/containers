@@ -142,7 +142,7 @@ $ docker run --name oauth2-proxy bitnami/oauth2-proxy:latest
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/blob/main/bitnami/oauth2-proxy/issues), or submit a [pull
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/blob/main/bitnami/oauth2-proxy/issues) or submitting a [pull
 request](https://github.com/bitnami/containers/blob/main/bitnami/oauth2-proxy/pulls) with your contribution.
 
 ## Issues

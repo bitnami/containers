@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.13.0-debian-11-r1" \
+      org.opencontainers.image.ref.name="1.13.1-debian-11-r20" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cosign" \
       org.opencontainers.image.title="cosign" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.13.0"
+      org.opencontainers.image.version="1.13.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -21,7 +21,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "cosign-1.13.0-0-linux-${OS_ARCH}-debian-11" \
+      "cosign-1.13.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -39,7 +39,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN mkdir -p "/cosign-keys" && chmod -R 777 "/cosign-keys"
 RUN mkdir /.sigstore && chmod g+rwX /.sigstore
 
-ENV APP_VERSION="1.13.0" \
+ENV APP_VERSION="1.13.1" \
     BITNAMI_APP_NAME="cosign" \
     PATH="/opt/bitnami/cosign/bin:$PATH"
 

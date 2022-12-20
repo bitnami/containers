@@ -77,7 +77,7 @@ Check the [official Kapacitor documentation](https://docs.influxdata.com/kapacit
 
 # Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/blob/main/bitnami/kapacitor/issues), or submit a [pull request](https://github.com/bitnami/containers/blob/main/bitnami/kapacitor/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/blob/main/bitnami/kapacitor/issues) or submitting a [pull request](https://github.com/bitnami/containers/blob/main/bitnami/kapacitor/pulls) with your contribution.
 
 # Issues
 

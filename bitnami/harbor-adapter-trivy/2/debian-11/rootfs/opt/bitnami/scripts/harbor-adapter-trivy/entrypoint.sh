@@ -5,7 +5,7 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-#set -o xtrace
+# set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
 . /opt/bitnami/scripts/libbitnami.sh
@@ -15,9 +15,9 @@ set -o pipefail
 print_welcome_page
 
 if [[ "$*" = *"/opt/bitnami/scripts/harbor-adapter-trivy/run.sh"* ]]; then
-    info "** Starting Harbor Adapter Trivy setup **"
+    info "** Starting harbor-adapter-trivy setup **"
     /opt/bitnami/scripts/harbor-adapter-trivy/setup.sh
-    info "** Harbor Adapter Trivy setup finished! **"
+    info "** harbor-adapter-trivy setup finished! **"
 fi
 
 echo ""

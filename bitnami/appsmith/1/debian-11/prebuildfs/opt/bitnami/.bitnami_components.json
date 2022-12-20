@@ -1,0 +1,65 @@
+{
+    "appsmith": {
+        "arch": "amd64",
+        "digest": "12c3fd06ca71f430d8e55d6f244142b740a758e4a4d2d405362d0540921781d1",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.8.13-0"
+    },
+    "gosu": {
+        "arch": "amd64",
+        "digest": "7969f4cc8ad0a260f891cccf5694686a513f4706b48771d605645be1f3f072e2",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.14.0-156"
+    },
+    "java": {
+        "arch": "amd64",
+        "digest": "e2e6c8abc916f52a57d4af507b87da59ac3ae5cc0b1e8ea0f12756ebc90be8f5",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "11.0.17-7-2"
+    },
+    "mongodb-shell": {
+        "arch": "amd64",
+        "digest": "27f654d6961a6e45e18096a9e9b22125542599bedd1c353281b978b12e9baf7c",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.6.1-1"
+    },
+    "nginx": {
+        "arch": "amd64",
+        "digest": "2e58816925d6fa15ffd2f98a2cdc7e8b9d4f8f23bae30bb04a175899ed8e4029",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.23.3-0"
+    },
+    "node": {
+        "arch": "amd64",
+        "digest": "14ee50e198ce5a739e1040de6428ed438fe5b1d45819a14e87f39c7d3d900197",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "16.19.0-0"
+    },
+    "python": {
+        "arch": "amd64",
+        "digest": "ec9073bd5f6b3a19ff2de522d3164682162fe17836ff7fc72fb9d3a459c3ca6b",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "3.8.16-0"
+    },
+    "render-template": {
+        "arch": "amd64",
+        "digest": "045804695ee2c857d91f28ba623f8c5f6898f5ae9016ee78504d3af76411c261",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.4-1"
+    },
+    "wait-for-port": {
+        "arch": "amd64",
+        "digest": "6b1bd6f534ef27b696922dcbdc0e377ac1a7db1e2bc1ff688ae0fa80bbfcb618",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.5-1"
+    }
+}

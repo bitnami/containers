@@ -1,9 +1,9 @@
 {
     "oras": {
         "arch": "amd64",
-        "digest": "5a9ebcd55ae08243b2e7cd47567f284d2cec649ced17cd6e7b39d4c4ac895cd5",
+        "digest": "29aa8fcc7dec0b30adbbed4550326707e549ddf0ea9ef84a52a9974b17fbf900",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.15.0-1"
+        "version": "0.16.0-0"
     }
 }

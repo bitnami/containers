@@ -1,0 +1,23 @@
+{
+    "gosu": {
+        "arch": "amd64",
+        "digest": "7969f4cc8ad0a260f891cccf5694686a513f4706b48771d605645be1f3f072e2",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.14.0-156"
+    },
+    "java": {
+        "arch": "amd64",
+        "digest": "ba9b1ccbacdefcc3fbbf6eca8c546323399d05ce4d4377fd32434378794da445",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "17.0.5-8-2"
+    },
+    "neo4j": {
+        "arch": "amd64",
+        "digest": "e7205212504596c7dc7a10ec3badb3b31b7691ae03cd024566974b1237e4d1b1",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "5.2.0-1"
+    }
+}

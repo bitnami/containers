@@ -439,14 +439,14 @@ The above command scales up the number of replicas to `3`. You can scale down in
 Starting with version 6, Redis(R) adds the support for SSL/TLS connections. Should you desire to enable this optional feature, you may use the following environment variables to configure the application:
 
  - `REDIS_TLS_ENABLED`: Whether to enable TLS for traffic or not. Defaults to `no`.
- - `REDIS_TLS_PORT`: Port used for TLS secure traffic. Defaults to `6379`.
+ - `REDIS_TLS_PORT_NUMBER`: Port used for TLS secure traffic. Defaults to `6379`.
  - `REDIS_TLS_CERT_FILE`: File containing the certificate file for the TLS traffic. No defaults.
  - `REDIS_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
  - `REDIS_TLS_CA_FILE`: File containing the CA of the certificate. No defaults.
  - `REDIS_TLS_DH_PARAMS_FILE`: File containing DH params (in order to support DH based ciphers). No defaults.
  - `REDIS_TLS_AUTH_CLIENTS`: Whether to require clients to authenticate or not. Defaults to `yes`.
 
-When enabling TLS, conventional standard traffic is disabled by default. However this new feature is not mutually exclusive, which means it is possible to listen to both TLS and non-TLS connection simultaneously. To enable non-TLS traffic, set `REDIS_TLS_PORT` to another port different than `0`.
+When enabling TLS, conventional standard traffic is disabled by default. However this new feature is not mutually exclusive, which means it is possible to listen to both TLS and non-TLS connection simultaneously. To enable non-TLS traffic, set `REDIS_TLS_PORT_NUMBER` to another port different than `0`.
 
 1. Using `docker run`
 
@@ -650,7 +650,7 @@ docker-compose up -d
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 

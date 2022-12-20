@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.6.1-debian-11-r48" \
+      org.opencontainers.image.ref.name="0.6.2-debian-11-r7" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/metrics-server" \
       org.opencontainers.image.title="metrics-server" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.6.1"
+      org.opencontainers.image.version="0.6.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -21,7 +21,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "metrics-server-0.6.1-154-linux-${OS_ARCH}-debian-11" \
+      "metrics-server-0.6.2-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -38,7 +38,7 @@ RUN apt-get autoremove --purge -y curl && \
 RUN chmod g+rwX /opt/bitnami
 
 RUN chown -R 1001:root /opt/bitnami/metrics-server && chmod -R g+rwX /opt/bitnami/metrics-server
-ENV APP_VERSION="0.6.1" \
+ENV APP_VERSION="0.6.2" \
     BITNAMI_APP_NAME="metrics-server" \
     PATH="/opt/bitnami/metrics-server/bin:$PATH"
 

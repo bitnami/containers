@@ -4,7 +4,7 @@
 
 > TensorFlow ResNet is a client utility for use with TensorFlow Serving and ResNet models.
 
-[Overview of TensorFlow ResNet](https://github.com/tensorflow/models/tree/master/official/resnet)
+[Overview of TensorFlow ResNet](https://github.com/tensorflow/models)
 
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
@@ -172,7 +172,7 @@ Tensorflow Resnet can be customized by specifying environment variables on the f
 
 ## Contributing
 
-We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 

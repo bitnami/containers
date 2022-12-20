@@ -94,13 +94,13 @@ kafka:
 
 ## Connecting to other containers
 
-Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a Apache Kafka server running inside a container can easily be accessed by your application containers.
+Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), an Apache Kafka server running inside a container can easily be accessed by your application containers.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
 ### Using the Command Line
 
-In this example, we will create a Apache Kafka client instance that will connect to the server instance that is running on the same docker network as the client.
+In this example, we will create an Apache Kafka client instance that will connect to the server instance that is running on the same docker network as the client.
 
 #### Step 1: Create a network
 
@@ -185,7 +185,7 @@ $ docker-compose up -d
 The configuration can easily be setup with the Bitnami Apache Kafka Docker image using the following environment variables:
 
 * `ALLOW_PLAINTEXT_LISTENER`: Allow to use the PLAINTEXT listener. Default: **no**.
-* `KAFKA_INTER_BROKER_USER`: Apache Kafka inter broker communication user. Default: admin. Default: **user**.
+* `KAFKA_INTER_BROKER_USER`: Apache Kafka inter broker communication user. Default: **user**.
 * `KAFKA_INTER_BROKER_PASSWORD`: Apache Kafka inter broker communication password. Default: **bitnami**.
 * `KAFKA_CERTIFICATE_PASSWORD`: Password for certificates. No defaults.
 * `KAFKA_HEAP_OPTS`: Apache Kafka's Java Heap size. Default: **-Xmx1024m -Xms1024m**.
@@ -263,7 +263,7 @@ This greatly simplifies Kafka’s architecture by consolidating responsibility f
 
 More Info can be found here: https://developer.confluent.io/learn/kraft/
 
-> **NOTE:** KRaft is in early access and should be used in development only. It is not suitable for production.
+> **NOTE:** According to [KIP-833](https://cwiki.apache.org/confluence/display/KAFKA/KIP-833%3A+Mark+KRaft+as+Production+Ready), KRaft is now in a production-ready state.
 
 Configuration here has been crafted from the [Kraft Repo](https://github.com/apache/kafka/tree/trunk/config/kraft).
 
@@ -329,7 +329,7 @@ And expose the external port:
 These clients, from the same host, will use `localhost` to connect to Apache Kafka.
 
 ```console
-kafka-console-producer.sh --broker-list 127.0.0.1:9093 --topic test
+kafka-console-producer.sh --bootstrap-server 127.0.0.1:9093 --topic test
 kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9093 --topic test --from-beginning
 ```
 
@@ -340,7 +340,7 @@ If running these commands from another machine, change the address accordingly.
 These clients, from other containers on the same Docker network, will use the kafka container service hostname to connect to Apache Kafka.
 
 ```console
-kafka-console-producer.sh --broker-list kafka:9092 --topic test
+kafka-console-producer.sh --bootstrap-server kafka:9092 --topic test
 kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic test --from-beginning
 ```
 
@@ -363,7 +363,7 @@ In order to configure authentication, you must configure the Apache Kafka listen
 
 Let's see an example to configure Apache Kafka with `SASL_SSL` authentication for communications with clients, and `SSL` authentication for inter-broker communication.
 
-The environment variables below should be define to configure the listeners, and the SASL credentials for client communications:
+The environment variables below should be defined to configure the listeners, and the SASL credentials for client communications:
 
 ```console
 KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=INTERNAL:SSL,CLIENT:SASL_SSL
@@ -389,7 +389,7 @@ Keep in mind the following notes:
 * When prompted to enter a password, use the same one for all.
 * Set the Common Name or FQDN values to your Apache Kafka container hostname, e.g. `kafka.example.com`. After entering this value, when prompted "What is your first and last name?", enter this value as well.
   * As an alternative, you can disable host name verification setting the environment variable `KAFKA_CFG_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM` to an empty string.
-* When setting up a Apache Kafka Cluster (check [this section](#setting-up-a-kafka-cluster) for more information), each Apache Kafka broker and logical client needs its own keystore. You will have to repeat the process for each of the brokers in the cluster.
+* When setting up an Apache Kafka Cluster (check [this section](#setting-up-a-kafka-cluster) for more information), each Apache Kafka broker and logical client needs its own keystore. You will have to repeat the process for each of the brokers in the cluster.
 
 The following docker-compose file is an example showing how to mount your JKS certificates protected by the password `certificatePassword123`. Additionally it is specifying the Apache Kafka container hostname and the credentials for the client and zookeeper users.
 
@@ -438,7 +438,7 @@ Use this to generate messages using a secure setup:
 
 ```console
 export KAFKA_OPTS="-Djava.security.auth.login.config=/opt/bitnami/kafka/conf/kafka_jaas.conf"
-kafka-console-producer.sh --broker-list 127.0.0.1:9092 --topic test --producer.config /opt/bitnami/kafka/conf/producer.properties
+kafka-console-producer.sh --bootstrap-server 127.0.0.1:9092 --topic test --producer.config /opt/bitnami/kafka/conf/producer.properties
 ```
 
 Use this to consume messages using a secure setup
@@ -459,7 +459,7 @@ When configuring your broker to use `SASL` or `SASL_SSL` for inter-broker commun
 
 #### Apache Kafka client configuration
 
-When configuring Apache Kafka with `SASL` or `SASL_SSL` for communications with clients, you can provide your the SASL credentials using this environment variables:
+When configuring Apache Kafka with `SASL` or `SASL_SSL` for communications with clients, you can provide the SASL credentials using this environment variables:
 
 * `KAFKA_CLIENT_USERS`: Apache Kafka client user. Default: **user**
 * `KAFKA_CLIENT_PASSWORDS`: Apache Kafka client user password. Default: **bitnami**
@@ -498,9 +498,9 @@ In order to authenticate Apache Kafka against a Zookeeper server with `SASL_SSL`
 
 > Note: You **must** also use your own certificates for SSL. You can mount your Java Key Stores (`zookeeper.keystore.jks` and `zookeeper.truststore.jks`) or PEM files (`zookeeper.keystore.pem`, `zookeeper.keystore.key` and `zookeeper.truststore.pem`) into `/opt/bitnami/kafka/conf/certs`. If client authentication is `none` or `want` in Zookeeper, the cert files are optional.
 
-### Setting up a Apache Kafka Cluster
+### Setting up an Apache Kafka Cluster
 
-A Apache Kafka cluster can easily be setup with the Bitnami Apache Kafka Docker image using the following environment variables:
+An Apache Kafka cluster can easily be setup with the Bitnami Apache Kafka Docker image using the following environment variables:
 
  - `KAFKA_CFG_ZOOKEEPER_CONNECT`: Comma separated host:port pairs, each corresponding to a Zookeeper Server.
 
@@ -561,7 +561,7 @@ $ docker run --name kafka3 \
   bitnami/kafka:latest
 ```
 
-You now have a Apache Kafka cluster up and running. You can scale the cluster by adding/removing slaves without incurring any downtime.
+You now have an Apache Kafka cluster up and running. You can scale the cluster by adding/removing slaves without incurring any downtime.
 
 With Docker Compose, topic replication can be setup using:
 
@@ -699,14 +699,14 @@ We need to mount two volumes in a container we will use to create the backup: a 
 
 ```console
 $ docker run --rm -v /path/to/kafka-backups:/backups --volumes-from kafka busybox \
-  cp -a /bitnami/kafka:latest /backups/latest
+  cp -a /bitnami/kafka /backups/latest
 ```
 
 Or using Docker Compose:
 
 ```console
 $ docker run --rm -v /path/to/kafka-backups:/backups --volumes-from `docker-compose ps -q kafka` busybox \
-  cp -a /bitnami/kafka:latest /backups/latest
+  cp -a /bitnami/kafka /backups/latest
 ```
 
 ### Restoring a backup
@@ -862,7 +862,7 @@ Configuration changes. Most environment variables now start with `KAFKA_CFG_`, a
 
 ## Contributing
 
-We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 

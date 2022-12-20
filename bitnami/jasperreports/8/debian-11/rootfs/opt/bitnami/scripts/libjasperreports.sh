@@ -98,7 +98,7 @@ jasperreports_validate() {
         done
         is_empty_value "$JASPERREPORTS_SMTP_PORT_NUMBER" && print_validation_error "The JASPERREPORTS_SMTP_PORT_NUMBER environment variable is empty or not set."
         ! is_empty_value "$JASPERREPORTS_SMTP_PORT_NUMBER" && check_valid_port "JASPERREPORTS_SMTP_PORT_NUMBER"
-        ! is_empty_value "$JASPERREPORTS_SMTP_PROTOCOL" && check_multi_value "JASPERREPORTS_SMTP_PROTOCOL" "smtp smtps ssl tls"
+        ! is_empty_value "$JASPERREPORTS_SMTP_PROTOCOL" && check_multi_value "JASPERREPORTS_SMTP_PROTOCOL" "smtp smtps"
     fi
 
     return "$error_code"
@@ -172,7 +172,7 @@ jasperreports_configure_smtp() {
     jasperreports_conf_set "quartz.mail.sender.protocol" "$JASPERREPORTS_SMTP_PROTOCOL"
     jasperreports_conf_set "quartz.mail.sender.username" "$JASPERREPORTS_SMTP_USER"
     jasperreports_conf_set "quartz.mail.sender.password" "$JASPERREPORTS_SMTP_PASSWORD"
-    jasperreports_conf_set "quartz.mail.sender.from" "$JASPERREPORTS_SMTP_USER"
+    jasperreports_conf_set "quartz.mail.sender.from" "$JASPERREPORTS_SMTP_EMAIL"
     # We only need to configure the URL when sending reports via email, so the user gets the proper URL for accessing the report
     # Source: https://community.jaspersoft.com/documentation/tibco-jasperreports-server-installation-guide/v720/configuring-report-scheduling
     jasperreports_conf_set "quartz.web.deployment.uri" "$JASPERREPORTS_HOST"
@@ -362,6 +362,9 @@ jasperreports_initialize() {
                 # Add a new prop node with mail.smtp.startls.enable=true
                 xmlstarlet ed -L --subnode '//*[name()="property" and @name="javaMailProperties"]/*[name()="props"]' --type elem -n "prop" -v "true" "${JASPERREPORTS_BASE_DIR}/WEB-INF/applicationContext-report-scheduling.xml"
                 xmlstarlet ed -L -i '//*[name()="prop" and not(@key)]' --type "attr" -n "key" -v "mail.smtp.starttls.enable" "${JASPERREPORTS_BASE_DIR}/WEB-INF/applicationContext-report-scheduling.xml"
+                # Add a new prop node with mail.smtp.ssl.protocols=TLSv1.2 (see issue [#112](https://github.com/bitnami/bitnami-docker-jasperreports/#112)).
+                xmlstarlet ed -L --subnode '//*[name()="property" and @name="javaMailProperties"]/*[name()="props"]' --type elem -n "prop" -v "TLSv1.2" "${JASPERREPORTS_BASE_DIR}/WEB-INF/applicationContext-report-scheduling.xml"
+                xmlstarlet ed -L -i '//*[name()="prop" and not(@key)]' --type "attr" -n "key" -v "mail.smtp.ssl.protocols" "${JASPERREPORTS_BASE_DIR}/WEB-INF/applicationContext-report-scheduling.xml"
             fi
 
         else

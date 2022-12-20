@@ -246,6 +246,9 @@ discourse_create_conf_file() {
     discourse_conf_set "db_username" "$DISCOURSE_DATABASE_USER"
     discourse_conf_set "db_password" "$DISCOURSE_DATABASE_PASSWORD"
     discourse_conf_set "db_name" "$DISCOURSE_DATABASE_NAME"
+    # Database backup settings
+    discourse_conf_set "db_backup_host" "$DISCOURSE_DB_BACKUP_HOST"
+    discourse_conf_set "db_backup_port" "$DISCOURSE_DB_BACKUP_PORT"
     # Redis credentials
     discourse_conf_set "redis_host" "$DISCOURSE_REDIS_HOST"
     discourse_conf_set "redis_port" "$DISCOURSE_REDIS_PORT_NUMBER"

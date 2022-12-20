@@ -116,7 +116,14 @@ phpmyadmin_initialize() {
     # Configure allow deny order/rules settings
     ! is_empty_value "$CONFIGURATION_ALLOWDENY_ORDER" && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['AllowDeny']['order']" "$ALLOWDENY_ORDER"
     ! is_empty_value "$CONFIGURATION_ALLOWDENY_RULES" && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['AllowDeny']['rules']" "array($ALLOWDENY_RULES)" yes
-    
+
+    # Configure automatic login with account
+    if ! is_empty_value "$DATABASE_USER"; then
+      info "Setting auth_type option" && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['auth_type']" config
+      info "Setting database user option" && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['user']" "$DATABASE_USER"
+      ! is_empty_value "$DATABASE_PASSWORD" && info "Setting database password option" && phpmyadmin_conf_set "\$cfg['Servers'][\$i]['password']" "$DATABASE_PASSWORD"
+    fi
+
     # Generate random blowfish secret, used for encrypting
     info "Setting blowfish_secret option to a randomly generated value"
     local blowfish_secret

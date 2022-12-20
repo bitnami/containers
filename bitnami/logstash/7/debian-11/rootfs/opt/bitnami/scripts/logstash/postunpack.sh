@@ -17,9 +17,13 @@ set -o pipefail
 info "Creating Logstash daemon user"
 ensure_user_exists "$LOGSTASH_DAEMON_USER" --group "$LOGSTASH_DAEMON_GROUP"
 
-for dir in "$LOGSTASH_CONF_DIR" "$LOGSTASH_PIPELINE_CONF_DIR" "$LOGSTASH_MOUNTED_CONF_DIR" "$LOGSTASH_MOUNTED_PIPELINE_CONF_DIR" "$LOGSTASH_VOLUME_DIR" "$LOGSTASH_DATA_DIR"; do
+for dir in "$LOGSTASH_BASE_DIR/vendor/bundle/jruby" "$LOGSTASH_CONF_DIR" "$LOGSTASH_PIPELINE_CONF_DIR" "$LOGSTASH_MOUNTED_CONF_DIR" "$LOGSTASH_MOUNTED_PIPELINE_CONF_DIR" "$LOGSTASH_VOLUME_DIR" "$LOGSTASH_DATA_DIR"; do
     ensure_dir_exists "$dir"
     configure_permissions_ownership "$dir" -d "775" -f "664" -u "$LOGSTASH_DAEMON_USER" -g "root"
+done
+
+for file in "$LOGSTASH_BASE_DIR/Gemfile" "$LOGSTASH_BASE_DIR/Gemfile.lock"; do
+    configure_permissions_ownership "$file" -f "664" -u "$LOGSTASH_DAEMON_USER" -g "root"
 done
 
 info "Configuring paths"
@@ -46,3 +50,5 @@ appender.json_console.layout.eventEol = true
 rootLogger.level = \${sys:ls.log.level}
 rootLogger.appenderRef.console.ref = \${sys:ls.log.format}_console
 EOF
+
+logstash_install_plugins

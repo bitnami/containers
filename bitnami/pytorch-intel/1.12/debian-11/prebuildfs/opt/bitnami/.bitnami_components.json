@@ -1,0 +1,23 @@
+{
+    "gosu": {
+        "arch": "amd64",
+        "digest": "7969f4cc8ad0a260f891cccf5694686a513f4706b48771d605645be1f3f072e2",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.14.0-156"
+    },
+    "python": {
+        "arch": "amd64",
+        "digest": "ec9073bd5f6b3a19ff2de522d3164682162fe17836ff7fc72fb9d3a459c3ca6b",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "3.8.16-0"
+    },
+    "pytorch-intel": {
+        "arch": "amd64",
+        "digest": "cef9e9c3ddc578b8723e7460cdc18081c30e43be1ce8038b9b3e67efe098e091",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.12.300-0"
+    }
+}

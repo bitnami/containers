@@ -21,3 +21,5 @@ am_i_root && ensure_user_exists "$LOGSTASH_DAEMON_USER" --group "$LOGSTASH_DAEMO
 
 # Ensure Logstash is initialized
 logstash_initialize
+# Install Logstash plugins
+logstash_install_plugins

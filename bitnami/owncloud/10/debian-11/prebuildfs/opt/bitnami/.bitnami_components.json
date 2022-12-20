@@ -4,48 +4,48 @@
         "digest": "836005c75ea1c35ca68b9f468340a854c6237a50ca341dba29e39ec4cf32acf3",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.4.54-157"
+        "version": "2.4.54-158"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "f21869b27c26b9c3053bce8b419a0fdf1dc45fcf13a7c2058e0afb6996d3687f",
+        "digest": "7969f4cc8ad0a260f891cccf5694686a513f4706b48771d605645be1f3f072e2",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-155"
+        "version": "1.14.0-156"
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "402497e0c72e0d6ca251cc28550dfb7e23619562015b79531d78da39319839af",
+        "digest": "43e3df993fed23ea81504e23559c11d759f0029387c7f6c18b958b734492a7d6",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.4.32-1"
+        "version": "7.4.33-1"
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "0fda0610f58dd980bcf431d256d3fbad89b58f915af3d9a642b1588057d353f5",
+        "digest": "5c67ad12863f967c435da9070c023bf5342c83f2a82d03c7e822cfbc28c342d1",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.6.10-1"
+        "version": "10.6.11-1"
     },
     "owncloud": {
         "arch": "amd64",
-        "digest": "3ae6f631a32e22e77c7a15cac77c954db46627c7dee94493c9ddee304f210bca",
+        "digest": "67f617a05fa14b141278cefd1bcd4c4f6960a3c263ce762a989d210378d8bd01",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.11.0-1"
+        "version": "10.11.0-2"
     },
     "php": {
         "arch": "amd64",
-        "digest": "d36d85746ca409a8c4454cccb88f48ea00a2228ade1a0101f0cd770e60d3cc36",
+        "digest": "e58d8a23732911f371753bc9afd2bca38896c87ef75dae2aad64d5a3083bf4b0",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.4.32-1"
+        "version": "7.4.33-2"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "cb0a32f121f58797a77247fe41ae2b9f9b705bdf170f55015963c667edca6360",
+        "digest": "045804695ee2c857d91f28ba623f8c5f6898f5ae9016ee78504d3af76411c261",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.3-154"
+        "version": "1.0.4-1"
     }
 }

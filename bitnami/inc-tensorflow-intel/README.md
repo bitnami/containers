@@ -1,10 +1,10 @@
-# Intel Neural Compressor for TensorFlow packaged by Bitnami
+# Intel Neural Compressor for TF packaged by Bitnami
 
-## What is Intel Neural Compressor for TensorFlow?
+## What is Intel Neural Compressor for TF?
 
 > TensorFlow is an open-source high-performance machine learning framework. This image is equipped with Intel&reg; Neural Compressor (INC) to improve the performance of inference with TensorFlow.
 
-[Overview of Intel Neural Compressor for TensorFlow](https://github.com/intel/neural-compressor/)
+[Overview of Intel Neural Compressor for TF](https://github.com/intel/neural-compressor/)
 
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
@@ -69,7 +69,7 @@ $ docker build -t bitnami/APP:latest .
 
 ## Entering the REPL
 
-By default, running this image will drop you into the Python REPL, where you can interactively test and try things out with Intel Neural Compressor for TensorFlow in Python.
+By default, running this image will drop you into the Python REPL, where you can interactively test and try things out with Intel Neural Compressor for TF in Python.
 
 ```console
 $ docker run -it --name inc bitnami/inc-tensorflow-intel
@@ -77,18 +77,18 @@ $ docker run -it --name inc bitnami/inc-tensorflow-intel
 
 ## Configuration
 
-### Running your Intel Neural Compressor for TensorFlow app
+### Running your Intel Neural Compressor for TF app
 
-The default work directory for the Intel Neural Compressor for TensorFlow image is `/app`. You can mount a folder from your host here that includes your Intel Neural Compressor for TensorFlow script, and run it normally using the `python` command.
+The default work directory for the Intel Neural Compressor for TF image is `/app`. You can mount a folder from your host here that includes your Intel Neural Compressor for TF script, and run it normally using the `python` command.
 
 ```console
 $ docker run -it --name inc -v /path/to/app:/app bitnami/inc-tensorflow-intel \
   python script.py
 ```
 
-### Running a Intel Neural Compressor for TensorFlow app with package dependencies
+### Running a Intel Neural Compressor for TF app with package dependencies
 
-If your Intel Neural Compressor for TensorFlow app has a `requirements.txt` defining your app's dependencies, you can install the dependencies before running your app.
+If your Intel Neural Compressor for TF app has a `requirements.txt` defining your app's dependencies, you can install the dependencies before running your app.
 
 ```console
 $ docker run -it --name inc -v /path/to/app:/app bitnami/inc-tensorflow-intel \
@@ -103,7 +103,7 @@ $ docker run -it --name inc -v /path/to/app:/app bitnami/inc-tensorflow-intel \
 
 ### Upgrade this image
 
-Bitnami provides up-to-date versions of Intel Neural Compressor for TensorFlow, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
+Bitnami provides up-to-date versions of Intel Neural Compressor for TF, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
 #### Step 1: Get the updated image
 
@@ -141,7 +141,7 @@ $ docker-compose up inc-tensorflow-intel
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 

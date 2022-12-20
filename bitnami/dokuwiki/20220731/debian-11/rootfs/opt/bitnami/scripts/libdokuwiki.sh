@@ -3,12 +3,14 @@
 # Bitnami DokuWiki library
 
 # shellcheck disable=SC1091
+. /opt/bitnami/scripts/php-env.sh
 
 # Load generic libraries
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libvalidations.sh
 . /opt/bitnami/scripts/libpersistence.sh
+. /opt/bitnami/scripts/libphp.sh
 . /opt/bitnami/scripts/libwebserver.sh
 
 ########################
@@ -60,6 +62,7 @@ dokuwiki_initialize() {
             dokuwiki_pass_wizard
             web_server_stop
             dokuwiki_enable_friendly_urls
+            dokuwiki_configure_DOKU_INC
         fi
 
         info "Persisting DokuWiki installation"
@@ -122,4 +125,22 @@ dokuwiki_pass_wizard() {
 dokuwiki_enable_friendly_urls() {
     # Based on: https://www.dokuwiki.org/rewrite
     echo "\$conf['userewrite'] = 1; // URL rewriting is handled by the webserver" >>"${DOKUWIKI_BASE_DIR}/conf/local.php"
+}
+
+########################
+# Configure DOKU_INC
+# Globals:
+#   DOKUWIKI_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+dokuwiki_configure_DOKU_INC() {
+    # Based on: https://github.com/bitnami/containers/pull/12535
+    # Fix DOKU_INC, since we split application from state, DokuWiki's plugins and templates need to know where they live
+    info "Fix DOKU_INC variable"
+    auto_prepend_file="$DOKUWIKI_BASE_DIR/conf/auto_prepend.php"
+    printf '<?php\ndefine("DOKU_INC", "%s/");\n' "$DOKUWIKI_BASE_DIR" >>"$auto_prepend_file"
+    php_conf_set auto_prepend_file "$auto_prepend_file"
 }

@@ -27,8 +27,7 @@ $ docker run --name wavefront-kubernetes-collector bitnami/wavefront-kubernetes-
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
-
-* [`1`, `1-scratch`, `1.12.0`, `1.12.0-scratch-r3`, `latest` (1/scratch/Dockerfile)](https://github.com/bitnami/containers/blob/main/bitnami/wavefront-kubernetes-collector/1/scratch/Dockerfile)
+You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
@@ -66,7 +65,7 @@ $ docker run --rm --name wavefront-kubernetes-collector bitnami/wavefront-kubern
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 

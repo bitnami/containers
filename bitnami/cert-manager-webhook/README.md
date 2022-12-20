@@ -1,11 +1,11 @@
-# Cert Manager Webhook packaged by Bitnami
+# cert-manager Webhook packaged by Bitnami
 
-## What is Cert Manager Webhook?
+## What is cert-manager Webhook?
 
-> Cert Manager Webhook provides dynamic admission control over cert-manager resources using a webhook server.
+> cert-manager Webhook provides dynamic admission control over cert-manager resources using a webhook server.
 > Cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources.
 
-[Overview of Cert Manager Webhook](https://github.com/jetstack/cert-manager)
+[Overview of cert-manager Webhook](https://github.com/jetstack/cert-manager)
 
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
@@ -57,7 +57,7 @@ For further documentation, please check [here](https://github.com/jetstack/cert-
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 

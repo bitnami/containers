@@ -84,13 +84,9 @@ RUN conda install --quiet --yes \
 USER 1001
 ```
 
-## Branch Deprecation Notice
-
-Jupyter Base Notebook's branch 1 and 2 are no longer maintained by upstream and are now internally tagged as to be deprecated. These branches will no longer be released in our catalog a month after this notice is published, but already released container images will still persist in the registries. Valid to be removed starting on: 10-28-2022
-
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 

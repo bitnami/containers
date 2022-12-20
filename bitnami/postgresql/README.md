@@ -723,6 +723,10 @@ It is possible to change the user that PostgreSQL will use to execute the init s
 | POSTGRESQL_INITSCRIPTS_USERNAME | User that will be used to execute the init scripts                |
 | POSTGRESQL_INITSCRIPTS_PASSWORD | Password for the user specified in POSTGRESQL_INITSCRIPT_USERNAME |
 
+### Default toast compression
+
+The default toast compression is `pglz`, but you can modify it by setting the environment variable `POSTGRES_DEFAULT_COMPRESSION` with the desired value. For example: `POSTGRES_DEFAULT_COMPRESSION='lz4'`.
+
 ## Logging
 
 The Bitnami PostgreSQL Docker image sends the container logs to the `stdout`. To view the logs:
@@ -846,7 +850,7 @@ $ docker-compose up postgresql
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 

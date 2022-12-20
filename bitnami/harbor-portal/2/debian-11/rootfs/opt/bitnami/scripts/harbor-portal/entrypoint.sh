@@ -5,7 +5,7 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-# set -o xtrace # Uncomment this line for debugging purpose
+# set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
 . /opt/bitnami/scripts/libbitnami.sh
@@ -17,10 +17,10 @@ set -o pipefail
 print_welcome_page
 
 if [[ "$1" = "/opt/bitnami/scripts/nginx/run.sh" ]]; then
-    info "** Starting Harbor Portal setup **"
+    info "** Starting harbor-portal setup **"
     /opt/bitnami/scripts/nginx/setup.sh
     /opt/bitnami/scripts/harbor-portal/setup.sh
-    info "** Harbor Portal setup finished! **"
+    info "** harbor-portal setup finished! **"
 fi
 
 echo ""

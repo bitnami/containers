@@ -91,6 +91,12 @@ redis_cluster_override_conf() {
         redis_conf_set tls-cluster yes
         redis_conf_set tls-replication yes
     fi
+    if ! is_empty_value "$REDIS_CLUSTER_ANNOUNCE_PORT"; then
+        redis_conf_set "cluster-announce-port" "$REDIS_CLUSTER_ANNOUNCE_PORT"
+    fi
+    if ! is_empty_value "$REDIS_CLUSTER_ANNOUNCE_BUS_PORT"; then
+        redis_conf_set "cluster-announce-bus-port" "$REDIS_CLUSTER_ANNOUNCE_BUS_PORT"
+    fi
     # Multithreading configuration
     if ! is_empty_value "$REDIS_IO_THREADS_DO_READS"; then
         redis_conf_set "io-threads-do-reads" "$REDIS_IO_THREADS_DO_READS"
@@ -195,7 +201,8 @@ redis_cluster_update_ips() {
     if [[ ! -f "${REDIS_DATA_DIR}/nodes.sh" ]]; then
         # It is the first initialization so store the nodes
         for node in "${nodes[@]}"; do
-            ip=$(wait_for_dns_lookup "$node" "$REDIS_DNS_RETRIES" 5)
+            read -r -a host_and_port <<< "$(to_host_and_port "$node")"
+            ip=$(wait_for_dns_lookup "${host_and_port[0]}" "$REDIS_DNS_RETRIES" 5)
             host_2_ip_array["$node"]="$ip"
         done
         echo "Storing map with hostnames and IPs"
@@ -205,7 +212,8 @@ redis_cluster_update_ips() {
         . "${REDIS_DATA_DIR}/nodes.sh"
         # Update the IPs in the nodes.conf
         for node in "${nodes[@]}"; do
-            newIP=$(wait_for_dns_lookup "$node" "$REDIS_DNS_RETRIES" 5)
+            read -r -a host_and_port <<< "$(to_host_and_port "$node")"
+            newIP=$(wait_for_dns_lookup "${host_and_port[0]}" "$REDIS_DNS_RETRIES" 5)
             # The node can be new if we are updating the cluster, so catch the unbound variable error
             if [[ ${host_2_ip_array[$node]+true} ]]; then
                 echo "Changing old IP ${host_2_ip_array[$node]} by the new one ${newIP}"
@@ -234,7 +242,7 @@ to_host_and_port() {
 
     if [ "${#host_and_port[*]}" -eq "1" ]; then
         if is_boolean_yes "$REDIS_TLS_ENABLED"; then
-            host_and_port=("${host_and_port[0]}" "${REDIS_TLS_PORT}")
+            host_and_port=("${host_and_port[0]}" "${REDIS_TLS_PORT_NUMBER}")
         else
             host_and_port=("${host_and_port[0]}" "${REDIS_PORT_NUMBER}")
         fi

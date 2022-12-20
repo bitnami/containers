@@ -1,0 +1,58 @@
+{
+    "gosu": {
+        "arch": "amd64",
+        "digest": "7969f4cc8ad0a260f891cccf5694686a513f4706b48771d605645be1f3f072e2",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.14.0-156"
+    },
+    "mastodon": {
+        "arch": "amd64",
+        "digest": "75c4c99b0d88dcb3892421c906daa8eac5ed973131886d25df48aa20627fbee5",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "4.0.2-1"
+    },
+    "node": {
+        "arch": "amd64",
+        "digest": "14ee50e198ce5a739e1040de6428ed438fe5b1d45819a14e87f39c7d3d900197",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "16.19.0-0"
+    },
+    "postgresql-client": {
+        "arch": "amd64",
+        "digest": "b52b264c1ed3c900d650d320317d66287e15a734ab6e94de10270c939cc6ab75",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "15.1.0-0"
+    },
+    "python": {
+        "arch": "amd64",
+        "digest": "ec9073bd5f6b3a19ff2de522d3164682162fe17836ff7fc72fb9d3a459c3ca6b",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "3.8.16-0"
+    },
+    "redis-client": {
+        "arch": "amd64",
+        "digest": "4fe3c81d6175a56324b6f94ab79bf881f06d2a10823d78b580b729e6d5bb02d6",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "7.0.7-0"
+    },
+    "ruby": {
+        "arch": "amd64",
+        "digest": "0a86cae5a2016a5b9826307613ad20b6084d3078d68378f507c8895805d0e957",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "3.0.5-0"
+    },
+    "wait-for-port": {
+        "arch": "amd64",
+        "digest": "6b1bd6f534ef27b696922dcbdc0e377ac1a7db1e2bc1ff688ae0fa80bbfcb618",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.5-1"
+    }
+}

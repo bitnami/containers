@@ -58,11 +58,8 @@
         {
           "action_id": "container-image-publish",
           "params": {
-            "application": {
-              "details": {
-                "name": "{VIB_ENV_CONTAINER}",
-                "tag": "{VIB_ENV_TAG}"
-              }
+            "metadata": {
+              "tags": {VIB_ENV_ROLLING_TAGS}
             },
             "repository": {
               "kind": "OCI",

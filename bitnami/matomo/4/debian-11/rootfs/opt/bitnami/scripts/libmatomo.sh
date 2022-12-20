@@ -170,6 +170,11 @@ EOF
             ini-file set -s "General" -k "force_ssl" -v "1" "$MATOMO_CONF_FILE"
         fi
 
+        if ! is_empty_value "$MATOMO_PROXY_HOST_HEADER"; then
+        info "Configuring Matomo to check proxy_host_headers for client IP"
+            ini-file set -s "General" -k "proxy_host_headers[]" -v "$MATOMO_PROXY_HOST_HEADER" "$MATOMO_CONF_FILE"
+        fi
+
         # Database SSL
         if is_boolean_yes "$MATOMO_ENABLE_DATABASE_SSL"; then
             info "Enabling database SSL"

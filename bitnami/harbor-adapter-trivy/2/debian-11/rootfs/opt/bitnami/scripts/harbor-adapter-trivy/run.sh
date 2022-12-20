@@ -5,18 +5,20 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-# set -o xtrace
+# set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libos.sh
+
+# Load harbor-adapter-trivy environment
 . /opt/bitnami/scripts/harbor-adapter-trivy-env.sh
 
-cmd=$(command -v scanner-trivy)
+CMD="$(command -v scanner-trivy)"
 
-info "** Starting Harbor Adapter Trivy **"
+info "** Starting harbor-adapter-trivy **"
 if am_i_root; then
-    exec gosu "$SCANNER_TRIVY_DAEMON_USER" "$cmd" "$@"
+    exec gosu "$SCANNER_TRIVY_DAEMON_USER" "$CMD" "$@"
 else
-    exec "$cmd" "$@"
+    exec "$CMD" "$@"
 fi

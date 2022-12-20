@@ -78,16 +78,16 @@ clickhouse_copy_mounted_configuration() {
             info "Copying mounted configuration from $CLICKHOUSE_MOUNTED_CONF_DIR"
             # Copy first the files at the base of the mounted folder to go to ClickHouse
             # base etc folder
-            find "$CLICKHOUSE_MOUNTED_CONF_DIR" -maxdepth 1 -type f -exec cp -L {} "$CLICKHOUSE_CONF_DIR" \;
+            find "$CLICKHOUSE_MOUNTED_CONF_DIR" -maxdepth 1 \( -type f -o -type l \) -exec cp -L {} "$CLICKHOUSE_CONF_DIR" \;
 
             # The ClickHouse override directories (etc/conf.d and etc/users.d) do not support subfolders. That means we cannot
             # copy directly with cp -RL because we need all override xml files to have at the root of these subfolders. In the helm
             # chart we want to allow overrides from different ConfigMaps and Secrets so we need to use the find command
             if [[ -d "${CLICKHOUSE_MOUNTED_CONF_DIR}/conf.d" ]]; then
-                find "${CLICKHOUSE_MOUNTED_CONF_DIR}/conf.d" -type f -exec cp -L {} "${CLICKHOUSE_CONF_DIR}/conf.d" \;
+                find "${CLICKHOUSE_MOUNTED_CONF_DIR}/conf.d" \( -type f -o -type l \) -exec cp -L {} "${CLICKHOUSE_CONF_DIR}/conf.d" \;
             fi
             if [[ -d "${CLICKHOUSE_MOUNTED_CONF_DIR}/users.d" ]]; then
-                find "${CLICKHOUSE_MOUNTED_CONF_DIR}/users.d" -type f -exec cp -L {} "${CLICKHOUSE_CONF_DIR}/users.d" \;
+                find "${CLICKHOUSE_MOUNTED_CONF_DIR}/users.d" \( -type f -o -type l \) -exec cp -L {} "${CLICKHOUSE_CONF_DIR}/users.d" \;
             fi
         fi
     else

@@ -349,3 +349,30 @@ logstash_stop() {
     debug "Stopping Logstash"
     stop_service_using_pid "$LOGSTASH_PID_FILE"
 }
+
+########################
+# Install Logstash plugins
+# Globals:
+#   LOGSTASH_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+logstash_install_plugins() {
+    read -r -a plugins_list <<<"$(tr ',;' ' ' <<<"$LOGSTASH_PLUGINS")"
+
+    # Skip if there isn't any plugin to install
+    [[ -z "${plugins_list[*]:-}" ]] && return
+
+    # Install plugins
+    info "Installing plugins: ${plugins_list[*]}"
+    for plugin in "${plugins_list[@]}"; do
+        debug "Installing plugin: ${plugin}"
+        if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+            logstash-plugin install "$plugin"
+        else
+            logstash-plugin install "$plugin" >/dev/null 2>&1
+        fi
+    done
+}

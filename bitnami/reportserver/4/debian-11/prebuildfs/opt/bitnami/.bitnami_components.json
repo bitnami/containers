@@ -1,44 +1,44 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "f21869b27c26b9c3053bce8b419a0fdf1dc45fcf13a7c2058e0afb6996d3687f",
+        "digest": "c42abbc5d57ba4c33c89e4daf46c33b0173565fbf533ef7a60281cf3283f611f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-155"
+        "version": "1.16.0-0"
     },
     "java": {
         "arch": "amd64",
-        "digest": "c375579c55ee13d9561dcfaeba0338a6c2f5233dc386ead63dbbb67cc974fcdb",
+        "digest": "e2e6c8abc916f52a57d4af507b87da59ac3ae5cc0b1e8ea0f12756ebc90be8f5",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.16-1"
+        "version": "11.0.17-7-2"
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "0fda0610f58dd980bcf431d256d3fbad89b58f915af3d9a642b1588057d353f5",
+        "digest": "5c67ad12863f967c435da9070c023bf5342c83f2a82d03c7e822cfbc28c342d1",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.6.10-1"
+        "version": "10.6.11-1"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "cb0a32f121f58797a77247fe41ae2b9f9b705bdf170f55015963c667edca6360",
+        "digest": "045804695ee2c857d91f28ba623f8c5f6898f5ae9016ee78504d3af76411c261",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.3-154"
+        "version": "1.0.4-1"
     },
     "reportserver": {
         "arch": "amd64",
-        "digest": "4f66be6e9ed822d68bbaf7802857f02ace3483fbbe1c72573f92440ece1f7a65",
+        "digest": "c286666ada5917719c1d63eb1cac07000f014a8fd816f59e7aba00ba85d91dbe",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.3.0-6078-1"
+        "version": "4.4.0-6084-0"
     },
     "tomcat": {
         "arch": "amd64",
-        "digest": "e4261b73b49c6aada46f6d3fd137e316cea0191ae35ea158a940827031c5248c",
+        "digest": "7c6a1cc1983ed9f4f4e30168d003675e79db5baa8080b691ab4eaf0863e91efc",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.0.68-0"
+        "version": "9.0.70-1"
     }
 }

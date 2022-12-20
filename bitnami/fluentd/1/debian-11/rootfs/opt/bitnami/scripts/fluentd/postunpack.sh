@@ -22,3 +22,7 @@ for dir in "$FLUENTD_CONF_DIR" "$FLUENTD_LOG_DIR" "$FLUENTD_PLUGINS_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done
+
+# Fluentd requires the /tmp directory to not be world-writable
+# This ensures the sticky bit (t) is set
+chmod +t /tmp

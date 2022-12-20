@@ -32,7 +32,7 @@ $ docker-compose up -d
 
 ## How to deploy Logstash in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Logstash Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/logstash).
+Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Logstash Chart GitHub repository](https://github.com/bitnami/charts/tree/main/bitnami/logstash).
 
 Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
 
@@ -170,6 +170,28 @@ You can expose the Logstash API by setting the environment variable `LOGSTASH_EX
 $ docker run -d --env LOGSTASH_EXPOSE_API=yes --env LOGSTASH_API_PORT_NUMBER=9090 -p 9090:9090 bitnami/logstash:latest
 ```
 
+### Plugins
+
+You can add extra plugins by setting the `LOGSTASH_PLUGINS` environment variable. To specify multiple plugins, separate them by spaces, commas or semicolons. When the container is initialized it will install all of the specified plugins before starting Logstash.
+
+```console
+$ docker run -d --name logstash \
+    -e LOGSTASH_PLUGINS=logstash-input-github \
+    bitnami/logstash:latest
+```
+
+#### Adding plugins at build time (persisting plugins)
+
+The Bitnami Logstash image provides a way to create your custom image installing plugins on build time. This is the preferred way to persist plugins when using Logstash, as they will not be installed every time the container is started but just once at build time.
+
+To create your own image providing plugins execute the flowing command:
+
+```console
+$ docker build --build-arg LOGSTASH_PLUGINS=<plugin1,plugin2,...> -t bitnami/logstash:latest 'https://github.com/bitnami/containers/blob/main/bitnami/logstash.git#main:8/debian-11'
+```
+
+The command above will build the image providing this GitHub repository as build context, and will pass the list of plugins to install to the build logic.
+
 ## Logging
 
 The Bitnami Logstash Docker image sends the container logs to `stdout`. To view the logs:
@@ -225,7 +247,7 @@ $ docker run --name logstash bitnami/logstash:latest
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 

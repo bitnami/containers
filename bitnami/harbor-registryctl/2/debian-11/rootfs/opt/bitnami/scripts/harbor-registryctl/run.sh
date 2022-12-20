@@ -5,13 +5,21 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-#set -o xtrace
+# set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
 . /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libos.sh
 
-readonly cmd=$(command -v harbor_registryctl)
-readonly flags=("-c" "/etc/registryctl/config.yml" "$@")
+# Load harbor-registryctl environment
+. /opt/bitnami/scripts/harbor-registryctl-env.sh
 
-info "** Starting Harbor Registryctl **"
-exec "${cmd}" "${flags[@]}"
+CMD="$(command -v harbor_registryctl)"
+FLAGS=("-c" "/etc/registryctl/config.yml" "$@")
+
+info "** Starting harbor-registryctl **"
+if am_i_root; then
+    exec gosu "$HARBOR_REGISTRYCTL_DAEMON_USER" "$CMD" "${FLAGS[@]}"
+else
+    exec "$CMD" "${FLAGS[@]}"
+fi

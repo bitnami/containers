@@ -2,7 +2,7 @@
 
 ## What is ACME Solver?
 
-> ACME Solver is a part of the Cert Manager project. It will ensure certificates are valid and up to date periodically, and attempt to renew certificates at an appropriate time before expiry.
+> ACME Solver is a part of the cert-manager project. It will ensure certificates are valid and up to date periodically, and attempt to renew certificates at an appropriate time before expiry.
 > Cert-manager is a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources.
 
 [Overview of ACME Solver](https://github.com/jetstack/cert-manager)
@@ -57,7 +57,7 @@ For further documentation, please check [here](https://github.com/jetstack/cert-
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 

@@ -1,9 +1,9 @@
 {
     "kiam": {
         "arch": "amd64",
-        "digest": "a4eaa63788d33842a41bc2d390858712f076baf4b4e29953ec4f0bc7d02930b8",
+        "digest": "0fd6cc582b0063f4994f9ad33383feb01925ed8f04b7d0b8c99146d2a4324017",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.2.0-153"
+        "version": "4.2.0-154"
     }
 }

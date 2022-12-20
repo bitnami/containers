@@ -149,11 +149,11 @@ Additionally, SSL configuration can be easily activated following the next steps
 
 2. You need to mount your spark keystore and truststore files to `/opt/bitnami/spark/conf/certs`. Please note they should be called `spark-keystore.jks` and `spark-truststore.jks` and they should be in JKS format.
 
-### Setting up a Apache Spark Cluster
+### Setting up an Apache Spark Cluster
 
-A Apache Spark cluster can easily be setup with the default docker-compose.yml file from the root of this repo. The docker-compose includes two different services, `spark-master` and `spark-worker.`
+An Apache Spark cluster can easily be setup with the default docker-compose.yml file from the root of this repo. The docker-compose includes two different services, `spark-master` and `spark-worker.`
 
-By default, when you deploy the docker-compose file you will get a Apache Spark cluster with 1 master and 1 worker.
+By default, when you deploy the docker-compose file you will get an Apache Spark cluster with 1 master and 1 worker.
 
 If you want N workers, all you need to do is start the docker-compose deployment with the following command:
 
@@ -187,6 +187,7 @@ By default, this container bundles a generic set of jar files but the default im
 
 ```Dockerfile
 FROM bitnami/spark
+USER 1001
 RUN curl https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.11.704/aws-java-sdk-bundle-1.11.704.jar --output /opt/bitnami/spark/jars/aws-java-sdk-bundle-1.11.704.jar
 ```
 
@@ -199,11 +200,10 @@ Go to https://spark.apache.org/downloads.html and copy the download url bundling
 ```Dockerfile
 FROM bitnami/spark:3.0.0
 
-USER root
+USER 1001
 RUN rm -r /opt/bitnami/spark/jars && \
     curl --location http://mirror.cc.columbia.edu/pub/software/apache/spark/spark-3.0.0/spark-3.0.0-bin-hadoop2.7.tgz | \
     tar --extract --gzip --strip=1 --directory /opt/bitnami/spark/ spark-3.0.0-bin-hadoop2.7/jars/
-USER 1001
 ```
 
 You can check the Hadoop version by running the following commands in the new container image:
@@ -254,14 +254,14 @@ We need to mount two volumes in a container we will use to create the backup: a 
 
 ```console
 $ docker run --rm -v /path/to/spark-backups:/backups --volumes-from spark busybox \
-  cp -a /bitnami/spark:latest /backups/latest
+  cp -a /bitnami/spark /backups/latest
 ```
 
 or using Docker Compose:
 
 ```console
 $ docker run --rm -v /path/to/spark-backups:/backups --volumes-from `docker-compose ps -q spark` busybox \
-  cp -a /bitnami/spark:latest /backups/latest
+  cp -a /bitnami/spark /backups/latest
 ```
 
 ### Restoring a backup
@@ -342,7 +342,7 @@ $ docker-compose up spark
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues), or submit a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
 
 ## Issues
 
