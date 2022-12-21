@@ -389,7 +389,7 @@ Keep in mind the following notes:
 * When prompted to enter a password, use the same one for all.
 * Set the Common Name or FQDN values to your Apache Kafka container hostname, e.g. `kafka.example.com`. After entering this value, when prompted "What is your first and last name?", enter this value as well.
   * As an alternative, you can disable host name verification setting the environment variable `KAFKA_CFG_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM` to an empty string.
-* When setting up an Apache Kafka Cluster (check [this section](#setting-up-a-kafka-cluster) for more information), each Apache Kafka broker and logical client needs its own keystore. You will have to repeat the process for each of the brokers in the cluster.
+* When setting up a Apache Kafka Cluster (check [this section](#setting-up-a-kafka-cluster) for more information), each Apache Kafka broker and logical client needs its own keystore. You will have to repeat the process for each of the brokers in the cluster.
 
 The following docker-compose file is an example showing how to mount your JKS certificates protected by the password `certificatePassword123`. Additionally it is specifying the Apache Kafka container hostname and the credentials for the client and zookeeper users.
 
@@ -459,7 +459,7 @@ When configuring your broker to use `SASL` or `SASL_SSL` for inter-broker commun
 
 #### Apache Kafka client configuration
 
-When configuring Apache Kafka with `SASL` or `SASL_SSL` for communications with clients, you can provide the SASL credentials using this environment variables:
+When configuring Apache Kafka with `SASL` or `SASL_SSL` for communications with clients, you can provide your SASL credentials using this environment variables:
 
 * `KAFKA_CLIENT_USERS`: Apache Kafka client user. Default: **user**
 * `KAFKA_CLIENT_PASSWORDS`: Apache Kafka client user password. Default: **bitnami**
