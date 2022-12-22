@@ -6,7 +6,7 @@ ARG WITH_ALL_LOCALES="no"
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.11.11-debian-11-r12" \
+      org.opencontainers.image.ref.name="3.11.11-debian-11-r13" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/moodle" \
       org.opencontainers.image.title="moodle" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -30,7 +30,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "libphp-7.4.33-1-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.4-1-linux-${OS_ARCH}-debian-11" \
       "moodle-3.11.11-1-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.16.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
