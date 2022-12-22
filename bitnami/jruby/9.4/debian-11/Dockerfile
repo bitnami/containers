@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="9.4.0-0-debian-11-r6" \
+      org.opencontainers.image.ref.name="9.4.0-0-debian-11-r7" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jruby" \
       org.opencontainers.image.title="jruby" \
       org.opencontainers.image.vendor="VMware, Inc." \
