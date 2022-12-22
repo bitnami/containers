@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.4.0-debian-11-r5" \
+      org.opencontainers.image.ref.name="4.4.1-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pgpool" \
       org.opencontainers.image.title="pgpool" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="4.4.0"
+      org.opencontainers.image.version="4.4.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,7 +23,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "postgresql-client-14.6.0-0-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.5-1-linux-${OS_ARCH}-debian-11" \
-      "pgpool-4.4.0-0-linux-${OS_ARCH}-debian-11" \
+      "pgpool-4.4.1-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -42,7 +42,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/pgpool/postunpack.sh
-ENV APP_VERSION="4.4.0" \
+ENV APP_VERSION="4.4.1" \
     BITNAMI_APP_NAME="pgpool" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib/:/opt/bitnami/common/lib64/:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/common/bin:/opt/bitnami/common/sbin:/opt/bitnami/pgpool/bin:$PATH"
