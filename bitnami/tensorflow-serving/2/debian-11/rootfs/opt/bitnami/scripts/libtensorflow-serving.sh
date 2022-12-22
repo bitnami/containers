@@ -40,7 +40,7 @@ tensorflow_serving_validate() {
 }
 
 ########################
-# Render config files from templates
+# Generate config files from mounted files, if mounted, or render config templates
 # Globals:
 #   TENSORFLOW_SERVING_*
 # Arguments:
@@ -48,16 +48,27 @@ tensorflow_serving_validate() {
 # Returns:
 #   None
 #########################
-tensorflow_serving_render_templates() {
+tensorflow_serving_generate_config() {
     local template_dir="${BITNAMI_ROOT_DIR}/scripts/tensorflow-serving/bitnami-templates"
-
-    info "Rendering configuration files form templates ..."
 
     export tensorflow_monitoring_enable="false"
     is_boolean_yes "$TENSORFLOW_SERVING_ENABLE_MONITORING" && tensorflow_monitoring_enable="true"
 
-    render-template "${template_dir}/monitoring.config.tpl" > "${TENSORFLOW_SERVING_MONITORING_CONF_FILE}"
-    render-template "${template_dir}/tensorflow-serving.conf.tpl" > "${TENSORFLOW_SERVING_CONF_FILE}"
+    if [[ -f "${TENSORFLOW_SERVING_VOLUME_DIR}/conf/monitoring.config" ]]; then
+        info "Detected mounted monitoring.config configuration file"
+        cp "${TENSORFLOW_SERVING_VOLUME_DIR}/conf/monitoring.config" "$TENSORFLOW_SERVING_MONITORING_CONF_FILE"
+    else
+        info "Rendering monitoring.config configuration file from template"
+        render-template "${template_dir}/monitoring.config.tpl" > "$TENSORFLOW_SERVING_MONITORING_CONF_FILE"
+    fi
+
+    if [[ -f "${TENSORFLOW_SERVING_VOLUME_DIR}/conf/tensorflow-serving.conf" ]]; then
+        info "Detected mounted tensorflow-serving.conf configuration file"
+        cp "${TENSORFLOW_SERVING_VOLUME_DIR}/conf/tensorflow-serving.conf" "$TENSORFLOW_SERVING_CONF_FILE"
+    else
+        info "Rendering tensorflow-serving.conf configuration file from template"
+        render-template "${template_dir}/tensorflow-serving.conf.tpl" > "$TENSORFLOW_SERVING_CONF_FILE"
+    fi
 }
 
 
@@ -112,5 +123,5 @@ tensorflow_serving_initialize() {
 
     rm -f "$TENSORFLOW_SERVING_PID_FILE"
 
-    tensorflow_serving_render_templates
+    tensorflow_serving_generate_config
 }

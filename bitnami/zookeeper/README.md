@@ -104,13 +104,13 @@ services:
 
 ## Connecting to other containers
 
-Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a Apache ZooKeeper server running inside a container can easily be accessed by your application containers.
+Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), an Apache ZooKeeper server running inside a container can easily be accessed by your application containers.
 
 Containers attached to the same network can communicate with each other using the container name as the hostname.
 
 ### Using the Command Line
 
-In this example, we will create a Apache ZooKeeper client instance that will connect to the server instance that is running on the same docker network as the client.
+In this example, we will create an Apache ZooKeeper client instance that will connect to the server instance that is running on the same docker network as the client.
 
 #### Step 1: Create a network
 
@@ -182,7 +182,7 @@ The configuration can easily be setup with the Bitnami Apache ZooKeeper Docker i
  - `ZOO_SNAPCOUNT`: The number of transactions recorded in the transaction log before a snapshot can be taken (and the transaction log rolled). Default: **100000**
  - `ZOO_INIT_LIMIT`: Apache ZooKeeper uses to limit the length of time the Apache ZooKeeper servers in quorum have to connect to a leader. Default: **10**
  - `ZOO_SYNC_LIMIT`: How far out of date a server can be from a leader. Default: **5**
- - `ZOO_MAX_CNXNS`: Limits the total number of concurrent connections that can be made to a Apache ZooKeeper server. Setting it to 0 entirely removes the limit. Default: **0**
+ - `ZOO_MAX_CNXNS`: Limits the total number of concurrent connections that can be made to an Apache ZooKeeper server. Setting it to 0 entirely removes the limit. Default: **0**
  - `ZOO_MAX_CLIENT_CNXNS`: Limits the number of concurrent connections that a single client may make to a single member of the Apache ZooKeeper ensemble. Default: **60**
  - `ZOO_4LW_COMMANDS_WHITELIST`: List of whitelisted [4LW](https://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_4lw) commands. Default: **srvr, mntr**
  - `ZOO_SERVERS`: Comma, space or semi-colon separated list of servers. Example: zoo1:2888:3888,zoo2:2888:3888 or if specifying server IDs zoo1:2888:3888::1,zoo2:2888:3888::2. Default: No defaults.
@@ -322,11 +322,11 @@ services:
   ...
 ```
 
-### Setting up a Apache ZooKeeper ensemble
+### Setting up an Apache ZooKeeper ensemble
 
 A Apache ZooKeeper (https://zookeeper.apache.org/doc/r3.1.2/zookeeperAdmin.html) cluster can easily be setup with the Bitnami Apache ZooKeeper Docker image using the following environment variables:
 
- - `ZOO_SERVERS`: Comma, space or semi-colon separated list of servers.This can be done with or without specifying the ID of the server in the ensemble. No defaults. Examples:
+ - `ZOO_SERVERS`: Comma, space or semi-colon separated list of servers. This can be done with or without specifying the ID of the server in the ensemble. No defaults. Examples:
   - without Server ID - zoo1:2888:3888,zoo2:2888:3888
   - with Server ID - zoo1:2888:3888::1,zoo2:2888:3888::2
   - without Server ID and Observers - zoo1:2888:3888,zoo2:2888:3888:observer
@@ -346,7 +346,7 @@ $ docker network create app-tier --driver bridge
 
 #### Step 1: Create the first node
 
-The first step is to create one  Apache ZooKeeper instance.
+The first step is to create one Apache ZooKeeper instance.
 
 ```console
 $ docker run --name zookeeper1 \

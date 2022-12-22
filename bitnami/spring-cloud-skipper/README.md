@@ -77,10 +77,6 @@ A relational database is used to store stream and task definitions as well as th
 - SPRING_DATASOURCE_PASSWORD=bn_skipper
 - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.mariadb.jdbc.Driver
 
-If you are using MariaDB 10.2 or greater, you must also set the following environment variable:
-
-- spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MariaDB102Dialect
-
 Consult the [spring-cloud-skipper Reference Documentation](https://docs.spring.io/spring-cloud-skipper/docs/current/reference/htmlsingle/#_local_platform_configuration) to find the completed list of documentation.
 
 In the same way, you might need to customize the JVM. Use the `JAVA_OPTS` environment variable for this purpose.

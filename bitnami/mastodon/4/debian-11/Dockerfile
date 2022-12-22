@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.0.2-debian-11-r4" \
+      org.opencontainers.image.ref.name="4.0.2-debian-11-r8" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mastodon" \
       org.opencontainers.image.title="mastodon" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,10 +22,11 @@ RUN install_packages acl ca-certificates curl ffmpeg file imagemagick libbsd0 li
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.8.16-0-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.5-1-linux-${OS_ARCH}-debian-11" \
       "ruby-3.0.5-0-linux-${OS_ARCH}-debian-11" \
-      "redis-client-7.0.5-1-linux-${OS_ARCH}-debian-11" \
+      "redis-client-7.0.7-0-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-15.1.0-0-linux-${OS_ARCH}-debian-11" \
-      "node-16.18.1-1-linux-${OS_ARCH}-debian-11" \
+      "node-16.19.0-0-linux-${OS_ARCH}-debian-11" \
       "mastodon-4.0.2-1-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
     ) && \
@@ -46,7 +47,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/mastodon/postunpack.sh
 ENV APP_VERSION="4.0.2" \
     BITNAMI_APP_NAME="mastodon" \
-    PATH="/opt/bitnami/python/bin:/opt/bitnami/ruby/bin:/opt/bitnami/redis/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/mastodon/bin:/opt/bitnami/common/bin:$PATH"
+    PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/redis/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/mastodon/bin:$PATH"
 
 EXPOSE 3000
 

@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="9.4.0-0-debian-11-r2" \
+      org.opencontainers.image.ref.name="9.4.0-0-debian-11-r6" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jruby" \
       org.opencontainers.image.title="jruby" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,9 +21,9 @@ RUN install_packages build-essential ca-certificates curl git libbrotli1 libbz2-
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.8.16-0-linux-${OS_ARCH}-debian-11" \
-      "node-16.18.1-1-linux-${OS_ARCH}-debian-11" \
+      "node-16.19.0-0-linux-${OS_ARCH}-debian-11" \
       "java-17.0.5-8-2-linux-${OS_ARCH}-debian-11" \
-      "jruby-9.4.0-0-1-linux-${OS_ARCH}-debian-11" \
+      "jruby-9.4.0-0-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \

@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.13.7-debian-11-r17" \
+      org.opencontainers.image.ref.name="0.13.7-debian-11-r21" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/metallb-speaker" \
       org.opencontainers.image.title="metallb-speaker" \
       org.opencontainers.image.vendor="VMware, Inc." \

@@ -14,7 +14,7 @@ set -o pipefail
 . /opt/bitnami/scripts/rabbitmq-env.sh
 
 if [[ -f "${RABBITMQ_LIB_DIR}/.start" ]]; then
-    rabbitmqctl node_health_check
+    rabbitmq-diagnostics -q ping
     RESULT=$?
     if [[ $RESULT -ne 0 ]]; then
         rabbitmqctl status

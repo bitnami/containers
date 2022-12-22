@@ -15,10 +15,10 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "02c19388db4ac3c8d8d614285a7092714836f87c45cf2ab39982361346816749",
+        "digest": "14ee50e198ce5a739e1040de6428ed438fe5b1d45819a14e87f39c7d3d900197",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "16.18.1-1"
+        "version": "16.19.0-0"
     },
     "postgresql-client": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "redis-client": {
         "arch": "amd64",
-        "digest": "7479e99b80ec66856b17439a20335bb6c285362f39927e61aebc0f87faee951f",
+        "digest": "4fe3c81d6175a56324b6f94ab79bf881f06d2a10823d78b580b729e6d5bb02d6",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.0.5-1"
+        "version": "7.0.7-0"
     },
     "ruby": {
         "arch": "amd64",
@@ -47,5 +47,12 @@
         "distro": "debian-11",
         "type": "NAMI",
         "version": "3.0.5-0"
+    },
+    "wait-for-port": {
+        "arch": "amd64",
+        "digest": "6b1bd6f534ef27b696922dcbdc0e377ac1a7db1e2bc1ff688ae0fa80bbfcb618",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.5-1"
     }
 }
