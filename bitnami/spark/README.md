@@ -151,7 +151,7 @@ Additionally, SSL configuration can be easily activated following the next steps
 
 ### Setting up an Apache Spark Cluster
 
-An Apache Spark cluster can easily be setup with the default docker-compose.yml file from the root of this repo. The docker-compose includes two different services, `spark-master` and `spark-worker.`
+A Apache Spark cluster can easily be setup with the default docker-compose.yml file from the root of this repo. The docker-compose includes two different services, `spark-master` and `spark-worker.`
 
 By default, when you deploy the docker-compose file you will get an Apache Spark cluster with 1 master and 1 worker.
 
