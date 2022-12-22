@@ -34,7 +34,7 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.9.9-scratch-r11" \
+      org.opencontainers.image.ref.name="0.9.9-scratch-r12" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/wavefront-hpa-adapter" \
       org.opencontainers.image.title="wavefront-hpa-adapter" \
       org.opencontainers.image.vendor="VMware, Inc." \

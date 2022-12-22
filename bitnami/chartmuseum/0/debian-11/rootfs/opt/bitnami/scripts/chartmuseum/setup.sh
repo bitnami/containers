@@ -1,18 +1,19 @@
 #!/bin/bash
-#
-# Bitnami Chartmuseum setup
 
 # shellcheck disable=SC1091
 
 set -o errexit
 set -o nounset
 set -o pipefail
-# set -o xtrace # Uncomment this line for debugging purpose
+# set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libharbor.sh
+
+# Load environment
+. /opt/bitnami/scripts/chartmuseum-env.sh
 
 chart_museum_validate() {
     info "Validating ChartMuseum parameters"

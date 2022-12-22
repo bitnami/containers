@@ -2,18 +2,25 @@
 
 # shellcheck disable=SC1091
 
+set -o errexit
+set -o nounset
+set -o pipefail
+# set -o xtrace # Uncomment this line for debugging purposes
+
 # Load libraries
 . /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libnginx.sh
 . /opt/bitnami/scripts/libharbor.sh
 
-export HARBOR_PORTAL_BASE_DIR="/opt/bitnami/harbor"
-export HARBOR_PORTAL_NGINX_CONF_DIR="${HARBOR_PORTAL_BASE_DIR}/nginx-conf"
-export HARBOR_PORTAL_NGINX_CONF_FILE="${HARBOR_PORTAL_NGINX_CONF_DIR}/nginx.conf"
-
 # Load Nginx environment variables
 . /opt/bitnami/scripts/nginx-env.sh
+
+# Load environment
+. /opt/bitnami/scripts/harbor-portal-env.sh
+
+ensure_user_exists "$HARBOR_PORTAL_DAEMON_USER" --group "$HARBOR_PORTAL_DAEMON_GROUP"
 
 # Ensure NGINX temp folders exists
 for dir in "${NGINX_BASE_DIR}/client_body_temp" "${NGINX_BASE_DIR}/proxy_temp" "${NGINX_BASE_DIR}/fastcgi_temp" "${NGINX_BASE_DIR}/scgi_temp" "${NGINX_BASE_DIR}/uwsgi_temp"; do
@@ -23,10 +30,12 @@ done
 # Fix for CentOS Internal TLS
 if [[ -f /etc/pki/tls/certs/ca-bundle.crt ]]; then
     chmod g+w /etc/pki/tls/certs/ca-bundle.crt
+    chown "$HARBOR_PORTAL_DAEMON_USER" /etc/pki/tls/certs/ca-bundle.crt
 fi
 
 if [[ -f /etc/pki/tls/certs/ca-bundle.trust.crt ]]; then
     chmod g+w /etc/pki/tls/certs/ca-bundle.trust.crt
+    chown "$HARBOR_PORTAL_DAEMON_USER" /etc/pki/tls/certs/ca-bundle.trust.crt
 fi
 
 # Loading bitnami paths
@@ -37,10 +46,10 @@ cp -a "${HARBOR_PORTAL_NGINX_CONF_DIR}/." "$NGINX_CONF_DIR"
 # Remove the folder, otherwise it will get exposed when accessing via browser
 rm -rf "${HARBOR_PORTAL_NGINX_CONF_DIR}"
 
-# Ensure the non-root user has writing permission at a set of directories
+# Ensure a set of directories exist and the non-root user has write privileges to them
 read -r -a directories <<<"$(get_system_cert_paths)"
 directories+=("$NGINX_CONF_DIR")
-
 for dir in "${directories[@]}"; do
     chmod -R g+rwX "$dir"
+    chown -R "$HARBOR_PORTAL_DAEMON_USER" "$dir"
 done

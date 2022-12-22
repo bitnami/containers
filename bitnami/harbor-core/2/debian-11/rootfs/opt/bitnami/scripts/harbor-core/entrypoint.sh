@@ -5,7 +5,7 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-#set -o xtrace
+# set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
 . /opt/bitnami/scripts/libbitnami.sh
@@ -13,9 +13,9 @@ set -o pipefail
 print_welcome_page
 
 if [[ "$*" = "harbor_core" ]]; then
-    info "** Starting Harbor Core setup **"
+    info "** Starting harbor-core setup **"
     /opt/bitnami/scripts/harbor-core/setup.sh
-    info "** Harbor Core setup finished! **"
+    info "** harbor-core setup finished! **"
 fi
 
 echo ""

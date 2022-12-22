@@ -377,6 +377,15 @@ $ docker run -d --name rabbitmq-server \
 
 After that, your changes will be taken into account in the server's behaviour.
 
+## Permission of SSL/TLS certificate and key files 
+
+If you bind mount the certificate and key files from your local host to the container, make sure to set proper ownership and permissions of those files:
+
+```
+$ sudo chown 1001:root <your cert/key files>
+$ sudo chmod 400 <your cert/key files> 
+```
+
 ## Enabling LDAP support
 
 LDAP configuration parameters must be specified if you wish to enable LDAP support for RabbitMQ. The following environment variables are available to configure LDAP support:

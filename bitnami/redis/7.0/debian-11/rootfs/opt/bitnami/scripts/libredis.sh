@@ -361,6 +361,9 @@ redis_initialize() {
 #########################
 redis_append_include_conf() {
     if [[ -f "$REDIS_OVERRIDES_FILE" ]]; then
+        # Remove all include statements including commented ones
+        redis_conf_set include "$REDIS_OVERRIDES_FILE"
+        redis_conf_unset "include"
         echo "include $REDIS_OVERRIDES_FILE" >> "${REDIS_BASE_DIR}/etc/redis.conf"
     fi
 }

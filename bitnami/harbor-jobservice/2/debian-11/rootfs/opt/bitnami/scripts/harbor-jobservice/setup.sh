@@ -5,13 +5,16 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-# set -o xtrace
+# set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libvalidations.sh
 . /opt/bitnami/scripts/libharbor.sh
+
+# Load environment
+. /opt/bitnami/scripts/harbor-jobservice-env.sh
 
 # Auxiliar Functions
 
@@ -66,14 +69,14 @@ not_empty_env_var() {
 }
 
 ########################
-# Validate Job Service settings
+# Validate harbor-jobservice settings
 # Arguments:
 #   None
 # Returns:
 #   None
 #########################
 harbor_jobservice_validate() {
-    info "Validating Job Service settings..."
+    info "Validating harbor-jobservice settings..."
 
     if [[ ! -f "/etc/jobservice/config.yml" ]]; then
         error "No configuration file was detected. Please mount your configuration file at \"/etc/jobservice/config.yml\""
@@ -84,7 +87,6 @@ harbor_jobservice_validate() {
     not_empty_setting "JOB_SERVICE_PORT" "port"
     not_empty_setting "JOB_SERVICE_POOL_WORKERS" "worker_pool.workers"
     not_empty_setting "JOB_SERVICE_POOL_BACKEND" "worker_pool.backend"
-    not_empty_env_var "JOBSERVICE_SECRET"
 
     if [[ "${JOB_SERVICE_PROTOCOL:-$(harbor_jobservice_conf_get "protocol")}" != "http" ]] &&
         [[ "${JOB_SERVICE_PROTOCOL:-$(harbor_jobservice_conf_get "protocol")}" != "https" ]]; then
@@ -101,7 +103,7 @@ harbor_jobservice_validate() {
 
 
 ########################
-# Check if Harbor Core API is reported as healthy
+# Check if harbor-core API is reported as healthy
 # Globals:
 #   CORE_URL
 # Arguments:
@@ -110,6 +112,10 @@ harbor_jobservice_validate() {
 #   Boolean
 #########################
 is_harbor_core_ready() {
+    if [[ -n "${HARBOR_JOBSERVICE_CFG_CORE_URL:-}" && -z "${CORE_URL:-}" ]]; then
+        # Hack to support VMs approach to initializing Harbor components
+        export CORE_URL="$HARBOR_JOBSERVICE_CFG_CORE_URL"
+    fi
     not_empty_env_var "CORE_URL"
 
     local -r status="$(yq eval '.components[]|select(.name == "core").status' - <<<"$(curl -s "${CORE_URL}/api/v2.0/health")")"
@@ -117,7 +123,7 @@ is_harbor_core_ready() {
 }
 
 ########################
-# Waits for Harbor Core to be ready
+# Waits for harbor-core to be ready
 # Times out after 60 seconds
 # Globals:
 #   INFLUXDB_*
@@ -127,15 +133,15 @@ is_harbor_core_ready() {
 #   None
 ########################
 wait_for_harbor_core() {
-    info "Waiting for Harbor Core to be started and ready"
+    info "Waiting for harbor-core to be started and ready"
     if ! retry_while "is_harbor_core_ready"; then
-        error "Timeout waiting for Harbor Core to be available"
+        error "Timeout waiting for harbor-core to be available"
         return 1
     fi
 }
 
 
-# Ensure Harbor Job Service settings are valid
+# Ensure harbor-jobservice settings are valid
 harbor_jobservice_validate
 install_custom_certs
 wait_for_harbor_core

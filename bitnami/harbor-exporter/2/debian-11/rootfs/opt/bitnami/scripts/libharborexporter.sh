@@ -93,3 +93,59 @@ harbor_exporter_validate() {
 
     return "$error_code"
 }
+
+########################
+# Print harbor-exporter runtime environment
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+harbor_exporter_print_env() {
+    for var in "${!HARBOR_EXPORTER_CFG_@}"; do
+        echo "${var/HARBOR_EXPORTER_CFG_/}=${!var}"
+    done
+}
+
+########################
+# Check if harbor-exporter is running
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_harbor_exporter_running() {
+    # harbor-exporter does not create any PID file
+    # We regenerate the PID file for each time we query it to avoid getting outdated
+    pgrep -f "harbor_exporter" > "$HARBOR_EXPORTER_PID_FILE"
+
+    pid="$(get_pid_from_file "$HARBOR_EXPORTER_PID_FILE")"
+    if [[ -n "$pid" ]]; then
+        is_service_running "$pid"
+    else
+        false
+    fi
+}
+
+########################
+# Check if harbor-exporter is not running
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_harbor_exporter_not_running() {
+    ! is_harbor_exporter_running
+}
+
+########################
+# Stop harbor-exporter
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+harbor_exporter_stop() {
+    ! is_harbor_exporter_running && return
+    stop_service_using_pid "$HARBOR_EXPORTER_PID_FILE"
+}

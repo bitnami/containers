@@ -1,16 +1,16 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "7969f4cc8ad0a260f891cccf5694686a513f4706b48771d605645be1f3f072e2",
+        "digest": "c42abbc5d57ba4c33c89e4daf46c33b0173565fbf533ef7a60281cf3283f611f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-156"
+        "version": "1.16.0-0"
     },
     "harbor-exporter": {
         "arch": "amd64",
-        "digest": "2cb005ef45d8d5421f050f75d474ac63dd85b97b5d4c47a583c9cbfb390994cb",
+        "digest": "fd3c7c61236caad3263383ab8bd94324b4b3d25ce66502fc1c7e5ccd07996eba",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.6.2-0"
+        "version": "2.7.0-0"
     }
 }

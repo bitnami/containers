@@ -5,19 +5,26 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-#set -o xtrace
+# set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
 . /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libos.sh
 
-readonly cmd=$(command -v notary-signer)
-readonly flags=("-config=/etc/notary/signer-config.postgres.json" "-logf=logfmt")
-readonly installdir=$(dirname "$(dirname "$cmd")")
+# Load harbor-notary-signer environment
+. /opt/bitnami/scripts/harbor-notary-signer-env.sh
 
-cd "$installdir"
+CMD="$(command -v notary-signer)"
+FLAGS=("-config=/etc/notary/signer-config.postgres.json" "-logf=logfmt")
 
-info "Running Harbor Notary Server migrations"
-"$installdir"/migrations/migrate.sh
+cd "$HARBOR_NOTARY_SIGNER_BASE_DIR"
 
-info "** Starting Harbor Notary Signer **"
-exec "$cmd" "${flags[@]}"
+info "Running harbor-notary-signer migrations"
+migrations/migrate.sh
+
+info "** Starting harbor-notary-signer **"
+if am_i_root; then
+    exec gosu "$HARBOR_NOTARY_SIGNER_DAEMON_USER" "$CMD" "${FLAGS[@]}"
+else
+    exec "$CMD" "${FLAGS[@]}"
+fi

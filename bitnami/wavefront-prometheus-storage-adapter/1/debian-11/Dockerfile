@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.0.5-debian-11-r67" \
+      org.opencontainers.image.ref.name="1.0.5-debian-11-r72" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/wavefront-prometheus-storage-adapter" \
       org.opencontainers.image.title="wavefront-prometheus-storage-adapter" \
       org.opencontainers.image.vendor="VMware, Inc." \

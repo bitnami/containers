@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="6.1.1-debian-11-r8" \
+      org.opencontainers.image.ref.name="6.1.1-debian-11-r14" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/wordpress-nginx" \
       org.opencontainers.image.title="wordpress-nginx" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,11 +22,11 @@ RUN install_packages acl ca-certificates curl less libaudit1 libbrotli1 libbsd0 
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "render-template-1.0.4-1-linux-${OS_ARCH}-debian-11" \
-      "php-8.1.13-1-linux-${OS_ARCH}-debian-11" \
+      "php-8.1.13-2-linux-${OS_ARCH}-debian-11" \
       "wp-cli-2.7.1-0-linux-${OS_ARCH}-debian-11" \
-      "nginx-1.23.2-1-linux-${OS_ARCH}-debian-11" \
+      "nginx-1.23.3-0-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.11-1-linux-${OS_ARCH}-debian-11" \
-      "wordpress-6.1.1-4-linux-${OS_ARCH}-debian-11" \
+      "wordpress-6.1.1-8-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \

@@ -115,6 +115,9 @@ mysql_validate() {
     if [[ "${DB_ROOT_PASSWORD:-}" = *\\* ]]; then
         backslash_password_error "$(get_env_var ROOT_PASSWORD)"
     fi
+    if [[ -n "$DB_USER" ]] && [[ "$DB_USER" = "root" ]]; then
+        print_validation_error "root user is already created in the database and you can't use it as username for user creation."
+    fi
     if [[ "${DB_PASSWORD:-}" = *\\* ]]; then
         backslash_password_error "$(get_env_var PASSWORD)"
     fi

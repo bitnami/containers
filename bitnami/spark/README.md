@@ -149,11 +149,11 @@ Additionally, SSL configuration can be easily activated following the next steps
 
 2. You need to mount your spark keystore and truststore files to `/opt/bitnami/spark/conf/certs`. Please note they should be called `spark-keystore.jks` and `spark-truststore.jks` and they should be in JKS format.
 
-### Setting up a Apache Spark Cluster
+### Setting up an Apache Spark Cluster
 
 A Apache Spark cluster can easily be setup with the default docker-compose.yml file from the root of this repo. The docker-compose includes two different services, `spark-master` and `spark-worker.`
 
-By default, when you deploy the docker-compose file you will get a Apache Spark cluster with 1 master and 1 worker.
+By default, when you deploy the docker-compose file you will get an Apache Spark cluster with 1 master and 1 worker.
 
 If you want N workers, all you need to do is start the docker-compose deployment with the following command:
 

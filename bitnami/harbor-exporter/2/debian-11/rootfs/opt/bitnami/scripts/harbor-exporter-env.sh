@@ -22,6 +22,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 harbor_exporter_env_vars=(
+    HARBOR_EXPORTER_BASE_DIR
     HARBOR_DATABASE_HOST
     HARBOR_DATABASE_PORT
     HARBOR_DATABASE_USERNAME
@@ -49,6 +50,13 @@ for env_var in "${harbor_exporter_env_vars[@]}"; do
     fi
 done
 unset harbor_exporter_env_vars
+
+# Paths
+export HARBOR_EXPORTER_BASE_DIR="${HARBOR_EXPORTER_BASE_DIR:-${BITNAMI_ROOT_DIR}/harbor-exporter}"
+
+# System users
+export HARBOR_EXPORTER_DAEMON_USER="harbor"
+export HARBOR_EXPORTER_DAEMON_GROUP="harbor"
 
 # Core Database Config
 export HARBOR_DATABASE_HOST="${HARBOR_DATABASE_HOST:-}"

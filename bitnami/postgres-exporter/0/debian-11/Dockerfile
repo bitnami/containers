@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.11.1-debian-11-r36" \
+      org.opencontainers.image.ref.name="0.11.1-debian-11-r41" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/postgres-exporter" \
       org.opencontainers.image.title="postgres-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \

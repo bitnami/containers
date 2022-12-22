@@ -36,6 +36,7 @@ export LDAP_ONLINE_CONF_DIR="${LDAP_VOLUME_DIR}/slapd.d"
 export LDAP_PID_FILE="${LDAP_VAR_DIR}/run/slapd.pid"
 export LDAP_CUSTOM_LDIF_DIR="${LDAP_CUSTOM_LDIF_DIR:-/ldifs}"
 export LDAP_CUSTOM_SCHEMA_FILE="${LDAP_CUSTOM_SCHEMA_FILE:-/schema/custom.ldif}"
+export LDAP_CUSTOM_SCHEMA_DIR="${LDAP_CUSTOM_SCHEMA_DIR:-/schemas}"
 export PATH="${LDAP_BIN_DIR}:${LDAP_SBIN_DIR}:$PATH"
 export LDAP_TLS_CERT_FILE="${LDAP_TLS_CERT_FILE:-}"
 export LDAP_TLS_KEY_FILE="${LDAP_TLS_KEY_FILE:-}"
@@ -358,6 +359,23 @@ ldap_add_custom_schema() {
 }
 
 ########################
+# Add custom schemas
+# Globals:
+#   LDAP_*
+# Arguments:
+#   None
+# Returns
+#   None
+#########################
+ldap_add_custom_schemas() {
+    info "Adding custom schemas : $LDAP_CUSTOM_SCHEMA_DIR ..."
+    find "$LDAP_CUSTOM_SCHEMA_DIR" -maxdepth 1 \( -type f -o -type l \) -iname '*.ldif' -print0 | sort -z | xargs --null -I{} bash -c ". /opt/bitnami/scripts/libos.sh && debug_execute slapadd -F \"$LDAP_ONLINE_CONF_DIR\" -n 0 -l {}"
+    ldap_stop
+    while is_ldap_running; do sleep 1; done
+    ldap_start_bg
+}
+
+########################
 # Create LDAP tree
 # Globals:
 #   LDAP_*
@@ -495,6 +513,9 @@ ldap_initialize() {
         fi
         if [[ -f "$LDAP_CUSTOM_SCHEMA_FILE" ]]; then
             ldap_add_custom_schema
+        fi
+        if ! is_dir_empty "$LDAP_CUSTOM_SCHEMA_DIR"; then
+            ldap_add_custom_schemas
         fi
         if ! is_dir_empty "$LDAP_CUSTOM_LDIF_DIR"; then
             ldap_add_custom_ldifs

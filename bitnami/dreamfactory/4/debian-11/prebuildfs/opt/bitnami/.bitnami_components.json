@@ -4,7 +4,7 @@
         "digest": "836005c75ea1c35ca68b9f468340a854c6237a50ca341dba29e39ec4cf32acf3",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.4.54-157"
+        "version": "2.4.54-158"
     },
     "dreamfactory": {
         "arch": "amd64",
@@ -15,10 +15,10 @@
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "7969f4cc8ad0a260f891cccf5694686a513f4706b48771d605645be1f3f072e2",
+        "digest": "c42abbc5d57ba4c33c89e4daf46c33b0173565fbf533ef7a60281cf3283f611f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-156"
+        "version": "1.16.0-0"
     },
     "libphp": {
         "arch": "amd64",
@@ -50,10 +50,10 @@
     },
     "redis-client": {
         "arch": "amd64",
-        "digest": "7479e99b80ec66856b17439a20335bb6c285362f39927e61aebc0f87faee951f",
+        "digest": "4fe3c81d6175a56324b6f94ab79bf881f06d2a10823d78b580b729e6d5bb02d6",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.0.5-1"
+        "version": "7.0.7-0"
     },
     "render-template": {
         "arch": "amd64",

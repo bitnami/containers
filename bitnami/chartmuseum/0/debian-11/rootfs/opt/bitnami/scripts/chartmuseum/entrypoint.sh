@@ -5,7 +5,7 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-#set -o xtrace
+# set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
 . /opt/bitnami/scripts/libbitnami.sh
@@ -13,9 +13,9 @@ set -o pipefail
 print_welcome_page
 
 if [[ "$*" = *"/opt/bitnami/scripts/chartmuseum/run.sh"* ]]; then
-    info "** Starting chartmuseum setup **"
+    info "** Starting ChartMuseum setup **"
     /opt/bitnami/scripts/chartmuseum/setup.sh
-    info "** chartmuseum setup finished! **"
+    info "** ChartMuseum setup finished! **"
 fi
 
 echo ""

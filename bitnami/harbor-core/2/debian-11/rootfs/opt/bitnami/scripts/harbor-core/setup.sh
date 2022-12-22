@@ -5,13 +5,16 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-# set -o xtrace
+# set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/libvalidations.sh
 . /opt/bitnami/scripts/libharbor.sh
+
+# Load environment
+. /opt/bitnami/scripts/harbor-core-env.sh
 
 # Auxiliar Functions
 
@@ -75,6 +78,10 @@ harbor_core_validate() {
 
     if [[ ! -f "/etc/core/key" ]]; then
         info "The key was not mounted at \"/etc/core/key\". Will use environment variable \"CORE_KEY\" instead."
+        if [[ -n "${HARBOR_CORE_CFG_CORE_KEY:-}" && -z "${CORE_KEY:-}" ]]; then
+            # Hack to support VMs approach to initializing Harbor components
+            export CORE_KEY="$HARBOR_CORE_CFG_CORE_KEY"
+        fi
         not_empty_env_var "CORE_KEY"
         echo -n "$CORE_KEY" >/etc/core/key
     fi
@@ -85,9 +92,6 @@ harbor_core_validate() {
     fi
 
     not_empty_setting "httpport"
-    not_empty_env_var "CORE_SECRET"
-    not_empty_env_var "JOBSERVICE_SECRET"
-
     local validate_port_args=()
     ! am_i_root && validate_port_args+=("-unprivileged")
     if ! err=$(validate_port "${validate_port_args[@]}" "$(harbor_core_conf_get "httpport")"); then
@@ -96,6 +100,6 @@ harbor_core_validate() {
     fi
 }
 
-# Ensure Harbor Core settings are valid
+# Ensure harbor-core settings are valid
 harbor_core_validate
 install_custom_certs

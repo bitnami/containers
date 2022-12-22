@@ -1,16 +1,16 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "7969f4cc8ad0a260f891cccf5694686a513f4706b48771d605645be1f3f072e2",
+        "digest": "c42abbc5d57ba4c33c89e4daf46c33b0173565fbf533ef7a60281cf3283f611f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-156"
+        "version": "1.16.0-0"
     },
     "postgresql-repmgr": {
         "arch": "amd64",
-        "digest": "91992983affd3b8952efb11cdc9bc657b6f9c9ba2e650295610c4988da17018e",
+        "digest": "92984e5d5003f65783d648bc0cda1ea80eaa507354da97e3f288505bac140144",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.6.0-1"
+        "version": "14.6.0-3"
     }
 }

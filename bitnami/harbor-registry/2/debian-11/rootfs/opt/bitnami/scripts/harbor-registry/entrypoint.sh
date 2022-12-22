@@ -5,7 +5,7 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-#set -o xtrace
+# set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
 . /opt/bitnami/scripts/libbitnami.sh
@@ -13,9 +13,9 @@ set -o pipefail
 print_welcome_page
 
 if [[ "$1" = "/opt/bitnami/scripts/harbor-registry/run.sh" ]]; then
-    info "** Starting Harbor Registry setup **"
+    info "** Starting harbor-registry setup **"
     /opt/bitnami/scripts/harbor-registry/setup.sh
-    info "** Harbor Registry setup finished! **"
+    info "** harbor-registry setup finished! **"
 fi
 
 echo ""

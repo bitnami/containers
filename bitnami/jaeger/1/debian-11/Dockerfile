@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.39.0-debian-11-r10" \
+      org.opencontainers.image.ref.name="1.40.0-debian-11-r5" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jaeger" \
       org.opencontainers.image.title="jaeger" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.39.0"
+      org.opencontainers.image.version="1.40.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -21,7 +21,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "jaeger-1.39.0-3-linux-${OS_ARCH}-debian-11" \
+      "jaeger-1.40.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -37,7 +37,7 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="1.39.0" \
+ENV APP_VERSION="1.40.0" \
     BITNAMI_APP_NAME="jaeger" \
     PATH="/opt/bitnami/jaeger/bin:$PATH"
 

@@ -5,13 +5,15 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-# set -o xtrace
+# set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libos.sh
-. /opt/bitnami/scripts/harbor-adapter-trivy-env.sh
 . /opt/bitnami/scripts/libharbor.sh
+
+# Load environment
+. /opt/bitnami/scripts/harbor-adapter-trivy-env.sh
 
 # Create directories
 for dir in "$SCANNER_TRIVY_CACHE_DIR" "$SCANNER_TRIVY_REPORTS_DIR"; do
