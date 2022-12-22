@@ -1,5 +1,9 @@
 # DreamFactory packaged by Bitnami
 
+## Container Deprecation Notice
+
+This image has been deprecated and will no longer be maintained nor updated.
+
 ## What is DreamFactory?
 
 > DreamFactory is an API management gateway. It's capable of generating powerful, documented APIs for almost twenty databases, file storage, caching, e-mail, 3rd party APIs and SOAP services.

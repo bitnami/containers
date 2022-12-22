@@ -26,9 +26,6 @@ php_conf_set "listen" "$PHP_FPM_DEFAULT_LISTEN_ADDRESS" "${PHP_CONF_DIR}/php-fpm
 php_conf_set "upload_tmp_dir" "${PHP_BASE_DIR}/tmp"
 php_conf_set "session.save_path" "${PHP_TMP_DIR}/session"
 
-# Log errors to stdout for easy debugging
-php_conf_set "error_log" "/dev/stderr"
-
 # Ensure directories used by PHP-FPM exist and have proper ownership and permissions
 for dir in "$PHP_CONF_DIR" "${PHP_BASE_DIR}/tmp" "$PHP_TMP_DIR" "$PHP_FPM_LOGS_DIR" "${PHP_TMP_DIR}/session"; do
     ensure_dir_exists "$dir"

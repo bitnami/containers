@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="15.7.0-debian-11-r0" \
+      org.opencontainers.image.ref.name="15.7.1-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/gitlab-runner-helper" \
       org.opencontainers.image.title="gitlab-runner-helper" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="15.7.0"
+      org.opencontainers.image.version="15.7.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,7 +23,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "dumb-init-1.2.5-154-linux-${OS_ARCH}-debian-11" \
       "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
-      "gitlab-runner-helper-15.7.0-0-linux-${OS_ARCH}-debian-11" \
+      "gitlab-runner-helper-15.7.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,7 +41,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN mkdir /home/gitlab-runner && chmod -R g+rwX /home/gitlab-runner && ln -s /opt/bitnami/common/bin/dumb-init /usr/bin/dumb-init && ln -s /opt/bitnami/scripts/gitlab-runner-helper/entrypoint.sh /entrypoint
-ENV APP_VERSION="15.7.0" \
+ENV APP_VERSION="15.7.1" \
     BITNAMI_APP_NAME="gitlab-runner-helper" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/gitlab-runner-helper/bin:$PATH"
 

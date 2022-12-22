@@ -12,7 +12,6 @@ services:
       - SPRING_DATASOURCE_USERNAME=bn_skipper
       - SPRING_DATASOURCE_PASSWORD=bn_skipper
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.mariadb.jdbc.Driver
-      - spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MariaDB102Dialect
     ports:
       - '7577:7577'
     depends_on:
