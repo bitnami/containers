@@ -15,24 +15,24 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "8ae4f78854fece62ada7eb585fd1177777125d2585cf474c58707752dc68497f",
+        "digest": "327a18f5d80ad375b953c28f9d86e5727f74a57a65b5ed2df78e0d3b9945afca",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.21.2-0"
+        "version": "18.12.1-1"
     },
     "php": {
         "arch": "amd64",
-        "digest": "20f69a3917585cee6e91a28ef16079faf7150e4ae9489e06ee4bc3ae7042d957",
+        "digest": "23418ce0d667ee0ed6b33d31645f8448cf8089fd663a22c962c3d6ef317274f6",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.13-5"
+        "version": "8.2.0-1"
     },
     "python": {
         "arch": "amd64",
-        "digest": "ec9073bd5f6b3a19ff2de522d3164682162fe17836ff7fc72fb9d3a459c3ca6b",
+        "digest": "47aa3cba7d8431fdf632c473e7f7827f711ca6af08c41172f75811fd2fd2ba84",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-0"
+        "version": "3.11.1-0"
     },
     "wait-for-port": {
         "arch": "amd64",
