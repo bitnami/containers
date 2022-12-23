@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.39.0-debian-11-r7" \
+      org.opencontainers.image.ref.name="1.39.1-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mediawiki" \
       org.opencontainers.image.title="mediawiki" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.39.0"
+      org.opencontainers.image.version="1.39.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "mysql-client-10.6.11-1-linux-${OS_ARCH}-debian-11" \
       "libphp-7.4.33-1-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.4-1-linux-${OS_ARCH}-debian-11" \
-      "mediawiki-1.39.0-0-linux-${OS_ARCH}-debian-11" \
+      "mediawiki-1.39.1-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -51,7 +51,7 @@ RUN /opt/bitnami/scripts/mediawiki/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="1.39.0" \
+    APP_VERSION="1.39.1" \
     BITNAMI_APP_NAME="mediawiki" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
