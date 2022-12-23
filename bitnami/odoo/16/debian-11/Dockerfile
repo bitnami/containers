@@ -39,7 +39,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     done
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
-RUN chmod g+rwX /opt/bitnami
+RUN chgrp -R 0 /opt/bitnami && chmod -R g+rwX /opt/bitnami
 RUN if [ "$OS_ARCH" = "amd64" ]; then \
     curl -sLO "https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.buster_${OS_ARCH}.deb" && \
     echo "dfab5506104447eef2530d1adb9840ee3a67f30caaad5e9bcb8743ef2f9421bd  wkhtmltox_0.12.5-1.buster_${OS_ARCH}.deb" | sha256sum -c - && \
