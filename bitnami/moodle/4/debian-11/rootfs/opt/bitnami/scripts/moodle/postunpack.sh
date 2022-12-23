@@ -37,6 +37,7 @@ done
 # Configure required PHP options for application to work properly, based on build-time defaults
 info "Configuring default PHP options for Moodle"
 php_conf_set memory_limit "$PHP_DEFAULT_MEMORY_LIMIT"
+php_conf_set max_input_vars "$PHP_DEFAULT_MAX_INPUT_VARS"
 php_conf_set extension "pgsql"
 
 # Enable default web server configuration for Moodle
