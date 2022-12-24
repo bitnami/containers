@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.7.2-debian-11-r4" \
+      org.opencontainers.image.ref.name="1.7.2-debian-11-r5" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/xgboost-intel" \
       org.opencontainers.image.title="xgboost-intel" \
       org.opencontainers.image.vendor="VMware, Inc." \
