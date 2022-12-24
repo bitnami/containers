@@ -5,7 +5,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="8.11.2-debian-11-r65" \
+      org.opencontainers.image.ref.name="8.11.2-debian-11-r66" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/solr" \
       org.opencontainers.image.title="solr" \
       org.opencontainers.image.vendor="VMware, Inc." \
