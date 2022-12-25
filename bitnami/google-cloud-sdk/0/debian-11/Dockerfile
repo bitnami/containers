@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.412.0-debian-11-r3" \
+      org.opencontainers.image.ref.name="0.412.0-debian-11-r4" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/google-cloud-sdk" \
       org.opencontainers.image.title="google-cloud-sdk" \
       org.opencontainers.image.vendor="VMware, Inc." \
