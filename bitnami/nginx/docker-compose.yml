@@ -1,7 +1,5 @@
-version: '2'
-
 services:
   nginx:
-    image: docker.io/bitnami/nginx:1.23
-    ports:
-      - '80:8080'
+  ...
+    volumes:
+      - /path/to/my_server_block.conf:/opt/bitnami/nginx/conf/server_blocks/my_server_block.conf:ro
