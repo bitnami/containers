@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.9.27-debian-11-r5" \
+      org.opencontainers.image.ref.name="3.9.27-debian-11-r6" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/rabbitmq" \
       org.opencontainers.image.title="rabbitmq" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -23,7 +23,7 @@ RUN install_packages ca-certificates curl libgcc-s1 libssl1.1 libstdc++6 libtinf
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "gosu-1.16.0-0-linux-${OS_ARCH}-debian-11" \
-      "erlang-24.3.4-6-1-linux-${OS_ARCH}-debian-11" \
+      "erlang-24.3.4-7-0-linux-${OS_ARCH}-debian-11" \
       "rabbitmq-3.9.27-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
