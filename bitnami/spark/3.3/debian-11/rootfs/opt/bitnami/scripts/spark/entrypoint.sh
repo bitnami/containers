@@ -11,8 +11,8 @@ set -o pipefail
 . /opt/bitnami/scripts/libbitnami.sh
 . /opt/bitnami/scripts/libspark.sh
 
-# Load Spark environment variables
-eval "$(spark_env)"
+# Load Spark environment settings
+. /opt/bitnami/scripts/spark-env.sh
 
 print_welcome_page
 

@@ -5,7 +5,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.2.3-debian-11-r7" \
+      org.opencontainers.image.ref.name="3.2.3-debian-11-r11" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/spark" \
       org.opencontainers.image.title="spark" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -25,7 +25,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.8.16-0-linux-${OS_ARCH}-debian-11" \
       "java-1.8.352-2-linux-${OS_ARCH}-debian-11" \
-      "spark-3.2.3-0-linux-${OS_ARCH}-debian-11" \
+      "spark-3.2.3-1-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -42,7 +42,6 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /.local && chmod g+rwX /.local
-RUN chown -R 1001:root /opt/bitnami/spark
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/spark/postunpack.sh

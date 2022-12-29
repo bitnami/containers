@@ -13,62 +13,6 @@
 # Functions
 
 ########################
-# Load global variables used on Spark configuration
-# Globals:
-#  SPARK_*
-# Arguments:
-#   None
-# Returns:
-#   Series of exports to be used as 'eval' arguments
-#########################
-spark_env() {
-    cat <<"EOF"
-# Spark directories
-export SPARK_BASEDIR="/opt/bitnami/spark"
-export SPARK_CONFDIR="${SPARK_BASEDIR}/conf"
-export SPARK_WORKDIR="${SPARK_BASEDIR}/work"
-export SPARK_CONF_FILE="${SPARK_CONFDIR}/spark-defaults.conf"
-export SPARK_LOGDIR="${SPARK_BASEDIR}/logs"
-export SPARK_TMPDIR="${SPARK_BASEDIR}/tmp"
-export SPARK_JARSDIR="${SPARK_BASEDIR}/jars"
-
-# Spark basic cluster
-export SPARK_MODE="${SPARK_MODE:-master}"
-export SPARK_MASTER_URL="${SPARK_MASTER_URL:-spark://spark-master:7077}"
-export SPARK_NO_DAEMONIZE="${SPARK_NO_DAEMONIZE:-true}"
-
-# RPC Authentication and Encryption
-export SPARK_RPC_AUTHENTICATION_ENABLED="${SPARK_RPC_AUTHENTICATION_ENABLED:-no}"
-export SPARK_RPC_AUTHENTICATION_SECRET="${SPARK_RPC_AUTHENTICATION_SECRET:-}"
-export SPARK_RPC_ENCRYPTION_ENABLED="${SPARK_RPC_ENCRYPTION_ENABLED:-no}"
-
-# Local Storage Encryption
-export SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED="${SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED:-no}"
-
-# SSL
-export SPARK_SSL_ENABLED="${SPARK_SSL_ENABLED:-no}"
-export SPARK_SSL_KEY_PASSWORD="${SPARK_SSL_KEY_PASSWORD:-}"
-export SPARK_SSL_KEYSTORE_PASSWORD="${SPARK_SSL_KEYSTORE_PASSWORD:-}"
-export SPARK_SSL_KEYSTORE_FILE="${SPARK_SSL_KEYSTORE_FILE:-${SPARK_CONFDIR}/certs/spark-keystore.jks}"
-export SPARK_SSL_TRUSTSTORE_PASSWORD="${SPARK_SSL_TRUSTSTORE_PASSWORD:-}"
-export SPARK_SSL_TRUSTSTORE_FILE="${SPARK_SSL_TRUSTSTORE_FILE:-${SPARK_CONFDIR}/certs/spark-truststore.jks}"
-export SPARK_SSL_NEED_CLIENT_AUTH="${SPARK_SSL_NEED_CLIENT_AUTH:-yes}"
-export SPARK_SSL_PROTOCOL="${SPARK_SSL_PROTOCOL:-TLSv1.2}"
-export SPARK_WEBUI_SSL_PORT="${SPARK_WEBUI_SSL_PORT:-}"
-
-# Monitoring
-export SPARK_METRICS_ENABLED="${SPARK_METRICS_ENABLED:-false}"
-
-# System Users
-export SPARK_DAEMON_USER="spark"
-export SPARK_DAEMON_GROUP="spark"
-
-# Paths
-export SPARK_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
-EOF
-}
-
-########################
 # Validate settings in SPARK_* env vars
 # Globals:
 #   SPARK_*

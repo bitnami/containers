@@ -11,8 +11,8 @@ set -o pipefail
 . /opt/bitnami/scripts/libspark.sh
 . /opt/bitnami/scripts/libos.sh
 
-# Load Spark environment variables
-eval "$(spark_env)"
+# Load Spark environment settings
+. /opt/bitnami/scripts/spark-env.sh
 
 if [ "$SPARK_MODE" == "master" ]; then
     # Master constants

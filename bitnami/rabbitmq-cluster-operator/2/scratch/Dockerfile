@@ -34,7 +34,7 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.0.0-scratch-r5" \
+      org.opencontainers.image.ref.name="2.0.0-scratch-r6" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/rabbitmq-cluster-operator" \
       org.opencontainers.image.title="rabbitmq-cluster-operator" \
       org.opencontainers.image.vendor="VMware, Inc." \
