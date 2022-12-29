@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.23.0-debian-11-r5" \
+      org.opencontainers.image.ref.name="0.23.0-debian-11-r8" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/blackbox-exporter" \
       org.opencontainers.image.title="blackbox-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \

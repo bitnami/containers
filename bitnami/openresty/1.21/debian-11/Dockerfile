@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.21.4-1-debian-11-r68" \
+      org.opencontainers.image.ref.name="1.21.4-1-debian-11-r71" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/openresty" \
       org.opencontainers.image.title="openresty" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,7 +22,7 @@ RUN install_packages ca-certificates curl libbrotli1 libbsd0 libcrypt1 libdeflat
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "openresty-1.21.4-1-155-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.16.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \

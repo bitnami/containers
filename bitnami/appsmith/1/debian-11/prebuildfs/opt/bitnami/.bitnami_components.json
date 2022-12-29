@@ -1,17 +1,17 @@
 {
     "appsmith": {
         "arch": "amd64",
-        "digest": "12c3fd06ca71f430d8e55d6f244142b740a758e4a4d2d405362d0540921781d1",
+        "digest": "4126c974a30f1117b2ec579057c8fbc0967421e8085ad2aa5f1fcde12aa44797",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.8.13-0"
+        "version": "1.8.15-0"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "7969f4cc8ad0a260f891cccf5694686a513f4706b48771d605645be1f3f072e2",
+        "digest": "c42abbc5d57ba4c33c89e4daf46c33b0173565fbf533ef7a60281cf3283f611f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-156"
+        "version": "1.16.0-0"
     },
     "java": {
         "arch": "amd64",

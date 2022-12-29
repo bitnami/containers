@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.43.0-debian-11-r4" \
+      org.opencontainers.image.ref.name="2.43.0-debian-11-r7" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/azure-cli" \
       org.opencontainers.image.title="azure-cli" \
       org.opencontainers.image.vendor="VMware, Inc." \

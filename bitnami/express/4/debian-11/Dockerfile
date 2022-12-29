@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.18.2-debian-11-r23" \
+      org.opencontainers.image.ref.name="4.18.2-debian-11-r26" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/express" \
       org.opencontainers.image.title="express" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "express-generator-4.16.1-155-linux-${OS_ARCH}-debian-11" \
       "bower-1.8.13-1-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.5-1-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.16.0-0-linux-${OS_ARCH}-debian-11" \
       "express-4.18.2-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \

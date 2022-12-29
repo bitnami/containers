@@ -15,24 +15,24 @@
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "7969f4cc8ad0a260f891cccf5694686a513f4706b48771d605645be1f3f072e2",
+        "digest": "c42abbc5d57ba4c33c89e4daf46c33b0173565fbf533ef7a60281cf3283f611f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.14.0-156"
+        "version": "1.16.0-0"
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "43e3df993fed23ea81504e23559c11d759f0029387c7f6c18b958b734492a7d6",
+        "digest": "13db51b9c1371ad7f67e5a4d13418df291a688385753f6a8624f92ef0f0b59d9",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.4.33-1"
+        "version": "8.1.13-1"
     },
     "php": {
         "arch": "amd64",
-        "digest": "e58d8a23732911f371753bc9afd2bca38896c87ef75dae2aad64d5a3083bf4b0",
+        "digest": "20f69a3917585cee6e91a28ef16079faf7150e4ae9489e06ee4bc3ae7042d957",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.4.33-2"
+        "version": "8.1.13-5"
     },
     "render-template": {
         "arch": "amd64",

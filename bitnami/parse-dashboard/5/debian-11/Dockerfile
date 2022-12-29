@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="5.0.0-debian-11-r14" \
+      org.opencontainers.image.ref.name="5.0.0-debian-11-r17" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/parse-dashboard" \
       org.opencontainers.image.title="parse-dashboard" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -24,7 +24,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "python-3.8.16-0-linux-${OS_ARCH}-debian-11" \
       "node-16.19.0-0-linux-${OS_ARCH}-debian-11" \
       "parse-dashboard-5.0.0-0-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.16.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \

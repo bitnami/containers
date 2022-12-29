@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.3.1-debian-11-r20" \
+      org.opencontainers.image.ref.name="1.3.1-debian-11-r23" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/gramine-redis-intel" \
       org.opencontainers.image.title="gramine-redis-intel" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -24,7 +24,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "redis-7.0.7-0-linux-${OS_ARCH}-debian-11" \
       "python-3.10.9-0-linux-${OS_ARCH}-debian-11" \
       "gramine-redis-intel-1.3.1-0-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.16.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
