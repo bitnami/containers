@@ -91,9 +91,9 @@ export DB_DAEMON_GROUP="mysql"
 # Default configuration (build-time)
 export MARIADB_DEFAULT_PORT_NUMBER="3306"
 export DB_DEFAULT_PORT_NUMBER="$MARIADB_DEFAULT_PORT_NUMBER" # only used at build time
-export MARIADB_DEFAULT_CHARACTER_SET="utf8"
+export MARIADB_DEFAULT_CHARACTER_SET="utf8mb4"
 export DB_DEFAULT_CHARACTER_SET="$MARIADB_DEFAULT_CHARACTER_SET" # only used at build time
-export MARIADB_DEFAULT_COLLATE="utf8_general_ci"
+export MARIADB_DEFAULT_COLLATE="utf8mb4_unicode_ci"
 export DB_DEFAULT_COLLATE="$MARIADB_DEFAULT_COLLATE" # only used at build time
 export MARIADB_DEFAULT_BIND_ADDRESS="0.0.0.0"
 export DB_DEFAULT_BIND_ADDRESS="$MARIADB_DEFAULT_BIND_ADDRESS" # only used at build time
