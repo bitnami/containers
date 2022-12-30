@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.20220314.0-debian-11-r74" \
+      org.opencontainers.image.ref.name="0.20220314.0-debian-11-r75" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/airflow-exporter" \
       org.opencontainers.image.title="airflow-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
