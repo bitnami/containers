@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.2.6-debian-11-r5" \
+      org.opencontainers.image.ref.name="4.2.6-debian-11-r6" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/joomla" \
       org.opencontainers.image.title="joomla" \
       org.opencontainers.image.vendor="VMware, Inc." \
