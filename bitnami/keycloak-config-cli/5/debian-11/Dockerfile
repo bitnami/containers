@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="5.5.0-debian-11-r15" \
+      org.opencontainers.image.ref.name="5.5.0-debian-11-r16" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/keycloak-config-cli" \
       org.opencontainers.image.title="keycloak-config-cli" \
       org.opencontainers.image.vendor="VMware, Inc." \
