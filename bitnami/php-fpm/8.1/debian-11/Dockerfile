@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="8.1.13-debian-11-r15" \
+      org.opencontainers.image.ref.name="8.1.13-debian-11-r16" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/php-fpm" \
       org.opencontainers.image.title="php-fpm" \
       org.opencontainers.image.vendor="VMware, Inc." \
