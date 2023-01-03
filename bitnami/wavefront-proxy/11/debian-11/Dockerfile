@@ -5,7 +5,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="11.4.0-debian-11-r42" \
+      org.opencontainers.image.ref.name="11.4.0-debian-11-r43" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/wavefront-proxy" \
       org.opencontainers.image.title="wavefront-proxy" \
       org.opencontainers.image.vendor="VMware, Inc." \
