@@ -11,8 +11,6 @@ services:
       - SPRING_DATASOURCE_USERNAME=bn_dataflow
       - SPRING_DATASOURCE_PASSWORD=bn_dataflow
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.mariadb.jdbc.Driver
-      # we use mariadb 10.2+ so we need to set hibernate dialect.
-      - spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MariaDB102Dialect
       # enable advance features
       - SPRING_CLOUD_DATAFLOW_FEATURES_STREAMS_ENABLED=true
       - SPRING_CLOUD_DATAFLOW_FEATURES_TASKS_ENABLED=true
@@ -39,7 +37,6 @@ services:
       - SPRING_DATASOURCE_USERNAME=bn_skipper
       - SPRING_DATASOURCE_PASSWORD=bn_skipper
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.mariadb.jdbc.Driver
-      - spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MariaDB102Dialect
     ports:
       - '20000-20100:20000-20100'
     depends_on:
