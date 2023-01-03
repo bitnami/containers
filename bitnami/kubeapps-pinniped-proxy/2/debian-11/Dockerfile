@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.6.2-debian-11-r8" \
+      org.opencontainers.image.ref.name="2.6.2-debian-11-r9" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kubeapps-pinniped-proxy" \
       org.opencontainers.image.title="kubeapps-pinniped-proxy" \
       org.opencontainers.image.vendor="VMware, Inc." \
