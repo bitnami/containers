@@ -12,7 +12,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "thanos-0.30.0-0-linux-${OS_ARCH}-debian-11" \
+      "thanos-0.30.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -34,11 +34,11 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.30.0-scratch-r0" \
+      org.opencontainers.image.ref.name="0.30.1-scratch-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/thanos" \
       org.opencontainers.image.title="thanos" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.30.0"
+      org.opencontainers.image.version="0.30.1"
 
 COPY prebuildfs /
 COPY rootfs /
