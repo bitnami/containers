@@ -75,6 +75,8 @@ export PGPOOL_HEALTH_CHECK_PERIOD="${PGPOOL_HEALTH_CHECK_PERIOD:-30}"
 export PGPOOL_HEALTH_CHECK_TIMEOUT="${PGPOOL_HEALTH_CHECK_TIMEOUT:-10}"
 export PGPOOL_HEALTH_CHECK_MAX_RETRIES="${PGPOOL_HEALTH_CHECK_MAX_RETRIES:-5}"
 export PGPOOL_HEALTH_CHECK_RETRY_DELAY="${PGPOOL_HEALTH_CHECK_RETRY_DELAY:-5}"
+export PGPOOL_CONNECT_TIMEOUT="${PGPOOL_CONNECT_TIMEOUT:-10000}"
+export PGPOOL_HEALTH_CHECK_PSQL_TIMEOUT="${PGPOOL_HEALTH_CHECK_PSQL_TIMEOUT:-15}"
 export PGPOOL_POSTGRES_CUSTOM_USERS="${PGPOOL_POSTGRES_CUSTOM_USERS:-}"
 export PGPOOL_POSTGRES_CUSTOM_PASSWORDS="${PGPOOL_POSTGRES_CUSTOM_PASSWORDS:-}"
 export PGPOOL_AUTO_FAILBACK="${PGPOOL_AUTO_FAILBACK:-no}"
@@ -209,7 +211,7 @@ pgpool_validate() {
             print_validation_error "The values allowed for $yn are: yes or no"
         fi
     done
-    local positive_values=("PGPOOL_NUM_INIT_CHILDREN" "PGPOOL_MAX_POOL" "PGPOOL_CHILD_MAX_CONNECTIONS" "PGPOOL_CHILD_LIFE_TIME" "PGPOOL_CONNECTION_LIFE_TIME" "PGPOOL_CLIENT_IDLE_LIMIT" "PGPOOL_HEALTH_CHECK_PERIOD" "PGPOOL_HEALTH_CHECK_TIMEOUT" "PGPOOL_HEALTH_CHECK_MAX_RETRIES" "PGPOOL_HEALTH_CHECK_RETRY_DELAY" "PGPOOL_RESERVED_CONNECTIONS")
+    local positive_values=("PGPOOL_NUM_INIT_CHILDREN" "PGPOOL_MAX_POOL" "PGPOOL_CHILD_MAX_CONNECTIONS" "PGPOOL_CHILD_LIFE_TIME" "PGPOOL_CONNECTION_LIFE_TIME" "PGPOOL_CLIENT_IDLE_LIMIT" "PGPOOL_HEALTH_CHECK_PERIOD" "PGPOOL_HEALTH_CHECK_TIMEOUT" "PGPOOL_HEALTH_CHECK_MAX_RETRIES" "PGPOOL_HEALTH_CHECK_RETRY_DELAY" "PGPOOL_RESERVED_CONNECTIONS" "PGPOOL_CONNECT_TIMEOUT" "PGPOOL_HEALTH_CHECK_PSQL_TIMEOUT")
     for p in "${positive_values[@]}"; do
         if [[ -n "${!p:-}" ]]; then
             if ! is_positive_int "${!p}"; then
@@ -292,11 +294,18 @@ pgpool_attach_node() {
 pgpool_healthcheck() {
     info "Checking pgpool health..."
     local backends
-    backends="$(PGCONNECT_TIMEOUT=15 PGPASSWORD="$PGPOOL_POSTGRES_PASSWORD" psql -U "$PGPOOL_POSTGRES_USERNAME" \
-        -d postgres -h "$PGPOOL_TMP_DIR" -p "$PGPOOL_PORT_NUMBER" -tA -c "SHOW pool_nodes;")"
-    if [[ "$backends" ]]; then
-        # look up backends that are marked offline
-        for node in $(echo "${backends}" | grep "down" | tr -d ' '); do
+    # Timeout should be in sync with liveness probe timeout and number of nodes which could be down together
+    # Only nodes marked UP in pgpool are tested. Each failed standby backend consumes up to PGPOOL_CONNECT_TIMEOUT
+    # to test. Network split is worst-case scenario.
+    # NOTE: command blocks indefinitely if primary node is marked UP in pgpool but is DOWN in reality and connection
+    # times-out. Example is again network-split.
+    backends="$(PGCONNECT_TIMEOUT=$PGPOOL_HEALTH_CHECK_PSQL_TIMEOUT PGPASSWORD="$PGPOOL_POSTGRES_PASSWORD" \
+        psql -U "$PGPOOL_POSTGRES_USERNAME" -d postgres -h "$PGPOOL_TMP_DIR" -p "$PGPOOL_PORT_NUMBER" \
+        -tA -c "SHOW pool_nodes;")" || backends="command failed"
+    if [[ "$backends" != "command failed" ]]; then
+        # look up backends that are marked offline and being up - attach only status=down and pg_status=up
+        # situation down|down means PG is not yet ready to be attached
+        for node in $(echo "${backends}" | grep "down|up" | tr -d ' '); do
             IFS="|" read -ra node_info <<< "$node"
             local node_id="${node_info[0]}"
             local node_host="${node_info[1]}"
@@ -307,6 +316,7 @@ pgpool_healthcheck() {
             fi
         done
     else
+        # backends command failed
         return 1
     fi
 }
@@ -488,6 +498,7 @@ pgpool_create_config() {
     pgpool_set_property "health_check_password" "$PGPOOL_HEALTH_CHECK_PASSWORD"
     pgpool_set_property "health_check_max_retries" "$PGPOOL_HEALTH_CHECK_MAX_RETRIES"
     pgpool_set_property "health_check_retry_delay" "$PGPOOL_HEALTH_CHECK_RETRY_DELAY"
+    pgpool_set_property "connect_timeout" "$PGPOOL_CONNECT_TIMEOUT"
     # Failover settings
     pgpool_set_property "failover_command" "echo \">>> Failover - that will initialize new primary node search!\""
     pgpool_set_property "failover_on_backend_error" "off"
