@@ -235,7 +235,17 @@ wordpress_initialize() {
         # Use daemon:root ownership for compatibility when running as a non-root user
         am_i_root && configure_permissions_ownership "$WORDPRESS_VOLUME_DIR" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root"
         info "Trying to connect to the database server"
-        wordpress_wait_for_mysql_connection "$WORDPRESS_DATABASE_HOST" "$WORDPRESS_DATABASE_PORT_NUMBER" "$WORDPRESS_DATABASE_NAME" "$WORDPRESS_DATABASE_USER" "$WORDPRESS_DATABASE_PASSWORD"
+
+        local mysqli_cli_options=""
+        if is_boolean_yes "$WORDPRESS_ENABLE_DATABASE_SSL"; then
+            if ! is_boolean_yes "$WORDPRESS_VERIFY_DATABASE_SSL"; then
+                mysqli_cli_options+="--ssl=true --ssl-verify-server-cert=false"
+            else
+                mysqli_cli_options+="--ssl=true"
+            fi
+        fi
+
+        wordpress_wait_for_mysql_connection "$WORDPRESS_DATABASE_HOST" "$WORDPRESS_DATABASE_PORT_NUMBER" "$WORDPRESS_DATABASE_NAME" "$WORDPRESS_DATABASE_USER" "$WORDPRESS_DATABASE_PASSWORD" "$mysqli_cli_options"
 
         # Apply changes to WordPress configuration file based on user inputs
         # See: https://wordpress.org/support/article/editing-wp-config-php/
@@ -421,6 +431,7 @@ wordpress_initialize() {
         db_user="$(wordpress_conf_get "DB_USER")"
         db_pass="$(wordpress_conf_get "DB_PASSWORD")"
         db_host_port="$(wordpress_conf_get "DB_HOST")"
+        db_flags="$(wordpress_conf_get "MYSQL_CLIENT_FLAGS")"
         db_host="${db_host_port%:*}"
         if [[ "$db_host_port" =~ :[0-9]+$ ]]; then
             # Use '##' to extract only the part after the last colon, to avoid any possible issues with IPv6 addresses
@@ -428,7 +439,17 @@ wordpress_initialize() {
         else
             db_port="$WORDPRESS_DATABASE_PORT_NUMBER"
         fi
-        wordpress_wait_for_mysql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
+
+        local mysqli_cli_options=""
+        if [[ "$db_flags" == *"MYSQLI_CLIENT_SSL"* ]]; then
+            if [[ "$db_flags" == *"MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT"* ]]; then
+                mysqli_cli_options+="--ssl=true --ssl-verify-server-cert=false"
+            else
+                 mysqli_cli_options+="--ssl=true"
+            fi
+        fi
+
+        wordpress_wait_for_mysql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass" "$mysqli_cli_options"
         wp_execute core update-db
 
         if is_boolean_yes "$WORDPRESS_RESET_DATA_PERMISSIONS"; then
@@ -556,6 +577,7 @@ wordpress_conf_get() {
 #   $3 - database name
 #   $4 - database username
 #   $5 - database user password (optional)
+#   $6 - Extra MySQL CLI options (optional)
 # Returns:
 #   true if the database connection succeeded, false otherwise
 #########################
@@ -565,8 +587,11 @@ wordpress_wait_for_mysql_connection() {
     local -r db_name="${3:?missing database name}"
     local -r db_user="${4:?missing database user}"
     local -r db_pass="${5:-}"
+    local -r db_options="${6:-}"
     check_mysql_connection() {
-        echo "SELECT 1" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
+        #Remove test first line
+        echo "SELECT 1" "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass" "$db_options"
+        echo "SELECT 1" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass" "$db_options"
     }
     if ! retry_while "check_mysql_connection"; then
         error "Could not connect to the database"
