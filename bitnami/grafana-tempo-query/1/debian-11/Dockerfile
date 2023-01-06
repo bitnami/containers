@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.5.0-debian-11-r46" \
+      org.opencontainers.image.ref.name="1.5.0-debian-11-r47" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/grafana-tempo-query" \
       org.opencontainers.image.title="grafana-tempo-query" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,7 +21,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "jaeger-query-1.40.0-0-linux-${OS_ARCH}-debian-11" \
+      "jaeger-query-1.41.0-0-linux-${OS_ARCH}-debian-11" \
       "grafana-tempo-query-1.5.0-3-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
