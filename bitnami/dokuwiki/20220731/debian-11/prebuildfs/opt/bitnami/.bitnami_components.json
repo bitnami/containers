@@ -1,10 +1,10 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "836005c75ea1c35ca68b9f468340a854c6237a50ca341dba29e39ec4cf32acf3",
+        "digest": "966e04f044d933a9395f848be40d4be75686031bca15a35e21aec4b746c44f6f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.4.54-158"
+        "version": "2.4.54-159"
     },
     "dokuwiki": {
         "arch": "amd64",
@@ -22,17 +22,17 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "13db51b9c1371ad7f67e5a4d13418df291a688385753f6a8624f92ef0f0b59d9",
+        "digest": "47cecb1aa635e1a5eec16965c9c04d65463e19e7c8de6429e23b922b853c008e",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.13-1"
+        "version": "8.1.14-0"
     },
     "php": {
         "arch": "amd64",
-        "digest": "20f69a3917585cee6e91a28ef16079faf7150e4ae9489e06ee4bc3ae7042d957",
+        "digest": "32c330f646b3c257ff0b96b74ab61d1a3c0a884daabdeaa682fb5eeb97e27b89",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.13-5"
+        "version": "8.1.14-0"
     },
     "render-template": {
         "arch": "amd64",
