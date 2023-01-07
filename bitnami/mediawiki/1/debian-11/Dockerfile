@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.39.1-debian-11-r5" \
+      org.opencontainers.image.ref.name="1.39.1-debian-11-r6" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mediawiki" \
       org.opencontainers.image.title="mediawiki" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,7 +22,7 @@ RUN install_packages acl ca-certificates curl libaudit1 libbrotli1 libbsd0 libbz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "php-8.1.14-0-linux-${OS_ARCH}-debian-11" \
-      "apache-2.4.54-158-linux-${OS_ARCH}-debian-11" \
+      "apache-2.4.54-159-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.11-1-linux-${OS_ARCH}-debian-11" \
       "libphp-8.1.14-0-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.4-1-linux-${OS_ARCH}-debian-11" \
