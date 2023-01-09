@@ -589,8 +589,6 @@ wordpress_wait_for_mysql_connection() {
     local -r db_pass="${5:-}"
     local -r db_options="${6:-}"
     check_mysql_connection() {
-        #Remove test first line
-        echo "SELECT 1" "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass" "$db_options"
         echo "SELECT 1" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass" "$db_options"
     }
     if ! retry_while "check_mysql_connection"; then
