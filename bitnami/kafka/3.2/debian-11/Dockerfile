@@ -5,7 +5,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.2.3-debian-11-r37" \
+      org.opencontainers.image.ref.name="3.2.3-debian-11-r38" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kafka" \
       org.opencontainers.image.title="kafka" \
       org.opencontainers.image.vendor="VMware, Inc." \
