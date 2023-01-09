@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.3.27-debian-11-r76" \
+      org.opencontainers.image.ref.name="3.3.27-debian-11-r77" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/etcd" \
       org.opencontainers.image.title="etcd" \
       org.opencontainers.image.vendor="VMware, Inc." \
