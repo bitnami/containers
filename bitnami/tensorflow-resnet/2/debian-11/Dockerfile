@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.11.0-debian-11-r12" \
+      org.opencontainers.image.ref.name="2.11.0-debian-11-r16" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/tensorflow-resnet" \
       org.opencontainers.image.title="tensorflow-resnet" \
       org.opencontainers.image.vendor="VMware, Inc." \

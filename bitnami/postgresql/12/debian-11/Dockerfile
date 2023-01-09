@@ -6,7 +6,7 @@ ARG WITH_ALL_LOCALES="no"
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="12.13.0-debian-11-r16" \
+      org.opencontainers.image.ref.name="12.13.0-debian-11-r20" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/postgresql" \
       org.opencontainers.image.title="postgresql" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -24,7 +24,7 @@ RUN install_packages ca-certificates curl libbsd0 libbz2-1.0 libedit2 libffi7 li
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "gosu-1.16.0-0-linux-${OS_ARCH}-debian-11" \
-      "postgresql-12.13.0-3-linux-${OS_ARCH}-debian-11" \
+      "postgresql-12.13.0-4-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \

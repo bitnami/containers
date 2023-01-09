@@ -8,10 +8,10 @@
     },
     "gitea": {
         "arch": "amd64",
-        "digest": "36598197580032ef47b6ef0f6527da82dbe215fe1569f1d2affc546386f7761c",
+        "digest": "6b3791e3c053f38a971dc0d91e5b147e99abe941438c8c3316354b1347897674",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.17.4-0"
+        "version": "1.18.0-0"
     },
     "gosu": {
         "arch": "amd64",

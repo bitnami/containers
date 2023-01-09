@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="6.0.3-debian-11-r11" \
+      org.opencontainers.image.ref.name="6.0.3-debian-11-r15" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mongodb-sharded" \
       org.opencontainers.image.title="mongodb-sharded" \
       org.opencontainers.image.vendor="VMware, Inc." \

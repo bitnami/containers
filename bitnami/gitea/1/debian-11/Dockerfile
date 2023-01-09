@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.17.4-debian-11-r2" \
+      org.opencontainers.image.ref.name="1.18.0-debian-11-r3" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/gitea" \
       org.opencontainers.image.title="gitea" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.17.4"
+      org.opencontainers.image.version="1.18.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "render-template-1.0.4-1-linux-${OS_ARCH}-debian-11" \
       "ini-file-1.4.4-1-linux-${OS_ARCH}-debian-11" \
       "git-2.39.0-0-linux-${OS_ARCH}-debian-11" \
-      "gitea-1.17.4-0-linux-${OS_ARCH}-debian-11" \
+      "gitea-1.18.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -43,7 +43,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/gitea/postunpack.sh
-ENV APP_VERSION="1.17.4" \
+ENV APP_VERSION="1.18.0" \
     BITNAMI_APP_NAME="gitea" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/git/bin:/opt/bitnami/gitea/bin:$PATH"
 

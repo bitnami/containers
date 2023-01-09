@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.10.11-debian-11-r44" \
+      org.opencontainers.image.ref.name="3.10.11-debian-11-r48" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/joomla" \
       org.opencontainers.image.title="joomla" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -21,10 +21,10 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages acl ca-certificates curl libaudit1 libbrotli1 libbsd0 libbz2-1.0 libcap-ng0 libcom-err2 libcrypt1 libcurl4 libexpat1 libffi7 libfftw3-double3 libfontconfig1 libfreetype6 libgcc-s1 libgcrypt20 libglib2.0-0 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed6 libicu67 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblcms2-2 libldap-2.4-2 liblqr-1-0 libltdl7 liblzma5 libmagickcore-6.q16-6 libmagickwand-6.q16-6 libmd0 libmemcached11 libncurses6 libnettle8 libnghttp2-14 libonig5 libp11-kit0 libpam0g libpcre2-8-0 libpcre3 libpng16-16 libpq5 libpsl5 libreadline8 librtmp1 libsasl2-2 libsodium23 libsqlite3-0 libssh2-1 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtidy5deb1 libtinfo6 libunistring2 libuuid1 libwebp6 libx11-6 libxau6 libxcb1 libxdmcp6 libxext6 libxml2 libxslt1.1 libzip4 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "php-8.1.13-5-linux-${OS_ARCH}-debian-11" \
-      "apache-2.4.54-158-linux-${OS_ARCH}-debian-11" \
+      "php-8.1.14-0-linux-${OS_ARCH}-debian-11" \
+      "apache-2.4.54-159-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.11-1-linux-${OS_ARCH}-debian-11" \
-      "libphp-8.1.13-1-linux-${OS_ARCH}-debian-11" \
+      "libphp-8.1.14-0-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.4-1-linux-${OS_ARCH}-debian-11" \
       "joomla-3.10.11-3-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-0-linux-${OS_ARCH}-debian-11" \

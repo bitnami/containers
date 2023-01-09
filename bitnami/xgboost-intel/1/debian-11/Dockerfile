@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.7.2-debian-11-r6" \
+      org.opencontainers.image.ref.name="1.7.3-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/xgboost-intel" \
       org.opencontainers.image.title="xgboost-intel" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.7.2"
+      org.opencontainers.image.version="1.7.3"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ RUN install_packages ca-certificates curl libbz2-1.0 libcom-err2 libcrypt1 libff
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.10.9-0-linux-${OS_ARCH}-debian-11" \
-      "xgboost-intel-1.7.2-0-linux-${OS_ARCH}-debian-11" \
+      "xgboost-intel-1.7.3-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -42,7 +42,7 @@ RUN mkdir /.local && chmod g+rwX /.local
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/xgboost-intel/postunpack.sh
-ENV APP_VERSION="1.7.2" \
+ENV APP_VERSION="1.7.3" \
     BITNAMI_APP_NAME="xgboost-intel" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:$PATH"
 

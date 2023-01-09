@@ -6,7 +6,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="7.17.8-debian-11-r6" \
+      org.opencontainers.image.ref.name="7.17.8-debian-11-r10" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/elasticsearch" \
       org.opencontainers.image.title="elasticsearch" \
       org.opencontainers.image.vendor="VMware, Inc." \

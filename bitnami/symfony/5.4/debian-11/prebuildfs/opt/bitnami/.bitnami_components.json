@@ -15,16 +15,16 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "20f69a3917585cee6e91a28ef16079faf7150e4ae9489e06ee4bc3ae7042d957",
+        "digest": "32c330f646b3c257ff0b96b74ab61d1a3c0a884daabdeaa682fb5eeb97e27b89",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.13-5"
+        "version": "8.1.14-0"
     },
     "symfony": {
         "arch": "amd64",
-        "digest": "fd0ed71bd148362137e131629ef77b7de72de2b032e293ae1d317d2b24891e2a",
+        "digest": "61bc3439072adedbc78713b7b98af9ed8dc3c03f4d6c27d3dfddcc803d9b6ea5",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.4.17-0"
+        "version": "5.4.18-0"
     }
 }

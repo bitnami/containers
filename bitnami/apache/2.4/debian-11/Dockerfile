@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.4.54-debian-11-r69" \
+      org.opencontainers.image.ref.name="2.4.54-debian-11-r73" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/apache" \
       org.opencontainers.image.title="apache" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -23,7 +23,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "render-template-1.0.4-1-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-0-linux-${OS_ARCH}-debian-11" \
-      "apache-2.4.54-158-linux-${OS_ARCH}-debian-11" \
+      "apache-2.4.54-159-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \

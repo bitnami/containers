@@ -5,7 +5,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="7.2.3-debian-11-r3" \
+      org.opencontainers.image.ref.name="7.2.3-debian-11-r7" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ksql" \
       org.opencontainers.image.title="ksql" \
       org.opencontainers.image.vendor="VMware, Inc." \

@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="7.4.0-debian-11-r20" \
+      org.opencontainers.image.ref.name="7.4.0-debian-11-r24" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/oauth2-proxy" \
       org.opencontainers.image.title="oauth2-proxy" \
       org.opencontainers.image.vendor="VMware, Inc." \

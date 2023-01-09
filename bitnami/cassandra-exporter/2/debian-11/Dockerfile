@@ -4,7 +4,7 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.3.8-debian-11-r73" \
+      org.opencontainers.image.ref.name="2.3.8-debian-11-r77" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cassandra-exporter" \
       org.opencontainers.image.title="cassandra-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
