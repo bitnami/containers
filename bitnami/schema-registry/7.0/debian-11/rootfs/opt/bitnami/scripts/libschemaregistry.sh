@@ -303,6 +303,7 @@ schema_registry_initialize() {
         if [[ "$brokers_auth_protocol" =~ SSL ]]; then
             schema_registry_conf_set "kafkastore.ssl.keystore.location" "${SCHEMA_REGISTRY_CERTS_DIR}/schema-registry.keystore.jks"
             [[ -n "$SCHEMA_REGISTRY_KAFKA_KEYSTORE_PASSWORD" ]] && schema_registry_conf_set "kafkastore.ssl.keystore.password" "$SCHEMA_REGISTRY_KAFKA_KEYSTORE_PASSWORD"
+            [[ -n "$SCHEMA_REGISTRY_KAFKA_KEY_PASSWORD" ]] && schema_registry_conf_set "kafkastore.ssl.key.password" "$SCHEMA_REGISTRY_KAFKA_KEY_PASSWORD"
             schema_registry_conf_set "kafkastore.ssl.truststore.location" "${SCHEMA_REGISTRY_CERTS_DIR}/schema-registry.truststore.jks"
             [[ -n "$SCHEMA_REGISTRY_KAFKA_TRUSTSTORE_PASSWORD" ]] && schema_registry_conf_set "kafkastore.ssl.truststore.password" "$SCHEMA_REGISTRY_KAFKA_TRUSTSTORE_PASSWORD"
             [[ -n "$SCHEMA_REGISTRY_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM" ]] && schema_registry_conf_set "kafkastore.ssl.endpoint.identification.algorithm" "$SCHEMA_REGISTRY_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM"
