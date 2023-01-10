@@ -8,10 +8,10 @@
     },
     "dokuwiki": {
         "arch": "amd64",
-        "digest": "6acb2663fb50464e0f4054e72a4f5df388c63762c58cbd696669e3083fba5f59",
+        "digest": "870e3011ad8c90b4526e0374c98b16437124b236cfb74ce7fda0e771641003ee",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "20220731.1.0-5"
+        "version": "20220731.1.0-6"
     },
     "gosu": {
         "arch": "amd64",
