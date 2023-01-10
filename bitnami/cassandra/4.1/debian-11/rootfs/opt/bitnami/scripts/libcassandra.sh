@@ -233,6 +233,10 @@ cassandra_validate() {
         check_resolved_hostname "$seed"
     done
 
+    if [[ ! ${CASSANDRA_AUTO_SNAPSHOT_TTL} =~ ([1-9]{1}[0-9]{0,}[d|h|m]) ]]; then
+       print_validation_error "CASSANDRA_AUTO_SNAPSHOT_TTL accepted units: d (days), h (hours) or m (minutes)"
+    fi
+
     check_true_false_value CASSANDRA_SSL_VALIDATE
     check_true_false_value CASSANDRA_AUTOMATIC_SSTABLE_UPGRADE
 
@@ -401,6 +405,7 @@ cassandra_setup_cluster() {
         cassandra_yaml_set "keystore_password" "$CASSANDRA_KEYSTORE_PASSWORD"
         cassandra_yaml_set "truststore" "$CASSANDRA_TRUSTSTORE_LOCATION"
         cassandra_yaml_set "truststore_password" "$CASSANDRA_TRUSTSTORE_PASSWORD"
+        cassandra_yaml_set "auto_snapshot_ttl" "$CASSANDRA_AUTO_SNAPSHOT_TTL"
 
         if [[ -n "$CASSANDRA_BROADCAST_ADDRESS" ]]; then
             cassandra_yaml_set "broadcast_address" "$CASSANDRA_BROADCAST_ADDRESS"
