@@ -388,12 +388,8 @@ elasticsearch_cluster_configuration() {
     if [[ -n "$ELASTICSEARCH_CLUSTER_HOSTS" ]]; then
         read -r -a host_list <<<"$(tr ',;' ' ' <<<"$ELASTICSEARCH_CLUSTER_HOSTS")"
         master_list=("${host_list[@]}")
-        total_nodes=${#host_list[@]}
         if [[ -n "$ELASTICSEARCH_CLUSTER_MASTER_HOSTS" ]]; then
             read -r -a master_list <<<"$(tr ',;' ' ' <<<"$ELASTICSEARCH_CLUSTER_MASTER_HOSTS")"
-        fi
-        if [[ -n "$ELASTICSEARCH_TOTAL_NODES" ]]; then
-            total_nodes=$ELASTICSEARCH_TOTAL_NODES
         fi
         es_version="$(elasticsearch_get_version)"
         es_major_version="$(get_sematic_version "$es_version" 1)"
