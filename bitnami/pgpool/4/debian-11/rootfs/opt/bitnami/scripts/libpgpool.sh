@@ -440,7 +440,7 @@ pgpool_create_config() {
     # ref: http://www.pgpool.net/docs/latest/en/html/runtime-config-connection.html#RUNTIME-CONFIG-CONNECTION-SETTINGS
     pgpool_set_property "listen_addresses" "*"
     pgpool_set_property "port" "$PGPOOL_PORT_NUMBER"
-    pgpool_set_property "socket_dir" "$PGPOOL_TMP_DIR"
+    pgpool_set_property "unix_socket_directories" "$PGPOOL_TMP_DIR"
     pgpool_set_property "pcp_socket_dir" "$PGPOOL_TMP_DIR"
     # Connection Pooling settings
     # http://www.pgpool.net/docs/latest/en/html/runtime-config-connection-pooling.html
