@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.2.12-debian-11-r0" \
+      org.opencontainers.image.ref.name="4.3.0-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/codeigniter" \
       org.opencontainers.image.title="codeigniter" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="4.2.12"
+      org.opencontainers.image.version="4.3.0"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
@@ -23,7 +23,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "php-8.1.14-0-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.11-1-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-0-linux-${OS_ARCH}-debian-11" \
-      "codeigniter-4.2.12-0-linux-${OS_ARCH}-debian-11" \
+      "codeigniter-4.3.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -42,7 +42,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/codeigniter/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
-ENV APP_VERSION="4.2.12" \
+ENV APP_VERSION="4.3.0" \
     BITNAMI_APP_NAME="codeigniter" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/codeigniter/bin:$PATH" \
     PHP_ENABLE_OPCACHE="0"
