@@ -52,19 +52,19 @@ case "$1" in
     set -o pipefail
 
     CMD=(
-      ${JAVA_HOME}/bin/java
+      "${JAVA_HOME}/bin/java"
       "${SPARK_EXECUTOR_JAVA_OPTS[@]}"
-      -Xms$SPARK_EXECUTOR_MEMORY
-      -Xmx$SPARK_EXECUTOR_MEMORY
+      "-Xms${SPARK_EXECUTOR_MEMORY}"
+      "-Xmx${SPARK_EXECUTOR_MEMORY}"
       -cp '/opt/bitnami/spark/conf::/opt/bitnami/spark/jars/*'
       org.apache.spark.scheduler.cluster.k8s.KubernetesExecutorBackend
-      --driver-url $SPARK_DRIVER_URL
-      --executor-id $SPARK_EXECUTOR_ID
-      --cores $SPARK_EXECUTOR_CORES
-      --app-id $SPARK_APPLICATION_ID
-      --hostname $SPARK_EXECUTOR_POD_IP
-      --resourceProfileId $SPARK_RESOURCE_PROFILE_ID
-      --podName $SPARK_EXECUTOR_POD_NAME
+      --driver-url "$SPARK_DRIVER_URL"
+      --executor-id "$SPARK_EXECUTOR_ID"
+      --cores "$SPARK_EXECUTOR_CORES"
+      --app-id "$SPARK_APPLICATION_ID"
+      --hostname "$SPARK_EXECUTOR_POD_IP"
+      --resourceProfileId "$SPARK_RESOURCE_PROFILE_ID"
+      --podName "$SPARK_EXECUTOR_POD_NAME"
     )
     ;;
 
