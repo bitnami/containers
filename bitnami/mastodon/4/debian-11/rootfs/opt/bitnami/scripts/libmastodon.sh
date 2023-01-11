@@ -235,15 +235,15 @@ mastodon_ensure_admin_user_exists() {
     cd "$MASTODON_BASE_DIR" || exit
     # We use the tootctl tool to create the admin user
     # https://github.com/mastodon/mastodon/blob/main/chart/templates/job-create-admin.yaml#L50
-    local -r cmd="tootctl"
+    local -r cmd=("tootctl")
     local -r args=("accounts" "create" "$MASTODON_ADMIN_USERNAME" "--email" "$MASTODON_ADMIN_EMAIL" "--confirmed" "--role" "Owner")
     local res=""
     if am_i_root; then
         # Adding true to avoid the logic to exit
-        res="$(gosu "$MASTODON_DAEMON_USER" "$cmd" "${args[@]}" || true)"
+        res="$(gosu "$MASTODON_DAEMON_USER" "${cmd[@]}" "${args[@]}" || true)"
     else
         # Adding true to avoid the logic to exit
-        res="$("$cmd" "${args[@]}" || true)"
+        res="$("${cmd[@]}" "${args[@]}" || true)"
     fi
 
     if [[ "$res" =~ "OK" ]]; then
