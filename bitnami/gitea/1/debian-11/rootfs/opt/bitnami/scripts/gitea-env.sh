@@ -25,6 +25,8 @@ gitea_env_vars=(
     GITEA_REPO_ROOT_PATH
     GITEA_LFS_ROOT_PATH
     GITEA_LOG_ROOT_PATH
+    GITEA_LOG_MODE
+    GITEA_LOG_ROUTER
     GITEA_ADMIN_USER
     GITEA_ADMIN_PASSWORD
     GITEA_ADMIN_EMAIL
@@ -85,6 +87,8 @@ export GITEA_DATA_TO_PERSIST="${GITEA_CONF_FILE} data"
 export GITEA_REPO_ROOT_PATH="${GITEA_REPO_ROOT_PATH:-${GITEA_DATA_DIR}/git/repositories}"
 export GITEA_LFS_ROOT_PATH="${GITEA_LFS_ROOT_PATH:-}"
 export GITEA_LOG_ROOT_PATH="${GITEA_LOG_ROOT_PATH:-${GITEA_TMP_DIR}/log}"
+export GITEA_LOG_MODE="${GITEA_LOG_MODE:-}"
+export GITEA_LOG_ROUTER="${GITEA_LOG_ROUTER:-}"
 export GITEA_ADMIN_USER="${GITEA_ADMIN_USER:-bn_user}"
 export GITEA_ADMIN_PASSWORD="${GITEA_ADMIN_PASSWORD:-bitnami}"
 export GITEA_ADMIN_EMAIL="${GITEA_ADMIN_EMAIL:-user@bitnami.org}"
@@ -116,7 +120,7 @@ export GITEA_SMTP_PASSWORD="${GITEA_SMTP_PASSWORD:-}"
 
 # Gitea system parameters
 export GITEA_DAEMON_USER="gitea"
-export GITEA_DAEMON_GROUP="bitnami"
+export GITEA_DAEMON_GROUP="gitea"
 export PATH="/opt/bitnami/common/bin:/opt/bitnami/gitea/bin:$PATH"
 
 # Custom environment variables may be defined below

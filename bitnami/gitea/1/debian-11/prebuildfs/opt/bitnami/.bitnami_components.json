@@ -1,17 +1,10 @@
 {
-    "git": {
-        "arch": "amd64",
-        "digest": "bcfde989b7726dc61bbbc4b79d7c55c3e42fe658de202fb613b8eddfb17261ee",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "2.39.0-0"
-    },
     "gitea": {
         "arch": "amd64",
-        "digest": "6b3791e3c053f38a971dc0d91e5b147e99abe941438c8c3316354b1347897674",
+        "digest": "3e1c5692c6cd657fadfe65776474160f4a5f49f0da4611002e182240fdb30231",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.18.0-0"
+        "version": "1.18.0-1"
     },
     "gosu": {
         "arch": "amd64",
