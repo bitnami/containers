@@ -137,6 +137,10 @@ gitea_initialize() {
         done
         gitea_update_conf_file
         gitea_pass_wizard
+        # These config values are not desired for the wizard, as we want to print install output to a specific log file
+        # In addition, Gitea overwrites these values after passing the wizard, so we need to set them afterwards anyways
+        is_empty_value "$GITEA_LOG_MODE" || gitea_conf_set "log" "MODE" "$GITEA_LOG_MODE"
+        is_empty_value "$GITEA_LOG_ROUTER" || gitea_conf_set "log" "ROUTER" "$GITEA_LOG_ROUTER"
         info "Persisting Gitea installation"
         persist_app "$app_name" "$GITEA_DATA_TO_PERSIST"
     else
@@ -232,6 +236,7 @@ gitea_conf_set() {
     local -r value="${3:?value is required}"
     local -r file="${4:-${GITEA_CONF_FILE}}"
 
+    debug "Setting ${section:+"${section}."}${key} to '${value}' in Gitea configuration"
     ini-file set --section "$section" --key "$key" --value "$value" "$file"
 }
 
@@ -331,4 +336,43 @@ gitea_start_bg() {
     fi
     wait_for_log_entry "Starting new Web server" "$log_file"
     info "Gitea started successfully"
+}
+
+########################
+# Check if Gitea is running
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_gitea_running() {
+    pid="$(get_pid_from_file "$GITEA_PID_FILE")"
+    if [[ -n "$pid" ]]; then
+        is_service_running "$pid"
+    else
+        false
+    fi
+}
+
+########################
+# Check if Gitea is not running
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_gitea_not_running() {
+    ! is_gitea_running
+}
+
+########################
+# Stop Gitea
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+gitea_stop() {
+    ! is_gitea_running && return
+    stop_service_using_pid "$GITEA_PID_FILE"
 }
