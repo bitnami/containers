@@ -264,6 +264,7 @@ harbor_jobservice_stop() {
 #########################
 harbor_notary_server_print_env() {
     if [[ -n "${HARBOR_NOTARY_SERVER_DATABASE_NAME:-}" ]]; then
+        # shellcheck disable=SC2034
         HARBOR_NOTARY_SERVER_CFG_DB_URL="postgres://${HARBOR_NOTARY_SERVER_DATABASE_USERNAME:-}:${HARBOR_NOTARY_SERVER_DATABASE_PASSWORD:-}@${HARBOR_NOTARY_SERVER_DATABASE_HOST:-127.0.0.1}:${HARBOR_NOTARY_SERVER_DATABASE_PORT_NUMBER:-5432}/${HARBOR_NOTARY_SERVER_DATABASE_NAME}?sslmode=${HARBOR_NOTARY_SERVER_DATABASE_SSLMODE:-disable}"
     fi
     for var in "${!HARBOR_NOTARY_SERVER_CFG_@}"; do
@@ -323,6 +324,7 @@ harbor_notary_server_stop() {
 #########################
 harbor_notary_signer_print_env() {
     if [[ -n "${HARBOR_NOTARY_SIGNER_DATABASE_NAME:-}" ]]; then
+        # shellcheck disable=SC2034
         HARBOR_NOTARY_SIGNER_CFG_DB_URL="postgres://${HARBOR_NOTARY_SIGNER_DATABASE_USERNAME:-}:${HARBOR_NOTARY_SIGNER_DATABASE_PASSWORD:-}@${HARBOR_NOTARY_SIGNER_DATABASE_HOST:-127.0.0.1}:${HARBOR_NOTARY_SIGNER_DATABASE_PORT_NUMBER:-5432}/${HARBOR_NOTARY_SIGNER_DATABASE_NAME}?sslmode=${HARBOR_NOTARY_SIGNER_DATABASE_SSLMODE:-disable}"
     fi
     for var in "${!HARBOR_NOTARY_SIGNER_CFG_@}"; do
