@@ -4,11 +4,11 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.6.2-debian-11-r16" \
+      org.opencontainers.image.ref.name="3.6.3-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/grafana-image-renderer" \
       org.opencontainers.image.title="grafana-image-renderer" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="3.6.2"
+      org.opencontainers.image.version="3.6.3"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,7 +23,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.8.16-0-linux-${OS_ARCH}-debian-11" \
       "node-16.19.0-0-linux-${OS_ARCH}-debian-11" \
-      "grafana-image-renderer-3.6.2-1-linux-${OS_ARCH}-debian-11" \
+      "grafana-image-renderer-3.6.3-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -39,7 +39,7 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="3.6.2" \
+ENV APP_VERSION="3.6.3" \
     BITNAMI_APP_NAME="grafana-image-renderer" \
     HTTP_HOST="0.0.0.0" \
     HTTP_PORT="8080" \
