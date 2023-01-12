@@ -270,12 +270,12 @@ kafka_validate() {
         if [[ -n "$KAFKA_CFG_PROCESS_ROLES" ]]; then
             old_IFS=$IFS
             IFS=','
-            read -a roles <<< "$KAFKA_CFG_PROCESS_ROLES"
+            read -r -a roles <<< "$KAFKA_CFG_PROCESS_ROLES"
             IFS=${old_IFS}
             controller_exists=false
             for val in "${roles[@]}";
             do
-            if [ $val == "controller" ]; then
+            if [[ "$val" == "controller" ]]; then
                 controller_exists=true
                 break
             fi
@@ -289,7 +289,7 @@ kafka_validate() {
         if [[ -n "$KAFKA_CFG_LISTENERS" ]]; then
             old_IFS=$IFS
             IFS=','
-            read -a listener <<< "$KAFKA_CFG_LISTENERS"
+            read -r -a listener <<< "$KAFKA_CFG_LISTENERS"
             IFS=${old_IFS}
             controller_exists=false
             for val in "${listener[@]}";
@@ -424,7 +424,7 @@ KafkaServer {
    user_${KAFKA_INTER_BROKER_USER:-}="${KAFKA_INTER_BROKER_PASSWORD:-}"
 EOF
                 for ((i = 0; i < ${#users[@]}; i++)); do
-                    if [[ "$i" -eq "(( ${#users[@]} - 1 ))" ]]; then
+                    if [[ "$i" = "$(( ${#users[@]} - 1 ))" ]]; then
                         cat >>"${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
    user_${users[i]:-}="${passwords[i]:-}";
 EOF
@@ -454,7 +454,7 @@ KafkaServer {
 EOF
             if [[ "${KAFKA_CFG_SASL_ENABLED_MECHANISMS:-}" =~ PLAIN ]]; then
                 for ((i = 0; i < ${#users[@]}; i++)); do
-                    if [[ "$i" -eq "(( ${#users[@]} - 1 ))" ]]; then
+                    if [[ "$i" = "$(( ${#users[@]} - 1 ))" ]]; then
                         cat >>"${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
    user_${users[i]:-}="${passwords[i]:-}";
 EOF
