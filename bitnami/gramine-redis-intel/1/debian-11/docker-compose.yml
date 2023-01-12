@@ -1,7 +1,0 @@
-version: '2'
-
-services:
-  redis:
-    image: docker.io/bitnami/gramine-redis-intel:1
-    ports:
-      - '6379:6379'

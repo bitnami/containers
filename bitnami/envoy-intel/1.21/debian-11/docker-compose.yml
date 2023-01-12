@@ -1,4 +1,0 @@
-version: '2'
-services:
-  envoy:
-    image: docker.io/bitnami/envoy-intel:1.21
