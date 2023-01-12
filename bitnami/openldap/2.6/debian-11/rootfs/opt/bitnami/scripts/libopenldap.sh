@@ -222,7 +222,7 @@ ldap_stop() {
         for f in "${db_files[@]}"; do
             debug_execute fuser "$f" && return_value=1
         done
-        return $return_value
+        return "$return_value"
     }
 
     is_ldap_not_running && return
