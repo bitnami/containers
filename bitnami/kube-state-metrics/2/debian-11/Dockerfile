@@ -4,7 +4,8 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.7.0-debian-11-r13" \
+      org.opencontainers.image.licenses="Apache-2.0" \
+      org.opencontainers.image.ref.name="2.7.0-debian-11-r14" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kube-state-metrics" \
       org.opencontainers.image.title="kube-state-metrics" \
       org.opencontainers.image.vendor="VMware, Inc." \
