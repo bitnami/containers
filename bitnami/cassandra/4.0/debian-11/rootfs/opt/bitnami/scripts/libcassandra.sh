@@ -289,7 +289,7 @@ cassandra_copy_default_config() {
     local -r tmp_file_list=/tmp/conf_file_list
     find "$CASSANDRA_DEFAULT_CONF_DIR" -type f >$tmp_file_list
     while read -r f; do
-        filename="${f#${CASSANDRA_DEFAULT_CONF_DIR}/}" # Get path with subfolder
+        filename="${f#"${CASSANDRA_DEFAULT_CONF_DIR}/"}" # Get path with subfolder
         dest="${f//$CASSANDRA_DEFAULT_CONF_DIR/$CASSANDRA_CONF_DIR}"
         if [[ -f "$dest" ]]; then
             debug "Found ${filename}. Skipping default"
