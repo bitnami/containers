@@ -368,7 +368,7 @@ EOF
         # When loading definitions, default vhost and user/pass won't be created: https://www.rabbitmq.com/definitions.html#import-on-boot
         if ! is_boolean_yes "$RABBITMQ_LOAD_DEFINITIONS"; then
             cat <<EOF
-default_vhost = ${RABBITMQ_VHOST}
+default_vhost = ${RABBITMQ_VHOST:?}
 default_user = ${RABBITMQ_USERNAME}
 EOF
             # In most cases (i.e. container images), it is not a concern to specify the default password this way
@@ -860,6 +860,7 @@ rabbitmq_custom_init_scripts() {
                     "$f"
                 else
                     debug "Sourcing $f"
+                    # shellcheck disable=SC1090
                     . "$f"
                 fi
                 ;;
