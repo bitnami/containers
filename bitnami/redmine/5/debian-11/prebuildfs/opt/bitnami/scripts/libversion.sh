@@ -31,7 +31,7 @@ get_sematic_version () {
 
         while [[ $i -lt $n ]]; do
             if [[ -n "${BASH_REMATCH[$i]}" ]] && [[ "${BASH_REMATCH[$i]:0:1}" != '.' ]];  then
-                version_sections[$j]=${BASH_REMATCH[$i]}
+                version_sections[j]="${BASH_REMATCH[$i]}"
                 ((j++))
             fi
             ((i++))
