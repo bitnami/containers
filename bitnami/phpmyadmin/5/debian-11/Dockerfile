@@ -4,7 +4,8 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="5.2.0-debian-11-r77" \
+      org.opencontainers.image.licenses="Apache-2.0" \
+      org.opencontainers.image.ref.name="5.2.0-debian-11-r78" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/phpmyadmin" \
       org.opencontainers.image.title="phpmyadmin" \
       org.opencontainers.image.vendor="VMware, Inc." \
