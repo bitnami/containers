@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.1.1-debian-11-r25" \
+      org.opencontainers.image.ref.name="6.1.1-debian-11-r26" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/wordpress" \
       org.opencontainers.image.title="wordpress" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -28,7 +28,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "wp-cli-2.7.1-0-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.11-1-linux-${OS_ARCH}-debian-11" \
       "libphp-8.1.14-0-linux-${OS_ARCH}-debian-11" \
-      "wordpress-6.1.1-11-linux-${OS_ARCH}-debian-11" \
+      "wordpress-6.1.1-12-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
