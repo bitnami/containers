@@ -508,6 +508,7 @@ ejbca_custom_init_scripts() {
                     "$f"
                 else
                     debug "Sourcing $f"
+                    # shellcheck disable=SC1090
                     . "$f"
                 fi
                 ;;
