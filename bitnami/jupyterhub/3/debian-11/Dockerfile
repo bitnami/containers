@@ -4,7 +4,8 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.0.0-debian-11-r34" \
+      org.opencontainers.image.licenses="Apache-2.0" \
+      org.opencontainers.image.ref.name="3.0.0-debian-11-r35" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jupyterhub" \
       org.opencontainers.image.title="jupyterhub" \
       org.opencontainers.image.vendor="VMware, Inc." \
