@@ -4,7 +4,8 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.15.3-debian-11-r23" \
+      org.opencontainers.image.licenses="Apache-2.0" \
+      org.opencontainers.image.ref.name="1.15.3-debian-11-r24" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/fluentd" \
       org.opencontainers.image.title="fluentd" \
       org.opencontainers.image.vendor="VMware, Inc." \
