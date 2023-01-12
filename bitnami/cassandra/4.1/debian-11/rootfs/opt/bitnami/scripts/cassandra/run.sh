@@ -34,7 +34,7 @@ info "** Starting Cassandra **"
 #
 # If none of the two cases apply, we assume it is an error and exit
 if is_cassandra_running; then
-    readonly __run_pid="$(get_pid_from_file "$CASSANDRA_PID_FILE")"
+    __run_pid="$(get_pid_from_file "$CASSANDRA_PID_FILE")"
     running_log_file=""
 
     if [[ -f "$CASSANDRA_FIRST_BOOT_LOG_FILE" ]]; then
@@ -49,7 +49,7 @@ if is_cassandra_running; then
     fi
 
     info "Tailing $running_log_file"
-    readonly __run_tail_cmd="$(which tail)"
+    __run_tail_cmd="$(which tail)"
     readonly __run_tail_flags=("--pid=${__run_pid}" "-n" "1000" "-f" "$running_log_file")
 
     if am_i_root; then
