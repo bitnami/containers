@@ -314,7 +314,7 @@ etcd_store_member_id() {
     etcd_start_bg
     read -r -a extra_flags <<<"$(etcdctl_auth_flags)"
     is_boolean_yes "$ETCD_ON_K8S" && extra_flags+=("--endpoints=$(etcdctl_get_endpoints)")
-    if retry_while "etcdctl ${extra_flags[*]} member list" >/dev/null 2>&1; then
+    if retry_while "etcdctl ${extra_flags[*]:-} member list" >/dev/null 2>&1; then
         while is_empty_value "$member_id"; do
             read -r -a advertised_array <<<"$(tr ',;' ' ' <<<"$ETCD_ADVERTISE_CLIENT_URLS")"
             member_id="$(etcdctl "${extra_flags[@]}" member list | grep -w "${advertised_array[0]}" | awk -F "," '{ print $1}' || true)"
@@ -597,7 +597,8 @@ etcd_initialize() {
                     hostname_has_N_ips() {
                         local -r hostname="${1:?hostname is required}"
                         local -r n=${2:?number of ips is required}
-                        [[ $(getent ahosts "$hostname" | awk '{print $1}' | uniq | wc -l) -eq $n ]] && return 0
+                        local -r ready_hosts=$(getent ahosts "$hostname" | awk '{print $1}' | uniq | wc -l)
+                        [[ $((ready_hosts % n)) -eq 0 ]] && [[ $((ready_hosts / n)) -ge 1 ]] && return 0
                         return 1
                     }
                     if ! retry_while "hostname_has_N_ips $domain ${#initial_members[@]}"; then
