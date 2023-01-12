@@ -15,6 +15,9 @@ env:
   CSP_API_URL: https://console.cloud.vmware.com
   CSP_API_TOKEN: ${{ secrets.CSP_API_TOKEN }}
   VIB_PUBLIC_URL: https://cp.bromelia.vmware.com
+# Avoid concurrency over the same PR
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
 jobs:
   get-containers:
     runs-on: ubuntu-latest
