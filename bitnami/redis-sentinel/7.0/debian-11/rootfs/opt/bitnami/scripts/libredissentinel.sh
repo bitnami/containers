@@ -212,6 +212,7 @@ redis_initialize() {
         [[ -z "$REDIS_SENTINEL_PASSWORD" ]] || redis_conf_set "requirepass" "$REDIS_SENTINEL_PASSWORD"
 
         # Master set
+        # shellcheck disable=SC2153
         redis_conf_set "sentinel monitor" "${REDIS_MASTER_SET} ${REDIS_MASTER_HOST} ${REDIS_MASTER_PORT_NUMBER} ${REDIS_SENTINEL_QUORUM}"
         redis_conf_set "sentinel down-after-milliseconds" "${REDIS_MASTER_SET} ${REDIS_SENTINEL_DOWN_AFTER_MILLISECONDS}"
         redis_conf_set "sentinel failover-timeout" "${REDIS_MASTER_SET} ${REDIS_SENTINEL_FAILOVER_TIMEOUT}"
