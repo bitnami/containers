@@ -94,6 +94,8 @@ EOF
     fi
 }
 
+# shellcheck disable=SC2148
+
 ########################
 # Execute an arbitrary query/queries against the running MongoDB service
 # Stdin:
