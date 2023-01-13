@@ -39,6 +39,47 @@ get_system_cert_paths() {
 }
 
 ########################
+# Ensure CA bundles allows users in root group install new certificate
+# Globals:
+#   OS_FLAVOUR
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+configure_permissions_system_certs() {
+    local -r owner="${1:-}"
+    # Debian
+    set_permissions_ownership "/etc/pki/tls/certs/ca-bundle.crt" "$owner"
+    # Centos/Phonton
+    set_permissions_ownership "/etc/pki/tls/certs/ca-bundle.trust.crt" "$owner"
+    set_permissions_ownership "/etc/ssl/certs/ca-certificates.crt" "$owner"
+}
+
+########################
+# Grant group write permissions to the file provided and change ownership if a the owner argument is set.
+# If the path is not a file, then do nothing.
+# Globals:
+#   OS_FLAVOUR
+# Arguments:
+#   $1 - path
+#   $2 - owner
+# Returns:
+#   None
+#########################
+set_permissions_ownership() {
+    local -r path="${1:?path is missing}"
+    local -r owner="${2:-}"
+
+    if [[ -f "$path" ]]; then
+        chmod g+w "$path"
+        if [[ -n "$owner" ]]; then
+            chown "$owner" "$path"
+        fi
+    fi
+}
+
+########################
 # Place a given certificate in the correct location for installation
 # depending on the OS
 # Globals:
