@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.0.1-1-debian-11-r41" \
+      org.opencontainers.image.ref.name="4.0.1-1-debian-11-r42" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/opencart" \
       org.opencontainers.image.title="opencart" \
       org.opencontainers.image.vendor="VMware, Inc." \
