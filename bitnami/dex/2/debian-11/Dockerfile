@@ -4,7 +4,8 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="2.35.3-debian-11-r29" \
+      org.opencontainers.image.licenses="Apache-2.0" \
+      org.opencontainers.image.ref.name="2.35.3-debian-11-r30" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/dex" \
       org.opencontainers.image.title="dex" \
       org.opencontainers.image.vendor="VMware, Inc." \
