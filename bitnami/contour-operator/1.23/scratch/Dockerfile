@@ -34,7 +34,8 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="1.23.0-scratch-r2" \
+      org.opencontainers.image.licenses="Apache-2.0" \
+      org.opencontainers.image.ref.name="1.23.0-scratch-r3" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/contour-operator" \
       org.opencontainers.image.title="contour-operator" \
       org.opencontainers.image.vendor="VMware, Inc." \
