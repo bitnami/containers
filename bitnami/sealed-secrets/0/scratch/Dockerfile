@@ -34,7 +34,8 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="0.19.3-scratch-r0" \
+      org.opencontainers.image.licenses="Apache-2.0" \
+      org.opencontainers.image.ref.name="0.19.3-scratch-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/sealed-secrets" \
       org.opencontainers.image.title="sealed-secrets" \
       org.opencontainers.image.vendor="VMware, Inc." \
