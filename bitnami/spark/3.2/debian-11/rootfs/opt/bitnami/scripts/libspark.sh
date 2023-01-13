@@ -91,7 +91,7 @@ spark_validate() {
 #########################
 spark_generate_conf_file() {
     info "Generating Spark configuration file..."
-    mv "${SPARK_CONFDIR}/spark-defaults.conf.template" "${SPARK_CONFDIR}/spark-defaults.conf"
+    mv "${SPARK_CONF_DIR}/spark-defaults.conf.template" "${SPARK_CONF_DIR}/spark-defaults.conf"
 }
 
 ########################
@@ -106,7 +106,7 @@ spark_generate_conf_file() {
 spark_enable_rpc_authentication() {
     info "Configuring Spark RPC authentication..."
 
-    echo "# Spark RPC Authentication settings" >>"${SPARK_CONFDIR}/spark-defaults.conf"
+    echo "# Spark RPC Authentication settings" >>"${SPARK_CONF_DIR}/spark-defaults.conf"
     spark_conf_set spark.authenticate "true"
     spark_conf_set spark.authenticate.secret "$SPARK_RPC_AUTHENTICATION_SECRET"
 }
@@ -123,7 +123,7 @@ spark_enable_rpc_authentication() {
 spark_enable_rpc_encryption() {
     info "Configuring Spark RPC encryption..."
 
-    echo "# Spark RPC Encryption settings" >>"${SPARK_CONFDIR}/spark-defaults.conf"
+    echo "# Spark RPC Encryption settings" >>"${SPARK_CONF_DIR}/spark-defaults.conf"
     spark_conf_set spark.network.crypto.enabled "true"
     spark_conf_set spark.network.crypto.keyLength "128"
 }
@@ -140,7 +140,7 @@ spark_enable_rpc_encryption() {
 spark_enable_local_storage_encryption() {
     info "Configuring Spark local storage encryption..."
 
-    echo "# Spark Local Storate Encryption settings" >>"${SPARK_CONFDIR}/spark-defaults.conf"
+    echo "# Spark Local Storate Encryption settings" >>"${SPARK_CONF_DIR}/spark-defaults.conf"
     spark_conf_set spark.io.encryption.enabled "true"
     spark_conf_set spark.io.encryption.keySizeBits "128"
 }
@@ -157,7 +157,7 @@ spark_enable_local_storage_encryption() {
 spark_enable_metrics() {
     info "Enabling metrics..."
 
-    mv "${SPARK_CONFDIR}/metrics.properties.template" "${SPARK_CONFDIR}/metrics.properties"
+    mv "${SPARK_CONF_DIR}/metrics.properties.template" "${SPARK_CONF_DIR}/metrics.properties"
 
     spark_metrics_conf_set "\*.sink.prometheusServlet.class" "org.apache.spark.metrics.sink.PrometheusServlet"
     spark_metrics_conf_set "\*.sink.prometheusServlet.path" "/metrics"
@@ -177,7 +177,7 @@ spark_enable_metrics() {
 spark_enable_ssl() {
     info "Configuring Spark SSL..."
 
-    echo "# Spark SSL settings" >>"${SPARK_CONFDIR}/spark-defaults.conf"
+    echo "# Spark SSL settings" >>"${SPARK_CONF_DIR}/spark-defaults.conf"
     spark_conf_set spark.ssl.enabled "true"
     if ! is_empty_value "${SPARK_WEBUI_SSL_PORT}"; then
         spark_conf_set spark.ssl.standalone.port "${SPARK_WEBUI_SSL_PORT}"
@@ -198,7 +198,7 @@ spark_enable_ssl() {
 ########################
 # Set a metrics configuration setting value
 # Globals:
-#   SPARK_CONFDIR
+#   SPARK_CONF_DIR
 # Arguments:
 #   $1 - key
 #   $2 - value
@@ -215,13 +215,13 @@ spark_metrics_conf_set() {
     value="${value//\?/\\?}"
     [[ "$value" = "" ]] && value="\"$value\""
 
-    replace_in_file "${SPARK_CONFDIR}/metrics.properties" "^#*\s*${key}.*" "${key}=${value}" false
+    replace_in_file "${SPARK_CONF_DIR}/metrics.properties" "^#*\s*${key}.*" "${key}=${value}" false
 }
 
 ########################
 # Set a configuration setting value
 # Globals:
-#   SPARK_BASEDIR
+#   SPARK_BASE_DIR
 # Arguments:
 #   $1 - key
 #   $2 - value
@@ -239,7 +239,7 @@ spark_conf_set() {
 
     [[ "$value" = "" ]] && value="\"$value\""
 
-    echo "$key $value" >>"${SPARK_BASEDIR}/conf/spark-defaults.conf"
+    echo "$key $value" >>"${SPARK_BASE_DIR}/conf/spark-defaults.conf"
 }
 
 ########################
@@ -252,8 +252,8 @@ spark_conf_set() {
 #   None
 #########################
 spark_initialize() {
-    ensure_dir_exists "$SPARK_WORKDIR"
-    am_i_root && chown "$SPARK_DAEMON_USER:$SPARK_DAEMON_GROUP" "$SPARK_WORKDIR"
+    ensure_dir_exists "$SPARK_WORK_DIR"
+    am_i_root && chown "$SPARK_DAEMON_USER:$SPARK_DAEMON_GROUP" "$SPARK_WORK_DIR"
     if [[ ! -f "$SPARK_CONF_FILE" ]]; then
         # Generate default config file
         spark_generate_conf_file
