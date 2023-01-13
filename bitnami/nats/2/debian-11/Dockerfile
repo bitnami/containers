@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.9.11-debian-11-r2" \
+      org.opencontainers.image.ref.name="2.9.11-debian-11-r3" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/nats" \
       org.opencontainers.image.title="nats" \
       org.opencontainers.image.vendor="VMware, Inc." \
