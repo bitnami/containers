@@ -146,7 +146,7 @@ $ docker-compose up -d
 
 When you start the neo4j image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. The following environment values are provided to custom Neo4j:
 
-- `NEO4J_PASSWORD`: Password used by Neo4j server. Default: **bitnami**
+- `NEO4J_PASSWORD`: Password used by Neo4j server. Default: **bitnami1**
 - `NEO4J_HOST`: Hostname used to configure Neo4j advertised address. It can be either an IP or a domain. If left empty, it will be resolved to the machine IP. Default: **empty**
 - `NEO4J_BOLT_PORT_NUMBER`: Port used by Neo4j https. Default: **7687**
 - `NEO4J_HTTP_PORT_NUMBER`: Port used by Neo4j http. Default: **7474**
