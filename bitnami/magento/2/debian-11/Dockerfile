@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.4.5-p1-debian-11-r29" \
+      org.opencontainers.image.ref.name="2.4.5-p1-debian-11-r30" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/magento" \
       org.opencontainers.image.title="magento" \
       org.opencontainers.image.vendor="VMware, Inc." \
