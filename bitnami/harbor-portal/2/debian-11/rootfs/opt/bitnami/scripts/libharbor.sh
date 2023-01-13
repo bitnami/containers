@@ -39,6 +39,29 @@ get_system_cert_paths() {
 }
 
 ########################
+# Ensure CA bundles allows users in root group install new certificate
+# Globals:
+#   OS_FLAVOUR
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+configure_permissions_system_certs() {
+    if [[ -f /etc/pki/tls/certs/ca-bundle.crt ]]; then
+        chmod g+w /etc/pki/tls/certs/ca-bundle.crt
+    fi
+
+    if [[ -f /etc/pki/tls/certs/ca-bundle.trust.crt ]]; then
+        chmod g+w /etc/pki/tls/certs/ca-bundle.trust.crt
+    fi
+
+    if [[ -f /etc/ssl/certs/ca-certificates.crt ]]; then
+        chmod g+w /etc/ssl/certs/ca-certificates.crt
+    fi
+}
+
+########################
 # Place a given certificate in the correct location for installation
 # depending on the OS
 # Globals:

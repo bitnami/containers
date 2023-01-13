@@ -27,16 +27,8 @@ for dir in "${NGINX_BASE_DIR}/client_body_temp" "${NGINX_BASE_DIR}/proxy_temp" "
     ensure_dir_exists "$dir"
 done
 
-# Fix for CentOS Internal TLS
-if [[ -f /etc/pki/tls/certs/ca-bundle.crt ]]; then
-    chmod g+w /etc/pki/tls/certs/ca-bundle.crt
-    chown "$HARBOR_PORTAL_DAEMON_USER" /etc/pki/tls/certs/ca-bundle.crt
-fi
-
-if [[ -f /etc/pki/tls/certs/ca-bundle.trust.crt ]]; then
-    chmod g+w /etc/pki/tls/certs/ca-bundle.trust.crt
-    chown "$HARBOR_PORTAL_DAEMON_USER" /etc/pki/tls/certs/ca-bundle.trust.crt
-fi
+# Ensure permissions for Internal TLS
+configure_permissions_system_certs
 
 # Loading bitnami paths
 replace_in_file "$HARBOR_PORTAL_NGINX_CONF_FILE" "/usr/share/nginx/html" "${HARBOR_PORTAL_BASE_DIR}" false
