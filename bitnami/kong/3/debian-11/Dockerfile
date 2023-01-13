@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.1.1-debian-11-r15" \
+      org.opencontainers.image.ref.name="3.1.1-debian-11-r16" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kong" \
       org.opencontainers.image.title="kong" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -19,11 +19,11 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libcrypt1 libgcc-s1 libpcre3 libprotobuf-dev libssl1.1 libyaml-0-2 perl procps zlib1g zlib1g-dev
+RUN install_packages ca-certificates curl libcrypt1 libgcc-s1 libprotobuf-dev libssl1.1 libyaml-0-2 perl procps zlib1g zlib1g-dev
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "gosu-1.16.0-0-linux-${OS_ARCH}-debian-11" \
-      "kong-3.1.1-3-linux-${OS_ARCH}-debian-11" \
+      "kong-3.1.1-4-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -43,6 +43,8 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/kong/postunpack.sh
 ENV APP_VERSION="3.1.1" \
     BITNAMI_APP_NAME="kong" \
+    LUA_CPATH="./?.so;/usr/local/lib/lua/5.1/?.so;/opt/bitnami/kong/openresty/luajit/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/loadall.so;/opt/bitnami/kong/luarocks/lib/lua/5.1/?.so" \
+    LUA_PATH="/opt/bitnami/kong/openresty/luajit/share/luajit-?/?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;/opt/bitnami/kong/openresty/luajit/share/lua/5.1/?.lua;/opt/bitnami/kong/openresty/luajit/share/lua/5.1/?/init.lua;/opt/bitnami/kong/luarocks/share/lua/5.1/?.lua;/opt/bitnami/kong/luarocks/share/lua/5.1/?/init.lua" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/kong/bin:/opt/bitnami/kong/openresty/bin:/opt/bitnami/kong/openresty/luajit/bin:/opt/bitnami/kong/openresty/nginx/sbin:$PATH"
 
 EXPOSE 8000 8001 8443 8444
