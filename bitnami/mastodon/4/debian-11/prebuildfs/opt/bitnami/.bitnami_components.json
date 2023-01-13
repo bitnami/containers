@@ -8,10 +8,10 @@
     },
     "mastodon": {
         "arch": "amd64",
-        "digest": "75c4c99b0d88dcb3892421c906daa8eac5ed973131886d25df48aa20627fbee5",
+        "digest": "00ebb5a819cceee7dbbabd93a9312e2382675a06ea73adf630f8dfcdda51205c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.0.2-1"
+        "version": "4.0.2-2"
     },
     "node": {
         "arch": "amd64",

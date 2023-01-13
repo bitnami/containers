@@ -16,6 +16,9 @@ set -o pipefail
 # Load Mastodon environment variables
 . /opt/bitnami/scripts/mastodon-env.sh
 
+# Load Mastodon configuration
+eval "$(mastodon_runtime_env)"
+
 declare cmd
 declare -a args=()
 
