@@ -5,7 +5,8 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="4.4.0-6084-debian-11-r10" \
+      org.opencontainers.image.licenses="Apache-2.0" \
+      org.opencontainers.image.ref.name="4.4.0-6084-debian-11-r11" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/reportserver" \
       org.opencontainers.image.title="reportserver" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -23,7 +24,7 @@ RUN install_packages ca-certificates curl libaudit1 libcap-ng0 libgcc-s1 libicu6
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "java-11.0.17-7-2-linux-${OS_ARCH}-debian-11" \
-      "tomcat-9.0.70-1-linux-${OS_ARCH}-debian-11" \
+      "tomcat-9.0.71-0-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.11-1-linux-${OS_ARCH}-debian-11" \
       "reportserver-4.4.0-6084-0-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.4-1-linux-${OS_ARCH}-debian-11" \
