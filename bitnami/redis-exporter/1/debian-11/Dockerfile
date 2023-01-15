@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.45.0-debian-11-r25" \
+      org.opencontainers.image.ref.name="1.45.0-debian-11-r26" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/redis-exporter" \
       org.opencontainers.image.title="redis-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
