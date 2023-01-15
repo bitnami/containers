@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.5.1-debian-11-r14" \
+      org.opencontainers.image.ref.name="1.5.1-debian-11-r15" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pushgateway" \
       org.opencontainers.image.title="pushgateway" \
       org.opencontainers.image.vendor="VMware, Inc." \
