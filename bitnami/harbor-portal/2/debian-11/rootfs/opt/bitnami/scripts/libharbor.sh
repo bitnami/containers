@@ -48,16 +48,34 @@ get_system_cert_paths() {
 #   None
 #########################
 configure_permissions_system_certs() {
-    if [[ -f /etc/pki/tls/certs/ca-bundle.crt ]]; then
-        chmod g+w /etc/pki/tls/certs/ca-bundle.crt
-    fi
+    local -r owner="${1:-}"
+    # Debian
+    set_permissions_ownership "/etc/pki/tls/certs/ca-bundle.crt" "$owner"
+    # Centos/Phonton
+    set_permissions_ownership "/etc/pki/tls/certs/ca-bundle.trust.crt" "$owner"
+    set_permissions_ownership "/etc/ssl/certs/ca-certificates.crt" "$owner"
+}
 
-    if [[ -f /etc/pki/tls/certs/ca-bundle.trust.crt ]]; then
-        chmod g+w /etc/pki/tls/certs/ca-bundle.trust.crt
-    fi
+########################
+# Grant group write permissions to the file provided and change ownership if a the owner argument is set.
+# If the path is not a file, then do nothing.
+# Globals:
+#   OS_FLAVOUR
+# Arguments:
+#   $1 - path
+#   $2 - owner
+# Returns:
+#   None
+#########################
+set_permissions_ownership() {
+    local -r path="${1:?path is missing}"
+    local -r owner="${2:-}"
 
-    if [[ -f /etc/ssl/certs/ca-certificates.crt ]]; then
-        chmod g+w /etc/ssl/certs/ca-certificates.crt
+    if [[ -f "$path" ]]; then
+        chmod g+w "$path"
+        if [[ -n "$owner" ]]; then
+            chown "$owner" "$path"
+        fi
     fi
 }
 
