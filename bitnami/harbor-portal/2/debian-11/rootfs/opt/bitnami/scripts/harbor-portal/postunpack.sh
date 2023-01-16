@@ -28,7 +28,7 @@ for dir in "${NGINX_BASE_DIR}/client_body_temp" "${NGINX_BASE_DIR}/proxy_temp" "
 done
 
 # Ensure permissions for Internal TLS
-configure_permissions_system_certs
+configure_permissions_system_certs "$HARBOR_PORTAL_DAEMON_USER"
 
 # Loading bitnami paths
 replace_in_file "$HARBOR_PORTAL_NGINX_CONF_FILE" "/usr/share/nginx/html" "${HARBOR_PORTAL_BASE_DIR}" false
