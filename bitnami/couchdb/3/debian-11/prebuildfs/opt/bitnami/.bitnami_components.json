@@ -1,10 +1,10 @@
 {
     "couchdb": {
         "arch": "amd64",
-        "digest": "6f2404264228f0013423b4aa4da042080d278885dcde780395a1979ad823148d",
+        "digest": "f8b79160df8cfa53483bf77a9740d0187c2bd50a64afc0ea5d0199f37fbaaf0a",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.2.2-163"
+        "version": "3.3.1-0"
     },
     "gosu": {
         "arch": "amd64",
