@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.1.0-debian-11-r14" \
+      org.opencontainers.image.ref.name="3.1.0-debian-11-r15" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jupyter-base-notebook" \
       org.opencontainers.image.title="jupyter-base-notebook" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,9 +22,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libcrypt1 libgcc-s1 libstdc++6 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "tini-0.19.0-155-linux-${OS_ARCH}-debian-11" \
-      "miniconda-4.12.0-158-linux-${OS_ARCH}-debian-11" \
-      "jupyter-base-notebook-3.1.0-1-linux-${OS_ARCH}-debian-11" \
+      "tini-0.19.0-156-linux-${OS_ARCH}-debian-11" \
+      "miniconda-4.12.0-159-linux-${OS_ARCH}-debian-11" \
+      "jupyter-base-notebook-3.1.0-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
