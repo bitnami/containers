@@ -6,7 +6,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="17.0.5-8-debian-11-r29" \
+      org.opencontainers.image.ref.name="17.0.5-8-debian-11-r30" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/java" \
       org.opencontainers.image.title="java" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,8 +22,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libfontconfig libsqlite3-dev libssl-dev locales procps wget zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-17.0.5-8-2-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-0-linux-${OS_ARCH}-debian-11" \
+      "java-17.0.5-8-3-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
