@@ -1,16 +1,16 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "c42abbc5d57ba4c33c89e4daf46c33b0173565fbf533ef7a60281cf3283f611f",
+        "digest": "9ab9654690d90d3c49ff66fb1eb286487e318adc899d036bc45922f6b176865b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-0"
+        "version": "1.16.0-1"
     },
     "memcached": {
         "arch": "amd64",
-        "digest": "8a1e261ccf96278cdf0728d019ec779b0209b1fbcf13c5f08d64c8ac2b1d357d",
+        "digest": "6209cd9a4f94a895179fdb2077e28882f4780d232fb98592c666b46519b4b7b1",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.6.18-0"
+        "version": "1.6.18-1"
     }
 }

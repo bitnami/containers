@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.6.18-debian-11-r2" \
+      org.opencontainers.image.ref.name="1.6.18-debian-11-r3" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/memcached" \
       org.opencontainers.image.title="memcached" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,8 +22,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libevent-2.1-7 libsasl2-2 libsasl2-modules procps sasl2-bin
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "memcached-1.6.18-0-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-0-linux-${OS_ARCH}-debian-11" \
+      "memcached-1.6.18-1-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
