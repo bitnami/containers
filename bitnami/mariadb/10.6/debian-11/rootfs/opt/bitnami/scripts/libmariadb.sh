@@ -265,20 +265,20 @@ mysql_initialize() {
     if is_file_writable "$DB_CONF_FILE"; then
         info "Updating 'my.cnf' with custom configuration"
         mysql_update_custom_config
+        # Including my_custom.cnf also requires write access to my.cnf
+        if [[ -f "${DB_CONF_DIR}/my_custom.cnf" ]]; then
+            if is_file_writable "${DB_CONF_DIR}/bitnami/my_custom.cnf"; then
+                info "Injecting custom configuration 'my_custom.cnf'"
+                cat "${DB_CONF_DIR}/my_custom.cnf" > "${DB_CONF_DIR}/bitnami/my_custom.cnf"
+                if ! grep --silent "!include ${DB_CONF_DIR}/bitnami/my_custom.cnf" "${DB_CONF_FILE}"; then
+                    echo "!include ${DB_CONF_DIR}/bitnami/my_custom.cnf" >> "${DB_CONF_FILE}"
+                fi
+            else
+                warn "Could not inject custom configuration for the ${DB_FLAVOR} configuration file '$DB_CONF_DIR/bitnami/my_custom.cnf' because it is not writable."
+            fi
+        fi
     else
         warn "The ${DB_FLAVOR} configuration file '${DB_CONF_FILE}' is not writable. Configurations based on environment variables will not be applied for this file."
-    fi
-
-    if [[ -f "${DB_CONF_DIR}/my_custom.cnf" ]]; then
-        if is_file_writable "${DB_CONF_DIR}/bitnami/my_custom.cnf"; then
-            info "Injecting custom configuration 'my_custom.cnf'"
-            cat "${DB_CONF_DIR}/my_custom.cnf" > "${DB_CONF_DIR}/bitnami/my_custom.cnf"
-            if ! grep --silent "!include ${DB_CONF_DIR}/bitnami/my_custom.cnf" "${DB_CONF_FILE}"; then
-                echo "!include ${DB_CONF_DIR}/bitnami/my_custom.cnf" >> "${DB_CONF_FILE}"
-            fi
-        else
-            warn "Could not inject custom configuration for the ${DB_FLAVOR} configuration file '$DB_CONF_DIR/bitnami/my_custom.cnf' because it is not writable."
-        fi
     fi
 
     if [[ -e "$DB_DATA_DIR/mysql" ]]; then
@@ -304,7 +304,8 @@ EOF
         if [[ -z "$DB_REPLICATION_MODE" ]] || [[ "$DB_REPLICATION_MODE" = "master" ]]; then
             if [[ "$DB_REPLICATION_MODE" = "master" ]]; then
                 debug "Starting replication"
-                echo "RESET MASTER;" | debug_execute "$DB_BIN_DIR/mysql" --defaults-file="$DB_CONF_FILE" -N -u root
+                [[ -f "$DB_EXTRA_CONF_FILE" ]] && DEFAULTS_EXTRA_FILE_OPT=--defaults-extra-file="$DB_EXTRA_CONF_FILE"
+                echo "RESET MASTER;" | debug_execute "$DB_BIN_DIR/mysql" --defaults-file="$DB_CONF_FILE" ${DEFAULTS_EXTRA_FILE_OPT:-} -N -u root
             fi
             mysql_ensure_root_user_exists "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" "$DB_AUTHENTICATION_PLUGIN"
             mysql_ensure_user_not_exists "" # ensure unknown user does not exist
@@ -393,7 +394,9 @@ mysql_custom_scripts() {
 #   None
 #########################
 mysql_start_bg() {
-    local -a flags=("--defaults-file=${DB_CONF_FILE}" "--basedir=${DB_BASE_DIR}" "--datadir=${DB_DATA_DIR}" "--socket=${DB_SOCKET_FILE}")
+    local -a flags=("--defaults-file=${DB_CONF_FILE}")
+    [[ -f "$DB_EXTRA_CONF_FILE" ]] && flags+=("--defaults-extra-file=${DB_EXTRA_CONF_FILE}")
+    flags+=("--basedir=${DB_BASE_DIR}" "--datadir=${DB_DATA_DIR}" "--socket=${DB_SOCKET_FILE}")
 
     # Only allow local connections until MySQL is fully initialized, to avoid apps trying to connect to MySQL before it is fully initialized
     flags+=("--bind-address=127.0.0.1")
@@ -515,6 +518,7 @@ mysql_execute_print_output() {
     local -a args=()
     if [[ -f "$DB_CONF_FILE" ]]; then
         args+=("--defaults-file=${DB_CONF_FILE}")
+        [[ -f "$DB_EXTRA_CONF_FILE" ]] && args+=("--defaults-extra-file=${DB_EXTRA_CONF_FILE}")
     fi
     args+=("-N" "-u" "$user" "$db")
     [[ -n "$pass" ]] && args+=("-p$pass")
@@ -722,7 +726,9 @@ mysql_stop() {
 #########################
 mysql_install_db() {
     local command="${DB_BIN_DIR}/mysql_install_db"
-    local -a args=("--defaults-file=${DB_CONF_FILE}" "--basedir=${DB_BASE_DIR}" "--datadir=${DB_DATA_DIR}")
+    local -a args=("--defaults-file=${DB_CONF_FILE}")
+    [[ -f "$DB_EXTRA_CONF_FILE" ]] && args+=("--defaults-extra-file=${DB_EXTRA_CONF_FILE}")
+    args+=("--basedir=${DB_BASE_DIR}" "--datadir=${DB_DATA_DIR}")
     am_i_root && args=("${args[@]}" "--user=$DB_DAEMON_USER")
     if [[ "$DB_FLAVOR" = "mariadb" ]]; then
         args+=("--auth-root-authentication-method=normal")
@@ -749,7 +755,9 @@ mysql_install_db() {
 #   None
 #########################
 mysql_upgrade() {
-    local -a args=("--defaults-file=${DB_CONF_FILE}" "-u" "$DB_ROOT_USER")
+    local -a args=("--defaults-file=${DB_CONF_FILE}")
+    [[ -f "$DB_EXTRA_CONF_FILE" ]] && args+=("--defaults-extra-file=${DB_EXTRA_CONF_FILE}")
+    args+=("-u" "$DB_ROOT_USER")
     local major_version minor_version patch_version
     major_version="$(get_sematic_version "$(mysql_get_version)" 1)"
     minor_version="$(get_sematic_version "$(mysql_get_version)" 2)"

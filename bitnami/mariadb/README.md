@@ -206,6 +206,12 @@ services:
   ...
 ```
 
+or by mounting a `--defaults-extra-file=my_extra.cnf` to the configuration directory, which is also suitable for Helm charts usage (refer to [Deploy extra resources](https://docs.bitnami.com/kubernetes/apps/aspnet-core/administration/deploy-extra-resources/)):
+
+```console
+$ docker run --name mariadb -v /path/to/my_extra.cnf:/opt/bitnami/mariadb/conf/my_extra.cnf bitnami/mariadb:latest
+```
+
 ### Setting character set and collation
 
 It is possible to configure the character set and collation used by default by the database with the following environment variables:

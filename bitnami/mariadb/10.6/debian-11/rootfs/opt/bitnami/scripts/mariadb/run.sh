@@ -17,8 +17,10 @@ set -o pipefail
 # mysqld_safe does not allow logging to stdout/stderr, so we stick with mysqld
 EXEC="${DB_SBIN_DIR}/mysqld"
 
-flags=("--defaults-file=${DB_CONF_DIR}/my.cnf" "--basedir=${DB_BASE_DIR}" "--datadir=${DB_DATA_DIR}" "--socket=${DB_SOCKET_FILE}")
-[[ -z "${DB_PID_FILE:-}" ]] || flags+=("--pid-file=${DB_PID_FILE}")
+flags=("--defaults-file=${DB_CONF_FILE}")
+[[ -f "$DB_EXTRA_CONF_FILE" ]] && flags+=("--defaults-extra-file=${DB_EXTRA_CONF_FILE}")
+flags+=("--basedir=${DB_BASE_DIR}" "--datadir=${DB_DATA_DIR}" "--socket=${DB_SOCKET_FILE}")
+[[ -n "${DB_PID_FILE}" ]] && flags+=("--pid-file=${DB_PID_FILE}")
 
 # Add flags specified via the 'DB_EXTRA_FLAGS' environment variable
 read -r -a db_extra_flags <<< "$(mysql_extra_flags)"
