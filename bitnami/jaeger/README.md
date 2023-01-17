@@ -4,7 +4,7 @@
 
 > Jaeger is a Distributed Tracing System
 
-[Overview of jaeger](https://change.me)
+[Overview of jaeger](https://www.jaegertracing.io/)
 
 
 
@@ -67,7 +67,7 @@ To run commands inside this container you can use `docker run`, for example to e
 $ docker run --rm --name jaeger bitnami/jaeger:latest --help
 ```
 
-Check the [official jaeger documentation](https://change.me/docs) for more information.
+Check the [official jaeger documentation](https://www.jaegertracing.io//docs) for more information.
 
 ## Contributing
 
