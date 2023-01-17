@@ -1,9 +1,9 @@
 {
     "kube-rbac-proxy": {
         "arch": "amd64",
-        "digest": "cd2f1fcd48a58163f2f2f5c4e9ad8e6dbb16c9b8bb11ae8b3f8ad0557bb846ee",
+        "digest": "492b09528e4488876eb1fc058857c9f7ea852505472dfc2191a4c8bb6bb91fc7",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.14.0-0"
+        "version": "0.14.0-1"
     }
 }
