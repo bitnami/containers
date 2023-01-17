@@ -6,7 +6,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.10.0-debian-11-r3" \
+      org.opencontainers.image.ref.name="2.10.0-debian-11-r4" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/spring-cloud-dataflow" \
       org.opencontainers.image.title="spring-cloud-dataflow" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -24,7 +24,7 @@ RUN install_packages ca-certificates curl libgcc-s1 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "java-1.8.352-2-linux-${OS_ARCH}-debian-11" \
-      "yq-4.30.7-0-linux-${OS_ARCH}-debian-11" \
+      "yq-4.30.8-0-linux-${OS_ARCH}-debian-11" \
       "spring-cloud-dataflow-2.10.0-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
