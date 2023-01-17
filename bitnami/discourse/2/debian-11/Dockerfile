@@ -32,7 +32,6 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "node-14.21.2-0-${OS_NAME}-${OS_ARCH}-${OS_FLAVOUR}" \
       "brotli-1.0.9-154-${OS_NAME}-${OS_ARCH}-${OS_FLAVOUR}" \
       "gosu-1.16.0-0-${OS_NAME}-${OS_ARCH}-${OS_FLAVOUR}" \
-      "discourse-${APP_VERSION}-0-${OS_NAME}-${OS_ARCH}-${OS_FLAVOUR}" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -42,6 +41,16 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       sha256sum -c "${COMPONENT}.tar.gz.sha256" && \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
       rm -rf "${COMPONENT}".tar.gz{,.sha256} ; \
+    done
+
+RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+    COMPONENTS=( "discourse-v${APP_VERSION}-0-${OS_NAME}-${OS_ARCH}-${OS_FLAVOUR}" ) && \
+    for COMPONENT in "${COMPONENTS[@]}"; do \
+      if [ ! -f "${COMPONENT}.tar.gz" ]; then \
+        curl -SsLf "https://github.com/discourse/discourse/archive/refs/tags/${COMPONENT}.tar.gz" -O ; \
+      fi && \
+      tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+      rm -rf "${COMPONENT}".tar.gz; \
     done
 RUN apt-get autoremove --purge -y curl && \
     apt-get update && apt-get upgrade -y && \
