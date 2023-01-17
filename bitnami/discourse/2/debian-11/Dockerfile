@@ -44,7 +44,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     done
 
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
-    COMPONENTS=( "discourse-v${APP_VERSION}" ) && \
+    COMPONENTS=( "v${APP_VERSION}" ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
         curl -SsLf "https://github.com/discourse/discourse/archive/refs/tags/${COMPONENT}.tar.gz" -O ; \
