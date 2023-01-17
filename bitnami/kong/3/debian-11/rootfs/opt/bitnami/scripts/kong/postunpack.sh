@@ -28,4 +28,4 @@ kong_conf_set lua_package_path
 kong_conf_set nginx_user
 kong_configure_non_empty_values
 install_opentelemetry
-
+configure_lua_paths "/opt/bitnami/scripts/kong-env.sh" "/etc/bash.bashrc"
