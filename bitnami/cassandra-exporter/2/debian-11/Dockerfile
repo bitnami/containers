@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.3.8-debian-11-r79" \
+      org.opencontainers.image.ref.name="2.3.8-debian-11-r80" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/cassandra-exporter" \
       org.opencontainers.image.title="cassandra-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,8 +22,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-11.0.17-7-2-linux-${OS_ARCH}-debian-11" \
-      "cassandra-exporter-2.3.8-155-linux-${OS_ARCH}-debian-11" \
+      "java-11.0.17-7-3-linux-${OS_ARCH}-debian-11" \
+      "cassandra-exporter-2.3.8-156-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
