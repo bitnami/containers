@@ -1,9 +1,9 @@
 {
     "argo-workflows": {
         "arch": "amd64",
-        "digest": "848673358eb0c2d891eb441b417b0cb47fbfdddff17633b8541dc07c0cd66cc1",
+        "digest": "bfff4dd101a5c8573c096eaa7c6ce2aff7540fd37958855b3d4a45855f0dc63f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.4.4-0"
+        "version": "3.4.4-1"
     }
 }
