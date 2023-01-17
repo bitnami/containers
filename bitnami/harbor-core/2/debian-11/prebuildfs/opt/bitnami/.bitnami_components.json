@@ -1,24 +1,24 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "c42abbc5d57ba4c33c89e4daf46c33b0173565fbf533ef7a60281cf3283f611f",
+        "digest": "9ab9654690d90d3c49ff66fb1eb286487e318adc899d036bc45922f6b176865b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-0"
+        "version": "1.16.0-1"
     },
     "harbor-core": {
         "arch": "amd64",
-        "digest": "f41338aaf21300581259a7c0b54378287aa93402d6cc77a9dab9bf2e3c3a8100",
+        "digest": "2d6e6ec0503f547abbe7e8c357f07d5185dd4963ab76855e6371b54b6ad4d808",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.7.0-1"
+        "version": "2.7.0-2"
     },
     "ini-file": {
         "arch": "amd64",
-        "digest": "9b5793ab94c63d6384a29c88c06b3e33cf718112edc8358ac54ada72072c3f3e",
+        "digest": "2dbb90172e7ea19b23975df82fa85eb37ab1fff0fabb89d6ee4e5093ec8cc867",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.4.4-1"
+        "version": "1.4.4-2"
     },
     "wait-for-port": {
         "arch": "amd64",
