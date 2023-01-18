@@ -15,10 +15,10 @@
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "ec11c39ba3b96484bdefb023c5c82702fc96a1364f4490cdb0335fc67e110b6b",
+        "digest": "f9199cd66b92fef328ecfbc5ffbc8f14be33257a4e34b8c6ba35a730c5a2f59d",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-2"
+        "version": "1.0.6-0"
     },
     "zookeeper": {
         "arch": "amd64",
