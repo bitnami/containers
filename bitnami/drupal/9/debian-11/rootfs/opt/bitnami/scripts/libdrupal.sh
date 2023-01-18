@@ -368,21 +368,7 @@ drush_config_set() {
     local -r key="${2:?missing config key}"
     local -r value="${3:-}"
 
-    local -r major_version="$(get_sematic_version "$(drupal_get_version)" 1)"
     drush_execute "config-set" "--yes" "$group" "$key" "$value"
-}
-
-########################
-# Get Drupal version
-# Globals:
-#   *
-# Arguments:
-#   None
-# Returns:
-#   Version string
-#########################
-drupal_get_version() {
-    BITNAMI_DEBUG=true drush_execute "status" "drupal-version" "--pipe" | grep -E -o '[0-9.]+'
 }
 
 ########################
@@ -411,8 +397,6 @@ drupal_enable_modules() {
 #   None
 #########################
 drupal_configure_smtp() {
-    local -r major_version="$(get_sematic_version "$(drupal_get_version)" 1)"
-
     drush_execute "pm:enable" "--yes" "smtp"
 
     drush_config_set "system.mail" "interface.default" "SMTPMailSystem"
@@ -436,7 +420,6 @@ drupal_configure_smtp() {
 #   None
 #########################
 drupal_flush_cache() {
-    local -r major_version="$(get_sematic_version "$(drupal_get_version)" 1)"
     drush_execute "cache:rebuild"
 }
 
