@@ -1,16 +1,16 @@
 {
     "node": {
         "arch": "amd64",
-        "digest": "4c747408132499a665842569684f986e2aefe1a1b9befffdf1a983f766f953b4",
+        "digest": "d6af04c243ce6dccdad7e9eae84e877925fb46cff39b556fe8914d0261e461e2",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.13.0-0"
+        "version": "18.13.0-1"
     },
     "python": {
         "arch": "amd64",
-        "digest": "ec9073bd5f6b3a19ff2de522d3164682162fe17836ff7fc72fb9d3a459c3ca6b",
+        "digest": "5baedbb7b4cd8e626842e71320bfe8cc4866b7238c5e8479c5426b9123c7dba0",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-0"
+        "version": "3.8.16-1"
     }
 }
