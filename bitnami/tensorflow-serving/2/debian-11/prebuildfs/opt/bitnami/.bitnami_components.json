@@ -1,23 +1,23 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "c42abbc5d57ba4c33c89e4daf46c33b0173565fbf533ef7a60281cf3283f611f",
+        "digest": "9ab9654690d90d3c49ff66fb1eb286487e318adc899d036bc45922f6b176865b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-0"
+        "version": "1.16.0-1"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "045804695ee2c857d91f28ba623f8c5f6898f5ae9016ee78504d3af76411c261",
+        "digest": "64bd7fafa98c548438f7c304bdac850a7f048bd8c2135af613b8748a370f1ef0",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.4-1"
+        "version": "1.0.4-2"
     },
     "tensorflow-serving": {
         "arch": "amd64",
-        "digest": "4418330f26cecd8518afd8c118fc1f95c42f17aba93baa66343e4ed2381f7911",
+        "digest": "7467ed74390ec87b11805ca916b8abf514a89b36c033b5432606f72bacad6148",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.11.0-1"
+        "version": "2.11.0-2"
     }
 }
