@@ -1,37 +1,37 @@
 {
     "gitea": {
         "arch": "amd64",
-        "digest": "3e1c5692c6cd657fadfe65776474160f4a5f49f0da4611002e182240fdb30231",
+        "digest": "42259d181d739c874fad24770c23ae5ed91cd1ebb1b9bea31c56924ead251118",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.18.0-1"
+        "version": "1.18.1-0"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "c42abbc5d57ba4c33c89e4daf46c33b0173565fbf533ef7a60281cf3283f611f",
+        "digest": "9ab9654690d90d3c49ff66fb1eb286487e318adc899d036bc45922f6b176865b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-0"
+        "version": "1.16.0-1"
     },
     "ini-file": {
         "arch": "amd64",
-        "digest": "9b5793ab94c63d6384a29c88c06b3e33cf718112edc8358ac54ada72072c3f3e",
+        "digest": "2dbb90172e7ea19b23975df82fa85eb37ab1fff0fabb89d6ee4e5093ec8cc867",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.4.4-1"
+        "version": "1.4.4-2"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "045804695ee2c857d91f28ba623f8c5f6898f5ae9016ee78504d3af76411c261",
+        "digest": "64bd7fafa98c548438f7c304bdac850a7f048bd8c2135af613b8748a370f1ef0",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.4-1"
+        "version": "1.0.4-2"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "6b1bd6f534ef27b696922dcbdc0e377ac1a7db1e2bc1ff688ae0fa80bbfcb618",
+        "digest": "ec11c39ba3b96484bdefb023c5c82702fc96a1364f4490cdb0335fc67e110b6b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-1"
+        "version": "1.0.5-2"
     }
 }
