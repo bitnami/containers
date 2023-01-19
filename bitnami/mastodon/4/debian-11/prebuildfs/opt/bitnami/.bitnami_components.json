@@ -29,10 +29,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "ec9073bd5f6b3a19ff2de522d3164682162fe17836ff7fc72fb9d3a459c3ca6b",
+        "digest": "5baedbb7b4cd8e626842e71320bfe8cc4866b7238c5e8479c5426b9123c7dba0",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-0"
+        "version": "3.8.16-1"
     },
     "redis-client": {
         "arch": "amd64",
@@ -43,16 +43,16 @@
     },
     "ruby": {
         "arch": "amd64",
-        "digest": "0a86cae5a2016a5b9826307613ad20b6084d3078d68378f507c8895805d0e957",
+        "digest": "b577d1f22323f236c985caec199676729c1bf104475a37cc85925d291685a71b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.0.5-0"
+        "version": "3.0.5-2"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "6b1bd6f534ef27b696922dcbdc0e377ac1a7db1e2bc1ff688ae0fa80bbfcb618",
+        "digest": "f9199cd66b92fef328ecfbc5ffbc8f14be33257a4e34b8c6ba35a730c5a2f59d",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-1"
+        "version": "1.0.6-0"
     }
 }
