@@ -22,16 +22,16 @@
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "64bd7fafa98c548438f7c304bdac850a7f048bd8c2135af613b8748a370f1ef0",
+        "digest": "57c1d857acbb187fcb98f4ba26d138af9d866f59ad38dd443a75c0a6422de994",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.4-2"
+        "version": "1.0.5-0"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "6b1bd6f534ef27b696922dcbdc0e377ac1a7db1e2bc1ff688ae0fa80bbfcb618",
+        "digest": "f9199cd66b92fef328ecfbc5ffbc8f14be33257a4e34b8c6ba35a730c5a2f59d",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-1"
+        "version": "1.0.6-0"
     }
 }
