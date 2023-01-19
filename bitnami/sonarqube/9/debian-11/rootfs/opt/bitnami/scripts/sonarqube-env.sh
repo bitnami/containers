@@ -22,6 +22,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 sonarqube_env_vars=(
+    SONARQUBE_MOUNTED_PROVISIONING_DIR
     SONARQUBE_DATA_TO_PERSIST
     SONARQUBE_PORT_NUMBER
     SONARQUBE_ELASTICSEARCH_PORT_NUMBER
@@ -78,6 +79,7 @@ unset sonarqube_env_vars
 export SONARQUBE_BASE_DIR="${BITNAMI_ROOT_DIR}/sonarqube"
 export SONARQUBE_DATA_DIR="${SONARQUBE_BASE_DIR}/data"
 export SONARQUBE_EXTENSIONS_DIR="${SONARQUBE_BASE_DIR}/extensions"
+export SONARQUBE_MOUNTED_PROVISIONING_DIR="${SONARQUBE_MOUNTED_PROVISIONING_DIR:-/bitnami/sonarqube-extensions}"
 export SONARQUBE_CONF_DIR="${SONARQUBE_BASE_DIR}/conf"
 export SONARQUBE_CONF_FILE="${SONARQUBE_CONF_DIR}/sonar.properties"
 export SONARQUBE_LOGS_DIR="${SONARQUBE_BASE_DIR}/logs"
