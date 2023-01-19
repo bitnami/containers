@@ -368,25 +368,7 @@ drush_config_set() {
     local -r key="${2:?missing config key}"
     local -r value="${3:-}"
 
-    local -r major_version="$(get_sematic_version "$(drupal_get_version)" 1)"
-    if [[ "$major_version" -gt 7 ]]; then
-        drush_execute "config-set" "--yes" "$group" "$key" "$value"
-    else
-        drush_execute "variable-set" "$key" "$value"
-    fi
-}
-
-########################
-# Get Drupal version
-# Globals:
-#   *
-# Arguments:
-#   None
-# Returns:
-#   Version string
-#########################
-drupal_get_version() {
-    BITNAMI_DEBUG=true drush_execute "status" "drupal-version" "--pipe" | grep -E -o '[0-9.]+'
+    drush_execute "config-set" "--yes" "$group" "$key" "$value"
 }
 
 ########################
@@ -415,16 +397,9 @@ drupal_enable_modules() {
 #   None
 #########################
 drupal_configure_smtp() {
-    local -r major_version="$(get_sematic_version "$(drupal_get_version)" 1)"
-
     drush_execute "pm:enable" "--yes" "smtp"
 
-    if [[ "$major_version" -gt 7 ]]; then
-        drush_config_set "system.mail" "interface.default" "SMTPMailSystem"
-    else
-        drush_execute "php:eval" 'variable_set("mail_system", array("default-system" => "SmtpMailSystem"))'
-    fi
-
+    drush_config_set "system.mail" "interface.default" "SMTPMailSystem"
     drush_config_set "smtp.settings" "smtp_on" "1"
     drush_config_set "smtp.settings" "smtp_host" "$DRUPAL_SMTP_HOST"
     drush_config_set "smtp.settings" "smtp_port" "$DRUPAL_SMTP_PORT_NUMBER"
@@ -445,14 +420,7 @@ drupal_configure_smtp() {
 #   None
 #########################
 drupal_flush_cache() {
-    local -r major_version="$(get_sematic_version "$(drupal_get_version)" 1)"
-    if [[ "$major_version" -gt 7 ]]; then
-        drush_execute "cache:rebuild"
-    else
-        # This is occasionally needed by modules that make system-wide changes to access levels.
-        drush_execute "php:eval" 'node_access_rebuild();'
-        drush_execute "cache:clear" "all"
-    fi
+    drush_execute "cache:rebuild"
 }
 
 ########################
