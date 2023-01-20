@@ -4,11 +4,12 @@ ARG TARGETARCH
 
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
-      org.opencontainers.image.ref.name="3.2.2-debian-11-r70" \
+      org.opencontainers.image.licenses="Apache-2.0" \
+      org.opencontainers.image.ref.name="3.3.1-debian-11-r2" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/couchdb" \
       org.opencontainers.image.title="couchdb" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="3.2.2"
+      org.opencontainers.image.version="3.3.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -21,10 +22,10 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libgcc-s1 libicu67 libssl1.1 libstdc++6 libtinfo6 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "wait-for-port-1.0.5-1-linux-${OS_ARCH}-debian-11" \
-      "ini-file-1.4.4-1-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.14.0-156-linux-${OS_ARCH}-debian-11" \
-      "couchdb-3.2.2-162-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.5-2-linux-${OS_ARCH}-debian-11" \
+      "ini-file-1.4.4-2-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
+      "couchdb-3.3.1-3-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,7 +42,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/couchdb/postunpack.sh
-ENV APP_VERSION="3.2.2" \
+ENV APP_VERSION="3.3.1" \
     BITNAMI_APP_NAME="couchdb" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/couchdb/bin:$PATH"

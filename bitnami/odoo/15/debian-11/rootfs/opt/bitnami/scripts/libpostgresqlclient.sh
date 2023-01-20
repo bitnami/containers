@@ -115,6 +115,8 @@ postgresql_client_initialize() {
     true
 }
 
+# shellcheck disable=SC2148
+
 ########################
 # Return PostgreSQL major version
 # Globals:

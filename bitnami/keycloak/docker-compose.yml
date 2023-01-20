@@ -11,7 +11,7 @@ services:
       - 'postgresql_data:/bitnami/postgresql'
 
   keycloak:
-    image: docker.io/bitnami/keycloak:19
+    image: docker.io/bitnami/keycloak:20
     depends_on:
       - postgresql
     ports:

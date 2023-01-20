@@ -28,11 +28,5 @@ for dir in "${directories[@]}"; do
     chown -R "$HARBOR_EXPORTER_DAEMON_USER" "$dir"
 done
 
-# Fix for CentOS Internal TLS
-if [[ -f /etc/pki/tls/certs/ca-bundle.crt ]]; then
-    chmod g+w /etc/pki/tls/certs/ca-bundle.crt
-fi
-
-if [[ -f /etc/pki/tls/certs/ca-bundle.trust.crt ]]; then
-    chmod g+w /etc/pki/tls/certs/ca-bundle.trust.crt
-fi
+# Ensure permissions for Internal TLS
+configure_permissions_system_certs

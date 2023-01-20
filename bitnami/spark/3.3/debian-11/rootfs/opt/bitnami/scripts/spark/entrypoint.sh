@@ -11,15 +11,15 @@ set -o pipefail
 . /opt/bitnami/scripts/libbitnami.sh
 . /opt/bitnami/scripts/libspark.sh
 
-# Load Spark environment variables
-eval "$(spark_env)"
+# Load Spark environment settings
+. /opt/bitnami/scripts/spark-env.sh
 
 print_welcome_page
 
 if [ ! $EUID -eq 0 ] && [ -e "$LIBNSS_WRAPPER_PATH" ]; then
     echo "spark:x:$(id -u):$(id -g):Spark:$SPARK_HOME:/bin/false" > "$NSS_WRAPPER_PASSWD"
     echo "spark:x:$(id -g):" > "$NSS_WRAPPER_GROUP"
-    echo "LD_PRELOAD=$LIBNSS_WRAPPER_PATH" >> "$SPARK_CONFDIR/spark-env.sh"
+    echo "LD_PRELOAD=$LIBNSS_WRAPPER_PATH" >> "$SPARK_CONF_DIR/spark-env.sh"
 fi
 
 if [[ "$1" = "/opt/bitnami/scripts/spark/run.sh" ]]; then
@@ -52,19 +52,19 @@ case "$1" in
     set -o pipefail
 
     CMD=(
-      ${JAVA_HOME}/bin/java
+      "${JAVA_HOME}/bin/java"
       "${SPARK_EXECUTOR_JAVA_OPTS[@]}"
-      -Xms$SPARK_EXECUTOR_MEMORY
-      -Xmx$SPARK_EXECUTOR_MEMORY
+      "-Xms${SPARK_EXECUTOR_MEMORY}"
+      "-Xmx${SPARK_EXECUTOR_MEMORY}"
       -cp '/opt/bitnami/spark/conf::/opt/bitnami/spark/jars/*'
       org.apache.spark.scheduler.cluster.k8s.KubernetesExecutorBackend
-      --driver-url $SPARK_DRIVER_URL
-      --executor-id $SPARK_EXECUTOR_ID
-      --cores $SPARK_EXECUTOR_CORES
-      --app-id $SPARK_APPLICATION_ID
-      --hostname $SPARK_EXECUTOR_POD_IP
-      --resourceProfileId $SPARK_RESOURCE_PROFILE_ID
-      --podName $SPARK_EXECUTOR_POD_NAME
+      --driver-url "$SPARK_DRIVER_URL"
+      --executor-id "$SPARK_EXECUTOR_ID"
+      --cores "$SPARK_EXECUTOR_CORES"
+      --app-id "$SPARK_APPLICATION_ID"
+      --hostname "$SPARK_EXECUTOR_POD_IP"
+      --resourceProfileId "$SPARK_RESOURCE_PROFILE_ID"
+      --podName "$SPARK_EXECUTOR_POD_NAME"
     )
     ;;
 

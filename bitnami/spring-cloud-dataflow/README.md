@@ -77,10 +77,6 @@ A relational database is used to store stream and task definitions as well as th
 - SPRING_DATASOURCE_PASSWORD=bn_dataflow
 - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.mariadb.jdbc.Driver
 
-If you are using MariaDB 10.2 or greater, you must also set the following environment variable:
-
-- spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MariaDB102Dialect
-
 ### Configuring additional features
 
 Spring Cloud Data Flow Server offers specific set of features that can be enabled/disabled when launching.
@@ -122,7 +118,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2022 Bitnami
+Copyright &copy; 2023 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

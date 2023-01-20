@@ -235,15 +235,15 @@ mastodon_ensure_admin_user_exists() {
     cd "$MASTODON_BASE_DIR" || exit
     # We use the tootctl tool to create the admin user
     # https://github.com/mastodon/mastodon/blob/main/chart/templates/job-create-admin.yaml#L50
-    local -r cmd="tootctl"
+    local -r cmd=("tootctl")
     local -r args=("accounts" "create" "$MASTODON_ADMIN_USERNAME" "--email" "$MASTODON_ADMIN_EMAIL" "--confirmed" "--role" "Owner")
     local res=""
     if am_i_root; then
         # Adding true to avoid the logic to exit
-        res="$(gosu "$MASTODON_DAEMON_USER" "$cmd" "${args[@]}" || true)"
+        res="$(gosu "$MASTODON_DAEMON_USER" "${cmd[@]}" "${args[@]}" || true)"
     else
         # Adding true to avoid the logic to exit
-        res="$("$cmd" "${args[@]}" || true)"
+        res="$("${cmd[@]}" "${args[@]}" || true)"
     fi
 
     if [[ "$res" =~ "OK" ]]; then
@@ -474,4 +474,174 @@ mastodon_initialize() {
 
     # Avoid exit code of previous commands to affect the result of this function
     true
+}
+
+########################
+# Add or modify an entry in the Mastodon configuration file (.env.production)
+# Globals:
+#   MASTODON_BASE_DIR
+#   MASTODON_CFG_*
+# Arguments:
+#   $1 - Environment variable name
+#   $2 - Value to assign to the environment variable
+# Returns:
+#   None
+#########################
+mastodon_conf_set() {
+    local -r key="${1:?key missing}"
+    local -r value="${2:-}"
+    local -r conf_file="${MASTODON_BASE_DIR}/.env.production"
+    debug "Setting ${key} to '${value}' in Mastodon .env.production configuration"
+    # Sanitize key (sed does not support fixed string substitutions)
+    local sanitized_pattern
+    sanitized_pattern="^\s*(#\s*)?$(sed 's/[]\[^$.*/]/\\&/g' <<< "$key")\s*=.*"
+    local entry="${key}=${value}"
+    # Check if the configuration exists in the file
+    if grep -q -E "$sanitized_pattern" "$conf_file"; then
+        # It exists, so replace the line
+        replace_in_file "$conf_file" "$sanitized_pattern" "$entry"
+    else
+        cat >> "$conf_file" <<< "$entry"
+    fi
+}
+
+########################
+# Obtain Mastodon runtime configuration and environment variables
+# Arguments:
+#   None
+# Returns:
+#   Mastodon runtime configuration and environment variables
+#########################
+mastodon_runtime_env() {
+    # Convert the .env.production file so it can be loaded with eval
+    sed -E 's/^\s*([^# ])/export \1/' "${MASTODON_BASE_DIR}/.env.production"
+}
+
+########################
+# Check if mastodon-web is running
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+mastodon_is_web_running() {
+    # mastodon-web does not create any PID file
+    # We regenerate the PID file for each time we query it to avoid getting outdated
+    pgrep -f "puma" | head -n 1 > "$MASTODON_WEB_PID_FILE"
+
+    pid="$(get_pid_from_file "$MASTODON_WEB_PID_FILE")"
+    if [[ -n "$pid" ]]; then
+        is_service_running "$pid"
+    else
+        false
+    fi
+}
+
+########################
+# Check if mastodon-web is not running
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+mastodon_is_web_not_running() {
+    ! mastodon_is_web_running
+}
+
+########################
+# Stop mastodon-web
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+mastodon_web_stop() {
+    ! mastodon_is_web_running && return
+    stop_service_using_pid "$MASTODON_WEB_PID_FILE"
+}
+
+########################
+# Check if mastodon-streaming is running
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+mastodon_is_streaming_running() {
+    # mastodon-streaming does not create any PID file
+    # We regenerate the PID file for each time we query it to avoid getting outdated
+    pgrep -f "^node \./streaming$" | head -n 1 > "$MASTODON_STREAMING_PID_FILE"
+
+    pid="$(get_pid_from_file "$MASTODON_STREAMING_PID_FILE")"
+    if [[ -n "$pid" ]]; then
+        is_service_running "$pid"
+    else
+        false
+    fi
+}
+
+########################
+# Check if mastodon-streaming is not running
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+mastodon_is_streaming_not_running() {
+    ! mastodon_is_streaming_running
+}
+
+########################
+# Stop mastodon-streaming
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+mastodon_streaming_stop() {
+    ! mastodon_is_streaming_running && return
+    stop_service_using_pid "$MASTODON_STREAMING_PID_FILE"
+}
+
+########################
+# Check if mastodon-sidekiq is running
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+mastodon_is_sidekiq_running() {
+    # mastodon-sidekiq does not create any PID file
+    # We regenerate the PID file for each time we query it to avoid getting outdated
+    pgrep -f "(bin/sidekiq$|^sidekiq )" | head -n 1 > "$MASTODON_SIDEKIQ_PID_FILE"
+
+    pid="$(get_pid_from_file "$MASTODON_SIDEKIQ_PID_FILE")"
+    if [[ -n "$pid" ]]; then
+        is_service_running "$pid"
+    else
+        false
+    fi
+}
+
+########################
+# Check if mastodon-sidekiq is not running
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+mastodon_is_sidekiq_not_running() {
+    ! mastodon_is_sidekiq_running
+}
+
+########################
+# Stop mastodon-sidekiq
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+mastodon_sidekiq_stop() {
+    ! mastodon_is_sidekiq_running && return
+    stop_service_using_pid "$MASTODON_SIDEKIQ_PID_FILE"
 }

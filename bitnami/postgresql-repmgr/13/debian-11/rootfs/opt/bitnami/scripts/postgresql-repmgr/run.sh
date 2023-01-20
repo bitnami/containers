@@ -16,6 +16,7 @@ set -o pipefail
 . /opt/bitnami/scripts/postgresql-env.sh
 
 readonly repmgr_flags=("-f" "$REPMGR_CONF_FILE" "--daemonize=false")
+# shellcheck disable=SC2155
 readonly repmgr_cmd=$(command -v repmgrd)
 
 postgresql_start_bg true

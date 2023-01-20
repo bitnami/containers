@@ -1,8 +1,0 @@
-version: '2'
-
-services:
-  scikit:
-    tty: true
-    image: docker.io/bitnami/scikit-learn-intel:2021
-    volumes:
-      - '.:/app'

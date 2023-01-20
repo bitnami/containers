@@ -46,6 +46,11 @@ airflow_worker_validate() {
 #   None
 #########################
 airflow_worker_initialize() {
+    # Remove airflow-worker.pid file if exists to prevent error after WSL restarts
+    if [ -f "$AIRFLOW_PID_FILE" ]; then
+        rm "$AIRFLOW_PID_FILE"
+    fi
+
     # Change permissions if running as root
     for dir in "$AIRFLOW_TMP_DIR" "$AIRFLOW_LOGS_DIR"; do
         ensure_dir_exists "$dir"

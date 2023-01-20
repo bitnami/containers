@@ -1614,6 +1614,8 @@ mongodb_execute() {
     debug_execute mongodb_execute_print_output "$@"
 }
 
+# shellcheck disable=SC2148
+
 ########################
 # Execute an arbitrary query/queries against the running MongoDB service
 # Stdin:

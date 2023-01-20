@@ -1,7 +1,7 @@
 version: '2'
 services:
   cassandra:
-    image: docker.io/bitnami/cassandra:4.0
+    image: docker.io/bitnami/cassandra:4.1
     ports:
       - 7000:7000
       - 9042:9042
@@ -17,7 +17,7 @@ services:
       - MAX_HEAP_SIZE=2G
       - HEAP_NEWSIZE=200M
   cassandra2:
-    image: docker.io/bitnami/cassandra:4.0
+    image: docker.io/bitnami/cassandra:4.1
     ports:
       - 7001:7000
       - 9043:9042

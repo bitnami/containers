@@ -250,6 +250,7 @@ A HA PostgreSQL cluster with [Streaming replication](https://www.postgresql.org/
 - `REPMGR_PRIMARY_HOST`: Hostname of the initial primary node. No defaults.
 - `REPMGR_PARTNER_NODES`: Comma separated list of partner nodes in the cluster.  No defaults.
 - `REPMGR_NODE_NAME`: Node name. No defaults.
+- `REPMGR_NODE_TYPE`: Node type. Defaults to `data`. Allowed values: `data` for data nodes (master or replicas), `witness` for witness nodes.
 - `REPMGR_NODE_NETWORK_NAME`: Node hostname. No defaults.
 - `REPMGR_PGHBA_TRUST_ALL`: This will set the auth-method in the generated pg_hba.conf. Set it to `yes` only if you are using pgpool with LDAP authentication. Default to `no`.
 
@@ -660,7 +661,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2022 Bitnami
+Copyright &copy; 2023 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

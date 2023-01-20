@@ -158,7 +158,11 @@ neo4j_conf_set() {
     # Check if the configuration exists in the file
     if grep -q -E "$sanitized_pattern" "$file"; then
         # It exists, so replace the line
-        replace_in_file "$file" "$sanitized_pattern" "$entry"
+        if [[ "${key}" =~ jvm.additional ]]; then
+            append_file_after_last_match "$file" "$sanitized_pattern" "$entry"
+        else
+            replace_in_file "$file" "$sanitized_pattern" "$entry"
+        fi
     else
         echo "$entry" >>"$file"
     fi

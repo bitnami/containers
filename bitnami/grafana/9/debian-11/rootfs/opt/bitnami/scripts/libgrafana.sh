@@ -259,6 +259,7 @@ grafana_configure_from_environment_variables() {
     local section_key_pair section key value
     # Map environment variables to config properties
     for var in "${!GRAFANA_CFG_@}"; do
+        # shellcheck disable=SC2001
         section_key_pair="$(sed 's/^GRAFANA_CFG_//g' <<< "$var" | tr '[:upper:]' '[:lower:]')"
         section="${section_key_pair/_*}"
         key="${section_key_pair#*_}"

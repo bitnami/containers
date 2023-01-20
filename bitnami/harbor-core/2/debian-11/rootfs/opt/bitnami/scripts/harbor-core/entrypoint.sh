@@ -12,7 +12,7 @@ set -o pipefail
 
 print_welcome_page
 
-if [[ "$*" = "harbor_core" ]]; then
+if [[ "$1" = "/opt/bitnami/scripts/harbor-core/run.sh" ]]; then
     info "** Starting harbor-core setup **"
     /opt/bitnami/scripts/harbor-core/setup.sh
     info "** harbor-core setup finished! **"

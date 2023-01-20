@@ -13,7 +13,7 @@ set -o pipefail
 # Load LDAP environment variables
 eval "$(ldap_env)"
 
-readonly command="$(command -v slapd)"
+command="$(command -v slapd)"
 
 # Reduce maximum number of open file descriptors
 # https://github.com/docker/docker/issues/8231

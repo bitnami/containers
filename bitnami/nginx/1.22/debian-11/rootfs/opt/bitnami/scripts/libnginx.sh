@@ -252,14 +252,14 @@ ensure_nginx_app_configuration_exists() {
             --server-aliases)
             var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
             shift
-            read -r -a "$var_name" <<<"$1"
+            read -r -a "${var_name?}" <<<"$1"
             ;;
         --disable | \
             --disable-http | \
             --disable-https)
 
             var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
-            export "${var_name}=yes"
+            export "${var_name?}=yes"
             ;;
         --type | \
             --server-name | \
@@ -273,7 +273,7 @@ ensure_nginx_app_configuration_exists() {
 
             var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
             shift
-            export "${var_name}"="$1"
+            export "${var_name?}"="$1"
             ;;
         *)
             echo "Invalid command line flag $1" >&2
@@ -419,7 +419,7 @@ ensure_nginx_prefix_configuration_exists() {
 
             var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
             shift
-            declare "${var_name}"="$1"
+            declare "${var_name?}"="$1"
             ;;
         *)
             echo "Invalid command line flag $1" >&2
@@ -499,7 +499,7 @@ nginx_update_app_configuration() {
             )
                 var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
                 shift
-                read -r -a "$var_name" <<<"$1"
+                read -r -a "${var_name?}" <<<"$1"
                 ;;
             # Common flags
             --enable-http \
@@ -508,7 +508,7 @@ nginx_update_app_configuration() {
             | --disable-https \
             )
                 var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
-                declare "${var_name}=yes"
+                declare "${var_name?}=yes"
                 ;;
             --server-name \
             | --http-port \
@@ -516,7 +516,7 @@ nginx_update_app_configuration() {
             )
                 var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
                 shift
-                declare "${var_name}=${1}"
+                declare "${var_name?}=${1}"
                 ;;
 
             *)

@@ -19,7 +19,7 @@ eval "$(pgpool_env)"
 # Load LDAP environment variables
 eval "$(ldap_env)"
 
-readonly command=$(command -v pgpool)
+command="$(command -v pgpool)"
 flags=("-n" "--config-file=${PGPOOL_CONF_FILE}" "--hba-file=${PGPOOL_PGHBA_FILE}")
 [[ -z "${PGPOOL_EXTRA_FLAGS:-}" ]] || flags=("${flags[@]}" "${PGPOOL_EXTRA_FLAGS[@]}")
 

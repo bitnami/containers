@@ -121,5 +121,6 @@ export MOODLE_DATABASE_PASSWORD="${MOODLE_DATABASE_PASSWORD:-}" # only used duri
 
 # PHP configuration
 export PHP_DEFAULT_MEMORY_LIMIT="256M" # only used at build time
+export PHP_DEFAULT_MAX_INPUT_VARS="5000" # only used at build time
 
 # Custom environment variables may be defined below

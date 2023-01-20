@@ -238,7 +238,6 @@ For larger cluster, you can setup 'dedicated nodes' using the following environm
 * `ELASTICSEARCH_IS_DEDICATED_NODE`: Elasticsearch node to behave as a 'dedicated node'. Default: **no**
 * `ELASTICSEARCH_NODE_TYPE`: Elasticsearch node type when behaving as a 'dedicated node'. Valid values: *master*, *data*, *coordinating* or *ingest*.
 * `ELASTICSEARCH_CLUSTER_MASTER_HOSTS`: List of elasticsearch master-eligible hosts. Available separators are ' ', ',' and ';'. If no values are provided, it will have the same value as `ELASTICSEARCH_CLUSTER_HOSTS`.
-* `ELASTICSEARCH_TOTAL_NODES`: Number of master + data nodes, it's used to calculate `gateway.expected_nodes` and `gateway.recover_after_nodes` parameters. If not set, those parameters are calculated using `ELASTICSEARCH_CLUSTER_HOSTS`. No defaults.
 
 Find more information about 'dedicated nodes' in the [official documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html).
 
@@ -501,7 +500,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2022 Bitnami
+Copyright &copy; 2023 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

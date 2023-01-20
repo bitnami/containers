@@ -146,7 +146,7 @@ The running mode is defined via the `MASTODON_MODE` environment variable. The po
 - `MASTODON_CREATE_ADMIN`: Create admin users if it does not exist. Default: **true**
 - `MASTODON_ADMIN_USERNAME`: Mastodon application username. Default: **user**
 - `MASTODON_ADMIN_PASSWORD`: Mastodon application password. Default: **bitnami1**
-- `MASTODON_ADMIN_EMAIL`: Mastodon application email. Default: **user@example.com**
+- `MASTODON_ADMIN_EMAIL`: Mastodon application email. Default: **user@bitnami.org**
 - `MASTODON_HTTPS_ENABLED`: Set the Mastodon Puma server as HTTPS. Default: **false**.
 - `MASTODON_ALLOW_ALL_DOMAINS`: Disable the Mastodon host verification process. Default: **true**.
 - `MASTODON_DATA_TO_PERSIST`: Space separated list of files and directories to persist. Use a space to persist no data: `" "`. Default: **public/system, public/assets**
@@ -219,7 +219,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2022 Bitnami
+Copyright &copy; 2023 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -5,6 +5,7 @@
 # shellcheck disable=SC1090,SC1091
 
 # Load generic libraries
+. /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libnet.sh
@@ -347,8 +348,30 @@ find_opentelemetry_source() {
 #   None
 #########################
 install_opentelemetry() {
-    local -r sourceDir="$(find_opentelemetry_source)"
-    local -r destinationDir="/usr/local/kong/include"
-    mkdir -p "$destinationDir"
-    ln -s "$sourceDir" "${destinationDir}/opentelemetry"
+    local -r source_dir="$(find_opentelemetry_source)"
+    local -r destination_dir="/usr/local/kong/include"
+    mkdir -p "$destination_dir"
+    ln -s "$source_dir" "${destination_dir}/opentelemetry"
+}
+
+########################
+# Configure LUA_PATH and LUA_CPATH in the required files
+# Globals:
+#   None
+# Arguments:
+#   List of files to include the configuration
+# Returns:
+#   None
+#########################
+configure_lua_paths() {
+    local -a dest_files=("${@}")
+    local -r lua_paths_file="/tmp/lua-paths.sh"
+    # Skip the PATH environment variable. We are already setting it.
+    "${KONG_BASE_DIR}/luarocks/bin/luarocks" path > "$lua_paths_file"
+    remove_in_file "$lua_paths_file" "^export\s+PATH=.*$"
+    for dest_file in "${dest_files[@]}"; do
+        echo "# 'luarocks path' configuration" >> "$dest_file"
+        cat "$lua_paths_file" >> "$dest_file"
+    done
+    rm --force "$lua_paths_file"
 }

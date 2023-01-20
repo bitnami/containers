@@ -39,6 +39,47 @@ get_system_cert_paths() {
 }
 
 ########################
+# Ensure CA bundles allows users in root group install new certificate
+# Globals:
+#   OS_FLAVOUR
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+configure_permissions_system_certs() {
+    local -r owner="${1:-}"
+    # Debian
+    set_permissions_ownership "/etc/pki/tls/certs/ca-bundle.crt" "$owner"
+    # Centos/Phonton
+    set_permissions_ownership "/etc/pki/tls/certs/ca-bundle.trust.crt" "$owner"
+    set_permissions_ownership "/etc/ssl/certs/ca-certificates.crt" "$owner"
+}
+
+########################
+# Grant group write permissions to the file provided and change ownership if a the owner argument is set.
+# If the path is not a file, then do nothing.
+# Globals:
+#   OS_FLAVOUR
+# Arguments:
+#   $1 - path
+#   $2 - owner
+# Returns:
+#   None
+#########################
+set_permissions_ownership() {
+    local -r path="${1:?path is missing}"
+    local -r owner="${2:-}"
+
+    if [[ -f "$path" ]]; then
+        chmod g+w "$path"
+        if [[ -n "$owner" ]]; then
+            chown "$owner" "$path"
+        fi
+    fi
+}
+
+########################
 # Place a given certificate in the correct location for installation
 # depending on the OS
 # Globals:
@@ -264,6 +305,7 @@ harbor_jobservice_stop() {
 #########################
 harbor_notary_server_print_env() {
     if [[ -n "${HARBOR_NOTARY_SERVER_DATABASE_NAME:-}" ]]; then
+        # shellcheck disable=SC2034
         HARBOR_NOTARY_SERVER_CFG_DB_URL="postgres://${HARBOR_NOTARY_SERVER_DATABASE_USERNAME:-}:${HARBOR_NOTARY_SERVER_DATABASE_PASSWORD:-}@${HARBOR_NOTARY_SERVER_DATABASE_HOST:-127.0.0.1}:${HARBOR_NOTARY_SERVER_DATABASE_PORT_NUMBER:-5432}/${HARBOR_NOTARY_SERVER_DATABASE_NAME}?sslmode=${HARBOR_NOTARY_SERVER_DATABASE_SSLMODE:-disable}"
     fi
     for var in "${!HARBOR_NOTARY_SERVER_CFG_@}"; do
@@ -323,6 +365,7 @@ harbor_notary_server_stop() {
 #########################
 harbor_notary_signer_print_env() {
     if [[ -n "${HARBOR_NOTARY_SIGNER_DATABASE_NAME:-}" ]]; then
+        # shellcheck disable=SC2034
         HARBOR_NOTARY_SIGNER_CFG_DB_URL="postgres://${HARBOR_NOTARY_SIGNER_DATABASE_USERNAME:-}:${HARBOR_NOTARY_SIGNER_DATABASE_PASSWORD:-}@${HARBOR_NOTARY_SIGNER_DATABASE_HOST:-127.0.0.1}:${HARBOR_NOTARY_SIGNER_DATABASE_PORT_NUMBER:-5432}/${HARBOR_NOTARY_SIGNER_DATABASE_NAME}?sslmode=${HARBOR_NOTARY_SIGNER_DATABASE_SSLMODE:-disable}"
     fi
     for var in "${!HARBOR_NOTARY_SIGNER_CFG_@}"; do

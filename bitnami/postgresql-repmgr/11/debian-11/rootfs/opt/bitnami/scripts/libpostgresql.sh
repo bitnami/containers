@@ -997,6 +997,8 @@ postgresql_remove_pghba_lines() {
     done
 }
 
+# shellcheck disable=SC2148
+
 ########################
 # Return PostgreSQL major version
 # Globals:

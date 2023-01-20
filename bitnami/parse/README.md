@@ -230,7 +230,7 @@ Available environment variables:
 - `PARSE_DATABASE_PASSWORD`: Database password that Parse will use to connect with the database. No default.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-###### Create a MongoDB database for DreamFactory using mongodb-shell
+###### Create a MongoDB database using mongodb-shell
 
 - `MONGODB_SHELL_DATABASE_HOST`: Hostname for the MongoDB server. Default: **mongodb**
 - `MONGODB_SHELL_DATABASE_PORT_NUMBER`: Port used by the MongoDB server. Default: **27017**
@@ -333,7 +333,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2022 Bitnami
+Copyright &copy; 2023 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -24,12 +24,14 @@ dirs=(
     "${GITEA_DATA_DIR}"
     "${GITEA_TMP_DIR}"
     "${GITEA_VOLUME_DIR}"
+    "${GITEA_LOG_ROOT_PATH}"
 )
 
 for dir in "${dirs[@]}"; do
     ensure_dir_exists "$dir"
-    chmod -R g+rwX "$dir"
+    configure_permissions_ownership "$dir" -d "775" -f "664" -u "$GITEA_DAEMON_USER" -g "root"
 done
+chmod a+x "${GITEA_WORK_DIR}/bin/gitea"
 
 render-template "$GITEA_CONF_DIR/app.ini.template" >"$GITEA_CONF_FILE"
 chmod g+rw "$GITEA_CONF_FILE"
