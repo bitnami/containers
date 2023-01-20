@@ -1,30 +1,30 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "c42abbc5d57ba4c33c89e4daf46c33b0173565fbf533ef7a60281cf3283f611f",
+        "digest": "9ab9654690d90d3c49ff66fb1eb286487e318adc899d036bc45922f6b176865b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-0"
+        "version": "1.16.0-1"
     },
     "java": {
         "arch": "amd64",
-        "digest": "1214b3b5e02e9ea11c64f67dda24648ded9f896552bafb7ceaabea026a61cba7",
+        "digest": "19976426bb1d50974588dbe1fece1d8e54dc9932d15dd6b81b37fdf2c8307495",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.8.352-2"
+        "version": "1.8.362-0"
     },
     "spring-cloud-dataflow": {
         "arch": "amd64",
-        "digest": "afac5f5d89c5ffb042316ec797677c382730384a455efec118f76a12b2b30136",
+        "digest": "7dee1fe904d67ba8787b413556eac0592f72436db7e5dff534245520a864d298",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.10.0-0"
+        "version": "2.10.0-1"
     },
     "yq": {
         "arch": "amd64",
-        "digest": "be32ffee928d124d4e072a9c0aaaa393f218a26fdece00eb35c254ac9001f89e",
+        "digest": "33fec06619aa3c1f7ea3c2516bf36f79af01354972ff06998ca6fe1d65078998",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.30.8-0"
+        "version": "4.30.8-1"
     }
 }
