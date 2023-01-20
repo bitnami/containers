@@ -1,10 +1,10 @@
 {
     "ejbca": {
         "arch": "amd64",
-        "digest": "10052f5eb79bce8694f48257d4902ce9f7e267a2e7c8dbf6fe9860ecc7d3c346",
+        "digest": "e29033ffdbc2dc720d63a18594ad1dc9224d4642c618d411188a43cc703fae64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.10.0-2-1"
+        "version": "7.11.0-0"
     },
     "gosu": {
         "arch": "amd64",
@@ -29,9 +29,9 @@
     },
     "wildfly": {
         "arch": "amd64",
-        "digest": "372f9941d18b1f647e96e1cabacbd99fa340acfff122eac9e0511265f5d359fb",
+        "digest": "07d6122bffd0170c3babfe5730c684533f6c3c6e41339d28137e1d35dfebd626",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "26.1.3-0"
+        "version": "26.1.3-1"
     }
 }
