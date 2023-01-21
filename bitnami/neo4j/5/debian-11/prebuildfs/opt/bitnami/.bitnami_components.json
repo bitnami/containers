@@ -8,10 +8,10 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "014d5d162d28116c88453e7739f35bf41042ce54033bf1471c3b5e68e5a25bae",
+        "digest": "a89ace6cbda8b33cc4e18bb0954e8b3316eb810f4f832516d60dfb49bd5f20f2",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "17.0.5-8-3"
+        "version": "17.0.6-10-0"
     },
     "neo4j": {
         "arch": "amd64",
