@@ -140,13 +140,17 @@ appsmith_conf_set() {
 }
 
 ########################
-# Check if Appsmith daemon is running
+# Check if Appsmith backend daemon is running
 # Arguments:
 #   None
 # Returns:
 #   Boolean
 #########################
 is_appsmith_backend_running() {
+    # appsmith-backend does not create any PID file
+    # We regenerate the PID file for each time we query it to avoid getting outdated
+    pgrep -f "${APPSMITH_BASE_DIR}/backend/server.jar" | head -n 1 > "$APPSMITH_PID_FILE"
+
     pid="$(get_pid_from_file "$APPSMITH_PID_FILE")"
     if [[ -n "$pid" ]]; then
         is_service_running "$pid"
@@ -156,7 +160,7 @@ is_appsmith_backend_running() {
 }
 
 ########################
-# Check if Appsmith daemon is not running
+# Check if Appsmith backend daemon is not running
 # Arguments:
 #   None
 # Returns:
@@ -167,7 +171,7 @@ is_appsmith_backend_not_running() {
 }
 
 ########################
-# Stop Appsmith daemons
+# Stop Appsmith backend daemon
 # Arguments:
 #   None
 # Returns:
@@ -176,6 +180,49 @@ is_appsmith_backend_not_running() {
 appsmith_backend_stop() {
     ! is_appsmith_backend_running && return
     stop_service_using_pid "$APPSMITH_PID_FILE"
+}
+
+########################
+# Check if Appsmith rts daemon is running
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_appsmith_rts_running() {
+    # appsmith-rts does not create any PID file
+    # We regenerate the PID file for each time we query it to avoid getting outdated
+    pgrep -f "${APPSMITH_BASE_DIR}/rts/server.js" | head -n 1 > "$APPSMITH_RTS_PID_FILE"
+
+    pid="$(get_pid_from_file "$APPSMITH_RTS_PID_FILE")"
+    if [[ -n "$pid" ]]; then
+        is_service_running "$pid"
+    else
+        false
+    fi
+}
+
+########################
+# Check if Appsmith rts daemon is not running
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_appsmith_rts_not_running() {
+    ! is_appsmith_rts_running
+}
+
+########################
+# Stop Appsmith rts daemon
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+appsmith_rts_stop() {
+    ! is_appsmith_rts_running && return
+    stop_service_using_pid "$APPSMITH_RTS_PID_FILE"
 }
 
 ########################
@@ -250,12 +297,8 @@ appsmith_initialize() {
     # - rts: Component written in Node.js. Creates websockets for editing the applications in real-time. Connects to the API and MongoDB
     # https://github.com/appsmithorg/appsmith/tree/release/deploy/docker
 
-    if [[ "$APPSMITH_MODE" == "client" ]]; then
-        # The client (UI) only needs to generate the nginx vhost configuration
-        echo "Rendering nginx configuration"
-        export APPSMITH_SERVER_PROXY_PASS="http://$APPSMITH_API_HOST:$APPSMITH_API_PORT"
-        render-template "${APPSMITH_CONF_DIR}/nginx-app-http.conf.template" >"${NGINX_SERVER_BLOCKS_DIR}/appsmith.conf"
-    else
+    # The client (UI) only needs to generate the nginx vhost configuration
+    if [[ "$APPSMITH_MODE" != "client" ]]; then
         # RTS or API server
         if { [[ "$APPSMITH_MODE" == "rts" ]]; } || { ! is_app_initialized "appsmith"; }; then
             info "Deploying Appsmith $APPSMITH_MODE from scratch"
