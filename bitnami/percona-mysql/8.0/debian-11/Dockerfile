@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.0.30-22-debian-11-r20" \
+      org.opencontainers.image.ref.name="8.0.30-22-debian-11-r21" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/percona-mysql" \
       org.opencontainers.image.title="percona-mysql" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -23,7 +23,7 @@ RUN install_packages ca-certificates curl libaio1 libaudit1 libbrotli1 libbz2-1.
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "percona-xtrabackup-binary-8.0.30-23-1-linux-${OS_ARCH}-debian-11" \
-      "ini-file-1.4.4-2-linux-${OS_ARCH}-debian-11" \
+      "ini-file-1.4.5-0-linux-${OS_ARCH}-debian-11" \
       "percona-mysql-8.0.30-22-2-linux-${OS_ARCH}-debian-11" \
       "mysql-shell-8.0.31-2-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
