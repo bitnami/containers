@@ -124,3 +124,75 @@ jobs:
           VIB_ENV_REGISTRY_URL: ${{ secrets.PROD_MARKETPLACE_REGISTRY_URL }}
           VIB_ENV_REGISTRY_USERNAME: ${{ steps.get-registry-credentials.outputs.marketplace_user }}
           VIB_ENV_REGISTRY_PASSWORD: ${{ steps.get-registry-credentials.outputs.marketplace_passwd }}
+      - name: Install s3cmd
+          run: sudo apt-get install -y s3cmd
+      - name: 'Getting 3rd party packages for OSSPI for ${{ steps.get-container-metadata.outputs.name }}: ${{ steps.get-container-metadata.outputs.tag }}'
+        if: ${{ steps.get-container-metadata.outputs.result == 'ok' }}
+        env:
+          # Path with docker resources
+          VIB_ENV_PATH: ${{ matrix.container }}
+        run: |
+          # If it's set from outside, can be changed
+          ARCH="${ARCH:-amd64}"
+          IMAGE_NAME=$(grep -oE "org.opencontainers.image.ref.name=\".+\"" ${{ matrix.container }}/Dockerfile | sed -nr "s|org.opencontainers.image.ref.name=\"(.+)\"|\1|p")
+          VERSION=$(grep -oE "org.opencontainers.image.version=\".+\"" ${{ matrix.container }}/Dockerfile | sed -nr "s|org.opencontainers.image.version=\"(.+)\"|\1|p")
+          ASSET=$(grep -oE "org.opencontainers.image.title=\".+\"" ${{ matrix.container }}/Dockerfile | sed -nr "s|org.opencontainers.image.title=\"(.+)\"|\1|p")
+          CLEANED_IMAGE_NAME=${IMAGE_NAME#"$VERSION-"}
+          # split by -
+          ASSET_DATA=(${CLEANED_IMAGE_NAME//-/ })
+          OS=${ASSET_DATA[0]}-${ASSET_DATA[1]}
+          REVISION=(${ASSET_DATA[2]/r/})
+          
+          COMPONENTS_FILES=$(s3cmd ls -l --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$ASSET/$VERSION/$OS/$ARCH/$REVISION/ | grep "components.json" | wc -l)
+          # If the components.json file, so it seems has external packages
+          if [[ $COMPONENTS_FILES -gt 0 ]]; then
+            s3cmd get --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$ASSET/$VERSION/$OS/$ARCH/$REVISION/components.json components.json
+          
+            declare -A PACKAGES
+            # Iterating over the external components to get the involved elements
+            while read -r COMPONENT_ID; do
+              COMPONENT_VERSION_FULL=$(jq -c ".$COMPONENT_ID.version" components.json)
+              COMPONENT_VERSION_FULL=(${COMPONENT_VERSION_FULL//"\""/})
+          
+              # Sanityzing strings
+              COMPONENT_ID=(${COMPONENT_ID//"\""/})
+              #split by "-"
+              COMPONENT_PARTS=(${COMPONENT_VERSION_FULL//-/ })
+              COMPONENT_VERSION=${COMPONENT_PARTS[0]}
+          
+              COMPILATION_RECIPE=$(s3cmd ls -l --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$COMPONENT_ID/$COMPONENT_VERSION/$OS/$ARCH/ | grep "compilation-recipe.json" | wc -l)
+              # If the components.json file, so it seems has external packages
+              if [[ $COMPILATION_RECIPE -gt 0 ]]; then             
+                s3cmd get --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$COMPONENT_ID/$COMPONENT_VERSION/$OS/$ARCH/compilation-recipe.json compilation-recipe.json
+              else
+                s3cmd get --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$COMPONENT_ID/$COMPONENT_VERSION-${COMPONENT_PARTS[1]}/$OS/$ARCH/compilation-recipe.json compilation-recipe.json
+              fi
+              # now getting each component to be reported
+              while read -r JSON_PACKAGE; do
+                PACKAGE_ID=$(echo "$JSON_PACKAGE" | jq -r '.id' )
+                PACKAGE_VERSION=$(echo "$JSON_PACKAGE" | jq -r '.version' )
+                PACKAGE_URL=$(echo "$JSON_PACKAGE" | jq -r '.source.upstreamSourceUrl')
+                PACKAGES[$PACKAGE_ID]="$PACKAGE_VERSION $PACKAGE_URL"
+              done <<<"$(jq -c '.components[]' compilation-recipe.json)"
+              rm compilation-recipe.json
+            done <<<"$(jq -c 'keys[]' components.json)"
+          
+            # Now creating the JSON file with the needed transformations
+            JSON_PACKAGES=()
+            for PACKAGE_ID in "${!PACKAGES[@]}"
+            do
+              VALUES=(${PACKAGES[$PACKAGE_ID]// / })
+              CLEANED_URL=(${VALUES[1]/git+/})
+              if [ -z "$CLEANED_URL" ]
+              then
+                echo "[WARNING] The URL for $PACKAGE_ID:${VALUES[0]} is missing in the recipe"
+              else
+                JSON_PACKAGES+=($(jq -n '{"_unique_id": $uniqueID, "name": $name, "version": $version, "url": $url, "repository": "other"}' --arg uniqueID "other:$PACKAGE_ID:${VALUES[0]}" --arg name $PACKAGE_ID --arg version ${VALUES[0]} --arg url $CLEANED_URL))
+              fi
+            done
+            JSON_ARRAY=$(printf "%s" "${JSON_PACKAGES[@]}" | jq -s)
+            echo "$JSON_ARRAY" > packages.json
+            s3cmd put --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} packages.json s3://${{ secrets.AWS_S3_BUCKET }}/$ASSET/$VERSION/$OS/$ARCH/$REVISION/packages.json
+          else
+            echo "$IMAGE_NAME:$VERSION doesn't have external components.json"
+          fi
