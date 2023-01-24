@@ -48,3 +48,4 @@ EXPOSE 3000
 WORKDIR /opt/bitnami/supabase-storage
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/node/bin/pm2-runtime" ]
+
