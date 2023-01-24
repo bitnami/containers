@@ -1,4 +1,6 @@
 name: '[CI/CD] CD Pipeline Run'
+run-name: " ${{ github.event_name == 'workflow_dispatch' && format('[CD] Retrying SHA: {0}', inputs.sha) || '' }}"
+
 on: # rebuild any PRs and main branch changes
   workflow_run:
     workflows:
@@ -14,8 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Get modified containers path
     if: |
-      github.event.head_commit.author.username == 'bitnami-bot' &&
-      github.event.forced == false
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.head_commit.author.username == 'bitnami-bot' && github.event.forced == false)
     outputs:
       result: ${{ steps.get-containers.outputs.result }}
       containers: ${{ steps.get-containers.outputs.containers }}
@@ -23,7 +25,7 @@ jobs:
       - id: get-containers
         name: Get modified containers path
         env:
-          GITHUB_COMMITS: ${{ toJson(github.event.commits) }}
+          GITHUB_COMMITS: ${{ github.event_name == 'workflow_dispatch' && format('[{{"id":"{0}"}}]', inputs.sha) || toJson(github.event.commits) }}
         run: |
           # Get all commits associated to the push
           commits=($(echo "${GITHUB_COMMITS}" | jq -r '.[] | .id'))
@@ -125,7 +127,7 @@ jobs:
           VIB_ENV_REGISTRY_USERNAME: ${{ steps.get-registry-credentials.outputs.marketplace_user }}
           VIB_ENV_REGISTRY_PASSWORD: ${{ steps.get-registry-credentials.outputs.marketplace_passwd }}
       - name: Install s3cmd
-          run: sudo apt-get install -y s3cmd
+        run: sudo apt-get install -y s3cmd
       - name: 'Getting 3rd party packages for OSSPI for ${{ steps.get-container-metadata.outputs.name }}: ${{ steps.get-container-metadata.outputs.tag }}'
         if: ${{ steps.get-container-metadata.outputs.result == 'ok' }}
         env:

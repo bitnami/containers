@@ -1,0 +1,5 @@
+version: '2'
+
+services:
+  supabase-postgres-meta:
+    image: docker.io/bitnami/supabase-postgres-meta:0
