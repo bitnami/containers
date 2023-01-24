@@ -43,3 +43,4 @@ ENV APP_VERSION="10.1.1" \
 
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/postgrest/bin/postgrest" ]
+
