@@ -1,10 +1,10 @@
-name: '[CI/CD] CD Pipeline Run'
+name: '[CI/CD] CD Pipeline'
 on: # rebuild any PRs and main branch changes
-  workflow_run:
-    workflows:
-      - '[CI/CD] CD Pipeline Prepare'
-    types:
-      - 'completed'
+  push:
+    branches:
+      - main
+    paths:
+      - 'bitnami/**'
 env:
   CSP_API_URL: https://console.cloud.vmware.com
   CSP_API_TOKEN: ${{ secrets.CSP_API_TOKEN }}
@@ -142,27 +142,27 @@ jobs:
           ASSET_DATA=(${CLEANED_IMAGE_NAME//-/ })
           OS=${ASSET_DATA[0]}-${ASSET_DATA[1]}
           REVISION=(${ASSET_DATA[2]/r/})
-
+          
           COMPONENTS_FILES=$(s3cmd ls -l --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$ASSET/$VERSION/$OS/$ARCH/$REVISION/ | grep "components.json" | wc -l)
           # If the components.json file, so it seems has external packages
           if [[ $COMPONENTS_FILES -gt 0 ]]; then
             s3cmd get --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$ASSET/$VERSION/$OS/$ARCH/$REVISION/components.json components.json
-
+          
             declare -A PACKAGES
             # Iterating over the external components to get the involved elements
             while read -r COMPONENT_ID; do
               COMPONENT_VERSION_FULL=$(jq -c ".$COMPONENT_ID.version" components.json)
               COMPONENT_VERSION_FULL=(${COMPONENT_VERSION_FULL//"\""/})
-
+          
               # Sanityzing strings
               COMPONENT_ID=(${COMPONENT_ID//"\""/})
               #split by "-"
               COMPONENT_PARTS=(${COMPONENT_VERSION_FULL//-/ })
               COMPONENT_VERSION=${COMPONENT_PARTS[0]}
-
+          
               COMPILATION_RECIPE=$(s3cmd ls -l --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$COMPONENT_ID/$COMPONENT_VERSION/$OS/$ARCH/ | grep "compilation-recipe.json" | wc -l)
               # If the components.json file, so it seems has external packages
-              if [[ $COMPILATION_RECIPE -gt 0 ]]; then
+              if [[ $COMPILATION_RECIPE -gt 0 ]]; then             
                 s3cmd get --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$COMPONENT_ID/$COMPONENT_VERSION/$OS/$ARCH/compilation-recipe.json compilation-recipe.json
               else
                 s3cmd get --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$COMPONENT_ID/$COMPONENT_VERSION-${COMPONENT_PARTS[1]}/$OS/$ARCH/compilation-recipe.json compilation-recipe.json
@@ -176,7 +176,7 @@ jobs:
               done <<<"$(jq -c '.components[]' compilation-recipe.json)"
               rm compilation-recipe.json
             done <<<"$(jq -c 'keys[]' components.json)"
-
+          
             # Now creating the JSON file with the needed transformations
             JSON_PACKAGES=()
             for PACKAGE_ID in "${!PACKAGES[@]}"
