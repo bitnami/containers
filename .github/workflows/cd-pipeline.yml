@@ -125,7 +125,7 @@ jobs:
           VIB_ENV_REGISTRY_USERNAME: ${{ steps.get-registry-credentials.outputs.marketplace_user }}
           VIB_ENV_REGISTRY_PASSWORD: ${{ steps.get-registry-credentials.outputs.marketplace_passwd }}
       - name: Install s3cmd
-          run: sudo apt-get install -y s3cmd
+        run: sudo apt-get install -y s3cmd
       - name: 'Getting 3rd party packages for OSSPI for ${{ steps.get-container-metadata.outputs.name }}: ${{ steps.get-container-metadata.outputs.tag }}'
         if: ${{ steps.get-container-metadata.outputs.result == 'ok' }}
         env:
