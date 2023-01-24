@@ -43,4 +43,3 @@ ENV APP_VERSION="1.0.1" \
 
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/gotrue/bin/gotrue" ]
-
