@@ -1,4 +1,5 @@
 name: '[CI/CD] CD Pipeline Prepare'
+run-name: " ${{ github.event_name == 'workflow_dispatch' && format('[CD] Retrying SHA: {0}', inputs.sha) || '' }}"
 on: # rebuild any PRs and main branch changes
   workflow_dispatch:
     inputs:
@@ -16,20 +17,28 @@ env:
   CSP_API_TOKEN: ${{ secrets.CSP_API_TOKEN }}
   VIB_PUBLIC_URL: https://cp.bromelia.vmware.com
 jobs:
-  get-containers:
+  prepare:
     runs-on: ubuntu-latest
     name: Get modified containers path
     if: |
-      github.event.head_commit.author.username == 'bitnami-bot' &&
-      github.event.forced == false
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.head_commit.author.username == 'bitnami-bot' && github.event.forced == false)
     outputs:
       result: ${{ steps.get-containers.outputs.result }}
       containers: ${{ steps.get-containers.outputs.containers }}
     steps:
+      - name: Install s3cmd
+        run: sudo apt-get install -y s3cmd
+      - uses: actions/checkout@v3
+        name: Checkout Repository
+        # Full history is not required anymore
+        with:
+          ref: ${{github.event_name == 'workflow_dispatch' && inputs.sha || '' }}
+          fetch-depth: 1
       - id: get-containers
         name: Get modified containers path
         env:
-          GITHUB_COMMITS: ${{ toJson(github.event.commits) }}
+          GITHUB_COMMITS: ${{ github.event_name == 'workflow_dispatch' && format('[{{"id":"{0}"}}]', inputs.sha) || toJson(github.event.commits) }}
         run: |
           # Get all commits associated to the push
           commits=($(echo "${GITHUB_COMMITS}" | jq -r '.[] | .id'))
@@ -46,6 +55,20 @@ jobs:
               if [[ ! $containers =~ (^|[[:space:]])$container($|[[:space:]]) ]]; then
                 # Avoid duplicates
                 containers+=("${container}")
+                if [[ -d "${container}" ]]; then
+                  tag="$(grep -oE "org.opencontainers.image.ref.name=\".+\"" ${container}/Dockerfile | sed -nr "s|org.opencontainers.image.ref.name=\"(.+)\"|\1|p")"
+                  if [[ -z "${tag}" ]]; then
+                    echo "No tag found for: ${container}"
+                  else
+                    name="$(grep -oE "org.opencontainers.image.ref.name=\".+\"" ${container}/Dockerfile | sed -nr "s|org.opencontainers.image.title=\"(.+)\"|\1|p")"
+                    app_version="$(grep -oE "org.opencontainers.image.ref.name=\".+\"" ${container}/Dockerfile | sed -nr "s|org.opencontainers.image.version=\"(.+)\"|\1|p")"
+                    rolling_tags="$(yq '.rolling-tags' ${container}/tags-info.yaml -o json | jq -c)"
+                    branch="$(echo "${container}" | awk -F '/' '{print $3}')"
+
+                    container_json=$(jq -n '{"name": $name, "path": $path, "branch": $branch, "app_version": $app_version, "tag": $tag, "rolling_tags": $rolling_tags}' --arg name "$name" --arg app_version "$app_version" --arg branch "$branch" --arg path "$container" --argjson rolling_tags "$rolling_tags")
+                    containers_json+=("${container_json}")
+                  fi
+                fi
               fi
             done
           done
@@ -54,151 +77,83 @@ jobs:
             echo "No changes detected in containers. The rest of the steps will be skipped."
             echo "result=skip" >> $GITHUB_OUTPUT
           else
-            containers_json=$(printf "%s\n" "${containers[@]}" | jq -R . | jq -cs .)
+            containers_json=$(printf "%s\n" "${containers_json[@]}" | jq -s .)
             echo "result=ok" >> $GITHUB_OUTPUT
-            echo "containers=${containers_json}" >> $GITHUB_OUTPUT
+            echo "${containers_json}" > publish-metadata.json
           fi
-  vib-publish:
-    runs-on: ubuntu-latest
-    needs: get-containers
-    if: ${{ needs.get-containers.outputs.result == 'ok' }}
-    name: Publish
-    strategy:
-      fail-fast: false
-      max-parallel: 2
-      matrix:
-        container: ${{ fromJSON(needs.get-containers.outputs.containers) }}
-    steps:
-      - uses: actions/checkout@v3
-        name: Checkout Repository
-        # Full history is not required anymore
-        with:
-          fetch-depth: 1
-      - id: get-container-metadata
-        name: Get image tag and container name
+      - name: 'Getting 3rd party packages for OSSPI'
+        if: ${{ steps.get-container-metadata.outputs.result == 'ok' }}
         run: |
-          if [[ -d "${{ matrix.container }}" ]]; then
-            tag="$(grep -oE "org.opencontainers.image.ref.name=\".+\"" ${{ matrix.container }}/Dockerfile | sed -nr "s|org.opencontainers.image.ref.name=\"(.+)\"|\1|p")"
-            if [[ -z "${tag}" ]]; then
-              echo "No tag found for: ${{ matrix.container }}"
-              exit 1
+          CONTAINERS_TO_PUBLISH=$(cat publish-metadata.json | jq -cr '.[]')
+          for CONTAINER in "${CONTAINERS_TO_PUBLISH[@]}"; do
+            # If it's set from outside, can be changed
+            ARCH="${ARCH:-amd64}"
+            IMAGE_NAME=$(echo $CONTAINER | jq -cr '.tag')
+            VERSION=$(echo $CONTAINER | jq -cr '.app_version')
+            ASSET=$(echo $CONTAINER | jq -cr '.name')
+            CLEANED_IMAGE_NAME=${IMAGE_NAME#"$VERSION-"}
+            # split by -
+            ASSET_DATA=(${CLEANED_IMAGE_NAME//-/ })
+            OS=${ASSET_DATA[0]}-${ASSET_DATA[1]}
+            REVISION=(${ASSET_DATA[2]/r/})
+
+            COMPONENTS_FILES=""
+            #COMPONENTS_FILES=$(s3cmd ls -l --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$ASSET/$VERSION/$OS/$ARCH/$REVISION/ | grep "components.json" | wc -l)
+            # If the components.json file, so it seems has external packages
+            if [[ $COMPONENTS_FILES -gt 0 ]]; then
+              # s3cmd get --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$ASSET/$VERSION/$OS/$ARCH/$REVISION/components.json components.json
+
+              declare -A PACKAGES
+              # Iterating over the external components to get the involved elements
+              while read -r COMPONENT_ID; do
+                COMPONENT_VERSION_FULL=$(jq -c ".$COMPONENT_ID.version" components.json)
+                COMPONENT_VERSION_FULL=(${COMPONENT_VERSION_FULL//"\""/})
+
+                # Sanityzing strings
+                COMPONENT_ID=(${COMPONENT_ID//"\""/})
+                #split by "-"
+                COMPONENT_PARTS=(${COMPONENT_VERSION_FULL//-/ })
+                COMPONENT_VERSION=${COMPONENT_PARTS[0]}
+
+                COMPILATION_RECIPE=""
+                COMPILATION_RECIPE=$(s3cmd ls -l --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$COMPONENT_ID/$COMPONENT_VERSION/$OS/$ARCH/ | grep "compilation-recipe.json" | wc -l)
+                # If the components.json file, so it seems has external packages
+                if [[ $COMPILATION_RECIPE -gt 0 ]]; then
+                  # s3cmd get --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$COMPONENT_ID/$COMPONENT_VERSION/$OS/$ARCH/compilation-recipe.json compilation-recipe.json
+                else
+                  # s3cmd get --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$COMPONENT_ID/$COMPONENT_VERSION-${COMPONENT_PARTS[1]}/$OS/$ARCH/compilation-recipe.json compilation-recipe.json
+                fi
+                # now getting each component to be reported
+                while read -r JSON_PACKAGE; do
+                  PACKAGE_ID=$(echo "$JSON_PACKAGE" | jq -r '.id' )
+                  PACKAGE_VERSION=$(echo "$JSON_PACKAGE" | jq -r '.version' )
+                  PACKAGE_URL=$(echo "$JSON_PACKAGE" | jq -r '.source.upstreamSourceUrl')
+                  PACKAGES[$PACKAGE_ID]="$PACKAGE_VERSION $PACKAGE_URL"
+                done <<<"$(jq -c '.components[]' compilation-recipe.json)"
+                rm compilation-recipe.json
+              done <<<"$(jq -c 'keys[]' components.json)"
+
+              # Now creating the JSON file with the needed transformations
+              JSON_PACKAGES=()
+              for PACKAGE_ID in "${!PACKAGES[@]}"
+              do
+                VALUES=(${PACKAGES[$PACKAGE_ID]// / })
+                CLEANED_URL=(${VALUES[1]/git+/})
+                if [ -z "$CLEANED_URL" ]
+                then
+                  echo "[WARNING] The URL for $PACKAGE_ID:${VALUES[0]} is missing in the recipe"
+                else
+                  JSON_PACKAGES+=($(jq -n '{"_unique_id": $uniqueID, "name": $name, "version": $version, "url": $url, "repository": "other"}' --arg uniqueID "other:$PACKAGE_ID:${VALUES[0]}" --arg name $PACKAGE_ID --arg version ${VALUES[0]} --arg url $CLEANED_URL))
+                fi
+              done
+              JSON_ARRAY=$(printf "%s" "${JSON_PACKAGES[@]}" | jq -s)
+              echo "$JSON_ARRAY" > ${container}/packages.json
+              # s3cmd put --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} ${container}/packages.json s3://${{ secrets.AWS_S3_BUCKET }}/$ASSET/$VERSION/$OS/$ARCH/$REVISION/packages.json
             else
-              rolling_tags="$(yq '.rolling-tags' ${{ matrix.container }}/tags-info.yaml -o json | jq -c)"
-              name="$(echo "${{ matrix.container }}" | awk -F '/' '{print $2}')"
-              branch="$(echo "${{ matrix.container }}" | awk -F '/' '{print $3}')"
-              echo "rolling_tags=${rolling_tags}" >> $GITHUB_OUTPUT
-              echo "tag=${tag}" >> $GITHUB_OUTPUT
-              echo "name=${name}" >> $GITHUB_OUTPUT
-              echo "branch=${branch}" >> $GITHUB_OUTPUT
-              echo "result=ok" >> $GITHUB_OUTPUT
+              echo "$IMAGE_NAME:$VERSION doesn't have external components.json"
             fi
-          else
-            # Container folder doesn't exists we are assuming a deprecation
-            echo "result=skip" >> $GITHUB_OUTPUT
-          fi
-      - id: get-registry-credentials
-        name: Get marketplace's registry credentials
-        run: |
-          csp_auth_token=$(curl -s -H 'Content-Type: application/x-www-form-urlencoded' -X POST -d "grant_type=refresh_token&api_token=${{ secrets.PROD_MARKETPLACE_API_TOKEN }}" https://console.cloud.vmware.com/csp/gateway/am/api/auth/api-tokens/authorize | jq -re .access_token)
-          repo_info=$(curl -s -X POST -H "Content-Type: application/json" -H "csp-auth-token:$csp_auth_token" -d '{"withCredentials":true, "storageType":"OCI"}' https://gtw.marketplace.cloud.vmware.com/api/v1/repositories/transient)
-          marketplace_user=$(echo "$repo_info" | jq -re .response.repodetails.username)
-          marketplace_passwd=$(echo "$repo_info" | jq -re .response.repodetails.token)
-          echo "::add-mask::${marketplace_user}"
-          echo "::add-mask::${marketplace_passwd}"
-          echo "marketplace_user=${marketplace_user}" >> $GITHUB_OUTPUT
-          echo "marketplace_passwd=${marketplace_passwd}" >> $GITHUB_OUTPUT
-      - id: get-dsl-filepath
-        name: Get pipeline DSL filepath
-        run: |
-          dsl_path="${{ steps.get-container-metadata.outputs.name }}"
-          if [[ -d ".vib/${dsl_path}/${{ steps.get-container-metadata.outputs.branch }}" ]]; then
-            dsl_path="${dsl_path}/${{ steps.get-container-metadata.outputs.branch }}"
-          fi
-          echo "dsl_path=${dsl_path}" >> $GITHUB_OUTPUT
-      - uses: vmware-labs/vmware-image-builder-action@main
-        name: 'Publish ${{ steps.get-container-metadata.outputs.name }}: ${{ steps.get-container-metadata.outputs.tag }}'
-        if: ${{ steps.get-container-metadata.outputs.result == 'ok' }}
+          done
+      - uses: actions/upload-artifact@v3
         with:
-          pipeline: ${{ steps.get-dsl-filepath.outputs.dsl_path }}/vib-publish.json
-        env:
-          # Path with docker resources
-          VIB_ENV_PATH:  ${{ matrix.container }}
-          # Container name
-          VIB_ENV_CONTAINER: ${{ steps.get-container-metadata.outputs.name }}
-          VIB_ENV_TAG: ${{ steps.get-container-metadata.outputs.tag }}
-          VIB_ENV_ROLLING_TAGS: ${{ steps.get-container-metadata.outputs.rolling_tags }}
-          VIB_ENV_REGISTRY_URL: ${{ secrets.PROD_MARKETPLACE_REGISTRY_URL }}
-          VIB_ENV_REGISTRY_USERNAME: ${{ steps.get-registry-credentials.outputs.marketplace_user }}
-          VIB_ENV_REGISTRY_PASSWORD: ${{ steps.get-registry-credentials.outputs.marketplace_passwd }}
-      - name: Install s3cmd
-          run: sudo apt-get install -y s3cmd
-      - name: 'Getting 3rd party packages for OSSPI for ${{ steps.get-container-metadata.outputs.name }}: ${{ steps.get-container-metadata.outputs.tag }}'
-        if: ${{ steps.get-container-metadata.outputs.result == 'ok' }}
-        env:
-          # Path with docker resources
-          VIB_ENV_PATH: ${{ matrix.container }}
-        run: |
-          # If it's set from outside, can be changed
-          ARCH="${ARCH:-amd64}"
-          IMAGE_NAME=$(grep -oE "org.opencontainers.image.ref.name=\".+\"" ${{ matrix.container }}/Dockerfile | sed -nr "s|org.opencontainers.image.ref.name=\"(.+)\"|\1|p")
-          VERSION=$(grep -oE "org.opencontainers.image.version=\".+\"" ${{ matrix.container }}/Dockerfile | sed -nr "s|org.opencontainers.image.version=\"(.+)\"|\1|p")
-          ASSET=$(grep -oE "org.opencontainers.image.title=\".+\"" ${{ matrix.container }}/Dockerfile | sed -nr "s|org.opencontainers.image.title=\"(.+)\"|\1|p")
-          CLEANED_IMAGE_NAME=${IMAGE_NAME#"$VERSION-"}
-          # split by -
-          ASSET_DATA=(${CLEANED_IMAGE_NAME//-/ })
-          OS=${ASSET_DATA[0]}-${ASSET_DATA[1]}
-          REVISION=(${ASSET_DATA[2]/r/})
-
-          COMPONENTS_FILES=$(s3cmd ls -l --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$ASSET/$VERSION/$OS/$ARCH/$REVISION/ | grep "components.json" | wc -l)
-          # If the components.json file, so it seems has external packages
-          if [[ $COMPONENTS_FILES -gt 0 ]]; then
-            s3cmd get --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$ASSET/$VERSION/$OS/$ARCH/$REVISION/components.json components.json
-
-            declare -A PACKAGES
-            # Iterating over the external components to get the involved elements
-            while read -r COMPONENT_ID; do
-              COMPONENT_VERSION_FULL=$(jq -c ".$COMPONENT_ID.version" components.json)
-              COMPONENT_VERSION_FULL=(${COMPONENT_VERSION_FULL//"\""/})
-
-              # Sanityzing strings
-              COMPONENT_ID=(${COMPONENT_ID//"\""/})
-              #split by "-"
-              COMPONENT_PARTS=(${COMPONENT_VERSION_FULL//-/ })
-              COMPONENT_VERSION=${COMPONENT_PARTS[0]}
-
-              COMPILATION_RECIPE=$(s3cmd ls -l --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$COMPONENT_ID/$COMPONENT_VERSION/$OS/$ARCH/ | grep "compilation-recipe.json" | wc -l)
-              # If the components.json file, so it seems has external packages
-              if [[ $COMPILATION_RECIPE -gt 0 ]]; then
-                s3cmd get --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$COMPONENT_ID/$COMPONENT_VERSION/$OS/$ARCH/compilation-recipe.json compilation-recipe.json
-              else
-                s3cmd get --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$COMPONENT_ID/$COMPONENT_VERSION-${COMPONENT_PARTS[1]}/$OS/$ARCH/compilation-recipe.json compilation-recipe.json
-              fi
-              # now getting each component to be reported
-              while read -r JSON_PACKAGE; do
-                PACKAGE_ID=$(echo "$JSON_PACKAGE" | jq -r '.id' )
-                PACKAGE_VERSION=$(echo "$JSON_PACKAGE" | jq -r '.version' )
-                PACKAGE_URL=$(echo "$JSON_PACKAGE" | jq -r '.source.upstreamSourceUrl')
-                PACKAGES[$PACKAGE_ID]="$PACKAGE_VERSION $PACKAGE_URL"
-              done <<<"$(jq -c '.components[]' compilation-recipe.json)"
-              rm compilation-recipe.json
-            done <<<"$(jq -c 'keys[]' components.json)"
-
-            # Now creating the JSON file with the needed transformations
-            JSON_PACKAGES=()
-            for PACKAGE_ID in "${!PACKAGES[@]}"
-            do
-              VALUES=(${PACKAGES[$PACKAGE_ID]// / })
-              CLEANED_URL=(${VALUES[1]/git+/})
-              if [ -z "$CLEANED_URL" ]
-              then
-                echo "[WARNING] The URL for $PACKAGE_ID:${VALUES[0]} is missing in the recipe"
-              else
-                JSON_PACKAGES+=($(jq -n '{"_unique_id": $uniqueID, "name": $name, "version": $version, "url": $url, "repository": "other"}' --arg uniqueID "other:$PACKAGE_ID:${VALUES[0]}" --arg name $PACKAGE_ID --arg version ${VALUES[0]} --arg url $CLEANED_URL))
-              fi
-            done
-            JSON_ARRAY=$(printf "%s" "${JSON_PACKAGES[@]}" | jq -s)
-            echo "$JSON_ARRAY" > packages.json
-            s3cmd put --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} packages.json s3://${{ secrets.AWS_S3_BUCKET }}/$ASSET/$VERSION/$OS/$ARCH/$REVISION/packages.json
-          else
-            echo "$IMAGE_NAME:$VERSION doesn't have external components.json"
-          fi
+          name: containers-to-publish
+          path: ${{ github.workspace }}
