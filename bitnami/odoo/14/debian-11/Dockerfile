@@ -59,3 +59,4 @@ EXPOSE 3000 8069 8072
 USER root
 ENTRYPOINT [ "/opt/bitnami/scripts/odoo/entrypoint.sh" ]
 CMD [ "/opt/bitnami/scripts/odoo/run.sh" ]
+
