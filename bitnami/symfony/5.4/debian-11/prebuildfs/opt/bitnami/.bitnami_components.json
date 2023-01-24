@@ -22,9 +22,9 @@
     },
     "symfony": {
         "arch": "amd64",
-        "digest": "d9b606de812b584ccde81cfb264b77b516f40a8fa2870e9dd5bb779964b6a9a3",
+        "digest": "30c38486e6fe2ad92a065691b9d82f87e3f9a5e85ab584a572341f87377921aa",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.4.18-1"
+        "version": "5.4.19-0"
     }
 }
