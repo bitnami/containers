@@ -1,17 +1,17 @@
 {
     "java": {
         "arch": "amd64",
-        "digest": "014d5d162d28116c88453e7739f35bf41042ce54033bf1471c3b5e68e5a25bae",
+        "digest": "a89ace6cbda8b33cc4e18bb0954e8b3316eb810f4f832516d60dfb49bd5f20f2",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "17.0.5-8-3"
+        "version": "17.0.6-10-0"
     },
     "jruby": {
         "arch": "amd64",
-        "digest": "17e1b08031af0a861bcfe13404c53f0c617ada9ae9be16190e509b4b57a4825a",
+        "digest": "0feaa05f4948b6d9e88200897be8564008f884950daa2dbe311ddf6b6d846111",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.4.0-0-5"
+        "version": "9.4.0-0-6"
     },
     "node": {
         "arch": "amd64",

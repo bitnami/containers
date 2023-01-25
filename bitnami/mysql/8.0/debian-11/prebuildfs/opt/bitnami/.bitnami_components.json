@@ -8,16 +8,16 @@
     },
     "ini-file": {
         "arch": "amd64",
-        "digest": "2dbb90172e7ea19b23975df82fa85eb37ab1fff0fabb89d6ee4e5093ec8cc867",
+        "digest": "d82fb302437effeec0d20f104b35304c46cf295bb3af56ab00d69ad4ffd39eb0",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.4.4-2"
+        "version": "1.4.5-0"
     },
     "mysql": {
         "arch": "amd64",
-        "digest": "076caff3f1c2b7c9a34077c02d2044537d66ae4bf7e3411cb737236b61cdbbb9",
+        "digest": "ef8fdb6b4b9c78916bf1b1415bda0dbc1aaaa023d01bd20ce38002ce7793fa76",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.31-2"
+        "version": "8.0.32-0"
     }
 }

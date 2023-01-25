@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.7.0-debian-11-r12" \
+      org.opencontainers.image.ref.name="2.7.0-debian-11-r14" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/harbor-portal" \
       org.opencontainers.image.title="harbor-portal" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -23,7 +23,7 @@ RUN install_packages ca-certificates curl libcrypt1 libgeoip1 libpcre3 libssl1.1
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "nginx-1.23.3-1-linux-${OS_ARCH}-debian-11" \
-      "render-template-1.0.4-2-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.5-0-linux-${OS_ARCH}-debian-11" \
       "harbor-2.7.0-2-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
     ) && \

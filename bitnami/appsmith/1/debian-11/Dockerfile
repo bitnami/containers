@@ -5,11 +5,11 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.9.2-debian-11-r2" \
+      org.opencontainers.image.ref.name="1.9.4-debian-11-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/appsmith" \
       org.opencontainers.image.title="appsmith" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.9.2"
+      org.opencontainers.image.version="1.9.4"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,15 +22,15 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages acl ca-certificates curl gettext libbz2-1.0 libcom-err2 libcrypt1 libffi7 libgcc-s1 libgeoip1 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncursesw6 libnsl2 libpcre3 libreadline8 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 libtirpc3 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "python-3.8.16-0-linux-${OS_ARCH}-debian-11" \
-      "wait-for-port-1.0.5-1-linux-${OS_ARCH}-debian-11" \
-      "render-template-1.0.4-1-linux-${OS_ARCH}-debian-11" \
-      "node-16.19.0-0-linux-${OS_ARCH}-debian-11" \
-      "nginx-1.23.3-0-linux-${OS_ARCH}-debian-11" \
-      "mongodb-shell-1.6.2-0-linux-${OS_ARCH}-debian-11" \
-      "java-11.0.17-7-2-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-0-linux-${OS_ARCH}-debian-11" \
-      "appsmith-1.9.2-0-linux-${OS_ARCH}-debian-11" \
+      "python-3.8.16-1-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.6-0-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.5-0-linux-${OS_ARCH}-debian-11" \
+      "node-16.19.0-1-linux-${OS_ARCH}-debian-11" \
+      "nginx-1.23.3-1-linux-${OS_ARCH}-debian-11" \
+      "mongodb-shell-1.6.2-1-linux-${OS_ARCH}-debian-11" \
+      "java-17.0.6-10-0-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
+      "appsmith-1.9.4-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -46,9 +46,9 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
-RUN /opt/bitnami/scripts/appsmith/postunpack.sh
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
-ENV APP_VERSION="1.9.2" \
+RUN /opt/bitnami/scripts/appsmith/postunpack.sh
+ENV APP_VERSION="1.9.4" \
     BITNAMI_APP_NAME="appsmith" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
