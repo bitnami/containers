@@ -1,5 +1,5 @@
 name: '[CI/CD] CD Pipeline Prepare'
-run-name: " ${{ github.event_name == 'workflow_dispatch' && format('[CD] Retrying SHA: {0}', inputs.sha) || '' }}"
+run-name: "${{ github.event_name == 'workflow_dispatch' && format('[CD] Retrying SHA: {0}', inputs.sha) || '' }}"
 on: # rebuild any PRs and main branch changes
   workflow_dispatch:
     inputs:
@@ -24,19 +24,21 @@ jobs:
       github.event_name == 'workflow_dispatch' ||
       (github.event.head_commit.author.username == 'bitnami-bot' && github.event.forced == false)
     outputs:
-      result: ${{ steps.get-containers.outputs.result }}
-      containers: ${{ steps.get-containers.outputs.containers }}
+      result: ${{ steps.get-publish-metadata.outputs.result }}
+      containers: ${{ steps.get-publish-metadata.outputs.containers }}
     steps:
       - name: Install s3cmd
         run: sudo apt-get install -y s3cmd
-      - uses: actions/checkout@v3
-        name: Checkout Repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
         # Full history is not required anymore
         with:
           ref: ${{github.event_name == 'workflow_dispatch' && inputs.sha || '' }}
+          path: ./source
           fetch-depth: 1
-      - id: get-containers
-        name: Get modified containers path
+      - id: get-publish-metadata
+        name: Get information about containers to publish
+        working-directory: ./source
         env:
           GITHUB_COMMITS: ${{ github.event_name == 'workflow_dispatch' && format('[{{"id":"{0}"}}]', inputs.sha) || toJson(github.event.commits) }}
         run: |
@@ -60,12 +62,11 @@ jobs:
                   if [[ -z "${tag}" ]]; then
                     echo "No tag found for: ${container}"
                   else
-                    name="$(grep -oE "org.opencontainers.image.ref.name=\".+\"" ${container}/Dockerfile | sed -nr "s|org.opencontainers.image.title=\"(.+)\"|\1|p")"
-                    app_version="$(grep -oE "org.opencontainers.image.ref.name=\".+\"" ${container}/Dockerfile | sed -nr "s|org.opencontainers.image.version=\"(.+)\"|\1|p")"
+                    name="$(grep -oE "org.opencontainers.image.title=\".+\"" ${container}/Dockerfile | sed -nr "s|org.opencontainers.image.title=\"(.+)\"|\1|p")"
+                    app_version="$(grep -oE "org.opencontainers.image.version=\".+\"" ${container}/Dockerfile | sed -nr "s|org.opencontainers.image.version=\"(.+)\"|\1|p")"
                     rolling_tags="$(yq '.rolling-tags' ${container}/tags-info.yaml -o json | jq -c)"
                     branch="$(echo "${container}" | awk -F '/' '{print $3}')"
-
-                    container_json=$(jq -n '{"name": $name, "path": $path, "branch": $branch, "app_version": $app_version, "tag": $tag, "rolling_tags": $rolling_tags}' --arg name "$name" --arg app_version "$app_version" --arg branch "$branch" --arg path "$container" --argjson rolling_tags "$rolling_tags")
+                    container_json=$(jq -n '{"name": $name, "path": $path, "branch": $branch, "app_version": $app_version, "tag": $tag, "rolling_tags": $rolling_tags}' --arg name "$name" --arg app_version "$app_version" --arg branch "$branch" --arg path "$container" --arg tag "$tag" --argjson rolling_tags "$rolling_tags")
                     containers_json+=("${container_json}")
                   fi
                 fi
@@ -82,7 +83,8 @@ jobs:
             echo "${containers_json}" > publish-metadata.json
           fi
       - name: 'Getting 3rd party packages for OSSPI'
-        if: ${{ steps.get-container-metadata.outputs.result == 'ok' }}
+        working-directory: ./source
+        if: ${{ steps.get-publish-metadata.outputs.result == 'ok' }}
         run: |
           CONTAINERS_TO_PUBLISH=$(cat publish-metadata.json | jq -cr '.[]')
           for CONTAINER in "${CONTAINERS_TO_PUBLISH[@]}"; do
@@ -116,13 +118,13 @@ jobs:
                 COMPONENT_VERSION=${COMPONENT_PARTS[0]}
 
                 COMPILATION_RECIPE=""
-                COMPILATION_RECIPE=$(s3cmd ls -l --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$COMPONENT_ID/$COMPONENT_VERSION/$OS/$ARCH/ | grep "compilation-recipe.json" | wc -l)
+                #COMPILATION_RECIPE=$(s3cmd ls -l --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$COMPONENT_ID/$COMPONENT_VERSION/$OS/$ARCH/ | grep "compilation-recipe.json" | wc -l)
                 # If the components.json file, so it seems has external packages
-                if [[ $COMPILATION_RECIPE -gt 0 ]]; then
-                  # s3cmd get --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$COMPONENT_ID/$COMPONENT_VERSION/$OS/$ARCH/compilation-recipe.json compilation-recipe.json
-                else
-                  # s3cmd get --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$COMPONENT_ID/$COMPONENT_VERSION-${COMPONENT_PARTS[1]}/$OS/$ARCH/compilation-recipe.json compilation-recipe.json
-                fi
+                # if [[ $COMPILATION_RECIPE -gt 0 ]]; then
+                #   s3cmd get --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$COMPONENT_ID/$COMPONENT_VERSION/$OS/$ARCH/compilation-recipe.json compilation-recipe.json
+                # else
+                #   s3cmd get --access_key=${{ secrets.AWS_ACCESS_KEY_ID }} --secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} s3://${{ secrets.AWS_S3_BUCKET }}/$COMPONENT_ID/$COMPONENT_VERSION-${COMPONENT_PARTS[1]}/$OS/$ARCH/compilation-recipe.json compilation-recipe.json
+                # fi
                 # now getting each component to be reported
                 while read -r JSON_PACKAGE; do
                   PACKAGE_ID=$(echo "$JSON_PACKAGE" | jq -r '.id' )
@@ -153,7 +155,22 @@ jobs:
               echo "$IMAGE_NAME:$VERSION doesn't have external components.json"
             fi
           done
+      - name: 'Package artifacts'
+        if: ${{ steps.get-publish-metadata.outputs.result == 'ok' }}
+        run: |
+          # Create dist folder
+          mkdir dist
+          # Copy publish metadata
+          cp source/publish-metadata.json dist/
+          # Compress package
+          tar -czf dist/package.tgz -C source/ ./
       - uses: actions/upload-artifact@v3
+        if: ${{ steps.get-publish-metadata.outputs.result == 'ok' }}
         with:
-          name: containers-to-publish
-          path: ${{ github.workspace }}
+          name: publish-metadata.json
+          path: ./dist/publish-metadata.json
+      - uses: actions/upload-artifact@v3
+        if: ${{ steps.get-publish-metadata.outputs.result == 'ok' }}
+        with:
+          name: package.tgz
+          path: ./dist/package.tgz
