@@ -204,9 +204,9 @@ EOF
         restore_persisted_app "$app_name" "$SONARQUBE_DATA_TO_PERSIST"
     fi
 
-    # Check and move provisioned extensions from mounted provisioning directory to application extensions directory
+    # Check and move provisioned content from mounted provisioning directory to application directory
     if ! is_mounted_dir_empty "$SONARQUBE_MOUNTED_PROVISIONING_DIR"; then
-                info "Found mounted extensions provisioning directory"
+                info "Found mounted provisioning directory"
                 sonarqube_copy_mounted_config
     fi
 
@@ -395,8 +395,8 @@ sonarqube_stop() {
 #########################
 sonarqube_copy_mounted_config() {
     if ! is_dir_empty "$SONARQUBE_MOUNTED_PROVISIONING_DIR"; then
-        if ! cp -Lr "${SONARQUBE_MOUNTED_PROVISIONING_DIR}"/* "${SONARQUBE_EXTENSIONS_DIR}"; then
-            error "Issue copying mounted configuration files from $SONARQUBE_MOUNTED_PROVISIONING_DIR to $SONARQUBE_EXTENSIONS_DIR. Make sure you are not mounting configuration files in $SONARQUBE_MOUNTED_PROVISIONING_DIR and $SONARQUBE_EXTENSIONS_DIR at the same time"
+        if ! cp -Lr "${SONARQUBE_MOUNTED_PROVISIONING_DIR}"/* "${SONARQUBE_BASE_DIR}"; then
+            error "Issue copying mounted configuration files from $SONARQUBE_MOUNTED_PROVISIONING_DIR to $SONARQUBE_BASE_DIR. Make sure you are not mounting configuration files in $SONARQUBE_MOUNTED_PROVISIONING_DIR and $SONARQUBE_BASE_DIR at the same time"
             exit 1
         fi
     fi
