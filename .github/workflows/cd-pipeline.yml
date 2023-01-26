@@ -33,7 +33,7 @@ jobs:
           curl -sSL -o publish-metadata.json.zip -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" -H "Authorization: Bearer $GITHUB_TOKEN" $PUBLISH_METADATA_URL
           unzip publish-metadata.json.zip
           containers=$(cat publish-metadata.json | jq -c)
-          PACKAGE_URL="$(jq -r '.artifacts[] | select(.name == "package.tgz") | .archive_download_url' artifacts.json)"
+          PACKAGE_URL="$(jq -r '.artifacts[] | select(.name == "package") | .archive_download_url' artifacts.json)"
           echo "package_url=${PACKAGE_URL}" >> $GITHUB_OUTPUT
           echo "containers=${containers}" >> $GITHUB_OUTPUT
       - id: get-registry-credentials
