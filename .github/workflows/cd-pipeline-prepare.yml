@@ -34,11 +34,9 @@ jobs:
         # Full history is not required anymore
         with:
           ref: ${{github.event_name == 'workflow_dispatch' && inputs.sha || '' }}
-          path: ./source
           fetch-depth: 1
       - id: get-publish-metadata
         name: Get information about containers to publish
-        working-directory: ./source
         env:
           GITHUB_COMMITS: ${{ github.event_name == 'workflow_dispatch' && format('[{{"id":"{0}"}}]', inputs.sha) || toJson(github.event.commits) }}
         run: |
@@ -83,7 +81,6 @@ jobs:
             echo "${containers_json}" > publish-metadata.json
           fi
       - name: 'Getting 3rd party packages for OSSPI'
-        working-directory: ./source
         if: ${{ steps.get-publish-metadata.outputs.result == 'ok' }}
         run: |
           CONTAINERS_TO_PUBLISH=$(cat publish-metadata.json | jq -cr '.[]')
@@ -155,22 +152,13 @@ jobs:
               echo "$IMAGE_NAME:$VERSION doesn't have external components.json"
             fi
           done
-      - name: 'Package artifacts'
-        if: ${{ steps.get-publish-metadata.outputs.result == 'ok' }}
-        run: |
-          # Create dist folder
-          mkdir dist
-          # Copy publish metadata
-          cp source/publish-metadata.json dist/
-          # Compress package
-          tar -czf dist/package.tgz -C source/ ./
       - uses: actions/upload-artifact@v3
         if: ${{ steps.get-publish-metadata.outputs.result == 'ok' }}
         with:
           name: publish-metadata.json
-          path: ./dist/publish-metadata.json
+          path: ./publish-metadata.json
       - uses: actions/upload-artifact@v3
         if: ${{ steps.get-publish-metadata.outputs.result == 'ok' }}
         with:
-          name: package.tgz
-          path: ./dist/package.tgz
+          name: package
+          path: ${{github.workspace}}
