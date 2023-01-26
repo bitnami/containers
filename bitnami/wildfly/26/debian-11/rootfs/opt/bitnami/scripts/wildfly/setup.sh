@@ -11,6 +11,7 @@ set -o pipefail
 . /opt/bitnami/scripts/libwildfly.sh
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libvalidations.sh
 
 # Load WildFly environment
 . /opt/bitnami/scripts/wildfly-env.sh
