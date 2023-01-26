@@ -41,6 +41,7 @@ matomo_env_vars=(
     MATOMO_DATABASE_SSL_CERT_FILE
     MATOMO_DATABASE_SSL_KEY_FILE
     MATOMO_VERIFY_DATABASE_SSL
+    MATOMO_DATABASE_TABLE_PREFIX
     MATOMO_SMTP_HOST
     MATOMO_SMTP_PORT_NUMBER
     MATOMO_SMTP_USER
@@ -128,6 +129,7 @@ export MATOMO_DATABASE_PORT_NUMBER="${MATOMO_DATABASE_PORT_NUMBER:-3306}" # only
 export MATOMO_DATABASE_NAME="${MATOMO_DATABASE_NAME:-bitnami_matomo}" # only used during the first initialization
 export MATOMO_DATABASE_USER="${MATOMO_DATABASE_USER:-bn_matomo}" # only used during the first initialization
 export MATOMO_DATABASE_PASSWORD="${MATOMO_DATABASE_PASSWORD:-}" # only used during the first initialization
+export MATOMO_DATABASE_TABLE_PREFIX="${MATOMO_DATABASE_TABLE_PREFIX:-matomo_}" # only used during the first initialization
 
 # PHP configuration
 export PHP_DEFAULT_MEMORY_LIMIT="256M" # only used at build time
