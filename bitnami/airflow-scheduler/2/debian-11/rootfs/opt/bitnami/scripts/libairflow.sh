@@ -111,22 +111,53 @@ airflow_initialize() {
     info "Trying to connect to the database server"
     airflow_wait_for_postgresql_connection
     # Check if the Airflow database has been already initialized
-    if ! debug_execute airflow db check-migrations; then
+    if ! airflow_execute db check-migrations; then
         # Delete pid file
         rm -f "$AIRFLOW_PID_FILE"
 
         # Initialize database
         info "Populating database"
-        debug_execute airflow db init
+        airflow_execute db init
 
         airflow_create_admin_user
         airflow_create_pool
     else
         # Upgrade database
         info "Upgrading database schema"
-        debug_execute airflow db upgrade
+        airflow_execute db upgrade
         true # Avoid return false when I am not root
     fi
+}
+
+########################
+# Executes the 'airflow' CLI with the specified arguments and print result to stdout/stderr
+# Globals:
+#   AIRFLOW_*
+# Arguments:
+#   $1..$n - Arguments to pass to the CLI call
+# Returns:
+#   None
+#########################
+airflow_execute_print_output() {
+    # Run as web server user to avoid having to change permissions/ownership afterwards
+    if am_i_root; then
+        gosu "$AIRFLOW_DAEMON_USER" airflow "$@"
+    else
+        airflow "$@"
+    fi
+}
+
+########################
+# Executes the 'airflow' CLI with the specified arguments
+# Globals:
+#   AIRFLOW_*
+# Arguments:
+#   $1..$n - Arguments to pass to the CLI call
+# Returns:
+#   None
+#########################
+airflow_execute() {
+    debug_execute airflow_execute_print_output "$@"
 }
 
 ########################
@@ -140,7 +171,7 @@ airflow_initialize() {
 #########################
 airflow_generate_config() {
     # Generate Airflow default files
-    debug_execute airflow version
+    airflow_execute version
 
     # Setup Airflow base URL
     airflow_configure_base_url
@@ -376,7 +407,7 @@ airflow_configure_celery_executor() {
 #   true if the database connection succeeded, false otherwise
 #########################
 airflow_wait_for_postgresql_connection() {
-    if ! retry_while "debug_execute airflow db check"; then
+    if ! retry_while "airflow_execute db check"; then
         error "Could not connect to the database"
         return 1
     fi
@@ -391,7 +422,7 @@ airflow_wait_for_postgresql_connection() {
 #########################
 airflow_create_admin_user() {
     info "Creating Airflow admin user"
-    debug_execute airflow users create -r "Admin" -u "$AIRFLOW_USERNAME" -e "$AIRFLOW_EMAIL" -p "$AIRFLOW_PASSWORD" -f "$AIRFLOW_FIRSTNAME" -l "$AIRFLOW_LASTNAME"
+    airflow_execute users create -r "Admin" -u "$AIRFLOW_USERNAME" -e "$AIRFLOW_EMAIL" -p "$AIRFLOW_PASSWORD" -f "$AIRFLOW_FIRSTNAME" -l "$AIRFLOW_LASTNAME"
 }
 
 ########################
@@ -404,7 +435,7 @@ airflow_create_admin_user() {
 airflow_create_pool() {
     if [[ -n "$AIRFLOW_POOL_NAME" ]] && [[ -n "$AIRFLOW_POOL_SIZE" ]] && [[ -n "$AIRFLOW_POOL_DESC" ]]; then
         info "Creating Airflow pool"
-        debug_execute airflow pool -s "$AIRFLOW_POOL_NAME" "$AIRFLOW_POOL_SIZE" "$AIRFLOW_POOL_DESC"
+        airflow_execute pool -s "$AIRFLOW_POOL_NAME" "$AIRFLOW_POOL_SIZE" "$AIRFLOW_POOL_DESC"
     fi
 }
 
@@ -428,7 +459,7 @@ is_airflow_running() {
 }
 
 ########################
-# Check if Airflow is running
+# Check if Airflow is not running
 # Globals:
 #   AIRFLOW_PID_FILE
 # Arguments:
@@ -452,4 +483,54 @@ is_airflow_not_running() {
 airflow_stop() {
     info "Stopping Airflow..."
     stop_service_using_pid "$AIRFLOW_PID_FILE"
+}
+
+########################
+# Check if airflow-exporter is running
+# Globals:
+#   AIRFLOW_EXPORTER_PID_FILE
+# Arguments:
+#   None
+# Returns:
+#   Whether airflow-exporter is running
+########################
+is_airflow_exporter_running() {
+    # airflow-exporter does not create any PID file
+    # We regenerate the PID file for each time we query it to avoid getting outdated
+    pgrep -f "airflow-prometheus-exporter" | head -n 1 > "$AIRFLOW_EXPORTER_PID_FILE"
+
+    local pid
+    pid="$(get_pid_from_file "$AIRFLOW_EXPORTER_PID_FILE")"
+    if [[ -n "$pid" ]]; then
+        is_service_running "$pid"
+    else
+        false
+    fi
+}
+
+########################
+# Check if airflow-exporter is not running
+# Globals:
+#   AIRFLOW_EXPORTER_PID_FILE
+# Arguments:
+#   None
+# Returns:
+#   Whether airflow-exporter is not running
+########################
+is_airflow_exporter_not_running() {
+    ! is_airflow_exporter_running
+}
+
+########################
+# Stop airflow-exporter
+# Globals:
+#   AIRFLOW*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+airflow_exporter_stop() {
+    info "Stopping airflow-exporter..."
+    stop_service_using_pid "$AIRFLOW_EXPORTER_PID_FILE"
 }
