@@ -63,6 +63,7 @@ jobs:
         name: Checkout Packages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PACKAGE_URL: ${{ needs.get-metadata.outputs.package_url }}
         run: |
           curl -sSL -o /tmp/package.zip -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" -H "Authorization: Bearer $GITHUB_TOKEN" "${PACKAGE_URL}"
           unzip /tmp/package.zip
