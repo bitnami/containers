@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.6.3-debian-11-r6" \
+      org.opencontainers.image.ref.name="3.6.3-debian-11-r7" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/grafana-image-renderer" \
       org.opencontainers.image.title="grafana-image-renderer" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -24,7 +24,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.8.16-1-linux-${OS_ARCH}-debian-11" \
       "node-16.19.0-1-linux-${OS_ARCH}-debian-11" \
-      "grafana-image-renderer-3.6.3-1-linux-${OS_ARCH}-debian-11" \
+      "grafana-image-renderer-3.6.3-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
