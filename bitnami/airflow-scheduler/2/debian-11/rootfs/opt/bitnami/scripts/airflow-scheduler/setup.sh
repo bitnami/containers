@@ -15,6 +15,7 @@ set -o pipefail
 . /opt/bitnami/scripts/libfs.sh
 . /opt/bitnami/scripts/libairflowscheduler.sh
 
+
 # Ensure Airflow environment variables settings are valid
 airflow_scheduler_validate
 # Ensure Airflow daemon user exists when running as root
