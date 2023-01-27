@@ -225,8 +225,8 @@ pgbouncer_initialize() {
                 break;
             else
                 dsn=${!VAR_NAME};
-                ini-file set --section databases --key "$(echo $dsn | cut -d = -f 1)" --value "$(echo $dsn | cut -d = -f 2-)" "$PGBOUNCER_CONF_FILE";
-                i=$(( $i + 1 ));
+                ini-file set --section databases --key "$(echo "$dsn" | cut -d = -f 1)" --value "$(echo "$dsn" | cut -d = -f 2-)" "$PGBOUNCER_CONF_FILE";
+                i=$(( "$i" + 1 ));
             fi;
         done;
 
