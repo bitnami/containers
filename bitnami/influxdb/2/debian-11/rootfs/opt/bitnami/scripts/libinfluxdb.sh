@@ -7,129 +7,10 @@
 # Load Generic Libraries
 . /opt/bitnami/scripts/liblog.sh
 . /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/libservice.sh
 . /opt/bitnami/scripts/libvalidations.sh
 
 # Functions
-
-########################
-# Load global variables used on InfluxDB configuration
-# Globals:
-#   INFLUXDB_*
-# Arguments:
-#   None
-# Returns:
-#   Series of exports to be used as 'eval' arguments
-#########################
-influxdb_env() {
-    cat <<"EOF"
-# Format log messages
-export MODULE="influxdb"
-export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
-# Paths
-export INFLUXDB_BASE_DIR="/opt/bitnami/influxdb"
-export INFLUXDB_VOLUME_DIR="/bitnami/influxdb"
-export INFLUXDB_BIN_DIR="${INFLUXDB_BASE_DIR}/bin"
-export INFLUXDB_DATA_DIR="${INFLUXDB_DATA_DIR:-${INFLUXDB_VOLUME_DIR}/data}"
-export INFLUXDB_DATA_WAL_DIR="${INFLUXDB_DATA_WAL_DIR:-${INFLUXDB_VOLUME_DIR}/wal}"
-export INFLUXDB_META_DIR="${INFLUXDB_META_DIR:-${INFLUXDB_VOLUME_DIR}/meta}"
-export INFLUXDB_CONF_DIR="${INFLUXDB_BASE_DIR}/etc"
-export INFLUXDB_CONF_FILE="${INFLUXDB_CONF_DIR}/influxdb.conf"
-export INFLUXDB_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
-# Users
-export INFLUXDB_DAEMON_USER="influxdb"
-export INFLUXDB_DAEMON_GROUP="influxdb"
-# InfluxDB settings
-export INFLUXDB_REPORTING_DISABLED="${INFLUXDB_REPORTING_DISABLED:-true}"
-export INFLUXDB_HTTP_PORT_NUMBER="${INFLUXDB_HTTP_PORT_NUMBER:-8086}"
-export INFLUXDB_HTTP_BIND_ADDRESS="${INFLUXDB_HTTP_BIND_ADDRESS:-0.0.0.0:${INFLUXDB_HTTP_PORT_NUMBER}}"
-export INFLUXDB_HTTP_READINESS_TIMEOUT="${INFLUXDB_HTTP_READINESS_TIMEOUT:-60}"
-export INFLUXDB_PORT_NUMBER="${INFLUXDB_PORT_NUMBER:-8088}"
-export INFLUXDB_BIND_ADDRESS="${INFLUXDB_BIND_ADDRESS:-0.0.0.0:${INFLUXDB_PORT_NUMBER}}"
-export INFLUXDB_PORT_READINESS_TIMEOUT="${INFLUXDB_PORT_READINESS_TIMEOUT:-30}"
-# Authentication
-export INFLUXDB_ADMIN_USER="${INFLUXDB_ADMIN_USER:-admin}"
-export INFLUXDB_ADMIN_CONFIG_NAME="${INFLUXDB_ADMIN_CONFIG_NAME:-default}"
-export INFLUXDB_ADMIN_ORG="${INFLUXDB_ADMIN_ORG:-primary}"
-export INFLUXDB_ADMIN_BUCKET="${INFLUXDB_ADMIN_BUCKET:-primary}"
-export INFLUXDB_ADMIN_RETENTION="${INFLUXDB_ADMIN_RETENTION:-0}"
-export INFLUXDB_USER="${INFLUXDB_USER:-}"
-export INFLUXDB_USER_ORG="${INFLUXDB_USER_ORG:-${INFLUXDB_ADMIN_ORG}}"
-export INFLUXDB_USER_BUCKET="${INFLUXDB_USER_BUCKET:-}"
-export INFLUXDB_CREATE_USER_TOKEN="${INFLUXDB_CREATE_USER_TOKEN:-no}"
-export INFLUXDB_READ_USER="${INFLUXDB_READ_USER:-}"
-export INFLUXDB_WRITE_USER="${INFLUXDB_WRITE_USER:-}"
-export INFLUXDB_DB="${INFLUXDB_DB:-}"
-
-# V2 required env vars aliases
-export INFLUXD_ENGINE_PATH="${INFLUXDB_VOLUME_DIR}"
-export INFLUXD_BOLT_PATH="${INFLUXDB_VOLUME_DIR}/influxd.bolt"
-export INFLUXD_CONFIG_PATH="${INFLUXDB_CONF_DIR}/influxdb.conf"
-export INFLUX_CONFIGS_PATH="${INFLUXDB_VOLUME_DIR}/configs"
-
-export INFLUXD_HTTP_BIND_ADDRESS="${INFLUXDB_HTTP_BIND_ADDRESS}"
-
-EOF
-    # The configuration can be provided in a configuration file or environment variables
-    # This setting is necessary to determine certain validations/actions during the
-    # initialization, so we need to check the config file when existing.
-    if [[ -f "/opt/bitnami/influxdb/etc/influxdb.conf" ]]; then
-        cat <<"EOF"
-INFLUXDB_HTTP_AUTH_ENABLED="${INFLUXDB_HTTP_AUTH_ENABLED:-$(influxdb_conf_get "auth-enabled")}"
-export INFLUXDB_HTTP_AUTH_ENABLED="${INFLUXDB_HTTP_AUTH_ENABLED:-true}"
-EOF
-    else
-        cat <<"EOF"
-export INFLUXDB_HTTP_AUTH_ENABLED="${INFLUXDB_HTTP_AUTH_ENABLED:-true}"
-EOF
-    fi
-    # Credentials should be allowed to be mounted as files to avoid sensitive data
-    # in the environment variables
-    if [[ -f "${INFLUXDB_ADMIN_USER_PASSWORD_FILE:-}" ]]; then
-        cat <<"EOF"
-export INFLUXDB_ADMIN_USER_PASSWORD="$(< "${INFLUXDB_ADMIN_USER_PASSWORD_FILE}")"
-EOF
-    else
-        cat <<"EOF"
-export INFLUXDB_ADMIN_USER_PASSWORD="${INFLUXDB_ADMIN_USER_PASSWORD:-}"
-EOF
-    fi
-    if [[ -f "${INFLUXDB_ADMIN_USER_TOKEN_FILE:-}" ]]; then
-        cat <<"EOF"
-export INFLUXDB_ADMIN_USER_TOKEN="$(< "${INFLUXDB_ADMIN_USER_TOKEN_FILE}")"
-EOF
-    else
-        cat <<"EOF"
-export INFLUXDB_ADMIN_USER_TOKEN="${INFLUXDB_ADMIN_USER_TOKEN:-}"
-EOF
-    fi
-    if [[ -f "${INFLUXDB_USER_PASSWORD_FILE:-}" ]]; then
-        cat <<"EOF"
-export INFLUXDB_USER_PASSWORD="$(< "${INFLUXDB_USER_PASSWORD_FILE}")"
-EOF
-    else
-        cat <<"EOF"
-export INFLUXDB_USER_PASSWORD="${INFLUXDB_USER_PASSWORD:-}"
-EOF
-    fi
-    if [[ -f "${INFLUXDB_READ_USER_PASSWORD_FILE:-}" ]]; then
-        cat <<"EOF"
-export INFLUXDB_READ_USER_PASSWORD="$(< "${INFLUXDB_READ_USER_PASSWORD_FILE}")"
-EOF
-    else
-        cat <<"EOF"
-export INFLUXDB_READ_USER_PASSWORD="${INFLUXDB_READ_USER_PASSWORD:-}"
-EOF
-    fi
-    if [[ -f "${INFLUXDB_WRITE_USER_PASSWORD_FILE:-}" ]]; then
-        cat <<"EOF"
-export INFLUXDB_WRITE_USER_PASSWORD="$(< "${INFLUXDB_WRITE_USER_PASSWORD_FILE}")"
-EOF
-    else
-        cat <<"EOF"
-export INFLUXDB_WRITE_USER_PASSWORD="${INFLUXDB_WRITE_USER_PASSWORD:-}"
-EOF
-    fi
-}
 
 ########################
 # Validate settings in INFLUXDB_* env vars
@@ -149,11 +30,6 @@ influxdb_validate() {
         error "$1"
         error_code=1
     }
-    check_password_file() {
-        if ! is_empty_value "${!1:-}" && ! [[ -f "${!1:-}" ]]; then
-            print_validation_error "The variable $1 is defined but the file ${!1} is not accessible or does not exist."
-        fi
-    }
     check_true_false_value() {
         if ! is_true_false_value "${!1}"; then
             print_validation_error "The allowed values for $1 are [true, false]"
@@ -169,13 +45,6 @@ influxdb_validate() {
             done
         done
     }
-
-    # InfluxDB secret files validations
-    local -a pwd_file_envs=("INFLUXDB_ADMIN_USER_PASSWORD_FILE" "INFLUXDB_ADMIN_USER_TOKEN_FILE" "INFLUXDB_USER_PASSWORD_FILE")
-
-    for pwd_file in "${pwd_file_envs[@]}"; do
-        check_password_file "$pwd_file"
-    done
 
     # InfluxDB authentication validations
     if [[ -z "${INFLUXDB_ADMIN_USER_PASSWORD:-}" ]]; then
@@ -211,13 +80,14 @@ influxdb_validate() {
 # Returns:
 #   None
 #########################
-# TODO: use a golan binary (toml-parser)
 influxdb_conf_get() {
     local -r key="${1:?missing key}"
-    #     local -r section="${2:?missing section}"
+
+    # TODO: Improve logic by using toml-parser (or an alternative)
+    # local -r section="${2:?missing section}"
+    # toml-parser -r "$section" "$key" "$INFLUXDB_CONF_FILE"
 
     sed -n -e "s/^ *$key *= *//p" "$INFLUXDB_CONF_FILE"
-    #     toml-parser -r "$section" "$key" "$INFLUXDB_CONF_FILE"
 }
 
 ########################
@@ -345,7 +215,7 @@ influxdb_start_bg_noauth() {
 
     wait-for-port --timeout="$INFLUXDB_PORT_READINESS_TIMEOUT" "$INFLUXDB_HTTP_PORT_NUMBER"
 
-    wait-for-influxdb
+    wait_for_influxdb
 }
 
 ########################
@@ -358,7 +228,7 @@ influxdb_start_bg_noauth() {
 # Returns:
 #   None
 ########################
-wait-for-influxdb() {
+wait_for_influxdb() {
     curl -sSL -I "127.0.0.1:${INFLUXDB_HTTP_PORT_NUMBER}/ping?wait_for_leader=${INFLUXDB_HTTP_READINESS_TIMEOUT}s" >/dev/null 2>&1
 }
 
@@ -372,11 +242,37 @@ wait-for-influxdb() {
 #   Boolean
 #########################
 is_influxdb_running() {
-    if pgrep "influxd" >/dev/null 2>&1; then
+    # VMs use a PID file, but containers do not, so check if the variable exists to cover both scenarios
+    if [[ -n "${INFLUXDB_PID_FILE:-}" ]]; then
+        # influxdb does not create any PID file
+        # We regenerate the PID file for each time we query it to avoid getting outdated
+        pgrep "influxd" | head -n 1 > "$INFLUXDB_PID_FILE"
+
+        local pid
+        pid="$(get_pid_from_file "$INFLUXDB_PID_FILE")"
+        if [[ -z "$pid" ]]; then
+            false
+        else
+            is_service_running "$pid"
+        fi
+    elif pgrep "influxd" >/dev/null 2>&1; then
         true
     else
         false
     fi
+}
+
+########################
+# Check if InfluxDB is not running
+# Globals:
+#   INFLUXDB_*
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_influxdb_not_running() {
+    ! is_influxdb_running
 }
 
 ########################
