@@ -53,6 +53,60 @@ $ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 $ docker build -t bitnami/APP:latest .
 ```
 
+## Configuration
+
+### Environment variables
+
+When you start the Confluent Schema Registry image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. Please note that some variables are only considered when the container is started for the first time. If you want to add a new environment variable:
+
+- For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/schema-registry/docker-compose.yml) file present in this repository:
+
+    ```yaml
+    schema-registry:
+      ...
+      environment:
+        - SCHEMA_REGISTRY_DEBUG=true
+      ...
+    ```
+
+- For manual execution add a `--env` option with each variable and value:
+
+    ```console
+    $ docker run -d --name schema-registry -p 8081:8081 \
+      --env SCHEMA_REGISTRY_DEBUG=true \
+      --network schema-registry-tier \
+      --volume /path/to/schema-registry-persistence:/bitnami \
+      bitnami/schema-registry:latest
+    ```
+
+Available environment variables:
+
+##### Schema Registry settings
+
+- `SCHEMA_REGISTRY_KAFKA_BROKERS`: List of Kafka brokers to connect to. Default: **PLAINTEXT://localhost:9092**.
+- `SCHEMA_REGISTRY_ADVERTISED_HOSTNAME`: Advertised hostname in ZooKeeper. Default: **container IP**.
+- `SCHEMA_REGISTRY_KAFKA_KEYSTORE_PASSWORD`: Password to access the keystore. Default: **empty value**.
+- `SCHEMA_REGISTRY_KAFKA_KEY_PASSWORD`: Password to be able to used ssl secured kafka broker with Schema Registry. Default: **empty value**.
+- `SCHEMA_REGISTRY_KAFKA_TRUSTSTORE_PASSWORD`: Password to access the truststore. Default: **empty value**.
+- `SCHEMA_REGISTRY_KAFKA_SASL_USER`: SASL user to authenticate with Kafka. Default: **empty value**.
+- `SCHEMA_REGISTRY_KAFKA_SASL_PASSWORD`: SASL password to authenticate with Kafka. Default: **empty value**.
+- `SCHEMA_REGISTRY_LISTENERS`: Comma-separated list of listeners that listen for API requests over either HTTP or HTTPS. Default: **http://0.0.0.0:8081**.
+- `SCHEMA_REGISTRY_SSL_KEYSTORE_PASSWORD`: Password to access the SSL keystore. Default: **empty value**.
+- `SCHEMA_REGISTRY_SSL_KEY_PASSWORD`: Password to access the SSL key. Default: **empty value**.
+- `SCHEMA_REGISTRY_SSL_TRUSTSTORE_PASSWORD`: Password to access the SSL truststore. Default: **empty value**.
+- `SCHEMA_REGISTRY_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM`: Endpoint identification algorithm to validate the server hostname using the server certificate. Default: **empty value**.
+- `SCHEMA_REGISTRY_CLIENT_AUTHENTICATION`: Client authentication configuration. Valid options: `NONE`, `REQUESTED`, or `REQUIRED`.
+- `SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL`: The Avro compatibility type. Valid options: `NONE`, `BACKWARD`, `BACKWARD_TRANSITIVE`, `FORWARD`, `FORWARD_TRANSITIVE`, `FULL`, or `FULL_TRANSITIVE`.
+- `SCHEMA_REGISTRY_DEBUG`: Enable Schema Registry debug logs. Valid options: true or false. Default: **false**.
+
+##### Kafka settings
+
+Please check the configuration settings for the Kakfa service in the [Kafka's README file](https://github.com/bitnami/containers/tree/main/bitnami/kafka#configuration).
+
+##### Zookeeper settings
+
+Please check the configuration settings for the Kakfa service in the [Zookeeper's README file](https://github.com/bitnami/containers/tree/main/bitnami/zookeeper#configuration).
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
