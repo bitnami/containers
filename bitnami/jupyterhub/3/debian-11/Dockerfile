@@ -5,11 +5,11 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.1.0-debian-11-r3" \
+      org.opencontainers.image.ref.name="3.1.1-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jupyterhub" \
       org.opencontainers.image.title="jupyterhub" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="3.1.0"
+      org.opencontainers.image.version="3.1.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,7 +23,7 @@ RUN install_packages ca-certificates curl libbrotli1 libcom-err2 libcrypt1 libcu
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "miniconda-4.12.0-159-linux-${OS_ARCH}-debian-11" \
-      "jupyterhub-3.1.0-0-linux-${OS_ARCH}-debian-11" \
+      "jupyterhub-3.1.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -39,7 +39,7 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="3.1.0" \
+ENV APP_VERSION="3.1.1" \
     BITNAMI_APP_NAME="jupyterhub" \
     PATH="/opt/bitnami/miniconda/bin:/opt/bitnami/miniconda/bin/:$PATH"
 
