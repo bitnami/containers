@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.6.0-debian-11-r18" \
+      org.opencontainers.image.ref.name="1.6.0-debian-11-r19" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/nginx-ingress-controller" \
       org.opencontainers.image.title="nginx-ingress-controller" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -56,7 +56,7 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log
 ENV APP_VERSION="1.6.0" \
     BITNAMI_APP_NAME="nginx-ingress-controller" \
-    LD_LIBRARY_PATH="/lib:/usr/lib:/usr/local/lib:/modules_mount/etc/nginx/modules/otel" \
+    LD_LIBRARY_PATH="/lib:/modules_mount/etc/nginx/modules/otel:/usr/lib:/usr/local/lib:$LD_LIBRARY_PATH" \
     LUA_CPATH="/usr/local/lib/lua/?/?.so;/usr/local/lib/lua/?.so;;" \
     LUA_PATH="/usr/local/share/luajit-2.1.0-beta3/?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/lib/lua/?.lua;;" \
     PATH="/opt/bitnami/nginx-ingress-controller/bin:/opt/bitnami/nginx/sbin:$PATH:/usr/local/luajit/bin:/usr/local/nginx/sbin:/usr/local/nginx/bin"
