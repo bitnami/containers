@@ -22,6 +22,8 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 ejbca_env_vars=(
+    EJBCA_WILDFLY_ADMIN_USER
+    EJBCA_WILDFLY_ADMIN_PASSWORD
     EJBCA_SERVER_CERT_FILE
     EJBCA_SERVER_CERT_PASSWORD
     EJBCA_HTTP_PORT_NUMBER
@@ -58,7 +60,7 @@ unset ejbca_env_vars
 
 # Paths
 export BITNAMI_VOLUME_DIR="/bitnami"
-export EJBCA_BASE_DIR="/opt/bitnami/ejbca"
+export EJBCA_BASE_DIR="${BITNAMI_ROOT_DIR}/ejbca"
 export EJBCA_BIN_DIR="${EJBCA_BASE_DIR}/bin"
 export EJBCA_TMP_DIR="${EJBCA_BASE_DIR}/tmp"
 export EJBCA_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
@@ -77,17 +79,19 @@ export EJBCA_DB_SCRIPT_TABLES="${EJBCA_DATABASE_SCRIPTS_DIR}/create-tables-ejbca
 export EJBCA_EAR_FILE="${EJBCA_BASE_DIR}/dist/ejbca.ear"
 
 # Wildfly
-export EJBCA_WILDFLY_BASE_DIR="/opt/bitnami/wildfly"
+export EJBCA_WILDFLY_BASE_DIR="${BITNAMI_ROOT_DIR}/wildfly"
 export EJBCA_WILDFLY_TMP_DIR="${EJBCA_WILDFLY_BASE_DIR}/tmp"
 export EJBCA_WILDFLY_BIN_DIR="${EJBCA_WILDFLY_BASE_DIR}/bin"
+export EJBCA_WILDFLY_CONF_DIR="${EJBCA_WILDFLY_BASE_DIR}/standalone/configuration"
 export EJBCA_WILDFLY_PID_DIR="${EJBCA_TMP_DIR}"
 export EJBCA_WILDFLY_PID_FILE="${EJBCA_WILDFLY_PID_DIR}/wildfly.pid"
 export EJBCA_WILDFLY_DEPLOY_DIR="${EJBCA_WILDFLY_BASE_DIR}/standalone/deployments"
-export EJBCA_WILDFLY_ADMIN_USER="admin"
-export EJBCA_WILDFLY_TRUSTSTORE_FILE="${EJBCA_WILDFLY_BASE_DIR}/standalone/configuration/truststore.jks"
-export EJBCA_WILDFLY_KEYSTORE_FILE="${EJBCA_WILDFLY_BASE_DIR}/standalone/configuration/keystore.jks"
+export EJBCA_WILDFLY_ADMIN_USER="${EJBCA_WILDFLY_ADMIN_USER:-admin}"
+export EJBCA_WILDFLY_ADMIN_PASSWORD="${EJBCA_WILDFLY_ADMIN_PASSWORD:-}"
+export EJBCA_WILDFLY_TRUSTSTORE_FILE="${EJBCA_WILDFLY_CONF_DIR}/truststore.jks"
+export EJBCA_WILDFLY_KEYSTORE_FILE="${EJBCA_WILDFLY_CONF_DIR}/keystore.jks"
 export EJBCA_WILDFLY_STANDALONE_CONF_FILE="${EJBCA_WILDFLY_BIN_DIR}/standalone.conf"
-export EJBCA_WILDFLY_STANDALONE_XML_FILE="${EJBCA_WILDFLY_BASE_DIR}/standalone/configuration/standalone.xml"
+export EJBCA_WILDFLY_STANDALONE_XML_FILE="${EJBCA_WILDFLY_CONF_DIR}/standalone.xml"
 
 # Users
 export EJBCA_DAEMON_USER="wildfly"
@@ -127,6 +131,6 @@ export JAVA_HOME="/opt/bitnami/java"
 export JBOSS_HOME="${EJBCA_WILDFLY_BASE_DIR}"
 export LAUNCH_JBOSS_IN_BACKGROUND="true"
 export JBOSS_PIDFILE="${EJBCA_WILDFLY_PID_FILE}"
-export EJBCA_WILDFLY_DATA_TO_PERSIST="${EJBCA_WILDFLY_BASE_DIR}/standalone/configuration,${EJBCA_WILDFLY_ADMIN_PASSWORD_FILE},${EJBCA_WILDFLY_BASE_DIR}/standalone/data,${EJBCA_WILDFLY_KEYSTORE_PASSWORD_FILE},${EJBCA_WILDFLY_TRUSTSTORE_PASSWORD_FILE}"
+export EJBCA_WILDFLY_DATA_TO_PERSIST="${EJBCA_WILDFLY_CONF_DIR},${EJBCA_WILDFLY_ADMIN_PASSWORD_FILE},${EJBCA_WILDFLY_BASE_DIR}/standalone/data,${EJBCA_WILDFLY_KEYSTORE_PASSWORD_FILE},${EJBCA_WILDFLY_TRUSTSTORE_PASSWORD_FILE}"
 
 # Custom environment variables may be defined below
