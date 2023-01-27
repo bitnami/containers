@@ -395,8 +395,8 @@ sonarqube_stop() {
 #########################
 sonarqube_copy_mounted_config() {
     if ! is_dir_empty "$SONARQUBE_MOUNTED_PROVISIONING_DIR"; then
-        if ! cp -Lr "${SONARQUBE_MOUNTED_PROVISIONING_DIR}"/* "${SONARQUBE_BASE_DIR}"; then
-            error "Issue copying mounted configuration files from $SONARQUBE_MOUNTED_PROVISIONING_DIR to $SONARQUBE_BASE_DIR. Make sure you are not mounting configuration files in $SONARQUBE_MOUNTED_PROVISIONING_DIR and $SONARQUBE_BASE_DIR at the same time"
+        if ! cp -Lr "${SONARQUBE_MOUNTED_PROVISIONING_DIR}"/* "${SONARQUBE_VOLUME_DIR}"; then
+            error "Issue copying mounted configuration files from $SONARQUBE_MOUNTED_PROVISIONING_DIR to $SONARQUBE_VOLUME_DIR. Make sure you are not mounting configuration files in $SONARQUBE_MOUNTED_PROVISIONING_DIR and $SONARQUBE_VOLUME_DIR at the same time"
             exit 1
         fi
     fi
