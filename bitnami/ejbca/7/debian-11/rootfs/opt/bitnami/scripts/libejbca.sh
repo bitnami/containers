@@ -60,6 +60,25 @@ ejbca_validate() {
 }
 
 ########################
+# Run wildfly CLI and print output
+# Globals:
+#   EJBCA_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+ejbca_wildfly_command_print_output() {
+    local -r cmd="${EJBCA_WILDFLY_BIN_DIR}/jboss-cli.sh"
+    local -r -a args=("--connect" "-u=${EJBCA_WILDFLY_ADMIN_USER}" "-p=${EJBCA_WILDFLY_ADMIN_PASSWORD}" "$@")
+    if am_i_root; then
+        gosu "$EJBCA_DAEMON_USER" "$cmd" "${args[@]}"
+    else
+        "$cmd" "${args[@]}"
+    fi
+}
+
+########################
 # Run wildfly CLI
 # Globals:
 #   EJBCA_*
@@ -69,7 +88,7 @@ ejbca_validate() {
 #   None
 #########################
 ejbca_wildfly_command() {
-    "$EJBCA_WILDFLY_BIN_DIR"/jboss-cli.sh --connect -u="$EJBCA_WILDFLY_ADMIN_USER" -p="$EJBCA_WILDFLY_ADMIN_PASSWORD" "$1"
+    debug_execute ejbca_wildfly_command_print_output "$@"
 }
 
 ########################
@@ -82,7 +101,13 @@ ejbca_wildfly_command() {
 #   None
 #########################
 wait_for_wildfly() {
-    retry_while wildfly_not_ready
+    local -r retries="30"
+    local -r sleep_time="5"
+
+    if ! retry_while wildfly_not_ready "$retries" "$sleep_time"; then
+        error "Timeout waiting for Wildfly to be ready"
+        return 1
+    fi
 }
 
 ########################
@@ -97,7 +122,7 @@ wait_for_wildfly() {
 wildfly_not_ready() {
     local status
 
-    status=$(ejbca_wildfly_command ":read-attribute(name=server-state)" | grep "result")
+    status=$(ejbca_wildfly_command_print_output ":read-attribute(name=server-state)" | grep "result")
     [[ "$status" =~ "running" ]] && return 0 || return 1
 }
 
@@ -229,10 +254,10 @@ ejbca_start_wildfly_bg() {
     info "Starting wildfly..."
 
     if ! is_wildfly_running; then
-        if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
-            "${exec}" "${args[@]}" &
+        if am_i_root; then
+            debug_execute gosu "$EJBCA_DAEMON_USER" "${exec}" "${args[@]}" &
         else
-            "${exec}" "${args[@]}" >/dev/null 2>&1 &
+            debug_execute "${exec}" "${args[@]}" &
         fi
     fi
 }
@@ -270,8 +295,14 @@ ejbca_stop_wildfly() {
 #########################
 ejbca_create_management_user() {
     info "Creating wildfly management user..."
+    local -r cmd="${EJBCA_WILDFLY_BIN_DIR}/add-user.sh"
+    local -r -a args=("-u" "$EJBCA_WILDFLY_ADMIN_USER" "-p" "$EJBCA_WILDFLY_ADMIN_PASSWORD" "-s")
 
-    "$EJBCA_WILDFLY_BIN_DIR"/add-user.sh -u "$EJBCA_WILDFLY_ADMIN_USER" -p "$EJBCA_WILDFLY_ADMIN_PASSWORD" -s
+    if am_i_root; then
+        debug_execute gosu "$EJBCA_DAEMON_USER" "$cmd" "${args[@]}"
+    else
+        debug_execute "$cmd" "${args[@]}"
+    fi
 }
 
 #######################
@@ -286,10 +317,15 @@ ejbca_create_management_user() {
 ejbca_wildfly_deploy() {
     local -r file_to_deploy="${1:?Missing file to deploy}"
     deployed_file="${EJBCA_WILDFLY_DEPLOY_DIR}/$(basename "$file_to_deploy").deployed"
+    local -r retries="30"
+    local -r sleep_time="5"
 
     if [[ ! -f "$deployed_file" ]]; then
         cp "$file_to_deploy" "$EJBCA_WILDFLY_DEPLOY_DIR"/
-        retry_while "ls ${deployed_file}" 2>/dev/null
+        if ! retry_while "test -f ${deployed_file}" "$retries" "$sleep_time" 2>/dev/null; then
+            error "Timeout deploying ${file_to_deploy} to WildFly: File ${deployed_file} was not generated"
+            return 1
+        fi
         info "Deployment done"
     else
         info "Already deployed"
@@ -310,7 +346,10 @@ wait_for_mysql_connection() {
         echo "select 1" | debug_execute mysql -u"$EJBCA_DATABASE_USERNAME" -p"$EJBCA_DATABASE_PASSWORD" -h"$EJBCA_DATABASE_HOST" -P"$EJBCA_DATABASE_PORT" "$EJBCA_DATABASE_NAME"
     }
 
-    retry_while database_not_ready
+    if ! retry_while database_not_ready; then
+        error "Timeout waiting for database to be ready"
+        return 1
+    fi
 }
 
 ########################
@@ -346,7 +385,7 @@ ejbca_generate_ca() {
     local -r instance_hostname="$(hostname --fqdn)"
 
     info "Generating CA"
-    ejbca_ca="$(ejbca_execute_command ca listcas 2>&1)"
+    ejbca_ca="$(ejbca_execute_command_print_output ca listcas 2>&1)"
     if ! grep -q 'CA Name: ' <<<"$ejbca_ca"; then
         info "Init CA"
         ejbca_execute_command ca init \
@@ -371,7 +410,7 @@ ejbca_generate_ca() {
             --password "$EJBCA_ADMIN_PASSWORD"
     fi
 
-    ejbca_ca="$(ejbca_execute_command ca listcas 2>&1)"
+    ejbca_ca="$(ejbca_execute_command_print_output ca listcas 2>&1)"
     if grep -q "CA Name: $EJBCA_CA_NAME" <<<"$ejbca_ca"; then
         existing_management_ca="$(grep "CA Name: $EJBCA_CA_NAME" <<<"$ejbca_ca" | sed 's/.*CA Name: //g')"
 
@@ -423,6 +462,23 @@ ejbca_generate_ca() {
 }
 
 ########################
+# EJBCA CLI and print output
+# Globals:
+#   EJBCA_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+ejbca_execute_command_print_output() {
+    if am_i_root; then
+        gosu "$EJBCA_DAEMON_USER" "$EJBCA_BIN_DIR"/ejbca.sh "$@" 2>&1
+    else
+        "$EJBCA_BIN_DIR"/ejbca.sh "$@" 2>&1
+    fi
+}
+
+########################
 # EJBCA CLI
 # Globals:
 #   EJBCA_*
@@ -432,7 +488,7 @@ ejbca_generate_ca() {
 #   None
 #########################
 ejbca_execute_command() {
-    "$EJBCA_BIN_DIR"/ejbca.sh "$@" 2>&1
+    debug_execute ejbca_execute_command_print_output "$@"
 }
 
 ########################
@@ -463,7 +519,7 @@ ejbca_create_truststore() {
     local ca_list
 
     info "Load the CAs in the trustkeystore"
-    ejbca_ca="$(ejbca_execute_command ca listcas 2>&1)"
+    ejbca_ca="$(ejbca_execute_command_print_output ca listcas 2>&1)"
     if grep -q 'CA Name: ' <<<"$ejbca_ca"; then
         ca_list=("$(grep 'CA Name: ' <<<"$ejbca_ca" | sed 's/.*CA Name: //g')")
         for line in "${ca_list[@]}"; do
@@ -498,7 +554,7 @@ ejbca_custom_init_scripts() {
     if [[ -n $(find "${EJBCA_INITSCRIPTS_DIR}/" -type f -regex ".*\.sh") ]]; then
         info "Loading user's custom files from $EJBCA_INITSCRIPTS_DIR ..."
         local -r tmp_file="/tmp/filelist"
-        ejbca_start_bg
+        ejbca_start_wildfly_bg
         find "${EJBCA_INITSCRIPTS_DIR}/" -type f -regex ".*\.sh" | sort >"$tmp_file"
         while read -r f; do
             case "$f" in
@@ -552,8 +608,8 @@ ejbca_initialize() {
     info "Initializing EJBCA..."
 
     # Configuring permissions for tmp, logs and data folders
-    am_i_root && configure_permissions_ownership "$EJBCA_TMP_DIR $EJBCA_LOG_DIR" -u "$EJBCA_DAEMON_USER" -g "$EJBCA_DAEMON_GROUP"
-    am_i_root && configure_permissions_ownership "$EJBCA_DATA_DIR" -u "$EJBCA_DAEMON_USER" -g "$EJBCA_DAEMON_GROUP" -d "755" -f "644"
+    am_i_root && configure_permissions_ownership "$EJBCA_TMP_DIR" -u "$EJBCA_DAEMON_USER" -g "$EJBCA_DAEMON_GROUP"
+    am_i_root && configure_permissions_ownership "$EJBCA_DATA_DIR" -u "$EJBCA_DAEMON_USER" -g "$EJBCA_DAEMON_GROUP"
 
     # Note we need to use wildfly instead of ejbca as directory since the persist_app function relativizes them to /opt/bitnami/wildfly
     if ! is_app_initialized "wildfly"; then
@@ -653,4 +709,28 @@ is_wildfly_running() {
     else
         false
     fi
+}
+
+########################
+# Check if WildFly is not running
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_wildfly_not_running() {
+    ! is_wildfly_running
+}
+
+########################
+# Stop WildFly
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+wildfly_stop() {
+    is_wildfly_not_running && return
+    info "Stopping ejbca"
+    stop_service_using_pid "$EJBCA_WILDFLY_PID_FILE"
 }
