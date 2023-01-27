@@ -7,7 +7,7 @@ ARG WITH_ALL_LOCALES="no"
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.1.1-debian-11-r4" \
+      org.opencontainers.image.ref.name="4.1.1-debian-11-r5" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/moodle" \
       org.opencontainers.image.title="moodle" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -66,6 +66,7 @@ ENV APACHE_HTTPS_PORT_NUMBER="" \
     BITNAMI_APP_NAME="moodle" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
+    LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8080 8443
