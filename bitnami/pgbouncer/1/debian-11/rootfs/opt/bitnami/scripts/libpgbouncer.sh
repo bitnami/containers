@@ -225,7 +225,6 @@ pgbouncer_initialize() {
                 break;
             else
                 dsn=${!VAR_NAME};
-                echo "conntection: $dsn";
                 ini-file set --section databases --key "$(echo $dsn | cut -d = -f 1)" --value "$(echo $dsn | cut -d = -f 2-)" "$PGBOUNCER_CONF_FILE";
                 i=$(( $i + 1 ));
             fi;
