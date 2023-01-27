@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.0.4-debian-11-r19" \
+      org.opencontainers.image.ref.name="5.0.4-debian-11-r20" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/redmine" \
       org.opencontainers.image.title="redmine" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -48,6 +48,7 @@ RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/redmine/postunpack.sh
 ENV APP_VERSION="5.0.4" \
     BITNAMI_APP_NAME="redmine" \
+    LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:$PATH"
 
 EXPOSE 3000
