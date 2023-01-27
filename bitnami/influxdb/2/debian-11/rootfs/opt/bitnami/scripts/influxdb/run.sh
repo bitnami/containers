@@ -13,7 +13,7 @@ set -o pipefail
 . /opt/bitnami/scripts/libinfluxdb.sh
 
 # Load InfluxDB environment variables
-eval "$(influxdb_env)"
+. /opt/bitnami/scripts/influxdb-env.sh
 
 info "** Starting InfluxDB **"
 start_command=("${INFLUXDB_BIN_DIR}/influxd" "$@")
