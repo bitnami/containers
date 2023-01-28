@@ -151,6 +151,19 @@ ldap_validate() {
 }
 
 ########################
+# Check if OpenLDAP is ready to answer
+# Globals:
+#   LDAP_PID_FILE
+# Arguments:
+#   None
+# Returns:
+#   Whether slapd is running
+#########################
+is_ldap_answering() {
+    is_ldap_running && debug_execute ldapsearch -Y EXTERNAL -H "ldapi:///" -b cn=config -s base || false
+}
+
+########################
 # Check if OpenLDAP is running
 # Globals:
 #   LDAP_PID_FILE
@@ -197,7 +210,7 @@ ldap_start_bg() {
         ulimit -n "$LDAP_ULIMIT_NOFILES"
         am_i_root && flags=("-u" "$LDAP_DAEMON_USER" "${flags[@]}")
         debug_execute slapd "${flags[@]}" &
-        if ! retry_while is_ldap_running "$retries" "$sleep_time"; then
+        if ! retry_while is_ldap_answering "$retries" "$sleep_time"; then
             error "OpenLDAP failed to start"
             return 1
         fi
