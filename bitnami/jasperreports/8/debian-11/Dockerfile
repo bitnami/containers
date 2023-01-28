@@ -6,7 +6,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.1.0-debian-11-r47" \
+      org.opencontainers.image.ref.name="8.1.0-debian-11-r48" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jasperreports" \
       org.opencontainers.image.title="jasperreports" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -52,6 +52,7 @@ RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APP_VERSION="8.1.0" \
     BITNAMI_APP_NAME="jasperreports" \
     JAVA_HOME="/opt/bitnami/java" \
+    LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 8009 8080 8443
