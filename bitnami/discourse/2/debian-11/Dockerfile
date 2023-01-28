@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.8.14-debian-11-r3" \
+      org.opencontainers.image.ref.name="2.8.14-debian-11-r4" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/discourse" \
       org.opencontainers.image.title="discourse" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "wait-for-port-1.0.6-0-linux-${OS_ARCH}-debian-11" \
       "ruby-2.7.7-2-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-15.1.0-1-linux-${OS_ARCH}-debian-11" \
-      "node-14.21.2-1-linux-${OS_ARCH}-debian-11" \
+      "node-18.13.0-2-linux-${OS_ARCH}-debian-11" \
       "brotli-1.0.9-155-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
       "discourse-2.8.14-0-linux-${OS_ARCH}-debian-11" \
@@ -50,6 +50,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/discourse/postunpack.sh
 ENV APP_VERSION="2.8.14" \
     BITNAMI_APP_NAME="discourse" \
+    LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/brotli/bin:$PATH"
 
 EXPOSE 3000
