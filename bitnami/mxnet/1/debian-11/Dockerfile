@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.9.1-debian-11-r82" \
+      org.opencontainers.image.ref.name="1.9.1-debian-11-r83" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mxnet" \
       org.opencontainers.image.title="mxnet" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -45,7 +45,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/mxnet/postunpack.sh
 ENV APP_VERSION="1.9.1" \
     BITNAMI_APP_NAME="mxnet" \
-    LD_LIBRARY_PATH="/opt/bitnami/python/lib/:$LD_LIBRARY_PATH" \
+    LD_LIBRARY_PATH="/opt/bitnami/python/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:$PATH"
 
 WORKDIR /app
