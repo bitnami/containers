@@ -1,5 +1,5 @@
 {
-   "context": {
+  "context": {
     "resources": {
       "url": "{VIB_ENV_CONTAINER_URL}",
       "path": "{VIB_ENV_PATH}"
