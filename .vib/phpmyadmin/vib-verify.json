@@ -1,18 +1,9 @@
 {
   "context": {
     "resources": {
-      "url": "{VIB_ENV_ARCHIVE}",
+      "url": "{SHA_ARCHIVE}",
       "path": "{VIB_ENV_PATH}"
-    },
-    "credentials": [
-      {
-        "url": "{VIB_ENV_REPOSITORY_URL}",
-        "authn": {
-          "header": "Authorization",
-          "token": "Bearer {VIB_ENV_GITHUB_TOKEN}"
-        }
-      }
-    ]
+    }
   },
   "phases": {
     "package": {
