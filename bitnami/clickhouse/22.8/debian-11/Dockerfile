@@ -5,11 +5,11 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="22.8.12-debian-11-r8" \
+      org.opencontainers.image.ref.name="22.8.13-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/clickhouse" \
       org.opencontainers.image.title="clickhouse" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="22.8.12"
+      org.opencontainers.image.version="22.8.13"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,7 +23,7 @@ RUN install_packages ca-certificates curl procps xmlstarlet
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
-      "clickhouse-22.8.12-2-linux-${OS_ARCH}-debian-11" \
+      "clickhouse-22.8.13-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,7 +41,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/clickhouse/postunpack.sh
-ENV APP_VERSION="22.8.12" \
+ENV APP_VERSION="22.8.13" \
     BITNAMI_APP_NAME="clickhouse" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/clickhouse/bin:$PATH" \
     clickhouseCTL_API="3"
