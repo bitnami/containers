@@ -207,9 +207,9 @@ pgbouncer_initialize() {
         fi
         ini-file set --section "databases" --key "$PGBOUNCER_DATABASE" --value "$database_value" "$PGBOUNCER_CONF_FILE"
 
-        i=0; 
-        while true; VAR_NAME="PGBOUNCER_DSN_${i}"; 
-        do 
+        i=0;
+        while true; VAR_NAME="PGBOUNCER_DSN_${i}";
+        do
             if [ -z "${!VAR_NAME+x}" ]; then
                 break;
             else
