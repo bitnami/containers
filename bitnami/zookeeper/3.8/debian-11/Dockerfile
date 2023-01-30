@@ -5,11 +5,11 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.8.0-debian-11-r83" \
+      org.opencontainers.image.ref.name="3.8.1-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/zookeeper" \
       org.opencontainers.image.title="zookeeper" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="3.8.0"
+      org.opencontainers.image.version="3.8.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "wait-for-port-1.0.6-0-linux-${OS_ARCH}-debian-11" \
       "java-11.0.18-10-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
-      "zookeeper-3.8.0-159-linux-${OS_ARCH}-debian-11" \
+      "zookeeper-3.8.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -46,7 +46,7 @@ RUN ln -s /opt/bitnami/scripts/zookeeper/run.sh /run.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/zookeeper/postunpack.sh
-ENV APP_VERSION="3.8.0" \
+ENV APP_VERSION="3.8.1" \
     BITNAMI_APP_NAME="zookeeper"
 
 EXPOSE 2181 2888 3888 8080
