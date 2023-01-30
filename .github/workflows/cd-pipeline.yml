@@ -68,7 +68,7 @@ jobs:
       - uses: vmware-labs/vmware-image-builder-action@main
         name: 'Publish ${{ matrix.container.name }}: ${{ matrix.container.tag }}'
         with:
-          pipeline: ${{ steps.get-dsl-filepath.outputs.dsl_path }}/vib-publish.json
+          pipeline: ${{ matrix.container.dsl_path }}/vib-publish.json
         env:
           # Path with docker resources
           VIB_ENV_PATH:  "${{ matrix.container.path }}"
