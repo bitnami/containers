@@ -99,6 +99,7 @@ jobs:
             # If it's set from outside, can be changed
             arch="${arch:-amd64}"
             image_name=$(echo "$container" | jq -cr '.tag')
+            image_path=$(echo "$container" | jq -cr '.path')
             version=$(echo "$container" | jq -cr '.app_version')
             asset=$(echo "$container" | jq -cr '.name')
             os_flavour=$(echo "$container" | jq -cr '.os_flavour')
@@ -112,7 +113,7 @@ jobs:
               declare -A packages
               # Iterating over the external components to get the involved elements
               while read -r component_id; do
-                component_version_full=$(jq -cr ".$component_id.version" components.json)
+                component_version_full=$(jq -cr '."'${component_id}'".version' components.json)
 
                 #split by "-"
                 component_parts=(${component_version_full//-/ })
@@ -131,9 +132,9 @@ jobs:
                   package_version=$(echo "$json_package" | jq -r '.version' )
                   package_url=$(echo "$json_package" | jq -r '.source.upstreamSourceUrl')
                   packages[$package_id]="$package_version $package_url"
-                done <<<"$(jq -c '.components[]' compilation-recipe.json)"
+                done <<<"$(jq -cr '.components[]' compilation-recipe.json)"
                 rm compilation-recipe.json
-              done <<<"$(jq -c 'keys[]' components.json)"
+              done <<<"$(jq -cr 'keys[]' components.json)"
 
               # Now creating the JSON file with the needed transformations
               json_packages=()
@@ -149,8 +150,9 @@ jobs:
                 fi
               done
               JSON_ARRAY=$(printf "%s" "${json_packages[@]}" | jq -s)
-              echo "$JSON_ARRAY" > "${container}/packages.json"
-              s3cmd put "${container}/packages.json" "s3://${AWS_S3_BUCKET}/${asset}/${version}/${os_flavour}/${arch}/${revision}/packages.json"
+              echo "${JSON_ARRAY}" > "${image_path}/packages.json"
+              s3cmd put "${image_path}/packages.json" "s3://${AWS_S3_BUCKET}/${asset}/${version}/${os_flavour}/${arch}/${revision}/packages.json"
+              rm components.json
             else
               echo "$image_name:$version doesn't have external components.json"
             fi
