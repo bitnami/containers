@@ -61,6 +61,7 @@
             },
             "resources": {
               "url": "{VIB_ENV_PACKAGES_JSON_URL}",
+              "path": "/",
               "authn": {
                   "header": "Authorization",
                   "token": "Bearer {VIB_ENV_GITHUB_TOKEN}"
