@@ -2,7 +2,7 @@ name: '[CI/CD] CD Pipeline Run'
 on: # rebuild any PRs and main branch changes
   workflow_run:
     workflows:
-      - '\[CI/CD\] CD Pipeline Prepare'
+      - '\[CI/CD\] CD Prepare'
     types:
       - 'completed'
 permissions:

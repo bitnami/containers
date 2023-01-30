@@ -166,5 +166,5 @@ jobs:
       - uses: actions/upload-artifact@v3
         if: ${{ steps.get-publish-metadata.outputs.result == 'ok' }}
         with:
-          name: package
+          name: packages.json
           path: ~/work/containers/**/osspi-packages.json
