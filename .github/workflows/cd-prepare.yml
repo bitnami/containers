@@ -151,6 +151,7 @@ jobs:
               done
               JSON_ARRAY=$(printf "%s" "${json_packages[@]}" | jq -s)
               echo "${JSON_ARRAY}" > "${image_path}/packages.json"
+              jq -n '{"packages": $packages, "server": { "scanner": "custom", "type": "Hub"}}' --argjson packages "$(cat ${image_path}/packages.json)" > "$image_path/osspi-packages.json"
               s3cmd put "${image_path}/packages.json" "s3://${AWS_S3_BUCKET}/${asset}/${version}/${os_flavour}/${arch}/${revision}/packages.json"
               rm components.json
             else
@@ -166,4 +167,4 @@ jobs:
         if: ${{ steps.get-publish-metadata.outputs.result == 'ok' }}
         with:
           name: package
-          path: ~/work/**/osspi-packages.json
+          path: ~/work/containers/**/osspi-packages.json
