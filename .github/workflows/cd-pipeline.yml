@@ -17,7 +17,7 @@ jobs:
     name: Get modified containers path
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     outputs:
-      package_url: ${{ steps.get-artifacts.outputs.package_url }}
+      packages_json_url: ${{ steps.get-artifacts.outputs.packages_json_url }}
       containers: ${{ steps.get-artifacts.outputs.containers }}
       marketplace_user: ${{ steps.get-registry-credentials.outputs.marketplace_user }}
       marketplace_passwd: ${{ steps.get-registry-credentials.outputs.marketplace_passwd }}
@@ -29,16 +29,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           curl -sSL -o artifacts.json -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" -H "Authorization: Bearer $GITHUB_TOKEN" $PREPARE_WORKFLOW_ARTIFACTS_URL
-          PUBLISH_METADATA_URL="$(jq -r '.artifacts[] | select(.name == "publish-metadata.json") | .archive_download_url' artifacts.json)"
-          curl -sSL -o publish-metadata.json.zip -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" -H "Authorization: Bearer $GITHUB_TOKEN" $PUBLISH_METADATA_URL
+          publish_metadata_url="$(jq -r '.artifacts[] | select(.name == "publish-metadata.json") | .archive_download_url' artifacts.json)"
+          curl -sSL -o publish-metadata.json.zip -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" -H "Authorization: Bearer $GITHUB_TOKEN" $publish_metadata_url
           unzip publish-metadata.json.zip
           containers=$(cat publish-metadata.json | jq -c)
-          PACKAGE_URL="$(jq -r '.artifacts[] | select(.name == "package") | .archive_download_url' artifacts.json)"
-          echo "package_url=${PACKAGE_URL}" >> $GITHUB_OUTPUT
+          packages_json_url="$(jq -r '.artifacts[] | select(.name == "packages.json") | .archive_download_url' artifacts.json)"
+          echo "packages_json_url=${packages_json_url}" >> $GITHUB_OUTPUT
           echo "containers=${containers}" >> $GITHUB_OUTPUT
       - id: get-registry-credentials
         name: Get marketplace's registry credentials
-        if: ${{ steps.get-artifacts.output.package_url != '' }}
+        if: ${{ steps.get-artifacts.output.packages_json_url != '' }}
         run: |
           # csp_auth_token=$(curl -s -H 'Content-Type: application/x-www-form-urlencoded' -X POST -d "grant_type=refresh_token&api_token=${{ secrets.PROD_MARKETPLACE_API_TOKEN }}" https://console.cloud.vmware.com/csp/gateway/am/api/auth/api-tokens/authorize | jq -re .access_token)
           # repo_info=$(curl -s -X POST -H "Content-Type: application/json" -H "csp-auth-token:$csp_auth_token" -d '{"withCredentials":true, "storageType":"OCI"}' https://gtw.marketplace.cloud.vmware.com/api/v1/repositories/transient)
@@ -59,25 +59,12 @@ jobs:
       matrix:
         container: ${{ fromJSON(needs.get-metadata.outputs.containers) }}
     steps:
-      - id: checkout-packages
-        name: Checkout Packages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PACKAGE_URL: ${{ needs.get-metadata.outputs.package_url }}
-        run: |
-          curl -sSL -o /tmp/package.zip -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" -H "Authorization: Bearer $GITHUB_TOKEN" "${PACKAGE_URL}"
-          unzip /tmp/package.zip
-      - id: get-dsl-filepath
-        name: Get pipeline DSL filepath
-        env:
-          CONTAINER_NAME: ${{ matrix.container.name }}
-          CONTAINER_BRANCH: ${{ matrix.container.branch }}
-        run: |
-          dsl_path="${CONTAINER_NAME}"
-          if [[ -d ".vib/${dsl_path}/${CONTAINER_BRANCH}" ]]; then
-            dsl_path="${dsl_path}/${CONTAINER_BRANCH}"
-          fi
-          echo "dsl_path=${dsl_path}" >> $GITHUB_OUTPUT
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        # Full history is not required anymore
+        with:
+          ref: ${{ matrix.container.sha }}
+          fetch-depth: 1
       - uses: vmware-labs/vmware-image-builder-action@main
         name: 'Publish ${{ matrix.container.name }}: ${{ matrix.container.tag }}'
         with:
@@ -87,7 +74,10 @@ jobs:
           VIB_ENV_PATH:  "${{ matrix.container.path }}"
           # Container name
           VIB_ENV_CONTAINER: "${{ matrix.container.name }}"
-          VIB_ENV_ARCHIVE: "${{ needs.get-metadata.outputs.package_url }}"
+          VIB_ENV_CONTAINER_URL: "${{ matrix.container.sha_url }}"
+          VIB_ENV_PACKAGES_JSON_URL: "${{ needs.get-metadata.outputs.packages_json_url }}"
+          VIB_ENV_APP_VERSION: "${{ matrix.container.name }}"
+          VIB_ENV_OS_FLAVOUR: "${{ matrix.container.os_flavour }}"
           VIB_ENV_REPOSITORY_URL: "${{ github.event.workflow_run.repository.url }}"
           VIB_ENV_GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           VIB_ENV_TAG: "${{ matrix.container.tag }}"
