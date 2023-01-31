@@ -19,7 +19,7 @@ env:
 jobs:
   prepare:
     runs-on: ubuntu-latest
-    name: Get modified containers path
+    name: Retrieve metadata and auxiliary files
     if: |
       github.event_name == 'workflow_dispatch' ||
       (github.event.head_commit.author.username == 'bitnami-bot' && github.event.forced == false)
@@ -87,7 +87,7 @@ jobs:
             echo "result=ok" >> $GITHUB_OUTPUT
             echo "${publish_metadata}" > publish-metadata.json
           fi
-      - name: 'Getting 3rd party packages for OSSPI'
+      - name: Getting 3rd party packages for OSSPI
         if: ${{ steps.get-publish-metadata.outputs.result == 'ok' }}
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}

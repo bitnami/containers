@@ -78,7 +78,6 @@ jobs:
           VIB_ENV_PACKAGES_JSON_URL: "${{ needs.get-metadata.outputs.packages_json_url }}"
           VIB_ENV_APP_VERSION: "${{ matrix.container.app_version }}"
           VIB_ENV_OS_FLAVOUR: "${{ matrix.container.os_flavour }}"
-          VIB_ENV_REPOSITORY_URL: "${{ github.event.workflow_run.repository.url }}"
           VIB_ENV_GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           VIB_ENV_TAG: "${{ matrix.container.tag }}"
           VIB_ENV_ROLLING_TAGS: "${{ toJSON(matrix.container.rolling_tags) }}"
