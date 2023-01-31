@@ -8,9 +8,9 @@
     },
     "jaeger-query": {
         "arch": "amd64",
-        "digest": "fcfb3abc00ec36dac8273dd65ae821ff410a36d224fd7c7b54009d05e85dc7f9",
+        "digest": "4fa02f5830ad624f474aa82251f5627cdc0bcc447cd4a144407e9bdce2bdc7ec",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.41.0-2"
+        "version": "1.41.0-3"
     }
 }

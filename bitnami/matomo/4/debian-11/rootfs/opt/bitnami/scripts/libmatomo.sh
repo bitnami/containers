@@ -146,7 +146,7 @@ EOF
             ini-file set -s "database" -k "port" -v "$db_port" "$MATOMO_CONF_FILE"
             ini-file set -s "database" -k "dbname" -v "$db_name" "$MATOMO_CONF_FILE"
             ini-file set -s "database" -k "adapter" -v "MYSQLI" "$MATOMO_CONF_FILE"
-            ini-file set -s "database" -k "tables_prefix" -v "matomo_" "$MATOMO_CONF_FILE"
+            ini-file set -s "database" -k "tables_prefix" -v "$MATOMO_DATABASE_TABLE_PREFIX" "$MATOMO_CONF_FILE"
         fi
 
         # Reverse Proxy Configuration options
@@ -361,6 +361,7 @@ matomo_pass_wizard() {
         "--data-urlencode" "username=${MATOMO_DATABASE_USER}"
         "--data-urlencode" "password=${MATOMO_DATABASE_PASSWORD}"
         "--data-urlencode" "dbname=${MATOMO_DATABASE_NAME}"
+        "--data-urlencode" "tables_prefix=${MATOMO_DATABASE_TABLE_PREFIX}"
         "--data-urlencode" "adapter=MYSQLI"
     )
     debug_execute "curl" "${curl_opts[@]}" "${curl_data_opts[@]}" "${wizard_url}"

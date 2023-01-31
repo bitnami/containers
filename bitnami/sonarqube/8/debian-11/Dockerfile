@@ -6,7 +6,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.9.10-debian-11-r32" \
+      org.opencontainers.image.ref.name="8.9.10-debian-11-r35" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/sonarqube" \
       org.opencontainers.image.title="sonarqube" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -47,6 +47,7 @@ RUN /opt/bitnami/scripts/sonarqube/postunpack.sh
 ENV APP_VERSION="8.9.10" \
     BITNAMI_APP_NAME="sonarqube" \
     JAVA_HOME="/opt/bitnami/java" \
+    LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"
 
 EXPOSE 9000

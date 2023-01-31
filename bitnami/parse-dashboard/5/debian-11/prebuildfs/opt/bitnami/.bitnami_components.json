@@ -15,10 +15,10 @@
     },
     "parse-dashboard": {
         "arch": "amd64",
-        "digest": "c477748f5a159211f340280ecb7e7488f2c965161eb4b1fdb0b6801def9fc432",
+        "digest": "01a96406eaeb7b9aacfd26644e3321a3ebe9d5de6070428fe5692b91e790f53a",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.0.0-1"
+        "version": "5.0.0-3"
     },
     "python": {
         "arch": "amd64",

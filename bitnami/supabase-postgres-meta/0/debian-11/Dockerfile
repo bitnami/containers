@@ -5,11 +5,11 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.60.0-debian-11-r0" \
+      org.opencontainers.image.ref.name="0.60.3-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/supabase-postgres-meta" \
       org.opencontainers.image.title="supabase-postgres-meta" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.60.0"
+      org.opencontainers.image.version="0.60.3"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -24,7 +24,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.8.16-1-linux-${OS_ARCH}-debian-11" \
       "node-16.19.0-1-linux-${OS_ARCH}-debian-11" \
-      "supabase-postgres-meta-0.60.0-0-linux-${OS_ARCH}-debian-11" \
+      "supabase-postgres-meta-0.60.3-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,7 +40,7 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN useradd -r -u 1001 -g root supabase-postgres-meta
 
 RUN mkdir /.npm && chmod g+rwX /.npm
-ENV APP_VERSION="0.60.0" \
+ENV APP_VERSION="0.60.3" \
     BITNAMI_APP_NAME="supabase-postgres-meta" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/supabase-postgres-meta/bin:$PATH"
 

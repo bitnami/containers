@@ -13,13 +13,12 @@ set -o pipefail
 . /opt/bitnami/scripts/libinfluxdb.sh
 
 # Load InfluxDB environment variables
-eval "$(influxdb_env)"
+. /opt/bitnami/scripts/influxdb-env.sh
 
 # Ensure InfluxDB environment variables are valid
 influxdb_validate
 # Ensure InfluxDB user and group exist when running as 'root'
 if am_i_root; then
-    ensure_user_exists "$INFLUXDB_DAEMON_USER" --group "$INFLUXDB_DAEMON_GROUP"
     chown -R "$INFLUXDB_DAEMON_USER" "$INFLUXDB_DATA_DIR" "$INFLUXDB_CONF_DIR"
 fi
 # Ensure InfluxDB is stopped when this script ends.

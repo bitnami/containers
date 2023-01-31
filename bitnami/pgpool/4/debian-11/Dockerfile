@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.4.2-debian-11-r0" \
+      org.opencontainers.image.ref.name="4.4.2-debian-11-r2" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pgpool" \
       org.opencontainers.image.title="pgpool" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -45,7 +45,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/pgpool/postunpack.sh
 ENV APP_VERSION="4.4.2" \
     BITNAMI_APP_NAME="pgpool" \
-    LD_LIBRARY_PATH="/opt/bitnami/common/lib/:/opt/bitnami/common/lib64/:$LD_LIBRARY_PATH" \
+    LD_LIBRARY_PATH="/opt/bitnami/common/lib:/opt/bitnami/common/lib64:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/postgresql/bin:/opt/bitnami/common/bin:/opt/bitnami/common/sbin:/opt/bitnami/pgpool/bin:$PATH"
 
 EXPOSE 5432

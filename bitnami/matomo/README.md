@@ -281,6 +281,7 @@ When you start the Matomo image, you can adjust the configuration of the instanc
  - `MATOMO_DATABASE_SSL_CERT_FILE`: Path to the database client certificate file. No defaults.
  - `MATOMO_DATABASE_SSL_KEY_FILE`: Path to the database client certificate key. No defaults.
  - `MATOMO_VERIFY_DATABASE_SSL`: Whether to verify the database SSL certificate when SSL is enabled. Default: **yes**
+ - `MATOMO_DATABASE_TABLE_PREFIX`: Prefix to use when creating Matomo tables. Default: **matomo_**
  - `BITNAMI_DEBUG`: Increase verbosity on initialization logs. Default **false**
 
 #### Reverse proxy configuration options

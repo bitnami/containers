@@ -6,7 +6,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.2.3-debian-11-r19" \
+      org.opencontainers.image.ref.name="3.2.3-debian-11-r21" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/spark" \
       org.opencontainers.image.title="spark" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.8.16-1-linux-${OS_ARCH}-debian-11" \
       "java-1.8.362-0-linux-${OS_ARCH}-debian-11" \
-      "spark-3.2.3-5-linux-${OS_ARCH}-debian-11" \
+      "spark-3.2.3-6-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -50,7 +50,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="3.2.3" \
     BITNAMI_APP_NAME="spark" \
     JAVA_HOME="/opt/bitnami/java" \
-    LD_LIBRARY_PATH="/opt/bitnami/python/lib/:/opt/bitnami/spark/venv/lib/python3.8/site-packages/numpy.libs/:$LD_LIBRARY_PATH" \
+    LD_LIBRARY_PATH="/opt/bitnami/python/lib:/opt/bitnami/spark/venv/lib/python3.8/site-packages/numpy.libs:$LD_LIBRARY_PATH" \
     LIBNSS_WRAPPER_PATH="/opt/bitnami/common/lib/libnss_wrapper.so" \
     NSS_WRAPPER_GROUP="/opt/bitnami/spark/tmp/nss_group" \
     NSS_WRAPPER_PASSWD="/opt/bitnami/spark/tmp/nss_passwd" \
