@@ -108,9 +108,9 @@ jobs:
             components_files=$(s3cmd ls -l "s3://$AWS_S3_BUCKET/$asset/$version/$os_flavour/$arch/$revision/" | grep -c "components.json")
             # If the components.json file, so it seems has external packages
             if [[ $components_files -gt 0 ]]; then
-              s3cmd get "s3://${AWS_S3_BUCKET}/$asset/$version/$os_flavour/$arch/$revision/components.json" components.json
+              s3cmd get -q "s3://${AWS_S3_BUCKET}/$asset/$version/$os_flavour/$arch/$revision/components.json" components.json
 
-              declare -A packages
+              declare -A packages=()
               # Iterating over the external components to get the involved elements
               while read -r component_id; do
                 component_version_full=$(jq -cr '."'${component_id}'".version' components.json)
@@ -118,17 +118,17 @@ jobs:
                 #split by "-"
                 component_parts=(${component_version_full//-/ })
                 component_version=${component_parts[0]}
-
                 compilation_recipe=$(s3cmd ls -l "s3://${AWS_S3_BUCKET}/$component_id/$component_version/$os_flavour/$arch/" | grep -c "compilation-recipe.json")
                 # If the components.json file, so it seems has external packages
                 if [[ $compilation_recipe -gt 0 ]]; then
-                  s3cmd get "s3://${AWS_S3_BUCKET}/$component_id/$component_version/$os_flavour/$arch/compilation-recipe.json" compilation-recipe.json
+                  s3cmd get -q  "s3://${AWS_S3_BUCKET}/$component_id/$component_version/$os_flavour/$arch/compilation-recipe.json" compilation-recipe.json
                 else
-                  s3cmd get "s3://${AWS_S3_BUCKET}/$component_id/$component_version-${component_parts[1]}/$os_flavour/$arch/compilation-recipe.json" compilation-recipe.json
+                  s3cmd get -q "s3://${AWS_S3_BUCKET}/$component_id/$component_version-${component_parts[1]}/$os_flavour/$arch/compilation-recipe.json" compilation-recipe.json
                 fi
                 # now getting each component to be reported
                 while read -r json_package; do
                   package_id=$(echo "$json_package" | jq -r '.id' )
+                  echo "${asset}: ${package_id}"
                   package_version=$(echo "$json_package" | jq -r '.version' )
                   package_url=$(echo "$json_package" | jq -r '.source.upstreamSourceUrl')
                   packages[$package_id]="$package_version $package_url"
@@ -137,7 +137,7 @@ jobs:
               done <<<"$(jq -cr 'keys[]' components.json)"
 
               # Now creating the JSON file with the needed transformations
-              json_packages=()
+              declare -a json_packages=()
               for package_id in "${!packages[@]}"
               do
                 values=(${packages[$package_id]// / })
