@@ -123,8 +123,8 @@ Use the `--network <NETWORK>` argument to the `docker run` command to attach the
 $ docker run --detach --rm --name pgpool \
   --network my-network \
   --env PGPOOL_BACKEND_NODES=0:pg-0:5432,1:pg-1:5432 \
-  --env PGPOOL_SR_CHECK_USER=customuser \
-  --env PGPOOL_SR_CHECK_PASSWORD=custompassword \
+  --env PGPOOL_SR_CHECK_USER=repmgr \
+  --env PGPOOL_SR_CHECK_PASSWORD=repmgrpassword \
   --env PGPOOL_ENABLE_LDAP=no \
   --env PGPOOL_POSTGRES_USERNAME=postgres \
   --env PGPOOL_POSTGRES_PASSWORD=adminpassword \
@@ -193,8 +193,8 @@ services:
       - 5432:5432
     environment:
       - PGPOOL_BACKEND_NODES=0:pg-0:5432,1:pg-1:5432
-      - PGPOOL_SR_CHECK_USER=customuser
-      - PGPOOL_SR_CHECK_PASSWORD=custompassword
+      - PGPOOL_SR_CHECK_USER=repmgr
+      - PGPOOL_SR_CHECK_PASSWORD=repmgrpassword
       - PGPOOL_ENABLE_LDAP=no
       - PGPOOL_POSTGRES_USERNAME=postgres
       - PGPOOL_POSTGRES_PASSWORD=adminpassword
@@ -350,8 +350,8 @@ $ docker run --detach --name pg-1 \
 $ docker run --detach --rm --name pgpool \
   --network my-network \
   --env PGPOOL_BACKEND_NODES=0:pg-0:5432,1:pg-1:5432 \
-  --env PGPOOL_SR_CHECK_USER=postgres \
-  --env PGPOOL_SR_CHECK_PASSWORD=adminpassword \
+  --env PGPOOL_SR_CHECK_USER=repmgr \
+  --env PGPOOL_SR_CHECK_PASSWORD=repmgrpassword \
   --env PGPOOL_ENABLE_LDAP=no \
   --env PGPOOL_USERNAME=customuser \
   --env PGPOOL_PASSWORD=custompassword \
@@ -387,7 +387,7 @@ In order to have your custom files inside the docker image you can mount them as
 +      - /path/to/init-scripts:/docker-entrypoint-initdb.d
      environment:
        - PGPOOL_BACKEND_NODES=0:pg-0:5432,1:pg-1:5432
-       - PGPOOL_SR_CHECK_USER=customuser
+       - PGPOOL_SR_CHECK_USER=repmgr
 ```
 
 ### Securing Pgpool traffic
@@ -461,7 +461,7 @@ Run the Pgpool image, mounting a directory from your host and setting `PGPOOL_US
 +      - PGPOOL_USER_CONF_FILE=/config/myconf.conf
 +      - PGPOOL_USER_HBA_FILE=/config/myhbaconf.conf
        - PGPOOL_BACKEND_NODES=0:pg-0:5432,1:pg-1:5432
-       - PGPOOL_SR_CHECK_USER=customuser
+       - PGPOOL_SR_CHECK_USER=repmgr
 ```
 
 #### Step 3: Start Pgpool
