@@ -237,7 +237,7 @@ Pgpool configuration:
 
 - `PGPOOL_PASSWORD_FILE`: Path to a file that contains the password for the custom user set in the `PGPOOL_USERNAME` environment variable. This will override the value specified in `PGPOOL_PASSWORD`. No defaults.
 - `PGPOOL_SR_CHECK_PERIOD`: Specifies the time interval in seconds to check the streaming replication delay. Defaults to `30`.
-- `PGPOOL_SR_CHECK_USER`: Username to use to perform streaming checks. No defaults.
+- `PGPOOL_SR_CHECK_USER`: Username to use to perform streaming checks. This is the user that is used to check that streaming replication is working. Typically, this is the user owner of the 'repmgr' database. No defaults.
 - `PGPOOL_SR_CHECK_PASSWORD`: Password to use to perform streaming checks. No defaults.
 - `PGPOOL_SR_CHECK_PASSWORD_FILE`: Path to a file that contains the password to use to perform streaming checks. This will override the value specified in `PGPOOL_SR_CHECK_PASSWORD`. No defaults.
 - `PGPOOL_SR_CHECK_DATABASE`: Database to use to perform streaming checks. Defaults to `postgres`.
