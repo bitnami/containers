@@ -158,6 +158,7 @@ ldap_validate() {
 #   Whether slapd is ready to answer
 #########################
 is_ldap_ready() {
+    # shellcheck disable=SC2015
     is_ldap_running && debug_execute ldapsearch -Y EXTERNAL -H "ldapi:///" -b cn=config -s base || false
 }
 
