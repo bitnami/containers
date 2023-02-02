@@ -22,9 +22,9 @@
     },
     "tomcat": {
         "arch": "amd64",
-        "digest": "d3c973b9239d52b0168450ecba25b35907879b3e80de4474bc95b10ca96c14a4",
+        "digest": "11fcf466c7034b395ed0ae98a737572981c94fc44d9653c233e36c029eb3ba56",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.5.85-2"
+        "version": "8.5.85-3"
     }
 }
