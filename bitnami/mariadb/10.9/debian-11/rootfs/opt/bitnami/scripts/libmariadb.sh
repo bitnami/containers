@@ -304,8 +304,10 @@ EOF
         if [[ -z "$DB_REPLICATION_MODE" ]] || [[ "$DB_REPLICATION_MODE" = "master" ]]; then
             if [[ "$DB_REPLICATION_MODE" = "master" ]]; then
                 debug "Starting replication"
-                [[ -f "$DB_EXTRA_CONF_FILE" ]] && DEFAULTS_EXTRA_FILE_OPT=--defaults-extra-file="$DB_EXTRA_CONF_FILE"
-                echo "RESET MASTER;" | debug_execute "$DB_BIN_DIR/mysql" --defaults-file="$DB_CONF_FILE" ${DEFAULTS_EXTRA_FILE_OPT:-} -N -u root
+               local -a flags=("--defaults-file=${DB_CONF_FILE}")
+               [[ -f "$DB_EXTRA_CONF_FILE" ]] && flags+=("--defaults-extra-file=${DB_EXTRA_CONF_FILE}")
+               flags+=("-N" "-u" "root")
+               echo "RESET MASTER;" | debug_execute "$DB_BIN_DIR/mysql" "${flags[@]}"
             fi
             mysql_ensure_root_user_exists "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" "$DB_AUTHENTICATION_PLUGIN"
             mysql_ensure_user_not_exists "" # ensure unknown user does not exist
