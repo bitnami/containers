@@ -8,10 +8,10 @@
     },
     "kubeapps": {
         "arch": "amd64",
-        "digest": "a055dcc844b1698483583bee492b7f3e034f2b8d1e4addad2aa974a71f54a900",
+        "digest": "b5b9aa65b141e0843fadea6d88aad3deb882ca478b3c1eaf4fdd5d15a3d94908",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.6.2-2"
+        "version": "2.6.3-0"
     },
     "nginx": {
         "arch": "amd64",
