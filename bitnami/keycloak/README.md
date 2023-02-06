@@ -93,6 +93,47 @@ The Bitnami Keycloak container requires a PostgreSQL database to work. This is c
 - `KEYCLOAK_DATABASE_SCHEMA`: PostgreSQL database schema. Default: **public**.
 - `KEYCLOAK_JDBC_PARAMS`: PostgreSQL database JDBC parameters (example: `sslmode=verify-full&connectTimeout=30000`). No defaults.
 
+### Connecting to a Oracle database
+
+The Bitnami Keycloak container can also be connected to an Oracle database. This is configured with the following environment variables and the following custom startup script:
+
+- `KEYCLOAK_DATABASE_VENDOR` or `DB_VENDOR`: set to `oracle` to use an Oracle database. Default: postgresql
+- `ORCL_VERSION`: set to `11` or `12andnewer` depending on your Oracle database version (no default, this variable is needed in every case when using an Oracle database!)
+
+Mount the following custom startup script as described at [Initializing a new instance](https://github.com/bitnami/containers/tree/main/bitnami/keycloak#initializing-a-new-instance):
+
+```console
+#!/bin/sh
+
+KEYCLOAK_DATABASE_VENDOR="${KEYCLOAK_DATABASE_VENDOR:-"${DB_VENDOR:-}"}"
+export KEYCLOAK_DATABASE_VENDOR="${KEYCLOAK_DATABASE_VENDOR:-postgresql}"
+
+if [ "${KEYCLOAK_DATABASE_VENDOR}" == "oracle" ]
+then
+  echo "!!! ORACLE DATABASE IS USED !!!"
+  if [ "${ORCL_VERSION}" == "12andnewer"  ]
+    then
+      kc.sh start --http-relative-path=/auth --db=oracle
+  fi
+  if [ "${ORCL_VERSION}" == "11" ]
+    then
+      kc.sh start --http-relative-path=/auth --db=oracle -Dkc.db-dialect=org.hibernate.dialect.Oracle10gDialect
+  fi
+else
+  echo "!!! POSTGRES DATABASE IS USED !!!"
+  kc.sh start --http-relative-path=/auth
+fi
+```
+
+The above custom startup script can also be added in a custom Dockerfile for the building, then a mount of the script would not be necessary.
+Be aware, this script also contains a modification of the keycloak-web-entrypoint `/auth` (default `/`).
+
+Following Oracle database versions were tested with Keycloak-20.0.3:
+
+- 11gR2
+- 19.3c
+- 21.3c
+
 ### Port and address binding
 
 The listening port and listening address can be configured with the following environment variables:
