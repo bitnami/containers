@@ -5,11 +5,11 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.6.2-debian-11-r21" \
+      org.opencontainers.image.ref.name="2.6.3-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kubeapps-apis" \
       org.opencontainers.image.title="kubeapps-apis" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.6.2"
+      org.opencontainers.image.version="2.6.3"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "kubeapps-apis-2.6.2-1-linux-${OS_ARCH}-debian-11" \
+      "kubeapps-apis-2.6.3-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -39,7 +39,7 @@ RUN apt-get autoremove --purge -y curl && \
 RUN chmod g+rwX /opt/bitnami
 RUN ln -s /opt/bitnami/kubeapps-apis/plugins /plugins && ln -s /opt/bitnami/kubeapps-apis/bin/kubeapps-apis /kubeapps-apis
 
-ENV APP_VERSION="2.6.2" \
+ENV APP_VERSION="2.6.3" \
     BITNAMI_APP_NAME="kubeapps-apis" \
     PATH="/opt/bitnami/kubeapps-apis/bin:$PATH"
 
