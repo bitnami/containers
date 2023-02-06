@@ -210,8 +210,8 @@ services:
 
 It is possible to configure the character set and collation used by default by the database with the following environment variables:
 
-- `MARIADB_CHARACTER_SET`: The default character set to use. Default: `utf8`
-- `MARIADB_COLLATE`: The default collation to use. Default: `utf8_general_ci`
+- `MARIADB_CHARACTER_SET`: The default character set to use. Default: `utf8mb4`
+- `MARIADB_COLLATE`: The default collation to use. Default: `utf8mb4_unicode_ci`
 
 ### Setting the root password on first run
 
