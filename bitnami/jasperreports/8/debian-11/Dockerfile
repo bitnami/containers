@@ -6,7 +6,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.1.0-debian-11-r50" \
+      org.opencontainers.image.ref.name="8.1.0-debian-11-r51" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jasperreports" \
       org.opencontainers.image.title="jasperreports" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -24,7 +24,7 @@ RUN install_packages acl ca-certificates curl fontconfig git libaudit1 libbsd0 l
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "java-1.8.362-0-linux-${OS_ARCH}-debian-11" \
-      "tomcat-9.0.71-6-linux-${OS_ARCH}-debian-11" \
+      "tomcat-9.0.71-7-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-11.18.0-1-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.11-2-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-0-linux-${OS_ARCH}-debian-11" \
