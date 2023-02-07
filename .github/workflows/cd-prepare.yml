@@ -129,7 +129,6 @@ jobs:
                   # now getting each component to be reported
                   while read -r json_package; do
                     package_id=$(echo "$json_package" | jq -r '.id' )
-                    echo "${asset}: ${package_id}"
                     package_version=$(echo "$json_package" | jq -r '.version' )
                     package_url=$(echo "$json_package" | jq -r '.source.upstreamSourceUrl')
                     packages[$package_id]="$package_version $package_url"
