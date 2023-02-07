@@ -20,8 +20,6 @@ jobs:
     outputs:
       packages_json_url: ${{ steps.get-artifacts.outputs.packages_json_url }}
       containers: ${{ steps.get-artifacts.outputs.containers }}
-      marketplace_user: ${{ steps.get-registry-credentials.outputs.marketplace_user }}
-      marketplace_passwd: ${{ steps.get-registry-credentials.outputs.marketplace_passwd }}
     steps:
       - id: get-artifacts
         name: Get modified containers path
@@ -37,17 +35,6 @@ jobs:
           packages_json_url="$(jq -r '.artifacts[] | select(.name == "packages.json") | .archive_download_url' artifacts.json)"
           echo "packages_json_url=${packages_json_url}" >> $GITHUB_OUTPUT
           echo "containers=${containers}" >> $GITHUB_OUTPUT
-      - id: get-registry-credentials
-        name: Get marketplace's registry credentials
-        run: |
-          csp_auth_token=$(curl -s -H 'Content-Type: application/x-www-form-urlencoded' -X POST -d "grant_type=refresh_token&api_token=${{ secrets.PROD_MARKETPLACE_API_TOKEN }}" https://console.cloud.vmware.com/csp/gateway/am/api/auth/api-tokens/authorize | jq -re .access_token)
-          repo_info=$(curl -s -X POST -H "Content-Type: application/json" -H "csp-auth-token:$csp_auth_token" -d '{"withCredentials":true, "storageType":"OCI"}' https://gtw.marketplace.cloud.vmware.com/api/v1/repositories/transient)
-          marketplace_user=$(echo "$repo_info" | jq -re .response.repodetails.username)
-          marketplace_passwd=$(echo "$repo_info" | jq -re .response.repodetails.token)
-          echo "::add-mask::${marketplace_user}"
-          echo "::add-mask::${marketplace_passwd}"
-          echo "marketplace_user=${marketplace_user}" >> $GITHUB_OUTPUT
-          echo "marketplace_passwd=${marketplace_passwd}" >> $GITHUB_OUTPUT
 
   vib-publish:
     runs-on: ubuntu-latest
@@ -65,6 +52,17 @@ jobs:
         with:
           ref: ${{ matrix.container.sha }}
           fetch-depth: 1
+      - id: get-registry-credentials
+        name: Get marketplace's registry credentials
+        run: |
+          csp_auth_token=$(curl -s -H 'Content-Type: application/x-www-form-urlencoded' -X POST -d "grant_type=refresh_token&api_token=${{ secrets.PROD_MARKETPLACE_API_TOKEN }}" https://console.cloud.vmware.com/csp/gateway/am/api/auth/api-tokens/authorize | jq -re .access_token)
+          repo_info=$(curl -s -X POST -H "Content-Type: application/json" -H "csp-auth-token:$csp_auth_token" -d '{"withCredentials":true, "storageType":"OCI"}' https://gtw.marketplace.cloud.vmware.com/api/v1/repositories/transient)
+          marketplace_user=$(echo "$repo_info" | jq -re .response.repodetails.username)
+          marketplace_passwd=$(echo "$repo_info" | jq -re .response.repodetails.token)
+          echo "::add-mask::${marketplace_user}"
+          echo "::add-mask::${marketplace_passwd}"
+          echo "marketplace_user=${marketplace_user}" >> $GITHUB_OUTPUT
+          echo "marketplace_passwd=${marketplace_passwd}" >> $GITHUB_OUTPUT
       - uses: vmware-labs/vmware-image-builder-action@main
         name: 'Publish ${{ matrix.container.name }}: ${{ matrix.container.tag }}'
         with:
@@ -82,5 +80,5 @@ jobs:
           VIB_ENV_TAG: "${{ matrix.container.tag }}"
           VIB_ENV_ROLLING_TAGS: "${{ toJSON(matrix.container.rolling_tags) }}"
           VIB_ENV_REGISTRY_URL: "${{ secrets.PROD_MARKETPLACE_REGISTRY_URL }}"
-          VIB_ENV_REGISTRY_USERNAME: "${{ needs.get-metadata.outputs.marketplace_user }}"
-          VIB_ENV_REGISTRY_PASSWORD: "${{ needs.get-metadata.outputs.marketplace_passwd }}"
+          VIB_ENV_REGISTRY_USERNAME: "${{ steps.get-registry-credentials.outputs.marketplace_user }}"
+          VIB_ENV_REGISTRY_PASSWORD: "${{ steps.get-registry-credentials.outputs.marketplace_passwd }}"
