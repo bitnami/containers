@@ -1,0 +1,23 @@
+{
+    "gosu": {
+        "arch": "amd64",
+        "digest": "9ab9654690d90d3c49ff66fb1eb286487e318adc899d036bc45922f6b176865b",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.16.0-1"
+    },
+    "java": {
+        "arch": "amd64",
+        "digest": "f8c3013925073f94edc495584b76f0b08c867ba35c524e2b262e47e815a443b9",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "11.0.18-10-0"
+    },
+    "supabase-postgres": {
+        "arch": "amd64",
+        "digest": "225eceb222395c3012590d83e251f5ac97375dcfd418e2d4b527355e611a6a67",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "15.1.0-1"
+    }
+}
