@@ -119,13 +119,15 @@ jobs:
                   #split by "-"
                   component_parts=(${component_version_full//-/ })
                   component_version=${component_parts[0]}
+                  component_distro=$(jq -cr '."'${component_id}'".distro' "$components_json_file")
+                  component_arch=$(jq -cr '."'${component_id}'".arch' "$components_json_file")
                   # Added "true" to avoid errors if compilation_recipe doesn't exists
-                  compilation_recipe=$(s3cmd ls -l "s3://${AWS_S3_BUCKET}/$component_id/$component_version/$os_flavour/$arch/" | grep -c "compilation-recipe.json" || true)
+                  compilation_recipe=$(s3cmd ls -l "s3://${AWS_S3_BUCKET}/$component_id/$component_version/$component_distro/$component_arch/" | grep -c "compilation-recipe.json" || true)
                   # If the components.json file, so it seems has external packages
                   if [[ $compilation_recipe -gt 0 ]]; then
-                    s3cmd get  "s3://${AWS_S3_BUCKET}/$component_id/$component_version/$os_flavour/$arch/compilation-recipe.json" compilation-recipe.json
+                    s3cmd get  "s3://${AWS_S3_BUCKET}/$component_id/$component_version/$component_distro/$component_arch/compilation-recipe.json" compilation-recipe.json
                   else
-                    s3cmd get "s3://${AWS_S3_BUCKET}/$component_id/$component_version-${component_parts[1]}/$os_flavour/$arch/compilation-recipe.json" compilation-recipe.json
+                    s3cmd get "s3://${AWS_S3_BUCKET}/$component_id/$component_version-${component_parts[1]}/$component_distro/$component_arch/compilation-recipe.json" compilation-recipe.json
                   fi
                   # now getting each component to be reported
                   while read -r json_package; do
