@@ -118,7 +118,8 @@ jobs:
                   #split by "-"
                   component_parts=(${component_version_full//-/ })
                   component_version=${component_parts[0]}
-                  compilation_recipe=$(s3cmd ls -l "s3://${AWS_S3_BUCKET}/$component_id/$component_version/$os_flavour/$arch/" | grep -c "compilation-recipe.json")
+                  # Added "true" to avoid errors if compilation_recipe doesn't exists
+                  compilation_recipe=$(s3cmd ls -l "s3://${AWS_S3_BUCKET}/$component_id/$component_version/$os_flavour/$arch/" | grep -c "compilation-recipe.json" || true)
                   # If the components.json file, so it seems has external packages
                   if [[ $compilation_recipe -gt 0 ]]; then
                     s3cmd get  "s3://${AWS_S3_BUCKET}/$component_id/$component_version/$os_flavour/$arch/compilation-recipe.json" compilation-recipe.json
