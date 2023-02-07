@@ -12,7 +12,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "kubeapps-apprepository-controller-2.6.2-1-linux-${OS_ARCH}-debian-11" \
+      "kubeapps-apprepository-controller-2.6.3-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -35,11 +35,11 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.6.2-scratch-r2" \
+      org.opencontainers.image.ref.name="2.6.3-scratch-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/kubeapps-apprepository-controller" \
       org.opencontainers.image.title="kubeapps-apprepository-controller" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.6.2"
+      org.opencontainers.image.version="2.6.3"
 
 COPY prebuildfs /
 COPY rootfs /

@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="20220731.1.0-debian-11-r50" \
+      org.opencontainers.image.ref.name="20220731.1.0-debian-11-r52" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/dokuwiki" \
       org.opencontainers.image.title="dokuwiki" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -23,7 +23,7 @@ RUN install_packages acl ca-certificates curl ldap-utils libbrotli1 libbsd0 libb
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "php-8.1.14-1-linux-${OS_ARCH}-debian-11" \
-      "apache-2.4.55-1-linux-${OS_ARCH}-debian-11" \
+      "apache-2.4.55-4-linux-${OS_ARCH}-debian-11" \
       "libphp-8.1.14-2-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \

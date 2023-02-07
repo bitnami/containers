@@ -6,7 +6,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="27.0.1-debian-11-r17" \
+      org.opencontainers.image.ref.name="27.0.1-debian-11-r20" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/wildfly" \
       org.opencontainers.image.title="wildfly" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -24,7 +24,7 @@ RUN install_packages ca-certificates curl libaio1 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "java-11.0.18-10-0-linux-${OS_ARCH}-debian-11" \
-      "wildfly-27.0.1-3-linux-${OS_ARCH}-debian-11" \
+      "wildfly-27.0.1-5-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \

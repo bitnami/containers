@@ -5,11 +5,11 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="9.5.2-debian-11-r4" \
+      org.opencontainers.image.ref.name="9.5.3-debian-11-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/drupal-nginx" \
       org.opencontainers.image.title="drupal-nginx" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="9.5.2"
+      org.opencontainers.image.version="9.5.3"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -27,7 +27,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "mysql-client-10.6.11-2-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
-      "drupal-9.5.2-1-linux-${OS_ARCH}-debian-11" \
+      "drupal-9.5.3-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,7 +48,7 @@ RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/nginx-php-fpm/postunpack.sh
 RUN /opt/bitnami/scripts/drupal/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
-ENV APP_VERSION="9.5.2" \
+ENV APP_VERSION="9.5.3" \
     BITNAMI_APP_NAME="drupal-nginx" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \

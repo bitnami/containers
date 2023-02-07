@@ -6,7 +6,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="20.0.3-debian-11-r8" \
+      org.opencontainers.image.ref.name="20.0.3-debian-11-r11" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/keycloak" \
       org.opencontainers.image.title="keycloak" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -25,7 +25,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "wait-for-port-1.0.6-0-linux-${OS_ARCH}-debian-11" \
       "java-11.0.18-10-0-linux-${OS_ARCH}-debian-11" \
-      "keycloak-20.0.3-2-linux-${OS_ARCH}-debian-11" \
+      "keycloak-20.0.3-4-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \

@@ -1,10 +1,10 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "d0aa10a66399e95861e3ab3dc2d36fc84eabe022ecb577fb4c4e72e9b34c9655",
+        "digest": "6937b37eaae1a0053c097ae04509cf3ccc4d260dd5fe010572753c3e8b22470d",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.4.55-1"
+        "version": "2.4.55-4"
     },
     "gosu": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "phpbb": {
         "arch": "amd64",
-        "digest": "dbad1975495959bebdababf3a45ac6f087dc6ecb29a69b5e51dc8d4f4142168b",
+        "digest": "9823ee4534132b1b872896ef68100be1808aac4fab743a3a297aa8099782f8d5",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.3.9-1"
+        "version": "3.3.10-0"
     },
     "render-template": {
         "arch": "amd64",

@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.28.2-debian-11-r2" \
+      org.opencontainers.image.ref.name="0.28.2-debian-11-r4" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/supabase-storage" \
       org.opencontainers.image.title="supabase-storage" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -23,7 +23,7 @@ RUN install_packages ca-certificates curl libbz2-1.0 libcom-err2 libcrypt1 libff
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.8.16-1-linux-${OS_ARCH}-debian-11" \
-      "node-18.13.0-2-linux-${OS_ARCH}-debian-11" \
+      "node-18.14.0-0-linux-${OS_ARCH}-debian-11" \
       "supabase-storage-0.28.2-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \

@@ -5,11 +5,11 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.3.0-debian-11-r2" \
+      org.opencontainers.image.ref.name="2.4.0-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/supabase-realtime" \
       org.opencontainers.image.title="supabase-realtime" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.3.0"
+      org.opencontainers.image.version="2.4.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libgcc-s1 libssl1.1 libstdc++6 libtinfo6 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "supabase-realtime-2.3.0-0-linux-${OS_ARCH}-debian-11" \
+      "supabase-realtime-2.4.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -37,7 +37,7 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN useradd -r -u 1001 -g root supabase-realtime
 
-ENV APP_VERSION="2.3.0" \
+ENV APP_VERSION="2.4.0" \
     BITNAMI_APP_NAME="supabase-realtime" \
     PATH="/opt/bitnami/supabase-realtime/bin:$PATH"
 

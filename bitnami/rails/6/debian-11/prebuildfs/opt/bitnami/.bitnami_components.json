@@ -15,10 +15,10 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "d6af04c243ce6dccdad7e9eae84e877925fb46cff39b556fe8914d0261e461e2",
+        "digest": "79b27ed6e282bf9425b00dbe23de769f78422535817477f0026d5981aa708192",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.13.0-1"
+        "version": "18.14.0-0"
     },
     "python": {
         "arch": "amd64",
@@ -29,10 +29,10 @@
     },
     "rails": {
         "arch": "amd64",
-        "digest": "029740adee037f25f5e08546f8d41e3943a2a7c332a641cf016bf9fd9afe1639",
+        "digest": "30699ee1667c2577e1f46abf09407e40af8bd6a63c220c0108f5a5494e053392",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.1.7-2-0"
+        "version": "6.1.7-2-2"
     },
     "ruby": {
         "arch": "amd64",

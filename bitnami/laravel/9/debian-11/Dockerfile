@@ -5,11 +5,11 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="9.5.1-debian-11-r5" \
+      org.opencontainers.image.ref.name="9.5.2-debian-11-r2" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/laravel" \
       org.opencontainers.image.title="laravel" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="9.5.1"
+      org.opencontainers.image.version="9.5.2"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
@@ -23,9 +23,9 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.8.16-1-linux-${OS_ARCH}-debian-11" \
       "php-8.1.14-1-linux-${OS_ARCH}-debian-11" \
-      "node-18.13.0-2-linux-${OS_ARCH}-debian-11" \
+      "node-18.14.0-0-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.6-0-linux-${OS_ARCH}-debian-11" \
-      "laravel-9.5.1-0-linux-${OS_ARCH}-debian-11" \
+      "laravel-9.5.2-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -44,7 +44,7 @@ RUN /build/bitnami-user.sh
 COPY rootfs /
 RUN /opt/bitnami/scripts/laravel/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
-ENV APP_VERSION="9.5.1" \
+ENV APP_VERSION="9.5.2" \
     BITNAMI_APP_NAME="laravel" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/node/bin:/opt/bitnami/common/bin:$PATH" \

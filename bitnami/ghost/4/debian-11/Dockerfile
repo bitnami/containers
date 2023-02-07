@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.48.9-debian-11-r21" \
+      org.opencontainers.image.ref.name="4.48.9-debian-11-r23" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ghost" \
       org.opencontainers.image.title="ghost" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -23,7 +23,7 @@ RUN install_packages acl ca-certificates curl jq libaudit1 libbz2-1.0 libcap-ng0
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.8.16-1-linux-${OS_ARCH}-debian-11" \
-      "node-14.21.2-1-linux-${OS_ARCH}-debian-11" \
+      "node-16.19.0-1-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.11-2-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
       "ghost-4.48.9-2-linux-${OS_ARCH}-debian-11" \

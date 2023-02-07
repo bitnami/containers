@@ -5,11 +5,11 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="10.8.6-debian-11-r28" \
+      org.opencontainers.image.ref.name="10.8.7-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mariadb-galera" \
       org.opencontainers.image.title="mariadb-galera" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="10.8.6"
+      org.opencontainers.image.version="10.8.7"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,7 +23,7 @@ RUN install_packages ca-certificates curl iproute2 ldap-utils libaio1 libaudit1 
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "ini-file-1.4.5-0-linux-${OS_ARCH}-debian-11" \
-      "mariadb-galera-10.8.6-4-linux-${OS_ARCH}-debian-11" \
+      "mariadb-galera-10.8.7-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -43,7 +43,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mariadb-galera/postunpack.sh
-ENV APP_VERSION="10.8.6" \
+ENV APP_VERSION="10.8.7" \
     BITNAMI_APP_NAME="mariadb-galera" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/common/sbin:/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:$PATH"
 

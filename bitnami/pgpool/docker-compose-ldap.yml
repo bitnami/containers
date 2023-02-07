@@ -11,12 +11,13 @@ services:
       - POSTGRESQL_USERNAME=customuser
       - POSTGRESQL_PASSWORD=custompassword
       - POSTGRESQL_DATABASE=customdatabase
-      - REPMGR_PASSWORD=repmgrpassword
       - REPMGR_PRIMARY_HOST=pg-0
       - REPMGR_PARTNER_NODES=pg-0,pg-1
       - REPMGR_NODE_NAME=pg-0
       - REPMGR_NODE_NETWORK_NAME=pg-0
       - REPMGR_PGHBA_TRUST_ALL=yes
+      - REPMGR_USERNAME=repmgr
+      - REPMGR_PASSWORD=repmgrpassword
   pg-1:
     image: docker.io/bitnami/postgresql-repmgr:14
     ports:
@@ -28,12 +29,13 @@ services:
       - POSTGRESQL_USERNAME=customuser
       - POSTGRESQL_PASSWORD=custompassword
       - POSTGRESQL_DATABASE=customdatabase
-      - REPMGR_PASSWORD=repmgrpassword
       - REPMGR_PRIMARY_HOST=pg-0
       - REPMGR_PARTNER_NODES=pg-0,pg-1
       - REPMGR_NODE_NAME=pg-1
       - REPMGR_NODE_NETWORK_NAME=pg-1
       - REPMGR_PGHBA_TRUST_ALL=yes
+      - REPMGR_USERNAME=repmgr
+      - REPMGR_PASSWORD=repmgrpassword
   pgpool:
     image: docker.io/bitnami/pgpool:4
     ports:
@@ -52,6 +54,8 @@ services:
       - LDAP_BASE=dc=example,dc=org
       - LDAP_BIND_DN=cn=admin,dc=example,dc=org
       - LDAP_BIND_PASSWORD=adminpassword
+      - PGPOOL_POSTGRES_CUSTOM_USERS=customuser
+      - PGPOOL_POSTGRES_CUSTOM_PASSWORDS=custompassword
     healthcheck:
       test: ["CMD", "/opt/bitnami/scripts/pgpool/healthcheck.sh"]
       interval: 10s

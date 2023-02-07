@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.4.5-p1-debian-11-r37" \
+      org.opencontainers.image.ref.name="2.4.5-p1-debian-11-r39" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/magento" \
       org.opencontainers.image.title="magento" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -23,7 +23,7 @@ RUN install_packages acl ca-certificates cron curl libaudit1 libbrotli1 libbsd0 
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "php-8.1.14-1-linux-${OS_ARCH}-debian-11" \
-      "apache-2.4.55-1-linux-${OS_ARCH}-debian-11" \
+      "apache-2.4.55-4-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.6-0-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.11-2-linux-${OS_ARCH}-debian-11" \
       "libphp-8.1.14-2-linux-${OS_ARCH}-debian-11" \

@@ -1,10 +1,10 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "d0aa10a66399e95861e3ab3dc2d36fc84eabe022ecb577fb4c4e72e9b34c9655",
+        "digest": "6937b37eaae1a0053c097ae04509cf3ccc4d260dd5fe010572753c3e8b22470d",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.4.55-1"
+        "version": "2.4.55-4"
     },
     "gosu": {
         "arch": "amd64",
@@ -43,10 +43,10 @@
     },
     "wordpress": {
         "arch": "amd64",
-        "digest": "a2f7e36085a1771f8d7f578290749488793a4a55e42204549a51ffd7de7d623e",
+        "digest": "812f41b5cfeaf8a0ea91532a9df0d465f0e13d0949eb96160dba8833d31b8796",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.1.1-19"
+        "version": "6.1.1-21"
     },
     "wp-cli": {
         "arch": "amd64",

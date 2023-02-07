@@ -1,10 +1,10 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "d0aa10a66399e95861e3ab3dc2d36fc84eabe022ecb577fb4c4e72e9b34c9655",
+        "digest": "6937b37eaae1a0053c097ae04509cf3ccc4d260dd5fe010572753c3e8b22470d",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.4.55-1"
+        "version": "2.4.55-4"
     },
     "gosu": {
         "arch": "amd64",
@@ -43,9 +43,9 @@
     },
     "suitecrm": {
         "arch": "amd64",
-        "digest": "bd02863cc4cfe0fdb16413464eaff57d37b34f096fea12537cf3c7a528b27dce",
+        "digest": "38ee2fa98e3fbd74a1a1ef695a6ab30fa431bbfdfff4a566ed83f865cb170fcc",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.13.1-0"
+        "version": "7.13.1-1"
     }
 }

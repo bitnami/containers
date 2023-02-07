@@ -6,11 +6,11 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.5.0-6085-debian-11-r0" \
+      org.opencontainers.image.ref.name="4.5.0-6086-debian-11-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/reportserver" \
       org.opencontainers.image.title="reportserver" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="4.5.0-6085"
+      org.opencontainers.image.version="4.5.0-6086"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -24,9 +24,9 @@ RUN install_packages ca-certificates curl libaudit1 libcap-ng0 libgcc-s1 libicu6
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "java-11.0.18-10-0-linux-${OS_ARCH}-debian-11" \
-      "tomcat-9.0.71-3-linux-${OS_ARCH}-debian-11" \
+      "tomcat-9.0.71-7-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.11-2-linux-${OS_ARCH}-debian-11" \
-      "reportserver-4.5.0-6085-0-linux-${OS_ARCH}-debian-11" \
+      "reportserver-4.5.0-6086-0-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
     ) && \
@@ -49,7 +49,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/reportserver/postunpack.sh
 RUN /opt/bitnami/scripts/tomcat/postunpack.sh
-ENV APP_VERSION="4.5.0-6085" \
+ENV APP_VERSION="4.5.0-6086" \
     BITNAMI_APP_NAME="reportserver" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH" \

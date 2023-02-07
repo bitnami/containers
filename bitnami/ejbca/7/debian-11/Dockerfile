@@ -6,7 +6,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.11.0-debian-11-r4" \
+      org.opencontainers.image.ref.name="7.11.0-debian-11-r6" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/ejbca" \
       org.opencontainers.image.title="ejbca" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -24,7 +24,7 @@ RUN install_packages acl ca-certificates curl libaio1 libaudit1 libcap-ng0 libgc
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "java-11.0.18-10-0-linux-${OS_ARCH}-debian-11" \
-      "wildfly-26.1.3-1-linux-${OS_ARCH}-debian-11" \
+      "wildfly-26.1.3-3-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.11-2-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
       "ejbca-7.11.0-0-linux-${OS_ARCH}-debian-11" \
