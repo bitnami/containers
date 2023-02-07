@@ -104,37 +104,38 @@ jobs:
             asset=$(echo "$container" | jq -cr '.name')
             os_flavour=$(echo "$container" | jq -cr '.os_flavour')
             revision=$(echo "$container" | jq -cr '.revision')
+            containers_path=$(echo "$container" | jq -cr '.path')
+            components_json_file="${containers_path}/prebuildfs/opt/bitnami/.bitnami_components.json"
 
-            components_files=$(s3cmd ls -l "s3://$AWS_S3_BUCKET/$asset/$version/$os_flavour/$arch/$revision/" | grep -c "components.json")
             # If the components.json file, so it seems has external packages
-            if [[ $components_files -gt 0 ]]; then
-              s3cmd get -q "s3://${AWS_S3_BUCKET}/$asset/$version/$os_flavour/$arch/$revision/components.json" components.json
-
+            if [[ -f "$components_json_file" ]]; then
               declare -A packages=()
               # Iterating over the external components to get the involved elements
               while read -r component_id; do
-                component_version_full=$(jq -cr '."'${component_id}'".version' components.json)
+                if [[ -n "$component_id" ]]; then
+                  component_version_full=$(jq -cr '."'${component_id}'".version' "$components_json_file")
 
-                #split by "-"
-                component_parts=(${component_version_full//-/ })
-                component_version=${component_parts[0]}
-                compilation_recipe=$(s3cmd ls -l "s3://${AWS_S3_BUCKET}/$component_id/$component_version/$os_flavour/$arch/" | grep -c "compilation-recipe.json")
-                # If the components.json file, so it seems has external packages
-                if [[ $compilation_recipe -gt 0 ]]; then
-                  s3cmd get -q  "s3://${AWS_S3_BUCKET}/$component_id/$component_version/$os_flavour/$arch/compilation-recipe.json" compilation-recipe.json
-                else
-                  s3cmd get -q "s3://${AWS_S3_BUCKET}/$component_id/$component_version-${component_parts[1]}/$os_flavour/$arch/compilation-recipe.json" compilation-recipe.json
+                  #split by "-"
+                  component_parts=(${component_version_full//-/ })
+                  component_version=${component_parts[0]}
+                  # Added "true" to avoid errors if compilation_recipe doesn't exists
+                  compilation_recipe=$(s3cmd ls -l "s3://${AWS_S3_BUCKET}/$component_id/$component_version/$os_flavour/$arch/" | grep -c "compilation-recipe.json" || true)
+                  # If the components.json file, so it seems has external packages
+                  if [[ $compilation_recipe -gt 0 ]]; then
+                    s3cmd get  "s3://${AWS_S3_BUCKET}/$component_id/$component_version/$os_flavour/$arch/compilation-recipe.json" compilation-recipe.json
+                  else
+                    s3cmd get "s3://${AWS_S3_BUCKET}/$component_id/$component_version-${component_parts[1]}/$os_flavour/$arch/compilation-recipe.json" compilation-recipe.json
+                  fi
+                  # now getting each component to be reported
+                  while read -r json_package; do
+                    package_id=$(echo "$json_package" | jq -r '.id' )
+                    package_version=$(echo "$json_package" | jq -r '.version' )
+                    package_url=$(echo "$json_package" | jq -r '.source.upstreamSourceUrl')
+                    packages[$package_id]="$package_version $package_url"
+                  done <<<"$(jq -cr '.components[]' compilation-recipe.json)"
+                  rm compilation-recipe.json
                 fi
-                # now getting each component to be reported
-                while read -r json_package; do
-                  package_id=$(echo "$json_package" | jq -r '.id' )
-                  echo "${asset}: ${package_id}"
-                  package_version=$(echo "$json_package" | jq -r '.version' )
-                  package_url=$(echo "$json_package" | jq -r '.source.upstreamSourceUrl')
-                  packages[$package_id]="$package_version $package_url"
-                done <<<"$(jq -cr '.components[]' compilation-recipe.json)"
-                rm compilation-recipe.json
-              done <<<"$(jq -cr 'keys[]' components.json)"
+              done <<<"$(jq -cr 'keys[]' "$components_json_file")"
 
               # Now creating the JSON file with the needed transformations
               declare -a json_packages=()
@@ -153,7 +154,6 @@ jobs:
               echo "${JSON_ARRAY}" > "${image_path}/packages.json"
               jq -n '{"packages": $packages, "server": { "scanner": "custom", "type": "Hub"}}' --argjson packages "$(cat ${image_path}/packages.json)" > "$image_path/osspi-packages.json"
               s3cmd put "${image_path}/packages.json" "s3://${AWS_S3_BUCKET}/${asset}/${version}/${os_flavour}/${arch}/${revision}/packages.json"
-              rm components.json
             else
               echo "$image_name:$version doesn't have external components.json"
             fi
