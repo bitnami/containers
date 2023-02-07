@@ -62,7 +62,8 @@ jobs:
                   else
                     name="$(grep -oE "org.opencontainers.image.title=\".+\"" "${container}/Dockerfile" | sed -nr "s|org.opencontainers.image.title=\"(.+)\"|\1|p")"
                     app_version="$(grep -oE "org.opencontainers.image.version=\".+\"" "${container}/Dockerfile" | sed -nr "s|org.opencontainers.image.version=\"(.+)\"|\1|p")"
-                    os_flavour="$(grep -oP "OS_FLAVOUR=\"\K[^\"]+" "${container}/Dockerfile")"
+                    os_flavour_parsed="$(grep -oP "OS_FLAVOUR=\"\K[^\"]+" "${container}/Dockerfile" || true)"
+                    os_flavour=${os_flavour_parsed:-scratch}
                     revision="${tag#"${app_version}-${os_flavour}-r"}"
                     rolling_tags="$(yq '.rolling-tags' "${container}/tags-info.yaml" -o json | jq -c)"
                     branch="$(echo "${container}" | awk -F '/' '{print $3}')"
