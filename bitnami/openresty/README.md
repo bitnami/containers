@@ -227,6 +227,15 @@ services:
   ...
 ```
 
+### Adding lua modules
+
+Openresty uses its own Lua's package manager named `opm`. It is advised to use `opm` [instead of other Lua's package manager like `luarocks`](https://openresty.org/en/using-luarocks.html). You can easily run the `opm` command from the container command-line, or build your custom image by extending Bitnami's:
+
+```Dockerfile
+FROM bitnami/openresty:latest
+RUN opm get openresty/lua-resty-lock
+```
+
 ## Reverse proxy to other containers
 
 OpenResty can be used to reverse proxy to other containers using Docker's linking system. This is particularly useful if you want to serve dynamic content through an OpenResty frontend. To do so, [add a server block](#adding-custom-server-blocks) like the following in the `/opt/bitnami/openresty/nginx/conf/server_blocks/` folder:
