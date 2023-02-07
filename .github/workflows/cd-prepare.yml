@@ -1,5 +1,5 @@
 name: '[CI/CD] CD Prepare'
-run-name: "${{ github.event_name == 'workflow_dispatch' && format('[CD] Retrying SHA: {0}', inputs.sha) || '' }}"
+run-name: "${{ github.event_name == 'workflow_dispatch' && format('Retrying SHA: {0}', inputs.sha) || '' }}"
 on: # rebuild any PRs and main branch changes
   workflow_dispatch:
     inputs:

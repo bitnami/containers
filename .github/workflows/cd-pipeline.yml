@@ -1,4 +1,5 @@
 name: '[CI/CD] CD Pipeline Run'
+run-name: "${{ format('[CI/CD] CD Publish {0}',github.event.workflow_run.display_title) }}"
 on: # rebuild any PRs and main branch changes
   workflow_run:
     workflows:
