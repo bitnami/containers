@@ -1,0 +1,11 @@
+########################
+# Checks components directories exist
+# Needed vars:
+#   - .Vars.components.directories (Array)
+########################
+file:
+  {{ range $directory := .Vars.components.directories }}
+  {{ $directory }}:
+    exists: true
+    filetype: directory
+  {{ end }}

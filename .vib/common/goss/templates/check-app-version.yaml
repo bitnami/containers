@@ -1,0 +1,12 @@
+########################
+# Checks asset version via its binary
+# Needed vars:
+#   - .Vars.version.bin_name (String)
+#   - .Vars.version.flag (String)
+########################
+command:
+  check-app-version:
+    exec: {{ .Vars.version.bin_name }} {{ .Vars.version.flag }}
+    exit-status: 0
+    stdout:
+    - {{ .Env.APP_VERSION }}
