@@ -1,0 +1,5 @@
+version: '2'
+
+services:
+  jwt-cli:
+    image: docker.io/bitnami/jwt-cli:5
