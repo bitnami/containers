@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.39.1-debian-11-r17" \
+      org.opencontainers.image.ref.name="1.39.1-debian-11-r18" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/mediawiki" \
       org.opencontainers.image.title="mediawiki" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -24,7 +24,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "php-8.1.14-1-linux-${OS_ARCH}-debian-11" \
       "apache-2.4.55-4-linux-${OS_ARCH}-debian-11" \
-      "mysql-client-10.6.11-2-linux-${OS_ARCH}-debian-11" \
+      "mysql-client-10.6.12-0-linux-${OS_ARCH}-debian-11" \
       "libphp-8.1.14-2-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-0-linux-${OS_ARCH}-debian-11" \
       "mediawiki-1.39.1-2-linux-${OS_ARCH}-debian-11" \
