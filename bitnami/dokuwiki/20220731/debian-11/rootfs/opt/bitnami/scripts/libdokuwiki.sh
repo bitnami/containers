@@ -63,7 +63,6 @@ dokuwiki_initialize() {
             web_server_stop
             dokuwiki_enable_friendly_urls
         fi
-
         dokuwiki_configure_DOKU_INC
 
         info "Persisting DokuWiki installation"
