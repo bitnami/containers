@@ -234,7 +234,7 @@ cassandra_validate() {
     done
 
     if [[ ! ${CASSANDRA_AUTO_SNAPSHOT_TTL} =~ ([1-9]{1}[0-9]{0,}[d|h|m]) ]]; then
-       print_validation_error "CASSANDRA_AUTO_SNAPSHOT_TTL accepted units: d (days), h (hours) or m (minutes)"
+        print_validation_error "CASSANDRA_AUTO_SNAPSHOT_TTL accepted units: d (days), h (hours) or m (minutes)"
     fi
 
     check_true_false_value CASSANDRA_SSL_VALIDATE
