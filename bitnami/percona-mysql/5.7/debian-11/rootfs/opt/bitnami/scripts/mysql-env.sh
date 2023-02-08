@@ -91,9 +91,9 @@ export DB_DAEMON_GROUP="mysql"
 # Default configuration (build-time)
 export MYSQL_DEFAULT_PORT_NUMBER="3306"
 export DB_DEFAULT_PORT_NUMBER="$MYSQL_DEFAULT_PORT_NUMBER" # only used at build time
-export MYSQL_DEFAULT_CHARACTER_SET="utf8"
+export MYSQL_DEFAULT_CHARACTER_SET="utf8mb4"
 export DB_DEFAULT_CHARACTER_SET="$MYSQL_DEFAULT_CHARACTER_SET" # only used at build time
-export MYSQL_DEFAULT_COLLATE="utf8_general_ci"
+export MYSQL_DEFAULT_COLLATE="utf8mb4_unicode_ci"
 export DB_DEFAULT_COLLATE="$MYSQL_DEFAULT_COLLATE" # only used at build time
 export MYSQL_DEFAULT_BIND_ADDRESS="0.0.0.0"
 export DB_DEFAULT_BIND_ADDRESS="$MYSQL_DEFAULT_BIND_ADDRESS" # only used at build time
