@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.6.1-debian-11-r0" \
+      org.opencontainers.image.ref.name="2.6.1-debian-11-r1" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/argo-cd" \
       org.opencontainers.image.title="argo-cd" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,11 +22,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl git git-lfs gnupg openssh-client procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "kustomize-4.5.7-4-linux-${OS_ARCH}-debian-11" \
-      "ksonnet-0.13.1-155-linux-${OS_ARCH}-debian-11" \
-      "helm-3.10.3-1-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
-      "argo-cd-2.6.1-0-linux-${OS_ARCH}-debian-11" \
+      "argo-cd-2.6.1-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -46,7 +43,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/argo-cd/postunpack.sh
 ENV APP_VERSION="2.6.1" \
     BITNAMI_APP_NAME="argo-cd" \
-    PATH="/opt/bitnami/kustomize/bin:/opt/bitnami/ksonnet/bin:/opt/bitnami/helm/bin:/opt/bitnami/common/bin:/opt/bitnami/argo-cd/bin:/opt/bitnami/argo-cd/hack:$PATH"
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/argo-cd/bin:/opt/bitnami/argo-cd/hack:/opt/bitnami/helm/bin:/opt/bitnami/ksonnet/bin:/opt/bitnami/kustomize/bin:$PATH"
 
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/argo-cd/entrypoint.sh" ]
