@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.4.2-debian-11-r5" \
+      org.opencontainers.image.ref.name="4.4.2-debian-11-r6" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/pgpool" \
       org.opencontainers.image.title="pgpool" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -22,9 +22,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl ldap-utils libaudit1 libbsd0 libcap-ng0 libcrypt1 libedit2 libffi7 libgcc-s1 libgmp10 libgnutls30 libhogweed6 libicu67 libidn2-0 libldap-2.4-2 libldap-common liblz4-1 liblzma5 libmd0 libnettle8 libp11-kit0 libpam-ldapd libpam0g libsasl2-2 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 nslcd procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "postgresql-client-14.6.0-1-linux-${OS_ARCH}-debian-11" \
+      "postgresql-client-14.7.0-0-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.6-0-linux-${OS_ARCH}-debian-11" \
-      "pgpool-4.4.2-0-linux-${OS_ARCH}-debian-11" \
+      "pgpool-4.4.2-1-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
