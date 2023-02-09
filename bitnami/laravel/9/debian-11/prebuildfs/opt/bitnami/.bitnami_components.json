@@ -22,17 +22,17 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "4dfcd710baee20f9690f910709c5fca5e2bf63d0cf275cf0a2ada72733b50374",
+        "digest": "4e56974292b79dcc5dc73d84aa7af36139c5e379ca9e1c8d67b706e00bc883c0",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.14-1"
+        "version": "8.1.15-1"
     },
     "python": {
         "arch": "amd64",
-        "digest": "5baedbb7b4cd8e626842e71320bfe8cc4866b7238c5e8479c5426b9123c7dba0",
+        "digest": "fbe5cb1a19ecccf616d2e97c130e7dae06537494bdcc3ead8b9e98054fb4a6f9",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-1"
+        "version": "3.8.16-3"
     },
     "wait-for-port": {
         "arch": "amd64",
