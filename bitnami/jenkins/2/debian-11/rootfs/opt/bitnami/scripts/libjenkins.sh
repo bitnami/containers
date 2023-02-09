@@ -207,20 +207,14 @@ jenkins_initialize() {
     fi
 
     if is_mounted_dir_empty "$JENKINS_HOME"; then
-        # Plugins
-        if ! is_dir_empty "${JENKINS_BASE_DIR}/plugins"; then
-            debug "Moving plugins to $JENKINS_HOME"
-            ensure_dir_exists "${JENKINS_HOME}/plugins"
-            mv "${JENKINS_BASE_DIR}/plugins"/* "${JENKINS_HOME}/plugins"
-            am_i_root && configure_permissions_ownership "${JENKINS_HOME}/plugins" -d "755" -f "644" -u "$JENKINS_DAEMON_USER" -g "$JENKINS_DAEMON_GROUP"
-        else
-            debug "${JENKINS_BASE_DIR}/plugins is empty, assuming a restart"
-        fi
+        # Copy files from mounted directory, except for plugins
         if ! is_mounted_dir_empty "$JENKINS_MOUNTED_CONTENT_DIR"; then
             info "Moving custom mounted files to Jenkins home directory"
             echo "--- Copying files at $(date)" >>"${JENKINS_LOGS_DIR}/copy_reference_file.log"
-            find "$JENKINS_MOUNTED_CONTENT_DIR" \( -type f -o -type l \) | xargs -I % -P10 bash -c '. /opt/bitnami/scripts/libjenkins.sh && jenkins_add_custom_file %'
+            find "$JENKINS_MOUNTED_CONTENT_DIR" \( -type f -o -type l \) -and -not -path "$JENKINS_MOUNTED_CONTENT_DIR/plugins/*" | xargs -I % -P10 bash -c '. /opt/bitnami/scripts/libjenkins.sh && jenkins_add_custom_file %'
         fi
+        # Install Jenkins plugins defined in JENKINS_PLUGINS
+        jenkins_install_plugins
         # Initialize Jenkins
         if ! is_boolean_yes "$JENKINS_SKIP_BOOTSTRAP"; then
             # Create init groovy script and initialize Jenkins
@@ -233,7 +227,7 @@ jenkins_initialize() {
             # Rotate the logs in Jenkins to clean the Jenkins warnings before actually configuring the app
             jenkins_stop
             # Generate jenkins.jks
-            "${JAVA_HOME}/bin/keytool" -genkey -keypass "${JENKINS_KEYSTORE_PASSWORD}" -storepass "${JENKINS_KEYSTORE_PASSWORD}" -keystore "${JENKINS_HOME}/jenkins.jks" -dname "CN=${JENKINS_HOST}, O=${JENKINS_HOST}" -alias "${JENKINS_HOST}"
+            "${JAVA_HOME}/bin/keytool" -genkey -keypass "${JENKINS_KEYSTORE_PASSWORD}" -storepass "${JENKINS_KEYSTORE_PASSWORD}" -keystore "${JENKINS_CERTS_DIR}/jenkins.jks" -dname "CN=${JENKINS_HOST}, O=${JENKINS_HOST}" -alias "${JENKINS_HOST}"
             mv "$JENKINS_LOG_FILE" "${JENKINS_LOGS_DIR}/jenkins.firstboot.log"
             rm "${JENKINS_HOME}/init.groovy.d/init-jenkins.groovy"
         else
@@ -241,6 +235,12 @@ jenkins_initialize() {
         fi
     else
         info "Detected data from previous deployments"
+        jenkins_override_home_paths
+        # If JENKINS_OVERRIDE_PLUGINS is enabled, remove plugins from the volume if any and trigger new installation
+        if is_boolean_yes "$JENKINS_OVERRIDE_PLUGINS"; then
+            [[ -d "${JENKINS_HOME}/plugins" ]] && rm -rf "${JENKINS_HOME}/plugins"
+            jenkins_install_plugins
+        fi
     fi
 
     true
@@ -320,13 +320,13 @@ jenkins_add_custom_file() {
             if [[ "$(get_sematic_version "$plugin_version" 1)" -gt "$(get_sematic_version "$current_version" 1)" ]]; then
                 action="UPGRADED"
                 reason="Installed version ($current_version) is older than installed version ($plugin_version)"
+                cp -pr "$(realpath "${filepath}")" "${JENKINS_HOME}/${relpath}"
             else
                 action="SKIPPED"
                 reason="Installed version ($current_version) is lower or equal than installed version ($plugin_version)"
             fi
-        fi
-        if [[ ! -f "${JENKINS_HOME}/${relpath}" || "$action" = "UPGRADED" ]]; then
-            action=${action:-"INSTALLED"}
+        else
+            action="INSTALLED"
             mkdir -p "${JENKINS_HOME}/$(dirname "$relpath")"
             cp -pr "$(realpath "${filepath}")" "${JENKINS_HOME}/${relpath}"
         fi
@@ -349,7 +349,7 @@ jenkins_add_custom_file() {
 ########################
 # Run custom initialization scripts
 # Globals:
-#   DB_*
+#   JENKINS_*
 # Arguments:
 #   None
 # Returns:
@@ -381,10 +381,103 @@ jenkins_custom_init_scripts() {
                 rm "${JENKINS_HOME}/init.groovy.d/$(basename "$f")"
                 ;;
             *)
-                warn "Skipping $f, supported formats are: .sh .sql .sql.gz"
+                warn "Skipping $f, supported formats are: .sh .groovy"
                 ;;
             esac
         done
         touch "${JENKINS_VOLUME_DIR}/.user_scripts_initialized"
     fi
+}
+
+########################
+# Installs/upgrades plugins defined
+# Globals:
+#   JENKINS_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+jenkins_install_plugins() {
+    read -r -a plugins_list <<<"$(tr ',;' ' ' <<<"$JENKINS_PLUGINS")"
+    local -r plugin_manager_jar="${JENKINS_BASE_DIR}/jenkins-plugin-manager.jar"
+    local -r jenkins_war="${JENKINS_BASE_DIR}/jenkins.war"
+    local -r plugins_dir="${JENKINS_HOME}/plugins"
+    local -r tmp_plugins_file="${JENKINS_TMP_DIR}/plugins.txt"
+    local -a args=("-jar" "${plugin_manager_jar}" "--war" "$jenkins_war" "--plugin-file" "$tmp_plugins_file" "-d" "$plugins_dir" "--verbose")
+
+    info "Installing Jenkins plugins"
+    # Copy built-in plugins included in the image
+    if ! is_dir_empty "${JENKINS_BASE_DIR}/plugins" && ! is_boolean_yes "$JENKINS_SKIP_IMAGE_PLUGINS"; then
+        debug "Moving image plugins to $JENKINS_HOME"
+        ensure_dir_exists "${JENKINS_HOME}/plugins"
+        mv "${JENKINS_BASE_DIR}/plugins"/* "${JENKINS_HOME}/plugins"
+        am_i_root && configure_permissions_ownership "${JENKINS_HOME}/plugins" -d "755" -f "644" -u "$JENKINS_DAEMON_USER" -g "$JENKINS_DAEMON_GROUP"
+    else
+        debug "${JENKINS_BASE_DIR}/plugins is empty"
+    fi
+
+    # Copy plugins from mounted directory
+    if ! is_mounted_dir_empty "$JENKINS_MOUNTED_CONTENT_DIR/plugins"; then
+        debug "Moving custom mounted plugins to Jenkins home directory"
+        echo "--- Copying files at $(date)" >>"${JENKINS_LOGS_DIR}/copy_reference_file.log"
+        find "$JENKINS_MOUNTED_CONTENT_DIR/plugins" \( -type f -o -type l \) | xargs -I % -P10 bash -c '. /opt/bitnami/scripts/libjenkins.sh && jenkins_add_custom_file %'
+    else
+        debug "${JENKINS_MOUNTED_CONTENT_DIR}/plugins is empty"
+    fi
+
+    # Install plugins from JENKINS_PLUGINS environment variable
+    if [[ "${#plugins_list[@]}" -gt 0 ]]; then
+        # Additional parameters
+        args+=("--latest" "$(is_boolean_yes "$JENKINS_PLUGINS_LATEST" && echo "true" || echo "false")")
+        if is_boolean_yes "$JENKINS_PLUGINS_LATEST_SPECIFIED"; then
+            args+=("--latest-specified")
+        fi
+        # Install plugins
+        debug "Installing plugins: ${plugins_list[*]}"
+        for i in "${plugins_list[@]}"; do
+            echo "$i" >> "$tmp_plugins_file"
+        done
+        if am_i_root; then
+            debug_execute gosu "$JENKINS_DAEMON_USER" java "${args[@]}"
+        else
+            debug_execute java "${args[@]}"
+        fi
+        rm "$tmp_plugins_file"
+    fi
+}
+
+########################
+# Remove directories and files from Jenkins home and/or copy them from the mounted content dir
+# Globals:
+#   JENKINS_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+jenkins_override_home_paths() {
+    read -r -a paths_list <<<"$(tr ',;' ' ' <<<"$JENKINS_OVERRIDE_PATHS")"
+     # Skip if JENKINS_OVERRIDE_PATHS is empty
+    [[ "${#paths_list[@]}" -gt 0 ]] || return 0
+
+    info "The following relative paths will be removed from Jenkins home directory: ${paths_list[*]}"
+    for path in "${paths_list[@]}"; do
+        # Ensure no leading slash
+        relpath=${path#/}
+        # Remove file from Jenkins home
+        if [[ -d "${JENKINS_HOME}/${relpath}" ]]; then
+            rm -rf "${JENKINS_HOME:?}/${relpath}"
+        elif [[ -f "${JENKINS_HOME}/${relpath}" ]]; then
+            rm "${JENKINS_HOME}/${relpath}"
+        fi
+        # Mount relative path from mounted content dir
+        if ! is_mounted_dir_empty "$JENKINS_MOUNTED_CONTENT_DIR/${relpath}"; then
+            debug "Copying mounted directory ${relpath} to Jenkins home directory"
+            find "$JENKINS_MOUNTED_CONTENT_DIR/${relpath}" \( -type f -o -type l \) | xargs -I % -P10 bash -c '. /opt/bitnami/scripts/libjenkins.sh && jenkins_add_custom_file %'
+        elif [[ -f "$JENKINS_MOUNTED_CONTENT_DIR/${relpath}" ]]; then
+            debug "Copying mounted file ${relpath} to Jenkins home directory"
+            jenkins_add_custom_file "$JENKINS_MOUNTED_CONTENT_DIR/${relpath}"
+        fi
+    done
 }

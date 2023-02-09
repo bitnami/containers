@@ -301,6 +301,14 @@ To download and install a set of plugins and their dependencies, use the [Plugin
 
 - [Getting Started with Plugin Installation Manager tool](https://github.com/jenkinsci/plugin-installation-manager-tool#getting-started)
 
+Alternatively, it is possible to install plugins using the following env variables:
+
+- `JENKINS_PLUGINS`: Comma-separated list of Jenkins plugins to be installed during the first boot.
+- `JENKINS_PLUGINS_LATEST`: If set to false, install the minimum required version of the plugins in `JENKINS_PLUGINS`. Default: **true**
+- `JENKINS_PLUGINS_LATEST_SPECIFIED`: If set to true, install the latest dependencies of any plugin that is requested to have the latest version. Default: **false**
+- `JENKINS_OVERRIDE_PLUGINS`: If set to true, existing plugins in the persisted volume will be removed and will force plugins to be reinstalled. Default: **false**
+- `JENKINS_SKIP_IMAGE_PLUGINS`: If set to true, skip the installation of image built-in plugins. Default: **false**
+
 ### Passing JVM parameters
 
 You might need to customize the JVM running Jenkins, typically to pass system properties or to tweak heap memory settings. Use the `JAVA_OPTS` environment variable for this purpose:
