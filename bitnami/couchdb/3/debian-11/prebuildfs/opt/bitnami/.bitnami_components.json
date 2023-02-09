@@ -1,10 +1,17 @@
 {
     "couchdb": {
         "arch": "amd64",
-        "digest": "4e2c4c97f5f1e36d10e4e08f9f9e80fc864441f4bd47bd6b52e619c6ea933f37",
+        "digest": "f74c4da6b705687edf499b0ca8414588d5a15e8ee7905057fa4c0fa7ed5a6d5e",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.3.1-3"
+        "version": "3.3.1-4"
+    },
+    "erlang": {
+        "arch": "amd64",
+        "digest": "a1ce099021af9de24b9df83b2f53769caa1e37f71fa0a284d58e8d2662ee385c",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "25.2.2-0"
     },
     "gosu": {
         "arch": "amd64",
