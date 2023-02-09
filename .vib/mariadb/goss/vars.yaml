@@ -1,0 +1,18 @@
+components:
+  binaries:
+    - gosu
+    - ini-file
+    - mysql
+filesystem:
+  - mode: "0775"
+    directories:
+      - /bitnami/mariadb
+      - /bitnami/mariadb/data
+      - /opt/bitnami/mariadb/conf
+      - /opt/bitnami/mariadb/conf/bitnami
+      - /opt/bitnami/mariadb/logs
+      - /opt/bitnami/mariadb/tmp
+root_dir: /opt/bitnami
+version:
+  bin_name: mysql
+  flag: --version
