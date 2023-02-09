@@ -8,17 +8,17 @@
     },
     "pgpool": {
         "arch": "amd64",
-        "digest": "50f896c936dcab465879cde2eeb7f9cd1e7a855021f92c892c669cc6b09ac90c",
+        "digest": "c9edd2e61b80895c6ea24f6c9ad1d67f4bc583b18a646392d518bebcd275ae74",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.4.2-0"
+        "version": "4.4.2-1"
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "c631511abd6d04a5905de8ce98c97feedbf36f3fc8ae49561d629be333121965",
+        "digest": "ee21941aa945ca1e03044390aa486f5139f7fbd47a8eb8fd60bbbb9180f5baa8",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.6.0-1"
+        "version": "14.7.0-0"
     },
     "wait-for-port": {
         "arch": "amd64",
