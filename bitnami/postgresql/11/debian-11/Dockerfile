@@ -7,11 +7,11 @@ ARG WITH_ALL_LOCALES="no"
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="11.18.0-debian-11-r34" \
+      org.opencontainers.image.ref.name="11.19.0-debian-11-r0" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/postgresql" \
       org.opencontainers.image.title="postgresql" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="11.18.0"
+      org.opencontainers.image.version="11.19.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -25,7 +25,7 @@ RUN install_packages ca-certificates curl libbsd0 libbz2-1.0 libedit2 libffi7 li
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
-      "postgresql-11.18.0-8-linux-${OS_ARCH}-debian-11" \
+      "postgresql-11.19.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -49,7 +49,7 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 RUN /opt/bitnami/scripts/postgresql/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
-ENV APP_VERSION="11.18.0" \
+ENV APP_VERSION="11.19.0" \
     BITNAMI_APP_NAME="postgresql" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
