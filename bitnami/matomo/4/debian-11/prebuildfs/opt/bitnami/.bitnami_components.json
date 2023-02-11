@@ -22,10 +22,10 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "516b4c2622e3ed42abcc3ee65063e83255452d0f9f12244c4ea4c70ab43de095",
+        "digest": "5a3520c062955556412a0b86f206427f00e6da914104372684ce70f468b16d61",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.14-2"
+        "version": "8.1.15-0"
     },
     "matomo": {
         "arch": "amd64",
@@ -43,10 +43,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "4dfcd710baee20f9690f910709c5fca5e2bf63d0cf275cf0a2ada72733b50374",
+        "digest": "3b929f9b41ee8fc4bb120b1380d70cc2a2f37e65b02958d3d86436b75e729858",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.14-1"
+        "version": "8.1.15-2"
     },
     "render-template": {
         "arch": "amd64",
