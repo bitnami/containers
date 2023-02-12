@@ -15,10 +15,10 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "501dfa639fb922301334755f68e8228303e4476ca033550d261ccfc7983ddf33",
+        "digest": "bfecbedc18efc500e94ff1db7b5dd1564d456e2b3b9d8980038727ed7db350fd",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.27-2"
+        "version": "8.0.27-3"
     },
     "moodle": {
         "arch": "amd64",
@@ -36,17 +36,17 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "eafa6d920509daf7b255e9b627af0e2ecaefd7c47169eafb0a8008e12855cadf",
+        "digest": "73f0d0b08f0399c712c7c79ed1f473029d1270b476d3f5e2b67f199037a7c3d9",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.27-1"
+        "version": "8.0.27-4"
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "a3d86efb823ce32a5d4fe7b84f1d3788602ec7f04d761deb14a21be36bc12de8",
+        "digest": "512e881136125fb2cb046767cdaf36783853d4b84e15c57dbd18d7b2177d3f7a",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "13.9.0-1"
+        "version": "13.10.0-0"
     },
     "render-template": {
         "arch": "amd64",
