@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.0.4-debian-11-r24" \
+      org.opencontainers.image.ref.name="5.0.4-debian-11-r25" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/redmine" \
       org.opencontainers.image.title="redmine" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -24,7 +24,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "yq-4.30.8-1-linux-${OS_ARCH}-debian-11" \
       "ruby-3.0.5-2-linux-${OS_ARCH}-debian-11" \
-      "postgresql-client-15.1.0-1-linux-${OS_ARCH}-debian-11" \
+      "postgresql-client-15.2.0-0-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.12-0-linux-${OS_ARCH}-debian-11" \
       "redmine-5.0.4-1-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
