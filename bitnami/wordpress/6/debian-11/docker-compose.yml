@@ -19,7 +19,7 @@ services:
     depends_on:
       - mariadb
     environment:
-      # [TEST] ALLOW_EMPTY_PASSWORD is recommended only for development.
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
       - WORDPRESS_DATABASE_HOST=mariadb
       - WORDPRESS_DATABASE_PORT_NUMBER=3306
