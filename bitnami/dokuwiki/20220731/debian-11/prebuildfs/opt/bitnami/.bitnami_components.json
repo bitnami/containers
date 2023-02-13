@@ -11,7 +11,7 @@
         "digest": "10f4368837d4e9928b0f7b32e704b476d5d4f4d8c19a0df2edd614166a3d60f0",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "20220731.1.0-7"
+        "version": "20220731.1.0-8"
     },
     "gosu": {
         "arch": "amd64",
