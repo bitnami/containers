@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="20220731.1.0-debian-11-r54" \
+      org.opencontainers.image.ref.name="20220731.1.0-debian-11-r55" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/dokuwiki" \
       org.opencontainers.image.title="dokuwiki" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -27,7 +27,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "libphp-8.1.15-0-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
-      "dokuwiki-20220731.1.0-7-linux-${OS_ARCH}-debian-11" \
+      "dokuwiki-20220731.1.0-8-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
