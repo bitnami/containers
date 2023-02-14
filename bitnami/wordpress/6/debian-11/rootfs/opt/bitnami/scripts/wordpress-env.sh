@@ -107,6 +107,11 @@ unset wordpress_env_vars
 # Paths
 export WORDPRESS_BASE_DIR="${BITNAMI_ROOT_DIR}/wordpress"
 export WORDPRESS_CONF_FILE="${WORDPRESS_BASE_DIR}/wp-config.php"
+export WP_CLI_BASE_DIR="${BITNAMI_ROOT_DIR}/wp-cli"
+export WP_CLI_BIN_DIR="${WP_CLI_BASE_DIR}/bin"
+export WP_CLI_CONF_DIR="${WP_CLI_BASE_DIR}/conf"
+export WP_CLI_CONF_FILE="${WP_CLI_CONF_DIR}/wp-cli.yml"
+export PATH="${BITNAMI_ROOT_DIR}/common/bin:${PATH}"
 
 # WordPress persistence configuration
 export WORDPRESS_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/wordpress"
@@ -194,5 +199,9 @@ export WORDPRESS_OVERRIDE_DATABASE_SETTINGS="${WORDPRESS_OVERRIDE_DATABASE_SETTI
 export PHP_DEFAULT_MEMORY_LIMIT="512M" # only used at build time
 export PHP_DEFAULT_POST_MAX_SIZE="80M" # only used at build time
 export PHP_DEFAULT_UPLOAD_MAX_FILESIZE="80M" # only used at build time
+
+# System users (when running with a privileged user)
+export WP_CLI_DAEMON_USER="daemon"
+export WP_CLI_DAEMON_GROUP="daemon"
 
 # Custom environment variables may be defined below

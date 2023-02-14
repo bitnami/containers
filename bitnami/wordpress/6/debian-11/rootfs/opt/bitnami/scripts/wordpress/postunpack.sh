@@ -58,3 +58,26 @@ web_server_validate
 # Do not move htaccess files via WORDPRESS_HTACCESS_OVERRIDE_NONE
 # so that users can choose whether to do it or not during initialization
 WORDPRESS_HTACCESS_OVERRIDE_NONE=no wordpress_generate_web_server_configuration
+
+# wp-cli
+# Ensure the WordPress base directory exists and has proper permissions
+info "Configuring file permissions for WP-CLI"
+ensure_user_exists "$WP_CLI_DAEMON_USER" --group "$WP_CLI_DAEMON_GROUP"
+declare -a writable_dirs=(
+    "${WP_CLI_BASE_DIR}/.cache"
+    "${WP_CLI_BASE_DIR}/.packages"
+)
+for dir in "${writable_dirs[@]}"; do
+    ensure_dir_exists "$dir"
+    # Use daemon:root ownership for compatibility when running as a non-root user
+    configure_permissions_ownership "$dir" -d "g+rwx" -f "g+rw" -u "$WP_CLI_DAEMON_USER" -g "root"
+done
+
+# Configure wp-cli
+ensure_dir_exists "$WP_CLI_CONF_DIR"
+cat >"$WP_CLI_CONF_FILE" <<EOF
+# Global parameter defaults
+path: "${BITNAMI_ROOT_DIR}/wordpress"
+EOF
+render-template "${BITNAMI_ROOT_DIR}/scripts/wordpress/bitnami-templates/wp.tpl" >"${WP_CLI_BIN_DIR}/wp"
+configure_permissions_ownership "${WP_CLI_BIN_DIR}/wp" -f "755"
