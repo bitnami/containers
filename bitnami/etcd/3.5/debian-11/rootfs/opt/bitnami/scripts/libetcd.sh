@@ -689,6 +689,9 @@ etcd_initialize() {
                 extra_flags+=("--peer-urls=$ETCD_INITIAL_ADVERTISE_PEER_URLS")
                 etcdctl member add "$ETCD_NAME" "${extra_flags[@]}" | grep "^ETCD_" >"$ETCD_NEW_MEMBERS_ENV_FILE"
                 replace_in_file "$ETCD_NEW_MEMBERS_ENV_FILE" "^" "export "
+                # The value of ETCD_INITIAL_CLUSTER_STATE must be changed for it to be correctly added to the existing cluster
+                # https://etcd.io/docs/v3.3/op-guide/configuration/#--initial-cluster-state
+                export ETCD_INITIAL_CLUSTER_STATE=existing
                 etcd_store_member_id
             elif ! is_empty_value "$member_id"; then
                 info "Updating member in existing cluster"
