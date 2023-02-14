@@ -1,0 +1,9 @@
+{
+    "grafana-tempo-vulture": {
+        "arch": "amd64",
+        "digest": "45ecc07e1d1ec55cdffe86bfad15bbdc6f6aaf58767dd7088b91d3fdb86969e7",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "2.0.0-0"
+    }
+}
