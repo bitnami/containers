@@ -34,7 +34,13 @@ replace_in_file() {
     if [[ $posix_regex = true ]]; then
         result="$(sed -E "s${del}${match_regex}${del}${substitute_regex}${del}g" "$filename")"
     else
-        result="$(sed "s${del}${match_regex}${del}${substitute_regex}${del}g" "$filename")"
+     #Added substitute_regex matching to the environment, matching the save keyword to write the substitute_regex value into the redis.conf file
+        if [[ "$substitute_regex" =~ ^save.* ]];then
+            echo "$substitute_regex" >> $filename
+            result=$(cat $filename)
+        else
+            result="$(sed "s${del}${match_regex}${del}${substitute_regex}${del}g" "$filename")"
+        fi
     fi
     echo "$result" > "$filename"
 }
