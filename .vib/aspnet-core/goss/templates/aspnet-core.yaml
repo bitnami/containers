@@ -1,0 +1,17 @@
+file:
+  # Checks the postunpack phase properly creates the lib's symlink
+  /lib64/libz.so:
+    exists: true
+    filetype: symlink
+command:
+  check-bin-caps:
+    exec: getcap {{ .Vars.root_dir }}/aspnet-core/bin/dotnet
+    stdout:
+      - {{ .Vars.binary.capabilities }}
+    exit-status: 0
+  check-installed-runtimes:
+    exec: {{ .Vars.version.bin_name }} {{ .Vars.version.flag }}
+    stdout:
+      - AspNetCore.App {{ .Env.APP_VERSION }}
+      - NETCore.App {{ .Env.APP_VERSION }}
+    exit-status: 0

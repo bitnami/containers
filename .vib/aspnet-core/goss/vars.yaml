@@ -1,0 +1,17 @@
+components:
+  binaries:
+    - dotnet
+filesystem:
+  - mode: "0775"
+    directories:
+      - /app
+  - mode: "0755"
+    directories:
+      - /opt/bitnami/aspnet-core/bin/host
+      - /opt/bitnami/aspnet-core/bin/shared
+root_dir: /opt/bitnami
+version:
+  bin_name: dotnet
+  flag: --info
+binary:
+  capabilities: cap_net_bind_service=eip
