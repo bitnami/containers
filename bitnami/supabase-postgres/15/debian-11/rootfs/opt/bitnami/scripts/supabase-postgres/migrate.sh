@@ -14,7 +14,11 @@ set -eu
 export PGDATABASE="${POSTGRES_DB:-postgres}"
 export PGHOST="${POSTGRES_HOST:-localhost}"
 export PGPORT="${POSTGRESQL_PORT_NUMBER:-5432}"
-export PGPASSWORD="${POSTGRESQL_PASSWORD:-}"
+if [[ "$POSTGRESQL_USERNAME" = "postgres" ]]; then
+    export PGPASSWORD="${POSTGRESQL_PASSWORD:-}"
+else
+    export PGPASSWORD="${POSTGRES_POSTGRES_PASSWORD:-}"
+fi
 
 for sql in /opt/bitnami/supabase-postgres/migrations/*.sql; do
     echo "$0: running $sql"
