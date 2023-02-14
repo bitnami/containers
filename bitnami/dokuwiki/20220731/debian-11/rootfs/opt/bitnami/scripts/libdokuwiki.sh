@@ -63,7 +63,6 @@ dokuwiki_initialize() {
             web_server_stop
             dokuwiki_enable_friendly_urls
         fi
-        dokuwiki_configure_DOKU_INC
 
         info "Persisting DokuWiki installation"
         persist_app "$app_name" "$DOKUWIKI_DATA_TO_PERSIST"
@@ -71,6 +70,7 @@ dokuwiki_initialize() {
         info "Restoring persisted DokuWiki installation"
         restore_persisted_app "$app_name" "$DOKUWIKI_DATA_TO_PERSIST"
     fi
+    dokuwiki_configure_DOKU_INC
 
     # Avoid exit code of previous commands to affect the result of this function
     true
