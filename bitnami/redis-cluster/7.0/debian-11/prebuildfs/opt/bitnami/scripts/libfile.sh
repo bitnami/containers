@@ -31,10 +31,17 @@ replace_in_file() {
     # 1) They are not compatible with files mounted from ConfigMap(s)
     # 2) We found incompatibility issues with Debian10 and "in-place" substitutions
     local -r del=$'\001' # Use a non-printable character as a 'sed' delimiter to avoid issues
+    echo $substitute_regex
     if [[ $posix_regex = true ]]; then
         result="$(sed -E "s${del}${match_regex}${del}${substitute_regex}${del}g" "$filename")"
     else
-        result="$(sed "s${del}${match_regex}${del}${substitute_regex}${del}g" "$filename")"
+     #Added substitute_regex matching to the environment, matching the save keyword to write the substitute_regex value into the redis.conf file
+        if [[ "$substitute_regex" =~ ^save.* ]];then
+            echo "$substitute_regex" >> $filename
+            result=$(cat $filename)
+        else
+            result="$(sed "s${del}${match_regex}${del}${substitute_regex}${del}g" "$filename")"
+        fi
     fi
     echo "$result" > "$filename"
 }
