@@ -10,7 +10,7 @@ command:
       - {{ .Vars.binary.capabilities }}
     exit-status: 0
   check-installed-runtimes:
-    exec: {{ .Vars.version.bin_name }} {{ .Vars.version.flag }}
+    exec: dotnet --list-runtimes
     stdout:
       - AspNetCore.App {{ .Env.APP_VERSION }}
       - NETCore.App {{ .Env.APP_VERSION }}
