@@ -13,9 +13,9 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ### Local workspace
 
 ```console
-$ mkdir ~/myapp && cd ~/myapp
-$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/laravel/docker-compose.yml
-$ docker-compose up
+mkdir ~/myapp && cd ~/myapp
+curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/laravel/docker-compose.yml
+docker-compose up
 ```
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [MariaDB container](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#readme) for a more secure deployment.
@@ -59,13 +59,13 @@ cd ~/myapp
 Download the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/containers/main/bitnami/laravel/docker-compose.yml) file in the application directory:
 
 ```console
-$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/laravel/docker-compose.yml
+curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/laravel/docker-compose.yml
 ```
 
 Finally launch the Laravel application development environment using:
 
 ```console
-$ docker-compose up
+docker-compose up
 ```
 
 Among other things, the above command creates a container service, named `myapp`, for Laravel development and bootstraps a new Laravel application in the application directory. You can use your favorite IDE for developing the application.
@@ -93,38 +93,38 @@ Commands can be launched inside the `myapp` Laravel Development Container with `
 The general structure of the `exec` command is:
 
 ```console
-$ docker-compose exec <service> <command>
+docker-compose exec <service> <command>
 ```
 
 , where `<service>` is the name of the container service as described in the `docker-compose.yml` file and `<command>` is the command you want to launch inside the service.
 
 Following are a few examples of launching some commonly used Laravel development commands inside the `myapp` service container.
 
-- List all `artisan` commands:
+* List all `artisan` commands:
 
   ```console
-  $ docker-compose exec myapp php artisan list
+  docker-compose exec myapp php artisan list
   ```
 
-- List all registered routes:
+* List all registered routes:
 
   ```console
-  $ docker-compose exec myapp php artisan route:list
+  docker-compose exec myapp php artisan route:list
   ```
 
-- Create a new application controller named `UserController`:
+* Create a new application controller named `UserController`:
 
   ```console
-  $ docker-compose exec myapp php artisan make:controller UserController
+  docker-compose exec myapp php artisan make:controller UserController
   ```
 
-- Installing a new composer package called `phpmailer/phpmailer` with version `5.2.*`:
+* Installing a new composer package called `phpmailer/phpmailer` with version `5.2.*`:
 
   ```console
-  $ docker-compose exec myapp composer require phpmailer/phpmailer:5.2.*
+  docker-compose exec myapp composer require phpmailer/phpmailer:5.2.*
   ```
 
-# Contributing
+## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/blob/main/bitnami/laravel/issues) or submitting a [pull request](https://github.com/bitnami/containers/blob/main/bitnami/laravel/pulls) with your contribution.
 
@@ -132,17 +132,17 @@ We'd love for you to contribute to this container. You can request new features 
 
 We want to thank the following individuals for reporting vulnerabilities responsibly and helping improve the security of this container.
 
-- [LEI WANG](https://github.com/ssst0n3): [APP_KEY fixed into the docker image](https://github.com/bitnami/bitnami-docker-laravel/issues/139)
+* [LEI WANG](https://github.com/ssst0n3): [APP_KEY fixed into the docker image](https://github.com/bitnami/bitnami-docker-laravel/issues/139)
 
 ## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/blob/main/bitnami/laravel/issues/new). Be sure to include the following information in your issue:
 
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+* Host OS and version
+* Docker version (`docker version`)
+* Output of `docker info`
+* Version of this container
+* The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 ### Community supported solution
 
@@ -160,7 +160,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

@@ -11,14 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run --name memcached bitnami/memcached:latest
+docker run --name memcached bitnami/memcached:latest
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/memcached/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/memcached/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ## Why use Bitnami Images?
@@ -53,21 +53,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami Memcached Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com).
 
 ```console
-$ docker pull bitnami/memcached:latest
+docker pull bitnami/memcached:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/memcached/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/memcached:[TAG]
+docker pull bitnami/memcached:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Connecting to other containers
@@ -81,7 +81,7 @@ Containers attached to the same network can communicate with each other using th
 #### Step 1: Create a network
 
 ```console
-$ docker network create app-tier --driver bridge
+docker network create app-tier --driver bridge
 ```
 
 #### Step 2: Launch the Memcached server instance
@@ -89,7 +89,7 @@ $ docker network create app-tier --driver bridge
 Use the `--network app-tier` argument to the `docker run` command to attach the Memcached container to the `app-tier` network.
 
 ```console
-$ docker run -d --name memcached-server \
+docker run -d --name memcached-server \
     --network app-tier \
     bitnami/memcached:latest
 ```
@@ -97,7 +97,7 @@ $ docker run -d --name memcached-server \
 #### Step 3: Launch your application container
 
 ```console
-$ docker run -d --name myapp \
+docker run -d --name myapp \
     --network app-tier \
     YOUR_APPLICATION_IMAGE
 ```
@@ -137,7 +137,7 @@ services:
 Launch the containers using:
 
 ```console
-$ docker-compose up -d
+docker-compose up -d
 ```
 
 ## Configuration
@@ -147,7 +147,7 @@ $ docker-compose up -d
 By default, the Bitnami Memcached container will not specify any cache size and will start with Memcached defaults (64MB). You can specify a different value with the `MEMCACHED_CACHE_SIZE` environment variable (in MB).
 
 ```console
-$ docker run --name memcached -e MEMCACHED_CACHE_SIZE=128 bitnami/memcached:latest
+docker run --name memcached -e MEMCACHED_CACHE_SIZE=128 bitnami/memcached:latest
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/memcached/docker-compose.yml) file present in this repository:
@@ -166,7 +166,7 @@ services:
 By default, the Bitnami Memcached container will not specify any maximum number of concurrent connections and will start with Memcached defaults (1024 concurrent connections). You can specify a different value with the `MEMCACHED_MAX_CONNECTIONS` environment variable.
 
 ```console
-$ docker run --name memcached -e MEMCACHED_MAX_CONNECTIONS=2000 bitnami/memcached:latest
+docker run --name memcached -e MEMCACHED_MAX_CONNECTIONS=2000 bitnami/memcached:latest
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/memcached/docker-compose.yml) file present in this repository:
@@ -185,7 +185,7 @@ services:
 By default, the Bitnami Memcached container will not specify the amount of threads for which to process requests for and will start with Memcached defaults (4 threads). You can specify a different value with the `MEMCACHED_THREADS` environment variable.
 
 ```console
-$ docker run --name memcached -e MEMCACHED_THREADS=4 bitnami/memcached:latest
+docker run --name memcached -e MEMCACHED_THREADS=4 bitnami/memcached:latest
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/memcached/docker-compose.yml) file present in this repository:
@@ -204,7 +204,7 @@ services:
 By default, the Memcached container will not specify any max item size and will start with Memcached defaults (1048576 ~ 1 megabyte). You can specify a different value with the `MEMCACHED_MAX_ITEM_SIZE` environment variable. Only numeric values are accepted - use `8388608` instead of `8m`
 
 ```console
-$ docker run --name memcached -e MEMCACHED_MAX_ITEM_SIZE=8388608 bitnami/memcached:latest
+docker run --name memcached -e MEMCACHED_MAX_ITEM_SIZE=8388608 bitnami/memcached:latest
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/memcached/docker-compose.yml) file present in this repository:
@@ -225,7 +225,7 @@ Authentication on the Memcached server is disabled by default. To enable authent
 To customize the username of the Memcached admin user, which defaults to `root`, the `MEMCACHED_USERNAME` variable should be specified.
 
 ```console
-$ docker run --name memcached \
+docker run --name memcached \
   -e MEMCACHED_USERNAME=my_user \
   -e MEMCACHED_PASSWORD=my_password \
   bitnami/memcached:latest
@@ -252,7 +252,7 @@ services:
 Passing extra command-line flags to the Memcached service command is possible by adding them as arguments to *run.sh* script:
 
 ```console
-$ docker run --name memcached bitnami/memcached:latest /opt/bitnami/scripts/memcached/run.sh -vvv
+docker run --name memcached bitnami/memcached:latest /opt/bitnami/scripts/memcached/run.sh -vvv
 ```
 
 Alternatively, modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/memcached/docker-compose.yml) file present in this repository:
@@ -271,8 +271,8 @@ Refer to the [Memcached man page](https://www.unix.com/man-page/linux/1/memcache
 
 In order to load your own SASL configuration file, you will have to make them available to the container. You can do it doing the following:
 
-- Mounting a volume with your custom configuration
-- Adding custom configuration via environment variable.
+* Mounting a volume with your custom configuration
+* Adding custom configuration via environment variable.
 
 By default, when authentication is enabled the SASL configuration of Memcached is written to `/opt/bitnami/memcached/sasl2/memcached.conf` file with the following content:
 
@@ -288,13 +288,13 @@ The `/opt/bitnami/memcached/conf/memcachedsasldb` is the path to the sasldb file
 The Bitnami Memcached Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```console
-$ docker logs memcached
+docker logs memcached
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose logs memcached
+docker-compose logs memcached
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -308,7 +308,7 @@ Bitnami provides up-to-date versions of Memcached, including security patches, s
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/memcached:latest
+docker pull bitnami/memcached:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
@@ -317,13 +317,13 @@ or if you're using Docker Compose, update the value of the image property to
 #### Step 2: Remove the currently running container
 
 ```console
-$ docker rm -v memcached
+docker rm -v memcached
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose rm -v memcached
+docker-compose rm -v memcached
 ```
 
 #### Step 3: Run the new image
@@ -331,39 +331,39 @@ $ docker-compose rm -v memcached
 Re-create your container from the new image.
 
 ```console
-$ docker run --name memcached bitnami/memcached:latest
+docker run --name memcached bitnami/memcached:latest
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose up memcached
+docker-compose up memcached
 ```
 
 ## Notable Changes
 
 ### 1.5.18-debian-9-r13 and 1.5.19-ol-7-r1
 
-- Fixes regression in Memcached Authentication introduced in release `1.5.18-debian-9-r6` and `1.5.18-ol-7-r7` (#62).
+* Fixes regression in Memcached Authentication introduced in release `1.5.18-debian-9-r6` and `1.5.18-ol-7-r7` (#62).
 
 ### 1.5.18-debian-9-r6 and 1.5.18-ol-7-r7
 
-- Decrease the size of the container. The configuration logic is now based on Bash scripts in the `rootfs/ folder.
-- Custom SASL configuration should be mounted at `/opt/bitnami/memcached/conf/sasl2/` instead of `/bitnami/memcached/conf/`.
-- Password for Memcached admin user can be specified in the content of the file specified in `MEMCACHED_PASSWORD_FILE`.
+* Decrease the size of the container. The configuration logic is now based on Bash scripts in the `rootfs/ folder.
+* Custom SASL configuration should be mounted at `/opt/bitnami/memcached/conf/sasl2/` instead of `/bitnami/memcached/conf/`.
+* Password for Memcached admin user can be specified in the content of the file specified in `MEMCACHED_PASSWORD_FILE`.
 
 ### 1.5.0-r1
 
-- The memcached container has been migrated to a non-root container approach. Previously the container run as `root` user and the memcached daemon was started as `memcached` user. From now own, both the container and the memcached daemon run as user `1001`.
+* The memcached container has been migrated to a non-root container approach. Previously the container run as `root` user and the memcached daemon was started as `memcached` user. From now own, both the container and the memcached daemon run as user `1001`.
   As a consequence, the configuration files are writable by the user running the memcached process.
 
 ### 1.4.25-r4
 
-- `MEMCACHED_USER` parameter has been renamed to `MEMCACHED_USERNAME`.
+* `MEMCACHED_USER` parameter has been renamed to `MEMCACHED_USERNAME`.
 
 ### 1.4.25-r0
 
-- The logs are always sent to the `stdout` and are no longer collected in the volume.
+* The logs are always sent to the `stdout` and are no longer collected in the volume.
 
 ## Contributing
 
@@ -381,7 +381,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

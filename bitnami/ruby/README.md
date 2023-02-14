@@ -11,14 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run -it --name ruby bitnami/ruby:latest
+docker run -it --name ruby bitnami/ruby:latest
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/ruby/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/ruby/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ## Why use Bitnami Images?
@@ -55,21 +55,21 @@ The formatting convention for `prod` tags has been changed:
 The recommended way to get the Bitnami Ruby Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/ruby).
 
 ```console
-$ docker pull bitnami/ruby:latest
+docker pull bitnami/ruby:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/ruby/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/ruby:[TAG]
+docker pull bitnami/ruby:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Entering the REPL
@@ -77,12 +77,12 @@ $ docker build -t bitnami/APP:latest .
 By default, running this image will drop you into the Ruby REPL (`irb`), where you can interactively test and try things out in Ruby.
 
 ```console
-$ docker run -it --name ruby bitnami/ruby:latest
+docker run -it --name ruby bitnami/ruby:latest
 ```
 
 **Further Reading:**
 
-  - [Ruby IRB Documentation](http://ruby-doc.org/stdlib-2.4.0/libdoc/irb/rdoc/IRB.html)
+* [Ruby IRB Documentation](http://ruby-doc.org/stdlib-2.4.0/libdoc/irb/rdoc/IRB.html)
 
 ## Configuration
 
@@ -91,7 +91,7 @@ $ docker run -it --name ruby bitnami/ruby:latest
 The default work directory for the Ruby image is `/app`. You can mount a folder from your host here that includes your Ruby script, and run it normally using the `ruby` command.
 
 ```console
-$ docker run -it --name ruby -v /path/to/app:/app bitnami/ruby:latest \
+docker run -it --name ruby -v /path/to/app:/app bitnami/ruby:latest \
   ruby script.rb
 ```
 
@@ -100,7 +100,7 @@ $ docker run -it --name ruby -v /path/to/app:/app bitnami/ruby:latest \
 If your Ruby app has a `Gemfile` defining your app's dependencies and start script, you can install the dependencies before running your app.
 
 ```console
-$ docker run -it --name ruby -v /path/to/app:/app bitnami/ruby:latest \
+docker run -it --name ruby -v /path/to/app:/app bitnami/ruby:latest \
   sh -c "bundle install && ruby script.rb"
 ```
 
@@ -117,8 +117,8 @@ ruby:
 
 **Further Reading:**
 
-  - [rubygems.org](https://rubygems.org/)
-  - [bundler.io](http://bundler.io/)
+* [rubygems.org](https://rubygems.org/)
+* [bundler.io](http://bundler.io/)
 
 ### Accessing a Ruby app running a web server
 
@@ -140,20 +140,20 @@ end
 To access your web server from your host machine you can ask Docker to map a random port on your host to port `3000` inside the container.
 
 ```console
-$ docker run -it --name ruby -P bitnami/ruby:latest
+docker run -it --name ruby -P bitnami/ruby:latest
 ```
 
 Run `docker port` to determine the random port Docker assigned.
 
 ```console
-$ docker port ruby
+docker port ruby
 3000/tcp -> 0.0.0.0:32769
 ```
 
 You can also manually specify the port you want forwarded from your host to the container.
 
 ```console
-$ docker run -it --name ruby -p 8080:3000 bitnami/ruby:latest
+docker run -it --name ruby -p 8080:3000 bitnami/ruby:latest
 ```
 
 Access your web server in the browser by navigating to `http://localhost:8080`.
@@ -169,7 +169,7 @@ We may want to make our Ruby web server only accessible via an nginx web server.
 #### Step 1: Create a network
 
 ```console
-$ docker network create app-tier --driver bridge
+docker network create app-tier --driver bridge
 ```
 
 or using Docker Compose:
@@ -210,7 +210,7 @@ Copy the virtual host above, saving the file somewhere on your host. We will mou
 #### Step 3: Run the Ruby image with a specific name
 
 ```console
-$ docker run -it --name myapp \
+docker run -it --name myapp \
   --network app-tier \
   -v /path/to/app:/app \
   bitnami/ruby:latest ruby script.rb
@@ -232,7 +232,7 @@ myapp:
 #### Step 4: Run the nginx image
 
 ```console
-$ docker run -it \
+docker run -it \
   -v /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf \
   --network app-tier \
   bitnami/nginx:latest
@@ -259,7 +259,7 @@ Bitnami provides up-to-date versions of Ruby, including security patches, soon a
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/ruby:latest
+docker pull bitnami/ruby:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to `bitnami/ruby:latest`.
@@ -267,13 +267,13 @@ or if you're using Docker Compose, update the value of the image property to `bi
 #### Step 2: Remove the currently running container
 
 ```console
-$ docker rm -v ruby
+docker rm -v ruby
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose rm -v ruby
+docker-compose rm -v ruby
 ```
 
 #### Step 3: Run the new image
@@ -281,27 +281,28 @@ $ docker-compose rm -v ruby
 Re-create your container from the new image.
 
 ```console
-$ docker run --name ruby bitnami/ruby:latest
+docker run --name ruby bitnami/ruby:latest
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose up ruby
+docker-compose up ruby
 ```
 
 ## Notable Changes
 
 ### 2.3.1-r0 (2016-05-11)
+
 - Commands are now executed as the `root` user. Use the `--user` argument to switch to another user or change to the required user using `sudo` to launch applications. Alternatively, as of Docker 1.10 User Namespaces are supported by the docker daemon. Refer to the [daemon user namespace options](https://docs.docker.com/engine/security/userns-remap/) for more details.
 
 ### 2.2.3-0-r02 (2015-09-30)
 
-- `/app` directory no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume were not persisted between RUN commands. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
+* `/app` directory no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume were not persisted between RUN commands. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
 
 ### 2.2.3-0-r01 (2015-08-26)
 
-- Permissions fixed so `bitnami` user can install gems without needing `sudo`.
+* Permissions fixed so `bitnami` user can install gems without needing `sudo`.
 
 ## Contributing
 
@@ -312,13 +313,14 @@ We'd love for you to contribute to this container. You can request new features 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
+
 Copyright &copy; 2023 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

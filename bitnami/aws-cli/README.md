@@ -11,7 +11,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run --name aws-cli bitnami/aws-cli:latest
+docker run --name aws-cli bitnami/aws-cli:latest
 ```
 
 ## Why use Bitnami Images?
@@ -36,21 +36,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami aws-cli Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/aws-cli).
 
 ```console
-$ docker pull bitnami/aws-cli:latest
+docker pull bitnami/aws-cli:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/aws-cli/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/aws-cli:[TAG]
+docker pull bitnami/aws-cli:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
@@ -60,7 +60,7 @@ $ docker build -t bitnami/APP:latest .
 To run commands inside this container you can use `docker run`, for example to execute `aws-cli --version` you can follow the example below:
 
 ```console
-$ docker run --rm --name aws-cli bitnami/aws-cli:latest -- --version
+docker run --rm --name aws-cli bitnami/aws-cli:latest -- --version
 ```
 
 Consult the [aws-cli Reference Documentation](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/index.html) to find the completed list of commands available.
@@ -70,7 +70,7 @@ Consult the [aws-cli Reference Documentation](https://awscli.amazonaws.com/v2/do
 It's possible to load your own configuration, which is useful if you want to connect to a remote cluster:
 
 ```console
-$ docker run --rm --name aws-cli -v /path/to/your/aws/config:/.aws/config bitnami/aws-cli:latest
+docker run --rm --name aws-cli -v /path/to/your/aws/config:/.aws/config bitnami/aws-cli:latest
 ```
 
 ## Contributing
@@ -89,7 +89,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

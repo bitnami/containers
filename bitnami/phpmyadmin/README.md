@@ -13,8 +13,8 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/phpmyadmin/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/phpmyadmin/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
@@ -55,8 +55,8 @@ phpMyAdmin requires access to a MySQL database or MariaDB database to work. We'l
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/phpmyadmin/docker-compose.yml) file. Run the application using it as shown below:
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/phpmyadmin/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/phpmyadmin/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ### Using the Docker Command Line
@@ -66,23 +66,23 @@ If you want to run the application manually instead of using `docker-compose`, t
 1. Create a network
 
 ```console
-$ docker network create phpmyadmin-tier
+docker network create phpmyadmin-tier
 ```
 
-2. Create a volume for MariaDB persistence and create a MariaDB container
+1. Create a volume for MariaDB persistence and create a MariaDB container
 
 ```console
-$ docker volume create --name mariadb_data
-$ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
+docker volume create --name mariadb_data
+docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
   --net phpmyadmin-tier \
   --volume mariadb_data:/bitnami/mariadb \
   bitnami/mariadb:latest
 ```
 
-3. Launch the phpMyAdmin container
+1. Launch the phpMyAdmin container
 
 ```console
-$ docker run -d --name phpmyadmin -p 80:8080 -p 443:8443 \
+docker run -d --name phpmyadmin -p 80:8080 -p 443:8443 \
   --net phpmyadmin-tier \
   bitnami/phpmyadmin:latest
 ```
@@ -117,52 +117,52 @@ services:
 1. Create a network (if it does not exist)
 
 ```console
-$ docker network create phpmyadmin-tier
+docker network create phpmyadmin-tier
 ```
 
-2. Create a MariaDB container with host volume
+1. Create a MariaDB container with host volume
 
 ```console
-$ docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
+docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
   --net phpmyadmin-tier \
   --volume /path/to/mariadb-persistence:/bitnami/mariadb \
   bitnami/mariadb:latest
 ```
 
-3. Launch the phpMyAdmin container
+1. Launch the phpMyAdmin container
 
 ```console
-$ docker run -d --name phpmyadmin -p 80:8080 -p 443:8443 \
+docker run -d --name phpmyadmin -p 80:8080 -p 443:8443 \
   --net phpmyadmin-tier \
   bitnami/phpmyadmin:latest
 ```
 
 ## Upgrading phpMyAdmin
 
-Bitnami provides up-to-date versions of MariaDB and phpMyAdmin, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the phpMyAdmin container. For the MariaDB upgrade see https://github.com/bitnami/containers/tree/main/bitnami/mariadb#upgrade-this-image
+Bitnami provides up-to-date versions of MariaDB and phpMyAdmin, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the phpMyAdmin container. For the MariaDB upgrade see <https://github.com/bitnami/containers/tree/main/bitnami/mariadb#upgrade-this-image>
 
 The `bitnami/phpmyadmin:latest` tag always points to the most recent release. To get the most recent release you can simple repull the `latest` tag from the Docker Hub with `docker pull bitnami/phpmyadmin:latest`. However it is recommended to use [tagged versions](https://hub.docker.com/r/bitnami/phpmyadmin/tags/).
 
 1. Get the updated images:
 
   ```console
-  $ docker pull bitnami/phpmyadmin:latest
+  docker pull bitnami/phpmyadmin:latest
   ```
 
-2. Stop your container
+1. Stop your container
 
- * For docker-compose: `$ docker-compose stop phpmyadmin`
- * For manual execution: `$ docker stop phpmyadmin`
+* For docker-compose: `docker-compose stop phpmyadmin`
+* For manual execution: `docker stop phpmyadmin`
 
-3. Remove the currently running container
+1. Remove the currently running container
 
- * For docker-compose: `$ docker-compose rm -v phpmyadmin`
- * For manual execution: `$ docker rm -v phpmyadmin`
+* For docker-compose: `docker-compose rm -v phpmyadmin`
+* For manual execution: `docker rm -v phpmyadmin`
 
-4. Run the new image
+1. Run the new image
 
- * For docker-compose: `$ docker-compose up phpmyadmin`
- * For manual execution: `docker run --name phpmyadmin bitnami/phpmyadmin:latest`
+* For docker-compose: `docker-compose up phpmyadmin`
+* For manual execution: `docker run --name phpmyadmin bitnami/phpmyadmin:latest`
 
 ## Configuration
 
@@ -170,40 +170,40 @@ The `bitnami/phpmyadmin:latest` tag always points to the most recent release. To
 
 The phpMyAdmin instance can be customized by specifying environment variables on the first run. The following environment values are provided to custom phpMyAdmin:
 
-- `PHPMYADMIN_ALLOW_ARBITRARY_SERVER`: Allows you to enter database server hostname on login form. Default: **false**
-- `PHPMYADMIN_ALLOW_REMOTE_CONNECTIONS`: Whether to allow access from any source. When disabled, only connections from 127.0.0.1 will be allowed. Default: **yes**
-- `PHPMYADMIN_ABSOLUTE_URI`: If specified, absolute URL to phpMyAdmin when generating links. No defaults
-- `DATABASE_ALLOW_NO_PASSWORD`: Whether to allow logins without a password. Default: **yes**
-- `DATABASE_HOST`: Database server host. Default: **mariadb**
-- `DATABASE_USER`: Database username.
-- `DATABASE_PASSWORD`: Database password.
-- `DATABASE_PORT_NUMBER`: Database server port. Default: **3306**
-- `DATABASE_ENABLE_SSL`: Whether to enable SSL for the connection between phpMyAdmin and the MySQL server to secure the connection. Default: **no**
-- `DATABASE_SSL_KEY`: Path to the client key file when using SSL. Default: **no**
-- `DATABASE_SSL_CERT`: Path to the client certificate file when using SSL.
-- `DATABASE_SSL_CA`: Path to the CA file when using SSL.
-- `DATABASE_SSL_CA_PATH`: Directory containing trusted SSL CA certificates in PEM format.
-- `DATABASE_SSL_CIPHERS`: List of allowable ciphers for connections when using SSL.
-- `DATABASE_SSL_VERIFY`: Enable SSL certificate validation. Default: **yes**
-- `CONFIGURATION_STORAGE_ENABLE`: Enable phpMyAdmin configuration storage. Default: **no**
-- `CONFIGURATION_STORAGE_DB_USER`: phpMyAdmin configuration storage database user (ignored unless `CONFIGURATION_STORAGE_ENABLE` is set to **yes**). Default: **pma**
-- `CONFIGURATION_STORAGE_DB_PASSWORD`: phpMyAdmin configuration storage database password (ignored unless `CONFIGURATION_STORAGE_ENABLE` is set to **yes**). No defaults.
-- `CONFIGURATION_STORAGE_DB_HOST`: phpMyAdmin configuration storage database server hostname (ignored unless `CONFIGURATION_STORAGE_ENABLE` is set to **yes**). Default: **mariadb**
-- `CONFIGURATION_STORAGE_DB_PORT_NUMBER`: phpMyAdmin configuration storage database server port (ignored unless `CONFIGURATION_STORAGE_ENABLE` is set to **yes**). Default: **3306**
-- `CONFIGURATION_STORAGE_DB_NAME`: phpMyAdmin configuration storage database name (ignored unless `CONFIGURATION_STORAGE_ENABLE` is set to **yes**). Default: **phpmyadmin**
-- `CONFIGURATION_ALLOWDENY_ORDER`: Set the AllowDeny order. If your rule order is empty, then IP authorization is disabled. Available values are: `deny,allow`, `allow,deny`, `explicit`. No defaults.
-- `CONFIGURATION_ALLOWDENY_RULES`: Array of strings to allow or deny hosts/user to connect to the database. The value must be literal, following the format `'allow' | 'deny' <username> [from] <ipmask>`. No defaults.
+* `PHPMYADMIN_ALLOW_ARBITRARY_SERVER`: Allows you to enter database server hostname on login form. Default: **false**
+* `PHPMYADMIN_ALLOW_REMOTE_CONNECTIONS`: Whether to allow access from any source. When disabled, only connections from 127.0.0.1 will be allowed. Default: **yes**
+* `PHPMYADMIN_ABSOLUTE_URI`: If specified, absolute URL to phpMyAdmin when generating links. No defaults
+* `DATABASE_ALLOW_NO_PASSWORD`: Whether to allow logins without a password. Default: **yes**
+* `DATABASE_HOST`: Database server host. Default: **mariadb**
+* `DATABASE_USER`: Database username.
+* `DATABASE_PASSWORD`: Database password.
+* `DATABASE_PORT_NUMBER`: Database server port. Default: **3306**
+* `DATABASE_ENABLE_SSL`: Whether to enable SSL for the connection between phpMyAdmin and the MySQL server to secure the connection. Default: **no**
+* `DATABASE_SSL_KEY`: Path to the client key file when using SSL. Default: **no**
+* `DATABASE_SSL_CERT`: Path to the client certificate file when using SSL.
+* `DATABASE_SSL_CA`: Path to the CA file when using SSL.
+* `DATABASE_SSL_CA_PATH`: Directory containing trusted SSL CA certificates in PEM format.
+* `DATABASE_SSL_CIPHERS`: List of allowable ciphers for connections when using SSL.
+* `DATABASE_SSL_VERIFY`: Enable SSL certificate validation. Default: **yes**
+* `CONFIGURATION_STORAGE_ENABLE`: Enable phpMyAdmin configuration storage. Default: **no**
+* `CONFIGURATION_STORAGE_DB_USER`: phpMyAdmin configuration storage database user (ignored unless `CONFIGURATION_STORAGE_ENABLE` is set to **yes**). Default: **pma**
+* `CONFIGURATION_STORAGE_DB_PASSWORD`: phpMyAdmin configuration storage database password (ignored unless `CONFIGURATION_STORAGE_ENABLE` is set to **yes**). No defaults.
+* `CONFIGURATION_STORAGE_DB_HOST`: phpMyAdmin configuration storage database server hostname (ignored unless `CONFIGURATION_STORAGE_ENABLE` is set to **yes**). Default: **mariadb**
+* `CONFIGURATION_STORAGE_DB_PORT_NUMBER`: phpMyAdmin configuration storage database server port (ignored unless `CONFIGURATION_STORAGE_ENABLE` is set to **yes**). Default: **3306**
+* `CONFIGURATION_STORAGE_DB_NAME`: phpMyAdmin configuration storage database name (ignored unless `CONFIGURATION_STORAGE_ENABLE` is set to **yes**). Default: **phpmyadmin**
+* `CONFIGURATION_ALLOWDENY_ORDER`: Set the AllowDeny order. If your rule order is empty, then IP authorization is disabled. Available values are: `deny,allow`, `allow,deny`, `explicit`. No defaults.
+* `CONFIGURATION_ALLOWDENY_RULES`: Array of strings to allow or deny hosts/user to connect to the database. The value must be literal, following the format `'allow' | 'deny' <username> [from] <ipmask>`. No defaults.
 
 #### PHP configuration
 
-- `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
-- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
-- `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. No default.
-- `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
-- `PHP_MAX_INPUT_VARS`: Maximum amount of input variables for PHP scripts. No default.
-- `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
-- `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. Default: **80M**
-- `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP upload. Default: **80M**
+* `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
+* `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
+* `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. No default.
+* `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
+* `PHP_MAX_INPUT_VARS`: Maximum amount of input variables for PHP scripts. No default.
+* `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
+* `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. Default: **80M**
+* `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP upload. Default: **80M**
 
 #### Specifying Environment variables using Docker Compose
 
@@ -227,7 +227,7 @@ services:
 #### Specifying Environment variables on the Docker command line
 
 ```console
-$ docker run -d --name phpmyadmin -p 80:8080 -p 443:8443 \
+docker run -d --name phpmyadmin -p 80:8080 -p 443:8443 \
   --net phpmyadmin-tier \
   --env PHPMYADMIN_PASSWORD=my_password \
   bitnami/phpmyadmin:latest
@@ -241,10 +241,10 @@ The Bitnami phpMyAdmin Docker image is designed to be extended so it can be used
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
-- Settings that can be adapted using environment variables. For instance, you can change the ports used by Apache for HTTP and HTTPS, by setting the environment variables `APACHE_HTTP_PORT_NUMBER` and `APACHE_HTTPS_PORT_NUMBER` respectively.
-- [Adding custom virtual hosts](https://github.com/bitnami/containers/blob/main/bitnami/apache#adding-custom-virtual-hosts).
-- [Replacing the 'httpd.conf' file](https://github.com/bitnami/containers/blob/main/bitnami/apache#full-configuration).
-- [Using custom SSL certificates](https://github.com/bitnami/containers/blob/main/bitnami/apache#using-custom-ssl-certificates).
+* Settings that can be adapted using environment variables. For instance, you can change the ports used by Apache for HTTP and HTTPS, by setting the environment variables `APACHE_HTTP_PORT_NUMBER` and `APACHE_HTTPS_PORT_NUMBER` respectively.
+* [Adding custom virtual hosts](https://github.com/bitnami/containers/blob/main/bitnami/apache#adding-custom-virtual-hosts).
+* [Replacing the 'httpd.conf' file](https://github.com/bitnami/containers/blob/main/bitnami/apache#full-configuration).
+* [Using custom SSL certificates](https://github.com/bitnami/containers/blob/main/bitnami/apache#using-custom-ssl-certificates).
 
 If your desired customizations cannot be covered using the methods mentioned above, extend the image. To do so, create your own image using a Dockerfile with the format below:
 
@@ -256,10 +256,10 @@ FROM bitnami/phpmyadmin
 
 Here is an example of extending the image with the following modifications:
 
-- Install the `vim` editor
-- Modify the Apache configuration file
-- Modify the ports used by Apache
-- Modify the default container user
+* Install the `vim` editor
+* Modify the Apache configuration file
+* Modify the ports used by Apache
+* Modify the default container user
 
 ```Dockerfile
 FROM bitnami/phpmyadmin
@@ -315,16 +315,16 @@ volumes:
 
 ### 5.0.2-debian-10-r73
 
-- Decrease the size of the container. The configuration logic is now based on Bash scripts in the `rootfs/` folder.
-- The `PHPMYADMIN_ALLOW_NO_PASSWORD` environment variable has been deprecated in favor of `DATABASE_ALLOW_NO_PASSWORD`.
-- New environment variables have been added to support configuring extra PHP options: `PHP_UPLOAD_MAX_FILESIZE` for `upload_max_filesize`, and `PHP_POST_MAX_SIZE` for `post_max_size`.
+* Decrease the size of the container. The configuration logic is now based on Bash scripts in the `rootfs/` folder.
+* The `PHPMYADMIN_ALLOW_NO_PASSWORD` environment variable has been deprecated in favor of `DATABASE_ALLOW_NO_PASSWORD`.
+* New environment variables have been added to support configuring extra PHP options: `PHP_UPLOAD_MAX_FILESIZE` for `upload_max_filesize`, and `PHP_POST_MAX_SIZE` for `post_max_size`.
 
 ### 4.8.5-debian-9-r96 and 4.8.5-ol-7-r111
 
-- This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
-- The Apache configuration volume (`/bitnami/apache`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the Apache configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom Apache configuration files are advised to mount a volume for the configuration at `/opt/bitnami/apache/conf`, or mount specific configuration files individually.
-- The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
-- Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`.
+* This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
+* The Apache configuration volume (`/bitnami/apache`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the Apache configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom Apache configuration files are advised to mount a volume for the configuration at `/opt/bitnami/apache/conf`, or mount specific configuration files individually.
+* The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
+* Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`.
 
 ## Contributing
 
@@ -350,7 +350,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

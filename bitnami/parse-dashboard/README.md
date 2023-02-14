@@ -13,8 +13,8 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/parse-dashboard/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/parse-dashboard/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
@@ -46,43 +46,43 @@ To run this application you need Docker Engine 1.10.0. Docker Compose is recomen
 
 ## How to use this image
 
-#### Run the application using Docker Compose
+### Run the application using Docker Compose
 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/parse-dashboard/docker-compose.yml) file. Run the application using it as shown below:
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/parse-dashboard/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/parse-dashboard/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
-#### Run the application manually
+### Run the application manually
 
 If you want to run the application manually instead of using docker-compose, these are the basic steps you need to run:
 
 1. Create a network for the application, Parse Server and the database:
 
   ```console
-  $ docker network create parse_dashboard-tier
+  docker network create parse_dashboard-tier
   ```
 
-2. Start a MongoDB&reg; database in the network generated:
+1. Start a MongoDB&reg; database in the network generated:
 
   ```console
-  $ docker run -d --name mongodb --net=parse_dashboard-tier bitnami/mongodb
+  docker run -d --name mongodb --net=parse_dashboard-tier bitnami/mongodb
   ```
 
   *Note:* You need to give the container a name in order to Parse to resolve the host.
 
-3. Start a Parse Server container:
+1. Start a Parse Server container:
 
   ```console
-  $ docker run -d -p 1337:1337 --name parse --net=parse_dashboard-tier bitnami/parse
+  docker run -d -p 1337:1337 --name parse --net=parse_dashboard-tier bitnami/parse
   ```
 
-4. Run the Parse Dashboard container:
+1. Run the Parse Dashboard container:
 
   ```console
-  $ docker run -d -p 80:4040 --name parse-dashboard --net=parse_dashboard-tier bitnami/parse-dashboard
+  docker run -d -p 80:4040 --name parse-dashboard --net=parse_dashboard-tier bitnami/parse-dashboard
   ```
 
 Then you can access your application at `http://your-ip/`
@@ -129,13 +129,13 @@ In this case you need to specify the directories to mount on the run command. Th
 1. Create a network (if it does not exist):
 
   ```console
-  $ docker network create parse_dashboard-tier
+  docker network create parse_dashboard-tier
   ```
 
-2. Create a MongoDB&reg; container with host volume:
+1. Create a MongoDB&reg; container with host volume:
 
   ```console
-  $ docker run -d --name mongodb \
+  docker run -d --name mongodb \
     --net parse-dashboard-tier \
     --volume /path/to/mongodb-persistence:/bitnami \
     bitnami/mongodb:latest
@@ -143,19 +143,19 @@ In this case you need to specify the directories to mount on the run command. Th
 
   *Note:* You need to give the container a name in order to Parse to resolve the host.
 
-3. Start a Parse Server container:
+1. Start a Parse Server container:
 
   ```console
-  $ docker run -d -name parse -p 1337:1337 \
+  docker run -d -name parse -p 1337:1337 \
     --net parse-dashboard-tier
     --volume /path/to/parse-persistence:/bitnami \
     bitnami/parse:latest
   ```
 
-4. Run the Parse Dashboard container:
+1. Run the Parse Dashboard container:
 
   ```console
-  $ docker run -d --name parse-dashboard -p 80:4040 \
+  docker run -d --name parse-dashboard -p 80:4040 \
   --volume /path/to/parse_dashboard-persistence:/bitnami \
   bitnami/parse-dashboard:latest
   ```
@@ -167,33 +167,33 @@ Bitnami provides up-to-date versions of Parse Dashboard, including security patc
 1. Get the updated images:
 
 ```console
-$ docker pull bitnami/parse-dashboard:latest
+docker pull bitnami/parse-dashboard:latest
 ```
 
-2. Stop your container
+1. Stop your container
 
- * For docker-compose: `$ docker-compose stop parse-dashboard`
- * For manual execution: `$ docker stop parse-dashboard`
+* For docker-compose: `docker-compose stop parse-dashboard`
+* For manual execution: `docker stop parse-dashboard`
 
-3. Take a snapshot of the application state
+1. Take a snapshot of the application state
 
 ```console
-$ rsync -a /path/to/parse-persistence /path/to/parse-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+rsync -a /path/to/parse-persistence /path/to/parse-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 Additionally, snapshot the [MongoDB&reg;](https://github.com/bitnami/containers/blob/main/bitnami/mongodb#step-2-stop-and-backup-the-currently-running-container) and [Parse server](https://github.com/bitnami/containers/blob/main/bitnami/parse#step-2-stop-and-backup-the-currently-running-container) data.
 
 You can use these snapshots to restore the application state should the upgrade fail.
 
-4. Remove the currently running container
+1. Remove the currently running container
 
- * For docker-compose: `$ docker-compose rm parse-dashboard`
- * For manual execution: `$ docker rm parse-dashboard`
+* For docker-compose: `docker-compose rm parse-dashboard`
+* For manual execution: `docker rm parse-dashboard`
 
-5. Run the new image
+1. Run the new image
 
- * For docker-compose: `$ docker-compose up parse-dashboard`
- * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name parse-dashboard bitnami/parse-dashboard:latest`
+* For docker-compose: `docker-compose up parse-dashboard`
+* For manual execution mount the directories if needed): `docker run --name parse-dashboard bitnami/parse-dashboard:latest`
 
 ## Configuration
 
@@ -201,8 +201,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 When you start the parse-dashboard image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/parse-dashboard/docker-compose.yml) file present in this repository:
-
+* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/parse-dashboard/docker-compose.yml) file present in this repository:
 
 ```yaml
 parse-dashboard:
@@ -212,40 +211,40 @@ parse-dashboard:
   ...
 ```
 
- * For manual execution add a `-e` option with each variable and value:
+* For manual execution add a `-e` option with each variable and value:
 
 ```console
- $ docker run -d -e PARSE_DASHBOARD_PASSWORD=my_password -p 80:4040 --name parse-dashboard -v /your/local/path/bitnami/parse_dashboard:/bitnami --network=parse_dashboard-tier bitnami/parse-dashboard
+ docker run -d -e PARSE_DASHBOARD_PASSWORD=my_password -p 80:4040 --name parse-dashboard -v /your/local/path/bitnami/parse_dashboard:/bitnami --network=parse_dashboard-tier bitnami/parse-dashboard
 ```
 
 Available environment variables:
 
-###### User and Site configuration
+#### User and Site configuration
 
-- `PARSE_DASHBOARD_ENABLE_HTTPS`: Whether to enable HTTPS for Parse Dashboard by default. Default: **no**
-- `PARSE_DASHBOARD_EXTERNAL_HTTP_PORT_NUMBER`: External HTTP port for Parse Dashboard. Default: **80**
-- `PARSE_DASHBOARD_EXTERNAL_HTTPS_PORT_NUMBER`: External HTTPS port for Parse Dashboard. Default: **80**
-- `PARSE_DASHBOARD_PARSE_HOST`: Parse server host. Default: **parse**
-- `PARSE_DASHBOARD_PORT_NUMBER`: Port number in which Parse Dashboard will run. Default: **4040**
-- `PARSE_DASHBOARD_PARSE_PORT_NUMBER`: Parse server port number. Default: **1337**
-- `PARSE_DASHBOARD_PARSE_APP_ID`: Parse app ID. Default: **myappID**
-- `PARSE_DASHBOARD_PARSE_APP_NAME`: Parse app name. Default: **myappID**
-- `PARSE_DASHBOARD_PARSE_MASTER_KEY`: Parse master key: **mymasterKey**
-- `PARSE_DASHBOARD_PARSE_MOUNT_PATH`: Parse server mount path. Default: **/parse**
-- `PARSE_DASHBOARD_PARSE_PROTOCOL`: Parse server protocol. Default: **https**
-- `PARSE_DASHBOARD_USERNAME`: Parse Dashboard user name. Default: **user**
-- `PARSE_DASHBOARD_PASSWORD`: Parse Dashboard password. Default: **bitnami**
+* `PARSE_DASHBOARD_ENABLE_HTTPS`: Whether to enable HTTPS for Parse Dashboard by default. Default: **no**
+* `PARSE_DASHBOARD_EXTERNAL_HTTP_PORT_NUMBER`: External HTTP port for Parse Dashboard. Default: **80**
+* `PARSE_DASHBOARD_EXTERNAL_HTTPS_PORT_NUMBER`: External HTTPS port for Parse Dashboard. Default: **80**
+* `PARSE_DASHBOARD_PARSE_HOST`: Parse server host. Default: **parse**
+* `PARSE_DASHBOARD_PORT_NUMBER`: Port number in which Parse Dashboard will run. Default: **4040**
+* `PARSE_DASHBOARD_PARSE_PORT_NUMBER`: Parse server port number. Default: **1337**
+* `PARSE_DASHBOARD_PARSE_APP_ID`: Parse app ID. Default: **myappID**
+* `PARSE_DASHBOARD_PARSE_APP_NAME`: Parse app name. Default: **myappID**
+* `PARSE_DASHBOARD_PARSE_MASTER_KEY`: Parse master key: **mymasterKey**
+* `PARSE_DASHBOARD_PARSE_MOUNT_PATH`: Parse server mount path. Default: **/parse**
+* `PARSE_DASHBOARD_PARSE_PROTOCOL`: Parse server protocol. Default: **https**
+* `PARSE_DASHBOARD_USERNAME`: Parse Dashboard user name. Default: **user**
+* `PARSE_DASHBOARD_PASSWORD`: Parse Dashboard password. Default: **bitnami**
 
 ## Notable Changes
 
 ### 2.1.0-debian-10-r328
 
-- The size of the container image has been decreased.
-- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+* The size of the container image has been decreased.
+* The configuration logic is now based on Bash scripts in the *rootfs/* folder.
 
 ### 1.2.0-r69
 
-- The Parse Dashboard container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Parse Dashboard daemon was started as the `parsedashboard` user. From now on, both the container and the Parse Dashboard daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
+* The Parse Dashboard container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Parse Dashboard daemon was started as the `parsedashboard` user. From now on, both the container and the Parse Dashboard daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 ## Contributing
 
@@ -263,7 +262,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

@@ -11,17 +11,18 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run --name keycloak bitnami/keycloak:latest
+docker run --name keycloak bitnami/keycloak:latest
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/keycloak/docker-compose.yml
-$ docker-compose up
+curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/keycloak/docker-compose.yml
+docker-compose up
 ```
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
+
 ## Why use Bitnami Images?
 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
@@ -52,21 +53,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami keycloak Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/keycloak).
 
 ```console
-$ docker pull bitnami/keycloak:latest
+docker pull bitnami/keycloak:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/keycloak/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/keycloak:[TAG]
+docker pull bitnami/keycloak:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
@@ -75,38 +76,38 @@ $ docker build -t bitnami/APP:latest .
 
 The Bitnami Keycloak container can create a default admin user by setting the following environment variables:
 
-- `KEYCLOAK_CREATE_ADMIN_USER`: Create administrator user on boot. Default: **true**.
-- `KEYCLOAK_ADMIN_USER`: Administrator default user. Default: **user**.
-- `KEYCLOAK_ADMIN_PASSWORD`: Administrator default password. Default: **bitnami**.
-- `KEYCLOAK_MANAGEMENT_USER`: WildFly default management user. Default: **manager**.
-- `KEYCLOAK_MANAGEMENT_PASSWORD`: WildFly default management password. Default: **bitnami1**.
+* `KEYCLOAK_CREATE_ADMIN_USER`: Create administrator user on boot. Default: **true**.
+* `KEYCLOAK_ADMIN_USER`: Administrator default user. Default: **user**.
+* `KEYCLOAK_ADMIN_PASSWORD`: Administrator default password. Default: **bitnami**.
+* `KEYCLOAK_MANAGEMENT_USER`: WildFly default management user. Default: **manager**.
+* `KEYCLOAK_MANAGEMENT_PASSWORD`: WildFly default management password. Default: **bitnami1**.
 
 ### Connecting to a PostgreSQL database
 
 The Bitnami Keycloak container requires a PostgreSQL database to work. This is configured with the following environment variables:
 
-- `KEYCLOAK_DATABASE_HOST`: PostgreSQL host. Default: **postgresql**.
-- `KEYCLOAK_DATABASE_PORT`: PostgreSQL port. Default: **5432**.
-- `KEYCLOAK_DATABASE_NAME`: PostgreSQL database name. Default: **bitnami_keycloak**.
-- `KEYCLOAK_DATABASE_USER`: PostgreSQL database user. Default: **bn_keycloak**.
-- `KEYCLOAK_DATABASE_PASSWORD`: PostgreSQL database password. No defaults.
-- `KEYCLOAK_DATABASE_SCHEMA`: PostgreSQL database schema. Default: **public**.
-- `KEYCLOAK_JDBC_PARAMS`: PostgreSQL database JDBC parameters (example: `sslmode=verify-full&connectTimeout=30000`). No defaults.
+* `KEYCLOAK_DATABASE_HOST`: PostgreSQL host. Default: **postgresql**.
+* `KEYCLOAK_DATABASE_PORT`: PostgreSQL port. Default: **5432**.
+* `KEYCLOAK_DATABASE_NAME`: PostgreSQL database name. Default: **bitnami_keycloak**.
+* `KEYCLOAK_DATABASE_USER`: PostgreSQL database user. Default: **bn_keycloak**.
+* `KEYCLOAK_DATABASE_PASSWORD`: PostgreSQL database password. No defaults.
+* `KEYCLOAK_DATABASE_SCHEMA`: PostgreSQL database schema. Default: **public**.
+* `KEYCLOAK_JDBC_PARAMS`: PostgreSQL database JDBC parameters (example: `sslmode=verify-full&connectTimeout=30000`). No defaults.
 
 ### Port and address binding
 
 The listening port and listening address can be configured with the following environment variables:
 
-- `KEYCLOAK_HTTP_PORT`: Keycloak HTTP port. Default: **8080**.
-- `KEYCLOAK_HTTPS_PORT`: Keycloak HTTPS port. Default: **8443**.
-- `KEYCLOAK_BIND_ADDRESS`: Keycloak bind address. Default: **0.0.0.0**.
+* `KEYCLOAK_HTTP_PORT`: Keycloak HTTP port. Default: **8080**.
+* `KEYCLOAK_HTTPS_PORT`: Keycloak HTTPS port. Default: **8443**.
+* `KEYCLOAK_BIND_ADDRESS`: Keycloak bind address. Default: **0.0.0.0**.
 
 ### Extra arguments to Keycloak startup
 
 In case you want to add extra flags to the Keycloak use the `KEYCLOAK_EXTRA_ARGS` variable. Example:
 
 ```console
-$ docker run --name keycloak \
+docker run --name keycloak \
   -e KEYCLOAK_EXTRA_ARGS="-Dkeycloak.profile.feature.scripts=enabled" \
   bitnami/keycloak:latest
 ```
@@ -114,7 +115,7 @@ $ docker run --name keycloak \
 Or, if you need flags which are applied directly to keycloak executable, you can use `KEYCLOAK_EXTRA_ARGS_PREPENDED` variable. Example:
 
 ```console
-$ docker run --name keycloak \
+docker run --name keycloak \
   -e KEYCLOAK_EXTRA_ARGS_PREPENDED="--spi-login-protocol-openid-connect-legacy-logout-redirect-uri=true" \
   bitnami/keycloak:latest
 ```
@@ -126,7 +127,7 @@ When the container is launched, it will execute the files with extension `.sh` l
 In order to have your custom files inside the docker image you can mount them as a volume.
 
 ```console
-$ docker run --name keycloak \
+docker run --name keycloak \
   -v /path/to/init-scripts:/docker-entrypoint-initdb.d \
   bitnami/keycloak:latest
 ```
@@ -144,29 +145,29 @@ keycloak:
 
 The Bitnami Keycloak Docker image allows configuring HTTPS/TLS encription. This is done by mounting in `/opt/bitnami/keycloak/certs` two files:
 
- - `keystore`: File with the server keystore
- - `truststore`: File with the server truststore
+* `keystore`: File with the server keystore
+* `truststore`: File with the server truststore
 
 > Note: find more information about how to create these files at the [Keycloak documentation](https://www.keycloak.org/docs/latest/server_installation/#_truststore).
 
 Apart from that, the following environment variables must be set:
 
- - `KEYCLOAK_ENABLE_HTTPS`: Enable TLS encryption using the keystore. Default: **false**.
- - `KEYCLOAK_HTTPS_KEY_STORE_FILE`: Path to the keystore file (e.g. `/opt/bitnami/keycloak/certs/keystore.jks`). No defaults.
- - `KEYCLOAK_HTTPS_TRUST_STORE_FILE`: Path to the truststore file (e.g. `/opt/bitnami/keycloak/certs/truststore.jks`). No defaults.
- - `KEYCLOAK_HTTPS_KEY_STORE_PASSWORD`: Password for accessing the keystore. No defaults.
- - `KEYCLOAK_HTTPS_TRUST_STORE_PASSWORD`: Password for accessing the truststore. No defaults.
- - `KEYCLOAK_HTTPS_USE_PEM`: Set to true to configure HTTPS using PEM certificates'. Default: **false**.
- - `KEYCLOAK_HTTPS_CERTIFICATE_FILE`: Path to the PEM certificate file (e.g. `/opt/bitnami/keycloak/certs/tls.crt`). No defaults.
- - `KEYCLOAK_HTTPS_CERTIFICATE_KEY_FILE`: Path to the PEM key file (e.g. `/opt/bitnami/keycloak/certs/tls.key`). No defaults.
+* `KEYCLOAK_ENABLE_HTTPS`: Enable TLS encryption using the keystore. Default: **false**.
+* `KEYCLOAK_HTTPS_KEY_STORE_FILE`: Path to the keystore file (e.g. `/opt/bitnami/keycloak/certs/keystore.jks`). No defaults.
+* `KEYCLOAK_HTTPS_TRUST_STORE_FILE`: Path to the truststore file (e.g. `/opt/bitnami/keycloak/certs/truststore.jks`). No defaults.
+* `KEYCLOAK_HTTPS_KEY_STORE_PASSWORD`: Password for accessing the keystore. No defaults.
+* `KEYCLOAK_HTTPS_TRUST_STORE_PASSWORD`: Password for accessing the truststore. No defaults.
+* `KEYCLOAK_HTTPS_USE_PEM`: Set to true to configure HTTPS using PEM certificates'. Default: **false**.
+* `KEYCLOAK_HTTPS_CERTIFICATE_FILE`: Path to the PEM certificate file (e.g. `/opt/bitnami/keycloak/certs/tls.crt`). No defaults.
+* `KEYCLOAK_HTTPS_CERTIFICATE_KEY_FILE`: Path to the PEM key file (e.g. `/opt/bitnami/keycloak/certs/tls.key`). No defaults.
 
 ### SPI TLS truststore
 
 The Bitnami Keycloak Docker image supports configuring a truststore for HTTP/TLS connection with Keycloak SPIs.
 
- - `KEYCLOAK_SPI_TRUSTSTORE_FILE`: Path to the Keycloak SPI truststore file (e.g. `/opt/bitnami/keycloak/certs-spi/truststore.jks`). No defaults.
- - `KEYCLOAK_SPI_TRUSTSTORE_PASSWORD`: Password for decrypting the SPI truststore file. No defaults.
- - `KEYCLOAK_SPI_TRUSTSTORE_FILE_HOSTNAME_VERIFICATION_POLICY`: Hostname verification policy for SPI connection over HTTPS/TLS
+* `KEYCLOAK_SPI_TRUSTSTORE_FILE`: Path to the Keycloak SPI truststore file (e.g. `/opt/bitnami/keycloak/certs-spi/truststore.jks`). No defaults.
+* `KEYCLOAK_SPI_TRUSTSTORE_PASSWORD`: Password for decrypting the SPI truststore file. No defaults.
+* `KEYCLOAK_SPI_TRUSTSTORE_FILE_HOSTNAME_VERIFICATION_POLICY`: Hostname verification policy for SPI connection over HTTPS/TLS
 
 ### Adding custom themes
 
@@ -207,7 +208,7 @@ The Bitnami Keycloak container can activate different set of statistics (databas
 The image looks for configuration files in the `/bitnami/keycloak/configuration/` directory, this directory can be changed by setting the KEYCLOAK_MOUNTED_CONF_DIR environment variable.
 
 ```console
-$ docker run --name keycloak \
+docker run --name keycloak \
     -v /path/to/standalone-ha.xml:/bitnami/keycloak/configuration/standalone-ha.xml \
     bitnami/keycloak:latest
 ```
@@ -227,14 +228,14 @@ After that, your changes will be taken into account in the server's behaviour.
 
 ### 19-debian-11-r4
 
-- TLS environment variables have been renamed to match upstream.
-  - `KEYCLOAK_ENABLE_TLS` was renamed as `KEYCLOAK_ENABLE_HTTPS`.
-  - `KEYCLOAK_TLS_KEYSTORE_FILE` was renamed as `KEYCLOAK_TLS_KEY_STORE_FILE`.
-  - `KEYCLOAK_TLS_TRUSTSTORE_FILE` was renamed as `KEYCLOAK_TLS_TRUST_STORE_FILE`.
-  - `KEYCLOAK_TLS_KEYSTORE_PASSWORD` was renamed as `KEYCLOAK_TLS_KEY_STORE_PASSWORD`.
-  - `KEYCLOAK_TLS_TRUSTSTORE_PASSWORD` was renamed as `KEYCLOAK_TLS_TRUST_STORE_PASSWORD`.
-- HTTPS/TLS can now be configured using PEM certificates.
-- Added support to add SPI truststore file.
+* TLS environment variables have been renamed to match upstream.
+  * `KEYCLOAK_ENABLE_TLS` was renamed as `KEYCLOAK_ENABLE_HTTPS`.
+  * `KEYCLOAK_TLS_KEYSTORE_FILE` was renamed as `KEYCLOAK_TLS_KEY_STORE_FILE`.
+  * `KEYCLOAK_TLS_TRUSTSTORE_FILE` was renamed as `KEYCLOAK_TLS_TRUST_STORE_FILE`.
+  * `KEYCLOAK_TLS_KEYSTORE_PASSWORD` was renamed as `KEYCLOAK_TLS_KEY_STORE_PASSWORD`.
+  * `KEYCLOAK_TLS_TRUSTSTORE_PASSWORD` was renamed as `KEYCLOAK_TLS_TRUST_STORE_PASSWORD`.
+* HTTPS/TLS can now be configured using PEM certificates.
+* Added support to add SPI truststore file.
 
 ### 17-debian-10
 
@@ -257,7 +258,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

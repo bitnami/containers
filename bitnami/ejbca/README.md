@@ -11,14 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run --name ejbca bitnami/ejbca:latest
+docker run --name ejbca bitnami/ejbca:latest
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/ejbca/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/ejbca/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
@@ -49,21 +49,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami EJBCA Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/ejbca).
 
 ```console
-$ docker pull bitnami/ejbca:latest
+docker pull bitnami/ejbca:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/ejbca/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/ejbca:[TAG]
+docker pull bitnami/ejbca:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## How to use this image
@@ -75,8 +75,8 @@ EJBCA requires access to a MySQL or MariaDB database to store information. We'll
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/ejbca/docker-compose.yml) file. Run the application using it as shown below:
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/ejbca/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/ejbca/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ### Using the Docker Command Line
@@ -86,14 +86,14 @@ If you want to run the application manually instead of using `docker-compose`, t
 #### Step 1: Create a network
 
 ```console
-$ docker network create ejbca-network
+docker network create ejbca-network
 ```
 
 #### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
 
 ```console
-$ docker volume create --name mariadb_data
-$ docker run -d --name mariadb \
+docker volume create --name mariadb_data
+docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_ejbca \
   --env MARIADB_PASSWORD=Bitnami1234 \
@@ -106,8 +106,8 @@ $ docker run -d --name mariadb \
 #### Step 3: Create volumes for EJBCA persistence and launch the container
 
 ```console
-$ docker volume create --name ejbca_data
-$ docker run -d --name ejbca \
+docker volume create --name ejbca_data
+docker run -d --name ejbca \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env EJBCA_DATABASE_USERNAME=bn_ejbca \
@@ -128,7 +128,7 @@ If you remove the container all your data will be lost, and the next time you ru
 For persistence you should mount a directory at the `/bitnami/wildfly` path. If the mounted directory is empty, it will be initialized on the first run.
 
 ```console
-$ docker run \
+docker run \
     -v /path/to/ejbca-persistence:/bitnami/wildfly \
     bitnami/ejbca:latest
 ```
@@ -151,34 +151,34 @@ You can also do this with a minor change to the [`docker-compose.yml`](https://g
 
 The EJBCA instance can be customized by specifying environment variables on the first run. The following environment variables are available:
 
-- `EJBCA_HTTP_PORT_NUMBER`: HTTP port number. Defaults to `8080`.
-- `EJBCA_HTTPS_PORT_NUMBER`: HTTPS port number. Default to `8443`.
-- `EJBCA_HTTPS_ADVERTISED_PORT_NUMBER`: Port number used in the rendered URLs for the admistrator login. Default to `8443`.
-- `EJBCA_ADMIN_USERNAME`: EJBCA administrator username. Defaults to `superadmin`.
-- `EJBCA_ADMIN_PASSWORD`: EJBCA administrator password. Defaults to `Bitnami1234`.
-- `EJBCA_DATABASE_HOST`: Database hostname. No defaults.
-- `EJBCA_DATABASE_PORT`: Database port name. Defaults to `3306`.
-- `EJBCA_DATABASE_NAME`: Database name. No defaults.
-- `EJBCA_DATABASE_USERNAME`: Database username. No defaults.
-- `EJBCA_DATABASE_PASSWORD`: Database password. No defaults.
-- `EJBCA_BASE_DN`: Base DN for the CA. Defaults to `O=Example CA,C=SE,UID=c-XXXXXXX`, where `XXXXXXX` is a random generated ID.
-- `EJBCA_CA_NAME`: CA Name. Defaults to `ManagementCA`
-- `JAVA_OPTS`: Java options. Defaults to `-Xms2048m -Xmx2048m -XX:MetaspaceSize=192M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Dhibernate.dialect=org.hibernate.dialect.MySQL5Dialect -Dhibernate.dialect.storage_engine=innodb`.
-- `EJBCA_SERVER_CERT_FILE`: User provided keystore file. No defaults.
-- `EJBCA_SERVER_CERT_PASSWORD`: User provided keystore file password. No defaults.
-- `EJBCA_SMTP_HOST`: SMTP Email server address. Defaults to `localhost`.
-- `EJBCA_SMTP_PORT`: SMTP Email server port. Defaults to `25`.
-- `EJBCA_SMTP_FROM_ADDRESS`: SMTP from email address. Defaults to `user@example.com`.
-- `EJBCA_SMTP_TLS`: SMTP TLS authentication: Defaults to `false`.
-- `EJBCA_SMTP_USERNAME`: SMTP authentication username. No defaults.
-- `EJBCA_SMTP_PASSWORD`: SMTP authentication password. No defaults.
+* `EJBCA_HTTP_PORT_NUMBER`: HTTP port number. Defaults to `8080`.
+* `EJBCA_HTTPS_PORT_NUMBER`: HTTPS port number. Default to `8443`.
+* `EJBCA_HTTPS_ADVERTISED_PORT_NUMBER`: Port number used in the rendered URLs for the admistrator login. Default to `8443`.
+* `EJBCA_ADMIN_USERNAME`: EJBCA administrator username. Defaults to `superadmin`.
+* `EJBCA_ADMIN_PASSWORD`: EJBCA administrator password. Defaults to `Bitnami1234`.
+* `EJBCA_DATABASE_HOST`: Database hostname. No defaults.
+* `EJBCA_DATABASE_PORT`: Database port name. Defaults to `3306`.
+* `EJBCA_DATABASE_NAME`: Database name. No defaults.
+* `EJBCA_DATABASE_USERNAME`: Database username. No defaults.
+* `EJBCA_DATABASE_PASSWORD`: Database password. No defaults.
+* `EJBCA_BASE_DN`: Base DN for the CA. Defaults to `O=Example CA,C=SE,UID=c-XXXXXXX`, where `XXXXXXX` is a random generated ID.
+* `EJBCA_CA_NAME`: CA Name. Defaults to `ManagementCA`
+* `JAVA_OPTS`: Java options. Defaults to `-Xms2048m -Xmx2048m -XX:MetaspaceSize=192M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Dhibernate.dialect=org.hibernate.dialect.MySQL5Dialect -Dhibernate.dialect.storage_engine=innodb`.
+* `EJBCA_SERVER_CERT_FILE`: User provided keystore file. No defaults.
+* `EJBCA_SERVER_CERT_PASSWORD`: User provided keystore file password. No defaults.
+* `EJBCA_SMTP_HOST`: SMTP Email server address. Defaults to `localhost`.
+* `EJBCA_SMTP_PORT`: SMTP Email server port. Defaults to `25`.
+* `EJBCA_SMTP_FROM_ADDRESS`: SMTP from email address. Defaults to `user@example.com`.
+* `EJBCA_SMTP_TLS`: SMTP TLS authentication: Defaults to `false`.
+* `EJBCA_SMTP_USERNAME`: SMTP authentication username. No defaults.
+* `EJBCA_SMTP_PASSWORD`: SMTP authentication password. No defaults.
 
 ## Logging
 
 The Bitnami EJBCA Docker image sends the container logs to `stdout`. To view the logs:
 
 ```console
-$ docker logs ejbca
+docker logs ejbca
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -198,7 +198,7 @@ Bitnami provides up-to-date versions of EJBCA, including security patches, soon 
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/ejbca:latest
+docker pull bitnami/ejbca:latest
 ```
 
 #### Step 2: Stop the running container
@@ -206,13 +206,13 @@ $ docker pull bitnami/ejbca:latest
 Stop the currently running container using the command
 
 ```console
-$ docker stop ejbca
+docker stop ejbca
 ```
 
 #### Step 3: Remove the currently running container
 
 ```console
-$ docker rm -v ejbca
+docker rm -v ejbca
 ```
 
 #### Step 4: Run the new image
@@ -220,7 +220,7 @@ $ docker rm -v ejbca
 Re-create your container from the new image.
 
 ```console
-$ docker run --name ejbca bitnami/ejbca:latest
+docker run --name ejbca bitnami/ejbca:latest
 ```
 
 ## Notable Changes
@@ -249,7 +249,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

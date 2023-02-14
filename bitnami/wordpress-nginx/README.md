@@ -6,13 +6,11 @@
 
 [Overview of WordPress with NGINX](http://www.wordpress.org)
 
-
-
 ## TL;DR
 
 ```console
-$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/wordpress-nginx/docker-compose.yml
-$ docker-compose up
+curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/wordpress-nginx/docker-compose.yml
+docker-compose up
 ```
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
@@ -43,21 +41,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami WordPress with NGINX Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/wordpress-nginx).
 
 ```console
-$ docker pull bitnami/wordpress-nginx:latest
+docker pull bitnami/wordpress-nginx:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/wordpress-nginx/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/wordpress-nginx:[TAG]
+docker pull bitnami/wordpress-nginx:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## How to use this image
@@ -69,8 +67,8 @@ WordPress requires access to a MySQL or MariaDB database to store information. W
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/wordpress/docker-compose.yml) file. Run the application using it as shown below:
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/wordpress/docker-compose.yml > docker-compose.yml
-$ docker-compose up
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/wordpress/docker-compose.yml > docker-compose.yml
+docker-compose up
 ```
 
 ### Using the Docker Command Line
@@ -80,14 +78,14 @@ If you want to run the application manually instead of using `docker-compose`, t
 #### Step 1: Create a network
 
 ```console
-$ docker network create wordpress-network
+docker network create wordpress-network
 ```
 
 #### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
 
 ```console
-$ docker volume create --name mariadb_data
-$ docker run -d --name mariadb \
+docker volume create --name mariadb_data
+docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_wordpress \
   --env MARIADB_PASSWORD=bitnami \
@@ -100,8 +98,8 @@ $ docker run -d --name mariadb \
 #### Step 3: Create volumes for WordPress persistence and launch the container
 
 ```console
-$ docker volume create --name wordpress_data
-$ docker run -d --name wordpress \
+docker volume create --name wordpress_data
+docker run -d --name wordpress \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env WORDPRESS_DATABASE_USER=bn_wordpress \
@@ -155,13 +153,13 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 #### Step 1: Create a network (if it does not exist)
 
 ```console
-$ docker network create wordpress-network
+docker network create wordpress-network
 ```
 
 #### Step 2. Create a MariaDB container with host volume
 
 ```console
-$ docker run -d --name mariadb \
+docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_wordpress \
   --env MARIADB_PASSWORD=bitnami \
@@ -176,7 +174,7 @@ $ docker run -d --name mariadb \
 #### Step 3. Create the WordPress container with host volumes
 
 ```console
-$ docker run -d --name wordpress \
+docker run -d --name wordpress \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env WORDPRESS_DATABASE_USER=bn_wordpress \
@@ -208,7 +206,7 @@ When you start the WordPress image, you can adjust the configuration of the inst
 - For manual execution add a `--env` option with each variable and value:
 
     ```console
-    $ docker run -d --name wordpress -p 80:8080 -p 443:8443 \
+    docker run -d --name wordpress -p 80:8080 -p 443:8443 \
       --env WORDPRESS_PASSWORD=my_password \
       --network wordpress-tier \
       --volume /path/to/wordpress-persistence:/bitnami \
@@ -217,7 +215,7 @@ When you start the WordPress image, you can adjust the configuration of the inst
 
 Available environment variables:
 
-##### User and Site configuration
+#### User and Site configuration
 
 - `NGINX_HTTP_PORT_NUMBER`: Port used by NGINX for HTTP. Default: **8080**
 - `NGINX_HTTPS_PORT_NUMBER`: Port used by NGINX for HTTPS. Default: **8443**
@@ -329,7 +327,7 @@ This would be an example of SMTP configuration using a Gmail account:
 - For manual execution:
 
     ```console
-    $ docker run -d --name wordpress -p 80:8080 -p 443:8443 \
+    docker run -d --name wordpress -p 80:8080 -p 443:8443 \
       --env WORDPRESS_DATABASE_USER=bn_wordpress \
       --env WORDPRESS_DATABASE_NAME=bitnami_wordpress \
       --env WORDPRESS_SMTP_HOST=smtp.gmail.com \
@@ -364,7 +362,7 @@ The Bitnami WordPress container supports connecting the WordPress application to
 - For manual execution:
 
     ```console
-    $ docker run -d --name wordpress\
+    docker run -d --name wordpress\
       -p 8080:8080 -p 8443:8443 \
       --network wordpress-network \
       --env WORDPRESS_DATABASE_HOST=mariadb_host \
@@ -384,16 +382,16 @@ The Bitnami WordPress container includes the command line interface **wp-cli** t
 
 This would be an example of using **wp-cli** to display the help menu:
 
-* Using `docker-compose` command:
+- Using `docker-compose` command:
 
 ```console
-$ docker-compose exec wordpress wp help
+docker-compose exec wordpress wp help
 ```
 
-* Using `docker` command:
+- Using `docker` command:
 
 ```console
-$ docker exec wordpress wp help
+docker exec wordpress wp help
 ```
 
 Find more information about parameters available in the tool in the [official documentation](https://make.wordpress.org/cli/handbook/config/).
@@ -403,13 +401,13 @@ Find more information about parameters available in the tool in the [official do
 The Bitnami WordPress Docker image sends the container logs to `stdout`. To view the logs:
 
 ```console
-$ docker logs wordpress
+docker logs wordpress
 ```
 
 Or using Docker Compose:
 
 ```console
-$ docker-compose logs wordpress
+docker-compose logs wordpress
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -423,13 +421,13 @@ To backup your data, configuration and logs, follow these simple steps:
 #### Step 1: Stop the currently running container
 
 ```console
-$ docker stop wordpress
+docker stop wordpress
 ```
 
 Or using Docker Compose:
 
 ```console
-$ docker-compose stop wordpress
+docker-compose stop wordpress
 ```
 
 #### Step 2: Run the backup command
@@ -437,7 +435,7 @@ $ docker-compose stop wordpress
 We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
 
 ```console
-$ docker run --rm -v /path/to/wordpress-backups:/backups --volumes-from wordpress busybox \
+docker run --rm -v /path/to/wordpress-backups:/backups --volumes-from wordpress busybox \
   cp -a /bitnami/wordpress /backups/latest
 ```
 
@@ -448,7 +446,7 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 For the MariaDB database container:
 
 ```diff
- $ docker run -d --name mariadb \
+ docker run -d --name mariadb \
    ...
 -  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
 +  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
@@ -458,7 +456,7 @@ For the MariaDB database container:
 For the WordPress container:
 
 ```diff
- $ docker run -d --name wordpress \
+ docker run -d --name wordpress \
    ...
 -  --volume /path/to/wordpress-persistence:/bitnami/wordpress \
 +  --volume /path/to/wordpress-backups/latest:/bitnami/wordpress \
@@ -467,14 +465,14 @@ For the WordPress container:
 
 ### Upgrade this image
 
-Bitnami provides up-to-date versions of MariaDB and WordPress, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the WordPress container. For the MariaDB upgrade see https://github.com/bitnami/containers/tree/main/bitnami/mariadb#upgrade-this-image
+Bitnami provides up-to-date versions of MariaDB and WordPress, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the WordPress container. For the MariaDB upgrade see <https://github.com/bitnami/containers/tree/main/bitnami/mariadb#upgrade-this-image>
 
 The `bitnami/wordpress-nginx:latest` tag always points to the most recent release. To get the most recent release you can simple repull the `latest` tag from the Docker Hub with `docker pull bitnami/wordpress-nginx:latest`. However it is recommended to use [tagged versions](https://hub.docker.com/r/bitnami/wordpress-nginx/tags/).
 
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/wordpress-nginx:latest
+docker pull bitnami/wordpress-nginx:latest
 ```
 
 #### Step 2: Stop the running container
@@ -482,7 +480,7 @@ $ docker pull bitnami/wordpress-nginx:latest
 Stop the currently running container using the command
 
 ```console
-$ docker-compose stop wordpress
+docker-compose stop wordpress
 ```
 
 #### Step 3: Take a snapshot of the application state
@@ -502,7 +500,7 @@ docker-compose rm -v wordpress
 Update the image tag in `docker-compose.yml` and re-create your container with the new image:
 
 ```console
-$ docker-compose up -d
+docker-compose up -d
 ```
 
 ## Customize this image
@@ -619,7 +617,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

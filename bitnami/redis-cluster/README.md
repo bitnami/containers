@@ -11,14 +11,14 @@ Disclaimer: Redis is a registered trademark of Redis Ltd. Any rights therein are
 ## TL;DR
 
 ```console
-$ docker run --name redis-cluster -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis-cluster:latest
+docker run --name redis-cluster -e ALLOW_EMPTY_PASSWORD=yes bitnami/redis-cluster:latest
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/redis-cluster/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/redis-cluster/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ## Why use Bitnami Images?
@@ -49,21 +49,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami Redis(R) Cluster Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/redis-cluster).
 
 ```console
-$ docker pull bitnami/redis-cluster:latest
+docker pull bitnami/redis-cluster:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/redis-cluster/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/redis-cluster:[TAG]
+docker pull bitnami/redis-cluster:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Persisting your application
@@ -73,7 +73,7 @@ If you remove the container all your data will be lost, and the next time you ru
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
 ```console
-$ docker run \
+docker run \
     -e ALLOW_EMPTY_PASSWORD=yes
     -v /path/to/redis-cluster-persistence:/bitnami \
     bitnami/redis-cluster:latest
@@ -100,7 +100,7 @@ Containers attached to the same network can communicate with each other using th
 #### Step 1: Create a network
 
 ```console
-$ docker network create redis-cluster-network --driver bridge
+docker network create redis-cluster-network --driver bridge
 ```
 
 #### Step 2: Launch the Redis(R) Cluster container within your network
@@ -108,7 +108,7 @@ $ docker network create redis-cluster-network --driver bridge
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `redis-cluster-network` network.
 
 ```console
-$ docker run -e ALLOW_EMPTY_PASSWORD=yes --name redis-cluster-node1 --network redis-cluster-network bitnami/redis-cluster:latest
+docker run -e ALLOW_EMPTY_PASSWORD=yes --name redis-cluster-node1 --network redis-cluster-network bitnami/redis-cluster:latest
 ```
 
 #### Step 3: Run another containers
@@ -122,7 +122,7 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 The image looks for configurations in `/opt/bitnami/redis/mounted-etc/redis.conf`. You can overwrite the `redis.conf` file using your own custom configuration file.
 
 ```console
-$ docker run --name redis \
+docker run --name redis \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -v /path/to/your_redis.conf:/opt/bitnami/redis/mounted-etc/redis.conf \
     -v /path/to/redis-data-persistence:/bitnami/redis/data \
@@ -148,7 +148,7 @@ Refer to the [Redis(R) configuration](http://redis.io/topics/config) manual for 
 Instead of providing a custom `redis.conf`, you may also choose to provide only settings you wish to override. The image will look for `/opt/bitnami/redis/mounted-etc/overrides.conf`. This will be ignored if custom `redis.conf` is provided.
 
 ```console
-$ docker run --name redis \
+docker run --name redis \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -v /path/to/overrides.conf:/opt/bitnami/redis/mounted-etc/overrides.conf \
     bitnami/redis:latest
@@ -219,7 +219,7 @@ When enabling TLS, conventional standard traffic is disabled by default. However
 1. Using `docker run`
 
     ```console
-    $ docker run --name redis-cluster \
+    docker run --name redis-cluster \
         -v /path/to/certs:/opt/bitnami/redis/certs \
         -v /path/to/redis-cluster-persistence:/bitnami \
         -e ALLOW_EMPTY_PASSWORD=yes \
@@ -230,7 +230,7 @@ When enabling TLS, conventional standard traffic is disabled by default. However
         bitnami/redis-cluster:latest
     ```
 
-2. Modifying the `docker-compose.yml` file present in this repository:
+1. Modifying the `docker-compose.yml` file present in this repository:
 
     ```yaml
       redis-cluster:
@@ -247,6 +247,7 @@ When enabling TLS, conventional standard traffic is disabled by default. However
         ...
       ...
     ```
+
 Alternatively, you may also provide with this configuration in your [custom](https://github.com/bitnami/containers/blob/main/bitnami/redis-cluster#configuration-file) configuration file.
 
 ## Logging
@@ -254,7 +255,7 @@ Alternatively, you may also provide with this configuration in your [custom](htt
 The Bitnami Redis(R) Cluster Docker image sends the container logs to `stdout`. To view the logs:
 
 ```console
-$ docker logs redis-cluster
+docker logs redis-cluster
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -268,7 +269,7 @@ Bitnami provides up-to-date versions of Redis(R) Cluster, including security pat
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/redis-cluster:latest
+docker pull bitnami/redis-cluster:latest
 ```
 
 #### Step 2: Stop the running container
@@ -276,13 +277,13 @@ $ docker pull bitnami/redis-cluster:latest
 Stop the currently running container using the command
 
 ```console
-$ docker stop redis-cluster
+docker stop redis-cluster
 ```
 
 #### Step 3: Remove the currently running container
 
 ```console
-$ docker rm -v redis-cluster
+docker rm -v redis-cluster
 ```
 
 #### Step 4: Run the new image
@@ -290,7 +291,7 @@ $ docker rm -v redis-cluster
 Re-create your container from the new image.
 
 ```console
-$ docker run --name redis-cluster bitnami/redis-cluster:latest
+docker run --name redis-cluster bitnami/redis-cluster:latest
 ```
 
 ## Upgrading
@@ -315,7 +316,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

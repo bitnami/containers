@@ -11,14 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run -it --name nats bitnami/nats
+docker run -it --name nats bitnami/nats
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/nats/docker-compose.yml
-$ docker-compose up
+curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/nats/docker-compose.yml
+docker-compose up
 ```
 
 ## Why use Bitnami Images?
@@ -57,7 +57,7 @@ To run this application you need [Docker Engine](https://www.docker.com/products
 The recommended way to get the Bitnami NATS Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/nats).
 
 ```console
-$ docker pull bitnami/nats:latest
+docker pull bitnami/nats:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the
@@ -65,15 +65,15 @@ To use a specific version, you can pull a versioned tag. You can view the
 in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/nats:[TAG]
+docker pull bitnami/nats:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Connecting to other containers
@@ -89,7 +89,7 @@ In this example, we will create a NATS client instance that will connect to the 
 #### Step 1: Create a network
 
 ```console
-$ docker network create app-tier --driver bridge
+docker network create app-tier --driver bridge
 ```
 
 #### Step 2: Launch the NATS server instance
@@ -97,7 +97,7 @@ $ docker network create app-tier --driver bridge
 Use the `--network app-tier` argument to the `docker run` command to attach the NATS container to the `app-tier` network.
 
 ```console
-$ docker run -d --name nats-server \
+docker run -d --name nats-server \
     --network app-tier \
     --publish 4222:4222 \
     --publish 6222:6222 \
@@ -122,7 +122,7 @@ go build /go/src/github.com/nats-io/go-nats/examples/nats-pub.go
 Then, you can use the script to create a client instance as shown below:
 
 ```console
-$ docker run -it --rm \
+docker run -it --rm \
     --network app-tier \
     --volume /path/to/your/workspace:/go
     golang ./nats-pub.sh foo bar
@@ -162,7 +162,7 @@ services:
 Launch the containers using:
 
 ```console
-$ docker-compose up -d
+docker-compose up -d
 ```
 
 ## Configuration
@@ -185,7 +185,7 @@ nats:
 * For manual execution add a `--env` option with each variable and value:
 
   ```console
-  $ docker run -d --name nats -p 4222:4222 -p 6222:6222 -p 8222:8222 \
+  docker run -d --name nats -p 4222:4222 -p 6222:6222 -p 8222:8222 \
     --env NATS_ENABLE_AUTH=yes \
     --env NATS_PASSWORD=my_password \
     bitnami/nats:latest
@@ -228,7 +228,7 @@ The image looks for custom configuration files in the `/bitnami/nats/conf/` dire
 #### Using the Docker Command Line
 
 ```console
-$ docker run -d --name nats -p 4222:4222 -p 6222:6222 -p 8222:8222 \
+docker run -d --name nats -p 4222:4222 -p 6222:6222 -p 8222:8222 \
   --volume /path/to/nats-server.conf:/bitnami/nats/conf/nats-server.conf:ro \
   bitnami/nats:latest
 ```
@@ -252,11 +252,11 @@ After that, your custom configuration will be taken into account to start the NA
 
 For further documentation, please check [NATS documentation](https://docs.nats.io/)
 
-# Notable Changes
+## Notable Changes
 
 ### 2.6.4-debian-10-r14
 
-- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+* The configuration logic is now based on Bash scripts in the *rootfs/* folder.
 
 ## Contributing
 
@@ -274,7 +274,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

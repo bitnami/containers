@@ -11,14 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run -it --name phpfpm -v /path/to/app:/app bitnami/php-fpm
+docker run -it --name phpfpm -v /path/to/app:/app bitnami/php-fpm
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/php-fpm/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/php-fpm/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ## Why use Bitnami Images?
@@ -55,21 +55,21 @@ The formatting convention for `prod` tags has been changed:
 The recommended way to get the Bitnami PHP-FPM Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/php-fpm).
 
 ```console
-$ docker pull bitnami/php-fpm:latest
+docker pull bitnami/php-fpm:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/php-fpm/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/php-fpm:[TAG]
+docker pull bitnami/php-fpm:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Connecting to other containers
@@ -83,7 +83,7 @@ We will use PHP-FPM with nginx to serve our PHP app. Doing so will allow us to s
 #### Step 1: Create a network
 
 ```console
-$ docker network create app-tier --driver bridge
+docker network create app-tier --driver bridge
 ```
 
 or using Docker Compose:
@@ -129,7 +129,7 @@ Copy the server block above, saving the file somewhere on your host. We will mou
 Docker's linking system uses container ids or names to reference containers. We can explicitly specify a name for our PHP-FPM server to make it easier to connect to other containers.
 
 ```console
-$ docker run -it --name phpfpm \
+docker run -it --name phpfpm \
   --network app-tier
   -v /path/to/app:/app \
   bitnami/php-fpm
@@ -150,7 +150,7 @@ services:
 #### Step 4: Run the nginx image
 
 ```console
-$ docker run -it \
+docker run -it \
   -v /path/to/server_block.conf:/opt/bitnami/nginx/conf/server_blocks/yourapp.conf \
   --network app-tier \
   bitnami/nginx
@@ -182,19 +182,19 @@ Since this image bundles a PHP runtime, you may want to make use of PHP outside 
 PHP provides a REPL where you can interactively test and try things out in PHP.
 
 ```console
-$ docker run -it --name phpfpm bitnami/php-fpm php -a
+docker run -it --name phpfpm bitnami/php-fpm php -a
 ```
 
 **Further Reading:**
 
-- [PHP Interactive Shell Documentation](http://php.net/manual/en/features.commandline.interactive.php)
+* [PHP Interactive Shell Documentation](http://php.net/manual/en/features.commandline.interactive.php)
 
 ## Running your PHP script
 
 The default work directory for the PHP-FPM image is `/app`. You can mount a folder from your host here that includes your PHP script, and run it normally using the `php` command.
 
 ```console
-$ docker run -it --name php-fpm -v /path/to/app:/app bitnami/php-fpm \
+docker run -it --name php-fpm -v /path/to/app:/app bitnami/php-fpm \
   php script.php
 ```
 
@@ -209,7 +209,7 @@ You can mount a custom config file from your host to edit the default configurat
 Run the PHP-FPM image, mounting a file from your host.
 
 ```console
-$ docker run --name phpfpm -v /path/to/php-fpm.conf:/opt/bitnami/php/etc/php-fpm.conf bitnami/php-fpm
+docker run --name phpfpm -v /path/to/php-fpm.conf:/opt/bitnami/php/etc/php-fpm.conf bitnami/php-fpm
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/php-fpm/docker-compose.yml) file present in this repository:
@@ -228,7 +228,7 @@ services:
 Edit the configuration on your host using your favorite editor.
 
 ```console
-$ vi /path/to/php-fpm.conf
+vi /path/to/php-fpm.conf
 ```
 
 #### Step 3: Restart PHP-FPM
@@ -236,13 +236,13 @@ $ vi /path/to/php-fpm.conf
 After changing the configuration, restart your PHP-FPM container for the changes to take effect.
 
 ```console
-$ docker restart phpfpm
+docker restart phpfpm
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose restart phpfpm
+docker-compose restart phpfpm
 ```
 
 ### Add additional .ini files
@@ -261,10 +261,10 @@ In order to override the default `max_file_uploads` settings you can do the foll
 max_file_uploads = 30M
 ```
 
-2. Run the php-fpm container mounting the custom file.
+1. Run the php-fpm container mounting the custom file.
 
 ```console
-$ docker run -it -v /path/to/custom.ini:/opt/bitnami/php/etc/conf.d/custom.ini bitnami/php-fpm php -i | grep max_file_uploads
+docker run -it -v /path/to/custom.ini:/opt/bitnami/php/etc/conf.d/custom.ini bitnami/php-fpm php -i | grep max_file_uploads
 
 ```
 
@@ -277,16 +277,16 @@ The Bitnami PHP-FPM Docker Image sends the container logs to the `stdout`. You c
 To view the logs:
 
 ```console
-$ docker logs phpfpm
+docker logs phpfpm
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose logs phpfpm
+docker-compose logs phpfpm
 ```
 
-*The `docker logs` command is only available when the `json-file` or `journald` logging driver is in use.*
+_The `docker logs` command is only available when the `json-file` or `journald` logging driver is in use._
 
 ## Maintenance
 
@@ -297,7 +297,7 @@ Bitnami provides up-to-date versions of PHP-FPM, including security patches, soo
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/php-fpm:latest
+docker pull bitnami/php-fpm:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
@@ -308,19 +308,19 @@ or if you're using Docker Compose, update the value of the image property to
 Stop the currently running container using the command
 
 ```console
-$ docker stop php-fpm
+docker stop php-fpm
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose stop php-fpm
+docker-compose stop php-fpm
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/php-fpm-persistence` using:
 
 ```console
-$ rsync -a /path/to/php-fpm-persistence /path/to/php-fpm-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+rsync -a /path/to/php-fpm-persistence /path/to/php-fpm-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 You can use this snapshot to restore the database state should the upgrade fail.
@@ -328,13 +328,13 @@ You can use this snapshot to restore the database state should the upgrade fail.
 #### Step 3: Remove the currently running container
 
 ```console
-$ docker rm -v phpfpm
+docker rm -v phpfpm
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose rm -v phpfpm
+docker-compose rm -v phpfpm
 ```
 
 #### Step 4: Run the new image
@@ -342,44 +342,44 @@ $ docker-compose rm -v phpfpm
 Re-create your container from the new image.
 
 ```console
-$ docker run --name phpfpm bitnami/php-fpm:latest
+docker run --name phpfpm bitnami/php-fpm:latest
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose up phpfpm
+docker-compose up phpfpm
 ```
 
 ## Useful Links
 
-- [Create An AMP Development Environment With Bitnami Containers
+* [Create An AMP Development Environment With Bitnami Containers
 ](https://docs.bitnami.com/containers/how-to/create-amp-environment-containers/)
-- [Create An EMP Development Environment With Bitnami Containers
+* [Create An EMP Development Environment With Bitnami Containers
 ](https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/)
 
 ## Notable Changes
 
 ### 7.2.3-r2, 7.1.15-r2, 7.0.28-r2 and 5.6.34-r2 (2018-03-13)
 
-- PHP has been configured at compile time to scan the `/opt/bitnami/php/etc/conf.d/` folder for extra .ini configuration files.
+* PHP has been configured at compile time to scan the `/opt/bitnami/php/etc/conf.d/` folder for extra .ini configuration files.
 
 ### 7.0.6-r0 (2016-05-17)
 
-- All volumes have been merged at `/bitnami/php-fpm`. Now you only need to mount a single volume at `/bitnami/php-fpm` for persistence.
-- The logs are always sent to the `stdout` and are no longer collected in the volume.
+* All volumes have been merged at `/bitnami/php-fpm`. Now you only need to mount a single volume at `/bitnami/php-fpm` for persistence.
+* The logs are always sent to the `stdout` and are no longer collected in the volume.
 
 ### 5.5.30-2 (2015-12-07)
 
-- Enables support for imagick extension
+* Enables support for imagick extension
 
 ### 5.5.30-0-r01 (2015-11-10)
 
-- `php.ini` is now exposed in the volume mounted at `/bitnami/php-fpm/conf/` allowing users to change the defaults as per their requirements.
+* `php.ini` is now exposed in the volume mounted at `/bitnami/php-fpm/conf/` allowing users to change the defaults as per their requirements.
 
 ### 5.5.30-0 (2015-10-06)
 
-- `/app` directory is no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume are not persisted between Dockerfile `RUN` instructions. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
+* `/app` directory is no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume are not persisted between Dockerfile `RUN` instructions. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
 
 ## Contributing
 
@@ -397,7 +397,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

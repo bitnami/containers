@@ -11,8 +11,8 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/jenkins/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/jenkins/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
@@ -49,21 +49,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami Jenkins Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/jenkins).
 
 ```console
-$ docker pull bitnami/jenkins:latest
+docker pull bitnami/jenkins:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/jenkins/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/jenkins:[TAG]
+docker pull bitnami/jenkins:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## How to use this image
@@ -73,8 +73,8 @@ $ docker build -t bitnami/APP:latest .
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/jenkins/docker-compose.yml) file. Run the application using it as shown below:
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/jenkins/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/jenkins/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ### Using the Docker Command Line
@@ -84,14 +84,14 @@ If you want to run the application manually instead of using `docker-compose`, t
 #### Step 1: Create a network
 
 ```console
-$ docker network create jenkins-network
+docker network create jenkins-network
 ```
 
 #### Step 2: Create volumes for Jenkins persistence and launch the container
 
 ```console
-$ docker volume create --name jenkins_data
-$ docker run -d -p 80:8080 --name jenkins \
+docker volume create --name jenkins_data
+docker run -d -p 80:8080 --name jenkins \
   --network jenkins-network \
   --volume jenkins_data:/bitnami/jenkins \
   bitnami/jenkins:latest
@@ -131,13 +131,13 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 #### Step 1: Create a network (if it does not exist)
 
 ```console
-$ docker network create jenkins-network
+docker network create jenkins-network
 ```
 
 #### Step 2. Create the Jenkins container with host volumes
 
 ```console
-$ docker run -d -p 80:8080 --name jenkins \
+docker run -d -p 80:8080 --name jenkins \
   --network jenkins-network \
   --volume /path/to/jenkins-persistence:/bitnami/jenkins \
   bitnami/jenkins:latest
@@ -149,7 +149,7 @@ $ docker run -d -p 80:8080 --name jenkins \
 
 When you start the Jenkins image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
-- For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/jenkins/docker-compose.yml) file present in this repository:
+* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/jenkins/docker-compose.yml) file present in this repository:
 
     ```yaml
     jenkins:
@@ -159,10 +159,10 @@ When you start the Jenkins image, you can adjust the configuration of the instan
       ...
     ```
 
-- For manual execution add a `--env` option with each variable and value:
+* For manual execution add a `--env` option with each variable and value:
 
     ```console
-    $ docker run -d -p 80:8080 --name jenkins \
+    docker run -d -p 80:8080 --name jenkins \
       --env JENKINS_PASSWORD=my_password \
       --network jenkins-network \
       --volume /path/to/jenkins-persistence:/bitnami/jenkins \
@@ -171,36 +171,36 @@ When you start the Jenkins image, you can adjust the configuration of the instan
 
 Available environment variables:
 
-##### User and Site configuration
+#### User and Site configuration
 
-- `JENKINS_USERNAME`: Jenkins admin username. Default: **user**
-- `JENKINS_PASSWORD`: Jenkins admin password. Default: **bitnami**
-- `JENKINS_EMAIL`: Jenkins admin email. Default: **user@example.com**
-- `JENKINS_HOME`: Jenkins home directory. Default: **/bitnami/jenkins/home**
-- `JENKINS_HTTP_PORT_NUMBER`: Port used by Jenkins for HTTP. Default: **8080**
-- `JENKINS_HTTPS_PORT_NUMBER`: Port used by Jenkins for HTTPS. Default: **8443**
-- `JENKINS_EXTERNAL_HTTP_PORT_NUMBER`: Port to used by Jenkins to generate URLs and links when accessing using HTTP. Default: **80**
-- `JENKINS_EXTERNAL_HTTPS_PORT_NUMBER`: Port to used by Jenkins to generate URLs and links when accessing using HTTPS. Default: **443**
-- `JENKINS_JNLP_PORT_NUMBER`: Port used by Jenkins for JNLP. Default: **50000**
-- `JENKINS_FORCE_HTTPS`: Enable serving Jenkins only through HTTPS. Default: **no**
-- `JENKINS_SKIP_BOOTSTRAP`: Skip performing the initial bootstrapping. Default: **no**
+* `JENKINS_USERNAME`: Jenkins admin username. Default: **user**
+* `JENKINS_PASSWORD`: Jenkins admin password. Default: **bitnami**
+* `JENKINS_EMAIL`: Jenkins admin email. Default: **user@example.com**
+* `JENKINS_HOME`: Jenkins home directory. Default: **/bitnami/jenkins/home**
+* `JENKINS_HTTP_PORT_NUMBER`: Port used by Jenkins for HTTP. Default: **8080**
+* `JENKINS_HTTPS_PORT_NUMBER`: Port used by Jenkins for HTTPS. Default: **8443**
+* `JENKINS_EXTERNAL_HTTP_PORT_NUMBER`: Port to used by Jenkins to generate URLs and links when accessing using HTTP. Default: **80**
+* `JENKINS_EXTERNAL_HTTPS_PORT_NUMBER`: Port to used by Jenkins to generate URLs and links when accessing using HTTPS. Default: **443**
+* `JENKINS_JNLP_PORT_NUMBER`: Port used by Jenkins for JNLP. Default: **50000**
+* `JENKINS_FORCE_HTTPS`: Enable serving Jenkins only through HTTPS. Default: **no**
+* `JENKINS_SKIP_BOOTSTRAP`: Skip performing the initial bootstrapping. Default: **no**
 
-##### JAVA configuration
+#### JAVA configuration
 
-- `JAVA_OPTS`: Customize JVM parameters. No defaults.
+* `JAVA_OPTS`: Customize JVM parameters. No defaults.
 
 ## Logging
 
 The Bitnami Jenkins Docker image sends the container logs to `stdout`. To view the logs:
 
 ```console
-$ docker logs jenkins
+docker logs jenkins
 ```
 
 Or using Docker Compose:
 
 ```console
-$ docker-compose logs jenkins
+docker-compose logs jenkins
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -213,15 +213,15 @@ To backup your data, configuration and logs, follow these simple steps:
 
 #### Step 1: Stop the currently running container
 
-- For docker-compose: `$ docker-compose stop jenkins`
-- For manual execution: `$ docker stop jenkins`
+* For docker-compose: `docker-compose stop jenkins`
+* For manual execution: `docker stop jenkins`
 
 #### Step 2: Run the backup command
 
 We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
 
 ```console
-$ docker run --rm -v /path/to/jenkins-backups:/backups --volumes-from jenkins bitnami/bitnami-shell \
+docker run --rm -v /path/to/jenkins-backups:/backups --volumes-from jenkins bitnami/bitnami-shell \
   cp -a /bitnami/jenkins /backups/latest
 ```
 
@@ -230,7 +230,7 @@ $ docker run --rm -v /path/to/jenkins-backups:/backups --volumes-from jenkins bi
 Restoring a backup is as simple as mounting the backup as volumes in the containers.
 
 ```diff
- $ docker run -d --name jenkins \
+ docker run -d --name jenkins \
    ...
 -  --volume /path/to/jenkins-persistence:/bitnami/jenkins \
 +  --volume /path/to/jenkins-backups/latest:/bitnami/jenkins \
@@ -241,16 +241,16 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 
 Bitnami provides up-to-date versions of Jenkins, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Jenkins container.
 
-### Step 1. Get the updated images:
+### Step 1. Get the updated images
 
 ```console
-$ docker pull bitnami/jenkins:latest
+docker pull bitnami/jenkins:latest
 ```
 
 ### Step 2. Stop your container
 
-- For docker-compose: `$ docker-compose stop jenkins`
-- For manual execution: `$ docker stop jenkins`
+* For docker-compose: `docker-compose stop jenkins`
+* For manual execution: `docker stop jenkins`
 
 ### Step 3. Take a snapshot of the application state
 
@@ -258,13 +258,13 @@ Follow the steps in [Backing up your container](#backing-up-your-container) to t
 
 ### Step 4. Remove the stopped container
 
-- For docker-compose: `$ docker-compose rm -v jenkins`
-- For manual execution: `$ docker rm -v jenkins`
+* For docker-compose: `docker-compose rm -v jenkins`
+* For manual execution: `docker rm -v jenkins`
 
 ### Step 5. Run the new image
 
-- For docker-compose: `$ docker-compose up jenkins`
-- For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name jenkins bitnami/jenkins:latest`
+* For docker-compose: `docker-compose up jenkins`
+* For manual execution mount the directories if needed): `docker run --name jenkins bitnami/jenkins:latest`
 
 ## Customize this image
 
@@ -282,7 +282,7 @@ FROM bitnami/jenkins
 
 Here is an example of extending the image with the following modifications:
 
-- Install the `vim` editor
+* Install the `vim` editor
 
 ```Dockerfile
 FROM bitnami/jenkins
@@ -299,22 +299,22 @@ USER 1001
 
 To download and install a set of plugins and their dependencies, use the [Plugin Installation Manager tool](https://github.com/jenkinsci/plugin-installation-manager-tool). You can find information about how to use this tool in the guide below:
 
-- [Getting Started with Plugin Installation Manager tool](https://github.com/jenkinsci/plugin-installation-manager-tool#getting-started)
+* [Getting Started with Plugin Installation Manager tool](https://github.com/jenkinsci/plugin-installation-manager-tool#getting-started)
 
 Alternatively, it is possible to install plugins using the following env variables:
 
-- `JENKINS_PLUGINS`: Comma-separated list of Jenkins plugins to be installed during the first boot.
-- `JENKINS_PLUGINS_LATEST`: If set to false, install the minimum required version of the plugins in `JENKINS_PLUGINS`. Default: **true**
-- `JENKINS_PLUGINS_LATEST_SPECIFIED`: If set to true, install the latest dependencies of any plugin that is requested to have the latest version. Default: **false**
-- `JENKINS_OVERRIDE_PLUGINS`: If set to true, existing plugins in the persisted volume will be removed and will force plugins to be reinstalled. Default: **false**
-- `JENKINS_SKIP_IMAGE_PLUGINS`: If set to true, skip the installation of image built-in plugins. Default: **false**
+* `JENKINS_PLUGINS`: Comma-separated list of Jenkins plugins to be installed during the first boot.
+* `JENKINS_PLUGINS_LATEST`: If set to false, install the minimum required version of the plugins in `JENKINS_PLUGINS`. Default: **true**
+* `JENKINS_PLUGINS_LATEST_SPECIFIED`: If set to true, install the latest dependencies of any plugin that is requested to have the latest version. Default: **false**
+* `JENKINS_OVERRIDE_PLUGINS`: If set to true, existing plugins in the persisted volume will be removed and will force plugins to be reinstalled. Default: **false**
+* `JENKINS_SKIP_IMAGE_PLUGINS`: If set to true, skip the installation of image built-in plugins. Default: **false**
 
 ### Passing JVM parameters
 
 You might need to customize the JVM running Jenkins, typically to pass system properties or to tweak heap memory settings. Use the `JAVA_OPTS` environment variable for this purpose:
 
 ```console
-$ docker run -d --name jenkins -p 80:8080 \
+docker run -d --name jenkins -p 80:8080 \
   --env JAVA_OPTS=-Dhudson.footerURL=http://mycompany.com \
   bitnami/jenkins:latest
 ```
@@ -323,14 +323,14 @@ $ docker run -d --name jenkins -p 80:8080 \
 
 By default, when running this image, Bitnami implement some logic in order to configure it for working out of the box. This initialization consists of creating the user and password, preparing data to persist, configuring permissions, creating the `JENKINS_HOME`, etc. You can skip it in two ways:
 
-- Setting the `JENKINS_SKIP_BOOTSTRAP` environment variable to `yes`.
-- Attaching a volume with a custom `JENKINS_HOME` that contains a functional Jenkins installation.
+* Setting the `JENKINS_SKIP_BOOTSTRAP` environment variable to `yes`.
+* Attaching a volume with a custom `JENKINS_HOME` that contains a functional Jenkins installation.
 
 ### Adding files/directories to the image
 
 You can include files to the image automatically. All files/directories located in `/usr/share/jenkins/ref` are copied to `/bitnami/jenkins/home` (default Jenkins home directory).
 
-#### Examples:
+#### Examples
 
 ##### Run groovy scripts at Jenkins start up
 
@@ -339,16 +339,16 @@ You can create custom groovy scripts and make Jenkins run them at start up.
 However, using this feature will disable the default configuration done by the Bitnami scripts. This is intended to customize the Jenkins configuration by code.
 
 ```console
-$ mkdir jenkins-init.groovy.d
-$ echo "println '--> hello world'" > jenkins-init.groovy.d/AA_hello.groovy
-$ echo "println '--> bye world'" > jenkins-init.groovy.d/BA_bye.groovy
+mkdir jenkins-init.groovy.d
+echo "println '--> hello world'" > jenkins-init.groovy.d/AA_hello.groovy
+echo "println '--> bye world'" > jenkins-init.groovy.d/BA_bye.groovy
 
-$ docker run -d -p 80:8080 --name jenkins \
+docker run -d -p 80:8080 --name jenkins \
   --env "JENKINS_SKIP_BOOTSTRAP=yes" \
   --volume "$(pwd)/jenkins-init.groovy.d:/usr/share/jenkins/ref/init.groovy.d" \
   bitnami/jenkins:latest
 
-$ docker logs jenkins | grep world
+docker logs jenkins | grep world
 --> hello world!
 --> bye world!
 ```
@@ -358,7 +358,7 @@ $ docker logs jenkins | grep world
 You can use your our own `config.xml` file. However, using this feature will disable the default configuration generated by the Bitnami scripts. This is intended to customize the Jenkins configuration by code.
 
 ```console
-$ docker run -d -p 80:8080 --name jenkins \
+docker run -d -p 80:8080 --name jenkins \
   --env "JENKINS_SKIP_BOOTSTRAP=yes" \
   --volume "$(pwd)/config.xml:/usr/share/jenkins/ref/config.xml" \
   bitnami/jenkins:latest
@@ -370,45 +370,45 @@ $ docker run -d -p 80:8080 --name jenkins \
 
 ### 2.346.3-debian-11-r3
 
-- The preinstalled plugins were removed.
+* The preinstalled plugins were removed.
 
 ### 2.332.2-debian-10-r21
 
-- HTTPS and HTTP support are enabled by default.
-- `JENKINS_ENABLE_HTTPS` has been renamed to `JENKINS_FORCE_HTTPS`.
+* HTTPS and HTTP support are enabled by default.
+* `JENKINS_ENABLE_HTTPS` has been renamed to `JENKINS_FORCE_HTTPS`.
 
 ### 2.277.4-debian-10-r19
 
-- The size of the container image has been decreased.
-- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
-- Only the Jenkins Home directory is persisted.
-- The `install-plugins.sh` script has been deprecated. Instead use the Plugin Installation Manager Tool as explained in the [Installing Plugins](#installing-plugins) section.
-- The `DISABLE_JENKINS_INITIALIZATION` environment variable was renamed to `JENKINS_SKIP_BOOTSTRAP`.
+* The size of the container image has been decreased.
+* The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+* Only the Jenkins Home directory is persisted.
+* The `install-plugins.sh` script has been deprecated. Instead use the Plugin Installation Manager Tool as explained in the [Installing Plugins](#installing-plugins) section.
+* The `DISABLE_JENKINS_INITIALIZATION` environment variable was renamed to `JENKINS_SKIP_BOOTSTRAP`.
 
 ### 2.263.3-debian-10-rXX
 
-- The deprecated plugins below are not included in the image by default anymore:
-  - [GitHub Organization Folder](https://plugins.jenkins.io/github-organization-folder).
-  - [Pipeline: Declarative Agent API](https://plugins.jenkins.io/pipeline-model-declarative-agent).
+* The deprecated plugins below are not included in the image by default anymore:
+  * [GitHub Organization Folder](https://plugins.jenkins.io/github-organization-folder).
+  * [Pipeline: Declarative Agent API](https://plugins.jenkins.io/pipeline-model-declarative-agent).
 
 ### 2.222.1-debian-10-r17
 
-- Java distribution has been migrated from AdoptOpenJDK to OpenJDK Liberica. As part of VMware, we have an agreement with Bell Software to distribute the Liberica distribution of OpenJDK. That way, we can provide support & the latest versions and security releases for Java.
+* Java distribution has been migrated from AdoptOpenJDK to OpenJDK Liberica. As part of VMware, we have an agreement with Bell Software to distribute the Liberica distribution of OpenJDK. That way, we can provide support & the latest versions and security releases for Java.
 
 ### 2.204.4-debian-10-r3
 
-- The Jenkins container has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the Jenkins service was started as the `jenkins` user. From now on, both the container and the Jenkins service run as user `jenkins` (`uid=1001`). You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
-- Consequences:
-  - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating your Jenkins data ensuring the `jenkins` user has the appropriate permissions.
-  - No "privileged" actions are allowed anymore.
+* The Jenkins container has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the Jenkins service was started as the `jenkins` user. From now on, both the container and the Jenkins service run as user `jenkins` (`uid=1001`). You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
+* Consequences:
+  * Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating your Jenkins data ensuring the `jenkins` user has the appropriate permissions.
+  * No "privileged" actions are allowed anymore.
 
 ### 2.121.2-ol-7-r14 / 2.121.2-debian-9-r18
 
-- Use Jetty instead of Tomcat as web server.
+* Use Jetty instead of Tomcat as web server.
 
 ### 2.107.1-r0
 
-- The Jenkins container has been migrated to the LTS version. From now on, this repository will only track long term support releases from [Jenkins](https://jenkins.io/changelog-stable/).
+* The Jenkins container has been migrated to the LTS version. From now on, this repository will only track long term support releases from [Jenkins](https://jenkins.io/changelog-stable/).
 
 ## Contributing
 
@@ -426,7 +426,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

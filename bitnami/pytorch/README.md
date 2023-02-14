@@ -11,14 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run -it --name pytorch bitnami/pytorch
+docker run -it --name pytorch bitnami/pytorch
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/pytorch/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/pytorch/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ## Why use Bitnami Images?
@@ -47,21 +47,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami Pytorch Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/pytorch).
 
 ```console
-$ docker pull bitnami/pytorch:latest
+docker pull bitnami/pytorch:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/pytorch/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/pytorch:[TAG]
+docker pull bitnami/pytorch:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Entering the REPL
@@ -69,7 +69,7 @@ $ docker build -t bitnami/APP:latest .
 By default, running this image will drop you into the Python REPL, where you can interactively test and try things out with PyTorch in Python.
 
 ```console
-$ docker run -it --name pytorch bitnami/pytorch
+docker run -it --name pytorch bitnami/pytorch
 ```
 
 ## Configuration
@@ -79,7 +79,7 @@ $ docker run -it --name pytorch bitnami/pytorch
 The default work directory for the PyTorch image is `/app`. You can mount a folder from your host here that includes your PyTorch script, and run it normally using the `python` command.
 
 ```console
-$ docker run -it --name pytorch -v /path/to/app:/app bitnami/pytorch \
+docker run -it --name pytorch -v /path/to/app:/app bitnami/pytorch \
   python script.py
 ```
 
@@ -88,14 +88,14 @@ $ docker run -it --name pytorch -v /path/to/app:/app bitnami/pytorch \
 If your PyTorch app has a `requirements.txt` defining your app's dependencies, you can install the dependencies before running your app.
 
 ```console
-$ docker run -it --name pytorch -v /path/to/app:/app bitnami/pytorch \
+docker run -it --name pytorch -v /path/to/app:/app bitnami/pytorch \
   sh -c "conda install -y --file requirements.txt && python script.py"
 ```
 
 **Further Reading:**
 
-  - [pytorch documentation](https://pytorch.org/docs/stable/index.html)
-  - [conda documentation](https://docs.conda.io/en/latest/)
+* [pytorch documentation](https://pytorch.org/docs/stable/index.html)
+* [conda documentation](https://docs.conda.io/en/latest/)
 
 ## Maintenance
 
@@ -106,7 +106,7 @@ Bitnami provides up-to-date versions of PyTorch, including security patches, soo
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/pytorch:latest
+docker pull bitnami/pytorch:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to `bitnami/pytorch:latest`.
@@ -114,13 +114,13 @@ or if you're using Docker Compose, update the value of the image property to `bi
 #### Step 2: Remove the currently running container
 
 ```console
-$ docker rm -v pytorch
+docker rm -v pytorch
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose rm -v pytorch
+docker-compose rm -v pytorch
 ```
 
 #### Step 3: Run the new image
@@ -128,13 +128,13 @@ $ docker-compose rm -v pytorch
 Re-create your container from the new image.
 
 ```console
-$ docker run --name pytorch bitnami/pytorch:latest
+docker run --name pytorch bitnami/pytorch:latest
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose up pytorch
+docker-compose up pytorch
 ```
 
 ## Notable changes

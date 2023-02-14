@@ -13,8 +13,8 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/parse/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/parse/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
@@ -61,8 +61,8 @@ Running Parse with a database server is the recommended way. You can either use 
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/parse/docker-compose.yml) file. Run the application using it as shown below:
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/parse/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/parse/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 #### Run the application manually
@@ -72,21 +72,21 @@ If you want to run the application manually instead of using docker-compose, the
 1. Create a new network for the application and the database:
 
   ```console
-  $ docker network create parse_network
+  docker network create parse_network
   ```
 
-2. Start a MongoDB&reg; database in the network generated:
+1. Start a MongoDB&reg; database in the network generated:
 
   ```console
-  $ docker run -d --name mongodb --net=parse_network bitnami/mongodb
+  docker run -d --name mongodb --net=parse_network bitnami/mongodb
   ```
 
   *Note:* You need to give the container a name in order to Parse to resolve the host
 
-3. Run the Parse container:
+1. Run the Parse container:
 
   ```console
-  $ docker run -d -p 1337:1337 --name parse --net=parse_network bitnami/parse
+  docker run -d -p 1337:1337 --name parse --net=parse_network bitnami/parse
   ```
 
 Then you can access your application at `http://your-ip/parse`
@@ -127,13 +127,13 @@ In this case you need to specify the directories to mount on the run command. Th
 1. Create a network (if it does not exist):
 
   ```console
-  $ docker network create parse-tier
+  docker network create parse-tier
   ```
 
-2. Create a MongoDB&reg; container with host volume:
+1. Create a MongoDB&reg; container with host volume:
 
   ```console
-  $ docker run -d --name mongodb \
+  docker run -d --name mongodb \
     --net parse-tier \
     --volume /path/to/mongodb-persistence:/bitnami \
     bitnami/mongodb:latest
@@ -141,10 +141,10 @@ In this case you need to specify the directories to mount on the run command. Th
 
   *Note:* You need to give the container a name in order to Parse to resolve the host
 
-3. Run the Parse container:
+1. Run the Parse container:
 
   ```console
-  $ docker run -d --name parse -p 1337:1337 \
+  docker run -d --name parse -p 1337:1337 \
     --net parse-tier \
     --volume /path/to/parse-persistence:/bitnami \
      bitnami/parse:latest
@@ -152,38 +152,38 @@ In this case you need to specify the directories to mount on the run command. Th
 
 ## Upgrade this application
 
-Bitnami provides up-to-date versions of Mongodb and Parse, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Parse container. For the Mongodb upgrade see https://github.com/bitnami/containers/blob/main/bitnami/mongodb/blob/master/README.md#upgrade-this-image
+Bitnami provides up-to-date versions of Mongodb and Parse, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Parse container. For the Mongodb upgrade see <https://github.com/bitnami/containers/blob/main/bitnami/mongodb/blob/master/README.md#upgrade-this-image>
 
 1. Get the updated images:
 
   ```console
-  $ docker pull bitnami/parse:latest
+  docker pull bitnami/parse:latest
   ```
 
-2. Stop your container
+1. Stop your container
 
- * For docker-compose: `$ docker-compose stop parse`
- * For manual execution: `$ docker stop parse`
+* For docker-compose: `docker-compose stop parse`
+* For manual execution: `docker stop parse`
 
-3. Take a snapshot of the application state
+1. Take a snapshot of the application state
 
 ```console
-$ rsync -a /path/to/parse-persistence /path/to/parse-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+rsync -a /path/to/parse-persistence /path/to/parse-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 Additionally, [snapshot the MongoDB&reg; data](https://github.com/bitnami/containers/blob/main/bitnami/mongodb#step-2-stop-and-backup-the-currently-running-container)
 
 You can use these snapshots to restore the application state should the upgrade fail.
 
-4. Remove the currently running container
+1. Remove the currently running container
 
- * For docker-compose: `$ docker-compose rm parse`
- * For manual execution: `$ docker rm parse`
+* For docker-compose: `docker-compose rm parse`
+* For manual execution: `docker rm parse`
 
-5. Run the new image
+1. Run the new image
 
- * For docker-compose: `$ docker-compose up parse`
- * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name parse bitnami/parse:latest`
+* For docker-compose: `docker-compose up parse`
+* For manual execution (mount the directories if needed): `docker run --name parse bitnami/parse:latest`
 
 ## Configuration
 
@@ -191,7 +191,7 @@ You can use these snapshots to restore the application state should the upgrade 
 
 When you start the parse image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/parse/docker-compose.yml) file present in this repository:
+* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/parse/docker-compose.yml) file present in this repository:
 
 ```yaml
 parse:
@@ -201,46 +201,46 @@ parse:
   ...
 ```
 
- * For manual execution add a `-e` option with each variable and value:
+* For manual execution add a `-e` option with each variable and value:
 
 ```console
- $ docker run -d -e PARSE_HOST=my_host -p 1337:1337 --name parse -v /your/local/path/bitnami/parse:/bitnami --network=parse_network bitnami/parse
+ docker run -d -e PARSE_HOST=my_host -p 1337:1337 --name parse -v /your/local/path/bitnami/parse:/bitnami --network=parse_network bitnami/parse
 ```
 
 Available environment variables:
 
-###### User and Site configuration
+#### User and Site configuration
 
-- `PARSE_ENABLE_HTTPS`: Whether to enable HTTPS for Parse by default. Default: **no**
-- `PARSE_BIND_HOST`: Parse bind host. Default: **127.0.0.1**
-- `PARSE_HOST`: Parse server host. Default: **127.0.0.1**
-- `PARSE_PORT_NUMBER_NUMBER`: Parse server port. Default: **1337**
-- `PARSE_APP_ID`: Parse app ID. Default: **myappID**
-- `PARSE_MASTER_KEY`: Parse master key: **mymasterKey**
-- `PARSE_APP_NAME`: Parse app name. Default: **myappID**
-- `PARSE_MOUNT_PATH`: Parse server mount path. Default: **/parse**
-- `PARSE_ENABLE_CLOUD_CODE`: Enable Parse cloud code support. Default **no**
+* `PARSE_ENABLE_HTTPS`: Whether to enable HTTPS for Parse by default. Default: **no**
+* `PARSE_BIND_HOST`: Parse bind host. Default: **127.0.0.1**
+* `PARSE_HOST`: Parse server host. Default: **127.0.0.1**
+* `PARSE_PORT_NUMBER_NUMBER`: Parse server port. Default: **1337**
+* `PARSE_APP_ID`: Parse app ID. Default: **myappID**
+* `PARSE_MASTER_KEY`: Parse master key: **mymasterKey**
+* `PARSE_APP_NAME`: Parse app name. Default: **myappID**
+* `PARSE_MOUNT_PATH`: Parse server mount path. Default: **/parse**
+* `PARSE_ENABLE_CLOUD_CODE`: Enable Parse cloud code support. Default **no**
 
-###### Database connection configuration
+#### Database connection configuration
 
-- `PARSE_DATABASE_HOST`: Hostname for the MongoDB server. Default: **mongodb**
-- `PARSE_DATABASE_PORT_NUMBER`: Port used by the MongoDB server. Default: **27017**
-- `PARSE_DATABASE_NAME`: Database name that Parse will use to connect with the database. Default: **bitnami_parse**
-- `PARSE_DATABASE_USER`: Database user that Parse will use to connect with the database. Default: **bn_parse**
-- `PARSE_DATABASE_PASSWORD`: Database password that Parse will use to connect with the database. No default.
-- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+* `PARSE_DATABASE_HOST`: Hostname for the MongoDB server. Default: **mongodb**
+* `PARSE_DATABASE_PORT_NUMBER`: Port used by the MongoDB server. Default: **27017**
+* `PARSE_DATABASE_NAME`: Database name that Parse will use to connect with the database. Default: **bitnami_parse**
+* `PARSE_DATABASE_USER`: Database user that Parse will use to connect with the database. Default: **bn_parse**
+* `PARSE_DATABASE_PASSWORD`: Database password that Parse will use to connect with the database. No default.
+* `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-###### Create a MongoDB database using mongodb-shell
+#### Create a MongoDB database using mongodb-shell
 
-- `MONGODB_SHELL_DATABASE_HOST`: Hostname for the MongoDB server. Default: **mongodb**
-- `MONGODB_SHELL_DATABASE_PORT_NUMBER`: Port used by the MongoDB server. Default: **27017**
-- `MONGODB_SHELL_DATABASE_ROOT_USER`: Database admin user. Default: **root**
-- `MONGODB_SHELL_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No defaults.
-- `MONGODB_SHELL_CREATE_DATABASE_NAME`: New database to be created by the mongodb-shell module. No defaults.
-- `MONGODB_SHELL_CREATE_DATABASE_USERNAME`: New database user to be created by the mongodb-shell module. No defaults.
-- `MONGODB_SHELL_CREATE_DATABASE_PASSWORD`: Database password for the `MONGODB_SHELL_CREATE_DATABASE_USERNAME` user. No defaults.
-- `MONGODB_SHELL_EXTRA_FLAGS`: Extra flags when using the mongodb-shell during initialization. No defaults.
-- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
+* `MONGODB_SHELL_DATABASE_HOST`: Hostname for the MongoDB server. Default: **mongodb**
+* `MONGODB_SHELL_DATABASE_PORT_NUMBER`: Port used by the MongoDB server. Default: **27017**
+* `MONGODB_SHELL_DATABASE_ROOT_USER`: Database admin user. Default: **root**
+* `MONGODB_SHELL_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No defaults.
+* `MONGODB_SHELL_CREATE_DATABASE_NAME`: New database to be created by the mongodb-shell module. No defaults.
+* `MONGODB_SHELL_CREATE_DATABASE_USERNAME`: New database user to be created by the mongodb-shell module. No defaults.
+* `MONGODB_SHELL_CREATE_DATABASE_PASSWORD`: Database password for the `MONGODB_SHELL_CREATE_DATABASE_USERNAME` user. No defaults.
+* `MONGODB_SHELL_EXTRA_FLAGS`: Extra flags when using the mongodb-shell during initialization. No defaults.
+* `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
 ### How to deploy your Cloud functions with Parse Cloud Code?
 
@@ -249,8 +249,8 @@ You can use Cloud Code to run a piece of code in your Parse Server instead of th
 * Create a directory on your host machine and put your Cloud functions on it. In the example below, a simple "Hello world!" function is used:
 
 ```console
-$ mkdir ~/cloud
-$ cat > ~/cloud/main.js <<'EOF'
+mkdir ~/cloud
+cat > ~/cloud/main.js <<'EOF'
 Parse.Cloud.define("sayHelloWorld", function(request, response) {
     return "Hello world!";
 });
@@ -299,7 +299,7 @@ volumes:
 * Use the `docker-compose` tool to deploy Parse and Parse Dashboard:
 
 ```console
-$ docker-compose up -d
+docker-compose up -d
 ```
 
 * Once both Parse and Parse Dashboard are running, access Parse Dashboard and browse to 'My Dashboard -> API Console'.
@@ -312,16 +312,16 @@ Find more information about Cloud Code and Cloud functions in the [official docu
 
 ### 4.9.3
 
-- This version was released from an incorrect version tag from the upstream Parse repositories. Parse developers have reported issues in some functionalities, though no concerns in regards to privacy, security, or legality were found. As such, we strongly recommend updating this version as soon as possible. You can find more information in [Parse 4.10.0 Release Notes](https://github.com/parse-community/parse-server/releases/tag/4.10.0)
+* This version was released from an incorrect version tag from the upstream Parse repositories. Parse developers have reported issues in some functionalities, though no concerns in regards to privacy, security, or legality were found. As such, we strongly recommend updating this version as soon as possible. You can find more information in [Parse 4.10.0 Release Notes](https://github.com/parse-community/parse-server/releases/tag/4.10.0)
 
 ### 4.9.3-debian-10-r161
 
-- The size of the container image has been decreased.
-- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+* The size of the container image has been decreased.
+* The configuration logic is now based on Bash scripts in the *rootfs/* folder.
 
 ### 3.1.2-r14
 
-- The Parse container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Parse daemon was started as the `parse` user. From now on, both the container and the Parse daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
+* The Parse container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Parse daemon was started as the `parse` user. From now on, both the container and the Parse daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 ## Contributing
 
@@ -339,7 +339,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

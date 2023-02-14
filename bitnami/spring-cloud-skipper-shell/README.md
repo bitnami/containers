@@ -6,12 +6,10 @@
 
 [Overview of Spring Cloud Skipper Shell](https://github.com/spring-cloud/spring-cloud-skipper)
 
-
-
 ## TL;DR
 
 ```console
-$ docker run --name spring-cloud-skipper-shell bitnami/spring-cloud-skipper-shell:latest
+docker run --name spring-cloud-skipper-shell bitnami/spring-cloud-skipper-shell:latest
 ```
 
 ## Why use Bitnami Images?
@@ -36,21 +34,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami spring-cloud-skipper-shell Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/spring-cloud-skipper-shell).
 
 ```console
-$ docker pull bitnami/spring-cloud-skipper-shell:latest
+docker pull bitnami/spring-cloud-skipper-shell:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/spring-cloud-skipper-shell/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/spring-cloud-skipper-shell:[TAG]
+docker pull bitnami/spring-cloud-skipper-shell:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
@@ -60,7 +58,7 @@ $ docker build -t bitnami/APP:latest .
 To run commands inside this container you can use `docker run`, for example to execute `spring-cloud-skipper-shell --help` you can follow the example below:
 
 ```console
-$ docker run --rm --name spring-cloud-skipper-shell bitnami/spring-cloud-skipper-shell:latest --help
+docker run --rm --name spring-cloud-skipper-shell bitnami/spring-cloud-skipper-shell:latest --help
 ```
 
 Consult the [spring-cloud-skipper-shell Reference Documentation](https://docs.spring.io/spring-cloud-skipper/docs/current/reference/htmlsingle/#using-shell) to find the completed list of commands available.
@@ -89,7 +87,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

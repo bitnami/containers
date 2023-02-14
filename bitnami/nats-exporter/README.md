@@ -11,7 +11,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run --name nats-exporter bitnami/nats-exporter:latest
+docker run --name nats-exporter bitnami/nats-exporter:latest
 ```
 
 ## Why use Bitnami Images?
@@ -40,21 +40,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami NATS Exporter Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/nats-exporter).
 
 ```console
-$ docker pull bitnami/nats-exporter:latest
+docker pull bitnami/nats-exporter:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/nats-exporter/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/nats-exporter:[TAG]
+docker pull bitnami/nats-exporter:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Connecting to other containers
@@ -68,7 +68,7 @@ Containers attached to the same network can communicate with each other using th
 #### Step 1: Create a network
 
 ```console
-$ docker network create nats-exporter-network --driver bridge
+docker network create nats-exporter-network --driver bridge
 ```
 
 #### Step 2: Launch the nats-exporter container within your network
@@ -76,7 +76,7 @@ $ docker network create nats-exporter-network --driver bridge
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `nats-exporter-network` network.
 
 ```console
-$ docker run --name nats-exporter-node1 --network nats-exporter-network bitnami/nats-exporter:latest
+docker run --name nats-exporter-node1 --network nats-exporter-network bitnami/nats-exporter:latest
 ```
 
 #### Step 3: Run another containers
@@ -92,7 +92,7 @@ Find all the configuration options in the [NATS Prometheus Exporter documentatio
 The Bitnami NATS Exporter Docker image sends the container logs to `stdout`. To view the logs:
 
 ```console
-$ docker logs nats-exporter
+docker logs nats-exporter
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -106,7 +106,7 @@ Bitnami provides up-to-date versions of NATS Exporter, including security patche
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/nats-exporter:latest
+docker pull bitnami/nats-exporter:latest
 ```
 
 #### Step 2: Stop the running container
@@ -114,13 +114,13 @@ $ docker pull bitnami/nats-exporter:latest
 Stop the currently running container using the command
 
 ```console
-$ docker stop nats-exporter
+docker stop nats-exporter
 ```
 
 #### Step 3: Remove the currently running container
 
 ```console
-$ docker rm -v nats-exporter
+docker rm -v nats-exporter
 ```
 
 #### Step 4: Run the new image
@@ -128,7 +128,7 @@ $ docker rm -v nats-exporter
 Re-create your container from the new image.
 
 ```console
-$ docker run --name nats-exporter bitnami/nats-exporter:latest
+docker run --name nats-exporter bitnami/nats-exporter:latest
 ```
 
 ## Contributing
@@ -147,7 +147,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

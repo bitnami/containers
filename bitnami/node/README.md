@@ -11,14 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run -it --name node bitnami/node
+docker run -it --name node bitnami/node
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/node/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/node/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ## Why use Bitnami Images?
@@ -43,21 +43,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami Node.js Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/node).
 
 ```console
-$ docker pull bitnami/node:latest
+docker pull bitnami/node:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/node/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/node:[TAG]
+docker pull bitnami/node:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Entering the REPL
@@ -65,12 +65,12 @@ $ docker build -t bitnami/APP:latest .
 By default, running this image will drop you into the Node.js REPL, where you can interactively test and try things out in Node.js.
 
 ```console
-$ docker run -it --name node bitnami/node
+docker run -it --name node bitnami/node
 ```
 
 **Further Reading:**
 
-  - [nodejs.org/api/repl.html](https://nodejs.org/api/repl.html)
+* [nodejs.org/api/repl.html](https://nodejs.org/api/repl.html)
 
 ## Configuration
 
@@ -79,7 +79,7 @@ $ docker run -it --name node bitnami/node
 The default work directory for the Node.js image is `/app`. You can mount a folder from your host here that includes your Node.js script, and run it normally using the `node` command.
 
 ```console
-$ docker run -it --name node -v /path/to/app:/app bitnami/node \
+docker run -it --name node -v /path/to/app:/app bitnami/node \
   node script.js
 ```
 
@@ -88,12 +88,11 @@ $ docker run -it --name node -v /path/to/app:/app bitnami/node \
 If your Node.js app has a `package.json` defining your app's dependencies and start script, you can install the dependencies before running your app.
 
 ```console
-$ docker run --rm -v /path/to/app:/app bitnami/node npm install
-$ docker run -it --name node  -v /path/to/app:/app bitnami/node npm start
+docker run --rm -v /path/to/app:/app bitnami/node npm install
+docker run -it --name node  -v /path/to/app:/app bitnami/node npm start
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/node/docker-compose.yml) file present in this repository:
-
 
 ```yaml
 node:
@@ -106,8 +105,8 @@ node:
 
 **Further Reading:**
 
-- [package.json documentation](https://docs.npmjs.com/files/package.json)
-- [npm start script](https://docs.npmjs.com/misc/scripts#default-values)
+* [package.json documentation](https://docs.npmjs.com/files/package.json)
+* [npm start script](https://docs.npmjs.com/misc/scripts#default-values)
 
 ## Working with private npm modules
 
@@ -142,16 +141,16 @@ CMD node app.js
 * Now you can build the image using the above Dockerfile and the token. Run the `docker build` command as follows:
 
 ```console
-$ docker build --build-arg NPM_TOKEN=${NPM_TOKEN} .
+docker build --build-arg NPM_TOKEN=${NPM_TOKEN} .
 ```
 
 | NOTE: The "." at the end gives `docker build` the current directory as an argument.
 
 Congratulations! You are now logged into the npm repo.
 
-**Further reading**
+### Further reading
 
-- [npm official documentation](https://docs.npmjs.com/private-modules/docker-and-private-modules).
+* [npm official documentation](https://docs.npmjs.com/private-modules/docker-and-private-modules).
 
 ## Accessing a Node.js app running a web server
 
@@ -179,20 +178,20 @@ var server = app.listen(3000, '0.0.0.0', function () {
 To access your web server from your host machine you can ask Docker to map a random port on your host to port `3000` inside the container.
 
 ```console
-$ docker run -it --name node -v /path/to/app:/app -P bitnami/node node index.js
+docker run -it --name node -v /path/to/app:/app -P bitnami/node node index.js
 ```
 
 Run `docker port` to determine the random port Docker assigned.
 
 ```console
-$ docker port node
+docker port node
 3000/tcp -> 0.0.0.0:32769
 ```
 
 You can also specify the port you want forwarded from your host to the container.
 
 ```console
-$ docker run -it --name node -p 8080:3000 -v /path/to/app:/app bitnami/node node index.js
+docker run -it --name node -p 8080:3000 -v /path/to/app:/app bitnami/node node index.js
 ```
 
 Access your web server in the browser by navigating to `http://localhost:8080`.
@@ -208,7 +207,7 @@ We may want to make our Node.js web server only accessible via an nginx web serv
 #### Step 1: Create a network
 
 ```console
-$ docker network create app-tier --driver bridge
+docker network create app-tier --driver bridge
 ```
 
 or using Docker Compose:
@@ -249,7 +248,7 @@ Copy the virtual host above, saving the file somewhere on your host. We will mou
 #### Step 3: Run the Node.js image with a specific name
 
 ```console
-$ docker run -it --name myapp --network app-tier \
+docker run -it --name myapp --network app-tier \
   -v /path/to/app:/app \
   bitnami/node node index.js
 ```
@@ -270,7 +269,7 @@ myapp:
 #### Step 4: Run the nginx image
 
 ```console
-$ docker run -it \
+docker run -it \
   -v /path/to/vhost.conf:/bitnami/nginx/conf/vhosts/yourapp.conf:ro \
   --network app-tier \
   bitnami/nginx
@@ -297,7 +296,7 @@ Bitnami provides up-to-date versions of Node.js, including security patches, soo
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/node:latest
+docker pull bitnami/node:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to `bitnami/node:latest`.
@@ -305,13 +304,13 @@ or if you're using Docker Compose, update the value of the image property to `bi
 #### Step 2: Remove the currently running container
 
 ```console
-$ docker rm -v node
+docker rm -v node
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose rm -v node
+docker-compose rm -v node
 ```
 
 #### Step 3: Run the new image
@@ -319,28 +318,28 @@ $ docker-compose rm -v node
 Re-create your container from the new image.
 
 ```console
-$ docker run --name node bitnami/node:latest
+docker run --name node bitnami/node:latest
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose up node
+docker-compose up node
 ```
 
 ## Notable Changes
 
 ### 6.2.0-r0 (2016-05-11)
 
-- Commands are now executed as the `root` user. Use the `--user` argument to switch to another user or change to the required user using `sudo` to launch applications. Alternatively, as of Docker 1.10 User Namespaces are supported by the docker daemon. Refer to the [daemon user namespace options](https://docs.docker.com/engine/security/userns-remap/) for more details.
+* Commands are now executed as the `root` user. Use the `--user` argument to switch to another user or change to the required user using `sudo` to launch applications. Alternatively, as of Docker 1.10 User Namespaces are supported by the docker daemon. Refer to the [daemon user namespace options](https://docs.docker.com/engine/security/userns-remap/) for more details.
 
 ### 4.1.2-0 (2015-10-12)
 
-- Permissions fixed so `bitnami` user can install global npm modules without needing `sudo`.
+* Permissions fixed so `bitnami` user can install global npm modules without needing `sudo`.
 
 ### 4.1.1-0-r01 (2015-10-07)
 
-- `/app` directory is no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume are not persisted between Dockerfile `RUN` instructions. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
+* `/app` directory is no longer exported as a volume. This caused problems when building on top of the image, since changes in the volume are not persisted between Dockerfile `RUN` instructions. To keep the previous behavior (so that you can mount the volume in another container), create the container with the `-v /app` option.
 
 ## Contributing
 
@@ -358,7 +357,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

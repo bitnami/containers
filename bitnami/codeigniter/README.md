@@ -13,9 +13,9 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ### Local workspace
 
 ```console
-$ mkdir ~/myapp && cd ~/myapp
-$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/codeigniter/docker-compose.yml
-$ docker-compose up
+mkdir ~/myapp && cd ~/myapp
+curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/codeigniter/docker-compose.yml
+docker-compose up
 ```
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [MariaDB container](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#readme) for a more secure deployment.
@@ -37,7 +37,7 @@ The Bitnami CodeIgniter Development Container has been carefully engineered to p
 
 [Learn more about Bitnami Development Containers.](https://docs.bitnami.com/containers/how-to/use-bitnami-development-containers/)
 
-# Supported tags and respective `Dockerfile` links
+## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
 
@@ -52,20 +52,20 @@ The quickest way to get started with the Bitnami CodeIgniter Development Contain
 Begin by creating a directory for your CodeIgniter application:
 
 ```console
-$ mkdir ~/myapp
-$ cd ~/myapp
+mkdir ~/myapp
+cd ~/myapp
 ```
 
 Download the [docker-compose.yml](https://raw.githubusercontent.com/bitnami/containers/main/bitnami/codeigniter/docker-compose.yml) file in the application directory:
 
 ```console
-$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/codeigniter/docker-compose.yml
+curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/codeigniter/docker-compose.yml
 ```
 
 Finally launch the CodeIgniter application development environment using:
 
 ```console
-$ docker-compose up
+docker-compose up
 ```
 
 The above command creates a container service for CodeIgniter development and bootstraps a new CodeIgniter application, named `myapp` in working directory. You can use your favorite IDE for developing the application.
@@ -83,17 +83,17 @@ Commands can be launched inside the `myapp` CodeIgniter Development Container wi
 The general structure of the `exec` command is:
 
 ```console
-$ docker-compose exec <service> <command>
+docker-compose exec <service> <command>
 ```
 
 where `<service>` is the name of the container service as described in the `docker-compose.yml` file and `<command>` is the command you want to launch inside the service.
 
 Following are a few examples:
 
-- Create a new project named `foo`:
+* Create a new project named `foo`:
 
   ```console
-  $ docker-compose run myapp nami execute codeigniter createProject foo
+  docker-compose run myapp nami execute codeigniter createProject foo
   ```
 
   Additionally, in the `docker-compose.yml` file you need to update the `CODEIGNITER_PROJECT_NAME` environment variable to `foo` so that the built-in PHP application server serves the application from the `foo` directory.
@@ -102,11 +102,11 @@ Following are a few examples:
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/blob/main/bitnami/codeigniter/issues/new). Be sure to include the following information in your issue:
 
-- Host OS and version
-- Docker version (`docker version`)
-- Output of `docker info`
-- Version of this container
-- The command you used to run the container, and any relevant output you saw (masking any sensitive information)
+* Host OS and version
+* Docker version (`docker version`)
+* Output of `docker info`
+* Version of this container
+* The command you used to run the container, and any relevant output you saw (masking any sensitive information)
 
 ### Community supported solution
 

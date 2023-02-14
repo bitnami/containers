@@ -11,14 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run -it --name mastodon bitnami/mastodon
+docker run -it --name mastodon bitnami/mastodon
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/mastodon/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/mastodon/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ## Why use Bitnami Images?
@@ -43,21 +43,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami Mastodon Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mastodon).
 
 ```console
-$ docker pull bitnami/mastodon:latest
+docker pull bitnami/mastodon:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/mastodon/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/mastodon:[TAG]
+docker pull bitnami/mastodon:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Maintenance
@@ -69,7 +69,7 @@ Bitnami provides up-to-date versions of Mastodon, including security patches, so
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/mastodon:latest
+docker pull bitnami/mastodon:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to `bitnami/mastodon:latest`.
@@ -77,13 +77,13 @@ or if you're using Docker Compose, update the value of the image property to `bi
 #### Step 2: Remove the currently running container
 
 ```console
-$ docker rm -v mastodon
+docker rm -v mastodon
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose rm -v mastodon
+docker-compose rm -v mastodon
 ```
 
 #### Step 3: Run the new image
@@ -91,13 +91,13 @@ $ docker-compose rm -v mastodon
 Re-create your container from the new image.
 
 ```console
-$ docker run --name mastodon bitnami/mastodon:latest
+docker run --name mastodon bitnami/mastodon:latest
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose up mastodon
+docker-compose up mastodon
 ```
 
 ## Configuration
@@ -106,7 +106,7 @@ $ docker-compose up mastodon
 
 When you start the Mastodon image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. Please note that some variables are only considered when the container is started for the first time. If you want to add a new environment variable:
 
-- For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mastodon/docker-compose.yml) file present in this repository:
+* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mastodon/docker-compose.yml) file present in this repository:
 
     ```yaml
     mastodon-api:
@@ -116,10 +116,10 @@ When you start the Mastodon image, you can adjust the configuration of the insta
       ...
     ```
 
-- For manual execution add a `--env` option with each variable and value:
+* For manual execution add a `--env` option with each variable and value:
 
     ```console
-    $ docker run -d --name mastodon-api -p 80:8080 -p 443:8443 \
+    docker run -d --name mastodon-api -p 80:8080 -p 443:8443 \
       --env MASTODON_ADMIN_PASSWORD=my_password \
       --env MASTODON_MODE=backend \
       --network mastodon-tier \
@@ -135,35 +135,35 @@ In addition to the official environment variables, the Bitnami Mastodon image ad
 
 Mastodon supports three running modes:
 
-- Web: The Mastodon web frontend. It is the essential functional element of Mastodon.
-- Streaming: Necessary for performing real-time interactions inside Mastodon.
-- Sidekiq: Performs background operations like sending emails.
+* Web: The Mastodon web frontend. It is the essential functional element of Mastodon.
+* Streaming: Necessary for performing real-time interactions inside Mastodon.
+* Sidekiq: Performs background operations like sending emails.
 
 The running mode is defined via the `MASTODON_MODE` environment variable. The possible values are `web`, `streaming` and `sidekiq`.
 
 ##### User and Site configuration
 
-- `MASTODON_CREATE_ADMIN`: Create admin users if it does not exist. Default: **true**
-- `MASTODON_ADMIN_USERNAME`: Mastodon application username. Default: **user**
-- `MASTODON_ADMIN_PASSWORD`: Mastodon application password. Default: **bitnami1**
-- `MASTODON_ADMIN_EMAIL`: Mastodon application email. Default: **user@bitnami.org**
-- `MASTODON_HTTPS_ENABLED`: Set the Mastodon Puma server as HTTPS. Default: **false**.
-- `MASTODON_ALLOW_ALL_DOMAINS`: Disable the Mastodon host verification process. Default: **true**.
-- `MASTODON_DATA_TO_PERSIST`: Space separated list of files and directories to persist. Use a space to persist no data: `" "`. Default: **public/system, public/assets**
+* `MASTODON_CREATE_ADMIN`: Create admin users if it does not exist. Default: **true**
+* `MASTODON_ADMIN_USERNAME`: Mastodon application username. Default: **user**
+* `MASTODON_ADMIN_PASSWORD`: Mastodon application password. Default: **bitnami1**
+* `MASTODON_ADMIN_EMAIL`: Mastodon application email. Default: **user@bitnami.org**
+* `MASTODON_HTTPS_ENABLED`: Set the Mastodon Puma server as HTTPS. Default: **false**.
+* `MASTODON_ALLOW_ALL_DOMAINS`: Disable the Mastodon host verification process. Default: **true**.
+* `MASTODON_DATA_TO_PERSIST`: Space separated list of files and directories to persist. Use a space to persist no data: `" "`. Default: **public/system, public/assets**
 
 ##### Startup operations
 
 At startup, several operations are necessary. In order to allow multiple replicas of the web server, the container allows enabling certain operations via flags:
 
-- `MASTODON_PRECOMPILE_ASSETS`: Perform `rake assets:precompile` at startup. Default: **true**.
-- `MASTODON_MIGRATE_DATABASE`: Perform `rake db:migrate`. Default: **true**.
-- `MASTODON_MIGRATE_ELASTICSEARCH`: Perform `rake chewy:upgrade`. Default: **true**.
+* `MASTODON_PRECOMPILE_ASSETS`: Perform `rake assets:precompile` at startup. Default: **true**.
+* `MASTODON_MIGRATE_DATABASE`: Perform `rake db:migrate`. Default: **true**.
+* `MASTODON_MIGRATE_ELASTICSEARCH`: Perform `rake chewy:upgrade`. Default: **true**.
 
 ##### Connect Mastodon container to an existing database
 
 The Bitnami Mastodon container supports connecting the Mastodon application to an external database. This would be an example of using an external database for Mastodon.
 
-- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mastodon/docker-compose.yml) file present in this repository:
+* Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mastodon/docker-compose.yml) file present in this repository:
 
     ```diff
        mastodon:
@@ -178,10 +178,10 @@ The Bitnami Mastodon container supports connecting the Mastodon application to a
          ...
     ```
 
-- For manual execution:
+* For manual execution:
 
     ```console
-    $ docker run -d --name mastodon\
+    docker run -d --name mastodon\
       -p 8080:8080 -p 8443:8443 \
       --network mastodon-network \
       --env DB_HOST=postgresql_host \
@@ -198,13 +198,13 @@ The Bitnami Mastodon container supports connecting the Mastodon application to a
 The Bitnami Mastodon Docker image sends the container logs to `stdout`. To view the logs:
 
 ```console
-$ docker logs mastodon
+docker logs mastodon
 ```
 
 Or using Docker Compose:
 
 ```console
-$ docker-compose logs mastodon
+docker-compose logs mastodon
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -225,7 +225,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
