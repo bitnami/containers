@@ -79,6 +79,18 @@ airflow_validate() {
         [[ -z "$AIRFLOW_POOL_SIZE" ]] && print_validation_error "Provided AIRFLOW_POOL_NAME but missing AIRFLOW_POOL_SIZE"
     fi
 
+    # Check cryptography parameters
+    if [[ -n "$AIRFLOW_RAW_FERNET_KEY" && -z "$AIRFLOW_FERNET_KEY" ]]; then
+        local fernet_char_count
+        fernet_char_count="$(echo -n "$AIRFLOW_RAW_FERNET_KEY")"
+        if [[ "$fernet_char_count" -lt 32 ]]; then
+            print_validation_error "AIRFLOW_RAW_FERNET_KEY must have at least 32 characters"
+        elif [[ "$fernet_char_count" -gt 32 ]]; then
+            warn "AIRFLOW_RAW_FERNET_KEY has more than 32 characters, the rest will be ignored"
+        fi
+        AIRFLOW_FERNET_KEY="$(echo -n "${AIRFLOW_RAW_FERNET_KEY:0:32}" | base64)"
+    fi
+
     return "$error_code"
 }
 
