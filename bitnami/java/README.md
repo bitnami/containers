@@ -110,7 +110,7 @@ In case you are replacing the default [minideb](https://github.com/bitnami/minid
 
 * Run `docker build` setting the value of `JAVA_EXTRA_SECURITY_DIR`. Remember to replace the `MYJAVAFORK:TAG` placeholder.
 
-```
+```console
 docker build --build-arg JAVA_EXTRA_SECURITY_DIR=/bitnami/java/extra-security -t MYJAVAFORK:TAG .
 ```
 

@@ -233,7 +233,7 @@ docker run -d --name nats -p 4222:4222 -p 6222:6222 -p 8222:8222 \
   bitnami/nats:latest
 ```
 
-#### Using Docker Compose
+#### Using Docker Compose deployment
 
 Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/nats/docker-compose.yml) file present in this repository as follows:
 

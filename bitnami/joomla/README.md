@@ -221,7 +221,7 @@ joomla:
 
 Available environment variables:
 
-###### User and Site configuration
+#### User and Site configuration
 
 * `JOOMLA_USERNAME`: Joomla! application username. Default: **user**
 * `JOOMLA_PASSWORD`: Joomla! application password. Default: **bitnami**
@@ -231,7 +231,7 @@ Available environment variables:
 * `JOOMLA_LOAD_SAMPLE_DATA`: Load Joomla sample data. Default: **yes**
 * `JOOMLA_SKIP_BOOTSTRAP`: Do not initialize the Joomla! database for a new deployment. This is necessary in case you use a database that already has Joomla! data. Default: **no**
 
-###### Use an existing database
+#### Use an existing database
 
 * `JOOMLA_DATABASE_TYPE`: Database type. Valid values: *mariadb*, *mysqli*. Default: **mariadb**
 * `JOOMLA_DATABASE_HOST`: Hostname for database server. Default: **mariadb**
@@ -241,7 +241,7 @@ Available environment variables:
 * `JOOMLA_DATABASE_PASSWORD`: Database password that Joomla! will use to connect with the database. No defaults.
 * `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-###### Create a database for Joomla! using mysql-client
+#### Create a database for Joomla! using mysql-client
 
 * `MYSQL_CLIENT_FLAVOR`: SQL database flavor. Valid values: `mariadb` or `mysql`. Default: **mariadb**.
 * `MYSQL_CLIENT_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
@@ -261,7 +261,7 @@ Available environment variables:
 * `MYSQL_CLIENT_SSL_KEY_FILE`: Path to the SSL CA file for the new database. No defaults
 * `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-###### SMTP Configuration
+#### SMTP Configuration
 
 To configure Joomla! to send email using SMTP you can set the following environment variables:
 
@@ -273,7 +273,7 @@ To configure Joomla! to send email using SMTP you can set the following environm
 * `JOOMLA_SMTP_SENDER_EMAIL`: SMTP sender email.
 * `JOOMLA_SMTP_SENDER_NAME`: SMTP sender name.
 
-###### PHP configuration
+#### PHP configuration
 
 * `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
 * `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
@@ -284,7 +284,7 @@ To configure Joomla! to send email using SMTP you can set the following environm
 * `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
 * `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
 
-###### Example
+#### Example
 
 This would be an example of SMTP configuration using a Gmail account:
 

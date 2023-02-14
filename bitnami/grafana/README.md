@@ -95,7 +95,7 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 Update the `grafana.ini` configuration file in the `/opt/bitnami/grafana/conf` directory to override default configuration options. You only need to add the options you want to override. Config files are applied in the order of:
 
-```
+```config
 grafana.ini
 default.ini
 ```
@@ -231,7 +231,7 @@ docker rm -v grafana
 
 #### Step 4: Run the new image
 
-Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
+Re-create your container from the new image, restoring your backup if necessary.
 
 ```console
 docker run --name grafana bitnami/grafana:latest

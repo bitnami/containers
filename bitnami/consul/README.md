@@ -386,7 +386,7 @@ This command will generate a keygen, that you can add to your Dockerfile, docker
 docker run -e CONSUL_GOSSIP_ENCRYPTION_KEY=YOUR_GENERATED_KEY --name consul bitnami/consul:latest
 ```
 
-#### Using Docker Compose
+#### Using Docker Compose deployment
 
 ```yaml
 consul:

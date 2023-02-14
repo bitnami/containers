@@ -215,7 +215,7 @@ When you start the Redmine image, you can adjust the configuration of the instan
 
 Available environment variables:
 
-##### User and Site configuration
+#### User and Site configuration
 
 - `REDMINE_PORT_NUMBER`: Port number in which Redmine will run. Default: **3000**
 - `REDMINE_USERNAME`: Redmine application username. Default: **user**
@@ -228,7 +228,7 @@ Available environment variables:
 - `REDMINE_LOAD_DEFAULT_DATA`: Whether to load default configuration data for Redmine. Default: **yes**
 - `REDMINE_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. This is necessary in case you use a database that already has Redmine data. Default: **no**
 
-##### Database connection configuration
+#### Database connection configuration
 
 - `REDMINE_DATABASE_TYPE`: Database type to be used for the Redmine installation. Allowed values: *mariadb*, *postgresql*. Default: **mariadb**
 - `REDMINE_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
@@ -238,7 +238,7 @@ Available environment variables:
 - `REDMINE_DATABASE_PASSWORD`: Database password that Redmine will use to connect with the database. No default.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-##### Create a MariaDB or MySQL database for Redmine using mysql-client
+#### Create a MariaDB or MySQL database for Redmine using mysql-client
 
 - `MYSQL_CLIENT_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
 - `MYSQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the MariaDB or MySQL server. Default: **3306**
@@ -253,7 +253,7 @@ Available environment variables:
 - `MYSQL_CLIENT_SSL_CA_FILE`: Path to the SSL CA file for the new database. No default.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-##### Create a PostgreSQL database for Redmine using postgresql-client
+#### Create a PostgreSQL database for Redmine using postgresql-client
 
 - `POSTGRESQL_CLIENT_DATABASE_HOST`: Hostname for the PostgreSQL server. Default: **postgresql**
 - `POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the PostgreSQL server. Default: **5432**
@@ -266,7 +266,7 @@ Available environment variables:
 - `POSTGRESQL_CLIENT_EXECUTE_SQL`: SQL code to execute in the PostgreSQL server. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-##### SMTP Configuration
+#### SMTP Configuration
 
 To configure Redmine to send email using SMTP you can set the following environment variables:
 

@@ -81,7 +81,7 @@ When you start the Confluent Schema Registry image, you can adjust the configura
 
 Available environment variables:
 
-##### Schema Registry settings
+#### Schema Registry settings
 
 * `SCHEMA_REGISTRY_KAFKA_BROKERS`: List of Kafka brokers to connect to. Default: **PLAINTEXT://localhost:9092**.
 * `SCHEMA_REGISTRY_ADVERTISED_HOSTNAME`: Advertised hostname in ZooKeeper. Default: **container IP**.
@@ -99,11 +99,11 @@ Available environment variables:
 * `SCHEMA_REGISTRY_AVRO_COMPATIBILY_LEVEL`: The Avro compatibility type. Valid options: `NONE`, `BACKWARD`, `BACKWARD_TRANSITIVE`, `FORWARD`, `FORWARD_TRANSITIVE`, `FULL`, or `FULL_TRANSITIVE`.
 * `SCHEMA_REGISTRY_DEBUG`: Enable Schema Registry debug logs. Valid options: true or false. Default: **false**.
 
-##### Kafka settings
+#### Kafka settings
 
 Please check the configuration settings for the Kakfa service in the [Kafka's README file](https://github.com/bitnami/containers/tree/main/bitnami/kafka#configuration).
 
-##### Zookeeper settings
+#### Zookeeper settings
 
 Please check the configuration settings for the Kakfa service in the [Zookeeper's README file](https://github.com/bitnami/containers/tree/main/bitnami/zookeeper#configuration).
 

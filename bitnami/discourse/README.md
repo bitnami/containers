@@ -281,7 +281,7 @@ When you start the Discourse image, you can adjust the configuration of the inst
 
 Available environment variables:
 
-##### User and Site configuration
+#### User and Site configuration
 
 - `DISCOURSE_ENABLE_HTTPS`: Whether to use HTTPS by default. Default: **no**
 - `DISCOURSE_EXTERNAL_HTTP_PORT_NUMBER`: Port to used by Discourse to generate URLs and links when accessing using HTTP. Will be ignored if multisite mode is not enabled. Default **80**
@@ -302,7 +302,7 @@ Available environment variables:
 - `DISCOURSE_ENABLE_CONF_PERSISTENCE`: Whether to enable persistence of the Discourse `discourse.conf` configuration file. Default: **no**
 - `DISCOURSE_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. This is necessary in case you use a database that already has Discourse data. Default: **no**
 
-##### Database connection configuration
+#### Database connection configuration
 
 - `DISCOURSE_DATABASE_HOST`: Hostname for PostgreSQL server. Default: **postgresql**
 - `DISCOURSE_DATABASE_PORT_NUMBER`: Port used by the PostgreSQL server. Default: **5432**
@@ -311,14 +311,14 @@ Available environment variables:
 - `DISCOURSE_DATABASE_PASSWORD`: Database password that Discourse will use to connect with the database. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-##### Redis connection configuration
+#### Redis connection configuration
 
 - `DISCOURSE_REDIS_HOST`: Hostname for Redis(R). Default: **redis**
 - `DISCOURSE_REDIS_PORT_NUMBER`: Port used by Redis(R). Default: **6379**
 - `DISCOURSE_REDIS_PASSWORD`: Password for Redis(R).
 - `DISCOURSE_REDIS_USE_SSL`: Whether to enable SSL for Redis(R). Default: **no**
 
-##### Create a database for Discourse using postgresql-client
+#### Create a database for Discourse using postgresql-client
 
 - `POSTGRESQL_CLIENT_DATABASE_HOST`: Hostname for the PostgreSQL server. Default: **postgresql**
 - `POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the PostgreSQL server. Default: **5432**
@@ -331,7 +331,7 @@ Available environment variables:
 - `POSTGRESQL_CLIENT_EXECUTE_SQL`: SQL code to execute in the PostgreSQL server. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-##### SMTP Configuration
+#### SMTP Configuration
 
 To configure Discourse to send email using SMTP you can set the following environment variables:
 
