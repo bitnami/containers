@@ -184,10 +184,12 @@ $ docker run -d --name logstash \
 
 The Bitnami Logstash image provides a way to create your custom image installing plugins on build time. This is the preferred way to persist plugins when using Logstash, as they will not be installed every time the container is started but just once at build time.
 
-To create your own image providing plugins execute the flowing command:
+To create your own image providing plugins execute the following command. Remember to replace the `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build --build-arg LOGSTASH_PLUGINS=<plugin1,plugin2,...> -t bitnami/logstash:latest 'https://github.com/bitnami/containers/blob/main/bitnami/logstash.git#main:8/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/logstash/VERSION/OPERATING-SYSTEM
+$ docker build --build-arg LOGSTASH_PLUGINS=<plugin1,plugin2,...> -t bitnami/logstash:latest .
 ```
 
 The command above will build the image providing this GitHub repository as build context, and will pass the list of plugins to install to the build logic.
