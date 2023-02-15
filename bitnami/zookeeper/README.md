@@ -236,7 +236,7 @@ services:
   ...
 ```
 
-### Zookeeper Configuration
+### ZooKeeper configuration
 
 The image looks for configuration in the `conf/` directory of `/opt/bitnami/zookeeper`.
 
