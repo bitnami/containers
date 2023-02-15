@@ -397,53 +397,6 @@ cassandra:
     - /path/to/cassandra-persistence:/bitnami
 ```
 
-### Configuration file
-
-The image looks for configurations in `/bitnami/cassandra/conf/`. As mentioned in [Persisting your application](#persisting-your-application) you can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/cassandra-persistence/cassandra/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
-
-#### Step 1: Run the Apache Cassandra image
-
-Run the Apache Cassandra image, mounting a directory from your host.
-
-```console
-docker run --name cassandra \
-    -v /path/to/cassandra-persistence:/bitnami \
-    bitnami/cassandra:latest
-```
-
-or using Docker Compose:
-
-```yaml
-cassandra:
-  image: bitnami/cassandra:latest
-  volumes:
-    - /path/to/cassandra-persistence:/bitnami
-```
-
-#### Step 2: Edit the configuration
-
-Edit the configuration on your host using your favorite editor.
-
-```console
-vi /path/to/cassandra-persistence/cassandra/conf/cassandra.yaml
-```
-
-#### Step 3: Restart Apache Cassandra
-
-After changing the configuration, restart your Apache Cassandra container for changes to take effect.
-
-```console
-docker restart cassandra
-```
-
-or using Docker Compose:
-
-```console
-docker-compose restart cassandra
-```
-
-Refer to the [configuration](http://docs.datastax.com/en/cassandra/3.x/cassandra/configuration/configTOC.html) manual for the complete list of configuration options.
-
 ## TLS Encryption
 
 The Bitnami Apache Cassandra Docker image allows configuring TLS encryption between nodes and between server-client. This is done by mounting in `/bitnami/cassandra/secrets` two files:

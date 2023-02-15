@@ -287,7 +287,7 @@ docker-compose rm -v solr
 
 #### Step 4: Run the new image
 
-Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
+Re-create your container from the new image, restoring your backup if necessary.
 
 ```console
 docker run --name solr bitnami/solr:latest

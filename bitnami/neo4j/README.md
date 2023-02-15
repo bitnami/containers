@@ -178,7 +178,7 @@ docker run -d -e NEO4J_BOLT_PORT_NUMBER=7777 --name neo4j bitnami/neo4j:latest
 
 In order to load your own configuration files, you will have to make them available to the container. You can do it mounting a [volume](https://docs.docker.com/engine/tutorials/dockervolumes/) in `/bitnami/neo4j/conf`.
 
-#### Using Docker Compose
+#### Using Docker Compose to add a custom config file
 
 Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/neo4j/docker-compose.yml) file present in this repository:
 
@@ -194,7 +194,7 @@ neo4j:
 
 In order to add extra plugins, you will have to make them available to the container. You can do it mounting a [volume](https://docs.docker.com/engine/tutorials/dockervolumes/) in `/bitnami/neo4j/plugins`.
 
-#### Using Docker Compose
+#### Using Docker Compose to add plugins
 
 Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/neo4j/docker-compose.yml) file present in this repository:
 
@@ -273,7 +273,7 @@ docker-compose rm -v neo4j
 
 #### Step 4: Run the new image
 
-Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
+Re-create your container from the new image, restoring your backup if necessary.
 
 ```console
 docker run --name neo4j bitnami/neo4j:latest

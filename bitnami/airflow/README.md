@@ -296,13 +296,13 @@ This container supports the installation of additional python modules at start-u
 
 The Airflow instance can be customized by specifying environment variables on the first run. The following environment values are provided to customize Airflow:
 
-###### User configuration
+#### User configuration
 
 * `AIRFLOW_USERNAME`: Airflow application username. Default: **user**
 * `AIRFLOW_PASSWORD`: Airflow application password. Default: **bitnami**
 * `AIRFLOW_EMAIL`: Airflow application email. Default: **user@example.com**
 
-###### Airflow configuration
+#### Airflow configuration
 
 * `AIRFLOW_EXECUTOR`: Airflow executor. Default: **SequentialExecutor**
 * `AIRFLOW_FERNET_KEY`: Airflow Fernet key. No defaults.
@@ -316,7 +316,7 @@ The Airflow instance can be customized by specifying environment variables on th
 * `AIRFLOW_POOL_SIZE`: Pool size, required with `AIRFLOW_POOL_NAME`. No defaults.
 * `AIRFLOW_POOL_DESC`: Pool description, required with `AIRFLOW_POOL_NAME`. No defaults.
 
-###### Use an existing database
+#### Use an existing database
 
 * `AIRFLOW_DATABASE_HOST`: Hostname for PostgreSQL server. Default: **postgresql**
 * `AIRFLOW_DATABASE_PORT_NUMBER`: Port used by PostgreSQL server. Default: **5432**
@@ -331,7 +331,7 @@ The Airflow instance can be customized by specifying environment variables on th
 * `REDIS_PASSWORD`: Password that Airflow will use to connect with Redis(R). No defaults.
 * `REDIS_DATABASE`: Database number for Redis(R) server. Default: **1**
 
-###### Airflow LDAP authentication
+#### Airflow LDAP authentication
 
 * `AIRFLOW_LDAP_ENABLE`: Enable LDAP authentication. Default: **no**
 * `AIRFLOW_LDAP_URI`: LDAP server URI. No defaults.
@@ -349,7 +349,7 @@ The Airflow instance can be customized by specifying environment variables on th
 
 > In addition to the previous environment variables, all the parameters from the configuration file can be overwritten by using environment variables with this format: `AIRFLOW__{SECTION}__{KEY}`. Note the double underscores.
 
-#### Specifying Environment variables using Docker Compose
+### Specifying Environment variables using Docker Compose
 
 ```yaml
 version: '2'
@@ -369,7 +369,7 @@ services:
       - AIRFLOW_EMAIL=user@example.com
 ```
 
-#### Specifying Environment variables on the Docker command line
+### Specifying Environment variables on the Docker command line
 
 ```console
 docker run -d --name airflow -p 8080:8080 \
