@@ -1,6 +1,5 @@
 version: '2'
 services:
-  # [TEST]
   apache:
     image: docker.io/bitnami/apache:2.4
     ports:
