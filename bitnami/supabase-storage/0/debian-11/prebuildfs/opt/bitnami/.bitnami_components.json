@@ -8,16 +8,16 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "5baedbb7b4cd8e626842e71320bfe8cc4866b7238c5e8479c5426b9123c7dba0",
+        "digest": "fbe5cb1a19ecccf616d2e97c130e7dae06537494bdcc3ead8b9e98054fb4a6f9",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-1"
+        "version": "3.8.16-3"
     },
     "supabase-storage": {
         "arch": "amd64",
-        "digest": "b913938c7c3549790c8969b3b4086328be7933d322ae85633444a4d35b87961b",
+        "digest": "f2bc367fc650c14b030626a4cc5d84f5857fef0fcd55ec86b0a36d9cf64cf6fd",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.28.2-0"
+        "version": "0.28.2-1"
     }
 }
