@@ -43,7 +43,6 @@ Date:   Thu Feb 2 11:41:15 2018 -0800
     Update README
 
     Signed-off-by: Joe Smith <joe.smith@example.com>
-```
 
 Notice the `Author` and `Signed-off-by` lines match. If they don't your PR will be rejected by the automated DCO check.
 
