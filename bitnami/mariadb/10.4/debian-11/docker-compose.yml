@@ -1,7 +1,6 @@
 version: '2.1'
 
 services:
-  # [TEST]
   mariadb:
     image: docker.io/bitnami/mariadb:10.4
     ports:
