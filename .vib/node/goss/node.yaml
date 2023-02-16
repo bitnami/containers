@@ -1,0 +1,14 @@
+command:
+  # Node can run a simple 'Hello World' program
+  check-node:
+    exec: "node -e \"console.log('Hello')\""
+    exit-status: 0
+    stdout:
+      - Hello
+  check-global-modules:
+    exec: npm list -g
+    exit-status: 0
+    stdout:
+    {{ range $module := .Vars.modules }}
+      - {{ $module }}
+    {{ end }}
