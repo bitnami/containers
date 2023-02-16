@@ -1,6 +1,5 @@
 version: '2'
 services:
-  # [TEST]
   aspnet-core:
     image: docker.io/bitnami/aspnet-core:7
     command: ["tail", "-f", "/dev/null"] # To keep the container running
