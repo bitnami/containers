@@ -1,3 +1,19 @@
+command:
+  # There are no syntax error in the configuration
+  check-configuration:
+    exec: apachectl -t
+    exit-status: 0
+  # Check explicitly enabled and disabled modules
+  check-loaded-modules:
+    exec: apachectl -M
+    exit-status: 0
+    stdout:
+    {{ range $module := .Vars.modules.loaded }}
+      - "{{ $module }}_module"
+    {{ end }}
+    {{ range $module := .Vars.modules.disabled }}
+      - "!{{ $module }}_module"
+    {{ end }}
 file:
   # Main Apache config file includes other config files
   {{ .Vars.root_dir }}/apache/conf/httpd.conf:
@@ -31,19 +47,3 @@ file:
     exists: true
     filetype: file
   {{ end }}
-command:
-  # There are no syntax error in the configuration
-  check-configuration:
-    exec: apachectl -t
-    exit-status: 0
-  # Check explicitly enabled and disabled modules
-  check-loaded-modules:
-    exec: apachectl -M
-    exit-status: 0
-    stdout:
-    {{ range $module := .Vars.modules.loaded }}
-      - "{{ $module }}_module"
-    {{ end }}
-    {{ range $module := .Vars.modules.disabled }}
-      - "!{{ $module }}_module"
-    {{ end }}

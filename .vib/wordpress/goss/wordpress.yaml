@@ -1,3 +1,24 @@
+command:
+  check-app-version:
+    exec: cat {{ .Vars.root_dir }}/wordpress/wp-includes/version.php  | grep "wp_version"
+    exit-status: 0
+    stdout:
+      - {{ .Env.APP_VERSION }}
+  # WP-CLI points to correct binaries and config file
+  check-wp-cli-conf:
+    exec: wp --info
+    exit-status: 0
+    stdout:
+      - "{{ .Vars.root_dir }}/php/bin/php"
+      - "{{ .Vars.root_dir }}/mysql/bin/mysql"
+      - "{{ .Vars.root_dir }}/wp-cli/conf/wp-cli.yml"
+  check-enabled-modules:
+    exec: php -m
+    exit-status: 0
+    stdout:
+    {{ range $module := .Vars.phpmodules }}
+      - "{{ $module }}"
+    {{ end }}
 file:
   # HTTP vhost should have been properly rendered
   {{ .Vars.root_dir }}/apache/conf/vhosts/wordpress-vhost.conf:
@@ -20,27 +41,6 @@ file:
     filetype: file
     contains:
       - /path.*{{ .Vars.root_dir }}/wordpress/
-command:
-  check-app-version:
-    exec: cat {{ .Vars.root_dir }}/wordpress/wp-includes/version.php  | grep "wp_version"
-    exit-status: 0
-    stdout:
-      - {{ .Env.APP_VERSION }}
-  # WP-CLI points to correct binaries and config file
-  check-wp-cli-conf:
-    exec: wp --info
-    exit-status: 0
-    stdout:
-      - "{{ .Vars.root_dir }}/php/bin/php"
-      - "{{ .Vars.root_dir }}/mysql/bin/mysql"
-      - "{{ .Vars.root_dir }}/wp-cli/conf/wp-cli.yml"
-  check-enabled-modules:
-    exec: php -m
-    exit-status: 0
-    stdout:
-    {{ range $module := .Vars.phpmodules }}
-      - "{{ $module }}"
-    {{ end }}
 group:
   daemon:
     exists: true

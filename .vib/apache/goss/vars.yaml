@@ -1,14 +1,14 @@
-components:
-  binaries:
-    - httpd
-    - gosu
-    - render-template
-  files:
-    - /opt/bitnami/apache/conf/modsecurity.conf
-    - /opt/bitnami/apache/conf/unicode.mapping
-filesystem:
+binaries:
+  - httpd
+  - gosu
+  - render-template
+files:
+  - paths:
+      - /opt/bitnami/apache/conf/modsecurity.conf
+      - /opt/bitnami/apache/conf/unicode.mapping
+directories:
   - mode: "0775"
-    directories:
+    paths:
       - /opt/bitnami/apache/var/run
       - /opt/bitnami/apache/conf
       - /opt/bitnami/apache/logs

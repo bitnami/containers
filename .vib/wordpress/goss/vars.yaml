@@ -1,17 +1,17 @@
-components:
-  binaries:
-    - apachectl
-    - gosu
-    - mariadb
-    - php
-    - render-template
-    - wp
-  files:
+binaries:
+  - apachectl
+  - gosu
+  - mariadb
+  - php
+  - render-template
+  - wp
+files:
+  - paths:
     - /opt/bitnami/apache/modules/libphp.so
     - /opt/bitnami/wordpress/wp-config.php
-filesystem:
+directories:
   - mode: "0775"
-    directories:
+    paths:
       - /bitnami/wordpress
       - /opt/bitnami/wordpress
       - /opt/bitnami/wordpress/tmp

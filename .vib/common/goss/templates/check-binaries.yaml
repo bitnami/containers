@@ -1,10 +1,10 @@
 ########################
-# Checks components binaries are added to the $PATH
+# Checks binaries are added to the $PATH
 # Needed vars:
-#   - .Vars.components.binaries (Array)
+#   - .Vars.binaries (Array)
 ########################
 command:
-  {{ range $binary := .Vars.components.binaries }}
+  {{ range $binary := .Vars.binaries }}
   check-{{ $binary }}-binary:
     exec: which {{ $binary }}
     exit-status: 0
