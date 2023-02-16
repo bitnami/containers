@@ -13,11 +13,9 @@ files:
       - /opt/bitnami/codeigniter/composer.json
       - /opt/bitnami/codeigniter/spark
 directories:
-  - mode: "0755"
+  - mode: "0775"
     paths:
-      - /opt/bitnami/codeigniter/app
-      - /opt/bitnami/codeigniter/licenses
-      - /opt/bitnami/codeigniter/public
+      - /app
 root_dir: /opt/bitnami
 version:
   bin_name: /opt/bitnami/codeigniter/spark
