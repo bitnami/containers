@@ -11,14 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run -it --name gradle bitnami/gradle
+docker run -it --name gradle bitnami/gradle
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/gradle/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/gradle/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ## Why use Bitnami Images?
@@ -43,21 +43,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami Gradle Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/gradle).
 
 ```console
-$ docker pull bitnami/gradle:latest
+docker pull bitnami/gradle:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/gradle/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/gradle:[TAG]
+docker pull bitnami/gradle:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
@@ -67,14 +67,14 @@ $ docker build -t bitnami/APP:latest .
 The default work directory for the Gradle image is `/app`. You can mount a folder from your host here that includes your Gradle build script, and run any task specifying its identifier.
 
 ```console
-$ docker run --name gradle -v /path/to/app:/app bitnami/gradle \
+docker run --name gradle -v /path/to/app:/app bitnami/gradle \
   build
 ```
 
 **Further Reading:**
 
-  - [gradle documentation](https://docs.gradle.org/)
-  - [gradle command-line interface](https://docs.gradle.org/current/userguide/command_line_interface.html)
+* [gradle documentation](https://docs.gradle.org/)
+* [gradle command-line interface](https://docs.gradle.org/current/userguide/command_line_interface.html)
 
 ## Maintenance
 
@@ -85,7 +85,7 @@ Bitnami provides up-to-date versions of Gradle, including security patches, soon
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/gradle:latest
+docker pull bitnami/gradle:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to `bitnami/gradle:latest`.
@@ -93,13 +93,13 @@ or if you're using Docker Compose, update the value of the image property to `bi
 #### Step 2: Remove the currently running container
 
 ```console
-$ docker rm -v gradle
+docker rm -v gradle
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose rm -v gradle
+docker-compose rm -v gradle
 ```
 
 #### Step 3: Run the new image
@@ -107,13 +107,13 @@ $ docker-compose rm -v gradle
 Re-create your container from the new image.
 
 ```console
-$ docker run --name gradle bitnami/gradle:latest
+docker run --name gradle bitnami/gradle:latest
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose up gradle
+docker-compose up gradle
 ```
 
 ## Contributing
@@ -132,7 +132,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

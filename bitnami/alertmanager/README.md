@@ -11,7 +11,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run --name alertmanager bitnami/alertmanager:latest
+docker run --name alertmanager bitnami/alertmanager:latest
 ```
 
 ## Why use Bitnami Images?
@@ -40,21 +40,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami Alertmanager Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/alertmanager).
 
 ```console
-$ docker pull bitnami/alertmanager:latest
+docker pull bitnami/alertmanager:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/alertmanager/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/alertmanager:[TAG]
+docker pull bitnami/alertmanager:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Persisting your application
@@ -66,7 +66,7 @@ For persistence you should mount a volume at the `/opt/bitnami/data` path. The a
 To avoid inadvertent removal of this volume you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
 ```console
-$ docker run -v /path/to/alertmanager-persistence:/opt/bitnami/data bitnami/alertmanager:latest
+docker run -v /path/to/alertmanager-persistence:/opt/bitnami/data bitnami/alertmanager:latest
 ```
 
 > NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
@@ -82,7 +82,7 @@ Containers attached to the same network can communicate with each other using th
 #### Step 1: Create a network
 
 ```console
-$ docker network create alertmanager-network --driver bridge
+docker network create alertmanager-network --driver bridge
 ```
 
 #### Step 2: Launch the Alertmanager container within your network
@@ -90,7 +90,7 @@ $ docker network create alertmanager-network --driver bridge
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `alertmanager-network` network.
 
 ```console
-$ docker run --name alertmanager-node1 --network alertmanager-network bitnami/alertmanager:latest
+docker run --name alertmanager-node1 --network alertmanager-network bitnami/alertmanager:latest
 ```
 
 #### Step 3: Run another containers
@@ -102,7 +102,7 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 The configuration can easily be setup by mounting your own configuration file on the directory `/opt/bitnami/alertmanager/conf/`:
 
 ```console
-$ docker run --name alertmanager -v /path/to/config.yml:/opt/bitnami/alertmanager/conf/config.yml bitnami/alertmanager:latest
+docker run --name alertmanager -v /path/to/config.yml:/opt/bitnami/alertmanager/conf/config.yml bitnami/alertmanager:latest
 ```
 
 After that, your configuration will be taken into account in the server's behaviour.
@@ -130,7 +130,7 @@ Configuration is yaml based. The full documentation of the configuration can be 
 The Bitnami alertmanager Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```console
-$ docker logs alertmanager
+docker logs alertmanager
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -144,7 +144,7 @@ Bitnami provides up-to-date versions of alertmanager, including security patches
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/alertmanager:latest
+docker pull bitnami/alertmanager:latest
 ```
 
 #### Step 2: Stop and backup the currently running container
@@ -152,13 +152,13 @@ $ docker pull bitnami/alertmanager:latest
 Stop the currently running container using the command
 
 ```console
-$ docker stop alertmanager
+docker stop alertmanager
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/alertmanager-persistence` using:
 
 ```console
-$ rsync -a /path/to/alertmanager-persistence /path/to/alertmanager-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+rsync -a /path/to/alertmanager-persistence /path/to/alertmanager-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 You can use this snapshot to restore the database state should the upgrade fail.
@@ -166,15 +166,15 @@ You can use this snapshot to restore the database state should the upgrade fail.
 #### Step 3: Remove the currently running container
 
 ```console
-$ docker rm -v alertmanager
+docker rm -v alertmanager
 ```
 
 #### Step 4: Run the new image
 
-Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
+Re-create your container from the new image, restoring your backup if necessary.
 
 ```console
-$ docker run --name alertmanager bitnami/alertmanager:latest
+docker run --name alertmanager bitnami/alertmanager:latest
 ```
 
 ## Contributing
@@ -186,13 +186,14 @@ We'd love for you to contribute to this container. You can request new features 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
+
 Copyright &copy; 2023 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

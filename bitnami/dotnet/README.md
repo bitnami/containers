@@ -11,14 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run --name dotnet bitnami/dotnet:latest
+docker run --name dotnet bitnami/dotnet:latest
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/dotnet/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/dotnet/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ## Why use Bitnami Images?
@@ -43,21 +43,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami Dotnet Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/dotnet).
 
 ```console
-$ docker pull bitnami/dotnet:latest
+docker pull bitnami/dotnet:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/dotnet/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/dotnet:[TAG]
+docker pull bitnami/dotnet:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Persisting your application
@@ -67,7 +67,7 @@ If you remove the container all your data will be lost, and the next time you ru
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
 ```console
-$ docker run \
+docker run \
     -v /path/to/dotnet-persistence:/bitnami \
     bitnami/dotnet:latest
 ```
@@ -93,7 +93,7 @@ Containers attached to the same network can communicate with each other using th
 #### Step 1: Create a network
 
 ```console
-$ docker network create dotnet-network --driver bridge
+docker network create dotnet-network --driver bridge
 ```
 
 #### Step 2: Launch the Dotnet container within your network
@@ -101,7 +101,7 @@ $ docker network create dotnet-network --driver bridge
 Use the `--network .NETWORK>` argument to the `docker run` command to attach the container to the `dotnet-network` network.
 
 ```console
-$ docker run --name dotnet-node1 --network dotnet-network bitnami/dotnet:latest
+docker run --name dotnet-node1 --network dotnet-network bitnami/dotnet:latest
 ```
 
 #### Step 3: Run another containers
@@ -113,7 +113,7 @@ We can launch another containers using the same flag (`--network.NETWORK`) in th
 The Bitnami Dotnet Docker image sends the container logs to `stdout`. To view the logs:
 
 ```console
-$ docker logs dotnet
+docker logs dotnet
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -127,7 +127,7 @@ Bitnami provides up-to-date versions of Dotnet, including security patches, soon
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/dotnet:latest
+docker pull bitnami/dotnet:latest
 ```
 
 #### Step 2: Stop the running container
@@ -135,13 +135,13 @@ $ docker pull bitnami/dotnet:latest
 Stop the currently running container using the command
 
 ```console
-$ docker stop dotnet
+docker stop dotnet
 ```
 
 #### Step 3: Remove the currently running container
 
 ```console
-$ docker rm -v dotnet
+docker rm -v dotnet
 ```
 
 #### Step 4: Run the new image
@@ -149,7 +149,7 @@ $ docker rm -v dotnet
 Re-create your container from the new image.
 
 ```console
-$ docker run --name dotnet bitnami/dotnet:latest
+docker run --name dotnet bitnami/dotnet:latest
 ```
 
 ## Contributing
@@ -168,7 +168,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

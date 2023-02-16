@@ -11,14 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run --name logstash bitnami/logstash:latest
+docker run --name logstash bitnami/logstash:latest
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/logstash/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/logstash/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ## Why use Bitnami Images?
@@ -53,21 +53,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami Logstash Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/logstash).
 
 ```console
-$ docker pull bitnami/logstash:latest
+docker pull bitnami/logstash:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/logstash/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/logstash:[TAG]
+docker pull bitnami/logstash:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Persisting your application
@@ -77,7 +77,7 @@ If you remove the container all your data will be lost, and the next time you ru
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
 ```console
-$ docker run \
+docker run \
     -v /path/to/logstash-persistence:/bitnami \
     bitnami/logstash:latest
 ```
@@ -105,7 +105,7 @@ Containers attached to the same network can communicate with each other using th
 #### Step 1: Create a network
 
 ```console
-$ docker network create logstash-network --driver bridge
+docker network create logstash-network --driver bridge
 ```
 
 #### Step 2: Launch the Logstash container within your network
@@ -113,7 +113,7 @@ $ docker network create logstash-network --driver bridge
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `logstash-network` network.
 
 ```console
-$ docker run --name logstash-node1 --network logstash-network bitnami/logstash:latest
+docker run --name logstash-node1 --network logstash-network bitnami/logstash:latest
 ```
 
 #### Step 3: Run another containers
@@ -125,7 +125,7 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 This container, by default, provides a very basic configuration for Logstash, that listen http on port 8080 and writes to stdout.
 
 ```console
-$ docker run -d -p 8080:8080 bitnami/logstash:latest
+docker run -d -p 8080:8080 bitnami/logstash:latest
 ```
 
 ### Using a configuration string
@@ -133,7 +133,7 @@ $ docker run -d -p 8080:8080 bitnami/logstash:latest
 For simple configurations, you specify it using the `LOGSTASH_CONF_STRING` environment variable:
 
 ```console
-$ docker run --env LOGSTASH_CONF_STRING="input {file {path => \"/tmp/logstash_input\"}} output {file {path => \"/tmp/logstash_output\"}}" bitnami/logstash:latest
+docker run --env LOGSTASH_CONF_STRING="input {file {path => \"/tmp/logstash_input\"}} output {file {path => \"/tmp/logstash_output\"}}" bitnami/logstash:latest
 ```
 
 ### Using a configuration file
@@ -141,7 +141,7 @@ $ docker run --env LOGSTASH_CONF_STRING="input {file {path => \"/tmp/logstash_in
 You can override the default configuration for Logstash by mounting your own configuration files on directory `/bitnami/logstash/pipeline`. You will need to indicate the file holding the pipeline definition by setting the `LOGSTASH_PIPELINE_CONF_FILENAME` environment variable.
 
 ```console
-$ docker run -d --env LOGSTASH_PIPELINE_CONF_FILENAME=my_config.conf -v /path/to/custom-conf-directory:/bitnami/logstash/pipeline bitnami/logstash:latest
+docker run -d --env LOGSTASH_PIPELINE_CONF_FILENAME=my_config.conf -v /path/to/custom-conf-directory:/bitnami/logstash/pipeline bitnami/logstash:latest
 ```
 
 ### Additional command line options
@@ -149,7 +149,7 @@ $ docker run -d --env LOGSTASH_PIPELINE_CONF_FILENAME=my_config.conf -v /path/to
 In case you want to add extra flags to the Logstash command, use the `LOGSTASH_EXTRA_FLAGS` variable. Example:
 
 ```console
-$ docker run -d --env LOGSTASH_EXTRA_FLAGS="-w 4 -b 4096" bitnami/logstash:latest
+docker run -d --env LOGSTASH_EXTRA_FLAGS="-w 4 -b 4096" bitnami/logstash:latest
 ```
 
 ### Using multiple pipelines
@@ -159,7 +159,7 @@ You can use [multiple pipelines](https://www.elastic.co/guide/en/logstash/master
 In that case, you should place your `pipelines.yml` file in the mounted volume (together with the rest of the desired configuration files). If the `LOGSTASH_ENABLE_MULTIPLE_PIPELINES` environment variable is set to `true` but there is not any `pipelines.yml` file in the mounted volume, a dummy file is created using `LOGSTASH_PIPELINE_CONF_FILENAME` as a single pipeline.
 
 ```console
-$ docker run -d --env LOGSTASH_ENABLE_MULTIPLE_PIPELINES=true -v /path/to/custom-conf-directory:/bitnami/logstash/config bitnami/logstash:latest
+docker run -d --env LOGSTASH_ENABLE_MULTIPLE_PIPELINES=true -v /path/to/custom-conf-directory:/bitnami/logstash/config bitnami/logstash:latest
 ```
 
 ### Exposing Logstash API
@@ -167,7 +167,7 @@ $ docker run -d --env LOGSTASH_ENABLE_MULTIPLE_PIPELINES=true -v /path/to/custom
 You can expose the Logstash API by setting the environment variable `LOGSTASH_EXPOSE_API`, you can also change the default port by using `LOGSTASH_API_PORT_NUMBER`.
 
 ```console
-$ docker run -d --env LOGSTASH_EXPOSE_API=yes --env LOGSTASH_API_PORT_NUMBER=9090 -p 9090:9090 bitnami/logstash:latest
+docker run -d --env LOGSTASH_EXPOSE_API=yes --env LOGSTASH_API_PORT_NUMBER=9090 -p 9090:9090 bitnami/logstash:latest
 ```
 
 ### Plugins
@@ -175,7 +175,7 @@ $ docker run -d --env LOGSTASH_EXPOSE_API=yes --env LOGSTASH_API_PORT_NUMBER=909
 You can add extra plugins by setting the `LOGSTASH_PLUGINS` environment variable. To specify multiple plugins, separate them by spaces, commas or semicolons. When the container is initialized it will install all of the specified plugins before starting Logstash.
 
 ```console
-$ docker run -d --name logstash \
+docker run -d --name logstash \
     -e LOGSTASH_PLUGINS=logstash-input-github \
     bitnami/logstash:latest
 ```
@@ -187,9 +187,9 @@ The Bitnami Logstash image provides a way to create your custom image installing
 To create your own image providing plugins execute the following command. Remember to replace the `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/logstash/VERSION/OPERATING-SYSTEM
-$ docker build --build-arg LOGSTASH_PLUGINS=<plugin1,plugin2,...> -t bitnami/logstash:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/logstash/VERSION/OPERATING-SYSTEM
+docker build --build-arg LOGSTASH_PLUGINS=<plugin1,plugin2,...> -t bitnami/logstash:latest .
 ```
 
 The command above will build the image providing this GitHub repository as build context, and will pass the list of plugins to install to the build logic.
@@ -199,7 +199,7 @@ The command above will build the image providing this GitHub repository as build
 The Bitnami Logstash Docker image sends the container logs to `stdout`. To view the logs:
 
 ```console
-$ docker logs logstash
+docker logs logstash
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -216,7 +216,7 @@ Bitnami provides up-to-date versions of Logstash, including security patches, so
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/logstash:latest
+docker pull bitnami/logstash:latest
 ```
 
 #### Step 2: Stop the running container
@@ -224,13 +224,13 @@ $ docker pull bitnami/logstash:latest
 Stop the currently running container using the command
 
 ```console
-$ docker stop logstash
+docker stop logstash
 ```
 
 #### Step 3: Remove the currently running container
 
 ```console
-$ docker rm -v logstash
+docker rm -v logstash
 ```
 
 #### Step 4: Run the new image
@@ -238,14 +238,14 @@ $ docker rm -v logstash
 Re-create your container from the new image.
 
 ```console
-$ docker run --name logstash bitnami/logstash:latest
+docker run --name logstash bitnami/logstash:latest
 ```
 
 ## Notable Changes
 
 ### 7.15.2-debian-10-r12
 
-- Pipeline configuration files (i.e. `default_config.conf`) are being added into the `/opt/bitnami/logstash/pipeline` directory, instead of `/opt/bitnami/logstash/config`. Subsequently, `LOGSTASH_CONF_FILENAME` was renamed to `LOGSTASH_PIPELINE_CONF_FILENAME`, and `LOGSTASH_CONF_STRING` was renamed to `LOGSTASH_PIPELINE_CONF_STRING`.
+* Pipeline configuration files (i.e. `default_config.conf`) are being added into the `/opt/bitnami/logstash/pipeline` directory, instead of `/opt/bitnami/logstash/config`. Subsequently, `LOGSTASH_CONF_FILENAME` was renamed to `LOGSTASH_PIPELINE_CONF_FILENAME`, and `LOGSTASH_CONF_STRING` was renamed to `LOGSTASH_PIPELINE_CONF_STRING`.
 
 ## Contributing
 
@@ -263,7 +263,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

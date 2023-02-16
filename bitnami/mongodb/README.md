@@ -11,14 +11,14 @@ Disclaimer: The respective trademarks mentioned in the offering are owned by the
 ## TL;DR
 
 ```console
-$ docker run --name mongodb bitnami/mongodb:latest
+docker run --name mongodb bitnami/mongodb:latest
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/mongodb/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/mongodb/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ## Why use Bitnami Images?
@@ -53,21 +53,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami MongoDB&reg; Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mongodb).
 
 ```console
-$ docker pull bitnami/mongodb:latest
+docker pull bitnami/mongodb:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/mongodb/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/mongodb:[TAG]
+docker pull bitnami/mongodb:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Persisting your database
@@ -77,7 +77,7 @@ If you remove the container all your data will be lost, and the next time you ru
 For persistence you should mount a directory at the `/bitnami/mongodb` path. If the mounted directory is empty, it will be initialized on the first run.
 
 ```console
-$ docker run \
+docker run \
     -v /path/to/mongodb-persistence:/bitnami/mongodb \
     bitnami/mongodb:latest
 ```
@@ -110,7 +110,7 @@ In this example, we will create a MongoDB&reg; client instance that will connect
 #### Step 1: Create a network
 
 ```console
-$ docker network create app-tier --driver bridge
+docker network create app-tier --driver bridge
 ```
 
 #### Step 2: Launch the MongoDB&reg; server instance
@@ -118,7 +118,7 @@ $ docker network create app-tier --driver bridge
 Use the `--network app-tier` argument to the `docker run` command to attach the MongoDB&reg; container to the `app-tier` network.
 
 ```console
-$ docker run -d --name mongodb-server \
+docker run -d --name mongodb-server \
     --network app-tier \
     bitnami/mongodb:latest
 ```
@@ -128,7 +128,7 @@ $ docker run -d --name mongodb-server \
 Finally we create a new container instance to launch the MongoDB&reg; client and connect to the server created in the previous step:
 
 ```console
-$ docker run -it --rm \
+docker run -it --rm \
     --network app-tier \
     bitnami/mongodb:latest mongo --host mongodb-server
 ```
@@ -163,7 +163,7 @@ services:
 Launch the containers using:
 
 ```console
-$ docker-compose up -d
+docker-compose up -d
 ```
 
 ## Configuration
@@ -178,11 +178,11 @@ In order to have your custom files inside the docker image you can mount them as
 
 Passing extra command-line flags to the mongod service command is possible through the following env var:
 
-- `MONGODB_EXTRA_FLAGS`: Flags to be appended to the `mongod` startup command. No defaults
-- `MONGODB_CLIENT_EXTRA_FLAGS`: Flags to be appended to the `mongo` command which is used to connect to the (local or remote) `mongod` daemon. No defaults
+* `MONGODB_EXTRA_FLAGS`: Flags to be appended to the `mongod` startup command. No defaults
+* `MONGODB_CLIENT_EXTRA_FLAGS`: Flags to be appended to the `mongo` command which is used to connect to the (local or remote) `mongod` daemon. No defaults
 
 ```console
-$ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_EXTRA_FLAGS='--wiredTigerCacheSizeGB=2' bitnami/mongodb:latest
+docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_EXTRA_FLAGS='--wiredTigerCacheSizeGB=2' bitnami/mongodb:latest
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mongodb/docker-compose.yml) file present in this repository:
@@ -201,11 +201,11 @@ services:
 
 Configuring the system log verbosity level is possible through the following env vars:
 
-- `MONGODB_DISABLE_SYSTEM_LOG`: Whether to enable/disable system log on MongoDB&reg;. Default: `false`. Possible values: `[true, false]`.
-- `MONGODB_SYSTEM_LOG_VERBOSITY`: MongoDB&reg; system log verbosity level. Default: `0`. Possible values: `[0, 1, 2, 3, 4, 5]`. For more information about the verbosity levels please refer to the [MongoDB&reg; documentation](https://docs.mongodb.com/manual/reference/configuration-options/#systemLog.verbosity)
+* `MONGODB_DISABLE_SYSTEM_LOG`: Whether to enable/disable system log on MongoDB&reg;. Default: `false`. Possible values: `[true, false]`.
+* `MONGODB_SYSTEM_LOG_VERBOSITY`: MongoDB&reg; system log verbosity level. Default: `0`. Possible values: `[0, 1, 2, 3, 4, 5]`. For more information about the verbosity levels please refer to the [MongoDB&reg; documentation](https://docs.mongodb.com/manual/reference/configuration-options/#systemLog.verbosity)
 
 ```console
-$ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_SYSTEM_LOG_VERBOSITY='3' bitnami/mongodb:latest
+docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_SYSTEM_LOG_VERBOSITY='3' bitnami/mongodb:latest
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mongodb/docker-compose.yml) file present in this repository:
@@ -222,18 +222,18 @@ services:
 
 ### Using numactl
 
-  In order to enable launching commands using numactl, set the `MONGODB_ENABLE_NUMACTL` variable to true. For more information on this, check the official [MongoDB documentation][(https://docs.mongodb.com/manual/administration/production-notes/#configuring-numa-on-linux)
+  In order to enable launching commands using numactl, set the `MONGODB_ENABLE_NUMACTL` variable to true. For more information on this, check the official [MongoDB documentation][(<https://docs.mongodb.com/manual/administration/production-notes/#configuring-numa-on-linux>)
 
 ### Enabling/disabling IPv6
 
 Enabling/disabling IPv6 is possible through the following env var:
 
-- `MONGODB_ENABLE_IPV6`: Whether to enable/disable IPv6 on MongoDB&reg;. Default: `false`. Possible values: `[true, false]`
+* `MONGODB_ENABLE_IPV6`: Whether to enable/disable IPv6 on MongoDB&reg;. Default: `false`. Possible values: `[true, false]`
 
 To enable IPv6 support, you can execute:
 
 ```console
-$ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_ENABLE_IPV6=yes bitnami/mongodb:latest
+docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_ENABLE_IPV6=yes bitnami/mongodb:latest
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mongodb/docker-compose.yml) file present in this repository:
@@ -252,10 +252,10 @@ services:
 
 Enabling/disabling [directoryPerDB](https://docs.mongodb.com/manual/reference/configuration-options/#storage.directoryPerDB) is possible through the following env var:
 
-- `MONGODB_ENABLE_DIRECTORY_PER_DB`: Whether to enable/disable directoryPerDB on MongoDB&reg;. Default: `true`. Possible values: `[true, false]`
+* `MONGODB_ENABLE_DIRECTORY_PER_DB`: Whether to enable/disable directoryPerDB on MongoDB&reg;. Default: `true`. Possible values: `[true, false]`
 
 ```console
-$ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_ENABLE_DIRECTORY_PER_DB=yes bitnami/mongodb:latest
+docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_ENABLE_DIRECTORY_PER_DB=yes bitnami/mongodb:latest
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mongodb/docker-compose.yml) file present in this repository:
@@ -274,10 +274,10 @@ services:
 
 Enabling/disabling [journal](https://docs.mongodb.com/manual/reference/configuration-options/#mongodb-setting-storage.journal.enabled) is possible through the following env var:
 
-- `MONGODB_ENABLE_JOURNAL`: Whether to enable/disable journaling on MongoDB&reg;. Default: `true`. Possible values: `[true, false]`
+* `MONGODB_ENABLE_JOURNAL`: Whether to enable/disable journaling on MongoDB&reg;. Default: `true`. Possible values: `[true, false]`
 
 ```console
-$ docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_ENABLE_JOURNAL=true bitnami/mongodb:latest
+docker run --name mongodb -e ALLOW_EMPTY_PASSWORD=yes -e MONGODB_ENABLE_JOURNAL=true bitnami/mongodb:latest
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mongodb/docker-compose.yml) file present in this repository:
@@ -297,7 +297,7 @@ services:
 Passing the `MONGODB_ROOT_PASSWORD` environment variable when running the image for the first time will set the password of `MONGODB_ROOT_USER` to the value of `MONGODB_ROOT_PASSWORD` and enable authentication on the MongoDB&reg; server. If unset, `MONGODB_ROOT_USER` defaults to `root`.
 
 ```console
-$ docker run --name mongodb \
+docker run --name mongodb \
   -e MONGODB_ROOT_PASSWORD=password123 bitnami/mongodb:latest
 ```
 
@@ -319,7 +319,7 @@ The `MONGODB_ROOT_USER` user is configured to have full administrative access to
 You can create a user with restricted access to a database while starting the container for the first time. To do this, provide the `MONGODB_USERNAME`, `MONGODB_PASSWORD` and `MONGODB_DATABASE` environment variables.
 
 ```console
-$ docker run --name mongodb \
+docker run --name mongodb \
   -e MONGODB_USERNAME=my_user -e MONGODB_PASSWORD=password123 \
   -e MONGODB_DATABASE=my_database bitnami/mongodb:latest
 ```
@@ -344,18 +344,18 @@ Creation of a user enables authentication on the MongoDB&reg; server and as a re
 
 A [replication](https://docs.mongodb.com/manual/replication/) cluster can easily be setup with the Bitnami MongoDB&reg; Docker Image using the following environment variables:
 
- - `MONGODB_REPLICA_SET_MODE`: The replication mode. Possible values `primary`/`secondary`/`arbiter`. No defaults.
- - `MONGODB_REPLICA_SET_NAME`: MongoDB&reg; replica set name. Default: **replicaset**
- - `MONGODB_PORT_NUMBER`: The port each MongoDB&reg; will use. Default: **27017**
- - `MONGODB_INITIAL_PRIMARY_HOST`: MongoDB&reg; initial primary host, once the replicaset is created any node can be eventually promoted to be the primary. No defaults.
- - `MONGODB_INITIAL_PRIMARY_PORT_NUMBER`: MongoDB&reg; initial primary node port, as seen by other nodes. Default: **27017**
- - `MONGODB_ADVERTISED_HOSTNAME`: MongoDB&reg; advertised hostname. No defaults. It is recommended to pass this environment variable if you experience issues with ephemeral IPs. Setting this env var makes the nodes of the replica set to be configured with a hostname instead of the machine IP.
- - `MONGODB_ADVERTISE_IP`: MongoDB&reg; advertised hostname is set to container ip. Default: **false**. Overrides `MONGODB_ADVERTISED_HOSTNAME`
- - `MONGODB_ADVERTISED_PORT_NUMBER`: MongoDB&reg; advertised port number. No defaults. It is recommended to pass this environment variable if you have a proxy port forwarding requests to container.
- - `MONGODB_REPLICA_SET_KEY`: MongoDB&reg; replica set key. Length should be greater than 5 characters and should not contain any special characters. Required for all nodes. No default.
- - `MONGODB_ROOT_USER`: MongoDB&reg; root user name. Default: **root**.
- - `MONGODB_ROOT_PASSWORD`: MongoDB&reg; root password. No defaults. Only for primary node.
- - `MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD`: MongoDB&reg; initial primary root password. No defaults. Only for secondaries and arbiter nodes.
+* `MONGODB_REPLICA_SET_MODE`: The replication mode. Possible values `primary`/`secondary`/`arbiter`. No defaults.
+* `MONGODB_REPLICA_SET_NAME`: MongoDB&reg; replica set name. Default: **replicaset**
+* `MONGODB_PORT_NUMBER`: The port each MongoDB&reg; will use. Default: **27017**
+* `MONGODB_INITIAL_PRIMARY_HOST`: MongoDB&reg; initial primary host, once the replicaset is created any node can be eventually promoted to be the primary. No defaults.
+* `MONGODB_INITIAL_PRIMARY_PORT_NUMBER`: MongoDB&reg; initial primary node port, as seen by other nodes. Default: **27017**
+* `MONGODB_ADVERTISED_HOSTNAME`: MongoDB&reg; advertised hostname. No defaults. It is recommended to pass this environment variable if you experience issues with ephemeral IPs. Setting this env var makes the nodes of the replica set to be configured with a hostname instead of the machine IP.
+* `MONGODB_ADVERTISE_IP`: MongoDB&reg; advertised hostname is set to container ip. Default: **false**. Overrides `MONGODB_ADVERTISED_HOSTNAME`
+* `MONGODB_ADVERTISED_PORT_NUMBER`: MongoDB&reg; advertised port number. No defaults. It is recommended to pass this environment variable if you have a proxy port forwarding requests to container.
+* `MONGODB_REPLICA_SET_KEY`: MongoDB&reg; replica set key. Length should be greater than 5 characters and should not contain any special characters. Required for all nodes. No default.
+* `MONGODB_ROOT_USER`: MongoDB&reg; root user name. Default: **root**.
+* `MONGODB_ROOT_PASSWORD`: MongoDB&reg; root password. No defaults. Only for primary node.
+* `MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD`: MongoDB&reg; initial primary root password. No defaults. Only for secondaries and arbiter nodes.
 
 In a replication cluster you can have one primary node, zero or more secondary nodes and zero or one arbiter node.
 
@@ -366,7 +366,7 @@ In a replication cluster you can have one primary node, zero or more secondary n
 The first step is to start the MongoDB&reg; primary.
 
 ```console
-$ docker run --name mongodb-primary \
+docker run --name mongodb-primary \
   -e MONGODB_REPLICA_SET_MODE=primary \
   -e MONGODB_ADVERTISED_HOSTNAME=mongodb-primary \
   -e MONGODB_ROOT_PASSWORD=password123 \
@@ -381,7 +381,7 @@ In the above command the container is configured as the `primary` using the `MON
 Next we start a MongoDB&reg; secondary container.
 
 ```console
-$ docker run --name mongodb-secondary \
+docker run --name mongodb-secondary \
   --link mongodb-primary:primary \
   -e MONGODB_REPLICA_SET_MODE=secondary \
   -e MONGODB_ADVERTISED_HOSTNAME=mongodb-secondary \
@@ -399,7 +399,7 @@ In the above command the container is configured as a `secondary` using the `MON
 Finally we start a MongoDB&reg; arbiter container.
 
 ```console
-$ docker run --name mongodb-arbiter \
+docker run --name mongodb-arbiter \
   --link mongodb-primary:primary \
   -e MONGODB_REPLICA_SET_MODE=arbiter \
   -e MONGODB_ADVERTISED_HOSTNAME=mongodb-arbiter \
@@ -419,7 +419,7 @@ You now have a three node MongoDB&reg; replication cluster up and running which 
 If we want a replication hidden node, we start a MongoDB&reg; hidden container.
 
 ```console
-$ docker run --name mongodb-hidden \
+docker run --name mongodb-hidden \
   --link mongodb-primary:primary \
   -e MONGODB_REPLICA_SET_MODE=hidden \
   -e MONGODB_ADVERTISED_HOSTNAME=mongodb-hidden \
@@ -481,7 +481,7 @@ volumes:
 and run docker-compose using:
 
 ```console
-$ docker-compose up --detach
+docker-compose up --detach
 ```
 
 In the case you want to scale the number of secondary nodes using the docker-compose parameter `--scale`, the MONGODB_ADVERTISED_HOSTNAME must not be set in mongodb-secondary and mongodb-arbiter defintions.
@@ -531,7 +531,7 @@ volumes:
 And then run docker-compose using:
 
 ```console
-$ docker-compose up --detach --scale mongodb-primary=1 --scale mongodb-secondary=3 --scale mongodb-arbiter=1
+docker-compose up --detach --scale mongodb-primary=1 --scale mongodb-secondary=3 --scale mongodb-arbiter=1
 ```
 
 The above command scales up the number of secondary nodes to `3`. You can scale down in the same way.
@@ -572,28 +572,31 @@ Finally, the hidden node follows the same procedure than secondary nodes with th
 
 This container supports enabling SSL/TLS between nodes in the cluster, as well as between mongo clients and nodes, by setting the `MONGODB_EXTRA_FLAGS` and `MONGODB_CLIENT_EXTRA_FLAGS` environment variables,
 together with the correct `MONGODB_ADVERTISED_HOSTNAME`.
-Before starting the cluster you need to generate PEM certificates as required by Mongo - one way is to create self-signed certificates using `openssl` (see http://www.openssl.org).
+Before starting the cluster you need to generate PEM certificates as required by Mongo - one way is to create self-signed certificates using `openssl` (see <http://www.openssl.org>).
 
-**The certificates generated as described are not for production use**
+> **The certificates generated as described are not for production use**
 
 Another option would be to use letsencrypt certificates; the required configuration steps for that scenario are left as an exercise for the user and are beyond the scope of this README.
 
 #### Generating self-signed certificates
 
-- Generate a new private key which will be used to create your own Certificate Authority (CA):
+* Generate a new private key which will be used to create your own Certificate Authority (CA):
+
 ```console
 openssl genrsa -out mongoCA.key 2048
 ```
 
-- Create the public certificate for your own CA:
+* Create the public certificate for your own CA:
+
 ```console
 openssl req -x509 -new \
     -subj "/C=US/ST=NY/L=New York/O=Example Corp/OU=IT Department/CN=mongoCA" \
     -key mongoCA.key -out mongoCA.crt
 ```
 
-- Create a Certificate Signing Request for a node `${NODE_NAME}`, the essential part here is that the `Common Name` corresponds to the hostname by which the nodes will be addressed.
+* Create a Certificate Signing Request for a node `${NODE_NAME}`, the essential part here is that the `Common Name` corresponds to the hostname by which the nodes will be addressed.
 Example for `mongodb-primary`:
+
 ```console
 export NODE_NAME=mongodb-primary
 openssl req -new -nodes \
@@ -601,19 +604,22 @@ openssl req -new -nodes \
     -keyout ${NODE_NAME}.key -out ${NODE_NAME}.csr
 ```
 
-- Create a certificate from the Certificate Signing Request and sign it using the private key of your previously created Certificate Authority:
+* Create a certificate from the Certificate Signing Request and sign it using the private key of your previously created Certificate Authority:
+
 ```console
 openssl x509 \
     -req -days 365 -in ${NODE_NAME}.csr -out ${NODE_NAME}.crt \
     -CA mongoCA.crt -CAkey mongoCA.key -CAcreateserial -extensions req
 ```
 
-- Create a PEM bundle using the private key and the public certificate:
+* Create a PEM bundle using the private key and the public certificate:
+
 ```console
 cat ${NODE_NAME}.key ${NODE_NAME}.crt > ${NODE_NAME}.pem
 ```
 
 NB: Afterwards you do not need the Certificate Signing Request.
+
 ```console
 rm ${NODE_NAME}.csr
 ```
@@ -621,20 +627,25 @@ rm ${NODE_NAME}.csr
 Repeat the process to generate PEM bundles for all the nodes in your cluster.
 
 #### Starting the cluster
+
 After having generated the certificates and making them available to the containers at the correct mount points (i.e. `/certificates/`), the environment variables could be setup as in the following examples.
 
 Example settings for the primary node `mongodb-primary`:
-- `MONGODB_ADVERTISED_HOSTNAME=mongodb-primary`
-- `MONGODB_EXTRA_FLAGS=--tlsMode=requireTLS --tlsCertificateKeyFile=/certificates/mongodb-primary.pem --tlsClusterFile=/certificates/mongodb-primary.pem --tlsCAFile=/certificates/mongoCA.crt`
-- `MONGODB_CLIENT_EXTRA_FLAGS=--tls --tlsCertificateKeyFile=/certificates/mongodb-primary.pem --tlsCAFile=/certificates/mongoCA.crt`
+
+* `MONGODB_ADVERTISED_HOSTNAME=mongodb-primary`
+* `MONGODB_EXTRA_FLAGS=--tlsMode=requireTLS --tlsCertificateKeyFile=/certificates/mongodb-primary.pem --tlsClusterFile=/certificates/mongodb-primary.pem --tlsCAFile=/certificates/mongoCA.crt`
+* `MONGODB_CLIENT_EXTRA_FLAGS=--tls --tlsCertificateKeyFile=/certificates/mongodb-primary.pem --tlsCAFile=/certificates/mongoCA.crt`
 
 Example corresponding settings for a secondary node `mongodb-secondary`:
-- `MONGODB_ADVERTISED_HOSTNAME=mongodb-secondary`
-- `MONGODB_EXTRA_FLAGS=--tlsMode=requireTLS --tlsCertificateKeyFile=/certificates/mongodb-secondary.pem --tlsClusterFile=/certificates/mongodb-secondary.pem --tlsCAFile=/certificates/mongoCA.crt`
-- `MONGODB_CLIENT_EXTRA_FLAGS=--tls --tlsCertificateKeyFile=/certificates/mongodb-secondary.pem --tlsCAFile=/certificates/mongoCA.crt`
+
+* `MONGODB_ADVERTISED_HOSTNAME=mongodb-secondary`
+* `MONGODB_EXTRA_FLAGS=--tlsMode=requireTLS --tlsCertificateKeyFile=/certificates/mongodb-secondary.pem --tlsClusterFile=/certificates/mongodb-secondary.pem --tlsCAFile=/certificates/mongoCA.crt`
+* `MONGODB_CLIENT_EXTRA_FLAGS=--tls --tlsCertificateKeyFile=/certificates/mongodb-secondary.pem --tlsCAFile=/certificates/mongoCA.crt`
 
 #### Connecting to the mongo daemon via SSL
+
 After successfully starting a cluster as specified, within the container it should be possible to connect to the mongo daemon on the primary node using:
+
 ```console
 /opt/bitnami/mongodb/bin/mongo -u ${MONGODB_ROOT_USER} -p ${MONGODB_ROOT_PASSWORD} --host mongodb-primary --tls --tlsCertificateKeyFile=/certificates/mongodb-primary.pem --tlsCAFile=/certificates/mongoCA.crt
 ```
@@ -642,8 +653,10 @@ After successfully starting a cluster as specified, within the container it shou
 **NB**: We only support `--clusterAuthMode=keyFile` in this configuration.
 
 #### References
-- To also allow clients to connect using username and password (without X509 certificates): https://docs.mongodb.com/manual/reference/configuration-options/#net.ssl.allowConnectionsWithoutCertificates
-- For more extensive information regarding related configuration options: https://docs.mongodb.com/manual/reference/program/mongod/#tls-ssl-options,
+
+* To also allow clients to connect using username and password (without X509 certificates): <https://docs.mongodb.com/manual/reference/configuration-options/#net.ssl.allowConnectionsWithoutCertificates>
+
+* For more extensive information regarding related configuration options: <https://docs.mongodb.com/manual/reference/program/mongod/#tls-ssl-options>,
 Especially client authentication and requirements for common name and OU/DN/etc. fields in the certificates are important for creating a secure setup.
 
 ### Configuration file
@@ -655,7 +668,7 @@ The image looks for mounted configurations files in `/bitnami/mongodb/conf/`. Yo
 Run the MongoDB&reg; image, mounting a directory from your host.
 
 ```console
-$ docker run --name mongodb -v /path/to/mongodb-configuration-persistence:/bitnami/mongodb/conf bitnami/mongodb:latest
+docker run --name mongodb -v /path/to/mongodb-configuration-persistence:/bitnami/mongodb/conf bitnami/mongodb:latest
 ```
 
 or using Docker Compose:
@@ -676,7 +689,7 @@ or using Docker Compose:
 Edit the configuration on your host using your favorite editor.
 
 ```console
-$ vi /path/to/mongodb-configuration-persistence/mongodb.conf
+vi /path/to/mongodb-configuration-persistence/mongodb.conf
 ```
 
 #### Step 3: Restart MongoDB&reg;
@@ -684,13 +697,13 @@ $ vi /path/to/mongodb-configuration-persistence/mongodb.conf
 After changing the configuration, restart your MongoDB&reg; container for changes to take effect.
 
 ```console
-$ docker restart mongodb
+docker restart mongodb
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose restart mongodb
+docker-compose restart mongodb
 ```
 
 Refer to the [configuration file options](http://docs.mongodb.org/v2.4/reference/configuration-options/) manual for the complete list of MongoDB&reg; configuration options.
@@ -700,13 +713,13 @@ Refer to the [configuration file options](http://docs.mongodb.org/v2.4/reference
 The Bitnami MongoDB&reg; Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```console
-$ docker logs mongodb
+docker logs mongodb
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose logs mongodb
+docker-compose logs mongodb
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -720,7 +733,7 @@ Bitnami provides up-to-date versions of MongoDB&reg;, including security patches
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/mongodb:latest
+docker pull bitnami/mongodb:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to `bitnami/mongodb:latest`.
@@ -730,19 +743,19 @@ or if you're using Docker Compose, update the value of the image property to `bi
 Stop the currently running container using the command
 
 ```console
-$ docker stop mongodb
+docker stop mongodb
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose stop mongodb
+docker-compose stop mongodb
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/mongodb-persistence` using:
 
 ```console
-$ rsync -a /path/to/mongodb-persistence /path/to/mongodb-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+rsync -a /path/to/mongodb-persistence /path/to/mongodb-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 You can use this snapshot to restore the database state should the upgrade fail.
@@ -750,13 +763,13 @@ You can use this snapshot to restore the database state should the upgrade fail.
 #### Step 3: Remove the currently running container
 
 ```console
-$ docker rm -v mongodb
+docker rm -v mongodb
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose rm -v mongodb
+docker-compose rm -v mongodb
 ```
 
 #### Step 4: Run the new image
@@ -764,49 +777,49 @@ $ docker-compose rm -v mongodb
 Re-create your container from the new image.
 
 ```console
-$ docker run --name mongodb bitnami/mongodb:latest
+docker run --name mongodb bitnami/mongodb:latest
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose up mongodb
+docker-compose up mongodb
 ```
 
 ## Notable Changes
 
 ### 4.4.8-debian-10-r31, and 5.0.2-debian-10-r0
 
-- From now on, "Default Write Concern" need to be set before adding new members (secondary, arbiter or hidden) to the cluster. In order to maintain the safest default configuration, `{"setDefaultRWConcern" : 1, "defaultWriteConcern" : {"w" : "majority"}}` is configured before adding new members. See https://docs.mongodb.com/manual/reference/command/setDefaultRWConcern/ and https://docs.mongodb.com/v5.0/reference/mongodb-defaults/#default-write-concern
+* From now on, "Default Write Concern" need to be set before adding new members (secondary, arbiter or hidden) to the cluster. In order to maintain the safest default configuration, `{"setDefaultRWConcern" : 1, "defaultWriteConcern" : {"w" : "majority"}}` is configured before adding new members. See <https://docs.mongodb.com/manual/reference/command/setDefaultRWConcern/> and <https://docs.mongodb.com/v5.0/reference/mongodb-defaults/#default-write-concern>
 
 ### 3.6.14-r69, 4.0.13-r11, and 4.2.1-r12
 
-- The configuration files mount point changed from `/opt/bitnami/mongodb/conf` to `/bitnami/mongodb/conf`.
+* The configuration files mount point changed from `/opt/bitnami/mongodb/conf` to `/bitnami/mongodb/conf`.
 
 ### 3.6.13-r33, 4.0.10-r42, 4.1.13-r40 and 4.1.13-r41
 
-- `MONGODB_ENABLE_IPV6` set to `false` by default, if you want to enable IPv6, you need to set this environment variable to `true`. You can find more info at the above ["Enabling/disabling IPv6"](#enablingdisabling-ipv6) section.
+* `MONGODB_ENABLE_IPV6` set to `false` by default, if you want to enable IPv6, you need to set this environment variable to `true`. You can find more info at the above ["Enabling/disabling IPv6"](#enablingdisabling-ipv6) section.
 
 ### 3.6.13-debian-9-r15, 3.6.13-ol-7-r15, 4.0.10-debian-9-r23, 4.0.10-ol-7-r24, 4.1.13-debian-9-r22, 4.1.13-ol-7-r23 or later
 
-- Decrease the size of the container. Node.js is not needed anymore. MongoDB&reg; configuration logic has been moved to bash scripts in the rootfs folder.
+* Decrease the size of the container. Node.js is not needed anymore. MongoDB&reg; configuration logic has been moved to bash scripts in the rootfs folder.
 
 ### 3.6.9, 4.0.4 and 4.1.5 or later
 
-- All MongoDB&reg; versions released after October 16, 2018 (3.6.9 or later, 4.0.4 or later or 4.1.5 or later) are licensed under the [Server Side Public License](https://www.mongodb.com/licensing/server-side-public-license) that is not currently accepted as a Open Source license by the Open Source Iniciative (OSI).
+* All MongoDB&reg; versions released after October 16, 2018 (3.6.9 or later, 4.0.4 or later or 4.1.5 or later) are licensed under the [Server Side Public License](https://www.mongodb.com/licensing/server-side-public-license) that is not currently accepted as a Open Source license by the Open Source Iniciative (OSI).
 
 ### 3.6.6-r16 and 4.1.1-r9
 
-- The MongoDB&reg; container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the MongoDB&reg; daemon was started as the `mongo` user. From now on, both the container and the MongoDB&reg; daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
+* The MongoDB&reg; container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the MongoDB&reg; daemon was started as the `mongo` user. From now on, both the container and the MongoDB&reg; daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 ### 3.2.7-r5
 
-- `MONGODB_USER` parameter has been renamed to `MONGODB_USERNAME`.
+* `MONGODB_USER` parameter has been renamed to `MONGODB_USERNAME`.
 
 ### 3.2.6-r0
 
-- All volumes have been merged at `/bitnami/mongodb`. Now you only need to mount a single volume at `/bitnami/mongodb` for persistence.
-- The logs are always sent to the `stdout` and are no longer collected in the volume.
+* All volumes have been merged at `/bitnami/mongodb`. Now you only need to mount a single volume at `/bitnami/mongodb` for persistence.
+* The logs are always sent to the `stdout` and are no longer collected in the volume.
 
 ## Contributing
 
@@ -824,7 +837,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

@@ -11,14 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run --name openldap bitnami/openldap:latest
+docker run --name openldap bitnami/openldap:latest
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/openldap/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/openldap/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ## Why use Bitnami Images?
@@ -47,21 +47,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami OpenLDAP Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/openldap).
 
 ```console
-$ docker pull bitnami/openldap:latest
+docker pull bitnami/openldap:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/openldap/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/openldap:[TAG]
+docker pull bitnami/openldap:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Connecting to other containers
@@ -77,7 +77,7 @@ In this example, we will use a MariaDB Galera instance that will use a OpenLDAP 
 #### Step 1: Create a network
 
 ```console
-$ docker network create my-network --driver bridge
+docker network create my-network --driver bridge
 ```
 
 #### Step 2: Launch the OpenLDAP server instance
@@ -85,7 +85,7 @@ $ docker network create my-network --driver bridge
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `my-network` network.
 
 ```console
-$ docker run --detach --rm --name openldap \
+docker run --detach --rm --name openldap \
   --network my-network \
   --env LDAP_ADMIN_USERNAME=admin \
   --env LDAP_ADMIN_PASSWORD=adminpassword \
@@ -99,7 +99,7 @@ $ docker run --detach --rm --name openldap \
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `my-network` network.
 
 ```console
-$ docker run --detach --rm --name mariadb-galera \
+docker run --detach --rm --name mariadb-galera \
     --network my-network \
     --env MARIADB_ROOT_PASSWORD=root-password \
     --env MARIADB_GALERA_MARIABACKUP_PASSWORD=backup-password \
@@ -118,7 +118,7 @@ $ docker run --detach --rm --name mariadb-galera \
 Finally we create a new container instance to launch the MariaDB client and connect to the server created in the previous step:
 
 ```console
-$ docker run -it --rm --name mariadb-client \
+docker run -it --rm --name mariadb-client \
     --network my-network \
     bitnami/mariadb-galera:latest mysql -h mariadb-galera -u customuser -D customdatabase -pcustompassword
 ```
@@ -165,35 +165,35 @@ volumes:
 Launch the containers using:
 
 ```console
-$ docker-compose up -d
+docker-compose up -d
 ```
 
 ## Configuration
 
 The Bitnami Docker OpenLDAP can be easily setup with the following environment variables:
 
-- `LDAP_PORT_NUMBER`: The port OpenLDAP is listening for requests. Default: **1389** (non privileged port)
-- `LDAP_ROOT`: LDAP baseDN (or suffix) of the LDAP tree. Default: **dc=example,dc=org**
-- `LDAP_ADMIN_USERNAME`: LDAP database admin user. Default: **admin**
-- `LDAP_ADMIN_PASSWORD`: LDAP database admin password. Default: **adminpassword**
-- `LDAP_ADMIN_PASSWORD_FILE`: Path to a file that contains the LDAP database admin user password. This will override the value specified in `LDAP_ADMIN_PASSWORD`. No defaults.
-- `LDAP_CONFIG_ADMIN_ENABLED`: Whether to create a configuration admin user. Default: **no**.
-- `LDAP_CONFIG_ADMIN_USERNAME`: LDAP configuration admin user. This is separate from `LDAP_ADMIN_USERNAME`. Default: **admin**.
-- `LDAP_CONFIG_ADMIN_PASSWORD`: LDAP configuration admin password. Default: **configpassword**.
-- `LDAP_CONFIG_ADMIN_PASSWORD_FILE`: Path to a file that contains the LDAP configuration admin user password. This will override the value specified in `LDAP_CONFIG_ADMIN_PASSWORD`. No defaults.
-- `LDAP_USERS`: Comma separated list of LDAP users to create in the default LDAP tree. Default: **user01,user02**
-- `LDAP_PASSWORDS`: Comma separated list of passwords to use for LDAP users. Default: **bitnami1,bitnami2**
-- `LDAP_USER_DC`: DC for the users' organizational unit. Default: **users**
-- `LDAP_GROUP`: Group used to group created users. Default: **readers**
-- `LDAP_ADD_SCHEMAS`: Whether to add the schemas specified in `LDAP_EXTRA_SCHEMAS`. Default: **yes**
-- `LDAP_EXTRA_SCHEMAS`: Extra schemas to add, among OpenLDAP's distributed schemas. Default: **cosine, inetorgperson, nis**
-- `LDAP_SKIP_DEFAULT_TREE`: Whether to skip creating the default LDAP tree based on `LDAP_USERS`, `LDAP_PASSWORDS`, `LDAP_USER_DC` and `LDAP_GROUP`. Please note that this will **not** skip the addition of schemas or importing of LDIF files. Default: **no**
-- `LDAP_CUSTOM_LDIF_DIR`: Location of a directory that contains LDIF files that should be used to bootstrap the database. Only files ending in `.ldif` will be used. Default LDAP tree based on the `LDAP_USERS`, `LDAP_PASSWORDS`, `LDAP_USER_DC` and `LDAP_GROUP` will be skipped when `LDAP_CUSTOM_LDIF_DIR` is used. When using this it will override the usage of `LDAP_USERS`, `LDAP_PASSWORDS`, `LDAP_USER_DC` and `LDAP_GROUP`. You should set `LDAP_ROOT` to your base to make sure the `olcSuffix` configured on the database matches the contents imported from the LDIF files. Default: **/ldifs**
-- `LDAP_CUSTOM_SCHEMA_FILE`: Location of a custom internal schema file that could not be added as custom ldif file (i.e. containing some `structuralObjectClass`). Default is **/schema/custom.ldif**"
-- `LDAP_CUSTOM_SCHEMA_DIR`: Location of a directory containing custom internal schema files that could not be added as custom ldif files (i.e. containing some `structuralObjectClass`). This can be used in addition to or instead of `LDAP_CUSTOM_SCHEMA_FILE` (above) to add multiple schema files. Default: **/schemas**
-- `LDAP_ULIMIT_NOFILES`: Maximum number of open file descriptors. Default: **1024**.
-- `LDAP_ALLOW_ANON_BINDING`: Allow anonymous bindings to the LDAP server. Default: **yes**.
-- `LDAP_LOGLEVEL`: Set the loglevel for the OpenLDAP server (see https://www.openldap.org/doc/admin25/slapdconfig.html for possible values). Default: **256**.
+* `LDAP_PORT_NUMBER`: The port OpenLDAP is listening for requests. Default: **1389** (non privileged port)
+* `LDAP_ROOT`: LDAP baseDN (or suffix) of the LDAP tree. Default: **dc=example,dc=org**
+* `LDAP_ADMIN_USERNAME`: LDAP database admin user. Default: **admin**
+* `LDAP_ADMIN_PASSWORD`: LDAP database admin password. Default: **adminpassword**
+* `LDAP_ADMIN_PASSWORD_FILE`: Path to a file that contains the LDAP database admin user password. This will override the value specified in `LDAP_ADMIN_PASSWORD`. No defaults.
+* `LDAP_CONFIG_ADMIN_ENABLED`: Whether to create a configuration admin user. Default: **no**.
+* `LDAP_CONFIG_ADMIN_USERNAME`: LDAP configuration admin user. This is separate from `LDAP_ADMIN_USERNAME`. Default: **admin**.
+* `LDAP_CONFIG_ADMIN_PASSWORD`: LDAP configuration admin password. Default: **configpassword**.
+* `LDAP_CONFIG_ADMIN_PASSWORD_FILE`: Path to a file that contains the LDAP configuration admin user password. This will override the value specified in `LDAP_CONFIG_ADMIN_PASSWORD`. No defaults.
+* `LDAP_USERS`: Comma separated list of LDAP users to create in the default LDAP tree. Default: **user01,user02**
+* `LDAP_PASSWORDS`: Comma separated list of passwords to use for LDAP users. Default: **bitnami1,bitnami2**
+* `LDAP_USER_DC`: DC for the users' organizational unit. Default: **users**
+* `LDAP_GROUP`: Group used to group created users. Default: **readers**
+* `LDAP_ADD_SCHEMAS`: Whether to add the schemas specified in `LDAP_EXTRA_SCHEMAS`. Default: **yes**
+* `LDAP_EXTRA_SCHEMAS`: Extra schemas to add, among OpenLDAP's distributed schemas. Default: **cosine, inetorgperson, nis**
+* `LDAP_SKIP_DEFAULT_TREE`: Whether to skip creating the default LDAP tree based on `LDAP_USERS`, `LDAP_PASSWORDS`, `LDAP_USER_DC` and `LDAP_GROUP`. Please note that this will **not** skip the addition of schemas or importing of LDIF files. Default: **no**
+* `LDAP_CUSTOM_LDIF_DIR`: Location of a directory that contains LDIF files that should be used to bootstrap the database. Only files ending in `.ldif` will be used. Default LDAP tree based on the `LDAP_USERS`, `LDAP_PASSWORDS`, `LDAP_USER_DC` and `LDAP_GROUP` will be skipped when `LDAP_CUSTOM_LDIF_DIR` is used. When using this it will override the usage of `LDAP_USERS`, `LDAP_PASSWORDS`, `LDAP_USER_DC` and `LDAP_GROUP`. You should set `LDAP_ROOT` to your base to make sure the `olcSuffix` configured on the database matches the contents imported from the LDIF files. Default: **/ldifs**
+* `LDAP_CUSTOM_SCHEMA_FILE`: Location of a custom internal schema file that could not be added as custom ldif file (i.e. containing some `structuralObjectClass`). Default is **/schema/custom.ldif**"
+* `LDAP_CUSTOM_SCHEMA_DIR`: Location of a directory containing custom internal schema files that could not be added as custom ldif files (i.e. containing some `structuralObjectClass`). This can be used in addition to or instead of `LDAP_CUSTOM_SCHEMA_FILE` (above) to add multiple schema files. Default: **/schemas**
+* `LDAP_ULIMIT_NOFILES`: Maximum number of open file descriptors. Default: **1024**.
+* `LDAP_ALLOW_ANON_BINDING`: Allow anonymous bindings to the LDAP server. Default: **yes**.
+* `LDAP_LOGLEVEL`: Set the loglevel for the OpenLDAP server (see <https://www.openldap.org/doc/admin25/slapdconfig.html> for possible values). Default: **256**.
 
 You can bootstrap the contents of your database by putting LDIF files in the directory `/ldifs` (or the one you define in `LDAP_CUSTOM_LDIF_DIR`). Those may only contain content underneath your base DN (set by `LDAP_ROOT`). You can **not** set configuration for e.g. `cn=config` in those files.
 
@@ -203,19 +203,19 @@ Check the official [OpenLDAP Configuration Reference](https://www.openldap.org/d
 
 OpenLDAP clients and servers are capable of using the Transport Layer Security (TLS) framework to provide integrity and confidentiality protections and to support LDAP authentication using the SASL EXTERNAL mechanism. Should you desire to enable this optional feature, you may use the following environment variables to configure the application:
 
- - `LDAP_ENABLE_TLS`: Whether to enable TLS for traffic or not. Defaults to `no`.
- - `LDAP_LDAPS_PORT_NUMBER`: Port used for TLS secure traffic. Defaults to `1636`.
- - `LDAP_TLS_CERT_FILE`: File containing the certificate file for the TLS traffic. No defaults.
- - `LDAP_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
- - `LDAP_TLS_CA_FILE`: File containing the CA of the certificate. No defaults.
- - `LDAP_TLS_DH_PARAMS_FILE`: File containing the DH parameters. No defaults.
+* `LDAP_ENABLE_TLS`: Whether to enable TLS for traffic or not. Defaults to `no`.
+* `LDAP_LDAPS_PORT_NUMBER`: Port used for TLS secure traffic. Defaults to `1636`.
+* `LDAP_TLS_CERT_FILE`: File containing the certificate file for the TLS traffic. No defaults.
+* `LDAP_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
+* `LDAP_TLS_CA_FILE`: File containing the CA of the certificate. No defaults.
+* `LDAP_TLS_DH_PARAMS_FILE`: File containing the DH parameters. No defaults.
 
 This new feature is not mutually exclusive, which means it is possible to listen to both TLS and non-TLS connection simultaneously. To use TLS you can use the URI `ldaps://openldap:1636` or use the non-TLS URI forcing ldap to use TLS `ldap://openldap:1389 -ZZ`.
 
 1. Using `docker run`
 
     ```console
-    $ docker run --name openldap \
+    docker run --name openldap \
         -v /path/to/certs:/opt/bitnami/openldap/certs \
         -v /path/to/openldap-data-persistence:/bitnami/openldap/ \
         -e ALLOW_EMPTY_PASSWORD=yes \
@@ -258,7 +258,7 @@ Scripts are executed are after the initilization and before the startup of the O
 The Bitnami OpenLDAP Docker image sends the container logs to `stdout`. To view the logs:
 
 ```console
-$ docker logs openldap
+docker logs openldap
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -274,7 +274,7 @@ Bitnami provides up-to-date versions of OpenLDAP, including security patches, so
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/openldap:latest
+docker pull bitnami/openldap:latest
 ```
 
 #### Step 2: Stop the running container
@@ -282,13 +282,13 @@ $ docker pull bitnami/openldap:latest
 Stop the currently running container using the command
 
 ```console
-$ docker stop openldap
+docker stop openldap
 ```
 
 #### Step 3: Remove the currently running container
 
 ```console
-$ docker rm -v openldap
+docker rm -v openldap
 ```
 
 #### Step 4: Run the new image
@@ -296,14 +296,14 @@ $ docker rm -v openldap
 Re-create your container from the new image.
 
 ```console
-$ docker run --name openldap bitnami/openldap:latest
+docker run --name openldap bitnami/openldap:latest
 ```
 
 ## Notable Changes
 
 ### 2.4.58-debian-10-r93
 
-- The default database backend has been changed from `hdb` to `mdb` as recommended. No additional steps should be necessary at upgrade time; the new container version `2.4.59` will initialize using the persisted data.
+* The default database backend has been changed from `hdb` to `mdb` as recommended. No additional steps should be necessary at upgrade time; the new container version `2.4.59` will initialize using the persisted data.
 
 ## Contributing
 
@@ -321,7 +321,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

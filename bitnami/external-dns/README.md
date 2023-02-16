@@ -13,7 +13,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 Deploy ExternalDNS on your [GKE cluster](https://github.com/kubernetes-incubator/external-dns/blob/master/docs/tutorials/nginx-ingress.md).
 
 ```console
-$ docker run --name external-dns bitnami/external-dns:latest
+docker run --name external-dns bitnami/external-dns:latest
 ```
 
 ## Why use Bitnami Images?
@@ -56,13 +56,14 @@ We'd love for you to contribute to this container. You can request new features 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
+
 Copyright &copy; 2023 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

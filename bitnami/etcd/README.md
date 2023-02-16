@@ -11,14 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run -it --name Etcd bitnami/etcd
+docker run -it --name Etcd bitnami/etcd
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/etcd/docker-compose.yml
-$ docker-compose up
+curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/etcd/docker-compose.yml
+docker-compose up
 ```
 
 ## Why use Bitnami Images?
@@ -57,7 +57,7 @@ To run this application you need [Docker Engine](https://www.docker.com/products
 The recommended way to get the Bitnami Etcd Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/etcd).
 
 ```console
-$ docker pull bitnami/etcd:latest
+docker pull bitnami/etcd:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the
@@ -65,15 +65,15 @@ To use a specific version, you can pull a versioned tag. You can view the
 in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/etcd:[TAG]
+docker pull bitnami/etcd:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Connecting to other containers
@@ -89,7 +89,7 @@ In this example, we will create a Etcd client instance that will connect to the 
 #### Step 1: Create a network
 
 ```console
-$ docker network create app-tier --driver bridge
+docker network create app-tier --driver bridge
 ```
 
 #### Step 2: Launch the Etcd server instance
@@ -97,7 +97,7 @@ $ docker network create app-tier --driver bridge
 Use the `--network app-tier` argument to the `docker run` command to attach the Etcd container to the `app-tier` network.
 
 ```console
-$ docker run -d --name Etcd-server \
+docker run -d --name Etcd-server \
     --network app-tier \
     --publish 2379:2379 \
     --publish 2380:2380 \
@@ -111,7 +111,7 @@ $ docker run -d --name Etcd-server \
 Finally we create a new container instance to launch the Etcd client and connect to the server created in the previous step:
 
 ```console
-$ docker run -it --rm \
+docker run -it --rm \
     --network app-tier \
     --env ALLOW_NONE_AUTHENTICATION=yes \
     bitnami/etcd:latest etcdctl --endpoints http://etcd-server:2379 put /message Hello
@@ -153,7 +153,7 @@ services:
 Launch the containers using:
 
 ```console
-$ docker-compose up -d
+docker-compose up -d
 ```
 
 ## Configuration
@@ -161,7 +161,7 @@ $ docker-compose up -d
 The configuration can easily be setup by mounting your own configuration file on the directory `/opt/bitnami/etcd/conf`:
 
 ```console
-$ docker run --name Etcd -v /path/to/Etcd.conf.yml:/opt/bitnami/Etcd/conf/etcd.conf.yml bitnami/etcd:latest
+docker run --name Etcd -v /path/to/Etcd.conf.yml:/opt/bitnami/Etcd/conf/etcd.conf.yml bitnami/etcd:latest
 ```
 
 After that, your configuration will be taken into account in the server's behaviour.
@@ -194,7 +194,7 @@ The previous rule applies to all [etcd flags](https://coreos.com/etcd/docs/lates
 
 ### 3.4.13-debian-10-r7
 
-* Arbitrary user ID(s) are supported again, see https://github.com/etcd-io/etcd/issues/12158 for more information abut the changes in the upstream source code
+* Arbitrary user ID(s) are supported again, see <https://github.com/etcd-io/etcd/issues/12158> for more information abut the changes in the upstream source code
 
 ### 3.4.10-debian-10-r0
 
@@ -220,7 +220,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

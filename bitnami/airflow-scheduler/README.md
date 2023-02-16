@@ -13,8 +13,8 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ### Docker Compose
 
 ```console
-$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/airflow-scheduler/docker-compose.yml
-$ docker-compose up
+curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/airflow-scheduler/docker-compose.yml
+docker-compose up
 ```
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
@@ -50,8 +50,8 @@ You will need an [Airflow Webserver](https://github.com/bitnami/containers/tree/
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/airflow-scheduler/docker-compose.yml) file. Run the application using it as shown below:
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/airflow-scheduler/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/airflow-scheduler/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ### Using the Docker Command Line
@@ -60,82 +60,82 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 1. Create a network
 
-  ```console
-  $ docker network create airflow-tier
-  ```
+    ```console
+    docker network create airflow-tier
+    ```
 
 2. Create a volume for PostgreSQL persistence and create a PostgreSQL container
 
-  ```console
-  $ docker volume create --name postgresql_data
-  $ docker run -d --name postgresql \
-    -e POSTGRESQL_USERNAME=bn_airflow \
-    -e POSTGRESQL_PASSWORD=bitnami1 \
-    -e POSTGRESQL_DATABASE=bitnami_airflow \
-    --net airflow-tier \
-    --volume postgresql_data:/bitnami/postgresql \
-    bitnami/postgresql:latest
-  ```
+    ```console
+    docker volume create --name postgresql_data
+    docker run -d --name postgresql \
+      -e POSTGRESQL_USERNAME=bn_airflow \
+      -e POSTGRESQL_PASSWORD=bitnami1 \
+      -e POSTGRESQL_DATABASE=bitnami_airflow \
+      --net airflow-tier \
+      --volume postgresql_data:/bitnami/postgresql \
+      bitnami/postgresql:latest
+    ```
 
 3. Create a volume for Redis(R) persistence and create a Redis(R) container
 
-  ```console
-  $ docker volume create --name redis_data
-  $ docker run -d --name redis \
-    -e ALLOW_EMPTY_PASSWORD=yes \
-    --net airflow-tier \
-    --volume redis_data:/bitnami \
-    bitnami/redis:latest
-  ```
+    ```console
+    docker volume create --name redis_data
+    docker run -d --name redis \
+      -e ALLOW_EMPTY_PASSWORD=yes \
+      --net airflow-tier \
+      --volume redis_data:/bitnami \
+      bitnami/redis:latest
+    ```
 
-4. Launch the Apache Airflow Scheduler web container
+4. Launch the {{ .Name }} web container
 
-  ```console
-  $ docker run -d --name airflow -p 8080:8080 \
-    -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
-    -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
-    -e AIRFLOW_EXECUTOR=CeleryExecutor \
-    -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
-    -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
-    -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
-    -e AIRFLOW_LOAD_EXAMPLES=yes \
-    -e AIRFLOW_PASSWORD=bitnami123 \
-    -e AIRFLOW_USERNAME=user \
-    -e AIRFLOW_EMAIL=user@example.com \
-    --net airflow-tier \
-    bitnami/airflow:latest
-  ```
+    ```console
+    docker run -d --name airflow -p 8080:8080 \
+      -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
+      -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
+      -e AIRFLOW_EXECUTOR=CeleryExecutor \
+      -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
+      -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
+      -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
+      -e AIRFLOW_LOAD_EXAMPLES=yes \
+      -e AIRFLOW_PASSWORD=bitnami123 \
+      -e AIRFLOW_USERNAME=user \
+      -e AIRFLOW_EMAIL=user@example.com \
+      --net airflow-tier \
+      bitnami/airflow:latest
+    ```
 
-5. Launch the Apache Airflow Scheduler scheduler container
+5. Launch the {{ .Name }} scheduler container
 
-  ```console
-  $ docker run -d --name airflow-scheduler \
-    -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
-    -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
-    -e AIRFLOW_EXECUTOR=CeleryExecutor \
-    -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
-    -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
-    -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
-    -e AIRFLOW_LOAD_EXAMPLES=yes \
-    --net airflow-tier \
-    bitnami/airflow-scheduler:latest
-  ```
+    ```console
+    docker run -d --name airflow-scheduler \
+      -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
+      -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
+      -e AIRFLOW_EXECUTOR=CeleryExecutor \
+      -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
+      -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
+      -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
+      -e AIRFLOW_LOAD_EXAMPLES=yes \
+      --net airflow-tier \
+      bitnami/airflow-scheduler:latest
+    ```
 
-6. Launch the Apache Airflow Scheduler worker container
+6. Launch the {{ .Name }} worker container
 
-  ```console
-  $ docker run -d --name airflow-worker \
-    -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
-    -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
-    -e AIRFLOW_EXECUTOR=CeleryExecutor \
-    -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
-    -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
-    -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
-    --net airflow-tier \
-    bitnami/airflow-worker:latest
-  ```
+    ```console
+    docker run -d --name airflow-worker \
+      -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
+      -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
+      -e AIRFLOW_EXECUTOR=CeleryExecutor \
+      -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
+      -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
+      -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
+      --net airflow-tier \
+      bitnami/airflow-worker:latest
+    ```
 
-Access your application at `http://your-ip:8080`
+  Access your application at `http://your-ip:8080`
 
 ### Persisting your application
 
@@ -206,78 +206,78 @@ services:
 
 1. Create a network (if it does not exist)
 
-  ```console
-  $ docker network create airflow-tier
-  ```
+    ```console
+    docker network create airflow-tier
+    ```
 
 2. Create the PostgreSQL container with host volumes
 
-  ```console
-  $ docker run -d --name postgresql \
-    -e POSTGRESQL_USERNAME=bn_airflow \
-    -e POSTGRESQL_PASSWORD=bitnami1 \
-    -e POSTGRESQL_DATABASE=bitnami_airflow \
-    --net airflow-tier \
-    --volume /path/to/postgresql-persistence:/bitnami \
-    bitnami/postgresql:latest
-  ```
+    ```console
+    docker run -d --name postgresql \
+      -e POSTGRESQL_USERNAME=bn_airflow \
+      -e POSTGRESQL_PASSWORD=bitnami1 \
+      -e POSTGRESQL_DATABASE=bitnami_airflow \
+      --net airflow-tier \
+      --volume /path/to/postgresql-persistence:/bitnami \
+      bitnami/postgresql:latest
+    ```
 
 3. Create the Redis(R) container with host volumes
 
-  ```console
-  $ docker run -d --name redis \
-    -e ALLOW_EMPTY_PASSWORD=yes \
-    --net airflow-tier \
-    --volume /path/to/redis-persistence:/bitnami \
-    bitnami/redis:latest
-  ```
+    ```console
+    docker run -d --name redis \
+      -e ALLOW_EMPTY_PASSWORD=yes \
+      --net airflow-tier \
+      --volume /path/to/redis-persistence:/bitnami \
+      bitnami/redis:latest
+    ```
 
 4. Create the Airflow container
 
-  ```console
-  $ docker run -d --name airflow -p 8080:8080 \
-    -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
-    -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
-    -e AIRFLOW_EXECUTOR=CeleryExecutor \
-    -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
-    -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
-    -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
-    -e AIRFLOW_LOAD_EXAMPLES=yes \
-    -e AIRFLOW_PASSWORD=bitnami123 \
-    -e AIRFLOW_USERNAME=user \
-    -e AIRFLOW_EMAIL=user@example.com \
-    --net airflow-tier \
-    bitnami/airflow:latest
-  ```
+    ```console
+    docker run -d --name airflow -p 8080:8080 \
+      -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
+      -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
+      -e AIRFLOW_EXECUTOR=CeleryExecutor \
+      -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
+      -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
+      -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
+      -e AIRFLOW_LOAD_EXAMPLES=yes \
+      -e AIRFLOW_PASSWORD=bitnami123 \
+      -e AIRFLOW_USERNAME=user \
+      -e AIRFLOW_EMAIL=user@example.com \
+      --net airflow-tier \
+      bitnami/airflow:latest
+    ```
 
-5. Create the Apache Airflow Scheduler container
+5. Create the {{ .Name }} container
 
-  ```console
-  $ docker run -d --name airflow-scheduler \
-    -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
-    -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
-    -e AIRFLOW_EXECUTOR=CeleryExecutor \
-    -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
-    -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
-    -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
-    -e AIRFLOW_LOAD_EXAMPLES=yes \
-    --net airflow-tier \
-    bitnami/airflow-scheduler:latest
-  ```
+    ```console
+    docker run -d --name airflow-scheduler \
+      -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
+      -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
+      -e AIRFLOW_EXECUTOR=CeleryExecutor \
+      -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
+      -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
+      -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
+      -e AIRFLOW_LOAD_EXAMPLES=yes \
+      --net airflow-tier \
+      bitnami/airflow-scheduler:latest
+    ```
 
 6. Create the Airflow Worker container
 
-  ```console
-  $ docker run -d --name airflow-worker \
-    -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
-    -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
-    -e AIRFLOW_EXECUTOR=CeleryExecutor \
-    -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
-    -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
-    -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
-    --net airflow-tier \
-    bitnami/airflow-worker:latest
-  ```
+    ```console
+    docker run -d --name airflow-worker \
+      -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
+      -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
+      -e AIRFLOW_EXECUTOR=CeleryExecutor \
+      -e AIRFLOW_DATABASE_NAME=bitnami_airflow \
+      -e AIRFLOW_DATABASE_USERNAME=bn_airflow \
+      -e AIRFLOW_DATABASE_PASSWORD=bitnami1 \
+      --net airflow-tier \
+      bitnami/airflow-worker:latest
+    ```
 
 ## Configuration
 
@@ -289,30 +289,30 @@ This container supports the installation of additional python modules at start-u
 
 The Apache Airflow Scheduler instance can be customized by specifying environment variables on the first run. The following environment values are provided to customize Apache Airflow Scheduler:
 
-###### Apache Airflow Scheduler configuration
+#### Apache Airflow Scheduler configuration
 
-- `AIRFLOW_EXECUTOR`: Apache Airflow Scheduler executor. Default: **SequentialExecutor**
-- `AIRFLOW_FERNET_KEY`: Apache Airflow Scheduler Fernet key. No defaults.
-- `AIRFLOW_SECRET_KEY`: Apache Airflow Scheduler Secret key. No defaults.
-- `AIRFLOW_WEBSERVER_HOST`: Apache Airflow Scheduler webserver host. Default: **airflow**
-- `AIRFLOW_WEBSERVER_PORT_NUMBER`: Apache Airflow Scheduler webserver port. Default: **8080**
-- `AIRFLOW_LOAD_EXAMPLES`: To load example tasks into the application. Default: **yes**
-- `AIRFLOW_HOSTNAME_CALLABLE`: Method to obtain the hostname. No defaults.
+* `AIRFLOW_EXECUTOR`: Apache Airflow Scheduler executor. Default: **SequentialExecutor**
+* `AIRFLOW_FERNET_KEY`: Apache Airflow Scheduler Fernet key. No defaults.
+* `AIRFLOW_SECRET_KEY`: Apache Airflow Scheduler Secret key. No defaults.
+* `AIRFLOW_WEBSERVER_HOST`: Apache Airflow Scheduler webserver host. Default: **airflow**
+* `AIRFLOW_WEBSERVER_PORT_NUMBER`: Apache Airflow Scheduler webserver port. Default: **8080**
+* `AIRFLOW_LOAD_EXAMPLES`: To load example tasks into the application. Default: **yes**
+* `AIRFLOW_HOSTNAME_CALLABLE`: Method to obtain the hostname. No defaults.
 
-###### Use an existing database
+#### Use an existing database
 
-- `AIRFLOW_DATABASE_HOST`: Hostname for PostgreSQL server. Default: **postgresql**
-- `AIRFLOW_DATABASE_PORT_NUMBER`: Port used by PostgreSQL server. Default: **5432**
-- `AIRFLOW_DATABASE_NAME`: Database name that Apache Airflow Scheduler will use to connect with the database. Default: **bitnami_airflow**
-- `AIRFLOW_DATABASE_USERNAME`: Database user that Apache Airflow Scheduler will use to connect with the database. Default: **bn_airflow**
-- `AIRFLOW_DATABASE_PASSWORD`: Database password that Apache Airflow Scheduler will use to connect with the database. No defaults.
-- `AIRFLOW_DATABASE_USE_SSL`: Set to yes if the database uses SSL. Default: **no**
-- `AIRFLOW_REDIS_USE_SSL`: Set to yes if Redis(R) uses SSL. Default: **no**
-- `REDIS_HOST`: Hostname for Redis(R) server. Default: **redis**
-- `REDIS_PORT_NUMBER`: Port used by Redis(R) server. Default: **6379**
-- `REDIS_USER`: USER that Apache Airflow Scheduler will use to connect with Redis(R). No defaults.
-- `REDIS_PASSWORD`: Password that Apache Airflow Scheduler will use to connect with Redis(R). No defaults.
-- `REDIS_DATABASE`: Database number for Redis(R) server. Default: **1**
+* `AIRFLOW_DATABASE_HOST`: Hostname for PostgreSQL server. Default: **postgresql**
+* `AIRFLOW_DATABASE_PORT_NUMBER`: Port used by PostgreSQL server. Default: **5432**
+* `AIRFLOW_DATABASE_NAME`: Database name that Apache Airflow Scheduler will use to connect with the database. Default: **bitnami_airflow**
+* `AIRFLOW_DATABASE_USERNAME`: Database user that Apache Airflow Scheduler will use to connect with the database. Default: **bn_airflow**
+* `AIRFLOW_DATABASE_PASSWORD`: Database password that Apache Airflow Scheduler will use to connect with the database. No defaults.
+* `AIRFLOW_DATABASE_USE_SSL`: Set to yes if the database uses SSL. Default: **no**
+* `AIRFLOW_REDIS_USE_SSL`: Set to yes if Redis(R) uses SSL. Default: **no**
+* `REDIS_HOST`: Hostname for Redis(R) server. Default: **redis**
+* `REDIS_PORT_NUMBER`: Port used by Redis(R) server. Default: **6379**
+* `REDIS_USER`: USER that Apache Airflow Scheduler will use to connect with Redis(R). No defaults.
+* `REDIS_PASSWORD`: Password that Apache Airflow Scheduler will use to connect with Redis(R). No defaults.
+* `REDIS_DATABASE`: Database number for Redis(R) server. Default: **1**
 
 > In addition to the previous environment variables, all the parameters from the configuration file can be overwritten by using environment variables with this format: `AIRFLOW__{SECTION}__{KEY}`. Note the double underscores.
 
@@ -339,7 +339,7 @@ services:
 #### Specifying Environment variables on the Docker command line
 
 ```console
-$ docker run -d --name airflow -p 8080:8080 \
+docker run -d --name airflow -p 8080:8080 \
     -e AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho= \
     -e AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08= \
     -e AIRFLOW_EXECUTOR=CeleryExecutor \
@@ -357,8 +357,8 @@ $ docker run -d --name airflow -p 8080:8080 \
 
 ### 1.10.15-debian-10-r18 and 2.0.1-debian-10-r52
 
-- The size of the container image has been decreased.
-- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+* The size of the container image has been decreased.
+* The configuration logic is now based on Bash scripts in the *rootfs/* folder.
 
 ## Contributing
 

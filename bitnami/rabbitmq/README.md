@@ -11,14 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run --name rabbitmq bitnami/rabbitmq:latest
+docker run --name rabbitmq bitnami/rabbitmq:latest
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/rabbitmq/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/rabbitmq/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
@@ -55,21 +55,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami RabbitMQ Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/rabbitmq).
 
 ```console
-$ docker pull bitnami/rabbitmq:latest
+docker pull bitnami/rabbitmq:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/rabbitmq/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/rabbitmq:[TAG]
+docker pull bitnami/rabbitmq:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Persisting your application
@@ -79,7 +79,7 @@ If you remove the container all your data will be lost, and the next time you ru
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
 ```console
-$ docker run \
+docker run \
     -v /path/to/rabbitmq-persistence:/bitnami \
     bitnami/rabbitmq:latest
 ```
@@ -109,7 +109,7 @@ In this example, we will create a RabbitMQ client instance that will connect to 
 #### Step 1: Create a network
 
 ```console
-$ docker network create app-tier --driver bridge
+docker network create app-tier --driver bridge
 ```
 
 #### Step 2: Launch the RabbitMQ server instance
@@ -117,7 +117,7 @@ $ docker network create app-tier --driver bridge
 Use the `--network app-tier` argument to the `docker run` command to attach the RabbitMQ container to the `app-tier` network.
 
 ```console
-$ docker run -d --name rabbitmq-server \
+docker run -d --name rabbitmq-server \
     --network app-tier \
     bitnami/rabbitmq:latest
 ```
@@ -127,7 +127,7 @@ $ docker run -d --name rabbitmq-server \
 Finally we create a new container instance to launch the RabbitMQ client and connect to the server created in the previous step:
 
 ```console
-$ docker run -it --rm \
+docker run -it --rm \
     --network app-tier \
     bitnami/rabbitmq:latest rabbitmqctl -n rabbit@rabbitmq-server status
 ```
@@ -162,7 +162,7 @@ services:
 Launch the containers using:
 
 ```console
-$ docker-compose up -d
+docker-compose up -d
 ```
 
 ## Configuration
@@ -241,7 +241,7 @@ Available variables:
 
 ### Setting up a cluster
 
-#### Docker Compose
+#### Docker Compose deployment
 
 This is the simplest way to run RabbitMQ with clustering configuration:
 
@@ -361,7 +361,7 @@ A custom `rabbitmq.conf` configuration file can be mounted to the `/bitnami/rabb
 
 As an alternative, you can also mount a `custom.conf` configuration file and mount it to the `/bitnami/rabbitmq/conf` directory. In this case, the default configuation file will be generated and, later on, the settings available in the `custom.conf` configuration file will be merged with the default ones. For example, in order to override the `listeners.tcp.default` directive:
 
-#### Step 1: Write your custom.conf configuation file with the following content.
+#### Step 1: Write your custom.conf configuation file with the following content
 
 ```ini
 listeners.tcp.default=1337
@@ -369,21 +369,21 @@ listeners.tcp.default=1337
 
 #### Step 2: Run RabbitMQ mounting your custom.conf configuation file
 
-```
-$ docker run -d --name rabbitmq-server \
+```console
+docker run -d --name rabbitmq-server \
    -v /path/to/custom.conf:/bitnami/rabbitmq/conf/custom.conf:ro \
     bitnami/rabbitmq:latest
 ```
 
 After that, your changes will be taken into account in the server's behaviour.
 
-## Permission of SSL/TLS certificate and key files 
+## Permission of SSL/TLS certificate and key files
 
 If you bind mount the certificate and key files from your local host to the container, make sure to set proper ownership and permissions of those files:
 
-```
-$ sudo chown 1001:root <your cert/key files>
-$ sudo chmod 400 <your cert/key files> 
+```console
+sudo chown 1001:root <your cert/key files>
+sudo chmod 400 <your cert/key files>
 ```
 
 ## Enabling LDAP support
@@ -400,16 +400,11 @@ LDAP configuration parameters must be specified if you wish to enable LDAP suppo
 
 Follow these instructions to use the [Bitnami Docker OpenLDAP](https://github.com/bitnami/containers/blob/main/bitnami/openldap) image to create an OpenLDAP server and use it to authenticate users on RabbitMQ:
 
-### Step 1: Create a network
+### Step 1: Create a network and start an OpenLDAP server
 
 ```console
-$ docker network create app-tier --driver bridge
-```
-
-### Step 2: Start an OpenLDAP server
-
-```console
-$ docker run --name openldap \
+docker network create app-tier --driver bridge
+docker run --name openldap \
   --env LDAP_ADMIN_USERNAME=admin \
   --env LDAP_ADMIN_PASSWORD=adminpassword \
   --env LDAP_USERS=user01,user02 \
@@ -422,7 +417,7 @@ $ docker run --name openldap \
 
 To configure authorization, you need to create an advanced.config file, following the [clasic config format](https://www.rabbitmq.com/configure.html#erlang-term-config-file), and add your authorization rules. For instance, use the file below to grant all users the ability to use the management plugin, but make none of them administrators:
 
-```
+```config
 [{rabbitmq_auth_backend_ldap,[
     {tag_queries, [{administrator, {constant, false}},
                    {management,    {constant, true}}]}
@@ -434,7 +429,7 @@ More information at [https://www.rabbitmq.com/ldap.html#authorisation](https://w
 ### Step 4: Start RabbitMQ with LDAP support
 
 ```console
-$ docker run --name rabbitmq \
+docker run --name rabbitmq \
   --env RABBITMQ_ENABLE_LDAP=yes \
   --env RABBITMQ_LDAP_TLS=no \
   --env RABBITMQ_LDAP_SERVERS=openldap \
@@ -450,13 +445,13 @@ $ docker run --name rabbitmq \
 The Bitnami RabbitMQ Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```console
-$ docker logs rabbitmq
+docker logs rabbitmq
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose logs rabbitmq
+docker-compose logs rabbitmq
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -470,7 +465,7 @@ Bitnami provides up-to-date versions of RabbitMQ, including security patches, so
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/rabbitmq:latest
+docker pull bitnami/rabbitmq:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
@@ -481,31 +476,31 @@ or if you're using Docker Compose, update the value of the image property to
 Stop the currently running container using the command
 
 ```console
-$ docker stop rabbitmq
+docker stop rabbitmq
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose stop rabbitmq
+docker-compose stop rabbitmq
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/rabbitmq-persistence` using:
 
 ```console
-$ rsync -a /path/to/rabbitmq-persistence /path/to/rabbitmq-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+rsync -a /path/to/rabbitmq-persistence /path/to/rabbitmq-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 #### Step 3: Remove the currently running container
 
 ```console
-$ docker rm -v rabbitmq
+docker rm -v rabbitmq
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose rm -v rabbitmq
+docker-compose rm -v rabbitmq
 ```
 
 #### Step 4: Run the new image
@@ -513,13 +508,13 @@ $ docker-compose rm -v rabbitmq
 Re-create your container from the new image.
 
 ```console
-$ docker run --name rabbitmq bitnami/rabbitmq:latest
+docker run --name rabbitmq bitnami/rabbitmq:latest
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose up rabbitmq
+docker-compose up rabbitmq
 ```
 
 ## Notable changes

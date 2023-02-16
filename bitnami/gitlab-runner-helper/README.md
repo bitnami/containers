@@ -11,14 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run -it --name gitlab-runner-helper bitnami/gitlab-runner-helper
+docker run -it --name gitlab-runner-helper bitnami/gitlab-runner-helper
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/gitlab-runner-helper/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/gitlab-runner-helper/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ## Why use Bitnami Images?
@@ -43,13 +43,13 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami Gitlab Runner Helper Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/gitlab-runner-helper).
 
 ```console
-$ docker pull bitnami/gitlab-runner:latest
+docker pull bitnami/gitlab-runner:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/gitlab-runner-helper/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/gitlab-runner-helper:[TAG]
+docker pull bitnami/gitlab-runner-helper:[TAG]
 ```
 
 If you wish, you can also build the image yourself.
@@ -57,9 +57,9 @@ If you wish, you can also build the image yourself.
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Maintenance
@@ -71,7 +71,7 @@ Bitnami provides up-to-date versions of Gitlab Runner Helper, including security
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/gitlab-runner-helper:latest
+docker pull bitnami/gitlab-runner-helper:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to `bitnami/gitlab-runner-helper:latest`.
@@ -79,13 +79,13 @@ or if you're using Docker Compose, update the value of the image property to `bi
 #### Step 2: Remove the currently running container
 
 ```console
-$ docker rm -v gitlab-runner-helper
+docker rm -v gitlab-runner-helper
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose rm -v gitlab-runner-helper
+docker-compose rm -v gitlab-runner-helper
 ```
 
 #### Step 3: Run the new image
@@ -93,13 +93,13 @@ $ docker-compose rm -v gitlab-runner-helper
 Re-create your container from the new image.
 
 ```console
-$ docker run --name gitlab-runner-helper bitnami/gitlab-runner-helper:latest
+docker run --name gitlab-runner-helper bitnami/gitlab-runner-helper:latest
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose up gitlab-runner-helper
+docker-compose up gitlab-runner-helper
 ```
 
 ## Configuration
@@ -109,7 +109,7 @@ $ docker-compose up gitlab-runner-helper
 To run commands inside this container you can use `docker run`, for example to execute `gitlab-runner-helper --help` you can follow the example below:
 
 ```console
-$ docker run --rm --name gitlab-runner-helper bitnami/gitlab-runner–helper:latest --help
+docker run --rm --name gitlab-runner-helper bitnami/gitlab-runner–helper:latest --help
 ```
 
 Check the [official Gitlab Runner Helper documentation](https://docs.gitlab.com/runner/configuration/advanced-configuration.html#helper-image) for the list of the available parameters.
@@ -130,7 +130,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

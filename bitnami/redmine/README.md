@@ -11,8 +11,8 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/redmine/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/redmine/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
@@ -45,21 +45,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami Redmine Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/redmine).
 
 ```console
-$ docker pull bitnami/redmine:latest
+docker pull bitnami/redmine:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/redmine/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/redmine:[TAG]
+docker pull bitnami/redmine:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## How to use this image
@@ -71,8 +71,8 @@ Redmine requires access to a MySQL, MariaDB or PostgreSQL database to store info
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redmine/docker-compose.yml) file. Run the application using it as shown below:
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/redmine/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/redmine/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ### Using the Docker Command Line
@@ -82,14 +82,14 @@ If you want to run the application manually instead of using `docker-compose`, t
 #### Step 1: Create a network
 
 ```console
-$ docker network create redmine-network
+docker network create redmine-network
 ```
 
 #### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
 
 ```console
-$ docker volume create --name mariadb_data
-$ docker run -d --name mariadb \
+docker volume create --name mariadb_data
+docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_redmine \
   --env MARIADB_PASSWORD=bitnami \
@@ -102,8 +102,8 @@ $ docker run -d --name mariadb \
 #### Step 3: Create volumes for Redmine persistence and launch the container
 
 ```console
-$ docker volume create --name redmine_data
-$ docker run -d --name redmine \
+docker volume create --name redmine_data
+docker run -d --name redmine \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env REDMINE_DATABASE_USER=bn_redmine \
@@ -157,13 +157,13 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 #### Step 1: Create a network (if it does not exist)
 
 ```console
-$ docker network create redmine-network
+docker network create redmine-network
 ```
 
 #### Step 2. Create a MariaDB container with host volume
 
 ```console
-$ docker run -d --name mariadb \
+docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_redmine \
   --env MARIADB_PASSWORD=bitnami \
@@ -176,7 +176,7 @@ $ docker run -d --name mariadb \
 #### Step 3. Create the Redmine container with host volumes
 
 ```console
-$ docker run -d --name redmine \
+docker run -d --name redmine \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env REDMINE_DATABASE_USER=bn_redmine \
@@ -206,7 +206,7 @@ When you start the Redmine image, you can adjust the configuration of the instan
 - For manual execution add a `--env` option with each variable and value:
 
     ```console
-    $ docker run -d --name redmine -p 80:8080 -p 443:8443 \
+    docker run -d --name redmine -p 80:8080 -p 443:8443 \
       --env REDMINE_PASSWORD=my_password \
       --network redmine-tier \
       --volume /path/to/redmine-persistence:/bitnami \
@@ -215,7 +215,7 @@ When you start the Redmine image, you can adjust the configuration of the instan
 
 Available environment variables:
 
-##### User and Site configuration
+#### User and Site configuration
 
 - `REDMINE_PORT_NUMBER`: Port number in which Redmine will run. Default: **3000**
 - `REDMINE_USERNAME`: Redmine application username. Default: **user**
@@ -228,7 +228,7 @@ Available environment variables:
 - `REDMINE_LOAD_DEFAULT_DATA`: Whether to load default configuration data for Redmine. Default: **yes**
 - `REDMINE_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. This is necessary in case you use a database that already has Redmine data. Default: **no**
 
-##### Database connection configuration
+#### Database connection configuration
 
 - `REDMINE_DATABASE_TYPE`: Database type to be used for the Redmine installation. Allowed values: *mariadb*, *postgresql*. Default: **mariadb**
 - `REDMINE_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
@@ -238,7 +238,7 @@ Available environment variables:
 - `REDMINE_DATABASE_PASSWORD`: Database password that Redmine will use to connect with the database. No default.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-##### Create a MariaDB or MySQL database for Redmine using mysql-client
+#### Create a MariaDB or MySQL database for Redmine using mysql-client
 
 - `MYSQL_CLIENT_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
 - `MYSQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the MariaDB or MySQL server. Default: **3306**
@@ -253,7 +253,7 @@ Available environment variables:
 - `MYSQL_CLIENT_SSL_CA_FILE`: Path to the SSL CA file for the new database. No default.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-##### Create a PostgreSQL database for Redmine using postgresql-client
+#### Create a PostgreSQL database for Redmine using postgresql-client
 
 - `POSTGRESQL_CLIENT_DATABASE_HOST`: Hostname for the PostgreSQL server. Default: **postgresql**
 - `POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the PostgreSQL server. Default: **5432**
@@ -266,7 +266,7 @@ Available environment variables:
 - `POSTGRESQL_CLIENT_EXECUTE_SQL`: SQL code to execute in the PostgreSQL server. No defaults.
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-##### SMTP Configuration
+#### SMTP Configuration
 
 To configure Redmine to send email using SMTP you can set the following environment variables:
 
@@ -302,7 +302,7 @@ This would be an example of SMTP configuration using a Gmail account:
 - For manual execution:
 
     ```console
-    $ docker run -d --name redmine -p 80:8080 -p 443:8443 \
+    docker run -d --name redmine -p 80:8080 -p 443:8443 \
       --env REDMINE_DATABASE_USER=bn_redmine \
       --env REDMINE_DATABASE_NAME=bitnami_redmine \
       --env REDMINE_SMTP_HOST=smtp.gmail.com \
@@ -337,7 +337,7 @@ The Bitnami Redmine container supports connecting the Redmine application to an 
 - For manual execution:
 
     ```console
-    $ docker run -d --name redmine\
+    docker run -d --name redmine\
       -p 8080:8080 -p 8443:8443 \
       --network redmine-network \
       --env REDMINE_DATABASE_HOST=mariadb_host \
@@ -356,13 +356,13 @@ In case the database already contains data from a previous Redmine installation,
 The Bitnami Redmine Docker image sends the container logs to `stdout`. To view the logs:
 
 ```console
-$ docker logs redmine
+docker logs redmine
 ```
 
 Or using Docker Compose:
 
 ```console
-$ docker-compose logs redmine
+docker-compose logs redmine
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -376,13 +376,13 @@ To backup your data, configuration and logs, follow these simple steps:
 #### Step 1: Stop the currently running container
 
 ```console
-$ docker stop redmine
+docker stop redmine
 ```
 
 Or using Docker Compose:
 
 ```console
-$ docker-compose stop redmine
+docker-compose stop redmine
 ```
 
 #### Step 2: Run the backup command
@@ -390,7 +390,7 @@ $ docker-compose stop redmine
 We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
 
 ```console
-$ docker run --rm -v /path/to/redmine-backups:/backups --volumes-from redmine busybox \
+docker run --rm -v /path/to/redmine-backups:/backups --volumes-from redmine busybox \
   cp -a /bitnami/redmine /backups/latest
 ```
 
@@ -401,7 +401,7 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 For the MariaDB database container:
 
 ```diff
- $ docker run -d --name mariadb \
+ docker run -d --name mariadb \
    ...
 -  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
 +  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
@@ -411,7 +411,7 @@ For the MariaDB database container:
 For the Redmine container:
 
 ```diff
- $ docker run -d --name redmine \
+ docker run -d --name redmine \
    ...
 -  --volume /path/to/redmine-persistence:/bitnami/redmine \
 +  --volume /path/to/redmine-backups/latest:/bitnami/redmine \
@@ -420,14 +420,14 @@ For the Redmine container:
 
 ### Upgrade this image
 
-Bitnami provides up-to-date versions of MariaDB and Redmine, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Redmine container. For the MariaDB upgrade see: https://github.com/bitnami/containers/tree/main/bitnami/mariadb#upgrade-this-image
+Bitnami provides up-to-date versions of MariaDB and Redmine, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Redmine container. For the MariaDB upgrade see: <https://github.com/bitnami/containers/tree/main/bitnami/mariadb#upgrade-this-image>
 
 The `bitnami/redmine:latest` tag always points to the most recent release. To get the most recent release you can simple repull the `latest` tag from the Docker Hub with `docker pull bitnami/redmine:latest`. However it is recommended to use [tagged versions](https://hub.docker.com/r/bitnami/redmine/tags/).
 
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/redmine:latest
+docker pull bitnami/redmine:latest
 ```
 
 #### Step 2: Stop the running container
@@ -435,7 +435,7 @@ $ docker pull bitnami/redmine:latest
 Stop the currently running container using the command
 
 ```console
-$ docker-compose stop redmine
+docker-compose stop redmine
 ```
 
 #### Step 3: Take a snapshot of the application state
@@ -455,7 +455,7 @@ docker-compose rm -v redmine
 Update the image tag in `docker-compose.yml` and re-create your container with the new image:
 
 ```console
-$ docker-compose up -d
+docker-compose up -d
 ```
 
 ## Notable Changes
@@ -494,7 +494,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

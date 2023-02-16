@@ -11,14 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run --name gitea bitnami/gitea:latest
+docker run --name gitea bitnami/gitea:latest
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/gitea/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/gitea/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ## Why use Bitnami Images?
@@ -49,21 +49,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami Gitea Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/gitea).
 
 ```console
-$ docker pull bitnami/gitea:latest
+docker pull bitnami/gitea:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/gitea/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/gitea:[TAG]
+docker pull bitnami/gitea:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Persisting your application
@@ -73,7 +73,7 @@ If you remove the container all your data will be lost, and the next time you ru
 For persistence you should mount a directory at the `/bitnami/gitea` path. If the mounted directory is empty, it will be initialized on the first run.
 
 ```console
-$ docker run \
+docker run \
     --volume /path/to/gitea-persistence:/bitnami/gitea \
     --env ALLOM_EMPTY_PASSWORD=false \
     bitnami/gitea:latest
@@ -102,7 +102,7 @@ In this example, we will create a Gitea client instance that will connect to the
 #### Step 1: Create a network
 
 ```console
-$ docker network create my-network --driver bridge
+docker network create my-network --driver bridge
 ```
 
 #### Step 2: Launch the Gitea container within your network
@@ -110,7 +110,7 @@ $ docker network create my-network --driver bridge
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `my-network` network.
 
 ```console
-$ docker run -d --name gitea-server \
+docker run -d --name gitea-server \
   --network my-network \
   --env ALLOW_EMPTY_PASSWORD=yes \
   bitnami/gitea:latest
@@ -121,7 +121,7 @@ $ docker run -d --name gitea-server \
 Finally we create a new container instance to launch the Gitea client and connect to the server created in the previous step:
 
 ```console
-$ docker run -it --rm \
+docker run -it --rm \
     --network my-network \
     bitnami/gitea:latest gitea-client --host gitea-server
 ```
@@ -158,7 +158,7 @@ services:
 Launch the containers using:
 
 ```console
-$ docker-compose up -d
+docker-compose up -d
 ```
 
 ## Configuration
@@ -170,7 +170,7 @@ Gitea can be configured via environment variables or using a configuration file 
 The configuration can easily be setup by mounting your own configuration overrides on the directory `/bitnami/gitea/custom/conf/app.ini`:
 
 ```console
-$ docker run --name gitea \
+docker run --name gitea \
     --volume /path/to/override.ini:/bitnami/gitea/custom/conf/app.ini:ro \
     bitnami/gitea:latest
 ```
@@ -197,14 +197,14 @@ In order to have your custom files inside the docker image you can mount them as
 
 The admin user and password can easily be setup with the Bitnami Gitea Docker image using the following environment variables:
 
- - `GITEA_ADMIN_USER`: Admin user name. Defaults to `bn_user`.
- - `GITEA_ADMIN_PASSWORD`: Admin password. Defaults to `bitnami`.
- - `GITEA_ADMIN_EMAIL`: Admin user email. Defaults to `user@bitnami.org`.
+* `GITEA_ADMIN_USER`: Admin user name. Defaults to `bn_user`.
+* `GITEA_ADMIN_PASSWORD`: Admin password. Defaults to `bitnami`.
+* `GITEA_ADMIN_EMAIL`: Admin user email. Defaults to `user@bitnami.org`.
 
 Passing the `GITEA_ADMIN_PASSWORD` environment variable when running the image for the first time will set the password of the `GITEA_ADMIN_USER` user to the value of `GITEA_ADMIN_PASSWORD`.
 
 ```console
-$ docker run --name gitea -e GITEA_ADMIN_PASSWORD=password123 bitnami/gitea:latest
+docker run --name gitea -e GITEA_ADMIN_PASSWORD=password123 bitnami/gitea:latest
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/gitea/docker-compose.yml) file present in this repository:
@@ -222,15 +222,15 @@ services:
 
 Gitea default ports can be changed using the following environment variables:
 
-- `GITEA_HTTP_PORT`: HTTP port. Defaults to `3000`.
-- `GITEA_SSH_LISTEN_PORT`: Port for the built-in SSH server. Defaults to `2222`
+* `GITEA_HTTP_PORT`: HTTP port. Defaults to `3000`.
+* `GITEA_SSH_LISTEN_PORT`: Port for the built-in SSH server. Defaults to `2222`
 
 ## Logging
 
 The Bitnami Gitea Docker image sends the container logs to `stdout`. To view the logs:
 
 ```console
-$ docker logs gitea
+docker logs gitea
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -244,7 +244,7 @@ Bitnami provides up-to-date versions of Gitea, including security patches, soon 
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/gitea:latest
+docker pull bitnami/gitea:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to `bitnami/gitea:latest`.
@@ -254,31 +254,31 @@ or if you're using Docker Compose, update the value of the image property to `bi
 Stop the currently running container using the command
 
 ```console
-$ docker stop gitea
+docker stop gitea
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose stop gitea
+docker-compose stop gitea
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/gitea-persistence` using:
 
 ```console
-$ rsync -a /path/to/gitea-persistence /path/to/gitea-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+rsync -a /path/to/gitea-persistence /path/to/gitea-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 #### Step 3: Remove the currently running container
 
 ```console
-$ docker rm -v gitea
+docker rm -v gitea
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose rm -v gitea
+docker-compose rm -v gitea
 ```
 
 #### Step 4: Run the new image
@@ -286,13 +286,13 @@ $ docker-compose rm -v gitea
 Re-create your container from the new image.
 
 ```console
-$ docker run --name gitea bitnami/gitea:latest
+docker run --name gitea bitnami/gitea:latest
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose up gitea
+docker-compose up gitea
 ```
 
 ## Contributing
@@ -311,7 +311,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

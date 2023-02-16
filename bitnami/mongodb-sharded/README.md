@@ -11,14 +11,14 @@ Disclaimer: The respective trademarks mentioned in the offering are owned by the
 ## TL;DR
 
 ```console
-$ docker run --name mongodb bitnami/mongodb-sharded:latest
+docker run --name mongodb bitnami/mongodb-sharded:latest
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/mongodb-sharded/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/mongodb-sharded/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ## Why use Bitnami Images?
@@ -53,21 +53,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami MongoDB&reg; Sharded Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mongodb-sharded).
 
 ```console
-$ docker pull bitnami/mongodb-sharded:latest
+docker pull bitnami/mongodb-sharded:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/mongodb-sharded/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/mongodb-sharded:[TAG]
+docker pull bitnami/mongodb-sharded:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Persisting your database
@@ -77,14 +77,14 @@ If you remove the container all your data will be lost, and the next time you ru
 For persistence you should create a directory and mount it at the `/bitnami/mongodb` path. If the mounted directory is empty, it will be initialized on the first run. As this is a non-root container, directory must have read/write permissions for the UID 1001.
 
 ```console
-$ docker run \
+docker run \
     -v /path/to/mongodb-persistence:/bitnami/mongodb \
     bitnami/mongodb-sharded:latest
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mongodb-sharded/docker-compose.yml) file present in this repository:
 
-- Create directories to hold the persistence data. At minimum you will need one directory for each mongo instance running in the sharded cluster. For example, that means one directory for mongos, mongocfg and mongoshard. You need to assign read write permission to UID 1001 (ie. mkdir [directory] && chown 1001:1001 [directory] && chmod 777 [directory]) to all directories.
+* Create directories to hold the persistence data. At minimum you will need one directory for each mongo instance running in the sharded cluster. For example, that means one directory for mongos, mongocfg and mongoshard. You need to assign read write permission to UID 1001 (ie. mkdir [directory] && chown 1001:1001 [directory] && chmod 777 [directory]) to all directories.
 
 ```yaml
 services:
@@ -111,28 +111,28 @@ services:
 
 In a sharded cluster, there are [three components](https://docs.mongodb.com/manual/sharding/#sharded-cluster):
 
-- Mongos: Interface between the applications and the sharded database.
-- Config Servers: Stores metadata and configuration settings for the sharded database.
-- Shards: Contains a subset of the data.
+* Mongos: Interface between the applications and the sharded database.
+* Config Servers: Stores metadata and configuration settings for the sharded database.
+* Shards: Contains a subset of the data.
 
 A [sharded cluster](https://docs.mongodb.com/manual/sharding/#sharded-cluster) can easily be setup with the Bitnami MongoDB&reg; Sharded Docker Image using the following environment variables:
 
- - `MONGODB_SHARDING_MODE`: The sharding mode. Possible values: `mongos`/`configsvr`/`shardsvr`. No defaults.
- - `MONGODB_REPLICA_SET_NAME`: MongoDB&reg; replica set name. In a sharded cluster we will have multiple replica sets. Default: **replicaset**
- - `MONGODB_MONGOS_HOST`: MongoDB&reg; mongos instance host. No defaults.
- - `MONGODB_CFG_REPLICA_SET_NAME`: MongoDB&reg; config server replica set name. In a sharded cluster we will have multiple replica sets. Default: **replicaset**
- - `MONGODB_CFG_PRIMARY_HOST`: MongoDB&reg; config server primary host. No defaults.
- - `MONGODB_ADVERTISED_HOSTNAME`: MongoDB&reg; advertised hostname. No defaults. It is recommended to pass this environment variable if you experience issues with ephemeral IPs. Setting this env var makes the nodes of the replica set to be configured with a hostname instead of the machine IP.
- - `MONGODB_REPLICA_SET_KEY`: MongoDB&reg; replica set key. Length should be greater than 5 characters and should not contain any special characters. Required for all nodes in the sharded cluster. No default.
- - `MONGODB_ROOT_PASSWORD`: MongoDB&reg; root password. No defaults.
- - `MONGODB_REPLICA_SET_MODE`: The replication mode. Possible values `primary`/`secondary`/`arbiter`. No defaults.
+* `MONGODB_SHARDING_MODE`: The sharding mode. Possible values: `mongos`/`configsvr`/`shardsvr`. No defaults.
+* `MONGODB_REPLICA_SET_NAME`: MongoDB&reg; replica set name. In a sharded cluster we will have multiple replica sets. Default: **replicaset**
+* `MONGODB_MONGOS_HOST`: MongoDB&reg; mongos instance host. No defaults.
+* `MONGODB_CFG_REPLICA_SET_NAME`: MongoDB&reg; config server replica set name. In a sharded cluster we will have multiple replica sets. Default: **replicaset**
+* `MONGODB_CFG_PRIMARY_HOST`: MongoDB&reg; config server primary host. No defaults.
+* `MONGODB_ADVERTISED_HOSTNAME`: MongoDB&reg; advertised hostname. No defaults. It is recommended to pass this environment variable if you experience issues with ephemeral IPs. Setting this env var makes the nodes of the replica set to be configured with a hostname instead of the machine IP.
+* `MONGODB_REPLICA_SET_KEY`: MongoDB&reg; replica set key. Length should be greater than 5 characters and should not contain any special characters. Required for all nodes in the sharded cluster. No default.
+* `MONGODB_ROOT_PASSWORD`: MongoDB&reg; root password. No defaults.
+* `MONGODB_REPLICA_SET_MODE`: The replication mode. Possible values `primary`/`secondary`/`arbiter`. No defaults.
 
 #### Step 1: Create the config server replica set
 
 The first step is to start the MongoDB&reg; primary config server.
 
 ```console
-$ docker run --name mongodb-configsvr-primary \
+docker run --name mongodb-configsvr-primary \
   -e MONGODB_SHARDING_MODE=configsvr \
   -e MONGODB_REPLICA_SET_MODE=primary \
   -e MONGODB_ROOT_PASSWORD=password123 \
@@ -148,7 +148,7 @@ In the above command the container is configured as Config server using the `MON
 Next we start a MongoDB&reg; mongos server and connect it to the config server replica set.
 
 ```console
-$ docker run --name mongos \
+docker run --name mongos \
   --link mongodb-configsvr-primary:cfg-primary \
   -e MONGODB_SHARDING_MODE=mongos \
   -e MONGODB_CFG_PRIMARY_HOST=cfg-primary \
@@ -165,7 +165,7 @@ In the above command the container is configured as a `mongos` using the `MONGOD
 Finally we start a MongoDB&reg; data shard container.
 
 ```console
-$ docker run --name mongodb-shard0-primary \
+docker run --name mongodb-shard0-primary \
   --link mongodb-configsvr-primary:cfg-primary \
   --link mongos:mongos \
   -e MONGODB_SHARDING_MODE=shardsvr \
@@ -229,6 +229,7 @@ volumes:
 ```
 
 ### More MongoDB&reg; configuration settings
+
 The Bitnami MongoDB&reg; Sharded image contains the [same configuration features than the Bitnami MongoDB&reg; image](https://github.com/bitnami/containers/blob/main/bitnami/mongodb#configuration).
 
 ## Logging
@@ -236,13 +237,13 @@ The Bitnami MongoDB&reg; Sharded image contains the [same configuration features
 The Bitnami MongoDB&reg; Sharded Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```console
-$ docker logs mongodb-sharded
+docker logs mongodb-sharded
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose logs mongodb-sharded
+docker-compose logs mongodb-sharded
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -256,7 +257,7 @@ Bitnami provides up-to-date versions of MongoDB&reg;, including security patches
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/mongodb-sharded:latest
+docker pull bitnami/mongodb-sharded:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to `bitnami/mongodb-sharded:latest`.
@@ -266,19 +267,19 @@ or if you're using Docker Compose, update the value of the image property to `bi
 Stop the currently running container using the command
 
 ```console
-$ docker stop mongodb-sharded
+docker stop mongodb-sharded
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose stop mongodb-sharded
+docker-compose stop mongodb-sharded
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/mongodb-persistence` using:
 
 ```console
-$ rsync -a /path/to/mongodb-persistence /path/to/mongodb-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+rsync -a /path/to/mongodb-persistence /path/to/mongodb-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 You can use this snapshot to restore the database state should the upgrade fail.
@@ -286,13 +287,13 @@ You can use this snapshot to restore the database state should the upgrade fail.
 #### Step 3: Remove the currently running container
 
 ```console
-$ docker rm -v mongodb-sharded
+docker rm -v mongodb-sharded
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose rm -v mongodb-sharded
+docker-compose rm -v mongodb-sharded
 ```
 
 #### Step 4: Run the new image
@@ -300,25 +301,25 @@ $ docker-compose rm -v mongodb-sharded
 Re-create your container from the new image.
 
 ```console
-$ docker run --name mongodb bitnami/mongodb-sharded:latest
+docker run --name mongodb bitnami/mongodb-sharded:latest
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose up mongodb-sharded
+docker-compose up mongodb-sharded
 ```
 
 ## Notable Changes
 
 ### 4.4.8-debian-10-r32, and 5.0.2-debian-10-r0
 
-- From now on, "Default Write Concern" need to be set before adding new members (secondary, arbiter or hidden) to the cluster. In order to maintain the safest default configuration, `{"setDefaultRWConcern" : 1, "defaultWriteConcern" : {"w" : "majority"}}` is configured before adding new members. See https://docs.mongodb.com/manual/reference/command/setDefaultRWConcern/ and https://docs.mongodb.com/v5.0/reference/mongodb-defaults/#default-write-concern
+* From now on, "Default Write Concern" need to be set before adding new members (secondary, arbiter or hidden) to the cluster. In order to maintain the safest default configuration, `{"setDefaultRWConcern" : 1, "defaultWriteConcern" : {"w" : "majority"}}` is configured before adding new members. See <https://docs.mongodb.com/manual/reference/command/setDefaultRWConcern/> and <https://docs.mongodb.com/v5.0/reference/mongodb-defaults/#default-write-concern>
 
 ### 3.6.16-centos-7-r49, 4.0.14-centos-7-r29, and 4.2.2-centos-7-r41
 
-- `3.6.16-centos-7-r49`, `4.0.14-centos-7-r29`, and `4.2.2-centos-7-r41` are considered the latest images based on CentOS.
-- Standard supported distros: Debian & OEL.
+* `3.6.16-centos-7-r49`, `4.0.14-centos-7-r29`, and `4.2.2-centos-7-r41` are considered the latest images based on CentOS.
+* Standard supported distros: Debian & OEL.
 
 ## Contributing
 
@@ -336,7 +337,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

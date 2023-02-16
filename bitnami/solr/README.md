@@ -11,14 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run --name solr bitnami/solr:latest
+docker run --name solr bitnami/solr:latest
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/solr/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/solr/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 You can find the available configuration options in the [Environment Variables](#environment-variables) section.
@@ -45,21 +45,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami solr Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/solr).
 
 ```console
-$ docker pull bitnami/solr:latest
+docker pull bitnami/solr:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/solr/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/solr:[TAG]
+docker pull bitnami/solr:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Persisting your application
@@ -71,7 +71,7 @@ For persistence you should mount a volume at the `/bitnami` path. The above exam
 To avoid inadvertent removal of this volume you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
 ```console
-$ docker run -v /path/to/solr-persistence:/bitnami bitnami/solr:latest
+docker run -v /path/to/solr-persistence:/bitnami bitnami/solr:latest
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/solr/docker-compose.yml) file present in this repository:
@@ -97,7 +97,7 @@ Containers attached to the same network can communicate with each other using th
 #### Step 1: Create a network
 
 ```console
-$ docker network create solr-network --driver bridge
+docker network create solr-network --driver bridge
 ```
 
 #### Step 2: Launch the solr container within your network
@@ -105,7 +105,7 @@ $ docker network create solr-network --driver bridge
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `solr-network` network.
 
 ```console
-$ docker run --name solr-node1 --network solr-network bitnami/solr:latest
+docker run --name solr-node1 --network solr-network bitnami/solr:latest
 ```
 
 #### Step 3: Run another containers
@@ -141,7 +141,7 @@ services:
 Then, launch the containers using:
 
 ```console
-$ docker-compose up -d
+docker-compose up -d
 ```
 
 ## Configuration
@@ -150,37 +150,39 @@ $ docker-compose up -d
 
 When you start the solr image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. The following environment values are provided to custom Solr:
 
-- `SOLR_PORT_NUMBER`: Port used by Solr server. Default: **8983**
-- `SOLR_SERVER_DIR`: Specify the Solr server directory. Default: **/opt/bitnami/solr/server**
-- `SOLR_CORES`: List of core names to create at first run separated by either a space, (` `), a comma (`,`) or a semicolon (`;`). No default. (E.g.: '**my_core_en,my_core_es**')
-- `SOLR_CORE_CONF_DIR`: Configuration directory to copy when creating a new core. Default: **data_driven_schema_configs**
-- `SOLR_OPTS`: List of Solr server options and flags separated by either a space, (` `), a comma (`,`) or a semicolon (`;`). No default. (E.g.: '**-XX:+AggressiveOpts -XX:G1HeapRegionSize=8m**')
-- `SOLR_JETTY_HOST`: Configuration to listen on a specific IP address or host name.Default: **0.0.0.0**
+* `SOLR_PORT_NUMBER`: Port used by Solr server. Default: **8983**
+* `SOLR_SERVER_DIR`: Specify the Solr server directory. Default: **/opt/bitnami/solr/server**
+* `SOLR_CORES`: List of core names to create at first run separated by either a space, (``), a comma (`,`) or a semicolon (`;`). No default. (E.g.: '**my_core_en,my_core_es**')
+* `SOLR_CORE_CONF_DIR`: Configuration directory to copy when creating a new core. Default: **data_driven_schema_configs**
+* `SOLR_OPTS`: List of Solr server options and flags separated by either a space, (``), a comma (`,`) or a semicolon (`;`). No default. (E.g.: '**-XX:+AggressiveOpts -XX:G1HeapRegionSize=8m**')
+* `SOLR_JETTY_HOST`: Configuration to listen on a specific IP address or host name.Default: **0.0.0.0**
 
 Cluster related environment variables:
 
-- `SOLR_CLOUD_BOOTSTRAP`: Indicates if this node is going to bootstrap the cluster. Default: **no**
-- `SOLR_ENABLE_CLOUD_MODE`: Enable cloud mode. Default: **no**
-- `SOLR_COLLECTION`: Create collection at the first run. By default, it will not create a core. (E.g.: '**my_collection**')
-- `SOLR_COLLECTION_SHARDS`: Number of shards for the collection created at first run. Default: **1**
-- `SOLR_COLLECTION_REPLICAS`: Number of replicas for the collection create at first run. Default: **1**
-- `SOLR_NUMBER_OF_NODES`: Number of the node of the Solr cloud cluster. Default: **1**
-- `SOLR_HOST`: Name of the node. If not set the node IP will be used. Default: **null**
-- `SORL_ZK_SLEEP_TIME`: Sleep time when waiting for init configuration operations to finish. Default: **5**
-- `SOLR_ZK_MAX_RETRIES`: Maximum retries when waitinf for init configuration operations to finish. Default: **5**
+* `SOLR_CLOUD_BOOTSTRAP`: Indicates if this node is going to bootstrap the cluster. Default: **no**
+* `SOLR_ENABLE_CLOUD_MODE`: Enable cloud mode. Default: **no**
+* `SOLR_COLLECTION`: Create collection at the first run. By default, it will not create a core. (E.g.: '**my_collection**')
+* `SOLR_COLLECTION_SHARDS`: Number of shards for the collection created at first run. Default: **1**
+* `SOLR_COLLECTION_REPLICAS`: Number of replicas for the collection create at first run. Default: **1**
+* `SOLR_NUMBER_OF_NODES`: Number of the node of the Solr cloud cluster. Default: **1**
+* `SOLR_HOST`: Name of the node. If not set the node IP will be used. Default: **null**
+* `SORL_ZK_SLEEP_TIME`: Sleep time when waiting for init configuration operations to finish. Default: **5**
+* `SOLR_ZK_MAX_RETRIES`: Maximum retries when waitinf for init configuration operations to finish. Default: **5**
 
 Authentication related environment variables:
-- `SOLR_ENABLE_AUTHENTICATION`: Enable the authentication, you can indicate the administrator credentiales with the following variables. Default: **no**
-- `SOLR_ADMIN_USERNAME`: Username for the administrator user. Default: **admin**
-- `SOLR_ADMIN_PASSWORD`: Password for the administrator user. Default: **Bitnami**
+
+* `SOLR_ENABLE_AUTHENTICATION`: Enable the authentication, you can indicate the administrator credentiales with the following variables. Default: **no**
+* `SOLR_ADMIN_USERNAME`: Username for the administrator user. Default: **admin**
+* `SOLR_ADMIN_PASSWORD`: Password for the administrator user. Default: **Bitnami**
 
 SSL related environment variables:
-- `SOLR_SSL_ENABLED`: Indicates if solr is going to enable SSL. Default: **no**
-- `SOLR_SSL_KEY_STORE`: Key store file. Default: **null**
-- `SOLR_SSL_KEY_STORE_PASSWORD`: Password for the key store file. Default: **null**
-- `SOLR_SSL_TRUST_STORE`: Trust store file. Default: **null**
-- `SOLR_SSL_TRUST_STORE_PASSWORD`: Password for the trust store file. Default: **null**
-- `SOLR_SSL_CHECK_PEER_NAME`: Indicates if the peer name should be checked. Default: **false**
+
+* `SOLR_SSL_ENABLED`: Indicates if solr is going to enable SSL. Default: **no**
+* `SOLR_SSL_KEY_STORE`: Key store file. Default: **null**
+* `SOLR_SSL_KEY_STORE_PASSWORD`: Password for the key store file. Default: **null**
+* `SOLR_SSL_TRUST_STORE`: Trust store file. Default: **null**
+* `SOLR_SSL_TRUST_STORE_PASSWORD`: Password for the trust store file. Default: **null**
+* `SOLR_SSL_CHECK_PEER_NAME`: Indicates if the peer name should be checked. Default: **false**
 
 #### Specifying Environment Variables using Docker Compose
 
@@ -197,14 +199,14 @@ solr:
 #### Specifying Environment Variables on the Docker command line
 
 ```console
-$ docker run -d -e SOLR_CORES=my_core --name solr bitnami/solr:latest
+docker run -d -e SOLR_CORES=my_core --name solr bitnami/solr:latest
 ```
 
 ### Using your Apache Solr Cores configuration files
 
 In order to load your own configuration files, you will have to make them available to the container. You can do it mounting a [volume](https://docs.docker.com/engine/tutorials/dockervolumes/) in the desired location and setting the environment variable with the customized value (as it is pointed above, the default value is **data_driven_schema_configs**).
 
-#### Using Docker Compose
+#### Using a Docker Compose
 
 This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/solr/docker-compose.yml) file present in this repository:
 
@@ -223,13 +225,13 @@ solr:
 The Bitnami solr Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```console
-$ docker logs solr
+docker logs solr
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose logs solr
+docker-compose logs solr
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -243,7 +245,7 @@ Bitnami provides up-to-date versions of solr, including security patches, soon a
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/solr:latest
+docker pull bitnami/solr:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
@@ -254,19 +256,19 @@ or if you're using Docker Compose, update the value of the image property to
 Stop the currently running container using the command
 
 ```console
-$ docker stop solr
+docker stop solr
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose stop solr
+docker-compose stop solr
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/solr-persistence` using:
 
 ```console
-$ rsync -a /path/to/solr-persistence /path/to/solr-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+rsync -a /path/to/solr-persistence /path/to/solr-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 You can use this snapshot to restore the database state should the upgrade fail.
@@ -274,45 +276,46 @@ You can use this snapshot to restore the database state should the upgrade fail.
 #### Step 3: Remove the currently running container
 
 ```console
-$ docker rm -v solr
+docker rm -v solr
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose rm -v solr
+docker-compose rm -v solr
 ```
 
 #### Step 4: Run the new image
 
-Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
+Re-create your container from the new image, restoring your backup if necessary.
 
 ```console
-$ docker run --name solr bitnami/solr:latest
+docker run --name solr bitnami/solr:latest
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose up solr
+docker-compose up solr
 ```
+
 ## Notable Changes
 
 ### 8.8.0-debian-10-r11
 
-- Adds SSL support.
+* Adds SSL support.
 
 ### 8.8.0-debian-10-r9
 
-- The Solr container initialization logic has been moved to Bash scripts.
-- The size of the container image has been decreased.
-- Added the support for cloud mode.
-- Added support for authentication and admin user creation.
-- Data migration for the upgrades. If you are running an older version of this container, run this version as user `root` and it will migrate your current data.
+* The Solr container initialization logic has been moved to Bash scripts.
+* The size of the container image has been decreased.
+* Added the support for cloud mode.
+* Added support for authentication and admin user creation.
+* Data migration for the upgrades. If you are running an older version of this container, run this version as user `root` and it will migrate your current data.
 
 ### 7.4.0-r23
 
-- The Solr container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Solr daemon was started as the `solr` user. From now on, both the container and the Solr daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
+* The Solr container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Solr daemon was started as the `solr` user. From now on, both the container and the Solr daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 ## Contributing
 
@@ -323,13 +326,14 @@ We'd love for you to contribute to this container. You can request new features 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
+
 Copyright &copy; 2023 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

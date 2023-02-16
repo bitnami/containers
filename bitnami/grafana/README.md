@@ -11,7 +11,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run --name grafana bitnami/grafana:latest
+docker run --name grafana bitnami/grafana:latest
 ```
 
 ## Why use Bitnami Images?
@@ -46,21 +46,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami Grafana Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/grafana).
 
 ```console
-$ docker pull bitnami/grafana:latest
+docker pull bitnami/grafana:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/grafana/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/grafana:[TAG]
+docker pull bitnami/grafana:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Connecting to other containers
@@ -74,7 +74,7 @@ Containers attached to the same network can communicate with each other using th
 #### Step 1: Create a network
 
 ```console
-$ docker network create grafana-network --driver bridge
+docker network create grafana-network --driver bridge
 ```
 
 #### Step 2: Launch the grafana container within your network
@@ -82,7 +82,7 @@ $ docker network create grafana-network --driver bridge
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `grafana-network` network.
 
 ```console
-$ docker run --name grafana-node1 --network grafana-network bitnami/grafana:latest
+docker run --name grafana-node1 --network grafana-network bitnami/grafana:latest
 ```
 
 #### Step 3: Run another containers
@@ -95,7 +95,7 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 Update the `grafana.ini` configuration file in the `/opt/bitnami/grafana/conf` directory to override default configuration options. You only need to add the options you want to override. Config files are applied in the order of:
 
-```
+```config
 grafana.ini
 default.ini
 ```
@@ -107,7 +107,7 @@ To enable development mode, edit the `grafana.ini` file and set `app_mode = deve
 Override the `/opt/bitnami/grafana/conf/grafana.ini` file mounting a volume.
 
 ```console
-$ docker run --name grafana-node -v /path/to/grafana.ini:/opt/bitnami/grafana/conf/grafana.ini bitnami/grafana:latest
+docker run --name grafana-node -v /path/to/grafana.ini:/opt/bitnami/grafana/conf/grafana.ini bitnami/grafana:latest
 ```
 
 After that, your configuration will be taken into account in the server's behaviour.
@@ -127,17 +127,17 @@ grafana:
 You can customize this image and include the plugins you desire editing the list of plugins avilable in the script (see the variable "grafana_plugin_list") and build your own image as shown below:
 
 ```console
-$ cd 8/debian-11
-$ docker build -t your-custom-grafana .
+cd 8/debian-11
+docker build -t your-custom-grafana .
 ```
 
 #### Install plugins at initialization
 
 When you start the Grafana image, you can specify a comma, semi-colon or space separated list of plugins to install by setting the env. variable `GF_INSTALL_PLUGINS`. The entries in `GF_INSTALL_PLUGINS` have three different formats:
 
- * `plugin_id`: This will download the latest plugin version with name `plugin_id` from [the official Grafana plugins page](https://grafana.com/grafana/plugins).
- * `plugin_id:plugin_version`: This will download the plugin with name `plugin_id` and version `plugin_version` from [the official Grafana plugins page](https://grafana.com/grafana/plugins).
- * `plugin_id=url`: This will download the plugin with name `plugin_id` using the zip file specified in `url`. In case you want to skip TLS verification, set the variable `GF_INSTALL_PLUGINS_SKIP_TLS` to `yes`.
+* `plugin_id`: This will download the latest plugin version with name `plugin_id` from [the official Grafana plugins page](https://grafana.com/grafana/plugins).
+* `plugin_id:plugin_version`: This will download the plugin with name `plugin_id` and version `plugin_version` from [the official Grafana plugins page](https://grafana.com/grafana/plugins).
+* `plugin_id=url`: This will download the plugin with name `plugin_id` using the zip file specified in `url`. In case you want to skip TLS verification, set the variable `GF_INSTALL_PLUGINS_SKIP_TLS` to `yes`.
 
 For Docker Compose, add the variable name and value under the application section:
 
@@ -152,7 +152,7 @@ grafana:
 For manual execution add a `-e` option with each variable and value:
 
 ```console
-$ docker run -d --name grafana -p 3000:3000 \
+docker run -d --name grafana -p 3000:3000 \
     -e GF_INSTALL_PLUGINS="grafana-clock-panel:1.1.0,grafana-kubernetes-app,worldpring=https://github.com/raintank/worldping-app/releases/download/v1.2.6/worldping-app-release-1.2.6.zip" \
     bitnami/grafana:latest
 ```
@@ -190,7 +190,7 @@ services:
 The Bitnami Grafana Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```console
-$ docker logs grafana
+docker logs grafana
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -204,7 +204,7 @@ Bitnami provides up-to-date versions of grafana, including security patches, soo
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/grafana:latest
+docker pull bitnami/grafana:latest
 ```
 
 #### Step 2: Stop and backup the currently running container
@@ -212,13 +212,13 @@ $ docker pull bitnami/grafana:latest
 Stop the currently running container using the command
 
 ```console
-$ docker stop grafana
+docker stop grafana
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/grafana-persistence` using:
 
 ```console
-$ rsync -a /path/to/grafana-persistence /path/to/grafana-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+rsync -a /path/to/grafana-persistence /path/to/grafana-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 You can use this snapshot to restore the database state should the upgrade fail.
@@ -226,15 +226,15 @@ You can use this snapshot to restore the database state should the upgrade fail.
 #### Step 3: Remove the currently running container
 
 ```console
-$ docker rm -v grafana
+docker rm -v grafana
 ```
 
 #### Step 4: Run the new image
 
-Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
+Re-create your container from the new image, restoring your backup if necessary.
 
 ```console
-$ docker run --name grafana bitnami/grafana:latest
+docker run --name grafana bitnami/grafana:latest
 ```
 
 ## Notable Changes
@@ -243,19 +243,19 @@ $ docker run --name grafana bitnami/grafana:latest
 
 The number of plugins included in the image by default has been decreased. This decision is supported by the following reasons:
 
-- Bitnami commitment to offer images as less opinionated as possible: only very popular and well-maintained plugins should be included.
-- Reducing the image size.
-- Security concerns: by reducing the number of plugins, we also reduce the chances to include libraries affected by known vulnerabilities.
+* Bitnami commitment to offer images as less opinionated as possible: only very popular and well-maintained plugins should be included.
+* Reducing the image size.
+* Security concerns: by reducing the number of plugins, we also reduce the chances to include libraries affected by known vulnerabilities.
 
 You can still build your custom image adding your custom plugins or install them during the installization as explained in the [Grafana Plugins section](#grafana-plugins).
 
 ### 6.7.3-debian-10-r28
 
-- The `GF_INSTALL_PLUGINS` environment variable is not set by default anymore. This means it doesn't try to install the [`grafana-image-renderer` plugin](https://github.com/grafana/grafana-image-renderer) anymore unless you specify it. As an alternative to install this plugin, you can use the [Grafana Image Renderer container](https://github.com/bitnami/containers/blob/main/bitnami/grafana-image-renderer).
+* The `GF_INSTALL_PLUGINS` environment variable is not set by default anymore. This means it doesn't try to install the [`grafana-image-renderer` plugin](https://github.com/grafana/grafana-image-renderer) anymore unless you specify it. As an alternative to install this plugin, you can use the [Grafana Image Renderer container](https://github.com/bitnami/containers/blob/main/bitnami/grafana-image-renderer).
 
 ### 6.7.2-debian-10-r18
 
-- Grafana doesn't ship the [`grafana-image-renderer` plugin](https://github.com/grafana/grafana-image-renderer/) by default anymore since it's not compatible with K8s distros with IPv6 disable. Instead, the `GF_INSTALL_PLUGINS` environment variable is set by default including this plugin so it's installed during the container's initialization, users can easily avoid it by overwriting the environment variable.
+* Grafana doesn't ship the [`grafana-image-renderer` plugin](https://github.com/grafana/grafana-image-renderer/) by default anymore since it's not compatible with K8s distros with IPv6 disable. Instead, the `GF_INSTALL_PLUGINS` environment variable is set by default including this plugin so it's installed during the container's initialization, users can easily avoid it by overwriting the environment variable.
 
 ## Contributing
 
@@ -273,7 +273,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

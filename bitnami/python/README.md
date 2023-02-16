@@ -11,14 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run -it --name python bitnami/python
+docker run -it --name python bitnami/python
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/python/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/python/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ## Why use Bitnami Images?
@@ -55,21 +55,21 @@ The formatting convention for `prod` tags has been changed:
 The recommended way to get the Bitnami Python Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/python).
 
 ```console
-$ docker pull bitnami/python:latest
+docker pull bitnami/python:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/python/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/python:[TAG]
+docker pull bitnami/python:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Entering the REPL
@@ -77,7 +77,7 @@ $ docker build -t bitnami/APP:latest .
 By default, running this image will drop you into the Python REPL, where you can interactively test and try things out in Python.
 
 ```console
-$ docker run -it --name python bitnami/python
+docker run -it --name python bitnami/python
 ```
 
 ## Configuration
@@ -87,7 +87,7 @@ $ docker run -it --name python bitnami/python
 The default work directory for the Python image is `/app`. You can mount a folder from your host here that includes your Python script, and run it normally using the `python` command.
 
 ```console
-$ docker run -it --name python -v /path/to/app:/app bitnami/python \
+docker run -it --name python -v /path/to/app:/app bitnami/python \
   python script.py
 ```
 
@@ -96,8 +96,8 @@ $ docker run -it --name python -v /path/to/app:/app bitnami/python \
 If your Python app has a `requirements.txt` defining your app's dependencies, you can install the dependencies before running your app.
 
 ```console
-$ docker run --rm -v /path/to/app:/app bitnami/python pip install -r requirements.txt
-$ docker run -it --name python -v /path/to/app:/app bitnami/python python script.py
+docker run --rm -v /path/to/app:/app bitnami/python pip install -r requirements.txt
+docker run -it --name python -v /path/to/app:/app bitnami/python python script.py
 ```
 
 or using Docker Compose:
@@ -112,8 +112,8 @@ python:
 
 **Further Reading:**
 
-  - [python documentation](https://www.python.org/doc/)
-  - [pip documentation](https://pip.pypa.io/en/stable/)
+* [python documentation](https://www.python.org/doc/)
+* [pip documentation](https://pip.pypa.io/en/stable/)
 
 ## Maintenance
 
@@ -124,7 +124,7 @@ Bitnami provides up-to-date versions of Python, including security patches, soon
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/python:latest
+docker pull bitnami/python:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to `bitnami/python:latest`.
@@ -132,13 +132,13 @@ or if you're using Docker Compose, update the value of the image property to `bi
 #### Step 2: Remove the currently running container
 
 ```console
-$ docker rm -v python
+docker rm -v python
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose rm -v python
+docker-compose rm -v python
 ```
 
 #### Step 3: Run the new image
@@ -146,13 +146,13 @@ $ docker-compose rm -v python
 Re-create your container from the new image.
 
 ```console
-$ docker run --name python bitnami/python:latest
+docker run --name python bitnami/python:latest
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose up python
+docker-compose up python
 ```
 
 ## Contributing
@@ -171,7 +171,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

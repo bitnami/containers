@@ -11,14 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run --name contour bitnami/contour:latest
+docker run --name contour bitnami/contour:latest
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/contour/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/contour/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ## Why use Bitnami Images?
@@ -47,21 +47,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami contour Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/contour).
 
 ```console
-$ docker pull bitnami/contour:latest
+docker pull bitnami/contour:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/contour/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/contour:[TAG]
+docker pull bitnami/contour:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Persisting your application
@@ -71,7 +71,7 @@ If you remove the container all your data will be lost, and the next time you ru
 For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
 
 ```console
-$ docker run \
+docker run \
     -v /path/to/contour-persistence:/bitnami/contour \
     bitnami/contour:latest
 ```
@@ -97,7 +97,7 @@ Containers attached to the same network can communicate with each other using th
 #### Step 1: Create a network
 
 ```console
-$ docker network create contour-network --driver bridge
+docker network create contour-network --driver bridge
 ```
 
 #### Step 2: Launch the contour container within your network
@@ -105,7 +105,7 @@ $ docker network create contour-network --driver bridge
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `contour-network` network.
 
 ```console
-$ docker run --name contour-node1 --network contour-network bitnami/contour:latest
+docker run --name contour-node1 --network contour-network bitnami/contour:latest
 ```
 
 #### Step 3: Run another containers
@@ -121,7 +121,7 @@ Find how to configure Contour in its [official documentation](https://projectcon
 The Bitnami contour Docker image sends the container logs to `stdout`. To view the logs:
 
 ```console
-$ docker logs contour
+docker logs contour
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -135,7 +135,7 @@ Bitnami provides up-to-date versions of contour, including security patches, soo
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/contour:latest
+docker pull bitnami/contour:latest
 ```
 
 #### Step 2: Stop the running container
@@ -143,13 +143,13 @@ $ docker pull bitnami/contour:latest
 Stop the currently running container using the command
 
 ```console
-$ docker stop contour
+docker stop contour
 ```
 
 #### Step 3: Remove the currently running container
 
 ```console
-$ docker rm -v contour
+docker rm -v contour
 ```
 
 #### Step 4: Run the new image
@@ -157,14 +157,14 @@ $ docker rm -v contour
 Re-create your container from the new image.
 
 ```console
-$ docker run --name contour bitnami/contour:latest
+docker run --name contour bitnami/contour:latest
 ```
 
 ## Notable Changes
 
-# 1.20.0-debian-10-r8 Rename branch 1.20
+### 1.20.0-debian-10-r8 Rename branch 1.20
 
-- Branch 1 has been renamed into branch 1.20 in order to follow the upstream [Contour major versions](https://github.com/projectcontour/contour/releases).
+* Branch 1 has been renamed into branch 1.20 in order to follow the upstream [Contour major versions](https://github.com/projectcontour/contour/releases).
 
 ## Contributing
 
@@ -182,7 +182,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

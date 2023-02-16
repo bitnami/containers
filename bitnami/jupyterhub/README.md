@@ -34,21 +34,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami jupyterhub Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/jupyterhub).
 
 ```console
-$ docker pull bitnami/jupyterhub:latest
+docker pull bitnami/jupyterhub:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/jupyterhub/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/jupyterhub:[TAG]
+docker pull bitnami/jupyterhub:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Why use a non-root container?
@@ -62,13 +62,13 @@ Non-root container images add an extra layer of security and are generally recom
 To run commands inside this container you can use `docker run`, for example to execute `jupyterhub --version` you can follow the example below:
 
 ```console
-$ docker run --rm --name jupyterhub bitnami/jupyterhub:latest --version
+docker run --rm --name jupyterhub bitnami/jupyterhub:latest --version
 ```
 
 Check the [official Jupyter Hub documentation](https://jupyterhub.readthedocs.io/en/stable/reference/config-reference.html)i, or run the following to list of the available parameters.
 
 ```console
-$ docker run --rm --name jupyterhub bitnami/jupyterhub:latest --help-all
+docker run --rm --name jupyterhub bitnami/jupyterhub:latest --help-all
 ```
 
 ## Contributing
@@ -87,7 +87,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

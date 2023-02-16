@@ -11,7 +11,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run --name Kube RBAC Proxy bitnami/kube-rbac-proxy:latest
+docker run --name Kube RBAC Proxy bitnami/kube-rbac-proxy:latest
 ```
 
 ## Why use Bitnami Images?
@@ -36,21 +36,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami Kube RBAC Proxy Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kube-rbac-proxy).
 
 ```console
-$ docker pull bitnami/kube-rbac-proxy:latest
+docker pull bitnami/kube-rbac-proxy:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/kube-rbac-proxy/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/kube-rbac-proxy:[TAG]
+docker pull bitnami/kube-rbac-proxy:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Why use a non-root container?
@@ -64,7 +64,7 @@ Non-root container images add an extra layer of security and are generally recom
 To run commands inside this container you can use `docker run`, for example to execute `kube-rbac-proxy --upstream=http://127.0.0.1:8081/` you can follow the example below:
 
 ```console
-$ docker run --rm --name Kube RBAC Proxy bitnami/kube-rbac-proxy:latest --  --upstream=http://127.0.0.1:8081/
+docker run --rm --name Kube RBAC Proxy bitnami/kube-rbac-proxy:latest --  --upstream=http://127.0.0.1:8081/
 ```
 
 Check the [official Kube RBAC Proxy documentation](https://github.com/brancz/kube-rbac-proxy) for more information.
@@ -85,7 +85,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
