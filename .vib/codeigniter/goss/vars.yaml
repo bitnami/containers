@@ -1,0 +1,24 @@
+binaries:
+  - composer
+  - php-fpm
+  - gosu
+  - mmdblookup
+  - mysql
+files:
+  - paths:
+      - /opt/bitnami/codeigniter/app/Common.php
+      - /opt/bitnami/codeigniter/app/index.html
+      - /opt/bitnami/codeigniter/psalm-baseline.xml
+      - /opt/bitnami/codeigniter/psalm.xml
+      - /opt/bitnami/codeigniter/composer.json
+      - /opt/bitnami/codeigniter/spark
+directories:
+  - mode: "0755"
+    paths:
+      - /opt/bitnami/codeigniter/app
+      - /opt/bitnami/codeigniter/licenses
+      - /opt/bitnami/codeigniter/public
+root_dir: /opt/bitnami
+version:
+  bin_name: /opt/bitnami/codeigniter/spark
+  flag: --version
