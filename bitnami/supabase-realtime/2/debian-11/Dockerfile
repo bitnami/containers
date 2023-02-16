@@ -5,7 +5,7 @@ ARG TARGETARCH
 LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
       org.opencontainers.image.description="Application packaged by Bitnami" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.4.0-debian-11-r2" \
+      org.opencontainers.image.ref.name="2.4.0-debian-11-r3" \
       org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/supabase-realtime" \
       org.opencontainers.image.title="supabase-realtime" \
       org.opencontainers.image.vendor="VMware, Inc." \
@@ -37,6 +37,7 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN useradd -r -u 1001 -g root supabase-realtime
+RUN chmod g+rwX -R /opt/bitnami/supabase-realtime/lib/tzdata-*/priv
 
 ENV APP_VERSION="2.4.0" \
     BITNAMI_APP_NAME="supabase-realtime" \

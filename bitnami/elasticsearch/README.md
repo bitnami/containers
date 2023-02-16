@@ -342,10 +342,12 @@ The Bitnami Elasticsearch Docker image will also install plugin `.zip` files mou
 
 The Bitnami Elasticsearch image provides a way to create your custom image installing plugins on build time. This is the preferred way to persist plugins when using ElasticSearch, as they will not be installed every time the container is started but just once at build time.
 
-To create your own image providing plugins execute the flowing command:
+To create your own image providing plugins execute the following command. Remember to replace the `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ docker build --build-arg ELASTICSEARCH_PLUGINS=<plugin1,plugin2,...> -t bitnami/elasticsearch:latest 'https://github.com/bitnami/containers/blob/main/bitnami/elasticsearch.git#master:8/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/elasticsearch/VERSION/OPERATING-SYSTEM
+$ docker build --build-arg ELASTICSEARCH_PLUGINS=<plugin1,plugin2,...> -t bitnami/elasticsearch:latest .
 ```
 
 The command above will build the image providing this GitHub repository as build context, and will pass the list of plugins to install to the build logic.

@@ -2,11 +2,11 @@ FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
-LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
-      org.opencontainers.image.description="Application packaged by Bitnami" \
+LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
+      org.opencontainers.image.created="2023-02-15T16:08:07Z" \
+      org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.22.11-debian-11-r7" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/supabase-studio" \
+      org.opencontainers.image.ref.name="0.22.11-debian-11-r9" \
       org.opencontainers.image.title="supabase-studio" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.22.11"
@@ -40,6 +40,7 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN useradd -r -u 1001 -g root supabase
 
+RUN mkdir -p /opt/bitnami/supabase/studio/.next/cache && chmod g+rwX /opt/bitnami/supabase/studio/.next/cache
 RUN mkdir /.npm && chmod g+rwX /.npm
 ENV APP_VERSION="0.22.11" \
     BITNAMI_APP_NAME="supabase-studio" \

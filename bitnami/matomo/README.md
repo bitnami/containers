@@ -53,10 +53,12 @@ To use a specific version, you can pull a versioned tag. Find the [list of avail
 $ docker pull bitnami/matomo:[TAG]
 ```
 
-If you wish, you can also build the image youself.
+If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-docker build -t bitnami/matomo:latest 'https://github.com/bitnami/containers/blob/main/bitnami/matomo.git#master:4/debian-11'
+$ git clone https://github.com/bitnami/containers.git
+$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t bitnami/APP:latest .
 ```
 
 ## How to use this image

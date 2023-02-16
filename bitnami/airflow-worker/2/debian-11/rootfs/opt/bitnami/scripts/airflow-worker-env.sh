@@ -23,6 +23,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # variable will be overridden with the value specified in that file
 airflow_worker_env_vars=(
     AIRFLOW_EXECUTOR
+    AIRFLOW_RAW_FERNET_KEY
     AIRFLOW_FERNET_KEY
     AIRFLOW_SECRET_KEY
     AIRFLOW_WEBSERVER_HOST
@@ -72,6 +73,7 @@ export AIRFLOW_DAEMON_GROUP="airflow"
 
 # Airflow configuration
 export AIRFLOW_EXECUTOR="${AIRFLOW_EXECUTOR:-SequentialExecutor}"
+export AIRFLOW_RAW_FERNET_KEY="${AIRFLOW_RAW_FERNET_KEY:-}"
 export AIRFLOW_FERNET_KEY="${AIRFLOW_FERNET_KEY:-}"
 export AIRFLOW_SECRET_KEY="${AIRFLOW_SECRET_KEY:-}"
 export AIRFLOW_WEBSERVER_HOST="${AIRFLOW_WEBSERVER_HOST:-127.0.0.1}"
