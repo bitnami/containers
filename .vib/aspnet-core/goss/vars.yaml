@@ -1,12 +1,10 @@
-components:
-  binaries:
-    - dotnet
-filesystem:
-  - mode: "0775"
-    directories:
+binaries:
+  - dotnet
+directories:
+  - paths:
       - /app
-  - mode: "0755"
-    directories:
+    mode: "0775"
+  - paths:
       - /opt/bitnami/aspnet-core/bin/host
       - /opt/bitnami/aspnet-core/bin/shared
 root_dir: /opt/bitnami
