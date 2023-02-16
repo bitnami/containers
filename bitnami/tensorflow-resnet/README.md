@@ -132,30 +132,30 @@ You can use these snapshots to restore the application state should the upgrade 
 Once you have deployed both the TensorFlow Serving and TensorFlow ResNet containers you can use the `resnet_client_cc` utility to predict images. To do that follow the next steps:
 
 1. Exec into the TensorFlow ResNet container.
-1. Download an image:
+2. Download an image:
 
-```console
-curl -L --output cat.jpeg https://tensorflow.org/images/blogs/serving/cat.jpg
-```
+    ```console
+    curl -L --output cat.jpeg https://tensorflow.org/images/blogs/serving/cat.jpg
+    ```
 
-1. Send the image to the TensorFlow Serving server.
+3. Send the image to the TensorFlow Serving server.
 
-```console
-resnet_client_cc --server_port=tensorflow-serving:8500 --image_file=./cat.jpg
-```
+    ```console
+    resnet_client_cc --server_port=tensorflow-serving:8500 --image_file=./cat.jpg
+    ```
 
-1. The model says the image belongs to the category 286. You can check the [imagenet classes index](https://s3.amazonaws.com/deep-learning-models/image-models/imagenet_class_index.json) to see how the category 286 correspond to a cougar.
+4. The model says the image belongs to the category 286. You can check the [imagenet classes index](https://s3.amazonaws.com/deep-learning-models/image-models/imagenet_class_index.json) to see how the category 286 correspond to a cougar.
 
-```console
-calling predict using file: cat.jpg  ...
-call predict ok
-outputs size is 2
-the result tensor[0] is:
-[2.41628254e-06 1.90121955e-06 2.72477027e-05 4.4263885e-07 8.98362089e-07 6.84422412e-06 1.66555201e-05 3.4298439e-06 5.25692e-06 2.66782135e-05...]...
-the result tensor[1] is:
-286
-Done.
-```
+    ```console
+    calling predict using file: cat.jpg  ...
+    call predict ok
+    outputs size is 2
+    the result tensor[0] is:
+    [2.41628254e-06 1.90121955e-06 2.72477027e-05 4.4263885e-07 8.98362089e-07 6.84422412e-06 1.66555201e-05 3.4298439e-06 5.25692e-06 2.66782135e-05...]...
+    the result tensor[1] is:
+    286
+    Done.
+    ```
 
 ### Environment variables
 

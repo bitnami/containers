@@ -521,7 +521,7 @@ When enabling TLS, PostgreSQL will support both standard and encrypted traffic b
         bitnami/postgresql:latest
     ```
 
-1. Modifying the `docker-compose.yml` file present in this repository:
+2. Modifying the `docker-compose.yml` file present in this repository:
 
     ```yaml
     services:

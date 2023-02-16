@@ -239,7 +239,7 @@ When enabling TLS, conventional standard traffic is disabled by default. However
         bitnami/redis-sentinel:latest
     ```
 
-1. Modifying the `docker-compose.yml` file present in this repository:
+2. Modifying the `docker-compose.yml` file present in this repository:
 
     ```yaml
       redis-sentinel:

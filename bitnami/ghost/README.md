@@ -494,7 +494,7 @@ RUN cd /bitnami/ghost \
 ```
 
 1. Prepare npm and install an adapter.
-1. Add configuration for the adapter.
+2. Add configuration for the adapter.
 
 #### Create a script named `post_ghost_config.sh` using `jq` for adding configuration to the `config.production.json`
 

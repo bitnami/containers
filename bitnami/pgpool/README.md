@@ -409,7 +409,7 @@ When enabling TLS, Pgpool will support both standard and encrypted traffic by de
         bitnami/pgpool:latest
     ```
 
-1. Modifying the `docker-compose.yml` file present in this repository:
+2. Modifying the `docker-compose.yml` file present in this repository:
 
     ```yaml
     services:

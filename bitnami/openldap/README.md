@@ -226,7 +226,7 @@ This new feature is not mutually exclusive, which means it is possible to listen
         bitnami/openldap:latest
     ```
 
-1. Modifying the `docker-compose.yml` file present in this repository:
+2. Modifying the `docker-compose.yml` file present in this repository:
 
     ```yaml
     services:

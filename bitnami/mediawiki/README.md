@@ -324,22 +324,22 @@ If you require better quality thumbnails for your uploaded images, you may want 
 
 1. Create the following Dockerfile
 
-```Dockerfile
-FROM bitnami/mediawiki:latest
-USER root
-RUN install_packages imagemagick
-USER 1001
-```
+   ```Dockerfile
+   FROM bitnami/mediawiki:latest
+   USER root
+   RUN install_packages imagemagick
+   USER 1001
+   ```
 
-1. Build the docker image
+2. Build the docker image
 
-```console
-docker build -t bitnami/mediawiki:imagemagick .
-```
+    ```console
+    docker build -t bitnami/mediawiki:imagemagick .
+    ```
 
-1. Edit the *docker-compose.yml* to use the docker image built in the previous step.
+3. Edit the *docker-compose.yml* to use the docker image built in the previous step.
 
-1. Finally exec into your MediaWiki container and edit the file */opt/bitnami/mediawiki/LocalSettings.php* as described [here](https://www.mediawiki.org/wiki/Manual:Installing_third-party_tools#Image_thumbnailing) in order to start using imagemagick.
+4. Finally exec into your MediaWiki container and edit the file */opt/bitnami/mediawiki/LocalSettings.php* as described [here](https://www.mediawiki.org/wiki/Manual:Installing_third-party_tools#Image_thumbnailing) in order to start using imagemagick.
 
 ## How to migrate from a Bitnami MediaWiki Stack
 
@@ -347,79 +347,79 @@ You can follow these steps in order to migrate it to this container:
 
 1. Export the data from your SOURCE installation: (assuming an installation in `/opt/bitnami` directory)
 
-  ```console
-  mysqldump -u root -p bitnami_mediawiki > ~/backup-mediawiki-database.sql
-  gzip -c ~/backup-mediawiki-database.sql > ~/backup-mediawiki-database.sql.gz
-  cd /opt/bitnami/apps/mediawiki/htdocs/
-  tar cfz ~/backup-mediawiki-extensions.tar.gz extensions
-  tar cfz ~/backup-mediawiki-images.tar.gz images
-  tar cfz ~/backup-mediawiki-skins.tar.gz skins
-  ```
+    ```console
+    mysqldump -u root -p bitnami_mediawiki > ~/backup-mediawiki-database.sql
+    gzip -c ~/backup-mediawiki-database.sql > ~/backup-mediawiki-database.sql.gz
+    cd /opt/bitnami/apps/mediawiki/htdocs/
+    tar cfz ~/backup-mediawiki-extensions.tar.gz extensions
+    tar cfz ~/backup-mediawiki-images.tar.gz images
+    tar cfz ~/backup-mediawiki-skins.tar.gz skins
+    ```
 
-1. Copy the backup files to your TARGET installation:
+2. Copy the backup files to your TARGET installation:
 
-  ```console
-  scp ~/backup-mediawiki-* YOUR_USERNAME@TARGET_HOST:~
-  ```
+    ```console
+    scp ~/backup-mediawiki-* YOUR_USERNAME@TARGET_HOST:~
+    ```
 
-1. Create the MediaWiki Container as described in the section [How to use this Image (Using Docker Compose)](https://github.com/bitnami/containers/blob/main/bitnami/mediawiki#using-docker-compose)
+3. Create the MediaWiki Container as described in the section [How to use this Image (Using Docker Compose)](https://github.com/bitnami/containers/blob/main/bitnami/mediawiki#using-docker-compose)
 
-1. Wait for the initial setup to finish. You can follow it with
+4. Wait for the initial setup to finish. You can follow it with
 
-  ```console
-  docker-compose logs -f mediawiki
-  ```
+    ```console
+    docker-compose logs -f mediawiki
+    ```
 
-  and press `Ctrl-C` when you see this:
+    and press `Ctrl-C` when you see this:
 
-  ```console
-  nami    INFO  mediawiki successfully initialized
-  Starting mediawiki ...
-  ```
+    ```console
+    nami    INFO  mediawiki successfully initialized
+    Starting mediawiki ...
+    ```
 
-1. Stop Apache:
+5. Stop Apache:
 
-  ```console
-  docker-compose exec mediawiki nami stop apache
-  ```
+    ```console
+    docker-compose exec mediawiki nami stop apache
+    ```
 
-1. Obtain the password used by MediaWiki to access the database in order avoid reconfiguring it:
+6. Obtain the password used by MediaWiki to access the database in order avoid reconfiguring it:
 
-  ```console
-  docker-compose exec mediawiki bash -c 'cat /opt/bitnami/mediawiki/LocalSettings.php | grep wgDBpassword'
-  ```
+    ```console
+    docker-compose exec mediawiki bash -c 'cat /opt/bitnami/mediawiki/LocalSettings.php | grep wgDBpassword'
+    ```
 
-1. Restore the database backup: (replace ROOT_PASSWORD below with your MariaDB root password)
+7. Restore the database backup: (replace ROOT_PASSWORD below with your MariaDB root password)
 
-  ```console
-  cd ~
-  docker-compose exec mariadb mysql -u root -pROOT_PASSWORD
-  MariaDB [(none)]> drop database bitnami_mediawiki;
-  MariaDB [(none)]> create database bitnami_mediawiki;
-  MariaDB [(none)]> grant all privileges on bitnami_mediawiki.* to 'bn_mediawiki'@'%' identified by 'PASSWORD_OBTAINED_IN_STEP_6';
-  MariaDB [(none)]> exit
-  gunzip -c ./backup-mediawiki-database.sql.gz | docker exec -i $(docker-compose ps -q mariadb) mysql -u root bitnami_mediawiki -pROOT_PASSWORD
-  ```
+    ```console
+    cd ~
+    docker-compose exec mariadb mysql -u root -pROOT_PASSWORD
+    MariaDB [(none)]> drop database bitnami_mediawiki;
+    MariaDB [(none)]> create database bitnami_mediawiki;
+    MariaDB [(none)]> grant all privileges on bitnami_mediawiki.* to 'bn_mediawiki'@'%' identified by 'PASSWORD_OBTAINED_IN_STEP_6';
+    MariaDB [(none)]> exit
+    gunzip -c ./backup-mediawiki-database.sql.gz | docker exec -i $(docker-compose ps -q mariadb) mysql -u root bitnami_mediawiki -pROOT_PASSWORD
+    ```
 
-1. Restore extensions/images/skins directories from backup:
+8. Restore extensions/images/skins directories from backup:
 
-  ```console
-  cat ./backup-mediawiki-extensions.tar.gz | docker exec -i $(docker-compose ps -q mediawiki) bash -c 'cd /bitnami/mediawiki/ ; tar -xzvf -'
-  cat ./backup-mediawiki-images.tar.gz | docker exec -i $(docker-compose ps -q mediawiki) bash -c 'cd /bitnami/mediawiki/ ; tar -xzvf -'
-  cat ./backup-mediawiki-skins.tar.gz | docker exec -i $(docker-compose ps -q mediawiki) bash -c 'cd /bitnami/mediawiki/ ; tar -xzvf -'
-  ```
+    ```console
+    cat ./backup-mediawiki-extensions.tar.gz | docker exec -i $(docker-compose ps -q mediawiki) bash -c 'cd /bitnami/mediawiki/ ; tar -xzvf -'
+    cat ./backup-mediawiki-images.tar.gz | docker exec -i $(docker-compose ps -q mediawiki) bash -c 'cd /bitnami/mediawiki/ ; tar -xzvf -'
+    cat ./backup-mediawiki-skins.tar.gz | docker exec -i $(docker-compose ps -q mediawiki) bash -c 'cd /bitnami/mediawiki/ ; tar -xzvf -'
+    ```
 
-1. Fix MediaWiki directory permissions:
+9. Fix MediaWiki directory permissions:
 
-  ```console
-  docker-compose exec mediawiki chown -R daemon:daemon /bitnami/mediawiki
-  ```
+    ```console
+    docker-compose exec mediawiki chown -R daemon:daemon /bitnami/mediawiki
+    ```
 
-1. Restart Apache:
+10. Restart Apache:
 
-  ```console
-  docker-compose exec mediawiki nami start apache
-  ```
+    ```console
+    docker-compose exec mediawiki nami start apache
+    ```
 
 ## Logging
 
