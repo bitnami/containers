@@ -348,34 +348,7 @@ wordpress_initialize() {
             is_boolean_yes "$WORDPRESS_ENABLE_MULTISITE" && wp_execute site meta update "$default_site_id" fileupload_maxk "$WORDPRESS_MULTISITE_FILEUPLOAD_MAXK"
             # Enable friendly URLs / permalinks (using historic Bitnami defaults)
             wp_execute rewrite structure '/%year%/%monthnum%/%day%/%postname%/'
-            if ! is_empty_value "$WORDPRESS_SMTP_HOST"; then
-                info "Configuring SMTP settings"
-                wp_execute option set mail_from "$WORDPRESS_SMTP_USER"
-                wp_execute option set mail_from_name "${WORDPRESS_FIRST_NAME} ${WORDPRESS_LAST_NAME}"
-                wp_execute option set mailer "smtp"
-                wp_execute option set mail_set_return_path ""
-                wp_execute option set smtp_host "$WORDPRESS_SMTP_HOST"
-                wp_execute option set smtp_port "$WORDPRESS_SMTP_PORT_NUMBER"
-                wp_execute option set smtp_ssl "$WORDPRESS_SMTP_PROTOCOL"
-                wp_execute option set smtp_auth "true"
-                wp_execute option set smtp_user "$WORDPRESS_SMTP_USER"
-                wp_execute option set smtp_pass "$WORDPRESS_SMTP_PASSWORD"
-                # Enable wp-mail-smtp plugin, which is required for SMTP to work
-                info "Enabling wp-mail-smtp plugin"
-                local -a install_smtp_plugin_args
-                if is_boolean_yes "$WORDPRESS_ENABLE_MULTISITE"; then
-                    install_smtp_plugin_args=("--activate-network")
-                else
-                    install_smtp_plugin_args=("--activate")
-                fi
-                wp_execute plugin install wp-mail-smtp "${install_smtp_plugin_args[@]}"
-                # Delete default SMTP credentials created when enabling the plugin
-                # If not deleted, the previously configured credentials will not be taken into account
-                # and the user will be forced to re-launch the plugin wizard right after logging in the admin panel
-                local wp_mail_options_to_delete
-                read -r -a wp_mail_options_to_delete <<<"$(wp_execute_print_output option list --search='*wp_mail*' --field=option_name | tr '\n' ' ')"
-                wp_execute option delete "${wp_mail_options_to_delete[@]}"
-            fi
+            ! is_empty_value "$WORDPRESS_SMTP_HOST" && wordpress_configure_smtp
         else
             info "An already initialized WordPress database was provided, configuration will be skipped"
             wp_execute core update-db
@@ -666,6 +639,37 @@ EOF
     local wp_url_string="'${wp_url_protocol}://' . \$_SERVER['HTTP_HOST'] . '/'"
     wordpress_conf_set "WP_HOME" "$wp_url_string" yes
     wordpress_conf_set "WP_SITEURL" "$wp_url_string" yes
+}
+
+########################
+# Configure SMTP
+# Globals:
+#   *
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+wordpress_configure_smtp() {
+    info "Enabling wp-mail-smtp plugin"
+    local -a install_smtp_plugin_args
+    if is_boolean_yes "$WORDPRESS_ENABLE_MULTISITE"; then
+        install_smtp_plugin_args=("--activate-network")
+    else
+        install_smtp_plugin_args=("--activate")
+    fi
+    wp_execute plugin install wp-mail-smtp "${install_smtp_plugin_args[@]}"
+    info "Configuring SMTP settings"
+    wp_execute option patch update wp_mail_smtp mail from_email "$WORDPRESS_SMTP_USER"
+    wp_execute option patch update wp_mail_smtp mail from_name "${WORDPRESS_FIRST_NAME} ${WORDPRESS_LAST_NAME}"
+    wp_execute option patch update wp_mail_smtp mail mailer "smtp"
+    wp_execute option patch insert wp_mail_smtp smtp host "$WORDPRESS_SMTP_HOST"
+    wp_execute option patch insert wp_mail_smtp smtp port "$WORDPRESS_SMTP_PORT_NUMBER"
+    wp_execute option patch insert wp_mail_smtp smtp encryption "$WORDPRESS_SMTP_PROTOCOL"
+    wp_execute option patch insert wp_mail_smtp smtp user "$WORDPRESS_SMTP_USER"
+    wp_execute option patch insert wp_mail_smtp smtp pass "$WORDPRESS_SMTP_PASSWORD"
+    # Prevent WP Mail SMTP wizard to be launched after logging in the admin panel
+    wp_execute option set wp_mail_smtp_activation_prevent_redirect 1
 }
 
 ########################
