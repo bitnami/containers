@@ -80,37 +80,37 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```console
-  docker network create matomo_network
-  ```
+    ```console
+    docker network create matomo_network
+    ```
 
-1. Create a volume for MariaDB persistence and create a MariaDB container
+2. Create a volume for MariaDB persistence and create a MariaDB container
 
-  ```console
-  docker volume create --name mariadb_data
-  docker run -d --name mariadb \
-    -e ALLOW_EMPTY_PASSWORD=yes \
-    -e MARIADB_USER=bn_matomo \
-    -e MARIADB_DATABASE=bitnami_matomo \
-    --net matomo_network \
-    --volume mariadb_data:/bitnami \
-    bitnami/mariadb:latest
-  ```
+    ```console
+    docker volume create --name mariadb_data
+    docker run -d --name mariadb \
+      -e ALLOW_EMPTY_PASSWORD=yes \
+      -e MARIADB_USER=bn_matomo \
+      -e MARIADB_DATABASE=bitnami_matomo \
+      --net matomo_network \
+      --volume mariadb_data:/bitnami \
+      bitnami/mariadb:latest
+    ```
 
-1. Create volumes for Matomo persistence and launch the container
+3. Create volumes for {{ .Name }} persistence and launch the container
 
-  ```console
-  docker volume create --name matomo_data
-  docker run -d --name matomo -p 80:8080 -p 443:8443 \
-    -e ALLOW_EMPTY_PASSWORD=yes \
-    -e MATOMO_DATABASE_USER=bn_matomo \
-    -e MATOMO_DATABASE_NAME=bitnami_matomo \
-    --net matomo_network \
-    --volume matomo_data:/bitnami \
-    bitnami/matomo:latest
-  ```
+    ```console
+    docker volume create --name matomo_data
+    docker run -d --name matomo -p 80:8080 -p 443:8443 \
+      -e ALLOW_EMPTY_PASSWORD=yes \
+      -e MATOMO_DATABASE_USER=bn_matomo \
+      -e MATOMO_DATABASE_NAME=bitnami_matomo \
+      --net matomo_network \
+      --volume matomo_data:/bitnami \
+      bitnami/matomo:latest
+    ```
 
-Then you can access your application at `http://your-ip/`
+  Then you can access your application at `http://your-ip/`
 
 ### Persisting your application
 
@@ -148,35 +148,35 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exist):
 
-  ```console
-  docker network create matomo_network
-  ```
+    ```console
+    docker network create matomo_network
+    ```
 
-1. Create a MariaDB container with host volume:
+2. Create a MariaDB container with host volume:
 
-  ```console
-  docker run -d --name mariadb
-    -e ALLOW_EMPTY_PASSWORD=yes \
-    -e MARIADB_USER=bn_matomo \
-    -e MARIADB_DATABASE=bitnami_matomo \
-    --net matomo_network \
-    --volume /path/to/mariadb-persistence:/bitnami \
-    bitnami/mariadb:latest
-  ```
+   ```console
+    docker run -d --name mariadb
+     -e ALLOW_EMPTY_PASSWORD=yes \
+     -e MARIADB_USER=bn_matomo \
+     -e MARIADB_DATABASE=bitnami_matomo \
+     --net matomo_network \
+     --volume /path/to/mariadb-persistence:/bitnami \
+     bitnami/mariadb:latest
+   ```
 
-   *Note:* You need to give the container a name in order to Matomo to resolve the host
+    *Note:* You need to give the container a name in order to {{ .Name }} to resolve the host
 
-1. Create the Matomo container with host volumes:
+3. Create the {{ .Name }} container with host volumes:
 
-  ```console
-  docker run -d --name matomo -p 80:80 -p 443:443 \
-    -e ALLOW_EMPTY_PASSWORD=yes \
-    -e MATOMO_DATABASE_USER=bn_matomo \
-    -e MATOMO_DATABASE_NAME=bitnami_matomo \
-    --net matomo_network \
-    --volume /path/to/matomo-persistence:/bitnami \
-    bitnami/matomo:latest
-  ```
+    ```console
+    docker run -d --name matomo -p 80:80 -p 443:443 \
+      -e ALLOW_EMPTY_PASSWORD=yes \
+      -e MATOMO_DATABASE_USER=bn_matomo \
+      -e MATOMO_DATABASE_NAME=bitnami_matomo \
+      --net matomo_network \
+      --volume /path/to/matomo-persistence:/bitnami \
+      bitnami/matomo:latest
+    ```
 
 ### Backing up your container
 
@@ -233,34 +233,34 @@ Bitnami provides up-to-date versions of MariaDB and Matomo, including security p
 
 1. Get the updated images:
 
-  ```console
-  docker pull bitnami/matomo:latest
-  ```
+    ```console
+    docker pull bitnami/matomo:latest
+    ```
 
-1. Stop your container
+2. Stop your container
 
-* For docker-compose: `docker-compose stop matomo`
-* For manual execution: `docker stop matomo`
+    * For docker-compose: `docker-compose stop matomo`
+    * For manual execution: `docker stop matomo`
 
-1. Take a snapshot of the application state
+3. Take a snapshot of the application state
 
-```console
-rsync -a /path/to/matomo-persistence /path/to/matomo-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
-```
+    ```console
+    rsync -a /path/to/matomo-persistence /path/to/matomo-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+    ```
 
-Additionally, [snapshot the MariaDB data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#step-2-stop-and-backup-the-currently-running-container)
+    Additionally, [snapshot the MariaDB data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#step-2-stop-and-backup-the-currently-running-container)
 
-You can use these snapshots to restore the application state should the upgrade fail.
+    You can use these snapshots to restore the application state should the upgrade fail.
 
-1. Remove the currently running container
+4. Remove the currently running container
 
-* For docker-compose: `docker-compose rm -v matomo`
-* For manual execution: `docker rm -v matomo`
+    * For docker-compose: `docker-compose rm -v matomo`
+    * For manual execution: `docker rm -v matomo`
 
-1. Run the new image
+5. Run the new image
 
-* For docker-compose: `docker-compose up matomo`
-* For manual execution mount the directories if needed): `docker run --name matomo bitnami/matomo:latest`
+    * For docker-compose: `docker-compose up matomo`
+    * For manual execution mount the directories if needed): `docker run --name matomo bitnami/matomo:latest`
 
 ## Configuration
 

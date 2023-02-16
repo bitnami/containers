@@ -77,23 +77,23 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```console
-  docker network create kibana_network
-  ```
+    ```console
+    docker network create kibana_network
+    ```
 
-1. Run the Elasticsearch container:
+2. Run the Elasticsearch container:
 
-  ```console
-  docker run -d -p 9200:9200 --name elasticsearch --net=kibana_network bitnami/elasticsearch
-  ```
+   ```console
+   docker run -d -p 9200:9200 --name elasticsearch --net=kibana_network bitnami/elasticsearch
+   ```
 
-1. Run the Kibana container:
+3. Run the Kibana container:
 
-  ```console
-  docker run -d -p 5601:5601 --name kibana --net=kibana_network \
-    -e KIBANA_ELASTICSEARCH_URL=elasticsearch \
-    bitnami/kibana
-  ```
+    ```console
+    docker run -d -p 5601:5601 --name kibana --net=kibana_network \
+      -e KIBANA_ELASTICSEARCH_URL=elasticsearch \
+      bitnami/kibana
+    ```
 
 Then you can access your application at `http://your-ip:5601/`
 

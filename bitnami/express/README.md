@@ -127,17 +127,17 @@ The Express Development Container generates a Dockerfile in your working directo
 
 1. Build your Docker image
 
-  ```console
-  docker build -t myregistry/myapp:1.0.0
-  ```
+    ```console
+    docker build -t myregistry/myapp:1.0.0
+    ```
 
-1. Push to an image registry
+2. Push to an image registry
 
-  ```console
-  docker push myregistry/myapp:1.0.0
-  ```
+   ```console
+   docker push myregistry/myapp:1.0.0
+   ```
 
-1. Update orchestration files to reference the pushed image
+3. Update orchestration files to reference the pushed image
 
 ## Issues
 

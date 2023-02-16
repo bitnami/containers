@@ -71,25 +71,25 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```console
-  docker network create parse_network
-  ```
+    ```console
+    docker network create parse_network
+    ```
 
-1. Start a MongoDB&reg; database in the network generated:
+2. Start a MongoDB&reg; database in the network generated:
 
-  ```console
-  docker run -d --name mongodb --net=parse_network bitnami/mongodb
-  ```
+    ```console
+    docker run -d --name mongodb --net=parse_network bitnami/mongodb
+    ```
 
-  *Note:* You need to give the container a name in order to Parse to resolve the host
+    *Note:* You need to give the container a name in order to Parse to resolve the host
 
-1. Run the Parse container:
+3. Run the Parse container:
 
-  ```console
-  docker run -d -p 1337:1337 --name parse --net=parse_network bitnami/parse
-  ```
+    ```console
+    docker run -d -p 1337:1337 --name parse --net=parse_network bitnami/parse
+    ```
 
-Then you can access your application at `http://your-ip/parse`
+    Then you can access your application at `http://your-ip/parse`
 
 ### Persisting your application
 
@@ -126,29 +126,29 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exist):
 
-  ```console
-  docker network create parse-tier
-  ```
+    ```console
+    docker network create parse-tier
+    ```
 
-1. Create a MongoDB&reg; container with host volume:
+2. Create a MongoDB&reg; container with host volume:
 
-  ```console
-  docker run -d --name mongodb \
-    --net parse-tier \
-    --volume /path/to/mongodb-persistence:/bitnami \
-    bitnami/mongodb:latest
-  ```
+    ```console
+    docker run -d --name mongodb \
+      --net parse-tier \
+      --volume /path/to/mongodb-persistence:/bitnami \
+      bitnami/mongodb:latest
+    ```
 
-  *Note:* You need to give the container a name in order to Parse to resolve the host
+    *Note:* You need to give the container a name in order to Parse to resolve the host
 
-1. Run the Parse container:
+3. Run the Parse container:
 
-  ```console
-  docker run -d --name parse -p 1337:1337 \
-    --net parse-tier \
-    --volume /path/to/parse-persistence:/bitnami \
-     bitnami/parse:latest
-  ```
+    ```console
+    docker run -d --name parse -p 1337:1337 \
+      --net parse-tier \
+      --volume /path/to/parse-persistence:/bitnami \
+       bitnami/parse:latest
+    ```
 
 ## Upgrade this application
 
@@ -156,34 +156,34 @@ Bitnami provides up-to-date versions of Mongodb and Parse, including security pa
 
 1. Get the updated images:
 
-  ```console
-  docker pull bitnami/parse:latest
-  ```
+   ```console
+   docker pull bitnami/parse:latest
+   ```
 
-1. Stop your container
+2. Stop your container
 
-* For docker-compose: `docker-compose stop parse`
-* For manual execution: `docker stop parse`
+    * For docker-compose: `$ docker-compose stop parse`
+    * For manual execution: `$ docker stop parse`
 
-1. Take a snapshot of the application state
+3. Take a snapshot of the application state
 
-```console
-rsync -a /path/to/parse-persistence /path/to/parse-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
-```
+    ```console
+    rsync -a /path/to/parse-persistence /path/to/parse-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+    ```
 
-Additionally, [snapshot the MongoDB&reg; data](https://github.com/bitnami/containers/blob/main/bitnami/mongodb#step-2-stop-and-backup-the-currently-running-container)
+    Additionally, [snapshot the MongoDB&reg; data](https://github.com/bitnami/containers/blob/main/bitnami/mongodb#step-2-stop-and-backup-the-currently-running-container)
 
-You can use these snapshots to restore the application state should the upgrade fail.
+    You can use these snapshots to restore the application state should the upgrade fail.
 
-1. Remove the currently running container
+4. Remove the currently running container
 
-* For docker-compose: `docker-compose rm parse`
-* For manual execution: `docker rm parse`
+    * For docker-compose: `$ docker-compose rm parse`
+    * For manual execution: `$ docker rm parse`
 
-1. Run the new image
+5. Run the new image
 
-* For docker-compose: `docker-compose up parse`
-* For manual execution (mount the directories if needed): `docker run --name parse bitnami/parse:latest`
+    * For docker-compose: `$ docker-compose up parse`
+    * For manual execution (mount the directories if needed): `docker run --name parse bitnami/parse:latest`
 
 ## Configuration
 

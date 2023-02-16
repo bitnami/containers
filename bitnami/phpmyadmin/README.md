@@ -65,29 +65,29 @@ If you want to run the application manually instead of using `docker-compose`, t
 
 1. Create a network
 
-```console
-docker network create phpmyadmin-tier
-```
+    ```console
+    docker network create phpmyadmin-tier
+    ```
 
-1. Create a volume for MariaDB persistence and create a MariaDB container
+2. Create a volume for MariaDB persistence and create a MariaDB container
 
-```console
-docker volume create --name mariadb_data
-docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
-  --net phpmyadmin-tier \
-  --volume mariadb_data:/bitnami/mariadb \
-  bitnami/mariadb:latest
-```
+    ```console
+    docker volume create --name mariadb_data
+    docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
+      --net phpmyadmin-tier \
+      --volume mariadb_data:/bitnami/mariadb \
+      bitnami/mariadb:latest
+    ```
 
-1. Launch the phpMyAdmin container
+3. Launch the {{ .Name }} container
 
-```console
-docker run -d --name phpmyadmin -p 80:8080 -p 443:8443 \
-  --net phpmyadmin-tier \
-  bitnami/phpmyadmin:latest
-```
+    ```console
+    docker run -d --name phpmyadmin -p 80:8080 -p 443:8443 \
+      --net phpmyadmin-tier \
+      bitnami/phpmyadmin:latest
+    ```
 
-Access your application at `http://your-ip/`
+    Access your application at `http://your-ip/`
 
 ### Persisting your application
 
@@ -116,53 +116,53 @@ services:
 
 1. Create a network (if it does not exist)
 
-```console
-docker network create phpmyadmin-tier
-```
+    ```console
+    docker network create phpmyadmin-tier
+    ```
 
-1. Create a MariaDB container with host volume
+2. Create a MariaDB container with host volume
 
-```console
-docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
-  --net phpmyadmin-tier \
-  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
-  bitnami/mariadb:latest
-```
+    ```console
+    docker run -d --name mariadb -e ALLOW_EMPTY_PASSWORD=yes \
+      --net phpmyadmin-tier \
+      --volume /path/to/mariadb-persistence:/bitnami/mariadb \
+      bitnami/mariadb:latest
+    ```
 
-1. Launch the phpMyAdmin container
+3. Launch the {{ .Name }} container
 
-```console
-docker run -d --name phpmyadmin -p 80:8080 -p 443:8443 \
-  --net phpmyadmin-tier \
-  bitnami/phpmyadmin:latest
-```
+    ```console
+    docker run -d --name phpmyadmin -p 80:8080 -p 443:8443 \
+      --net phpmyadmin-tier \
+      bitnami/phpmyadmin:latest
+    ```
 
-## Upgrading phpMyAdmin
+## Upgrading {{ .Name }}
 
-Bitnami provides up-to-date versions of MariaDB and phpMyAdmin, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the phpMyAdmin container. For the MariaDB upgrade see <https://github.com/bitnami/containers/tree/main/bitnami/mariadb#upgrade-this-image>
+Bitnami provides up-to-date versions of MariaDB and {{ .Name }}, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the {{ .Name }} container. For the MariaDB upgrade see <https://github.com/bitnami/containers/tree/main/bitnami/mariadb#upgrade-this-image>
 
 The `bitnami/phpmyadmin:latest` tag always points to the most recent release. To get the most recent release you can simple repull the `latest` tag from the Docker Hub with `docker pull bitnami/phpmyadmin:latest`. However it is recommended to use [tagged versions](https://hub.docker.com/r/bitnami/phpmyadmin/tags/).
 
 1. Get the updated images:
 
-  ```console
-  docker pull bitnami/phpmyadmin:latest
-  ```
+    ```console
+    docker pull bitnami/phpmyadmin:latest
+    ```
 
-1. Stop your container
+2. Stop your container
 
-* For docker-compose: `docker-compose stop phpmyadmin`
-* For manual execution: `docker stop phpmyadmin`
+    * For docker-compose: `$ docker-compose stop phpmyadmin`
+    * For manual execution: `$ docker stop phpmyadmin`
 
-1. Remove the currently running container
+3. Remove the currently running container
 
-* For docker-compose: `docker-compose rm -v phpmyadmin`
-* For manual execution: `docker rm -v phpmyadmin`
+    * For docker-compose: `$ docker-compose rm -v phpmyadmin`
+    * For manual execution: `$ docker rm -v phpmyadmin`
 
-1. Run the new image
+4. Run the new image
 
-* For docker-compose: `docker-compose up phpmyadmin`
-* For manual execution: `docker run --name phpmyadmin bitnami/phpmyadmin:latest`
+    * For docker-compose: `$ docker-compose up phpmyadmin`
+    * For manual execution: `docker run --name phpmyadmin bitnami/phpmyadmin:latest`
 
 ## Configuration
 

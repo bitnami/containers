@@ -61,31 +61,31 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a network for the application, Parse Server and the database:
 
-  ```console
-  docker network create parse_dashboard-tier
-  ```
+    ```console
+    docker network create parse_dashboard-tier
+    ```
 
-1. Start a MongoDB&reg; database in the network generated:
+2. Start a MongoDB&reg; database in the network generated:
 
-  ```console
-  docker run -d --name mongodb --net=parse_dashboard-tier bitnami/mongodb
-  ```
+    ```console
+    docker run -d --name mongodb --net=parse_dashboard-tier bitnami/mongodb
+    ```
 
-  *Note:* You need to give the container a name in order to Parse to resolve the host.
+    *Note:* You need to give the container a name in order to Parse to resolve the host.
 
-1. Start a Parse Server container:
+3. Start a Parse Server container:
 
-  ```console
-  docker run -d -p 1337:1337 --name parse --net=parse_dashboard-tier bitnami/parse
-  ```
+    ```console
+    docker run -d -p 1337:1337 --name parse --net=parse_dashboard-tier bitnami/parse
+    ```
 
-1. Run the Parse Dashboard container:
+4. Run the {{ .Name }} container:
 
-  ```console
-  docker run -d -p 80:4040 --name parse-dashboard --net=parse_dashboard-tier bitnami/parse-dashboard
-  ```
+    ```console
+    docker run -d -p 80:4040 --name parse-dashboard --net=parse_dashboard-tier bitnami/parse-dashboard
+    ```
 
-Then you can access your application at `http://your-ip/`
+    Then you can access your application at `http://your-ip/`
 
 ### Persisting your application
 
@@ -128,72 +128,72 @@ In this case you need to specify the directories to mount on the run command. Th
 
 1. Create a network (if it does not exist):
 
-  ```console
-  docker network create parse_dashboard-tier
-  ```
+    ```console
+    docker network create parse_dashboard-tier
+    ```
 
-1. Create a MongoDB&reg; container with host volume:
+2. Create a MongoDB&reg; container with host volume:
 
-  ```console
-  docker run -d --name mongodb \
-    --net parse-dashboard-tier \
-    --volume /path/to/mongodb-persistence:/bitnami \
-    bitnami/mongodb:latest
-  ```
+    ```console
+    docker run -d --name mongodb \
+      --net parse-dashboard-tier \
+      --volume /path/to/mongodb-persistence:/bitnami \
+      bitnami/mongodb:latest
+    ```
 
-  *Note:* You need to give the container a name in order to Parse to resolve the host.
+    *Note:* You need to give the container a name in order to Parse to resolve the host.
 
-1. Start a Parse Server container:
+3. Start a Parse Server container:
 
-  ```console
-  docker run -d -name parse -p 1337:1337 \
-    --net parse-dashboard-tier
-    --volume /path/to/parse-persistence:/bitnami \
-    bitnami/parse:latest
-  ```
+    ```console
+    docker run -d -name parse -p 1337:1337 \
+      --net parse-dashboard-tier
+      --volume /path/to/parse-persistence:/bitnami \
+      bitnami/parse:latest
+    ```
 
-1. Run the Parse Dashboard container:
+4. Run the {{ .Name }} container:
 
-  ```console
-  docker run -d --name parse-dashboard -p 80:4040 \
-  --volume /path/to/parse_dashboard-persistence:/bitnami \
-  bitnami/parse-dashboard:latest
-  ```
+    ```console
+    docker run -d --name parse-dashboard -p 80:4040 \
+    --volume /path/to/parse_dashboard-persistence:/bitnami \
+    bitnami/parse-dashboard:latest
+    ```
 
 ## Upgrade this application
 
-Bitnami provides up-to-date versions of Parse Dashboard, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Parse Dashboard container.
+Bitnami provides up-to-date versions of {{ .Name }}, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the {{ .Name }} container.
 
 1. Get the updated images:
 
-```console
-docker pull bitnami/parse-dashboard:latest
-```
+    ```console
+    docker pull bitnami/parse-dashboard:latest
+    ```
 
-1. Stop your container
+2. Stop your container
 
-* For docker-compose: `docker-compose stop parse-dashboard`
-* For manual execution: `docker stop parse-dashboard`
+    * For docker-compose: `$ docker-compose stop parse-dashboard`
+    * For manual execution: `$ docker stop parse-dashboard`
 
-1. Take a snapshot of the application state
+3. Take a snapshot of the application state
 
-```console
-rsync -a /path/to/parse-persistence /path/to/parse-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
-```
+    ```console
+    rsync -a /path/to/parse-persistence /path/to/parse-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+    ```
 
-Additionally, snapshot the [MongoDB&reg;](https://github.com/bitnami/containers/blob/main/bitnami/mongodb#step-2-stop-and-backup-the-currently-running-container) and [Parse server](https://github.com/bitnami/containers/blob/main/bitnami/parse#step-2-stop-and-backup-the-currently-running-container) data.
+    Additionally, snapshot the [MongoDB&reg;](https://github.com/bitnami/containers/blob/main/bitnami/mongodb#step-2-stop-and-backup-the-currently-running-container) and [Parse server](https://github.com/bitnami/containers/blob/main/bitnami/parse#step-2-stop-and-backup-the-currently-running-container) data.
 
-You can use these snapshots to restore the application state should the upgrade fail.
+    You can use these snapshots to restore the application state should the upgrade fail.
 
-1. Remove the currently running container
+4. Remove the currently running container
 
-* For docker-compose: `docker-compose rm parse-dashboard`
-* For manual execution: `docker rm parse-dashboard`
+    * For docker-compose: `$ docker-compose rm parse-dashboard`
+    * For manual execution: `$ docker rm parse-dashboard`
 
-1. Run the new image
+5. Run the new image
 
-* For docker-compose: `docker-compose up parse-dashboard`
-* For manual execution mount the directories if needed): `docker run --name parse-dashboard bitnami/parse-dashboard:latest`
+    * For docker-compose: `$ docker-compose up parse-dashboard`
+    * For manual execution (mount the directories if needed): `docker run --name parse-dashboard bitnami/parse-dashboard:latest`
 
 ## Configuration
 

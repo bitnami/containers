@@ -257,18 +257,17 @@ In order to override the default `max_file_uploads` settings you can do the foll
 
 1. Create a file called _custom.ini_ with the following content:
 
-```config
-max_file_uploads = 30M
-```
+    ```config
+    max_file_uploads = 30M
+    ```
 
-1. Run the php-fpm container mounting the custom file.
+2. Run the php-fpm container mounting the custom file.
 
-```console
-docker run -it -v /path/to/custom.ini:/opt/bitnami/php/etc/conf.d/custom.ini bitnami/php-fpm php -i | grep max_file_uploads
+    ```console
+    docker run -it -v /path/to/custom.ini:/opt/bitnami/php/etc/conf.d/custom.ini bitnami/php-fpm php -i | grep max_file_uploads
+    ```
 
-```
-
-You should see that PHP is using the new specified value for the `max_file_uploads` setting.
+    You should see that PHP is using the new specified value for the `max_file_uploads` setting.
 
 ## Logging
 

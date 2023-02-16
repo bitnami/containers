@@ -135,18 +135,18 @@ Additionally, SSL configuration can be easily activated following the next steps
 
 1. Enable SSL configuration by setting the following env vars:
 
-```diff
-+ SPARK_SSL_ENABLED=yes
-+ SPARK_SSL_KEY_PASSWORD=KEY_PASSWORD
-+ SPARK_SSL_KEYSTORE_PASSWORD=KEYSTORE_PASSWORD
-+ SPARK_SSL_TRUSTSTORE_PASSWORD=TRUSTSTORE_PASSWORD
-+ SPARK_SSL_NEED_CLIENT_AUTH=yes
-+ SPARK_SSL_PROTOCOL=TLSv1.2
-```
+    ```diff
+    + SPARK_SSL_ENABLED=yes
+    + SPARK_SSL_KEY_PASSWORD=KEY_PASSWORD
+    + SPARK_SSL_KEYSTORE_PASSWORD=KEYSTORE_PASSWORD
+    + SPARK_SSL_TRUSTSTORE_PASSWORD=TRUSTSTORE_PASSWORD
+    + SPARK_SSL_NEED_CLIENT_AUTH=yes
+    + SPARK_SSL_PROTOCOL=TLSv1.2
+    ```
 
-> Please note that `KEY_PASSWORD`, `KEYSTORE_PASSWORD`, and `TRUSTSTORE_PASSWORD` are placeholders that needs to be updated with a correct value.
+    > Please note that `KEY_PASSWORD`, `KEYSTORE_PASSWORD`, and `TRUSTSTORE_PASSWORD` are placeholders that needs to be updated with a correct value.
 
-1. You need to mount your spark keystore and truststore files to `/opt/bitnami/spark/conf/certs`. Please note they should be called `spark-keystore.jks` and `spark-truststore.jks` and they should be in JKS format.
+2. You need to mount your spark keystore and truststore files to `/opt/bitnami/spark/conf/certs`. Please note they should be called `spark-keystore.jks` and `spark-truststore.jks` and they should be in JKS format.
 
 ### Setting up an Apache Spark Cluster
 
