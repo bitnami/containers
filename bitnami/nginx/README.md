@@ -102,7 +102,7 @@ docker run --name nginx -P bitnami/nginx:latest
 Run `docker port` to determine the random ports Docker assigned.
 
 ```console
-docker port nginx
+$ docker port nginx
 8080/tcp -> 0.0.0.0:32769
 ```
 
