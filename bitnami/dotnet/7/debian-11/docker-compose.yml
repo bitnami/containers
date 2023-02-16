@@ -1,5 +1,6 @@
 version: '2'
 services:
+  # [TEST]
   dotnet:
     image: docker.io/bitnami/dotnet:7
     command: ["tail", "-f", "/dev/null"] # To keep the container running
