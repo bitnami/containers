@@ -219,7 +219,7 @@ When enabling TLS, conventional standard traffic is disabled by default. However
 1. Using `docker run`
 
     ```console
-    docker run --name redis-cluster \
+    $ docker run --name redis-cluster \
         -v /path/to/certs:/opt/bitnami/redis/certs \
         -v /path/to/redis-cluster-persistence:/bitnami \
         -e ALLOW_EMPTY_PASSWORD=yes \
