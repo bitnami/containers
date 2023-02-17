@@ -6,6 +6,8 @@
 
 [Overview of WordPress with NGINX](http://www.wordpress.org)
 
+
+
 ## TL;DR
 
 ```console
@@ -84,7 +86,7 @@ docker network create wordpress-network
 #### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
 
 ```console
-docker volume create --name mariadb_data
+$ docker volume create --name mariadb_data
 docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_wordpress \
@@ -98,7 +100,7 @@ docker run -d --name mariadb \
 #### Step 3: Create volumes for WordPress persistence and launch the container
 
 ```console
-docker volume create --name wordpress_data
+$ docker volume create --name wordpress_data
 docker run -d --name wordpress \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
@@ -206,7 +208,7 @@ When you start the WordPress image, you can adjust the configuration of the inst
 - For manual execution add a `--env` option with each variable and value:
 
     ```console
-    docker run -d --name wordpress -p 80:8080 -p 443:8443 \
+    $ docker run -d --name wordpress -p 80:8080 -p 443:8443 \
       --env WORDPRESS_PASSWORD=my_password \
       --network wordpress-tier \
       --volume /path/to/wordpress-persistence:/bitnami \
@@ -239,7 +241,7 @@ Available environment variables:
 - `WORDPRESS_AUTO_UPDATE_LEVEL`: Level of auto-updates to allow for the WordPress core installation. Valid values: `major`, `minor`, `none`. Default: **none**
 - `WORDPRESS_ENABLE_REVERSE_PROXY`: Enable WordPress support for reverse proxy headers. Default: **no**
 
-##### Multisite configuration
+#### Multisite configuration
 
 - `WORDPRESS_ENABLE_MULTISITE`: Enable WordPress Multisite configuration. Default: **no**
 - `WORDPRESS_MULTISITE_HOST`: WordPress hostname/address. Only used for Multisite installations. No defaults.
@@ -249,7 +251,7 @@ Available environment variables:
 - `WORDPRESS_MULTISITE_ENABLE_NIP_IO_REDIRECTION`: Whether to enable IP address redirection to nip.io wildcard DNS when enabling WordPress Multisite. This is useful when running on an IP address with subdomain network type. Default: **no**
 - `WORDPRESS_MULTISITE_FILEUPLOAD_MAXK`: Maximum upload file size allowed for WordPress Multisite uploads, in kilobytes. Default: **81920**
 
-##### Database connection configuration
+#### Database connection configuration
 
 - `WORDPRESS_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
 - `WORDPRESS_DATABASE_PORT_NUMBER`: Port used by the MariaDB or MySQL server. Default: **3306**
@@ -263,7 +265,7 @@ Available environment variables:
 - `WORDPRESS_DATABASE_SSL_CA_FILE`: Path to the database server CA bundle file. No defaults
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-##### Create a database for WordPress using mysql-client
+#### Create a database for WordPress using mysql-client
 
 - `MYSQL_CLIENT_FLAVOR`: SQL database flavor. Valid values: `mariadb` or `mysql`. Default: **mariadb**
 - `MYSQL_CLIENT_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
@@ -282,7 +284,7 @@ Available environment variables:
 - `MYSQL_CLIENT_SSL_KEY_FILE`: Path to the SSL CA file for the new database. No defaults
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-##### SMTP Configuration
+#### SMTP Configuration
 
 To configure WordPress to send email using SMTP you can set the following environment variables:
 
@@ -291,7 +293,7 @@ To configure WordPress to send email using SMTP you can set the following enviro
 - `WORDPRESS_SMTP_USER`: SMTP account user.
 - `WORDPRESS_SMTP_PASSWORD`: SMTP account password.
 
-##### PHP configuration
+#### PHP configuration
 
 - `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. Default: **yes**
 - `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
@@ -327,7 +329,7 @@ This would be an example of SMTP configuration using a Gmail account:
 - For manual execution:
 
     ```console
-    docker run -d --name wordpress -p 80:8080 -p 443:8443 \
+    $ docker run -d --name wordpress -p 80:8080 -p 443:8443 \
       --env WORDPRESS_DATABASE_USER=bn_wordpress \
       --env WORDPRESS_DATABASE_NAME=bitnami_wordpress \
       --env WORDPRESS_SMTP_HOST=smtp.gmail.com \
@@ -362,7 +364,7 @@ The Bitnami WordPress container supports connecting the WordPress application to
 - For manual execution:
 
     ```console
-    docker run -d --name wordpress\
+    $ docker run -d --name wordpress\
       -p 8080:8080 -p 8443:8443 \
       --network wordpress-network \
       --env WORDPRESS_DATABASE_HOST=mariadb_host \
@@ -446,7 +448,7 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 For the MariaDB database container:
 
 ```diff
- docker run -d --name mariadb \
+ $ docker run -d --name mariadb \
    ...
 -  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
 +  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
@@ -456,7 +458,7 @@ For the MariaDB database container:
 For the WordPress container:
 
 ```diff
- docker run -d --name wordpress \
+ $ docker run -d --name wordpress \
    ...
 -  --volume /path/to/wordpress-persistence:/bitnami/wordpress \
 +  --volume /path/to/wordpress-backups/latest:/bitnami/wordpress \
