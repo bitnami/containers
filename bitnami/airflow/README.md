@@ -87,7 +87,7 @@ If you want to run the application manually instead of using `docker-compose`, t
       bitnami/redis:latest
     ```
 
-4. Launch the {{ .Name }} web container
+4. Launch the Apache Airflow web container
 
     ```console
     docker run -d --name airflow -p 8080:8080 \
@@ -105,7 +105,7 @@ If you want to run the application manually instead of using `docker-compose`, t
       bitnami/airflow:latest
     ```
 
-5. Launch the {{ .Name }} scheduler container
+5. Launch the Apache Airflow scheduler container
 
     ```console
     docker run -d --name airflow-scheduler \
@@ -121,7 +121,7 @@ If you want to run the application manually instead of using `docker-compose`, t
       bitnami/airflow-scheduler:latest
     ```
 
-6. Launch the {{ .Name }} worker container
+6. Launch the Apache Airflow worker container
 
     ```console
     docker run -d --name airflow-worker \
@@ -349,7 +349,7 @@ The Airflow instance can be customized by specifying environment variables on th
 
 > In addition to the previous environment variables, all the parameters from the configuration file can be overwritten by using environment variables with this format: `AIRFLOW__{SECTION}__{KEY}`. Note the double underscores.
 
-### Specifying Environment variables using Docker Compose
+#### Specifying Environment variables using Docker Compose
 
 ```yaml
 version: '2'
@@ -369,7 +369,7 @@ services:
       - AIRFLOW_EMAIL=user@example.com
 ```
 
-### Specifying Environment variables on the Docker command line
+#### Specifying Environment variables on the Docker command line
 
 ```console
 docker run -d --name airflow -p 8080:8080 \
