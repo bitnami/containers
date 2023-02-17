@@ -88,7 +88,7 @@ docker network create redmine-network
 #### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
 
 ```console
-docker volume create --name mariadb_data
+$ docker volume create --name mariadb_data
 docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_redmine \
@@ -102,7 +102,7 @@ docker run -d --name mariadb \
 #### Step 3: Create volumes for Redmine persistence and launch the container
 
 ```console
-docker volume create --name redmine_data
+$ docker volume create --name redmine_data
 docker run -d --name redmine \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
@@ -206,7 +206,7 @@ When you start the Redmine image, you can adjust the configuration of the instan
 - For manual execution add a `--env` option with each variable and value:
 
     ```console
-    docker run -d --name redmine -p 80:8080 -p 443:8443 \
+    $ docker run -d --name redmine -p 80:8080 -p 443:8443 \
       --env REDMINE_PASSWORD=my_password \
       --network redmine-tier \
       --volume /path/to/redmine-persistence:/bitnami \
@@ -302,7 +302,7 @@ This would be an example of SMTP configuration using a Gmail account:
 - For manual execution:
 
     ```console
-    docker run -d --name redmine -p 80:8080 -p 443:8443 \
+    $ docker run -d --name redmine -p 80:8080 -p 443:8443 \
       --env REDMINE_DATABASE_USER=bn_redmine \
       --env REDMINE_DATABASE_NAME=bitnami_redmine \
       --env REDMINE_SMTP_HOST=smtp.gmail.com \
@@ -337,7 +337,7 @@ The Bitnami Redmine container supports connecting the Redmine application to an 
 - For manual execution:
 
     ```console
-    docker run -d --name redmine\
+    $ docker run -d --name redmine\
       -p 8080:8080 -p 8443:8443 \
       --network redmine-network \
       --env REDMINE_DATABASE_HOST=mariadb_host \
@@ -401,7 +401,7 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 For the MariaDB database container:
 
 ```diff
- docker run -d --name mariadb \
+ $ docker run -d --name mariadb \
    ...
 -  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
 +  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
@@ -411,7 +411,7 @@ For the MariaDB database container:
 For the Redmine container:
 
 ```diff
- docker run -d --name redmine \
+ $ docker run -d --name redmine \
    ...
 -  --volume /path/to/redmine-persistence:/bitnami/redmine \
 +  --volume /path/to/redmine-backups/latest:/bitnami/redmine \
