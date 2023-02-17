@@ -12,7 +12,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "sealed-secrets-0.19.4-1-linux-${OS_ARCH}-debian-11" \
+      "sealed-secrets-0.19.5-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -32,14 +32,14 @@ ARG TARGETARCH
 
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
-LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
-      org.opencontainers.image.description="Application packaged by Bitnami" \
+LABEL org.opencontainers.image.base.name="scratch" \
+      org.opencontainers.image.created="2023-02-17T18:14:33Z" \
+      org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.19.4-scratch-r3" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/sealed-secrets" \
+      org.opencontainers.image.ref.name="0.19.5-scratch-r0" \
       org.opencontainers.image.title="sealed-secrets" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.19.4"
+      org.opencontainers.image.version="0.19.5"
 
 COPY prebuildfs /
 COPY rootfs /
