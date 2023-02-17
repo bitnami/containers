@@ -94,7 +94,7 @@ docker network create joomla-network
 ##### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
 
 ```console
-docker volume create --name mariadb_data
+$ docker volume create --name mariadb_data
 docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_joomla \
@@ -108,7 +108,7 @@ docker run -d --name mariadb \
 ##### Step 3: Create volumes for Joomla! persistence and launch the container
 
 ```console
-docker volume create --name joomla_data
+$ docker volume create --name joomla_data
 docker run -d --name joomla \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
@@ -193,7 +193,7 @@ docker run -d --name joomla \
   bitnami/joomla:latest
 ```
 
-### Configuration
+## Configuration
 
 ### Environment variables
 
@@ -383,7 +383,7 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 For the MariaDB database container:
 
 ```diff
- docker run -d --name mariadb \
+ $ docker run -d --name mariadb \
    ...
 -  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
 +  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
@@ -393,7 +393,7 @@ For the MariaDB database container:
 For the Joomla! container:
 
 ```diff
- docker run -d --name joomla \
+ $ docker run -d --name joomla \
    ...
 -  --volume /path/to/joomla-persistence:/bitnami/joomla \
 +  --volume /path/to/joomla-backups/latest:/bitnami/joomla \
