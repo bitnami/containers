@@ -92,7 +92,7 @@ docker network create mediawiki-network
 #### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
 
 ```console
-docker volume create --name mariadb_data
+$ docker volume create --name mariadb_data
 docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_mediawiki \
@@ -106,7 +106,7 @@ docker run -d --name mariadb \
 #### Step 3: Create volumes for MediaWiki persistence and launch the container
 
 ```console
-docker volume create --name mediawiki_data
+$ docker volume create --name mediawiki_data
 docker run -d --name mediawiki \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
@@ -193,7 +193,7 @@ docker run -d --name mediawiki \
 
 ## Configuration
 
-## Environment variables
+### Environment variables
 
 When you start the MediaWiki image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
@@ -219,7 +219,7 @@ mediawiki:
 
 Available variables:
 
-### User and Site configuration
+#### User and Site configuration
 
 * `MEDIAWIKI_USERNAME`: MediaWiki application username. Default: **user**
 * `MEDIAWIKI_PASSWORD`: MediaWiki application password. Default: **bitnami123** (min 10 characters, alphanumeric, no special characters)
@@ -230,7 +230,7 @@ Available variables:
 * `MEDIAWIKI_EXTERNAL_HTTPS_PORT_NUMBER`: Port to used by MediaWiki to generate URLs and links when accessing using HTTPS. Default **443**.
 * `MEDIAWIKI_ENABLE_HTTPS`: Whether to use HTTPS by default. Default: **no**.
 
-### Use an existing database
+#### Use an existing database
 
 * `MEDIAWIKI_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
 * `MEDIAWIKI_DATABASE_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
@@ -239,7 +239,7 @@ Available variables:
 * `MEDIAWIKI_DATABASE_PASSWORD`: Database password that MediaWiki will use to connect with the database. No defaults.
 * `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-### Create a database for MediaWiki using mysql-client
+#### Create a database for MediaWiki using mysql-client
 
 * `MYSQL_CLIENT_FLAVOR`: SQL database flavor. Valid values: `mariadb` or `mysql`. Default: **mariadb**.
 * `MYSQL_CLIENT_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
@@ -259,7 +259,7 @@ Available variables:
 * `MYSQL_CLIENT_SSL_KEY_FILE`: Path to the SSL CA file for the new database. No defaults
 * `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-### SMTP Configuration
+#### SMTP Configuration
 
 To configure MediaWiki to send email using SMTP you can set the following environment variables:
 
@@ -270,7 +270,7 @@ To configure MediaWiki to send email using SMTP you can set the following enviro
 * `MEDIAWIKI_SMTP_PASSWORD`: SMTP account password (if being used).
 * `MEDIAWIKI_ENABLE_SMTP_AUTH`: Whether to use authentication for SMTP server. Valid values: `yes`, `no`. Default: **yes**
 
-### PHP configuration
+#### PHP configuration
 
 * `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
 * `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
@@ -281,7 +281,7 @@ To configure MediaWiki to send email using SMTP you can set the following enviro
 * `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
 * `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
 
-### Example
+#### Example
 
 This would be an example of SMTP configuration using a GMail account:
 
@@ -324,12 +324,12 @@ If you require better quality thumbnails for your uploaded images, you may want 
 
 1. Create the following Dockerfile
 
-   ```Dockerfile
-   FROM bitnami/mediawiki:latest
-   USER root
-   RUN install_packages imagemagick
-   USER 1001
-   ```
+    ```Dockerfile
+    FROM bitnami/mediawiki:latest
+    USER root
+    RUN install_packages imagemagick
+    USER 1001
+    ```
 
 2. Build the docker image
 
@@ -471,7 +471,7 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 For the MariaDB database container:
 
 ```diff
- docker run -d --name mariadb \
+ $ docker run -d --name mariadb \
    ...
 -  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
 +  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
@@ -481,7 +481,7 @@ For the MariaDB database container:
 For the MediaWiki container:
 
 ```diff
- docker run -d --name mediawiki \
+ $ docker run -d --name mediawiki \
    ...
 -  --volume /path/to/mediawiki-persistence:/bitnami/mediawiki \
 +  --volume /path/to/mediawiki-backups/latest:/bitnami/mediawiki \
