@@ -92,7 +92,7 @@ docker network create prestashop-network
 #### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
 
 ```console
-docker volume create --name mariadb_data
+$ docker volume create --name mariadb_data
 docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_prestashop \
@@ -106,7 +106,7 @@ docker run -d --name mariadb \
 #### Step 3: Create volumes for PrestaShop persistence and launch the container
 
 ```console
-docker volume create --name prestashop_data
+$ docker volume create --name prestashop_data
 docker run -d --name prestashop \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
@@ -195,7 +195,7 @@ docker run -d --name prestashop \
 
 ## Configuration
 
-## Environment variables
+### Environment variables
 
 When you start the PrestaShop image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
@@ -221,7 +221,7 @@ prestashop:
 
 Available environment variables:
 
-### User and Site configuration
+#### User and Site configuration
 
 * `APACHE_HTTP_PORT_NUMBER`: Port used by Apache for HTTP. Default: **8080**
 * `APACHE_HTTPS_PORT_NUMBER`: Port used by Apache for HTTPS. Default: **8443**
@@ -238,7 +238,7 @@ Available environment variables:
 * `PRESTASHOP_LANGUAGE`: Default language of the store (iso code). Default: **en**.
 * `PRESTASHOP_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. Default: **no**
 
-### Use an existing database
+#### Use an existing database
 
 * `PRESTASHOP_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
 * `PRESTASHOP_DATABASE_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
@@ -248,7 +248,7 @@ Available environment variables:
 * `PRESTASHOP_DATABASE_PREFIX`: Database table prefix that prestashop will use in the database. Default: **ps_**
 * `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-### Create a database for PrestaShop using mysql-client
+#### Create a database for PrestaShop using mysql-client
 
 * `MYSQL_CLIENT_FLAVOR`: SQL database flavor. Valid values: `mariadb` or `mysql`. Default: **mariadb**.
 * `MYSQL_CLIENT_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
@@ -268,7 +268,7 @@ Available environment variables:
 * `MYSQL_CLIENT_SSL_KEY_FILE`: Path to the SSL CA file for the new database. No defaults
 * `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-### SMTP Configuration
+#### SMTP Configuration
 
 To configure PrestaShop to send email using SMTP you can set the following environment variables:
 
@@ -277,7 +277,7 @@ To configure PrestaShop to send email using SMTP you can set the following envir
 * `PRESTASHOP_SMTP_USER`: SMTP account user.
 * `PRESTASHOP_SMTP_PASSWORD`: SMTP account password.
 
-### PHP configuration
+#### PHP configuration
 
 * `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
 * `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
@@ -288,7 +288,7 @@ To configure PrestaShop to send email using SMTP you can set the following envir
 * `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. Default: **20M**
 * `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. Default: **25M**
 
-### Example
+#### Example
 
 This would be an example of SMTP configuration using a Gmail account:
 
@@ -377,7 +377,7 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 For the MariaDB database container:
 
 ```diff
- docker run -d --name mariadb \
+ $ docker run -d --name mariadb \
    ...
 -  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
 +  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
@@ -387,7 +387,7 @@ For the MariaDB database container:
 For the PrestaShop container:
 
 ```diff
- docker run -d --name prestashop \
+ $ docker run -d --name prestashop \
    ...
 -  --volume /path/to/prestashop-persistence:/bitnami/prestashop \
 +  --volume /path/to/prestashop-backups/latest:/bitnami/prestashop \
