@@ -83,7 +83,7 @@ docker run --name fluent-bit-node1 --network fluent-bit-network bitnami/fluent-b
 
 We can launch another container using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
 
-### Using Docker Compose
+### Using a Docker Compose file
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the Fluent Bit log processor from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
