@@ -6,7 +6,6 @@ services:
     environment:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
-      - TRIGGER_TESTS=yes
       - MARIADB_USER=bn_myapp
       - MARIADB_DATABASE=bitnami_myapp
   myapp:
