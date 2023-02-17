@@ -6,6 +6,8 @@
 
 [Overview of Wavefront Prometheus Adapter](https://github.com/wavefrontHQ/prometheus-storage-adapter)
 
+
+
 ## TL;DR
 
 ```console
