@@ -1,23 +1,23 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "9ab9654690d90d3c49ff66fb1eb286487e318adc899d036bc45922f6b176865b",
+        "digest": "f6056076afb745fd7d9d87d20f71e7248d63330352cf5ae0be2130b7f44a8cfa",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-1"
+        "version": "1.16.0-2"
     },
     "ini-file": {
         "arch": "amd64",
-        "digest": "d82fb302437effeec0d20f104b35304c46cf295bb3af56ab00d69ad4ffd39eb0",
+        "digest": "75d5f74f62ca3a476e5ffc01715b197ba18c3b45a85b18fb61cc68e998616119",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.4.5-0"
+        "version": "1.4.5-1"
     },
     "mariadb-galera": {
         "arch": "amd64",
-        "digest": "2c3e48e0c44a9dfd26bdee2d9c7ff3072e5dc7ed6afd6ec55be668ae5be9bf16",
+        "digest": "6936d2b6ece33e1cf88e967d64c4c0ac157bc62e07db41c610fb0c3bebca7f74",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.10.3-0"
+        "version": "10.10.3-1"
     }
 }
