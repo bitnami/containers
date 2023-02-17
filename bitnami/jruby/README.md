@@ -134,7 +134,7 @@ docker run -it --name jruby -P bitnami/jruby:latest
 Run `docker port` to determine the random port Docker assigned.
 
 ```console
-docker port jruby
+$ docker port jruby
 3000/tcp -> 0.0.0.0:32769
 ```
 
