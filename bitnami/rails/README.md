@@ -131,7 +131,7 @@ Following are a few examples of launching some commonly used Rails development c
 > Database migrations are automatically applied during the start up of the Rails Development Container. This means that the `myapp` service could also be restarted to apply the database migrations.
 >
 > ```console
-> docker-compose restart myapp
+> $ docker-compose restart myapp
 > ```
 
 ## Configuring your database
