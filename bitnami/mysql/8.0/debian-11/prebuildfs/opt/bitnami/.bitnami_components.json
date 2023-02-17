@@ -1,23 +1,23 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "9ab9654690d90d3c49ff66fb1eb286487e318adc899d036bc45922f6b176865b",
+        "digest": "f6056076afb745fd7d9d87d20f71e7248d63330352cf5ae0be2130b7f44a8cfa",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-1"
+        "version": "1.16.0-2"
     },
     "ini-file": {
         "arch": "amd64",
-        "digest": "d82fb302437effeec0d20f104b35304c46cf295bb3af56ab00d69ad4ffd39eb0",
+        "digest": "75d5f74f62ca3a476e5ffc01715b197ba18c3b45a85b18fb61cc68e998616119",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.4.5-0"
+        "version": "1.4.5-1"
     },
     "mysql": {
         "arch": "amd64",
-        "digest": "ef8fdb6b4b9c78916bf1b1415bda0dbc1aaaa023d01bd20ce38002ce7793fa76",
+        "digest": "ca53488c416e85bc58c21a287b40fe30d7a3236e0a54737158f83b6053cd1026",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.32-0"
+        "version": "8.0.32-1"
     }
 }
