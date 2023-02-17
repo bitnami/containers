@@ -82,7 +82,7 @@ docker network create discourse-network
 #### Step 2: Create a volume for PostgreSQL persistence and create a PostgreSQL container
 
 ```console
-docker volume create --name postgresql_data
+$ docker volume create --name postgresql_data
 docker run -d --name postgresql \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env POSTGRESQL_USERNAME=bn_discourse \
@@ -96,7 +96,7 @@ docker run -d --name postgresql \
 #### Step 3: Create a volume for Redis persistence and create a Redis container
 
 ```console
-docker volume create --name redis_data
+$ docker volume create --name redis_data
 docker run -d --name redis \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --network discourse-network \
@@ -107,7 +107,7 @@ docker run -d --name redis \
 #### Step 4: Create volumes for Discourse persistence and launch the container
 
 ```console
-docker volume create --name discourse_data
+$ docker volume create --name discourse_data
 docker run -d --name discourse \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
@@ -272,7 +272,7 @@ When you start the Discourse image, you can adjust the configuration of the inst
 - For manual execution add a `--env` option with each variable and value:
 
     ```console
-    docker run -d --name discourse -p 80:8080 -p 443:8443 \
+    $ docker run -d --name discourse -p 80:8080 -p 443:8443 \
       --env DISCOURSE_PASSWORD=my_password \
       --network discourse-tier \
       --volume /path/to/discourse-persistence:/bitnami \
@@ -377,35 +377,35 @@ This would be an example of SMTP configuration using a Gmail account:
 
   - First, create the Discourse container:
 
-  ```console
-  docker run -d --name discourse -p 80:8080 -p 443:8443 \
-    --env DISCOURSE_DATABASE_USER=bn_discourse \
-    --env DISCOURSE_DATABASE_NAME=bitnami_discourse \
-    --env DISCOURSE_SMTP_HOST=smtp.gmail.com \
-    --env DISCOURSE_SMTP_PORT=587 \
-    --env DISCOURSE_SMTP_USER=your_email@gmail.com \
-    --env DISCOURSE_SMTP_PASSWORD=your_password \
-    --env DISCOURSE_SMTP_PROTOCOL=tls \
-    --network discourse-tier \
-    --volume /path/to/discourse-persistence:/bitnami \
-    bitnami/discourse:latest
-  ```
+    ```console
+    $ docker run -d --name discourse -p 80:8080 -p 443:8443 \
+      --env DISCOURSE_DATABASE_USER=bn_discourse \
+      --env DISCOURSE_DATABASE_NAME=bitnami_discourse \
+      --env DISCOURSE_SMTP_HOST=smtp.gmail.com \
+      --env DISCOURSE_SMTP_PORT=587 \
+      --env DISCOURSE_SMTP_USER=your_email@gmail.com \
+      --env DISCOURSE_SMTP_PASSWORD=your_password \
+      --env DISCOURSE_SMTP_PROTOCOL=tls \
+      --network discourse-tier \
+      --volume /path/to/discourse-persistence:/bitnami \
+      bitnami/discourse:latest
+    ```
 
   - Then, create the Sidekiq container:
 
-  ```console
-  docker run -d --name sidekiq \
-    --env DISCOURSE_DATABASE_USER=bn_discourse \
-    --env DISCOURSE_DATABASE_NAME=bitnami_discourse \
-    --env DISCOURSE_SMTP_HOST=smtp.gmail.com \
-    --env DISCOURSE_SMTP_PORT=587 \
-    --env DISCOURSE_SMTP_USER=your_email@gmail.com \
-    --env DISCOURSE_SMTP_PASSWORD=your_password \
-    --env DISCOURSE_SMTP_PROTOCOL=tls \
-    --network discourse-tier \
-    --volume /path/to/discourse-persistence:/bitnami \
-    bitnami/discourse:latest
-  ```
+    ```console
+    $ docker run -d --name sidekiq \
+      --env DISCOURSE_DATABASE_USER=bn_discourse \
+      --env DISCOURSE_DATABASE_NAME=bitnami_discourse \
+      --env DISCOURSE_SMTP_HOST=smtp.gmail.com \
+      --env DISCOURSE_SMTP_PORT=587 \
+      --env DISCOURSE_SMTP_USER=your_email@gmail.com \
+      --env DISCOURSE_SMTP_PASSWORD=your_password \
+      --env DISCOURSE_SMTP_PROTOCOL=tls \
+      --network discourse-tier \
+      --volume /path/to/discourse-persistence:/bitnami \
+      bitnami/discourse:latest
+    ```
 
 In order to verify your configuration works properly, you can test your configuration parameters from the container itself.
 
@@ -440,7 +440,7 @@ The Bitnami Discourse container supports connecting the Discourse application to
 - For manual execution:
 
     ```console
-    docker run -d --name discourse\
+    $ docker run -d --name discourse\
       -p 8080:8080 -p 8443:8443 \
       --network discourse-network \
       --env DISCOURSE_DATABASE_HOST=mariadb_host \
@@ -504,7 +504,7 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 For the PostgreSQL database container:
 
 ```diff
- docker run -d --name postgresql \
+ $ docker run -d --name postgresql \
    ...
 -  --volume /path/to/postgresql-persistence:/bitnami/postgresql \
 +  --volume /path/to/postgresql-backups/latest:/bitnami/postgresql \
@@ -514,7 +514,7 @@ For the PostgreSQL database container:
 For the Discourse container:
 
 ```diff
- docker run -d --name discourse \
+ $ docker run -d --name discourse \
    ...
 -  --volume /path/to/discourse-persistence:/bitnami/discourse \
 +  --volume /path/to/discourse-backups/latest:/bitnami/discourse \
