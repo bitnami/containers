@@ -117,7 +117,7 @@ docker run -it --rm \
     bitnami/etcd:latest etcdctl --endpoints http://etcd-server:2379 put /message Hello
 ```
 
-### Using Docker Compose
+### Using a Docker Compose file
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the Etcd server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 

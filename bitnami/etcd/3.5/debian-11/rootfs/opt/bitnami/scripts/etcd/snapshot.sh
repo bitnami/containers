@@ -27,7 +27,7 @@ for e in "${endpoints_array[@]}"; do
         etcdctl snapshot save "${ETCD_SNAPSHOTS_DIR}/db-${current_time}" "${extra_flags[@]}"
         find "${ETCD_SNAPSHOTS_DIR}/" -maxdepth 1 -type f -name 'db-*' \! -name "db-${current_time}" \
             | sort -r \
-            | tail -n+$((1 + ${ETCD_SNAPSHOT_HISTORY_LIMIT})) \
+            | tail -n+$((1 + ETCD_SNAPSHOT_HISTORY_LIMIT)) \
             | xargs rm -f
         exit 0
     else
