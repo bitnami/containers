@@ -1,58 +1,58 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "6937b37eaae1a0053c097ae04509cf3ccc4d260dd5fe010572753c3e8b22470d",
+        "digest": "a1afe61b7489ffb908895a02d0ce3b8771005a61489c35bef21101bb87b00a9d",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.4.55-4"
+        "version": "2.4.55-5"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "9ab9654690d90d3c49ff66fb1eb286487e318adc899d036bc45922f6b176865b",
+        "digest": "f6056076afb745fd7d9d87d20f71e7248d63330352cf5ae0be2130b7f44a8cfa",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-1"
+        "version": "1.16.0-2"
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "b60db2a11e595d8fb25367c818760d5acb0e9d6967259eeece4ea3cc20be858f",
+        "digest": "d5aa0be40a79bb9f71d030c5d27636433f141bb6d7c237eafdffb2f01fcf17b7",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.28-0"
+        "version": "8.0.28-1"
     },
     "moodle": {
         "arch": "amd64",
-        "digest": "fadc8c935341bdb1a5e25131f14c8abfe64603acc2d6ff2105159791473def45",
+        "digest": "d666c054a748aa4018ee04cdc7eb793575467b73ce38b7dfbaaa51ea358ea4d4",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.1.1-1"
+        "version": "4.1.1-2"
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "f1d55c82fe67003513561ab0b4c91f2e7699d4eaaa5d417dc4ed6be50cb4cbed",
+        "digest": "dbc087bd90a6387956751464da45660229b3e7349b96099805e61dcbc2514853",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.6.12-0"
+        "version": "10.6.12-1"
     },
     "php": {
         "arch": "amd64",
-        "digest": "b368582efa2bad583abf7f8dfa85b840f41635a283fffb116a60d74743039387",
+        "digest": "7e8454fc4ee35df73f26bf09c9b5fe4dd130202dda3de42341facd900068a971",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.28-0"
+        "version": "8.0.28-1"
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "512e881136125fb2cb046767cdaf36783853d4b84e15c57dbd18d7b2177d3f7a",
+        "digest": "2b34f81adcd687ccfe59415c378605ea9bce9a4200cd2e10599f187fbcecc249",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "13.10.0-0"
+        "version": "13.10.0-1"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "57c1d857acbb187fcb98f4ba26d138af9d866f59ad38dd443a75c0a6422de994",
+        "digest": "185e277977366ec222d2bde1a395ffa138ce1a9d3bdf1df20c3e49e8b8f9c68b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-0"
+        "version": "1.0.5-1"
     }
 }

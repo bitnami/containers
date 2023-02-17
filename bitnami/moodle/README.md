@@ -88,7 +88,7 @@ docker network create moodle-network
 #### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
 
 ```console
-docker volume create --name mariadb_data
+$ docker volume create --name mariadb_data
 docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_moodle \
@@ -102,7 +102,7 @@ docker run -d --name mariadb \
 #### Step 3: Create volumes for Moodle&trade; persistence and launch the container
 
 ```console
-docker volume create --name moodle_data
+$ docker volume create --name moodle_data
 docker run -d --name moodle \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
@@ -187,7 +187,7 @@ docker run -d --name moodle \
 
 ## Configuration
 
-## Environment variables
+### Environment variables
 
 When you start the Moodle&trade; image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
@@ -213,7 +213,7 @@ moodle:
 
 Available environment variables:
 
-### User and Site configuration
+#### User and Site configuration
 
 * `MOODLE_USERNAME`: Moodle application username. Default: **user**
 * `MOODLE_PASSWORD`: Moodle application password. Default: **bitnami**
@@ -225,7 +225,7 @@ Available environment variables:
 * `MOODLE_SSLPROXY`: Allows you to activate the sslproxy feature of Moodle. Default: **no**
 * `MOODLE_LANG`: Allows you to set the default site language. Default: **en**
 
-### Use an existing database
+#### Use an existing database
 
 * `MOODLE_DATABASE_TYPE`: Database type. Valid values: *mariadb*, *mysqli*, *pgsql*, *auroramysql*. Default: **mariadb**
 * `MOODLE_DATABASE_HOST`: Hostname for database server. Default: **mariadb**
@@ -235,7 +235,7 @@ Available environment variables:
 * `MOODLE_DATABASE_PASSWORD`: Database password that Moodle will use to connect with the database. No defaults.
 * `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-### Create a database for Moodle using mysql-client
+#### Create a database for Moodle using mysql-client
 
 * `MYSQL_CLIENT_FLAVOR`: SQL database flavor. Valid values: `mariadb` or `mysql`. Default: **mariadb**.
 * `MYSQL_CLIENT_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
@@ -255,7 +255,7 @@ Available environment variables:
 * `MYSQL_CLIENT_SSL_KEY_FILE`: Path to the SSL CA file for the new database. No defaults
 * `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-### Create a database for Moodle using postgresql-client
+#### Create a database for Moodle using postgresql-client
 
 * `POSTGRESQL_CLIENT_DATABASE_HOST`: Hostname for the PostgreSQL server. Default: **postgresql**
 * `POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the PostgreSQL server. Default: **5432**
@@ -268,7 +268,7 @@ Available environment variables:
 * `POSTGRESQL_CLIENT_EXECUTE_SQL`: SQL code to execute in the PostgreSQL server. No defaults.
 * `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-### SMTP Configuration
+#### SMTP Configuration
 
 To configure Moodle&trade; to send email using SMTP you can set the following environment variables:
 
@@ -278,7 +278,7 @@ To configure Moodle&trade; to send email using SMTP you can set the following en
 * `MOODLE_SMTP_PASSWORD`: SMTP account password.
 * `MOODLE_SMTP_PROTOCOL`: SMTP protocol.
 
-### PHP configuration
+#### PHP configuration
 
 * `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
 * `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
@@ -289,7 +289,7 @@ To configure Moodle&trade; to send email using SMTP you can set the following en
 * `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
 * `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
 
-### Examples
+#### Examples
 
 This would be an example of SMTP configuration using a Gmail account:
 
@@ -477,7 +477,7 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 For the MariaDB database container:
 
 ```diff
- docker run -d --name mariadb \
+ $ docker run -d --name mariadb \
    ...
 -  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
 +  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
@@ -487,7 +487,7 @@ For the MariaDB database container:
 For the Moodle&trade; container:
 
 ```diff
- docker run -d --name moodle \
+ $ docker run -d --name moodle \
    ...
 -  --volume /path/to/moodle-persistence:/bitnami/moodle \
 +  --volume /path/to/moodle-backups/latest:/bitnami/moodle \
