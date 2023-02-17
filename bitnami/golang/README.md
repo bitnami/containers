@@ -113,7 +113,7 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 The default workspace for the Bitnami Golang image is `/go` (GOPATH, consult [Golang documentation](https://golang.org/doc/gopath_code#Workspaces) for more info about workspaces). You can mount your custom Golang project from your host, and run it normally using the `go` command.
 
 ```console
-docker -it --name golang run \
+$ docker -it --name golang run \
   -v /path/to/your/project:/go/src/project \
   bitnami/golang \
   bash -ec 'cd src/project && go run .'
