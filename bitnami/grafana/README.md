@@ -95,7 +95,7 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 Update the `grafana.ini` configuration file in the `/opt/bitnami/grafana/conf` directory to override default configuration options. You only need to add the options you want to override. Config files are applied in the order of:
 
-```config
+```text
 grafana.ini
 default.ini
 ```
@@ -247,7 +247,7 @@ The number of plugins included in the image by default has been decreased. This 
 * Reducing the image size.
 * Security concerns: by reducing the number of plugins, we also reduce the chances to include libraries affected by known vulnerabilities.
 
-You can still build your custom image adding your custom plugins or install them during the installization as explained in the [Grafana Plugins section](#grafana-plugins).
+You can still build your custom image adding your custom plugins or install them during the installization as explained in the Grafana Plugins section.
 
 ### 6.7.3-debian-10-r28
 
