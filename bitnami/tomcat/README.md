@@ -124,7 +124,7 @@ docker run --name tomcat -P bitnami/tomcat:latest
 Run `docker port` to determine the random ports Docker assigned.
 
 ```console
-docker port tomcat
+$ docker port tomcat
 8080/tcp -> 0.0.0.0:32768
 ```
 
