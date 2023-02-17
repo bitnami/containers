@@ -133,7 +133,7 @@ docker run -it --rm \
     bitnami/postgresql:latest psql -h postgresql-server -U postgres
 ```
 
-### Using Docker Compose
+### Using a Docker Compose file
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the PostgreSQL server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
@@ -512,7 +512,7 @@ When enabling TLS, PostgreSQL will support both standard and encrypted traffic b
 1. Using `docker run`
 
     ```console
-    docker run \
+    $ docker run \
         -v /path/to/certs:/opt/bitnami/postgresql/certs \
         -e ALLOW_EMPTY_PASSWORD=yes \
         -e POSTGRESQL_ENABLE_TLS=yes \
@@ -713,7 +713,7 @@ The Bitnami PostgreSQL container allows two different sets of environment variab
 | POSTGRESQL_SYNCHRONOUS_COMMIT_MODE   | POSTGRES_SYNCHRONOUS_COMMIT_MODE   |
 | POSTGRESQL_SHUTDOWN_MODE             | POSTGRES_SHUTDOWN_MODE             |
 
-> *IMPORTANT*: Changing the `POSTGRES_USER` will not change the owner of the database that will continue being the `postgres` user. In order to change the database owner, please access using `postgres` as user (`psql -U postgres ...`) and execute the following command:
+> *IMPORTANT*: Changing the `POSTGRES_USER` will not change the owner of the database that will continue being the `postgres` user. In order to change the database owner, please access using `postgres` as user (`$ psql -U postgres ...`) and execute the following command:
 
 ```console
 alter database POSTGRES_DATABASE owner to POSTGRES_USER;
