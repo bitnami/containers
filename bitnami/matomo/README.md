@@ -97,7 +97,7 @@ If you want to run the application manually instead of using docker-compose, the
       bitnami/mariadb:latest
     ```
 
-3. Create volumes for {{ .Name }} persistence and launch the container
+3. Create volumes for Matomo persistence and launch the container
 
     ```console
     docker volume create --name matomo_data
@@ -164,9 +164,9 @@ In this case you need to specify the directories to mount on the run command. Th
      bitnami/mariadb:latest
    ```
 
-    *Note:* You need to give the container a name in order to {{ .Name }} to resolve the host
+    *Note:* You need to give the container a name in order to Matomo to resolve the host
 
-3. Create the {{ .Name }} container with host volumes:
+3. Create the Matomo container with host volumes:
 
     ```console
     docker run -d --name matomo -p 80:80 -p 443:443 \
@@ -210,7 +210,7 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 For the MariaDB database container:
 
 ```diff
- docker run -d --name mariadb \
+ $ docker run -d --name mariadb \
    ...
 -  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
 +  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
@@ -220,7 +220,7 @@ For the MariaDB database container:
 For the Matomo container:
 
 ```diff
- docker run -d --name matomo \
+ $ docker run -d --name matomo \
    ...
 -  --volume /path/to/matomo-persistence:/bitnami/matomo \
 +  --volume /path/to/matomo-backups/latest:/bitnami/matomo \
@@ -239,8 +239,8 @@ Bitnami provides up-to-date versions of MariaDB and Matomo, including security p
 
 2. Stop your container
 
-    * For docker-compose: `docker-compose stop matomo`
-    * For manual execution: `docker stop matomo`
+    * For docker-compose: `$ docker-compose stop matomo`
+    * For manual execution: `$ docker stop matomo`
 
 3. Take a snapshot of the application state
 
@@ -254,13 +254,13 @@ Bitnami provides up-to-date versions of MariaDB and Matomo, including security p
 
 4. Remove the currently running container
 
-    * For docker-compose: `docker-compose rm -v matomo`
-    * For manual execution: `docker rm -v matomo`
+    * For docker-compose: `$ docker-compose rm -v matomo`
+    * For manual execution: `$ docker rm -v matomo`
 
 5. Run the new image
 
-    * For docker-compose: `docker-compose up matomo`
-    * For manual execution mount the directories if needed): `docker run --name matomo bitnami/matomo:latest`
+    * For docker-compose: `$ docker-compose up matomo`
+    * For manual execution (mount the directories if needed): `docker run --name matomo bitnami/matomo:latest`
 
 ## Configuration
 
@@ -297,7 +297,7 @@ If you are connecting through a reverse proxy (https-to-http) and Matomo is not 
 * `MATOMO_PROXY_CLIENT_HEADER`: Specify the client IP HTTP Header. Usually 'HTTP_X_FORWARDED_FOR'. No defaults.
 * `MATOMO_PROXY_HOST_HEADER`: Specify the host IP HTTP Header. Usually 'HTTP_X_FORWARDED_HOST'. No defaults.
 
-##### Example
+##### Reverse proxy configuration example
 
 This would be an example of reverse proxy configuration:
 
@@ -316,7 +316,7 @@ This would be an example of reverse proxy configuration:
 * For manual execution:
 
 ```console
- docker run -d --name matomo -p 80:80 -p 443:443 \
+ $ docker run -d --name matomo -p 80:80 -p 443:443 \
    --net matomo_network \
    -e MARIADB_HOST=mariadb \
    -e MARIADB_PORT_NUMBER=3306 \
@@ -369,7 +369,7 @@ To configure Matomo to send email using SMTP you can set the following environme
 * `MATOMO_SMTP_PROTOCOL`: Matomo SMTP protocol to use. Available protocols are: "ssl", "tls", "none". No default.
 * `MATOMO_SMTP_AUTH`: Matomo SMTP authentication mechanism to use. Available mechanisms are: "Plain", "Login", "Crammd5". Default: **Plain**.
 
-##### SMTP Example
+##### SMTP example
 
 This would be an example of SMTP configuration using a Gmail account:
 
@@ -392,7 +392,7 @@ This would be an example of SMTP configuration using a Gmail account:
 * For manual execution:
 
 ```console
-  docker run -d --name matomo -p 80:8080 -p 443:8443 \
+ docker run -d --name matomo -p 80:8080 -p 443:8443 \
     --env MATOMO_DATABASE_USER=bn_matomo \
     --env MATOMO_DATABASE_NAME=bitnami_matomo \
     --env MATOMO_SMTP_HOST=smtp.gmail.com \
