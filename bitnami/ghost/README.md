@@ -92,7 +92,7 @@ docker network create ghost-network
 #### Step 2: Create a volume for MySQL persistence and create a MySQL container
 
 ```console
-docker volume create --name mysql_data
+$ docker volume create --name mysql_data
 docker run -d --name mysql \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MYSQL_USER=bn_ghost \
@@ -106,7 +106,7 @@ docker run -d --name mysql \
 #### Step 3: Create volumes for Ghost persistence and launch the container
 
 ```console
-docker volume create --name ghost_data
+$ docker volume create --name ghost_data
 docker run -d --name ghost \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
@@ -210,7 +210,7 @@ When you start the Ghost image, you can adjust the configuration of the instance
 - For manual execution add a `--env` option with each variable and value:
 
     ```console
-    docker run -d --name ghost -p 80:8080 -p 443:8443 \
+    $ docker run -d --name ghost -p 80:8080 -p 443:8443 \
       --env GHOST_PASSWORD=my_password \
       --network ghost-tier \
       --volume /path/to/ghost-persistence:/bitnami/ghost \
@@ -294,7 +294,7 @@ This would be an example of SMTP configuration using a Gmail account:
 - For manual execution:
 
     ```console
-    docker run -d --name ghost -p 80:8080 -p 443:8443 \
+    $ docker run -d --name ghost -p 80:8080 -p 443:8443 \
       --env GHOST_DATABASE_USER=bn_ghost \
       --env GHOST_DATABASE_NAME=bitnami_ghost \
       --env GHOST_SMTP_HOST=smtp.gmail.com \
@@ -330,7 +330,7 @@ The Bitnami Ghost container supports connecting the Ghost application to an exte
 - For manual execution:
 
     ```console
-    docker run -d --name ghost\
+    $ docker run -d --name ghost\
       -p 8080:8080 -p 8443:8443 \
       --network ghost-network \
       --env GHOST_DATABASE_HOST=mysql_host \
@@ -394,7 +394,7 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 For the MySQL database container:
 
 ```diff
- docker run -d --name mysql \
+ $ docker run -d --name mysql \
    ...
 -  --volume /path/to/mysql-persistence:/bitnami/mysql \
 +  --volume /path/to/mysql-backups/latest:/bitnami/mysql \
@@ -404,7 +404,7 @@ For the MySQL database container:
 For the Ghost container:
 
 ```diff
- docker run -d --name ghost \
+ $ docker run -d --name ghost \
    ...
 -  --volume /path/to/ghost-persistence:/bitnami/ghost \
 +  --volume /path/to/ghost-backups/latest:/bitnami/ghost \
