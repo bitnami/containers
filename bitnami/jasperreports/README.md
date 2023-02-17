@@ -116,7 +116,7 @@ docker network create jasperreports-network
 #### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
 
 ```console
-docker volume create --name mariadb_data
+$ docker volume create --name mariadb_data
 docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_jasperreports \
@@ -130,7 +130,7 @@ docker run -d --name mariadb \
 #### Step 3: Create volumes for JasperReports persistence and launch the container
 
 ```console
-docker volume create --name jasperreports_data
+$ docker volume create --name jasperreports_data
 docker run -d --name jasperreports \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
@@ -234,7 +234,7 @@ When you start the JasperReports image, you can adjust the configuration of the 
 - For manual execution add a `--env` option with each variable and value:
 
     ```console
-    docker run -d --name jasperreports -p 80:8080 -p 443:8443 \
+    $ docker run -d --name jasperreports -p 80:8080 -p 443:8443 \
       --env JASPERREPORTS_PASSWORD=my_password \
       --network jasperreports-tier \
       --volume /path/to/jasperreports-persistence:/bitnami \
@@ -316,7 +316,7 @@ This would be an example of SMTP configuration using a Gmail account:
 - For manual execution:
 
     ```console
-    docker run -d --name jasperreports -p 80:8080 -p 443:8443 \
+    $ docker run -d --name jasperreports -p 80:8080 -p 443:8443 \
       --env JASPERREPORTS_DATABASE_USER=bn_jasperreports \
       --env JASPERREPORTS_DATABASE_NAME=bitnami_jasperreports \
       --env JASPERREPORTS_SMTP_HOST=smtp.gmail.com \
@@ -352,7 +352,7 @@ The Bitnami JasperReports container supports connecting the JasperReports applic
 - For manual execution:
 
     ```console
-    docker run -d --name jasperreports\
+    $ docker run -d --name jasperreports\
       -p 8080:8080 -p 8443:8443 \
       --network jasperreports-network \
       --env JASPERREPORTS_DATABASE_HOST=mariadb_host \
@@ -416,7 +416,7 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 For the MariaDB database container:
 
 ```diff
- docker run -d --name mariadb \
+ $ docker run -d --name mariadb \
    ...
 -  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
 +  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
@@ -426,7 +426,7 @@ For the MariaDB database container:
 For the JasperReports container:
 
 ```diff
- docker run -d --name jasperreports \
+ $ docker run -d --name jasperreports \
    ...
 -  --volume /path/to/jasperreports-persistence:/bitnami/jasperreports \
 +  --volume /path/to/jasperreports-backups/latest:/bitnami/jasperreports \
