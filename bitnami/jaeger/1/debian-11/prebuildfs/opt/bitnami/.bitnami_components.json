@@ -1,9 +1,9 @@
 {
     "jaeger": {
         "arch": "amd64",
-        "digest": "e3bfcc3e021493a8c5e335b832ad1f83e6c7811111ab9ce9fbd41b380aae8592",
+        "digest": "088e2fac893bb0e04d1a73e35d6c07091cf6f91ee9cd478f7cbe8d5f2de5b9ec",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.42.0-0"
+        "version": "1.42.0-1"
     }
 }
