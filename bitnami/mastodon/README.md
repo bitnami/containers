@@ -119,7 +119,7 @@ When you start the Mastodon image, you can adjust the configuration of the insta
 * For manual execution add a `--env` option with each variable and value:
 
     ```console
-    docker run -d --name mastodon-api -p 80:8080 -p 443:8443 \
+    $ docker run -d --name mastodon-api -p 80:8080 -p 443:8443 \
       --env MASTODON_ADMIN_PASSWORD=my_password \
       --env MASTODON_MODE=backend \
       --network mastodon-tier \
@@ -181,7 +181,7 @@ The Bitnami Mastodon container supports connecting the Mastodon application to a
 * For manual execution:
 
     ```console
-    docker run -d --name mastodon\
+    $ docker run -d --name mastodon\
       -p 8080:8080 -p 8443:8443 \
       --network mastodon-network \
       --env DB_HOST=postgresql_host \
