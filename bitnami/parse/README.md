@@ -249,8 +249,8 @@ You can use Cloud Code to run a piece of code in your Parse Server instead of th
 * Create a directory on your host machine and put your Cloud functions on it. In the example below, a simple "Hello world!" function is used:
 
 ```console
-mkdir ~/cloud
-cat > ~/cloud/main.js <<'EOF'
+$ mkdir ~/cloud
+$ cat > ~/cloud/main.js <<'EOF'
 Parse.Cloud.define("sayHelloWorld", function(request, response) {
     return "Hello world!";
 });
