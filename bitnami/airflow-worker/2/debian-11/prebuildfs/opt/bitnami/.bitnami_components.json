@@ -1,44 +1,44 @@
 {
     "airflow-worker": {
         "arch": "amd64",
-        "digest": "655ec007ecb66dcf153f0a381ae5ba49d648f56d1d9426fc37d3eec6740d9fde",
+        "digest": "f4eb22f6a008f42ad53d825eefe9b730d54bf9b453c5190760ba2fd2cdffba0b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.5.1-1"
+        "version": "2.5.1-2"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "9ab9654690d90d3c49ff66fb1eb286487e318adc899d036bc45922f6b176865b",
+        "digest": "f6056076afb745fd7d9d87d20f71e7248d63330352cf5ae0be2130b7f44a8cfa",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-1"
+        "version": "1.16.0-2"
     },
     "ini-file": {
         "arch": "amd64",
-        "digest": "d82fb302437effeec0d20f104b35304c46cf295bb3af56ab00d69ad4ffd39eb0",
+        "digest": "75d5f74f62ca3a476e5ffc01715b197ba18c3b45a85b18fb61cc68e998616119",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.4.5-0"
+        "version": "1.4.5-1"
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "61b00bfe3c2675486aa377b10b1b7a5d3bdb161914729fa2c5ec3c90749cbdf8",
+        "digest": "29659c3d87558bf03d65ffd4dfd4fee76cc89e05ec0ac595e26dc72b8e15dc14",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "15.2.0-0"
+        "version": "15.2.0-1"
     },
     "python": {
         "arch": "amd64",
-        "digest": "dc98177aa6bb38b1df12fbc42b826ef1ced23b3620355832f905454a7c67b617",
+        "digest": "3ca3cf3d15f16edd34757f892175aed86e3d95b1919425218c831cb8a29beea0",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.9.16-3"
+        "version": "3.9.16-4"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "f9199cd66b92fef328ecfbc5ffbc8f14be33257a4e34b8c6ba35a730c5a2f59d",
+        "digest": "be7c393d598ddf16d1c3c008a67b87879e48aca62071a208583390f2b41e6744",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-0"
+        "version": "1.0.6-1"
     }
 }

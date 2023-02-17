@@ -10,15 +10,15 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ## TL;DR
 
-```
-$ docker run --name kong bitnami/kong:latest
+```console
+docker run --name kong bitnami/kong:latest
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/kong/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/kong/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ## Why use Bitnami Images?
@@ -47,21 +47,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami Kong Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/kong).
 
 ```console
-$ docker pull bitnami/kong:latest
+docker pull bitnami/kong:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/kong/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/kong:[TAG]
+docker pull bitnami/kong:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Connecting to other containers
@@ -75,7 +75,7 @@ Containers attached to the same network can communicate with each other using th
 #### Step 1: Create a network
 
 ```console
-$ docker network create kong-network --driver bridge
+docker network create kong-network --driver bridge
 ```
 
 #### Step 2: Launch the Kong container within your network
@@ -83,7 +83,7 @@ $ docker network create kong-network --driver bridge
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `kong-network` network.
 
 ```console
-$ docker run --name kong-node1 --network kong-network bitnami/kong:latest
+docker run --name kong-node1 --network kong-network bitnami/kong:latest
 ```
 
 #### Step 3: Run another containers
@@ -94,19 +94,19 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 The Bitnami Docker Kong can be easily setup with the following environment variables:
 
-- `KONG_PROXY_LISTEN_ADDRESS`: Address to which Kong Proxy service is bound to. Default: **0.0.0.0**
-- `KONG_PROXY_HTTP_PORT_NUMBER`: The port Kong Proxy is listening for HTTP requests. Default: **8000**
-- `KONG_PROXY_HTTPS_PORT_NUMBER`: The port Kong Proxy is listening for HTTPS requests. Default: **8443**
-- `KONG_ADMIN_LISTEN_ADDRESS`: Address to which Kong Admin service is bound to. Default: **127.0.0.1**
-- `KONG_ADMIN_HTTP_PORT_NUMBER`: The port Kong Admin is listening for HTTP requests. Default: **8001**
-- `KONG_ADMIN_HTTPS_PORT_NUMBER`: The port Kong Admin is listening for HTTPS requests. Default: **8444**
-- `KONG_MIGRATE`: Whether to automatically run Kong migration scripts on this node. In a cluster, only one node should have this flag enabled. Default: **no**
-- `KONG_EXIT_AFTER_MIGRATE`: Whether to exit after performing the migration (it will not launch the Kong daemon). This is useful using the container in Jobs and Cron Jobs. Default: **no**
+* `KONG_PROXY_LISTEN_ADDRESS`: Address to which Kong Proxy service is bound to. Default: **0.0.0.0**
+* `KONG_PROXY_HTTP_PORT_NUMBER`: The port Kong Proxy is listening for HTTP requests. Default: **8000**
+* `KONG_PROXY_HTTPS_PORT_NUMBER`: The port Kong Proxy is listening for HTTPS requests. Default: **8443**
+* `KONG_ADMIN_LISTEN_ADDRESS`: Address to which Kong Admin service is bound to. Default: **127.0.0.1**
+* `KONG_ADMIN_HTTP_PORT_NUMBER`: The port Kong Admin is listening for HTTP requests. Default: **8001**
+* `KONG_ADMIN_HTTPS_PORT_NUMBER`: The port Kong Admin is listening for HTTPS requests. Default: **8444**
+* `KONG_MIGRATE`: Whether to automatically run Kong migration scripts on this node. In a cluster, only one node should have this flag enabled. Default: **no**
+* `KONG_EXIT_AFTER_MIGRATE`: Whether to exit after performing the migration (it will not launch the Kong daemon). This is useful using the container in Jobs and Cron Jobs. Default: **no**
 
 This container also supports configuring Kong via environment values starting with `KONG_`. For instance, by setting the `KONG_LOG_LEVEL` environment variable, Kong will take into account this value rather than the property set in `kong.conf`. It is recommended to set the following environment variables:
 
-- `KONG_DATABASE`: Database type used. Valid values: **postgres** or **off**. Default: **postgres**
-- For PostgreSQL database: `KONG_PG_HOST`, `KONG_PG_PORT`, `KONG_PG_TIMEOUT`, `KONG_PG_USER`, `KONG_PG_PASSWORD`.
+* `KONG_DATABASE`: Database type used. Valid values: **postgres** or **off**. Default: **postgres**
+* For PostgreSQL database: `KONG_PG_HOST`, `KONG_PG_PORT`, `KONG_PG_TIMEOUT`, `KONG_PG_USER`, `KONG_PG_PASSWORD`.
 
 Check the official [Kong Configuration Reference](https://docs.konghq.com/latest/configuration/#environment-variables) for the full list of configurable properties.
 
@@ -115,7 +115,7 @@ Check the official [Kong Configuration Reference](https://docs.konghq.com/latest
 The image looks for Kong the configuration file in `/opt/bitnami/kong/conf/kong.conf`, which you can overwrite using your own custom configuration file.
 
 ```console
-$ docker run --name kong \
+docker run --name kong \
   -e KONG_DATABASE=off \
   -v /path/to/kong.conf:/opt/bitnami/kong/conf/kong.conf \
   bitnami/kong:latest
@@ -144,7 +144,7 @@ services:
 The Bitnami Kong Docker image sends the container logs to `stdout`. To view the logs:
 
 ```console
-$ docker logs kong
+docker logs kong
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -157,8 +157,8 @@ The Bitnami Kong Docker image is designed to be extended so it can be used as th
 
 Before extending this image, please note it is possible there are certain ways you can configure Kong using the original:
 
-- [Configuring Kong via environment variables](#configuration).
-- [Changing the 'kong.conf' file](#full-configuration).
+* [Configuring Kong via environment variables](#configuration).
+* [Changing the 'kong.conf' file](#full-configuration).
 
 If your desired customizations cannot be covered using the methods mentioned above, extend the image. To do so, create your own image using a Dockerfile with the format below:
 
@@ -170,10 +170,10 @@ FROM bitnami/kong
 
 Here is an example of extending the image with the following modifications:
 
-- Install the `vim` editor
-- Modify the Kong configuration file
-- Modify the ports used by Kong
-- Change the user that runs the container
+* Install the `vim` editor
+* Modify the Kong configuration file
+* Modify the ports used by Kong
+* Change the user that runs the container
 
 ```Dockerfile
 FROM bitnami/kong
@@ -201,8 +201,8 @@ USER 1002
 
 Based on the extended image, you can use a Docker Compose file like the one below to add other features:
 
-- Configure Kong via environment variables
-- Override the entire `kong.conf` configuration file
+* Configure Kong via environment variables
+* Override the entire `kong.conf` configuration file
 
 ```yaml
 version: '2'
@@ -231,7 +231,7 @@ Bitnami provides up-to-date versions of Kong, including security patches, soon a
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/kong:latest
+docker pull bitnami/kong:latest
 ```
 
 #### Step 2: Stop the running container
@@ -239,13 +239,13 @@ $ docker pull bitnami/kong:latest
 Stop the currently running container using the command
 
 ```console
-$ docker stop kong
+docker stop kong
 ```
 
 #### Step 3: Remove the currently running container
 
 ```console
-$ docker rm -v kong
+docker rm -v kong
 ```
 
 #### Step 4: Run the new image
@@ -253,7 +253,7 @@ $ docker rm -v kong
 Re-create your container from the new image.
 
 ```console
-$ docker run --name kong bitnami/kong:latest
+docker run --name kong bitnami/kong:latest
 ```
 
 ## Contributing
@@ -272,7 +272,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

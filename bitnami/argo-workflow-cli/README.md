@@ -11,14 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run -it --name argo-workflow-cli bitnami/argo-workflow-cli
+docker run -it --name argo-workflow-cli bitnami/argo-workflow-cli
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/argo-workflow-cli/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/argo-workflow-cli/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ## Why use Bitnami Images?
@@ -51,21 +51,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami Argo Workflows CLI Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/argo-workflow-cli).
 
 ```console
-$ docker pull bitnami/argo-workflow-cli:latest
+docker pull bitnami/argo-workflow-cli:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/argo-workflow-cli/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/argo-workflow-cli:[TAG]
+docker pull bitnami/argo-workflow-cli:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Maintenance
@@ -77,7 +77,7 @@ Bitnami provides up-to-date versions of Argo Workflows CLI, including security p
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/argo-workflow-cli:latest
+docker pull bitnami/argo-workflow-cli:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to `bitnami/argo-workflow-cli:latest`.
@@ -85,13 +85,13 @@ or if you're using Docker Compose, update the value of the image property to `bi
 #### Step 2: Remove the currently running container
 
 ```console
-$ docker rm -v argo-workflow-cli
+docker rm -v argo-workflow-cli
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose rm -v argo-workflow-cli
+docker-compose rm -v argo-workflow-cli
 ```
 
 #### Step 3: Run the new image
@@ -99,13 +99,13 @@ $ docker-compose rm -v argo-workflow-cli
 Re-create your container from the new image.
 
 ```console
-$ docker run --name argo-workflow-cli bitnami/argo-workflow-cli:latest
+docker run --name argo-workflow-cli bitnami/argo-workflow-cli:latest
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose up argo-workflow-cli
+docker-compose up argo-workflow-cli
 ```
 
 ## Configuration
@@ -115,7 +115,7 @@ $ docker-compose up argo-workflow-cli
 To run commands inside this container you can use `docker run`, for example to execute `argocd --help` you can follow the example below:
 
 ```console
-$ docker run --rm --name argo-workflow-cli bitnami/argo-workflow-cli:latest --help
+docker run --rm --name argo-workflow-cli bitnami/argo-workflow-cli:latest --help
 ```
 
 Check the [official Argo Workflows CLI documentation](https://argoproj.github.io/argo-workflows/cli/) for the list of the available parameters.
@@ -136,7 +136,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

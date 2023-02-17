@@ -32,11 +32,11 @@ ARG TARGETARCH
 
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
-LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
-      org.opencontainers.image.description="Application packaged by Bitnami" \
+LABEL org.opencontainers.image.base.name="scratch" \
+      org.opencontainers.image.created="2023-02-17T10:58:49Z" \
+      org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.13.0-scratch-r4" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/wavefront-kubernetes-collector" \
+      org.opencontainers.image.ref.name="1.13.0-scratch-r5" \
       org.opencontainers.image.title="wavefront-kubernetes-collector" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.13.0"

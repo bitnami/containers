@@ -13,17 +13,17 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 Before running the docker image you first need to download the ResNet model training checkpoint so it will be available for the TensorFlow Serving server.
 
 ```console
-$ mkdir -p /tmp/model-data/1
-$ cd /tmp/model-data
-$ curl -o resnet_50_classification_1.tar.gz https://storage.googleapis.com/tfhub-modules/tensorflow/resnet_50/classification/1.tar.gz
-$ tar xzf resnet_50_classification_1.tar.gz -C 1
+mkdir -p /tmp/model-data/1
+cd /tmp/model-data
+curl -o resnet_50_classification_1.tar.gz https://storage.googleapis.com/tfhub-modules/tensorflow/resnet_50/classification/1.tar.gz
+tar xzf resnet_50_classification_1.tar.gz -C 1
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/tensorflow-resnet/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/tensorflow-resnet/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ## Why use Bitnami Images?
@@ -62,8 +62,8 @@ Running TensorFlow ResNet client with the TensorFlow Serving server is the recom
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/tensorflow-resnet/docker-compose.yml) file. Run the application using it as shown below:
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/tensorflow-resnet/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/tensorflow-resnet/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 #### Run the application manually
@@ -72,58 +72,58 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-  ```console
-  $ docker network create tensorflow-tier
-  ```
+    ```console
+    docker network create tensorflow-tier
+    ```
 
 2. Start a Tensorflow Serving server in the network generated:
 
-  ```console
-  $ docker run -d -v /tmp/model-data:/bitnami/model-data -e TENSORFLOW_SERVING_MODEL_NAME=resnet -p 8500:8500 -p 8501:8501 --name tensorflow-serving --net tensorflow-tier bitnami/tensorflow-serving:latest
-  ```
+    ```console
+    docker run -d -v /tmp/model-data:/bitnami/model-data -e TENSORFLOW_SERVING_MODEL_NAME=resnet -p 8500:8500 -p 8501:8501 --name tensorflow-serving --net tensorflow-tier bitnami/tensorflow-serving:latest
+    ```
 
-  *Note:* You need to give the container a name in order to TensorFlow ResNet client to resolve the host
+    *Note:* You need to give the container a name in order to TensorFlow ResNet client to resolve the host
 
 3. Run the TensorFlow ResNet client container:
 
-  ```console
-  $ docker run -d -v /tmp/model-data:/bitnami/model-data --name tensorflow-resnet --net tensorflow-tier bitnami/tensorflow-resnet:latest
-  ```
+    ```console
+    docker run -d -v /tmp/model-data:/bitnami/model-data --name tensorflow-resnet --net tensorflow-tier bitnami/tensorflow-resnet:latest
+    ```
 
 ## Upgrade this application
 
-Bitnami provides up-to-date versions of Tensorflow-Serving and TensorFlow ResNet client, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the TensorFlow ResNet client container. For the Tensorflow-Serving upgrade see https://github.com/bitnami/containers/blob/main/bitnami/tensorflow-serving/blob/master/README.md#upgrade-this-image
+Bitnami provides up-to-date versions of Tensorflow-Serving and TensorFlow ResNet client, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the TensorFlow ResNet client container. For the Tensorflow-Serving upgrade see <https://github.com/bitnami/containers/blob/main/bitnami/tensorflow-serving/blob/master/README.md#upgrade-this-image>
 
 1. Get the updated images:
 
-  ```console
-  $ docker pull bitnami/tensorflow-resnet:latest
-  ```
+    ```console
+    docker pull bitnami/tensorflow-resnet:latest
+    ```
 
 2. Stop your container
 
- * For docker-compose: `$ docker-compose stop tensorflow-resnet`
- * For manual execution: `$ docker stop tensorflow-resnet`
+    * For docker-compose: `docker-compose stop tensorflow-resnet`
+    * For manual execution: `docker stop tensorflow-resnet`
 
 3. Take a snapshot of the application state
 
-```console
-$ rsync -a tensorflow-resnet-persistence tensorflow-resnet-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
-```
+    ```console
+    rsync -a tensorflow-resnet-persistence tensorflow-resnet-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+    ```
 
-Additionally, [snapshot the TensorFlow Serving data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#step-2-stop-and-backup-the-currently-running-container)
+    Additionally, [snapshot the TensorFlow Serving data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#step-2-stop-and-backup-the-currently-running-container)
 
-You can use these snapshots to restore the application state should the upgrade fail.
+    You can use these snapshots to restore the application state should the upgrade fail.
 
 4. Remove the currently running container
 
- * For docker-compose: `$ docker-compose rm tensorflow-resnet`
- * For manual execution: `$ docker rm tensorflow-resnet`
+    * For docker-compose: `docker-compose rm tensorflow-resnet`
+    * For manual execution: `docker rm tensorflow-resnet`
 
 5. Run the new image
 
- * For docker-compose: `$ docker-compose up tensorflow-resnet`
- * For manual execution ([mount](#mount-persistent-folders-manually) the directories if needed): `docker run --name tensorflow-resnet bitnami/tensorflow-resnet:latest`
+    * For docker-compose: `docker-compose up tensorflow-resnet`
+    * For manual execution (mount the directories if needed): `docker run --name tensorflow-resnet bitnami/tensorflow-resnet:latest`
 
 ## Configuration
 
@@ -134,41 +134,41 @@ Once you have deployed both the TensorFlow Serving and TensorFlow ResNet contain
 1. Exec into the TensorFlow ResNet container.
 2. Download an image:
 
-```console
-curl -L --output cat.jpeg https://tensorflow.org/images/blogs/serving/cat.jpg
-```
+    ```console
+    curl -L --output cat.jpeg https://tensorflow.org/images/blogs/serving/cat.jpg
+    ```
 
 3. Send the image to the TensorFlow Serving server.
 
-```console
-resnet_client_cc --server_port=tensorflow-serving:8500 --image_file=./cat.jpg
-```
+    ```console
+    resnet_client_cc --server_port=tensorflow-serving:8500 --image_file=./cat.jpg
+    ```
 
 4. The model says the image belongs to the category 286. You can check the [imagenet classes index](https://s3.amazonaws.com/deep-learning-models/image-models/imagenet_class_index.json) to see how the category 286 correspond to a cougar.
 
-```console
-calling predict using file: cat.jpg  ...
-call predict ok
-outputs size is 2
-the result tensor[0] is:
-[2.41628254e-06 1.90121955e-06 2.72477027e-05 4.4263885e-07 8.98362089e-07 6.84422412e-06 1.66555201e-05 3.4298439e-06 5.25692e-06 2.66782135e-05...]...
-the result tensor[1] is:
-286
-Done.
-```
+    ```console
+    calling predict using file: cat.jpg  ...
+    call predict ok
+    outputs size is 2
+    the result tensor[0] is:
+    [2.41628254e-06 1.90121955e-06 2.72477027e-05 4.4263885e-07 8.98362089e-07 6.84422412e-06 1.66555201e-05 3.4298439e-06 5.25692e-06 2.66782135e-05...]...
+    the result tensor[1] is:
+    286
+    Done.
+    ```
 
 ### Environment variables
 
 Tensorflow Resnet can be customized by specifying environment variables on the first run. The following environment values are provided to custom Tensorflow:
 
-- `TF_RESNET_SERVING_PORT_NUMBER`: TensorFlow Serving Port. Default: **8500**
-- `TF_RESNET_SERVING_HOST`: TensorFlow Serving server name. Default: **tensorflow-serving**
+* `TF_RESNET_SERVING_PORT_NUMBER`: TensorFlow Serving Port. Default: **8500**
+* `TF_RESNET_SERVING_HOST`: TensorFlow Serving server name. Default: **tensorflow-serving**
 
 ## Notable Changes
 
 ### 2.4.1-debian-10-r87
 
-- The container initialization logic is now using bash.
+* The container initialization logic is now using bash.
 
 ## Contributing
 

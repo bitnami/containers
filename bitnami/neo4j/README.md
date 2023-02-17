@@ -11,14 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run --name neo4j bitnami/neo4j:latest
+docker run --name neo4j bitnami/neo4j:latest
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/neo4j/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/neo4j/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
@@ -45,21 +45,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami Neo4j Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/neo4j).
 
 ```console
-$ docker pull bitnami/neo4j:latest
+docker pull bitnami/neo4j:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/neo4j/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/neo4j:[TAG]
+docker pull bitnami/neo4j:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Persisting your application
@@ -71,7 +71,7 @@ For persistence you should mount a volume at the `/bitnami` path. The above exam
 To avoid inadvertent removal of this volume you can [mount host directories as data volumes](https://docs.docker.com/engine/tutorials/dockervolumes/). Alternatively you can make use of volume plugins to host the volume data.
 
 ```console
-$ docker run -v /path/to/neo4j-persistence:/bitnami bitnami/neo4j:latest
+docker run -v /path/to/neo4j-persistence:/bitnami bitnami/neo4j:latest
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/neo4j/docker-compose.yml) file present in this repository:
@@ -97,7 +97,7 @@ Containers attached to the same network can communicate with each other using th
 #### Step 1: Create a network
 
 ```console
-$ docker network create neo4j-network --driver bridge
+docker network create neo4j-network --driver bridge
 ```
 
 #### Step 2: Launch the Neo4j container within your network
@@ -105,7 +105,7 @@ $ docker network create neo4j-network --driver bridge
 Use the `--network <NETWORK>` argument to the `docker run` command to attach the container to the `neo4j-network` network.
 
 ```console
-$ docker run --name neo4j-node1 --network neo4j-network bitnami/neo4j:latest
+docker run --name neo4j-node1 --network neo4j-network bitnami/neo4j:latest
 ```
 
 #### Step 3: Run another containers
@@ -137,7 +137,7 @@ services:
 Then, launch the containers using:
 
 ```console
-$ docker-compose up -d
+docker-compose up -d
 ```
 
 ## Configuration
@@ -146,15 +146,15 @@ $ docker-compose up -d
 
 When you start the neo4j image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. The following environment values are provided to custom Neo4j:
 
-- `NEO4J_PASSWORD`: Password used by Neo4j server. Default: **bitnami1**
-- `NEO4J_HOST`: Hostname used to configure Neo4j advertised address. It can be either an IP or a domain. If left empty, it will be resolved to the machine IP. Default: **empty**
-- `NEO4J_BOLT_PORT_NUMBER`: Port used by Neo4j https. Default: **7687**
-- `NEO4J_HTTP_PORT_NUMBER`: Port used by Neo4j http. Default: **7474**
-- `NEO4J_HTTPS_PORT_NUMBER`: Port used by Neo4j https. Default: **7473**
-- `NEO4J_BIND_ADDRESS`: Bind address. Default: **0.0.0.0**
-- `NEO4J_ALLOW_UPGRADE`: Allow automatic schema upgrades. Default: **true**
-- `NEO4J_APOC_IMPORT_FILE_ENABLED`: Allow importing files using the apoc library. Default: **true**
-- `NEO4J_APOC_IMPORT_FILE_USE_NEO4J_CONFIG`: Port used by Neo4j https. Default: **false**
+* `NEO4J_PASSWORD`: Password used by Neo4j server. Default: **bitnami1**
+* `NEO4J_HOST`: Hostname used to configure Neo4j advertised address. It can be either an IP or a domain. If left empty, it will be resolved to the machine IP. Default: **empty**
+* `NEO4J_BOLT_PORT_NUMBER`: Port used by Neo4j https. Default: **7687**
+* `NEO4J_HTTP_PORT_NUMBER`: Port used by Neo4j http. Default: **7474**
+* `NEO4J_HTTPS_PORT_NUMBER`: Port used by Neo4j https. Default: **7473**
+* `NEO4J_BIND_ADDRESS`: Bind address. Default: **0.0.0.0**
+* `NEO4J_ALLOW_UPGRADE`: Allow automatic schema upgrades. Default: **true**
+* `NEO4J_APOC_IMPORT_FILE_ENABLED`: Allow importing files using the apoc library. Default: **true**
+* `NEO4J_APOC_IMPORT_FILE_USE_NEO4J_CONFIG`: Port used by Neo4j https. Default: **false**
 
 #### Specifying Environment Variables using Docker Compose
 
@@ -171,14 +171,14 @@ neo4j:
 #### Specifying Environment Variables on the Docker command line
 
 ```console
-$ docker run -d -e NEO4J_BOLT_PORT_NUMBER=7777 --name neo4j bitnami/neo4j:latest
+docker run -d -e NEO4J_BOLT_PORT_NUMBER=7777 --name neo4j bitnami/neo4j:latest
 ```
 
 ### Using your Neo4j configuration files
 
 In order to load your own configuration files, you will have to make them available to the container. You can do it mounting a [volume](https://docs.docker.com/engine/tutorials/dockervolumes/) in `/bitnami/neo4j/conf`.
 
-#### Using Docker Compose
+#### Using Docker Compose to add a custom config file
 
 Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/neo4j/docker-compose.yml) file present in this repository:
 
@@ -194,7 +194,7 @@ neo4j:
 
 In order to add extra plugins, you will have to make them available to the container. You can do it mounting a [volume](https://docs.docker.com/engine/tutorials/dockervolumes/) in `/bitnami/neo4j/plugins`.
 
-#### Using Docker Compose
+#### Using Docker Compose to add plugins
 
 Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/neo4j/docker-compose.yml) file present in this repository:
 
@@ -211,13 +211,13 @@ neo4j:
 The Bitnami neo4j Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```console
-$ docker logs neo4j
+docker logs neo4j
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose logs neo4j
+docker-compose logs neo4j
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -231,7 +231,7 @@ Bitnami provides up-to-date versions of neo4j, including security patches, soon 
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/neo4j:latest
+docker pull bitnami/neo4j:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
@@ -242,19 +242,19 @@ or if you're using Docker Compose, update the value of the image property to
 Stop the currently running container using the command
 
 ```console
-$ docker stop neo4j
+docker stop neo4j
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose stop neo4j
+docker-compose stop neo4j
 ```
 
 Next, take a snapshot of the persistent volume `/path/to/neo4j-persistence` using:
 
 ```console
-$ rsync -a /path/to/neo4j-persistence /path/to/neo4j-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
+rsync -a /path/to/neo4j-persistence /path/to/neo4j-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
 ```
 
 You can use this snapshot to restore the database state should the upgrade fail.
@@ -262,40 +262,40 @@ You can use this snapshot to restore the database state should the upgrade fail.
 #### Step 3: Remove the currently running container
 
 ```console
-$ docker rm -v neo4j
+docker rm -v neo4j
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose rm -v neo4j
+docker-compose rm -v neo4j
 ```
 
 #### Step 4: Run the new image
 
-Re-create your container from the new image, [restoring your backup](#restoring-a-backup) if necessary.
+Re-create your container from the new image, restoring your backup if necessary.
 
 ```console
-$ docker run --name neo4j bitnami/neo4j:latest
+docker run --name neo4j bitnami/neo4j:latest
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose up neo4j
+docker-compose up neo4j
 ```
 
 ## Notable Changes
 
 ### 4.3.0-debian-10-r17
 
-  - Decrease the size of the container. The configuration logic is now based on Bash scripts in the `rootfs/` folder. In addition to this, the container now has the latest stable version of the [apoc library](https://github.com/neo4j-contrib/neo4j-apoc-procedures) enabled by default.
+* Decrease the size of the container. The configuration logic is now based on Bash scripts in the `rootfs/` folder. In addition to this, the container now has the latest stable version of the [apoc library](https://github.com/neo4j-contrib/neo4j-apoc-procedures) enabled by default.
 
-  - Now the configuration file is not persisted, so it is recommended to remove the persisted file in `/bitnami/neo4j/conf/` to avoid potential upgrade issues.
+* Now the configuration file is not persisted, so it is recommended to remove the persisted file in `/bitnami/neo4j/conf/` to avoid potential upgrade issues.
 
 ### 3.4.3-r13
 
-- The Neo4j container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Neo4j daemon was started as the `neo4j` user. From now on, both the container and the Neo4j daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
+* The Neo4j container has been migrated to a non-root user approach. Previously the container ran as the `root` user and the Neo4j daemon was started as the `neo4j` user. From now on, both the container and the Neo4j daemon run as user `1001`. As a consequence, the data directory must be writable by that user. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile.
 
 ## Contributing
 
@@ -306,13 +306,14 @@ We'd love for you to contribute to this container. You can request new features 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
+
 Copyright &copy; 2023 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

@@ -14,7 +14,7 @@ set -o nounset
 # Load etcd environment settings
 . /opt/bitnami/scripts/etcd-env.sh
 
-ensure_dir_exists "/snapshots"
+ensure_dir_exists "$ETCD_SNAPSHOTS_DIR"
 endpoints="$(etcdctl_get_endpoints)"
 read -r -a endpoints_array <<< "$(tr ',;' ' ' <<< "$endpoints")"
 for e in "${endpoints_array[@]}"; do
@@ -24,8 +24,8 @@ for e in "${endpoints_array[@]}"; do
     if etcdctl endpoint health "${extra_flags[@]}"; then
         info "Snapshotting the keyspace"
         current_time="$(date -u "+%Y-%m-%d_%H-%M")"
-        etcdctl snapshot save "/snapshots/db-${current_time}" "${extra_flags[@]}"
-        find /snapshots/ -maxdepth 1 -type f -name 'db-*' \! -name "db-${current_time}" \
+        etcdctl snapshot save "${ETCD_SNAPSHOTS_DIR}/db-${current_time}" "${extra_flags[@]}"
+        find "${ETCD_SNAPSHOTS_DIR}/" -maxdepth 1 -type f -name 'db-*' \! -name "db-${current_time}" \
             | sort -r \
             | tail -n+$((1 + ETCD_SNAPSHOT_HISTORY_LIMIT)) \
             | xargs rm -f

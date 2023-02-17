@@ -1,0 +1,23 @@
+########################
+# Checks directories exist,
+# optionally checking their permissions
+# Needed vars:
+#   - .Vars.directories (Array)
+#   - .Vars.directories.paths (Array)
+#   - .Vars.directories.mode (Optional - String)
+########################
+file:
+  {{ range .Vars.directories }}
+  {{ $mode := "" }}
+  {{ if (gt (len .) 1) }}
+  {{ $mode = .mode }}
+  {{ end }}
+  {{ range $directory := .paths }}
+  {{ $directory }}:
+    exists: true
+    filetype: directory
+    {{ if $mode }}
+    mode: "{{ $mode }}"
+    {{ end }}
+  {{ end }}
+  {{ end }}

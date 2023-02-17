@@ -6,14 +6,12 @@
 
 [Overview of Harbor](https://goharbor.io/)
 
-
-
 ## TL;DR
 
 ```console
-$ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/harbor-portal/docker-compose.yml
-$ curl -L https://github.com/bitnami/containers/archive/main.tar.gz | tar xz --strip=1 --wildcards '*-main/bitnami/harbor-portal/config' && mv bitnami/harbor-portal/config . && rm -rf bitnami
-$ docker-compose up
+curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/harbor-portal/docker-compose.yml
+curl -L https://github.com/bitnami/containers/archive/main.tar.gz | tar xz --strip=1 --wildcards '*-main/bitnami/harbor-portal/config' && mv bitnami/harbor-portal/config . && rm -rf bitnami
+docker-compose up
 ```
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options for the [PostgreSQL](https://github.com/bitnami/containers/tree/main/bitnami/postgresql#readme) and [Redis(R)](https://github.com/bitnami/containers/blob/main/bitnami/redis#readme) containers for a more secure deployment.
@@ -66,7 +64,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

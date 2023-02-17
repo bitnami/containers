@@ -1,0 +1,11 @@
+########################
+# Checks binaries are added to the $PATH
+# Needed vars:
+#   - .Vars.binaries (Array)
+########################
+command:
+  {{ range $binary := .Vars.binaries }}
+  check-{{ $binary }}-binary:
+    exec: which {{ $binary }}
+    exit-status: 0
+  {{ end }}

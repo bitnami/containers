@@ -11,8 +11,8 @@
 ## TL;DR
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/wordpress/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/wordpress/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
@@ -26,7 +26,7 @@ $ docker-compose up -d
 - All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 - Bitnami container images are released on a regular basis with the latest distribution packages available.
 
-# How to deploy WordPress in Kubernetes?
+## How to deploy WordPress in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami WordPress Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/wordpress).
 
@@ -49,21 +49,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami WordPress Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/wordpress).
 
 ```console
-$ docker pull bitnami/wordpress:latest
+docker pull bitnami/wordpress:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/wordpress/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/wordpress:[TAG]
+docker pull bitnami/wordpress:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## How to use this image
@@ -75,8 +75,8 @@ WordPress requires access to a MySQL or MariaDB database to store information. W
 The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/wordpress/docker-compose.yml) file. Run the application using it as shown below:
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/wordpress/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/wordpress/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ### Using the Docker Command Line
@@ -86,14 +86,14 @@ If you want to run the application manually instead of using `docker-compose`, t
 #### Step 1: Create a network
 
 ```console
-$ docker network create wordpress-network
+docker network create wordpress-network
 ```
 
 #### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
 
 ```console
 $ docker volume create --name mariadb_data
-$ docker run -d --name mariadb \
+docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_wordpress \
   --env MARIADB_PASSWORD=bitnami \
@@ -107,7 +107,7 @@ $ docker run -d --name mariadb \
 
 ```console
 $ docker volume create --name wordpress_data
-$ docker run -d --name wordpress \
+docker run -d --name wordpress \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env WORDPRESS_DATABASE_USER=bn_wordpress \
@@ -161,13 +161,13 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 #### Step 1: Create a network (if it does not exist)
 
 ```console
-$ docker network create wordpress-network
+docker network create wordpress-network
 ```
 
 #### Step 2. Create a MariaDB container with host volume
 
 ```console
-$ docker run -d --name mariadb \
+docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_wordpress \
   --env MARIADB_PASSWORD=bitnami \
@@ -182,7 +182,7 @@ $ docker run -d --name mariadb \
 #### Step 3. Create the WordPress container with host volumes
 
 ```console
-$ docker run -d --name wordpress \
+docker run -d --name wordpress \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env WORDPRESS_DATABASE_USER=bn_wordpress \
@@ -223,7 +223,7 @@ When you start the WordPress image, you can adjust the configuration of the inst
 
 Available environment variables:
 
-##### User and Site configuration
+#### User and Site configuration
 
 - `APACHE_HTTP_PORT_NUMBER`: Port used by Apache for HTTP. Default: **8080**
 - `APACHE_HTTPS_PORT_NUMBER`: Port used by Apache for HTTPS. Default: **8443**
@@ -247,7 +247,7 @@ Available environment variables:
 - `WORDPRESS_AUTO_UPDATE_LEVEL`: Level of auto-updates to allow for the WordPress core installation. Valid values: `major`, `minor`, `none`. Default: **none**
 - `WORDPRESS_ENABLE_REVERSE_PROXY`: Enable WordPress support for reverse proxy headers. Default: **no**
 
-##### Salt and keys configuration
+#### Salt and keys configuration
 
 Authentication unique keys and salts. Specify these values to prevent cookies from being invalidated when creating a new container or when using multiple containers to serve the same WordPress instance. By default these values are generated randomly:
 
@@ -260,7 +260,7 @@ Authentication unique keys and salts. Specify these values to prevent cookies fr
 - `WORDPRESS_LOGGED_IN_SALT`: Set the value of the `LOGGED_IN_SALT` constant in `wp-config.php`
 - `WORDPRESS_NONCE_SALT`: Set the value of the `NONCE_SALT` constant in `wp-config.php`
 
-##### Multisite configuration
+#### Multisite configuration
 
 - `WORDPRESS_ENABLE_MULTISITE`: Enable WordPress Multisite configuration. Default: **no**
 - `WORDPRESS_MULTISITE_HOST`: WordPress hostname/address. Only used for Multisite installations. No defaults.
@@ -270,7 +270,7 @@ Authentication unique keys and salts. Specify these values to prevent cookies fr
 - `WORDPRESS_MULTISITE_ENABLE_NIP_IO_REDIRECTION`: Whether to enable IP address redirection to nip.io wildcard DNS when enabling WordPress Multisite. This is useful when running on an IP address with subdomain network type. Default: **no**
 - `WORDPRESS_MULTISITE_FILEUPLOAD_MAXK`: Maximum upload file size allowed for WordPress Multisite uploads, in kilobytes. Default: **81920**
 
-##### Database connection configuration
+#### Database connection configuration
 
 - `WORDPRESS_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
 - `WORDPRESS_DATABASE_PORT_NUMBER`: Port used by the MariaDB or MySQL server. Default: **3306**
@@ -284,7 +284,7 @@ Authentication unique keys and salts. Specify these values to prevent cookies fr
 - `WORDPRESS_DATABASE_SSL_CA_FILE`: Path to the database server CA bundle file. No defaults
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-##### Create a database for WordPress using mysql-client
+#### Create a database for WordPress using mysql-client
 
 - `MYSQL_CLIENT_FLAVOR`: SQL database flavor. Valid values: `mariadb` or `mysql`. Default: **mariadb**
 - `MYSQL_CLIENT_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
@@ -303,7 +303,7 @@ Authentication unique keys and salts. Specify these values to prevent cookies fr
 - `MYSQL_CLIENT_SSL_KEY_FILE`: Path to the SSL CA file for the new database. No defaults
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-##### SMTP Configuration
+#### SMTP Configuration
 
 To configure WordPress to send email using SMTP you can set the following environment variables:
 
@@ -312,7 +312,7 @@ To configure WordPress to send email using SMTP you can set the following enviro
 - `WORDPRESS_SMTP_USER`: SMTP account user.
 - `WORDPRESS_SMTP_PASSWORD`: SMTP account password.
 
-##### PHP configuration
+#### PHP configuration
 
 - `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. Default: **yes**
 - `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
@@ -403,16 +403,16 @@ The Bitnami WordPress container includes the command line interface **wp-cli** t
 
 This would be an example of using **wp-cli** to display the help menu:
 
-* Using `docker-compose` command:
+- Using `docker-compose` command:
 
 ```console
-$ docker-compose exec wordpress wp help
+docker-compose exec wordpress wp help
 ```
 
-* Using `docker` command:
+- Using `docker` command:
 
 ```console
-$ docker exec wordpress wp help
+docker exec wordpress wp help
 ```
 
 Find more information about parameters available in the tool in the [official documentation](https://make.wordpress.org/cli/handbook/config/).
@@ -422,13 +422,13 @@ Find more information about parameters available in the tool in the [official do
 The Bitnami WordPress Docker image sends the container logs to `stdout`. To view the logs:
 
 ```console
-$ docker logs wordpress
+docker logs wordpress
 ```
 
 Or using Docker Compose:
 
 ```console
-$ docker-compose logs wordpress
+docker-compose logs wordpress
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -442,13 +442,13 @@ To backup your data, configuration and logs, follow these simple steps:
 #### Step 1: Stop the currently running container
 
 ```console
-$ docker stop wordpress
+docker stop wordpress
 ```
 
 Or using Docker Compose:
 
 ```console
-$ docker-compose stop wordpress
+docker-compose stop wordpress
 ```
 
 #### Step 2: Run the backup command
@@ -456,7 +456,7 @@ $ docker-compose stop wordpress
 We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
 
 ```console
-$ docker run --rm -v /path/to/wordpress-backups:/backups --volumes-from wordpress busybox \
+docker run --rm -v /path/to/wordpress-backups:/backups --volumes-from wordpress busybox \
   cp -a /bitnami/wordpress /backups/latest
 ```
 
@@ -486,14 +486,14 @@ For the WordPress container:
 
 ### Upgrade this image
 
-Bitnami provides up-to-date versions of MariaDB and WordPress, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the WordPress container. For the MariaDB upgrade see https://github.com/bitnami/containers/tree/main/bitnami/mariadb#upgrade-this-image
+Bitnami provides up-to-date versions of MariaDB and WordPress, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the WordPress container. For the MariaDB upgrade see <https://github.com/bitnami/containers/tree/main/bitnami/mariadb#upgrade-this-image>
 
 The `bitnami/wordpress:latest` tag always points to the most recent release. To get the most recent release you can simple repull the `latest` tag from the Docker Hub with `docker pull bitnami/wordpress:latest`. However it is recommended to use [tagged versions](https://hub.docker.com/r/bitnami/wordpress/tags/).
 
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/wordpress:latest
+docker pull bitnami/wordpress:latest
 ```
 
 #### Step 2: Stop the running container
@@ -501,7 +501,7 @@ $ docker pull bitnami/wordpress:latest
 Stop the currently running container using the command
 
 ```console
-$ docker-compose stop wordpress
+docker-compose stop wordpress
 ```
 
 #### Step 3: Take a snapshot of the application state
@@ -521,7 +521,7 @@ docker-compose rm -v wordpress
 Update the image tag in `docker-compose.yml` and re-create your container with the new image:
 
 ```console
-$ docker-compose up -d
+docker-compose up -d
 ```
 
 ## Customize this image
@@ -643,7 +643,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

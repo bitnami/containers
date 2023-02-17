@@ -11,14 +11,14 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run -it --name mxnet bitnami/mxnet
+docker run -it --name mxnet bitnami/mxnet
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/mxnet/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/mxnet/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 ## Why use Bitnami Images?
@@ -47,21 +47,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami Apache MXNet (Incubating) Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mxnet).
 
 ```console
-$ docker pull bitnami/mxnet:latest
+docker pull bitnami/mxnet:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/mxnet/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/mxnet:[TAG]
+docker pull bitnami/mxnet:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Entering the REPL
@@ -69,7 +69,7 @@ $ docker build -t bitnami/APP:latest .
 By default, running this image will drop you into the Python REPL, where you can interactively test and try things out with mxnet in Python.
 
 ```console
-$ docker run -it --name mxnet bitnami/mxnet
+docker run -it --name mxnet bitnami/mxnet
 ```
 
 ## Configuration
@@ -79,7 +79,7 @@ $ docker run -it --name mxnet bitnami/mxnet
 The default work directory for the mxnet image is `/app`. You can mount a folder from your host here that includes your mxnet script, and run it normally using the `python` command.
 
 ```console
-$ docker run -it --name mxnet -v /path/to/app:/app bitnami/mxnet \
+docker run -it --name mxnet -v /path/to/app:/app bitnami/mxnet \
   python script.py
 ```
 
@@ -88,7 +88,7 @@ $ docker run -it --name mxnet -v /path/to/app:/app bitnami/mxnet \
 If your mxnet app has a `requirements.txt` defining your app's dependencies, you can install the dependencies before running your app.
 
 ```console
-$ docker run -it --name mxnet -v /path/to/app:/app bitnami/mxnet \
+docker run -it --name mxnet -v /path/to/app:/app bitnami/mxnet \
   sh -c "pip install -y --file requirements.txt && python script.py"
 ```
 
@@ -101,7 +101,7 @@ Bitnami provides up-to-date versions of Apache MXNet (Incubating), including sec
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/mxnet:latest
+docker pull bitnami/mxnet:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to `bitnami/mxnet:latest`.
@@ -109,13 +109,13 @@ or if you're using Docker Compose, update the value of the image property to `bi
 #### Step 2: Remove the currently running container
 
 ```console
-$ docker rm -v mxnet
+docker rm -v mxnet
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose rm -v mxnet
+docker-compose rm -v mxnet
 ```
 
 #### Step 3: Run the new image
@@ -123,13 +123,13 @@ $ docker-compose rm -v mxnet
 Re-create your container from the new image.
 
 ```console
-$ docker run --name mxnet bitnami/mxnet:latest
+docker run --name mxnet bitnami/mxnet:latest
 ```
 
 or using Docker Compose:
 
 ```console
-$ docker-compose up mxnet
+docker-compose up mxnet
 ```
 
 ## Contributing

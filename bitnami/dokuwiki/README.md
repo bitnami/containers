@@ -11,8 +11,8 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/dokuwiki/docker-compose.yml > docker-compose.yml
-$ docker-compose up -d
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/dokuwiki/docker-compose.yml > docker-compose.yml
+docker-compose up -d
 ```
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
@@ -43,21 +43,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami DokuWiki Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/dokuwiki).
 
 ```console
-$ docker pull bitnami/dokuwiki:latest
+docker pull bitnami/dokuwiki:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/dokuwiki/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/dokuwiki:[TAG]
+docker pull bitnami/dokuwiki:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Persisting your application
@@ -93,13 +93,13 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 #### Step 1: Create a network (if it does not exist)
 
 ```console
-$ docker network create dokuwiki-network
+docker network create dokuwiki-network
 ```
 
 #### Step 2. Create the DokuWiki container with host volumes
 
 ```console
-$ docker run -d --name dokuwiki \
+docker run -d --name dokuwiki \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --network dokuwiki-network \
@@ -109,11 +109,11 @@ $ docker run -d --name dokuwiki \
 
 ## Configuration
 
-## Environment variables
+### Environment variables
 
 When you start the DokuWiki image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
- * For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/dokuwiki/docker-compose.yml) file present in this repository:
+* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/dokuwiki/docker-compose.yml) file present in this repository:
 
 ```yaml
 dokuwiki:
@@ -123,10 +123,10 @@ dokuwiki:
   ...
 ```
 
- * For manual execution add a `--env` option with each variable and value:
+* For manual execution add a `--env` option with each variable and value:
 
   ```console
-  $ docker run -d --name dokuwiki -p 80:8080 -p 443:8443 \
+  docker run -d --name dokuwiki -p 80:8080 -p 443:8443 \
     --env DOKUWIKI_PASSWORD=my_password \
     --network dokuwiki-tier \
     --volume /path/to/dokuwiki-persistence:/bitnami/dokuwiki \
@@ -135,37 +135,37 @@ dokuwiki:
 
 Available environment variables:
 
-##### User and Site configuration
+#### User and Site configuration
 
- - `DOKUWIKI_USERNAME`: Dokuwiki application username. Default: **user**
- - `DOKUWIKI_FULL_NAME`: Dokuwiki application user full name. Default: **Full Name**
- - `DOKUWIKI_PASSWORD`: Dokuwiki application password. Default: **bitnami1**
- - `DOKUWIKI_EMAIL`: Dokuwiki application email. Default: **user@example.com**
- - `DOKUWIKI_WIKI_NAME`: Dokuwiki wiki name. Default: **Bitnami DokuWiki**
+* `DOKUWIKI_USERNAME`: Dokuwiki application username. Default: **user**
+* `DOKUWIKI_FULL_NAME`: Dokuwiki application user full name. Default: **Full Name**
+* `DOKUWIKI_PASSWORD`: Dokuwiki application password. Default: **bitnami1**
+* `DOKUWIKI_EMAIL`: Dokuwiki application email. Default: **user@example.com**
+* `DOKUWIKI_WIKI_NAME`: Dokuwiki wiki name. Default: **Bitnami DokuWiki**
 
-##### PHP configuration
+#### PHP configuration
 
-- `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
-- `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
-- `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. No default.
-- `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
-- `PHP_MAX_INPUT_VARS`: Maximum amount of input variables for PHP scripts. No default.
-- `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
-- `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
-- `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
+* `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
+* `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
+* `PHP_MAX_EXECUTION_TIME`: Maximum execution time for PHP scripts. No default.
+* `PHP_MAX_INPUT_TIME`: Maximum input time for PHP scripts. No default.
+* `PHP_MAX_INPUT_VARS`: Maximum amount of input variables for PHP scripts. No default.
+* `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
+* `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
+* `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
 
 ## Logging
 
 The Bitnami DokuWiki Docker image sends the container logs to `stdout`. To view the logs:
 
 ```console
-$ docker logs dokuwiki
+docker logs dokuwiki
 ```
 
 Or using Docker Compose:
 
 ```console
-$ docker-compose logs dokuwiki
+docker-compose logs dokuwiki
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -179,13 +179,13 @@ To backup your data, configuration and logs, follow these simple steps:
 #### Step 1: Stop the currently running container
 
 ```console
-$ docker stop dokuwiki
+docker stop dokuwiki
 ```
 
 Or using Docker Compose:
 
 ```console
-$ docker-compose stop dokuwiki
+docker-compose stop dokuwiki
 ```
 
 #### Step 2: Run the backup command
@@ -193,7 +193,7 @@ $ docker-compose stop dokuwiki
 We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
 
 ```console
-$ docker run --rm -v /path/to/dokuwiki-backups:/backups --volumes-from dokuwiki busybox \
+docker run --rm -v /path/to/dokuwiki-backups:/backups --volumes-from dokuwiki busybox \
   cp -a /bitnami/dokuwiki /backups/latest
 ```
 
@@ -218,7 +218,7 @@ Bitnami provides up-to-date versions of DokuWiki, including security patches, so
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/dokuwiki:latest
+docker pull bitnami/dokuwiki:latest
 ```
 
 #### Step 2: Stop the running container
@@ -226,7 +226,7 @@ $ docker pull bitnami/dokuwiki:latest
 Stop the currently running container using the command
 
 ```console
-$ docker-compose stop dokuwiki
+docker-compose stop dokuwiki
 ```
 
 #### Step 3: Take a snapshot of the application state
@@ -246,7 +246,7 @@ docker-compose rm -v dokuwiki
 Update the image tag in `docker-compose.yml` and re-create your container with the new image:
 
 ```console
-$ docker-compose up -d
+docker-compose up -d
 ```
 
 ## Customize this image
@@ -257,10 +257,10 @@ The Bitnami DokuWiki Docker image is designed to be extended so it can be used a
 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
-- Settings that can be adapted using environment variables. For instance, you can change the ports used by Apache for HTTP and HTTPS, by setting the environment variables `APACHE_HTTP_PORT_NUMBER` and `APACHE_HTTPS_PORT_NUMBER` respectively.
-- [Adding custom virtual hosts](https://github.com/bitnami/containers/blob/main/bitnami/apache#adding-custom-virtual-hosts).
-- [Replacing the 'httpd.conf' file](https://github.com/bitnami/containers/blob/main/bitnami/apache#full-configuration).
-- [Using custom SSL certificates](https://github.com/bitnami/containers/blob/main/bitnami/apache#using-custom-ssl-certificates).
+* Settings that can be adapted using environment variables. For instance, you can change the ports used by Apache for HTTP and HTTPS, by setting the environment variables `APACHE_HTTP_PORT_NUMBER` and `APACHE_HTTPS_PORT_NUMBER` respectively.
+* [Adding custom virtual hosts](https://github.com/bitnami/containers/blob/main/bitnami/apache#adding-custom-virtual-hosts).
+* [Replacing the 'httpd.conf' file](https://github.com/bitnami/containers/blob/main/bitnami/apache#full-configuration).
+* [Using custom SSL certificates](https://github.com/bitnami/containers/blob/main/bitnami/apache#using-custom-ssl-certificates).
 
 If your desired customizations cannot be covered using the methods mentioned above, extend the image. To do so, create your own image using a Dockerfile with the format below:
 
@@ -272,9 +272,9 @@ FROM bitnami/dokuwiki
 
 Here is an example of extending the image with the following modifications:
 
-- Install the `vim` editor
-- Modify the Apache configuration file
-- Modify the ports used by Apache
+* Install the `vim` editor
+* Modify the Apache configuration file
+* Modify the ports used by Apache
 
 ```Dockerfile
 FROM bitnami/dokuwiki
@@ -316,38 +316,38 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 
 ### 20200729.0.0-debian-10-r6
 
-- Enabled nice/friendly URLs (#52)
+* Enabled nice/friendly URLs (#52)
 
 ### 20180422.4.0-debian-10-r0
 
-- Changed versionioning to be shorter and more similar to the official version name.
+* Changed versionioning to be shorter and more similar to the official version name.
 
 ### 0.20180422.202005011246-debian-10-r68
 
-- The size of the container image has been decreased.
-- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
-- The DokuWiki container image has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the Apache daemon was started as the `daemon` user. From now on, both the container and the Apache daemon run as user `1001`. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile, or `user: root` in `docker-compose.yml`. Consequences:
-  - The HTTP/HTTPS ports exposed by the container are now `8080/8443` instead of `80/443`.
-  - Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the DokuWiki site by exporting its content, and importing it on a new DokuWiki container. Follow the steps in [Backing up your container](#backing-up-your-container) and [Restoring a backup](#restoring-a-backup) to migrate the data between the old and new container.
+* The size of the container image has been decreased.
+* The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+* The DokuWiki container image has been migrated to a "non-root" user approach. Previously the container ran as the `root` user and the Apache daemon was started as the `daemon` user. From now on, both the container and the Apache daemon run as user `1001`. You can revert this behavior by changing `USER 1001` to `USER root` in the Dockerfile, or `user: root` in `docker-compose.yml`. Consequences:
+  * The HTTP/HTTPS ports exposed by the container are now `8080/8443` instead of `80/443`.
+  * Backwards compatibility is not guaranteed when data is persisted using docker or docker-compose. We highly recommend migrating the DokuWiki site by exporting its content, and importing it on a new DokuWiki container. Follow the steps in [Backing up your container](#backing-up-your-container) and [Restoring a backup](#restoring-a-backup) to migrate the data between the old and new container.
 
 ### 0.20180422.201901061035-debian-9-r114 and 0.20180422.201901061035-ol-7-r128
 
-- This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
-- The Apache configuration volume (`/bitnami/apache`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the Apache configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom Apache configuration files are advised to mount a volume for the configuration at `/opt/bitnami/apache/conf`, or mount specific configuration files individually.
-- The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
-- Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`.
+* This image has been adapted so it's easier to customize. See the [Customize this image](#customize-this-image) section for more information.
+* The Apache configuration volume (`/bitnami/apache`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the Apache configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom Apache configuration files are advised to mount a volume for the configuration at `/opt/bitnami/apache/conf`, or mount specific configuration files individually.
+* The PHP configuration volume (`/bitnami/php`) has been deprecated, and support for this feature will be dropped in the near future. Until then, the container will enable the PHP configuration from that volume if it exists. By default, and if the configuration volume does not exist, the configuration files will be regenerated each time the container is created. Users wanting to apply custom PHP configuration files are advised to mount a volume for the configuration at `/opt/bitnami/php/conf`, or mount specific configuration files individually.
+* Enabling custom Apache certificates by placing them at `/opt/bitnami/apache/certs` has been deprecated, and support for this functionality will be dropped in the near future. Users wanting to enable custom certificates are advised to mount their certificate files on top of the preconfigured ones at `/certs`.
 
 ### 0.20170219.201708232029-r3
 
-- Custom smileys, available in `lib/images/smileys/local`, are now persisted.
-- Address issue [#40](https://github.com/bitnami/bitnami-docker-dokuwiki/issues/40).
-- In order to upgrade your image from previous versions, see the workaround provided on issue [#42](https://github.com/bitnami/bitnami-docker-dokuwiki/issues/42).
+* Custom smileys, available in `lib/images/smileys/local`, are now persisted.
+* Address issue [#40](https://github.com/bitnami/bitnami-docker-dokuwiki/issues/40).
+* In order to upgrade your image from previous versions, see the workaround provided on issue [#42](https://github.com/bitnami/bitnami-docker-dokuwiki/issues/42).
 
 ### 0.20180422.201805030840-r5
 
-- Custom InterWiki shortcut icons, available in `lib/images/interwiki/`, are now persisted.
-- Address issue [#40](https://github.com/bitnami/bitnami-docker-dokuwiki/issues/40).
-- In order to upgrade your image from previous versions, see the workaround provided on issue [#42](https://github.com/bitnami/bitnami-docker-dokuwiki/issues/42).
+* Custom InterWiki shortcut icons, available in `lib/images/interwiki/`, are now persisted.
+* Address issue [#40](https://github.com/bitnami/bitnami-docker-dokuwiki/issues/40).
+* In order to upgrade your image from previous versions, see the workaround provided on issue [#42](https://github.com/bitnami/bitnami-docker-dokuwiki/issues/42).
 
 ## Contributing
 
@@ -373,7 +373,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
