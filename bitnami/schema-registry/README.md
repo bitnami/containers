@@ -72,7 +72,7 @@ When you start the Confluent Schema Registry image, you can adjust the configura
 * For manual execution add a `--env` option with each variable and value:
 
     ```console
-    docker run -d --name schema-registry -p 8081:8081 \
+    $ docker run -d --name schema-registry -p 8081:8081 \
       --env SCHEMA_REGISTRY_DEBUG=true \
       --network schema-registry-tier \
       --volume /path/to/schema-registry-persistence:/bitnami \

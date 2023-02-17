@@ -1,23 +1,23 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "9ab9654690d90d3c49ff66fb1eb286487e318adc899d036bc45922f6b176865b",
+        "digest": "f6056076afb745fd7d9d87d20f71e7248d63330352cf5ae0be2130b7f44a8cfa",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-1"
+        "version": "1.16.0-2"
     },
     "java": {
         "arch": "amd64",
-        "digest": "f8c3013925073f94edc495584b76f0b08c867ba35c524e2b262e47e815a443b9",
+        "digest": "cd40a6df619d734d300324ad671f34323152e84682bc998da1330f1a7f0acfa6",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.18-10-0"
+        "version": "11.0.18-10-1"
     },
     "schema-registry": {
         "arch": "amd64",
-        "digest": "681d62470352f8a992d5a4e2f970f44110adcbe736e29337273ff4ac5e2dfb66",
+        "digest": "2e7a511f447d2cf566efd10247e793c5895297c6e73fd182cc3fcce5097754a3",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.1.9-1"
+        "version": "6.1.9-2"
     }
 }
