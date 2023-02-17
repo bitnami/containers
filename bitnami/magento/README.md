@@ -88,7 +88,7 @@ docker network create magento-network
 #### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
 
 ```console
-docker volume create --name mariadb_data
+$ docker volume create --name mariadb_data
 docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_magento \
@@ -102,7 +102,7 @@ docker run -d --name mariadb \
 #### Step 3: Create volumes for Magento persistence and launch the container
 
 ```console
-docker volume create --name magento_data
+$ docker volume create --name magento_data
 docker run -d --name magento \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
@@ -385,7 +385,7 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 For the MariaDB database container:
 
 ```diff
- docker run -d --name mariadb \
+ $ docker run -d --name mariadb \
    ...
 -  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
 +  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
@@ -395,7 +395,7 @@ For the MariaDB database container:
 For the Magento container:
 
 ```diff
- docker run -d --name magento \
+ $ docker run -d --name magento \
    ...
 -  --volume /path/to/magento-persistence:/bitnami/magento \
 +  --volume /path/to/magento-backups/latest:/bitnami/magento \
