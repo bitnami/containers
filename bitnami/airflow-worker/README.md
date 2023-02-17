@@ -88,7 +88,7 @@ If you want to run the application manually instead of using `docker-compose`, t
       bitnami/redis:latest
     ```
 
-4. Launch the {{ .Name }} web container
+4. Launch the Apache Airflow Worker web container
 
     ```console
     docker run -d --name airflow -p 8080:8080 \
@@ -106,7 +106,7 @@ If you want to run the application manually instead of using `docker-compose`, t
       bitnami/airflow:latest
     ```
 
-5. Launch the {{ .Name }} scheduler container
+5. Launch the Apache Airflow Worker scheduler container
 
     ```console
     docker run -d --name airflow-scheduler \
@@ -121,7 +121,7 @@ If you want to run the application manually instead of using `docker-compose`, t
       bitnami/airflow-scheduler:latest
     ```
 
-6. Launch the {{ .Name }} worker container
+6. Launch the Apache Airflow Worker worker container
 
     ```console
     docker run -d --name airflow-worker \
