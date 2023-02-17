@@ -1,6 +1,7 @@
 version: '2'
 
 services:
+  # [TEST]
   mongodb:
     image: docker.io/bitnami/mongodb:5.0
     environment:
