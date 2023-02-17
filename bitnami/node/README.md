@@ -184,7 +184,7 @@ docker run -it --name node -v /path/to/app:/app -P bitnami/node node index.js
 Run `docker port` to determine the random port Docker assigned.
 
 ```console
-docker port node
+$ docker port node
 3000/tcp -> 0.0.0.0:32769
 ```
 
