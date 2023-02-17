@@ -2,14 +2,14 @@ FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
-LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
-      org.opencontainers.image.description="Application packaged by Bitnami" \
+LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
+      org.opencontainers.image.created="2023-02-17T18:31:36Z" \
+      org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.4.0-debian-11-r3" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/supabase-realtime" \
+      org.opencontainers.image.ref.name="2.5.1-debian-11-r0" \
       org.opencontainers.image.title="supabase-realtime" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.4.0"
+      org.opencontainers.image.version="2.5.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libgcc-s1 libssl1.1 libstdc++6 libtinfo6 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "supabase-realtime-2.4.0-0-linux-${OS_ARCH}-debian-11" \
+      "supabase-realtime-2.5.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -39,7 +39,7 @@ RUN apt-get autoremove --purge -y curl && \
 RUN useradd -r -u 1001 -g root supabase-realtime
 RUN chmod g+rwX -R /opt/bitnami/supabase-realtime/lib/tzdata-*/priv
 
-ENV APP_VERSION="2.4.0" \
+ENV APP_VERSION="2.5.1" \
     BITNAMI_APP_NAME="supabase-realtime" \
     PATH="/opt/bitnami/supabase-realtime/bin:$PATH"
 
