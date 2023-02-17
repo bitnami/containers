@@ -89,7 +89,7 @@ docker network create odoo-network
 #### Step 2: Create a volume for PostgreSQL persistence and create a PostgreSQL container
 
 ```console
-docker volume create --name postgresql_data
+$ docker volume create --name postgresql_data
 docker run -d --name postgresql \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env POSTGRESQL_PASSWORD=bitnami \
@@ -101,7 +101,7 @@ docker run -d --name postgresql \
 #### Step 3: Create volumes for Odoo persistence and launch the container
 
 ```console
-docker volume create --name odoo_data
+$ docker volume create --name odoo_data
 docker run -d --name odoo \
   -p 80:8069 \
   --env ALLOW_EMPTY_PASSWORD=yes \
@@ -199,7 +199,7 @@ When you start the Odoo image, you can adjust the configuration of the instance 
 - For manual execution add a `--env` option with each variable and value:
 
     ```console
-    docker run -d --name odoo -p 80:8069 \
+    $ docker run -d --name odoo -p 80:8069 \
       --env ODOO_PASSWORD=my_password \
       --network odoo-tier \
       --volume /path/to/odoo-persistence:/bitnami \
@@ -270,7 +270,7 @@ This would be an example of SMTP configuration using a Gmail account:
 - For manual execution:
 
     ```console
-    docker run -d --name odoo -p 80:8069 \
+    $ docker run -d --name odoo -p 80:8069 \
       --env ODOO_SMTP_HOST=smtp.gmail.com \
       --env ODOO_SMTP_PORT_NUMBER=587 \
       --env ODOO_SMTP_USER=your_email@gmail.com \
@@ -301,7 +301,7 @@ The Bitnami Odoo container supports connecting the Odoo application to an extern
 - For manual execution:
 
     ```console
-    docker run -d --name odoo\
+    $ docker run -d --name odoo\
       -p 80:8069 \
       --network odoo-network \
       --env ODOO_DATABASE_HOST=mariadb_host \
@@ -363,7 +363,7 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 For the PostgreSQL database container:
 
 ```diff
- docker run -d --name postgresql \
+ $ docker run -d --name postgresql \
    ...
 -  --volume /path/to/postgresql-persistence:/bitnami/postgresql \
 +  --volume /path/to/postgresql-backups/latest:/bitnami/postgresql \
@@ -373,7 +373,7 @@ For the PostgreSQL database container:
 For the Odoo container:
 
 ```diff
- docker run -d --name odoo \
+ $ docker run -d --name odoo \
    ...
 -  --volume /path/to/odoo-persistence:/bitnami/odoo \
 +  --volume /path/to/odoo-backups/latest:/bitnami/odoo \
