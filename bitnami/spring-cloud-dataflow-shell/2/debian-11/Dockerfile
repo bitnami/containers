@@ -2,14 +2,14 @@ FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
-LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
-      org.opencontainers.image.description="Application packaged by Bitnami" \
+LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
+      org.opencontainers.image.created="2023-02-17T18:27:41Z" \
+      org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.10.0-debian-11-r22" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/spring-cloud-dataflow-shell" \
+      org.opencontainers.image.ref.name="2.10.1-debian-11-r0" \
       org.opencontainers.image.title="spring-cloud-dataflow-shell" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.10.0"
+      org.opencontainers.image.version="2.10.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,8 +22,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libgcc-s1 locales procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-1.8.362-0-linux-${OS_ARCH}-debian-11" \
-      "spring-cloud-dataflow-shell-2.10.0-1-linux-${OS_ARCH}-debian-11" \
+      "java-1.8.362-1-linux-${OS_ARCH}-debian-11" \
+      "spring-cloud-dataflow-shell-2.10.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -46,7 +46,7 @@ RUN touch /opt/bitnami/spring-cloud-dataflow-shell/spring-cloud-dataflow-shell.l
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
-ENV APP_VERSION="2.10.0" \
+ENV APP_VERSION="2.10.1" \
     BITNAMI_APP_NAME="spring-cloud-dataflow-shell" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
