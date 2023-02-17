@@ -1,30 +1,30 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "9ab9654690d90d3c49ff66fb1eb286487e318adc899d036bc45922f6b176865b",
+        "digest": "f6056076afb745fd7d9d87d20f71e7248d63330352cf5ae0be2130b7f44a8cfa",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-1"
+        "version": "1.16.0-2"
     },
     "pgpool": {
         "arch": "amd64",
-        "digest": "c9edd2e61b80895c6ea24f6c9ad1d67f4bc583b18a646392d518bebcd275ae74",
+        "digest": "97cd5266b133b64400d7daf105bbced5972d77f53b68d96b829c982e7ea60265",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.4.2-1"
+        "version": "4.4.2-2"
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "ee21941aa945ca1e03044390aa486f5139f7fbd47a8eb8fd60bbbb9180f5baa8",
+        "digest": "fd6d0139da68f4b4352ddb527e93bbc4ff30583ab27e6c707bf7eaaf670f36c5",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.7.0-0"
+        "version": "14.7.0-1"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "f9199cd66b92fef328ecfbc5ffbc8f14be33257a4e34b8c6ba35a730c5a2f59d",
+        "digest": "be7c393d598ddf16d1c3c008a67b87879e48aca62071a208583390f2b41e6744",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-0"
+        "version": "1.0.6-1"
     }
 }
