@@ -86,7 +86,7 @@ docker network create sonarqube-network
 #### Step 2: Create a volume for PostgreSQL persistence and create a PostgreSQL container
 
 ```console
-docker volume create --name postgresql_data
+$ docker volume create --name postgresql_data
 docker run -d --name postgresql \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env POSTGRESQL_USERNAME=bn_sonarqube \
@@ -100,7 +100,7 @@ docker run -d --name postgresql \
 #### Step 3: Create volumes for SonarQube&trade; persistence and launch the container
 
 ```console
-docker volume create --name sonarqube_data
+$ docker volume create --name sonarqube_data
 docker run -d --name sonarqube \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
@@ -204,7 +204,7 @@ When you start the SonarQube&trade; image, you can adjust the configuration of t
 - For manual execution add a `--env` option with each variable and value:
 
     ```console
-    docker run -d --name sonarqube -p 80:8080 -p 443:8443 \
+    $ docker run -d --name sonarqube -p 80:8080 -p 443:8443 \
       --env SONARQUBE_PASSWORD=my_password \
       --network sonarqube-tier \
       --volume /path/to/sonarqube-persistence:/bitnami \
@@ -287,7 +287,7 @@ This would be an example of SMTP configuration using a Gmail account:
 - For manual execution:
 
     ```console
-    docker run -d --name sonarqube -p 80:8080 -p 443:8443 \
+    $ docker run -d --name sonarqube -p 80:8080 -p 443:8443 \
       --env SONARQUBE_DATABASE_USER=bn_sonarqube \
       --env SONARQUBE_DATABASE_NAME=bitnami_sonarqube \
       --env SONARQUBE_SMTP_HOST=smtp.gmail.com \
@@ -322,7 +322,7 @@ The Bitnami SonarQube&trade; container supports connecting the SonarQube&trade; 
 - For manual execution:
 
     ```console
-    docker run -d --name sonarqube\
+    $ docker run -d --name sonarqube\
       -p 8080:8080 -p 8443:8443 \
       --network sonarqube-network \
       --env SONARQUBE_DATABASE_HOST=mariadb_host \
@@ -386,7 +386,7 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 For the PostgreSQL database container:
 
 ```diff
- docker run -d --name postgresql \
+ $ docker run -d --name postgresql \
    ...
 -  --volume /path/to/postgresql-persistence:/bitnami/postgresql \
 +  --volume /path/to/postgresql-backups/latest:/bitnami/postgresql \
@@ -396,7 +396,7 @@ For the PostgreSQL database container:
 For the SonarQube&trade; container:
 
 ```diff
- docker run -d --name sonarqube \
+ $ docker run -d --name sonarqube \
    ...
 -  --volume /path/to/sonarqube-persistence:/bitnami/sonarqube \
 +  --volume /path/to/sonarqube-backups/latest:/bitnami/sonarqube \
