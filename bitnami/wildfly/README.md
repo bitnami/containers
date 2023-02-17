@@ -120,7 +120,7 @@ docker run --name wildfly -P bitnami/wildfly:latest
 Run `docker port` to determine the random ports Docker assigned.
 
 ```console
-docker port wildfly
+$ docker port wildfly
 8080/tcp -> 0.0.0.0:32775
 9990/tcp -> 0.0.0.0:32774
 ```
@@ -171,7 +171,7 @@ docker run -it --rm \
 You can also run the client in the same container as the server using the Docker [exec](https://docs.docker.com/reference/commandline/cli/#exec) command.
 
 ```console
-docker exec -it wildfly-server \
+$ docker exec -it wildfly-server \
     jboss-cli.sh --controller=wildfly-server:9990 --connect
 ```
 
