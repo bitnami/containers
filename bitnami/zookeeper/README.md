@@ -138,7 +138,7 @@ docker run -it --rm \
     bitnami/zookeeper:latest zkCli.sh -server zookeeper-server:2181  get /
 ```
 
-### Using Docker Compose
+### Using a Docker Compose file
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the Apache ZooKeeper server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
@@ -236,7 +236,7 @@ services:
   ...
 ```
 
-### ZooKeeper configuration
+### Apache ZooKeeper Configuration
 
 The image looks for configuration in the `conf/` directory of `/opt/bitnami/zookeeper`.
 
@@ -325,7 +325,7 @@ services:
 
 ### Setting up an Apache ZooKeeper ensemble
 
-A Apache ZooKeeper (<https://zookeeper.apache.org/doc/r3.1.2/zookeeperAdmin.html>) cluster can easily be setup with the Bitnami Apache ZooKeeper Docker image using the following environment variables:
+A Apache ZooKeeper (https://zookeeper.apache.org/doc/r3.1.2/zookeeperAdmin.html) cluster can easily be setup with the Bitnami Apache ZooKeeper Docker image using the following environment variables:
 
 * `ZOO_SERVERS`: Comma, space or semi-colon separated list of servers. This can be done with or without specifying the ID of the server in the ensemble. No defaults. Examples:
 * without Server ID - zoo1:2888:3888,zoo2:2888:3888
@@ -433,7 +433,7 @@ services:
       - ZOO_SERVERS=zookeeper1:2888:3888,zookeeper2:2888:3888,0.0.0.0:2888:3888
 ```
 
-### Start Zookeeper with TLS
+### Start Apache ZooKeeper with TLS
 
 ```console
 docker run --name zookeeper \
