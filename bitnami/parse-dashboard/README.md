@@ -79,7 +79,7 @@ If you want to run the application manually instead of using docker-compose, the
     docker run -d -p 1337:1337 --name parse --net=parse_dashboard-tier bitnami/parse
     ```
 
-4. Run the {{ .Name }} container:
+4. Run the Parse Dashboard container:
 
     ```console
     docker run -d -p 80:4040 --name parse-dashboard --net=parse_dashboard-tier bitnami/parse-dashboard
@@ -152,7 +152,7 @@ In this case you need to specify the directories to mount on the run command. Th
       bitnami/parse:latest
     ```
 
-4. Run the {{ .Name }} container:
+4. Run the Parse Dashboard container:
 
     ```console
     docker run -d --name parse-dashboard -p 80:4040 \
@@ -162,7 +162,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 ## Upgrade this application
 
-Bitnami provides up-to-date versions of {{ .Name }}, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the {{ .Name }} container.
+Bitnami provides up-to-date versions of Parse Dashboard, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Parse Dashboard container.
 
 1. Get the updated images:
 
