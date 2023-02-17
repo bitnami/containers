@@ -88,8 +88,8 @@ If you want to run the application manually instead of using docker-compose, the
 ##### 2. Create a volume for MariaDB persistence and create a MariaDB container
 
   ```console
-  docker volume create --name mariadb_data
-  docker run -d --name mariadb \
+ docker volume create --name mariadb_data
+ docker run -d --name mariadb \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e MARIADB_USER=bn_drupal \
     -e MARIADB_DATABASE=bitnami_drupal \
@@ -101,8 +101,8 @@ If you want to run the application manually instead of using docker-compose, the
 ##### 3. Create volumes for Drupal persistence and launch the container
 
   ```console
-  docker volume create --name drupal_data
-  docker run -d --name drupal -p 8080:8080 -p 8443:8443 \
+ docker volume create --name drupal_data
+ docker run -d --name drupal -p 8080:8080 -p 8443:8443 \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e DRUPAL_DATABASE_USER=bn_drupal \
     -e DRUPAL_DATABASE_NAME=bitnami_drupal \
@@ -184,9 +184,9 @@ docker run -d --name drupal \
   bitnami/drupal-nginx:latest
 ```
 
-### Configuration
+## Configuration
 
-#### Environment variables
+### Environment variables
 
 When you start the Drupal image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
@@ -212,7 +212,7 @@ drupal:
 
 Available environment variables:
 
-##### User and Site configuration
+#### User and Site configuration
 
 * `DRUPAL_PROFILE`: Drupal installation profile. Default: **standard**
 * `DRUPAL_SITE_NAME`: Drupal blog name. Default: **My blog**
@@ -224,7 +224,7 @@ Available environment variables:
 * `DRUPAL_CONFIG_SYNC_DIR`: Drupal sync configuration directory location. Only used when `DRUPAL_SKIP_BOOTSTRAP` is enabled. No defaults.
 * `DRUPAL_HASH_SALT`: Drupal string used to generate random values. Only used when `DRUPAL_SKIP_BOOTSTRAP` is enabled. No defaults.
 
-##### Use an existing database
+#### Use an existing database
 
 * `DRUPAL_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
 * `DRUPAL_DATABASE_PORT_NUMBER`: Port used by MariaDB server. Default: **3306**
@@ -234,7 +234,7 @@ Available environment variables:
 * `DRUPAL_DATABASE_TLS_CA_FILE`: TLS CA certificate for connections. No defaults.
 * `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-##### Create a database for Drupal using mysql-client
+#### Create a database for Drupal using mysql-client
 
 * `MYSQL_CLIENT_FLAVOR`: SQL database flavor. Valid values: `mariadb` or `mysql`. Default: **mariadb**.
 * `MYSQL_CLIENT_DATABASE_HOST`: Hostname for MariaDB server. Default: **mariadb**
@@ -254,7 +254,7 @@ Available environment variables:
 * `MYSQL_CLIENT_SSL_KEY_FILE`: Path to the SSL CA file for the new database. No defaults
 * `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
-##### SMTP Configuration
+#### SMTP Configuration
 
 To configure Drupal to send email using SMTP you can set the following environment variables:
 
@@ -264,7 +264,7 @@ To configure Drupal to send email using SMTP you can set the following environme
 * `DRUPAL_SMTP_PASSWORD`: SMTP account password.
 * `DRUPAL_SMTP_PROTOCOL`: SMTP protocol. (standard, tls, ssl).
 
-##### PHP configuration
+#### PHP configuration
 
 * `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
 * `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
@@ -275,7 +275,7 @@ To configure Drupal to send email using SMTP you can set the following environme
 * `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
 * `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
 
-###### Example
+#### Example
 
 This would be an example of SMTP configuration using a Gmail account:
 
@@ -310,6 +310,7 @@ This would be an example of SMTP configuration using a Gmail account:
     --network drupal-tier \
     --volume /path/to/drupal-persistence:/bitnami \
     bitnami/drupal-nginx:latest
+
   ```
 
 ### Logging
@@ -362,7 +363,7 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 For the MariaDB database container:
 
 ```diff
- docker run -d --name mariadb \
+ $ docker run -d --name mariadb \
    ...
 -  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
 +  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
@@ -372,7 +373,7 @@ For the MariaDB database container:
 For the Drupal container:
 
 ```diff
- docker run -d --name drupal \
+ $ docker run -d --name drupal \
    ...
 -  --volume /path/to/drupal-persistence:/bitnami/drupal \
 +  --volume /path/to/drupal-backups/latest:/bitnami/drupal \
