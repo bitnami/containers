@@ -90,7 +90,7 @@ docker network create jenkins-network
 #### Step 2: Create volumes for Jenkins persistence and launch the container
 
 ```console
-docker volume create --name jenkins_data
+$ docker volume create --name jenkins_data
 docker run -d -p 80:8080 --name jenkins \
   --network jenkins-network \
   --volume jenkins_data:/bitnami/jenkins \
@@ -162,7 +162,7 @@ When you start the Jenkins image, you can adjust the configuration of the instan
 * For manual execution add a `--env` option with each variable and value:
 
     ```console
-    docker run -d -p 80:8080 --name jenkins \
+    $ docker run -d -p 80:8080 --name jenkins \
       --env JENKINS_PASSWORD=my_password \
       --network jenkins-network \
       --volume /path/to/jenkins-persistence:/bitnami/jenkins \
@@ -213,8 +213,8 @@ To backup your data, configuration and logs, follow these simple steps:
 
 #### Step 1: Stop the currently running container
 
-* For docker-compose: `docker-compose stop jenkins`
-* For manual execution: `docker stop jenkins`
+* For docker-compose: `$ docker-compose stop jenkins`
+* For manual execution: `$ docker stop jenkins`
 
 #### Step 2: Run the backup command
 
@@ -230,7 +230,7 @@ docker run --rm -v /path/to/jenkins-backups:/backups --volumes-from jenkins bitn
 Restoring a backup is as simple as mounting the backup as volumes in the containers.
 
 ```diff
- docker run -d --name jenkins \
+ $ docker run -d --name jenkins \
    ...
 -  --volume /path/to/jenkins-persistence:/bitnami/jenkins \
 +  --volume /path/to/jenkins-backups/latest:/bitnami/jenkins \
@@ -249,8 +249,8 @@ docker pull bitnami/jenkins:latest
 
 ### Step 2. Stop your container
 
-* For docker-compose: `docker-compose stop jenkins`
-* For manual execution: `docker stop jenkins`
+* For docker-compose: `$ docker-compose stop jenkins`
+* For manual execution: `$ docker stop jenkins`
 
 ### Step 3. Take a snapshot of the application state
 
@@ -258,13 +258,13 @@ Follow the steps in [Backing up your container](#backing-up-your-container) to t
 
 ### Step 4. Remove the stopped container
 
-* For docker-compose: `docker-compose rm -v jenkins`
-* For manual execution: `docker rm -v jenkins`
+* For docker-compose: `$ docker-compose rm -v jenkins`
+* For manual execution: `$ docker rm -v jenkins`
 
 ### Step 5. Run the new image
 
-* For docker-compose: `docker-compose up jenkins`
-* For manual execution mount the directories if needed): `docker run --name jenkins bitnami/jenkins:latest`
+* For docker-compose: `$ docker-compose up jenkins`
+* For manual execution (mount the directories if needed): `docker run --name jenkins bitnami/jenkins:latest`
 
 ## Customize this image
 
@@ -339,16 +339,16 @@ You can create custom groovy scripts and make Jenkins run them at start up.
 However, using this feature will disable the default configuration done by the Bitnami scripts. This is intended to customize the Jenkins configuration by code.
 
 ```console
-mkdir jenkins-init.groovy.d
-echo "println '--> hello world'" > jenkins-init.groovy.d/AA_hello.groovy
-echo "println '--> bye world'" > jenkins-init.groovy.d/BA_bye.groovy
+$ mkdir jenkins-init.groovy.d
+$ echo "println '--> hello world'" > jenkins-init.groovy.d/AA_hello.groovy
+$ echo "println '--> bye world'" > jenkins-init.groovy.d/BA_bye.groovy
 
 docker run -d -p 80:8080 --name jenkins \
   --env "JENKINS_SKIP_BOOTSTRAP=yes" \
   --volume "$(pwd)/jenkins-init.groovy.d:/usr/share/jenkins/ref/init.groovy.d" \
   bitnami/jenkins:latest
 
-docker logs jenkins | grep world
+$ docker logs jenkins | grep world
 --> hello world!
 --> bye world!
 ```
