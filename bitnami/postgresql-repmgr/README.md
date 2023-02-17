@@ -131,7 +131,7 @@ docker run -it --rm \
   psql -h pg-0 -U postgres
 ```
 
-### Using Docker Compose
+### Using a Docker Compose file
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `my-network`. In this example we assume that you want to connect to the PostgreSQL server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
@@ -324,7 +324,7 @@ When enabling TLS, PostgreSQL will support both standard and encrypted traffic b
 1. Using `docker run`
 
     ```console
-    docker run \
+    $ docker run \
         -v /path/to/certs:/opt/bitnami/postgresql/certs \
         -e POSTGRESQL_ENABLE_TLS=yes \
         -e POSTGRESQL_TLS_CERT_FILE=/opt/bitnami/postgresql/certs/postgres.crt \
@@ -368,7 +368,7 @@ sudo chgrp -R root /path/to/custom-conf/
 sudo chmod -R g+rwX /path/to/custom-conf/
 ```
 
-#### Step 1: Run the PostgreSQL image mounting a directory
+#### Step 1: Run the PostgreSQL image
 
 Run the PostgreSQL image, mounting a directory from your host.
 
@@ -398,7 +398,7 @@ services:
       - /path/to/custom-conf/:/bitnami/repmgr/conf/
 ```
 
-#### Step 2: Edit the configuration file
+#### Step 2: Edit the configuration
 
 Edit the configuration on your host using your favorite editor.
 
@@ -406,7 +406,7 @@ Edit the configuration on your host using your favorite editor.
 vi /path/to/custom-conf/postgresql.conf
 ```
 
-#### Step 3: Restart PostgreSQL container
+#### Step 3: Restart PostgreSQL
 
 After changing the configuration, restart your PostgreSQL container for changes to take effect.
 
@@ -455,7 +455,7 @@ sudo chgrp -R root /path/to/extra-custom-conf/
 sudo chmod -R g+rwX /path/to/extra-custom-conf/
 ```
 
-#### Step 1: Run the PostgreSQL image
+#### Step 1: Deploy the PostgreSQL image
 
 Run the PostgreSQL image, mounting a directory from your host.
 
@@ -488,7 +488,7 @@ services:
       - /path/to/custom-conf/:/bitnami/repmgr/conf/
 ```
 
-#### Step 2: Edit the configuration
+#### Step 2: Edit the configuration file
 
 Edit the configuration on your host using your favorite editor.
 
@@ -496,7 +496,7 @@ Edit the configuration on your host using your favorite editor.
 vi /path/to/extra-custom-conf/extended.conf
 ```
 
-#### Step 3: Restart PostgreSQL
+#### Step 3: Restart the PostgreSQL container
 
 After changing the configuration, restart your PostgreSQL container for changes to take effect.
 
