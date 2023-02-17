@@ -92,7 +92,7 @@ docker network create ejbca-network
 #### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
 
 ```console
-docker volume create --name mariadb_data
+$ docker volume create --name mariadb_data
 docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_ejbca \
@@ -106,7 +106,7 @@ docker run -d --name mariadb \
 #### Step 3: Create volumes for EJBCA persistence and launch the container
 
 ```console
-docker volume create --name ejbca_data
+$ docker volume create --name ejbca_data
 docker run -d --name ejbca \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
