@@ -134,7 +134,7 @@ fluentd:
 
 Find more information about this feature, consult [official documentation](https://docs.fluentd.org/configuration/config-file)
 
-## Environment Variables
+### Environment variables
 
 Environment variable below are configurable to control how to execute fluentd process:
 
