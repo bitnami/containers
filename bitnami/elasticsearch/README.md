@@ -146,7 +146,7 @@ docker run -d --name myapp \
 > 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
 > 2. In your application container, use the hostname `elasticsearch-server` to connect to the Elasticsearch server
 
-### Using Docker Compose
+### Using a Docker Compose file
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the Elasticsearch server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
@@ -198,7 +198,7 @@ elasticsearch:
 * For manual execution add a `-e` option with each variable and value:
 
 ```console
- docker run -d --name elasticsearch \
+ $ docker run -d --name elasticsearch \
     -p 9201:9201 --network=elasticsearch_network \
     -e ELASTICSEARCH_PORT_NUMBER=9201 \
     -v /path/to/elasticsearch-data-persistence:/bitnami/elasticsearch/data \
@@ -470,12 +470,12 @@ docker-compose up elasticsearch
 * Backwards compatibility is not guaranteed when data is persisted using docker-compose. You can use the workaround below to overcome it:
 
 ```console
-docker-compose down
+$ docker-compose down
 # Change the mount point
 sed -i -e 's#elasticsearch_data:/bitnami#elasticsearch_data:/bitnami/elasticsearch/data#g' docker-compose.yml
 # Pull the latest bitnami/elasticsearch image
-docker pull bitnami/elasticsearch:latest
-docker-compose up -d
+$ docker pull bitnami/elasticsearch:latest
+$ docker-compose up -d
 ```
 
 ### 6.2.3-r7 & 5.6.4-r18
