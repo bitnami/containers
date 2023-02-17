@@ -1,9 +1,9 @@
 {
     "thanos": {
         "arch": "amd64",
-        "digest": "d6c0b37f32e7015bd05861822c400eba67a4fd382d0c680054e179f23bad5f23",
+        "digest": "87eb2d17d2c6e294624e201438623978bf8d423cf4db9650b73b32b25130281a",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.30.2-0"
+        "version": "0.30.2-1"
     }
 }
