@@ -196,7 +196,7 @@ nginx_initialize() {
         nginx_configure_port "$NGINX_HTTP_PORT_NUMBER"
     fi
     # Configure HTTPS port number
-    if [[ -n "${NGINX_HTTPS_PORT_NUMBER:-}" ]]; then
+    if [[ -n "${NGINX_HTTPS_PORT_NUMBER:-}" ]] && [[ -f "${NGINX_SERVER_BLOCKS_DIR}/default-https-server-block.conf" ]]; then
         nginx_configure_port "$NGINX_HTTPS_PORT_NUMBER" "${NGINX_SERVER_BLOCKS_DIR}/default-https-server-block.conf"
     fi
     nginx_configure "absolute_redirect" "$(is_boolean_yes "$NGINX_ENABLE_ABSOLUTE_REDIRECT" && echo "on" || echo "off" )"
