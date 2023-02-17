@@ -22,6 +22,8 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 etcd_env_vars=(
+    ETCD_SNAPSHOTS_DIR
+    ETCD_SNAPSHOT_HISTORY_LIMIT
     ETCD_INIT_SNAPSHOTS_DIR
     ALLOW_NONE_AUTHENTICATION
     ETCD_ROOT_PASSWORD
