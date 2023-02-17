@@ -6,15 +6,17 @@
 
 [Overview of Harbor Job Service](https://github.com/goharbor/harbor)
 
+
+
 ## TL;DR
 
 ```console
 curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/harbor-portal/docker-compose.yml
-curl -L https://github.com/bitnami/containers/blob/main/bitnami/harbor-portal/archive/master.tar.gz | tar xz --strip=1 --wildcards '*-master/config'
+curl -L https://github.com/bitnami/containers/archive/main.tar.gz | tar xz --strip=2 containers-main/bitnami/harbor-portal && cp -RL harbor-portal/config . && rm -rf harbor-portal
 docker-compose up
 ```
 
-> Please note we are downloading the docker-compose.yml file from the Harbor Portal component repository.
+> Please note you are downloading the docker-compose.yml file from the Harbor Portal component repository.
 
 ## Why use Bitnami Images?
 
