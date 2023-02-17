@@ -92,7 +92,7 @@ docker network create drupal-network
 #### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
 
 ```console
-docker volume create --name mariadb_data
+$ docker volume create --name mariadb_data
 docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_drupal \
@@ -106,7 +106,7 @@ docker run -d --name mariadb \
 #### Step 3: Create volumes for Drupal persistence and launch the container
 
 ```console
-docker volume create --name drupal_data
+$ docker volume create --name drupal_data
 docker run -d --name drupal \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
@@ -369,7 +369,7 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 For the MariaDB database container:
 
 ```diff
- docker run -d --name mariadb \
+ $ docker run -d --name mariadb \
    ...
 -  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
 +  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
@@ -379,7 +379,7 @@ For the MariaDB database container:
 For the Drupal container:
 
 ```diff
- docker run -d --name drupal \
+ $ docker run -d --name drupal \
    ...
 -  --volume /path/to/drupal-persistence:/bitnami/drupal \
 +  --volume /path/to/drupal-backups/latest:/bitnami/drupal \
