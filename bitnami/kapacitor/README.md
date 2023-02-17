@@ -65,7 +65,7 @@ docker run \
 
 ## Configuration
 
-## Running commands
+### Running commands
 
 The container has the `kapacitor`, `kapacitord` and `tickfmt` commands available. To run commands inside this container you can use `docker run`, for example to execute `kapacitord --help` you can follow the example below:
 
