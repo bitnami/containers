@@ -1,9 +1,9 @@
 {
     "kapacitor": {
         "arch": "amd64",
-        "digest": "a94190fb4fd76a9a5e935b29bc16896206ca8fda3790aedc3e7f8ee8880e1367",
+        "digest": "9e298ebea32f539a5032e7a50080f4406984aa7dd00868b7d2fb004ba2001b2e",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.6.5-3"
+        "version": "1.6.5-4"
     }
 }
