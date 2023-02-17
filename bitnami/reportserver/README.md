@@ -86,7 +86,7 @@ docker network create reportserver-network
 #### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
 
 ```console
-docker volume create --name mariadb_data
+$ docker volume create --name mariadb_data
 docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_reportserver \
@@ -100,7 +100,7 @@ docker run -d --name mariadb \
 #### Step 3: Create volumes for ReportServer Community persistence and launch the container
 
 ```console
-docker volume create --name reportserver_data
+$ docker volume create --name reportserver_data
 docker run -d --name reportserver \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
@@ -204,7 +204,7 @@ When you start the ReportServer Community image, you can adjust the configuratio
 - For manual execution add a `--env` option with each variable and value:
 
     ```console
-    docker run -d --name reportserver -p 80:8080 -p 443:8443 \
+    $ docker run -d --name reportserver -p 80:8080 -p 443:8443 \
       --env REPORTSERVER_PASSWORD=my_password \
       --network reportserver-tier \
       --volume /path/to/reportserver-persistence:/bitnami \
@@ -280,7 +280,7 @@ This would be an example of SMTP configuration using a Gmail account:
 - For manual execution:
 
     ```console
-    docker run -d --name reportserver -p 80:8080 -p 443:8443 \
+    $ docker run -d --name reportserver -p 80:8080 -p 443:8443 \
       --env REPORTSERVER_DATABASE_USER=bn_reportserver \
       --env REPORTSERVER_DATABASE_NAME=bitnami_reportserver \
       --env REPORTSERVER_SMTP_HOST=smtp.gmail.com \
@@ -315,7 +315,7 @@ The Bitnami ReportServer Community container supports connecting the ReportServe
 - For manual execution:
 
     ```console
-    docker run -d --name reportserver\
+    $ docker run -d --name reportserver\
       -p 8080:8080 -p 8443:8443 \
       --network reportserver-network \
       --env REPORTSERVER_DATABASE_HOST=mariadb_host \
@@ -379,7 +379,7 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 For the MariaDB database container:
 
 ```diff
- docker run -d --name mariadb \
+ $ docker run -d --name mariadb \
    ...
 -  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
 +  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
@@ -389,7 +389,7 @@ For the MariaDB database container:
 For the ReportServer Community container:
 
 ```diff
- docker run -d --name reportserver \
+ $ docker run -d --name reportserver \
    ...
 -  --volume /path/to/reportserver-persistence:/bitnami/reportserver \
 +  --volume /path/to/reportserver-backups/latest:/bitnami/reportserver \
