@@ -146,7 +146,7 @@ docker run -it --name ruby -P bitnami/ruby:latest
 Run `docker port` to determine the random port Docker assigned.
 
 ```console
-docker port ruby
+$ docker port ruby
 3000/tcp -> 0.0.0.0:32769
 ```
 
