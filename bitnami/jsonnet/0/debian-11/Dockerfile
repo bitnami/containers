@@ -2,11 +2,11 @@ FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
-LABEL org.opencontainers.image.authors="https://bitnami.com/contact" \
-      org.opencontainers.image.description="Application packaged by Bitnami" \
+LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
+      org.opencontainers.image.created="2023-02-17T18:25:29Z" \
+      org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.19.1-debian-11-r37" \
-      org.opencontainers.image.source="https://github.com/bitnami/containers/tree/main/bitnami/jsonnet" \
+      org.opencontainers.image.ref.name="0.19.1-debian-11-r38" \
       org.opencontainers.image.title="jsonnet" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.19.1"
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libgcc-s1 libstdc++6 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "jsonnet-0.19.1-1-linux-${OS_ARCH}-debian-11" \
+      "jsonnet-0.19.1-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
