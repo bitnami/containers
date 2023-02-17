@@ -108,7 +108,7 @@ docker run --name apache -P bitnami/apache:latest
 Run `docker port` to determine the random ports Docker assigned.
 
 ```console
-docker port apache
+$ docker port apache
 8443/tcp -> 0.0.0.0:32768
 8080/tcp -> 0.0.0.0:32769
 ```
@@ -451,20 +451,20 @@ docker-compose up apache
 
 * Included [Apache PageSpeed Module (`mod_pagespeed`)](https://developers.google.com/speed/pagespeed/module). It is disabled by default. To enable it, uncomment the following lines in `httpd.conf`:
 
-```text
+```config
 ##Include conf/pagespeed.conf
 ##Include conf/pagespeed_libraries.conf
 ```
 
 * Included [ModSecurity v2](https://github.com/SpiderLabs/ModSecurity). It is disabled by default. To enable it, mount and enable your custom ModSecurity rules for the virtual hosts, and uncomment the following line in `httpd.conf`:
 
-```text
+```config
 ##LoadModule security2_module modules/mod_security2.so
 ```
 
 * Included [ModSecurity v3](https://github.com/SpiderLabs/ModSecurity) and [ModSecurity v3 Apache Connector (`mod_security3`)](https://github.com/SpiderLabs/ModSecurity-apache). It is disabled by default. To enable it, mount and enable your custom ModSecurity rules for the virtual hosts, and uncomment the following line in `httpd.conf`:
 
-```text
+```config
 ##LoadModule security3_module modules/mod_security3.so
 ```
 
