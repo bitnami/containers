@@ -109,7 +109,7 @@ docker run -d --name dokuwiki \
 
 ## Configuration
 
-## Environment variables
+### Environment variables
 
 When you start the DokuWiki image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
@@ -135,7 +135,7 @@ dokuwiki:
 
 Available environment variables:
 
-### User and Site configuration
+#### User and Site configuration
 
 * `DOKUWIKI_USERNAME`: Dokuwiki application username. Default: **user**
 * `DOKUWIKI_FULL_NAME`: Dokuwiki application user full name. Default: **Full Name**
@@ -143,7 +143,7 @@ Available environment variables:
 * `DOKUWIKI_EMAIL`: Dokuwiki application email. Default: **user@example.com**
 * `DOKUWIKI_WIKI_NAME`: Dokuwiki wiki name. Default: **Bitnami DokuWiki**
 
-### PHP configuration
+#### PHP configuration
 
 * `PHP_ENABLE_OPCACHE`: Enable OPcache for PHP scripts. No default.
 * `PHP_EXPOSE_PHP`: Enables HTTP header with PHP version. No default.
@@ -204,7 +204,7 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 For the DokuWiki container:
 
 ```diff
- docker run -d --name  \
+ $ docker run -d --name  \
    ...
 -  --volume /path/to/-persistence:/bitnami/dokuwiki \
 +  --volume /path/to/-backups/latest:/bitnami/dokuwiki \
