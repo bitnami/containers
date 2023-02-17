@@ -121,7 +121,7 @@ docker run --name consul-node1 --network consul-network bitnami/consul:latest
 
 We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
 
-### Using Docker Compose
+### Using a Docker Compose file
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new bridge network named consul-network.
 
@@ -152,13 +152,11 @@ Then, launch the containers using:
 docker-compose up -d
 ```
 
-## Setting up a cluster
-
-### Docker Compose deployment
+## Setting up a cluster using Docker Compose
 
 This is the simplest way to run HashiCorp Consul with clustering configuration:
 
-#### Step 1: Add a server node in your `docker-compose.yml`
+### Step 1: Add a server node in your `docker-compose.yml`
 
 Copy the snippet below into your docker-compose.yml to add a HashiCorp Consul server node to your cluster configuration.
 
@@ -186,7 +184,7 @@ services:
 
 > **Note:** The value of the **CONSUL_BOOTSTRAP_EXPECT** should reflect the total number of nodes the cluster will have.
 
-##### Step 2: Add extra nodes to your configuration
+### Step 2: Add extra nodes to your configuration
 
 Update the definitions for nodes you want your HashiCorp Consul node cluster with. If it is a remote WAN node, use `CONSUL_RETRY_JOIN_WAN_ADDRESS`.
 
@@ -214,7 +212,7 @@ consul-node3:
     - 'consul-node3_data:/bitnami'
 ```
 
-##### Step 3: Add the volume description
+### Step 3: Add the volume description
 
 ```yaml
 volumes:
@@ -386,7 +384,7 @@ This command will generate a keygen, that you can add to your Dockerfile, docker
 docker run -e CONSUL_GOSSIP_ENCRYPTION_KEY=YOUR_GENERATED_KEY --name consul bitnami/consul:latest
 ```
 
-#### Using Docker Compose deployment
+#### Deploying a Docker Compose file
 
 ```yaml
 consul:
