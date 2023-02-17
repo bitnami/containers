@@ -137,7 +137,7 @@ docker run -it --rm \
     bitnami/mariadb:latest mysql -h mariadb-server -u root
 ```
 
-### Using Docker Compose
+### Using a Docker Compose file
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the MariaDB server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
@@ -667,12 +667,12 @@ docker-compose up mariadb
 * Backwards compatibility is not guaranteed when data is persisted using docker-compose. You can use the workaround below to overcome it:
 
 ```console
-docker-compose down
+$ docker-compose down
 ## Change the mount point
 sed -i -e 's#mariadb_data:/bitnami#mariadb_data:/bitnami/mariadb#g' docker-compose.yml
 ## Pull the latest bitnami/mariadb image
-docker pull bitnami/mariadb:latest
-docker-compose up -d
+$ docker pull bitnami/mariadb:latest
+$ docker-compose up -d
 ```
 
 ### 10.1.28-r2 and 10.2.16-r2
