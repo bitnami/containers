@@ -104,7 +104,7 @@ docker run -it --rm \
     bitnami/redis-sentinel:latest
 ```
 
-### Using Docker Compose
+### Using a Docker Compose file
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the Redis(R) server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
@@ -227,7 +227,7 @@ When enabling TLS, conventional standard traffic is disabled by default. However
 1. Using `docker run`
 
     ```console
-    docker run --name redis-sentinel \
+    $ docker run --name redis-sentinel \
         -v /path/to/certs:/opt/bitnami/redis/certs \
         -v /path/to/redis-sentinel/persistence:/bitnami \
         -e REDIS_MASTER_HOST=redis \
