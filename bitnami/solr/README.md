@@ -112,7 +112,7 @@ docker run --name solr-node1 --network solr-network bitnami/solr:latest
 
 We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
 
-### Using Docker Compose
+### Using a Docker Compose file
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new bridge network named solr-network.
 
@@ -206,7 +206,7 @@ docker run -d -e SOLR_CORES=my_core --name solr bitnami/solr:latest
 
 In order to load your own configuration files, you will have to make them available to the container. You can do it mounting a [volume](https://docs.docker.com/engine/tutorials/dockervolumes/) in the desired location and setting the environment variable with the customized value (as it is pointed above, the default value is **data_driven_schema_configs**).
 
-#### Using a Docker Compose
+#### Using Docker Compose
 
 This requires a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/solr/docker-compose.yml) file present in this repository:
 
@@ -287,7 +287,7 @@ docker-compose rm -v solr
 
 #### Step 4: Run the new image
 
-Re-create your container from the new image, restoring your backup if necessary.
+Re-create your container from the new image, restoring your backup](#restoring-a-backup if necessary.
 
 ```console
 docker run --name solr bitnami/solr:latest
