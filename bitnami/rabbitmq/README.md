@@ -132,7 +132,7 @@ docker run -it --rm \
     bitnami/rabbitmq:latest rabbitmqctl -n rabbit@rabbitmq-server status
 ```
 
-### Using Docker Compose
+### Using a Docker Compose file
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the RabbitMQ server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
@@ -241,11 +241,11 @@ Available variables:
 
 ### Setting up a cluster
 
-#### Docker Compose deployment
+### Using Docker Compose
 
 This is the simplest way to run RabbitMQ with clustering configuration:
 
-##### Step 1: Add a stats node in your `docker-compose.yml`
+#### Step 1: Add a stats node in your `docker-compose.yml`
 
 Copy the snippet below into your docker-compose.yml to add a RabbitMQ stats node to your cluster configuration.
 
@@ -417,7 +417,7 @@ docker run --name openldap \
 
 To configure authorization, you need to create an advanced.config file, following the [clasic config format](https://www.rabbitmq.com/configure.html#erlang-term-config-file), and add your authorization rules. For instance, use the file below to grant all users the ability to use the management plugin, but make none of them administrators:
 
-```config
+```text
 [{rabbitmq_auth_backend_ldap,[
     {tag_queries, [{administrator, {constant, false}},
                    {management,    {constant, true}}]}
