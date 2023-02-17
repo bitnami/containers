@@ -119,7 +119,7 @@ When you start the Appsmith image, you can adjust the configuration of the insta
 * For manual execution add a `--env` option with each variable and value:
 
     ```console
-    docker run -d --name appsmith-api -p 80:8080 -p 443:8443 \
+    $ docker run -d --name appsmith-api -p 80:8080 -p 443:8443 \
       --env APPSMITH_PASSWORD=my_password \
       --env APPSMITH_MODE=backend \
       --network appsmith-tier \
@@ -189,7 +189,7 @@ The Bitnami Appsmith container supports connecting the Appsmith application to a
 * For manual execution:
 
     ```console
-    docker run -d --name appsmith\
+    $ docker run -d --name appsmith\
       -p 8080:8080 -p 8443:8443 \
       --network appsmith-network \
       --env APPSMITH_DATABASE_HOST=mongodb_host \
