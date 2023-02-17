@@ -137,7 +137,7 @@ docker run -it --rm \
     bitnami/mysql:latest mysql -h mysql-server -u root
 ```
 
-### Using Docker Compose
+### Using a Docker Compose file
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the MySQL server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
@@ -610,12 +610,12 @@ docker-compose up mysql
 * Backwards compatibility is not guaranteed when data is persisted using docker-compose. You can use the workaround below to overcome it:
 
 ```console
-docker-compose down
+$ docker-compose down
 ## Change the mount point
 sed -i -e 's#mysql_data:/bitnami#mysql_data:/bitnami/mysql/data#g' docker-compose.yml
 ## Pull the latest bitnami/mysql image
-docker pull bitnami/mysql:latest
-docker-compose up -d
+$ docker pull bitnami/mysql:latest
+$ docker-compose up -d
 ```
 
 ### 5.7.22-r18 and 8.0.11-r16
