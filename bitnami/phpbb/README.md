@@ -96,7 +96,7 @@ docker network create phpbb-network
 #### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
 
 ```console
-docker volume create --name mariadb_data
+$ docker volume create --name mariadb_data
 docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_phpbb \
@@ -110,7 +110,7 @@ docker run -d --name mariadb \
 #### Step 3: Create volumes for phpBB persistence and launch the container
 
 ```console
-docker volume create --name phpbb_data
+$ docker volume create --name phpbb_data
 docker run -d --name phpbb \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
@@ -373,7 +373,7 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 For the MariaDB database container:
 
 ```diff
- docker run -d --name mariadb \
+ $ docker run -d --name mariadb \
    ...
 -  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
 +  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
@@ -383,7 +383,7 @@ For the MariaDB database container:
 For the phpBB container:
 
 ```diff
- docker run -d --name phpbb \
+ $ docker run -d --name phpbb \
    ...
 -  --volume /path/to/phpbb-persistence:/bitnami/phpbb \
 +  --volume /path/to/phpbb-backups/latest:/bitnami/phpbb \
