@@ -1,23 +1,23 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "9ab9654690d90d3c49ff66fb1eb286487e318adc899d036bc45922f6b176865b",
+        "digest": "f6056076afb745fd7d9d87d20f71e7248d63330352cf5ae0be2130b7f44a8cfa",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-1"
+        "version": "1.16.0-2"
     },
     "harbor-jobservice": {
         "arch": "amd64",
-        "digest": "3eb9b470e1b53cf59179760386018c75025995e53c2e5623a2bde1b55943b69c",
+        "digest": "a07024a4bb8c5655080b8d526985a09967c175950f6df8f164ad5212ad63d45c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.7.0-2"
+        "version": "2.7.0-3"
     },
     "yq": {
         "arch": "amd64",
-        "digest": "33fec06619aa3c1f7ea3c2516bf36f79af01354972ff06998ca6fe1d65078998",
+        "digest": "2fcd60b9977991e83f7066cf6da2c319b21483cdc67597625af37fa753534faf",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.30.8-1"
+        "version": "4.30.8-2"
     }
 }
