@@ -94,7 +94,7 @@ docker run --name nginx -P bitnami/openresty:latest
 Run `docker port` to determine the random ports Docker assigned.
 
 ```console
-docker port openresty
+$ docker port openresty
 8080/tcp -> 0.0.0.0:32769
 ```
 
