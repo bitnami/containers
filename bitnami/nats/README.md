@@ -128,7 +128,7 @@ docker run -it --rm \
     golang ./nats-pub.sh foo bar
 ```
 
-### Using Docker Compose
+### Using a Docker Compose file
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the NATS server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
@@ -233,7 +233,7 @@ docker run -d --name nats -p 4222:4222 -p 6222:6222 -p 8222:8222 \
   bitnami/nats:latest
 ```
 
-#### Using Docker Compose deployment
+#### Deploying a Docker Compose file
 
 Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/nats/docker-compose.yml) file present in this repository as follows:
 
