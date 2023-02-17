@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-02-17T16:17:27Z" \
+      org.opencontainers.image.created="2023-02-17T18:27:48Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="18.14.1-debian-11-r0" \
+      org.opencontainers.image.ref.name="18.14.1-debian-11-r1" \
       org.opencontainers.image.title="node" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="18.14.1"
@@ -22,7 +22,7 @@ RUN install_packages build-essential ca-certificates curl git libbz2-1.0 libcom-
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.8.16-4-linux-${OS_ARCH}-debian-11" \
-      "node-18.14.1-0-linux-${OS_ARCH}-debian-11" \
+      "node-18.14.1-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
