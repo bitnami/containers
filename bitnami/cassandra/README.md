@@ -131,7 +131,7 @@ docker run -it --rm \
     bitnami/cassandra:latest cqlsh --username cassandra --password cassandra cassandra-server
 ```
 
-### Using Docker Compose
+### Using a Docker Compose file
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the Apache Cassandra server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
@@ -182,7 +182,7 @@ cassandra:
 * For manual execution add a `-e` option with each variable and value:
 
 ```console
- docker run --name cassandra -d -p 7000:7000 --network=cassandra_network \
+ $ docker run --name cassandra -d -p 7000:7000 --network=cassandra_network \
     -e CASSANDRA_TRANSPORT_PORT_NUMBER=7000 \
     -v /your/local/path/bitnami/cassandra:/bitnami \
     bitnami/cassandra
@@ -231,50 +231,6 @@ cassandra:
     - CASSANDRA_CFG_RACKDC_PREFER_LOCAL=true
   ...
 ```
-
-### Configuration file
-
-The image looks for configurations in `/opt/bitnami/cassandra/conf/`. You can mount a volume at `/bitnami/cassandra/conf/` and copy/edit the configurations in the `/path/to/cassandra-persistence/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
-
-For example, in order to override the `cassandra.yaml` configuration file:
-
-#### Step 1: Write your custom `cassandra.yaml` file
-
-You can download the basic cassandra.yaml file like follows
-
-```console
-wget https://raw.githubusercontent.com/apache/cassandra/trunk/conf/cassandra.yaml
-```
-
-Perform any desired modifications in that file
-
-#### Step 2: Run the Apache Cassandra image with the designed volume attached
-
-```console
-docker run --name cassandra \
-    -p 7000:7000  \
-    -e CASSANDRA_TRANSPORT_PORT_NUMBER=7000 \
-    -v /path/to/cassandra.yaml:/bitnami/cassandra/conf/cassandra.yaml:ro \
-    -v /your/local/path/bitnami/cassandra:/bitnami \
-    bitnami/cassandra:latest
-```
-
-or using Docker Compose:
-
-```yaml
-version: '2'
-
-services:
-  cassandra:
-    image: bitnami/cassandra:latest
-    environment:
-      - CASSANDRA_TRANSPORT_PORT_NUMBER=7000
-    volumes:
-      - /path/to/cassandra.yaml:/bitnami/cassandra/conf/cassandra.yaml:ro
-      - /your/local/path/bitnami/cassandra:/bitnami
-```
-
-After that, your changes will be taken into account in the server's behaviour. Note that you can override any other Apache Cassandra configuration file, such as `rack-dc.properties`.
 
 ### Setting the server password on first run
 
@@ -396,6 +352,53 @@ cassandra:
     - /path/to/init-scripts:/docker-entrypoint-initdb.d
     - /path/to/cassandra-persistence:/bitnami
 ```
+
+### Configuration file
+
+The image looks for configurations in `/bitnami/cassandra/conf/`. As mentioned in [Persisting your application](#persisting-your-application) you can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/cassandra-persistence/cassandra/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
+
+#### Step 1: Run the Apache Cassandra image
+
+Run the Apache Cassandra image, mounting a directory from your host.
+
+```console
+docker run --name cassandra \
+    -v /path/to/cassandra-persistence:/bitnami \
+    bitnami/cassandra:latest
+```
+
+or using Docker Compose:
+
+```yaml
+cassandra:
+  image: bitnami/cassandra:latest
+  volumes:
+    - /path/to/cassandra-persistence:/bitnami
+```
+
+#### Step 2: Edit the configuration
+
+Edit the configuration on your host using your favorite editor.
+
+```console
+vi /path/to/cassandra-persistence/cassandra/conf/cassandra.yaml
+```
+
+#### Step 3: Restart Apache Cassandra
+
+After changing the configuration, restart your Apache Cassandra container for changes to take effect.
+
+```console
+docker restart cassandra
+```
+
+or using Docker Compose:
+
+```console
+docker-compose restart cassandra
+```
+
+Refer to the [configuration](http://docs.datastax.com/en/cassandra/3.x/cassandra/configuration/configTOC.html) manual for the complete list of configuration options.
 
 ## TLS Encryption
 
