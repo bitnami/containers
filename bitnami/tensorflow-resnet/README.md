@@ -102,8 +102,8 @@ Bitnami provides up-to-date versions of Tensorflow-Serving and TensorFlow ResNet
 
 2. Stop your container
 
-    * For docker-compose: `docker-compose stop tensorflow-resnet`
-    * For manual execution: `docker stop tensorflow-resnet`
+    * For docker-compose: `$ docker-compose stop tensorflow-resnet`
+    * For manual execution: `$ docker stop tensorflow-resnet`
 
 3. Take a snapshot of the application state
 
@@ -111,18 +111,18 @@ Bitnami provides up-to-date versions of Tensorflow-Serving and TensorFlow ResNet
     rsync -a tensorflow-resnet-persistence tensorflow-resnet-persistence.bkp.$(date +%Y%m%d-%H.%M.%S)
     ```
 
-    Additionally, [snapshot the TensorFlow Serving data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#step-2-stop-and-backup-the-currently-running-container)
+Additionally, [snapshot the TensorFlow Serving data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#step-2-stop-and-backup-the-currently-running-container)
 
-    You can use these snapshots to restore the application state should the upgrade fail.
+You can use these snapshots to restore the application state should the upgrade fail.
 
-4. Remove the currently running container
+1. Remove the currently running container
 
-    * For docker-compose: `docker-compose rm tensorflow-resnet`
-    * For manual execution: `docker rm tensorflow-resnet`
+    * For docker-compose: `$ docker-compose rm tensorflow-resnet`
+    * For manual execution: `$ docker rm tensorflow-resnet`
 
-5. Run the new image
+2. Run the new image
 
-    * For docker-compose: `docker-compose up tensorflow-resnet`
+    * For docker-compose: `$ docker-compose up tensorflow-resnet`
     * For manual execution (mount the directories if needed): `docker run --name tensorflow-resnet bitnami/tensorflow-resnet:latest`
 
 ## Configuration
