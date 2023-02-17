@@ -1,44 +1,44 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "9ab9654690d90d3c49ff66fb1eb286487e318adc899d036bc45922f6b176865b",
+        "digest": "f6056076afb745fd7d9d87d20f71e7248d63330352cf5ae0be2130b7f44a8cfa",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-1"
+        "version": "1.16.0-2"
     },
     "laravel": {
         "arch": "amd64",
-        "digest": "ef1798ed3efb438a2cd40f8728bad806b132cf8426d45ed87a3059b65ecdc3ce",
+        "digest": "0c609c6485d451d7e317ae57899dbf468487b9fb96ca76afbf1b053d30303e91",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.0.0-0"
+        "version": "10.0.2-0"
     },
     "node": {
         "arch": "amd64",
-        "digest": "79b27ed6e282bf9425b00dbe23de769f78422535817477f0026d5981aa708192",
+        "digest": "d6828cad4303399275281eb1c617d87c315c65d0def58d1204fac426e0200b0a",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.14.0-0"
+        "version": "18.14.1-1"
     },
     "php": {
         "arch": "amd64",
-        "digest": "cf3db32904b1b7359117477538ab174df76b2f065e5de5495ba223a8f21f40cd",
+        "digest": "928131776dab0ecb6d22ccc2b0b5f790fa6886419b60f9b4beb489f70dc76342",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.16-0"
+        "version": "8.1.16-1"
     },
     "python": {
         "arch": "amd64",
-        "digest": "fbe5cb1a19ecccf616d2e97c130e7dae06537494bdcc3ead8b9e98054fb4a6f9",
+        "digest": "100f7d546cffcd034bcced74a0fa87b5771c4109945a6ae616b53d0ec13d7881",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-3"
+        "version": "3.8.16-4"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "f9199cd66b92fef328ecfbc5ffbc8f14be33257a4e34b8c6ba35a730c5a2f59d",
+        "digest": "be7c393d598ddf16d1c3c008a67b87879e48aca62071a208583390f2b41e6744",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-0"
+        "version": "1.0.6-1"
     }
 }
