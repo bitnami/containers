@@ -1,23 +1,23 @@
 {
     "node": {
         "arch": "amd64",
-        "digest": "79b27ed6e282bf9425b00dbe23de769f78422535817477f0026d5981aa708192",
+        "digest": "d6828cad4303399275281eb1c617d87c315c65d0def58d1204fac426e0200b0a",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.14.0-0"
+        "version": "18.14.1-1"
     },
     "python": {
         "arch": "amd64",
-        "digest": "fbe5cb1a19ecccf616d2e97c130e7dae06537494bdcc3ead8b9e98054fb4a6f9",
+        "digest": "100f7d546cffcd034bcced74a0fa87b5771c4109945a6ae616b53d0ec13d7881",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-3"
+        "version": "3.8.16-4"
     },
     "supabase-storage": {
         "arch": "amd64",
-        "digest": "b913938c7c3549790c8969b3b4086328be7933d322ae85633444a4d35b87961b",
+        "digest": "45dfe5680bf3e2beb180873c3b7dc9e594fda1690ede0b44f97208575d6a08a8",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.28.2-0"
+        "version": "0.28.2-2"
     }
 }
