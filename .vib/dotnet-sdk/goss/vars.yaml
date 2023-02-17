@@ -7,9 +7,10 @@ directories:
   - paths:
       - /opt/bitnami/dotnet-sdk/bin/host
       - /opt/bitnami/dotnet-sdk/bin/shared
+      - /opt/bitnami/dotnet-sdk/bin/sdk
 root_dir: /opt/bitnami
 version:
   bin_name: dotnet
-  flag: --info
+  flag: --version
 binary:
   capabilities: cap_net_bind_service=eip

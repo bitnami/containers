@@ -10,9 +10,18 @@ command:
       - AspNetCore.App
       - NETCore.App
     exit-status: 0
+  check-installed-sdks:
+    exec: dotnet --list-sdks
+    stdout:
+    - {{ .Env.APP_VERSION }}
+    exit-status: 0
 file:
   # Checks the postunpack phase properly creates the lib's symlink
   /lib64/libz.so:
     exists: true
     filetype: symlink
     linked-to: /usr/lib/libz.so.1
+  # Checks the permission change done at compilation
+  /opt/bitnami/dotnet-sdk/bin/sdk/{{ .Env.APP_VERSION }}/AppHostTemplate/apphost:
+    exists: true
+    mode: "0755"
