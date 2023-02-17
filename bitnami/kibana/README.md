@@ -77,15 +77,15 @@ If you want to run the application manually instead of using docker-compose, the
 
 1. Create a new network for the application and the database:
 
-    ```console
-    docker network create kibana_network
-    ```
+   ```console
+   docker network create kibana_network
+   ```
 
 2. Run the Elasticsearch container:
 
-   ```console
-   docker run -d -p 9200:9200 --name elasticsearch --net=kibana_network bitnami/elasticsearch
-   ```
+    ```console
+    docker run -d -p 9200:9200 --name elasticsearch --net=kibana_network bitnami/elasticsearch
+    ```
 
 3. Run the Kibana container:
 
@@ -95,7 +95,7 @@ If you want to run the application manually instead of using docker-compose, the
       bitnami/kibana
     ```
 
-Then you can access your application at `http://your-ip:5601/`
+  Then you can access your application at `http://your-ip:5601/`
 
 ## Persisting your application
 
@@ -160,7 +160,7 @@ docker run -d --name myapp \
 > 1. Please update the **YOUR_APPLICATION_IMAGE_** placeholder in the above snippet with your application image
 > 2. In your application container, use the hostname `kibana-server` to connect to the Kibana server
 
-### Using Docker Compose
+### Using a Docker Compose file
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `app-tier`. In this example we assume that you want to connect to the Kibana server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
