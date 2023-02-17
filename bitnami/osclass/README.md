@@ -92,7 +92,7 @@ docker network create osclass-network
 #### Step 2: Create a volume for MariaDB persistence and create a MariaDB container
 
 ```console
-docker volume create --name mariadb_data
+$ docker volume create --name mariadb_data
 docker run -d --name mariadb \
   --env ALLOW_EMPTY_PASSWORD=yes \
   --env MARIADB_USER=bn_osclass \
@@ -106,7 +106,7 @@ docker run -d --name mariadb \
 #### Step 3: Create volumes for Osclass persistence and launch the container
 
 ```console
-docker volume create --name osclass_data
+$ docker volume create --name osclass_data
 docker run -d --name osclass \
   -p 8080:8080 -p 8443:8443 \
   --env ALLOW_EMPTY_PASSWORD=yes \
@@ -210,7 +210,7 @@ When you start the Osclass image, you can adjust the configuration of the instan
 - For manual execution add a `--env` option with each variable and value:
 
     ```console
-    docker run -d --name osclass -p 80:8080 -p 443:8443 \
+    $ docker run -d --name osclass -p 80:8080 -p 443:8443 \
       --env OSCLASS_PASSWORD=my_password \
       --network osclass-tier \
       --volume /path/to/osclass-persistence:/bitnami \
@@ -298,7 +298,7 @@ This would be an example of SMTP configuration using a Gmail account:
 - For manual execution:
 
     ```console
-    docker run -d --name osclass -p 80:8080 -p 443:8443 \
+    $ docker run -d --name osclass -p 80:8080 -p 443:8443 \
       --env OSCLASS_DATABASE_USER=bn_osclass \
       --env OSCLASS_DATABASE_NAME=bitnami_osclass \
       --env OSCLASS_SMTP_HOST=smtp.gmail.com \
@@ -333,7 +333,7 @@ The Bitnami Osclass container supports connecting the Osclass application to an 
 - For manual execution:
 
     ```console
-    docker run -d --name osclass\
+    $ docker run -d --name osclass\
       -p 8080:8080 -p 8443:8443 \
       --network osclass-network \
       --env OSCLASS_DATABASE_HOST=mariadb_host \
@@ -397,7 +397,7 @@ Restoring a backup is as simple as mounting the backup as volumes in the contain
 For the MariaDB database container:
 
 ```diff
- docker run -d --name mariadb \
+ $ docker run -d --name mariadb \
    ...
 -  --volume /path/to/mariadb-persistence:/bitnami/mariadb \
 +  --volume /path/to/mariadb-backups/latest:/bitnami/mariadb \
@@ -407,7 +407,7 @@ For the MariaDB database container:
 For the Osclass container:
 
 ```diff
- docker run -d --name osclass \
+ $ docker run -d --name osclass \
    ...
 -  --volume /path/to/osclass-persistence:/bitnami/osclass \
 +  --volume /path/to/osclass-backups/latest:/bitnami/osclass \
