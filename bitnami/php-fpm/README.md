@@ -265,6 +265,7 @@ In order to override the default `max_file_uploads` settings you can do the foll
 
     ```console
     docker run -it -v /path/to/custom.ini:/opt/bitnami/php/etc/conf.d/custom.ini bitnami/php-fpm php -i | grep max_file_uploads
+
     ```
 
     You should see that PHP is using the new specified value for the `max_file_uploads` setting.
