@@ -112,7 +112,7 @@ docker run --name neo4j-node1 --network neo4j-network bitnami/neo4j:latest
 
 We can launch another containers using the same flag (`--network NETWORK`) in the `docker run` command. If you also set a name to your container, you will be able to use it as hostname in your network.
 
-### Using Docker Compose
+### Using a Docker Compose file
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new bridge network named neo4j-network.
 
@@ -178,7 +178,7 @@ docker run -d -e NEO4J_BOLT_PORT_NUMBER=7777 --name neo4j bitnami/neo4j:latest
 
 In order to load your own configuration files, you will have to make them available to the container. You can do it mounting a [volume](https://docs.docker.com/engine/tutorials/dockervolumes/) in `/bitnami/neo4j/conf`.
 
-#### Using Docker Compose to add a custom config file
+#### Using Docker Compose
 
 Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/neo4j/docker-compose.yml) file present in this repository:
 
