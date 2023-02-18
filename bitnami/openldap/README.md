@@ -123,7 +123,7 @@ docker run -it --rm --name mariadb-client \
     bitnami/mariadb-galera:latest mysql -h mariadb-galera -u customuser -D customdatabase -pcustompassword
 ```
 
-### Using Docker Compose
+### Using a Docker Compose file
 
 When not specified, Docker Compose automatically sets up a new network and attaches all deployed services to that network. However, we will explicitly define a new `bridge` network named `my-network`. In this example we assume that you want to connect to the OpenLDAP server from your own custom application image which is identified in the following snippet by the service name `myapp`.
 
@@ -215,7 +215,7 @@ This new feature is not mutually exclusive, which means it is possible to listen
 1. Using `docker run`
 
     ```console
-    docker run --name openldap \
+    $ docker run --name openldap \
         -v /path/to/certs:/opt/bitnami/openldap/certs \
         -v /path/to/openldap-data-persistence:/bitnami/openldap/ \
         -e ALLOW_EMPTY_PASSWORD=yes \
