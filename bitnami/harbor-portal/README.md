@@ -6,11 +6,13 @@
 
 [Overview of Harbor](https://goharbor.io/)
 
+
+
 ## TL;DR
 
 ```console
 curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/harbor-portal/docker-compose.yml
-curl -L https://github.com/bitnami/containers/archive/main.tar.gz | tar xz --strip=1 --wildcards '*-main/bitnami/harbor-portal/config' && mv bitnami/harbor-portal/config . && rm -rf bitnami
+curl -L https://github.com/bitnami/containers/archive/main.tar.gz | tar xz --strip=2 containers-main/bitnami/harbor-portal && cp -RL harbor-portal/config . && rm -rf harbor-portal
 docker-compose up
 ```
 
