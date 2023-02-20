@@ -7,11 +7,8 @@ binaries:
 files:
   - paths:
       - /opt/bitnami/codeigniter/app/Common.php
-      - /opt/bitnami/codeigniter/app/index.html
-      - /opt/bitnami/codeigniter/psalm-baseline.xml
       - /opt/bitnami/codeigniter/psalm.xml
       - /opt/bitnami/codeigniter/composer.json
-      - /opt/bitnami/codeigniter/spark
 directories:
   - mode: "0775"
     paths:
