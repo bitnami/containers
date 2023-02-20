@@ -10,19 +10,6 @@
     "package": {
       "actions": [
         {
-          "action_id": "goss",
-          "params": {
-            "resources": {
-              "path": "/.vib"
-            },
-            "tests_file": "dotnet/goss/goss.yaml",
-            "vars_file": "dotnet/goss/vars.yaml",
-            "remote": {
-              "workload": "deploy-dotnet"
-            }
-          }
-        },
-        {
           "action_id": "container-image-package",
           "params": {
             "application": {
@@ -46,6 +33,21 @@
     },
     "verify": {
       "actions": [
+        {
+          "action_id": "goss",
+          "params": {
+            "resources": {
+              "path": "/.vib"
+            },
+            "tests_file": "dotnet/goss/goss.yaml",
+            "vars_file": "dotnet/goss/vars.yaml",
+            "remote": {
+              "pod": {
+                "workload": "deploy-dotnet"
+              }
+            }
+          }
+        },
         {
           "action_id": "trivy",
           "params": {
