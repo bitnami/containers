@@ -39,7 +39,9 @@
             "tests_file": "dotnet/goss/goss.yaml",
             "vars_file": "dotnet/goss/vars.yaml",
             "remote": {
-              "workload": "deploy-dotnet"
+              "pod": {
+                "workload": "deploy-dotnet"
+              }
             }
           }
         },
