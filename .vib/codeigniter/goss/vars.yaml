@@ -2,7 +2,6 @@ binaries:
   - composer
   - php-fpm
   - gosu
-  - mmdblookup
   - mysql
 files:
   - paths:
