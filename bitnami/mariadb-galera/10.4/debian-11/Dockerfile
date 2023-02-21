@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-02-20T16:23:57Z" \
+      org.opencontainers.image.created="2023-02-21T08:29:49Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="10.4.28-debian-11-r4" \
+      org.opencontainers.image.ref.name="10.4.28-debian-11-r5" \
       org.opencontainers.image.title="mariadb-galera" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="10.4.28"
@@ -23,7 +23,7 @@ RUN install_packages ca-certificates curl iproute2 ldap-utils libaio1 libaudit1 
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "ini-file-1.4.5-1-linux-${OS_ARCH}-debian-11" \
-      "mariadb-galera-10.4.28-1-linux-${OS_ARCH}-debian-11" \
+      "mariadb-galera-10.4.28-2-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
