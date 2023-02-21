@@ -1,10 +1,10 @@
 {
     "express": {
         "arch": "amd64",
-        "digest": "cbe5f317e346fb15aae4ea9980f675aba41470646087dda5ced59b59face5780",
+        "digest": "c9d294177420a5958352dd9affe52bbdcc418631dcbb1cd132e6dc07e299446f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.18.2-3"
+        "version": "4.18.2-4"
     },
     "gosu": {
         "arch": "amd64",
@@ -22,10 +22,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "100f7d546cffcd034bcced74a0fa87b5771c4109945a6ae616b53d0ec13d7881",
+        "digest": "e6ada4eebb80ec0bf135a4d0edd51b8e975939e2fea74e843b4eadae6a62d54f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-4"
+        "version": "3.8.16-5"
     },
     "wait-for-port": {
         "arch": "amd64",
