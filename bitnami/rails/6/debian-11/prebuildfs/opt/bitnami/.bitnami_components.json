@@ -15,17 +15,17 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "b1ec1c6a8662e67d9c08853b1242a42103bf4b3924600ff574c097aeedc3a29f",
+        "digest": "d6828cad4303399275281eb1c617d87c315c65d0def58d1204fac426e0200b0a",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.14.1-0"
+        "version": "18.14.1-1"
     },
     "python": {
         "arch": "amd64",
-        "digest": "100f7d546cffcd034bcced74a0fa87b5771c4109945a6ae616b53d0ec13d7881",
+        "digest": "e6ada4eebb80ec0bf135a4d0edd51b8e975939e2fea74e843b4eadae6a62d54f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-4"
+        "version": "3.8.16-5"
     },
     "rails": {
         "arch": "amd64",
@@ -36,10 +36,10 @@
     },
     "ruby": {
         "arch": "amd64",
-        "digest": "7d4509f926aa29d646727b4adc990b63328517cd24e385554d4ad0449bf06261",
+        "digest": "0c15215ff3f8be311d23e8c8e98a65364b307d5ab93a079089704aebcd21360a",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.7.7-3"
+        "version": "2.7.7-4"
     },
     "wait-for-port": {
         "arch": "amd64",
