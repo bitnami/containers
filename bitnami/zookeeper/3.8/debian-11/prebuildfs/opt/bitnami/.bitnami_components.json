@@ -8,10 +8,10 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "cd40a6df619d734d300324ad671f34323152e84682bc998da1330f1a7f0acfa6",
+        "digest": "be7aa8950dacdcd96b5308a246b86665d364f70675564f157bfc7594b383af1f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.18-10-1"
+        "version": "11.0.18-10-2"
     },
     "wait-for-port": {
         "arch": "amd64",
@@ -22,9 +22,9 @@
     },
     "zookeeper": {
         "arch": "amd64",
-        "digest": "d38934d6aed2425eb7cdfc0fa002d4294a210409528f9f2612444d007e4ad341",
+        "digest": "dd0df20b968df24100ba2951e2d60933509bbb9828060838eaeacb9fceed8d92",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.1-1"
+        "version": "3.8.1-2"
     }
 }
