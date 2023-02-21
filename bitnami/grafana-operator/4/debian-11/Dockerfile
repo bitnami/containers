@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-02-20T15:12:47Z" \
+      org.opencontainers.image.created="2023-02-21T07:53:46Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.9.0-debian-11-r3" \
+      org.opencontainers.image.ref.name="4.9.0-debian-11-r4" \
       org.opencontainers.image.title="grafana-operator" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="4.9.0"
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "grafana-operator-4.9.0-1-linux-${OS_ARCH}-debian-11" \
+      "grafana-operator-4.9.0-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
