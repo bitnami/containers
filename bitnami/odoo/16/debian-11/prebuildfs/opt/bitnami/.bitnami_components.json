@@ -8,10 +8,10 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "d6828cad4303399275281eb1c617d87c315c65d0def58d1204fac426e0200b0a",
+        "digest": "7f2d4830add40c5bb11444044654340a4bc288c0b52ce766adcb1c446eece182",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.14.1-1"
+        "version": "18.14.2-0"
     },
     "odoo": {
         "arch": "amd64",
@@ -29,10 +29,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "3bf58b5eaec0b24b4e1a949ba80e1437d708cc681675df573da994442a7b30ff",
+        "digest": "30bc9a9799f4ed06049f9cdc577c0da5d52e8cbcb395d9eb0d9bf6b86d3652a3",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.10.10-1"
+        "version": "3.10.10-2"
     },
     "render-template": {
         "arch": "amd64",
