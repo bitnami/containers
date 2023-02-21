@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-02-20T16:29:37Z" \
+      org.opencontainers.image.created="2023-02-21T10:58:14Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.13.7-debian-11-r42" \
+      org.opencontainers.image.ref.name="0.13.9-debian-11-r0" \
       org.opencontainers.image.title="metallb-speaker" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.13.7"
+      org.opencontainers.image.version="0.13.9"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "metallb-speaker-0.13.7-2-linux-${OS_ARCH}-debian-11" \
+      "metallb-speaker-0.13.9-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -38,7 +38,7 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="0.13.7" \
+ENV APP_VERSION="0.13.9" \
     BITNAMI_APP_NAME="metallb-speaker" \
     PATH="/opt/bitnami/metallb-speaker/bin:$PATH"
 
