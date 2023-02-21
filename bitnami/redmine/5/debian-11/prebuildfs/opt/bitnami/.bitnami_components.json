@@ -29,16 +29,16 @@
     },
     "ruby": {
         "arch": "amd64",
-        "digest": "bdf68921ebc087c51971c782949e70199f35134a2ff43692dc1220a3a4b0a74d",
+        "digest": "39428f0e9ae6023c043d4e00810a62275a26e59d21e3f748d11e674e999bf49c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.0.5-3"
+        "version": "3.0.5-4"
     },
     "yq": {
         "arch": "amd64",
-        "digest": "2fcd60b9977991e83f7066cf6da2c319b21483cdc67597625af37fa753534faf",
+        "digest": "83bb15cc1ad5d561294aa058542a9160685b976c866a303208c10e7c08634a8f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.30.8-2"
+        "version": "4.31.1-0"
     }
 }
