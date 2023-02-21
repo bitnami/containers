@@ -15,9 +15,9 @@
     },
     "supabase-storage": {
         "arch": "amd64",
-        "digest": "93bdbfc2db54c8fb9b6a90ae1cfe0e43c797970b27b402f15079f6d208914e40",
+        "digest": "cde7a61d936c5baec26770b73a86a1143116e7a1f8080cfc21c045b50cbc1bef",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.29.0-0"
+        "version": "0.29.1-0"
     }
 }
