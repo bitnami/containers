@@ -1,10 +1,10 @@
 {
     "java": {
         "arch": "amd64",
-        "digest": "5bd5372669617e425c32344e8ce1558d9402474acf2c7ed8ccd54c3fbcca7ce1",
+        "digest": "0cb6f9d6d7247b2978176a29d50e6a9ebe853545757decaaaff1899a22ebf12c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.8.362-1"
+        "version": "1.8.362-2"
     },
     "spring-cloud-dataflow-shell": {
         "arch": "amd64",
