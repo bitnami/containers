@@ -8,16 +8,16 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "cd40a6df619d734d300324ad671f34323152e84682bc998da1330f1a7f0acfa6",
+        "digest": "be7aa8950dacdcd96b5308a246b86665d364f70675564f157bfc7594b383af1f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.18-10-1"
+        "version": "11.0.18-10-2"
     },
     "supabase-postgres": {
         "arch": "amd64",
-        "digest": "ac1eacf2a162b948c41a93b2dceee10b731304de18955259aec99bd5dfc20d42",
+        "digest": "f576bf91a44b4623d50b2fcd16171ea3336f7d6ec659cd671c1ee9eabc116959",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "15.1.0-4"
+        "version": "15.1.0-6"
     }
 }
