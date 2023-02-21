@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-02-19T11:50:31Z" \
+      org.opencontainers.image.created="2023-02-21T08:04:28Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.0.0-debian-11-r2" \
+      org.opencontainers.image.ref.name="2.0.0-debian-11-r3" \
       org.opencontainers.image.title="grafana-tempo-query" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.0.0"
@@ -23,7 +23,7 @@ RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "jaeger-query-1.42.0-1-linux-${OS_ARCH}-debian-11" \
-      "grafana-tempo-query-2.0.0-1-linux-${OS_ARCH}-debian-11" \
+      "grafana-tempo-query-2.0.0-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
