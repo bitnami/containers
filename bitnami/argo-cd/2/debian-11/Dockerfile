@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-02-20T14:16:49Z" \
+      org.opencontainers.image.created="2023-02-21T07:39:19Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.6.2-debian-11-r1" \
+      org.opencontainers.image.ref.name="2.6.2-debian-11-r2" \
       org.opencontainers.image.title="argo-cd" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.6.2"
@@ -23,7 +23,7 @@ RUN install_packages ca-certificates curl git git-lfs gnupg openssh-client procp
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
-      "argo-cd-2.6.2-0-linux-${OS_ARCH}-debian-11" \
+      "argo-cd-2.6.2-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
