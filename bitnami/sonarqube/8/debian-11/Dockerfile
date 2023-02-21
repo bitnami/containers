@@ -4,10 +4,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-02-17T18:15:24Z" \
+      org.opencontainers.image.created="2023-02-21T09:46:47Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.9.10-debian-11-r41" \
+      org.opencontainers.image.ref.name="8.9.10-debian-11-r42" \
       org.opencontainers.image.title="sonarqube" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="8.9.10"
@@ -24,7 +24,7 @@ RUN install_packages acl ca-certificates curl libbsd0 libedit2 libffi7 libgcc-s1
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "postgresql-client-15.2.0-1-linux-${OS_ARCH}-debian-11" \
-      "java-17.0.6-10-1-linux-${OS_ARCH}-debian-11" \
+      "java-17.0.6-10-2-linux-${OS_ARCH}-debian-11" \
       "sonarqube-8.9.10-3-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
     ) && \
