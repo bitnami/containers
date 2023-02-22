@@ -607,7 +607,7 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 
 ## 3.7.1-debian-9-r38 and 3.7.1-ol-7-r40
 
-* It is now possible to use existing Moodle&trade; databases from other installations, as requested in [#95](https://github.com/bitnami/bitnami-docker-moodle/issues/95). In order to do this, use the environment variable `MOODLE_SKIP_INSTALL`, which forces the container not to run the initial Moodle&trade; setup wizard.
+* It is now possible to use existing Moodle&trade; databases from other installations. In order to do this, use the environment variable `MOODLE_SKIP_INSTALL`, which forces the container not to run the initial Moodle&trade; setup wizard.
 
 ## 3.7.0-debian-9-r12 and 3.7.0-ol-7-r13
 
