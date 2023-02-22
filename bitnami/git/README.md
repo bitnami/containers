@@ -70,7 +70,7 @@ docker run --name git bitnami/git:latest git --version
 * The `ENTRYPOINT` of the container has been modified to load a proper NSS environment that enables git ssh connections when running the container as non-root.
 * The `CMD` is also changed to enter the Bash shell.
 
-If you were using the container without replacing the entrypoint [`ENTRYPOINT [ "git" ]`](https://github.com/bitnami/containers/blob/main/bitnami/git/blob/af46ea91cebed3de1a863cb9969210688131b4e9/2/debian-10/Dockerfile#L19), make sure you specify the `git` command now:
+If you were using the container without replacing the entrypoint, make sure you specify the `git` command now:
 
 ```diff
 -docker run bitnami/git:latest --version
