@@ -340,14 +340,12 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 ### 0.20170219.201708232029-r3
 
 * Custom smileys, available in `lib/images/smileys/local`, are now persisted.
-* Address issue [#40](https://github.com/bitnami/bitnami-docker-dokuwiki/issues/40).
-* In order to upgrade your image from previous versions, see the workaround provided on issue [#42](https://github.com/bitnami/bitnami-docker-dokuwiki/issues/42).
+* In order to upgrade your image from previous versions.
 
 ### 0.20180422.201805030840-r5
 
 * Custom InterWiki shortcut icons, available in `lib/images/interwiki/`, are now persisted.
-* Address issue [#40](https://github.com/bitnami/bitnami-docker-dokuwiki/issues/40).
-* In order to upgrade your image from previous versions, see the workaround provided on issue [#42](https://github.com/bitnami/bitnami-docker-dokuwiki/issues/42).
+* In order to upgrade your image from previous versions.
 
 ## Contributing
 
