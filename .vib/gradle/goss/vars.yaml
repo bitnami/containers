@@ -1,0 +1,4 @@
+binaries:
+  - java
+  - gradle
+root_dir: /opt/bitnami
