@@ -413,7 +413,7 @@ For the Ghost container:
 
 ### Upgrade this image
 
-Bitnami provides up-to-date versions of MySQL and Ghost, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Ghost container. For the MySQL upgrade see: <https://github.com/bitnami/containers/blob/main/bitnami/mysql/blob/master/README.md#upgrade-this-image>
+Bitnami provides up-to-date versions of MySQL and Ghost, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Ghost container. For the MySQL upgrade see: <https://github.com/bitnami/containers/blob/main/bitnami/mysql/README.md#upgrade-this-image>
 
 The `bitnami/ghost:latest` tag always points to the most recent release. To get the most recent release you can simple repull the `latest` tag from the Docker Hub with `docker pull bitnami/ghost:latest`. However it is recommended to use [tagged versions](https://hub.docker.com/r/bitnami/ghost/tags/).
 
