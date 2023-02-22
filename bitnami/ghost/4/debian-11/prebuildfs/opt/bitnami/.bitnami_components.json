@@ -4,7 +4,7 @@
         "digest": "d37dd4069029400b8ac0d5f74c2d2bacfced6338ea6bbc8025ceae51a98db777",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.48.9-3"
+        "version": "4.48.9-4"
     },
     "gosu": {
         "arch": "amd64",
