@@ -11,14 +11,14 @@
         "digest": "674851da6b09acf26b688f1a435645573701b581ade0b8cb200ac38d5b19b8c1",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.7.1-0"
+        "version": "2.7.1-1"
     },
     "harbor-registryctl": {
         "arch": "amd64",
         "digest": "db7c34b4d70c2ac57ecddca2c02b047d690729c9c9ae7fa26205d8ea3bd8feaf",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.7.1-0"
+        "version": "2.7.1-1"
     },
     "yq": {
         "arch": "amd64",
