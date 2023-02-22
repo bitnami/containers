@@ -382,7 +382,7 @@ For the Odoo container:
 
 ### Upgrade this image
 
-Bitnami provides up-to-date versions of PostgreSQL and Odoo, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Odoo container. For the PostgreSQL upgrade see: <https://github.com/bitnami/containers/tree/main/bitnami/postgresql/blob/master/README.md#upgrade-this-image>
+Bitnami provides up-to-date versions of PostgreSQL and Odoo, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Odoo container. For the PostgreSQL upgrade see: <https://github.com/bitnami/containers/tree/main/bitnami/odoo#user-content-upgrade-this-image>
 
 The `bitnami/odoo:latest` tag always points to the most recent release. To get the most recent release you can simple repull the `latest` tag from the Docker Hub with `docker pull bitnami/odoo:latest`. However it is recommended to use [tagged versions](https://hub.docker.com/r/bitnami/odoo/tags/).
 
