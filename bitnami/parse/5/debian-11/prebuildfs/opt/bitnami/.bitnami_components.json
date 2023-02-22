@@ -25,7 +25,7 @@
         "digest": "58626a81731a5185e7c10caf2348521acb530e8a91548e1042e0bb161fa315fc",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.4.2-0"
+        "version": "5.4.2-1"
     },
     "python": {
         "arch": "amd64",
