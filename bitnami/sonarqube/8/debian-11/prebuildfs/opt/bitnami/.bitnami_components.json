@@ -25,6 +25,6 @@
         "digest": "0d99bccd66887beb6e8807696429d0e9272fc664936fd36eafa643974e2d36f9",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.9.10-3"
+        "version": "8.9.10-4"
     }
 }
