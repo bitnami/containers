@@ -110,7 +110,7 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name cosign bitnami/cosign:latest --help
 ```
 
-Check the [official Cosign documentation](https://github.com/sigstore/cosigndocs/) for more information about how to use Cosign.
+Check the [official Cosign documentation](https://github.com/sigstore/cosign/tree/main/doc) for more information about how to use Cosign.
 
 ## Contributing
 
