@@ -25,6 +25,6 @@
         "digest": "5a552925f3ded32faba9ee8b58629e5cd2b9cf84567a4a33696ff7d96065a81e",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.2.6-1"
+        "version": "6.2.6-2"
     }
 }
