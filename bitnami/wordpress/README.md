@@ -617,7 +617,7 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 
 ### 5.1.1-r28, 5.1.1-rhel-7-r31 and 5.1.1-ol-7-r30
 
-- Users reported that they wanted to import their WordPress database from other installations, such as [this ticket](https://github.com/bitnami/bitnami-docker-wordpress/issues/157). Now, in order to cover this use case, the variable `WORDPRESS_SKIP_INSTALL` can be set to avoid the container launch the WordPress installation wizard.
+- Users reported that they wanted to import their WordPress database from other installations. Now, in order to cover this use case, the variable `WORDPRESS_SKIP_INSTALL` can be set to avoid the container launch the WordPress installation wizard.
 
 ### 5.0.3-r20
 
