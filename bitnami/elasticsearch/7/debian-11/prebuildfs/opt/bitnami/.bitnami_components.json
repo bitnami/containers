@@ -4,7 +4,7 @@
         "digest": "c4fc25c8948bb5c5945049ebab3fda18139efe982e2a855b94d92d67db2b2fb9",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.17.9-3"
+        "version": "7.17.9-4"
     },
     "gosu": {
         "arch": "amd64",
@@ -15,10 +15,10 @@
     },
     "java": {
         "arch": "amd64",
-        "digest": "616d810dc3a926249db7843e25676da79c536a6fb01af626cd6ce88d7aa4c3e1",
+        "digest": "09eb316f02e065beb59e8c3cc8f2f908879faf7f4902cd1cc4b9fcd25bd528ca",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "17.0.6-10-1"
+        "version": "17.0.6-10-2"
     },
     "yq": {
         "arch": "amd64",
