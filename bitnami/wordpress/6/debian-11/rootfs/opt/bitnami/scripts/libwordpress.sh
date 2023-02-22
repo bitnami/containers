@@ -349,6 +349,7 @@ wordpress_initialize() {
             # Enable friendly URLs / permalinks (using historic Bitnami defaults)
             wp_execute rewrite structure '/%year%/%monthnum%/%day%/%postname%/'
             ! is_empty_value "$WORDPRESS_SMTP_HOST" && wordpress_configure_smtp
+            ! is_empty_value "$WORDPRESS_OPTIONS" && wordpress_set_options
         else
             info "An already initialized WordPress database was provided, configuration will be skipped"
             wp_execute core update-db
@@ -579,6 +580,28 @@ if ( !defined( 'WP_CLI' ) ) {
 	});
 }
 EOF
+}
+
+########################
+# Set wordpress options
+# Globals:
+#   *
+# Arguments:
+#   None
+# Returns:
+#   None
+########################
+wordpress_set_options() {
+  read -r -a options_to_set <<<"$(echo "$WORDPRESS_OPTIONS" | tr ',;' ' ')"
+  if [[ "${#options_to_set[@]}" -gt 0 ]]; then
+    info "Setting options"
+    for OPTIONVALUE in ${options_to_set[*]}; do
+      OPTION=$(echo "$OPTIONVALUE" | cut -d "=" -f 1)
+      VALUE=$(echo "$OPTIONVALUE" | cut -d "=" -f 2)
+      debug "Setting option ${OPTION} to value ${VALUE}"
+      wp_execute option set --format=json "$OPTION" "$VALUE"
+    done
+  fi
 }
 
 ########################
