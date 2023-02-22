@@ -779,7 +779,7 @@ Branch 2 has been renamed to 2.8 and branch 3 has been splited into branches 3.0
 
 ### 3.0.0-debian-10-r0
 
-* Apache Kafka 3.0 deprecates the `--zookeper` flag in shell commands. Related operations such as topic creation require the use of updated flags. Please, refer to [Apache Kafka's official release notes](https://downloads.apache.org/kafka/3.0.0/RELEASE_NOTES.html) for further information on the changes introduced by this version.
+* Apache Kafka 3.0 deprecates the `--zookeper` flag in shell commands. Related operations such as topic creation require the use of updated flags. Please, refer to [Apache Kafka's official release notes](https://archive.apache.org/dist/kafka/3.0.0/RELEASE_NOTES.html) for further information on the changes introduced by this version.
 
 ### 2.5.0-debian-10-r111
 
