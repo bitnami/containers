@@ -152,7 +152,7 @@ In this case you need to specify the directories to mount on the run command. Th
 
 ## Upgrade this application
 
-Bitnami provides up-to-date versions of Mongodb and Parse, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Parse container. For the Mongodb upgrade see <https://github.com/bitnami/containers/blob/main/bitnami/mongodb/blob/master/README.md#upgrade-this-image>
+Bitnami provides up-to-date versions of Mongodb and Parse, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container. We will cover here the upgrade of the Parse container. For the Mongodb upgrade see <https://github.com/bitnami/containers/tree/main/bitnami/mongodb#user-content-upgrade-this-image>
 
 1. Get the updated images:
 
