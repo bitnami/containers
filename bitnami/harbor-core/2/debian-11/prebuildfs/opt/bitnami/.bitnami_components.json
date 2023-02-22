@@ -11,7 +11,7 @@
         "digest": "07c49fda5e0bce464c211eb4e280e72626dc792289a3cf76c57c7bdc52c491c6",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.7.1-0"
+        "version": "2.7.1-1"
     },
     "ini-file": {
         "arch": "amd64",
