@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-02-21T08:51:20Z" \
+      org.opencontainers.image.created="2023-02-22T14:29:14Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.0.0-debian-11-r2" \
+      org.opencontainers.image.ref.name="6.0.0-debian-11-r3" \
       org.opencontainers.image.title="parse" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="6.0.0"
@@ -25,7 +25,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "python-3.8.16-5-linux-${OS_ARCH}-debian-11" \
       "node-16.19.1-1-linux-${OS_ARCH}-debian-11" \
       "mongodb-shell-1.7.1-1-linux-${OS_ARCH}-debian-11" \
-      "parse-6.0.0-1-linux-${OS_ARCH}-debian-11" \
+      "parse-6.0.0-2-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
