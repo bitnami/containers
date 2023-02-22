@@ -451,7 +451,7 @@ docker-compose up elasticsearch
 ### 6.8.5-debian-9-r0, 6.8.5-ol-7-r1, 7.4.2-debian-9-r10, 7.4.2-ol-7-r27
 
 * Arbitrary user ID(s) when running the container with a non-privileged user is not supported (only `1001` UID is allowed).
-* This is temporary solution while Elasticsearch maintainers address an issue with ownership/permissions when installing plugins. Issue reported at: <https://github.com/bitnami/bitnami-docker-elasticsearch/issues/50>
+* This is temporary solution while Elasticsearch maintainers address an issue with ownership/permissions when installing plugins.
 
 ### 6.8.2-debian-9-r36, 6.8.2-ol-7-r36, 7.3.1-debian-9-r8, 7.3.1-ol-7-r13
 
