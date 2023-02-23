@@ -1,0 +1,23 @@
+{
+    "gosu": {
+        "arch": "amd64",
+        "digest": "f6056076afb745fd7d9d87d20f71e7248d63330352cf5ae0be2130b7f44a8cfa",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.16.0-2"
+    },
+    "java": {
+        "arch": "amd64",
+        "digest": "be7aa8950dacdcd96b5308a246b86665d364f70675564f157bfc7594b383af1f",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "11.0.18-10-2"
+    },
+    "jenkins-agent": {
+        "arch": "amd64",
+        "digest": "38cd6c00fda7c269b3b4b4cbb87211182abc89d7affc0ddd96f64c8c63d11469",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "0.3107.0-0"
+    }
+}
