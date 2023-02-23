@@ -4,7 +4,7 @@
 
 > Redmine is an open source management application. It includes a tracking issue system, Gantt charts for a visual view of projects and deadlines, and supports SCM integration for version control.
 
-[Overview of Redmine](http://www.redmine.org/)
+[Overview of Redmine](https://www.redmine.org/)
 
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
