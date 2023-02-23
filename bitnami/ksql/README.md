@@ -4,7 +4,7 @@
 
 > Confluent KSQL DB is an event streaming database that helps you build stream processing apps
 
-[Overview of ksql](https://change.me)
+[Overview of ksql](https://www.confluent.io/)
 
 
 
