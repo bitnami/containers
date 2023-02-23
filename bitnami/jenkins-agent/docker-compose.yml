@@ -1,0 +1,4 @@
+version: '2'
+services:
+  jenkins-agent:
+    image: docker.io/bitnami/jenkins-agent:0
