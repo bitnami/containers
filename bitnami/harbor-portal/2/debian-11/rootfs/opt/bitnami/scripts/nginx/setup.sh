@@ -32,7 +32,7 @@ nginx_custom_init_scripts
 
 # Configure HTTPS port number
 if [[ -n "${NGINX_HTTPS_PORT_NUMBER:-}" ]] && [[ ! -f "${NGINX_SERVER_BLOCKS_DIR}/default-https-server-block.conf" ]] && is_file_writable "${NGINX_SERVER_BLOCKS_DIR}/default-https-server-block.conf"; then
-    cp "${BITNAMI_ROOT_DIR}/scripts/nginx/server_blocks/default-https-server-block.conf" "${NGINX_SERVER_BLOCKS_DIR}/default-https-server-block.conf"
+    cp "${BITNAMI_ROOT_DIR}/scripts/nginx/bitnami-templates/default-https-server-block.conf" "${NGINX_SERVER_BLOCKS_DIR}/default-https-server-block.conf"
 fi
 
 # Initialize NGINX
