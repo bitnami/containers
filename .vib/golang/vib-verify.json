@@ -39,7 +39,9 @@
             "tests_file": "golang/goss/goss.yaml",
             "vars_file": "golang/goss/vars.yaml",
             "remote": {
-              "workload": "deploy-golang"
+              "pod": {
+                "workload": "deploy-golang"
+              }
             }
           }
         },
