@@ -682,6 +682,11 @@ mongodb_create_user() {
 mongodb_create_users() {
     info "Creating users..."
 
+    if ! retry_while "mongodb_is_primary_node_up 127.0.0.1 $MONGODB_PORT_NUMBER admin" "$MONGODB_MAX_TIMEOUT"; then
+        error "Unable to initialize primary config server: cannot become primary"
+        exit 1
+    fi
+
     if [[ -n "$MONGODB_ROOT_PASSWORD" ]] && ! [[ "$MONGODB_REPLICA_SET_MODE" =~ ^(secondary|arbiter|hidden) ]]; then
         info "Creating $MONGODB_ROOT_USER user..."
         mongodb_execute "" "" "" "127.0.0.1" <<EOF
@@ -1044,7 +1049,7 @@ mongodb_is_primary_node_up() {
 db.isMaster().ismaster
 EOF
     )
-    grep -q "true" <<<"$result"
+    grep -E 'true.*primary|primary.*true' <<<"$result"
 }
 
 ########################
