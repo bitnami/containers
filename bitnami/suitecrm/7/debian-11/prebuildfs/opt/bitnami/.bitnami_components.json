@@ -1,45 +1,45 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "6937b37eaae1a0053c097ae04509cf3ccc4d260dd5fe010572753c3e8b22470d",
+        "digest": "85cad262b1568f5c507335dea52c7b311b157f15db13e88c4272a93410009abf",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.4.55-4"
+        "version": "2.4.55-6"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "9ab9654690d90d3c49ff66fb1eb286487e318adc899d036bc45922f6b176865b",
+        "digest": "f6056076afb745fd7d9d87d20f71e7248d63330352cf5ae0be2130b7f44a8cfa",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-1"
+        "version": "1.16.0-2"
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "501dfa639fb922301334755f68e8228303e4476ca033550d261ccfc7983ddf33",
+        "digest": "975e5e7663ae11b6b0f34ed8a589a5beb9589c0628f23890421a92143d9dfacc",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.27-2"
+        "version": "8.0.28-2"
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "f1d55c82fe67003513561ab0b4c91f2e7699d4eaaa5d417dc4ed6be50cb4cbed",
+        "digest": "dbc087bd90a6387956751464da45660229b3e7349b96099805e61dcbc2514853",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.6.12-0"
+        "version": "10.6.12-1"
     },
     "php": {
         "arch": "amd64",
-        "digest": "eafa6d920509daf7b255e9b627af0e2ecaefd7c47169eafb0a8008e12855cadf",
+        "digest": "9253bfece005a8afc80c15181035bec19fca8556b117ec8a6daa8321e4ec2f1e",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.27-1"
+        "version": "8.0.28-2"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "57c1d857acbb187fcb98f4ba26d138af9d866f59ad38dd443a75c0a6422de994",
+        "digest": "185e277977366ec222d2bde1a395ffa138ce1a9d3bdf1df20c3e49e8b8f9c68b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-0"
+        "version": "1.0.5-1"
     },
     "suitecrm": {
         "arch": "amd64",
