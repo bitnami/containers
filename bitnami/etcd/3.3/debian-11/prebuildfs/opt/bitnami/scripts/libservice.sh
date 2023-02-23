@@ -305,6 +305,8 @@ generate_systemd_conf() {
     local exec_reload=""
     local restart="always"
     local pid_file=""
+    local standard_output="journal"
+    local standard_error=""
     # Parse CLI flags
     shift
     while [[ "$#" -gt 0 ]]; do
@@ -318,6 +320,8 @@ generate_systemd_conf() {
             | --exec-reload \
             | --restart \
             | --pid-file \
+            | --standard-output \
+            | --standard-error \
             )
                 var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
                 shift
@@ -362,35 +366,32 @@ ExecStart=${exec_start}
 EOF
     # Optional stop and reload commands
     if [[ -n "$exec_stop" ]]; then
-        cat >> "$service_file" <<EOF
-ExecStop=${exec_stop}
-EOF
+        cat >> "$service_file" <<< "ExecStop=${exec_stop}"
     fi
     if [[ -n "$exec_reload" ]]; then
-        cat >> "$service_file" <<EOF
-ExecReload=${exec_reload}
-EOF
+        cat >> "$service_file" <<< "ExecReload=${exec_reload}"
     fi
     # User and group
     if [[ -n "$user" ]]; then
-        cat >> "$service_file" <<EOF
-User=${user}
-EOF
+        cat >> "$service_file" <<< "User=${user}"
     fi
     if [[ -n "$group" ]]; then
-        cat >> "$service_file" <<EOF
-Group=${group}
-EOF
+        cat >> "$service_file" <<< "Group=${group}"
     fi
     # PID file allows to determine if the main process is running properly (for Restart=always)
     if [[ -n "$pid_file" ]]; then
-        cat >> "$service_file" <<EOF
-PIDFile=${pid_file}
-EOF
+        cat >> "$service_file" <<< "PIDFile=${pid_file}"
     fi
     # Environment flags (may be specified multiple times in a unit)
     if [[ -n "$environment" ]]; then
         cat >> "$service_file" <<< "$environment"
+    fi
+    # Logging
+    if [[ -n "$standard_output" ]]; then
+        cat >> "$service_file" <<< "StandardOutput=${standard_output}"
+    fi
+    if [[ -n "$standard_error" ]]; then
+        cat >> "$service_file" <<< "StandardError=${standard_error}"
     fi
     cat >> "$service_file" <<EOF
 Restart=${restart}
@@ -400,8 +401,6 @@ IgnoreSIGPIPE=no
 KillMode=mixed
 # Limits
 LimitNOFILE=infinity
-# Configure output to appear in instance console output
-StandardOutput=journal+console
 
 [Install]
 # Enabling/disabling the main bitnami service should cause the same effect for this service
