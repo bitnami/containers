@@ -43,7 +43,9 @@
             "tests_file": "express/goss/goss.yaml",
             "vars_file": "express/goss/vars.yaml",
             "remote": {
-              "workload": "deploy-express"
+              "pod": {
+                "workload": "deploy-express"
+              }
             }
           }
         },
