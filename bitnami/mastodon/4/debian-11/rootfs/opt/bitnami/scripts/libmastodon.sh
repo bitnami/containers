@@ -431,7 +431,10 @@ mastodon_initialize() {
         # Elasticsearch is an optional component in Mastodon. It is necessary for enabling
         # text searches
         if is_boolean_yes "$MASTODON_ELASTICSEARCH_ENABLED"; then
-            local -r elasticsearch_connection_string="http://${MASTODON_ELASTICSEARCH_HOST}:${MASTODON_ELASTICSEARCH_PORT_NUMBER}"
+            # Only prefix the ES host with a protocol if it doesn't already contain one
+            [[ $MASTODON_ELASTICSEARCH_HOST != "http"* ]] && local -r protocol="http://"
+
+            local -r elasticsearch_connection_string="${protocol}${MASTODON_ELASTICSEARCH_HOST}:${MASTODON_ELASTICSEARCH_PORT_NUMBER}"
             mastodon_wait_for_elasticsearch_connection "$elasticsearch_connection_string"
             if is_boolean_yes "$MASTODON_MIGRATE_ELASTICSEARCH"; then
                 info "Migrating Elasticsearch"
