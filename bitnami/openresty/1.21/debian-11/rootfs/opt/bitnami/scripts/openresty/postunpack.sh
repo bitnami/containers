@@ -42,6 +42,7 @@ declare -a writable_dirs=(
     "$OPENRESTY_LOGS_DIR"
     "$OPENRESTY_TMP_DIR"
     "$OPENRESTY_SITE_DIR"
+    "$OPENRESTY_INITSCRIPTS_DIR"
     "$OPM_BASE_DIR"
 )
 for dir in "${writable_dirs[@]}"; do

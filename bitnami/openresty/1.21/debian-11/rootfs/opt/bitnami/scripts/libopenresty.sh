@@ -2,7 +2,7 @@
 #
 # Bitnami OpenResty library
 
-# shellcheck disable=SC1091
+# shellcheck disable=SC1090,SC1091
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/libfs.sh
@@ -154,5 +154,36 @@ openresty_initialize() {
     fi
     if [[ -n "${OPENRESTY_HTTP_PORT_NUMBER:-}" ]]; then
         openresty_configure_port "$OPENRESTY_HTTP_PORT_NUMBER"
+    fi
+}
+
+########################
+# Run custom initialization scripts
+# Globals:
+#   OPENRESTY_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+openresty_custom_init_scripts() {
+    info "Loading custom scripts..."
+    if [[ -d "$OPENRESTY_INITSCRIPTS_DIR" ]] && [[ -n $(find "$OPENRESTY_INITSCRIPTS_DIR/" -type f -regex ".*\.sh") ]] && [[ ! -f "$OPENRESTY_VOLUME_DIR/.user_scripts_initialized" || "$OPENRESTY_FORCE_INITSCRIPTS" == "true" ]]; then
+        info "Loading user's custom files from $OPENRESTY_INITSCRIPTS_DIR ..."
+        find "$OPENRESTY_INITSCRIPTS_DIR/" -type f -regex ".*\.sh" | sort | while read -r f; do
+            case "$f" in
+            *.sh)
+                if [[ -x "$f" ]]; then
+                    debug "Executing $f"
+                    "$f"
+                else
+                    debug "Sourcing $f"
+                    . "$f"
+                fi
+                ;;
+            *) debug "Ignoring $f" ;;
+            esac
+        done
+        touch "$OPENRESTY_VOLUME_DIR"/.user_scripts_initialized
     fi
 }

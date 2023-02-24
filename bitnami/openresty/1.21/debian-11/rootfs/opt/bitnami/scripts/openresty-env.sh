@@ -24,6 +24,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 openresty_env_vars=(
     OPENRESTY_HTTP_PORT_NUMBER
     OPENRESTY_HTTPS_PORT_NUMBER
+    OPENRESTY_FORCE_INITSCRIPTS
 )
 for env_var in "${openresty_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -48,6 +49,7 @@ export OPENRESTY_TMP_DIR="${OPENRESTY_BASE_DIR}/nginx/tmp"
 export OPENRESTY_LOGS_DIR="${OPENRESTY_BASE_DIR}/nginx/logs"
 export OPENRESTY_SERVER_BLOCKS_DIR="${OPENRESTY_CONF_DIR}/nginx/server_blocks"
 export OPENRESTY_SITE_DIR="${OPENRESTY_BASE_DIR}/site"
+export OPENRESTY_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
 export OPM_BASE_DIR="/home/openresty"
 export OPENRESTY_CONF_FILE="${OPENRESTY_CONF_DIR}/nginx.conf"
 export OPENRESTY_PID_FILE="${OPENRESTY_TMP_DIR}/nginx.pid"
@@ -62,5 +64,6 @@ export OPENRESTY_DEFAULT_HTTPS_PORT_NUMBER="8443" # only used at build time
 # OpenResty configuration
 export OPENRESTY_HTTP_PORT_NUMBER="${OPENRESTY_HTTP_PORT_NUMBER:-}"
 export OPENRESTY_HTTPS_PORT_NUMBER="${OPENRESTY_HTTPS_PORT_NUMBER:-}"
+export OPENRESTY_FORCE_INITSCRIPTS="${OPENRESTY_FORCE_INITSCRIPTS:-false}"
 
 # Custom environment variables may be defined below

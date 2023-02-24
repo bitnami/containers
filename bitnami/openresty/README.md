@@ -108,6 +108,12 @@ Access your web server in the browser by navigating to `http://localhost:9000`.
 
 ## Configuration
 
+### Initializing a new instance
+
+When the container is executed for the first time, it will execute the files with extensions `.sh` located at `/docker-entrypoint-initdb.d`.
+
+In order to have your custom files inside the docker image you can mount them as a volume.
+
 ### Adding custom server blocks
 
 The default `nginx.conf` includes server blocks placed in `/opt/bitnami/openresty/nginx/conf/server_blocks/`. You can mount a `my_server_block.conf` file containing your custom server block at this location.
@@ -235,6 +241,8 @@ FROM bitnami/openresty:latest
 RUN opm get openresty/lua-resty-lock
 ```
 
+Additionally, you can install your custom Lua modules using [your custom init scripts](#initializing-a-new-instance).
+
 ## Reverse proxy to other containers
 
 OpenResty can be used to reverse proxy to other containers using Docker's linking system. This is particularly useful if you want to serve dynamic content through an OpenResty frontend. To do so, [add a server block](#adding-custom-server-blocks) like the following in the `/opt/bitnami/openresty/nginx/conf/server_blocks/` folder:
@@ -286,6 +294,7 @@ The Bitnami OpenResty Docker image is designed to be extended so it can be used 
 Before extending this image, please note there are certain configuration settings you can modify using the original image:
 
 * Settings that can be adapted using environment variables. For instance, you can change the port used by OpenResty for HTTP setting the environment variable `OPENRESTY_HTTP_PORT_NUMBER`.
+* [Initializing a new instance](#initializing-a-new-instance)
 * [Adding custom server blocks](#adding-custom-server-blocks).
 * [Replacing the 'nginx.conf' file](#full-configuration).
 * [Using custom SSL certificates](#using-custom-ssl-certificates).
