@@ -11,7 +11,7 @@
         "digest": "4ccf63f0f00283775c332928aa07f9effed56acd897047f0079fe2429a5c3258",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.0.15-0"
+        "version": "5.0.15-1"
     },
     "mongodb-shell": {
         "arch": "amd64",
