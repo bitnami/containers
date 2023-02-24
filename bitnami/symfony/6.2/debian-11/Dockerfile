@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-02-22T14:48:56Z" \
+      org.opencontainers.image.created="2023-02-23T22:17:42Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.2.6-debian-11-r7" \
+      org.opencontainers.image.ref.name="6.2.6-debian-11-r8" \
       org.opencontainers.image.title="symfony" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="6.2.6"
