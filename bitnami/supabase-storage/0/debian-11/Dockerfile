@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-02-21T20:03:23Z" \
+      org.opencontainers.image.created="2023-02-23T22:08:12Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.29.1-debian-11-r0" \
+      org.opencontainers.image.ref.name="0.29.1-debian-11-r1" \
       org.opencontainers.image.title="supabase-storage" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.29.1"
@@ -23,7 +23,7 @@ RUN install_packages ca-certificates curl libbz2-1.0 libcom-err2 libcrypt1 libff
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.8.16-5-linux-${OS_ARCH}-debian-11" \
-      "node-18.14.1-1-linux-${OS_ARCH}-debian-11" \
+      "node-18.14.2-0-linux-${OS_ARCH}-debian-11" \
       "supabase-storage-0.29.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
