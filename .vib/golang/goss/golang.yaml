@@ -1,6 +1,6 @@
 command:
   check-app-version:
-    exec: go version | grep -q $(echo $APP_VERSION | cut -d '.' -f 1,2)
+    exec: go version | grep "$(echo $APP_VERSION | sed -E 's|([0-9]+\.[0-9]+)\.0$|\1|g')"
     exit-status: 0
   check-go-build:
     {{- $filename := printf "test_%s" (randAlpha 5) }}
