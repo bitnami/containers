@@ -17,7 +17,7 @@ set -o pipefail
 
 # Ensure required directories exist
 chmod g+rwX "$SYMFONY_BASE_DIR"
-for dir in "/app" "$SYMFONY_SKELETON_DIR" "$SYMFONY_WEB_SKELETON_DIR"; do
+for dir in "/app" "$SYMFONY_SKELETON_DIR"; do
     ensure_dir_exists "$dir"
     configure_permissions_ownership "$dir" -d "775" -f "664"
 done
