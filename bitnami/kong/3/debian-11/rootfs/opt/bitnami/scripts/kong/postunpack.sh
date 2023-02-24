@@ -24,8 +24,7 @@ chmod -R g+rwX "$KONG_SERVER_DIR" "$KONG_CONF_DIR"
 cp "$KONG_DEFAULT_CONF_FILE" "$KONG_CONF_FILE"
 kong_conf_set prefix "$KONG_SERVER_DIR"
 kong_conf_set nginx_daemon off
-kong_conf_set lua_package_path
-kong_conf_set nginx_user
+kong_conf_set nginx_user "$KONG_DAEMON_USER"
 kong_configure_non_empty_values
 install_opentelemetry
 configure_lua_paths "/opt/bitnami/scripts/kong-env.sh" "/etc/bash.bashrc"
