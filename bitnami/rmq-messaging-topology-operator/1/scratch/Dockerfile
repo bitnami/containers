@@ -33,10 +33,10 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-02-17T17:56:37Z" \
+      org.opencontainers.image.created="2023-02-24T16:18:51Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.10.1-scratch-r1" \
+      org.opencontainers.image.ref.name="1.10.1-scratch-r2" \
       org.opencontainers.image.title="rmq-messaging-topology-operator" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.10.1"
