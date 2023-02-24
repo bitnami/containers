@@ -58,3 +58,7 @@ touch "$NEO4J_APOC_CONF_FILE"
 neo4j_conf_set "apoc.import.file.enabled" "true" "$NEO4J_APOC_CONF_FILE"
 neo4j_conf_set "apoc.import.file.use_neo4j_config" "false" "$NEO4J_APOC_CONF_FILE"
 configure_permissions_ownership "$NEO4J_APOC_CONF_FILE" -u "root" -g "root" -f 664
+
+## Create a hidden directory where the cypher-shell executable can write cache and history data
+ensure_dir_exists "$NEO4J_BASE_DIR/.home"
+configure_permissions_ownership "$NEO4J_BASE_DIR/.home" -u "root" -g "root" -d 775
