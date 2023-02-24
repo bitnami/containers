@@ -33,10 +33,10 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-02-17T16:10:05Z" \
+      org.opencontainers.image.created="2023-02-24T16:16:36Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.16.0-scratch-r3" \
+      org.opencontainers.image.ref.name="0.16.0-scratch-r4" \
       org.opencontainers.image.title="oras" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.16.0"
