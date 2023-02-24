@@ -15,9 +15,9 @@
     },
     "ksql": {
         "arch": "amd64",
-        "digest": "9a0085f106956f399fb051506506dfd90b6d635e4997150246f1bd526bee0e0a",
+        "digest": "60a7286b7e5899edc59aff6cd6738302f68087c2a613151c2ae9806b6d151be6",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.1.5-2"
+        "version": "7.1.6-0"
     }
 }
