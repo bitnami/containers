@@ -23,7 +23,6 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # variable will be overridden with the value specified in that file
 symfony_env_vars=(
     SYMFONY_PORT_NUMBER
-    SYMFONY_PROJECT_SKELETON
     SYMFONY_SKIP_DATABASE
     SYMFONY_DATABASE_HOST
     SYMFONY_DATABASE_PORT_NUMBER
@@ -52,11 +51,9 @@ unset symfony_env_vars
 # Paths
 export SYMFONY_BASE_DIR="${BITNAMI_ROOT_DIR}/symfony"
 export SYMFONY_SKELETON_DIR="${SYMFONY_BASE_DIR}/skeleton"
-export SYMFONY_WEB_SKELETON_DIR="${SYMFONY_BASE_DIR}/website-skeleton"
 
 # Symfony configuration
 export SYMFONY_PORT_NUMBER="${SYMFONY_PORT_NUMBER:-8000}"
-export SYMFONY_PROJECT_SKELETON="${SYMFONY_PROJECT_SKELETON:-symfony/website-skeleton}"
 export SYMFONY_SKIP_DATABASE="${SYMFONY_SKIP_DATABASE:-no}" # only used during the first initialization
 
 # Database configuration
