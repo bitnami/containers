@@ -43,9 +43,9 @@
     },
     "suitecrm": {
         "arch": "amd64",
-        "digest": "38ee2fa98e3fbd74a1a1ef695a6ab30fa431bbfdfff4a566ed83f865cb170fcc",
+        "digest": "c3970a553c123cf18b6b4f417dd92114b7b6d0dd96d4045f123c553c560e06a1",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.13.1-1"
+        "version": "7.13.1-2"
     }
 }
