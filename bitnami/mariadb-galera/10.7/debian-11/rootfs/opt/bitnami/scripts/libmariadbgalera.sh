@@ -344,6 +344,7 @@ wsrep_sst_auth=${DB_GALERA_DEFAULT_MARIABACKUP_USER}:${DB_GALERA_DEFAULT_MARIABA
 wsrep_cluster_name=${DB_GALERA_DEFAULT_CLUSTER_NAME}
 wsrep_node_name=${DB_GALERA_DEFAULT_NODE_NAME}
 wsrep_node_address=${DB_GALERA_DEFAULT_NODE_ADDRESS}
+innodb_autoinc_lock_mode=2
 
 [mariadb]
 plugin_load_add = auth_pam
