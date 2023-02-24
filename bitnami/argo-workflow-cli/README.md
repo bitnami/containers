@@ -118,7 +118,7 @@ To run commands inside this container you can use `docker run`, for example to e
 docker run --rm --name argo-workflow-cli bitnami/argo-workflow-cli:latest --help
 ```
 
-Check the [official Argo Workflows CLI documentation](https://argoproj.github.io/argo-workflows/cli/) for the list of the available parameters.
+Check the [official Argo Workflows CLI documentation](https://argoproj.github.io/argo-workflows/cli/argo/) for the list of the available parameters.
 
 ## Contributing
 
