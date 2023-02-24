@@ -1,4 +1,5 @@
 command:
+  # Major and Minor versions are often shown as "x.0" and "x.y" instead of "x.0.0" and "x.y.0"
   check-app-version:
     exec: go version | grep "$(echo $APP_VERSION | sed -E 's|([0-9]+\.[0-9]+)\.0$|\1|g')"
     exit-status: 0
