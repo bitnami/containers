@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-02-24T08:24:44Z" \
+      org.opencontainers.image.created="2023-02-24T23:22:21Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.0.15-debian-11-r0" \
+      org.opencontainers.image.ref.name="5.0.15-debian-11-r1" \
       org.opencontainers.image.title="mongodb-sharded" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="5.0.15"
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "yq-4.31.1-0-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.6-1-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-1-linux-${OS_ARCH}-debian-11" \
-      "mongodb-5.0.15-0-linux-${OS_ARCH}-debian-11" \
+      "mongodb-5.0.15-1-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
