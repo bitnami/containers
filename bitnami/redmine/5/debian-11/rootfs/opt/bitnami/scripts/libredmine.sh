@@ -171,6 +171,8 @@ redmine_initialize() {
             redmine_conf_set "default.email_delivery.smtp_settings.password" "$REDMINE_SMTP_PASSWORD"
             # Remove 'USER@' part from e-mail address and use as domain
             redmine_conf_set "default.email_delivery.smtp_settings.domain" "${REDMINE_SMTP_USER//*@/}"
+            redmine_conf_set "default.email_delivery.smtp_settings.openssl_verify_mode" "$REDMINE_SMTP_OPENSSL_VERIFY_MODE"
+            redmine_conf_set "default.email_delivery.smtp_settings.ca_file" "$REDMINE_SMTP_CA_FILE"
             if [[ "$REDMINE_SMTP_PROTOCOL" = "tls" ]]; then
                 redmine_conf_set "default.email_delivery.smtp_settings.enable_starttls_auto" "true" "bool"
             else
