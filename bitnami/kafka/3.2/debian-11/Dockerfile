@@ -4,10 +4,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-02-23T22:55:28Z" \
+      org.opencontainers.image.created="2023-02-26T23:18:03Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.2.3-debian-11-r56" \
+      org.opencontainers.image.ref.name="3.2.3-debian-11-r57" \
       org.opencontainers.image.title="kafka" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.2.3"
