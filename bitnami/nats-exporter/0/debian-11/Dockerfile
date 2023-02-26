@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-02-23T20:20:49Z" \
+      org.opencontainers.image.created="2023-02-26T20:46:09Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.10.1-debian-11-r38" \
+      org.opencontainers.image.ref.name="0.10.1-debian-11-r39" \
       org.opencontainers.image.title="nats-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.10.1"
