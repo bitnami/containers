@@ -282,7 +282,7 @@ olcDatabase: frontend
 dn: olcDatabase=config,cn=config
 objectClass: olcDatabaseConfig
 olcDatabase: config
-olcAccess: to * by dn.base="gidNumber=0+uidNumber=1001,cn=peercred,cn=external,cn=auth" manage by * none
+olcAccess: to * by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" manage by * none
 
 #
 # Server status monitoring
@@ -291,7 +291,7 @@ olcAccess: to * by dn.base="gidNumber=0+uidNumber=1001,cn=peercred,cn=external,c
 dn: olcDatabase=monitor,cn=config
 objectClass: olcDatabaseConfig
 olcDatabase: monitor
-olcAccess: to * by dn.base="gidNumber=0+uidNumber=1001,cn=peercred,cn=external,cn=auth" read by dn.base="cn=Manager,dc=my-domain,dc=com" read by * none
+olcAccess: to * by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" read by dn.base="cn=Manager,dc=my-domain,dc=com" read by * none
 
 #
 # Backend database definitions
