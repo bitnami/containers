@@ -375,7 +375,7 @@ To use `EXTRA_LOCALES`, you have two options:
   ```yaml
   moodle:
   ...
-    # image: 'bitnami/moodle:4' # remove this line !
+    # image: 'bitnami/moodle:latest' # remove this line !
     build:
       context: .
       dockerfile: Dockerfile
@@ -384,7 +384,7 @@ To use `EXTRA_LOCALES`, you have two options:
   ...
   ```
 
-* For manual execution, clone the repository and run the following command inside the `4/debian-11` directory:
+* For manual execution, clone the repository and run the following command inside the `X/debian-11` directory:
 
   ```console
   docker build -t bitnami/moodle:latest --build-arg EXTRA_LOCALES="fr_FR.UTF-8 UTF-8, de_DE.UTF-8 UTF-8, it_IT.UTF-8 UTF-8, es_ES.UTF-8 UTF-8" .
@@ -401,7 +401,7 @@ To use `WITH_ALL_LOCALES`, you have two options:
   ```yaml
   moodle:
   ...
-    # image: 'bitnami/moodle:4' # remove this line !
+    # image: 'bitnami/moodle:latest' # remove this line !
     build:
       context: .
       dockerfile: Dockerfile
@@ -410,7 +410,7 @@ To use `WITH_ALL_LOCALES`, you have two options:
   ...
   ```
 
-* For manual execution, clone the repository and run the following command inside the `4/debian-11` directory:
+* For manual execution, clone the repository and run the following command inside the `X/debian-11` directory:
 
   ```console
   docker build -t bitnami/moodle:latest --build-arg WITH_ALL_LOCALES=yes .
