@@ -40,6 +40,8 @@ redmine_env_vars=(
     REDMINE_SMTP_PASSWORD
     REDMINE_SMTP_PROTOCOL
     REDMINE_SMTP_AUTH
+    REDMINE_SMTP_OPENSSL_VERIFY_MODE
+    REDMINE_SMTP_CA_FILE
     REDMINE_DATABASE_TYPE
     REDMINE_DATABASE_HOST
     REDMINE_DATABASE_PORT_NUMBER
@@ -119,6 +121,11 @@ REDMINE_SMTP_PROTOCOL="${REDMINE_SMTP_PROTOCOL:-"${SMTP_PROTOCOL:-}"}"
 export REDMINE_SMTP_PROTOCOL="${REDMINE_SMTP_PROTOCOL:-}" # only used during the first initialization
 REDMINE_SMTP_AUTH="${REDMINE_SMTP_AUTH:-"${SMTP_AUTHENTICATION:-}"}"
 export REDMINE_SMTP_AUTH="${REDMINE_SMTP_AUTH:-login}" # only used during the first initialization
+REDMINE_SMTP_OPENSSL_VERIFY_MODE="${REDMINE_SMTP_OPENSSL_VERIFY_MODE:-"${SMTP_OPENSSL_VERIFY_MODE:-}"}"
+export REDMINE_SMTP_OPENSSL_VERIFY_MODE="${REDMINE_SMTP_OPENSSL_VERIFY_MODE:-peer}" # only used during the first initialization
+REDMINE_SMTP_CA_FILE="${REDMINE_SMTP_CA_FILE:-"${SMTP_CA_FILE:-}"}"
+export REDMINE_SMTP_CA_FILE="${REDMINE_SMTP_CA_FILE:-/etc/ssl/certs/ca-certificates.crt}" # only used during the first initialization
+
 
 # Database configuration
 export REDMINE_DATABASE_TYPE="${REDMINE_DATABASE_TYPE:-mariadb}" # only used during the first initialization
