@@ -5,10 +5,10 @@ ARG TARGETARCH
 ARG WITH_ALL_LOCALES="no"
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-02-23T20:10:21Z" \
+      org.opencontainers.image.created="2023-02-26T21:35:43Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.1.1-debian-11-r16" \
+      org.opencontainers.image.ref.name="4.1.1-debian-11-r17" \
       org.opencontainers.image.title="moodle" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="4.1.1"
