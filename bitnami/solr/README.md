@@ -153,7 +153,7 @@ When you start the solr image, you can adjust the configuration of the instance 
 * `SOLR_PORT_NUMBER`: Port used by Solr server. Default: **8983**
 * `SOLR_SERVER_DIR`: Specify the Solr server directory. Default: **/opt/bitnami/solr/server**
 * `SOLR_CORES`: List of core names to create at first run separated by either a space, (``), a comma (`,`) or a semicolon (`;`). No default. (E.g.: '**my_core_en,my_core_es**')
-* `SOLR_CORE_CONF_DIR`: Configuration directory to copy when creating a new core. Default: **data_driven_schema_configs**
+* `SOLR_CORE_CONF_DIR`: Configuration directory to copy when creating a new core. Alternatively, you can provide a List of core configurations separated by either a space, (``), a comma (`,`) or a semicolon (`;`). If you use this, the number and order of directories must match `SOLR_CORES`. This allows you to have a custom configuration for each of the defined cores. Default: **data_driven_schema_configs**
 * `SOLR_OPTS`: List of Solr server options and flags separated by either a space, (``), a comma (`,`) or a semicolon (`;`). No default. (E.g.: '**-XX:+AggressiveOpts -XX:G1HeapRegionSize=8m**')
 * `SOLR_JETTY_HOST`: Configuration to listen on a specific IP address or host name.Default: **0.0.0.0**
 

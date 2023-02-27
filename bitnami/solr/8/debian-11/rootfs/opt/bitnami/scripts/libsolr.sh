@@ -185,11 +185,22 @@ solr_create_cores() {
     is_boolean_yes "$SOLR_ENABLE_AUTHENTICATION" && command_args+=("--user" "${SOLR_ADMIN_USERNAME}:${SOLR_ADMIN_PASSWORD}")
 
     read -r -a cores <<<"$(tr ',;' ' ' <<<"${SOLR_CORES}")"
+    read -r -a conf_dirs <<<"$(tr ',;' ' ' <<<"${SOLR_CORE_CONF_DIR}")"
+    if [[ "${#cores[@]}" -ne "${#conf_dirs[@]}" ]] && [[ "${#conf_dirs[@]}" -ne 1 ]]; then
+        error "The number of SOLR_CORES and SOLR_CORE_CONF_DIR do not match"
+        return 1
+    fi
+
     info "Creating cores..."
-    for core in "${cores[@]}"; do
+    for index in "${!cores[@]}"; do
+        core="${cores[$index]}"
         mkdir -p "${SOLR_SERVER_DIR}/solr/${core}/data"
         mkdir -p "${SOLR_SERVER_DIR}/solr/${core}/conf"
-        cp -Lr "${SOLR_CORE_CONF_DIR}"/* "${SOLR_SERVER_DIR}/solr/${core}/conf/"
+        if [[ "${#cores[@]}" -ne "${#conf_dirs[@]}" ]]; then
+            cp -Lr "${SOLR_CORE_CONF_DIR}"/* "${SOLR_SERVER_DIR}/solr/${core}/conf/"
+        else
+            cp -Lr "${conf_dirs[$index]}"/* "${SOLR_SERVER_DIR}/solr/${core}/conf/"
+        fi
 
         command_args+=("${protocol}://localhost:${SOLR_PORT_NUMBER}/solr/admin/cores?action=CREATE&name=${core}&instanceDir=${core}&dataDir=data")
 
