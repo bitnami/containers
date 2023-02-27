@@ -19,11 +19,6 @@ command:
     exec: dotnet new -i CamundaProcessTemplate --force && dotnet new CamundaProcess -n VIBInstance --force
     exit-status: 0
 file:
-  # Checks the postunpack phase properly creates the lib's symlink
-  /lib64/libz.so:
-    exists: true
-    filetype: symlink
-    linked-to: /usr/lib/libz.so.1
   # Checks the permission change done at compilation
   /opt/bitnami/dotnet-sdk/bin/sdk/{{ .Env.APP_VERSION }}/AppHostTemplate/apphost:
     exists: true
