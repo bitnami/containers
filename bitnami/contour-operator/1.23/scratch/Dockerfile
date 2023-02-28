@@ -33,10 +33,10 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-02-24T16:14:45Z" \
+      org.opencontainers.image.created="2023-02-28T15:37:33Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.23.0-scratch-r7" \
+      org.opencontainers.image.ref.name="1.23.0-scratch-r8" \
       org.opencontainers.image.title="contour-operator" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.23.0"
