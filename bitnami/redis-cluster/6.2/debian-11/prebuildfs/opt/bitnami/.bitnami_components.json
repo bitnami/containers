@@ -8,9 +8,9 @@
     },
     "redis": {
         "arch": "amd64",
-        "digest": "26c33e943f177eea39fd9866ac8d4e562de3b4ec68ef7ef448dfd4e644e24ba0",
+        "digest": "52e4b1c27e450f58b2a9924f916c7768001d3a4b93c73d9efe0658b30c8f5d1c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.2.10-1"
+        "version": "6.2.11-0"
     }
 }
