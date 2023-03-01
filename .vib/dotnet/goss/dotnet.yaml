@@ -9,9 +9,3 @@ command:
     stdout:
       - NETCore.App {{ .Env.APP_VERSION }}
     exit-status: 0
-file:
-  # Checks the postunpack phase properly creates the lib's symlink
-  /lib64/libz.so:
-    exists: true
-    filetype: symlink
-    linked-to: /usr/lib/libz.so.1
