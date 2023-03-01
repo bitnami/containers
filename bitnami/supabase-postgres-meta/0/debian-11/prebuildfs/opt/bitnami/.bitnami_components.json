@@ -8,16 +8,16 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "e6ada4eebb80ec0bf135a4d0edd51b8e975939e2fea74e843b4eadae6a62d54f",
+        "digest": "d1ef0d0e577eb68d61ffda2378cb61c756d6a92db7e0ead6ed8c2b19e600ee77",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-5"
+        "version": "3.8.16-6"
     },
     "supabase-postgres-meta": {
         "arch": "amd64",
-        "digest": "d28981267b9b46ff60ef096ab086125e06635841eaab0eac145a062e0966466b",
+        "digest": "03f2ad4218bd49e4fe261a6c3dba0f7372aaebcd94db3b4da062dd5d8e483524",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.60.3-0"
+        "version": "0.60.7-0"
     }
 }
