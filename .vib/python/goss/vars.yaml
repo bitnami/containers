@@ -1,0 +1,6 @@
+binaries:
+  - python
+version:
+  bin_name: python
+  flag: --version
+root_dir: /opt/bitnami
