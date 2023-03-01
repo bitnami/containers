@@ -1,0 +1,12 @@
+command:
+  # We need to parse the printed version differently depending on the version
+  # Java 1.8 does not support --version, with -version printing to stderr
+  # Major versions are often shown as "x" instead of "x.0.0"
+  check-app-version:
+    exec: java -version 2>&1 | sed "s/+/-/g" | sed "s/0_//g" | grep "$(echo $APP_VERSION | sed -E 's|([0-9]+)\.0\.0$|\1|g')"
+    exit-status: 0
+  check-run-jar:
+    exec: java -jar ../../java/goss/testfiles/HelloTest.jar
+    stdout:
+    - Hello VIB
+    exit-status: 0

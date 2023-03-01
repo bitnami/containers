@@ -1,0 +1,10 @@
+gossfile:
+  # Goss tests exclusive to the current container
+  ../../java/goss/java.yaml: {}
+  # Load scripts from .vib/common/goss/templates
+  ../../common/goss/templates/check-binaries.yaml: {}
+  ../../common/goss/templates/check-broken-symlinks.yaml: {}
+  ../../common/goss/templates/check-ca-certs.yaml: {}
+  ../../common/goss/templates/check-files.yaml: {}
+  ../../common/goss/templates/check-linked-libraries.yaml: {}
+  ../../common/goss/templates/check-sed-in-place.yaml: {}
