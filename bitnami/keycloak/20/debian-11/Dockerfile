@@ -24,7 +24,7 @@ RUN install_packages ca-certificates curl krb5-user libaio1 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "wait-for-port-1.0.6-1-linux-${OS_ARCH}-debian-11" \
-      "java-11.0.18-10-2-linux-${OS_ARCH}-debian-11" \
+      "java-17.0.6-10-2-linux-${OS_ARCH}-debian-11" \
       "keycloak-20.0.5-1-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
     ) && \
