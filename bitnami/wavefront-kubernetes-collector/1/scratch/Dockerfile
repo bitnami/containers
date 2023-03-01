@@ -33,10 +33,10 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-02-28T16:05:15Z" \
+      org.opencontainers.image.created="2023-03-01T11:47:45Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.13.0-scratch-r8" \
+      org.opencontainers.image.ref.name="1.13.0-scratch-r9" \
       org.opencontainers.image.title="wavefront-kubernetes-collector" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.13.0"
