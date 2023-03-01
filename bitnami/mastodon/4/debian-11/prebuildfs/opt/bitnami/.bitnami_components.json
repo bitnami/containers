@@ -29,17 +29,17 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "e6ada4eebb80ec0bf135a4d0edd51b8e975939e2fea74e843b4eadae6a62d54f",
+        "digest": "d1ef0d0e577eb68d61ffda2378cb61c756d6a92db7e0ead6ed8c2b19e600ee77",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-5"
+        "version": "3.8.16-6"
     },
     "redis-client": {
         "arch": "amd64",
-        "digest": "ecc21410b02b461113b028fad182ecc3c35b952886fdeaf3dde4c456de3fe9f1",
+        "digest": "bce7d8b5648748463af83b48999a1a6d9b83db73295f2cd57d1caa5a0a028216",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.0.8-2"
+        "version": "7.0.9-0"
     },
     "ruby": {
         "arch": "amd64",
