@@ -8,10 +8,10 @@
     },
     "kong": {
         "arch": "amd64",
-        "digest": "8d70a988f5533a1fd73a22e2aeffb798496872f37007904588a68a0154cf3a3f",
+        "digest": "397800fdf9209b8938a13f46006ad496502687d78a6dffae2660cf8b1101cc52",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.2.1-0"
+        "version": "3.2.1-1"
     },
     "render-template": {
         "arch": "amd64",
