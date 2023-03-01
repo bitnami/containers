@@ -43,7 +43,9 @@
             "tests_file": "codeigniter/goss/goss.yaml",
             "vars_file": "codeigniter/goss/vars.yaml",
             "remote": {
-              "workload": "deploy-codeigniter"
+              "pod": {
+                "workload": "deploy-codeigniter"
+              }
             }
           }
         },
