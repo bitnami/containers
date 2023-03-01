@@ -21,4 +21,3 @@ for dir in "$TENSORFLOW_SERVING_TMP_DIR" "$TENSORFLOW_SERVING_BIN_DIR" "$TENSORF
     ensure_dir_exists "$dir"
     configure_permissions_ownership "$dir" -d "775" -u "$TENSORFLOW_SERVING_DAEMON_USER" -g "root"
 done
-
