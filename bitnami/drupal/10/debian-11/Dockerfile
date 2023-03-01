@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-02-27T20:11:45Z" \
+      org.opencontainers.image.created="2023-03-01T17:35:50Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="10.0.3-debian-11-r12" \
+      org.opencontainers.image.ref.name="10.0.4-debian-11-r0" \
       org.opencontainers.image.title="drupal" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="10.0.3"
+      org.opencontainers.image.version="10.0.4"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "libphp-8.1.16-2-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-1-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
-      "drupal-10.0.3-4-linux-${OS_ARCH}-debian-11" \
+      "drupal-10.0.4-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -52,7 +52,7 @@ RUN /opt/bitnami/scripts/drupal/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="10.0.3" \
+    APP_VERSION="10.0.4" \
     BITNAMI_APP_NAME="drupal" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/drupal/vendor/bin:$PATH"
 
