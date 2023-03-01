@@ -1,0 +1,7 @@
+command:
+  # The spark serve command is working
+  check-server:
+    exec: timeout 2s /opt/bitnami/codeigniter/spark serve | tail -n2
+    exit-status: 0
+    stdout:
+      - farted
