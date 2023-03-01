@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-02-20T14:47:58Z" \
+      org.opencontainers.image.created="2023-02-27T20:07:38Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.0.406-debian-11-r2" \
+      org.opencontainers.image.ref.name="6.0.406-debian-11-r4" \
       org.opencontainers.image.title="dotnet-sdk" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="6.0.406"
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages build-essential ca-certificates curl git libcap2-bin libgcc-s1 libicu-dev liblttng-ust-dev libsqlite3-dev libssl-dev libstdc++6 pkg-config procps unzip wget zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "dotnet-sdk-6.0.406-1-linux-${OS_ARCH}-debian-11" \
+      "dotnet-sdk-6.0.406-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
