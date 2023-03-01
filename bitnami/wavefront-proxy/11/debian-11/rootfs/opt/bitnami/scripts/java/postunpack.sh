@@ -18,7 +18,7 @@ set -o pipefail
 # Override default files in the Java security directory. This is used for
 # custom base images (with custom CA certificates or block lists is used)
 
-if ! is_dir_empty "$JAVA_EXTRA_SECURITY_DIR"; then
+if [[ -n "${JAVA_EXTRA_SECURITY_DIR:-}" ]] && ! is_dir_empty "$JAVA_EXTRA_SECURITY_DIR"; then
     info "Adding custom CAs to the Java security folder"
     cp -Lr "$JAVA_EXTRA_SECURITY_DIR" /opt/bitnami/java/lib/security
 fi
