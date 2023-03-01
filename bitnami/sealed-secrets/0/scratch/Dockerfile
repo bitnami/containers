@@ -33,10 +33,10 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-02-28T16:01:06Z" \
+      org.opencontainers.image.created="2023-03-01T11:49:59Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.19.5-scratch-r2" \
+      org.opencontainers.image.ref.name="0.19.5-scratch-r3" \
       org.opencontainers.image.title="sealed-secrets" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.19.5"
