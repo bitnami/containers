@@ -276,8 +276,6 @@ To configure Redmine to send email using SMTP you can set the following environm
 - `REDMINE_SMTP_PASSWORD`: SMTP account password.
 - `REDMINE_SMTP_PROTOCOL`: If specified, SMTP protocol to use. Allowed values: *tls*, *ssl*. No default.
 - `REDMINE_SMTP_AUTH`: SMTP authentication method. Allowed values: *login*, *plain*, *cram_md5*. Default: **login**.
-- `REDMINE_SMTP_CA_FILE`: Path to the SMTP CA file. Default: **/etc/ssl/certs/ca-certificates.crt**.
-- `REDMINE_SMTP_VERIFY_MODE`: SMTP sets the level of verification for the SSL certificate presented by the server. Allowed values: *none*, *peer*. Default: **peer**.
 
 #### Examples
 
