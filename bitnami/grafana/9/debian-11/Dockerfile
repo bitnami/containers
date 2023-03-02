@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-02T02:07:38Z" \
+      org.opencontainers.image.created="2023-03-02T18:49:48Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="9.3.6-debian-11-r12" \
+      org.opencontainers.image.ref.name="9.4.2-debian-11-r0" \
       org.opencontainers.image.title="grafana" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="9.3.6"
+      org.opencontainers.image.version="9.4.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libfontconfig procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "grafana-9.3.6-1-linux-${OS_ARCH}-debian-11" \
+      "grafana-9.4.2-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -40,7 +40,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/grafana/postunpack.sh
-ENV APP_VERSION="9.3.6" \
+ENV APP_VERSION="9.4.2" \
     BITNAMI_APP_NAME="grafana" \
     PATH="/opt/bitnami/grafana/bin:/opt/bitnami/common/bin:$PATH"
 
