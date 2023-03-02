@@ -259,7 +259,7 @@ docker-compose up -d
 ### Kafka without Zookeeper (KRaft)
 
 Apache Kafka Raft (KRaft) makes use of a new quorum controller service in Kafka which replaces the previous controller and makes use of an event-based variant of the Raft consensus protocol.
-This greatly simplifies Kafka’s architecture by consolidating responsibility for metadata into Kafka itself, rather than splitting it between two different systems: ZooKeeper and Kafka.
+This greatly simplifies Kafka's architecture by consolidating responsibility for metadata into Kafka itself, rather than splitting it between two different systems: ZooKeeper and Kafka.
 
 More Info can be found here: <https://developer.confluent.io/learn/kraft/>
 
@@ -298,7 +298,7 @@ services:
 
 ### Accessing Apache Kafka with internal and external clients
 
-In order to use internal and external clients to access Apache Kafka brokers you need to configure one listener for each kind of clients.
+In order to use internal and external clients to access Apache Kafka brokers you need to configure one listener for each kind of client.
 
 To do so, add the following environment variables to your docker-compose:
 
