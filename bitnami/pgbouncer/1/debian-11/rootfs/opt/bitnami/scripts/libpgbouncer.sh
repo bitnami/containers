@@ -205,7 +205,7 @@ pgbouncer_initialize() {
         if ! is_empty_value "$PGBOUNCER_CONNECT_QUERY"; then
             database_value+=" connect_query='${PGBOUNCER_CONNECT_QUERY}'"
         fi
-        ini-file set --section "databases" --key "$PGBOUNCER_DATABASE" --value "$database_value" "$PGBOUNCER_CONF_FILE"
+        ini-file set --ignore-inline-comments --section "databases" --key "$PGBOUNCER_DATABASE" --value "$database_value" "$PGBOUNCER_CONF_FILE"
 
         i=0;
         while true; VAR_NAME="PGBOUNCER_DSN_${i}";
@@ -214,7 +214,7 @@ pgbouncer_initialize() {
                 break;
             else
                 dsn=${!VAR_NAME};
-                ini-file set --section databases --key "$(echo "$dsn" | cut -d = -f 1)" --value "$(echo "$dsn" | cut -d = -f 2-)" "$PGBOUNCER_CONF_FILE";
+                ini-file set --ignore-inline-comments --section databases --key "$(echo "$dsn" | cut -d = -f 1)" --value "$(echo "$dsn" | cut -d = -f 2-)" "$PGBOUNCER_CONF_FILE";
                 i=$(( "$i" + 1 ));
             fi;
         done;
