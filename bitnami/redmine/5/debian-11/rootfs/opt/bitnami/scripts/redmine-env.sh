@@ -55,6 +55,8 @@ redmine_env_vars=(
     SMTP_PASSWORD
     SMTP_PROTOCOL
     SMTP_AUTHENTICATION
+    SMTP_OPENSSL_VERIFY_MODE
+    SMTP_CA_FILE
     REDMINE_DB_MYSQL
     REDMINE_DB_POSTGRES
     MARIADB_HOST
@@ -125,7 +127,6 @@ REDMINE_SMTP_OPENSSL_VERIFY_MODE="${REDMINE_SMTP_OPENSSL_VERIFY_MODE:-"${SMTP_OP
 export REDMINE_SMTP_OPENSSL_VERIFY_MODE="${REDMINE_SMTP_OPENSSL_VERIFY_MODE:-peer}" # only used during the first initialization
 REDMINE_SMTP_CA_FILE="${REDMINE_SMTP_CA_FILE:-"${SMTP_CA_FILE:-}"}"
 export REDMINE_SMTP_CA_FILE="${REDMINE_SMTP_CA_FILE:-/etc/ssl/certs/ca-certificates.crt}" # only used during the first initialization
-
 
 # Database configuration
 export REDMINE_DATABASE_TYPE="${REDMINE_DATABASE_TYPE:-mariadb}" # only used during the first initialization
