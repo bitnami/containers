@@ -12,7 +12,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "wavefront-hpa-adapter-0.9.9-8-linux-${OS_ARCH}-debian-11" \
+      "wavefront-hpa-adapter-0.9.10-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -33,13 +33,13 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-03-01T11:47:58Z" \
+      org.opencontainers.image.created="2023-03-02T10:16:08Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.9.9-scratch-r20" \
+      org.opencontainers.image.ref.name="0.9.10-scratch-r0" \
       org.opencontainers.image.title="wavefront-hpa-adapter" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.9.9"
+      org.opencontainers.image.version="0.9.10"
 
 COPY prebuildfs /
 COPY rootfs /
