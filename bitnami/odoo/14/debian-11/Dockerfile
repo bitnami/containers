@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-02-26T21:45:46Z" \
+      org.opencontainers.image.created="2023-03-01T22:32:14Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="14.0.20230210-debian-11-r6" \
+      org.opencontainers.image.ref.name="14.0.20230210-debian-11-r7" \
       org.opencontainers.image.title="odoo" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="14.0.20230210"
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages acl ca-certificates curl fontconfig libbsd0 libbz2-1.0 libc6 libcap2-bin libcom-err2 libcrypt1 libedit2 libffi7 libfreetype6 libgcc-s1 libgmp10 libgnutls30 libgssapi-krb5-2 libhogweed6 libicu67 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmd0 libncursesw6 libnettle8 libnsl2 libp11-kit0 libpng16-16 libpq5 libreadline8 libsasl2-2 libsqlite3-0 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libtirpc3 libunistring2 libuuid1 libx11-6 libxcb1 libxext6 libxml2 libxrender1 libxslt1.1 procps xfonts-75dpi xfonts-base zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "python-3.8.16-5-linux-${OS_ARCH}-debian-11" \
+      "python-3.8.16-6-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-1-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-15.2.0-1-linux-${OS_ARCH}-debian-11" \
       "node-18.14.2-0-linux-${OS_ARCH}-debian-11" \
