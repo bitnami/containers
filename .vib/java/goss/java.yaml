@@ -6,7 +6,7 @@ command:
     exec: java -version 2>&1 | sed "s/+/-/g" | sed "s/0_//g" | grep "$(echo $APP_VERSION | sed -E 's|([0-9]+)\.0\.0$|\1|g')"
     exit-status: 0
   check-run-jar:
-    exec: java -jar ../../java/goss/testfiles/HelloTest.jar
+    exec: java -jar ./java/goss/testfiles/HelloTest.jar
     stdout:
     - Hello VIB
     exit-status: 0
