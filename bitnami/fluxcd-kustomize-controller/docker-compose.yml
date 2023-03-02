@@ -1,0 +1,5 @@
+version: '2'
+
+services:
+  fluxcd-kustomize-controller:
+    image: docker.io/bitnami/fluxcd-kustomize-controller:0
