@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-02-27T20:34:02Z" \
+      org.opencontainers.image.created="2023-03-02T19:40:13Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.13.1-debian-11-r8" \
+      org.opencontainers.image.ref.name="7.13.2-debian-11-r0" \
       org.opencontainers.image.title="suitecrm" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="7.13.1"
+      org.opencontainers.image.version="7.13.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "apache-2.4.55-6-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.12-1-linux-${OS_ARCH}-debian-11" \
       "libphp-8.0.28-2-linux-${OS_ARCH}-debian-11" \
-      "suitecrm-7.13.1-2-linux-${OS_ARCH}-debian-11" \
+      "suitecrm-7.13.2-0-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-1-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
     ) && \
@@ -52,7 +52,7 @@ RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/suitecrm/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="7.13.1" \
+    APP_VERSION="7.13.2" \
     BITNAMI_APP_NAME="suitecrm" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
