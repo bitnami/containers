@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-01T21:59:17Z" \
+      org.opencontainers.image.created="2023-03-02T13:01:03Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.7.40-43-debian-11-r32" \
+      org.opencontainers.image.ref.name="5.7.41-44-debian-11-r0" \
       org.opencontainers.image.title="percona-mysql" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="5.7.40-43"
+      org.opencontainers.image.version="5.7.41-44"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -24,7 +24,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "percona-xtrabackup-binary-8.0.30-23-2-linux-${OS_ARCH}-debian-11" \
       "ini-file-1.4.5-1-linux-${OS_ARCH}-debian-11" \
-      "percona-mysql-5.7.40-43-2-linux-${OS_ARCH}-debian-11" \
+      "percona-mysql-5.7.41-44-0-linux-${OS_ARCH}-debian-11" \
       "mysql-shell-8.0.31-3-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
     ) && \
@@ -45,7 +45,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql/postunpack.sh
-ENV APP_VERSION="5.7.40-43" \
+ENV APP_VERSION="5.7.41-44" \
     BITNAMI_APP_NAME="percona-mysql" \
     MYSQL_HOME="/opt/bitnami/mysql/conf" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mysql/bin:/opt/bitnami/mysql/sbin:$PATH"
