@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-01T23:43:40Z" \
+      org.opencontainers.image.created="2023-03-02T19:31:01Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.11.9-debian-11-r5" \
+      org.opencontainers.image.ref.name="3.11.10-debian-11-r0" \
       org.opencontainers.image.title="rabbitmq" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="3.11.9"
+      org.opencontainers.image.version="3.11.10"
 
 ENV HOME="/opt/bitnami/rabbitmq/.rabbitmq" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -25,7 +25,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
       "erlang-25.2.3-0-linux-${OS_ARCH}-debian-11" \
-      "rabbitmq-3.11.9-1-linux-${OS_ARCH}-debian-11" \
+      "rabbitmq-3.11.10-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,7 +48,7 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 RUN /opt/bitnami/scripts/rabbitmq/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
-ENV APP_VERSION="3.11.9" \
+ENV APP_VERSION="3.11.10" \
     BITNAMI_APP_NAME="rabbitmq" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en"
