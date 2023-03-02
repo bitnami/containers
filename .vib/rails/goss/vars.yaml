@@ -1,0 +1,12 @@
+binaries:
+  - rails
+  - ruby
+directories:
+  - mode: "0755"
+    paths:
+      - /opt/bitnami/ruby/lib
+      - /opt/bitnami/ruby/bin
+root_dir: /opt/bitnami
+version:
+  bin_name: rails
+  flag: --version

@@ -1,0 +1,12 @@
+command:
+  # A new Rails project can be created
+  check-project:
+    timeout: 60000
+    exec: "rails new /app"
+    exit-status: 0
+  check-app-version:
+  # rails --version returns other version format than APP_VERSION
+    exec: {{ .Vars.version.bin_name }} {{ .Vars.version.flag }} | sed "s/\.\([0-9]\)$/-\1/"
+    exit-status: 0
+    stdout:
+    - {{ .Env.APP_VERSION }}
