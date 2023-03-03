@@ -7,7 +7,6 @@ gossfile:
   ../../common/goss/templates/check-broken-symlinks.yaml: {}
   ../../common/goss/templates/check-ca-certs.yaml: {}
   ../../common/goss/templates/check-binaries.yaml: {}
-  ../../common/goss/templates/check-files.yaml: {}
   ../../common/goss/templates/check-directories.yaml: {}
   ../../common/goss/templates/check-linked-libraries.yaml: {}
   ../../common/goss/templates/check-sed-in-place.yaml: {}

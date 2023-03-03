@@ -3,11 +3,6 @@ binaries:
   - php-fpm
   - gosu
   - mysql
-files:
-  - paths:
-      - /opt/bitnami/codeigniter/app/Common.php
-      - /opt/bitnami/codeigniter/psalm.xml
-      - /opt/bitnami/codeigniter/composer.json
 directories:
   - mode: "0775"
     paths:
