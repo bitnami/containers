@@ -1,0 +1,9 @@
+{
+    "whereabouts": {
+        "arch": "amd64",
+        "digest": "bd54d7c590addee2423c93ff4becbe4f76d11f9f44ebc8ea8ab64c8995ef740e",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "0.6.1-0"
+    }
+}
