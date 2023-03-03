@@ -1,0 +1,5 @@
+version: '2'
+
+services:
+  whereabouts:
+    image: docker.io/bitnami/whereabouts:0
