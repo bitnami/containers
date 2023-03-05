@@ -8,9 +8,9 @@
     },
     "keycloak-config-cli": {
         "arch": "amd64",
-        "digest": "e75c4e6bd3f467ae1f7f393c22e95558541fdcd6948ee04b073147c9bc33ea7d",
+        "digest": "250f86946ad4162ddb35b3956380cb6b7073c9747f1d9c23824f58fd4bd5836f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.5.0-2"
+        "version": "5.6.1-0"
     }
 }
