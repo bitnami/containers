@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-01T23:26:45Z" \
+      org.opencontainers.image.created="2023-03-05T00:14:20Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.0.4-debian-11-r31" \
+      org.opencontainers.image.ref.name="5.0.4-debian-11-r32" \
       org.opencontainers.image.title="redmine" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="5.0.4"
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages acl ca-certificates curl ghostscript git gsfonts imagemagick libaudit1 libbsd0 libcap-ng0 libcom-err2 libcrypt1 libedit2 libffi7 libgcc-s1 libgmp10 libgnutls30 libgssapi-krb5-2 libhogweed6 libicu67 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmariadb3 libmd0 libncurses6 libnettle8 libp11-kit0 libpam0g libpq5 libreadline-dev libreadline8 libsasl2-2 libssl-dev libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 procps sqlite3 zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "yq-4.31.1-0-linux-${OS_ARCH}-debian-11" \
+      "yq-4.31.2-0-linux-${OS_ARCH}-debian-11" \
       "ruby-3.0.5-4-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-15.2.0-1-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.12-1-linux-${OS_ARCH}-debian-11" \
