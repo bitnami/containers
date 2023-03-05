@@ -4,10 +4,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-01T23:09:54Z" \
+      org.opencontainers.image.created="2023-03-04T23:37:16Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.11.0-debian-11-r34" \
+      org.opencontainers.image.ref.name="2.11.0-debian-11-r35" \
       org.opencontainers.image.title="tensorflow-serving" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.11.0"
