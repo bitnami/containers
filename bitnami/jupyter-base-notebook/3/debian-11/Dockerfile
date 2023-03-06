@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-04T20:48:51Z" \
+      org.opencontainers.image.created="2023-03-06T10:34:04Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.1.1-debian-11-r14" \
+      org.opencontainers.image.ref.name="3.1.1-debian-11-r15" \
       org.opencontainers.image.title="jupyter-base-notebook" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.1.1"
@@ -23,7 +23,7 @@ RUN install_packages ca-certificates curl libbrotli1 libcom-err2 libcrypt1 libcu
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "miniconda-4.12.0-160-linux-${OS_ARCH}-debian-11" \
-      "jupyter-base-notebook-3.1.1-4-linux-${OS_ARCH}-debian-11" \
+      "jupyter-base-notebook-3.1.1-5-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
