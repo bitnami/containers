@@ -3,7 +3,8 @@
     "resources": {
       "url": "{VIB_ENV_CONTAINER_URL}",
       "path": "{VIB_ENV_PATH}"
-    }
+    },
+    "runtime_parameters": "Y29tbWFuZDogWyJ0YWlsIiwgIi1mIiwgIi9kZXYvbnVsbCJd"
   },
   "phases": {
     "package": {
@@ -18,7 +19,8 @@
               }
             },
             "architectures": [
-              "linux/amd64"
+              "linux/amd64",
+              "linux/arm64"
             ]
           }
         },
@@ -32,6 +34,21 @@
     },
     "verify": {
       "actions": [
+        {
+          "action_id": "goss",
+          "params": {
+            "resources": {
+              "path": "/.vib"
+            },
+            "tests_file": "mongodb/goss/goss.yaml",
+            "vars_file": "mongodb/goss/vars.yaml",
+            "remote": {
+              "pod": {
+                "workload": "deploy-mongodb"
+              }
+            }
+          }
+        },
         {
           "action_id": "trivy",
           "params": {

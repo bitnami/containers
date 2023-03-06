@@ -1,0 +1,10 @@
+binaries:
+  - mongodb
+directories:
+  - mode: "0775"
+    paths:
+      - /opt/bitnami/mongodb/conf
+root_dir: /opt/bitnami
+version:
+  bin_name: mongodb
+  flag: --version
