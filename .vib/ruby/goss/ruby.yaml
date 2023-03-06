@@ -1,0 +1,16 @@
+command:
+  check-installed-gems:
+    exec: gem list
+    exit-status: 0
+    stdout:
+      {{ range $module := .Vars.modules }}
+      - {{ $module }}
+      {{ end }}
+  check-ssl:
+    exec: ruby -rnet/https -e "Net::HTTP.get URI('https://github.com')"
+    exit-status: 0
+  check-eaccess:
+    exec: grep HAVE_EACCESS -r /opt/bitnami/ruby/include/
+    exit-status: 0
+    stdout:
+      - config.h
