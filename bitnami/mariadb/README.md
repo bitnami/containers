@@ -651,7 +651,7 @@ docker-compose up mariadb
 
 ## Notable Changes
 
-### 10.2.41-debian-10-r12, 10.3.32-debian-10-r13, 10.4.22-debian-10-r13, 10.5.13-debian-10-r14 and 10.6.5-debian-10-r13
+### 10.2.41-debian-10-r12, 10.3.32-debian-10-r13, 10.4.22-debian-10-r13, 10.5.13-debian-10-r14, 10.6.5-debian-10-r13, 10.3.38-r5-debian-11, 10.4.28-r5-debian-11, 10.5.19-r5-debian-11, 10.6.12-r5-debian-11, 10.7.8-r5-debian-11, 10.8.7-r5-debian-11, 10.9.5-r5-debian-11 and 10.10.3-r6-debian-11     
 
 * The command `mysql_upgrade` no longer includes the flag `--force`. Nonetheless, it can be enabled by using the [mysql_upgrade] option group in the MariaDB configuration.
 
