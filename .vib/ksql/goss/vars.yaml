@@ -1,0 +1,25 @@
+binaries:
+  - gosu
+  - java
+  - ksql
+  - ksql-datagen
+  - ksql-print-metrics
+  - ksql-run-class
+  - ksql-server-start
+  - ksql-server-stop
+  - ksql-stop
+  - ksql-test-runner
+  - ksql-restore-command-topic
+directories:
+  - mode: "0775"
+    paths:
+      - /opt/bitnami/ksql/etc/ksqldb
+      - /bitnami/ksql/data
+      - /opt/bitnami/ksql/logs
+      - /opt/bitnami/ksql/certs
+root_dir: /opt/bitnami
+# ksql does not have a version flag so we initiate the shell
+# which does show the version.
+version:
+  bin_name: timeout
+  flag: 5s ksql
