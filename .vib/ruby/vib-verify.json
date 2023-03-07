@@ -39,7 +39,9 @@
             "tests_file": "ruby/goss/goss.yaml",
             "vars_file": "ruby/goss/vars.yaml",
             "remote": {
-              "workload": "deploy-ruby"
+              "pod": {
+                "workload": "deploy-ruby"
+              }
             }
           }
         },
