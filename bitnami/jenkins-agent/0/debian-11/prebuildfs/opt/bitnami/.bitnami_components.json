@@ -15,9 +15,9 @@
     },
     "jenkins-agent": {
         "arch": "amd64",
-        "digest": "38cd6c00fda7c269b3b4b4cbb87211182abc89d7affc0ddd96f64c8c63d11469",
+        "digest": "e45580f1f97acb6519d84e34e1dcdbbd98c93f5d9e6bc13726670beb6aaaee35",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.3107.0-0"
+        "version": "0.3107.0-1"
     }
 }
