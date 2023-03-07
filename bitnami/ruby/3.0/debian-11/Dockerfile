@@ -17,7 +17,7 @@ ENV OS_ARCH="${TARGETARCH:-amd64}" \
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-# Install required system packages and dependencies
+## Install required system packages and dependencies
 RUN install_packages build-essential ca-certificates curl git libcrypt1 libreadline-dev libreadline8 libsqlite3-dev libssl-dev libssl1.1 libtinfo6 pkg-config procps sqlite3 unzip wget zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
