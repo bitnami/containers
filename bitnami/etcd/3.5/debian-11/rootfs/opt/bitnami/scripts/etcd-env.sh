@@ -76,7 +76,7 @@ export ETCD_SNAPSHOTS_DIR="${ETCD_SNAPSHOTS_DIR:-/snapshots}"
 export ETCD_SNAPSHOT_HISTORY_LIMIT="${ETCD_SNAPSHOT_HISTORY_LIMIT:-1}"
 export ETCD_INIT_SNAPSHOTS_DIR="${ETCD_INIT_SNAPSHOTS_DIR:-/init-snapshot}"
 export ETCD_NEW_MEMBERS_ENV_FILE="${ETCD_DATA_DIR}/new_member_envs"
-export PATH="${ETCD_BIN_DIR}:${PATH}"
+export PATH="${ETCD_BIN_DIR}:${BITNAMI_ROOT_DIR}/common/bin:${PATH}"
 
 # System users (when running with a privileged user)
 export ETCD_DAEMON_USER="etcd"
