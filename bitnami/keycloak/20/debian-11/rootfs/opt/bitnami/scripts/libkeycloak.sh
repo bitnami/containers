@@ -132,7 +132,7 @@ keycloak_configure_database() {
     jdbc_params="$(echo "$KEYCLOAK_JDBC_PARAMS" | sed -E '/^$|^\&.+$/!s/^/\&/;s/\&/\\&/g')"
 
     info "Configuring database settings"
-    if [[ "KEYCLOAK_DATABASE_VENDOR" == "postgresql" ]]; then
+    if [[ "${KEYCLOAK_DATABASE_VENDOR}" == "postgresql" ]]; then
         keycloak_conf_set "db" "postgres"
         keycloak_conf_set "db-username" "$KEYCLOAK_DATABASE_USER"
         keycloak_conf_set "db-password" "$KEYCLOAK_DATABASE_PASSWORD"
@@ -280,19 +280,19 @@ keycloak_configure_spi_tls() {
 #########################
 keycloak_initialize() {
     # Clean to avoid issues when running docker restart
-    if [[ "KEYCLOAK_DATABASE_VENDOR" == "postgresql" ]]; then
-      # Wait for database
-      info "Trying to connect to PostgreSQL server $KEYCLOAK_DATABASE_HOST..."
-      if ! retry_while "wait-for-port --host $KEYCLOAK_DATABASE_HOST --timeout 10 $KEYCLOAK_DATABASE_PORT" "$KEYCLOAK_INIT_MAX_RETRIES"; then
-          error "Unable to connect to host $KEYCLOAK_DATABASE_HOST"
-          exit 1
-      else
-          info "Found PostgreSQL server listening at $KEYCLOAK_DATABASE_HOST:$KEYCLOAK_DATABASE_PORT"
-      fi
+    if [[ "${KEYCLOAK_DATABASE_VENDOR}" == "postgresql" ]]; then
+        # Wait for database
+        info "Trying to connect to PostgreSQL server $KEYCLOAK_DATABASE_HOST..."
+        if ! retry_while "wait-for-port --host $KEYCLOAK_DATABASE_HOST --timeout 10 $KEYCLOAK_DATABASE_PORT" "$KEYCLOAK_INIT_MAX_RETRIES"; then
+            error "Unable to connect to host $KEYCLOAK_DATABASE_HOST"
+            exit 1
+        else
+            info "Found PostgreSQL server listening at $KEYCLOAK_DATABASE_HOST:$KEYCLOAK_DATABASE_PORT"
+        fi
 
-      if ! is_dir_empty "$KEYCLOAK_MOUNTED_CONF_DIR"; then
-          cp -Lr "$KEYCLOAK_MOUNTED_CONF_DIR"/* "$KEYCLOAK_CONF_DIR"
-      fi
+        if ! is_dir_empty "$KEYCLOAK_MOUNTED_CONF_DIR"; then
+            cp -Lr "$KEYCLOAK_MOUNTED_CONF_DIR"/* "$KEYCLOAK_CONF_DIR"
+        fi
     fi
     keycloak_configure_database
     keycloak_configure_metrics
