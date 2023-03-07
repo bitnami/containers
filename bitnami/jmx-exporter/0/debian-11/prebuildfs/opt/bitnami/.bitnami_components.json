@@ -8,9 +8,9 @@
     },
     "jmx-exporter": {
         "arch": "amd64",
-        "digest": "7d147c0f40bc4ae36a5fc38db79a811a73cc50a61a8d94cec7db77eb4fef2a78",
+        "digest": "fd6900b9038368cf382a207ed1e0ed17cb7300747946069f6dfb6f5702c2dcb7",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.17.2-3"
+        "version": "0.18.0-0"
     }
 }
