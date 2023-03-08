@@ -9,10 +9,13 @@ command:
   check-ssl:
     exec: ruby -rnet/https -e "Net::HTTP.get URI('https://bitnami.com')"
     exit-status: 0
-  check-flags:
-  {{ range $flag := .Vars.flags }}
+  check-eaccess:
     exit-status: 0
-    exec: grep -r {{ $flag }} /opt/bitnami/ruby/include/
+    exec: grep -r HAVE_EACCESS /opt/bitnami/ruby/include/
     stdout:
-      - {{ $flag }}
-  {{ end }}
+      - config.h
+  check-libpthread:
+    exit-status: 0
+    exec: grep -r HAVE_LIBPTHREAD /opt/bitnami/ruby/include/
+    stdout:
+      - config.h
