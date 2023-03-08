@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-05T00:30:04Z" \
+      org.opencontainers.image.created="2023-03-08T01:36:24Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="15.0.20230210-debian-11-r8" \
+      org.opencontainers.image.ref.name="15.0.20230210-debian-11-r9" \
       org.opencontainers.image.title="odoo" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="15.0.20230210"
@@ -25,7 +25,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "python-3.10.10-3-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-1-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-15.2.0-1-linux-${OS_ARCH}-debian-11" \
-      "node-18.14.2-0-linux-${OS_ARCH}-debian-11" \
+      "node-18.15.0-0-linux-${OS_ARCH}-debian-11" \
       "odoo-15.0.20230210-2-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
     ) && \
