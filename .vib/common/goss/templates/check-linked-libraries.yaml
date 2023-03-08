@@ -7,7 +7,7 @@
 command:
   check-linked-libraries:
     {{ $exclude_paths := "" }}
-    {{ if contains "exclude_paths" (.Vars | toString) }}
+    {{ if contains "exclude_paths:" (.Vars | toString) }}
         {{ $exclude_paths = (.Vars.linked_libraries.exclude_paths | join "|") }}
     {{ end }}
     exec: export BITNAMI_ROOT_DIR={{ .Vars.root_dir }}{{ if $exclude_paths }} && export EXCLUDE_PATHS='{{ $exclude_paths }}'{{ end }} && ./common/goss/scripts/check-linked-libraries.sh
