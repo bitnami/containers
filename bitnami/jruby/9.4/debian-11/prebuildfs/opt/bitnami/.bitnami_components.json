@@ -8,10 +8,10 @@
     },
     "jruby": {
         "arch": "amd64",
-        "digest": "ac1b4ff2d378fd92ebef1a9ced4e8798f0e0bb9f1a808ecef619fb384f8d9f4f",
+        "digest": "2c5d68947f73da8104b6451d7510f598674bc5647828248baa941cd4cb1b8c73",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.4.1-0-2"
+        "version": "9.4.2-0-0"
     },
     "node": {
         "arch": "amd64",
