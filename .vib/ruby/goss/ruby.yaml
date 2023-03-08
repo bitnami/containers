@@ -1,16 +1,18 @@
 command:
   check-installed-gems:
-    exec: gem list
+    exec: gem list --local
     exit-status: 0
     stdout:
       {{ range $module := .Vars.modules }}
       - {{ $module }}
       {{ end }}
   check-ssl:
-    exec: ruby -rnet/https -e "Net::HTTP.get URI('https://github.com')"
+    exec: ruby -rnet/https -e "Net::HTTP.get URI('https://bitnami.com')"
     exit-status: 0
-  check-eaccess:
-    exec: grep HAVE_EACCESS -r /opt/bitnami/ruby/include/
+  check-flags:
+  {{ range $flag := .Vars.flags }}
     exit-status: 0
+    exec: grep -r {{ $flag }} /opt/bitnami/ruby/include/
     stdout:
-      - config.h
+      - {{ $flag }}
+  {{ end }}
