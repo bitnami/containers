@@ -9,7 +9,7 @@
 file:
   {{ range .Vars.directories }}
   {{ $mode := "" }}
-  {{ if contains "mode:" (.Vars | toString) }}
+  {{ if contains "mode:" (. | toString) }}
   {{ $mode = .mode }}
   {{ end }}
   {{ range $directory := .paths }}
