@@ -4,10 +4,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-04T23:34:03Z" \
+      org.opencontainers.image.created="2023-03-08T00:11:24Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.11.2-debian-11-r90" \
+      org.opencontainers.image.ref.name="8.11.2-debian-11-r91" \
       org.opencontainers.image.title="solr" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="8.11.2"
