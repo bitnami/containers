@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-08T10:50:54Z" \
+      org.opencontainers.image.created="2023-03-08T18:13:38Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.35.2-debian-11-r2" \
+      org.opencontainers.image.ref.name="0.36.0-debian-11-r0" \
       org.opencontainers.image.title="fluxcd-source-controller" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.35.2"
+      org.opencontainers.image.version="0.36.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "fluxcd-source-controller-0.35.2-0-linux-${OS_ARCH}-debian-11" \
+      "fluxcd-source-controller-0.36.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -37,7 +37,7 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN useradd -r -u 1001 -g root fluxcd-source-controller
 
-ENV APP_VERSION="0.35.2" \
+ENV APP_VERSION="0.36.0" \
     BITNAMI_APP_NAME="fluxcd-source-controller" \
     PATH="/opt/bitnami/fluxcd-source-controller/bin:$PATH"
 
