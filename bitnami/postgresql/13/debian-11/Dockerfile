@@ -5,10 +5,10 @@ ARG TARGETARCH
 ARG WITH_ALL_LOCALES="no"
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-05T12:56:22Z" \
+      org.opencontainers.image.created="2023-03-08T17:21:14Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="13.10.0-debian-11-r9" \
+      org.opencontainers.image.ref.name="13.10.0-debian-11-r10" \
       org.opencontainers.image.title="postgresql" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="13.10.0"
