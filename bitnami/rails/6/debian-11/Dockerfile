@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-05T01:26:17Z" \
+      org.opencontainers.image.created="2023-03-08T02:03:26Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.1.7-2-debian-11-r13" \
+      org.opencontainers.image.ref.name="6.1.7-2-debian-11-r14" \
       org.opencontainers.image.title="rails" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="6.1.7-2"
@@ -23,7 +23,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.8.16-6-linux-${OS_ARCH}-debian-11" \
       "ruby-2.7.7-4-linux-${OS_ARCH}-debian-11" \
-      "node-18.14.2-0-linux-${OS_ARCH}-debian-11" \
+      "node-18.15.0-0-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.12-1-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.6-1-linux-${OS_ARCH}-debian-11" \
       "rails-6.1.7-2-4-linux-${OS_ARCH}-debian-11" \
