@@ -9,5 +9,6 @@ command:
     {{ if contains "linked_libraries:map[paths_to_exclude:" (.Vars | toString) }}
         {{ $paths_to_exclude = (.Vars.linked_libraries.paths_to_exclude | join "|") }}
     {{ end }}
-    exec: export BITNAMI_ROOT_DIR={{ .Vars.root_dir }} {{ if $paths_to_exclude }} && export PATHS_TO_EXCLUDE='{{ $paths_to_exclude }}'{{ end }} && ./common/goss/scripts/check-linked-libraries.sh
+    exec: export BITNAMI_ROOT_DIR={{ .Vars.root_dir }} {{ if $paths_to_exclude }}&& export PATHS_TO_EXCLUDE='{{ $paths_to_exclude }}'{{ end }} && ./common/goss/scripts/check-linked-libraries.sh
+    timeout: 20000
     exit-status: 0
