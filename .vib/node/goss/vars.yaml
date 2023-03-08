@@ -1,0 +1,19 @@
+binaries:
+  - node
+  - npm
+  - npx
+  - node-gyp
+  - python
+  - yarn
+directories:
+  - mode: "0755"
+    paths:
+      - /app
+root_dir: /opt/bitnami
+modules:
+  - node-gyp
+  - npm
+  - yarn
+version:
+  bin_name: node
+  flag: --version
