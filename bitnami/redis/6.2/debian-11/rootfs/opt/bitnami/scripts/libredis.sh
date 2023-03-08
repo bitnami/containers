@@ -220,9 +220,6 @@ redis_validate() {
         elif [[ ! -f "$REDIS_TLS_KEY_FILE" ]]; then
             print_validation_error "The private key file in the specified path ${REDIS_TLS_KEY_FILE} does not exist"
         fi
-        if [[ -n "$REDIS_TLS_KEY_FILE_PASS" ]] && [[ ! -f "$REDIS_TLS_KEY_FILE_PASS" ]]; then
-            print_validation_error "The passphrase for the private key file in the specified path ${REDIS_TLS_KEY_FILE_PASS} does not exist"
-        fi
         if [[ -z "$REDIS_TLS_CA_FILE" ]]; then
             print_validation_error "You must provide a CA X.509 certificate in order to use TLS"
         elif [[ ! -f "$REDIS_TLS_CA_FILE" ]]; then
