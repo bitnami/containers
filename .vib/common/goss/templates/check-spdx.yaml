@@ -1,6 +1,6 @@
 ########################
 # Checks there is at least a spdx file
-# included int the bitnami directories
+# included in the bitnami directories
 # Needed vars:
 #   - .Vars.root_dir
 ########################
