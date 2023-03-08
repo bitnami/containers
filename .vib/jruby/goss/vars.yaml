@@ -5,4 +5,7 @@ binaries:
   - python
   - node
   - java
+linked_libraries:
+  paths_to_exclude:
+    - .*\/gems\/shared\/gems\/[^/]+\/buildout\/.*
 root_dir: /opt/bitnami
