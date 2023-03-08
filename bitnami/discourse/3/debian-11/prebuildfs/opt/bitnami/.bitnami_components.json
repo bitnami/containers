@@ -22,10 +22,10 @@
     },
     "node": {
         "arch": "amd64",
-        "digest": "7f2d4830add40c5bb11444044654340a4bc288c0b52ce766adcb1c446eece182",
+        "digest": "cc1030a32cab4b0f02fd57b2e2e98917779a496ef9ea0eba14e0f4c44b5bebfa",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.14.2-0"
+        "version": "18.15.0-0"
     },
     "postgresql-client": {
         "arch": "amd64",
