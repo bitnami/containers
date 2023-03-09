@@ -6,4 +6,4 @@ set -o pipefail
 
 mapfile -t files < <( find /bitnami "$BITNAMI_ROOT_DIR" -name '.spdx-*.json' )
 
-[[ ${#files[@]} -eq 0 ]] && exit 1
+[[ ${#files[@]} -ne 0 ]] || exit 1
