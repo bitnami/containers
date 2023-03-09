@@ -43,7 +43,9 @@
             "tests_file": "apache/goss/goss.yaml",
             "vars_file": "apache/goss/vars.yaml",
             "remote": {
-              "workload": "deploy-apache"
+              "pod": {
+                "workload": "deploy-apache"
+              }
             }
           }
         },

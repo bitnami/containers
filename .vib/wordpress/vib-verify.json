@@ -39,7 +39,9 @@
             "tests_file": "wordpress/goss/goss.yaml",
             "vars_file": "wordpress/goss/vars.yaml",
             "remote": {
-              "workload": "deploy-wordpress"
+              "pod": {
+                "workload": "deploy-wordpress"
+              }
             }
           }
         },

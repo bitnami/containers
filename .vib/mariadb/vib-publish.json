@@ -43,7 +43,9 @@
             "tests_file": "mariadb/goss/goss.yaml",
             "vars_file": "mariadb/goss/vars.yaml",
             "remote": {
-              "workload": "deploy-mariadb"
+              "pod": {
+                "workload": "deploy-mariadb"
+              }
             }
           }
         },
