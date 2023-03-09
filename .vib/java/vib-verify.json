@@ -39,7 +39,9 @@
             "tests_file": "java/goss/goss.yaml",
             "vars_file": "java/goss/vars.yaml",
             "remote": {
-              "workload": "deploy-java"
+              "pod": {
+                "workload": "deploy-java"
+              }
             }
           }
         },

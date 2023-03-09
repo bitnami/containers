@@ -39,7 +39,9 @@
             "tests_file": "telegraf/goss/goss.yaml",
             "vars_file": "telegraf/goss/vars.yaml",
             "remote": {
-              "workload": "deploy-telegraf"
+              "pod": {
+                "workload": "deploy-telegraf"
+              }
             }
           }
         },

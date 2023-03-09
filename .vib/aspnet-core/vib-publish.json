@@ -42,7 +42,9 @@
             "tests_file": "aspnet-core/goss/goss.yaml",
             "vars_file": "aspnet-core/goss/vars.yaml",
             "remote": {
-              "workload": "deploy-aspnet-core"
+              "pod": {
+                "workload": "deploy-aspnet-core"
+              }
             }
           }
         },
@@ -96,8 +98,10 @@
             "repository": {
               "kind": "OCI",
               "url": "{VIB_ENV_REGISTRY_URL}",
-              "username": "{VIB_ENV_REGISTRY_USERNAME}",
-              "password":  "{VIB_ENV_REGISTRY_PASSWORD}"
+              "authn": {
+                "username": "{VIB_ENV_REGISTRY_USERNAME}",
+                "password":  "{VIB_ENV_REGISTRY_PASSWORD}"
+              }
             }
           }
         }

@@ -42,7 +42,9 @@
             "tests_file": "mariadb/goss/goss.yaml",
             "vars_file": "mariadb/goss/vars.yaml",
             "remote": {
-              "workload": "deploy-mariadb"
+              "pod": {
+                "workload": "deploy-mariadb"
+              }
             }
           }
         },
@@ -96,8 +98,10 @@
             "repository": {
               "kind": "OCI",
               "url": "{VIB_ENV_REGISTRY_URL}",
-              "username": "{VIB_ENV_REGISTRY_USERNAME}",
-              "password":  "{VIB_ENV_REGISTRY_PASSWORD}"
+              "authn": {
+                "username": "{VIB_ENV_REGISTRY_USERNAME}",
+                "password":  "{VIB_ENV_REGISTRY_PASSWORD}"
+              }
             }
           }
         }

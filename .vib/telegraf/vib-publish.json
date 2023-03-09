@@ -43,7 +43,9 @@
             "tests_file": "telegraf/goss/goss.yaml",
             "vars_file": "telegraf/goss/vars.yaml",
             "remote": {
-              "workload": "deploy-telegraf"
+              "pod": {
+                "workload": "deploy-telegraf"
+              }
             }
           }
         },
@@ -97,8 +99,10 @@
             "repository": {
               "kind": "OCI",
               "url": "{VIB_ENV_REGISTRY_URL}",
-              "username": "{VIB_ENV_REGISTRY_USERNAME}",
-              "password":  "{VIB_ENV_REGISTRY_PASSWORD}"
+              "authn": {
+                "username": "{VIB_ENV_REGISTRY_USERNAME}",
+                "password":  "{VIB_ENV_REGISTRY_PASSWORD}"
+              }
             }
           }
         }

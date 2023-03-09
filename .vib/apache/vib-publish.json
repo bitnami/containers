@@ -43,7 +43,9 @@
             "tests_file": "apache/goss/goss.yaml",
             "vars_file": "apache/goss/vars.yaml",
             "remote": {
-              "workload": "deploy-apache"
+              "pod": {
+                "workload": "deploy-apache"
+              }
             }
           }
         },
@@ -97,8 +99,10 @@
             "repository": {
               "kind": "OCI",
               "url": "{VIB_ENV_REGISTRY_URL}",
-              "username": "{VIB_ENV_REGISTRY_USERNAME}",
-              "password":  "{VIB_ENV_REGISTRY_PASSWORD}"
+              "authn": {
+                "username": "{VIB_ENV_REGISTRY_USERNAME}",
+                "password":  "{VIB_ENV_REGISTRY_PASSWORD}"
+              }
             }
           }
         }
