@@ -1,0 +1,12 @@
+binaries:
+  - jruby
+  - ruby
+  - gem
+  - python
+  - node
+  - java
+linked_libraries:
+  exclude_paths:
+    # Ignore Gems build output directory
+    - .*\/gems\/shared\/gems\/[^/]+\/buildout\/.*
+root_dir: /opt/bitnami

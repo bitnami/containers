@@ -1,0 +1,30 @@
+command:
+  # Revisions are displayed as "x.y.z.r" instead of "x.y.z-r"
+  check-app-version:
+    exec: jruby --version | grep $(echo $APP_VERSION | tr '-' '.')
+    exit-status: 0
+  check-bundle:
+    exec: cd /tmp && echo "source 'https://rubygems.org'" > Gemfile && bundle
+    timeout: 30000
+    exit-status: 0
+  check-jruby-ssl:
+    exec: jruby -rnet/https -e "Net::HTTP.get URI('https://bitnami.com')"
+    timeout: 30000
+    exit-status: 0
+  check-rake-task:
+    exec: echo "task :test do; puts 'Hello VIB'; end" > /tmp/test-rake.rb && rake -f /tmp/test-rake.rb test
+    exit-status: 0
+    timeout: 30000
+    stdout:
+      - Hello VIB
+  check-mariadb-jdbc-driver:
+    exec: jruby -e "puts Java::org.mariadb.jdbc.Driver"
+    exit-status: 0
+    timeout: 30000
+    stdout:
+      - Java::OrgMariadbJdbc::Driver
+file:
+  /opt/bitnami/jruby/bin/ruby:
+    exists: true
+    filetype: symlink
+    linked-to: /opt/bitnami/jruby/bin/jruby
