@@ -1,0 +1,7 @@
+command:
+  check-git-init:
+    exec: git init /tmp/test
+    exit-status: 0
+  check-git-clone:
+    exec: git clone https://github.com/bitnami/bncert.git
+    exit-status: 0
