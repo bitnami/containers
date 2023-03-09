@@ -76,22 +76,12 @@ docker build -t bitnami/APP:latest .
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a directory at the `/bitnami` path. If the mounted directory is empty, it will be initialized on the first run.
+For persistence you should mount a directory at the `/bitnami/rabbitmq/mnesia` path. If the mounted directory is empty, it will be initialized on the first run.
 
 ```console
 docker run \
-    -v /path/to/rabbitmq-persistence:/bitnami \
+    -v /path/to/rabbitmq-persistence:/bitnami/rabbitmq/mnesia \
     bitnami/rabbitmq:latest
-```
-
-You can also do this with a minor change to the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/rabbitmq/docker-compose.yml) file present in this repository:
-
-```yaml
-rabbitmq:
-  ...
-  volumes:
-    - /path/to/rabbitmq-persistence:/bitnami
-  ...
 ```
 
 > NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
@@ -262,7 +252,7 @@ services:
     ports:
       - '15672:15672'
     volumes:
-      - 'rabbitmqstats_data:/bitnami'
+      - 'rabbitmqstats_data:/bitnami/rabbitmq/mnesia'
 ```
 
 > **Note:** The name of the service (**stats**) is important so that a node could resolve the hostname to cluster with. (Note that the node name is `rabbit@stats`)
@@ -280,7 +270,7 @@ Update the definitions for nodes you want your RabbitMQ stats node cluster with.
       - RABBITMQ_CLUSTER_NODE_NAME=rabbit@stats
       - RABBITMQ_ERL_COOKIE=s3cr3tc00ki3
     volumes:
-      - 'rabbitmqdisc1_data:/bitnami'
+      - 'rabbitmqdisc1_data:/bitnami/rabbitmq/mnesia'
 ```
 
 > **Note:** Again, the name of the service (**queue-disc1**) is important so that each node could resolve the hostname of this one.
@@ -296,7 +286,7 @@ We are going to add a ram node too:
       - RABBITMQ_CLUSTER_NODE_NAME=rabbit@stats
       - RABBITMQ_ERL_COOKIE=s3cr3tc00ki3
     volumes:
-      - 'rabbitmqram1_data:/bitnami'
+      - 'rabbitmqram1_data:/bitnami/rabbitmq/mnesia'
 ```
 
 ##### Step 3: Add the volume description
@@ -326,7 +316,7 @@ services:
     ports:
       - '15672:15672'
     volumes:
-      - 'rabbitmqstats_data:/bitnami'
+      - 'rabbitmqstats_data:/bitnami/rabbitmq/mnesia'
   queue-disc1:
     image: bitnami/rabbitmq
     environment:
@@ -335,7 +325,7 @@ services:
       - RABBITMQ_CLUSTER_NODE_NAME=rabbit@stats
       - RABBITMQ_ERL_COOKIE=s3cr3tc00ki3
     volumes:
-      - 'rabbitmqdisc1_data:/bitnami'
+      - 'rabbitmqdisc1_data:/bitnami/rabbitmq/mnesia'
   queue-ram1:
     image: bitnami/rabbitmq
     environment:
@@ -344,7 +334,7 @@ services:
       - RABBITMQ_CLUSTER_NODE_NAME=rabbit@stats
       - RABBITMQ_ERL_COOKIE=s3cr3tc00ki3
     volumes:
-      - 'rabbitmqram1_data:/bitnami'
+      - 'rabbitmqram1_data:/bitnami/rabbitmq/mnesia'
 
 volumes:
   rabbitmqstats_data:
