@@ -1,5 +1,4 @@
 version: '2'
 services:
-  # [TEST]
   cosign:
     image: docker.io/bitnami/cosign:2
