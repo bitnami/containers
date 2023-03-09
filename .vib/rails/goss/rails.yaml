@@ -7,7 +7,10 @@ command:
     stdout:
       - Listening
   check-app-version:
-  # rails --version returns other version format than APP_VERSION
+  # The `APP_VERSION` environment variable returns the version in the format of
+  # Major.Minor.Patch-Build, such as 1.2.3-4 while the `rails -v` command returns
+  # the version in the format of Major.Minor.Patch.Build, such as 1.2.3.4 so we
+  # need to convert the environment variable before comparing the two versions
     exec: {{ .Vars.version.bin_name }} {{ .Vars.version.flag }} | sed '/^[0-9]\+\.[0-9]\+\.[0-9]\+$/ s/$/-0/' | sed "s/\.\([0-9]\)$/-\1/"
     exit-status: 0
     stdout:

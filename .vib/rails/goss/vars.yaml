@@ -5,7 +5,6 @@ binaries:
   - python
   - rails
   - ruby
-  - wait-for-port
 directories:
   - mode: "0775"
     paths:
