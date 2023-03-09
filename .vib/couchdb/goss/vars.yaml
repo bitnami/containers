@@ -1,0 +1,18 @@
+binaries:
+  - couchdb
+  - couchjs
+  - erl
+  - gosu
+  - ini-file
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/couchdb/data
+      - /opt/bitnami/couchdb/etc
+  - paths:
+      - /opt/bitnami/couchdb/etc/default.d
+      - /opt/bitnami/common/lib
+root_dir: /opt/bitnami
+version:
+  bin_name: couchjs
+  flag: -V

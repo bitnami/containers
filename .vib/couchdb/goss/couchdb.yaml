@@ -1,0 +1,16 @@
+file:
+  # Checks default config for erlang is set
+  {{ .Vars.root_dir }}/couchdb/etc/vm.args:
+    exists: true
+    filetype: file
+    contains:
+      - /-kernel.*inet_dist_listen_min.*9100/
+command:
+  check-library-path:
+    exec: echo $LD_LIBRARY_PATH
+    stdout:
+      - /opt/bitnami/common/lib
+    exit-status: 0
+  check-libmozjs:
+    exec: ls /opt/bitnami/common/lib | grep libmozjs
+    exit-status: 0
