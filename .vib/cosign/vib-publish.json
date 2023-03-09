@@ -43,7 +43,9 @@
             "tests_file": "cosign/goss/goss.yaml",
             "vars_file": "cosign/goss/vars.yaml",
             "remote": {
-              "workload": "deploy-cosign"
+              "pod": {
+                "workload": "deploy-cosign"
+              }
             }
           }
         },
