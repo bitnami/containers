@@ -1,0 +1,6 @@
+binaries:
+  - telegraf
+root_dir: /opt/bitnami
+version:
+  bin_name: telegraf
+  flag: version
