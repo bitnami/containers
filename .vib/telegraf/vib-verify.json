@@ -3,7 +3,8 @@
     "resources": {
       "url": "{SHA_ARCHIVE}",
       "path": "{VIB_ENV_PATH}"
-    }
+    },
+    "runtime_parameters": "Y29tbWFuZDogWyJ0YWlsIiwgIi1mIiwgIi9kZXYvbnVsbCJd"
   },
   "phases": {
     "package": {
@@ -29,6 +30,19 @@
     },
     "verify": {
       "actions": [
+        {
+          "action_id": "goss",
+          "params": {
+            "resources": {
+              "path": "/.vib"
+            },
+            "tests_file": "telegraf/goss/goss.yaml",
+            "vars_file": "telegraf/goss/vars.yaml",
+            "remote": {
+              "workload": "deploy-telegraf"
+            }
+          }
+        },
         {
           "action_id": "trivy",
           "params": {
