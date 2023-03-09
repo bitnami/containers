@@ -271,6 +271,8 @@ Pgpool configuration:
 * `PGPOOL_HEALTH_CHECK_TIMEOUT`: Specifies the timeout in seconds to give up connecting to the backend PostgreSQL if the TCP connect does not succeed within this time. Defaults to `10`.
 * `PGPOOL_HEALTH_CHECK_MAX_RETRIES`: Specifies the maximum number of retries to do before giving up and initiating failover when health check fails. Defaults to `5`.
 * `PGPOOL_HEALTH_CHECK_RETRY_DELAY`: Specifies the amount of time in seconds to sleep between failed health check retries. Defaults to `5`.
+* `PGPOOL_CONNECT_TIMEOUT`: Specifies the amount of time in milliseconds before giving up connecting to backend using `connect()` system call. Default is `10000`.
+* `PGPOOL_HEALTH_CHECK_PSQL_TIMEOUT`: Specifies the maximum amount of time in seconds function `pgpool_healthcheck()` waits for result of `show pool_nodes` command. It is set to `PGCONNECT_TIMEOUT` of respective `psql` execution. Default is `15`.
 * `PGPOOL_USER_CONF_FILE`: Configuration file to be added to the generated config file. This allow to override configuration set by the initializacion process. No defaults.
 * `PGPOOL_USER_HBA_FILE`: Configuration file to be added to the generated hba file. This allow to override configuration set by the initialization process. No defaults.
 * `PGPOOL_POSTGRES_CUSTOM_USERS`: List of comma or semicolon separeted list of postgres usernames. This will create entries in `pgpool_passwd`. No defaults.
