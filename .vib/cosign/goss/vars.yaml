@@ -1,0 +1,6 @@
+binaries:
+  - cosign
+root_dir: /opt/bitnami
+version:
+  bin_name: cosign
+  flag: version
