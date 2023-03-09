@@ -1,6 +1,7 @@
 version: '2'
 
 services:
+  # [TEST]
   java:
     tty: true # Enables debugging capabilities when attached to this container.
     image: docker.io/bitnami/java:17
