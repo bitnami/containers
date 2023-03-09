@@ -15,9 +15,9 @@
     },
     "rabbitmq": {
         "arch": "amd64",
-        "digest": "64b84debf3756086d0c6e10dc173d53071aaf93f06524df03e10ea57b5a87f68",
+        "digest": "d2dc1d3734f37fed36a84f6bece7d67f638452fd1b81947d70ce05165a908965",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.9.28-1"
+        "version": "3.9.29-0"
     }
 }
