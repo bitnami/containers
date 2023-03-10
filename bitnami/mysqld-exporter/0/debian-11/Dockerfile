@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-07T22:19:00Z" \
+      org.opencontainers.image.created="2023-03-10T22:33:57Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.14.0-debian-11-r97" \
+      org.opencontainers.image.ref.name="0.14.0-debian-11-r98" \
       org.opencontainers.image.title="mysqld-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.14.0"
