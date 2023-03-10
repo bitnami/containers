@@ -5,10 +5,10 @@ ARG TARGETARCH
 ARG WITH_ALL_LOCALES="no"
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-07T09:04:29Z" \
+      org.opencontainers.image.created="2023-03-10T09:53:16Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.1.1-debian-11-r21" \
+      org.opencontainers.image.ref.name="4.1.1-debian-11-r22" \
       org.opencontainers.image.title="moodle" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="4.1.1"
@@ -25,10 +25,10 @@ RUN install_packages acl ca-certificates cron curl libaudit1 libbrotli1 libbsd0 
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "php-8.0.28-2-linux-${OS_ARCH}-debian-11" \
-      "apache-2.4.55-6-linux-${OS_ARCH}-debian-11" \
+      "apache-2.4.56-0-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-13.10.0-1-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.12-1-linux-${OS_ARCH}-debian-11" \
-      "libphp-8.0.28-2-linux-${OS_ARCH}-debian-11" \
+      "libphp-8.0.28-3-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-1-linux-${OS_ARCH}-debian-11" \
       "moodle-4.1.1-5-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
