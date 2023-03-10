@@ -1,10 +1,10 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "85cad262b1568f5c507335dea52c7b311b157f15db13e88c4272a93410009abf",
+        "digest": "d03822c8f55162804b116a8d1753545a39faed5de86139ea775aefbd63252510",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.4.55-6"
+        "version": "2.4.56-0"
     },
     "gosu": {
         "arch": "amd64",
@@ -15,10 +15,10 @@
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "975e5e7663ae11b6b0f34ed8a589a5beb9589c0628f23890421a92143d9dfacc",
+        "digest": "722d7b694c1bb91c8fa05b5ba8e837215f14aef38c24975ca10f473265afa20f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.28-2"
+        "version": "8.0.28-3"
     },
     "moodle": {
         "arch": "amd64",
