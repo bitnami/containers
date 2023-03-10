@@ -41,6 +41,7 @@ export PATH="${LDAP_BIN_DIR}:${LDAP_SBIN_DIR}:$PATH"
 export LDAP_TLS_CERT_FILE="${LDAP_TLS_CERT_FILE:-}"
 export LDAP_TLS_KEY_FILE="${LDAP_TLS_KEY_FILE:-}"
 export LDAP_TLS_CA_FILE="${LDAP_TLS_CA_FILE:-}"
+export LDAP_TLS_VERIFY_CLIENTS="${LDAP_TLS_VERIFY_CLIENTS:-never}"
 export LDAP_TLS_DH_PARAMS_FILE="${LDAP_TLS_DH_PARAMS_FILE:-}"
 # Users
 export LDAP_DAEMON_USER="slapd"
@@ -664,6 +665,9 @@ olcTLSCertificateFile: $LDAP_TLS_CERT_FILE
 -
 replace: olcTLSCertificateKeyFile
 olcTLSCertificateKeyFile: $LDAP_TLS_KEY_FILE
+-
+replace: olcTLSVerifyClient
+olcTLSVerifyClient: $LDAP_TLS_VERIFY_CLIENTS
 EOF
     if [[ -f "$LDAP_TLS_DH_PARAMS_FILE" ]]; then
         cat >> "${LDAP_SHARE_DIR}/certs.ldif" << EOF
