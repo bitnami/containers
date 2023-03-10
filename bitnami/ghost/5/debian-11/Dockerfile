@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-09T21:22:30Z" \
+      org.opencontainers.image.created="2023-03-10T19:57:41Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.37.0-debian-11-r2" \
+      org.opencontainers.image.ref.name="5.38.0-debian-11-r0" \
       org.opencontainers.image.title="ghost" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="5.37.0"
+      org.opencontainers.image.version="5.38.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "node-16.19.1-1-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.12-1-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
-      "ghost-5.37.0-0-linux-${OS_ARCH}-debian-11" \
+      "ghost-5.38.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -44,7 +44,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/ghost/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
-ENV APP_VERSION="5.37.0" \
+ENV APP_VERSION="5.38.0" \
     BITNAMI_APP_NAME="ghost" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/ghost/bin:$PATH"
 
