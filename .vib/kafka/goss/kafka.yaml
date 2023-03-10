@@ -1,0 +1,22 @@
+file:
+  # Checks the postunpack phase properly creates the plugin's symlink
+  {{ .Vars.root_dir }}/kafka/configtmp:
+    exists: false
+  # Checks the postunpack phase properly creates the plugin's symlink
+  {{ .Vars.root_dir }}/kafka/conf:
+    exists: false
+  # Checks the postunpack phase properly creates the plugin's symlink
+  {{ .Vars.root_dir }}/kafka/config/log4j.properties:
+    exists: true
+    filetype: file
+    contains:
+      - "log4j.appender.stdout.Threshold=OFF"
+      - "!DailyRollingFileAppender"
+      - "ConsoleAppender"
+      - "!DatePattern"
+      - "!Appender.File"
+  {{ .Vars.root_dir }}/kafka/bin/kafka-server-start.sh:
+    exists: true
+    filetype: file
+    contains:
+      - "![-]loggc"

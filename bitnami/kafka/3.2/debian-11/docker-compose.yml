@@ -1,6 +1,7 @@
 version: "2"
 
 services:
+  # [TEST]
   zookeeper:
     image: docker.io/bitnami/zookeeper:3.8
     ports:
