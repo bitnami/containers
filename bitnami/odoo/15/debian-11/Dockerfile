@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-08T01:36:24Z" \
+      org.opencontainers.image.created="2023-03-10T08:45:11Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="15.0.20230210-debian-11-r9" \
+      org.opencontainers.image.ref.name="15.0.20230310-debian-11-r0" \
       org.opencontainers.image.title="odoo" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="15.0.20230210"
+      org.opencontainers.image.version="15.0.20230310"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "render-template-1.0.5-1-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-15.2.0-1-linux-${OS_ARCH}-debian-11" \
       "node-18.15.0-0-linux-${OS_ARCH}-debian-11" \
-      "odoo-15.0.20230210-2-linux-${OS_ARCH}-debian-11" \
+      "odoo-15.0.20230310-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -50,7 +50,7 @@ RUN if [ "$OS_ARCH" = "amd64" ]; then \
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/odoo/postunpack.sh
-ENV APP_VERSION="15.0.20230210" \
+ENV APP_VERSION="15.0.20230310" \
     BITNAMI_APP_NAME="odoo" \
     LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/odoo/bin:$PATH"
