@@ -4,10 +4,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-08T12:00:31Z" \
+      org.opencontainers.image.created="2023-03-11T12:42:07Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.0.8-debian-11-r4" \
+      org.opencontainers.image.ref.name="7.0.8-debian-11-r5" \
       org.opencontainers.image.title="ksql" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="7.0.8"
