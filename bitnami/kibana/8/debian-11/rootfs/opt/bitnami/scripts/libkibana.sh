@@ -129,6 +129,9 @@ kibana_initialize() {
             kibana_conf_set "elasticsearch.username" "kibana_system"
             kibana_conf_set "elasticsearch.password" "$KIBANA_PASSWORD"
         fi
+        if is_boolean_yes "$KIBANA_DISABLE_STRICT_CSP"; then
+            kibana_conf_set "csp.strict" "false" "bool"
+        fi
         if is_boolean_yes "$KIBANA_SERVER_ENABLE_TLS"; then
             kibana_conf_set "server.ssl.enabled" "true" "bool"
             if "$KIBANA_SERVER_TLS_USE_PEM"; then
