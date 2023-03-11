@@ -58,6 +58,7 @@ done
 unset solr_env_vars
 
 # Paths
+export PATH="$BITNAMI_ROOT_DIR/solr/bin:$BITNAMI_ROOT_DIR/java/bin:$BITNAMI_ROOT_DIR/common/bin:$PATH"
 export BITNAMI_VOLUME_DIR="/bitnami"
 export SOLR_BASE_DIR="${BITNAMI_ROOT_DIR}/solr"
 export SOLR_JAVA_HOME="${BITNAMI_ROOT_DIR}/java"
