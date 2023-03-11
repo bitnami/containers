@@ -1,10 +1,10 @@
 {
     "clickhouse": {
         "arch": "amd64",
-        "digest": "5022ce1d7e68e36cd9afc83bd5c1856e86cfd2aa48746f6532e28a8015b8aaca",
+        "digest": "f479e4a2fb758f07773ab11c4520653444a37c6749815c27d74370e5dbf24bb3",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "22.8.14-0"
+        "version": "22.8.15-0"
     },
     "gosu": {
         "arch": "amd64",
