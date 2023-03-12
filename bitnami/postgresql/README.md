@@ -269,6 +269,7 @@ The Bitnami PostgreSQL Image comes with the pgAudit module enabled by default. T
 
 The Bitnami PostgreSQL Image allows configuring several parameters for the connection and session management:
 
+* `POSTGRESQL_PORT_NUMBER`: Set the listening port number
 * `POSTGRESQL_USERNAME_CONNECTION_LIMIT`: If a user different from `postgres` is created, set the connection limit. No defaults.
 * `POSTGRESQL_POSTGRES_CONNECTION_LIMIT`: Set the connection limit for the `postgres` user. No defaults.
 * `POSTGRESQL_STATEMENT_TIMEOUT`: Set the statement timeout. No defaults.
