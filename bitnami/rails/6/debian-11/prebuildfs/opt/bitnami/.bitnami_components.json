@@ -22,17 +22,17 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "d1ef0d0e577eb68d61ffda2378cb61c756d6a92db7e0ead6ed8c2b19e600ee77",
+        "digest": "a4249f456ce331010413d741375847593c983fba42e31eb6e042db931dedd9f1",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-6"
+        "version": "3.8.16-7"
     },
     "rails": {
         "arch": "amd64",
-        "digest": "373854d6d1f2a1732109f13d28507df203083f334bc7b4d3b153b5f2c10b786d",
+        "digest": "681c765c419fbb70a10722fc221255b9ec0d9c504063ff23ba099186c302b3ea",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.1.7-2-4"
+        "version": "6.1.7-3-0"
     },
     "ruby": {
         "arch": "amd64",
