@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-10T20:54:27Z" \
+      org.opencontainers.image.created="2023-03-13T18:48:53Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.39.2-debian-11-r9" \
+      org.opencontainers.image.ref.name="2.40.0-debian-11-r0" \
       org.opencontainers.image.title="git" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.39.2"
+      org.opencontainers.image.version="2.40.0"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
@@ -22,7 +22,7 @@ RUN install_packages ca-certificates curl less libbrotli1 libcom-err2 libcurl4 l
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
-      "git-2.39.2-2-linux-${OS_ARCH}-debian-11" \
+      "git-2.40.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -37,7 +37,7 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 COPY rootfs /
-ENV APP_VERSION="2.39.2" \
+ENV APP_VERSION="2.40.0" \
     BITNAMI_APP_NAME="git" \
     NSS_WRAPPER_LIB="/opt/bitnami/common/lib/libnss_wrapper.so" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/git/bin:$PATH"
