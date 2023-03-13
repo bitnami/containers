@@ -36,9 +36,9 @@
     },
     "wordpress": {
         "arch": "amd64",
-        "digest": "2fe508823832d0b1e82f4e19358099a8266c24f398252faad907703d9e3db88f",
+        "digest": "e0492c097f1956d718a6ab09649f1e83f22c7e48ffc0db1d24341b9a73c9ff9f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.1.1-36"
+        "version": "6.1.1-37"
     }
 }
