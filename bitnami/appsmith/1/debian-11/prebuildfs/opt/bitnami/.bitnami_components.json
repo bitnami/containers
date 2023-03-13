@@ -1,10 +1,10 @@
 {
     "appsmith": {
         "arch": "amd64",
-        "digest": "8c1a7e62116ae2c1811b002b0d63ae90f360991a217b0b7a8812dbd55aa6bf35",
+        "digest": "7cb1a7d7b4955a6b81d00d555220a17b2dab23f06fae89840dbfd6cb320c2d49",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.9.11-0"
+        "version": "1.9.12-0"
     },
     "gosu": {
         "arch": "amd64",
@@ -43,10 +43,10 @@
     },
     "python": {
         "arch": "amd64",
-        "digest": "d1ef0d0e577eb68d61ffda2378cb61c756d6a92db7e0ead6ed8c2b19e600ee77",
+        "digest": "a4249f456ce331010413d741375847593c983fba42e31eb6e042db931dedd9f1",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-6"
+        "version": "3.8.16-7"
     },
     "render-template": {
         "arch": "amd64",
