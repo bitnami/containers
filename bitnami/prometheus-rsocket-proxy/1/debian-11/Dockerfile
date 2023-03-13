@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-10T23:11:22Z" \
+      org.opencontainers.image.created="2023-03-13T23:34:48Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.5.0-debian-11-r69" \
+      org.opencontainers.image.ref.name="1.5.0-debian-11-r70" \
       org.opencontainers.image.title="prometheus-rsocket-proxy" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.5.0"
