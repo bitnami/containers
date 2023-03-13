@@ -21,6 +21,7 @@ if [[ "$*" = *"/opt/bitnami/scripts/laravel/run.sh"* ]]; then
     info "** Running Laravel setup **"
     /opt/bitnami/scripts/php/setup.sh
     /opt/bitnami/scripts/laravel/setup.sh
+    /post-init.sh
     info "** Laravel setup finished! **"
 fi
 
