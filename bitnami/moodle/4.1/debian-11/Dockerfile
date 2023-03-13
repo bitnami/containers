@@ -5,13 +5,13 @@ ARG TARGETARCH
 ARG WITH_ALL_LOCALES="no"
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-10T09:53:16Z" \
+      org.opencontainers.image.created="2023-03-13T04:36:55Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.1.1-debian-11-r22" \
+      org.opencontainers.image.ref.name="4.1.2-debian-11-r0" \
       org.opencontainers.image.title="moodle" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="4.1.1"
+      org.opencontainers.image.version="4.1.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -30,7 +30,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "mysql-client-10.6.12-1-linux-${OS_ARCH}-debian-11" \
       "libphp-8.0.28-3-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-1-linux-${OS_ARCH}-debian-11" \
-      "moodle-4.1.1-5-linux-${OS_ARCH}-debian-11" \
+      "moodle-4.1.2-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -62,7 +62,7 @@ RUN /opt/bitnami/scripts/moodle/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="4.1.1" \
+    APP_VERSION="4.1.2" \
     BITNAMI_APP_NAME="moodle" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
