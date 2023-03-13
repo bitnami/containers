@@ -192,7 +192,7 @@ EOF
         # Valve docs for Access Control: https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Access_Control
         if is_boolean_yes "$TOMCAT_ALLOW_REMOTE_MANAGEMENT"; then
             info "Enabling remote connections for manager and host-manager applications"
-            for application in manager host-manager; do
+             for application in manager host-manager examples docs; do
                 [[ -f "${TOMCAT_WEBAPPS_DIR}/${application}/META-INF/context.xml" ]] || continue
                 xmlstarlet ed -S --inplace --update '//Valve/@allow' --value '\d+\.\d+\.\d+\.\d+' "${TOMCAT_WEBAPPS_DIR}/${application}/META-INF/context.xml"
             done
