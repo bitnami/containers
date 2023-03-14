@@ -6,8 +6,6 @@
 
 [Overview of Kubeapps APIs](https://github.com/vmware-tanzu/kubeapps)
 
-
-
 ## TL;DR
 
 ```console
