@@ -5,7 +5,6 @@
 > Supabase Realtime is a component of Supabase. Supabase is an open source implementation of Firebase. Supabase Realtime tracks and synchronizes changes in PostgreSQL instances using Websockets.
 
 [Overview of Supabase Realtime](https://github.com/supabase/realtime)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
