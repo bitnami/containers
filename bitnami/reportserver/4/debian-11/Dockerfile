@@ -4,10 +4,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-11T06:45:21Z" \
+      org.opencontainers.image.created="2023-03-14T10:17:50Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.5.0-6087-debian-11-r7" \
+      org.opencontainers.image.ref.name="4.5.0-6087-debian-11-r8" \
       org.opencontainers.image.title="reportserver" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="4.5.0-6087"
@@ -24,7 +24,7 @@ RUN install_packages ca-certificates curl libaudit1 libcap-ng0 libgcc-s1 libicu6
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "java-11.0.18-10-2-linux-${OS_ARCH}-debian-11" \
-      "tomcat-9.0.71-10-linux-${OS_ARCH}-debian-11" \
+      "tomcat-9.0.73-0-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.12-1-linux-${OS_ARCH}-debian-11" \
       "reportserver-4.5.0-6087-1-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-1-linux-${OS_ARCH}-debian-11" \
