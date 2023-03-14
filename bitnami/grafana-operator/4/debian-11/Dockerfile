@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-13T21:41:04Z" \
+      org.opencontainers.image.created="2023-03-14T11:55:15Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.9.0-debian-11-r11" \
+      org.opencontainers.image.ref.name="4.10.0-debian-11-r0" \
       org.opencontainers.image.title="grafana-operator" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="4.9.0"
+      org.opencontainers.image.version="4.10.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "grafana-operator-4.9.0-2-linux-${OS_ARCH}-debian-11" \
+      "grafana-operator-4.10.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,7 +40,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN ln -sf /opt/bitnami/grafana-operator/bin/grafana-operator /usr/local/bin/grafana-operator
 RUN mkdir -p /opt/jsonnet && ln -sf /opt/bitnami/grafonnet-lib/grafonnet /opt/jsonnet/grafonnet
 
-ENV APP_VERSION="4.9.0" \
+ENV APP_VERSION="4.10.0" \
     BITNAMI_APP_NAME="grafana-operator" \
     PATH="/opt/bitnami/grafana-operator/bin:$PATH"
 
