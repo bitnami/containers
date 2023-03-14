@@ -6,8 +6,6 @@
 
 [Overview of Spring Cloud Skipper](https://github.com/spring-cloud/spring-cloud-skipper)
 
-
-
 ## TL;DR
 
 ### Docker Compose
