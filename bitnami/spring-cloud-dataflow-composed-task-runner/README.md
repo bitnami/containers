@@ -6,8 +6,6 @@
 
 [Overview of SCDF Composed Task Runner](https://github.com/spring-cloud/spring-cloud-dataflow)
 
-
-
 ## TL;DR
 
 ```console
