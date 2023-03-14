@@ -6,8 +6,6 @@
 
 [Overview of WordPress with NGINX](http://www.wordpress.org)
 
-
-
 ## TL;DR
 
 ```console
