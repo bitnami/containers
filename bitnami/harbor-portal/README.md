@@ -6,8 +6,6 @@
 
 [Overview of Harbor](https://goharbor.io/)
 
-
-
 ## TL;DR
 
 ```console
