@@ -6,8 +6,6 @@
 
 [Overview of Kubeapps Pinniped Proxy](https://github.com/vmware-tanzu/kubeapps)
 
-
-
 ## TL;DR
 
 ```console
