@@ -5,7 +5,6 @@
 > Envoy is a distributed, high-performance proxy for cloud-native applications. It features a small memory footprint, universal application language compatibility, and supports http/2 and gRPC.
 
 [Overview of Envoy](https://www.envoyproxy.io/)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
