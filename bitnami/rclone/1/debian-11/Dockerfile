@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-13T23:28:38Z" \
+      org.opencontainers.image.created="2023-03-14T15:57:13Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.61.1-debian-11-r28" \
+      org.opencontainers.image.ref.name="1.62.0-debian-11-r0" \
       org.opencontainers.image.title="rclone" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.61.1"
+      org.opencontainers.image.version="1.62.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "rclone-1.61.1-2-linux-${OS_ARCH}-debian-11" \
+      "rclone-1.62.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -38,7 +38,7 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="1.61.1" \
+ENV APP_VERSION="1.62.0" \
     BITNAMI_APP_NAME="rclone" \
     PATH="/opt/bitnami/rclone/bin:$PATH"
 

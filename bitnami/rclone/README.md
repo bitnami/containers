@@ -5,7 +5,6 @@
 > RClone synchronizes files and directories to and from different cloud storage providers. It supports different backends, including GCS, S3 and Azure Blob Storage. It provides caching and encryption.
 
 [Overview of rClone](https://rclone.org/)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
