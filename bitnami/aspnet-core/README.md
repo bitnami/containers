@@ -5,7 +5,6 @@
 > ASP.NET Core is an open-source framework for web application development created by Microsoft. It runs on both the full .NET Framework, on Windows, and the cross-platform .NET Core.
 
 [Overview of ASP.NET](https://github.com/dotnet/aspnetcore)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
