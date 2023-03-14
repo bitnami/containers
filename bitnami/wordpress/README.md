@@ -6,8 +6,6 @@
 
 [Overview of WordPress](http://www.wordpress.org)
 
-
-
 ## TL;DR
 
 ```console
