@@ -4,10 +4,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-11T00:08:19Z" \
+      org.opencontainers.image.created="2023-03-14T09:30:55Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="12.1.0-debian-11-r21" \
+      org.opencontainers.image.ref.name="12.1.0-debian-11-r22" \
       org.opencontainers.image.title="wavefront-proxy" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="12.1.0"
