@@ -5,7 +5,6 @@
 > The AWS Command Line Interface (CLI) allows you to manage your AWS services from a single tool. Use it to control multiple services and automate actions through scripts.
 
 [Overview of AWS CLI](https://aws.amazon.com/cli/)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
