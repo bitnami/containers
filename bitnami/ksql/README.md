@@ -6,8 +6,6 @@
 
 [Overview of ksql](https://www.confluent.io/)
 
-
-
 ## TL;DR
 
 ```console
