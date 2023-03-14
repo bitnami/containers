@@ -20,7 +20,6 @@ for dir in "$RABBITMQ_BIN_DIR" "$RABBITMQ_INITSCRIPTS_DIR" "$RABBITMQ_CONF_DIR" 
 done
 chmod -R g+rwX "$RABBITMQ_INITSCRIPTS_DIR" "$RABBITMQ_BIN_DIR" "$RABBITMQ_CONF_DIR" "$RABBITMQ_DATA_DIR" "$RABBITMQ_HOME_DIR" "$RABBITMQ_LIB_DIR" "$RABBITMQ_LOGS_DIR" "$RABBITMQ_PLUGINS_DIR"
 
-
 # Adding symlinks to upstream RabbitMQ paths to make the container compatible with the RabbitMQ Cluster Operator
 
 symlinks=(

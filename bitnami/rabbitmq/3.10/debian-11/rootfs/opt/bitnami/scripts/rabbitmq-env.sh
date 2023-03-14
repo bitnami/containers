@@ -104,7 +104,7 @@ export RABBITMQ_LOGS_DIR="${RABBITMQ_BASE_DIR}/var/log/rabbitmq"
 export RABBITMQ_DEFINITIONS_FILE="${RABBITMQ_DEFINITIONS_FILE:-/app/load_definition.json}"
 export RABBITMQ_PLUGINS_DIR="${RABBITMQ_BASE_DIR}/plugins"
 export RABBITMQ_MOUNTED_CONF_DIR="${RABBITMQ_VOLUME_DIR}/conf"
-export PATH="${RABBITMQ_BIN_DIR}:${PATH}"
+export PATH="${RABBITMQ_BIN_DIR}:${BITNAMI_ROOT_DIR}/common/bin:${BITNAMI_ROOT_DIR}/erlang/bin:${PATH}"
 
 # System users (when running with a privileged user)
 export RABBITMQ_DAEMON_USER="rabbitmq"
