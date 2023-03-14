@@ -5,7 +5,6 @@
 > The Gcloud CLI is a set of command-line tools and libraries for use with Google Cloud. It enables users to access multiple Google Cloud services and products from the command line.
 
 [Overview of Google Cloud SDK](https://cloud.google.com/sdk/gcloud)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
