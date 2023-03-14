@@ -5,7 +5,6 @@
 > supabase-storage is a component of Supabase. Supabase is an open source implementation of Firebase. supabase-storage is a RESTful API for managing the PostgreSQL database.
 
 [Overview of Supabase Storage](https://github.com/supabase/storage-api)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
