@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-14T10:54:24Z" \
+      org.opencontainers.image.created="2023-03-14T14:49:20Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.0.1-debian-11-r22" \
+      org.opencontainers.image.ref.name="8.0.2-debian-11-r0" \
       org.opencontainers.image.title="prestashop" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="8.0.1"
+      org.opencontainers.image.version="8.0.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -27,7 +27,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "mysql-client-10.6.12-1-linux-${OS_ARCH}-debian-11" \
       "libphp-8.1.16-3-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-1-linux-${OS_ARCH}-debian-11" \
-      "prestashop-8.0.1-2-linux-${OS_ARCH}-debian-11" \
+      "prestashop-8.0.2-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -52,7 +52,7 @@ RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/prestashop/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="8.0.1" \
+    APP_VERSION="8.0.2" \
     BITNAMI_APP_NAME="prestashop" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/prestashop/bin:$PATH"
 
