@@ -195,7 +195,7 @@ RUN curl https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.11.7
 
 In a similar way that in the previous section, you may want to use a different version of Hadoop jars.
 
-Go to https://spark.apache.org/downloads.html and copy the download url bundling the Hadoop version you want and matching the Apache Spark version of the container. Extend the Bitnami container image as below:
+Go to <https://spark.apache.org/downloads.html> and copy the download url bundling the Hadoop version you want and matching the Apache Spark version of the container. Extend the Bitnami container image as below:
 
 ```Dockerfile
 FROM bitnami/spark:3.0.0

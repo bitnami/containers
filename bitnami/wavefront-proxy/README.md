@@ -6,8 +6,6 @@
 
 [Overview of Wavefront Proxy](https://github.com/wavefrontHQ/wavefront-proxy)
 
-
-
 ## TL;DR
 
 ```console

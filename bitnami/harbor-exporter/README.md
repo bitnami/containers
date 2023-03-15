@@ -6,8 +6,6 @@
 
 [Overview of harbor-exporter](https://github.com/goharbor/harbor)
 
-
-
 ## TL;DR
 
 This container is part of the [Harbor solution](https://github.com/bitnami/charts/tree/main/bitnami/harbor) that is primarily intended to be deployed in Kubernetes. You can deploy Harbor solution and then enable this specific container with the command below:

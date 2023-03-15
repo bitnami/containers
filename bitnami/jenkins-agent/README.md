@@ -11,7 +11,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run --name jenkins-agent --env JENKINS_URL=http://jenkins:port bitnami/jenkins-agent:latest <agent-secret> <agent-name>
+docker run --name jenkins-agent --env JENKINS_URL=http://jenkins:port bitnami/jenkins-agent:latest <agent-secret> <agent-name>
 ```
 
 You can find all the available configuration options in the [Environment Variables](#environment-variables) section.
@@ -42,21 +42,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami Jenkins Agent Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/jenkins).
 
 ```console
-$ docker pull bitnami/jenkins-agent:latest
+docker pull bitnami/jenkins-agent:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/jenkins/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/jenkins-agent:[TAG]
+docker pull bitnami/jenkins-agent:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Configuration
@@ -65,7 +65,7 @@ $ docker build -t bitnami/APP:latest .
 
 When you start the Jenkins Agent image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
-- For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/jenkins/docker-compose.yml) file present in this repository:
+* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/jenkins/docker-compose.yml) file present in this repository:
 
     ```yaml
     jenkins-agent:
@@ -75,7 +75,7 @@ When you start the Jenkins Agent image, you can adjust the configuration of the 
       ...
     ```
 
-- For manual execution add a `--env` option with each variable and value:
+* For manual execution add a `--env` option with each variable and value:
 
     ```console
     $ docker run -d --name jenkins-agent \
@@ -85,35 +85,35 @@ When you start the Jenkins Agent image, you can adjust the configuration of the 
 
 Available environment variables:
 
-##### User and Site configuration
+#### User and Site configuration
 
-- `JENKINS_AGENT_WORKDIR`: The working directory of the remoting instance (stores cache and logs by default). Default: **/bitnami/jenkins/home**
-- `JENKINS_URL`: Specify the Jenkins root URLs to connect to.
-- `JENKINS_AGENT_TUNNEL`: Connect to the specified host and port, instead of connecting directly to Jenkins. Useful when connection to Jenkins needs to be tunneled.
-- `JENKINS_AGENT_PROTOCOLS`: Specify the remoting protocols to attempt when instanceIdentity is provided.
-- `JENKINS_AGENT_DIRECT_CONNECTION`: Connect directly to this TCP agent port, skipping the HTTP(S) connection.
-- `JENKINS_AGENT_INSTANCE_IDENTITY`: The base64 encoded InstanceIdentity byte array of the Jenkins controller.
-- `JENKINS_AGENT_WEB_SOCKET`: Make a WebSocket connection to Jenkins rather than using the TCP port. Default: **false**
-- `JENKINS_AGENT_SECRET`: Jenkins Agent name.
-- `JENKINS_AGENT_NAME`: Jenkins Agent secret.
+* `JENKINS_AGENT_WORKDIR`: The working directory of the remoting instance (stores cache and logs by default). Default: **/bitnami/jenkins/home**
+* `JENKINS_URL`: Specify the Jenkins root URLs to connect to.
+* `JENKINS_AGENT_TUNNEL`: Connect to the specified host and port, instead of connecting directly to Jenkins. Useful when connection to Jenkins needs to be tunneled.
+* `JENKINS_AGENT_PROTOCOLS`: Specify the remoting protocols to attempt when instanceIdentity is provided.
+* `JENKINS_AGENT_DIRECT_CONNECTION`: Connect directly to this TCP agent port, skipping the HTTP(S) connection.
+* `JENKINS_AGENT_INSTANCE_IDENTITY`: The base64 encoded InstanceIdentity byte array of the Jenkins controller.
+* `JENKINS_AGENT_WEB_SOCKET`: Make a WebSocket connection to Jenkins rather than using the TCP port. Default: **false**
+* `JENKINS_AGENT_SECRET`: Jenkins Agent name.
+* `JENKINS_AGENT_NAME`: Jenkins Agent secret.
 
-##### JAVA configuration
+#### JAVA configuration
 
-- `JAVA_OPTS`: Customize JVM parameters. No defaults.
-- `JAVA_HOME`: Java Home directory. Default: **/opt/bitnami/java**
+* `JAVA_OPTS`: Customize JVM parameters. No defaults.
+* `JAVA_HOME`: Java Home directory. Default: **/opt/bitnami/java**
 
 ## Logging
 
 The Bitnami Jenkins Agent Docker image sends the container logs to `stdout`. To view the logs:
 
 ```console
-$ docker logs jenkins
+docker logs jenkins
 ```
 
 Or using Docker Compose:
 
 ```console
-$ docker-compose logs jenkins
+docker-compose logs jenkins
 ```
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
@@ -150,7 +150,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

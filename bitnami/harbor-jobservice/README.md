@@ -6,8 +6,6 @@
 
 [Overview of Harbor Job Service](https://github.com/goharbor/harbor)
 
-
-
 ## TL;DR
 
 ```console
