@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-12T16:09:17Z" \
+      org.opencontainers.image.created="2023-03-15T23:15:37Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="10.11.2-debian-11-r5" \
+      org.opencontainers.image.ref.name="10.11.2-debian-11-r6" \
       org.opencontainers.image.title="mariadb" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="10.11.2"
