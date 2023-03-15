@@ -5,7 +5,6 @@
 > Promtail is an agent that ships the contents of local logs to a private Grafana Loki instance or Grafana Cloud. Features log file discovery, and label management, and exposes a web server.
 
 [Overview of Promtail](https://grafana.com/docs/loki/latest/clients/promtail/)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
