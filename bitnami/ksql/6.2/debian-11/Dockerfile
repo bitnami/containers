@@ -19,7 +19,7 @@ ENV HOME="/" \
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-# Install required system packages and dependencies
+## Install required system packages and dependencies
 RUN install_packages ca-certificates curl netcat procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
