@@ -11,7 +11,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-$ docker run --name v bitnami/flink:latest
+docker run --name v bitnami/flink:latest
 ```
 
 ## Why use Bitnami Images?
@@ -36,21 +36,21 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 The recommended way to get the Bitnami flink Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/flink).
 
 ```console
-$ docker pull bitnami/flink:latest
+docker pull bitnami/flink:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/flink/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/flink:[TAG]
+docker pull bitnami/flink:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+git clone https://github.com/bitnami/containers.git
+cd bitnami/APP/VERSION/OPERATING-SYSTEM
+docker build -t bitnami/APP:latest .
 ```
 
 ## Why use a non-root container?
@@ -66,7 +66,7 @@ To run commands inside this container you can use `docker run`. The default endp
 Also, you can use the `help` Flink Mode in order to obtain an updated list of modes to run of different components instances
 
 ```console
-$ docker run --rm -e FLINK_MODE=help --name flink bitnami/flink:latest
+docker run --rm -e FLINK_MODE=help --name flink bitnami/flink:latest
 ```
 
 ```console
