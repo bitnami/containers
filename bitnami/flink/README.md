@@ -70,10 +70,10 @@ docker run --rm -e FLINK_MODE=help --name flink bitnami/flink:latest
 ```
 
 ```console
-$ Usage: FLINK_MODE=(jobmanager|standalone-job|taskmanager|history-server)
+Usage: FLINK_MODE=(jobmanager|standalone-job|taskmanager|history-server)
 
-  By default, the Apache Flink Packaged by Bitnami  image will run in jobmanager mode.
-  Also, by default, Apache Flink Packaged by Bitnami image adopts jemalloc as default memory allocator. This behavior can be disabled by setting the 'DISABLE_JEMALLOC' environment variable to 'true'.
+By default, the Apache Flink Packaged by Bitnami  image will run in jobmanager mode.
+Also, by default, Apache Flink Packaged by Bitnami image adopts jemalloc as default memory allocator. This behavior can be disabled by setting the 'DISABLE_JEMALLOC' environment variable to 'true'.
 ```
 
 Check the [official Apache Flink documentation](https://flink.apache.org//docs) for more information.
