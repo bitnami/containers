@@ -87,10 +87,16 @@ redis_cluster_override_conf() {
         # Always set the announce-ip to avoid issues when using proxies and traffic restrictions.
         redis_conf_set cluster-announce-ip "$(get_machine_ip)"
     fi
+    if ! is_empty_value "$REDIS_CLUSTER_ANNOUNCE_HOSTNAME"; then
+        redis_conf_set "cluster-announce-hostname" "$REDIS_CLUSTER_ANNOUNCE_HOSTNAME"
+    fi
+    if ! is_empty_value "$REDIS_CLUSTER_PREFERRED_ENDPOINT_TYPE"; then
+        redis_conf_set "cluster-preferred-endpoint-type" "$REDIS_CLUSTER_PREFERRED_ENDPOINT_TYPE"
+    fi
     if is_boolean_yes "$REDIS_TLS_ENABLED"; then
         redis_conf_set tls-cluster yes
         redis_conf_set tls-replication yes
-    fi
+    fi  
     if ! is_empty_value "$REDIS_CLUSTER_ANNOUNCE_PORT"; then
         redis_conf_set "cluster-announce-port" "$REDIS_CLUSTER_ANNOUNCE_PORT"
     fi
