@@ -6,8 +6,6 @@
 
 [Overview of Concourse](https://concourse-ci.org/)
 
-
-
 ## TL;DR
 
 ```console

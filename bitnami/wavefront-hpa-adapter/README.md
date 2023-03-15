@@ -6,8 +6,6 @@
 
 [Overview of Wavefront HPA Adapter for Kubernetes](https://github.com/wavefrontHQ/wavefront-kubernetes-adapter)
 
-
-
 ## TL;DR
 
 ```console

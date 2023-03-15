@@ -86,7 +86,7 @@ The Bitnami Keycloak container can create a default admin user by setting the fo
 
 The Bitnami Keycloak container can connect to a database by setting the following environment variables:
 
-- `KEYCLOAK_DATABASE_VENDOR`: Database vendor. Default: **postgres**. Use **dev-mem** or **dev-file** to use an in-memory or file-based database for development purposes.
+* `KEYCLOAK_DATABASE_VENDOR`: Database vendor. Default: **postgres**. Use **dev-mem** or **dev-file** to use an in-memory or file-based database for development purposes.
 
 ### PostgreSQL database connection configuration
 

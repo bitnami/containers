@@ -6,8 +6,6 @@
 
 [Overview of jaeger](https://www.jaegertracing.io/)
 
-
-
 ## TL;DR
 
 ```console

@@ -6,8 +6,6 @@
 
 [Overview of Harbor Registryctl](https://github.com/goharbor/harbor)
 
-
-
 ## TL;DR
 
 ```console
