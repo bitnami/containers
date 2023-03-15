@@ -1,0 +1,9 @@
+{
+    "fluxcd-image-automation-controller": {
+        "arch": "amd64",
+        "digest": "c2c977cc98d02879c8adfa4968dac20b29e538563e5b3481bf5b76dc4d500c27",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "0.31.0-0"
+    }
+}
