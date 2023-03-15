@@ -1,0 +1,23 @@
+{
+    "flink": {
+        "arch": "amd64",
+        "digest": "d4a41f1c37b456513aef72cd7d19605d0fb998a241697feb06d04e6d15ebd68a",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.16.1-0"
+    },
+    "gosu": {
+        "arch": "amd64",
+        "digest": "f6056076afb745fd7d9d87d20f71e7248d63330352cf5ae0be2130b7f44a8cfa",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.16.0-2"
+    },
+    "java": {
+        "arch": "amd64",
+        "digest": "be7aa8950dacdcd96b5308a246b86665d364f70675564f157bfc7594b383af1f",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "11.0.18-10-2"
+    }
+}
