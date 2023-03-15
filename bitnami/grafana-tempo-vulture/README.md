@@ -5,7 +5,6 @@
 > Grafana Tempo Vulture is a component of the Bitnami Grafana Tempo chart. Grafana Tempo Vulture is designed to monitor Grafana Tempo's performance.
 
 [Overview of Grafana Tempo Vulture](https://github.com/grafana/tempo)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
