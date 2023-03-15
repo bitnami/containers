@@ -1,6 +1,7 @@
 version: '2'
 
 services:
+  # [TEST]
   memcached:
     image: docker.io/bitnami/memcached:1
     ports:
