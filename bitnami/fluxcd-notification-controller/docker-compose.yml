@@ -1,0 +1,5 @@
+version: '2'
+
+services:
+  fluxcd-notification-controller:
+    image: docker.io/bitnami/fluxcd-notification-controller:0
