@@ -1,0 +1,19 @@
+binaries:
+  - gosu
+  - mysql
+  - node
+  - python
+  - rails
+  - ruby
+directories:
+  - mode: "0775"
+    paths:
+      - /app
+root_dir: /opt/bitnami
+version:
+  bin_name: rails
+  flag: --version
+modules:
+  - sqlite3
+  - mysql
+  - pg
