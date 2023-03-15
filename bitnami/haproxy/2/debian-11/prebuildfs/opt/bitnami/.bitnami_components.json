@@ -1,9 +1,9 @@
 {
     "haproxy": {
         "arch": "amd64",
-        "digest": "e3b298feaaa2440bb6b1cdaf870252e528cc4f2ae8e2c3c95fa5fb5022947b8a",
+        "digest": "0181145f1fb336a84781aeba175466fe9d02580633350f3172eb13357ce83cd4",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.7.4-0"
+        "version": "2.7.4-1"
     }
 }
