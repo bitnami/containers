@@ -5,7 +5,6 @@
 > Apache Airflow is a tool to express and execute workflows as directed acyclic graphs (DAGs). The Airflow scheduler triggers tasks and provides tools to monitor task progress.
 
 [Overview of Apache Airflow Scheduler](https://airflow.apache.org/)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
