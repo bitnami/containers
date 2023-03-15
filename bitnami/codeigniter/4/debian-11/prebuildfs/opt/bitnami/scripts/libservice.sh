@@ -277,21 +277,16 @@ remove_logrotate_conf() {
 # Arguments:
 #   $1 - Service name
 # Flags:
-#   --custom-service-content - Custom content to add to the [service] block
-#   --environment - Environment variable to define (multiple --environment options may be passed)
-#   --environment-file - Text file with environment variables
 #   --exec-start - Start command (required)
 #   --exec-stop - Stop command (optional)
 #   --exec-reload - Reload command (optional)
-#   --group - System group to start the service with
 #   --name - Service full name (e.g. Apache HTTP Server, defaults to $1)
 #   --restart - When to restart the Systemd service after being stopped (defaults to always)
-#   --pid-file - Service PID file
-#   --standard-output - File where to print stdout output
-#   --standard-error - File where to print stderr output
-#   --success-exit-status - Exit code that indicates a successful shutdown
+#   --pid-file - Service PID file (required when --restart is set to always)
 #   --type - Systemd unit type (defaults to forking)
 #   --user - System user to start the service with
+#   --group - System group to start the service with
+#   --environment - Environment variable to define (multiple --environment options may be passed)
 # Returns:
 #   None
 #########################
@@ -305,17 +300,11 @@ generate_systemd_conf() {
     local user=""
     local group=""
     local environment=""
-    local environment_file=""
     local exec_start=""
     local exec_stop=""
     local exec_reload=""
     local restart="always"
     local pid_file=""
-    local standard_output="journal"
-    local standard_error=""
-    local limits_content=""
-    local success_exit_status=""
-    local custom_service_content=""
     # Parse CLI flags
     shift
     while [[ "$#" -gt 0 ]]; do
@@ -324,26 +313,15 @@ generate_systemd_conf() {
             | --type \
             | --user \
             | --group \
-            | --environment-file \
             | --exec-start \
             | --exec-stop \
             | --exec-reload \
             | --restart \
             | --pid-file \
-            | --standard-output \
-            | --standard-error \
-            | --success-exit-status \
-            | --custom-service-content \
             )
                 var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
                 shift
-                declare "$var_name"="${1:?"${var_name} value is missing"}"
-                ;;
-            --limit-*)
-                [[ -n "$limits_content" ]] && limits_content+=$'\n'
-                var_name="${1//--limit-}"
-                shift
-                limits_content+="Limit${var_name^^}=${1:?"--limit-${var_name} value is missing"}"
+                declare "$var_name"="${1:?"$var_name" is missing}"
                 ;;
             --environment)
                 shift
@@ -364,6 +342,10 @@ generate_systemd_conf() {
         error "The --exec-start option is required"
         error="yes"
     fi
+    if [[ "$restart" = "always" && -z "$pid_file" ]]; then
+        error "The --restart option cannot be set to 'always' if --pid-file is not set"
+        error="yes"
+    fi
     if [[ "$error" != "no" ]]; then
         return 1
     fi
@@ -380,61 +362,46 @@ ExecStart=${exec_start}
 EOF
     # Optional stop and reload commands
     if [[ -n "$exec_stop" ]]; then
-        cat >> "$service_file" <<< "ExecStop=${exec_stop}"
+        cat >> "$service_file" <<EOF
+ExecStop=${exec_stop}
+EOF
     fi
     if [[ -n "$exec_reload" ]]; then
-        cat >> "$service_file" <<< "ExecReload=${exec_reload}"
+        cat >> "$service_file" <<EOF
+ExecReload=${exec_reload}
+EOF
     fi
     # User and group
     if [[ -n "$user" ]]; then
-        cat >> "$service_file" <<< "User=${user}"
+        cat >> "$service_file" <<EOF
+User=${user}
+EOF
     fi
     if [[ -n "$group" ]]; then
-        cat >> "$service_file" <<< "Group=${group}"
+        cat >> "$service_file" <<EOF
+Group=${group}
+EOF
     fi
     # PID file allows to determine if the main process is running properly (for Restart=always)
     if [[ -n "$pid_file" ]]; then
-        cat >> "$service_file" <<< "PIDFile=${pid_file}"
-    fi
-    if [[ -n "$restart" ]]; then
-        cat >> "$service_file" <<< "Restart=${restart}"
+        cat >> "$service_file" <<EOF
+PIDFile=${pid_file}
+EOF
     fi
     # Environment flags (may be specified multiple times in a unit)
     if [[ -n "$environment" ]]; then
         cat >> "$service_file" <<< "$environment"
     fi
-    if [[ -n "$environment_file" ]]; then
-        cat >> "$service_file" <<< "EnvironmentFile=${environment_file}"
-    fi
-    # Logging
-    if [[ -n "$standard_output" ]]; then
-        cat >> "$service_file" <<< "StandardOutput=${standard_output}"
-    fi
-    if [[ -n "$standard_error" ]]; then
-        cat >> "$service_file" <<< "StandardError=${standard_error}"
-    fi
-    if [[ -n "$custom_service_content" ]]; then
-        cat >> "$service_file" <<< "$custom_service_content"
-    fi
-    if [[ -n "$success_exit_status" ]]; then
-        cat >> "$service_file" <<EOF
-# When the process receives a SIGTERM signal, it exits with code ${success_exit_status}
-SuccessExitStatus=${success_exit_status}
-EOF
-    fi
     cat >> "$service_file" <<EOF
+Restart=${restart}
 # Optimizations
 TimeoutSec=5min
 IgnoreSIGPIPE=no
 KillMode=mixed
-EOF
-    if [[ -n "$limits_content" ]]; then
-        cat >> "$service_file" <<EOF
 # Limits
-${limits_content}
-EOF
-    fi
-    cat >> "$service_file" <<EOF
+LimitNOFILE=infinity
+# Configure output to appear in instance console output
+StandardOutput=journal+console
 
 [Install]
 # Enabling/disabling the main bitnami service should cause the same effect for this service
