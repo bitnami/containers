@@ -5,7 +5,6 @@
 > Apache Airflow is a tool to express and execute workflows as directed acyclic graphs (DAGs). Airflow workers listen to, and process, queues containing workflow tasks.
 
 [Overview of Apache Airflow Worker](https://airflow.apache.org/)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
