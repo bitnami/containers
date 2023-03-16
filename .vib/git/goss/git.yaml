@@ -1,7 +1,7 @@
 command:
   check-git-init:
-    exec: git init /tmp/test
+    exec: git init $RANDOM
     exit-status: 0
   check-git-clone:
-    exec: git clone https://github.com/bitnami/bncert.git
+    exec: git clone https://github.com/bitnami/bncert.git $RANDOM
     exit-status: 0
