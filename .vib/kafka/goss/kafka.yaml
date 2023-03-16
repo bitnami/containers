@@ -1,11 +1,9 @@
 file:
-  # Checks the postunpack phase properly creates the plugin's symlink
+  # Checks specific files are no longer present
   /opt/bitnami/kafka/configtmp:
     exists: false
-  # Checks the postunpack phase properly creates the plugin's symlink
   /opt/bitnami/kafka/conf:
     exists: false
-  # Checks the postunpack phase properly creates the plugin's symlink
   /opt/bitnami/kafka/config/log4j.properties:
     exists: true
     filetype: file
