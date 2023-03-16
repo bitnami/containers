@@ -1,0 +1,12 @@
+command:
+  # ES7 does not support using `elasticsearch --version`
+  # without properly configuring it
+  check-app-version:
+    exec: ls {{ .Vars.root_dir }}/elasticsearch/lib/elasticsearch-core-*.jar | grep {{ .Env.APP_VERSION }}
+    exit-status: 0
+file:
+  # Check x-pack is not included
+  {{ .Vars.root_dir }}/elasticsearch/bin/xpack:
+    exists: false
+  {{ .Vars.root_dir }}/elasticsearch/module/xpack:
+    exists: false
