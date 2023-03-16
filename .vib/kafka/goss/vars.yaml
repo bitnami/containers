@@ -2,6 +2,8 @@ binaries:
   - gosu
   - java
   - kafka-server-start.sh
+  - render-template
+  - wait-for-port
 directories:
   - mode: "0775"
     paths:
