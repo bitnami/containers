@@ -1,7 +1,6 @@
 version: '2'
 
 services:
-  # [TEST]
   nginx:
     image: docker.io/bitnami/nginx:1.22
     ports:
