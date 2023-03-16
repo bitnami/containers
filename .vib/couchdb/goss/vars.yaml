@@ -4,6 +4,7 @@ binaries:
   - erl
   - gosu
   - ini-file
+  - wait-for-port
 directories:
   - mode: "0775"
     paths:

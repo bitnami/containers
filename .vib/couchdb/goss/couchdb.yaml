@@ -1,6 +1,6 @@
 file:
   # Checks default config for erlang is set
-  {{ .Vars.root_dir }}/couchdb/etc/vm.args:
+  /opt/bitnami/couchdb/etc/vm.args:
     exists: true
     filetype: file
     contains:
