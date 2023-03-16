@@ -284,6 +284,7 @@ magento_initialize() {
         # Setup would be hard as it would require to configure Sendmail (SMTP not supported) and authorization keys
         # 'You need to configure Two-Factor Authorization in order to proceed to your store's admin area'
         # 'An E-mail was sent to you with further instructions'
+        magento_execute module:disable "Magento_AdminAdobeImsTwoFactorAuth"
         magento_execute module:disable "Magento_TwoFactorAuth"
 
         # Set the Magento mode in 'env.php'
