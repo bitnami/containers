@@ -1,6 +1,7 @@
 binaries:
   - gosu
   - nginx
+  - render-template
 config_opts:
   - stream
   - mail
