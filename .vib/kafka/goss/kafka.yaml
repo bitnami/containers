@@ -1,12 +1,12 @@
 file:
   # Checks the postunpack phase properly creates the plugin's symlink
-  {{ .Vars.root_dir }}/kafka/configtmp:
+  /opt/bitnami/kafka/configtmp:
     exists: false
   # Checks the postunpack phase properly creates the plugin's symlink
-  {{ .Vars.root_dir }}/kafka/conf:
+  /opt/bitnami/kafka/conf:
     exists: false
   # Checks the postunpack phase properly creates the plugin's symlink
-  {{ .Vars.root_dir }}/kafka/config/log4j.properties:
+  /opt/bitnami/kafka/config/log4j.properties:
     exists: true
     filetype: file
     contains:
@@ -15,7 +15,7 @@ file:
       - "ConsoleAppender"
       - "!DatePattern"
       - "!Appender.File"
-  {{ .Vars.root_dir }}/kafka/bin/kafka-server-start.sh:
+  /opt/bitnami/kafka/bin/kafka-server-start.sh:
     exists: true
     filetype: file
     contains:
