@@ -1,6 +1,5 @@
 command:
-  # Perform a simple spin-up
-  # of memcached as a deamon
+  # Perform a simple spin-up of memcached as a deamon
   check-memcached-daemon:
     exec: memcached -u {{ .Vars.memcached.user }} -p {{ .Vars.memcached.port }} -d
     exit-status: 0
