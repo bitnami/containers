@@ -2,10 +2,6 @@ binaries:
   - gosu
   - java
   - kafka-server-start.sh
-  - kafka-topics.sh
-  - kafka-console-consumer.sh
-  - kafka-console-producer.sh
-  # - render-template
 directories:
   - mode: "0775"
     paths:
