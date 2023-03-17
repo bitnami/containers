@@ -77,7 +77,7 @@
           "action_id": "container-image-publish",
           "params": {
             "metadata": {
-              "tags": "{VIB_ENV_ROLLING_TAGS}"
+              "tags": {VIB_ENV_ROLLING_TAGS}
             },
             "repository": {
               "kind": "OCI",
