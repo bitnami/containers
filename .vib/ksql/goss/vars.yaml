@@ -10,8 +10,3 @@ directories:
       - /opt/bitnami/ksql/logs
       - /opt/bitnami/ksql/certs
 root_dir: /opt/bitnami
-# ksql does not have a version flag so we initiate the shell
-# which does show the version.
-version:
-  bin_name: timeout
-  flag: 5s ksql
