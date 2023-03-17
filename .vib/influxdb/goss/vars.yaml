@@ -2,6 +2,7 @@ binaries:
   - influx
   - influxd
   - gosu
+  - wait-for-port
 directories:
   - mode: "0775"
     paths:
