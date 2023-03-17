@@ -6,4 +6,4 @@ gossfile:
   ../../common/goss/templates/check-directories.yaml: {}
   ../../common/goss/templates/check-files.yaml: {}
   ../../common/goss/templates/check-linked-libraries.yaml: {}
-  ../../common/goss/templates/check-sdpx.yaml: {}
+  ../../common/goss/templates/check-spdx.yaml: {}
