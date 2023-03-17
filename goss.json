@@ -1,0 +1,15 @@
+{
+  "action_id": "goss",
+  "params": {
+    "resources": {
+      "path": "/.vib"
+    },
+    "tests_file": "placeholder/goss/goss.yaml",
+    "vars_file": "placeholder/goss/vars.yaml",
+    "remote": {
+      "pod": {
+        "workload": "deploy-placeholder"
+      }
+    }
+  }
+}

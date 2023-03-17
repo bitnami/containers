@@ -63,9 +63,9 @@
               "url": "{VIB_ENV_PACKAGES_JSON_URL}",
               "path": "/",
               "authn": {
-                  "header": "Authorization",
-                  "token": "Bearer {VIB_ENV_GITHUB_TOKEN}"
-                }
+                "header": "Authorization",
+                "token": "Bearer {VIB_ENV_GITHUB_TOKEN}"
+              }
             }
           }
         }
@@ -77,14 +77,14 @@
           "action_id": "container-image-publish",
           "params": {
             "metadata": {
-              "tags": {VIB_ENV_ROLLING_TAGS}
+              "tags": "{VIB_ENV_ROLLING_TAGS}"
             },
             "repository": {
               "kind": "OCI",
               "url": "{VIB_ENV_REGISTRY_URL}",
               "authn": {
                 "username": "{VIB_ENV_REGISTRY_USERNAME}",
-                "password":  "{VIB_ENV_REGISTRY_PASSWORD}"
+                "password": "{VIB_ENV_REGISTRY_PASSWORD}"
               }
             }
           }
