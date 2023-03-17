@@ -1,0 +1,20 @@
+file:
+  # Checks specific files are no longer present
+  /opt/bitnami/kafka/configtmp:
+    exists: false
+  /opt/bitnami/kafka/conf:
+    exists: false
+  /opt/bitnami/kafka/config/log4j.properties:
+    exists: true
+    filetype: file
+    contains:
+      - "log4j.appender.stdout.Threshold=OFF"
+      - "!DailyRollingFileAppender"
+      - "ConsoleAppender"
+      - "!DatePattern"
+      - "!Appender.File"
+  /opt/bitnami/kafka/bin/kafka-server-start.sh:
+    exists: true
+    filetype: file
+    contains:
+      - "![-]loggc"

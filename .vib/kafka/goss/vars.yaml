@@ -1,0 +1,24 @@
+binaries:
+  - gosu
+  - java
+  - kafka-server-start.sh
+  - render-template
+  - wait-for-port
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/kafka
+      - /bitnami/kafka/data
+      - /opt/bitnami/kafka
+      - /docker-entrypoint-initdb.d
+  - paths:
+      - /bitnami/kafka/config
+      - /opt/bitnami/kafka/config
+      - /opt/bitnami/kafka/logs
+files:
+  - paths:
+      - /opt/bitnami/kafka/config/server.properties
+root_dir: /opt/bitnami
+version:
+  bin_name: kafka-topics.sh
+  flag: --version
