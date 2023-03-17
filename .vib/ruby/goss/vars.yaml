@@ -8,10 +8,6 @@ modules:
   - bundler
   - openssl
   - readline
-directories:
-  - mode: "0755"
-    paths:
-      - /app
 files:
   - paths:
     - /opt/bitnami/ruby/lib/libruby-static.a
