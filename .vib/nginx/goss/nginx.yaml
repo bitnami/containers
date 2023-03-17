@@ -1,0 +1,57 @@
+file:
+  # Checks configured symlinks
+  /opt/bitnami/nginx/conf/bitnami/certs:
+    exists: true
+    filetype: symlink
+    linked-to: /certs
+  /opt/bitnami/nginx/html:
+    exists: true
+    filetype: symlink
+    linked-to: /app
+  /opt/bitnami/nginx/logs/access.log:
+    exists: true
+    filetype: symlink
+    linked-to: /dev/stdout
+  /opt/bitnami/nginx/logs/error.log:
+    exists: true
+    filetype: symlink
+    linked-to: /dev/stderr
+  # Check selected dirs are not present
+  /opt/bitnami/certs:
+    exists: false
+  /opt/bitnami/server_blocks:
+    exists: false
+  # Check custom config
+  /opt/bitnami/nginx/conf/nginx.conf:
+    exists: true
+    filetype: file
+    contains:
+      - /listen.*{{ .Vars.ports.http }}/
+  /opt/bitnami/nginx/conf/fastcgi_params:
+    exists: true
+    filetype: file
+    contains:
+      - /Unset.*HTTP_PROXY/
+command:
+  check-app-version:
+    exec: {{ .Vars.version.bin_name }} {{ .Vars.version.flag }} 2>&1
+    exit-status: 0
+    stdout:
+    - {{ .Env.APP_VERSION }}
+  test-config:
+    exec: nginx -t
+    exit-status: 0
+  # Check enabled config and added/enabled modules at compilation time
+  check-compilation-opts:
+    exec: nginx -V 2>&1
+    exit-status: 0
+    stdout:
+    {{ range $added_module := .Vars.modules.added }}
+      - nginx-module-{{ $added_module }}
+    {{ end }}
+    {{ range $enabled_module := .Vars.modules.enabled }}
+      - with-{{ $enabled_module }}_module
+    {{ end }}
+    {{ range $additional_config := .Vars.config_opts }}
+      - with-{{ $additional_config }}
+    {{ end }}
