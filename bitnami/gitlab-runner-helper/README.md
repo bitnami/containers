@@ -5,7 +5,6 @@
 > Gitlab Runner Helper is an auxiliary container to be used with Gitlab Runner. Gitlab Runner allows to run CI/CD jobs and send the results back to Gitlab.
 
 [Overview of Gitlab Runner Helper](https://gitlab.com/gitlab-org/gitlab-runner/)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
