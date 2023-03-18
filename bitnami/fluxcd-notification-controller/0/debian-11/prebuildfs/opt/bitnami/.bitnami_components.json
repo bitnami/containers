@@ -1,9 +1,9 @@
 {
     "fluxcd-notification-controller": {
         "arch": "amd64",
-        "digest": "4e7700976ff4f48ca131b241586ecd32b58813c763b948e544a30bdd70498b10",
+        "digest": "0c3d10b7d0d8db02d87d59ea6970515e81e6f99ba3da79ab8c4adb322f52e775",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.33.0-0"
+        "version": "0.33.0-1"
     }
 }
