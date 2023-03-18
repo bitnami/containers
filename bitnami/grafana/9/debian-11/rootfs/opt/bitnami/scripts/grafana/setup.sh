@@ -21,7 +21,6 @@ fi
 
 # Load libraries
 . /opt/bitnami/scripts/liblog.sh
-. /opt/bitnami/scripts/libservice.sh
 . /opt/bitnami/scripts/libgrafana.sh
 
 # Ensure Grafana environment variables are valid
