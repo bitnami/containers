@@ -5,7 +5,6 @@
 > The Azure command-line interface (Azure CLI) allows you to create and manage Azure resources. It is available across all Azure services for use with any Azure solution.
 
 [Overview of Azure CLI](https://docs.microsoft.com/en-us/cli/azure/)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
