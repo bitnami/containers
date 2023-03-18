@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-14T16:13:38Z" \
+      org.opencontainers.image.created="2023-03-18T20:44:46Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.6.5-debian-11-r0" \
+      org.opencontainers.image.ref.name="2.6.6-debian-11-r0" \
       org.opencontainers.image.title="argo-cd" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.6.5"
+      org.opencontainers.image.version="2.6.6"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,8 +22,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl git git-lfs gnupg openssh-client procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
-      "argo-cd-2.6.5-0-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.16.0-3-linux-${OS_ARCH}-debian-11" \
+      "argo-cd-2.6.6-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,7 +41,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/argo-cd/postunpack.sh
-ENV APP_VERSION="2.6.5" \
+ENV APP_VERSION="2.6.6" \
     BITNAMI_APP_NAME="argo-cd" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/argo-cd/bin:/opt/bitnami/argo-cd/hack:/opt/bitnami/helm/bin:/opt/bitnami/ksonnet/bin:/opt/bitnami/kustomize/bin:$PATH"
 
