@@ -5,7 +5,6 @@
 > Configurable HTTP Proxy is a proxy solution that can be managed using a REST API. It is written in Node.js and includes TLS support.
 
 [Overview of Configurable HTTP Proxy](https://github.com/jupyterhub/configurable-http-proxy)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
