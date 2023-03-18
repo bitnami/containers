@@ -1,9 +1,9 @@
 {
     "dotnet": {
         "arch": "amd64",
-        "digest": "7c299dbccb56d7fc826cc6b85c42ecc22a032737b49d89ec89ac909654d23f0d",
+        "digest": "751f3878749dad3523fe88c426669a75795c75a028abe5b25f6dfad0625f524a",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.0.4-0"
+        "version": "7.0.4-1"
     }
 }
