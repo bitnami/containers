@@ -1,16 +1,16 @@
 {
     "git": {
         "arch": "amd64",
-        "digest": "d07ddfa8f49263be7d98f7e6988445a6aecf1e31aca57f4b66c74c0ff5e3c50d",
+        "digest": "72fc670cf46c8e10ffed07ad3eeda5f94886b5364e9b55abe191a79dcfb1a63c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.40.0-0"
+        "version": "2.40.0-1"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "f6056076afb745fd7d9d87d20f71e7248d63330352cf5ae0be2130b7f44a8cfa",
+        "digest": "bf2b90a31df691e3648c4a41190a926bb638c3a9fa1dfcde36623ce1bfaadc23",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-2"
+        "version": "1.16.0-3"
     }
 }
