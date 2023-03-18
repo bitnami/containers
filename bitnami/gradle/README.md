@@ -5,7 +5,6 @@
 > Gradle is an open source automation tool to compile, deploy, and package software for any platform. It supports multiple languages such as Java,  C/C++, and JavaScript.
 
 [Overview of Gradle](https://gradle.org/)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
