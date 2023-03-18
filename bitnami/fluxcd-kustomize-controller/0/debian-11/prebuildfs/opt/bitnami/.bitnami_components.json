@@ -1,9 +1,9 @@
 {
     "fluxcd-kustomize-controller": {
         "arch": "amd64",
-        "digest": "1e59005daeac52bdb1626b61f9dca05b459e1a69b648247532afca1a2c31cd2c",
+        "digest": "cd482ca07c6837ff33900c32f48bba69419ccda41bd19435ce8c55770ce0bc00",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.35.0-0"
+        "version": "0.35.0-1"
     }
 }
