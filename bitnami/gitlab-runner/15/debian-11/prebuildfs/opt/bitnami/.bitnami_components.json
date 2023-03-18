@@ -1,16 +1,16 @@
 {
     "gitlab-runner": {
         "arch": "amd64",
-        "digest": "dd4188caf114e311f84df52f5ffc425a2081a14872d02b03f655495df495b11f",
+        "digest": "a65becf89e61e18364157ca073bf93c24c636317f158e3bab08643ad51b21536",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "15.9.1-0"
+        "version": "15.10.0-0"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "f6056076afb745fd7d9d87d20f71e7248d63330352cf5ae0be2130b7f44a8cfa",
+        "digest": "bf2b90a31df691e3648c4a41190a926bb638c3a9fa1dfcde36623ce1bfaadc23",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-2"
+        "version": "1.16.0-3"
     }
 }
