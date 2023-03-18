@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-13T21:52:01Z" \
+      org.opencontainers.image.created="2023-03-18T21:27:30Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.0.9-debian-11-r13" \
+      org.opencontainers.image.ref.name="2.0.10-debian-11-r0" \
       org.opencontainers.image.title="fluent-bit" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.0.9"
+      org.opencontainers.image.version="2.0.10"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libgcc-s1 libgcrypt20 libgpg-error0 liblz4-1 liblzma5 libsasl2-2 libssl1.1 libsystemd0 libyaml-0-2 libzstd1 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "fluent-bit-2.0.9-1-linux-${OS_ARCH}-debian-11" \
+      "fluent-bit-2.0.10-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -39,7 +39,7 @@ RUN apt-get autoremove --purge -y curl && \
 RUN chmod g+rwX /opt/bitnami
 RUN chown -R 1001:1001 /opt/bitnami/fluent-bit
 
-ENV APP_VERSION="2.0.9" \
+ENV APP_VERSION="2.0.10" \
     BITNAMI_APP_NAME="fluent-bit" \
     PATH="/opt/bitnami/fluent-bit/bin:$PATH"
 
