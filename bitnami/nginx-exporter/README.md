@@ -5,7 +5,6 @@
 > NGINX Prometheus exporter makes it possible to monitor NGINX or NGINX Plus using Prometheus.
 
 [Overview of NGINX Exporter](https://github.com/nginxinc/nginx-prometheus-exporter)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
