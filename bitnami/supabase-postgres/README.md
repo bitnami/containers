@@ -5,7 +5,6 @@
 > Supabase Postgres is a component of Supabase. Supabase is an open source implementation of Firebase. Supabase Postgres is an unmodified PostgreSQL with the necessary plugins to work with Supabase.
 
 [Overview of Supabase Postgres](https://github.com/supabase/postgres)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
