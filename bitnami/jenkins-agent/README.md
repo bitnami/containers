@@ -5,7 +5,6 @@
 > Jenkins Agent executable (agent.jar). This executable is an instance of the Jenkins Remoting library.
 
 [Overview of Jenkins Agent](https://github.com/jenkinsci/remoting)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
@@ -97,7 +96,7 @@ Available environment variables:
 * `JENKINS_AGENT_SECRET`: Jenkins Agent name.
 * `JENKINS_AGENT_NAME`: Jenkins Agent secret.
 
-#### JAVA configuration
+##### JAVA configuration
 
 * `JAVA_OPTS`: Customize JVM parameters. No defaults.
 * `JAVA_HOME`: Java Home directory. Default: **/opt/bitnami/java**
