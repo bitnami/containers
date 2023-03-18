@@ -5,7 +5,6 @@
 > InfluxDB&trade; is an open source time-series database. It is a core component of the TICK (Telegraf, InfluxDB&trade;, Chronograf, Kapacitor) stack.
 
 [Overview of InfluxDB&trade;](https://www.influxdata.com/products/influxdb-overview)
-
 InfluxDB(TM) is a trademark owned by InfluxData, which is not affiliated with, and does not endorse, this site.
 
 ## TL;DR
