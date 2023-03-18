@@ -1,9 +1,9 @@
 {
     "grafana-mimir": {
         "arch": "amd64",
-        "digest": "ece22ff8dcce3832549c274b04b2dafc5b5996258c4f9e60b33cd5a316cfb5ec",
+        "digest": "f4b59cc22a70f6b814a9f07fcc884f0c9b6a4896c7f35e74c907c801e0f7fece",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.7.0-0"
+        "version": "2.7.1-0"
     }
 }
