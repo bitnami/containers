@@ -1,30 +1,30 @@
 {
     "elasticsearch": {
         "arch": "amd64",
-        "digest": "c4fc25c8948bb5c5945049ebab3fda18139efe982e2a855b94d92d67db2b2fb9",
+        "digest": "6df619719a9fdb3026745da2b2907b7997acafa7e87b94985f5b42a35cad1c26",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.17.9-4"
+        "version": "7.17.9-5"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "f6056076afb745fd7d9d87d20f71e7248d63330352cf5ae0be2130b7f44a8cfa",
+        "digest": "bf2b90a31df691e3648c4a41190a926bb638c3a9fa1dfcde36623ce1bfaadc23",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-2"
+        "version": "1.16.0-3"
     },
     "java": {
         "arch": "amd64",
-        "digest": "09eb316f02e065beb59e8c3cc8f2f908879faf7f4902cd1cc4b9fcd25bd528ca",
+        "digest": "96ba9170f22f7be0bfe9825baee24b7a1b48a2dc110896f0937fded1dbaab896",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "17.0.6-10-2"
+        "version": "17.0.6-10-3"
     },
     "yq": {
         "arch": "amd64",
-        "digest": "498dd1e7ac81a0e41ac2761d6708e425bab6cbbf37c93e47ce8df12000e8a4d3",
+        "digest": "13a33ecf140c2b141bffd4969e38a75b67db29525f166d6a1c21b4a1b6aff2fd",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.31.2-0"
+        "version": "4.32.1-0"
     }
 }

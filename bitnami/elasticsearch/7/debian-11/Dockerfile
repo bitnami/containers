@@ -5,10 +5,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-13T22:53:39Z" \
+      org.opencontainers.image.created="2023-03-18T21:21:30Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.17.9-debian-11-r16" \
+      org.opencontainers.image.ref.name="7.17.9-debian-11-r17" \
       org.opencontainers.image.title="elasticsearch" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="7.17.9"
@@ -25,10 +25,10 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libasound2-dev libc6 libfreetype6 libfreetype6-dev libgcc1 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "yq-4.31.2-0-linux-${OS_ARCH}-debian-11" \
-      "java-17.0.6-10-2-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
-      "elasticsearch-7.17.9-4-linux-${OS_ARCH}-debian-11" \
+      "yq-4.32.1-0-linux-${OS_ARCH}-debian-11" \
+      "java-17.0.6-10-3-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.16.0-3-linux-${OS_ARCH}-debian-11" \
+      "elasticsearch-7.17.9-5-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
