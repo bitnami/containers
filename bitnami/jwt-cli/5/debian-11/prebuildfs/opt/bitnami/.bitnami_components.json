@@ -1,9 +1,9 @@
 {
     "jwt-cli": {
         "arch": "amd64",
-        "digest": "a82a8055c49946e93c78a1f5085f0e424a6495b87c7c355714af9fe33a92cac6",
+        "digest": "9fcd6495dd1176ded8c739a13f0154fd7b0a5f3bdd812d72d64b310f43fc0b84",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.0.3-1"
+        "version": "5.0.3-2"
     }
 }
