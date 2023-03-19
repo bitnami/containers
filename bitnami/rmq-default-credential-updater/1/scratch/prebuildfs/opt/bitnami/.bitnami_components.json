@@ -1,9 +1,9 @@
 {
     "rmq-default-credential-updater": {
         "arch": "amd64",
-        "digest": "3d75cd86ad5ddc441d14e5f95ea8523c3b789a7c5c202510cd06c0c436bc281a",
+        "digest": "8c33c3b6059d300fd98c92870e928971063f0363dc36464de74b6eb23c8b0264",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.2-158"
+        "version": "1.0.2-159"
     }
 }
