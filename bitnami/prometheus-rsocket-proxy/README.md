@@ -5,7 +5,6 @@
 > Prometheus RSocket Proxy is a collection of resources used to get application metrics into Prometheus without ingress. It preserves the pull model by using RSocket bidirectional persistent RPC.
 
 [Overview of Prometheus RSocket Proxy](https://github.com/micrometer-metrics/prometheus-rsocket-proxy)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
