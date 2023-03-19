@@ -96,7 +96,7 @@ redis_cluster_override_conf() {
     if is_boolean_yes "$REDIS_TLS_ENABLED"; then
         redis_conf_set tls-cluster yes
         redis_conf_set tls-replication yes
-    fi  
+    fi
     if ! is_empty_value "$REDIS_CLUSTER_ANNOUNCE_PORT"; then
         redis_conf_set "cluster-announce-port" "$REDIS_CLUSTER_ANNOUNCE_PORT"
     fi
