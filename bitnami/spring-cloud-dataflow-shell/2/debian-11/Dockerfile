@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-14T18:19:43Z" \
+      org.opencontainers.image.created="2023-03-19T01:09:28Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.10.2-debian-11-r2" \
+      org.opencontainers.image.ref.name="2.10.2-debian-11-r3" \
       org.opencontainers.image.title="spring-cloud-dataflow-shell" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.10.2"
@@ -22,8 +22,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libgcc-s1 locales procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-1.8.362-2-linux-${OS_ARCH}-debian-11" \
-      "spring-cloud-dataflow-shell-2.10.2-0-linux-${OS_ARCH}-debian-11" \
+      "java-1.8.362-3-linux-${OS_ARCH}-debian-11" \
+      "spring-cloud-dataflow-shell-2.10.2-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
