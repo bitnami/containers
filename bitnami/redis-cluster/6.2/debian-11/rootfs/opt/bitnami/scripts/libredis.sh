@@ -53,8 +53,13 @@ redis_conf_set() {
     value="${value//\?/\\?}"
     value="${value//[$'\t\n\r']}"
     [[ "$value" = "" ]] && value="\"$value\""
+    # Determine whether to enable the configuration for RDB persistence, if yes, do not enable the replacement operation
+    if [[ ${key} =~ ^save.* ]];then
+          echo "${key} ${value}" >> ${REDIS_BASE_DIR}/etc/redis.conf
+        else
+          replace_in_file "${REDIS_BASE_DIR}/etc/redis.conf" "^#*\s*${key} .*" "${key} ${value}" false
+    fi
 
-    replace_in_file "${REDIS_BASE_DIR}/etc/redis.conf" "^#*\s*${key} .*" "${key} ${value}" false
 }
 
 ########################
@@ -402,6 +407,14 @@ redis_configure_default() {
         # Enable AOF https://redis.io/topics/persistence#append-only-file
         # Leave default fsync (every second)
         redis_conf_set appendonly "${REDIS_AOF_ENABLED}"
+        if [ "${REDIS_RDB_ENABLED}" == "yes" ];then
+        #The value stored in $i here is the number of seconds and times of save rules in redis rdb mode
+          for i in ${REDIS_RDB_POLICY};do
+            redis_conf_set save "${i//#/ }"
+          done
+        fi
+
+
         redis_conf_set port "$REDIS_PORT_NUMBER"
         # TLS configuration
         if is_boolean_yes "$REDIS_TLS_ENABLED"; then
