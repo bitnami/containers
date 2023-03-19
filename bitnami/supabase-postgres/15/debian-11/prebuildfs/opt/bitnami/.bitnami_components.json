@@ -15,9 +15,9 @@
     },
     "supabase-postgres": {
         "arch": "amd64",
-        "digest": "dfd8b254629e887d884fa9d522138e76ab08784493e08fa9fc28bbb738c95899",
+        "digest": "d4114c0d57bd02c29642e4d3a4b4b35461b33ed75b6c9ac0e7aa632dc7ed9851",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "15.1.0-8"
+        "version": "15.1.0-9"
     }
 }
