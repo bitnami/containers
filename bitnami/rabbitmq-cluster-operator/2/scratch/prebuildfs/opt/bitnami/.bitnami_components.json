@@ -1,9 +1,9 @@
 {
     "rabbitmq-cluster-operator": {
         "arch": "amd64",
-        "digest": "0567f80384f3289930ad3724a918d5e42d8284f565dcd0ad0428fe7f0a9d0c32",
+        "digest": "81834759207e536793c77b59670f7039877c1908312b3993bc4001f18d4f4b9a",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.2.0-0"
+        "version": "2.2.0-1"
     }
 }
