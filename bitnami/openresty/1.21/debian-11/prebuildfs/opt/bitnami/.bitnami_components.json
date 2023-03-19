@@ -1,16 +1,16 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "f6056076afb745fd7d9d87d20f71e7248d63330352cf5ae0be2130b7f44a8cfa",
+        "digest": "bf2b90a31df691e3648c4a41190a926bb638c3a9fa1dfcde36623ce1bfaadc23",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-2"
+        "version": "1.16.0-3"
     },
     "openresty": {
         "arch": "amd64",
-        "digest": "f4530e1a6f726fe9691685638dc161b0ba87067fdae0ec73437e3a68b1a5532c",
+        "digest": "0f36fb37dd5262c6dd7bd4d8db47ec8478ccdb9822e9a40fe41a232c0df2fe7d",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.21.4-1-159"
+        "version": "1.21.4-1-160"
     }
 }
