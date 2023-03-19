@@ -1,16 +1,16 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "f6056076afb745fd7d9d87d20f71e7248d63330352cf5ae0be2130b7f44a8cfa",
+        "digest": "bf2b90a31df691e3648c4a41190a926bb638c3a9fa1dfcde36623ce1bfaadc23",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-2"
+        "version": "1.16.0-3"
     },
     "tensorflow-resnet": {
         "arch": "amd64",
-        "digest": "9fab8ce681fb83d33ced04b79595bd1ba10d7952929180bc75d8a7bcdb6b45c2",
+        "digest": "3eb1e7d1a0d9302c59639f998d32928ac3b1749bb77f6e948245f233a0b95816",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.11.0-3"
+        "version": "2.11.0-4"
     }
 }
