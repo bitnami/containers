@@ -5,7 +5,6 @@
 > Telegraf is a server agent for collecting and sending metrics and events from databases, systems, and IoT sensors. It is easily extendable with plugins for collection and output of data operations.
 
 [Overview of Telegraf &trade;](https://github.com/influxdata/telegraf)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
