@@ -1,44 +1,44 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "f6056076afb745fd7d9d87d20f71e7248d63330352cf5ae0be2130b7f44a8cfa",
+        "digest": "bf2b90a31df691e3648c4a41190a926bb638c3a9fa1dfcde36623ce1bfaadc23",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-2"
+        "version": "1.16.0-3"
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "dbc087bd90a6387956751464da45660229b3e7349b96099805e61dcbc2514853",
+        "digest": "6ed7c73b5e779521cf2f47a00ac54e6d2929213cb4eb3cbd9a4f12f84557c664",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.6.12-1"
+        "version": "10.6.12-2"
     },
     "nginx": {
         "arch": "amd64",
-        "digest": "d91f7d25430a4c7fa7d2bf1dc4525b925fa54dbcd3aca669be9909624115307e",
+        "digest": "dc08b425a75d9b60c6352daef53932c9766023086a89978ee3a95b5bc1e1818f",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.23.3-3"
+        "version": "1.23.3-4"
     },
     "php": {
         "arch": "amd64",
-        "digest": "6b1ce5c0f853008554f356d4721625cb7dc41fb932339ff86db04dfb874598a4",
+        "digest": "29a2bd14bc69f30f96706c9d26c42e4613c50a663ddcd1c10b20766ca261127b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.17-0"
+        "version": "8.1.17-1"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "185e277977366ec222d2bde1a395ffa138ce1a9d3bdf1df20c3e49e8b8f9c68b",
+        "digest": "d1a128e25098f793a92342efd5fa85c1075a2b21042929b269d23c6694e20c3b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-1"
+        "version": "1.0.5-2"
     },
     "wordpress": {
         "arch": "amd64",
-        "digest": "f2fe60af9e82a3503c4f114a094c7143d78e0c6ecf535215f1c4545bd67f5eb4",
+        "digest": "8e09085d84747c6835c0c6ebd8f75f359ab387712e08d518d65a1aa5af7805df",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.1.1-40"
+        "version": "6.1.1-41"
     }
 }
