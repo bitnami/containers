@@ -53,8 +53,12 @@ redis_conf_set() {
     value="${value//\?/\\?}"
     value="${value//[$'\t\n\r']}"
     [[ "$value" = "" ]] && value="\"$value\""
-
-    replace_in_file "${REDIS_BASE_DIR}/etc/redis.conf" "^#*\s*${key} .*" "${key} ${value}" false
+    # Determine whether to enable the configuration for RDB persistence, if yes, do not enable the replacement operation
+    if [[ ${key} =~ ^save.* ]];then
+          echo "${key} ${value}" >> ${REDIS_BASE_DIR}/etc/redis.conf
+        else
+          replace_in_file "${REDIS_BASE_DIR}/etc/redis.conf" "^#*\s*${key} .*" "${key} ${value}" false
+    fi
 }
 
 ########################
