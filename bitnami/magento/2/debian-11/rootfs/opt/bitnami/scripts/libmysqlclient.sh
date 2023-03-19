@@ -239,7 +239,8 @@ mysql_execute_print_output() {
     if [[ -f "$DB_CONF_FILE" ]]; then
         args+=("--defaults-file=${DB_CONF_FILE}")
     fi
-    args+=("-N" "-u" "$user" "$db")
+    args+=("-N" "-u" "$user")
+    [[ -n "$db" ]] && args+=("$db")
     [[ -n "$pass" ]] && args+=("-p$pass")
     [[ "${#opts[@]}" -gt 0 ]] && args+=("${opts[@]}")
     [[ "${#extra_opts[@]}" -gt 0 ]] && args+=("${extra_opts[@]}")
