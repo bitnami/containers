@@ -5,7 +5,6 @@
 > Ruby on Rails is a full-stack development environment optimized for programmer happiness and sustainable productivity. It lets you write beautiful code by favoring convention over configuration.
 
 [Overview of Ruby](http://www.ruby-lang.org)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
