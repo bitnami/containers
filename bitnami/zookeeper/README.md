@@ -5,7 +5,6 @@
 > Apache ZooKeeper provides a reliable, centralized register of configuration data and services for distributed applications.
 
 [Overview of Apache ZooKeeper](https://zookeeper.apache.org)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
@@ -325,7 +324,7 @@ services:
 
 ### Setting up an Apache ZooKeeper ensemble
 
-An Apache ZooKeeper (<https://zookeeper.apache.org/doc/r3.1.2/zookeeperAdmin.html>) cluster can easily be setup with the Bitnami Apache ZooKeeper Docker image using the following environment variables:
+A Apache ZooKeeper (https://zookeeper.apache.org/doc/r3.1.2/zookeeperAdmin.html) cluster can easily be setup with the Bitnami Apache ZooKeeper Docker image using the following environment variables:
 
 * `ZOO_SERVERS`: Comma, space or semi-colon separated list of servers. This can be done with or without specifying the ID of the server in the ensemble. No defaults. Examples:
 * without Server ID - zoo1:2888:3888,zoo2:2888:3888
