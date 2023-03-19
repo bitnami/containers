@@ -63,4 +63,5 @@ RewriteRule "(\/tests\/behat\/)" - [F]
 RewriteRule "(\/fixtures\/)" - [F]
 
 RewriteRule "(\/package\.json)" - [F]
+RewriteRule "(\/Gruntfile\.js)" - [F]
 '
