@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-14T21:51:20Z" \
+      org.opencontainers.image.created="2023-03-18T23:59:52Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.11.10-debian-11-r4" \
+      org.opencontainers.image.ref.name="3.11.10-debian-11-r5" \
       org.opencontainers.image.title="rabbitmq" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.11.10"
@@ -23,9 +23,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libgcc-s1 libssl1.1 libstdc++6 libtinfo6 locales procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
-      "erlang-25.3.0-0-linux-${OS_ARCH}-debian-11" \
-      "rabbitmq-3.11.10-0-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.16.0-3-linux-${OS_ARCH}-debian-11" \
+      "erlang-25.3.0-1-linux-${OS_ARCH}-debian-11" \
+      "rabbitmq-3.11.10-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
