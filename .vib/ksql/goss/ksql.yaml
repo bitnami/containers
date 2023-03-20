@@ -4,9 +4,9 @@ file:
     exists: true
     filetype: file
     contains:
-      - /http:\/\/0.0.0.0:8088/
-      - /bootstrap.servers = localhost:9092/
-      - /ksql.streams.state.dir = \/bitnami\/ksql\/data/
+      - http://0.0.0.0:8088
+      - bootstrap.servers = localhost:9092
+      - ksql.streams.state.dir = /bitnami/ksql/data
   # ksql does not have a version flag so we check the version.txt
   /opt/bitnami/ksql/share/doc/confluent-kafka-mqtt/version.txt:
     exists: true
