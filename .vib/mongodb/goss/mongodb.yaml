@@ -1,0 +1,10 @@
+file:
+  /opt/bitnami/mongodb/mongodb_get_source.txt:
+    exists: true
+    contains:
+      - This solution ships the official MongoDB Community binaries
+  /opt/bitnami/mongodb/logs/mongodb.log:
+    exists: true
+    filetype: symlink
+    linked-to: /dev/stdout
+    skip: false
