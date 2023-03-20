@@ -1,44 +1,44 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "f6056076afb745fd7d9d87d20f71e7248d63330352cf5ae0be2130b7f44a8cfa",
+        "digest": "bf2b90a31df691e3648c4a41190a926bb638c3a9fa1dfcde36623ce1bfaadc23",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-2"
+        "version": "1.16.0-3"
     },
     "mongodb": {
         "arch": "amd64",
-        "digest": "1a6d752a44712f4c79c2ec759ceda3a7f89fa4f95b9ebbe5df524f89a9b2ef78",
+        "digest": "9fc8702ad835433f037438df1de1a79d0c8e168169453a099bcae7a4f6619438",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.0.5-0"
+        "version": "6.0.5-1"
     },
     "mongodb-shell": {
         "arch": "amd64",
-        "digest": "576eeff229a936ab7c401e7f0c9185b6008ee37f40745517e9b5d097395c8023",
+        "digest": "d2163d2ad0a5ebb4fedacbf97e7ad459cb317d6fe722da4910ddb78b17c05ce7",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.8.0-0"
+        "version": "1.8.0-1"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "185e277977366ec222d2bde1a395ffa138ce1a9d3bdf1df20c3e49e8b8f9c68b",
+        "digest": "d1a128e25098f793a92342efd5fa85c1075a2b21042929b269d23c6694e20c3b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-1"
+        "version": "1.0.5-2"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "be7c393d598ddf16d1c3c008a67b87879e48aca62071a208583390f2b41e6744",
+        "digest": "66c83aadf646d230d0cb097d9fe1663911bed94fabf8cbba2a17c39f7c6ffbcc",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-1"
+        "version": "1.0.6-2"
     },
     "yq": {
         "arch": "amd64",
-        "digest": "498dd1e7ac81a0e41ac2761d6708e425bab6cbbf37c93e47ce8df12000e8a4d3",
+        "digest": "e09f11557e4dfd4170495f320d5ce5655c57ac9be844f81f27066cce84c1bad8",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.31.2-0"
+        "version": "4.32.2-0"
     }
 }
