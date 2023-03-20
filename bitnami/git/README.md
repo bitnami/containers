@@ -5,7 +5,6 @@
 > Git is an open source distributed version control system that can handle both small and large projects with speed and efficiency.
 
 [Overview of Git](https://git-scm.com/)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
