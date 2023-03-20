@@ -1,9 +1,9 @@
 {
     "fluxcd-helm-controller": {
         "arch": "amd64",
-        "digest": "931754c18d9f720850f1f3accab71d6d86d978632c546cfa36e21bb8224d424e",
+        "digest": "451c97ed2c1f416104c2c86bf6345fe7a492ee7d61a392ddce7bdf60166d8eb7",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.31.1-0"
+        "version": "0.31.1-1"
     }
 }
