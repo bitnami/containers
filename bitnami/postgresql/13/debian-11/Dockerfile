@@ -5,10 +5,10 @@ ARG TARGETARCH
 ARG WITH_ALL_LOCALES="no"
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-18T23:47:16Z" \
+      org.opencontainers.image.created="2023-03-20T05:27:29Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="13.10.0-debian-11-r13" \
+      org.opencontainers.image.ref.name="13.10.0-debian-11-r14" \
       org.opencontainers.image.title="postgresql" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="13.10.0"
@@ -25,7 +25,7 @@ RUN install_packages ca-certificates curl libbsd0 libbz2-1.0 libedit2 libffi7 li
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "gosu-1.16.0-3-linux-${OS_ARCH}-debian-11" \
-      "postgresql-13.10.0-6-linux-${OS_ARCH}-debian-11" \
+      "postgresql-13.10.0-7-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
