@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-14T05:39:46Z" \
+      org.opencontainers.image.created="2023-03-20T15:58:22Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.0.31-23-debian-11-r10" \
+      org.opencontainers.image.ref.name="8.0.32-24-debian-11-r0" \
       org.opencontainers.image.title="percona-mysql" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="8.0.31-23"
+      org.opencontainers.image.version="8.0.32-24"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,11 +22,11 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libaio1 libaudit1 libbrotli1 libbz2-1.0 libcap-ng0 libcom-err2 libcrypt1 libcurl4 libev4 libffi7 libgcc-s1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed6 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblz4-1 liblzma5 libnettle8 libnghttp2-14 libnuma-dev libp11-kit0 libpam0g libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.1 libstdc++6 libsystemd0 libtasn1-6 libudev1 libunistring2 libuuid1 libzstd1 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "percona-xtrabackup-binary-8.0.30-23-2-linux-${OS_ARCH}-debian-11" \
-      "ini-file-1.4.5-1-linux-${OS_ARCH}-debian-11" \
-      "percona-mysql-8.0.31-23-1-linux-${OS_ARCH}-debian-11" \
-      "mysql-shell-8.0.31-3-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
+      "percona-xtrabackup-binary-8.0.30-23-3-linux-${OS_ARCH}-debian-11" \
+      "ini-file-1.4.5-2-linux-${OS_ARCH}-debian-11" \
+      "percona-mysql-8.0.32-24-0-linux-${OS_ARCH}-debian-11" \
+      "mysql-shell-8.0.31-4-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.16.0-3-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -45,7 +45,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql/postunpack.sh
-ENV APP_VERSION="8.0.31-23" \
+ENV APP_VERSION="8.0.32-24" \
     BITNAMI_APP_NAME="percona-mysql" \
     MYSQL_HOME="/opt/bitnami/mysql/conf" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mysql/bin:/opt/bitnami/mysql/sbin:$PATH"
