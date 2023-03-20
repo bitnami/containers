@@ -1,0 +1,24 @@
+binaries:
+  - gosu
+  - mongod
+  - render-template
+  - wait-for-port
+  - yq
+files:
+  - paths:
+    - /.dbshell
+    - /.mongoshrc.js
+    - /.mongorc.js
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/mongodb/data
+      - /docker-entrypoint-initdb.d
+      - /opt/bitnami/mongodb/conf
+      - /opt/bitnami/mongodb/logs
+      - /opt/bitnami/mongodb/tmp
+      - /.mongodb
+root_dir: /opt/bitnami
+version:
+  bin_name: mongod
+  flag: --version
