@@ -1,0 +1,25 @@
+binaries:
+  - cassandra
+  - cqlsh
+  - python
+  - java
+  - gosu
+  - yq
+files:
+  - mode: "0755"
+    paths:
+      - /opt/bitnami/cassandra/bin/cqlsh
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/cassandra
+      - /bitnami/cassandra/conf
+      - /opt/bitnami/cassandra/tmp
+      - /opt/bitnami/cassandra/conf
+      - /opt/bitnami/cassandra/logs
+      - /opt/bitnami/cassandra/.cassandra
+      - /docker-entrypoint-initdb.d
+root_dir: /opt/bitnami
+version:
+  bin_name: cassandra
+  flag: -v
