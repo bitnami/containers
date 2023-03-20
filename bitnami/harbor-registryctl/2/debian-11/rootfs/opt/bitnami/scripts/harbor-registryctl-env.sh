@@ -22,6 +22,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # Paths
 export HARBOR_REGISTRYCTL_BASE_DIR="${BITNAMI_ROOT_DIR}/harbor-registryctl"
 export HARBOR_REGISTRYCTL_STORAGE_DIR="/storage"
+export PATH="${BITNAMI_ROOT_DIR}/common/bin:${PATH}"
 
 # System users
 export HARBOR_REGISTRYCTL_DAEMON_USER="harbor"

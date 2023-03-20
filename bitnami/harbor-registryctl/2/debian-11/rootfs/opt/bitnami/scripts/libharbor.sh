@@ -13,7 +13,7 @@
 # Get the paths relevant to CA certs depending
 # on the OS
 # Globals:
-#   OS_FLAVOUR
+#   None
 # Arguments:
 #   None
 # Returns:
@@ -21,9 +21,11 @@
 #   depending on the OS.
 #########################
 get_system_cert_paths() {
-    if [[ "$OS_FLAVOUR" =~ ^(debian|ubuntu)-.*$ ]]; then
+    local distro
+    distro="$(get_os_metadata --id)"
+    if [[ "$distro" =~ ^(debian|ubuntu)$ ]]; then
         echo "/etc/ssl/certs/"
-    elif [[ "$OS_FLAVOUR" =~ ^(centos|photon)-.*$ ]]; then
+    elif [[ "$distro" =~ ^(centos|photon)$ ]]; then
         echo "/etc/pki/tls/certs/"
     else
         # Check the existence of generic paths when OS_FLAVOR does
@@ -41,7 +43,7 @@ get_system_cert_paths() {
 ########################
 # Ensure CA bundles allows users in root group install new certificate
 # Globals:
-#   OS_FLAVOUR
+#   None
 # Arguments:
 #   None
 # Returns:
@@ -60,7 +62,7 @@ configure_permissions_system_certs() {
 # Grant group write permissions to the file provided and change ownership if a the owner argument is set.
 # If the path is not a file, then do nothing.
 # Globals:
-#   OS_FLAVOUR
+#   None
 # Arguments:
 #   $1 - path
 #   $2 - owner
@@ -83,7 +85,7 @@ set_permissions_ownership() {
 # Place a given certificate in the correct location for installation
 # depending on the OS
 # Globals:
-#   OS_FLAVOUR*
+#   None
 # Arguments:
 #   $1 - certificate to be installed
 # Returns:
@@ -91,10 +93,12 @@ set_permissions_ownership() {
 #########################
 install_cert() {
     local -r cert="${1:?missing certificate}"
+    local distro
+    distro="$(get_os_metadata --id)"
 
-    if [[ "$OS_FLAVOUR" =~ ^(debian|ubuntu)-.*$ ]]; then
+    if [[ "$distro" =~ ^(debian|ubuntu)$ ]]; then
         cat "$cert" >> /etc/ssl/certs/ca-certificates.crt
-    elif [[ "$OS_FLAVOUR" =~ ^(centos|photon)-.*$ ]]; then
+    elif [[ "$distro" =~ ^(centos|photon)$ ]]; then
         cat "$cert" >> /etc/pki/tls/certs/ca-bundle.crt
     else
         # Check the existence of generic ca-bundles when OS_FLAVOR does
@@ -168,17 +172,21 @@ install_custom_certs() {
 #   String
 #########################
 harbor_generate_env_file_contents() {
-    local -r envvars_string="${1:?missing envvars}"
-    echo "#!/bin/bash"
+    local -r envvars_string="${1:-}"
+    [[ -z "$envvars_string" ]] && return
+    # For systemd, we will load it via EnvironmentFile=, so the shebang is not needed
+    [[ "$BITNAMI_SERVICE_MANAGER" != "systemd" ]] && echo "#!/bin/bash"
     while IFS= read -r ENV_VAR_LINE; do
         if [[ ! "$ENV_VAR_LINE" =~ ^[A-Z_] ]]; then
             continue
         fi
         ENV_VAR_NAME="${ENV_VAR_LINE/=*}"
         ENV_VAR_VALUE="${ENV_VAR_LINE#*=}"
+        # For systemd, we will load it via EnvironmentFile=, which does not allow 'export'
+        [[ "$BITNAMI_SERVICE_MANAGER" != "systemd" ]] && echo -n 'export '
         # Use single quotes to avoid shell expansion, and escape to be parsed properly (even if it contains quotes)
         # Escape the value, so it can be parsed as a variable even with quotes set
-        echo "export ${ENV_VAR_NAME}='${ENV_VAR_VALUE//\'/\'\\\'\'}'"
+        echo "${ENV_VAR_NAME}='${ENV_VAR_VALUE//\'/\'\\\'\'}'"
     done <<< "$envvars_string"
 }
 
