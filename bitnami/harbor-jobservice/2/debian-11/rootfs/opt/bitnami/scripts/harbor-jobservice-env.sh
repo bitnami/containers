@@ -21,6 +21,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 
 # Paths
 export HARBOR_JOBSERVICE_BASE_DIR="${BITNAMI_ROOT_DIR}/harbor-jobservice"
+export PATH="${BITNAMI_ROOT_DIR}/common/bin:${PATH}"
 
 # System users
 export HARBOR_JOBSERVICE_DAEMON_USER="harbor"

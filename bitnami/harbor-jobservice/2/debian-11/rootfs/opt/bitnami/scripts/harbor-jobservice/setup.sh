@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# shellcheck disable=SC1091
+# shellcheck disable=SC1090,SC1091
 
 set -o errexit
 set -o nounset
@@ -139,7 +139,6 @@ wait_for_harbor_core() {
         return 1
     fi
 }
-
 
 # Ensure harbor-jobservice settings are valid
 harbor_jobservice_validate
