@@ -5,7 +5,7 @@ command:
     exit-status: 0
 file:
   # Check x-pack is not included
-  /opt/bitnami/elasticsearch/bin/xpack:
+  /opt/bitnami/elasticsearch/bin/x-pack:
     exists: false
-  /opt/bitnami/elasticsearch/module/xpack:
+  /opt/bitnami/elasticsearch/modules/x-pack:
     exists: false

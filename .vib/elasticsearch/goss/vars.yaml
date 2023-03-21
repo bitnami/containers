@@ -4,7 +4,8 @@ binaries:
   - java
   - yq
 directories:
-  - paths:
+  - mode: "0775"
+    paths:
       - /bitnami/elasticsearch
       - /bitnami/elasticsearch/data
       - /bitnami/elasticsearch/plugins
