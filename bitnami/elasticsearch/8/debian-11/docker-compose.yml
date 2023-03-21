@@ -1,7 +1,6 @@
 version: '2'
 
 services:
-  # [TEST]
   elasticsearch:
     image: docker.io/bitnami/elasticsearch:8
     ports:
