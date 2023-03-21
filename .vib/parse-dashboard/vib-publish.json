@@ -50,25 +50,6 @@
               "OS"
             ]
           }
-        },
-        {
-          "action_id": "osspi-application",
-          "params": {
-            "additional_packages_file": "{VIB_ENV_PATH}/osspi-packages.json",
-            "scan_type": "BASE_OS",
-            "osm": {
-              "product_name": "main-catalog-{VIB_ENV_CONTAINER}",
-              "product_version": "{VIB_ENV_APP_VERSION}-{VIB_ENV_OS_FLAVOUR}-container"
-            },
-            "resources": {
-              "url": "{VIB_ENV_PACKAGES_JSON_URL}",
-              "path": "/",
-              "authn": {
-                  "header": "Authorization",
-                  "token": "Bearer {VIB_ENV_GITHUB_TOKEN}"
-                }
-            }
-          }
         }
       ]
     },
