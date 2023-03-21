@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-18T21:06:33Z" \
+      org.opencontainers.image.created="2023-03-21T21:31:08Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.15.0-debian-11-r82" \
+      org.opencontainers.image.ref.name="0.15.0-debian-11-r83" \
       org.opencontainers.image.title="chartmuseum" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.15.0"
