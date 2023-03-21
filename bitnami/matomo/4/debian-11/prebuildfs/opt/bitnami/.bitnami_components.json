@@ -29,10 +29,10 @@
     },
     "matomo": {
         "arch": "amd64",
-        "digest": "78659076fcfe83895c5ff2e4259fd4fba6b7f1897d227f57964802e685634ebc",
+        "digest": "c76e8e6319176b533f60d9b21fb0db76c7243769f766335643ae1db104a37e30",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.14.0-0"
+        "version": "4.14.1-0"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -43,10 +43,10 @@
     },
     "php": {
         "arch": "amd64",
-        "digest": "29a2bd14bc69f30f96706c9d26c42e4613c50a663ddcd1c10b20766ca261127b",
+        "digest": "ba9ac9354d481be58fbe16bff58cb159101ad9b935fe7e654c933a54397fa2a4",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.17-1"
+        "version": "8.1.17-2"
     },
     "render-template": {
         "arch": "amd64",
