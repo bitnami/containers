@@ -5,7 +5,6 @@
 > MetalLB is a load-balancer that allows enabling "LoadBalancer" service addresses in any bare-metal Kubernetes installation. MetalLB speaker is in charge of IP advertisement.
 
 [Overview of MetalLB Speaker](https://metallb.universe.tf/)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR

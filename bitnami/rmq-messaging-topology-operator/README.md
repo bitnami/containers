@@ -5,7 +5,6 @@
 > The RabbitMQ Messaging Topology Operator allows developers to create and manage RabbitMQ messaging topologies within a RabbitMQ cluster using a declarative Kubernetes API.
 
 [Overview of RabbitMQ Messaging Topology Operator](https://github.com/rabbitmq/messaging-topology-operator)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR

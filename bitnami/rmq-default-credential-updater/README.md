@@ -5,7 +5,6 @@
 > RabbitMQ Default User Credential Updater is a component of the RabbitMQ Cluster Operator Helm chart that enables Hashicorp Vault integration.
 
 [Overview of RabbitMQ Default User Credential Updater](https://github.com/rabbitmq/default-user-credential-updater)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR

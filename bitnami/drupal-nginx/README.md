@@ -5,7 +5,6 @@
 > Drupal with NGINX enhances the popular open source CMS with the performance and security of NGINX. Drupal's modular architecture lets you create many different types of websites and applications.
 
 [Overview of Drupal with NGINX](http://drupal.org)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR

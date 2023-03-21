@@ -1,6 +1,6 @@
 command:
   check-bin-caps:
-    exec: getcap {{ .Vars.root_dir }}/aspnet-core/bin/dotnet
+    exec: getcap /opt/bitnami/aspnet-core/bin/dotnet
     stdout:
       - {{ .Vars.binary.capabilities }}
     exit-status: 0

@@ -1,6 +1,6 @@
 command:
   check-app-version:
-    exec: cat {{ .Vars.root_dir }}/wordpress/wp-includes/version.php  | grep "wp_version"
+    exec: cat /opt/bitnami/wordpress/wp-includes/version.php  | grep "wp_version"
     exit-status: 0
     stdout:
       - {{ .Env.APP_VERSION }}
@@ -9,9 +9,9 @@ command:
     exec: wp --info
     exit-status: 0
     stdout:
-      - "{{ .Vars.root_dir }}/php/bin/php"
-      - "{{ .Vars.root_dir }}/mysql/bin/mysql"
-      - "{{ .Vars.root_dir }}/wp-cli/conf/wp-cli.yml"
+      - "/opt/bitnami/php/bin/php"
+      - "/opt/bitnami/mysql/bin/mysql"
+      - "/opt/bitnami/wp-cli/conf/wp-cli.yml"
   check-enabled-modules:
     exec: php -m
     exit-status: 0
@@ -21,26 +21,26 @@ command:
     {{ end }}
 file:
   # HTTP vhost should have been properly rendered
-  {{ .Vars.root_dir }}/apache/conf/vhosts/wordpress-vhost.conf:
+  /opt/bitnami/apache/conf/vhosts/wordpress-vhost.conf:
     exists: true
     filetype: file
     contains:
       - "RewriteRule ^bitnami/wordpress(/.*) $1"
-      - /DocumentRoot.*{{ .Vars.root_dir }}/wordpress/
+      - /DocumentRoot.*/opt/bitnami/wordpress/
   # HTTPs vhost should have been properly rendered
-  {{ .Vars.root_dir }}/apache/conf/vhosts/wordpress-https-vhost.conf:
+  /opt/bitnami/apache/conf/vhosts/wordpress-https-vhost.conf:
     exists: true
     filetype: file
     contains:
       - "SSLEngine on"
       - "RewriteRule ^bitnami/wordpress(/.*) $1"
-      - /DocumentRoot.*{{ .Vars.root_dir }}/wordpress/
+      - /DocumentRoot.*/opt/bitnami/wordpress/
   # WP-CLI should point to wordpress' installation path
-  {{ .Vars.root_dir }}/wp-cli/conf/wp-cli.yml:
+  /opt/bitnami/wp-cli/conf/wp-cli.yml:
     exists: true
     filetype: file
     contains:
-      - /path.*{{ .Vars.root_dir }}/wordpress/
+      - /path.*/opt/bitnami/wordpress/
 group:
   daemon:
     exists: true

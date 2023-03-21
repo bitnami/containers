@@ -4,10 +4,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-14T06:02:22Z" \
+      org.opencontainers.image.created="2023-03-19T01:38:05Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="27.0.1-debian-11-r31" \
+      org.opencontainers.image.ref.name="27.0.1-debian-11-r32" \
       org.opencontainers.image.title="wildfly" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="27.0.1"
@@ -23,9 +23,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libaio1 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-11.0.18-10-2-linux-${OS_ARCH}-debian-11" \
-      "wildfly-27.0.1-6-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
+      "java-11.0.18-10-3-linux-${OS_ARCH}-debian-11" \
+      "wildfly-27.0.1-7-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.16.0-3-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \

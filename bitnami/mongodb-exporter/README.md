@@ -5,7 +5,6 @@
 > A Prometheus exporter for MongoDB&reg; including sharding, replication and storage engines.
 
 [Overview of MongoDB Exporter](https://github.com/percona/mongodb_exporter)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR

@@ -1,0 +1,20 @@
+binaries:
+  - bundle
+  - bundler
+  - gem
+  - rake
+  - ruby
+modules:
+  - bundler
+  - openssl
+  - readline
+files:
+  - paths:
+    - /opt/bitnami/ruby/lib/libruby-static.a
+root_dir: /opt/bitnami
+version:
+  bin_name: ruby
+  flag: -v
+flags:
+  - HAVE_EACCESS
+  - HAVE_LIBPTHREAD

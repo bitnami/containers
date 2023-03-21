@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-15T19:41:21Z" \
+      org.opencontainers.image.created="2023-03-18T21:28:38Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.31.0-debian-11-r0" \
+      org.opencontainers.image.ref.name="0.31.0-debian-11-r1" \
       org.opencontainers.image.title="fluxcd-image-automation-controller" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.31.0"
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "fluxcd-image-automation-controller-0.31.0-0-linux-${OS_ARCH}-debian-11" \
+      "fluxcd-image-automation-controller-0.31.0-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \

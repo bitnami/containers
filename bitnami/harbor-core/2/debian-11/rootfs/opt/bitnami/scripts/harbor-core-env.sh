@@ -22,6 +22,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # Paths
 export HARBOR_CORE_BASE_DIR="${BITNAMI_ROOT_DIR}/harbor-core"
 export HARBOR_CORE_VOLUME_DIR="/data"
+export PATH="${BITNAMI_ROOT_DIR}/common/bin:${PATH}"
 
 # System users
 export HARBOR_CORE_DAEMON_USER="harbor"

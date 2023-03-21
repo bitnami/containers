@@ -5,7 +5,6 @@
 > ReportServer is the open source business intelligence tool for fast information access and analysis. It integrates multiple reporting engines and features an intuitive dashboard component.
 
 [Overview of ReportServer Community](https://reportserver.net/en/)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR

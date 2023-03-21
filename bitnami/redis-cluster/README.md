@@ -5,7 +5,6 @@
 > Redis&reg; is an open source, scalable, distributed in-memory cache for applications. It can be used to store and serve data in the form of strings, hashes, lists, sets and sorted sets.
 
 [Overview of Redis&reg; Cluster](http://redis.io)
-
 Disclaimer: Redis is a registered trademark of Redis Ltd. Any rights therein are reserved to Redis Ltd. Any use by Bitnami is for referential purposes only and does not indicate any sponsorship, endorsement, or affiliation between Redis Ltd.
 
 ## TL;DR
@@ -180,14 +179,14 @@ The following env vars are supported for this container:
 | `REDIS_CLUSTER_CREATOR`                 | Set to `yes` if the container will be the one on charge of initialize the cluster. This node will also be part of the cluster.                                     |
 | `REDIS_CLUSTER_REPLICAS`                | Number of replicas for every master that the cluster will have.                                                                                                    |
 | `REDIS_NODES`                           | String delimited by spaces containing the hostnames of all of the nodes that will be part of the cluster                                                           |
-| `REDIS_CLUSTER_ANNOUNCE_IP`             | IP that the node should announce, used for non dynamic ip environments                                                                                              |
-| `REDIS_CLUSTER_ANNOUNCE_PORT`           | Port that the node should announce, used for non dynamic ip environments.                                                                                           |
-| `REDIS_CLUSTER_ANNOUNCE_HOSTNAME`       | Hostname that node should announce, used for non dynamic ip environments.                                                                                           |
-| `REDIS_CLUSTER_PREFERRED_ENDPOINT_TYPE` | Preferred endpoint type which cluster should use, options- ip, hostname|
+| `REDIS_CLUSTER_ANNOUNCE_IP`             | IP that the node should announce, used for non dynamic ip environments                                                                                             |
+| `REDIS_CLUSTER_ANNOUNCE_PORT`           | Port that the node should announce, used for non dynamic ip environments.                                                                                          |
+| `REDIS_CLUSTER_ANNOUNCE_HOSTNAME`       | Hostname that node should announce, used for non dynamic ip environments.                                                                                          |
+| `REDIS_CLUSTER_PREFERRED_ENDPOINT_TYPE` | Preferred endpoint type which cluster should use, options- ip, hostname                                                                                            |
 | `REDIS_CLUSTER_ANNOUNCE_BUS_PORT`       | The cluster bus port to announce.                                                                                                                                  |
 | `REDIS_CLUSTER_DYNAMIC_IPS`             | Set to `no` if your Redis(R) cluster will be created with statical IPs. Default: `yes`                                                                             |
 | `REDIS_TLS_ENABLED`                     | Whether to enable TLS for traffic or not. Defaults to `no`.                                                                                                        |
-| `REDIS_TLS_PORT_NUMBER`                        | Port used for TLS secure traffic. Defaults to `6379`.                                                                                                              |
+| `REDIS_TLS_PORT_NUMBER`                 | Port used for TLS secure traffic. Defaults to `6379`.                                                                                                              |
 | `REDIS_TLS_CERT_FILE`                   | File containing the certificate file for the TLS traffic. No defaults.                                                                                             |
 | `REDIS_TLS_KEY_FILE`                    | File containing the key for certificate. No defaults.                                                                                                              |
 | `REDIS_TLS_CA_FILE`                     | File containing the CA of the certificate. No defaults.                                                                                                            |

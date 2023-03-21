@@ -5,7 +5,6 @@
 > Harbor Notary Signer is one of the main components of Harbor. Combined with the Harbor Notary Server, it is responsible for signing and verifying images.
 
 [Overview of Harbor Notary Signer](https://goharbor.io/)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
