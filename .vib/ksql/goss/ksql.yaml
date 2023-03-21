@@ -1,0 +1,15 @@
+file:
+  # Checks default config for erlang is set
+  /opt/bitnami/ksql/etc/ksqldb/ksql-server.properties.default:
+    exists: true
+    filetype: file
+    contains:
+      - http://0.0.0.0:8088
+      - bootstrap.servers = localhost:9092
+      - ksql.streams.state.dir = /bitnami/ksql/data
+  # ksql does not have a version flag so we check the version.txt
+  /opt/bitnami/ksql/share/doc/confluent-kafka-mqtt/version.txt:
+    exists: true
+    filetype: file
+    contains:
+      - {{ .Env.APP_VERSION }}
