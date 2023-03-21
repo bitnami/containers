@@ -1,16 +1,16 @@
 file:
   # Checks there is a template already loaded as a config file
-  {{ .Vars.root_dir }}/mariadb/conf/my.cnf:
+  /opt/bitnami/mariadb/conf/my.cnf:
     exists: true
     filetype: file
     contains:
-      - socket={{ .Vars.root_dir }}/mariadb/tmp/mysql.sock
+      - socket=/opt/bitnami/mariadb/tmp/mysql.sock
   # Checks the postunpack phase properly creates the plugin's symlink
-  {{ .Vars.root_dir }}/mariadb/lib/plugin:
+  /opt/bitnami/mariadb/lib/plugin:
     exists: true
     filetype: symlink
   # Check the plugins added at compilation time are available
-  {{ .Vars.root_dir }}/mariadb/plugin/auth_pam.so:
+  /opt/bitnami/mariadb/plugin/auth_pam.so:
     exists: true
     filetype: file
     mode: "0644"
