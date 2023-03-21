@@ -65,7 +65,7 @@
               "kind": "OCI",
               "url": "{VIB_ENV_REGISTRY_URL}",
               "username": "{VIB_ENV_REGISTRY_USERNAME}",
-              "password":  "{VIB_ENV_REGISTRY_PASSWORD}"
+              "password": "{VIB_ENV_REGISTRY_PASSWORD}"
             }
           }
         }

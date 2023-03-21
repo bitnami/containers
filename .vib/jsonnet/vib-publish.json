@@ -66,7 +66,7 @@
               "url": "{VIB_ENV_REGISTRY_URL}",
               "authn": {
                 "username": "{VIB_ENV_REGISTRY_USERNAME}",
-                "password":  "{VIB_ENV_REGISTRY_PASSWORD}"
+                "password": "{VIB_ENV_REGISTRY_PASSWORD}"
               }
             }
           }
