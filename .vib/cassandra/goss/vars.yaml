@@ -12,14 +12,18 @@ files:
 directories:
   - mode: "0775"
     paths:
+      - /.cassandra
       - /bitnami/cassandra
       - /bitnami/cassandra/conf
       - /opt/bitnami/cassandra/tmp
       - /opt/bitnami/cassandra/conf
       - /opt/bitnami/cassandra/logs
-      - /opt/bitnami/cassandra/.cassandra
       - /docker-entrypoint-initdb.d
 root_dir: /opt/bitnami
+sed_in_place:
+  exclude_paths:
+    # Ignore PyLib directory (not bitnami-related)
+    - \/opt\/bitnami\/cassandra\/pylib\/.*
 version:
   bin_name: cassandra
   flag: -v
