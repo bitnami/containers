@@ -63,8 +63,10 @@ done
 unset consul_env_vars
 
 # Paths
+export PATH="${BITNAMI_ROOT_DIR}/common/bin:${PATH}"
 export CONSUL_BASE_DIR="${BITNAMI_ROOT_DIR}/consul"
 export CONSUL_CONF_DIR="${CONSUL_BASE_DIR}/conf"
+export CONSUL_BIN_DIR="${CONSUL_BASE_DIR}/bin"
 export CONSUL_CONF_FILE="${CONSUL_CONF_DIR}/consul.json"
 export CONSUL_ENCRYPT_FILE="${CONSUL_CONF_DIR}/encrypt.json"
 export CONSUL_LOCAL_FILE="${CONSUL_CONF_DIR}/local.json"
