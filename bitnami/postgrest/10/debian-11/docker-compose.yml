@@ -3,3 +3,4 @@ version: '2'
 services:
   postgrest:
     image: docker.io/bitnami/postgrest:10
+#TEST
