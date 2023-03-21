@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-18T21:02:20Z" \
+      org.opencontainers.image.created="2023-03-21T21:28:31Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.11.4-debian-11-r0" \
+      org.opencontainers.image.ref.name="2.11.4-debian-11-r1" \
       org.opencontainers.image.title="aws-cli" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.11.4"
