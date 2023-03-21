@@ -40,7 +40,7 @@
             "vars_file": "postgres/goss/vars.yaml",
             "remote": {
               "pod": {
-                "workload": "deploy-postgres"
+                "workload": "deploy-postgresql"
               }
             }
           }
