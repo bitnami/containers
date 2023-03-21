@@ -1,0 +1,9 @@
+command:
+  check-app-version:
+    exec: postgrest --help
+    exit-status: 0
+    stdout:
+      - {{ .Env.APP_VERSION }}
+user:
+  postgrest:
+    exists: true
