@@ -8,7 +8,7 @@
 command:
   check-sed-in-place:
     {{ $exclude_paths := "" }}
-    {{ if contains "exclude_paths:" (.Vars | toString) }}
+    {{ if contains "sed_in_place:map[exclude_paths:" (.Vars | toString) }}
         {{ $exclude_paths = (.Vars.sed_in_place.exclude_paths | join "|") }}
     {{ end }}
     exec: export BITNAMI_ROOT_DIR={{ .Vars.root_dir }} && export EXCLUDE_PATHS='{{ $exclude_paths }}' && && ./common/goss/scripts/check-sed-in-place.sh
