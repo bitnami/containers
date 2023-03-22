@@ -8,9 +8,9 @@
     },
     "grafana": {
         "arch": "amd64",
-        "digest": "06fabe7a33fd1fe0160f9d8500a53f292606616ee548fad88a1a5f16b7d5bb3d",
+        "digest": "6b195ced496d46caeb47ad23b9f799809fb626249077c361b81191c027734431",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.4.3-1"
+        "version": "9.4.7-0"
     }
 }
