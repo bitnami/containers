@@ -5,7 +5,6 @@
 > JRuby is a 100% Java implementation of the Ruby programming language. It is Ruby for the JVM. JRuby provides a complete set of core built-in classes and syntax for the Ruby language.
 
 [Overview of JRuby](http://jruby.org/)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
