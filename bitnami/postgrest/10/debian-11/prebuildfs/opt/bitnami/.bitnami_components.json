@@ -1,9 +1,9 @@
 {
     "postgrest": {
         "arch": "amd64",
-        "digest": "ed1f44e26ac39433b181a01c2bc3b761e0173fc79bf1fde691e47e56b80cf425",
+        "digest": "72d0712bab66c5a1d50bcafbea1b233588a315ff00a01eb9b0df736230094566",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.1.2-1"
+        "version": "10.1.2-2"
     }
 }
