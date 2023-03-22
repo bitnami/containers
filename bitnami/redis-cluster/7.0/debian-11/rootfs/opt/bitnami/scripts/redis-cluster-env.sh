@@ -21,14 +21,13 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
-#Added REDIS_RDB_ENABLED and REDIS_RDB_POLICY variables
+#Added REDIS_RDB_POLICY variables
 redis_cluster_env_vars=(
     REDIS_DATA_DIR
     REDIS_OVERRIDES_FILE
     REDIS_DISABLE_COMMANDS
     REDIS_DATABASE
     REDIS_AOF_ENABLED
-    REDIS_RDB_ENABLED
     REDIS_RDB_POLICY
     REDIS_MASTER_HOST
     REDIS_MASTER_PORT_NUMBER
@@ -103,8 +102,7 @@ export REDIS_DAEMON_GROUP="redis"
 export REDIS_DISABLE_COMMANDS="${REDIS_DISABLE_COMMANDS:-}"
 export REDIS_DATABASE="${REDIS_DATABASE:-redis}"
 export REDIS_AOF_ENABLED="${REDIS_AOF_ENABLED:-yes}"
-export REDIS_RDB_ENABLED="${REDIS_RDB_ENABLED:-no}"
-export REDIS_RDB_POLICY="${REDIS_RDB_POLICY:-900#1 300#10 60#10000}"
+export REDIS_RDB_POLICY="${REDIS_RDB_POLICY:-""}"
 export REDIS_MASTER_HOST="${REDIS_MASTER_HOST:-}"
 export REDIS_MASTER_PORT_NUMBER="${REDIS_MASTER_PORT_NUMBER:-6379}"
 export REDIS_DEFAULT_PORT_NUMBER="6379" # only used at build time
