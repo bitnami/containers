@@ -5,7 +5,6 @@
 > Pinniped is an identity service provider for Kubernetes. It supplies a consistent and unified login experience across all your clusters. Pinniped is securely integrated with enterprise IDP protocols.
 
 [Overview of Pinniped](https://pinniped.dev/)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
