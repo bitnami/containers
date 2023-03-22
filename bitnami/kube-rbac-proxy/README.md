@@ -5,7 +5,6 @@
 > kube-rbac-proxy is an HTTP proxy that can perform RBAC authorization against the Kubernetes API based on the SubjectAccessReview authorization resource.
 
 [Overview of Kube RBAC Proxy](https://github.com/brancz/kube-rbac-proxy)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
