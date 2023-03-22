@@ -3,9 +3,9 @@ file:
     exists: true
     mode: "0664"
     contains:
-      - port {{ .Env.REDIS_DEFAULT_PORT_NUMBER }}
-      - dir {{ .Env.REDIS_DATA_DIR }}
-      - pidfile {{ .Env.REDIS_PID_FILE }}
+      - port {{ .Vars.port }}
+      - dir /bitnami/redis/data
+      - pidfile /opt/bitnami/redis/tmp/redis.pid
       - daemonize yes
 command:
   check-redis-server:
