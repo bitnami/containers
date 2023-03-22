@@ -1,10 +1,10 @@
 {
     "google-cloud-sdk": {
         "arch": "amd64",
-        "digest": "0a7a1e84dbfeadcd55d29d4ff74557fac0acfd8f8cb61c356f3ad11a103d23de",
+        "digest": "ca469eff9da00101d3a2ef3fad0ea806abc42eafb6a15121b0a815dc047e84d4",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.422.0-1"
+        "version": "0.423.0-0"
     },
     "python": {
         "arch": "amd64",
