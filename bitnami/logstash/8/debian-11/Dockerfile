@@ -5,7 +5,7 @@ ARG LOGSTASH_PLUGINS
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-22T03:04:27Z" \
+      org.opencontainers.image.created="2023-03-22T07:58:52Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
       org.opencontainers.image.ref.name="8.6.2-debian-11-r9" \
