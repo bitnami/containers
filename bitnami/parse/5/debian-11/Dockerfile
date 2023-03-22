@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-21T23:55:21Z" \
+      org.opencontainers.image.created="2023-03-22T22:03:02Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.4.2-debian-11-r11" \
+      org.opencontainers.image.ref.name="5.4.3-debian-11-r0" \
       org.opencontainers.image.title="parse" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="5.4.2"
+      org.opencontainers.image.version="5.4.3"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -25,7 +25,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "python-3.8.16-8-linux-${OS_ARCH}-debian-11" \
       "node-16.19.1-2-linux-${OS_ARCH}-debian-11" \
       "mongodb-shell-1.8.0-1-linux-${OS_ARCH}-debian-11" \
-      "parse-5.4.2-2-linux-${OS_ARCH}-debian-11" \
+      "parse-5.4.3-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-3-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -44,7 +44,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/parse/postunpack.sh
-ENV APP_VERSION="5.4.2" \
+ENV APP_VERSION="5.4.3" \
     BITNAMI_APP_NAME="parse" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/parse/bin:/opt/bitnami/common/bin:$PATH"
 
