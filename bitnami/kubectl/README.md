@@ -5,7 +5,6 @@
 > Kubectl is the Kubernetes command line interface. It allows to manage Kubernetes cluster by providing a wide set of commands that allows to communicate with the Kubernetes API in a friendly way.
 
 [Overview of Kubectl](https://github.com/kubernetes/kubectl)
-
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
