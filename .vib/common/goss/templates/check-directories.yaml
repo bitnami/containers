@@ -4,7 +4,8 @@
 # Needed vars:
 #   - .Vars.directories (Array)
 #   - .Vars.directories.paths (Array)
-#   - .Vars.directories.mode (Optional - String)
+# Optional vars:
+#   - .Vars.directories.mode (String)
 ########################
 file:
   {{ range .Vars.directories }}
