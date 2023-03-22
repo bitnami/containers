@@ -8,6 +8,7 @@ files:
     paths:
     - /etc/nslcd.conf
   - paths:
+    - /etc/pam.d/mariadb
     - /opt/bitnami/mariadb/plugin/auth_pam.so
     - /opt/bitnami/mariadb/lib/libgalera_smm.so
 directories:
@@ -21,7 +22,6 @@ directories:
       - /opt/bitnami/mariadb/logs
       - /opt/bitnami/mariadb/tmp
       - /var/run/nslcd
-      - /etc/pam.d/mariadb
 root_dir: /opt/bitnami
 version:
   bin_name: mysqld
