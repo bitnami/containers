@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-14T18:19:47Z" \
+      org.opencontainers.image.created="2023-03-22T02:03:23Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.6.1-debian-11-r3" \
+      org.opencontainers.image.ref.name="5.6.1-debian-11-r4" \
       org.opencontainers.image.title="keycloak-config-cli" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="5.6.1"
@@ -22,8 +22,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-11.0.18-10-2-linux-${OS_ARCH}-debian-11" \
-      "keycloak-config-cli-5.6.1-0-linux-${OS_ARCH}-debian-11" \
+      "java-11.0.18-10-3-linux-${OS_ARCH}-debian-11" \
+      "keycloak-config-cli-5.6.1-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
