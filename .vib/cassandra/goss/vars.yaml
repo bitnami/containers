@@ -9,6 +9,8 @@ files:
   - mode: "0755"
     paths:
       - /opt/bitnami/cassandra/bin/cqlsh
+  - paths:
+      - /opt/bitnami/cassandra/conf.default
 directories:
   - mode: "0775"
     paths:

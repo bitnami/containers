@@ -2,7 +2,8 @@
 # Check components executables have no missing linked libraries
 # Needed vars:
 #   - .Vars.root_dir
-#   - .Vars.linked_libraries.exclude_paths (Optional - Array)
+# Optional vars:
+#   - .Vars.linked_libraries.exclude_paths (Array)
 ########################
 command:
   check-linked-libraries:

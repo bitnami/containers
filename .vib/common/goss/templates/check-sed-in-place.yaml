@@ -3,7 +3,8 @@
 # to sed commands with the in-place argument
 # Needed vars:
 #   - .Vars.root_dir
-#   - .Vars.sed_in_place.exclude_paths (Optional - Array)
+# Optional vars:
+#   - .Vars.sed_in_place.exclude_paths (Array)
 ########################
 command:
   check-sed-in-place:
