@@ -281,6 +281,8 @@ remove_logrotate_conf() {
 #   --environment - Environment variable to define (multiple --environment options may be passed)
 #   --environment-file - Text file with environment variables
 #   --exec-start - Start command (required)
+#   --exec-start-pre - Pre-start command (optional)
+#   --exec-start-post - Post-start command (optional)
 #   --exec-stop - Stop command (optional)
 #   --exec-reload - Reload command (optional)
 #   --group - System group to start the service with
@@ -292,6 +294,7 @@ remove_logrotate_conf() {
 #   --success-exit-status - Exit code that indicates a successful shutdown
 #   --type - Systemd unit type (defaults to forking)
 #   --user - System user to start the service with
+#   --working-directory - Working directory at which to start the service
 # Returns:
 #   None
 #########################
@@ -307,6 +310,8 @@ generate_systemd_conf() {
     local environment=""
     local environment_file=""
     local exec_start=""
+    local exec_start_pre=""
+    local exec_start_post=""
     local exec_stop=""
     local exec_reload=""
     local restart="always"
@@ -316,6 +321,7 @@ generate_systemd_conf() {
     local limits_content=""
     local success_exit_status=""
     local custom_service_content=""
+    local working_directory=""
     # Parse CLI flags
     shift
     while [[ "$#" -gt 0 ]]; do
@@ -334,6 +340,7 @@ generate_systemd_conf() {
             | --standard-error \
             | --success-exit-status \
             | --custom-service-content \
+            | --working-directory \
             )
                 var_name="$(echo "$1" | sed -e "s/^--//" -e "s/-/_/g")"
                 shift
@@ -345,11 +352,21 @@ generate_systemd_conf() {
                 shift
                 limits_content+="Limit${var_name^^}=${1:?"--limit-${var_name} value is missing"}"
                 ;;
+            --exec-start-pre)
+                shift
+                [[ -n "$exec_start_pre" ]] && exec_start_pre+=$'\n'
+                exec_start_pre+="ExecStartPre=${1:?"--exec-start-pre value is missing"}"
+                ;;
+            --exec-start-post)
+                shift
+                [[ -n "$exec_start_post" ]] && exec_start_post+=$'\n'
+                exec_start_post+="ExecStartPost=${1:?"--exec-start-post value is missing"}"
+                ;;
             --environment)
                 shift
                 # It is possible to add multiple environment lines
                 [[ -n "$environment" ]] && environment+=$'\n'
-                environment+="Environment=${1:?"environment" is missing}"
+                environment+="Environment=${1:?"--environment value is missing"}"
                 ;;
             *)
                 echo "Invalid command line flag ${1}" >&2
@@ -376,8 +393,21 @@ PartOf=bitnami.service
 
 [Service]
 Type=${type}
-ExecStart=${exec_start}
 EOF
+    if [[ -n "$working_directory" ]]; then
+        cat >> "$service_file" <<< "WorkingDirectory=$working_directory"
+    fi
+    if [[ -n "$exec_start_pre" ]]; then
+        # This variable may contain multiple ExecStartPre= directives
+        cat >> "$service_file" <<< "$exec_start_pre"
+    fi
+    if [[ -n "$exec_start" ]]; then
+        cat >> "$service_file" <<< "ExecStart=${exec_start}"
+    fi
+    if [[ -n "$exec_start_post" ]]; then
+        # This variable may contain multiple ExecStartPost= directives
+        cat >> "$service_file" <<< "$exec_start_post"
+    fi
     # Optional stop and reload commands
     if [[ -n "$exec_stop" ]]; then
         cat >> "$service_file" <<< "ExecStop=${exec_stop}"
@@ -399,8 +429,9 @@ EOF
     if [[ -n "$restart" ]]; then
         cat >> "$service_file" <<< "Restart=${restart}"
     fi
-    # Environment flags (may be specified multiple times in a unit)
+    # Environment flags
     if [[ -n "$environment" ]]; then
+        # This variable may contain multiple Environment= directives
         cat >> "$service_file" <<< "$environment"
     fi
     if [[ -n "$environment_file" ]]; then
@@ -414,6 +445,7 @@ EOF
         cat >> "$service_file" <<< "StandardError=${standard_error}"
     fi
     if [[ -n "$custom_service_content" ]]; then
+        # This variable may contain multiple miscellaneous directives
         cat >> "$service_file" <<< "$custom_service_content"
     fi
     if [[ -n "$success_exit_status" ]]; then
@@ -424,7 +456,8 @@ EOF
     fi
     cat >> "$service_file" <<EOF
 # Optimizations
-TimeoutSec=5min
+TimeoutStartSec=2min
+TimeoutStopSec=30s
 IgnoreSIGPIPE=no
 KillMode=mixed
 EOF
