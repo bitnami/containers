@@ -1,0 +1,15 @@
+binaries:
+  - gosu
+  - redis-benchmark
+  - redis-cli
+  - redis-server
+  - wait-for-port
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/redis/data
+      - /opt/bitnami/redis/etc
+root_dir: /opt/bitnami
+version:
+  bin_name: redis-server
+  flag: --version

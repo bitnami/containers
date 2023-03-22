@@ -1,0 +1,15 @@
+file:
+  /opt/bitnami/redis/etc/redis.conf:
+    exists: true
+    mode: "0664"
+    contains:
+      - port {{ .Env.REDIS_DEFAULT_PORT_NUMBER }}
+      - dir {{ .Env.REDIS_DATA_DIR }}
+      - pidfile {{ .Env.REDIS_PID_FILE }}
+      - daemonize yes
+command:
+  check-redis-server:
+    exec: timeout 5s redis-server || true
+    exit-status: 0
+    stdout:
+      - Ready to accept connections
