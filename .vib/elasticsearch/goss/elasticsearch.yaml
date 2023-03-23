@@ -9,3 +9,10 @@ file:
     exists: false
   /opt/bitnami/elasticsearch/modules/x-pack:
     exists: false
+  /opt/bitnami/elasticsearch/config/log4j2.properties:
+    exists: true
+    filetype: file
+    contains:
+      - "Console"
+      - "!RollingFile"
+      - "!_old"

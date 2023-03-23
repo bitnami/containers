@@ -18,4 +18,5 @@ directories:
 files:
   - paths:
       - /opt/bitnami/elasticsearch/config/es_config.sample
+      - /opt/bitnami/elasticsearch/config/log4j2.file.properties
 root_dir: /opt/bitnami
