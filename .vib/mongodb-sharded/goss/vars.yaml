@@ -11,10 +11,10 @@ files:
     - /.dbshell
     - /.mongorc.js
     - /.mongoshrc.js
-    - /.mongodb
 directories:
   - mode: "0775"
     paths:
+      - /.mongodb
       - /bitnami/mongodb
       - /bitnami/mongodb/data
       - /opt/bitnami/mongodb/tmp
