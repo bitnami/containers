@@ -1,5 +1,5 @@
 file:
-  /opt/bitnami/mariadb-galera/conf/my.cnf:
+  /opt/bitnami/mariadb/conf/my.cnf:
     exists: true
     filetype: file
     contains:
