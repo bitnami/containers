@@ -8,3 +8,10 @@ file:
     filetype: symlink
     linked-to: /dev/stdout
     skip: false
+  /opt/bitnami/mongodb/conf/mongodb.conf:
+    exists: true
+    contains:
+      - /port.*{{ .Env.MONGODB_DEFAULT_PORT_NUMBER }}/
+      - /pidFilePath.* {{ .Env.MONGODB_PID_FILE }}/
+      - /dbPath.*{{ .Env.MONGODB_DATA_DIR}}/db/
+      - /path.* {{.Env.MONGODB_LOG_DIR}}/mongodb.log/

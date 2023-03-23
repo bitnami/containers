@@ -1,6 +1,7 @@
 binaries:
   - gosu
   - mongod
+  - mongosh
   - render-template
   - wait-for-port
   - yq
@@ -9,9 +10,11 @@ files:
     - /.dbshell
     - /.mongoshrc.js
     - /.mongorc.js
+    - /opt/bitnami/mongodb/conf/mongodb.conf
 directories:
   - mode: "0775"
     paths:
+      - /bitnami/mongodb
       - /bitnami/mongodb/data
       - /docker-entrypoint-initdb.d
       - /opt/bitnami/mongodb/conf
