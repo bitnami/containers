@@ -1,9 +1,9 @@
 {
     "rmq-messaging-topology-operator": {
         "arch": "amd64",
-        "digest": "c5a01ea987a9a95b2b8d7c4f31e350d677949e876788ed3e87d0c7c52f12cb95",
+        "digest": "f7acae5d1d0683cc653ab027148577a635c1077e3327fd00bf34faebb7263e84",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.10.1-2"
+        "version": "1.10.2-0"
     }
 }
