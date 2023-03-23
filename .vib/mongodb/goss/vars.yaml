@@ -21,6 +21,7 @@ directories:
       - /opt/bitnami/mongodb/logs
       - /opt/bitnami/mongodb/tmp
       - /.mongodb
+port: 27017
 root_dir: /opt/bitnami
 version:
   bin_name: mongod
