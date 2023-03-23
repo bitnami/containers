@@ -1,7 +1,6 @@
 version: '2.1'
 
 services:
-  # [TEST]
   mysql:
     image: docker.io/bitnami/mysql:5.7
     ports:
