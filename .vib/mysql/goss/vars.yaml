@@ -18,7 +18,6 @@ directories:
       - /.mysqlsh
 files:
   - paths:
-      - /opt/bitnami/mysql/lib/mysqlrouter/metadata_cache.so
       - /opt/bitnami/mysql/lib/plugin/authentication_ldap_sasl_client.so
 root_dir: /opt/bitnami
 version:
