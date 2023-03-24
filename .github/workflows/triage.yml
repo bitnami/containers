@@ -51,13 +51,12 @@ jobs:
       # a card for the automated PRs only when it is needed.
       - name: From Bitnami labeling
         if: ${{steps.get-issue.outputs.author == 'bitnami-bot' && steps.get-issue.outputs.type == 'pull_request'}}
-        uses: fmulero/labeler@1.0.5
+        uses: fmulero/labeler@1.1.0
         with:
           add-labels: 'automated, auto-merge'
-          remove-labels: on-hold, in-progress, triage, solved
       - name: Verify labeling
         if: ${{steps.get-issue.outputs.author == 'bitnami-bot' && steps.get-issue.outputs.type == 'pull_request'}}
-        uses: fmulero/labeler@1.0.5
+        uses: fmulero/labeler@1.1.0
         with:
           # Bitnami bot token is required to trigger CI workflows
           repo-token: ${{ secrets.BITNAMI_BOT_TOKEN }}
