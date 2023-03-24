@@ -1,0 +1,52 @@
+binaries:
+  - php
+directories:
+  - paths:
+      - /opt/bitnami/php/etc/conf.d
+      - /opt/bitnami/php/logs
+files:
+  - paths:
+      - /opt/bitnami/php/etc/php.ini-production
+      - /opt/bitnami/php/etc/php.ini-development
+      - /opt/bitnami/php/etc/environment.conf
+      - /opt/bitnami/php/etc/common.conf
+      - /opt/bitnami/php/etc/pear.conf
+modules:
+  enabled:
+    - zlib
+    - libxml
+    - soap
+    - bz2
+    - sockets
+    - pcntl
+    - exif
+    - bcmath
+    - pdo_mysql
+    - mysqli
+    - openssl
+    - ftp
+    - calendar
+    - gettext
+    - xml
+    - xsl
+    - mbstring
+    - ctype
+    - session
+    - mysqlnd
+    - intl
+    - iconv
+    - pdo_sqlite
+    - sqlite3
+    - readline
+    - gmp
+    - curl
+    - PDO
+    - SimpleXML
+    - sodium
+    - gd
+  disabled:
+    - rpath
+root_dir: /opt/bitnami
+version:
+  bin_name: php
+  flag: -v
