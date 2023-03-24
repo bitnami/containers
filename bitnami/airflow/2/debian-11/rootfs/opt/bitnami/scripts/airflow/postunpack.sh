@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# shellcheck disable=SC1091
+# shellcheck disable=SC1091,SC1090
 
 set -o errexit
 set -o nounset
