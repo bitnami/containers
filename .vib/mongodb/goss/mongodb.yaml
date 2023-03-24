@@ -7,7 +7,6 @@ file:
     exists: true
     filetype: symlink
     linked-to: /dev/stdout
-    skip: false
   /opt/bitnami/mongodb/conf/mongodb.conf:
     exists: true
     contains:
