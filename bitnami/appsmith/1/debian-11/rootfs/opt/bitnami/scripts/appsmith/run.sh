@@ -18,10 +18,12 @@ set -o pipefail
 
 # We need to load in the environment the Appsmith configuration file in order
 # for the application to work. Using a similar approach as the upstream container
-# https://github.com/appsmithorg/appsmith/blob/release/deploy/docker/entrypoint.sh#L57-L62
+# https://github.com/appsmithorg/appsmith/blob/v1.9.12/deploy/docker/entrypoint.sh#L58-L63
 set -a
-eval "$(grep -v "=$" "$APPSMITH_CONF_FILE")"
+. "$APPSMITH_CONF_FILE"
 set +a
+
+appsmith_unset_unused_variables
 
 declare -a cmd=()
 declare -a args=()
