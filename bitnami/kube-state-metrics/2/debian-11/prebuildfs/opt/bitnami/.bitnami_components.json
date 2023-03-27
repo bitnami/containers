@@ -1,7 +1,6 @@
 {
     "kube-state-metrics": {
         "arch": "amd64",
-        "digest": "5f874275952e7be7e755d931c3e1765591fcf5ae6f93eba3d83820258d7fe3cc",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "2.8.2-0"
