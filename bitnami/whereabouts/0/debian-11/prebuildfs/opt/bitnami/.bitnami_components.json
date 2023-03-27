@@ -1,7 +1,6 @@
 {
     "whereabouts": {
         "arch": "amd64",
-        "digest": "ea70ebaf8faa58283c8c47ad2a9fb72777dd6cb508cf7969e020824a33aadf46",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "0.6.1-1"
