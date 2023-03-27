@@ -67,6 +67,7 @@ export AIRFLOW_CONF_FILE="${AIRFLOW_BASE_DIR}/airflow.cfg"
 export AIRFLOW_TMP_DIR="${AIRFLOW_BASE_DIR}/tmp"
 export AIRFLOW_PID_FILE="${AIRFLOW_TMP_DIR}/airflow-scheduler.pid"
 export AIRFLOW_DAGS_DIR="${AIRFLOW_BASE_DIR}/dags"
+export PATH="${AIRFLOW_BIN_DIR}:${BITNAMI_ROOT_DIR}/common/bin:${PATH}"
 
 # System users (when running with a privileged user)
 export AIRFLOW_DAEMON_USER="airflow"

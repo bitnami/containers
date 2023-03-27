@@ -1,0 +1,6 @@
+binaries:
+  - postgrest
+root_dir: /opt/bitnami
+version:
+  bin_name: postgrest
+  flag: --help
