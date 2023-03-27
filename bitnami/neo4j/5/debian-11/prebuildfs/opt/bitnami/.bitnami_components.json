@@ -1,21 +1,21 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "bf2b90a31df691e3648c4a41190a926bb638c3a9fa1dfcde36623ce1bfaadc23",
+        "digest": "deadbeef",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "1.16.0-3"
     },
     "java": {
         "arch": "amd64",
-        "digest": "96ba9170f22f7be0bfe9825baee24b7a1b48a2dc110896f0937fded1dbaab896",
+        "digest": "deadbeef",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "17.0.6-10-3"
     },
     "neo4j": {
         "arch": "amd64",
-        "digest": "64d49b8bf6bdf56a2bac3e6ab70a30c17393335694deeb79c85d576678b0699d",
+        "digest": "deadbeef",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "5.6.0-0"
