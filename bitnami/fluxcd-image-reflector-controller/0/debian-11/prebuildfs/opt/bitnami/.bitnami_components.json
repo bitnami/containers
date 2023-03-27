@@ -1,7 +1,6 @@
 {
     "fluxcd-image-reflector-controller": {
         "arch": "amd64",
-        "digest": "5f5b7e17be6ed987e4fbda4754e96789b0c55a77f402f67d66b4ccad5b621574",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "0.26.1-0"
