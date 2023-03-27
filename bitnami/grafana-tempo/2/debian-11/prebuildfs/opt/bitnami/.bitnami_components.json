@@ -1,7 +1,6 @@
 {
     "grafana-tempo": {
         "arch": "amd64",
-        "digest": "e89ec34292474cae7d219a4ea321da72794638df95014cc909c0fb165590335a",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "2.0.1-1"
