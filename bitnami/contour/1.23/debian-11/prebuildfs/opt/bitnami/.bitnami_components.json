@@ -1,7 +1,6 @@
 {
     "contour": {
         "arch": "amd64",
-        "digest": "b46c6614eee71abb1277d74aa31499942d8c03cd58cfbafaced8094e71cbb0d6",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "1.23.4-1"
