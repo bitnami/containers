@@ -1,35 +1,30 @@
 {
     "couchdb": {
         "arch": "amd64",
-        "digest": "d36e07532425d3b53c9576628966591866b0dc4d932b0618cb529bf9c40af4e5",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "3.3.1-6"
     },
     "erlang": {
         "arch": "amd64",
-        "digest": "96cba0cf22e440e2ebd3e6e6e1c3457d29b83cba03978671974504bb19e34578",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "25.3.0-1"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "bf2b90a31df691e3648c4a41190a926bb638c3a9fa1dfcde36623ce1bfaadc23",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "1.16.0-3"
     },
     "ini-file": {
         "arch": "amd64",
-        "digest": "c75066994058575c6092fb760bd53feeb2aabd6039e942f3904de57f5a5534dc",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "1.4.5-2"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "66c83aadf646d230d0cb097d9fe1663911bed94fabf8cbba2a17c39f7c6ffbcc",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "1.0.6-2"
