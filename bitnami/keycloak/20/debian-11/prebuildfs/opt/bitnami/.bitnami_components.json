@@ -1,28 +1,28 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "bf2b90a31df691e3648c4a41190a926bb638c3a9fa1dfcde36623ce1bfaadc23",
+        "digest": "deadbeef",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "1.16.0-3"
     },
     "java": {
         "arch": "amd64",
-        "digest": "96ba9170f22f7be0bfe9825baee24b7a1b48a2dc110896f0937fded1dbaab896",
+        "digest": "deadbeef",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "17.0.6-10-3"
     },
     "keycloak": {
         "arch": "amd64",
-        "digest": "7d2eef18c5ae16c0231cba02e93fe5b8fc7abafceda0e3e243c1c144c76725ff",
+        "digest": "deadbeef",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "20.0.5-4"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "66c83aadf646d230d0cb097d9fe1663911bed94fabf8cbba2a17c39f7c6ffbcc",
+        "digest": "deadbeef",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "1.0.6-2"
