@@ -1,6 +1,5 @@
 binaries:
   - gosu
-  - redis-benchmark
   - redis-cli
   - redis-server
   - wait-for-port
@@ -16,4 +15,3 @@ root_dir: /opt/bitnami
 version:
   bin_name: redis-server
   flag: --version
-port: 6379
