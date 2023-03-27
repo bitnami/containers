@@ -1,14 +1,12 @@
 {
     "cassandra-exporter": {
         "arch": "amd64",
-        "digest": "3dbd7348d1947424307d92c5f7bae9666baed823f7d370528293da3d9710dbd1",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "2.3.8-159"
     },
     "java": {
         "arch": "amd64",
-        "digest": "fbdf266273a4dd4c5fc37c344462aa50047549aa2e63858ffee5594ea450fca5",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "11.0.18-10-3"
