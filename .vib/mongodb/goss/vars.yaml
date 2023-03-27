@@ -6,11 +6,11 @@ binaries:
   - wait-for-port
   - yq
 files:
-  - paths:
+  - mode: "0664"
+    paths:
     - /.dbshell
     - /.mongoshrc.js
     - /.mongorc.js
-    - /opt/bitnami/mongodb/conf/mongodb.conf
 directories:
   - mode: "0775"
     paths:
@@ -21,7 +21,6 @@ directories:
       - /opt/bitnami/mongodb/logs
       - /opt/bitnami/mongodb/tmp
       - /.mongodb
-port: 27017
 root_dir: /opt/bitnami
 version:
   bin_name: mongod
