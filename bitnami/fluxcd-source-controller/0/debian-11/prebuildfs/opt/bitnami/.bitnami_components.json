@@ -1,7 +1,6 @@
 {
     "fluxcd-source-controller": {
         "arch": "amd64",
-        "digest": "7a4ff325bc711b1688f418f384f74ed20b28a4f67e177d260b742ba3d4a545aa",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "0.36.1-0"
