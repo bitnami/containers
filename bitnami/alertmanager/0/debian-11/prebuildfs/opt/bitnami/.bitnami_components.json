@@ -1,7 +1,6 @@
 {
     "alertmanager": {
         "arch": "amd64",
-        "digest": "eca4c49953d98d2dfec300b2b42a9d7259afe6df69fe9339da6941fd036858a7",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "0.25.0-3"
