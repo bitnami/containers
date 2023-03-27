@@ -395,7 +395,7 @@ PartOf=bitnami.service
 Type=${type}
 EOF
     if [[ -n "$working_directory" ]]; then
-        cat >> "$service_file" <<< "WorkingDirectory=$working_directory"
+        cat >> "$service_file" <<< "WorkingDirectory=${working_directory}"
     fi
     if [[ -n "$exec_start_pre" ]]; then
         # This variable may contain multiple ExecStartPre= directives
