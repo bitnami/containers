@@ -112,7 +112,11 @@ is_web_server_running() {
 #########################
 web_server_start() {
     info "Starting $(web_server_type) in background"
-    "${BITNAMI_ROOT_DIR}/scripts/$(web_server_type)/start.sh"
+    if [[ "$BITNAMI_SERVICE_MANAGER" = "monit" ]]; then
+        "${BITNAMI_ROOT_DIR}/scripts/$(web_server_type)/start.sh"
+    elif [[ "$BITNAMI_SERVICE_MANAGER" = "systemd" ]]; then
+        systemctl start "bitnami.$(web_server_type).service"
+    fi
 }
 
 ########################
@@ -126,7 +130,11 @@ web_server_start() {
 #########################
 web_server_stop() {
     info "Stopping $(web_server_type)"
-    "${BITNAMI_ROOT_DIR}/scripts/$(web_server_type)/stop.sh"
+    if [[ "$BITNAMI_SERVICE_MANAGER" = "monit" ]]; then
+        "${BITNAMI_ROOT_DIR}/scripts/$(web_server_type)/stop.sh"
+    elif [[ "$BITNAMI_SERVICE_MANAGER" = "systemd" ]]; then
+        systemctl stop "bitnami.$(web_server_type).service"
+    fi
 }
 
 ########################
@@ -140,7 +148,11 @@ web_server_stop() {
 #########################
 web_server_restart() {
     info "Restarting $(web_server_type)"
-    "${BITNAMI_ROOT_DIR}/scripts/$(web_server_type)/restart.sh"
+    if [[ "$BITNAMI_SERVICE_MANAGER" = "monit" ]]; then
+        "${BITNAMI_ROOT_DIR}/scripts/$(web_server_type)/restart.sh"
+    elif [[ "$BITNAMI_SERVICE_MANAGER" = "systemd" ]]; then
+        systemctl restart "bitnami.$(web_server_type).service"
+    fi
 }
 
 ########################
@@ -153,7 +165,11 @@ web_server_restart() {
 #   None
 #########################
 web_server_reload() {
-    "${BITNAMI_ROOT_DIR}/scripts/$(web_server_type)/reload.sh"
+    if [[ "$BITNAMI_SERVICE_MANAGER" = "monit" ]]; then
+        "${BITNAMI_ROOT_DIR}/scripts/$(web_server_type)/reload.sh"
+    elif [[ "$BITNAMI_SERVICE_MANAGER" = "systemd" ]]; then
+        systemctl reload "bitnami.$(web_server_type).service"
+    fi
 }
 
 ########################
