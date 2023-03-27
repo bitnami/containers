@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-24T21:24:05Z" \
+      org.opencontainers.image.created="2023-03-27T19:10:25Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.13.0-debian-11-r10" \
+      org.opencontainers.image.ref.name="0.13.1-debian-11-r0" \
       org.opencontainers.image.title="apache-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.13.0"
+      org.opencontainers.image.version="0.13.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "apache-exporter-0.13.0-1-linux-${OS_ARCH}-debian-11" \
+      "apache-exporter-0.13.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -39,7 +39,7 @@ RUN apt-get autoremove --purge -y curl ca-certificates && \
 RUN ln -sf /opt/bitnami/apache-exporter/bin/apache_exporter /bin/apache_exporter
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="0.13.0" \
+ENV APP_VERSION="0.13.1" \
     BITNAMI_APP_NAME="apache-exporter" \
     PATH="/opt/bitnami/apache-exporter/bin:$PATH"
 
