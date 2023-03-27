@@ -4,13 +4,13 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-04T22:38:01Z" \
+      org.opencontainers.image.created="2023-03-22T15:51:43Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.1.0-debian-11-r27" \
+      org.opencontainers.image.ref.name="4.1.1-debian-11-r0" \
       org.opencontainers.image.title="cassandra" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="4.1.0"
+      org.opencontainers.image.version="4.1.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,11 +23,11 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libbz2-1.0 libcom-err2 libcrypt1 libffi7 libgcc-s1 libgssapi-krb5-2 libjemalloc2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncursesw6 libnsl2 libreadline8 libsqlite3-0 libssl1.1 libtinfo6 libtirpc3 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "python-3.9.16-6-linux-${OS_ARCH}-debian-11" \
-      "java-1.8.362-2-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-2-linux-${OS_ARCH}-debian-11" \
-      "yq-4.31.2-0-linux-${OS_ARCH}-debian-11" \
-      "cassandra-4.1.0-2-linux-${OS_ARCH}-debian-11" \
+      "python-3.9.16-8-linux-${OS_ARCH}-debian-11" \
+      "java-1.8.362-3-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.16.0-3-linux-${OS_ARCH}-debian-11" \
+      "yq-4.32.2-0-linux-${OS_ARCH}-debian-11" \
+      "cassandra-4.1.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,7 +48,7 @@ RUN ln -s /opt/bitnami/scripts/cassandra/run.sh /run.sh
 COPY rootfs /
 RUN /opt/bitnami/scripts/cassandra/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
-ENV APP_VERSION="4.1.0" \
+ENV APP_VERSION="4.1.1" \
     BITNAMI_APP_NAME="cassandra" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/cassandra/bin:$PATH"

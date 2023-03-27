@@ -2,12 +2,13 @@
 # Check components executables have no missing linked libraries
 # Needed vars:
 #   - .Vars.root_dir
-#   - .Vars.linked_libraries.exclude_paths (Optional - Array)
+# Optional vars:
+#   - .Vars.linked_libraries.exclude_paths (Array)
 ########################
 command:
   check-linked-libraries:
     {{ $exclude_paths := "" }}
-    {{ if contains "exclude_paths:" (.Vars | toString) }}
+    {{ if contains "linked_libraries:map[exclude_paths:" (.Vars | toString) }}
         {{ $exclude_paths = (.Vars.linked_libraries.exclude_paths | join "|") }}
     {{ end }}
     exec: export BITNAMI_ROOT_DIR={{ .Vars.root_dir }} && export EXCLUDE_PATHS='{{ $exclude_paths }}' && ./common/goss/scripts/check-linked-libraries.sh

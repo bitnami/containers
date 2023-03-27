@@ -4,7 +4,8 @@
 # Needed vars:
 #   - .Vars.files (Array)
 #   - .Vars.files.paths (Array)
-#   - .Vars.files.mode (Optional - String)
+# Optional vars:
+#   - .Vars.files.mode (String)
 ########################
 file:
   {{ range .Vars.files }}

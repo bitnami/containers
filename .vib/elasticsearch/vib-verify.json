@@ -3,7 +3,8 @@
     "resources": {
       "url": "{SHA_ARCHIVE}",
       "path": "{VIB_ENV_PATH}"
-    }
+    },
+    "runtime_parameters": "Y29tbWFuZDogWyJ0YWlsIiwgIi1mIiwgIi9kZXYvbnVsbCJd"
   },
   "phases": {
     "package": {
@@ -29,6 +30,21 @@
     },
     "verify": {
       "actions": [
+        {
+          "action_id": "goss",
+          "params": {
+            "resources": {
+              "path": "/.vib"
+            },
+            "tests_file": "elasticsearch/goss/goss.yaml",
+            "vars_file": "elasticsearch/goss/vars.yaml",
+            "remote": {
+              "pod": {
+                "workload": "deploy-elasticsearch"
+              }
+            }
+          }
+        },
         {
           "action_id": "trivy",
           "params": {

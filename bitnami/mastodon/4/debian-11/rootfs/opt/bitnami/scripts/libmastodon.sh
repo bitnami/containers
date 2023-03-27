@@ -284,7 +284,7 @@ mastodon_wait_for_postgresql_connection() {
         echo "$res" | grep -q '1 row'
     }
     if ! retry_while "debug_execute check_postgresql_connection" "$MASTODON_STARTUP_ATTEMPTS"; then
-        error "Could not connect to the database"
+        error "Could not connect to the PostgreSQL database"
         return 1
     fi
     info "PostgreSQL instance is ready"
@@ -311,7 +311,7 @@ mastodon_wait_for_elasticsearch_connection() {
         echo "$res" | grep -q 'You Know'
     }
     if ! retry_while "debug_execute check_elasticsearch_connection" "$MASTODON_STARTUP_ATTEMPTS"; then
-        error "Could not connect to the database"
+        error "Could not connect to Elasticsearch"
         return 1
     fi
     info "Elasticsearch instance is ready"

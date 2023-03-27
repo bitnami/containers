@@ -387,16 +387,20 @@ appsmith_initialize() {
 appsmith_backend_start_bg() {
     local -r log_file="${1:-"${APPSMITH_LOG_FILE}"}"
     info "Starting Appsmith backend in background"
+
+    is_appsmith_backend_running && return
+
     # We need to load in the environment the Appsmith configuration file in order
     # for the application to work. Using a similar approach as the upstream container.
     # We also need to load only those environment variables that are not empty, otherwise
     # the Appsmith daemon crashes on startup because of not allowed empty values.
-    # https://github.com/appsmithorg/appsmith/blob/release/deploy/docker/entrypoint.sh#L57-L62
+    # https://github.com/appsmithorg/appsmith/blob/v1.9.12/deploy/docker/entrypoint.sh#L58-L63
     set -a
-    eval "$(grep -v "=$" "$APPSMITH_CONF_FILE")"
+    . "$APPSMITH_CONF_FILE"
     set +a
 
-    is_appsmith_backend_running && return
+    appsmith_unset_unused_variables
+
     cd "${APPSMITH_BASE_DIR}/backend" || exit 1
     local -r cmd=("java")
     local -r args=("-Dserver.port=${APPSMITH_API_PORT}" "-Dappsmith.admin.envfile=${APPSMITH_CONF_FILE}" "-Djava.security.egd=file:/dev/./urandom" "-jar" "${APPSMITH_BASE_DIR}/backend/server.jar")
@@ -414,4 +418,39 @@ appsmith_backend_start_bg() {
         exit 1
     fi
     info "Appsmith started successfully"
+}
+
+########################
+# Unset environment variables that may cause Appsmith to crash during initialization
+# https://github.com/appsmithorg/appsmith/blob/v1.9.12/deploy/docker/entrypoint.sh#L83-L109
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+appsmith_unset_unused_variables() {
+    info "Unsetting unused environment variables"
+    if [[ -z "${APPSMITH_MAIL_ENABLED}" ]]; then
+        unset APPSMITH_MAIL_ENABLED
+    fi
+
+    if [[ -z "${APPSMITH_OAUTH2_GITHUB_CLIENT_ID}" ]] || [[ -z "${APPSMITH_OAUTH2_GITHUB_CLIENT_SECRET}" ]]; then
+        unset APPSMITH_OAUTH2_GITHUB_CLIENT_ID
+        unset APPSMITH_OAUTH2_GITHUB_CLIENT_SECRET
+    fi
+
+    if [[ -z "${APPSMITH_OAUTH2_GOOGLE_CLIENT_ID}" ]] || [[ -z "${APPSMITH_OAUTH2_GOOGLE_CLIENT_SECRET}" ]]; then
+        unset APPSMITH_OAUTH2_GOOGLE_CLIENT_ID
+        unset APPSMITH_OAUTH2_GOOGLE_CLIENT_SECRET
+    fi
+
+    if [[ -z "${APPSMITH_GOOGLE_MAPS_API_KEY}" ]]; then
+        unset APPSMITH_GOOGLE_MAPS_API_KEY
+    fi
+
+    if [[ -z "${APPSMITH_RECAPTCHA_SITE_KEY}" ]] || [[ -z "${APPSMITH_RECAPTCHA_SECRET_KEY}" ]] || [[ -z "${APPSMITH_RECAPTCHA_ENABLED}" ]]; then
+        unset APPSMITH_RECAPTCHA_SITE_KEY
+        unset APPSMITH_RECAPTCHA_SECRET_KEY
+        unset APPSMITH_RECAPTCHA_ENABLED
+    fi
 }
