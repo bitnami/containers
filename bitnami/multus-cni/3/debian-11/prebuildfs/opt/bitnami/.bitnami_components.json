@@ -1,7 +1,6 @@
 {
     "multus-cni": {
         "arch": "amd64",
-        "digest": "fb3488258493d00d79f7d9335261065c971740e1055e2a93d1174f6d8ad88cb6",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "3.9.3-1"
