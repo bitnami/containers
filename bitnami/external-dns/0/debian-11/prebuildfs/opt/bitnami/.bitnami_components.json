@@ -1,7 +1,6 @@
 {
     "external-dns": {
         "arch": "amd64",
-        "digest": "deadbeef",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "0.13.4-0"
