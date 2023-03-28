@@ -11,3 +11,8 @@ file:
     exists: true
     filetype: symlink
     linked-to: /dev/stdout
+  /opt/bitnami/postgresql/conf/postgresql.conf:
+    exists: true
+    mode: "0664"
+    contains:
+      - /^include_dir = 'conf.d'/
