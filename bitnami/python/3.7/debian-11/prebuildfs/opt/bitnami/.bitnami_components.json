@@ -1,7 +1,6 @@
 {
     "python": {
         "arch": "amd64",
-        "digest": "1fc63d946ee6a72e2129ddd2ccbab31d8a2416780e40d64cedf91cc833619a4f",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "3.7.16-8"
