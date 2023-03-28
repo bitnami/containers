@@ -1,7 +1,6 @@
 version: '2'
 
 services:
-  # [TEST]
   php:
     tty: true # Enables debugging capabilities when attached to this container.
     image: docker.io/bitnami/php-fpm:8.2
