@@ -1,7 +1,6 @@
 {
     "metallb-speaker": {
         "arch": "amd64",
-        "digest": "4f45403dcae17723e90d8d8717d40de3487ff0bc77f21df682cccbc0007090b7",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "0.13.9-1"
