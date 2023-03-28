@@ -22,6 +22,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 pgbouncer_env_vars=(
+    PGBOUNCER_LOG_FILE
     PGBOUNCER_DATABASE
     PGBOUNCER_PORT
     PGBOUNCER_LISTEN_ADDRESS
@@ -99,7 +100,6 @@ export PGBOUNCER_BASE_DIR="${BITNAMI_ROOT_DIR}/pgbouncer"
 export PGBOUNCER_CONF_DIR="${PGBOUNCER_BASE_DIR}/conf"
 export PGBOUNCER_LOG_DIR="${PGBOUNCER_BASE_DIR}/logs"
 export PGBOUNCER_TMP_DIR="${PGBOUNCER_BASE_DIR}/tmp"
-export PGBOUNCER_LOG_FILE="${PGBOUNCER_LOG_FILE:-$PGBOUNCER_LOG_DIR/pgbouncer.log}"
 export PGBOUNCER_PID_FILE="${PGBOUNCER_TMP_DIR}/pgbouncer.pid"
 export PGBOUNCER_CONF_FILE="${PGBOUNCER_CONF_DIR}/pgbouncer.ini"
 export PGBOUNCER_AUTH_FILE="${PGBOUNCER_CONF_DIR}/userlist.txt"
@@ -108,6 +108,7 @@ export PGBOUNCER_MOUNTED_CONF_DIR="${PGBOUNCER_VOLUME_DIR}/conf"
 export PGBOUNCER_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
 
 # General PgBouncer settings
+export PGBOUNCER_LOG_FILE="${PGBOUNCER_LOG_FILE:-${PGBOUNCER_LOG_DIR}/pgbouncer.log}"
 export PGBOUNCER_DATABASE="${PGBOUNCER_DATABASE:-postgres}"
 export PGBOUNCER_PORT="${PGBOUNCER_PORT:-6432}"
 export PGBOUNCER_LISTEN_ADDRESS="${PGBOUNCER_LISTEN_ADDRESS:-0.0.0.0}"
