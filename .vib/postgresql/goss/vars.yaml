@@ -8,7 +8,6 @@ binaries:
 files:
   - paths:
     - /opt/bitnami/postgresql/conf/pg_hba.conf
-    - /opt/bitnami/postgresql/conf/postgresql.conf
 directories:
   - mode: "0775"
     paths:
