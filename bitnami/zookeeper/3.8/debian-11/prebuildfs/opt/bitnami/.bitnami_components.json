@@ -1,28 +1,24 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "bf2b90a31df691e3648c4a41190a926bb638c3a9fa1dfcde36623ce1bfaadc23",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "1.16.0-3"
     },
     "java": {
         "arch": "amd64",
-        "digest": "fbdf266273a4dd4c5fc37c344462aa50047549aa2e63858ffee5594ea450fca5",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "11.0.18-10-3"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "66c83aadf646d230d0cb097d9fe1663911bed94fabf8cbba2a17c39f7c6ffbcc",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "1.0.6-2"
     },
     "zookeeper": {
         "arch": "amd64",
-        "digest": "203f85bf22e995e32ceb42dad1451077cd17773c139440b2279ae9e7ea79c2ca",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "3.8.1-3"
