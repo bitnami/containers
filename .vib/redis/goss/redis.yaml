@@ -9,10 +9,10 @@ file:
       - daemonize yes
 command:
   check-redis-server:
-    exec: timeout 5s redis-server || true
+    exec: redis-server /opt/bitnami/redis/etc/redis.conf && ps aux
     exit-status: 0
     stdout:
-      - Ready to accept connections
+      - redis-server 127.0.0.1:6379
   check-redis-server-ssl:
     exec: ldd /opt/bitnami/redis/bin/redis-server
     exit-status: 0
