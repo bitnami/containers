@@ -1,14 +1,12 @@
 {
     "gosu": {
         "arch": "amd64",
-        "digest": "bf2b90a31df691e3648c4a41190a926bb638c3a9fa1dfcde36623ce1bfaadc23",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "1.16.0-3"
     },
     "openldap": {
         "arch": "amd64",
-        "digest": "c3985c583afb975eb3a49316f4cd56a8e8f2cc6a64f2612ed72b346b5e520b48",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "2.5.14-1"
