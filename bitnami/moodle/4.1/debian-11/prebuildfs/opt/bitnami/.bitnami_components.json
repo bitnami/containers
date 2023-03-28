@@ -1,56 +1,48 @@
 {
     "apache": {
         "arch": "amd64",
-        "digest": "d5cad8cbc55051131d136e9cdaa6f9802b24641302c8b02d823389c32b4daf30",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "2.4.56-1"
     },
     "gosu": {
         "arch": "amd64",
-        "digest": "bf2b90a31df691e3648c4a41190a926bb638c3a9fa1dfcde36623ce1bfaadc23",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "1.16.0-3"
     },
     "libphp": {
         "arch": "amd64",
-        "digest": "27a2516f8d36b23aa874188f9b3708e5cd06a9bf2bb470383b96f6316d23d45a",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "8.0.28-4"
     },
     "moodle": {
         "arch": "amd64",
-        "digest": "28880dd3f7d83c879aa7f4630fbcd74f95242ed3a79da59974adbc27305c2166",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "4.1.2-1"
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "6ed7c73b5e779521cf2f47a00ac54e6d2929213cb4eb3cbd9a4f12f84557c664",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "10.6.12-2"
     },
     "php": {
         "arch": "amd64",
-        "digest": "b50514c8ff1b37c79f67b381d487756ba0211068b457813cf99fb95048f9463d",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "8.0.28-5"
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "8fe91f9d7614cfa0005f9bb38c0893a7c94e67bfaca421862500c23c68c52ac9",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "13.10.0-2"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "d1a128e25098f793a92342efd5fa85c1075a2b21042929b269d23c6694e20c3b",
         "distro": "debian-11",
         "type": "NAMI",
         "version": "1.0.5-2"
