@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-21T23:35:17Z" \
+      org.opencontainers.image.created="2023-03-28T01:56:42Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.9.1-debian-11-r101" \
+      org.opencontainers.image.ref.name="1.9.1-debian-11-r102" \
       org.opencontainers.image.title="mxnet" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.9.1"
@@ -23,7 +23,7 @@ RUN install_packages ca-certificates curl libaec0 libaom0 libarmadillo10 libarpa
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.8.16-8-linux-${OS_ARCH}-debian-11" \
-      "mxnet-1.9.1-158-linux-${OS_ARCH}-debian-11" \
+      "mxnet-1.9.1-159-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-3-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
