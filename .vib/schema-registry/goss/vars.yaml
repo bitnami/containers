@@ -1,4 +1,6 @@
 binaries:
+  - gosu
+  - java
   - schema-registry-start
 directories:
   - mode: "0775"
