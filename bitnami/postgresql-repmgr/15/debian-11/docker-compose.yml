@@ -1,6 +1,5 @@
 version: '2'
 services:
-  # [TEST]
   pg-0:
     image: docker.io/bitnami/postgresql-repmgr:15
     ports:
