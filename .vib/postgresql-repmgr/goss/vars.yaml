@@ -26,6 +26,3 @@ files:
     paths:
       - /opt/bitnami/repmgr/events/router.sh
 root_dir: /opt/bitnami
-version:
-  bin_name: psql
-  flag: --version
