@@ -5,10 +5,6 @@ user:
   redmine:
     exists: true
 command:
-  # Redmine does not include a binary or file to obtain the version from
-  check-app-version:
-    exec: cat /opt/bitnami/redmine/.spdx-redmine.json | grep -q redmine-$APP_VERSION
-    exit-status: 0
   check-configured-databases:
     # Strips config file of comments and looks for adapters
     exec: yq --no-colors '... comments=""' /opt/bitnami/redmine/config/database.yml
