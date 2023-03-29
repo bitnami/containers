@@ -1,6 +1,4 @@
 backends:
-  # - bdb -- DEPRECATED
-  # - hdb -- DEPRECATED
   - mdb
   - monitor
 binaries:
@@ -21,7 +19,6 @@ features:
   - Syslog
   - IPv6
   - LOCAL
-  # - proctitle -- https://git.openldap.org/openldap/openldap/-/merge_requests/27
 files:
   - paths:
       - /opt/bitnami/openldap/sbin/slapd
