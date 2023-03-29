@@ -5,3 +5,7 @@ file:
     filetype: file
     contains:
       - socket=/opt/bitnami/mysql/tmp/mysql.sock
+  /opt/bitnami/mysql/logs/mysqld.log:
+    exists: true
+    filetype: symlink
+    linked-to: /dev/stdout
