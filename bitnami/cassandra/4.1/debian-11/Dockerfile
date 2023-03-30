@@ -4,10 +4,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-30T15:18:39Z" \
+      org.opencontainers.image.created="2023-03-30T16:56:19Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.1.1-debian-11-r2" \
+      org.opencontainers.image.ref.name="4.1.1-debian-11-r3" \
       org.opencontainers.image.title="cassandra" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="4.1.1"
@@ -27,7 +27,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "java-1.8.362-3-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-4-linux-${OS_ARCH}-debian-11" \
       "yq-4.33.1-1-linux-${OS_ARCH}-debian-11" \
-      "cassandra-4.1.1-1-linux-${OS_ARCH}-debian-11" \
+      "cassandra-4.1.1-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
