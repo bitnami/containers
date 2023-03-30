@@ -3,19 +3,19 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-3"
+        "version": "1.16.0-4"
     },
     "mysql-client": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.6.12-2"
+        "version": "10.6.12-3"
     },
     "nginx": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.23.4-0"
+        "version": "1.23.4-1"
     },
     "php": {
         "arch": "amd64",
@@ -27,12 +27,12 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-2"
+        "version": "1.0.5-3"
     },
     "wordpress": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.1.1-45"
+        "version": "6.2.0-0"
     }
 }
