@@ -1,6 +1,7 @@
 version: '2'
 
 services:
+  # [TEST]
   openldap:
     image: docker.io/bitnami/openldap:2.6
     ports:

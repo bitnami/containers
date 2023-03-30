@@ -16,10 +16,9 @@ file:
   {{ range $package := .Vars.packages }}
   {{ $package }}:
     exists: true
-    filetype: symlink
   {{ end }}
 command:
-  check-enabled-backends:
+  check-app-version:
     exec: {{ .Vars.version.bin_name }} {{ .Vars.version.flag }} 2>&1
     exit-status: 0
     stdout:
