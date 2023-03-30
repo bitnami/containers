@@ -1,0 +1,15 @@
+binaries:
+  - gosu
+  - java
+  - psql
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/sonarqube
+      - /bitnami/sonarqube-provisioning
+      - /opt/bitnami/sonarqube/data
+      - /opt/bitnami/sonarqube/extensions
+      - /opt/bitnami/sonarqube/logs
+      - /opt/bitnami/sonarqube/temp
+      - /opt/bitnami/sonarqube/pids
+root_dir: /opt/bitnami
