@@ -939,7 +939,7 @@ mongodb_is_hidden_node_pending() {
     debug "Adding hidden node ${node}:${port}"
     result=$(
         mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
-rs.add({host: '$node:$port', hidden: true, priority: 0})
+rs.add({host: '$node:$port', hidden: true, priority: 0, votes: 0})
 EOF
     )
     # Error code 103 is considered OK.
