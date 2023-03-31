@@ -286,6 +286,31 @@ solr_wait_for_api() {
 }
 
 #########################
+# Check if SOLR Cloud auth is already enabled
+# Globals:
+#   SOLR_*
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+solr_auth_already_enabled() {
+    local temp_file_name="/tmp/zk-security.json"
+    local -r exec="${SOLR_BIN_DIR}/solr"
+    local command_args=("zk" "cp" "zk:/solr/security.json" "$temp_file_name" "-z" "$SOLR_ZK_HOSTS")
+    debug "Checking if auth already enabled in ZK"
+
+    "$exec" "${command_args[@]}"
+
+    local result=1
+    if grep -q solr.BasicAuthPlugin "$temp_file_name"; then
+      result=0
+    fi
+    rm "$temp_file_name"
+    return $result
+}
+
+#########################
 # Create SOLR cloud user
 # Globals:
 #   SOLR_*
@@ -303,11 +328,15 @@ solr_create_cloud_user() {
 
     info "Creating user: ${username}"
 
-    if ! debug_execute "$exec" "${command_args[@]}"; then
-        error "There was an error when creating the user"
-        exit 1
+    if ! solr_auth_already_enabled; then
+      if ! debug_execute "$exec" "${command_args[@]}"; then
+          error "There was an error when creating the user"
+          exit 1
+      else
+          info "User created"
+      fi
     else
-        info "User created"
+      info "Skipping. Security is already enabled."
     fi
 }
 
