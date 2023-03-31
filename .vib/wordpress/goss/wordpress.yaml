@@ -1,6 +1,6 @@
 command:
   check-app-version:
-    exec: cat /opt/bitnami/wordpress/wp-includes/version.php  | grep "wp_version"
+    exec: sed -nE "s/.wp_version\s*=\s*'([0-9\.]+)';/\1/p" /opt/bitnami/wordpress/wp-includes/version.php | sed -E 's/^[0-9]+\.[0-9]+$/&.0/'
     exit-status: 0
     stdout:
       - {{ .Env.APP_VERSION }}
