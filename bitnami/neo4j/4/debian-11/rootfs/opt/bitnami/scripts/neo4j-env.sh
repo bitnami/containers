@@ -83,4 +83,10 @@ export NEO4J_BOLT_PORT_NUMBER="${NEO4J_BOLT_PORT_NUMBER:-7687}"
 export NEO4J_HTTP_PORT_NUMBER="${NEO4J_HTTP_PORT_NUMBER:-7474}"
 export NEO4J_HTTPS_PORT_NUMBER="${NEO4J_HTTPS_PORT_NUMBER:-7473}"
 
+# Default JVM configuration
+export JAVA_HOME="${BITNAMI_ROOT_DIR}/java"
+
+# Other parameters
+export PATH="${NEO4J_BASE_DIR}/bin:${JAVA_HOME}/bin:${BITNAMI_ROOT_DIR}/common/bin:${PATH}"
+
 # Custom environment variables may be defined below
