@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-27T22:03:38Z" \
+      org.opencontainers.image.created="2023-04-01T10:18:56Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.11.0-debian-11-r26" \
+      org.opencontainers.image.ref.name="1.11.0-debian-11-r27" \
       org.opencontainers.image.title="cainjector" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.11.0"
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "cainjector-1.11.0-3-linux-${OS_ARCH}-debian-11" \
+      "cainjector-1.11.0-4-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
