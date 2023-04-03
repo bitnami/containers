@@ -3,14 +3,15 @@ file:
     exists: true
     filetype: file
     contains:
-      - "SOLR_JAVA_HOME=/opt/bitnami/solr/java"
+      - "SOLR_JAVA_HOME=/opt/bitnami/java"
       - "SOLR_PID_DIR=/opt/bitnami/solr/tmp"
       - "SOLR_LOGS_DIR=/opt/bitnami/solr/logs"
 command:
-  exec: JAVA_HOME=/opt/bitnami/solr/java /opt/bitnami/solr/bin/solr version
-  exit-status: 0
-  stdout:
-  - {{ .Env.APP_VERSION }}
+  check-app-version:
+    exec: JAVA_HOME=/opt/bitnami/solr/java /opt/bitnami/solr/bin/solr version
+    exit-status: 0
+    stdout:
+    - {{ .Env.APP_VERSION }}
 group:
   solr:
     exists: true
