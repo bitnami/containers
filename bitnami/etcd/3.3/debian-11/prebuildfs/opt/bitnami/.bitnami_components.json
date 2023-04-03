@@ -3,18 +3,18 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.3.27-159"
+        "version": "3.3.27-161"
     },
     "gosu": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-3"
+        "version": "1.16.0-5"
     },
     "yq": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.33.1-0"
+        "version": "4.33.2-0"
     }
 }
