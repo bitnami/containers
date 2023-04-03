@@ -3,18 +3,18 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.4.56-3"
+        "version": "2.4.56-5"
     },
     "gosu": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-4"
+        "version": "1.16.0-5"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-3"
+        "version": "1.0.5-4"
     }
 }
