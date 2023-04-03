@@ -13,5 +13,12 @@ set -o pipefail
 # Load libraries
 . /opt/bitnami/scripts/libdiscourse.sh
 
+# If DISCOURSE_HOST is not provided via user-data, force value from CLI args
+if [[ -z "$DISCOURSE_HOST" || "$DISCOURSE_HOST" = "www.example.com" ]]; then
+    DISCOURSE_DOMAIN="${1:?missing host}"
+else
+    DISCOURSE_DOMAIN="$DISCOURSE_HOST"
+fi
+
 info "Updating configuration file"
-discourse_set_hostname "${1:?missing host}"
+discourse_set_hostname "$DISCOURSE_DOMAIN"
