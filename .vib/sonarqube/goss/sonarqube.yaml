@@ -15,7 +15,6 @@ file:
     exists: true
     filetype: file
     contains:
-      - "../../sonar.log"
       - "wrapper.logfile.rollmode=NONE"
   {{ end }}
 group:
