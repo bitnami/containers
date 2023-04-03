@@ -4,10 +4,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-30T15:13:56Z" \
+      org.opencontainers.image.created="2023-04-02T15:40:49Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.2.3-debian-11-r65" \
+      org.opencontainers.image.ref.name="3.2.3-debian-11-r66" \
       org.opencontainers.image.title="kafka" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.2.3"
@@ -23,10 +23,10 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-11.0.18-10-3-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-4-linux-${OS_ARCH}-debian-11" \
-      "wait-for-port-1.0.6-3-linux-${OS_ARCH}-debian-11" \
-      "render-template-1.0.5-3-linux-${OS_ARCH}-debian-11" \
+      "java-11.0.18-10-4-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.6-4-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.5-4-linux-${OS_ARCH}-debian-11" \
       "kafka-3.2.3-8-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
