@@ -73,7 +73,7 @@ jobs:
                     fi
                     # This is hack to avoid jq errors while getting the architectures
                     vib_publish="$(cat .vib/${dsl_path}/vib-publish.json | sed -e 's|{VIB_ENV_ROLLING_TAGS}|"${rolling_tags}"|')"
-                    architectures="$(echo "${vib_publish}" | jq -cr '.phases.package.actions[] | select(.action_id == "container-image-package") | .params.architectures')"
+                    architectures="$(echo "${vib_publish}" | jq -cr '.phases.package.actions[] | select(.action_id == "container-image-package") | .params.architectures // ["linux/amd64"]')"
                     container_json=$(jq -n '{"name": $name, "path": $path, "os_flavour": $os_flavour, "branch": $branch, "app_version": $app_version, "revision": $revision, "sha": $sha, "sha_url": $sha_url, "dsl_path": $dsl_path, "tag": $tag, "rolling_tags": $rolling_tags, "architectures": $architectures}' \
                                     --arg name "$name" --arg path "$container" --arg os_flavour "$os_flavour" --arg branch "$branch" --arg app_version "$app_version" --arg revision "$revision" --arg sha "$SHA" --arg sha_url "$SHA_URL" --arg dsl_path "$dsl_path" --arg tag "$tag" --argjson rolling_tags "$rolling_tags" --argjson architectures "$architectures")
                     containers_json+=("${container_json}")
