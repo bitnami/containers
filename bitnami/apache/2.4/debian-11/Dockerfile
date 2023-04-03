@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-01T10:06:10Z" \
+      org.opencontainers.image.created="2023-04-03T07:34:22Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.4.56-debian-11-r8" \
+      org.opencontainers.image.ref.name="2.4.56-debian-11-r10" \
       org.opencontainers.image.title="apache" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.4.56"
@@ -24,7 +24,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "render-template-1.0.5-4-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
-      "apache-2.4.56-5-linux-${OS_ARCH}-debian-11" \
+      "apache-2.4.56-6-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
