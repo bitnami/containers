@@ -27,7 +27,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.5.0-6087-4"
+        "version": "4.5.0-6088-0"
     },
     "tomcat": {
         "arch": "amd64",
