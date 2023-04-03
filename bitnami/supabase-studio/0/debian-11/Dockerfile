@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-27T18:45:38Z" \
+      org.opencontainers.image.created="2023-04-01T14:48:21Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.23.2-debian-11-r3" \
+      org.opencontainers.image.ref.name="0.23.2-debian-11-r4" \
       org.opencontainers.image.title="supabase-studio" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.23.2"
@@ -22,9 +22,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libbz2-1.0 libcom-err2 libcrypt1 libffi7 libgcc-s1 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncursesw6 libnsl2 libreadline8 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 libtirpc3 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "python-3.8.16-8-linux-${OS_ARCH}-debian-11" \
-      "node-16.19.1-2-linux-${OS_ARCH}-debian-11" \
-      "supabase-0.23.2-1-linux-${OS_ARCH}-debian-11" \
+      "python-3.8.16-9-linux-${OS_ARCH}-debian-11" \
+      "node-16.20.0-1-linux-${OS_ARCH}-debian-11" \
+      "supabase-0.23.2-3-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
