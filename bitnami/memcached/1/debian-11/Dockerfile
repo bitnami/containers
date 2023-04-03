@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-28T00:03:22Z" \
+      org.opencontainers.image.created="2023-04-01T12:53:11Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.6.19-debian-11-r6" \
+      org.opencontainers.image.ref.name="1.6.19-debian-11-r7" \
       org.opencontainers.image.title="memcached" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.6.19"
@@ -22,8 +22,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libevent-2.1-7 libsasl2-2 libsasl2-modules netcat procps sasl2-bin
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "memcached-1.6.19-1-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-3-linux-${OS_ARCH}-debian-11" \
+      "memcached-1.6.19-2-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
