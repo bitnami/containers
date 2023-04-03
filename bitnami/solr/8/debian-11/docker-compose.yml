@@ -1,5 +1,6 @@
 version: '2'
 services:
+  # [TEST]
   solr:
     image: docker.io/bitnami/solr:8
     environment:
