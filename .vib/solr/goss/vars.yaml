@@ -1,0 +1,12 @@
+binaries:
+  - gosu
+  - java
+  - solr
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/solr
+      - /opt/bitnami/solr
+      - /opt/bitnami/solr/tmp
+      - /opt/bitnami/solr/logs
+root_dir: /opt/bitnami
