@@ -1,4 +1,7 @@
 binaries:
+  - composer
+  - pear
+  - pecl
   - php
 directories:
   - paths:
