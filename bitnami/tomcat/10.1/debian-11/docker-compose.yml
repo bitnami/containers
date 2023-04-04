@@ -1,7 +1,6 @@
 version: '2'
 
 services:
-  # [TEST]
   tomcat:
     image: docker.io/bitnami/tomcat:10.1
     ports:
