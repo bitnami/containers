@@ -1,0 +1,20 @@
+file:
+  # HTTP vhost should have been properly rendered
+  /opt/bitnami/nginx/conf/server_blocks/drupal-server-block.conf:
+    exists: true
+    filetype: file
+    contains:
+      - /root\s+/opt/bitnami/drupal/
+  # HTTPs vhost should have been properly rendered
+  /opt/bitnami/nginx/conf/server_blocks/drupal-https-server-block.conf:
+    exists: true
+    filetype: file
+    contains:
+      - /listen \d+ ssl/
+      - /root\s+/opt/bitnami/drupal/
+group:
+  daemon:
+    exists: true
+user:
+  daemon:
+    exists: true
