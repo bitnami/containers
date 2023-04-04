@@ -13,7 +13,7 @@ directories:
       - /opt/bitnami/tomcat/work
       - /opt/bitnami/tomcat/webapps_default
 files:
-  - mode: "0674"
+  - mode: "0664"
     paths:
       - /opt/bitnami/tomcat/bin/setenv.sh
   - mode: "0755"
