@@ -13,37 +13,45 @@ files:
       - /opt/bitnami/php/etc/pear.conf
 modules:
   enabled:
-    - zlib
-    - libxml
-    - soap
-    - bz2
-    - sockets
+    - ZLib
+    - libXML
+    - Soap
+    - bzip2
+    - Sockets
     - pcntl
-    - exif
-    - bcmath
-    - pdo_mysql
-    - mysqli
-    - openssl
-    - ftp
-    - calendar
-    - gettext
-    - xml
-    - xsl
+    - EXIF
+    - BCMath
+    - PDO.*MySQL
+    - MysqlI
+    - OpenSSL
+    - FTP
+    - Calendar
+    - GetText
+    - DOM/XML
+    - XSL
     - mbstring
     - ctype
-    - session
+    - Session
     - mysqlnd
-    - intl
+    - Internationalization
     - iconv
-    - pdo_sqlite
-    - sqlite3
-    - readline
+    - PDO.*SQLite
+    - SQLite3
+    - Readline
     - gmp
-    - curl
+    - cURL
     - PDO
     - SimpleXML
     - sodium
-    - gd
+    - GD
+    - FreeType
+    - JPEG
+    - WebP
+  inactive:
+    - apcu
+    - imagick
+    - maxminddb
+    - xdebug
   disabled:
     - rpath
 root_dir: /opt/bitnami
