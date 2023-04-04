@@ -1,0 +1,6 @@
+binaries:
+  - gitlab-runner
+files:
+  - paths:
+      - /opt/bitnami/gitlab-runner/bin/gitlab-runner
+root_dir: /opt/bitnami
