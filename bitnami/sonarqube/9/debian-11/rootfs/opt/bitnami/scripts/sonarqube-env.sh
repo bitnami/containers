@@ -87,6 +87,7 @@ export SONARQUBE_LOG_FILE="${SONARQUBE_LOGS_DIR}/sonar.log"
 export SONARQUBE_TMP_DIR="${SONARQUBE_BASE_DIR}/temp"
 export SONARQUBE_PID_FILE="${SONARQUBE_BASE_DIR}/pids/SonarQube.pid"
 export SONARQUBE_BIN_DIR="${SONARQUBE_BASE_DIR}/bin/linux-x86-64"
+export PATH="${BITNAMI_ROOT_DIR}/java/bin:${PATH}"
 
 # SonarQube persistence configuration
 export SONARQUBE_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/sonarqube"
