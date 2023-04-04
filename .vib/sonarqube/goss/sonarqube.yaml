@@ -2,7 +2,6 @@ file:
   /opt/bitnami/sonarqube/bin/linux-x86-64/sonar.sh:
     exists: true
     filetype: file
-    mode: "0755"
     contains:
     {{ if regexMatch "^8.+" .Env.APP_VERSION }}
       - "PIDDIR=\"../../pids\""

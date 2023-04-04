@@ -12,4 +12,8 @@ directories:
       - /opt/bitnami/sonarqube/logs
       - /opt/bitnami/sonarqube/temp
       - /opt/bitnami/sonarqube/pids
+files:
+  - mode: "0755"
+    paths:
+      - /opt/bitnami/sonarqube/conf/sonar.properties
 root_dir: /opt/bitnami
