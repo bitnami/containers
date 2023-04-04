@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-01T13:22:14Z" \
+      org.opencontainers.image.created="2023-04-04T16:35:28Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.0.2-debian-11-r4" \
+      org.opencontainers.image.ref.name="8.0.2-debian-11-r5" \
       org.opencontainers.image.title="prestashop" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="8.0.2"
@@ -23,7 +23,7 @@ RUN install_packages acl ca-certificates curl libaudit1 libbrotli1 libbsd0 libbz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "php-8.1.17-4-linux-${OS_ARCH}-debian-11" \
-      "apache-2.4.56-5-linux-${OS_ARCH}-debian-11" \
+      "apache-2.4.56-6-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.12-4-linux-${OS_ARCH}-debian-11" \
       "libphp-8.1.17-4-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-4-linux-${OS_ARCH}-debian-11" \
