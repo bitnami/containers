@@ -9,12 +9,12 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.18-10-4"
+        "version": "17.0.6-10-4"
     },
     "supabase-postgres": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "15.1.0-19"
+        "version": "15.1.0-20"
     }
 }
