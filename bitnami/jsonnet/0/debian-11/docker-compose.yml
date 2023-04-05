@@ -1,7 +1,6 @@
 version: '2'
 
 services:
-  # [TEST]
   jsonnet:
     image: docker.io/bitnami/jsonnet:0
     volumes:
