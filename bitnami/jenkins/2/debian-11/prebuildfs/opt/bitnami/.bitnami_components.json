@@ -15,7 +15,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.387.1-3"
+        "version": "2.387.2-0"
     },
     "render-template": {
         "arch": "amd64",
