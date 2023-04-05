@@ -1,6 +1,5 @@
 version: '2'
 services:
-  # [TEST]
   kapacitor:
     image: docker.io/bitnami/kapacitor:1
     volumes:
