@@ -6,9 +6,7 @@ files:
     - /opt/bitnami/fluent-bit/conf/parsers.conf
     - /opt/bitnami/fluent-bit/conf/parsers_java.conf
 directories:
-  - mode: "0755"
-    paths:
-      - /opt/bitnami/fluent-bit
+  - paths:
       - /opt/bitnami/fluent-bit/conf
       - /opt/bitnami/fluent-bit/log
 root_dir: /opt/bitnami
