@@ -1,4 +1,5 @@
 file:
+  # Check file replacements in binary scripts
   /opt/bitnami/solr/bin/solr.in.sh:
     exists: true
     filetype: file
