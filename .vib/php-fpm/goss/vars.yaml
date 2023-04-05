@@ -50,11 +50,6 @@ modules:
     - FreeType
     - JPEG
     - WebP
-  inactive:
-    - apcu
-    - imagick
-    - maxminddb
-    - xdebug
   disabled:
     - rpath
 root_dir: /opt/bitnami

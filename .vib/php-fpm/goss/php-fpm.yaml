@@ -3,18 +3,13 @@ file:
     exists: true
     filetype: symlink
     linked-to: ../etc/php.ini
+  # Checks custom config
   /opt/bitnami/php/etc/php.ini:
     exists: true
     filetype: file
     contains:
       - upload_max_filesize = 40M
       - opcache.revalidate_freq = 60
-    {{ range $module := .Vars.modules.inactive }}
-      - /;.*extension.*{{ $module }}/
-    {{ end }}
-    {{ range $module := .Vars.modules.disabled }}
-      - "!{{ $module }}"
-    {{ end }}
   /opt/bitnami/php/etc/common.conf:
     exists: true
     filetype: file
@@ -48,4 +43,7 @@ command:
     stdout:
     {{ range $module := .Vars.modules.enabled }}
       - /{{ $module }}.*enabled/
+    {{ end }}
+    {{ range $module := .Vars.modules.disabled }}
+      - "!{{ $module }}"
     {{ end }}
