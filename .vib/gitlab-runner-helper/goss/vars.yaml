@@ -1,0 +1,11 @@
+binaries:
+  - gitlab-runner-helper
+files:
+  - paths:
+      - /opt/bitnami/gitlab-runner-helper/bin/gitlab-runner-helper
+  directories:
+    - mode: "0755"
+      paths:
+        - /opt/bitnami/gitlab-runner-helper
+        - /opt/bitnami/gitlab-runner-helper/bin
+root_dir: /opt/bitnami
