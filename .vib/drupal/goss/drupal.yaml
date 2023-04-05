@@ -1,3 +1,19 @@
+command:
+  # There are no syntax error in the Apache configuration
+  check-configuration:
+    exec: apachectl -t
+    exit-status: 0
+  # Check explicitly enabled and disabled modules
+  check-loaded-modules:
+    exec: apachectl -M
+    exit-status: 0
+    stdout:
+    {{ range $module := .Vars.modules.loaded }}
+      - "{{ $module }}_module"
+    {{ end }}
+    {{ range $module := .Vars.modules.disabled }}
+      - "!{{ $module }}_module"
+    {{ end }}
 file:
   # HTTP vhost should have been properly rendered
   /opt/bitnami/apache/conf/vhosts/drupal-vhost.conf:
@@ -12,6 +28,35 @@ file:
     contains:
       - "SSLEngine on"
       - /DocumentRoot.*/opt/bitnami/drupal/
+  /opt/bitnami/apache/conf/vhosts/htaccess/drupal-htaccess.conf:
+    exists: true
+    filetype: file
+    contains:
+      - "Options -Indexes -ExecCGI -Includes -MultiViews"
+      - "SetHandler Drupal_Security_Do_Not_Remove_See_SA_2006_006"
+      - "SetHandler Drupal_Security_Do_Not_Remove_See_SA_2013_003"
+      - "php_flag engine off"
+  /opt/bitnami/drupal/sites/default/settings.php:
+    exists: true
+    filetype: file
+    contains:
+      - "$settings['trusted_host_patterns'] = array('^.*$');"
+  /opt/bitnami/php/etc/php.ini:
+    exists: true
+    filetype: file
+    contains:
+      - /^memory_limit = 256M/
+  /opt/bitnami/apache/conf/bitnami/php.conf:
+    exists: true
+    filetype: file
+    contains:
+      - "AddType application/x-httpd-php .php"
+      - "DirectoryIndex index.html index.htm index.php"
+  /opt/bitnami/apache/conf/httpd.conf:
+    exists: true
+    filetype: file
+    contains:
+      - "Include \"/opt/bitnami/apache/conf/bitnami/php.conf\""
 group:
   daemon:
     exists: true
