@@ -1,4 +1,5 @@
 version: '2'
 services:
   gitlab-runner:
+    # New change
     image: docker.io/bitnami/gitlab-runner:15
