@@ -7,4 +7,9 @@ directories:
   - mode: "0775"
     paths:
       - /app
+      - /opt/bitnami/php/bin
+files:
+  - paths:
+      - /opt/bitnami/php/bin/php
+      - /opt/bitnami/php/bin/composer
 root_dir: /opt/bitnami
