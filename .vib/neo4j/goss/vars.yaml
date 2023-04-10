@@ -25,4 +25,4 @@ directories:
 root_dir: /opt/bitnami
 version:
   bin_name: neo4j
-  flag: -V
+  flag: --version
