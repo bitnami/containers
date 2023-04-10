@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-07T11:12:09Z" \
+      org.opencontainers.image.created="2023-04-10T14:28:17Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.3.8-debian-11-r107" \
+      org.opencontainers.image.ref.name="2.3.8-debian-11-r108" \
       org.opencontainers.image.title="cassandra-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.3.8"
