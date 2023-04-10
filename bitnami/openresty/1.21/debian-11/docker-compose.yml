@@ -1,7 +1,6 @@
 version: '2'
 
 services:
-  # [TEST]
   openresty:
     image: docker.io/bitnami/openresty:1.21
     ports:
