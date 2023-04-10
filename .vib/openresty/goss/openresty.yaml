@@ -15,6 +15,7 @@ file:
     exists: true
     filetype: symlink
     linked-to: /dev/stderr
+  # Check custom configuration
   /opt/bitnami/openresty/nginx/conf/nginx.conf:
     exists: true
     filetype: file
