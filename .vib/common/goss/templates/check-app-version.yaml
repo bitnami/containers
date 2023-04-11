@@ -8,5 +8,10 @@ command:
   check-app-version:
     exec: {{ .Vars.version.bin_name }} {{ .Vars.version.flag }}
     exit-status: 0
+    {{- if and (index .Vars.version "useStderr") .Vars.version.useStderr }}
+    stderr:
+    - {{ .Env.APP_VERSION }}
+    {{- else }}
     stdout:
     - {{ .Env.APP_VERSION }}
+    {{- end }}
