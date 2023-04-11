@@ -1,6 +1,5 @@
 version: '2'
 services:
-  # [TEST]
   percona-xtrabackup:
     image: docker.io/bitnami/percona-xtrabackup:2.4
     entrypoint: sleep infinity
