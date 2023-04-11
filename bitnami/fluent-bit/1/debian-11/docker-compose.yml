@@ -1,7 +1,6 @@
 version: '2'
 
 services:
-  # [TEST]
   fluent-bit:
     image: docker.io/bitnami/fluent-bit:1
     ports:
