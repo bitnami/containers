@@ -4,7 +4,8 @@ binaries:
 directories:
   - mode: "0775"
     paths:
-      - /JENKINS_AGENT_VOLUME_DIR/home
+      - /bitnami/jenkins/home
+      - /opt/bitnami/jenkins-agent
       - /opt/bitnami/jenkins-agent/tmp
       - /opt/bitnami/jenkins-agent/logs
 files:
