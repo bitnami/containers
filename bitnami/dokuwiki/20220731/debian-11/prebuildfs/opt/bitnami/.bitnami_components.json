@@ -9,7 +9,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "20220731.1.0-11"
+        "version": "20220731.1.0-12"
     },
     "gosu": {
         "arch": "amd64",
