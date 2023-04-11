@@ -1,7 +1,6 @@
 version: '2.1'
 
 services:
-  # [TEST]
   percona-mysql:
     image: docker.io/bitnami/percona-mysql:5.7
     ports:
