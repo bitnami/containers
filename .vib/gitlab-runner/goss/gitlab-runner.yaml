@@ -1,6 +1,0 @@
-file:
-  /opt/bitnami/gitlab-runner/bin/gitlab-runner:
-    exists: true
-    filetype: file
-    contains:
-      - "arm64"

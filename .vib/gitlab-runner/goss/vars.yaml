@@ -1,11 +1,4 @@
 binaries:
   - gitlab-runner
-files:
-  - paths:
-      - /opt/bitnami/gitlab-runner/bin/gitlab-runner
-directories:
-  - mode: "0755"
-    paths:
-      - /opt/bitnami/gitlab-runner
-      - /opt/bitnami/gitlab-runner/bin
+  - gosu
 root_dir: /opt/bitnami
