@@ -1,6 +1,0 @@
-file:
-  /opt/bitnami/gitlab-runner-helper/bin/gitlab-runner-helper:
-    exists: true
-    filetype: file
-    contains:
-      - "GO_ARCH_aarch64"
