@@ -27,7 +27,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.0.1-1-5"
+        "version": "4.0.1-1-6"
     },
     "php": {
         "arch": "amd64",
