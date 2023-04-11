@@ -2,6 +2,7 @@ binaries:
   - gosu
   - ini-file
   - mysql
+  - mysqlsh
   - xtrabackup
 directories:
   - mode: "0775"
