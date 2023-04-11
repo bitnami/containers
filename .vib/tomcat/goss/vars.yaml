@@ -9,6 +9,7 @@ directories:
       - /opt/bitnami/tomcat
       - /opt/bitnami/tomcat/lib
       - /opt/bitnami/tomcat/temp
+      - /opt/bitnami/tomcat/logs
       - /opt/bitnami/tomcat/conf
       - /opt/bitnami/tomcat/work
       - /opt/bitnami/tomcat/webapps_default
