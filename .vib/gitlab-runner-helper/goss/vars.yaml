@@ -5,3 +5,6 @@ files:
   - paths:
       - /opt/bitnami/gitlab-runner-helper/bin/gitlab-runner-build
 root_dir: /opt/bitnami
+version:
+  bin_name: gitlab-runner-helper
+  flag: -v
