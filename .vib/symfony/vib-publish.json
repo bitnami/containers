@@ -40,11 +40,11 @@
             "resources": {
               "path": "/.vib"
             },
-            "tests_file": "appname/goss/goss.yaml",
-            "vars_file": "appname/goss/vars.yaml",
+            "tests_file": "symfony/goss/goss.yaml",
+            "vars_file": "symfony/goss/vars.yaml",
             "remote": {
               "pod": {
-                "workload": "deploy-appname"
+                "workload": "deploy-symfony"
               }
             }
           }
