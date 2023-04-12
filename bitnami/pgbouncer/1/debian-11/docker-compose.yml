@@ -1,5 +1,6 @@
 version: '2.1'
 services:
+  # [TEST]
   postgresql:
     image: docker.io/bitnami/postgresql:11
     volumes:
