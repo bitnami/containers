@@ -9,13 +9,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.18-10-4"
+        "version": "17.0.6-10-4"
     },
     "logstash": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.7.0-0"
+        "version": "8.7.0-1"
     },
     "yq": {
         "arch": "amd64",

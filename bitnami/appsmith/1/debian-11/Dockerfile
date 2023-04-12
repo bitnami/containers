@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-04T13:19:45Z" \
+      org.opencontainers.image.created="2023-04-09T19:07:22Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.9.13-debian-11-r1" \
+      org.opencontainers.image.ref.name="1.9.15-debian-11-r1" \
       org.opencontainers.image.title="appsmith" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.9.13"
+      org.opencontainers.image.version="1.9.15"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -30,7 +30,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "mongodb-shell-1.8.0-3-linux-${OS_ARCH}-debian-11" \
       "java-17.0.6-10-4-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
-      "appsmith-1.9.13-2-linux-${OS_ARCH}-debian-11" \
+      "appsmith-1.9.15-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,7 +48,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN /opt/bitnami/scripts/appsmith/postunpack.sh
-ENV APP_VERSION="1.9.13" \
+ENV APP_VERSION="1.9.15" \
     BITNAMI_APP_NAME="appsmith" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
