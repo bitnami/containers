@@ -29,9 +29,3 @@ file:
       - "index index.html index.htm index.php;"
       - "location ~ \\.php$|^/update.php {"
       - "fastcgi_index  index.php;"
-group:
-  daemon:
-    exists: true
-user:
-  daemon:
-    exists: true

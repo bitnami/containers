@@ -5,10 +5,6 @@ binaries:
   - php
   - render-template
   - drush
-files:
-  - paths:
-    - /opt/bitnami/drupal/sites/default/settings.php
-    - /opt/bitnami/drupal/sites/default/files/.htaccess
 directories:
   - mode: "0775"
     paths:
