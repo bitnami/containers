@@ -1,0 +1,12 @@
+command:
+  check-apache-exporter-help:
+    exec: apache_exporter --help
+    exit-status: 0
+    stderr:
+      - "usage:"
+  check-apache-exporter-run:
+    exec: timeout 2 apache_exporter
+    timeout: 5000
+    exit-status: 124
+    stderr:
+      - Starting apache_exporter
