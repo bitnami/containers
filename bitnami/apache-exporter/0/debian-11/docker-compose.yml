@@ -1,5 +1,6 @@
 version: '2'
 services:
+  # [TEST]
   apache-exporter:
     image: docker.io/bitnami/apache-exporter:0
     ports:
