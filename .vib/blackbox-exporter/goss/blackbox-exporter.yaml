@@ -1,0 +1,14 @@
+command:
+  check-blackbox-exporter-help:
+    exec: blackbox_exporter --help
+    exit-status: 0
+    stdout:
+      - "usage:"
+  check-blackbox-exporter-run:
+    exec: cd /opt/bitnami/blackbox-exporter && timeout 2 blackbox_exporter
+    timeout: 5000
+    exit-status: 124
+    stderr:
+      - Starting blackbox_exporter
+      - Loaded config file
+      - Listening on
