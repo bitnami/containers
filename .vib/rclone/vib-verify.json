@@ -36,11 +36,11 @@
             "resources": {
               "path": "/.vib"
             },
-            "tests_file": "appname/goss/goss.yaml",
-            "vars_file": "appname/goss/vars.yaml",
+            "tests_file": "rclone/goss/goss.yaml",
+            "vars_file": "rclone/goss/vars.yaml",
             "remote": {
               "pod": {
-                "workload": "deploy-appname"
+                "workload": "deploy-rclone"
               }
             }
           }
