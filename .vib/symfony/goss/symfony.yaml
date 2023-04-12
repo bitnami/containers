@@ -1,0 +1,34 @@
+command:
+  check-composer-json:
+    exec: export MINOR_VERSION=$(echo "{{ .Env.APP_VERSION }}" | cut -d "." -f-2); grep -P "\"extra\".*\"symfony\".*\"require\":\"${MINOR_VERSION}\.\*\"" /opt/bitnami/symfony/skeleton/composer.json
+    exit-status: 0
+  check-composer-help:
+    exec: composer --help
+    exit-status: 0
+  check-composer-version:
+    exec: composer --version | grep -P "(Composer|version) \d+\.\d+\.\d+"
+    exit-status: 0
+file:
+  /opt/bitnami/symfony/skeleton/symfony.lock:
+    exists: true
+    contains:
+      - symfony/webapp-pack
+  /opt/bitnami/php/etc/php.ini:
+    exists: true
+    contains:
+      - /^opcache.interned_strings_buffer = 16/
+      - /^opcache.memory_consumption = 192/
+      - /^opcache.file_cache = \/opt\/bitnami\/php\/var\/run\/opcache_file/
+      - /^upload_tmp_dir = \/opt\/bitnami\/php\/tmp/
+      - /^session.save_path = \/opt\/bitnami\/php\/var\/run\/session/
+      - /^error_log = \/dev\/stderr/
+  /opt/bitnami/php/etc/php-fpm.d/www.conf:
+    exists: true
+    contains:
+      - /^listen = \/opt\/bitnami\/php\/var\/run\/www.sock/
+  /opt/bitnami/php/logs/php-fpm.log:
+    filetype: symlink
+    exists: true
+  /opt/bitnami/symfony/skeleton/var/cache:
+    exists: false
+

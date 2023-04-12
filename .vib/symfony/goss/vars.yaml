@@ -1,0 +1,24 @@
+binaries:
+  - php
+  - composer
+  - gosu
+  - mysql
+files:
+  - paths:
+      - /opt/bitnami/symfony/skeleton/bin/console
+      - /opt/bitnami/symfony/skeleton/bin/phpunit
+      - /opt/bitnami/php/etc/common.conf.disabled
+directories:
+  - mode: "0775"
+    paths:
+      - /opt/bitnami/php/etc
+      - /opt/bitnami/php/tmp
+      - /opt/bitnami/php/var/run
+      - /opt/bitnami/php/logs
+      - /opt/bitnami/php/var/run/session
+      - /app
+      - /opt/bitnami/symfony/skeleton
+root_dir: /opt/bitnami
+version:
+  bin_name: php /opt/bitnami/symfony/skeleton/bin/console
+  flag: --version
