@@ -1,13 +1,11 @@
 binaries:
+  - gosu
   - php
   - node
+  - python
+  - wait-for-port
 directories:
   - mode: "0775"
     paths:
       - /app
-  - paths:
-      - /opt/bitnami/php/bin
-files:
-  - paths:
-      - /opt/bitnami/php/bin/php
 root_dir: /opt/bitnami
