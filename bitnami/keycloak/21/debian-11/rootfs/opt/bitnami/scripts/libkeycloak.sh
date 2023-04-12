@@ -135,7 +135,6 @@ keycloak_configure_database() {
     if [[ "${KEYCLOAK_DATABASE_VENDOR}" == "postgresql" ]]; then
         keycloak_conf_set "db" "postgres"
         keycloak_conf_set "db-username" "$KEYCLOAK_DATABASE_USER"
-        keycloak_conf_set "db-password" "$KEYCLOAK_DATABASE_PASSWORD"
         keycloak_conf_set "db-url" "jdbc:postgresql://${KEYCLOAK_DATABASE_HOST}:${KEYCLOAK_DATABASE_PORT}/${KEYCLOAK_DATABASE_NAME}?currentSchema=${KEYCLOAK_DATABASE_SCHEMA}${jdbc_params}"
     else
         keycloak_conf_set "db" "$KEYCLOAK_DATABASE_VENDOR"
