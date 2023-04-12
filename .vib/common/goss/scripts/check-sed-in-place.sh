@@ -4,7 +4,6 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-set -x
 mapfile -t files < <( find /bitnami "$BITNAMI_ROOT_DIR" -name '*.sh' )
 
 for file in "${files[@]}"; do
