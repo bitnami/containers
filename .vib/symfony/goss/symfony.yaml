@@ -3,7 +3,7 @@ command:
     exec: export MINOR_VERSION=$(echo "{{ .Env.APP_VERSION }}" | cut -d "." -f-2); grep -P "\"extra\".*\"symfony\".*\"require\":\"${MINOR_VERSION}\.\*\"" /opt/bitnami/symfony/skeleton/composer.json
     exit-status: 0
   check-composer-help:
-    exec: composer --help
+    exec: HOME="/" composer --help
     exit-status: 0
   check-composer-version:
     exec: composer --version | grep -P "(Composer|version) \d+\.\d+\.\d+"
