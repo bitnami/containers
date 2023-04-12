@@ -1,0 +1,8 @@
+command:
+  check-cassandra-exporter-jar:
+    exec: timeout 2 java -jar /opt/bitnami/cassandra-exporter/cassandra_exporter.jar /opt/bitnami/cassandra-exporter/config.yml
+    exit-status: 124
+    timeout: 5000
+    stderr:
+      - Loading yaml config
+      - Connection refused to host
