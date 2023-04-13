@@ -1,4 +1,5 @@
 version: '2'
 services:
+  # [TEST]
   aws-cli:
     image: docker.io/bitnami/aws-cli:2
