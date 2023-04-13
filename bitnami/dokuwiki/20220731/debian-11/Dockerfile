@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-11T04:40:23Z" \
+      org.opencontainers.image.created="2023-04-13T01:26:57Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="20220731.1.0-debian-11-r71" \
+      org.opencontainers.image.ref.name="20220731.1.0-debian-11-r72" \
       org.opencontainers.image.title="dokuwiki" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="20220731.1.0"
@@ -24,10 +24,10 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "php-8.1.17-4-linux-${OS_ARCH}-debian-11" \
       "apache-2.4.57-0-linux-${OS_ARCH}-debian-11" \
-      "libphp-8.1.17-5-linux-${OS_ARCH}-debian-11" \
+      "libphp-8.1.18-0-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-4-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
-      "dokuwiki-20220731.1.0-12-linux-${OS_ARCH}-debian-11" \
+      "dokuwiki-20220731.1.0-13-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
