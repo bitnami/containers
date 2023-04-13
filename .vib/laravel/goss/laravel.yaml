@@ -1,0 +1,4 @@
+command:
+  check-app-run:
+    exec: php /opt/bitnami/laravel/artisan test
+    exit-status: 0
