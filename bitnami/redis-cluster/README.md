@@ -197,6 +197,7 @@ The following env vars are supported for this container:
 | `REDIS_CLUSTER_DNS_LOOKUP_SLEEP`        | Number of seconds to wait between each node's DNS lookup during the initial cluster creation. Defaults to `1`.                                                     |
 | `REDIS_IO_THREADS`                      | Number of threads to implement multithreading operations. Defaults to `1`.                                                                                         |
 | `REDIS_IO_THREADS_DO_READS`             | Enables multithreading for read operations. Defaults to `false`.                                                                                                   |
+| `REDIS_RDB_POLICY`                      | Set this variable to enable RDB persistent storage RDB data synchronization strategy configuration example `900#1 300#10 60#1000` Defaults to disable RDB persistent storage. |
 
 Once all the Redis(R) nodes are running you need to execute command like the following to initiate the cluster:
 
