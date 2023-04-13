@@ -1,4 +1,5 @@
 command:
   check-rclone-sync:
-    exec: rclone sync /opt/bitnami/rclone/bin /tmp/RANDOM_FOLDER && [ -f /tmp/RANDOM_FOLDER/rclone ]
+    {{- $rnd_folder := printf "folder_%s" (randAlpha 5) }}
+    exec: rclone sync /opt/bitnami/rclone/bin /tmp/{{ $rnd_folder }} && [ -f /tmp/{{ $rnd_folder }}/rclone ]
     exit-status: 0
