@@ -1,6 +1,7 @@
 version: '2'
 
 services:
+  # [TEST]
   consul:
     image: docker.io/bitnami/consul:1
     volumes:
