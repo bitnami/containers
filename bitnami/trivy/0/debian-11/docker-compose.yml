@@ -1,4 +1,5 @@
 version: '2'
 services:
+  # [TEST]
   trivy:
     image: docker.io/bitnami/trivy:0
