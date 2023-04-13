@@ -5,10 +5,10 @@ ARG LOGSTASH_PLUGINS
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-10T19:49:39Z" \
+      org.opencontainers.image.created="2023-04-13T20:35:59Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.17.9-debian-11-r20" \
+      org.opencontainers.image.ref.name="7.17.9-debian-11-r21" \
       org.opencontainers.image.title="logstash" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="7.17.9"
@@ -25,7 +25,7 @@ RUN install_packages ca-certificates curl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "java-17.0.6-10-4-linux-${OS_ARCH}-debian-11" \
-      "yq-4.33.2-0-linux-${OS_ARCH}-debian-11" \
+      "yq-4.33.3-0-linux-${OS_ARCH}-debian-11" \
       "logstash-7.17.9-5-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
     ) && \
