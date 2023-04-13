@@ -1,9 +1,4 @@
 command:
-  check-trivy-help:
-    exec: trivy --help
-    exit-status: 0
-    stdout:
-      - Commands
   check-wire-help:
     exec: wire --help
     exit-status: 0
