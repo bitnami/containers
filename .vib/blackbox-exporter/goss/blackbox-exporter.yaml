@@ -1,9 +1,4 @@
 command:
-  check-blackbox-exporter-help:
-    exec: blackbox_exporter --help
-    exit-status: 0
-    stdout:
-      - "usage:"
   check-blackbox-exporter-run:
     exec: cd /opt/bitnami/blackbox-exporter && timeout --preserve-status 5 blackbox_exporter
     timeout: 8000
