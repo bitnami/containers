@@ -1,0 +1,4 @@
+command:
+  check-consul-help:
+    exec: consul --help
+    exit-status: 0
