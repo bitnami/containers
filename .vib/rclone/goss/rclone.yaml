@@ -1,0 +1,4 @@
+command:
+  check-rclone-sync:
+    exec: rclone sync /opt/bitnami/rclone/bin /tmp/RANDOM_FOLDER && [ -f /tmp/RANDOM_FOLDER/rclone ]
+    exit-status: 0
