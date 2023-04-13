@@ -1,4 +1,4 @@
 command:
   check-app-run:
-    exec: php /opt/bitnami/laravel/artisan test
+    exec: (cd /opt/bitnami/laravel/ && php artisan test)
     exit-status: 0
