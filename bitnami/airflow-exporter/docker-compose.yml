@@ -1,6 +1,5 @@
 version: '2'
 services:
-  # [TEST]
   airflow-exporter:
     image: docker.io/bitnami/airflow-exporter:0
     ports:
