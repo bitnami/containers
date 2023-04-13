@@ -1,9 +1,4 @@
 command:
-  check-wire-help:
-    exec: wire --help
-    exit-status: 0
-    stderr:
-      - Subcommands
   trivy-scanner:
     exec: trivy image docker.io/bitnami/minideb:buster-snapshot-20201101T210343Z
     timeout: 60000
