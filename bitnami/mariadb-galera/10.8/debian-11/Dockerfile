@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-28T06:34:16Z" \
+      org.opencontainers.image.created="2023-04-10T19:58:34Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="10.8.7-debian-11-r15" \
+      org.opencontainers.image.ref.name="10.8.7-debian-11-r19" \
       org.opencontainers.image.title="mariadb-galera" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="10.8.7"
@@ -22,9 +22,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl iproute2 ldap-utils libaio1 libaudit1 libcap-ng0 libcrypt1 libgcc-s1 libicu67 libldap-common liblzma5 libncurses6 libpam-ldapd libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 nslcd procps psmisc rsync socat zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "ini-file-1.4.5-2-linux-${OS_ARCH}-debian-11" \
-      "mariadb-galera-10.8.7-4-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-3-linux-${OS_ARCH}-debian-11" \
+      "ini-file-1.4.5-4-linux-${OS_ARCH}-debian-11" \
+      "mariadb-galera-10.8.7-5-linux-${OS_ARCH}-debian-11" \
+      "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \

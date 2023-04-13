@@ -557,7 +557,7 @@ kafka_configure_ssl() {
     ! is_empty_value "$KAFKA_CERTIFICATE_PASSWORD" && configure_both ssl.key.password "$KAFKA_CERTIFICATE_PASSWORD"
     if [[ "$KAFKA_TLS_TYPE" = "PEM" ]]; then
         file_to_multiline_property() {
-            awk 'NR > 1{print line" \\"}{line=$0;}END{print $0" "}' <"${1:?missing file}"
+            awk 'NR > 1{print line"\\n\\"}{line=$0;}END{print $0" "}' <"${1:?missing file}"
         }
         remove_previous_cert_value() {
             local key="${1:?missing key}"

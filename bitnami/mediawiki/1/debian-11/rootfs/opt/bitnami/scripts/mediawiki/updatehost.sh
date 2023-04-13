@@ -19,4 +19,8 @@ MEDIAWIKI_SERVER_HOST="${1:?missing host}"
 mediawiki_configure_host "$MEDIAWIKI_SERVER_HOST"
 
 # Reload PHP-FPM configuration to ensure that the home page redirects to the new domain
-/opt/bitnami/scripts/php/reload.sh
+if [[ "${BITNAMI_SERVICE_MANAGER:-}" = "systemd" ]]; then
+    systemctl reload bitnami.php-fpm.service
+else
+    /opt/bitnami/scripts/php/reload.sh
+fi

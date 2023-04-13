@@ -63,7 +63,7 @@ jobs:
           echo "::add-mask::${marketplace_passwd}"
           echo "marketplace_user=${marketplace_user}" >> $GITHUB_OUTPUT
           echo "marketplace_passwd=${marketplace_passwd}" >> $GITHUB_OUTPUT
-      - uses: vmware-labs/vmware-image-builder-action@main
+      - uses: vmware-labs/vmware-image-builder-action@v0
         name: 'Publish ${{ matrix.container.name }}: ${{ matrix.container.tag }}'
         with:
           pipeline: ${{ matrix.container.dsl_path }}/vib-publish.json
@@ -82,3 +82,4 @@ jobs:
           VIB_ENV_REGISTRY_URL: "${{ secrets.PROD_MARKETPLACE_REGISTRY_URL }}"
           VIB_ENV_REGISTRY_USERNAME: "${{ steps.get-registry-credentials.outputs.marketplace_user }}"
           VIB_ENV_REGISTRY_PASSWORD: "${{ steps.get-registry-credentials.outputs.marketplace_passwd }}"
+          VIB_ENV_BOSSD_RELEASE_ID: "${{ secrets.BOSSD_RELEASE_ID }}"

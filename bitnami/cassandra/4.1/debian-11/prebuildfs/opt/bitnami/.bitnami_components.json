@@ -3,30 +3,30 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.1.1-0"
+        "version": "4.1.1-2"
     },
     "gosu": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.0-3"
+        "version": "1.16.0-5"
     },
     "java": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.8.362-3"
+        "version": "1.8.362-4"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.9.16-8"
+        "version": "3.9.16-9"
     },
     "yq": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.33.1-0"
+        "version": "4.33.2-0"
     }
 }
