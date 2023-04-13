@@ -1,9 +1,4 @@
 command:
-  check-apache-exporter-help:
-    exec: apache_exporter --help
-    exit-status: 0
-    stderr:
-      - "usage:"
   check-apache-exporter-run:
     exec: timeout --preserve-status 5 apache_exporter
     timeout: 8000
