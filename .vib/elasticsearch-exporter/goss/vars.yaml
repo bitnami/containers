@@ -1,0 +1,6 @@
+binaries:
+  - elasticsearch_exporter
+root_dir: /opt/bitnami
+version:
+  bin_name: elasticsearch_exporter
+  flag: --version
