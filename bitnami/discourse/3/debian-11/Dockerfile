@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-10T21:10:51Z" \
+      org.opencontainers.image.created="2023-04-13T23:34:46Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.0.2-debian-11-r6" \
+      org.opencontainers.image.ref.name="3.0.2-debian-11-r7" \
       org.opencontainers.image.title="discourse" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.0.2"
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "wait-for-port-1.0.6-4-linux-${OS_ARCH}-debian-11" \
       "ruby-3.1.4-0-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-15.2.0-4-linux-${OS_ARCH}-debian-11" \
-      "node-18.15.0-3-linux-${OS_ARCH}-debian-11" \
+      "node-18.16.0-0-linux-${OS_ARCH}-debian-11" \
       "brotli-1.0.9-160-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
       "discourse-3.0.2-2-linux-${OS_ARCH}-debian-11" \
