@@ -1,0 +1,96 @@
+{
+  "context": {
+    "resources": {
+      "url": "{VIB_ENV_CONTAINER_URL}",
+      "path": "{VIB_ENV_PATH}"
+    }
+  },
+  "phases": {
+    "package": {
+      "actions": [
+        {
+          "action_id": "container-image-package",
+          "params": {
+            "application": {
+              "details": {
+                "name": "{VIB_ENV_CONTAINER}",
+                "tag": "{VIB_ENV_TAG}"
+              }
+            },
+            "architectures": [
+              "linux/amd64",
+              "linux/arm64"
+            ]
+          }
+        },
+        {
+          "action_id": "container-image-lint",
+          "params": {
+            "threshold": "error"
+          }
+        }
+      ]
+    },
+    "verify": {
+      "actions": [
+        {
+          "action_id": "trivy",
+          "params": {
+            "threshold": "CRITICAL",
+            "vuln_type": [
+              "OS"
+            ]
+          }
+        },
+        {
+          "action_id": "grype",
+          "params": {
+            "threshold": "CRITICAL",
+            "package_type": [
+              "OS"
+            ]
+          }
+        },
+        {
+          "action_id": "osspi-application",
+          "params": {
+            "additional_packages_file": "{VIB_ENV_PATH}/osspi-packages.json",
+            "scan_type": "BASE_OS",
+            "osm": {
+              "product_name": "main-catalog-{VIB_ENV_CONTAINER}",
+              "product_version": "{VIB_ENV_APP_VERSION}-{VIB_ENV_OS_FLAVOUR}-container"
+            },
+            "resources": {
+              "url": "{VIB_ENV_PACKAGES_JSON_URL}",
+              "path": "/",
+              "authn": {
+                  "header": "Authorization",
+                  "token": "Bearer {VIB_ENV_GITHUB_TOKEN}"
+                }
+            }
+          }
+        }
+      ]
+    },
+    "publish": {
+      "actions": [
+        {
+          "action_id": "container-image-publish",
+          "params": {
+            "metadata": {
+              "tags": {VIB_ENV_ROLLING_TAGS}
+            },
+            "repository": {
+              "kind": "OCI",
+              "url": "{VIB_ENV_REGISTRY_URL}",
+              "authn": {
+                "username": "{VIB_ENV_REGISTRY_USERNAME}",
+                "password":  "{VIB_ENV_REGISTRY_PASSWORD}"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
