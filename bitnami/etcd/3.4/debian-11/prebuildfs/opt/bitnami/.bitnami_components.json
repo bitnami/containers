@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.4.24-4"
+        "version": "3.4.25-0"
     },
     "gosu": {
         "arch": "amd64",
