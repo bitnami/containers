@@ -1,5 +1,6 @@
 version: '2'
 services:
+  # [TEST]
   nats-exporter:
     image: docker.io/bitnami/nats-exporter:0
     ports:
