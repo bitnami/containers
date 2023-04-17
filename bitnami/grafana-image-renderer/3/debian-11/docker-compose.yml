@@ -2,6 +2,7 @@ version: '2'
 
 services:
   grafana-image-renderer:
+    # New change
     image: docker.io/bitnami/grafana-image-renderer:3
     ports:
       - '8080:8080'
