@@ -1,0 +1,9 @@
+binaries:
+  - harbor_jobservice
+  - gosu
+  - yq
+directories:
+  - mode: "0775"
+    paths:
+      - /var/log/jobs
+root_dir: /opt/bitnami

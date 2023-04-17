@@ -1,0 +1,17 @@
+group:
+  daemon:
+    exists: true
+user:
+  daemon:
+    exists: true
+command:
+  check-system-cert-paths:
+    exec: if (test -d /etc/ssl/certs/ && (ls -ld /etc/ssl/certs/ | cut --delimiter=' ' --fields=3 | grep 'harbor') && (ls -ld /etc/ssl/certs/ | cut --delimiter=' ' --fields=1 | grep 'drwxrwxr-x')); then echo "Directory exists"; fi || if (test -d /etc/pki/tls/certs/ && (ls -ld /etc/pki/tls/certs/ | cut --delimiter=' ' --fields=3 | grep 'harbor') && (ls -ld /etc/pki/tls/certs/ | cut --delimiter=' ' --fields=1 | grep 'drwxrwxr-x')); then echo "Directory exists"; fi
+    exit-status: 0
+    stdout:
+      - "Directory exists"
+  check-permissions-system-certs:
+    exec: if (test -f /etc/ssl/certs/ca-certificates.crt && (ls -ld /etc/ssl/certs/ca-certificates.crt | cut --delimiter=' ' --fields=3 | grep 'harbor')); then echo "File exists"; fi || if (test -f /etc/pki/tls/certs/ca-bundle.crt && (ls -ld /etc/pki/tls/certs/ca-bundle.crt | cut --delimiter=' ' --fields=3 | grep 'harbor')); then echo "File exists"; fi || if (test -f /etc/pki/tls/certs/ca-bundle.trust.crt && (ls -ld /etc/pki/tls/certs/ca-bundle.trust.crt | cut --delimiter=' ' --fields=3 | grep 'harbor')); then echo "File exists"; fi
+    exit-status: 0
+    stdout:
+      - "File exists"
