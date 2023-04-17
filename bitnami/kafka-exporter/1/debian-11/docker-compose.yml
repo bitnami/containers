@@ -1,6 +1,5 @@
 version: '2'
 services:
-  # [TEST]
   kafka-exporter:
     image: docker.io/bitnami/kafka-exporter:1
     ports:
