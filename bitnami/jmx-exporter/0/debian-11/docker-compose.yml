@@ -1,6 +1,5 @@
 version: '2'
 services:
-  # [TEST]
   jmx-exporter:
     image: docker.io/bitnami/jmx-exporter:0
     ports:
