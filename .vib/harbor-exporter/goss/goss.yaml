@@ -1,6 +1,6 @@
 gossfile:
   # Goss tests exclusive to the current container
-  ../../harbor-exporter/goss/harbor-exporter.yaml: { }
+  ../../harbor-exporter/goss/harbor-exporter.yaml: {}
   # Load scripts from .vib/common/goss/templates
   ../../common/goss/templates/check-binaries.yaml: {}
   ../../common/goss/templates/check-broken-symlinks.yaml: {}
