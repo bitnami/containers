@@ -1,6 +1,7 @@
 version: '2'
 
 services:
+  # [TEST]
   postgres-exporter:
     image: docker.io/bitnami/postgres-exporter:0
     environment:
