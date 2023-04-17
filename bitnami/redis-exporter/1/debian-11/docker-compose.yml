@@ -1,6 +1,5 @@
 version: '2'
 
 services:
-  # [TEST]
   redis-exporter:
     image: docker.io/bitnami/redis-exporter:1
