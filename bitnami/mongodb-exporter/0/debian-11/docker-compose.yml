@@ -1,6 +1,5 @@
 version: '2'
 services:
-  # [TEST]
   mongodb-exporter:
     image: docker.io/bitnami/mongodb-exporter:0
     ports:
