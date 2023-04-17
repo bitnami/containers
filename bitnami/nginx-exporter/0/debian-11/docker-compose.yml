@@ -1,6 +1,5 @@
 version: '2'
 services:
-  # [TEST]
   nginx-exporter:
     image: docker.io/bitnami/nginx-exporter:0
     ports:
