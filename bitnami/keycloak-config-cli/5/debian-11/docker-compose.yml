@@ -1,4 +1,5 @@
 version: '2'
 services:
+  # [TEST]
   keycloak-config-cli:
     image: docker.io/bitnami/keycloak-config-cli:5
