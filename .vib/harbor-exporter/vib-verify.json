@@ -30,22 +30,21 @@
     },
     "verify": {
       "actions": [
-        "actions": [
-          {
-            "action_id": "goss",
-            "params": {
-              "resources": {
-                "path": "/.vib"
-              },
-              "tests_file": "harbor-exporter/goss/goss.yaml",
-              "vars_file": "harbor-exporter/goss/vars.yaml",
-              "remote": {
-                "pod": {
-                  "workload": "deploy-harbor-exporter"
-                }
+        {
+          "action_id": "goss",
+          "params": {
+            "resources": {
+              "path": "/.vib"
+            },
+            "tests_file": "harbor-exporter/goss/goss.yaml",
+            "vars_file": "harbor-exporter/goss/vars.yaml",
+            "remote": {
+              "pod": {
+                "workload": "deploy-harbor-exporter"
               }
             }
-          },
+          }
+        },
         {
           "action_id": "trivy",
           "params": {
@@ -65,6 +64,6 @@
           }
         }
       ]
-    }
+    },
   }
 }
