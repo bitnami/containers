@@ -1,8 +1,14 @@
 binaries:
-  - grafana-image-renderer
   - node
   - python
+directories:
+  - mode: "0755"
+    paths:
+      - /opt/bitnami/grafana-image-renderer/build
+      - /opt/bitnami/grafana-image-renderer/node_modules
+      - /opt/bitnami/grafana-image-renderer/proto
 files:
   - paths:
       - /opt/bitnami/grafana-image-renderer/conf/config.json
+      - /opt/bitnami/grafana-image-renderer/plugin.json
 root_dir: /opt/bitnami
