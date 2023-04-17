@@ -1,6 +1,5 @@
 version: '2'
 services:
-  # [TEST]
   redis-node-0:
     image: docker.io/bitnami/redis-cluster:7.0
     volumes:
