@@ -6,16 +6,18 @@ binaries:
 files:
   - mode: "0664"
     paths:
+      - /opt/bitnami/reportserver/.componentsSkip
       - /opt/bitnami/reportserver/WEB-INF/classes/persistence.properties
       - /opt/bitnami/reportserver/WEB-INF/classes/reportserver.properties
       - /opt/bitnami/reportserver/WEB-INF/classes/rsinit.properties
-      - /opt/bitnami/reportserver/WEB-INF/web.xml
 directories:
   - mode: "0775"
     paths:
       - /bitnami/tomcat/webapps
       - /opt/bitnami/reportserver
-      - /opt/bitnami/reportserver/WEB-INF/classes
-      - /opt/bitnami/reportserver/WEB-INF/deploy
-      - /opt/bitnami/reportserver/WEB-INF/lib
 root_dir: /opt/bitnami
+webapp_folders:
+  - /bitnami/tomcat/host-manager
+  - /bitnami/tomcat/webapps/docs
+  - /bitnami/tomcat/webapps/examples
+  - /bitnami/tomcat/webapps/manager

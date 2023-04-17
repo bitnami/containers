@@ -1,0 +1,22 @@
+command:
+  check-version:
+    exec: cat /opt/bitnami/reportserver/WEB-INF/classes/rsversion.properties
+    exit-status: 0
+    stdout:
+      - {{ .Env.APP_VERSION }}
+user:
+  tomcat:
+    exists: true
+group:
+  root:
+    exists: true
+file:
+  /opt/bitnami/reportserver:
+    filetype: directory
+    exists: true
+    owner: tomcat
+    group: root
+  {{ range $webapp_path := .Vars.webapp_folders }}
+  {{ $webapp_path }}:
+    exists: false
+  {{ end }}
