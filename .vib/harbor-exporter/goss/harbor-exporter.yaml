@@ -1,0 +1,10 @@
+group:
+  daemon:
+    exists: true
+user:
+  daemon:
+    exists: true
+command:
+  check-run-app:
+    exec: harbor_exporter --help
+    exit-status: 0

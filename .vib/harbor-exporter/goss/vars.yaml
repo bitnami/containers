@@ -1,0 +1,8 @@
+binaries:
+  - harbor_exporter
+  - gosu
+directories:
+  - mode: "0775"
+    paths:
+      - /var/log/jobs
+root_dir: /opt/bitnami
