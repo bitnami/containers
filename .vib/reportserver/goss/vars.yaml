@@ -4,7 +4,6 @@ binaries:
   - mysql
   - render-template
 files:
-  - mode: "0664"
     paths:
       - /opt/bitnami/reportserver/.componentsSkip
       - /opt/bitnami/reportserver/WEB-INF/classes/persistence.properties
