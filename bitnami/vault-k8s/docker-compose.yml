@@ -1,0 +1,5 @@
+version: '2'
+
+services:
+  vault-k8s:
+    image: docker.io/bitnami/vault-k8s:1
