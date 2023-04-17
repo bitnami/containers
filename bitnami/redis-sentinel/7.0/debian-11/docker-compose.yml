@@ -1,6 +1,7 @@
 version: '2'
 
 services:
+  # [TEST]
   redis-sentinel:
     image: docker.io/bitnami/redis-sentinel:7.0
     volumes:
