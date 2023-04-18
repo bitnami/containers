@@ -16,7 +16,7 @@ directories:
       - /opt/bitnami/reportserver
 root_dir: /opt/bitnami
 webapp_folders:
-  - /bitnami/tomcat/host-manager
+  - /bitnami/tomcat/webapps/host-manager
   - /bitnami/tomcat/webapps/docs
   - /bitnami/tomcat/webapps/examples
   - /bitnami/tomcat/webapps/manager

@@ -8,14 +8,10 @@ user:
   tomcat:
     exists: true
 group:
-  root:
+  tomcat:
     exists: true
 file:
-  /opt/bitnami/reportserver:
-    filetype: directory
-    exists: true
-    owner: tomcat
-    group: root
+  # Checking the default webapp subfolders have been removed in the postunpack phase
   {{ range $webapp_path := .Vars.webapp_folders }}
   {{ $webapp_path }}:
     exists: false
