@@ -4,3 +4,6 @@ command:
     exit-status: 0
     stdout:
       - {{ .Env.APP_VERSION }}
+  check-build-app:
+    exec: timeout --preserve-status 3 node /opt/bitnami/grafana-image-renderer/build/app.js server --config=/opt/bitnami/grafana-image-renderer/conf/config.json
+    exit-status: 143

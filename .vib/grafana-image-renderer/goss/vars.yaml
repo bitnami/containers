@@ -2,8 +2,7 @@ binaries:
   - node
   - python
 directories:
-  - mode: "0755"
-    paths:
+  - paths:
       - /opt/bitnami/grafana-image-renderer/build
       - /opt/bitnami/grafana-image-renderer/node_modules
       - /opt/bitnami/grafana-image-renderer/proto
