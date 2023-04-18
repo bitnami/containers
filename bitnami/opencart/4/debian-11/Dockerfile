@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-17T23:00:58Z" \
+      org.opencontainers.image.created="2023-04-18T19:06:17Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.0.2-0-debian-11-r0" \
+      org.opencontainers.image.ref.name="4.0.2-1-debian-11-r0" \
       org.opencontainers.image.title="opencart" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="4.0.2-0"
+      org.opencontainers.image.version="4.0.2-1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -27,7 +27,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "mysql-client-10.6.12-4-linux-${OS_ARCH}-debian-11" \
       "libphp-8.1.18-0-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-4-linux-${OS_ARCH}-debian-11" \
-      "opencart-4.0.2-0-0-linux-${OS_ARCH}-debian-11" \
+      "opencart-4.0.2-1-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -51,7 +51,7 @@ RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/opencart/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="4.0.2-0" \
+    APP_VERSION="4.0.2-1" \
     BITNAMI_APP_NAME="opencart" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
