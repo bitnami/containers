@@ -6,5 +6,7 @@ directories:
   - mode: "0775"
     paths:
       - /var/log/jobs
+  - mode: "0755"
+    paths:
       - /etc/jobservice
 root_dir: /opt/bitnami
