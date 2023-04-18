@@ -1,6 +1,5 @@
 version: '2'
 services:
-  # [TEST]
   mysqld-exporter:
     image: docker.io/bitnami/mysqld-exporter:0
     ports:
