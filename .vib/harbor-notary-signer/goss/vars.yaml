@@ -1,5 +1,5 @@
 binaries:
-  - harbor-notary-signer
+  - notary-signer
   - gosu
 directories:
   - mode: "0775"
