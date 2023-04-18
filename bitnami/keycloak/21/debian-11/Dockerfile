@@ -4,10 +4,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-15T21:17:09Z" \
+      org.opencontainers.image.created="2023-04-18T22:35:13Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="21.0.2-debian-11-r5" \
+      org.opencontainers.image.ref.name="21.0.2-debian-11-r6" \
       org.opencontainers.image.title="keycloak" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="21.0.2"
