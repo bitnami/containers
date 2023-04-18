@@ -4,3 +4,10 @@ group:
 user:
   daemon:
     exists: true
+command:
+  check-app-run:
+    exec: notary-signer -h
+    exit-status: 0
+  check-user-harbor:
+    exec: if (test -d /etc/notary && (ls -ld /etc/notary | cut --delimiter=' ' --fields=3 | grep 'harbor')
+    exit-status: 0
