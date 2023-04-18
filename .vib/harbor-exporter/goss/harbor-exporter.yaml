@@ -1,9 +1,9 @@
 group:
   daemon:
-    exists: true
+    harbor: true
 user:
   daemon:
-    exists: true
+    harbor: true
 command:
   check-system-cert-paths:
     exec: if (test -d /etc/ssl/certs/ && (ls -ld /etc/ssl/certs/ | cut --delimiter=' ' --fields=3 | grep 'harbor') && (ls -ld /etc/ssl/certs/ | cut --delimiter=' ' --fields=1 | grep 'drwxrwxr-x')); then echo "Directory exists"; fi || if (test -d /etc/pki/tls/certs/ && (ls -ld /etc/pki/tls/certs/ | cut --delimiter=' ' --fields=3 | grep 'harbor') && (ls -ld /etc/pki/tls/certs/ | cut --delimiter=' ' --fields=1 | grep 'drwxrwxr-x')); then echo "Directory exists"; fi
