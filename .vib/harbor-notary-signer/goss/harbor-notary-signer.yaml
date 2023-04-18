@@ -9,7 +9,5 @@ command:
     exec: notary-signer --help
     exit-status: 2
   check-correct-user:
-    exec: if (test -d /etc/notary && (ls -ld /etc/notary | cut --delimiter=' ' --fields=3 | grep 'harbor')); then echo "Directory with correct user"; fi
+    exec: ls -dl /etc/notary 2>/dev/null | grep ".*harbor"
     exit-status: 0
-    stdout:
-      - "Directory with correct user"
