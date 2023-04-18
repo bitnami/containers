@@ -1,0 +1,8 @@
+binaries:
+  - harbor-notary-signer
+  - gosu
+directories:
+  - mode: "0775"
+    paths:
+      - /etc/notary
+root_dir: /opt/bitnami
