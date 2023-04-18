@@ -1,8 +1,8 @@
 group:
-  daemon:
+  harbor:
     exists: true
 user:
-  daemon:
+  harbor:
     exists: true
 command:
   check-app-run:
