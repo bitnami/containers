@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-17T16:25:18Z" \
+      org.opencontainers.image.created="2023-04-18T17:25:20Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.2.0-debian-11-r9" \
+      org.opencontainers.image.ref.name="6.2.0-debian-11-r10" \
       org.opencontainers.image.title="wordpress-nginx" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="6.2.0"
@@ -25,7 +25,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "php-8.1.18-0-linux-${OS_ARCH}-debian-11" \
       "nginx-1.23.4-3-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.12-4-linux-${OS_ARCH}-debian-11" \
-      "wordpress-6.2.0-7-linux-${OS_ARCH}-debian-11" \
+      "wordpress-6.2.0-8-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-4-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
     ) && \
