@@ -1,5 +1,4 @@
 binaries:
-
   - mysql
   - psql
   - ruby
