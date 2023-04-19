@@ -1,0 +1,17 @@
+command:
+  check-discourse-plugin-install:
+    exec: cd /opt/bitnami/discourse; if [[ ! -d "plugins/discourse-voting" ]]; then RAILS_ENV=production bundle exec rake plugin:install repo=https://github.com/discourse/discourse-voting/; fi
+    exit-status: 0
+file:
+  /opt/bitnami/discourse/.image_optim.yml:
+    exists: true
+    filetype: file
+    contains:
+      - "!timeout:"
+      - "svgo: false"
+group:
+  discourse:
+    exists: true
+user:
+  discourse:
+    exists: true
