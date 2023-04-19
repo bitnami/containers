@@ -1,6 +1,5 @@
 version: '2'
 services:
-  # [TEST]
   consul-exporter:
     image: docker.io/bitnami/consul-exporter:0
     ports:
