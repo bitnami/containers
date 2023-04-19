@@ -1,6 +1,5 @@
 binaries:
   - cypher-shell
-  - gosu
   - java
   - neo4j
   - neo4j-admin
