@@ -33,7 +33,7 @@ mastodon_validate() {
         error_code=1
     }
     check_empty_value() {
-        if [[ ! -v "$1" ]] || is_empty_value "${!1}"; then
+        if is_empty_value "${!1}"; then
             print_validation_error "${1} must be set"
         fi
     }
