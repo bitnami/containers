@@ -13,3 +13,11 @@ command:
   check-permissions-system-certs:
     exec: ls -l /etc/pki/tls/certs/ca-bundle.crt /etc/pki/tls/certs/ca-bundle.trust.crt /etc/ssl/certs/ca-certificates.crt 2>/dev/null | grep ".*-rw-rw-r--.*harbor"
     exit-status: 0
+  check-harbor-registryctl-binary:
+    exec: harbor_registryctl --help
+    exit-status: 0
+  check-app-version:
+    exec: registry --version | grep -o "[0-9]*\.[0-9]*\.[0-9]"
+    exit-status: 0
+    stdout:
+      - {{ .Env.APP_VERSION }}

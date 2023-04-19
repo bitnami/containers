@@ -1,6 +1,6 @@
 binaries:
   - yq
-  - harbor-registry
+  - registry
   - harbor_registryctl
 directories:
   - paths:
