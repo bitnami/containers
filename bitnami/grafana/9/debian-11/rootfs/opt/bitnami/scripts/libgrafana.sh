@@ -239,7 +239,7 @@ grafana_start_bg() {
 
     info "Starting Grafana in background"
     if am_i_root; then
-        debug_execute gosu "$GRAFANA_DAEMON_USER" "$cmd" "${args[@]}" &
+        debug_execute run_as_user "$GRAFANA_DAEMON_USER" "$cmd" "${args[@]}" &
     else
         debug_execute "$cmd" "${args[@]}" &
     fi
