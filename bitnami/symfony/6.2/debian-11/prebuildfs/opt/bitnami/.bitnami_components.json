@@ -15,12 +15,12 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.17-4"
+        "version": "8.1.18-0"
     },
     "symfony": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.2.8-0"
+        "version": "6.2.9-0"
     }
 }

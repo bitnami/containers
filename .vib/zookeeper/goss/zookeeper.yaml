@@ -1,0 +1,4 @@
+command:
+  check-custom-daemon-config:
+    exec: cat /opt/bitnami/zookeeper/bin/zkServer.sh | grep -q '_ZOO_DAEMON_OUT=$ZOO_LOG_DIR/zookeeper.out'
+    exit-status: 0

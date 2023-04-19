@@ -9,19 +9,19 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.0.6-0"
+        "version": "10.1.1-0"
     },
     "node": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.15.0-3"
+        "version": "18.16.0-0"
     },
     "php": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.17-4"
+        "version": "8.1.18-0"
     },
     "python": {
         "arch": "amd64",
