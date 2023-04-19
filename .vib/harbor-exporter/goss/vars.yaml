@@ -1,6 +1,5 @@
 binaries:
   - harbor_exporter
-  - gosu
 directories:
   - mode: "0775"
     paths:
