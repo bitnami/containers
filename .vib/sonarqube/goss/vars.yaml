@@ -1,5 +1,4 @@
 binaries:
-  - gosu
   - java
   - psql
 directories:

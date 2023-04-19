@@ -1,5 +1,4 @@
 binaries:
-  - gosu
   - ini-file
   - mysql
   - mysql_config

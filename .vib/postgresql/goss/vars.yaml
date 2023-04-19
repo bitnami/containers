@@ -1,5 +1,5 @@
 binaries:
-  - gosu
+
   - postgres
   - psql
   - pg_dump
