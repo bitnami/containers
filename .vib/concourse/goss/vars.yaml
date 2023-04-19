@@ -1,0 +1,11 @@
+binaries:
+  - concourse
+  - fly
+directories:
+  - paths:
+      - /opt/bitnami/concourse
+      - /opt/bitnami/concourse/fly-assets
+version:
+  bin_name: concourse
+  flag: --version
+root_dir: /opt/bitnami
