@@ -33,7 +33,7 @@ cmd+=("$@")
 
 info "** Starting etcd **"
 if am_i_root; then
-    exec gosu "$ETCD_DAEMON_USER" "${cmd[@]}"
+    exec_as_user "$ETCD_DAEMON_USER" "${cmd[@]}"
 else
     exec "${cmd[@]}"
 fi
