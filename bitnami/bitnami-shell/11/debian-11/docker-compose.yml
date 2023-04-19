@@ -1,5 +1,4 @@
 version: '2'
 services:
-  # [TEST]
   bitnami-shell:
     image: docker.io/bitnami/bitnami-shell:11
