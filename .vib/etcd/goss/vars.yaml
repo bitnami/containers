@@ -1,0 +1,17 @@
+binaries:
+  - yq
+  - etcd
+  - etcdctl
+  - etcdutl
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/etcd/data
+      - /opt/bitnami/etcd/certs
+  - mode: "0755"
+    paths:
+      - /opt/bitnami/etcd/bin
+root_dir: /opt/bitnami
+version:
+  bin_name: etcd
+  flag: --version
