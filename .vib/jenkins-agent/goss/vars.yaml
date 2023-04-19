@@ -1,5 +1,4 @@
 binaries:
-  - gosu
   - java
 directories:
   - mode: "0775"

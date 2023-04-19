@@ -1,5 +1,4 @@
 binaries:
-  - gosu
   - java
   - kafka-server-start.sh
   - render-template
