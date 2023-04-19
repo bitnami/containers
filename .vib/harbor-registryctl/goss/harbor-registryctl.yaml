@@ -4,10 +4,21 @@ group:
 user:
   harbor:
     exists: true
+file:
+  /var/lib/registry:
+    exists: true
+    mode: "0775"
+    owner: harbor
+    filetype: directory
+  /storage:
+    exists: true
+    mode: "0775"
+    owner: harbor
+    filetype: directory
 command:
   # Ensure a set of directories exist and the non-root user has write privileges to them
   check-directories-exist-with-user:
-    exec: ls -dl /etc/ssl/certs /etc/pki/tls/certs/ /var/lib/registry /storage 2>/dev/null | grep "drwxrwxr-x.*harbor"
+    exec: ls -dl /etc/ssl/certs /etc/pki/tls/certs/ 2>/dev/null | grep "drwxrwxr-x.*harbor"
     exit-status: 0
   # Ensure permissions for Internal TLS
   check-permissions-system-certs:
