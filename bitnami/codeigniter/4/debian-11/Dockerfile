@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-16T16:27:33Z" \
+      org.opencontainers.image.created="2023-04-19T19:39:05Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.3.3-debian-11-r6" \
+      org.opencontainers.image.ref.name="4.3.3-debian-11-r7" \
       org.opencontainers.image.title="codeigniter" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="4.3.3"
@@ -23,7 +23,6 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "php-8.1.18-0-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.12-4-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
       "codeigniter-4.3.3-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -45,7 +44,7 @@ RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
 ENV APP_VERSION="4.3.3" \
     BITNAMI_APP_NAME="codeigniter" \
-    PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/codeigniter/bin:$PATH" \
+    PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/codeigniter/bin:$PATH" \
     PHP_ENABLE_OPCACHE="0"
 
 EXPOSE 8000
