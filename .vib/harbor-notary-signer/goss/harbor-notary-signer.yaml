@@ -8,6 +8,7 @@ command:
   check-app-run:
     exec: notary-signer --help
     exit-status: 2
+  # Ensure that the user assigned to the directory is correct
   check-correct-user:
     exec: ls -dl /etc/notary 2>/dev/null | grep ".*harbor"
     exit-status: 0
