@@ -18,7 +18,7 @@ args=("--pid" "$AIRFLOW_PID_FILE" "$@")
 
 info "** Starting Airflow **"
 if am_i_root; then
-    exec gosu "$AIRFLOW_DAEMON_USER" "${AIRFLOW_BIN_DIR}/airflow" "scheduler" "${args[@]}"
+    exec_as_user "$AIRFLOW_DAEMON_USER" "${AIRFLOW_BIN_DIR}/airflow" "scheduler" "${args[@]}"
 else
     exec "${AIRFLOW_BIN_DIR}/airflow" "scheduler" "${args[@]}"
 fi

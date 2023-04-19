@@ -22,6 +22,7 @@ if ! am_i_root && [[ -e "$LIBNSS_WRAPPER_PATH" ]]; then
     echo "airflow:x:$(id -g):" > "$NSS_WRAPPER_GROUP"
 
     export LD_PRELOAD="$LIBNSS_WRAPPER_PATH"
+    export HOME="$AIRFLOW_HOME"
 fi
 
 # Install custom python package if requirements.txt is present
