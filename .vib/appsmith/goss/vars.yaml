@@ -1,0 +1,27 @@
+binaries:
+  - java
+  - mongosh
+  - nginx
+  - node
+  - python
+  - render-template
+  - wait-for-port
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/appsmith
+      - /opt/bitnami/appsmith/conf
+      - /opt/bitnami/appsmith/logs
+      - /opt/bitnami/appsmith/tmp
+  - paths:
+      - /opt/bitnami/appsmith/backend/plugins
+      - /opt/bitnami/appsmith/editor
+      - /opt/bitnami/appsmith/templates/client
+files:
+  - paths:
+      - /opt/bitnami/appsmith/conf/docker.env
+      - /opt/bitnami/appsmith/editor/index.html
+sed_in_place:
+  exclude_paths:
+    - /opt/bitnami/appsmith/rts/node_modules
+root_dir: /opt/bitnami

@@ -12,5 +12,5 @@ command:
         {{ $exclude_paths = (.Vars.linked_libraries.exclude_paths | join "|") }}
     {{ end }}
     exec: export BITNAMI_ROOT_DIR={{ .Vars.root_dir }} && export EXCLUDE_PATHS='{{ $exclude_paths }}' && ./common/goss/scripts/check-linked-libraries.sh
-    timeout: 20000
+    timeout: 45000
     exit-status: 0
