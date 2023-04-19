@@ -1,6 +1,5 @@
 version: '2'
 services:
-  # [TEST]
   neo4j:
     image: docker.io/bitnami/neo4j:4
     ports:
