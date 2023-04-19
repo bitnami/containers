@@ -11,6 +11,7 @@ directories:
   - mode: "0775"
     paths:
       - /app
+      - /opt/bitnami/symfony
       - /opt/bitnami/symfony/skeleton
 root_dir: /opt/bitnami
 version:
