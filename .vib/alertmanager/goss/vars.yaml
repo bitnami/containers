@@ -1,0 +1,11 @@
+binaries:
+  - alertmanager
+  - amtool
+directories:
+  - paths:
+      - /opt/bitnami/alertmanager
+      - /opt/bitnami/alertmanager/conf
+files:
+  - paths:
+      - /opt/bitnami/alertmanager/conf/config.yml
+root_dir: /opt/bitnami
