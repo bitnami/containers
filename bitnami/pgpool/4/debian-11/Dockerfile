@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-16T23:03:28Z" \
+      org.opencontainers.image.created="2023-04-19T23:21:42Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.4.2-debian-11-r24" \
+      org.opencontainers.image.ref.name="4.4.2-debian-11-r25" \
       org.opencontainers.image.title="pgpool" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="4.4.2"
@@ -23,9 +23,8 @@ RUN install_packages ca-certificates curl ldap-utils libaudit1 libbsd0 libcap-ng
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "postgresql-client-14.7.0-4-linux-${OS_ARCH}-debian-11" \
-      "wait-for-port-1.0.6-4-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.6-6-linux-${OS_ARCH}-debian-11" \
       "pgpool-4.4.2-5-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
