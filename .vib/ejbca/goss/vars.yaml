@@ -2,9 +2,9 @@ binaries:
   - java
   - jboss-cli.sh
   - mysql
-  - ejbca
+  - ejbca.sh
 files:
-  - mode: "664"
+  - mode: "0664"
     paths:
       - /opt/bitnami/wildfly/bin/standalone.conf
 directories:
