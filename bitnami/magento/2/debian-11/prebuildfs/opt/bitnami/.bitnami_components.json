@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.4.56-5"
+        "version": "2.4.57-3"
     },
     "gosu": {
         "arch": "amd64",
@@ -15,7 +15,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.17-4"
+        "version": "8.1.18-0"
     },
     "magento": {
         "arch": "amd64",
@@ -33,7 +33,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.17-4"
+        "version": "8.1.18-0"
     },
     "render-template": {
         "arch": "amd64",

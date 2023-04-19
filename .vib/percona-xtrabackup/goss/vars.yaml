@@ -1,0 +1,9 @@
+binaries:
+  - xtrabackup
+root_dir: /opt/bitnami
+sed_in_place:
+  exclude_paths:
+    - /opt/bitnami/mysql/xtrabackup-test/t
+version:
+  bin_name: xtrabackup
+  flag: --version
