@@ -8,3 +8,10 @@ file:
     filetype: file
     contains:
       - /kafkastore.bootstrap.servers.*9092/
+command:
+  check-schema-registry-initialization:
+    exec: timeout --preserve-status 5 /opt/bitnami/schema-registry/bin/schema-registry-start /opt/bitnami/schema-registry/etc/schema-registry/schema-registry.properties.default
+    exit-status: 143
+    timeout: 10000
+    stdout:
+      - Adding listener
