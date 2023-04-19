@@ -13,8 +13,9 @@ file:
     contains:
       - /^listen = \/opt\/bitnami\/php\/var\/run\/www.sock/
   /opt/bitnami/php/logs/php-fpm.log:
-    filetype: symlink
     exists: true
+    filetype: symlink
+    linked-to: /dev/stdout
   /opt/bitnami/php/etc/common.conf.disabled:
     exists: true
     filetype: file
