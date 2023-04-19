@@ -7,7 +7,6 @@ binaries:
   - wp
 files:
   - paths:
-    - /opt/bitnami/nginx/conf/bitnami/php-fpm.conf
     - /opt/bitnami/wordpress/wp-config.php
 directories:
   - mode: "0775"
