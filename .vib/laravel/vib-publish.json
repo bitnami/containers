@@ -34,22 +34,21 @@
     },
     "verify": {
       "actions": [
-        "actions": [
-          {
-            "action_id": "goss",
-            "params": {
-              "resources": {
-                "path": "/.vib"
-              },
-              "tests_file": "laravel/goss/goss.yaml",
-              "vars_file": "laravel/goss/vars.yaml",
-              "remote": {
-                "pod": {
-                  "workload": "deploy-laravel"
-                }
+        {
+          "action_id": "goss",
+          "params": {
+            "resources": {
+              "path": "/.vib"
+            },
+            "tests_file": "laravel/goss/goss.yaml",
+            "vars_file": "laravel/goss/vars.yaml",
+            "remote": {
+              "pod": {
+                "workload": "deploy-laravel"
               }
             }
-          },
+          }
+        },
         {
           "action_id": "trivy",
           "params": {
