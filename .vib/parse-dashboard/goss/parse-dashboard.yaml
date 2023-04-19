@@ -1,0 +1,12 @@
+group:
+  parsedashboard:
+    exists: true
+user:
+  parsedashboard:
+    exists: true
+command:
+  check-app-version:
+    exec: rgrep "version" /opt/bitnami/parse-dashboard
+    exit-status: 0
+    stdout:
+      - {{ .Env.APP_VERSION }}
