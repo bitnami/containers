@@ -1,5 +1,6 @@
 version: '2'
 services:
+  # [TEST]
   dokuwiki:
     image: docker.io/bitnami/dokuwiki:20220731
     ports:
