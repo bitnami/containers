@@ -1,6 +1,6 @@
 command:
   # Check explicitly enabled and disabled modules
-  check-loaded-modules:
+  check-apache-libphp-loaded-modules:
     exec: apachectl -M
     exit-status: 0
     stdout:
@@ -13,3 +13,9 @@ file:
     filetype: file
     contains:
       - "Include \"/opt/bitnami/apache/conf/bitnami/php.conf\""
+  /opt/bitnami/apache/conf/bitnami/php.conf:
+    exists: true
+    filetype: file
+    contains:
+      - "AddType application/x-httpd-php .php"
+      - "DirectoryIndex index.html index.htm index.php"

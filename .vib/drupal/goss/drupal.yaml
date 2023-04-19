@@ -35,9 +35,3 @@ file:
     filetype: file
     contains:
       - /^memory_limit = 256M/
-  /opt/bitnami/apache/conf/bitnami/php.conf:
-    exists: true
-    filetype: file
-    contains:
-      - "AddType application/x-httpd-php .php"
-      - "DirectoryIndex index.html index.htm index.php"
