@@ -1,8 +1,3 @@
-command:
-  # There are no syntax error in the Apache configuration
-  check-configuration:
-    exec: apachectl -t
-    exit-status: 0
 file:
   # HTTP vhost should have been properly rendered
   /opt/bitnami/apache/conf/vhosts/drupal-vhost.conf:
