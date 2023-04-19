@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-16T22:29:09Z" \
+      org.opencontainers.image.created="2023-04-19T23:01:48Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.0.0-debian-11-r19" \
+      org.opencontainers.image.ref.name="6.0.0-debian-11-r20" \
       org.opencontainers.image.title="parse" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="6.0.0"
@@ -26,7 +26,6 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "node-16.20.0-1-linux-${OS_ARCH}-debian-11" \
       "mongodb-shell-1.8.0-3-linux-${OS_ARCH}-debian-11" \
       "parse-6.0.0-5-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -46,7 +45,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/parse/postunpack.sh
 ENV APP_VERSION="6.0.0" \
     BITNAMI_APP_NAME="parse" \
-    PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/parse/bin:/opt/bitnami/common/bin:$PATH"
+    PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/parse/bin:$PATH"
 
 EXPOSE 1337 3000
 
