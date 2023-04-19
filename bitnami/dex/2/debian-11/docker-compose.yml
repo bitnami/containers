@@ -1,5 +1,6 @@
 version: '2'
 
 services:
+  # [TEST]
   dex:
     image: docker.io/bitnami/dex:2
