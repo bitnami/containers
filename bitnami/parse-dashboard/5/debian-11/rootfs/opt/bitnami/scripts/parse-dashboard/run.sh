@@ -24,7 +24,7 @@ if ! is_boolean_yes "$PARSE_DASHBOARD_ENABLE_HTTPS"; then
 fi
 
 if am_i_root; then
-    exec gosu "$PARSE_DASHBOARD_DAEMON_USER" "node" "${PARSE_DASHBOARD_BASE_DIR}/bin/parse-dashboard" "${parse_dashboard_args[@]}" "$@"
+    exec_as_user "$PARSE_DASHBOARD_DAEMON_USER" "node" "${PARSE_DASHBOARD_BASE_DIR}/bin/parse-dashboard" "${parse_dashboard_args[@]}" "$@"
 else
     exec node "${PARSE_DASHBOARD_BASE_DIR}/bin/parse-dashboard" "${parse_dashboard_args[@]}" "$@"
 fi
