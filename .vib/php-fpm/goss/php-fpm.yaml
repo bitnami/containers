@@ -45,5 +45,5 @@ command:
       - /{{ $module }}.*enabled/
     {{ end }}
     {{ range $module := .Vars.modules.disabled }}
-      - "!{{ $module }}"
+      - disable-{{ $module }}
     {{ end }}

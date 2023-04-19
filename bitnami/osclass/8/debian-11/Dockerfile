@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-11T01:58:34Z" \
+      org.opencontainers.image.created="2023-04-17T15:39:22Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.1.1-debian-11-r11" \
+      org.opencontainers.image.ref.name="8.1.1-debian-11-r14" \
       org.opencontainers.image.title="osclass" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="8.1.1"
@@ -23,11 +23,11 @@ RUN install_packages acl ca-certificates curl libaudit1 libbrotli1 libbsd0 libbz
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "php-8.0.28-7-linux-${OS_ARCH}-debian-11" \
-      "apache-2.4.57-0-linux-${OS_ARCH}-debian-11" \
+      "apache-2.4.57-3-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.6.12-4-linux-${OS_ARCH}-debian-11" \
       "libphp-8.0.28-8-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-4-linux-${OS_ARCH}-debian-11" \
-      "osclass-8.1.1-2-linux-${OS_ARCH}-debian-11" \
+      "osclass-8.1.1-4-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \

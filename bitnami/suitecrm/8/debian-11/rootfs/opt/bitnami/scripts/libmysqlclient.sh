@@ -586,9 +586,9 @@ mysql_ensure_user_exists() {
         auth_string="identified via pam using '$DB_FLAVOR'"
     elif [[ -n "$password" ]]; then
         if [[ -n "$auth_plugin" ]]; then
-            auth_string="identified with $auth_plugin by \"$password\""
+            auth_string="identified with $auth_plugin by '$password'"
         else
-            auth_string="identified by \"$password\""
+            auth_string="identified by '$password'"
         fi
     fi
     debug "creating database user \'$user\'"
