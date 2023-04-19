@@ -26,7 +26,7 @@ flags=("-n" "--config-file=${PGPOOL_CONF_FILE}" "--hba-file=${PGPOOL_PGHBA_FILE}
 is_boolean_yes "$PGPOOL_ENABLE_LDAP" && ldap_start_nslcd_bg
 info "** Starting Pgpool-II **"
 if am_i_root; then
-    exec gosu "$PGPOOL_DAEMON_USER" "${command}" "${flags[@]}"
+    exec_as_user "$PGPOOL_DAEMON_USER" "${command}" "${flags[@]}"
 else
     exec "${command}" "${flags[@]}"
 fi
