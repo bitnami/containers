@@ -188,6 +188,10 @@ Available environment variables:
 
 * `JAVA_OPTS`: Customize JVM parameters. No defaults.
 
+#### JENKINS configuration
+
+* `JENKINS_OPTS`: Customize Jenkins launcher parameters. No defaults.
+
 ## Logging
 
 The Bitnami Jenkins Docker image sends the container logs to `stdout`. To view the logs:
