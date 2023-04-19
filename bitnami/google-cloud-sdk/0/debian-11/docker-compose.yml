@@ -1,5 +1,4 @@
 version: '2'
 services:
-  # [TEST]
   google-cloud-sdk:
     image: docker.io/bitnami/google-cloud-sdk:0
