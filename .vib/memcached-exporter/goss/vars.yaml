@@ -1,0 +1,6 @@
+binaries:
+  - memcached_exporter
+root_dir: /opt/bitnami
+version:
+  bin_name: memcached_exporter
+  flag: --version
