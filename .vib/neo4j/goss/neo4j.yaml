@@ -16,11 +16,9 @@ file:
       - /server\.directories\.data.*\/bitnami\/neo4j\/data/
     {{ end }}
 command:
-  # Both "stop" and "restart" options timeout
-  # trying to stop the server even when they do so
   check-neo4j-daemon:
-    exec: timeout 5 neo4j stop || true && sleep 3 && neo4j start && neo4j status
+    exec: neo4j start; neo4j status
     exit-status: 0
-    timeout: 15000
+    timeout: 10000
     stdout:
       - "Neo4j is running"
