@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-10T20:41:12Z" \
+      org.opencontainers.image.created="2023-04-18T22:56:12Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.7.41-debian-11-r24" \
+      org.opencontainers.image.ref.name="5.7.42-debian-11-r0" \
       org.opencontainers.image.title="mysql" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="5.7.41"
+      org.opencontainers.image.version="5.7.42"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,7 +23,7 @@ RUN install_packages ca-certificates curl libaio1 libcom-err2 libcrypt1 libgcc-s
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "ini-file-1.4.5-4-linux-${OS_ARCH}-debian-11" \
-      "mysql-5.7.41-3-linux-${OS_ARCH}-debian-11" \
+      "mysql-5.7.42-0-linux-${OS_ARCH}-debian-11" \
       "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -43,7 +43,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql/postunpack.sh
-ENV APP_VERSION="5.7.41" \
+ENV APP_VERSION="5.7.42" \
     BITNAMI_APP_NAME="mysql" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mysql/bin:/opt/bitnami/mysql/sbin:$PATH"
 

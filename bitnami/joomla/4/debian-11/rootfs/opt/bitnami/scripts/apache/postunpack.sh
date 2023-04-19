@@ -50,6 +50,7 @@ apache_setup_bitnami_config() {
     done
 
     # Bitnami customizations
+    ensure_dir_exists "${APACHE_CONF_DIR}/bitnami"
     render-template "${template_dir}/bitnami.conf.tpl" > "${APACHE_CONF_DIR}/bitnami/bitnami.conf"
     render-template "${template_dir}/bitnami-ssl.conf.tpl" > "${APACHE_CONF_DIR}/bitnami/bitnami-ssl.conf"
 

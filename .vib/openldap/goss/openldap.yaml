@@ -18,11 +18,6 @@ file:
     exists: true
   {{ end }}
 command:
-  check-app-version:
-    exec: {{ .Vars.version.bin_name }} {{ .Vars.version.flag }} 2>&1
-    exit-status: 0
-    stdout:
-      - {{ .Env.APP_VERSION }}
   check-enabled-backends:
     exec: slapd -VVV 2>&1
     exit-status: 0

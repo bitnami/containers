@@ -30,12 +30,13 @@ declare -a writable_dirs=(
     "/.ghost"
     "${GHOST_BASE_DIR}/content/logs"
 )
+
 for dir in "${writable_dirs[@]}"; do
     ensure_dir_exists "$dir"
     # Use ghost:root ownership for compatibility when running as a non-root user
     # Due to a limitation in "ghost start" and "ghost doctor" commands which doesn't check
     # if the user has writing permissions properly, we need to set 777/666 permissions which
-    # is clearly a limitation in terms of security 
+    # is clearly a limitation in terms of security
     configure_permissions_ownership "$dir" -d "777" -f "666" -u "$GHOST_DAEMON_USER" -g "root"
 done
 # Provide write permissions in installation directory (without doing it recursively)
