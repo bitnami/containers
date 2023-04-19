@@ -6,7 +6,7 @@ user:
     exists: true
 command:
   check-app-version:
-    exec: rgrep "version" /opt/bitnami/parse-dashboard
+    exec: grep "version" /opt/bitnami/parse-dashboard
     exit-status: 0
     stdout:
       - {{ .Env.APP_VERSION }}
