@@ -1,0 +1,4 @@
+command:
+  check-ejbca-help:
+    exec: ejbca.sh --help
+    exit-status: 0
