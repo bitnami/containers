@@ -17,7 +17,7 @@ set -o pipefail
 
 info "** Starting Neo4j **"
 if am_i_root; then
-    gosu "$NEO4J_DAEMON_USER" "${NEO4J_BASE_DIR}/bin/neo4j" "start" "$@"
+    run_as_user "$NEO4J_DAEMON_USER" "${NEO4J_BASE_DIR}/bin/neo4j" "start" "$@"
 else
     "${NEO4J_BASE_DIR}/bin/neo4j" "start" "$@"
 fi
@@ -33,7 +33,7 @@ cmd="$(which tail)"
 flags=("--pid=${pid}" "-n" "1000" "-f" "$NEO4J_LOG_FILE")
 
 if am_i_root; then
-    exec gosu "$NEO4J_DAEMON_USER" "$cmd" "${flags[@]}"
+    exec_as_user "$NEO4J_DAEMON_USER" "$cmd" "${flags[@]}"
 else
     exec "$cmd" "${flags[@]}"
 fi
