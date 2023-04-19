@@ -35,7 +35,7 @@ minio_client_execute() {
     exec=$(command -v mc)
 
     if am_i_root; then
-        gosu "$MINIO_DAEMON_USER" "${exec}" "${args[@]}"
+        run_as_user "$MINIO_DAEMON_USER" "${exec}" "${args[@]}"
     else
         "${exec}" "${args[@]}"
     fi
@@ -55,7 +55,7 @@ minio_client_execute_timeout() {
     exec=$(command -v mc)
 
     if am_i_root; then
-        timeout 5s gosu "$MINIO_DAEMON_USER" "${exec}" "${args[@]}"
+        timeout 5s run_as_user "$MINIO_DAEMON_USER" "${exec}" "${args[@]}"
     else
         timeout 5s "${exec}" "${args[@]}"
     fi
