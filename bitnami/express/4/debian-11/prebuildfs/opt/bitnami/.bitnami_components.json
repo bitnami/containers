@@ -5,12 +5,6 @@
         "type": "NAMI",
         "version": "4.18.2-8"
     },
-    "gosu": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-5"
-    },
     "node": {
         "arch": "amd64",
         "distro": "debian-11",
@@ -27,6 +21,6 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-4"
+        "version": "1.0.6-6"
     }
 }
