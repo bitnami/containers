@@ -1,6 +1,5 @@
 binaries:
   - notary-signer
-  - gosu
 directories:
   - mode: "0775"
     paths:
