@@ -9,7 +9,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2023.3.24-2"
+        "version": "2023.4.13-0"
     },
     "minio-client": {
         "arch": "amd64",

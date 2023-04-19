@@ -155,6 +155,7 @@ When you start the solr image, you can adjust the configuration of the instance 
 * `SOLR_CORE_CONF_DIR`: Configuration directory to copy when creating a new core. Default: **data_driven_schema_configs**
 * `SOLR_OPTS`: List of Solr server options and flags separated by either a space, (``), a comma (`,`) or a semicolon (`;`). No default. (E.g.: '**-XX:+AggressiveOpts -XX:G1HeapRegionSize=8m**')
 * `SOLR_JETTY_HOST`: Configuration to listen on a specific IP address or host name.Default: **0.0.0.0**
+* `SOLR_SECURITY_MANAGER_ENABLED`: Java security manager disabled. Default: **false**
 
 Cluster related environment variables:
 
@@ -166,11 +167,11 @@ Cluster related environment variables:
 * `SOLR_NUMBER_OF_NODES`: Number of the node of the Solr cloud cluster. Default: **1**
 * `SOLR_HOST`: Name of the node. If not set the node IP will be used. Default: **null**
 * `SORL_ZK_SLEEP_TIME`: Sleep time when waiting for init configuration operations to finish. Default: **5**
-* `SOLR_ZK_MAX_RETRIES`: Maximum retries when waitinf for init configuration operations to finish. Default: **5**
+* `SOLR_ZK_MAX_RETRIES`: Maximum retries when waiting for init configuration operations to finish. Default: **5**
 
 Authentication related environment variables:
 
-* `SOLR_ENABLE_AUTHENTICATION`: Enable the authentication, you can indicate the administrator credentiales with the following variables. Default: **no**
+* `SOLR_ENABLE_AUTHENTICATION`: Enable the authentication, you can indicate the administrator credentials with the following variables. Default: **no**
 * `SOLR_ADMIN_USERNAME`: Username for the administrator user. Default: **admin**
 * `SOLR_ADMIN_PASSWORD`: Password for the administrator user. Default: **Bitnami**
 
