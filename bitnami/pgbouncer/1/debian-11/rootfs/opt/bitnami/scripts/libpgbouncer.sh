@@ -268,7 +268,7 @@ pgbouncer_initialize() {
             local key value
             key="$(awk -F: '{print $1}' <<<"$pair")"
             value="$(awk -F: '{print $2}' <<<"$pair")"
-            ! is_empty_value "${value}" && ini-file set --section "pgbouncer" --key "${key}" --value "${value}" "$PGBOUNCER_CONF_FILE"
+            ! is_empty_value "${value}" && ini-file set --ignore-inline-comments --section "pgbouncer" --key "${key}" --value "${value}" "$PGBOUNCER_CONF_FILE"
         done
         if [[ "$PGBOUNCER_CLIENT_TLS_SSLMODE" != "disable" ]]; then
             ini-file set --section "pgbouncer" --key "client_tls_cert_file" --value "$PGBOUNCER_CLIENT_TLS_CERT_FILE" "$PGBOUNCER_CONF_FILE"
