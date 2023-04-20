@@ -5,7 +5,7 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-#set -o xtrace 
+#set -o xtrace
 
 # Load libraries
 . /opt/bitnami/scripts/libfluentd.sh
@@ -27,7 +27,7 @@ fi
 info "** Starting Fluentd **"
 if am_i_root && [[ "$FLUENTD_DAEMON_USER" != "root" ]]; then
     info "Switching daemon from root to $FLUENTD_DAEMON_USER..."
-    exec gosu "$FLUENTD_DAEMON_USER" "$EXEC" "${args[@]}"
+    exec_as_user "$FLUENTD_DAEMON_USER" "$EXEC" "${args[@]}"
 else
     exec "$EXEC" "${args[@]}"
 fi
