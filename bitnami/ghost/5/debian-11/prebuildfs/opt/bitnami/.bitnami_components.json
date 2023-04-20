@@ -5,12 +5,6 @@
         "type": "NAMI",
         "version": "5.44.0-1"
     },
-    "gosu": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-5"
-    },
     "mysql-client": {
         "arch": "amd64",
         "distro": "debian-11",
@@ -27,6 +21,6 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-9"
+        "version": "3.8.16-11"
     }
 }
