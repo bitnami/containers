@@ -1,0 +1,12 @@
+command:
+  check-app-version:
+    exec: fluentd --version | grep -o "[0-9]*\.[0-9]*\.[0-9]"
+    exit-status: 0
+    stdout:
+      - {{ .Env.APP_VERSION }}
+  check-valid-config:
+    exec: fluentd -c /opt/bitnami/fluentd/conf/fluentd.conf --dry-run
+    exit-status: 0
+  check-pem-files:
+    exec: find /opt/bitnami/fluentd -name "*.pem"
+    exit-status: 0
