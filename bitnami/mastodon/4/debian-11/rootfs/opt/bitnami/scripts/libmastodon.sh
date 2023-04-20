@@ -111,7 +111,7 @@ mastodon_validate() {
         check_empty_value "MASTODON_S3_HOSTNAME"
         check_resolved_hostname "$MASTODON_S3_HOSTNAME"
         check_valid_port "MASTODON_S3_PORT_NUMBER"
-        check_empty_value "MASTODON_S3_ALIAS_HOST"
+        check_empty_value "MASTODON_S3_ALIAS"
         check_empty_value "MASTODON_S3_ENDPOINT"
         check_empty_value "MASTODON_AWS_ACCESS_KEY_ID"
         check_empty_value "MASTODON_AWS_SECRET_ACCESS_KEY"
@@ -155,7 +155,7 @@ mastodon_bundle_execute_print_output() {
     # Avoid creating unnecessary cache files at initialization time
     local -a cmd=("bundle" "exec" "$@")
     # Run as application user to avoid having to change permissions/ownership afterwards
-    am_i_root && cmd=("gosu" "$MASTODON_DAEMON_USER" "${cmd[@]}")
+    am_i_root && cmd=("run_as_user" "$MASTODON_DAEMON_USER" "${cmd[@]}")
     (
         cd "$MASTODON_BASE_DIR" || false
         "${cmd[@]}"
@@ -240,7 +240,7 @@ mastodon_ensure_admin_user_exists() {
     local res=""
     if am_i_root; then
         # Adding true to avoid the logic to exit
-        res="$(gosu "$MASTODON_DAEMON_USER" "${cmd[@]}" "${args[@]}" || true)"
+        res="$(run_as_user "$MASTODON_DAEMON_USER" "${cmd[@]}" "${args[@]}" || true)"
     else
         # Adding true to avoid the logic to exit
         res="$("${cmd[@]}" "${args[@]}" || true)"
