@@ -1,10 +1,4 @@
 {
-    "gosu": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-5"
-    },
     "laravel": {
         "arch": "amd64",
         "distro": "debian-11",
@@ -27,12 +21,12 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-9"
+        "version": "3.8.16-11"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-4"
+        "version": "1.0.6-6"
     }
 }
