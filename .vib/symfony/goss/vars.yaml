@@ -1,7 +1,6 @@
 binaries:
   - php
   - composer
-  - gosu
   - mysql
 files:
   - paths:
