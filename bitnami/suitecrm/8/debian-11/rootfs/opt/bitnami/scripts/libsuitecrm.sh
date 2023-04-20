@@ -468,7 +468,7 @@ suitecrm_execute() {
     local -a cmd=("php" "${SUITECRM_BASE_DIR}/bin/console" "$@")
     # Run as web server user to avoid having to change permissions/ownership afterwards
     if am_i_root; then
-        debug_execute gosu "$WEB_SERVER_DAEMON_USER" "${cmd[@]}"
+        debug_execute run_as_user "$WEB_SERVER_DAEMON_USER" "${cmd[@]}"
     else
         debug_execute "${cmd[@]}"
     fi
