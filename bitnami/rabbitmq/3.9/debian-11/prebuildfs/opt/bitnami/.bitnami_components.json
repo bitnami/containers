@@ -5,12 +5,6 @@
         "type": "NAMI",
         "version": "24.3.4-10-2"
     },
-    "gosu": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-5"
-    },
     "rabbitmq": {
         "arch": "amd64",
         "distro": "debian-11",
