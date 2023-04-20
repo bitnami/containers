@@ -1,6 +1,5 @@
 version: '2'
 services:
-  # [TEST]
   mongodb:
     image: docker.io/bitnami/mongodb:6.0
     volumes:
