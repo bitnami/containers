@@ -3,11 +3,12 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
-LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-19T20:58:40Z" \
+LABEL com.vmware.cp.artifact.flavor="sha256:109c7d51bd69bb6b3df71017440c1ea0699454f81fe188056c083f0b57c96ea6" \
+      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
+      org.opencontainers.image.created="2023-04-20T15:48:03Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.3.2-debian-11-r28" \
+      org.opencontainers.image.ref.name="3.3.2-debian-11-r29" \
       org.opencontainers.image.title="kafka" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.3.2"
@@ -23,8 +24,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-17.0.7-7-0-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.6-6-linux-${OS_ARCH}-debian-11" \
+      "java-17.0.7-7-0-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-5-linux-${OS_ARCH}-debian-11" \
       "kafka-3.3.2-6-linux-${OS_ARCH}-debian-11" \
     ) && \
@@ -49,7 +50,7 @@ RUN /opt/bitnami/scripts/kafka/postunpack.sh
 ENV APP_VERSION="3.3.2" \
     BITNAMI_APP_NAME="kafka" \
     JAVA_HOME="/opt/bitnami/java" \
-    PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/kafka/bin:$PATH"
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/kafka/bin:$PATH"
 
 EXPOSE 9092
 
