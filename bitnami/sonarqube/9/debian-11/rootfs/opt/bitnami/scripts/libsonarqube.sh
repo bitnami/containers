@@ -186,7 +186,7 @@ EOF
                 unix_timestamp_ms="$(date '+%s%N' | cut -b1-13)"
                 for setting in "${settings_to_update[@]}"; do
                     postgresql_remote_execute "${postgresql_execute_args[@]}" <<EOF
-INSERT INTO properties (uuid, prop_key, is_empty, text_value, created_at) VALUES ('$(generate_random_string -t alphanumeric -c 20)', '${setting%=*}', '0', '${setting#*=}', '${unix_timestamp_ms}');
+INSERT INTO properties (uuid, prop_key, is_empty, text_value, created_at) VALUES ('$(generate_random_string -t alphanumeric -c 20)', '${setting%%=*}', '0', '${setting#*=}', '${unix_timestamp_ms}');
 EOF
                 done
             fi
