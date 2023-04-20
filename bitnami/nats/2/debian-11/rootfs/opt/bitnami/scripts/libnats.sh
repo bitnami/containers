@@ -70,7 +70,7 @@ nats_start_bg() {
     is_nats_running && return
     info "Starting NATS in background"
     if am_i_root; then
-        gosu "$NATS_DAEMON_USER" "$nats_cmd" "${args[@]}" >/dev/null 2>&1 &
+        run_as_user "$NATS_DAEMON_USER" "$nats_cmd" "${args[@]}" >/dev/null 2>&1 &
     else
         "$nats_cmd" "${args[@]}" >/dev/null 2>&1 &
     fi
