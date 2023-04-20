@@ -42,7 +42,7 @@ args+=("$@")
 
 info "** Starting Jenkins **"
 if am_i_root; then
-    exec gosu "$JENKINS_DAEMON_USER" java "${args[@]}"
+    exec_as_user "$JENKINS_DAEMON_USER" java "${args[@]}"
 else
     exec java "${args[@]}"
 fi
