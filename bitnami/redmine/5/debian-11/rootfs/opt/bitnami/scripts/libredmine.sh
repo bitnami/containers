@@ -394,7 +394,7 @@ redmine_bundle_execute_print_output() {
     # Avoid creating unnecessary cache files at initialization time
     local -a cmd=("bundle" "exec" "$@")
     # Run as application user to avoid having to change permissions/ownership afterwards
-    am_i_root && cmd=("gosu" "$REDMINE_DAEMON_USER" "${cmd[@]}")
+    am_i_root && cmd=("run_as_user" "$REDMINE_DAEMON_USER" "${cmd[@]}")
     (
         export RAILS_ENV="$REDMINE_ENV"
         cd "$REDMINE_BASE_DIR" || false
