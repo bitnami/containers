@@ -6,12 +6,4 @@ directories:
       - /opt/bitnami/fluentd
       - /opt/bitnami/fluentd/conf
       - /opt/bitnami/fluentd/logs
-files:
-  - mode: 0755
-    paths:
-      - /opt/bitnami/fluentd/gems/fluent-plugin-detect-exceptions-*/lib/fluent/plugin/exception_detector.rb
-      - /opt/bitnami/fluentd/gems/fluent-plugin-detect-exceptions-*/lib/fluent/plugin/out_detect_exceptions.rb
-  - paths:
-      - /opt/bitnami/fluentd/gems/fluent-plugin-concat-*
-      # We need to check other gems
 root_dir: /opt/bitnami
