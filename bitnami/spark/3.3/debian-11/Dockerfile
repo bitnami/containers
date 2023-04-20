@@ -4,10 +4,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-17T01:00:13Z" \
+      org.opencontainers.image.created="2023-04-20T01:44:20Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.3.2-debian-11-r17" \
+      org.opencontainers.image.ref.name="3.3.2-debian-11-r18" \
       org.opencontainers.image.title="spark" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.3.2"
@@ -16,7 +16,7 @@ ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux" \
-    PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/spark/bin:/opt/bitnami/spark/sbin:/opt/bitnami/common/bin:$PATH"
+    PATH="/opt/bitnami/python/bin:/opt/bitnami/java/bin:/opt/bitnami/spark/bin:/opt/bitnami/spark/sbin:$PATH"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -25,9 +25,8 @@ RUN install_packages ca-certificates curl libbz2-1.0 libcom-err2 libcrypt1 libff
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.9.16-9-linux-${OS_ARCH}-debian-11" \
-      "java-17.0.6-10-4-linux-${OS_ARCH}-debian-11" \
+      "java-17.0.7-7-0-linux-${OS_ARCH}-debian-11" \
       "spark-3.3.2-5-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
