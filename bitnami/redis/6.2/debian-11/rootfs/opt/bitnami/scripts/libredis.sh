@@ -57,7 +57,7 @@ redis_conf_set() {
     # Determine whether to enable the configuration for RDB persistence, if yes, do not enable the replacement operation
     if [ "${key}" == "save" ];then
         echo "${key} ${value}" >> "${REDIS_BASE_DIR}/etc/redis.conf"
-    else 
+    else
         replace_in_file "${REDIS_BASE_DIR}/etc/redis.conf" "^#*\s*${key} .*" "${key} ${value}" false
     fi
 }
@@ -159,7 +159,7 @@ redis_stop() {
 
     debug "Stopping Redis"
     if am_i_root; then
-        gosu "$REDIS_DAEMON_USER" "${REDIS_BASE_DIR}/bin/redis-cli" "${args[@]}" shutdown
+        run_as_user "$REDIS_DAEMON_USER" "${REDIS_BASE_DIR}/bin/redis-cli" "${args[@]}" shutdown
     else
         "${REDIS_BASE_DIR}/bin/redis-cli" "${args[@]}" shutdown
     fi
