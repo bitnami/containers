@@ -52,7 +52,7 @@ fi
 info "** Starting RabbitMQ **"
 cd "$RABBITMQ_BASE_DIR"
 if am_i_root; then
-    exec gosu "$RABBITMQ_DAEMON_USER" "${RABBITMQ_BIN_DIR}/rabbitmq-server"
+    exec_as_user "$RABBITMQ_DAEMON_USER" "${RABBITMQ_BIN_DIR}/rabbitmq-server"
 else
     exec "${RABBITMQ_BIN_DIR}/rabbitmq-server"
 fi
