@@ -14,7 +14,7 @@
 #   Boolean
 minio_client_bucket_exists() {
     local -r bucket_name="${1:?bucket required}"
-    if minio_client_execute ls "${bucket_name}" >/dev/null 2>&1; then
+    if minio_client_execute stat "${bucket_name}" >/dev/null 2>&1; then
         true
     else
         false
