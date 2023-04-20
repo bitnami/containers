@@ -2,7 +2,6 @@ binaries:
   - yq
   - etcd
   - etcdctl
-  - etcdutl
 directories:
   - mode: "0775"
     paths:
