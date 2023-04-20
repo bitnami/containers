@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-16T23:35:19Z" \
+      org.opencontainers.image.created="2023-04-20T00:11:00Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.11.13-debian-11-r5" \
+      org.opencontainers.image.ref.name="3.11.13-debian-11-r6" \
       org.opencontainers.image.title="rabbitmq" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.11.13"
@@ -15,7 +15,7 @@ ENV HOME="/opt/bitnami/rabbitmq/.rabbitmq" \
     OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux" \
-    PATH="/opt/bitnami/common/bin:/opt/bitnami/erlang/bin:/opt/bitnami/rabbitmq/sbin:$PATH"
+    PATH="/opt/bitnami/erlang/bin:/opt/bitnami/rabbitmq/sbin:$PATH"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -23,7 +23,6 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libgcc-s1 libssl1.1 libstdc++6 libtinfo6 locales procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
       "erlang-25.3.0-3-linux-${OS_ARCH}-debian-11" \
       "rabbitmq-3.11.13-0-linux-${OS_ARCH}-debian-11" \
     ) && \
