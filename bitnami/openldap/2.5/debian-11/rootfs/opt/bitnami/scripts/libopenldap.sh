@@ -329,7 +329,7 @@ ldap_create_online_configuration() {
     ! am_i_root && replace_in_file "${LDAP_SHARE_DIR}/slapd.ldif" "uidNumber=0" "uidNumber=$(id -u)"
     local -a flags=(-F "$LDAP_ONLINE_CONF_DIR" -n 0 -l "${LDAP_SHARE_DIR}/slapd.ldif")
     if am_i_root; then
-        debug_execute gosu "$LDAP_DAEMON_USER" slapadd "${flags[@]}"
+        debug_execute run_as_user "$LDAP_DAEMON_USER" slapadd "${flags[@]}"
     else
         debug_execute slapadd "${flags[@]}"
     fi
