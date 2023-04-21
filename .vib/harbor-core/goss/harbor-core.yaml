@@ -15,6 +15,15 @@ file:
     mode: "0775"
     owner: harbor
     filetype: directory
+  /etc/core/certificates:
+    exists: true
+    filetype: symlink
+  /etc/core/ca_download:
+    exists: true
+    filetype: symlink
+  /etc/core/token:
+    exists: true
+    filetype: symlink
 command:
   # Ensure permissions for Internal TLS
   check-permissions-system-certs:

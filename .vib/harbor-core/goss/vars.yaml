@@ -4,9 +4,6 @@ binaries:
   - wait-for-port
 directories:
   - paths:
-      - /etc/core/certificates
-      - /etc/core/ca_download
-      - /etc/core/token
       - /opt/bitnami/harbor-core/views
       - /opt/bitnami/harbor-core/migrations
       - /opt/bitnami/harbor-core/icons
