@@ -11,11 +11,14 @@ file:
     owner: harbor
     filetype: directory
 command:
+  # Ensure swagger binary doesn't exist
+  check-swagger-binary:
+    exec: ls /opt/bitnami/harbor-jobservice/bin/swagger 2>/dev/null
+    exit-status: 2
   # Ensure a set of directories exist and the non-root user has write privileges to them
   check-directories-exist-with-user:
     exec: ls -dl /etc/ssl/certs /etc/pki/tls/certs/ 2>/dev/null | grep "drwxrwxr-x.*harbor"
     exit-status: 0
   # Ensure permissions for Internal TLS
   check-permissions-system-certs:
-    exec: ls -l /etc/pki/tls/certs/ca-bundle.crt /etc/pki/tls/certs/ca-bundle.trust.crt /etc/ssl/certs/ca-certificates.crt 2>/dev/null | grep ".*-rw-rw-r--"
-    exit-status: 0
+    exec: ls -l /etc/pki/tls/certs/ca-bundle.crt /etc/pki/tls/certs/ca-bundle
