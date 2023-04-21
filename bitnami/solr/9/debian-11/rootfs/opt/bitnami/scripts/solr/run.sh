@@ -25,7 +25,7 @@ fi
 is_boolean_yes "$SOLR_SSL_ENABLED" && export SOLR_SSL_ENABLED=true
 
 if am_i_root; then
-    exec gosu "$SOLR_DAEMON_USER" "${start_command[@]}"
+    exec_as_user "$SOLR_DAEMON_USER" "${start_command[@]}"
 else
     exec "${start_command[@]}"
 fi
