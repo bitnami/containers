@@ -1,6 +1,7 @@
 version: '2'
 
 services:
+  # New change
   harbor-core:
     image: docker.io/bitnami/harbor-core:2
     ports:
