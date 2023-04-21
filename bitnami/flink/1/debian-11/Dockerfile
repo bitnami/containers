@@ -3,11 +3,12 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
-LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-18T00:56:34Z" \
+LABEL com.vmware.cp.artifact.flavor="sha256:109c7d51bd69bb6b3df71017440c1ea0699454f81fe188056c083f0b57c96ea6" \
+      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
+      org.opencontainers.image.created="2023-04-21T12:19:31Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.16.1-debian-11-r11" \
+      org.opencontainers.image.ref.name="1.16.1-debian-11-r12" \
       org.opencontainers.image.title="flink" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.16.1"
@@ -23,8 +24,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages acl ca-certificates curl gettext-base libjemalloc-dev procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-11.0.18-10-4-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
+      "java-11.0.19-7-1-linux-${OS_ARCH}-debian-11" \
       "flink-1.16.1-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -47,7 +47,7 @@ ENV APP_VERSION="1.16.1" \
     BITNAMI_APP_NAME="flink" \
     FLINK_HOME="/opt/bitnami/flink" \
     JAVA_HOME="/opt/bitnami/java" \
-    PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"
+    PATH="/opt/bitnami/java/bin:$PATH"
 
 WORKDIR /opt/bitnami/flink
 USER 1001

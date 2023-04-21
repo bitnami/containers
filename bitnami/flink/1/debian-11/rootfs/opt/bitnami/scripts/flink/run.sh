@@ -65,7 +65,7 @@ fi
 
 # Running command
 if am_i_root; then
-    gosu "$FLINK_DAEMON_USER" "${cmd[@]}" "${args[@]}"
+    exec_as_user "$FLINK_DAEMON_USER" "${cmd[@]}" "${args[@]}"
 else
     exec "${cmd[@]}" "${args[@]}"
 fi
