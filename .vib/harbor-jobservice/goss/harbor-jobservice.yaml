@@ -21,4 +21,5 @@ command:
     exit-status: 0
   # Ensure permissions for Internal TLS
   check-permissions-system-certs:
-    exec: ls -l /etc/pki/tls/certs/ca-bundle.crt /etc/pki/tls/certs/ca-bundle
+    exec: ls -l /etc/pki/tls/certs/ca-bundle.crt /etc/pki/tls/certs/ca-bundle.trust.crt /etc/ssl/certs/ca-certificates.crt 2>/dev/null | grep ".*-rw-rw-r--"     
+    exit-status: 0
