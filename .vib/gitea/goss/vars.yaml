@@ -1,0 +1,6 @@
+binaries:
+  - gitea
+  - ini-file
+  - render-template
+  - wait-for-port
+root_dir: /opt/bitnami
