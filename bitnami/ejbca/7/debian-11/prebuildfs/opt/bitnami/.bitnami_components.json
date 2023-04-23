@@ -9,13 +9,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.19-7-0"
+        "version": "11.0.19-7-1"
     },
     "mysql-client": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.6.12-4"
+        "version": "10.11.2-5"
     },
     "wildfly": {
         "arch": "amd64",
