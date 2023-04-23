@@ -34,7 +34,7 @@ replace_in_file "${KAFKA_BASE_DIR}/bin/kafka-server-start.sh" " [-]loggc" " "
 replace_in_file "${KAFKA_CONF_DIR}/log4j.properties" "DailyRollingFileAppender" "ConsoleAppender"
 
 # Disable the default console logger in favour of KafkaAppender (which provides the exact output)
-echo "log4j.appender.stdout.Threshold=OFF" >>/opt/bitnami/kafka/config/log4j.properties
+echo "log4j.appender.stdout.Threshold=OFF" >>"${KAFKA_CONF_DIR}/log4j.properties"
 
 # Remove invalid parameters for ConsoleAppender
 remove_in_file "${KAFKA_CONF_DIR}/log4j.properties" "DatePattern"
