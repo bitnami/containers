@@ -3,11 +3,12 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
-LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-19T22:15:02Z" \
+LABEL com.vmware.cp.artifact.flavor="sha256:109c7d51bd69bb6b3df71017440c1ea0699454f81fe188056c083f0b57c96ea6" \
+      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
+      org.opencontainers.image.created="2023-04-22T23:22:32Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.11.0-debian-11-r27" \
+      org.opencontainers.image.ref.name="7.11.0-debian-11-r28" \
       org.opencontainers.image.title="ejbca" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="7.11.0"
@@ -23,9 +24,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages acl ca-certificates curl libaio1 libaudit1 libcap-ng0 libgcc-s1 libicu67 liblzma5 libncurses6 libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-11.0.19-7-0-linux-${OS_ARCH}-debian-11" \
+      "java-11.0.19-7-1-linux-${OS_ARCH}-debian-11" \
       "wildfly-26.1.3-9-linux-${OS_ARCH}-debian-11" \
-      "mysql-client-10.6.12-4-linux-${OS_ARCH}-debian-11" \
+      "mysql-client-10.11.2-5-linux-${OS_ARCH}-debian-11" \
       "ejbca-7.11.0-4-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
