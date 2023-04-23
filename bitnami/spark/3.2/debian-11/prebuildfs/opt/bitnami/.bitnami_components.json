@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.19-7-0"
+        "version": "11.0.19-7-1"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.9.16-9"
+        "version": "3.9.16-10"
     },
     "spark": {
         "arch": "amd64",
