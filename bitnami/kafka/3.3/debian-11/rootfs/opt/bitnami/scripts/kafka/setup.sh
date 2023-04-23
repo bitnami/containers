@@ -26,6 +26,7 @@ if [[ -z "${KAFKA_CFG_BROKER_ID:-}" ]]; then
         export KAFKA_CFG_BROKER_ID=-1
     fi
 fi
+
 # Set the default tuststore locations
 kafka_configure_default_truststore_locations
 # Ensure Kafka environment variables are valid
@@ -41,6 +42,9 @@ fi
 for dir in "$KAFKA_LOG_DIR" "$KAFKA_CONF_DIR" "$KAFKA_MOUNTED_CONF_DIR" "$KAFKA_VOLUME_DIR" "$KAFKA_DATA_DIR"; do
     ensure_dir_exists "$dir" "$KAFKA_OWNERSHIP_USER"
 done
+
+# shellcheck disable=SC2148
+
 # Ensure Kafka is initialized
 kafka_initialize
 # If KRaft is enabled initialize
