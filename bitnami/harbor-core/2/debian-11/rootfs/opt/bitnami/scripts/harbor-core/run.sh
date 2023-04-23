@@ -20,7 +20,7 @@ cd "$HARBOR_CORE_BASE_DIR"
 
 info "** Starting harbor-core **"
 if am_i_root; then
-    exec gosu "$HARBOR_CORE_DAEMON_USER" "$CMD" "$@"
+    exec_as_user "$HARBOR_CORE_DAEMON_USER" "$CMD" "$@"
 else
     exec "$CMD" "$@"
 fi
