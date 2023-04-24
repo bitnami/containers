@@ -18,7 +18,7 @@ file:
 command:
   # Ensure a set of directories exist and the non-root user has write privileges to them
   check-directories-exist-with-user:
-    exec: ls -dl /etc/ssl/certs /etc/pki/tls/certs/ 2>/dev/null | grep "drwxrwxr-x.*harbor"
+    exec: ls -dl /etc/ssl/certs /etc/pki/tls/certs/ 2>/dev/null | grep "drwxrwxr-x.*trivy-scanner"
     exit-status: 0
   # Ensure permissions for Internal TLS
   check-permissions-system-certs:
