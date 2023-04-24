@@ -4,13 +4,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:109c7d51bd69bb6b3df71017440c1ea0699454f81fe188056c083f0b57c96ea6" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-23T17:33:43Z" \
+      org.opencontainers.image.created="2023-04-24T10:01:20Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.13.1-debian-11-r9" \
+      org.opencontainers.image.ref.name="0.13.3-debian-11-r0" \
       org.opencontainers.image.title="apache-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.13.1"
+      org.opencontainers.image.version="0.13.3"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,7 +23,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "apache-exporter-0.13.1-1-linux-${OS_ARCH}-debian-11" \
+      "apache-exporter-0.13.3-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,7 +40,7 @@ RUN apt-get autoremove --purge -y curl ca-certificates && \
 RUN ln -sf /opt/bitnami/apache-exporter/bin/apache_exporter /bin/apache_exporter
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="0.13.1" \
+ENV APP_VERSION="0.13.3" \
     BITNAMI_APP_NAME="apache-exporter" \
     PATH="/opt/bitnami/apache-exporter/bin:$PATH"
 
