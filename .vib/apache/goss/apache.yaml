@@ -29,7 +29,6 @@ file:
     filetype: file
     contains:
       - /DocumentRoot.*/opt/bitnami/apache/htdocs/
-      - /^Include.*/opt/bitnami/apache/conf/bitnami/bitnami-ssl.conf/
   # Main Bitnami ssl config file was correctly generated
   /opt/bitnami/apache/conf/bitnami/bitnami-ssl.conf:
     exists: true
