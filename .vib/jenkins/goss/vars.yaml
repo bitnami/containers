@@ -1,0 +1,17 @@
+binaries:
+  - java
+  - jenkins
+  - render-template
+directories:
+  - mode: "0775"
+    paths:
+      - /opt/bitnami/jenkins
+      - /op/bitnami/jenkins/plugins
+      - /opt/bitnami/jenkins/tmp
+      - /opt/bitnami/jenkins/logs
+      - /bitnami/jenkins
+      - /bitnami/jenkins/home
+files:
+  - paths:
+      - /opt/bitnami/jenkins/jenkins-plugin-manager.jar
+root_dir: /opt/bitnami
