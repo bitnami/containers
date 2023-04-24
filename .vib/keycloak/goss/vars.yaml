@@ -1,6 +1,5 @@
 binaries:
   - java
-  - keycloak
   - wait-for-port
 directories:
   - paths:
