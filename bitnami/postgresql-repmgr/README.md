@@ -510,6 +510,39 @@ docker-compose restart pg-0
 docker-compose restart pg-1
 ```
 
+### Adding extra services to base docker-compose.yaml
+
+It is possible to add extra services to the provided `docker-compose.yaml` file, like [a witness node](https://repmgr.org/docs/4.3/repmgrd-witness-server.html). When adding the new service, please take into account the cluster set up process relays on the `REPMGR_NODE_ID_START_SEED` environment variable plus the service ID in the name (if present, or zero (`0`) by default) to assign cluster's ID to each service/node involved on it. In the case of docker-compose based clusters, this may lead to collisions in the internal IDs in case two or more services share the same ID in their names, making the service initialization process to fail. This isn't an issue on Kubernetes environments, as the Kubernetes controller enumerates the pods with different ID numbers by default.
+
+We recommend setting a different value for the `REPMGR_NODE_ID_START_SEED` in those nodes, or ensuring no services names use repeated numbers. Find below a sample service for a witness service:
+
+```yaml
+  pg-0:
+  (...)
+  pg-1:
+  (...)
+  pgw-0:
+    image: bitnami/postgresql-repmgr:latest
+    ports:
+      - 6439:5432
+    volumes:
+      - /docker/local/database_repmgr2/pgw-0:/bitnami/postgresql
+    environment:
+      (...)
+      - REPMGR_PRIMARY_HOST=pg-0
+      - REPMGR_PRIMARY_PORT=5432
+      - REPMGR_PARTNER_NODES=pg-0:5432,pg-1:5432,pgw-0:5432
+      - REPMGR_NODE_NAME=pgw-0
+      - REPMGR_NODE_NETWORK_NAME=pgw-0
+      - REPMGR_PORT_NUMBER=5432
+      - REPMGR_NODE_TYPE=witness
+      # Avoid naming collision with 'pg-0' service
+      - REPMGR_NODE_ID_START_SEED=2000
+(...)
+```
+
+Refer to [issues/27124](https://github.com/bitnami/containers/issues/27124) for further details on this.
+
 ### Environment variables
 
 Please see the list of environment variables available in the Bitnami PostgreSQL HA container in the next table:
