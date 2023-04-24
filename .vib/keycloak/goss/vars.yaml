@@ -1,0 +1,8 @@
+binaries:
+  - java
+  - keycloak
+  - wait-for-port
+directories:
+  - paths:
+      - /opt/bitnami/keycloak/modules/system/layers/keycloak/org/postgresql/jdbc/main
+root_dir: /opt/bitnami

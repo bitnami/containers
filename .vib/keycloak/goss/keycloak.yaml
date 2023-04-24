@@ -1,0 +1,78 @@
+group:
+  keycloak:
+    exists: true
+user:
+  user:
+    exists: true
+  keycloak:
+    exists: true
+file:
+  /opt/bitnami/keycloak:
+    exists: true
+    mode: "0775"
+    owner: keycloak
+    filetype: directory
+  /opt/bitnami/keycloak/providers:
+    exists: true
+    mode: "0775"
+    owner: keycloak
+    filetype: directory
+  /opt/bitnami/keycloak/providers/log:
+    exists: true
+    mode: "0775"     
+    owner: keycloak     
+    filetype: directory
+  /opt/bitnami/keycloak/providers/tmp:
+    exists: true
+    mode: "0775"
+    owner: keycloak
+    filetype: directory
+  /opt/bitnami/keycloak/conf:
+    exists: true
+    mode: "0775"
+    owner: keycloak
+    filetype: directory
+  /opt/bitnami/keycloak/.installation:
+    exists: true
+    mode: "0775"
+    owner: keycloak
+    filetype: directory
+  /opt/bitnami/keycloak/data:
+    exists: true
+    mode: "0775"
+    owner: keycloak
+    filetype: directory
+  /opt/bitnami/keycloak/lib:
+    exists: true
+    mode: "0775"
+    owner: keycloak
+    filetype: directory
+  /bitnami/keycloak:
+    exists: true
+    mode: "0775"
+    owner: keycloak
+    filetype: directory
+  /docker-entrypoint-initdb.d:
+    exists: true
+    mode: "0775"
+    owner: keycloak
+    filetype: directory
+  /opt/bitnami/keycloak/modules/system/layers/keycloak/org/postgresql/jdbc/main/module.xml:
+    exists: true
+    contains:
+      - "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+          <module xmlns=\"urn:jboss:module:1.0\" name=\"org.postgresql.jdbc\">
+          <resources>
+          <resource-root path=\"postgresql-${psqlDriverVersion}.jar\"/>
+          </resources>
+          <dependencies>
+          <module name=\"javax.api\"/>
+          <module name=\"javax.transaction.api\"/>
+          </dependencies>
+          </module>"
+command:
+  check-app-version:
+    exec: /opt/bitnami/keycloak/bin/kc.sh --version | grep "Keycloak" | grep -m 1 -o "[0-9]*\.[0-9]*\.[0-9]"
+    exit-status: 0          
+    stdout:              
+      - {{ .Env.APP_VERSION }}
