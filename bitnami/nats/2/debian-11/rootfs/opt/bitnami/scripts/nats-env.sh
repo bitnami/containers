@@ -44,6 +44,7 @@ nats_env_vars=(
     NATS_CLUSTER_TOKEN
     NATS_CLUSTER_ROUTES
     NATS_CLUSTER_SEED_NODE
+    NATS_EXTRA_FLAGS
 )
 for env_var in "${nats_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -108,3 +109,4 @@ export NATS_CLUSTER_ROUTES="${NATS_CLUSTER_ROUTES:-}"
 export NATS_CLUSTER_SEED_NODE="${NATS_CLUSTER_SEED_NODE:-}"
 
 # Custom environment variables may be defined below
+export NATS_EXTRA_FLAGS="${NATS_EXTRA_FLAGS:-}"

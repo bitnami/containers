@@ -16,8 +16,9 @@ set -o pipefail
 
 declare nats_cmd="nats-server"
 which "$nats_cmd" >/dev/null 2>&1 || nats_cmd="gnatsd"
-declare -a args=("-c" "$NATS_CONF_FILE")
-args+=("$@")
+declare -a args=($NATS_EXTRA_FLAGS)
+
+args+=("-c" "$NATS_CONF_FILE" "$@")
 
 info "** Starting NATS **"
 if am_i_root; then
