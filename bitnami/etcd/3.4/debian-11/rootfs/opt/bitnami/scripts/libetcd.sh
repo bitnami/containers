@@ -443,26 +443,26 @@ is_healthy_etcd_cluster() {
     export ETCD_ACTIVE_ENDPOINTS
 
     if is_boolean_yes "$ETCD_DISASTER_RECOVERY"; then
-        if [[ -f "${ETCD_SNAPSHOTS_DIR}/.disaster_recovery" ]]; then
+        if [[ -f "/snapshots/.disaster_recovery" ]]; then
             # Remove current node from the ones that need to recover
-            remove_in_file "${ETCD_SNAPSHOTS_DIR}/.disaster_recovery" "$host:$port"
+            remove_in_file "/snapshots/.disaster_recovery" "$host:$port"
             # Remove nodes that do not exist anymore from the ones that need to recover
-            read -r -a recovery_array <<<"$(tr '\n' ' ' <"${ETCD_SNAPSHOTS_DIR}/.disaster_recovery")"
+            read -r -a recovery_array <<<"$(tr '\n' ' ' <"/snapshots/.disaster_recovery")"
             for r in "${recovery_array[@]}"; do
                 if [[ ! "${endpoints_array[*]}" =~ $r ]]; then
-                    remove_in_file "${ETCD_SNAPSHOTS_DIR}/.disaster_recovery" "$r"
+                    remove_in_file "/snapshots/.disaster_recovery" "$r"
                 fi
             done
-            if [[ $(wc -w <"${ETCD_SNAPSHOTS_DIR}/.disaster_recovery") -eq 0 ]]; then
+            if [[ $(wc -w <"/snapshots/.disaster_recovery") -eq 0 ]]; then
                 debug "Last member to recover from the disaster!"
-                rm "${ETCD_SNAPSHOTS_DIR}/.disaster_recovery"
+                rm "/snapshots/.disaster_recovery"
             fi
             return_value=1
         else
             if [[ $active_endpoints -lt $(((cluster_size + 1) / 2)) ]]; then
                 debug "There are no enough active endpoints!"
                 for e in "${endpoints_array[@]}"; do
-                    [[ "$e" != "$host:$port" ]] && [[ "$e" != ":$port" ]] && echo "$e" >>"${ETCD_SNAPSHOTS_DIR}/.disaster_recovery"
+                    [[ "$e" != "$host:$port" ]] && [[ "$e" != ":$port" ]] && echo "$e" >>"/snapshots/.disaster_recovery"
                 done
                 return_value=1
             fi
@@ -669,7 +669,7 @@ etcd_initialize() {
             if ! is_healthy_etcd_cluster; then
                 warn "Cluster not responding!"
                 if is_boolean_yes "$ETCD_DISASTER_RECOVERY"; then
-                    latest_snapshot_file="$(find "${ETCD_SNAPSHOTS_DIR}/" -maxdepth 1 -type f -name 'db-*' | sort | tail -n 1)"
+                    latest_snapshot_file="$(find /snapshots/ -maxdepth 1 -type f -name 'db-*' | sort | tail -n 1)"
                     if [[ "${latest_snapshot_file}" != "" ]]; then
                         info "Restoring etcd cluster from snapshot"
                         rm -rf "$ETCD_DATA_DIR"
