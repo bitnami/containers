@@ -1,30 +1,24 @@
 version: '2'
 
 services:
-  zookeeper:
-    image: docker.io/bitnami/zookeeper:3.8
-    environment:
-      - ALLOW_ANONYMOUS_LOGIN=yes
-    volumes:
-      - 'zookeeper_data:/bitnami/zookeeper'
   kafka-0:
-    image: docker.io/bitnami/kafka:3.2
+    image: docker.io/bitnami/kafka:3.4
     environment:
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_NODE_ID=0
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093
+      - KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv
     volumes:
       - 'kafka0_data:/bitnami/kafka'
-    depends_on:
-      - zookeeper
   kafka-1:
-    image: docker.io/bitnami/kafka:3.2
+    image: docker.io/bitnami/kafka:3.4
     environment:
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_NODE_ID=1
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093
+      - KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv
     volumes:
       - 'kafka1_data:/bitnami/kafka'
-    depends_on:
-      - zookeeper
   schema-registry:
     image: docker.io/bitnami/schema-registry:6.2
     ports:
@@ -37,8 +31,6 @@ services:
       - SCHEMA_REGISTRY_KAFKA_BROKERS=PLAINTEXT://kafka-0:9092,PLAINTEXT://kafka-1:9092
 
 volumes:
-  zookeeper_data:
-    driver: local
   kafka0_data:
     driver: local
   kafka1_data:
