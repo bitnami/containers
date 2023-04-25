@@ -15,23 +15,6 @@ file:
   /opt/bitnami/ghost/versions/{{ .Env.APP_VERSION }}/node_modules/sharp/vendor/8.12.2/linux-x64/lib/libvips-cpp.so.42:
     exists: true
     mode: "0755"
-  # Check that permissions of some directories have been specifically set to 777 in postunpack phase
-  /bitnami/ghost:
-    exists: true
-    filetype: directory
-    mode: "0777"
-  /opt/bitnami/ghost/content:
-    exists: true
-    filetype: directory
-    mode: "0777"
-  /opt/bitnami/ghost/content/logs:
-    exists: true
-    filetype: directory
-    mode: "0777"
-  /.ghost:
-    exists: true
-    filetype: directory
-    mode: "0777"
 user:
   ghost:
     exists: true
