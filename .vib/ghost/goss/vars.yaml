@@ -1,0 +1,17 @@
+binaries:
+  - ghost
+  - mysql
+  - node
+  - python
+directories:
+  - paths:
+      - /home/ghost
+      - /opt/bitnami/ghost
+root_dir: /opt/bitnami
+version:
+  bin_name: cd /opt/bitnami/ghost && ghost
+  flag: --version
+sed_in_place:
+  exclude_paths:
+    # Ignore Ghost node_modules directory (not bitnami-related)
+    - .*\/ghost\/versions\/.*\/node_modules.*
