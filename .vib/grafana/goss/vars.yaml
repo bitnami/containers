@@ -1,0 +1,22 @@
+binaries:
+  - grafana
+root_dir: /opt/bitnami
+version:
+  bin_name: grafana
+  flag: --version
+files:
+  - mode: "0664"
+    paths:
+    - /opt/bitnami/grafana/conf/grafana.ini
+directories:
+  - mode: "0775"
+    paths:
+    - /opt/bitnami/grafana/conf
+    - /opt/bitnami/grafana/conf/provisioning
+    - /opt/bitnami/grafana/data
+    - /opt/bitnami/grafana/data/plugins
+    - /opt/bitnami/grafana/logs
+  - paths:
+    - /opt/bitnami/grafana/default-plugins/
+
+
