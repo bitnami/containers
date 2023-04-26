@@ -1,3 +1,14 @@
+# syntax=docker/dockerfile:1
+FROM docker.io/bitnami/minideb:bullseye
+
+WORKDIR /mvn-build
+ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
+ARG TARGETARCH
+RUN apt-get update && apt-get upgrade -y
+RUN apt-get install maven -y
+COPY pom.xml ./
+RUN mvn clean package
+
 FROM docker.io/bitnami/minideb:bullseye
 
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
@@ -48,7 +59,7 @@ ENV APP_VERSION="21.0.2" \
     BITNAMI_APP_NAME="keycloak" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/keycloak/bin:$PATH"
-
+COPY --from=0 /mvn-build/target/keycloak-server-copy/ /opt/bitnami/keycloak/
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/keycloak/entrypoint.sh" ]
 CMD [ "/opt/bitnami/scripts/keycloak/run.sh" ]
