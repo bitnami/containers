@@ -298,7 +298,6 @@ And expose the external port:
 
 **Note**: To connect from an external machine, change `localhost` above to your host's external IP/hostname and include `EXTERNAL://0.0.0.0:9093` in `KAFKA_CFG_LISTENERS` to allow for remote connections.
 
-
 #### Producer and consumer using external client
 
 These clients, from the same host, will use `localhost` to connect to Apache Kafka.
@@ -747,7 +746,7 @@ Branch 2 has been renamed to 2.8 and branch 3 has been splited into branches 3.0
 
 ### 3.4.0-debian-11-r23, 3.3.2-debian-11-r29 and 3.2.3-debian-11-r73
 
-* Apache Kafka is now configured using Kraft. You can disable this configuration with the `KAFKA_ENABLE_KRAFT=false` env var and by following the instructions in this guide. 
+* Apache Kafka is now configured using Kraft. You can disable this configuration with the `KAFKA_ENABLE_KRAFT=false` env var and by following the instructions in this guide.
 
 ### 3.0.0-debian-10-r0
 
