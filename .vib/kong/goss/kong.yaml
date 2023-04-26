@@ -19,12 +19,15 @@ file:
     exists: true
     contains:
       - "\'luarocks path\' configuration"
+  /usr/local/kong/include/opentelemetry:
+    exists: true
+    type: symlink
 command:
   # Ensure that there is no uncommented read-only postgres connection parameter in the main Kong configuration file
   check-read-only-conf-values:
-    exec: grep -E '^pg_ro.+=.+' kong.conf
+    exec: grep -E '^pg_ro.+=.+' /opt/bitnami/kong/conf/kong.conf
     exit-status: 1
   # Ensure that all non-empty keys in the main Kong configuration file are uncommented
   check-status-all-non-empty-keys:
-    exec: grep -E '^#+([a-z_ ]+)=\s*[^# ]' kong.conf | grep -v 'pg_ro'
+    exec: grep -E '^#+([a-z_ ]+)=\s*[^# ]' /opt/bitnami/kong/conf/kong.conf | grep -v 'pg_ro'
     exit-status: 1
