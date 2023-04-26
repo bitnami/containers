@@ -32,5 +32,5 @@ command:
     exec: grep -E '^#+([a-z_ ]+)=\s*[^# ]' /opt/bitnami/kong/conf/kong.conf | grep -v 'pg_ro'
     exit-status: 1
   check-app-version:
-    exec: kong version
+    exec: opt/bitnami/kong/bin/kong version
     exit-status: 0
