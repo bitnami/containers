@@ -4,10 +4,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:109c7d51bd69bb6b3df71017440c1ea0699454f81fe188056c083f0b57c96ea6" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-25T23:07:38Z" \
+      org.opencontainers.image.created="2023-04-26T17:31:04Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="10.6.12-debian-11-r24" \
+      org.opencontainers.image.ref.name="10.6.12-debian-11-r25" \
       org.opencontainers.image.title="mariadb" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="10.6.12"
@@ -24,7 +24,7 @@ RUN install_packages ca-certificates curl libaio1 libaudit1 libcap-ng0 libcrypt1
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "ini-file-1.4.5-5-linux-${OS_ARCH}-debian-11" \
-      "mariadb-10.6.12-3-linux-${OS_ARCH}-debian-11" \
+      "mariadb-10.6.12-4-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
