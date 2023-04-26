@@ -14,11 +14,11 @@ file:
   /opt/bitnami/scripts/kong-env.sh:
     exists: true
     contains:
-      - "\'luarocks path\' configuration"
+      - "'luarocks path' configuration"
   /etc/bash.bashrc:
     exists: true
     contains:
-      - "\'luarocks path\' configuration"
+      - "'luarocks path' configuration"
   /usr/local/kong/include/opentelemetry:
     exists: true
     filetype: symlink
