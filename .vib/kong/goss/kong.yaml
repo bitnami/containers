@@ -21,7 +21,7 @@ file:
       - "\'luarocks path\' configuration"
   /usr/local/kong/include/opentelemetry:
     exists: true
-    type: symlink
+    filetype: symlink
 command:
   # Ensure that there is no uncommented read-only postgres connection parameter in the main Kong configuration file
   check-read-only-conf-values:
