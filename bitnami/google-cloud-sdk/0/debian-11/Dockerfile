@@ -4,13 +4,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:109c7d51bd69bb6b3df71017440c1ea0699454f81fe188056c083f0b57c96ea6" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-24T23:40:40Z" \
+      org.opencontainers.image.created="2023-04-26T03:52:22Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.427.0-debian-11-r2" \
+      org.opencontainers.image.ref.name="0.428.0-debian-11-r0" \
       org.opencontainers.image.title="google-cloud-sdk" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.427.0"
+      org.opencontainers.image.version="0.428.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -24,7 +24,7 @@ RUN install_packages ca-certificates curl libbz2-1.0 libcom-err2 libcrypt1 libff
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.7.16-11-linux-${OS_ARCH}-debian-11" \
-      "google-cloud-sdk-0.427.0-0-linux-${OS_ARCH}-debian-11" \
+      "google-cloud-sdk-0.428.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -42,7 +42,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN mkdir /.config /.gsutil && chmod g+rwX /.config /.gsutil
 RUN mkdir /.local && chmod g+rwX /.local
 
-ENV APP_VERSION="0.427.0" \
+ENV APP_VERSION="0.428.0" \
     BITNAMI_APP_NAME="google-cloud-sdk" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/google-cloud-sdk/bin:$PATH"
 
