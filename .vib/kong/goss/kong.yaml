@@ -23,6 +23,9 @@ file:
     exists: true
     filetype: symlink
 command:
+  check-app-version:
+    exec: /opt/bitnami/kong/bin/kong version
+    exit-status: 0
   # Ensure that there is no uncommented read-only postgres connection parameter in the main Kong configuration file
   check-read-only-conf-values:
     exec: grep -E '^pg_ro.+=.+' /opt/bitnami/kong/conf/kong.conf
@@ -31,6 +34,3 @@ command:
   check-status-all-non-empty-keys:
     exec: grep -E '^#+([a-z_ ]+)=\s*[^# ]' /opt/bitnami/kong/conf/kong.conf | grep -v 'pg_ro'
     exit-status: 1
-  check-app-version:
-    exec: opt/bitnami/kong/bin/kong version
-    exit-status: 0
