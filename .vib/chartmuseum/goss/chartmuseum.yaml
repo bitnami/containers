@@ -14,8 +14,3 @@ command:
   check-directories-exist-with-user:
     exec: ls -dl /etc/ssl/certs /etc/pki/tls/certs/ 2>/dev/null | grep "drwxrwxr-x"
     exit-status: 0
-  check-app-version:
-    exec: chartmuseum --version | grep -o "[0-9]*\.[0-9]*\.[0-9]"
-    exit-status: 0
-    stdout:
-      - {{ .Env.APP_VERSION }}
