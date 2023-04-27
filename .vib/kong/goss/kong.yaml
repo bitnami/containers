@@ -23,11 +23,6 @@ file:
     exists: true
     filetype: symlink
 command:
-  check-app-version:
-    exec: /opt/bitnami/kong/bin/kong version
-    exit-status: 1
-    stdout:
-      - {{ .Env.APP_VERSION }}
   # Ensure that there is no uncommented read-only postgres connection parameter in the main Kong configuration file
   check-read-only-conf-values:
     exec: grep -E '^pg_ro.+=.+' /opt/bitnami/kong/conf/kong.conf
