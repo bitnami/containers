@@ -63,9 +63,3 @@ file:
     owner: gitea
     group: root
     filetype: file
-command:
-  check-app-version:
-    exec: gitea --version | grep -o "[0-9]*\.[0-9]*\.[0-9]" | head -1
-    exit-status: 0
-    stdout:
-      - {{ .Env.APP_VERSION }}
