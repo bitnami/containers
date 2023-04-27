@@ -1,9 +1,0 @@
-command:
-  check-app-version:
-    exec: alertmanager --version | grep -o -m 1 "[0-9]*\.[0-9]*\.[0-9]"
-    exit-status: 0
-    stdout:
-      - {{ .Env.APP_VERSION }}
-  check-binary-run:
-    exec: amtool --help
-    exit-status: 0

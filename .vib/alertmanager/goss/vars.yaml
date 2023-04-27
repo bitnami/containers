@@ -8,4 +8,7 @@ directories:
 files:
   - paths:
       - /opt/bitnami/alertmanager/conf/config.yml
+version:
+  bin_name: alertmanager
+  flag: --version
 root_dir: /opt/bitnami
