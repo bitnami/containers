@@ -4,10 +4,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:109c7d51bd69bb6b3df71017440c1ea0699454f81fe188056c083f0b57c96ea6" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-25T12:54:57Z" \
+      org.opencontainers.image.created="2023-04-27T17:16:15Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.2.0-debian-11-r14" \
+      org.opencontainers.image.ref.name="6.2.0-debian-11-r15" \
       org.opencontainers.image.title="wordpress" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="6.2.0"
@@ -24,10 +24,10 @@ RUN install_packages acl ca-certificates curl less libaudit1 libbrotli1 libbsd0 
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "php-8.1.18-1-linux-${OS_ARCH}-debian-11" \
-      "apache-2.4.57-5-linux-${OS_ARCH}-debian-11" \
+      "apache-2.4.57-6-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.11.2-5-linux-${OS_ARCH}-debian-11" \
       "libphp-8.1.18-2-linux-${OS_ARCH}-debian-11" \
-      "wordpress-6.2.0-8-linux-${OS_ARCH}-debian-11" \
+      "wordpress-6.2.0-9-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-5-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
