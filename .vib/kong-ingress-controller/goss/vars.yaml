@@ -1,0 +1,4 @@
+binaries:
+  - kong-ingress-controller
+  - wait-for-port
+root_dir: /opt/bitnami
