@@ -1,4 +1,5 @@
 version: '2'
 services:
   kong-ingress-controller:
+    # New change
     image: docker.io/bitnami/kong-ingress-controller:2
