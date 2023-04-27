@@ -11,6 +11,8 @@ file:
     owner: harbor
     filetype: directory
 command:
-  check-app-run:
-    exec: notary-signer --help
-    exit-status: 2
+  check-check-version:
+    exec: notary-signer
+    exit-status: 1
+    stdout:              
+       - {{ .Env.APP_VERSION }}
