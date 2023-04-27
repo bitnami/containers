@@ -31,5 +31,5 @@ command:
     exit-status: 0
   # Ensure swagger binary doesn't exist
   check-swagger-binary:
-    exec: ls /opt/bitnami/harbor-jobservice/bin/swagger 2>/dev/null
+    exec: ls /opt/bitnami/harbor-core/bin/swagger 2>/dev/null
     exit-status: 2
