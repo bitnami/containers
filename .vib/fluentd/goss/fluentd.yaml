@@ -1,6 +1,6 @@
 command:
   check-no-pem-files:
-    exec: find /opt/bitnami/fluentd -name "*.pem" | read
+    exec: find /opt/bitnami/fluentd -name "*.pem" | grep .
     exit-status: 1
   check-fluent-plugin-detect-exceptions:
     exec: ls -l /opt/bitnami/fluentd/gems/fluent-plugin-detect-exceptions-*/lib/fluent/plugin/*.rb 2>/dev/null | grep ".*-rwxrwxr-x"
