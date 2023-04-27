@@ -18,6 +18,4 @@ command:
   check-notary-server-binary:
     exec: notary-server -h
     exit-status: 2
-  check-migrate-binary:
-    exec: migrate -h
-    exit-status: 0
+ 
