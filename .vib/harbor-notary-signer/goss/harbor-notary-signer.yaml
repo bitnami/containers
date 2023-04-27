@@ -11,7 +11,7 @@ file:
     owner: harbor
     filetype: directory
 command:
-  check-check-version:
+  check-app-version:
     exec: notary-signer
     exit-status: 1
     stdout:              
