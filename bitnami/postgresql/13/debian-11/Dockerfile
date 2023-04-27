@@ -6,10 +6,10 @@ ARG WITH_ALL_LOCALES="no"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:109c7d51bd69bb6b3df71017440c1ea0699454f81fe188056c083f0b57c96ea6" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-24T20:14:43Z" \
+      org.opencontainers.image.created="2023-04-27T20:50:02Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="13.10.0-debian-11-r26" \
+      org.opencontainers.image.ref.name="13.10.0-debian-11-r27" \
       org.opencontainers.image.title="postgresql" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="13.10.0"
