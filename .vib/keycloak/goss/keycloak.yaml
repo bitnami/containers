@@ -67,7 +67,7 @@ file:
       - "<module name=\"javax.transaction.api\"/>"
 command:
   check-app-version:
-    exec: /opt/bitnami/keycloak/bin/kc.sh --version | grep "Keycloak" | grep -m 1 -o "[0-9]*\.[0-9]*\.[0-9]"
+    exec: /opt/bitnami/keycloak/bin/kc.sh --version
     exit-status: 0          
     stdout:              
       - {{ .Env.APP_VERSION }}
