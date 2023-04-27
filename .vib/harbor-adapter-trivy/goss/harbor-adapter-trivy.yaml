@@ -24,9 +24,3 @@ command:
   check-permissions-system-certs:
     exec: ls -l /etc/pki/tls/certs/ca-bundle.crt /etc/pki/tls/certs/ca-bundle.trust.crt /etc/ssl/certs/ca-certificates.crt 2>/dev/null | grep ".*-rw-rw-r--"
     exit-status: 0
-  check-trivy-binary:
-    exec: trivy --help
-    exit-status: 0
-  check-wire-binary:
-    exec: wire --help
-    exit-status: 0
