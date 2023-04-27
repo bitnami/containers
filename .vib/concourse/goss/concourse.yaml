@@ -1,4 +1,0 @@
-command:
-  check-binary-run:
-    exec: fly --help
-    exit-status: 0
