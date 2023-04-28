@@ -1,5 +1,4 @@
 version: '2'
 services:
-  # [TEST]
   envoy:
     image: docker.io/bitnami/envoy:1.25
