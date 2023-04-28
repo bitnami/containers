@@ -201,18 +201,18 @@ EOF
         if is_boolean_yes "$TOMCAT_INSTALL_DEFAULT_WEBAPPS"; then
             info "Deploying Tomcat from scratch"
             cp -rp "$TOMCAT_BASE_DIR"/webapps_default/* "$TOMCAT_WEBAPPS_DIR"
+
+            # These applications have been enabled for historical reasons, and do not pose any security threat
+            tomcat_enable_application examples
+            tomcat_enable_application docs
+            if is_boolean_yes "$TOMCAT_ALLOW_REMOTE_MANAGEMENT"; then
+                # These applications should not be enabled by default, for security reasons
+                info "Enabling remote connections for manager and host-manager applications"
+                tomcat_enable_application manager
+                tomcat_enable_application host-manager
+            fi
         else
             info "Skipping deployment of default webapps"
-        fi
-
-        # These applications have been enabled for historical reasons, and do not pose any security threat
-        tomcat_enable_application examples
-        tomcat_enable_application docs
-        if is_boolean_yes "$TOMCAT_ALLOW_REMOTE_MANAGEMENT"; then
-            # These applications should not be enabled by default, for security reasons
-            info "Enabling remote connections for manager and host-manager applications"
-            tomcat_enable_application manager
-            tomcat_enable_application host-manager
         fi
     fi
 }
