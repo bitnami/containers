@@ -1,0 +1,6 @@
+binaries:
+  - envoy
+root_dir: /opt/bitnami
+version:
+  bin_name: envoy
+  flag: --version
