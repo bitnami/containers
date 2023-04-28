@@ -632,7 +632,7 @@ rabbitmq_start_bg() {
     is_rabbitmq_running && return
     info "Starting RabbitMQ in background..."
     local start_command=("$RABBITMQ_BIN_DIR/rabbitmq-server")
-    am_i_root && start_command=("gosu" "$RABBITMQ_DAEMON_USER" "${start_command[@]}")
+    am_i_root && start_command=("run_as_user" "$RABBITMQ_DAEMON_USER" "${start_command[@]}")
     debug_execute "${start_command[@]}" &
     export RABBITMQ_PID="$!"
 

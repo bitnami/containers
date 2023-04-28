@@ -38,7 +38,7 @@ if [[ -n "$KEYCLOAK_EXTRA_ARGS" ]]; then
 fi
 
 if am_i_root; then
-    exec gosu "$KEYCLOAK_DAEMON_USER" /bin/bash -c "${start_command[*]}"
+    exec_as_user "$KEYCLOAK_DAEMON_USER" /bin/bash -c "${start_command[*]}"
 else
     exec /bin/bash -c "${start_command[*]}"
 fi

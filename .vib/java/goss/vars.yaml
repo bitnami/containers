@@ -1,6 +1,5 @@
 binaries:
   - java
-  - gosu
 files:
   - paths:
       - /opt/bitnami/java/legal/java.base/LICENSE

@@ -4,7 +4,6 @@ binaries:
   - yq
   - wait-for-port
   - render-template
-  - gosu
 files:
   - mode: "0664"
     paths:

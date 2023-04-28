@@ -18,8 +18,7 @@
               }
             },
             "architectures": [
-              "linux/amd64",
-              "linux/arm64"
+              "linux/amd64"
             ]
           }
         },
@@ -59,19 +58,7 @@
             "osm": {
               "associated_bossd_release": "{VIB_ENV_BOSSD_RELEASE_ID}",
               "product_name": "main-catalog-{VIB_ENV_CONTAINER}",
-              "product_version": "{VIB_ENV_APP_VERSION}-{VIB_ENV_OS_FLAVOUR}-container",
-              "architecture_overrides": [
-                {
-                  "architecture": "linux/amd64",
-                  "product_version": "{VIB_ENV_APP_VERSION}-{VIB_ENV_OS_FLAVOUR}-container",
-                  "additional_packages_file": "osspi-packages-amd64.json"
-                },
-                {
-                  "architecture": "linux/arm64",
-                  "product_version": "{VIB_ENV_APP_VERSION}-{VIB_ENV_OS_FLAVOUR}-container-arm64",
-                  "additional_packages_file": "osspi-packages-arm64.json"
-                }
-              ]
+              "product_version": "{VIB_ENV_APP_VERSION}-{VIB_ENV_OS_FLAVOUR}-container"
             },
             "resources": {
               "url": "{VIB_ENV_PACKAGES_JSON_URL}",

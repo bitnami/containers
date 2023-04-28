@@ -229,7 +229,7 @@ neo4j_initialize() {
             neo4j_admin_args=("dbms" "set-initial-password")
         fi
         if am_i_root; then
-            debug_execute gosu "$NEO4J_DAEMON_USER" neo4j-admin "${neo4j_admin_args[@]}" "$NEO4J_PASSWORD"
+            debug_execute run_as_user "$NEO4J_DAEMON_USER" neo4j-admin "${neo4j_admin_args[@]}" "$NEO4J_PASSWORD"
         else
             debug_execute neo4j-admin "${neo4j_admin_args[@]}" "$NEO4J_PASSWORD"
         fi

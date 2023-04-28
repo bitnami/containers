@@ -1,5 +1,4 @@
 binaries:
-  - gosu
   - mongod
   - mongosh
   - render-template

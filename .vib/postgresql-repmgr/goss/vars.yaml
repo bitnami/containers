@@ -1,5 +1,4 @@
 binaries:
-  - gosu
   - psql
   - pg_dump
   - pg_dumpall

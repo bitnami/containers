@@ -1,0 +1,9 @@
+command:
+  check-consul-exporter-run:
+    exec: timeout --preserve-status 5 consul_exporter
+    timeout: 8000
+    exit-status: 143
+    stderr:
+      - "Starting consul_exporter"
+      - "Listening on"
+      - "version={{ .Env.APP_VERSION }}"

@@ -20,7 +20,7 @@ EXEC=$(command -v mc)
 ARGS=("--config-dir" "${MINIO_CLIENT_CONF_DIR}" "$@")
 
 if am_i_root; then
-    exec gosu "${MINIO_CLIENT_DAEMON_USER}" "${EXEC}"  "${ARGS[@]}"
+    exec_as_user "${MINIO_CLIENT_DAEMON_USER}" "${EXEC}"  "${ARGS[@]}"
 else
     exec "${EXEC}" "${ARGS[@]}"
 fi

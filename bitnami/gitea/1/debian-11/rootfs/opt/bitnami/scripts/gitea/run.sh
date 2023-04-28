@@ -22,7 +22,7 @@ args+=("$@")
 
 info "** Starting Gitea **"
 if am_i_root; then
-    exec gosu "$GITEA_DAEMON_USER" "${cmd[@]}" "${args[@]}"
+    exec_as_user "$GITEA_DAEMON_USER" "${cmd[@]}" "${args[@]}"
 else
     exec "${cmd[@]}" "${args[@]}"
 fi

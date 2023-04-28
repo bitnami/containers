@@ -3,11 +3,12 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
-LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-16T22:07:05Z" \
+LABEL com.vmware.cp.artifact.flavor="sha256:109c7d51bd69bb6b3df71017440c1ea0699454f81fe188056c083f0b57c96ea6" \
+      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
+      org.opencontainers.image.created="2023-04-26T02:13:08Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.1.0-debian-11-r72" \
+      org.opencontainers.image.ref.name="8.1.0-debian-11-r75" \
       org.opencontainers.image.title="jasperreports" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="8.1.0"
@@ -24,12 +25,11 @@ RUN install_packages acl ca-certificates curl fontconfig git libaudit1 libbsd0 l
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "java-1.8.362-4-linux-${OS_ARCH}-debian-11" \
-      "tomcat-9.0.73-3-linux-${OS_ARCH}-debian-11" \
+      "tomcat-9.0.74-2-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-11.19.0-4-linux-${OS_ARCH}-debian-11" \
-      "mysql-client-10.6.12-4-linux-${OS_ARCH}-debian-11" \
-      "render-template-1.0.5-4-linux-${OS_ARCH}-debian-11" \
+      "mysql-client-10.11.2-5-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.5-5-linux-${OS_ARCH}-debian-11" \
       "jasperreports-8.1.0-7-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \

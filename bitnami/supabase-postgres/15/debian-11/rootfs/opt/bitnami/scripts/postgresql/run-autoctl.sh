@@ -24,7 +24,7 @@ cmd=$(command -v pg_autoctl)
 
 info "** Starting PostgreSQL autoctl_node (Mode: $POSTGRESQL_AUTOCTL_MODE) **"
 if am_i_root; then
-    exec gosu "$POSTGRESQL_DAEMON_USER" "$cmd" "${flags[@]}"
+    exec_as_user "$POSTGRESQL_DAEMON_USER" "$cmd" "${flags[@]}"
 else
     PGPASSWORD=$POSTGRESQL_REPLICATION_PASSWORD exec "$cmd" "${flags[@]}"
 fi

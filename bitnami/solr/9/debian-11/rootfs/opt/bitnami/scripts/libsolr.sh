@@ -476,7 +476,7 @@ solr_start_bg() {
 
     # Do not start as root, to avoid solr error message
     if am_i_root; then
-        debug_execute "gosu" "$SOLR_DAEMON_USER" "$exec" "${start_args[@]}"
+        debug_execute "run_as_user" "$SOLR_DAEMON_USER" "$exec" "${start_args[@]}"
     else
         debug_execute "$exec" "${start_args[@]}"
     fi

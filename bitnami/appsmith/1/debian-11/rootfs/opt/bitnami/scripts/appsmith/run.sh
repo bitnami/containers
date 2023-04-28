@@ -49,7 +49,7 @@ fi
 
 info "** Starting Appsmith ${APPSMITH_MODE} **"
 if am_i_root; then
-    exec gosu "$APPSMITH_DAEMON_USER" "${cmd[@]}" "${args[@]}"
+    exec_as_user "$APPSMITH_DAEMON_USER" "${cmd[@]}" "${args[@]}"
 else
     exec "${cmd[@]}" "${args[@]}"
 fi

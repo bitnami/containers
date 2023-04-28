@@ -2,7 +2,6 @@ binaries:
   - mysql
   - mysqld
   - ini-file
-  - gosu
 files:
   - mode: "0660"
     paths:

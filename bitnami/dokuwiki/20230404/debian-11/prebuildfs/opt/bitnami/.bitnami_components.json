@@ -1,0 +1,32 @@
+{
+    "apache": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "2.4.57-5"
+    },
+    "dokuwiki": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "2023.4.4-1"
+    },
+    "libphp": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "8.2.5-2"
+    },
+    "php": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "8.2.5-1"
+    },
+    "render-template": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.5-5"
+    }
+}

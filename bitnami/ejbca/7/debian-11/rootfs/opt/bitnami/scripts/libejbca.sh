@@ -72,7 +72,7 @@ ejbca_wildfly_command_print_output() {
     local -r cmd="${EJBCA_WILDFLY_BIN_DIR}/jboss-cli.sh"
     local -r -a args=("--connect" "-u=${EJBCA_WILDFLY_ADMIN_USER}" "-p=${EJBCA_WILDFLY_ADMIN_PASSWORD}" "$@")
     if am_i_root; then
-        gosu "$EJBCA_DAEMON_USER" "$cmd" "${args[@]}"
+        run_as_user "$EJBCA_DAEMON_USER" "$cmd" "${args[@]}"
     else
         "$cmd" "${args[@]}"
     fi
@@ -255,7 +255,7 @@ ejbca_start_wildfly_bg() {
 
     if ! is_wildfly_running; then
         if am_i_root; then
-            debug_execute gosu "$EJBCA_DAEMON_USER" "${exec}" "${args[@]}" &
+            debug_execute run_as_user "$EJBCA_DAEMON_USER" "${exec}" "${args[@]}" &
         else
             debug_execute "${exec}" "${args[@]}" &
         fi
@@ -299,7 +299,7 @@ ejbca_create_management_user() {
     local -r -a args=("-u" "$EJBCA_WILDFLY_ADMIN_USER" "-p" "$EJBCA_WILDFLY_ADMIN_PASSWORD" "-s")
 
     if am_i_root; then
-        debug_execute gosu "$EJBCA_DAEMON_USER" "$cmd" "${args[@]}"
+        debug_execute run_as_user "$EJBCA_DAEMON_USER" "$cmd" "${args[@]}"
     else
         debug_execute "$cmd" "${args[@]}"
     fi
@@ -472,7 +472,7 @@ ejbca_generate_ca() {
 #########################
 ejbca_execute_command_print_output() {
     if am_i_root; then
-        gosu "$EJBCA_DAEMON_USER" "$EJBCA_BIN_DIR"/ejbca.sh "$@" 2>&1
+        run_as_user "$EJBCA_DAEMON_USER" "$EJBCA_BIN_DIR"/ejbca.sh "$@" 2>&1
     else
         "$EJBCA_BIN_DIR"/ejbca.sh "$@" 2>&1
     fi

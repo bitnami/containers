@@ -26,7 +26,7 @@ fi
 
 info "** Starting ChartMuseum **"
 if am_i_root; then
-    exec gosu "$CHARTMUSEUM_DAEMON_USER" "${CMD[@]}"
+    exec_as_user "$CHARTMUSEUM_DAEMON_USER" "${CMD[@]}"
 else
     exec "${CMD[@]}" "$@"
 fi

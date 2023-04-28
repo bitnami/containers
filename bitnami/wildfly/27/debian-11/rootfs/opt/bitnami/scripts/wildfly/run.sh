@@ -19,7 +19,7 @@ declare -a args=("-Djboss.server.data.dir=${WILDFLY_DATA_DIR}" "$@")
 
 info "** Starting WildFly **"
 if am_i_root; then
-    exec gosu "$WILDFLY_DAEMON_USER" "${EXEC[@]}" "${args[@]}"
+    exec_as_user "$WILDFLY_DAEMON_USER" "${EXEC[@]}" "${args[@]}"
 else
     exec "${EXEC[@]}" "${args[@]}"
 fi

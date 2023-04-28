@@ -2,14 +2,15 @@ FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
-LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-16T19:45:15Z" \
+LABEL com.vmware.cp.artifact.flavor="sha256:109c7d51bd69bb6b3df71017440c1ea0699454f81fe188056c083f0b57c96ea6" \
+      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
+      org.opencontainers.image.created="2023-04-25T10:50:48Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.7.1-debian-11-r9" \
+      org.opencontainers.image.ref.name="2.7.2-debian-11-r2" \
       org.opencontainers.image.title="grafana-mimir" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.7.1"
+      org.opencontainers.image.version="2.7.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +23,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "grafana-mimir-2.7.1-1-linux-${OS_ARCH}-debian-11" \
+      "grafana-mimir-2.7.2-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -39,7 +40,7 @@ RUN apt-get autoremove --purge -y curl && \
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir -p /bitnami/grafana-mimir/data /bitnami/grafana-mimir/mimir && chmod -R g+rwX /bitnami/grafana-mimir && ln -s  /bitnami/grafana-mimir/mimir /mimir && ln -s /bitnami/grafana-mimir/data /data
 
-ENV APP_VERSION="2.7.1" \
+ENV APP_VERSION="2.7.2" \
     BITNAMI_APP_NAME="grafana-mimir" \
     PATH="/opt/bitnami/grafana-mimir/bin:$PATH"
 
