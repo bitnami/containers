@@ -4,13 +4,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:109c7d51bd69bb6b3df71017440c1ea0699454f81fe188056c083f0b57c96ea6" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-26T22:04:20Z" \
+      org.opencontainers.image.created="2023-04-29T16:54:08Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.24.3-debian-11-r7" \
+      org.opencontainers.image.ref.name="1.24.4-debian-11-r0" \
       org.opencontainers.image.title="contour" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.24.3"
+      org.opencontainers.image.version="1.24.4"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,7 +23,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "contour-1.24.3-0-linux-${OS_ARCH}-debian-11" \
+      "contour-1.24.4-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,7 +40,7 @@ RUN apt-get autoremove --purge -y curl && \
 RUN chmod g+rwX /opt/bitnami
 RUN ln -s /opt/bitnami/contour/bin/contour /bin/contour
 
-ENV APP_VERSION="1.24.3" \
+ENV APP_VERSION="1.24.4" \
     BITNAMI_APP_NAME="contour" \
     PATH="/opt/bitnami/contour/bin:$PATH"
 
