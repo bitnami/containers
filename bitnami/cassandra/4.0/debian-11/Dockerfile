@@ -5,10 +5,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:109c7d51bd69bb6b3df71017440c1ea0699454f81fe188056c083f0b57c96ea6" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-26T18:06:04Z" \
+      org.opencontainers.image.created="2023-04-29T18:45:18Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.0.9-debian-11-r4" \
+      org.opencontainers.image.ref.name="4.0.9-debian-11-r5" \
       org.opencontainers.image.title="cassandra" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="4.0.9"
@@ -24,7 +24,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libbz2-1.0 libcom-err2 libcrypt1 libffi7 libgcc-s1 libgssapi-krb5-2 libjemalloc2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncursesw6 libnsl2 libreadline8 libsqlite3-0 libssl1.1 libtinfo6 libtirpc3 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "python-3.9.16-10-linux-${OS_ARCH}-debian-11" \
+      "python-3.9.16-11-linux-${OS_ARCH}-debian-11" \
       "java-1.8.362-4-linux-${OS_ARCH}-debian-11" \
       "yq-4.33.3-0-linux-${OS_ARCH}-debian-11" \
       "cassandra-4.0.9-0-linux-${OS_ARCH}-debian-11" \
