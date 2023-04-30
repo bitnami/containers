@@ -1,0 +1,32 @@
+version: '3.4'
+services:
+  redis-node:
+    image: docker.io/bitnami/redis-cluster:7.0
+    volumes:
+      - redis-node-x_data:/bitnami/redis/data
+    environment:
+      - 'REDIS_PASSWORD=bitnami'
+      - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
+    hostname: 'redis-node-{{.Task.Slot}}'
+    deploy:
+      replicas: 5
+
+  redis-node-0:
+    image: docker.io/bitnami/redis-cluster:7.0
+    volumes:
+      - redis-node-0_data:/bitnami/redis/data
+    depends_on:
+      - redis-node
+    environment:
+      - 'REDIS_PASSWORD=bitnami'
+      - 'REDISCLI_AUTH=bitnami'
+      - 'REDIS_CLUSTER_REPLICAS=1'
+      - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
+      - 'REDIS_CLUSTER_CREATOR=yes'
+
+volumes:
+  redis-node-0_data:
+    driver: local
+  redis-node-x_data:
+    name: '{{.Service.Name}}-{{.Task.Slot}}_data'
+    driver: local
