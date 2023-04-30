@@ -4,10 +4,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:109c7d51bd69bb6b3df71017440c1ea0699454f81fe188056c083f0b57c96ea6" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-25T20:43:42Z" \
+      org.opencontainers.image.created="2023-04-29T23:45:05Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.3.1-debian-11-r34" \
+      org.opencontainers.image.ref.name="3.3.1-debian-11-r35" \
       org.opencontainers.image.title="couchdb" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.3.1"
@@ -25,7 +25,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "wait-for-port-1.0.6-6-linux-${OS_ARCH}-debian-11" \
       "ini-file-1.4.5-5-linux-${OS_ARCH}-debian-11" \
-      "erlang-25.3.0-3-linux-${OS_ARCH}-debian-11" \
+      "erlang-25.3.1-0-linux-${OS_ARCH}-debian-11" \
       "couchdb-3.3.1-7-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
