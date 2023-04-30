@@ -4,13 +4,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:109c7d51bd69bb6b3df71017440c1ea0699454f81fe188056c083f0b57c96ea6" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-25T15:52:34Z" \
+      org.opencontainers.image.created="2023-04-30T05:43:02Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.4.22-debian-11-r8" \
+      org.opencontainers.image.ref.name="5.4.23-debian-11-r0" \
       org.opencontainers.image.title="symfony" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="5.4.22"
+      org.opencontainers.image.version="5.4.23"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
@@ -24,7 +24,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "php-8.1.18-1-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.11.2-5-linux-${OS_ARCH}-debian-11" \
-      "symfony-5.4.22-0-linux-${OS_ARCH}-debian-11" \
+      "symfony-5.4.23-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -44,7 +44,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/symfony/postunpack.sh
-ENV APP_VERSION="5.4.22" \
+ENV APP_VERSION="5.4.23" \
     BITNAMI_APP_NAME="symfony" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/symfony/bin:$PATH" \
     PHP_ENABLE_OPCACHE="0"
