@@ -346,7 +346,7 @@ drupal_set_hash_salt() {
 #########################
 drush_execute() {
     if am_i_root; then
-        debug_execute gosu "$WEB_SERVER_DAEMON_USER" drush "--root=${DRUPAL_BASE_DIR}" "$@"
+        debug_execute run_as_user "$WEB_SERVER_DAEMON_USER" drush "--root=${DRUPAL_BASE_DIR}" "$@"
     else
         debug_execute drush "--root=${DRUPAL_BASE_DIR}" "$@"
     fi
