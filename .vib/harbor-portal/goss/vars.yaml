@@ -1,5 +1,4 @@
 binaries:
-  - harbor
   - nginx
   - render-template
 directories:

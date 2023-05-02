@@ -7,7 +7,6 @@ user:
 file:
   /opt/bitnami/harbor/nginx-conf:
     exists: false
-    filetype: directory
   /opt/bitnami/nginx/conf:
     exists: true
     mode: "0775"
