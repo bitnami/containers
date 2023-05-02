@@ -18,9 +18,13 @@ directories:
       - /opt/bitnami/appsmith/editor
       - /opt/bitnami/appsmith/templates/client
 files:
-  - paths:
+  - mode: "0664"
+    paths:
       - /opt/bitnami/appsmith/conf/docker.env
+  - paths:
       - /opt/bitnami/appsmith/editor/index.html
+      - /opt/bitnami/appsmith/backend/server.jar
+      - /opt/bitnami/appsmith/rts/package.json
 sed_in_place:
   exclude_paths:
     - /opt/bitnami/appsmith/rts/node_modules
