@@ -1,0 +1,4 @@
+command:
+  check-app-binary:
+    exec: mc --help
+    exit-status: 0
