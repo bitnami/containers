@@ -1,0 +1,6 @@
+binaries:
+  - tempo-query
+root_dir: /opt/bitnami
+directories:
+  - paths:
+    - /opt/bitnami/grafana-tempo-query/bin
