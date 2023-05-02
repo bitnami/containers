@@ -1,0 +1,10 @@
+file:
+  /opt/bitnami/minio/log/minio-http.log:
+    exists: true
+    filetype: symlink
+command:
+  check-app-version:
+    exec: minio --version | grep -o "[0-9]*\-[0-9]*\-[0-9]" | sed -r 's/-/./g'
+    exit-status: 0
+    stdout:
+      - {{ .Env.APP_VERSION }}
