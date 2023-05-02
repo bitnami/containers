@@ -32,11 +32,12 @@ ARG TARGETARCH
 
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
-LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-04-01T14:39:50Z" \
+LABEL com.vmware.cp.artifact.flavor="sha256:7921197aa81bc396c250990c32f0f98242361ecfbbe055730bae5784fece63b7" \
+      org.opencontainers.image.base.name="scratch" \
+      org.opencontainers.image.created="2023-05-02T07:26:33Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.9.10-scratch-r2" \
+      org.opencontainers.image.ref.name="0.9.10-scratch-r3" \
       org.opencontainers.image.title="wavefront-hpa-adapter" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.9.10"
