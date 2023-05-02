@@ -1,0 +1,5 @@
+command:
+  check-version:
+    ## grafana-operator does not return the version so we check the license name
+    exec: find /opt/bitnami/grafana-operator/licenses -type f -regex '.*{{ .Env.APP_VERSION }}.*'
+    exit-status: 0
