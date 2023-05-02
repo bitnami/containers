@@ -4,5 +4,5 @@ directories:
   - mode: "0775"
     paths:
       - /opt/bitnami/minio-client
-      - /opt/bitnami/minio-client/.mc
+      - /.mc
 root_dir: /opt/bitnami
