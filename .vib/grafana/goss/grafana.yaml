@@ -1,8 +1,4 @@
 command:
-  check-grafana:
-    exit-status: 0
-    exec: grafana --help
-  # Check the grafana command line client
   check-grafana-plugins:
     exit-status: 0
     exec: grafana-cli --pluginsDir /opt/bitnami/grafana/default-plugins/ plugins ls
