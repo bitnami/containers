@@ -1,29 +1,31 @@
 FROM docker.io/bitnami/minideb:bullseye
 
+ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:109c7d51bd69bb6b3df71017440c1ea0699454f81fe188056c083f0b57c96ea6" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-29T13:51:59Z" \
+      org.opencontainers.image.created="2023-05-03T07:16:57Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="14.21.3-debian-11-r21" \
-      org.opencontainers.image.title="node" \
+      org.opencontainers.image.ref.name="28.0.0-debian-11-r1" \
+      org.opencontainers.image.title="wildfly" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="14.21.3"
+      org.opencontainers.image.version="28.0.0"
 
-ENV OS_ARCH="${TARGETARCH:-amd64}" \
+ENV HOME="/" \
+    OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages build-essential ca-certificates curl git libbz2-1.0 libcom-err2 libcrypt1 libffi7 libgcc-s1 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncursesw6 libnsl2 libreadline8 libsqlite3-0 libsqlite3-dev libssl-dev libssl1.1 libstdc++6 libtinfo6 libtirpc3 pkg-config procps unzip wget zlib1g
+RUN install_packages ca-certificates curl libaio1 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "python-3.9.16-11-linux-${OS_ARCH}-debian-11" \
-      "node-14.21.3-4-linux-${OS_ARCH}-debian-11" \
+      "java-17.0.7-7-1-linux-${OS_ARCH}-debian-11" \
+      "wildfly-28.0.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -34,18 +36,22 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
       rm -rf "${COMPONENT}".tar.gz{,.sha256} ; \
     done
-RUN apt-get update && apt-get upgrade -y && \
+RUN apt-get autoremove --purge -y curl && \
+    apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
-RUN mkdir /.npm && chmod g+rwX /.npm
-RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
-    sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS    0/' /etc/login.defs && \
-    sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
+RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="14.21.3" \
-    BITNAMI_APP_NAME="node" \
-    PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:$PATH"
+COPY rootfs /
+RUN /opt/bitnami/scripts/java/postunpack.sh
+RUN /opt/bitnami/scripts/wildfly/postunpack.sh
+ENV APP_VERSION="28.0.0" \
+    BITNAMI_APP_NAME="wildfly" \
+    JAVA_HOME="/opt/bitnami/java" \
+    PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:$PATH" \
+    WILDFLY_HOME="/home/wildfly"
 
-EXPOSE 3000
+EXPOSE 8080 9990
 
-WORKDIR /app
-CMD [ "node" ]
+USER 1001
+ENTRYPOINT [ "/opt/bitnami/scripts/wildfly/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/wildfly/run.sh" ]

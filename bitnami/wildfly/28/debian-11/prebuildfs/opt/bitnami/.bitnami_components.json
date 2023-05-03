@@ -1,14 +1,14 @@
 {
-    "node": {
+    "java": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.21.3-4"
+        "version": "17.0.7-7-1"
     },
-    "python": {
+    "wildfly": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.9.16-11"
+        "version": "28.0.0-0"
     }
 }

@@ -997,7 +997,7 @@ cassandra_start_bg() {
     local -r args=("-p" "$CASSANDRA_PID_FILE" "-R" "-f")
 
     if am_i_root; then
-        gosu "$CASSANDRA_DAEMON_USER" "${cmd[@]}" "${args[@]}" >"$logger" 2>&1 &
+        run_as_user "$CASSANDRA_DAEMON_USER" "${cmd[@]}" "${args[@]}" >"$logger" 2>&1 &
     else
         "${cmd[@]}" "${args[@]}" >"$logger" 2>&1 &
     fi
