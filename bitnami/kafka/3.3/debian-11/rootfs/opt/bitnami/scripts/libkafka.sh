@@ -755,9 +755,8 @@ kafka_configure_from_environment_variables() {
         done
 
         value="${!var}"
-        if [[ -n "$value" ]]; then
-            kafka_server_conf_set "$key" "$value"
-        fi
+        kafka_server_conf_set "$key" "$value"
+
     done
 }
 
