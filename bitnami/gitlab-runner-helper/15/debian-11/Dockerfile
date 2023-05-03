@@ -4,10 +4,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:109c7d51bd69bb6b3df71017440c1ea0699454f81fe188056c083f0b57c96ea6" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-30T23:23:30Z" \
+      org.opencontainers.image.created="2023-05-03T15:14:15Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="15.11.0-debian-11-r3" \
+      org.opencontainers.image.ref.name="15.11.0-debian-11-r4" \
       org.opencontainers.image.title="gitlab-runner-helper" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="15.11.0"
@@ -23,7 +23,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl git git-lfs openssh-client procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "gitlab-runner-helper-15.11.0-0-linux-${OS_ARCH}-debian-11" \
+      "gitlab-runner-helper-15.11.0-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,7 +40,8 @@ RUN apt-get autoremove --purge -y curl && \
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
-RUN mkdir /home/gitlab-runner && chmod -R g+rwX /home/gitlab-runner && \
+RUN mkdir /home/gitlab-runner && \
+    chmod -R g+rwX /home/gitlab-runner && \
     ln -s /opt/bitnami/common/bin/dumb-init /usr/bin/dumb-init && \
     ln -s /opt/bitnami/scripts/gitlab-runner-helper/entrypoint.sh /entrypoint && \
     ln -s /opt/bitnami/gitlab-runner-helper/bin/gitlab-runner-helper /usr/bin/gitlab-runner-helper
