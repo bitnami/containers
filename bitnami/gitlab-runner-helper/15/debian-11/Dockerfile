@@ -40,7 +40,10 @@ RUN apt-get autoremove --purge -y curl && \
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
-RUN mkdir /home/gitlab-runner && chmod -R g+rwX /home/gitlab-runner && ln -s /opt/bitnami/common/bin/dumb-init /usr/bin/dumb-init && ln -s /opt/bitnami/scripts/gitlab-runner-helper/entrypoint.sh /entrypoint
+RUN mkdir /home/gitlab-runner && chmod -R g+rwX /home/gitlab-runner && \
+    ln -s /opt/bitnami/common/bin/dumb-init /usr/bin/dumb-init && \
+    ln -s /opt/bitnami/scripts/gitlab-runner-helper/entrypoint.sh /entrypoint && \
+    ln -s /opt/bitnami/gitlab-runner-helper/bin/gitlab-runner-helper /usr/bin/gitlab-runner-helper
 ENV APP_VERSION="15.11.0" \
     BITNAMI_APP_NAME="gitlab-runner-helper" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/gitlab-runner-helper/bin:$PATH"
