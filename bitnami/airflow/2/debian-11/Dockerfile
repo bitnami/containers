@@ -4,13 +4,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:109c7d51bd69bb6b3df71017440c1ea0699454f81fe188056c083f0b57c96ea6" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-03T06:19:08Z" \
+      org.opencontainers.image.created="2023-05-03T11:16:24Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.5.3-debian-11-r10" \
+      org.opencontainers.image.ref.name="2.6.0-debian-11-r0" \
       org.opencontainers.image.title="airflow" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.5.3"
+      org.opencontainers.image.version="2.6.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -27,7 +27,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "python-3.9.16-11-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-15.2.0-4-linux-${OS_ARCH}-debian-11" \
       "ini-file-1.4.5-5-linux-${OS_ARCH}-debian-11" \
-      "airflow-2.5.3-0-linux-${OS_ARCH}-debian-11" \
+      "airflow-2.6.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -52,7 +52,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/airflow/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
-    APP_VERSION="2.5.3" \
+    APP_VERSION="2.6.0" \
     BITNAMI_APP_NAME="airflow" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en" \
