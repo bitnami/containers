@@ -1,0 +1,7 @@
+version: '2'
+
+services:
+  pgpool-exporter:
+    image: docker.io/bitnami/pgpool-exporter:0
+    environment:
+      - DATA_SOURCE_NAME='postgresql://postgres@:5432/postgres?host=/var/run/postgresql'
