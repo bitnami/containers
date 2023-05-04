@@ -1,5 +1,4 @@
 version: '2'
 services:
   haproxy:
-    # TEST
     image: docker.io/bitnami/haproxy:2
