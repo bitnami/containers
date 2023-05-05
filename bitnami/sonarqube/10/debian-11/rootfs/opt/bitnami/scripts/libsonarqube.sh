@@ -133,7 +133,7 @@ sonarqube_initialize() {
     if [[ "${#additional_properties[@]}" -gt 0 ]]; then
         info "Adding properties provided via SONARQUBE_EXTRA_PROPERTIES to sonar.properties"
         for property in "${additional_properties[@]}"; do
-            sonarqube_conf_set "${property%%=*}" "${property#*=}"
+            sonarqube_conf_set "${property%=*}" "${property#*=}"
         done
     fi
 
@@ -186,7 +186,7 @@ EOF
                 unix_timestamp_ms="$(date '+%s%N' | cut -b1-13)"
                 for setting in "${settings_to_update[@]}"; do
                     postgresql_remote_execute "${postgresql_execute_args[@]}" <<EOF
-INSERT INTO properties (uuid, prop_key, is_empty, text_value, created_at) VALUES ('$(generate_random_string -t alphanumeric -c 20)', '${setting%%=*}', '0', '${setting#*=}', '${unix_timestamp_ms}');
+INSERT INTO properties (uuid, prop_key, is_empty, text_value, created_at) VALUES ('$(generate_random_string -t alphanumeric -c 20)', '${setting%=*}', '0', '${setting#*=}', '${unix_timestamp_ms}');
 EOF
                 done
             fi
@@ -237,7 +237,7 @@ sonarqube_start_bg() {
     (
         cd "$SONARQUBE_BASE_DIR" || return 1
         if am_i_root; then
-            debug_execute gosu "$SONARQUBE_DAEMON_USER" "${SONARQUBE_BIN_DIR}/sonar.sh" "start"
+            debug_execute run_as_user "$SONARQUBE_DAEMON_USER" "${SONARQUBE_BIN_DIR}/sonar.sh" "start"
         else
             debug_execute "${SONARQUBE_BIN_DIR}/sonar.sh" "start"
         fi
@@ -351,7 +351,7 @@ is_sonarqube_running() {
     # The 'sonar.sh status' command checks whether the PID file exists, and a process exists with that PID
     # That way we do not need to re-implement such logic
     if am_i_root; then
-        debug_execute gosu "$SONARQUBE_DAEMON_USER" "${SONARQUBE_BIN_DIR}/sonar.sh" "status"
+        debug_execute run_as_user "$SONARQUBE_DAEMON_USER" "${SONARQUBE_BIN_DIR}/sonar.sh" "status"
     else
         debug_execute "${SONARQUBE_BIN_DIR}/sonar.sh" "status"
     fi
@@ -378,7 +378,7 @@ is_sonarqube_not_running() {
 sonarqube_stop() {
     ! is_sonarqube_running && return
     if am_i_root; then
-        debug_execute gosu "$SONARQUBE_DAEMON_USER" "${SONARQUBE_BIN_DIR}/sonar.sh" "stop"
+        debug_execute run_as_user "$SONARQUBE_DAEMON_USER" "${SONARQUBE_BIN_DIR}/sonar.sh" "stop"
     else
         debug_execute "${SONARQUBE_BIN_DIR}/sonar.sh" "stop"
     fi
