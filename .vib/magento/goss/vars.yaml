@@ -1,8 +1,8 @@
 binaries:
-  - apache
-  - libphp
+  - apachectl
+  - php
   - magento
-  - mysql-client
+  - mysql
   - php
   - render-template
   - wait-for-port
@@ -16,4 +16,7 @@ files:
       # Validate that a supported web server is configured
       - /opt/bitnami/scripts/apache-env.sh
       - /opt/bitnami/scripts/libapache.sh
+version:
+  bin_name: magento
+  flag: --version
 root_dir: /opt/bitnami
