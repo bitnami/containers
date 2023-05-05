@@ -2,5 +2,5 @@ command:
   check-jaeger:
     exec: timeout --preserve-status 5 jaeger-all-in-one
     exit-status: 0
-    stdout:
+    stderr:
       - Server created
