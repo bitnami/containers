@@ -412,11 +412,14 @@ generate_random_string() {
     ascii)
         filter="[:print:]"
         ;;
+    numeric)
+        filter="0-9"
+        ;;
     alphanumeric)
         filter="a-zA-Z0-9"
         ;;
-    numeric)
-        filter="0-9"
+    alphanumeric+special|special+alphanumeric)
+        filter='a-zA-Z0-9!@#$%^'
         ;;
     *)
         echo "Invalid type ${type}" >&2
