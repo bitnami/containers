@@ -1,0 +1,44 @@
+group:
+  daemon:
+    exists: true
+user:
+  daemon:
+    exists: true
+file:
+  /opt/bitnami/magento:
+    exists: true
+    filetype: directory
+    mode: "0775"
+    owner: daemon
+    group: root
+  /bitnami/magento:
+    exists: true
+    filetype: directory
+    mode: "0775"
+    owner: daemon
+    group: root
+  /opt/bitnami/magento/tmp:
+    exists: true
+    filetype: directory
+    mode: "0775"
+    owner: daemon
+    group: root
+  /opt/bitnami/magento/uploads:
+    exists: true
+    filetype: directory
+    mode: "0775"
+    owner: daemon
+    group: root
+  /opt/bitnami/php/etc/php.ini:
+    exists: true
+    filetype: file
+    contains:
+      - "max_execution_time = 18000"
+      - "memory_limit = 1G"
+      - "realpath_cache_size = 10M"
+      - "realpath_cache_ttl = 7200"
+      - "opcache.memory_consumption = 512MB"
+      - "opcache.max_accelerated_files = 60000"
+      - "opcache.consistency_checks = 0"
+      - "opcache.validate_timestamps = 0"
+      - "opcache.enable_cli = 1"
