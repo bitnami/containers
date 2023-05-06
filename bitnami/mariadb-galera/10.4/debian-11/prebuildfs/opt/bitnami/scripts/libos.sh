@@ -412,11 +412,16 @@ generate_random_string() {
     ascii)
         filter="[:print:]"
         ;;
+    numeric)
+        filter="0-9"
+        ;;
     alphanumeric)
         filter="a-zA-Z0-9"
         ;;
-    numeric)
-        filter="0-9"
+    alphanumeric+special|special+alphanumeric)
+        # Limit variety of special characters, so there is a higher chance of containing more alphanumeric characters
+        # Special characters are harder to write, and it could impact the overall UX if most passwords are too complex
+        filter='a-zA-Z0-9!@#$%^'
         ;;
     *)
         echo "Invalid type ${type}" >&2
