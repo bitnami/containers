@@ -2,12 +2,11 @@ FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
-LABEL com.vmware.cp.artifact.flavor="sha256:109c7d51bd69bb6b3df71017440c1ea0699454f81fe188056c083f0b57c96ea6" \
-      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-03T21:32:45Z" \
+LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
+      org.opencontainers.image.created="2023-05-06T21:50:13Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.11.3-debian-11-r7" \
+      org.opencontainers.image.ref.name="0.11.3-debian-11-r8" \
       org.opencontainers.image.title="memcached-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.11.3"
