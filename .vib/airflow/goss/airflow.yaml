@@ -5,7 +5,7 @@ command:
     exit-status: 0
     stdout:
       - No data found
-  check-so-files:
+  check-subpackages:
     # Check python packages that should have been installed
     exec: . /opt/bitnami/airflow/venv/bin/activate && pip list
     exit-status: 0
