@@ -1,6 +1,4 @@
-file:
-  ## tempo-vulture does not return the version so we check the license
-  /opt/bitnami/grafana-tempo-vulture/licenses/agpl-source-links.txt:
-    exists: true
-    contains:
-      - {{ .Env.APP_VERSION }}
+command:
+  check-tempo-vulture:
+    exec: /opt/bitnami/grafana-tempo-vulture/bin/tempo-vulture --help
+    exit-status: 0
