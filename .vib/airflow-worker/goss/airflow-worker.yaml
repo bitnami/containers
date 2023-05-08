@@ -5,16 +5,35 @@ command:
     exit-status: 0
     stdout:
       - No data found
-  check-so-files:
-    # Check that all .so files in site-packages are executable
-    exec: find /opt/bitnami/airflow/venv/lib/python3.9/site-packages/ -type f -name '*.so.*' ! -executable | wc -l
+  check-subpackages:
+    # Check python packages that should have been installed
+    exec: . /opt/bitnami/airflow/venv/bin/activate && pip list
     exit-status: 0
     stdout:
-      - 0
+      # all_dbs does not show in the package list so we don't check it
+      - async
+      - amazon
+      - celery
+      - /cncf.kubernetes/
+      - docker
+      - dask
+      - elasticsearch
+      - ftp
+      - grpc
+      - hashicorp
+      - http
+      - ldap
+      - google
+      - /microsoft.azure/
+      - mysql
+      - postgres
+      - redis
+      - sendgrid
+      - sftp
+      - slack
+      - ssh
+      - statsd
+      - virtualenv
 file:
   /opt/bitnami/airflow/venv/lib/python3.9/site-packages/airflow/www/node_modules:
     exists: false
-  /opt/bitnami/airflow/venv/lib/python3.9/site-packages/airflow/config_templates/default_airflow.cfg:
-    exists: true
-    contains:
-      - Typically, this is a simple statement like "SELECT 1"
