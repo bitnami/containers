@@ -168,6 +168,7 @@ Cluster related environment variables:
 * `SOLR_HOST`: Name of the node. If not set the node IP will be used. Default: **null**
 * `SORL_ZK_SLEEP_TIME`: Sleep time when waiting for init configuration operations to finish. Default: **5**
 * `SOLR_ZK_MAX_RETRIES`: Maximum retries when waiting for init configuration operations to finish. Default: **5**
+* `SOLR_ZK_CHROOT`: ZooKeeper ZNode chroot where to store solr data. Default: **/solr**
 
 Authentication related environment variables:
 

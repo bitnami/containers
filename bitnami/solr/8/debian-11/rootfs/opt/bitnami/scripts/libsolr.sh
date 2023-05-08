@@ -112,6 +112,8 @@ solr_validate() {
     ! is_yes_no_value "$SOLR_ENABLE_CLOUD_MODE" && print_validation_error "SOLR_ENABLE_CLOUD_MODE possible values are yes or no"
     is_boolean_yes "$SOLR_ENABLE_CLOUD_MODE" && [[ -z "$SOLR_ZK_HOSTS" ]] && print_validation_error "You need to provide the Zookeper node list in SOLR_ZK_HOSTS"
 
+    [[ -n "$SOLR_ZK_CHROOT" ]] && [[ ${SOLR_ZK_CHROOT:0:1} != "/" ]] && print_validation_error "SOLR_ZK_CHROOT has to start with '/' char"
+
     ! is_boolean_yes "$SOLR_CLOUD_BOOTSTRAP" && is_boolean_yes "$SOLR_ENABLE_CLOUD_MODE" && [[ -n "$SOLR_CORES" ]] && info "This node is not a boostrap node and will not create the collection"
 
     ! is_true_false_value "$SOLR_SSL_CHECK_PEER_NAME" && print_validation_error "SOLR_SSL_CHECK_PEER_NAME possible values are true or false"
@@ -297,7 +299,7 @@ solr_wait_for_api() {
 solr_auth_already_enabled() {
     local temp_file_name="/tmp/zk-security.json"
     local -r exec="${SOLR_BIN_DIR}/solr"
-    local command_args=("zk" "cp" "zk:/solr/security.json" "$temp_file_name" "-z" "$SOLR_ZK_HOSTS")
+    local command_args=("zk" "cp" "zk:${SOLR_ZK_CHROOT}/security.json" "$temp_file_name" "-z" "$SOLR_ZK_HOSTS")
     debug "Checking if auth already enabled in ZK"
 
     "$exec" "${command_args[@]}"
@@ -324,7 +326,7 @@ solr_create_cloud_user() {
     local -r exec="${SOLR_BIN_DIR}/solr"
     local -r username="${1:?user is required}"
     local -r password="${2:?password is required}"
-    local command_args=("auth" "enable" "-type" "basicAuth" "-credentials" "${username}:${password}" "-blockUnknown" "true" "-z" "$SOLR_ZK_HOSTS/solr")
+    local command_args=("auth" "enable" "-type" "basicAuth" "-credentials" "${username}:${password}" "-blockUnknown" "true" "-z" "${SOLR_ZK_HOSTS}${SOLR_ZK_CHROOT}")
 
     info "Creating user: ${username}"
 
@@ -395,9 +397,9 @@ solr_zk_root_exists() {
     local -r exec="${SOLR_BIN_DIR}/solr"
     local command_args=("zk" "ls" "/" "-z" "$SOLR_ZK_HOSTS")
 
-    debug "Checking if root of solr exists in zookeeper"
+    debug "Checking if root of solr ($SOLR_ZK_CHROOT) exists in zookeeper"
 
-    "$exec" "${command_args[@]}" 2>/dev/null | grep -q "solr"
+    "$exec" "${command_args[@]}" 2>/dev/null | grep -q "${SOLR_ZK_CHROOT:1}"
 }
 
 #########################
@@ -412,7 +414,7 @@ solr_zk_root_exists() {
 solr_collection_exists() {
     local -r collection="${1:?collection is required}"
     local -r exec="${SOLR_BIN_DIR}/solr"
-    local command_args=("zk" "ls" "/solr/collections" "-z" "$SOLR_ZK_HOSTS")
+    local command_args=("zk" "ls" "${SOLR_ZK_CHROOT}/collections" "-z" "$SOLR_ZK_HOSTS")
     debug "Checking if ${collection} exists"
 
     "$exec" "${command_args[@]}" | grep -q "$collection"
@@ -428,7 +430,7 @@ solr_collection_exists() {
 solr_check_number_of_nodes() {
     local -r nodes="${1:-1}"
     local -r exec="${SOLR_BIN_DIR}/solr"
-    local command_args=("zk" "ls" "/solr/live_nodes" "-z" "$SOLR_ZK_HOSTS")
+    local command_args=("zk" "ls" "${SOLR_ZK_CHROOT}/live_nodes" "-z" "$SOLR_ZK_HOSTS")
 
     [[ $("$exec" "${command_args[@]}" | wc -l) -ge "$nodes" ]]
 }
@@ -442,7 +444,7 @@ solr_check_number_of_nodes() {
 ########################
 solr_is_zk_initialized() {
     local -r exec="${SOLR_BIN_DIR}/solr"
-    local command_args=("zk" "ls" "/solr" "-z" "$SOLR_ZK_HOSTS")
+    local command_args=("zk" "ls" "${SOLR_ZK_CHROOT}" "-z" "$SOLR_ZK_HOSTS")
 
     info "Checking if solr has been initialized in zookeeper"
 
@@ -471,7 +473,7 @@ solr_start_bg() {
 
     info "Starting solr in background"
     if [[ "$mode" == "cloud" ]]; then
-        start_args+=("-cloud" "-z" "$SOLR_ZK_HOSTS/solr")
+        start_args+=("-cloud" "-z" "${SOLR_ZK_HOSTS}${SOLR_ZK_CHROOT}")
     fi
 
     # Do not start as root, to avoid solr error message
@@ -539,7 +541,7 @@ is_solr_not_running() {
 #########################
 solr_zk_initialize() {
     local -r exec="${SOLR_BIN_DIR}/solr"
-    local command_args=("zk" "mkroot" "/solr" "-z" "$SOLR_ZK_HOSTS")
+    local command_args=("zk" "mkroot" "${SOLR_ZK_CHROOT}" "-z" "$SOLR_ZK_HOSTS")
 
     if solr_is_zk_initialized; then
         info "Zookeeper is already initialized"
@@ -561,7 +563,7 @@ solr_zk_initialize() {
 solr_set_ssl_url_scheme() {
     info "Initializing configuring Solr HTTPS in Zookeeper"
 
-    solr_wait_for_zk_root && "${SOLR_SERVER_DIR}/scripts/cloud-scripts/zkcli.sh" -zkhost "${SOLR_ZK_HOSTS}/solr" -cmd clusterprop -name urlScheme -val https
+    solr_wait_for_zk_root && "${SOLR_SERVER_DIR}/scripts/cloud-scripts/zkcli.sh" -zkhost "${SOLR_ZK_HOSTS}${SOLR_ZK_CHROOT}" -cmd clusterprop -name urlScheme -val https
 }
 
 #########################
