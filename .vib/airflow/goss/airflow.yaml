@@ -10,7 +10,7 @@ command:
     exec: . /opt/bitnami/airflow/venv/bin/activate && pip list
     exit-status: 0
     stdout:
-      - all_dbs
+      # all_dbs does not show in the package list so we don't add it
       - async
       - amazon
       - celery
