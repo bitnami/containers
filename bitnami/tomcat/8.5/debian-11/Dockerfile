@@ -3,12 +3,11 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
-LABEL com.vmware.cp.artifact.flavor="sha256:109c7d51bd69bb6b3df71017440c1ea0699454f81fe188056c083f0b57c96ea6" \
-      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-05T12:43:37Z" \
+LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
+      org.opencontainers.image.created="2023-05-08T13:05:40Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.5.88-debian-11-r6" \
+      org.opencontainers.image.ref.name="8.5.88-debian-11-r7" \
       org.opencontainers.image.title="tomcat" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="8.5.88"
