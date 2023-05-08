@@ -2,12 +2,11 @@ FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
-LABEL com.vmware.cp.artifact.flavor="sha256:109c7d51bd69bb6b3df71017440c1ea0699454f81fe188056c083f0b57c96ea6" \
-      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-05T01:35:50Z" \
+LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
+      org.opencontainers.image.created="2023-05-08T02:06:27Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.1.0-debian-11-r1" \
+      org.opencontainers.image.ref.name="6.1.0-debian-11-r2" \
       org.opencontainers.image.title="parse" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="6.1.0"
