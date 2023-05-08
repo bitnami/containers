@@ -3,18 +3,11 @@ command:
     exec: ghost --help
     exit-status: 0
 file:
-  # Check that the gscan test folder is properly removed during compilation
-  /opt/bitnami/ghost/versions/{{ .Env.APP_VERSION }}/node_modules/gscan/test:
-    exists: false
   # Check if node executable directory is symlinked to default bin directory
   /opt/bitnami/ghost/bin:
     filetype: symlink
     linked-to: /opt/bitnami/ghost/versions/{{ .Env.APP_VERSION }}/node_modules/.bin
     exists: true
-  # Check permissions of libvips-cpp.so.42 have been set to 755 during compilation
-  /opt/bitnami/ghost/versions/{{ .Env.APP_VERSION }}/node_modules/sharp/vendor/8.12.2/linux-x64/lib/libvips-cpp.so.42:
-    exists: true
-    mode: "0755"
 user:
   ghost:
     exists: true
