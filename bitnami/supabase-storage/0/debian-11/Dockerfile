@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-06T14:56:34Z" \
+      org.opencontainers.image.created="2023-05-08T14:17:57Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.37.9-debian-11-r5" \
+      org.opencontainers.image.ref.name="0.37.9-debian-11-r6" \
       org.opencontainers.image.title="supabase-storage" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.37.9"
@@ -24,7 +24,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.9.16-11-linux-${OS_ARCH}-debian-11" \
       "node-18.16.0-0-linux-${OS_ARCH}-debian-11" \
-      "supabase-storage-0.37.9-0-linux-${OS_ARCH}-debian-11" \
+      "supabase-storage-0.37.9-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
