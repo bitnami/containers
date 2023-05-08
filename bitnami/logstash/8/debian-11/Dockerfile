@@ -5,10 +5,10 @@ ARG LOGSTASH_PLUGINS
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-05T16:50:23Z" \
+      org.opencontainers.image.created="2023-05-08T17:26:26Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.7.1-debian-11-r1" \
+      org.opencontainers.image.ref.name="8.7.1-debian-11-r2" \
       org.opencontainers.image.title="logstash" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="8.7.1"
