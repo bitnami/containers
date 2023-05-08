@@ -1,6 +1,4 @@
-file:
-  ## tempo-query does not return the version so we check the license
-  /opt/bitnami/grafana-tempo-query/licenses/agpl-source-links.txt:
-    exists: true
-    contains:
-      - {{ .Env.APP_VERSION }}
+command:
+  check-tempo-query:
+    exec: /opt/bitnami/grafana-tempo-query/bin/tempo-query --help
+    exit-status: 0
