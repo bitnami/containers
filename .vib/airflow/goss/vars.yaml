@@ -3,6 +3,7 @@ binaries:
   - ini-file
   - psql
   - python
+  - wait-for-port
 linked_libraries:
   exclude_paths:
     # Ignore python venv executable scripts
