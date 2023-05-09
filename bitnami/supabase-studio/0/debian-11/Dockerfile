@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-09T01:11:42Z" \
+      org.opencontainers.image.created="2023-05-09T14:07:09Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.23.2-debian-11-r16" \
+      org.opencontainers.image.ref.name="0.23.2-debian-11-r17" \
       org.opencontainers.image.title="supabase-studio" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.23.2"
