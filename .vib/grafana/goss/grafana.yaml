@@ -3,24 +3,9 @@ command:
     exit-status: 0
     exec: grafana-cli --pluginsDir /opt/bitnami/grafana/default-plugins/ plugins ls
     stdout:
-      - agenty-flowcharting-panel
-      - briangann-datatable-panel
-      - briangann-gauge-panel
-      - digiapulssi-organisations-panel
-      - grafana-clock-panel
-      - grafana-piechart-panel
-      - grafana-polystat-panel
-      - jdbranham-diagram-panel
-      - larona-epict-panel
-      - marcuscalidus-svg-panel
-      - michaeldmoore-annunciator-panel
-      - michaeldmoore-multistat-panel
-      - natel-discrete-panel
-      - neocat-cal-heatmap-panel
-      - pierosavi-imageit-panel
-      - scadavis-synoptic-pane
-      - snuids-trafficlights-panel
-      - vonage-status-panel
+    {{ range $plugin := .Vars.plugins }}
+      - {{ $plugin }}
+    {{ end }}
 user:
   grafana:
     exists: true
