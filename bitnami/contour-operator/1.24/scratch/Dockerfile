@@ -32,12 +32,11 @@ ARG TARGETARCH
 
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
-LABEL com.vmware.cp.artifact.flavor="sha256:7921197aa81bc396c250990c32f0f98242361ecfbbe055730bae5784fece63b7" \
-      org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-05-02T07:29:38Z" \
+LABEL org.opencontainers.image.base.name="scratch" \
+      org.opencontainers.image.created="2023-05-09T14:06:46Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.24.0-scratch-r6" \
+      org.opencontainers.image.ref.name="1.24.0-scratch-r7" \
       org.opencontainers.image.title="contour-operator" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.24.0"
