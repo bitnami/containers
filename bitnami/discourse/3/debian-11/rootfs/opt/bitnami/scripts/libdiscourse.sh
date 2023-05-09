@@ -455,20 +455,3 @@ discourse_set_hostname() {
     fi
     discourse_conf_set "hostname" "$discourse_server_host"
 }
-
-########################
-# Install passenger native support library
-# Globals:
-#   DISCOURSE_*, BITNAMI_*, PASSENGER_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-install_native_support_library() {
-    local -r library_name="passenger_native_support.so"
-    local -r orig="${DISCOURSE_BASE_DIR}/lib/${library_name}"
-    local -r dest="${BITNAMI_ROOT_DIR}/ruby/lib/${library_name}"
-    debug "Installing passenger native support library into '${dest}'"
-    mv "${orig}" "${dest}"
-}
