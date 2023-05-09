@@ -130,6 +130,7 @@ jobs:
                                   component_arch=$arch
                                   # Added "true" to avoid errors if compilation_recipe doesn't exists
                                   compilation_recipe=$(s3cmd get "s3://${AWS_S3_BUCKET}/${component_id}/${component_version}/${component_distro}/${component_arch}/compilation-recipe.json" - 2>/dev/null || true)
+                                  echo "Compilation recipe: ${compilation_recipe}"
                                   # now getting each component to be reported
                                   while read -r json_package; do
                                       package_id="$(echo "$json_package" | jq -r '.id' )"
