@@ -8,5 +8,3 @@ version:
 directories:
   - paths:
     - /opt/bitnami/grafana-tempo/bin
-
-
