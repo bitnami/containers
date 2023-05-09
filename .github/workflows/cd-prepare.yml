@@ -122,11 +122,11 @@ jobs:
                       while read -r component_id; do
                           if [[ -n "$component_id" ]]; then
                               echo "Component ${component_id}"
-                              component_version_full=$(jq -cr '.'"${component_id}"'.version' "$components_json_file")
+                              component_version_full=$(jq -cr '."'${component_id}'".version' "$components_json_file")
                               echo "Component version: ${component_version_full}"
                               if [[ "$component_version_full" =~ $COMPONENT_VERSION_REGEX ]] && [[ "${#BASH_REMATCH[@]}" -ge 3 ]]; then
                                   component_version=${BASH_REMATCH[1]}
-                                  component_distro=$(jq -cr '.'"${component_id}"'.distro' "$components_json_file")
+                                  component_distro=$(jq -cr '."'${component_id}'".distro' "$components_json_file")
                                   # We will use the container arch instead of the component arch (component file has only amd64 references)
                                   # component_arch=$(jq -cr '."'${component_id}'".arch' "$components_json_file")
                                   component_arch=$arch
