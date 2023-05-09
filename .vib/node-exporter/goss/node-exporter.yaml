@@ -1,0 +1,4 @@
+command:
+  check-node-exporter:
+    exec: /opt/bitnami/node-exporter/bin/node_exporter --help
+    exit-status: 0
