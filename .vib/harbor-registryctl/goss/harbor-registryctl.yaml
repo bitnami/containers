@@ -15,11 +15,9 @@ file:
     mode: "0775"
     owner: harbor
     filetype: directory
+  /opt/bitnami/harbor-registryctl/bin/swagger:
+    exists: false
 command:
-  # Ensure swagger binary doesn't exist
-  check-swagger-binary:
-    exec: ls /opt/bitnami/harbor-registryctl/bin/swagger 2>/dev/null
-    exit-status: 2
   # Ensure a set of directories exist and the non-root user has write privileges to them
   check-directories-exist-with-user:
     exec: ls -dl /etc/ssl/certs /etc/pki/tls/certs/ 2>/dev/null | grep "drwxrwxr-x.*harbor"
