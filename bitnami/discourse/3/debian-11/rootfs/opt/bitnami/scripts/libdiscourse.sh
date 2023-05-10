@@ -267,6 +267,8 @@ discourse_create_conf_file() {
         discourse_conf_set "smtp_password" "$DISCOURSE_SMTP_PASSWORD"
         discourse_conf_set "smtp_enable_start_tls" "$([[ "$DISCOURSE_SMTP_PROTOCOL" = "tls" ]] && echo "true" || echo "false")"
         discourse_conf_set "smtp_authentication" "$DISCOURSE_SMTP_AUTH"
+        discourse_conf_set "smtp_open_timeout" "$DISCOURSE_SMTP_OPEN_TIMEOUT"
+        discourse_conf_set "smtp_read_timeout" "$DISCOURSE_SMTP_READ_TIMEOUT"
     fi
     # Extra configuration
     ! is_empty_value "$DISCOURSE_EXTRA_CONF_CONTENT" && echo "$DISCOURSE_EXTRA_CONF_CONTENT" >> "$DISCOURSE_CONF_FILE"
