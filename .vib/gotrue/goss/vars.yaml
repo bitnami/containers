@@ -1,0 +1,6 @@
+binaries:
+  - gotrue
+files:
+  - paths:
+      - /opt/bitnami/gotrue/schema.sql
+root_dir: /opt/bitnami
