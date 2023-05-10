@@ -4,11 +4,6 @@ group:
 user:
   harbor:
     exists: true
-file:
-  /bitnami/data:
-    exists: true
-    mode: "0775"
-    filetype: directory
 command:
   # Ensure a set of directories exist and the non-root user has write privileges to them
   check-directories-exist-with-user:

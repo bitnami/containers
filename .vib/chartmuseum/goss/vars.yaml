@@ -1,5 +1,9 @@
 binaries:
   - chartmuseum
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/data
 version:
   bin_name: chartmuseum
   flag: --version
