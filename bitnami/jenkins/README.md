@@ -322,6 +322,16 @@ docker run -d --name jenkins -p 80:8080 \
   bitnami/jenkins:latest
 ```
 
+### Configuring reverse proxy
+
+If you need to install Jenkins behind a reverse proxy with a prefix, such as mycompany.com/jenkins, you can use the "JENKINS_OPTS" environment variable for this purpose:
+
+```console
+docker run -d --name jenkins -p 8080:8080 \
+  --env JENKINS_OPTS="--prefix=/jenkins" \
+  bitnami/jenkins:latest
+```
+
 ### Skipping Bitnami initialization
 
 By default, when running this image, Bitnami implement some logic in order to configure it for working out of the box. This initialization consists of creating the user and password, preparing data to persist, configuring permissions, creating the `JENKINS_HOME`, etc. You can skip it in two ways:
