@@ -15,3 +15,11 @@ command:
     stdout:
       - Configuration loaded
       - /monitor.*quorum/
+  {{ range $binary := .Vars.binaries }}
+  check-{{ $binary }}-ssl:
+    exec: ldd /opt/bitnami/redis-sentinel/bin/{{ $binary }}
+    exit-status: 0
+    stdout:
+      - libcrypto.so
+      - libssl.so
+  {{ end }}

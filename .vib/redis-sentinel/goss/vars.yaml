@@ -1,6 +1,7 @@
 binaries:
   - redis-cli
   - redis-server
+  - redis-sentinel
 directories:
   - mode: "0775"
     paths:
