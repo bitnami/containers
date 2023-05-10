@@ -115,7 +115,7 @@ export JENKINS_EMAIL="${JENKINS_EMAIL:-user@example.com}" # only used during the
 export JENKINS_SWARM_USERNAME="${JENKINS_SWARM_USERNAME:-swarm}" # only used during the first initialization
 export JENKINS_SWARM_PASSWORD="${JENKINS_SWARM_PASSWORD:-}" # only used during the first initialization
 
-# Jenkins configuration
+# Jenkins launcher parameters
 export JENKINS_OPTS="${JENKINS_OPTS:-}"
 
 # Java configuration
