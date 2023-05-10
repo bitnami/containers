@@ -2,9 +2,15 @@ binaries:
   - fluentd
   - ruby
 directories:
-  - paths:
+  - mode: "0775"
+    paths:
+      - /opt/bitnami/fluentd/gems
+      - /opt/bitnami/fluentd/specifications
+      - /opt/bitnami/fluentd/cache
+      - /opt/bitnami/fluentd/doc
       - /opt/bitnami/fluentd/conf
       - /opt/bitnami/fluentd/logs
+      - /opt/bitnami/fluentd/plugins
 version:
   bin_name: fluentd
   flag: --version
