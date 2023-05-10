@@ -1,6 +1,5 @@
 binaries:
   - registry
-  - registry_DO_NOT_USE_GC
 directories:   
   - paths:       
       - /etc/registry
