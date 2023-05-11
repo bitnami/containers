@@ -7,9 +7,6 @@ directories:
       - /opt/bitnami/harbor-core/views
       - /opt/bitnami/harbor-core/migrations
       - /opt/bitnami/harbor-core/icons
-      - /data/certificates
-      - /data/ca_download
-      - /data/psc
 files:
   - paths:
       - /opt/bitnami/harbor-core/UIVERSION
