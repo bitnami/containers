@@ -95,7 +95,7 @@
               "authn": {
                   "header": "Authorization",
                   "token": "Bearer {VIB_ENV_GITHUB_TOKEN}"
-                }
+              }
             }
           }
         }
