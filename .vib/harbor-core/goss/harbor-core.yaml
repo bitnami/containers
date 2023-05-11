@@ -18,15 +18,15 @@ file:
   /etc/core/certificates:
     exists: true
     filetype: symlink
-    linked-to: /bitnami/harbor-core/certificates
+    linked-to: /data/certificates
   /etc/core/ca_download:
     exists: true
     filetype: symlink
-    linked-to: /bitnami/harbor-core/ca_download
+    linked-to: /data/ca_download
   /etc/core/token:
     exists: true
     filetype: symlink
-    linked-to: /bitnami/harbor-core/psc
+    linked-to: /data/psc
   /opt/bitnami/harbor-core/bin/swagger:
     exists: false
 command:
