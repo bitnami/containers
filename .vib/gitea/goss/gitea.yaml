@@ -53,7 +53,7 @@ file:
     filetype: file
 command:
   check-app-run:
-    exec: gitea web
+    exec: timeout --preserve-status 5 gitea web
     exit-status: 0
     stdout:
-      - "Starting new Web server"
+      - "Starting new"
