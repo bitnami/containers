@@ -1,7 +1,8 @@
 binaries:
   - java
   - wait-for-port
-directories:
-  - paths:
-      - /opt/bitnami/keycloak/modules/system/layers/keycloak/org/postgresql/jdbc/main
+  - kc.sh
+version:
+  bin_name: kc.sh
+  flag: --version
 root_dir: /opt/bitnami
