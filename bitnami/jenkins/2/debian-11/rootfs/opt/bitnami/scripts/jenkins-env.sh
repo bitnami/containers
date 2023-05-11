@@ -47,6 +47,7 @@ jenkins_env_vars=(
     JENKINS_EMAIL
     JENKINS_SWARM_USERNAME
     JENKINS_SWARM_PASSWORD
+    JENKINS_OPTS
     JAVA_HOME
     JAVA_OPTS
     DISABLE_JENKINS_INITIALIZATION
@@ -114,6 +115,9 @@ export JENKINS_PASSWORD="${JENKINS_PASSWORD:-bitnami}" # only used during the fi
 export JENKINS_EMAIL="${JENKINS_EMAIL:-user@example.com}" # only used during the first initialization
 export JENKINS_SWARM_USERNAME="${JENKINS_SWARM_USERNAME:-swarm}" # only used during the first initialization
 export JENKINS_SWARM_PASSWORD="${JENKINS_SWARM_PASSWORD:-}" # only used during the first initialization
+
+# Jenkins launcher parameters
+export JENKINS_OPTS="${JENKINS_OPTS:-}"
 
 # Java configuration
 export JAVA_HOME="${JAVA_HOME:-${BITNAMI_ROOT_DIR}/java}"

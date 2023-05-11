@@ -38,6 +38,10 @@ else
         "--httpsKeyStorePassword=${JENKINS_KEYSTORE_PASSWORD}"
     )
 fi
+if [[ -n "${JENKINS_OPTS:-}" ]]; then
+    read -r -a jenkins_opts <<<"$JENKINS_OPTS"
+    args+=("${jenkins_opts[@]}")
+fi
 args+=("$@")
 
 info "** Starting Jenkins **"
