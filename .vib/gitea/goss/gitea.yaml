@@ -21,12 +21,6 @@ file:
     owner: gitea
     group: root
     filetype: directory
-  /opt/bitnami/gitea/custom/conf:
-    exists: true
-    mode: "0775"
-    owner: gitea
-    group: root
-    filetype: directory
   /opt/bitnami/gitea/data:
     exists: true
     mode: "0775"
@@ -51,15 +45,15 @@ file:
     owner: gitea
     group: root
     filetype: directory
-  /opt/bitnami/gitea/custom/conf/app.ini.template:
-    exists: true
-    mode: "0664"
-    owner: gitea
-    group: root
-    filetype: file
   /opt/bitnami/gitea/custom/conf/app.ini:
     exists: true
     mode: "0664"
     owner: gitea
     group: root
     filetype: file
+command:
+  check-app-run:
+    exec: gitea web
+    exit-status: 0
+    stdout:
+      - "Starting new Web server"
