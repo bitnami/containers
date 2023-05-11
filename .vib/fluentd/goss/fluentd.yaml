@@ -6,5 +6,9 @@ command:
     exec: ls -l /opt/bitnami/fluentd/gems/fluent-plugin-detect-exceptions-*/lib/fluent/plugin/*.rb 2>/dev/null | grep ".*-rwxrwxr-x"
     exit-status: 0
   check-plugins:
-    exec: ls /opt/bitnami/fluentd/gems/fluent-plugin-concat-* 2>/dev/null && ls /opt/bitnami/fluentd/gems/fluent-plugin-detect-exceptions-* 2>/dev/null && ls /opt/bitnami/fluentd/gems/fluent-plugin-elasticsearch-* 2>/dev/null && ls /opt/bitnami/fluentd/gems/fluent-plugin-grafana-loki-* 2>/dev/null && ls /opt/bitnami/fluentd/gems/fluent-plugin-kafka-* 2>/dev/null && ls /opt/bitnami/fluentd/gems/fluent-plugin-kubernetes_metadata_filter-* 2>/dev/null && ls /opt/bitnami/fluentd/gems/fluent-plugin-multi-format-parser-* 2>/dev/null && ls /opt/bitnami/fluentd/gems/fluent-plugin-prometheus-* 2>/dev/null && ls /opt/bitnami/fluentd/gems/fluent-plugin-rewrite-tag-filter-* 2>/dev/null && ls /opt/bitnami/fluentd/gems/fluent-plugin-s3-* 2>/dev/null && ls /opt/bitnami/fluentd/gems/fluent-plugin-systemd-* 2>/dev/null && ls /opt/bitnami/fluentd/gems/fluent-plugin-record-modifier-* 2>/dev/null && ls /opt/bitnami/fluentd/gems/oj-* 2>/dev/null && ls /opt/bitnami/fluentd/gems/json-* 2>/dev/null && ls /opt/bitnami/fluentd/gems/fluentd-* 2>/dev/null && ls /opt/bitnami/fluentd/gems/activesupport-* 2>/dev/null && ls /opt/bitnami/fluentd/gems/elasticsearch-xpack-* 2>/dev/null
+    exec: gem list --local
     exit-status: 0
+    stdout:
+      { { range $gem := .Vars.modules.gems } }
+        - "{{ $gem }}"
+      { { end } }
