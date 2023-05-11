@@ -1,0 +1,21 @@
+binaries:
+  - kibana
+  - kibana-keystore
+  - yq
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/kibana
+      - /bitnami/kibana/data
+      - /opt/bitnami/kibana/config
+      - /opt/bitnami/kibana/logs
+      - /opt/bitnami/kibana/plugins
+      - /opt/bitnami/kibana/tmp
+      - /docker-entrypoint-initdb.d
+files:
+  - paths:
+      - /opt/bitnami/kibana/config/node.options
+root_dir: /opt/bitnami
+version:
+  bin_name: kibana
+  flag: --version
