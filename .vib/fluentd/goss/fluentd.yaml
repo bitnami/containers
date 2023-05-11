@@ -9,6 +9,6 @@ command:
     exec: gem list --local
     exit-status: 0
     stdout:
-      { { range $gem := .Vars.modules.gems } }
+      {{ range $gem := .Vars.modules.gems }}
         - "{{ $gem }}"
-      { { end } }
+      {{ end }}
