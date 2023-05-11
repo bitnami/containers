@@ -18,18 +18,19 @@ file:
   /etc/core/certificates:
     exists: true
     filetype: symlink
+    linked-to: /bitnami/harbor-core/certificates
   /etc/core/ca_download:
     exists: true
     filetype: symlink
+    linked-to: /bitnami/harbor-core/ca_download
   /etc/core/token:
     exists: true
     filetype: symlink
+    linked-to: /bitnami/harbor-core/psc
+  /opt/bitnami/harbor-core/bin/swagger:
+    exists: false
 command:
   # Ensure permissions for Internal TLS
   check-permissions-system-certs:
     exec: ls -l /etc/pki/tls/certs/ca-bundle.crt /etc/pki/tls/certs/ca-bundle.trust.crt /etc/ssl/certs/ca-certificates.crt 2>/dev/null | grep ".*-rw-rw-r--"
     exit-status: 0
-  # Ensure swagger binary doesn't exist
-  check-swagger-binary:
-    exec: ls /opt/bitnami/harbor-core/bin/swagger 2>/dev/null
-    exit-status: 2
