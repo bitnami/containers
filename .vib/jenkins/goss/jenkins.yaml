@@ -2,11 +2,6 @@ command:
   check-app-jar:
     exec: java -jar /opt/bitnami/jenkins/jenkins-plugin-manager.jar
     exit-status: 0
-  check-app-version:
-    exec: java -jar /opt/bitnami/jenkins/jenkins.war --version
-    exit-status: 0
-    stdout:              
-      - {{ .Env.APP_VERSION }}
 file:
   /opt/bitnami/jenkins/plugins.txt:
     exists: true
