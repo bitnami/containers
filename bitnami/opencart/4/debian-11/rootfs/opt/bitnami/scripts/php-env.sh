@@ -83,5 +83,6 @@ export PHP_MAX_INPUT_VARS="${PHP_MAX_INPUT_VARS:-}"
 export PHP_MEMORY_LIMIT="${PHP_MEMORY_LIMIT:-}"
 export PHP_POST_MAX_SIZE="${PHP_POST_MAX_SIZE:-}"
 export PHP_UPLOAD_MAX_FILESIZE="${PHP_UPLOAD_MAX_FILESIZE:-}"
+export PHP_OUTPUT_BUFFERING="8196"
 
 # Custom environment variables may be defined below

@@ -179,8 +179,8 @@ pgbouncer_initialize() {
     info "Configuring credentials"
     # Create credentials file
     if ! pgbouncer_is_file_external "userlist.txt"; then
-        echo "\"$POSTGRESQL_USERNAME\" \"$POSTGRESQL_PASSWORD\"" >"$PGBOUNCER_AUTH_FILE"
-        echo "$PGBOUNCER_USERLIST" >>"$PGBOUNCER_AUTH_FILE"
+        echo "\"$POSTGRESQL_USERNAME\" \"$POSTGRESQL_PASSWORD\"" > "$PGBOUNCER_AUTH_FILE"
+        echo "$PGBOUNCER_USERLIST" >> "$PGBOUNCER_AUTH_FILE"
     else
         debug "User list file mounted externally, skipping configuration"
     fi
@@ -268,7 +268,7 @@ pgbouncer_initialize() {
             local key value
             key="$(awk -F: '{print $1}' <<<"$pair")"
             value="$(awk -F: '{print $2}' <<<"$pair")"
-            ! is_empty_value "${value}" && ini-file set --section "pgbouncer" --key "${key}" --value "${value}" "$PGBOUNCER_CONF_FILE"
+            ! is_empty_value "${value}" && ini-file set --ignore-inline-comments --section "pgbouncer" --key "${key}" --value "${value}" "$PGBOUNCER_CONF_FILE"
         done
         if [[ "$PGBOUNCER_CLIENT_TLS_SSLMODE" != "disable" ]]; then
             ini-file set --section "pgbouncer" --key "client_tls_cert_file" --value "$PGBOUNCER_CLIENT_TLS_CERT_FILE" "$PGBOUNCER_CONF_FILE"

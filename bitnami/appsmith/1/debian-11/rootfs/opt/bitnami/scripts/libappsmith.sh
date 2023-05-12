@@ -405,7 +405,7 @@ appsmith_backend_start_bg() {
     local -r cmd=("java")
     local -r args=("-Dserver.port=${APPSMITH_API_PORT}" "-Dappsmith.admin.envfile=${APPSMITH_CONF_FILE}" "-Djava.security.egd=file:/dev/./urandom" "-jar" "${APPSMITH_BASE_DIR}/backend/server.jar")
     if am_i_root; then
-        gosu "$APPSMITH_DAEMON_USER" "${cmd[@]}" "${args[@]}" >"$log_file" 2>&1 &
+        run_as_user "$APPSMITH_DAEMON_USER" "${cmd[@]}" "${args[@]}" >"$log_file" 2>&1 &
     else
         "${cmd[@]}" "${args[@]}" >"$log_file" 2>&1 &
     fi

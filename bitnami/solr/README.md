@@ -31,6 +31,8 @@ You can find the available configuration options in the [Environment Variables](
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
+Looking to use Apache Solr in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
@@ -168,6 +170,7 @@ Cluster related environment variables:
 * `SOLR_HOST`: Name of the node. If not set the node IP will be used. Default: **null**
 * `SORL_ZK_SLEEP_TIME`: Sleep time when waiting for init configuration operations to finish. Default: **5**
 * `SOLR_ZK_MAX_RETRIES`: Maximum retries when waiting for init configuration operations to finish. Default: **5**
+* `SOLR_ZK_CHROOT`: ZooKeeper ZNode chroot where to store solr data. Default: **/solr**
 
 Authentication related environment variables:
 

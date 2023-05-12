@@ -1,21 +1,15 @@
 {
-    "gosu": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-5"
-    },
     "ini-file": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.4.5-4"
+        "version": "1.4.5-5"
     },
     "pgbouncer": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.18.0-6"
+        "version": "1.19.0-0"
     },
     "postgresql-client": {
         "arch": "amd64",
@@ -27,6 +21,6 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-4"
+        "version": "1.0.6-6"
     }
 }

@@ -24,7 +24,7 @@ start_command=("${TENSORFLOW_SERVING_BASE_DIR}/serving/bazel-bin/tensorflow_serv
     "--file_system_poll_wait_seconds=5" )
 
 if am_i_root; then
-    exec gosu "$TENSORFLOW_SERVING_DAEMON_USER" "${start_command[@]}"
+    exec_as_user "$TENSORFLOW_SERVING_DAEMON_USER" "${start_command[@]}"
 else
     exec "${start_command[@]}"
 fi

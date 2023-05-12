@@ -1,6 +1,5 @@
 binaries:
   - consul
-  - gosu
   - render-template
 directories:
   - mode: "0775"

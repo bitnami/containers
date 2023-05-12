@@ -215,7 +215,7 @@ tomcat_start_bg() {
     info "Starting Tomcat in background"
     local start_error=0
     if am_i_root; then
-        debug_execute gosu "$TOMCAT_DAEMON_USER" "${TOMCAT_BIN_DIR}/startup.sh" || start_error="$?"
+        debug_execute run_as_user "$TOMCAT_DAEMON_USER" "${TOMCAT_BIN_DIR}/startup.sh" || start_error="$?"
     else
         debug_execute "${TOMCAT_BIN_DIR}/startup.sh" || start_error="$?"
     fi
@@ -246,7 +246,7 @@ tomcat_stop() {
     # In addition, force the shutdown if it did not stop in time to ensure that the shutdown (almost) never fails
     local tomcat_shutdown_timeout=10
     if am_i_root; then
-        debug_execute gosu "$TOMCAT_DAEMON_USER" "${TOMCAT_BIN_DIR}/shutdown.sh" "$tomcat_shutdown_timeout" -force || stop_error="$?"
+        debug_execute run_as_user "$TOMCAT_DAEMON_USER" "${TOMCAT_BIN_DIR}/shutdown.sh" "$tomcat_shutdown_timeout" -force || stop_error="$?"
     else
         debug_execute "${TOMCAT_BIN_DIR}/shutdown.sh" "$tomcat_shutdown_timeout" -force || stop_error="$?"
     fi

@@ -205,7 +205,7 @@ etcd_start_bg() {
 
     info "Starting etcd in background"
     local start_command=("etcd")
-    am_i_root && start_command=("gosu" "$ETCD_DAEMON_USER" "${start_command[@]}")
+    am_i_root && start_command=("run_as_user" "$ETCD_DAEMON_USER" "${start_command[@]}")
     [[ -f "$ETCD_CONF_FILE" ]] && start_command+=("--config-file" "$ETCD_CONF_FILE")
     debug_execute "${start_command[@]}" &
     sleep 3

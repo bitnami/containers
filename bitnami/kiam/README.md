@@ -62,7 +62,7 @@ docker build -t bitnami/APP:latest .
 To run commands inside this container you can use `docker run`, for example to execute `kiam --version` you can follow the example below:
 
 ```console
-docker run --rm --name Kiam bitnami/kiam:latest -- --version
+docker run --rm --name kiam bitnami/kiam:latest -- --version
 ```
 
 Check the [official Kiam documentation](https://github.com/uswitch/kiam/tree/master/docs) for a list of the available parameters.

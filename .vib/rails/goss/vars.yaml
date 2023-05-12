@@ -1,5 +1,4 @@
 binaries:
-  - gosu
   - mysql
   - node
   - python
