@@ -4,5 +4,17 @@
         "distro": "debian-11",
         "type": "NAMI",
         "version": "3.0.1-0"
+    },
+    "render-template": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.5-5"
+    },
+    "yq": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "4.33.3-0"
     }
 }
