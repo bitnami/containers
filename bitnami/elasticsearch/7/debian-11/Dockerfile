@@ -5,13 +5,13 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-16T17:28:19Z" \
+      org.opencontainers.image.created="2023-05-11T18:34:06Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.17.9-debian-11-r26" \
+      org.opencontainers.image.ref.name="7.17.10-debian-11-r3" \
       org.opencontainers.image.title="elasticsearch" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="7.17.9"
+      org.opencontainers.image.version="7.17.10"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,9 +26,8 @@ RUN install_packages ca-certificates curl libasound2-dev libc6 libfreetype6 libf
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "yq-4.33.3-0-linux-${OS_ARCH}-debian-11" \
-      "java-17.0.6-10-4-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
-      "elasticsearch-7.17.9-7-linux-${OS_ARCH}-debian-11" \
+      "java-17.0.7-7-1-linux-${OS_ARCH}-debian-11" \
+      "elasticsearch-7.17.10-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -46,7 +45,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/elasticsearch/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
-ENV APP_VERSION="7.17.9" \
+ENV APP_VERSION="7.17.10" \
     BITNAMI_APP_NAME="elasticsearch" \
     ES_JAVA_HOME="/opt/bitnami/java" \
     JAVA_HOME="/opt/bitnami/java" \

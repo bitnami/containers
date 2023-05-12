@@ -1,5 +1,4 @@
 binaries:
-  - gosu
   - redis-cli
   - redis-server
   - wait-for-port

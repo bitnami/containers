@@ -17,7 +17,7 @@ set -o pipefail
 
 info "** Starting Parse **"
 if am_i_root; then
-    exec gosu "$PARSE_DAEMON_USER" "${PARSE_BASE_DIR}/bin/parse-server" "$PARSE_CONF_FILE" "$@"
+    exec_as_user "$PARSE_DAEMON_USER" "${PARSE_BASE_DIR}/bin/parse-server" "$PARSE_CONF_FILE" "$@"
 else
     exec "${PARSE_BASE_DIR}/bin/parse-server" "$PARSE_CONF_FILE" "$@"
 fi

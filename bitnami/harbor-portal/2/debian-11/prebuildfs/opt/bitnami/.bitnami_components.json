@@ -1,15 +1,9 @@
 {
-    "gosu": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-5"
-    },
     "harbor": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.7.1-4"
+        "version": "2.8.1-0"
     },
     "nginx": {
         "arch": "amd64",
@@ -21,6 +15,6 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-4"
+        "version": "1.0.5-5"
     }
 }

@@ -1,0 +1,6 @@
+binaries:
+  - rclone
+root_dir: /opt/bitnami
+version:
+  bin_name: rclone
+  flag: --version

@@ -18,7 +18,7 @@ set -o pipefail
 info "** Starting Kibana **"
 start_command=("${KIBANA_BIN_DIR}/kibana" "serve")
 if am_i_root; then
-    exec gosu "$KIBANA_DAEMON_USER" "${start_command[@]}"
+    exec_as_user "$KIBANA_DAEMON_USER" "${start_command[@]}"
 else
     exec "${start_command[@]}"
 fi

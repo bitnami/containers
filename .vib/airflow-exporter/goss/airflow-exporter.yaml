@@ -1,0 +1,8 @@
+command:
+  check-airflow-exporter-run:
+    exec: AIRFLOW_PROMETHEUS_DATABASE_NAME=mydatabase timeout --preserve-status 5 airflow-prometheus-exporter
+    timeout: 8000
+    exit-status: 143
+    stderr:
+      - Starting airflow-exporter
+      - mydatabase

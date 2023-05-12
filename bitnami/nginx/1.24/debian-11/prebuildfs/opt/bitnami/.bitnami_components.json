@@ -1,0 +1,14 @@
+{
+    "nginx": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.24.0-0"
+    },
+    "render-template": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.5-5"
+    }
+}

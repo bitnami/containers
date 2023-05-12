@@ -249,7 +249,7 @@ jasperreports_run_install_scripts() {
 
     # We set "y" to accept a warning on the keystore files
     if am_i_root; then
-        echo "y" | debug_execute gosu "$JASPERREPORTS_DAEMON_USER" "${JASPERREPORTS_CONF_DIR}/js-ant" "import-minimal-ce"
+        echo "y" | debug_execute run_as_user "$JASPERREPORTS_DAEMON_USER" "${JASPERREPORTS_CONF_DIR}/js-ant" "import-minimal-ce"
 
     else
         echo "y" | debug_execute "${JASPERREPORTS_CONF_DIR}/js-ant" "import-minimal-ce"
@@ -274,7 +274,7 @@ jasperreports_run_deployment_scripts() {
         # During the deployment, it will copy one library file to the tomcat lib folder. We need to temporarily grant write permissions
         # for the installer to finish successfully. We restore the initial permissions after the operation
         chmod o+w "$BITNAMI_ROOT_DIR/tomcat/lib"
-        debug_execute gosu "$JASPERREPORTS_DAEMON_USER" "${JASPERREPORTS_CONF_DIR}/js-ant" "deploy-webapp-ce"
+        debug_execute run_as_user "$JASPERREPORTS_DAEMON_USER" "${JASPERREPORTS_CONF_DIR}/js-ant" "deploy-webapp-ce"
         chmod o-w "$BITNAMI_ROOT_DIR/tomcat/lib"
     else
         debug_execute "${JASPERREPORTS_CONF_DIR}/js-ant" "deploy-webapp-ce"
@@ -298,7 +298,7 @@ jasperreports_run_upgrade_scripts() {
     info "Running upgrade script"
     cd "${JASPERREPORTS_CONF_DIR}" || exit
     if am_i_root; then
-        debug_execute gosu "$JASPERREPORTS_DAEMON_USER" "${JASPERREPORTS_CONF_DIR}/js-upgrade-samedb-ce.sh"
+        debug_execute run_as_user "$JASPERREPORTS_DAEMON_USER" "${JASPERREPORTS_CONF_DIR}/js-upgrade-samedb-ce.sh"
 
     else
         debug_execute "${JASPERREPORTS_CONF_DIR}/js-upgrade-samedb-ce.sh"

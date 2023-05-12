@@ -1,15 +1,9 @@
 {
-    "gosu": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-5"
-    },
     "mysql-client": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.6.12-4"
+        "version": "10.11.3-0"
     },
     "nginx": {
         "arch": "amd64",
@@ -21,18 +15,18 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.18-0"
+        "version": "8.1.19-0"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-4"
+        "version": "1.0.5-5"
     },
     "wordpress": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.2.0-8"
+        "version": "6.2.0-14"
     }
 }

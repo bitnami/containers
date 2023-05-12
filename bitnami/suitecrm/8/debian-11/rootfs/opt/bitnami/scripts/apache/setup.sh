@@ -35,6 +35,10 @@ if [[ ! -f "${APACHE_CONF_DIR}/bitnami/certs/server.crt" ]]; then
     openssl x509 -req -sha256 -in "$SSL_CSR_FILE" -signkey "$SSL_KEY_FILE" -out "$SSL_CERT_FILE" -days 1825 -extfile <(echo -n "$SSL_EXT")
     rm -f "$SSL_CSR_FILE"
 fi
+# Load SSL configuration
+if [[ -f "${APACHE_CONF_DIR}/bitnami/bitnami.conf" ]] && [[ -f "${APACHE_CONF_DIR}/bitnami/bitnami-ssl.conf" ]]; then
+    ensure_apache_configuration_exists "Include \"${APACHE_CONF_DIR}/bitnami/bitnami-ssl.conf\"" "bitnami-ssl\.conf" "${APACHE_CONF_DIR}/bitnami/bitnami.conf"
+fi
 
 # Copy vhosts files
 if ! is_dir_empty "/vhosts"; then
