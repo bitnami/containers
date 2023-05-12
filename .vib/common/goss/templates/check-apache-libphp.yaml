@@ -1,3 +1,8 @@
+########################
+# Test coverage for apache-libphp package
+# Needed vars:
+# - None
+########################
 command:
   # Check explicitly enabled and disabled modules
   check-apache-libphp-loaded-modules:

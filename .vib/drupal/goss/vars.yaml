@@ -1,6 +1,5 @@
 binaries:
   - apachectl
-  - gosu
   - mysql
   - php
   - render-template
