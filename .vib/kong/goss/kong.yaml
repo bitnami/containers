@@ -31,3 +31,6 @@ command:
   check-status-all-non-empty-keys:
     exec: grep -E '^#+([a-z_ ]+)=\s*[^# ]' /opt/bitnami/kong/conf/kong.conf | grep -v 'pg_ro'
     exit-status: 1
+  check-nginx-run:
+    exec: nginx -V
+    exit-status: 0

@@ -13,6 +13,8 @@ directories:
       - /opt/bitnami/kong/server/lib
 files:
   - paths:
-      - /opt/bitnami/kong/conf/kong.conf.default
       - /opt/bitnami/kong/server/lib/pluginsocket.proto
+version:
+  bin_name: kong
+  flag: version
 root_dir: /opt/bitnami
