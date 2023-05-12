@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.11.2-5"
+        "version": "10.11.3-0"
     },
     "postgresql-client": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "15.2.0-4"
+        "version": "15.3.0-0"
     },
     "redmine": {
         "arch": "amd64",
