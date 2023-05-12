@@ -1,6 +1,5 @@
 binaries:
   - elasticsearch
-  - gosu
   - java
   - yq
 directories:

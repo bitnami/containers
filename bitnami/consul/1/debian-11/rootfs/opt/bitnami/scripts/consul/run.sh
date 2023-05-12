@@ -26,7 +26,7 @@ fi
 
 info "** Starting Consul **"
 if am_i_root; then
-    exec gosu "${CONSUL_DAEMON_USER}" "${EXEC}" "${flags[@]}"
+    exec_as_user "${CONSUL_DAEMON_USER}" "${EXEC}" "${flags[@]}"
 else
     exec "${EXEC}" "${flags[@]}"
 fi

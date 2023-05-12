@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-17T15:25:57Z" \
+      org.opencontainers.image.created="2023-05-11T20:41:04Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.8.0-debian-11-r1" \
+      org.opencontainers.image.ref.name="2.8.0-debian-11-r9" \
       org.opencontainers.image.title="harbor-notary-signer" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.8.0"
@@ -23,7 +23,6 @@ RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "harbor-notary-signer-2.8.0-1-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -43,7 +42,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-notary-signer/postunpack.sh
 ENV APP_VERSION="2.8.0" \
     BITNAMI_APP_NAME="harbor-notary-signer" \
-    PATH="/opt/bitnami/harbor-notary-signer/bin:/opt/bitnami/common/bin:$PATH" \
+    PATH="/opt/bitnami/harbor-notary-signer/bin:$PATH" \
     SERVICE_NAME="notary_signer"
 
 VOLUME [ "/etc/notary" ]

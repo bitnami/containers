@@ -1,6 +1,5 @@
 binaries:
   - express
-  - gosu
   - node
   - python
   - wait-for-port

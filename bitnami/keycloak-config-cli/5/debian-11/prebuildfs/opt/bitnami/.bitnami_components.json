@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "17.0.6-10-4"
+        "version": "17.0.7-7-1"
     },
     "keycloak-config-cli": {
         "arch": "amd64",

@@ -1,26 +1,20 @@
 {
-    "gosu": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-5"
-    },
     "java": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "17.0.6-10-4"
+        "version": "17.0.7-7-1"
     },
     "keycloak": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "21.0.2-0"
+        "version": "21.1.1-0"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-4"
+        "version": "1.0.6-6"
     }
 }

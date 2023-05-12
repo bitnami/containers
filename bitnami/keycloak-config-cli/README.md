@@ -10,7 +10,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
 
 ```console
-docker run --rm --name Keycloak Config CLI bitnami/keycloak-config-cli:latest
+docker run --rm --name keycloak-config-cli bitnami/keycloak-config-cli:latest
 ```
 
 ## Why use Bitnami Images?

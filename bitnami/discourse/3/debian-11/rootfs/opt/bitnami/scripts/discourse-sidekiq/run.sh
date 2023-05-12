@@ -26,7 +26,7 @@ START_CMD=(
 
 info "** Starting Sidekiq **"
 if am_i_root; then
-    exec gosu "$DISCOURSE_DAEMON_USER" "${START_CMD[@]}" "$@"
+    exec_as_user "$DISCOURSE_DAEMON_USER" "${START_CMD[@]}" "$@"
 else
     exec "${START_CMD[@]}" "$@"
 fi

@@ -203,6 +203,7 @@ The phpMyAdmin instance can be customized by specifying environment variables on
 * `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
 * `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. Default: **80M**
 * `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP upload. Default: **80M**
+* `PHP_OUTPUT_BUFFERING`: Size of the output buffer for PHP. Default: **8196**
 
 #### Specifying Environment variables using Docker Compose
 
