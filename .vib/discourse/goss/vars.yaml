@@ -5,9 +5,8 @@ binaries:
   - node
   - brotli
   - psql
-files:
-  - paths:
-      - /opt/bitnami/ruby/lib/passenger_native_support.so
+  - bundle
+  - terser
 directories:
   - mode: "0775"
     paths:

@@ -4,6 +4,7 @@
 #   - .Vars.root_dir
 # Optional vars:
 #   - .Vars.linked_libraries.exclude_paths (Array)
+#   - .Vars.linked_libraries.timeout (String)
 ########################
 command:
   check-linked-libraries:
