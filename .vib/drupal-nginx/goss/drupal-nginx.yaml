@@ -1,11 +1,11 @@
 file:
-  # HTTP vhost should have been properly rendered
+  # HTTP server block should have been properly rendered
   /opt/bitnami/nginx/conf/server_blocks/drupal-server-block.conf:
     exists: true
     filetype: file
     contains:
       - /root\s+/opt/bitnami/drupal/
-  # HTTPs vhost should have been properly rendered
+  # HTTPs server block should have been properly rendered
   /opt/bitnami/nginx/conf/server_blocks/drupal-https-server-block.conf:
     exists: true
     filetype: file
@@ -26,6 +26,5 @@ file:
     exists: true
     filetype: file
     contains:
-      - "index index.html index.htm index.php;"
       - "location ~ \\.php$|^/update.php {"
-      - "fastcgi_index  index.php;"
+      - "fastcgi_split_path_info ^(.+?.php)(|/.*)$;"
