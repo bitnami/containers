@@ -8,6 +8,10 @@ files:
     paths:
       - /opt/bitnami/wildfly/bin/standalone.conf
 directories:
+  - paths:
+      - /opt/bitnami/ejbca/bin
+      - /opt/bitnami/ejbca/dist
+      - /opt/bitnami/ejbca/sql-scripts
   - mode: "0775"
     paths:
       - /opt/bitnami/ejbca
@@ -18,7 +22,4 @@ directories:
       - /opt/bitnami/wildfly/standalone
       - /opt/bitnami/wildfly/domain
       - /opt/bitnami/wildfly/tmp
-      - /opt/bitnami/ejbca/bin
-      - /opt/bitnami/ejbca/dist
-      - /opt/bitnami/ejbca/sql-scripts
 root_dir: /opt/bitnami
