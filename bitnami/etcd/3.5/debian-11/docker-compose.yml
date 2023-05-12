@@ -1,7 +1,6 @@
 version: '2'
 
 services:
-  # [TEST]
   etcd:
     image: docker.io/bitnami/etcd:3.5
     environment:
