@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-12T00:20:05Z" \
+      org.opencontainers.image.created="2023-05-12T15:10:49Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.0.5-debian-11-r17" \
+      org.opencontainers.image.ref.name="6.0.6-debian-11-r0" \
       org.opencontainers.image.title="mongodb-sharded" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="6.0.5"
+      org.opencontainers.image.version="6.0.6"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "yq-4.33.3-0-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.6-6-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-5-linux-${OS_ARCH}-debian-11" \
-      "mongodb-6.0.5-3-linux-${OS_ARCH}-debian-11" \
+      "mongodb-6.0.6-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -46,7 +46,7 @@ RUN ln -s /opt/bitnami/scripts/mongodb-sharded/run.sh /run.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb-sharded/postunpack.sh
-ENV APP_VERSION="6.0.5" \
+ENV APP_VERSION="6.0.6" \
     BITNAMI_APP_NAME="mongodb-sharded" \
     PATH="/opt/bitnami/mongodb/bin:/opt/bitnami/common/bin:$PATH"
 
