@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-10T04:18:21Z" \
+      org.opencontainers.image.created="2023-05-12T07:25:35Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.8.0-debian-11-r4" \
+      org.opencontainers.image.ref.name="2.8.1-debian-11-r0" \
       org.opencontainers.image.title="harbor-portal" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.8.0"
+      org.opencontainers.image.version="2.8.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -24,7 +24,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "nginx-1.23.4-3-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-5-linux-${OS_ARCH}-debian-11" \
-      "harbor-2.8.0-0-linux-${OS_ARCH}-debian-11" \
+      "harbor-2.8.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -45,7 +45,7 @@ RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN /opt/bitnami/scripts/harbor-portal/postunpack.sh
-ENV APP_VERSION="2.8.0" \
+ENV APP_VERSION="2.8.1" \
     BITNAMI_APP_NAME="harbor-portal" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
