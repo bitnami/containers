@@ -18,7 +18,7 @@ file:
   /opt/bitnami/harbor-registry/bin/registry_DO_NOT_USE_GC:
     exists: true
     filetype: symlink
-    linked-to: /opt/bitnami/harbor-registry/bin/registry
+    linked-to: registry
 command:
   # Ensure a set of directories exist and the non-root user has write privileges to them
   check-directories-exist-with-user:
