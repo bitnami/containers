@@ -4,10 +4,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-08T19:19:56Z" \
+      org.opencontainers.image.created="2023-05-11T20:31:35Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.11.0-debian-11-r33" \
+      org.opencontainers.image.ref.name="7.11.0-debian-11-r34" \
       org.opencontainers.image.title="ejbca" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="7.11.0"
@@ -25,7 +25,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "java-11.0.19-7-1-linux-${OS_ARCH}-debian-11" \
       "wildfly-26.1.3-9-linux-${OS_ARCH}-debian-11" \
-      "mysql-client-10.11.2-5-linux-${OS_ARCH}-debian-11" \
+      "mysql-client-10.11.3-0-linux-${OS_ARCH}-debian-11" \
       "ejbca-7.11.0-4-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
