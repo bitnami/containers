@@ -1,7 +1,6 @@
 version: '2'
 services:
   chartmuseum:
-    # New change
     image: docker.io/bitnami/chartmuseum:0
     ports:
       - '8080:8080'
