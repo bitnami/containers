@@ -10,25 +10,19 @@
 #   - .Vars.directories.group (String)
 ########################
 file:
-  {{ range .Vars.directories }}
-  {{ $attributes := dict }}
-  {{ if and (index . "mode") }}
-  {{ $_ := set $attributes "mode" .mode }}
-  {{ end }}
-  {{ if and (index . "owner") }}
-  {{ $_ := set $attributes "owner" .owner }}
-  {{ end }}
-  {{ if and (index . "group") }}
-  {{ $_ := set $attributes "group" .group }}
-  {{ end }}
-  {{ range $directory := .paths }}
-  {{ $directory }}:
+  {{ range $dir := .Vars.directories }}
+  {{ range $path := .paths }}
+  {{ $path }}:
     exists: true
     filetype: directory
-    {{ range $att_name := list "mode" "owner" "group" }}
-    {{ if hasKey $attributes $att_name }}
-    "{{ $att_name }}": "{{ get $attributes $att_name }}"
+    {{ if and (index $dir "mode") }}
+    mode: "{{ printf "%s" $dir.mode }}"
     {{ end }}
+    {{ if and (index $dir "owner") }}
+    owner: {{ printf "%s" $dir.owner }}
+    {{ end }}
+    {{ if and (index $dir "group") }}
+    group: {{ printf "%s" $dir.group }}
     {{ end }}
   {{ end }}
   {{ end }}

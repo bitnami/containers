@@ -10,25 +10,19 @@
 #   - .Vars.files.group (String)
 ########################
 file:
-  {{ range .Vars.files }}
-  {{ $attributes := dict }}
-  {{ if and (index . "mode") }}
-  {{ $_ := set $attributes "mode" .mode }}
-  {{ end }}
-  {{ if and (index . "owner") }}
-  {{ $_ := set $attributes "owner" .owner }}
-  {{ end }}
-  {{ if and (index . "group") }}
-  {{ $_ := set $attributes "group" .group }}
-  {{ end }}
-  {{ range $file := .paths }}
-  {{ $file }}:
+  {{ range $file := .Vars.files }}
+  {{ range $path := .paths }}
+  {{ $path }}:
     exists: true
     filetype: file
-    {{ range $att_name := list "mode" "owner" "group" }}
-    {{ if hasKey $attributes $att_name }}
-    "{{ $att_name }}": "{{ get $attributes $att_name }}"
+    {{ if and (index $file "mode") }}
+    mode: "{{ printf "%s" $file.mode }}"
     {{ end }}
+    {{ if and (index $file "owner") }}
+    owner: {{ printf "%s" $file.owner }}
+    {{ end }}
+    {{ if and (index $file "group") }}
+    group: {{ printf "%s" $file.group }}
     {{ end }}
   {{ end }}
   {{ end }}
