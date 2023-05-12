@@ -1,6 +1,5 @@
 version: '2'
 services:
-  # [TEST]
   mariadb:
     image: docker.io/bitnami/mariadb:10.6
     environment:
