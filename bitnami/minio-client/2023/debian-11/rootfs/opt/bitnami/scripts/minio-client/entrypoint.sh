@@ -13,9 +13,11 @@ set -o pipefail
 
 print_welcome_page
 
-info "** Starting MinIO Client setup **"
-/opt/bitnami/scripts/minio-client/setup.sh
-info "** MinIO Client setup finished! **"
+if [[ "$*" = *"/opt/bitnami/scripts/minio-client/run.sh"* ]]; then
+    info "** Starting MinIO Client setup **"
+    /opt/bitnami/scripts/minio-client/setup.sh
+    info "** MinIO Client setup finished! **"
+fi
 
 echo ""
-exec "/opt/bitnami/scripts/minio-client/run.sh" "$@"
+exec "$@"
