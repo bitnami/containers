@@ -27,7 +27,7 @@ ARGS+=("$@")
 
 info "** Starting Elasticsearch **"
 if am_i_root; then
-    exec gosu "$ELASTICSEARCH_DAEMON_USER" "$EXEC" "${ARGS[@]}"
+    exec_as_user "$ELASTICSEARCH_DAEMON_USER" "$EXEC" "${ARGS[@]}"
 else
     exec "$EXEC" "${ARGS[@]}"
 fi

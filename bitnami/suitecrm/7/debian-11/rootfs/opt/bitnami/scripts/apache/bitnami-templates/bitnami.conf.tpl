@@ -15,4 +15,3 @@ SetEnvIf X-Forwarded-Proto https HTTPS=on
   ErrorDocument 503 /503.html
 </VirtualHost>
 
-Include "{{APACHE_CONF_DIR}}/bitnami/bitnami-ssl.conf"

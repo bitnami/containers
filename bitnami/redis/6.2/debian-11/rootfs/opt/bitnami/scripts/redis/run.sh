@@ -24,7 +24,7 @@ args+=("$@")
 
 info "** Starting Redis **"
 if am_i_root; then
-    exec gosu "$REDIS_DAEMON_USER" redis-server "${args[@]}"
+    exec_as_user "$REDIS_DAEMON_USER" redis-server "${args[@]}"
 else
     exec redis-server "${args[@]}"
 fi

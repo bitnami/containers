@@ -291,7 +291,7 @@ odoo_wait_for_postgresql_connection() {
 odoo_execute() {
     # Define 'odoo' cmdline arguments
     local -a cmd=("${ODOO_BIN_DIR}/odoo")
-    am_i_root && cmd=("gosu" "$ODOO_DAEMON_USER" "${cmd[@]}")
+    am_i_root && cmd=("run_as_user" "$ODOO_DAEMON_USER" "${cmd[@]}")
 
     # Ensure the logfile is not populated with init info and no service is left running
     debug_execute "${cmd[@]}" --config="$ODOO_CONF_FILE" --logfile= --pidfile= --stop-after-init "$@"

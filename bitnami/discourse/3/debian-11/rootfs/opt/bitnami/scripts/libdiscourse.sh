@@ -332,7 +332,7 @@ discourse_bundle_execute_print_output() {
     # Avoid creating unnecessary cache files at initialization time
     local -a cmd=("bundle" "exec" "$@")
     # Run as application user to avoid having to change permissions/ownership afterwards
-    am_i_root && cmd=("gosu" "$DISCOURSE_DAEMON_USER" "${cmd[@]}")
+    am_i_root && cmd=("run_as_user" "$DISCOURSE_DAEMON_USER" "${cmd[@]}")
     (
         export RAILS_ENV="$DISCOURSE_ENV"
         cd "$DISCOURSE_BASE_DIR" || false
@@ -454,21 +454,4 @@ discourse_set_hostname() {
         [[ "$DISCOURSE_EXTERNAL_HTTP_PORT_NUMBER" != "80" ]] && discourse_server_host+=":${DISCOURSE_EXTERNAL_HTTP_PORT_NUMBER}"
     fi
     discourse_conf_set "hostname" "$discourse_server_host"
-}
-
-########################
-# Install passenger native support library
-# Globals:
-#   DISCOURSE_*, BITNAMI_*, PASSENGER_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-install_native_support_library() {
-    local -r library_name="passenger_native_support.so"
-    local -r orig="${DISCOURSE_BASE_DIR}/lib/${library_name}"
-    local -r dest="${BITNAMI_ROOT_DIR}/ruby/lib/${library_name}"
-    debug "Installing passenger native support library into '${dest}'"
-    mv "${orig}" "${dest}"
 }

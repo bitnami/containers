@@ -1,0 +1,6 @@
+binaries:
+  - configurable-http-proxy
+root_dir: /opt/bitnami
+version:
+  bin_name: configurable-http-proxy
+  flag: --version

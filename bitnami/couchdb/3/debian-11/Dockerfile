@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-16T16:51:23Z" \
+      org.opencontainers.image.created="2023-05-10T22:06:28Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.3.1-debian-11-r31" \
+      org.opencontainers.image.ref.name="3.3.2-debian-11-r2" \
       org.opencontainers.image.title="couchdb" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="3.3.1"
+      org.opencontainers.image.version="3.3.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,11 +22,10 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libgcc-s1 libicu67 libssl1.1 libstdc++6 libtinfo6 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "wait-for-port-1.0.6-4-linux-${OS_ARCH}-debian-11" \
-      "ini-file-1.4.5-4-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
-      "erlang-25.3.0-3-linux-${OS_ARCH}-debian-11" \
-      "couchdb-3.3.1-7-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.6-6-linux-${OS_ARCH}-debian-11" \
+      "ini-file-1.4.5-5-linux-${OS_ARCH}-debian-11" \
+      "erlang-25.3.2-0-linux-${OS_ARCH}-debian-11" \
+      "couchdb-3.3.2-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -43,7 +42,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/couchdb/postunpack.sh
-ENV APP_VERSION="3.3.1" \
+ENV APP_VERSION="3.3.2" \
     BITNAMI_APP_NAME="couchdb" \
     LD_LIBRARY_PATH="/opt/bitnami/common/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/erlang/bin:/opt/bitnami/couchdb/bin:$PATH"

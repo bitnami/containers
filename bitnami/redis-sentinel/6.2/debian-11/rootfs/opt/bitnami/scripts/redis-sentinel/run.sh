@@ -19,7 +19,7 @@ args=("$REDIS_SENTINEL_CONF_FILE" "--daemonize" "no" "$@")
 
 info "** Starting Redis Sentinel **"
 if am_i_root; then
-    exec gosu "$REDIS_SENTINEL_DAEMON_USER" redis-sentinel "${args[@]}"
+    exec_as_user "$REDIS_SENTINEL_DAEMON_USER" redis-sentinel "${args[@]}"
 else
     exec redis-sentinel "${args[@]}"
 fi
