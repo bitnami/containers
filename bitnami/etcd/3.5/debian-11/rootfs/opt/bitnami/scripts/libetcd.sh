@@ -205,7 +205,7 @@ etcd_start_bg() {
 
     info "Starting etcd in background"
     local start_command=("etcd")
-    am_i_root && start_command=("gosu" "$ETCD_DAEMON_USER" "${start_command[@]}")
+    am_i_root && start_command=("run_as_user" "$ETCD_DAEMON_USER" "${start_command[@]}")
     [[ -f "$ETCD_CONF_FILE" ]] && start_command+=("--config-file" "$ETCD_CONF_FILE")
     debug_execute "${start_command[@]}" &
     sleep 3
@@ -617,9 +617,17 @@ etcd_initialize() {
                 info "Restoring snapshot before initializing etcd cluster"
                 local -a restore_args=("--data-dir" "$ETCD_DATA_DIR")
                 if [[ ${#initial_members[@]} -gt 1 ]]; then
-                    ETCD_INITIAL_CLUSTER="$(recalculate_initial_cluster)"
-                    export ETCD_INITIAL_CLUSTER
+                    #
+                    # Only recalculate the initial cluster config if it hasn't
+                    # been provided.
+                    #
+                    if is_empty_value "$ETCD_INITIAL_CLUSTER"; then
+                      ETCD_INITIAL_CLUSTER="$(recalculate_initial_cluster)"
+                      export ETCD_INITIAL_CLUSTER
+                    fi
+
                     [[ -f "$ETCD_CONF_FILE" ]] && etcd_conf_write "initial-cluster" "$ETCD_INITIAL_CLUSTER"
+
                     restore_args+=(
                         "--name" "$ETCD_NAME"
                         "--initial-cluster" "$ETCD_INITIAL_CLUSTER"
@@ -665,8 +673,14 @@ etcd_initialize() {
                     if [[ "${latest_snapshot_file}" != "" ]]; then
                         info "Restoring etcd cluster from snapshot"
                         rm -rf "$ETCD_DATA_DIR"
-                        ETCD_INITIAL_CLUSTER="$(recalculate_initial_cluster)"
-                        export ETCD_INITIAL_CLUSTER
+                        #
+                        # Only recalculate the initial cluster config if it hasn't
+                        # been provided.
+                        #
+                        if is_empty_value "$ETCD_INITIAL_CLUSTER"; then
+                          ETCD_INITIAL_CLUSTER="$(recalculate_initial_cluster)"
+                          export ETCD_INITIAL_CLUSTER
+                        fi
                         [[ -f "$ETCD_CONF_FILE" ]] && etcd_conf_write "initial-cluster" "$ETCD_INITIAL_CLUSTER"
                         debug_execute etcdctl snapshot restore "${latest_snapshot_file}" \
                             --name "$ETCD_NAME" \

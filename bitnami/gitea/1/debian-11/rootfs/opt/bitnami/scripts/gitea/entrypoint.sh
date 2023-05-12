@@ -28,7 +28,10 @@ if ! am_i_root; then
         export NSS_WRAPPER_PASSWD
         NSS_WRAPPER_GROUP="$(mktemp)"
         export NSS_WRAPPER_GROUP
-        echo "gitea:x:$(id -u):$(id -g):gitea:/opt/bitnami/gitea:/bin/false" >"$NSS_WRAPPER_PASSWD"
+        if [[ "$HOME" == "/" ]]; then
+            export HOME=/opt/bitnami/gitea
+        fi
+        echo "gitea:x:$(id -u):$(id -g):gitea:${HOME}:/bin/false" >"$NSS_WRAPPER_PASSWD"
         echo "gitea:x:$(id -g):" >"$NSS_WRAPPER_GROUP"
         chmod 400 "$NSS_WRAPPER_PASSWD" "$NSS_WRAPPER_GROUP"
     fi

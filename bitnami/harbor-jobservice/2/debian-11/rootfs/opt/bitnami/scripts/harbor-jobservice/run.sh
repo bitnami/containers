@@ -21,7 +21,7 @@ cd "$HARBOR_JOBSERVICE_BASE_DIR"
 
 info "** Starting harbor-jobservice **"
 if am_i_root; then
-    exec gosu "$HARBOR_JOBSERVICE_DAEMON_USER" "$CMD" "${FLAGS[@]}"
+    exec_as_user "$HARBOR_JOBSERVICE_DAEMON_USER" "$CMD" "${FLAGS[@]}"
 else
     exec "$CMD" "${FLAGS[@]}"
 fi

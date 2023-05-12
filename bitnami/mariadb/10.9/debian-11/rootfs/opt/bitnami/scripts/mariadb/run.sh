@@ -33,7 +33,7 @@ export LD_PRELOAD
 
 info "** Starting MariaDB **"
 if am_i_root; then
-    exec gosu "$DB_DAEMON_USER" "$EXEC" "${flags[@]}"
+    exec_as_user "$DB_DAEMON_USER" "$EXEC" "${flags[@]}"
 else
     exec "$EXEC" "${flags[@]}"
 fi

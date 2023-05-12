@@ -503,7 +503,7 @@ zookeeper_start_bg() {
     local args=("start")
     info "Starting ZooKeeper in background..."
     if am_i_root; then
-        debug_execute "gosu" "$ZOO_DAEMON_USER" "$cmd" "${args[@]}"
+        debug_execute "run_as_user" "$ZOO_DAEMON_USER" "$cmd" "${args[@]}"
     else
         debug_execute "$cmd" "${args[@]}"
     fi

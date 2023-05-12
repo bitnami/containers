@@ -194,7 +194,7 @@ couchdb_conf_set() {
 couchdb_start_bg() {
     info "Starting CouchDB in background..."
     local start_command=("${COUCHDB_BIN_DIR}/couchdb")
-    am_i_root && start_command=("gosu" "$COUCHDB_DAEMON_USER" "${start_command[@]}")
+    am_i_root && start_command=("run_as_user" "$COUCHDB_DAEMON_USER" "${start_command[@]}")
     debug_execute "${start_command[@]}" &
     wait-for-port "${COUCHDB_PORT_NUMBER:-5984}"
     wait-for-port "${COUCHDB_CLUSTER_PORT_NUMBER:-9100}"

@@ -54,4 +54,4 @@ EOF
 # Unfortunately there aren't any CLI option to perform these actions, but it is simple to do with internal PrestaShop functions
 # The commands need to be executed as the web server daemon user, to ensure permissions are not messed up with
 info "Purging cache"
-debug_execute gosu "$WEB_SERVER_DAEMON_USER" php -r "require '${PRESTASHOP_BASE_DIR}/config/config.inc.php'; Tools::clearAllCache(); Tools::generateHtaccess();"
+debug_execute run_as_user "$WEB_SERVER_DAEMON_USER" php -r "require '${PRESTASHOP_BASE_DIR}/config/config.inc.php'; Tools::clearAllCache(); Tools::generateHtaccess();"

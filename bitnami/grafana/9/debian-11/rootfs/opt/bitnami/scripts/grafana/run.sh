@@ -33,7 +33,7 @@ cd "$GRAFANA_BASE_DIR"
 
 info "** Starting Grafana **"
 if am_i_root; then
-    exec gosu "$GRAFANA_DAEMON_USER" "$cmd" "${args[@]}"
+    exec_as_user "$GRAFANA_DAEMON_USER" "$cmd" "${args[@]}"
 else
     exec "$cmd" "${args[@]}"
 fi

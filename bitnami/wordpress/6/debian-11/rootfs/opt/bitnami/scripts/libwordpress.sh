@@ -443,7 +443,7 @@ wp_execute_print_output() {
     [[ "${#wp_extra_cli_flags[@]}" -gt 0 ]] && cmd+=("${wp_extra_cli_flags[@]}")
     # Run as web server user to avoid having to change permissions/ownership afterwards
     if am_i_root; then
-        gosu "$WEB_SERVER_DAEMON_USER" "${env[@]}" "${cmd[@]}"
+        run_as_user "$WEB_SERVER_DAEMON_USER" "${env[@]}" "${cmd[@]}"
     else
         "${env[@]}" "${cmd[@]}"
     fi

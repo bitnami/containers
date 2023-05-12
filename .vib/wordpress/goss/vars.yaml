@@ -1,6 +1,5 @@
 binaries:
   - apachectl
-  - gosu
   - mariadb
   - php
   - render-template

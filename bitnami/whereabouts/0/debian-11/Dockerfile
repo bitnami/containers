@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-17T00:32:02Z" \
+      org.opencontainers.image.created="2023-05-12T01:12:34Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.6.1-debian-11-r13" \
+      org.opencontainers.image.ref.name="0.6.1-debian-11-r21" \
       org.opencontainers.image.title="whereabouts" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.6.1"
@@ -33,7 +33,8 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
       rm -rf "${COMPONENT}".tar.gz{,.sha256} ; \
     done
-RUN apt-get update && apt-get upgrade -y && \
+RUN apt-get autoremove --purge -y curl && \
+    apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN useradd -r -u 1001 -g root whereabouts
 RUN ln -sf /opt/bitnami/whereabouts/bin/whereabouts /whereabouts && ln -sf /opt/bitnami/whereabouts/bin/ip-control-loop /ip-control-loop && ln -sf /opt/bitnami/whereabouts/bin/install-cni.sh /install-cni.sh && mkdir -p /bitnami/whereabouts/host && chmod g+rwX -R /bitnami/whereabouts/host && ln -sf /bitnami/whereabouts/host /host
