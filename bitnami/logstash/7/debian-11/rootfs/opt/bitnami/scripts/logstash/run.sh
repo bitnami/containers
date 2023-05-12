@@ -36,7 +36,7 @@ export LS_JAVA_HOME=/opt/bitnami/java
 
 info "** Starting Logstash **"
 if am_i_root; then
-    exec gosu "$LOGSTASH_DAEMON_USER" "${cmd[@]}"
+    exec_as_user "$LOGSTASH_DAEMON_USER" "${cmd[@]}"
 else
     exec "${cmd[@]}"
 fi

@@ -1,5 +1,4 @@
 binaries:
-  - gosu
   - java
   - ksql
 directories:

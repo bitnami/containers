@@ -2,7 +2,6 @@ binaries:
   - couchdb
   - couchjs
   - erl
-  - gosu
   - ini-file
   - wait-for-port
 directories:

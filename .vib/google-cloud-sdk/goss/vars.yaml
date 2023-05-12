@@ -1,0 +1,4 @@
+binaries:
+  - python
+  - gcloud
+root_dir: /opt/bitnami

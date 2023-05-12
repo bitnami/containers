@@ -95,7 +95,6 @@ export DISCOURSE_BASE_DIR="${BITNAMI_ROOT_DIR}/discourse"
 export DISCOURSE_CONF_FILE="${DISCOURSE_BASE_DIR}/config/discourse.conf"
 export PATH="${BITNAMI_ROOT_DIR}/common/bin:${BITNAMI_ROOT_DIR}/brotli/bin:${BITNAMI_ROOT_DIR}/git/bin:${PATH}"
 export YARN_CACHE_FOLDER="${DISCOURSE_BASE_DIR}/tmp/cache"
-export PASSENGER_NATIVE_SUPPORT_OUTPUT_DIR="${BITNAMI_ROOT_DIR}/ruby/lib"
 
 # Discourse persistence configuration
 export DISCOURSE_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/discourse"

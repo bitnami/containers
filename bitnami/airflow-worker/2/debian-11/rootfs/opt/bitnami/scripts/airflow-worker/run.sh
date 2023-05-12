@@ -23,7 +23,7 @@ args+=("--pid" "$AIRFLOW_PID_FILE" "$@")
 
 info "** Starting Airflow **"
 if am_i_root; then
-    exec gosu "$AIRFLOW_DAEMON_USER" "$EXEC" "${args[@]}"
+    exec_as_user "$AIRFLOW_DAEMON_USER" "$EXEC" "${args[@]}"
 else
     exec "$EXEC" "${args[@]}"
 fi

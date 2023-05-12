@@ -1,20 +1,14 @@
 {
-    "gosu": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-5"
-    },
     "python": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-9"
+        "version": "3.8.16-12"
     },
     "pytorch": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.0.0-0"
+        "version": "2.0.1-0"
     }
 }

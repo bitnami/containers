@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-16T09:55:15Z" \
+      org.opencontainers.image.created="2023-05-09T16:25:46Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.25.5-debian-11-r1" \
+      org.opencontainers.image.ref.name="1.25.6-debian-11-r4" \
       org.opencontainers.image.title="envoy" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.25.5"
+      org.opencontainers.image.version="1.25.6"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "envoy-1.25.5-0-linux-${OS_ARCH}-debian-11" \
+      "envoy-1.25.6-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -38,7 +38,7 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="1.25.5" \
+ENV APP_VERSION="1.25.6" \
     BITNAMI_APP_NAME="envoy" \
     PATH="/opt/bitnami/envoy/bin:$PATH"
 

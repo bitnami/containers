@@ -31,6 +31,8 @@ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
+Looking to use MariaDB in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
 ## How to deploy MariaDB in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami MariaDB Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/mariadb).
@@ -359,6 +361,7 @@ A **zero downtime** MariaDB master-slave [replication](https://dev.mysql.com/doc
 * `MARIADB_MASTER_ROOT_USER`: User on replication master with access to `MARIADB_DATABASE` (slave parameter). Defaults to `root`
 * `MARIADB_MASTER_ROOT_PASSWORD`: Password of user on replication master with access to `MARIADB_DATABASE` (slave parameter). No defaults.
 * `MARIADB_MASTER_ROOT_PASSWORD_FILE`: Path to a file that contains the password of user on replication master with access to `MARIADB_DATABASE`. This will override the value specified in `MARIADB_MASTER_ROOT_PASSWORD`. No defaults.
+* `MARIADB_MASTER_DELAY`: The database replication delay (slave parameter). Defaults to `0`.
 
 In a replication cluster you can have one master and zero or more slaves. When replication is enabled the master node is in read-write mode, while the slaves are in read-only mode. For best performance its advisable to limit the reads to the slaves.
 

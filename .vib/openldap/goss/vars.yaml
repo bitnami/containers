@@ -2,7 +2,6 @@ backends:
   - mdb
   - monitor
 binaries:
-  - gosu
   - ldapsearch
   - slapd
 directories:

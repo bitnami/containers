@@ -19,13 +19,13 @@ info "** Starting solr **"
 start_command=("${SOLR_BIN_DIR}/solr" "-p" "${SOLR_PORT_NUMBER}" "-d" "/opt/bitnami/solr/server" "-f")
 
 if is_boolean_yes "$SOLR_ENABLE_CLOUD_MODE"; then
-    start_command+=("-cloud" "-z" "$SOLR_ZK_HOSTS/solr")
+    start_command+=("-cloud" "-z" "${SOLR_ZK_HOSTS}${SOLR_ZK_CHROOT}")
 fi
 
 is_boolean_yes "$SOLR_SSL_ENABLED" && export SOLR_SSL_ENABLED=true
 
 if am_i_root; then
-    exec gosu "$SOLR_DAEMON_USER" "${start_command[@]}"
+    exec_as_user "$SOLR_DAEMON_USER" "${start_command[@]}"
 else
     exec "${start_command[@]}"
 fi

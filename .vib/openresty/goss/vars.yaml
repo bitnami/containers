@@ -1,5 +1,4 @@
 binaries:
-  - gosu
   - openresty
 directories:
   - mode: "0775"

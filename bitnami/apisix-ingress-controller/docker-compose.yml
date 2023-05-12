@@ -1,0 +1,5 @@
+version: '2'
+
+services:
+  apisix-ingress-controller:
+    image: docker.io/bitnami/apisix-ingress-controller:1

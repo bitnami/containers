@@ -237,7 +237,7 @@ sonarqube_start_bg() {
     (
         cd "$SONARQUBE_BASE_DIR" || return 1
         if am_i_root; then
-            debug_execute gosu "$SONARQUBE_DAEMON_USER" "${SONARQUBE_BIN_DIR}/sonar.sh" "start"
+            debug_execute run_as_user "$SONARQUBE_DAEMON_USER" "${SONARQUBE_BIN_DIR}/sonar.sh" "start"
         else
             debug_execute "${SONARQUBE_BIN_DIR}/sonar.sh" "start"
         fi
@@ -351,7 +351,7 @@ is_sonarqube_running() {
     # The 'sonar.sh status' command checks whether the PID file exists, and a process exists with that PID
     # That way we do not need to re-implement such logic
     if am_i_root; then
-        debug_execute gosu "$SONARQUBE_DAEMON_USER" "${SONARQUBE_BIN_DIR}/sonar.sh" "status"
+        debug_execute run_as_user "$SONARQUBE_DAEMON_USER" "${SONARQUBE_BIN_DIR}/sonar.sh" "status"
     else
         debug_execute "${SONARQUBE_BIN_DIR}/sonar.sh" "status"
     fi
@@ -378,7 +378,7 @@ is_sonarqube_not_running() {
 sonarqube_stop() {
     ! is_sonarqube_running && return
     if am_i_root; then
-        debug_execute gosu "$SONARQUBE_DAEMON_USER" "${SONARQUBE_BIN_DIR}/sonar.sh" "stop"
+        debug_execute run_as_user "$SONARQUBE_DAEMON_USER" "${SONARQUBE_BIN_DIR}/sonar.sh" "stop"
     else
         debug_execute "${SONARQUBE_BIN_DIR}/sonar.sh" "stop"
     fi

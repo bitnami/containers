@@ -22,7 +22,7 @@ args+=("$@")
 
 info "** Starting ClickHouse **"
 if am_i_root; then
-    exec gosu "$CLICKHOUSE_DAEMON_USER" "${cmd[@]}" "${args[@]}"
+    exec_as_user "$CLICKHOUSE_DAEMON_USER" "${cmd[@]}" "${args[@]}"
 else
     exec "${cmd[@]}" "${args[@]}"
 fi

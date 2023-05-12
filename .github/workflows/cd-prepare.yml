@@ -99,75 +99,67 @@ jobs:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
           AWS_DEFAULT_REGION: us-east-1
         run: |
+          # <version>-<revision>
+          # Example: 17.0.7-7-1
+          # version: semver but it can have also '-' like the upper example.
+          # revision: number
+          COMPONENT_VERSION_REGEX="([0-9]+\.[0-9]+\.[0-9]+(-.+)?)-([0-9]+)"
           while read -r container; do
-            # If it's set from outside, can be changed
-            image_name=$(echo "$container" | jq -cr '.tag')
-            image_path=$(echo "$container" | jq -cr '.path')
-            version=$(echo "$container" | jq -cr '.app_version')
-            asset=$(echo "$container" | jq -cr '.name')
-            os_flavour=$(echo "$container" | jq -cr '.os_flavour')
-            revision=$(echo "$container" | jq -cr '.revision')
-            containers_path=$(echo "$container" | jq -cr '.path')
-            components_json_file="${containers_path}/prebuildfs/opt/bitnami/.bitnami_components.json"
+              # If it's set from outside, can be changed
+              image_name=$(echo "$container" | jq -cr '.tag')
+              image_path=$(echo "$container" | jq -cr '.path')
+              version=$(echo "$container" | jq -cr '.app_version')
+              containers_path=$(echo "$container" | jq -cr '.path')
+              components_json_file="${containers_path}/prebuildfs/opt/bitnami/.bitnami_components.json"
 
-            # If the components.json file, so it seems has external packages
-            if [[ -f "$components_json_file" ]]; then
-              while read -r architecture; do
-                # Remove platform prefix.
-                arch="${architecture##*/}"
-                declare -A packages=()
-                # Iterating over the external components to get the involved elements
-                while read -r component_id; do
-                  if [[ -n "$component_id" ]]; then
-                    component_version_full=$(jq -cr '."'${component_id}'".version' "$components_json_file")
+              # If the components.json file, so it seems has external packages
+              if [[ -f "$components_json_file" ]]; then
+                  while read -r architecture; do
+                      # Remove platform prefix.
+                      arch="${architecture##*/}"
+                      declare -A packages=()
+                      # Iterating over the external components to get the involved elements
+                      while read -r component_id; do
+                          if [[ -n "$component_id" ]]; then
+                              component_version_full=$(jq -cr '."'${component_id}'".version' "$components_json_file")
+                              if [[ "$component_version_full" =~ $COMPONENT_VERSION_REGEX ]] && [[ "${#BASH_REMATCH[@]}" -ge 3 ]]; then
+                                  component_version=${BASH_REMATCH[1]}
+                                  component_distro=$(jq -cr '."'${component_id}'".distro' "$components_json_file")
+                                  # We will use the container arch instead of the component arch (component file has only amd64 references)
+                                  # component_arch=$(jq -cr '."'${component_id}'".arch' "$components_json_file")
+                                  component_arch=$arch
+                                  # Added "true" to avoid errors if compilation_recipe doesn't exists
+                                  compilation_recipe=$(s3cmd get "s3://${AWS_S3_BUCKET}/${component_id}/${component_version}/${component_distro}/${component_arch}/compilation-recipe.json" - 2>/dev/null || true)
+                                  # now getting each component to be reported
+                                  while read -r json_package; do
+                                      package_id="$(echo "$json_package" | jq -r '.id' )"
+                                      package_version="$(echo "$json_package" | jq -r '.version' )"
+                                      package_url="$(echo "$json_package" | jq -r '.source.upstreamSourceUrl')"
+                                      packages["$package_id"]="${package_version} ${package_url}"
+                                  done <<<"$(echo "$compilation_recipe" | jq -cr '.components[]')"
+                              fi
+                          fi
+                      done <<<"$(jq -cr 'keys[]' "$components_json_file")"
 
-                    #split by "-"
-                    component_parts=(${component_version_full//-/ })
-                    component_version=${component_parts[0]}
-                    component_distro=$(jq -cr '."'${component_id}'".distro' "$components_json_file")
-                    # We will use the container arch instead of the component arch (component file has only amd64 references)
-                    # component_arch=$(jq -cr '."'${component_id}'".arch' "$components_json_file")
-                    component_arch=$arch
-                    # Added "true" to avoid errors if compilation_recipe doesn't exists
-                    compilation_recipe=$(s3cmd ls -l "s3://${AWS_S3_BUCKET}/$component_id/$component_version/$component_distro/$component_arch/" | grep -c "compilation-recipe.json" || true)
-                    # If the components.json file, so it seems has external packages
-                    if [[ $compilation_recipe -gt 0 ]]; then
-                      s3cmd get  "s3://${AWS_S3_BUCKET}/$component_id/$component_version/$component_distro/$component_arch/compilation-recipe.json" compilation-recipe.json
-                    else
-                      s3cmd get "s3://${AWS_S3_BUCKET}/$component_id/$component_version-${component_parts[1]}/$component_distro/$component_arch/compilation-recipe.json" compilation-recipe.json
-                    fi
-                    # now getting each component to be reported
-                    while read -r json_package; do
-                      package_id=$(echo "$json_package" | jq -r '.id' )
-                      package_version=$(echo "$json_package" | jq -r '.version' )
-                      package_url=$(echo "$json_package" | jq -r '.source.upstreamSourceUrl')
-                      packages[$package_id]="$package_version $package_url"
-                    done <<<"$(jq -cr '.components[]' compilation-recipe.json)"
-                    rm compilation-recipe.json
-                  fi
-                done <<<"$(jq -cr 'keys[]' "$components_json_file")"
-
-                # Now creating the JSON file with the needed transformations
-                declare -a json_packages=()
-                for package_id in "${!packages[@]}"
-                do
-                  values=(${packages[$package_id]// / })
-                  cleaned_url="${values[1]#git+}"
-                  if [ -z "$cleaned_url" ]
-                  then
-                    echo "[WARNING] The URL for ${package_id}:${values[0]} is missing in the recipe"
-                  else
-                    json_packages+=($(jq -n '{"_unique_id": $uniqueID, "name": $name, "version": $version, "url": $url, "repository": "other"}' --arg uniqueID "other:$package_id:${values[0]}" --arg name "$package_id" --arg version "${values[0]}" --arg url "$cleaned_url"))
-                  fi
-                done
-                JSON_ARRAY=$(printf "%s" "${json_packages[@]}" | jq -s)
-                echo "${JSON_ARRAY}" > "${image_path}/packages-${arch}.json"
-                jq -n '{"packages": $packages, "server": { "scanner": "custom", "type": "Hub"}}' --argjson packages "$(cat ${image_path}/packages-${arch}.json)" > "$image_path/osspi-packages-${arch}.json"
-                s3cmd put "${image_path}/packages-${arch}.json" "s3://${AWS_S3_BUCKET}/${asset}/${version}/${os_flavour}/${arch}/${revision}/packages.json"
-              done <<<"$(echo $container | jq -cr '.architectures[]')"
-            else
-              echo "$image_name:$version doesn't have external components.json"
-            fi
+                      # Now creating the JSON file with the format required by the OSSPI Scan
+                      osspi_packages="[]"
+                      for package_id in "${!packages[@]}"; do
+                          read -r -a version_url <<< "${packages["$package_id"]}"
+                          http_url="${version_url[1]#git+}"
+                          if [[ -z "$http_url" ]]
+                          then
+                              echo "[WARNING] The URL for ${package_id}:${version_url[0]} is missing in the recipe"
+                          else
+                              # Concat new package to osspi_packages array
+                              osspi_packages="$(jq '. += [{"_unique_id": $uniqueID, "name": $name, "version": $version, "url": $url, "repository": "other"}]' --arg uniqueID "other:${package_id}:${version_url[0]}" --arg name "$package_id" --arg version "${version_url[0]}" --arg url "$http_url" <<< "$osspi_packages")"
+                          fi
+                      done
+                      jq -n '{"packages": $packages, "server": { "scanner": "custom", "type": "Hub"}}' --argjson packages "${osspi_packages}" > "${image_path}/osspi-packages-${arch}.json"
+                      s3cmd put "${image_path}/osspi-packages-${arch}.json" "s3://${AWS_S3_BUCKET}/${asset}/${version}/${os_flavour}/${arch}/${revision}/packages.json"
+                  done <<<"$(echo "$container" | jq -cr '.architectures[]')"
+              else
+                  echo "$image_name:$version doesn't have external components.json"
+              fi
           done <<<"$(jq -c '.[]' publish-metadata.json)"
       - uses: actions/upload-artifact@v3
         if: ${{ steps.get-publish-metadata.outputs.result == 'ok' }}

@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-16T23:03:33Z" \
+      org.opencontainers.image.created="2023-05-11T20:37:12Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.64.0-debian-11-r6" \
+      org.opencontainers.image.ref.name="0.65.1-debian-11-r2" \
       org.opencontainers.image.title="prometheus-operator" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.64.0"
+      org.opencontainers.image.version="0.65.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "prometheus-operator-0.64.0-1-linux-${OS_ARCH}-debian-11" \
+      "prometheus-operator-0.65.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,7 +40,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN ln -sf /opt/bitnami/prometheus-operator/bin/prometheus-config-reloader /bin/prometheus-config-reloader
 RUN ln -sf /opt/bitnami/prometheus-operator/bin/operator /bin/operator
 
-ENV APP_VERSION="0.64.0" \
+ENV APP_VERSION="0.65.1" \
     BITNAMI_APP_NAME="prometheus-operator" \
     PATH="/opt/bitnami/prometheus-operator/bin:$PATH"
 
