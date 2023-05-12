@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-01T13:35:25Z" \
+      org.opencontainers.image.created="2023-05-12T00:32:00Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.0.10-debian-11-r4" \
+      org.opencontainers.image.ref.name="7.0.11-debian-11-r8" \
       org.opencontainers.image.title="redis-cluster" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="7.0.10"
+      org.opencontainers.image.version="7.0.11"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,8 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libgomp1 libssl1.1 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "redis-7.0.10-2-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
+      "redis-7.0.11-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,9 +40,9 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/redis-cluster/postunpack.sh
-ENV APP_VERSION="7.0.10" \
+ENV APP_VERSION="7.0.11" \
     BITNAMI_APP_NAME="redis-cluster" \
-    PATH="/opt/bitnami/redis/bin:/opt/bitnami/common/bin:$PATH"
+    PATH="/opt/bitnami/redis/bin:$PATH"
 
 EXPOSE 6379
 

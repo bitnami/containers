@@ -1,26 +1,20 @@
 {
-    "gosu": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-5"
-    },
     "mysql-client": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.6.12-4"
+        "version": "10.11.2-5"
     },
     "php": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.17-4"
+        "version": "8.1.18-1"
     },
     "symfony": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.4.22-0"
+        "version": "5.4.23-0"
     }
 }

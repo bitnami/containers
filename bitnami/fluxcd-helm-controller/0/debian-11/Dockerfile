@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-03T18:53:02Z" \
+      org.opencontainers.image.created="2023-05-09T08:13:37Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.32.1-debian-11-r0" \
+      org.opencontainers.image.ref.name="0.32.2-debian-11-r8" \
       org.opencontainers.image.title="fluxcd-helm-controller" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.32.1"
+      org.opencontainers.image.version="0.32.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "fluxcd-helm-controller-0.32.1-0-linux-${OS_ARCH}-debian-11" \
+      "fluxcd-helm-controller-0.32.2-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -37,7 +37,7 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN useradd -r -u 1001 -g root fluxcd-helm-controller
 
-ENV APP_VERSION="0.32.1" \
+ENV APP_VERSION="0.32.2" \
     BITNAMI_APP_NAME="fluxcd-helm-controller" \
     PATH="/opt/bitnami/fluxcd-helm-controller/bin:$PATH"
 

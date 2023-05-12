@@ -1,0 +1,10 @@
+binaries:
+  - php
+  - node
+  - python
+  - wait-for-port
+directories:
+  - mode: "0775"
+    paths:
+      - /app
+root_dir: /opt/bitnami

@@ -188,6 +188,10 @@ Available environment variables:
 
 * `JAVA_OPTS`: Customize JVM parameters. No defaults.
 
+#### JENKINS configuration
+
+* `JENKINS_OPTS`: Customize Jenkins launcher parameters. No defaults.
+
 ## Logging
 
 The Bitnami Jenkins Docker image sends the container logs to `stdout`. To view the logs:
@@ -315,6 +319,16 @@ You might need to customize the JVM running Jenkins, typically to pass system pr
 ```console
 docker run -d --name jenkins -p 80:8080 \
   --env JAVA_OPTS=-Dhudson.footerURL=http://mycompany.com \
+  bitnami/jenkins:latest
+```
+
+### Configuring reverse proxy
+
+If you need to install Jenkins behind a reverse proxy with a prefix, such as mycompany.com/jenkins, you can use the "JENKINS_OPTS" environment variable for this purpose:
+
+```console
+docker run -d --name jenkins -p 8080:8080 \
+  --env JENKINS_OPTS="--prefix=/jenkins" \
   bitnami/jenkins:latest
 ```
 

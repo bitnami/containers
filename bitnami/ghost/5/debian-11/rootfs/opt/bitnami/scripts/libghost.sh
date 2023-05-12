@@ -65,7 +65,7 @@ ghost_stop() {
     info "Stopping Ghost"
     cd "$GHOST_BASE_DIR" || return 1
     if am_i_root; then
-        debug_execute gosu "$GHOST_DAEMON_USER" ghost stop
+        debug_execute run_as_user "$GHOST_DAEMON_USER" ghost stop
     else
         debug_execute ghost stop
     fi
@@ -86,7 +86,7 @@ ghost_start_bg() {
     if am_i_root; then
         touch "$GHOST_LOG_FILE"
         configure_permissions_ownership "$GHOST_LOG_FILE" -u "$GHOST_DAEMON_USER" -g "$GHOST_DAEMON_GROUP"
-        gosu "$GHOST_DAEMON_USER" ghost start --no-enable >>"$GHOST_LOG_FILE" 2>&1
+        run_as_user "$GHOST_DAEMON_USER" ghost start --no-enable >>"$GHOST_LOG_FILE" 2>&1
     else
         ghost start --no-enable >>"$GHOST_LOG_FILE" 2>&1
     fi
@@ -297,7 +297,7 @@ ghost_initialize() {
                 "--process" "local" "--no-prompt" "--no-start" "--no-enable"
             )
             if am_i_root; then
-                debug_execute gosu "$GHOST_DAEMON_USER" ghost setup "${setup_flags[@]}"
+                debug_execute run_as_user "$GHOST_DAEMON_USER" ghost setup "${setup_flags[@]}"
             else
                 debug_execute ghost setup "${setup_flags[@]}"
             fi

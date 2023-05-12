@@ -1,0 +1,15 @@
+binaries:
+  - fluent-bit
+files:
+  - paths:
+    - /opt/bitnami/fluent-bit/conf/fluent-bit.conf
+    - /opt/bitnami/fluent-bit/conf/parsers.conf
+    - /opt/bitnami/fluent-bit/conf/parsers_java.conf
+directories:
+  - paths:
+      - /opt/bitnami/fluent-bit/conf
+      - /opt/bitnami/fluent-bit/log
+root_dir: /opt/bitnami
+version:
+  bin_name: fluent-bit
+  flag: --version

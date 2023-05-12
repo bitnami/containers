@@ -1,0 +1,7 @@
+command:
+  check-apache-exporter-run:
+    exec: timeout --preserve-status 5 apache_exporter
+    timeout: 8000
+    exit-status: 0
+    stderr:
+      - Starting apache_exporter

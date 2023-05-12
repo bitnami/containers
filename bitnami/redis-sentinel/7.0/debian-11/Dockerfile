@@ -3,19 +3,19 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-01T13:35:55Z" \
+      org.opencontainers.image.created="2023-05-12T00:38:27Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.0.10-debian-11-r3" \
+      org.opencontainers.image.ref.name="7.0.11-debian-11-r8" \
       org.opencontainers.image.title="redis-sentinel" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="7.0.10"
+      org.opencontainers.image.version="7.0.11"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux" \
-    PATH="/opt/bitnami/redis-sentinel/bin:/opt/bitnami/common/bin:$PATH"
+    PATH="/opt/bitnami/redis-sentinel/bin:$PATH"
 
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -23,8 +23,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libssl1.1 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "redis-sentinel-7.0.10-1-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
+      "redis-sentinel-7.0.11-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -42,7 +41,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/redis-sentinel/postunpack.sh
-ENV APP_VERSION="7.0.10" \
+ENV APP_VERSION="7.0.11" \
     BITNAMI_APP_NAME="redis-sentinel"
 
 EXPOSE 26379

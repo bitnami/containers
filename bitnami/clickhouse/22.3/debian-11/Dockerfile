@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-04T11:04:03Z" \
+      org.opencontainers.image.created="2023-05-11T15:56:54Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="22.3.20-debian-11-r1" \
+      org.opencontainers.image.ref.name="22.3.20-debian-11-r13" \
       org.opencontainers.image.title="clickhouse" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="22.3.20"
@@ -22,7 +22,6 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps xmlstarlet
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
       "clickhouse-22.3.20-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -43,7 +42,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/clickhouse/postunpack.sh
 ENV APP_VERSION="22.3.20" \
     BITNAMI_APP_NAME="clickhouse" \
-    PATH="/opt/bitnami/common/bin:/opt/bitnami/clickhouse/bin:$PATH" \
+    PATH="/opt/bitnami/clickhouse/bin:/opt/bitnami/common/bin:$PATH" \
     clickhouseCTL_API="3"
 
 EXPOSE 8123 9000 9004 9005 9009

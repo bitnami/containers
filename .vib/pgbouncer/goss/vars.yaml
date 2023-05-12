@@ -1,0 +1,18 @@
+binaries:
+  - ini-file
+  - psql
+  - pgbouncer
+  - wait-for-port
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/pgbouncer
+      - /bitnami/pgbouncer/conf
+      - /opt/bitnami/pgbouncer/conf
+      - /opt/bitnami/pgbouncer/logs
+      - /opt/bitnami/pgbouncer/tmp
+      - /docker-entrypoint-initdb.d
+root_dir: /opt/bitnami
+version:
+  bin_name: pgbouncer
+  flag: --version

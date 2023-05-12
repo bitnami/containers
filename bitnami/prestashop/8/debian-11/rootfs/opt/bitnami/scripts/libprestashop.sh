@@ -135,7 +135,7 @@ prestashop_initialize() {
         )
         is_boolean_yes "$PRESTASHOP_ENABLE_HTTPS" && prestashop_install_args+=("--ssl=1")
         # Ensure new files get created with web server write access, by running the installation command as the web server user
-        am_i_root && prestashop_install_args=("gosu" "$WEB_SERVER_DAEMON_USER" "${prestashop_install_args[@]}")
+        am_i_root && prestashop_install_args=("run_as_user" "$WEB_SERVER_DAEMON_USER" "${prestashop_install_args[@]}")
         if ! is_boolean_yes "$PRESTASHOP_SKIP_BOOTSTRAP"; then
             info "Running install script"
             debug_execute "${prestashop_install_args[@]}"

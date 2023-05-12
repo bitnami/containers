@@ -112,10 +112,10 @@ is_web_server_running() {
 #########################
 web_server_start() {
     info "Starting $(web_server_type) in background"
-    if [[ "$BITNAMI_SERVICE_MANAGER" = "monit" ]]; then
-        "${BITNAMI_ROOT_DIR}/scripts/$(web_server_type)/start.sh"
-    elif [[ "$BITNAMI_SERVICE_MANAGER" = "systemd" ]]; then
+    if [[ "${BITNAMI_SERVICE_MANAGER:-}" = "systemd" ]]; then
         systemctl start "bitnami.$(web_server_type).service"
+    else
+        "${BITNAMI_ROOT_DIR}/scripts/$(web_server_type)/start.sh"
     fi
 }
 
@@ -130,10 +130,10 @@ web_server_start() {
 #########################
 web_server_stop() {
     info "Stopping $(web_server_type)"
-    if [[ "$BITNAMI_SERVICE_MANAGER" = "monit" ]]; then
-        "${BITNAMI_ROOT_DIR}/scripts/$(web_server_type)/stop.sh"
-    elif [[ "$BITNAMI_SERVICE_MANAGER" = "systemd" ]]; then
+    if [[ "${BITNAMI_SERVICE_MANAGER:-}" = "systemd" ]]; then
         systemctl stop "bitnami.$(web_server_type).service"
+    else
+        "${BITNAMI_ROOT_DIR}/scripts/$(web_server_type)/stop.sh"
     fi
 }
 
@@ -148,10 +148,10 @@ web_server_stop() {
 #########################
 web_server_restart() {
     info "Restarting $(web_server_type)"
-    if [[ "$BITNAMI_SERVICE_MANAGER" = "monit" ]]; then
-        "${BITNAMI_ROOT_DIR}/scripts/$(web_server_type)/restart.sh"
-    elif [[ "$BITNAMI_SERVICE_MANAGER" = "systemd" ]]; then
+    if [[ "${BITNAMI_SERVICE_MANAGER:-}" = "systemd" ]]; then
         systemctl restart "bitnami.$(web_server_type).service"
+    else
+        "${BITNAMI_ROOT_DIR}/scripts/$(web_server_type)/restart.sh"
     fi
 }
 
@@ -165,10 +165,10 @@ web_server_restart() {
 #   None
 #########################
 web_server_reload() {
-    if [[ "$BITNAMI_SERVICE_MANAGER" = "monit" ]]; then
-        "${BITNAMI_ROOT_DIR}/scripts/$(web_server_type)/reload.sh"
-    elif [[ "$BITNAMI_SERVICE_MANAGER" = "systemd" ]]; then
+    if [[ "${BITNAMI_SERVICE_MANAGER:-}" = "systemd" ]]; then
         systemctl reload "bitnami.$(web_server_type).service"
+    else
+        "${BITNAMI_ROOT_DIR}/scripts/$(web_server_type)/reload.sh"
     fi
 }
 

@@ -4,13 +4,13 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-18T22:10:36Z" \
+      org.opencontainers.image.created="2023-05-10T14:24:57Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.2.4-debian-11-r6" \
+      org.opencontainers.image.ref.name="7.2.5-debian-11-r10" \
       org.opencontainers.image.title="ksql" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="7.2.4"
+      org.opencontainers.image.version="7.2.5"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,9 +23,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl netcat procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-11.0.18-10-3-linux-${OS_ARCH}-debian-11" \
-      "ksql-7.2.4-1-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-3-linux-${OS_ARCH}-debian-11" \
+      "java-11.0.19-7-1-linux-${OS_ARCH}-debian-11" \
+      "ksql-7.2.5-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -44,10 +43,10 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/ksql/postunpack.sh
-ENV APP_VERSION="7.2.4" \
+ENV APP_VERSION="7.2.5" \
     BITNAMI_APP_NAME="ksql" \
     JAVA_HOME="/opt/bitnami/java" \
-    PATH="/opt/bitnami/java/bin:/opt/bitnami/ksql/bin:/opt/bitnami/common/bin:$PATH"
+    PATH="/opt/bitnami/java/bin:/opt/bitnami/ksql/bin:$PATH"
 
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/ksql/entrypoint.sh" ]

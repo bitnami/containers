@@ -1,0 +1,11 @@
+binaries:
+  - kapacitor
+  - kapacitord
+  - tickfmt
+directories:
+  - paths:
+      - /opt/bitnami/kapacitor/bin
+root_dir: /opt/bitnami
+version:
+  bin_name: kapacitor
+  flag: version

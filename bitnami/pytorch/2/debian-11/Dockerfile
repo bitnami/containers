@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-03T12:08:38Z" \
+      org.opencontainers.image.created="2023-05-09T14:06:13Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.0.0-debian-11-r0" \
+      org.opencontainers.image.ref.name="2.0.1-debian-11-r1" \
       org.opencontainers.image.title="pytorch" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.0.0"
+      org.opencontainers.image.version="2.0.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,9 +22,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libbz2-1.0 libcom-err2 libcrypt1 libffi7 libgcc-s1 libgomp1 libgssapi-krb5-2 libjemalloc2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncursesw6 libnsl2 libreadline8 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 libtirpc3 numactl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "python-3.8.16-9-linux-${OS_ARCH}-debian-11" \
-      "pytorch-2.0.0-0-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
+      "python-3.8.16-12-linux-${OS_ARCH}-debian-11" \
+      "pytorch-2.0.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -43,9 +42,9 @@ RUN mkdir /.local && chmod g+rwX /.local
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/pytorch/postunpack.sh
-ENV APP_VERSION="2.0.0" \
+ENV APP_VERSION="2.0.1" \
     BITNAMI_APP_NAME="pytorch" \
-    PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:$PATH"
+    PATH="/opt/bitnami/python/bin:$PATH"
 
 WORKDIR /app
 USER 1001

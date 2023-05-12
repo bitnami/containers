@@ -62,6 +62,7 @@ export SPARK_LOG_DIR="${SPARK_BASE_DIR}/logs"
 export SPARK_TMP_DIR="${SPARK_BASE_DIR}/tmp"
 export SPARK_JARS_DIR="${SPARK_BASE_DIR}/jars"
 export SPARK_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
+export SPARK_USER="spark"
 
 # Spark configuration
 export SPARK_MODE="${SPARK_MODE:-master}"

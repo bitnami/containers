@@ -1,0 +1,6 @@
+binaries:
+  - nginx-prometheus-exporter
+root_dir: /opt/bitnami
+version:
+  bin_name: nginx-prometheus-exporter
+  flag: -version

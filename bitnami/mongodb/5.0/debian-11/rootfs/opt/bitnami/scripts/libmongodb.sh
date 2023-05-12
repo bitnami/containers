@@ -368,9 +368,9 @@ mongodb_start_bg() {
 
     if am_i_root; then
         if is_boolean_yes "$MONGODB_ENABLE_NUMACTL"; then
-            debug_execute gosu "$MONGODB_DAEMON_USER" numactl --interleave=all "$MONGODB_BIN_DIR/mongod" "${flags[@]}"
+            debug_execute run_as_user "$MONGODB_DAEMON_USER" numactl --interleave=all "$MONGODB_BIN_DIR/mongod" "${flags[@]}"
         else
-            debug_execute gosu "$MONGODB_DAEMON_USER" "$MONGODB_BIN_DIR/mongod" "${flags[@]}"
+            debug_execute run_as_user "$MONGODB_DAEMON_USER" "$MONGODB_BIN_DIR/mongod" "${flags[@]}"
         fi
     else
         if is_boolean_yes "$MONGODB_ENABLE_NUMACTL"; then
@@ -939,7 +939,7 @@ mongodb_is_hidden_node_pending() {
     debug "Adding hidden node ${node}:${port}"
     result=$(
         mongodb_execute_print_output "$MONGODB_INITIAL_PRIMARY_ROOT_USER" "$MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD" "admin" "$MONGODB_INITIAL_PRIMARY_HOST" "$MONGODB_INITIAL_PRIMARY_PORT_NUMBER" <<EOF
-rs.add({host: '$node:$port', hidden: true, priority: 0})
+rs.add({host: '$node:$port', hidden: true, priority: 0, votes: 0})
 EOF
     )
     # Error code 103 is considered OK.

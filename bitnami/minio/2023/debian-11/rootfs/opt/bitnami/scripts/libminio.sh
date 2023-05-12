@@ -60,10 +60,13 @@ minio_distributed_drives() {
 #########################
 is_minio_running() {
     local status
-    if [[ -z "${MINIO_PID:-}" ]]; then
+    pgrep -f "$(command -v minio) server" >"$MINIO_PID_FILE"
+    pid="$(get_pid_from_file "$MINIO_PID_FILE")"
+
+    if [[ -z "$pid" ]]; then
         false
     else
-        if ! is_service_running "$MINIO_PID"; then
+        if ! is_service_running "$pid"; then
             false
         else
             status="$(minio_client_execute_timeout admin info local --json | jq -r .info.mode)"
@@ -87,10 +90,12 @@ is_minio_running() {
 ########################
 is_minio_live() {
     local status_code
-    if [[ -z "${MINIO_PID:-}" ]]; then
+    pgrep -f "$(command -v minio) server" >"$MINIO_PID_FILE"
+    pid="$(get_pid_from_file "$MINIO_PID_FILE")"
+    if [[ -z "${pid}" ]]; then
         false
     else
-        if ! is_service_running "$MINIO_PID"; then
+        if ! is_service_running "$pid"; then
             false
         else
             # We use cURL because we need to check the liveness before the client is configured
@@ -151,12 +156,11 @@ minio_start_bg() {
 
     is_minio_running && return
     info "Starting MinIO in background..."
-    if  is_boolean_yes "${BITNAMI_DEBUG}"; then
-        "${exec}" "${args[@]}" &
+    if am_i_root; then
+        debug_execute run_as_user "$MINIO_DAEMON_USER" "${exec}" "${args[@]}" &
     else
-        "${exec}" "${args[@]}" >/dev/null 2>&1 &
+        debug_execute "${exec}" "${args[@]}" &
     fi
-    export MINIO_PID="$!"
     wait_for_minio
 }
 
@@ -173,7 +177,7 @@ minio_stop() {
         minio_client_execute_timeout admin service stop local >/dev/null 2>&1 || true
 
         local counter=5
-        while is_minio_running || is_service_running "$MINIO_PID"; do
+        while is_minio_running; do
             if [[ "$counter" -le 0 ]]; then
                 break
             fi
@@ -183,6 +187,40 @@ minio_stop() {
     else
         info "MinIO is already stopped..."
     fi
+}
+
+########################
+# Configure Apache reverse proxy
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+minio_configure_reverse_proxy() {
+    local -r console_http_port="${MINIO_APACHE_CONSOLE_HTTP_PORT:-"${APACHE_HTTP_PORT_NUMBER:-"$APACHE_DEFAULT_HTTP_PORT_NUMBER"}"}"
+    local -r console_https_port="${MINIO_APACHE_CONSOLE_HTTPS_PORT:-"${APACHE_HTTPS_PORT_NUMBER:-"$APACHE_DEFAULT_HTTPS_PORT_NUMBER"}"}"
+    local -r api_http_port="${MINIO_APACHE_API_HTTP_PORT_NUMBER}"
+    local -r api_https_port="${MINIO_APACHE_API_HTTPS_PORT_NUMBER}"
+
+    # Create Apache vhost for Jaeger Query
+    ensure_web_server_app_configuration_exists "minio-console" \
+        --type proxy \
+        --apache-proxy-address "http://127.0.0.1:${MINIO_CONSOLE_PORT_NUMBER}/" \
+        --http-port "$console_http_port" \
+        --https-port "$console_https_port"
+
+    # Create Apache vhost for Jaeger Collector
+    ensure_web_server_app_configuration_exists "minio-api" \
+        --type proxy \
+        --apache-proxy-address "http://127.0.0.1:${MINIO_API_PORT_NUMBER}/" \
+        --http-port "$api_http_port" \
+        --https-port "$api_https_port" \
+        --apache-additional-configuration "
+        # Preserve Headers to avoid issue with mc
+        # https://github.com/minio/minio/issues/7936
+        ProxyPreserveHost On
+        ProxyVia Block
+        "
 }
 
 ########################
@@ -251,7 +289,7 @@ minio_validate() {
     if ! is_dir_empty "${MINIO_CERTS_DIR}" && [[ "${MINIO_SCHEME}" == "http" ]] && [[ "${MINIO_SERVER_URL}" == "http://"* ]]; then
         warn "Certificates provided but 'http' scheme in use. Please set MINIO_SCHEME and/or MINIO_SERVER_URL variables"
     fi
-    if [[ "${MINIO_SCHEME}" != "http" ]] && [[  "${MINIO_SCHEME}" != "https" ]]; then
+    if [[ "${MINIO_SCHEME}" != "http" ]] && [[ "${MINIO_SCHEME}" != "https" ]]; then
         print_validation_error "The values allowed for MINIO_SCHEME are only [http, https]"
     fi
     shopt -u nocasematch
@@ -350,4 +388,15 @@ minio_node_hostname() {
     else
         echo "localhost"
     fi
+}
+
+########################
+# Check if MinIO daemon is not running
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_minio_not_running() {
+    ! is_minio_running
 }

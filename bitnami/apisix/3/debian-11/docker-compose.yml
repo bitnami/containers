@@ -1,0 +1,5 @@
+version: '2'
+
+services:
+  apisix:
+    image: docker.io/bitnami/apisix:3

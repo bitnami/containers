@@ -1,0 +1,22 @@
+binaries:
+  - java
+  - render-template
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/tomcat/webapps
+      - /opt/bitnami/tomcat
+      - /opt/bitnami/tomcat/lib
+      - /opt/bitnami/tomcat/temp
+      - /opt/bitnami/tomcat/logs
+      - /opt/bitnami/tomcat/conf
+      - /opt/bitnami/tomcat/work
+      - /opt/bitnami/tomcat/webapps_default
+files:
+  - mode: "0664"
+    paths:
+      - /opt/bitnami/tomcat/bin/setenv.sh
+  - mode: "0755"
+    paths:
+      - /opt/bitnami/tomcat/bin/version.sh
+root_dir: /opt/bitnami

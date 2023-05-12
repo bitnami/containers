@@ -1,23 +1,14 @@
 {
-    "gosu": {
-        "arch": "amd64",
-        "digest": "bf2b90a31df691e3648c4a41190a926bb638c3a9fa1dfcde36623ce1bfaadc23",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-3"
-    },
     "java": {
         "arch": "amd64",
-        "digest": "fbdf266273a4dd4c5fc37c344462aa50047549aa2e63858ffee5594ea450fca5",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.18-10-3"
+        "version": "11.0.19-7-1"
     },
     "ksql": {
         "arch": "amd64",
-        "digest": "dbbc36da6ce92bee097e5621c7eeba0787d83f878dae6bdcd7744ec23338da0c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.1.6-1"
+        "version": "7.1.7-0"
     }
 }

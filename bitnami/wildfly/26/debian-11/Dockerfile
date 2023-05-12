@@ -4,10 +4,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-01T14:11:13Z" \
+      org.opencontainers.image.created="2023-05-12T01:43:43Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="26.1.3-debian-11-r22" \
+      org.opencontainers.image.ref.name="26.1.3-debian-11-r37" \
       org.opencontainers.image.title="wildfly" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="26.1.3"
@@ -23,9 +23,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libaio1 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-11.0.18-10-4-linux-${OS_ARCH}-debian-11" \
-      "wildfly-26.1.3-7-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
+      "java-17.0.7-7-1-linux-${OS_ARCH}-debian-11" \
+      "wildfly-26.1.3-9-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,7 +46,7 @@ RUN /opt/bitnami/scripts/wildfly/postunpack.sh
 ENV APP_VERSION="26.1.3" \
     BITNAMI_APP_NAME="wildfly" \
     JAVA_HOME="/opt/bitnami/java" \
-    PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:/opt/bitnami/common/bin:$PATH" \
+    PATH="/opt/bitnami/java/bin:/opt/bitnami/wildfly/bin:$PATH" \
     WILDFLY_HOME="/home/wildfly"
 
 EXPOSE 8080 9990

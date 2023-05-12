@@ -82,3 +82,4 @@ jobs:
           VIB_ENV_REGISTRY_URL: "${{ secrets.PROD_MARKETPLACE_REGISTRY_URL }}"
           VIB_ENV_REGISTRY_USERNAME: "${{ steps.get-registry-credentials.outputs.marketplace_user }}"
           VIB_ENV_REGISTRY_PASSWORD: "${{ steps.get-registry-credentials.outputs.marketplace_passwd }}"
+          VIB_ENV_BOSSD_RELEASE_ID: "${{ secrets.BOSSD_RELEASE_ID }}"

@@ -1,37 +1,26 @@
 {
     "ghost": {
         "arch": "amd64",
-        "digest": "aeef80e74deb14954429bf3e6e8d3189340dd7cb7d9ffd5915bc7d485a39c311",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.39.0-0"
-    },
-    "gosu": {
-        "arch": "amd64",
-        "digest": "bf2b90a31df691e3648c4a41190a926bb638c3a9fa1dfcde36623ce1bfaadc23",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-3"
+        "version": "5.47.0-0"
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "6ed7c73b5e779521cf2f47a00ac54e6d2929213cb4eb3cbd9a4f12f84557c664",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.6.12-2"
+        "version": "10.11.3-0"
     },
     "node": {
         "arch": "amd64",
-        "digest": "984a00c0d1b2d456c942d8acbf7acca0aff455268bcf79bae9aa7cf00d95b1ba",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "16.19.1-2"
+        "version": "16.20.0-1"
     },
     "python": {
         "arch": "amd64",
-        "digest": "faf2f2e22f3ae88f12fb973d60295f7d63fab48c6909ae351e88ee31c5d296c6",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-8"
+        "version": "3.9.16-11"
     }
 }

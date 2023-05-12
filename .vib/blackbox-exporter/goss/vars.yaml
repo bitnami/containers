@@ -1,0 +1,6 @@
+binaries:
+  - blackbox_exporter
+root_dir: /opt/bitnami
+version:
+  bin_name: blackbox_exporter
+  flag: --version

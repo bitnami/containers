@@ -54,7 +54,12 @@ redis_conf_set() {
     value="${value//[$'\t\n\r']}"
     [[ "$value" = "" ]] && value="\"$value\""
 
-    replace_in_file "${REDIS_BASE_DIR}/etc/redis.conf" "^#*\s*${key} .*" "${key} ${value}" false
+    # Determine whether to enable the configuration for RDB persistence, if yes, do not enable the replacement operation
+    if [ "${key}" == "save" ];then
+        echo "${key} ${value}" >> "${REDIS_BASE_DIR}/etc/redis.conf"
+    else
+        replace_in_file "${REDIS_BASE_DIR}/etc/redis.conf" "^#*\s*${key} .*" "${key} ${value}" false
+    fi
 }
 
 ########################
@@ -154,7 +159,7 @@ redis_stop() {
 
     debug "Stopping Redis"
     if am_i_root; then
-        gosu "$REDIS_DAEMON_USER" "${REDIS_BASE_DIR}/bin/redis-cli" "${args[@]}" shutdown
+        run_as_user "$REDIS_DAEMON_USER" "${REDIS_BASE_DIR}/bin/redis-cli" "${args[@]}" shutdown
     else
         "${REDIS_BASE_DIR}/bin/redis-cli" "${args[@]}" shutdown
     fi
@@ -399,6 +404,16 @@ redis_configure_default() {
         # Enable AOF https://redis.io/topics/persistence#append-only-file
         # Leave default fsync (every second)
         redis_conf_set appendonly "${REDIS_AOF_ENABLED}"
+
+        #The value stored in $i here is the number of seconds and times of save rules in redis rdb mode
+        if [ -z "${REDIS_RDB_POLICY}" ];then
+          redis_conf_set save ""
+        else
+          for i in ${REDIS_RDB_POLICY};do
+            redis_conf_set save "${i//#/ }"
+          done
+        fi
+
         redis_conf_set port "$REDIS_PORT_NUMBER"
         # TLS configuration
         if is_boolean_yes "$REDIS_TLS_ENABLED"; then

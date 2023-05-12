@@ -1,0 +1,16 @@
+binaries:
+  - openresty
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/openresty
+      - /opt/bitnami/openresty/nginx/conf
+      - /opt/bitnami/openresty/nginx/conf/nginx/server_blocks
+      - /opt/bitnami/openresty/nginx/conf/bitnami
+      - /opt/bitnami/openresty/nginx/conf/bitnami/certs
+      - /opt/bitnami/openresty/nginx/logs
+      - /opt/bitnami/openresty/nginx/tmp
+      - /opt/bitnami/openresty/site
+      - /docker-entrypoint-initdb.d
+      - /home/openresty
+root_dir: /opt/bitnami

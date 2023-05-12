@@ -77,7 +77,7 @@ export GHOST_BIN_DIR="${GHOST_BASE_DIR}/bin"
 export GHOST_LOG_FILE="${GHOST_BASE_DIR}/content/logs/ghost.log"
 export GHOST_CONF_FILE="${GHOST_BASE_DIR}/config.production.json"
 export GHOST_PID_FILE="${GHOST_BASE_DIR}/.ghostpid"
-export PATH="${GHOST_BIN_DIR}:${PATH}"
+export PATH="${GHOST_BIN_DIR}:${BITNAMI_ROOT_DIR}/common/bin:${BITNAMI_ROOT_DIR}/node/bin:${PATH}"
 
 # Ghost persistence configuration
 export GHOST_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/ghost"

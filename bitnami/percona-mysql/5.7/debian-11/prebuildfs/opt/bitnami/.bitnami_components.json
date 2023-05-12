@@ -1,27 +1,21 @@
 {
-    "gosu": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-5"
-    },
     "ini-file": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.4.5-4"
+        "version": "1.4.5-5"
     },
     "mysql-shell": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.31-6"
+        "version": "8.0.31-8"
     },
     "percona-mysql": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.7.41-44-3"
+        "version": "5.7.41-44-4"
     },
     "percona-xtrabackup-binary": {
         "arch": "amd64",

@@ -11,13 +11,13 @@ set -eu
 ## https://github.com/supabase/postgres/blob/develop/migrations/db/migrate.sh
 ##
 
-export PGDATABASE="${POSTGRES_DB:-postgres}"
+export PGDATABASE="${POSTGRESQL_DB:-postgres}"
 export PGHOST="${POSTGRES_HOST:-localhost}"
 export PGPORT="${POSTGRESQL_PORT_NUMBER:-5432}"
 if [[ "$POSTGRESQL_USERNAME" = "postgres" ]]; then
     export PGPASSWORD="${POSTGRESQL_PASSWORD:-}"
 else
-    export PGPASSWORD="${POSTGRES_POSTGRES_PASSWORD:-}"
+    export PGPASSWORD="${POSTGRESQL_POSTGRES_PASSWORD:-}"
 fi
 
 for sql in /opt/bitnami/supabase-postgres/migrations/*.sql; do

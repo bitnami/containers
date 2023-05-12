@@ -3,7 +3,8 @@
     "resources": {
       "url": "{VIB_ENV_CONTAINER_URL}",
       "path": "{VIB_ENV_PATH}"
-    }
+    },
+    "runtime_parameters": "Y29tbWFuZDogWyJ0YWlsIiwgIi1mIiwgIi9kZXYvbnVsbCJd"
   },
   "phases": {
     "package": {
@@ -57,6 +58,7 @@
             "additional_packages_file": "osspi-packages-amd64.json",
             "scan_type": "BASE_OS",
             "osm": {
+              "associated_bossd_release": "{VIB_ENV_BOSSD_RELEASE_ID}",
               "product_name": "main-catalog-{VIB_ENV_CONTAINER}",
               "product_version": "{VIB_ENV_APP_VERSION}-{VIB_ENV_OS_FLAVOUR}-container",
               "architecture_overrides": [
@@ -76,9 +78,24 @@
               "url": "{VIB_ENV_PACKAGES_JSON_URL}",
               "path": "/{VIB_ENV_PATH}",
               "authn": {
-                  "header": "Authorization",
-                  "token": "Bearer {VIB_ENV_GITHUB_TOKEN}"
-                }
+                "header": "Authorization",
+                "token": "Bearer {VIB_ENV_GITHUB_TOKEN}"
+              }
+            }
+          }
+        },
+        {
+          "action_id": "goss",
+          "params": {
+            "resources": {
+              "path": "/.vib"
+            },
+            "tests_file": "neo4j/goss/goss.yaml",
+            "vars_file": "neo4j/goss/vars.yaml",
+            "remote": {
+              "pod": {
+                "workload": "deploy-neo4j"
+              }
             }
           }
         }
