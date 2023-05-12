@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-12T10:26:23Z" \
+      org.opencontainers.image.created="2023-05-12T14:16:58Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.27.1-debian-11-r1" \
+      org.opencontainers.image.ref.name="0.27.2-debian-11-r0" \
       org.opencontainers.image.title="fluxcd-image-reflector-controller" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.27.1"
+      org.opencontainers.image.version="0.27.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "fluxcd-image-reflector-controller-0.27.1-0-linux-${OS_ARCH}-debian-11" \
+      "fluxcd-image-reflector-controller-0.27.2-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -38,7 +38,7 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN useradd -r -u 1001 -g root fluxcd-image-reflector-controlle
 
-ENV APP_VERSION="0.27.1" \
+ENV APP_VERSION="0.27.2" \
     BITNAMI_APP_NAME="fluxcd-image-reflector-controller" \
     PATH="/opt/bitnami/fluxcd-image-reflector-controller/bin:$PATH"
 
