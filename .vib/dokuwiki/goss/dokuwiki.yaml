@@ -1,5 +1,3 @@
-command:
-
 file:
   /opt/bitnami/apache/conf/vhosts/dokuwiki-vhost.conf:
     exists: true
@@ -16,14 +14,7 @@ file:
       - "SSLEngine on"
       - /DocumentRoot.*/opt/bitnami/dokuwiki/
       - "RewriteEngine on"
-      - "RewriteRule ^_media/(.*)              lib/exe/fetch.php?media=$1  [QSA,L]"
-      - "RewriteRule ^_detail/(.*)             lib/exe/detail.php?media=$1  [QSA,L]"
-      - "RewriteRule ^_export/([^/]+)/(.*)     doku.php?do=export_$1&id=$2  [QSA,L]"
-      - "RewriteRule ^$                        doku.php  [L]"
-      - "RewriteCond %{REQUEST_FILENAME}       !-f"
-      - "RewriteCond %{REQUEST_FILENAME}       !-d"
       - "RewriteCond %{REQUEST_URI}            !^/server-status$"
-      - "RewriteRule (.*)                      doku.php?id=$1  [QSA,L]"
       - "RewriteRule ^index.php$               doku.php"
   /opt/bitnami/php/etc/php.ini:
     exists: true
