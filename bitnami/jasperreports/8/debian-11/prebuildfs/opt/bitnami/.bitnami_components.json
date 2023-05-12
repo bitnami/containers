@@ -9,19 +9,19 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.8.362-4"
+        "version": "1.8.372-7-0"
     },
     "mysql-client": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.11.2-5"
+        "version": "10.11.3-0"
     },
     "postgresql-client": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.19.0-4"
+        "version": "11.20.0-0"
     },
     "render-template": {
         "arch": "amd64",
@@ -33,6 +33,6 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.0.74-3"
+        "version": "9.0.75-0"
     }
 }
