@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.4.25-1"
+        "version": "3.4.26-0"
     },
     "yq": {
         "arch": "amd64",
