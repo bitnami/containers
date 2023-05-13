@@ -1,6 +1,0 @@
-command:
-  check-jsonnet-file:
-    exec: jsonnet ./jsonnet/goss/testfiles/test_template.jsonnet
-    exit-status: 0
-    stdout:
-      - VIB

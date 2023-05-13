@@ -7,6 +7,7 @@
         "eamodio.gitlens",
         "EditorConfig.EditorConfig",
         "esbenp.prettier-vscode",
+        "GitHub.vscode-github-actions",
         "medo64.render-crlf",
         "streetsidesoftware.code-spell-checker"
       ]

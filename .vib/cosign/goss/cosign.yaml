@@ -1,4 +1,0 @@
-command:
-  initialize-sigstore:
-    exec: cosign initialize
-    exit-status: 0

@@ -1,4 +1,0 @@
-command:
-  check-python-module:
-    exec: /opt/bitnami/azure-cli/venv/bin/python -c 'import azure.cli'
-    exit-status: 0

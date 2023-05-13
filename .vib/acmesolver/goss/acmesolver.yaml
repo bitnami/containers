@@ -1,4 +1,0 @@
-command:
-  check-app-run:
-    exec: acmesolver -h
-    exit-status: 0

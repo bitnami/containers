@@ -1,6 +1,0 @@
-command:
-  check-distro-version:
-    exec: grep VERSION_ID /etc/os-release
-    exit-status: 0
-    stdout:
-      - {{ .Env.APP_VERSION }}

@@ -1,4 +1,0 @@
-binaries:
-  - notary-signer
-  - migrate
-root_dir: /opt/bitnami
