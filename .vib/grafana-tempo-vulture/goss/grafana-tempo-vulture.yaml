@@ -1,4 +1,0 @@
-command:
-  check-tempo-vulture:
-    exec: /opt/bitnami/grafana-tempo-vulture/bin/tempo-vulture --help
-    exit-status: 0

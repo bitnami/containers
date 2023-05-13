@@ -1,0 +1,16 @@
+{
+  "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu",
+  "remoteUser": "vscode",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "eamodio.gitlens",
+        "EditorConfig.EditorConfig",
+        "esbenp.prettier-vscode",
+        "GitHub.vscode-github-actions",
+        "medo64.render-crlf",
+        "streetsidesoftware.code-spell-checker"
+      ]
+    }
+  }
+}

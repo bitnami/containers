@@ -1,6 +1,0 @@
-group:
-  daemon:
-    exists: true
-user:
-  daemon:
-    exists: true

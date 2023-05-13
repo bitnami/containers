@@ -1,8 +1,0 @@
-command:
-  # The exporter jar doesn't really have a help flag
-  # and exits with a "status=1" when not properly started.
-  check-jmx-http-server:
-    exec: java -jar /opt/bitnami/jmx-exporter/jmx_prometheus_httpserver.jar
-    exit-status: 1
-    stderr:
-      - /Usage.*WebServer/
