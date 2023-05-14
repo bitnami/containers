@@ -2,6 +2,11 @@
 #
 # Bitnami MinIO Client library
 
+# shellcheck disable=SC1091
+
+# Load Generic Libraries
+. /opt/bitnami/scripts/libos.sh
+
 # Functions
 
 ########################
