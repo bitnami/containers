@@ -1,5 +1,7 @@
 # Contour Operator packaged by Bitnami
 
+Since the upstream project is not maintained, this image has been deprecated, and will no longer be maintained not updated.
+
 ## What is Contour Operator?
 
 > The Contour Operator extends the Kubernetes API to create, configure and manage instances of Contour on behalf of users.
