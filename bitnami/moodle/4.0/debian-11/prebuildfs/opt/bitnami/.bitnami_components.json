@@ -27,7 +27,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.28-8"
+        "version": "8.0.28-9"
     },
     "postgresql-client": {
         "arch": "amd64",
