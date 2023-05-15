@@ -4,8 +4,10 @@ command:
     exit-status: 0
   # Placeholders in SQL installation files should have been substituted
   sql-placeholders:
-    exec: grep "#__" /opt/bitnami/joomla/installation/sql/mysql/*.sql
-    exit-status: 1
+    exec: grep "#__" /opt/bitnami/joomla/installation/sql/mysql/*.sql | wc -l
+    exit-status: 0
+    stdout:
+      - /^0/
 file:
   # Joomla! should have been configured based on build-time defaults
   /opt/bitnami/joomla/configuration.php:
@@ -18,7 +20,7 @@ file:
     exists: true
     filetype: file
     contains:
-      - /^memory_limit/
+      - "memory_limit = 256M"
   # HTTP vhost should have been properly rendered
   /opt/bitnami/apache/conf/vhosts/joomla-vhost.conf:
     exists: true

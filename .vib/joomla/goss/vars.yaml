@@ -5,9 +5,7 @@ binaries:
   - render-template
 files:
   - paths:
-      - /opt/bitnami/apache/modules/libphp.so
       - /opt/bitnami/joomla/.htaccess
-      - /opt/bitnami/joomla/configuration.php
 directories:
   - mode: "0775"
     paths:
