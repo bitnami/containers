@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-15T16:54:46Z" \
+      org.opencontainers.image.created="2023-05-15T21:02:07Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.6.0-debian-11-r5" \
+      org.opencontainers.image.ref.name="2.6.0-debian-11-r6" \
       org.opencontainers.image.title="airflow" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.6.0"
@@ -23,7 +23,7 @@ RUN install_packages ca-certificates curl git krb5-user libbsd0 libbz2-1.0 libcd
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "wait-for-port-1.0.6-6-linux-${OS_ARCH}-debian-11" \
-      "python-3.9.16-11-linux-${OS_ARCH}-debian-11" \
+      "python-3.9.16-12-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-15.3.0-0-linux-${OS_ARCH}-debian-11" \
       "ini-file-1.4.5-5-linux-${OS_ARCH}-debian-11" \
       "airflow-2.6.0-1-linux-${OS_ARCH}-debian-11" \
