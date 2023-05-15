@@ -20,3 +20,16 @@ root_dir: /opt/bitnami
 version:
   bin_name: airflow
   flag: version
+subpackages:
+  - async
+  - amazon
+  - celery
+  - /cncf.kubernetes/
+  - docker
+  - hashicorp
+  - ldap
+  - google
+  - /microsoft.azure/
+  - mysql
+  - postgres
+  - redis
