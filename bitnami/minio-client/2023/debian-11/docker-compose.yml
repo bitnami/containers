@@ -2,5 +2,4 @@ version: '2'
 
 services:
   minio-client:
-    # New change
     image: docker.io/bitnami/minio-client:2023
