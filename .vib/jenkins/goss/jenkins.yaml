@@ -1,0 +1,4 @@
+command:
+  check-app-jar:
+    exec: java -jar /opt/bitnami/jenkins/jenkins-plugin-manager.jar
+    exit-status: 0
