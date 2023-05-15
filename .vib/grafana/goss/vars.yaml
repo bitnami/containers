@@ -1,0 +1,39 @@
+binaries:
+  - grafana
+  - grafana-cli
+root_dir: /opt/bitnami
+version:
+  bin_name: grafana
+  flag: --version
+files:
+  - mode: "0664"
+    paths:
+    - /opt/bitnami/grafana/conf/grafana.ini
+directories:
+  - paths:
+    - /opt/bitnami/grafana/conf/provisioning
+    - /opt/bitnami/grafana/data
+    - /opt/bitnami/grafana/data/plugins
+    - /opt/bitnami/grafana/logs
+    mode: "0775"
+  - paths:
+    - /opt/bitnami/grafana/default-plugins/
+plugins:
+  - agenty-flowcharting-panel
+  - briangann-datatable-panel
+  - briangann-gauge-panel
+  - digiapulssi-organisations-panel
+  - grafana-clock-panel
+  - grafana-piechart-panel
+  - grafana-polystat-panel
+  - jdbranham-diagram-panel
+  - larona-epict-panel
+  - marcuscalidus-svg-panel
+  - michaeldmoore-annunciator-panel
+  - michaeldmoore-multistat-panel
+  - natel-discrete-panel
+  - neocat-cal-heatmap-panel
+  - pierosavi-imageit-panel
+  - scadavis-synoptic-pane
+  - snuids-trafficlights-panel
+  - vonage-status-panel
