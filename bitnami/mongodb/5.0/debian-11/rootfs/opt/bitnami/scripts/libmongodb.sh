@@ -1396,14 +1396,14 @@ mongodb_initialize() {
     is_boolean_yes "$MONGODB_DISABLE_JAVASCRIPT" && mongodb_disable_javascript_conf "$MONGODB_CONF_FILE"
 
     # Create the ReplicaSet keyFile before Mongo starts in case it is referenced in the $MONGODB_CONF_FILE
-        if [[ -n "$MONGODB_REPLICA_SET_MODE" ]]; then
-            if [[ -n "$MONGODB_REPLICA_SET_KEY" ]]; then
-                mongodb_create_keyfile "$MONGODB_REPLICA_SET_KEY"
-                mongodb_set_keyfile_conf "$MONGODB_CONF_FILE"
-            fi
-            mongodb_set_replicasetmode_conf "$MONGODB_CONF_FILE"
-            mongodb_set_listen_all_conf "$MONGODB_CONF_FILE"
+    if [[ -n "$MONGODB_REPLICA_SET_MODE" ]]; then
+        if [[ -n "$MONGODB_REPLICA_SET_KEY" ]]; then
+            mongodb_create_keyfile "$MONGODB_REPLICA_SET_KEY"
+            mongodb_set_keyfile_conf "$MONGODB_CONF_FILE"
         fi
+        mongodb_set_replicasetmode_conf "$MONGODB_CONF_FILE"
+        mongodb_set_listen_all_conf "$MONGODB_CONF_FILE"
+    fi
 
     if is_dir_empty "$MONGODB_DATA_DIR/db"; then
         info "Deploying MongoDB from scratch..."
