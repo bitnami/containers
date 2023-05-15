@@ -1,0 +1,4 @@
+command:
+  check-app-binary:
+    exec: kong-ingress-controller --help
+    exit-status: 0
