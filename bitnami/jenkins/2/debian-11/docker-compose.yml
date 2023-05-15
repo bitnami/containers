@@ -2,7 +2,6 @@ version: '2'
 
 services:
   jenkins:
-    # New change
     image: docker.io/bitnami/jenkins:2
     ports:
       - '80:8080'
