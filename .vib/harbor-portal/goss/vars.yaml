@@ -9,4 +9,8 @@ directories:
       - /opt/bitnami/nginx/scgi_temp
       - /opt/bitnami/nginx/uwsgi_temp
       - /opt/bitnami/nginx/conf
+files:
+  - paths:
+      - /opt/bitnami/harbor/swagger.yaml
+      - /opt/bitnami/harbor/swagger.json
 root_dir: /opt/bitnami
