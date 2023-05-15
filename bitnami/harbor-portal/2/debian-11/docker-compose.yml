@@ -1,7 +1,6 @@
 version: '2'
 
 services:
-  # New change
   registry:
     image: docker.io/bitnami/harbor-registry:2
     environment:
