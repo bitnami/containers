@@ -56,4 +56,4 @@ command:
     exec: timeout --preserve-status 5 gitea web
     exit-status: 0
     stdout:
-      - "/Starting.*web.*server/"
+      - "/Starting.*Web.*server/"
