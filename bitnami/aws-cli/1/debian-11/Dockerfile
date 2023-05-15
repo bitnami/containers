@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-14T22:05:21Z" \
+      org.opencontainers.image.created="2023-05-15T16:47:02Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.27.133-debian-11-r1" \
+      org.opencontainers.image.ref.name="1.27.133-debian-11-r2" \
       org.opencontainers.image.title="aws-cli" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.27.133"
@@ -23,7 +23,7 @@ RUN install_packages ca-certificates curl groff-base libbz2-1.0 libcom-err2 libc
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.9.16-11-linux-${OS_ARCH}-debian-11" \
-      "aws-cli-1.27.133-0-linux-${OS_ARCH}-debian-11" \
+      "aws-cli-1.27.133-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
