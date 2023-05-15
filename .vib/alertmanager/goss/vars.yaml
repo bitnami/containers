@@ -1,9 +1,6 @@
 binaries:
   - alertmanager
   - amtool
-files:
-  - paths:
-      - /opt/bitnami/alertmanager/conf/config.yml
 version:
   bin_name: alertmanager
   flag: --version
