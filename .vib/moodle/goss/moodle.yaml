@@ -12,3 +12,9 @@ file:
       - extension = pgsql
       - /^memory_limit/
       - /^max_input_vars/
+group:
+  daemon:
+    exists: true
+user:
+  daemon:
+    exists: true

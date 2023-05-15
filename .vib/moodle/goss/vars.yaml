@@ -7,10 +7,6 @@ binaries:
   - pg_restore
   - pg_dumpall
   - render-template
-files:
-  - paths:
-      - /opt/bitnami/apache/conf/modsecurity.conf
-      - /opt/bitnami/apache/conf/unicode.mapping
 directories:
   - mode: "0775"
     paths:
@@ -27,16 +23,9 @@ apache:
     - RewriteRule "(\/vendor\/)" - [F]
     - RewriteRule "(\/node_modules\/)" - [F]
     - RewriteRule "(^|/)\.(?!well-known\/)" - [F]
-    - RewriteRule "(composer\.json)" - [F]
-    - RewriteRule "(\.lock)" - [F]
     - RewriteRule "(\/environment.xml)" - [F]
     - RewriteRule "(\/install.xml)" - [F]
     - RewriteRule "(\/README)" - [F]
-    - RewriteRule "(\/readme)" - [F]
-    - RewriteRule "(\/moodle_readme)" - [F]
     - RewriteRule "(\/upgrade\.txt)" - [F]
-    - RewriteRule "(phpunit\.xml\.dist)" - [F]
-    - RewriteRule "(\/tests\/behat\/)" - [F]
-    - RewriteRule "(\/fixtures\/)" - [F]
     - RewriteRule "(\/package\.json)" - [F]
     - RewriteRule "(\/Gruntfile\.js)" - [F]
