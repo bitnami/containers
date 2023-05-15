@@ -2,7 +2,6 @@ version: '2'
 
 services:
   registry:
-    # New change
     image: docker.io/bitnami/harbor-registry:2
     environment:
       - REGISTRY_HTTP_SECRET=CHANGEME
