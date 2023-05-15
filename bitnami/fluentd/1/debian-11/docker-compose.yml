@@ -2,7 +2,6 @@ version: '2'
 
 services:
   fluentd:
-    # New change
     image: docker.io/bitnami/fluentd:1
     ports:
       - '24224:24224'
