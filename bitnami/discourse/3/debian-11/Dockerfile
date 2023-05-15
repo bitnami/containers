@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-12T18:47:54Z" \
+      org.opencontainers.image.created="2023-05-15T20:05:51Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.0.3-debian-11-r8" \
+      org.opencontainers.image.ref.name="3.0.3-debian-11-r9" \
       org.opencontainers.image.title="discourse" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.0.3"
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages acl advancecomp ca-certificates curl file gifsicle git hostname imagemagick jhead jpegoptim libbrotli1 libbsd0 libbz2-1.0 libcom-err2 libcrypt1 libedit2 libffi7 libgcc-s1 libgmp10 libgnutls30 libgssapi-krb5-2 libhogweed6 libicu67 libidn2-0 libjpeg-turbo-progs libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmd0 libncursesw6 libnettle8 libnsl2 libp11-kit0 libpq5 libreadline-dev libreadline8 libsasl2-2 libsqlite3-0 libssl-dev libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libtirpc3 libunistring2 libuuid1 libxml2 libxslt1.1 optipng pngcrush pngquant procps rsync sqlite3 zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "python-3.9.16-11-linux-${OS_ARCH}-debian-11" \
+      "python-3.9.16-12-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.6-6-linux-${OS_ARCH}-debian-11" \
       "ruby-3.1.4-0-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-15.3.0-0-linux-${OS_ARCH}-debian-11" \
