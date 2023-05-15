@@ -4,10 +4,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-12T12:53:55Z" \
+      org.opencontainers.image.created="2023-05-15T17:06:10Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.2.4-debian-11-r9" \
+      org.opencontainers.image.ref.name="3.2.4-debian-11-r10" \
       org.opencontainers.image.title="spark" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.2.4"
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.9.16-11-linux-${OS_ARCH}-debian-11" \
       "java-11.0.19-7-1-linux-${OS_ARCH}-debian-11" \
-      "spark-3.2.4-0-linux-${OS_ARCH}-debian-11" \
+      "spark-3.2.4-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
