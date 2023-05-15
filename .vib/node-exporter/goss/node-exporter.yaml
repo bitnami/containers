@@ -1,4 +1,7 @@
 command:
   check-node-exporter:
-    exec: /opt/bitnami/node-exporter/bin/node_exporter --help
+    exec: timeout --preserve-status 5 node_exporter || true
     exit-status: 0
+    stderr:
+      - Listening
+
