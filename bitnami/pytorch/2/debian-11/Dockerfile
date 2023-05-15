@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-12T14:35:53Z" \
+      org.opencontainers.image.created="2023-05-15T17:02:50Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.0.1-debian-11-r2" \
+      org.opencontainers.image.ref.name="2.0.1-debian-11-r3" \
       org.opencontainers.image.title="pytorch" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.0.1"
@@ -23,7 +23,7 @@ RUN install_packages ca-certificates curl libbz2-1.0 libcom-err2 libcrypt1 libff
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.8.16-12-linux-${OS_ARCH}-debian-11" \
-      "pytorch-2.0.1-0-linux-${OS_ARCH}-debian-11" \
+      "pytorch-2.0.1-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
