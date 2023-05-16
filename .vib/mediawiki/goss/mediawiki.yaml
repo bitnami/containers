@@ -34,11 +34,17 @@ file:
     filetype: file
     contains:
       - "memory_limit = 256M"
-  /opt/bitnami/mediawiki/HISTORY:
+  /opt/bitnami/apache/conf/vhosts/mediawiki-vhost.conf:
     exists: true
     filetype: file
     contains:
       - "RewriteEngine On"
-      - "RewriteRule"
+      - "RewriteRule ^/?wiki(/.*)?$ %{DOCUMENT_ROOT}/index.php [L]"
   /opt/bitnami/mediawiki/extensions/Scribunto:
     exists: false
+command:
+  check-php-extensions:
+    exec: pear list
+    exit-status: 0
+    stdout:
+      - "Net_SMTP"
