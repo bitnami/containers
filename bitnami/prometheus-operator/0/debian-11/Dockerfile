@@ -1,4 +1,5 @@
 FROM docker.io/bitnami/minideb:bullseye
+# test
 
 ARG TARGETARCH
 
