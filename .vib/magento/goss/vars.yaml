@@ -11,11 +11,6 @@ directories:
   - mode: "0775"
     paths:
       - /opt/bitnami/magento
-files:
-  - paths:
-      # Validate that a supported web server is configured
-      - /opt/bitnami/scripts/apache-env.sh
-      - /opt/bitnami/scripts/libapache.sh
 version:
   bin_name: magento
   flag: --version
