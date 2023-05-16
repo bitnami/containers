@@ -1,7 +1,6 @@
 version: '2'
 
 services:
-  # [TEST]
   pytorch:
     tty: true
     image: docker.io/bitnami/pytorch:2
