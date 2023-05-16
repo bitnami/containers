@@ -1,5 +1,4 @@
 version: '2'
 services:
-  # [TEST]
   promtail:
     image: docker.io/bitnami/promtail:2
