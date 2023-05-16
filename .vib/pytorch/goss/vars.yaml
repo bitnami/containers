@@ -1,0 +1,11 @@
+binaries:
+  - python
+directories:
+  - mode: "0775"
+    paths:
+      - /opt/bitnami/python
+      - /app
+root_dir: /opt/bitnami
+version:
+  bin_name: python
+  flag: -c 'import torch; print(torch.__version__)'
