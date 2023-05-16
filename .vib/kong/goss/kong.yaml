@@ -35,7 +35,7 @@ command:
     exec: nginx -V
     exit-status: 0
   check-kong-version:
-    exec: /opt/bitnami/scripts/kong/entrypoint.sh /opt/bitnami/kong/bin/ version
+    exec: /opt/bitnami/scripts/kong/entrypoint.sh /opt/bitnami/kong/bin/kong version
     exit-status: 0
     stdout:
       - {{ .Env.APP_VERSION }}
