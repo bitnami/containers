@@ -1,7 +1,6 @@
 version: '2'
 
 services:
-  # [TEST]
   rabbitmq:
     image: docker.io/bitnami/rabbitmq:3.11
     ports:
