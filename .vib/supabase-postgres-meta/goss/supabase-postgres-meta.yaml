@@ -1,0 +1,6 @@
+command:
+  list-run-operations:
+    exec: cd /opt/bitnami/supabase-postgres-meta; npm run
+    exit-status: 0
+    stdout:
+      - node dist/server/server.js
