@@ -742,6 +742,10 @@ docker-compose up kafka
 
 ## Notable Changes
 
+### 3.4.0-debian-11-r32, 3.3.2-debian-11-r38 and 3.2.3-debian-11-r82
+
+Variable `BROKER_ID_COMMAND` was changed to `NODE_ID_COMMAND`.
+
 ### Branches rename
 
 Branch 2 has been renamed to 2.8 and branch 3 has been splited into branches 3.0 and 3.1 mirroing the upstream [Apache Kafka's naming policy](https://kafka.apache.org/downloads)

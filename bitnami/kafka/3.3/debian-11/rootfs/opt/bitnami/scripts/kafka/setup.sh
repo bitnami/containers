@@ -17,13 +17,13 @@ set -o pipefail
 
 # Map Kafka environment variables
 kafka_create_alias_environment_variables
-if [[ -z "${KAFKA_CFG_BROKER_ID:-}" ]]; then
-    if [[ -n "${BROKER_ID_COMMAND:-}" ]]; then
-        KAFKA_CFG_BROKER_ID="$(eval "${BROKER_ID_COMMAND:-}")"
-        export KAFKA_CFG_BROKER_ID
+if [[ -z "${KAFKA_CFG_NODE_ID:-}" ]]; then
+    if [[ -n "${NODE_ID_COMMAND:-}" ]]; then
+        KAFKA_CFG_NODE_ID="$(eval "${NODE_ID_COMMAND:-}")"
+        export KAFKA_CFG_NODE_ID
     elif ! is_boolean_yes "$KAFKA_ENABLE_KRAFT"; then
-        # By default auto allocate broker ID unless KRaft is enabled
-        export KAFKA_CFG_BROKER_ID=-1
+        # By default auto allocate NODE ID unless KRaft is enabled
+        export KAFKA_CFG_NODE_ID=-1
     fi
 fi
 
