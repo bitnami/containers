@@ -1,0 +1,6 @@
+command:
+  list-run-operations:
+    exec: cd /opt/bitnami/supabase/studio; npm run
+    exit-status: 0
+    stdout:
+      - next start
