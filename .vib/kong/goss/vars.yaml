@@ -14,7 +14,7 @@ directories:
 files:
   - paths:
       - /opt/bitnami/kong/server/lib/pluginsocket.proto
-version:
-  bin_name: kong
-  flag: version
+#version:
+#  bin_name: kong
+#  flag: version
 root_dir: /opt/bitnami
