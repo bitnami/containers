@@ -66,7 +66,8 @@ done
 unset drupal_env_vars
 
 # Paths
-export DRUPAL_BASE_DIR="${BITNAMI_ROOT_DIR}/drupal"
+default_drupal_base_dir="${BITNAMI_ROOT_DIR}/drupal"
+export DRUPAL_BASE_DIR="${DRUPAL_BASE_DIR:-$default_drupal_base_dir}"
 export DRUPAL_CONF_FILE="${DRUPAL_BASE_DIR}/sites/default/settings.php"
 export DRUPAL_MODULES_DIR="${DRUPAL_BASE_DIR}/modules"
 

@@ -44,6 +44,19 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
+# Optionally override DRUPAL_BASE_DIR to install Drupal in a custom directory
+ARG DRUPAL_BASE_DIR=/opt/bitnami/drupal
+ENV DRUPAL_BASE_DIR=$DRUPAL_BASE_DIR \
+    # For shared libs that don't know about Drupal vars
+    APP_BASE_DIR=$DRUPAL_BASE_DIR
+RUN \
+  if [ "${DRUPAL_BASE_DIR}" != '/opt/bitnami/drupal'  ]; then \
+    tmp=$(mktemp -d) && \
+    mv /opt/bitnami/drupal "${tmp}" && \
+    mkdir -p "$(dirname ${DRUPAL_BASE_DIR})" && \
+    mv "${tmp}/drupal" "${DRUPAL_BASE_DIR}" ; \
+  fi
+
 COPY rootfs /
 RUN /opt/bitnami/scripts/apache/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
@@ -54,7 +67,7 @@ ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
     APP_VERSION="9.5.7" \
     BITNAMI_APP_NAME="drupal" \
-    PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/drupal/vendor/bin:$PATH"
+    PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:${DRUPAL_BASE_DIR}/vendor/bin:$PATH"
 
 EXPOSE 8080 8443
 
