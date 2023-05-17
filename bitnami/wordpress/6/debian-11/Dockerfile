@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-15T21:40:10Z" \
+      org.opencontainers.image.created="2023-05-17T07:39:50Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.2.0-debian-11-r24" \
+      org.opencontainers.image.ref.name="6.2.1-debian-11-r0" \
       org.opencontainers.image.title="wordpress" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="6.2.0"
+      org.opencontainers.image.version="6.2.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "apache-2.4.57-6-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.11.3-0-linux-${OS_ARCH}-debian-11" \
       "libphp-8.1.19-0-linux-${OS_ARCH}-debian-11" \
-      "wordpress-6.2.0-14-linux-${OS_ARCH}-debian-11" \
+      "wordpress-6.2.1-0-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-5-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -51,7 +51,7 @@ RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/wordpress/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="6.2.0" \
+    APP_VERSION="6.2.1" \
     BITNAMI_APP_NAME="wordpress" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/wp-cli/bin:$PATH"
 
