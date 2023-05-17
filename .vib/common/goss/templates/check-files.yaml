@@ -10,7 +10,7 @@
 #   - .Vars.files.group (String)
 ########################
 file:
-  {{ range $file := .Vars.files }}
+  {{ range $files := .Vars.files }}
   {{ range $path := .paths }}
   {{ $path }}:
     exists: true

@@ -10,7 +10,7 @@
 #   - .Vars.directories.group (String)
 ########################
 file:
-  {{ range $dir := .Vars.directories }}
+  {{ range $dirs := .Vars.directories }}
   {{ range $path := .paths }}
   {{ $path }}:
     exists: true
