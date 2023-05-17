@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-15T20:07:59Z" \
+      org.opencontainers.image.created="2023-05-17T07:57:06Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="10.0.9-debian-11-r4" \
+      org.opencontainers.image.ref.name="10.0.9-debian-11-r5" \
       org.opencontainers.image.title="drupal-nginx" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="10.0.9"
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "nginx-1.23.4-3-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.11.3-0-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-5-linux-${OS_ARCH}-debian-11" \
-      "drupal-10.0.9-0-linux-${OS_ARCH}-debian-11" \
+      "drupal-10.0.9-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
