@@ -1,0 +1,14 @@
+command:
+  check-spring-cloud-dataflow:
+    timeout: 20000
+    exec: timeout --preserve-status 15 /opt/bitnami/java/bin/java -jar /opt/bitnami/spring-cloud-dataflow/spring-cloud-dataflow.jar
+    exit-status: 143
+    stdout:
+      - Started
+file:
+  /opt/bitnami/spring-cloud-dataflow/spring-cloud-dataflow.jar:
+    exists: true
+    filetype: symlink
+    linked-to: "spring-cloud-dataflow-server-{{ .Env.APP_VERSION }}.jar"
+
+
