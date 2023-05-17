@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-15T20:05:51Z" \
+      org.opencontainers.image.created="2023-05-16T23:37:37Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.0.3-debian-11-r9" \
+      org.opencontainers.image.ref.name="3.0.3-debian-11-r10" \
       org.opencontainers.image.title="discourse" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.0.3"
@@ -24,11 +24,11 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.9.16-12-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.6-6-linux-${OS_ARCH}-debian-11" \
-      "ruby-3.1.4-0-linux-${OS_ARCH}-debian-11" \
+      "ruby-3.1.4-1-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-15.3.0-0-linux-${OS_ARCH}-debian-11" \
-      "node-18.16.0-0-linux-${OS_ARCH}-debian-11" \
+      "node-18.16.0-1-linux-${OS_ARCH}-debian-11" \
       "brotli-1.0.9-160-linux-${OS_ARCH}-debian-11" \
-      "discourse-3.0.3-1-linux-${OS_ARCH}-debian-11" \
+      "discourse-3.0.3-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
