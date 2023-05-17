@@ -8,4 +8,4 @@ command:
     exec: {{ .Vars.version.bin_name }} {{ .Vars.version.flag }}
     exit-status: 1
     stdout:
-    - {{ .Env.APP_VERSION }}
+    - /.*{{ .Env.APP_VERSION }}.*/
