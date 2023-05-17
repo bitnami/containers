@@ -65,6 +65,10 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
+There are also [build-time variables](https://docs.docker.com/engine/reference/commandline/build/#build-arg) you may pass when building the image yourself, which allow additional customization:
+
+* `DRUPAL_BASE_DIR`: Allows custom install directory for Drupal. Default: **/opt/bitnami/drupal**
+
 ## How to use this image
 
 Drupal requires access to a MySQL or MariaDB database to store information. We'll use the [Bitnami Docker Image for MariaDB](https://github.com/bitnami/containers/tree/main/bitnami/mariadb) for the database requirements.
