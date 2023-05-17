@@ -15,14 +15,14 @@ file:
   {{ $path }}:
     exists: true
     filetype: file
-    {{ if and (index $file "mode") }}
-    mode: "{{ printf "%s" $file.mode }}"
+    {{ if and (index $files "mode") }}
+    mode: "{{ printf "%s" $files.mode }}"
     {{ end }}
-    {{ if and (index $file "owner") }}
-    owner: {{ printf "%s" $file.owner }}
+    {{ if and (index $files "owner") }}
+    owner: {{ printf "%s" $files.owner }}
     {{ end }}
-    {{ if and (index $file "group") }}
-    group: {{ printf "%s" $file.group }}
+    {{ if and (index $files "group") }}
+    group: {{ printf "%s" $files.group }}
     {{ end }}
   {{ end }}
   {{ end }}
