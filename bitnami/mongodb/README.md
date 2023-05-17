@@ -579,6 +579,8 @@ Before starting the cluster you need to generate PEM certificates as required by
 
 Another option would be to use letsencrypt certificates; the required configuration steps for that scenario are left as an exercise for the user and are beyond the scope of this README.
 
+The hostname used during initialization can be configured using `MONGODB_LOCALHOST_NAME`. Use this to provide a vaild domain for your certificate. Preferably this hostname should be routed back to `127.0.0.1` through the hosts file. If not possible then progress can be made bybinding the mongo server to the correct ip, or all ips, in the configuration.
+
 #### Generating self-signed certificates
 
 * Generate a new private key which will be used to create your own Certificate Authority (CA):

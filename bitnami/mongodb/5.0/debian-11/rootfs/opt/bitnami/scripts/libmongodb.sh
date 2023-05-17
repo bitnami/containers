@@ -667,7 +667,7 @@ mongodb_create_user() {
     [[ -z "$database" ]] && query="db.getSiblingDB(db.stats().db).createUser({ user: '$user', pwd: '$password', roles: [{role: 'readWrite', db: db.getSiblingDB(db.stats().db).stats().db }] })"
     # Create user, discarding mongo CLI output for clean logs
     info "Creating user '$user'..."
-    mongodb_execute "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD" "" "127.0.0.1" <<<"$query"
+    mongodb_execute "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD" "" "$MONGODB_LOCALHOST_NAME" <<<"$query"
 }
 
 ########################
@@ -684,7 +684,7 @@ mongodb_create_users() {
 
     if [[ -n "$MONGODB_ROOT_PASSWORD" ]] && ! [[ "$MONGODB_REPLICA_SET_MODE" =~ ^(secondary|arbiter|hidden) ]]; then
         info "Creating $MONGODB_ROOT_USER user..."
-        mongodb_execute "" "" "" "127.0.0.1" <<EOF
+        mongodb_execute "" "" "" "$MONGODB_LOCALHOST_NAME" <<EOF
 db.getSiblingDB('admin').createUser({ user: '$MONGODB_ROOT_USER', pwd: '$MONGODB_ROOT_PASSWORD', roles: [{role: 'root', db: 'admin'}] })
 EOF
     fi
@@ -714,7 +714,7 @@ EOF
 
     if [[ -n "$MONGODB_METRICS_USERNAME" ]] && [[ -n "$MONGODB_METRICS_PASSWORD" ]]; then
         info "Creating '$MONGODB_METRICS_USERNAME' user..."
-        mongodb_execute "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD" "" "127.0.0.1" <<EOF
+        mongodb_execute "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD" "" "$MONGODB_LOCALHOST_NAME" <<EOF
 db.getSiblingDB('admin').createUser({ user: '$MONGODB_METRICS_USERNAME', pwd: '$MONGODB_METRICS_PASSWORD', roles: [{role: 'clusterMonitor', db: 'admin'},{ role: 'read', db: 'local' }] })
 EOF
     fi
@@ -784,7 +784,7 @@ mongodb_is_primary_node_initiated() {
     local port="${2:?port is required}"
     local result
     result=$(
-        mongodb_execute_print_output "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD" "admin" "127.0.0.1" "$MONGODB_PORT_NUMBER" <<EOF
+        mongodb_execute_print_output "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD" "admin" "$MONGODB_LOCALHOST_NAME" "$MONGODB_PORT_NUMBER" <<EOF
 rs.initiate({"_id":"$MONGODB_REPLICA_SET_NAME", "members":[{"_id":0,"host":"$node:$port","priority":5}]})
 EOF
     )
