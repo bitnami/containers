@@ -1,0 +1,12 @@
+command:
+  check-spring-cloud-dataflow-shell:
+    timeout: 20000
+    exec: /opt/bitnami/java/bin/java -jar /opt/bitnami/spring-cloud-dataflow-shell/spring-cloud-dataflow-shell.jar --help
+    exit-status: 0
+file:
+  /opt/bitnami/spring-cloud-dataflow-shell/spring-cloud-dataflow-shell.jar:
+    exists: true
+    filetype: symlink
+    linked-to: "spring-cloud-dataflow-shell-{{ .Env.APP_VERSION }}.jar"
+
+

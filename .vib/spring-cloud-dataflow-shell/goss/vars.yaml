@@ -1,0 +1,7 @@
+binaries:
+  - java
+directories:
+  - mode: "0775"
+    paths:
+    - /opt/bitnami/spring-cloud-dataflow-shell
+root_dir: /opt/bitnami
