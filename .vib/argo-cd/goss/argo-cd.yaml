@@ -1,0 +1,11 @@
+command:
+  check-argo-cd:
+    exec: /opt/bitnami/argo-cd/bin/argocd --help
+    exit-status: 0
+command:
+  check-app-version:
+    # argocd version exits with exit code 1
+    exec: {{ .Vars.version.bin_name }} {{ .Vars.version.flag }}
+    exit-status: 1
+    stdout:
+    - {{ .Env.APP_VERSION }}
