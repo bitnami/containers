@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-15T20:11:51Z" \
+      org.opencontainers.image.created="2023-05-17T00:21:26Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2023.4.4-debian-11-r9" \
+      org.opencontainers.image.ref.name="20230404.1.0-debian-11-r0" \
       org.opencontainers.image.title="dokuwiki" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2023.4.4"
+      org.opencontainers.image.version="20230404.1.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "apache-2.4.57-6-linux-${OS_ARCH}-debian-11" \
       "libphp-8.2.6-0-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-5-linux-${OS_ARCH}-debian-11" \
-      "dokuwiki-2023.4.4-1-linux-${OS_ARCH}-debian-11" \
+      "dokuwiki-20230404.1.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -48,7 +48,7 @@ RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/dokuwiki/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="2023.4.4" \
+    APP_VERSION="20230404.1.0" \
     BITNAMI_APP_NAME="dokuwiki" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/common/bin:$PATH"
 
