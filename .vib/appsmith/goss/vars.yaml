@@ -25,6 +25,8 @@ files:
       - /opt/bitnami/appsmith/editor/index.html
       - /opt/bitnami/appsmith/backend/server.jar
       - /opt/bitnami/appsmith/rts/package.json
+linked_libraries:
+  timeout: 45000
 sed_in_place:
   exclude_paths:
     - /opt/bitnami/appsmith/rts/node_modules
