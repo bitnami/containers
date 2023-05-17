@@ -157,7 +157,7 @@ minio_start_bg() {
     is_minio_running && return
     info "Starting MinIO in background..."
     if am_i_root; then
-        debug_execute gosu "$MINIO_DAEMON_USER" "${exec}" "${args[@]}" &
+        debug_execute run_as_user "$MINIO_DAEMON_USER" "${exec}" "${args[@]}" &
     else
         debug_execute "${exec}" "${args[@]}" &
     fi

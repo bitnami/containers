@@ -19,7 +19,7 @@ FLAGS=("serve" "/etc/registry/config.yml" "$@")
 
 info "** Starting harbor-registry **"
 if am_i_root; then
-    exec gosu "$HARBOR_REGISTRY_DAEMON_USER" "$CMD" "${FLAGS[@]}"
+    exec_as_user "$HARBOR_REGISTRY_DAEMON_USER" "$CMD" "${FLAGS[@]}"
 else
     exec "$CMD" "${FLAGS[@]}"
 fi

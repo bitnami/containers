@@ -4,10 +4,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-17T11:32:30Z" \
+      org.opencontainers.image.created="2023-05-17T00:24:11Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.1.7-debian-11-r2" \
+      org.opencontainers.image.ref.name="7.1.7-debian-11-r12" \
       org.opencontainers.image.title="schema-registry" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="7.1.7"
@@ -23,9 +23,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl netcat procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-17.0.6-10-4-linux-${OS_ARCH}-debian-11" \
+      "java-17.0.7-7-1-linux-${OS_ARCH}-debian-11" \
       "schema-registry-7.1.7-1-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,7 +46,7 @@ RUN /opt/bitnami/scripts/schema-registry/postunpack.sh
 ENV APP_VERSION="7.1.7" \
     BITNAMI_APP_NAME="schema-registry" \
     JAVA_HOME="/opt/bitnami/java" \
-    PATH="/opt/bitnami/java/bin:/opt/bitnami/schema-registry/bin:/opt/bitnami/common/bin:$PATH"
+    PATH="/opt/bitnami/java/bin:/opt/bitnami/schema-registry/bin:$PATH"
 
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/schema-registry/entrypoint.sh" ]

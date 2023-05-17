@@ -25,6 +25,8 @@ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
+Looking to use SuiteCRM in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
 ## How to deploy SuiteCRM in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami SuiteCRM Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/suitecrm).
@@ -281,6 +283,7 @@ To configure SuiteCRM to send email using SMTP you can set the following environ
 * `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
 * `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. **60M**.
 * `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. **60M**.
+* `PHP_OUTPUT_BUFFERING`: Size of the output buffer for PHP. Default: **8196**
 
 #### Example
 

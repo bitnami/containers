@@ -1,26 +1,20 @@
 {
-    "gosu": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-5"
-    },
     "node": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "16.20.0-1"
+        "version": "16.20.0-2"
     },
     "parse-dashboard": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.0.0-7"
+        "version": "5.1.0-2"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-9"
+        "version": "3.9.16-12"
     }
 }

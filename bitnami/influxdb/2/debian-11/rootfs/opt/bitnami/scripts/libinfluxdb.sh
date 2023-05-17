@@ -208,8 +208,8 @@ influxdb_start_bg_noauth() {
     info "Starting InfluxDB in background..."
 
     local start_command=("${INFLUXDB_BIN_DIR}/influxd")
-    # if root user then run it with gosu
-    am_i_root && start_command=("gosu" "$INFLUXDB_DAEMON_USER" "${start_command[@]}")
+    # if root user then run it with chroot
+    am_i_root && start_command=("run_as_user" "$INFLUXDB_DAEMON_USER" "${start_command[@]}")
 
     INFLUXDB_HTTP_HTTPS_ENABLED=false INFLUXDB_HTTP_BIND_ADDRESS="127.0.0.1:${INFLUXDB_HTTP_PORT_NUMBER}" debug_execute "${start_command[@]}" &
 

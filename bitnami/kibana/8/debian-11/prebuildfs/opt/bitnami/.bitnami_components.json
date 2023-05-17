@@ -1,15 +1,9 @@
 {
-    "gosu": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-5"
-    },
     "kibana": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.7.0-0"
+        "version": "8.7.1-0"
     },
     "yq": {
         "arch": "amd64",

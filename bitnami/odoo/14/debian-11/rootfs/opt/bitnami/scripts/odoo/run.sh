@@ -20,7 +20,7 @@ declare -a args=("--config" "$ODOO_CONF_FILE" "$@")
 
 info "** Starting Odoo **"
 if am_i_root; then
-    exec gosu "$ODOO_DAEMON_USER" "$cmd" "${args[@]}"
+    exec_as_user "$ODOO_DAEMON_USER" "$cmd" "${args[@]}"
 else
     exec "$cmd" "${args[@]}"
 fi

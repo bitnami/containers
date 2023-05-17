@@ -27,6 +27,8 @@ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
+Looking to use Apache Kafka in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
 ## How to deploy Apache Kafka in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Apache Kafka Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/kafka).
@@ -107,17 +109,6 @@ In this example, we will create an Apache Kafka client instance that will connec
 docker network create app-tier --driver bridge
 ```
 
-#### Step 2: Launch the Zookeeper server instance
-
-Use the `--network app-tier` argument to the `docker run` command to attach the Zookeeper container to the `app-tier` network.
-
-```console
-docker run -d --name zookeeper-server \
-    --network app-tier \
-    -e ALLOW_ANONYMOUS_LOGIN=yes \
-    bitnami/zookeeper:latest
-```
-
 #### Step 2: Launch the Apache Kafka server instance
 
 Use the `--network app-tier` argument to the `docker run` command to attach the Apache Kafka container to the `app-tier` network.
@@ -126,7 +117,6 @@ Use the `--network app-tier` argument to the `docker run` command to attach the 
 docker run -d --name kafka-server \
     --network app-tier \
     -e ALLOW_PLAINTEXT_LISTENER=yes \
-    -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper-server:2181 \
     bitnami/kafka:latest
 ```
 
@@ -137,7 +127,6 @@ Finally we create a new container instance to launch the Apache Kafka client and
 ```console
 docker run -it --rm \
     --network app-tier \
-    -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper-server:2181 \
     bitnami/kafka:latest kafka-topics.sh --list  --bootstrap-server kafka-server:9092
 ```
 
@@ -153,14 +142,12 @@ networks:
     driver: bridge
 
 services:
-  zookeeper:
-    image: 'bitnami/zookeeper:latest'
-    networks:
-      - app-tier
   kafka:
     image: 'bitnami/kafka:latest'
     networks:
       - app-tier
+    environment:
+      - ALLOW_PLAINTEXT_LISTENER=yes
   myapp:
     image: 'YOUR_APPLICATION_IMAGE'
     networks:
@@ -170,8 +157,7 @@ services:
 > **IMPORTANT**:
 >
 > 1. Please update the `YOUR_APPLICATION_IMAGE` placeholder in the above snippet with your application image
-> 2. Configure Apache Kafka and ZooKeeper persistence, and configure them either via environment variables or by [mounting configuration files](#full-configuration).
-> 3. In your application container, use the hostname `kafka` to connect to the Apache Kafka server
+> 2. In your application container, use the hostname `kafka` to connect to the Apache Kafka server
 
 Launch the containers using:
 
@@ -195,21 +181,23 @@ The configuration can easily be setup with the Bitnami Apache Kafka Docker image
 * `KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD`: Apache Kafka Zookeeper truststore file password. No defaults.
 * `KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME`: Verify Zookeeper hostname on TLS certificates. Defaults: **true**.
 * `KAFKA_ZOOKEEPER_TLS_TYPE`: Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`. Defaults: **JKS**.
+* `KAFKA_CFG_LISTENERS`: Kafka `listeners` configuration override. Default: **PLAINTEXT://:9092,CONTROLLER://:9093**
+* `KAFKA_CFG_ADVERTISED_LISTENERS`: Kafka `advertised.listeners` configuration override. Default: **PLAINTEXT://:9092**
 * `KAFKA_CFG_SASL_ENABLED_MECHANISMS`: Allowed mechanism when using SASL either for clients, inter broker, or zookeeper comunications. Allowed values: `PLAIN`, `SCRAM-SHA-256`, `SCRAM-SHA-512` or a comma separated combination of those values. Default: **PLAIN,SCRAM-SHA-256,SCRAM-SHA-512**
 * `KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL`: SASL mechanism to use for inter broker communications. No defaults.
 * `KAFKA_TLS_CLIENT_AUTH`: Configures kafka brokers to request client authentication. Allowed values: `required`, `requested`, `none`. Defaults: **required**.
 * `KAFKA_TLS_TYPE`: Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`. Defaults: **JKS**.
 * `KAFKA_CLIENT_USERS`: Users that will be created into Zookeeper when using SASL for client communications. Separated by commas. Default: **user**
 * `KAFKA_CLIENT_PASSWORDS`: Passwords for the users specified at`KAFKA_CLIENT_USERS`. Separated by commas. Default: **bitnami**
-* `KAFKA_CFG_MAX_PARTITION_FETCH_BYTES`:  The maximum amount of data per-partition the server will return. Default: **1048576**
-* `KAFKA_CFG_MAX_REQUEST_SIZE`: The maximum size of a request in bytes. Default: **1048576**
-* `KAFKA_ENABLE_KRAFT`: Whether to enable Kafka Raft (KRaft) mode. Default: **no**
+* `KAFKA_CFG_MAX_PARTITION_FETCH_BYTES`:  The maximum amount of data per-partition the server will return. No defaults.
+* `KAFKA_CFG_MAX_REQUEST_SIZE`: The maximum size of a request in bytes. No defaults.
+* `KAFKA_ENABLE_KRAFT`: Whether to enable Kafka Raft (KRaft) mode. Default: **yes**
 * `KAFKA_KRAFT_CLUSTER_ID`: Kafka cluster ID when using Kafka Raft (KRaft). No defaults.
 
 Additionally, any environment variable beginning with `KAFKA_CFG_` will be mapped to its corresponding Apache Kafka key. For example, use `KAFKA_CFG_BACKGROUND_THREADS` in order to set `background.threads` or `KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE` in order to configure `auto.create.topics.enable`.
 
 ```console
-docker run --name kafka -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 -e ALLOW_PLAINTEXT_LISTENER=yes -e KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true bitnami/kafka:latest
+docker run --name kafka -e ALLOW_PLAINTEXT_LISTENER=yes -e KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true bitnami/kafka:latest
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/kafka/docker-compose.yml) file present in this repository:
@@ -218,7 +206,7 @@ or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers
 kafka:
   ...
   environment:
-    - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+    - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
   ...
 ```
 
@@ -229,24 +217,12 @@ To use Apache Kafka in a development setup, create the following `docker-compose
 ```yaml
 version: "3"
 services:
-  zookeeper:
-    image: 'bitnami/zookeeper:latest'
-    ports:
-      - '2181:2181'
-    environment:
-      - ALLOW_ANONYMOUS_LOGIN=yes
   kafka:
     image: 'bitnami/kafka:latest'
     ports:
       - '9092:9092'
     environment:
-      - KAFKA_BROKER_ID=1
-      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
-    depends_on:
-      - zookeeper
 ```
 
 To deploy it, run the following command in the directory where the `docker-compose.yml` file is located:
@@ -255,44 +231,48 @@ To deploy it, run the following command in the directory where the `docker-compo
 docker-compose up -d
 ```
 
-### Kafka without Zookeeper (KRaft)
+### Kafka with Zookeeper
 
 Apache Kafka Raft (KRaft) makes use of a new quorum controller service in Kafka which replaces the previous controller and makes use of an event-based variant of the Raft consensus protocol.
-This greatly simplifies Kafka's architecture by consolidating responsibility for metadata into Kafka itself, rather than splitting it between two different systems: ZooKeeper and Kafka.
+This greatly simplifies Kafka’s architecture by consolidating responsibility for metadata into Kafka itself, rather than splitting it between two different systems: ZooKeeper and Kafka.
 
 More Info can be found here: <https://developer.confluent.io/learn/kraft/>
 
 > **NOTE:** According to [KIP-833](https://cwiki.apache.org/confluence/display/KAFKA/KIP-833%3A+Mark+KRaft+as+Production+Ready), KRaft is now in a production-ready state.
 
-Configuration here has been crafted from the [Kraft Repo](https://github.com/apache/kafka/tree/trunk/config/kraft).
+However, if you want to keep using ZooKeeper, you can use the following configuration:
 
-```diff
-version: "3"
+```yaml
+version: "2"
+
 services:
--  zookeeper:
--    image: 'bitnami/zookeeper:latest'
--    ports:
--      - '2181:2181'
--    environment:
--      - ALLOW_ANONYMOUS_LOGIN=yes
-   kafka:
-     image: 'bitnami/kafka:latest'
-     ports:
-       - '9092:9092'
-     environment:
-+      - KAFKA_ENABLE_KRAFT=yes
-+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
-+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
--      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
-+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
-+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
-       - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092
-       - KAFKA_BROKER_ID=1
-+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@127.0.0.1:9093
--      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
-       - ALLOW_PLAINTEXT_LISTENER=yes
--    depends_on:
--      - zookeeper
+  zookeeper:
+    image: docker.io/bitnami/zookeeper:3.8
+    ports:
+      - "2181:2181"
+    volumes:
+      - "zookeeper_data:/bitnami"
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  kafka:
+    image: docker.io/bitnami/kafka:3.4
+    ports:
+      - "9092:9092"
+    volumes:
+      - "kafka_data:/bitnami"
+    environment:
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_ENABLE_KRAFT=no
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
+    depends_on:
+      - zookeeper
+
+volumes:
+  zookeeper_data:
+    driver: local
+  kafka_data:
+    driver: local
 ```
 
 ### Accessing Apache Kafka with internal and external clients
@@ -303,12 +283,9 @@ To do so, add the following environment variables to your docker-compose:
 
 ```diff
     environment:
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
-+     - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
-+     - KAFKA_CFG_LISTENERS=CLIENT://:9092,EXTERNAL://:9093
-+     - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka:9092,EXTERNAL://localhost:9093
-+     - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=CLIENT
++     - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
++     - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
 ```
 
 And expose the external port:
@@ -318,7 +295,7 @@ And expose the external port:
 ```diff
     ports:
 -     - '9092:9092'
-+     - '9093:9093'
++     - '9094:9094'
 ```
 
 **Note**: To connect from an external machine, change `localhost` above to your host's external IP/hostname and include `EXTERNAL://0.0.0.0:9093` in `KAFKA_CFG_LISTENERS` to allow for remote connections.
@@ -328,8 +305,8 @@ And expose the external port:
 These clients, from the same host, will use `localhost` to connect to Apache Kafka.
 
 ```console
-kafka-console-producer.sh --bootstrap-server 127.0.0.1:9093 --topic test
-kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9093 --topic test --from-beginning
+kafka-console-producer.sh --bootstrap-server 127.0.0.1:9094 --topic test
+kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9094 --topic test --from-beginning
 ```
 
 If running these commands from another machine, change the address accordingly.
@@ -355,20 +332,13 @@ The Bitnami Apache Kafka docker image disables the PLAINTEXT listener for securi
 ALLOW_PLAINTEXT_LISTENER=yes
 ```
 
-In order to configure authentication, you must configure the Apache Kafka listeners properly. This container assumes the names below will be used for the listeners:
-
-* INTERNAL: used for inter-broker communications.
-* CLIENT: used for communications with clients that are within the same network as Apache Kafka brokers.
-
-Let's see an example to configure Apache Kafka with `SASL_SSL` authentication for communications with clients, and `SSL` authentication for inter-broker communication.
+In order to configure authentication, you must configure the Apache Kafka listeners properly.Let's see an example to configure Apache Kafka with `SASL_SSL` authentication for communications with clients, and `PLAINTEXT` authentication for controller-related communications.
 
 The environment variables below should be defined to configure the listeners, and the SASL credentials for client communications:
 
 ```console
-KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=INTERNAL:SSL,CLIENT:SASL_SSL
-KAFKA_CFG_LISTENERS=INTERNAL://:9093,CLIENT://:9092
-KAFKA_CFG_ADVERTISED_LISTENERS=INTERNAL://kafka:9093,CLIENT://kafka:9092
-KAFKA_CFG_INTER_BROKER_LISTENER_NAME=INTERNAL
+KAFKA_CFG_LISTENERS=SASL_SSL://:9092,CONTROLLER://:9093
+KAFKA_CFG_ADVERTISED_LISTENERS=SASL_SSL://localhost:9092
 KAFKA_CLIENT_USERS=user
 KAFKA_CLIENT_PASSWORDS=password
 ```
@@ -396,25 +366,14 @@ The following docker-compose file is an example showing how to mount your JKS ce
 version: '2'
 
 services:
-  zookeeper:
-    image: 'bitnami/zookeeper:latest'
-    ports:
-     - '2181:2181'
-    environment:
-      - ZOO_ENABLE_AUTH=yes
-      - ZOO_SERVER_USERS=kafka
-      - ZOO_SERVER_PASSWORDS=kafka_password
   kafka:
     image: 'bitnami/kafka:latest'
     hostname: kafka.example.com
     ports:
       - '9092'
     environment:
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
-      - KAFKA_CFG_LISTENERS=SASL_SSL://:9092
+      - KAFKA_CFG_LISTENERS=SASL_SSL://:9092,CONTROLLER://:9093
       - KAFKA_CFG_ADVERTISED_LISTENERS=SASL_SSL://:9092
-      - KAFKA_ZOOKEEPER_USER=kafka
-      - KAFKA_ZOOKEEPER_PASSWORD=kafka_password
       - KAFKA_CLIENT_USERS=user
       - KAFKA_CLIENT_PASSWORDS=password
       - KAFKA_CERTIFICATE_PASSWORD=certificatePassword123
@@ -502,36 +461,21 @@ In order to authenticate Apache Kafka against a Zookeeper server with `SASL_SSL`
 
 An Apache Kafka cluster can easily be setup with the Bitnami Apache Kafka Docker image using the following environment variables:
 
-* `KAFKA_CFG_ZOOKEEPER_CONNECT`: Comma separated host:port pairs, each corresponding to a Zookeeper Server.
+* `KAFKA_CFG_CONTROLLER_QUORUM_VOTERS`: Comma separated host:port pairs, each corresponding to a Kafka controller connection.
 
-Create a Docker network to enable visibility to each other via the docker container name
-
-```console
-docker network create app-tier --driver bridge
-```
-
-#### Step 1: Create the first node for Zookeeper
-
-The first step is to create one Zookeeper instance.
-
-```console
-docker run --name zookeeper \
-  --network app-tier \
-  -e ALLOW_ANONYMOUS_LOGIN=yes \
-  -p 2181:2181 \
-  bitnami/zookeeper:latest
-```
-
-#### Step 2: Create the first node for Apache Kafka
+#### Step 1: Create the first node for Apache Kafka
 
 The first step is to create one Apache Kafka instance.
 
 ```console
-docker run --name kafka1 \
+docker run --name kafka-0 \
   --network app-tier \
-  -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
+  -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093 \
+  -e KAFKA_CFG_NODE_ID=0 \
+  -e KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv \
   -e ALLOW_PLAINTEXT_LISTENER=yes \
   -p :9092 \
+  -p :9093 \
   bitnami/kafka:latest
 ```
 
@@ -540,11 +484,14 @@ docker run --name kafka1 \
 Next we start a new Apache Kafka container.
 
 ```console
-docker run --name kafka2 \
+docker run --name kafka-1 \
   --network app-tier \
-  -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
+  -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093 \
+  -e KAFKA_CFG_NODE_ID=1 \
+  -e KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv \
   -e ALLOW_PLAINTEXT_LISTENER=yes \
   -p :9092 \
+  -p :9093 \
   bitnami/kafka:latest
 ```
 
@@ -553,11 +500,14 @@ docker run --name kafka2 \
 Next we start another new Apache Kafka container.
 
 ```console
-docker run --name kafka3 \
+docker run --name kafka-3 \
   --network app-tier \
-  -e KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181 \
+  -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093 \
+  -e KAFKA_CFG_NODE_ID=3 \
+  -e KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv \
   -e ALLOW_PLAINTEXT_LISTENER=yes \
   -p :9092 \
+  -p :9093 \
   bitnami/kafka:latest
 ```
 
@@ -569,42 +519,62 @@ With Docker Compose, topic replication can be setup using:
 version: '2'
 
 services:
-  zookeeper:
-    image: 'bitnami/zookeeper:latest'
+  kafka-0:
+    image: docker.io/bitnami/kafka:testing
     ports:
-     - '2181:2181'
+      - "9092"
+      - "9093"
     environment:
-     - ALLOW_ANONYMOUS_LOGIN=yes
-  kafka1:
-    image: 'bitnami/kafka:latest'
-    ports:
-      - '9092'
-    environment:
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - BRDEBUG=1
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093
+      - KAFKA_CFG_BROKER_ID=0
+      - KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv
       - ALLOW_PLAINTEXT_LISTENER=yes
-  kafka2:
-    image: 'bitnami/kafka:latest'
+    volumes:
+      - kafka_0_data:/bitnami/kafka
+  kafka-1:
+    image: docker.io/bitnami/kafka:testing
     ports:
-      - '9092'
+      - "9092"
+      - "9093"
     environment:
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - BRDEBUG=1
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093
+      - KAFKA_CFG_BROKER_ID=1
+      - KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv
       - ALLOW_PLAINTEXT_LISTENER=yes
-  kafka3:
-    image: 'bitnami/kafka:latest'
+    volumes:
+      - kafka_1_data:/bitnami/kafka
+  kafka-2:
+    image: docker.io/bitnami/kafka:testing
     ports:
-      - '9092'
+      - "9092"
+      - "9093"
     environment:
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - BRDEBUG=1
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093
+      - KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv
+      - KAFKA_CFG_BROKER_ID=2
       - ALLOW_PLAINTEXT_LISTENER=yes
+    volumes:
+      - kafka_2_data:/bitnami/kafka
+
+volumes:
+  kafka_0_data:
+    driver: local
+  kafka_1_data:
+    driver: local
+  kafka_2_data:
+    driver: local
 ```
 
 Then, you can create a replicated topic with:
 
 ```console
-root@kafka1:/# /opt/bitnami/kafka/bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --topic mytopic --partitions 3 --replication-factor 3
+root@kafka-0:/# /opt/bitnami/kafka/bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --topic mytopic --partitions 3 --replication-factor 3
 Created topic "mytopic".
 
-root@kafka1:/# /opt/bitnami/kafka/bin/kafka-topics.sh --describe --bootstrap-server localhost:9092 --topic mytopic
+root@kafka-0:/# /opt/bitnami/kafka/bin/kafka-topics.sh --describe --bootstrap-server localhost:9092 --topic mytopic
 Topic:mytopic   PartitionCount:3        ReplicationFactor:3     Configs:
         Topic: mytopic  Partition: 0    Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
         Topic: mytopic  Partition: 1    Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
@@ -613,7 +583,7 @@ Topic:mytopic   PartitionCount:3        ReplicationFactor:3     Configs:
 
 ### Full configuration
 
-The image looks for configuration files (server.properties, log4j.properties, etc.) in the `/bitnami/kafka/config/` directory, this directory can be changed by setting the KAFKA_MOUNTED_CONF_DIR environment variable.
+The image looks for configuration files (server.properties, log4j.properties, etc.) in the `/bitnami/kafka/config/` and `/bitnami/kafka/config/kraft` directories, this can be changed by setting the KAFKA_MOUNTED_CONF_DIR environment variable.
 
 ```console
 docker run --name kafka -v /path/to/server.properties:/bitnami/kafka/config/server.properties bitnami/kafka:latest
@@ -775,6 +745,10 @@ docker-compose up kafka
 ### Branches rename
 
 Branch 2 has been renamed to 2.8 and branch 3 has been splited into branches 3.0 and 3.1 mirroing the upstream [Apache Kafka's naming policy](https://kafka.apache.org/downloads)
+
+### 3.4.0-debian-11-r23, 3.3.2-debian-11-r29 and 3.2.3-debian-11-r73
+
+* Apache Kafka is now configured using Kraft. You can disable this configuration with the `KAFKA_ENABLE_KRAFT=false` env var and by following the instructions in this guide.
 
 ### 3.0.0-debian-10-r0
 

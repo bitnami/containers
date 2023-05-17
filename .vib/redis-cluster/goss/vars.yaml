@@ -1,0 +1,18 @@
+binaries:
+  - redis-cli
+  - redis-server
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/redis
+      - /opt/bitnami/redis
+  - paths:
+      - /bitnami/redis/data
+      - /opt/bitnami/redis/etc
+files:
+  - paths:
+      - /opt/bitnami/redis/etc/redis-default.conf
+root_dir: /opt/bitnami
+version:
+  bin_name: redis-server
+  flag: --version

@@ -1,44 +1,38 @@
 {
-    "gosu": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-5"
-    },
     "jasperreports": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.0-7"
+        "version": "8.2.0-0"
     },
     "java": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.8.362-4"
+        "version": "1.8.372-7-0"
     },
     "mysql-client": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.6.12-4"
+        "version": "10.11.3-0"
     },
     "postgresql-client": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.19.0-4"
+        "version": "11.20.0-0"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-4"
+        "version": "1.0.5-5"
     },
     "tomcat": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.0.73-3"
+        "version": "9.0.75-0"
     }
 }

@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-17T02:48:02Z" \
+      org.opencontainers.image.created="2023-05-16T18:29:05Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.44.0-debian-11-r2" \
+      org.opencontainers.image.ref.name="1.45.0-debian-11-r5" \
       org.opencontainers.image.title="jaeger" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.44.0"
+      org.opencontainers.image.version="1.45.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "jaeger-1.44.0-0-linux-${OS_ARCH}-debian-11" \
+      "jaeger-1.45.0-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -38,7 +38,7 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="1.44.0" \
+ENV APP_VERSION="1.45.0" \
     BITNAMI_APP_NAME="jaeger" \
     PATH="/opt/bitnami/jaeger/bin:$PATH"
 

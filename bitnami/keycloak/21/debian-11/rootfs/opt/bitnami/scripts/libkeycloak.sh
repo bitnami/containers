@@ -104,7 +104,12 @@ keycloak_validate() {
 keycloak_conf_set() {
     local -r key="${1:?key missing}"
     local -r value="${2:-}"
-    debug "Setting ${key} to '${value}' in Keycloak configuration"
+    # Redact sensitive values before outputting to debug log
+    local redacted_value="${value}"
+    if [[ "${key}" =~ ^(db|https-key-store|https-trust-store|spi-truststore-file)-password$ ]]; then
+        redacted_value="_redacted_"
+    fi
+    debug "Setting ${key} to '${redacted_value}' in Keycloak configuration"
     # Sanitize key (sed does not support fixed string substitutions)
     local sanitized_pattern
     sanitized_pattern="^\s*(#\s*)?$(sed 's/[]\[^$.*/]/\\&/g' <<<"$key")\s*=\s*(.*)"

@@ -25,6 +25,8 @@ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
+Looking to use Magento in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
 ## How to deploy Magento in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Magento Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/magento).
@@ -333,6 +335,7 @@ Available environment variables:
 * `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **756M**
 * `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
 * `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
+* `PHP_OUTPUT_BUFFERING`: Size of the output buffer for PHP. Default: **8196**
 
 ## Logging
 

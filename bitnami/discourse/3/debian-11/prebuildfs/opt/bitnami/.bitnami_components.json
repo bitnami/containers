@@ -9,42 +9,36 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.0.3-0"
-    },
-    "gosu": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-5"
+        "version": "3.0.3-2"
     },
     "node": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.16.0-0"
+        "version": "18.16.0-1"
     },
     "postgresql-client": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "15.2.0-4"
+        "version": "15.3.0-0"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-9"
+        "version": "3.9.16-12"
     },
     "ruby": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.1.4-0"
+        "version": "3.1.4-1"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-4"
+        "version": "1.0.6-6"
     }
 }

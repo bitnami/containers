@@ -1,0 +1,42 @@
+binaries:
+  - nginx
+  - mariadb
+  - php
+  - render-template
+  - wp
+files:
+  - paths:
+    - /opt/bitnami/wordpress/wp-config.php
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/wordpress
+      - /opt/bitnami/wordpress
+      - /opt/bitnami/wordpress/tmp
+      - /opt/bitnami/wordpress/wp-content/upgrade
+      - /opt/bitnami/wordpress/wp-content/uploads
+      - /opt/bitnami/wordpress/wp-content/languages
+      # WP-CLI
+      - /opt/bitnami/wp-cli/.cache
+      - /opt/bitnami/wp-cli/.packages
+phpmodules:
+# Based on https://make.wordpress.org/hosting/handbook/server-environment/#php-extensions
+# Required
+  - json
+  - mysqli
+# Recommended
+  - curl
+  - dom
+  - exif
+  - fileinfo
+  - hash
+  - imagick
+  - mbstring
+  - sodium
+  - openssl
+  - pcre
+  - xml
+  - zip
+# Specific from postunpack logic
+  - memcached
+root_dir: /opt/bitnami

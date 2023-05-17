@@ -26,7 +26,10 @@ if ! am_i_root; then
         export NSS_WRAPPER_PASSWD
         NSS_WRAPPER_GROUP="$(mktemp)"
         export NSS_WRAPPER_GROUP
-        echo "argocd:x:$(id -u):$(id -g):ArgoCD:/opt/bitnami/argo-cd:/bin/false" > "$NSS_WRAPPER_PASSWD"
+        if [[ "$HOME" == "/" ]]; then
+            export HOME=/opt/bitnami/argo-cd
+        fi
+        echo "argocd:x:$(id -u):$(id -g):ArgoCD:${HOME}:/bin/false" > "$NSS_WRAPPER_PASSWD"
         echo "argocd:x:$(id -g):" > "$NSS_WRAPPER_GROUP"
         chmod 400 "$NSS_WRAPPER_PASSWD" "$NSS_WRAPPER_GROUP"
     fi

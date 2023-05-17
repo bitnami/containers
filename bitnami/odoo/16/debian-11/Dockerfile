@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-17T15:57:44Z" \
+      org.opencontainers.image.created="2023-05-16T23:22:44Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="16.0.20230415-debian-11-r1" \
+      org.opencontainers.image.ref.name="16.0.20230515-debian-11-r2" \
       org.opencontainers.image.title="odoo" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="16.0.20230415"
+      org.opencontainers.image.version="16.0.20230515"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,12 +22,11 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages acl ca-certificates curl fontconfig libbrotli1 libbsd0 libbz2-1.0 libc6 libcap2-bin libcom-err2 libcrypt1 libedit2 libffi7 libfreetype6 libgcc-s1 libgmp10 libgnutls30 libgssapi-krb5-2 libhogweed6 libicu67 libidn2-0 libjpeg62-turbo libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmd0 libncursesw6 libnettle8 libnsl2 libp11-kit0 libpng16-16 libpq5 libreadline8 libsasl2-2 libsqlite3-0 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libtirpc3 libunistring2 libuuid1 libx11-6 libxcb1 libxext6 libxml2 libxrender1 libxslt1.1 procps xfonts-75dpi xfonts-base zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "python-3.10.11-0-linux-${OS_ARCH}-debian-11" \
-      "render-template-1.0.5-4-linux-${OS_ARCH}-debian-11" \
-      "postgresql-client-15.2.0-4-linux-${OS_ARCH}-debian-11" \
-      "node-18.16.0-0-linux-${OS_ARCH}-debian-11" \
-      "odoo-16.0.20230415-1-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
+      "python-3.10.11-4-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.5-5-linux-${OS_ARCH}-debian-11" \
+      "postgresql-client-15.3.0-0-linux-${OS_ARCH}-debian-11" \
+      "node-18.16.0-1-linux-${OS_ARCH}-debian-11" \
+      "odoo-16.0.20230515-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,7 +49,7 @@ RUN if [ "$OS_ARCH" = "amd64" ]; then \
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/odoo/postunpack.sh
-ENV APP_VERSION="16.0.20230415" \
+ENV APP_VERSION="16.0.20230515" \
     BITNAMI_APP_NAME="odoo" \
     LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/odoo/bin:$PATH"

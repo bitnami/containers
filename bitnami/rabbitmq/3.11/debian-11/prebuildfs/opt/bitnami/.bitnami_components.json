@@ -3,18 +3,12 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "25.3.0-3"
-    },
-    "gosu": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-5"
+        "version": "25.3.2-0"
     },
     "rabbitmq": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.11.13-0"
+        "version": "3.11.16-0"
     }
 }

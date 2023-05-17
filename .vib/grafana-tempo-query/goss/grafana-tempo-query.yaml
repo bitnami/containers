@@ -1,0 +1,4 @@
+command:
+  check-tempo-query:
+    exec: /opt/bitnami/grafana-tempo-query/bin/tempo-query --help
+    exit-status: 0

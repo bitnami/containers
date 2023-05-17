@@ -1,26 +1,20 @@
 {
-    "gosu": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-5"
-    },
     "java": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.18-10-4"
+        "version": "17.0.7-7-1"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-4"
+        "version": "1.0.5-5"
     },
     "tomcat": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.5.87-3"
+        "version": "8.5.88-3"
     }
 }

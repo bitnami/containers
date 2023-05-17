@@ -25,6 +25,8 @@ You can find the default credentials and available configuration options in the 
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
+Looking to use Jenkins in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
 ## How to deploy Jenkins in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Jenkins Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/jenkins).
@@ -315,6 +317,16 @@ You might need to customize the JVM running Jenkins, typically to pass system pr
 ```console
 docker run -d --name jenkins -p 80:8080 \
   --env JAVA_OPTS=-Dhudson.footerURL=http://mycompany.com \
+  bitnami/jenkins:latest
+```
+
+### Using custom launcher parameters
+
+In order to use custom parameters for Jenkins launcher, for example if you need to install Jenkins behind a reverse proxy with a prefix such as mycompany.com/jenkins, you can use the "JENKINS_OPTS" environment variable:
+
+```console
+docker run -d --name jenkins -p 8080:8080 \
+  --env JENKINS_OPTS="--prefix=/jenkins" \
   bitnami/jenkins:latest
 ```
 

@@ -3,18 +3,18 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.5.5-0"
+        "version": "4.5.5-1"
     },
     "node": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "16.20.0-1"
+        "version": "16.20.0-2"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-9"
+        "version": "3.9.16-12"
     }
 }

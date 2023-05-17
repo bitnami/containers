@@ -1,0 +1,9 @@
+binaries:
+  - registry
+directories:   
+  - paths:       
+      - /etc/registry
+version:
+  bin_name: registry
+  flag: --version
+root_dir: /opt/bitnami

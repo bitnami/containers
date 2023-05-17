@@ -4,13 +4,13 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-16T22:07:05Z" \
+      org.opencontainers.image.created="2023-05-15T20:38:57Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.1.0-debian-11-r72" \
+      org.opencontainers.image.ref.name="8.2.0-debian-11-r4" \
       org.opencontainers.image.title="jasperreports" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="8.1.0"
+      org.opencontainers.image.version="8.2.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,13 +23,12 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages acl ca-certificates curl fontconfig git libaudit1 libbsd0 libcap-ng0 libedit2 libffi7 libgcc-s1 libgmp10 libgnutls30 libhogweed6 libicu67 libidn2-0 libldap-2.4-2 liblzma5 libmd0 libncurses6 libnettle8 libp11-kit0 libpam0g libsasl2-2 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 procps xmlstarlet zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-1.8.362-4-linux-${OS_ARCH}-debian-11" \
-      "tomcat-9.0.73-3-linux-${OS_ARCH}-debian-11" \
-      "postgresql-client-11.19.0-4-linux-${OS_ARCH}-debian-11" \
-      "mysql-client-10.6.12-4-linux-${OS_ARCH}-debian-11" \
-      "render-template-1.0.5-4-linux-${OS_ARCH}-debian-11" \
-      "jasperreports-8.1.0-7-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-5-linux-${OS_ARCH}-debian-11" \
+      "java-1.8.372-7-0-linux-${OS_ARCH}-debian-11" \
+      "tomcat-9.0.75-0-linux-${OS_ARCH}-debian-11" \
+      "postgresql-client-11.20.0-0-linux-${OS_ARCH}-debian-11" \
+      "mysql-client-10.11.3-0-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.5-5-linux-${OS_ARCH}-debian-11" \
+      "jasperreports-8.2.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -49,7 +48,7 @@ RUN /opt/bitnami/scripts/tomcat/postunpack.sh
 RUN /opt/bitnami/scripts/jasperreports/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
-ENV APP_VERSION="8.1.0" \
+ENV APP_VERSION="8.2.0" \
     BITNAMI_APP_NAME="jasperreports" \
     JAVA_HOME="/opt/bitnami/java" \
     LD_LIBRARY_PATH="/opt/bitnami/postgresql/lib:$LD_LIBRARY_PATH" \

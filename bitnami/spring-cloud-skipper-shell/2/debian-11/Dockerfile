@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-17T09:55:43Z" \
+      org.opencontainers.image.created="2023-05-17T06:17:32Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.9.2-debian-11-r12" \
+      org.opencontainers.image.ref.name="2.9.3-debian-11-r4" \
       org.opencontainers.image.title="spring-cloud-skipper-shell" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.9.2"
+      org.opencontainers.image.version="2.9.3"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,8 +22,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-17.0.6-10-4-linux-${OS_ARCH}-debian-11" \
-      "spring-cloud-skipper-shell-2.9.2-4-linux-${OS_ARCH}-debian-11" \
+      "java-17.0.7-7-1-linux-${OS_ARCH}-debian-11" \
+      "spring-cloud-skipper-shell-2.9.3-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,7 +40,7 @@ RUN apt-get autoremove --purge -y curl && \
 RUN chmod g+rwX /opt/bitnami
 RUN touch /opt/bitnami/spring-cloud-skipper-shell/spring-cloud-skipper-shell.log && chmod -R g+rwX /opt/bitnami/spring-cloud-skipper-shell
 
-ENV APP_VERSION="2.9.2" \
+ENV APP_VERSION="2.9.3" \
     BITNAMI_APP_NAME="spring-cloud-skipper-shell" \
     PATH="/opt/bitnami/java/bin:$PATH"
 

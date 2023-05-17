@@ -629,3 +629,34 @@ nginx_custom_init_scripts() {
         info "No custom scripts in $NGINX_INITSCRIPTS_DIR"
     fi
 }
+
+########################
+# Generate sample TLS certificates without passphrase for sample HTTPS server_block
+# Globals:
+#   NGINX_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+nginx_generate_sample_certs() {
+    local certs_dir="${NGINX_CONF_DIR}/bitnami/certs"
+
+    if ! is_boolean_yes "$NGINX_SKIP_SAMPLE_CERTS" && [[ ! -f "${certs_dir}/server.crt" ]]; then
+        # Check certificates directory exists and is writable
+        if [[ -d "$certs_dir" && -w "$certs_dir" ]]; then
+            SSL_KEY_FILE="${certs_dir}/server.key"
+            SSL_CERT_FILE="${certs_dir}/server.crt"
+            SSL_CSR_FILE="${certs_dir}/server.csr"
+            SSL_SUBJ="/CN=example.com"
+            SSL_EXT="subjectAltName=DNS:example.com,DNS:www.example.com,IP:127.0.0.1"
+            rm -f "$SSL_KEY_FILE" "$SSL_CERT_FILE"
+            openssl genrsa -out "$SSL_KEY_FILE" 4096
+            openssl req -new -sha256 -out "$SSL_CSR_FILE" -key "$SSL_KEY_FILE" -nodes -subj "$SSL_SUBJ" -addext "$SSL_EXT"
+            openssl x509 -req -sha256 -in "$SSL_CSR_FILE" -signkey "$SSL_KEY_FILE" -out "$SSL_CERT_FILE" -days 1825 -extfile <(echo -n "$SSL_EXT")
+            rm -f "$SSL_CSR_FILE"
+        else
+            warn "The certificates directories '${certs_dir}' does not exist or is not writable, skipping sample HTTPS certificates generation"
+        fi
+    fi
+}

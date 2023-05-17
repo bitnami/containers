@@ -43,6 +43,7 @@ solr_env_vars=(
     SOLR_SSL_CHECK_PEER_NAME
     SOLR_ZK_MAX_RETRIES
     SOLR_ZK_SLEEP_TIME
+    SOLR_ZK_CHROOT
     SOLR_COLLECTION
 )
 for env_var in "${solr_env_vars[@]}"; do
@@ -103,5 +104,6 @@ export SOLR_DAEMON_GROUP="solr"
 # Solr retries configuration
 export SOLR_ZK_MAX_RETRIES="${SOLR_ZK_MAX_RETRIES:-5}"
 export SOLR_ZK_SLEEP_TIME="${SOLR_ZK_SLEEP_TIME:-5}"
+export SOLR_ZK_CHROOT="${SOLR_ZK_CHROOT:-/solr}"
 
 # Custom environment variables may be defined below

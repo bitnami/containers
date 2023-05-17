@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-04-16T16:22:21Z" \
+      org.opencontainers.image.created="2023-05-14T14:18:21Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.26.2-debian-11-r5" \
+      org.opencontainers.image.ref.name="1.27.1-debian-11-r2" \
       org.opencontainers.image.title="cluster-autoscaler" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.26.2"
+      org.opencontainers.image.version="1.27.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "cluster-autoscaler-1.26.2-0-linux-${OS_ARCH}-debian-11" \
+      "cluster-autoscaler-1.27.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,7 +41,7 @@ RUN ln -sf /opt/bitnami/cluster-autoscaler/bin/cluster-autoscaler /opt/bitnami/c
 
 COPY rootfs /
 RUN chmod -R g+rwX /opt/bitnami/cluster-autoscaler/
-ENV APP_VERSION="1.26.2" \
+ENV APP_VERSION="1.27.1" \
     BITNAMI_APP_NAME="cluster-autoscaler" \
     PATH="/opt/bitnami/cluster-autoscaler/bin:$PATH"
 

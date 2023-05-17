@@ -27,6 +27,8 @@ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
+Looking to use Matomo in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
 ## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
@@ -413,6 +415,7 @@ This would be an example of SMTP configuration using a Gmail account:
 * `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
 * `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
 * `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
+* `PHP_OUTPUT_BUFFERING`: Size of the output buffer for PHP. Default: **8196**
 
 If you want to add a new environment variable:
 
