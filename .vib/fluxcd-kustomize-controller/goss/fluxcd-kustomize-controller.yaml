@@ -1,0 +1,6 @@
+command:
+  check-kustomize-controller-help:
+    exec: kustomize-controller --help || true
+    exit-status: 0
+    stderr:
+      - "Usage of kustomize-controller:"
