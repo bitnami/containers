@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.16.0-0"
+        "version": "18.16.0-1"
     },
     "odoo": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.0.20230510-1"
+        "version": "14.0.20230510-2"
     },
     "postgresql-client": {
         "arch": "amd64",
@@ -21,7 +21,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-12"
+        "version": "3.8.16-13"
     },
     "render-template": {
         "arch": "amd64",
