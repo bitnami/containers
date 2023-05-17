@@ -274,7 +274,8 @@ apache_replace_htaccess_files() {
     local -r app="${1:?missing app}"
     local -r result_file="${APACHE_HTACCESS_DIR}/${app}-htaccess.conf"
     # Default options
-    local document_root="${BITNAMI_ROOT_DIR}/${app}"
+    local default_document_root="${BITNAMI_ROOT_DIR}/${app}"
+    local document_root="${APP_BASE_DIR:-$default_document_root}"
     local overwrite="yes"
     local -a htaccess_files
     local htaccess_dir
@@ -381,7 +382,8 @@ ensure_apache_app_configuration_exists() {
     export additional_https_configuration=""
     export before_vhost_configuration=""
     export allow_override="All"
-    export document_root="${BITNAMI_ROOT_DIR}/${app}"
+    local default_document_root="${BITNAMI_ROOT_DIR}/${app}"
+    export document_root="${APP_BASE_DIR:-$default_document_root}"
     export extra_directory_configuration=""
     export default_http_port="${APACHE_HTTP_PORT_NUMBER:-"$APACHE_DEFAULT_HTTP_PORT_NUMBER"}"
     export default_https_port="${APACHE_HTTPS_PORT_NUMBER:-"$APACHE_DEFAULT_HTTPS_PORT_NUMBER"}"
@@ -575,7 +577,8 @@ ensure_apache_prefix_configuration_exists() {
     # Template variables defaults
     export additional_configuration=""
     export allow_override="All"
-    export document_root="${BITNAMI_ROOT_DIR}/${app}"
+    local default_document_root="${BITNAMI_ROOT_DIR}/${app}"
+    export document_root="${APP_BASE_DIR:-$default_document_root}"
     export extra_directory_configuration=""
     # Validate arguments
     local var_name
