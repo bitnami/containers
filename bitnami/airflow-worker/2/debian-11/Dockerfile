@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-16T15:27:48Z" \
+      org.opencontainers.image.created="2023-05-17T01:21:49Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.6.0-debian-11-r5" \
+      org.opencontainers.image.ref.name="2.6.1-debian-11-r0" \
       org.opencontainers.image.title="airflow-worker" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.6.0"
+      org.opencontainers.image.version="2.6.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "python-3.9.16-12-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-15.3.0-0-linux-${OS_ARCH}-debian-11" \
       "ini-file-1.4.5-5-linux-${OS_ARCH}-debian-11" \
-      "airflow-worker-2.6.0-2-linux-${OS_ARCH}-debian-11" \
+      "airflow-worker-2.6.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -51,7 +51,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/airflow-worker/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 ENV AIRFLOW_HOME="/opt/bitnami/airflow" \
-    APP_VERSION="2.6.0" \
+    APP_VERSION="2.6.1" \
     BITNAMI_APP_NAME="airflow-worker" \
     C_FORCE_ROOT="True" \
     LANG="en_US.UTF-8" \
