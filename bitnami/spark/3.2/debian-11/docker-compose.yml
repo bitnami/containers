@@ -1,6 +1,7 @@
 version: '2'
 
 services:
+  # [TEST]
   spark:
     image: docker.io/bitnami/spark:3.2
     environment:
