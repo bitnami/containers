@@ -9,7 +9,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.16.0-0"
+        "version": "18.16.0-1"
     },
     "python": {
         "arch": "amd64",
@@ -21,13 +21,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.1.7-3-3"
+        "version": "6.1.7-3-4"
     },
     "ruby": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.7.8-0"
+        "version": "2.7.8-1"
     },
     "wait-for-port": {
         "arch": "amd64",
