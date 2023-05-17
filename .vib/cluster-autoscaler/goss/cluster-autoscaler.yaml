@@ -1,0 +1,6 @@
+command:
+  check-cluster-autoscaler-help:
+    exec: cluster-autoscaler --help || true
+    exit-status: 0
+    stderr:
+     - "Usage of cluster-autoscaler:"
