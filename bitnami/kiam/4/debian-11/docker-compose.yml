@@ -1,5 +1,4 @@
 version: '2'
 services:
-  # [TEST]
   kiam:
     image: docker.io/bitnami/kiam:4
