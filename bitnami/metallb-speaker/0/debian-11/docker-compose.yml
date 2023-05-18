@@ -1,5 +1,4 @@
 version: '2'
 services:
-  # [TEST]
   metallb-speaker:
     image: docker.io/bitnami/metallb-speaker:0
