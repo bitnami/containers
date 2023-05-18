@@ -1,6 +1,0 @@
-command:
-  check-oauth2-proxy:
-    exec: /opt/bitnami/oauth2-proxy/bin/oauth2-proxy --help
-    exit-status: 2
-    stdout:
-      - help requested
