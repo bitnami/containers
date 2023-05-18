@@ -1,7 +1,3 @@
-command:
-  check-ghost:
-    exec: ghost --help
-    exit-status: 0
 file:
   # Check if node executable directory is symlinked to default bin directory
   /opt/bitnami/ghost/bin:

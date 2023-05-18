@@ -6,11 +6,11 @@ directories:
   - paths:
     - /home/ghost
   - paths:
-    - /opt/bitnami/ghost
   # Check that permissions of some directories have been
   # specifically set to 777 in postunpack phase
   - paths:
     - /bitnami/ghost
+    - /opt/bitnami/ghost
     - /opt/bitnami/ghost/content
     - /opt/bitnami/ghost/content/logs
     - /.ghost
