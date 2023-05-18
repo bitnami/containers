@@ -1,5 +1,6 @@
 version: '2'
 services:
+  # [TEST]
   jupyterhub:
     image: docker.io/bitnami/jupyterhub:4
     entrypoint: ["tail", "-f", "/dev/null"]
