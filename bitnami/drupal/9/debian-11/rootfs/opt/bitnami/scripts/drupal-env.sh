@@ -69,6 +69,11 @@ unset drupal_env_vars
 export DRUPAL_BASE_DIR="${BITNAMI_ROOT_DIR}/drupal"
 export DRUPAL_CONF_FILE="${DRUPAL_BASE_DIR}/sites/default/settings.php"
 export DRUPAL_MODULES_DIR="${DRUPAL_BASE_DIR}/modules"
+export DRUPAL_COMPOSER_INSTALL="${DRUPAL_COMPOSER_INSTALL:-no}"
+default_drupal_composer_file="${DRUPAL_BASE_DIR}/composer.json"
+export DRUPAL_COMPOSER_FILE="${DRUPAL_COMPOSER_FILE:-$default_drupal_composer_file}"
+export DRUPAL_MOUNTED_COMPOSER_FILE="${DRUPAL_MOUNTED_COMPOSER_FILE:-}"
+export DRUPAL_MOUNTED_COMPOSER_LOCK_FILE="${DRUPAL_MOUNTED_COMPOSER_LOCK_FILE:-}"
 
 # Drupal persistence configuration
 export DRUPAL_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/drupal"

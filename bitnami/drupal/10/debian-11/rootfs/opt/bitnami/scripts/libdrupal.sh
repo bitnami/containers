@@ -127,6 +127,11 @@ drupal_initialize() {
         fi
     fi
 
+    # Check if we should install Drupal dependencies with Composer
+    if is_boolean_yes "${DRUPAL_COMPOSER_INSTALL:-}"; then
+        drupal_composer_install
+    fi
+
     # Check if Drupal has already been initialized and persisted in a previous run
     local -r app_name="drupal"
     if ! is_app_initialized "$app_name"; then
@@ -187,6 +192,55 @@ drupal_initialize() {
 
     # Avoid exit code of previous commands to affect the result of this function
     true
+}
+
+########################
+# Installs dependencies with Composer
+########################
+drupal_composer_install() {
+    composer_file_dir="$(dirname "${DRUPAL_COMPOSER_FILE:-}")"
+    composer_lock_file="${composer_file_dir}/composer.lock"
+    ensure_dir_exists "$composer_file_dir"
+
+    # Move mounted composer file in place
+    if is_file_writable "$DRUPAL_COMPOSER_FILE"; then
+        if [[ -f "$DRUPAL_MOUNTED_COMPOSER_FILE" ]]; then
+            info "Found mounted Drupal composer file '${DRUPAL_MOUNTED_COMPOSER_FILE}', copying to '${DRUPAL_COMPOSER_FILE}'"
+            cp "$DRUPAL_MOUNTED_COMPOSER_FILE" "$DRUPAL_COMPOSER_FILE"
+            # A custom composer.json file will not work with an existing
+            # composer.lock file, so we must remove it
+            if [[ -f "$composer_lock_file" ]]; then
+                info "Removing previous Composer lock file '${composer_lock_file}'"
+                rm "$composer_lock_file"
+            fi
+        else
+            warn "The 'DRUPAL_MOUNTED_COMPOSER_FILE' does not exist"
+        fi
+    else
+        warn "The specified 'DRUPAL_COMPOSER_FILE' '${DRUPAL_COMPOSER_FILE}' is not writable. The 'DRUPAL_MOUNTED_COMPOSER_FILE' will not be used."
+    fi
+
+    # Move mounted composer lock file in place
+    if ! is_empty_value "$DRUPAL_MOUNTED_COMPOSER_LOCK_FILE"; then
+        if is_file_writable "$composer_lock_file"; then
+            if [[ -f "$DRUPAL_MOUNTED_COMPOSER_LOCK_FILE" ]]; then
+                info "Found mounted Drupal composer lock file '${DRUPAL_MOUNTED_COMPOSER_LOCK_FILE}', copying to '${composer_lock_file}'"
+                cp "$DRUPAL_MOUNTED_COMPOSER_LOCK_FILE" "$composer_lock_file"
+            else
+                warn "The specified 'DRUPAL_MOUNTED_COMPOSER_LOCK_FILE' '${DRUPAL_MOUNTED_COMPOSER_LOCK_FILE}' does not exist"
+            fi
+        else
+            warn "A Composer lock file '${composer_lock_file}' is not writable. The 'DRUPAL_MOUNTED_COMPOSER_LOCK_FILE' will not be used."
+        fi
+    fi
+
+    # Warn user if a lock file is not present in Composer file directory
+    if [[ ! -f "$composer_lock_file" ]]; then
+        warn "There is no 'composer.lock' file specified. A lock file is recommended in testing and production environments for dependency version reproducibility."
+    fi
+
+    # Install Drupal dependencies with Composer
+    composer install --working-dir="${composer_file_dir}"
 }
 
 ########################

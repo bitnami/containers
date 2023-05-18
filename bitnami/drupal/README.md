@@ -281,6 +281,25 @@ To configure Drupal to send email using SMTP you can set the following environme
 * `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
 * `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
 
+#### Installation options
+
+* `DRUPAL_COMPOSER_INSTALL`: Optionally [installs Drupal dependencies with Composer](https://www.drupal.org/docs/develop/using-composer/manage-dependencies). Default: **no**
+* `DRUPAL_COMPOSER_FILE`: Desired Drupal Composer file location for `DRUPAL_COMPOSER_INSTALL`. Default: **`DRUPAL_BASE_DIR`/composer.json**
+* `DRUPAL_MOUNTED_COMPOSER_FILE`: Location of a mounted custom Composer file for `DRUPAL_COMPOSER_INSTALL`. No defaults
+* `DRUPAL_MOUNTED_COMPOSER_LOCK_FILE`: Location of a mounted custom Composer lock file for `DRUPAL_COMPOSER_INSTALL`. Note a lock file is recommended in testing and production environments for dependency version reproducibility. No defaults
+
+Note, when using Composer to install Drupal dependencies in read-only container volumes, it's recommended to set the Composer [cache-read-only](https://getcomposer.org/doc/06-config.md#cache-read-only) config:
+
+```diff
+     "minimum-stability": "stable",
+     "prefer-stable": true,
+     "config": {
++        "cache-read-only": true,
+         "allow-plugins": {
+             "composer/installers": true,
+             "drupal/core-composer-scaffold": true,
+```
+
 #### Example
 
 This would be an example of SMTP configuration using a Gmail account:
