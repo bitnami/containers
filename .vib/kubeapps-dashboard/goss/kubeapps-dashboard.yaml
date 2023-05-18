@@ -1,0 +1,39 @@
+file:
+  /opt/bitnami/nginx/conf/fastcgi_params:
+    exists: true
+    contains:
+      - /^fastcgi_param.*HTTP_PROXY.*\"\";/
+  /opt/bitnami/nginx/conf/nginx.conf:
+    exists: true
+    contains:
+      - /^\s+listen\s+.*8080;/
+  /opt/bitnami/scripts/nginx/bitnami-templates/default-https-server-block.conf:
+    exists: true
+    contains:
+      - /^\s+listen\s+.*8443\sssl;/
+  /opt/bitnami/nginx/conf/bitnami/certs:
+    exists: true
+    filetype: symlink
+    linked-to: "/certs"
+  /opt/bitnami/nginx/html:
+    exists: true
+    filetype: symlink
+    linked-to: "/app"
+  /opt/bitnami/nginx/logs/error.log:
+    exists: true
+    filetype: symlink
+    linked-to: "/dev/stderr"
+  /opt/bitnami/nginx/logs/access.log:
+    exists: true
+    filetype: symlink
+    linked-to: "/dev/stdout"
+commands:
+  check-group-permissions:
+    exec: find /bitnami /opt/bitnami -type d -perm -g+rwX
+    exit-status: 0
+    stdout:
+    {{ range $dirs := .Vars.directories }}
+      {{ range $path := .paths }}
+      - {{ $path }}
+      {{ end }}
+    {{ end }}
