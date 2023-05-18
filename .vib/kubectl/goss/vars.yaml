@@ -1,0 +1,11 @@
+binaries:
+  - kubectl
+  - jq
+directories:
+  - mode: "0775"
+    paths:
+      - /.kube
+root_dir: /opt/bitnami
+version:
+  bin_name: kubectl
+  flag: version --client
