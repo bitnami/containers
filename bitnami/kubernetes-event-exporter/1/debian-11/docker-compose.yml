@@ -1,4 +1,5 @@
 version: '2'
 services:
+  # [TEST]
   kubernetes-event-exporter:
     image: docker.io/bitnami/kubernetes-event-exporter:1
