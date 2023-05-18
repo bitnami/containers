@@ -1,0 +1,55 @@
+group:
+  daemon:
+    exists: true
+user:
+  daemon:
+    exists: true
+file:
+  /opt/bitnami/apache/conf/vhosts/htaccess/matomo-htaccess.conf:
+    exists: false
+  /opt/bitnami/matomo:
+    exists: true
+    filetype: directory
+    mode: "0775"
+    owner: daemon
+    group: root
+  /opt/bitnami/matomo/tmp:
+    exists: true
+    filetype: directory
+    mode: "0775"
+    owner: daemon
+    group: root
+  /opt/bitnami/matomo/misc/:
+    exists: true
+    filetype: directory
+    mode: "0775"
+    owner: daemon
+    group: root
+  /opt/bitnami/matomo/misc/user:
+    exists: true
+    filetype: directory
+    mode: "0775"
+    owner: daemon
+    group: root
+  /opt/bitnami/matomo/plugins:
+    exists: true
+    filetype: directory
+    mode: "0775"
+    owner: daemon
+    group: root
+  /opt/bitnami/php/etc/php.ini:
+    exists: true
+    filetype: file
+    contains:
+      - "memory_limit = 256M"
+      - "mysqli.allow_local_infile = 1"
+      - "extension = maxminddb.so"
+
+  /opt/bitnami/matomo/piwik:
+    exists: false
+  /opt/bitnami/matomo/How to install Matomo.html:
+    exists: false
+  /opt/bitnami/matomo/licenses:
+    exists: false
+  /opt/bitnami/matomo/.buildcomplete:
+    exists: false

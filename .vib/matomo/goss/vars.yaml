@@ -1,0 +1,11 @@
+binaries:
+  - apachectl
+  - ini-file
+  - php
+  - mysql
+  - render-template
+files:
+  - paths:
+      - /opt/bitnami/matomo/piwik.js
+      - /opt/bitnami/matomo/piwik.php
+root_dir: /opt/bitnami
