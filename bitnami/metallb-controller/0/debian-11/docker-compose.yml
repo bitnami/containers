@@ -1,4 +1,5 @@
 version: '2'
 services:
+  # [TEST]
   metallb:
     image: docker.io/bitnami/metallb-controller:0
