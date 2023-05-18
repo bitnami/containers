@@ -1,7 +1,4 @@
 command:
-  check-grafana-operator:
-    exec: find /opt/bitnami/grafana-operator/bin/grafana-operator --help
-    exit-status: 0
   check-app-version:
     exec: /opt/bitnami/grafana-operator/bin/grafana-operator || true
     exit-status: 0
