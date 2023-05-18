@@ -1,0 +1,6 @@
+command:
+  check-kubernetes-event-exporter-help:
+    exec: kubernetes-event-exporter --help
+    exit-status: 0
+
+
