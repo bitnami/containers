@@ -12,6 +12,19 @@ file:
       - extension = pgsql
       - /^memory_limit/
       - /^max_input_vars/
+  /opt/bitnami/apache/conf/vhosts/moodle-https-vhost.conf:
+    exists: true
+    contains:
+    {{ range $rule := .Vars.apache.rules }}
+      - {{ $rule }}
+    {{ end }}
+  /opt/bitnami/php/etc/php.ini:
+    exists: true
+    contains:
+      # Checking if the php.ini keys and pqsql extension are set
+      - extension = pgsql
+      - /^memory_limit/
+      - /^max_input_vars/
 group:
   daemon:
     exists: true
