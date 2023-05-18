@@ -1,7 +1,6 @@
 version: '2'
 
 services:
-  # [TEST]
   metrics-server:
     image: docker.io/bitnami/metrics-server:0
     ports:
