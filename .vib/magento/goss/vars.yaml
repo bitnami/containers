@@ -3,7 +3,6 @@ binaries:
   - php
   - magento
   - mysql
-  - php
   - render-template
   - wait-for-port
   - composer
