@@ -1,0 +1,5 @@
+command:
+  check-kiam-help:
+    exec: kiam --help
+    exit-status: 0
+
