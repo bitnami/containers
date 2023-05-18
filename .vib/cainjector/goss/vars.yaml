@@ -4,6 +4,3 @@ directories:
   - paths:
       - /opt/bitnami/cainjector
 root_dir: /opt/bitnami
-version:
-  bin_name: cainjector
-  flag: version
