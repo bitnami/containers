@@ -1,5 +1,6 @@
 version: '2'
 services:
+  # [TEST]
   jupyter-base-notebook:
     image: docker.io/bitnami/jupyter-base-notebook:4
     command: ["tail", "-f", "/dev/null"]
