@@ -10,30 +10,9 @@ command:
     exec: . /opt/bitnami/airflow/venv/bin/activate && pip list
     exit-status: 0
     stdout:
-      # all_dbs does not show in the package list so we don't check it
-      - async
-      - amazon
-      - celery
-      - /cncf.kubernetes/
-      - docker
-      - dask
-      - elasticsearch
-      - ftp
-      - grpc
-      - hashicorp
-      - http
-      - ldap
-      - google
-      - /microsoft.azure/
-      - mysql
-      - postgres
-      - redis
-      - sendgrid
-      - sftp
-      - slack
-      - ssh
-      - statsd
-      - virtualenv
+    {{ range $subpackage := .Vars.subpackages }}
+      - {{ $subpackage }}
+    {{ end }}
 file:
   /opt/bitnami/airflow/venv/lib/python3.9/site-packages/airflow/www/node_modules:
     exists: false
