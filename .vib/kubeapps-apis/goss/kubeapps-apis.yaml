@@ -1,0 +1,10 @@
+commands:
+  check-group-permissions:
+    exec: find /bitnami /opt/bitnami -type d -perm -g+rwX
+    exit-status: 0
+    stdout:
+    {{ range $dirs := .Vars.directories }}
+      {{ range $path := .paths }}
+      - {{ $path }}
+      {{ end }}
+    {{ end }}
