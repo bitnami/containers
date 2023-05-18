@@ -2,7 +2,6 @@ version: '2'
 
 services:
   minio:
-    # New change
     image: docker.io/bitnami/minio:2023
     ports:
       - '9000:9000'
