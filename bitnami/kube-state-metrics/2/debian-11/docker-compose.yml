@@ -1,6 +1,7 @@
 version: '2'
 
 services:
+  # [TEST]
   kube-state-metrics:
     image: docker.io/bitnami/kube-state-metrics:2
     ports:
