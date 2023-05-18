@@ -1,0 +1,7 @@
+binaries:
+  - conda
+  - jupyterhub-singleuser
+root_dir: /opt/bitnami
+version:
+  bin_name: jupyterhub-singleuser
+  flag: --version
