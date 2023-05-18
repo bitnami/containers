@@ -1,5 +1,9 @@
 # ChartMuseum packaged by Bitnami
 
+## Deprecation Notice
+
+The ChartMuseum container is no longer maintained by upstream and is now deprecated. This image will no longer be released in our catalog, but already released container images will still persist in the registries.
+
 ## What is ChartMuseum?
 
 > ChartMuseum is an open-source, easy to deploy, Helm Chart Repository server.
