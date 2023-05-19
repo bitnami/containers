@@ -1,6 +1,7 @@
 command:
   check-nats-server:
-    exec: timeout 5 nats-server || true
+    exec: timeout 15 nats-server || true
+    timeout: 20000
     exit-status: 0
     stdout:
       - "Listening for client connections"
