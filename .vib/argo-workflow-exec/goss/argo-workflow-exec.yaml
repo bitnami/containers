@@ -1,7 +1,3 @@
-command:
-  check-argo-workflow-exec:
-    exec: /opt/bitnami/argo-workflow-exec/bin/argoexec --help
-    exit-status: 0
 directory:
   /opt/bitnami/argo-workflow-exec/hack/git:
     exists: false
