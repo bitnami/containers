@@ -64,3 +64,9 @@ ln -sf /certs "${NGINX_CONF_DIR}/bitnami/certs"
 
 ln -sf "/dev/stdout" "${NGINX_LOGS_DIR}/access.log"
 ln -sf "/dev/stderr" "${NGINX_LOGS_DIR}/error.log"
+
+# This file is necessary for avoiding the error
+# "unable to write random state"
+# Source: https://stackoverflow.com/questions/94445/using-openssl-what-does-unable-to-write-random-state-mean
+
+touch /.rnd && chmod g+rw /.rnd
