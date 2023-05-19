@@ -7,30 +7,6 @@ user:
 file:
   /opt/bitnami/apache/conf/vhosts/htaccess/magento-htaccess.conf:
     exists: false
-  /opt/bitnami/magento:
-    exists: true
-    filetype: directory
-    mode: "0775"
-    owner: daemon
-    group: root
-  /bitnami/magento:
-    exists: true
-    filetype: directory
-    mode: "0775"
-    owner: daemon
-    group: root
-  /opt/bitnami/magento/tmp:
-    exists: true
-    filetype: directory
-    mode: "0775"
-    owner: daemon
-    group: root
-  /opt/bitnami/magento/uploads:
-    exists: true
-    filetype: directory
-    mode: "0775"
-    owner: daemon
-    group: root
   /opt/bitnami/php/etc/php.ini:
     exists: true
     filetype: file

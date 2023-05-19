@@ -8,8 +8,13 @@ binaries:
   - composer
 directories:
   - mode: "0775"
+    owner: daemon
+    group: root
     paths:
       - /opt/bitnami/magento
+      - /bitnami/magento
+      - /opt/bitnami/magento/tmp
+      - /opt/bitnami/magento/uploads
 version:
   bin_name: magento
   flag: --version
