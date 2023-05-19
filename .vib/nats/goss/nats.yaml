@@ -1,0 +1,18 @@
+command:
+  check-nats-server:
+    exec: timeout 5 nats-server || true
+    exit-status: 0
+    stdout:
+      - "Listening for client connections"
+      - "Server is ready"
+file:
+  /opt/bitnami/nats/conf/nats-server.conf:
+    exists: true
+    filetype: file
+    mode: "0664"
+    contains:
+      - /listen.*4222/
+  /opt/bitnami/nats/logs/nats-server.log:
+    exists: true
+    filetype: symlink
+    linked-to: /dev/stdout
