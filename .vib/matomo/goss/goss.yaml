@@ -2,6 +2,7 @@ gossfile:
   # Goss tests exclusive to the current container
   ../../matomo/goss/matomo.yaml: {}
   # Load scripts from .vib/common/goss/templates
+  ../../common/goss/templates/check-apache-libphp.yaml: {}
   ../../common/goss/templates/check-binaries.yaml: {}
   ../../common/goss/templates/check-broken-symlinks.yaml: {}
   ../../common/goss/templates/check-ca-certs.yaml: {}
