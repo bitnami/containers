@@ -1,5 +1,6 @@
 version: '2'
 services:
+  # [TEST]
   clickhouse:
     image: docker.io/bitnami/clickhouse:22.3
     environment:

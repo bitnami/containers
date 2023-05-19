@@ -1,0 +1,27 @@
+command:
+  check-clickhouse-server:
+    exec: timeout --preserve-status 5 clickhouse-server
+    exit-status: 0
+file:
+  /var/lib/clickhouse/tmp:
+    exists: true
+    filetype: symlink
+    linked-to: /opt/bitnami/clickhouse/tmp
+  /opt/bitnami/clickhouse/logs/clickhouse.log:
+    exists: true
+    filetype: symlink
+    linked-to: /dev/stdout
+  /opt/bitnami/clickhouse/etc/config.xml:
+    exists: true
+    filetype: file
+    contains:
+      - /data dir.*\/bitnami\/clickhouse\/data/
+      - /http_port from_env=\"CLICKHOUSE_HTTP_PORT\"/
+      - "!remote_servers"
+      - "<console>1</console></logger>"
+group:
+  clickhouse:
+    exists: true
+user:
+  clickhouse:
+    exists: true
