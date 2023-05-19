@@ -1,5 +1,4 @@
 command:
-  # There are no syntax error in the configuration
   check-cert-manager:
     exec: /opt/bitnami/cert-manager/bin/cert-manager -h
     exit-status: 0
