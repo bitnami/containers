@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-18T04:41:07Z" \
+      org.opencontainers.image.created="2023-05-21T14:00:45Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.4.26-debian-11-r2" \
+      org.opencontainers.image.ref.name="3.4.26-debian-11-r3" \
       org.opencontainers.image.title="etcd" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.4.26"
@@ -22,8 +22,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "yq-4.33.3-0-linux-${OS_ARCH}-debian-11" \
-      "etcd-3.4.26-0-linux-${OS_ARCH}-debian-11" \
+      "yq-4.33.3-1-linux-${OS_ARCH}-debian-11" \
+      "etcd-3.4.26-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
