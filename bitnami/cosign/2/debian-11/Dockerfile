@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-17T14:32:26Z" \
+      org.opencontainers.image.created="2023-05-21T13:50:48Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.0.2-debian-11-r5" \
+      org.opencontainers.image.ref.name="2.0.2-debian-11-r6" \
       org.opencontainers.image.title="cosign" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.0.2"
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "cosign-2.0.2-0-linux-${OS_ARCH}-debian-11" \
+      "cosign-2.0.2-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
