@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-18T22:19:53Z" \
+      org.opencontainers.image.created="2023-05-21T16:53:04Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.8.1-debian-11-r35" \
+      org.opencontainers.image.ref.name="3.8.1-debian-11-r36" \
       org.opencontainers.image.title="zookeeper" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.8.1"
@@ -23,9 +23,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl netcat procps xmlstarlet zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "wait-for-port-1.0.6-6-linux-${OS_ARCH}-debian-11" \
-      "java-11.0.19-7-1-linux-${OS_ARCH}-debian-11" \
-      "zookeeper-3.8.1-6-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.6-7-linux-${OS_ARCH}-debian-11" \
+      "java-11.0.19-7-2-linux-${OS_ARCH}-debian-11" \
+      "zookeeper-3.8.1-7-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
