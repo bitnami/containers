@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-21T13:48:15Z" \
+      org.opencontainers.image.created="2023-05-21T17:13:06Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.3.4-debian-11-r8" \
+      org.opencontainers.image.ref.name="4.3.5-debian-11-r0" \
       org.opencontainers.image.title="codeigniter" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="4.3.4"
+      org.opencontainers.image.version="4.3.5"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
@@ -23,7 +23,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "php-8.1.19-2-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.11.3-1-linux-${OS_ARCH}-debian-11" \
-      "codeigniter-4.3.4-1-linux-${OS_ARCH}-debian-11" \
+      "codeigniter-4.3.5-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -42,7 +42,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/codeigniter/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
-ENV APP_VERSION="4.3.4" \
+ENV APP_VERSION="4.3.5" \
     BITNAMI_APP_NAME="codeigniter" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/mysql/bin:/opt/bitnami/codeigniter/bin:$PATH" \
     PHP_ENABLE_OPCACHE="0"
