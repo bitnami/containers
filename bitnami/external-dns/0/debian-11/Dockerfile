@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-18T20:32:07Z" \
+      org.opencontainers.image.created="2023-05-21T14:01:41Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.13.4-debian-11-r18" \
+      org.opencontainers.image.ref.name="0.13.4-debian-11-r19" \
       org.opencontainers.image.title="external-dns" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.13.4"
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "external-dns-0.13.4-1-linux-${OS_ARCH}-debian-11" \
+      "external-dns-0.13.4-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
