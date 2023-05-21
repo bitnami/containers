@@ -50,4 +50,5 @@ EXPOSE 4222 6222 8222
 
 WORKDIR /opt/bitnami/nats
 USER 1001
-ENTRYPOINT [ "/opt/bitnami/scripts/nats/entrypoint.sh", "/opt/bitnami/scripts/nats/run.sh" ]
+ENTRYPOINT [ "/opt/bitnami/scripts/nats/entrypoint.sh" ]
+CMD [ "/opt/bitnami/scripts/nats/run.sh" ]
