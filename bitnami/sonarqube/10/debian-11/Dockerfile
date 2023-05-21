@@ -4,10 +4,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-18T22:20:02Z" \
+      org.opencontainers.image.created="2023-05-21T16:30:26Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="10.0.0-debian-11-r6" \
+      org.opencontainers.image.ref.name="10.0.0-debian-11-r7" \
       org.opencontainers.image.title="sonarqube" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="10.0.0"
@@ -23,9 +23,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages acl ca-certificates curl libbsd0 libedit2 libffi7 libgcc-s1 libgmp10 libgnutls30 libhogweed6 libicu67 libidn2-0 libldap-2.4-2 liblzma5 libmd0 libnettle8 libp11-kit0 libsasl2-2 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libuuid1 libxml2 libxslt1.1 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "postgresql-client-15.3.0-0-linux-${OS_ARCH}-debian-11" \
-      "java-17.0.7-7-1-linux-${OS_ARCH}-debian-11" \
-      "sonarqube-10.0.0-1-linux-${OS_ARCH}-debian-11" \
+      "postgresql-client-15.3.0-1-linux-${OS_ARCH}-debian-11" \
+      "java-17.0.7-7-2-linux-${OS_ARCH}-debian-11" \
+      "sonarqube-10.0.0-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
