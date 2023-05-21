@@ -4,10 +4,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-19T15:30:33Z" \
+      org.opencontainers.image.created="2023-05-21T18:36:42Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.2.10-debian-11-r13" \
+      org.opencontainers.image.ref.name="6.2.10-debian-11-r14" \
       org.opencontainers.image.title="schema-registry" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="6.2.10"
@@ -23,8 +23,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl netcat procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-17.0.7-7-1-linux-${OS_ARCH}-debian-11" \
-      "schema-registry-6.2.10-2-linux-${OS_ARCH}-debian-11" \
+      "java-17.0.7-7-2-linux-${OS_ARCH}-debian-11" \
+      "schema-registry-6.2.10-3-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
