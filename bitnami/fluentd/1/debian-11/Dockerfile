@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-16T18:22:59Z" \
+      org.opencontainers.image.created="2023-05-21T14:02:20Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.16.1-debian-11-r11" \
+      org.opencontainers.image.ref.name="1.16.1-debian-11-r12" \
       org.opencontainers.image.title="fluentd" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.16.1"
@@ -22,8 +22,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libcrypt1 libgcc-s1 libjemalloc-dev libreadline-dev libreadline8 libssl-dev libssl1.1 libstdc++6 libtinfo6 procps sqlite3 zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "ruby-3.1.4-0-linux-${OS_ARCH}-debian-11" \
-      "fluentd-1.16.1-1-linux-${OS_ARCH}-debian-11" \
+      "ruby-3.1.4-2-linux-${OS_ARCH}-debian-11" \
+      "fluentd-1.16.1-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
