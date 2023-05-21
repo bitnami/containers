@@ -3,12 +3,12 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.19-7-1"
+        "version": "11.0.19-7-2"
     },
     "wavefront-proxy": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "12.4.0-0"
+        "version": "12.4.0-1"
     }
 }
