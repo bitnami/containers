@@ -1,14 +1,12 @@
 command:
   check-spring-cloud-skipper:
     timeout: 20000
-    exec: timeout --preserve-status 15 /opt/bitnami/java/bin/java -jar /opt/bitnami/spring-cloud-skipper/spring-cloud-skipper.jar
+    exec: timeout --preserve-status 15 java -jar /opt/bitnami/spring-cloud-skipper/spring-cloud-skipper.jar
     exit-status: 143
     stdout:
-      - Started
+      - Started SkipperServerApplication
 file:
   /opt/bitnami/spring-cloud-skipper/spring-cloud-skipper.jar:
     exists: true
     filetype: symlink
     linked-to: "spring-cloud-skipper-server-{{ .Env.APP_VERSION }}.jar"
-
-
