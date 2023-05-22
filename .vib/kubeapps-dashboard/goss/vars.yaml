@@ -3,13 +3,14 @@ binaries:
   - render-template
 directories:
   - paths:
-    - /app
     - /bitnami/nginx
-    - /certs
-    - /docker-entrypoint-initdb.d
     - /opt/bitnami/nginx/conf
     - /opt/bitnami/nginx/conf/bitnami
     - /opt/bitnami/nginx/conf/server_blocks
     - /opt/bitnami/nginx/logs
     - /opt/bitnami/nginx/tmp
+extraPaths:
+  - /app
+  - /certs
+  - /docker-entrypoint-initdb.d
 root_dir: /opt/bitnami

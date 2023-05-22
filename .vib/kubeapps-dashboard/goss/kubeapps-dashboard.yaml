@@ -27,7 +27,7 @@ file:
     exists: true
     filetype: symlink
     linked-to: "/dev/stdout"
-commands:
+command:
   check-group-permissions:
     exec: find /bitnami /opt/bitnami -type d -perm -g+rwX
     exit-status: 0
@@ -37,3 +37,9 @@ commands:
       - {{ $path }}
       {{ end }}
     {{ end }}
+file:
+  {{ range $path := .Vars.extraPaths }}
+  {{ $path }}:
+    exists: true
+    filetype: directory
+  {{ end }}
