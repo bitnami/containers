@@ -10,7 +10,7 @@ file:
     filetype: file
     contains:
       - "https = ENV['MASTODON_HTTPS_ENABLED'] == 'true'"
-      - "config.hosts.clear if ENV['MASTODON_ALLOW_ALL_DOMAINS'] == 'true' config.host_authorization"
+      - "config.hosts.clear if ENV['MASTODON_ALLOW_ALL_DOMAINS'] == 'true'"
   /opt/bitnami/mastodon/config/environments/production.rb:
     exists: true
     filetype: file
