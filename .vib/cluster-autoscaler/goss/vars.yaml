@@ -1,7 +1,6 @@
 binaries:
   - cluster-autoscaler
 directories:
-  - mode: "0775"
-    paths:
+  - paths:
       - /opt/bitnami/cluster-autoscaler/log
 root_dir: /opt/bitnami
