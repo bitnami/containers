@@ -1,11 +1,6 @@
 binaries:
   - argocd
   - argocd-server
-  - argocd-application-controller
-  - argocd-applicationset-controller
-  - argocd-repo-server
-  - argocd-dex
-  - argocd-notifications
   - argocd-util
 directories:
   - paths:
