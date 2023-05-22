@@ -1,8 +1,8 @@
 binaries:
   - node
-  - postgresql-client
+  - psql
   - python
-  - redis-client
+  - redis-cli
   - ruby
   - wait-for-port
 directories:
