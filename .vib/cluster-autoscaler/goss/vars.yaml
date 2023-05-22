@@ -1,0 +1,6 @@
+binaries:
+  - cluster-autoscaler
+directories:
+  - paths:
+      - /opt/bitnami/cluster-autoscaler/log
+root_dir: /opt/bitnami
