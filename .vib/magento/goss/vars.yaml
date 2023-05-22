@@ -19,3 +19,7 @@ version:
   bin_name: magento
   flag: --version
 root_dir: /opt/bitnami
+sed_in_place:
+  exclude_paths:
+    - /opt/bitnami/magento/vendor/laminas/laminas-http/.laminas-ci/pre-run.sh
+    - /opt/bitnami/magento/vendor/phpseclib/mcrypt_compat/travis/run-phpunit.sh
