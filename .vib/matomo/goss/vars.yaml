@@ -4,7 +4,7 @@ binaries:
   - php
   - mysql
   - render-template
-files:
+directories:
   - mode: "0775"
     owner: daemon
     group: root
@@ -14,6 +14,7 @@ files:
       - /opt/bitnami/matomo/misc/
       - /opt/bitnami/matomo/misc/user
       - /opt/bitnami/matomo/plugins
+files:
   - paths:
       - /opt/bitnami/matomo/piwik.js
       - /opt/bitnami/matomo/piwik.php
