@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-21T22:51:46Z" \
+      org.opencontainers.image.created="2023-05-22T17:40:24Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.13.1-debian-11-r12" \
+      org.opencontainers.image.ref.name="1.13.2-debian-11-r0" \
       org.opencontainers.image.title="vault" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.13.1"
+      org.opencontainers.image.version="1.13.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "vault-1.13.1-1-linux-${OS_ARCH}-debian-11" \
+      "vault-1.13.2-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -37,7 +37,7 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN useradd -r -u 1001 -g root vault
 
-ENV APP_VERSION="1.13.1" \
+ENV APP_VERSION="1.13.2" \
     BITNAMI_APP_NAME="vault" \
     PATH="/opt/bitnami/vault/bin:$PATH"
 
