@@ -1,11 +1,18 @@
 binaries:
   - argocd
   - argocd-server
+  - argocd-application-controller
+  - argocd-applicationset-controller
+  - argocd-repo-server
+  - argocd-dex
+  - argocd-notifications
   - argocd-util
 directories:
   - paths:
     - /.argocd
     - /app/config/gpg/keys
+    - /opt/bitnami/argo-cd/bin
+    - /opt/bitnami/argo-cd/app
     - /app/config/gpg/source
     - /bitnami/argocd
     mode: "0775"
