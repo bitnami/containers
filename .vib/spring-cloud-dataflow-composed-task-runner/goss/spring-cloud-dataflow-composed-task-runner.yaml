@@ -1,7 +1,7 @@
 command:
   check-scdf-composed-task-runner-version:
     timeout: 20000
-    exec: timeout --preserve-status 15 /opt/bitnami/java/bin/java -jar /opt/bitnami/spring-cloud-dataflow-composed-task-runner/scdf-composed-task-runner.jar
+    exec: timeout --preserve-status 15 java -jar /opt/bitnami/spring-cloud-dataflow-composed-task-runner/scdf-composed-task-runner.jar
     exit-status: 1
     stdout:
       - {{ .Env.APP_VERSION }}
@@ -10,5 +10,3 @@ file:
     exists: true
     filetype: symlink
     linked-to: "spring-cloud-dataflow-composed-task-runner-{{ .Env.APP_VERSION }}.jar"
-
-
