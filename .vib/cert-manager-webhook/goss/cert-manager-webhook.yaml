@@ -1,5 +1,4 @@
 command:
-  # There are no syntax error in the configuration
   check-cert-manager-webhook:
-    exec: /opt/bitnami/cert-manager-webhook/bin/cert-manager-webhook -h
+    exec: cert-manager-webhook -h
     exit-status: 0
