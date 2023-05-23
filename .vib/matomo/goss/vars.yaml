@@ -14,8 +14,12 @@ directories:
       - /opt/bitnami/matomo/misc/
       - /opt/bitnami/matomo/misc/user
       - /opt/bitnami/matomo/plugins
+      - /bitnami/matomo
 files:
   - paths:
       - /opt/bitnami/matomo/piwik.js
       - /opt/bitnami/matomo/piwik.php
 root_dir: /opt/bitnami
+version:
+  bin_name: php /opt/bitnami/matomo/console
+  flag: --version

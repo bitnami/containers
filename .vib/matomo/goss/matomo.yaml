@@ -5,6 +5,13 @@ user:
   daemon:
     exists: true
 file:
+  # HTTPs vhost should have been properly rendered
+  /opt/bitnami/apache/conf/vhosts/matomo-https-vhost.conf:
+    exists: true
+    filetype: file
+    contains:
+      - "SSLEngine on"
+      - /DocumentRoot.*/opt/bitnami/matomo/
   /opt/bitnami/apache/conf/vhosts/htaccess/matomo-htaccess.conf:
     exists: false
   /opt/bitnami/php/etc/php.ini:
