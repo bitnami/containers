@@ -1,6 +1,7 @@
 version: '2'
 
 services:
+  # New change
   tensorflow-serving:
     image: docker.io/bitnami/tensorflow-serving:2
     ports:
