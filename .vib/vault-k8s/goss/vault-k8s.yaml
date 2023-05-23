@@ -1,0 +1,4 @@
+command:
+  check-vault-k8s-help:
+    exec: vault-k8s --help
+    exit-status: 0
