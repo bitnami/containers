@@ -15,7 +15,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.7.41-44-5"
+        "version": "5.7.42-45-0"
     },
     "percona-xtrabackup-binary": {
         "arch": "amd64",
