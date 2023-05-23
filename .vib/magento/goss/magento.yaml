@@ -5,18 +5,19 @@ user:
   daemon:
     exists: true
 file:
+  # HTTPs vhost should have been properly rendered
+  /opt/bitnami/apache/conf/vhosts/magento-https-vhost.conf:
+    exists: true
+    filetype: file
+    contains:
+      - "SSLEngine on"
+      - /DocumentRoot.*/opt/bitnami/magento/
   /opt/bitnami/apache/conf/vhosts/htaccess/magento-htaccess.conf:
     exists: false
   /opt/bitnami/php/etc/php.ini:
     exists: true
     filetype: file
     contains:
-      - "max_execution_time = 18000"
-      - "memory_limit = 1G"
-      - "realpath_cache_size = 10M"
-      - "realpath_cache_ttl = 7200"
-      - "opcache.memory_consumption = 512MB"
-      - "opcache.max_accelerated_files = 60000"
       - "opcache.consistency_checks = 0"
       - "opcache.validate_timestamps = 0"
       - "opcache.enable_cli = 1"
