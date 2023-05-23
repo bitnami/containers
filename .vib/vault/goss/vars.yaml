@@ -1,0 +1,9 @@
+binaries:
+  - vault
+directories:
+  - paths:
+      - /opt/bitnami/vault/bin
+root_dir: /opt/bitnami
+version:
+  bin_name: vault
+  flag: --version
