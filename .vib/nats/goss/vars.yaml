@@ -1,5 +1,6 @@
 binaries:
   - nats-server
+  - render-template
 directories:
   - mode: "0775"
     paths:

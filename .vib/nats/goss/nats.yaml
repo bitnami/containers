@@ -1,8 +1,8 @@
 command:
   check-nats-server:
-    exec: timeout 5 nats-server || true
+    exec: timeout --preserve-status 5 nats-server
     timeout: 10000
-    exit-status: 0
+    exit-status: 1
     stderr:
       - "Listening for client connections"
       - "Server is ready"
