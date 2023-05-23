@@ -1,0 +1,15 @@
+binaries:
+  - render-template
+directories:
+  - mode: "0775"
+    paths:
+      - /opt/bitnami/tensorflow-serving
+      - /opt/bitnami/tensorflow-serving/tmp
+      - /opt/bitnami/tensorflow-serving/bin
+      - /opt/bitnami/tensorflow-serving/conf
+      - /opt/bitnami/tensorflow-serving/logs
+      - /bitnami/tensorflow-serving
+root_dir: /opt/bitnami
+version:
+  bin_name: tensorflow_model_server
+  flag: --version
