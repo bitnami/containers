@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-15T20:51:43Z" \
+      org.opencontainers.image.created="2023-05-21T15:57:13Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.9.16-debian-11-r10" \
+      org.opencontainers.image.ref.name="2.9.17-debian-11-r1" \
       org.opencontainers.image.title="nats" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.9.16"
+      org.opencontainers.image.version="2.9.17"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,8 +22,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "render-template-1.0.5-5-linux-${OS_ARCH}-debian-11" \
-      "nats-2.9.16-0-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.5-6-linux-${OS_ARCH}-debian-11" \
+      "nats-2.9.17-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,7 +41,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/nats/postunpack.sh
-ENV APP_VERSION="2.9.16" \
+ENV APP_VERSION="2.9.17" \
     BITNAMI_APP_NAME="nats" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/nats/bin:$PATH"
 

@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-14T23:52:08Z" \
+      org.opencontainers.image.created="2023-05-21T16:07:58Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.7.41-44-debian-11-r22" \
+      org.opencontainers.image.ref.name="5.7.41-44-debian-11-r24" \
       org.opencontainers.image.title="percona-mysql" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="5.7.41-44"
@@ -22,10 +22,10 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libaio1 libaudit1 libbrotli1 libbz2-1.0 libcap-ng0 libcom-err2 libcrypt1 libcurl4 libev4 libffi7 libgcc-s1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed6 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblz4-1 liblzma5 libnettle8 libnghttp2-14 libnuma-dev libp11-kit0 libpam0g libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.1 libstdc++6 libsystemd0 libtasn1-6 libunistring2 libuuid1 libzstd1 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "percona-xtrabackup-binary-8.0.30-23-5-linux-${OS_ARCH}-debian-11" \
-      "ini-file-1.4.5-5-linux-${OS_ARCH}-debian-11" \
-      "percona-mysql-5.7.41-44-4-linux-${OS_ARCH}-debian-11" \
-      "mysql-shell-8.0.31-8-linux-${OS_ARCH}-debian-11" \
+      "percona-xtrabackup-binary-8.0.30-23-6-linux-${OS_ARCH}-debian-11" \
+      "ini-file-1.4.5-6-linux-${OS_ARCH}-debian-11" \
+      "percona-mysql-5.7.41-44-5-linux-${OS_ARCH}-debian-11" \
+      "mysql-shell-8.0.31-9-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \

@@ -6,19 +6,23 @@
 #   - .Vars.directories.paths (Array)
 # Optional vars:
 #   - .Vars.directories.mode (String)
+#   - .Vars.directories.owner (String)
+#   - .Vars.directories.group (String)
 ########################
 file:
-  {{ range .Vars.directories }}
-  {{ $mode := "" }}
-  {{ if contains "mode:" (. | toString) }}
-  {{ $mode = .mode }}
-  {{ end }}
-  {{ range $directory := .paths }}
-  {{ $directory }}:
+  {{ range $dirs := .Vars.directories }}
+  {{ range $path := .paths }}
+  {{ $path }}:
     exists: true
     filetype: directory
-    {{ if $mode }}
-    mode: "{{ $mode }}"
+    {{ if and (index $dirs "mode") }}
+    mode: "{{ printf "%s" $dirs.mode }}"
+    {{ end }}
+    {{ if and (index $dirs "owner") }}
+    owner: {{ printf "%s" $dirs.owner }}
+    {{ end }}
+    {{ if and (index $dirs "group") }}
+    group: {{ printf "%s" $dirs.group }}
     {{ end }}
   {{ end }}
   {{ end }}

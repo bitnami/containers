@@ -1,0 +1,6 @@
+command:
+  check-source-controller-help:
+    exec: source-controller --help || true
+    exit-status: 0
+    stderr:
+      - "Usage of source-controller:"

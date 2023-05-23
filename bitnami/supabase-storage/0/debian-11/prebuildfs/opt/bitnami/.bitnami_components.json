@@ -3,18 +3,18 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.16.0-1"
+        "version": "18.16.0-2"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.9.16-12"
+        "version": "3.9.16-13"
     },
     "supabase-storage": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.37.10-1"
+        "version": "0.39.0-0"
     }
 }

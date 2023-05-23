@@ -1,0 +1,4 @@
+command:
+  check-cainjector:
+    exec: /opt/bitnami/cainjector/bin/cainjector --help
+    exit-status: 0
