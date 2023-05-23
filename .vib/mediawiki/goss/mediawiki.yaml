@@ -48,3 +48,4 @@ command:
     exit-status: 0
     stdout:
       - "Net_SMTP"
+      - "Mail"
