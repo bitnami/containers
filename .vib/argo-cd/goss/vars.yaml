@@ -6,8 +6,6 @@ directories:
   - paths:
     - /.argocd
     - /app/config/gpg/keys
-    - /opt/bitnami/argo-cd/bin
-    - /opt/bitnami/argo-cd/app
     - /app/config/gpg/source
     - /bitnami/argocd
     mode: "0775"
