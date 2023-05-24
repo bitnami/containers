@@ -1,0 +1,13 @@
+binaries:
+  - java
+directories:
+  - mode: "0775"
+    paths:
+      - /opt/bitnami/tmp
+      - /var/log/wavefront
+  - paths:
+      - /etc/wavefront
+root_dir: /opt/bitnami
+version:
+  bin_name: java -jar /opt/bitnami/wavefront-proxy/wavefront-proxy.jar
+  flag: --version

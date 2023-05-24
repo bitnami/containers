@@ -1,0 +1,22 @@
+file:
+  /opt/wavefront:
+    exists: true
+    filetype: symlink
+    linked-to: /opt/bitnami
+  /etc/wavefront/wavefront-proxy:
+    exists: true
+    filetype: symlink
+    linked-to: /opt/bitnami/wavefront-proxy/etc
+  /var/spool/wavefront-proxy:
+    exists: true
+    filetype: symlink
+    linked-to: /opt/bitnami/wavefront-proxy/tmp
+  /run.sh:
+    exists: true
+    filetype: symlink
+    mode: "755"
+    linked-to: /opt/bitnami/wavefront-proxy/scripts/run.sh
+  /opt/wavefront/wavefront-proxy/wavefront-proxy.jar:
+    exists: true
+    filetype: symlink
+    linked-to: /opt/bitnami/wavefront-proxy/bin/wavefront-proxy.jar
