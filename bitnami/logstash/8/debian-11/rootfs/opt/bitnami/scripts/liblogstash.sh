@@ -282,19 +282,18 @@ logstash_initialize() {
     # Skip further configuration if Logstash pipeline configuration was passed as a string
     [[ -n "$LOGSTASH_PIPELINE_CONF_STRING" ]] && return
 
-    if [[ -n "$LOGSTASH_PIPELINE_CONF_FILENAME" && -e "${LOGSTASH_MOUNTED_PIPELINE_CONF_DIR}/${LOGSTASH_PIPELINE_CONF_FILENAME}" ]]; then
-        info "Detected mounted '${LOGSTASH_PIPELINE_CONF_FILENAME}' pipeline configuration file"
-        cp -L "${LOGSTASH_MOUNTED_PIPELINE_CONF_DIR}/${LOGSTASH_PIPELINE_CONF_FILENAME}" "$LOGSTASH_PIPELINE_CONF_DIR"
-    elif ! is_mounted_dir_empty "$LOGSTASH_MOUNTED_PIPELINE_CONF_DIR"; then
+    if ! is_mounted_dir_empty "$LOGSTASH_MOUNTED_PIPELINE_CONF_DIR"; then
         info "Detected mounted pipeline configuration files"
-        cp -Lr "$LOGSTASH_MOUNTED_PIPELINE_CONF_DIR"/*.conf "$LOGSTASH_PIPELINE_CONF_DIR"
+        cp -Lr "$LOGSTASH_MOUNTED_PIPELINE_CONF_DIR"/* "$LOGSTASH_PIPELINE_CONF_DIR"
     elif [[ -e "${LOGSTASH_MOUNTED_CONF_DIR}/${LOGSTASH_PIPELINE_CONF_FILENAME}" ]]; then
         # Support for legacy configuration before configurations were separated into 'config' and 'pipeline'
         warn "Detected mounted '${LOGSTASH_MOUNTED_CONF_DIR}/${LOGSTASH_PIPELINE_CONF_FILENAME}' pipeline configuration file in legacy directory."
-        warn "Support for this configuration may be deprecated in a future version of this image. Please mount the file to '${LOGSTASH_MOUNTED_PIPELINE_CONF_DIR}/${LOGSTASH_PIPELINE_CONF_FILENAME}' instead."
-        cp -Lr "$LOGSTASH_MOUNTED_CONF_DIR"/*.conf "$LOGSTASH_PIPELINE_CONF_DIR"
-    else
+        warn "Support for this configuration may be deprecated in a future version of this image. Please mount the pipeline files to '${LOGSTASH_MOUNTED_PIPELINE_CONF_DIR}' instead."
+        cp -Lr "${LOGSTASH_MOUNTED_CONF_DIR}/${LOGSTASH_PIPELINE_CONF_FILENAME}" "$LOGSTASH_PIPELINE_CONF_DIR"
+    elif is_dir_empty "$LOGSTASH_PIPELINE_CONF_DIR"; then
         logstash_create_sample_pipeline_config_file
+    else
+        info "Detected existing files in '${LOGSTASH_PIPELINE_CONF_DIR}', skipping sample pipeline generation"
     fi
 }
 
