@@ -5,8 +5,10 @@ binaries:
   - redis-cli
   - ruby
   - wait-for-port
+  - tootctl
 directories:
   - mode: "0775"
+    group: root
     paths:
       - /bitnami/mastodon
       - /opt/bitnami/mastodon/tmp
