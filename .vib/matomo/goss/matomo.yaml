@@ -29,3 +29,16 @@ file:
     exists: false
   /opt/bitnami/matomo/.buildcomplete:
     exists: false
+command:
+  # Since it is not done with sudo, the exit code is 1
+  check-app-version:
+    exec: php /opt/bitnami/matomo/console --version
+    exit-status: 1
+    stdout:
+      - {{ .Env.APP_VERSION }}
+  # Since it is not done with sudo, the exit code is 1
+  check-app-run:
+    exec: php /opt/bitnami/matomo/console config:get --section=database
+    exit-status: 1
+    stdout:
+      - "Mysql"
