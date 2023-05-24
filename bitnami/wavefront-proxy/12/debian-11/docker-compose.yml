@@ -1,5 +1,6 @@
 version: '2'
 services:
+  # New change
   wavefront-proxy:
     image: docker.io/bitnami/wavefront-proxy:12
     environment:
