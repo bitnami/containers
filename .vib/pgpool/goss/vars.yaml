@@ -1,0 +1,24 @@
+binaries:
+  - psql
+  - wait-for-port
+  - pgpool
+directories:
+  - mode: "0775"
+    paths:
+      - /docker-entrypoint-initdb.d
+      - /opt/bitnami/pgpool/tmp
+      - /opt/bitnami/pgpool/logs
+      - /opt/bitnami/pgpool/conf
+      - /opt/bitnami/pgpool/etc
+      - /opt/bitnami/pgpool/data
+      - /var/run/nslcd
+files:
+  - mode: "0660"
+    paths:
+    - /etc/nslcd.conf
+  - paths:
+      - /etc/pam.d/pgpool
+root_dir: /opt/bitnami
+version:
+  bin_name: pgpool
+  flag: --version
