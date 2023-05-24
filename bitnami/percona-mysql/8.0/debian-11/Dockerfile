@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-21T19:17:48Z" \
+      org.opencontainers.image.created="2023-05-24T20:42:54Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.0.32-24-debian-11-r20" \
+      org.opencontainers.image.ref.name="8.0.32-24-debian-11-r21" \
       org.opencontainers.image.title="percona-mysql" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="8.0.32-24"
