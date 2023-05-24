@@ -13,6 +13,3 @@ features:
     - "CUDA"
     - "MKLDNN"
 root_dir: /opt/bitnami
-version:
-  bin_name: python
-  flag: -c 'import mxnet; print(mxnet.__version__)'
