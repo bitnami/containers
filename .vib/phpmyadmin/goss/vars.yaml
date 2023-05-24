@@ -1,0 +1,25 @@
+binaries:
+  - apachectl
+  - mariadb
+  - php
+  - render-template
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/phpmyadmin
+      - /opt/bitnami/phpmyadmin
+      - /opt/bitnami/phpmyadmin/tmp
+files:
+  - paths:
+      - /opt/bitnami/phpmyadmin/config.inc.php
+phpmodules:
+  # Based on https://docs.phpmyadmin.net/en/latest/require.html#php
+  # Required
+  - mbstring
+  - mysqli
+  - openssl
+  - xml
+  - zip
+  # Recommended
+  - curl
+root_dir: /opt/bitnami
