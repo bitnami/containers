@@ -204,6 +204,15 @@ EOF
             ini-file set -s "mail" -k "encryption" -v "$MATOMO_SMTP_PROTOCOL" "$MATOMO_CONF_FILE"
         fi
 
+        # Optional noreply name and address
+        if ! is_empty_value "$MATOMO_NOREPLY_NAME"; then
+            ini-file set -s "General" -k "noreply_email_name" -v "$MATOMO_NOREPLY_NAME" "$MATOMO_CONF_FILE"
+        fi
+
+        if ! is_empty_value "$MATOMO_NOREPLY_ADDRESS"; then
+            ini-file set -s "General" -k "noreply_email_address" -v "$MATOMO_NOREPLY_ADDRESS" "$MATOMO_CONF_FILE"
+        fi
+
         info "Persisting Matomo installation"
         persist_app "$app_name" "$MATOMO_DATA_TO_PERSIST"
     else
