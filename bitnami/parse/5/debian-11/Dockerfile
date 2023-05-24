@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-21T16:07:39Z" \
+      org.opencontainers.image.created="2023-05-24T00:52:17Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.5.0-debian-11-r0" \
+      org.opencontainers.image.ref.name="5.5.1-debian-11-r0" \
       org.opencontainers.image.title="parse" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="5.5.0"
+      org.opencontainers.image.version="5.5.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -25,7 +25,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "python-3.9.16-13-linux-${OS_ARCH}-debian-11" \
       "node-16.20.0-3-linux-${OS_ARCH}-debian-11" \
       "mongodb-shell-1.9.0-1-linux-${OS_ARCH}-debian-11" \
-      "parse-5.5.0-0-linux-${OS_ARCH}-debian-11" \
+      "parse-5.5.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -43,7 +43,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/parse/postunpack.sh
-ENV APP_VERSION="5.5.0" \
+ENV APP_VERSION="5.5.1" \
     BITNAMI_APP_NAME="parse" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/mongodb/bin:/opt/bitnami/parse/bin:$PATH"
 
