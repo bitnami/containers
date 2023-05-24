@@ -1,0 +1,3 @@
+binaries:
+  - cert-manager
+root_dir: /opt/bitnami
