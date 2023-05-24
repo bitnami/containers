@@ -4,10 +4,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-21T17:14:12Z" \
+      org.opencontainers.image.created="2023-05-24T23:28:39Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.10.3-debian-11-r4" \
+      org.opencontainers.image.ref.name="2.10.3-debian-11-r5" \
       org.opencontainers.image.title="spring-cloud-dataflow-composed-task-runner" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.10.3"
