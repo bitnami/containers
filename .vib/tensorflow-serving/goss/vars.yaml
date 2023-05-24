@@ -1,7 +1,10 @@
 binaries:
   - render-template
+  - tensorflow_model_server
 directories:
   - mode: "0775"
+    owner: tensorflow
+    group: root
     paths:
       - /opt/bitnami/tensorflow-serving
       - /opt/bitnami/tensorflow-serving/tmp
