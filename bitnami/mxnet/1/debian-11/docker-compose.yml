@@ -1,5 +1,5 @@
 version: '2'
-# TEST
+
 services:
   mxnet:
     image: docker.io/bitnami/mxnet:1
