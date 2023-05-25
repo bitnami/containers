@@ -1,4 +1,5 @@
 command:
+  # Force the exit-status as the timeout's original return varies between 0 and 143.
   check-clickhouse-server:
     exec: timeout --preserve-status 5 clickhouse-server 2>&1 || true
     exit-status: 0
@@ -13,14 +14,23 @@ file:
     exists: true
     filetype: symlink
     linked-to: /dev/stdout
+  /opt/bitnami/clickhouse/logs/clickhouse_error.log:
+    exists: true
+    filetype: symlink
+    linked-to: /dev/stderr
   /opt/bitnami/clickhouse/etc/config.xml:
     exists: true
     filetype: file
     contains:
       - /data dir.*\/bitnami\/clickhouse\/data/
-      - /http_port from_env=\"CLICKHOUSE_HTTP_PORT\"/
+      - /http_port.*from_env.*CLICKHOUSE_HTTP_PORT/
       - "!remote_servers"
       - "<console>1</console></logger>"
+  /opt/bitnami/clickhouse/etc/users.xml:
+    exists: true
+    filetype: file
+    contains:
+      - /password.*from_env.*CLICKHOUSE_ADMIN_PASSWORD/
 group:
   clickhouse:
     exists: true
