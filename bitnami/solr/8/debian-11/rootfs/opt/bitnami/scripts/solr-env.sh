@@ -69,7 +69,6 @@ export SOLR_TMP_DIR="${SOLR_BASE_DIR}/tmp"
 export SOLR_PID_DIR="${SOLR_BASE_DIR}/tmp"
 export SOLR_LOGS_DIR="${SOLR_BASE_DIR}/logs"
 export SOLR_SERVER_DIR="${SOLR_BASE_DIR}/server"
-export SOLR_ZK_CHROOT="${SOLR_ZK_CHROOT:-/solr}"
 
 # Persistence
 export SOLR_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/solr"
@@ -105,5 +104,6 @@ export SOLR_DAEMON_GROUP="solr"
 # Solr retries configuration
 export SOLR_ZK_MAX_RETRIES="${SOLR_ZK_MAX_RETRIES:-5}"
 export SOLR_ZK_SLEEP_TIME="${SOLR_ZK_SLEEP_TIME:-5}"
+export SOLR_ZK_CHROOT="${SOLR_ZK_CHROOT:-/solr}"
 
 # Custom environment variables may be defined below

@@ -1,0 +1,29 @@
+binaries:
+  - mysql
+  - node
+  - python
+directories:
+  - paths:
+    - /home/ghost
+  - paths:
+  # Check that permissions of some directories have been
+  # specifically set to 777 in postunpack phase
+  - paths:
+    - /bitnami/ghost
+    - /opt/bitnami/ghost
+    - /opt/bitnami/ghost/content
+    - /opt/bitnami/ghost/content/logs
+    - /.ghost
+    mode: "0777"
+files:
+  - paths:
+    - /opt/bitnami/ghost/.ghost-cli
+    mode: "0666"
+root_dir: /opt/bitnami
+version:
+  bin_name: cd /opt/bitnami/ghost && ghost
+  flag: --version
+sed_in_place:
+  exclude_paths:
+    # Ignore Ghost node_modules directory (not bitnami-related)
+    - .*\/ghost\/versions\/.*\/node_modules.*

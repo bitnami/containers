@@ -112,7 +112,7 @@ solr_validate() {
     ! is_yes_no_value "$SOLR_ENABLE_CLOUD_MODE" && print_validation_error "SOLR_ENABLE_CLOUD_MODE possible values are yes or no"
     is_boolean_yes "$SOLR_ENABLE_CLOUD_MODE" && [[ -z "$SOLR_ZK_HOSTS" ]] && print_validation_error "You need to provide the Zookeper node list in SOLR_ZK_HOSTS"
 
-    [[ -n "$SOLR_ZK_CHROOT" ]] && [[ ${SOLR_ZK_CHROOT:0:1} != "/" ]] && print_validation_error "SOLR_ZK_CHROOT has to start with '/' char"
+    [[ -n "$SOLR_ZK_CHROOT" ]] && [[ "${SOLR_ZK_CHROOT:0:1}" != "/" ]] && print_validation_error "SOLR_ZK_CHROOT has to start with '/' char"
 
     ! is_boolean_yes "$SOLR_CLOUD_BOOTSTRAP" && is_boolean_yes "$SOLR_ENABLE_CLOUD_MODE" && [[ -n "$SOLR_CORES" ]] && info "This node is not a boostrap node and will not create the collection"
 

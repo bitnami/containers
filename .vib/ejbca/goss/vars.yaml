@@ -1,0 +1,25 @@
+binaries:
+  - java
+  - jboss-cli.sh
+  - mysql
+  - ejbca.sh
+files:
+  - mode: "0664"
+    paths:
+      - /opt/bitnami/wildfly/bin/standalone.conf
+directories:
+  - paths:
+      - /opt/bitnami/ejbca/bin
+      - /opt/bitnami/ejbca/dist
+      - /opt/bitnami/ejbca/sql-scripts
+  - mode: "0775"
+    paths:
+      - /opt/bitnami/ejbca
+      - /opt/bitnami/wildfly
+      - /opt/bitnami/ejbca/tmp
+      - /bitnami/ejbca
+      - /bitnami/wildfly
+      - /opt/bitnami/wildfly/standalone
+      - /opt/bitnami/wildfly/domain
+      - /opt/bitnami/wildfly/tmp
+root_dir: /opt/bitnami

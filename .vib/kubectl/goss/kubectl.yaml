@@ -1,0 +1,7 @@
+command:
+  check-kubectl-config:
+    {{- $context := printf "context_%s" (randAlpha 5) }}
+    exec: kubectl config set-context {{ $context }} && kubectl config view --output=jsonpath='{.contexts[0].name}' && rm ${HOME}/.kube/config
+    exit-status: 0
+    stdout:
+      - /^{{ $context }}$/

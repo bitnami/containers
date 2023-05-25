@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-11T17:52:10Z" \
+      org.opencontainers.image.created="2023-05-23T16:12:48Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.3.0-debian-11-r0" \
+      org.opencontainers.image.ref.name="3.3.0-debian-11-r7" \
       org.opencontainers.image.title="apisix" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.3.0"
@@ -22,7 +22,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libbrotli1 libbsd0 libcrypt1 libdeflate0 libexpat1 libffi7 libfontconfig1 libfreetype6 libgcc-s1 libgcrypt20 libgd3 libgeoip1 libgmp10 libgnutls30 libgpg-error0 libhogweed6 libicu67 libidn2-0 libjbig0 libjpeg62-turbo libldap-2.4-2 liblzma5 libmd0 libnettle8 libp11-kit0 libpcre3 libpng16-16 libsasl2-2 libssl1.1 libstdc++6 libtasn1-6 libtiff5 libunistring2 libuuid1 libwebp6 libx11-6 libxau6 libxcb1 libxdmcp6 libxml2 libxpm4 libxslt1.1 libzstd1 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "apisix-3.3.0-0-linux-${OS_ARCH}-debian-11" \
+      "yq-4.34.1-0-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.5-6-linux-${OS_ARCH}-debian-11" \
+      "apisix-3.3.0-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,7 +43,7 @@ RUN chmod g+rwX /opt/bitnami/apisix/conf && mkdir -p /usr/local/apisix/logs && c
 
 ENV APP_VERSION="3.3.0" \
     BITNAMI_APP_NAME="apisix" \
-    PATH="/opt/bitnami/apisix/bin:/opt/bitnami/apisix/openresty/bin:/opt/bitnami/apisix/openresty/luajit/bin:/opt/bitnami/apisix/openresty/luarocks/bin:/opt/bitnami/apisix/openresty/nginx/sbin:$PATH"
+    PATH="/opt/bitnami/common/bin:/opt/bitnami/apisix/bin:/opt/bitnami/apisix/openresty/bin:/opt/bitnami/apisix/openresty/luajit/bin:/opt/bitnami/apisix/openresty/luarocks/bin:/opt/bitnami/apisix/openresty/nginx/sbin:$PATH"
 
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/apisix/bin/apisix" ]

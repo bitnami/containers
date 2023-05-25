@@ -8,21 +8,6 @@ services:
     volumes:
       - registry_data:/storage
       - ./config/registry/:/etc/registry/:ro
-  chartmuseum:
-    container_name: chartmuseum
-    image: docker.io/bitnami/chartmuseum:0
-    environment:
-      - CACHE=redis
-      - CACHE_REDIS_ADDR=redis:6379
-      - CACHE_REDIS_DB=1
-      - DEPTH=1
-      - PORT=8080
-      - STORAGE=local
-      - STORAGE_LOCAL_ROOTDIR=/bitnami/data
-      - ALLOW_OVERWRITE=true
-      - INDEX_LIMIT=0
-    volumes:
-      - chartmuseum_data:/bitnami/data
   postgresql:
     image: docker.io/bitnami/postgresql:11
     container_name: harbor-db
@@ -41,7 +26,6 @@ services:
     container_name: harbor-core
     depends_on:
       - registry
-      - chartmuseum
     environment:
       - CORE_KEY=change-this-key
       - _REDIS_URL=redis:6379,100,
@@ -66,8 +50,6 @@ services:
       - JOBSERVICE_SECRET=CHANGEME
       - ADMIRAL_URL=
       - WITH_NOTARY=False
-      - WITH_CHARTMUSEUM=True
-      - CHART_REPOSITORY_URL=http://chartmuseum:8080
       - CORE_URL=http://core:8080
       - JOBSERVICE_URL=http://jobservice:8080
       - REGISTRY_STORAGE_PROVIDER_NAME=filesystem
@@ -100,6 +82,4 @@ volumes:
   core_data:
     driver: local
   postgresql_data:
-    driver: local
-  chartmuseum_data:
     driver: local

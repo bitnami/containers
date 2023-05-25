@@ -468,7 +468,7 @@ In the above command a new node is created and configured to join the bootstrapp
 
 You now have a two node MariaDB Galera cluster up and running. Write to any node of the cluster are automatically propagated to every node. You can scale the cluster by adding/removing slaves without incurring any downtime.
 
-> **Important**: If you need to stop the MariaDB Galera cluster, ensure you stop the bootstrap node only after you have stopped all other nodes in the cluster. This ensure you do not loose any write that may have occurred while the nodes were being stopped.
+> **Important**: If you need to stop the MariaDB Galera cluster, ensure you stop the bootstrap node only after you have stopped all other nodes in the cluster. This ensure you do not lose any write that may have occurred while the nodes were being stopped.
 
 ### Slow filesystems
 

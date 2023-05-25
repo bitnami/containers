@@ -1,0 +1,6 @@
+binaries:
+  - node_exporter
+root_dir: /opt/bitnami
+version:
+  bin_name: node_exporter
+  flag: --version

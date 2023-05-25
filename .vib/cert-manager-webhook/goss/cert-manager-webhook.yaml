@@ -1,0 +1,4 @@
+command:
+  check-cert-manager-webhook:
+    exec: cert-manager-webhook -h
+    exit-status: 0

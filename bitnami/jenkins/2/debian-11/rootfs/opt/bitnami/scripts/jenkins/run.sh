@@ -19,6 +19,7 @@ if [[ -n "${JAVA_OPTS:-}" ]]; then
     read -r -a java_opts <<<"$JAVA_OPTS"
     args+=("${java_opts[@]}")
 fi
+
 args+=("-Duser.home=${JENKINS_HOME}" "-jar" "${JENKINS_BASE_DIR}/jenkins.war")
 if is_boolean_yes "$JENKINS_FORCE_HTTPS"; then
     args+=(

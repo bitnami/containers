@@ -1,0 +1,8 @@
+binaries:
+  - java
+  - wait-for-port
+  - kc.sh
+version:
+  bin_name: kc.sh
+  flag: --version
+root_dir: /opt/bitnami

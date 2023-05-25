@@ -1,0 +1,13 @@
+binaries:
+  - node
+  - python
+directories:
+  - mode: "0775"
+    owner: "parsedashboard"
+    group: "root"
+    paths:
+      - /bitnami/parse-dashboard
+      - /opt/bitnami/parse-dashboard
+      - /opt/bitnami/parse-dashboard/tmp
+      - /opt/bitnami/parse-dashboard/logs
+root_dir: /opt/bitnami

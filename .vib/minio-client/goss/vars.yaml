@@ -1,0 +1,8 @@
+binaries:
+  - mc
+directories:
+  - mode: "0775"
+    paths:
+      - /opt/bitnami/minio-client
+      - /.mc
+root_dir: /opt/bitnami

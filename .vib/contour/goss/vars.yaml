@@ -1,0 +1,6 @@
+binaries:
+  - contour
+root_dir: /opt/bitnami
+version:
+  bin_name: contour
+  flag: version

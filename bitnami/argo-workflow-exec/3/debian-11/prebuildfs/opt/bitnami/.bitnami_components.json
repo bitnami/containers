@@ -3,12 +3,12 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.4.7-0"
+        "version": "3.4.7-1"
     },
     "kubectl": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.26.4-0"
+        "version": "1.26.5-1"
     }
 }

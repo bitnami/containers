@@ -1,0 +1,4 @@
+command:
+  check-vault-csi-provider-help:
+    exec: vault-csi-provider --help
+    exit-status: 0
