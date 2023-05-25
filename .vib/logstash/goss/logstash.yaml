@@ -1,0 +1,19 @@
+file:
+  /opt/bitnami/logstash/jdk:
+    exists: false
+  /opt/bitnami/logstash/config/logstash.yml:
+    exists: true
+    filetype: file
+    contains:
+      - "path.data: /bitnami/logstash/data"
+  /opt/bitnami/logstash/config/log4j2.properties:
+    exists: true
+    filetype: file
+    contains:
+      - "Console"
+group:
+  logstash:
+    exists: true
+user:
+  logstash:
+    exists: true
