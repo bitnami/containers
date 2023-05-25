@@ -5,6 +5,7 @@ binaries:
   - java
 directories:
   - mode: "0775"
+    group: "root"
     paths:
       - /opt/bitnami/spark/tmp
       - /opt/bitnami/spark/logs
