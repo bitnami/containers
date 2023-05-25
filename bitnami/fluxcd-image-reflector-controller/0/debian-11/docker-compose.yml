@@ -1,6 +1,5 @@
 version: '2'
 
 services:
-  # [TEST]
   fluxcd-image-reflector-controller:
     image: docker.io/bitnami/fluxcd-image-reflector-controller:0
