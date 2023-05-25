@@ -1,5 +1,6 @@
 version: '2'
 
 services:
+  # [TEST]
   fluxcd-image-automation-controller:
     image: docker.io/bitnami/fluxcd-image-automation-controller:0
