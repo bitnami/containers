@@ -1542,11 +1542,11 @@ mongodb_custom_init_scripts() {
                 ;;
             *.js)
                 debug "Executing $f"
-                mongodb_execute_print_output "$mongo_user" "$mongo_pass" <"$f"
+                mongodb_execute_print_output "$mongo_user" "$mongo_pass" "$MONGODB_INITDB_DATABASE" <"$f"
                 ;;
             *.js.gz)
                 debug "Executing $f"
-                gunzip -c "$f" | mongodb_execute_print_output "$mongo_user" "$mongo_pass"
+                gunzip -c "$f" | mongodb_execute_print_output "$mongo_user" "$mongo_pass" "$MONGODB_INITDB_DATABASE"
                 ;;
             *) debug "Ignoring $f" ;;
             esac
@@ -1580,7 +1580,7 @@ mongodb_execute_print_output() {
     # If password is empty it means no auth, do not specify user
     [[ -z "$password" ]] && final_user=""
 
-    local -a args=("--host" "$host" "--port" "$port")
+    local -a args=("--host" "$host" "--port" "$port" "--authenticationDatabase" "admin")
     [[ -n "$final_user" ]] && args+=("-u" "$final_user")
     [[ -n "$password" ]] && args+=("-p" "$password")
     if [[ -n "$extra_args" ]]; then
