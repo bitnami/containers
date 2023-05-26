@@ -171,7 +171,10 @@ docker-compose up -d
 
 ### Initializing a new instance
 
-When the container is executed for the first time, it will execute the files with extensions `.sh`, and `.js` located at `/docker-entrypoint-initdb.d`.
+When the container is executed for the first time, it will execute the files with extensions `.sh`, `.js` and `.js.gz` located at `/docker-entrypoint-initdb.d`.
+
+`MONGODB_INITDB_DATABASE` allows you to specify the name of a database to be used for creation scripts.
+if you do not specify a database name in `MONGODB_INITDB_DATABASE`, the test database will be used.
 
 In order to have your custom files inside the docker image you can mount them as a volume.
 
