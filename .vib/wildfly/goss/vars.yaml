@@ -13,7 +13,7 @@ directories:
 files:
   - mode: "0775"
     paths:
-      - /opt/bitnami/wildfly/standalone.conf
+      - /opt/bitnami/wildfly/bin/standalone.conf
 root_dir: /opt/bitnami
 version:
   bin_name: standalone.sh
