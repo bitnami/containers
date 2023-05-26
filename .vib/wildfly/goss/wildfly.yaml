@@ -1,0 +1,12 @@
+file:
+  /app:
+    exists: true
+    filetype: symlink
+    linked-to: /opt/bitnami/wildfly/standalone/deployments
+  /opt/bitnami/wildfly/modules/system/layers/base/org/wildfly/openssl/main/lib/macosx-x86_64/libwfssl.dylib:
+    exists: false
+command:
+  # The command must give exit-status 1 to verify that there is no library that doesn't have those permissions
+  check-permission-libraries:
+    exec: ls -al /opt/bitnami/wildfly/modules/system/layers/base/org/wildfly/openssl/main/lib/*/*.so 2>/dev/null | grep -v -e "-rwxr-xr--" && ls -al /opt/bitnami/wildfly/modules/system/layers/base/org/apache/activemq/artemis/journal/main/lib/linux-x86_64/libartemis-native-64.so 2>/dev/null | grep -v -e "-rwxr-xr--"
+    exit-status: 1
