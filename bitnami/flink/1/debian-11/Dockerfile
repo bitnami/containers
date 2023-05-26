@@ -4,10 +4,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-26T11:18:07Z" \
+      org.opencontainers.image.created="2023-05-26T13:15:47Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.17.1-debian-11-r0" \
+      org.opencontainers.image.ref.name="1.17.1-debian-11-r1" \
       org.opencontainers.image.title="flink" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.17.1"
@@ -24,7 +24,7 @@ RUN install_packages acl ca-certificates curl gettext-base libjemalloc-dev procp
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "java-11.0.19-7-2-linux-${OS_ARCH}-debian-11" \
-      "flink-1.17.1-0-linux-${OS_ARCH}-debian-11" \
+      "flink-1.17.1-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
