@@ -1,4 +1,5 @@
 gossfile:
+  ../../fluxcd-image-reflector-controller/goss/fluxcd-image-reflector-controller.yaml: {}
   # Load scripts from .vib/common/goss/templates
   ../../common/goss/templates/check-binaries.yaml: {}
   ../../common/goss/templates/check-broken-symlinks.yaml: {}
