@@ -1,6 +1,6 @@
 name: '[Support] Assign asset label'
 on:
-  pull_request_target:
+  pull_request:
     types:
       - opened
 permissions:
@@ -29,7 +29,7 @@ jobs:
             echo "name=NONE" >> $GITHUB_OUTPUT
           else
             echo "result=ok" >> $GITHUB_OUTPUT
-            echo "message=Adding label '${assets}'"  >> $GITHUB_OUTPUT
+            echo "message=Adding label '${assets}'" >> $GITHUB_OUTPUT
             echo "name=${assets}" >> $GITHUB_OUTPUT
           fi
       - name: Show messages
