@@ -1,16 +1,6 @@
-file:
-  # Symlink test template
-  /opt/bitnami/fluxcd-image-automation-controller/folder:
-    exists: true
-    filetype: symlink
-    linked-to: /folder
-  # Removed element test template
-  /opt/bitnami/fluxcd-image-automation-controller/element:
-    exists: false
-  # File contents test template
-  /opt/bitnami/fluxcd-image-automation-controller/config.conf:
-    exists: true
-    filetype: file
-    contains:
-      - /fluxcd-image-automation-controller1/
-      - fluxcd-image-automation-controller
+command:
+  check-image-automation-controller-binary:
+    exec: image-automation-controller --help
+    exit-status: 2
+    stderr:
+      - "Usage of image-automation-controller"
