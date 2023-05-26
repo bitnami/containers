@@ -11,7 +11,7 @@ directories:
   - paths:
       - /opt/bitnami/wildfly/modules/system/layers/base
 files:
-  - mode: "0775"
+  - mode: "0664"
     paths:
       - /opt/bitnami/wildfly/bin/standalone.conf
 root_dir: /opt/bitnami
