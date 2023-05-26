@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-24T14:31:22Z" \
+      org.opencontainers.image.created="2023-05-26T00:59:41Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="15.11.0-debian-11-r11" \
+      org.opencontainers.image.ref.name="15.11.1-debian-11-r0" \
       org.opencontainers.image.title="gitlab-runner" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="15.11.0"
+      org.opencontainers.image.version="15.11.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl git git-lfs openssh-client procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "gitlab-runner-15.11.0-1-linux-${OS_ARCH}-debian-11" \
+      "gitlab-runner-15.11.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,7 +40,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN mkdir /home/gitlab-runner && chmod -R g+rwX /home/gitlab-runner && ln -s /opt/bitnami/common/bin/dumb-init /usr/bin/dumb-init && ln -s /opt/bitnami/scripts/gitlab-runner/entrypoint.sh /entrypoint
-ENV APP_VERSION="15.11.0" \
+ENV APP_VERSION="15.11.1" \
     BITNAMI_APP_NAME="gitlab-runner" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/gitlab-runner/bin:$PATH"
 
