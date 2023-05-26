@@ -16,10 +16,6 @@ file:
     filetype: symlink
     mode: "0777"
     linked-to: /opt/bitnami/wavefront-proxy/scripts/run.sh
-  /opt/wavefront/wavefront-proxy/wavefront-proxy.jar:
-    exists: true
-    filetype: symlink
-    linked-to: /opt/bitnami/wavefront-proxy/bin/wavefront-proxy.jar
 command:
   check-app-version:
     exec: java -jar /opt/bitnami/wavefront-proxy/wavefront-proxy.jar --version 2>&1 | grep "$(echo $APP_VERSION | sed -E 's|([0-9]+\.[0-9]+)\.0$|\1|g')"
