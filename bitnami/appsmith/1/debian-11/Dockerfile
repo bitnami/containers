@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-25T21:18:54Z" \
+      org.opencontainers.image.created="2023-05-26T18:20:41Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.9.21-debian-11-r1" \
+      org.opencontainers.image.ref.name="1.9.21-debian-11-r2" \
       org.opencontainers.image.title="appsmith" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.9.21"
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "wait-for-port-1.0.6-7-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-6-linux-${OS_ARCH}-debian-11" \
       "node-16.20.0-3-linux-${OS_ARCH}-debian-11" \
-      "nginx-1.23.4-4-linux-${OS_ARCH}-debian-11" \
+      "nginx-1.23.4-5-linux-${OS_ARCH}-debian-11" \
       "mongodb-shell-1.9.1-0-linux-${OS_ARCH}-debian-11" \
       "java-17.0.7-7-2-linux-${OS_ARCH}-debian-11" \
       "appsmith-1.9.21-0-linux-${OS_ARCH}-debian-11" \
