@@ -1,0 +1,7 @@
+binaries:
+  - nginx-ingress-controller
+  - nginx
+root_dir: /opt/bitnami
+version:
+  bin_name: nginx-ingress-controller
+  flag: --version
