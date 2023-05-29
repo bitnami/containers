@@ -1,0 +1,6 @@
+binaries:
+  - oauth2-proxy
+version:
+  bin_name: oauth2-proxy
+  flag: --version
+root_dir: /opt/bitnami

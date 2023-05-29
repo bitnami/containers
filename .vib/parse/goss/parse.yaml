@@ -1,0 +1,12 @@
+command:
+  check-app-version:
+    exec: grep '"version":' /opt/bitnami/parse/package.json
+    exit-status: 0
+    stdout:
+      - '"version": "{{ .Env.APP_VERSION }}",'
+group:
+  parse:
+    exists: true
+user:
+  parse:
+    exists: true

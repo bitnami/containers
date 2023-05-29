@@ -1,0 +1,8 @@
+binaries:
+  - python
+directories:
+  - mode: "0775"
+    paths:
+      - /opt/bitnami/python
+      - /app
+root_dir: /opt/bitnami

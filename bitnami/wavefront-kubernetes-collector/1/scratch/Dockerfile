@@ -12,7 +12,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "wavefront-1.13.0-6-linux-${OS_ARCH}-debian-11" \
+      "wavefront-1.13.0-7-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -33,10 +33,10 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-05-15T21:34:33Z" \
+      org.opencontainers.image.created="2023-05-21T17:27:03Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.13.0-scratch-r15" \
+      org.opencontainers.image.ref.name="1.13.0-scratch-r16" \
       org.opencontainers.image.title="wavefront-kubernetes-collector" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.13.0"

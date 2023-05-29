@@ -3,12 +3,12 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.3.8-161"
+        "version": "2.3.8-162"
     },
     "java": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "17.0.7-7-1"
+        "version": "17.0.7-7-2"
     }
 }

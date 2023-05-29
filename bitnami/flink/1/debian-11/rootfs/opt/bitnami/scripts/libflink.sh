@@ -5,6 +5,7 @@
 # shellcheck disable=SC1091
 
 # Load generic libraries
+. /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/libpersistence.sh
 . /opt/bitnami/scripts/libvalidations.sh
 
@@ -29,7 +30,7 @@ flink_set_config_option() {
 
   # either override an existing entry, or append a new one
   if grep -E "^${escaped_option}:.*" "${FLINK_CONF_FILE_PATH}" > /dev/null; then
-        sed -i -e "s/${escaped_option}:.*/$option: $value/g" "${FLINK_CONF_FILE_PATH}"
+        replace_in_file "$FLINK_CONF_FILE_PATH" "${escaped_option}:.*" "${option}: ${value}"
   else
         echo "${option}: ${value}" >> "${FLINK_CONF_FILE_PATH}"
   fi

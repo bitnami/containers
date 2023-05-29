@@ -1,0 +1,6 @@
+binaries:
+  - kubectl
+root_dir: /opt/bitnami
+version:
+  bin_name: kubectl
+  flag: version --client

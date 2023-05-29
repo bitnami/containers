@@ -1,0 +1,31 @@
+binaries:
+  - node
+  - odoo-bin
+  - psql
+  - python
+  - render-template
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/odoo
+      - /opt/bitnami/odoo/addons
+      - /opt/bitnami/odoo/conf
+      - /opt/bitnami/odoo/data
+      - /opt/bitnami/odoo/log
+      - /opt/bitnami/odoo/tmp/pids
+files:
+  - paths:
+      - /opt/bitnami/odoo/package.json
+linked_libraries:
+  exclude_paths:
+    # Ignore binaries bundled within Python libs
+    - .*\/lib\/python[0-9.]*\/site-packages\/.*\.libs\/lib.*\.so\..*
+sed_in_place:
+  exclude_paths:
+    # Ignore Odoo scripts from upstream
+    - \/opt\/bitnami\/odoo\/lib\/.*
+root_dir: /opt/bitnami
+version:
+  bin_name: odoo
+  # Convert the version format to the one used by the APP_VERSION environment variable
+  flag: --version | sed -E 's/([0-9]+\.[0-9]+)-([0-9]+)/\1.\2/'
