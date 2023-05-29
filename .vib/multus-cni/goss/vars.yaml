@@ -1,0 +1,9 @@
+binaries:
+  - multus
+  - multus-shim
+  - multus-daemon
+  - install_multus
+root_dir: /opt/bitnami
+version:
+  bin_name: multus
+  flag: -v
