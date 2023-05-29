@@ -1,0 +1,17 @@
+binaries:
+  - flink
+  - java
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/flink
+      - /opt/bitnami/flink
+      - /opt/bitnami/flink/conf
+      - /opt/bitnami/flink/bin
+root_dir: /opt/bitnami
+version:
+  bin_name: flink
+  flag: -v
+sed_in_place:
+  exclude_paths:
+    - /opt/bitnami/flink/plugins
