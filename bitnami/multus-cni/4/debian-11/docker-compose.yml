@@ -1,5 +1,5 @@
 version: '2'
-#TEST
+
 services:
   multus-cni:
     image: docker.io/bitnami/multus-cni:4
