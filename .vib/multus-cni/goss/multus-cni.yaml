@@ -15,10 +15,6 @@ file:
     exists: true
     filetype: symlink
     linked-to: /bitnami/multus-cni/host
-  /bitnami/multus-cni/host:
-    exists: true
-    filetype: directory
-    mode: "0775"
 user:
   multus-cni:
     exists: true

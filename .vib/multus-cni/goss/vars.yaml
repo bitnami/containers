@@ -3,6 +3,10 @@ binaries:
   - multus-shim
   - multus-daemon
   - install_multus
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/multus-cni/host
 root_dir: /opt/bitnami
 version:
   bin_name: multus
