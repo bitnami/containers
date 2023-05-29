@@ -1,5 +1,6 @@
 binaries:
   - java
+  - standalone.sh
 directories:
   - mode: "0775"
     paths:
@@ -8,8 +9,6 @@ directories:
       - /opt/bitnami/wildfly/domain
       - /opt/bitnami/wildfly/standalone
       - /bitnami/wildfly/standalone/data
-  - paths:
-      - /opt/bitnami/wildfly/modules/system/layers/base
 files:
   - mode: "0664"
     paths:

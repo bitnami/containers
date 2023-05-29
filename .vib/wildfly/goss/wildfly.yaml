@@ -6,7 +6,11 @@ file:
   /opt/bitnami/wildfly/modules/system/layers/base/org/wildfly/openssl/main/lib/macosx-x86_64/libwfssl.dylib:
     exists: false
 command:
-  # The command must give exit-status 1 to verify that there is no library that doesn't have those permissions
-  check-permission-libraries:
-    exec: ls -al /opt/bitnami/wildfly/modules/system/layers/base/org/wildfly/openssl/main/lib/*/*.so 2>/dev/null | grep -v -e "-rwxr-xr--" && ls -al /opt/bitnami/wildfly/modules/system/layers/base/org/apache/activemq/artemis/journal/main/lib/linux-x86_64/libartemis-native-64.so 2>/dev/null | grep -v -e "-rwxr-xr--"
-    exit-status: 1
+  check-use-java:
+    exec: jboss-cli.sh version
+    exit-status: 0
+    stdout:
+      - "JAVA_HOME: /opt/bitnami/java"
+  check-jdbc-connectors:
+    exec: ls /opt/bitnami/wildfly/standalone/deployments/mariadb-java-client-*.jar && ls /opt/bitnami/wildfly/standalone/deployments/postgresql-*.jar
+    exit-status: 0
