@@ -81,7 +81,7 @@ export MATOMO_CONF_FILE="${MATOMO_CONF_DIR}/config.ini.php"
 
 # Matomo persistence configuration
 export MATOMO_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/matomo"
-export MATOMO_DATA_TO_PERSIST="${MATOMO_DATA_TO_PERSIST:-config/config.ini.php misc plugins js}"
+export MATOMO_DATA_TO_PERSIST="${MATOMO_DATA_TO_PERSIST:-$MATOMO_BASE_DIR}"
 
 # Matomo configuration
 export MATOMO_SKIP_BOOTSTRAP="${MATOMO_SKIP_BOOTSTRAP:-}" # only used during the first initialization
