@@ -9,5 +9,4 @@ directories:
 files:
   - paths:
     - /app/asset-manifest.json
-    - /app/site.webmanifest
 root_dir: /opt/bitnami
