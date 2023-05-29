@@ -21,11 +21,17 @@ export COMMAND_STANDALONE="standalone-job"
 export COMMAND_HISTORY_SERVER="history-server"
 
 declare cmd
-declare -a args=()
+declare -a args=("")
 
 cd "${FLINK_BASE_DIR}" || exit 1
 
-args=("${@:1}")
+# If nothing is provided as '$@', this assignation throws
+# an unbound variable error for Bash versions < 4.4.
+# https://git.savannah.gnu.org/cgit/bash.git/tree/CHANGES?id=3ba697465bc74fab513a26dea700cc82e9f4724e#n878
+if [[ "$#" -gt 0 ]]; then
+    args=("${@:1}")
+fi
+
 if [[ "$FLINK_MODE" = "help" ]]; then
     # shellcheck disable=SC2059
     printf "Available flink modes: $(basename "$0") jobmanager,${COMMAND_STANDALONE},taskmanager,${COMMAND_HISTORY_SERVER}\n"
