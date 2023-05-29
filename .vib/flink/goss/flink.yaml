@@ -9,7 +9,16 @@ command:
 file:
   /opt/bitnami/flink/plugins/s3-fs-base/flink-s3-fs-base-{{ .Env.APP_VERSION }}.jar:
     exists: true
+    filetype: file
   /opt/bitnami/flink/plugins/s3-fs-presto/flink-s3-fs-presto-{{ .Env.APP_VERSION }}.jar:
     exists: true
+    filetype: file
   /opt/bitnami/flink/plugins/s3-fs-hadoop/flink-s3-fs-hadoop-{{ .Env.APP_VERSION }}.jar:
+    exists: true
+    filetype: file
+user:
+  flink:
+    exists: true
+group:
+  flink:
     exists: true
