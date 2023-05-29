@@ -1,7 +1,6 @@
 version: '2'
 
 services:
-  # New change
   wildfly:
     image: docker.io/bitnami/wildfly:28
     ports:
