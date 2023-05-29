@@ -2,7 +2,7 @@ file:
   /usr/src/multus-cni:
     exists: true
     filetype: symlink
-    linked-to: /opt/bitnami/multus-cni
+    linked-to: /opt/bitnami/multus-cni/
   /thin_entrypoint:
     exists: true
     filetype: symlink
