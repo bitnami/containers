@@ -1,7 +1,7 @@
 command:
   check-app-version:
     # argocd version exits with exit code 1
-    exec: {{ .Vars.version.bin_name }} {{ .Vars.version.flag }}
+    exec: argocd version
     exit-status: 1
     stdout:
     - {{ .Env.APP_VERSION }}
