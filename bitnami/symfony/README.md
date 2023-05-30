@@ -85,7 +85,7 @@ services:
     depends_on:
       - mariadb
   mariadb:
-    image: 'bitnami/mariadb:10.3'
+    image: 'bitnami/mariadb:10.11'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=bobby
