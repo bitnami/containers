@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-27T14:08:05Z" \
+      org.opencontainers.image.created="2023-05-30T14:25:56Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.13.3-debian-11-r11" \
+      org.opencontainers.image.ref.name="0.13.3-debian-11-r12" \
       org.opencontainers.image.title="apache-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.13.3"
@@ -33,7 +33,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
       rm -rf "${COMPONENT}".tar.gz{,.sha256} ; \
     done
-RUN apt-get autoremove --purge -y curl ca-certificates && \
+RUN apt-get autoremove --purge -y ca-certificates curl && \
     apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN ln -sf /opt/bitnami/apache-exporter/bin/apache_exporter /bin/apache_exporter
