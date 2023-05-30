@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-27T15:36:02Z" \
+      org.opencontainers.image.created="2023-05-30T16:21:09Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="9.5.9-debian-11-r8" \
+      org.opencontainers.image.ref.name="9.5.9-debian-11-r9" \
       org.opencontainers.image.title="drupal-nginx" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="9.5.9"
@@ -23,7 +23,7 @@ RUN install_packages acl ca-certificates curl gnupg libaudit1 libbrotli1 libbsd0
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "php-8.1.19-4-linux-${OS_ARCH}-debian-11" \
-      "nginx-1.23.4-5-linux-${OS_ARCH}-debian-11" \
+      "nginx-1.25.0-1-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.11.3-1-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-6-linux-${OS_ARCH}-debian-11" \
       "drupal-9.5.9-2-linux-${OS_ARCH}-debian-11" \
