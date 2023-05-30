@@ -292,7 +292,7 @@ Based on the extended image, you can use a Docker Compose file like the one belo
 version: '2'
 services:
   mariadb:
-    image: 'bitnami/mariadb:10.3'
+    image: 'bitnami/mariadb:10.11'
     environment:
       - MARIADB_ROOT_PASSWORD=bitnami
     volumes:
