@@ -38,6 +38,7 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir -p "/cosign-keys" && chmod -R 777 "/cosign-keys"
+RUN mkdir -p "/.docker" && chmod g+rwX "/.docker"
 RUN mkdir /.sigstore && chmod g+rwX /.sigstore
 
 ENV APP_VERSION="2.0.2" \
