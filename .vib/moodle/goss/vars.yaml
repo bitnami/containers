@@ -1,0 +1,31 @@
+binaries:
+  - apachectl
+  - mysql
+  - php
+  - psql
+  - pg_dump
+  - pg_restore
+  - pg_dumpall
+  - render-template
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/moodle
+      - /bitnami/moodledata
+      - /opt/bitnami/moodle
+root_dir: /opt/bitnami
+sed_in_place:
+  exclude_paths:
+    # Ignore libmoodle.sh which uses sed -i
+    - /opt/bitnami/scripts/libmoodle.sh
+apache:
+  rules:
+    - RewriteRule "(\/vendor\/)" - [F]
+    - RewriteRule "(\/node_modules\/)" - [F]
+    - RewriteRule "(^|/)\.(?!well-known\/)" - [F]
+    - RewriteRule "(\/environment.xml)" - [F]
+    - RewriteRule "(\/install.xml)" - [F]
+    - RewriteRule "(\/README)" - [F]
+    - RewriteRule "(\/upgrade\.txt)" - [F]
+    - RewriteRule "(\/package\.json)" - [F]
+    - RewriteRule "(\/Gruntfile\.js)" - [F]
