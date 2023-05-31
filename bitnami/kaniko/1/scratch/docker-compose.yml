@@ -1,0 +1,5 @@
+version: '2'
+
+services:
+  kaniko:
+    image: docker.io/bitnami/kaniko:1
