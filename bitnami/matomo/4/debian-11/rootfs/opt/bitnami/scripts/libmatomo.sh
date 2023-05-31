@@ -208,12 +208,6 @@ EOF
         persist_app "$app_name" "$MATOMO_DATA_TO_PERSIST"
     else
         info "Persisted Matomo installation detected"
-        # Update default plugins
-        info "Updating default plugins in persisted data"
-        rsync -a "$MATOMO_BASE_DIR"/plugins/ "$MATOMO_VOLUME_DIR"/plugins/
-        # Update default js files
-        info "Updating default js scripts in persisted data"
-        rsync -a "$MATOMO_BASE_DIR"/js/ "$MATOMO_VOLUME_DIR"/js/
         info "Restoring Matomo installation"
         restore_persisted_app "$app_name" "$MATOMO_DATA_TO_PERSIST"
         info "Trying to connect to the database server"
