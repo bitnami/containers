@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-28T19:14:26Z" \
+      org.opencontainers.image.created="2023-05-31T10:02:20Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.10.23-debian-11-r2" \
+      org.opencontainers.image.ref.name="3.10.23-debian-11-r3" \
       org.opencontainers.image.title="rabbitmq" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.10.23"
@@ -35,8 +35,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
       rm -rf "${COMPONENT}".tar.gz{,.sha256} ; \
     done
-RUN apt-get autoremove --purge -y curl && \
-    apt-get update && apt-get upgrade -y && \
+RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8
