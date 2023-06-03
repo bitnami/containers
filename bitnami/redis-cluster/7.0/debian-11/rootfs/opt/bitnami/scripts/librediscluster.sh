@@ -143,7 +143,7 @@ redis_cluster_create() {
 
     for node in "${nodes[@]}"; do
         read -r -a host_and_port <<< "$(to_host_and_port "$node")"
-        wait_command="timeout -v 5 redis-cli -h ${host_and_port[0]} -p ${host_and_port[1]} ping"
+        wait_command="timeout 5 redis-cli -h ${host_and_port[0]} -p ${host_and_port[1]} ping"
         if is_boolean_yes "$REDIS_TLS_ENABLED"; then
             wait_command="${wait_command:0:-5} --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE} ping"
         fi
