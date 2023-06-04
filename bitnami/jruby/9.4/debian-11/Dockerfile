@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-31T23:50:15Z" \
+      org.opencontainers.image.created="2023-06-04T00:21:06Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="9.4.2-0-debian-11-r25" \
+      org.opencontainers.image.ref.name="9.4.2-0-debian-11-r26" \
       org.opencontainers.image.title="jruby" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="9.4.2-0"
