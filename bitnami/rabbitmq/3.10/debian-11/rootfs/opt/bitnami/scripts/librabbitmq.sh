@@ -342,6 +342,19 @@ rabbitmq_print_resource_limits_configuration() {
 }
 
 ########################
+# Enable generating log to file
+# Globals:
+#   RABBITMQ_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+rabbitmq_enable_log_file() {
+    replace_in_file "$RABBITMQ_CONF_FILE" 'log\.console.*' 'log\.console = false'
+}
+
+########################
 # Creates RabbitMQ configuration file
 # Globals:
 #   RABBITMQ_*
@@ -363,6 +376,7 @@ cluster_partition_handling = ${RABBITMQ_CLUSTER_PARTITION_HANDLING}
 default_permissions.configure = .*
 default_permissions.read = .*
 default_permissions.write = .*
+log.console = true
 EOF
 
         # When loading definitions, default vhost and user/pass won't be created: https://www.rabbitmq.com/definitions.html#import-on-boot
