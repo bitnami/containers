@@ -9,7 +9,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.31-9"
+        "version": "8.0.33-0"
     },
     "percona-mysql": {
         "arch": "amd64",
