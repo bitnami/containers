@@ -369,6 +369,8 @@ To configure Matomo to send email using SMTP you can set the following environme
 * `MATOMO_SMTP_PASSWORD`: Matomo SMTP account password.
 * `MATOMO_SMTP_PROTOCOL`: Matomo SMTP protocol to use. Available protocols are: "ssl", "tls", "none". No default.
 * `MATOMO_SMTP_AUTH`: Matomo SMTP authentication mechanism to use. Available mechanisms are: "Plain", "Login", "Crammd5". Default: **Plain**.
+* `MATOMO_NOREPLY_NAME`: Matomo noreply name. No defaults.
+* `MATOMO_NOREPLY_ADDRESS`: Matomo noreply address. No defaults.
 
 ##### SMTP example
 
