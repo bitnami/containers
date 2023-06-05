@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-05T14:13:53Z" \
+      org.opencontainers.image.created="2023-06-05T15:19:33Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.7.42-45-debian-11-r1" \
+      org.opencontainers.image.ref.name="5.7.42-46-debian-11-r0" \
       org.opencontainers.image.title="percona-mysql" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="5.7.42-45"
+      org.opencontainers.image.version="5.7.42-46"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -24,7 +24,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "percona-xtrabackup-binary-8.0.30-23-6-linux-${OS_ARCH}-debian-11" \
       "ini-file-1.4.5-6-linux-${OS_ARCH}-debian-11" \
-      "percona-mysql-5.7.42-45-0-linux-${OS_ARCH}-debian-11" \
+      "percona-mysql-5.7.42-46-0-linux-${OS_ARCH}-debian-11" \
       "mysql-shell-8.0.33-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -44,7 +44,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql/postunpack.sh
-ENV APP_VERSION="5.7.42-45" \
+ENV APP_VERSION="5.7.42-46" \
     BITNAMI_APP_NAME="percona-mysql" \
     MYSQL_HOME="/opt/bitnami/mysql/conf" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/mysql/bin:/opt/bitnami/mysql/sbin:$PATH"
