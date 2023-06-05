@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-03T19:30:40Z" \
+      org.opencontainers.image.created="2023-06-05T04:11:50Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.8.1-debian-11-r10" \
+      org.opencontainers.image.ref.name="2.8.2-debian-11-r0" \
       org.opencontainers.image.title="harbor-registry" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.8.1"
+      org.opencontainers.image.version="2.8.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "harbor-registry-2.8.1-4-linux-${OS_ARCH}-debian-11" \
+      "harbor-registry-2.8.2-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,7 +40,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-registry/postunpack.sh
-ENV APP_VERSION="2.8.1" \
+ENV APP_VERSION="2.8.2" \
     BITNAMI_APP_NAME="harbor-registry" \
     PATH="/opt/bitnami/harbor-registry/bin:$PATH"
 
