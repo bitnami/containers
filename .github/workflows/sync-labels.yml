@@ -1,17 +1,18 @@
-name: '[Support] Synchronize labels from the vms repository'
+name: '[Support] Synchronize labels from the containers repository'
 on:
   schedule:
     # Daily
     - cron: '0 3 * * *'
-permissions:
-  issues: write
-
+# Remove all permissions by default
+permissions: {}
 jobs:
   sync-labels:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
       - uses: EndBug/label-sync@v2
         with:
-          source-repo: bitnami/vms
+          source-repo: bitnami/containers
           delete-other-labels: false
           token: ${{ secrets.GITHUB_TOKEN }}
