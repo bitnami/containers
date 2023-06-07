@@ -64,6 +64,15 @@ pgbouncer_validate() {
         fi
     fi
 
+    # HBA Checks 
+    if [[ "$PGBOUNCER_AUTH_TYPE" == "hba" ]] ; then
+        if [[ -z "$PGBOUNCER_AUTH_HBA_FILE" ]]; then
+            print_validation_error "A hba file was not provided. You need to set this value when specifying auth_type to hba"
+        elif [[ ! -f "$PGBOUNCER_AUTH_HBA_FILE" ]]; then
+            print_validation_error "The hba file in the specified path ${PGBOUNCER_AUTH_HBA_FILE} does not exist"
+        fi
+    fi
+
     # TLS Checks (client)
     if [[ "$PGBOUNCER_CLIENT_TLS_SSLMODE" != "disable" ]]; then
         if [[ -z "$PGBOUNCER_CLIENT_TLS_CERT_FILE" ]]; then
@@ -228,6 +237,7 @@ pgbouncer_initialize() {
             "unix_socket_group:${PGBOUNCER_SOCKET_GROUP}"
             "auth_file:${PGBOUNCER_AUTH_FILE}"
             "auth_type:${PGBOUNCER_AUTH_TYPE}"
+            "auth_hba_file:${PGBOUNCER_AUTH_HBA_FILE}"
             "auth_query:${PGBOUNCER_AUTH_QUERY}"
             "pidfile:${PGBOUNCER_PID_FILE}"
             "logfile:${PGBOUNCER_LOG_FILE}"
