@@ -1,0 +1,14 @@
+{
+    "erlang": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "26.0.0-0"
+    },
+    "rabbitmq": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "3.12.0-0"
+    }
+}
