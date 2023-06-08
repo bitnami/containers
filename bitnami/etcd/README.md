@@ -49,6 +49,8 @@ You can see the equivalence between the different tags by taking a look at the `
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
 
+> Please note ARM support in branch 3.4 is experimental/unstable according to [upstream docs](https://github.com/etcd-io/website/blob/main/content/en/docs/v3.4/op-guide/supported-platform.md), therefore branch 3.4 is only supported for AMD archs while branch 3.5 supports multiarch (AMD and ARM)
+
 ## Prerequisites
 
 To run this application you need [Docker Engine](https://www.docker.com/products/docker-engine) >= `1.10.0`. [Docker Compose](https://docs.docker.com/compose/) is recommended with a version `1.6.0` or later.
