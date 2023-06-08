@@ -4,10 +4,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-05T19:45:54Z" \
+      org.opencontainers.image.created="2023-06-08T21:07:08Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.2.0-debian-11-r11" \
+      org.opencontainers.image.ref.name="8.2.0-debian-11-r12" \
       org.opencontainers.image.title="jasperreports" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="8.2.0"
@@ -26,7 +26,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "java-1.8.372-7-1-linux-${OS_ARCH}-debian-11" \
       "tomcat-9.0.75-2-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-11.20.0-1-linux-${OS_ARCH}-debian-11" \
-      "mysql-client-10.11.3-1-linux-${OS_ARCH}-debian-11" \
+      "mysql-client-10.11.4-0-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-6-linux-${OS_ARCH}-debian-11" \
       "jasperreports-8.2.0-1-linux-${OS_ARCH}-debian-11" \
     ) && \
