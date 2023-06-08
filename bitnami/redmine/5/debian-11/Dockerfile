@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-05T18:44:59Z" \
+      org.opencontainers.image.created="2023-06-08T19:29:02Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.0.5-debian-11-r28" \
+      org.opencontainers.image.ref.name="5.0.5-debian-11-r29" \
       org.opencontainers.image.title="redmine" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="5.0.5"
@@ -25,7 +25,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "yq-4.34.1-0-linux-${OS_ARCH}-debian-11" \
       "ruby-3.0.6-2-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-15.3.0-1-linux-${OS_ARCH}-debian-11" \
-      "mysql-client-10.11.3-1-linux-${OS_ARCH}-debian-11" \
+      "mysql-client-10.11.4-0-linux-${OS_ARCH}-debian-11" \
       "redmine-5.0.5-5-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
