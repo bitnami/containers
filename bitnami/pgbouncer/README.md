@@ -83,7 +83,7 @@ The Bitnami PgBouncer container requires a running PostgreSQL installation to co
 
 * `POSTGRESQL_USERNAME`: Backend PostgreSQL username. Default: **postgres**.
 * `POSTGRESQL_PASSWORD`: Backend PostgreSQL password. No defaults.
-* `POSTGRESQL_DATABASE`: Backend PostgreSQL Database name to connect to. Default: **postgres**.
+* `POSTGRESQL_DATABASE`: Backend PostgreSQL Database name to connect to. Default: **${PGBOUNCER_DATABASE}**.
 * `POSTGRESQL_HOST`: Backend PostgreSQL hostname. Default: **postgresql**.
 * `POSTGRESQL_PORT`: Backend PostgreSQL port. Default: **5432**.
 * `PGBOUNCER_SET_DATABASE_USER`: Whether to include the backend PostgreSQL username in the database string. Default **no**.
@@ -118,6 +118,8 @@ To expose the same database name as the backend, set `PGBOUNCER_DATABASE="$POSTG
 
 * `PGBOUNCER_AUTH_USER`: PgBouncer will use this user to connect to the database and query the PostgreSQL backend for a user and password. No defaults.
 * `PGBOUNCER_AUTH_QUERY`: PgBouncer will use this query to connect to the database and query the PostgreSQL backend for a user and password. No defaults.
+* `PGBOUNCER_AUTH_TYPE`: PgBouncer authentication type. Default: **md5**
+* `PGBOUNCER_AUTH_HBA_FILE`: HBA configuration file to use if auth_type is set to hba. No defaults.
 * `PGBOUNCER_USERLIST`: Specify content of the *userlist.txt* file
 * `PGBOUNCER_POOL_MODE` : PgBouncer pool mode. Allowed values: session, transaction and statement. Default: **session**.
 * `PGBOUNCER_INIT_SLEEP_TIME` : PgBouncer initialization sleep time. Default: **10**.
