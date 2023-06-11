@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-08T17:54:44Z" \
+      org.opencontainers.image.created="2023-06-11T18:11:47Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.20220314.0-debian-11-r130" \
+      org.opencontainers.image.ref.name="0.20220314.0-debian-11-r131" \
       org.opencontainers.image.title="airflow-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.20220314.0"
