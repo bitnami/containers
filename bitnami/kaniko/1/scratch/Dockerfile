@@ -12,7 +12,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "kaniko-1.10.0-0-linux-${OS_ARCH}-debian-11" \
+      "kaniko-1.11.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -36,13 +36,13 @@ ENV HOME="/root" \
     OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-05-31T15:19:22Z" \
+      org.opencontainers.image.created="2023-06-12T09:38:33Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.10.0-scratch-r0" \
+      org.opencontainers.image.ref.name="1.11.0-scratch-r0" \
       org.opencontainers.image.title="kaniko" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.10.0"
+      org.opencontainers.image.version="1.11.0"
 
 COPY prebuildfs /
 COPY rootfs /
