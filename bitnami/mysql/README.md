@@ -524,10 +524,31 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 
 ### Slow query logs
 
-By default MySQL doesn't enable [slow query log](https://dev.mysql.com/doc/refman/8.0/en/slow-query-log.html) to record the SQL queries that take a long time to perform. You can modify these settings using the following environment variables:
+By default MySQL doesn't enable [slow query log](https://dev.mysql.com/doc/refman/en/slow-query-log.html) to record the SQL queries that take a long time to perform. You can modify these settings using the following environment variables:
 
 * `MYSQL_ENABLE_SLOW_QUERY`: Whether to enable slow query logs. Default: `0`
 * `MYSQL_LONG_QUERY_TIME`: How much time, in seconds, defines a slow query. Default: `10.0`
+
+Slow queries information is logged to the `<data-dir>/<hostname>-slow.log` file by default, and you can easily check it with the `mysqldumpslow` tool ([link to docs](https://dev.mysql.com/doc/refman/en/mysqldumpslow.html)):
+
+```console
+$ docker run -d -e MYSQL_ENABLE_SLOW_QUERY=1 -e ALLOW_EMPTY_PASSWORD=yes --name my-mysql-container bitnami/mysql
+# wait a bit for the initialization process...
+$ docker exec -it my-mysql-container mysqldumpslow
+Reading mysql slow query log from /bitnami/mysql/data/<hostname>-slow.log
+Count: 1  Time=0.01s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  GRANT ALL PRIVILEGES ON *.* TO 'S'@'S' WITH GRANT OPTION
+
+Count: 1  Time=0.01s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  CREATE USER 'S'@'S'
+
+Count: 1  Time=0.01s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  DELETE FROM mysql.user WHERE user not in ('S','S')
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  flush privileges
+(...)
+```
 
 ### Slow filesystems
 

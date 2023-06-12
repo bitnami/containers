@@ -24,5 +24,5 @@ for dir in "$DB_TMP_DIR" "$DB_LOGS_DIR" "$DB_CONF_DIR" "${DB_CONF_DIR}/bitnami" 
     chmod -R g+rwX "$dir"
 done
 
-# Redirect all logging to stdout
-ln -sf /dev/stdout "$DB_LOGS_DIR/mysqld.log"
+# Redirect logging to PID 1's stdout file descriptor including database initialization logs
+ln -sf /proc/1/fd/1 "$DB_LOGS_DIR/mysqld.log"
