@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-11T00:50:32Z" \
+      org.opencontainers.image.created="2023-06-12T17:34:45Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="23.3.2-debian-11-r6" \
+      org.opencontainers.image.ref.name="23.3.3-debian-11-r0" \
       org.opencontainers.image.title="clickhouse" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="23.3.2"
+      org.opencontainers.image.version="23.3.3"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps xmlstarlet
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "clickhouse-23.3.2-3-linux-${OS_ARCH}-debian-11" \
+      "clickhouse-23.3.3-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,7 +40,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/clickhouse/postunpack.sh
-ENV APP_VERSION="23.3.2" \
+ENV APP_VERSION="23.3.3" \
     BITNAMI_APP_NAME="clickhouse" \
     PATH="/opt/bitnami/clickhouse/bin:/opt/bitnami/common/bin:$PATH" \
     clickhouseCTL_API="3"
