@@ -8,4 +8,4 @@ file:
   /opt/bitnami/mysql/logs/mysqld.log:
     exists: true
     filetype: symlink
-    linked-to: /dev/stdout
+    linked-to: /proc/1/fd/1
