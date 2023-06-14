@@ -15,13 +15,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.9.1-0"
+        "version": "1.10.0-0"
     },
     "nginx": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.25.0-1"
+        "version": "1.25.1-0"
     },
     "node": {
         "arch": "amd64",
