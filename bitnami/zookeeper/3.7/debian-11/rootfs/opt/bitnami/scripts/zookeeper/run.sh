@@ -19,7 +19,7 @@ START_COMMAND=("${ZOO_BASE_DIR}/bin/zkServer.sh" "start-foreground" "$@")
 
 info "** Starting ZooKeeper **"
 if am_i_root; then
-    exec gosu "$ZOO_DAEMON_USER" "${START_COMMAND[@]}"
+    exec_as_user "$ZOO_DAEMON_USER" "${START_COMMAND[@]}"
 else
     exec "${START_COMMAND[@]}"
 fi

@@ -17,7 +17,7 @@ set -o pipefail
 
 info "** Starting CouchDB **"
 if am_i_root; then
-    exec gosu "$COUCHDB_DAEMON_USER" "${COUCHDB_BIN_DIR}/couchdb"
+    exec_as_user "$COUCHDB_DAEMON_USER" "${COUCHDB_BIN_DIR}/couchdb"
 else
     exec "${COUCHDB_BIN_DIR}/couchdb"
 fi

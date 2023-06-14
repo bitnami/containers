@@ -20,7 +20,7 @@ __run_cmd="${KSQL_BIN_DIR}/ksql-server-start"
 __run_flags=("$KSQL_CONF_FILE" "$@")
 
 if am_i_root; then
-    exec gosu "$KSQL_DAEMON_USER" "$__run_cmd" "${__run_flags[@]}"
+    exec_as_user "$KSQL_DAEMON_USER" "$__run_cmd" "${__run_flags[@]}"
 else
     exec "$__run_cmd" "${__run_flags[@]}"
 fi

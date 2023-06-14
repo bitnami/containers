@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-27T17:54:59Z" \
+      org.opencontainers.image.created="2023-06-12T03:35:59Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.11.1-debian-11-r1" \
+      org.opencontainers.image.ref.name="2.12.1-debian-11-r8" \
       org.opencontainers.image.title="tensorflow-resnet" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.11.1"
+      org.opencontainers.image.version="2.12.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,8 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl gcc-10 libgcc-s1 libstdc++6 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "tensorflow-resnet-2.11.1-0-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-3-linux-${OS_ARCH}-debian-11" \
+      "tensorflow-resnet-2.12.1-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,9 +39,9 @@ RUN chmod g+rwX /opt/bitnami
 RUN mkdir /.local && chmod g+rwX /.local
 
 COPY rootfs /
-ENV APP_VERSION="2.11.1" \
+ENV APP_VERSION="2.12.1" \
     BITNAMI_APP_NAME="tensorflow-resnet" \
-    PATH="/opt/bitnami/tensorflow-resnet/bin:/opt/bitnami/common/bin:$PATH"
+    PATH="/opt/bitnami/tensorflow-resnet/bin:$PATH"
 
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/tensorflow-resnet/entrypoint.sh" ]

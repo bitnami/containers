@@ -3,7 +3,8 @@
     "resources": {
       "url": "{VIB_ENV_CONTAINER_URL}",
       "path": "{VIB_ENV_PATH}"
-    }
+    },
+    "runtime_parameters": "Y29tbWFuZDogWyJ0YWlsIiwgIi1mIiwgIi9kZXYvbnVsbCJd"
   },
   "phases": {
     "package": {
@@ -18,8 +19,7 @@
               }
             },
             "architectures": [
-              "linux/amd64",
-              "linux/arm64"
+              "linux/amd64"
             ]
           }
         },
@@ -33,6 +33,21 @@
     },
     "verify": {
       "actions": [
+        {
+          "action_id": "goss",
+          "params": {
+            "resources": {
+              "path": "/.vib"
+            },
+            "tests_file": "pytorch/goss/goss.yaml",
+            "vars_file": "pytorch/goss/vars.yaml",
+            "remote": {
+              "pod": {
+                "workload": "deploy-pytorch"
+              }
+            }
+          }
+        },
         {
           "action_id": "trivy",
           "params": {
@@ -54,19 +69,20 @@
         {
           "action_id": "osspi-application",
           "params": {
-            "additional_packages_file": "{VIB_ENV_PATH}/osspi-packages.json",
+            "additional_packages_file": "osspi-packages-amd64.json",
             "scan_type": "BASE_OS",
             "osm": {
+              "associated_bossd_release": "{VIB_ENV_BOSSD_RELEASE_ID}",
               "product_name": "main-catalog-{VIB_ENV_CONTAINER}",
               "product_version": "{VIB_ENV_APP_VERSION}-{VIB_ENV_OS_FLAVOUR}-container"
             },
             "resources": {
               "url": "{VIB_ENV_PACKAGES_JSON_URL}",
-              "path": "/",
+              "path": "/{VIB_ENV_PATH}",
               "authn": {
-                  "header": "Authorization",
-                  "token": "Bearer {VIB_ENV_GITHUB_TOKEN}"
-                }
+                "header": "Authorization",
+                "token": "Bearer {VIB_ENV_GITHUB_TOKEN}"
+              }
             }
           }
         }

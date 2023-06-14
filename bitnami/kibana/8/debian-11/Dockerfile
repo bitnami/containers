@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-22T07:59:39Z" \
+      org.opencontainers.image.created="2023-06-11T15:45:12Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.6.2-debian-11-r9" \
+      org.opencontainers.image.ref.name="8.8.1-debian-11-r1" \
       org.opencontainers.image.title="kibana" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="8.6.2"
+      org.opencontainers.image.version="8.8.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -20,12 +20,11 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libexpat1 libgcc-s1 libnss3 libstdc++6 procps
+RUN install_packages ca-certificates curl libgcc-s1 libnss3 libstdc++6 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "yq-4.32.2-0-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-3-linux-${OS_ARCH}-debian-11" \
-      "kibana-8.6.2-1-linux-${OS_ARCH}-debian-11" \
+      "yq-4.34.1-0-linux-${OS_ARCH}-debian-11" \
+      "kibana-8.8.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -42,7 +41,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/kibana/postunpack.sh
-ENV APP_VERSION="8.6.2" \
+ENV APP_VERSION="8.8.1" \
     BITNAMI_APP_NAME="kibana"
 
 EXPOSE 5601

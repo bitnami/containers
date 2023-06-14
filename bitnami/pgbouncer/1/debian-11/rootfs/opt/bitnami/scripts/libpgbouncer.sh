@@ -64,6 +64,15 @@ pgbouncer_validate() {
         fi
     fi
 
+    # HBA Checks 
+    if [[ "$PGBOUNCER_AUTH_TYPE" == "hba" ]] ; then
+        if [[ -z "$PGBOUNCER_AUTH_HBA_FILE" ]]; then
+            print_validation_error "A hba file was not provided. You need to set this value when specifying auth_type to hba"
+        elif [[ ! -f "$PGBOUNCER_AUTH_HBA_FILE" ]]; then
+            print_validation_error "The hba file in the specified path ${PGBOUNCER_AUTH_HBA_FILE} does not exist"
+        fi
+    fi
+
     # TLS Checks (client)
     if [[ "$PGBOUNCER_CLIENT_TLS_SSLMODE" != "disable" ]]; then
         if [[ -z "$PGBOUNCER_CLIENT_TLS_CERT_FILE" ]]; then
@@ -179,7 +188,8 @@ pgbouncer_initialize() {
     info "Configuring credentials"
     # Create credentials file
     if ! pgbouncer_is_file_external "userlist.txt"; then
-        echo "\"$POSTGRESQL_USERNAME\" \"$POSTGRESQL_PASSWORD\"" >"$PGBOUNCER_AUTH_FILE"
+        echo "\"$POSTGRESQL_USERNAME\" \"$POSTGRESQL_PASSWORD\"" > "$PGBOUNCER_AUTH_FILE"
+        echo "$PGBOUNCER_USERLIST" >> "$PGBOUNCER_AUTH_FILE"
     else
         debug "User list file mounted externally, skipping configuration"
     fi
@@ -227,6 +237,7 @@ pgbouncer_initialize() {
             "unix_socket_group:${PGBOUNCER_SOCKET_GROUP}"
             "auth_file:${PGBOUNCER_AUTH_FILE}"
             "auth_type:${PGBOUNCER_AUTH_TYPE}"
+            "auth_hba_file:${PGBOUNCER_AUTH_HBA_FILE}"
             "auth_query:${PGBOUNCER_AUTH_QUERY}"
             "pidfile:${PGBOUNCER_PID_FILE}"
             "logfile:${PGBOUNCER_LOG_FILE}"
@@ -267,18 +278,18 @@ pgbouncer_initialize() {
             local key value
             key="$(awk -F: '{print $1}' <<<"$pair")"
             value="$(awk -F: '{print $2}' <<<"$pair")"
-            ! is_empty_value "${value}" && ini-file set --section "pgbouncer" --key "${key}" --value "${value}" "$PGBOUNCER_CONF_FILE"
+            ! is_empty_value "${value}" && ini-file set --ignore-inline-comments --section "pgbouncer" --key "${key}" --value "${value}" "$PGBOUNCER_CONF_FILE"
         done
         if [[ "$PGBOUNCER_CLIENT_TLS_SSLMODE" != "disable" ]]; then
-            ini-file set --section "pgbouncer" --key "client_tls_cert_file" --value "$PGBOUNCER_CLIENT_TLS_CERT_FILE" "$PGBOUNCER_CONF_FILE"
-            ini-file set --section "pgbouncer" --key "client_tls_key_file" --value "$PGBOUNCER_CLIENT_TLS_KEY_FILE" "$PGBOUNCER_CONF_FILE"
-            ! is_empty_value "$PGBOUNCER_CLIENT_TLS_CA_FILE" && ini-file set --section "pgbouncer" --key "client_tls_ca_file" --value "$PGBOUNCER_CLIENT_TLS_CA_FILE" "$PGBOUNCER_CONF_FILE"
-            ini-file set --section "pgbouncer" --key "client_tls_ciphers" --value "$PGBOUNCER_CLIENT_TLS_CIPHERS" "$PGBOUNCER_CONF_FILE"
+            ini-file set --ignore-inline-comments --section "pgbouncer" --key "client_tls_cert_file" --value "$PGBOUNCER_CLIENT_TLS_CERT_FILE" "$PGBOUNCER_CONF_FILE"
+            ini-file set --ignore-inline-comments --section "pgbouncer" --key "client_tls_key_file" --value "$PGBOUNCER_CLIENT_TLS_KEY_FILE" "$PGBOUNCER_CONF_FILE"
+            ! is_empty_value "$PGBOUNCER_CLIENT_TLS_CA_FILE" && ini-file set --ignore-inline-comments --section "pgbouncer" --key "client_tls_ca_file" --value "$PGBOUNCER_CLIENT_TLS_CA_FILE" "$PGBOUNCER_CONF_FILE"
+            ini-file set --ignore-inline-comments --section "pgbouncer" --key "client_tls_ciphers" --value "$PGBOUNCER_CLIENT_TLS_CIPHERS" "$PGBOUNCER_CONF_FILE"
         fi
 
         if [[ "$PGBOUNCER_SERVER_TLS_SSLMODE" != "disable" ]] || ! is_empty_value "$PGBOUNCER_SERVER_TLS_CERT_FILE" || ! is_empty_value "$PGBOUNCER_SERVER_TLS_KEY_FILE"; then
-            ini-file set --section "pgbouncer" --key "server_tls_ciphers" --value "$PGBOUNCER_SERVER_TLS_CIPHERS" "$PGBOUNCER_CONF_FILE"
-            ini-file set --section "pgbouncer" --key "server_tls_protocols" --value "$PGBOUNCER_SERVER_TLS_PROTOCOLS" "$PGBOUNCER_CONF_FILE"
+            ini-file set --ignore-inline-comments --section "pgbouncer" --key "server_tls_ciphers" --value "$PGBOUNCER_SERVER_TLS_CIPHERS" "$PGBOUNCER_CONF_FILE"
+            ini-file set --ignore-inline-comments --section "pgbouncer" --key "server_tls_protocols" --value "$PGBOUNCER_SERVER_TLS_PROTOCOLS" "$PGBOUNCER_CONF_FILE"
         fi
     else
         debug "Configuration file is mounted externally, skipping configuration"

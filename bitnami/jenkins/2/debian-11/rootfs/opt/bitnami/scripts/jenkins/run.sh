@@ -19,6 +19,7 @@ if [[ -n "${JAVA_OPTS:-}" ]]; then
     read -r -a java_opts <<<"$JAVA_OPTS"
     args+=("${java_opts[@]}")
 fi
+
 args+=("-Duser.home=${JENKINS_HOME}" "-jar" "${JENKINS_BASE_DIR}/jenkins.war")
 if is_boolean_yes "$JENKINS_FORCE_HTTPS"; then
     args+=(
@@ -38,11 +39,15 @@ else
         "--httpsKeyStorePassword=${JENKINS_KEYSTORE_PASSWORD}"
     )
 fi
+if [[ -n "${JENKINS_OPTS:-}" ]]; then
+    read -r -a jenkins_opts <<<"$JENKINS_OPTS"
+    args+=("${jenkins_opts[@]}")
+fi
 args+=("$@")
 
 info "** Starting Jenkins **"
 if am_i_root; then
-    exec gosu "$JENKINS_DAEMON_USER" java "${args[@]}"
+    exec_as_user "$JENKINS_DAEMON_USER" java "${args[@]}"
 else
     exec java "${args[@]}"
 fi

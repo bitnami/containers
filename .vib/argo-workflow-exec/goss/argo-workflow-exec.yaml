@@ -1,0 +1,4 @@
+directory:
+  /opt/bitnami/argo-workflow-exec/hack/git:
+    exists: false
+

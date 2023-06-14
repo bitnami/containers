@@ -1,7 +1,0 @@
-version: '2'
-services:
-  jupyter-base-notebook:
-    image: docker.io/bitnami/jupyter-base-notebook:3
-    command: ["tail", "-f", "/dev/null"]
-    ports:
-      - 8888:8888

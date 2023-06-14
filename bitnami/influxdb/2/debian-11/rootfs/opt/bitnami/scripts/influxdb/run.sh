@@ -16,13 +16,14 @@ set -o pipefail
 . /opt/bitnami/scripts/influxdb-env.sh
 
 info "** Starting InfluxDB **"
-start_command=("${INFLUXDB_BIN_DIR}/influxd" "$@")
-am_i_root && start_command=("gosu" "$INFLUXDB_DAEMON_USER" "${start_command[@]}")
-
 if [[ -f "$INFLUXDB_CONF_FILE" ]]; then
   export INFLUXD_CONFIG_PATH=${INFLUXDB_CONF_FILE:-}
 fi
 
 export HOME=/bitnami/influxdb/
 
-exec "${start_command[@]}"
+if am_i_root; then
+    exec_as_user "$INFLUXDB_DAEMON_USER" "${INFLUXDB_BIN_DIR}/influxd" "$@"
+else
+    exec "${INFLUXDB_BIN_DIR}/influxd" "$@"
+fi

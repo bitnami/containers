@@ -1,26 +1,20 @@
 {
-    "gosu": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-3"
-    },
     "java": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.18-10-3"
+        "version": "11.0.19-7-2"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-2"
+        "version": "1.0.6-7"
     },
     "zookeeper": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.7.1-161"
+        "version": "3.7.1-165"
     }
 }

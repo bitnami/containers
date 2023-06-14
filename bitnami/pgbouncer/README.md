@@ -31,6 +31,8 @@ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
+Looking to use PgBouncer in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
 ## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
@@ -81,7 +83,7 @@ The Bitnami PgBouncer container requires a running PostgreSQL installation to co
 
 * `POSTGRESQL_USERNAME`: Backend PostgreSQL username. Default: **postgres**.
 * `POSTGRESQL_PASSWORD`: Backend PostgreSQL password. No defaults.
-* `POSTGRESQL_DATABASE`: Backend PostgreSQL Database name to connect to. Default: **postgres**.
+* `POSTGRESQL_DATABASE`: Backend PostgreSQL Database name to connect to. Default: **${PGBOUNCER_DATABASE}**.
 * `POSTGRESQL_HOST`: Backend PostgreSQL hostname. Default: **postgresql**.
 * `POSTGRESQL_PORT`: Backend PostgreSQL port. Default: **5432**.
 * `PGBOUNCER_SET_DATABASE_USER`: Whether to include the backend PostgreSQL username in the database string. Default **no**.
@@ -116,6 +118,9 @@ To expose the same database name as the backend, set `PGBOUNCER_DATABASE="$POSTG
 
 * `PGBOUNCER_AUTH_USER`: PgBouncer will use this user to connect to the database and query the PostgreSQL backend for a user and password. No defaults.
 * `PGBOUNCER_AUTH_QUERY`: PgBouncer will use this query to connect to the database and query the PostgreSQL backend for a user and password. No defaults.
+* `PGBOUNCER_AUTH_TYPE`: PgBouncer authentication type. Default: **md5**
+* `PGBOUNCER_AUTH_HBA_FILE`: HBA configuration file to use if auth_type is set to hba. No defaults.
+* `PGBOUNCER_USERLIST`: Specify content of the *userlist.txt* file
 * `PGBOUNCER_POOL_MODE` : PgBouncer pool mode. Allowed values: session, transaction and statement. Default: **session**.
 * `PGBOUNCER_INIT_SLEEP_TIME` : PgBouncer initialization sleep time. Default: **10**.
 * `PGBOUNCER_INIT_MAX_RETRIES` : PgBouncer initialization maximum retries. Default: **10**.
@@ -279,7 +284,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 Bitnami
+Copyright &copy; 2023 VMware, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

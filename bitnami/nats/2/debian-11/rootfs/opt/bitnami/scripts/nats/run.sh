@@ -21,7 +21,7 @@ args+=("$@")
 
 info "** Starting NATS **"
 if am_i_root; then
-    gosu "$NATS_DAEMON_USER" "$nats_cmd" "${args[@]}"
+    exec_as_user "$NATS_DAEMON_USER" "$nats_cmd" "${args[@]}"
 else
-    "$nats_cmd" "${args[@]}"
+    exec "$nats_cmd" "${args[@]}"
 fi

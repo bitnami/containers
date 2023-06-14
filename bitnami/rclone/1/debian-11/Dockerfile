@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-28T04:21:14Z" \
+      org.opencontainers.image.created="2023-06-12T06:19:36Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.62.2-debian-11-r2" \
+      org.opencontainers.image.ref.name="1.62.2-debian-11-r26" \
       org.opencontainers.image.title="rclone" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.62.2"
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "rclone-1.62.2-0-linux-${OS_ARCH}-debian-11" \
+      "rclone-1.62.2-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \

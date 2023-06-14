@@ -3,7 +3,8 @@
     "resources": {
       "url": "{SHA_ARCHIVE}",
       "path": "{VIB_ENV_PATH}"
-    }
+    },
+    "runtime_parameters": "Y29tbWFuZDogWyJ0YWlsIiwgIi1mIiwgIi9kZXYvbnVsbCJd"
   },
   "phases": {
     "package": {
@@ -45,6 +46,21 @@
             "package_type": [
               "OS"
             ]
+          }
+        },
+        {
+          "action_id": "goss",
+          "params": {
+            "resources": {
+              "path": "/.vib"
+            },
+            "tests_file": "redmine/goss/goss.yaml",
+            "vars_file": "redmine/goss/vars.yaml",
+            "remote": {
+              "pod": {
+                "workload": "deploy-redmine"
+              }
+            }
           }
         }
       ]

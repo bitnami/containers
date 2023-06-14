@@ -342,6 +342,19 @@ rabbitmq_print_resource_limits_configuration() {
 }
 
 ########################
+# Enable generating log to file
+# Globals:
+#   RABBITMQ_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+rabbitmq_enable_log_file() {
+    replace_in_file "$RABBITMQ_CONF_FILE" 'log\.console.*' 'log\.console = false'
+}
+
+########################
 # Creates RabbitMQ configuration file
 # Globals:
 #   RABBITMQ_*
@@ -363,6 +376,7 @@ cluster_partition_handling = ${RABBITMQ_CLUSTER_PARTITION_HANDLING}
 default_permissions.configure = .*
 default_permissions.read = .*
 default_permissions.write = .*
+log.console = true
 EOF
 
         # When loading definitions, default vhost and user/pass won't be created: https://www.rabbitmq.com/definitions.html#import-on-boot
@@ -632,7 +646,7 @@ rabbitmq_start_bg() {
     is_rabbitmq_running && return
     info "Starting RabbitMQ in background..."
     local start_command=("$RABBITMQ_BIN_DIR/rabbitmq-server")
-    am_i_root && start_command=("gosu" "$RABBITMQ_DAEMON_USER" "${start_command[@]}")
+    am_i_root && start_command=("run_as_user" "$RABBITMQ_DAEMON_USER" "${start_command[@]}")
     debug_execute "${start_command[@]}" &
     export RABBITMQ_PID="$!"
 

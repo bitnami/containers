@@ -47,6 +47,8 @@ matomo_env_vars=(
     MATOMO_SMTP_PASSWORD
     MATOMO_SMTP_AUTH
     MATOMO_SMTP_PROTOCOL
+    MATOMO_NOREPLY_NAME
+    MATOMO_NOREPLY_ADDRESS
     MATOMO_DATABASE_HOST
     MATOMO_DATABASE_PORT_NUMBER
     MATOMO_DATABASE_NAME
@@ -81,7 +83,7 @@ export MATOMO_CONF_FILE="${MATOMO_CONF_DIR}/config.ini.php"
 
 # Matomo persistence configuration
 export MATOMO_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/matomo"
-export MATOMO_DATA_TO_PERSIST="${MATOMO_DATA_TO_PERSIST:-config/config.ini.php misc plugins js}"
+export MATOMO_DATA_TO_PERSIST="${MATOMO_DATA_TO_PERSIST:-$MATOMO_BASE_DIR}"
 
 # Matomo configuration
 export MATOMO_SKIP_BOOTSTRAP="${MATOMO_SKIP_BOOTSTRAP:-}" # only used during the first initialization
@@ -121,6 +123,8 @@ MATOMO_SMTP_AUTH="${MATOMO_SMTP_AUTH:-"${SMTP_AUTH:-}"}"
 export MATOMO_SMTP_AUTH="${MATOMO_SMTP_AUTH:-}" # only used during the first initialization
 MATOMO_SMTP_PROTOCOL="${MATOMO_SMTP_PROTOCOL:-"${SMTP_PROTOCOL:-}"}"
 export MATOMO_SMTP_PROTOCOL="${MATOMO_SMTP_PROTOCOL:-}" # only used during the first initialization
+export MATOMO_NOREPLY_NAME="${MATOMO_NOREPLY_NAME:-}" # only used during the first initialization
+export MATOMO_NOREPLY_ADDRESS="${MATOMO_NOREPLY_ADDRESS:-}" # only used during the first initialization
 
 # Database configuration
 export MATOMO_DEFAULT_DATABASE_HOST="mariadb" # only used at build time

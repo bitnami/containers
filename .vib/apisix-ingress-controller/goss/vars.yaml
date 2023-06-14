@@ -1,0 +1,6 @@
+binaries:
+  - apisix-ingress-controller
+root_dir: /opt/bitnami
+version:
+  bin_name: apisix-ingress-controller
+  flag: -v

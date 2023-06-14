@@ -1,26 +1,20 @@
 {
-    "gosu": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-3"
-    },
     "harbor-registry": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.7.1-2"
+        "version": "2.8.2-0"
     },
     "harbor-registryctl": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.7.1-2"
+        "version": "2.8.2-1"
     },
     "yq": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.33.1-0"
+        "version": "4.34.1-0"
     }
 }

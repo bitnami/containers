@@ -29,6 +29,8 @@ docker-compose up
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
+Looking to use Etcd in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
 ## How to deploy Etcd in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Etcd Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/etcd).
@@ -46,6 +48,8 @@ Learn more about the Bitnami tagging policy and the difference between rolling t
 You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
 
 Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
+
+> Please note ARM support in branch 3.4 is experimental/unstable according to [upstream docs](https://github.com/etcd-io/website/blob/main/content/en/docs/v3.4/op-guide/supported-platform.md), therefore branch 3.4 is only supported for AMD archs while branch 3.5 supports multiarch (AMD and ARM)
 
 ## Prerequisites
 
@@ -213,7 +217,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 Bitnami
+Copyright &copy; 2023 VMware, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

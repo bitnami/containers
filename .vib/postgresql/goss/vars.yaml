@@ -1,0 +1,24 @@
+binaries:
+  - postgres
+  - psql
+  - pg_dump
+  - pg_dumpall
+  - pg_restore
+files:
+  - paths:
+    - /opt/bitnami/postgresql/conf/pg_hba.conf
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/postgresql
+      - /bitnami/postgresql/conf
+      - /bitnami/postgresql/conf/conf.d
+      - /docker-entrypoint-initdb.d
+      - /opt/bitnami/postgresql/conf
+      - /opt/bitnami/postgresql/conf/conf.d
+      - /opt/bitnami/postgresql/logs
+      - /opt/bitnami/postgresql/tmp
+root_dir: /opt/bitnami
+version:
+  bin_name: postgres
+  flag: --version

@@ -233,7 +233,7 @@ clickhouse_start_bg() {
     local -r cmd=("${CLICKHOUSE_BASE_DIR}/bin/clickhouse-server")
     local -r args=("--config-file=${CLICKHOUSE_CONF_FILE}" "--pid-file=${CLICKHOUSE_PID_FILE}" "--" "--listen_host=127.0.0.1")
     if am_i_root; then
-        gosu "$CLICKHOUSE_DAEMON_USER" "${cmd[@]}" "${args[@]}" >"$log_file" 2>&1 &
+        run_as_user "$CLICKHOUSE_DAEMON_USER" "${cmd[@]}" "${args[@]}" >"$log_file" 2>&1 &
     else
         "${cmd[@]}" "${args[@]}" >"$log_file" 2>&1 &
     fi

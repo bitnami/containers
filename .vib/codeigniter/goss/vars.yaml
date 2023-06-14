@@ -1,7 +1,6 @@
 binaries:
   - composer
   - php-fpm
-  - gosu
   - mysql
 directories:
   - mode: "0775"

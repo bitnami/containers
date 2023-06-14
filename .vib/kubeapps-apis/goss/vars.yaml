@@ -1,0 +1,23 @@
+binaries:
+  - kubeapps-apis
+directories:
+  - paths:
+    - /opt/bitnami/kubeapps-apis/bin
+    - /opt/bitnami/kubeapps-apis/plugins
+    - /opt/bitnami/kubeapps-apis/plugins/fluxv2-packages
+    - /opt/bitnami/kubeapps-apis/plugins/helm-packages
+    - /opt/bitnami/kubeapps-apis/plugins/kapp-controller-packages
+    - /opt/bitnami/kubeapps-apis/plugins/resources
+files:
+  - mode: "0754"
+    paths:
+      - /opt/bitnami/kubeapps-apis/plugins/fluxv2-packages/fluxv2-packages-v1alpha1-plugin.so
+      - /opt/bitnami/kubeapps-apis/plugins/helm-packages/helm-packages-v1alpha1-plugin.so
+      - /opt/bitnami/kubeapps-apis/plugins/kapp-controller-packages/kapp-controller-packages-v1alpha1-plugin.so
+      - /opt/bitnami/kubeapps-apis/plugins/resources/resources-v1alpha1-plugin.so
+  - paths:
+      - /opt/bitnami/kubeapps-apis/bin/grpc_health_probe
+root_dir: /opt/bitnami
+version:
+  bin_name: kubeapps-apis
+  flag: -v

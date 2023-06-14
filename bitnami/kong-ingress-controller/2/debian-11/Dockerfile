@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-28T06:50:24Z" \
+      org.opencontainers.image.created="2023-06-11T13:25:07Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.9.0-debian-11-r0" \
+      org.opencontainers.image.ref.name="2.10.0-debian-11-r2" \
       org.opencontainers.image.title="kong-ingress-controller" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.9.0"
+      org.opencontainers.image.version="2.10.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,8 +22,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "wait-for-port-1.0.6-2-linux-${OS_ARCH}-debian-11" \
-      "kong-ingress-controller-2.9.0-0-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.6-7-linux-${OS_ARCH}-debian-11" \
+      "kong-ingress-controller-2.10.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -39,7 +39,7 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="2.9.0" \
+ENV APP_VERSION="2.10.0" \
     BITNAMI_APP_NAME="kong-ingress-controller" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/kong-ingress-controller/bin:$PATH"
 

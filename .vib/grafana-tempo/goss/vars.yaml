@@ -1,0 +1,10 @@
+binaries:
+  - tempo
+  - tempo-cli
+root_dir: /opt/bitnami
+version:
+  bin_name: tempo
+  flag: --version
+directories:
+  - paths:
+    - /opt/bitnami/grafana-tempo/bin

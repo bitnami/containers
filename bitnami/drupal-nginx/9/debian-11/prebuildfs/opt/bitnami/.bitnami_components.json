@@ -3,36 +3,30 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.5.7-0"
-    },
-    "gosu": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-3"
+        "version": "9.5.9-2"
     },
     "mysql-client": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.6.12-2"
+        "version": "10.11.4-0"
     },
     "nginx": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.23.3-4"
+        "version": "1.25.0-1"
     },
     "php": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.17-3"
+        "version": "8.1.20-1"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-2"
+        "version": "1.0.5-6"
     }
 }

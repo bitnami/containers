@@ -4,13 +4,13 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-27T17:54:59Z" \
+      org.opencontainers.image.created="2023-06-11T23:06:45Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.9.2-debian-11-r5" \
+      org.opencontainers.image.ref.name="2.9.3-debian-11-r12" \
       org.opencontainers.image.title="spring-cloud-skipper" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.9.2"
+      org.opencontainers.image.version="2.9.3"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -20,13 +20,12 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libgcc-s1 procps
+RUN install_packages ca-certificates curl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-1.8.362-3-linux-${OS_ARCH}-debian-11" \
-      "yq-4.33.1-0-linux-${OS_ARCH}-debian-11" \
-      "spring-cloud-skipper-2.9.2-1-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-3-linux-${OS_ARCH}-debian-11" \
+      "java-17.0.7-7-2-linux-${OS_ARCH}-debian-11" \
+      "yq-4.34.1-0-linux-${OS_ARCH}-debian-11" \
+      "spring-cloud-skipper-2.9.3-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -45,7 +44,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/spring-cloud-skipper/postunpack.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
-ENV APP_VERSION="2.9.2" \
+ENV APP_VERSION="2.9.3" \
     BITNAMI_APP_NAME="spring-cloud-skipper" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:$PATH"

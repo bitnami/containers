@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-28T07:48:33Z" \
+      org.opencontainers.image.created="2023-06-12T01:44:22Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.2.1-debian-11-r14" \
+      org.opencontainers.image.ref.name="3.2.2-debian-11-r23" \
       org.opencontainers.image.title="ruby" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="3.2.1"
+      org.opencontainers.image.version="3.2.2"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
@@ -21,7 +21,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages build-essential ca-certificates curl git libcrypt1 libffi7 libreadline-dev libreadline8 libsqlite3-dev libssl-dev libssl1.1 libtinfo6 libyaml-0-2 pkg-config procps sqlite3 unzip wget zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "ruby-3.2.1-3-linux-${OS_ARCH}-debian-11" \
+      "ruby-3.2.2-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -38,7 +38,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
     sed -i 's/^PASS_MIN_DAYS.*/PASS_MIN_DAYS    0/' /etc/login.defs && \
     sed -i 's/sha512/sha512 minlen=8/' /etc/pam.d/common-password
 
-ENV APP_VERSION="3.2.1" \
+ENV APP_VERSION="3.2.2" \
     BITNAMI_APP_NAME="ruby" \
     PATH="/opt/bitnami/ruby/bin:$PATH"
 

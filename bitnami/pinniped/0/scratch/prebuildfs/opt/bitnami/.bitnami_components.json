@@ -1,9 +1,8 @@
 {
     "pinniped": {
         "arch": "amd64",
-        "digest": "4b3c7be894e7c850e706c340d94e96f78eb4158a68e7d13459d2e5ebc348c965",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.22.0-2"
+        "version": "0.23.0-1"
     }
 }

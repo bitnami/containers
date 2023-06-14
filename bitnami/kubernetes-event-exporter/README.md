@@ -26,6 +26,8 @@ docker-compose up -d
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
 
+Looking to use Kubernetes Event Exporter in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
 ## How to deploy Kubernetes Event Exporter in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Kubernetes Event Exporter Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/kubernetes-event-exporter).
@@ -76,7 +78,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 Bitnami
+Copyright &copy; 2023 VMware, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

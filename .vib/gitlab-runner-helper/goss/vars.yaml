@@ -1,0 +1,7 @@
+binaries:
+  - gitlab-runner-helper
+  - gitlab-runner-build
+root_dir: /opt/bitnami
+version:
+  bin_name: gitlab-runner-helper
+  flag: -v

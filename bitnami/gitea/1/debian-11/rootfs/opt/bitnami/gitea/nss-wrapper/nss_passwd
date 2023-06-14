@@ -1,0 +1,1 @@
+gitea:x:1001:0:Gitea:/opt/bitnami/gitea:/bin/false

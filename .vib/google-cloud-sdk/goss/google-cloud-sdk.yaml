@@ -1,0 +1,7 @@
+command:
+  check-app-version:
+    exec: gcloud --version 2>&1 | grep "Google Cloud SDK $(echo $APP_VERSION | sed -E 's|[0-9]+\.([0-9]+\.[0-9]+)$|\1|g')"
+    exit-status: 0
+file:
+  /opt/bitnami/google-cloud-sdk/platform/bundledpythonunix:
+    exists: false

@@ -237,18 +237,20 @@ is_apache_not_running() {
 # Arguments:
 #   $1 - configuration string
 #   $2 - pattern to use for checking if the configuration already exists (default: $1)
+#   $3 - Apache configuration file (default: $APACHE_CONF_FILE)
 # Returns:
 #   None
 ########################
 ensure_apache_configuration_exists() {
     local -r conf="${1:?conf missing}"
     local -r pattern="${2:-"$conf"}"
+    local -r conf_file="${3:-"$APACHE_CONF_FILE"}"
     # Enable configuration by appending to httpd.conf
-    if ! grep -E -q "$pattern" "$APACHE_CONF_FILE"; then
-        if is_file_writable "$APACHE_CONF_FILE"; then
-            cat >> "$APACHE_CONF_FILE" <<< "$conf"
+    if ! grep -E -q "$pattern" "$conf_file"; then
+        if is_file_writable "$conf_file"; then
+            cat >> "$conf_file" <<< "$conf"
         else
-            error "Could not add the following configuration to '${APACHE_CONF_FILE}:"
+            error "Could not add the following configuration to '${conf_file}:"
             error ""
             error "$(indent "$conf" 4)"
             error ""

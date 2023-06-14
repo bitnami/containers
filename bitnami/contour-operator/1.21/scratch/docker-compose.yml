@@ -1,4 +1,0 @@
-version: '2'
-services:
-  contour-operator:
-    image: docker.io/bitnami/contour-operator:1.21

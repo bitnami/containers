@@ -92,7 +92,7 @@ unset magento_env_vars
 export MAGENTO_BASE_DIR="${BITNAMI_ROOT_DIR}/magento"
 export MAGENTO_BIN_DIR="${MAGENTO_BASE_DIR}/bin"
 export MAGENTO_CONF_FILE="${MAGENTO_BASE_DIR}/app/etc/env.php"
-export PATH="${MAGENTO_BIN_DIR}:${PATH}"
+export PATH="${MAGENTO_BIN_DIR}:${BITNAMI_ROOT_DIR}/php/bin:${PATH}"
 
 # Magento persistence configuration
 export MAGENTO_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/magento"

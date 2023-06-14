@@ -1,37 +1,26 @@
 {
     "gitea": {
         "arch": "amd64",
-        "digest": "0eee2d482a13ebf314727cf1c69de45664ec1ae7be38ff73fca64efb21ce749d",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.18.5-1"
-    },
-    "gosu": {
-        "arch": "amd64",
-        "digest": "bf2b90a31df691e3648c4a41190a926bb638c3a9fa1dfcde36623ce1bfaadc23",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-3"
+        "version": "1.19.3-2"
     },
     "ini-file": {
         "arch": "amd64",
-        "digest": "c75066994058575c6092fb760bd53feeb2aabd6039e942f3904de57f5a5534dc",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.4.5-2"
+        "version": "1.4.5-6"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "d1a128e25098f793a92342efd5fa85c1075a2b21042929b269d23c6694e20c3b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-2"
+        "version": "1.0.5-6"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "66c83aadf646d230d0cb097d9fe1663911bed94fabf8cbba2a17c39f7c6ffbcc",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-2"
+        "version": "1.0.6-7"
     }
 }

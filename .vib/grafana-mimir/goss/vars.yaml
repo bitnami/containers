@@ -1,0 +1,10 @@
+binaries:
+  - mimir
+  - mimirtool
+root_dir: /opt/bitnami
+version:
+  bin_name: mimir
+  flag: --version
+directories:
+  - paths:
+    - /opt/bitnami/grafana-mimir/bin

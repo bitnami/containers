@@ -1,23 +1,14 @@
 {
-    "gosu": {
-        "arch": "amd64",
-        "digest": "deadbeef",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-3"
-    },
     "java": {
         "arch": "amd64",
-        "digest": "deadbeef",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "17.0.6-10-3"
+        "version": "17.0.7-7-2"
     },
     "neo4j": {
         "arch": "amd64",
-        "digest": "deadbeef",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.6.0-0"
+        "version": "5.8.0-0"
     }
 }

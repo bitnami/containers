@@ -21,7 +21,7 @@ declare -a args=("run" "$@")
 info "** Starting Ghost **"
 cd "$GHOST_BASE_DIR" || false
 if am_i_root; then
-    exec gosu "$GHOST_DAEMON_USER" ghost "${args[@]}"
+    exec_as_user "$GHOST_DAEMON_USER" ghost "${args[@]}"
 else
     exec ghost "${args[@]}"
 fi

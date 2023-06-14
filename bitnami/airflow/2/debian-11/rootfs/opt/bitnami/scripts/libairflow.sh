@@ -153,7 +153,7 @@ airflow_initialize() {
 airflow_execute_print_output() {
     # Run as web server user to avoid having to change permissions/ownership afterwards
     if am_i_root; then
-        gosu "$AIRFLOW_DAEMON_USER" airflow "$@"
+        run_as_user "$AIRFLOW_DAEMON_USER" airflow "$@"
     else
         airflow "$@"
     fi

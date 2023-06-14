@@ -26,7 +26,7 @@ else
     info "** Starting Spark in worker mode **"
 fi
 if am_i_root; then
-    exec gosu "$SPARK_DAEMON_USER" "$EXEC" "${ARGS[@]-}"
+    exec_as_user "$SPARK_DAEMON_USER" "$EXEC" "${ARGS[@]-}"
 else
     exec "$EXEC" "${ARGS[@]-}"
 fi

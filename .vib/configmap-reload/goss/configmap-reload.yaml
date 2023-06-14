@@ -1,0 +1,4 @@
+command:
+  check-configmap-reload-help:
+    exec: configmap-reload --help
+    exit-status: 0

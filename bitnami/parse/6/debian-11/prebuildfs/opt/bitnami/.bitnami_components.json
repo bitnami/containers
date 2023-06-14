@@ -1,32 +1,26 @@
 {
-    "gosu": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-3"
-    },
     "mongodb-shell": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.8.0-1"
+        "version": "1.9.1-0"
     },
     "node": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "16.19.1-2"
+        "version": "16.20.0-3"
     },
     "parse": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.0.0-3"
+        "version": "6.2.0-0"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-8"
+        "version": "3.9.17-0"
     }
 }

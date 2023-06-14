@@ -45,7 +45,7 @@ fi
 
 info "** Starting Mastodon ${MASTODON_MODE} **"
 if am_i_root; then
-    exec gosu "$MASTODON_DAEMON_USER" "$cmd" "${args[@]}"
+    exec_as_user "$MASTODON_DAEMON_USER" "$cmd" "${args[@]}"
 else
     exec "$cmd" "${args[@]}"
 fi

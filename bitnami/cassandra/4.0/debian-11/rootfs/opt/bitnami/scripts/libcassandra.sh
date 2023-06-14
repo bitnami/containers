@@ -364,7 +364,9 @@ cassandra_enable_auth() {
 cassandra_setup_logging() {
     if ! cassandra_is_file_external "logback.xml"; then
         replace_in_file "${CASSANDRA_CONF_DIR}/logback.xml" "system[.]log" "cassandra.log"
-        replace_in_file "${CASSANDRA_CONF_DIR}/logback.xml" "(<appender-ref\s+ref=\"ASYNCDEBUGLOG\"\s+\/>)" "<!-- \1 -->"
+        if [[ "$BITNAMI_DEBUG" = "false" ]]; then
+            replace_in_file "${CASSANDRA_CONF_DIR}/logback.xml" "(<appender-ref\s+ref=\"ASYNCDEBUGLOG\"\s+\/>)" "<!-- \1 -->"
+        fi
     else
         debug "logback.xml mounted. Skipping logging configuration"
     fi
@@ -997,7 +999,7 @@ cassandra_start_bg() {
     local -r args=("-p" "$CASSANDRA_PID_FILE" "-R" "-f")
 
     if am_i_root; then
-        gosu "$CASSANDRA_DAEMON_USER" "${cmd[@]}" "${args[@]}" >"$logger" 2>&1 &
+        run_as_user "$CASSANDRA_DAEMON_USER" "${cmd[@]}" "${args[@]}" >"$logger" 2>&1 &
     else
         "${cmd[@]}" "${args[@]}" >"$logger" 2>&1 &
     fi

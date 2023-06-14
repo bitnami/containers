@@ -34,4 +34,4 @@ done
 chmod a+x "${GITEA_WORK_DIR}/bin/gitea"
 
 render-template "$GITEA_CONF_DIR/app.ini.template" >"$GITEA_CONF_FILE"
-chmod g+rw "$GITEA_CONF_FILE"
+configure_permissions_ownership "$GITEA_CONF_FILE" -f "664" -u "$GITEA_DAEMON_USER" -g "root"

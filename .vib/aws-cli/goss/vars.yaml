@@ -1,0 +1,7 @@
+binaries:
+  - aws
+  - python
+root_dir: /opt/bitnami
+version:
+  bin_name: aws
+  flag: --version

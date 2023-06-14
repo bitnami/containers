@@ -1,0 +1,59 @@
+FROM bitnami/minideb:bullseye as builder
+
+ARG TARGETARCH
+
+ENV HOME="/root" \
+    OS_ARCH="${TARGETARCH:-amd64}"
+
+COPY prebuildfs /
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+# Install required system packages and dependencies
+RUN install_packages ca-certificates curl
+RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+    COMPONENTS=( \
+      "kaniko-1.11.0-0-linux-${OS_ARCH}-debian-11" \
+    ) && \
+    for COMPONENT in "${COMPONENTS[@]}"; do \
+      if [ ! -f "${COMPONENT}.tar.gz" ]; then \
+        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz" -O ; \
+        curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz.sha256" -O ; \
+      fi && \
+      sha256sum -c "${COMPONENT}.tar.gz.sha256" && \
+      tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+      rm -rf "${COMPONENT}".tar.gz{,.sha256} ; \
+    done
+
+RUN mkdir -p /out/kaniko/.docker /out/etc && cp /opt/bitnami/kaniko/bin/* /out/kaniko && cp /opt/bitnami/kaniko/nsswitch/nsswitch.conf /out/etc && chmod 775 /out/kaniko
+
+######
+
+FROM scratch
+
+ARG TARGETARCH
+
+ENV HOME="/root" \
+    OS_ARCH="${TARGETARCH:-amd64}"
+
+LABEL org.opencontainers.image.base.name="scratch" \
+      org.opencontainers.image.created="2023-06-12T09:38:33Z" \
+      org.opencontainers.image.description="Application packaged by VMware, Inc" \
+      org.opencontainers.image.licenses="Apache-2.0" \
+      org.opencontainers.image.ref.name="1.11.0-scratch-r0" \
+      org.opencontainers.image.title="kaniko" \
+      org.opencontainers.image.vendor="VMware, Inc." \
+      org.opencontainers.image.version="1.11.0"
+
+COPY prebuildfs /
+COPY rootfs /
+COPY --from=builder /out /
+
+ENV DOCKER_CONFIG="/kaniko/.docker" \
+    DOCKER_CREDENTIAL_GCR_CONFIG="/kaniko/.config/gcloud/docker_credential_gcr_config.json" \
+    PATH="/kaniko" \
+    SSL_CERT_DIR="/etc/ssl/certs/" \
+    USER="root"
+
+WORKDIR /workspace
+
+ENTRYPOINT [ "/kaniko/executor" ]

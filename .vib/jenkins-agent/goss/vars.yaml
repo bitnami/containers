@@ -1,0 +1,14 @@
+binaries:
+  - java
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/jenkins/home
+      - /opt/bitnami/jenkins-agent
+      - /opt/bitnami/jenkins-agent/tmp
+      - /opt/bitnami/jenkins-agent/logs
+files:
+  - paths:
+      - /opt/bitnami/jenkins-agent/agent.jar
+      - /opt/bitnami/jenkins-agent/LICENSE
+root_dir: /opt/bitnami

@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-27T23:55:54Z" \
+      org.opencontainers.image.created="2023-06-11T16:29:02Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.19.1-debian-11-r50" \
+      org.opencontainers.image.ref.name="0.20.0-debian-11-r18" \
       org.opencontainers.image.title="jsonnet" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.19.1"
+      org.opencontainers.image.version="0.20.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libgcc-s1 libstdc++6 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "jsonnet-0.19.1-3-linux-${OS_ARCH}-debian-11" \
+      "jsonnet-0.20.0-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -33,13 +33,13 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
       rm -rf "${COMPONENT}".tar.gz{,.sha256} ; \
     done
-RUN apt-get autoremove --purge -y curl ca-certificates && \
+RUN apt-get autoremove --purge -y ca-certificates curl && \
     apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 RUN chmod +x /opt/bitnami/jsonnet/bin/jsonnet
-ENV APP_VERSION="0.19.1" \
+ENV APP_VERSION="0.20.0" \
     BITNAMI_APP_NAME="jsonnet" \
     PATH="/opt/bitnami/jsonnet/bin:$PATH"
 

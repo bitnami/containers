@@ -1,5 +1,0 @@
-version: '2'
-
-services:
-  multus-cni:
-    image: docker.io/bitnami/multus-cni:3

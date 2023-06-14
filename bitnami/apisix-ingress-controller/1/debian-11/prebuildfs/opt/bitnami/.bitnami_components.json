@@ -1,0 +1,20 @@
+{
+    "apisix-ingress-controller": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.6.1-1"
+    },
+    "render-template": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.5-6"
+    },
+    "yq": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "4.34.1-0"
+    }
+}

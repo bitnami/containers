@@ -1,0 +1,13 @@
+binaries:
+  - java
+  - schema-registry-start
+directories:
+  - mode: "0775"
+    paths:
+      - /opt/bitnami/schema-registry/etc
+      - /opt/bitnami/schema-registry/logs
+      - /opt/bitnami/schema-registry/certs
+  - paths:
+      - /opt/bitnami/schema-registry/etc/schema-registry
+      - /opt/bitnami/schema-registry/share/java/schema-registry
+root_dir: /opt/bitnami

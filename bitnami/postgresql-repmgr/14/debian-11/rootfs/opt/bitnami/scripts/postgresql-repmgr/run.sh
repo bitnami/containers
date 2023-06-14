@@ -23,7 +23,7 @@ postgresql_start_bg true
 info "** Starting repmgrd **"
 # TODO: properly test running the container as root
 if am_i_root; then
-    exec gosu "$POSTGRESQL_DAEMON_USER" "$repmgr_cmd" "${repmgr_flags[@]}"
+    exec_as_user "$POSTGRESQL_DAEMON_USER" "$repmgr_cmd" "${repmgr_flags[@]}"
 else
     exec "$repmgr_cmd" "${repmgr_flags[@]}"
 fi

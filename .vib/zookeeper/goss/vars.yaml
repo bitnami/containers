@@ -1,0 +1,18 @@
+binaries:
+  - java
+  - wait-for-port
+  - zkServer.sh
+  - zkCli.sh
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/zookeeper/data
+      - /opt/bitnami/zookeeper/conf
+      - /opt/bitnami/zookeeper/logs
+files:
+  - paths:
+      - /opt/bitnami/base/functions
+root_dir: /opt/bitnami
+version:
+  bin_name: zkServer.sh
+  flag: version

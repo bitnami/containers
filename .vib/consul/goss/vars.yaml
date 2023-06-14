@@ -1,0 +1,15 @@
+binaries:
+  - consul
+  - render-template
+directories:
+  - mode: "0775"
+    paths:
+      - /opt/bitnami/consul/conf
+      - /bitnami/consul
+      - /opt/bitnami/consul/logs
+      - /opt/bitnami/consul/tmp
+      - /opt/bitnami/consul/certificates
+root_dir: /opt/bitnami
+version:
+  bin_name: consul
+  flag: --version

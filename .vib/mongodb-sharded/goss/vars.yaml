@@ -1,0 +1,26 @@
+binaries:
+  - mongod
+  - mongosh
+  - yq
+  - wait-for-port
+  - render-template
+files:
+  - mode: "0664"
+    paths:
+    - /.dbshell
+    - /.mongorc.js
+    - /.mongoshrc.js
+directories:
+  - mode: "0775"
+    paths:
+      - /.mongodb
+      - /bitnami/mongodb
+      - /bitnami/mongodb/data
+      - /opt/bitnami/mongodb/tmp
+      - /opt/bitnami/mongodb/logs
+      - /opt/bitnami/mongodb/conf
+      - /docker-entrypoint-initdb.d
+root_dir: /opt/bitnami
+version:
+  bin_name: mongod
+  flag: --version

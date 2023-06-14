@@ -142,7 +142,7 @@ elasticsearch_start() {
 
     debug "Starting Elasticsearch..."
     local command=("${ELASTICSEARCH_BASE_DIR}/bin/elasticsearch" "-d" "-p" "${ELASTICSEARCH_TMP_DIR}/elasticsearch.pid")
-    am_i_root && command=("gosu" "$ELASTICSEARCH_DAEMON_USER" "${command[@]}")
+    am_i_root && command=("run_as_user" "$ELASTICSEARCH_DAEMON_USER" "${command[@]}")
     if [[ "$BITNAMI_DEBUG" = true ]]; then
         "${command[@]}" &
     else
@@ -891,7 +891,7 @@ elasticsearch_custom_init_scripts() {
 #########################
 elasticsearch_get_version() {
     local -a elasticsearch_cmd=("elasticsearch" "--version")
-    am_i_root && elasticsearch_cmd=("gosu" "$ELASTICSEARCH_DAEMON_USER" "${elasticsearch_cmd[@]}")
+    am_i_root && elasticsearch_cmd=("run_as_user" "$ELASTICSEARCH_DAEMON_USER" "${elasticsearch_cmd[@]}")
     if [[ -f "$ELASTICSEARCH_CONF_FILE" ]]; then
         ES_JAVA_OPTS="-Xms1m -Xmx20m" "${elasticsearch_cmd[@]}" | grep Version: | awk -F "," '{print $1}' | awk -F ":" '{print $2}'
     else

@@ -1,0 +1,8 @@
+binaries:
+  - haproxy
+  - dataplaneapi
+  - lua
+root_dir: /opt/bitnami
+version:
+  bin_name: haproxy
+  flag: -v

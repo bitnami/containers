@@ -5,14 +5,13 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 COPY prebuildfs /
-
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "kube-rbac-proxy-0.14.0-3-linux-${OS_ARCH}-debian-11" \
+      "kube-rbac-proxy-0.14.2-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -33,13 +32,13 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-03-22T01:03:03Z" \
+      org.opencontainers.image.created="2023-06-05T15:51:01Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.14.0-scratch-r7" \
+      org.opencontainers.image.ref.name="0.14.2-scratch-r0" \
       org.opencontainers.image.title="kube-rbac-proxy" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.14.0"
+      org.opencontainers.image.version="0.14.2"
 
 COPY prebuildfs /
 COPY rootfs /

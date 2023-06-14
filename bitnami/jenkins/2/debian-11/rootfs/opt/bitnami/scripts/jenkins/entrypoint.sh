@@ -32,6 +32,7 @@ if ! am_i_root; then
         echo "jenkins:x:$(id -u):$(id -g):Jenkins:${JENKINS_HOME}:/bin/false" >"$NSS_WRAPPER_PASSWD"
         echo "jenkins:x:$(id -g):" >"$NSS_WRAPPER_GROUP"
         chmod 400 "$NSS_WRAPPER_PASSWD" "$NSS_WRAPPER_GROUP"
+        export HOME="$JENKINS_HOME"
     fi
 fi
 

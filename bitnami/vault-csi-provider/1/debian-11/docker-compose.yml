@@ -1,0 +1,5 @@
+version: '2'
+
+services:
+  vault-csi-provider:
+    image: docker.io/bitnami/vault-csi-provider:1

@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-27T16:53:46Z" \
+      org.opencontainers.image.created="2023-06-12T02:02:24Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.6.3-debian-11-r2" \
+      org.opencontainers.image.ref.name="0.6.3-debian-11-r28" \
       org.opencontainers.image.title="metrics-server" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.6.3"
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "metrics-server-0.6.3-0-linux-${OS_ARCH}-debian-11" \
+      "metrics-server-0.6.3-4-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \

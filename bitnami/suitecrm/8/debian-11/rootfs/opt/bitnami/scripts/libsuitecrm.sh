@@ -234,7 +234,7 @@ suitecrm_conf_set() {
     # Check if the configuration exists in the file
     if grep -q -E "$sanitized_pattern" "$SUITECRM_CONF_FILE"; then
         # It exists, so replace the line
-        replace_in_file "${SUITECRM_BASE_DIR}/config.php" "('${sanitized_pattern}' => ').*(',)" "\1${value}\2"
+        replace_in_file "$SUITECRM_CONF_FILE" "('${sanitized_pattern}' => ').*(',)" "\1${value}\2"
     else
         # The SuiteCRM configuration file includes all supported keys, but because of its format,
         # we cannot append contents to the end. We can assume thi
@@ -468,7 +468,7 @@ suitecrm_execute() {
     local -a cmd=("php" "${SUITECRM_BASE_DIR}/bin/console" "$@")
     # Run as web server user to avoid having to change permissions/ownership afterwards
     if am_i_root; then
-        debug_execute gosu "$WEB_SERVER_DAEMON_USER" "${cmd[@]}"
+        debug_execute run_as_user "$WEB_SERVER_DAEMON_USER" "${cmd[@]}"
     else
         debug_execute "${cmd[@]}"
     fi

@@ -3,18 +3,18 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "16.19.1-2"
+        "version": "16.20.0-3"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-8"
+        "version": "3.9.17-0"
     },
     "supabase-postgres-meta": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.61.0-0"
+        "version": "0.66.3-0"
     }
 }

@@ -1,0 +1,16 @@
+file:
+  /opt/bitnami/mariadb/conf/my.cnf:
+    exists: true
+    filetype: file
+    contains:
+      - "socket=/opt/bitnami/mariadb/tmp/mysql.sock"
+      - "wsrep_provider=/opt/bitnami/mariadb/lib/libgalera_smm.so"
+      - "plugin_load_add = auth_pam"
+  /opt/bitnami/mariadb/lib/plugin:
+    exists: true
+    filetype: symlink
+    linked-to: /opt/bitnami/mariadb/plugin
+  /opt/bitnami/mariadb/logs/mysqld.log:
+    exists: true
+    filetype: symlink
+    linked-to: /dev/stdout

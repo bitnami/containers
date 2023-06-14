@@ -5,13 +5,13 @@ ARG LOGSTASH_PLUGINS
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-22T07:58:52Z" \
+      org.opencontainers.image.created="2023-06-11T13:45:04Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.6.2-debian-11-r9" \
+      org.opencontainers.image.ref.name="8.8.1-debian-11-r1" \
       org.opencontainers.image.title="logstash" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="8.6.2"
+      org.opencontainers.image.version="8.8.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -24,10 +24,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-11.0.18-10-3-linux-${OS_ARCH}-debian-11" \
-      "yq-4.32.2-0-linux-${OS_ARCH}-debian-11" \
-      "logstash-8.6.2-1-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-3-linux-${OS_ARCH}-debian-11" \
+      "java-17.0.7-7-2-linux-${OS_ARCH}-debian-11" \
+      "yq-4.34.1-0-linux-${OS_ARCH}-debian-11" \
+      "logstash-8.8.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -46,7 +45,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/logstash/postunpack.sh
-ENV APP_VERSION="8.6.2" \
+ENV APP_VERSION="8.8.1" \
     BITNAMI_APP_NAME="logstash" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/common/bin:/opt/bitnami/logstash/bin:$PATH"

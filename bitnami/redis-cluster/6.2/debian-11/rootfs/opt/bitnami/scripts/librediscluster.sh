@@ -143,7 +143,7 @@ redis_cluster_create() {
 
     for node in "${nodes[@]}"; do
         read -r -a host_and_port <<< "$(to_host_and_port "$node")"
-        wait_command="timeout -v 5 redis-cli -h ${host_and_port[0]} -p ${host_and_port[1]} ping"
+        wait_command="timeout 5 redis-cli -h ${host_and_port[0]} -p ${host_and_port[1]} ping"
         if is_boolean_yes "$REDIS_TLS_ENABLED"; then
             wait_command="${wait_command:0:-5} --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE} ping"
         fi
@@ -204,7 +204,7 @@ redis_cluster_update_ips() {
     read -ra nodes <<< "$(tr ',;' ' ' <<< "${REDIS_NODES}")"
     declare -A host_2_ip_array # Array to map hosts and IPs
     # Update the IPs when a number of nodes > quorum change their IPs
-    if [[ ! -f "${REDIS_DATA_DIR}/nodes.sh" ]]; then
+    if [[ ! -f "${REDIS_DATA_DIR}/nodes.sh" || ! -f "${REDIS_DATA_DIR}/nodes.conf" ]]; then
         # It is the first initialization so store the nodes
         for node in "${nodes[@]}"; do
             read -r -a host_and_port <<< "$(to_host_and_port "$node")"

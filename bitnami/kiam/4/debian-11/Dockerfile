@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-28T04:37:27Z" \
+      org.opencontainers.image.created="2023-06-11T16:49:08Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.2.0-debian-11-r101" \
+      org.opencontainers.image.ref.name="4.2.0-debian-11-r125" \
       org.opencontainers.image.title="kiam" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="4.2.0"
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl iptables procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "kiam-4.2.0-158-linux-${OS_ARCH}-debian-11" \
+      "kiam-4.2.0-160-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \

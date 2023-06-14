@@ -28,7 +28,7 @@ if is_boolean_yes "$KONG_EXIT_AFTER_MIGRATE"; then
 else
     info "** Starting Kong **"
     if am_i_root; then
-        exec gosu "$KONG_DAEMON_USER" kong start
+        exec_as_user "$KONG_DAEMON_USER" kong start
     else
         exec kong start
     fi

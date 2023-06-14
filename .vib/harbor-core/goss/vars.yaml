@@ -1,0 +1,13 @@
+binaries:
+  - harbor_core
+  - ini-file
+  - wait-for-port
+directories:
+  - paths:
+      - /opt/bitnami/harbor-core/views
+      - /opt/bitnami/harbor-core/migrations
+      - /opt/bitnami/harbor-core/icons
+files:
+  - paths:
+      - /opt/bitnami/harbor-core/UIVERSION
+root_dir: /opt/bitnami

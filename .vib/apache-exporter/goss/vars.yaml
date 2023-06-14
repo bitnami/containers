@@ -1,0 +1,6 @@
+binaries:
+  - apache_exporter
+root_dir: /opt/bitnami
+version:
+  bin_name: apache_exporter
+  flag: --version

@@ -28,7 +28,7 @@ flags+=("$@")
 
 info "** Starting PgBouncer **"
 if am_i_root; then
-    exec gosu "$PGBOUNCER_DAEMON_USER" "$cmd" "${flags[@]}"
+    exec_as_user "$PGBOUNCER_DAEMON_USER" "$cmd" "${flags[@]}"
 else
     exec "$cmd" "${flags[@]}"
 fi

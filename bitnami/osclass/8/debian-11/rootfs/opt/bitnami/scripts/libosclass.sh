@@ -147,7 +147,7 @@ osclass_initialize() {
             # - The ampersand ('&') is escaped due to sed replacing any non-escaped ampersand characters with the matched string
             # - For the replacement text to be multi-line, an \ needs to be specified to escape the newline character
             local -r conf_to_replace="if (empty(\$_SERVER['HTTP_HOST'])) {\\
-    define('WEB_PATH', 'http://127.0.0.1:${WEB_SERVER_HTTP_PORT_NUMBER}/');\\
+    define('WEB_PATH', 'http://127.0.0.1:${WEB_SERVER_HTTP_PORT_NUMBER:-"$WEB_SERVER_DEFAULT_HTTP_PORT_NUMBER"}/');\\
 } else if (isset(\$_SERVER['HTTPS']) \&\& \$_SERVER['HTTPS'] == 'on') {\\
     define('WEB_PATH','https://' . \$_SERVER['HTTP_HOST'] . '/');\\
 } else {\\

@@ -155,7 +155,7 @@ wildfly_add_user() {
         "-sc" "$WILDFLY_CONF_DIR"          # Location of the server config directory
     )
     if am_i_root; then
-        debug_execute gosu "$WILDFLY_DAEMON_USER" "${WILDFLY_BIN_DIR}/add-user.sh" "${args[@]}"
+        debug_execute run_as_user "$WILDFLY_DAEMON_USER" "${WILDFLY_BIN_DIR}/add-user.sh" "${args[@]}"
     else
         debug_execute "${WILDFLY_BIN_DIR}/add-user.sh" "${args[@]}"
     fi

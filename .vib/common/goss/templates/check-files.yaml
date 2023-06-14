@@ -6,19 +6,23 @@
 #   - .Vars.files.paths (Array)
 # Optional vars:
 #   - .Vars.files.mode (String)
+#   - .Vars.files.owner (String)
+#   - .Vars.files.group (String)
 ########################
 file:
-  {{ range .Vars.files }}
-  {{ $mode := "" }}
-  {{ if contains "mode:" (. | toString) }}
-  {{ $mode = .mode }}
-  {{ end }}
-  {{ range $file := .paths }}
-  {{ $file }}:
+  {{ range $files := .Vars.files }}
+  {{ range $path := .paths }}
+  {{ $path }}:
     exists: true
     filetype: file
-    {{ if $mode }}
-    mode: "{{ $mode }}"
+    {{ if and (index $files "mode") }}
+    mode: "{{ printf "%s" $files.mode }}"
+    {{ end }}
+    {{ if and (index $files "owner") }}
+    owner: {{ printf "%s" $files.owner }}
+    {{ end }}
+    {{ if and (index $files "group") }}
+    group: {{ printf "%s" $files.group }}
     {{ end }}
   {{ end }}
   {{ end }}

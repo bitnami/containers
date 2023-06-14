@@ -202,18 +202,19 @@ EOF
             ini-file set -s "mail" -k "password" -v "$MATOMO_SMTP_PASSWORD" "$MATOMO_CONF_FILE"
             ini-file set -s "mail" -k "type" -v "$MATOMO_SMTP_AUTH" "$MATOMO_CONF_FILE"
             ini-file set -s "mail" -k "encryption" -v "$MATOMO_SMTP_PROTOCOL" "$MATOMO_CONF_FILE"
+            # Optional noreply name and address
+            if ! is_empty_value "$MATOMO_NOREPLY_NAME"; then
+                ini-file set -s "General" -k "noreply_email_name" -v "$MATOMO_NOREPLY_NAME" "$MATOMO_CONF_FILE"
+            fi
+            if ! is_empty_value "$MATOMO_NOREPLY_ADDRESS"; then
+                ini-file set -s "General" -k "noreply_email_address" -v "$MATOMO_NOREPLY_ADDRESS" "$MATOMO_CONF_FILE"
+            fi
         fi
 
         info "Persisting Matomo installation"
         persist_app "$app_name" "$MATOMO_DATA_TO_PERSIST"
     else
         info "Persisted Matomo installation detected"
-        # Update default plugins
-        info "Updating default plugins in persisted data"
-        rsync -a "$MATOMO_BASE_DIR"/plugins/ "$MATOMO_VOLUME_DIR"/plugins/
-        # Update default js files
-        info "Updating default js scripts in persisted data"
-        rsync -a "$MATOMO_BASE_DIR"/js/ "$MATOMO_VOLUME_DIR"/js/
         info "Restoring Matomo installation"
         restore_persisted_app "$app_name" "$MATOMO_DATA_TO_PERSIST"
         info "Trying to connect to the database server"

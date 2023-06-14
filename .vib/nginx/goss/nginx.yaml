@@ -33,11 +33,6 @@ file:
     contains:
       - /Unset.*HTTP_PROXY/
 command:
-  check-app-version:
-    exec: {{ .Vars.version.bin_name }} {{ .Vars.version.flag }} 2>&1
-    exit-status: 0
-    stdout:
-    - {{ .Env.APP_VERSION }}
   test-config:
     exec: nginx -t
     exit-status: 0

@@ -19,7 +19,7 @@ info "** Starting ejbca **"
 start_command=("${EJBCA_WILDFLY_BIN_DIR}/standalone.sh" "-b" "0.0.0.0")
 
 if am_i_root; then
-    exec gosu "$EJBCA_DAEMON_USER" "${start_command[@]}"
+    exec_as_user "$EJBCA_DAEMON_USER" "${start_command[@]}"
 else
     exec "${start_command[@]}"
 fi

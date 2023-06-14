@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-28T02:52:11Z" \
+      org.opencontainers.image.created="2023-06-12T00:20:05Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.21.4-1-debian-11-r102" \
+      org.opencontainers.image.ref.name="1.21.4-1-debian-11-r126" \
       org.opencontainers.image.title="openresty" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.21.4-1"
@@ -22,8 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libbrotli1 libbsd0 libcrypt1 libdeflate0 libexpat1 libfontconfig1 libfreetype6 libgcc-s1 libgcrypt20 libgd3 libgeoip1 libgpg-error0 libicu67 libjbig0 libjpeg62-turbo liblzma5 libmd0 libpcre3 libpng16-16 libssl1.1 libstdc++6 libtiff5 libuuid1 libwebp6 libx11-6 libxau6 libxcb1 libxdmcp6 libxml2 libxpm4 libxslt1.1 libzstd1 perl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "openresty-1.21.4-1-160-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-3-linux-${OS_ARCH}-debian-11" \
+      "openresty-1.21.4-1-163-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -42,7 +41,7 @@ COPY rootfs /
 RUN /opt/bitnami/scripts/openresty/postunpack.sh
 ENV APP_VERSION="1.21.4-1" \
     BITNAMI_APP_NAME="openresty" \
-    PATH="/opt/bitnami/openresty/bin:/opt/bitnami/openresty/luajit/bin:/opt/bitnami/common/bin:$PATH"
+    PATH="/opt/bitnami/openresty/bin:/opt/bitnami/openresty/luajit/bin:$PATH"
 
 EXPOSE 8080 8443
 

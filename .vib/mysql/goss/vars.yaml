@@ -1,0 +1,24 @@
+binaries:
+  - ini-file
+  - mysql
+  - mysql_config
+  - mysqld_safe
+  - mysqldumpslow
+  - mysqld_multi
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/mysql
+      - /bitnami/mysql/data
+      - /opt/bitnami/mysql/conf
+      - /opt/bitnami/mysql/conf/bitnami
+      - /opt/bitnami/mysql/logs
+      - /opt/bitnami/mysql/tmp
+      - /.mysqlsh
+files:
+  - paths:
+      - /opt/bitnami/mysql/lib/plugin/authentication_ldap_sasl_client.so
+root_dir: /opt/bitnami
+version:
+  bin_name: mysql
+  flag: --version

@@ -1,0 +1,6 @@
+command:
+  check-notification-controller-binary:
+    exec: notification-controller --help
+    exit-status: 2
+    stderr:
+      - "Usage of notification-controller"

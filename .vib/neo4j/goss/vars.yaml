@@ -1,0 +1,27 @@
+binaries:
+  - cypher-shell
+  - java
+  - neo4j
+  - neo4j-admin
+directories:
+  - mode: "0555"
+    paths:
+      - /bitnami/neo4j/import
+      - /bitnami/neo4j/certificates
+      - /bitnami/neo4j/conf
+      - /bitnami/neo4j/plugins
+      - /opt/bitnami/neo4j/lib
+      - /docker-entrypoint-initdb.d
+  - mode: "0775"
+    paths:
+      - /bitnami/neo4j/data
+      - /bitnami/neo4j/metrics
+      - /opt/bitnami/neo4j/conf
+      - /opt/bitnami/neo4j/plugins
+      - /opt/bitnami/neo4j/logs
+      - /opt/bitnami/neo4j/run
+      - /opt/bitnami/neo4j/.home
+root_dir: /opt/bitnami
+version:
+  bin_name: neo4j
+  flag: --version

@@ -1,23 +1,14 @@
 {
-    "gosu": {
-        "arch": "amd64",
-        "digest": "deadbeef",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-3"
-    },
     "redis": {
         "arch": "amd64",
-        "digest": "deadbeef",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.2.11-1"
+        "version": "6.2.12-1"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "deadbeef",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-2"
+        "version": "1.0.6-7"
     }
 }

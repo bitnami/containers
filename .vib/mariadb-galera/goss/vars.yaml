@@ -1,0 +1,27 @@
+binaries:
+  - mysql
+  - mysqld
+  - ini-file
+files:
+  - mode: "0660"
+    paths:
+    - /etc/nslcd.conf
+  - paths:
+    - /etc/pam.d/mariadb
+    - /opt/bitnami/mariadb/plugin/auth_pam.so
+    - /opt/bitnami/mariadb/lib/libgalera_smm.so
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/mariadb
+      - /bitnami/mariadb/data
+      - /bitnami/mariadb/.bootstrap
+      - /opt/bitnami/mariadb/conf
+      - /opt/bitnami/mariadb/conf/bitnami
+      - /opt/bitnami/mariadb/logs
+      - /opt/bitnami/mariadb/tmp
+      - /var/run/nslcd
+root_dir: /opt/bitnami
+version:
+  bin_name: mysqld
+  flag: --version

@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-27T22:36:58Z" \
+      org.opencontainers.image.created="2023-06-11T22:19:57Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.38.3-debian-11-r3" \
+      org.opencontainers.image.ref.name="0.41.0-debian-11-r15" \
       org.opencontainers.image.title="trivy" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.38.3"
+      org.opencontainers.image.version="0.41.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "trivy-0.38.3-1-linux-${OS_ARCH}-debian-11" \
+      "trivy-0.41.0-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -39,7 +39,7 @@ RUN apt-get autoremove --purge -y curl && \
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /.cache && chmod g+rwX /.cache
 
-ENV APP_VERSION="0.38.3" \
+ENV APP_VERSION="0.41.0" \
     BITNAMI_APP_NAME="trivy" \
     PATH="/opt/bitnami/trivy/bin:$PATH"
 

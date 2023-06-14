@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-27T23:00:08Z" \
+      org.opencontainers.image.created="2023-06-13T11:01:23Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.0.0-debian-11-r8" \
+      org.opencontainers.image.ref.name="2.0.2-debian-11-r14" \
       org.opencontainers.image.title="cosign" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.0.0"
+      org.opencontainers.image.version="2.0.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "cosign-2.0.0-1-linux-${OS_ARCH}-debian-11" \
+      "cosign-2.0.2-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -38,9 +38,10 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir -p "/cosign-keys" && chmod -R 777 "/cosign-keys"
-RUN mkdir /.sigstore && chmod g+rwX /.sigstore
+RUN mkdir "/.docker" && chmod g+rwX "/.docker"
+RUN mkdir "/.sigstore" && chmod g+rwX "/.sigstore"
 
-ENV APP_VERSION="2.0.0" \
+ENV APP_VERSION="2.0.2" \
     BITNAMI_APP_NAME="cosign" \
     PATH="/opt/bitnami/cosign/bin:$PATH"
 

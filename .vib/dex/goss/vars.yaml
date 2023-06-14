@@ -1,0 +1,10 @@
+binaries:
+  - dex
+directories:
+  - mode: "0755"
+    paths:
+      - /opt/bitnami/dex/web
+root_dir: /opt/bitnami
+version:
+  bin_name: dex
+  flag: version

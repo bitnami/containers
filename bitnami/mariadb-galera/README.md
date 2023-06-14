@@ -33,6 +33,8 @@ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
+Looking to use MariaDB Galera in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
 ## How to deploy MariaDB Galera in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami MariaDB Galera Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/mariadb-galera).
@@ -466,7 +468,7 @@ In the above command a new node is created and configured to join the bootstrapp
 
 You now have a two node MariaDB Galera cluster up and running. Write to any node of the cluster are automatically propagated to every node. You can scale the cluster by adding/removing slaves without incurring any downtime.
 
-> **Important**: If you need to stop the MariaDB Galera cluster, ensure you stop the bootstrap node only after you have stopped all other nodes in the cluster. This ensure you do not loose any write that may have occurred while the nodes were being stopped.
+> **Important**: If you need to stop the MariaDB Galera cluster, ensure you stop the bootstrap node only after you have stopped all other nodes in the cluster. This ensure you do not lose any write that may have occurred while the nodes were being stopped.
 
 ### Slow filesystems
 
@@ -709,7 +711,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 Bitnami
+Copyright &copy; 2023 VMware, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

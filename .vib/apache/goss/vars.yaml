@@ -1,6 +1,5 @@
 binaries:
   - httpd
-  - gosu
   - render-template
 files:
   - paths:

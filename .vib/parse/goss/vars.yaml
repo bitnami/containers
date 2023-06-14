@@ -1,0 +1,19 @@
+binaries:
+  - node
+  - parse-server
+  - python
+  - mongosh
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/parse
+      - /opt/bitnami/parse
+      - /opt/bitnami/parse/lib
+      - /opt/bitnami/parse/logs
+      - /opt/bitnami/parse/public_html
+      - /opt/bitnami/parse/tmp
+      - /opt/bitnami/parse/views
+files:
+  - paths:
+      - /opt/bitnami/parse/package.json
+root_dir: /opt/bitnami

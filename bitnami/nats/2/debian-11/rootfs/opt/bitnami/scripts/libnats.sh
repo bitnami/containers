@@ -70,7 +70,7 @@ nats_start_bg() {
     is_nats_running && return
     info "Starting NATS in background"
     if am_i_root; then
-        gosu "$NATS_DAEMON_USER" "$nats_cmd" "${args[@]}" >/dev/null 2>&1 &
+        run_as_user "$NATS_DAEMON_USER" "$nats_cmd" "${args[@]}" >/dev/null 2>&1 &
     else
         "$nats_cmd" "${args[@]}" >/dev/null 2>&1 &
     fi
@@ -179,6 +179,23 @@ nats_validate() {
 nats_initialize() {
     info "Initializing NATS"
 
+    # Generate sample certs in case they do not exist
+    # Generate SSL certs (without a passphrase)
+    if [[ ! -f "$NATS_CONF_DIR/certs/server.crt" ]]; then
+        info "Generating sample certificates"
+        ensure_dir_exists "${NATS_CONF_DIR}/certs"
+        SSL_KEY_FILE="${NATS_CONF_DIR}/certs/server.key"
+        SSL_CERT_FILE="${NATS_CONF_DIR}/certs/server.crt"
+        SSL_CSR_FILE="${NATS_CONF_DIR}/certs/server.csr"
+        SSL_SUBJ="/CN=example.com"
+        SSL_EXT="subjectAltName=DNS:example.com,DNS:www.example.com,IP:127.0.0.1"
+        rm -f "$SSL_KEY_FILE" "$SSL_CERT_FILE"
+        openssl genrsa -out "$SSL_KEY_FILE" 4096
+        openssl req -new -sha256 -out "$SSL_CSR_FILE" -key "$SSL_KEY_FILE" -nodes -subj "$SSL_SUBJ" -addext "$SSL_EXT"
+        openssl x509 -req -sha256 -in "$SSL_CSR_FILE" -signkey "$SSL_KEY_FILE" -out "$SSL_CERT_FILE" -days 1825 -extfile <(echo -n "$SSL_EXT")
+        rm -f "$SSL_CSR_FILE"
+    fi
+
     # Ensure NATS daemon user has proper permissions on data directory when runnint container as "root"
     if am_i_root; then
         info "Configuring file permissions for NATS"
@@ -198,12 +215,12 @@ nats_initialize() {
         info "Generating config file based one environment variables settings"
         # ref: https://docs.nats.io/nats-streaming-server/configuring/cfgfile
         enable_auth="$(is_boolean_yes "$NATS_ENABLE_AUTH" && echo true)" \
-        token="$([[ -n "$NATS_TOKEN" ]] && echo true)" \
-        enable_tls="$(is_boolean_yes "$NATS_ENABLE_TLS" && echo true)" \
-        enable_cluster="$(is_boolean_yes "$NATS_ENABLE_CLUSTER" && echo true)" \
-        cluster_token="$([[ -n "$NATS_CLUSTER_TOKEN" ]] && echo true)" \
-        cluster_routes="$([[ "${#routes[@]}" -gt 0 ]] && printf '%s\n' "${routes[@]}")" \
-        render-template "${BITNAMI_ROOT_DIR}/scripts/nats/bitnami-templates/server.conf.tpl" > "$NATS_CONF_FILE"
+            token="$([[ -n "$NATS_TOKEN" ]] && echo true)" \
+            enable_tls="$(is_boolean_yes "$NATS_ENABLE_TLS" && echo true)" \
+            enable_cluster="$(is_boolean_yes "$NATS_ENABLE_CLUSTER" && echo true)" \
+            cluster_token="$([[ -n "$NATS_CLUSTER_TOKEN" ]] && echo true)" \
+            cluster_routes="$([[ "${#routes[@]}" -gt 0 ]] && printf '%s\n' "${routes[@]}")" \
+            render-template "${BITNAMI_ROOT_DIR}/scripts/nats/bitnami-templates/server.conf.tpl" > "$NATS_CONF_FILE"
     fi
 
     true

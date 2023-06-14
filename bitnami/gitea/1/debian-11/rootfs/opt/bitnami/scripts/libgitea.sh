@@ -326,7 +326,7 @@ gitea_start_bg() {
     local -r args=("--config=${GITEA_CONF_FILE}" "--pid=${GITEA_PID_FILE}" "--custom-path=${GITEA_CUSTOM_DIR}" "--work-path=${GITEA_WORK_DIR}")
 
     if am_i_root; then
-        gosu "$GITEA_DAEMON_USER" "${cmd[@]}" "${args[@]}" >"$log_file" 2>&1 &
+        run_as_user "$GITEA_DAEMON_USER" "${cmd[@]}" "${args[@]}" >"$log_file" 2>&1 &
     else
         "${cmd[@]}" "${args[@]}" >"$log_file" 2>&1 &
     fi

@@ -19,7 +19,7 @@ start_error=0
 
 if is_tomcat_not_running; then
     if am_i_root; then
-        gosu "$TOMCAT_DAEMON_USER" "${TOMCAT_BIN_DIR}/startup.sh" || start_error="$?"
+        run_as_user "$TOMCAT_DAEMON_USER" "${TOMCAT_BIN_DIR}/startup.sh" || start_error="$?"
     else
         "${TOMCAT_BIN_DIR}/startup.sh" || start_error="$?"
     fi

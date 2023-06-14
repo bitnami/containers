@@ -339,7 +339,7 @@ moodle_install() {
     pushd "$MOODLE_BASE_DIR" >/dev/null || exit
     # Run as web server user to avoid having to change permissions/ownership afterwards
     if am_i_root; then
-        debug_execute gosu "$WEB_SERVER_DAEMON_USER" "${moodle_install_args[@]}"
+        debug_execute run_as_user "$WEB_SERVER_DAEMON_USER" "${moodle_install_args[@]}"
         # Remove write permissions for the web server to the config.php file
         configure_permissions_ownership "$MOODLE_CONF_FILE" -f "644" -u "root" -g "$WEB_SERVER_DAEMON_GROUP"
     else
@@ -365,7 +365,7 @@ moodle_upgrade() {
         "--non-interactive"
         "--allow-unstable"
     )
-    am_i_root && moodle_upgrade_args=("gosu" "$WEB_SERVER_DAEMON_USER" "${moodle_upgrade_args[@]}")
+    am_i_root && moodle_upgrade_args=("run_as_user" "$WEB_SERVER_DAEMON_USER" "${moodle_upgrade_args[@]}")
     debug_execute "${moodle_upgrade_args[@]}"
     popd >/dev/null || exit
 }

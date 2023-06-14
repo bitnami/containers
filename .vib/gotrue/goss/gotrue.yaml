@@ -1,0 +1,10 @@
+command:
+  # Migration files should be present
+  check-migrations-files:
+    exec: find /opt/bitnami/gotrue -name "*.sql" | wc -l
+    exit-status: 0
+    stdout:
+      - /^[1-9]/
+  check-gotrue-help:
+    exec: gotrue help
+    exit-status: 0

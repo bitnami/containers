@@ -1,0 +1,19 @@
+binaries:
+  - argocd
+  - argocd-server
+  - argocd-util
+directories:
+  - paths:
+    - /.argocd
+    - /app/config/gpg/keys
+    - /app/config/gpg/source
+    - /bitnami/argocd
+    mode: "0775"
+  - paths:
+    - /opt/bitnami/argo-cd/app
+    - /opt/bitnami/argo-cd/bin
+root_dir: /opt/bitnami
+sed_in_place:
+  exclude_paths:
+    # Ignore hack directory (not bitnami-related)
+    - /opt/bitnami/argo-cd/hack

@@ -27,6 +27,8 @@ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
+Looking to use Matomo in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
 ## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
@@ -367,6 +369,8 @@ To configure Matomo to send email using SMTP you can set the following environme
 * `MATOMO_SMTP_PASSWORD`: Matomo SMTP account password.
 * `MATOMO_SMTP_PROTOCOL`: Matomo SMTP protocol to use. Available protocols are: "ssl", "tls", "none". No default.
 * `MATOMO_SMTP_AUTH`: Matomo SMTP authentication mechanism to use. Available mechanisms are: "Plain", "Login", "Crammd5". Default: **Plain**.
+* `MATOMO_NOREPLY_NAME`: Matomo noreply name. No defaults.
+* `MATOMO_NOREPLY_ADDRESS`: Matomo noreply address. No defaults.
 
 ##### SMTP example
 
@@ -413,6 +417,7 @@ This would be an example of SMTP configuration using a Gmail account:
 * `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
 * `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. No default.
 * `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP uploads. No default.
+* `PHP_OUTPUT_BUFFERING`: Size of the output buffer for PHP. Default: **8196**
 
 If you want to add a new environment variable:
 
@@ -487,7 +492,7 @@ Based on the extended image, you can use a Docker Compose file like the one belo
 version: '2'
 services:
   mariadb:
-    image: 'bitnami/mariadb:10.3'
+    image: 'bitnami/mariadb:10.11'
     environment:
       - MARIADB_USER=bn_matomo
       - MARIADB_DATABASE=bitnami_matomo
@@ -564,7 +569,7 @@ New versions and releases cadence are not going to be affected. Once a new versi
 
 ## License
 
-Copyright &copy; 2023 Bitnami
+Copyright &copy; 2023 VMware, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -1,58 +1,44 @@
 {
     "brotli": {
         "arch": "amd64",
-        "digest": "b2d9fa688aecb04a040c7eb202b399ff9ffbea143a203e60f0a993c53d4fcff7",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.9-158"
+        "version": "1.0.9-161"
     },
     "discourse": {
         "arch": "amd64",
-        "digest": "b0698b605b8c70b94fbc0b00297a828ee6df2063185efcd1879329761d61a32c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.0.2-0"
-    },
-    "gosu": {
-        "arch": "amd64",
-        "digest": "bf2b90a31df691e3648c4a41190a926bb638c3a9fa1dfcde36623ce1bfaadc23",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-3"
+        "version": "3.0.3-3"
     },
     "node": {
         "arch": "amd64",
-        "digest": "6a3b2d1e7ab2f53f2f70faa3bab6406727c5024f73581294724b97eeb4ee4a2b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.15.0-1"
+        "version": "18.16.0-2"
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "f30b5782e06f5a81190143d77d76c364a73836ffa635b349478dcc1bee6b06ed",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "15.2.0-2"
+        "version": "15.3.0-1"
     },
     "python": {
         "arch": "amd64",
-        "digest": "faf2f2e22f3ae88f12fb973d60295f7d63fab48c6909ae351e88ee31c5d296c6",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-8"
+        "version": "3.9.17-0"
     },
     "ruby": {
         "arch": "amd64",
-        "digest": "d7e6302888e576514059077f449a85432386655d4cd3bb909915c4388b1bc054",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.1.3-5"
+        "version": "3.1.4-2"
     },
     "wait-for-port": {
         "arch": "amd64",
-        "digest": "66c83aadf646d230d0cb097d9fe1663911bed94fabf8cbba2a17c39f7c6ffbcc",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-2"
+        "version": "1.0.6-7"
     }
 }

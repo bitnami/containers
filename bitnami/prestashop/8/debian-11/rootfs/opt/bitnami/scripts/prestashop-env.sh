@@ -72,6 +72,7 @@ unset prestashop_env_vars
 # Paths
 export PRESTASHOP_BASE_DIR="${BITNAMI_ROOT_DIR}/prestashop"
 export PRESTASHOP_CONF_FILE="${PRESTASHOP_BASE_DIR}/app/config/parameters.php"
+export PATH="${BITNAMI_ROOT_DIR}/php/bin:${PATH}"
 
 # PrestaShop persistence configuration
 export PRESTASHOP_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/prestashop"

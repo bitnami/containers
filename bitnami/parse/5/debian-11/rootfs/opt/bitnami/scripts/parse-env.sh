@@ -65,6 +65,7 @@ export PARSE_LOGS_DIR="${PARSE_BASE_DIR}/logs"
 export PARSE_PID_FILE="${PARSE_TMP_DIR}/parse.pid"
 export PARSE_LOG_FILE="${PARSE_LOGS_DIR}/parse.log"
 export PARSE_CONF_FILE="${PARSE_BASE_DIR}/config.json"
+export PATH="${BITNAMI_ROOT_DIR}/node/bin:${PATH}"
 
 # Parse persistence configuration
 export PARSE_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/parse"

@@ -17,8 +17,7 @@ set -o pipefail
 info "** Starting Tomcat **"
 
 if am_i_root; then
-    exec gosu "$TOMCAT_DAEMON_USER" "${TOMCAT_BIN_DIR}/catalina.sh" run "$@"
+    exec_as_user "$TOMCAT_DAEMON_USER" "${TOMCAT_BIN_DIR}/catalina.sh" run "$@"
 else
     exec "${TOMCAT_BIN_DIR}/catalina.sh" run "$@"
 fi
-

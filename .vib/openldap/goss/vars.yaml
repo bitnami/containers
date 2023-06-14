@@ -1,0 +1,35 @@
+backends:
+  - mdb
+  - monitor
+binaries:
+  - ldapsearch
+  - slapd
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/openldap/data
+      - /bitnami/openldap/slapd.d
+      - /opt/bitnami/openldap/share
+      - /opt/bitnami/openldap/var
+      - /docker-entrypoint-initdb.d
+  - paths:
+      - /opt/bitnami/openldap/etc/certs
+features:
+  - Debug
+  - Syslog
+  - IPv6
+  - LOCAL
+files:
+  - paths:
+      - /opt/bitnami/openldap/sbin/slapd
+      - /opt/bitnami/openldap/share/slapd.ldif
+packages:
+  - /opt/bitnami/openldap/lib/libslapi.so
+  - /opt/bitnami/openldap/lib/openldap/argon2.so
+  - /opt/bitnami/openldap/lib/openldap/dyngroup.so
+  - /opt/bitnami/openldap/libexec/openldap/pw-pbkdf2.so
+  - /opt/bitnami/openldap/libexec/openldap/pw-sha2.so
+root_dir: /opt/bitnami
+version:
+  bin_name: slapd
+  flag: -VVV

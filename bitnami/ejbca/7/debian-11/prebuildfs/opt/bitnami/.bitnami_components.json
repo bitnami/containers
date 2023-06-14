@@ -1,37 +1,26 @@
 {
     "ejbca": {
         "arch": "amd64",
-        "digest": "538b548432bd1b85250733c0abfa56cd8c639661216b466d910ec43531e8af8b",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.11.0-2"
-    },
-    "gosu": {
-        "arch": "amd64",
-        "digest": "bf2b90a31df691e3648c4a41190a926bb638c3a9fa1dfcde36623ce1bfaadc23",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-3"
+        "version": "7.11.0-5"
     },
     "java": {
         "arch": "amd64",
-        "digest": "fbdf266273a4dd4c5fc37c344462aa50047549aa2e63858ffee5594ea450fca5",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.18-10-3"
+        "version": "11.0.19-7-2"
     },
     "mysql-client": {
         "arch": "amd64",
-        "digest": "6ed7c73b5e779521cf2f47a00ac54e6d2929213cb4eb3cbd9a4f12f84557c664",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.6.12-2"
+        "version": "10.11.4-0"
     },
     "wildfly": {
         "arch": "amd64",
-        "digest": "d3846e48d559528a779072a0d10f4b34b031cf820a9b412a46a38d1f9a223b7c",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "26.1.3-5"
+        "version": "26.1.3-10"
     }
 }

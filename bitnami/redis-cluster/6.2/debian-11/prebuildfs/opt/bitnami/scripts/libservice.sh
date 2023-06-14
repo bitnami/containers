@@ -279,7 +279,7 @@ remove_logrotate_conf() {
 # Flags:
 #   --custom-service-content - Custom content to add to the [service] block
 #   --environment - Environment variable to define (multiple --environment options may be passed)
-#   --environment-file - Text file with environment variables
+#   --environment-file - Text file with environment variables (multiple --environment-file options may be passed)
 #   --exec-start - Start command (required)
 #   --exec-start-pre - Pre-start command (optional)
 #   --exec-start-post - Post-start command (optional)
@@ -330,7 +330,6 @@ generate_systemd_conf() {
             | --type \
             | --user \
             | --group \
-            | --environment-file \
             | --exec-start \
             | --exec-stop \
             | --exec-reload \
@@ -367,6 +366,12 @@ generate_systemd_conf() {
                 # It is possible to add multiple environment lines
                 [[ -n "$environment" ]] && environment+=$'\n'
                 environment+="Environment=${1:?"--environment value is missing"}"
+                ;;
+            --environment-file)
+                shift
+                # It is possible to add multiple environment-file lines
+                [[ -n "$environment_file" ]] && environment_file+=$'\n'
+                environment_file+="EnvironmentFile=${1:?"--environment-file value is missing"}"
                 ;;
             *)
                 echo "Invalid command line flag ${1}" >&2
@@ -435,7 +440,8 @@ EOF
         cat >> "$service_file" <<< "$environment"
     fi
     if [[ -n "$environment_file" ]]; then
-        cat >> "$service_file" <<< "EnvironmentFile=${environment_file}"
+        # This variable may contain multiple EnvironmentFile= directives
+        cat >> "$service_file" <<< "$environment_file"
     fi
     # Logging
     if [[ -n "$standard_output" ]]; then

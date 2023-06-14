@@ -19,7 +19,7 @@ FLAGS=("-c" "/etc/registryctl/config.yml" "$@")
 
 info "** Starting harbor-registryctl **"
 if am_i_root; then
-    exec gosu "$HARBOR_REGISTRYCTL_DAEMON_USER" "$CMD" "${FLAGS[@]}"
+    exec_as_user "$HARBOR_REGISTRYCTL_DAEMON_USER" "$CMD" "${FLAGS[@]}"
 else
     exec "$CMD" "${FLAGS[@]}"
 fi

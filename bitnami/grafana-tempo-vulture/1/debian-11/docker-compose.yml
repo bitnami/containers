@@ -1,4 +1,0 @@
-version: '2'
-services:
-  grafana-tempo-vulture:
-    image: docker.io/bitnami/grafana-tempo-vulture:1

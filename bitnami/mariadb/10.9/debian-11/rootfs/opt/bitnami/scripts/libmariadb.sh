@@ -158,11 +158,11 @@ max_allowed_packet=16M
 bind_address=${DB_DEFAULT_BIND_ADDRESS}
 log_error=${DB_LOGS_DIR}/mysqld.log
 slow_query_log=${DB_ENABLE_SLOW_QUERY}
-slow_query_log_file=${DB_LOGS_DIR}/mysqld.log
 long_query_time=${DB_LONG_QUERY_TIME}
 character_set_server=${DB_DEFAULT_CHARACTER_SET}
 collation_server=${DB_DEFAULT_COLLATE}
 plugin_dir=${DB_BASE_DIR}/lib/plugin
+datadir=${DB_DATA_DIR}
 
 [client]
 port=${DB_DEFAULT_PORT_NUMBER}
@@ -200,6 +200,7 @@ CHANGE MASTER TO MASTER_HOST='$DB_MASTER_HOST',
 MASTER_PORT=$DB_MASTER_PORT_NUMBER,
 MASTER_USER='$DB_REPLICATION_USER',
 MASTER_PASSWORD='$DB_REPLICATION_PASSWORD',
+MASTER_DELAY=$DB_MASTER_DELAY,
 MASTER_CONNECT_RETRY=10;
 EOF
     elif [[ "$DB_REPLICATION_MODE" = "master" ]]; then
@@ -724,7 +725,7 @@ mysql_stop() {
 mysql_install_db() {
     local command="${DB_BIN_DIR}/mysql_install_db"
     local -a args=("--defaults-file=${DB_CONF_FILE}" "--basedir=${DB_BASE_DIR}" "--datadir=${DB_DATA_DIR}")
-    
+
     # Add flags specified via the 'DB_EXTRA_FLAGS' environment variable
     read -r -a db_extra_flags <<< "$(mysql_extra_flags)"
     [[ "${#db_extra_flags[@]}" -gt 0 ]] && args+=("${db_extra_flags[@]}")
@@ -863,9 +864,9 @@ mysql_ensure_user_exists() {
         auth_string="identified via pam using '$DB_FLAVOR'"
     elif [[ -n "$password" ]]; then
         if [[ -n "$auth_plugin" ]]; then
-            auth_string="identified with $auth_plugin by \"$password\""
+            auth_string="identified with $auth_plugin by '$password'"
         else
-            auth_string="identified by \"$password\""
+            auth_string="identified by '$password'"
         fi
     fi
     debug "creating database user \'$user\'"

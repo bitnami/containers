@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-27T23:56:11Z" \
+      org.opencontainers.image.created="2023-06-13T13:27:27Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.37.0-debian-11-r14" \
+      org.opencontainers.image.ref.name="0.39.0-debian-11-r5" \
       org.opencontainers.image.title="mongodb-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.37.0"
+      org.opencontainers.image.version="0.39.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "mongodb-exporter-0.37.0-2-linux-${OS_ARCH}-debian-11" \
+      "mongodb-exporter-0.39.0-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -39,7 +39,7 @@ RUN apt-get autoremove --purge -y curl && \
 RUN chmod g+rwX /opt/bitnami
 RUN ln -sf /opt/bitnami/mongodb-exporter/bin/mongodb_exporter /bin/mongodb_exporter
 
-ENV APP_VERSION="0.37.0" \
+ENV APP_VERSION="0.39.0" \
     BITNAMI_APP_NAME="mongodb-exporter" \
     PATH="/opt/bitnami/mongodb-exporter/bin:$PATH"
 

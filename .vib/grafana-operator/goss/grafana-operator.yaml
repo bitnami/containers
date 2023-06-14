@@ -1,0 +1,6 @@
+command:
+  check-app-version:
+    exec: /opt/bitnami/grafana-operator/bin/grafana-operator || true
+    exit-status: 0
+    stderr:
+    - {{ .Env.APP_VERSION }}

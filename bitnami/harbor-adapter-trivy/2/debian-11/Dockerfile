@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-27T23:14:01Z" \
+      org.opencontainers.image.created="2023-06-13T13:03:22Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.7.1-debian-11-r11" \
+      org.opencontainers.image.ref.name="2.8.2-debian-11-r0" \
       org.opencontainers.image.title="harbor-adapter-trivy" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.7.1"
+      org.opencontainers.image.version="2.8.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,8 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "harbor-adapter-trivy-2.7.1-1-linux-${OS_ARCH}-debian-11" \
-      "gosu-1.16.0-3-linux-${OS_ARCH}-debian-11" \
+      "harbor-adapter-trivy-2.8.2-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,9 +40,9 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/harbor-adapter-trivy/postunpack.sh
-ENV APP_VERSION="2.7.1" \
+ENV APP_VERSION="2.8.2" \
     BITNAMI_APP_NAME="harbor-adapter-trivy" \
-    PATH="/opt/bitnami/harbor-adapter-trivy/bin:/opt/bitnami/common/bin:$PATH"
+    PATH="/opt/bitnami/harbor-adapter-trivy/bin:$PATH"
 
 WORKDIR /opt/bitnami/harbor-adapter-trivy
 USER 1001

@@ -1,44 +1,32 @@
 {
-    "gosu": {
-        "arch": "amd64",
-        "digest": "deadbeef",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.16.0-3"
-    },
     "node": {
         "arch": "amd64",
-        "digest": "deadbeef",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.15.0-1"
+        "version": "18.16.0-2"
     },
     "odoo": {
         "arch": "amd64",
-        "digest": "deadbeef",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "14.0.20230310-2"
+        "version": "14.0.20230610-0"
     },
     "postgresql-client": {
         "arch": "amd64",
-        "digest": "deadbeef",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "15.2.0-2"
+        "version": "15.3.0-1"
     },
     "python": {
         "arch": "amd64",
-        "digest": "deadbeef",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.16-8"
+        "version": "3.8.17-0"
     },
     "render-template": {
         "arch": "amd64",
-        "digest": "deadbeef",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-2"
+        "version": "1.0.5-6"
     }
 }

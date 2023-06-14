@@ -1,0 +1,24 @@
+file:
+  # Check config files
+  /opt/bitnami/neo4j/conf/apoc.conf:
+    exists: true
+    filetype: file
+    mode: "0664"
+    contains:
+      - /file\.enabled.*true/
+  /opt/bitnami/neo4j/conf/neo4j.conf:
+    exists: true
+    filetype: file
+    contains:
+    {{ if regexMatch "^4.+" .Env.APP_VERSION }}
+      - /dbms\.directories\.data.*\/bitnami\/neo4j\/data/
+    {{ else if regexMatch "^5.+" .Env.APP_VERSION }}
+      - /server\.directories\.data.*\/bitnami\/neo4j\/data/
+    {{ end }}
+command:
+  check-neo4j-daemon:
+    exec: neo4j start; neo4j status
+    exit-status: 0
+    timeout: 10000
+    stdout:
+      - "Neo4j is running"

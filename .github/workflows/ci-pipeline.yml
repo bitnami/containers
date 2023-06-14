@@ -7,13 +7,10 @@ on: # rebuild any PRs and main branch changes
     branches:
       - main
       - bitnami:main
-permissions:
-  issues: write
-  pull-requests: write
-  statuses: write
+permissions: {}
 env:
   CSP_API_URL: https://console.cloud.vmware.com
-  CSP_API_TOKEN: ${{ secrets.CSP_API_TOKEN }}
+  CSP_API_TOKEN: ${{ secrets.CSP_API_TESTING_TOKEN }}
   VIB_PUBLIC_URL: https://cp.bromelia.vmware.com
 # Avoid concurrency over the same PR
 concurrency:
@@ -61,6 +58,8 @@ jobs:
     needs: get-containers
     if: ${{ needs.get-containers.outputs.result == 'ok' }}
     name: VIB Verify
+    permissions: 
+      contents: read
     continue-on-error: false
     strategy:
       fail-fast: false
@@ -100,7 +99,7 @@ jobs:
             # Container folder doesn't exists we are assuming a deprecation
             echo "result=skip" >> $GITHUB_OUTPUT
           fi
-      - uses: vmware-labs/vmware-image-builder-action@main
+      - uses: vmware-labs/vmware-image-builder-action@v0
         name: Verify
         if: ${{ steps.get-container-metadata.outputs.result == 'ok' }}
         with:
@@ -115,6 +114,8 @@ jobs:
     # Ensure all containers passed the verification
     runs-on: ubuntu-latest
     name: Check Matrix Outcome
+    permissions:
+      statuses: write
     needs:
       - get-containers
       - vib-verify
@@ -162,6 +163,8 @@ jobs:
   auto-pr-review:
     runs-on: ubuntu-latest
     name: Reviewal for automated PRs
+    permissions:
+      pull-requests: write
     needs: verification-summary
     # This job will be executed when the PR was created by bitnami-bot and it has the 'auto-merge' label
     if: |
@@ -196,7 +199,7 @@ jobs:
       # post a comment on the PR and assign a maintainer agent to review it
       - name: Manual review required
         if: ${{ always() && (needs.verification-summary.outputs.result != 'success' || steps.merge.outcome != 'success') }}
-        uses: peter-evans/create-or-update-comment@v2.0.0
+        uses: peter-evans/create-or-update-comment@v3.0.0
         with:
           issue-number: ${{ github.event.number }}
           # Necessary to trigger support workflows

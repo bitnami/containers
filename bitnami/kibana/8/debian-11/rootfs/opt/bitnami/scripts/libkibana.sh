@@ -361,7 +361,7 @@ kibana_start_bg() {
 
     info "Starting Kibana in background"
     local start_command=("${KIBANA_BIN_DIR}/kibana" "serve" "${extra_args[@]}")
-    am_i_root && start_command=("gosu" "$KIBANA_DAEMON_USER" "${start_command[@]}")
+    am_i_root && start_command=("run_as_user" "$KIBANA_DAEMON_USER" "${start_command[@]}")
     debug_execute "${start_command[@]}" &
 }
 

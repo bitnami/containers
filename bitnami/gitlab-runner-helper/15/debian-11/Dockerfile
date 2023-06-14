@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-03-27T23:06:11Z" \
+      org.opencontainers.image.created="2023-06-13T02:48:46Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="15.10.0-debian-11-r3" \
+      org.opencontainers.image.ref.name="15.11.1-debian-11-r6" \
       org.opencontainers.image.title="gitlab-runner-helper" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="15.10.0"
+      org.opencontainers.image.version="15.11.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,8 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl git git-lfs openssh-client procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "gosu-1.16.0-3-linux-${OS_ARCH}-debian-11" \
-      "gitlab-runner-helper-15.10.0-0-linux-${OS_ARCH}-debian-11" \
+      "gitlab-runner-helper-15.11.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -34,14 +33,17 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
       rm -rf "${COMPONENT}".tar.gz{,.sha256} ; \
     done
-RUN apt-get autoremove --purge -y curl && \
-    apt-get update && apt-get upgrade -y && \
+RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
-RUN mkdir /home/gitlab-runner && chmod -R g+rwX /home/gitlab-runner && ln -s /opt/bitnami/common/bin/dumb-init /usr/bin/dumb-init && ln -s /opt/bitnami/scripts/gitlab-runner-helper/entrypoint.sh /entrypoint
-ENV APP_VERSION="15.10.0" \
+RUN mkdir /home/gitlab-runner && \
+    chmod -R g+rwX /home/gitlab-runner && \
+    ln -s /opt/bitnami/common/bin/dumb-init /usr/bin/dumb-init && \
+    ln -s /opt/bitnami/scripts/gitlab-runner-helper/entrypoint.sh /entrypoint && \
+    ln -s /opt/bitnami/gitlab-runner-helper/bin/gitlab-runner-helper /usr/bin/gitlab-runner-helper
+ENV APP_VERSION="15.11.1" \
     BITNAMI_APP_NAME="gitlab-runner-helper" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/gitlab-runner-helper/bin:$PATH"
 

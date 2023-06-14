@@ -24,7 +24,7 @@ __run_flags=("-jar" "-Duser.home=${HOME}" "${SPRING_CLOUD_DATAFLOW_BASE_DIR}/spr
 [[ "${#java_opts[@]}" -gt 0 ]] && __run_flags=("${java_opts[@]}" "${__run_flags[@]}")
 
 if am_i_root; then
-    exec gosu "$SPRING_CLOUD_DATAFLOW_DAEMON_USER" "$__run_cmd" "${__run_flags[@]}"
+    exec_as_user "$SPRING_CLOUD_DATAFLOW_DAEMON_USER" "$__run_cmd" "${__run_flags[@]}"
 else
     exec "$__run_cmd" "${__run_flags[@]}"
 fi

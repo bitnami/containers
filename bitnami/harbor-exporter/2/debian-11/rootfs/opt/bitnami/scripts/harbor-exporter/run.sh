@@ -23,7 +23,7 @@ info "** Wait for database connection **"
 wait_for_connection "$HARBOR_DATABASE_HOST" "$HARBOR_DATABASE_PORT"
 info "** Starting harbor-exporter **"
 if am_i_root; then
-    exec gosu "$HARBOR_EXPORTER_DAEMON_USER" "$CMD" "$@"
+    exec_as_user "$HARBOR_EXPORTER_DAEMON_USER" "$CMD" "$@"
 else
     exec "$CMD" "$@"
 fi

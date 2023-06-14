@@ -27,6 +27,8 @@ You can find the default credentials and available configuration options in the 
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
+Looking to use phpMyAdmin in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
 ## How to deploy phpMyAdmin in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami phpMyAdmin Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/phpmyadmin).
@@ -203,6 +205,7 @@ The phpMyAdmin instance can be customized by specifying environment variables on
 * `PHP_MEMORY_LIMIT`: Memory limit for PHP scripts. Default: **256M**
 * `PHP_POST_MAX_SIZE`: Maximum size for PHP POST requests. Default: **80M**
 * `PHP_UPLOAD_MAX_FILESIZE`: Maximum file size for PHP upload. Default: **80M**
+* `PHP_OUTPUT_BUFFERING`: Size of the output buffer for PHP. Default: **8196**
 
 #### Specifying Environment variables using Docker Compose
 
@@ -289,7 +292,7 @@ Based on the extended image, you can use a Docker Compose file like the one belo
 version: '2'
 services:
   mariadb:
-    image: 'bitnami/mariadb:10.3'
+    image: 'bitnami/mariadb:10.11'
     environment:
       - MARIADB_ROOT_PASSWORD=bitnami
     volumes:
@@ -343,7 +346,7 @@ New versions and releases cadence are not going to be affected. Once a new versi
 
 ## License
 
-Copyright &copy; 2023 Bitnami
+Copyright &copy; 2023 VMware, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

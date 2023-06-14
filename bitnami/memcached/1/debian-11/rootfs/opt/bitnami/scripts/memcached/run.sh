@@ -32,7 +32,7 @@ args+=("$@")
 
 info "** Starting Memcached **"
 if am_i_root; then
-    exec gosu "$MEMCACHED_DAEMON_USER" memcached "${args[@]}"
+    exec_as_user "$MEMCACHED_DAEMON_USER" memcached "${args[@]}"
 else
     exec memcached "${args[@]}"
 fi

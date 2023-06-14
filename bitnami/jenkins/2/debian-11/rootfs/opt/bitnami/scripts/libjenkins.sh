@@ -76,7 +76,7 @@ jenkins_start_bg() {
     if am_i_root; then
         touch "$JENKINS_LOG_FILE"
         configure_permissions_ownership "$JENKINS_LOG_FILE" -u "$JENKINS_DAEMON_USER" -g "$JENKINS_DAEMON_GROUP"
-        gosu "$JENKINS_DAEMON_USER" java "${args[@]}" >>"$JENKINS_LOG_FILE" 2>&1 &
+        run_as_user "$JENKINS_DAEMON_USER" java "${args[@]}" >>"$JENKINS_LOG_FILE" 2>&1 &
     else
         java "${args[@]}" >>"$JENKINS_LOG_FILE" 2>&1 &
     fi
@@ -100,7 +100,7 @@ jenkins_cli_execute() {
 
     debug "Executing command: java ${args[*]}"
     if am_i_root; then
-        debug_execute gosu "$JENKINS_DAEMON_USER" java "${args[@]}"
+        debug_execute run_as_user "$JENKINS_DAEMON_USER" java "${args[@]}"
     else
         debug_execute java "${args[@]}"
     fi
@@ -439,7 +439,7 @@ jenkins_install_plugins() {
             echo "$i" >> "$tmp_plugins_file"
         done
         if am_i_root; then
-            debug_execute gosu "$JENKINS_DAEMON_USER" java "${args[@]}"
+            debug_execute run_as_user "$JENKINS_DAEMON_USER" java "${args[@]}"
         else
             debug_execute java "${args[@]}"
         fi

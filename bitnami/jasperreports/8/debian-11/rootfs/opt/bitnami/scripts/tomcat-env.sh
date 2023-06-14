@@ -74,7 +74,7 @@ export TOMCAT_HTTP_PORT_NUMBER="${TOMCAT_HTTP_PORT_NUMBER:-8080}"
 export TOMCAT_AJP_PORT_NUMBER="${TOMCAT_AJP_PORT_NUMBER:-8009}"
 export TOMCAT_USERNAME="${TOMCAT_USERNAME:-manager}"
 export TOMCAT_PASSWORD="${TOMCAT_PASSWORD:-}"
-export TOMCAT_ALLOW_REMOTE_MANAGEMENT="${TOMCAT_ALLOW_REMOTE_MANAGEMENT:-no}"
+export TOMCAT_ALLOW_REMOTE_MANAGEMENT="${TOMCAT_ALLOW_REMOTE_MANAGEMENT:-yes}" # only used during the first initialization
 export TOMCAT_ENABLE_AUTH="${TOMCAT_ENABLE_AUTH:-yes}"
 export TOMCAT_ENABLE_AJP="${TOMCAT_ENABLE_AJP:-no}"
 export TOMCAT_START_RETRIES="${TOMCAT_START_RETRIES:-12}"
@@ -83,7 +83,7 @@ export TOMCAT_INSTALL_DEFAULT_WEBAPPS="${TOMCAT_INSTALL_DEFAULT_WEBAPPS:-yes}"
 
 # Default JVM configuration
 export JAVA_HOME="${BITNAMI_ROOT_DIR}/java"
-export JAVA_OPTS="${JAVA_OPTS:--Djava.awt.headless=true -XX:+UseG1GC -Dfile.encoding=UTF-8 -Duser.home=${TOMCAT_HOME}}"
+export JAVA_OPTS="${JAVA_OPTS:--Djava.awt.headless=true -XX:+UseG1GC -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true -Duser.home=${TOMCAT_HOME}}"
 
 # Other parameters
 export PATH="${TOMCAT_BASE_DIR}/bin:${JAVA_HOME}/bin:${BITNAMI_ROOT_DIR}/common/bin:${PATH}"

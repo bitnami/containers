@@ -87,6 +87,7 @@ php_set_runtime_config() {
     ! is_empty_value "$PHP_MEMORY_LIMIT" && info "Setting PHP memory_limit option" && php_conf_set memory_limit "$PHP_MEMORY_LIMIT" "$conf_file"
     ! is_empty_value "$PHP_POST_MAX_SIZE" && info "Setting PHP post_max_size option" && php_conf_set post_max_size "$PHP_POST_MAX_SIZE" "$conf_file"
     ! is_empty_value "$PHP_UPLOAD_MAX_FILESIZE" && info "Setting PHP upload_max_filesize option" && php_conf_set upload_max_filesize "$PHP_UPLOAD_MAX_FILESIZE" "$conf_file"
+    ! is_empty_value "$PHP_OUTPUT_BUFFERING" && info "Setting PHP output_buffering option" && php_conf_set output_buffering "$PHP_OUTPUT_BUFFERING" "$conf_file"
 
     true
 }

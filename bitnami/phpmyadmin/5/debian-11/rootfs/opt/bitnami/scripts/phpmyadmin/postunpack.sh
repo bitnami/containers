@@ -47,13 +47,13 @@ if ! grep -q "$database_server_host_pattern" "$PHPMYADMIN_CONF_FILE"; then
 fi
 replace_in_file "$PHPMYADMIN_CONF_FILE" "$database_server_host_pattern" "$database_server_host_replacement"
 
+# Enable build-time web server configuration defaults for phpMyAdmin
+info "Creating default web server configuration for phpMyAdmin"
+web_server_validate
+phpmyadmin_ensure_web_server_app_configuration_exists
+
 # Configure PHP options based on build-time defaults
 info "Configuring default PHP options for phpMyAdmin"
 php_conf_set upload_max_filesize "$PHP_DEFAULT_UPLOAD_MAX_FILESIZE"
 php_conf_set post_max_size "$PHP_DEFAULT_POST_MAX_SIZE"
 php_conf_set memory_limit "$PHP_DEFAULT_MEMORY_LIMIT"
-
-# Enable build-time web server configuration defaults for phpMyAdmin
-info "Creating default web server configuration for phpMyAdmin"
-web_server_validate
-phpmyadmin_ensure_web_server_app_configuration_exists

@@ -1,0 +1,4 @@
+command:
+  check-app-run:
+    exec: concourse generate-key -t ssh -f ./worker_key
+    exit-status: 0
