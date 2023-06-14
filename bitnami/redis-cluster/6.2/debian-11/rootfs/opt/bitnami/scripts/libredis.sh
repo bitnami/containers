@@ -407,9 +407,13 @@ redis_configure_default() {
 
         #The value stored in $i here is the number of seconds and times of save rules in redis rdb mode
         if [ ! -z "${REDIS_RDB_POLICY}" ];then
-          for i in ${REDIS_RDB_POLICY};do
-            redis_conf_set save "${i//#/ }"
-          done
+            if [ "${REDIS_RDB_POLICY}" == "disabled" ]; then
+                redis_conf_set save ""
+            else
+                for i in ${REDIS_RDB_POLICY};do
+                    redis_conf_set save "${i//#/ }"
+                done
+            fi
         fi
 
         redis_conf_set port "$REDIS_PORT_NUMBER"
