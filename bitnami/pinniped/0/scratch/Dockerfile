@@ -5,14 +5,13 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 COPY prebuildfs /
-
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "pinniped-0.23.0-1-linux-${OS_ARCH}-debian-11" \
+      "pinniped-0.24.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -33,13 +32,13 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-05-21T16:09:18Z" \
+      org.opencontainers.image.created="2023-06-14T13:39:32Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.23.0-scratch-r4" \
+      org.opencontainers.image.ref.name="0.24.0-scratch-r0" \
       org.opencontainers.image.title="pinniped" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.23.0"
+      org.opencontainers.image.version="0.24.0"
 
 COPY prebuildfs /
 COPY rootfs /
