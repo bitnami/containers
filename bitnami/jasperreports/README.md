@@ -248,7 +248,7 @@ Available environment variables:
 
 - `JASPERREPORTS_USERNAME`: JasperReports application username. Default: **jasperadmin**
 - `JASPERREPORTS_PASSWORD`: JasperReports application password. Default: **bitnami**
-- `JASPERREPORTS_EMAIL`: JasperReports application email. Default: **user@example.com**
+- `JASPERREPORTS_EMAIL`: JasperReports application email. Default: **<user@example.com>**
 - `JASPERREPORTS_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. This is necessary in case you use a database that already has JasperReports data. Default: **no**
 
 #### Database connection configuration
@@ -481,14 +481,6 @@ We'd love for you to contribute to this container. You can request new features 
 ## Issues
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
-
-### Community supported solution
-
-Please, note this asset is a community-supported solution. This means that the Bitnami team is not actively working on new features/improvements nor providing support through GitHub Issues. Any new issue will stay open for 20 days to allow the community to contribute, after 15 days without activity the issue will be marked as stale being closed after 5 days.
-
-The Bitnami team will review any PR that is created, feel free to create a PR if you find any issue or want to implement a new feature.
-
-New versions and releases cadence are not going to be affected. Once a new version is released in the upstream project, the Bitnami container image will be updated to use the latest version, supporting the different branches supported by the upstream project as usual.
 
 ## Notable Changes
 
