@@ -258,6 +258,7 @@ pgbouncer_initialize() {
             "default_pool_size:${PGBOUNCER_DEFAULT_POOL_SIZE}"
             "min_pool_size:${PGBOUNCER_MIN_POOL_SIZE}"
             "reserve_pool_size:${PGBOUNCER_RESERVE_POOL_SIZE}"
+            "reserve_pool_timeout:${PGBOUNCER_RESERVE_POOL_TIMEOUT}"
             "ignore_startup_parameters:${PGBOUNCER_IGNORE_STARTUP_PARAMETERS}"
             "log_connections:${PGBOUNCER_LOG_CONNECTIONS}"
             "log_disconnections:${PGBOUNCER_LOG_DISCONNECTIONS}"
