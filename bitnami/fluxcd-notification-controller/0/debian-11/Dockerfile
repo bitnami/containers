@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-11T16:35:41Z" \
+      org.opencontainers.image.created="2023-06-14T16:48:58Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.33.0-debian-11-r28" \
+      org.opencontainers.image.ref.name="0.33.0-debian-11-r29" \
       org.opencontainers.image.title="fluxcd-notification-controller" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.33.0"
