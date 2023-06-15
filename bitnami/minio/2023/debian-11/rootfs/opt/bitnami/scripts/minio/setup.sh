@@ -53,11 +53,11 @@ else
         exit 1
     fi
 
+    # Create default buckets
+    minio_create_default_buckets
+
     if is_boolean_yes "$MINIO_DISTRIBUTED_MODE_ENABLED"; then
         # Wait for other clients (distribute mode)
         sleep 5
     fi
-
-    # Create default buckets
-    minio_create_default_buckets
 fi
