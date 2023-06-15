@@ -1,8 +1,8 @@
-## Deprecation notice
+# Deprecation notice
 
 The Wavefront developers have deprecated the chart installation method for Wavefront, instead now using the Kubernetes Operator. So this container is going to be deprecated.
 
-# Wavefront Proxy packaged by Bitnami
+## Wavefront Proxy packaged by Bitnami
 
 ## What is Wavefront Proxy?
 
