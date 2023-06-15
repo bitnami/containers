@@ -166,6 +166,9 @@ minio_start_bg() {
 
 ########################
 # Stop MinIO
+# Globals:
+#   MINIO_DISTRIBUTED_MODE_ENABLED
+#   MINIO_PID_FILE
 # Arguments:
 #   None
 # Returns:
@@ -174,7 +177,17 @@ minio_start_bg() {
 minio_stop() {
     if is_minio_running; then
         info "Stopping MinIO..."
-        minio_client_execute_timeout admin service stop local >/dev/null 2>&1 || true
+
+        if is_boolean_yes "$MINIO_DISTRIBUTED_MODE_ENABLED"; then
+            pgrep -f "$(command -v minio) server" >"$MINIO_PID_FILE"
+            pid="$(get_pid_from_file "$MINIO_PID_FILE")"
+
+            if [[ -n "$pid" ]]; then
+                kill -TERM $pid
+            fi
+        else
+            minio_client_execute_timeout admin service stop local >/dev/null 2>&1 || true
+        fi
 
         local counter=5
         while is_minio_running; do
