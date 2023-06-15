@@ -4,13 +4,13 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-11T18:04:13Z" \
+      org.opencontainers.image.created="2023-06-15T09:14:40Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.387.3-debian-11-r13" \
+      org.opencontainers.image.ref.name="2.401.1-debian-11-r0" \
       org.opencontainers.image.title="jenkins" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.387.3"
+      org.opencontainers.image.version="2.401.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -25,7 +25,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "render-template-1.0.5-6-linux-${OS_ARCH}-debian-11" \
       "java-11.0.19-7-2-linux-${OS_ARCH}-debian-11" \
-      "jenkins-2.387.3-1-linux-${OS_ARCH}-debian-11" \
+      "jenkins-2.401.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -43,7 +43,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/jenkins/postunpack.sh
-ENV APP_VERSION="2.387.3" \
+ENV APP_VERSION="2.401.1" \
     BITNAMI_APP_NAME="jenkins" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:$PATH"
