@@ -1,6 +1,6 @@
 # Deprecation notice
 
-Remove Wavefront chart since this installation method has been deprecated in favor of the Kubernetes Operator.
+Remove Wavefront-Proxy container since this installation method has been deprecated in favor of the Kubernetes Operator.
 
 ## Wavefront Proxy packaged by Bitnami
 
