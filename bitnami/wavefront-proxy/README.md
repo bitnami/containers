@@ -1,4 +1,8 @@
-# Wavefront Proxy packaged by Bitnami
+# Deprecation notice
+
+Remove Wavefront-Proxy container since this installation method has been deprecated in favor of the Kubernetes Operator.
+
+## Wavefront Proxy packaged by Bitnami
 
 ## What is Wavefront Proxy?
 
