@@ -1,4 +1,8 @@
-# Wavefront packaged by Bitnami
+# Deprecation notice
+
+Remove Wavefront container since this installation method has been deprecated in favor of the Kubernetes Operator.
+
+## Wavefront packaged by Bitnami
 
 ## What is Wavefront?
 
