@@ -1,7 +1,0 @@
-version: '2'
-services:
-  wavefront-proxy:
-    image: docker.io/bitnami/wavefront-proxy:11
-    environment:
-      - WAVEFRONT_URL=https://you.wavefront.com/api
-      - WAVEFRONT_TOKEN=CHANGE-ME
