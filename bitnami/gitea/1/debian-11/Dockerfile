@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-14T17:24:22Z" \
+      org.opencontainers.image.created="2023-06-17T18:00:36Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.19.3-debian-11-r14" \
+      org.opencontainers.image.ref.name="1.19.3-debian-11-r15" \
       org.opencontainers.image.title="gitea" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.19.3"
@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages acl ca-certificates curl git procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "wait-for-port-1.0.6-7-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.6-8-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-6-linux-${OS_ARCH}-debian-11" \
       "ini-file-1.4.5-6-linux-${OS_ARCH}-debian-11" \
       "gitea-1.19.3-2-linux-${OS_ARCH}-debian-11" \
