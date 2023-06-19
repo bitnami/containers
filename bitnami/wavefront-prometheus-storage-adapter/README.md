@@ -1,4 +1,8 @@
-# Wavefront Prometheus Adapter packaged by Bitnami
+# Deprecation notice
+
+Remove Wavefront Prometheus Adapter container since this installation method has been deprecated in favor of the Kubernetes Operator.
+
+## Wavefront Prometheus Adapter packaged by Bitnami
 
 ## What is Wavefront Prometheus Adapter?
 
