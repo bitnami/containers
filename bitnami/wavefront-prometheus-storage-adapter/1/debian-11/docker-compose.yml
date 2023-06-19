@@ -1,4 +1,0 @@
-version: '2'
-services:
-  wavefront-prometheus-storage-adapter:
-    image: docker.io/bitnami/wavefront-prometheus-storage-adapter:1

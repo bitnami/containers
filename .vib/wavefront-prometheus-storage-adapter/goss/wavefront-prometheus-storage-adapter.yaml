@@ -1,4 +1,0 @@
-command:
-  check-adapter-help:
-    exec: adapter --help
-    exit-status: 0
