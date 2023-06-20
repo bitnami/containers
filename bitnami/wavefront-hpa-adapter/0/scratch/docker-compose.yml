@@ -1,4 +1,0 @@
-version: '2'
-services:
-  wavefront-hpa-adapter:
-    image: docker.io/bitnami/wavefront-hpa-adapter:0
