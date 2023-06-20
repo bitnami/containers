@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-17T21:06:36Z" \
+      org.opencontainers.image.created="2023-06-20T21:44:00Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.13.3-debian-11-r13" \
+      org.opencontainers.image.ref.name="7.13.3-debian-11-r14" \
       org.opencontainers.image.title="suitecrm" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="7.13.3"
@@ -23,7 +23,7 @@ RUN install_packages acl ca-certificates cron curl libaudit1 libbrotli1 libbsd0 
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "php-8.0.29-1-linux-${OS_ARCH}-debian-11" \
-      "apache-2.4.57-7-linux-${OS_ARCH}-debian-11" \
+      "apache-2.4.57-8-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.11.4-0-linux-${OS_ARCH}-debian-11" \
       "libphp-8.0.29-0-linux-${OS_ARCH}-debian-11" \
       "suitecrm-7.13.3-2-linux-${OS_ARCH}-debian-11" \
