@@ -3,13 +3,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-18T20:32:41Z" \
+      org.opencontainers.image.created="2023-06-20T19:04:48Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="10.2.3-debian-11-r4" \
+      org.opencontainers.image.ref.name="10.2.4-debian-11-r0" \
       org.opencontainers.image.title="laravel" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="10.2.3"
+      org.opencontainers.image.version="10.2.4"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
@@ -25,7 +25,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "php-8.1.20-1-linux-${OS_ARCH}-debian-11" \
       "node-18.16.0-2-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.6-8-linux-${OS_ARCH}-debian-11" \
-      "laravel-10.2.3-0-linux-${OS_ARCH}-debian-11" \
+      "laravel-10.2.4-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -43,7 +43,7 @@ RUN /build/bitnami-user.sh
 COPY rootfs /
 RUN /opt/bitnami/scripts/laravel/postunpack.sh
 RUN /opt/bitnami/scripts/php/postunpack.sh
-ENV APP_VERSION="10.2.3" \
+ENV APP_VERSION="10.2.4" \
     BITNAMI_APP_NAME="laravel" \
     NODE_PATH="/opt/bitnami/node/lib/node_modules" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/node/bin:/opt/bitnami/common/bin:$PATH" \
