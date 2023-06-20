@@ -1,0 +1,8 @@
+binaries:
+  - node
+  - yarn
+  - npm
+root_dir: /opt/bitnami
+version:
+  bin_name: npm
+  flag: list /opt/bitnami/attu

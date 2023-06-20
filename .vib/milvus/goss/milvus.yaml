@@ -1,0 +1,23 @@
+group:
+  milvus:
+    exists: true
+user:
+  milvus:
+    exists: true
+file:
+  /milvus:
+    exists: true
+    filetype: symlink
+    linked-to: /opt/bitnami/milvus
+  /var/lib/milvus:
+    exists: true
+    filetype: symlink
+    linked-to: /bitnami/milvus/data
+  /run/milvus:
+    exists: true
+    filetype: symlink
+    linked-to: /opt/bitnami/milvus/tmp
+http://127.0.0.1:9091/api/v1/health:
+  status: 200
+  body:
+    - ok

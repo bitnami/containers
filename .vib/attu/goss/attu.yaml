@@ -1,0 +1,19 @@
+user:
+  attu:
+    exists: true
+    uid: 1001
+    gid: 0
+file:
+  /app:
+    exists: true
+    filetype: symlink
+    linked-to: /opt/bitnami/attu
+command:
+  attu-command-available:
+    exec: npm run
+    exit-status: 0
+    stdout:
+      - start:prod
+http:
+  http://127.0.0.1:3000/api/v1/swagger/:
+    status: 200
