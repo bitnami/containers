@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.4.57-7"
+        "version": "2.4.57-8"
     },
     "libphp": {
         "arch": "amd64",

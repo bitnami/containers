@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-17T19:59:32Z" \
+      org.opencontainers.image.created="2023-06-20T20:31:06Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.2.1-debian-11-r40" \
+      org.opencontainers.image.ref.name="5.2.1-debian-11-r41" \
       org.opencontainers.image.title="phpmyadmin" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="5.2.1"
@@ -23,7 +23,7 @@ RUN install_packages ca-certificates curl libaudit1 libbrotli1 libbsd0 libbz2-1.
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "php-8.1.20-1-linux-${OS_ARCH}-debian-11" \
-      "apache-2.4.57-7-linux-${OS_ARCH}-debian-11" \
+      "apache-2.4.57-8-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.11.4-0-linux-${OS_ARCH}-debian-11" \
       "libphp-8.1.20-0-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-6-linux-${OS_ARCH}-debian-11" \
