@@ -1,4 +1,8 @@
-# Wavefront HPA Adapter for Kubernetes
+# Deprecation notice
+
+Remove Wavefront HPA Adapter container since this installation method has been deprecated in favor of the Kubernetes Operator.
+
+## Wavefront HPA Adapter for Kubernetes
 
 ## What is Wavefront HPA Adapter for Kubernetes?
 
