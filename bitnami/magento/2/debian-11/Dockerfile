@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-17T22:53:57Z" \
+      org.opencontainers.image.created="2023-06-21T00:03:29Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.4.6-debian-11-r29" \
+      org.opencontainers.image.ref.name="2.4.6-debian-11-r30" \
       org.opencontainers.image.title="magento" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.4.6"
@@ -23,7 +23,7 @@ RUN install_packages acl ca-certificates cron curl libaudit1 libbrotli1 libbsd0 
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "php-8.1.20-1-linux-${OS_ARCH}-debian-11" \
-      "apache-2.4.57-7-linux-${OS_ARCH}-debian-11" \
+      "apache-2.4.57-8-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.6-8-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.11.4-0-linux-${OS_ARCH}-debian-11" \
       "libphp-8.1.20-0-linux-${OS_ARCH}-debian-11" \
