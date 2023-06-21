@@ -12,7 +12,7 @@ Popular applications, provided by [Bitnami](https://bitnami.com), containerized 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -61,6 +61,10 @@ As part of the release process, the Bitnami container images are analyzed for vu
 * [Grype](https://github.com/anchore/grype)
 
 This scanning process is triggered via a GH action for every PR affecting the source code of the containers, regardless of its nature or origin.
+
+## Retention policy
+
+Deprecated assets will be retained in the container registry ([Bitnami DockerHub org](https://hub.docker.com/u/bitnami)) for, at least, three months.
 
 ## Contributing
 
