@@ -32,10 +32,10 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-06-21T08:27:04Z" \
+      org.opencontainers.image.created="2023-06-21T11:38:17Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.31.0-scratch-r6" \
+      org.opencontainers.image.ref.name="0.31.0-scratch-r7" \
       org.opencontainers.image.title="thanos" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.31.0"
