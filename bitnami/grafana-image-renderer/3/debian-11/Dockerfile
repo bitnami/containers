@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-18T01:50:49Z" \
+      org.opencontainers.image.created="2023-06-21T02:24:21Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.7.1-debian-11-r11" \
+      org.opencontainers.image.ref.name="3.7.1-debian-11-r12" \
       org.opencontainers.image.title="grafana-image-renderer" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.7.1"
@@ -23,7 +23,7 @@ RUN install_packages ca-certificates chromium curl fonts-freefont-ttf fonts-ipaf
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.9.17-1-linux-${OS_ARCH}-debian-11" \
-      "node-16.20.0-3-linux-${OS_ARCH}-debian-11" \
+      "node-16.20.1-0-linux-${OS_ARCH}-debian-11" \
       "grafana-image-renderer-3.7.1-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
