@@ -3,6 +3,11 @@ binaries:
   - yarn
   - npm
 root_dir: /opt/bitnami
+directories:
+  - paths:
+      # Paths to the client and server directories
+      - /opt/bitnami/attu/dist
+      - /opt/bitnami/attu/build
 version:
   bin_name: npm
   flag: list /opt/bitnami/attu

@@ -1,9 +1,8 @@
-group:
-  milvus:
-    exists: true
 user:
   milvus:
     exists: true
+    uid: 1001
+    gid: 0
 file:
   /milvus:
     exists: true
