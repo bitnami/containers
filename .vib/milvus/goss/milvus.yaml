@@ -1,0 +1,25 @@
+user:
+  milvus:
+    exists: true
+    uid: 1001
+    gid: 0
+file:
+  /milvus:
+    exists: true
+    filetype: symlink
+    linked-to: /opt/bitnami/milvus
+  /var/lib/milvus:
+    exists: true
+    filetype: symlink
+    linked-to: /bitnami/milvus/data
+  /run/milvus:
+    exists: true
+    filetype: symlink
+    linked-to: /opt/bitnami/milvus/tmp
+command:
+  run-milvus:
+    exec: cd /opt/bitnami/milvus; timeout --preserve-status 5 milvus run standalone || true
+    timeout: 8000
+    exit-status: 0
+    stdout:
+      - running Milvus components
