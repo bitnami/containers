@@ -16,6 +16,13 @@ file:
     exists: true
     filetype: symlink
     linked-to: /opt/bitnami/milvus/tmp
+command:
+  run-milvus:
+    exec: cd /opt/bitnami/milvus; timeout --preserve-status 5 milvus run standalone || true
+    timeout: 8000
+    exit-status: 0
+    stdout:
+      - running Milvus components
 http://127.0.0.1:9091/api/v1/health:
   status: 200
   body:

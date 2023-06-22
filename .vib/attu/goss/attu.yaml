@@ -10,10 +10,16 @@ file:
     linked-to: /opt/bitnami/attu
 command:
   attu-command-available:
-    exec: npm run
+    exec: cd /opt/bitnami/attu; npm run
     exit-status: 0
     stdout:
       - start:prod
+  run-attu:
+    exec: cd /opt/bitnami/attu; timeout --preserve-status 5 milvus run standalone || true
+    timeout: 8000
+    exit-status: 0
+    stdout:
+      - Attu server started
 http:
   http://127.0.0.1:3000/api/v1/swagger/:
     status: 200
