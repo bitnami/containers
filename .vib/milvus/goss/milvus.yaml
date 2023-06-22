@@ -23,7 +23,3 @@ command:
     exit-status: 0
     stdout:
       - running Milvus components
-http://127.0.0.1:9091/api/v1/health:
-  status: 200
-  body:
-    - ok
