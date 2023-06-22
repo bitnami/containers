@@ -64,7 +64,8 @@ This scanning process is triggered via a GH action for every PR affecting the so
 
 ## Retention policy
 
-Deprecated assets will be retained in the container registry ([Bitnami DockerHub org](https://hub.docker.com/u/bitnami)) for, at least, three months.
+Deprecated assets will be retained in the container registry ([Bitnami DockerHub org](https://hub.docker.com/u/bitnami)) without changes for, at least, three months after the deprecation.
+After that period, all the images will be moved to a new _"archived"_ repository. For instance, once deprecated an asset named _foo_ whose container repository was `bitnami/foo`, all the images will be moved to `bitnami/foo-archived` where they will remain indefinitely.
 
 ## Contributing
 
