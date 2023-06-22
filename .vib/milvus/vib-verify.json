@@ -4,7 +4,7 @@
       "url": "{SHA_ARCHIVE}",
       "path": "{VIB_ENV_PATH}"
     },
-    "runtime_parameters": "Y29tbWFuZDogWyJ0YWlsIiwgIi1mIiwgIi9kZXYvbnVsbCJd"
+    "runtime_parameters": "Y29tbWFuZDogWyJtaWx2dXMiLCAicnVuIiwgInN0YW5kYWxvbmUiXQ=="
   },
   "phases": {
     "package": {
@@ -36,11 +36,11 @@
             "resources": {
               "path": "/.vib"
             },
-            "tests_file": "mastodon/goss/goss.yaml",
-            "vars_file": "mastodon/goss/vars.yaml",
+            "tests_file": "milvus/goss/goss.yaml",
+            "vars_file": "milvus/goss/vars.yaml",
             "remote": {
               "pod": {
-                "workload": "deploy-mastodon"
+                "workload": "deploy-milvus"
               }
             }
           }
@@ -49,18 +49,14 @@
           "action_id": "trivy",
           "params": {
             "threshold": "CRITICAL",
-            "vuln_type": [
-              "OS"
-            ]
+            "vuln_type": ["OS"]
           }
         },
         {
           "action_id": "grype",
           "params": {
             "threshold": "CRITICAL",
-            "package_type": [
-              "OS"
-            ]
+            "package_type": ["OS"]
           }
         }
       ]
