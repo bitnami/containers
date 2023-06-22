@@ -9,5 +9,5 @@ directories:
       - /opt/bitnami/attu/dist
       - /opt/bitnami/attu/build
 version:
-  bin_name: npm
+  bin_name: /opt/bitnami/node/bin/npm
   flag: list /opt/bitnami/attu
