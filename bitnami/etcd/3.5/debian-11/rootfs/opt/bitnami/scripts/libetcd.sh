@@ -664,6 +664,11 @@ etcd_initialize() {
             if is_boolean_yes "$ETCD_DISABLE_PRESTOP"; then
                 info "The member will try to join the cluster by it's own"
                 export ETCD_INITIAL_CLUSTER_STATE=existing
+                #
+                # If ETCD_DISABLE_PRESTOP is set, we won't dynamically adjust membership. In this case
+                # we'll return and allow etcd to start and join the statically configured cluster.
+                #
+                return 0
             fi
             member_id="$(get_member_id)"
             if ! is_healthy_etcd_cluster; then
