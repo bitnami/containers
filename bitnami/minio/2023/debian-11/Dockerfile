@@ -3,10 +3,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-19T09:18:52Z" \
+      org.opencontainers.image.created="2023-06-22T14:12:45Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2023.6.9-debian-11-r3" \
+      org.opencontainers.image.ref.name="2023.6.9-debian-11-r4" \
       org.opencontainers.image.title="minio" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2023.6.9"
@@ -23,7 +23,7 @@ RUN install_packages ca-certificates curl jq procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "wait-for-port-1.0.6-8-linux-${OS_ARCH}-debian-11" \
-      "minio-client-2023.6.15-0-linux-${OS_ARCH}-debian-11" \
+      "minio-client-2023.6.19-0-linux-${OS_ARCH}-debian-11" \
       "minio-2023.6.9-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
