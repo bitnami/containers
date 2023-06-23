@@ -1,15 +1,18 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-21T13:02:30Z" \
+      org.opencontainers.image.created="2023-06-23T11:11:16Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.13.3-debian-11-r3" \
+      org.opencontainers.image.ref.name="1.14.0-debian-11-r0" \
       org.opencontainers.image.title="vault" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.13.3"
+      org.opencontainers.image.version="1.14.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +25,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "vault-1.13.3-0-linux-${OS_ARCH}-debian-11" \
+      "vault-1.14.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -37,7 +40,7 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN useradd -r -u 1001 -g root vault
 
-ENV APP_VERSION="1.13.3" \
+ENV APP_VERSION="1.14.0" \
     BITNAMI_APP_NAME="vault" \
     PATH="/opt/bitnami/vault/bin:$PATH"
 
