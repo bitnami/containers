@@ -23,3 +23,5 @@ done
 # Symlinks to normalize directories
 ln -sf "$LDAP_ONLINE_CONF_DIR" "${LDAP_CONF_DIR}/slapd.d"
 ln -sf "$LDAP_DATA_DIR" "${LDAP_VAR_DIR}/data"
+
+setcap CAP_NET_BIND_SERVICE=+eip /opt/bitnami/openldap/sbin/slapd

@@ -173,7 +173,7 @@ docker-compose up -d
 
 The Bitnami Docker OpenLDAP can be easily setup with the following environment variables:
 
-* `LDAP_PORT_NUMBER`: The port OpenLDAP is listening for requests. Default: **1389** (non privileged port) or use the standard port **389**
+* `LDAP_PORT_NUMBER`: The port OpenLDAP is listening for requests. Priviledged port is supported (e.g. `1389`). Default: **1389** (non privileged port).
 * `LDAP_ROOT`: LDAP baseDN (or suffix) of the LDAP tree. Default: **dc=example,dc=org**
 * `LDAP_ADMIN_USERNAME`: LDAP database admin user. Default: **admin**
 * `LDAP_ADMIN_PASSWORD`: LDAP database admin password. Default: **adminpassword**
@@ -205,7 +205,7 @@ Check the official [OpenLDAP Configuration Reference](https://www.openldap.org/d
 OpenLDAP clients and servers are capable of using the Transport Layer Security (TLS) framework to provide integrity and confidentiality protections and to support LDAP authentication using the SASL EXTERNAL mechanism. Should you desire to enable this optional feature, you may use the following environment variables to configure the application:
 
 * `LDAP_ENABLE_TLS`: Whether to enable TLS for traffic or not. Defaults to `no`.
-* `LDAP_LDAPS_PORT_NUMBER`: Port used for TLS secure traffic. Defaults: **1636**  (non privileged port) or use the standard port **636**
+* `LDAP_LDAPS_PORT_NUMBER`: Port used for TLS secure traffic. Priviledged port is supported (e.g. `636`). Default: **1636** (non privileged port).
 * `LDAP_TLS_CERT_FILE`: File containing the certificate file for the TLS traffic. No defaults.
 * `LDAP_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
 * `LDAP_TLS_CA_FILE`: File containing the CA of the certificate. No defaults.
