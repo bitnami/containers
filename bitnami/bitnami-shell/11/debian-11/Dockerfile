@@ -1,12 +1,15 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-20T17:38:33Z" \
+      org.opencontainers.image.created="2023-06-23T17:58:15Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="11-debian-11-r128" \
+      org.opencontainers.image.ref.name="11-debian-11-r129" \
       org.opencontainers.image.title="bitnami-shell" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="11"
