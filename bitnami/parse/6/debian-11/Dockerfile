@@ -1,12 +1,15 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-20T21:06:45Z" \
+      org.opencontainers.image.created="2023-06-23T21:58:39Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.2.0-debian-11-r11" \
+      org.opencontainers.image.ref.name="6.2.0-debian-11-r12" \
       org.opencontainers.image.title="parse" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="6.2.0"
@@ -23,8 +26,8 @@ RUN install_packages ca-certificates curl jq libbz2-1.0 libcom-err2 libcrypt1 li
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.9.17-1-linux-${OS_ARCH}-debian-11" \
-      "node-16.20.0-3-linux-${OS_ARCH}-debian-11" \
-      "mongodb-shell-1.10.0-0-linux-${OS_ARCH}-debian-11" \
+      "node-16.20.1-0-linux-${OS_ARCH}-debian-11" \
+      "mongodb-shell-1.10.1-0-linux-${OS_ARCH}-debian-11" \
       "parse-6.2.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
