@@ -1,13 +1,16 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM docker.io/bitnami/minideb:bullseye
 
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-20T18:44:51Z" \
+      org.opencontainers.image.created="2023-06-23T19:30:23Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.3.2-debian-11-r49" \
+      org.opencontainers.image.ref.name="3.3.2-debian-11-r50" \
       org.opencontainers.image.title="kafka" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.3.2"
