@@ -1,12 +1,15 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-21T15:37:17Z" \
+      org.opencontainers.image.created="2023-06-24T15:55:18Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.9.0-debian-11-r68" \
+      org.opencontainers.image.ref.name="0.9.0-debian-11-r69" \
       org.opencontainers.image.title="consul-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.9.0"
