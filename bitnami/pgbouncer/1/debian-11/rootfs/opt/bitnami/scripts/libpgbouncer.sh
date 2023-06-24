@@ -64,7 +64,7 @@ pgbouncer_validate() {
         fi
     fi
 
-    # HBA Checks 
+    # HBA Checks
     if [[ "$PGBOUNCER_AUTH_TYPE" == "hba" ]] ; then
         if [[ -z "$PGBOUNCER_AUTH_HBA_FILE" ]]; then
             print_validation_error "A hba file was not provided. You need to set this value when specifying auth_type to hba"
