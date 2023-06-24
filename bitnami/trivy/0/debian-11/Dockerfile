@@ -1,12 +1,15 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-21T13:36:59Z" \
+      org.opencontainers.image.created="2023-06-24T13:59:50Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.42.1-debian-11-r2" \
+      org.opencontainers.image.ref.name="0.42.1-debian-11-r3" \
       org.opencontainers.image.title="trivy" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.42.1"
