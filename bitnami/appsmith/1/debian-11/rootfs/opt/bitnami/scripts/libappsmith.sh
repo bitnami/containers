@@ -192,7 +192,7 @@ appsmith_backend_stop() {
 is_appsmith_rts_running() {
     # appsmith-rts does not create any PID file
     # We regenerate the PID file for each time we query it to avoid getting outdated
-    pgrep -f "${APPSMITH_BASE_DIR}/rts/server.js" | head -n 1 > "$APPSMITH_RTS_PID_FILE"
+    pgrep -f "${APPSMITH_BASE_DIR}/rts/dist/server.js" | head -n 1 > "$APPSMITH_RTS_PID_FILE"
 
     pid="$(get_pid_from_file "$APPSMITH_RTS_PID_FILE")"
     if [[ -n "$pid" ]]; then
