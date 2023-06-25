@@ -1,12 +1,15 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-22T14:15:33Z" \
+      org.opencontainers.image.created="2023-06-25T14:49:44Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.436.0-debian-11-r0" \
+      org.opencontainers.image.ref.name="0.436.0-debian-11-r1" \
       org.opencontainers.image.title="google-cloud-sdk" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.436.0"
