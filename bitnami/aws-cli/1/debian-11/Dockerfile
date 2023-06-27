@@ -6,13 +6,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-23T22:46:32Z" \
+      org.opencontainers.image.created="2023-06-27T03:23:29Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.27.160-debian-11-r0" \
+      org.opencontainers.image.ref.name="1.27.161-debian-11-r0" \
       org.opencontainers.image.title="aws-cli" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.27.160"
+      org.opencontainers.image.version="1.27.161"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ RUN install_packages ca-certificates curl groff-base libbz2-1.0 libcom-err2 libc
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.11.4-1-linux-${OS_ARCH}-debian-11" \
-      "aws-cli-1.27.160-0-linux-${OS_ARCH}-debian-11" \
+      "aws-cli-1.27.161-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -42,7 +42,7 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="1.27.160" \
+ENV APP_VERSION="1.27.161" \
     AWS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt" \
     BITNAMI_APP_NAME="aws-cli" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/aws-cli/bin:/opt/bitnami/aws-cli/venv/bin:$PATH"
