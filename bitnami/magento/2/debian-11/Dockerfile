@@ -6,10 +6,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-24T09:13:46Z" \
+      org.opencontainers.image.created="2023-06-27T11:39:35Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.4.6-debian-11-r31" \
+      org.opencontainers.image.ref.name="2.4.6-debian-11-r32" \
       org.opencontainers.image.title="magento" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.4.6"
