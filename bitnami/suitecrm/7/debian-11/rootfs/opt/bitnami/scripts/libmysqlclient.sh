@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 #
 # Bitnami MySQL Client library
 
@@ -150,6 +152,8 @@ EOF
 }
 
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 #
 # Library for mysql common
 
