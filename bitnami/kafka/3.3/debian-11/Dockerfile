@@ -7,10 +7,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-27T04:15:32Z" \
+      org.opencontainers.image.created="2023-06-27T14:18:00Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.3.2-debian-11-r51" \
+      org.opencontainers.image.ref.name="3.3.2-debian-11-r52" \
       org.opencontainers.image.title="kafka" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.3.2"
@@ -28,7 +28,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "wait-for-port-1.0.6-8-linux-${OS_ARCH}-debian-11" \
       "java-17.0.7-7-2-linux-${OS_ARCH}-debian-11" \
-      "render-template-1.0.5-6-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.5-7-linux-${OS_ARCH}-debian-11" \
       "kafka-3.3.2-7-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
