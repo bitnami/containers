@@ -6,10 +6,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-23T18:51:55Z" \
+      org.opencontainers.image.created="2023-06-27T04:16:27Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.6.1-debian-11-r33" \
+      org.opencontainers.image.ref.name="5.6.1-debian-11-r34" \
       org.opencontainers.image.title="keycloak-config-cli" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="5.6.1"
