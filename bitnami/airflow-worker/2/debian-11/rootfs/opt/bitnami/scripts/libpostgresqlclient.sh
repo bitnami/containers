@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 #
 # Bitnami PostgreSQL Client library
 
@@ -114,6 +116,9 @@ postgresql_client_initialize() {
     # Avoid exit code of previous commands to affect the result of this function
     true
 }
+
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 
 # shellcheck disable=SC2148
 

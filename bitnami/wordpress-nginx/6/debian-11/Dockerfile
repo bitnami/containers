@@ -6,10 +6,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-23T08:23:10Z" \
+      org.opencontainers.image.created="2023-06-27T06:05:38Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.2.2-debian-11-r19" \
+      org.opencontainers.image.ref.name="6.2.2-debian-11-r20" \
       org.opencontainers.image.title="wordpress-nginx" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="6.2.2"
@@ -28,7 +28,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "php-8.2.7-3-linux-${OS_ARCH}-debian-11" \
       "nginx-1.25.1-0-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.11.4-0-linux-${OS_ARCH}-debian-11" \
-      "wordpress-6.2.2-14-linux-${OS_ARCH}-debian-11" \
+      "wordpress-6.2.2-15-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-6-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \

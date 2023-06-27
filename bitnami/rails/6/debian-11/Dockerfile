@@ -6,13 +6,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-24T08:35:09Z" \
+      org.opencontainers.image.created="2023-06-27T05:33:48Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.1.7-3-debian-11-r32" \
+      org.opencontainers.image.ref.name="6.1.7-4-debian-11-r0" \
       org.opencontainers.image.title="rails" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="6.1.7-3"
+      org.opencontainers.image.version="6.1.7-4"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
@@ -29,7 +29,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "node-18.16.1-0-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.11.4-0-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.6-8-linux-${OS_ARCH}-debian-11" \
-      "rails-6.1.7-3-5-linux-${OS_ARCH}-debian-11" \
+      "rails-6.1.7-4-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -46,7 +46,7 @@ RUN /build/bitnami-user.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/rails/postunpack.sh
-ENV APP_VERSION="6.1.7-3" \
+ENV APP_VERSION="6.1.7-4" \
     BITNAMI_APP_NAME="rails" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/ruby/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
