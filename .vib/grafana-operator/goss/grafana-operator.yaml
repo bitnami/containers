@@ -1,5 +1,5 @@
 command:
-  check-app-version:
+  check-app:
     exec: grafana-operator --help || true
     exit-status: 0
     stderr:
