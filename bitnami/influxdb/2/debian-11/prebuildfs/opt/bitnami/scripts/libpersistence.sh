@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 #
 # Bitnami persistence library
 # Used for bringing persistence capabilities to applications that don't have clear separation of data and logic
