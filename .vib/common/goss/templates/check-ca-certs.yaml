@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 ########################
 # Checks the ca-certificates package
 # is installed accesing an HTTPS URL

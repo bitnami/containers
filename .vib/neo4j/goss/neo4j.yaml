@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 file:
   # Check config files
   /opt/bitnami/neo4j/conf/apoc.conf:

@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 command:
   # The metallb-speaker binary does not have a --version flag, but starting it displays the version
   check-app-version:

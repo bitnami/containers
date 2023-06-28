@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 command:
   check-app-version:
     # suitecrm_version.php is located at the root path in SuiteCRM 7.x, but in 8.x it can be found in public/legacy

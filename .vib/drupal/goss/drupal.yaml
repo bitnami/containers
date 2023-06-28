@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 file:
   # HTTP vhost should have been properly rendered
   /opt/bitnami/apache/conf/vhosts/drupal-vhost.conf:

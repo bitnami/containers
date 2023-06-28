@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 command:
   check-cassandra-exporter-jar:
     exec: timeout --preserve-status 5 java -jar /opt/bitnami/cassandra-exporter/cassandra_exporter.jar /opt/bitnami/cassandra-exporter/config.yml

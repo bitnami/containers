@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 command:
   check-app-version:
     exec: java -cp /opt/bitnami/jenkins-agent/agent.jar hudson.remoting.jnlp.Main -version | echo "0.$(cut -d '.' -f 1).0"

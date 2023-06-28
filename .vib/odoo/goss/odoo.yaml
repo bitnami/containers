@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 command:
   check-virtualenv:
     exec: bash -c '. /opt/bitnami/odoo/venv/bin/activate; pip install tool; pip uninstall -y tool'

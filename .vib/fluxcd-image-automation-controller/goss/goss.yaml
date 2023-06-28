@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 gossfile:
   ../../fluxcd-image-automation-controller/goss/fluxcd-image-automation-controller.yaml: {}
   # Load scripts from .vib/common/goss/templates
