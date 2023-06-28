@@ -6,10 +6,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-25T21:47:05Z" \
+      org.opencontainers.image.created="2023-06-28T22:29:20Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="14.0.20230610-debian-11-r5" \
+      org.opencontainers.image.ref.name="14.0.20230610-debian-11-r6" \
       org.opencontainers.image.title="odoo" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="14.0.20230610"
@@ -26,7 +26,7 @@ RUN install_packages acl ca-certificates curl fontconfig libbsd0 libbz2-1.0 libc
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.8.17-1-linux-${OS_ARCH}-debian-11" \
-      "render-template-1.0.5-6-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.5-7-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-15.3.0-1-linux-${OS_ARCH}-debian-11" \
       "node-18.16.1-0-linux-${OS_ARCH}-debian-11" \
       "odoo-14.0.20230610-0-linux-${OS_ARCH}-debian-11" \
