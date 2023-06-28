@@ -7,13 +7,13 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-27T05:38:03Z" \
+      org.opencontainers.image.created="2023-06-28T18:03:03Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.6.1-6092-debian-11-r10" \
+      org.opencontainers.image.ref.name="4.6.1-6094-debian-11-r0" \
       org.opencontainers.image.title="reportserver" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="4.6.1-6092"
+      org.opencontainers.image.version="4.6.1-6094"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,8 +29,8 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "java-17.0.7-7-2-linux-${OS_ARCH}-debian-11" \
       "tomcat-9.0.76-0-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.11.4-0-linux-${OS_ARCH}-debian-11" \
-      "reportserver-4.6.1-6092-0-linux-${OS_ARCH}-debian-11" \
-      "render-template-1.0.5-6-linux-${OS_ARCH}-debian-11" \
+      "reportserver-4.6.1-6094-0-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.5-7-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -51,7 +51,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/reportserver/postunpack.sh
 RUN /opt/bitnami/scripts/tomcat/postunpack.sh
-ENV APP_VERSION="4.6.1-6092" \
+ENV APP_VERSION="4.6.1-6094" \
     BITNAMI_APP_NAME="reportserver" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH" \
