@@ -6,10 +6,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-25T14:29:58Z" \
+      org.opencontainers.image.created="2023-06-28T14:45:32Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.4.3-debian-11-r10" \
+      org.opencontainers.image.ref.name="4.4.3-debian-11-r11" \
       org.opencontainers.image.title="pgpool" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="4.4.3"
@@ -26,7 +26,7 @@ RUN install_packages ca-certificates curl ldap-utils libaudit1 libbsd0 libcap-ng
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "postgresql-client-14.8.0-1-linux-${OS_ARCH}-debian-11" \
-      "wait-for-port-1.0.6-8-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.6-9-linux-${OS_ARCH}-debian-11" \
       "pgpool-4.4.3-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
