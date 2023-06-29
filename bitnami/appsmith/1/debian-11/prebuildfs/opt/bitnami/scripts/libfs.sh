@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 #
 # Library for file system actions
 
@@ -42,7 +44,7 @@ ensure_dir_exists() {
     local owner_user="${2:-}"
     local owner_group="${3:-}"
 
-    mkdir -p "${dir}"
+    [ -d "${dir}" ] || mkdir -p "${dir}"
     if [[ -n $owner_user ]]; then
         owned_by "$dir" "$owner_user" "$owner_group"
     fi
