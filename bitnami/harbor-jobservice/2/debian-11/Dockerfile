@@ -6,10 +6,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-26T00:11:55Z" \
+      org.opencontainers.image.created="2023-06-29T00:30:21Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.8.2-debian-11-r7" \
+      org.opencontainers.image.ref.name="2.8.2-debian-11-r8" \
       org.opencontainers.image.title="harbor-jobservice" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.8.2"
@@ -25,7 +25,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "yq-4.34.1-0-linux-${OS_ARCH}-debian-11" \
+      "yq-4.34.1-3-linux-${OS_ARCH}-debian-11" \
       "harbor-jobservice-2.8.2-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
