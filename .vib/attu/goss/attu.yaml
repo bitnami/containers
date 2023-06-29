@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: APACHE-2.0
 
 user:
-  attu:
+  pymilvus:
     exists: true
     uid: 1001
     gid: 0
@@ -10,16 +10,16 @@ file:
   /app:
     exists: true
     filetype: symlink
-    linked-to: /opt/bitnami/attu
+    linked-to: /opt/bitnami/pymilvus
 command:
-  attu-command-available:
-    exec: cd /opt/bitnami/attu; npm run
+  pymilvus-command-available:
+    exec: cd /opt/bitnami/pymilvus; npm run
     exit-status: 0
     stdout:
       - start:prod
-  run-attu:
-    exec: cd /opt/bitnami/attu; timeout --preserve-status 5 yarn start:prod  || true
+  run-pymilvus:
+    exec: cd /opt/bitnami/pymilvus; timeout --preserve-status 5 yarn start:prod  || true
     timeout: 8000
     exit-status: 0
     stdout:
-      - Attu server started
+      - Pymilvus server started
