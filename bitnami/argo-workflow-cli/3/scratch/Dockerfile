@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM bitnami/minideb:bullseye as builder
 
 ARG TARGETARCH
@@ -5,7 +8,6 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 COPY prebuildfs /
-
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install required system packages and dependencies
@@ -33,10 +35,10 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-05-29T08:39:08Z" \
+      org.opencontainers.image.created="2023-06-29T11:25:48Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.4.8-scratch-r0" \
+      org.opencontainers.image.ref.name="3.4.8-scratch-r1" \
       org.opencontainers.image.title="argo-workflow-cli" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.4.8"
