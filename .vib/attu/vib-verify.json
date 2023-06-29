@@ -36,11 +36,11 @@
             "resources": {
               "path": "/.vib"
             },
-            "tests_file": "pymilvus/goss/goss.yaml",
-            "vars_file": "pymilvus/goss/vars.yaml",
+            "tests_file": "attu/goss/goss.yaml",
+            "vars_file": "attu/goss/vars.yaml",
             "remote": {
               "pod": {
-                "workload": "deploy-pymilvus"
+                "workload": "deploy-attu"
               }
             }
           }
