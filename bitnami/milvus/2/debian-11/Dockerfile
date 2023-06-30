@@ -6,10 +6,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-27T14:11:08Z" \
+      org.opencontainers.image.created="2023-06-30T14:26:19Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.2.10-debian-11-r3" \
+      org.opencontainers.image.ref.name="2.2.10-debian-11-r4" \
       org.opencontainers.image.title="milvus" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.2.10"
@@ -25,8 +25,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libblas3 libboost-filesystem1.74.0 libbrotli1 libcom-err2 libcurl4 libffi7 libgcc-s1 libgcrypt20 libgfortran5 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed6 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblapack3 libldap-2.4-2 libnettle8 libnghttp2-14 libp11-kit0 libpsl5 libquadmath0 librtmp1 libsasl2-2 libssh2-1 libssl1.1 libstdc++6 libtasn1-6 libtbb2 libunistring2 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "yq-4.34.1-2-linux-${OS_ARCH}-debian-11" \
-      "wait-for-port-1.0.6-8-linux-${OS_ARCH}-debian-11" \
+      "yq-4.34.1-3-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.6-9-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-7-linux-${OS_ARCH}-debian-11" \
       "milvus-2.2.10-0-linux-${OS_ARCH}-debian-11" \
     ) && \
