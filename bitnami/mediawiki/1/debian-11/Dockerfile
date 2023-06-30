@@ -6,13 +6,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-30T05:22:50Z" \
+      org.opencontainers.image.created="2023-06-30T19:41:53Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.39.3-debian-11-r29" \
+      org.opencontainers.image.ref.name="1.40.0-debian-11-r0" \
       org.opencontainers.image.title="mediawiki" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.39.3"
+      org.opencontainers.image.version="1.40.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -30,7 +30,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "mysql-client-10.11.4-0-linux-${OS_ARCH}-debian-11" \
       "libphp-8.1.20-0-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-7-linux-${OS_ARCH}-debian-11" \
-      "mediawiki-1.39.3-1-linux-${OS_ARCH}-debian-11" \
+      "mediawiki-1.40.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -54,7 +54,7 @@ RUN /opt/bitnami/scripts/mediawiki/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="1.39.3" \
+    APP_VERSION="1.40.0" \
     BITNAMI_APP_NAME="mediawiki" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
