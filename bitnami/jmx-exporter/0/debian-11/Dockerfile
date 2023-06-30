@@ -6,13 +6,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-30T04:38:40Z" \
+      org.opencontainers.image.created="2023-06-30T22:54:30Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.18.0-debian-11-r35" \
+      org.opencontainers.image.ref.name="0.19.0-debian-11-r0" \
       org.opencontainers.image.title="jmx-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.18.0"
+      org.opencontainers.image.version="0.19.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ RUN install_packages ca-certificates curl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "java-11.0.19-7-2-linux-${OS_ARCH}-debian-11" \
-      "jmx-exporter-0.18.0-4-linux-${OS_ARCH}-debian-11" \
+      "jmx-exporter-0.19.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -43,7 +43,7 @@ RUN apt-get autoremove --purge -y ca-certificates curl && \
 RUN chmod g+rwX /opt/bitnami
 RUN chown -R 1001:1001 /opt/bitnami/jmx-exporter
 
-ENV APP_VERSION="0.18.0" \
+ENV APP_VERSION="0.19.0" \
     BITNAMI_APP_NAME="jmx-exporter" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
