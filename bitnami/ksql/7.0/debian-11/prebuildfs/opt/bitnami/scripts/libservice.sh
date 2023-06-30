@@ -106,8 +106,6 @@ generate_cron_conf() {
     local schedule="* * * * *"
     local clean="true"
 
-    local clean="true"
-
     # Parse optional CLI flags
     shift 2
     while [[ "$#" -gt 0 ]]; do
@@ -133,7 +131,12 @@ generate_cron_conf() {
 
     mkdir -p /etc/cron.d
     if "$clean"; then
-        echo "${schedule} ${run_as} ${cmd}" > /etc/cron.d/"$service_name"
+        cat > "/etc/cron.d/${service_name}" <<EOF
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+${schedule} ${run_as} ${cmd}
+EOF
     else
         echo "${schedule} ${run_as} ${cmd}" >> /etc/cron.d/"$service_name"
     fi
@@ -189,7 +192,10 @@ generate_monit_conf() {
 
     is_boolean_yes "$disabled" && conf_suffix=".disabled"
     mkdir -p "$monit_conf_dir"
-    cat >"${monit_conf_dir}/${service_name}.conf${conf_suffix:-}" <<EOF
+    cat > "${monit_conf_dir}/${service_name}.conf${conf_suffix:-}" <<EOF
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 check process ${service_name}
   with pidfile "${pid_file}"
   start program = "${start_command}" with timeout 90 seconds
@@ -248,7 +254,10 @@ generate_logrotate_conf() {
     done
 
     mkdir -p "$logrotate_conf_dir"
-    cat <<EOF | sed '/^\s*$/d' >"${logrotate_conf_dir}/${service_name}"
+    cat <<EOF | sed '/^\s*$/d' > "${logrotate_conf_dir}/${service_name}"
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 ${log_path} {
   ${period}
   rotate ${rotations}
@@ -393,6 +402,9 @@ generate_systemd_conf() {
     fi
     # Generate the Systemd unit
     cat > "$service_file" <<EOF
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 [Unit]
 Description=Bitnami service for ${name}
 # Starting/stopping the main bitnami service should cause the same effect for this service
