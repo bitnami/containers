@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM bitnami/minideb:bullseye as builder
 
 ARG TARGETARCH
@@ -32,10 +35,10 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-06-14T13:39:32Z" \
+      org.opencontainers.image.created="2023-06-30T08:43:28Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.24.0-scratch-r0" \
+      org.opencontainers.image.ref.name="0.24.0-scratch-r1" \
       org.opencontainers.image.title="pinniped" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.24.0"
