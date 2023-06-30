@@ -15,12 +15,12 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-8"
+        "version": "1.0.6-9"
     },
     "yq": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.34.1-2"
+        "version": "4.34.1-3"
     }
 }
