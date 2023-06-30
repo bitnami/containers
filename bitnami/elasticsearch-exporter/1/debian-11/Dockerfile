@@ -6,13 +6,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-30T13:18:41Z" \
+      org.opencontainers.image.created="2023-06-30T22:54:16Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.5.0-debian-11-r115" \
+      org.opencontainers.image.ref.name="1.6.0-debian-11-r0" \
       org.opencontainers.image.title="elasticsearch-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.5.0"
+      org.opencontainers.image.version="1.6.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -25,7 +25,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "elasticsearch-exporter-1.5.0-12-linux-${OS_ARCH}-debian-11" \
+      "elasticsearch-exporter-1.6.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,7 +41,7 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="1.5.0" \
+ENV APP_VERSION="1.6.0" \
     BITNAMI_APP_NAME="elasticsearch-exporter" \
     PATH="/opt/bitnami/elasticsearch-exporter/bin:$PATH"
 
