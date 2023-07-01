@@ -6,10 +6,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-28T15:09:06Z" \
+      org.opencontainers.image.created="2023-07-01T15:27:42Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.35.1-debian-11-r33" \
+      org.opencontainers.image.ref.name="0.35.1-debian-11-r34" \
       org.opencontainers.image.title="fluxcd-kustomize-controller" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.35.1"
