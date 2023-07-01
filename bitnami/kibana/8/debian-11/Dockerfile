@@ -6,13 +6,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-30T21:17:43Z" \
+      org.opencontainers.image.created="2023-07-01T07:10:04Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.8.1-debian-11-r7" \
+      org.opencontainers.image.ref.name="8.8.2-debian-11-r0" \
       org.opencontainers.image.title="kibana" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="8.8.1"
+      org.opencontainers.image.version="8.8.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -27,7 +27,7 @@ RUN install_packages ca-certificates curl libgcc-s1 libnss3 libstdc++6 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "yq-4.34.1-6-linux-${OS_ARCH}-debian-11" \
-      "kibana-8.8.1-0-linux-${OS_ARCH}-debian-11" \
+      "kibana-8.8.2-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -44,7 +44,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/kibana/postunpack.sh
-ENV APP_VERSION="8.8.1" \
+ENV APP_VERSION="8.8.2" \
     BITNAMI_APP_NAME="kibana"
 
 EXPOSE 5601
