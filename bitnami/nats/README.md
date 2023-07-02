@@ -200,7 +200,7 @@ Available environment variables:
 * `NATS_HTTP_PORT_NUMBER`: NATS HTTP port number. Default: **8222**
 * `NATS_HTTPS_PORT_NUMBER`: NATS HTTPS port number. Default: **8443**
 * `NATS_FILENAME`: Pefix to use for NATS files (e.g., the PID file would be formed using `${NATS_FILENAME}.pid`). Default: **nats-server**
-* `NATS_EXTRA_FLAGS`: Additional command line arguments passed while starting NATS (e.g., `-js` for enabling JetStream). No defaults.
+* `NATS_EXTRA_ARGS`: Additional command line arguments passed while starting NATS (e.g., `-js` for enabling JetStream). No defaults.
 
 #### NATS security configuration
 
