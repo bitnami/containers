@@ -496,7 +496,7 @@ get_initial_cluster() {
         # This piece of code assumes this container is used on a VM environment
         # where ETCD_INITIAL_CLUSTER contains a comma-separated list of hostnames,
         # and recreates it as follows:
-        #   SCHEME://NOTE_NAME:PEER_PORT
+        #   SCHEME://NODE_NAME:PEER_PORT
         scheme="$(parse_uri "$ETCD_INITIAL_ADVERTISE_PEER_URLS" "scheme")"
         port="$(parse_uri "$ETCD_INITIAL_ADVERTISE_PEER_URLS" "port")"
         for nodePeer in "${endpoints_array[@]}"; do
