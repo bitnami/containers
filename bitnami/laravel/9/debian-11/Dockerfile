@@ -6,10 +6,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-30T13:18:12Z" \
+      org.opencontainers.image.created="2023-07-03T13:45:29Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="9.5.2-debian-11-r48" \
+      org.opencontainers.image.ref.name="9.5.2-debian-11-r49" \
       org.opencontainers.image.title="laravel" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="9.5.2"
