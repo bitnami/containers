@@ -1,0 +1,16 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+---
+header:
+  comment: on-failure
+  license:
+    spdx-id: Apache-2.0
+    copyright-owner: VMware, Inc.
+
+    content: |
+      # Copyright VMware, Inc.
+      # SPDX-License-Identifier: APACHE-2.0
+
+  paths:
+    - "**/Dockerfile"
