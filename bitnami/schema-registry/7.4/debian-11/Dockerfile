@@ -7,10 +7,10 @@ ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-30T06:25:29Z" \
+      org.opencontainers.image.created="2023-07-03T08:05:22Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.4.0-debian-11-r14" \
+      org.opencontainers.image.ref.name="7.4.0-debian-11-r15" \
       org.opencontainers.image.title="schema-registry" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="7.4.0"
