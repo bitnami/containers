@@ -8,14 +8,13 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 COPY prebuildfs /
-
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "kubeapps-asset-syncer-2.7.0-1-linux-${OS_ARCH}-debian-11" \
+      "kubeapps-asset-syncer-2.8.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -36,13 +35,13 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-05-21T14:38:50Z" \
+      org.opencontainers.image.created="2023-07-04T04:27:18Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.7.0-scratch-r1" \
+      org.opencontainers.image.ref.name="2.8.0-scratch-r0" \
       org.opencontainers.image.title="kubeapps-asset-syncer" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.7.0"
+      org.opencontainers.image.version="2.8.0"
 
 COPY prebuildfs /
 COPY rootfs /
