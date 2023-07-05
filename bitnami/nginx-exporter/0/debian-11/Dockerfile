@@ -6,10 +6,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-02T01:05:51Z" \
+      org.opencontainers.image.created="2023-07-05T01:27:05Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.11.0-debian-11-r97" \
+      org.opencontainers.image.ref.name="0.11.0-debian-11-r98" \
       org.opencontainers.image.title="nginx-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.11.0"
