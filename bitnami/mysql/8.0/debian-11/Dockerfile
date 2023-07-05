@@ -6,10 +6,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-04T22:46:12Z" \
+      org.opencontainers.image.created="2023-07-05T18:24:03Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.0.33-debian-11-r27" \
+      org.opencontainers.image.ref.name="8.0.33-debian-11-r28" \
       org.opencontainers.image.title="mysql" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="8.0.33"
@@ -26,7 +26,7 @@ RUN install_packages ca-certificates curl gcc-10 libaio1 libcom-err2 libgcc-s1 l
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "ini-file-1.4.5-6-linux-${OS_ARCH}-debian-11" \
-      "mysql-8.0.33-2-linux-${OS_ARCH}-debian-11" \
+      "mysql-8.0.33-3-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
