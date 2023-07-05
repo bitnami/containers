@@ -6,13 +6,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-04T15:35:13Z" \
+      org.opencontainers.image.created="2023-07-05T10:17:54Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.0.2-debian-11-r21" \
+      org.opencontainers.image.ref.name="2.1.1-debian-11-r0" \
       org.opencontainers.image.title="cosign" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.0.2"
+      org.opencontainers.image.version="2.1.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -25,7 +25,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "cosign-2.0.2-2-linux-${OS_ARCH}-debian-11" \
+      "cosign-2.1.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -44,7 +44,7 @@ RUN mkdir -p "/cosign-keys" && chmod -R 777 "/cosign-keys"
 RUN mkdir "/.docker" && chmod g+rwX "/.docker"
 RUN mkdir "/.sigstore" && chmod g+rwX "/.sigstore"
 
-ENV APP_VERSION="2.0.2" \
+ENV APP_VERSION="2.1.1" \
     BITNAMI_APP_NAME="cosign" \
     PATH="/opt/bitnami/cosign/bin:$PATH"
 
