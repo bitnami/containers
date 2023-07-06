@@ -6,10 +6,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-05T12:24:02Z" \
+      org.opencontainers.image.created="2023-07-06T16:16:27Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.9.1-debian-11-r136" \
+      org.opencontainers.image.ref.name="1.9.1-debian-11-r137" \
       org.opencontainers.image.title="mxnet" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.9.1"
