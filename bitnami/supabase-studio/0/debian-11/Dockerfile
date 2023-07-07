@@ -6,13 +6,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-06T16:23:42Z" \
+      org.opencontainers.image.created="2023-07-07T23:10:49Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.23.5-debian-11-r8" \
+      org.opencontainers.image.ref.name="0.23.6-debian-11-r0" \
       org.opencontainers.image.title="supabase-studio" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.23.5"
+      org.opencontainers.image.version="0.23.6"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -27,7 +27,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.9.17-1-linux-${OS_ARCH}-debian-11" \
       "node-16.20.1-0-linux-${OS_ARCH}-debian-11" \
-      "supabase-0.23.5-0-linux-${OS_ARCH}-debian-11" \
+      "supabase-0.23.6-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -45,7 +45,7 @@ RUN useradd -r -u 1001 -g root supabase
 
 RUN mkdir -p /opt/bitnami/supabase/studio/.next/cache && chmod g+rwX /opt/bitnami/supabase/studio/.next/cache
 RUN mkdir /.npm && chmod g+rwX /.npm
-ENV APP_VERSION="0.23.5" \
+ENV APP_VERSION="0.23.6" \
     BITNAMI_APP_NAME="supabase-studio" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/supabase/studio/node_modules/next/dist/bin:$PATH"
 
