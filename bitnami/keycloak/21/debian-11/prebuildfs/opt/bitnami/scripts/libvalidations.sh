@@ -188,6 +188,28 @@ validate_port() {
 }
 
 ########################
+# Validate if the provided argument is a valid IPv4 or IPv6 address
+# Arguments:
+#   $1 - IP to validate
+# Returns:
+#   Boolean
+#########################
+validate_ip() {
+    local ip="${1:?ip is missing}"
+    local stat=1
+
+    validate_ipv4 "$ip"
+    if [[ $? -eq 0 ]]; then
+        stat=0
+    else
+        validate_ipv6 "$ip"
+        stat=$?
+    fi
+
+    return $stat
+}
+
+########################
 # Validate if the provided argument is a valid IPv4 address
 # Arguments:
 #   $1 - IP to validate
@@ -206,6 +228,7 @@ validate_ipv4() {
     fi
     return $stat
 }
+
 ########################
 # Validate if the provided argument is a valid IPv6 address
 # Arguments:
@@ -227,6 +250,7 @@ validate_ipv6() {
 
     echo $stat
 }
+
 ########################
 # Validate a string format
 # Arguments:
