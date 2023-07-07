@@ -6,10 +6,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-06T05:59:56Z" \
+      org.opencontainers.image.created="2023-07-07T13:30:56Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.24.15-debian-11-r7" \
+      org.opencontainers.image.ref.name="1.24.15-debian-11-r8" \
       org.opencontainers.image.title="kubectl" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.24.15"
@@ -25,7 +25,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl git jq procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "kubectl-1.24.15-0-linux-${OS_ARCH}-debian-11" \
+      "kubectl-1.24.15-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
