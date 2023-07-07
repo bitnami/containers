@@ -6,13 +6,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-06T06:53:51Z" \
+      org.opencontainers.image.created="2023-07-07T07:37:11Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.14.2-debian-11-r28" \
+      org.opencontainers.image.ref.name="4.15.0-debian-11-r0" \
       org.opencontainers.image.title="matomo" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="4.14.2"
+      org.opencontainers.image.version="4.15.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -31,7 +31,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "libphp-8.2.8-0-linux-${OS_ARCH}-debian-11" \
       "ini-file-1.4.5-6-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-7-linux-${OS_ARCH}-debian-11" \
-      "matomo-4.14.2-3-linux-${OS_ARCH}-debian-11" \
+      "matomo-4.15.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -55,7 +55,7 @@ RUN /opt/bitnami/scripts/matomo/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="4.14.2" \
+    APP_VERSION="4.15.0" \
     BITNAMI_APP_NAME="matomo" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
