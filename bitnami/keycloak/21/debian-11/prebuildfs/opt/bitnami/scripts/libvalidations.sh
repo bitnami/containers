@@ -206,7 +206,27 @@ validate_ipv4() {
     fi
     return $stat
 }
+########################
+# Validate if the provided argument is a valid IPv6 address
+# Arguments:
+#   $1 - IP to validate
+# Returns:
+#   Boolean
+#########################
+validate_ipv6() {
+    local ip="${1:?ip is missing}"
+    local stat=1
 
+    local full_address_regex='^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$'
+		local short_address_regex='^((([0-9a-fA-F]{1,4}:){0,6}[0-9a-fA-F]{1,4}){0,6}::(([0-9a-fA-F]{1,4}:){0,6}[0-9a-fA-F]{1,4}){0,6})$'
+
+
+    if [[ $ip =~ $full_address_regex || $ip =~ $short_address_regex || $ip == "::" ]]; then
+        stat=0
+    fi
+
+    echo $stat
+}
 ########################
 # Validate a string format
 # Arguments:
