@@ -40,7 +40,7 @@ jobs:
             if [[ -f "${file_changed}" ]]; then
               dockerfiles+=("${file_changed}")
             fi
-          done <<< "$(echo "$files_changed" | grep -oE "Dockerfile$" | sort | uniq || true)"
+          done <<< "$(echo "$files_changed" | grep -oE ".*/Dockerfile$" | sort | uniq || true)"
           if [[ ${#dockerfiles[@]} -gt 0 ]]; then
             # There are modifications on dockerfiles
             export dockerfiles_json=$(printf "%s\n" "${dockerfiles[@]}" | jq -R . | jq -cs .)
