@@ -12,7 +12,8 @@ LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
       org.opencontainers.image.ref.name="2.6.2-debian-11-r7" \
       org.opencontainers.image.title="airflow" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.6.2"
+      org.opencontainers.image.version="2.6.2" \
+      framu=yes
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
