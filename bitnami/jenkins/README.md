@@ -222,7 +222,7 @@ To backup your data, configuration and logs, follow these simple steps:
 We need to mount two volumes in a container we will use to create the backup: a directory on your host to store the backup in, and the volumes from the container we just stopped so we can access the data.
 
 ```console
-docker run --rm -v /path/to/jenkins-backups:/backups --volumes-from jenkins bitnami/bitnami-shell \
+docker run --rm -v /path/to/jenkins-backups:/backups --volumes-from jenkins bitnami/os-shell \
   cp -a /bitnami/jenkins /backups/latest
 ```
 
