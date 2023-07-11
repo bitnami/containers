@@ -6,13 +6,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-11T09:11:34Z" \
+      org.opencontainers.image.created="2023-07-11T14:20:27Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.13.3-debian-11-r21" \
+      org.opencontainers.image.ref.name="7.13.4-debian-11-r0" \
       org.opencontainers.image.title="suitecrm" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="7.13.3"
+      org.opencontainers.image.version="7.13.4"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -29,7 +29,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "apache-2.4.57-8-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.11.4-0-linux-${OS_ARCH}-debian-11" \
       "libphp-8.0.29-1-linux-${OS_ARCH}-debian-11" \
-      "suitecrm-7.13.3-2-linux-${OS_ARCH}-debian-11" \
+      "suitecrm-7.13.4-0-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-7-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -54,7 +54,7 @@ RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/suitecrm/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="7.13.3" \
+    APP_VERSION="7.13.4" \
     BITNAMI_APP_NAME="suitecrm" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
