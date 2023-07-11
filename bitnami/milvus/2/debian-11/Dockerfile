@@ -6,13 +6,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-07T16:05:19Z" \
+      org.opencontainers.image.created="2023-07-11T09:08:34Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.2.10-debian-11-r7" \
+      org.opencontainers.image.ref.name="2.2.11-debian-11-r1" \
       org.opencontainers.image.title="milvus" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.2.10"
+      org.opencontainers.image.version="2.2.11"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "yq-4.34.1-6-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.6-9-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-7-linux-${OS_ARCH}-debian-11" \
-      "milvus-2.2.10-0-linux-${OS_ARCH}-debian-11" \
+      "milvus-2.2.11-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -45,7 +45,7 @@ RUN apt-get autoremove --purge -y curl && \
 RUN useradd -r -u 1001 -g root milvus
 RUN mkdir -p /opt/bitnami/milvus/tmp && chmod g+rwX /opt/bitnami/milvus/tmp && ln -s /opt/bitnami/milvus/tmp /run/milvus && mkdir -p /bitnami/milvus/data && chmod g+rwX /bitnami/milvus/data && ln -s /bitnami/milvus/data /var/lib/milvus && ln -s /opt/bitnami/milvus /milvus
 
-ENV APP_VERSION="2.2.10" \
+ENV APP_VERSION="2.2.11" \
     BITNAMI_APP_NAME="milvus" \
     LD_LIBRARY_PATH="/opt/bitnami/milvus/lib:/opt/bitnami/openblas/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/milvus/bin:$PATH"
