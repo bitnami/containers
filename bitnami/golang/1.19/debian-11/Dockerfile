@@ -6,13 +6,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-10T23:11:42Z" \
+      org.opencontainers.image.created="2023-07-12T05:56:34Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.19.10-debian-11-r11" \
+      org.opencontainers.image.ref.name="1.19.11-debian-11-r0" \
       org.opencontainers.image.title="golang" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.19.10"
+      org.opencontainers.image.version="1.19.11"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
@@ -24,7 +24,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages build-essential ca-certificates curl git pkg-config procps unzip
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "golang-1.19.10-0-linux-${OS_ARCH}-debian-11" \
+      "golang-1.19.11-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -39,7 +39,7 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN mkdir -p "/go/src" "/go/bin" && chmod -R 777 "/go"
 
-ENV APP_VERSION="1.19.10" \
+ENV APP_VERSION="1.19.11" \
     BITNAMI_APP_NAME="golang" \
     GOCACHE="/go/.cache" \
     GOPATH="/go" \
