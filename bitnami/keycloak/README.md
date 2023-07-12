@@ -210,6 +210,11 @@ volumes:
 
 The Bitnami Keycloak container can activate different set of statistics (database, jgroups and http) by setting the environment variable `KEYCLOAK_ENABLE_STATISTICS=true`.
 
+### Enabling health endpoints
+
+The Bitnami Keycloak container can activate several endpoints providing information about the health of Keycloak, by setting the environment variable `KEYCLOAK_ENABLE_HEALTH_ENDPOINTS=true`.  
+See [the official documentation](https://www.keycloak.org/server/health) for more information about these endpoints.
+
 #### Full configuration
 
 The image looks for configuration files in the `/bitnami/keycloak/configuration/` directory, this directory can be changed by setting the KEYCLOAK_MOUNTED_CONF_DIR environment variable.
