@@ -6,10 +6,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-09T21:09:10Z" \
+      org.opencontainers.image.created="2023-07-12T22:03:54Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.0.18-debian-11-r17" \
+      org.opencontainers.image.ref.name="5.0.18-debian-11-r18" \
       org.opencontainers.image.title="mongodb" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="5.0.18"
@@ -26,7 +26,7 @@ RUN install_packages ca-certificates curl libbrotli1 libcom-err2 libcurl4 libffi
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "mongodb-shell-1.10.1-0-linux-${OS_ARCH}-debian-11" \
-      "yq-4.34.1-6-linux-${OS_ARCH}-debian-11" \
+      "yq-4.34.2-0-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.6-9-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-7-linux-${OS_ARCH}-debian-11" \
       "mongodb-5.0.18-1-linux-${OS_ARCH}-debian-11" \
