@@ -74,7 +74,7 @@ keycloak_validate() {
 
     if ! validate_ip "${KEYCLOAK_BIND_ADDRESS}"; then
         if ! is_hostname_resolved "${KEYCLOAK_BIND_ADDRESS}"; then
-            print_validation_error print_validation_error "The value for KEYCLOAK_BIND_ADDRESS ($KEYCLOAK_BIND_ADDRESS) should be an IPv4 address or it must be a resolvable hostname"
+            print_validation_error print_validation_error "The value for KEYCLOAK_BIND_ADDRESS ($KEYCLOAK_BIND_ADDRESS) should be an IPv4 or IPv6 address, or it must be a resolvable hostname"
         fi
     fi
 
