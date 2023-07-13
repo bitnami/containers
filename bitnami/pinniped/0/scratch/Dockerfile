@@ -35,10 +35,10 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-07-13T14:25:27Z" \
+      org.opencontainers.image.created="2023-07-13T17:24:38Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.24.0-scratch-r2" \
+      org.opencontainers.image.ref.name="0.24.0-scratch-r3" \
       org.opencontainers.image.title="pinniped" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.24.0"
