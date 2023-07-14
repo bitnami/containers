@@ -11,14 +11,14 @@
 # Load environment
 . /opt/bitnami/scripts/elasticsearch-env.sh
 
-for dir in "$ELASTICSEARCH_TMP_DIR" "$ELASTICSEARCH_DATA_DIR" "$ELASTICSEARCH_LOGS_DIR" "${ELASTICSEARCH_BASE_DIR}/plugins" "${ELASTICSEARCH_BASE_DIR}/modules" "$ELASTICSEARCH_CONF_DIR" "$ELASTICSEARCH_VOLUME_DIR" "$ELASTICSEARCH_INITSCRIPTS_DIR" "$ELASTICSEARCH_MOUNTED_PLUGINS_DIR"; do
+for dir in "$DB_TMP_DIR" "$DB_DATA_DIR" "$DB_LOGS_DIR" "${DB_BASE_DIR}/plugins" "${DB_BASE_DIR}/modules" "$DB_CONF_DIR" "$DB_VOLUME_DIR" "$DB_INITSCRIPTS_DIR" "$DB_MOUNTED_PLUGINS_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R ug+rwX "$dir"
 done
 
 elasticsearch_configure_logging
 
-for dir in "$ELASTICSEARCH_TMP_DIR" "$ELASTICSEARCH_DATA_DIR" "$ELASTICSEARCH_LOGS_DIR" "${ELASTICSEARCH_BASE_DIR}/plugins" "${ELASTICSEARCH_BASE_DIR}/modules" "$ELASTICSEARCH_CONF_DIR" "$ELASTICSEARCH_VOLUME_DIR" "$ELASTICSEARCH_INITSCRIPTS_DIR" "$ELASTICSEARCH_MOUNTED_PLUGINS_DIR"; do
+for dir in "$DB_TMP_DIR" "$DB_DATA_DIR" "$DB_LOGS_DIR" "${DB_BASE_DIR}/plugins" "${DB_BASE_DIR}/modules" "$DB_CONF_DIR" "$DB_VOLUME_DIR" "$DB_INITSCRIPTS_DIR" "$DB_MOUNTED_PLUGINS_DIR"; do
     # `elasticsearch-plugin install` command complains about being unable to create the a plugin's directory
     # even when having the proper permissions.
     # The reason: the code is checking trying to check the permissions by consulting the parent directory owner,
