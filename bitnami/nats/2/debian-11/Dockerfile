@@ -6,10 +6,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-13T23:07:48Z" \
+      org.opencontainers.image.created="2023-07-14T16:28:52Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.9.20-debian-11-r0" \
+      org.opencontainers.image.ref.name="2.9.20-debian-11-r1" \
       org.opencontainers.image.title="nats" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.9.20"
@@ -26,7 +26,7 @@ RUN install_packages ca-certificates curl openssl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "render-template-1.0.5-7-linux-${OS_ARCH}-debian-11" \
-      "nats-2.9.20-0-linux-${OS_ARCH}-debian-11" \
+      "nats-2.9.20-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
