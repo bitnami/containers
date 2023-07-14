@@ -6,10 +6,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-11T02:16:48Z" \
+      org.opencontainers.image.created="2023-07-14T02:37:01Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.39.0-debian-11-r14" \
+      org.opencontainers.image.ref.name="0.39.0-debian-11-r15" \
       org.opencontainers.image.title="mongodb-exporter" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.39.0"
