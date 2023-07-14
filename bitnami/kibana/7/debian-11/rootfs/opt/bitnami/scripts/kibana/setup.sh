@@ -20,7 +20,7 @@ set -o pipefail
 kibana_validate
 
 # Ensure 'daemon' user exists when running as 'root'
-am_i_root && ensure_user_exists "$KIBANA_DAEMON_USER" --group "$KIBANA_DAEMON_GROUP"
+am_i_root && ensure_user_exists "$SERVER_DAEMON_USER" --group "$SERVER_DAEMON_GROUP"
 
 # Ensure kibana is initialized
 kibana_initialize
