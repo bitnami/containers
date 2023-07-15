@@ -75,7 +75,7 @@ The following parameters can be set for the PgBouncer daemon:
 
 ### Authentication
 
-The authentication mode can be set using the `PGBOUNCER_AUTH_TYPE` variable, which can be set to any of the values available [in the official PgBouncer documentation](https://www.pgbouncer.org/config.html). In the case of the `md5` authentication type (default value), set the backend PostgreSQL credentials as explained in the [Backend PostgreSQL connection section](#backend-postgresql-connection).
+The authentication mode can be set using the `PGBOUNCER_AUTH_TYPE` variable, which can be set to any of the values available [in the official PgBouncer documentation](https://www.pgbouncer.org/config.html). In the case of the `scram-sha-256` authentication type (default value), set the backend PostgreSQL credentials as explained in the [Backend PostgreSQL connection section](#backend-postgresql-connection).
 
 ### Backend PostgreSQL connection
 
@@ -118,7 +118,7 @@ To expose the same database name as the backend, set `PGBOUNCER_DATABASE="$POSTG
 
 * `PGBOUNCER_AUTH_USER`: PgBouncer will use this user to connect to the database and query the PostgreSQL backend for a user and password. No defaults.
 * `PGBOUNCER_AUTH_QUERY`: PgBouncer will use this query to connect to the database and query the PostgreSQL backend for a user and password. No defaults.
-* `PGBOUNCER_AUTH_TYPE`: PgBouncer authentication type. Default: **md5**
+* `PGBOUNCER_AUTH_TYPE`: PgBouncer authentication type. Default: **scram-sha-256**
 * `PGBOUNCER_AUTH_HBA_FILE`: HBA configuration file to use if auth_type is set to hba. No defaults.
 * `PGBOUNCER_USERLIST`: Specify content of the *userlist.txt* file
 * `PGBOUNCER_POOL_MODE` : PgBouncer pool mode. Allowed values: session, transaction and statement. Default: **session**.
