@@ -8,10 +8,10 @@ ARG TARGETARCH
 ARG WITH_ALL_LOCALES="no"
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-13T23:20:47Z" \
+      org.opencontainers.image.created="2023-07-16T23:44:28Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="15.1.0-debian-11-r59" \
+      org.opencontainers.image.ref.name="15.1.0-debian-11-r60" \
       org.opencontainers.image.title="supabase-postgres" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="15.1.0"
