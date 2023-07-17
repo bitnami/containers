@@ -2,8 +2,6 @@
 # SPDX-License-Identifier: APACHE-2.0
 
 command:
-  check-app-version:
-    exec: grep '"version":' /opt/bitnami/opensearch/package.json
+  check-app-binary:
+    exec: /opt/bitnami/bin/opensearch --version
     exit-status: 0
-    stdout:
-      - '"version": "{{ .Env.APP_VERSION }}",'
