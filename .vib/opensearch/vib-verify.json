@@ -40,7 +40,7 @@
             "vars_file": "opensearch/goss/vars.yaml",
             "remote": {
               "pod": {
-                "workload": "sts-opensearch-master"
+                "workload": "deploy-opensearch"
               }
             }
           }
