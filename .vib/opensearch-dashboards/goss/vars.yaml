@@ -1,7 +1,7 @@
 binaries:
   - node
 directories:
-  - mode: "0777"
+  - mode: "0775"
     paths:
       - /bitnami/opensearch-dashboards
       - /opt/bitnami/opensearch-dashboards
