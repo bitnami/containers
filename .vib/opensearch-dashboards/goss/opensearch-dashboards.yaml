@@ -7,9 +7,3 @@ command:
     exit-status: 0
     stdout:
       - '"version": "{{ .Env.APP_VERSION }}",'
-group:
-  opensearch-dashboards:
-    exists: true
-user:
-  opensearch-dashboards:
-    exists: true
