@@ -6,10 +6,10 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-14T02:34:36Z" \
+      org.opencontainers.image.created="2023-07-17T02:55:44Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.8.2-debian-11-r13" \
+      org.opencontainers.image.ref.name="2.8.2-debian-11-r14" \
       org.opencontainers.image.title="harbor-jobservice" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.8.2"
