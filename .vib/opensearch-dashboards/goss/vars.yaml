@@ -5,7 +5,6 @@ directories:
     paths:
       - /bitnami/opensearch-dashboards
       - /opt/bitnami/opensearch-dashboards
-      - /opt/bitnami/opensearch-dashboards/data
       - /opt/bitnami/opensearch-dashboards/logs
       - /opt/bitnami/opensearch-dashboards/plugins
       - /opt/bitnami/opensearch-dashboards/tmp
