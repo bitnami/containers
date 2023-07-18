@@ -406,14 +406,14 @@ redis_configure_default() {
         redis_conf_set appendonly "${REDIS_AOF_ENABLED}"
 
         #The value stored in $i here is the number of seconds and times of save rules in redis rdb mode
-        if [ ! -z "${REDIS_RDB_POLICY}" ]; then
-            if [ "${REDIS_RDB_POLICY}" == "disabled" ]; then
+        if is_empty_value "$REDIS_RDB_POLICY"; then
+            if is_boolean_yes "$REDIS_RDB_POLICY_DISABLED"; then
                 redis_conf_set save ""
-            else
-                for i in ${REDIS_RDB_POLICY}; do
-                    redis_conf_set save "${i//#/ }"
-                done
             fi
+        else
+            for i in ${REDIS_RDB_POLICY}; do
+                redis_conf_set save "${i//#/ }"
+            done
         fi
 
         redis_conf_set port "$REDIS_PORT_NUMBER"
