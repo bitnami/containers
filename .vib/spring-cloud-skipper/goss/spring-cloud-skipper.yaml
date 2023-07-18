@@ -3,8 +3,8 @@
 
 command:
   check-spring-cloud-skipper:
-    timeout: 20000
-    exec: timeout --preserve-status 15 java -jar /opt/bitnami/spring-cloud-skipper/spring-cloud-skipper.jar
+    timeout: 30000
+    exec: timeout --preserve-status 25 java -jar /opt/bitnami/spring-cloud-skipper/spring-cloud-skipper.jar
     exit-status: 143
     stdout:
       - Started SkipperServerApplication

@@ -6,13 +6,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-03T05:46:56Z" \
+      org.opencontainers.image.created="2023-07-17T03:25:11Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.5.14-debian-11-r42" \
+      org.opencontainers.image.ref.name="2.5.15-debian-11-r2" \
       org.opencontainers.image.title="openldap" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.5.14"
+      org.opencontainers.image.version="2.5.15"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -25,7 +25,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libargon2-1 libcap2-bin libcom-err2 libcrypt1 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libltdl7 libnsl2 libnss3-tools libsasl2-2 libssl1.1 libtirpc3 libwrap0 mdbtools procps psmisc
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "openldap-2.5.14-4-linux-${OS_ARCH}-debian-11" \
+      "openldap-2.5.15-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -43,7 +43,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/openldap/postunpack.sh
-ENV APP_VERSION="2.5.14" \
+ENV APP_VERSION="2.5.15" \
     BITNAMI_APP_NAME="openldap" \
     PATH="/opt/bitnami/openldap/bin:/opt/bitnami/openldap/sbin:$PATH"
 

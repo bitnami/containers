@@ -6,13 +6,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-02T09:15:33Z" \
+      org.opencontainers.image.created="2023-07-14T21:25:15Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.0.305-debian-11-r3" \
+      org.opencontainers.image.ref.name="7.0.306-debian-11-r1" \
       org.opencontainers.image.title="dotnet-sdk" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="7.0.305"
+      org.opencontainers.image.version="7.0.306"
 
 ENV HOME="/app" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -25,7 +25,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages build-essential ca-certificates curl git libcap2-bin libgcc-s1 libicu-dev liblttng-ust-dev libsqlite3-dev libssl-dev libstdc++6 pkg-config procps unzip wget zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "dotnet-sdk-7.0.305-0-linux-${OS_ARCH}-debian-11" \
+      "dotnet-sdk-7.0.306-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -44,7 +44,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/dotnet-sdk/postunpack.sh
-ENV APP_VERSION="7.0.305" \
+ENV APP_VERSION="7.0.306" \
     BITNAMI_APP_NAME="dotnet-sdk" \
     DOTNET_CLI_HOME="/app" \
     DOTNET_ROOT="/opt/bitnami/dotnet-sdk/bin" \

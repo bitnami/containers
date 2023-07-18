@@ -6,13 +6,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-03T05:31:17Z" \
+      org.opencontainers.image.created="2023-07-14T11:22:49Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.6.1-debian-11-r36" \
+      org.opencontainers.image.ref.name="5.7.0-debian-11-r0" \
       org.opencontainers.image.title="keycloak-config-cli" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="5.6.1"
+      org.opencontainers.image.version="5.7.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ RUN install_packages ca-certificates curl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "java-17.0.7-7-2-linux-${OS_ARCH}-debian-11" \
-      "keycloak-config-cli-5.6.1-5-linux-${OS_ARCH}-debian-11" \
+      "keycloak-config-cli-5.7.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -43,7 +43,7 @@ RUN apt-get autoremove --purge -y curl && \
 RUN chmod g+rwX /opt/bitnami
 RUN ln -sf /opt/bitnami/keycloak-config-cli/keycloak-config-cli.jar /opt/keycloak-config-cli.jar
 
-ENV APP_VERSION="5.6.1" \
+ENV APP_VERSION="5.7.0" \
     BITNAMI_APP_NAME="keycloak-config-cli" \
     PATH="/opt/bitnami/java/bin:$PATH"
 

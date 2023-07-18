@@ -8,10 +8,10 @@ ARG TARGETARCH
 ARG WITH_ALL_LOCALES="no"
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-29T07:35:30Z" \
+      org.opencontainers.image.created="2023-07-16T23:44:28Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="15.1.0-debian-11-r58" \
+      org.opencontainers.image.ref.name="15.1.0-debian-11-r60" \
       org.opencontainers.image.title="supabase-postgres" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="15.1.0"
@@ -28,7 +28,7 @@ RUN install_packages ca-certificates curl libbrotli1 libbsd0 libbz2-1.0 libcom-e
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "java-17.0.7-7-2-linux-${OS_ARCH}-debian-11" \
-      "supabase-postgres-15.1.0-36-linux-${OS_ARCH}-debian-11" \
+      "supabase-postgres-15.1.0-37-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \

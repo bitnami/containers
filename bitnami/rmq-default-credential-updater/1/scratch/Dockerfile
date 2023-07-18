@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM bitnami/minideb:bullseye as builder
 
 ARG TARGETARCH
@@ -5,7 +8,6 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 COPY prebuildfs /
-
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install required system packages and dependencies
@@ -33,10 +35,10 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-05-21T16:00:55Z" \
+      org.opencontainers.image.created="2023-07-13T14:22:02Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.0.2-scratch-r21" \
+      org.opencontainers.image.ref.name="1.0.2-scratch-r22" \
       org.opencontainers.image.title="rmq-default-credential-updater" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.0.2"

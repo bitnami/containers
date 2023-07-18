@@ -6,13 +6,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-30T08:32:01Z" \
+      org.opencontainers.image.created="2023-07-17T00:37:02Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.2.12-debian-11-r24" \
+      org.opencontainers.image.ref.name="6.2.13-debian-11-r2" \
       org.opencontainers.image.title="redis-sentinel" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="6.2.12"
+      org.opencontainers.image.version="6.2.13"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libssl1.1 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "redis-sentinel-6.2.12-1-linux-${OS_ARCH}-debian-11" \
+      "redis-sentinel-6.2.13-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -44,7 +44,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/redis-sentinel/postunpack.sh
-ENV APP_VERSION="6.2.12" \
+ENV APP_VERSION="6.2.13" \
     BITNAMI_APP_NAME="redis-sentinel"
 
 EXPOSE 26379
