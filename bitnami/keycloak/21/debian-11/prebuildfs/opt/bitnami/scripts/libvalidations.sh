@@ -198,13 +198,11 @@ validate_ip() {
     local ip="${1:?ip is missing}"
     local stat=1
 
-    validate_ipv4 "$ip"
-    if [[ $? -eq 0 ]]; then
-        stat=0
-    else
-        validate_ipv6 "$ip"
-        stat=$?
-    fi
+		if validate_ipv4 "$ip"; then
+			stat=0
+		else
+			stat=$(validate_ipv6 "$ip")
+		fi
 
     return $stat
 }
@@ -239,16 +237,13 @@ validate_ipv4() {
 validate_ipv6() {
     local ip="${1:?ip is missing}"
     local stat=1
-
     local full_address_regex='^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$'
 		local short_address_regex='^((([0-9a-fA-F]{1,4}:){0,6}[0-9a-fA-F]{1,4}){0,6}::(([0-9a-fA-F]{1,4}:){0,6}[0-9a-fA-F]{1,4}){0,6})$'
-
 
     if [[ $ip =~ $full_address_regex || $ip =~ $short_address_regex || $ip == "::" ]]; then
         stat=0
     fi
-
-    echo $stat
+    return $stat
 }
 
 ########################
