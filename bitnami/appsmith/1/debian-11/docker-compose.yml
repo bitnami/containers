@@ -33,7 +33,8 @@ services:
     volumes:
       - 'redis_data:/bitnami/redis'
     environment:
-      - REDIS_PASSWORD=bitmame123
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
   appsmith:
     image: docker.io/bitnami/appsmith:1
     environment:
@@ -53,7 +54,6 @@ services:
       - APPSMITH_DATABASE_USER=bn_appsmith
       - APPSMITH_DATABASE_NAME=bitnami_appsmith
       - APPSMITH_DATABASE_PASSWORD=bitnami123
-      - APPSMITH_REDIS_PASSWORD=bitmame123
       - APPSMITH_ENCRYPTION_PASSWORD=test123
       - APPSMITH_ENCRYPTION_SALT=testsalt123
       # Hack: This is only necessary in docker-compose
