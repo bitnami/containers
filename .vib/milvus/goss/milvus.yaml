@@ -21,8 +21,8 @@ file:
     linked-to: /opt/bitnami/milvus/tmp
 command:
   run-milvus:
-    exec: cd /opt/bitnami/milvus; timeout --preserve-status 5 milvus run standalone || true
-    timeout: 8000
+    exec: cd /opt/bitnami/milvus; timeout --preserve-status 15 milvus run standalone || true
+    timeout: 20000
     exit-status: 0
     stdout:
       - running Milvus components

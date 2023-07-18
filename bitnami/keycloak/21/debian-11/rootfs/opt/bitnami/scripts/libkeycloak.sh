@@ -84,7 +84,7 @@ keycloak_validate() {
     check_allowed_port KEYCLOAK_HTTP_PORT
     check_allowed_port KEYCLOAK_HTTPS_PORT
 
-    for var in KEYCLOAK_ENABLE_HTTPS KEYCLOAK_ENABLE_STATISTICS; do
+    for var in KEYCLOAK_ENABLE_HTTPS KEYCLOAK_ENABLE_STATISTICS KEYCLOAK_ENABLE_HEALTH_ENDPOINTS; do
         if ! is_true_false_value "${!var}"; then
             print_validation_error "The allowed values for $var are [true, false]"
         fi
@@ -176,6 +176,20 @@ keycloak_configure_cache() {
 keycloak_configure_metrics() {
     info "Enabling statistics"
     keycloak_conf_set "metrics-enabled" "$KEYCLOAK_ENABLE_STATISTICS"
+}
+
+########################
+# Enable health endpoints
+# Globals:
+#   KEYCLOAK_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+keycloak_configure_health_endpoints() {
+    info "Enabling health endpoints"
+    keycloak_conf_set "health-enabled" "$KEYCLOAK_ENABLE_HEALTH_ENDPOINTS"
 }
 
 ########################
@@ -303,6 +317,7 @@ keycloak_initialize() {
     fi
     keycloak_configure_database
     keycloak_configure_metrics
+    keycloak_configure_health_endpoints
     keycloak_configure_http
     keycloak_configure_hostname
     keycloak_configure_cache

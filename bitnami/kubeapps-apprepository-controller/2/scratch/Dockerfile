@@ -35,10 +35,10 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-07-04T04:29:14Z" \
+      org.opencontainers.image.created="2023-07-13T14:21:57Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.8.0-scratch-r0" \
+      org.opencontainers.image.ref.name="2.8.0-scratch-r1" \
       org.opencontainers.image.title="kubeapps-apprepository-controller" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.8.0"

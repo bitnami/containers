@@ -6,13 +6,13 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-06T15:03:56Z" \
+      org.opencontainers.image.created="2023-07-14T09:39:49Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.2.10-debian-11-r6" \
+      org.opencontainers.image.ref.name="2.2.11-debian-11-r2" \
       org.opencontainers.image.title="milvus" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.2.10"
+      org.opencontainers.image.version="2.2.11"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -25,10 +25,10 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libblas3 libboost-filesystem1.74.0 libbrotli1 libcom-err2 libcurl4 libffi7 libgcc-s1 libgcrypt20 libgfortran5 libgmp10 libgnutls30 libgomp1 libgpg-error0 libgssapi-krb5-2 libhogweed6 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblapack3 libldap-2.4-2 libnettle8 libnghttp2-14 libp11-kit0 libpsl5 libquadmath0 librtmp1 libsasl2-2 libssh2-1 libssl1.1 libstdc++6 libtasn1-6 libtbb2 libunistring2 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "yq-4.34.1-6-linux-${OS_ARCH}-debian-11" \
+      "yq-4.34.2-0-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.6-9-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-7-linux-${OS_ARCH}-debian-11" \
-      "milvus-2.2.10-0-linux-${OS_ARCH}-debian-11" \
+      "milvus-2.2.11-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -45,7 +45,7 @@ RUN apt-get autoremove --purge -y curl && \
 RUN useradd -r -u 1001 -g root milvus
 RUN mkdir -p /opt/bitnami/milvus/tmp && chmod g+rwX /opt/bitnami/milvus/tmp && ln -s /opt/bitnami/milvus/tmp /run/milvus && mkdir -p /bitnami/milvus/data && chmod g+rwX /bitnami/milvus/data && ln -s /bitnami/milvus/data /var/lib/milvus && ln -s /opt/bitnami/milvus /milvus
 
-ENV APP_VERSION="2.2.10" \
+ENV APP_VERSION="2.2.11" \
     BITNAMI_APP_NAME="milvus" \
     LD_LIBRARY_PATH="/opt/bitnami/milvus/lib:/opt/bitnami/openblas/lib:$LD_LIBRARY_PATH" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/milvus/bin:$PATH"

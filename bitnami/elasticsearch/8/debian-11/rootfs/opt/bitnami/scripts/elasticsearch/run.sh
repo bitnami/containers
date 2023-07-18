@@ -18,8 +18,8 @@ set -o pipefail
 
 # Constants
 EXEC=$(command -v elasticsearch)
-ARGS=("-p" "$ELASTICSEARCH_TMP_DIR/elasticsearch.pid")
-[[ -z "${ELASTICSEARCH_EXTRA_FLAGS:-}" ]] || ARGS=("${ARGS[@]}" "${ELASTICSEARCH_EXTRA_FLAGS[@]}")
+ARGS=("-p" "$DB_PID_FILE")
+[[ -z "${DB_EXTRA_FLAGS:-}" ]] || ARGS=("${ARGS[@]}" "${DB_EXTRA_FLAGS[@]}")
 # JAVA_HOME to be deprecated, see warning:
 #   warning: usage of JAVA_HOME is deprecated, use ES_JAVA_HOME
 export JAVA_HOME=/opt/bitnami/java
@@ -29,7 +29,7 @@ ARGS+=("$@")
 
 info "** Starting Elasticsearch **"
 if am_i_root; then
-    exec_as_user "$ELASTICSEARCH_DAEMON_USER" "$EXEC" "${ARGS[@]}"
+    exec_as_user "$DB_DAEMON_USER" "$EXEC" "${ARGS[@]}"
 else
     exec "$EXEC" "${ARGS[@]}"
 fi

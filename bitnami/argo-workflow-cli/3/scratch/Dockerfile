@@ -35,10 +35,10 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-06-29T11:25:48Z" \
+      org.opencontainers.image.created="2023-07-11T09:03:00Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.4.8-scratch-r1" \
+      org.opencontainers.image.ref.name="3.4.8-scratch-r2" \
       org.opencontainers.image.title="argo-workflow-cli" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.4.8"
