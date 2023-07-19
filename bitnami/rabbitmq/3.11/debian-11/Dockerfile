@@ -1,15 +1,18 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-05T19:51:15Z" \
+      org.opencontainers.image.created="2023-07-15T09:40:18Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.11.18-debian-11-r0" \
+      org.opencontainers.image.ref.name="3.11.19-debian-11-r6" \
       org.opencontainers.image.title="rabbitmq" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="3.11.18"
+      org.opencontainers.image.version="3.11.19"
 
 ENV HOME="/opt/bitnami/rabbitmq/.rabbitmq" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,8 +26,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libgcc-s1 libssl1.1 libstdc++6 libtinfo6 locales procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "erlang-25.3.2-1-linux-${OS_ARCH}-debian-11" \
-      "rabbitmq-3.11.18-0-linux-${OS_ARCH}-debian-11" \
+      "erlang-25.3.2-3-0-linux-${OS_ARCH}-debian-11" \
+      "rabbitmq-3.11.19-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,7 +50,7 @@ RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
 COPY rootfs /
 RUN /opt/bitnami/scripts/rabbitmq/postunpack.sh
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
-ENV APP_VERSION="3.11.18" \
+ENV APP_VERSION="3.11.19" \
     BITNAMI_APP_NAME="rabbitmq" \
     LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en"

@@ -1,16 +1,19 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM docker.io/bitnami/minideb:bullseye
 
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-04T18:15:35Z" \
+      org.opencontainers.image.created="2023-07-17T00:46:31Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.8.0-debian-11-r4" \
+      org.opencontainers.image.ref.name="5.9.0-debian-11-r10" \
       org.opencontainers.image.title="neo4j" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="5.8.0"
+      org.opencontainers.image.version="5.9.0"
 
 ENV HOME="/opt/bitnami/neo4j/.home" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -24,7 +27,7 @@ RUN install_packages ca-certificates curl jq procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "java-17.0.7-7-2-linux-${OS_ARCH}-debian-11" \
-      "neo4j-5.8.0-0-linux-${OS_ARCH}-debian-11" \
+      "neo4j-5.9.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -43,7 +46,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/neo4j/postunpack.sh
-ENV APP_VERSION="5.8.0" \
+ENV APP_VERSION="5.9.0" \
     BITNAMI_APP_NAME="neo4j" \
     JAVA_HOME="/opt/bitnami/java" \
     JAVA_OPTS="-Duser.home=/opt/bitnami/neo4j/.home" \

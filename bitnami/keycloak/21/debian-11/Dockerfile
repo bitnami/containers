@@ -1,16 +1,19 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM docker.io/bitnami/minideb:bullseye
 
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-06T01:05:43Z" \
+      org.opencontainers.image.created="2023-07-14T09:58:05Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="21.1.1-debian-11-r13" \
+      org.opencontainers.image.ref.name="21.1.2-debian-11-r6" \
       org.opencontainers.image.title="keycloak" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="21.1.1"
+      org.opencontainers.image.version="21.1.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,9 +26,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl krb5-user libaio1 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "wait-for-port-1.0.6-7-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.6-9-linux-${OS_ARCH}-debian-11" \
       "java-17.0.7-7-2-linux-${OS_ARCH}-debian-11" \
-      "keycloak-21.1.1-1-linux-${OS_ARCH}-debian-11" \
+      "keycloak-21.1.2-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -43,7 +46,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/keycloak/postunpack.sh
-ENV APP_VERSION="21.1.1" \
+ENV APP_VERSION="21.1.2" \
     BITNAMI_APP_NAME="keycloak" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/keycloak/bin:$PATH"

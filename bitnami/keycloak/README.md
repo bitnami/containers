@@ -80,8 +80,6 @@ The Bitnami Keycloak container can create a default admin user by setting the fo
 * `KEYCLOAK_CREATE_ADMIN_USER`: Create administrator user on boot. Default: **true**.
 * `KEYCLOAK_ADMIN_USER`: Administrator default user. Default: **user**.
 * `KEYCLOAK_ADMIN_PASSWORD`: Administrator default password. Default: **bitnami**.
-* `KEYCLOAK_MANAGEMENT_USER`: WildFly default management user. Default: **manager**.
-* `KEYCLOAK_MANAGEMENT_PASSWORD`: WildFly default management password. Default: **bitnami1**.
 
 ### Connecting to a database
 
@@ -209,6 +207,11 @@ volumes:
 ### Enabling statistics
 
 The Bitnami Keycloak container can activate different set of statistics (database, jgroups and http) by setting the environment variable `KEYCLOAK_ENABLE_STATISTICS=true`.
+
+### Enabling health endpoints
+
+The Bitnami Keycloak container can activate several endpoints providing information about the health of Keycloak, by setting the environment variable `KEYCLOAK_ENABLE_HEALTH_ENDPOINTS=true`.  
+See [the official documentation](https://www.keycloak.org/server/health) for more information about these endpoints.
 
 #### Full configuration
 

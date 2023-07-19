@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 command:
   # Force the exit-status as the timeout's original return varies between 0 and 143.
   check-clickhouse-server:

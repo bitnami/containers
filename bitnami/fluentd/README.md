@@ -135,6 +135,12 @@ fluentd:
 
 Find more information about this feature, consult [official documentation](https://docs.fluentd.org/configuration/config-file)
 
+You can also add custom init scripts to the path referenced on `$FLUENTD_INITSCRIPTS_DIR` (which defaults to `/docker-entrypoint-initdb.d`):
+
+```console
+docker run --name fluentd -v /path/to/custom-scripts-directory:/docker-entrypoint-initdb.d bitnami/fluentd:latest
+```
+
 ### Environment variables
 
 Environment variable below are configurable to control how to execute fluentd process:

@@ -1,15 +1,18 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-05T16:31:23Z" \
+      org.opencontainers.image.created="2023-07-16T23:25:18Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.24.14-debian-11-r6" \
+      org.opencontainers.image.ref.name="1.24.15-debian-11-r11" \
       org.opencontainers.image.title="kubectl" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.24.14"
+      org.opencontainers.image.version="1.24.15"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +25,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl git jq procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "kubectl-1.24.14-1-linux-${OS_ARCH}-debian-11" \
+      "kubectl-1.24.15-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -39,7 +42,7 @@ RUN apt-get autoremove --purge -y curl && \
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /.kube && chmod g+rwX /.kube
 
-ENV APP_VERSION="1.24.14" \
+ENV APP_VERSION="1.24.15" \
     BITNAMI_APP_NAME="kubectl" \
     PATH="/opt/bitnami/kubectl/bin:$PATH"
 

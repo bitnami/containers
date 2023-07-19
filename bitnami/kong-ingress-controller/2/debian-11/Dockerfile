@@ -1,15 +1,18 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-05T12:46:32Z" \
+      org.opencontainers.image.created="2023-07-16T23:09:25Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.10.0-debian-11-r0" \
+      org.opencontainers.image.ref.name="2.10.3-debian-11-r1" \
       org.opencontainers.image.title="kong-ingress-controller" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.10.0"
+      org.opencontainers.image.version="2.10.3"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,8 +25,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "wait-for-port-1.0.6-7-linux-${OS_ARCH}-debian-11" \
-      "kong-ingress-controller-2.10.0-0-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.6-9-linux-${OS_ARCH}-debian-11" \
+      "kong-ingress-controller-2.10.3-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -39,7 +42,7 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="2.10.0" \
+ENV APP_VERSION="2.10.3" \
     BITNAMI_APP_NAME="kong-ingress-controller" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/kong-ingress-controller/bin:$PATH"
 

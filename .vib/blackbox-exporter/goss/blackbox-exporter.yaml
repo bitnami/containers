@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 command:
   check-blackbox-exporter-run:
     exec: cd /opt/bitnami/blackbox-exporter && timeout --preserve-status 5 blackbox_exporter

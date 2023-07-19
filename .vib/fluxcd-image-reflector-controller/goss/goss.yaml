@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 gossfile:
   ../../fluxcd-image-reflector-controller/goss/fluxcd-image-reflector-controller.yaml: {}
   # Load scripts from .vib/common/goss/templates

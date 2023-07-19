@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 
 export WP_CLI_CONFIG_PATH="{{WP_CLI_CONF_FILE}}"
 export WP_CLI_CACHE_DIR="{{WP_CLI_BASE_DIR}}/.cache"

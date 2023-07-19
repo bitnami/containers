@@ -1,16 +1,19 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM docker.io/bitnami/minideb:bullseye
 
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-05T16:02:58Z" \
+      org.opencontainers.image.created="2023-07-17T00:59:50Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.3107.0-debian-11-r33" \
+      org.opencontainers.image.ref.name="0.3131.0-debian-11-r10" \
       org.opencontainers.image.title="jenkins-agent" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.3107.0"
+      org.opencontainers.image.version="0.3131.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -24,7 +27,7 @@ RUN install_packages ca-certificates curl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "java-11.0.19-7-2-linux-${OS_ARCH}-debian-11" \
-      "jenkins-agent-0.3107.0-5-linux-${OS_ARCH}-debian-11" \
+      "jenkins-agent-0.3131.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -42,7 +45,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/jenkins-agent/postunpack.sh
-ENV APP_VERSION="0.3107.0" \
+ENV APP_VERSION="0.3131.0" \
     BITNAMI_APP_NAME="jenkins-agent" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:$PATH"

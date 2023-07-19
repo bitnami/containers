@@ -1,15 +1,18 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-05T01:45:25Z" \
+      org.opencontainers.image.created="2023-07-14T09:52:17Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.15.3-debian-11-r1" \
+      org.opencontainers.image.ref.name="1.16.0-debian-11-r6" \
       org.opencontainers.image.title="consul" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.15.3"
+      org.opencontainers.image.version="1.16.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,8 +25,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl iproute2 procps zlib1g-dev
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "render-template-1.0.5-6-linux-${OS_ARCH}-debian-11" \
-      "consul-1.15.3-0-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.5-7-linux-${OS_ARCH}-debian-11" \
+      "consul-1.16.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,7 +44,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/consul/postunpack.sh
-ENV APP_VERSION="1.15.3" \
+ENV APP_VERSION="1.16.0" \
     BITNAMI_APP_NAME="consul" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/consul/bin:$PATH"
 

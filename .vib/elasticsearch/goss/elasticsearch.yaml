@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 command:
   # ES7 does not support using `elasticsearch --version` without properly configuring it
   check-app-version:

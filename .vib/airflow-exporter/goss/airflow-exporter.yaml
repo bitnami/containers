@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 command:
   check-airflow-exporter-run:
     exec: AIRFLOW_PROMETHEUS_DATABASE_NAME=mydatabase timeout --preserve-status 5 airflow-prometheus-exporter

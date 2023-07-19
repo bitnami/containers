@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 
 # shellcheck disable=SC1091
 
@@ -14,14 +16,11 @@ set -o pipefail
 # Load environment
 . /opt/bitnami/scripts/kibana-env.sh
 
-for dir in "$KIBANA_TMP_DIR" "$KIBANA_LOGS_DIR" "$KIBANA_CONF_DIR" "$KIBANA_PLUGINS_DIR" "$KIBANA_VOLUME_DIR" "$KIBANA_DATA_DIR" "$KIBANA_INITSCRIPTS_DIR"; do
+for dir in "$SERVER_TMP_DIR" "$SERVER_LOGS_DIR" "$SERVER_CONF_DIR" "$SERVER_PLUGINS_DIR" "$SERVER_VOLUME_DIR" "$SERVER_DATA_DIR" "$SERVER_INITSCRIPTS_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R ug+rwX "$dir"
 done
 
-# Optimize feature for Kibana 6
-[[ -d "$KIBANA_OPTIMIZE_DIR" ]] && chmod -R ug+rwX "$KIBANA_OPTIMIZE_DIR"
-
-kibana_conf_set "path.data" "$KIBANA_DATA_DIR"
+kibana_conf_set "path.data" "$SERVER_DATA_DIR"
 # For backwards compatibility, create a symlink to the default path
-! is_dir_empty "${KIBANA_BASE_DIR}/data" || rm -rf "${KIBANA_BASE_DIR}/data" && ln -s "$KIBANA_DATA_DIR" "${KIBANA_BASE_DIR}/data"
+! is_dir_empty "${SERVER_BASE_DIR}/data" || rm -rf "${SERVER_BASE_DIR}/data" && ln -s "$SERVER_DATA_DIR" "${SERVER_BASE_DIR}/data"

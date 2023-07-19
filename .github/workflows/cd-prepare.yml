@@ -12,6 +12,8 @@ on: # rebuild any PRs and main branch changes
       - main
     paths:
       - 'bitnami/**'
+# Remove all permissions by default.
+permissions: {}
 env:
   CSP_API_URL: https://console.cloud.vmware.com
   CSP_API_TOKEN: ${{ secrets.CSP_API_TOKEN }}
@@ -20,6 +22,8 @@ jobs:
   prepare:
     runs-on: ubuntu-latest
     name: Retrieve metadata and auxiliary files
+    permissions:
+      contents: read
     if: |
       github.event_name == 'workflow_dispatch' ||
       (github.event.head_commit.author.username == 'bitnami-bot' && github.event.forced == false)

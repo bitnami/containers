@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 command:
   check-rabbitmq-plugins:
     exec: rabbitmq-plugins enable rabbitmq_stomp && rabbitmq-plugins disable rabbitmq_stomp

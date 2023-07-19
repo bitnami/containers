@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 command:
   check-apache-exporter-run:
     exec: timeout --preserve-status 5 apache_exporter
