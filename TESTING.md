@@ -1,9 +1,9 @@
 # Testing information
 
-At Bitnami, we are committed to ensure the quality of the apps we deliver, and as such, tests play a fundamental role in the `bitnami/containers` repository. Bear in mind that every contribution to our containers is ultimately published to our container repositories, where it is made available for the rest of the community to benefit from. Before this happens, different checks are required to succeed. More precisely, tests are run when:
+At Bitnami, we are committed to ensuring the quality of the apps we deliver, and as such, tests play a fundamental role in the `bitnami/containers` repository. Bear in mind that every contribution to our containers is ultimately published to our container registries, where it is made available for the rest of the community to benefit from. Before this happens, different checks are required to succeed. More precisely, tests are run when:
 
 1. A new contribution (regardless of its author) is made through a GitHub Pull Request.
-2. Accepted changes are merged to the `main` branch, prior to their release.
+2. Accepted changes are merged to the `main` branch, before their release.
 
 This strategy ensures that a set of changes must have succeeded twice before a new version is sent out to the public.
 
@@ -17,11 +17,12 @@ In this section, we will discuss:
   * [Defining the scope](#defining-the-scope)
   * [Implementing the strategy](#implementing-the-strategy)
   * [Runtime parameters](#runtime-parameters)
-* [Test types and tools](#test-types-and-tools)
 * [Generic acceptance criteria](#generic-acceptance-criteria)
 * [GOSS](#goss)
+  * [Test suite](#test-suite)
+    * [GOSS Templates](#goss-templates)
+    * [Composition](#composition)
   * [Run GOSS locally](#run-goss-locally)
-  * [Useful GOSS information](#useful-goss-information)
   * [Specific GOSS acceptance criteria](#specific-goss-acceptance-criteria)
 
 ## Where to find the tests
@@ -30,9 +31,7 @@ All the apps have an associated folder inside [/.vib](https://github.com/bitnami
 
 ## VMware Image Builder (VIB)
 
-The service that powers the verification of the thousands of monthly tests performed in the repository is VMware Image Builder. VMware Image Builder (VIB) is a platform-agnostic, API-first modular service that allows large enterprises and independent software vendors to automate the packaging, **verification**, and publishing processes of software artifacts on any platform and cloud.
-
-For more information about VIB, you can refer to [its official page](https://tanzu.vmware.com/image-builder).
+The service that powers the verification of the thousands of monthly tests performed in the repository is VMware Image Builder. [VMware Image Builder](https://tanzu.vmware.com/content/blog/how-bitnami-uses-vmware-image-builder-to-deploy-apps) (VIB) is a platform-agnostic, API-first modular service that allows large enterprises and independent software vendors to automate the packaging, **verification**, and publishing processes of software artifacts on any platform and cloud.
 
 ## VIB pipeline files
 
@@ -85,22 +84,22 @@ Let's take a look at an example and try to understand it!
 }
 ```
 
-This guide will focus in the `verify` phase section, of which there are some things to remark:
+This guide will focus on the `verify` phase section, of which there are some things to remark on:
 
-* For the testing of containers, VIB will take the built container in the previous `package` phase and include it in a basic Helm chart template composed of a deployment and service template. Be aware VIB will only be taking into account the docker image `ENTRYPOINT/CMD` command of the image. Consecuently, this both simplifies and limits the configuration of the template chart and container image tested underneath.
+* For the testing of containers, VIB will take the built container in the previous `package` phase and include it in a basic Helm chart template composed of a deployment and service template. Beware VIB will only be taking into account the docker image `ENTRYPOINT/CMD` command of the image. Consequently, this both simplifies and limits the configurability of the template chart and container image tested underneath.
 
 * A container's testing phase will usually include a single `goss` testing action, followed by additional security-related actions.
 
 ### vib-verify.json vs vib-publish.json
 
-Going back to what we explained in the introduction, there are two different events that will trigger the test's execution. The following two files are associated to those two events respectively:
+Going back to what we explained in the introduction, two different events will trigger the test's execution. The following two files are associated with those events respectively:
 
 - The `vib-verify.json` pipeline definition file will be used to verify the changes proposed in a PR.
 - The `vib-publish.json` file will instead define the pipeline launched when the proposed changes are merged to `main`.
 
 Both files define what VIB should do when they are triggered and thus tweaking the files allows to define different action policies depending on the event that was fired. Nevertheless, it was decided that the verification process should be identical in both cases. Therefore, the `verify` section in `vib-verify.json` and `vib-verify.json` files must coincide.
 
-> NOTE: Some containers with per-branch ARM support use separate `vib-publish.json` pipelines for the said branches. Remember to also include the testing-related changes on those pipelines.
+> NOTE: Some containers with per-branch ARM support use separate `vib-publish.json` pipelines for the said branches. Remember to replicate any other changes on those pipelines.
 
 ## Testing strategy
 
@@ -108,58 +107,47 @@ Both files define what VIB should do when they are triggered and thus tweaking t
 
 As a starting point for this strategy, containers are to be considered as a middle artifact to be used by its corresponding chart and not as a final deliverable. This is a distinction that will affect the nature of the container tests. Essentially, we are assuming that most apps’ integration and functional tests are performed in the related chart’s test suite and should not be duplicated for the containers catalog.
 
-This strategy has to be understood together with the testing limitations for containers mentioned above. These restraints prevent us from setiing up complex multi-container testing scenarios, which is a necessity for most of our containers to be initialized properly. To work around this, we'll only test up to the postunpack phase of the container (where the initial filesystem changes are done). As a consecuence, we will concentrate on the verification of the app’s compilation and the container’s filesystem itself.
+This strategy has to be understood together with the testing limitations for the containers mentioned above. These restraints prevent us from setting up complex multi-container testing scenarios, which is a necessity for most of our containers to be initialized properly. To work around this, we will only test up to the postunpack phase of the container (where the initial filesystem changes are done). As a consequence, we will concentrate on the verification of the app’s compilation logic and the container’s filesystem itself.
 
-Some examples on the suitability of tests for the `bitnami/wordpress` container:
+Some examples of the suitability of tests for the `bitnami/wordpress` container:
 
-* ✅ Checking apache config added in Wordpress' postunpack stage
+* ✅ Checking Apache config added in Wordpress' postunpack stage
 * ❌ Manually finishing the container initialization to run functional tests
 * ✅ Checking the image filesystem (created dirs existence, changed permissions, etc) related to the compilation/postunpack stages
-* ❌ Verifying bash logic performed at `libwordpress.sh`, as we'll run Goss before that logic is executed.
-* ✅ Testing binaries' existance and usability
+* ❌ Verifying bash logic performed at `libwordpress.sh`, as we'll run Goss before that logic is executed
+* ✅ Testing binaries' existence and usability
 
-Something of note is the equality on scope for the whole container catalog. Though some apps do not require additional containers to run and can be fully initialised as they are, we will be using the same testing setup for every container.
+Something of note is the equality of scope for the whole container catalog. Though some apps do not require additional containers to run and can be fully initialised as they are, we will be using the same testing setup for every container.
 
-### Implementing the strategy
+### Runtime parameters
 
-* Check Dockerfile
-  * Included nami modules contain binaries -> use `check-binaries.yaml` Goss template
-  * Check whether the ca-certificates pakage is downloaded -> Use `check-ca-certificates.yaml` template
-* Check compilation logic
-  * Check whether files or directories are created and/or with permission changes -> Use `check-directories.yaml` and/or `check-files.yaml` templates.
-  * Check whether there are additional files/dirs modifications -> Use custom filesystem tests
-  * Add tests for any compilation options or flags used
-  * No distro-specific tests are included
-* Check postunpack script
-  * Check whether there are files or directories created w/o permission changes -> Add `check-directories.yaml` and/or `check-files.yaml` templates.
-  * Check whether there are additional files/dirs modifications -> Add custom filesystem tests
-* Check asset version -> Test version with `check-app-version.yaml` if $APP_VERSION` follows semver version
-* Check asset-dependant tests
-  * If the app is a runtime, test the runtime is able to run a compatible file
-  * If the app requires yet-to-run initialization logic:
-    * No complex configuration nor testing environment is created manually
-    * If possible, test the asset's basic features
-  * If the app is just a part of a bigger setup (exporter, multi-container assets, etc.):
-    * No testing environment is created manually
-    * If possible, test the asset's basic features
-  * If the app uses subcomponents (java/php, apache, etc.)
-    * If possible, test a subcomponent when there is custom config added to them
-    * Check whether the subcomponent is capable of running the asset
-* Final checks
-  * When possible, NO per-branch tests are used
-  * Every Goss template is included in `goss.yaml` and the needed vars are in place
+As of now, and linking with the scope definition we saw previously, the `runtime_parameters` field is only used to "stop" a container initialization logic after its `postunpack` has been executed. The `runtime_parameters` value is a base64 encoded string going by `command: ["tail", "-f", "/dev/null"]` and is the same for every VIB pipeline defined in `bitnami/containers`.
 
-#### Runtime parameters
+## Generic acceptance criteria
 
-/dev/null
+For your test code PR to be accepted the following criteria must be fulfilled:
 
-Depending on the tool used, additional acceptance criteria may apply. Please, refer to the corresponding section for further info.
+* [ ] Test scope needs to be focused on **installation** of the app and not testing the app
+* [ ] Key features of the app should be covered, when possible
+* [ ] Tests need to contain assertions
+* [ ] Tests need to be stateless
+* [ ] Tests need to be independent
+* [ ] Tests need to be retry-able
+* [ ] Tests need to be executable in any order
+* [ ] Test code needs to be peer-reviewed
+* [ ] Tests need to be as minimalistic as possible
+* [ ] Tests should run properly for future versions without major changes
+* [ ] Avoid hardcoded values
+* [ ] Include only necessary files
+* [ ] Test code needs to be [maintainable](https://testautomationpatterns.org/wiki/index.php/MAINTAINABLE_TESTWARE)
+* [ ] Test names should be descriptive
+* [ ] Test data should be generated dynamically
 
 ## GOSS
 
-[GOSS](https://github.com/aelsabbahy/goss/blob/master/docs/manual.md) is the framework used to implement integration tests. It is the reference tool to use when tests require interaction with a specific pod, with its tests being executed from within the pod.
+[GOSS](https://github.com/aelsabbahy/goss/blob/master/docs/manual.md) is the framework used to implement integration tests and the only testing tool presently used in our VIB pipelines. It is the reference tool to use when tests require interaction with a specific pod, with its tests being executed from within the pod.
 
-In order for VIB to execute GOSS tests, the following block of code needs to be defined in the corresponding [VIB pipeline files](#vib-pipeline-files) (`/.vib/app/vib-{verify,publish}.json`).
+For VIB to execute GOSS tests, the following block of code needs to be defined in the corresponding [VIB pipeline files](#vib-pipeline-files) (`/.vib/app/vib-{verify,publish}.json`).
 
 > Values denoted withing dollar signs (`$$VALUE$$`) should be treated as placeholders
 
@@ -182,6 +170,101 @@ In order for VIB to execute GOSS tests, the following block of code needs to be 
 ```
 
 Related files should be located under `/.vib/app/goss`.
+
+### Test suite
+
+A GOSS test suite for a given application can be divided in two. One half contains the tests specifically manufactured to verify different aspects of the application and the other half is intended to verify that the container complies with Bitnami's best practices. As some of these tests are oftentimes almost identical between different apps, we have compiled some of them in a series of GOSS templates to unify and simplify their usage.
+
+#### GOSS Templates
+
+At their core, GOSS templates are just tests of similar nature put together on a `.yaml` file under the `.vib/common/goss/templates` folder.
+
+Every template is composed of:
+
+* A brief description of the tests' nature
+* Any needed vars it may use to run its tests
+* One or more tests
+
+To better understand them, let's see one of these templates:
+
+```yaml
+########################
+# Checks binaries are added to the $PATH
+# Needed vars:
+#   - .Vars.binaries (Array)
+########################
+command:
+  {{ range $binary := .Vars.binaries }}
+  check-{{ $binary }}-binary:
+    exec: which {{ $binary }}
+    exit-status: 0
+  {{ end }}
+```
+
+In the example above, we can see the template will execute a `which` command for every binary included in the `.Vars.binaries` array. These variables may be optional or required and must be defined in the `/.vib/app/goss/vars.yaml` file.
+
+There are many different templates, some of them focusing on verifying specific types of apps (those that use PHP, NGINX, etc.) or a particular best practice. In the same vein, new templates can be added if a particular group of tests is going to be used by several apps.
+
+#### Composition
+
+There are instances where it is not needed to create custom tests for a given app, where using the templates will suffice. There will also be suites that may require the use of testing files to properly verify the app. Generally, a test suite can be composed of the following files:
+
+```bash
+.vib/java/goss
+├── goss.yaml
+├── java.yaml
+├── testfiles
+│   └── HelloTest.jar
+└── vars.yaml
+```
+
+* [ ] The optional `app.yaml` file is where custom tests created just for the related app verification are included.
+* [ ] The `goss.yaml` file should include the list of used GOSS templates as well as the `app.yaml` file (if necessary).
+* [ ] The `vars.yaml` file should include every variable used in the templates.
+* [ ] The `testfiles` folder should include any external files used in the `app.yaml` tests.
+
+Not every suite will be composed of the same tests, as it will depend on the type of application, its Dockerfile, and the used compilation/configuration logic. The list below details each pillar that should be checked when creating a test suite as well as when to use some of the most common templates:
+
+* Dockerfile check:
+  * Does it include nami modules which contain binaries? If so, use the `check-binaries.yaml` GOSS template.
+  * Does it include the ca-certificates package? If so, use the `check-ca-certificates.yaml` template.
+* Compilation logic check:
+  * Are there files or directories created and/or with permission changes? If so, use the `check-directories.yaml` and/or `check-files.yaml` templates.
+  * Are there additional files/dirs modifications? If so, use custom filesystem tests.
+  * Add tests for any compilation options or flags used.
+* Check postunpack script:
+  * Are there files or directories created and/or with permission changes? If so, use the `check-directories.yaml` and/or `check-files.yaml` templates.
+  * Are there additional files/dirs modifications? If so, use custom filesystem tests.
+* Check apps version:
+  * If `$APP_VERSION` follows semver version, use the `check-app-version.yaml` template.
+* Check apps-dependant tests:
+  * If the app is a runtime, test if the runtime can run a compatible file.
+  * If the app requires yet-to-run initialization logic:
+    * No complex configuration nor testing environment is created manually.
+    * If possible, test the app's basic features.
+  * If the app is just a part of a bigger setup (exporter, multi-container apps, etc.):
+    * No testing environment is created manually.
+    * If possible, test the app's basic features.
+  * If the app uses subcomponents (java/php, apache, etc.):
+    * If possible, test a subcomponent when there is a custom config added to them.
+    * Verify whether the subcomponent is capable of running the app.
+* Must-have templates to be added to every suite:
+  * `check-linked.libraries.yaml`
+  * `check-broken-symlinks.yaml`
+  * `check-sed-in-place.yaml`
+  * `check-spdx.yaml`
+* Final checks:
+  * When possible, NO per-branch tests are used.
+  * Every GOSS template is included in `goss.yaml` and the needed vars are in place.
+
+### Specific GOSS acceptance criteria
+
+* [ ] No distro-specific tests are included.
+* [ ] Prioritise using the tests included in the templates over creating custom tests.
+* [ ] Due to GOSS limitations, there can't be two tests with the same name or checking the same file/directory. In those cases, only one of them will be run.
+* [ ] For clarity purposes, the vars needed for the GOSS templates shouldn't be used in the custom tests at `app.yaml`.
+* [ ] Tests should not rely on system packages (e.g. `curl`). Favor built-in GOSS primitives instead.
+* [ ] Prefer checking the exit status of a command rather than looking for a specific output. This will avoid most of the potential flakiness.
 
 ### Run GOSS locally
 
@@ -209,45 +292,3 @@ Sometimes it is of interest to run the tests locally, for example during develop
     Total Duration: 1.203s
     Count: 11, Failed: 0, Skipped: 0
     ```
-
-## Generic acceptance criteria
-
-In order for your test code PR to be accepted the following criteria must be fulfilled:
-
-* [ ] Test scope needs to be focused on **installation** of the app and not testing the app
-* [ ] Key features of the app should be covered, when possible
-* [ ] Tests need to contain assertions
-* [ ] Tests need to be stateless
-* [ ] Tests need to be independent
-* [ ] Tests need to be retry-able
-* [ ] Tests need to be executable in any order
-* [ ] Test code needs to be peer-reviewed
-* [ ] Tests need to be as minimalistic as possible
-* [ ] Tests should run properly for future versions without major changes
-* [ ] Avoid hardcoded values
-* [ ] Include only necessary files
-* [ ] Test code needs to be [maintainable](https://testautomationpatterns.org/wiki/index.php/MAINTAINABLE_TESTWARE)
-* [ ] Test names should be descriptive
-* [ ] Test data should be generated dynamically
-
-### Specific GOSS acceptance criteria
-
-* [ ] Main test file name should be `goss.yaml`
-* [ ] Tests should not rely on system packages (e.g. `curl`). Favor built-in GOSS primitives instead
-* [ ] Prefer checking the exit status of a command rather than looking for a specific output. This will avoid most of the potential flakiness
-
-### Useful GOSS information
-
-As our Charts implement some standardized properties, there are a number of test cases that have been found recurrently throughout the catalog:
-
-* Correct user ID and Group of the running container
-* Reachability of the different ports exposed through services
-* Existence of mounted volumes
-* Correct configuration was applied to a config file or enviroment variable
-* Existence of a created Service Account
-* Restricted capabilities are applied to a running container
-* Valuable CLI checks (when available)
-
-[Kong](https://github.com/bitnami/charts/blob/main/.vib/kong/goss/goss.yaml) or [MetalLB](https://github.com/bitnami/charts/blob/main/.vib/metallb/goss/goss.yaml) are two good examples of tests implementing some of the above.
-
-

@@ -1,3 +1,8 @@
+########################
+# Test coverage for the php-fpm package
+# Needed vars:
+# - None
+########################
 file:
   /opt/bitnami/php/etc/php.ini:
     exists: true
