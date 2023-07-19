@@ -15,7 +15,6 @@ In this section, we will discuss:
   * [vib-verify.json vs vib-publish.json](#vib-verifyjson-vs-vib-publishjson)
 * [Testing strategy](#testing-strategy)
   * [Defining the scope](#defining-the-scope)
-  * [Implementing the strategy](#implementing-the-strategy)
   * [Runtime parameters](#runtime-parameters)
 * [Generic acceptance criteria](#generic-acceptance-criteria)
 * [GOSS](#goss)
@@ -94,8 +93,8 @@ This guide will focus on the `verify` phase section, of which there are some thi
 
 Going back to what we explained in the introduction, two different events will trigger the test's execution. The following two files are associated with those events respectively:
 
-- The `vib-verify.json` pipeline definition file will be used to verify the changes proposed in a PR.
-- The `vib-publish.json` file will instead define the pipeline launched when the proposed changes are merged to `main`.
+* The `vib-verify.json` pipeline definition file will be used to verify the changes proposed in a PR.
+* The `vib-publish.json` file will instead define the pipeline launched when the proposed changes are merged to `main`.
 
 Both files define what VIB should do when they are triggered and thus tweaking the files allows to define different action policies depending on the event that was fired. Nevertheless, it was decided that the verification process should be identical in both cases. Therefore, the `verify` section in `vib-verify.json` and `vib-verify.json` files must coincide.
 
