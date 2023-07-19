@@ -18,8 +18,8 @@ set -o pipefail
 # Load Apache Flink environment variables
 . /opt/bitnami/scripts/flink-env.sh
 
-# Ensure ActiveMQ environment variables are valid
+# Ensure Flink environment variables are valid
 flink_validate
 
-# Ensure ActiveMQ is initialized
+# Ensure Flink is initialized
 flink_initialize

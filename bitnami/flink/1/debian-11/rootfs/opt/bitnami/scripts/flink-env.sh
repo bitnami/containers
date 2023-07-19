@@ -25,6 +25,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # variable will be overridden with the value specified in that file
 flink_env_vars=(
     FLINK_MODE
+    FLINK_CFG_REST_PORT
     FLINK_TASK_MANAGER_NUMBER_OF_TASK_SLOTS
     FLINK_PROPERTIES
 )
@@ -43,11 +44,14 @@ unset flink_env_vars
 
 # Paths
 export FLINK_BASE_DIR="${BITNAMI_ROOT_DIR}/flink"
+export FLINK_BIN_DIR="${FLINK_BASE_DIR}/bin"
 export FLINK_WORK_DIR="${FLINK_BASE_DIR}"
+export FLINK_LOG_DIR="${FLINK_BASE_DIR}/log"
 export FLINK_CONF_DIR="${FLINK_BASE_DIR}/conf"
 export FLINK_CONF_FILE="flink-conf.yaml"
 export FLINK_CONF_FILE_PATH="${FLINK_CONF_DIR}/${FLINK_CONF_FILE}"
 export FLINK_MODE="${FLINK_MODE:-jobmanager}"
+export FLINK_CFG_REST_PORT="${FLINK_CFG_REST_PORT:-8081}"
 export FLINK_TASK_MANAGER_NUMBER_OF_TASK_SLOTS="${FLINK_TASK_MANAGER_NUMBER_OF_TASK_SLOTS:-$(grep -c ^processor /proc/cpuinfo)}"
 export FLINK_PROPERTIES="${FLINK_PROPERTIES:-}"
 
