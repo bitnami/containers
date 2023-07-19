@@ -68,7 +68,7 @@ elif [[ "$FLINK_MODE" = "taskmanager" ]]; then
     args=("start-foreground" "${args[@]}")
 else
   error "Flink mode not recognized"
-  return 1
+  exit 1
 fi
 
 # Running command
