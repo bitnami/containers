@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 #
 # Bitnami Apache Flink library
 
@@ -8,6 +10,7 @@
 . /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/libpersistence.sh
 . /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/libservice.sh
 
 ########################
 # Set a config option into the Flink configuration specified file.
@@ -184,4 +187,31 @@ flink_setup_jemalloc() {
     else
         warn "Couldn't find jemalloc installed. Skipping jemalloc configuration."
     fi
+}
+
+########################
+# Check if Flink daemon is running
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_flink_running() {
+    local -r pid="$(get_pid_from_file "$FLINK_PID_FILE")"
+    if [[ -n "$pid" ]]; then
+        is_service_running "$pid"
+    else
+        false
+    fi
+}
+
+########################
+# Check if Flink daemon is not running
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_flink_not_running() {
+    ! is_flink_running
 }

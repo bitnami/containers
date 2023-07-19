@@ -9,24 +9,24 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.11.3-1"
+        "version": "10.11.4-0"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-6"
+        "version": "1.0.5-7"
     },
     "reportserver": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.6.1-6092-0"
+        "version": "4.6.1-6094-0"
     },
     "tomcat": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.0.75-2"
+        "version": "9.0.78-0"
     }
 }

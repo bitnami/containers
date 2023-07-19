@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 file:
   # Checks there is a template already loaded as a config file
   /opt/bitnami/mariadb/conf/my.cnf:

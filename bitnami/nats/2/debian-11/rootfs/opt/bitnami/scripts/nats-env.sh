@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 #
 # Environment configuration for nats
 
@@ -44,6 +46,7 @@ nats_env_vars=(
     NATS_CLUSTER_TOKEN
     NATS_CLUSTER_ROUTES
     NATS_CLUSTER_SEED_NODE
+    NATS_EXTRA_ARGS
 )
 for env_var in "${nats_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -106,5 +109,6 @@ export NATS_CLUSTER_PASSWORD="${NATS_CLUSTER_PASSWORD:-}"
 export NATS_CLUSTER_TOKEN="${NATS_CLUSTER_TOKEN:-}"
 export NATS_CLUSTER_ROUTES="${NATS_CLUSTER_ROUTES:-}"
 export NATS_CLUSTER_SEED_NODE="${NATS_CLUSTER_SEED_NODE:-}"
+export NATS_EXTRA_ARGS="${NATS_EXTRA_ARGS:-}"
 
 # Custom environment variables may be defined below

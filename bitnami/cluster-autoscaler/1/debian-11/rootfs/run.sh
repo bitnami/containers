@@ -1,4 +1,6 @@
 #!/bin/sh
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 
 # Copyright 2017 The Kubernetes Authors.
 #

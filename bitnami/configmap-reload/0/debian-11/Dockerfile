@@ -1,15 +1,18 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-04T00:07:54Z" \
+      org.opencontainers.image.created="2023-07-15T05:38:33Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.11.0-debian-11-r3" \
+      org.opencontainers.image.ref.name="0.11.1-debian-11-r12" \
       org.opencontainers.image.title="configmap-reload" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.11.0"
+      org.opencontainers.image.version="0.11.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +25,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "configmap-reload-0.11.0-0-linux-${OS_ARCH}-debian-11" \
+      "configmap-reload-0.11.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -39,7 +42,7 @@ RUN apt-get autoremove --purge -y curl && \
 RUN chmod g+rwX /opt/bitnami
 RUN ln -sf /opt/bitnami/configmap-reload/bin/configmap-reload /bin/configmap-reload
 
-ENV APP_VERSION="0.11.0" \
+ENV APP_VERSION="0.11.1" \
     BITNAMI_APP_NAME="configmap-reload" \
     PATH="/opt/bitnami/configmap-reload/bin:$PATH"
 

@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 #
 # Bitnami Pgpool library
 
@@ -61,6 +63,15 @@ pgbouncer_validate() {
         check_empty_value "POSTGRESQL_PASSWORD"
         if ((${#POSTGRESQL_PASSWORD} > 100)); then
             print_validation_error "The password cannot be longer than 100 characters. Set the environment variable POSTGRESQL_PASSWORD with a shorter value"
+        fi
+    fi
+
+    # HBA Checks
+    if [[ "$PGBOUNCER_AUTH_TYPE" == "hba" ]] ; then
+        if [[ -z "$PGBOUNCER_AUTH_HBA_FILE" ]]; then
+            print_validation_error "A hba file was not provided. You need to set this value when specifying auth_type to hba"
+        elif [[ ! -f "$PGBOUNCER_AUTH_HBA_FILE" ]]; then
+            print_validation_error "The hba file in the specified path ${PGBOUNCER_AUTH_HBA_FILE} does not exist"
         fi
     fi
 
@@ -228,6 +239,7 @@ pgbouncer_initialize() {
             "unix_socket_group:${PGBOUNCER_SOCKET_GROUP}"
             "auth_file:${PGBOUNCER_AUTH_FILE}"
             "auth_type:${PGBOUNCER_AUTH_TYPE}"
+            "auth_hba_file:${PGBOUNCER_AUTH_HBA_FILE}"
             "auth_query:${PGBOUNCER_AUTH_QUERY}"
             "pidfile:${PGBOUNCER_PID_FILE}"
             "logfile:${PGBOUNCER_LOG_FILE}"
@@ -248,6 +260,7 @@ pgbouncer_initialize() {
             "default_pool_size:${PGBOUNCER_DEFAULT_POOL_SIZE}"
             "min_pool_size:${PGBOUNCER_MIN_POOL_SIZE}"
             "reserve_pool_size:${PGBOUNCER_RESERVE_POOL_SIZE}"
+            "reserve_pool_timeout:${PGBOUNCER_RESERVE_POOL_TIMEOUT}"
             "ignore_startup_parameters:${PGBOUNCER_IGNORE_STARTUP_PARAMETERS}"
             "log_connections:${PGBOUNCER_LOG_CONNECTIONS}"
             "log_disconnections:${PGBOUNCER_LOG_DISCONNECTIONS}"

@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 #
 # Bitnami PostgreSQL library
 
@@ -620,6 +622,7 @@ postgresql_initialize() {
     # Configure port
     postgresql_set_property "port" "$POSTGRESQL_PORT_NUMBER"
     is_empty_value "$POSTGRESQL_DEFAULT_TOAST_COMPRESSION" || postgresql_set_property "default_toast_compression" "$POSTGRESQL_DEFAULT_TOAST_COMPRESSION"
+    is_empty_value "$POSTGRESQL_PASSWORD_ENCRYPTION" || postgresql_set_property "password_encryption" "$POSTGRESQL_PASSWORD_ENCRYPTION"
     if ! is_dir_empty "$POSTGRESQL_DATA_DIR"; then
         info "Deploying PostgreSQL with persisted data..."
         export POSTGRESQL_FIRST_BOOT="no"
@@ -1012,6 +1015,9 @@ postgresql_remove_pghba_lines() {
         echo "$result" >"$POSTGRESQL_PGHBA_FILE"
     done
 }
+
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 
 # shellcheck disable=SC2148
 

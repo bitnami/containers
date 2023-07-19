@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 command:
   check-app-version:
     exec: ls /opt/bitnami/jasperreports/buildomatic/conf_source/ieCe/lib/jasperserver-war-jar-*.jar | grep {{ .Env.APP_VERSION }}

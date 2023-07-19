@@ -1,15 +1,18 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-04T08:09:25Z" \
+      org.opencontainers.image.created="2023-07-14T09:38:35Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.7.0-debian-11-r17" \
+      org.opencontainers.image.ref.name="2.8.0-debian-11-r4" \
       org.opencontainers.image.title="kubeapps-dashboard" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.7.0"
+      org.opencontainers.image.version="2.8.0"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
@@ -21,9 +24,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libcrypt1 libgeoip1 libpcre3 libssl1.1 openssl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "nginx-1.25.0-1-linux-${OS_ARCH}-debian-11" \
-      "render-template-1.0.5-6-linux-${OS_ARCH}-debian-11" \
-      "kubeapps-2.7.0-2-linux-${OS_ARCH}-debian-11" \
+      "nginx-1.25.1-0-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.5-7-linux-${OS_ARCH}-debian-11" \
+      "kubeapps-2.8.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -45,7 +48,7 @@ RUN rm -rf /app && \
     mv /opt/bitnami/kubeapps/build /app
 RUN chmod -R g+rwX /opt/bitnami/nginx/conf
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
-ENV APP_VERSION="2.7.0" \
+ENV APP_VERSION="2.8.0" \
     BITNAMI_APP_NAME="kubeapps-dashboard" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \

@@ -1,15 +1,18 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-05T16:32:07Z" \
+      org.opencontainers.image.created="2023-07-16T07:30:08Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.7.0-debian-11-r16" \
+      org.opencontainers.image.ref.name="2.8.0-debian-11-r4" \
       org.opencontainers.image.title="kubeapps-apis" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.7.0"
+      org.opencontainers.image.version="2.8.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,7 +25,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "kubeapps-apis-2.7.0-2-linux-${OS_ARCH}-debian-11" \
+      "kubeapps-apis-2.8.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,7 +43,7 @@ RUN chmod g+rwX /opt/bitnami
 RUN mkdir -p /opt/bitnami/kubeapps-apis/.kube && chown 1001:1001 /opt/bitnami/kubeapps-apis/.kube
 RUN ln -s /opt/bitnami/kubeapps-apis/plugins /plugins && ln -s /opt/bitnami/kubeapps-apis/bin/kubeapps-apis /kubeapps-apis && ln -s /opt/bitnami/kubeapps-apis/.kube /.kube
 
-ENV APP_VERSION="2.7.0" \
+ENV APP_VERSION="2.8.0" \
     BITNAMI_APP_NAME="kubeapps-apis" \
     PATH="/opt/bitnami/kubeapps-apis/bin:$PATH"
 

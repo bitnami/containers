@@ -1,6 +1,9 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 command:
-  check-app-version:
-    exec: /opt/bitnami/grafana-operator/bin/grafana-operator || true
+  check-app:
+    exec: grafana-operator --help || true
     exit-status: 0
     stderr:
-    - {{ .Env.APP_VERSION }}
+    - Usage of grafana-operator

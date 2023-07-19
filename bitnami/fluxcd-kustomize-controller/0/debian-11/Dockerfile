@@ -1,12 +1,15 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-05T15:54:02Z" \
+      org.opencontainers.image.created="2023-07-16T23:09:06Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.35.1-debian-11-r25" \
+      org.opencontainers.image.ref.name="0.35.1-debian-11-r39" \
       org.opencontainers.image.title="fluxcd-kustomize-controller" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.35.1"
@@ -22,7 +25,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl git gnupg openssh-client procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "fluxcd-kustomize-controller-0.35.1-3-linux-${OS_ARCH}-debian-11" \
+      "fluxcd-kustomize-controller-0.35.1-4-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \

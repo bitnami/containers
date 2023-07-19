@@ -1,0 +1,8 @@
+binaries:
+  - milvus
+directories:
+  - paths:
+      - /opt/bitnami/milvus/bin
+      - /opt/bitnami/milvus/tmp
+      - /bitnami/milvus/data
+root_dir: /opt/bitnami

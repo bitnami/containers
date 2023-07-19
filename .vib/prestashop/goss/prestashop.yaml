@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 command:
   check-app-version:
     exec: grep -Eo "'_PS_INSTALL_VERSION_', '[^']*'" /opt/bitnami/prestashop/install/install_version.php

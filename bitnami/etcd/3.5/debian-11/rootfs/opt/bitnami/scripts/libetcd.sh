@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 #
 # Bitnami etcd library
 
@@ -232,7 +234,7 @@ etcdctl_get_endpoints() {
         # 'getent hosts $ip' can return hostnames in 2 different formats:
         #     POD_NAME.HEADLESS_SVC_DOMAIN.NAMESPACE.svc.cluster.local (using headless service domain)
         #     10-237-136-79.SVC_DOMAIN.NAMESPACE.svc.cluster.local (using POD's IP and service domain)
-        # We need to discad the latter to avoid issues when TLS verification is enabled.
+        # We need to discard the latter to avoid issues when TLS verification is enabled.
         [[ "$(getent hosts "$ip")" = *"$parent_domain"* ]] && return 0
         return 1
     }
@@ -494,7 +496,7 @@ get_initial_cluster() {
         # This piece of code assumes this container is used on a VM environment
         # where ETCD_INITIAL_CLUSTER contains a comma-separated list of hostnames,
         # and recreates it as follows:
-        #   SCHEME://NOTE_NAME:PEER_PORT
+        #   SCHEME://NODE_NAME:PEER_PORT
         scheme="$(parse_uri "$ETCD_INITIAL_ADVERTISE_PEER_URLS" "scheme")"
         port="$(parse_uri "$ETCD_INITIAL_ADVERTISE_PEER_URLS" "port")"
         for nodePeer in "${endpoints_array[@]}"; do

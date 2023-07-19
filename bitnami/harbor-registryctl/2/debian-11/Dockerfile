@@ -1,12 +1,15 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
 LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-06-05T04:12:01Z" \
+      org.opencontainers.image.created="2023-07-17T03:27:54Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.8.2-debian-11-r0" \
+      org.opencontainers.image.ref.name="2.8.2-debian-11-r14" \
       org.opencontainers.image.title="harbor-registryctl" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.8.2"
@@ -22,9 +25,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "yq-4.34.1-0-linux-${OS_ARCH}-debian-11" \
+      "yq-4.34.2-0-linux-${OS_ARCH}-debian-11" \
       "harbor-registry-2.8.2-0-linux-${OS_ARCH}-debian-11" \
-      "harbor-registryctl-2.8.2-0-linux-${OS_ARCH}-debian-11" \
+      "harbor-registryctl-2.8.2-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
