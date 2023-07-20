@@ -5,17 +5,17 @@ FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
-LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-15T07:01:25Z" \
+LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
+      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
+      org.opencontainers.image.created="2023-07-19T22:15:54Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.0.5-debian-11-r1" \
+      org.opencontainers.image.ref.name="3.0.5-debian-11-r7" \
       org.opencontainers.image.title="discourse" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.0.5"
 
-ENV HOME="/" \
-    OS_ARCH="${TARGETARCH:-amd64}" \
+ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
@@ -29,7 +29,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "wait-for-port-1.0.6-9-linux-${OS_ARCH}-debian-11" \
       "ruby-3.2.2-3-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-15.3.0-1-linux-${OS_ARCH}-debian-11" \
-      "node-18.16.1-0-linux-${OS_ARCH}-debian-11" \
+      "node-18.17.0-0-linux-${OS_ARCH}-debian-11" \
       "brotli-1.0.9-161-linux-${OS_ARCH}-debian-11" \
       "discourse-3.0.5-0-linux-${OS_ARCH}-debian-11" \
     ) && \
@@ -45,7 +45,6 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
 RUN apt-get autoremove --purge -y curl && \
     apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
-RUN chmod g+rwX /opt/bitnami
 RUN /opt/bitnami/ruby/bin/gem install --force bundler -v '< 2'
 
 COPY rootfs /
@@ -57,6 +56,5 @@ ENV APP_VERSION="3.0.5" \
 
 EXPOSE 3000
 
-USER root
 ENTRYPOINT [ "/opt/bitnami/scripts/discourse/entrypoint.sh" ]
 CMD [ "/opt/bitnami/scripts/discourse/run.sh" ]
