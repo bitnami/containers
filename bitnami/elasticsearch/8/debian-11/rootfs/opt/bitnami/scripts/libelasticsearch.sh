@@ -727,7 +727,7 @@ elasticsearch_initialize() {
             if is_boolean_yes "$DB_ENABLE_SECURITY"; then
                 is_boolean_yes "$DB_ENABLE_REST_TLS" && elasticsearch_http_tls_configuration
                 ! is_boolean_yes "$DB_SKIP_TRANSPORT_TLS" && elasticsearch_transport_tls_configuration
-                if is_boolean_yes "$DB_ENABLE_FIPS_MODE"; then
+                if is_boolean_yes "$ELASTICSEARCH_ENABLE_FIPS_MODE"; then
                     elasticsearch_conf_set xpack.security.fips_mode.enabled "true"
                     elasticsearch_conf_set xpack.security.authc.password_hashing.algorithm "pbkdf2"
                 fi
