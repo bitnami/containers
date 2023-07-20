@@ -9,7 +9,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.16.1-0"
+        "version": "18.17.0-0"
     },
     "php": {
         "arch": "amd64",
@@ -21,7 +21,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.9.17-1"
+        "version": "3.9.17-2"
     },
     "wait-for-port": {
         "arch": "amd64",
