@@ -5,11 +5,12 @@ FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
-LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-14T15:05:23Z" \
+LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
+      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
+      org.opencontainers.image.created="2023-07-20T11:53:00Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.0.1-debian-11-r12" \
+      org.opencontainers.image.ref.name="4.0.1-debian-11-r40" \
       org.opencontainers.image.title="jupyter-base-notebook" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="4.0.1"
@@ -22,11 +23,11 @@ ENV HOME="/opt/bitnami/jupyterhub-singleuser/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl libbrotli1 libcom-err2 libcrypt1 libcurl4 libgcc-s1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed6 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 libnettle8 libnghttp2-14 libp11-kit0 libpsl5 librtmp1 libsasl2-2 libssh2-1 libstdc++6 libtasn1-6 libunistring2 procps zlib1g
+RUN install_packages ca-certificates curl libbrotli1 libbz2-1.0 libcom-err2 libcrypt1 libcurl4 libffi7 libgcc-s1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed6 libicu67 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblz4-1 liblzma5 libncursesw6 libnettle8 libnghttp2-14 libp11-kit0 libpsl5 libreadline8 librtmp1 libsasl2-2 libssh2-1 libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libunistring2 libxml2 libzstd1 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "miniconda-23.5.2-0-linux-${OS_ARCH}-debian-11" \
-      "jupyter-base-notebook-4.0.1-0-linux-${OS_ARCH}-debian-11" \
+      "jupyter-base-notebook-4.0.1-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
