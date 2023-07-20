@@ -38,11 +38,12 @@ ARG TARGETARCH
 ENV HOME="/root" \
     OS_ARCH="${TARGETARCH:-amd64}"
 
-LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-06-29T22:30:46Z" \
+LABEL com.vmware.cp.artifact.flavor="sha256:59c774543cd827c5e74f2cc55d77e9e923fdcfe2487c135bbb41d7709b51eef6" \
+      org.opencontainers.image.base.name="scratch" \
+      org.opencontainers.image.created="2023-07-20T09:01:32Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.12.1-scratch-r0" \
+      org.opencontainers.image.ref.name="1.12.1-scratch-r2" \
       org.opencontainers.image.title="kaniko" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.12.1"
