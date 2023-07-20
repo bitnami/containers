@@ -229,7 +229,7 @@ jenkins_initialize() {
             # Rotate the logs in Jenkins to clean the Jenkins warnings before actually configuring the app
             jenkins_stop
             # Generate jenkins.jks
-            "${JAVA_HOME}/bin/keytool" -genkey -keypass "${JENKINS_KEYSTORE_PASSWORD}" -storepass "${JENKINS_KEYSTORE_PASSWORD}" -keystore "${JENKINS_CERTS_DIR}/jenkins.jks" -dname "CN=${JENKINS_HOST}, O=${JENKINS_HOST}" -alias "${JENKINS_HOST}"
+            "${JAVA_HOME}/bin/keytool" -genkey -keyalg RSA -keypass "${JENKINS_KEYSTORE_PASSWORD}" -storepass "${JENKINS_KEYSTORE_PASSWORD}" -keystore "${JENKINS_CERTS_DIR}/jenkins.jks" -dname "CN=${JENKINS_HOST}, O=${JENKINS_HOST}" -alias "${JENKINS_HOST}"
             mv "$JENKINS_LOG_FILE" "${JENKINS_LOGS_DIR}/jenkins.firstboot.log"
             rm "${JENKINS_HOME}/init.groovy.d/init-jenkins.groovy"
         else
