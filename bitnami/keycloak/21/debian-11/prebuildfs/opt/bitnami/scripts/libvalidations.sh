@@ -188,23 +188,22 @@ validate_port() {
 }
 
 ########################
-# Validate if the provided argument is a valid IPv4 or IPv6 address
+# Validate if the provided argument is a valid IPv6 address
 # Arguments:
 #   $1 - IP to validate
 # Returns:
 #   Boolean
 #########################
-validate_ip() {
+validate_ipv6() {
     local ip="${1:?ip is missing}"
     local stat=1
+    local full_address_regex='^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$'
+    local short_address_regex='^((([0-9a-fA-F]{1,4}:){0,6}[0-9a-fA-F]{1,4}){0,6}::(([0-9a-fA-F]{1,4}:){0,6}[0-9a-fA-F]{1,4}){0,6})$'
 
-		if validate_ipv4 "$ip"; then
-			stat=0
-		else
-			stat=$(validate_ipv6 "$ip")
-		fi
-
-    return $stat
+    if [[ $ip =~ $full_address_regex || $ip =~ $short_address_regex || $ip == "::" ]]; then
+        stat=0
+    fi
+    return "$stat"
 }
 
 ########################
@@ -224,26 +223,26 @@ validate_ipv4() {
             && ${ip_array[2]} -le 255 && ${ip_array[3]} -le 255 ]]
         stat=$?
     fi
-    return $stat
+    return "$stat"
 }
 
 ########################
-# Validate if the provided argument is a valid IPv6 address
+# Validate if the provided argument is a valid IPv4 or IPv6 address
 # Arguments:
 #   $1 - IP to validate
 # Returns:
 #   Boolean
 #########################
-validate_ipv6() {
+validate_ip() {
     local ip="${1:?ip is missing}"
     local stat=1
-    local full_address_regex='^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$'
-		local short_address_regex='^((([0-9a-fA-F]{1,4}:){0,6}[0-9a-fA-F]{1,4}){0,6}::(([0-9a-fA-F]{1,4}:){0,6}[0-9a-fA-F]{1,4}){0,6})$'
 
-    if [[ $ip =~ $full_address_regex || $ip =~ $short_address_regex || $ip == "::" ]]; then
+    if validate_ipv4 "$ip"; then
         stat=0
+    else
+        stat=$(validate_ipv6 "$ip")
     fi
-    return $stat
+    return "$stat"
 }
 
 ########################
