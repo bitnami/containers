@@ -8,7 +8,6 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 COPY prebuildfs /
-
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install required system packages and dependencies
@@ -35,11 +34,12 @@ ARG TARGETARCH
 
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
-LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-05-29T08:39:40Z" \
+LABEL com.vmware.cp.artifact.flavor="sha256:59c774543cd827c5e74f2cc55d77e9e923fdcfe2487c135bbb41d7709b51eef6" \
+      org.opencontainers.image.base.name="scratch" \
+      org.opencontainers.image.created="2023-07-20T09:01:35Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.0.0-scratch-r2" \
+      org.opencontainers.image.ref.name="1.0.0-scratch-r4" \
       org.opencontainers.image.title="oras" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.0.0"
