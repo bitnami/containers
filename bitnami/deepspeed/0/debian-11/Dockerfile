@@ -43,7 +43,6 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir /.local && chmod g+rwX /.local
-RUN useradd -r -u 1001 -g root deepspeed
 
 RUN mkdir /app /.cache && chmod g+rwX /app /.cache
 ENV APP_VERSION="0.10.0" \
