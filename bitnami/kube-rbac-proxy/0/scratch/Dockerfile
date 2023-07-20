@@ -34,11 +34,12 @@ ARG TARGETARCH
 
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
-LABEL org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-06-05T15:51:01Z" \
+LABEL com.vmware.cp.artifact.flavor="sha256:59c774543cd827c5e74f2cc55d77e9e923fdcfe2487c135bbb41d7709b51eef6" \
+      org.opencontainers.image.base.name="scratch" \
+      org.opencontainers.image.created="2023-07-20T09:01:17Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.14.2-scratch-r0" \
+      org.opencontainers.image.ref.name="0.14.2-scratch-r2" \
       org.opencontainers.image.title="kube-rbac-proxy" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.14.2"
