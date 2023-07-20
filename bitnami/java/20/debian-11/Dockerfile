@@ -6,14 +6,15 @@ FROM docker.io/bitnami/minideb:bullseye
 ARG JAVA_EXTRA_SECURITY_DIR="/bitnami/java/extra-security"
 ARG TARGETARCH
 
-LABEL org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-15T06:32:55Z" \
+LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
+      org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
+      org.opencontainers.image.created="2023-07-20T16:59:07Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="20.0.1-10-debian-11-r28" \
+      org.opencontainers.image.ref.name="20.0.2-10-debian-11-r0" \
       org.opencontainers.image.title="java" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="20.0.1-10"
+      org.opencontainers.image.version="20.0.2-10"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
@@ -25,7 +26,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libfontconfig libsqlite3-dev libssl-dev locales procps wget zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-20.0.1-10-1-linux-${OS_ARCH}-debian-11" \
+      "java-20.0.2-10-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,7 +51,7 @@ RUN sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS    90/' /etc/login.defs && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/locales/add-extra-locales.sh
 RUN /opt/bitnami/scripts/java/postunpack.sh
-ENV APP_VERSION="20.0.1-10" \
+ENV APP_VERSION="20.0.2-10" \
     BITNAMI_APP_NAME="java" \
     JAVA_HOME="/opt/bitnami/java" \
     LANG="en_US.UTF-8" \
