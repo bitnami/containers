@@ -1,4 +1,7 @@
-name: '[CI/CD] CD Pipeline Run'
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+name: '[CI/CD] CD Pipelin'
 run-name: "${{ format('[CI/CD] CD Publish {0}',github.event.workflow_run.display_title) }}"
 on: # rebuild any PRs and main branch changes
   workflow_run:
@@ -41,7 +44,7 @@ jobs:
   vib-publish:
     runs-on: ubuntu-latest
     needs: get-metadata
-    name: Publish
+    name: VIB Publish
     permissions:
       contents: read
     strategy:
@@ -87,3 +90,45 @@ jobs:
           VIB_ENV_REGISTRY_USERNAME: "${{ steps.get-registry-credentials.outputs.marketplace_user }}"
           VIB_ENV_REGISTRY_PASSWORD: "${{ steps.get-registry-credentials.outputs.marketplace_passwd }}"
           VIB_ENV_BOSSD_RELEASE_ID: "${{ secrets.BOSSD_RELEASE_ID }}"
+
+  # If the CD Pipeline does not succeed we should notify the interested agents
+  slack-notif:
+    runs-on: ubuntu-latest
+    needs:
+      - vib-publish
+      - update-index
+    if: always()
+    name: Notify unsuccessful CD run
+    steps:
+      - name: Notify in Slack channel
+        if: ${{ needs.vib-publish.result != 'success' || needs.update-index.result != 'success' }}
+        uses: slackapi/slack-github-action@v1.23.0
+        with:
+          channel-id: ${{ secrets.CD_SLACK_CHANNEL_ID }}
+          payload: |
+            {
+              "attachments": [
+                {
+                  "color": "#CC0000",
+                  "fallback": "Unsuccessful bitnami/containers CD pipeline",
+                  "blocks": [
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "*Unsuccessful `bitnami/containers` CD pipeline*"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "The CD pipeline for <${{ github.event.head_commit.url }}|bitnami/containers@${{ github.event.head_commit.id }}> did not succeed. Check the related <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|action run> for more information."
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.CD_SLACK_BOT_TOKEN }}
