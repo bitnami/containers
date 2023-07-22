@@ -96,7 +96,6 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - vib-publish
-      - update-index
     if: always()
     name: Notify unsuccessful CD run
     steps:
