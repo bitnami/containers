@@ -1,0 +1,6 @@
+binaries:
+  - oci-catalog
+root_dir: /opt/bitnami
+version:
+  bin_name: oci-catalog
+  flag: --version
