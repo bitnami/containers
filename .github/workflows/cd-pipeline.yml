@@ -122,7 +122,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "The CD Pipeline for <${{ github.event.workflow_run.head_commit.url }}|bitnami/containers@${{ github.event.workflow_run.head_commit.id }}> and launched by its CD Prepare <${{ github.event.workflow_run.html_url }}|workflow run> did not succeed. Check the related <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|CD Pipeline run> for more information."
+                        "text": "The CD Pipeline for <${{ github.server_url }}/${{ github.repository }}/commit/${{ github.event.workflow_run.head_commit.id }}|${{ github.repository }}@${{ github.event.workflow_run.head_commit.id }}> and launched by its CD Prepare <${{ github.event.workflow_run.html_url }}|workflow run> did not succeed. Check the related <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|CD Pipeline run> for more information."
                       }
                     }
                   ]
