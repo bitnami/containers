@@ -8,13 +8,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-22T08:08:05Z" \
+      org.opencontainers.image.created="2023-07-24T10:06:48Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.12.2-debian-11-r4" \
+      org.opencontainers.image.ref.name="2.13.0-debian-11-r0" \
       org.opencontainers.image.title="tensorflow-serving" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.12.2"
+      org.opencontainers.image.version="2.13.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,8 +28,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl gcc-10 libgcc-s1 libstdc++6 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "tensorflow-serving-2.12.2-0-linux-${OS_ARCH}-debian-11" \
-      "render-template-1.0.5-7-linux-${OS_ARCH}-debian-11" \
+      "tensorflow-serving-2.13.0-0-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.5-9-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -49,7 +49,7 @@ RUN mkdir /.local && chmod g+rwX /.local
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/tensorflow-serving/postunpack.sh
-ENV APP_VERSION="2.12.2" \
+ENV APP_VERSION="2.13.0" \
     BITNAMI_APP_NAME="tensorflow-serving" \
     JAVA_HOME="/opt/bitnami/java"
 
