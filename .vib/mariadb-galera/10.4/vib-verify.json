@@ -1,7 +1,7 @@
 {
   "context": {
     "resources": {
-      "url": "{VIB_ENV_CONTAINER_URL}",
+      "url": "{SHA_ARCHIVE}",
       "path": "{VIB_ENV_PATH}"
     },
     "runtime_parameters": "Y29tbWFuZDogWyJ0YWlsIiwgIi1mIiwgIi9kZXYvbnVsbCJd"
@@ -64,46 +64,6 @@
             "package_type": [
               "OS"
             ]
-          }
-        },
-        {
-          "action_id": "osspi-application",
-          "params": {
-            "additional_packages_file": "osspi-packages-amd64.json",
-            "scan_type": "BASE_OS",
-            "osm": {
-              "associated_bossd_release": "{VIB_ENV_BOSSD_RELEASE_ID}",
-              "product_name": "main-catalog-{VIB_ENV_CONTAINER}",
-              "product_version": "{VIB_ENV_APP_VERSION}-{VIB_ENV_OS_FLAVOUR}-container"
-            },
-            "resources": {
-              "url": "{VIB_ENV_PACKAGES_JSON_URL}",
-              "path": "/{VIB_ENV_PATH}",
-              "authn": {
-                  "header": "Authorization",
-                  "token": "Bearer {VIB_ENV_GITHUB_TOKEN}"
-                }
-            }
-          }
-        }
-      ]
-    },
-    "publish": {
-      "actions": [
-        {
-          "action_id": "container-image-publish",
-          "params": {
-            "metadata": {
-              "tags": {VIB_ENV_ROLLING_TAGS}
-            },
-            "repository": {
-              "kind": "OCI",
-              "url": "{VIB_ENV_REGISTRY_URL}",
-              "authn": {
-                "username": "{VIB_ENV_REGISTRY_USERNAME}",
-                "password": "{VIB_ENV_REGISTRY_PASSWORD}"
-              }
-            }
           }
         }
       ]
