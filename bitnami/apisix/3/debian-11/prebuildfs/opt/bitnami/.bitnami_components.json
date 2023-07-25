@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.4.1-0"
+        "version": "3.4.1-1"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-7"
+        "version": "1.0.5-9"
     },
     "yq": {
         "arch": "amd64",
