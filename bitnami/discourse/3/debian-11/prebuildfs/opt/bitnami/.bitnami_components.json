@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.9-161"
+        "version": "1.0.9-162"
     },
     "discourse": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.0.5-0"
+        "version": "3.0.5-1"
     },
     "node": {
         "arch": "amd64",
