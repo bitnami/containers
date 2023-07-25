@@ -7,5 +7,6 @@ services:
     image: docker.io/bitnami/mysqld-exporter:0
     ports:
       - 9104:9104
-    environment:
-      - DATA_SOURCE_NAME='dbuser:dbpassword@(dbhost:3306)/'
+    command:
+     - --mysqld.username=dbuser:dbpassword
+     - --mysqld.address=dbhost:3306
