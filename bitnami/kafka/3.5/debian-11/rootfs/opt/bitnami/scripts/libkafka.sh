@@ -402,7 +402,7 @@ EOF
             else
                 cat >>"${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
 KafkaClient {
-   org.apache.kafka.common.security.plain.ScramLoginModule required
+   org.apache.kafka.common.security.scram.ScramLoginModule required
 EOF
             fi
             cat >>"${KAFKA_CONF_DIR}/kafka_jaas.conf" <<EOF
