@@ -786,7 +786,7 @@ kafka_configure_producer_consumer_message_sizes() {
 # Globals:
 #   KAFKA_*
 # Arguments:
-#   None
+#   $1 - Whether KRaft SCRAM credentials need to be generated
 # Returns:
 #   None
 #########################
@@ -800,7 +800,25 @@ kraft_initialize() {
     fi
 
     info "Formatting storage directories to add metadata..."
-    debug_execute "$KAFKA_HOME/bin/kafka-storage.sh" format --config "$(kafka_get_conf_file)" --cluster-id "$KAFKA_KRAFT_CLUSTER_ID" --ignore-formatted
+
+    local scram_command=""
+
+    if generate_kraft_scram=1; then
+        info "Creating users in KRaft"
+        read -r -a users <<<"$(tr ',;' ' ' <<<"${KAFKA_CLIENT_USERS}")"
+        read -r -a passwords <<<"$(tr ',;' ' ' <<<"${KAFKA_CLIENT_PASSWORDS}")"
+        if [[ "${KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL:-}" =~ SCRAM-SHA ]]; then
+            users+=("${KAFKA_INTER_BROKER_USER}")
+            passwords+=("${KAFKA_INTER_BROKER_PASSWORD}")
+        fi
+
+        for ((i = 0; i < ${#users[@]}; i++)); do
+            scram_command+="--add-scram SCRAM-SHA-256=[iterations=8192,name=${users[i]},password=${passwords[i]}] "
+            scram_command+="--add-scram SCRAM-SHA-512=[iterations=8192,name=${users[i]},password=${passwords[i]}] "
+
+        done
+    fi
+    debug_execute "$KAFKA_HOME/bin/kafka-storage.sh" format --config "$(kafka_get_conf_file)" --cluster-id "$KAFKA_KRAFT_CLUSTER_ID" --ignore-formatted ${scram_command}
 }
 
 ########################
@@ -832,6 +850,8 @@ kafka_initialize() {
         fi
     done
 
+    local generate_kraft_scram
+
     # DEPRECATED. Check for server.properties file in old conf directory to maintain compatibility with Helm chart.
     if [[ ! -f "$KAFKA_BASE_DIR"/conf/server.properties ]] && [[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/server.properties ]]; then
         info "No injected configuration files found, creating default config files"
@@ -861,7 +881,13 @@ kafka_initialize() {
             if [[ -n "$KAFKA_CFG_SASL_ENABLED_MECHANISMS" ]]; then
                 kafka_server_conf_set sasl.enabled.mechanisms "$KAFKA_CFG_SASL_ENABLED_MECHANISMS"
                 kafka_generate_jaas_authentication_file "${internal_protocol:-}" "${client_protocol:-}"
-                [[ "$KAFKA_CFG_SASL_ENABLED_MECHANISMS" =~ "SCRAM" ]] && kafka_create_sasl_scram_zookeeper_users
+                if [[ "$KAFKA_CFG_SASL_ENABLED_MECHANISMS" =~ "SCRAM" ]]; then 
+                    if is_boolean_yes "$KAFKA_ENABLE_KRAFT"; then
+                        generate_kraft_scram=1
+                    else
+                      kafka_create_sasl_scram_zookeeper_users
+                    fi
+                fi
             else
                 print_validation_error "Specified SASL protocol but no SASL mechanisms provided in KAFKA_CFG_SASL_ENABLED_MECHANISMS"
             fi
@@ -872,6 +898,12 @@ kafka_initialize() {
         fi
         kafka_configure_producer_consumer_message_sizes
     fi
+
+    # If KRaft is enabled initialize
+    if is_boolean_yes "$KAFKA_ENABLE_KRAFT"; then
+        kraft_initialize $generate_kraft_scram
+    fi
+
     true
 }
 

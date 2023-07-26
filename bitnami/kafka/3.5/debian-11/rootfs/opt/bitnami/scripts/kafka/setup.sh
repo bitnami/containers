@@ -49,9 +49,5 @@ done
 
 # Ensure Kafka is initialized
 kafka_initialize
-# If KRaft is enabled initialize
-if is_boolean_yes "$KAFKA_ENABLE_KRAFT"; then
-    kraft_initialize
-fi
 # Ensure custom initialization scripts are executed
 kafka_custom_init_scripts
