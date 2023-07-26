@@ -80,6 +80,7 @@ jobs:
         run: |
           if [[ -d "${{ matrix.container }}" ]]; then
             name="$(echo "${{ matrix.container }}" | awk -F '/' '{print $2}')"
+            branch="$(echo "${{ matrix.container }}" | awk -F '/' '{print $3}')"
             tag=""
             if [[ "${{ github.event.pull_request.user.login }}" == "bitnami-bot" ]]; then
               tag="$(grep -oE "org.opencontainers.image.ref.name=\".+\"" ${{ matrix.container }}/Dockerfile | sed -nr "s|org.opencontainers.image.ref.name=\"(.+)\"|\1|p")"
@@ -91,8 +92,13 @@ jobs:
               echo "No tag found for: ${{ matrix.container }}"
               exit 1
             else
+              dsl_path="${name}"
+              if [[ -d ".vib/${dsl_path}/${branch}" ]]; then
+                dsl_path="${dsl_path}/${branch}"
+              fi
               echo "tag=${tag}" >> $GITHUB_OUTPUT
               echo "name=${name}" >> $GITHUB_OUTPUT
+              echo "dsl_path=${dsl_path}" >> $GITHUB_OUTPUT
               echo "result=ok" >> $GITHUB_OUTPUT
             fi
           else
@@ -103,12 +109,12 @@ jobs:
         name: Verify
         if: ${{ steps.get-container-metadata.outputs.result == 'ok' }}
         with:
-          pipeline: ${{ steps.get-container-metadata.outputs.name }}/vib-verify.json
+          pipeline: ${{ steps.get-container-metadata.outputs.dsl_path }}/vib-verify.json
         env:
           # Path with docker resources
           VIB_ENV_PATH: ${{ matrix.container }}
           # Container name
-          VIB_ENV_CONTAINER: ${{ steps.get-container-metadata.outputs.name  }}
+          VIB_ENV_CONTAINER: ${{ steps.get-container-metadata.outputs.name }}
           VIB_ENV_TAG: ${{ steps.get-container-metadata.outputs.tag }}
   verification-summary:
     # Ensure all containers passed the verification

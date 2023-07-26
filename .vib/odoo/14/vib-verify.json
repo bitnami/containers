@@ -19,8 +19,7 @@
               }
             },
             "architectures": [
-              "linux/amd64",
-              "linux/arm64"
+              "linux/amd64"
             ]
           }
         },
@@ -40,11 +39,11 @@
             "resources": {
               "path": "/.vib"
             },
-            "tests_file": "cosign/goss/goss.yaml",
-            "vars_file": "cosign/goss/vars.yaml",
+            "tests_file": "odoo/goss/goss.yaml",
+            "vars_file": "odoo/goss/vars.yaml",
             "remote": {
               "pod": {
-                "workload": "deploy-cosign"
+                "workload": "deploy-odoo"
               }
             }
           }
