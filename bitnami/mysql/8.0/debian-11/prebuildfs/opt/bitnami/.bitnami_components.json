@@ -3,12 +3,12 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.4.5-8"
+        "version": "1.4.5-9"
     },
     "mysql": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.34-0"
+        "version": "8.0.34-1"
     }
 }
