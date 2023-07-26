@@ -14,7 +14,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "sealed-secrets-0.23.0-0-linux-${OS_ARCH}-debian-11" \
+      "sealed-secrets-0.23.0-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -36,10 +36,10 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:59c774543cd827c5e74f2cc55d77e9e923fdcfe2487c135bbb41d7709b51eef6" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-07-20T09:16:07Z" \
+      org.opencontainers.image.created="2023-07-26T07:01:22Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.23.0-scratch-r1" \
+      org.opencontainers.image.ref.name="0.23.0-scratch-r2" \
       org.opencontainers.image.title="sealed-secrets" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.23.0"
