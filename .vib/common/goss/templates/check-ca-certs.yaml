@@ -2,8 +2,9 @@
 # SPDX-License-Identifier: APACHE-2.0
 
 ########################
-# Checks the ca-certificates package
-# is installed accesing an HTTPS URL
+# Checks the ca-certificates package is installed accesing an HTTPS URL
+# Needed vars:
+# - None
 ########################
 http:
   https://www.bitnami.com:
