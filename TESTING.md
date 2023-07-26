@@ -104,9 +104,7 @@ Both files define what VIB should do when they are triggered and thus tweaking t
 
 ### Defining the scope
 
-As a starting point for this strategy, containers are to be considered as a middle artifact to be used by its corresponding chart and not as a final deliverable. This is a distinction that will affect the nature of the container tests. Essentially, we are assuming that most apps’ integration and functional tests are performed in the related chart’s test suite and should not be duplicated for the containers catalog.
-
-This strategy has to be understood together with the testing limitations for the containers mentioned above. These restraints prevent us from setting up complex multi-container testing scenarios, which is a necessity for most of our containers to be initialized properly. To work around this, we will only test up to the postunpack phase of the container (where the initial filesystem changes are done). As a consequence, we will concentrate on the verification of the app’s compilation logic and the container’s filesystem itself.
+This strategy has to be understood together with the VIB limitations for the containers mentioned above. These restraints prevent us from setting up complex multi-container testing scenarios, which is a necessity for most of our containers to be initialized properly. To work around this, we will only test up to the postunpack phase of the container (where the initial filesystem changes are done). Essentially, we are assuming that most apps’ integration and functional tests are performed in the related chart’s test suite and thus are not required to be duplicated for the containers catalog. As a consequence, we will concentrate on the verification of the app’s compilation logic and the container’s filesystem itself.
 
 Some examples of the suitability of tests for the `bitnami/wordpress` container:
 
