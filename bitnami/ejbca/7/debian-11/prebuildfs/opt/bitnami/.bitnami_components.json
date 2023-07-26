@@ -9,7 +9,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.20-8-0"
+        "version": "11.0.20-8-1"
     },
     "mysql-client": {
         "arch": "amd64",
