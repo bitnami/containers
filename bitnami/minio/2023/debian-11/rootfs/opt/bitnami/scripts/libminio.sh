@@ -183,7 +183,7 @@ minio_stop() {
             pid="$(get_pid_from_file "$MINIO_PID_FILE")"
 
             if [[ -n "$pid" ]]; then
-                kill -TERM $pid
+                kill -TERM "$pid"
             fi
         else
             minio_client_execute_timeout admin service stop local >/dev/null 2>&1 || true
