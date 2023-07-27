@@ -1,0 +1,20 @@
+{
+    "java": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "17.0.8-7-1"
+    },
+    "keycloak": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "22.0.1-1"
+    },
+    "wait-for-port": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.0.6-11"
+    }
+}
