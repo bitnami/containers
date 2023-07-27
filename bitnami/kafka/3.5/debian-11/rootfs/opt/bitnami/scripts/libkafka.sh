@@ -850,7 +850,7 @@ kafka_initialize() {
         fi
     done
 
-    local generate_kraft_scram
+    local generate_kraft_scram=0
 
     # DEPRECATED. Check for server.properties file in old conf directory to maintain compatibility with Helm chart.
     if [[ ! -f "$KAFKA_BASE_DIR"/conf/server.properties ]] && [[ ! -f "$KAFKA_MOUNTED_CONF_DIR"/server.properties ]]; then
