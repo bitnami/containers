@@ -415,19 +415,23 @@ elasticsearch_validate() {
                 print_validation_error "Opensearch does not support plaintext conections (HTTP) when Security is enabled."
             fi
         fi
-        if is_boolean_yes "$DB_TRANSPORT_TLS_USE_PEM"; then
-            if [[ ! -f "$DB_TRANSPORT_TLS_NODE_CERT_LOCATION" ]] || [[ ! -f "$DB_TRANSPORT_TLS_NODE_KEY_LOCATION" ]] || [[ ! -f "$DB_TRANSPORT_TLS_CA_CERT_LOCATION" ]]; then
-                print_validation_error "In order to configure the TLS encryption for ${DB_FLAVOR^} Transport you must provide your node key, certificate and a valid certification_authority certificate."
+        if ! is_boolean_yes "$DB_SKIP_TRANSPORT_TLS"; then
+            if is_boolean_yes "$DB_TRANSPORT_TLS_USE_PEM"; then
+                if [[ ! -f "$DB_TRANSPORT_TLS_NODE_CERT_LOCATION" ]] || [[ ! -f "$DB_TRANSPORT_TLS_NODE_KEY_LOCATION" ]] || [[ ! -f "$DB_TRANSPORT_TLS_CA_CERT_LOCATION" ]]; then
+                    print_validation_error "In order to configure the TLS encryption for ${DB_FLAVOR^} Transport you must provide your node key, certificate and a valid certification_authority certificate."
+                fi
+            elif [[ ! -f "$DB_TRANSPORT_TLS_KEYSTORE_LOCATION" ]] || [[ ! -f "$DB_TRANSPORT_TLS_TRUSTSTORE_LOCATION" ]]; then
+                print_validation_error "In order to configure the TLS encryption for ${DB_FLAVOR^} Transport with JKS/PKCS12 certs you must mount a valid keystore and truststore."
             fi
-        elif [[ ! -f "$DB_TRANSPORT_TLS_KEYSTORE_LOCATION" ]] || [[ ! -f "$DB_TRANSPORT_TLS_TRUSTSTORE_LOCATION" ]]; then
-            print_validation_error "In order to configure the TLS encryption for ${DB_FLAVOR^} Transport with JKS/PKCS12 certs you must mount a valid keystore and truststore."
         fi
         if is_boolean_yes "$DB_HTTP_TLS_USE_PEM"; then
-            if [[ ! -f "$DB_HTTP_TLS_NODE_CERT_LOCATION" ]] || [[ ! -f "$DB_HTTP_TLS_NODE_KEY_LOCATION" ]] || [[ ! -f "$DB_HTTP_TLS_CA_CERT_LOCATION" ]]; then
-                print_validation_error "In order to configure the TLS encryption for ${DB_FLAVOR^} you must provide your node key, certificate and a valid certification_authority certificate."
+            if is_boolean_yes "$DB_HTTP_TLS_USE_PEM"; then
+                if [[ ! -f "$DB_HTTP_TLS_NODE_CERT_LOCATION" ]] || [[ ! -f "$DB_HTTP_TLS_NODE_KEY_LOCATION" ]] || [[ ! -f "$DB_HTTP_TLS_CA_CERT_LOCATION" ]]; then
+                    print_validation_error "In order to configure the TLS encryption for ${DB_FLAVOR^} you must provide your node key, certificate and a valid certification_authority certificate."
+                fi
+            elif [[ ! -f "$DB_HTTP_TLS_KEYSTORE_LOCATION" ]] || [[ ! -f "$DB_HTTP_TLS_TRUSTSTORE_LOCATION" ]]; then
+                print_validation_error "In order to configure the TLS encryption for ${DB_FLAVOR^} with JKS/PKCS12 certs you must mount a valid keystore and truststore."
             fi
-        elif [[ ! -f "$DB_HTTP_TLS_KEYSTORE_LOCATION" ]] || [[ ! -f "$DB_HTTP_TLS_TRUSTSTORE_LOCATION" ]]; then
-            print_validation_error "In order to configure the TLS encryption for ${DB_FLAVOR^} with JKS/PKCS12 certs you must mount a valid keystore and truststore."
         fi
     fi
 
