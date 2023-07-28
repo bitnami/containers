@@ -3,24 +3,24 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "17.0.8-7-0"
+        "version": "17.0.8-7-1"
     },
     "kafka": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.3.2-7"
+        "version": "3.3.2-8"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-9"
+        "version": "1.0.5-10"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-10"
+        "version": "1.0.6-11"
     }
 }
