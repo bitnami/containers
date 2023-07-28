@@ -9,18 +9,18 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.8.382-6-0"
+        "version": "1.8.382-6-1"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.9.17-3"
+        "version": "3.9.17-4"
     },
     "yq": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.34.2-0"
+        "version": "4.34.2-1"
     }
 }
