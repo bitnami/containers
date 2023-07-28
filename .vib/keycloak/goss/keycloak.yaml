@@ -64,3 +64,10 @@ file:
     exists: true
     contains:
       - "<module xmlns=\"urn:jboss:module:1.0\" name=\"org.postgresql.jdbc\">"
+command:
+  check-app-version:
+    # We need to start the dev server once to make --version work
+    exec: timeout --preserve-status 5s {{ .Vars.version.bin_name }} start-dev > /dev/null ; {{.Vars.version.bin_name }} {{ .Vars.version.flag }} 2>&1
+    exit-status: 0
+    stdout:
+    - {{ .Env.APP_VERSION }}
