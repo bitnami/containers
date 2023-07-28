@@ -14,7 +14,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "argo-workflows-3.4.8-0-linux-${OS_ARCH}-debian-11" \
+      "argo-workflows-3.4.9-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -36,13 +36,13 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:59c774543cd827c5e74f2cc55d77e9e923fdcfe2487c135bbb41d7709b51eef6" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-07-20T09:01:26Z" \
+      org.opencontainers.image.created="2023-07-28T19:57:28Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.4.8-scratch-r4" \
+      org.opencontainers.image.ref.name="3.4.9-scratch-r0" \
       org.opencontainers.image.title="argo-workflow-cli" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="3.4.8"
+      org.opencontainers.image.version="3.4.9"
 
 COPY prebuildfs /
 COPY rootfs /
