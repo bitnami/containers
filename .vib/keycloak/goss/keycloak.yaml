@@ -66,9 +66,8 @@ file:
       - "<module xmlns=\"urn:jboss:module:1.0\" name=\"org.postgresql.jdbc\">"
 command:
   check-app-version:
-    timeout: 12000
-    # We need to start the dev server once to make --version work
-    exec: timeout --preserve-status 10s {{ .Vars.version.bin_name }} start-dev > /dev/null ; {{.Vars.version.bin_name }} {{ .Vars.version.flag }} 2>&1
+    # kc.sh --version only works after starting the server. Checking the version.txt instead.
+    exec: cat /opt/bitnami/keycloak/version.txt
     exit-status: 0
     stdout:
     - {{ .Env.APP_VERSION }}
