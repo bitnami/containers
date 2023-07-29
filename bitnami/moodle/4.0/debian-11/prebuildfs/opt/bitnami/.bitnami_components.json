@@ -21,24 +21,24 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.11.4-0"
+        "version": "10.11.4-1"
     },
     "php": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.29-5"
+        "version": "8.0.29-6"
     },
     "postgresql-client": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "13.11.0-1"
+        "version": "13.11.0-2"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-9"
+        "version": "1.0.5-10"
     }
 }
