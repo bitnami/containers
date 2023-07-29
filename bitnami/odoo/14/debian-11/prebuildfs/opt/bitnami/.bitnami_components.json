@@ -15,18 +15,18 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "15.3.0-1"
+        "version": "15.3.0-2"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.17-3"
+        "version": "3.8.17-4"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-9"
+        "version": "1.0.5-10"
     }
 }
