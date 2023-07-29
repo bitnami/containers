@@ -3,12 +3,12 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.17.0-1"
+        "version": "18.17.0-2"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.9.17-3"
+        "version": "3.9.17-4"
     }
 }
