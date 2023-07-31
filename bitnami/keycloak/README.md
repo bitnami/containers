@@ -215,11 +215,11 @@ See [the official documentation](https://www.keycloak.org/server/health) for mor
 
 #### Full configuration
 
-The image looks for configuration files in the `/bitnami/keycloak/configuration/` directory, this directory can be changed by setting the KEYCLOAK_MOUNTED_CONF_DIR environment variable.
+The image looks for configuration files in the `/bitnami/keycloak/conf/` directory, this directory can be changed by setting the `KEYCLOAK_MOUNTED_CONF_DIR` environment variable.
 
 ```console
 docker run --name keycloak \
-    -v /path/to/standalone-ha.xml:/bitnami/keycloak/configuration/standalone-ha.xml \
+    -v /path/to/keycloak.conf:/bitnami/keycloak/conf/keycloak.conf \
     bitnami/keycloak:latest
 ```
 
@@ -229,7 +229,7 @@ Or with docker-compose
 keycloak:
   image: bitnami/keycloak:latest
   volumes:
-    - /path/to/standalone-ha.xml:/bitnami/keycloak/configuration/standalone-ha.xml:ro
+    - /path/to/keycloak.conf:/bitnami/keycloak/conf/keycloak.conf:ro
 ```
 
 After that, your changes will be taken into account in the server's behaviour.
