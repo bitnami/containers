@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 file:
   # Checks specific files are no longer present
   /opt/bitnami/kafka/configtmp:

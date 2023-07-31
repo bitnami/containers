@@ -3,16 +3,19 @@ on:
   issue_comment:
     types:
       - created
-permissions:
-  repository-projects: write
-  issues: write
-  pull-requests: write
+# Remove all permissions by default
+permissions: {}
 # Avoid concurrency over the same issue
 concurrency:
   group: card-movement-${{ github.event.issue.number }}
 jobs:
   comments_handler:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      repository-projects: write
+      issues: read
+      pull-requests: read
     steps:
       - name: Repo checkout
         uses: actions/checkout@v3
@@ -33,7 +36,8 @@ jobs:
         uses: peter-evans/create-or-update-project-card@v2
         if: |
           (github.actor != 'bitnami-bot' || github.event.issue.user.login != 'bitnami-bot' || github.event.issue.pull_request == null) &&
-          (!contains(github.event.issue.labels.*.name, 'bitnami')) && contains(fromJson(env.BITNAMI_TEAM), github.actor)
+          contains(fromJson(env.BITNAMI_TEAM), github.actor) &&
+          (!contains(github.event.issue.labels.*.name, 'bitnami'))
         with:
           project-name: Support
           column-name: Pending
@@ -41,7 +45,8 @@ jobs:
         uses: peter-evans/create-or-update-project-card@v2
         if: |
           (github.actor != 'bitnami-bot' || github.event.issue.user.login != 'bitnami-bot' || github.event.issue.pull_request == null) &&
-          contains(github.event.issue.labels.*.name, 'in-progress') && (!contains(fromJson(env.BITNAMI_TEAM), github.actor))
+          (!contains(fromJson(env.BITNAMI_TEAM), github.actor)) &&
+          contains(github.event.issue.labels.*.name, 'in-progress')
         with:
           project-name: Support
           column-name: In progress
@@ -49,7 +54,8 @@ jobs:
         uses: peter-evans/create-or-update-project-card@v2
         if: |
           (github.actor != 'bitnami-bot' || github.event.issue.user.login != 'bitnami-bot' || github.event.issue.pull_request == null) &&
-          ((contains(github.event.issue.labels.*.name, 'triage')) || (contains(github.event.issue.labels.*.name, 'solved'))) && (!contains(fromJson(env.BITNAMI_TEAM), github.actor))
+          (!contains(fromJson(env.BITNAMI_TEAM), github.actor)) &&
+          (!contains(github.event.issue.labels.*.name, 'in-progress'))
         with:
           project-name: Support
           column-name: Triage

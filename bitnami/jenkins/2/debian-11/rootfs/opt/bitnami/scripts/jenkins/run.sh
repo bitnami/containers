@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 
 # shellcheck disable=SC1091
 
@@ -19,6 +21,7 @@ if [[ -n "${JAVA_OPTS:-}" ]]; then
     read -r -a java_opts <<<"$JAVA_OPTS"
     args+=("${java_opts[@]}")
 fi
+
 args+=("-Duser.home=${JENKINS_HOME}" "-jar" "${JENKINS_BASE_DIR}/jenkins.war")
 if is_boolean_yes "$JENKINS_FORCE_HTTPS"; then
     args+=(
@@ -37,6 +40,10 @@ else
         "--httpsKeyStore=${JENKINS_CERTS_DIR}/jenkins.jks"
         "--httpsKeyStorePassword=${JENKINS_KEYSTORE_PASSWORD}"
     )
+fi
+if [[ -n "${JENKINS_OPTS:-}" ]]; then
+    read -r -a jenkins_opts <<<"$JENKINS_OPTS"
+    args+=("${jenkins_opts[@]}")
 fi
 args+=("$@")
 

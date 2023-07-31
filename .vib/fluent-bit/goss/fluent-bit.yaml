@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 command:
   # The fluent-bit binary is compiled with the following options
   check-compilation-flags:

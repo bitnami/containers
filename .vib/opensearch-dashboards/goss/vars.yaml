@@ -1,0 +1,14 @@
+binaries:
+  - node
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/opensearch-dashboards
+      - /opt/bitnami/opensearch-dashboards/logs
+      - /opt/bitnami/opensearch-dashboards/plugins
+      - /opt/bitnami/opensearch-dashboards/tmp
+      - /opt/bitnami/opensearch-dashboards/config
+files:
+  - paths:
+      - /opt/bitnami/opensearch-dashboards/package.json
+root_dir: /opt/bitnami

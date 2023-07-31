@@ -1,0 +1,31 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+group:
+  harbor:
+    exists: true
+user:
+  harbor:
+    exists: true
+file:
+  /opt/bitnami/harbor/nginx-conf:
+    exists: false
+  /opt/bitnami/nginx/conf:
+    exists: true
+    mode: "0775"
+    owner: harbor
+    filetype: directory
+  /opt/bitnami/nginx/conf/nginx.conf:
+    exists: true
+    contains:
+      - "/opt/bitnami/harbor"
+      - "/opt/bitnami/nginx/conf/mime.types"
+command:
+  # Ensure permissions for Internal TLS
+  check-permissions-system-certs:
+    exec: ls -l /etc/pki/tls/certs/ca-bundle.crt /etc/pki/tls/certs/ca-bundle.trust.crt /etc/ssl/certs/ca-certificates.crt 2>/dev/null | grep ".*-rw-rw-r--.*harbor"
+    exit-status: 0
+  # Ensure a set of directories exist and the non-root user has write privileges to them
+  check-directories-exist-with-user:
+    exec: ls -dl /etc/ssl/certs /etc/pki/tls/certs/ 2>/dev/null | grep "drwxrwxr-x.*harbor"
+    exit-status: 0

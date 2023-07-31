@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 #
 # Bitnami Tomcat library
 
@@ -146,7 +148,7 @@ tomcat_enable_application() {
     # Access control is configured in the application's context.xml with a Valve element
     # context.xml docs: https://tomcat.apache.org/tomcat-9.0-doc/config/context.html
     # Valve docs for Access Control: https://tomcat.apache.org/tomcat-9.0-doc/config/valve.html#Access_Control
-    [[ -f "${TOMCAT_WEBAPPS_DIR}/${application}/META-INF/context.xml" ]] || return
+    [[ ! -f "${TOMCAT_WEBAPPS_DIR}/${application}/META-INF/context.xml" ]] && return
     xmlstarlet ed -S --inplace --update '//Valve/@allow' --value '\d+\.\d+\.\d+\.\d+' "${TOMCAT_WEBAPPS_DIR}/${application}/META-INF/context.xml"
 }
 
@@ -201,19 +203,20 @@ EOF
         if is_boolean_yes "$TOMCAT_INSTALL_DEFAULT_WEBAPPS"; then
             info "Deploying Tomcat from scratch"
             cp -rp "$TOMCAT_BASE_DIR"/webapps_default/* "$TOMCAT_WEBAPPS_DIR"
+
+            # These applications have been enabled for historical reasons, and do not pose any security threat
+            tomcat_enable_application examples
+            tomcat_enable_application docs
+            if is_boolean_yes "$TOMCAT_ALLOW_REMOTE_MANAGEMENT"; then
+                # These applications should not be enabled by default, for security reasons
+                info "Enabling remote connections for manager and host-manager applications"
+                tomcat_enable_application manager
+                tomcat_enable_application host-manager
+            fi
         else
             info "Skipping deployment of default webapps"
         fi
 
-        # These applications have been enabled for historical reasons, and do not pose any security threat
-        tomcat_enable_application examples
-        tomcat_enable_application docs
-        if is_boolean_yes "$TOMCAT_ALLOW_REMOTE_MANAGEMENT"; then
-            # These applications should not be enabled by default, for security reasons
-            info "Enabling remote connections for manager and host-manager applications"
-            tomcat_enable_application manager
-            tomcat_enable_application host-manager
-        fi
     fi
 }
 

@@ -1,16 +1,19 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
-LABEL com.vmware.cp.artifact.flavor="sha256:109c7d51bd69bb6b3df71017440c1ea0699454f81fe188056c083f0b57c96ea6" \
+LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-02T18:49:49Z" \
+      org.opencontainers.image.created="2023-07-28T22:16:45Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.6.19-debian-11-r17" \
+      org.opencontainers.image.ref.name="1.6.21-debian-11-r41" \
       org.opencontainers.image.title="memcached" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.6.19"
+      org.opencontainers.image.version="1.6.21"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,7 +26,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libevent-2.1-7 libsasl2-2 libsasl2-modules netcat procps sasl2-bin
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "memcached-1.6.19-2-linux-${OS_ARCH}-debian-11" \
+      "memcached-1.6.21-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -43,7 +46,7 @@ RUN ln -s /opt/bitnami/scripts/memcached/run.sh /run.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/memcached/postunpack.sh
-ENV APP_VERSION="1.6.19" \
+ENV APP_VERSION="1.6.21" \
     BITNAMI_APP_NAME="memcached" \
     PATH="/opt/bitnami/memcached/bin:$PATH"
 

@@ -22,6 +22,8 @@ docker run --name Kube RBAC Proxy bitnami/kube-rbac-proxy:latest
 - All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 - Bitnami container images are released on a regular basis with the latest distribution packages available.
 
+Looking to use Kube RBAC Proxy in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
 ## Supported tags and respective `Dockerfile` links
 
 Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
@@ -63,7 +65,7 @@ Non-root container images add an extra layer of security and are generally recom
 To run commands inside this container you can use `docker run`, for example to execute `kube-rbac-proxy --upstream=http://127.0.0.1:8081/` you can follow the example below:
 
 ```console
-docker run --rm --name Kube RBAC Proxy bitnami/kube-rbac-proxy:latest --  --upstream=http://127.0.0.1:8081/
+docker run --rm --name kube-rbac-proxy bitnami/kube-rbac-proxy:latest --  --upstream=http://127.0.0.1:8081/
 ```
 
 Check the [official Kube RBAC Proxy documentation](https://github.com/brancz/kube-rbac-proxy) for more information.
@@ -78,7 +80,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 Bitnami
+Copyright &copy; 2023 VMware, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

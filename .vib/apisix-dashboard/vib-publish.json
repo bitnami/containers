@@ -1,0 +1,125 @@
+{
+  "context": {
+    "resources": {
+      "url": "{VIB_ENV_CONTAINER_URL}",
+      "path": "{VIB_ENV_PATH}"
+    },
+    "runtime_parameters": "Y29tbWFuZDogWyJ0YWlsIiwgIi1mIiwgIi9kZXYvbnVsbCJd"
+  },
+  "phases": {
+    "package": {
+      "actions": [
+        {
+          "action_id": "container-image-package",
+          "params": {
+            "application": {
+              "details": {
+                "name": "{VIB_ENV_CONTAINER}",
+                "tag": "{VIB_ENV_TAG}"
+              }
+            },
+            "architectures": [
+              "linux/amd64",
+              "linux/arm64"
+            ]
+          }
+        },
+        {
+          "action_id": "container-image-lint",
+          "params": {
+            "threshold": "error"
+          }
+        }
+      ]
+    },
+    "verify": {
+      "actions": [
+        {
+          "action_id": "goss",
+          "params": {
+            "resources": {
+              "path": "/.vib"
+            },
+            "tests_file": "apisix-dashboard/goss/goss.yaml",
+            "vars_file": "apisix-dashboard/goss/vars.yaml",
+            "remote": {
+              "pod": {
+                "workload": "deploy-apisix-dashboard"
+              }
+            }
+          }
+        },
+        {
+          "action_id": "trivy",
+          "params": {
+            "threshold": "CRITICAL",
+            "vuln_type": [
+              "OS"
+            ]
+          }
+        },
+        {
+          "action_id": "grype",
+          "params": {
+            "threshold": "CRITICAL",
+            "package_type": [
+              "OS"
+            ]
+          }
+        },
+        {
+          "action_id": "osspi-application",
+          "params": {
+            "additional_packages_file": "osspi-packages-amd64.json",
+            "scan_type": "BASE_OS",
+            "osm": {
+              "associated_bossd_release": "{VIB_ENV_BOSSD_RELEASE_ID}",
+              "product_name": "main-catalog-{VIB_ENV_CONTAINER}",
+              "product_version": "{VIB_ENV_APP_VERSION}-{VIB_ENV_OS_FLAVOUR}-container",
+              "architecture_overrides": [
+                {
+                  "architecture": "linux/amd64",
+                  "product_version": "{VIB_ENV_APP_VERSION}-{VIB_ENV_OS_FLAVOUR}-container",
+                  "additional_packages_file": "osspi-packages-amd64.json"
+                },
+                {
+                  "architecture": "linux/arm64",
+                  "product_version": "{VIB_ENV_APP_VERSION}-{VIB_ENV_OS_FLAVOUR}-container-arm64",
+                  "additional_packages_file": "osspi-packages-arm64.json"
+                }
+              ]
+            },
+            "resources": {
+              "url": "{VIB_ENV_PACKAGES_JSON_URL}",
+              "path": "/{VIB_ENV_PATH}",
+              "authn": {
+                  "header": "Authorization",
+                  "token": "Bearer {VIB_ENV_GITHUB_TOKEN}"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "publish": {
+      "actions": [
+        {
+          "action_id": "container-image-publish",
+          "params": {
+            "metadata": {
+              "tags": {VIB_ENV_ROLLING_TAGS}
+            },
+            "repository": {
+              "kind": "OCI",
+              "url": "{VIB_ENV_REGISTRY_URL}",
+              "authn": {
+                "username": "{VIB_ENV_REGISTRY_USERNAME}",
+                "password": "{VIB_ENV_REGISTRY_PASSWORD}"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

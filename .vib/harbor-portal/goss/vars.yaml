@@ -1,0 +1,16 @@
+binaries:
+  - nginx
+  - render-template
+directories:
+  - paths:
+      - /opt/bitnami/nginx/client_body_temp
+      - /opt/bitnami/nginx/proxy_temp
+      - /opt/bitnami/nginx/fastcgi_temp
+      - /opt/bitnami/nginx/scgi_temp
+      - /opt/bitnami/nginx/uwsgi_temp
+      - /opt/bitnami/nginx/conf
+files:
+  - paths:
+      - /opt/bitnami/harbor/swagger.yaml
+      - /opt/bitnami/harbor/swagger.json
+root_dir: /opt/bitnami

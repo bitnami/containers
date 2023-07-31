@@ -1,0 +1,22 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+version: "2"
+services:
+  opensearch:
+    image: docker.io/bitnami/opensearch:2
+    volumes:
+      - "opensearch_data:/bitnami/opensearch"
+  opensearch-dashboards:
+    image: docker.io/bitnami/opensearch-dashboards:2
+    ports:
+      - "5601:5601"
+    volumes:
+      - "opensearch_dashboards_data:/bitnami/opensearch-dashboards"
+    depends_on:
+      - opensearch
+volumes:
+  opensearch_data:
+    driver: local
+  opensearch_dashboards_data:
+    driver: local

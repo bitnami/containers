@@ -1,12 +1,16 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 #
 # Bitnami Apache Flink library
 
 # shellcheck disable=SC1091
 
 # Load generic libraries
+. /opt/bitnami/scripts/libfile.sh
 . /opt/bitnami/scripts/libpersistence.sh
 . /opt/bitnami/scripts/libvalidations.sh
+. /opt/bitnami/scripts/libservice.sh
 
 ########################
 # Set a config option into the Flink configuration specified file.
@@ -29,7 +33,7 @@ flink_set_config_option() {
 
   # either override an existing entry, or append a new one
   if grep -E "^${escaped_option}:.*" "${FLINK_CONF_FILE_PATH}" > /dev/null; then
-        sed -i -e "s/${escaped_option}:.*/$option: $value/g" "${FLINK_CONF_FILE_PATH}"
+        replace_in_file "$FLINK_CONF_FILE_PATH" "${escaped_option}:.*" "${option}: ${value}"
   else
         echo "${option}: ${value}" >> "${FLINK_CONF_FILE_PATH}"
   fi
@@ -183,4 +187,31 @@ flink_setup_jemalloc() {
     else
         warn "Couldn't find jemalloc installed. Skipping jemalloc configuration."
     fi
+}
+
+########################
+# Check if Flink daemon is running
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_flink_running() {
+    local -r pid="$(get_pid_from_file "$FLINK_PID_FILE")"
+    if [[ -n "$pid" ]]; then
+        is_service_running "$pid"
+    else
+        false
+    fi
+}
+
+########################
+# Check if Flink daemon is not running
+# Arguments:
+#   None
+# Returns:
+#   Boolean
+#########################
+is_flink_not_running() {
+    ! is_flink_running
 }

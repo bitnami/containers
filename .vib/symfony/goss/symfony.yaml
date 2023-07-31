@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 command:
   check-composer-help:
     exec: COMPOSER_ALLOW_SUPERUSER=1 composer --help

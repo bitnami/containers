@@ -31,6 +31,8 @@ docker-compose up
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
+Looking to use Keycloak in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
 ## How to deploy Keycloak in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Keycloak Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/keycloak).
@@ -78,8 +80,6 @@ The Bitnami Keycloak container can create a default admin user by setting the fo
 * `KEYCLOAK_CREATE_ADMIN_USER`: Create administrator user on boot. Default: **true**.
 * `KEYCLOAK_ADMIN_USER`: Administrator default user. Default: **user**.
 * `KEYCLOAK_ADMIN_PASSWORD`: Administrator default password. Default: **bitnami**.
-* `KEYCLOAK_MANAGEMENT_USER`: WildFly default management user. Default: **manager**.
-* `KEYCLOAK_MANAGEMENT_PASSWORD`: WildFly default management password. Default: **bitnami1**.
 
 ### Connecting to a database
 
@@ -208,13 +208,18 @@ volumes:
 
 The Bitnami Keycloak container can activate different set of statistics (database, jgroups and http) by setting the environment variable `KEYCLOAK_ENABLE_STATISTICS=true`.
 
+### Enabling health endpoints
+
+The Bitnami Keycloak container can activate several endpoints providing information about the health of Keycloak, by setting the environment variable `KEYCLOAK_ENABLE_HEALTH_ENDPOINTS=true`.  
+See [the official documentation](https://www.keycloak.org/server/health) for more information about these endpoints.
+
 #### Full configuration
 
-The image looks for configuration files in the `/bitnami/keycloak/configuration/` directory, this directory can be changed by setting the KEYCLOAK_MOUNTED_CONF_DIR environment variable.
+The image looks for configuration files in the `/bitnami/keycloak/conf/` directory, this directory can be changed by setting the `KEYCLOAK_MOUNTED_CONF_DIR` environment variable.
 
 ```console
 docker run --name keycloak \
-    -v /path/to/standalone-ha.xml:/bitnami/keycloak/configuration/standalone-ha.xml \
+    -v /path/to/keycloak.conf:/bitnami/keycloak/conf/keycloak.conf \
     bitnami/keycloak:latest
 ```
 
@@ -224,7 +229,7 @@ Or with docker-compose
 keycloak:
   image: bitnami/keycloak:latest
   volumes:
-    - /path/to/standalone-ha.xml:/bitnami/keycloak/configuration/standalone-ha.xml:ro
+    - /path/to/keycloak.conf:/bitnami/keycloak/conf/keycloak.conf:ro
 ```
 
 After that, your changes will be taken into account in the server's behaviour.
@@ -257,7 +262,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 Bitnami
+Copyright &copy; 2023 VMware, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

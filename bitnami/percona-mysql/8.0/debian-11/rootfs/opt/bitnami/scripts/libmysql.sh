@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 #
 # Bitnami MySQL library
 
@@ -158,11 +160,11 @@ max_allowed_packet=16M
 bind_address=${DB_DEFAULT_BIND_ADDRESS}
 log_error=${DB_LOGS_DIR}/mysqld.log
 slow_query_log=${DB_ENABLE_SLOW_QUERY}
-slow_query_log_file=${DB_LOGS_DIR}/mysqld.log
 long_query_time=${DB_LONG_QUERY_TIME}
 character_set_server=${DB_DEFAULT_CHARACTER_SET}
 collation_server=${DB_DEFAULT_COLLATE}
 plugin_dir=${DB_BASE_DIR}/lib/plugin
+datadir=${DB_DATA_DIR}
 
 [client]
 port=${DB_DEFAULT_PORT_NUMBER}
@@ -200,6 +202,7 @@ CHANGE MASTER TO MASTER_HOST='$DB_MASTER_HOST',
 MASTER_PORT=$DB_MASTER_PORT_NUMBER,
 MASTER_USER='$DB_REPLICATION_USER',
 MASTER_PASSWORD='$DB_REPLICATION_PASSWORD',
+MASTER_DELAY=$DB_MASTER_DELAY,
 MASTER_CONNECT_RETRY=10;
 EOF
     elif [[ "$DB_REPLICATION_MODE" = "master" ]]; then
@@ -427,6 +430,8 @@ mysql_start_bg() {
 }
 
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 #
 # Library for mysql common
 

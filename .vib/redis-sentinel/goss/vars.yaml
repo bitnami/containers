@@ -1,0 +1,17 @@
+binaries:
+  - redis-cli
+  - redis-server
+  - redis-sentinel
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/redis-sentinel
+      - /bitnami/redis-sentinel/conf
+      - /opt/bitnami/redis-sentinel
+      - /opt/bitnami/redis-sentinel/etc
+      - /opt/bitnami/redis-sentinel/logs
+      - /opt/bitnami/redis-sentinel/tmp
+root_dir: /opt/bitnami
+version:
+  bin_name: redis-server
+  flag: --version

@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 #
 # Bitnami Discourse library
 
@@ -267,6 +269,8 @@ discourse_create_conf_file() {
         discourse_conf_set "smtp_password" "$DISCOURSE_SMTP_PASSWORD"
         discourse_conf_set "smtp_enable_start_tls" "$([[ "$DISCOURSE_SMTP_PROTOCOL" = "tls" ]] && echo "true" || echo "false")"
         discourse_conf_set "smtp_authentication" "$DISCOURSE_SMTP_AUTH"
+        ! is_empty_value "$DISCOURSE_SMTP_OPEN_TIMEOUT" && discourse_conf_set "smtp_open_timeout" "$DISCOURSE_SMTP_OPEN_TIMEOUT"
+        ! is_empty_value "$DISCOURSE_SMTP_READ_TIMEOUT" && discourse_conf_set "smtp_read_timeout" "$DISCOURSE_SMTP_READ_TIMEOUT"
     fi
     # Extra configuration
     ! is_empty_value "$DISCOURSE_EXTRA_CONF_CONTENT" && echo "$DISCOURSE_EXTRA_CONF_CONTENT" >> "$DISCOURSE_CONF_FILE"
@@ -454,21 +458,4 @@ discourse_set_hostname() {
         [[ "$DISCOURSE_EXTERNAL_HTTP_PORT_NUMBER" != "80" ]] && discourse_server_host+=":${DISCOURSE_EXTERNAL_HTTP_PORT_NUMBER}"
     fi
     discourse_conf_set "hostname" "$discourse_server_host"
-}
-
-########################
-# Install passenger native support library
-# Globals:
-#   DISCOURSE_*, BITNAMI_*, PASSENGER_*
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-install_native_support_library() {
-    local -r library_name="passenger_native_support.so"
-    local -r orig="${DISCOURSE_BASE_DIR}/lib/${library_name}"
-    local -r dest="${BITNAMI_ROOT_DIR}/ruby/lib/${library_name}"
-    debug "Installing passenger native support library into '${dest}'"
-    mv "${orig}" "${dest}"
 }

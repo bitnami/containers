@@ -1,0 +1,10 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+command:
+  # From upstream example: https://github.com/mike-engel/jwt-cli#usage-as-a-pipe
+  check-jwt-encode:
+    exec: jwt encode --secret=fake '{"hello":"world"}'
+    exit-status: 0
+    stdout:
+      - eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9

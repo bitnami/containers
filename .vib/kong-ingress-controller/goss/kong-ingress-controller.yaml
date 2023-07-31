@@ -1,0 +1,7 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+command:
+  check-app-binary:
+    exec: kong-ingress-controller --help
+    exit-status: 0

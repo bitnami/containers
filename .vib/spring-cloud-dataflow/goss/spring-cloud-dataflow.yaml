@@ -1,0 +1,17 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+command:
+  check-spring-cloud-dataflow:
+    # As the version is shown in the output we check it here
+    timeout: 40000
+    exec: timeout --preserve-status 30 java -jar /opt/bitnami/spring-cloud-dataflow/spring-cloud-dataflow.jar
+    exit-status: 143
+    stdout:
+      - {{ .Env.APP_VERSION }}
+      - Started DataFlowServerApplication
+file:
+  /opt/bitnami/spring-cloud-dataflow/spring-cloud-dataflow.jar:
+    exists: true
+    filetype: symlink
+    linked-to: "spring-cloud-dataflow-server-{{ .Env.APP_VERSION }}.jar"

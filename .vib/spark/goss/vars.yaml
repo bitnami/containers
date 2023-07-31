@@ -1,0 +1,32 @@
+binaries:
+  - python
+  - spark-shell
+  - spark-submit
+  - java
+directories:
+  - mode: "0775"
+    group: "root"
+    paths:
+      - /opt/bitnami/spark/tmp
+      - /opt/bitnami/spark/logs
+      - /opt/bitnami/spark/conf
+      - /opt/bitnami/spark/work
+      - /opt/bitnami/spark/jars
+root_dir: /opt/bitnami
+version:
+  bin_name: spark-shell --version
+  flag: --version
+linked_libraries:
+  exclude_paths:
+    # Exclude specific Pip modules from paths because they link to non-existent libraries that are not expected to exist
+  - .*\/lib\/python[0-9.]+\/site-packages\/numpy.libs\/.*
+  - .*\/lib\/python[0-9.]+\/site-packages\/psycopg2_binary.libs\/.*
+python:
+  modules:
+    - pyspark
+    - awscli
+    - boto3
+    - botocore
+    - psycopg2
+    - pandas
+    - py4j

@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 
 export JAVA_HOME="{{JAVA_HOME}}"
 export JAVA_OPTS="{{JAVA_OPTS}}"

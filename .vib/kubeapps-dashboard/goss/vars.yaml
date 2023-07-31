@@ -1,0 +1,12 @@
+binaries:
+  - nginx
+  - render-template
+directories:
+  - paths:
+    - /app/static/css
+    - /app/static/js
+    - /app/static/media
+files:
+  - paths:
+    - /app/asset-manifest.json
+root_dir: /opt/bitnami

@@ -1,0 +1,30 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+file:
+  /opt/bitnami/apache/conf/vhosts/moodle-vhost.conf:
+    exists: true
+    contains:
+    {{ range $rule := .Vars.apache.rules }}
+      - {{ $rule }}
+    {{ end }}
+  /opt/bitnami/php/etc/php.ini:
+    exists: true
+    contains:
+      # Checking if the php.ini keys and pqsql extension are set
+      - extension = pgsql
+      - /^memory_limit/
+      - /^max_input_vars/
+  /opt/bitnami/apache/conf/vhosts/moodle-https-vhost.conf:
+    exists: true
+    contains:
+      - "SSLEngine on"
+    {{ range $rule := .Vars.apache.rules }}
+      - {{ $rule }}
+    {{ end }}
+group:
+  daemon:
+    exists: true
+user:
+  daemon:
+    exists: true

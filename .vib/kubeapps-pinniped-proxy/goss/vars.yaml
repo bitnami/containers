@@ -1,0 +1,6 @@
+binaries:
+  - pinniped-proxy
+root_dir: /opt/bitnami
+version:
+  bin_name: pinniped-proxy
+  flag: --version

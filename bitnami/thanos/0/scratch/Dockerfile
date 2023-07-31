@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM bitnami/minideb:bullseye as builder
 
 ARG TARGETARCH
@@ -5,14 +8,13 @@ ARG TARGETARCH
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 COPY prebuildfs /
-
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "thanos-0.31.0-2-linux-${OS_ARCH}-debian-11" \
+      "thanos-0.31.0-7-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -32,12 +34,12 @@ ARG TARGETARCH
 
 ENV OS_ARCH="${TARGETARCH:-amd64}"
 
-LABEL com.vmware.cp.artifact.flavor="sha256:7921197aa81bc396c250990c32f0f98242361ecfbbe055730bae5784fece63b7" \
+LABEL com.vmware.cp.artifact.flavor="sha256:59c774543cd827c5e74f2cc55d77e9e923fdcfe2487c135bbb41d7709b51eef6" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-05-02T07:27:33Z" \
+      org.opencontainers.image.created="2023-07-26T09:39:01Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.31.0-scratch-r2" \
+      org.opencontainers.image.ref.name="0.31.0-scratch-r12" \
       org.opencontainers.image.title="thanos" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.31.0"

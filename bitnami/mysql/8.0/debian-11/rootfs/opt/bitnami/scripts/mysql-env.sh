@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 #
 # Environment configuration for mysql
 
@@ -33,6 +35,7 @@ mysql_env_vars=(
     MYSQL_MASTER_PORT_NUMBER
     MYSQL_MASTER_ROOT_USER
     MYSQL_MASTER_ROOT_PASSWORD
+    MYSQL_MASTER_DELAY
     MYSQL_REPLICATION_USER
     MYSQL_REPLICATION_PASSWORD
     MYSQL_PORT_NUMBER
@@ -120,6 +123,8 @@ export MYSQL_MASTER_ROOT_USER="${MYSQL_MASTER_ROOT_USER:-root}"
 export DB_MASTER_ROOT_USER="$MYSQL_MASTER_ROOT_USER" # only used during the first initialization
 export MYSQL_MASTER_ROOT_PASSWORD="${MYSQL_MASTER_ROOT_PASSWORD:-}"
 export DB_MASTER_ROOT_PASSWORD="$MYSQL_MASTER_ROOT_PASSWORD" # only used during the first initialization
+export MYSQL_MASTER_DELAY="${MYSQL_MASTER_DELAY:-0}"
+export DB_MASTER_DELAY="$MYSQL_MASTER_DELAY" # only used during the first initialization
 export MYSQL_REPLICATION_USER="${MYSQL_REPLICATION_USER:-}"
 export DB_REPLICATION_USER="$MYSQL_REPLICATION_USER" # only used during the first initialization
 export MYSQL_REPLICATION_PASSWORD="${MYSQL_REPLICATION_PASSWORD:-}"

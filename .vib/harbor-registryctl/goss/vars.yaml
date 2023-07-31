@@ -1,0 +1,9 @@
+binaries:
+  - yq
+  - registry
+  - harbor_registryctl
+directories:
+  - paths:
+      - /etc/registry
+      - /etc/registryctl
+root_dir: /opt/bitnami

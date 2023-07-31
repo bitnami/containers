@@ -1,6 +1,13 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 #
 # Bitnami MinIO Client library
+
+# shellcheck disable=SC1091
+
+# Load Generic Libraries
+. /opt/bitnami/scripts/libos.sh
 
 # Functions
 

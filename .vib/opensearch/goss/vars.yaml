@@ -1,0 +1,13 @@
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/opensearch
+      - /opt/bitnami/opensearch/logs
+      - /opt/bitnami/opensearch/plugins
+      - /opt/bitnami/opensearch/tmp
+      - /opt/bitnami/opensearch/config
+      - /opt/bitnami/opensearch/extensions
+files:
+  - paths:
+      - /opt/bitnami/opensearch/bin/opensearch
+root_dir: /opt/bitnami

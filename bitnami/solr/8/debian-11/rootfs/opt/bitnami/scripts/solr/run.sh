@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 
 # shellcheck disable=SC1091
 
@@ -19,7 +21,7 @@ info "** Starting solr **"
 start_command=("${SOLR_BIN_DIR}/solr" "-p" "${SOLR_PORT_NUMBER}" "-d" "/opt/bitnami/solr/server" "-f")
 
 if is_boolean_yes "$SOLR_ENABLE_CLOUD_MODE"; then
-    start_command+=("-cloud" "-z" "$SOLR_ZK_HOSTS/solr")
+    start_command+=("-cloud" "-z" "${SOLR_ZK_HOSTS}${SOLR_ZK_CHROOT}")
 fi
 
 is_boolean_yes "$SOLR_SSL_ENABLED" && export SOLR_SSL_ENABLED=true

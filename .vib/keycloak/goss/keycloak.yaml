@@ -1,0 +1,66 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+group:
+  keycloak:
+    exists: true
+user:
+  user:
+    exists: true
+  keycloak:
+    exists: true
+file:
+  /opt/bitnami/keycloak:
+    exists: true
+    mode: "0775"
+    owner: keycloak
+    filetype: directory
+  /opt/bitnami/keycloak/providers:
+    exists: true
+    mode: "0775"
+    owner: keycloak
+    filetype: directory
+  /opt/bitnami/keycloak/providers/log:
+    exists: true
+    mode: "0775"     
+    owner: keycloak     
+    filetype: directory
+  /opt/bitnami/keycloak/providers/tmp:
+    exists: true
+    mode: "0775"
+    owner: keycloak
+    filetype: directory
+  /opt/bitnami/keycloak/conf:
+    exists: true
+    mode: "0775"
+    owner: keycloak
+    filetype: directory
+  /opt/bitnami/keycloak/.installation:
+    exists: true
+    mode: "0775"
+    owner: keycloak
+    filetype: directory
+  /opt/bitnami/keycloak/data:
+    exists: true
+    mode: "0775"
+    owner: keycloak
+    filetype: directory
+  /opt/bitnami/keycloak/lib:
+    exists: true
+    mode: "0775"
+    owner: keycloak
+    filetype: directory
+  /bitnami/keycloak:
+    exists: true
+    mode: "0775"
+    owner: keycloak
+    filetype: directory
+  /docker-entrypoint-initdb.d:
+    exists: true
+    mode: "0775"
+    owner: keycloak
+    filetype: directory
+  /opt/bitnami/keycloak/modules/system/layers/keycloak/org/postgresql/jdbc/main/module.xml:
+    exists: true
+    contains:
+      - "<module xmlns=\"urn:jboss:module:1.0\" name=\"org.postgresql.jdbc\">"

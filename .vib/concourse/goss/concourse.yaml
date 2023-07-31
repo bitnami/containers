@@ -1,0 +1,7 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+command:
+  check-app-run:
+    exec: concourse generate-key -t ssh -f ./worker_key
+    exit-status: 0

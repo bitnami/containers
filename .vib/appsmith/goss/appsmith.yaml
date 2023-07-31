@@ -1,0 +1,32 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+file:
+  /opt/appsmith:
+    exists: true
+    filetype: symlink
+    linked-to: /opt/bitnami/appsmith
+  /opt/bitnami/appsmith/templates/docker.env.sh:
+    exists: true
+    filetype: file
+    contains:
+      - /cat.*EOF/
+      - APPSMITH_SUPERVISOR_USER
+command:
+  check-server-init:
+    exec: java -jar /opt/bitnami/appsmith/backend/server.jar
+    exit-status: 1
+    stdout:
+      - {{ .Env.APP_VERSION }}
+      - Starting ServerApplication
+  check-rts-init:
+    exec: cd /opt/appsmith/rts/ && node --require source-map-support/register server.js
+    exit-status: 1
+    stderr:
+      - APPSMITH_API_BASE_URL
+group:
+  appsmith:
+    exists: true
+user:
+  appsmith:
+    exists: true

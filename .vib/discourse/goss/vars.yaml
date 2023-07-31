@@ -1,0 +1,26 @@
+binaries:
+  - wait-for-port
+  - python
+  - ruby
+  - node
+  - brotli
+  - psql
+  - bundle
+  - terser
+directories:
+  - mode: "0775"
+    paths:
+      - /opt/bitnami/discourse
+      - /bitnami/discourse
+      - /opt/bitnami/discourse/plugins
+      - /opt/bitnami/discourse/public/backups
+      - /opt/bitnami/discourse/public/uploads
+      - /opt/bitnami/discourse/app/assets
+      - /opt/bitnami/discourse/log
+      - /opt/bitnami/discourse/public
+      - /opt/bitnami/discourse/tmp
+      - /home/discourse
+      - /home/discourse/.bundle
+root_dir: /opt/bitnami
+linked_libraries:
+  timeout: 60000

@@ -1,0 +1,13 @@
+binaries:
+  - minio
+  - mc
+  - wait-for-port
+directories:
+  - mode: "0775"
+    paths:
+      - /data
+      - /certs
+      - /opt/bitnami/minio/log
+      - /opt/bitnami/minio/tmp
+      - /opt/bitnami/minio/secrets
+root_dir: /opt/bitnami

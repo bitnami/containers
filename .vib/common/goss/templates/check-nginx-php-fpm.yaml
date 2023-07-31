@@ -1,0 +1,16 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+########################
+# Test coverage for the nginx-php-fpm package
+# Needed vars:
+# - None
+########################
+file:
+  /opt/bitnami/nginx/conf/bitnami/php-fpm.conf:
+    exists: true
+    filetype: file
+    contains:
+      - "location ~ \\.php$ {"
+      - "fastcgi_pass   unix:/opt/bitnami/php/var/run/www.sock;"
+      - "include        fastcgi_params;"

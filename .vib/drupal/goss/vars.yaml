@@ -1,0 +1,20 @@
+binaries:
+  - apachectl
+  - mysql
+  - php
+  - render-template
+  - drush
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/drupal
+      - /opt/bitnami/drupal
+      - /opt/bitnami/drupal/sites/default/files
+      - /.drush
+  - paths:
+      - /opt/bitnami/drupal/themes
+      - /opt/bitnami/drupal/modules
+root_dir: /opt/bitnami
+version:
+  bin_name: drush
+  flag: status

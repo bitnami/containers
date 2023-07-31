@@ -1,0 +1,14 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+command:
+  check-config-format:
+    exec: promtool check config /opt/bitnami/prometheus/conf/prometheus.yml
+    exit-status: 0
+  check-prometheus-run:
+    exec: timeout --preserve-status 5 prometheus --config.file=/opt/bitnami/prometheus/conf/prometheus.yml
+    timeout: 8000
+    exit-status: 0
+    stderr:
+      - Starting Prometheus Server
+      - Server is ready

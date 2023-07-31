@@ -24,6 +24,8 @@ You can find the available configuration options in the [Environment Variables](
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
+Looking to use Fluentd in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
 ## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
@@ -133,6 +135,12 @@ fluentd:
 
 Find more information about this feature, consult [official documentation](https://docs.fluentd.org/configuration/config-file)
 
+You can also add custom init scripts to the path referenced on `$FLUENTD_INITSCRIPTS_DIR` (which defaults to `/docker-entrypoint-initdb.d`):
+
+```console
+docker run --name fluentd -v /path/to/custom-scripts-directory:/docker-entrypoint-initdb.d bitnami/fluentd:latest
+```
+
 ### Environment variables
 
 Environment variable below are configurable to control how to execute fluentd process:
@@ -232,7 +240,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 Bitnami
+Copyright &copy; 2023 VMware, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

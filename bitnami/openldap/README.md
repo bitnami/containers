@@ -29,6 +29,8 @@ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
+Looking to use OpenLDAP in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
 ## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
@@ -171,7 +173,7 @@ docker-compose up -d
 
 The Bitnami Docker OpenLDAP can be easily setup with the following environment variables:
 
-* `LDAP_PORT_NUMBER`: The port OpenLDAP is listening for requests. Default: **1389** (non privileged port)
+* `LDAP_PORT_NUMBER`: The port OpenLDAP is listening for requests. Priviledged port is supported (e.g. `1389`). Default: **1389** (non privileged port).
 * `LDAP_ROOT`: LDAP baseDN (or suffix) of the LDAP tree. Default: **dc=example,dc=org**
 * `LDAP_ADMIN_USERNAME`: LDAP database admin user. Default: **admin**
 * `LDAP_ADMIN_PASSWORD`: LDAP database admin password. Default: **adminpassword**
@@ -203,7 +205,7 @@ Check the official [OpenLDAP Configuration Reference](https://www.openldap.org/d
 OpenLDAP clients and servers are capable of using the Transport Layer Security (TLS) framework to provide integrity and confidentiality protections and to support LDAP authentication using the SASL EXTERNAL mechanism. Should you desire to enable this optional feature, you may use the following environment variables to configure the application:
 
 * `LDAP_ENABLE_TLS`: Whether to enable TLS for traffic or not. Defaults to `no`.
-* `LDAP_LDAPS_PORT_NUMBER`: Port used for TLS secure traffic. Defaults to `1636`.
+* `LDAP_LDAPS_PORT_NUMBER`: Port used for TLS secure traffic. Priviledged port is supported (e.g. `636`). Default: **1636** (non privileged port).
 * `LDAP_TLS_CERT_FILE`: File containing the certificate file for the TLS traffic. No defaults.
 * `LDAP_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
 * `LDAP_TLS_CA_FILE`: File containing the CA of the certificate. No defaults.
@@ -314,7 +316,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 Bitnami
+Copyright &copy; 2023 VMware, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

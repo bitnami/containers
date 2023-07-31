@@ -1,0 +1,11 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+command:
+  # HAProxy should have been compiled with Lua and Prometheus support
+  check-lua-promex-support:
+    exec: haproxy -vv
+    exit-status: 0
+    stdout:
+      - Built with Lua
+      - Built with the Prometheus

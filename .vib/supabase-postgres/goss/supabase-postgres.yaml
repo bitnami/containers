@@ -1,0 +1,18 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+command:
+  # PostgreSQL should match the major version
+  check-postgresql-version:
+    exec: {{ .Vars.version.bin_name }} {{ .Vars.version.flag }} | grep "$(echo $APP_VERSION | sed -E 's|^([0-9]+\.).+$| \1|g')"
+    exit-status: 0
+file:
+  /opt/bitnami/postgresql/logs/postgresql.log:
+    exists: true
+    filetype: symlink
+    linked-to: /dev/stdout
+  /opt/bitnami/postgresql/conf/postgresql.conf:
+    exists: true
+    mode: "0664"
+    contains:
+      - /^include_dir = 'conf.d'/

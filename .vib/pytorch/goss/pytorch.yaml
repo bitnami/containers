@@ -1,0 +1,12 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+command:
+  check-pytorch-version:
+    exec: python -c 'import torch; print(torch.__version__)'
+    exit-status: 0
+    stdout:
+      - {{ .Env.APP_VERSION }}
+  check-torchvision-version:
+    exec: python -c 'import torchvision; print(torchvision.__version__)'
+    exit-status: 0

@@ -1,0 +1,17 @@
+binaries:
+  - prometheus
+  - promtool
+directories:
+  - mode: "0775"
+    paths:
+      - /opt/bitnami/prometheus/data
+  - paths:
+      - /opt/bitnami/prometheus/conf/console_libraries
+      - /opt/bitnami/prometheus/conf/consoles
+files:
+  - paths:
+      - /opt/bitnami/prometheus/conf/prometheus.yml
+root_dir: /opt/bitnami
+version:
+  bin_name: prometheus
+  flag: --version

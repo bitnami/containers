@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 
 # shellcheck disable=SC1090,SC1091
 
@@ -16,8 +18,8 @@ set -o pipefail
 # Load Apache Flink environment variables
 . /opt/bitnami/scripts/flink-env.sh
 
-# Ensure ActiveMQ environment variables are valid
+# Ensure Flink environment variables are valid
 flink_validate
 
-# Ensure ActiveMQ is initialized
+# Ensure Flink is initialized
 flink_initialize

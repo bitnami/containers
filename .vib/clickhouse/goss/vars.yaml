@@ -1,0 +1,27 @@
+binaries:
+  - clickhouse
+  - clickhouse-client
+  - clickhouse-local
+  - clickhouse-server
+directories:
+  - mode: "0775"
+    owner: clickhouse
+    group: root
+    paths:
+      - /bitnami/clickhouse/data
+      - /opt/bitnami/clickhouse/etc
+      - /opt/bitnami/clickhouse/etc/conf.d
+      - /opt/bitnami/clickhouse/etc/users.d
+      - /opt/bitnami/clickhouse/logs
+      - /opt/bitnami/clickhouse/tmp
+      - /bitnami/clickhouse/etc
+      - /docker-entrypoint-startdb.d
+      - /docker-entrypoint-initdb.d
+files:
+  - mode: "0664"
+    paths:
+      - /.clickhouse-client-history
+root_dir: /opt/bitnami
+version:
+  bin_name: clickhouse-server
+  flag: --version

@@ -3,13 +3,14 @@ on:
   pull_request_target:
     types:
       - opened
-permissions:
-  pull-requests: write
-  issues: write
+# Remove all permissions by default
+permissions: {}
 jobs:
   assign-label:
     name: Assign label
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - id: get-asset
         name: Get modified assets
@@ -29,7 +30,7 @@ jobs:
             echo "name=NONE" >> $GITHUB_OUTPUT
           else
             echo "result=ok" >> $GITHUB_OUTPUT
-            echo "message=Adding label '${assets}'"  >> $GITHUB_OUTPUT
+            echo "message=Adding label '${assets}'" >> $GITHUB_OUTPUT
             echo "name=${assets}" >> $GITHUB_OUTPUT
           fi
       - name: Show messages

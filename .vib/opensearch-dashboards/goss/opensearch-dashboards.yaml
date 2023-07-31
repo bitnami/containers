@@ -1,0 +1,9 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+command:
+  check-app-version:
+    exec: grep '"version":' /opt/bitnami/opensearch-dashboards/package.json
+    exit-status: 0
+    stdout:
+      - '"version": "{{ .Env.APP_VERSION }}",'

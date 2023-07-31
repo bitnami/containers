@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 #
 # Bitnami PostgreSQL library
 
@@ -52,6 +54,12 @@ postgresql_validate() {
     print_validation_error() {
         error "$1"
         error_code=1
+    }
+
+    check_multi_value() {
+        if [[ " ${2} " != *" ${!1} "* ]]; then
+            print_validation_error "The allowed values for ${1} are: ${2}"
+        fi
     }
 
     empty_password_enabled_warn() {
@@ -141,6 +149,10 @@ postgresql_validate() {
         if ! is_yes_no_value "$POSTGRESQL_TLS_PREFER_SERVER_CIPHERS"; then
             print_validation_error "The values allowed for POSTGRESQL_TLS_PREFER_SERVER_CIPHERS are: yes or no"
         fi
+    fi
+
+    if [[ -n "$POSTGRESQL_SYNCHRONOUS_REPLICAS_MODE" ]]; then
+        check_multi_value "POSTGRESQL_SYNCHRONOUS_REPLICAS_MODE" "FIRST ANY"
     fi
 
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
@@ -390,6 +402,7 @@ postgresql_configure_replication_parameters() {
 #########################
 postgresql_configure_synchronous_replication() {
     local replication_nodes=""
+    local synchronous_standby_names=""
     info "Configuring synchronous_replication"
 
     # Check for comma separate values
@@ -409,8 +422,13 @@ postgresql_configure_synchronous_replication() {
     fi
 
     if ((POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS > 0)); then
+        synchronous_standby_names="${POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS} (${replication_nodes})"
+        if [[ -n "$POSTGRESQL_SYNCHRONOUS_REPLICAS_MODE" ]]; then
+            synchronous_standby_names="${POSTGRESQL_SYNCHRONOUS_REPLICAS_MODE} ${synchronous_standby_names}"
+        fi
+
         postgresql_set_property "synchronous_commit" "$POSTGRESQL_SYNCHRONOUS_COMMIT_MODE"
-        postgresql_set_property "synchronous_standby_names" "${POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS} (${replication_nodes})"
+        postgresql_set_property "synchronous_standby_names" "$synchronous_standby_names"
     fi
 }
 
@@ -604,6 +622,7 @@ postgresql_initialize() {
     # Configure port
     postgresql_set_property "port" "$POSTGRESQL_PORT_NUMBER"
     is_empty_value "$POSTGRESQL_DEFAULT_TOAST_COMPRESSION" || postgresql_set_property "default_toast_compression" "$POSTGRESQL_DEFAULT_TOAST_COMPRESSION"
+    is_empty_value "$POSTGRESQL_PASSWORD_ENCRYPTION" || postgresql_set_property "password_encryption" "$POSTGRESQL_PASSWORD_ENCRYPTION"
     if ! is_dir_empty "$POSTGRESQL_DATA_DIR"; then
         info "Deploying PostgreSQL with persisted data..."
         export POSTGRESQL_FIRST_BOOT="no"
@@ -996,6 +1015,9 @@ postgresql_remove_pghba_lines() {
         echo "$result" >"$POSTGRESQL_PGHBA_FILE"
     done
 }
+
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 
 # shellcheck disable=SC2148
 

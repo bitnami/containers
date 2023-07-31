@@ -1,3 +1,6 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 command:
   trivy-scanner:
     exec: trivy image docker.io/bitnami/minideb:buster-snapshot-20201101T210343Z

@@ -1,0 +1,6 @@
+binaries:
+  - cainjector
+directories:
+  - paths:
+      - /opt/bitnami/cainjector
+root_dir: /opt/bitnami

@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 #
 # Bitnami Cassandra library
 
@@ -364,7 +366,9 @@ cassandra_enable_auth() {
 cassandra_setup_logging() {
     if ! cassandra_is_file_external "logback.xml"; then
         replace_in_file "${CASSANDRA_CONF_DIR}/logback.xml" "system[.]log" "cassandra.log"
-        replace_in_file "${CASSANDRA_CONF_DIR}/logback.xml" "(<appender-ref\s+ref=\"ASYNCDEBUGLOG\"\s+\/>)" "<!-- \1 -->"
+        if [[ "$BITNAMI_DEBUG" = "false" ]]; then
+            replace_in_file "${CASSANDRA_CONF_DIR}/logback.xml" "(<appender-ref\s+ref=\"ASYNCDEBUGLOG\"\s+\/>)" "<!-- \1 -->"
+        fi
     else
         debug "logback.xml mounted. Skipping logging configuration"
     fi

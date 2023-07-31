@@ -1,0 +1,5 @@
+binaries:
+  - scanner-trivy
+  - trivy
+  - wire
+root_dir: /opt/bitnami

@@ -27,6 +27,8 @@ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
+Looking to use Matomo in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
 ## Why use a non-root container?
 
 Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
@@ -367,6 +369,8 @@ To configure Matomo to send email using SMTP you can set the following environme
 * `MATOMO_SMTP_PASSWORD`: Matomo SMTP account password.
 * `MATOMO_SMTP_PROTOCOL`: Matomo SMTP protocol to use. Available protocols are: "ssl", "tls", "none". No default.
 * `MATOMO_SMTP_AUTH`: Matomo SMTP authentication mechanism to use. Available mechanisms are: "Plain", "Login", "Crammd5". Default: **Plain**.
+* `MATOMO_NOREPLY_NAME`: Matomo noreply name. No defaults.
+* `MATOMO_NOREPLY_ADDRESS`: Matomo noreply address. No defaults.
 
 ##### SMTP example
 
@@ -488,7 +492,7 @@ Based on the extended image, you can use a Docker Compose file like the one belo
 version: '2'
 services:
   mariadb:
-    image: 'bitnami/mariadb:10.3'
+    image: 'bitnami/mariadb:10.11'
     environment:
       - MARIADB_USER=bn_matomo
       - MARIADB_DATABASE=bitnami_matomo
@@ -518,6 +522,10 @@ volumes:
 ```
 
 ## Notable Changes
+
+## 4.15.0-debian-11-r20
+
+From this version on, all Matomo files are persisted (MATOMO_DATA_TO_PERSIST env var). During the upgrade process, they will be replaced (except the config.ini.php file) as suggested in [the official documentation](https://matomo.org/faq/on-premise/update-matomo/#the-manual-three-step-update)
 
 ### 3.14.1-debian-10-r82
 
@@ -555,17 +563,9 @@ We'd love for you to contribute to this container. You can request new features 
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
-### Community supported solution
-
-Please, note this asset is a community-supported solution. This means that the Bitnami team is not actively working on new features/improvements nor providing support through GitHub Issues. Any new issue will stay open for 20 days to allow the community to contribute, after 15 days without activity the issue will be marked as stale being closed after 5 days.
-
-The Bitnami team will review any PR that is created, feel free to create a PR if you find any issue or want to implement a new feature.
-
-New versions and releases cadence are not going to be affected. Once a new version is released in the upstream project, the Bitnami container image will be updated to use the latest version, supporting the different branches supported by the upstream project as usual.
-
 ## License
 
-Copyright &copy; 2023 Bitnami
+Copyright &copy; 2023 VMware, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

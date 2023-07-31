@@ -1,0 +1,31 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+command:
+  check-discourse-plugin-install:
+    exec: cd /opt/bitnami/discourse; if [[ ! -d "plugins/discourse-voting" ]]; then RAILS_ENV=production bundle exec rake plugin:install repo=https://github.com/discourse/discourse-voting/; fi
+    exit-status: 0
+  check-discourse-passenger-native-support:
+    exec: /opt/bitnami/discourse/bin/passenger-config build-native-support 2>&1
+    exit-status: 0
+    # Checks output is empty
+    stdout:
+      - '!/./'
+  check-terser-modules:
+    exec: npm list -g
+    exit-status: 0
+    stdout:
+      - terser
+file:
+  /opt/bitnami/discourse/.image_optim.yml:
+    exists: true
+    filetype: file
+    contains:
+      - "!timeout:"
+      - "svgo: false"
+group:
+  discourse:
+    exists: true
+user:
+  discourse:
+    exists: true

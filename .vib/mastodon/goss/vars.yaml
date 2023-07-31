@@ -1,0 +1,18 @@
+binaries:
+  - node
+  - psql
+  - python
+  - redis-cli
+  - ruby
+  - wait-for-port
+  - tootctl
+directories:
+  - mode: "0775"
+    group: root
+    paths:
+      - /bitnami/mastodon
+      - /opt/bitnami/mastodon/tmp
+      - /opt/bitnami/mastodon/public
+      - /opt/bitnami/mastodon/public/system
+      - /opt/bitnami/mastodon/public/assets
+root_dir: /opt/bitnami

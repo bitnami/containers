@@ -1,0 +1,6 @@
+binaries:
+  - metrics-server
+root_dir: /opt/bitnami
+version:
+  bin_name: metrics-server
+  flag: --version

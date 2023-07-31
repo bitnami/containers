@@ -1,0 +1,21 @@
+binaries:
+  - java
+  - render-template
+directories:
+  - mode: "0775"
+    paths:
+      - /opt/bitnami/jenkins
+      - /opt/bitnami/jenkins/plugins
+      - /opt/bitnami/jenkins/tmp
+      - /opt/bitnami/jenkins/logs
+      - /bitnami/jenkins
+      - /bitnami/jenkins/home
+files:
+  - paths:
+      - /opt/bitnami/jenkins/plugins/authorize-project.jpi
+      - /opt/bitnami/jenkins/plugins/matrix-auth.jpi
+      - /opt/bitnami/jenkins/plugins/swarm.jpi
+version:
+  bin_name: java -jar /opt/bitnami/jenkins/jenkins.war
+  flag: --version
+root_dir: /opt/bitnami

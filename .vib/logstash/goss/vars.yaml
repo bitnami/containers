@@ -1,0 +1,23 @@
+binaries:
+  - java
+  - logstash
+  - logstash-plugin
+  - yq
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/logstash
+      - /bitnami/logstash/config
+      - /bitnami/logstash/data
+      - /bitnami/logstash/pipeline
+      - /opt/bitnami/logstash/config
+      - /opt/bitnami/logstash/pipeline
+      - /opt/bitnami/logstash/vendor/bundle/jruby
+files:
+  - paths:
+      - /opt/bitnami/logstash/Gemfile
+      - /opt/bitnami/logstash/Gemfile.lock
+root_dir: /opt/bitnami
+version:
+  bin_name: logstash
+  flag: --version

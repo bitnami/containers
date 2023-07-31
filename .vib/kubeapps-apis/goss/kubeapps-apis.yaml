@@ -1,0 +1,17 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+commands:
+file:
+  /plugins:
+    exists: true
+    filetype: symlink
+    linked-to: "/opt/bitnami/kubeapps-apis/plugins"
+  /kubeapps-apis:
+    exists: true
+    filetype: symlink
+    linked-to: "/opt/bitnami/kubeapps-apis/bin/kubeapps-apis"
+  /.kube:
+    exists: true
+    filetype: symlink
+    linked-to: "/opt/bitnami/kubeapps-apis/.kube"

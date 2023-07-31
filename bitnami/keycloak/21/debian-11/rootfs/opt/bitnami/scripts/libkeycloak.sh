@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 #
 # Bitnami Keycloak library
 
@@ -70,9 +72,9 @@ keycloak_validate() {
         fi
     fi
 
-    if ! validate_ipv4 "${KEYCLOAK_BIND_ADDRESS}"; then
+    if ! validate_ip "${KEYCLOAK_BIND_ADDRESS}"; then
         if ! is_hostname_resolved "${KEYCLOAK_BIND_ADDRESS}"; then
-            print_validation_error print_validation_error "The value for KEYCLOAK_BIND_ADDRESS ($KEYCLOAK_BIND_ADDRESS) should be an IPv4 address or it must be a resolvable hostname"
+            print_validation_error print_validation_error "The value for KEYCLOAK_BIND_ADDRESS ($KEYCLOAK_BIND_ADDRESS) should be an IPv4 or IPv6 address, or it must be a resolvable hostname"
         fi
     fi
 
@@ -82,7 +84,7 @@ keycloak_validate() {
     check_allowed_port KEYCLOAK_HTTP_PORT
     check_allowed_port KEYCLOAK_HTTPS_PORT
 
-    for var in KEYCLOAK_ENABLE_HTTPS KEYCLOAK_ENABLE_STATISTICS; do
+    for var in KEYCLOAK_ENABLE_HTTPS KEYCLOAK_ENABLE_STATISTICS KEYCLOAK_ENABLE_HEALTH_ENDPOINTS; do
         if ! is_true_false_value "${!var}"; then
             print_validation_error "The allowed values for $var are [true, false]"
         fi
@@ -104,7 +106,12 @@ keycloak_validate() {
 keycloak_conf_set() {
     local -r key="${1:?key missing}"
     local -r value="${2:-}"
-    debug "Setting ${key} to '${value}' in Keycloak configuration"
+    # Redact sensitive values before outputting to debug log
+    local redacted_value="${value}"
+    if [[ "${key}" =~ ^(db|https-key-store|https-trust-store|spi-truststore-file)-password$ ]]; then
+        redacted_value="_redacted_"
+    fi
+    debug "Setting ${key} to '${redacted_value}' in Keycloak configuration"
     # Sanitize key (sed does not support fixed string substitutions)
     local sanitized_pattern
     sanitized_pattern="^\s*(#\s*)?$(sed 's/[]\[^$.*/]/\\&/g' <<<"$key")\s*=\s*(.*)"
@@ -169,6 +176,20 @@ keycloak_configure_cache() {
 keycloak_configure_metrics() {
     info "Enabling statistics"
     keycloak_conf_set "metrics-enabled" "$KEYCLOAK_ENABLE_STATISTICS"
+}
+
+########################
+# Enable health endpoints
+# Globals:
+#   KEYCLOAK_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+keycloak_configure_health_endpoints() {
+    info "Enabling health endpoints"
+    keycloak_conf_set "health-enabled" "$KEYCLOAK_ENABLE_HEALTH_ENDPOINTS"
 }
 
 ########################
@@ -296,6 +317,7 @@ keycloak_initialize() {
     fi
     keycloak_configure_database
     keycloak_configure_metrics
+    keycloak_configure_health_endpoints
     keycloak_configure_http
     keycloak_configure_hostname
     keycloak_configure_cache

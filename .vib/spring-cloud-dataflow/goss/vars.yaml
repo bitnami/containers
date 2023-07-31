@@ -1,0 +1,10 @@
+binaries:
+  - java
+  - yq
+directories:
+  - mode: "0775"
+    paths:
+    - /.m2
+    - /bitnami/spring-cloud-dataflow
+    - /opt/bitnami/spring-cloud-dataflow/conf
+root_dir: /opt/bitnami

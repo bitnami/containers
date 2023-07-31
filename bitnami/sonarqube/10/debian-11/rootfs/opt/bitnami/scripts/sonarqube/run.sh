@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 
 # shellcheck disable=SC1090,SC1091
 
@@ -23,7 +25,7 @@ cd "$SONARQUBE_BASE_DIR"
 
 info "** Starting SonarQube **"
 if am_i_root; then
-    exec gosu "$SONARQUBE_DAEMON_USER" "${START_CMD[@]}" "$@"
+    exec_as_user "$SONARQUBE_DAEMON_USER" "${START_CMD[@]}" "$@"
 else
     exec "${START_CMD[@]}" "$@"
 fi

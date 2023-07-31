@@ -1,0 +1,9 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+command:
+  check-helm-controller-help:
+    exec: helm-controller --help
+    exit-status: 2
+    stderr:
+      - "Usage of helm-controller:"

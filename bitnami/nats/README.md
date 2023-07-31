@@ -29,6 +29,8 @@ docker-compose up
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
+Looking to use NATS in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
 ## How to deploy NATS in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami NATS Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/nats).
@@ -199,7 +201,8 @@ Available environment variables:
 * `NATS_CLUSTER_PORT_NUMBER`: NATS Cluster port number. Default: **6222**
 * `NATS_HTTP_PORT_NUMBER`: NATS HTTP port number. Default: **8222**
 * `NATS_HTTPS_PORT_NUMBER`: NATS HTTPS port number. Default: **8443**
-* `NATS_FILENAME`: Pefix to use for NATS files (e.g. the PID file would be formed using `${NATS_FILENAME}.pid`). Default: **nats-server**
+* `NATS_FILENAME`: Pefix to use for NATS files (e.g., the PID file would be formed using `${NATS_FILENAME}.pid`). Default: **nats-server**
+* `NATS_EXTRA_ARGS`: Additional command line arguments passed while starting NATS (e.g., `-js` for enabling JetStream). No defaults.
 
 #### NATS security configuration
 
@@ -267,7 +270,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 Bitnami
+Copyright &copy; 2023 VMware, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

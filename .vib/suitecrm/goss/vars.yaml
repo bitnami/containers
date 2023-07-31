@@ -1,0 +1,29 @@
+binaries:
+  - apachectl
+  - mariadb
+  - php
+  - render-template
+directories:
+  - mode: "0775"
+    paths:
+      - /bitnami/suitecrm
+      - /opt/bitnami/suitecrm
+      - /opt/bitnami/suitecrm/tmp
+      - /opt/bitnami/suitecrm/vendor
+files:
+  - paths:
+      - /opt/bitnami/suitecrm/composer.json
+phpmodules:
+  # Based on https://docs.suitecrm.com/admin/installation-guide/downloading-installing/#_recommended_installation_pre_requisites
+  - curl
+  - json
+  - mbstring
+  - mysqli
+  - pcre
+  - xml
+  - zip
+  - zlib
+root_dir: /opt/bitnami
+sed_in_place:
+  exclude_paths:
+    - \/opt\/bitnami\/suitecrm\/vendor\/.*

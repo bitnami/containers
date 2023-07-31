@@ -1,0 +1,25 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+group:
+  mastodon:
+    exists: true
+user:
+  mastodon:
+    exists: true
+file:
+  /opt/bitnami/mastodon/config/initializers/1_hosts.rb:
+    exists: true
+    filetype: file
+    contains:
+      - "https = ENV['MASTODON_HTTPS_ENABLED'] == 'true'"
+      - "config.hosts.clear if ENV['MASTODON_ALLOW_ALL_DOMAINS'] == 'true'"
+  /opt/bitnami/mastodon/config/environments/production.rb:
+    exists: true
+    filetype: file
+    contains:
+      - "config.force_ssl = ENV['MASTODON_HTTPS_ENABLED'] == 'true'"
+  /opt/mastodon:
+    exists: true
+    filetype: symlink
+    linked-to: /opt/bitnami/mastodon

@@ -27,6 +27,8 @@ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
+Looking to use Apache Kafka in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
 ## How to deploy Apache Kafka in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami Apache Kafka Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/kafka).
@@ -112,9 +114,14 @@ docker network create app-tier --driver bridge
 Use the `--network app-tier` argument to the `docker run` command to attach the Apache Kafka container to the `app-tier` network.
 
 ```console
-docker run -d --name kafka-server \
+docker run -d --name kafka-server --hostname kafka-server \
     --network app-tier \
-    -e ALLOW_PLAINTEXT_LISTENER=yes \
+    -e KAFKA_CFG_NODE_ID=0 \
+    -e KAFKA_CFG_PROCESS_ROLES=controller,broker \
+    -e KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093 \
+    -e KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT \
+    -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-server:9093 \
+    -e KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER \
     bitnami/kafka:latest
 ```
 
@@ -145,7 +152,12 @@ services:
     networks:
       - app-tier
     environment:
-      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_NODE_ID=0
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
   myapp:
     image: 'YOUR_APPLICATION_IMAGE'
     networks:
@@ -167,9 +179,6 @@ docker-compose up -d
 
 The configuration can easily be setup with the Bitnami Apache Kafka Docker image using the following environment variables:
 
-* `ALLOW_PLAINTEXT_LISTENER`: Allow to use the PLAINTEXT listener. Default: **no**.
-* `KAFKA_INTER_BROKER_USER`: Apache Kafka inter broker communication user. Default: **user**.
-* `KAFKA_INTER_BROKER_PASSWORD`: Apache Kafka inter broker communication password. Default: **bitnami**.
 * `KAFKA_CERTIFICATE_PASSWORD`: Password for certificates. No defaults.
 * `KAFKA_HEAP_OPTS`: Apache Kafka's Java Heap size. Default: **-Xmx1024m -Xms1024m**.
 * `KAFKA_ZOOKEEPER_PROTOCOL`: Authentication protocol for Zookeeper connections. Allowed protocols: **PLAINTEXT**, **SASL**, **SSL**, and **SASL_SSL**. Defaults: **PLAINTEXT**.
@@ -181,21 +190,30 @@ The configuration can easily be setup with the Bitnami Apache Kafka Docker image
 * `KAFKA_ZOOKEEPER_TLS_TYPE`: Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`. Defaults: **JKS**.
 * `KAFKA_CFG_LISTENERS`: Kafka `listeners` configuration override. Default: **PLAINTEXT://:9092,CONTROLLER://:9093**
 * `KAFKA_CFG_ADVERTISED_LISTENERS`: Kafka `advertised.listeners` configuration override. Default: **PLAINTEXT://:9092**
-* `KAFKA_CFG_SASL_ENABLED_MECHANISMS`: Allowed mechanism when using SASL either for clients, inter broker, or zookeeper comunications. Allowed values: `PLAIN`, `SCRAM-SHA-256`, `SCRAM-SHA-512` or a comma separated combination of those values. Default: **PLAIN,SCRAM-SHA-256,SCRAM-SHA-512**
-* `KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL`: SASL mechanism to use for inter broker communications. No defaults.
+* `KAFKA_CFG_SASL_ENABLED_MECHANISMS`: Allowed mechanism when using SASL either for clients, inter broker, or zookeeper comunications. Allowed values: `PLAIN`, `SCRAM-SHA-256`, `SCRAM-SHA-512` or a comma separated combination of those values. Default: **PLAIN,SCRAM-SHA-256,SCRAM-SHA-512**. NOTE: KRaft mode does not yet support SCRAM mechanisms, so this list will be automatically reduced to only `PLAIN` SASL mechanism.
 * `KAFKA_TLS_CLIENT_AUTH`: Configures kafka brokers to request client authentication. Allowed values: `required`, `requested`, `none`. Defaults: **required**.
+* `KAFKA_TLS_INTER_BROKER_AUTH`: Configures TLS authentication method for kafka inter-broker communications. Defaults: **KAFKA_TLS_CLIENT_AUTH**.
+* `KAFKA_TLS_CONTROLLER_AUTH`: Configures TLS authentication method for kafka control plane communications. Defaults: **KAFKA_TLS_CLIENT_AUTH**.
 * `KAFKA_TLS_TYPE`: Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`. Defaults: **JKS**.
 * `KAFKA_CLIENT_USERS`: Users that will be created into Zookeeper when using SASL for client communications. Separated by commas. Default: **user**
 * `KAFKA_CLIENT_PASSWORDS`: Passwords for the users specified at`KAFKA_CLIENT_USERS`. Separated by commas. Default: **bitnami**
 * `KAFKA_CFG_MAX_PARTITION_FETCH_BYTES`:  The maximum amount of data per-partition the server will return. No defaults.
 * `KAFKA_CFG_MAX_REQUEST_SIZE`: The maximum size of a request in bytes. No defaults.
-* `KAFKA_ENABLE_KRAFT`: Whether to enable Kafka Raft (KRaft) mode. Default: **yes**
-* `KAFKA_KRAFT_CLUSTER_ID`: Kafka cluster ID when using Kafka Raft (KRaft). No defaults.
+* `KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL`: SASL mechanism to use for inter broker communications. No defaults. NOTE: KRaft mode does not yet support SCRAM mechanisms, so the only supported SASL mechanism in KRaft mode would be `PLAIN`.
+* `KAFKA_INTER_BROKER_USER`: Apache Kafka inter broker communication user. Default: **user**.
+* `KAFKA_INTER_BROKER_PASSWORD`: Apache Kafka inter broker communication password. Default: **bitnami**.
+* `KAFKA_CFG_SASL_MECHANISM_CONTROLLER_PROTOCOL`: SASL mechanism to use for controllers communications. No defaults. NOTE: KRaft mode does not yet support SCRAM mechanisms, so the only supported SASL mechanism in KRaft mode would be `PLAIN`.
+* `KAFKA_CONTROLLER_USER`: Apache Kafka controllers communication user. Default: **controller_user**.
+* `KAFKA_CONTROLLER_PASSWORD`: Apache Kafka controllers communication password. Default: **bitnami**.
+* `KAFKA_CFG_PROCESS_ROLES`: Node roles when running in KRaft mode. No defaults.
+* `KAFKA_CFG_NODE_ID`: Unique node id, required when running in KRaft mode. No defaults.
+* `KAFKA_CFG_CONTROLLER_QUORUM_VOTERS`: Map of id/endpoint information for the set of controller quorum voters in a comma-separated list of {id}@{host}:{port} entries. No defaults.
+* `KAFKA_RAFT_CLUSTER_ID`: Kafka cluster ID when using Kafka Raft (KRaft). No defaults.
 
 Additionally, any environment variable beginning with `KAFKA_CFG_` will be mapped to its corresponding Apache Kafka key. For example, use `KAFKA_CFG_BACKGROUND_THREADS` in order to set `background.threads` or `KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE` in order to configure `auto.create.topics.enable`.
 
 ```console
-docker run --name kafka -e ALLOW_PLAINTEXT_LISTENER=yes -e KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true bitnami/kafka:latest
+docker run --name kafka -e KAFKA_CFG_PROCESS_ROLES ... -e KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true bitnami/kafka:latest
 ```
 
 or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/kafka/docker-compose.yml) file present in this repository:
@@ -220,7 +238,12 @@ services:
     ports:
       - '9092:9092'
     environment:
-      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_NODE_ID=0
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
 ```
 
 To deploy it, run the following command in the directory where the `docker-compose.yml` file is located:
@@ -259,10 +282,7 @@ services:
     volumes:
       - "kafka_data:/bitnami"
     environment:
-      - ALLOW_PLAINTEXT_LISTENER=yes
-      - KAFKA_ENABLE_KRAFT=no
       - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
-      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
     depends_on:
       - zookeeper
 
@@ -281,9 +301,13 @@ To do so, add the following environment variables to your docker-compose:
 
 ```diff
     environment:
-      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_NODE_ID=0
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@<your_host>:9093
 +     - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
 +     - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
++     - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
 ```
 
 And expose the external port:
@@ -303,8 +327,8 @@ And expose the external port:
 These clients, from the same host, will use `localhost` to connect to Apache Kafka.
 
 ```console
-kafka-console-producer.sh --bootstrap-server 127.0.0.1:9094 --topic test
-kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9094 --topic test --from-beginning
+kafka-console-producer.sh --producer.config /opt/bitnami/kafka/config/producer.properties --bootstrap-server 127.0.0.1:9094 --topic test
+kafka-console-consumer.sh --consumer.config /opt/bitnami/kafka/config/consumer.properties --bootstrap-server 127.0.0.1:9094 --topic test --from-beginning
 ```
 
 If running these commands from another machine, change the address accordingly.
@@ -314,8 +338,8 @@ If running these commands from another machine, change the address accordingly.
 These clients, from other containers on the same Docker network, will use the kafka container service hostname to connect to Apache Kafka.
 
 ```console
-kafka-console-producer.sh --bootstrap-server kafka:9092 --topic test
-kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic test --from-beginning
+kafka-console-producer.sh --producer.config /opt/bitnami/kafka/config/producer.properties --bootstrap-server kafka:9092 --topic test
+kafka-console-consumer.sh --consumer.config /opt/bitnami/kafka/config/consumer.properties --bootstrap-server kafka:9092 --topic test --from-beginning
 ```
 
 Similarly, application code will need to use `bootstrap.servers=kafka:9092`
@@ -324,13 +348,7 @@ More info about Apache Kafka listeners can be found in [this great article](http
 
 ### Security
 
-The Bitnami Apache Kafka docker image disables the PLAINTEXT listener for security reasons. You can enable the PLAINTEXT listener by adding the next environment variable, but remember that this configuration is not recommended for production.
-
-```console
-ALLOW_PLAINTEXT_LISTENER=yes
-```
-
-In order to configure authentication, you must configure the Apache Kafka listeners properly.Let's see an example to configure Apache Kafka with `SASL_SSL` authentication for communications with clients, and `PLAINTEXT` authentication for controller-related communications.
+In order to configure authentication, you must configure the Apache Kafka listeners properly. Let's see an example to configure Apache Kafka with `SASL_SSL` authentication for communications with clients, and `SASL` authentication for controller-related communications.
 
 The environment variables below should be defined to configure the listeners, and the SASL credentials for client communications:
 
@@ -339,13 +357,18 @@ KAFKA_CFG_LISTENERS=SASL_SSL://:9092,CONTROLLER://:9093
 KAFKA_CFG_ADVERTISED_LISTENERS=SASL_SSL://localhost:9092
 KAFKA_CLIENT_USERS=user
 KAFKA_CLIENT_PASSWORDS=password
+KAFKA_CLIENT_LISTENER_NAME=SASL_SSL
+KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
+KAFKA_CFG_SASL_MECHANISM_CONTROLLER_PROTOCOL=PLAIN
+KAFKA_CONTROLLER_USER=controller_user
+KAFKA_CONTROLLER_PASSWORD=controller_password
 ```
 
 You **must** also use your own certificates for SSL. You can drop your Java Key Stores or PEM files into `/opt/bitnami/kafka/config/certs`. If the JKS or PEM certs are password protected (recommended), you will need to provide it to get access to the keystores:
 
 `KAFKA_CERTIFICATE_PASSWORD=myCertificatePassword`
 
-If the truststore is mounted in a different location than `/opt/bitnami/kafka/config/certs/kafka.truststore.jks`, `/opt/bitnami/kafka/conf/certs/kafka.truststore.pem`, `/bitnami/kafka/conf/certs/kafka.truststore.jks` or `/bitnami/kafka/conf/certs/kafka.truststore.pem`, set the `KAFKA_TLS_TRUSTSTORE_FILE` variable.
+If the truststore is mounted in a different location than `/opt/bitnami/kafka/config/certs/kafka.truststore.jks`, `/opt/bitnami/kafka/config/certs/kafka.truststore.pem`, `/bitnami/kafka/config/certs/kafka.truststore.jks` or `/bitnami/kafka/config/certs/kafka.truststore.pem`, set the `KAFKA_TLS_TRUSTSTORE_FILE` variable.
 
 The following script can help you with the creation of the JKS and certificates:
 
@@ -370,10 +393,22 @@ services:
     ports:
       - '9092'
     environment:
+      - KAFKA_CFG_NODE_ID=0
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
       - KAFKA_CFG_LISTENERS=SASL_SSL://:9092,CONTROLLER://:9093
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
       - KAFKA_CFG_ADVERTISED_LISTENERS=SASL_SSL://:9092
       - KAFKA_CLIENT_USERS=user
       - KAFKA_CLIENT_PASSWORDS=password
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_SASL_MECHANISM_CONTROLLER_PROTOCOL=PLAIN
+      - KAFKA_CONTROLLER_USER=controller_user
+      - KAFKA_CONTROLLER_PASSWORD=controller_password
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=SASL_SSL
+      - KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL=PLAIN
+      - KAFKA_INTER_BROKER_USER=controller_user
+      - KAFKA_INTER_BROKER_PASSWORD=controller_password
       - KAFKA_CERTIFICATE_PASSWORD=certificatePassword123
       - KAFKA_TLS_TYPE=JKS # or PEM
     volumes:
@@ -388,39 +423,96 @@ services:
 In order to get the required credentials to consume and produce messages you need to provide the credentials in the client. If your Apache Kafka client allows it, use the credentials you've provided.
 
 While producing and consuming messages using the `bitnami/kafka` image, you'll need to point to the `consumer.properties` and/or `producer.properties` file, which contains the needed configuration
-to work. You can find this files in the `/opt/bitnami/kafka/conf` directory.
+to work. You can find this files in the `/opt/bitnami/kafka/config` directory.
 
 Use this to generate messages using a secure setup:
 
 ```console
-export KAFKA_OPTS="-Djava.security.auth.login.config=/opt/bitnami/kafka/conf/kafka_jaas.conf"
-kafka-console-producer.sh --bootstrap-server 127.0.0.1:9092 --topic test --producer.config /opt/bitnami/kafka/conf/producer.properties
+kafka-console-producer.sh --bootstrap-server 127.0.0.1:9092 --topic test --producer.config /opt/bitnami/kafka/config/producer.properties
 ```
 
 Use this to consume messages using a secure setup
 
 ```console
-export KAFKA_OPTS="-Djava.security.auth.login.config=/opt/bitnami/kafka/conf/kafka_jaas.conf"
-kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic test --consumer.config /opt/bitnami/kafka/conf/consumer.properties
+kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic test --consumer.config /opt/bitnami/kafka/config/consumer.properties
 ```
 
-If you use other tools to use your Apache Kafka cluster, you'll need to provide the required information. You can find the required information in the files located at `/opt/bitnami/kafka/conf` directory.
+If you use other tools to use your Apache Kafka cluster, you'll need to provide the required information. You can find the required information in the files located at `/opt/bitnami/kafka/config` directory.
 
-#### InterBroker communications
+#### Inter-Broker communications
 
-When configuring your broker to use `SASL` or `SASL_SSL` for inter-broker communications, you can provide the SASL credentials using these environment variables:
+When deploying a Apache Kafka cluster with multiple brokers, inter broker communications can be configured with `SASL` or `SASL_SSL` using the following variables:
 
-* `KAFKA_INTER_BROKER_USER`: Apache Kafka inter broker communication user. Deprecated in favor of `KAFKA_CLIENT_USERS`.
-* `KAFKA_INTER_BROKER_PASSWORD`: Apache Kafka inter broker communication password. Deprecated in favor of `KAFKA_CLIENT_PASSWORDS`.
+* `KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL`: Apache Kafka inter broker communication protocol.
+* `KAFKA_INTER_BROKER_USER`: Apache Kafka inter broker communication user.
+* `KAFKA_INTER_BROKER_PASSWORD`: Apache Kafka inter broker communication password.
 
-#### Apache Kafka client configuration
+NOTE: When running in KRaft mode, KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL only supports `PLAIN` mechanism.
 
-When configuring Apache Kafka with `SASL` or `SASL_SSL` for communications with clients, you can provide your SASL credentials using this environment variables:
+#### Control plane communications
+
+When deploying a Apache Kafka cluster with multiple controllers in KRaft mode, controller communications can be configured with `SASL` or `SASL_SSL` using the following variables:
+
+* `KAFKA_CFG_SASL_MECHANISM_CONTROLLER_PROTOCOL`: Apache Kafka controllers communication protocol.
+* `KAFKA_CONTROLLER_USER`: Apache Kafka controllers communication user. Currently only `PLAIN` mechanism is supported.
+* `KAFKA_CONTROLLER_PASSWORD`: Apache Kafka controllers communication password.
+
+NOTE: When running in KRaft mode, KAFKA_CFG_SASL_MECHANISM_CONTROLLER_PROTOCOL only supports `PLAIN` mechanism.
+
+#### Apache Kafka SASL configuration
+
+When configuring Apache Kafka listeners with `SASL` or `SASL_SSL` for communications with clients, you can provide your SASL credentials using this environment variables:
 
 * `KAFKA_CLIENT_USERS`: Apache Kafka client user. Default: **user**
 * `KAFKA_CLIENT_PASSWORDS`: Apache Kafka client user password. Default: **bitnami**
 
-#### Apache Kafka ZooKeeper client configuration
+NOTE: When running in KRaft mode, only the first user:password pair will take effect, as KRaft mode does not support SCRAM mechanism yet.
+
+#### Apache Kafka KRaft mode configuration
+
+KRaft mode can be enabled by providing the following values:
+
+* `KAFKA_CFG_PROCESS_ROLES`: Comma-separated list of Kafka KRaft roles. Allowed values: `controller,broker`, `controller`, `broker`.
+* `KAFKA_CFG_NODE_ID`: Unique id for the Kafka node.
+* `KAFKA_CFG_LISTENERS`: List of Kafka listeners. If node is set with `controller` role, the listener `CONTROLLER` must be included.
+* `KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP`: Maps each listener with a Apache Kafka security protocol. If node is set with `controller` role, this setting is in order to assign a security protocol for the `CONTROLLER LISTENER`. E.g.: `PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT`.
+
+In order to configure controllers communications without authentication, you should provide the environment variables below:
+
+* `KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP`: Should include `CONTROLLER:PLAINTEXT`.
+
+In order to configure Apache Kafka controller communications with `SASL`, you should provide the environment variables below:
+
+* `KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP`: Should include `CONTROLLER:SASL`.
+* `KAFKA_CFG_SASL_MECHANISM_CONTROLLER_PROTOCOL`: SASL mechanism to use for controllers communications. NOTE: KRaft mode does not yet support SCRAM mechanisms, so the only supported SASL mechanism in KRaft mode would be `PLAIN`.
+* `KAFKA_CONTROLLER_USER`: Apache Kafka controllers communication user.
+* `KAFKA_CONTROLLER_PASSWORD`: Apache Kafka controllers communication password.
+
+In order to configure Apache Kafka controller communications with `SSL`, you should provide the environment variables below:
+
+* `KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP`: Should include `CONTROLLER:SSL`.
+* `KAFKA_TLS_CONTROLLER_AUTH`: Configures TLS authentication method for kafka control plane communications. Defaults: **required**.
+* `KAFKA_TLS_TYPE`: Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`. Defaults: **JKS**.
+* Valid keystore and truststore are mounted at `/opt/bitnami/kafka/config/certs/kafka.keystore.jks` and `/opt/bitnami/kafka/config/certs/kafka.truststore.jks`.
+
+In order to authenticate Apache Kafka against a Zookeeper server with `SASL_SSL`, you should provide the environment variables below:
+
+* `KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP`: Should include `CONTROLLER:SASL_SSL`.
+* `KAFKA_CFG_SASL_MECHANISM_CONTROLLER_PROTOCOL`: SASL mechanism to use for controllers communications. NOTE: KRaft mode does not yet support SCRAM mechanisms, so the only supported SASL mechanism in KRaft mode would be `PLAIN`.
+* `KAFKA_CONTROLLER_USER`: Apache Kafka controllers communication user.
+* `KAFKA_CONTROLLER_PASSWORD`: Apache Kafka controllers communication password.
+* `KAFKA_TLS_CONTROLLER_AUTH`: Configures TLS authentication method for kafka control plane communications. Defaults: **required**.
+* `KAFKA_TLS_TYPE`: Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`. Defaults: **JKS**.
+* Valid keystore and truststore are mounted at `/opt/bitnami/kafka/config/certs/kafka.keystore.jks` and `/opt/bitnami/kafka/config/certs/kafka.truststore.jks`.
+
+> Note: SSL settings are shared by all listeners configured using `SSL` or `SASL_SSL` protocols except for `KAFKA_TLS_CONTROLLER_AUTH` and `KAFKA_TLS_INTER_BROKER_AUTH`. Setting different certificates per listener is not yet supported.
+
+#### Apache Kafka ZooKeeper mode configuration
+
+Zookeeper mode can be enabled by providing the following values:
+
+* `KAFKA_CFG_ZOOKEEPER_CONNECT`: Comma-separated list of Zookeeper connection strings. E.g `<zk_host1>:<zk_port1>,<zk_host2>:<zk_port2>`
+* `KAFKA_CFG_BROKER_ID`: **Optional** ID of the Kafka broker. If not set, a random ID will be automatically generated.
 
 There are different options of configuration to connect a Zookeeper server.
 
@@ -455,7 +547,7 @@ In order to authenticate Apache Kafka against a Zookeeper server with `SASL_SSL`
 
 > Note: You **must** also use your own certificates for SSL. You can mount your Java Key Stores (`zookeeper.keystore.jks` and `zookeeper.truststore.jks`) or PEM files (`zookeeper.keystore.pem`, `zookeeper.keystore.key` and `zookeeper.truststore.pem`) into `/opt/bitnami/kafka/conf/certs`. If client authentication is `none` or `want` in Zookeeper, the cert files are optional.
 
-### Setting up an Apache Kafka Cluster
+### Setting up a Apache Kafka cluster
 
 An Apache Kafka cluster can easily be setup with the Bitnami Apache Kafka Docker image using the following environment variables:
 
@@ -468,10 +560,12 @@ The first step is to create one Apache Kafka instance.
 ```console
 docker run --name kafka-0 \
   --network app-tier \
-  -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093 \
   -e KAFKA_CFG_NODE_ID=0 \
+  -e KAFKA_CFG_PROCESS_ROLES=controller,broker \
+  -e KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093 \
+  -e KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT \
+  -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093 \
   -e KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv \
-  -e ALLOW_PLAINTEXT_LISTENER=yes \
   -p :9092 \
   -p :9093 \
   bitnami/kafka:latest
@@ -484,10 +578,12 @@ Next we start a new Apache Kafka container.
 ```console
 docker run --name kafka-1 \
   --network app-tier \
-  -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093 \
   -e KAFKA_CFG_NODE_ID=1 \
+  -e KAFKA_CFG_PROCESS_ROLES=controller,broker \
+  -e KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093 \
+  -e KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT \
+  -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093 \
   -e KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv \
-  -e ALLOW_PLAINTEXT_LISTENER=yes \
   -p :9092 \
   -p :9093 \
   bitnami/kafka:latest
@@ -500,10 +596,12 @@ Next we start another new Apache Kafka container.
 ```console
 docker run --name kafka-3 \
   --network app-tier \
-  -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093 \
   -e KAFKA_CFG_NODE_ID=3 \
+  -e KAFKA_CFG_PROCESS_ROLES=controller,broker \
+  -e KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093 \
+  -e KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT \
+  -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093 \
   -e KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv \
-  -e ALLOW_PLAINTEXT_LISTENER=yes \
   -p :9092 \
   -p :9093 \
   bitnami/kafka:latest
@@ -511,62 +609,11 @@ docker run --name kafka-3 \
 
 You now have an Apache Kafka cluster up and running. You can scale the cluster by adding/removing slaves without incurring any downtime.
 
-With Docker Compose, topic replication can be setup using:
+A docker-compose version of this deployment can be found in the file `docker-compose-cluster.yml`.
 
-```yaml
-version: '2'
+#### Example: Create a replicated topic
 
-services:
-  kafka-0:
-    image: docker.io/bitnami/kafka:testing
-    ports:
-      - "9092"
-      - "9093"
-    environment:
-      - BRDEBUG=1
-      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093
-      - KAFKA_CFG_BROKER_ID=0
-      - KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv
-      - ALLOW_PLAINTEXT_LISTENER=yes
-    volumes:
-      - kafka_0_data:/bitnami/kafka
-  kafka-1:
-    image: docker.io/bitnami/kafka:testing
-    ports:
-      - "9092"
-      - "9093"
-    environment:
-      - BRDEBUG=1
-      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093
-      - KAFKA_CFG_BROKER_ID=1
-      - KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv
-      - ALLOW_PLAINTEXT_LISTENER=yes
-    volumes:
-      - kafka_1_data:/bitnami/kafka
-  kafka-2:
-    image: docker.io/bitnami/kafka:testing
-    ports:
-      - "9092"
-      - "9093"
-    environment:
-      - BRDEBUG=1
-      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093
-      - KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv
-      - KAFKA_CFG_BROKER_ID=2
-      - ALLOW_PLAINTEXT_LISTENER=yes
-    volumes:
-      - kafka_2_data:/bitnami/kafka
-
-volumes:
-  kafka_0_data:
-    driver: local
-  kafka_1_data:
-    driver: local
-  kafka_2_data:
-    driver: local
-```
-
-Then, you can create a replicated topic with:
+A replicated topic could be created using the following command:
 
 ```console
 root@kafka-0:/# /opt/bitnami/kafka/bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --topic mytopic --partitions 3 --replication-factor 3
@@ -579,9 +626,62 @@ Topic:mytopic   PartitionCount:3        ReplicationFactor:3     Configs:
         Topic: mytopic  Partition: 2    Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
 ```
 
+### Setting up a Apache Kafka KRaft cluster with dedicated nodes
+
+The following docker-compose can be use as guide to build a Apache Kafka cluster with dedicated nodes.
+Please note this deployment is not suited for production usage as it does not met quorum minimums to prevent split-brain scenarios.
+
+```yaml
+version: '2'
+
+services:
+  kafka-combined:
+    image: docker.io/bitnami/kafka:latest
+    ports:
+      - "9092:9092"
+    environment:
+      - KAFKA_CFG_NODE_ID=0
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv
+    volumes:
+      - kafka_0_data:/bitnami/kafka
+  kafka-controller:
+    image: docker.io/bitnami/kafka:latest
+    environment:
+      - KAFKA_CFG_NODE_ID=1
+      - KAFKA_CFG_PROCESS_ROLES=controller
+      - KAFKA_CFG_LISTENERS=CONTROLLER://:9093
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv
+    volumes:
+      - kafka_1_data:/bitnami/kafka
+  kafka-broker:
+    image: docker.io/bitnami/kafka:latest
+    environment:
+      - KAFKA_CFG_NODE_ID=2
+      - KAFKA_CFG_PROCESS_ROLES=broker
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093
+    volumes:
+      - kafka_2_data:/bitnami/kafka
+
+volumes:
+  kafka_0_data:
+    driver: local
+  kafka_1_data:
+    driver: local
+  kafka_2_data:
+    driver: local
+```
+
 ### Full configuration
 
-The image looks for configuration files (server.properties, log4j.properties, etc.) in the `/bitnami/kafka/config/` and `/bitnami/kafka/config/kraft` directories, this can be changed by setting the KAFKA_MOUNTED_CONF_DIR environment variable.
+The image looks for configuration files (server.properties, log4j.properties, etc.) in the `/bitnami/kafka/config/`, this can be changed by setting the KAFKA_MOUNTED_CONF_DIR environment variable.
 
 ```console
 docker run --name kafka -v /path/to/server.properties:/bitnami/kafka/config/server.properties bitnami/kafka:latest
@@ -738,15 +838,98 @@ Or using Docker Compose:
 docker-compose up kafka
 ```
 
+## Migrating from Zookeeper mode to KRaft mode
+
+This guide covers how to execute the Kafka migration from Zookeeper mode to KRaft mode as explained in the [upstream documentation](https://docs.confluent.io/platform/current/installation/migrate-zk-kraft.html) when using the `bitnami/kafka` container.
+
+1. Retrieve the cluster ID from Zookeeper
+
+2. Configure Controller quorum by adding the following env variables in the nodes you'd like to configure as controller-elegible nodes:
+
+    ```console
+    KAFKA_CFG_PROCESS_ROLES=controller
+    KAFKA_CFG_NODE_ID=<unique_id>
+    KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=<controller1_node_id>@<controller1_host>:9093,<controller2_node_id>@<controller2_host>:9093,...
+    KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+    KAFKA_CFG_LISTENERS=CONTROLLER://:9093
+    KAFKA_CFG_ZOOKEEPER_METADATA_MIGRATION_ENABLE=true
+    KAFKA_CFG_ZOOKEEPER_CONNECT=<zk_host>:<zk_port>
+    KAFKA_KRAFT_CLUSTER_ID=<cluster_id_step1>
+    ```
+
+3. Configure brokers with migration settings:
+
+    ```console
+    KAFKA_CFG_BROKER_ID=<current_broker_id>
+    KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=<controller1_node_id>@<controller1_host>:9093,<controller2_node_id>@<controller2_host>:9093,...
+    KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+    KAFKA_CFG_INTER_BROKER_PROTOCOL_VERSION=3.4
+    KAFKA_CFG_ZOOKEEPER_METADATA_MIGRATION_ENABLE=true
+    KAFKA_CFG_ZOOKEEPER_CONNECT=<zk_host>:<zk_port>
+    ```
+
+4. Migrate brokers:
+
+    ```console
+    KAFKA_CFG_PROCESS_ROLES=broker
+    KAFKA_CFG_NODE_ID=<unique_id>
+    KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=<controller1_node_id>@<controller1_host>:9093,<controller2_node_id>@<controller2_host>:9093,...
+    KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+    ```
+
+5. Disable migration mode on controllers:
+
+    ```console
+    KAFKA_CFG_PROCESS_ROLES=controller
+    KAFKA_CFG_NODE_ID=<unique_id>
+    KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=<controller1_node_id>@<controller1_host>:9093,<controller2_node_id>@<controller2_host>:9093,...
+    KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+    KAFKA_CFG_LISTENERS=CONTROLLER://:9093
+    KAFKA_KRAFT_CLUSTER_ID=<cluster_id_step1>
+    ```
+
 ## Notable Changes
 
 ### Branches rename
 
 Branch 2 has been renamed to 2.8 and branch 3 has been splited into branches 3.0 and 3.1 mirroing the upstream [Apache Kafka's naming policy](https://kafka.apache.org/downloads)
 
+### 3.5.1-debian-11-r4, 3.4.1-debian-11-r50, 3.3.2-debian-11-r176 and 3.2.3-debian-11-r161
+
+This new release of the bitnami/kafka container includes a refactor in its logic and introduces several breaking changes and improvements:
+
+* Removed env variable KAFKA_ENABLE_KRAFT. Instead, KRaft configuration will be detected if KAFKA_CFG_PROCESS_ROLES is provided.
+* By default, the container will not configure neither Zookeeper mode or KRaft mode.
+  **IMPORTANT**: Either KAFKA_CFG_PROCESS_ROLES or KAFKA_CFG_ZOOKEEPER_CONNECT must be configured for Apache Kafka to be started.
+  The equivalent configuration to the deprecated `KAFKA_ENABLE_KRAFT=true` option would be setting `KAFKA_CFG_PROCESS_ROLES=controller,broker`.
+  This change is especially aimed to support migrating from Zookeeper mode to KRaft mode. Once Zookeeper mode is fully removed we will default to a KRaft controller+broker mode.
+  Once Zookeeper mode is fully removed we will default to a KRaft controller+broker mode.
+* Support for broker-only and controller-only nodes in KRaft mode.
+  By setting KAFKA_CFG_PROCESS_ROLES, the Bitnami Apache Kafka container can be configured as a dedicated broker or controller node, or run both processes.
+* Added support for SASL and SSL protocols in Control plane (controller listener).
+  New variables have been added for this purpose:
+  * KAFKA_CONTROLLER_USER - Username for the controller communications when SASL is enabled.
+  * KAFKA_CONTROLLER_PASSWORD - Password for the controller communications when SASL is enabled.
+* Removed the `"${KAFKA_CONFIG}/server.properties"` vs `${KAFKA_CONFIG}/kraft/server.properties` when using Zookeeper of KRaft mode.
+  By default, Kafka will use `"${KAFKA_CONFIG}/server.properties"`, but the base file has been modified at build time to remove references to both modes.
+* Refactor JAAS settings to use the recommended approach `listener.name.${listener_lower}.${mechanism_name}.sasl.jaas.config`.
+  The `kafka_jaas.conf` will no longer be generated, although it will continue being loaded if mounted.
+  Please note that, according to Kafka documentation, the preference will be:
+  * Configuration property `listener.name.<listenerName>.<saslMechanism>.sasl.jaas.config` (Recommended)
+  * `<listenerName>.KafkaServer` section of JAAS file
+  * KafkaServer section of JAAS file
+* The KAFKA_INTER_BROKER_USER and KAFKA_INTER_BROKER_PASSWORD will no longer be valid users in other listeners when INTERNAL listener is provided or KAFKA_CFG_INTER_BROKER_LISTENER_NAME is provided.
+* Refactor `kafka_validate` function for consistency with both KRaft and Zookeeper modes and improving existing SASL and SSL validations.
+* Definitively remove deprecated legacy values:
+  * Alternative mount path `/opt/bitnami/kafka/conf` is no longer valid.
+  * Deprecation messages for KAFKA_PORT variable
+* Extended existing `BROKER_ID_COMMAND` to support KRaft, by adding `KAFKA_NODE_ID_COMMAND` and `KAFKA_CONTROLLER_QUORUM_VOTERS_COMMAND`.
+* The existing `BROKER_ID_COMMAND` variable has been deprecated and replaced by `KAFKA_BROKER_ID_COMMAND` for consistency. It will be removed in a future release, so please update your deployments to use the new variable instead.
+* Environment variable `ALLOW_PLAINTEXT_LISTENER` has been removed. This variable was used to ensure Kafka wasn't started without any unauthenticated listener unless explicitly set. Since this new release requires explicitly configuring listeners and listeners' security protocol map, we have decided to remove it.
+
 ### 3.4.0-debian-11-r23, 3.3.2-debian-11-r29 and 3.2.3-debian-11-r73
 
-* Apache Kafka is now configured using Kraft. You can disable this configuration with the `KAFKA_ENABLE_KRAFT=false` env var and by following the instructions in this guide.
+* Apache Kafka is now configured using KRaft. You can disable this configuration with the `KAFKA_ENABLE_KRAFT=false` env var and by following the instructions in this guide.
 
 ### 3.0.0-debian-10-r0
 
@@ -848,7 +1031,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 Bitnami
+Copyright &copy; 2023 VMware, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

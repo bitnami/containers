@@ -1,0 +1,7 @@
+binaries:
+  - harbor_jobservice
+  - yq
+directories:
+  - paths:
+      - /etc/jobservice
+root_dir: /opt/bitnami

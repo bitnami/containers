@@ -1,0 +1,29 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+########################
+# Test coverage for apache-libphp package
+# Needed vars:
+# - None
+########################
+command:
+  # Check explicitly enabled and disabled modules
+  check-apache-libphp-loaded-modules:
+    exec: apachectl -M
+    exit-status: 0
+    stdout:
+      - "php_module"
+      - "mpm_prefork_module"
+      - "!mpm_event_module"
+file:
+  /opt/bitnami/apache/conf/httpd.conf:
+    exists: true
+    filetype: file
+    contains:
+      - "Include \"/opt/bitnami/apache/conf/bitnami/php.conf\""
+  /opt/bitnami/apache/conf/bitnami/php.conf:
+    exists: true
+    filetype: file
+    contains:
+      - "AddType application/x-httpd-php .php"
+      - "DirectoryIndex index.html index.htm index.php"

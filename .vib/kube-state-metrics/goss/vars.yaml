@@ -1,0 +1,6 @@
+binaries:
+  - kube-state-metrics
+root_dir: /opt/bitnami
+version:
+  bin_name: kube-state-metrics
+  flag: version

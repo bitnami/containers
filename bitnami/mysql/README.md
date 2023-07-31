@@ -31,6 +31,8 @@ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
+Looking to use MySQL in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
 ## How to deploy MySQL in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami MySQL Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/mysql).
@@ -302,6 +304,7 @@ A **zero downtime** MySQL master-slave [replication](https://dev.mysql.com/doc/r
 * `MYSQL_MASTER_PORT_NUMBER`: Server port of the replication master (slave parameter). Defaults to `3306`.
 * `MYSQL_MASTER_ROOT_USER`: User on replication master with access to `MYSQL_DATABASE` (slave parameter). Defaults to `root`
 * `MYSQL_MASTER_ROOT_PASSWORD`: Password of user on replication master with access to `MYSQL_DATABASE` (slave parameter). No defaults.
+* `MYSQL_MASTER_DELAY`: The database replication delay (slave parameter). Defaults to `0`.
 
 In a replication cluster you can have one master and zero or more slaves. When replication is enabled the master node is in read-write mode, while the slaves are in read-only mode. For best performance its advisable to limit the reads to the slaves.
 
@@ -521,10 +524,31 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 
 ### Slow query logs
 
-By default MySQL doesn't enable [slow query log](https://dev.mysql.com/doc/refman/8.0/en/slow-query-log.html) to record the SQL queries that take a long time to perform. You can modify these settings using the following environment variables:
+By default MySQL doesn't enable [slow query log](https://dev.mysql.com/doc/refman/en/slow-query-log.html) to record the SQL queries that take a long time to perform. You can modify these settings using the following environment variables:
 
 * `MYSQL_ENABLE_SLOW_QUERY`: Whether to enable slow query logs. Default: `0`
 * `MYSQL_LONG_QUERY_TIME`: How much time, in seconds, defines a slow query. Default: `10.0`
+
+Slow queries information is logged to the `<data-dir>/<hostname>-slow.log` file by default, and you can easily check it with the `mysqldumpslow` tool ([link to docs](https://dev.mysql.com/doc/refman/en/mysqldumpslow.html)):
+
+```console
+$ docker run -d -e MYSQL_ENABLE_SLOW_QUERY=1 -e ALLOW_EMPTY_PASSWORD=yes --name my-mysql-container bitnami/mysql
+# wait a bit for the initialization process...
+$ docker exec -it my-mysql-container mysqldumpslow
+Reading mysql slow query log from /bitnami/mysql/data/<hostname>-slow.log
+Count: 1  Time=0.01s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  GRANT ALL PRIVILEGES ON *.* TO 'S'@'S' WITH GRANT OPTION
+
+Count: 1  Time=0.01s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  CREATE USER 'S'@'S'
+
+Count: 1  Time=0.01s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  DELETE FROM mysql.user WHERE user not in ('S','S')
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  flush privileges
+(...)
+```
 
 ### Slow filesystems
 
@@ -645,7 +669,7 @@ If you encountered a problem running this container, you can file an [issue](htt
 
 ## License
 
-Copyright &copy; 2023 Bitnami
+Copyright &copy; 2023 VMware, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

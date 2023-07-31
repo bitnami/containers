@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 
 useradd -ms /bin/bash bitnami
 mkdir -p /opt/bitnami

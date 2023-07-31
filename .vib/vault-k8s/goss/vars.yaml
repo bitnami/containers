@@ -1,0 +1,6 @@
+binaries:
+  - vault-k8s
+root_dir: /opt/bitnami
+version:
+  bin_name: vault-k8s
+  flag: version

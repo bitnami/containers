@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 #
 # Bitnami MySQL Client library
 
@@ -150,6 +152,8 @@ EOF
 }
 
 #!/bin/bash
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 #
 # Library for mysql common
 
@@ -239,7 +243,8 @@ mysql_execute_print_output() {
     if [[ -f "$DB_CONF_FILE" ]]; then
         args+=("--defaults-file=${DB_CONF_FILE}")
     fi
-    args+=("-N" "-u" "$user" "$db")
+    args+=("-N" "-u" "$user")
+    [[ -n "$db" ]] && args+=("$db")
     [[ -n "$pass" ]] && args+=("-p$pass")
     [[ "${#opts[@]}" -gt 0 ]] && args+=("${opts[@]}")
     [[ "${#extra_opts[@]}" -gt 0 ]] && args+=("${extra_opts[@]}")
@@ -446,6 +451,11 @@ mysql_stop() {
 mysql_install_db() {
     local command="${DB_BIN_DIR}/mysql_install_db"
     local -a args=("--defaults-file=${DB_CONF_FILE}" "--basedir=${DB_BASE_DIR}" "--datadir=${DB_DATA_DIR}")
+
+    # Add flags specified via the 'DB_EXTRA_FLAGS' environment variable
+    read -r -a db_extra_flags <<< "$(mysql_extra_flags)"
+    [[ "${#db_extra_flags[@]}" -gt 0 ]] && args+=("${db_extra_flags[@]}")
+
     am_i_root && args=("${args[@]}" "--user=$DB_DAEMON_USER")
     if [[ "$DB_FLAVOR" = "mariadb" ]]; then
         args+=("--auth-root-authentication-method=normal")
@@ -488,7 +498,7 @@ mysql_upgrade() {
     else
         mysql_start_bg
         is_boolean_yes "${ROOT_AUTH_ENABLED:-false}" && args+=("-p$(get_master_env_var_value ROOT_PASSWORD)")
-        debug_execute "${DB_BIN_DIR}/mysql_upgrade" "${args[@]}" --force
+        debug_execute "${DB_BIN_DIR}/mysql_upgrade" "${args[@]}" || echo "This installation is already upgraded"
     fi
 }
 

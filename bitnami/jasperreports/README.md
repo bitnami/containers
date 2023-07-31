@@ -25,6 +25,8 @@ docker-compose up -d
 - All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 - Bitnami container images are released on a regular basis with the latest distribution packages available.
 
+Looking to use JasperReports in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+
 ## How to deploy JasperReports Server in Kubernetes?
 
 Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami JasperReports Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/jasperreports).
@@ -246,7 +248,7 @@ Available environment variables:
 
 - `JASPERREPORTS_USERNAME`: JasperReports application username. Default: **jasperadmin**
 - `JASPERREPORTS_PASSWORD`: JasperReports application password. Default: **bitnami**
-- `JASPERREPORTS_EMAIL`: JasperReports application email. Default: **user@example.com**
+- `JASPERREPORTS_EMAIL`: JasperReports application email. Default: **<user@example.com>**
 - `JASPERREPORTS_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. This is necessary in case you use a database that already has JasperReports data. Default: **no**
 
 #### Database connection configuration
@@ -480,14 +482,6 @@ We'd love for you to contribute to this container. You can request new features 
 
 If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
-### Community supported solution
-
-Please, note this asset is a community-supported solution. This means that the Bitnami team is not actively working on new features/improvements nor providing support through GitHub Issues. Any new issue will stay open for 20 days to allow the community to contribute, after 15 days without activity the issue will be marked as stale being closed after 5 days.
-
-The Bitnami team will review any PR that is created, feel free to create a PR if you find any issue or want to implement a new feature.
-
-New versions and releases cadence are not going to be affected. Once a new version is released in the upstream project, the Bitnami container image will be updated to use the latest version, supporting the different branches supported by the upstream project as usual.
-
 ## Notable Changes
 
 ## 7.8.0-debian-10-r275
@@ -502,7 +496,7 @@ New versions and releases cadence are not going to be affected. Once a new versi
 
 ## License
 
-Copyright &copy; 2023 Bitnami
+Copyright &copy; 2023 VMware, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

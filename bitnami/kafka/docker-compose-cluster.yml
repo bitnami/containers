@@ -1,8 +1,11 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 version: "2"
 
 services:
   kafka-0:
-    image: docker.io/bitnami/kafka:3.4
+    image: docker.io/bitnami/kafka:3.5
     ports:
       - "9092"
     environment:
@@ -13,7 +16,7 @@ services:
     volumes:
       - kafka_0_data:/bitnami/kafka
   kafka-1:
-    image: docker.io/bitnami/kafka:3.4
+    image: docker.io/bitnami/kafka:3.5
     ports:
       - "9092"
     environment:
@@ -24,7 +27,7 @@ services:
     volumes:
       - kafka_1_data:/bitnami/kafka
   kafka-2:
-    image: docker.io/bitnami/kafka:3.4
+    image: docker.io/bitnami/kafka:3.5
     ports:
       - "9092"
     environment:

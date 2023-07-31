@@ -1,0 +1,10 @@
+binaries:
+  - loki
+  - logcli
+root_dir: /opt/bitnami
+version:
+  bin_name: loki
+  flag: --version
+directories:
+  - paths:
+    - /opt/bitnami/grafana-loki/bin

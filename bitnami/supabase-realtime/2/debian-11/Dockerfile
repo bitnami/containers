@@ -1,16 +1,19 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 FROM docker.io/bitnami/minideb:bullseye
 
 ARG TARGETARCH
 
-LABEL com.vmware.cp.artifact.flavor="sha256:109c7d51bd69bb6b3df71017440c1ea0699454f81fe188056c083f0b57c96ea6" \
+LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-05-03T00:08:34Z" \
+      org.opencontainers.image.created="2023-07-28T20:52:14Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.13.0-debian-11-r1" \
+      org.opencontainers.image.ref.name="2.19.1-debian-11-r4" \
       org.opencontainers.image.title="supabase-realtime" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.13.0"
+      org.opencontainers.image.version="2.19.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,7 +26,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libgcc-s1 libssl1.1 libstdc++6 libtinfo6 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "supabase-realtime-2.13.0-0-linux-${OS_ARCH}-debian-11" \
+      "supabase-realtime-2.19.1-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -40,7 +43,7 @@ RUN apt-get autoremove --purge -y curl && \
 RUN useradd -r -u 1001 -g root supabase-realtime
 RUN chmod g+rwX -R /opt/bitnami/supabase-realtime/lib/tzdata-*/priv
 
-ENV APP_VERSION="2.13.0" \
+ENV APP_VERSION="2.19.1" \
     BITNAMI_APP_NAME="supabase-realtime" \
     PATH="/opt/bitnami/supabase-realtime/bin:$PATH"
 
