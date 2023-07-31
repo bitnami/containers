@@ -217,6 +217,8 @@ EOF
         persist_app "$app_name" "$MATOMO_DATA_TO_PERSIST"
     else
         info "Persisted Matomo installation detected"
+        info "Updating Matomo files in persisted data"
+        rsync -a "$MATOMO_BASE_DIR"/* "$MATOMO_VOLUME_DIR" --exclude "$(realpath --relative-to="$MATOMO_BASE_DIR" "$MATOMO_CONF_FILE")"
         info "Restoring Matomo installation"
         restore_persisted_app "$app_name" "$MATOMO_DATA_TO_PERSIST"
         info "Trying to connect to the database server"
