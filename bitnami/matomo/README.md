@@ -523,6 +523,10 @@ volumes:
 
 ## Notable Changes
 
+## 4.15.0-debian-11-r20
+
+From this version on, all Matomo files are persisted (MATOMO_DATA_TO_PERSIST env var). During the upgrade process, they will be replaced (except the config.ini.php file) as suggested in [the official documentation](https://matomo.org/faq/on-premise/update-matomo/#the-manual-three-step-update)
+
 ### 3.14.1-debian-10-r82
 
 * The size of the container image has been decreased.
