@@ -15,13 +15,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.2.8-3"
+        "version": "8.2.9-0"
     },
     "matomo": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.15.0-2"
+        "version": "4.15.1-0"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -33,7 +33,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.2.8-3"
+        "version": "8.2.9-0"
     },
     "render-template": {
         "arch": "amd64",
