@@ -19,39 +19,42 @@ set -o pipefail
 
 # Map Kafka environment variables
 kafka_create_alias_environment_variables
-if [[ -z "${KAFKA_CFG_BROKER_ID:-}" ]]; then
-    if [[ -n "${BROKER_ID_COMMAND:-}" ]]; then
-        KAFKA_CFG_BROKER_ID="$(eval "${BROKER_ID_COMMAND:-}")"
-        export KAFKA_CFG_BROKER_ID
-    elif ! is_boolean_yes "$KAFKA_ENABLE_KRAFT"; then
-        # By default auto allocate broker ID unless KRaft is enabled
-        export KAFKA_CFG_BROKER_ID=-1
-    fi
-fi
 
-# Set the default tuststore locations
+# Dinamically set node.id/broker.id/controller.quorum.voters if the _COMMAND environment variable is set
+kafka_dynamic_environment_variables
+
+# Set the default tuststore locations before validation
 kafka_configure_default_truststore_locations
-# Ensure Kafka environment variables are valid
-kafka_validate
 # Ensure Kafka user and group exist when running as 'root'
-if am_i_root; then
-    ensure_user_exists "$KAFKA_DAEMON_USER" --group "$KAFKA_DAEMON_GROUP"
-    KAFKA_OWNERSHIP_USER="$KAFKA_DAEMON_USER"
-else
-    KAFKA_OWNERSHIP_USER=""
-fi
+am_i_root && ensure_user_exists "$KAFKA_DAEMON_USER" --group "$KAFKA_DAEMON_GROUP"
 # Ensure directories used by Kafka exist and have proper ownership and permissions
 for dir in "$KAFKA_LOG_DIR" "$KAFKA_CONF_DIR" "$KAFKA_MOUNTED_CONF_DIR" "$KAFKA_VOLUME_DIR" "$KAFKA_DATA_DIR"; do
-    ensure_dir_exists "$dir" "$KAFKA_OWNERSHIP_USER"
+    if am_i_root; then
+        ensure_dir_exists "$dir" "$KAFKA_DAEMON_USER" "$KAFKA_DAEMON_GROUP"
+    else
+        ensure_dir_exists "$dir"
+    fi
 done
 
-# shellcheck disable=SC2148
+# Kafka validation, skipped if server.properties was mounted at either $KAFKA_MOUNTED_CONF_DIR or $KAFKA_CONF_DIR
+[[ ! -f "${KAFKA_MOUNTED_CONF_DIR}/server.properties" && ! -f "$KAFKA_CONF_FILE" ]] && kafka_validate
+# Kafka initialization, skipped if server.properties was mounted at $KAFKA_CONF_DIR
+[[ ! -f "$KAFKA_CONF_FILE" ]] && kafka_initialize
 
-# Ensure Kafka is initialized
-kafka_initialize
-# If KRaft is enabled initialize
-if is_boolean_yes "$KAFKA_ENABLE_KRAFT"; then
-    kraft_initialize
+# Initialise KRaft metadata storage if process.roles configured
+if grep -q "^process.roles=" "$KAFKA_CONF_FILE" && ! is_boolean_yes "$KAFKA_SKIP_KRAFT_STORAGE_INIT" ; then
+    kafka_kraft_storage_initialize
+fi
+# Configure Zookeeper SCRAM users
+if is_boolean_yes "${KAFKA_ZOOKEEPER_BOOTSTRAP_SCRAM_USERS:-}"; then
+    kafka_zookeeper_create_sasl_scram_users
+fi
+# KRaft controllers may get stuck starting when the controller quorum voters are changed.
+# Workaround: Remove quorum-state file when scaling up/down controllers (Waiting proposal KIP-853)
+# https://cwiki.apache.org/confluence/display/KAFKA/KIP-853%3A+KRaft+Voter+Changes
+if [[ -f "${KAFKA_DATA_DIR}/__cluster_metadata-0/quorum-state" ]] && grep -q "^controller.quorum.voters=" "$KAFKA_CONF_FILE" && kafka_kraft_quorum_voters_changed; then
+    warn "Detected inconsitences between controller.quorum.voters and quorum-state, removing it..."
+    rm -f "${KAFKA_DATA_DIR}/__cluster_metadata-0/quorum-state"
 fi
 # Ensure custom initialization scripts are executed
 kafka_custom_init_scripts
