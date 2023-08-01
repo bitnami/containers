@@ -85,7 +85,7 @@ Let's take a look at an example and try to understand it!
 
 This guide will focus on the `verify` phase section, of which there are some things to remark on:
 
-* For the testing of containers, VIB will take the built container in the previous `package` phase and include it in a basic Helm chart template composed of a deployment and service template. 
+* For the testing of containers, VIB will take the container built in the previous `package` phase and include it in a basic Helm chart template composed of a deployment and service template.
 
 * VIB does only allow to modify the `ENTRYPOINT/CMD` of the image (through `runtime_parameters`). Consequently, this both simplifies and limits the configurability of the template chart and container image tested underneath.
 
@@ -93,7 +93,7 @@ This guide will focus on the `verify` phase section, of which there are some thi
 
 ### vib-verify.json vs vib-publish.json
 
-Going back to what we explained in the introduction, two different events will trigger the test's execution. The following two files are associated with those events respectively:
+Going back to what we explained in the introduction, two different events will trigger the tests' execution. The following two files are associated with those events respectively:
 
 * The `vib-verify.json` pipeline definition file will be used to verify the changes proposed in a PR.
 * The `vib-publish.json` file will instead define the pipeline launched when the proposed changes are merged to `main`.
@@ -225,7 +225,7 @@ There are instances where it is not needed to create custom tests for a given ap
 Not every suite will be composed of the same tests, as it will depend on the type of application, its Dockerfile, and the used compilation/configuration logic. The list below details each pillar that should be checked when creating a test suite as well as when to use some of the most common templates:
 
 * Dockerfile check:
-  * Does it include nami modules which contain binaries? If so, use the `check-binaries.yaml` GOSS template.
+  * Does it include bitnami components which contain binaries? If so, use the `check-binaries.yaml` GOSS template.
   * Does it include the `ca-certificates` package? If so, use the `check-ca-certificates.yaml` template.
 * Compilation logic check:
   * Are there files or directories created and/or with permission changes? If so, use the `check-directories.yaml` and/or `check-files.yaml` templates.
