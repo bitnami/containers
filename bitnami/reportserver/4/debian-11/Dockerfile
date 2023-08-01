@@ -8,10 +8,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-07-27T13:29:26Z" \
+      org.opencontainers.image.created="2023-07-31T18:39:54Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.6.1-6096-debian-11-r5" \
+      org.opencontainers.image.ref.name="4.6.1-6096-debian-11-r6" \
       org.opencontainers.image.title="reportserver" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="4.6.1-6096"
@@ -27,7 +27,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libaudit1 libcap-ng0 libgcc-s1 libicu67 liblzma5 libncurses6 libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 procps xmlstarlet zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-17.0.8-7-1-linux-${OS_ARCH}-debian-11" \
+      "java-17.0.8-7-2-linux-${OS_ARCH}-debian-11" \
       "tomcat-9.0.78-1-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.11.4-1-linux-${OS_ARCH}-debian-11" \
       "reportserver-4.6.1-6096-1-linux-${OS_ARCH}-debian-11" \
