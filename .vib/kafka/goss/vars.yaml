@@ -16,7 +16,7 @@ directories:
       - /opt/bitnami/kafka/logs
 files:
   - paths:
-      - /opt/bitnami/kafka/config/server.properties
+      - /opt/bitnami/kafka/config/server.properties.original
 root_dir: /opt/bitnami
 version:
   bin_name: kafka-topics.sh
