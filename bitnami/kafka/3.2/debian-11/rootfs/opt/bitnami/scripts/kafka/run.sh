@@ -16,22 +16,17 @@ set -o pipefail
 # Load Kafka environment variables
 . /opt/bitnami/scripts/kafka-env.sh
 
-if [[ "${KAFKA_CFG_LISTENERS:-}" =~ SASL ]] || [[ "${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP:-}" =~ SASL ]] || [[ "${KAFKA_ZOOKEEPER_PROTOCOL:-}" =~ SASL ]]; then
+if [[ -f "${KAFKA_CONF_DIR}/kafka_jaas.conf" ]]; then
     export KAFKA_OPTS="-Djava.security.auth.login.config=${KAFKA_CONF_DIR}/kafka_jaas.conf"
 fi
 
-if [[ "${KAFKA_ZOOKEEPER_PROTOCOL:-}" =~ SSL ]]; then
-    ZOOKEEPER_SSL_CONFIG=$(zookeeper_get_tls_config)
-    export KAFKA_OPTS="$KAFKA_OPTS $ZOOKEEPER_SSL_CONFIG"
-fi
-
-flags=("$(kafka_get_conf_file)")
-[[ -z "${KAFKA_EXTRA_FLAGS:-}" ]] || flags=("${flags[@]}" "${KAFKA_EXTRA_FLAGS[@]}")
-START_COMMAND=("$KAFKA_HOME/bin/kafka-server-start.sh" "${flags[@]}" "$@")
+cmd="$KAFKA_HOME/bin/kafka-server-start.sh"
+args=("$KAFKA_CONF_FILE")
+! is_empty_value "${KAFKA_EXTRA_FLAGS:-}" && args=("${args[@]}" "${KAFKA_EXTRA_FLAGS[@]}")
 
 info "** Starting Kafka **"
 if am_i_root; then
-    exec_as_user "$KAFKA_DAEMON_USER" "${START_COMMAND[@]}"
+    exec_as_user "$KAFKA_DAEMON_USER" "$cmd" "${args[@]}" "$@"
 else
-    exec "${START_COMMAND[@]}"
+    exec "$cmd" "${args[@]}" "$@"
 fi
