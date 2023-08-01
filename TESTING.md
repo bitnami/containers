@@ -85,7 +85,9 @@ Let's take a look at an example and try to understand it!
 
 This guide will focus on the `verify` phase section, of which there are some things to remark on:
 
-* For the testing of containers, VIB will take the built container in the previous `package` phase and include it in a basic Helm chart template composed of a deployment and service template. Beware VIB will only be taking into account the docker image `ENTRYPOINT/CMD` command of the image. Consequently, this both simplifies and limits the configurability of the template chart and container image tested underneath.
+* For the testing of containers, VIB will take the built container in the previous `package` phase and include it in a basic Helm chart template composed of a deployment and service template. 
+
+* VIB does only allow to modify the `ENTRYPOINT/CMD` of the image (through `runtime_parameters`). Consequently, this both simplifies and limits the configurability of the template chart and container image tested underneath.
 
 * A container's testing phase will usually include a single `goss` testing action, followed by additional security-related actions.
 
@@ -96,7 +98,7 @@ Going back to what we explained in the introduction, two different events will t
 * The `vib-verify.json` pipeline definition file will be used to verify the changes proposed in a PR.
 * The `vib-publish.json` file will instead define the pipeline launched when the proposed changes are merged to `main`.
 
-Both files define what VIB should do when they are triggered and thus tweaking the files allows to define different action policies depending on the event that was fired. Nevertheless, it was decided that the verification process should be identical in both cases. Therefore, the `verify` section in `vib-verify.json` and `vib-verify.json` files must coincide.
+Both files define what VIB should do when they are triggered and thus tweaking them allows to define different action policies depending on the event that was fired. Nevertheless, it was decided that the verification process should be identical in both cases. Therefore, the `verify` section in `vib-verify.json` and `vib-verify.json` files must coincide.
 
 > NOTE: Some containers with per-branch ARM support use separate `vib-publish.json` pipelines for the said branches. Remember to replicate any other changes on those pipelines.
 
@@ -118,7 +120,7 @@ Something of note is the equality of scope for the whole container catalog. Thou
 
 ### Runtime parameters
 
-As of now, and linking with the scope definition we saw previously, the `runtime_parameters` field is only used to "stop" a container initialization logic after its `postunpack` has been executed. The `runtime_parameters` value is a base64 encoded string going by `command: ["tail", "-f", "/dev/null"]` and is the same for every VIB pipeline defined in `bitnami/containers`.
+As of now, and linking with the scope definition we saw previously, the `runtime_parameters` field is only used to "stop" a container's initialization logic after its `postunpack` has been executed. The `runtime_parameters` value is a base64 encoded string going by `command: ["tail", "-f", "/dev/null"]` and is the same for every VIB pipeline defined in `bitnami/containers`.
 
 ## Generic acceptance criteria
 
@@ -224,7 +226,7 @@ Not every suite will be composed of the same tests, as it will depend on the typ
 
 * Dockerfile check:
   * Does it include nami modules which contain binaries? If so, use the `check-binaries.yaml` GOSS template.
-  * Does it include the ca-certificates package? If so, use the `check-ca-certificates.yaml` template.
+  * Does it include the `ca-certificates` package? If so, use the `check-ca-certificates.yaml` template.
 * Compilation logic check:
   * Are there files or directories created and/or with permission changes? If so, use the `check-directories.yaml` and/or `check-files.yaml` templates.
   * Are there additional files/dirs modifications? If so, use custom filesystem tests.
@@ -267,7 +269,7 @@ Not every suite will be composed of the same tests, as it will depend on the typ
 
 Sometimes it is of interest to run the tests locally, for example during development. Though there may be different approaches, you may follow the steps below to execute the tests locally:
 
-1. Download the [GOSS binary for Linux AMD64](https://github.com/goss-org/goss/releases/)
+1. Download the [GOSS binary for Linux](https://github.com/goss-org/goss/releases/)
 
 2. Add the binary and test files to the tested container as volumes
 
