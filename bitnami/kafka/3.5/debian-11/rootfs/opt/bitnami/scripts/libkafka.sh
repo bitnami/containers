@@ -978,7 +978,13 @@ kafka_initialize() {
             listener_lower="$(echo "$listener" | tr '[:upper:]' '[:lower:]')"
 
             if [[ "$protocol" = "SSL" || "$protocol" = "SASL_SSL" ]]; then
-                kafka_server_conf_set "listener.name.${listener_lower}.ssl.client.auth" "$KAFKA_TLS_INTER_BROKER_AUTH"
+                if [[ "$listener" = "${KAFKA_CFG_INTER_BROKER_LISTENER_NAME:-INTERNAL}" ]]; then
+                    kafka_server_conf_set "listener.name.${listener_lower}.ssl.client.auth" "$KAFKA_TLS_INTER_BROKER_AUTH"
+                elif [[ "${KAFKA_CFG_CONTROLLER_LISTENER_NAMES:-CONTROLLER}" =~ $listener ]]; then
+                    kafka_server_conf_set "listener.name.${listener_lower}.ssl.client.auth" "$KAFKA_TLS_CONTROLLER_AUTH"
+                else
+                    kafka_server_conf_set "listener.name.${listener_lower}.ssl.client.auth" "$KAFKA_TLS_CLIENT_AUTH"
+                fi
             fi
             if [[ "$protocol" = "SASL_PLAINTEXT" || "$protocol" = "SASL_SSL" ]]; then
                 local role=""
