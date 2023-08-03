@@ -666,10 +666,6 @@ etcd_initialize() {
                 export ETCD_INITIAL_CLUSTER_STATE=existing
             elif ! is_healthy_etcd_cluster; then
                 warn "Cluster not responding!"
-            fi
-            member_id="$(get_member_id)"
-            if ! is_healthy_etcd_cluster; then
-                warn "Cluster not responding!"
                 if is_boolean_yes "$ETCD_DISASTER_RECOVERY"; then
                     latest_snapshot_file="$(find /snapshots/ -maxdepth 1 -type f -name 'db-*' | sort | tail -n 1)"
                     if [[ "${latest_snapshot_file}" != "" ]]; then
