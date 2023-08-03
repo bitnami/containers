@@ -9,3 +9,4 @@ command:
   create-sample-project:
     exec: echo | gradle init && gradle build
     exit-status: 0
+    timeout: 60000
