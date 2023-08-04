@@ -103,7 +103,7 @@ codeigniter_initialize() {
             info "Configuring database credentials"
             codeigniter_conf_set "database.default.hostname" "$CODEIGNITER_DATABASE_HOST"
             codeigniter_conf_set "database.default.port" "$CODEIGNITER_DATABASE_PORT_NUMBER"
-            codeigniter_conf_set "database.default.database" "$CODEIGNITER_DATABASE_USER"
+            codeigniter_conf_set "database.default.database" "$CODEIGNITER_DATABASE_NAME"
             codeigniter_conf_set "database.default.username" "$CODEIGNITER_DATABASE_USER"
             codeigniter_conf_set "database.default.password" "$CODEIGNITER_DATABASE_PASSWORD"
         fi
