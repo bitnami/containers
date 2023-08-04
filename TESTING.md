@@ -11,8 +11,7 @@ In this section, we will discuss:
 
 * [Where to find the tests](#where-to-find-the-tests)
 * [VMware Image Builder (VIB)](#vmware-image-builder-vib)
-* [VIB pipeline files](#vib-pipeline-files)
-  * [vib-verify.json vs vib-publish.json](#vib-verifyjson-vs-vib-publishjson)
+* [VIB pipeline definition file](#vib-pipeline-definition-file)
 * [Testing strategy](#testing-strategy)
   * [Defining the scope](#defining-the-scope)
   * [Runtime parameters](#runtime-parameters)
@@ -26,15 +25,15 @@ In this section, we will discuss:
 
 ## Where to find the tests
 
-All the apps have an associated folder inside [/.vib](https://github.com/bitnami/containers/tree/main/.vib) with their custom tests implementation (the `goss` subfolder) and files containing their test plans (`vib-verify.json` and `vib-publish.json`).
+All the apps have an associated folder inside [/.vib](https://github.com/bitnami/containers/tree/main/.vib) with their custom tests implementation (the `goss` subfolder) and the file containing their test plan (`vib-verify.json`).
 
 ## VMware Image Builder (VIB)
 
 The service that powers the verification of the thousands of monthly tests performed in the repository is VMware Image Builder. [VMware Image Builder](https://tanzu.vmware.com/content/blog/how-bitnami-uses-vmware-image-builder-to-deploy-apps) (VIB) is a platform-agnostic, API-first modular service that allows large enterprises and independent software vendors to automate the packaging, **verification**, and publishing processes of software artifacts on any platform and cloud.
 
-## VIB pipeline files
+## VIB pipeline definition file
 
-The CI/CD pipelines in the repository are configured to trigger VIB when an app needs to be verified. But as every application is different, VIB needs to be supplied with a definition of the set of actions and configurations that precisely describe the verification process to perform in each case. This is the role of the aforementioned `vib-verify.json` and `vib-publish.json` files, which every app defines and can be found alongside its tests inside the `/.vib` folder.
+The CI pipeline in this repository will be used to verify the changes proposed in a PR and triggered by any new commits once said PR is ready to be verified. But as every application is different, VIB needs to be supplied with a definition of the set of actions and configurations that precisely describe the verification process to perform in each case. This is the role of the aforementioned `vib-verify.json` file, which every app defines and can be found alongside its tests inside the `/.vib` folder. Keeping it simple, the `vib-verify.json` file defines what VIB should do.
 
 Let's take a look at an example and try to understand it!
 
@@ -91,16 +90,7 @@ This guide will focus on the `verify` phase section, of which there are some thi
 
 * A container's testing phase will usually include a single `goss` testing action, followed by additional security-related actions.
 
-### vib-verify.json vs vib-publish.json
-
-Going back to what we explained in the introduction, two different events will trigger the tests' execution. The following two files are associated with those events respectively:
-
-* The `vib-verify.json` pipeline definition file will be used to verify the changes proposed in a PR.
-* The `vib-publish.json` file will instead define the pipeline launched when the proposed changes are merged to `main`.
-
-Both files define what VIB should do when they are triggered and thus tweaking them allows to define different action policies depending on the event that was fired. Nevertheless, it was decided that the verification process should be identical in both cases. Therefore, the `verify` section in `vib-verify.json` and `vib-verify.json` files must coincide.
-
-> NOTE: Some containers with per-branch ARM support use separate `vib-publish.json` pipelines for the said branches. Remember to replicate any other changes on those pipelines.
+> NOTE: Some containers with per-branch ARM support use separate per-branch `vib-verify.json` pipelines. Remember to replicate changes performed on the main pipeline definition file to those pipelines.
 
 ## Testing strategy
 
