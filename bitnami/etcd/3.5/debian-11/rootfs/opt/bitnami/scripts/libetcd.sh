@@ -661,6 +661,7 @@ etcd_initialize() {
             debug_execute chmod -R 700 "$ETCD_DATA_DIR" || true
         fi
         if [[ ${#initial_members[@]} -gt 1 ]]; then
+            member_id="$(get_member_id)"
             if is_boolean_yes "$ETCD_DISABLE_PRESTOP"; then
                 info "The member will try to join the cluster by it's own"
                 export ETCD_INITIAL_CLUSTER_STATE=existing
