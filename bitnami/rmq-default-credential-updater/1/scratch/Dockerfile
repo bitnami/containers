@@ -14,7 +14,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "rmq-default-credential-updater-1.0.2-163-linux-${OS_ARCH}-debian-11" \
+      "rmq-default-credential-updater-1.0.2-164-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -36,10 +36,10 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:59c774543cd827c5e74f2cc55d77e9e923fdcfe2487c135bbb41d7709b51eef6" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-07-26T05:21:34Z" \
+      org.opencontainers.image.created="2023-08-04T17:54:33Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.0.2-scratch-r25" \
+      org.opencontainers.image.ref.name="1.0.2-scratch-r26" \
       org.opencontainers.image.title="rmq-default-credential-updater" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.0.2"
@@ -47,6 +47,9 @@ LABEL com.vmware.cp.artifact.flavor="sha256:59c774543cd827c5e74f2cc55d77e9e923fd
 COPY prebuildfs /
 COPY rootfs /
 COPY --from=builder /opt/bitnami/rmq-default-credential-updater/bin/default-user-credential-updater /default-user-credential-updater
+
+ENV APP_VERSION="1.0.2" \
+    BITNAMI_APP_NAME="rmq-default-credential-updater"
 
 USER 1001
 
