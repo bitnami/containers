@@ -1,11 +1,6 @@
 # Testing information
 
-At Bitnami, we are committed to ensuring the quality of the apps we deliver, and as such, tests play a fundamental role in the `bitnami/containers` repository. Bear in mind that every contribution to our containers is ultimately published to our container registries, where it is made available for the rest of the community to benefit from. Before this happens, different checks are required to succeed. More precisely, tests are run when:
-
-1. A new contribution (regardless of its author) is made through a GitHub Pull Request.
-2. Accepted changes are merged to the `main` branch, before their release.
-
-This strategy ensures that a set of changes must have succeeded twice before a new version is sent out to the public.
+At Bitnami, we are committed to ensuring the quality of the apps we deliver, and as such, tests play a fundamental role in the `bitnami/containers` repository. Bear in mind that every contribution to our containers is ultimately published to our container registries, where it is made available for the rest of the community to benefit from. Before this happens, different checks are required to succeed. More precisely, tests are run when a new contribution (regardless of its author) is made through a GitHub Pull Request.
 
 In this section, we will discuss:
 
@@ -136,7 +131,7 @@ For your test code PR to be accepted the following criteria must be fulfilled:
 
 [GOSS](https://github.com/aelsabbahy/goss/blob/master/docs/manual.md) is the framework used to implement integration tests and the only testing tool presently used in our VIB pipelines. It is the reference tool to use when tests require interaction with a specific pod, with its tests being executed from within the pod.
 
-For VIB to execute GOSS tests, the following block of code needs to be defined in the corresponding [VIB pipeline files](#vib-pipeline-files) (`/.vib/app/vib-{verify,publish}.json`).
+For VIB to execute GOSS tests, the following block of code needs to be defined in the corresponding [VIB pipeline definition file](#vib-pipeline-definition-file) (`/.vib/app/vib-verify.json`).
 
 > Values denoted withing dollar signs (`$$VALUE$$`) should be treated as placeholders
 
