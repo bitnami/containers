@@ -747,6 +747,7 @@ kafka_configure_ssl() {
         ! is_empty_value "${KAFKA_CERTIFICATE_PASSWORD:-}" && configure_both ssl.keystore.password "$KAFKA_CERTIFICATE_PASSWORD"
         ! is_empty_value "${KAFKA_CERTIFICATE_PASSWORD:-}" && configure_both ssl.truststore.password "$KAFKA_CERTIFICATE_PASSWORD"
     fi
+    true # Avoid the function to fail due to the check above
 }
 
 ########################
@@ -781,6 +782,7 @@ kafka_zookeeper_configure_tls() {
     ! is_empty_value "${kafka_zk_truststore_location:-}" && kafka_server_conf_set "zookeeper.ssl.trustStore.location" "${kafka_zk_truststore_location}"
     ! is_empty_value "${KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD:-}" && kafka_server_conf_set "zookeeper.ssl.trustStore.password" "${KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD}"
     ! is_empty_value "${KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME:-}" && kafka_server_conf_set "zookeeper.ssl.hostnameVerification" "${KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME}"
+    true # Avoid the function to fail due to the check above
 }
 
 ########################
