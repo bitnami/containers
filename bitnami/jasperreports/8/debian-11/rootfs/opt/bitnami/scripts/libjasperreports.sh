@@ -353,22 +353,6 @@ jasperreports_initialize() {
             jasperreports_run_install_scripts
             jasperreports_run_deployment_scripts
             jasperreports_configure_user
-
-            if ! is_empty_value "$JASPERREPORTS_SMTP_HOST"; then
-                # Fix that needs to be done after the installation on SMTP
-                # Source: https://github.com/bitnami/bitnami-docker-jasperreports/issues/49
-                # We need to use * in the XPath expressions because it is a namespaced XML but the namespace is not properly detected
-                # in regular XPath experssions with namespace
-                # Set mail.smtp.auth to true
-                xmlstarlet ed -L -u '//*[name()="prop" and @key="mail.smtp.auth"]' -v "true" "${JASPERREPORTS_BASE_DIR}/WEB-INF/applicationContext-report-scheduling.xml"
-                # Add a new prop node with mail.smtp.startls.enable=true
-                xmlstarlet ed -L --subnode '//*[name()="property" and @name="javaMailProperties"]/*[name()="props"]' --type elem -n "prop" -v "true" "${JASPERREPORTS_BASE_DIR}/WEB-INF/applicationContext-report-scheduling.xml"
-                xmlstarlet ed -L -i '//*[name()="prop" and not(@key)]' --type "attr" -n "key" -v "mail.smtp.starttls.enable" "${JASPERREPORTS_BASE_DIR}/WEB-INF/applicationContext-report-scheduling.xml"
-                # Add a new prop node with mail.smtp.ssl.protocols=TLSv1.2 (see issue [#112](https://github.com/bitnami/bitnami-docker-jasperreports/#112)).
-                xmlstarlet ed -L --subnode '//*[name()="property" and @name="javaMailProperties"]/*[name()="props"]' --type elem -n "prop" -v "TLSv1.2" "${JASPERREPORTS_BASE_DIR}/WEB-INF/applicationContext-report-scheduling.xml"
-                xmlstarlet ed -L -i '//*[name()="prop" and not(@key)]' --type "attr" -n "key" -v "mail.smtp.ssl.protocols" "${JASPERREPORTS_BASE_DIR}/WEB-INF/applicationContext-report-scheduling.xml"
-            fi
-
         else
             info "An already initialized JasperReports database was provided, configuration will be skipped"
             jasperreports_run_upgrade_scripts
@@ -402,6 +386,21 @@ jasperreports_initialize() {
         [[ "$db_type" = "postgresql" ]] && jasperreports_wait_for_postgresql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
         jasperreports_run_upgrade_scripts
         jasperreports_run_deployment_scripts
+    fi
+
+    if ! is_empty_value "$JASPERREPORTS_SMTP_HOST"; then
+        # Fix that needs to be done after the installation on SMTP
+        # Source: https://github.com/bitnami/bitnami-docker-jasperreports/issues/49
+        # We need to use * in the XPath expressions because it is a namespaced XML but the namespace is not properly detected
+        # in regular XPath experssions with namespace
+        # Set mail.smtp.auth to true
+        xmlstarlet ed -L -u '//*[name()="prop" and @key="mail.smtp.auth"]' -v "true" "${JASPERREPORTS_BASE_DIR}/WEB-INF/applicationContext-report-scheduling.xml"
+        # Add a new prop node with mail.smtp.startls.enable=true
+        xmlstarlet ed -L --subnode '//*[name()="property" and @name="javaMailProperties"]/*[name()="props"]' --type elem -n "prop" -v "true" "${JASPERREPORTS_BASE_DIR}/WEB-INF/applicationContext-report-scheduling.xml"
+        xmlstarlet ed -L -i '//*[name()="prop" and not(@key)]' --type "attr" -n "key" -v "mail.smtp.starttls.enable" "${JASPERREPORTS_BASE_DIR}/WEB-INF/applicationContext-report-scheduling.xml"
+        # Add a new prop node with mail.smtp.ssl.protocols=TLSv1.2 (see issue [#112](https://github.com/bitnami/bitnami-docker-jasperreports/#112)).
+        xmlstarlet ed -L --subnode '//*[name()="property" and @name="javaMailProperties"]/*[name()="props"]' --type elem -n "prop" -v "TLSv1.2" "${JASPERREPORTS_BASE_DIR}/WEB-INF/applicationContext-report-scheduling.xml"
+        xmlstarlet ed -L -i '//*[name()="prop" and not(@key)]' --type "attr" -n "key" -v "mail.smtp.ssl.protocols" "${JASPERREPORTS_BASE_DIR}/WEB-INF/applicationContext-report-scheduling.xml"
     fi
 
     # Disable JNDI
