@@ -85,7 +85,7 @@ mongodb_sharded_mongod_initialize() {
 
     mongodb_set_listen_all_conf
     if [[ "$MONGODB_SHARDING_MODE" = "shardsvr" ]] && [[ "$MONGODB_REPLICA_SET_MODE" = "primary" ]]; then
-        mongodb_wait_for_node "$MONGODB_MONGOS_HOST" "$MONGODB_MONGOS_PORT_NUMBER" "root" "$MONGODB_ROOT_PASSWORD"
+        mongodb_wait_for_node "$MONGODB_MONGOS_HOST" "$MONGODB_MONGOS_PORT_NUMBER" "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD"
         if ! mongodb_sharded_shard_currently_in_cluster "$MONGODB_REPLICA_SET_NAME"; then
             mongodb_sharded_join_shard_cluster
         else
@@ -306,7 +306,7 @@ mongodb_sharded_is_svr_primary_reconfigured() {
     local result
 
     result=$(
-        mongodb_execute_print_output "root" "$MONGODB_ROOT_PASSWORD" "admin" "$node" "$MONGODB_PORT_NUMBER" <<EOF
+        mongodb_execute_print_output "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD" "admin" "$node" "$MONGODB_PORT_NUMBER" <<EOF
 rs.reconfig({"_id":"$MONGODB_REPLICA_SET_NAME","configsvr": $([[ "$MONGODB_SHARDING_MODE" = "configsvr" ]] && echo "true" || echo "false"),"protocolVersion":1,"members":[{"_id":0,"host":"$node:$MONGODB_PORT_NUMBER","priority":5}]})
 EOF
     )
@@ -352,7 +352,7 @@ mongodb_sharded_mongos_initialize() {
     mongodb_set_net_conf "$MONGODB_MONGOS_CONF_FILE"
     mongodb_set_log_conf "$MONGODB_MONGOS_CONF_FILE"
     mongodb_sharded_set_cfg_server_host_conf "$MONGODB_MONGOS_CONF_FILE"
-    mongodb_wait_for_primary_node "$MONGODB_CFG_PRIMARY_HOST" "$MONGODB_CFG_PRIMARY_PORT_NUMBER" "root" "$MONGODB_ROOT_PASSWORD"
+    mongodb_wait_for_primary_node "$MONGODB_CFG_PRIMARY_HOST" "$MONGODB_CFG_PRIMARY_PORT_NUMBER" "$MONGODB_ROOT_USER" "$MONGODB_ROOT_PASSWORD"
     mongodb_set_listen_all_conf "$MONGODB_MONGOS_CONF_FILE"
 }
 
