@@ -963,7 +963,7 @@ kafka_initialize() {
                     fi
                 fi
                 if ! is_empty_value "${KAFKA_CFG_ZOOKEEPER_CONNECT:-}"; then
-                    export KAFKA_KRAFT_BOOTSTRAP_SCRAM_USERS="true"
+                    export KAFKA_ZOOKEEPER_BOOTSTRAP_SCRAM_USERS="true"
                 fi
             fi
             kafka_server_conf_set sasl.enabled.mechanisms "$KAFKA_CFG_SASL_ENABLED_MECHANISMS"
