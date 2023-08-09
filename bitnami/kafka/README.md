@@ -188,9 +188,9 @@ The configuration can easily be setup with the Bitnami Apache Kafka Docker image
 * `KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD`: Apache Kafka Zookeeper truststore file password. No defaults.
 * `KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME`: Verify Zookeeper hostname on TLS certificates. Defaults: **true**.
 * `KAFKA_ZOOKEEPER_TLS_TYPE`: Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`. Defaults: **JKS**.
-* `KAFKA_CFG_LISTENERS`: Kafka `listeners` configuration override. Default: **PLAINTEXT://:9092,CONTROLLER://:9093**
-* `KAFKA_CFG_ADVERTISED_LISTENERS`: Kafka `advertised.listeners` configuration override. Default: **PLAINTEXT://:9092**
-* `KAFKA_CFG_SASL_ENABLED_MECHANISMS`: Allowed mechanism when using SASL either for clients, inter broker, or zookeeper comunications. Allowed values: `PLAIN`, `SCRAM-SHA-256`, `SCRAM-SHA-512` or a comma separated combination of those values. Default: **PLAIN,SCRAM-SHA-256,SCRAM-SHA-512**. NOTE: KRaft mode does not yet support SCRAM mechanisms, so this list will be automatically reduced to only `PLAIN` SASL mechanism.
+* `KAFKA_CFG_LISTENERS`: Kafka `listeners` configuration override. No defaults.
+* `KAFKA_CFG_ADVERTISED_LISTENERS`: Kafka `advertised.listeners` configuration override. No defaults.
+* `KAFKA_CFG_SASL_ENABLED_MECHANISMS`: Allowed mechanism when using SASL either for clients, inter broker, or zookeeper comunications. Allowed values: `PLAIN`, `SCRAM-SHA-256`, `SCRAM-SHA-512` or a comma separated combination of those values. Default: **PLAIN,SCRAM-SHA-256,SCRAM-SHA-512**. NOTE: KRaft <= 3.4 does not yet support SCRAM mechanisms, so this list will be automatically reduced to only `PLAIN` SASL mechanism.
 * `KAFKA_TLS_CLIENT_AUTH`: Configures kafka brokers to request client authentication. Allowed values: `required`, `requested`, `none`. Defaults: **required**.
 * `KAFKA_TLS_INTER_BROKER_AUTH`: Configures TLS authentication method for kafka inter-broker communications. Defaults: **KAFKA_TLS_CLIENT_AUTH**.
 * `KAFKA_TLS_CONTROLLER_AUTH`: Configures TLS authentication method for kafka control plane communications. Defaults: **KAFKA_TLS_CLIENT_AUTH**.
@@ -199,10 +199,10 @@ The configuration can easily be setup with the Bitnami Apache Kafka Docker image
 * `KAFKA_CLIENT_PASSWORDS`: Passwords for the users specified at`KAFKA_CLIENT_USERS`. Separated by commas. Default: **bitnami**
 * `KAFKA_CFG_MAX_PARTITION_FETCH_BYTES`:  The maximum amount of data per-partition the server will return. No defaults.
 * `KAFKA_CFG_MAX_REQUEST_SIZE`: The maximum size of a request in bytes. No defaults.
-* `KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL`: SASL mechanism to use for inter broker communications. No defaults. NOTE: KRaft mode does not yet support SCRAM mechanisms, so the only supported SASL mechanism in KRaft mode would be `PLAIN`.
+* `KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL`: SASL mechanism to use for inter broker communications. No defaults. NOTE: KRaft <= 3.4 does not yet support SCRAM mechanisms, so the only supported SASL mechanism in KRaft mode would be `PLAIN`.
 * `KAFKA_INTER_BROKER_USER`: Apache Kafka inter broker communication user. Default: **user**.
 * `KAFKA_INTER_BROKER_PASSWORD`: Apache Kafka inter broker communication password. Default: **bitnami**.
-* `KAFKA_CFG_SASL_MECHANISM_CONTROLLER_PROTOCOL`: SASL mechanism to use for controllers communications. No defaults. NOTE: KRaft mode does not yet support SCRAM mechanisms, so the only supported SASL mechanism in KRaft mode would be `PLAIN`.
+* `KAFKA_CFG_SASL_MECHANISM_CONTROLLER_PROTOCOL`: SASL mechanism to use for controllers communications. No defaults. NOTE: KRaft <= 3.4 does not yet support SCRAM mechanisms, so the only supported SASL mechanism in KRaft mode would be `PLAIN`.
 * `KAFKA_CONTROLLER_USER`: Apache Kafka controllers communication user. Default: **controller_user**.
 * `KAFKA_CONTROLLER_PASSWORD`: Apache Kafka controllers communication password. Default: **bitnami**.
 * `KAFKA_CFG_PROCESS_ROLES`: Node roles when running in KRaft mode. No defaults.
@@ -447,7 +447,7 @@ When deploying a Apache Kafka cluster with multiple brokers, inter broker commun
 * `KAFKA_INTER_BROKER_USER`: Apache Kafka inter broker communication user.
 * `KAFKA_INTER_BROKER_PASSWORD`: Apache Kafka inter broker communication password.
 
-NOTE: When running in KRaft mode, KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL only supports `PLAIN` mechanism.
+NOTE: When running in KRaft mode, KAFKA_CFG_SASL_MECHANISM_INTER_BROKER_PROTOCOL only supports `PLAIN` mechanism in Kafka version <= 3.4.
 
 #### Control plane communications
 
