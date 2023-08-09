@@ -200,6 +200,7 @@ The following env vars are supported for this container:
 | `REDIS_IO_THREADS`                      | Number of threads to implement multithreading operations. Defaults to `1`.                                                                                                    |
 | `REDIS_IO_THREADS_DO_READS`             | Enables multithreading for read operations. Defaults to `false`.                                                                                                              |
 | `REDIS_RDB_POLICY`                      | Set this variable to enable RDB persistent storage RDB data synchronization strategy configuration example `900#1 300#10 60#1000` Defaults to disable RDB persistent storage. |
+| `REDIS_RDB_POLICY_DISABLED`             | If set to `yes` the container will skip the configuration of RDB policy ('save' setting) and rely on Redis(R) default. If `REDIS_RDB_POLICY` is provided, this will be ignored. Defaults to `no`.                                                |
 
 Once all the Redis(R) nodes are running you need to execute command like the following to initiate the cluster:
 
