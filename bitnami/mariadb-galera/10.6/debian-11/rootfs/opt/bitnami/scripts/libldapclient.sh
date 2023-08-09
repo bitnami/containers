@@ -39,7 +39,7 @@ EOF
         cat <<"EOF"
 export LDAP_NSLCD_GROUP="nslcd"
 EOF
-    elif [[ "$OS_FLAVOUR" =~ ^(centos|photon)-.*$ ]]; then
+    elif [[ "$OS_FLAVOUR" =~ ^(photon)-.*$ ]]; then
         cat <<"EOF"
 export LDAP_NSLCD_GROUP="ldap"
 EOF
@@ -59,7 +59,7 @@ ldap_openldap_config_path() {
     local openldap_config
     case "$OS_FLAVOUR" in
     debian-* | ubuntu-*) openldap_config=/etc/ldap/ldap.conf ;;
-    centos-* | photon-* | redhatubi-*) openldap_config=/etc/openldap/ldap.conf ;;
+    photon-* | redhatubi-*) openldap_config=/etc/openldap/ldap.conf ;;
     *) error "Unsupported OS flavor ${OS_FLAVOUR}" && exit 1 ;;
     esac
     echo "$openldap_config"
