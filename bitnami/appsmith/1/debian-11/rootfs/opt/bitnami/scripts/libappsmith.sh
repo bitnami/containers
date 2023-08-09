@@ -73,6 +73,9 @@ appsmith_validate() {
         if [[ "$APPSMITH_MODE" != "client" ]]; then
             is_empty_value "${APPSMITH_DATABASE_PASSWORD}" && print_validation_error "The APPSMITH_DATABASE_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
         fi
+        if [[ "$APPSMITH_MODE" == "backend" ]]; then
+            is_empty_value "${APPSMITH_REDIS_PASSWORD}" && print_validation_error "The APPSMITH_REDIS_PASSWORD environment variable is empty or not set. Set the environment variable ALLOW_EMPTY_PASSWORD=yes to allow a blank password. This is only recommended for development environments."
+        fi
     fi
 
     if [[ "$APPSMITH_MODE" == "backend" ]]; then
@@ -329,7 +332,7 @@ appsmith_initialize() {
                 # https://github.com/appsmithorg/appsmith/blob/release/app/server/appsmith-server/src/main/resources/application.properties
                 appsmith_conf_set "APPSMITH_MONGODB_PASSWORD" "$APPSMITH_DATABASE_PASSWORD"
                 appsmith_conf_set "APPSMITH_MONGODB_USER" "$APPSMITH_DATABASE_USER"
-                appsmith_conf_set "APPSMITH_REDIS_URL" "redis://${APPSMITH_REDIS_HOST}:${APPSMITH_REDIS_PORT_NUMBER}"
+                appsmith_conf_set "APPSMITH_REDIS_URL" "redis://:${APPSMITH_REDIS_PASSWORD}@${APPSMITH_REDIS_HOST}:${APPSMITH_REDIS_PORT_NUMBER}"
                 appsmith_conf_set "APPSMITH_ENCRYPTION_PASSWORD" "$APPSMITH_ENCRYPTION_PASSWORD"
                 appsmith_conf_set "APPSMITH_ENCRYPTION_SALT" "$APPSMITH_ENCRYPTION_SALT"
                 info "Ensuring Appsmith directories exist"
@@ -441,10 +444,6 @@ appsmith_unset_unused_variables() {
     if [[ -z "${APPSMITH_OAUTH2_GOOGLE_CLIENT_ID}" ]] || [[ -z "${APPSMITH_OAUTH2_GOOGLE_CLIENT_SECRET}" ]]; then
         unset APPSMITH_OAUTH2_GOOGLE_CLIENT_ID
         unset APPSMITH_OAUTH2_GOOGLE_CLIENT_SECRET
-    fi
-
-    if [[ -z "${APPSMITH_GOOGLE_MAPS_API_KEY}" ]]; then
-        unset APPSMITH_GOOGLE_MAPS_API_KEY
     fi
 
     if [[ -z "${APPSMITH_RECAPTCHA_SITE_KEY}" ]] || [[ -z "${APPSMITH_RECAPTCHA_SECRET_KEY}" ]] || [[ -z "${APPSMITH_RECAPTCHA_ENABLED}" ]]; then
