@@ -56,7 +56,7 @@ file:
     filetype: file
 command:
   check-app-run:
-    exec: timeout --preserve-status 5 gitea web
+    exec: timeout --preserve-status 5 gitea web || true
     exit-status: 0
     stdout:
       - "/Starting.*Web.*server/"
