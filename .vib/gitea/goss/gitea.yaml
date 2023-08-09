@@ -55,13 +55,8 @@ file:
     group: root
     filetype: file
 command:
-  manager-processes:
-    exec: gitea manager processes --config=/opt/bitnami/gitea/custom/conf/app.ini
+  check-app-run:
+    exec: timeout --preserve-status 5 gitea web
     exit-status: 0
     stdout:
-      - "/Total.*Number.*of.*Processes:.*[1-9]/"
-  doctor:
-    exec: gitea doctor --config=/opt/bitnami/gitea/custom/conf/app.ini
-    exit-status: 0
-    stdout:
-      - "/All.*done/"
+      - "/Starting.*Web.*server/"
