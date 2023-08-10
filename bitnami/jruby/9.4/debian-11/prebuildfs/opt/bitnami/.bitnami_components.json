@@ -9,13 +9,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.4.3-0-5"
+        "version": "9.4.3-0-6"
     },
     "node": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "16.20.1-2"
+        "version": "16.20.2-0"
     },
     "python": {
         "arch": "amd64",
