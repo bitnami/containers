@@ -22,16 +22,16 @@ print_welcome_page
 if ! am_i_root; then
     export LNAME="deepspeed"
     export LD_PRELOAD="/opt/bitnami/common/lib/libnss_wrapper.so"
-    if ! user_exists "$(id -u)" && [[ -f "$LD_PRELOAD" ]]; then
+    if [[ -f "$LD_PRELOAD" ]]; then
         info "Configuring libnss_wrapper"
         NSS_WRAPPER_PASSWD="$(mktemp)"
         export NSS_WRAPPER_PASSWD
         NSS_WRAPPER_GROUP="$(mktemp)"
         export NSS_WRAPPER_GROUP
         if [[ "$HOME" == "/" ]]; then
-            export HOME=/opt/bitnami/deepspeed
+            export HOME=/home/deepspeed
         fi
-        echo "deepspeed:x:$(id -u):$(id -g):deepspeed:${HOME}:/bin/false" >"$NSS_WRAPPER_PASSWD"
+        echo "deepspeed:x:$(id -u):$(id -g):deepspeed:${HOME}:/bin/sh" >"$NSS_WRAPPER_PASSWD"
         echo "deepspeed:x:$(id -g):" >"$NSS_WRAPPER_GROUP"
         chmod 400 "$NSS_WRAPPER_PASSWD" "$NSS_WRAPPER_GROUP"
     fi
