@@ -2,21 +2,30 @@
 # Copyright VMware, Inc.
 # SPDX-License-Identifier: APACHE-2.0
 
-
 set -o errexit
 set -o nounset
 set -o pipefail
 #set -o xtrace
 
+# Load libraries
+. /opt/bitnami/scripts/libbitnami.sh
+. /opt/bitnami/scripts/liblog.sh
+. /opt/bitnami/scripts/libos.sh
+
+print_welcome_page
+
 # Configure NSS wrapper
-if ! getent passwd "$(id -u)" &>/dev/null && [ -e "$NSS_WRAPPER_LIB" ]; then
-    export LD_PRELOAD="$NSS_WRAPPER_LIB"
-    # shellcheck disable=SC2155
-    export NSS_WRAPPER_PASSWD="$(mktemp)"
-    # shellcheck disable=SC2155
-    export NSS_WRAPPER_GROUP="$(mktemp)"
-    echo "git:x:$(id -u):$(id -g):Git:${HOME}:/bin/false" >"$NSS_WRAPPER_PASSWD"
-    echo "git:x:$(id -g):" >"$NSS_WRAPPER_GROUP"
+if ! am_i_root; then
+    export LNAME="git"
+    export LD_PRELOAD="/opt/bitnami/common/lib/libnss_wrapper.so"
+    if ! user_exists "$(id -u)" && [[ -f "$LD_PRELOAD" ]]; then
+        # shellcheck disable=SC2155
+        export NSS_WRAPPER_PASSWD="$(mktemp)"
+        # shellcheck disable=SC2155
+        export NSS_WRAPPER_GROUP="$(mktemp)"
+        echo "git:x:$(id -u):$(id -g):Git:${HOME}:/bin/false" >"$NSS_WRAPPER_PASSWD"
+        echo "git:x:$(id -g):" >"$NSS_WRAPPER_GROUP"
+    fi
 fi
 
 # Generate new SSH key pairs if they don't exist
