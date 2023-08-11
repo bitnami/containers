@@ -27,7 +27,7 @@ get_system_cert_paths() {
     distro="$(get_os_metadata --id)"
     if [[ "$distro" =~ ^(debian|ubuntu)$ ]]; then
         echo "/etc/ssl/certs/"
-    elif [[ "$distro" =~ ^(centos|photon)$ ]]; then
+    elif [[ "$distro" =~ ^photon$ ]]; then
         echo "/etc/pki/tls/certs/"
     else
         # Check the existence of generic paths when OS_FLAVOR does
@@ -55,7 +55,7 @@ configure_permissions_system_certs() {
     local -r owner="${1:-}"
     # Debian
     set_permissions_ownership "/etc/pki/tls/certs/ca-bundle.crt" "$owner"
-    # Centos/Phonton
+    # Photon
     set_permissions_ownership "/etc/pki/tls/certs/ca-bundle.trust.crt" "$owner"
     set_permissions_ownership "/etc/ssl/certs/ca-certificates.crt" "$owner"
 }
@@ -100,7 +100,7 @@ install_cert() {
 
     if [[ "$distro" =~ ^(debian|ubuntu)$ ]]; then
         cat "$cert" >> /etc/ssl/certs/ca-certificates.crt
-    elif [[ "$distro" =~ ^(centos|photon)$ ]]; then
+    elif [[ "$distro" =~ ^photon$ ]]; then
         cat "$cert" >> /etc/pki/tls/certs/ca-bundle.crt
     else
         # Check the existence of generic ca-bundles when OS_FLAVOR does
