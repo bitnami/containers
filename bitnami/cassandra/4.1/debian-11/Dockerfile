@@ -8,10 +8,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-08-08T17:23:20Z" \
+      org.opencontainers.image.created="2023-08-11T19:01:08Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.1.3-debian-11-r14" \
+      org.opencontainers.image.ref.name="4.1.3-debian-11-r17" \
       org.opencontainers.image.title="cassandra" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="4.1.3"
@@ -29,7 +29,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.9.17-4-linux-${OS_ARCH}-debian-11" \
       "java-1.8.382-6-3-linux-${OS_ARCH}-debian-11" \
-      "yq-4.34.2-1-linux-${OS_ARCH}-debian-11" \
+      "yq-4.35.1-0-linux-${OS_ARCH}-debian-11" \
       "cassandra-4.1.3-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
