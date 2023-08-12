@@ -663,12 +663,11 @@ etcd_initialize() {
             debug_execute chmod -R 700 "$ETCD_DATA_DIR" || true
         fi
         if [[ ${#initial_members[@]} -gt 1 ]]; then
+            member_id="$(get_member_id)"
             if is_boolean_yes "$ETCD_DISABLE_PRESTOP"; then
                 info "The member will try to join the cluster by it's own"
                 export ETCD_INITIAL_CLUSTER_STATE=existing
-            fi
-            member_id="$(get_member_id)"
-            if ! is_healthy_etcd_cluster; then
+            elif ! is_healthy_etcd_cluster; then
                 warn "Cluster not responding!"
                 if is_boolean_yes "$ETCD_DISASTER_RECOVERY"; then
                     latest_snapshot_file="$(find /snapshots/ -maxdepth 1 -type f -name 'db-*' | sort | tail -n 1)"
