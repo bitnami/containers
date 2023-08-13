@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.17.0-2"
+        "version": "18.17.1-0"
     },
     "odoo": {
         "arch": "amd64",
@@ -15,13 +15,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "15.3.0-2"
+        "version": "15.4.0-0"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.10.12-4"
+        "version": "3.10.12-5"
     },
     "render-template": {
         "arch": "amd64",
