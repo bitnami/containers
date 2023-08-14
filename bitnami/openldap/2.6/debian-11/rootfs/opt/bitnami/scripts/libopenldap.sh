@@ -403,6 +403,9 @@ dn: cn=config
 changetype: modify
 add: olcDisallows
 olcDisallows: bind_anon
+-
+add: olcRequires
+olcRequires: authc
 EOF
     debug_execute ldapmodify -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/disable_anon_bind.ldif"
 }
