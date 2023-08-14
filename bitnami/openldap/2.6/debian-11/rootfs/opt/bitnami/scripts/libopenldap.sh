@@ -67,6 +67,7 @@ export LDAP_PASSWORDS="${LDAP_PASSWORDS:-bitnami1,bitnami2}"
 export LDAP_USER_DC="${LDAP_USER_DC:-users}"
 export LDAP_GROUP="${LDAP_GROUP:-readers}"
 export LDAP_ENABLE_TLS="${LDAP_ENABLE_TLS:-no}"
+export LDAP_REQUIRE_TLS="${LDAP_REQUIRE_TLS:-no}"
 export LDAP_ULIMIT_NOFILES="${LDAP_ULIMIT_NOFILES:-1024}"
 export LDAP_ALLOW_ANON_BINDING="${LDAP_ALLOW_ANON_BINDING:-yes}"
 export LDAP_LOGLEVEL="${LDAP_LOGLEVEL:-256}"
@@ -606,6 +607,11 @@ ldap_initialize() {
         else
             info "Skipping default schemas/tree structure"
         fi
+        if is_boolean_yes "$LDAP_ENABLE_TLS"; then
+          if is_boolean_yes "$LDAP_REQUIRE_TLS"; then
+            ldap_configure_tls_required
+          fi
+        fi
         ldap_stop
     fi
 }
@@ -679,4 +685,24 @@ olcTLSDHParamFile: $LDAP_TLS_DH_PARAMS_FILE
 EOF
     fi
     debug_execute ldapmodify -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/certs.ldif"
+}
+
+########################
+# OpenLDAP configure connections to require TLS
+# Globals:
+#   LDAP_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+ldap_configure_tls_required() {
+    info "Configuring connections to require TLS"
+    cat > "${LDAP_SHARE_DIR}/tls_required.ldif" << EOF
+dn: cn=config
+changetype: modify
+add: olcSecurity
+olcSecurity: tls=1
+EOF
+    debug_execute ldapmodify -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/tls_required.ldif"
 }

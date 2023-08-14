@@ -194,17 +194,18 @@ The Bitnami Docker OpenLDAP can be easily setup with the following environment v
 * `LDAP_CUSTOM_SCHEMA_DIR`: Location of a directory containing custom internal schema files that could not be added as custom ldif files (i.e. containing some `structuralObjectClass`). This can be used in addition to or instead of `LDAP_CUSTOM_SCHEMA_FILE` (above) to add multiple schema files. Default: **/schemas**
 * `LDAP_ULIMIT_NOFILES`: Maximum number of open file descriptors. Default: **1024**.
 * `LDAP_ALLOW_ANON_BINDING`: Allow anonymous bindings to the LDAP server. Default: **yes**.
-* `LDAP_LOGLEVEL`: Set the loglevel for the OpenLDAP server (see <https://www.openldap.org/doc/admin25/slapdconfig.html> for possible values). Default: **256**.
+* `LDAP_LOGLEVEL`: Set the loglevel for the OpenLDAP server (see <https://www.openldap.org/doc/admin26/slapdconfig.html> for possible values). Default: **256**.
 
 You can bootstrap the contents of your database by putting LDIF files in the directory `/ldifs` (or the one you define in `LDAP_CUSTOM_LDIF_DIR`). Those may only contain content underneath your base DN (set by `LDAP_ROOT`). You can **not** set configuration for e.g. `cn=config` in those files.
 
-Check the official [OpenLDAP Configuration Reference](https://www.openldap.org/doc/admin25/guide.html) for more information about how to configure OpenLDAP.
+Check the official [OpenLDAP Configuration Reference](https://www.openldap.org/doc/admin26/guide.html) for more information about how to configure OpenLDAP.
 
 ### Securing OpenLDAP traffic
 
 OpenLDAP clients and servers are capable of using the Transport Layer Security (TLS) framework to provide integrity and confidentiality protections and to support LDAP authentication using the SASL EXTERNAL mechanism. Should you desire to enable this optional feature, you may use the following environment variables to configure the application:
 
 * `LDAP_ENABLE_TLS`: Whether to enable TLS for traffic or not. Defaults to `no`.
+* `LDAP_REQUIRE_TLS`: Whether connections must use TLS. Defaults to `no`.
 * `LDAP_LDAPS_PORT_NUMBER`: Port used for TLS secure traffic. Priviledged port is supported (e.g. `636`). Default: **1636** (non privileged port).
 * `LDAP_TLS_CERT_FILE`: File containing the certificate file for the TLS traffic. No defaults.
 * `LDAP_TLS_KEY_FILE`: File containing the key for certificate. No defaults.
