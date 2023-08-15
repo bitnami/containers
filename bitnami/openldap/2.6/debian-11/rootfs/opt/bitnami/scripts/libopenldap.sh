@@ -71,8 +71,10 @@ export LDAP_REQUIRE_TLS="${LDAP_REQUIRE_TLS:-no}"
 export LDAP_ULIMIT_NOFILES="${LDAP_ULIMIT_NOFILES:-1024}"
 export LDAP_ALLOW_ANON_BINDING="${LDAP_ALLOW_ANON_BINDING:-yes}"
 export LDAP_LOGLEVEL="${LDAP_LOGLEVEL:-256}"
-export LDAP_HASH_CLEARTEXT="${LDAP_HASH_CLEARTEXT:-no}"
 export LDAP_PASSWORD_HASH="${LDAP_PASSWORD_HASH:-{SSHA}}"
+export LDAP_CONFIGURE_PPOLICY="${LDAP_CONFIGURE_PPOLICY:-no}"
+export LDAP_PPOLICY_USE_LOCKOUT="${LDAP_PPOLICY_USE_LOCKOUT:-no}"
+export LDAP_PPOLICY_HASH_CLEARTEXT="${LDAP_PPOLICY_HASH_CLEARTEXT:-no}"
 
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
@@ -594,9 +596,6 @@ ldap_initialize() {
         if [ "$LDAP_ALLOW_ANON_BINDING" == 'no' ]; then
             ldap_disable_anon_binding
         fi
-        if is_boolean_yes "$LDAP_ENABLE_TLS"; then
-            ldap_configure_tls
-        fi
         # Initialize OpenLDAP with schemas/tree structure
         if is_boolean_yes "$LDAP_ADD_SCHEMAS"; then
             ldap_add_schemas
@@ -614,13 +613,16 @@ ldap_initialize() {
         else
             info "Skipping default schemas/tree structure"
         fi
-        if is_boolean_yes "$LDAP_HASH_CLEARTEXT"; then
-            ldap_configure_ppolicy_hash_cleartext
-        fi
+        # additional configuration
         if ! [ "$LDAP_PASSWORD_HASH" == '{SSHA}' ]; then
             ldap_configure_password_hash
         fi
+        if is_boolean_yes "$LDAP_CONFIGURE_PPOLICY"; then
+            ldap_configure_ppolicy
+        fi
+        # enable tls
         if is_boolean_yes "$LDAP_ENABLE_TLS"; then
+          ldap_configure_tls
           if is_boolean_yes "$LDAP_REQUIRE_TLS"; then
             ldap_configure_tls_required
           fi
@@ -725,24 +727,25 @@ EOF
 # Globals:
 #   LDAP_*
 # Arguments:
-#   $1: Module file name
+#   $1: Module path
+#   $2: Module file name
 # Returns:
 #   None
 #########################
 ldap_load_module() {
-    info "Enable LDAP $1 module"
-    cat > "${LDAP_SHARE_DIR}/enable_$1.ldif" << EOF
+    info "Enable LDAP $2 module from $1"
+    cat > "${LDAP_SHARE_DIR}/enable_module_$2.ldif" << EOF
 dn: cn=module,cn=config
 cn: module
 objectClass: olcModuleList
-olcModulePath: /opt/bitnami/openldap/lib/openldap
-olcModuleLoad: $1
+olcModulePath: $1
+olcModuleLoad: $2
 EOF
-    debug_execute ldapadd -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/enable_$1.ldif"
+    debug_execute ldapadd -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/enable_module_$2.ldif"
 }
 
 ########################
-# OpenLDAP configure ppolicy_hash_cleartext
+# OpenLDAP configure ppolicy
 # Globals:
 #   LDAP_*
 # Arguments:
@@ -750,17 +753,39 @@ EOF
 # Returns:
 #   None
 #########################
-ldap_configure_ppolicy_hash_cleartext() {
-    ldap_load_module "ppolicy.so"
-    info "Enabling LDAP ppolicy_hash_cleartext"
-    cat > "${LDAP_SHARE_DIR}/ppolicy_hash_cleartext.ldif" << EOF
+ldap_configure_ppolicy() {
+    info "Configuring LDAP ppolicy"
+    ldap_load_module "/opt/bitnami/openldap/lib/openldap" "ppolicy.so"
+    # create configuration
+    cat > "${LDAP_SHARE_DIR}/ppolicy_create_configuration.ldif" << EOF
 dn: olcOverlay={0}ppolicy,olcDatabase={2}mdb,cn=config
 objectClass: olcOverlayConfig
 objectClass: olcPPolicyConfig
 olcOverlay: {0}ppolicy
+EOF
+    debug_execute ldapadd -Q -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/ppolicy_create_configuration.ldif"
+    # enable ppolicy_hash_cleartext
+    if is_boolean_yes "$LDAP_PPOLICY_HASH_CLEARTEXT"; then
+        info "Enabling ppolicy_hash_cleartext"
+        cat > "${LDAP_SHARE_DIR}/ppolicy_configuration_hash_cleartext.ldif" << EOF
+dn: olcOverlay={0}ppolicy,olcDatabase={2}mdb,cn=config
+changetype: modify
+add: olcPPolicyHashCleartext
 olcPPolicyHashCleartext: TRUE
 EOF
-    debug_execute ldapadd -Q -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/ppolicy_hash_cleartext.ldif"
+    debug_execute ldapmodify -Q -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/ppolicy_configuration_hash_cleartext.ldif"
+    fi
+  # enable ppolicy_use_lockout
+    if is_boolean_yes "$LDAP_PPOLICY_USE_LOCKOUT"; then
+        info "Enabling ppolicy_use_lockout"
+        cat > "${LDAP_SHARE_DIR}/ppolicy_configuration_use_lockout.ldif" << EOF
+dn: olcOverlay={0}ppolicy,olcDatabase={2}mdb,cn=config
+changetype: modify
+add: olcPPolicyUseLockout
+olcPPolicyUseLockout: TRUE
+EOF
+        debug_execute ldapmodify -Q -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/ppolicy_configuration_use_lockout.ldif"
+    fi
 }
 
 ########################
