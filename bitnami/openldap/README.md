@@ -195,6 +195,8 @@ The Bitnami Docker OpenLDAP can be easily setup with the following environment v
 * `LDAP_ULIMIT_NOFILES`: Maximum number of open file descriptors. Default: **1024**.
 * `LDAP_ALLOW_ANON_BINDING`: Allow anonymous bindings to the LDAP server. Default: **yes**.
 * `LDAP_LOGLEVEL`: Set the loglevel for the OpenLDAP server (see <https://www.openldap.org/doc/admin26/slapdconfig.html> for possible values). Default: **256**.
+* `LDAP_HASH_CLEARTEXT`: Whether plaintext passwords should be hashed automatically. Default: **no**
+* `LDAP_PASSWORD_HASH`: Hash to be used in generation of user passwords. Must be one of {SSHA}, {SHA}, {SMD5}, {MD5}, {CRYPT}, and {CLEARTEXT}. Default: **{SSHA}**.
 
 You can bootstrap the contents of your database by putting LDIF files in the directory `/ldifs` (or the one you define in `LDAP_CUSTOM_LDIF_DIR`). Those may only contain content underneath your base DN (set by `LDAP_ROOT`). You can **not** set configuration for e.g. `cn=config` in those files.
 

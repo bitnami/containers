@@ -71,6 +71,8 @@ export LDAP_REQUIRE_TLS="${LDAP_REQUIRE_TLS:-no}"
 export LDAP_ULIMIT_NOFILES="${LDAP_ULIMIT_NOFILES:-1024}"
 export LDAP_ALLOW_ANON_BINDING="${LDAP_ALLOW_ANON_BINDING:-yes}"
 export LDAP_LOGLEVEL="${LDAP_LOGLEVEL:-256}"
+export LDAP_HASH_CLEARTEXT="${LDAP_HASH_CLEARTEXT:-no}"
+export LDAP_PASSWORD_HASH="${LDAP_PASSWORD_HASH:-{SSHA}}"
 
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
@@ -403,7 +405,9 @@ dn: cn=config
 changetype: modify
 add: olcDisallows
 olcDisallows: bind_anon
--
+
+dn: cn=config
+changetype: modify
 add: olcRequires
 olcRequires: authc
 EOF
@@ -610,6 +614,12 @@ ldap_initialize() {
         else
             info "Skipping default schemas/tree structure"
         fi
+        if is_boolean_yes "$LDAP_HASH_CLEARTEXT"; then
+            ldap_configure_ppolicy_hash_cleartext
+        fi
+        if ! [ "$LDAP_PASSWORD_HASH" == '{SSHA}' ]; then
+            ldap_configure_password_hash
+        fi
         if is_boolean_yes "$LDAP_ENABLE_TLS"; then
           if is_boolean_yes "$LDAP_REQUIRE_TLS"; then
             ldap_configure_tls_required
@@ -700,7 +710,7 @@ EOF
 #   None
 #########################
 ldap_configure_tls_required() {
-    info "Configuring connections to require TLS"
+    info "Configuring LDAP connections to require TLS"
     cat > "${LDAP_SHARE_DIR}/tls_required.ldif" << EOF
 dn: cn=config
 changetype: modify
@@ -708,4 +718,67 @@ add: olcSecurity
 olcSecurity: tls=1
 EOF
     debug_execute ldapmodify -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/tls_required.ldif"
+}
+
+########################
+# OpenLDAP enable module
+# Globals:
+#   LDAP_*
+# Arguments:
+#   $1: Module file name
+# Returns:
+#   None
+#########################
+ldap_load_module() {
+    info "Enable LDAP $1 module"
+    cat > "${LDAP_SHARE_DIR}/enable_$1.ldif" << EOF
+dn: cn=module,cn=config
+cn: module
+objectClass: olcModuleList
+olcModulePath: /opt/bitnami/openldap/lib/openldap
+olcModuleLoad: $1
+EOF
+    debug_execute ldapadd -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/enable_$1.ldif"
+}
+
+########################
+# OpenLDAP configure ppolicy_hash_cleartext
+# Globals:
+#   LDAP_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+ldap_configure_ppolicy_hash_cleartext() {
+    ldap_load_module "ppolicy.so"
+    info "Enabling LDAP ppolicy_hash_cleartext"
+    cat > "${LDAP_SHARE_DIR}/ppolicy_hash_cleartext.ldif" << EOF
+dn: olcOverlay={0}ppolicy,olcDatabase={2}mdb,cn=config
+objectClass: olcOverlayConfig
+objectClass: olcPPolicyConfig
+olcOverlay: {0}ppolicy
+olcPPolicyHashCleartext: TRUE
+EOF
+    debug_execute ldapadd -Q -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/ppolicy_hash_cleartext.ldif"
+}
+
+########################
+# OpenLDAP configure olcPasswordHash
+# Globals:
+#   LDAP_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+ldap_configure_password_hash() {
+    info "Configuring LDAP olcPasswordHash"
+    cat > "${LDAP_SHARE_DIR}/password_hash.ldif" << EOF
+dn: olcDatabase={-1}frontend,cn=config
+changetype: modify
+add: olcPasswordHash
+olcPasswordHash: $LDAP_PASSWORD_HASH
+EOF
+    debug_execute ldapmodify -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/password_hash.ldif"
 }
