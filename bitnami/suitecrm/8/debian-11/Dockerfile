@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-08-13T04:40:24Z" \
+      org.opencontainers.image.created="2023-08-16T09:21:47Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.3.1-debian-11-r27" \
+      org.opencontainers.image.ref.name="8.3.1-debian-11-r31" \
       org.opencontainers.image.title="suitecrm" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="8.3.1"
@@ -27,7 +27,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "php-8.1.22-1-linux-${OS_ARCH}-debian-11" \
       "apache-2.4.57-10-linux-${OS_ARCH}-debian-11" \
-      "mysql-client-10.11.4-1-linux-${OS_ARCH}-debian-11" \
+      "mysql-client-10.11.5-0-linux-${OS_ARCH}-debian-11" \
       "libphp-8.1.22-1-linux-${OS_ARCH}-debian-11" \
       "suitecrm-8.3.1-1-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-10-linux-${OS_ARCH}-debian-11" \
