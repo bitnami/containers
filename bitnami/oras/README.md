@@ -68,7 +68,6 @@ docker run --rm --name oras bitnami/oras:latest --version
 
 Check the [official ORAS documentation](https://oras.land/cli/) for a list of the available commands and parameters.
 
-
 ## Notable Changes
 
 Starting from August 16, 2023, all container images with the "scratch" suffix in their tag name will be changed to use the "debian" suffix. It's important to note that this change also affects the structure of our repository.
