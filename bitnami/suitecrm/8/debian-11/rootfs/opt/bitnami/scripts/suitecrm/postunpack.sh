@@ -31,8 +31,8 @@ info "Configuring file permissions for SuiteCRM"
 ensure_user_exists "$WEB_SERVER_DAEMON_USER" --group "$WEB_SERVER_DAEMON_GROUP"
 for dir in "$SUITECRM_BASE_DIR" "$SUITECRM_VOLUME_DIR" "${SUITECRM_BASE_DIR}/tmp"; do
     ensure_dir_exists "$dir"
-    # Use daemon:root ownership for compatibility when running as a non-root user
-    configure_permissions_ownership "$dir" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root"
+    # Use daemon:daemon ownership for compatibility when running as a non-root user
+    configure_permissions_ownership "$dir" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "$WEB_SERVER_DAEMON_GROUP"
 done
 
 # Configure required PHP options for application to work properly, based on build-time defaults

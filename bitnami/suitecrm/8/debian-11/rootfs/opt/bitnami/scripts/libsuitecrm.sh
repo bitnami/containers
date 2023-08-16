@@ -113,8 +113,8 @@ suitecrm_initialize() {
         # Ensure SuiteCRM persisted directories exist (i.e. when a volume has been mounted to /bitnami)
         info "Ensuring SuiteCRM directories exist"
         ensure_dir_exists "$SUITECRM_VOLUME_DIR"
-        # Use daemon:root ownership for compatibility when running as a non-root user
-        am_i_root && configure_permissions_ownership "$SUITECRM_VOLUME_DIR" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "root"
+        # Use daemon:daemon ownership for compatibility when running as a non-root user
+        am_i_root && configure_permissions_ownership "$SUITECRM_VOLUME_DIR" -d "775" -f "664" -u "$WEB_SERVER_DAEMON_USER" -g "$WEB_SERVER_DAEMON_GROUP"
         info "Trying to connect to the database server"
         db_host="$SUITECRM_DATABASE_HOST"
         db_port="$SUITECRM_DATABASE_PORT_NUMBER"
