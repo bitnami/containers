@@ -113,6 +113,12 @@ docker run --rm --name kaniko bitnami/kaniko:latest --help
 
 Check the [official Kaniko documentation](https://github.com/GoogleContainerTools/kanikodocs/) for more information about how to use Kaniko.
 
+## Notable Changes
+
+Starting from August 16, 2023, all container images with the "scratch" suffix in their tag name will be changed to use the "debian" suffix. It's important to note that this change also affects the structure of our repository.
+
+This adjustment helps to accurately reflect the operating system used in our pipeline for building our distroless binary-only container. Apart from the change in tag naming, there are no other impacts on the generated images.
+
 ## Contributing
 
 We'd love for you to contribute to this Docker image. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
