@@ -1,0 +1,9 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+version: '2'
+
+services:
+  argo-workflows:
+    image: docker.io/bitnami/argo-workflow-cli:3
+    entrypoint: tail -f /dev/null
