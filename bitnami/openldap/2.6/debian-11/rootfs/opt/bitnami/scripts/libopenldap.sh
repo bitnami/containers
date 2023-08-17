@@ -622,10 +622,10 @@ ldap_initialize() {
         fi
         # enable tls
         if is_boolean_yes "$LDAP_ENABLE_TLS"; then
-          ldap_configure_tls
-          if is_boolean_yes "$LDAP_REQUIRE_TLS"; then
-            ldap_configure_tls_required
-          fi
+            ldap_configure_tls
+            if is_boolean_yes "$LDAP_REQUIRE_TLS"; then
+                ldap_configure_tls_required
+            fi
         fi
         ldap_stop
     fi
@@ -775,7 +775,7 @@ olcPPolicyHashCleartext: TRUE
 EOF
     debug_execute ldapmodify -Q -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/ppolicy_configuration_hash_cleartext.ldif"
     fi
-  # enable ppolicy_use_lockout
+    # enable ppolicy_use_lockout
     if is_boolean_yes "$LDAP_PPOLICY_USE_LOCKOUT"; then
         info "Enabling ppolicy_use_lockout"
         cat > "${LDAP_SHARE_DIR}/ppolicy_configuration_use_lockout.ldif" << EOF
