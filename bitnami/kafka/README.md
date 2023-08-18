@@ -191,9 +191,8 @@ The configuration can easily be setup with the Bitnami Apache Kafka Docker image
 * `KAFKA_CFG_LISTENERS`: Kafka `listeners` configuration override. No defaults.
 * `KAFKA_CFG_ADVERTISED_LISTENERS`: Kafka `advertised.listeners` configuration override. No defaults.
 * `KAFKA_CFG_SASL_ENABLED_MECHANISMS`: Allowed mechanism when using SASL either for clients, inter broker, or zookeeper comunications. Allowed values: `PLAIN`, `SCRAM-SHA-256`, `SCRAM-SHA-512` or a comma separated combination of those values. Default: **PLAIN,SCRAM-SHA-256,SCRAM-SHA-512**. NOTE: KRaft <= 3.4 does not yet support SCRAM mechanisms, so this list will be automatically reduced to only `PLAIN` SASL mechanism.
-* `KAFKA_TLS_CLIENT_AUTH`: Configures kafka brokers to request client authentication. Allowed values: `required`, `requested`, `none`. Defaults: **required**.
-* `KAFKA_TLS_INTER_BROKER_AUTH`: Configures TLS authentication method for kafka inter-broker communications. Defaults: **KAFKA_TLS_CLIENT_AUTH**.
-* `KAFKA_TLS_CONTROLLER_AUTH`: Configures TLS authentication method for kafka control plane communications. Defaults: **KAFKA_TLS_CLIENT_AUTH**.
+* `KAFKA_TLS_CLIENT_AUTH`: Sets the value for `ssl.client.auth`. Allowed values: `required`, `requested`, `none`. Defaults: **required**.
+* `KAFKA_TLS_<uppercase_listener_name>_CLIENT_AUTH`: Sets the value for `listener.name.<listener>.ssl.client.auth` used to configure mTLS with SASL. Allowed values: `required`, `requested`, `none`.
 * `KAFKA_TLS_TYPE`: Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`. Defaults: **JKS**.
 * `KAFKA_CLIENT_USERS`: Users that will be created into Zookeeper when using SASL for client communications. Separated by commas. Default: **user**
 * `KAFKA_CLIENT_PASSWORDS`: Passwords for the users specified at`KAFKA_CLIENT_USERS`. Separated by commas. Default: **bitnami**
@@ -491,7 +490,7 @@ In order to configure Apache Kafka controller communications with `SASL`, you sh
 In order to configure Apache Kafka controller communications with `SSL`, you should provide the environment variables below:
 
 * `KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP`: Should include `CONTROLLER:SSL`.
-* `KAFKA_TLS_CONTROLLER_AUTH`: Configures TLS authentication method for kafka control plane communications. Defaults: **required**.
+* `KAFKA_TLS_<uppercase_controller_listener_name>_CLIENT_AUTH`: Configures mTLS authentication method for kafka control plane communications. Allowed values: `required`, `requested`, `none`.
 * `KAFKA_TLS_TYPE`: Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`. Defaults: **JKS**.
 * Valid keystore and truststore are mounted at `/opt/bitnami/kafka/config/certs/kafka.keystore.jks` and `/opt/bitnami/kafka/config/certs/kafka.truststore.jks`.
 
@@ -501,11 +500,11 @@ In order to authenticate Apache Kafka against a Zookeeper server with `SASL_SSL`
 * `KAFKA_CFG_SASL_MECHANISM_CONTROLLER_PROTOCOL`: SASL mechanism to use for controllers communications. NOTE: KRaft mode does not yet support SCRAM mechanisms, so the only supported SASL mechanism in KRaft mode would be `PLAIN`.
 * `KAFKA_CONTROLLER_USER`: Apache Kafka controllers communication user.
 * `KAFKA_CONTROLLER_PASSWORD`: Apache Kafka controllers communication password.
-* `KAFKA_TLS_CONTROLLER_AUTH`: Configures TLS authentication method for kafka control plane communications. Defaults: **required**.
+* `KAFKA_TLS_<uppercase_controller_listener_name>_CLIENT_AUTH`: Configures mTLS authentication method for kafka control plane communications. Allowed values: `required`, `requested`, `none`.
 * `KAFKA_TLS_TYPE`: Choose the TLS certificate format to use. Allowed values: `JKS`, `PEM`. Defaults: **JKS**.
 * Valid keystore and truststore are mounted at `/opt/bitnami/kafka/config/certs/kafka.keystore.jks` and `/opt/bitnami/kafka/config/certs/kafka.truststore.jks`.
 
-> Note: SSL settings are shared by all listeners configured using `SSL` or `SASL_SSL` protocols except for `KAFKA_TLS_CONTROLLER_AUTH` and `KAFKA_TLS_INTER_BROKER_AUTH`. Setting different certificates per listener is not yet supported.
+> Note: SSL settings are shared by all listeners configured using `SSL` or `SASL_SSL` protocols. Setting different certificates per listener is not yet supported.
 
 #### Apache Kafka ZooKeeper mode configuration
 
