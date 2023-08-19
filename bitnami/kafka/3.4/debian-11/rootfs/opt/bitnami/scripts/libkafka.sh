@@ -711,6 +711,7 @@ kafka_configure_ssl() {
         kafka_server_conf_set "${1:?missing key}" "${2:?missing value}"
         kafka_producer_consumer_conf_set "${1:?missing key}" "${2:?missing value}"
     }
+    kafka_server_conf_set "ssl.client.auth" "${KAFKA_TLS_CLIENT_AUTH}"
     configure_both ssl.keystore.type "${KAFKA_TLS_TYPE}"
     configure_both ssl.truststore.type "${KAFKA_TLS_TYPE}"
     local -r kafka_truststore_location="${KAFKA_CERTS_DIR}/$(basename "${KAFKA_TLS_TRUSTSTORE_FILE}")"
@@ -978,7 +979,9 @@ kafka_initialize() {
             listener_lower="$(echo "$listener" | tr '[:upper:]' '[:lower:]')"
 
             if [[ "$protocol" = "SSL" || "$protocol" = "SASL_SSL" ]]; then
-                kafka_server_conf_set "listener.name.${listener_lower}.ssl.client.auth" "$KAFKA_TLS_INTER_BROKER_AUTH"
+                listener_upper="$(echo "$listener" | tr '[:lower:]' '[:upper:]')"
+                env_name="KAFKA_TLS_${listener_upper}_CLIENT_AUTH"
+                [[ -n "${!env_name:-}" ]] && kafka_server_conf_set "listener.name.${listener_lower}.ssl.client.auth" "${!env_name}"
             fi
             if [[ "$protocol" = "SASL_PLAINTEXT" || "$protocol" = "SASL_SSL" ]]; then
                 local role=""
