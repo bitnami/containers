@@ -593,8 +593,11 @@ ldap_initialize() {
         ldap_create_online_configuration
         ldap_start_bg
         ldap_admin_credentials
-        if [ "$LDAP_ALLOW_ANON_BINDING" == 'no' ]; then
+        if ! is_boolean_yes "$LDAP_ALLOW_ANON_BINDING"; then
             ldap_disable_anon_binding
+        fi
+        if is_boolean_yes "$LDAP_ENABLE_TLS"; then
+            ldap_configure_tls
         fi
         # Initialize OpenLDAP with schemas/tree structure
         if is_boolean_yes "$LDAP_ADD_SCHEMAS"; then
@@ -614,7 +617,7 @@ ldap_initialize() {
             info "Skipping default schemas/tree structure"
         fi
         # additional configuration
-        if ! [ "$LDAP_PASSWORD_HASH" == '{SSHA}' ]; then
+        if [[ ! "$LDAP_PASSWORD_HASH" == "{SSHA}" ]]; then
             ldap_configure_password_hash
         fi
         if is_boolean_yes "$LDAP_CONFIGURE_PPOLICY"; then
