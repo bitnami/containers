@@ -21,7 +21,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-10"
+        "version": "1.0.5-12"
     },
     "wordpress": {
         "arch": "amd64",
