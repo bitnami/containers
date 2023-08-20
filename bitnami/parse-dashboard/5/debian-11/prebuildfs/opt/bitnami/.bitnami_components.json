@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "16.20.2-0"
+        "version": "16.20.2-1"
     },
     "parse-dashboard": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.1.0-4"
+        "version": "5.1.0-5"
     },
     "python": {
         "arch": "amd64",
