@@ -3,25 +3,25 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.11.5-0"
+        "version": "10.11.5-1"
     },
     "postgresql-client": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "15.4.0-0"
+        "version": "15.4.0-1"
     },
     "redmine": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.0.5-7"
+        "version": "5.0.5-8"
     },
     "ruby": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.0.6-4"
+        "version": "3.0.6-5"
     },
     "yq": {
         "arch": "amd64",
