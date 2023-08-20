@@ -3,19 +3,19 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.2.13-0"
+        "version": "2.2.13-1"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-10"
+        "version": "1.0.5-12"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-11"
+        "version": "1.0.6-12"
     },
     "yq": {
         "arch": "amd64",
