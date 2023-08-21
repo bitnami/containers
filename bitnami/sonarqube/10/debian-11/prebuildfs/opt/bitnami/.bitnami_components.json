@@ -3,18 +3,18 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "17.0.8-7-2"
+        "version": "17.0.8-7-3"
     },
     "postgresql-client": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "15.4.0-0"
+        "version": "15.4.0-1"
     },
     "sonarqube": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.1.0-1"
+        "version": "10.1.0-2"
     }
 }
