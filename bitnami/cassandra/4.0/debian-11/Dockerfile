@@ -28,7 +28,7 @@ RUN install_packages ca-certificates curl libbz2-1.0 libcom-err2 libcrypt1 libff
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.9.17-5-linux-${OS_ARCH}-debian-11" \
-      "java-1.8.382-6-3-linux-${OS_ARCH}-debian-11" \
+      "java-11.0.20-8-3-linux-${OS_ARCH}-debian-11" \
       "yq-4.35.1-0-linux-${OS_ARCH}-debian-11" \
       "cassandra-4.0.11-2-linux-${OS_ARCH}-debian-11" \
     ) && \
