@@ -3,30 +3,30 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.11.5-0"
+        "version": "10.11.5-1"
     },
     "nginx": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.25.2-0"
+        "version": "1.25.2-1"
     },
     "php": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.2.9-1"
+        "version": "8.2.9-2"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-12"
+        "version": "1.0.5-13"
     },
     "wordpress": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "6.3.0-1"
+        "version": "6.3.0-2"
     }
 }
