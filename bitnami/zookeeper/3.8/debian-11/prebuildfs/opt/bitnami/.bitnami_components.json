@@ -3,18 +3,18 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.20-8-2"
+        "version": "11.0.20-8-3"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-12"
+        "version": "1.0.6-13"
     },
     "zookeeper": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.2-1"
+        "version": "3.8.2-2"
     }
 }
