@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-08-19T08:20:40Z" \
+      org.opencontainers.image.created="2023-08-21T12:48:02Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.6.1-debian-11-r86" \
+      org.opencontainers.image.ref.name="1.6.1-debian-11-r88" \
       org.opencontainers.image.title="apisix-ingress-controller" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.6.1"
@@ -27,7 +27,7 @@ RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "yq-4.35.1-0-linux-${OS_ARCH}-debian-11" \
-      "render-template-1.0.5-12-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.5-13-linux-${OS_ARCH}-debian-11" \
       "apisix-ingress-controller-1.6.1-3-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
