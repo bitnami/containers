@@ -902,7 +902,6 @@ This new release of the bitnami/kafka container includes a refactor in its logic
   **IMPORTANT**: Either KAFKA_CFG_PROCESS_ROLES or KAFKA_CFG_ZOOKEEPER_CONNECT must be configured for Apache Kafka to be started.
   The equivalent configuration to the deprecated `KAFKA_ENABLE_KRAFT=true` option would be setting `KAFKA_CFG_PROCESS_ROLES=controller,broker`.
   This change is especially aimed to support migrating from Zookeeper mode to KRaft mode. Once Zookeeper mode is fully removed we will default to a KRaft controller+broker mode.
-  Once Zookeeper mode is fully removed we will default to a KRaft controller+broker mode.
 * Support for broker-only and controller-only nodes in KRaft mode.
   By setting KAFKA_CFG_PROCESS_ROLES, the Bitnami Apache Kafka container can be configured as a dedicated broker or controller node, or run both processes.
 * Added support for SASL and SSL protocols in Control plane (controller listener).
