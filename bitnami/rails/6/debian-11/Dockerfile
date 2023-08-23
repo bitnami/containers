@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-08-18T09:09:04Z" \
+      org.opencontainers.image.created="2023-08-23T03:04:37Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.1.7-4-debian-11-r50" \
+      org.opencontainers.image.ref.name="6.1.7-6-debian-11-r0" \
       org.opencontainers.image.title="rails" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="6.1.7-4"
+      org.opencontainers.image.version="6.1.7-6"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
@@ -25,12 +25,12 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl git libaudit1 libbz2-1.0 libcap-ng0 libcom-err2 libcrypt1 libffi7 libgcc-s1 libgmp10 libgnutls30 libgssapi-krb5-2 libhogweed6 libicu67 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmariadb3 libncurses6 libncursesw6 libnettle8 libnsl2 libp11-kit0 libpam0g libpq5 libreadline-dev libreadline8 libsasl2-2 libsqlite3-0 libssl-dev libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libtirpc3 libunistring2 libxml2 procps sqlite3 sudo zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "python-3.9.17-5-linux-${OS_ARCH}-debian-11" \
-      "ruby-2.7.8-4-linux-${OS_ARCH}-debian-11" \
-      "node-18.17.1-0-linux-${OS_ARCH}-debian-11" \
-      "mysql-client-10.11.5-0-linux-${OS_ARCH}-debian-11" \
-      "wait-for-port-1.0.6-11-linux-${OS_ARCH}-debian-11" \
-      "rails-6.1.7-4-2-linux-${OS_ARCH}-debian-11" \
+      "python-3.9.17-6-linux-${OS_ARCH}-debian-11" \
+      "ruby-2.7.8-5-linux-${OS_ARCH}-debian-11" \
+      "node-18.17.1-1-linux-${OS_ARCH}-debian-11" \
+      "mysql-client-10.11.5-1-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.6-13-linux-${OS_ARCH}-debian-11" \
+      "rails-6.1.7-6-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,7 +47,7 @@ RUN /build/bitnami-user.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/rails/postunpack.sh
-ENV APP_VERSION="6.1.7-4" \
+ENV APP_VERSION="6.1.7-6" \
     BITNAMI_APP_NAME="rails" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/ruby/bin:/opt/bitnami/node/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
