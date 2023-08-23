@@ -21,7 +21,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.2.9-2"
+        "version": "8.2.9-4"
     },
     "phpmyadmin": {
         "arch": "amd64",
@@ -33,6 +33,6 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-12"
+        "version": "1.0.5-13"
     }
 }
