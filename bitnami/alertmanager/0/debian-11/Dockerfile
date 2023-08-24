@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-08-21T12:39:45Z" \
+      org.opencontainers.image.created="2023-08-24T13:59:23Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.25.0-debian-11-r190" \
+      org.opencontainers.image.ref.name="0.26.0-debian-11-r0" \
       org.opencontainers.image.title="alertmanager" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.25.0"
+      org.opencontainers.image.version="0.26.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "alertmanager-0.25.0-9-linux-${OS_ARCH}-debian-11" \
+      "alertmanager-0.26.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -45,7 +45,7 @@ RUN ln -sf /opt/bitnami/alertmanager/data /alertmanager
 RUN chmod g+rwX /opt/bitnami
 
 RUN mkdir -p /opt/bitnami/alertmanager/data/ && chmod g+rwX /opt/bitnami/alertmanager/data/
-ENV APP_VERSION="0.25.0" \
+ENV APP_VERSION="0.26.0" \
     BITNAMI_APP_NAME="alertmanager" \
     PATH="/opt/bitnami/alertmanager/bin:$PATH"
 
