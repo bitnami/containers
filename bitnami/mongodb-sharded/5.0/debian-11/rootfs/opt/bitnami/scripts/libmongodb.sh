@@ -1403,7 +1403,6 @@ mongodb_initialize() {
             mongodb_create_keyfile "$MONGODB_REPLICA_SET_KEY"
             mongodb_set_keyfile_conf "$MONGODB_CONF_FILE"
         fi
-        mongodb_set_replicasetmode_conf "$MONGODB_CONF_FILE"
     fi
 
     if is_dir_empty "$MONGODB_DATA_DIR/db"; then
@@ -1414,10 +1413,6 @@ mongodb_initialize() {
         mongodb_start_bg "$MONGODB_CONF_FILE"
         mongodb_create_users
         if [[ -n "$MONGODB_REPLICA_SET_MODE" ]]; then
-            if [[ -n "$MONGODB_REPLICA_SET_KEY" ]]; then
-                mongodb_create_keyfile "$MONGODB_REPLICA_SET_KEY"
-                mongodb_set_keyfile_conf "$MONGODB_CONF_FILE"
-            fi
             mongodb_set_replicasetmode_conf "$MONGODB_CONF_FILE"
             mongodb_set_listen_all_conf "$MONGODB_CONF_FILE"
             mongodb_configure_replica_set
@@ -1427,8 +1422,11 @@ mongodb_initialize() {
     else
         mongodb_set_auth_conf "$MONGODB_CONF_FILE"
         info "Deploying MongoDB with persisted data..."
-        if [[ -n "$MONGODB_REPLICA_SET_MODE" ]] && [[ "$MONGODB_REPLICA_SET_MODE" = "dynamic" ]]; then
-            mongodb_ensure_dynamic_mode_consistency
+        if [[ -n "$MONGODB_REPLICA_SET_MODE" ]]; then
+            if [[ "$MONGODB_REPLICA_SET_MODE" = "dynamic" ]]; then
+                mongodb_ensure_dynamic_mode_consistency
+            fi
+            mongodb_set_replicasetmode_conf "$MONGODB_CONF_FILE"
         fi
     fi
 
