@@ -1397,6 +1397,14 @@ mongodb_initialize() {
     mongodb_set_storage_conf "$MONGODB_CONF_FILE"
     is_boolean_yes "$MONGODB_DISABLE_JAVASCRIPT" && mongodb_disable_javascript_conf "$MONGODB_CONF_FILE"
 
+    # Create the ReplicaSet keyFile before Mongo starts in case it is referenced in the $MONGODB_CONF_FILE
+    if [[ -n "$MONGODB_REPLICA_SET_MODE" ]]; then
+        if [[ -n "$MONGODB_REPLICA_SET_KEY" ]]; then
+            mongodb_create_keyfile "$MONGODB_REPLICA_SET_KEY"
+            mongodb_set_keyfile_conf "$MONGODB_CONF_FILE"
+        fi
+    fi
+
     if is_dir_empty "$MONGODB_DATA_DIR/db"; then
         info "Deploying MongoDB from scratch..."
         ensure_dir_exists "$MONGODB_DATA_DIR/db"
@@ -1405,10 +1413,6 @@ mongodb_initialize() {
         mongodb_start_bg "$MONGODB_CONF_FILE"
         mongodb_create_users
         if [[ -n "$MONGODB_REPLICA_SET_MODE" ]]; then
-            if [[ -n "$MONGODB_REPLICA_SET_KEY" ]]; then
-                mongodb_create_keyfile "$MONGODB_REPLICA_SET_KEY"
-                mongodb_set_keyfile_conf "$MONGODB_CONF_FILE"
-            fi
             mongodb_set_replicasetmode_conf "$MONGODB_CONF_FILE"
             mongodb_set_listen_all_conf "$MONGODB_CONF_FILE"
             mongodb_configure_replica_set
@@ -1419,10 +1423,6 @@ mongodb_initialize() {
         mongodb_set_auth_conf "$MONGODB_CONF_FILE"
         info "Deploying MongoDB with persisted data..."
         if [[ -n "$MONGODB_REPLICA_SET_MODE" ]]; then
-            if [[ -n "$MONGODB_REPLICA_SET_KEY" ]]; then
-                mongodb_create_keyfile "$MONGODB_REPLICA_SET_KEY"
-                mongodb_set_keyfile_conf "$MONGODB_CONF_FILE"
-            fi
             if [[ "$MONGODB_REPLICA_SET_MODE" = "dynamic" ]]; then
                 mongodb_ensure_dynamic_mode_consistency
             fi
