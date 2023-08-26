@@ -15,13 +15,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.2.9-2"
+        "version": "8.2.9-4"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.9.17-6"
+        "version": "3.9.18-0"
     },
     "wait-for-port": {
         "arch": "amd64",
