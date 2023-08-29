@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-08-26T10:31:29Z" \
+      org.opencontainers.image.created="2023-08-29T22:15:45Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.8.4-debian-11-r9" \
+      org.opencontainers.image.ref.name="2.9.0-debian-11-r0" \
       org.opencontainers.image.title="harbor-portal" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.8.4"
+      org.opencontainers.image.version="2.9.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "nginx-1.25.2-1-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-13-linux-${OS_ARCH}-debian-11" \
-      "harbor-2.8.4-1-linux-${OS_ARCH}-debian-11" \
+      "harbor-2.9.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -49,7 +49,7 @@ RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN /opt/bitnami/scripts/harbor-portal/postunpack.sh
-ENV APP_VERSION="2.8.4" \
+ENV APP_VERSION="2.9.0" \
     BITNAMI_APP_NAME="harbor-portal" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
