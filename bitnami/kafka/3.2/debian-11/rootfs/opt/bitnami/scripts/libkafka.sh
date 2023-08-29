@@ -777,12 +777,12 @@ kafka_zookeeper_configure_tls() {
     fi
 
     kafka_server_conf_set "zookeeper.clientCnxnSocket" "org.apache.zookeeper.ClientCnxnSocketNetty"
-    kafka_server_conf_set "zookeeper.client.secure" "true"
-    ! is_empty_value "${keystore_location:-}" && kafka_server_conf_set "zookeeper.ssl.keyStore.location" "${keystore_location}"
-    ! is_empty_value "${KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD:-}" && kafka_server_conf_set "zookeeper.ssl.keyStore.password" "${KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD}"
-    ! is_empty_value "${kafka_zk_truststore_location:-}" && kafka_server_conf_set "zookeeper.ssl.trustStore.location" "${kafka_zk_truststore_location}"
-    ! is_empty_value "${KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD:-}" && kafka_server_conf_set "zookeeper.ssl.trustStore.password" "${KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD}"
-    ! is_empty_value "${KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME:-}" && kafka_server_conf_set "zookeeper.ssl.hostnameVerification" "${KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME}"
+    kafka_server_conf_set "zookeeper.ssl.client.enable" "true"
+    is_boolean_yes "${KAFKA_ZOOKEEPER_TLS_VERIFY_HOSTNAME:-}" && kafka_server_conf_set "zookeeper.ssl.endpoint.identification.algorithm" "HTTPS"
+    ! is_empty_value "${keystore_location:-}" && kafka_server_conf_set "zookeeper.ssl.keystore.location" "${keystore_location}"
+    ! is_empty_value "${KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD:-}" && kafka_server_conf_set "zookeeper.ssl.keystore.password" "${KAFKA_ZOOKEEPER_TLS_KEYSTORE_PASSWORD}"
+    ! is_empty_value "${kafka_zk_truststore_location:-}" && kafka_server_conf_set "zookeeper.ssl.truststore.location" "${kafka_zk_truststore_location}"
+    ! is_empty_value "${KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD:-}" && kafka_server_conf_set "zookeeper.ssl.truststore.password" "${KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_PASSWORD}"
     true # Avoid the function to fail due to the check above
 }
 
