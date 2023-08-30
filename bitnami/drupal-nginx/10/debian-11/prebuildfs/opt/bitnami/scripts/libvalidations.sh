@@ -4,7 +4,7 @@
 #
 # Validation functions library
 
-# shellcheck disable=SC1091
+# shellcheck disable=SC1091,SC2086
 
 # Load Generic Libraries
 . /opt/bitnami/scripts/liblog.sh
@@ -203,7 +203,7 @@ validate_ipv6() {
     if [[ $ip =~ $full_address_regex || $ip =~ $short_address_regex || $ip == "::" ]]; then
         stat=0
     fi
-    return "$stat"
+    return $stat
 }
 
 ########################
@@ -223,7 +223,7 @@ validate_ipv4() {
             && ${ip_array[2]} -le 255 && ${ip_array[3]} -le 255 ]]
         stat=$?
     fi
-    return "$stat"
+    return $stat
 }
 
 ########################
@@ -242,7 +242,7 @@ validate_ip() {
     else
         stat=$(validate_ipv6 "$ip")
     fi
-    return "$stat"
+    return $stat
 }
 
 ########################
