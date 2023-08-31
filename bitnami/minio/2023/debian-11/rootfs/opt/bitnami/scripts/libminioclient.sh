@@ -62,7 +62,19 @@ minio_client_execute_timeout() {
     exec=$(command -v mc)
 
     if am_i_root; then
-        timeout 5s run_as_user "$MINIO_DAEMON_USER" "${exec}" "${args[@]}"
+        cat > /tmp/cmd.sh << EOF
+#!/bin/bash
+# timeout forks its own shell process, so we need to provide it with the expected environment
+. /opt/bitnami/scripts/libos.sh
+. /opt/bitnami/scripts/minio-env.sh
+. /opt/bitnami/scripts/minio-client-env.sh
+. /opt/bitnami/scripts/libminio.sh
+. /opt/bitnami/scripts/libminioclient.sh
+run_as_user "$MINIO_DAEMON_USER" "${exec}" ${args[@]}
+EOF
+        chmod +x /tmp/cmd.sh
+        timeout 5s bash -c "/tmp/cmd.sh"
+        rm -f /tmp/cmd.sh
     else
         timeout 5s "${exec}" "${args[@]}"
     fi

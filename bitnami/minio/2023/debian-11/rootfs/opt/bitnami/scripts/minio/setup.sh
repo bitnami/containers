@@ -29,6 +29,8 @@ export MINIO_SERVER_SCHEME
 # Validate settings in MINIO_* env vars.
 minio_validate
 
+minio_initialize
+
 # Keys regeneration
 minio_regenerate_keys
 
@@ -49,7 +51,7 @@ else
         data_drive="${drives[0]}"
     fi
 
-    # Trying to add a server within a minute.
+    # Try to add a local server within a minute.
     if ! retry_while "minio_client_configure_local ${data_drive:-MINIO_DATA_DIR}/.minio.sys/config/config.json"; then
         echo "Failed to add temporary MinIO server"
         exit 1

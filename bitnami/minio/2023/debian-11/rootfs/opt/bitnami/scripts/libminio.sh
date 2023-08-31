@@ -402,3 +402,15 @@ minio_node_hostname() {
 is_minio_not_running() {
     ! is_minio_running
 }
+
+minio_initialize() {
+    if am_i_root; then
+        debug "Ensuring MinIO daemon user/group exists"
+        ensure_user_exists "$MINIO_DAEMON_USER" --group "$MINIO_DAEMON_GROUP"
+        debug "Ensuring MinIO config folder '$MINIO_CLIENT_CONF_DIR' exists"
+        ensure_dir_exists "$MINIO_CLIENT_CONF_DIR"
+        if [[ -n "${MINIO_DAEMON_USER:-}" ]]; then
+            chown -R "${MINIO_DAEMON_USER:-}" "$MINIO_BASE_DIR" "$MINIO_DATA_DIR" "$MINIO_CLIENT_CONF_DIR"
+        fi
+    fi
+}
