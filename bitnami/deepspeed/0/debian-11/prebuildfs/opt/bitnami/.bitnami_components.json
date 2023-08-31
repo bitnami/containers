@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.10.1-0"
+        "version": "0.10.2-0"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.8.18-0"
+        "version": "3.8.18-1"
     },
     "render-template": {
         "arch": "amd64",
