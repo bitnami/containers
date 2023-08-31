@@ -5,7 +5,7 @@ binaries:
 directories:
   - mode: "0775"
     paths:
-      - /data
+      - /bitnami/minio/data
       - /certs
       - /opt/bitnami/minio/log
       - /opt/bitnami/minio/tmp
