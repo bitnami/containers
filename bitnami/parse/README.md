@@ -215,7 +215,7 @@ Available environment variables:
 * `PARSE_ENABLE_HTTPS`: Whether to enable HTTPS for Parse by default. Default: **no**
 * `PARSE_BIND_HOST`: Parse bind host. Default: **127.0.0.1**
 * `PARSE_HOST`: Parse server host. Default: **127.0.0.1**
-* `PARSE_PORT_NUMBER_NUMBER`: Parse server port. Default: **1337**
+* `PARSE_PORT_NUMBER`: Parse server port. Default: **1337**
 * `PARSE_APP_ID`: Parse app ID. Default: **myappID**
 * `PARSE_MASTER_KEY`: Parse master key: **mymasterKey**
 * `PARSE_APP_NAME`: Parse app name. Default: **myappID**
