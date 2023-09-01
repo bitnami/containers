@@ -9,7 +9,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.30-2"
+        "version": "8.0.30-3"
     },
     "moodle": {
         "arch": "amd64",
@@ -27,7 +27,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.30-3"
+        "version": "8.0.30-4"
     },
     "postgresql-client": {
         "arch": "amd64",
