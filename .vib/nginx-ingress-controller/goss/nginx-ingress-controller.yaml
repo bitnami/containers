@@ -20,5 +20,5 @@ command:
     exec: getcap /nginx-ingress-controller /usr/local/nginx/sbin/nginx
     exit-status: 0
     stdout:
-      - nginx-ingress-controller cap_net_bind_service=ep
-      - nginx cap_net_bind_service=ep
+      - /nginx-ingress-controller .*cap_net_bind_service[+=]ep/
+      - /.*nginx .*cap_net_bind_service[+=]ep/
