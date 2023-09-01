@@ -10,6 +10,9 @@ directories:
       - /opt/bitnami/mariadb/conf/bitnami
       - /opt/bitnami/mariadb/logs
       - /opt/bitnami/mariadb/tmp
+files:
+  - paths:
+      - /opt/bitnami/mariadb/plugin/auth_pam.so
 root_dir: /opt/bitnami
 version:
   bin_name: mysql
