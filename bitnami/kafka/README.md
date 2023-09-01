@@ -267,7 +267,7 @@ version: "2"
 
 services:
   zookeeper:
-    image: docker.io/bitnami/zookeeper:3.8
+    image: docker.io/bitnami/zookeeper:3.9
     ports:
       - "2181:2181"
     volumes:
