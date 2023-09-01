@@ -3,7 +3,7 @@
 
 gossfile:
   # Load scripts from .vib/common/goss/templates
-  ../../common/goss/templates/check-app-version.yaml: {}
+  # ../../common/goss/templates/check-app-version.yaml: {} - Disable due to mismatch version in the upstream release https://github.com/supabase/realtime/releases/tag/v2.22.3
   ../../common/goss/templates/check-binaries.yaml: {}
   ../../common/goss/templates/check-broken-symlinks.yaml: {}
   ../../common/goss/templates/check-ca-certs.yaml: {}
