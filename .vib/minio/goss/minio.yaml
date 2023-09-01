@@ -8,7 +8,7 @@ file:
     linked-to: /dev/stdout
 command:
   check-app-version:
-    exec: minio --version | grep -P -o "[0-9]{4}\-[0-9]{2}\-[0-9]{2}" | sed "s/\-0*/./g"
+    exec: minio --version | sed "s/\-0*/./g"
     exit-status: 0
     stdout:
       - {{ .Env.APP_VERSION }}
