@@ -12,4 +12,4 @@ version:
   bin_name: dotnet
   flag: --info
 binary:
-  capabilities: cap_net_bind_service=eip
+  capabilities: cap_net_bind_service[+=]eip
