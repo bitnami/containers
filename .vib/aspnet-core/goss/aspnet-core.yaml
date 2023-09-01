@@ -5,7 +5,7 @@ command:
   check-bin-caps:
     exec: getcap /opt/bitnami/aspnet-core/bin/dotnet
     stdout:
-      - {{ .Vars.binary.capabilities }}
+      - /{{ .Vars.binary.capabilities }}/
     exit-status: 0
   check-installed-runtimes:
     exec: dotnet --list-runtimes
