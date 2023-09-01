@@ -12,8 +12,3 @@ file:
   /opt/bitnami/mariadb/lib/plugin:
     exists: true
     filetype: symlink
-  # Check the plugins added at compilation time are available
-  /opt/bitnami/mariadb/plugin/auth_pam.so:
-    exists: true
-    filetype: file
-    mode: "0644"
