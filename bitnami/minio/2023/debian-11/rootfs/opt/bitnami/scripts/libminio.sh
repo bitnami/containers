@@ -403,6 +403,15 @@ is_minio_not_running() {
     ! is_minio_running
 }
 
+###############
+# Initialize MinIO service
+# Globals:
+#   MINIO_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
 minio_initialize() {
     if am_i_root; then
         debug "Ensuring MinIO daemon user/group exists"
