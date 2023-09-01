@@ -14,6 +14,7 @@ command:
   check-redis-server:
     exec: redis-server /opt/bitnami/redis/etc/redis.conf && ps aux
     exit-status: 0
+    timeout: 20000
     stdout:
       - redis-server 127.0.0.1:6379
   check-redis-server-ssl:
