@@ -3,7 +3,7 @@
 
 gossfile:
   # Goss tests exclusive to the current container
-  ../../tomcat/goss/tomcat.yaml: {}
+  ../../tomcat-jdk-17/goss/tomcat-jdk-17.yaml: {}
   # Load scripts from .vib/common/goss/templates
   ../../common/goss/templates/check-binaries.yaml: {}
   ../../common/goss/templates/check-broken-symlinks.yaml: {}
