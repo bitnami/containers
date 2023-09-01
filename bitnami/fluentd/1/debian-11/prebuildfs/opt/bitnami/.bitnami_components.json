@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.16.2-2"
+        "version": "1.16.2-3"
     },
     "ruby": {
         "arch": "amd64",
