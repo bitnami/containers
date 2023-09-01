@@ -38,6 +38,4 @@ phpmodules:
   - pcre
   - xml
   - zip
-# Specific from postunpack logic
-  - memcached
 root_dir: /opt/bitnami
