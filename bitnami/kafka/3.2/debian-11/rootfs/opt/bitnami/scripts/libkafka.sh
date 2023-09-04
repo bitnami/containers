@@ -773,7 +773,7 @@ kafka_zookeeper_configure_tls() {
         # Concatenating private key into public certificate file
         # This is needed to load keystore from location using PEM
         keystore_location="${KAFKA_CERTS_DIR}/zookeeper.keypair.pem"
-        cat "${KAFKA_CERTS_DIR}/zookeeper.keystore.pem" "${KAFKA_CERTS_DIR}/zookeeper.keystore.key" > "$keystore_location"
+        cat "${KAFKA_CERTS_DIR}/zookeeper.keystore.{pem,key}" > "$keystore_location"
     fi
 
     kafka_server_conf_set "zookeeper.clientCnxnSocket" "org.apache.zookeeper.ClientCnxnSocketNetty"
