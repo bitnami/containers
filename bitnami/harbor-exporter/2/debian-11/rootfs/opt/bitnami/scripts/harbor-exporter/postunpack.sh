@@ -22,6 +22,8 @@ set -o pipefail
 ensure_user_exists "$HARBOR_EXPORTER_DAEMON_USER" --group "$HARBOR_EXPORTER_DAEMON_GROUP"
 
 # Ensure a set of directories exist and the non-root user has write privileges to them
+# Give execution permissions to /var/log to ensure harbor can access the child folder
+chmod +x /var/log
 read -r -a directories <<<"$(get_system_cert_paths)"
 directories+=("/var/log/jobs")
 for dir in "${directories[@]}"; do
