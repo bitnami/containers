@@ -3,5 +3,5 @@
 
 command:
   check-distro-version:
-    exec: grep VERSION_ID /etc/os-release | grep "$(echo $APP_VERSION | sed -E 's|^([0-9]+).*$|\1|g')
+    exec: grep VERSION_ID /etc/os-release | grep "$(echo $APP_VERSION | sed -E 's|^([0-9]+).*$|\1|g')"
     exit-status: 0
