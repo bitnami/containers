@@ -36,6 +36,9 @@ for entry in "${symlinks[@]}"; do
     ln -s "$file" "$link"
 done
 
+# Additionally, ensure that the /var/log is accessible, which may have been hardened
+chmod g+x /var/log
+
 # Special case for RabbitMQ mnesia dir, which will have a different symbolic linking to ensure compatibility with
 # the RabbitMQ Cluster Operator
 
