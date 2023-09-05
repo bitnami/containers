@@ -16,7 +16,7 @@ command:
     exit-status: 0
     timeout: 20000
     stdout:
-      - redis-server 127.0.0.1:6379
+      - /redis-server.*(127.0.0.1|localhost).*6379/
   check-redis-server-ssl:
     exec: ldd /opt/bitnami/redis/bin/redis-server
     exit-status: 0
