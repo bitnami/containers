@@ -767,9 +767,9 @@ kafka_zookeeper_configure_tls() {
     local keystore_location=""
     local -r kafka_zk_truststore_location="${KAFKA_CERTS_DIR}/$(basename "${KAFKA_ZOOKEEPER_TLS_TRUSTSTORE_FILE}")"
 
-    if [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "JKS" ]] && [[ -f "$KAFKA_CERTS_DIR"/zookeeper.keystore.jks ]]; then
+    if [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "JKS" ]] && [[ -f "${KAFKA_CERTS_DIR}/zookeeper.keystore.jks" ]]; then
         keystore_location="${KAFKA_CERTS_DIR}/zookeeper.keystore.jks"
-    elif [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "PEM" ]] && [[ -f "$KAFKA_CERTS_DIR"/zookeeper.keystore.pem ]] && [[ -f "$KAFKA_CERTS_DIR"/zookeeper.keystore.key ]]; then
+    elif [[ "$KAFKA_ZOOKEEPER_TLS_TYPE" = "PEM" ]] && [[ -f "${KAFKA_CERTS_DIR}/zookeeper.keystore.pem" ]] && [[ -f "${KAFKA_CERTS_DIR}/zookeeper.keystore.key" ]]; then
         # Concatenating private key into public certificate file
         # This is needed to load keystore from location using PEM
         keystore_location="${KAFKA_CERTS_DIR}/zookeeper.keypair.pem"
