@@ -36,6 +36,7 @@ for dir in "$MONGODB_TMP_DIR" "$MONGODB_LOG_DIR" "$MONGODB_DATA_DIR"; do
     ensure_dir_exists "$dir"
     am_i_root && chown -R "${MONGODB_DAEMON_USER}:${MONGODB_DAEMON_GROUP}" "$dir"
 done
+am_i_root && configure_permissions_ownership "$MONGODB_CONF_FILE" -f "640" -g "$MONGODB_DAEMON_GROUP"
 
 # Ensure MongoDB is initialized
 mongodb_initialize
