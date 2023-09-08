@@ -1389,16 +1389,6 @@ configure_permissions() {
 mongodb_initialize() {
     info "Initializing MongoDB..."
 
-    if am_i_root; then
-        debug "Ensuring MongoDB daemon user/group exists"
-        ensure_user_exists "$MONGODB_DAEMON_USER" --group "$MONGODB_DAEMON_GROUP"
-        debug "Ensuring Mongosh directory '$MONGOSH_DIR' exists"
-        ensure_dir_exists "$MONGOSH_DIR"
-        if [[ -n "${MONGODB_DAEMON_USER:-}" ]]; then
-            chown -R "${MONGODB_DAEMON_USER:-}" "$MONGODB_BASE_DIR" "$MONGODB_DATA_DIR" "$MONGOSH_DIR"
-        fi
-    fi
-
     rm -f "$MONGODB_PID_FILE"
     mongodb_copy_mounted_config
     mongodb_set_net_conf "$MONGODB_CONF_FILE"
