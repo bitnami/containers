@@ -14,7 +14,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl tzdata
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "argo-workflow-controller-3.4.10-1-linux-${OS_ARCH}-debian-11" \
+      "argo-workflow-controller-3.4.11-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -36,20 +36,20 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-09-05T17:18:53Z" \
+      org.opencontainers.image.created="2023-09-08T07:45:34Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.4.10-debian-11-r20" \
+      org.opencontainers.image.ref.name="3.4.11-debian-11-r0" \
       org.opencontainers.image.title="argo-workflow-controller" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="3.4.10"
+      org.opencontainers.image.version="3.4.11"
 
 COPY prebuildfs /
 COPY rootfs /
 COPY --from=builder /opt/bitnami/../../usr/share/zoneinfo /usr/share/zoneinfo
 COPY --from=builder /opt/bitnami/argo-workflow-controller/bin/workflow-controller /workflow-controller
 
-ENV APP_VERSION="3.4.10" \
+ENV APP_VERSION="3.4.11" \
     BITNAMI_APP_NAME="argo-workflow-controller"
 
 USER 1001
