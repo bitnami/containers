@@ -181,6 +181,14 @@ Passing extra command-line flags to the postgresql service command is possible t
 
 * `POSTGRESQL_EXTRA_FLAGS`: Flags to be appended to the `postgres` startup command. No defaults
 
+#### Adjusting the default transaction isolation level
+
+The default transaction isolation level in postgresql is `read committed`, the global default transaction isolation level can be changed using the environment variable `POSTGRESQL_DEFAULT_TRANSACTION_ISOLATION`.
+
+Possible values are: `read uncommitted`, `read committed`, `repeatable read` or `serializable`. For more details consult the documentation for `default_transaction_isolation` in <https://www.postgresql.org/docs/current/runtime-config-client.html>
+
+*Note: Setting `default_transaction_isolation` via `POSTGRESQL_EXTRA_FLAGS` is currently only possible for transaction levels without white spaces in its name.*
+
 ### Initializing a new instance
 
 When the container is executed for the first time, it will execute the files with extensions `.sh`, `.sql` and `.sql.gz` located at `/docker-entrypoint-initdb.d`.
