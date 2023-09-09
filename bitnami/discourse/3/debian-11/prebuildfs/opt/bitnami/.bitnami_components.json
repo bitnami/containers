@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.9-163"
+        "version": "1.1.0-0"
     },
     "discourse": {
         "arch": "amd64",
@@ -27,7 +27,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.9.18-1"
+        "version": "3.9.18-2"
     },
     "ruby": {
         "arch": "amd64",
