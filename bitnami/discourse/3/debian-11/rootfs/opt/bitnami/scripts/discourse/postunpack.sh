@@ -44,6 +44,10 @@ for dir in "${writable_dirs[@]}"; do
     configure_permissions_ownership "$dir" -d "775" -f "664" -u "$DISCOURSE_DAEMON_USER" -g "root"
 done
 
+# Gem 'sprockets' purposely includes a broken symlink, which causes permissions change to fail
+# We need to remove the broken symlink for chown to succeed
+find "${DISCOURSE_BASE_DIR}/vendor/bundle/ruby" -wholename "*/sprockets-*/test/fixtures/errors/symlink" -type l -exec rm -f {} \;
+
 # Required for running as non-root users, for persistence logic to work properly
 # Using g+rwx/g+rw instead of explicit 775/664 permissions because Discourse includes executable binaries in different subfolders
 configure_permissions_ownership "$DISCOURSE_BASE_DIR" -d "g+rwx" -f "g+rw" -u "$DISCOURSE_DAEMON_USER" -g "root"
