@@ -10,7 +10,7 @@ services:
       - 9000:9000
       - 9001:9001
     volumes:
-      - 'minio_data:/data'
+      - 'minio_data:/bitnami/minio/data'
     environment:
       - MINIO_ROOT_USER=minio
       - MINIO_ROOT_PASSWORD=miniosecret
@@ -19,7 +19,7 @@ services:
   minio2:
     image: docker.io/bitnami/minio:2023
     volumes:
-      - 'minio_2_data:/data'
+      - 'minio_2_data:/bitnami/minio/data'
     environment:
       - MINIO_ROOT_USER=minio
       - MINIO_ROOT_PASSWORD=miniosecret
@@ -28,7 +28,7 @@ services:
   minio3:
     image: docker.io/bitnami/minio:2023
     volumes:
-      - 'minio_3_data:/data'
+      - 'minio_3_data:/bitnami/minio/data'
     environment:
       - MINIO_ROOT_USER=minio
       - MINIO_ROOT_PASSWORD=miniosecret
@@ -37,7 +37,7 @@ services:
   minio4:
     image: docker.io/bitnami/minio:2023
     volumes:
-      - 'minio_4_data:/data'
+      - 'minio_4_data:/bitnami/minio/data'
     environment:
       - MINIO_ROOT_USER=minio
       - MINIO_ROOT_PASSWORD=miniosecret
