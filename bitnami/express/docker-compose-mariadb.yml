@@ -1,8 +1,11 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 version: '2'
 
 services:
   mariadb:
-    image: docker.io/bitnami/mariadb:10.3
+    image: docker.io/bitnami/mariadb:10.6
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_DATABASE=myapp
