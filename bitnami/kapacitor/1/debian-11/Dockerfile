@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-09-09T07:14:47Z" \
+      org.opencontainers.image.created="2023-09-11T22:26:25Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.6.6-debian-11-r109" \
+      org.opencontainers.image.ref.name="1.7.0-debian-11-r0" \
       org.opencontainers.image.title="kapacitor" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.6.6"
+      org.opencontainers.image.version="1.7.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "kapacitor-1.6.6-3-linux-${OS_ARCH}-debian-11" \
+      "kapacitor-1.7.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -43,7 +43,7 @@ RUN apt-get autoremove --purge -y curl && \
 RUN chmod g+rwX /opt/bitnami
 RUN mkdir -p /bitnami/kapacitor && chmod g+rwX /bitnami/kapacitor
 
-ENV APP_VERSION="1.6.6" \
+ENV APP_VERSION="1.7.0" \
     BITNAMI_APP_NAME="kapacitor" \
     KAPACITOR_DATA_DIR="/bitnami/kapacitor" \
     KAPACITOR_LOAD_DIR="/bitnami/kapacitor/load" \
