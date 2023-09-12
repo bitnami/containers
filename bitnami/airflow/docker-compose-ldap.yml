@@ -49,6 +49,8 @@ services:
       - AIRFLOW_LDAP_BIND_PASSWORD=adminpassword
       - AIRFLOW_LDAP_UID_FIELD=uid
       - AIRFLOW_LDAP_USE_TLS=False
+      - AIRFLOW_LDAP_ROLES_MAPPING="{ 'cn=All,ou=Groups,dc=example,dc=org':['User'], 'cn=Admins,ou=Groups,dc=example,dc=org':['Admin'], }"
+      - AIRFLOW_LDAP_USER_REGISTRATION_ROLE=Public
       - AIRFLOW_USER_REGISTRATION_ROLE=Public
       - AIRFLOW_DATABASE_NAME=bitnami_airflow
       - AIRFLOW_DATABASE_USERNAME=bn_airflow
