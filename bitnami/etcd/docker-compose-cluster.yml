@@ -1,8 +1,11 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 version: '2'
 
 services:
   etcd1:
-    image: docker.io/bitnami/etcd:3
+    image: docker.io/bitnami/etcd:3.5
     environment:
       - ALLOW_NONE_AUTHENTICATION=yes
       - ETCD_NAME=etcd1
@@ -14,7 +17,7 @@ services:
       - ETCD_INITIAL_CLUSTER=etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380
       - ETCD_INITIAL_CLUSTER_STATE=new
   etcd2:
-    image: docker.io/bitnami/etcd:3
+    image: docker.io/bitnami/etcd:3.5
     environment:
       - ALLOW_NONE_AUTHENTICATION=yes
       - ETCD_NAME=etcd2
@@ -26,7 +29,7 @@ services:
       - ETCD_INITIAL_CLUSTER=etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380
       - ETCD_INITIAL_CLUSTER_STATE=new
   etcd3:
-    image: docker.io/bitnami/etcd:3
+    image: docker.io/bitnami/etcd:3.5
     environment:
       - ALLOW_NONE_AUTHENTICATION=yes
       - ETCD_NAME=etcd3
