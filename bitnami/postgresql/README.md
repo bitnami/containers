@@ -646,12 +646,12 @@ If you are using your custom `postgresql.conf`, you should create (or uncomment)
 Specifying extra initdb arguments can easily be done using the following environment variables:
 
 * `POSTGRESQL_INITDB_ARGS`: Specifies extra arguments for the initdb command. No defaults.
-* `POSTGRESQL_INITDB_WALDIR`: Defines a custom location for the transaction log. No defaults.
+* `POSTGRESQL_INITDB_WAL_DIR`: Defines a custom location for the transaction log. No defaults.
 
 ```console
 docker run --name postgresql \
   -e POSTGRESQL_INITDB_ARGS="--data-checksums" \
-  -e POSTGRESQL_INITDB_WALDIR="/bitnami/waldir" \
+  -e POSTGRESQL_INITDB_WAL_DIR="/bitnami/waldir" \
   bitnami/postgresql:latest
 ```
 
@@ -663,7 +663,7 @@ services:
   ...
     environment:
       - POSTGRESQL_INITDB_ARGS=--data-checksums
-      - POSTGRESQL_INITDB_WALDIR=/bitnami/waldir
+      - POSTGRESQL_INITDB_WAL_DIR=/bitnami/waldir
   ...
 ```
 
@@ -701,7 +701,7 @@ The Bitnami PostgreSQL container allows two different sets of environment variab
 | POSTGRESQL_POSTGRES_PASSWORD_FILE    | POSTGRES_POSTGRES_PASSWORD_FILE    |
 | POSTGRESQL_PORT_NUMBER               | POSTGRES_PORT_NUMBER               |
 | POSTGRESQL_INITDB_ARGS               | POSTGRES_INITDB_ARGS               |
-| POSTGRESQL_INITDB_WALDIR             | POSTGRES_INITDB_WALDIR             |
+| POSTGRESQL_INITDB_WAL_DIR            | POSTGRES_INITDB_WAL_DIR            |
 | POSTGRESQL_DATA_DIR                  | PGDATA                             |
 | POSTGRESQL_REPLICATION_USER          | POSTGRES_REPLICATION_USER          |
 | POSTGRESQL_REPLICATION_MODE          | POSTGRES_REPLICATION_MODE          |
