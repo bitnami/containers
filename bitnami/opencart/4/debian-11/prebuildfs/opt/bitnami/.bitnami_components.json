@@ -15,19 +15,19 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.11.5-1"
+        "version": "11.0.3-0"
     },
     "opencart": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.0.2-2-2"
+        "version": "4.0.2-3-0"
     },
     "php": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.2.10-4"
+        "version": "8.2.10-6"
     },
     "render-template": {
         "arch": "amd64",
