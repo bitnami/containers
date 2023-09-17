@@ -9,19 +9,19 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.30-3"
+        "version": "8.1.23-0"
     },
     "mysql-client": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.11.5-1"
+        "version": "11.0.3-0"
     },
     "php": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.30-7"
+        "version": "8.1.23-3"
     },
     "render-template": {
         "arch": "amd64",
