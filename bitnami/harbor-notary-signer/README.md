@@ -1,5 +1,9 @@
 # Harbor Notary Signer packaged by Bitnami
 
+## Deprecation Notice
+
+The Harbor Notary Signer container is no longer maintained by upstream and is now deprecated. This image will no longer be released in our catalog, but already released container images will still persist in the registries.
+
 ## What is Harbor Notary Signer?
 
 > Harbor Notary Signer is one of the main components of Harbor. Combined with the Harbor Notary Server, it is responsible for signing and verifying images.
