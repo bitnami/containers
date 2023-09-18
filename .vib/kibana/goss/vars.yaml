@@ -15,6 +15,8 @@ directories:
 files:
   - paths:
       - /opt/bitnami/kibana/config/node.options
+linked_libraries:
+  timeout: 60000
 root_dir: /opt/bitnami
 version:
   bin_name: kibana
