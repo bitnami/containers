@@ -23,6 +23,10 @@ if [[ -n "${POSTGRESQL_EXTRA_FLAGS:-}" ]]; then
     flags+=("${extra_flags[@]}")
 fi
 
+if [[ -n "${POSTGRESQL_DEFAULT_TRANSACTION_ISOLATION:-}" ]]; then
+    flags+=("-c" "default_transaction_isolation=$POSTGRESQL_DEFAULT_TRANSACTION_ISOLATION")
+fi
+
 flags+=("$@")
 
 cmd=$(command -v postgres)
