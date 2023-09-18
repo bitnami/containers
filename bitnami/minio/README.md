@@ -75,13 +75,13 @@ docker build -t bitnami/APP:latest .
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a directory at the `/data` path.
+For persistence you should mount a directory at the `/bitnami/minio/data` path.
 
 ```console
 docker run --name minio \
     --publish 9000:9000 \
     --publish 9001:9001 \
-    --volume /path/to/minio-persistence:/data \
+    --volume /path/to/minio-persistence:/bitnami/minio/data \
     bitnami/minio:latest
 ```
 
@@ -92,7 +92,7 @@ services:
   minio:
   ...
     volumes:
-      - /path/to/minio-persistence:/data
+      - /path/to/minio-persistence:/bitnami/minio/data
   ...
 ```
 
@@ -312,23 +312,23 @@ services:
   minio-0:
     image: 'bitnami/minio:latest'
     volumes:
-      - 'minio_0_data_0:/data-0'
-      - 'minio_0_data_1:/data-1'
+      - 'minio_0_data_0:/bitnami/minio/data-0'
+      - 'minio_0_data_1:/bitnami/minio/data-1'
     environment:
       - MINIO_ROOT_USER=minio
       - MINIO_ROOT_PASSWORD=miniosecret
       - MINIO_DISTRIBUTED_MODE_ENABLED=yes
-      - MINIO_DISTRIBUTED_NODES=minio-{0...1}/data-{0...1}
+      - MINIO_DISTRIBUTED_NODES=minio-{0...1}/bitnami/minio/data-{0...1}
   minio-1:
     image: 'bitnami/minio:latest'
     volumes:
-      - 'minio_1_data_0:/data-0'
-      - 'minio_1_data_1:/data-1'
+      - 'minio_1_data_0:/bitnami/minio/data-0'
+      - 'minio_1_data_1:/bitnami/minio/data-1'
     environment:
       - MINIO_ROOT_USER=minio
       - MINIO_ROOT_PASSWORD=miniosecret
       - MINIO_DISTRIBUTED_MODE_ENABLED=yes
-      - MINIO_DISTRIBUTED_NODES=minio-{0...1}/data-{0...1}
+      - MINIO_DISTRIBUTED_NODES=minio-{0...1}/bitnami/minio/data-{0...1}
 volumes:
   minio_0_data_0:
     driver: local
@@ -355,7 +355,7 @@ docker run --name minio \
     --env MINIO_FORCE_NEW_KEYS="yes" \
     --env MINIO_ROOT_USER="new-minio-root-user" \
     --env MINIO_ROOT_PASSWORD="new-minio-root-password" \
-    --volume /path/to/minio-persistence:/data \
+    --volume /path/to/minio-persistence:/bitnami/minio/data \
     bitnami/minio:latest
 ```
 
