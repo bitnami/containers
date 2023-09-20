@@ -203,7 +203,8 @@ pgbouncer_initialize() {
     info "Configuring credentials"
     # Create credentials file
     if ! pgbouncer_is_file_external "userlist.txt"; then
-        echo "pgbouncer_escape_auth $POSTGRESQL_USERNAME" "pgbouncer_escape_auth $POSTGRESQL_PASSWORD" > "$PGBOUNCER_AUTH_FILE"
+        echo "\""$(pgbouncer_escape_auth "$POSTGRESQL_USERNAME")"\" \""$(pgbouncer_escape_auth "$POSTGRESQL_PASSWORD")"\"" \
+           > "$PGBOUNCER_AUTH_FILE"
         echo "$PGBOUNCER_USERLIST" >> "$PGBOUNCER_AUTH_FILE"
     else
         debug "User list file mounted externally, skipping configuration"
