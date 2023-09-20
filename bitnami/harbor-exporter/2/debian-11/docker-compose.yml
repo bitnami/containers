@@ -52,7 +52,6 @@ services:
       - CORE_SECRET=CHANGEME
       - JOBSERVICE_SECRET=CHANGEME
       - ADMIRAL_URL=
-      - WITH_NOTARY=False
       - CORE_URL=http://core:8080
       - JOBSERVICE_URL=http://jobservice:8080
       - REGISTRY_STORAGE_PROVIDER_NAME=filesystem
