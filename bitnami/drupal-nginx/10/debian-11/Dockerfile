@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-09-19T06:02:54Z" \
+      org.opencontainers.image.created="2023-09-20T20:50:30Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="10.1.3-debian-11-r10" \
+      org.opencontainers.image.ref.name="10.1.4-debian-11-r0" \
       org.opencontainers.image.title="drupal-nginx" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="10.1.3"
+      org.opencontainers.image.version="10.1.4"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -30,7 +30,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "nginx-1.25.2-3-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.11.5-1-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-13-linux-${OS_ARCH}-debian-11" \
-      "drupal-10.1.3-0-linux-${OS_ARCH}-debian-11" \
+      "drupal-10.1.4-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -51,7 +51,7 @@ RUN /opt/bitnami/scripts/php/postunpack.sh
 RUN /opt/bitnami/scripts/nginx-php-fpm/postunpack.sh
 RUN /opt/bitnami/scripts/drupal/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
-ENV APP_VERSION="10.1.3" \
+ENV APP_VERSION="10.1.4" \
     BITNAMI_APP_NAME="drupal-nginx" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
