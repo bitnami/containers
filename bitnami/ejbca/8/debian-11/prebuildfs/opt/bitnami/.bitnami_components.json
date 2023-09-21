@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.20230531-0"
+        "version": "8.0.20230531-1"
     },
     "java": {
         "arch": "amd64",
