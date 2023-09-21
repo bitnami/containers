@@ -609,13 +609,6 @@ ldap_initialize() {
         if ! is_dir_empty "$LDAP_CUSTOM_SCHEMA_DIR"; then
             ldap_add_custom_schemas
         fi
-        if ! is_dir_empty "$LDAP_CUSTOM_LDIF_DIR"; then
-            ldap_add_custom_ldifs
-        elif ! is_boolean_yes "$LDAP_SKIP_DEFAULT_TREE"; then
-            ldap_create_tree
-        else
-            info "Skipping default schemas/tree structure"
-        fi
         # additional configuration
         if [[ ! "$LDAP_PASSWORD_HASH" == "{SSHA}" ]]; then
             ldap_configure_password_hash
@@ -629,6 +622,13 @@ ldap_initialize() {
             if is_boolean_yes "$LDAP_REQUIRE_TLS"; then
                 ldap_configure_tls_required
             fi
+        fi
+        if ! is_dir_empty "$LDAP_CUSTOM_LDIF_DIR"; then
+            ldap_add_custom_ldifs
+        elif ! is_boolean_yes "$LDAP_SKIP_DEFAULT_TREE"; then
+            ldap_create_tree
+        else
+            info "Skipping default schemas/tree structure"
         fi
         ldap_stop
     fi
