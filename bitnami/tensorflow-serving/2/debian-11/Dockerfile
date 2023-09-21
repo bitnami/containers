@@ -8,10 +8,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-09-19T04:15:45Z" \
+      org.opencontainers.image.created="2023-09-21T11:20:33Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.13.0-debian-11-r50" \
+      org.opencontainers.image.ref.name="2.13.0-debian-11-r53" \
       org.opencontainers.image.title="tensorflow-serving" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.13.0"
@@ -28,7 +28,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl gcc-10 libgcc-s1 libstdc++6 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "tensorflow-serving-2.13.0-3-linux-${OS_ARCH}-debian-11" \
+      "tensorflow-serving-2.13.0-4-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-13-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
