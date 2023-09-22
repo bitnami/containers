@@ -18,5 +18,5 @@ directories:
 root_dir: /opt/bitnami
 sed_in_place:
   exclude_paths:
-    # Ignore PyLib directory (not bitnami-related)
+    # Ignore Mastodon node_modules directory (not bitnami-related)
     - \/opt\/bitnami\/mastodon\/node_modules\/.*
