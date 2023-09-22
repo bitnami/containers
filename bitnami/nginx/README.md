@@ -560,6 +560,10 @@ docker-compose up nginx
 
 ## Notable Changes
 
+### 1.24.0-debian-11-r142 and 1.25.2-debian-11-r33
+
+* Added support for [Module ngx_http_dav_module](http://nginx.org/en/docs/http/ngx_http_dav_module.html), WebDAV protocol.
+
 ### 1.18.0-debian-10-r210 and 1.19.6-debian-10-r1
 
 * Added support for enabling dynamic modules.
