@@ -186,7 +186,7 @@ airflow_execute() {
 airflow_generate_config() {
     # Create Airflow confirguration from default files
     cp "$(find "$AIRFLOW_BASE_DIR" -name default_airflow.cfg)" "$AIRFLOW_CONF_FILE"
-    cp "$(find "$AIRFLOW_BASE_DIR" -name default_webserver_config.py)" "$AIRFLOW_WEBSERVER_CONF_FILE"
+    [[ -n "$AIRFLOW_WEBSERVER_CONF_FILE" ]] && cp "$(find "$AIRFLOW_BASE_DIR" -name default_webserver_config.py)" "$AIRFLOW_WEBSERVER_CONF_FILE"
 
     # Setup Airflow base URL
     airflow_configure_base_url
@@ -402,6 +402,7 @@ airflow_configure_celery_executor() {
     local -r redis_user=$(airflow_encode_url "$REDIS_USER")
     local -r redis_password=$(airflow_encode_url "$REDIS_PASSWORD")
     airflow_conf_set "celery" "broker_url" "redis://${redis_user}:${redis_password}@${REDIS_HOST}:${REDIS_PORT_NUMBER}/${REDIS_DATABASE}"
+    is_boolean_yes "$AIRFLOW_REDIS_USE_SSL" && airflow_conf_set "celery" "broker_url" "rediss://${redis_user}:${redis_password}@${REDIS_HOST}:${REDIS_PORT_NUMBER}/${REDIS_DATABASE}"
     is_boolean_yes "$AIRFLOW_REDIS_USE_SSL" && airflow_conf_set "celery" "redis_backend_use_ssl" "true"
 
     # Configure celery backend
