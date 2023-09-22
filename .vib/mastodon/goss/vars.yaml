@@ -16,3 +16,7 @@ directories:
       - /opt/bitnami/mastodon/public/system
       - /opt/bitnami/mastodon/public/assets
 root_dir: /opt/bitnami
+sed_in_place:
+  exclude_paths:
+    # Ignore PyLib directory (not bitnami-related)
+    - \/opt\/bitnami\/mastodon\/node_modules\/.*
