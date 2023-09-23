@@ -17,7 +17,7 @@ set -o pipefail
 . /opt/bitnami/scripts/mastodon-env.sh
 
 # System User
-ensure_user_exists "$MASTODON_DAEMON_USER" --group "$MASTODON_DAEMON_GROUP" --system
+ensure_user_exists "$MASTODON_DAEMON_USER" --group "$MASTODON_DAEMON_GROUP" --home "/home/${MASTODON_DAEMON_USER}" --system
 
 for dir in "$MASTODON_VOLUME_DIR" "$MASTODON_TMP_DIR" "$MASTODON_SYSTEM_DIR" "$MASTODON_ASSETS_DIR"; do
     ensure_dir_exists "$dir"
