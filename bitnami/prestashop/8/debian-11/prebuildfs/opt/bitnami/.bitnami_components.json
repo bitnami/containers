@@ -9,7 +9,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.23-0"
+        "version": "8.1.23-2"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -21,7 +21,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.23-3"
+        "version": "8.1.23-4"
     },
     "prestashop": {
         "arch": "amd64",
