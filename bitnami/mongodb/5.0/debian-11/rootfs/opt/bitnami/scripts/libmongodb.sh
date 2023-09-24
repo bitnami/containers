@@ -488,9 +488,15 @@ mongodb_set_journal_conf() {
     local mongodb_conf
 
     if ! mongodb_is_file_external "$conf_file_name"; then
-        if [[ -n "$MONGODB_ENABLE_JOURNAL" ]]; then
-            mongodb_conf="$(sed -E "/^ *journal:/,/^ *[^:]*:/s/enabled:.*/enabled: $({ is_boolean_yes "$MONGODB_ENABLE_JOURNAL" && echo 'true'; } || echo 'false')/" "$conf_file_path")"
+        # Disable journal.enabled since it is not supported from 7.0 on
+        if [[ "$(mongodb_get_version)" =~ ^7\..\. ]]; then
+            mongodb_conf="$(sed '/journal:/,/enabled: .*/d' "$conf_file_path")"
             echo "$mongodb_conf" >"$conf_file_path"
+        else
+            if [[ -n "$MONGODB_ENABLE_JOURNAL" ]]; then
+                mongodb_conf="$(sed -E "/^ *journal:/,/^ *[^:]*:/s/enabled:.*/enabled: $({ is_boolean_yes "$MONGODB_ENABLE_JOURNAL" && echo 'true'; } || echo 'false')/" "$conf_file_path")"
+                echo "$mongodb_conf" >"$conf_file_path"
+            fi
         fi
     else
         debug "$conf_file_name mounted. Skipping setting log settings"
