@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.5.2-10"
+        "version": "9.5.2-11"
     },
     "node": {
         "arch": "amd64",
@@ -15,7 +15,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.2.10-7"
+        "version": "8.2.10-8"
     },
     "python": {
         "arch": "amd64",
