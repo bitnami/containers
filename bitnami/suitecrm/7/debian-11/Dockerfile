@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-09-23T09:19:09Z" \
+      org.opencontainers.image.created="2023-09-25T18:43:52Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.14.0-debian-11-r21" \
+      org.opencontainers.image.ref.name="7.14.0-debian-11-r24" \
       org.opencontainers.image.title="suitecrm" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="7.14.0"
@@ -29,7 +29,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "apache-2.4.57-11-linux-${OS_ARCH}-debian-11" \
       "mysql-client-11.0.3-0-linux-${OS_ARCH}-debian-11" \
       "libphp-8.1.23-2-linux-${OS_ARCH}-debian-11" \
-      "suitecrm-7.14.0-0-linux-${OS_ARCH}-debian-11" \
+      "suitecrm-7.14.0-1-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.5-13-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
