@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-09-24T19:25:39Z" \
+      org.opencontainers.image.created="2023-09-25T18:45:03Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.8.0-debian-11-r79" \
+      org.opencontainers.image.ref.name="2.9.0-debian-11-r0" \
       org.opencontainers.image.title="kubeapps-pinniped-proxy" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.8.0"
+      org.opencontainers.image.version="2.9.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libgcc-s1 libssl1.1 procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "kubeapps-pinniped-proxy-2.8.0-2-linux-${OS_ARCH}-debian-11" \
+      "kubeapps-pinniped-proxy-2.9.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -42,7 +42,7 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="2.8.0" \
+ENV APP_VERSION="2.9.0" \
     BITNAMI_APP_NAME="kubeapps-pinniped-proxy" \
     PATH="/opt/bitnami/kubeapps-pinniped-proxy/bin:$PATH"
 
