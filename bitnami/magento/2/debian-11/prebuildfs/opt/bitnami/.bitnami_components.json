@@ -15,7 +15,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.4.6-7"
+        "version": "2.4.6-8"
     },
     "mysql-client": {
         "arch": "amd64",
