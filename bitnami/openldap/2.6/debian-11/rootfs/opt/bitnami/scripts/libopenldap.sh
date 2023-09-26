@@ -128,17 +128,17 @@ ldap_validate() {
     if is_boolean_yes "$LDAP_ENABLE_TLS"; then
         if [[ -z "$LDAP_TLS_CERT_FILE" ]]; then
             print_validation_error "You must provide a X.509 certificate in order to use TLS"
-        elif [[ ! -f "$LDAP_TLS_CERT_FILE" ]]; then
+        elif [[ ! -f "$LDAP_TLS_CERT_FILE" && ! -h "$LDAP_TLS_CERT_FILE" ]]; then
             print_validation_error "The X.509 certificate file in the specified path ${LDAP_TLS_CERT_FILE} does not exist"
         fi
         if [[ -z "$LDAP_TLS_KEY_FILE" ]]; then
             print_validation_error "You must provide a private key in order to use TLS"
-        elif [[ ! -f "$LDAP_TLS_KEY_FILE" ]]; then
+        elif [[ ! -f "$LDAP_TLS_KEY_FILE" && ! -h "$LDAP_TLS_KEY_FILE" ]]; then
             print_validation_error "The private key file in the specified path ${LDAP_TLS_KEY_FILE} does not exist"
         fi
         if [[ -z "$LDAP_TLS_CA_FILE" ]]; then
             print_validation_error "You must provide a CA X.509 certificate in order to use TLS"
-        elif [[ ! -f "$LDAP_TLS_CA_FILE" ]]; then
+        elif [[ ! -f "$LDAP_TLS_CA_FILE" && ! -h "$LDAP_TLS_CA_FILE" ]]; then
             print_validation_error "The CA X.509 certificate file in the specified path ${LDAP_TLS_CA_FILE} does not exist"
         fi
     fi
