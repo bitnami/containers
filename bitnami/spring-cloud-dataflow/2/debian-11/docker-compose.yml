@@ -3,8 +3,6 @@
 
 version: '2'
 
-#Trigger
-
 services:
   spring-cloud-dataflow:
     image: docker.io/bitnami/spring-cloud-dataflow:2
