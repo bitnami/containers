@@ -940,8 +940,10 @@ elasticsearch_healthcheck() {
 
     host=$(get_elasticsearch_hostname)
 
-    is_boolean_yes "$DB_ENABLE_SECURITY" && command_args+=("-k" "--user" "${DB_USERNAME}:${DB_PASSWORD}")
-    is_boolean_yes "$DB_ENABLE_REST_TLS" && protocol="https"
+    if is_boolean_yes "$DB_ENABLE_SECURITY"; then
+        command_args+=("-k" "--user" "${DB_USERNAME}:${DB_PASSWORD}")
+        is_boolean_yes "$DB_ENABLE_REST_TLS" && protocol="https"
+    fi
 
     # Combination of --silent, --output and --write-out allows us to obtain both the status code and the request body
     output=$(mktemp)
