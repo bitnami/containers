@@ -113,7 +113,7 @@ mastodon_validate() {
         check_empty_value "MASTODON_S3_HOSTNAME"
         check_resolved_hostname "$MASTODON_S3_HOSTNAME"
         check_valid_port "MASTODON_S3_PORT_NUMBER"
-        check_empty_value "MASTODON_S3_ALIAS"
+        check_empty_value "MASTODON_S3_ALIAS_HOST"
         check_empty_value "MASTODON_S3_ENDPOINT"
         check_empty_value "MASTODON_AWS_ACCESS_KEY_ID"
         check_empty_value "MASTODON_AWS_SECRET_ACCESS_KEY"
