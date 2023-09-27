@@ -50,6 +50,7 @@ mongodb_sharded_mongod_initialize() {
     mongodb_set_net_conf
     mongodb_set_log_conf
     mongodb_set_storage_conf
+    mongodb_set_journal_conf
     mongodb_sharded_set_sharding_conf "$MONGODB_CONF_FILE"
 
     if is_dir_empty "$MONGODB_DATA_DIR/db"; then
