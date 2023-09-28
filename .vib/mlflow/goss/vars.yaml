@@ -1,0 +1,12 @@
+binaries:
+  - python
+  - mlflow
+root_dir: /opt/bitnami
+directories:
+  - mode: "0775"
+    paths:
+      - /opt/bitnami/python
+      - /app
+version:
+  bin_name: python
+  flag: "-c 'import mlflow; print(mlflow.__version__)'"
