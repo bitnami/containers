@@ -95,7 +95,7 @@ export ODOO_LONGPOLLING_PORT_NUMBER="${ODOO_LONGPOLLING_PORT_NUMBER:-8072}" # on
 export ODOO_SKIP_BOOTSTRAP="${ODOO_SKIP_BOOTSTRAP:-no}" # only used during the first initialization
 export ODOO_SKIP_MODULES_UPDATE="${ODOO_SKIP_MODULES_UPDATE:-no}" # only used during the first initialization
 export ODOO_LOAD_DEMO_DATA="${ODOO_LOAD_DEMO_DATA:-no}" # only used during the first initialization
-export ODOO_DATABASE_FILTER="${ODOO_DATABASE_FILTER:.*}"
+export ODOO_DATABASE_FILTER="${ODOO_DATABASE_FILTER:-.*}"
 
 # Odoo credentials
 export ODOO_EMAIL="${ODOO_EMAIL:-user@example.com}" # only used during the first initialization
