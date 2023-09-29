@@ -8,7 +8,7 @@ user:
     gid: 0
 command:
   mlflow-serve:
-    exec: timeout --preserve-status 5 mlflow server
+    exec: cd /app && timeout --signal 2 --preserve-status 5 mlflow server
     timeout: 10000
     exit-status: 1
     stderr:
