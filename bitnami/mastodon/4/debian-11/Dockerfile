@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-09-25T18:01:53Z" \
+      org.opencontainers.image.created="2023-09-29T03:43:45Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.2.0-debian-11-r2" \
+      org.opencontainers.image.ref.name="4.2.0-debian-11-r5" \
       org.opencontainers.image.title="mastodon" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="4.2.0"
@@ -23,14 +23,14 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages acl ca-certificates curl ffmpeg file imagemagick libbsd0 libbz2-1.0 libcom-err2 libcrypt1 libedit2 libffi7 libgcc-s1 libgmp10 libgnutls30 libgssapi-krb5-2 libhogweed6 libicu67 libidn11 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libmd0 libncursesw6 libnettle8 libnsl2 libp11-kit0 libpq5 libreadline-dev libreadline8 libsasl2-2 libsqlite3-0 libssl-dev libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libtirpc3 libunistring2 libuuid1 libxml2 libxslt1.1 procps sqlite3 zlib1g
+RUN install_packages acl ca-certificates curl ffmpeg file imagemagick libbsd0 libbz2-1.0 libcom-err2 libcrypt1 libedit2 libffi7 libgcc-s1 libgmp10 libgnutls30 libgssapi-krb5-2 libhogweed6 libicu67 libidn11 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblz4-1 liblzma5 libmd0 libncursesw6 libnettle8 libnsl2 libp11-kit0 libpq5 libreadline-dev libreadline8 libsasl2-2 libsqlite3-0 libssl-dev libssl1.1 libstdc++6 libtasn1-6 libtinfo6 libtirpc3 libunistring2 libuuid1 libxml2 libxslt1.1 procps sqlite3 zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.9.18-2-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.6-13-linux-${OS_ARCH}-debian-11" \
-      "ruby-3.0.6-5-linux-${OS_ARCH}-debian-11" \
+      "ruby-3.0.6-7-linux-${OS_ARCH}-debian-11" \
       "redis-client-7.0.13-0-linux-${OS_ARCH}-debian-11" \
-      "postgresql-client-15.4.0-1-linux-${OS_ARCH}-debian-11" \
+      "postgresql-client-16.0.0-0-linux-${OS_ARCH}-debian-11" \
       "node-16.20.2-1-linux-${OS_ARCH}-debian-11" \
       "mastodon-4.2.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
