@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "17.0.8-7-3"
+        "version": "17.0.8-7-5"
     },
     "wildfly": {
         "arch": "amd64",
