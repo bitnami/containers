@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "17.0.8-7-3"
+        "version": "17.0.8-7-5"
     },
     "jenkins": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.414.2-1"
+        "version": "2.414.2-2"
     },
     "render-template": {
         "arch": "amd64",
