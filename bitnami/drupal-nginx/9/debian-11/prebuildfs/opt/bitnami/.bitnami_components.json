@@ -15,13 +15,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.25.2-4"
+        "version": "1.25.2-5"
     },
     "php": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.23-5"
+        "version": "8.1.24-0"
     },
     "render-template": {
         "arch": "amd64",
