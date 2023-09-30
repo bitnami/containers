@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-09-29T18:19:14Z" \
+      org.opencontainers.image.created="2023-09-30T11:29:27Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.0.5-debian-11-r108" \
+      org.opencontainers.image.ref.name="5.0.6-debian-11-r0" \
       org.opencontainers.image.title="redmine" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="5.0.5"
+      org.opencontainers.image.version="5.0.6"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
@@ -29,7 +29,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "ruby-3.0.6-7-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-16.0.0-0-linux-${OS_ARCH}-debian-11" \
       "mysql-client-11.0.3-0-linux-${OS_ARCH}-debian-11" \
-      "redmine-5.0.5-8-linux-${OS_ARCH}-debian-11" \
+      "redmine-5.0.6-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,7 +47,7 @@ RUN apt-get autoremove --purge -y curl && \
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/redmine/postunpack.sh
-ENV APP_VERSION="5.0.5" \
+ENV APP_VERSION="5.0.6" \
     BITNAMI_APP_NAME="redmine" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/mysql/bin:$PATH"
 
