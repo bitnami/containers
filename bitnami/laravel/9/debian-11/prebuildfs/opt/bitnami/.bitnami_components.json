@@ -15,7 +15,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.2.11-0"
+        "version": "8.2.11-1"
     },
     "python": {
         "arch": "amd64",
