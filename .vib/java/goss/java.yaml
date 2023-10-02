@@ -9,7 +9,7 @@ command:
   # - Versions are usually printed as x.y.z+b, but $APP_VERSION is formated as x.y.z-r
   # - In Java 1.8, the version may also be printed as x.y.z-b0r or x.y.z-br
   check-app-version:
-    exec: java -version 2>&1 | sed -E -e "s/\+/-/g" -e "s/0_//g" -e "s/-b0?/-/g" | grep "$(echo $APP_VERSION | sed -E 's|([0-9]+)\.0[\.0]?$|\1|g')"
+    exec: java -version 2>&1 | sed -E -e "s/\+/-/g" -e "s/0_//g" -e "s/-b0?/-/g" | grep "$(echo $APP_VERSION | sed -E 's|([0-9]+)\..*|\1|g')"
     exit-status: 0
   check-run-jar:
     exec: java -jar ./java/goss/testfiles/HelloTest.jar
