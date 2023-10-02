@@ -34,6 +34,7 @@ export LDAP_SHARE_DIR="${LDAP_BASE_DIR}/share"
 export LDAP_VAR_DIR="${LDAP_BASE_DIR}/var"
 export LDAP_VOLUME_DIR="/bitnami/openldap"
 export LDAP_DATA_DIR="${LDAP_VOLUME_DIR}/data"
+export LDAP_ACCESSLOG_DATA_DIR="${LDAP_DATA_DIR}/accesslog"
 export LDAP_ONLINE_CONF_DIR="${LDAP_VOLUME_DIR}/slapd.d"
 export LDAP_PID_FILE="${LDAP_VAR_DIR}/run/slapd.pid"
 export LDAP_CUSTOM_LDIF_DIR="${LDAP_CUSTOM_LDIF_DIR:-/ldifs}"
@@ -75,12 +76,26 @@ export LDAP_PASSWORD_HASH="${LDAP_PASSWORD_HASH:-{SSHA\}}"
 export LDAP_CONFIGURE_PPOLICY="${LDAP_CONFIGURE_PPOLICY:-no}"
 export LDAP_PPOLICY_USE_LOCKOUT="${LDAP_PPOLICY_USE_LOCKOUT:-no}"
 export LDAP_PPOLICY_HASH_CLEARTEXT="${LDAP_PPOLICY_HASH_CLEARTEXT:-no}"
+export LDAP_ENABLE_ACCESSLOG="${LDAP_ENABLE_ACCESSLOG:-no}"
+export LDAP_ACCESSLOG_DB="${LDAP_ACCESSLOG_DB:-cn=accesslog}"
+export LDAP_ACCESSLOG_LOGOPS="${LDAP_ACCESSLOG_LOGOPS:-writes}"
+export LDAP_ACCESSLOG_LOGSUCCESS="${LDAP_ACCESSLOG_LOGSUCCESS:-TRUE}"
+export LDAP_ACCESSLOG_LOGPURGE="${LDAP_ACCESSLOG_LOGPURGE:-07+00:00 01+00:00}"
+export LDAP_ACCESSLOG_LOGOLD="${LDAP_ACCESSLOG_LOGOLD:-(objectClass=*)}"
+export LDAP_ACCESSLOG_LOGOLDATTR="${LDAP_ACCESSLOG_LOGOLDATTR:-objectClass}"
+export LDAP_ACCESSLOG_ADMIN_USERNAME="${LDAP_ACCESSLOG_ADMIN_USERNAME:-admin}"
+export LDAP_ACCESSLOG_ADMIN_DN="${LDAP_ACCESSLOG_ADMIN_USERNAME/#/cn=},${LDAP_ACCESSLOG_DB:-cn=accesslog}"
+export LDAP_ACCESSLOG_ADMIN_PASSWORD="${LDAP_ACCESSLOG_PASSWORD:-accesspassword}"
+export LDAP_ENABLE_SYNCPROV="${LDAP_ENABLE_SYNCPROV:-no}"
+export LDAP_SYNCPROV_CHECKPPOINT="${LDAP_SYNCPROV_CHECKPPOINT:-100 10}"
+export LDAP_SYNCPROV_SESSIONLOG="${LDAP_SYNCPROV_SESSIONLOG:-100}"
 
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 ldap_env_vars=(
     LDAP_ADMIN_PASSWORD
     LDAP_CONFIG_ADMIN_PASSWORD
+    LDAP_ACCESSLOG_ADMIN_PASSWORD
 )
 for env_var in "${ldap_env_vars[@]}"; do
     file_env_var="${env_var}_FILE"
@@ -98,6 +113,7 @@ unset ldap_env_vars
 # Setting encrypted admin passwords
 export LDAP_ENCRYPTED_ADMIN_PASSWORD="$(echo -n $LDAP_ADMIN_PASSWORD | slappasswd -n -T /dev/stdin)"
 export LDAP_ENCRYPTED_CONFIG_ADMIN_PASSWORD="$(echo -n $LDAP_CONFIG_ADMIN_PASSWORD | slappasswd -n -T /dev/stdin)"
+export LDAP_ENCRYPTED_ACCESSLOG_ADMIN_PASSWORD="$(echo -n $LDAP_ACCESSLOG_ADMIN_PASSWORD | slappasswd -n -T /dev/stdin)"
 EOF
 }
 
@@ -616,6 +632,14 @@ ldap_initialize() {
         if is_boolean_yes "$LDAP_CONFIGURE_PPOLICY"; then
             ldap_configure_ppolicy
         fi
+        # enable accesslog overlay
+        if is_boolean_yes "$LDAP_ENABLE_ACCESSLOG"; then
+            ldap_enable_accesslog
+        fi
+        # enable syncprov overlay
+        if is_boolean_yes "$LDAP_ENABLE_SYNCPROV"; then
+            ldap_enable_syncprov
+        fi
         # enable tls
         if is_boolean_yes "$LDAP_ENABLE_TLS"; then
             ldap_configure_tls
@@ -809,4 +833,85 @@ add: olcPasswordHash
 olcPasswordHash: $LDAP_PASSWORD_HASH
 EOF
     debug_execute ldapmodify -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/password_hash.ldif"
+}
+
+########################
+# OpenLDAP configure Access Logging
+# Globals:
+#   LDAP_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+ldap_enable_accesslog() {
+    info "Configure Access Logging"
+    # Add indexes
+    cat > "${LDAP_SHARE_DIR}/accesslog_add_indexes.ldif" << EOF
+dn: olcDatabase={2}mdb,cn=config
+changetype: modify
+add: olcDbIndex
+olcDbIndex: entryCSN eq
+-
+add: olcDbIndex
+olcDbIndex: entryUUID eq
+EOF
+    debug_execute ldapmodify -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/accesslog_add_indexes.ldif"
+    # Load module
+    ldap_load_module "/opt/bitnami/openldap/lib/openldap" "accesslog.so"
+    # Create AccessLog database
+    cat > "${LDAP_SHARE_DIR}/accesslog_create_accesslog_database.ldif" << EOF
+dn: olcDatabase={3}mdb,cn=config
+objectClass: olcDatabaseConfig
+objectClass: olcMdbConfig
+olcDatabase: {3}mdb
+olcDbDirectory: $LDAP_ACCESSLOG_DATA_DIR
+olcSuffix: $LDAP_ACCESSLOG_DB
+olcRootDN: $LDAP_ACCESSLOG_ADMIN_DN
+olcRootPW: $LDAP_ENCRYPTED_ACCESSLOG_ADMIN_PASSWORD
+olcDbIndex: default eq
+olcDbIndex: entryCSN,objectClass,reqEnd,reqResult,reqStart
+EOF
+    mkdir /bitnami/openldap/data/accesslog
+    debug_execute ldapadd -Q -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/accesslog_create_accesslog_database.ldif"
+    # Add AccessLog overlay
+    cat > "${LDAP_SHARE_DIR}/accesslog_create_overlay_configuration.ldif" << EOF
+dn: olcOverlay=accesslog,olcDatabase={2}mdb,cn=config
+objectClass: olcOverlayConfig
+objectClass: olcAccessLogConfig
+olcOverlay: accesslog
+olcAccessLogDB: $LDAP_ACCESSLOG_DB
+olcAccessLogOps: $LDAP_ACCESSLOG_LOGOPS
+olcAccessLogSuccess: $LDAP_ACCESSLOG_LOGSUCCESS
+olcAccessLogPurge: $LDAP_ACCESSLOG_LOGPURGE
+olcAccessLogOld: $LDAP_ACCESSLOG_LOGOLD
+olcAccessLogOldAttr: $LDAP_ACCESSLOG_LOGOLDATTR
+EOF
+    info "adding accesslog_create_overlay_configuration.ldif"
+    debug_execute ldapadd -Q -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/accesslog_create_overlay_configuration.ldif"
+}
+
+########################
+# OpenLDAP configure Sync Provider
+# Globals:
+#   LDAP_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+ldap_enable_syncprov() {
+    info "Configure Sync Provider"
+    # Load module
+    ldap_load_module "/opt/bitnami/openldap/lib/openldap" "syncprov.so"
+    # Add Sync Provider overlay
+    cat > "${LDAP_SHARE_DIR}/syncprov_create_overlay_configuration.ldif" << EOF
+dn: olcOverlay=syncprov,olcDatabase={2}mdb,cn=config
+objectClass: olcOverlayConfig
+objectClass: olcSyncProvConfig
+olcOverlay: syncprov
+olcSpCheckpoint: $LDAP_SYNCPROV_CHECKPPOINT
+olcSpSessionLog: $LDAP_SYNCPROV_SESSIONLOG
+EOF
+    debug_execute ldapadd -Q -Y EXTERNAL -H "ldapi:///" -f "${LDAP_SHARE_DIR}/syncprov_create_overlay_configuration.ldif"
 }
