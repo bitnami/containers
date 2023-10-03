@@ -145,7 +145,7 @@ export WORDPRESS_SECURE_AUTH_SALT="${WORDPRESS_SECURE_AUTH_SALT:-}"
 export WORDPRESS_LOGGED_IN_SALT="${WORDPRESS_LOGGED_IN_SALT:-}"
 export WORDPRESS_NONCE_SALT="${WORDPRESS_NONCE_SALT:-}"
 export WORDPRESS_ENABLE_REVERSE_PROXY="${WORDPRESS_ENABLE_REVERSE_PROXY:-no}" # only used during the first initialization
-export WORDPRESS_ENABLE_XML_RPC="${WORDPRESS_ENABLE_XML_RPC:-no}" # only used during the first initialization
+export WORDPRESS_ENABLE_XML_RPC="${WORDPRESS_ENABLE_XML_RPC:-yes}" # only used during the first initialization
 
 # WordPress credentials
 export WORDPRESS_USERNAME="${WORDPRESS_USERNAME:-user}" # only used during the first initialization
