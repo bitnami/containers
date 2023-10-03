@@ -360,7 +360,6 @@ wordpress_initialize() {
             wp_execute rewrite structure '/%year%/%monthnum%/%day%/%postname%/'
             ! is_empty_value "$WORDPRESS_SMTP_HOST" && wordpress_configure_smtp
             ! is_boolean_yes "$WORDPRESS_ENABLE_XML_RPC" && wordpress_disable_xmlrpc_endpoint "$htaccess_file"
-            ! is_boolean_yes "$WORDPRESS_ENABLE_XML_RPC" && wordpress_disable_xmlrpc_endpoint "$htaccess_file"
         else
             info "An already initialized WordPress database was provided, configuration will be skipped"
             wp_execute core update-db
