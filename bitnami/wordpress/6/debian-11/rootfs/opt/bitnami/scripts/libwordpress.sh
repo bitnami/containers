@@ -92,6 +92,7 @@ wordpress_validate() {
     check_yes_no_value "WORDPRESS_SKIP_BOOTSTRAP"
     check_multi_value "WORDPRESS_AUTO_UPDATE_LEVEL" "major minor none"
     check_yes_no_value "WORDPRESS_ENABLE_REVERSE_PROXY"
+    check_yes_no_value "WORDPRESS_ENABLE_XML_RPC"
 
     # Multisite validations
     check_yes_no_value "WORDPRESS_ENABLE_MULTISITE"
@@ -351,6 +352,7 @@ wordpress_initialize() {
             # Enable friendly URLs / permalinks (using historic Bitnami defaults)
             wp_execute rewrite structure '/%year%/%monthnum%/%day%/%postname%/'
             ! is_empty_value "$WORDPRESS_SMTP_HOST" && wordpress_configure_smtp
+            ! is_boolean_yes "$WORDPRESS_ENABLE_XML_RPC" && wordpress_disable_xmlrpc_endpoint "$htaccess_file"
         else
             info "An already initialized WordPress database was provided, configuration will be skipped"
             wp_execute core update-db
@@ -580,6 +582,28 @@ if ( !defined( 'WP_CLI' ) ) {
 		return $methods;
 	});
 }
+EOF
+}
+
+########################
+# Disable access to the WordPress XML-RPC endpoint
+# Globals:
+#   *
+# Arguments:
+#   $1 - path to .htaccess file
+# Returns:
+#   None
+#########################
+wordpress_disable_xmlrpc_endpoint() {
+    local -r htaccess_file="${1:?missing path to htaccess file}"
+
+    cat >>"$htaccess_file" <<"EOF"
+
+# Disable the oudated WordPress XML-RPC endpoint to prevent security vulnerabilities.
+<Files xmlrpc.php>
+Order Allow,Deny
+Deny from all
+</Files>
 EOF
 }
 
