@@ -92,6 +92,7 @@ wordpress_validate() {
     check_yes_no_value "WORDPRESS_SKIP_BOOTSTRAP"
     check_multi_value "WORDPRESS_AUTO_UPDATE_LEVEL" "major minor none"
     check_yes_no_value "WORDPRESS_ENABLE_REVERSE_PROXY"
+    check_yes_no_value "WORDPRESS_ENABLE_XML_RPC"
 
     # Multisite validations
     check_yes_no_value "WORDPRESS_ENABLE_MULTISITE"
@@ -226,6 +227,12 @@ wordpress_initialize() {
                 WORDPRESS_DATA_TO_PERSIST+=" ${htaccess_file}"
             fi
         fi
+    else
+        if is_boolean_yes "$WORDPRESS_HTACCESS_OVERRIDE_NONE"; then
+            local htaccess_file="${APACHE_HTACCESS_DIR}/wordpress-htaccess.conf"
+        else
+            local htaccess_file="${WORDPRESS_BASE_DIR}/.htaccess"
+        fi
     fi
 
     # Check if WordPress has already been initialized and persisted in a previous run
@@ -351,6 +358,7 @@ wordpress_initialize() {
             # Enable friendly URLs / permalinks (using historic Bitnami defaults)
             wp_execute rewrite structure '/%year%/%monthnum%/%day%/%postname%/'
             ! is_empty_value "$WORDPRESS_SMTP_HOST" && wordpress_configure_smtp
+            ! is_boolean_yes "$WORDPRESS_ENABLE_XML_RPC" && wordpress_disable_xmlrpc_endpoint "$htaccess_file"
         else
             info "An already initialized WordPress database was provided, configuration will be skipped"
             wp_execute core update-db
@@ -405,6 +413,8 @@ wordpress_initialize() {
         fi
         wordpress_wait_for_mysql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
         wp_execute core update-db
+
+        ! is_boolean_yes "$WORDPRESS_ENABLE_XML_RPC" && wordpress_disable_xmlrpc_endpoint "$htaccess_file"
 
         if is_boolean_yes "$WORDPRESS_RESET_DATA_PERMISSIONS"; then
             warn "Resetting file permissions in persisted volume"
@@ -580,6 +590,29 @@ if ( !defined( 'WP_CLI' ) ) {
 		return $methods;
 	});
 }
+EOF
+}
+
+########################
+# Disable access to the WordPress XML-RPC endpoint
+# Globals:
+#   *
+# Arguments:
+#   $1 - path to .htaccess file
+# Returns:
+#   None
+#########################
+wordpress_disable_xmlrpc_endpoint() {
+    local -r htaccess_file="${1:?missing htaccess file path}"
+    [[ ! -f "$htaccess_file" ]] && touch "$htaccess_file" 
+    grep -q "<Files xmlrpc.php>" "$htaccess_file" || cat >>"$htaccess_file" <<"EOF"
+
+# Disable the oudated WordPress XML-RPC endpoint to prevent security vulnerabilities.
+<Files xmlrpc.php>
+Order Allow,Deny
+Deny from all
+</Files>
+
 EOF
 }
 
