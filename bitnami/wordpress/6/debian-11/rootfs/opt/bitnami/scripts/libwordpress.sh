@@ -93,7 +93,6 @@ wordpress_validate() {
     check_multi_value "WORDPRESS_AUTO_UPDATE_LEVEL" "major minor none"
     check_yes_no_value "WORDPRESS_ENABLE_REVERSE_PROXY"
     check_yes_no_value "WORDPRESS_ENABLE_XML_RPC"
-    check_yes_no_value "WORDPRESS_ENABLE_XML_RPC"
 
     # Multisite validations
     check_yes_no_value "WORDPRESS_ENABLE_MULTISITE"
