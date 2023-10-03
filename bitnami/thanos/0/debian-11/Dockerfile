@@ -36,10 +36,10 @@ ENV OS_ARCH="${TARGETARCH:-amd64}"
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="scratch" \
-      org.opencontainers.image.created="2023-09-29T07:29:31Z" \
+      org.opencontainers.image.created="2023-10-02T11:53:20Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.32.3-debian-11-r8" \
+      org.opencontainers.image.ref.name="0.32.3-debian-11-r11" \
       org.opencontainers.image.title="thanos" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="0.32.3"
