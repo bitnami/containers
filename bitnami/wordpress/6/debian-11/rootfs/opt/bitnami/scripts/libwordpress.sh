@@ -414,8 +414,6 @@ wordpress_initialize() {
         wordpress_wait_for_mysql_connection "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
         wp_execute core update-db
 
-        ! is_boolean_yes "$WORDPRESS_ENABLE_XML_RPC" && wordpress_disable_xmlrpc_endpoint "$htaccess_file"
-
         if is_boolean_yes "$WORDPRESS_RESET_DATA_PERMISSIONS"; then
             warn "Resetting file permissions in persisted volume"
             local wp_config_path
