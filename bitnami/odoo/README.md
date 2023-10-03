@@ -223,7 +223,7 @@ Available environment variables:
 - `ODOO_DATABASE_PORT_NUMBER`: Port used by the PostgreSQL server. Default: **5432**
 - `ODOO_DATABASE_ADMIN_USER`: Database admin user that Odoo will use to connect with the database. Default: **postgres**
 - `ODOO_DATABASE_ADMIN_PASSWORD`: Database admin password that Odoo will use to connect with the database. No default.
-- `ODOO_DATABASE_FILTER`: Apply a regex to filter a specific pattern or match for a database name: Default: .*
+- `ODOO_DATABASE_FILTER`: Apply a regex to filter a specific pattern or match for a database name: Default: **.\***
 - `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
 
 #### Create a database for Odoo using postgresql-client
