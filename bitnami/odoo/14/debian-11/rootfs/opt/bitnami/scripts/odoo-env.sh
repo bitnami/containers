@@ -95,7 +95,6 @@ export ODOO_LONGPOLLING_PORT_NUMBER="${ODOO_LONGPOLLING_PORT_NUMBER:-8072}" # on
 export ODOO_SKIP_BOOTSTRAP="${ODOO_SKIP_BOOTSTRAP:-no}" # only used during the first initialization
 export ODOO_SKIP_MODULES_UPDATE="${ODOO_SKIP_MODULES_UPDATE:-no}" # only used during the first initialization
 export ODOO_LOAD_DEMO_DATA="${ODOO_LOAD_DEMO_DATA:-no}" # only used during the first initialization
-export ODOO_DATABASE_FILTER="${ODOO_DATABASE_FILTER:-.*}"
 
 # Odoo credentials
 export ODOO_EMAIL="${ODOO_EMAIL:-user@example.com}" # only used during the first initialization
@@ -127,5 +126,6 @@ ODOO_DATABASE_USER="${ODOO_DATABASE_USER:-"${POSTGRESQL_DATABASE_USERNAME:-}"}"
 export ODOO_DATABASE_USER="${ODOO_DATABASE_USER:-bn_odoo}" # only used during the first initialization
 ODOO_DATABASE_PASSWORD="${ODOO_DATABASE_PASSWORD:-"${POSTGRESQL_DATABASE_PASSWORD:-}"}"
 export ODOO_DATABASE_PASSWORD="${ODOO_DATABASE_PASSWORD:-}" # only used during the first initialization
+export ODOO_DATABASE_FILTER="${ODOO_DATABASE_FILTER:-}" # only used during the first initialization
 
 # Custom environment variables may be defined below
