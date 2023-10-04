@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-09-30T11:30:17Z" \
+      org.opencontainers.image.created="2023-10-04T10:44:28Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.9.3-debian-11-r90" \
+      org.opencontainers.image.ref.name="2.11.0-debian-11-r0" \
       org.opencontainers.image.title="spring-cloud-skipper-shell" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.9.3"
+      org.opencontainers.image.version="2.11.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -27,7 +27,7 @@ RUN install_packages ca-certificates curl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "java-17.0.8-7-5-linux-${OS_ARCH}-debian-11" \
-      "spring-cloud-skipper-shell-2.9.3-3-linux-${OS_ARCH}-debian-11" \
+      "spring-cloud-skipper-shell-2.11.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -44,7 +44,7 @@ RUN apt-get autoremove --purge -y curl && \
 RUN chmod g+rwX /opt/bitnami
 RUN touch /opt/bitnami/spring-cloud-skipper-shell/spring-cloud-skipper-shell.log && chmod -R g+rwX /opt/bitnami/spring-cloud-skipper-shell
 
-ENV APP_VERSION="2.9.3" \
+ENV APP_VERSION="2.11.0" \
     BITNAMI_APP_NAME="spring-cloud-skipper-shell" \
     PATH="/opt/bitnami/java/bin:$PATH"
 
