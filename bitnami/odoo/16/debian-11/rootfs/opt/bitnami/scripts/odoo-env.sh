@@ -42,6 +42,7 @@ odoo_env_vars=(
     ODOO_DATABASE_NAME
     ODOO_DATABASE_USER
     ODOO_DATABASE_PASSWORD
+    ODOO_DATABASE_FILTER
     SMTP_HOST
     SMTP_PORT
     ODOO_SMTP_PORT
@@ -125,5 +126,6 @@ ODOO_DATABASE_USER="${ODOO_DATABASE_USER:-"${POSTGRESQL_DATABASE_USERNAME:-}"}"
 export ODOO_DATABASE_USER="${ODOO_DATABASE_USER:-bn_odoo}" # only used during the first initialization
 ODOO_DATABASE_PASSWORD="${ODOO_DATABASE_PASSWORD:-"${POSTGRESQL_DATABASE_PASSWORD:-}"}"
 export ODOO_DATABASE_PASSWORD="${ODOO_DATABASE_PASSWORD:-}" # only used during the first initialization
+export ODOO_DATABASE_FILTER="${ODOO_DATABASE_FILTER:-}" # only used during the first initialization
 
 # Custom environment variables may be defined below
