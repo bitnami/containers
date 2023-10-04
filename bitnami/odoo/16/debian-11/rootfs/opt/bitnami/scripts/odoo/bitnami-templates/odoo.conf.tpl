@@ -12,7 +12,7 @@ db_port = {{ODOO_DATABASE_PORT_NUMBER}}
 ; https://www.postgresql.org/docs/current/manage-ag-templatedbs.html
 db_template = template1
 db_user = {{ODOO_DATABASE_USER}}
-dbfilter = .*
+dbfilter = {{ODOO_DATABASE_FILTER}}
 debug_mode = False
 email_from = {{ODOO_EMAIL}}
 http_port = {{ODOO_PORT_NUMBER}}
