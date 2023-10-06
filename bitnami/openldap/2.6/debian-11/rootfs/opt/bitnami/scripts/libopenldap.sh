@@ -66,6 +66,7 @@ export LDAP_SKIP_DEFAULT_TREE="${LDAP_SKIP_DEFAULT_TREE:-no}"
 export LDAP_USERS="${LDAP_USERS:-user01,user02}"
 export LDAP_PASSWORDS="${LDAP_PASSWORDS:-bitnami1,bitnami2}"
 export LDAP_USER_DC="${LDAP_USER_DC:-users}"
+export LDAP_GROUP_DC="${LDAP_GROUP_DC:-groups}"
 export LDAP_GROUP="${LDAP_GROUP:-readers}"
 export LDAP_ENABLE_TLS="${LDAP_ENABLE_TLS:-no}"
 export LDAP_REQUIRE_TLS="${LDAP_REQUIRE_TLS:-no}"
@@ -516,6 +517,10 @@ dn: ${LDAP_USER_DC/#/ou=},${LDAP_ROOT}
 objectClass: organizationalUnit
 ou: users
 
+dn: ${LDAP_GROUP_DC/#/ou=},${LDAP_ROOT}
+objectClass: organizationalUnit
+ou: groups
+
 EOF
     read -r -a users <<< "$(tr ',;' ' ' <<< "${LDAP_USERS}")"
     read -r -a passwords <<< "$(tr ',;' ' ' <<< "${LDAP_PASSWORDS}")"
@@ -540,7 +545,7 @@ EOF
     done
     cat >> "${LDAP_SHARE_DIR}/tree.ldif" << EOF
 # Group creation
-dn: ${LDAP_GROUP/#/cn=},${LDAP_USER_DC/#/ou=},${LDAP_ROOT}
+dn: ${LDAP_GROUP/#/cn=},${LDAP_GROUP_DC/#/ou=},${LDAP_ROOT}
 cn: $LDAP_GROUP
 objectClass: groupOfNames
 # User group membership
@@ -566,7 +571,7 @@ EOF
 #########################
 ldap_add_custom_ldifs() {
     info "Loading custom LDIF files..."
-    warn "Ignoring LDAP_USERS, LDAP_PASSWORDS, LDAP_USER_DC and LDAP_GROUP environment variables..."
+    warn "Ignoring LDAP_USERS, LDAP_PASSWORDS, LDAP_USER_DC, LDAP_GROUP_DC and LDAP_GROUP environment variables..."
     find "$LDAP_CUSTOM_LDIF_DIR" -maxdepth 1 \( -type f -o -type l \) -iname '*.ldif' -print0 | sort -z | xargs --null -I{} bash -c ". /opt/bitnami/scripts/libos.sh && debug_execute ldapadd -f {} -H 'ldapi:///' -D \"$LDAP_ADMIN_DN\" -w \"$LDAP_ADMIN_PASSWORD\""
 }
 
