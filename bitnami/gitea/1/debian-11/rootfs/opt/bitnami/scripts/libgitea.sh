@@ -218,6 +218,7 @@ gitea_update_conf_file() {
     is_empty_value "$GITEA_SMTP_PASSWORD" || gitea_conf_set "mailer" "PASSWD" "$GITEA_SMTP_PASSWORD"
     is_empty_value "$GITEA_LFS_ROOT_PATH" || gitea_conf_set "lfs" "PATH" "$GITEA_LFS_ROOT_PATH"
 
+    gitea_conf_set "service" "DISABLE_REGISTRATION" "$GITEA_DISABLE_REGISTRATION"
 }
 
 ########################
@@ -292,6 +293,11 @@ gitea_pass_wizard() {
         "--data-urlencode" "admin_confirm_passwd=${GITEA_ADMIN_PASSWORD}"
         "--data-urlencode" "admin_email=${GITEA_ADMIN_EMAIL}"
     )
+    if is_boolean_yes "${GITEA_DISABLE_REGISTRATION}"; then
+         curl_data_opts+=(
+            "--data-urlencode" "disable_registration=on"
+         )
+    fi
     # Note in version 1.18 SMTP configuration is different
     if is_boolean_yes "${GITEA_SMTP_ENABLED}"; then
         curl_data_opts+=(

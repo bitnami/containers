@@ -226,6 +226,10 @@ Gitea default ports can be changed using the following environment variables:
 * `GITEA_HTTP_PORT`: HTTP port. Defaults to `3000`.
 * `GITEA_SSH_LISTEN_PORT`: Port for the built-in SSH server. Defaults to `2222`
 
+### Disabling new users registration
+
+Setting `DISABLE_REGISTRATION` in `app.ini` permits to disable users to self register in Gitea after which only admin can create accounts for users. This can be easily controlled in Docker by setting this environment variable. 
+* `GITEA_DISABLE_REGISTRATION`: yes|no or "true"|"false"
 ## Logging
 
 The Bitnami Gitea Docker image sends the container logs to `stdout`. To view the logs:
