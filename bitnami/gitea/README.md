@@ -228,7 +228,7 @@ Gitea default ports can be changed using the following environment variables:
 
 ### Disabling new users registration
 
-Setting `DISABLE_REGISTRATION` in `app.ini` permits to disable users to self register in Gitea after which only admin can create accounts for users. This can be easily controlled in Docker by setting this environment variable. 
+Setting `DISABLE_REGISTRATION` in `app.ini` permits to disable users to self register in Gitea after which only admin can create accounts for users. This can be easily controlled in Docker by setting this environment variable.  
 
 * `GITEA_DISABLE_REGISTRATION`: yes|no or "true"|"false"
   
