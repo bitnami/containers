@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-10-06T01:12:42Z" \
+      org.opencontainers.image.created="2023-10-09T17:20:52Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.2.0-debian-11-r11" \
+      org.opencontainers.image.ref.name="4.2.0-debian-11-r12" \
       org.opencontainers.image.title="mastodon" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="4.2.0"
@@ -27,7 +27,7 @@ RUN install_packages acl ca-certificates curl ffmpeg file imagemagick libbsd0 li
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.9.18-2-linux-${OS_ARCH}-debian-11" \
-      "wait-for-port-1.0.7-0-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.7-1-linux-${OS_ARCH}-debian-11" \
       "ruby-3.0.6-7-linux-${OS_ARCH}-debian-11" \
       "redis-client-7.0.13-0-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-16.0.0-0-linux-${OS_ARCH}-debian-11" \
