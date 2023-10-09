@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-13"
+        "version": "1.0.6-1"
     },
     "tensorflow-serving": {
         "arch": "amd64",
