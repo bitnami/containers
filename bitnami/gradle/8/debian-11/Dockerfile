@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-10-03T20:42:01Z" \
+      org.opencontainers.image.created="2023-10-09T10:47:23Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.3.0-debian-11-r41" \
+      org.opencontainers.image.ref.name="8.4.0-debian-11-r0" \
       org.opencontainers.image.title="gradle" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="8.3.0"
+      org.opencontainers.image.version="8.4.0"
 
 ENV HOME="/app" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -27,7 +27,7 @@ RUN install_packages ca-certificates curl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "java-17.0.8-7-5-linux-${OS_ARCH}-debian-11" \
-      "gradle-8.3.0-1-linux-${OS_ARCH}-debian-11" \
+      "gradle-8.4.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -42,7 +42,7 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN mkdir /app && chmod g+rwX /app
 
-ENV APP_VERSION="8.3.0" \
+ENV APP_VERSION="8.4.0" \
     BITNAMI_APP_NAME="gradle" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/gradle/bin:$PATH"
 
