@@ -5,7 +5,7 @@ version: '2'
 
 services:
   mariadb:
-    image: docker.io/bitnami/mariadb:11.0
+    image: docker.io/bitnami/mariadb:11.1
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_DATABASE=myapp
