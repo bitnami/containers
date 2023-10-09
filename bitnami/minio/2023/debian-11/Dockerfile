@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-10-04T01:20:07Z" \
+      org.opencontainers.image.created="2023-10-09T13:59:54Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2023.9.30-debian-11-r2" \
+      org.opencontainers.image.ref.name="2023.10.7-debian-11-r0" \
       org.opencontainers.image.title="minio" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2023.9.30"
+      org.opencontainers.image.version="2023.10.7"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,9 +26,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl jq procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "wait-for-port-1.0.6-13-linux-${OS_ARCH}-debian-11" \
-      "minio-client-2023.9.29-1-linux-${OS_ARCH}-debian-11" \
-      "minio-2023.9.30-1-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.7-1-linux-${OS_ARCH}-debian-11" \
+      "minio-client-2023.10.4-0-linux-${OS_ARCH}-debian-11" \
+      "minio-2023.10.7-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -46,7 +46,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/minio-client/postunpack.sh
 RUN /opt/bitnami/scripts/minio/postunpack.sh
-ENV APP_VERSION="2023.9.30" \
+ENV APP_VERSION="2023.10.7" \
     BITNAMI_APP_NAME="minio" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/minio-client/bin:/opt/bitnami/minio/bin:$PATH"
 
