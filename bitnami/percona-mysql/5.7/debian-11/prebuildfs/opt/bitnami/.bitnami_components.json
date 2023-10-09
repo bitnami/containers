@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.4.5-10"
+        "version": "1.4.6-1"
     },
     "mysql-shell": {
         "arch": "amd64",
