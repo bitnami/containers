@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.9.37-0"
+        "version": "1.9.38-0"
     },
     "java": {
         "arch": "amd64",
@@ -15,13 +15,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.10.6-0"
+        "version": "2.0.1-0"
     },
     "nginx": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.25.2-5"
+        "version": "1.25.2-6"
     },
     "node": {
         "arch": "amd64",
@@ -39,12 +39,12 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-13"
+        "version": "1.0.6-1"
     },
     "wait-for-port": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-13"
+        "version": "1.0.7-1"
     }
 }
