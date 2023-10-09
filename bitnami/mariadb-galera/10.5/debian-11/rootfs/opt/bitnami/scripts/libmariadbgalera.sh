@@ -320,7 +320,6 @@ max_allowed_packet=16M
 bind_address=${DB_DEFAULT_BIND_ADDRESS}
 log_error=${DB_LOGS_DIR}/mysqld.log
 character_set_server=${DB_DEFAULT_CHARACTER_SET}
-collation_server=${DB_DEFAULT_COLLATE}
 plugin_dir=${DB_BASE_DIR}/plugin
 binlog_format=row
 log_bin=mysql-bin
