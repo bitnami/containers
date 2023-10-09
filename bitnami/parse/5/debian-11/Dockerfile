@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-10-02T09:00:00Z" \
+      org.opencontainers.image.created="2023-10-09T21:35:25Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.5.5-debian-11-r26" \
+      org.opencontainers.image.ref.name="5.5.5-debian-11-r29" \
       org.opencontainers.image.title="parse" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="5.5.5"
@@ -28,7 +28,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.9.18-2-linux-${OS_ARCH}-debian-11" \
       "node-16.20.2-1-linux-${OS_ARCH}-debian-11" \
-      "mongodb-shell-1.10.6-0-linux-${OS_ARCH}-debian-11" \
+      "mongodb-shell-2.0.1-0-linux-${OS_ARCH}-debian-11" \
       "parse-5.5.5-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
