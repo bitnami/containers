@@ -18,7 +18,7 @@
                 "tag": "{VIB_ENV_TAG}"
               }
             },
-            "architectures": ["linux/amd64"]
+            "architectures": ["linux/amd64", "linux/arm64"]
           }
         },
         {
