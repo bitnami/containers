@@ -5,7 +5,6 @@ binaries:
 files:
   - paths:
       - /opt/bitnami/symfony/skeleton/bin/console
-      - /opt/bitnami/symfony/skeleton/bin/phpunit
 directories:
   - mode: "0775"
     paths:
