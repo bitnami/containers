@@ -10,10 +10,6 @@ command:
     exec: export MINOR_VERSION=$(echo "{{ .Env.APP_VERSION }}" | cut -d "." -f-2); grep -P "\"extra\".*\"symfony\".*\"require\":\"${MINOR_VERSION}\.\*\"" /opt/bitnami/symfony/skeleton/composer.json
     exit-status: 0
 file:
-  /opt/bitnami/symfony/skeleton/symfony.lock:
-    exists: true
-    contains:
-      - symfony/webapp-pack
   /opt/bitnami/symfony/skeleton/var/cache:
     exists: false
 
