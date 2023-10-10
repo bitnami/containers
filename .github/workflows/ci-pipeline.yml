@@ -16,6 +16,46 @@ env:
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
 jobs:
+  license-headers-linter:
+    runs-on: ubuntu-latest
+    name: License Headers Linter
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v3
+        name: Checkout Repository
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+      - id: get-modified-files
+        name: 'Get modified files'
+        env:
+          DIFF_URL: "${{github.event.pull_request.diff_url}}"
+          TEMP_FILE: "${{runner.temp}}/pr-${{github.event.number}}.diff"
+        run: |
+          # This request doesn't consume API calls.
+          curl -Lkso $TEMP_FILE $DIFF_URL
+          files_changed="$(sed -nr 's/[\-\+]{3} [ab]\/(.*)/\1/p' $TEMP_FILE | sort | uniq)"
+          dockerfiles=()
+          while read -r file_changed; do
+            # Avoid removed files
+            if [[ -f "${file_changed}" ]]; then
+              dockerfiles+=("${file_changed}")
+            fi
+          done <<< "$(echo "$files_changed" | grep -oE ".*/Dockerfile$" | sort | uniq || true)"
+          if [[ ${#dockerfiles[@]} -gt 0 ]]; then
+            # There are modifications on dockerfiles
+            export dockerfiles_json=$(printf "%s\n" "${dockerfiles[@]}" | jq -R . | jq -cs .)
+            # Overwrite configuration file to analyze only changed dockerfiles
+            yq -i '. | .header.paths=env(dockerfiles_json)' .licenserc.yaml
+            echo "result=success" >> $GITHUB_OUTPUT
+          else
+            echo "result=skip" >> $GITHUB_OUTPUT
+          fi
+      - name: Check license Headers
+        uses: apache/skywalking-eyes/header@v0.4.0
+        if: ${{ steps.get-modified-files.outputs.result == 'success' }}
   get-containers:
     runs-on: ubuntu-latest
     name: Get modified containers
@@ -169,3 +209,47 @@ jobs:
               core.setFailed(error.message)
             }
             return state
+  auto-pr-review:
+    runs-on: ubuntu-latest
+    name: Reviewal for automated PRs
+    permissions:
+      pull-requests: write
+    needs:
+      - license-headers-linter
+    # This job will be executed when the PR was created by bitnami-bot and it has the 'auto-merge' label
+    if: |
+      contains(github.event.pull_request.labels.*.name, 'auto-merge') &&
+      github.event.pull_request.user.login == 'bitnami-bot'
+    steps:
+      # Approve the CI's PR automatically, as it has been tested in our internal pipeline already
+      # Approved by the 'github-actions' user; a PR can't be approved by its author
+      - name: PR Approval
+        uses: hmarr/auto-approve-action@v3.0.0
+        with:
+          pull-request-number: ${{ github.event.number }}
+      - name: Merge
+        id: merge
+        uses: actions/github-script@v6
+        with:
+          result-encoding: string
+          retries: 3
+          # Necessary to trigger CD workflows
+          github-token: ${{ secrets.BITNAMI_BOT_TOKEN }}
+          script: |
+            github.rest.pulls.merge({
+              pull_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              merge_method: 'squash'
+            })
+      # If the merge process did not succeed,
+      # post a comment on the PR and assign a maintainer agent to review it
+      - name: Manual review required
+        if: ${{ always() && steps.merge.outcome != 'success' }}
+        uses: peter-evans/create-or-update-comment@v3.0.0
+        with:
+          issue-number: ${{ github.event.number }}
+          # Necessary to trigger support workflows
+          token: ${{ secrets.BITNAMI_BOT_TOKEN }}
+          body: |
+            There has been an error during the automated release process. Manual revision is now required.
