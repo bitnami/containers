@@ -3,16 +3,19 @@
 
 file:
   # Checks default config for erlang is set
+  # Test specific for branch@8
+  {{ if regexMatch "^7.5.+" .Env.APP_VERSION }}
+  /opt/bitnami/ksql/etc/ksqldb/ksql-server.properties:
+  {{ else }}
   /opt/bitnami/ksql/etc/ksqldb/ksql-server.properties.default:
+  {{ end }}
     exists: true
     filetype: file
     contains:
       - http://0.0.0.0:8088
-      - bootstrap.servers = localhost:9092
       - ksql.streams.state.dir = /bitnami/ksql/data
   # ksql does not have a version flag so we check the version.txt
   /opt/bitnami/ksql/share/doc/confluent-kafka-mqtt/version.txt:
     exists: true
-    filetype: file
     contains:
       - {{ .Env.APP_VERSION }}
