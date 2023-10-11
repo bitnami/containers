@@ -12,3 +12,8 @@ files:
   - paths:
       - /opt/bitnami/opensearch-dashboards/package.json
 root_dir: /opt/bitnami
+linked_libraries:
+  exclude_paths:
+    # Opensearch Dashboards embedded node is throwing a false positive because
+    # it cannot be run in some distros (it has a fallback node.js in that scenario)
+    - /opt/bitnami/opensearch-dashboards/node/bin/node
