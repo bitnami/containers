@@ -3,12 +3,7 @@
 
 file:
   # Checks default config for erlang is set
-  # Test specific for branch@7.5
-  {{ if regexMatch "^7.5.+" .Env.APP_VERSION }}
-  /opt/bitnami/ksql/etc/ksqldb/ksql-server.properties:
-  {{ else }}
   /opt/bitnami/ksql/etc/ksqldb/ksql-server.properties.default:
-  {{ end }}
     exists: true
     filetype: file
     contains:
