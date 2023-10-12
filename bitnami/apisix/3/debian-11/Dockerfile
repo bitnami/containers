@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-10-06T00:14:02Z" \
+      org.opencontainers.image.created="2023-10-09T22:35:44Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.6.0-debian-11-r2" \
+      org.opencontainers.image.ref.name="3.6.0-debian-11-r3" \
       org.opencontainers.image.title="apisix" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.6.0"
@@ -26,8 +26,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libbrotli1 libbsd0 libcrypt1 libdeflate0 libexpat1 libffi7 libfontconfig1 libfreetype6 libgcc-s1 libgcrypt20 libgd3 libgeoip1 libgmp10 libgnutls30 libgpg-error0 libhogweed6 libicu67 libidn2-0 libjbig0 libjpeg62-turbo libldap-2.4-2 liblzma5 libmd0 libnettle8 libp11-kit0 libpcre3 libpng16-16 libsasl2-2 libssl1.1 libstdc++6 libtasn1-6 libtiff5 libunistring2 libuuid1 libwebp6 libx11-6 libxau6 libxcb1 libxdmcp6 libxml2 libxpm4 libxslt1.1 libzstd1 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "yq-4.35.2-1-linux-${OS_ARCH}-debian-11" \
-      "render-template-1.0.6-0-linux-${OS_ARCH}-debian-11" \
+      "yq-4.35.2-2-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.6-1-linux-${OS_ARCH}-debian-11" \
       "apisix-3.6.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
