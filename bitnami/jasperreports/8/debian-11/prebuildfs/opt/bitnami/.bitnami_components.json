@@ -27,12 +27,12 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.5-13"
+        "version": "1.0.6-2"
     },
     "tomcat": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.0.80-0"
+        "version": "9.0.81-0"
     }
 }
