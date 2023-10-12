@@ -213,7 +213,7 @@ gitea_update_conf_file() {
 
     gitea_conf_set "mailer" "ENABLED" "$GITEA_SMTP_ENABLED"
     is_empty_value "$GITEA_SMTP_HOST" || gitea_conf_set "mailer" "SMTP_ADDR" "$GITEA_SMTP_HOST"
-    
+    is_empty_value "$GITEA_SMTP_PORT" || gitea_conf_set "mailer" "SMTP_PORT" "$GITEA_SMTP_PORT"
     is_empty_value "$GITEA_SMTP_FROM" || gitea_conf_set "mailer" "FROM" "$GITEA_SMTP_FROM"
     is_empty_value "$GITEA_SMTP_USER" || gitea_conf_set "mailer" "USER" "$GITEA_SMTP_USER"
     is_empty_value "$GITEA_SMTP_PASSWORD" || gitea_conf_set "mailer" "PASSWD" "$GITEA_SMTP_PASSWORD"
