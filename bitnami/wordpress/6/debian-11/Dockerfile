@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-10-12T22:49:36Z" \
+      org.opencontainers.image.created="2023-10-13T00:25:35Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.3.1-debian-11-r38" \
+      org.opencontainers.image.ref.name="6.3.2-debian-11-r0" \
       org.opencontainers.image.title="wordpress" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="6.3.1"
+      org.opencontainers.image.version="6.3.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -30,7 +30,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "apache-2.4.57-12-linux-${OS_ARCH}-debian-11" \
       "mysql-client-11.1.2-0-linux-${OS_ARCH}-debian-11" \
       "libphp-8.2.11-0-linux-${OS_ARCH}-debian-11" \
-      "wordpress-6.3.1-22-linux-${OS_ARCH}-debian-11" \
+      "wordpress-6.3.2-0-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.6-2-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
@@ -55,7 +55,7 @@ RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/wordpress/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="6.3.1" \
+    APP_VERSION="6.3.2" \
     BITNAMI_APP_NAME="wordpress" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:/opt/bitnami/wp-cli/bin:$PATH"
 
