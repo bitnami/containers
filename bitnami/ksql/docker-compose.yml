@@ -20,7 +20,7 @@ services:
     volumes:
       - 'kafka_data:/bitnami/kafka'
   ksql:
-    image: docker.io/bitnami/ksql:7.4
+    image: docker.io/bitnami/ksql:7.5
     environment:
       - KSQL_BOOTSTRAP_SERVERS=kafka:9092
     volumes:
