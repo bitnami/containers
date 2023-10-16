@@ -302,7 +302,7 @@ grafana_install_plugins() {
     [[ -z "$GF_INSTALL_PLUGINS" ]] && return
 
     local -a plugin_list
-    read -r -a plugin_list <<< "$(tr ',;' ' ' <<< "${GF_INSTALL_PLUGINS}")"
+    IFS="," read -r -a plugin_list <<< "$(tr ';' ',' <<< "${GF_INSTALL_PLUGINS}")"
     if [[ "${#plugin_list[@]}" -le 0 ]]; then
         warn "There are no plugins to install"
         return
@@ -324,6 +324,11 @@ grafana_install_plugins() {
             grafana_plugin_install_args+=("--pluginUrl" "${plugin_url_array[1]}")
         elif grep ':' <<< "$plugin"; then
             read -r -a plugin_id_version_array <<< "$(tr ':' ' ' <<< "${plugin}")"
+            plugin_id="${plugin_id_version_array[0]}"
+            plugin_version="${plugin_id_version_array[1]}"
+            info "Installing plugin ${plugin_id} @ ${plugin_version}"
+        elif grep ' ' <<< "$plugin"; then
+            read -r -a plugin_id_version_array <<< $plugin
             plugin_id="${plugin_id_version_array[0]}"
             plugin_version="${plugin_id_version_array[1]}"
             info "Installing plugin ${plugin_id} @ ${plugin_version}"
