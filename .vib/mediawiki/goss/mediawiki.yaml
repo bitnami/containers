@@ -35,12 +35,12 @@ file:
   /opt/bitnami/php/etc/php.ini:
     exists: true
     filetype: file
-    contains:
+    contents:
       - "memory_limit = 256M"
   /opt/bitnami/apache/conf/vhosts/mediawiki-vhost.conf:
     exists: true
     filetype: file
-    contains:
+    contents:
       - "RewriteEngine On"
       - "RewriteRule ^/?wiki(/.*)?$ %{DOCUMENT_ROOT}/index.php [L]"
   /opt/bitnami/mediawiki/extensions/Scribunto:

@@ -10,7 +10,7 @@ file:
   /opt/bitnami/kafka/config/log4j.properties:
     exists: true
     filetype: file
-    contains:
+    contents:
       - "log4j.appender.stdout.Threshold=OFF"
       - "!DailyRollingFileAppender"
       - "ConsoleAppender"
@@ -19,5 +19,5 @@ file:
   /opt/bitnami/kafka/bin/kafka-server-start.sh:
     exists: true
     filetype: file
-    contains:
+    contents:
       - "![-]loggc"

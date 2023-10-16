@@ -4,7 +4,7 @@
 file:
   /opt/bitnami/redis/etc/redis.conf:
     exists: true
-    contains:
+    contents:
       - /port.*6379/
       - /dir.*/bitnami/redis/data/
       - /pidfile.*/opt/bitnami/redis/tmp/redis.pid/

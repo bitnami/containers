@@ -27,14 +27,14 @@ file:
   /opt/bitnami/nginx/conf/server_blocks/wordpress-server-block.conf:
     exists: true
     filetype: file
-    contains:
+    contents:
       - /root\s+/opt/bitnami/wordpress/
       - "rewrite ^/bitnami/wordpress(/.*) $1 last;"
   # HTTPs vhost should have been properly rendered
   /opt/bitnami/nginx/conf/server_blocks/wordpress-https-server-block.conf:
     exists: true
     filetype: file
-    contains:
+    contents:
       - /listen \d+ ssl/
       - /root\s+/opt/bitnami/wordpress/
       - "rewrite ^/bitnami/wordpress(/.*) $1 last;"
@@ -42,7 +42,7 @@ file:
   /opt/bitnami/wp-cli/conf/wp-cli.yml:
     exists: true
     filetype: file
-    contains:
+    contents:
       - /path.*/opt/bitnami/wordpress/
 group:
   daemon:

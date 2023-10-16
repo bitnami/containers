@@ -10,23 +10,23 @@ file:
   /opt/bitnami/php/etc/php.ini:
     exists: true
     filetype: file
-    contains:
+    contents:
       - upload_max_filesize = 40M
       - opcache.revalidate_freq = 60
   /opt/bitnami/php/etc/common.conf:
     exists: true
     filetype: file
-    contains:
+    contents:
       - user=daemon
   /opt/bitnami/php/etc/php-fpm.conf:
     exists: true
     filetype: file
-    contains:
+    contents:
       - error_log = /opt/bitnami/php/logs/php-fpm.log
   /opt/bitnami/php/etc/php-fpm.d/www.conf:
     exists: true
     filetype: file
-    contains:
+    contents:
       - listen = 9000
       - include=/opt/bitnami/php/etc/environment.conf
       - include=/opt/bitnami/php/etc/common.conf

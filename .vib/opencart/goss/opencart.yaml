@@ -20,13 +20,13 @@ file:
   /opt/bitnami/apache/conf/vhosts/opencart-vhost.conf:
     exists: true
     filetype: file
-    contains:
+    contents:
       - /DocumentRoot.*/opt/bitnami/opencart/
   # HTTPS vhost should have been properly rendered
   /opt/bitnami/apache/conf/vhosts/opencart-https-vhost.conf:
     exists: true
     filetype: file
-    contains:
+    contents:
       - "SSLEngine on"
       - /DocumentRoot.*/opt/bitnami/opencart/
 group:

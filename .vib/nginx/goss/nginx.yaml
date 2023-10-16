@@ -28,12 +28,12 @@ file:
   /opt/bitnami/nginx/conf/nginx.conf:
     exists: true
     filetype: file
-    contains:
+    contents:
       - /listen.*{{ .Vars.ports.http }}/
   /opt/bitnami/nginx/conf/fastcgi_params:
     exists: true
     filetype: file
-    contains:
+    contents:
       - /Unset.*HTTP_PROXY/
 command:
   test-config:

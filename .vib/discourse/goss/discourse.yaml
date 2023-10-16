@@ -20,7 +20,7 @@ file:
   /opt/bitnami/discourse/.image_optim.yml:
     exists: true
     filetype: file
-    contains:
+    contents:
       - "!timeout:"
       - "svgo: false"
 group:

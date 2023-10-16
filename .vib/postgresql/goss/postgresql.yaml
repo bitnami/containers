@@ -17,5 +17,5 @@ file:
   /opt/bitnami/postgresql/conf/postgresql.conf:
     exists: true
     mode: "0664"
-    contains:
+    contents:
       - /^include_dir = 'conf.d'/

@@ -5,5 +5,5 @@ file:
   /opt/bitnami/kibana/config/kibana.yml:
     exists: true
     filetype: file
-    contains:
+    contents:
       - "data: /bitnami/kibana/data"

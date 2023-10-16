@@ -4,7 +4,7 @@
 file:
   /opt/bitnami/redis-sentinel/etc/sentinel.conf:
     exists: true
-    contains:
+    contents:
       - port 26379
       - bind 0.0.0.0
       - /pidfile.*/opt/bitnami/redis-sentinel/tmp/redis-sentinel.pid/

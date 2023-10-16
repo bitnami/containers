@@ -6,28 +6,28 @@ file:
   /opt/bitnami/nginx/conf/server_blocks/drupal-server-block.conf:
     exists: true
     filetype: file
-    contains:
+    contents:
       - /root\s+/opt/bitnami/drupal/
   # HTTPs server block should have been properly rendered
   /opt/bitnami/nginx/conf/server_blocks/drupal-https-server-block.conf:
     exists: true
     filetype: file
-    contains:
+    contents:
       - /listen \d+ ssl/
       - /root\s+/opt/bitnami/drupal/
   /opt/bitnami/drupal/sites/default/settings.php:
     exists: true
     filetype: file
-    contains:
+    contents:
       - "$settings['trusted_host_patterns'] = array('^.*$');"
   /opt/bitnami/php/etc/php.ini:
     exists: true
     filetype: file
-    contains:
+    contents:
       - /^memory_limit = 256M/
   /opt/bitnami/nginx/conf/bitnami/php-fpm.conf:
     exists: true
     filetype: file
-    contains:
+    contents:
       - "location ~ \\.php$|^/update.php {"
       - "fastcgi_split_path_info ^(.+?.php)(|/.*)$;"

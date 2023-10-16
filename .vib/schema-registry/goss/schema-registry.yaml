@@ -9,7 +9,7 @@ file:
   /opt/bitnami/schema-registry/etc/schema-registry/schema-registry.properties.default:
     exists: true
     filetype: file
-    contains:
+    contents:
       - /kafkastore.bootstrap.servers.*9092/
 command:
   check-schema-registry-initialization:

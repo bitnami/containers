@@ -17,7 +17,7 @@ file:
     filetype: directory
   /opt/bitnami/nginx/conf/nginx.conf:
     exists: true
-    contains:
+    contents:
       - "/opt/bitnami/harbor"
       - "/opt/bitnami/nginx/conf/mime.types"
 command:
