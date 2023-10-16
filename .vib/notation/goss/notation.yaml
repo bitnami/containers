@@ -1,0 +1,7 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+command:
+  generate-test-key:
+    exec: notation cert generate-test --default "wabbit-networks.io"
+    exit-status: 0
