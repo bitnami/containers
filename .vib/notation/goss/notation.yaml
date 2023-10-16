@@ -3,5 +3,5 @@
 
 command:
   generate-test-key:
-    exec: notation cert generate-test --default "wabbit-networks.io"
+    exec: notation cert generate-test --default "domain.com"
     exit-status: 0
