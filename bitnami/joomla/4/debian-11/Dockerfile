@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-10-11T19:09:30Z" \
+      org.opencontainers.image.created="2023-10-17T20:04:06Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.3.4-debian-11-r36" \
+      org.opencontainers.image.ref.name="4.4.0-debian-11-r0" \
       org.opencontainers.image.title="joomla" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="4.3.4"
+      org.opencontainers.image.version="4.4.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -31,7 +31,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "mysql-client-11.1.2-0-linux-${OS_ARCH}-debian-11" \
       "libphp-8.1.24-0-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.6-2-linux-${OS_ARCH}-debian-11" \
-      "joomla-4.3.4-0-linux-${OS_ARCH}-debian-11" \
+      "joomla-4.4.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -55,7 +55,7 @@ RUN /opt/bitnami/scripts/joomla/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="4.3.4" \
+    APP_VERSION="4.4.0" \
     BITNAMI_APP_NAME="joomla" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
