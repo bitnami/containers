@@ -135,6 +135,7 @@ To expose the same database name as the backend, set `PGBOUNCER_DATABASE="$POSTG
 * `PGBOUNCER_SERVER_IDLE_TIMEOUT`: PgBouncer maximum time in seconds a server connection can be idle. If 0 then the timeout is disabled. Default: **600**
 * `PGBOUNCER_SERVER_RESET_QUERY`: PgBouncer query sent to server on connection release before making it available to other clients. Default: **DISCARD ALL**
 * `PGBOUNCER_STATS_USERS`: PgBouncer comma-separated list of database users that are allowed to connect and run read-only queries. No defaults.
+* `PGBOUNCER_MAX_PREPARED_STATEMENTS`: PgBouncer maximum number of cached prepared statements. Default: **0 (disabled)**.
 
 ### Initializing a new instance
 
