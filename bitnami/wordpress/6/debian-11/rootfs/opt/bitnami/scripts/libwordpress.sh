@@ -227,12 +227,6 @@ wordpress_initialize() {
                 WORDPRESS_DATA_TO_PERSIST+=" ${htaccess_file}"
             fi
         fi
-    else
-        if is_boolean_yes "$WORDPRESS_HTACCESS_OVERRIDE_NONE"; then
-            local htaccess_file="${APACHE_HTACCESS_DIR}/wordpress-htaccess.conf"
-        else
-            local htaccess_file="${WORDPRESS_BASE_DIR}/.htaccess"
-        fi
     fi
 
     # Check if WordPress has already been initialized and persisted in a previous run
@@ -596,12 +590,17 @@ EOF
 # Globals:
 #   *
 # Arguments:
-#   $1 - path to .htaccess file
+#   None
 # Returns:
 #   None
 #########################
 wordpress_disable_xmlrpc_endpoint() {
-    local -r htaccess_file="${1:?missing htaccess file path}"
+    if is_boolean_yes "$WORDPRESS_HTACCESS_OVERRIDE_NONE"; then
+        local htaccess_file="${APACHE_HTACCESS_DIR}/wordpress-htaccess.conf"
+    else
+        local htaccess_file="${WORDPRESS_BASE_DIR}/.htaccess"
+    fi
+
     [[ ! -f "$htaccess_file" ]] && touch "$htaccess_file" 
     grep -q "<Files xmlrpc.php>" "$htaccess_file" || cat >>"$htaccess_file" <<"EOF"
 
