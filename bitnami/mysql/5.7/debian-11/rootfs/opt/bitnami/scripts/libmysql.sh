@@ -162,7 +162,6 @@ log_error=${DB_LOGS_DIR}/mysqld.log
 slow_query_log=${DB_ENABLE_SLOW_QUERY}
 long_query_time=${DB_LONG_QUERY_TIME}
 character_set_server=${DB_DEFAULT_CHARACTER_SET}
-collation_server=${DB_DEFAULT_COLLATE}
 plugin_dir=${DB_BASE_DIR}/lib/plugin
 datadir=${DB_DATA_DIR}
 
