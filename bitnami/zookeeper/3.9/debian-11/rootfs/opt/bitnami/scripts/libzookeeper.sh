@@ -180,6 +180,17 @@ zookeeper_initialize() {
     if [[ -n "$ZOO_PEER_TYPE" ]]; then
         zookeeper_conf_set "$ZOO_CONF_FILE" peerType "$ZOO_PEER_TYPE"
     fi
+
+    # Convey logging configuration to system properties
+    if [[ -n "$ZOO_LOG_LEVEL" ]]; then
+        zookeeper_export_jvmflags "-Dzookeeper.log.level=$ZOO_LOG_LEVEL"
+    fi
+    if [[ -n "$ZOO_LOG_APPENDER" ]]; then
+        zookeeper_export_jvmflags "-Dzookeeper.log.appender=$ZOO_LOG_APPENDER"
+    fi
+    if [[ -n "$ZOO_LOG_FORMAT" ]]; then
+        zookeeper_export_jvmflags "-Dzookeeper.log.format=$ZOO_LOG_FORMAT"
+    fi
 }
 
 ########################
