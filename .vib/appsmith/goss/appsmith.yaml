@@ -9,7 +9,7 @@ file:
   /opt/bitnami/appsmith/templates/docker.env.sh:
     exists: true
     filetype: file
-    contains:
+    contents:
       - /cat.*EOF/
       - APPSMITH_SUPERVISOR_USER
 command:

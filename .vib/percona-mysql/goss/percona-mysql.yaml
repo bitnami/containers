@@ -6,7 +6,7 @@ file:
   /opt/bitnami/mysql/conf/my.cnf:
     exists: true
     filetype: file
-    contains:
+    contents:
       - socket=/opt/bitnami/mysql/tmp/mysql.sock
   /opt/bitnami/mysql/logs/mysqld.log:
     exists: true

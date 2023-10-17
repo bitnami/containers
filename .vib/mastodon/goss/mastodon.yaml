@@ -11,13 +11,13 @@ file:
   /opt/bitnami/mastodon/config/initializers/1_hosts.rb:
     exists: true
     filetype: file
-    contains:
+    contents:
       - "https = ENV['MASTODON_HTTPS_ENABLED'] == 'true'"
       - "config.hosts.clear if ENV['MASTODON_ALLOW_ALL_DOMAINS'] == 'true'"
   /opt/bitnami/mastodon/config/environments/production.rb:
     exists: true
     filetype: file
-    contains:
+    contents:
       - "config.force_ssl = ENV['MASTODON_HTTPS_ENABLED'] == 'true'"
   /opt/mastodon:
     exists: true

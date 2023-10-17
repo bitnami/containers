@@ -15,7 +15,7 @@ file:
   /opt/bitnami/elasticsearch/config/log4j2.properties:
     exists: true
     filetype: file
-    contains:
+    contents:
       - "Console"
       - "!RollingFile"
       - "!_old"

@@ -10,7 +10,7 @@ file:
   /opt/bitnami/nginx/conf/bitnami/php-fpm.conf:
     exists: true
     filetype: file
-    contains:
+    contents:
       - "location ~ \\.php$ {"
       - "fastcgi_pass   unix:/opt/bitnami/php/var/run/www.sock;"
       - "include        fastcgi_params;"

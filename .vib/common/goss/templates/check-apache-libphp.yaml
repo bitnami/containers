@@ -19,11 +19,11 @@ file:
   /opt/bitnami/apache/conf/httpd.conf:
     exists: true
     filetype: file
-    contains:
+    contents:
       - "Include \"/opt/bitnami/apache/conf/bitnami/php.conf\""
   /opt/bitnami/apache/conf/bitnami/php.conf:
     exists: true
     filetype: file
-    contains:
+    contents:
       - "AddType application/x-httpd-php .php"
       - "DirectoryIndex index.html index.htm index.php"

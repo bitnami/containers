@@ -6,7 +6,7 @@ file:
   /opt/bitnami/solr/bin/solr.in.sh:
     exists: true
     filetype: file
-    contains:
+    contents:
       - "SOLR_JAVA_HOME=/opt/bitnami/java"
       - "SOLR_PID_DIR=/opt/bitnami/solr/tmp"
       - "SOLR_LOGS_DIR=/opt/bitnami/solr/logs"

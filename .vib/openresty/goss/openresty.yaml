@@ -22,12 +22,12 @@ file:
   /opt/bitnami/openresty/nginx/conf/nginx.conf:
     exists: true
     filetype: file
-    contains:
+    contents:
       - /listen.*8080/
   /opt/bitnami/openresty/nginx/conf/fastcgi_params:
     exists: true
     filetype: file
-    contains:
+    contents:
       - /fastcgi_param.*HTTP_PROXY.*""/
 command:
   # Revisions are displayed as "x.y.z.r" instead of "x.y.z-r"

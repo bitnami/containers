@@ -7,12 +7,12 @@ file:
     exists: true
     filetype: file
     mode: "0664"
-    contains:
+    contents:
       - /file\.enabled.*true/
   /opt/bitnami/neo4j/conf/neo4j.conf:
     exists: true
     filetype: file
-    contains:
+    contents:
     {{ if regexMatch "^4.+" .Env.APP_VERSION }}
       - /dbms\.directories\.data.*\/bitnami\/neo4j\/data/
     {{ else if regexMatch "^5.+" .Env.APP_VERSION }}

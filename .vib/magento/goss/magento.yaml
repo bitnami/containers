@@ -12,7 +12,7 @@ file:
   /opt/bitnami/apache/conf/vhosts/magento-https-vhost.conf:
     exists: true
     filetype: file
-    contains:
+    contents:
       - "SSLEngine on"
       - /DocumentRoot.*/opt/bitnami/magento/
   /opt/bitnami/apache/conf/vhosts/htaccess/magento-htaccess.conf:
@@ -20,7 +20,7 @@ file:
   /opt/bitnami/php/etc/php.ini:
     exists: true
     filetype: file
-    contains:
+    contents:
       - "opcache.consistency_checks = 0"
       - "opcache.validate_timestamps = 0"
       - "opcache.enable_cli = 1"

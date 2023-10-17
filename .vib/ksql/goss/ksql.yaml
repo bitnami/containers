@@ -6,11 +6,11 @@ file:
   /opt/bitnami/ksql/etc/ksqldb/ksql-server.properties.default:
     exists: true
     filetype: file
-    contains:
+    contents:
       - http://0.0.0.0:8088
       - ksql.streams.state.dir = /bitnami/ksql/data
   # ksql does not have a version flag so we check the version.txt
   /opt/bitnami/ksql/share/doc/confluent-kafka-mqtt/version.txt:
     exists: true
-    contains:
+    contents:
       - {{ .Env.APP_VERSION }}

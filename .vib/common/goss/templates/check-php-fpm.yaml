@@ -9,7 +9,7 @@
 file:
   /opt/bitnami/php/etc/php.ini:
     exists: true
-    contains:
+    contents:
       - /^opcache.interned_strings_buffer = 16/
       - /^opcache.memory_consumption = 192/
       - /^opcache.file_cache = \/opt\/bitnami\/php\/var\/run\/opcache_file/
@@ -18,7 +18,7 @@ file:
       - /^error_log = \/dev\/stderr/
   /opt/bitnami/php/etc/php-fpm.d/www.conf:
     exists: true
-    contains:
+    contents:
       - /^listen = \/opt\/bitnami\/php\/var\/run\/www.sock/
   /opt/bitnami/php/logs/php-fpm.log:
     exists: true

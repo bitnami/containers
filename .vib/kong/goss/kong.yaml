@@ -10,17 +10,17 @@ user:
 file:
   /opt/bitnami/kong/conf/kong.conf:
     exists: true
-    contains:
+    contents:
       - "prefix = /opt/bitnami/kong/server"
       - "nginx_daemon = off"
       - "nginx_user = kong"
   /opt/bitnami/scripts/kong-env.sh:
     exists: true
-    contains:
+    contents:
       - "'luarocks path' configuration"
   /etc/bash.bashrc:
     exists: true
-    contains:
+    contents:
       - "'luarocks path' configuration"
   /usr/local/kong/include/opentelemetry:
     exists: true

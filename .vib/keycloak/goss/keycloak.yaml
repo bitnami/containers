@@ -62,7 +62,7 @@ file:
     filetype: directory
   /opt/bitnami/keycloak/modules/system/layers/keycloak/org/postgresql/jdbc/main/module.xml:
     exists: true
-    contains:
+    contents:
       - "<module xmlns=\"urn:jboss:module:1.0\" name=\"org.postgresql.jdbc\">"
 command:
   check-app-version:
