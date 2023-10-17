@@ -223,10 +223,7 @@ zookeeper_generate_conf() {
     zookeeper_conf_set "$ZOO_CONF_FILE" 4lw.commands.whitelist "$ZOO_4LW_COMMANDS_WHITELIST"
     zookeeper_conf_set "$ZOO_CONF_FILE" maxSessionTimeout "$ZOO_MAX_SESSION_TIMEOUT"
     # Set log level
-    if [ -f "${ZOO_CONF_DIR}/logback.xml" ]; then
-      # Zookeeper 3.8+
-      xmlstarlet edit -L -u "/configuration/property[@name='zookeeper.console.threshold']/@value" -v "$ZOO_LOG_LEVEL" "${ZOO_CONF_DIR}/logback.xml"
-    else
+    if [ ! -f "${ZOO_CONF_DIR}/logback.xml" ]; then
       zookeeper_conf_set "${ZOO_CONF_DIR}/log4j.properties" zookeeper.console.threshold "$ZOO_LOG_LEVEL"
     fi
     # Admin web server https://zookeeper.apache.org/doc/r3.5.7/zookeeperAdmin.html#sc_adminserver
