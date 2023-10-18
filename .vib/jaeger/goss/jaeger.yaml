@@ -6,4 +6,4 @@ command:
     exec: timeout --preserve-status 5 jaeger-all-in-one
     exit-status: 0
     stderr:
-      - Server created
+      - "Server created"

@@ -6,4 +6,4 @@ command:
     exec: grafana-operator --help || true
     exit-status: 0
     stderr:
-    - Usage of grafana-operator
+    - "Usage of grafana-operator"

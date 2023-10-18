@@ -7,5 +7,5 @@ command:
     exit-status: 143
     timeout: 8000
     stderr:
-      - Loading yaml config
-      - Connection refused to host
+      - "Loading yaml config"
+      - "Connection refused to host"

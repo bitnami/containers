@@ -6,5 +6,5 @@ command:
     exec: timeout --preserve-status 5 node_exporter || true
     exit-status: 0
     stderr:
-      - Listening
+      - "Listening"
 

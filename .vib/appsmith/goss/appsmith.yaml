@@ -23,7 +23,7 @@ command:
     exec: cd /opt/appsmith/rts/ && node --require source-map-support/register server.js
     exit-status: 1
     stderr:
-      - APPSMITH_API_BASE_URL
+      - "APPSMITH_API_BASE_URL"
 group:
   appsmith:
     exists: true
