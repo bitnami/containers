@@ -10,5 +10,5 @@ command:
   check-installed-runtimes:
     exec: dotnet --list-runtimes
     stdout:
-      - NETCore.App {{ .Env.APP_VERSION }}
+      - "NETCore.App {{ .Env.APP_VERSION }}"
     exit-status: 0

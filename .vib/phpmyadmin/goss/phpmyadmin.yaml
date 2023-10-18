@@ -19,8 +19,8 @@ file:
     exists: true
     filetype: file
     contents:
-      - post_max_size = 80M
-      - upload_max_filesize = 80M
+      - "post_max_size = 80M"
+      - "upload_max_filesize = 80M"
   # HTTP vhost should have been properly rendered
   /opt/bitnami/apache/conf/vhosts/phpmyadmin-vhost.conf:
     exists: true

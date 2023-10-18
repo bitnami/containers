@@ -6,8 +6,8 @@ command:
     exec: ldd /opt/bitnami/pgpool/bin/pgpool
     exit-status: 0
     stdout:
-      - libpam.so
-      - libssl.so
+      - "libpam.so"
+      - "libssl.so"
 file:
   /opt/bitnami/pgpool/logs/pgpool.log:
     exists: true

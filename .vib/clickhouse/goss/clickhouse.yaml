@@ -7,7 +7,7 @@ command:
     exec: timeout --preserve-status 5 clickhouse-server 2>&1 || true
     exit-status: 0
     stdout:
-      - Ready for connections
+      - "Ready for connections"
 file:
   /var/lib/clickhouse/tmp:
     exists: true

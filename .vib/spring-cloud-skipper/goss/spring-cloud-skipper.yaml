@@ -7,7 +7,7 @@ command:
     exec: timeout --preserve-status 25 java -jar /opt/bitnami/spring-cloud-skipper/spring-cloud-skipper.jar
     exit-status: 143
     stdout:
-      - Started SkipperServerApplication
+      - "Started SkipperServerApplication"
 file:
   /opt/bitnami/spring-cloud-skipper/spring-cloud-skipper.jar:
     exists: true

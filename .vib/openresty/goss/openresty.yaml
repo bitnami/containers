@@ -44,5 +44,5 @@ command:
     exec: openresty -V 2>&1
     exit-status: 0
     stdout:
-      - pcre-jit
-      - compat
+      - "pcre-jit"
+      - "compat"

@@ -6,7 +6,7 @@ file:
     mode: "0644"
     exists: true
     contents:
-      - This solution ships the official MongoDB Community binaries
+      - "This solution ships the official MongoDB Community binaries"
   /opt/bitnami/mongodb/logs/mongodb.log:
     exists: true
     filetype: symlink

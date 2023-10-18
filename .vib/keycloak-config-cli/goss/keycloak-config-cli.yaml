@@ -9,7 +9,7 @@ command:
     exit-status: 1
     timeout: 10000
     stdout:
-      - Started KeycloakConfigApplication
+      - "Started KeycloakConfigApplication"
   # Besides the default one, we are packaging
   # one cli per keycloak major as done by upstream
   check-per-major-clis:

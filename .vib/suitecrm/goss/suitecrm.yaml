@@ -7,7 +7,7 @@ command:
     exec: find /opt/bitnami/suitecrm -maxdepth 3 -type f -name suitecrm_version.php -exec grep -Eo "version = '([0-9.]+)'" {} \;
     exit-status: 0
     stdout:
-      - version = '{{ .Env.APP_VERSION }}'
+      - 'version = "{{ .Env.APP_VERSION }}"'
   check-enabled-modules:
     exec: php -m
     exit-status: 0
@@ -20,8 +20,8 @@ file:
     exists: true
     filetype: file
     contents:
-      - post_max_size = 60M
-      - upload_max_filesize = 128M
+      - "post_max_size = 60M"
+      - "upload_max_filesize = 128M"
   /opt/bitnami/suitecrm/node_modules:
     exists: false
   # Disabling opcache to be able to modify parameters using the system setting panel
@@ -29,7 +29,7 @@ file:
     exists: true
     filetype: file
     contents:
-      - opcache.enable = Off
+      - "opcache.enable = Off"
   # HTTP vhost should have been properly rendered
   /opt/bitnami/apache/conf/vhosts/suitecrm-vhost.conf:
     exists: true

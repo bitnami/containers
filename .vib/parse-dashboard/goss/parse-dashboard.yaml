@@ -12,4 +12,4 @@ command:
     exec: grep "version" /opt/bitnami/parse-dashboard/package.json
     exit-status: 0
     stdout:
-      - {{ .Env.APP_VERSION }}
+      - "{{ .Env.APP_VERSION }}"

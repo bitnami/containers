@@ -70,4 +70,4 @@ command:
     exec: cat /opt/bitnami/keycloak/version.txt
     exit-status: 0
     stdout:
-    - {{ .Env.APP_VERSION }}
+    - "{{ .Env.APP_VERSION }}"

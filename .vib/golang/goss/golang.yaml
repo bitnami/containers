@@ -14,4 +14,4 @@ command:
       ./{{ $filename }}
     exit-status: 0
     stdout:
-      - Hello VIB
+      - "Hello VIB"

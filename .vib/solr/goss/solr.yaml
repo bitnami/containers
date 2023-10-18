@@ -15,7 +15,7 @@ command:
     exec: JAVA_HOME=/opt/bitnami/solr/java /opt/bitnami/solr/bin/solr version
     exit-status: 0
     stdout:
-    - {{ .Env.APP_VERSION }}
+    - "{{ .Env.APP_VERSION }}"
 group:
   solr:
     exists: true

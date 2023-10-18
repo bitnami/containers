@@ -25,4 +25,4 @@ command:
     timeout: 20000
     exit-status: 0
     stdout:
-      - running Milvus components
+      - "running Milvus components"

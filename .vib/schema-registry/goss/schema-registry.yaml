@@ -17,4 +17,4 @@ command:
     exit-status: 143
     timeout: 10000
     stdout:
-      - Adding listener
+      - "Adding listener"

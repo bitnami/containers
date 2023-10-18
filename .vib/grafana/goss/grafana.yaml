@@ -7,7 +7,7 @@ command:
     exec: grafana-cli --pluginsDir /opt/bitnami/grafana/default-plugins/ plugins ls
     stdout:
     {{ range $plugin := .Vars.plugins }}
-      - {{ $plugin }}
+      - "{{ $plugin }}"
     {{ end }}
 user:
   grafana:

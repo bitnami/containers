@@ -8,12 +8,12 @@ command:
     exec: timeout --preserve-status 30 java -jar /opt/bitnami/spring-cloud-dataflow/spring-cloud-dataflow.jar
     exit-status: 143
     stdout:
-      - Started DataFlowServerApplication
+      - "Started DataFlowServerApplication"
   check-spring-cloud-dataflow-version:
     exec: output=$(mktemp -d); cd $output; jar xf /opt/bitnami/spring-cloud-dataflow/spring-cloud-dataflow.jar; cat ./BOOT-INF/classes/application.yml
     exit-status: 0
     stdout:
-      - {{ .Env.APP_VERSION }}
+      - "{{ .Env.APP_VERSION }}"
 file:
   /opt/bitnami/spring-cloud-dataflow/spring-cloud-dataflow.jar:
     exists: true

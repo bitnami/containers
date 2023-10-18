@@ -7,13 +7,13 @@ command:
     exec: ls /opt/bitnami/prometheus-rsocket-proxy/prometheus-rsocket-proxy-*.jar
     exit-status: 0
     stdout:
-    - {{ .Env.APP_VERSION }}
+    - "{{ .Env.APP_VERSION }}"
   check-proxy-jar:
     exec: timeout --preserve-status 10 java -jar /opt/bitnami/prometheus-rsocket-proxy/prometheus-rsocket-proxy.jar
     exit-status: 143
     timeout: 20000
     stdout:
-      - Started PrometheusRSocketProxy
+      - "Started PrometheusRSocketProxy"
 file:
   /opt/bitnami/prometheus-rsocket-proxy/prometheus-rsocket-proxy.jar:
     exists: true

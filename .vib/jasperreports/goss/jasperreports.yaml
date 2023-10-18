@@ -10,8 +10,8 @@ file:
     exists: true
     filetype: file
     contents:
-      - appServerDir=/opt/bitnami/tomcat
-      - jdbcDriverClass=org.mariadb.jdbc.Driver
+      - "appServerDir=/opt/bitnami/tomcat"
+      - "jdbcDriverClass=org.mariadb.jdbc.Driver"
   /opt/bitnami/jasperreports/buildomatic/bin/app-server.xml:
     exists: true
     filetype: file

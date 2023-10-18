@@ -7,7 +7,7 @@ command:
     exec: grep -Eo "'VERSION', '[^']*'" /opt/bitnami/opencart/index.php | sed -E 's/([0-9]+\.[0-9]+\.[0-9]+)\.([0-9]+)/\1-\2/'
     exit-status: 0
     stdout:
-      - {{ .Env.APP_VERSION }}
+      - "{{ .Env.APP_VERSION }}"
   check-enabled-modules:
     exec: php -m
     exit-status: 0

@@ -7,7 +7,7 @@ command:
     exec: timeout --preserve-status 15 java -jar /opt/bitnami/spring-cloud-dataflow-composed-task-runner/scdf-composed-task-runner.jar
     exit-status: 1
     stdout:
-      - {{ .Env.APP_VERSION }}
+      - "{{ .Env.APP_VERSION }}"
 file:
   /opt/bitnami/spring-cloud-dataflow-composed-task-runner/scdf-composed-task-runner.jar:
     exists: true

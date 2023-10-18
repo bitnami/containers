@@ -7,5 +7,5 @@ command:
     timeout: 8000
     exit-status: 2
     stdout:
-      - Proxying
-      - Proxy API at
+      - "Proxying"
+      - "Proxy API at"

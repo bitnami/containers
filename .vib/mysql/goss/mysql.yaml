@@ -7,7 +7,7 @@ file:
     exists: true
     filetype: file
     contents:
-      - socket=/opt/bitnami/mysql/tmp/mysql.sock
+      - "socket=/opt/bitnami/mysql/tmp/mysql.sock"
   /opt/bitnami/mysql/logs/mysqld.log:
     exists: true
     filetype: symlink

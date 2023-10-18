@@ -13,4 +13,4 @@ command:
     exec: {{ .Vars.version.bin_name }} {{ .Vars.version.flag }} 2>&1
     exit-status: 0
     stdout:
-    - {{ .Env.APP_VERSION }}
+    - "{{ .Env.APP_VERSION }}"

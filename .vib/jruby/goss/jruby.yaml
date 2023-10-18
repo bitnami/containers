@@ -19,13 +19,13 @@ command:
     exit-status: 0
     timeout: 30000
     stdout:
-      - Hello VIB
+      - "Hello VIB"
   check-mariadb-jdbc-driver:
     exec: jruby -e "puts Java::org.mariadb.jdbc.Driver"
     exit-status: 0
     timeout: 30000
     stdout:
-      - Java::OrgMariadbJdbc::Driver
+      - "Java::OrgMariadbJdbc::Driver"
 file:
   /opt/bitnami/jruby/bin/ruby:
     exists: true

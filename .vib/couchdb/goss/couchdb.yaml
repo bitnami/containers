@@ -12,7 +12,7 @@ command:
   check-library-path:
     exec: echo $LD_LIBRARY_PATH
     stdout:
-      - /opt/bitnami/common/lib
+      - "/opt/bitnami/common/lib"
     exit-status: 0
   check-libmozjs:
     exec: ls /opt/bitnami/common/lib | grep libmozjs

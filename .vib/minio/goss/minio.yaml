@@ -11,4 +11,4 @@ command:
     exec: minio --version | sed "s/\-0*/./g"
     exit-status: 0
     stdout:
-      - {{ .Env.APP_VERSION }}
+      - "{{ .Env.APP_VERSION }}"

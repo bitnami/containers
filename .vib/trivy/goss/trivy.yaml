@@ -7,4 +7,4 @@ command:
     timeout: 60000
     exit-status: 0
     stdout:
-      - CVE-2020-1751
+      - "CVE-2020-1751"
