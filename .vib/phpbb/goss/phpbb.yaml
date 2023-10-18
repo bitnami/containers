@@ -16,7 +16,7 @@ file:
     filetype: file
     contents:
       - /DocumentRoot.*/opt/bitnami/phpbb/
-      - Alias /bitnami/phpbb /bitnami/phpbb
+      - "Alias /bitnami/phpbb /bitnami/phpbb"
   # HTTPS vhost should have been properly rendered
   /opt/bitnami/apache/conf/vhosts/phpbb-https-vhost.conf:
     exists: true
@@ -24,7 +24,7 @@ file:
     contents:
       - "SSLEngine on"
       - /DocumentRoot.*/opt/bitnami/phpbb/
-      - Alias /bitnami/phpbb /bitnami/phpbb
+      - "Alias /bitnami/phpbb /bitnami/phpbb"
 group:
   daemon:
     exists: true
