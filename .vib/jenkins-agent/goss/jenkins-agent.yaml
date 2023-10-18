@@ -6,4 +6,4 @@ command:
     exec: java -cp /opt/bitnami/jenkins-agent/agent.jar hudson.remoting.jnlp.Main -version | echo "0.$(cut -d '.' -f 1).0"
     exit-status: 0
     stdout:
-      - {{ .Env.APP_VERSION }}
+      - "{{ .Env.APP_VERSION }}"

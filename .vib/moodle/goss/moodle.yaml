@@ -6,13 +6,13 @@ file:
     exists: true
     contents:
     {{ range $rule := .Vars.apache.rules }}
-      - {{ $rule }}
+      - "{{ $rule }}"
     {{ end }}
   /opt/bitnami/php/etc/php.ini:
     exists: true
     contents:
       # Checking if the php.ini keys and pqsql extension are set
-      - extension = pgsql
+      - "extension = pgsql"
       - /^memory_limit/
       - /^max_input_vars/
   /opt/bitnami/apache/conf/vhosts/moodle-https-vhost.conf:

@@ -7,4 +7,4 @@ command:
     exec: jwt encode --secret=fake '{"hello":"world"}'
     exit-status: 0
     stdout:
-      - eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+      - "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9"

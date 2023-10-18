@@ -6,7 +6,7 @@ command:
     exec: python -c 'import torch; print(torch.__version__)'
     exit-status: 0
     stdout:
-      - {{ .Env.APP_VERSION }}
+      - "{{ .Env.APP_VERSION }}"
   check-torchvision-version:
     exec: python -c 'import torchvision; print(torchvision.__version__)'
     exit-status: 0

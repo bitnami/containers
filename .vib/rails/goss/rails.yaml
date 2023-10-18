@@ -8,7 +8,7 @@ command:
     exec: "rails new /app && cd /app && timeout 10s rails s -p 4000 || true"
     exit-status: 0
     stdout:
-      - Listening
+      - "Listening"
   check-app-version:
   # The `APP_VERSION` environment variable returns the version in the format of
   # Major.Minor.Patch-Build, such as 1.2.3-4 while the `rails -v` command returns
@@ -17,11 +17,11 @@ command:
     exec: {{ .Vars.version.bin_name }} {{ .Vars.version.flag }} | sed '/ [0-9]\+\.[0-9]\+\.[0-9]\+$/ s/$/-0/' | sed "s/\.\([0-9]\)$/-\1/"
     exit-status: 0
     stdout:
-    - {{ .Env.APP_VERSION }}
+    - "{{ .Env.APP_VERSION }}"
   check-installed-gems:
     exec: gem list
     exit-status: 0
     stdout:
       {{ range $module := .Vars.modules }}
-      - {{ $module }}
+      - "{{ $module }}"
       {{ end }}

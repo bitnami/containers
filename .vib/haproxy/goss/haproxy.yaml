@@ -7,5 +7,5 @@ command:
     exec: haproxy -vv
     exit-status: 0
     stdout:
-      - Built with Lua
-      - Built with the Prometheus
+      - "Built with Lua"
+      - "Built with the Prometheus"

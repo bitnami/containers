@@ -45,11 +45,11 @@ command:
     exit-status: 0
     stdout:
     {{ range $added_module := .Vars.modules.added }}
-      - nginx-module-{{ $added_module }}
+      - "nginx-module-{{ $added_module }}"
     {{ end }}
     {{ range $enabled_module := .Vars.modules.enabled }}
-      - with-{{ $enabled_module }}_module
+      - "with-{{ $enabled_module }}_module"
     {{ end }}
     {{ range $additional_config := .Vars.config_opts }}
-      - with-{{ $additional_config }}
+      - "with-{{ $additional_config }}"
     {{ end }}

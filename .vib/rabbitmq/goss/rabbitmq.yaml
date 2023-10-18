@@ -7,8 +7,8 @@ command:
     exit-status: 0
     timeout: 120000
     stdout:
-      - have been enabled
-      - have been disabled
+      - "have been enabled"
+      - "have been disabled"
 file:
   /etc/rabbitmq:
     exists: true

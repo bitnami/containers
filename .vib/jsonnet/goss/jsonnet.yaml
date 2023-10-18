@@ -6,4 +6,4 @@ command:
     exec: jsonnet ./jsonnet/goss/testfiles/test_template.jsonnet
     exit-status: 0
     stdout:
-      - VIB
+      - "VIB"

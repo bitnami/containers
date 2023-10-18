@@ -38,7 +38,7 @@ command:
     exec: php /opt/bitnami/matomo/console --version
     exit-status: 1
     stdout:
-      - {{ .Env.APP_VERSION }}
+      - "{{ .Env.APP_VERSION }}"
   # Since it is not done with sudo, the exit code is 1
   check-app-run:
     exec: php /opt/bitnami/matomo/console config:get --section=database

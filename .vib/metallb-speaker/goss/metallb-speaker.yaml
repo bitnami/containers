@@ -7,7 +7,7 @@ command:
     exec: speaker
     exit-status: 1
     stdout:
-      - {{ .Env.APP_VERSION }}
+      - "{{ .Env.APP_VERSION }}"
   check-metallb-speaker-help:
     exec: speaker --help
     exit-status: 0

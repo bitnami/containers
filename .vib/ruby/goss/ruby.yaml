@@ -7,7 +7,7 @@ command:
     exit-status: 0
     stdout:
       {{ range $module := .Vars.modules }}
-      - {{ $module }}
+      - "{{ $module }}"
       {{ end }}
   check-ssl:
     exec: ruby -rnet/https -e "Net::HTTP.get URI('https://bitnami.com')"
@@ -17,7 +17,7 @@ command:
     exit-status: 0
     exec: grep -r {{ $flag }} /opt/bitnami/ruby/include/
     stdout:
-      - config.h
+      - "config.h"
   {{ end }}
   check-bundle:
     exec: cd /tmp && echo "source 'https://rubygems.org'" > Gemfile && bundle
@@ -26,4 +26,4 @@ command:
     exec: echo "task :test do; puts 'Hello VIB'; end" > /tmp/test-rake.rb && rake -f /tmp/test-rake.rb test
     exit-status: 0
     stdout:
-      - Hello VIB
+      - "Hello VIB"

@@ -15,7 +15,7 @@ command:
     exec: npm list -g
     exit-status: 0
     stdout:
-      - terser
+      - "terser"
 file:
   /opt/bitnami/discourse/.image_optim.yml:
     exists: true

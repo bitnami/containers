@@ -14,5 +14,5 @@ command:
   check-run-jar:
     exec: java -jar ./java/goss/testfiles/HelloTest.jar
     stdout:
-    - Hello VIB
+    - "Hello VIB"
     exit-status: 0

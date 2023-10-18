@@ -6,7 +6,7 @@ command:
     exec: grep -A2 '"version"' /opt/bitnami/grafana-image-renderer/plugin.json | grep -o "[0-9]*\.[0-9]*\.[0-9]"
     exit-status: 0
     stdout:
-      - {{ .Env.APP_VERSION }}
+      - "{{ .Env.APP_VERSION }}"
   check-build-app:
     exec: timeout --preserve-status 3 node /opt/bitnami/grafana-image-renderer/build/app.js server --config=/opt/bitnami/grafana-image-renderer/conf/config.json
     exit-status: 143
