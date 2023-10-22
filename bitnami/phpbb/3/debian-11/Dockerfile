@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-10-11T19:35:07Z" \
+      org.opencontainers.image.created="2023-10-22T16:27:17Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.3.10-debian-11-r120" \
+      org.opencontainers.image.ref.name="3.3.11-debian-11-r0" \
       org.opencontainers.image.title="phpbb" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="3.3.10"
+      org.opencontainers.image.version="3.3.11"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -27,11 +27,11 @@ RUN install_packages acl ca-certificates curl jq libaudit1 libbrotli1 libbsd0 li
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "php-8.2.11-3-linux-${OS_ARCH}-debian-11" \
-      "apache-2.4.57-12-linux-${OS_ARCH}-debian-11" \
+      "apache-2.4.58-0-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.11.5-1-linux-${OS_ARCH}-debian-11" \
-      "libphp-8.2.11-0-linux-${OS_ARCH}-debian-11" \
+      "libphp-8.2.11-1-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.6-2-linux-${OS_ARCH}-debian-11" \
-      "phpbb-3.3.10-6-linux-${OS_ARCH}-debian-11" \
+      "phpbb-3.3.11-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -54,7 +54,7 @@ RUN /opt/bitnami/scripts/apache-modphp/postunpack.sh
 RUN /opt/bitnami/scripts/phpbb/postunpack.sh
 ENV APACHE_HTTPS_PORT_NUMBER="" \
     APACHE_HTTP_PORT_NUMBER="" \
-    APP_VERSION="3.3.10" \
+    APP_VERSION="3.3.11" \
     BITNAMI_APP_NAME="phpbb" \
     PATH="/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/apache/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH"
 
