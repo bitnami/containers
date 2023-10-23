@@ -6,3 +6,10 @@ user:
     exists: true
     uid: 1001
     gid: 0
+command:
+  basic-example:
+    exec: python ./tensorflow/goss/testfiles/basic_example.py
+    timeout: 120000
+    stdout:
+      - shape=(5, 10)
+    exit-status: 0
