@@ -21,7 +21,7 @@ docker run --name spring-cloud-dataflow-shell bitnami/spring-cloud-dataflow-shel
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
-Looking to use Spring Cloud Data Flow Shell in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+Looking to use Spring Cloud Data Flow Shell in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
 
 ## Supported tags and respective `Dockerfile` links
 
