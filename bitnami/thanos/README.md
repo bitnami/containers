@@ -28,7 +28,7 @@ docker-compose up -d
 * All our images are based on minideb a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
-Looking to use Thanos in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+Looking to use Thanos in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
 
 ## How to deploy Thanos in Kubernetes?
 
