@@ -190,31 +190,16 @@ joomla_initialize() {
             local -r version_id="$(joomla_get_version_schema)"
             local -r encrypted_password="$(generate_md5_hash "${JOOMLA_PASSWORD}${salt}")"
             info "Executing initialization SQL commands"
-            if [[ "$(joomla_get_major_version)" -eq "4" ]]; then
-                echo "SOURCE ${JOOMLA_BASE_DIR}/installation/sql/mysql/base.sql" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
-                echo "SOURCE ${JOOMLA_BASE_DIR}/installation/sql/mysql/extensions.sql" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
-                echo "SOURCE ${JOOMLA_BASE_DIR}/installation/sql/mysql/supports.sql" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
-                echo "INSERT INTO jos_users(id, name, username, email, password, block, sendEmail, registerDate, params) VALUES(42, 'Super User', '$JOOMLA_USERNAME', '$JOOMLA_EMAIL', '${encrypted_password}:${salt}', 0, 1, '0000-00-00 00:00:00', '')" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
-                echo "INSERT INTO jos_user_usergroup_map(user_id, group_id) VALUES(42, 8)" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
-                echo "INSERT INTO jos_schemas(extension_id, version_id) VALUES(700, '${version_id}')" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
-                echo "UPDATE jos_extensions SET manifest_cache='{\"version\": \"$(joomla_get_version)\"}' WHERE name='files_joomla'" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
-                if ! is_boolean_yes "$JOOMLA_LOAD_SAMPLE_DATA"; then
-                    info "Disabling sample data"
-                    echo "UPDATE jos_extensions SET enabled='0' WHERE name LIKE '%sampledata%';" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
-                fi
-            else
-                echo "SOURCE ${JOOMLA_BASE_DIR}/installation/sql/mysql/joomla.sql" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
-                echo "INSERT INTO jos_users(id, name, username, email, password, block, sendEmail, params) VALUES(42, 'Super User', '$JOOMLA_USERNAME', '$JOOMLA_EMAIL', '${encrypted_password}:${salt}', 0, 1, '')" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
-                echo "INSERT INTO jos_user_usergroup_map(user_id, group_id) VALUES(42, 8)" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
-                echo "DELETE FROM jos_utf8_conversion;" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
-                echo "INSERT INTO jos_utf8_conversion(converted) VALUES(2)" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
-                echo "INSERT INTO jos_schemas(extension_id, version_id) VALUES(700, '${version_id}')" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
-                echo "UPDATE jos_extensions SET manifest_cache='{\"version\": \"$(joomla_get_version)\"}' WHERE extension_id=700" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
-                if is_boolean_yes "$JOOMLA_LOAD_SAMPLE_DATA"; then
-                    info "Loading sample data"
-                    # Using source to avoid too much output
-                    echo "SOURCE ${JOOMLA_BASE_DIR}/installation/sql/mysql/sample_data.sql" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
-                fi
+            echo "SOURCE ${JOOMLA_BASE_DIR}/installation/sql/mysql/base.sql" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
+            echo "SOURCE ${JOOMLA_BASE_DIR}/installation/sql/mysql/extensions.sql" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
+            echo "SOURCE ${JOOMLA_BASE_DIR}/installation/sql/mysql/supports.sql" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
+            echo "INSERT INTO jos_users(id, name, username, email, password, block, sendEmail, registerDate, params) VALUES(42, 'Super User', '$JOOMLA_USERNAME', '$JOOMLA_EMAIL', '${encrypted_password}:${salt}', 0, 1, '0000-00-00 00:00:00', '')" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
+            echo "INSERT INTO jos_user_usergroup_map(user_id, group_id) VALUES(42, 8)" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
+            echo "INSERT INTO jos_schemas(extension_id, version_id) VALUES(700, '${version_id}')" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
+            echo "UPDATE jos_extensions SET manifest_cache='{\"version\": \"$(joomla_get_version)\"}' WHERE name='files_joomla'" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
+            if ! is_boolean_yes "$JOOMLA_LOAD_SAMPLE_DATA"; then
+                info "Disabling sample data"
+                echo "UPDATE jos_extensions SET enabled='0' WHERE name LIKE '%sampledata%';" | mysql_remote_execute "$db_host" "$db_port" "$db_name" "$db_user" "$db_pass"
             fi
         else
             info "An already initialized Joomla! database was provided, configuration will be skipped"
