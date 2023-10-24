@@ -43,7 +43,7 @@ elif [[ "$APPSMITH_MODE" == "rts" ]]; then
     cd "${APPSMITH_BASE_DIR}/rts" || exit 1
     export PORT="$APPSMITH_RTS_PORT"
     cmd+=("node")
-    args+=("--require" "source-map-support/register" "${APPSMITH_BASE_DIR}/rts/server.js")
+    args+=("${APPSMITH_BASE_DIR}/rts/bundle/server.js")
 else
     # For the Client (UI) we just run nginx with the generated configuration
     cmd+=("${BITNAMI_ROOT_DIR}/scripts/nginx/run.sh")
