@@ -1,0 +1,14 @@
+{
+    "python": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "3.10.13-7"
+    },
+    "tensorflow": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "2.14.0-0"
+    }
+}
