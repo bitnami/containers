@@ -3,19 +3,19 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.9.38-0"
+        "version": "1.9.41-0"
     },
     "java": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "17.0.8-7-5"
+        "version": "17.0.9-11-1"
     },
     "mongodb-shell": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.0.1-0"
+        "version": "2.0.2-0"
     },
     "nginx": {
         "arch": "amd64",
@@ -27,13 +27,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.18.1-0"
+        "version": "18.18.2-0"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.9.18-2"
+        "version": "3.11.6-5"
     },
     "render-template": {
         "arch": "amd64",
