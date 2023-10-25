@@ -328,7 +328,7 @@ grafana_install_plugins() {
             plugin_version="${plugin_id_version_array[1]}"
             info "Installing plugin ${plugin_id} @ ${plugin_version}"
         elif grep ' ' <<< "$plugin"; then
-            read -r -a plugin_id_version_array <<< $plugin
+            read -r -a plugin_id_version_array <<< "$plugin"
             plugin_id="${plugin_id_version_array[0]}"
             plugin_version="${plugin_id_version_array[1]}"
             info "Installing plugin ${plugin_id} @ ${plugin_version}"
