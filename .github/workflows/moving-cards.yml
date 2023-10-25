@@ -123,7 +123,6 @@ jobs:
           path: .github/workflows/
       - name: Assign to a person to work on it
         # Assign when there is nobody assigned or the card is new.
-        # Cards in Build Maintenance column will remain unassigned.
         if: |
           github.event.project_card.column_id != env.SOLVED_COLUMN_ID && (needs.get-issue.outputs.assignees == '[]' || github.event.action == 'created')
         uses: pozil/auto-assign-issue@v1.11.0
