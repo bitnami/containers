@@ -207,6 +207,7 @@ The configuration can easily be setup with the Bitnami Apache Kafka Docker image
 * `KAFKA_CFG_PROCESS_ROLES`: Node roles when running in KRaft mode. No defaults.
 * `KAFKA_CFG_NODE_ID`: Unique node id, required when running in KRaft mode. No defaults.
 * `KAFKA_CFG_CONTROLLER_QUORUM_VOTERS`: Map of id/endpoint information for the set of controller quorum voters in a comma-separated list of {id}@{host}:{port} entries. No defaults.
+* `KAFKA_CFG_CONTROLLER_LISTENER_NAMES`: Comma-separated list of the names of the listeners used by the controller. This is required if running in KRaft mode. No defaults.
 * `KAFKA_KRAFT_CLUSTER_ID`: Kafka cluster ID when using Kafka Raft (KRaft). No defaults.
 
 Additionally, any environment variable beginning with `KAFKA_CFG_` will be mapped to its corresponding Apache Kafka key. For example, use `KAFKA_CFG_BACKGROUND_THREADS` in order to set `background.threads` or `KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE` in order to configure `auto.create.topics.enable`.
