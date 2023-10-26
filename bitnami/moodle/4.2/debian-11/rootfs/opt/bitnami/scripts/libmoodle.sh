@@ -160,6 +160,12 @@ moodle_initialize() {
         mdl_prefix="mdl_"
         for extra_arg in "${extra_args[@]}"; do
             if [[ $extra_arg == --prefix=* ]]; then
+                mdl_prefix=${extra_arg#--prefix=}
+                break
+            fi
+        done
+        for extra_arg in "${extra_args[@]}"; do
+            if [[ $extra_arg == --prefix=* ]]; then
                 parts=$( echo $extra_arg | tr "=" "\n" )
                 declare -i i=1
                 for part in $parts ; do
