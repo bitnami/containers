@@ -9,25 +9,25 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.18.1-0"
+        "version": "18.18.2-0"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.9.18-2"
+        "version": "3.11.6-6"
     },
     "rails": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.1.1-0"
+        "version": "7.1.1-1"
     },
     "ruby": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.2.2-7"
+        "version": "3.2.2-8"
     },
     "wait-for-port": {
         "arch": "amd64",
