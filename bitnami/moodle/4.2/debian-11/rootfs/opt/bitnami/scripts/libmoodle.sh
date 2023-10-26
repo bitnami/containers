@@ -164,20 +164,6 @@ moodle_initialize() {
                 break
             fi
         done
-        for extra_arg in "${extra_args[@]}"; do
-            if [[ $extra_arg == --prefix=* ]]; then
-                parts=$( echo $extra_arg | tr "=" "\n" )
-                declare -i i=1
-                for part in $parts ; do
-                    if [[ $i -eq 2 ]] ; then
-                        mdl_prefix=$part
-                    else
-                        mdl_prefix=""
-                    fi
-                    i+=1
-                done
-            fi
-        done
         
         # Setup Moodle
         if ! is_boolean_yes "$MOODLE_SKIP_BOOTSTRAP"; then
