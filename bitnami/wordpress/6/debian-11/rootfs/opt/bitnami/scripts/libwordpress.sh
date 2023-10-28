@@ -352,7 +352,6 @@ wordpress_initialize() {
             # Enable friendly URLs / permalinks (using historic Bitnami defaults)
             wp_execute rewrite structure '/%year%/%monthnum%/%day%/%postname%/'
             ! is_empty_value "$WORDPRESS_SMTP_HOST" && wordpress_configure_smtp
-            ! is_boolean_yes "$WORDPRESS_ENABLE_XML_RPC" && wordpress_disable_xmlrpc_endpoint
         else
             info "An already initialized WordPress database was provided, configuration will be skipped"
             wp_execute core update-db
@@ -586,34 +585,6 @@ EOF
 }
 
 ########################
-# Disable access to the WordPress XML-RPC endpoint
-# Globals:
-#   *
-# Arguments:
-#   None
-# Returns:
-#   None
-#########################
-wordpress_disable_xmlrpc_endpoint() {
-    if is_boolean_yes "$WORDPRESS_HTACCESS_OVERRIDE_NONE"; then
-        local htaccess_file="${APACHE_HTACCESS_DIR}/wordpress-htaccess.conf"
-    else
-        local htaccess_file="${WORDPRESS_BASE_DIR}/.htaccess"
-    fi
-
-    [[ ! -f "$htaccess_file" ]] && touch "$htaccess_file" 
-    grep -q "<Files xmlrpc.php>" "$htaccess_file" || cat >>"$htaccess_file" <<"EOF"
-
-# Disable the oudated WordPress XML-RPC endpoint to prevent security vulnerabilities.
-<Files xmlrpc.php>
-Order Allow,Deny
-Deny from all
-</Files>
-
-EOF
-}
-
-########################
 # Configure reverse proxy headers
 # Globals:
 #   *
@@ -756,6 +727,12 @@ wordpress_generate_web_server_configuration() {
         error "Unknown WordPress Multisite network mode"
         return 1
     fi
+
+    if ! is_boolean_yes "$WORDPRESS_ENABLE_XML_RPC"; then
+        apache_config+=$'\n'"$(render-template "${template_dir}/apache-wordpress-disable-xml-rpc.tpl")"
+        nginx_config+=$'\n'"$(render-template "${template_dir}/nginx-wordpress-disable-xml-rpc.tpl")"
+    fi
+
     web_server_config_create_flags+=("--apache-extra-directory-configuration" "$apache_config" "--nginx-additional-configuration" "$nginx_config")
     [[ -n "$nginx_external_config" ]] && web_server_config_create_flags+=("--nginx-external-configuration" "$nginx_external_config")
     ensure_web_server_app_configuration_exists "wordpress" --type "php" "${web_server_config_create_flags[@]}"
