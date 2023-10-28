@@ -253,7 +253,7 @@ wordpress_initialize() {
             replace_in_file "$WORDPRESS_CONF_FILE" "^(\s*\\\$table_prefix\s*=\s*).*" "\1'$WORDPRESS_TABLE_PREFIX';"
             wordpress_set_db_settings
             # Configure random keys and salt values
-              config shuffle-salts
+            wp_execute config shuffle-salts
 
             # Configure keys and salt values
             ! is_empty_value "$WORDPRESS_AUTH_KEY" && wordpress_conf_set "AUTH_KEY" "$WORDPRESS_AUTH_KEY"
