@@ -112,6 +112,7 @@ docker run -d --name moodle \
   --env MOODLE_DATABASE_NAME=bitnami_moodle \
   --network moodle-network \
   --volume moodle_data:/bitnami/moodle \
+  --volume moodledata_data:/bitnami/moodledata
   bitnami/moodle:latest
 ```
 
@@ -121,9 +122,9 @@ Access your application at `http://your-ip/`
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a directory at the `/bitnami/moodle` path. If the mounted directory is empty, it will be initialized on the first run. Additionally you should mount a volume for persistence of the [MariaDB data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#persisting-your-database).
+For persistence you should mount a directory at the `/bitnami/moodle` path and another at `/bitnami/moodledata`. If the mounted directory is empty, it will be initialized on the first run. Additionally you should mount a volume for persistence of the [MariaDB data](https://github.com/bitnami/containers/blob/main/bitnami/mariadb#persisting-your-database).
 
-The above examples define the Docker volumes named mariadb_data and moodle_data. The Moodle&trade; application state will persist as long as volumes are not removed.
+The above examples define the Docker volumes named mariadb_data, moodle_data and moodledata_data. The Moodle&trade; application state will persist as long as volumes are not removed.
 
 To avoid inadvertent removal of volumes, you can mount host directories as data volumes. Alternatively you can make use of volume plugins to host the volume data.
 
@@ -143,6 +144,9 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
      volumes:
 -      - 'moodle_data:/bitnami/moodle'
 +      - /path/to/moodle-persistence:/bitnami/moodle
+-      - 'moodledata_data:/bitnami/moodledata'
++      - /path/to/moodledata-persistence:/bitnami/moodle
+
    ...
 -volumes:
 -  mariadb_data:
@@ -183,6 +187,7 @@ docker run -d --name moodle \
   --env MOODLE_DATABASE_NAME=bitnami_moodle \
   --network moodle-network \
   --volume /path/to/moodle-persistence:/bitnami/moodle \
+  --volume /path/to/moodledata-persistence:/bitnami/moodledata \
   bitnami/moodle:latest
 ```
 
@@ -208,6 +213,7 @@ moodle:
   docker run -d --name moodle -p 80:8080 -p 443:8443 \
     --env MOODLE_PASSWORD=my_password \
     --network moodle-tier \
+    --volume /path/to/moodle-persistence:/bitnami \
     --volume /path/to/moodle-persistence:/bitnami \
     bitnami/moodle:latest
   ```
@@ -324,7 +330,8 @@ This would be an example of SMTP configuration using a Gmail account:
     --env MOODLE_SMTP_PASSWORD=your_password \
     --env MOODLE_SMTP_PROTOCOL=tls \
     --network moodle-tier \
-    --volume /path/to/moodle-persistence:/bitnami \
+    --volume /path/to/moodle-persistence:/bitnami/moodle \
+    --volume /path/to/moodledata-persistence:/bitnami/moodledata \
     bitnami/moodle:latest
   ```
 
@@ -494,7 +501,9 @@ For the Moodle&trade; container:
  $ docker run -d --name moodle \
    ...
 -  --volume /path/to/moodle-persistence:/bitnami/moodle \
-+  --volume /path/to/moodle-backups/latest:/bitnami/moodle \
++  --volume /path/to/moodle-backups/latest/moodle:/bitnami/moodle \
+-  --volume /path/to/moodledata-persistence:/bitnami/moodledata \
++  --volume /path/to/moodle-backups/latest/moodledata:/bitnami/moodledata \
    bitnami/moodle:latest
 ```
 
