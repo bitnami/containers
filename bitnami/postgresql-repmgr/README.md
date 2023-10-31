@@ -595,6 +595,11 @@ Please see the list of environment variables available in the Bitnami PostgreSQL
 | POSTGRESQL_TLS_CA_FILE                 | `nil`         |
 | POSTGRESQL_TLS_CRL_FILE                | `nil`         |
 | POSTGRESQL_TLS_PREFER_SERVER_CIPHERS   | `yes`         |
+| POSTGRESQL_MAX_CONNECTIONS             | `100`         |
+| POSTGRESQL_TCP_KEEPALIVES_IDLE         | `0`           |
+| POSTGRESQL_TCP_KEEPALIVES_INTERVAL     | `0`           |
+| POSTGRESQL_TCP_KEEPALIVES_COUNT        | `0`           |
+| POSTGRESQL_STATEMENT_TIMEOUT           | `0`           |
 
 ## Logging
 
