@@ -242,8 +242,12 @@ pgbouncer_initialize() {
                     export "${VAR_NAME}=$(< "${!FILE_VAR_NAME}")"
                     unset "${FILE_VAR_NAME}"
                 else
-                    error "Failed to export \$$VAR_NAME. '${!FILE_VAR_NAME:-}' is not readable."
-                    exit 1
+                    if [[ "$PGBOUNCER_FAIL_ON_INVALID_DSN_FILE" == "false" ]]; then
+                        warn "Skipping export of '${VAR_NAME}'. '${!FILE_VAR_NAME:-}' is not readable."
+                    else
+                        error "Failed to export \$$VAR_NAME. '${!FILE_VAR_NAME:-}' is not readable."
+                        exit 1
+                    fi
                 fi
             fi
 
