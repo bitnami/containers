@@ -16,8 +16,9 @@ set -o pipefail
 . /opt/bitnami/scripts/libos.sh
 . /opt/bitnami/scripts/liblog.sh
 
-declare cmd="grafana-server"
+declare cmd="grafana"
 declare -a args=(
+    "server"
     # Based on https://github.com/grafana/grafana/blob/v8.2.5/packaging/docker/run.sh
     "--homepath=${GF_PATHS_HOME}"
     "--config=${GF_PATHS_CONFIG}"

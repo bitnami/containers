@@ -63,7 +63,7 @@ grafana_plugin_list=(
 )
 for plugin in "${grafana_plugin_list[@]}"; do
     info "Installing ${plugin} plugin"
-    grafana-cli --pluginsDir "$(grafana_env_var_value PATHS_PLUGINS)" plugins install "$plugin"
+    grafana cli --pluginsDir "$(grafana_env_var_value PATHS_PLUGINS)" plugins install "$plugin"
 done
 
 # The Grafana Helm chart mounts the data directory at "/opt/bitnami/grafana/data"

@@ -1,6 +1,5 @@
 binaries:
   - grafana
-  - grafana-cli
 root_dir: /opt/bitnami
 version:
   bin_name: grafana

@@ -4,7 +4,7 @@
 command:
   check-grafana-plugins:
     exit-status: 0
-    exec: grafana-cli --pluginsDir /opt/bitnami/grafana/default-plugins/ plugins ls
+    exec: grafana cli --pluginsDir /opt/bitnami/grafana/default-plugins/ plugins ls
     stdout:
     {{ range $plugin := .Vars.plugins }}
       - "{{ $plugin }}"
