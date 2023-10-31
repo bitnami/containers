@@ -27,7 +27,7 @@ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
-Looking to use Apache Kafka in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+Looking to use Apache Kafka in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
 
 ## How to deploy Apache Kafka in Kubernetes?
 
@@ -564,6 +564,9 @@ docker run --name kafka-0 \
   -e KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093 \
   -e KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT \
   -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093 \
+  -e KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR=3 \
+  -e KAFKA_CFG_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=3 \
+  -e KAFKA_CFG_TRANSACTION_STATE_LOG_MIN_ISR=2 \
   -e KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv \
   -p :9092 \
   -p :9093 \
@@ -582,6 +585,9 @@ docker run --name kafka-1 \
   -e KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093 \
   -e KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT \
   -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093 \
+  -e KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR=3 \
+  -e KAFKA_CFG_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=3 \
+  -e KAFKA_CFG_TRANSACTION_STATE_LOG_MIN_ISR=2 \
   -e KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv \
   -p :9092 \
   -p :9093 \
@@ -600,6 +606,9 @@ docker run --name kafka-3 \
   -e KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093 \
   -e KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT \
   -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka-0:9093,1@kafka-1:9093,2@kafka-2:9093 \
+  -e KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR=3 \
+  -e KAFKA_CFG_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=3 \
+  -e KAFKA_CFG_TRANSACTION_STATE_LOG_MIN_ISR=2 \
   -e KAFKA_KRAFT_CLUSTER_ID=abcdefghijklmnopqrstuv \
   -p :9092 \
   -p :9093 \

@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-10-02T08:19:23Z" \
+      org.opencontainers.image.created="2023-10-26T19:14:21Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.10.3-debian-11-r19" \
+      org.opencontainers.image.ref.name="0.11.1-debian-11-r1" \
       org.opencontainers.image.title="deepspeed" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.10.3"
+      org.opencontainers.image.version="0.11.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,9 +26,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages build-essential ca-certificates curl git jq libbz2-1.0 libcom-err2 libcrypt1 libffi7 libgcc-s1 libgomp1 libgssapi-krb5-2 libjemalloc2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncursesw6 libnsl2 libreadline8 libsqlite3-0 libssl1.1 libstdc++6 libtinfo6 libtirpc3 libuuid1 numactl openssh-server pkg-config procps unzip zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "render-template-1.0.5-13-linux-${OS_ARCH}-debian-11" \
-      "python-3.8.18-2-linux-${OS_ARCH}-debian-11" \
-      "deepspeed-0.10.3-0-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.6-2-linux-${OS_ARCH}-debian-11" \
+      "python-3.10.13-8-linux-${OS_ARCH}-debian-11" \
+      "deepspeed-0.11.1-1-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,7 +47,7 @@ RUN mkdir /.local && chmod g+rwX /.local
 
 COPY rootfs /
 RUN mkdir /app /.cache && mkdir -p /home/deepspeed/.local && mkdir -p /home/deepspeed/.ssh && mkdir /home/deepspeed/.cache && ln -s /home/deepspeed/.local /opt/bitnami/deepspeed && ln -s /home/deepspeed/.ssh /opt/bitnami/deepspeed && ln -s /home/deepspeed/.cache /opt/bitnami/deepspeed && chmod g+rwX /app /.cache /home/deepspeed/.cache /home/deepspeed/.local
-ENV APP_VERSION="0.10.3" \
+ENV APP_VERSION="0.11.1" \
     BITNAMI_APP_NAME="deepspeed" \
     CPLUS_INCLUDE_PATH="/opt/bitnami/common/include" \
     C_INCLUDE_PATH="/opt/bitnami/common/include" \

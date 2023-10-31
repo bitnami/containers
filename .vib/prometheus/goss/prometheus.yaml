@@ -10,5 +10,5 @@ command:
     timeout: 8000
     exit-status: 0
     stderr:
-      - Starting Prometheus Server
-      - Server is ready
+      - "Starting Prometheus Server"
+      - "Server is ready"

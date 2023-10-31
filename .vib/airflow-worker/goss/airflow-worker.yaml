@@ -7,14 +7,14 @@ command:
     exec: airflow users list
     exit-status: 0
     stdout:
-      - No data found
+      - "No data found"
   check-subpackages:
     # Check python packages that should have been installed
     exec: . /opt/bitnami/airflow/venv/bin/activate && pip list
     exit-status: 0
     stdout:
     {{ range $subpackage := .Vars.subpackages }}
-      - {{ $subpackage }}
+      - "{{ $subpackage }}"
     {{ end }}
 file:
   /opt/bitnami/airflow/venv/lib/python3.9/site-packages/airflow/www/node_modules:

@@ -5,8 +5,8 @@ file:
   /opt/bitnami/mongodb/mongodb_get_source.txt:
     mode: "0644"
     exists: true
-    contains:
-      - This solution ships the official MongoDB Community binaries
+    contents:
+      - "This solution ships the official MongoDB Community binaries"
   /opt/bitnami/mongodb/logs/mongodb.log:
     exists: true
     filetype: symlink
@@ -14,7 +14,7 @@ file:
   /opt/bitnami/mongodb/conf/mongodb.conf:
     mode: "0660"
     exists: true
-    contains:
+    contents:
       - /port.*27017/
       - /pidFilePath.*opt/bitnami/mongodb/tmp/mongodb.pid/
       - /path.*/opt/bitnami/mongodb/logs/mongodb.log/

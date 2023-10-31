@@ -14,7 +14,7 @@ file:
     exists: true
     filetype: file
     mode: "0664"
-    contains:
+    contents:
       - /listen.*4222/
   /opt/bitnami/nats/logs/nats-server.log:
     exists: true

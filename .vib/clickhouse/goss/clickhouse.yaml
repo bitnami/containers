@@ -7,7 +7,7 @@ command:
     exec: timeout --preserve-status 5 clickhouse-server 2>&1 || true
     exit-status: 0
     stdout:
-      - Ready for connections
+      - "Ready for connections"
 file:
   /var/lib/clickhouse/tmp:
     exists: true
@@ -24,7 +24,7 @@ file:
   /opt/bitnami/clickhouse/etc/config.xml:
     exists: true
     filetype: file
-    contains:
+    contents:
       - /data dir.*\/bitnami\/clickhouse\/data/
       - /http_port.*from_env.*CLICKHOUSE_HTTP_PORT/
       - "!remote_servers"
@@ -32,7 +32,7 @@ file:
   /opt/bitnami/clickhouse/etc/users.xml:
     exists: true
     filetype: file
-    contains:
+    contents:
       - /password.*from_env.*CLICKHOUSE_ADMIN_PASSWORD/
 group:
   clickhouse:

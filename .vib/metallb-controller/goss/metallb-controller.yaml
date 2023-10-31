@@ -9,7 +9,7 @@ command:
     exec: controller -webhook-mode test
     exit-status: 1
     stdout:
-      - {{ .Env.APP_VERSION }}
+      - "{{ .Env.APP_VERSION }}"
   check-metallb-controller-help:
     exec: controller --help
     exit-status: 0

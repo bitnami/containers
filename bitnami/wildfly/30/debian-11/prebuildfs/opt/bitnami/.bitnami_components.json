@@ -1,0 +1,14 @@
+{
+    "java": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "17.0.9-11-1"
+    },
+    "wildfly": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "30.0.0-0"
+    }
+}

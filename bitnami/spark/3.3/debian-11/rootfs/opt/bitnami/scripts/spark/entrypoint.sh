@@ -30,14 +30,15 @@ if [[ "$1" = "/opt/bitnami/scripts/spark/run.sh" ]]; then
     info "** Spark setup finished! **"
 fi
 
-# Spark has an special 'driver' command which is an alias for spark-submit
-# https://github.com/apache/spark/blob/master/resource-managers/kubernetes/docker/src/main/dockerfiles/spark/entrypoint.sh
+# ref: https://spark.apache.org/docs/latest/running-on-kubernetes.html
+# inspired by https://github.com/apache/spark/blob/master/resource-managers/kubernetes/docker/src/main/dockerfiles/spark/entrypoint.sh
 case "$1" in
   driver)
     shift 1
     CMD=(
         "/opt/bitnami/spark/bin/spark-submit"
-        --master "${SPARK_MASTER_URL}"
+        --conf "spark.driver.bindAddress=$SPARK_DRIVER_BIND_ADDRESS"
+        --conf "spark.executorEnv.SPARK_DRIVER_POD_IP=$SPARK_DRIVER_BIND_ADDRESS"
         --conf "spark.jars.ivy=/tmp/.ivy"
         --deploy-mode client
         "$@"

@@ -10,13 +10,13 @@ command:
   check-installed-runtimes:
     exec: dotnet --list-runtimes
     stdout:
-      - AspNetCore.App
-      - NETCore.App
+      - "AspNetCore.App"
+      - "NETCore.App"
     exit-status: 0
   check-installed-sdks:
     exec: dotnet --list-sdks
     stdout:
-    - {{ .Env.APP_VERSION }}
+    - "{{ .Env.APP_VERSION }}"
     exit-status: 0
   create-dotnet-project:
     exec: dotnet new -i CamundaProcessTemplate --force && dotnet new CamundaProcess -n VIBInstance --force

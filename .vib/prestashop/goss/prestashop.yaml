@@ -6,7 +6,7 @@ command:
     exec: grep -Eo "'_PS_INSTALL_VERSION_', '[^']*'" /opt/bitnami/prestashop/install/install_version.php
     exit-status: 0
     stdout:
-      - {{ .Env.APP_VERSION }}
+      - "{{ .Env.APP_VERSION }}"
   check-enabled-modules:
     exec: php -m
     exit-status: 0
@@ -18,26 +18,26 @@ file:
   /opt/bitnami/php/etc/php.ini:
     exists: true
     filetype: file
-    contains:
-      - post_max_size = 128M
-      - upload_max_filesize = 128M
+    contents:
+      - "post_max_size = 128M"
+      - "upload_max_filesize = 128M"
   # Ensure that .htaccess file contents have not been moved to /opt/bitnami/apache/conf/vhosts/htaccess
   /opt/bitnami/prestashop/app/.htaccess:
     exists: true
     filetype: file
-    contains:
-      - Require all denied
+    contents:
+      - "Require all denied"
   # HTTP vhost should have been properly rendered
   /opt/bitnami/apache/conf/vhosts/prestashop-vhost.conf:
     exists: true
     filetype: file
-    contains:
+    contents:
       - /DocumentRoot.*/opt/bitnami/prestashop/
   # HTTPS vhost should have been properly rendered
   /opt/bitnami/apache/conf/vhosts/prestashop-https-vhost.conf:
     exists: true
     filetype: file
-    contains:
+    contents:
       - "SSLEngine on"
       - /DocumentRoot.*/opt/bitnami/prestashop/
 group:

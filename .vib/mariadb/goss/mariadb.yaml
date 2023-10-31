@@ -6,8 +6,8 @@ file:
   /opt/bitnami/mariadb/conf/my.cnf:
     exists: true
     filetype: file
-    contains:
-      - socket=/opt/bitnami/mariadb/tmp/mysql.sock
+    contents:
+      - "socket=/opt/bitnami/mariadb/tmp/mysql.sock"
   # Checks the postunpack phase properly creates the plugin's symlink
   /opt/bitnami/mariadb/lib/plugin:
     exists: true

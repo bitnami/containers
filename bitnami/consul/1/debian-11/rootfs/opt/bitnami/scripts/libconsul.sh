@@ -108,8 +108,6 @@ consul_configure_encryption() {
 
         if [[ -z ${CONSUL_GOSSIP_ENCRYPTION_KEY} ]]; then
             CONSUL_GOSSIP_ENCRYPTION_KEY=$("${CONSUL_BASE_DIR}/bin/consul" "keygen")
-        else
-            CONSUL_GOSSIP_ENCRYPTION_KEY=$(base64 <<<"${CONSUL_GOSSIP_ENCRYPTION_KEY}")
         fi
 
         # In case the node name was not set, we automatically set

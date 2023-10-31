@@ -4,6 +4,6 @@
 file:
   /app/site.webmanifest:
     exists: true
-    contains:
+    contents:
       - "Kubeapps Dashboard"
 

@@ -31,7 +31,7 @@ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
-Looking to use PgBouncer in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+Looking to use PgBouncer in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
 
 ## Why use a non-root container?
 
@@ -89,6 +89,8 @@ The Bitnami PgBouncer container requires a running PostgreSQL installation to co
 * `PGBOUNCER_SET_DATABASE_USER`: Whether to include the backend PostgreSQL username in the database string. Default **no**.
 * `PGBOUNCER_SET_DATABASE_PASSWORD`: Whether to include the backend PostgreSQL password in the database string. Default **no**.
 * `PGBOUNCER_CONNECT_QUERY`: Query which will be executed after a connection is established. No Defaults.
+* `PGBOUNCER_DSN_${i}`: PgBouncer configuration string for extra PostgreSQL server, where `i` is a number starting at zero (`0`).
+* `PGBOUNCER_USERLIST_FILE`: Custom PgBouncer userlists file with connection credentials for any extra PostgreSQL backend. Required line format (including quotes): `"<postresql-user>" "<password>"`.
 
 ### Port and address binding
 
@@ -135,6 +137,7 @@ To expose the same database name as the backend, set `PGBOUNCER_DATABASE="$POSTG
 * `PGBOUNCER_SERVER_IDLE_TIMEOUT`: PgBouncer maximum time in seconds a server connection can be idle. If 0 then the timeout is disabled. Default: **600**
 * `PGBOUNCER_SERVER_RESET_QUERY`: PgBouncer query sent to server on connection release before making it available to other clients. Default: **DISCARD ALL**
 * `PGBOUNCER_STATS_USERS`: PgBouncer comma-separated list of database users that are allowed to connect and run read-only queries. No defaults.
+* `PGBOUNCER_MAX_PREPARED_STATEMENTS`: PgBouncer maximum number of cached prepared statements. Default: **0 (disabled)**.
 
 ### Initializing a new instance
 
@@ -273,6 +276,79 @@ docker-compose restart pgbouncer
 ```
 
 Refer to the [server configuration](https://www.pgbouncer.org/usage.html) manual for the complete list of configuration options.
+
+### How to connect with multiple PostgreSQL servers
+
+It is possible to connect a single PgBouncer instance with multiple PostgreSQL backends. By using as many `PGBOUNCER_DSN_${i}` environment variables (with `i` starting at zero, `0`) as needed, and the `PGBOUNCER_USERLIST_FILE` variable pointing to a mounted volume with the required credentials for any extra PostgreSQL database in the format `"<postgresql-user>" "<password>"`.
+
+The PgBouncer initialization process requires one PostgreSQL backend to be configured using the different `POSTGRESQL_*` variables listed in the [backend PostgreSQL connection](#backend-postgresql-connection), but the rest of backends connections can be provided using the method explained in this section. An example `docker-compose.yaml` for this scenario can be found below
+
+```yaml
+  pg1:
+    image: docker.io/bitnami/postgresql:14
+    volumes:
+      - 'pg1_data:/bitnami/postgresql'
+    environment:
+      - POSTGRESQL_PASSWORD=password1
+      - POSTGRESQL_DATABASE=db1
+
+  pg2:
+    image: docker.io/bitnami/postgresql:15
+    volumes:
+      - 'pg2_data:/bitnami/postgresql'
+    environment:
+      - POSTGRESQL_PASSWORD=password2
+      - POSTGRESQL_DATABASE=db2
+
+  pg3:
+    image: docker.io/bitnami/postgresql:14
+    volumes:
+      - 'pg3_data:/bitnami/postgresql'
+    environment:
+      - POSTGRESQL_PASSWORD=password3
+      - POSTGRESQL_DATABASE=db3
+
+  pgbouncer:
+    image: docker.io/bitnami/pgbouncer:1
+    ports:
+      - 6432:6432
+    volumes:
+      - './userlists.txt:/bitnami/userlists.txt'
+    environment:
+      - POSTGRESQL_HOST=pg1
+      - POSTGRESQL_PASSWORD=password1
+      - POSTGRESQL_DATABASE=db1
+      - PGBOUNCER_AUTH_TYPE=trust
+      - PGBOUNCER_USERLIST_FILE=/bitnami/userlists.txt
+      - PGBOUNCER_DSN_0=pg1=host=pg1 port=5432 dbname=db1
+      - PGBOUNCER_DSN_1=pg2=host=pg2 port=5432 dbname=db2
+      - PGBOUNCER_DSN_2=pg3=host=pg3 port=5432 dbname=db3
+volumes:
+  pg1_data:
+    driver: local
+  pg2_data:
+    driver: local
+  pg3_data:
+    driver: local
+```
+
+And this is the content of the `userlists.txt` file:
+
+```text
+"postgres" "password1"
+"postgres" "password2"
+"postgres" "password3"
+```
+
+Once initialized, the scenario above provides access to three diferent PostgreSQL backends from a single PgBouncer instance. As an example, you can request the PostgreSQL version of the backend server number two (notice it is the only running PostgreSQL 15.x in this scenario):
+
+```bash
+$ docker exec -it -u root debian-11-pgbouncer-1 psql -p 6432 -U postgres pg2 -c "show server_version;"
+ server_version
+ ----------------
+  15.4
+  (1 row)
+```
 
 ## Contributing
 

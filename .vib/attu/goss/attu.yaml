@@ -16,10 +16,10 @@ command:
     exec: cd /opt/bitnami/attu; npm run
     exit-status: 0
     stdout:
-      - start:prod
+      - "start:prod"
   run-attu:
     exec: cd /opt/bitnami/attu; timeout --preserve-status 5 yarn start:prod  || true
     timeout: 8000
     exit-status: 0
     stdout:
-      - Attu server started
+      - "Attu server started"

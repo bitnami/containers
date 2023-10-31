@@ -1,0 +1,14 @@
+{
+    "mlflow": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "2.8.0-0"
+    },
+    "python": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "3.10.13-8"
+    }
+}

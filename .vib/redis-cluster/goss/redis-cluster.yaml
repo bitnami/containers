@@ -4,12 +4,12 @@
 file:
   /opt/bitnami/redis/etc/redis.conf:
     exists: true
-    contains:
+    contents:
       - /port.*6379/
       - /dir.*/bitnami/redis/data/
       - /pidfile.*/opt/bitnami/redis/tmp/redis.pid/
-      - daemonize no
-      - cluster-enabled yes
+      - "daemonize no"
+      - "cluster-enabled yes"
       - /cluster-config-file.*/bitnami/redis/data/nodes.conf/
 command:
   check-redis-server:
@@ -17,16 +17,16 @@ command:
     exit-status: 0
     timeout: 10000
     stdout:
-      - Ready to accept connections
+      - "Ready to accept connections"
   check-redis-server-ssl:
     exec: ldd /opt/bitnami/redis/bin/redis-server
     exit-status: 0
     stdout:
-      - libcrypto.so
-      - libssl.so
+      - "libcrypto.so"
+      - "libssl.so"
   check-redis-cli-ssl:
     exec: ldd /opt/bitnami/redis/bin/redis-cli
     exit-status: 0
     stdout:
-      - libcrypto.so
-      - libssl.so
+      - "libcrypto.so"
+      - "libssl.so"

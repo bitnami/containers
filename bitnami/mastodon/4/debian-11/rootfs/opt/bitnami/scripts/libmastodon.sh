@@ -259,7 +259,7 @@ user.reset_password!
 user.reset_password('${MASTODON_ADMIN_PASSWORD}', '${MASTODON_ADMIN_PASSWORD}')
 EOF
 
-    elif [[ "$res" =~ "been taken" ]]; then
+    elif [[ "$res" =~ "taken" ]]; then
         info "Admin user already exists. Skipping"
     else
         error "Error creating admin user"

@@ -19,7 +19,7 @@ command:
     exec: version.sh
     exit-status: 0
     stdout:
-    - {{ .Env.APP_VERSION }}
+    - "{{ .Env.APP_VERSION }}"
 group:
   tomcat:
     exists: true

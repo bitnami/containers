@@ -9,21 +9,21 @@ file:
   /opt/bitnami/appsmith/templates/docker.env.sh:
     exists: true
     filetype: file
-    contains:
+    contents:
       - /cat.*EOF/
-      - APPSMITH_SUPERVISOR_USER
+      - "APPSMITH_SUPERVISOR_USER"
 command:
   check-server-init:
     exec: java -jar /opt/bitnami/appsmith/backend/server.jar
     exit-status: 1
     stdout:
-      - {{ .Env.APP_VERSION }}
-      - Starting ServerApplication
+      - "{{ .Env.APP_VERSION }}"
+      - "Starting ServerApplication"
   check-rts-init:
-    exec: cd /opt/appsmith/rts/ && node --require source-map-support/register server.js
+    exec: cd /opt/appsmith/rts/bundle && node server.js
     exit-status: 1
     stderr:
-      - APPSMITH_API_BASE_URL
+      - "APPSMITH_API_BASE_URL"
 group:
   appsmith:
     exists: true

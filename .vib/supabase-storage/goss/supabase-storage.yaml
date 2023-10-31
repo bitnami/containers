@@ -6,4 +6,4 @@ command:
     exec: cd /opt/bitnami/supabase-storage; npm run
     exit-status: 0
     stdout:
-      - node dist/server.js
+      - "node dist/server.js"

@@ -24,6 +24,7 @@ export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
 kafka_env_vars=(
+    KAFKA_MOUNTED_CONF_DIR
     KAFKA_INTER_BROKER_USER
     KAFKA_INTER_BROKER_PASSWORD
     KAFKA_CONTROLLER_USER
@@ -68,7 +69,7 @@ export KAFKA_VOLUME_DIR="/bitnami/kafka"
 export KAFKA_DATA_DIR="${KAFKA_VOLUME_DIR}/data"
 export KAFKA_CONF_DIR="${KAFKA_BASE_DIR}/config"
 export KAFKA_CONF_FILE="${KAFKA_CONF_DIR}/server.properties"
-export KAFKA_MOUNTED_CONF_DIR="${KAFKA_VOLUME_DIR}/config"
+export KAFKA_MOUNTED_CONF_DIR="${KAFKA_MOUNTED_CONF_DIR:-${KAFKA_VOLUME_DIR}/config}"
 export KAFKA_CERTS_DIR="${KAFKA_CONF_DIR}/certs"
 export KAFKA_INITSCRIPTS_DIR="/docker-entrypoint-initdb.d"
 export KAFKA_LOG_DIR="${KAFKA_BASE_DIR}/logs"

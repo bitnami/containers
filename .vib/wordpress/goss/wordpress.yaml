@@ -6,7 +6,7 @@ command:
     exec: sed -nE "s/.wp_version\s*=\s*'([0-9\.]+)';/\1/p" /opt/bitnami/wordpress/wp-includes/version.php | sed -E 's/^[0-9]+\.[0-9]+$/&.0/'
     exit-status: 0
     stdout:
-      - {{ .Env.APP_VERSION }}
+      - "{{ .Env.APP_VERSION }}"
   # WP-CLI points to correct binaries and config file
   check-wp-cli-conf:
     exec: wp --info
@@ -27,14 +27,14 @@ file:
   /opt/bitnami/apache/conf/vhosts/wordpress-vhost.conf:
     exists: true
     filetype: file
-    contains:
+    contents:
       - "RewriteRule ^bitnami/wordpress(/.*) $1"
       - /DocumentRoot.*/opt/bitnami/wordpress/
   # HTTPs vhost should have been properly rendered
   /opt/bitnami/apache/conf/vhosts/wordpress-https-vhost.conf:
     exists: true
     filetype: file
-    contains:
+    contents:
       - "SSLEngine on"
       - "RewriteRule ^bitnami/wordpress(/.*) $1"
       - /DocumentRoot.*/opt/bitnami/wordpress/
@@ -42,7 +42,7 @@ file:
   /opt/bitnami/wp-cli/conf/wp-cli.yml:
     exists: true
     filetype: file
-    contains:
+    contents:
       - /path.*/opt/bitnami/wordpress/
 group:
   daemon:

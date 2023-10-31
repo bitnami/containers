@@ -10,6 +10,6 @@ command:
   check-installed-runtimes:
     exec: dotnet --list-runtimes
     stdout:
-      - AspNetCore.App {{ .Env.APP_VERSION }}
-      - NETCore.App {{ .Env.APP_VERSION }}
+      - "AspNetCore.App {{ .Env.APP_VERSION }}"
+      - "NETCore.App {{ .Env.APP_VERSION }}"
     exit-status: 0

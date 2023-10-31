@@ -7,7 +7,7 @@ command:
   check-version:
     exec: {{ .Vars.version.bin_name }} {{ .Vars.version.flag }} | awk '{ if (split($NF, ver, ".") == 2) { $NF = $NF ".0" } print }'
     stdout:
-      - {{ .Env.APP_VERSION }}
+      - "{{ .Env.APP_VERSION }}"
     exit-status: 0
 file:
   /opt/bitnami/postgresql/logs/postgresql.log:
@@ -17,5 +17,5 @@ file:
   /opt/bitnami/postgresql/conf/postgresql.conf:
     exists: true
     mode: "0664"
-    contains:
+    contents:
       - /^include_dir = 'conf.d'/

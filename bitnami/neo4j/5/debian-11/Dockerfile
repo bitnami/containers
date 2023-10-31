@@ -8,13 +8,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-10-04T20:14:23Z" \
+      org.opencontainers.image.created="2023-10-26T16:35:58Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="5.12.0-debian-11-r2" \
+      org.opencontainers.image.ref.name="5.13.0-debian-11-r0" \
       org.opencontainers.image.title="neo4j" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="5.12.0"
+      org.opencontainers.image.version="5.13.0"
 
 ENV HOME="/opt/bitnami/neo4j/.home" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -27,8 +27,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl jq procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "java-17.0.8-7-5-linux-${OS_ARCH}-debian-11" \
-      "neo4j-5.12.0-0-linux-${OS_ARCH}-debian-11" \
+      "java-17.0.9-11-1-linux-${OS_ARCH}-debian-11" \
+      "neo4j-5.13.0-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -47,7 +47,7 @@ RUN chmod g+rwX /opt/bitnami
 COPY rootfs /
 RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/neo4j/postunpack.sh
-ENV APP_VERSION="5.12.0" \
+ENV APP_VERSION="5.13.0" \
     BITNAMI_APP_NAME="neo4j" \
     JAVA_HOME="/opt/bitnami/java" \
     JAVA_OPTS="-Duser.home=/opt/bitnami/neo4j/.home" \

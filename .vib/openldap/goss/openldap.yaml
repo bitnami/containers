@@ -25,7 +25,7 @@ command:
     exec: slappasswd -o module-load=/opt/bitnami/openldap/libexec/openldap/pw-sha2.so -h '{SHA256}' -s bitnami123
     exit-status: 0
     stdout:
-      - zbRYwNWa5lwE8+I7W+YIdh2pA/UhaZWJB+eJ7euy5Fc=
+      - "zbRYwNWa5lwE8+I7W+YIdh2pA/UhaZWJB+eJ7euy5Fc="
   check-enabled-backends:
     exec: slapd -VVV 2>&1
     exit-status: 0

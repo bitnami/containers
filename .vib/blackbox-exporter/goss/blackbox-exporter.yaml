@@ -7,6 +7,6 @@ command:
     timeout: 8000
     exit-status: 0
     stderr:
-      - Starting blackbox_exporter
-      - Loaded config file
-      - Listening on
+      - "Starting blackbox_exporter"
+      - "Loaded config file"
+      - "Listening on"

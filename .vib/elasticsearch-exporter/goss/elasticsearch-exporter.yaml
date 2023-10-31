@@ -7,4 +7,4 @@ command:
     exit-status: 143
     timeout: 8000
     stdout:
-      - triggering initial cluster info call
+      - "triggering initial cluster info call"

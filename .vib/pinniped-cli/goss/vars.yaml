@@ -1,0 +1,9 @@
+binaries:
+   - pinniped
+root_dir: /opt/bitnami
+directories:
+  - paths:
+      - /opt/bitnami/pinniped-cli
+version:
+  bin_name: pinniped
+  flag: version

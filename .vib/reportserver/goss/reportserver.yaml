@@ -6,7 +6,7 @@ command:
     exec: cat /opt/bitnami/reportserver/WEB-INF/classes/rsversion.properties
     exit-status: 0
     stdout:
-      - {{ .Env.APP_VERSION }}
+      - "{{ .Env.APP_VERSION }}"
 user:
   tomcat:
     exists: true
