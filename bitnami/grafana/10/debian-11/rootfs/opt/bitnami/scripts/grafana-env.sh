@@ -56,6 +56,7 @@ unset grafana_env_vars
 
 # Grafana paths
 export GRAFANA_BASE_DIR="${BITNAMI_ROOT_DIR}/grafana"
+export GRAFANA_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/grafana"
 export GRAFANA_BIN_DIR="${GRAFANA_BASE_DIR}/bin"
 export GRAFANA_TMP_DIR="${GRAFANA_TMP_DIR:-${GRAFANA_BASE_DIR}/tmp}"
 export GRAFANA_PID_FILE="${GRAFANA_PID_FILE:-${GRAFANA_TMP_DIR}/grafana.pid}"
