@@ -9,12 +9,12 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.11.6-7"
+        "version": "3.11.6-8"
     },
     "supabase-storage": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "0.43.8-0"
+        "version": "0.43.9-0"
     }
 }
