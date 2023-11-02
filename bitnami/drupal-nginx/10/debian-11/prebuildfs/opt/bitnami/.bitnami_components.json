@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.1.5-0"
+        "version": "10.1.6-1"
     },
     "mysql-client": {
         "arch": "amd64",
@@ -15,13 +15,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.25.2-7"
+        "version": "1.25.3-0"
     },
     "php": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.2.11-3"
+        "version": "8.2.12-0"
     },
     "render-template": {
         "arch": "amd64",
