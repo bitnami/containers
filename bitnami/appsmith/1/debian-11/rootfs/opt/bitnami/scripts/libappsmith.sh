@@ -194,7 +194,7 @@ appsmith_backend_stop() {
 is_appsmith_rts_running() {
     # appsmith-rts does not create any PID file
     # We regenerate the PID file for each time we query it to avoid getting outdated
-    pgrep -f "${APPSMITH_BASE_DIR}/rts/server.js" | head -n 1 > "$APPSMITH_RTS_PID_FILE"
+    pgrep -f "${APPSMITH_BASE_DIR}/rts/bundle/server.js" | head -n 1 > "$APPSMITH_RTS_PID_FILE"
 
     pid="$(get_pid_from_file "$APPSMITH_RTS_PID_FILE")"
     if [[ -n "$pid" ]]; then
@@ -346,23 +346,19 @@ appsmith_initialize() {
                 local -r -a create_user_cmd=("curl")
                 # Taken from inspecting Appsmith wizard
                 # https://github.com/appsmithorg/appsmith/blob/release/app/server/appsmith-server/src/main/java/com/appsmith/server/dtos/UserSignupRequestDTO.java#L26
-                local -r -a create_user_args=("-X" "POST"
+                # Necessary for the installer to succeed
+                local -r -a create_user_args=("-L" "http://localhost:${APPSMITH_API_PORT}/api/v1/users/super"
+                    "-H" "Origin: http://localhost:${APPSMITH_API_PORT}"
+                    "-H" "Content-Type: application/x-www-form-urlencoded"
                     "--data-urlencode" "name=${APPSMITH_USERNAME}"
                     "--data-urlencode" "email=${APPSMITH_EMAIL}"
                     "--data-urlencode" "password=${APPSMITH_PASSWORD}"
-                    # Necessary for the installer to succeed
                     "--data-urlencode" "allowCollectingAnnonymousData=false"
-                    "--data-urlencode" "signupForNewsletter=false"
-                    "--data-urlencode" "role=engineer"
-                    "--data-urlencode" "useCase=just exploring"
-                    "http://localhost:${APPSMITH_API_PORT}/api/v1/users/super"
-                )
-
+                    "--data-urlencode" "signupForNewsletter=false")
                 if ! debug_execute "${create_user_cmd[@]}" "${create_user_args[@]}"; then
                     error "Installation failed. User ${APPSMITH_USERNAME} could not be created"
                     exit 1
                 fi
-
                 info "User created successfully"
             fi
         else
