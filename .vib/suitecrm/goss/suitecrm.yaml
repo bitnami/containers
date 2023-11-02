@@ -7,7 +7,7 @@ command:
     exec: find /opt/bitnami/suitecrm -maxdepth 3 -type f -name suitecrm_version.php -exec grep -Eo "version = '([0-9.]+)'" {} \;
     exit-status: 0
     stdout:
-      - 'version = "{{ .Env.APP_VERSION }}"'
+      - /version = .{{ .Env.APP_VERSION }}./
   check-enabled-modules:
     exec: php -m
     exit-status: 0
