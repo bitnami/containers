@@ -6,7 +6,7 @@ file:
     exists: true
     contents:
     {{ range $rule := .Vars.apache.rules }}
-      - "{{ $rule }}"
+      - {{ $rule }}
     {{ end }}
   /opt/bitnami/php/etc/php.ini:
     exists: true
