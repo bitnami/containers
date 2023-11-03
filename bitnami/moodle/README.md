@@ -112,7 +112,7 @@ docker run -d --name moodle \
   --env MOODLE_DATABASE_NAME=bitnami_moodle \
   --network moodle-network \
   --volume moodle_data:/bitnami/moodle \
-  --volume moodledata_data:/bitnami/moodledata
+  --volume moodledata_data:/bitnami/moodledata \
   bitnami/moodle:latest
 ```
 
@@ -146,7 +146,6 @@ This requires a minor change to the [`docker-compose.yml`](https://github.com/bi
 +      - /path/to/moodle-persistence:/bitnami/moodle
 -      - 'moodledata_data:/bitnami/moodledata'
 +      - /path/to/moodledata-persistence:/bitnami/moodle
-
    ...
 -volumes:
 -  mariadb_data:
@@ -213,8 +212,8 @@ moodle:
   docker run -d --name moodle -p 80:8080 -p 443:8443 \
     --env MOODLE_PASSWORD=my_password \
     --network moodle-tier \
-    --volume /path/to/moodle-persistence:/bitnami \
-    --volume /path/to/moodle-persistence:/bitnami \
+    --volume /path/to/moodle-persistence:/bitnami/moodle \
+    --volume /path/to/moodledata-persistence:/bitnami/moodledata \
     bitnami/moodle:latest
   ```
 
@@ -357,7 +356,8 @@ This would be an instance ready to be put behind the NGINX load balancer.
     --env MOODLE_REVERSEPROXY=true \
     --env MOODLE_SSLPROXY=true \
     --network moodle-tier \
-    --volume /path/to/moodle-persistence:/bitnami \
+    --volume /path/to/moodle-persistence:/bitnami/moodle \
+    --volume /path/to/moodledata-persistence:/bitnami/moodledata \
     bitnami/moodle:latest
   ```
 
@@ -503,7 +503,7 @@ For the Moodle&trade; container:
 -  --volume /path/to/moodle-persistence:/bitnami/moodle \
 +  --volume /path/to/moodle-backups/latest/moodle:/bitnami/moodle \
 -  --volume /path/to/moodledata-persistence:/bitnami/moodledata \
-+  --volume /path/to/moodle-backups/latest/moodledata:/bitnami/moodledata \
++  --volume /path/to/moodledata-backups/latest/moodledata:/bitnami/moodledata \
    bitnami/moodle:latest
 ```
 
