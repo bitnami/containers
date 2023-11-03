@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.1.6-1"
+        "version": "10.1.6-2"
     },
     "mysql-client": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.11.5-1"
+        "version": "10.11.5-2"
     },
     "nginx": {
         "arch": "amd64",
