@@ -212,7 +212,8 @@ gitea_update_conf_file() {
     gitea_conf_set "security" "PASSWORD_HASH_ALGO" "$GITEA_PASSWORD_HASH_ALGO"
 
     gitea_conf_set "mailer" "ENABLED" "$GITEA_SMTP_ENABLED"
-    is_empty_value "$GITEA_SMTP_HOST" || gitea_conf_set "mailer" "HOST" "$GITEA_SMTP_HOST"
+    is_empty_value "$GITEA_SMTP_HOST" || gitea_conf_set "mailer" "SMTP_ADDR" "$GITEA_SMTP_HOST"
+    is_empty_value "$GITEA_SMTP_PORT" || gitea_conf_set "mailer" "SMTP_PORT" "$GITEA_SMTP_PORT"
     is_empty_value "$GITEA_SMTP_FROM" || gitea_conf_set "mailer" "FROM" "$GITEA_SMTP_FROM"
     is_empty_value "$GITEA_SMTP_USER" || gitea_conf_set "mailer" "USER" "$GITEA_SMTP_USER"
     is_empty_value "$GITEA_SMTP_PASSWORD" || gitea_conf_set "mailer" "PASSWD" "$GITEA_SMTP_PASSWORD"
@@ -295,7 +296,8 @@ gitea_pass_wizard() {
     # Note in version 1.18 SMTP configuration is different
     if is_boolean_yes "${GITEA_SMTP_ENABLED}"; then
         curl_data_opts+=(
-            "--data-urlencode" "smtp_host=${GITEA_SMTP_HOST}"
+            "--data-urlencode" "smtp_addr=${GITEA_SMTP_HOST}"
+            "--data-urlencode" "smtp_port=${GITEA_SMTP_PORT}"
             "--data-urlencode" "smtp_from=${GITEA_SMTP_FROM}"
             "--data-urlencode" "smtp_user=${GITEA_SMTP_USER}"
             "--data-urlencode" "smtp_passwd=${GITEA_SMTP_PASSWORD}"
