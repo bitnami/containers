@@ -223,8 +223,9 @@ EOF
 #   None
 #########################
 grafana_start_bg() {
-    local cmd="grafana-server"
+    local cmd="grafana"
     local -a args=(
+        "server"
         # Based on https://github.com/grafana/grafana/blob/v8.2.5/packaging/docker/run.sh
         "--homepath=${GF_PATHS_HOME}"
         "--config=${GF_PATHS_CONFIG}"
@@ -339,7 +340,7 @@ grafana_install_plugins() {
         if [[ -n "$plugin_version" ]]; then
             grafana_plugin_install_args+=("$plugin_version")
         fi
-        grafana-cli "${grafana_plugin_install_args[@]}"
+        grafana cli "${grafana_plugin_install_args[@]}"
     done
 }
 
