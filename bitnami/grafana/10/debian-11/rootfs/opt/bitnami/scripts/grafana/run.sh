@@ -18,8 +18,8 @@ set -o pipefail
 
 declare cmd="grafana"
 declare -a args=(
-    "server"
     # Based on https://github.com/grafana/grafana/blob/v8.2.5/packaging/docker/run.sh
+    "server"
     "--homepath=${GF_PATHS_HOME}"
     "--config=${GF_PATHS_CONFIG}"
     "--pidfile=${GRAFANA_PID_FILE}"
