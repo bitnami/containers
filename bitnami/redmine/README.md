@@ -228,6 +228,7 @@ Available environment variables:
 - `REDMINE_REST_API_ENABLED`: Whether to allow REST API calls to Redmine. Default: **0**
 - `REDMINE_LOAD_DEFAULT_DATA`: Whether to load default configuration data for Redmine. Default: **yes**
 - `REDMINE_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. This is necessary in case you use a database that already has Redmine data. Default: **no**
+- `REDMINE_QUEUE_ADAPTER`: Active job queue adapter. You may need to install additional dependencies if you select a value other than `async` or `inline`. Notice `async` is [not recommended](https://www.redmine.org/issues/36695) by Redmine developers in production environments. Default: **inline**
 
 #### Database connection configuration
 

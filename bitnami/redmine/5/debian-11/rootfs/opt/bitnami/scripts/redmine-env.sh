@@ -31,6 +31,7 @@ redmine_env_vars=(
     REDMINE_REST_API_ENABLED
     REDMINE_LOAD_DEFAULT_DATA
     REDMINE_SKIP_BOOTSTRAP
+    REDMINE_QUEUE_ADAPTER
     REDMINE_USERNAME
     REDMINE_PASSWORD
     REDMINE_EMAIL
@@ -103,6 +104,7 @@ export REDMINE_LANGUAGE="${REDMINE_LANGUAGE:-en}" # only used during the first i
 export REDMINE_REST_API_ENABLED="${REDMINE_REST_API_ENABLED:-0}" # only used during the first initialization
 export REDMINE_LOAD_DEFAULT_DATA="${REDMINE_LOAD_DEFAULT_DATA:-yes}" # only used during the first initialization
 export REDMINE_SKIP_BOOTSTRAP="${REDMINE_SKIP_BOOTSTRAP:-}" # only used during the first initialization
+export REDMINE_QUEUE_ADAPTER="${REDMINE_QUEUE_ADAPTER:-inline}"
 
 # Redmine credentials
 export REDMINE_USERNAME="${REDMINE_USERNAME:-user}" # only used during the first initialization
