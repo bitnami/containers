@@ -90,6 +90,7 @@ The Bitnami PgBouncer container requires a running PostgreSQL installation to co
 * `PGBOUNCER_SET_DATABASE_PASSWORD`: Whether to include the backend PostgreSQL password in the database string. Default **no**.
 * `PGBOUNCER_CONNECT_QUERY`: Query which will be executed after a connection is established. No Defaults.
 * `PGBOUNCER_DSN_${i}`: PgBouncer configuration string for extra PostgreSQL server, where `i` is a number starting at zero (`0`).
+* `PGBOUNCER_DSN_${i}_FILE`: As an alternative to specifying extra PostgreSQL servers *directly* using `PGBOUNCER_DSN_${i}` (see above), specify file paths containing the values, one file per PostgreSQL server. This is in line how other variables get read from `$…_FILE` if it is provided. – By default, when a file is missing, a warning will be printed, and all others will be used. If you set `$PGBOUNCER_FAIL_ON_INVALID_DSN_FILE` to `true`, the initialisation process will instead abort with an error.
 * `PGBOUNCER_USERLIST_FILE`: Custom PgBouncer userlists file with connection credentials for any extra PostgreSQL backend. Required line format (including quotes): `"<postresql-user>" "<password>"`.
 
 ### Port and address binding

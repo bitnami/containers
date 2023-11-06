@@ -234,14 +234,29 @@ pgbouncer_initialize() {
         ini-file set --ignore-inline-comments --section "databases" --key "$PGBOUNCER_DATABASE" --value "$database_value" "$PGBOUNCER_CONF_FILE"
 
         i=0;
-        while true; VAR_NAME="PGBOUNCER_DSN_${i}";
+        while true; VAR_NAME="PGBOUNCER_DSN_${i}"; FILE_VAR_NAME="PGBOUNCER_DSN_${i}_FILE";
         do
-            if [ -z "${!VAR_NAME+x}" ]; then
-                break;
-            else
+            if [ -n "${!FILE_VAR_NAME+x}" ]; then
+                debug "reading \$$VAR_NAME from file, via \$$FILE_VAR_NAME (${!FILE_VAR_NAME})"
+                if [[ -r "${!FILE_VAR_NAME:-}" ]]; then
+                    export "${VAR_NAME}=$(< "${!FILE_VAR_NAME}")"
+                    unset "${FILE_VAR_NAME}"
+                else
+                    if [[ "$PGBOUNCER_FAIL_ON_INVALID_DSN_FILE" == "false" ]]; then
+                        warn "Skipping export of '${VAR_NAME}'. '${!FILE_VAR_NAME:-}' is not readable."
+                    else
+                        error "Failed to export \$$VAR_NAME. '${!FILE_VAR_NAME:-}' is not readable."
+                        exit 1
+                    fi
+                fi
+            fi
+
+            if [ -n "${!VAR_NAME:-}" ]; then
                 dsn=${!VAR_NAME};
                 ini-file set --ignore-inline-comments --section databases --key "$(echo "$dsn" | cut -d = -f 1)" --value "$(echo "$dsn" | cut -d = -f 2-)" "$PGBOUNCER_CONF_FILE";
                 i=$(( "$i" + 1 ));
+            else
+                break;
             fi;
         done;
 
