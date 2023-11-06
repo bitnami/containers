@@ -23,7 +23,7 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl procps
+RUN install_packages ca-certificates curl procps fuse3
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "rclone-1.64.2-0-linux-${OS_ARCH}-debian-11" \
