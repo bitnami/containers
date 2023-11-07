@@ -206,7 +206,9 @@ The configuration can easily be setup with the Bitnami Apache Kafka Docker image
 * `KAFKA_CONTROLLER_PASSWORD`: Apache Kafka controllers communication password. Default: **bitnami**.
 * `KAFKA_CFG_PROCESS_ROLES`: Node roles when running in KRaft mode. No defaults.
 * `KAFKA_CFG_NODE_ID`: Unique node id, required when running in KRaft mode. No defaults.
+* `KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP`: Maps each listener with a Apache Kafka security protocol. If node is set with `controller` role, this setting is in required order to assign a security protocol for the `CONTROLLER LISTENER`. E.g.: `PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT`. No defaults.
 * `KAFKA_CFG_CONTROLLER_QUORUM_VOTERS`: Map of id/endpoint information for the set of controller quorum voters in a comma-separated list of {id}@{host}:{port} entries. No defaults.
+* `KAFKA_CFG_CONTROLLER_LISTENER_NAMES`: Comma-separated list of the names of the listeners used by the controller. This is required if running in KRaft mode. No defaults.
 * `KAFKA_KRAFT_CLUSTER_ID`: Kafka cluster ID when using Kafka Raft (KRaft). No defaults.
 
 Additionally, any environment variable beginning with `KAFKA_CFG_` will be mapped to its corresponding Apache Kafka key. For example, use `KAFKA_CFG_BACKGROUND_THREADS` in order to set `background.threads` or `KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE` in order to configure `auto.create.topics.enable`.
@@ -474,7 +476,7 @@ KRaft mode can be enabled by providing the following values:
 * `KAFKA_CFG_PROCESS_ROLES`: Comma-separated list of Kafka KRaft roles. Allowed values: `controller,broker`, `controller`, `broker`.
 * `KAFKA_CFG_NODE_ID`: Unique id for the Kafka node.
 * `KAFKA_CFG_LISTENERS`: List of Kafka listeners. If node is set with `controller` role, the listener `CONTROLLER` must be included.
-* `KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP`: Maps each listener with a Apache Kafka security protocol. If node is set with `controller` role, this setting is in order to assign a security protocol for the `CONTROLLER LISTENER`. E.g.: `PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT`.
+* `KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP`: Maps each listener with a Apache Kafka security protocol. If node is set with `controller` role, this setting is required in order to assign a security protocol for the `CONTROLLER LISTENER`. E.g.: `PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT`.
 
 In order to configure controllers communications without authentication, you should provide the environment variables below:
 
