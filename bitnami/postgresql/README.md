@@ -31,7 +31,7 @@ docker-compose up -d
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
-Looking to use PostgreSQL in production? Try [VMware Tanzu Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
+Looking to use PostgreSQL in production? Try [VMware Application Catalog](https://bitnami.com/enterprise), the enterprise edition of Bitnami Application Catalog.
 
 ## How to deploy PostgreSQL in Kubernetes?
 
@@ -307,6 +307,10 @@ A [Streaming replication](http://www.postgresql.org/docs/9.4/static/warm-standby
 * `POSTGRESQL_MASTER_PORT_NUMBER`: Server port of the replication master (slave parameter). Defaults to `5432`.
 
 In a replication cluster you can have one master and zero or more slaves. When replication is enabled the master node is in read-write mode, while the slaves are in read-only mode. For best performance its advisable to limit the reads to the slaves.
+
+### Setting up database incremental backup storage
+
+* `POSTGRESQL_WAL_ARCHIVE_COMMAND_DIR`: The Path were the archive command will store wal increments using `cp %p ${POSTGRESQL_WAL_ARCHIVE_COMMAND_DIR}/%f` by default `archive_command` value is `/bin/true` stored. No defaults.
 
 #### Step 1: Create the replication master
 

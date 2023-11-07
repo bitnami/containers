@@ -369,6 +369,19 @@ postgresql_create_replication_user() {
 }
 
 ########################
+# Change postgresql.conf by setting archive_command value
+# Globals:
+#   POSTGRESQL_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+postgresql_configure_archive_command() {
+  info "Overriding archive_command default value..."
+  postgresql_set_property "archive_command" "cp %p ${POSTGRESQL_WAL_ARCHIVE_COMMAND_DIR}/%f"
+}
+########################
 # Change postgresql.conf by setting replication parameters
 # Globals:
 #   POSTGRESQL_*
@@ -614,15 +627,19 @@ postgresql_initialize() {
         ensure_dir_exists "$dir"
         am_i_root && chown "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" "$dir"
     done
+    is_empty_value "$POSTGRESQL_WAL_ARCHIVE_COMMAND_DIR" || ensure_dir_exists "$POSTGRESQL_WAL_ARCHIVE_COMMAND_DIR" && am_i_root && chown "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" "$POSTGRESQL_WAL_ARCHIVE_COMMAND_DIR"
     am_i_root && find "$POSTGRESQL_DATA_DIR" -mindepth 1 -maxdepth 1 -not -name ".snapshot" -not -name "lost+found" -exec chown -R "$POSTGRESQL_DAEMON_USER:$POSTGRESQL_DAEMON_GROUP" {} \;
     chmod u+rwx "$POSTGRESQL_DATA_DIR" || warn "Lack of permissions on data directory!"
     chmod go-rwx "$POSTGRESQL_DATA_DIR" || warn "Lack of permissions on data directory!"
+    is_empty_value "$POSTGRESQL_WAL_ARCHIVE_COMMAND_DIR" || chmod u+rw "$POSTGRESQL_WAL_ARCHIVE_COMMAND_DIR"
 
     is_boolean_yes "$POSTGRESQL_ALLOW_REMOTE_CONNECTIONS" && is_boolean_yes "$create_pghba_file" && postgresql_create_pghba && postgresql_allow_local_connection
     # Configure port
     postgresql_set_property "port" "$POSTGRESQL_PORT_NUMBER"
     is_empty_value "$POSTGRESQL_DEFAULT_TOAST_COMPRESSION" || postgresql_set_property "default_toast_compression" "$POSTGRESQL_DEFAULT_TOAST_COMPRESSION"
     is_empty_value "$POSTGRESQL_PASSWORD_ENCRYPTION" || postgresql_set_property "password_encryption" "$POSTGRESQL_PASSWORD_ENCRYPTION"
+    # Configure WAL backup with archive_command
+    is_empty_value "$POSTGRESQL_WAL_ARCHIVE_COMMAND_DIR" || postgresql_configure_archive_command
     if ! is_dir_empty "$POSTGRESQL_DATA_DIR"; then
         info "Deploying PostgreSQL with persisted data..."
         export POSTGRESQL_FIRST_BOOT="no"
