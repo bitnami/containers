@@ -270,7 +270,7 @@ Sometimes it is of interest to run the tests locally, for example during develop
 
     ```bash
     $ docker exec e6961 chmod +x /usr/local/bin/gossctl
-    $ docker exec e6961 gossctl --gossfile /goss/app_name/goss/goss.yaml --vars /goss/app_name/goss/vars.yaml validate
+    $ docker exec e6961 bash -c 'cd /goss && gossctl --gossfile /goss/app_name/goss/goss.yaml --vars /goss/app_name/goss/vars.yaml validate'
     .........
 
     Total Duration: 1.203s
