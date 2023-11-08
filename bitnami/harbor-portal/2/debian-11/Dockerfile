@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-10-24T07:56:57Z" \
+      org.opencontainers.image.created="2023-11-08T18:56:42Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.9.0-debian-11-r38" \
+      org.opencontainers.image.ref.name="2.9.1-debian-11-r0" \
       org.opencontainers.image.title="harbor-portal" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.9.0"
+      org.opencontainers.image.version="2.9.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,9 +26,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libcrypt1 libgeoip1 libpcre3 libssl1.1 openssl procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "nginx-1.25.2-7-linux-${OS_ARCH}-debian-11" \
+      "nginx-1.25.3-1-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.6-2-linux-${OS_ARCH}-debian-11" \
-      "harbor-2.9.0-0-linux-${OS_ARCH}-debian-11" \
+      "harbor-2.9.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -49,7 +49,7 @@ RUN ln -sf /dev/stderr /opt/bitnami/nginx/logs/error.log
 COPY rootfs /
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
 RUN /opt/bitnami/scripts/harbor-portal/postunpack.sh
-ENV APP_VERSION="2.9.0" \
+ENV APP_VERSION="2.9.1" \
     BITNAMI_APP_NAME="harbor-portal" \
     NGINX_HTTPS_PORT_NUMBER="" \
     NGINX_HTTP_PORT_NUMBER="" \
