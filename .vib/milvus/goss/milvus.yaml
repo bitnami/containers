@@ -21,7 +21,7 @@ file:
     linked-to: /opt/bitnami/milvus/tmp
 command:
   run-milvus:
-    exec: cd /opt/bitnami/milvus; timeout --preserve-status 15 milvus run standalone || true
+    exec: cd /opt/bitnami/milvus; timeout --preserve-status --kill-after=2 15 milvus run datanode || true
     timeout: 20000
     exit-status: 0
     stdout:
