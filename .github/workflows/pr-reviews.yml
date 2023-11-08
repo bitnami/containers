@@ -17,7 +17,6 @@ jobs:
     permissions:
       repository-projects: write
       contents: read
-      issues: read
       pull-requests: read
     # This job will ignore:
     # * Events triggered by bitnami-bot (README commits for example).

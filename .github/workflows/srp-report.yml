@@ -49,5 +49,7 @@ jobs:
           path: source-provenance.json
       - id: submit-report
         name: Submit SRP report
+        env:
+           SRP_UID: "${{ steps.build-report.outputs.uid }}"
         run: |
-          srp metadata submit --verbose --path ./source-provenance.json --uid "uid.mtd.provenance_2_5.fragment(obj_uid=${{ steps.build-report.outputs.uid }},revision='')"
+          srp metadata submit --verbose --path ./source-provenance.json --uid "uid.mtd.provenance_2_5.fragment(obj_uid=${SRP_UID},revision='')"
