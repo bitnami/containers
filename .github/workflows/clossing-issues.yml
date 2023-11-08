@@ -1,5 +1,9 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
 name: '[Support] Close Solved issues'
 on:
+  workflow_dispatch:
   schedule:
     # Hourly
     - cron: '0 * * * *'
@@ -9,7 +13,7 @@ jobs:
   stale:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/stale@v6.0.1
+      - uses: actions/stale@1160a2240286f5da8ec72b1c0816ce2481aabf84
         with:
           any-of-labels: 'solved'
           stale-issue-label: 'solved'
