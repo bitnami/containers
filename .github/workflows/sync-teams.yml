@@ -3,6 +3,7 @@
 
 name: '[Support] Synchronize team members in the .env file'
 on:
+  workflow_dispatch:
   schedule:
     # Daily
     - cron: '0 5 * * *'

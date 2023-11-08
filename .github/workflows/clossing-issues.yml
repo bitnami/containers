@@ -3,6 +3,7 @@
 
 name: '[Support] Close Solved issues'
 on:
+  workflow_dispatch:
   schedule:
     # Hourly
     - cron: '0 * * * *'
