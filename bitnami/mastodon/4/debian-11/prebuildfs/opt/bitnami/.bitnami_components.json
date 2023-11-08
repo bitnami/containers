@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.2.1-0"
+        "version": "4.2.1-2"
     },
     "node": {
         "arch": "amd64",
@@ -21,7 +21,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.11.6-6"
+        "version": "3.11.6-8"
     },
     "redis-client": {
         "arch": "amd64",
@@ -33,7 +33,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.0.6-7"
+        "version": "3.0.6-8"
     },
     "wait-for-port": {
         "arch": "amd64",
