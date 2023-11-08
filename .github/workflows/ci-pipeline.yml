@@ -23,7 +23,7 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
         name: Checkout Repository
         with:
           ref: ${{ github.event.pull_request.head.ref }}
@@ -54,7 +54,7 @@ jobs:
             echo "result=skip" >> $GITHUB_OUTPUT
           fi
       - name: Check license Headers
-        uses: apache/skywalking-eyes/header@v0.4.0
+        uses: apache/skywalking-eyes/header@6b2529214f6b1ccee3ec92bb0adfeabf6f66f538
         if: ${{ steps.get-modified-files.outputs.result == 'success' }}
   get-containers:
     runs-on: ubuntu-latest
@@ -110,7 +110,7 @@ jobs:
       matrix:
         container: ${{ fromJSON(needs.get-containers.outputs.containers) }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
         name: Checkout Repository
         with:
           # Full history is not required anymore
@@ -174,7 +174,7 @@ jobs:
     steps:
       - id: get-status
         name: Check Status
-        uses: actions/github-script@v6
+        uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410
         with:
           result-encoding: string
           script: |
@@ -224,12 +224,20 @@ jobs:
       # Approve the CI's PR automatically, as it has been tested in our internal pipeline already
       # Approved by the 'github-actions' user; a PR can't be approved by its author
       - name: PR Approval
-        uses: hmarr/auto-approve-action@v3.0.0
+        uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410
         with:
-          pull-request-number: ${{ github.event.number }}
+          result-encoding: string
+          retries: 3
+          script: |
+            github.rest.pulls.createReview({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              event: 'APPROVE',
+            });
       - name: Merge
         id: merge
-        uses: actions/github-script@v6
+        uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410
         with:
           result-encoding: string
           retries: 3
@@ -246,10 +254,18 @@ jobs:
       # post a comment on the PR and assign a maintainer agent to review it
       - name: Manual review required
         if: ${{ always() && steps.merge.outcome != 'success' }}
-        uses: peter-evans/create-or-update-comment@v3.0.0
-        with:
-          issue-number: ${{ github.event.number }}
-          # Necessary to trigger support workflows
-          token: ${{ secrets.BITNAMI_BOT_TOKEN }}
-          body: |
+        uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410
+        env:
+          BODY: |
             There has been an error during the automated release process. Manual revision is now required.
+            Please check the related [action_run#${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for more information.
+        with:
+          retries: 3
+          script: |
+            const {BODY} = process.env
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `${BODY}`
+            })
