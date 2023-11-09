@@ -8,4 +8,4 @@ command:
     exit-status: 0
     stdout:
       - "next start"
-      - "started server"
+      - "Ready"
