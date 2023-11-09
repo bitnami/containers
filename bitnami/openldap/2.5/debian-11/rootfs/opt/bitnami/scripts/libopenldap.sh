@@ -281,6 +281,16 @@ olcArgsFile: /opt/bitnami/openldap/var/run/slapd.args
 olcPidFile: /opt/bitnami/openldap/var/run/slapd.pid
 
 #
+# Enable pw-sha2 module
+#
+
+dn: cn=module,cn=config
+cn: module
+objectClass: olcModuleList
+olcModulePath: /opt/bitnami/openldap/libexec/openldap
+olcModuleLoad: pw-sha2.so
+
+#
 # Schema settings
 #
 
