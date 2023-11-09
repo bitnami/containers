@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-11-08T21:42:15Z" \
+      org.opencontainers.image.created="2023-11-09T19:24:02Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.10.0-debian-11-r35" \
+      org.opencontainers.image.ref.name="2.10.1-debian-11-r0" \
       org.opencontainers.image.title="kube-state-metrics" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.10.0"
+      org.opencontainers.image.version="2.10.1"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
-      "kube-state-metrics-2.10.0-4-linux-${OS_ARCH}-debian-11" \
+      "kube-state-metrics-2.10.1-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -42,7 +42,7 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
 
-ENV APP_VERSION="2.10.0" \
+ENV APP_VERSION="2.10.1" \
     BITNAMI_APP_NAME="kube-state-metrics" \
     PATH="/opt/bitnami/kube-state-metrics/bin:$PATH"
 
