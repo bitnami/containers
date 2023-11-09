@@ -1,5 +1,9 @@
 # Apache MXNet (Incubating) packaged by Bitnami
 
+## Deprecation Notice
+
+The Apache MXNet container is no longer maintained by upstream and is now deprecated. This image will no longer be released in our catalog, but already released container images will still persist in the registries.
+
 ## What is Apache MXNet (Incubating)?
 
 > Apache MXNet (Incubating) is a flexible and efficient library for deep learning designed to work as a neural network. Bitnami image ships OpenBLAS as math library.
