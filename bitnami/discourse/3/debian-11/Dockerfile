@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-11-02T20:28:36Z" \
+      org.opencontainers.image.created="2023-11-09T07:39:49Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.1.2-debian-11-r2" \
+      org.opencontainers.image.ref.name="3.1.3-debian-11-r0" \
       org.opencontainers.image.title="discourse" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="3.1.2"
+      org.opencontainers.image.version="3.1.3"
 
 ENV OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-11" \
@@ -26,12 +26,12 @@ RUN install_packages acl advancecomp ca-certificates curl file gifsicle git host
 RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
     COMPONENTS=( \
       "python-3.11.6-8-linux-${OS_ARCH}-debian-11" \
-      "wait-for-port-1.0.7-2-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.7-3-linux-${OS_ARCH}-debian-11" \
       "ruby-3.2.2-8-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-16.0.0-0-linux-${OS_ARCH}-debian-11" \
       "node-18.18.2-0-linux-${OS_ARCH}-debian-11" \
       "brotli-1.1.0-0-linux-${OS_ARCH}-debian-11" \
-      "discourse-3.1.2-1-linux-${OS_ARCH}-debian-11" \
+      "discourse-3.1.3-0-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -49,7 +49,7 @@ RUN /opt/bitnami/ruby/bin/gem install --force bundler -v '< 2'
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/discourse/postunpack.sh
-ENV APP_VERSION="3.1.2" \
+ENV APP_VERSION="3.1.3" \
     BITNAMI_APP_NAME="discourse" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/common/bin:/opt/bitnami/ruby/bin:/opt/bitnami/postgresql/bin:/opt/bitnami/node/bin:/opt/bitnami/brotli/bin:/opt/bitnami/discourse/app/assets/javascripts/node_modules/ember-cli/bin:$PATH"
 
