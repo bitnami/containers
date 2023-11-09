@@ -44,10 +44,10 @@ print_welcome_page() {
 print_image_welcome_page() {
     local github_url="https://github.com/bitnami/containers"
 
-    log ""
-    log "${BOLD}Welcome to the Bitnami ${BITNAMI_APP_NAME} container${RESET}"
-    log "Subscribe to project updates by watching ${BOLD}${github_url}${RESET}"
-    log "Submit issues and feature requests at ${BOLD}${github_url}/issues${RESET}"
-    log ""
+    info ""
+    info "${BOLD}Welcome to the Bitnami ${BITNAMI_APP_NAME} container${RESET}"
+    info "Subscribe to project updates by watching ${BOLD}${github_url}${RESET}"
+    info "Submit issues and feature requests at ${BOLD}${github_url}/issues${RESET}"
+    info ""
 }
 
