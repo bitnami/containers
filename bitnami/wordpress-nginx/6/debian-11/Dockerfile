@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-11-09T05:39:49Z" \
+      org.opencontainers.image.created="2023-11-09T17:02:27Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.4.1-debian-11-r0" \
+      org.opencontainers.image.ref.name="6.4.1-debian-11-r1" \
       org.opencontainers.image.title="wordpress-nginx" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="6.4.1"
@@ -29,7 +29,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
       "php-8.2.12-1-linux-${OS_ARCH}-debian-11" \
       "nginx-1.25.3-1-linux-${OS_ARCH}-debian-11" \
       "mysql-client-10.11.5-3-linux-${OS_ARCH}-debian-11" \
-      "wordpress-6.4.1-0-linux-${OS_ARCH}-debian-11" \
+      "wordpress-6.4.1-2-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.6-3-linux-${OS_ARCH}-debian-11" \
     ) && \
     for COMPONENT in "${COMPONENTS[@]}"; do \
