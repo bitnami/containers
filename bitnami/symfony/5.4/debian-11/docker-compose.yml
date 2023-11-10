@@ -22,6 +22,7 @@ services:
       - SYMFONY_DATABASE_PORT_NUMBER=3306
       - SYMFONY_DATABASE_USER=bn_myapp
       - SYMFONY_DATABASE_NAME=bitnami_myapp
+      - SYMFONY_PROJECT_SKELETON=symfony/skeleton
     volumes:
       - './my-project:/app'
     depends_on:

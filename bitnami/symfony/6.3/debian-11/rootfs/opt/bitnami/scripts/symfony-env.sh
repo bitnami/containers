@@ -57,7 +57,7 @@ export SYMFONY_SKELETON_DIR="${SYMFONY_BASE_DIR}/skeleton"
 # Symfony configuration
 export SYMFONY_PORT_NUMBER="${SYMFONY_PORT_NUMBER:-8000}"
 export SYMFONY_SKIP_DATABASE="${SYMFONY_SKIP_DATABASE:-no}" # only used during the first initialization
-export SYMFONY_PROJECT_SKELETON="symfony/skeleton"
+export SYMFONY_PROJECT_SKELETON="${SYMFONY_PROJECT_SKELETON:-}"
 
 # Database configuration
 SYMFONY_DATABASE_HOST="${SYMFONY_DATABASE_HOST:-"${MARIADB_HOST:-}"}"
