@@ -116,6 +116,7 @@ docker run --name pgbouncer \
 
 In case you'd like pgbouncer to expose your database with a different name, you can use the `PGBOUNCER_DATABASE` variable.
 To expose the same database name as the backend, set `PGBOUNCER_DATABASE="$POSTGRESQL_DATABASE"`.
+To expose a ["fallback database" (wildcard that matches any)](https://www.pgbouncer.org/config.html#section-databases)), set `PGBOUNCER_DATABASE="*"`.
 
 ### Other options
 
