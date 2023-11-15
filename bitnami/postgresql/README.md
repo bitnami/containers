@@ -310,7 +310,7 @@ In a replication cluster you can have one master and zero or more slaves. When r
 
 ### Setting up database incremental backup storage
 
-* `POSTGRESQL_WAL_ARCHIVE_COMMAND_DIR`: The Path were the archive command will store wal increments using `cp %p ${POSTGRESQL_WAL_ARCHIVE_COMMAND_DIR}/%f` by default `archive_command` value is `/bin/true` stored. No defaults.
+* `POSTGRESQL_WAL_ARCHIVE_COMMAND_DIR`: The Path were the archive command will store wal increments using `cp %p ${POSTGRESQL_WAL_ARCHIVE_COMMAND_DIR}/%f` by default `archive_command` value is `/bin/true` stored. For the backups to be useful is a good practice to use a dedicated volume for this, in addition when using several replicas, in order to avoid overwriting other replica data it is good to use variables for defining each replica subpath. For example: `/backup/$(MY_POD_NAME)`. No defaults.
 
 #### Step 1: Create the replication master
 
