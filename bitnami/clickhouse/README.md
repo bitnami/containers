@@ -185,7 +185,7 @@ services:
   clickhouse:
     image: bitnami/clickhouse:latest
     volumes:
-      - /path/to/override.xml:/bitnami/clickhouse/conf/override.xml:ro
+      - /path/to/override.xml:/bitnami/clickhouse/etc/conf.d/override.xml:ro
 ```
 
 Check the [official ClickHouse configuration documentation](https://clickhouse.com/docs/en/operations/configuration-files/) for all the possible overrides and settings.
