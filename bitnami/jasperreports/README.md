@@ -134,7 +134,6 @@ docker run -d --name mariadb \
 $ docker volume create --name jasperreports_data
 docker run -d --name jasperreports \
   -p 8080:8080 -p 8443:8443 \
-  --env ALLOW_EMPTY_PASSWORD=yes \
   --env JASPERREPORTS_DATABASE_USER=bn_jasperreports \
   --env JASPERREPORTS_DATABASE_PASSWORD=bitnami \
   --env JASPERREPORTS_DATABASE_NAME=bitnami_jasperreports \
@@ -207,7 +206,6 @@ docker run -d --name mariadb \
 ```console
 docker run -d --name jasperreports \
   -p 8080:8080 -p 8443:8443 \
-  --env ALLOW_EMPTY_PASSWORD=yes \
   --env JASPERREPORTS_DATABASE_USER=bn_jasperreports \
   --env JASPERREPORTS_DATABASE_PASSWORD=bitnami \
   --env JASPERREPORTS_DATABASE_NAME=bitnami_jasperreports \
