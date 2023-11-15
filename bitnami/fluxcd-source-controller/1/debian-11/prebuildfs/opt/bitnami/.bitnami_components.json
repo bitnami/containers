@@ -1,5 +1,5 @@
 {
-    "fluxcd-source-controller": {
+    "flux": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
