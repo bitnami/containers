@@ -5,4 +5,4 @@ version: '2'
 
 services:
   fluxcd-source-controller:
-    image: docker.io/bitnami/fluxcd-source-controller:1
+    image: 
