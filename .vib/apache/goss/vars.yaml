@@ -33,6 +33,7 @@ modules:
     # Explicitly disabled in postunpack
     - http2
     - proxy_hcheck
+    - proxy_html
   extra:
     # Not enabled, but compiled
     - mpm_event
