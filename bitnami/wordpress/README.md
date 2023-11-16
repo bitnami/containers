@@ -246,6 +246,7 @@ Available environment variables:
 - `WORDPRESS_SKIP_BOOTSTRAP`: Skip the WordPress installation wizard. This is necessary when providing a database with existing WordPress data. Default: **no**
 - `WORDPRESS_AUTO_UPDATE_LEVEL`: Level of auto-updates to allow for the WordPress core installation. Valid values: `major`, `minor`, `none`. Default: **none**
 - `WORDPRESS_ENABLE_REVERSE_PROXY`: Enable WordPress support for reverse proxy headers. Default: **no**
+- `WORDPRESS_ENABLE_XML_RPC`: Enable the WordPress XML-RPC endpoint. Default: **no**
 
 #### Salt and keys configuration
 
