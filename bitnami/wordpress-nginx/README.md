@@ -572,6 +572,10 @@ Based on the extended image, you can update the [`docker-compose.yml`](https://g
 
 ## Notable Changes
 
+### 6.4.1-debian-11-r5
+
+- The XML-RCP endpoint has been disabled by default. Users can manually activate via the new `WORDPRESS_ENABLE_XML_RPC` environment variable.
+
 ### 5.7.1-debian-10-r22
 
 - The size of the container image has been decreased.
