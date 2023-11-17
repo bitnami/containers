@@ -3,15 +3,15 @@
 
 group:
   gitea:
-    exists: true 
-user:   
+    exists: true
+user:
   gitea:
     exists: true
 file:
-  /opt/bitnami/gitea:     
-    exists: true     
-    mode: "0775"     
-    owner: gitea     
+  /opt/bitnami/gitea:
+    exists: true
+    mode: "0775"
+    owner: gitea
     group: root
     filetype: directory
   /opt/bitnami/gitea/bin/gitea:
@@ -60,3 +60,8 @@ command:
     exit-status: 0
     stdout:
       - "/Starting.*Web.*server/"
+  check-app-version:
+    exec: ls /opt/bitnami/gitea/licenses/gitea-*.txt
+    exit-status: 0
+    stdout:
+    - "{{ .Env.APP_VERSION }}"
