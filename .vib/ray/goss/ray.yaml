@@ -1,0 +1,15 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+user:
+  ray:
+    exists: true
+    uid: 1001
+    gid: 0
+command:
+  basic-example:
+    exec: python ./ray/goss/testfiles/basic_example.py
+    timeout: 120000
+    stdout:
+      - /Estimated value.*3.14/
+    exit-status: 0

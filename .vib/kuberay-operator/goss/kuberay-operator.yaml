@@ -1,0 +1,15 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+user:
+  kuberay-operator:
+    exists: true
+    uid: 1001
+    gid: 0
+
+command:
+  check-kuberay-operator:
+    exec: manager --help
+    exit-status: 2
+    stdout:
+      - "Forced cluster upgrade"

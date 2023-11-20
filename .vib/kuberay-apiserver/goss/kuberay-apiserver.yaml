@@ -1,0 +1,15 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+user:
+  kuberay-apiserver:
+    exists: true
+    uid: 1001
+    gid: 0
+
+command:
+  check-kuberay-apiserver:
+    exec: kuberay-apiserver --help
+    exit-status: 2
+    stdout:
+      - "Paths to a kubeconfig"
