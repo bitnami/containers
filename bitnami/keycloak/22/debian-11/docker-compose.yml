@@ -4,7 +4,7 @@
 version: '2'
 services:
   postgresql:
-    image: docker.io/bitnami/postgresql:11
+    image: docker.io/bitnami/postgresql:15
     environment:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
