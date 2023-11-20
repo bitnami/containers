@@ -66,6 +66,12 @@
               "OS"
             ]
           }
+        },
+        {
+          "action_id": "clamav",
+          "params": {
+            "allowlist": ["Win.Tool.UACBypass-5474404-0"]
+          }
         }
       ]
     }
