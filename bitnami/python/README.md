@@ -1,4 +1,4 @@
-# Python packaged by Bitnami
+# Bitnami package for Python
 
 ## What is Python?
 
