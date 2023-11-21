@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.20.5-4"
+        "version": "1.21.0-1"
     },
     "ini-file": {
         "arch": "amd64",

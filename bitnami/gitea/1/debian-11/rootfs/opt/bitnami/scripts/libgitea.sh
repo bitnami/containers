@@ -327,7 +327,7 @@ gitea_start_bg() {
     is_gitea_running && return
     # This function is meant to be called for internal operations like the init scripts
     local -r cmd=("${GITEA_BASE_DIR}/bin/gitea")
-    local -r args=("--config=${GITEA_CONF_FILE}" "--pid=${GITEA_PID_FILE}" "--custom-path=${GITEA_CUSTOM_DIR}" "--work-path=${GITEA_WORK_DIR}")
+    local -r args=("web" "--config=${GITEA_CONF_FILE}" "--pid=${GITEA_PID_FILE}" "--custom-path=${GITEA_CUSTOM_DIR}" "--work-path=${GITEA_WORK_DIR}")
 
     if am_i_root; then
         run_as_user "$GITEA_DAEMON_USER" "${cmd[@]}" "${args[@]}" >"$log_file" 2>&1 &
