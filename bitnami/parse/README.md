@@ -1,4 +1,4 @@
-# Parse Server packaged by Bitnami
+# Bitnami package for Parse Server
 
 ## What is Parse Server?
 
