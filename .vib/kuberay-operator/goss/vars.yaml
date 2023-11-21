@@ -4,6 +4,3 @@ root_dir: /opt/bitnami
 directories:
   - paths:
       - /opt/bitnami/kuberay
-version:
-  bin_name: manager
-  flag: "--version"
