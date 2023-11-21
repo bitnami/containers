@@ -1,0 +1,6 @@
+binaries:
+  - manager
+root_dir: /opt/bitnami
+directories:
+  - paths:
+      - /opt/bitnami/kuberay
