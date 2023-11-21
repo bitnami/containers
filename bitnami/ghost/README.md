@@ -1,4 +1,4 @@
-# Ghost packaged by Bitnami
+# Bitnami package for Ghost
 
 ## What is Ghost?
 
