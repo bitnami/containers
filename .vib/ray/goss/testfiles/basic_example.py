@@ -1,3 +1,5 @@
+# Taken from https://docs.ray.io/en/latest/ray-core/examples/gentle_walkthrough.html
+
 import ray
 import math
 import time
