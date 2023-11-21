@@ -19,7 +19,7 @@ set -o pipefail
 . /opt/bitnami/scripts/gitea-env.sh
 
 declare -a cmd=("${GITEA_BASE_DIR}/bin/gitea")
-declare -a args=("--config=${GITEA_CONF_FILE}" "--pid=${GITEA_PID_FILE}" "--custom-path=${GITEA_CUSTOM_DIR}" "--work-path=${GITEA_WORK_DIR}")
+declare -a args=("web" "--config=${GITEA_CONF_FILE}" "--pid=${GITEA_PID_FILE}" "--custom-path=${GITEA_CUSTOM_DIR}" "--work-path=${GITEA_WORK_DIR}")
 args+=("$@")
 
 info "** Starting Gitea **"
