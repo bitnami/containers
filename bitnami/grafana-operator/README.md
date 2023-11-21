@@ -1,4 +1,4 @@
-# Grafana Operator packaged by Bitnami
+# Bitnami package for Grafana Operator
 
 ## What is Grafana Operator?
 
