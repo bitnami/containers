@@ -1,4 +1,4 @@
-# HAProxy packaged by Bitnami
+# Bitnami package for HAProxy
 
 ## What is HAProxy?
 
