@@ -10,6 +10,6 @@ user:
 command:
   check-kuberay-apiserver:
     exec: kuberay-apiserver --help
-    exit-status: 2
-    stdout:
+    exit-status: 0
+    stderr:
       - "Paths to a kubeconfig"

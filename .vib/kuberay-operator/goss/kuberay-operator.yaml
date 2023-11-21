@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: APACHE-2.0
 
 user:
-  kuberay-operator:
+  kuberay:
     exists: true
     uid: 1001
     gid: 0
@@ -10,6 +10,6 @@ user:
 command:
   check-kuberay-operator:
     exec: manager --help
-    exit-status: 2
-    stdout:
+    exit-status: 0
+    stderr:
       - "Forced cluster upgrade"

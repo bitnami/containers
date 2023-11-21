@@ -3,7 +3,7 @@
 
 gossfile:
   # Goss tests exclusive to the current container
-  ../../fluxcd-helm-controller/goss/kuberay-operator.yaml: {}
+  ../../kuberay-operator/goss/kuberay-operator.yaml: {}
   # Load scripts from .vib/common/goss/templates
   ../../common/goss/templates/check-binaries.yaml: {}
   ../../common/goss/templates/check-broken-symlinks.yaml: {}

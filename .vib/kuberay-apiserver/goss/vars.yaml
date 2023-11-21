@@ -1,9 +1,9 @@
 binaries:
-  - manager
+  - kuberay-apiserver
 root_dir: /opt/bitnami
 directories:
   - paths:
-      - /opt/bitnami/kuberay
+      - /opt/bitnami/kuberay-apiserver
 version:
-  bin_name: manager
+  bin_name: kuberay-apiserver
   flag: "--version"
