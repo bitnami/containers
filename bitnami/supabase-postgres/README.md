@@ -1,4 +1,4 @@
-# Supabase Postgres packaged by Bitnami
+# Bitnami package for Supabase Postgres
 
 ## What is Supabase Postgres?
 
