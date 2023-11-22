@@ -1,4 +1,4 @@
-# RabbitMQ packaged by Bitnami
+# Bitnami package for RabbitMQ
 
 ## What is RabbitMQ?
 
