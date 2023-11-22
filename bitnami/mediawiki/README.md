@@ -1,4 +1,4 @@
-# MediaWiki packaged by Bitnami
+# Bitnami package for MediaWiki
 
 ## What is MediaWiki?
 
