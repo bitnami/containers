@@ -1,4 +1,4 @@
-# Supabase Realtime packaged by Bitnami
+# Bitnami package for Supabase Realtime
 
 ## What is Supabase Realtime?
 
