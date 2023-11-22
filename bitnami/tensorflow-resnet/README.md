@@ -1,4 +1,4 @@
-# TensorFlow ResNet packaged by Bitnami
+# Bitnami package for TensorFlow ResNet
 
 ## What is TensorFlow ResNet?
 
