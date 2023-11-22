@@ -1,4 +1,4 @@
-# TensorFlow Serving packaged by Bitnami
+# Bitnami package for TensorFlow Serving
 
 ## What is TensorFlow Serving?
 
