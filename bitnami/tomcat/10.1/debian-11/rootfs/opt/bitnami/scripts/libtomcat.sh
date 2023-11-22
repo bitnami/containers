@@ -163,11 +163,16 @@ tomcat_enable_application() {
 #########################
 tomcat_initialize() {
     if ! is_empty_value "$TOMCAT_EXTRA_JAVA_OPTS"; then
-        cat >>"${TOMCAT_BIN_DIR}/setenv.sh" <<EOF
+      # Check if $TOMCAT_EXTRA_JAVA_OPTS has already been added to setenv.sh
+      if ! grep -q "Additional configuration from TOMCAT_EXTRA_JAVA_OPTS" "$TOMCAT_BIN_DIR/setenv.sh"; then
+        # Add $TOMCAT_EXTRA_JAVA_OPTS to setenv.sh
+        cat >> "$TOMCAT_BIN_DIR/setenv.sh" <<EOF
 
-# Additional configuration
+
+# Additional configuration from TOMCAT_EXTRA_JAVA_OPTS
 export JAVA_OPTS="\${JAVA_OPTS} ${TOMCAT_EXTRA_JAVA_OPTS}"
 EOF
+      fi
     fi
 
     # server.xml docs: https://tomcat.apache.org/tomcat-9.0-doc/config/server.html
