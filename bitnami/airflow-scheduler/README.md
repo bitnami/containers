@@ -1,4 +1,4 @@
-# Apache Airflow Scheduler packaged by Bitnami
+# Bitnami package for Apache Airflow Scheduler
 
 ## What is Apache Airflow Scheduler?
 
