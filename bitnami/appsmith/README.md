@@ -1,4 +1,4 @@
-# Appsmith packaged by Bitnami
+# Bitnami package for Appsmith
 
 ## What is Appsmith?
 
