@@ -1,4 +1,4 @@
-# Grafana packaged by Bitnami
+# Bitnami package for Grafana
 
 ## What is Grafana?
 
