@@ -1,4 +1,4 @@
-# Kong Ingress Controller packaged by Bitnami
+# Bitnami package for Kong Ingress Controller
 
 ## What is Kong Ingress Controller?
 
