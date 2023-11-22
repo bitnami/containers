@@ -1,4 +1,4 @@
-# Contour packaged by Bitnami
+# Bitnami package for Contour
 
 ## What is Contour?
 
