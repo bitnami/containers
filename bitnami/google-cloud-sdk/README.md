@@ -1,4 +1,4 @@
-# Google Cloud SDK packaged by Bitnami
+# Bitnami package for Google Cloud SDK
 
 ## What is Google Cloud SDK?
 
