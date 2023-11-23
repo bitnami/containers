@@ -1,4 +1,4 @@
-# Grafana Mimir packaged by Bitnami
+# Bitnami package for Grafana Mimir
 
 ## What is Grafana Mimir?
 
