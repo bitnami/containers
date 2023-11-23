@@ -1,4 +1,4 @@
-# Configurable HTTP Proxy packaged by Bitnami
+# Bitnami package for Configurable HTTP Proxy
 
 ## What is Configurable HTTP Proxy?
 
