@@ -1,4 +1,4 @@
-# JRuby packaged by Bitnami
+# Bitnami package for JRuby
 
 ## What is JRuby?
 
