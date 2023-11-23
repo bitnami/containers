@@ -38,3 +38,7 @@ version:
   bin_name: fluentd
   flag: --version
 root_dir: /opt/bitnami
+# We can't control what third-party devs include in their internal scripts.
+sed_in_place:
+  exclude_paths:
+    - /opt/bitnami/fluentd/gems
