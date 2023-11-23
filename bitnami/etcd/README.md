@@ -1,4 +1,4 @@
-# Etcd packaged by Bitnami
+# Bitnami package for Etcd
 
 ## What is Etcd?
 
