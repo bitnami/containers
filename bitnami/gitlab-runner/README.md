@@ -1,4 +1,4 @@
-# Gitlab Runner packaged by Bitnami
+# Bitnami package for Gitlab Runner
 
 ## What is Gitlab Runner?
 
