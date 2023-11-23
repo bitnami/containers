@@ -1,4 +1,4 @@
-# Attu packaged by Bitnami
+# Bitnami package for Attu
 
 ## What is Attu?
 
