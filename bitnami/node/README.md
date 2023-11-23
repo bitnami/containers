@@ -1,4 +1,4 @@
-# Node.js packaged by Bitnami
+# Bitnami package for Node.js
 
 ## What is Node.js?
 
