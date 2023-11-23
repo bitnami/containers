@@ -1,4 +1,4 @@
-# Apache Tomcat packaged by Bitnami
+# Bitnami package for Apache Tomcat
 
 ## What is Apache Tomcat?
 
