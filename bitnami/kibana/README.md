@@ -1,4 +1,4 @@
-# Kibana packaged by Bitnami
+# Bitnami package for Kibana
 
 ## What is Kibana?
 
