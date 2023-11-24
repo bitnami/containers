@@ -1,4 +1,4 @@
-# PostgreSQL packaged by Bitnami
+# Bitnami package for PostgreSQL
 
 ## What is PostgreSQL?
 
