@@ -1,4 +1,4 @@
-# WordPress with NGINX packaged by Bitnami
+# Bitnami package for WordPress with NGINX
 
 ## What is WordPress with NGINX?
 
