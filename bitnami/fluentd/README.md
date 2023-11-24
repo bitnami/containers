@@ -1,4 +1,4 @@
-# Fluentd packaged by Bitnami
+# Bitnami package for Fluentd
 
 ## What is Fluentd?
 
