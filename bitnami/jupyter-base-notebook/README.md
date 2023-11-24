@@ -1,4 +1,4 @@
-# Jupyter Base Notebook packaged by Bitnami
+# Bitnami package for Jupyter Base Notebook
 
 ## What is Jupyter Base Notebook?
 

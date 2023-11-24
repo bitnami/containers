@@ -3,12 +3,12 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.0.2-15"
+        "version": "4.0.2-17"
     },
     "miniconda": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "23.9.0-1"
+        "version": "23.10.0-0"
     }
 }
