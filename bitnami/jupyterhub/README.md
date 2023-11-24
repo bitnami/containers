@@ -1,4 +1,4 @@
-# JupyterHub packaged by Bitnami
+# Bitnami package for JupyterHub
 
 ## What is JupyterHub?
 
