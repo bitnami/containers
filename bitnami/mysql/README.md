@@ -1,4 +1,4 @@
-# MySQL packaged by Bitnami
+# Bitnami package for MySQL
 
 ## What is MySQL?
 
