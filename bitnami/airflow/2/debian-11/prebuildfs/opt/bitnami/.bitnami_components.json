@@ -21,7 +21,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.11.6-10"
+        "version": "3.11.6-11"
     },
     "wait-for-port": {
         "arch": "amd64",
