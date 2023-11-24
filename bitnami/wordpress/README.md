@@ -1,4 +1,4 @@
-# WordPress packaged by Bitnami
+# Bitnami package for WordPress
 
 ## What is WordPress?
 
