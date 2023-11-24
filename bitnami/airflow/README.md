@@ -1,4 +1,4 @@
-# Apache Airflow packaged by Bitnami
+# Bitnami package for Apache Airflow
 
 ## What is Apache Airflow?
 
