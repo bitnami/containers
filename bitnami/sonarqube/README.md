@@ -1,4 +1,4 @@
-# SonarQube&trade; packaged by Bitnami
+# Bitnami package for SonarQube&trade;
 
 ## What is SonarQube&trade;?
 
