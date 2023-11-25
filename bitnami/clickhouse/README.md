@@ -1,4 +1,4 @@
-# ClickHouse packaged by Bitnami
+# Bitnami package for ClickHouse
 
 ## What is ClickHouse?
 
