@@ -1,4 +1,4 @@
-# Kubeapps Pinniped Proxy packaged by Bitnami
+# Bitnami package for Kubeapps Pinniped Proxy
 
 ## What is Kubeapps Pinniped Proxy?
 
