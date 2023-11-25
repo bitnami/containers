@@ -1,4 +1,4 @@
-# Kubeapps packaged by Bitnami
+# Bitnami package for Kubeapps
 
 ## What is Kubeapps?
 
