@@ -1,4 +1,4 @@
-# Kubeapps OCI Catalog Service packaged by Bitnami
+# Bitnami package for Kubeapps OCI Catalog Service
 
 ## What is Kubeapps OCI Catalog Service?
 
