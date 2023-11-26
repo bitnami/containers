@@ -1,4 +1,4 @@
-# Drupal with NGINX packaged by Bitnami
+# Bitnami package for Drupal with NGINX
 
 ## What is Drupal with NGINX?
 
