@@ -1,4 +1,4 @@
-# Gitea packaged by Bitnami
+# Bitnami package for Gitea
 
 ## What is Gitea?
 
