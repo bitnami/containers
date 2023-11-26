@@ -1,4 +1,4 @@
-# Drupal packaged by Bitnami
+# Bitnami package for Drupal
 
 ## What is Drupal?
 
