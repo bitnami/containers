@@ -1,4 +1,4 @@
-# Jenkins Agent packaged by Bitnami
+# Bitnami package for Jenkins Agent
 
 ## What is Jenkins Agent?
 
