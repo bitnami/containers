@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-11-22T14:45:50Z" \
+      org.opencontainers.image.created="2023-11-27T18:56:00Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.0.3-debian-11-r7" \
+      org.opencontainers.image.ref.name="7.0.4-debian-11-r0" \
       org.opencontainers.image.title="mongodb" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="7.0.3"
+      org.opencontainers.image.version="7.0.4"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -21,24 +21,24 @@ ENV HOME="/" \
     OS_NAME="linux"
 
 COPY prebuildfs /
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libbrotli1 libcom-err2 libcurl4 libffi7 libgcc-s1 libgcrypt20 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed6 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libnettle8 libnghttp2-14 libp11-kit0 libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.1 libtasn1-6 libunistring2 numactl procps zlib1g
-RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "mongodb-shell-2.1.0-0-linux-${OS_ARCH}-debian-11" \
-      "yq-4.40.2-0-linux-${OS_ARCH}-debian-11" \
+      "yq-4.40.3-0-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.7-3-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.6-3-linux-${OS_ARCH}-debian-11" \
-      "mongodb-7.0.3-5-linux-${OS_ARCH}-debian-11" \
-    ) && \
+      "mongodb-7.0.4-0-linux-${OS_ARCH}-debian-11" \
+    ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
         curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz" -O ; \
         curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz.sha256" -O ; \
-      fi && \
-      sha256sum -c "${COMPONENT}.tar.gz.sha256" && \
-      tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+      fi ; \
+      sha256sum -c "${COMPONENT}.tar.gz.sha256" ; \
+      tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' ; \
       rm -rf "${COMPONENT}".tar.gz{,.sha256} ; \
     done
 RUN apt-get autoremove --purge -y curl && \
@@ -48,7 +48,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb/postunpack.sh
-ENV APP_VERSION="7.0.3" \
+ENV APP_VERSION="7.0.4" \
     BITNAMI_APP_NAME="mongodb" \
     PATH="/opt/bitnami/mongodb/bin:/opt/bitnami/common/bin:$PATH"
 
