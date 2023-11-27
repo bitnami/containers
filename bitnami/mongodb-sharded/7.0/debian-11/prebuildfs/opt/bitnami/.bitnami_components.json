@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "7.0.3-5"
+        "version": "7.0.4-0"
     },
     "mongodb-shell": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.0.2-0"
+        "version": "2.1.0-0"
     },
     "render-template": {
         "arch": "amd64",
@@ -27,6 +27,6 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.40.1-1"
+        "version": "4.40.3-0"
     }
 }
