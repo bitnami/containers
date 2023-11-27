@@ -66,10 +66,10 @@ WordPress requires access to a MySQL or MariaDB database to store information. W
 
 ### Run the application using Docker Compose
 
-The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/wordpress/docker-compose.yml) file. Run the application using it as shown below:
+The main folder of this repository contains a functional [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/wordpress-nginx/docker-compose.yml) file. Run the application using it as shown below:
 
 ```console
-curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/wordpress/docker-compose.yml > docker-compose.yml
+curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/wordpress-nginx/docker-compose.yml > docker-compose.yml
 docker-compose up
 ```
 
@@ -195,7 +195,7 @@ docker run -d --name wordpress \
 
 When you start the WordPress image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
-- For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/wordpress/docker-compose.yml) file present in this repository:
+- For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/wordpress-nginx/docker-compose.yml) file present in this repository:
 
     ```yaml
     wordpress:
@@ -312,7 +312,7 @@ To configure WordPress to send email using SMTP you can set the following enviro
 
 This would be an example of SMTP configuration using a Gmail account:
 
-- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/wordpress/docker-compose.yml) file present in this repository:
+- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/wordpress-nginx/docker-compose.yml) file present in this repository:
 
     ```yaml
       wordpress:
@@ -347,7 +347,7 @@ This would be an example of SMTP configuration using a Gmail account:
 
 The Bitnami WordPress container supports connecting the WordPress application to an external database. This would be an example of using an external database for WordPress.
 
-- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/wordpress/docker-compose.yml) file present in this repository:
+- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/wordpress-nginx/docker-compose.yml) file present in this repository:
 
     ```diff
        wordpress:
