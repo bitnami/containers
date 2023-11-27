@@ -641,7 +641,7 @@ repmgr_clone_primary() {
 #########################
 repmgr_pgrewind() {
     info "Running pg_rewind data to primary node..."
-    local -r flags=("-D" "$POSTGRESQL_DATA_DIR" "--source-server" "host=${REPMGR_CURRENT_PRIMARY_HOST} port=${REPMGR_CURRENT_PRIMARY_PORT} user=${REPMGR_USERNAME} dbname=${REPMGR_DATABASE}")
+    local -r flags=("-D" "$POSTGRESQL_DATA_DIR" "--source-server" "host=${REPMGR_CURRENT_PRIMARY_HOST} port=${REPMGR_CURRENT_PRIMARY_PORT} user=${REPMGR_USERNAME} dbname=${REPMGR_DATABASE}" "--config-file=postgresql.auto.conf")
 
     if [[ "$REPMGR_USE_PASSFILE" = "true" ]]; then
         PGPASSFILE="$REPMGR_PASSFILE_PATH" debug_execute "${POSTGRESQL_BIN_DIR}/pg_rewind" "${flags[@]}"
