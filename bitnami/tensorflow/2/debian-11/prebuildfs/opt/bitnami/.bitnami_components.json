@@ -3,12 +3,12 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.11.6-10"
+        "version": "3.11.6-11"
     },
     "tensorflow": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.15.0-0"
+        "version": "2.15.0-2"
     }
 }
