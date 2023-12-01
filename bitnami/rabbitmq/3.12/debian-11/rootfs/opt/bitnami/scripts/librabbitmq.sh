@@ -277,8 +277,17 @@ rabbitmq_print_management_configuration() {
         # Assume SSL is disabled when no environment variables matching 'RABBITMQ_SSL_*' have been specified
         echo "management.tcp.ip = ${RABBITMQ_MANAGEMENT_BIND_IP}"
         echo "management.tcp.port = ${RABBITMQ_MANAGEMENT_PORT_NUMBER}"
-        echo
     fi
+
+    # Allow access to web UI
+    if is_boolean_yes "$RABBITMQ_MANAGEMENT_ALLOW_WEB_ACCESS"; then
+        echo "loopback_users.${RABBITMQ_USERNAME} = false"
+    else
+        echo "loopback_users.${RABBITMQ_USERNAME} = true"
+    fi
+
+    # End config file section
+    echo
 }
 
 ########################
