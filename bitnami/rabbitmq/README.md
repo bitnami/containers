@@ -27,7 +27,7 @@ You can find the default credentials and available configuration options in the 
 * Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
 * With Bitnami images the latest bug fixes and features are available as soon as possible.
 * Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All our images are based on [**minideb**](https://github.com/bitnami/minideb) -a minimalist Debian based container image that gives you a small base container image and the familiarity of a leading Linux distribution- or **scratch** -an explicitly empty image-.
 * All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
 * Bitnami container images are released on a regular basis with the latest distribution packages available.
 
@@ -207,6 +207,7 @@ Available variables:
 
 * `RABBITMQ_MANAGEMENT_BIND_IP`: RabbitMQ management server bind IP address. Default: **0.0.0.0**
 * `RABBITMQ_MANAGEMENT_PORT_NUMBER`: RabbitMQ management server port number. Default: **15672**
+* `RABBITMQ_MANAGEMENT_ALLOW_WEB_ACCESS`: Allow web access to RabbitMQ management portal for `RABBITMQ_USERNAME`. Default: **false**
 * `RABBITMQ_MANAGEMENT_SSL_PORT_NUMBER`: RabbitMQ management server port number for SSL/TLS connections. No defaults.
 * `RABBITMQ_MANAGEMENT_SSL_CACERTFILE`: Path to the RabbitMQ management server SSL CA certificate file. No defaults.
 * `RABBITMQ_MANAGEMENT_SSL_CERTFILE`: Path to the RabbitMQ management server SSL certificate file. No defaults.

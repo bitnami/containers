@@ -1,8 +1,0 @@
-{
-    "clickhouse": {
-        "arch": "amd64",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "22.8.21-0"
-    }
-}
