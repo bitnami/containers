@@ -3,12 +3,12 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "17.0.9-11-1"
+        "version": "17.0.9-11-6"
     },
     "neo4j": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.13.0-2"
+        "version": "5.14.0-0"
     }
 }
