@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-12-04T18:30:46Z" \
+      org.opencontainers.image.created="2023-12-04T22:20:34Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="3.8.18-debian-11-r48" \
+      org.opencontainers.image.ref.name="3.8.18-debian-11-r49" \
       org.opencontainers.image.title="python" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="3.8.18"
@@ -25,7 +25,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages build-essential ca-certificates curl git libbz2-1.0 libcom-err2 libcrypt1 libffi7 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 liblzma5 libncursesw6 libnsl2 libreadline8 libsqlite3-0 libsqlite3-dev libssl-dev libssl1.1 libtinfo6 libtirpc3 pkg-config procps unzip wget zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "python-3.8.18-12-linux-${OS_ARCH}-debian-11" \
+      "python-3.8.18-13-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
