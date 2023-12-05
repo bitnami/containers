@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.3.2-8"
+        "version": "3.3.3-0"
     },
     "erlang": {
         "arch": "amd64",
