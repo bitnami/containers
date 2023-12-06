@@ -12,7 +12,7 @@ services:
       - registry_data:/storage
       - ./config/registry/:/etc/registry/:ro
   postgresql:
-    image: docker.io/bitnami/postgresql:11
+    image: docker.io/bitnami/postgresql:13
     container_name: harbor-db
     environment:
       - POSTGRESQL_PASSWORD=bitnami
