@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.4.57-12"
+        "version": "2.4.58-1"
     },
     "dokuwiki": {
         "arch": "amd64",
@@ -15,18 +15,18 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.2.11-0"
+        "version": "8.2.13-0"
     },
     "php": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.2.11-3"
+        "version": "8.2.13-6"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-2"
+        "version": "1.0.6-3"
     }
 }
