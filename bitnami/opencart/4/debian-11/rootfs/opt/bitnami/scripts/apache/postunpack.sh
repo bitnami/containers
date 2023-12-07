@@ -46,6 +46,7 @@ apache_setup_bitnami_config() {
     local -a modules_to_disable=(
         "http2_module"
         "proxy_hcheck_module"
+        "proxy_html_module"
         "proxy_http2_module"
     )
     for module in "${modules_to_disable[@]}"; do
