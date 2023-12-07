@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.0.21-10-1"
+        "version": "11.0.21-10-6"
     },
     "ksql": {
         "arch": "amd64",
