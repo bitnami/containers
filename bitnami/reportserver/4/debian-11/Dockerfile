@@ -8,13 +8,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-10-09T19:10:51Z" \
+      org.opencontainers.image.created="2023-12-08T11:39:11Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="4.6.1-6098-debian-11-r9" \
+      org.opencontainers.image.ref.name="4.6.2-6102-debian-11-r0" \
       org.opencontainers.image.title="reportserver" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="4.6.1-6098"
+      org.opencontainers.image.version="4.6.2-6102"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -22,24 +22,24 @@ ENV HOME="/" \
     OS_NAME="linux"
 
 COPY prebuildfs /
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libaudit1 libcap-ng0 libgcc-s1 libicu67 liblzma5 libncurses6 libpam0g libssl1.1 libstdc++6 libtinfo6 libxml2 procps xmlstarlet zlib1g
-RUN mkdir -p /tmp/bitnami/pkg/cache/ && cd /tmp/bitnami/pkg/cache/ && \
+RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "java-17.0.8-7-5-linux-${OS_ARCH}-debian-11" \
-      "tomcat-9.0.80-1-linux-${OS_ARCH}-debian-11" \
-      "mysql-client-10.11.5-1-linux-${OS_ARCH}-debian-11" \
-      "reportserver-4.6.1-6098-0-linux-${OS_ARCH}-debian-11" \
-      "render-template-1.0.6-1-linux-${OS_ARCH}-debian-11" \
-    ) && \
+      "java-17.0.9-11-6-linux-${OS_ARCH}-debian-11" \
+      "tomcat-9.0.83-4-linux-${OS_ARCH}-debian-11" \
+      "mysql-client-10.11.6-0-linux-${OS_ARCH}-debian-11" \
+      "reportserver-4.6.2-6102-0-linux-${OS_ARCH}-debian-11" \
+      "render-template-1.0.6-4-linux-${OS_ARCH}-debian-11" \
+    ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
         curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz" -O ; \
         curl -SsLf "https://downloads.bitnami.com/files/stacksmith/${COMPONENT}.tar.gz.sha256" -O ; \
-      fi && \
-      sha256sum -c "${COMPONENT}.tar.gz.sha256" && \
-      tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' && \
+      fi ; \
+      sha256sum -c "${COMPONENT}.tar.gz.sha256" ; \
+      tar -zxf "${COMPONENT}.tar.gz" -C /opt/bitnami --strip-components=2 --no-same-owner --wildcards '*/files' ; \
       rm -rf "${COMPONENT}".tar.gz{,.sha256} ; \
     done
 RUN apt-get autoremove --purge -y curl && \
@@ -52,7 +52,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/reportserver/postunpack.sh
 RUN /opt/bitnami/scripts/tomcat/postunpack.sh
-ENV APP_VERSION="4.6.1-6098" \
+ENV APP_VERSION="4.6.2-6102" \
     BITNAMI_APP_NAME="reportserver" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:/opt/bitnami/mysql/bin:/opt/bitnami/common/bin:$PATH" \
