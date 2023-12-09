@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "18.18.2-0"
+        "version": "18.19.0-0"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.11.6-8"
+        "version": "3.11.7-0"
     },
     "supabase": {
         "arch": "amd64",
