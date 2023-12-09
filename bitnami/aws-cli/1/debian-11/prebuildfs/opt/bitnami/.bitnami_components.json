@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.31.10-0"
+        "version": "1.31.11-0"
     },
     "python": {
         "arch": "amd64",
