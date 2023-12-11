@@ -10,7 +10,7 @@ fi
 
 script=$1
 exit_code="${2:-96}"
-fail_if_not_present="${3:-n}"
+fail_if_not_present="${3:-y}"
 
 if test -f "$script"; then
   sh $script

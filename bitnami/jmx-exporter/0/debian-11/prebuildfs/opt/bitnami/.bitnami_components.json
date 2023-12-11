@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "17.0.9-11-1"
+        "version": "17.0.9-11-6"
     },
     "jmx-exporter": {
         "arch": "amd64",

@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.4.58-0"
+        "version": "2.4.58-1"
     },
     "libphp": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.25-0"
+        "version": "8.1.26-0"
     },
     "moodle": {
         "arch": "amd64",
@@ -21,24 +21,24 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "11.1.2-2"
+        "version": "11.1.3-0"
     },
     "php": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.1.25-0"
+        "version": "8.1.26-4"
     },
     "postgresql-client": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "13.12.0-1"
+        "version": "13.13.0-0"
     },
     "render-template": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-2"
+        "version": "1.0.6-3"
     }
 }
