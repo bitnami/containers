@@ -52,7 +52,7 @@ RUN /opt/bitnami/scripts/java/postunpack.sh
 ENV APP_VERSION="2.11.1" \
     BITNAMI_APP_NAME="opensearch" \
     JAVA_HOME="/opt/bitnami/java" \
-    LD_LIBRARY_PATH="/opt/bitnami/opensearch/jdk/lib:/opt/bitnami/opensearch/jdk/lib/server:$LD_LIBRARY_PATH" \
+    LD_LIBRARY_PATH="/opt/bitnami/opensearch/jdk/lib:/opt/bitnami/opensearch/jdk/lib/server:/opt/bitnami/opensearch/plugins/opensearch-knn/lib:$LD_LIBRARY_PATH" \
     OPENSEARCH_JAVA_HOME="/opt/bitnami/java"
 
 EXPOSE 9200 9300
