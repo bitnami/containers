@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2023.12.9-0"
+        "version": "2023.12.9-1"
     },
     "minio-client": {
         "arch": "amd64",
