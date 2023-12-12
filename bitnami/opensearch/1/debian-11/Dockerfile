@@ -9,10 +9,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-12-02T09:09:29Z" \
+      org.opencontainers.image.created="2023-12-12T12:59:55Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.3.13-debian-11-r11" \
+      org.opencontainers.image.ref.name="1.3.13-debian-11-r12" \
       org.opencontainers.image.title="opensearch" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.3.13"
@@ -29,7 +29,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libgcc-s1 libgomp1 libstdc++6 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "yq-4.40.3-0-linux-${OS_ARCH}-debian-11" \
+      "yq-4.40.5-0-linux-${OS_ARCH}-debian-11" \
       "java-17.0.9-11-6-linux-${OS_ARCH}-debian-11" \
       "opensearch-1.3.13-0-linux-${OS_ARCH}-debian-11" \
     ) ; \
