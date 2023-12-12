@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-12-02T07:47:42Z" \
+      org.opencontainers.image.created="2023-12-12T13:39:46Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.15.2-debian-11-r2" \
+      org.opencontainers.image.ref.name="1.15.4-debian-11-r0" \
       org.opencontainers.image.title="vault" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.15.2"
+      org.opencontainers.image.version="1.15.4"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "vault-1.15.2-1-linux-${OS_ARCH}-debian-11" \
+      "vault-1.15.4-0-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,7 +41,7 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN useradd -r -u 1001 -g root vault
 
-ENV APP_VERSION="1.15.2" \
+ENV APP_VERSION="1.15.4" \
     BITNAMI_APP_NAME="vault" \
     PATH="/opt/bitnami/vault/bin:$PATH"
 
