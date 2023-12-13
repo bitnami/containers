@@ -113,4 +113,7 @@ export ETCD_TRUSTED_CA_FILE="${ETCD_TRUSTED_CA_FILE:-}"
 export ETCD_CLIENT_CERT_AUTH="${ETCD_CLIENT_CERT_AUTH:-false}"
 export ETCD_PEER_AUTO_TLS="${ETCD_PEER_AUTO_TLS:-false}"
 
+# STS settings
+export MY_STS_NAME="${MY_STS_NAME:-etcd}"
+
 # Custom environment variables may be defined below
