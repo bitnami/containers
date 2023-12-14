@@ -31,6 +31,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
       "java-17.0.9-11-6-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.6-4-linux-${OS_ARCH}-debian-11" \
       "kafka-3.6.1-0-linux-${OS_ARCH}-debian-11" \
+      "jmx-exporter-0.20.0-1-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
