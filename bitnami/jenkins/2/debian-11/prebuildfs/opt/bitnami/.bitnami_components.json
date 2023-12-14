@@ -9,7 +9,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "2.426.1-2"
+        "version": "2.426.2-0"
     },
     "render-template": {
         "arch": "amd64",
