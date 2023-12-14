@@ -352,7 +352,6 @@ etcd_configure_rbac() {
                 info "Authentication already enabled"
             else
                 info "Enabling etcd authentication"
-                extra_flags=("--endpoints=$(etcdctl_get_endpoints)")
                 etcdctl "${extra_flags[@]}" user add root --interactive=false <<<"$ETCD_ROOT_PASSWORD"
                 etcdctl "${extra_flags[@]}" user grant-role root root
                 etcdctl "${extra_flags[@]}" auth enable
