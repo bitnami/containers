@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-12-14T02:29:00Z" \
+      org.opencontainers.image.created="2023-12-15T11:47:36Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.9.1-debian-11-r0" \
+      org.opencontainers.image.ref.name="2.9.2-debian-11-r0" \
       org.opencontainers.image.title="mlflow" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="2.9.1"
+      org.opencontainers.image.version="2.9.2"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -27,7 +27,7 @@ RUN install_packages ca-certificates curl git libbz2-1.0 libcom-err2 libcrypt1 l
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "python-3.10.13-13-linux-${OS_ARCH}-debian-11" \
-      "mlflow-2.9.1-0-linux-${OS_ARCH}-debian-11" \
+      "mlflow-2.9.2-0-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -45,7 +45,7 @@ RUN useradd -r -u 1001 -g root mlflow
 RUN mkdir /.local && chmod g+rwX /.local
 
 RUN mkdir -p /app/mlruns /app/mlartifacts /bitnami/mlflow && chmod g+rwX /app /app/mlruns /app/mlartifacts /bitnami/mlflow && ln -s /opt/bitnami/python/lib/*/site-packages/mlflow/server/auth/ /bitnami/mlflow-basic-auth
-ENV APP_VERSION="2.9.1" \
+ENV APP_VERSION="2.9.2" \
     BITNAMI_APP_NAME="mlflow" \
     PATH="/opt/bitnami/python/bin:$PATH"
 
