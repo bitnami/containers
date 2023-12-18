@@ -1,0 +1,8 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+version: '2'
+services:
+  percona-xtrabackup:
+    image: docker.io/bitnami/percona-xtrabackup:8.0
+    entrypoint: sleep infinity
