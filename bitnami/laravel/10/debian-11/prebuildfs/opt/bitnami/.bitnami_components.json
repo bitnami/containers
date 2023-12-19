@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.2.10-0"
+        "version": "10.3.0-0"
     },
     "node": {
         "arch": "amd64",
@@ -15,13 +15,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.2.13-8"
+        "version": "8.2.13-11"
     },
     "python": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.11.7-0"
+        "version": "3.11.7-2"
     },
     "wait-for-port": {
         "arch": "amd64",
