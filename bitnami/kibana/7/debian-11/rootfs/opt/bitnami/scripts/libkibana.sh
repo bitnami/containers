@@ -210,28 +210,23 @@ kibana_initialize() {
                 exit 1
             fi
         fi
-        # Override configuration
+        # Kibana override configuration
         if [[ "$SERVER_FLAVOR" = "kibana" ]]; then
             if is_boolean_yes "$KIBANA_DISABLE_STRICT_CSP"; then
                 kibana_conf_set "csp.strict" "false" "bool"
             fi
-            #The publicly available URL that end-users access Kibana at
             if ! is_empty_value "$KIBANA_SERVER_PUBLICBASEURL"; then
-                kibana_conf_set "server.publicBaseUrl" "$KIBANA_SERVER_PUBLICBASEURLL"
+                kibana_conf_set "server.publicBaseUrl" "$KIBANA_SERVER_PUBLICBASEURL"
             fi
-            #Set an encryption key so that sessions are not invalidated. Use any text string that is 32 characters or longer as the encryption key. 
             if ! is_empty_value "$KIBANA_XPACK_SECURITY_ENCRYPTIONKEY"; then
                 kibana_conf_set "xpack.security.encryptionKey" "$KIBANA_XPACK_SECURITY_ENCRYPTIONKEY"
-            fi           
-            #The static encryption key for reporting. Use an alphanumeric text string that is at least 32 characters. By default, Kibana generates a random key when it starts, which causes pending reports to fail 
+            fi
             if ! is_empty_value "$KIBANA_XPACK_REPORTING_ENCRYPTIONKEY"; then
                 kibana_conf_set "xpack.reporting.encryptionKey" "$KIBANA_XPACK_REPORTING_ENCRYPTIONKEY"
             fi
-            #Controls whether to enable the newsfeed system for the Kibana UI notification center
             if ! is_boolean_yes "$KIBANA_NEWSFEED_ENABLED"; then
                 kibana_conf_set "newsfeed.enabled" "false" "bool"
-            fi   
-            #Time in milliseconds to wait for responses from the back end or Elasticsearch. This value must be a positive integer. Default: 30000
+            fi
             if [[ "$KIBANA_ELASTICSEARCH_REQUESTTIMEOUT" != "30000" ]]; then
                 kibana_conf_set "elasticsearch.requestTimeout" "$KIBANA_ELASTICSEARCH_REQUESTTIMEOUT"
             fi
