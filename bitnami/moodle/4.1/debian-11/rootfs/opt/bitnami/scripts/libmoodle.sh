@@ -156,6 +156,14 @@ moodle_initialize() {
         read -r -a extra_args <<<"$MOODLE_INSTALL_EXTRA_ARGS"
         [[ "${#extra_args[@]}" -gt 0 ]] && moodle_install_args+=("${extra_args[@]}")
 
+        # Handle --prefix (table prefix) being overridden via MOODLE_INSTALL_EXTRA_ARGS
+        mdl_prefix="mdl_"
+        for extra_arg in "${extra_args[@]}"; do
+            if [[ $extra_arg == --prefix=* ]]; then
+                mdl_prefix=${extra_arg#--prefix=}
+                break
+            fi
+        done
         # Setup Moodle
         if ! is_boolean_yes "$MOODLE_SKIP_BOOTSTRAP"; then
             info "Running Moodle install script"
@@ -166,17 +174,17 @@ moodle_initialize() {
             [[ "$db_type" = "pgsql" ]] && db_remote_execute="postgresql_remote_execute"
             local -a db_execute_args=("$db_host" "$db_port" "$db_name" "$db_user" "$db_pass")
             # Configure no-reply e-mail address for SMTP
-            echo "INSERT INTO mdl_config (name, value) VALUES ('noreplyaddress', '${MOODLE_EMAIL}')" | "$db_remote_execute" "${db_execute_args[@]}"
+	    echo "INSERT INTO ${mdl_prefix}config (name, value) VALUES ('noreplyaddress', '${MOODLE_EMAIL}')" | "$db_remote_execute" "${db_execute_args[@]}"
             # Additional Bitnami customizations
-            echo "UPDATE mdl_course SET summary='Moodle powered by Bitnami' WHERE id='1'" | "$db_remote_execute" "${db_execute_args[@]}"
+            echo "UPDATE ${mdl_prefix}course SET summary='Moodle powered by Bitnami' WHERE id='1'" | "$db_remote_execute" "${db_execute_args[@]}"
             # SMTP configuration
             if ! is_empty_value "$MOODLE_SMTP_HOST"; then
                 info "Configuring SMTP credentials"
                 "$db_remote_execute" "${db_execute_args[@]}" <<EOF
-UPDATE mdl_config SET value='${MOODLE_SMTP_HOST}:${MOODLE_SMTP_PORT_NUMBER}' WHERE name='smtphosts';
-UPDATE mdl_config SET value='${MOODLE_SMTP_USER}' WHERE name='smtpuser';
-UPDATE mdl_config SET value='${MOODLE_SMTP_PASSWORD}' WHERE name='smtppass';
-UPDATE mdl_config SET value='${MOODLE_SMTP_PROTOCOL}' WHERE name='smtpsecure';
+UPDATE ${mdl_prefix}config SET value='${MOODLE_SMTP_HOST}:${MOODLE_SMTP_PORT_NUMBER}' WHERE name='smtphosts';
+UPDATE ${mdl_prefix}config SET value='${MOODLE_SMTP_USER}' WHERE name='smtpuser';
+UPDATE ${mdl_prefix}config SET value='${MOODLE_SMTP_PASSWORD}' WHERE name='smtppass';
+UPDATE ${mdl_prefix}config SET value='${MOODLE_SMTP_PROTOCOL}' WHERE name='smtpsecure';
 EOF
             fi
         else

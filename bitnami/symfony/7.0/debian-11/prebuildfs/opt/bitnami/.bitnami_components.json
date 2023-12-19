@@ -1,0 +1,20 @@
+{
+    "mysql-client": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "10.11.6-0"
+    },
+    "php": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "8.2.13-10"
+    },
+    "symfony": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "7.0.1-0"
+    }
+}

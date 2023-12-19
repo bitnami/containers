@@ -210,9 +210,26 @@ kibana_initialize() {
                 exit 1
             fi
         fi
-        # Override configuration
-        if [[ "$SERVER_FLAVOR" = "kibana" ]] && is_boolean_yes "$KIBANA_DISABLE_STRICT_CSP"; then
-            kibana_conf_set "csp.strict" "false" "bool"
+        # Kibana override configuration
+        if [[ "$SERVER_FLAVOR" = "kibana" ]]; then
+            if is_boolean_yes "$KIBANA_DISABLE_STRICT_CSP"; then
+                kibana_conf_set "csp.strict" "false" "bool"
+            fi
+            if ! is_empty_value "$KIBANA_SERVER_PUBLICBASEURL"; then
+                kibana_conf_set "server.publicBaseUrl" "$KIBANA_SERVER_PUBLICBASEURL"
+            fi
+            if ! is_empty_value "$KIBANA_XPACK_SECURITY_ENCRYPTIONKEY"; then
+                kibana_conf_set "xpack.security.encryptionKey" "$KIBANA_XPACK_SECURITY_ENCRYPTIONKEY"
+            fi
+            if ! is_empty_value "$KIBANA_XPACK_REPORTING_ENCRYPTIONKEY"; then
+                kibana_conf_set "xpack.reporting.encryptionKey" "$KIBANA_XPACK_REPORTING_ENCRYPTIONKEY"
+            fi
+            if ! is_boolean_yes "$KIBANA_NEWSFEED_ENABLED"; then
+                kibana_conf_set "newsfeed.enabled" "false" "bool"
+            fi
+            if [[ "$KIBANA_ELASTICSEARCH_REQUESTTIMEOUT" != "30000" ]]; then
+                kibana_conf_set "elasticsearch.requestTimeout" "$KIBANA_ELASTICSEARCH_REQUESTTIMEOUT"
+            fi
         fi
 
         # Configure Elasticsearch/Opensearch authentication

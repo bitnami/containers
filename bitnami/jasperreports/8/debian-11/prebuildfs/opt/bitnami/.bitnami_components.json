@@ -3,7 +3,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.2.0-3"
+        "version": "8.2.0-4"
     },
     "java": {
         "arch": "amd64",
@@ -27,12 +27,12 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.6-3"
+        "version": "1.0.6-4"
     },
     "tomcat": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "9.0.83-2"
+        "version": "9.0.84-0"
     }
 }
