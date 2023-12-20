@@ -5,7 +5,7 @@ version: '2.1'
 
 services:
   mariadb-galera:
-    image: docker.io/bitnami/mariadb-galera:11.1
+    image: docker.io/bitnami/mariadb-galera:11.2
     ports:
       - '3306:3306'
       - '4444:4444'
