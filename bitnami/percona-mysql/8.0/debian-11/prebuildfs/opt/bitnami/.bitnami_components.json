@@ -9,18 +9,18 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.35-2"
+        "version": "8.1.1-0"
     },
     "percona-mysql": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.34-26-1"
+        "version": "8.0.34-26-2"
     },
     "percona-xtrabackup-binary": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.0.35-30-2"
+        "version": "8.0.35-30-3"
     }
 }
