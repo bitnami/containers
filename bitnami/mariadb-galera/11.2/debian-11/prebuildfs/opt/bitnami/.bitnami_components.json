@@ -1,0 +1,14 @@
+{
+    "ini-file": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "1.4.6-4"
+    },
+    "mariadb-galera": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "11.2.2-0"
+    }
+}
