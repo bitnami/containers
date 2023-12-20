@@ -18,7 +18,7 @@ set -o pipefail
 # Load environment
 . /opt/bitnami/scripts/harbor-adapter-trivy-env.sh
 
-ensure_user_exists "$SCANNER_TRIVY_DAEMON_USER" --group "$SCANNER_TRIVY_DAEMON_GROUP"
+ensure_user_exists "$SCANNER_TRIVY_DAEMON_USER" --group "$SCANNER_TRIVY_DAEMON_GROUP" --home "/home/${SCANNER_TRIVY_DAEMON_USER}"
 
 # Ensure a set of directories exist and the non-root user has write privileges to them
 read -r -a directories <<<"$(get_system_cert_paths)"
