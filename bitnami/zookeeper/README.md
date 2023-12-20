@@ -203,7 +203,8 @@ The configuration can easily be setup with the Bitnami Apache ZooKeeper Docker i
 * `ZOO_ENABLE_PROMETHEUS_METRICS`: Expose Prometheus metrics. Default: **no**
 * `ZOO_PROMETHEUS_METRICS_PORT_NUMBER`: Port where a Jetty server will expose Prometheus metrics. Default: **7000**
 * `ALLOW_ANONYMOUS_LOGIN`: If set to true, Allow to accept connections from unauthenticated users. Default: **no**
-* `ZOO_LOG_LEVEL`: Apache ZooKeeper log level. Available levels are: `ALL`, `DEBUG`, `INFO`, `WARN`, `ERROR`, `FATAL`, `OFF`, `TRACE`. Default: **INFO**
+* `ZOO_LOG_LEVEL`: Apache ZooKeeper log level. Available levels are: `TRACE`, `DEBUG`, `INFO`, `WARN` and `ERROR`. Default: **INFO**
+* `ZOO_LOG_FORMAT`: Format of the log lines. Available formats are: `TEXT` and `JSON`. The JSON format uses [ECS schema](https://doc.wikimedia.org/ecs/). Default: **TEXT**
 * `JVMFLAGS`: Default JVMFLAGS for the Apache ZooKeeper process. Default: No defaults
 * `ZOO_TLS_CLIENT_ENABLE`: Enable tls for client communication. Default: **false**
 * `ZOO_TLS_PORT_NUMBER`: Zookeeper TLS port. Default: 3181

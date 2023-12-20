@@ -12,6 +12,7 @@ set -o pipefail
 # Load libraries
 . /opt/bitnami/scripts/libzookeeper.sh
 . /opt/bitnami/scripts/libfs.sh
+. /opt/bitnami/scripts/libmaven.sh
 
 # Load ZooKeeper environment variables
 . /opt/bitnami/scripts/zookeeper-env.sh
@@ -21,6 +22,12 @@ for dir in "$ZOO_DATA_DIR" "$ZOO_CONF_DIR" "$ZOO_LOG_DIR"; do
     ensure_dir_exists "$dir"
     chmod -R g+rwX "$dir"
 done
+
+# Add maven artifacts needed for JSON logging and logback configuration
+maven_get_jar co.elastic.logging:ecs-logging-core:1.5.0 "$ZOO_LIB_DIR"
+maven_get_jar co.elastic.logging:logback-ecs-encoder:1.5.0 "$ZOO_LIB_DIR"
+maven_get_jar org.codehaus.janino:janino:3.1.10 "$ZOO_LIB_DIR"
+maven_get_jar org.codehaus.janino:commons-compiler:3.1.10 "$ZOO_LIB_DIR"
 
 # Ensure a smooth transition to Bash logic in chart deployments
 zookeeper_ensure_backwards_compatibility

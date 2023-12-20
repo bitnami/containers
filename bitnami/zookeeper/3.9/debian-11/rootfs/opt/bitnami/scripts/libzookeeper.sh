@@ -180,6 +180,17 @@ zookeeper_initialize() {
     if [[ -n "$ZOO_PEER_TYPE" ]]; then
         zookeeper_conf_set "$ZOO_CONF_FILE" peerType "$ZOO_PEER_TYPE"
     fi
+
+    # Convey logging configuration to system properties
+    if [[ -n "$ZOO_LOG_LEVEL" ]]; then
+        zookeeper_export_jvmflags "-Dzookeeper.log.level=$ZOO_LOG_LEVEL"
+    fi
+    if [[ -n "$ZOO_LOG_APPENDER" ]]; then
+        zookeeper_export_jvmflags "-Dzookeeper.log.appender=$ZOO_LOG_APPENDER"
+    fi
+    if [[ -n "$ZOO_LOG_FORMAT" ]]; then
+        zookeeper_export_jvmflags "-Dzookeeper.log.format=$ZOO_LOG_FORMAT"
+    fi
 }
 
 ########################
@@ -212,10 +223,7 @@ zookeeper_generate_conf() {
     zookeeper_conf_set "$ZOO_CONF_FILE" 4lw.commands.whitelist "$ZOO_4LW_COMMANDS_WHITELIST"
     zookeeper_conf_set "$ZOO_CONF_FILE" maxSessionTimeout "$ZOO_MAX_SESSION_TIMEOUT"
     # Set log level
-    if [ -f "${ZOO_CONF_DIR}/logback.xml" ]; then
-      # Zookeeper 3.8+
-      xmlstarlet edit -L -u "/configuration/property[@name='zookeeper.console.threshold']/@value" -v "$ZOO_LOG_LEVEL" "${ZOO_CONF_DIR}/logback.xml"
-    else
+    if [ ! -f "${ZOO_CONF_DIR}/logback.xml" ]; then
       zookeeper_conf_set "${ZOO_CONF_DIR}/log4j.properties" zookeeper.console.threshold "$ZOO_LOG_LEVEL"
     fi
     # Admin web server https://zookeeper.apache.org/doc/r3.5.7/zookeeperAdmin.html#sc_adminserver
