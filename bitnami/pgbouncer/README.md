@@ -121,6 +121,7 @@ To expose a ["fallback database" (wildcard that matches any)](https://www.pgboun
 ### Other options
 
 * `PGBOUNCER_AUTH_USER`: PgBouncer will use this user to connect to the database and query the PostgreSQL backend for a user and password. No defaults.
+* `PGBOUNCER_AUTH_DBNAME`: PgBouncer will use this user database for authentication purposes. No defaults.
 * `PGBOUNCER_AUTH_QUERY`: PgBouncer will use this query to connect to the database and query the PostgreSQL backend for a user and password. No defaults.
 * `PGBOUNCER_AUTH_TYPE`: PgBouncer authentication type. Default: **scram-sha-256**
 * `PGBOUNCER_AUTH_HBA_FILE`: HBA configuration file to use if auth_type is set to hba. No defaults.
