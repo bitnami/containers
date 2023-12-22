@@ -9,7 +9,7 @@
 ## TL;DR
 
 ```console
-docker run --name sealed-secrets bitnami/sealed-secrets:latest
+docker run --name sealed-secrets-controller bitnami/sealed-secrets-controller:latest
 ```
 
 ## Why use Bitnami Images?
@@ -33,16 +33,16 @@ Subscribe to project updates by watching the [bitnami/containers GitHub repo](ht
 
 ## Get this image
 
-The recommended way to get the Bitnami sealed-secrets Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/sealed-secrets).
+The recommended way to get the Bitnami sealed-secrets-controller Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/sealed-secrets-controller).
 
 ```console
-docker pull bitnami/sealed-secrets:latest
+docker pull bitnami/sealed-secrets-controller:latest
 ```
 
-To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/sealed-secrets/tags/) in the Docker Hub Registry.
+To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/sealed-secrets-controller/tags/) in the Docker Hub Registry.
 
 ```console
-docker pull bitnami/sealed-secrets:[TAG]
+docker pull bitnami/sealed-secrets-controller:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
@@ -60,7 +60,7 @@ docker build -t bitnami/APP:latest .
 To run commands inside this container you can use `docker run`, for example to execute `kubeseal --version` you can follow the example below:
 
 ```console
-docker run --rm --name sealed-secrets bitnami/sealed-secrets:latest -- kubeseal --version
+docker run --rm --name sealed-secrets-controller bitnami/sealed-secrets-controller:latest -- kubeseal --version
 ```
 
 ## Contributing
