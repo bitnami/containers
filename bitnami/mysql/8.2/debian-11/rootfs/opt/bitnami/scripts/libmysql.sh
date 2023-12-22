@@ -179,6 +179,64 @@ EOF
 }
 
 ########################
+# Make a dump on master database and update slave database
+# Globals:
+#   DB_*
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+mysql_exec_initial_dump() {
+    DATA_DIR="/bitnami/mysql/data"
+    info "MySQL dump master data start..."
+    
+    mysql -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$DB_MASTER_ROOT_PASSWORD" -e 'RESET MASTER;'
+
+    databases=("mysql" "$DB_DATABASE")
+
+    for DB in "${databases[@]}"; do
+        info "Start dump process database $DB"
+        
+        if [[ $DB = "information_schema" ]] || [[ $DB = "performance_schema" ]] || [[ $DB = "sys" ]]; then
+            info "The table $DB not be imported, skiping"
+            continue
+        fi
+
+        FILE_LOCATION="$DATA_DIR/dump_$DB.sql"
+
+        mysqldump --verbose -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$DB_MASTER_ROOT_PASSWORD" $DB > $FILE_LOCATION
+
+        info "Finish dump database $DB"
+
+        if [ $? -eq 0 ]; then
+            head -n 15 $FILE_LOCATION
+
+            info "Ensure database exists $DB"
+
+            mysql -u "$DB_MASTER_ROOT_USER" <<EOF
+CREATE DATABASE IF NOT EXISTS $DB;
+EOF
+
+            info "Start import dump database $DB"
+            mysql_execute $DB < $FILE_LOCATION
+            info "Finish import dump database $DB"
+
+        else
+            info "Fail create dump"
+        fi
+
+        info "Remove dump file"
+        rm -f $FILE_LOCATION
+
+        info "Finish dump process database $DB"
+
+    done
+
+    info "MySQL dump master data finish..."
+}
+
+########################
 # Migrate old custom configuration files
 # Globals:
 #   DB_*
@@ -194,6 +252,11 @@ mysql_configure_replication() {
         while ! echo "select 1" | mysql_remote_execute "$DB_MASTER_HOST" "$DB_MASTER_PORT_NUMBER" "mysql" "$DB_MASTER_ROOT_USER" "$DB_MASTER_ROOT_PASSWORD"; do
             sleep 1
         done
+
+        if [[ "$DB_REPLICATION_SLAVE_DUMP" = "true" ]]; then
+            mysql_exec_initial_dump
+        fi
+        
         debug "Replication master ready!"
         debug "Setting the master configuration"
         mysql_execute "mysql" <<EOF
