@@ -14,6 +14,14 @@ file:
       - "prefix = /opt/bitnami/kong/server"
       - "nginx_daemon = off"
       - "nginx_user = kong"
+  /opt/bitnami/scripts/kong-env.sh:
+    exists: true
+    contents:
+      - "'luarocks path' configuration"
+  /etc/bash.bashrc:
+    exists: true
+    contents:
+      - "'luarocks path' configuration"
   /usr/local/kong/include/opentelemetry:
     exists: true
     filetype: symlink
