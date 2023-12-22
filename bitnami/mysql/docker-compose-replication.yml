@@ -40,6 +40,8 @@ services:
       - MYSQL_MASTER_ROOT_PASSWORD=my_root_password
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
+      # Only use true if master node missing binary files (The binary files will be reset, recomendate backup files)
+      - MYSQL_REPLICATION_SLAVE_DUMP=false
     healthcheck:
       test: ['CMD', '/opt/bitnami/scripts/mysql/healthcheck.sh']
       interval: 15s
