@@ -193,7 +193,11 @@ mysql_exec_initial_dump() {
     
     mysql -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$DB_MASTER_ROOT_PASSWORD" -e 'RESET MASTER;'
 
-    databases=("mysql" "$DB_DATABASE")
+    databases=("mysql")
+
+    if [ -n "$DB_DATABASE" ]; then
+        databases+=("$DB_DATABASE")
+    fi
 
     for DB in "${databases[@]}"; do
         info "Start dump process database $DB"
