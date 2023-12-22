@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-12-07T11:27:17Z" \
+      org.opencontainers.image.created="2023-12-22T10:32:35Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.9.4-debian-11-r3" \
+      org.opencontainers.image.ref.name="1.9.5-debian-11-r0" \
       org.opencontainers.image.title="nginx-ingress-controller" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="1.9.4"
+      org.opencontainers.image.version="1.9.5"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl libbrotli1 libcap2-bin libcom-err2 libcrypt1 libcurl4 libffi7 libgcc-s1 libgcrypt20 libgeoip1 libgmp10 libgnutls30 libgpg-error0 libgssapi-krb5-2 libhogweed6 libicu67 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2 liblzma5 libnettle8 libnghttp2-14 libp11-kit0 libpcre3 libpsl5 librtmp1 libsasl2-2 libssh2-1 libssl1.1 libstdc++6 libtasn1-6 libunistring2 libxml2 procps zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "nginx-ingress-controller-1.9.4-2-linux-${OS_ARCH}-debian-11" \
+      "nginx-ingress-controller-1.9.5-0-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -58,7 +58,7 @@ RUN setcap    cap_net_bind_service=+ep /nginx-ingress-controller && \
 RUN mkdir -p /etc/ingress-controller/auth /etc/ingress-controller/ssl
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log
-ENV APP_VERSION="1.9.4" \
+ENV APP_VERSION="1.9.5" \
     BITNAMI_APP_NAME="nginx-ingress-controller" \
     LD_LIBRARY_PATH="/lib:/modules_mount/etc/nginx/modules/otel:/usr/lib:/usr/local/lib:$LD_LIBRARY_PATH" \
     LUA_CPATH="/usr/local/lib/lua/?/?.so;/usr/local/lib/lua/?.so;;" \
