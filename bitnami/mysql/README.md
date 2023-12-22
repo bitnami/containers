@@ -392,7 +392,6 @@ The above command scales up the number of slaves to `3`. You can scale down in t
 If your master database missing some binary files, the replication will broken. It's possible add `MYSQL_REPLICATION_SLAVE_DUMP=true` toe make a dump on master and import it on slave.
 
 > **Note**: It's most important that master database is only used by this process until the end to avoid missing data.
-
 > **Note**: This process will use "RESET MASTER;" on master database, for security make a backup of binary files.
 
 ### Configuration file
