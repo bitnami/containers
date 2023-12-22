@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-12-06T15:54:58Z" \
+      org.opencontainers.image.created="2023-12-22T10:25:32Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="16.6.1-debian-11-r2" \
+      org.opencontainers.image.ref.name="16.7.0-debian-11-r0" \
       org.opencontainers.image.title="gitlab-runner" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="16.6.1"
+      org.opencontainers.image.version="16.7.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -26,7 +26,7 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl git git-lfs openssh-client procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "gitlab-runner-16.6.1-1-linux-${OS_ARCH}-debian-11" \
+      "gitlab-runner-16.7.0-0-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -43,7 +43,7 @@ RUN chmod g+rwX /opt/bitnami
 
 COPY rootfs /
 RUN mkdir /home/gitlab-runner && chmod -R g+rwX /home/gitlab-runner && ln -s /opt/bitnami/common/bin/dumb-init /usr/bin/dumb-init && ln -s /opt/bitnami/scripts/gitlab-runner/entrypoint.sh /entrypoint
-ENV APP_VERSION="16.6.1" \
+ENV APP_VERSION="16.7.0" \
     BITNAMI_APP_NAME="gitlab-runner" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/gitlab-runner/bin:$PATH"
 
