@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-12-22T11:12:26Z" \
+      org.opencontainers.image.created="2023-12-22T12:24:32Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="23.11.3-debian-11-r0" \
-      org.opencontainers.image.title="clickhouse" \
+      org.opencontainers.image.ref.name="1.29.0-debian-11-r0" \
+      org.opencontainers.image.title="kubectl" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="23.11.3"
+      org.opencontainers.image.version="1.29.0"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -23,10 +23,10 @@ ENV HOME="/" \
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
-RUN install_packages ca-certificates curl procps xmlstarlet
+RUN install_packages ca-certificates curl git jq procps
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "clickhouse-23.11.3-0-linux-${OS_ARCH}-debian-11" \
+      "kubectl-1.29.0-0-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -41,16 +41,12 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN chmod g+rwX /opt/bitnami
+RUN mkdir /.kube && chmod g+rwX /.kube
 
-COPY rootfs /
-RUN /opt/bitnami/scripts/clickhouse/postunpack.sh
-ENV APP_VERSION="23.11.3" \
-    BITNAMI_APP_NAME="clickhouse" \
-    PATH="/opt/bitnami/clickhouse/bin:/opt/bitnami/common/bin:$PATH" \
-    clickhouseCTL_API="3"
-
-EXPOSE 8123 9000 9004 9005 9009
+ENV APP_VERSION="1.29.0" \
+    BITNAMI_APP_NAME="kubectl" \
+    PATH="/opt/bitnami/kubectl/bin:$PATH"
 
 USER 1001
-ENTRYPOINT [ "/opt/bitnami/scripts/clickhouse/entrypoint.sh" ]
-CMD [ "/opt/bitnami/scripts/clickhouse/run.sh", "--", "--listen_host=0.0.0.0" ]
+ENTRYPOINT [ "kubectl" ]
+CMD [ "--help" ]
