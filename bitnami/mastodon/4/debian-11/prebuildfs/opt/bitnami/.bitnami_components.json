@@ -21,7 +21,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "3.11.7-0"
+        "version": "3.11.7-2"
     },
     "redis-client": {
         "arch": "amd64",
@@ -39,6 +39,6 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "1.0.7-3"
+        "version": "1.0.7-4"
     }
 }
