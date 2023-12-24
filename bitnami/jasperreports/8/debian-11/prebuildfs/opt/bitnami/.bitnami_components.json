@@ -15,7 +15,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.11.6-0"
+        "version": "10.11.6-1"
     },
     "postgresql-client": {
         "arch": "amd64",
