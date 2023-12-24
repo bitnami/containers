@@ -4,7 +4,7 @@
 version: '2'
 services:
   mariadb:
-    image: docker.io/bitnami/mariadb:11.1
+    image: docker.io/bitnami/mariadb:11.2
     environment:
       - MARIADB_ROOT_PASSWORD=bitnami
     volumes:
