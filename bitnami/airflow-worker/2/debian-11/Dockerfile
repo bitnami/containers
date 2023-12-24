@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-12-02T11:50:16Z" \
+      org.opencontainers.image.created="2023-12-24T11:06:26Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="2.7.3-debian-11-r4" \
+      org.opencontainers.image.ref.name="2.7.3-debian-11-r5" \
       org.opencontainers.image.title="airflow-worker" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="2.7.3"
@@ -26,10 +26,10 @@ SHELL ["/bin/bash", "-o", "errexit", "-o", "nounset", "-o", "pipefail", "-c"]
 RUN install_packages ca-certificates curl git krb5-user libbsd0 libbz2-1.0 libcdt5 libcgraph6 libcom-err2 libcrypt1 libedit2 libexpat1 libffi7 libgcc-s1 libgmp10 libgnutls30 libgss-dev libgssapi-krb5-2 libgvc6 libhogweed6 libicu67 libidn2-0 libk5crypto3 libkeyutils1 libkrb5-3 libkrb5-dev libkrb5support0 libldap-2.4-2 libltdl7 liblz4-1 liblzma5 libmariadb3 libmd0 libncursesw6 libnettle8 libnsl2 libp11-kit0 libpathplan4 libreadline8 libsasl2-2 libsasl2-modules libsqlite3-0 libssl1.1 libstdc++6 libsybdb5 libtasn1-6 libtinfo6 libtirpc3 libunistring2 libuuid1 libxml2 libxslt1.1 locales netbase procps tzdata zlib1g
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
-      "wait-for-port-1.0.7-3-linux-${OS_ARCH}-debian-11" \
-      "python-3.11.6-11-linux-${OS_ARCH}-debian-11" \
+      "wait-for-port-1.0.7-4-linux-${OS_ARCH}-debian-11" \
+      "python-3.11.7-2-linux-${OS_ARCH}-debian-11" \
       "postgresql-client-16.1.0-0-linux-${OS_ARCH}-debian-11" \
-      "ini-file-1.4.6-3-linux-${OS_ARCH}-debian-11" \
+      "ini-file-1.4.6-4-linux-${OS_ARCH}-debian-11" \
       "airflow-worker-2.7.3-5-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
