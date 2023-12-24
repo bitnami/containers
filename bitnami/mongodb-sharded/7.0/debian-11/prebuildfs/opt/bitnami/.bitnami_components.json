@@ -27,6 +27,6 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "4.40.4-1"
+        "version": "4.40.5-0"
     }
 }
