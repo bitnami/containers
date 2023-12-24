@@ -8,10 +8,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-12-02T07:56:09Z" \
+      org.opencontainers.image.created="2023-12-24T08:57:32Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="8.11.2-debian-11-r213" \
+      org.opencontainers.image.ref.name="8.11.2-debian-11-r214" \
       org.opencontainers.image.title="solr" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="8.11.2"
