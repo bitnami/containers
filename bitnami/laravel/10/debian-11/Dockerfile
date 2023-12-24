@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-12-19T18:28:53Z" \
+      org.opencontainers.image.created="2023-12-24T09:50:37Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="10.3.0-debian-11-r0" \
+      org.opencontainers.image.ref.name="10.3.0-debian-11-r1" \
       org.opencontainers.image.title="laravel" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="10.3.0"
@@ -26,7 +26,7 @@ RUN install_packages ca-certificates curl libbrotli1 libbsd0 libbz2-1.0 libcom-e
 RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "python-3.11.7-2-linux-${OS_ARCH}-debian-11" \
-      "php-8.2.13-11-linux-${OS_ARCH}-debian-11" \
+      "php-8.2.14-0-linux-${OS_ARCH}-debian-11" \
       "node-18.19.0-0-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.7-4-linux-${OS_ARCH}-debian-11" \
       "laravel-10.3.0-0-linux-${OS_ARCH}-debian-11" \
