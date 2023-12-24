@@ -3,13 +3,13 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.11.6-0"
+        "version": "10.11.6-1"
     },
     "php": {
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "8.2.13-10"
+        "version": "8.2.14-0"
     },
     "symfony": {
         "arch": "amd64",
