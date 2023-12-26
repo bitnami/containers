@@ -217,8 +217,8 @@ mysql_exec_initial_dump() {
 
             info "Ensure database exists $DB"
 
-            mysql -u "$DB_MASTER_ROOT_USER" <<EOF
-CREATE DATABASE IF NOT EXISTS $DB;
+            mysql -u "$DB_MASTER_ROOT_USER" <<EOF 
+    create database if not exists $DB; 
 EOF
 
             info "Start import dump database $DB"
