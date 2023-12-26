@@ -201,7 +201,7 @@ mysql_exec_initial_dump() {
     for DB in "${databases[@]}"; do
         info "Start dump process database $DB"
         
-        if [[ $DB = "information_schema" ]] || [[ $DB = "performance_schema" ]] || [[ $DB = "sys" ]]; then
+        if [[ $DB = @(information_schema|performance_schema|sys) ]]; then
             info "The table $DB not be imported, skiping"
             continue
         fi
