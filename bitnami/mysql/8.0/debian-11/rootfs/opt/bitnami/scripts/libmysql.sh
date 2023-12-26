@@ -188,7 +188,6 @@ EOF
 #   None
 #########################
 mysql_exec_initial_dump() {
-    DATA_DIR="/bitnami/mysql/data"
     info "MySQL dump master data start..."
     
     mysql -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$DB_MASTER_ROOT_PASSWORD" -e 'RESET MASTER;'
@@ -207,7 +206,7 @@ mysql_exec_initial_dump() {
             continue
         fi
 
-        FILE_LOCATION="$DATA_DIR/dump_$DB.sql"
+        FILE_LOCATION="$DB_DATA_DIR/dump_$DB.sql"
 
         mysqldump --verbose -h "$DB_MASTER_HOST" -P "$DB_MASTER_PORT_NUMBER" -u "$DB_MASTER_ROOT_USER" -p"$DB_MASTER_ROOT_PASSWORD" $DB > $FILE_LOCATION
 
