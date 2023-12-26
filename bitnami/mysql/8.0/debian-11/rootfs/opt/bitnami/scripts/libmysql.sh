@@ -202,7 +202,7 @@ mysql_exec_initial_dump() {
         info "Start dump process database $DB"
         
         if [[ $DB = @(information_schema|performance_schema|sys) ]]; then
-            info "The table $DB not be imported, skiping"
+            info "Skipping default table $DB to be imported"
             continue
         fi
 
