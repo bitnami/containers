@@ -224,7 +224,7 @@ EOF
             info "Finish import dump database $DB"
 
         else
-            info "Fail create dump"
+            info "Error creating dump"
         fi
 
         info "Remove dump file"
