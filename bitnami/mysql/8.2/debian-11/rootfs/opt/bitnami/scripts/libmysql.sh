@@ -213,8 +213,6 @@ mysql_exec_initial_dump() {
         info "Finish dump database $DB"
 
         if [ $? -eq 0 ]; then
-            head -n 15 $FILE_LOCATION
-
             info "Ensure database exists $DB"
 
             mysql -u "$DB_MASTER_ROOT_USER" <<EOF 
