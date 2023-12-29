@@ -108,6 +108,35 @@ Please check the configuration settings for the Kakfa service in the [Kafka's RE
 
 Please check the configuration settings for the Kakfa service in the [Zookeeper's README file](https://github.com/bitnami/containers/tree/main/bitnami/zookeeper#configuration).
 
+## Security
+
+The Schema Registry container can be setup to serve clients securely via TLS. To do so, specify the listener protocol as **https** in the `SCHEMA_REGISTRY_LISTENERS` environment variable (ex. SCHEMA_REGISTRY_LISTENERS=http://0.0.0.0:8081,https://0.0.0.0:8082).
+The keystore and trustore **must** be mounted in the `/opt/bitnami/schema-registry/certs` directory as `ssl.keystore.jks` and `ssl.truststore.jks` respectively. Only jks formats are currently supported and please note that the environment variables `SCHEMA_REGISTRY_SSL_KEYSTORE_LOCATION` or `SCHEMA_REGISTRY_SSL_TRUSTSTORE_LOCATION` **will not override the expected location or file names**, so please follow the instructions provided or you will get an error like this on startup
+    
+    ERROR ==> In order to configure HTTPS access, you must mount your ssl.keystore.jks (and optionally the ssl.truststore.jks) to the /opt/bitnami/schema-registry/certs directory.
+
+Here is a docker-compose.yaml example that exposes a TLS listener on port 8082
+``` yaml
+schema-registry:
+  image: bitnami/schema-registry
+  ports:
+    - "8081:8081"
+    - "8082:8082"
+  depends_on:
+    - kafka
+  environment:
+    - SCHEMA_REGISTRY_KAFKA_BROKERS=PLAINTEXT://kafka:9092
+    - SCHEMA_REGISTRY_HOST_NAME=schema-registry
+    - SCHEMA_REGISTRY_LISTENERS=http://0.0.0.0:8081,https://0.0.0.0:8082
+    - SCHEMA_REGISTRY_SSL_KEYSTORE_PASSWORD=keystore
+    - SCHEMA_REGISTRY_SSL_TRUSTSTORE_PASSWORD=keystore
+    - SCHEMA_REGISTRY_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM=none
+    - SCHEMA_REGISTRY_CLIENT_AUTHENTICATION=REQUESTED
+  volumes:
+    - ./keystore.jks:/opt/bitnami/schema-registry/certs/keystore.jks:ro
+    - ./truststore.jks:/opt/bitnami/schema-registry/certs/truststore.jks:ro
+```
+
 ## Contributing
 
 We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
