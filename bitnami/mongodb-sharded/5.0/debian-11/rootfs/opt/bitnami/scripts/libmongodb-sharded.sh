@@ -191,7 +191,7 @@ mongodb_sharded_set_sharding_conf() {
 mongodb_sharded_join_shard_cluster() {
     mongodb_start_bg
     info "Joining the shard cluster"
-    if ! retry_while "mongodb_sharded_is_join_shard_pending $MONGODB_REPLICA_SET_NAME/$MONGODB_ADVERTISED_HOSTNAME:$MONGODB_PORT_NUMBER $MONGODB_MONGOS_HOST $MONGODB_MONGOS_PORT_NUMBER root $MONGODB_ROOT_PASSWORD" "$MONGODB_MAX_TIMEOUT"; then
+    if ! retry_while "mongodb_sharded_is_join_shard_pending $MONGODB_REPLICA_SET_NAME/$MONGODB_ADVERTISED_HOSTNAME:$MONGODB_PORT_NUMBER $MONGODB_MONGOS_HOST $MONGODB_MONGOS_PORT_NUMBER root $MONGODB_ROOT_PASSWORD" "$MONGODB_INIT_RETRY_ATTEMPTS" "$MONGODB_INIT_RETRY_DELAY"; then
         error "Unable to join the sharded cluster"
         exit 1
     fi
@@ -283,11 +283,11 @@ EOF
     }
 
     mongodb_start_bg
-    if ! retry_while "mongodb_sharded_is_svr_initiated" "$MONGODB_MAX_TIMEOUT"; then
+    if ! retry_while "mongodb_sharded_is_svr_initiated" "$MONGODB_INIT_RETRY_ATTEMPTS" "$MONGODB_INIT_RETRY_DELAY"; then
         error "Unable to initialize primary config server: cannot initiate"
         exit 1
     fi
-    if ! retry_while "mongodb_is_primary_node_up 127.0.0.1 $MONGODB_PORT_NUMBER admin" "$MONGODB_MAX_TIMEOUT"; then
+    if ! retry_while "mongodb_is_primary_node_up 127.0.0.1 $MONGODB_PORT_NUMBER admin" "$MONGODB_INIT_RETRY_ATTEMPTS" "$MONGODB_INIT_RETRY_DELAY"; then
         error "Unable to initialize primary config server: cannot become primary"
         exit 1
     fi
@@ -329,7 +329,7 @@ mongodb_sharded_reconfigure_svr_primary() {
     info "Configuring MongoDB primary node...: $node"
     wait-for-port --timeout 360 "$MONGODB_PORT_NUMBER"
 
-    if ! retry_while "mongodb_sharded_is_svr_primary_reconfigured $node" "$MONGODB_MAX_TIMEOUT"; then
+    if ! retry_while "mongodb_sharded_is_svr_primary_reconfigured $node" "$MONGODB_INIT_RETRY_ATTEMPTS" "$MONGODB_INIT_RETRY_DELAY"; then
         error "Unable to initialize primary config server"
         exit 1
     fi
