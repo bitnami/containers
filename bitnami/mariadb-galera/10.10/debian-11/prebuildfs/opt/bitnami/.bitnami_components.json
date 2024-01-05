@@ -9,6 +9,6 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "10.10.7-2"
+        "version": "10.10.7-3"
     }
 }
