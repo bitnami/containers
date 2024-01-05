@@ -228,9 +228,6 @@ pgbouncer_initialize() {
         if ! is_empty_value "$PGBOUNCER_AUTH_USER"; then
             database_value+=" auth_user=$PGBOUNCER_AUTH_USER"
         fi
-        if ! is_empty_value "$PGBOUNCER_AUTH_DBNAME"; then
-            database_value+=" auth_dbname=$PGBOUNCER_AUTH_DBNAME"
-        fi
         if ! is_empty_value "$PGBOUNCER_CONNECT_QUERY"; then
             database_value+=" connect_query='${PGBOUNCER_CONNECT_QUERY}'"
         fi
