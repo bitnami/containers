@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-01-02T12:56:33Z" \
+      org.opencontainers.image.created="2024-01-06T03:46:59Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="7.0.4-debian-11-r4" \
+      org.opencontainers.image.ref.name="7.0.5-debian-11-r0" \
       org.opencontainers.image.title="mongodb-sharded" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="7.0.4"
+      org.opencontainers.image.version="7.0.5"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -30,7 +30,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
       "yq-4.40.5-0-linux-${OS_ARCH}-debian-11" \
       "wait-for-port-1.0.7-4-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.6-4-linux-${OS_ARCH}-debian-11" \
-      "mongodb-7.0.4-1-linux-${OS_ARCH}-debian-11" \
+      "mongodb-7.0.5-0-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -50,7 +50,7 @@ RUN ln -s /opt/bitnami/scripts/mongodb-sharded/run.sh /run.sh
 
 COPY rootfs /
 RUN /opt/bitnami/scripts/mongodb-sharded/postunpack.sh
-ENV APP_VERSION="7.0.4" \
+ENV APP_VERSION="7.0.5" \
     BITNAMI_APP_NAME="mongodb-sharded" \
     PATH="/opt/bitnami/mongodb/bin:/opt/bitnami/common/bin:$PATH"
 
