@@ -581,3 +581,50 @@ is_zookeeper_running() {
 is_zookeeper_not_running() {
     ! is_zookeeper_running
 }
+
+########################
+# Check Zookeeper health
+# Globals:
+#   ZOOKEEPER_*
+# Arguments:
+#   None
+# Returns:
+#   0 when healthy
+#   1 when unhealthy
+#########################
+zookeeper_healthcheck() {
+    local command=""
+    local args=()
+    local port="$ZOO_PORT_NUMBER"
+
+    if [[ "$ZOO_TLS_CLIENT_ENABLE" = true ]]; then
+        port="$ZOO_TLS_PORT_NUMBER"
+        command="openssl"
+        args+=("s_client" "-quiet" "-crlf" "-connect" "localhost:${port}")
+
+        debug "Running healthcheck command: 'echo \"ruok\" | timeout ${ZOO_HC_TIMEOUT} ${command} ${args[*]} \
+            -key <(openssl pkcs12 -in ${ZOO_TLS_CLIENT_KEYSTORE_FILE} -nodes -nocerts -passin pass:\$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD) \
+            -cert <(openssl pkcs12 -in ${ZOO_TLS_CLIENT_KEYSTORE_FILE} -nodes -nokeys -passin pass:\$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD)'"
+        response=$(echo "ruok" | timeout "$ZOO_HC_TIMEOUT" "$command" "${args[@]}" \
+            -key <(openssl pkcs12 -in "$ZOO_TLS_CLIENT_KEYSTORE_FILE" -nodes -nocerts -passin pass:"$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD") \
+            -cert <(openssl pkcs12 -in "$ZOO_TLS_CLIENT_KEYSTORE_FILE" -nodes -nokeys -passin pass:"$ZOO_TLS_CLIENT_KEYSTORE_PASSWORD") 2> /dev/null
+        )
+    else
+        command="nc"
+        # Only add flag '-q' if OpenBSD netcat is used
+        if nc -help 2>&1 | grep -q "\[-q seconds\]"; then
+            args+=("-q" "1")
+        fi
+        args+=("-w" "$ZOO_HC_TIMEOUT" "localhost" "$port")
+        debug "Running healthcheck command: 'echo \"ruok\" | timeout ${ZOO_HC_TIMEOUT} ${command} ${args[*]}'"
+        response=$(echo "ruok" | timeout "$ZOO_HC_TIMEOUT" "$command" "${args[@]}")
+    fi
+
+    if [[ "$response" =~ "imok" ]]; then
+        info "Zookeeper healthcheck succeeded"
+        return 0
+    else
+        error "Zookeeper healthcheck failed."
+        return 1
+    fi
+}
