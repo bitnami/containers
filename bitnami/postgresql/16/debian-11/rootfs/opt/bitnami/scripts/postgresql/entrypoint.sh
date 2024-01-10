@@ -16,6 +16,9 @@ set -o pipefail
 # Load PostgreSQL environment variables
 . /opt/bitnami/scripts/postgresql-env.sh
 
+# Move config files from template directory 
+cp -pR /opt/bitnami/postgresql/temp-conf/* /opt/bitnami/postgresql/conf/
+
 print_welcome_page
 
 # Enable the nss_wrapper settings
