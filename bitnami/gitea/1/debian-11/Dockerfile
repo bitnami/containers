@@ -7,10 +7,10 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2023-12-27T13:30:22Z" \
+      org.opencontainers.image.created="2024-01-10T10:35:04Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="1.21.3-debian-11-r2" \
+      org.opencontainers.image.ref.name="1.21.3-debian-11-r3" \
       org.opencontainers.image.title="gitea" \
       org.opencontainers.image.vendor="VMware, Inc." \
       org.opencontainers.image.version="1.21.3"
@@ -28,8 +28,8 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "wait-for-port-1.0.7-4-linux-${OS_ARCH}-debian-11" \
       "render-template-1.0.6-4-linux-${OS_ARCH}-debian-11" \
-      "ini-file-1.4.6-4-linux-${OS_ARCH}-debian-11" \
-      "gitea-1.21.3-0-linux-${OS_ARCH}-debian-11" \
+      "ini-file-1.4.6-5-linux-${OS_ARCH}-debian-11" \
+      "gitea-1.21.3-1-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
