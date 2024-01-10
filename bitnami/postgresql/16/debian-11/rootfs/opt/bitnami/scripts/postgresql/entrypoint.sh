@@ -17,7 +17,7 @@ set -o pipefail
 . /opt/bitnami/scripts/postgresql-env.sh
 
 # Move config files from template directory 
-cp -pR /opt/bitnami/postgresql/temp-conf/* /opt/bitnami/postgresql/conf/
+cp -puR /opt/bitnami/postgresql/temp-conf/* /opt/bitnami/postgresql/conf/
 
 print_welcome_page
 
