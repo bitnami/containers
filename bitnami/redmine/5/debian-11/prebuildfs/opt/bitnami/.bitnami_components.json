@@ -15,7 +15,7 @@
         "arch": "amd64",
         "distro": "debian-11",
         "type": "NAMI",
-        "version": "5.1.1-1"
+        "version": "5.1.1-2"
     },
     "ruby": {
         "arch": "amd64",
