@@ -66,9 +66,26 @@ docker build -t bitnami/APP:latest .
 
 ## Configuration
 
-You can use some environment variable in order to configure the deployment of spring cloud skipper.
+### Environment variables
 
-### Configuring database
+| Name                                          | Description                                                            | Default Value                                      | Can be set |
+|-----------------------------------------------|------------------------------------------------------------------------|----------------------------------------------------|------------|
+| `$SPRING_CLOUD_SKIPPER_BASE_DIR`              | Base path for SPRING CLOUD SKIPPER files.                              | `${BITNAMI_ROOT_DIR}/spring-cloud-skipper`         |            |
+| `$SPRING_CLOUD_SKIPPER_VOLUME_DIR`            | SPRING CLOUD SKIPPER directory for persisted files.                    | `${BITNAMI_VOLUME_DIR}/spring-cloud-skipper`       |            |
+| `$SPRING_CLOUD_SKIPPER_CONF_DIR`              | SPRING CLOUD SKIPPER configuration directory.                          | `${SPRING_CLOUD_SKIPPER_BASE_DIR}/conf`            |            |
+| `$SPRING_CLOUD_SKIPPER_CONF_FILE`             | Main SPRING CLOUD SKIPPER configuration file.                          | `${SPRING_CLOUD_SKIPPER_CONF_DIR}/application.yml` |            |
+| `$SPRING_CLOUD_SKIPPER_M2_DIR`                | SPRING CLOUD SKIPPER maven root dir.                                   | `/.m2`                                             |            |
+| `$SPRING_CLOUD_SKIPPER_DAEMON_USER`           | Users that will execute the SPRING CLOUD SKIPPER Server process.       | `dataflow`                                         |            |
+| `$SPRING_CLOUD_SKIPPER_DAEMON_GROUP`          | Group that will execute the SPRING CLOUD SKIPPER Server process.       | `dataflow`                                         |            |
+| `$SERVER_PORT`                                | Custom port number to use for the SPRING CLOUD SKIPPER Server service. |                                                    | &check;    |
+| `$SPRING_CLOUD_CONFIG_ENABLED`                | Whether to load config using Spring Cloud Config Servie.               | `false`                                            | &check;    |
+| `$SPRING_CLOUD_KUBERNETES_SECRETS_ENABLE_API` | Whether to load config using Kubernetes API.                           | `false`                                            | &check;    |
+| `$SPRING_CLOUD_KUBERNETES_CONFIG_NAME`        | Name of the ConfigMap that contains the configuration.                 |                                                    | &check;    |
+| `$SPRING_CLOUD_KUBERNETES_SECRETS_PATHS`      | Paths where the secrets are going to be mount.                         |                                                    | &check;    |
+| `$JAVA_OPTS`                                  | JVM options                                                            |                                                    | &check;    |
+
+
+#### Configuring database
 
 A relational database is used to store stream and task definitions as well as the state of executed tasks. Spring Cloud Skipper provides schemas for H2, MySQL, Oracle, PostgreSQL, Db2, and SQL Server. Use the following environment to configure the connection.
 
