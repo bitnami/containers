@@ -103,6 +103,38 @@ docker-compose up supabase-realtime
 
 ## Configuration
 
+### Environment variables
+
+| Name                                | Description                                                                  | Default Value                                         | Can be set |
+|-------------------------------------|------------------------------------------------------------------------------|-------------------------------------------------------|------------|
+| `$SUPABASE_REALTIME_BASE_DIR`       | Supabase-realtime installation directory.                                    | `${BITNAMI_ROOT_DIR}/supabase-realtime`               |            |
+| `$SUPABASE_REALTIME_LOGS_DIR`       | Directory where Supabase-realtime logs are stored.                           | `${SUPABASE_REALTIME_BASE_DIR}/logs`                  |            |
+| `$SUPABASE_REALTIME_LOG_FILE`       | Directory where Supabase-realtime logs are stored.                           | `${SUPABASE_REALTIME_LOGS_DIR}/supabase-realtime.log` |            |
+| `$SUPABASE_REALTIME_BIN_DIR`        | Supabase-realtime directory for binary executables.                          | `${SUPABASE_REALTIME_BASE_DIR}/bin`                   |            |
+| `$SUPABASE_REALTIME_TMP_DIR`        | Directory where Supabase-realtime temporary files are stored.                | `${SUPABASE_REALTIME_BASE_DIR}/tmp`                   |            |
+| `$SUPABASE_REALTIME_PID_FILE`       | Path to the PID file for Supabase-realtime.                                  | `${SUPABASE_REALTIME_TMP_DIR}/supabase-realtime.pid`  |            |
+| `$SUPABASE_REALTIME_EXTRA_ENV_FILE` | File to store extra environment variables for the harbor-jobservice service. | `${SUPABASE_REALTIME_BASE_DIR}/.env`                  |            |
+| `$DB_HOST`                          | Database host                                                                | `localhost`                                           | &check;    |
+| `$DB_PORT`                          | Database port number                                                         | `5432`                                                | &check;    |
+| `$DB_NAME`                          | Database name                                                                | `postgres`                                            | &check;    |
+| `$DB_USER`                          | Database user username                                                       | `postgres`                                            | &check;    |
+| `$DB_PASSWORD`                      | Database password                                                            |                                                       | &check;    |
+| `$DB_SSL`                           | Database SSL connection enabled                                              | `disable`                                             | &check;    |
+| `$API_JWT_SECRET`                   | API Secret                                                                   |                                                       | &check;    |
+| `$SECRET_KEY_BASE`                  | Key Base Secret                                                              |                                                       | &check;    |
+| `$PORT`                             | Service Port                                                                 | `9500`                                                | &check;    |
+| `$FLY_APP_NAME`                     | App Name                                                                     | `realtime`                                            | &check;    |
+| `$FLY_ALLOC_ID`                     | Alloc ID                                                                     | `realtime`                                            | &check;    |
+| `$ERL_AFLAGS`                       | Flags                                                                        | `-proto_dist inet_tcp`                                | &check;    |
+| `$REPLICATION_MODE`                 | Replication Mode                                                             | `RLS`                                                 | &check;    |
+| `$REPLICATION_POLL_INTERVAL`        | Replication pool interval                                                    | `100`                                                 | &check;    |
+| `$SECURE_CHANNELS`                  | Secure channels                                                              | `true`                                                | &check;    |
+| `$SLOT_NAME`                        | Slot name                                                                    | `supabase_realtime_rls`                               | &check;    |
+| `$TEMPORARY_SLOT`                   | Temporary Slot                                                               | `true`                                                | &check;    |
+| `$SUPABASE_REALTIME_DAEMON_USER`    | postgrest system user.                                                       | `supabase`                                            |            |
+| `$SUPABASE_REALTIME_DAEMON_GROUP`   | postgrest system group.                                                      | `supabase`                                            |            |
+
+
 ### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `supabase-realtime --help` you can follow the example below:
