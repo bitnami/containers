@@ -59,6 +59,55 @@ Non-root container images add an extra layer of security and are generally recom
 
 ## Configuration
 
+### Environment variables
+
+| Name                                         | Description                                                                | Default Value                   | Can be set |
+|----------------------------------------------|----------------------------------------------------------------------------|---------------------------------|------------|
+| `$JAEGER_BASE_DIR`                           | Jaeger installation directory.                                             | `${BITNAMI_ROOT_DIR}/jaeger`    |            |
+| `$JAEGER_BIN_DIR`                            | Jaeger directory for binary files.                                         | `${JAEGER_BASE_DIR}/bin`        |            |
+| `$JAEGER_CONF_DIR`                           | Jaeger configuration directory.                                            | `${JAEGER_BASE_DIR}/conf`       |            |
+| `$JAEGER_CONF_FILE`                          | Jaeger configuration file.                                                 | `${JAEGER_CONF_DIR}/jaeger.yml` |            |
+| `$JAEGER_LOGS_DIR`                           | Jaeger logs directory.                                                     | `${JAEGER_BASE_DIR}/logs`       |            |
+| `$JAEGER_LOG_FILE`                           | Jaeger log file.                                                           | `${JAEGER_LOGS_DIR}/jaeger.log` |            |
+| `$JAEGER_TMP_DIR`                            | Jaeger temporary directory.                                                | `${JAEGER_BASE_DIR}/tmp`        |            |
+| `$JAEGER_PID_FILE`                           | Jaeger PID file.                                                           | `${JAEGER_TMP_DIR}/jaeger.pid`  |            |
+| `$JAEGER_DAEMON_USER`                        | Jaeger daemon system user.                                                 | `jaeger`                        |            |
+| `$JAEGER_DAEMON_GROUP`                       | Jaeger daemon system group.                                                | `jaeger`                        |            |
+| `$JAEGER_USERNAME`                           | Jaeger username.                                                           | `user`                          | &check;    |
+| `$JAEGER_PASSWORD`                           | Jaeger password.                                                           | `bitnami`                       | &check;    |
+| `$JAEGER_AGENT_ZIPKIN_UDP_PORT_NUMBER`       | Jaeger Agent UDP port. Accept zipkin.thrift over compact thrift protocol   | `5775`                          | &check;    |
+| `$JAEGER_AGENT_COMPACT_UDP_PORT_NUMBER`      | Jaeger Agent UDP port. Accept jaeger.thrift over compact thrift protocol   | `6831`                          | &check;    |
+| `$JAEGER_AGENT_BINARY_UDP_PORT_NUMBER`       | Jaeger Agent UDP port. Accept jaeger.thrift over binary thrift protocol    | `6832`                          | &check;    |
+| `$JAEGER_AGENT_HTTP_PORT_NUMBER`             | Jaeger Agent HTTP port. Serve configs.                                     | `5778`                          | &check;    |
+| `$JAEGER_QUERY_HTTP_PORT_NUMBER`             | Jaeger Query HTTP port.                                                    | `16686`                         | &check;    |
+| `$JAEGER_QUERY_GRPC_PORT_NUMBER`             | Jaeger Query GRPC port.                                                    | `16685`                         | &check;    |
+| `$JAEGER_COLLECTOR_ZIPKIN_PORT_NUMBER`       | Jaeger Collector Zipkin compatible port.                                   |                                 | &check;    |
+| `$JAEGER_COLLECTOR_HTTP_PORT_NUMBER`         | Jaeger Collector HTTP port. Accept jaeger.thrift directly from clients     | `14268`                         | &check;    |
+| `$JAEGER_COLLECTOR_GRPC_PORT_NUMBER`         | Jaeger Collector GRPC port. Accept jaeger.thrift directly from clients     | `14250`                         | &check;    |
+| `$JAEGER_ADMIN_HTTP_PORT_NUMBER`             | Jaeger Admin port.                                                         | `14269`                         | &check;    |
+| `$JAEGER_AGENT_ZIPKIN_UDP_HOST`              | Jaeger Agent UDP host. Accept zipkin.thrift over compact thrift protocol   |                                 | &check;    |
+| `$JAEGER_AGENT_COMPACT_UDP_HOST`             | Jaeger Agent UDP host. Accept jaeger.thrift over compact thrift protocol   |                                 | &check;    |
+| `$JAEGER_AGENT_BINARY_UDP_HOST`              | Jaeger Agent UDP host. Accept jaeger.thrift over binary thrift protocol    |                                 | &check;    |
+| `$JAEGER_AGENT_HTTP_HOST`                    | Jaeger Agent HTTP host. Serve configs.                                     |                                 | &check;    |
+| `$JAEGER_QUERY_HTTP_HOST`                    | Jaeger Query HTTP host.                                                    |                                 | &check;    |
+| `$JAEGER_QUERY_GRPC_HOST`                    | Jaeger Query GRPC host.                                                    |                                 | &check;    |
+| `$JAEGER_COLLECTOR_HTTP_HOST`                | Jaeger Collector Zipkin compatible host.                                   |                                 | &check;    |
+| `$JAEGER_COLLECTOR_GRPC_HOST`                | Jaeger Collector HTTP host. Accept jaeger.thrift directly from clients     |                                 | &check;    |
+| `$JAEGER_ADMIN_HTTP_HOST`                    | Jaeger Collector GRPC host. Accept jaeger.thrift directly from clients     |                                 | &check;    |
+| `$JAEGER_COLLECTOR_ZIPKIN_HOST`              | Jaeger Admin host.                                                         |                                 | &check;    |
+| `$JAEGER_APACHE_QUERY_HTTP_PORT_NUMBER`      | Jaeger Query UI HTTP port, exposed via Apache with basic authentication.   |                                 | &check;    |
+| `$JAEGER_APACHE_QUERY_HTTPS_PORT_NUMBER`     | Jaeger Query UI HTTPS port, exposed via Apache with basic authentication.  |                                 | &check;    |
+| `$JAEGER_APACHE_COLLECTOR_HTTP_PORT_NUMBER`  | Jaeger Collector HTTP port, exposed via Apache with basic authentication.  | `14270`                         | &check;    |
+| `$JAEGER_APACHE_COLLECTOR_HTTPS_PORT_NUMBER` | Jaeger Collector HTTPS port, exposed via Apache with basic authentication. | `14271`                         | &check;    |
+| `$SPAN_STORAGE_TYPE`                         | Jaeger storage type.                                                       | `cassandra`                     | &check;    |
+| `$JAEGER_CASSANDRA_HOST`                     | Cassandra server host.                                                     | `127.0.0.1`                     | &check;    |
+| `$JAEGER_CASSANDRA_PORT_NUMBER`              | Cassandra server port.                                                     | `9042`                          | &check;    |
+| `$JAEGER_CASSANDRA_KEYSPACE`                 | Cassandra keyspace.                                                        | `bn_jaeger`                     | &check;    |
+| `$JAEGER_CASSANDRA_DATACENTER`               | Cassandra keyspace.                                                        | `dc1`                           | &check;    |
+| `$JAEGER_CASSANDRA_USER`                     | Cassandra user name.                                                       | `cassandra`                     | &check;    |
+| `$JAEGER_CASSANDRA_PASSWORD`                 | Cassandra user password.                                                   |                                 | &check;    |
+
+
 ### Running commands
 
 To run commands inside this container you can use `docker run`, for example to execute `jaeger-all-in-one --help` you can follow the example below:
