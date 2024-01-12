@@ -1,0 +1,8 @@
+{
+    "minio-client": {
+        "arch": "amd64",
+        "distro": "debian-11",
+        "type": "NAMI",
+        "version": "2024.1.11-0"
+    }
+}
