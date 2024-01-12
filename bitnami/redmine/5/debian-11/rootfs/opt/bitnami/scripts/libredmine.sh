@@ -156,6 +156,7 @@ redmine_initialize() {
         elif [[ "$db_type" = "postgresql" ]]; then
             redmine_db_conf_set "${REDMINE_ENV}.adapter" "postgresql"
             redmine_db_conf_set "${REDMINE_ENV}.encoding" "utf8"
+            redmine_db_conf_set "${REDMINE_ENV}.variables.transaction_isolation" "read committed"
         fi
 
         info "Configuring Redmine application with settings provided via environment variables"
