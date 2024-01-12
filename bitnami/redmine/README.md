@@ -192,9 +192,49 @@ docker run -d --name redmine \
 
 ### Environment variables
 
+| Name                                | Description                                                                                                                     | Default Value                                                                                               | Can be set |
+|-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|------------|
+| `$REDMINE_BASE_DIR`                 | Redmine installation directory.                                                                                                 | `${BITNAMI_ROOT_DIR}/redmine`                                                                               |            |
+| `$REDMINE_CONF_DIR`                 | Redmine directory for configuration files.                                                                                      | `${REDMINE_BASE_DIR}/config`                                                                                |            |
+| `$REDMINE_VOLUME_DIR`               | Redmine directory for mounted configuration files.                                                                              | `${BITNAMI_VOLUME_DIR}/redmine`                                                                             |            |
+| `$REDMINE_DATA_TO_PERSIST`          | Files to persist relative to the Redmine installation directory. To provide multiple values, separate them with a whitespace.   | `${REDMINE_CONF_DIR}/configuration.yml ${REDMINE_CONF_DIR}/database.yml files plugins public/plugin_assets` | &check;    |
+| `$REDMINE_DAEMON_USER`              | Redmine system user.                                                                                                            | `redmine`                                                                                                   |            |
+| `$REDMINE_DAEMON_USER`              | Redmine system user.                                                                                                            | `daemon`                                                                                                    |            |
+| `$REDMINE_DAEMON_GROUP`             | Redmine system group.                                                                                                           | `redmine`                                                                                                   |            |
+| `$REDMINE_DAEMON_GROUP`             | Redmine system group.                                                                                                           | `daemon`                                                                                                    |            |
+| `$REDMINE_PORT_NUMBER`              | Port number in which Redmine will run.                                                                                          | `3000`                                                                                                      | &check;    |
+| `$REDMINE_ENV`                      | Redmine environment mode. Allowed values: *development*, *production*, *test*.                                                  | `production`                                                                                                | &check;    |
+| `$REDMINE_LANGUAGE`                 | Redmine site default language.                                                                                                  | `en`                                                                                                        | &check;    |
+| `$REDMINE_REST_API_ENABLED`         | Whether to allow REST API calls to Redmine.                                                                                     | `0`                                                                                                         | &check;    |
+| `$REDMINE_LOAD_DEFAULT_DATA`        | Whether to generate default data for Redmine.                                                                                   | `yes`                                                                                                       | &check;    |
+| `$REDMINE_SKIP_BOOTSTRAP`           | Whether to perform initial bootstrapping for the application.                                                                   |                                                                                                             | &check;    |
+| `$REDMINE_QUEUE_ADAPTER`            | Active job queue adapter. You may need to install additional dependencies if you select a value other than "async" or "inline". | `inline`                                                                                                    | &check;    |
+| `$REDMINE_USERNAME`                 | Redmine user name.                                                                                                              | `user`                                                                                                      | &check;    |
+| `$REDMINE_PASSWORD`                 | Redmine user password.                                                                                                          | `bitnami1`                                                                                                  | &check;    |
+| `$REDMINE_EMAIL`                    | Redmine user e-mail address.                                                                                                    | `user@example.com`                                                                                          | &check;    |
+| `$REDMINE_FIRST_NAME`               | Redmine user first name.                                                                                                        | `UserName`                                                                                                  | &check;    |
+| `$REDMINE_LAST_NAME`                | Redmine user last name.                                                                                                         | `LastName`                                                                                                  | &check;    |
+| `$REDMINE_SMTP_HOST`                | Redmine SMTP server host.                                                                                                       |                                                                                                             | &check;    |
+| `$REDMINE_SMTP_PORT_NUMBER`         | Redmine SMTP server port number.                                                                                                |                                                                                                             | &check;    |
+| `$REDMINE_SMTP_USER`                | Redmine SMTP server user.                                                                                                       |                                                                                                             | &check;    |
+| `$REDMINE_SMTP_PASSWORD`            | Redmine SMTP server user password.                                                                                              |                                                                                                             | &check;    |
+| `$REDMINE_SMTP_PROTOCOL`            | Redmine SMTP server protocol to use.                                                                                            |                                                                                                             | &check;    |
+| `$REDMINE_SMTP_AUTH`                | Redmine SMTP server protocol to use. Allowed values: *login*, *plain*, *cram_md5*.                                              | `login`                                                                                                     | &check;    |
+| `$REDMINE_SMTP_OPENSSL_VERIFY_MODE` | SMTP sets the level of verification for the SSL certificate presented by the server. Allowed values: *none*, *peer*.            | `peer`                                                                                                      | &check;    |
+| `$REDMINE_SMTP_CA_FILE`             | Path to the SMTP CA file.                                                                                                       | `/etc/ssl/certs/ca-certificates.crt`                                                                        | &check;    |
+| `$REDMINE_DATABASE_TYPE`            | Database type to be used for the Redmine installation. Allowed values: *mariadb*, *postgresql*.                                 | `mariadb`                                                                                                   | &check;    |
+| `$REDMINE_DEFAULT_DATABASE_HOST`    | Default database server host.                                                                                                   | `mariadb`                                                                                                   |            |
+| `$REDMINE_DEFAULT_DATABASE_HOST`    | Default database server host.                                                                                                   | `127.0.0.1`                                                                                                 |            |
+| `$REDMINE_DATABASE_HOST`            | Database server host.                                                                                                           | `$REDMINE_DEFAULT_DATABASE_HOST`                                                                            | &check;    |
+| `$REDMINE_DATABASE_PORT_NUMBER`     | Database server port.                                                                                                           | `3306`                                                                                                      | &check;    |
+| `$REDMINE_DATABASE_NAME`            | Database name.                                                                                                                  | `bitnami_redmine`                                                                                           | &check;    |
+| `$REDMINE_DATABASE_USER`            | Database user name.                                                                                                             | `bn_redmine`                                                                                                | &check;    |
+| `$REDMINE_DATABASE_PASSWORD`        | Database user password.                                                                                                         |                                                                                                             | &check;    |
+
+
 When you start the Redmine image, you can adjust the configuration of the instance by passing one or more environment variables either on the docker-compose file or on the `docker run` command line. If you want to add a new environment variable:
 
-- For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redmine/docker-compose.yml) file present in this repository:
+* For docker-compose add the variable name and value under the application section in the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redmine/docker-compose.yml) file present in this repository:
 
     ```yaml
     redmine:
@@ -204,7 +244,7 @@ When you start the Redmine image, you can adjust the configuration of the instan
       ...
     ```
 
-- For manual execution add a `--env` option with each variable and value:
+* For manual execution add a `--env` option with each variable and value:
 
     ```console
     $ docker run -d --name redmine -p 80:8080 -p 443:8443 \
@@ -214,78 +254,13 @@ When you start the Redmine image, you can adjust the configuration of the instan
       bitnami/redmine:latest
     ```
 
-Available environment variables:
+### Examples
 
-#### User and Site configuration
-
-- `REDMINE_PORT_NUMBER`: Port number in which Redmine will run. Default: **3000**
-- `REDMINE_USERNAME`: Redmine application username. Default: **user**
-- `REDMINE_PASSWORD`: Redmine application password. Default: **bitnami1**
-- `REDMINE_EMAIL`: Redmine application email. Default: **user@example.com**
-- `REDMINE_FIRST_NAME`: Redmine user first name. Default: **UserName**
-- `REDMINE_LAST_NAME`: Redmine user last name. Default: **LastName**
-- `REDMINE_LANGUAGE`: Redmine site default language. Default: **en**
-- `REDMINE_REST_API_ENABLED`: Whether to allow REST API calls to Redmine. Default: **0**
-- `REDMINE_LOAD_DEFAULT_DATA`: Whether to load default configuration data for Redmine. Default: **yes**
-- `REDMINE_SKIP_BOOTSTRAP`: Whether to skip performing the initial bootstrapping for the application. This is necessary in case you use a database that already has Redmine data. Default: **no**
-- `REDMINE_QUEUE_ADAPTER`: Active job queue adapter. You may need to install additional dependencies if you select a value other than `async` or `inline`. Notice `async` is [not recommended](https://www.redmine.org/issues/36695) by Redmine developers in production environments. Default: **inline**
-
-#### Database connection configuration
-
-- `REDMINE_DATABASE_TYPE`: Database type to be used for the Redmine installation. Allowed values: *mariadb*, *postgresql*. Default: **mariadb**
-- `REDMINE_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
-- `REDMINE_DATABASE_PORT_NUMBER`: Port used by the MariaDB or MySQL server. Default: **3306**
-- `REDMINE_DATABASE_NAME`: Database name that Redmine will use to connect with the database. Default: **bitnami_redmine**
-- `REDMINE_DATABASE_USER`: Database user that Redmine will use to connect with the database. Default: **bn_redmine**
-- `REDMINE_DATABASE_PASSWORD`: Database password that Redmine will use to connect with the database. No default.
-- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### Create a MariaDB or MySQL database for Redmine using mysql-client
-
-- `MYSQL_CLIENT_DATABASE_HOST`: Hostname for the MariaDB or MySQL server. Default: **mariadb**
-- `MYSQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the MariaDB or MySQL server. Default: **3306**
-- `MYSQL_CLIENT_DATABASE_ROOT_USER`: Database admin user. Default: **root**
-- `MYSQL_CLIENT_DATABASE_ROOT_PASSWORD`: Database password for the database admin user. No default.
-- `MYSQL_CLIENT_CREATE_DATABASE_NAME`: New database to be created by the mysql client module. No default.
-- `MYSQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the mysql client module. No default.
-- `MYSQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `MYSQL_CLIENT_CREATE_DATABASE_USER` user. No default.
-- `MYSQL_CLIENT_CREATE_DATABASE_CHARACTER_SET`: Character set to use for the new database. No default.
-- `MYSQL_CLIENT_CREATE_DATABASE_COLLATE`: Database collation to use for the new database. No default.
-- `MYSQL_CLIENT_ENABLE_SSL`: Whether to enable SSL connections for the new database. Default: **no**
-- `MYSQL_CLIENT_SSL_CA_FILE`: Path to the SSL CA file for the new database. No default.
-- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### Create a PostgreSQL database for Redmine using postgresql-client
-
-- `POSTGRESQL_CLIENT_DATABASE_HOST`: Hostname for the PostgreSQL server. Default: **postgresql**
-- `POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER`: Port used by the PostgreSQL server. Default: **5432**
-- `POSTGRESQL_CLIENT_POSTGRES_USER`: Database admin user. Default: **root**
-- `POSTGRESQL_CLIENT_POSTGRES_PASSWORD`: Database password for the database admin user. No defaults.
-- `POSTGRESQL_CLIENT_CREATE_DATABASE_NAMES`: List of new databases to be created by the postgresql-client module. No defaults.
-- `POSTGRESQL_CLIENT_CREATE_DATABASE_USER`: New database user to be created by the postgresql-client module. No defaults.
-- `POSTGRESQL_CLIENT_CREATE_DATABASE_PASSWORD`: Database password for the `POSTGRESQL_CLIENT_CREATE_DATABASE_USER` user. No defaults.
-- `POSTGRESQL_CLIENT_CREATE_DATABASE_EXTENSIONS`: PostgreSQL extensions to enable in the specified database during the first initialization. No defaults.
-- `POSTGRESQL_CLIENT_EXECUTE_SQL`: SQL code to execute in the PostgreSQL server. No defaults.
-- `ALLOW_EMPTY_PASSWORD`: It can be used to allow blank passwords. Default: **no**
-
-#### SMTP Configuration
-
-To configure Redmine to send email using SMTP you can set the following environment variables:
-
-- `REDMINE_SMTP_HOST`: SMTP host.
-- `REDMINE_SMTP_PORT`: SMTP port.
-- `REDMINE_SMTP_USER`: SMTP account user.
-- `REDMINE_SMTP_PASSWORD`: SMTP account password.
-- `REDMINE_SMTP_PROTOCOL`: If specified, SMTP protocol to use. Allowed values: *tls*, *ssl*. No default.
-- `REDMINE_SMTP_AUTH`: SMTP authentication method. Allowed values: *login*, *plain*, *cram_md5*. Default: **login**.
-
-#### Examples
-
-##### SMTP configuration using a Gmail account
+#### SMTP configuration using a Gmail account
 
 This would be an example of SMTP configuration using a Gmail account:
 
-- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redmine/docker-compose.yml) file present in this repository:
+* Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redmine/docker-compose.yml) file present in this repository:
 
     ```yaml
       redmine:
@@ -301,7 +276,7 @@ This would be an example of SMTP configuration using a Gmail account:
       ...
     ```
 
-- For manual execution:
+* For manual execution:
 
     ```console
     $ docker run -d --name redmine -p 80:8080 -p 443:8443 \
@@ -316,11 +291,11 @@ This would be an example of SMTP configuration using a Gmail account:
       bitnami/redmine:latest
     ```
 
-##### Connect Redmine container to an existing database
+#### Connect Redmine container to an existing database
 
 The Bitnami Redmine container supports connecting the Redmine application to an external database. This would be an example of using an external database for Redmine.
 
-- Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redmine/docker-compose.yml) file present in this repository:
+* Modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redmine/docker-compose.yml) file present in this repository:
 
     ```diff
        redmine:
@@ -336,7 +311,7 @@ The Bitnami Redmine container supports connecting the Redmine application to an 
          ...
     ```
 
-- For manual execution:
+* For manual execution:
 
     ```console
     $ docker run -d --name redmine\
@@ -464,13 +439,13 @@ docker-compose up -d
 
 ### 4.2.1-debian-10-r70
 
-- The size of the container image has been decreased.
-- The configuration logic is now based on Bash scripts in the *rootfs/* folder.
-- It is now possible to use an already populated Redmine database from another installation. In order to do this, use the environment variable `REDMINE_SKIP_BOOTSTRAP`, which forces the container not to run the initial Redmine setup wizard.
-- The following environment variables have been deprecated. They will continue to work as before, but support for these may be removed in a future update:
+* The size of the container image has been decreased.
+* The configuration logic is now based on Bash scripts in the *rootfs/* folder.
+* It is now possible to use an already populated Redmine database from another installation. In order to do this, use the environment variable `REDMINE_SKIP_BOOTSTRAP`, which forces the container not to run the initial Redmine setup wizard.
+* The following environment variables have been deprecated. They will continue to work as before, but support for these may be removed in a future update:
 
-  - `REDMINE_DB_POSTGRES` in favor of `REDMINE_DATABASE_HOST`. When used, `REDMINE_DATABASE_TYPE=postgresql` will also be set.
-  - `REDMINE_DB_MYSQL`, in favor of `REDMINE_DATABASE_HOST`. Whenused, `REDMINE_DATABASE_TYPE=mariadb` will also be set.
+  * `REDMINE_DB_POSTGRES` in favor of `REDMINE_DATABASE_HOST`. When used, `REDMINE_DATABASE_TYPE=postgresql` will also be set.
+  * `REDMINE_DB_MYSQL`, in favor of `REDMINE_DATABASE_HOST`. Whenused, `REDMINE_DATABASE_TYPE=mariadb` will also be set.
 
 ## Contributing
 
