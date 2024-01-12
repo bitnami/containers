@@ -65,6 +65,23 @@ cd bitnami/APP/VERSION/OPERATING-SYSTEM
 docker build -t bitnami/APP:latest .
 ```
 
+## Environment variables
+
+| Name                          | Description                                     | Default Value                      | Can be set |
+|-------------------------------|-------------------------------------------------|------------------------------------|------------|
+| `$MINIO_CLIENT_BASE_DIR`      | MinIO Client installation directory.            | `${BITNAMI_ROOT_DIR}/minio-client` |            |
+| `$MINIO_CLIENT_BIN_DIR`       | MinIO Client directory for binaries.            | `${MINIO_CLIENT_BASE_DIR}/bin`     |            |
+| `$MINIO_CLIENT_CONF_DIR`      | MinIO Client directory for configuration files. | `${MINIO_CLIENT_BASE_DIR}/.mc`     | &check;    |
+| `$MINIO_CLIENT_CONF_DIR`      | MinIO Client directory for configuration files. | `/.mc`                             | &check;    |
+| `$MINIO_SERVER_HOST`          | MinIO Server host.                              |                                    | &check;    |
+| `$MINIO_SERVER_PORT_NUMBER`   | MinIO Server port number.                       | `9000`                             | &check;    |
+| `$MINIO_SERVER_SCHEME`        | MinIO Server web scheme.                        | `http`                             | &check;    |
+| `$MINIO_SERVER_ROOT_USER`     | MinIO Server root user name.                    |                                    | &check;    |
+| `$MINIO_SERVER_ROOT_PASSWORD` | Password for MinIO Server root user.            |                                    | &check;    |
+| `$MINIO_DAEMON_USER`          | MinIO system user.                              | `minio`                            |            |
+| `$MINIO_DAEMON_GROUP`         | MinIO system group.                             | `minio`                            |            |
+
+
 ## Connecting to other containers
 
 Using [Docker container networking](https://docs.docker.com/engine/userguide/networking/), a MinIO(R) Client can be used to access other running containers such as [MinIO(R) server](https://github.com/bitnami/containers/blob/main/bitnami/minio).
