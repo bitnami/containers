@@ -296,6 +296,7 @@ pgbouncer_initialize() {
             "log_pooler_errors:${PGBOUNCER_LOG_POOLER_ERRORS}"
             "log_stats:${PGBOUNCER_LOG_STATS}"
             "stats_period:${PGBOUNCER_STATS_PERIOD}"
+            "server_fast_close:${PGBOUNCER_SERVER_FAST_CLOSE}"
             "server_lifetime:${PGBOUNCER_SERVER_LIFETIME}"
             "server_idle_timeout:${PGBOUNCER_SERVER_IDLE_TIMEOUT}"
             "server_connect_timeout:${PGBOUNCER_SERVER_CONNECT_TIMEOUT}"
