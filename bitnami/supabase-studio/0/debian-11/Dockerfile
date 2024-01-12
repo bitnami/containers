@@ -7,13 +7,13 @@ ARG TARGETARCH
 
 LABEL com.vmware.cp.artifact.flavor="sha256:1e1b4657a77f0d47e9220f0c37b9bf7802581b93214fff7d1bd2364c8bf22e8e" \
       org.opencontainers.image.base.name="docker.io/bitnami/minideb:bullseye" \
-      org.opencontainers.image.created="2024-01-08T17:45:49Z" \
+      org.opencontainers.image.created="2024-01-12T09:25:47Z" \
       org.opencontainers.image.description="Application packaged by VMware, Inc" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="0.23.10-debian-11-r2" \
+      org.opencontainers.image.ref.name="0.23.11-debian-11-r0" \
       org.opencontainers.image.title="supabase-studio" \
       org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="0.23.10"
+      org.opencontainers.image.version="0.23.11"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -28,7 +28,7 @@ RUN mkdir -p /tmp/bitnami/pkg/cache/ ; cd /tmp/bitnami/pkg/cache/ ; \
     COMPONENTS=( \
       "python-3.11.7-2-linux-${OS_ARCH}-debian-11" \
       "node-18.19.0-0-linux-${OS_ARCH}-debian-11" \
-      "supabase-0.23.10-0-linux-${OS_ARCH}-debian-11" \
+      "supabase-0.23.11-0-linux-${OS_ARCH}-debian-11" \
     ) ; \
     for COMPONENT in "${COMPONENTS[@]}"; do \
       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
@@ -44,9 +44,9 @@ RUN apt-get autoremove --purge -y curl && \
     apt-get clean && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 RUN useradd -r -u 1001 -g root supabase
 
-RUN mkdir -p /opt/bitnami/supabase/studio/.next/cache && chmod g+rwX /opt/bitnami/supabase/studio/.next/cache
+RUN mkdir -p /opt/bitnami/supabase/apps/studio/.next/cache && chmod g+rwX /opt/bitnami/supabase/apps/studio/.next/cache
 RUN mkdir /.npm && chmod g+rwX /.npm
-ENV APP_VERSION="0.23.10" \
+ENV APP_VERSION="0.23.11" \
     BITNAMI_APP_NAME="supabase-studio" \
     PATH="/opt/bitnami/python/bin:/opt/bitnami/node/bin:/opt/bitnami/supabase/studio/node_modules/next/dist/bin:$PATH"
 
@@ -55,4 +55,4 @@ EXPOSE 3000
 WORKDIR /opt/bitnami/supabase
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/node/bin/node" ]
-CMD [ "studio/server.js" ]
+CMD [ "apps/studio/server.js" ]
