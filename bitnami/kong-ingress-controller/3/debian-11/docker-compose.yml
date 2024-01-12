@@ -1,7 +1,0 @@
-# Copyright VMware, Inc.
-# SPDX-License-Identifier: APACHE-2.0
-
-version: '2'
-services:
-  kong-ingress-controller:
-    image: docker.io/bitnami/kong-ingress-controller:3
