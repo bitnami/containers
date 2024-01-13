@@ -125,11 +125,12 @@ Following are a few examples of launching some commonly used Laravel development
   docker-compose exec myapp composer require phpmailer/phpmailer:5.2.*
   ```
 ## Environment variables
+
 | Name                  | Description                                                                                       | Default Value | Can be set |
 | --------------------- | ------------------------------------------------------------------------------------------------- | ------------- | ---------- |
 | SKIP_COMPOSER_UPDATE  | Whether the composer should update or not                                                         | no            | &check;    |
 | LARAVEL_SKIP_DATABASE | Whether the database should be skipped or not                                                     | no            | &check;    |
-| DB_CONNECTION         | The connection settings used to connect to the database (https://laravel.com/docs/10.x/database). | mysql         | &check;    |
+| DB_CONNECTION         | The [connection settings](https://laravel.com/docs/10.x/database) used to connect to the database.| mysql         | &check;    |
 | DB_HOST               | The host of the database                                                                          | mariadb       | &check;    |
 | DB_USERNAME           | The username of the database                                                                      | bn_myapp      | &check;    |
 | DB_PASSWORD           | The password for the user of the database                                                         |               | &check;    |
