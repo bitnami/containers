@@ -1,6 +1,0 @@
-version: '2'
-
-services:
-  milvus:
-    image: docker.io/bitnami/milvus:2
-    command: run standalone
