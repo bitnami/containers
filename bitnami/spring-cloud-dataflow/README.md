@@ -68,27 +68,28 @@ docker build -t bitnami/APP:latest .
 
 ### Environment variables
 
-| Name                                                 | Description                                                                                  | Default Value                                                                                   | Can be set |
-|------------------------------------------------------|----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|------------|
-| `$SPRING_CLOUD_DATAFLOW_BASE_DIR`                    | Base path for SPRING CLOUD DATAFLOW files.                                                   | `${BITNAMI_ROOT_DIR}/spring-cloud-dataflow`                                                     |            |
-| `$SPRING_CLOUD_DATAFLOW_VOLUME_DIR`                  | SPRING CLOUD DATAFLOW directory for persisted files.                                         | `${BITNAMI_VOLUME_DIR}/spring-cloud-dataflow`                                                   |            |
-| `$SPRING_CLOUD_DATAFLOW_CONF_DIR`                    | SPRING CLOUD DATAFLOW configuration directory.                                               | `${SPRING_CLOUD_DATAFLOW_BASE_DIR}/conf`                                                        |            |
-| `$SPRING_CLOUD_DATAFLOW_CONF_FILE`                   | Main SPRING CLOUD DATAFLOW configuration file.                                               | `${SPRING_CLOUD_DATAFLOW_CONF_DIR}/application.yml`                                             |            |
-| `$SPRING_CLOUD_DATAFLOW_M2_DIR`                      | SPRING CLOUD DATAFLOW maven root dir.                                                        | `/.m2`                                                                                          |            |
-| `$SPRING_CLOUD_DATAFLOW_DAEMON_USER`                 | Users that will execute the SPRING CLOUD DATAFLOW Server process.                            | `dataflow`                                                                                      |            |
-| `$SPRING_CLOUD_DATAFLOW_DAEMON_GROUP`                | Group that will execute the SPRING CLOUD DATAFLOW Server process.                            | `dataflow`                                                                                      |            |
-| `$SERVER_PORT`                                       | Custom port number to use for the SPRING CLOUD DATAFLOW Server service.                      |                                                                                                 | &check;    |
-| `$SPRING_CLOUD_CONFIG_ENABLED`                       | Whether to load config using Spring Cloud Config Servie.                                     | `false`                                                                                         | &check;    |
-| `$SPRING_CLOUD_KUBERNETES_SECRETS_ENABLE_API`        | Whether to load config using Kubernetes API.                                                 | `false`                                                                                         | &check;    |
-| `$SPRING_CLOUD_KUBERNETES_CONFIG_NAME`               | Name of the ConfigMap that contains the configuration.                                       |                                                                                                 | &check;    |
-| `$SPRING_CLOUD_KUBERNETES_SECRETS_PATHS`             | Paths where the secrets are going to be mount.                                               |                                                                                                 | &check;    |
-| `$SPRING_CLOUD_DATAFLOW_FEATURES_STREAMS_ENABLED`    | Whether enable stream feature in dataflow. It need SPRING_CLOUD_SKIPPER_CLIENT_SERVER_URI    | `false`                                                                                         | &check;    |
-| `$SPRING_CLOUD_DATAFLOW_FEATURES_TASKS_ENABLED`      | Whether enable tasks feature in dataflow. It need SPRING_CLOUD_SKIPPER_CLIENT_SERVER_URI     | `false`                                                                                         | &check;    |
-| `$SPRING_CLOUD_DATAFLOW_FEATURES_SCHEDULES_ENABLED`  | Whether enable schedules feature in dataflow. It need SPRING_CLOUD_SKIPPER_CLIENT_SERVER_URI | `false`                                                                                         | &check;    |
-| `$SPRING_CLOUD_SKIPPER_CLIENT_SERVER_URI`            | Skipper server URI                                                                           |                                                                                                 | &check;    |
-| `$SPRING_CLOUD_DATAFLOW_TASK_COMPOSEDTASKRUNNER_URI` | Workaround for https://github.com/spring-cloud/spring-cloud-dataflow/issues/5072             | `maven://org.springframework.cloud:spring-cloud-dataflow-composed-task-runner:${APP_VERSION:-}` | &check;    |
-| `$JAVA_OPTS`                                         | JVM options                                                                                  |                                                                                                 | &check;    |
+#### Customizable environment variables
 
+| Name                                                | Description                                                                                  | Default Value                                                                                   |
+|-----------------------------------------------------|----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
+| `SPRING_CLOUD_CONFIG_ENABLED`                       | Whether to load config using Spring Cloud Config Servie.                                     | `false`                                                                                         |
+| `SPRING_CLOUD_KUBERNETES_SECRETS_ENABLE_API`        | Whether to load config using Kubernetes API.                                                 | `false`                                                                                         |
+| `SPRING_CLOUD_DATAFLOW_FEATURES_STREAMS_ENABLED`    | Whether enable stream feature in dataflow. It need SPRING_CLOUD_SKIPPER_CLIENT_SERVER_URI    | `false`                                                                                         |
+| `SPRING_CLOUD_DATAFLOW_FEATURES_TASKS_ENABLED`      | Whether enable tasks feature in dataflow. It need SPRING_CLOUD_SKIPPER_CLIENT_SERVER_URI     | `false`                                                                                         |
+| `SPRING_CLOUD_DATAFLOW_FEATURES_SCHEDULES_ENABLED`  | Whether enable schedules feature in dataflow. It need SPRING_CLOUD_SKIPPER_CLIENT_SERVER_URI | `false`                                                                                         |
+| `SPRING_CLOUD_DATAFLOW_TASK_COMPOSEDTASKRUNNER_URI` | Workaround for https://github.com/spring-cloud/spring-cloud-dataflow/issues/5072             | `maven://org.springframework.cloud:spring-cloud-dataflow-composed-task-runner:${APP_VERSION:-}` |
+
+#### Read-only environment variables
+
+| Name                                 | Description                                                       | Value                                               |
+|--------------------------------------|-------------------------------------------------------------------|-----------------------------------------------------|
+| `SPRING_CLOUD_DATAFLOW_BASE_DIR`     | Base path for SPRING CLOUD DATAFLOW files.                        | `${BITNAMI_ROOT_DIR}/spring-cloud-dataflow`         |
+| `SPRING_CLOUD_DATAFLOW_VOLUME_DIR`   | SPRING CLOUD DATAFLOW directory for persisted files.              | `${BITNAMI_VOLUME_DIR}/spring-cloud-dataflow`       |
+| `SPRING_CLOUD_DATAFLOW_CONF_DIR`     | SPRING CLOUD DATAFLOW configuration directory.                    | `${SPRING_CLOUD_DATAFLOW_BASE_DIR}/conf`            |
+| `SPRING_CLOUD_DATAFLOW_CONF_FILE`    | Main SPRING CLOUD DATAFLOW configuration file.                    | `${SPRING_CLOUD_DATAFLOW_CONF_DIR}/application.yml` |
+| `SPRING_CLOUD_DATAFLOW_M2_DIR`       | SPRING CLOUD DATAFLOW maven root dir.                             | `/.m2`                                              |
+| `SPRING_CLOUD_DATAFLOW_DAEMON_USER`  | Users that will execute the SPRING CLOUD DATAFLOW Server process. | `dataflow`                                          |
+| `SPRING_CLOUD_DATAFLOW_DAEMON_GROUP` | Group that will execute the SPRING CLOUD DATAFLOW Server process. | `dataflow`                                          |
 
 #### Configuring database
 
