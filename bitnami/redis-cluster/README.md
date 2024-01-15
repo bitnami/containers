@@ -168,64 +168,48 @@ services:
 
 ### Environment variables
 
-| Name                                     | Description                                                               | Default Value                              | Can be set |
-|------------------------------------------|---------------------------------------------------------------------------|--------------------------------------------|------------|
-| `$REDIS_VOLUME_DIR`                      | Persistence base directory                                                | `/bitnami/redis`                           |            |
-| `$REDIS_BASE_DIR`                        | Redis installation directory                                              | `${BITNAMI_ROOT_DIR}/redis`                |            |
-| `$REDIS_CONF_DIR`                        | Redis configuration directory                                             | `${REDIS_BASE_DIR}/etc`                    |            |
-| `$REDIS_DATA_DIR`                        | Redis data directory                                                      | `${REDIS_VOLUME_DIR}/data`                 | &check;    |
-| `$REDIS_MOUNTED_CONF_DIR`                | Redis mounted configuration directory                                     | `${REDIS_BASE_DIR}/mounted-etc`            |            |
-| `$REDIS_OVERRIDES_FILE`                  | Redis config overrides file                                               | `${REDIS_MOUNTED_CONF_DIR}/overrides.conf` | &check;    |
-| `$REDIS_CONF_FILE`                       | Redis configuration file                                                  | `${REDIS_CONF_DIR}/redis.conf`             |            |
-| `$REDIS_LOG_DIR`                         | Redis logs directory                                                      | `${REDIS_BASE_DIR}/logs`                   |            |
-| `$REDIS_LOG_FILE`                        | Redis log file                                                            | `${REDIS_LOG_DIR}/redis.log`               |            |
-| `$REDIS_TMP_DIR`                         | Redis temporary directory                                                 | `${REDIS_BASE_DIR}/tmp`                    |            |
-| `$REDIS_PID_FILE`                        | Redis PID file                                                            | `${REDIS_TMP_DIR}/redis.pid`               |            |
-| `$REDIS_BIN_DIR`                         | Redis executables directory                                               | `${REDIS_BASE_DIR}/bin`                    |            |
-| `$REDIS_DAEMON_USER`                     | Redis system user                                                         | `redis`                                    |            |
-| `$REDIS_DAEMON_GROUP`                    | Redis system group                                                        | `redis`                                    |            |
-| `$REDIS_DISABLE_COMMANDS`                | Commands to disable in Redis                                              |                                            | &check;    |
-| `$REDIS_DATABASE`                        | Default Redis database                                                    | `redis`                                    | &check;    |
-| `$REDIS_AOF_ENABLED`                     | Enable AOF                                                                | `yes`                                      | &check;    |
-| `$REDIS_RDB_POLICY`                      | Enable RDB policy persitence                                              |                                            | &check;    |
-| `$REDIS_RDB_POLICY_DISABLED`             | Allows to enable RDP policy persistence                                   | `no`                                       | &check;    |
-| `$REDIS_MASTER_HOST`                     | Redis master host (used by slaves)                                        |                                            | &check;    |
-| `$REDIS_MASTER_PORT_NUMBER`              | Redis master host port (used by slaves)                                   | `6379`                                     | &check;    |
-| `$REDIS_DEFAULT_PORT_NUMBER`             | Redis port number (Build time)                                            | `6379`                                     |            |
-| `$REDIS_PORT_NUMBER`                     | Redis port number                                                         | `$REDIS_DEFAULT_PORT_NUMBER`               | &check;    |
-| `$REDIS_ALLOW_REMOTE_CONNECTIONS`        | Allow remote connection to the service                                    | `yes`                                      | &check;    |
-| `$REDIS_REPLICATION_MODE`                | Redis replication mode (values: master, slave)                            |                                            | &check;    |
-| `$REDIS_REPLICA_IP`                      | The replication announce ip                                               |                                            | &check;    |
-| `$REDIS_REPLICA_PORT`                    | The replication announce port                                             |                                            | &check;    |
-| `$REDIS_EXTRA_FLAGS`                     | Additional flags pass to 'redis-server' commands                          |                                            | &check;    |
-| `$ALLOW_EMPTY_PASSWORD`                  | Allow password-less access                                                | `no`                                       | &check;    |
-| `$REDIS_PASSWORD`                        | Password for Redis                                                        |                                            | &check;    |
-| `$REDIS_MASTER_PASSWORD`                 | Redis master node password                                                |                                            | &check;    |
-| `$REDIS_ACLFILE`                         | Redis ACL file                                                            |                                            | &check;    |
-| `$REDIS_IO_THREADS_DO_READS`             | Enable multithreading when reading socket                                 |                                            | &check;    |
-| `$REDIS_IO_THREADS`                      | Number of threads                                                         |                                            | &check;    |
-| `$REDIS_TLS_ENABLED`                     | Enable TLS                                                                | `no`                                       | &check;    |
-| `$REDIS_TLS_PORT_NUMBER`                 | Redis TLS port (requires REDIS_ENABLE_TLS=yes)                            | `6379`                                     | &check;    |
-| `$REDIS_TLS_CERT_FILE`                   | Redis TLS certificate file                                                |                                            | &check;    |
-| `$REDIS_TLS_KEY_FILE`                    | Redis TLS key file                                                        |                                            | &check;    |
-| `$REDIS_TLS_KEY_FILE_PASS`               | Redis TLS key file passphrase                                             |                                            | &check;    |
-| `$REDIS_TLS_CA_FILE`                     | Redis TLS CA file                                                         |                                            | &check;    |
-| `$REDIS_TLS_DH_PARAMS_FILE`              | Redis TLS DH parameter file                                               |                                            | &check;    |
-| `$REDIS_TLS_AUTH_CLIENTS`                | Enable Redis TLS client authentication                                    | `yes`                                      | &check;    |
-| `$REDIS_CLUSTER_CREATOR`                 | Launch the cluster bootstrap command                                      | `no`                                       | &check;    |
-| `$REDIS_CLUSTER_REPLICAS`                | Number of cluster replicas                                                | `1`                                        | &check;    |
-| `$REDIS_CLUSTER_DYNAMIC_IPS`             | Use dynamic IPS for cluster creation                                      | `yes`                                      | &check;    |
-| `$REDIS_CLUSTER_ANNOUNCE_IP`             | IP to use for announcing the cluster service                              |                                            | &check;    |
-| `$REDIS_CLUSTER_ANNOUNCE_PORT`           | Client port to use for announcing the cluster service                     |                                            | &check;    |
-| `$REDIS_CLUSTER_ANNOUNCE_BUS_PORT`       | Cluster message bus port to use for announcing the cluster service        |                                            | &check;    |
-| `$REDIS_DNS_RETRIES`                     | Number of retries in order to get an addresable domain name               | `120`                                      | &check;    |
-| `$REDIS_NODES`                           | List of Redis cluster nodes                                               |                                            | &check;    |
-| `$REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP` | Time to wait before the DNS lookup                                        | `0`                                        | &check;    |
-| `$REDIS_CLUSTER_DNS_LOOKUP_RETRIES`      | Number of retires for the DNS lookup                                      | `1`                                        | &check;    |
-| `$REDIS_CLUSTER_DNS_LOOKUP_SLEEP`        | Time to sleep between DNS lookups                                         | `1`                                        | &check;    |
-| `$REDIS_CLUSTER_ANNOUNCE_HOSTNAME`       | Hostname that node should announce, used for non dynamic ip environments. |                                            | &check;    |
-| `$REDIS_CLUSTER_PREFERRED_ENDPOINT_TYPE` | Preferred endpoint type which cluster should use (ip, hostname)           | `ip`                                       | &check;    |
+#### Customizable environment variables
 
+| Name                                    | Description                                                     | Default Value                              |
+|-----------------------------------------|-----------------------------------------------------------------|--------------------------------------------|
+| `REDIS_DATA_DIR`                        | Redis data directory                                            | `${REDIS_VOLUME_DIR}/data`                 |
+| `REDIS_OVERRIDES_FILE`                  | Redis config overrides file                                     | `${REDIS_MOUNTED_CONF_DIR}/overrides.conf` |
+| `REDIS_DATABASE`                        | Default Redis database                                          | `redis`                                    |
+| `REDIS_AOF_ENABLED`                     | Enable AOF                                                      | `yes`                                      |
+| `REDIS_RDB_POLICY_DISABLED`             | Allows to enable RDP policy persistence                         | `no`                                       |
+| `REDIS_MASTER_PORT_NUMBER`              | Redis master host port (used by slaves)                         | `6379`                                     |
+| `REDIS_PORT_NUMBER`                     | Redis port number                                               | `$REDIS_DEFAULT_PORT_NUMBER`               |
+| `REDIS_ALLOW_REMOTE_CONNECTIONS`        | Allow remote connection to the service                          | `yes`                                      |
+| `ALLOW_EMPTY_PASSWORD`                  | Allow password-less access                                      | `no`                                       |
+| `REDIS_TLS_ENABLED`                     | Enable TLS                                                      | `no`                                       |
+| `REDIS_TLS_PORT_NUMBER`                 | Redis TLS port (requires REDIS_ENABLE_TLS=yes)                  | `6379`                                     |
+| `REDIS_TLS_AUTH_CLIENTS`                | Enable Redis TLS client authentication                          | `yes`                                      |
+| `REDIS_CLUSTER_CREATOR`                 | Launch the cluster bootstrap command                            | `no`                                       |
+| `REDIS_CLUSTER_REPLICAS`                | Number of cluster replicas                                      | `1`                                        |
+| `REDIS_CLUSTER_DYNAMIC_IPS`             | Use dynamic IPS for cluster creation                            | `yes`                                      |
+| `REDIS_DNS_RETRIES`                     | Number of retries in order to get an addresable domain name     | `120`                                      |
+| `REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP` | Time to wait before the DNS lookup                              | `0`                                        |
+| `REDIS_CLUSTER_DNS_LOOKUP_RETRIES`      | Number of retires for the DNS lookup                            | `1`                                        |
+| `REDIS_CLUSTER_DNS_LOOKUP_SLEEP`        | Time to sleep between DNS lookups                               | `1`                                        |
+| `REDIS_CLUSTER_PREFERRED_ENDPOINT_TYPE` | Preferred endpoint type which cluster should use (ip, hostname) | `ip`                                       |
+
+#### Read-only environment variables
+
+| Name                        | Description                           | Value                           |
+|-----------------------------|---------------------------------------|---------------------------------|
+| `REDIS_VOLUME_DIR`          | Persistence base directory            | `/bitnami/redis`                |
+| `REDIS_BASE_DIR`            | Redis installation directory          | `${BITNAMI_ROOT_DIR}/redis`     |
+| `REDIS_CONF_DIR`            | Redis configuration directory         | `${REDIS_BASE_DIR}/etc`         |
+| `REDIS_MOUNTED_CONF_DIR`    | Redis mounted configuration directory | `${REDIS_BASE_DIR}/mounted-etc` |
+| `REDIS_CONF_FILE`           | Redis configuration file              | `${REDIS_CONF_DIR}/redis.conf`  |
+| `REDIS_LOG_DIR`             | Redis logs directory                  | `${REDIS_BASE_DIR}/logs`        |
+| `REDIS_LOG_FILE`            | Redis log file                        | `${REDIS_LOG_DIR}/redis.log`    |
+| `REDIS_TMP_DIR`             | Redis temporary directory             | `${REDIS_BASE_DIR}/tmp`         |
+| `REDIS_PID_FILE`            | Redis PID file                        | `${REDIS_TMP_DIR}/redis.pid`    |
+| `REDIS_BIN_DIR`             | Redis executables directory           | `${REDIS_BASE_DIR}/bin`         |
+| `REDIS_DAEMON_USER`         | Redis system user                     | `redis`                         |
+| `REDIS_DAEMON_GROUP`        | Redis system group                    | `redis`                         |
+| `REDIS_DEFAULT_PORT_NUMBER` | Redis port number (Build time)        | `6379`                          |
 
 Once all the Redis(R) nodes are running you need to execute command like the following to initiate the cluster:
 
