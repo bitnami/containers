@@ -175,6 +175,45 @@ docker-compose up -d
 
 ## Configuration
 
+### Environment variables
+
+#### Customizable environment variables
+
+| Name                              | Description                                      | Default Value                              |
+|-----------------------------------|--------------------------------------------------|--------------------------------------------|
+| `$REDIS_DATA_DIR`                 | Redis data directory                             | `${REDIS_VOLUME_DIR}/data`                 |
+| `$REDIS_OVERRIDES_FILE`           | Redis config overrides file                      | `${REDIS_MOUNTED_CONF_DIR}/overrides.conf` |
+| `$REDIS_DATABASE`                 | Default Redis database                           | `redis`                                    |
+| `$REDIS_AOF_ENABLED`              | Enable AOF                                       | `yes`                                      |
+| `$REDIS_RDB_POLICY_DISABLED`      | Allows to enable RDP policy persistence          | `no`                                       |
+| `$REDIS_MASTER_PORT_NUMBER`       | Redis master host port (used by slaves)          | `6379`                                     |
+| `$REDIS_PORT_NUMBER`              | Redis port number                                | `$REDIS_DEFAULT_PORT_NUMBER`               |
+| `$REDIS_ALLOW_REMOTE_CONNECTIONS` | Allow remote connection to the service           | `yes`                                      |
+| `$ALLOW_EMPTY_PASSWORD`           | Allow password-less access                       | `no`                                       |
+| `$REDIS_TLS_ENABLED`              | Enable TLS                                       | `no`                                       |
+| `$REDIS_TLS_PORT_NUMBER`          | Redis TLS port (requires REDIS_ENABLE_TLS=yes)   | `6379`                                     |
+| `$REDIS_TLS_AUTH_CLIENTS`         | Enable Redis TLS client authentication           | `yes`                                      |
+| `$REDIS_DISABLE_SERVICE`          | Whether to disable the Redis service by default. | `no`                                       |
+| `$REDIS_SENTINEL_PORT_NUMBER`     | Redis Sentinel host port (used by slaves)        | `26379`                                    |
+
+#### Read-only environment variables
+
+| Name                         | Description                           | Value                           |
+|------------------------------|---------------------------------------|---------------------------------|
+| `$REDIS_VOLUME_DIR`          | Persistence base directory            | `/bitnami/redis`                |
+| `$REDIS_BASE_DIR`            | Redis installation directory          | `${BITNAMI_ROOT_DIR}/redis`     |
+| `$REDIS_CONF_DIR`            | Redis configuration directory         | `${REDIS_BASE_DIR}/etc`         |
+| `$REDIS_MOUNTED_CONF_DIR`    | Redis mounted configuration directory | `${REDIS_BASE_DIR}/mounted-etc` |
+| `$REDIS_CONF_FILE`           | Redis configuration file              | `${REDIS_CONF_DIR}/redis.conf`  |
+| `$REDIS_LOG_DIR`             | Redis logs directory                  | `${REDIS_BASE_DIR}/logs`        |
+| `$REDIS_LOG_FILE`            | Redis log file                        | `${REDIS_LOG_DIR}/redis.log`    |
+| `$REDIS_TMP_DIR`             | Redis temporary directory             | `${REDIS_BASE_DIR}/tmp`         |
+| `$REDIS_PID_FILE`            | Redis PID file                        | `${REDIS_TMP_DIR}/redis.pid`    |
+| `$REDIS_BIN_DIR`             | Redis executables directory           | `${REDIS_BASE_DIR}/bin`         |
+| `$REDIS_DAEMON_USER`         | Redis system user                     | `redis`                         |
+| `$REDIS_DAEMON_GROUP`        | Redis system group                    | `redis`                         |
+| `$REDIS_DEFAULT_PORT_NUMBER` | Redis port number (Build time)        | `6379`                          |
+
 ### Disabling Redis(R) commands
 
 For security reasons, you may want to disable some commands. You can specify them by using the following environment variable on the first run:
