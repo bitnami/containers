@@ -61,12 +61,12 @@ docker build -t bitnami/APP:latest .
 
 #### Read-only environment variables
 
-| Name                                      | Description                                                           | Value                                                            |
-|-------------------------------------------|-----------------------------------------------------------------------|------------------------------------------------------------------|
-| `$SCDF_COMPOSED_TASK_RUNNER_BASE_DIR`     | Base path for SCDF COMPOSED TASK RUNNER files.                        | `${BITNAMI_ROOT_DIR}/spring-cloud-dataflow-composed-task-runner` |
-| `$SCDF_COMPOSED_TASK_RUNNER_M2_DIR`       | SCDF COMPOSED TASK RUNNER maven root dir.                             | `/.m2`                                                           |
-| `$SCDF_COMPOSED_TASK_RUNNER_DAEMON_USER`  | Users that will execute the SCDF COMPOSED TASK RUNNER Server process. | `dataflow`                                                       |
-| `$SCDF_COMPOSED_TASK_RUNNER_DAEMON_GROUP` | Group that will execute the SCDF COMPOSED TASK RUNNER Server process. | `dataflow`                                                       |
+| Name                                     | Description                                                           | Value                                                            |
+|------------------------------------------|-----------------------------------------------------------------------|------------------------------------------------------------------|
+| `SCDF_COMPOSED_TASK_RUNNER_BASE_DIR`     | Base path for SCDF COMPOSED TASK RUNNER files.                        | `${BITNAMI_ROOT_DIR}/spring-cloud-dataflow-composed-task-runner` |
+| `SCDF_COMPOSED_TASK_RUNNER_M2_DIR`       | SCDF COMPOSED TASK RUNNER maven root dir.                             | `/.m2`                                                           |
+| `SCDF_COMPOSED_TASK_RUNNER_DAEMON_USER`  | Users that will execute the SCDF COMPOSED TASK RUNNER Server process. | `dataflow`                                                       |
+| `SCDF_COMPOSED_TASK_RUNNER_DAEMON_GROUP` | Group that will execute the SCDF COMPOSED TASK RUNNER Server process. | `dataflow`                                                       |
 
 ### Running commands
 
