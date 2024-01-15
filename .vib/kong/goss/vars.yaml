@@ -8,6 +8,5 @@ directories:
       - /opt/bitnami/kong/conf
   - paths:
       - /docker-entrypoint-initdb.d
-      - /opt/bitnami/kong/include/opentelemetry
       - /opt/bitnami/kong/bin
 root_dir: /opt/bitnami
