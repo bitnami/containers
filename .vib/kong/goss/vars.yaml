@@ -8,10 +8,5 @@ directories:
       - /opt/bitnami/kong/conf
   - paths:
       - /docker-entrypoint-initdb.d
-      - /opt/bitnami/kong/openresty/luajit/share/lua/5.1/kong/include/opentelemetry
       - /opt/bitnami/kong/bin
-      - /opt/bitnami/kong/server/lib
-files:
-  - paths:
-      - /opt/bitnami/kong/server/lib/pluginsocket.proto
 root_dir: /opt/bitnami
