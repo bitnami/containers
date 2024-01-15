@@ -93,18 +93,45 @@ We can launch another containers using the same flag (`--network NETWORK`) in th
 
 ## Configuration
 
-The Bitnami Docker Kong can be easily setup with the following environment variables:
+### Environment variables
 
-* `KONG_PROXY_LISTEN_ADDRESS`: Address to which Kong Proxy service is bound to. Default: **0.0.0.0**
-* `KONG_PROXY_HTTP_PORT_NUMBER`: The port Kong Proxy is listening for HTTP requests. Default: **8000**
-* `KONG_PROXY_HTTPS_PORT_NUMBER`: The port Kong Proxy is listening for HTTPS requests. Default: **8443**
-* `KONG_ADMIN_LISTEN_ADDRESS`: Address to which Kong Admin service is bound to. Default: **127.0.0.1**
-* `KONG_ADMIN_HTTP_PORT_NUMBER`: The port Kong Admin is listening for HTTP requests. Default: **8001**
-* `KONG_ADMIN_HTTPS_PORT_NUMBER`: The port Kong Admin is listening for HTTPS requests. Default: **8444**
-* `KONG_MIGRATE`: Whether to automatically run Kong migration scripts on this node. In a cluster, only one node should have this flag enabled. Default: **no**
-* `KONG_EXIT_AFTER_MIGRATE`: Whether to exit after performing the migration (it will not launch the Kong daemon). This is useful using the container in Jobs and Cron Jobs. Default: **no**
+#### Customizable environment variables
 
-This container also supports configuring Kong via environment values starting with `KONG_`. For instance, by setting the `KONG_LOG_LEVEL` environment variable, Kong will take into account this value rather than the property set in `kong.conf`. It is recommended to set the following environment variables:
+| Name                            | Description                                        | Default Value                                                                                                                   |
+|---------------------------------|----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| `$KONG_MIGRATE`                 | Perform Kong database migration.                   | `no`                                                                                                                            |
+| `$KONG_EXIT_AFTER_MIGRATE`      | Exit Kong after performing the database migration. | `no`                                                                                                                            |
+| `$KONG_PROXY_LISTEN_ADDRESS`    | Listen address for Kong proxy daemon.              | `0.0.0.0`                                                                                                                       |
+| `$KONG_PROXY_HTTP_PORT_NUMBER`  | HTTP port of the Kong proxy daemon.                | `8000`                                                                                                                          |
+| `$KONG_PROXY_HTTPS_PORT_NUMBER` | HTTPS port of the Kong proxy daemon.               | `8443`                                                                                                                          |
+| `$KONG_ADMIN_LISTEN_ADDRESS`    | Listen address for Kong admin daemon.              | `0.0.0.0`                                                                                                                       |
+| `$KONG_ADMIN_HTTP_PORT_NUMBER`  | HTTP port of the Kong admin daemon.                | `8001`                                                                                                                          |
+| `$KONG_ADMIN_HTTPS_PORT_NUMBER` | HTTPS port of the Kong admin daemon.               | `8444`                                                                                                                          |
+| `$KONG_NGINX_DAEMON`            | Set silent log streams for the nginx daemon.       | `off`                                                                                                                           |
+| `$KONG_PROXY_LISTEN`            | Kong proxy listen address.                         | `${KONG_PROXY_LISTEN_ADDRESS}:${KONG_PROXY_HTTP_PORT_NUMBER}, ${KONG_PROXY_LISTEN_ADDRESS}:${KONG_PROXY_HTTPS_PORT_NUMBER} ssl` |
+| `$KONG_PROXY_LISTEN_OVERRIDE`   | Override proxy listen.                             | `no`                                                                                                                            |
+| `$KONG_ADMIN_LISTEN`            | Kong admin listen address.                         | `${KONG_ADMIN_LISTEN_ADDRESS}:${KONG_ADMIN_HTTP_PORT_NUMBER}, ${KONG_ADMIN_LISTEN_ADDRESS}:${KONG_ADMIN_HTTPS_PORT_NUMBER} ssl` |
+| `$KONG_ADMIN_LISTEN_OVERRIDE`   | Override admin listen.                             | `no`                                                                                                                            |
+| `$KONG_DATABASE`                | Select database for Kong.                          | `postgres`                                                                                                                      |
+| `$KONG_DATABASE`                | Select database for Kong.                          | `postgres`                                                                                                                      |
+| `$KONG_NGINX_USER`              | Set nginx user.                                    | `${KONG_DAEMON_USER} ${KONG_DAEMON_GROUP}`                                                                                      |
+
+#### Read-only environment variables
+
+| Name                      | Description                                         | Value                                |
+|---------------------------|-----------------------------------------------------|--------------------------------------|
+| `$KONG_BASE_DIR`          | Kong installation directory.                        | `${BITNAMI_ROOT_DIR}/kong`           |
+| `$KONG_CONF_DIR`          | Kong configuration directory.                       | `${KONG_BASE_DIR}/conf`              |
+| `$KONG_CONF_FILE`         | Kong configuration file.                            | `${KONG_CONF_DIR}/kong.conf`         |
+| `$KONG_DEFAULT_CONF_FILE` | Kong default configuration file.                    | `${KONG_CONF_DIR}/kong.conf.default` |
+| `$KONG_INITSCRIPTS_DIR`   | Kong directory for init scripts.                    | `/docker-entrypoint-initdb.d`        |
+| `$KONG_SERVER_DIR`        | Directory where Kong Openresty instance is created. | `${KONG_BASE_DIR}/server`            |
+| `$KONG_LOGS_DIR`          | Directory where Kong logs are stored.               | `${KONG_SERVER_DIR}/logs`            |
+| `$KONG_PID_FILE`          | Path to the PID file for Kong.                      | `${KONG_SERVER_DIR}/pids/nginx.pid`  |
+| `$KONG_DAEMON_USER`       | Kong system user.                                   | `kong`                               |
+| `$KONG_DAEMON_GROUP`      | Kong system group.                                  | `kong`                               |
+
+Additionally, this container also supports configuring Kong via environment values starting with `KONG_`. For instance, by setting the `KONG_LOG_LEVEL` environment variable, Kong will take into account this value rather than the property set in `kong.conf`. It is recommended to set the following environment variables:
 
 * `KONG_DATABASE`: Database type used. Valid values: **postgres** or **off**. Default: **postgres**
 * For PostgreSQL database: `KONG_PG_HOST`, `KONG_PG_PORT`, `KONG_PG_TIMEOUT`, `KONG_PG_USER`, `KONG_PG_PASSWORD`.
